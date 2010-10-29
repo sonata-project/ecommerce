@@ -7,8 +7,7 @@ use Symfony\Component\DependencyInjection\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
-
-use Sonata\SonataExtension as Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 
 /*
  * This file is part of the Sonata package.
@@ -29,12 +28,12 @@ class DeliveryExtension extends Extension
 {
 
     /**
-     * Loads the url shortener configuration.
+     * Loads the delivery configuration.
      *
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function deliveryLoad($config, ContainerBuilder $container)
+    public function configLoad($config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('delivery.xml');
@@ -43,6 +42,11 @@ class DeliveryExtension extends Extension
         
         foreach($config['methods'] as $method)
         {
+            if(!$method['enabled'])
+            {
+                continue;
+            }
+
             $definition = new Definition($method['class']);
             $definition->addMethodCall('setName', array($method['name']));
             $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
@@ -57,7 +61,6 @@ class DeliveryExtension extends Extension
         }
 
         $container->setDefinition('sonata.delivery.pool',$pool_definition);
-        
     }
 
     /**
@@ -73,5 +76,10 @@ class DeliveryExtension extends Extension
     public function getNamespace()
     {
         return 'http://www.sonata-project.org/schema/dic/sonata-delivery';
+    }
+
+    public function getAlias()
+    {
+        return 'sonata_delivery';
     }
 }

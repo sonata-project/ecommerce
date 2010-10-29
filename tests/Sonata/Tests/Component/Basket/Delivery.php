@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,31 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Component\Delivery;
 
-/**
- * A free delivery method, used this only for testing
- *
- */
-class FreeDelivery extends BaseDelivery
-{
+namespace Sonata\Tests\Component\Basket;
 
-    public function getVat() {
+use Sonata\Component\Delivery\BaseDelivery;
 
-        return 0;
-    }
 
-    public function getPrice() {
-
-        return 0;
-    }
-
+class Delivery extends BaseDelivery {
     public function isAddressRequired() {
         return true;
     }
 
     public function getName() {
-        return 'Free delivery';
+        return "delivery 1";
     }
-    
+
+    public function getVat() {
+        return 19.60;
+    }
+
+    public function getPrice() {
+        return 120;
+    }
+
 }

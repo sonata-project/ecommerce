@@ -12,44 +12,7 @@
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketElement;
-use Sonata\Component\Basket\ProductInterface;
 
-class Product implements ProductInterface
-{
-    public $enabled = true;
-    
-    public function getId()
-    {
-        return 1;
-    }
-
-    public function getPrice()
-    {
-        return 15;
-    }
-
-    public function getVat()
-    {
-        return 19.6;
-    }
-
-    public function getName()
-    {
-        return "fake name";
-    }
-
-    public function getOptions()
-    {
-        return array(
-            'option1' => 'toto',
-        );
-    }
-
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-}
 
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {

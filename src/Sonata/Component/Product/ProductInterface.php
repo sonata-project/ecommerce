@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Component\Basket;
+namespace Sonata\Component\Product;
 
 interface ProductInterface {
 
@@ -50,4 +50,11 @@ interface ProductInterface {
      * @return boolean , true is the product is enabled (ready to be sell)
      */
     public function getEnabled();
+
+    /**
+     * Return true if the product is recurrent
+     * @abstract
+     * @return void
+     */
+    public function isRecurrentPayment();
 }

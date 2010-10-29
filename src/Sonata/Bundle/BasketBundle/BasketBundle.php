@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Bundle\PaymentBundle;
+namespace Sonata\Bundle\BasketBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class PaymentBundle extends Bundle
+class BasketBundle extends Bundle
 {
 }

@@ -8,11 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Sonata\Tests\Component\Basket;
 
-namespace Sonata\Bundle\PaymentBundle;
+use Sonata\Component\Product\ProductRepositoryInterface;
+use Sonata\Component\Product\BaseProductRepository;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class PaymentBundle extends Bundle
+class ProductRepository extends BaseProductRepository
 {
+
+    
 }

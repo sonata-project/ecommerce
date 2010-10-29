@@ -11,6 +11,8 @@
 
 namespace Sonata\Component\Basket;
 
+use Sonata\Component\Product\ProductInterface;
+
 class BasketElement {
 
     protected
@@ -90,16 +92,6 @@ class BasketElement {
     }
 
     /**
-     * return the related behavior
-     *
-     * @return trShopProductBehavior
-     */
-    public function getTable() {
-
-        return $this->table;
-    }
-
-    /**
      * Return the related product
      *
      * @return Product
@@ -123,7 +115,7 @@ class BasketElement {
     }
 
     /**
-     * Return the VAT amount
+     * Return the VAT
      *
      *
      * @return $float
@@ -249,9 +241,6 @@ class BasketElement {
 
             return false;
         }
-
-        // TODO : find a way to inject the related proxy object 
-        //  return $this->getTable()->isValidBasketElement($this);
 
         return true;
     }

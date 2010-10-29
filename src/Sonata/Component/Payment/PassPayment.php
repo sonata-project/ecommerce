@@ -11,7 +11,7 @@
 namespace Sonata\Component\Payment;
 
 
-class PassPayment extends Payment
+class PassPayment extends BasePayment
 {
 
 }

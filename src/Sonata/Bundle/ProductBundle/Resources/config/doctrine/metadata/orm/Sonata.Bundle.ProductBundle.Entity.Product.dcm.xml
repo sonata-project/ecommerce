@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Sonata\Bundle\ProductBundle\Entity\Product" table="sonata_product">
+
+        <id name="id" type="integer" column="id">
+          <generator strategy="AUTO"/>
+        </id>
+
+        <field name="sku"           column="sku"            type="text"     nullable="false" length="255"/>
+        <field name="slug"          column="slug"           type="text"     nullable="false" length="1024"/>
+        <field name="name"          column="name"           type="string"   nullable="false" length="255"/>
+        <field name="description"   column="description"    type="text"     nullable="false" length="1024"/>
+        <field name="price"         column="price"          type="decimal"  nullable="false" length="1024"/>
+        <field name="vat"           column="vat"            type="decimal"  nullable="false" length="1024"/>
+        <field name="stock"         column="stock"          type="integer"  nullable="false" length="1024"/>
+        <field name="enabled"       column="enabled"        type="boolean"  nullable="false" length="1024"/>
+
+        <field name="updatedAt" column="updated_at" type="datetime" />
+        <field name="createdAt" column="created_at" type="datetime" />
+    </entity>
+</doctrine-mapping>

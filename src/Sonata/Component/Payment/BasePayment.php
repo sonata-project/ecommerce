@@ -8,17 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Component\Delivery;
+namespace Sonata\Component\Payment;
 
 /**
  * A free delivery method, used this only for testing
  *
  */
-abstract class Delivery implements DeliveryInterface
+abstract class BasePayment implements PaymentInterface
 {
     protected
-        $vat,
-        $price,
         $name,
         $code,
         $options;
@@ -41,26 +39,6 @@ abstract class Delivery implements DeliveryInterface
     public function setName($name) {
 
         $this->name = $name;
-    }
-
-    public function setVat($vat) {
-
-        $this->vat = $vat;
-    }
-
-    public function getVat() {
-
-        return $this->vat;
-    }
-
-    public function getPrice() {
-
-        return $this->prive;
-    }
-
-    public function setPrice($price) {
-
-        $this->prive = $price;
     }
 
     public function setOptions($options)
