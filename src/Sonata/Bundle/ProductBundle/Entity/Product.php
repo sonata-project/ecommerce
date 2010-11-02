@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sonata package.
- *
- * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Sonata\Bundle\ProductBundle\Entity;
 
 /**
@@ -57,19 +48,34 @@ class Product
     private $enabled;
 
     /**
-     * @var datetime $updatedAt
+     * @var datetime $updated_at
      */
-    private $updatedAt;
+    private $updated_at;
 
     /**
-     * @var datetime $createdAt
+     * @var datetime $created_at
      */
-    private $createdAt;
+    private $created_at;
 
     /**
      * @var integer $id
      */
     private $id;
+
+    /**
+     * @var Sonata\Bundle\ProductBundle\Entity\Package
+     */
+    private $package;
+
+    /**
+     * @var Sonata\Bundle\ProductBundle\Entity\Delivery
+     */
+    private $delivery;
+
+    /**
+     * @var Sonata\Bundle\ProductBundle\Entity\Category
+     */
+    private $categories;
 
     /**
      * Set sku
@@ -232,43 +238,43 @@ class Product
     }
 
     /**
-     * Set updatedAt
+     * Set updated_at
      *
      * @param datetime $updatedAt
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_at = $updatedAt;
     }
 
     /**
-     * Get updatedAt
+     * Get updated_at
      *
      * @return datetime $updatedAt
      */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
     /**
-     * Set createdAt
+     * Set created_at
      *
      * @param datetime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $createdAt;
     }
 
     /**
-     * Get createdAt
+     * Get created_at
      *
      * @return datetime $createdAt
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
@@ -280,5 +286,75 @@ class Product
     {
         return $this->id;
     }
+
+    /**
+     * Add package
+     *
+     * @param Sonata\Bundle\ProductBundle\Entity\Package $package
+     */
+    public function addPackage(\Sonata\Bundle\ProductBundle\Entity\Package $package)
+    {
+        $this->package[] = $package;
+    }
+
+    /**
+     * Get package
+     *
+     * @return Doctrine\Common\Collections\Collection $package
+     */
+    public function getPackage()
+    {
+        return $this->package;
+    }
+
+    /**
+     * Add delivery
+     *
+     * @param Sonata\Bundle\ProductBundle\Entity\Delivery $delivery
+     */
+    public function addDelivery(\Sonata\Bundle\ProductBundle\Entity\Delivery $delivery)
+    {
+        $this->delivery[] = $delivery;
+    }
+
+    /**
+     * Get delivery
+     *
+     * @return Doctrine\Common\Collections\Collection $delivery
+     */
+    public function getDelivery()
+    {
+        return $this->delivery;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param Sonata\Bundle\ProductBundle\Entity\Category $categories
+     */
+    public function addCategories(\Sonata\Bundle\ProductBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection $categories
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+
+
+
+
+
+
+
+
+
 
 }

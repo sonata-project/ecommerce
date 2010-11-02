@@ -22,11 +22,11 @@ class BaseProductRepository implements ProductRepositoryInterface {
      ;
 
     public function setOptions($options) {
-      $this->options = $options;
+        $this->options = $options;
     }
 
-    public function getOptions()
-    {
+    public function getOptions() {
+
         return $this->options;
     }
 
@@ -55,8 +55,7 @@ class BaseProductRepository implements ProductRepositoryInterface {
     /**
      * @return bool return true if the product haas some variation fields
      */
-    public function hasVariationFields()
-    {
+    public function hasVariationFields() {
 
         return count($this->getVariationFields()) > 0;
     }
@@ -71,10 +70,10 @@ class BaseProductRepository implements ProductRepositoryInterface {
         return $this->variation_fields;
     }
 
-    public function createVariation($product)
-    {
-        if($product->isVariation())
-        {
+    public function createVariation($product) {
+
+        if($product->isVariation()) {
+
             throw RuntimeException('Cannot create a variation from a variation product');
         }
 

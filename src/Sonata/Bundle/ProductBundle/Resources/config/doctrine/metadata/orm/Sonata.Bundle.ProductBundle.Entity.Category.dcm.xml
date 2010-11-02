@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity
+
+        name="Sonata\Bundle\ProductBundle\Entity\Category"
+        table="sonata_category"
+        repository-class="Sonata\Bundle\ProductBundle\Entity\CategoryRepository"
+        >
+
+        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="rank"              type="integer"  column="rank"/>
+        <field name="label"             type="string"   column="label"              length="255"/>
+        <field name="main_description"  type="text"     column="main_description"/>
+        <field name="sub_description"   type="text"     column="sub_description"/>
+        <field name="enabled"           type="boolean"  column="enabled"/>
+
+        <field name="updated_at"    column="updated_at"     type="datetime" />
+        <field name="created_at"    column="created_at"     type="datetime" />
+        
+        <lifecycle-callbacks/>
+    </entity>
+</doctrine-mapping>

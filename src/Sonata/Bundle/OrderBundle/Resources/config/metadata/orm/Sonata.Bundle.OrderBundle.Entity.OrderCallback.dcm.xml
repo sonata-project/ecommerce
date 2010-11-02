@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sonata\Bundle\OrderBundle\Entity\OrderCallback" table="sonata_order_callbacks">
+        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="order_id"          type="integer"  column="order_id"/>
+        <field name="transaction_id"    type="string"   column="transaction_id" length="255"/>
+        <field name="status"            type="integer"  column="status"/>
+        <field name="amount"            type="decimal"  column="amount"         scale="4"/>
+        <field name="post"              type="text"     column="post"/>
+        <field name="get"               type="text"     column="get"/>
+        <field name="uri"               type="text"     column="uri"/>
+        <field name="method"            type="string"   column="method"         length="6"/>
+        <field name="remote_ip"         type="string"   column="remote_ip"      length="255"/>
+        <field name="errors"            type="text"     column="errors"/>
+
+        <one-to-many field="Order" target-entity="Sonata\Bundle\OrderBundle\Entity\Order" mapped-by="Orders" orphan-removal="">
+            <join-columns>
+                <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE"/>
+            </join-columns>
+        </one-to-many>
+        
+        <lifecycle-callbacks/>
+    </entity>
+</doctrine-mapping>

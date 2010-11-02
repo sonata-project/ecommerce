@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sonata\Bundle\MediaBundle\Entity\EntityMedia" table="sonata_entities_images">
+
+        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="classname" type="string"   column="classname"  length="255"/>
+        <field name="object_id" type="integer"  column="object_id"  />
+        <field name="enabled"   type="boolean"  column="enabled"    />
+
+        <lifecycle-callbacks/>
+        
+    </entity>
+</doctrine-mapping>
