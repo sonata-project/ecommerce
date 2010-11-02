@@ -36,7 +36,7 @@ class ProductExtension extends Extension
     public function configLoad($config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
-        $loader->load('payment.xml');
+        $loader->load('product.xml');
     }
 
     /**

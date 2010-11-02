@@ -86,4 +86,20 @@ abstract class BaseDelivery implements DeliveryInterface {
         return bcadd($vat, 0, 2);
     }
 
+    /**
+     * return status list
+     *
+     * @return array
+     */
+    public static function getStatusList() {
+
+        return array(
+            self::STATUS_OPEN       => 'status_open',
+            self::STATUS_SENT       => 'status_sent',
+            self::STATUS_CANCELLED  => 'status_cancelled',
+            self::STATUS_COMPLETED  => 'status_delivered',
+            self::STATUS_RETURNED   => 'status_returned',
+        );
+        
+    }
 }

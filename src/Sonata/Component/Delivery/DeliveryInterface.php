@@ -12,6 +12,13 @@ namespace Sonata\Component\Delivery;
 
 interface DeliveryInterface {
 
+    const
+        STATUS_OPEN      = 0,
+        STATUS_SENT      = 1,
+        STATUS_CANCELLED = 2,
+        STATUS_COMPLETED = 3,
+        STATUS_RETURNED  = 4;
+
     /**
      * @abstract
      * @return float the delivery base price

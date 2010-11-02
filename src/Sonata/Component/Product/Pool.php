@@ -52,9 +52,25 @@ class Pool
         return isset($this->products[$code]) ? $this->products[$code] : null;
     }
 
-    public function getRepository(ProductInterface $product)
+    /**
+     * @throws RuntimeException
+     * @param  $product ProductInterface|product code|product class
+     * @return array
+     */
+    public function getRepository($product)
     {
-        $class = get_class($product);
+        // code
+        if (is_string($product) && strpos($product, '\\') === false)
+        {
+            return $this->products[$product]['repository'];
+        }
+
+        if($product instanceof ProductInterface) {
+            $class = get_class($product);
+        } else {
+            $class = $product;
+        }
+
 
         foreach($this->products as $product)
         {

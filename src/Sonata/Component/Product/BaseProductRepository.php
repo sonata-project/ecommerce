@@ -16,6 +16,137 @@ use Sonata\Component\Basket\BasketElement;
 
 class BaseProductRepository implements ProductRepositoryInterface {
 
+    protected
+        $options            = array(),
+        $variation_fields   = array()
+     ;
+
+    public function setOptions($options) {
+      $this->options = $options;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    public function getOption($name, $default = null){
+
+        return isset($this->options[$name]) ? $this->options[$name] : $default;
+    }
+
+    public function createProductInstance() {
+        
+    }
+
+    ////////////////////////////////////////////////
+    //   VARIATION RELATED FUNCTIONS
+
+    /**
+     * @param  $name
+     * @return bool return true if the field $name is a variation
+     */
+    public function isVariateBy($name) {
+
+        return in_array($name, $this->variation_fields);
+    }
+
+       
+    /**
+     * @return bool return true if the product haas some variation fields
+     */
+    public function hasVariationFields()
+    {
+
+        return count($this->getVariationFields()) > 0;
+    }
+
+    public function setVariationFields($fields) {
+
+        $this->variation_fields = $fields;
+    }
+
+    public function getVariationFields() {
+
+        return $this->variation_fields;
+    }
+
+    public function createVariation($product)
+    {
+        if($product->isVariation())
+        {
+            throw RuntimeException('Cannot create a variation from a variation product');
+        }
+
+        $variation = clone $product;
+        $variation->setParent($product);
+        $variation->setId(null);
+        $variation->setEnabled(false);
+        $variation->setName(sprintf('%s (duplicated)', $product->getName()));
+
+        return $variation;
+    }
+
+    public function copyVariation($product, $name = 'all', $force_copy = false) {
+
+        if($product->isVariation())
+        {
+
+            return;
+        }
+
+        switch($name)
+        {
+          case 'product':
+                $this->copyProductVariation($product, $force_copy);
+
+                return;
+
+
+          case 'all':
+                $this->copyProductVariation($product, $force_copy);
+
+                return;
+
+        }
+    }
+
+    public function copyProductVariation(Product $product, $force_copy = false) {
+
+        $variation_fields = array_merge(array('id'), $this->getVariationFields());
+
+        // fields to copy
+        $values = array(
+            'Name'    => $product->getName(),
+            'Price'   => $product->getPrice(),
+            'Vat'     => $product->getVat(),
+            'Enabled' => $product->getEnabled()
+        );
+
+        if(!$force_copy) {
+
+            foreach($variation_fields as $field) {
+
+                if(!array_key_exists($field, $values)) {
+                   continue;
+                }
+
+                unset($values[$field]);
+            }
+        }
+
+        foreach($product->getVariations() as $variation) {
+
+            foreach($values as $name => $value) {
+
+                call_user_func(array($variation, 'set'.$name), $value );
+            }
+        }
+    }
+
+    /////////////////////////////////////////////////////
+    // BASKET RELATED FUNCTIONS
+
     /**
      * return true if the basket element is still valid
      *
@@ -120,4 +251,5 @@ class BaseProductRepository implements ProductRepositoryInterface {
         
         return true;
     }
+
 }

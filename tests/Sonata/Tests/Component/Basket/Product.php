@@ -10,27 +10,16 @@
  */
 namespace Sonata\Tests\Component\Basket;
 
-use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Product\BaseProduct;
 
-class Product implements ProductInterface
+class Product extends BaseProduct
 {
     public $enabled = true;
+    public $id = 1;
+    public $name = 'fake name';
+    public $price = 15;
+    public $vat = 19.6;
 
-    public function getId() {
-        return 1;
-    }
-
-    public function getPrice() {
-        return 15;
-    }
-
-    public function getVat() {
-        return 19.6;
-    }
-
-    public function getName() {
-        return "fake name";
-    }
 
     public function getOptions() {
         return array(
@@ -38,11 +27,8 @@ class Product implements ProductInterface
         );
     }
 
-    public function getEnabled() {
-        return $this->enabled;
-    }
-
     public function isRecurrentPayment() {
         return false;
     }
+
 }
