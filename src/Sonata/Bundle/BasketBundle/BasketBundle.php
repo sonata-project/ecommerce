@@ -13,6 +13,33 @@ namespace Sonata\Bundle\BasketBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class BasketBundle extends Bundle
+use Doctrine\Common\EventSubscriber;
+
+class BasketBundle extends Bundle implements EventSubscriber
 {
+    public function boot() {
+
+        $evm = $this->container->getDoctrine_Orm_EntityManagerService()->getEventManager();
+
+        $evm->addEventSubscriber($this);
+    }
+
+    public function getSubscribedEvents() {
+        return array(
+            'loadClassMetadata'
+        );
+    }
+
+    public function loadClassMetadata($eventArgs) {
+        $metadata = $eventArgs->getClassMetadata();
+
+        if($metadata->name == 'Sonata\Bundle\BasketBundle\Entity\Address')
+        {
+            $metadata->mapManyToOne(array(
+                'fieldName'     => 'user',
+                'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),
+                'invertedBy'    => 'addresses',
+            ));
+        }
+    }
 }

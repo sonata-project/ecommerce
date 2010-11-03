@@ -21,21 +21,6 @@
         <field name="country"       type="string"   column="country"    length="3"/>
         <field name="phone"         type="string"   column="phone"      length="255"/>
 
-        <one-to-many
-            field="user" 
-            target-entity="User"
-            mapped-by="address"
-            orphan-removal="">
-
-            <join-columns>
-                <join-column
-                    name="user_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"/>
-
-            </join-columns>
-
-        </one-to-many>
         <lifecycle-callbacks/>
     </entity>
 </doctrine-mapping>

@@ -38,7 +38,11 @@ Installation
         sonata_basket.config:
             class: Sonata\Component\Basket\Basket
 
-        sonata_products.config:
+        sonata_product.config:
             methods:
                 - { id: free, name: Free, enabled: true, class: Sonata\Component\Payment\Free }
 
+
+* add the DoctrineUserBundle bundle (user management) and follow DoctrineUserBundle README
+
+        git submodule add git://github.com/knplabs/DoctrineUserBundle.git src/Bundle/DoctrineUserBundle

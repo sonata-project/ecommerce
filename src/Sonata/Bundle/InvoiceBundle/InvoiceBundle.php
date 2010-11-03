@@ -8,10 +8,35 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Bundle\OrderBundle;
+namespace Sonata\Bundle\InvoiceBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Doctrine\Common\EventSubscriber;
 
-class OrderBundle extends Bundle
-{
+class InvoiceBundle extends Bundle implements EventSubscriber {
+    public function boot() {
+
+        $evm = $this->container->getDoctrine_Orm_EntityManagerService()->getEventManager();
+
+        $evm->addEventSubscriber($this);
+    }
+
+    public function getSubscribedEvents() {
+        return array(
+            'loadClassMetadata'
+        );
+    }
+
+    public function loadClassMetadata($eventArgs) {
+        $metadata = $eventArgs->getClassMetadata();
+
+        if($metadata->name == 'Sonata\Bundle\InvoiceBundle\Entity\Invoice')
+        {
+            $metadata->mapManyToOne(array(
+                'fieldName'     => 'user',
+                'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),
+                'invertedBy'    => 'invoices',
+            ));
+        }
+    }
 }

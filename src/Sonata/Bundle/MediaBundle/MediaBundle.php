@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Sonata package.
  *
@@ -9,9 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Bundle\DeliveryBundle;
+namespace Sonata\Bundle\MediaBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class DeliveryBundle extends Bundle {
+class MediaBundle extends Bundle
+{
 }
