@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity
-
-        name="Sonata\Bundle\ProductBundle\Entity\Category"
-        table="sonata_category"
-        repository-class="Sonata\Bundle\ProductBundle\Entity\CategoryRepository"
-        >
-
-        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
-
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
+    <mapped-superclass name="Sonata\Bundle\ProductBundle\Entity\BaseCategory" >
 
         <field name="rank"              type="integer"  column="rank"/>
         <field name="label"             type="string"   column="label"              length="255"/>
@@ -21,7 +10,6 @@
 
         <field name="updated_at"    column="updated_at"     type="datetime" />
         <field name="created_at"    column="created_at"     type="datetime" />
-        
-        <lifecycle-callbacks/>
-    </entity>
+
+    </mapped-superclass>
 </doctrine-mapping>

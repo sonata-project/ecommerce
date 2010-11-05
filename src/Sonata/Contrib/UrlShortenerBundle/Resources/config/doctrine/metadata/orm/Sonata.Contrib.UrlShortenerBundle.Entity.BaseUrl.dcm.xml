@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Sonata\Contrib\UrlShortenerBundle\Entity\BaseUrl">
+
+        <indexes>
+            <index name="slug" columns="slug"/>
+        </indexes>
+
+
+        <field name="href" column="href" type="text" nullable="false" length="1024"/>
+        <field name="slug" column="slug" unique="true" type="string" length="255" nullable="false"/>
+
+        <field name="createdAt" column="created_at" type="datetime" />
+
+        <one-to-many field="usages" target-entity="Sonata\Contrib\UrlShortenerBundle\Entity\BaseUsage" mapped-by="url_id">
+
+          <!--<cascade>-->
+            <!--<cascade-persist/>-->
+          <!--</cascade>-->
+        </one-to-many>
+
+    </entity>
+
+</doctrine-mapping>

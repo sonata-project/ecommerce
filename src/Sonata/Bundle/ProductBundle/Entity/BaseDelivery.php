@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\ProductBundle\Entity;
 
 /**
- * Sonata\Bundle\ProductBundle\Entity\Package
+ * Sonata\Bundle\ProductBundle\Entity\BaseDelivery
  */
-class Package
+abstract class BaseDelivery
 {
     /**
      * @var integer $product_id
@@ -13,24 +13,24 @@ class Package
     private $product_id;
 
     /**
-     * @var decimal $width
+     * @var string $class_name
      */
-    private $width;
+    private $class_name;
 
     /**
-     * @var decimal $height
+     * @var boolean $per_item
      */
-    private $height;
+    private $per_item;
 
     /**
-     * @var decimal $length
+     * @var string $country
      */
-    private $length;
+    private $country;
 
     /**
-     * @var decimal $weight
+     * @var string $zone
      */
-    private $weight;
+    private $zone;
 
     /**
      * @var boolean $enabled
@@ -46,11 +46,6 @@ class Package
      * @var datetime $created_at
      */
     private $created_at;
-
-    /**
-     * @var integer $id
-     */
-    private $id;
 
     /**
      * Set product_id
@@ -73,83 +68,83 @@ class Package
     }
 
     /**
-     * Set width
+     * Set class_name
      *
-     * @param decimal $width
+     * @param string $className
      */
-    public function setWidth($width)
+    public function setClassName($className)
     {
-        $this->width = $width;
+        $this->class_name = $className;
     }
 
     /**
-     * Get width
+     * Get class_name
      *
-     * @return decimal $width
+     * @return string $className
      */
-    public function getWidth()
+    public function getClassName()
     {
-        return $this->width;
+        return $this->class_name;
     }
 
     /**
-     * Set height
+     * Set per_item
      *
-     * @param decimal $height
+     * @param boolean $perItem
      */
-    public function setHeight($height)
+    public function setPerItem($perItem)
     {
-        $this->height = $height;
+        $this->per_item = $perItem;
     }
 
     /**
-     * Get height
+     * Get per_item
      *
-     * @return decimal $height
+     * @return boolean $perItem
      */
-    public function getHeight()
+    public function getPerItem()
     {
-        return $this->height;
+        return $this->per_item;
     }
 
     /**
-     * Set length
+     * Set country
      *
-     * @param decimal $length
+     * @param string $country
      */
-    public function setLength($length)
+    public function setCountry($country)
     {
-        $this->length = $length;
+        $this->country = $country;
     }
 
     /**
-     * Get length
+     * Get country
      *
-     * @return decimal $length
+     * @return string $country
      */
-    public function getLength()
+    public function getCountry()
     {
-        return $this->length;
+        return $this->country;
     }
 
     /**
-     * Set weight
+     * Set zone
      *
-     * @param decimal $weight
+     * @param string $zone
      */
-    public function setWeight($weight)
+    public function setZone($zone)
     {
-        $this->weight = $weight;
+        $this->zone = $zone;
     }
 
     /**
-     * Get weight
+     * Get zone
      *
-     * @return decimal $weight
+     * @return string $zone
      */
-    public function getWeight()
+    public function getZone()
     {
-        return $this->weight;
+        return $this->zone;
     }
 
     /**
@@ -210,15 +205,5 @@ class Package
     public function getCreatedAt()
     {
         return $this->created_at;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

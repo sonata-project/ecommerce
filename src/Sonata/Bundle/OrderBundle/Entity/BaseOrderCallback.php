@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\OrderBundle\Entity;
 
 /**
- * Sonata\Bundle\OrderBundle\Entity\OrderCallback
+ * Sonata\Bundle\OrderBundle\Entity\BaseOrderCallback
  */
-class OrderCallback
+abstract class BaseOrderCallback
 {
     /**
      * @var integer $order_id
@@ -58,12 +58,7 @@ class OrderCallback
     private $errors;
 
     /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
-     * @var Sonata\Bundle\OrderBundle\Entity\Order
+     * @var Sonata\Bundle\OrderBundle\Entity\BaseOrder
      */
     private $Order;
 
@@ -268,21 +263,11 @@ class OrderCallback
     }
 
     /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Add Order
      *
-     * @param Sonata\Bundle\OrderBundle\Entity\Order $order
+     * @param Sonata\Bundle\OrderBundle\Entity\BaseOrder $order
      */
-    public function addOrder(\Sonata\Bundle\OrderBundle\Entity\Order $order)
+    public function addOrder(\Application\OrderBundle\Entity\Order $order)
     {
         $this->Order[] = $order;
     }

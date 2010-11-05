@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\ProductBundle\Entity;
 
 /**
- * Sonata\Bundle\ProductBundle\Entity\Product
+ * Sonata\Bundle\ProductBundle\Entity\BaseProduct
  */
-class Product
+abstract class BaseProduct //implements \Sonata\Component\Product\ProductInterface
 {
     /**
      * @var text $sku
@@ -58,24 +58,14 @@ class Product
     private $created_at;
 
     /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
-     * @var Sonata\Bundle\ProductBundle\Entity\Package
+     * @var Sonata\Bundle\ProductBundle\Entity\BasePackage
      */
     private $package;
 
     /**
-     * @var Sonata\Bundle\ProductBundle\Entity\Delivery
+     * @var Sonata\Bundle\ProductBundle\Entity\BaseDelivery
      */
     private $delivery;
-
-    /**
-     * @var Sonata\Bundle\ProductBundle\Entity\Category
-     */
-    private $categories;
 
     /**
      * Set sku
@@ -278,21 +268,11 @@ class Product
     }
 
     /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Add package
      *
-     * @param Sonata\Bundle\ProductBundle\Entity\Package $package
+     * @param Sonata\Bundle\ProductBundle\Entity\BasePackage $package
      */
-    public function addPackage(\Sonata\Bundle\ProductBundle\Entity\Package $package)
+    public function addPackage(\Sonata\Bundle\ProductBundle\Entity\BasePackage $package)
     {
         $this->package[] = $package;
     }
@@ -310,9 +290,9 @@ class Product
     /**
      * Add delivery
      *
-     * @param Sonata\Bundle\ProductBundle\Entity\Delivery $delivery
+     * @param Sonata\Bundle\ProductBundle\Entity\BaseDelivery $delivery
      */
-    public function addDelivery(\Sonata\Bundle\ProductBundle\Entity\Delivery $delivery)
+    public function addDelivery(\Sonata\Bundle\ProductBundle\Entity\BaseDelivery $delivery)
     {
         $this->delivery[] = $delivery;
     }
@@ -325,25 +305,5 @@ class Product
     public function getDelivery()
     {
         return $this->delivery;
-    }
-
-    /**
-     * Add categories
-     *
-     * @param Sonata\Bundle\ProductBundle\Entity\Category $categories
-     */
-    public function addCategories(\Sonata\Bundle\ProductBundle\Entity\Category $categories)
-    {
-        $this->categories[] = $categories;
-    }
-
-    /**
-     * Get categories
-     *
-     * @return Doctrine\Common\Collections\Collection $categories
-     */
-    public function getCategories()
-    {
-        return $this->categories;
     }
 }

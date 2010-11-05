@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\InvoiceBundle\Entity;
 
 /**
- * Sonata\Bundle\InvoiceBundle\Entity\Invoice
+ * Sonata\Bundle\InvoiceBundle\Entity\BaseInvoice
  */
-class Invoice
+abstract class BaseInvoice
 {
     /**
      * @var string $reference
@@ -91,16 +91,6 @@ class Invoice
      * @var string $mobile
      */
     private $mobile;
-
-    /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
-     * @var Application\Entity\User
-     */
-    private $user;
 
     /**
      * Set reference
@@ -441,23 +431,17 @@ class Invoice
     {
         return $this->mobile;
     }
-
     /**
-     * Get id
-     *
-     * @return integer $id
+     * @var Application\DoctrineUserBundle\Entity\User
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $user;
 
     /**
      * Set user
      *
-     * @param Application\Entity\User $user
+     * @param Application\DoctrineUserBundle\Entity\User $user
      */
-    public function setUser(\Application\Entity\User $user)
+    public function setUser(\Application\DoctrineUserBundle\Entity\User $user)
     {
         $this->user = $user;
     }
@@ -465,7 +449,7 @@ class Invoice
     /**
      * Get user
      *
-     * @return Application\Entity\User $user
+     * @return Application\DoctrineUserBundle\Entity\User $user
      */
     public function getUser()
     {

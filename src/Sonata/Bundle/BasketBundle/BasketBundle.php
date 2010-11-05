@@ -15,8 +15,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 use Doctrine\Common\EventSubscriber;
 
-class BasketBundle extends Bundle implements EventSubscriber
-{
+class BasketBundle extends Bundle implements EventSubscriber {
+
     public function boot() {
 
         $evm = $this->container->getDoctrine_Orm_EntityManagerService()->getEventManager();
@@ -33,8 +33,7 @@ class BasketBundle extends Bundle implements EventSubscriber
     public function loadClassMetadata($eventArgs) {
         $metadata = $eventArgs->getClassMetadata();
 
-        if($metadata->name == 'Sonata\Bundle\BasketBundle\Entity\Address')
-        {
+        if($metadata->name == 'Sonata\Bundle\BasketBundle\Entity\BaseAddress') {
             $metadata->mapManyToOne(array(
                 'fieldName'     => 'user',
                 'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),

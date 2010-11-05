@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\OrderBundle\Entity;
 
 /**
- * Sonata\Bundle\OrderBundle\Entity\Order
+ * Sonata\Bundle\OrderBundle\Entity\BaseOrder
  */
-class Order
+class BaseOrder
 {
     /**
      * @var string $reference
@@ -183,12 +183,7 @@ class Order
     private $shipping_mobile;
 
     /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
-     * @var Application\Entity\User
+     * @var Application\DoctrineUserBundle\Entity\User
      */
     private $user;
 
@@ -893,21 +888,11 @@ class Order
     }
 
     /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Set user
      *
-     * @param Application\Entity\User $user
+     * @param Application\DoctrineUserBundle\Entity\User $user
      */
-    public function setUser($user)
+    public function setUser(\Application\DoctrineUserBundle\Entity\User $user)
     {
         $this->user = $user;
     }
@@ -915,7 +900,7 @@ class Order
     /**
      * Get user
      *
-     * @return Application\Entity\User $user
+     * @return Application\DoctrineUserBundle\Entity\User $user
      */
     public function getUser()
     {

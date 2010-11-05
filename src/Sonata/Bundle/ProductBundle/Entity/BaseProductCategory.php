@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\ProductBundle\Entity;
 
 /**
- * Sonata\Bundle\ProductBundle\Entity\ProductCategory
+ * Sonata\Bundle\ProductBundle\Entity\BaseProductCategory
  */
-class ProductCategory
+abstract class BaseProductCategory
 {
     /**
      * @var integer $category_id
@@ -33,17 +33,12 @@ class ProductCategory
     private $created_at;
 
     /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
-     * @var Sonata\Bundle\ProductBundle\Entity\Product
+     * @var Application\ProductBundle\Entity\Product
      */
     private $product;
 
     /**
-     * @var Sonata\Bundle\ProductBundle\Entity\Category
+     * @var Application\ProductBundle\Entity\Category
      */
     private $category;
 
@@ -148,21 +143,11 @@ class ProductCategory
     }
 
     /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Set product
      *
-     * @param Sonata\Bundle\ProductBundle\Entity\Product $product
+     * @param Application\ProductBundle\Entity\Product $product
      */
-    public function setProduct(\Sonata\Bundle\ProductBundle\Entity\Product $product)
+    public function setProduct(\Application\ProductBundle\Entity\Product $product)
     {
         $this->product = $product;
     }
@@ -170,7 +155,7 @@ class ProductCategory
     /**
      * Get product
      *
-     * @return Sonata\Bundle\ProductBundle\Entity\Product $product
+     * @return Application\ProductBundle\Entity\Product $product
      */
     public function getProduct()
     {
@@ -180,9 +165,9 @@ class ProductCategory
     /**
      * Set category
      *
-     * @param Sonata\Bundle\ProductBundle\Entity\Category $category
+     * @param Application\ProductBundle\Entity\Category $category
      */
-    public function setCategory(\Sonata\Bundle\ProductBundle\Entity\Category $category)
+    public function setCategory(\Application\ProductBundle\Entity\Category $category)
     {
         $this->category = $category;
     }
@@ -190,7 +175,7 @@ class ProductCategory
     /**
      * Get category
      *
-     * @return Sonata\Bundle\ProductBundle\Entity\Category $category
+     * @return Application\ProductBundle\Entity\Category $category
      */
     public function getCategory()
     {

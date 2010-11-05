@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\InvoiceBundle\Entity;
 
 /**
- * Sonata\Bundle\InvoiceBundle\Entity\InvoiceElement
+ * Sonata\Bundle\InvoiceBundle\Entity\BaseInvoiceElement
  */
-class InvoiceElement
+abstract class BaseInvoiceElement
 {
     /**
      * @var integer $invoice_id
@@ -46,11 +46,6 @@ class InvoiceElement
      * @var text $description
      */
     private $description;
-
-    /**
-     * @var integer $id
-     */
-    private $id;
 
     /**
      * @var Sonata\Bundle\InvoiceBundle\Entity\Invoice
@@ -223,21 +218,11 @@ class InvoiceElement
     }
 
     /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Add invoice
      *
      * @param Sonata\Bundle\InvoiceBundle\Entity\Invoice $invoice
      */
-    public function addInvoice(\Sonata\Bundle\InvoiceBundle\Entity\Invoice $invoice)
+    public function addInvoice(\Application\InvoiceBundle\Entity\Invoice $invoice)
     {
         $this->invoice[] = $invoice;
     }
@@ -257,7 +242,7 @@ class InvoiceElement
      *
      * @param Sonata\Bundle\OrderBundle\Entity\OrderElement $orderElement
      */
-    public function addOrderElement(\Sonata\Bundle\OrderBundle\Entity\OrderElement $orderElement)
+    public function addOrderElement(\Application\OrderBundle\Entity\OrderElement $orderElement)
     {
         $this->order_element[] = $orderElement;
     }

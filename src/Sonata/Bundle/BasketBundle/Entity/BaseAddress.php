@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\BasketBundle\Entity;
 
 /**
- * Sonata\Bundle\BasketBundle\Entity\Address
+ * Sonata\Bundle\BasketBundle\Entity\BaseAddress
  */
-class Address
+abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
 {
     /**
      * @var integer $user_id
@@ -35,17 +35,17 @@ class Address
     /**
      * @var string $addr1
      */
-    private $addr1;
+    private $address1;
 
     /**
      * @var string $addr2
      */
-    private $addr2;
+    private $address2;
 
     /**
      * @var string $addr3
      */
-    private $addr3;
+    private $address3;
 
     /**
      * @var string $postcode
@@ -60,7 +60,7 @@ class Address
     /**
      * @var string $country
      */
-    private $country;
+    private $country_code;
 
     /**
      * @var string $phone
@@ -68,12 +68,17 @@ class Address
     private $phone;
 
     /**
-     * @var integer $id
+     * @var datetime $updated_at
      */
-    private $id;
+    private $updated_at;
 
     /**
-     * @var Application\Entity\User
+     * @var datetime $created_at
+     */
+    private $created_at;
+
+    /**
+     * @var Application\SandboxBundle\Entity\User
      */
     private $user;
 
@@ -192,9 +197,9 @@ class Address
      *
      * @return string $addr1
      */
-    public function getAddr1()
+    public function getAddress1()
     {
-        return $this->addr1;
+        return $this->address1;
     }
 
     /**
@@ -202,9 +207,9 @@ class Address
      *
      * @param string $addr2
      */
-    public function setAddr2($addr2)
+    public function setAddress2($address2)
     {
-        $this->addr2 = $addr2;
+        $this->addr2 = $address2;
     }
 
     /**
@@ -212,9 +217,9 @@ class Address
      *
      * @return string $addr2
      */
-    public function getAddr2()
+    public function getAddress2()
     {
-        return $this->addr2;
+        return $this->address2;
     }
 
     /**
@@ -222,9 +227,9 @@ class Address
      *
      * @param string $addr3
      */
-    public function setAddr3($addr3)
+    public function setAddress3($address3)
     {
-        $this->addr3 = $addr3;
+        $this->addr3 = $address3;
     }
 
     /**
@@ -232,9 +237,9 @@ class Address
      *
      * @return string $addr3
      */
-    public function getAddr3()
+    public function getAddress3()
     {
-        return $this->addr3;
+        return $this->address3;
     }
 
     /**
@@ -282,9 +287,9 @@ class Address
      *
      * @param string $country
      */
-    public function setCountry($country)
+    public function setCountryCode($country_code)
     {
-        $this->country = $country;
+        $this->country_code = $country_code;
     }
 
     /**
@@ -292,9 +297,9 @@ class Address
      *
      * @return string $country
      */
-    public function getCountry()
+    public function getCountryCode()
     {
-        return $this->country;
+        return $this->country_code;
     }
 
     /**
@@ -318,32 +323,72 @@ class Address
     }
 
     /**
-     * Get id
+     * Set updated_at
      *
-     * @return integer $id
+     * @param datetime $updatedAt
      */
-    public function getId()
+    public function setUpdatedAt($updatedAt)
     {
-        return $this->id;
+        $this->updated_at = $updatedAt;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return datetime $updatedAt
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime $createdAt
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 
     /**
      * Set user
      *
-     * @param Application\Entity\User $user
+     * @param Application\SandboxBundle\Entity\User $user
      */
-    public function setUser($user)
+    public function setUser(\Application\SandboxBundle\Entity\User $user)
     {
         $this->user = $user;
     }
-    
+
     /**
      * Get user
      *
-     * @return Application\Entity\User $user
+     * @return Application\SandboxBundle\Entity\User $user
      */
     public function getUser()
     {
         return $this->user;
+    }
+    
+    /**
+     * Set address1
+     *
+     * @param string $address1
+     */
+    public function setAddress1($address1)
+    {
+        $this->address1 = $address1;
     }
 }

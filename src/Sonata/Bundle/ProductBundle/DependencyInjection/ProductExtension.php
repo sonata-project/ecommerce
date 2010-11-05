@@ -24,8 +24,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class ProductExtension extends Extension
-{
+class ProductExtension extends Extension {
 
     /**
      * Loads the product configuration.
@@ -33,8 +32,7 @@ class ProductExtension extends Extension
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function configLoad($config, ContainerBuilder $container)
-    {
+    public function configLoad($config, ContainerBuilder $container) {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('product.xml');
     }
@@ -44,18 +42,15 @@ class ProductExtension extends Extension
      *
      * @return string The XSD base path
      */
-    public function getXsdValidationBasePath()
-    {
+    public function getXsdValidationBasePath() {
         return __DIR__.'/../Resources/config/schema';
     }
 
-    public function getNamespace()
-    {
+    public function getNamespace() {
         return 'http://www.sonata-project.org/schema/dic/sonata-product';
     }
 
-    public function getAlias()
-    {
+    public function getAlias() {
         return "sonata_product";
     }
 }

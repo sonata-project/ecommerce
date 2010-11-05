@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sonata\Bundle\OrderBundle\Entity\OrderElement" table="sonata_order_element">
-
-        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
-
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
+    <mapped-superclass name="Sonata\Bundle\OrderBundle\Entity\BaseOrderElement">
 
         <field name="order_id"          type="integer"      column="order_id"/>
         <field name="quantity"          type="integer"      column="quantity"/>
@@ -24,7 +18,7 @@
 
         <one-to-many
             field="order"
-            target-entity="Sonata\Bundle\OrderBundle\Entity\Order"
+            target-entity="Application\OrderBundle\Entity\Order"
             mapped-by="order_elements"
             orphan-removal="">
 
@@ -38,7 +32,7 @@
 
         <one-to-many
             field="product"
-            target-entity="Sonata\Bundle\ProductBundle\Entity\Product"
+            target-entity="Sonata\Bundle\ProductBundle\Entity\BaseProduct"
             mapped-by="order_elements"
             orphan-removal="">
 
@@ -49,6 +43,6 @@
                     on-delete="SET NULL"/>
             </join-columns>
         </one-to-many>
-        <lifecycle-callbacks/>
-    </entity>
+
+    </mapped-superclass>
 </doctrine-mapping>

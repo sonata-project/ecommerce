@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sonata\Bundle\MediaBundle\Entity\Media" table="sonata_media">
-        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
-
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
+    <mapped-superclass name="Sonata\Bundle\MediaBundle\Entity\BaseMedia">
                 
         <lifecycle-callbacks/>
-    </entity>
+    </mapped-superclass>
 </doctrine-mapping>

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sonata\Bundle\OrderBundle\Entity\Order" table="sonata_order">
+    <mapped-superclass name="Sonata\Bundle\OrderBundle\Entity\BaseOrder">
 
-        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
-
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
 
         <field name="reference"             type="string"   column="reference"          length="255"/>
         <field name="user_id"               type="integer"  column="user_id"            length="4"/>
@@ -44,6 +39,5 @@
         <field name="shipping_email"        type="string"   column="shipping_email"     length="255"/>
         <field name="shipping_mobile"       type="string"   column="shipping_mobile"    length="255"/>
 
-        <lifecycle-callbacks/>
-    </entity>
+    </mapped-superclass>
 </doctrine-mapping>

@@ -30,12 +30,14 @@ class InvoiceBundle extends Bundle implements EventSubscriber {
     public function loadClassMetadata($eventArgs) {
         $metadata = $eventArgs->getClassMetadata();
 
-        if($metadata->name == 'Sonata\Bundle\InvoiceBundle\Entity\Invoice')
-        {
+        if($metadata->name == 'Sonata\Bundle\InvoiceBundle\Entity\BaseInvoice') {
             $metadata->mapManyToOne(array(
                 'fieldName'     => 'user',
                 'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),
                 'invertedBy'    => 'invoices',
+                'cascade' => array(
+                    'persist'
+                ),
             ));
         }
     }

@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\OrderBundle\Entity;
 
 /**
- * Sonata\Bundle\OrderBundle\Entity\OrderElement
+ * Sonata\Bundle\OrderBundle\Entity\BaseOrderElement
  */
-class OrderElement
+abstract class BaseOrderElement
 {
     /**
      * @var integer $order_id
@@ -73,17 +73,12 @@ class OrderElement
     private $validated_at;
 
     /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
-     * @var Sonata\Bundle\OrderBundle\Entity\Order
+     * @var Sonata\Bundle\OrderBundle\Entity\BaseOrder
      */
     private $order;
 
     /**
-     * @var Sonata\Bundle\ProductBundle\Entity\Product
+     * @var Sonata\Bundle\ProductBundle\Entity\BaseProduct
      */
     private $product;
 
@@ -348,21 +343,11 @@ class OrderElement
     }
 
     /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Add order
      *
-     * @param Sonata\Bundle\OrderBundle\Entity\Order $order
+     * @param Sonata\Bundle\OrderBundle\Entity\BaseOrder $order
      */
-    public function addOrder(\Sonata\Bundle\OrderBundle\Entity\Order $order)
+    public function addOrder(\Application\OrderBundle\Entity\Order $order)
     {
         $this->order[] = $order;
     }
@@ -380,9 +365,9 @@ class OrderElement
     /**
      * Add product
      *
-     * @param Sonata\Bundle\ProductBundle\Entity\Product $product
+     * @param Sonata\Bundle\ProductBundle\Entity\BaseProduct $product
      */
-    public function addProduct(\Sonata\Bundle\ProductBundle\Entity\Product $product)
+    public function addProduct(\Application\ProductBundle\Entity\Product $product)
     {
         $this->product[] = $product;
     }

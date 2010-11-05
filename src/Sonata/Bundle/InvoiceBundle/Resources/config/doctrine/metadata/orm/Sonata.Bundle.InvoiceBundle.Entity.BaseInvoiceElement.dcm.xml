@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sonata\Bundle\InvoiceBundle\Entity\InvoiceElement" table="sonata_invoice_elements">
-        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
-
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
+    <mapped-superclass name="Sonata\Bundle\InvoiceBundle\Entity\BaseInvoiceElement">
         
         <field name="invoice_id"        type="integer"  column="invoice_id"/>
         <field name="order_element_id"  type="integer"  column="order_element_id"/>
@@ -18,7 +13,7 @@
 
         <one-to-many
             field="invoice"
-            target-entity="Sonata\Bundle\InvoiceBundle\Entity\Invoice"
+            target-entity="Application\InvoiceBundle\Entity\Invoice"
             mapped-by="invoice_elements"
             orphan-removal="">
 
@@ -32,7 +27,7 @@
 
         <one-to-many
             field="order_element"
-            target-entity="Sonata\Bundle\OrderBundle\Entity\OrderElement" 
+            target-entity="Application\OrderBundle\Entity\OrderElement" 
             mapped-by="invoice_element"
             orphan-removal="">
             <join-columns>
@@ -42,8 +37,6 @@
                     on-delete="CASCADE"/>
             </join-columns>
         </one-to-many>
-
-        <lifecycle-callbacks/>
         
-    </entity>
+    </mapped-superclass>
 </doctrine-mapping>

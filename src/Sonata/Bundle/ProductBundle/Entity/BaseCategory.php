@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\ProductBundle\Entity;
 
 /**
- * Sonata\Bundle\ProductBundle\Entity\Category
+ * Sonata\Bundle\ProductBundle\Entity\BaseCategory
  */
-class Category
+abstract class BaseCategory
 {
     /**
      * @var integer $rank
@@ -41,11 +41,6 @@ class Category
      * @var datetime $created_at
      */
     private $created_at;
-
-    /**
-     * @var integer $id
-     */
-    private $id;
 
     /**
      * Set rank
@@ -185,15 +180,5 @@ class Category
     public function getCreatedAt()
     {
         return $this->created_at;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer $id
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

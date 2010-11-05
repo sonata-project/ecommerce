@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Sonata\Bundle\OrderBundle\Entity\OrderCallback" table="sonata_order_callbacks">
-        <change-tracking-policy>DEFERRED_IMPLICIT</change-tracking-policy>
-
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
+    <mapped-superclass name="Sonata\Bundle\OrderBundle\Entity\BaseOrderCallback">
 
         <field name="order_id"          type="integer"  column="order_id"/>
         <field name="transaction_id"    type="string"   column="transaction_id" length="255"/>
@@ -18,12 +13,11 @@
         <field name="remote_ip"         type="string"   column="remote_ip"      length="255"/>
         <field name="errors"            type="text"     column="errors"/>
 
-        <one-to-many field="Order" target-entity="Sonata\Bundle\OrderBundle\Entity\Order" mapped-by="Orders" orphan-removal="">
+        <one-to-many field="Order" target-entity="Application\OrderBundle\Entity\Order" mapped-by="Orders" orphan-removal="">
             <join-columns>
                 <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE"/>
             </join-columns>
         </one-to-many>
         
-        <lifecycle-callbacks/>
-    </entity>
+    </mapped-superclass>
 </doctrine-mapping>

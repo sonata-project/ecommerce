@@ -5,15 +5,7 @@
       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity
-        name="Sonata\Bundle\ProductBundle\Entity\Product"
-        table="sonata_product"
-        repository-class="Sonata\Bundle\ProductBundle\Entity\ProductRepository"
-        >
-
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
+    <mapped-superclass name="Sonata\Bundle\ProductBundle\Entity\BaseProduct" >
 
         <field name="sku"           column="sku"            type="text"     nullable="false" length="255"/>
         <field name="slug"          column="slug"           type="text"     nullable="false" length="255"/>
@@ -29,7 +21,7 @@
 
         <one-to-many
             field="package"
-            target-entity="Sonata\Bundle\ProductBundle\Entity\Package"
+            target-entity="Application\ProductBundle\Entity\Package"
             mapped-by="product"
             orphan-removal="false">
 
@@ -44,7 +36,7 @@
 
         <one-to-many
             field="delivery"
-            target-entity="Sonata\Bundle\ProductBundle\Entity\Delivery"
+            target-entity="Application\ProductBundle\Entity\Delivery"
             mapped-by="delivery"
             orphan-removal="false">
 
@@ -57,19 +49,5 @@
             </join-columns>
         </one-to-many>
 
-        <many-to-many
-            field="categories"
-            target-entity="Sonata\Bundle\ProductBundle\Entity\Category"
-            >
-            <join-table name="sonata_products_categories">
-                <join-columns>
-                    <join-column name="product_id" referenced-column-name="id"/>
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="category_id" referenced-column-name="id"/>
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-
-    </entity>
+    </mapped-superclass>
 </doctrine-mapping>

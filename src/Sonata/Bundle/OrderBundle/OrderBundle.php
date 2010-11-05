@@ -31,8 +31,8 @@ class OrderBundle extends Bundle implements EventSubscriber {
     public function loadClassMetadata($eventArgs) {
         $metadata = $eventArgs->getClassMetadata();
 
-        if($metadata->name == 'Sonata\Bundle\OrderBundle\Entity\Order')
-        {
+        if($metadata->name == 'Sonata\Bundle\OrderBundle\Entity\BaseOrder') {
+            
             $metadata->mapManyToOne(array(
                 'fieldName'     => 'user',
                 'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),
