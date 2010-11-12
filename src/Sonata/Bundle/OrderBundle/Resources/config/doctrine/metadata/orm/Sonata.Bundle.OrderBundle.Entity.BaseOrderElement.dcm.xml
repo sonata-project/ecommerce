@@ -3,6 +3,9 @@
     <mapped-superclass name="Sonata\Bundle\OrderBundle\Entity\BaseOrderElement">
 
         <field name="order_id"          type="integer"      column="order_id"/>
+        <field name="product_id"        type="integer"      column="product_id"/>
+        <field name="product_type"      type="string"       column="product_type"          length="255"/>
+
         <field name="quantity"          type="integer"      column="quantity"/>
         <field name="price"             type="decimal"      column="price"          scale="4"/>
         <field name="vat"               type="decimal"      column="vat"            scale="4"/>
@@ -10,29 +13,14 @@
         <field name="description"       type="text"         column="description"/>
         <field name="serialize"         type="text"         column="serialize"/>
         <field name="type"              type="integer"      column="type"/>
-        <field name="product_id"        type="integer"      column="product_id"/>
         <field name="status"            type="integer"      column="status"/>
         <field name="delivery_status"   type="integer"      column="delivery_status"/>
         <field name="behavior_class"    type="string"       column="behavior_class" length="255"/>
         <field name="validated_at"      type="datetime"     column="validated_at"/>
 
         <one-to-many
-            field="order"
-            target-entity="Application\OrderBundle\Entity\Order"
-            mapped-by="order_elements"
-            orphan-removal="">
-
-            <join-columns>
-                <join-column
-                    name="order_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"/>
-            </join-columns>
-        </one-to-many>
-
-        <one-to-many
             field="product"
-            target-entity="Sonata\Bundle\ProductBundle\Entity\BaseProduct"
+            target-entity="Application\ProductBundle\Entity\Product"
             mapped-by="order_elements"
             orphan-removal="">
 

@@ -43,4 +43,7 @@ class Address implements AddressInterface {
         return "";
     }
 
+    public function getName() {
+        return "home";
+    }
 }

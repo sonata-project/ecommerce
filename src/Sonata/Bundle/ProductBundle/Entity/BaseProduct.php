@@ -5,67 +5,71 @@ namespace Sonata\Bundle\ProductBundle\Entity;
 /**
  * Sonata\Bundle\ProductBundle\Entity\BaseProduct
  */
-abstract class BaseProduct //implements \Sonata\Component\Product\ProductInterface
+abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
 {
     /**
      * @var text $sku
      */
-    private $sku;
+    protected $sku;
 
     /**
      * @var text $slug
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var string $name
      */
-    private $name;
+    protected $name;
 
     /**
      * @var text $description
      */
-    private $description;
+    protected $description;
 
     /**
      * @var decimal $price
      */
-    private $price;
+    protected $price;
 
     /**
      * @var decimal $vat
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @var integer $stock
      */
-    private $stock;
+    protected $stock;
 
     /**
      * @var boolean $enabled
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * @var datetime $updated_at
      */
-    private $updated_at;
+    protected $updated_at;
 
     /**
      * @var datetime $created_at
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * @var Sonata\Bundle\ProductBundle\Entity\BasePackage
      */
-    private $package;
+    protected $package;
 
     /**
      * @var Sonata\Bundle\ProductBundle\Entity\BaseDelivery
      */
-    private $delivery;
+    protected $delivery;
+
+    protected $parent_id;
+
+    protected $options = array();
 
     /**
      * Set sku
@@ -305,5 +309,79 @@ abstract class BaseProduct //implements \Sonata\Component\Product\ProductInterfa
     public function getDelivery()
     {
         return $this->delivery;
+    }
+
+
+    /**
+     * @abstract
+     * @return string the product name
+     */
+    public function getParent() {
+
+        return $this->parent;
+    }
+
+    /**
+     * @abstract
+     * @return
+     */
+    public function setParent($parent) {
+        $this->parent = $parent;
+    }
+
+
+    /**
+     * @abstract
+     * @return string the product name
+     */
+    public function getOptions() {
+
+        return $this->options;
+    }
+
+    /**
+     * @abstract
+     * @return
+     */
+    public function setOptions($options) {
+        $this->$options = $options;
+    }
+
+    public function getParentId() {
+        return $this->parent_id;
+    }
+
+    public function setParentId($parent_id) {
+        $this->parent_id = $parent_id;
+    }
+
+    public function isVariation() {
+
+        return $this->parent_id > 0;
+    }
+
+    /**
+     * @var type $type
+     */
+    protected $type;
+
+    /**
+     * Set type
+     *
+     * @param type $type
+     */
+    public function setType(\type $type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type
+     *
+     * @return type $type
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

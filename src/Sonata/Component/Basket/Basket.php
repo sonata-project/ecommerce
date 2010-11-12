@@ -270,7 +270,7 @@ class Basket {
             $pos = $this->pos[$product];
         }
 
-        return $this->elements[$pos];
+        return isset($this->elements[$pos]) ? $this->elements[$pos] : null;
     }
 
     /**

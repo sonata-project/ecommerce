@@ -31,4 +31,8 @@ class Product extends BaseProduct
         return false;
     }
 
+    public function getElementOptions() {
+        return array();
+    }
+
 }

@@ -10,77 +10,83 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     /**
      * @var integer $user_id
      */
-    private $user_id;
+    protected $user_id;
 
     /**
      * @var boolean $current
      */
-    private $current;
+    protected $current;
 
+    /**
+     * @var string $name
+     */
+    protected $name;
+
+    
     /**
      * @var integer $type
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string $firstname
      */
-    private $firstname;
+    protected $firstname;
 
     /**
      * @var string $lastname
      */
-    private $lastname;
+    protected $lastname;
 
     /**
      * @var string $addr1
      */
-    private $address1;
+    protected $address1;
 
     /**
      * @var string $addr2
      */
-    private $address2;
+    protected $address2;
 
     /**
      * @var string $addr3
      */
-    private $address3;
+    protected $address3;
 
     /**
      * @var string $postcode
      */
-    private $postcode;
+    protected $postcode;
 
     /**
      * @var string $city
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string $country
      */
-    private $country_code;
+    protected $country_code;
 
     /**
      * @var string $phone
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var datetime $updated_at
      */
-    private $updated_at;
+    protected $updated_at;
 
     /**
      * @var datetime $created_at
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * @var Application\SandboxBundle\Entity\User
      */
-    private $user;
+    protected $user;
 
     /**
      * Set user_id
@@ -391,4 +397,16 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     {
         $this->address1 = $address1;
     }
+
+    public function setName($name) {
+
+        $this->name = $name;
+    }
+
+    public function getName() {
+
+        return $this->name;
+    }
+
+
 }

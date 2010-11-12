@@ -14,6 +14,12 @@ interface AddressInterface {
 
     /**
      * @abstract
+     * @return string return the address name
+     */
+    public function getName();
+
+    /**
+     * @abstract
      * @return string return the address (line 1)
      */
     public function getAddress1();

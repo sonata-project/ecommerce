@@ -27,7 +27,7 @@ class Pool
      */
     public function addProduct($definition)
     {
-        $this->products[$definition['code']] = $definition;
+        $this->products[$definition['id']] = $definition;
     }
 
     /**

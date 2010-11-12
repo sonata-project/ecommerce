@@ -10,57 +10,57 @@ abstract class BaseOrderCallback
     /**
      * @var integer $order_id
      */
-    private $order_id;
+    protected $order_id;
 
     /**
      * @var string $transaction_id
      */
-    private $transaction_id;
+    protected $transaction_id;
 
     /**
      * @var integer $status
      */
-    private $status;
+    protected $status;
 
     /**
      * @var decimal $amount
      */
-    private $amount;
+    protected $amount;
 
     /**
      * @var text $post
      */
-    private $post;
+    protected $post;
 
     /**
      * @var text $get
      */
-    private $get;
+    protected $get;
 
     /**
      * @var text $uri
      */
-    private $uri;
+    protected $uri;
 
     /**
      * @var string $method
      */
-    private $method;
+    protected $method;
 
     /**
      * @var string $remote_ip
      */
-    private $remote_ip;
+    protected $remote_ip;
 
     /**
      * @var text $errors
      */
-    private $errors;
+    protected $errors;
 
     /**
      * @var Sonata\Bundle\OrderBundle\Entity\BaseOrder
      */
-    private $Order;
+    protected $Order;
 
     /**
      * Set order_id

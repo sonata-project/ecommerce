@@ -7,8 +7,8 @@
 
     <mapped-superclass name="Sonata\Bundle\ProductBundle\Entity\BaseProduct" >
 
-        <field name="sku"           column="sku"            type="text"     nullable="false" length="255"/>
-        <field name="slug"          column="slug"           type="text"     nullable="false" length="255"/>
+        <field name="sku"           column="sku"            type="text"     nullable="true" length="255"/>
+        <field name="slug"          column="slug"           type="text"     nullable="true" length="255"/>
         <field name="name"          column="name"           type="string"   nullable="false" length="255"/>
         <field name="description"   column="description"    type="text"     nullable="false" length="1024"/>
         <field name="price"         column="price"          type="decimal"  nullable="false" />

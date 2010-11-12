@@ -8,79 +8,20 @@ namespace Sonata\Bundle\ProductBundle\Entity;
 abstract class BaseProductCategory
 {
     /**
-     * @var integer $category_id
-     */
-    private $category_id;
-
-    /**
-     * @var integer $product_id
-     */
-    private $product_id;
-
-    /**
      * @var boolean $enabled
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * @var datetime $updated_at
      */
-    private $updated_at;
+    protected $updated_at;
 
     /**
      * @var datetime $created_at
      */
-    private $created_at;
+    protected $created_at;
 
-    /**
-     * @var Application\ProductBundle\Entity\Product
-     */
-    private $product;
-
-    /**
-     * @var Application\ProductBundle\Entity\Category
-     */
-    private $category;
-
-    /**
-     * Set category_id
-     *
-     * @param integer $categoryId
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->category_id = $categoryId;
-    }
-
-    /**
-     * Get category_id
-     *
-     * @return integer $categoryId
-     */
-    public function getCategoryId()
-    {
-        return $this->category_id;
-    }
-
-    /**
-     * Set product_id
-     *
-     * @param integer $productId
-     */
-    public function setProductId($productId)
-    {
-        $this->product_id = $productId;
-    }
-
-    /**
-     * Get product_id
-     *
-     * @return integer $productId
-     */
-    public function getProductId()
-    {
-        return $this->product_id;
-    }
 
     /**
      * Set enabled
@@ -142,43 +83,4 @@ abstract class BaseProductCategory
         return $this->created_at;
     }
 
-    /**
-     * Set product
-     *
-     * @param Application\ProductBundle\Entity\Product $product
-     */
-    public function setProduct(\Application\ProductBundle\Entity\Product $product)
-    {
-        $this->product = $product;
-    }
-
-    /**
-     * Get product
-     *
-     * @return Application\ProductBundle\Entity\Product $product
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * Set category
-     *
-     * @param Application\ProductBundle\Entity\Category $category
-     */
-    public function setCategory(\Application\ProductBundle\Entity\Category $category)
-    {
-        $this->category = $category;
-    }
-
-    /**
-     * Get category
-     *
-     * @return Application\ProductBundle\Entity\Category $category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
 }

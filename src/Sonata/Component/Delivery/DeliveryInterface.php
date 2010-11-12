@@ -12,12 +12,11 @@ namespace Sonata\Component\Delivery;
 
 interface DeliveryInterface {
 
-    const
-        STATUS_OPEN      = 0,
-        STATUS_SENT      = 1,
-        STATUS_CANCELLED = 2,
-        STATUS_COMPLETED = 3,
-        STATUS_RETURNED  = 4;
+    const STATUS_OPEN       = 1;
+    const STATUS_SENT       = 2;
+    const STATUS_CANCELLED  = 3;
+    const STATUS_COMPLETED  = 4;
+    const STATUS_RETURNED   = 5;
 
     /**
      * @abstract

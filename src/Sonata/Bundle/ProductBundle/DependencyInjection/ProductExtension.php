@@ -35,6 +35,15 @@ class ProductExtension extends Extension {
     public function configLoad($config, ContainerBuilder $container) {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('product.xml');
+
+        $definition = new Definition('Sonata\Component\Product\Pool');
+
+        foreach($config['products'] as $product) {
+
+            $definition->addMethodCall('addProduct', array($product));
+        }
+
+        $container->setDefinition('sonata.products.pool', $definition);
     }
 
     /**

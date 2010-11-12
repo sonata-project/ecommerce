@@ -48,17 +48,52 @@ class PaymentExtension extends Extension {
             $definition = new Definition($method['class']);
             $definition->addMethodCall('setName', array($method['name']));
             $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
-
+            $definition->addMethodCall('setLogger', array(new Reference('logger')));
+            $definition->addMethodCall('setRequest', array(new Reference('request')));
+            $definition->addMethodCall('setTransformer', array(new Reference('sonata.transformer')));
+            $definition->addMethodCall('setRouter', array(new Reference('router')));
+            
             $id         = sprintf('sonata.payment.method.%s', $method['name']);
 
             // add the delivery method as a service
-            $container->setDefinition(sprintf('sonata.payment.method.%s', $method['name']), $definition);
+            $container->setDefinition($id, $definition);
 
             // add the delivery method in the method pool
             $pool_definition->addMethodCall('addMethod', array(new Reference($id)));
         }
 
-        $container->setDefinition('sonata.payment.pool',$pool_definition);
+        $container->setDefinition('sonata.payment.pool', $pool_definition);
+    }
+
+    public function transformerLoad($config, ContainerBuilder $container) {
+
+        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader->load('transformer.xml');
+
+        $pool_definition = new Definition('Sonata\Component\Transformer\Pool');
+
+        foreach($config['types'] as $type)
+        {
+            if(!$type['enabled'])
+            {
+                continue;
+            }
+
+            $definition = new Definition($type['class']);
+            $definition->addMethodCall('setLogger', array(new Reference('logger')));
+            $definition->addMethodCall('setOptions', array($type));
+            $definition->addMethodCall('setProductPool', array(new Reference('sonata.products.pool')));
+
+            $id         = sprintf('sonata.transformer.%s', $type['id']);
+
+            // add the delivery method as a service
+            $container->setDefinition($id, $definition);
+
+            // add the delivery method in the method pool
+            $pool_definition->addMethodCall('addTransformer', array($type['id'], new Reference($id)));
+        }
+
+        $container->setDefinition('sonata.transformer', $pool_definition);
     }
 
     /**

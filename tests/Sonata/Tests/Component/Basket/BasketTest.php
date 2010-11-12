@@ -25,7 +25,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
     {
         $pool = new Pool;
         $pool->addProduct(array(
-            'code'       => 'fake_product',
+            'id'         => 'fake_product',
             'class'      => 'Sonata\\Tests\Component\\Basket\\Product',
             'repository' => new ProductRepository
         ));

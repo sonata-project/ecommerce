@@ -7,20 +7,11 @@ namespace Sonata\Bundle\ProductBundle\Entity;
  */
 abstract class BaseCategory
 {
-    /**
-     * @var integer $rank
-     */
-    private $rank;
 
     /**
      * @var string $label
      */
-    private $label;
-
-    /**
-     * @var text $main_description
-     */
-    private $main_description;
+    private $name;
 
     /**
      * @var text $sub_description
@@ -43,64 +34,34 @@ abstract class BaseCategory
     private $created_at;
 
     /**
-     * Set rank
-     *
-     * @param integer $rank
+     * @var integer $parent_id
      */
-    public function setRank($rank)
-    {
-        $this->rank = $rank;
-    }
+    private $parent_id;
 
     /**
-     * Get rank
-     *
-     * @return integer $rank
+     * @var Application\ProductBundle\Entity\Category
      */
-    public function getRank()
-    {
-        return $this->rank;
-    }
+    private $children;
 
     /**
-     * Set label
-     *
-     * @param string $label
+     * @var Application\ProductBundle\Entity\Category
      */
-    public function setLabel($label)
-    {
-        $this->label = $label;
-    }
+    private $parent;
 
     /**
-     * Get label
-     *
-     * @return string $label
+     * @var text $description
      */
-    public function getLabel()
-    {
-        return $this->label;
-    }
+    private $description;
 
     /**
-     * Set main_description
-     *
-     * @param text $mainDescription
+     * @var string $slug
      */
-    public function setMainDescription($mainDescription)
-    {
-        $this->main_description = $mainDescription;
-    }
+    private $slug;
 
     /**
-     * Get main_description
-     *
-     * @return text $mainDescription
+     * @var integer $position
      */
-    public function getMainDescription()
-    {
-        return $this->main_description;
-    }
+    private $position;
 
     /**
      * Set sub_description
@@ -180,5 +141,145 @@ abstract class BaseCategory
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+
+    /**
+     * Set parent_id
+     *
+     * @param integer $parentId
+     */
+    public function setParentId($parentId)
+    {
+        $this->parent_id = $parentId;
+    }
+
+    /**
+     * Get parent_id
+     *
+     * @return integer $parentId
+     */
+    public function getParentId()
+    {
+        return $this->parent_id;
+    }
+
+    /**
+     * Add children
+     *
+     * @param Application\ProductBundle\Entity\Category $children
+     */
+    public function addChildren(\Application\ProductBundle\Entity\Category $children)
+    {
+        $this->children[] = $children;
+    }
+
+    /**
+     * Get children
+     *
+     * @return Doctrine\Common\Collections\Collection $children
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param Application\ProductBundle\Entity\Category $parent
+     */
+    public function setParent(\Application\ProductBundle\Entity\Category $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return Application\ProductBundle\Entity\Category $parent
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return text $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string $slug
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer $position
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

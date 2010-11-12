@@ -10,77 +10,72 @@ abstract class BaseOrderElement
     /**
      * @var integer $order_id
      */
-    private $order_id;
+    protected $order_id;
 
     /**
      * @var integer $quantity
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var decimal $price
      */
-    private $price;
+    protected $price;
 
     /**
      * @var decimal $vat
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @var string $designation
      */
-    private $designation;
+    protected $designation;
 
     /**
      * @var text $description
      */
-    private $description;
+    protected $description;
 
     /**
      * @var text $serialize
      */
-    private $serialize;
+    protected $serialize;
 
     /**
      * @var integer $type
      */
-    private $type;
+    protected $type;
 
     /**
      * @var integer $product_id
      */
-    private $product_id;
+    protected $product_id;
 
     /**
      * @var integer $status
      */
-    private $status;
+    protected $status;
 
     /**
      * @var integer $delivery_status
      */
-    private $delivery_status;
+    protected $delivery_status;
 
     /**
      * @var string $behavior_class
      */
-    private $behavior_class;
+    protected $behavior_class;
 
     /**
      * @var datetime $validated_at
      */
-    private $validated_at;
-
-    /**
-     * @var Sonata\Bundle\OrderBundle\Entity\BaseOrder
-     */
-    private $order;
+    protected $validated_at;
 
     /**
      * @var Sonata\Bundle\ProductBundle\Entity\BaseProduct
      */
-    private $product;
+    protected $product;
 
     /**
      * Set order_id
@@ -340,26 +335,6 @@ abstract class BaseOrderElement
     public function getValidatedAt()
     {
         return $this->validated_at;
-    }
-
-    /**
-     * Add order
-     *
-     * @param Sonata\Bundle\OrderBundle\Entity\BaseOrder $order
-     */
-    public function addOrder(\Application\OrderBundle\Entity\Order $order)
-    {
-        $this->order[] = $order;
-    }
-
-    /**
-     * Get order
-     *
-     * @return Doctrine\Common\Collections\Collection $order
-     */
-    public function getOrder()
-    {
-        return $this->order;
     }
 
     /**

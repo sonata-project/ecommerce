@@ -10,182 +10,184 @@ class BaseOrder
     /**
      * @var string $reference
      */
-    private $reference;
+    protected $reference;
 
     /**
      * @var integer $user_id
      */
-    private $user_id;
+    protected $user_id;
 
     /**
      * @var string $bank_handler
      */
-    private $bank_handler;
+    protected $bank_handler;
 
     /**
      * @var string $delivery_method
      */
-    private $delivery_method;
+    protected $delivery_method;
 
     /**
      * @var string $currency
      */
-    private $currency;
+    protected $currency;
 
     /**
      * @var integer $status
      */
-    private $status;
+    protected $status;
 
     /**
      * @var integer $payment_status
      */
-    private $payment_status;
+    protected $payment_status;
 
     /**
      * @var integer $delivery_status
      */
-    private $delivery_status;
+    protected $delivery_status;
 
     /**
      * @var datetime $validated_at
      */
-    private $validated_at;
+    protected $validated_at;
 
     /**
      * @var string $username
      */
-    private $username;
+    protected $username;
 
     /**
      * @var decimal $total_inc
      */
-    private $total_inc;
+    protected $total_inc;
 
     /**
      * @var decimal $total_excl
      */
-    private $total_excl;
+    protected $total_excl;
 
     /**
      * @var decimal $delivery_cost
      */
-    private $delivery_cost;
+    protected $delivery_cost;
 
     /**
      * @var string $billing_name
      */
-    private $billing_name;
+    protected $billing_name;
 
     /**
      * @var string $billing_phone
      */
-    private $billing_phone;
+    protected $billing_phone;
 
     /**
      * @var string $billing_address1
      */
-    private $billing_address1;
+    protected $billing_address1;
 
     /**
      * @var string $billing_address2
      */
-    private $billing_address2;
+    protected $billing_address2;
 
     /**
      * @var string $billing_address3
      */
-    private $billing_address3;
+    protected $billing_address3;
 
     /**
      * @var string $billing_city
      */
-    private $billing_city;
+    protected $billing_city;
 
     /**
      * @var string $billing_postcode
      */
-    private $billing_postcode;
+    protected $billing_postcode;
 
     /**
      * @var string $billing_country
      */
-    private $billing_country;
+    protected $billing_country_code;
 
     /**
      * @var string $billing_fax
      */
-    private $billing_fax;
+    protected $billing_fax;
 
     /**
      * @var string $billing_email
      */
-    private $billing_email;
+    protected $billing_email;
 
     /**
      * @var string $billing_mobile
      */
-    private $billing_mobile;
+    protected $billing_mobile;
 
     /**
      * @var string $shipping_name
      */
-    private $shipping_name;
+    protected $shipping_name;
 
     /**
      * @var string $shipping_phone
      */
-    private $shipping_phone;
+    protected $shipping_phone;
 
     /**
      * @var string $shipping_address1
      */
-    private $shipping_address1;
+    protected $shipping_address1;
 
     /**
      * @var string $shipping_address2
      */
-    private $shipping_address2;
+    protected $shipping_address2;
 
     /**
      * @var string $shipping_address3
      */
-    private $shipping_address3;
+    protected $shipping_address3;
 
     /**
      * @var string $shipping_city
      */
-    private $shipping_city;
+    protected $shipping_city;
 
     /**
      * @var string $shipping_postcode
      */
-    private $shipping_postcode;
+    protected $shipping_postcode;
 
     /**
      * @var string $shipping_country
      */
-    private $shipping_country;
+    protected $shipping_country_code;
 
     /**
      * @var string $shipping_fax
      */
-    private $shipping_fax;
+    protected $shipping_fax;
 
     /**
      * @var string $shipping_email
      */
-    private $shipping_email;
+    protected $shipping_email;
 
     /**
      * @var string $shipping_mobile
      */
-    private $shipping_mobile;
+    protected $shipping_mobile;
 
     /**
      * @var Application\DoctrineUserBundle\Entity\User
      */
-    private $user;
+    protected $user;
+
+    protected $order_elements;
 
     /**
      * Set reference
@@ -588,21 +590,21 @@ class BaseOrder
     }
 
     /**
-     * Set billing_country
+     * Set billing_country_code
      *
      * @param string $billingCountry
      */
-    public function setBillingCountry($billingCountry)
+    public function setBillingCountryCode($billingCountryCode)
     {
-        $this->billing_country = $billingCountry;
+        $this->billing_country_code = $billingCountryCpde;
     }
 
     /**
      * Get billing_country
      *
-     * @return string $billingCountry
+     * @return string $billingCountryCode
      */
-    public function getBillingCountry()
+    public function getBillingCountryCode()
     {
         return $this->billing_country;
     }
@@ -812,9 +814,9 @@ class BaseOrder
      *
      * @param string $shippingCountry
      */
-    public function setShippingCountry($shippingCountry)
+    public function setShippingCountryCode($shippingCountryCode)
     {
-        $this->shipping_country = $shippingCountry;
+        $this->shipping_country_code = $shippingCountryCode;
     }
 
     /**
@@ -822,9 +824,9 @@ class BaseOrder
      *
      * @return string $shippingCountry
      */
-    public function getShippingCountry()
+    public function getShippingCountryCode()
     {
-        return $this->shipping_country;
+        return $this->shipping_country_code;
     }
 
     /**
@@ -892,7 +894,7 @@ class BaseOrder
      *
      * @param Application\DoctrineUserBundle\Entity\User $user
      */
-    public function setUser(\Application\DoctrineUserBundle\Entity\User $user)
+    public function setUser($user)
     {
         $this->user = $user;
     }
@@ -905,5 +907,15 @@ class BaseOrder
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function getOrderElements()
+    {
+        return $this->order_elements;    
+    }
+
+    public function addOrderElement($order_element)
+    {
+        $this->order_elements[] = $order_element;
     }
 }

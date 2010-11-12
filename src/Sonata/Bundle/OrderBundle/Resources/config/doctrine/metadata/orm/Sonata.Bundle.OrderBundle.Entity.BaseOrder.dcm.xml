@@ -2,7 +2,6 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\Bundle\OrderBundle\Entity\BaseOrder">
 
-
         <field name="reference"             type="string"   column="reference"          length="255"/>
         <field name="user_id"               type="integer"  column="user_id"            length="4"/>
         <field name="bank_handler"          type="string"   column="bank_handler"       length="255"/>
@@ -16,6 +15,7 @@
         <field name="total_inc"             type="decimal"  column="total_inc"          scale="4"/>
         <field name="total_excl"            type="decimal"  column="total_excl"         scale="4"/>
         <field name="delivery_cost"         type="decimal"  column="delivery_cost"      scale="4"/>
+
         <field name="billing_name"          type="string"   column="billing_name"       length="255"/>
         <field name="billing_phone"         type="string"   column="billing_phone"      length="255"/>
         <field name="billing_address1"      type="string"   column="billing_address1"   length="255"/>
@@ -23,10 +23,11 @@
         <field name="billing_address3"      type="string"   column="billing_address3"   length="255"/>
         <field name="billing_city"          type="string"   column="billing_city"       length="255"/>
         <field name="billing_postcode"      type="string"   column="billing_postcode"   length="255"/>
-        <field name="billing_country"       type="string"   column="billing_country"    length="255"/>
+        <field name="billing_country_code"  type="string"   column="billing_country_code"    length="255"/>
         <field name="billing_fax"           type="string"   column="billing_fax"        length="255"/>
         <field name="billing_email"         type="string"   column="billing_email"      length="255"/>
         <field name="billing_mobile"        type="string"   column="billing_mobile"     length="255"/>
+
         <field name="shipping_name"         type="string"   column="shipping_name"      length="255"/>
         <field name="shipping_phone"        type="string"   column="shipping_phone"     length="255"/>
         <field name="shipping_address1"     type="string"   column="shipping_address1"  length="255"/>
@@ -34,10 +35,24 @@
         <field name="shipping_address3"     type="string"   column="shipping_address3"  length="255"/>
         <field name="shipping_city"         type="string"   column="shipping_city"      length="255"/>
         <field name="shipping_postcode"     type="string"   column="shipping_postcode"  length="255"/>
-        <field name="shipping_country"      type="string"   column="shipping_country"   length="255"/>
+        <field name="shipping_country_code" type="string"   column="shipping_country_code"   length="255"/>
         <field name="shipping_fax"          type="string"   column="shipping_fax"       length="255"/>
         <field name="shipping_email"        type="string"   column="shipping_email"     length="255"/>
         <field name="shipping_mobile"       type="string"   column="shipping_mobile"    length="255"/>
 
+        <one-to-many
+            field="order"
+            target-entity="Application\OrderBundle\Entity\OrderElement"
+            mapped-by="order_elements"
+            orphan-removal="">
+
+            <join-columns>
+                <join-column
+                    name="id"
+                    referenced-column-name="order_id"
+                    on-delete="CASCADE"/>
+            </join-columns>
+        </one-to-many>
+        
     </mapped-superclass>
 </doctrine-mapping>

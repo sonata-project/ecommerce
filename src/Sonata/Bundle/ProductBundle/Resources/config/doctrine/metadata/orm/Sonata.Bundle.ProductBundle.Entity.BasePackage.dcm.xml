@@ -13,21 +13,5 @@
         <field name="updated_at"    column="updated_at"     type="datetime" />
         <field name="created_at"    column="created_at"     type="datetime" />
 
-<!--
-        <many-to-one
-            field="product"
-            target-entity="Sonata\Bundle\ProductBundle\Entity\Product"
-            inversed-by="packages"
-            orphan-removal="false">
-
-            <join-columns>
-                <join-column
-                    name="product_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"
-                />
-            </join-columns>
-        </many-to-one>
--->
     </mapped-superclass>
 </doctrine-mapping>

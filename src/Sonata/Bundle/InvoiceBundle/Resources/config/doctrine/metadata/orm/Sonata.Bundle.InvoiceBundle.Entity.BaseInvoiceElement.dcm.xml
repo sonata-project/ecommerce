@@ -27,7 +27,7 @@
 
         <one-to-many
             field="order_element"
-            target-entity="Application\OrderBundle\Entity\OrderElement" 
+            target-entity="Application\OrderBundle\Entity\OrderElement"
             mapped-by="invoice_element"
             orphan-removal="">
             <join-columns>

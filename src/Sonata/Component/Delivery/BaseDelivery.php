@@ -23,6 +23,22 @@ abstract class BaseDelivery implements DeliveryInterface {
         $code,
         $options;
 
+    /**
+     * return status list
+     *
+     * @return array
+     */
+    public static function getStatusList() {
+
+        return array(
+            self::STATUS_OPEN       => 'open',
+            self::STATUS_SENT       => 'sent',
+            self::STATUS_CANCELLED  => 'cancelled',
+            self::STATUS_COMPLETED  => 'delivered',
+            self::STATUS_RETURNED   => 'returned',
+        );
+    }
+
     public function getCode() {
 
         return $this->code;
@@ -84,22 +100,5 @@ abstract class BaseDelivery implements DeliveryInterface {
         $vat = $this->getDeliveryPrice($basket, true) - $this->getDeliveryPrice($basket);
 
         return bcadd($vat, 0, 2);
-    }
-
-    /**
-     * return status list
-     *
-     * @return array
-     */
-    public static function getStatusList() {
-
-        return array(
-            self::STATUS_OPEN       => 'status_open',
-            self::STATUS_SENT       => 'status_sent',
-            self::STATUS_CANCELLED  => 'status_cancelled',
-            self::STATUS_COMPLETED  => 'status_delivered',
-            self::STATUS_RETURNED   => 'status_returned',
-        );
-        
     }
 }
