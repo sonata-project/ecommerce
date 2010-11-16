@@ -45,17 +45,8 @@ class Payment extends BasePayment {
      * return the transaction id from the bank
      *
      */
-    public function getTransactionId() {
+    public function applyTransactionId($transaction) {
         // TODO: Implement getTransactionId() method.
-    }
-
-    /**
-     * return errors from the current basket
-     *
-     * @return string
-     */
-    public function getErrorBasket() {
-        // TODO: Implement getErrorBasket() method.
     }
 
     /**
@@ -64,7 +55,7 @@ class Payment extends BasePayment {
      * @param Basket $basket
      * @param Product $product
      */
-    public function isAddableProduct(\Sonata\Component\Basket\Basket $basket, \Sonata\Component\Product\ProductInterface $product) {
+    public function isAddableProduct($basket, $product) {
         // TODO: Implement isAddableProduct() method.
     }
 
@@ -73,7 +64,7 @@ class Payment extends BasePayment {
      *
      * @return boolean
      */
-    public function isBasketValid(\Sonata\Component\Basket\Basket $basket) {
+    public function isBasketValid($basket) {
         // TODO: Implement isBasketValid() method.
     }
 
@@ -84,7 +75,7 @@ class Payment extends BasePayment {
      *
      * @return boolean true if all parameter are ok
      */
-    public function isRequestOk($order, $request) {
+    public function isRequestOk($transaction) {
         // TODO: Implement isRequestOk() method.
     }
 
@@ -93,31 +84,22 @@ class Payment extends BasePayment {
      *
      * @return boolean true if ok
      */
-    public function sendConfirmationReceipt($state) {
+    public function sendConfirmationReceipt($transaction) {
         // TODO: Implement sendConfirmationReceipt() method.
     }
 
     /**
      * Method called when an error occurs
      */
-    public function handleError($code) {
+    public function handleError($transaction) {
         // TODO: Implement handleError() method.
-    }
-
-    /**
-     * Load the order from the request
-     *
-     * @return
-     */
-    public function loadOrder() {
-        // TODO: Implement loadOrder() method.
     }
 
     /**
      *
      * @return boolean true if callback ok else false
      */
-    public function isCallbackValid() {
+    public function isCallbackValid($transaction) {
         // TODO: Implement isCallbackValid() method.
     }
 
@@ -125,12 +107,33 @@ class Payment extends BasePayment {
      * Send information to the bank, this method should handle
      * everything when called
      */
-    public function callBank() {
+    public function callbank($order) {
         // TODO: Implement callBank() method.
     }
 
     public function getCode() {
         // TODO: Implement getCode() method.
+    }
+
+    /**
+     * return the order reference from the transaction
+     *
+     * @param  $transaction
+     * @return string
+     */
+    public function getOrderReference($transaction) {
+        // TODO: Implement getOrderReference() method.
+    }
+
+    /**
+     * Test if the request variables are valid for the current request
+     *
+     * WARNING : this methods does not check if the callback is valid
+     *
+     * @return boolean true if all parameter are ok
+     */
+    public function isRequestValid($transaction) {
+        // TODO: Implement isRequestValid() method.
     }
 
 

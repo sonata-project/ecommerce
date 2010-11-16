@@ -125,7 +125,7 @@ class BasketTransformer extends BaseTransformer {
 
         $order->setStatus(\Sonata\Component\Order\OrderInterface::STATUS_OPEN);
 
-        $order->setPaymentStatus(\Sonata\Component\Payment\PaymentInterface::STATUS_OPEN);
+        $order->setPaymentStatus(\Sonata\Component\Payment\Transaction::STATUS_OPEN);
 
         foreach ($basket->getElements() as $basket_element)
         {
@@ -135,9 +135,6 @@ class BasketTransformer extends BaseTransformer {
 
             $order->addOrderElement($order_element);
         }
-
-        // reset the basket
-        $basket->reset();
 
         return $order;
     }

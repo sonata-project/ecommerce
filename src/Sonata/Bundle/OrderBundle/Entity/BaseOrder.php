@@ -2,10 +2,12 @@
 
 namespace Sonata\Bundle\OrderBundle\Entity;
 
+use \Sonata\Component\Order\OrderInterface;
+
 /**
  * Sonata\Bundle\OrderBundle\Entity\BaseOrder
  */
-class BaseOrder
+class BaseOrder implements \Sonata\Component\Order\OrderInterface
 {
     /**
      * @var string $reference
@@ -917,5 +919,56 @@ class BaseOrder
     public function addOrderElement($order_element)
     {
         $this->order_elements[] = $order_element;
+    }
+
+    /**
+     *
+     * return true if the order is validated
+     *
+     * @return boolean
+     */
+    public function isValidated() {
+
+        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_VALIDATED;
+    }
+
+    /**
+     *
+     *
+     * @return boolean true if cancelled, else false
+     */
+    public function isCancelled() {
+
+        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_CANCELLED;
+    }
+
+    /**
+     *
+     *
+     * @return boolean true if pending, else false
+     */
+    public function isPending() {
+
+        return in_array($this->getStatus(), array(OrderInterface::STATUS_PENDING));
+    }
+
+    /**
+     * Return true if the order is open
+     *
+     * @return boolean
+     */
+    public function isOpen() {
+
+        return in_array($this->getStatus(), array(OrderInterface::STATUS_OPEN));
+    }
+
+    /**
+     * Return true if the order has an error
+     *
+     * @return boolean
+     */
+    public function isError() {
+
+        return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
     }
 }

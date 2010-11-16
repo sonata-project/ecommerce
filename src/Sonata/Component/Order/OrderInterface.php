@@ -14,4 +14,7 @@ interface OrderInterface {
     const STATUS_STOPPED    = 5; // use if the subscription has been cancelled/stopped
 
 
+    public function setStatus($status);
+
+    public function getStatus();
 }

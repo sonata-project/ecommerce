@@ -38,7 +38,7 @@ class PaymentExtension extends Extension {
 
         $pool_definition = new Definition('Sonata\Component\Payment\Pool');
 
-        foreach($config['methods'] as $method)
+        foreach($config['methods'] as $code => $method)
         {
             if(!$method['enabled'])
             {
@@ -49,8 +49,12 @@ class PaymentExtension extends Extension {
             $definition->addMethodCall('setName', array($method['name']));
             $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
             $definition->addMethodCall('setLogger', array(new Reference('logger')));
-            $definition->addMethodCall('setRequest', array(new Reference('request')));
-            $definition->addMethodCall('setTransformer', array(new Reference('sonata.transformer')));
+            $definition->addMethodCall('setTranslator', array(new Reference('translator')));
+
+            foreach($method['transformers'] as $name => $service_id) {
+                $definition->addMethodCall('addTransformer', array($name, new Reference($service_id)));
+            }
+
             $definition->addMethodCall('setRouter', array(new Reference('router')));
             
             $id         = sprintf('sonata.payment.method.%s', $method['name']);

@@ -12,22 +12,6 @@ namespace Sonata\Component\Payment;
 
 interface PaymentInterface {
 
-
-    const BANK_CALL             = 1;
-    const BANK_CALLBACK         = 2;
-
-    const ERROR_ORDER_UNKNOWN   = -1;
-    const ERROR_CALLBACK_KO     = -2;
-    const ERROR_CALLBACK_OKKO   = -3;
-
-    const STATUS_OPEN             = 0;  // created but not validated
-    const STATUS_PENDING          = 1;  // the bank send a 'pending-like' status, so the payment is not validated, but the user payed
-    const STATUS_VALIDATED        = 2;  // the bank confirm the payment
-    const STATUS_CANCELLED        = 3;  // the user cancelled the payment
-    const STATUS_ERROR_VALIDATION = 9;  // something wrong happen when the bank validate the postback
-    const STATUS_WRONG_CALLBACK   = 10; // something wrong is sent from the bank. hack or the bank change something ...
-
-
     public function getName();
 
     public function getCode();
@@ -36,33 +20,30 @@ interface PaymentInterface {
     /**
      * Send information to the bank, this method should handle
      * everything when called
+     *
+     * @return Response
      */
-    public function callBank();
+    public function callbank($order);
 
     /**
      *
      * @return boolean true if callback ok else false
      */
-    public function isCallbackValid();
-
-    /**
-     * Load the order from the request
-     *
-     * @return
-     */
-    public function loadOrder();
+    public function isCallbackValid($transaction);
 
     /**
      * Method called when an error occurs
+     *
+     * @return Response 
      */
-    public function handleError($code);
+    public function handleError($transaction);
 
     /**
      * Send post back confirmation to the bank when the bank callback the site
      *
-     * @return boolean true if ok
+     * @return Response, false otherwise
      */
-    public function sendConfirmationReceipt($state);
+    public function sendConfirmationReceipt($transaction);
 
     /**
      * Test if the request variables are valid for the current request
@@ -71,14 +52,14 @@ interface PaymentInterface {
      *
      * @return boolean true if all parameter are ok
      */
-    public function isRequestOk($order, $request);
+    public function isRequestValid($transaction);
 
     /**
      * return true is the basket is valid for the current bank gateway
      *
      * @return boolean
      */
-    public function isBasketValid(\Sonata\Component\Basket\Basket $basket);
+    public function isBasketValid($basket);
 
     /**
      * return true if the product can be added to the basket
@@ -86,20 +67,13 @@ interface PaymentInterface {
      * @param Basket $basket
      * @param Product $product
      */
-    public function isAddableProduct(\Sonata\Component\Basket\Basket $basket, \Sonata\Component\Product\ProductInterface $product);
-
-    /**
-     * return errors from the current basket
-     *
-     * @return string
-     */
-    public function getErrorBasket();
+    public function isAddableProduct($basket, $product);
 
     /**
      * return the transaction id from the bank
      *
      */
-    public function getTransactionId();
+    public function applyTransactionId($transaction);
 
     /**
      * encode value for the bank
@@ -108,4 +82,13 @@ interface PaymentInterface {
      * @return string the encoded value
      */
     public function encodeString($value);
+
+    /**
+     * return the order reference from the transaction
+     * 
+     * @abstract
+     * @param  $transaction
+     * @return string
+     */
+    public function getOrderReference($transaction);
 }

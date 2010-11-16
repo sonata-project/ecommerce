@@ -30,7 +30,7 @@ class Basket {
         $delivery_method    = null,
 
         $payment_address    = null,
-        $payment_method     =  null;
+        $payment_method     = null;
 
     protected
         $logs               = array(),

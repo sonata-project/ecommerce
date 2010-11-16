@@ -104,7 +104,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 
         $basket_elements[] = $basket_element;
 
-        $basket = $this->getMock('Basket', array('reset', 'getDeliveryPrice','getTotal', 'getBillingAddress', 'getDeliveryMethod', 'getShippingAddress', 'getElements'));
+        $basket = $this->getMock('Basket', array('getDeliveryPrice','getTotal', 'getBillingAddress', 'getDeliveryMethod', 'getShippingAddress', 'getElements'));
         
         $basket->expects($this->once())
             ->method('getBillingAddress')
@@ -129,10 +129,6 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $basket->expects($this->once())
             ->method('getElements')
             ->will($this->returnValue($basket_elements));
-
-        $basket->expects($this->once())
-            ->method('reset');
-
 
         $order = $this->getMock('Sonata\\Tests\\Component\\Basket\\Order');
 

@@ -32,21 +32,12 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * return errors from the current basket
-     *
-     * @return string
-     */
-    public function getErrorBasket() {
-        return array();
-    }
-
-    /**
      * return true if the product can be added to the basket
      *
      * @param Basket $basket
      * @param Product $product
      */
-    public function isAddableProduct(\Sonata\Component\Basket\Basket $basket, \Sonata\Component\Product\ProductInterface $product) {
+    public function isAddableProduct($basket, $product) {
 
         return true;
     }
@@ -56,7 +47,7 @@ class PassPayment extends BasePayment
      *
      * @return boolean
      */
-    public function isBasketValid(\Sonata\Component\Basket\Basket $basket) {
+    public function isBasketValid( $basket) {
 
         return true;
     }
@@ -68,7 +59,7 @@ class PassPayment extends BasePayment
      *
      * @return boolean true if all parameter are ok
      */
-    public function isRequestOk($order, $request) {
+    public function isRequestValid($transaction) {
 
         return true;
     }
@@ -90,19 +81,10 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * Load the order from the request
-     *
-     * @return
-     */
-    public function loadOrder() {
-        // TODO: Implement loadOrder() method.
-    }
-
-    /**
      *
      * @return boolean true if callback ok else false
      */
-    public function isCallbackValid() {
+    public function isCallbackValid($transaction) {
         return true;
     }
 
@@ -110,8 +92,31 @@ class PassPayment extends BasePayment
      * Send information to the bank, this method should handle
      * everything when called
      */
-    public function callBank() {
-        // TODO: Implement callBank() method.
+    public function callbank($order) {
+
+        $response = new Symfony\Component\HttpFoundation\Response;
+        $response->setRedirect($this->router->generateUrl('url_return_ok'));
+        $response->setPrivate(true);
+
     }
 
+    /**
+     * return the order reference from the transaction
+     *
+     * @param  $transaction
+     * @return string
+     */
+    public function getOrderReference($transaction) {
+
+        return $transaction->get('reference');
+    }
+
+    /**
+     * return the transaction id from the bank
+     *
+     */
+    public function applyTransactionId($transaction) {
+
+        $transaction->setTransactionId($transaction->get('transaction_id'));
+    }
 }
