@@ -3,9 +3,9 @@
 namespace Sonata\Bundle\OrderBundle\Entity;
 
 /**
- * Sonata\Bundle\OrderBundle\Entity\BaseOrderCallback
+ * Sonata\Bundle\OrderBundle\Entity\BaseOrderTransaction
  */
-abstract class BaseOrderCallback
+abstract class BaseTransaction
 {
     /**
      * @var integer $order_id
