@@ -37,7 +37,7 @@ final class Transaction
     const STATUS_UNKNOWN          = 4;  // the bank sent a unknown code ...
     const STATUS_ERROR_VALIDATION = 9;  // something wrong happen when the bank validate the postback
     const STATUS_WRONG_CALLBACK   = 10; // something wrong is sent from the bank. hack or the bank change something ...
-   
+    const STATUS_WRONG_REQUEST    = 11; // the callback request is not valid
 
     protected $order;
 
@@ -51,7 +51,7 @@ final class Transaction
 
     protected $parameters;
 
-    protected $error_code;
+    protected $status_code;
 
     public function setOrder($order) {
         $this->order = $order;
@@ -101,12 +101,12 @@ final class Transaction
         return $this->parameters->get($name, $default);
     }
 
-    public function setErrorCode($error_code) {
-        $this->error_code = $error_code;
+    public function setStatusCode($status_code) {
+        $this->status_code = $status_code;
     }
 
-    public function getErrorCode() {
-        return $this->error_code;
+    public function getStatusCode() {
+        return $this->status_code;
     }
 
     /**

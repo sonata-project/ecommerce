@@ -22,7 +22,7 @@ abstract class BaseTransformer {
     /**
      * @var the product pool
      */
-    protected $products_pool;
+    protected $product_pool;
 
     /**
      * @var the transformer option
@@ -40,14 +40,14 @@ abstract class BaseTransformer {
         return $this->logger;
     }
 
-    public function setProductsPool($pool) {
+    public function setProductPool($pool) {
 
-        $this->products_pool = $pool;
+        $this->product_pool = $pool;
     }
 
     public function getProductPool() {
 
-        return $this->products_pool;
+        return $this->product_pool;
     }
 
     public function setOptions($options) {

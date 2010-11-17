@@ -43,7 +43,7 @@ class ProductExtension extends Extension {
             $definition->addMethodCall('addProduct', array($product));
         }
 
-        $container->setDefinition('sonata.products.pool', $definition);
+        $container->setDefinition('sonata.product.pool', $definition);
     }
 
     /**

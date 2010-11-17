@@ -86,7 +86,7 @@ class PaymentExtension extends Extension {
             $definition = new Definition($type['class']);
             $definition->addMethodCall('setLogger', array(new Reference('logger')));
             $definition->addMethodCall('setOptions', array($type));
-            $definition->addMethodCall('setProductPool', array(new Reference('sonata.products.pool')));
+            $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
 
             $id         = sprintf('sonata.transformer.%s', $type['id']);
 

@@ -24,18 +24,19 @@ class PaymentController extends Controller
      *
      * @return void
      */
-    public function callbankAction() {
+    public function callbankAction()
+    {
 
         $basket     = $this->container->get('sonata.basket');
         $request    = $this->container->get('request');
         $user       = $this->container->get('user');
 
         if($request->getMethod() !== 'POST') {
-            $this->redirect($this->generateUrl('sonata_basket'));
+            $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
         if(!$basket->isValid()) {
-            $this->redirect($this->generateUrl('sonata_basket'));
+            $this->redirect($this->generateUrl('sonata_basket_index'));
         }
         
         $payment = $basket->getPaymentMethod();
@@ -45,7 +46,7 @@ class PaymentController extends Controller
 
             $this->container->get('session')->setFlash('notice', $this->containe->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'sonata_payment'));
 
-            $this->redirect($this->generateUrl('sonata_basket'));
+            $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
         // transform the basket into order
@@ -59,7 +60,7 @@ class PaymentController extends Controller
         $basket->reset();
         
         // the payment must handle everything when calling the bank
-        return $payment->callbank($order, $user);
+        return $payment->callbank($order);
     }
 
     /**
@@ -67,7 +68,8 @@ class PaymentController extends Controller
      *
      * @return void
      */
-    public function callbackAction() {
+    public function callbackAction()
+    {
         
         $request    = $this->container->get('request');
 
@@ -87,45 +89,7 @@ class PaymentController extends Controller
 
         $transaction->setOrder($em->getRepository('OrderBundle::Order')->findOneByReference($reference));
 
-        // check if the order exists
-        if(!$transaction->getOrder()) {
-            $transaction->setErrorCode(Transaction::STATUS_ORDER_UNKNOWN);
-            $transaction->setState(Transaction::STATE_KO);
-
-            return $payment->handleError($transaction);
-        }
-
-        // check if the request is valid
-        if(!$payment->isRequestValid($transaction)) {
-            $transaction->setErrorCode(Transaction::STATUS_WRONG_CALLBACK);
-            $transaction->setState(Transaction::STATE_KO);
-
-            return $payment->handleError($transaction);
-        }
-
-        // check if the callback is valid
-        if(!$payment->isCallbackValid($transaction)) {
-            $transaction->setErrorCode(Transaction::STATUS_WRONG_CALLBACK);
-            $transaction->setState(Transaction::STATE_KO);
-
-            return $payment->handleError($transaction);
-        }
-
-        // apply the transaction id and define the order to the transaction object
-        $payment->applyTransactionId($transaction);
-
-        // send the confirmation request to the bank
-        if(!($response = $payment->sendConfirmationReceipt($transaction))) {
-            
-            $response = $payment->handleError($transaction);
-
-            $transaction->getOrder()->setStatus($transaction->getStatus());
-
-        } else {
-
-            $transaction->getOrder()->setStatus($transaction->getStatus());
-            $transaction->getOrder()->setValidatedAt(new \Datetime);
-        }
+        $response = $payment->callback($transaction);
 
         $em->persist($transaction->getOrder());
         $em->flush();

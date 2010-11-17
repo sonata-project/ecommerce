@@ -35,12 +35,24 @@ class BasketExtension extends Extension {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('basket.xml');
 
-        $definition = new Definition($config['class']);
-        $definition->addMethodCall('setPaymentPool', array(new Reference('sonata.payment.pool')));
-        $definition->addMethodCall('setDeliveryPool', array(new Reference('sonata.delivery.pool')));
+        $definition = new Definition();
+        $definition
+            ->setFactoryService('sonata.basket.loader')
+            ->setFactoryMethod('getBasket')
+        ;
 
         $container->setDefinition('sonata.basket', $definition);
+
+        $definition = new Definition('Sonata\\Component\\Basket\\Loader');
+        $definition
+            ->addArgument(array($config['class']))
+            ->addMethodCall('setSession',       array(new Reference('session')))   // store the basket into session
+            ->addMethodCall('setProductPool',   array(new Reference('sonata.product.pool')))
+        ;
+
+        $container->setDefinition('sonata.basket.loader', $definition);
     }
+
 
     /**
      * Returns the base path for the XSD files.

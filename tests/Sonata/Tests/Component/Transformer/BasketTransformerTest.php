@@ -64,7 +64,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         ));
 
         $transformer = new BasketTransformer;
-        $transformer->setProductsPool($product_pool);
+        $transformer->setProductPool($product_pool);
         $transformer->setLogger($logger);        
 
         try {

@@ -112,11 +112,11 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
 
 
         $basket = new \Sonata\Component\Basket\Basket;
-        $basket->setProductsPool($product_pool);
+        $basket->setProductPool($product_pool);
 
         // Finally, transform the order into a basket
         $transformer = new OrderTransformer;
-        $transformer->setProductsPool($product_pool);
+        $transformer->setProductPool($product_pool);
 
         $basket = $transformer->transformIntoBasket($user, $order, $basket);
 

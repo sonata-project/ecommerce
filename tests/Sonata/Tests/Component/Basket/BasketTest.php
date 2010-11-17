@@ -31,7 +31,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         ));
         
         $basket = new Basket;
-        $basket->setProductsPool($pool);
+        $basket->setProductPool($pool);
 
         $product = new Product;
 
@@ -101,5 +101,45 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket->reset();
         $this->assertFalse($basket->isValid(), '::isValid() return false after reset');
+    }
+
+    public function testSerialize()
+    {
+
+        $product = $this->getMock('Product', array('getId'));
+        $product->expects($this->exactly(1), array('getId'))
+            ->method('getId')
+            ->will($this->returnValue(3));
+
+        $basket_element = $this->getMock('BasketElement', array('getProduct', 'setPos'));
+        $basket_element->expects($this->exactly(2))
+            ->method('getProduct')
+            ->will($this->returnValue($product))
+        ;
+
+        $basket_element->expects($this->once())
+            ->method('setPos')
+        ;
+
+        $product_pool = $this->getMock('ProductPool', array('getRepository'));
+        $product_pool->expects($this->any())
+            ->method('getRepository')
+            ->will($this->returnValue(false));
+
+        $basket = new Basket;
+
+        $basket->setProductPool($product_pool);
+
+        $basket->addBasketElement($basket_element);
+
+        $data = $basket->serialize();
+
+        $this->assertTrue(is_string($data));
+        $this->assertStringStartsWith('a:7:', $data, 'the serialize array has 7 elements');
+
+        $basket->reset();
+        $this->assertTrue(count($basket->getElements()) == 0, '::reset() remove all elements');
+        $basket->unserialize($data);
+        $this->assertTrue(count($basket->getElements()) == 1, '::unserialize() restore elements');
     }
 }

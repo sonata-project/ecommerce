@@ -131,7 +131,7 @@ class BasketTransformer extends BaseTransformer {
         {
             $product = $basket_element->getProduct();
 
-            $order_element = $this->products_pool->getRepository($product)->createOrderElement($basket_element);
+            $order_element = $this->product_pool->getRepository($product)->createOrderElement($basket_element);
 
             $order->addOrderElement($order_element);
         }

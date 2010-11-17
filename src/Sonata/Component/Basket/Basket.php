@@ -18,36 +18,31 @@ use Sonata\Component\Basket\AddressInterface as Address;
 use Sonata\Component\Product\ProductInterface as Product;
 
 
-class Basket {
-    
-    protected
-        $elements           = array(),
-        $pos                = array(),
-        $cptElement         = 0,
-        $products_pool      = null,
+class Basket implements \Serializable 
+{
 
-        $delivery_address   = null,
-        $delivery_method    = null,
-
-        $payment_address    = null,
-        $payment_method     = null;
-
-    protected
-        $logs               = array(),
-        $inBuild            = false;
+    protected $elements           = array();
+    protected $pos                = array();
+    protected $cptElement         = 0;
+    protected $product_pool       = null;
+    protected $delivery_address   = null;
+    protected $delivery_method    = null;
+    protected $payment_address    = null;
+    protected $payment_method     = null;
+    protected $inBuild            = false;
 
     public function initialize() {
         $this->buildPrices();
     }
 
-    public function setProductsPool($pool)
+    public function setProductPool($pool)
     {
-        $this->products_pool = $pool;
+        $this->product_pool = $pool;
     }
 
-    public function getProductsPool()
+    public function getProductPool()
     {
-        return $this->products_pool;
+        return $this->product_pool;
     }
 
     /**
@@ -77,7 +72,6 @@ class Basket {
         foreach ($this->elements as $element)
         {
             if ($element->isValid() === false) {
-                $this->addLog($element->getName() . " is not valid");
 
                 return false;
             }
@@ -202,7 +196,7 @@ class Basket {
         /*
         * We ask the product repository if it can be added to the basket
         */
-        $isAddableBehavior = call_user_func_array(array($this->getProductsPool()->getRepository($product), 'isAddableToBasket'), $args);
+        $isAddableBehavior = call_user_func_array(array($this->getProductPool()->getRepository($product), 'isAddableToBasket'), $args);
 
         return $isAddableBehavior;
     }
@@ -262,7 +256,7 @@ class Basket {
      * @return Product
      */
     public function getElement($product) {
-        if ($product instanceof Product) {
+        if (is_object($product)) {
             $pos = $this->pos[$product->getId()];
         }
         else
@@ -314,7 +308,7 @@ class Basket {
 
         $args = array_merge(array($this, $product), count($args) == 0 ? array(array()) : $args);
         
-        return call_user_func_array(array($this->getProductsPool()->getRepository($product), 'basketAddProduct'), $args);
+        return call_user_func_array(array($this->getProductPool()->getRepository($product), 'basketAddProduct'), $args);
     }
 
     /**
@@ -332,7 +326,7 @@ class Basket {
         array_shift($args);
         $args = array_merge(array($this, $product), count($args) == 0 ? array(array()) : $args);
 
-        return call_user_func_array(array($this->getProductsPool()->getRepository($product), 'basketMergeProduct'), $args);
+        return call_user_func_array(array($this->getProductPool()->getRepository($product), 'basketMergeProduct'), $args);
     }
 
     /**
@@ -340,10 +334,10 @@ class Basket {
      *
      * @param BasketElement $basket_element
      */
-    public function addBasketElement(BasketElement $basket_element) {
+    public function addBasketElement($basket_element) {
 
         $basket_element->setPos($this->cptElement);
-        
+
         $this->elements[$this->cptElement] = $basket_element;
         $this->pos[$basket_element->getProduct()->getId()] = $this->cptElement;
         
@@ -441,7 +435,6 @@ class Basket {
             return 0;
         }
 
-
         return $method->getDeliveryPrice($this, $vat);
     }
 
@@ -475,44 +468,50 @@ class Basket {
      */
     public function buildPrices() {
         $this->inBuild = true;
-        $this->logs = array();
 
-        foreach ($this->elements as $element)
-        {
+        foreach ($this->elements as $element) {
             $product = $element->getProduct();
 
-            if (!$product instanceof Product) {
+            if (!is_object($product)) {
                 $this->removeElement($element);
+                
                 continue;
             }
 
-            $price = $this->getProductsPool()->getRepository($product)->basketCalculatePrice($this, $element);
-
-            $element->setPrice($price);
+            $repository = $this->getProductPool()->getRepository($product);
+            if($repository) {
+                $price = $repository->basketCalculatePrice($this, $element);
+                $element->setPrice($price);
+            }
+            
         }
 
-        $total = $this->getTotal();
-
         $this->inBuild = false;
-        $this->addLog(sprintf("[Basket::buildPrices] Total price=%f€", $total));
     }
 
-    /**
-     * return the log array of the current basket
-     *
-     * @return array
-     */
-    public function getLogs() {
-        return $this->logs;
+    public function serialize() {
+        return serialize(array(
+            'elements'          => $this->elements,
+            'pos'               => $this->pos,
+            'delivery_address'  => $this->delivery_address,
+            'delivery_method'   => $this->delivery_method,
+            'payment_address'   => $this->payment_address,
+            'payment_method'    => $this->payment_method,
+            'cptElement'       => $this->cptElement,
+        ));
     }
+    
+    public function unserialize($data) {
 
-    /**
-     * Add the $log into the log array
-     *
-     * @param string $log
-     */
-    public function addLog($log) {
-        $this->logs[] = $log;
+        $data = unserialize($data);
+        
+        $this->elements         = $data['elements'];
+        $this->pos              = $data['pos'];
+        $this->delivery_address = $data['delivery_address'];
+        $this->delivery_method  = $data['delivery_method'];
+        $this->payment_address  = $data['payment_address'];
+        $this->payment_method   = $data['payment_method'];
+        $this->cptElement       = $data['cptElement'];
     }
 
 }
