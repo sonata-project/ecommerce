@@ -21,13 +21,6 @@ interface ProductInterface {
 
     /**
      * @abstract
-     * @param  $id the product id
-     * @return void
-     */
-    public function setId($id);
-
-    /**
-     * @abstract
      * @return float the product price
      */
     public function getPrice();
