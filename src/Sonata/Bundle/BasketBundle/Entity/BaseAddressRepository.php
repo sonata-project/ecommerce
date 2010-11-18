@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Bundle\ProductBundle\Entity;
+namespace Sonata\Bundle\BasketBundle\Entity;
 
 class BaseAddressRepository extends \Doctrine\ORM\EntityRepository
 {
