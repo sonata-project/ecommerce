@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://www.symfony-project.org/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
+
+    <route id="sonata_payment_confirmation" pattern="/confirmation">
+        <default key="_controller">PaymentBundle:Payment:confirmation</default>
+    </route>
+
+    <route id="sonata_payment_error" pattern="/error">
+        <default key="_controller">PaymentBundle:Payment:error</default>
+    </route>
+
+    <route id="sonata_payment_callback" pattern="/callbank">
+        <default key="_controller">PaymentBundle:Payment:callbank</default>
+    </route>
+
+    <route id="sonata_payment_callback" pattern="/callback">
+        <default key="_controller">PaymentBundle:Payment:callback</default>
+    </route>
+
+</routes>

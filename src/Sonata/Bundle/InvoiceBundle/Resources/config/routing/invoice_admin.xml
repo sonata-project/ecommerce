@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://www.symfony-project.org/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
+
+    <route id="sonata_admin_invoice_index" pattern="/">
+        <default key="_controller">InvoiceBundle:InvoiceAdmin:index</default>
+    </route>
+
+    <route id="sonata_admin_invoice_view" pattern="/:reference">
+        <default key="_controller">InvoiceBundle:InvoiceAdmin:view</default>
+    </route>
+
+    <route id="sonata_admin_invoice_update" pattern="/:reference/update">
+        <default key="_controller">InvoiceBundle:InvoiceAdmin:update</default>
+    </route>
+</routes>

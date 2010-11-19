@@ -356,4 +356,28 @@ abstract class BaseOrderElement
     {
         return $this->product;
     }
+    /**
+     * @var string $product_type
+     */
+    private $product_type;
+
+    /**
+     * Set product_type
+     *
+     * @param string $productType
+     */
+    public function setProductType($productType)
+    {
+        $this->product_type = $productType;
+    }
+
+    /**
+     * Get product_type
+     *
+     * @return string $productType
+     */
+    public function getProductType()
+    {
+        return $this->product_type;
+    }
 }

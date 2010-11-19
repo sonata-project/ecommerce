@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://www.symfony-project.org/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
+
+    <route id="sonata_basket_index" pattern="/basket">
+        <default key="_controller">BasketBundle:Basket:index</default>
+    </route>
+
+    <route id="sonata_basket_add_product" pattern="/basket/add-porduct">
+        <default key="_controller">BasketBundle:Basket:addProduct</default>
+    </route>
+
+    <route id="sonata_basket_update" pattern="/basket/update">
+        <default key="_controller">BasketBundle:Basket:update</default>
+    </route>
+
+    <route id="sonata_basket_reset" pattern="/basket/reset">
+        <default key="_controller">BasketBundle:Basket:reset</default>
+    </route>
+
+    <route id="sonata_basket_reset" pattern="/basket/step/validation">
+        <default key="_controller">BasketBundle:Basket:validationStep</default>
+    </route>
+
+    <route id="sonata_basket_reset" pattern="/basket/step/authentification">
+        <default key="_controller">BasketBundle:Basket:authentificationStep</default>
+    </route>
+
+    <route id="sonata_basket_reset" pattern="/basket/step/billing">
+        <default key="_controller">BasketBundle:Basket:billingStep</default>
+    </route>
+
+    <route id="sonata_basket_reset" pattern="/basket/step/shipping">
+        <default key="_controller">BasketBundle:Basket:shippingStep</default>
+    </route>
+
+    <route id="sonata_basket_reset" pattern="/basket/step/final-review">
+        <default key="_controller">BasketBundle:Basket:finalReviewStep</default>
+    </route>
+
+</routes>

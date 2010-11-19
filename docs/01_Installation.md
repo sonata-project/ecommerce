@@ -88,3 +88,49 @@ Installation
             types:
                 - { id: order, name: Order, enabled: true, class: Sonata\Component\Transformer\Order }
                 - { id: basket, name: Basket, enabled: true, class: Sonata\Component\Transformer\Basket }
+
+* add the current lines in your routing.yml files
+
+        # sonata front controller
+        sonata_user:
+            resource: Sonata/Bundle/UserBundle/Resources/config/routing/user.xml
+            prefix: /shop/user
+
+        sonata_order:
+            resource: Sonata/Bundle/OrderBundle/Resources/config/routing/order.xml
+            prefix: /shop/user/invoice
+
+        sonata_product:
+            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/product.xml
+            prefix: /shop/product
+
+        sonata_category:
+            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/category.xml
+            prefix: /shop/category
+
+        sonata_payment:
+            resource: Sonata/Bundle/PaymentBundle/Resources/config/routing/payment.xml
+            prefix: /shop/payment
+
+        sonata_invoice:
+            resource: Sonata/Bundle/InvoiceBundle/Resources/config/routing/invoice.xml
+            prefix: /shop/user/invoice
+
+
+        # sonata admin controller
+        sonata_admin_product:
+            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/product_admin.xml
+            prefix: /admin/shop/product
+
+        sonata_admin_product:
+            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/category_admin.xml
+            prefix: /admin/shop/category
+
+
+        sonata_admin_order:
+            resource: Sonata/Bundle/OrderBundle/Resources/config/routing/order_admin.xml
+            prefix: /admin/shop/order
+
+        sonata_admin_order:
+            resource: Sonata/Bundle/InvoiceBundle/Resources/config/routing/invoice_admin.xml
+            prefix: /admin/shop/invoice

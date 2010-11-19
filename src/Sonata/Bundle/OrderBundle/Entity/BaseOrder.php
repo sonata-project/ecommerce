@@ -598,7 +598,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingCountryCode($billingCountryCode)
     {
-        $this->billing_country_code = $billingCountryCpde;
+        $this->billing_country_code = $billingCountryCode;
     }
 
     /**
@@ -608,7 +608,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingCountryCode()
     {
-        return $this->billing_country;
+        return $this->billing_country_code;
     }
 
     /**
@@ -970,5 +970,29 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     public function isError() {
 
         return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
+    }
+    /**
+     * @var Application\OrderBundle\Entity\OrderElement
+     */
+    private $order;
+
+    /**
+     * Add order
+     *
+     * @param Application\OrderBundle\Entity\OrderElement $order
+     */
+    public function addOrder(\Application\OrderBundle\Entity\OrderElement $order)
+    {
+        $this->order[] = $order;
+    }
+
+    /**
+     * Get order
+     *
+     * @return Doctrine\Common\Collections\Collection $order
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

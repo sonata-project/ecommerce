@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\PaymentBundle\Controller;
+namespace Sonata\Bundle\PaymentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,7 +19,16 @@ use Sonata\Component\Payment\Transaction;
 class PaymentController extends Controller
 {
 
+    public function errorAction() {
+
+    }
+
+    public function confirmationAction() {
+
+    }
+    
     /**
+     *
      * this action redirect the user to the bank
      *
      * @return void

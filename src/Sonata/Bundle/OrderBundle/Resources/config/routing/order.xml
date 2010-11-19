@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://www.symfony-project.org/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
+
+    <route id="sonata_order_index" pattern="/user/order">
+        <default key="_controller">OrderBundle:Order:index</default>
+    </route>
+
+    <route id="sonata_order_view" pattern="/user/order/:reference">
+        <default key="_controller">OrderBundle:Order:view</default>
+    </route>
+
+    <route id="sonata_order_view" pattern="/user/order/:reference/download">
+        <default key="_controller">OrderBundle:Order:view</default>
+    </route>
+
+</routes>
