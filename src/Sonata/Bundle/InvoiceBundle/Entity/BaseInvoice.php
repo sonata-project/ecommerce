@@ -10,87 +10,87 @@ abstract class BaseInvoice
     /**
      * @var string $reference
      */
-    private $reference;
+    protected $reference;
 
     /**
      * @var integer $user_id
      */
-    private $user_id;
+    protected $user_id;
 
     /**
      * @var string $currency
      */
-    private $currency;
+    protected $currency;
 
     /**
      * @var integer $status
      */
-    private $status;
+    protected $status;
 
     /**
      * @var decimal $total_inc
      */
-    private $total_inc;
+    protected $total_inc;
 
     /**
      * @var decimal $total_excl
      */
-    private $total_excl;
+    protected $total_excl;
 
     /**
      * @var string $name
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string $phone
      */
-    private $phone;
+    protected $phone;
 
     /**
      * @var string $address1
      */
-    private $address1;
+    protected $address1;
 
     /**
      * @var string $address2
      */
-    private $address2;
+    protected $address2;
 
     /**
      * @var string $address3
      */
-    private $address3;
+    protected $address3;
 
     /**
      * @var string $city
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string $postcode
      */
-    private $postcode;
+    protected $postcode;
 
     /**
      * @var string $country
      */
-    private $country;
+    protected $country;
 
     /**
      * @var string $fax
      */
-    private $fax;
+    protected $fax;
 
     /**
      * @var string $email
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string $mobile
      */
-    private $mobile;
+    protected $mobile;
 
     /**
      * Set reference
@@ -434,7 +434,7 @@ abstract class BaseInvoice
     /**
      * @var Application\DoctrineUserBundle\Entity\User
      */
-    private $user;
+    protected $user;
 
     /**
      * Set user

@@ -378,7 +378,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      *
      * @param type $type
      */
-    public function setType(\type $type)
+    public function setType($type)
     {
         $this->type = $type;
     }
@@ -391,5 +391,29 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     public function getType()
     {
         return $this->type;
+    }
+    /**
+     * @var Application\ProductBundle\Entity\ProductCategory
+     */
+    protected $ProductCategories;
+
+    /**
+     * Add ProductCategories
+     *
+     * @param Application\ProductBundle\Entity\ProductCategory $productCategories
+     */
+    public function addProductCategories(\Application\ProductBundle\Entity\ProductCategory $productCategories)
+    {
+        $this->ProductCategories[] = $productCategories;
+    }
+
+    /**
+     * Get ProductCategories
+     *
+     * @return Doctrine\Common\Collections\Collection $productCategories
+     */
+    public function getProductCategories()
+    {
+        return $this->ProductCategories;
     }
 }

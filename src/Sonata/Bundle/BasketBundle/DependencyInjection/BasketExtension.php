@@ -45,7 +45,7 @@ class BasketExtension extends Extension {
 
         $definition = new Definition('Sonata\\Component\\Basket\\Loader');
         $definition
-            ->addArgument(array($config['class']))
+            ->addArgument($config['class'])
             ->addMethodCall('setSession',       array(new Reference('session')))   // store the basket into session
             ->addMethodCall('setProductPool',   array(new Reference('sonata.product.pool')))
         ;

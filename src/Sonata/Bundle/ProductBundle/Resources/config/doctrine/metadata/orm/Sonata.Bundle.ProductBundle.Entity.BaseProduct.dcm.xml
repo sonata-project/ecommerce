@@ -22,7 +22,7 @@
         <one-to-many
             field="package"
             target-entity="Application\ProductBundle\Entity\Package"
-            mapped-by="product"
+            mapped-by="Product"
             orphan-removal="false">
 
             <join-columns>
@@ -37,7 +37,23 @@
         <one-to-many
             field="delivery"
             target-entity="Application\ProductBundle\Entity\Delivery"
-            mapped-by="delivery"
+            mapped-by="Delivery"
+            orphan-removal="false">
+
+            <join-columns>
+                <join-column
+                    name="id"
+                    referenced-column-name="product_id"
+                    on-delete="CASCADE"
+                />
+            </join-columns>
+        </one-to-many>
+
+        <one-to-many
+            field="ProductCategories"
+            target-entity="Application\ProductBundle\Entity\ProductCategory"
+            mapped-by="Product"
+            inverted-by="Product"
             orphan-removal="false">
 
             <join-columns>

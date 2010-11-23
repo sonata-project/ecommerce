@@ -37,7 +37,7 @@ class ProductBundle extends Bundle implements EventSubscriber {
             return;
         }
 
-        $metadata->setDiscriminatorColumn(array('name' => 'type', 'type' => 'string'));
+        $metadata->setDiscriminatorColumn(array('name' => 'type', 'type' => 'string', 'length' => 16));
         $metadata->setInheritanceType(\Doctrine\ORM\Mapping\ClassMetadataInfo::INHERITANCE_TYPE_SINGLE_TABLE);
 
         $map = array();

@@ -19,57 +19,46 @@ abstract class BaseCategory
     /**
      * @var string $label
      */
-    private $name;
+    protected $name;
 
     /**
      * @var text $sub_description
      */
-    private $sub_description;
+    protected $sub_description;
 
     /**
      * @var boolean $enabled
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * @var datetime $updated_at
      */
-    private $updated_at;
+    protected $updated_at;
 
     /**
      * @var datetime $created_at
      */
-    private $created_at;
-
-    /**
-     * @var integer $parent_id
-     */
-    private $parent_id;
-
-    /**
-     * @var Application\ProductBundle\Entity\Category
-     */
-    private $children;
-
-    /**
-     * @var Application\ProductBundle\Entity\Category
-     */
-    private $parent;
+    protected $created_at;
 
     /**
      * @var text $description
      */
-    private $description;
+    protected $description;
 
     /**
      * @var string $slug
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var integer $position
      */
-    private $position;
+    protected $position;
+
+    protected $Children;
+
+    protected $Parent;
 
     /**
      * Set sub_description
@@ -152,66 +141,6 @@ abstract class BaseCategory
     }
 
     /**
-     * Set parent_id
-     *
-     * @param integer $parentId
-     */
-    public function setParentId($parentId)
-    {
-        $this->parent_id = $parentId;
-    }
-
-    /**
-     * Get parent_id
-     *
-     * @return integer $parentId
-     */
-    public function getParentId()
-    {
-        return $this->parent_id;
-    }
-
-    /**
-     * Add children
-     *
-     * @param Application\ProductBundle\Entity\Category $children
-     */
-    public function addChildren(\Application\ProductBundle\Entity\Category $children)
-    {
-        $this->children[] = $children;
-    }
-
-    /**
-     * Get children
-     *
-     * @return Doctrine\Common\Collections\Collection $children
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    /**
-     * Set parent
-     *
-     * @param Application\ProductBundle\Entity\Category $parent
-     */
-    public function setParent(\Application\ProductBundle\Entity\Category $parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return Application\ProductBundle\Entity\Category $parent
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
      * Set name
      *
      * @param string $name
@@ -289,5 +218,52 @@ abstract class BaseCategory
     public function getPosition()
     {
         return $this->position;
+    }
+    /**
+     * Add Children
+     *
+     * @param Application\ProductBundle\Entity\Category $children
+     */
+    public function addChildren(\Application\ProductBundle\Entity\Category $children, $nested = false)
+    {
+        $this->Children[] = $children;
+
+        if(!$nested) {
+            $children->setParent($this, true);
+        }
+    }
+
+    /**
+     * Get Children
+     *
+     * @return Doctrine\Common\Collections\Collection $children
+     */
+    public function getChildren()
+    {
+        return $this->Children;
+    }
+
+    /**
+     * Set Parent
+     *
+     * @param Application\ProductBundle\Entity\Category $parent
+     */
+    public function setParent(\Application\ProductBundle\Entity\Category $parent, $nested = false)
+    {
+        $this->Parent = $parent;
+
+        if(!$nested) {
+            $parent->addChildren($this, true);
+        }
+    }
+
+    /**
+     * Get Parent
+     *
+     * @return Application\ProductBundle\Entity\Category $parent
+     */
+    public function getParent()
+    {
+        return $this->Parent;
     }
 }

@@ -10,52 +10,52 @@ abstract class BaseInvoiceElement
     /**
      * @var integer $invoice_id
      */
-    private $invoice_id;
+    protected $invoice_id;
 
     /**
      * @var integer $order_element_id
      */
-    private $order_element_id;
+    protected $order_element_id;
 
     /**
      * @var integer $quantity
      */
-    private $quantity;
+    protected $quantity;
 
     /**
      * @var decimal $price
      */
-    private $price;
+    protected $price;
 
     /**
      * @var decimal $vat
      */
-    private $vat;
+    protected $vat;
 
     /**
      * @var decimal $total
      */
-    private $total;
+    protected $total;
 
     /**
      * @var string $designation
      */
-    private $designation;
+    protected $designation;
 
     /**
      * @var text $description
      */
-    private $description;
+    protected $description;
 
     /**
      * @var Sonata\Bundle\InvoiceBundle\Entity\Invoice
      */
-    private $invoice;
+    protected $invoice;
 
     /**
      * @var Sonata\Bundle\OrderBundle\Entity\OrderElement
      */
-    private $order_element;
+    protected $order_element;
 
     /**
      * Set invoice_id

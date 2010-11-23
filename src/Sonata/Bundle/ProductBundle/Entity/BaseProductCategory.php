@@ -91,4 +91,53 @@ abstract class BaseProductCategory
         return $this->created_at;
     }
 
+    /**
+     * @var Application\ProductBundle\Entity\Product
+     */
+    protected $Product;
+
+    /**
+     * @var Application\ProductBundle\Entity\Category
+     */
+    protected $Category;
+
+    /**
+     * Set Product
+     *
+     * @param Application\ProductBundle\Entity\Product $product
+     */
+    public function setProduct(\Application\ProductBundle\Entity\Product $product)
+    {
+        $this->Product = $product;
+    }
+
+    /**
+     * Get Product
+     *
+     * @return Application\ProductBundle\Entity\Product $product
+     */
+    public function getProduct()
+    {
+        return $this->Product;
+    }
+
+    /**
+     * Set Category
+     *
+     * @param Application\ProductBundle\Entity\Category $category
+     */
+    public function setCategory(\Application\ProductBundle\Entity\Category $category)
+    {
+        $this->Category = $category;
+    }
+
+    /**
+     * Get Category
+     *
+     * @return Application\ProductBundle\Entity\Category $category
+     */
+    public function getCategory()
+    {
+        return $this->Category;
+    }
 }

@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 use Application\ProductBundle\Entity\Category;
-use Application\ProductBundle\Entity\Product;
+use Application\ProductBundle\Entity\Bottle as Product;
 
 use Application\ProductBundle\Entity\ProductCategory;
 
@@ -23,7 +23,7 @@ class AllData implements FixtureInterface
 {
     public function load($manager)
     {
-        
+
         $id = 1;
         foreach(range(0, 15) as $level_1_id) {
 
@@ -45,6 +45,7 @@ class AllData implements FixtureInterface
             $manager->persist($category);
 
             foreach(range(0, 25) as $product) {
+                
                 $id++;
                 $product = new Product();
                 $product->setName('product '.$id);
@@ -61,10 +62,9 @@ class AllData implements FixtureInterface
                 $products[] = $product;
                 
                 $manager->persist($product);
-
             }
 
-            foreach(range(0, 10) as $level_2_id) {
+            foreach(range(0, 5) as $level_2_id) {
                 $cat2 = new Category();
                 $cat2->setName($category->getName().' : '.$level_2_id);
                 $cat2->setSlug($category->getSlug().'-'.$level_2_id);
@@ -73,11 +73,9 @@ class AllData implements FixtureInterface
                 $cat2->setCreatedAt(new \DateTime());
                 $cat2->setUpdatedAt(new \DateTime());
 
-                $manager->persist($cat2);
-
                 $categories[] = $cat2;
 
-                foreach(range(0, 5) as $level_3_id) {
+                foreach(range(0, 4) as $level_3_id) {
                     $id++;
                     $cat3 = new Category();
                     $cat3->setName($cat2->getName().' : '.$level_3_id);
@@ -87,21 +85,22 @@ class AllData implements FixtureInterface
                     $cat3->setCreatedAt(new \DateTime());
                     $cat3->setUpdatedAt(new \DateTime());
 
+                    $cat3->setParent($cat2);
+                    
                     $manager->persist($cat3);
-
-                    $cat2->addChildren($cat3);
 
                     $categories[] = $cat3;
                 }
 
-
                 $category->addChildren($cat2);
 
-                $manager->flush();
+                $manager->persist($cat2);
+
+//                $manager->flush();
             }
 
 
-            $manager->flush();
+//            $manager->flush();
         }
 
 

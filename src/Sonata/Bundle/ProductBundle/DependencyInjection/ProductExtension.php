@@ -43,6 +43,7 @@ class ProductExtension extends Extension {
             $definition->addMethodCall('addProduct', array($product));
         }
 
+        $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
         $container->setDefinition('sonata.product.pool', $definition);
     }
 

@@ -18,42 +18,42 @@ abstract class BasePackage
     /**
      * @var integer $product_id
      */
-    private $product_id;
+    protected $product_id;
 
     /**
      * @var decimal $width
      */
-    private $width;
+    protected $width;
 
     /**
      * @var decimal $height
      */
-    private $height;
+    protected $height;
 
     /**
      * @var decimal $length
      */
-    private $length;
+    protected $length;
 
     /**
      * @var decimal $weight
      */
-    private $weight;
+    protected $weight;
 
     /**
      * @var boolean $enabled
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * @var datetime $updated_at
      */
-    private $updated_at;
+    protected $updated_at;
 
     /**
      * @var datetime $created_at
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * Set product_id

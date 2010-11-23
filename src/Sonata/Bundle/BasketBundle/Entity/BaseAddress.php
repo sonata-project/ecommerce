@@ -373,7 +373,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      *
      * @param Application\SandboxBundle\Entity\User $user
      */
-    public function setUser(\Application\SandboxBundle\Entity\User $user)
+    public function setUser($user)
     {
         $this->user = $user;
     }

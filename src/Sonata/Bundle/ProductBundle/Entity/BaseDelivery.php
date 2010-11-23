@@ -18,42 +18,42 @@ abstract class BaseDelivery
     /**
      * @var integer $product_id
      */
-    private $product_id;
+    protected $product_id;
 
     /**
      * @var string $class_name
      */
-    private $class_name;
+    protected $class_name;
 
     /**
      * @var boolean $per_item
      */
-    private $per_item;
+    protected $per_item;
 
     /**
      * @var string $country
      */
-    private $country;
+    protected $country;
 
     /**
      * @var string $zone
      */
-    private $zone;
+    protected $zone;
 
     /**
      * @var boolean $enabled
      */
-    private $enabled;
+    protected $enabled;
 
     /**
      * @var datetime $updated_at
      */
-    private $updated_at;
+    protected $updated_at;
 
     /**
      * @var datetime $created_at
      */
-    private $created_at;
+    protected $created_at;
 
     /**
      * Set product_id
