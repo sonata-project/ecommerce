@@ -21,21 +21,25 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         $variation_fields   = array()
      ;
 
-    public function setOptions($options) {
+    public function setOptions($options)
+    {
         $this->options = $options;
     }
 
-    public function getOptions() {
+    public function getOptions()
+    {
 
         return $this->options;
     }
 
-    public function getOption($name, $default = null){
+    public function getOption($name, $default = null)
+    {
 
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function createProductInstance() {
+    public function createProductInstance()
+    {
 
     }
 
@@ -86,16 +90,15 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         return $variation;
     }
 
-    public function copyVariation($product, $name = 'all', $force_copy = false) {
+    public function copyVariation($product, $name = 'all', $force_copy = false)
+    {
 
-        if($product->isVariation())
-        {
+        if($product->isVariation()) {
 
             return;
         }
 
-        switch($name)
-        {
+        switch($name) {
           case 'product':
                 $this->copyProductVariation($product, $force_copy);
 
@@ -110,7 +113,8 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         }
     }
 
-    public function copyProductVariation(Product $product, $force_copy = false) {
+    public function copyProductVariation(Product $product, $force_copy = false)
+    {
 
         $variation_fields = array_merge(array('id'), $this->getVariationFields());
 
@@ -146,6 +150,29 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     /////////////////////////////////////////////////////
     // BASKET RELATED FUNCTIONS
 
+        /**
+     * This function return the form used in the product view page
+     *
+     * @param  $product
+     * @param  $validator
+     * @param array $options
+     * @return Application\ProductBundle\Products\Bottle\BottleAddBasketForm
+     */
+    public function getAddBasketForm($product, $validator, $options = array())
+    {
+        // create the product form
+        $class = $this->getAddBasketClass();
+
+        $product_basket = new $class;
+        $product_basket->setProduct($product);
+        $product_basket->setQuantity(1);
+
+        // create the form
+        $class = $this->getAddBasketFormClass();
+
+        return new $class('basket', $product_basket, $validator, $options);
+    }
+    
     /**
      * return true if the basket element is still valid
      *
@@ -154,13 +181,16 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
      *
      * @return BasketElement
      */
-    public function basketAddProduct($basket, $product, $values) {
+    public function basketAddProduct($basket, $product, $values)
+    {
 
         if ($basket->hasProduct($product)) {
             return false;
         }
 
-        $basket_element = new BasketElement;
+        $class = $this->getBasketElementClass();
+        
+        $basket_element = new $class;
         $basket_element->setProduct($product);
         $basket_element->setQuantity($values->getQuantity());
 
@@ -187,7 +217,8 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
      *
      * @return BasketElement
      */
-    public function basketMergeProduct($basket, $product, $values) {
+    public function basketMergeProduct($basket, $product, $values)
+    {
 
         if (!$basket->hasProduct($product)) {
 
@@ -206,7 +237,8 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
      *
      * @return boolean true if the basket element is still valid
      */
-    public function isValidBasketElement($basket_element) {
+    public function isValidBasketElement($basket_element)
+    {
         $product = $basket_element->getProduct();
 
         if (!$product instanceof Product) {
@@ -228,7 +260,8 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
      *
      * @return float price of the basket element
      */
-    public function basketCalculatePrice($basket, $basket_element) {
+    public function basketCalculatePrice($basket, $basket_element)
+    {
 
         return $basket_element->getProduct()->getPrice();
     }
@@ -242,8 +275,34 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
      * @param array $options
      * @return boolean
      */
-    public function isAddableToBasket($basket, $product, $options = array()) {
+    public function isAddableToBasket($basket, $product, $options = array())
+    {
 
         return true;
     }
+
+    /**
+     * return a fresh product instance (so information are reloaded: enabled and stock ...)
+     *
+     * @param  $product
+     * @return ProductInterface
+     */
+    public function reloadProduct($product)
+    {
+
+        return $this->findOneById($product->getId());
+    }
+
+    /**
+     * return the stock available for the current product
+     *
+     * @param  $product
+     * @return int the stock available
+     */
+    public function getStockAvailable($product)
+    {
+
+        return $product->getStock();
+    }
+        
 }

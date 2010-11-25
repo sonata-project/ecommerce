@@ -416,4 +416,9 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     {
         return $this->ProductCategories;
     }
+
+    public function isEnabled()
+    {
+        return $this->getEnabled();
+    }
 }

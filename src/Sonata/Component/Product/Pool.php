@@ -17,6 +17,9 @@ namespace Sonata\Component\Product;
 class Pool
 {
     protected $products = array();
+    protected $classes = array();
+
+    protected $em = null;
 
 
     /**
@@ -28,6 +31,16 @@ class Pool
     public function addProduct($definition)
     {
         $this->products[$definition['id']] = $definition;
+        $this->classes[$definition['class']] = $definition['id'];
+    }
+
+    /**
+     * define the entity manager
+     * 
+     * @return void
+     */
+    public function setEntityManager($em) {
+        $this->em = $em;
     }
 
     /**
@@ -52,6 +65,13 @@ class Pool
         return isset($this->products[$code]) ? $this->products[$code] : null;
     }
 
+    public function getProductCode($product)
+    {
+        $class = get_class($product);
+        
+        return isset($this->classes[$class]) ? $this->classes[$class] : null;
+    }
+
     /**
      * @throws RuntimeException
      * @param  $product ProductInterface|product code|product class
@@ -71,15 +91,6 @@ class Pool
             $class = $product;
         }
 
-
-        foreach($this->products as $product)
-        {
-            if($class === $product['class'])
-            {
-                return $product['repository'];
-            }
-        }
-
-        throw new RuntimeException(sprintf('No product repository defined for the class %s', $class));
+        return $this->em->getRepository($class);
     }
 }

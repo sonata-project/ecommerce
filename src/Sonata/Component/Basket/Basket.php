@@ -17,11 +17,13 @@ use Sonata\Component\Delivery\DeliveryInterface as Delivery;
 use Sonata\Component\Basket\AddressInterface as Address;
 use Sonata\Component\Product\ProductInterface as Product;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 class Basket implements \Serializable 
 {
 
     protected $elements           = array();
+
     protected $pos                = array();
     protected $cptElement         = 0;
     protected $product_pool       = null;
@@ -30,6 +32,13 @@ class Basket implements \Serializable
     protected $payment_address    = null;
     protected $payment_method     = null;
     protected $inBuild            = false;
+
+    public static function loadMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addGetterConstraint('tokenValid', new AssertTrue(array(
+            'message' => 'The token is invalid',
+        )));
+    }
 
     public function initialize() {
         $this->buildPrices();
@@ -228,6 +237,16 @@ class Basket implements \Serializable
         return $this->elements;
     }
 
+    /**
+     * Warning : this method should be only used by the validation framework
+     * 
+     * @param  $elements
+     * @return void
+     */
+    public function setElements($elements)
+    {
+        $this->element = $elements;
+    }
     /**
      * count number of element in the basket
      *
@@ -487,6 +506,19 @@ class Basket implements \Serializable
         }
 
         $this->inBuild = false;
+    }
+
+    /**
+     * remove basket element market as deleted
+     * @return void
+     */
+    public function clean() {
+
+        foreach($this->getElements() as $basket_element) {
+            if($basket_element->getDelete()) {
+                $this->removeElement($basket_element);
+            }
+        }
     }
 
     public function serialize() {

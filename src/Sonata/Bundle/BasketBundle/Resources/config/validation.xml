@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<constraint-mapping xmlns="http://www.symfony-project.org/schema/dic/constraint-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/dic/constraint-mapping
+        http://www.symfony-project.org/schema/dic/services/constraint-mapping-1.0.xsd">
+
+    <class name="Sonata\Component\Basket\Basket">
+        <property name="elements">
+           <constraint name="Sonata\Component\Form\BasketElementCollection" />
+        </property>
+    </class>
+
+</constraint-mapping>

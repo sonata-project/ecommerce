@@ -19,12 +19,8 @@ use Sonata\Component\Payment\Transaction;
 class ProductController extends Controller
 {
 
-
-    public function indexAction() {
-
-    }
-
-    public function viewAction($product_id, $slug) {
+    public function viewAction($product_id, $slug)
+    {
 
         $em             = $this->get('doctrine.orm.default_entity_manager');
         $repository     = $em->getRepository('ProductBundle:Product');
@@ -39,12 +35,47 @@ class ProductController extends Controller
         $this->get('session')->start();
 
         $code = $this->get('sonata.product.pool')->getProductCode($product);
-        
-        return $this->forward(sprintf('ProductBundle:%s:view', ucfirst($code)), array(
+
+        $action = sprintf('ProductBundle:%s:view', ucfirst($code));
+        $response = $this->forward($action, array(
             'product' => $product
         ));
+
+        if($this->get('kernel')->isDebug()) {
+            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
+                $code,
+                $product->getId(),
+                $action,
+                $response->getContent()
+            ));
+        }
+
+        return $response;
     }
 
+    public function renderFormBasketElementAction($field_group, $basket_element)
+    {
+
+        $code   = $this->get('sonata.product.pool')->getProductCode($basket_element->getProduct());
+        $action = sprintf('ProductBundle:%s:renderFormBasketElement', ucfirst($code)) ;
+
+        $response = $this->forward($action, array(
+            'field_group'     => $field_group,
+            'basket_element'  => $basket_element,
+        ));
+
+        if($this->get('kernel')->isDebug()) {
+            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
+                $code,
+                $basket_element->getProductId(),
+                $action,
+                $response->getContent()
+            ));
+        }
+
+        return $response;
+    }
+    
     public function viewVariationsAction($product_id, $slug) {
 
     }

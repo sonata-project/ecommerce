@@ -39,6 +39,11 @@ class Loader
         $basket = $this->getSession()->get('sonata/basket');
 
         if(!$basket) {
+
+            if(!class_exists($this->basket_class)) {
+                throw new RuntimeException(sprintf('unable to load the class %s', $this->basket_class));
+            }
+
             $basket = new $this->basket_class;
         }
         

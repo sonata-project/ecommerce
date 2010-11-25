@@ -82,7 +82,7 @@ Installation
 
             class:
                 model:
-                    user: Application\SandboxBundle\Entity\User # you must define your own user class
+                    user: Application\DoctrineUserBundle\Entity\User # you must define your own user class
 
         sonata_payment.transformer:
             types:

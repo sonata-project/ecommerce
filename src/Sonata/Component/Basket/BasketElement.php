@@ -13,24 +13,37 @@ namespace Sonata\Component\Basket;
 
 use Sonata\Component\Product\ProductInterface;
 
-class BasketElement {
+class BasketElement
+{
 
-    protected
-        $product_id = null,
-        $product = null,
-        $price = null,
-        $quantity = 1,
-        $options = array(),
-        $name = null,
-        $errors = array(),
-        $pos = null;
+    protected $product_id = null;
+
+    protected $product = null;
+
+    protected $price = null;
+
+    protected $quantity = 1;
+
+    protected $options = array();
+
+    protected $name = null;
+
+    protected $errors = array();
+
+    protected $pos = null;
+
+    /*
+     * use by the validation framework
+     */
+    protected $delete = false;
 
     /**
      * the position in the basket stack
      *
      * @param unknown_type $pos
      */
-    public function setPos($pos) {
+    public function setPos($pos)
+    {
         $this->pos = $pos;
     }
 
@@ -39,7 +52,8 @@ class BasketElement {
      *
      * @return int
      */
-    public function getPos() {
+    public function getPos()
+    {
 
         return $this->pos;
     }
@@ -49,7 +63,8 @@ class BasketElement {
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
 
         return $this->name;
     }
@@ -60,7 +75,8 @@ class BasketElement {
      * @param string $name
      * @param string $value
      */
-    public function addError($name, $value) {
+    public function addError($name, $value)
+    {
         $this->errors[$name] = $value;
     }
 
@@ -69,7 +85,8 @@ class BasketElement {
      *
      * @return array
      */
-    public function getErrors() {
+    public function getErrors()
+    {
 
         return $this->errors;
     }
@@ -80,7 +97,8 @@ class BasketElement {
      * @param trShopProduct $product
      * @return BasketElement
      */
-    public function setProduct(ProductInterface $product) {
+    public function setProduct(ProductInterface $product)
+    {
 
         $this->product     = $product;
         $this->product_id  = $product->getId();
@@ -96,9 +114,34 @@ class BasketElement {
      *
      * @return Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
 
         return $this->product;
+    }
+
+    /**
+     * return the product id
+     * 
+     * @return null
+     */
+    public function getProductId()
+    {
+        return $this->product_id;
+    }
+
+    /**
+     * Never call this method, use the setProduct instead. This method is only used
+     * by the form framework
+     * 
+     * @param  $product_id
+     * @return void
+     */
+    public function setProductId($product_id)
+    {
+        if(!$this->getProduct()) {
+            $this->product_id = $product_id;
+        }
     }
 
     /**
@@ -107,7 +150,8 @@ class BasketElement {
      *
      * @return $float
      */
-    public function getVatAmount() {
+    public function getVatAmount()
+    {
 
         $tva = $this->getTotal(true) - $this->getTotal();
 
@@ -120,7 +164,8 @@ class BasketElement {
      *
      * @return $float
      */
-    public function getVat() {
+    public function getVat()
+    {
 
         $product = $this->getProduct();
         if (!$product instanceof ProductInterface) {
@@ -138,7 +183,8 @@ class BasketElement {
      * @param boolean $tva
      * @return float
      */
-    public function getPrice($tva = false) {
+    public function getUnitPrice($tva = false)
+    {
         $price = $this->price;
 
         $product = $this->getProduct();
@@ -161,9 +207,10 @@ class BasketElement {
      * @param boolean $tva
      * @return float
      */
-    public function getTotal($tva = false) {
+    public function getTotal($tva = false)
+    {
 
-        return $this->getPrice($tva) * $this->getQuantity();
+        return $this->getUnitPrice($tva) * $this->getQuantity();
     }
 
     /**
@@ -171,7 +218,8 @@ class BasketElement {
      *
      * @return array
      */
-    public function getOptions() {
+    public function getOptions()
+    {
 
         return $this->options;
     }
@@ -182,7 +230,8 @@ class BasketElement {
      * @param string $name
      * @return mixed
      */
-    public function getOption($name) {
+    public function getOption($name)
+    {
 
         if (!array_key_exists($name, $this->options)) {
 
@@ -198,7 +247,8 @@ class BasketElement {
      * @param string $name
      * @param mixed $value
      */
-    public function setOption($name, $value) {
+    public function setOption($name, $value)
+    {
         $this->options[$name] = $value;
     }
 
@@ -207,7 +257,8 @@ class BasketElement {
      *
      * @param float $price
      */
-    public function setPrice($price) {
+    public function setPrice($price)
+    {
         $this->price = $price;
     }
 
@@ -216,11 +267,18 @@ class BasketElement {
      *
      * @param float $price
      */
-    public function setQuantity($quantity) {
+    public function setQuantity($quantity)
+    {
         $this->quantity = $quantity;
     }
 
-    public function getQuantity() {
+    /**
+     * return the quantity
+     * 
+     * @return int
+     */
+    public function getQuantity()
+    {
 
         return $this->quantity;
     }
@@ -230,7 +288,8 @@ class BasketElement {
      *
      * @return boolean
      */
-    public function isValid() {
+    public function isValid()
+    {
         $product = $this->getProduct();
         if (!$product instanceof ProductInterface) {
 
@@ -243,5 +302,15 @@ class BasketElement {
         }
 
         return true;
+    }
+
+    public function setDelete($delete)
+    {
+        $this->delete = $delete;
+    }
+
+    public function getDelete()
+    {
+        return $this->delete;
     }
 }

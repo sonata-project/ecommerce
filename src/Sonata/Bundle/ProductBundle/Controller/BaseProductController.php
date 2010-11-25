@@ -39,6 +39,15 @@ abstract class BaseProductController extends Controller
         ));
     }
 
+    public function renderFormBasketElementAction($field_group, $basket_element)
+    {
+
+        return $this->render(sprintf('ProductBundle:%s:form_basket_element.twig', ucfirst($this->getProductCode($basket_element->getProduct()))), array(
+           'field_group'    => $field_group,
+           'basket_element' => $basket_element,
+        ));
+    }
+
     public function getProductCode($product) {
         
         return $this->get('sonata.product.pool')->getProductCode($product);

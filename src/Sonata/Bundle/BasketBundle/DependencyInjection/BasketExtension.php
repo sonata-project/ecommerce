@@ -23,7 +23,8 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class BasketExtension extends Extension {
+class BasketExtension extends Extension
+{
 
     /**
      * Loads the url shortener configuration.
@@ -31,18 +32,12 @@ class BasketExtension extends Extension {
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function configLoad($config, ContainerBuilder $container) {
+    public function configLoad($config, ContainerBuilder $container)
+    {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('basket.xml');
 
-        $definition = new Definition();
-        $definition
-            ->setFactoryService('sonata.basket.loader')
-            ->setFactoryMethod('getBasket')
-        ;
-
-        $container->setDefinition('sonata.basket', $definition);
-
+        // define the basket loader service
         $definition = new Definition('Sonata\\Component\\Basket\\Loader');
         $definition
             ->addArgument($config['class'])
@@ -51,6 +46,26 @@ class BasketExtension extends Extension {
         ;
 
         $container->setDefinition('sonata.basket.loader', $definition);
+
+        // define the basket service which depends on the basket loader (load the basket from the session)
+        $definition = new Definition();
+        $definition
+            ->setFactoryService('sonata.basket.loader')
+            ->setFactoryMethod('getBasket')
+        ;
+
+        $container->setDefinition('sonata.basket', $definition);
+
+
+        // initialize the basket elements validator
+        $definition = new Definition('Sonata\\Component\\Form\\BasketElementCollectionValidator');
+        $definition
+            ->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')))
+            ->addMethodCall('setBasket', array(new Reference('sonata.basket')))
+            ->addTag('validator.constraint_validator', array('alias' => 'sonata_basket_element_collection_validator'))
+         ;
+
+        $container->setDefinition('sonata.basket.elements.validator', $definition);
     }
 
 
@@ -59,17 +74,20 @@ class BasketExtension extends Extension {
      *
      * @return string The XSD base path
      */
-    public function getXsdValidationBasePath() {
+    public function getXsdValidationBasePath()
+    {
 
         return __DIR__.'/../Resources/config/schema';
     }
 
-    public function getNamespace() {
+    public function getNamespace()
+    {
 
         return 'http://www.sonata-project.org/schema/dic/sonata-basket';
     }
 
-    public function getAlias() {
+    public function getAlias()
+    {
         
         return "sonata_basket";
     }
