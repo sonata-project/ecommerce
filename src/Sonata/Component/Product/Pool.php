@@ -44,6 +44,16 @@ class Pool
     }
 
     /**
+     * define the entity manager
+     *
+     * @return void
+     */
+    public function getEntityManager() {
+        return $this->em;
+    }
+
+
+    /**
      *
      * @return array of delivery methods
      */
@@ -80,17 +90,38 @@ class Pool
     public function getRepository($product)
     {
         // code
-        if (is_string($product) && strpos($product, '\\') === false)
-        {
-            return $this->products[$product]['repository'];
+        if (is_string($product) && strpos($product, '\\') === false) {
+            
+            $class =  $this->products[$product]['class'];
         }
+        else if($product instanceof ProductInterface) {
 
-        if($product instanceof ProductInterface) {
             $class = get_class($product);
         } else {
+            
             $class = $product;
         }
 
-        return $this->em->getRepository($class);
+        return $this->getEntityManager()->getRepository($class);
+    }
+
+    public function setClasses($classes)
+    {
+        $this->classes = $classes;
+    }
+
+    public function getClasses()
+    {
+        return $this->classes;
+    }
+
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

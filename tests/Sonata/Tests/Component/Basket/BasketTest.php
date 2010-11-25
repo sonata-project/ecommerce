@@ -23,22 +23,67 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
     public function testBasket()
     {
+        $product = new Product;
+
+        $basket = new Basket;
+        
+        $repository = $this->getMock('ProductRepository', array('basketMergeProduct', 'basketAddProduct', 'basketCalculatePrice', 'isAddableToBasket'));
+        $repository->expects($this->any())
+            ->method('basketAddProduct')
+            ->will($this->returnCallback(function($bsket, $product, $params = array()) use ($basket) {
+
+           
+                $basket_element = new BasketElement;
+                $basket_element->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
+                $basket_element->setProduct($product);
+
+                $basket->addBasketElement($basket_element);
+
+                return $basket_element;
+            }));
+
+        $repository->expects($this->any())
+            ->method('basketMergeProduct')
+            ->will($this->returnCallback(function($baskt, $product, $params = array()) use ($basket) {
+
+
+                $basket_element = new BasketElement;
+                $basket_element->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
+                $basket_element->setProduct($product);
+
+                $basket->addBasketElement($basket_element);
+
+                return $basket_element;
+            }));
+                
+
+        $repository->expects($this->any())
+            ->method('basketCalculatePrice')
+            ->will($this->returnValue(15));
+
+        $repository->expects($this->any())
+            ->method('isAddableToBasket')
+            ->will($this->returnValue(true));
+
+        $entity_manager = $this->getMock('EntityManager', array('getRepository'));
+        $entity_manager->expects($this->any())
+            ->method('getRepository')
+            ->will($this->returnValue($repository));
+
+
         $pool = new Pool;
         $pool->addProduct(array(
             'id'         => 'fake_product',
             'class'      => 'Sonata\\Tests\Component\\Basket\\Product',
-            'repository' => new ProductRepository
         ));
-        
-        $basket = new Basket;
-        $basket->setProductPool($pool);
+        $pool->setEntityManager($entity_manager);
 
-        $product = new Product;
+        $basket->setProductPool($pool);
 
         $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
         $basket_element = $basket->addProduct($product);
-
+        
         $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basket_element, '::addProduct() - return a BasketElement');
         $this->assertEquals(1, $basket_element->getQuantity(), '::getQuantity() - return 1');
         $this->assertEquals(15, $basket->getTotal(), '::getTotal() w/o vat return 15');

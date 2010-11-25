@@ -18,7 +18,11 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testVariation()
     {
-        $repository = new ProductRepository();
+        $em = $this->getMock('EntityManager');
+        $metadata = $this->getMock('Doctrine\ORM\Mapping\ClassMetadata', array(),  array(), '', false);
+
+
+        $repository = new ProductRepository($em, $metadata);
         $repository->setVariationFields(array('name', 'price'));
 
         $this->assertTrue($repository->hasVariationFields(), '::hasVariationFields() return true' );
@@ -28,7 +32,11 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testDuplicate()
     {
-        $repository = new ProductRepository();
+        $em = $this->getMock('EntityManager');
+        $metadata = $this->getMock('Doctrine\ORM\Mapping\ClassMetadata', array(),  array(), '', false);
+
+
+        $repository = new ProductRepository($em, $metadata);
         $repository->setVariationFields(array('Name', 'Price'));
 
         $product = new \Sonata\Tests\Component\Basket\Product;

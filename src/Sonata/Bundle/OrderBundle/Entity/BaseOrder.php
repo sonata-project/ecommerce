@@ -971,28 +971,5 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
 
         return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
     }
-    /**
-     * @var Application\OrderBundle\Entity\OrderElement
-     */
-    private $order;
 
-    /**
-     * Add order
-     *
-     * @param Application\OrderBundle\Entity\OrderElement $order
-     */
-    public function addOrder(\Application\OrderBundle\Entity\OrderElement $order)
-    {
-        $this->order[] = $order;
-    }
-
-    /**
-     * Get order
-     *
-     * @return Doctrine\Common\Collections\Collection $order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
 }

@@ -48,6 +48,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $products[] = new \Sonata\Tests\Component\Basket\Product;
         $products[] = new \Sonata\Tests\Component\Basket\Product;
 
+
         // Mock the product repository
         $repository = $this->getMock('ProductRepository', array('createOrderElement'));
 
@@ -55,17 +56,22 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
             ->method('createOrderElement')
             ->will($this->onConsecutiveCalls($this->getMock('OrderElement'), $this->getMock('OrderElement')));
 
-        
         $product_pool = new  \Sonata\Component\Product\Pool;
         $product_pool->addProduct(array(
             'id'            => 'test',
             'class'         => 'Sonata\\Tests\\Component\\Basket\\Product',
-            'repository'    => $repository
         ));
+
+        $entity_manager = $this->getMock('EntityManager', array('getRepository'));
+        $entity_manager->expects($this->any())
+            ->method('getRepository')
+            ->will($this->returnValue($repository));
+
+        $product_pool->setEntityManager($entity_manager);
 
         $transformer = new BasketTransformer;
         $transformer->setProductPool($product_pool);
-        $transformer->setLogger($logger);        
+        $transformer->setLogger($logger);
 
         try {
             $transformer->transformIntoOrder(null, null);
@@ -134,9 +140,9 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 
         $order->expects($this->exactly(2))
             ->method('addOrderElement');
-        
+
         $transformer->setOptions(array('class_order' => get_class($order), 'order_instance' => $order));
-        
+
         $order = $transformer->transformIntoOrder($user, $basket);
     }
 }

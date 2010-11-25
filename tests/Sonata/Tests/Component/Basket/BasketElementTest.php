@@ -24,8 +24,8 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(19.6, $basket_element->getVat(), 'BasketElement returns the correct VAT');
         $this->assertEquals(1, $basket_element->getQuantity(), 'BasketElement returns the correct default quantity');
 
-        $this->assertEquals(15, $basket_element->getPrice(), 'BasketElement return the correct price w/o VAT');
-        $this->assertEquals(17.94, $basket_element->getPrice(true), 'BasketElement return the correct price w/ VAT');
+        $this->assertEquals(15, $basket_element->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
+        $this->assertEquals(17.94, $basket_element->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
 
         $this->assertEquals(15, $basket_element->getTotal(), 'BasketElement return the correct price w/o VAT');
         $this->assertEquals(17.94, $basket_element->getTotal(true), 'BasketElement return the correct price w VAT');

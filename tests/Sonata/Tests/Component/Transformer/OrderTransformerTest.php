@@ -59,13 +59,19 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
             ->method('basketCalculatePrice')
             ->will($this->onConsecutiveCalls(14, 23));
 
-        
+
+        $entity_manager = $this->getMock('EntityManager', array('getRepository'));
+
+        $entity_manager->expects($this->any())
+            ->method('getRepository')
+            ->will($this->returnValue($repository));
+
         $product_pool = new  \Sonata\Component\Product\Pool;
         $product_pool->addProduct(array(
             'id'            => 'test',
             'class'         => 'Sonata\\Tests\\Component\\Basket\\Product',
-            'repository'    => $repository
         ));
+        $product_pool->setEntityManager($entity_manager);
 
         // Mock the order elements
         $elements = array();
