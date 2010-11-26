@@ -39,7 +39,8 @@
             field="Children"
             target-entity="Application\ProductBundle\Entity\Category"
             mapped-by="Parent"
-            orphan-removal="false">
+            orphan-removal="false"
+            fetch="LAZY">
 
             <cascade>
                 <cascade-persist/>

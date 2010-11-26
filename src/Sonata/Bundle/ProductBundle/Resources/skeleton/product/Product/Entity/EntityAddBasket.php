@@ -11,8 +11,7 @@
 
 namespace Application\ProductBundle\Product\{{ product }};
 
-
-use Sonata\Bundle\ProductBundle\Product\AddBasket;
+use Sonata\Component\Product\AddBasket;
 
 /**
  * This class represents the data being used in the add form

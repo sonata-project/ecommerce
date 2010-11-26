@@ -138,7 +138,6 @@ class BasketController extends Controller
         ));
     }
 
-
     public function resetAction()
     {
         $this->get('sonata.basket')->reset();
@@ -146,6 +145,14 @@ class BasketController extends Controller
         return $this->redirect($this->generateUrl('sonata_basket_index'));
     }
 
+    public function headerPreviewAction()
+    {
+
+        return $this->render('BasketBundle:Basket:header_preview.twig', array(
+             'basket' => $this->get('sonata.basket')
+        ));
+    }
+    
     public function validationStepAction()
     {
 

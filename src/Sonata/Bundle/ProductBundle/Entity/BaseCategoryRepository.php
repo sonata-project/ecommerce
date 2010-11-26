@@ -13,4 +13,49 @@ namespace Sonata\Bundle\ProductBundle\Entity;
 class BaseCategoryRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    protected $categories = null;
+
+    public function getRootCategory()
+    {
+        $this->loadCategories();
+
+        return $this->categories[0];
+    }
+
+    public function loadCategories()
+    {
+
+        if($this->categories !== null)
+        {
+            return;
+        }
+
+        $class = $this->getEntityName();
+
+
+        $this->categories = $this
+            ->getEntityManager()
+            ->createQuery('SELECT c FROM ProductBundle:Category c INDEX BY c.id')
+            ->execute();
+
+        $root = new $class;
+        
+        foreach( $this->categories as $category) {
+
+            $parent = $category->getParent();
+
+            $category->disableChildrenLazyLoading();
+                
+            if(!$parent) {
+                $root->addChildren($category);
+
+                continue;
+            }
+
+            $parent->addChildren($category);
+        }
+
+        $this->categories[0] = $root;
+
+    }
 }

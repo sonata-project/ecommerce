@@ -233,6 +233,14 @@ abstract class BaseCategory
         }
     }
 
+    public function disableChildrenLazyLoading()
+    {
+        if(is_object($this->Children))
+        {
+            $this->Children->setInitialized(true);
+        }
+    }
+
     /**
      * Get Children
      *
@@ -241,6 +249,12 @@ abstract class BaseCategory
     public function getChildren()
     {
         return $this->Children;
+    }
+
+    public function hasChildren()
+    {
+        
+        return count($this->Children) > 0;
     }
 
     /**

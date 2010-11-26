@@ -129,4 +129,19 @@ class CategoryController extends Controller
             'pager' => $pager
         ));
     }
+
+
+    public function listSideMenuCategoriesAction($category = null, $depth = 2, $deep = 0)
+    {
+        $em             = $this->get('doctrine.orm.default_entity_manager');
+        $repository     = $em->getRepository('ProductBundle:Category');
+
+        $category = $category ?: $repository->getRootCategory();
+
+        return $this->render('ProductBundle:Category:side_menu_category.twig', array(
+          'root_category' => $category,
+          'depth'         => $depth,
+          'deep'          => $deep + 1
+        ));
+    }
 }
