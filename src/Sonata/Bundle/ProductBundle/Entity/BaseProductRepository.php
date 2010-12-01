@@ -150,7 +150,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     /////////////////////////////////////////////////////
     // BASKET RELATED FUNCTIONS
 
-        /**
+    /**
      * This function return the form used in the product view page
      *
      * @param  $product
@@ -172,7 +172,84 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
         return new $class('basket', $product_basket, $validator, $options);
     }
-    
+
+
+    /**
+     * return an array of errors if any, you can also manipulate the basket_element if require
+     * please not you always work with a clone version of the basket_element.
+     *
+     * If the basket is valid it will then replace the one in session
+     *
+     * @param  $basket_element
+     * @return array
+     */
+    public function validateFormBasketElement($basket_element)
+    {
+
+        // initialize the errors array
+        $errors = array(
+            'global' => false,    // global error, ie the basket element is not valid anymore
+            'fields' => array(),  // error per field
+        );
+
+        // the item is flagged as deleted, no need to validate the item
+        if($basket_element->getDelete()) {
+
+            return $errors;
+        }
+
+        // refresh the product from the database
+        $product = $basket_element->getProduct();
+
+        // check if the product is still enabled
+        if(!$product) {
+            $errors['global'] = array(
+                'The product is not available anymore',
+                array(),
+                null
+            );
+
+            return $errors;
+        }
+
+        // check if the product is still enabled
+        if(!$basket_element->getProduct()->isEnabled()) {
+            $errors['global'] = array(
+                'The product is not enabled anymore',
+                array(),
+                null
+            );
+
+            return $errors;
+        }
+
+        // check if the quantity is numeric
+        if(!is_numeric($basket_element->getQuantity())) {
+            $errors['fields']['quantity'] = array(
+                'The product quantity is not a numeric value',
+                array('{{ quantity }}' => $basket_element->getQuantity()),
+                $basket_element->getQuantity() // todo : not sure about the third element
+            );
+
+            return $errors;
+        }
+
+        // check if the product is still available
+        if($this->getStockAvailable($basket_element->getProduct()) < $basket_element->getQuantity()) {
+            $errors['fields']['quantity'] = array(
+                'The product quantity ({{ quantity }}) is not valid',
+                array('{{ quantity }}' => $basket_element->getQuantity()),
+                $basket_element->getQuantity() // todo : not sure about the third element
+            );
+        }
+
+        // add here your own validation check
+
+
+
+        return $errors;
+    }
+
     /**
      * return true if the basket element is still valid
      *
@@ -191,7 +268,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         $class = $this->getBasketElementClass();
         
         $basket_element = new $class;
-        $basket_element->setProduct($product);
+        $basket_element->setProduct($product, $this);
         $basket_element->setQuantity($values->getQuantity());
 
         $basket_element_options = $product->getOptions();
@@ -304,5 +381,14 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $product->getStock();
     }
-        
+
+    /**
+     * make the method public ...
+     *
+     * @return
+     */
+    public function getClassMetadata()
+    {
+        return parent::getClassMetadata();
+    }
 }

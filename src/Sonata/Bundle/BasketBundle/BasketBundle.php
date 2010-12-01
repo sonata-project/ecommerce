@@ -34,6 +34,7 @@ class BasketBundle extends Bundle implements EventSubscriber {
         $metadata = $eventArgs->getClassMetadata();
 
         if($metadata->name == 'Sonata\Bundle\BasketBundle\Entity\BaseAddress') {
+//            var_dump('hetre'); die();
             $metadata->mapManyToOne(array(
                 'fieldName'     => 'user',
                 'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),

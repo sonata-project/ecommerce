@@ -19,12 +19,34 @@
         <field name="updated_at"    column="updated_at"     type="datetime" />
         <field name="created_at"    column="created_at"     type="datetime" />
 
+        <one-to-one
+            field="image"
+            target-entity="Application\MediaBundle\Entity\Media"
+             >
+
+            <cascade-type>
+                <cascade-all />
+            </cascade-type>
+            
+            <join-columns>
+                <join-column
+                    name="image_id"
+                    on-delete="SET NULL"
+                />
+            </join-columns>
+
+        </one-to-one>
+
         <one-to-many
             field="package"
             target-entity="Application\ProductBundle\Entity\Package"
             mapped-by="Product"
-            orphan-removal="false">
+            >
 
+            <cascade-type>
+                <cascade-all />
+            </cascade-type>
+            
             <join-columns>
                 <join-column
                     name="id"
@@ -37,9 +59,13 @@
         <one-to-many
             field="delivery"
             target-entity="Application\ProductBundle\Entity\Delivery"
-            mapped-by="Delivery"
-            orphan-removal="false">
+            mapped-by="product"
+            fetch="LAZY">
 
+            <cascade-type>
+                <cascade-all />
+            </cascade-type>
+            
             <join-columns>
                 <join-column
                     name="id"
@@ -53,8 +79,11 @@
             field="ProductCategories"
             target-entity="Application\ProductBundle\Entity\ProductCategory"
             mapped-by="Product"
-            inverted-by="Product"
-            orphan-removal="false">
+            inverted-by="Product">
+
+            <cascade-type>
+                <cascade-all />
+            </cascade-type>
 
             <join-columns>
                 <join-column

@@ -20,20 +20,16 @@
         <default key="_controller">BasketBundle:Basket:reset</default>
     </route>
 
-    <route id="sonata_basket_validation" pattern="/step/validation">
-        <default key="_controller">BasketBundle:Basket:validationStep</default>
-    </route>
-
     <route id="sonata_basket_authentification" pattern="/step/authentification">
         <default key="_controller">BasketBundle:Basket:authentificationStep</default>
     </route>
 
-    <route id="sonata_basket_billing" pattern="/step/billing">
-        <default key="_controller">BasketBundle:Basket:billingStep</default>
+    <route id="sonata_basket_delivery" pattern="/step/delivery">
+        <default key="_controller">BasketBundle:Basket:deliveryStep</default>
     </route>
 
-    <route id="sonata_basket_shipping" pattern="/step/shipping">
-        <default key="_controller">BasketBundle:Basket:shippingStep</default>
+    <route id="sonata_basket_payment" pattern="/step/payment">
+        <default key="_controller">BasketBundle:Basket:paymentStep</default>
     </route>
 
     <route id="sonata_basket_final" pattern="/step/final-review">

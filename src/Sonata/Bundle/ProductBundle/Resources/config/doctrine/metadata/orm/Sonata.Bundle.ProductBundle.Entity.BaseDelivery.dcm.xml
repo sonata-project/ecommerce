@@ -2,15 +2,33 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\Bundle\ProductBundle\Entity\BaseDelivery" >
 
-        <field name="product_id"    type="integer"  column="product_id"/>
-        <field name="class_name"    type="string"   column="class_name"     length="255"/>
-        <field name="per_item"      type="boolean"  column="per_item"/>
-        <field name="country"       type="string"   column="country"        length="3"/>
-        <field name="zone"          type="string"   column="zone"           length="5"/>
+        <field name="code"          type="string"   column="code"     length="255"/>
+        <field name="per_item"      type="boolean"  column="per_item" nullable="true"/>
+        <field name="country_code"  type="string"   column="country_code"        length="3"/>
+        <field name="zone"          type="string"   column="zone"  nullable="true"         length="5"/>
         <field name="enabled"       type="boolean"  column="enabled"/>
 
         <field name="updated_at"    column="updated_at"     type="datetime" />
         <field name="created_at"    column="created_at"     type="datetime" />
-        
+
+        <many-to-one
+            field="product"
+            target-entity="Application\ProductBundle\Entity\Product"
+            mapped-by="delivery"
+            >
+
+            <cascade-type>
+                <cascade-all />
+            </cascade-type>
+
+            <join-columns>
+                <join-column
+                    name="product_id"
+                    referenced-column-name="id"
+                    on-delete="CASCADE"
+                />
+            </join-columns>
+        </many-to-one>
+
     </mapped-superclass>
 </doctrine-mapping>

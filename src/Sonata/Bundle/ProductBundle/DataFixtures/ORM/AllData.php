@@ -17,6 +17,9 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Application\ProductBundle\Entity\Category;
 use Application\ProductBundle\Entity\Bottle as Product;
 
+use Application\BasketBundle\Entity\Address;
+use Application\ProductBundle\Entity\Delivery;
+use Application\DoctrineUserBundle\Entity\User;
 use Application\ProductBundle\Entity\ProductCategory;
 
 class AllData implements FixtureInterface
@@ -24,8 +27,63 @@ class AllData implements FixtureInterface
     public function load($manager)
     {
 
+        $ratio = 1;
+
+        foreach(range(0, 200 * $ratio) as $id) {
+            $user = new User;
+            $user->setUsername('user'.$id);
+            $user->setEmail('user'.$id.'@fakedomain.com');
+            $user->setIsActive(true);
+            $user->setPassword('test');
+
+            foreach(range(0, 2 * $ratio) as $di) {
+                $address = new Address;
+                $address->setUser($user);
+                $address->setCurrent($di == 1);
+                $address->setType(Address::TYPE_BILLING);
+                $address->setFirstname(sprintf('John %d %d', $id, $di));
+                $address->setLastname(sprintf('Doe'));
+                $address->setAddress1(sprintf('%d sonata street', $id));
+                $address->setPostcode(12342);
+                $address->setCity('Symfony City');
+                $address->setCountryCode('FRA');
+                $address->setPhone('42');
+                $address->setCreatedAt(new \DateTime());
+                $address->setUpdatedAt(new \DateTime());
+
+                $manager->persist($address);
+            }
+
+            foreach(range(0, 2 * $ratio) as $di) {
+                $address = new Address;
+                $address->setUser($user);
+                $address->setCurrent($di == 1);
+                $address->setType(Address::TYPE_DELIVERY);
+                $address->setFirstname(sprintf('John %d %d', $id, $di));
+                $address->setLastname(sprintf('Doe'));
+                $address->setAddress1(sprintf('%d sonata street', $id));
+                $address->setPostcode(12342);
+                $address->setCity('Symfony City');
+                $address->setCountryCode('FRA');
+                $address->setPhone('42');
+                $address->setCreatedAt(new \DateTime());
+                $address->setUpdatedAt(new \DateTime());
+
+                $manager->persist($address);
+            }
+
+
+            $manager->persist($user);
+
+            if($id % 100 == 0) {
+                $manager->flush();
+            }
+        }
+
+        $manager->flush();
+
         $id = 1;
-        foreach(range(0, 15) as $level_1_id) {
+        foreach(range(0, 5 * $ratio) as $level_1_id) {
 
             $categories = array();
             $products = array();
@@ -44,7 +102,7 @@ class AllData implements FixtureInterface
             
             $manager->persist($category);
 
-            foreach(range(0, 25) as $product) {
+            foreach(range(0, 10 * $ratio) as $product) {
                 
                 $id++;
                 $product = new Product();
@@ -62,9 +120,37 @@ class AllData implements FixtureInterface
                 $products[] = $product;
                 
                 $manager->persist($product);
+
+                // add product delivery
+
+                $delivery = new Delivery;
+                $delivery->setCountryCode('FRA');
+                $delivery->setCode('free');
+                $delivery->setEnabled(true);
+                $delivery->setPerItem(2);
+                $delivery->setProduct($product);
+                $delivery->setCreatedAt(new \DateTime());
+                $delivery->setUpdatedAt(new \DateTime());
+
+                $manager->persist($delivery);
+                
+                $delivery = new Delivery;
+                $delivery->setCountryCode('GBR');
+                $delivery->setCode('free');
+                $delivery->setEnabled(true);
+                $delivery->setPerItem(2);
+                $delivery->setProduct($product);
+                $delivery->setCreatedAt(new \DateTime());
+                $delivery->setUpdatedAt(new \DateTime());
+
+                $manager->persist($delivery);
+
+                $manager->flush();
             }
 
-            foreach(range(0, 5) as $level_2_id) {
+            $manager->flush();
+
+            foreach(range(0, 2 * $ratio) as $level_2_id) {
                 $cat2 = new Category();
                 $cat2->setName($category->getName().' : '.$level_2_id);
                 $cat2->setSlug($category->getSlug().'-'.$level_2_id);
@@ -75,7 +161,7 @@ class AllData implements FixtureInterface
 
                 $categories[] = $cat2;
 
-                foreach(range(0, 4) as $level_3_id) {
+                foreach(range(0, 2 * $ratio) as $level_3_id) {
                     $id++;
                     $cat3 = new Category();
                     $cat3->setName($cat2->getName().' : '.$level_3_id);
@@ -96,32 +182,28 @@ class AllData implements FixtureInterface
 
                 $manager->persist($cat2);
 
-//                $manager->flush();
+
+            }
+            $manager->flush();
+
+            foreach($categories as $category) {
+                foreach($products as $product) {
+                    $product_category = new ProductCategory;
+                    $product_category->setProduct($product);
+                    $product_category->setCategory($category);
+
+                    $product_category->setEnabled(true);
+                    $product_category->setCreatedAt(new \DateTime());
+                    $product_category->setUpdatedAt(new \DateTime());
+
+                    $manager->persist($product_category);
+                }
             }
 
-
-//            $manager->flush();
+            $manager->flush();
         }
-
 
         $manager->flush();
 
-        foreach($categories as $category) {
-            foreach($products as $product) {
-                $product_category = new ProductCategory;
-                $product_category->setProduct($product);
-                $product_category->setCategory($category);
-
-                $product_category->setEnabled(true);
-                $product_category->setCreatedAt(new \DateTime());
-                $product_category->setUpdatedAt(new \DateTime());
-
-                $manager->persist($product_category);
-            }
-        }
-        
-        $manager->flush();
-
-        
     }
 }

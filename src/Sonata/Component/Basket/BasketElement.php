@@ -13,7 +13,7 @@ namespace Sonata\Component\Basket;
 
 use Sonata\Component\Product\ProductInterface;
 
-class BasketElement
+class BasketElement implements \Serializable
 {
 
     protected $product_id = null;
@@ -28,9 +28,11 @@ class BasketElement
 
     protected $name = null;
 
-    protected $errors = array();
-
     protected $pos = null;
+
+    protected $product_repository = null;
+
+    protected $product_code = null;
 
     /*
      * use by the validation framework
@@ -70,42 +72,23 @@ class BasketElement
     }
 
     /**
-     * add an error to the basket element
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function addError($name, $value)
-    {
-        $this->errors[$name] = $value;
-    }
-
-    /**
-     * return the errors
-     *
-     * @return array
-     */
-    public function getErrors()
-    {
-
-        return $this->errors;
-    }
-
-    /**
      * Define the related product
      *
      * @param trShopProduct $product
      * @return BasketElement
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductInterface $product, $product_repository)
     {
 
-        $this->product     = $product;
-        $this->product_id  = $product->getId();
-        $this->name        = $product->getName();
-        $this->price       = $product->getPrice();
-        $this->options     = $this->product->getOptions();
+        $this->product      = $product;
+        $this->product_id   = $product->getId();
+        $this->product_code = $product_repository->getClassMetadata()->discriminatorValue;
+        $this->name         = $product->getName();
+        $this->price        = $product->getPrice();
+        $this->options      = $product->getOptions();
 
+        $this->product_repository = $product_repository;
+        
         return $this;
     }
 
@@ -117,6 +100,11 @@ class BasketElement
     public function getProduct()
     {
 
+        if($this->product == null && $this->getProductRepository())
+        {
+            $this->product      = $this->getProductRepository()->findOneById($this->product_id);
+        }
+        
         return $this->product;
     }
 
@@ -312,5 +300,53 @@ class BasketElement
     public function getDelete()
     {
         return $this->delete;
+    }
+
+    public function serialize()
+    {
+
+        return serialize(array(
+            'product_id' => $this->product_id,
+            'pos'        => $this->pos,
+            'price'      => $this->price,
+            'quantity'   => $this->quantity,
+            'options'    => $this->options,
+            'name'       => $this->name,
+            'product_code' => $this->product_code,
+        ));
+    }
+
+    public function unserialize($data)
+    {
+
+        $data = unserialize($data);
+
+        $this->product_id   = $data['product_id'];
+        $this->pos          = $data['pos'];
+        $this->price        = $data['price'];
+        $this->quantity     = $data['quantity'];
+        $this->options      = $data['options'];
+        $this->name         = $data['name'];
+        $this->product_code = $data['product_code'];
+    }
+
+    public function setProductRepository($product_repository)
+    {
+        $this->product_repository = $product_repository;
+    }
+
+    public function getProductRepository()
+    {
+        return $this->product_repository;
+    }
+
+    public function setProductCode($product_code)
+    {
+        $this->product_code = $product_code;
+    }
+
+    public function getProductCode()
+    {
+        return $this->product_code;
     }
 }

@@ -78,47 +78,9 @@ class {{ product }}Repository extends \Sonata\Bundle\ProductBundle\Entity\BasePr
     public function validateFormBasketElement($basket_element)
     {
 
-        // refresh the product from the database
-        $basket_element->setProduct($this->reloadProduct($basket_element->getProduct()));
+        $errors = parent::validateFormBasketElement($basket_element);
 
-        // initialize the errors array
-        $errors = array(
-            'global' => false,    // global error, ie the basket element is not valid anymore
-            'fields' => array(),  // error per field
-        );
-
-        // check if the product is still enabled
-        if(!$basket_element->getProduct()->isEnabled()) {
-            $errors['global'] = array(
-                'The product is not available anymore',
-                array(),
-                null
-            );
-        }
-
-        // check if the quantity is numeric
-        if(!is_numeric($basket_element->getQuantity())) {
-            $errors['fields']['quantity'] = array(
-                'The product quantity is not a numeric value',
-                array('quantity' => $basket_element->getQuantity()),
-                $basket_element->getQuantity() // todo : not sure about the third element
-            );
-
-            return $errors;
-        }
-
-        // check if the product is still available
-        if($this->getStockAvailable($basket_element->getProduct()) < $basket_element->getQuantity()) {
-            $errors['fields']['quantity'] = array(
-                'The product quantity ({{ quantity }}) is not valid',
-                array('quantity' => $basket_element->getQuantity()),
-                $basket_element->getQuantity() // todo : not sure about the third element
-            );
-        }
-
-        // add here your own validation check
-
-
+        // add here your own validation
 
         return $errors;
     }

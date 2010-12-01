@@ -1,0 +1,42 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+
+<h1>{% trans 'title_basket' from 'BasketBundle' %}</h1>
+
+
+<table>
+    {#
+    <thead>
+        <tr>
+            <td>{% trans 'header_basket_information' from 'BasketBundle'%}</td>
+            <td>{% trans 'header_basket_price' from 'BasketBundle'%}</td>
+            <td>{% trans 'header_basket_quantity' from 'BasketBundle'%}</td>
+            <td>{% trans 'header_basket_total' from 'BasketBundle'%}</td>
+        </tr>
+    </thead>
+    #}
+    <tbody>
+        {# call each product controller to render its own view #}
+        {% for basket_element in basket.getElements %}
+            {% render 'ProductBundle:Product:renderFinalReviewBasketElement' with [
+                'basket_element' : basket_element
+            ] %}
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"></td>
+            <td><b>{{ basket.getTotal(true) }}</b></td>
+        </tr>
+    </tfoot>
+</table>
+

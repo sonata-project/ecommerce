@@ -9,17 +9,14 @@ file that was distributed with this source code.
 
 #}
 
-
-{#
-    Default product template file, you can
-      => customize the global template : ProductBundle:Product:view.twig
-      => rewrite your own template
-#}
-
 <tr>
-    <td>{% block product_description %}{% endblock %}</td>
-    <td>{% block product_unit_price %}{% endblock %}</td>
-    <td>{% block product_quantity %}{% endblock %}</td>
-    <td>{% block product_total %}{% endblock %}</td>
+    {% if field_group.hasErrors %} {# global error the product is not active anymore #}
+        <td colspan="4">{% block product_error %}{% trans 'message_product_not_available' from 'ProductBundle' %}{% endblock %}</td>
+    {% else %}
+        <td>{% block product_description %}{% endblock %}</td>
+        <td>{% block product_unit_price %}{% endblock %}</td>
+        <td>{% block product_quantity %}{% endblock %}</td>
+        <td>{% block product_total %}{% endblock %}</td>
+    {% endif %}
     <td>{% block product_delete %}{% endblock %}</td>
 </tr>

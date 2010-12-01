@@ -6,8 +6,45 @@
 
     <class name="Sonata\Component\Basket\Basket">
         <property name="elements">
-           <constraint name="Sonata\Component\Form\BasketElementCollection" />
+           <constraint name="Sonata\Component\Form\BasketElementCollection" >
+               <option name="groups" >
+                    <value>basket</value>
+               </option>
+           </constraint>
         </property>
+
+        <property name="delivery_method">
+           <constraint name="NotNull" >
+               <option name="groups" >
+                    <value>delivery</value>
+               </option>
+           </constraint>
+        </property>
+
+        <property name="delivery_address">
+           <constraint name="NotNull" >
+               <option name="groups" >
+                    <value>delivery</value>
+               </option>
+           </constraint>
+        </property>
+
+        <property name="payment_method">
+           <constraint name="NotNull" >
+               <option name="groups" >
+                    <value>billing</value>
+               </option>
+           </constraint>
+        </property>
+
+        <property name="payment_address">
+           <constraint name="NotNull" >
+               <option name="groups" >
+                    <value>billing</value>
+               </option>
+           </constraint>
+        </property>
+
     </class>
 
 </constraint-mapping>

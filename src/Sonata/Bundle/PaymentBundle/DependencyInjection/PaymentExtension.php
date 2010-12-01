@@ -47,8 +47,9 @@ class PaymentExtension extends Extension {
 
             $definition = new Definition($method['class']);
             $definition->addMethodCall('setName', array($method['name']));
+            $definition->addMethodCall('setCode', array($method['id']));
+            $definition->addMethodCall('setEnabled', array($method['enabled']));
             $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
-            $definition->addMethodCall('setLogger', array(new Reference('logger')));
             $definition->addMethodCall('setTranslator', array(new Reference('translator')));
 
             foreach($method['transformers'] as $name => $service_id) {
@@ -67,6 +68,13 @@ class PaymentExtension extends Extension {
         }
 
         $container->setDefinition('sonata.payment.pool', $pool_definition);
+
+        $definition = new Definition($config['selector']['class']);
+        $definition->addMethodCall('setLogger', array(new Reference('logger')));
+        $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
+        $definition->addMethodCall('setPaymentPool', array(new Reference('sonata.payment.pool')));
+
+        $container->setDefinition('sonata.payment.selector', $definition);
     }
 
     public function transformerLoad($config, ContainerBuilder $container) {

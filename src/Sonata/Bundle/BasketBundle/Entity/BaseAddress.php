@@ -7,10 +7,18 @@ namespace Sonata\Bundle\BasketBundle\Entity;
  */
 abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
 {
-    /**
-     * @var integer $user_id
-     */
-    protected $user_id;
+    const TYPE_BILLING  = 1;
+    const TYPE_DELIVERY = 2;
+    const TYPE_CONTACT  = 3;
+
+    public static function getTypesList()
+    {
+        return array(
+            self::TYPE_BILLING  => 'type_billing',
+            self::TYPE_DELIVERY => 'type_delivery',
+            self::TYPE_CONTACT  => 'type_contact',
+        );
+    }
 
     /**
      * @var boolean $current
@@ -88,25 +96,6 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     protected $user;
 
-    /**
-     * Set user_id
-     *
-     * @param integer $userId
-     */
-    public function setUserId($userId)
-    {
-        $this->user_id = $userId;
-    }
-
-    /**
-     * Get user_id
-     *
-     * @return integer $userId
-     */
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
 
     /**
      * Set current
@@ -398,15 +387,27 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
         $this->address1 = $address1;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
 
         $this->name = $name;
     }
 
-    public function getName() {
+    public function getName()
+    {
 
         return $this->name;
     }
 
+    public function getFullAddress($sep = "\n")
+    {
+
+        return sprintf("%s, %s, %s, %s",
+            $this->getName(),
+            $this->getAddress1(),
+            $this->getPostcode(),
+            $this->getCity()
+        );
+    }
 
 }

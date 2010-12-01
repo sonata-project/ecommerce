@@ -65,6 +65,8 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     protected $created_at;
 
+    protected $image;
+
     /**
      * @var Sonata\Bundle\ProductBundle\Entity\BasePackage
      */
@@ -75,7 +77,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     protected $delivery;
 
-    protected $parent_id;
+    protected $parent;
 
     protected $options = array();
 
@@ -284,7 +286,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      *
      * @param Sonata\Bundle\ProductBundle\Entity\BasePackage $package
      */
-    public function addPackage(\Sonata\Bundle\ProductBundle\Entity\BasePackage $package)
+    public function addPackage($package)
     {
         $this->package[] = $package;
     }
@@ -304,7 +306,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      *
      * @param Sonata\Bundle\ProductBundle\Entity\BaseDelivery $delivery
      */
-    public function addDelivery(\Sonata\Bundle\ProductBundle\Entity\BaseDelivery $delivery)
+    public function addDelivery($delivery)
     {
         $this->delivery[] = $delivery;
     }
@@ -355,17 +357,9 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
         $this->$options = $options;
     }
 
-    public function getParentId() {
-        return $this->parent_id;
-    }
-
-    public function setParentId($parent_id) {
-        $this->parent_id = $parent_id;
-    }
-
     public function isVariation() {
 
-        return $this->parent_id > 0;
+        return $this->getParent() !== null;
     }
 
     /**

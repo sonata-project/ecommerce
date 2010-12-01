@@ -36,6 +36,7 @@ class CategoryController extends Controller
             ->createQueryBuilder('c')
             ->where('c.Parent IS NULL');
 
+
         $pager = new Pager($class);
         $pager->setQueryBuilder($query_buidler);
         $pager->setPage($this->get('request')->get('page', 1));
@@ -116,6 +117,7 @@ class CategoryController extends Controller
         $query_buidler = $repository
             ->createQueryBuilder('p')
             ->leftJoin('p.ProductCategories', 'pc')
+            ->leftJoin('p.image', 'i')
             ->where('pc.Category = :category_id');
 
         $pager = new Pager($class);
@@ -131,7 +133,7 @@ class CategoryController extends Controller
     }
 
 
-    public function listSideMenuCategoriesAction($category = null, $depth = 2, $deep = 0)
+    public function listSideMenuCategoriesAction($category = null, $depth = 1, $deep = 0)
     {
         $em             = $this->get('doctrine.orm.default_entity_manager');
         $repository     = $em->getRepository('ProductBundle:Category');

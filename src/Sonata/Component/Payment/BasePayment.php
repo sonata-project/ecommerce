@@ -18,12 +18,21 @@ abstract class BasePayment implements PaymentInterface
 {
 
     protected $name;
+
     protected $code;
+
     protected $options;
+
     protected $router;
+
     protected $transformers;
+
     protected $logger;
+
     protected $is_debug;
+
+    protected $enabled;
+    
     protected $translator;
 
     /**
@@ -187,5 +196,25 @@ abstract class BasePayment implements PaymentInterface
         }
 
         return $response;
+    }
+
+    public function setTranslator($translator)
+    {
+        $this->translator = $translator;
+    }
+
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
+
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 }

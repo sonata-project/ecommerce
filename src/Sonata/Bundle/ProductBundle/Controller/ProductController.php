@@ -75,6 +75,27 @@ class ProductController extends Controller
 
         return $response;
     }
+
+    public function renderFinalReviewBasketElementAction($basket_element)
+    {
+        $code   = $this->get('sonata.product.pool')->getProductCode($basket_element->getProduct());
+        $action = sprintf('ProductBundle:%s:renderFinalReviewBasketElement', ucfirst($code)) ;
+
+        $response = $this->forward($action, array(
+            'basket_element'  => $basket_element,
+        ));
+
+        if($this->get('kernel')->isDebug()) {
+            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
+                $code,
+                $basket_element->getProductId(),
+                $action,
+                $response->getContent()
+            ));
+        }
+
+        return $response;
+    }
     
     public function viewVariationsAction($product_id, $slug) {
 

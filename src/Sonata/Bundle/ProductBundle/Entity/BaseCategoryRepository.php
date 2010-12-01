@@ -25,8 +25,8 @@ class BaseCategoryRepository extends \Doctrine\ORM\EntityRepository
     public function loadCategories()
     {
 
-        if($this->categories !== null)
-        {
+        if($this->categories !== null) {
+            
             return;
         }
 
@@ -45,7 +45,7 @@ class BaseCategoryRepository extends \Doctrine\ORM\EntityRepository
             $parent = $category->getParent();
 
             $category->disableChildrenLazyLoading();
-                
+            
             if(!$parent) {
                 $root->addChildren($category);
 
@@ -56,6 +56,5 @@ class BaseCategoryRepository extends \Doctrine\ORM\EntityRepository
         }
 
         $this->categories[0] = $root;
-
     }
 }

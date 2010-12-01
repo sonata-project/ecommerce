@@ -36,9 +36,9 @@ class DeliveryExtension extends Extension {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('delivery.xml');
 
-        $pool_definition = new Definition('Sonata\Component\Delivery\Pool');
+        $pool_definition = new Definition($config['pool']['class']);
         
-        foreach($config['methods'] as $method)
+        foreach($config['pool']['methods'] as $method)
         {
             if(!$method['enabled'])
             {
@@ -47,6 +47,8 @@ class DeliveryExtension extends Extension {
 
             $definition = new Definition($method['class']);
             $definition->addMethodCall('setName', array($method['name']));
+            $definition->addMethodCall('setCode', array($method['id']));
+            $definition->addMethodCall('setEnabled', array($method['enabled']));
             $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
 
             $id         = sprintf('sonata.delivery.method.%s', $method['name']);
@@ -59,6 +61,13 @@ class DeliveryExtension extends Extension {
         }
 
         $container->setDefinition('sonata.delivery.pool',$pool_definition);
+
+        $definition = new Definition($config['selector']['class']);
+        $definition->addMethodCall('setLogger', array(new Reference('logger')));
+        $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
+        $definition->addMethodCall('setDeliveryPool', array(new Reference('sonata.delivery.pool')));
+
+        $container->setDefinition('sonata.delivery.selector', $definition);
     }
 
     /**

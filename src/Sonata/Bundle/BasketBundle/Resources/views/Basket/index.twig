@@ -9,6 +9,7 @@ file that was distributed with this source code.
 
 #}
 
+
 <h1>{% trans 'title_basket' from 'BasketBundle' %}</h1>
 
 {% if basket.hasElements %}
@@ -18,18 +19,39 @@ file that was distributed with this source code.
         {{ form|render_hidden }}
 
         <table>
-
-            {# call each product controller to render its own view #}
-            {% for basket_element in basket.getElements %}
-                {% render 'ProductBundle:Product:renderFormBasketElement' with [
-                    'field_group': form.elements.get(basket_element.pos),
-                    'basket_element' : basket_element
-                ] %}
-            {% endfor %}
-
+            {#
+            <thead>
+                <tr>
+                    <td>{% trans 'header_basket_information' from 'BasketBundle'%}</td>
+                    <td>{% trans 'header_basket_price' from 'BasketBundle'%}</td>
+                    <td>{% trans 'header_basket_quantity' from 'BasketBundle'%}</td>
+                    <td>{% trans 'header_basket_total' from 'BasketBundle'%}</td>
+                    <td>{% trans 'header_basket_delete' from 'BasketBundle'%}</td>
+                </tr>
+            </thead>
+            #}
+            <tbody>
+                {# call each product controller to render its own view #}
+                {% for basket_element in basket.getElements %}
+                    {% render 'ProductBundle:Product:renderFormBasketElement' with [
+                        'field_group': form.elements.get(basket_element.pos),
+                        'basket_element' : basket_element
+                    ] %}
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td><b>{{ basket.getTotal(true) }}</b></td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
 
         <input type="submit" value="{% trans 'btn_update_basket' from 'BasketBundle' %}" />
+
+        <a href="{% url 'sonata_basket_authentification' %}">{% trans 'link_next_step' from 'BasketBundle' %}</a>
+
     </form>
 
 {% else %}
@@ -38,10 +60,15 @@ file that was distributed with this source code.
 
 {% endif %}
 
+{% if form.isValid %}
 
+{% endif %}
+
+{#
 <h2>Debug</h2>
 <ul>
     {% for basket_element in basket.getElements %}
         <li><a href="{% url 'sonata_product_view' with ['product_id': basket_element.product.id, 'slug': basket_element.product.slug] %}">{{ basket_element.name }}</a> - qty : {{ basket_element.quantity }} - price : {{ basket_element.getPrice(true) }} TTC - {{ basket_element.price  }} HT</li>
     {% endfor %}
 </ul>
+#}

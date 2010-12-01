@@ -65,9 +65,14 @@ Installation
 * edit your config.yml and add the following lines
 
         sonata_delivery.config:
-            methods:
-                - { id: free, name: Free, enabled: true, class: Sonata\Component\Delivery\Free }
+            pool: # all available delivery method
+                class: Sonata\Component\Delivery\Pool
+                methods:
+                    - { id: free, name: Free, enabled: true, class: Sonata\Component\Delivery\FreeDelivery }
 
+            selector:
+                class: Sonata\Component\Delivery\Selector
+            
         sonata_payment.config:
             methods:
                 - { id: free, name: Free, enabled: true, class: Sonata\Component\Payment\Free }
@@ -84,11 +89,18 @@ Installation
                 model:
                     user: Application\DoctrineUserBundle\Entity\User # you must define your own user class
 
-        sonata_payment.transformer:
-            types:
-                - { id: order, name: Order, enabled: true, class: Sonata\Component\Transformer\Order }
-                - { id: basket, name: Basket, enabled: true, class: Sonata\Component\Transformer\Basket }
-
+        sonata_payment.config:
+            methods:
+                free:
+                    name: Free
+                    enabled: true
+                    class: Sonata\Component\Payment\Free
+                    transformers:
+                        basket: sonata.transformer.basket
+                        order: sonata.transformer.order
+            selector:
+                class: Sonata\Component\Payment\Selector
+        
 * add the current lines in your routing.yml files
 
         # sonata front controller

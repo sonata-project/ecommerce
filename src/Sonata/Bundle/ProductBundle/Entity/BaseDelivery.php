@@ -16,14 +16,9 @@ namespace Sonata\Bundle\ProductBundle\Entity;
 abstract class BaseDelivery
 {
     /**
-     * @var integer $product_id
+     * @var string $code
      */
-    protected $product_id;
-
-    /**
-     * @var string $class_name
-     */
-    protected $class_name;
+    protected $code;
 
     /**
      * @var boolean $per_item
@@ -33,7 +28,7 @@ abstract class BaseDelivery
     /**
      * @var string $country
      */
-    protected $country;
+    protected $country_code;
 
     /**
      * @var string $zone
@@ -55,14 +50,18 @@ abstract class BaseDelivery
      */
     protected $created_at;
 
+    protected $product;
+    
     /**
      * Set product_id
      *
      * @param integer $productId
      */
-    public function setProductId($productId)
+    public function setProduct($product)
     {
-        $this->product_id = $productId;
+        $this->product = $product;
+
+        $product->addDelivery($this);
     }
 
     /**
@@ -70,9 +69,9 @@ abstract class BaseDelivery
      *
      * @return integer $productId
      */
-    public function getProductId()
+    public function getProduct()
     {
-        return $this->product_id;
+        return $this->product;
     }
 
     /**
@@ -80,9 +79,9 @@ abstract class BaseDelivery
      *
      * @param string $className
      */
-    public function setClassName($className)
+    public function setCode($code)
     {
-        $this->class_name = $className;
+        $this->code = $code;
     }
 
     /**
@@ -90,9 +89,9 @@ abstract class BaseDelivery
      *
      * @return string $className
      */
-    public function getClassName()
+    public function getCode()
     {
-        return $this->class_name;
+        return $this->code;
     }
 
     /**
@@ -120,9 +119,9 @@ abstract class BaseDelivery
      *
      * @param string $country
      */
-    public function setCountry($country)
+    public function setCountryCode($country_code)
     {
-        $this->country = $country;
+        $this->country_code = $country_code;
     }
 
     /**
@@ -130,9 +129,9 @@ abstract class BaseDelivery
      *
      * @return string $country
      */
-    public function getCountry()
+    public function getCountryCode()
     {
-        return $this->country;
+        return $this->country_code;
     }
 
     /**

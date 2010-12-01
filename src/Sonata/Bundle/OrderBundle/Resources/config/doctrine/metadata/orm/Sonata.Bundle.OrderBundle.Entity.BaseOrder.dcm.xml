@@ -41,9 +41,9 @@
         <field name="shipping_mobile"       type="string"   column="shipping_mobile"    length="255"/>
 
         <one-to-many
-            field="OrderElements"
+            field="order_elements"
             target-entity="Application\OrderBundle\Entity\OrderElement"
-            mapped-by="order_elements"
+            mapped-by="OrderElements"
             orphan-removal="">
 
             <join-columns>
