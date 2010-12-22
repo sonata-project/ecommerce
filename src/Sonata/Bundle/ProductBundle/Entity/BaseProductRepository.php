@@ -13,13 +13,17 @@ namespace Sonata\Bundle\ProductBundle\Entity;
 use Sonata\Component\Product\ProductInterface as Product;
 use Sonata\Component\Basket\BasketElement;
 
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Delivery\DeliveryInterface;
+
+
 class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    protected
-        $options            = array(),
-        $variation_fields   = array()
-     ;
+    protected $options            = array();
+
+    protected $variation_fields   = array();
+
 
     public function setOptions($options)
     {
@@ -38,10 +42,66 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function createProductInstance()
+    public function getProductType()
     {
-
+        return $this->getClassMetadata()->discriminatorValue;
     }
+
+    ////////////////////////////////////////////////
+    //   ORDER RELATED FUNCTIONS
+
+    public function createOrderElement($basket_element)
+    {
+        $product = $basket_element->getProduct();
+
+        $order_element = new \Application\OrderBundle\Entity\OrderElement;
+        $order_element->setQuantity($basket_element->getQuantity());
+        $order_element->setPrice($basket_element->getTotal(false));
+        $order_element->setVat($basket_element->getVat());
+        $order_element->setDesignation($basket_element->getName());
+        $order_element->setDescription($product->getDescription());
+        $order_element->setSerialize(null);
+        $order_element->setProductId($product->getId());
+        $order_element->setProductType($this->getProductType());
+        $order_element->setStatus(OrderInterface::STATUS_PENDING);
+        $order_element->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
+        $order_element->setCreatedAt(new \DateTime);
+
+        // todo : create a serialized version of the product element
+        $order_element->setSerialize(array('todo'));
+
+        // we save product information
+//        foreach($product->toArray(false) as $name => $value)
+//        {
+//          if(is_null($value) || strlen(trim($value)) == 0)
+//          {
+//            continue;
+//          }
+//
+//          $order_element_option = new OrderElementOption;
+//          $order_element_option->setName('product_'.$name);
+//          $order_element_option->setValue($value);
+//
+//          $order_element->addOption($order_element_option);
+//        }
+
+//        $order_element_option = new OrderElementOption;
+//        $order_element_option->setName('product_is_recurrent');
+//        $order_element_option->setValue($product->isRecurrentPayment() ? '1' : '0');
+
+//        // we save basket_element options
+//        foreach($basket_element->getOptions() as $name => $value)
+//        {
+//          $order_element_option = new OrderElementOption;
+//          $order_element_option->setName($name);
+//          $order_element_option->setValue($value);
+//
+//          $order_element->addOption($order_element_option);
+//        }
+
+        return $order_element;
+    }
+
 
     ////////////////////////////////////////////////
     //   VARIATION RELATED FUNCTIONS
@@ -50,7 +110,8 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
      * @param  $name
      * @return bool return true if the field $name is a variation
      */
-    public function isVariateBy($name) {
+    public function isVariateBy($name)
+    {
 
         return in_array($name, $this->variation_fields);
     }
@@ -59,31 +120,35 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     /**
      * @return bool return true if the product haas some variation fields
      */
-    public function hasVariationFields() {
+    public function hasVariationFields()
+    {
 
         return count($this->getVariationFields()) > 0;
     }
 
-    public function setVariationFields($fields) {
+    public function setVariationFields($fields)
+    {
 
         $this->variation_fields = $fields;
     }
 
-    public function getVariationFields() {
+    public function getVariationFields()
+    {
 
         return $this->variation_fields;
     }
 
-    public function createVariation($product) {
+    public function createVariation($product)
+    {
 
         if($product->isVariation()) {
 
-            throw RuntimeException('Cannot create a variation from a variation product');
+            throw \RuntimeException('Cannot create a variation from a variation product');
         }
 
         $variation = clone $product;
         $variation->setParent($product);
-        $variation->setId(null);
+        $variation->id = null;
         $variation->setEnabled(false);
         $variation->setName(sprintf('%s (duplicated)', $product->getName()));
 
@@ -271,6 +336,17 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         $basket_element->setProduct($product, $this);
         $basket_element->setQuantity($values->getQuantity());
 
+        if($values instanceof \Application\OrderBundle\Entity\OrderElement) {
+            // restore the basket_element from an order element
+            // ie: an error occur during the payment process
+
+            // tweak the code here
+        } else {
+            // create a new basket element from the product
+
+            // tweak the code here
+        }
+
         $basket_element_options = $product->getOptions();
         // add the default product options to the basket element
         if (is_array($basket_element_options) && !empty($basket_element_options)) {
@@ -285,6 +361,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $basket_element;
     }
+
 
     /**
      * Merge a product with another when the product is already present into the basket
@@ -368,6 +445,21 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     {
 
         return $this->findOneById($product->getId());
+    }
+
+    public function findOneById($id)
+    {
+
+        $results = $this->createQueryBuilder('p')
+            ->addSelect('i')
+            ->leftJoin('p.image', 'i')
+            ->andWhere('p.id = :id')
+            ->getQuery()
+            ->setParameters(array('id' => $id))
+            ->setMaxResults(1)
+            ->execute();
+
+        return count($results) > 0 ? $results[0] : false;
     }
 
     /**

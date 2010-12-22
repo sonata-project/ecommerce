@@ -12,7 +12,7 @@
         <default key="_controller">PaymentBundle:Payment:error</default>
     </route>
 
-    <route id="sonata_payment_callback" pattern="/callbank">
+    <route id="sonata_payment_callbank" pattern="/callbank">
         <default key="_controller">PaymentBundle:Payment:callbank</default>
     </route>
 

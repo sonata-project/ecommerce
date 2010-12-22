@@ -44,7 +44,7 @@ class BasketTransformer extends BaseTransformer {
 
         
         // Billing
-        $billing_address = $basket->getBillingAddress();
+        $billing_address = $basket->getPaymentAddress();
         if (!$billing_address instanceof  \Sonata\Component\Basket\AddressInterface) {
 
             if($this->getLogger()) {
@@ -65,7 +65,7 @@ class BasketTransformer extends BaseTransformer {
             throw new \RuntimeException('Invalid delivery method');
         }
 
-        $delivery_address = $basket->getShippingAddress();
+        $delivery_address = $basket->getDeliveryAddress();
         if ($delivery_method->isAddressRequired() && !$delivery_address instanceof \Sonata\Component\Basket\AddressInterface) {
 
             if($this->getLogger()) {
@@ -75,21 +75,11 @@ class BasketTransformer extends BaseTransformer {
             throw new \RuntimeException('Invalid delivery method');
         }
 
-        $class_order = $this->getOption('class_order');
-        if(!class_exists($class_order, true)) {
-
-            if($this->getLogger()) {
-                $this->getLogger()->emerg(sprintf('[Sonata\Component\Delivery\DeliveryInterface::transform] Invalid order class : %s', $class_order));
-            }
-            
-            throw new \RuntimeException(sprintf('Invalid order class : %s', $class_order));
-        }
-
         // add a custom class_instance for testing purpose.
         // todo : find a cleaner way to do that
-        $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : new $class_order;
+        $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : new \Application\OrderBundle\Entity\Order;
 
-        $order->setUserId($user->getId());
+        $order->setUser($user);
 
         $order->setUsername($user->getUsername());
 
@@ -117,22 +107,22 @@ class BasketTransformer extends BaseTransformer {
         $order->setTotalInc($basket->getTotal(true));
 
         $order->setDeliveryCost($basket->getDeliveryPrice(true));
-        $order->setDeliveryMethod(get_class($basket->getDeliveryMethod()));
+        $order->setDeliveryMethod($basket->getDeliveryMethod()->getCode());
         $order->setDeliveryStatus(\Sonata\Component\Delivery\DeliveryInterface::STATUS_OPEN);
 
+        $order->setCreatedAt(new \DateTime);
+        
         // todo : handle the currency
         //$order->setCurrency(Product::getDefaultCurrency());
 
         $order->setStatus(\Sonata\Component\Order\OrderInterface::STATUS_OPEN);
 
-        $order->setPaymentStatus(\Sonata\Component\Payment\Transaction::STATUS_OPEN);
-
+        $order->setPaymentStatus(\Application\PaymentBundle\Entity\Transaction::STATUS_OPEN);
+        $order->setPaymentMethod($basket->getPaymentMethod()->getCode());
 
         foreach ($basket->getElements() as $basket_element)
         {
-            $product = $basket_element->getProduct();
-
-            $order_element = $this->getProductPool()->getRepository($product)->createOrderElement($basket_element);
+            $order_element = $basket_element->getProductRepository()->createOrderElement($basket_element);
 
             $order->addOrderElement($order_element);
         }

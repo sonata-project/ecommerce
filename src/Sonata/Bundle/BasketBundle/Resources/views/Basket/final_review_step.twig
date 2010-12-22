@@ -27,16 +27,79 @@ file that was distributed with this source code.
     <tbody>
         {# call each product controller to render its own view #}
         {% for basket_element in basket.getElements %}
-            {% render 'ProductBundle:Product:renderFinalReviewBasketElement' with [
+            {% render 'ProductBundle:Product:renderFinalReviewBasketElement' with {
                 'basket_element' : basket_element
-            ] %}
+            } %}
         {% endfor %}
+
+        <tr>
+            <td>{% trans 'label_delivery_charge' from 'BasketBundle' %}</td>
+            <td>{{ basket.getDeliveryPrice(false) }}</td>
+            <td></td>
+            <td>{{ basket.getDeliveryPrice(true) }}</td>
+        </tr>
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3"></td>
+            <td colspan="3">{% trans 'total_wo_vat' from 'BasketBundle' %}</td>
+            <td><b>{{ basket.getTotal(false) }}</b></td>
+        </tr>
+        <tr>
+            <td colspan="3">{% trans 'total_vat' from 'BasketBundle' %}</td>
+            <td><b>{{ basket.getVatAmount() }}</b></td>
+        </tr>
+        <tr>
+            <td colspan="3">{% trans 'total_w_vat' from 'BasketBundle' %}</td>
             <td><b>{{ basket.getTotal(true) }}</b></td>
         </tr>
     </tfoot>
 </table>
 
+<table>
+    <tr>
+        <td class="basket_validation_box">
+            <h3>{% trans 'title_delivery_address' from 'BasketBundle' %}</h3>
+            {% if basket.deliverymethod.isAddressRequired() %}
+                {{ basket.deliveryaddress.getFullAddress("<br />") }}
+                <br />
+            {% else %}
+                {% trans 'title_delivery_address_not_required' from 'BasketBundle' %}
+            {% endif %}
+        </td>
+        <td class="basket_validation_box">
+            <h3>{% trans 'title_payment_address' from 'BasketBundle' %}</h3>
+            {{  basket.paymentaddress.name }}
+
+            {{  basket.paymentaddress.getFullAddress("<br />") }}
+        </td>
+    </tr>
+    <tr>
+        <td class="basket_validation_box">
+            <h3>{% trans 'title_delivery_method' from 'BasketBundle' %}</h3>
+            {{ basket.deliverymethod.name }} :
+            <em>{{ basket.deliverymethod.description }}</em>
+        </td>
+        <td class="validation_box">
+            <h3>{% trans 'title_payment_method' from 'BasketBundle' %}</h3>
+            @{{ basket.paymentmethod.name }}@ :
+            <em>{{ basket.paymentmethod.description }}</em>
+        </td>
+    </tr>
+</table>
+
+<div class="basket_tac">
+    <h3>{% trans 'order_terms_and_conditions_title' from 'BasketBundle' %}</h3>
+    <form action="{{ url('sonata_basket_final') }}" method="POST">
+
+        <input type="checkbox" name="tac" id="basket_tac"/>
+        <label for="basket_tac">
+            {% trans 'label_terms_and_condition' from 'BasketBundle' %}
+            <a href="/page/terms-and-conditions">{% trans 'link_terms_and_condition' from 'BasketBundle' %}</a>
+        </label>
+        <br />
+
+        <input type="submit" value="{% trans 'label_process_to_payment' from 'BasketBundle' %}" />
+
+        <div style="clear:both"></div>
+    </form>
+</div>

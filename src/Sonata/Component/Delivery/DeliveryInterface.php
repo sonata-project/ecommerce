@@ -44,13 +44,22 @@ interface DeliveryInterface {
     public function isAddressRequired();
 
     /**
-     * Return the delivery price for the current basket
+     * Return the delivery price
      *
      * @abstract
-     * @param  $basket Basket
      * @param  $vat set to true if the VAT should be included
      * @return float
      */
-    public function getDeliveryPrice($basket, $vat = false);
+    public function getTotal($price, $vat = false);
+
+    /**
+     * Return the vat amount
+     *
+     * @abstract
+     * @param  $vat set to true if the VAT should be included
+     * @return float
+     */
+    public function getVatAmount($basket);
+
     
 }

@@ -44,8 +44,8 @@ class BasketExtension extends Extension
             ->addMethodCall('setSession',       array(new Reference('session')))   // store the basket into session
             ->addMethodCall('setProductPool',   array(new Reference('sonata.product.pool')))
             ->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')))
-            ->addMethodCall('setPaymentPool', array(new Reference('sonata.payment.pool')))
-            ->addMethodCall('setDeliveryPool', array(new Reference('sonata.delivery.pool')))
+            ->addMethodCall('setPaymentPool',   array(new Reference('sonata.payment.pool')))
+            ->addMethodCall('setDeliveryPool',  array(new Reference('sonata.delivery.pool')))
         ;
 
         $container->setDefinition('sonata.basket.loader', $definition);

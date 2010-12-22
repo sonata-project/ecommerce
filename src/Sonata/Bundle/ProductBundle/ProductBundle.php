@@ -17,7 +17,7 @@ class ProductBundle extends Bundle implements EventSubscriber {
 
     public function boot() {
 
-        $evm = $this->container->getDoctrine_Orm_EntityManagerService()->getEventManager();
+        $evm = $this->container->get('doctrine.orm.entity_manager')->getEventManager();
 
         $evm->addEventSubscriber($this);
     }
@@ -42,7 +42,7 @@ class ProductBundle extends Bundle implements EventSubscriber {
 
         $map = array();
 
-        foreach($this->container->getSonata_Product_PoolService()->getProductDefinitions() as $code => $definition) {
+        foreach($this->container->get('sonata.product.pool')->getProductDefinitions() as $code => $definition) {
             $map[$code] = $definition['class'];
         }
 

@@ -9,8 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Component\Payment;
+namespace Sonata\Bundle\PaymentBundle\Entity;
 
+
+use Sonata\Component\Payment\PaymentInterface;
 
 /**
  * The Transaction class represents a callback request from the bank.
@@ -23,7 +25,7 @@ namespace Sonata\Component\Payment;
  *   - the error code       : the current error code of the transaction from the payment handler
  *
  */
-final class Transaction
+class BaseTransaction 
 {
 
     const STATE_OK = 1;
@@ -45,67 +47,72 @@ final class Transaction
 
     protected $state;
 
-    protected $status;
-    
-    protected $handler_state;
-
-    protected $parameters;
+    protected $parameters = array();
 
     protected $status_code;
 
-    public function setOrder($order) {
+    protected $created_at;
+
+    protected $payment_code;
+
+    public function setOrder($order)
+    {
         $this->order = $order;
     }
 
-    public function getOrder() {
+    public function getOrder()
+    {
         return $this->order;
     }
 
-    public function setState($state) {
+    public function setState($state)
+    {
         $this->state = $state;
     }
 
-    public function getState() {
+    public function getState()
+    {
         return $this->state;
     }
 
-    public function setTransactionId($transaction_id) {
+    public function setTransactionId($transaction_id)
+    {
         $this->transaction_id = $transaction_id;
     }
 
-    public function getTransactionId() {
+    public function getTransactionId()
+    {
         return $this->transaction_id;
-    }
-
-    public function setHandlerState($handler_state) {
-        $this->handler_state = $handler_state;
-    }
-
-    public function getHandlerState() {
-        return $this->handler_state;
     }
 
     public function isValid() {
         return $this->state == self::STATE_OK;
     }
 
-    public function setParameters($parameters) {
+    public function setParameters($parameters)
+    {
         $this->parameters = $parameters;
     }
 
-    public function getParameters() {
+    public function getParameters()
+    {
+
         return $this->parameters;
     }
 
-    public function get($name, $default) {
-        return $this->parameters->get($name, $default);
+    public function get($name, $default = null)
+    {
+
+        return isset($this->parameters[$name]) ? $this->parameters[$name] : $default;
     }
 
-    public function setStatusCode($status_code) {
+    public function setStatusCode($status_code)
+    {
         $this->status_code = $status_code;
     }
 
-    public function getStatusCode() {
+    public function getStatusCode()
+    {
         return $this->status_code;
     }
 
@@ -114,7 +121,8 @@ final class Transaction
      *
      * @return array
      */
-    public static function getStatusList() {
+    public static function getStatusList()
+    {
         return array(
             PaymentInterface::STATUS_ORDER_UNKNOWN     => 'order_unknown',
             PaymentInterface::STATUS_OPEN              => 'open',
@@ -126,13 +134,23 @@ final class Transaction
         );
     }
 
-    public function setStatus($status) {
-        $this->status = $status;
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
     }
 
-    public function getStatus() {
-        return $this->status;
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 
+    public function setPaymentCode($payment_code)
+    {
+        $this->payment_code = $payment_code;
+    }
 
+    public function getPaymentCode()
+    {
+        return $this->payment_code;
+    }
 }

@@ -11,6 +11,9 @@
 
 namespace Sonata\Component\Payment;
 
+use Application\PaymentBundle\Entity\Transaction;
+use Sonata\Component\Order\OrderInterface;
+
 /**
  * A free delivery method, used this only for testing
  *
@@ -36,11 +39,12 @@ class Paypal extends BasePaypal
      * @param  $user
      * @return Response object
      */
-    public function callbank($order) {
+    public function callbank($order)
+    {
 
         $params = array(
             'order' => $order->getReference(),
-            'bank' => get_class($this),
+            'bank'  => $this->getCode(),
             'check' => $this->generateUrlCheck($order),
         );
 
@@ -72,11 +76,11 @@ class Paypal extends BasePaypal
 
             // Callback information
             'custom'        => $this->generateUrlCheck($order),
-            'notify_url'    => $this->router->generate('url_callback', $params),
+            'notify_url'    => $this->router->generate($this->getOption('url_callback'), $params, true),
 
             // user link
-            'cancel_return' => $this->router->generate('url_return_ko', $params),
-            'return'        => $this->router->generate('url_return_ok', $params),
+            'cancel_return' => $this->router->generate($this->getOption('url_return_ko'), $params, true),
+            'return'        => $this->router->generate($this->getOption('url_return_ok'), $params, true),
 
         );
 
@@ -88,14 +92,14 @@ class Paypal extends BasePaypal
             $html = '<html><body onload="document.getElementById(\'submit_button\').disabled = \'disabled\'; document.getElementById(\'formPaiement\').submit();">' . "\n";
         }
 
-        $method = $this->getConfig('method');
+        $method = $this->getOption('method', 'encrypt');
 
         $html .= sprintf('<form action="%s" method="%s" id="formPaiement" >' . "\n", $this->getOption('url_action'), 'POST');
         $html .= '<input type="hidden" name="cmd" value="_s-xclick">' . "\n";
         $html .= sprintf('<input type="hidden" name="encrypted" value="%s" />', call_user_func(array($this, $method), $fields));
 
-        $html .= '<p>' . $this->translator->trans('process_to_paiement_bank_page', null, 'sonata_payment') . '</p>';
-        $html .= '<input type="submit" id="submit_button" value="' . $this->translator->trans('process_to_paiement_btn', null, 'sonata_payment') . '" />';
+        $html .= '<p>' . $this->translator->trans('process_to_paiement_bank_page', array(), 'PaymentBundle') . '</p>';
+        $html .= '<input type="submit" id="submit_button" value="' . $this->translator->trans('process_to_paiement_btn', array(), 'PaymentBundle') . '" />';
         $html .= '</form>';
 
 
@@ -105,7 +109,7 @@ class Paypal extends BasePaypal
             echo "<!-- Encrypted Array : \n" . print_r($fields, 1) . "-->";
         }
 
-        $response = new Symfony\Component\HttpFoundation\Response($html, 200, array(
+        $response = new \Symfony\Component\HttpFoundation\Response($html, 200, array(
             'Content-Type' => 'text/html'
         ));
         $response->setPrivate(true);
@@ -134,21 +138,22 @@ class Paypal extends BasePaypal
      *
      * @return integer the order status
      */
-    public function isCallbackValid($transaction) {
+    public function isCallbackValid($transaction)
+    {
         $order          = $transaction->getOrder();
-        $checkOrder     = $this->generateUrlCheck($order);
-        $checkParams    = $transaction->get('custom');
 
-        if ($checkOrder !== $checkParams) {
+        if (!$this->isRequestValid($transaction)) {
 
             $transaction->setState(Transaction::STATE_KO);
-            return PaymentInterface::STATUS_WRONG_CALLBACK;
+            $transaction->setStatusCode(Transaction::STATUS_WRONG_CALLBACK);
+            
+            return false;
         }
 
         if ($order->isValidated()) {
 
             $transaction->setState(Transaction::STATE_KO);
-            $transaction->setErrorCode(PaymentInterface::STATUS_WRONG_CALLBACK);
+            $transaction->setStatusCode(Transaction::STATUS_WRONG_CALLBACK);
             
             return false;
         }
@@ -156,7 +161,7 @@ class Paypal extends BasePaypal
         if ($transaction->get('payment_status') === 'Pending') {
 
             $transaction->setState(Transaction::STATE_OK);
-            $transaction->setErrorCode(PaymentInterface::STATUS_PENDING);
+            $transaction->setStatusCode(Transaction::STATUS_PENDING);
 
             return true;
         }
@@ -164,7 +169,7 @@ class Paypal extends BasePaypal
         if ($transaction->get('payment_status') === 'Completed') {
 
             $transaction->setState(Transaction::STATE_OK);
-            $transaction->setErrorCode(PaymentInterface::STATUS_VALIDATED);
+            $transaction->setStatusCode(Transaction::STATUS_VALIDATED);
 
             return true;
         }
@@ -172,21 +177,22 @@ class Paypal extends BasePaypal
         if ($transaction->get('payment_status') === 'Cancelled') {
 
             $transaction->setState(Transaction::STATE_OK);
-            $transaction->setErrorCode(PaymentInterface::STATUS_CANCELLED);
+            $transaction->setStatusCode(Transaction::STATUS_CANCELLED);
 
             return true;
         }
 
         $transaction->setState(Transaction::STATE_KO);
-        $transaction->setErrorCode(PaymentInterface::STATUS_UNKNOWN);
+        $transaction->setStatusCode(Transaction::STATUS_UNKNOWN);
 
         return false;
     }
 
-    public function handleError($transaction) {
+    public function handleError($transaction)
+    {
         $order = $transaction->getOrder();
 
-        switch ($transaction->getErrorCode()) {
+        switch ($transaction->getStatusCode()) {
             case Transaction::STATUS_ORDER_UNKNOWN:
 
                 if($this->getLogger()) {
@@ -228,71 +234,59 @@ class Paypal extends BasePaypal
                     $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_PENDING - uncaught error code %s', $transaction->getErrorCode()));
                 }
         }
+
+        $transaction->setState(Transaction::STATE_KO);
+
+        if($order->getStatus() === null) {
+            $order->setStatus(OrderInterface::STATUS_CANCELLED);
+        }
+
+        if($transaction->getStatusCode() == null) {
+            $transaction->setStatusCode(Transaction::STATUS_UNKNOWN);
+        }
     }
 
-    public function sendConfirmationReceipt($transaction) {
-
+    public function sendConfirmationReceipt($transaction)
+    {
 
         if(!$transaction->isValid()) {
 
-            return; // nothing to do if the transaction is not valid
+            return new \Symfony\Component\HttpFoundation\Response('');
         }
 
-        $params = array(
-            'cmd' => '_notify-validate',
-        );
+        $params = $transaction->getParameters();
+        $params['cmd'] = '_notify-validate';
 
-        $params = array_merge($params, $_POST);
+        // retrieve the client
+        $client = $this
+            ->getWebConnectorProvider()
+            ->getNamedClient($this->getOption('web_connector_name', 'default'));
 
-        // todo : remove call and add an a clien to the Zend Http Client
-        $ch = curl_init($this->getConfig('url_action'));
+        $client->request('POST', $this->getOption('url_action'), $params);
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($ch, CURLOPT_FRESH_CONNECT, true); // make sure the server does not use any cached connection
+        if ($client->getResponse()->getContent() == 'VERIFIED') {
+            $transaction->setState(Transaction::STATE_OK);
+            $transaction->setStatusCode(Transaction::STATUS_VALIDATED);
 
-        if ($this->getOption('debug')) {
-            // ignore the certification test, that does not work on test machine
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        }
-
-        $buffer = curl_exec($ch);
-
-        curl_close($ch);
-        
-        /*
-        $stream_params = array(
-          'ssl' => array(
-             'method' => 'POST',
-             'header'  => 'Content-type: application/x-www-form-urlencoded',
-             'content' => http_build_query($params, null, '&'),
-             'verify_peer' => false,
-           )
-         );
-
-         $context = stream_context_create($stream_params);
-
-         $buffer = file_get_contents($this->getConfig('url_action'), false, $context);
-        */
-
-        if ($buffer !== 'VERIFIED') {
+            $transaction->getOrder()->setValidatedAt(new \DateTime);
+            $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
+            $transaction->getOrder()->setPaymentStatus(Transaction::STATUS_VALIDATED);
+        } else {
             $transaction->setState(Transaction::STATE_KO);
-            $transaction->setErrorCode(PaymentInterface::STATUS_ERROR_VALIDATION);
+            $transaction->setStatusCode(PaymentInterface::STATUS_ERROR_VALIDATION);
+
+            $transaction->getOrder()->setPaymentStatus(OrderInterface::STATUS_ERROR);
 
             if($this->getLogger()) {
                 $this->getLogger()->emerg('[Paypal::sendAccuseReception] Paypal failed to check the postback');
             }
         }
 
-        
-        $transaction->setState(Transaction::STATE_OK);
-        $transaction->setErrorCode(null);
-
-        return $transaction;
+        return new \Symfony\Component\HttpFoundation\Response('');
     }
 
-    public function isBasketValid($basket) {
+    public function isBasketValid($basket)
+    {
         if ($basket->countElements() == 0) {
 
             return false;
@@ -309,7 +303,8 @@ class Paypal extends BasePaypal
         return true;
     }
 
-    public function isAddableProduct($basket, $product) {
+    public function isAddableProduct($basket, $product)
+    {
         if (!$product->isRecurrentPayment()) {
 
             return true;
@@ -318,7 +313,8 @@ class Paypal extends BasePaypal
         return false;
     }
 
-    public static function getPendingReasonsList() {
+    public static function getPendingReasonsList()
+    {
 
         return array(
             self::PENDING_REASON_ADRESS         => 'The payment is pending because your customer did not include a confirmed shipping address and your Payment Receiving Preferences is set yo allow you to manually accept or deny each of these payments. To change your preference, go to the Preferences section of your Profile.',

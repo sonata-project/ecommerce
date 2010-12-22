@@ -13,6 +13,6 @@ file that was distributed with this source code.
 
 <ul>
     {% for category in pager.getResults %}
-        <li><a href="{% url 'sonata_category_view' with ['category_id': category.id, 'slug': category.slug] %}">{{ category.name }}</a></li>
+        <li><a href="{{ url('sonata_category_view', {'category_id': category.id, 'slug': category.slug}) }}">{{ category.name }}</a></li>
     {% endfor %}
 </ul>

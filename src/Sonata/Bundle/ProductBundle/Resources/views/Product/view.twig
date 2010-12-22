@@ -13,6 +13,9 @@ file that was distributed with this source code.
 <h2>{% block product_title %}Product title{% endblock %}</h2>
 
 <div>
+    <div style="float: left">
+        {% block product_image %}{% thumbnail product.image, 'preview' %}{% endblock%}
+    </div>
     {% block product_description %}Product description{% endblock %}
 </div>
 

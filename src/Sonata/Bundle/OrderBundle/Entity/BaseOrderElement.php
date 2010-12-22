@@ -8,9 +8,9 @@ namespace Sonata\Bundle\OrderBundle\Entity;
 abstract class BaseOrderElement
 {
     /**
-     * @var integer $order_id
+     * @var integer $order
      */
-    protected $order_id;
+    protected $order;
 
     /**
      * @var integer $quantity
@@ -43,11 +43,6 @@ abstract class BaseOrderElement
     protected $serialize;
 
     /**
-     * @var integer $type
-     */
-    protected $type;
-
-    /**
      * @var integer $product_id
      */
     protected $product_id;
@@ -63,11 +58,6 @@ abstract class BaseOrderElement
     protected $delivery_status;
 
     /**
-     * @var string $behavior_class
-     */
-    protected $behavior_class;
-
-    /**
      * @var datetime $validated_at
      */
     protected $validated_at;
@@ -78,23 +68,32 @@ abstract class BaseOrderElement
     protected $product;
 
     /**
-     * Set order_id
-     *
-     * @param integer $orderId
+     * @var string $product_type
      */
-    public function setOrderId($orderId)
+    protected $product_type;
+
+    protected $created_at;
+
+    protected $updated_at;
+
+    /**
+     * Set order
+     *
+     * @param Order $order
+     */
+    public function setOrder($order)
     {
-        $this->order_id = $orderId;
+        $this->order = $order;
     }
 
     /**
-     * Get order_id
+     * Get order
      *
-     * @return integer $orderId
+     * @return Order $order
      */
-    public function getOrderId()
+    public function getOrder()
     {
-        return $this->order_id;
+        return $this->order;
     }
 
     /**
@@ -218,26 +217,6 @@ abstract class BaseOrderElement
     }
 
     /**
-     * Set type
-     *
-     * @param integer $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * Get type
-     *
-     * @return integer $type
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set product_id
      *
      * @param integer $productId
@@ -298,26 +277,6 @@ abstract class BaseOrderElement
     }
 
     /**
-     * Set behavior_class
-     *
-     * @param string $behaviorClass
-     */
-    public function setBehaviorClass($behaviorClass)
-    {
-        $this->behavior_class = $behaviorClass;
-    }
-
-    /**
-     * Get behavior_class
-     *
-     * @return string $behaviorClass
-     */
-    public function getBehaviorClass()
-    {
-        return $this->behavior_class;
-    }
-
-    /**
      * Set validated_at
      *
      * @param datetime $validatedAt
@@ -356,11 +315,7 @@ abstract class BaseOrderElement
     {
         return $this->product;
     }
-    /**
-     * @var string $product_type
-     */
-    private $product_type;
-
+    
     /**
      * Set product_type
      *
@@ -379,5 +334,25 @@ abstract class BaseOrderElement
     public function getProductType()
     {
         return $this->product_type;
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
     }
 }

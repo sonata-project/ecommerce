@@ -27,7 +27,6 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-
         $em             = $this->get('doctrine.orm.default_entity_manager');
         $repository     = $em->getRepository('ProductBundle:Category');
         $class          = $em->getClassMetaData('ProductBundle:Category')->name;

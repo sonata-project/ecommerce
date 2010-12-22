@@ -11,16 +11,23 @@
 
 namespace Sonata\Bundle\ProductBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Bundle\BaseApplicationBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Sonata\Component\Payment\Transaction;
 
 class ProductAdminController extends Controller
 {
-    public function indexAction() {
+    protected $class = 'Application\ProductBundle\Entity\Product';
 
-    }
+    protected $list_fields = array(
+        'id',
+        'enabled',
+        'name',
+        'price',
+        'stock',
+    );
+
+    protected $base_route = 'sonata_admin_product';
 
     public function editAction($product_id) {
 

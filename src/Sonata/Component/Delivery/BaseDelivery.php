@@ -88,13 +88,13 @@ abstract class BaseDelivery implements DeliveryInterface
     public function getPrice()
     {
 
-        return $this->prive;
+        return $this->price;
     }
 
     public function setPrice($price)
     {
 
-        $this->prive = $price;
+        $this->price = $price;
     }
 
     public function setOptions($options)
@@ -112,7 +112,7 @@ abstract class BaseDelivery implements DeliveryInterface
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function getDeliveryPrice($basket, $vat = false)
+    public function getTotal($basket, $vat = false)
     {
 
         if ($vat) {
@@ -124,7 +124,7 @@ abstract class BaseDelivery implements DeliveryInterface
 
     public function getVatAmount($basket)
     {
-        $vat = $this->getDeliveryPrice($basket, true) - $this->getDeliveryPrice($basket);
+        $vat = $this->getTotal($basket, true) - $this->getTotal($basket);
 
         return bcadd($vat, 0, 2);
     }

@@ -4,15 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
 
-    <route id="sonata_order_index" pattern="/user/order">
+    <route id="sonata_order_index" pattern="/">
         <default key="_controller">OrderBundle:Order:index</default>
     </route>
 
-    <route id="sonata_order_view" pattern="/user/order/:reference">
+    <route id="sonata_order_view" pattern="/:reference">
         <default key="_controller">OrderBundle:Order:view</default>
     </route>
 
-    <route id="sonata_order_view" pattern="/user/order/:reference/download">
+    <route id="sonata_order_download" pattern="/:reference/download">
         <default key="_controller">OrderBundle:Order:view</default>
     </route>
 

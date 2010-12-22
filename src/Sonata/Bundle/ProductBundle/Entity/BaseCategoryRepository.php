@@ -39,7 +39,8 @@ class BaseCategoryRepository extends \Doctrine\ORM\EntityRepository
             ->execute();
 
         $root = new $class;
-        
+        $root->setName('root');
+
         foreach( $this->categories as $category) {
 
             $parent = $category->getParent();

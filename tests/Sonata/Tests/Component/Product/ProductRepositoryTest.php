@@ -35,12 +35,11 @@ class ProductRepositoryTest extends \PHPUnit_Framework_TestCase
         $em = $this->getMock('EntityManager');
         $metadata = $this->getMock('Doctrine\ORM\Mapping\ClassMetadata', array(),  array(), '', false);
 
-
         $repository = new ProductRepository($em, $metadata);
         $repository->setVariationFields(array('Name', 'Price'));
 
         $product = new \Sonata\Tests\Component\Basket\Product;
-        $product->setId(2);
+        $product->id = 2;
 
         $variation = $repository->createVariation($product);
         $variation->setPrice(11);

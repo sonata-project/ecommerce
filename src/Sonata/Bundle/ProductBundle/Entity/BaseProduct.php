@@ -81,6 +81,9 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
 
     protected $options = array();
 
+    protected $variations = array();
+    
+
     /**
      * Set sku
      *
@@ -414,5 +417,39 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     public function isEnabled()
     {
         return $this->getEnabled();
+    }
+    /**
+     * Set image
+     *
+     * @param Application\MediaBundle\Entity\Media $image
+     */
+    public function setImage(\Application\MediaBundle\Entity\Media $image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Application\MediaBundle\Entity\Media $image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setVariations($variations)
+    {
+        $this->variations = $variations;
+    }
+
+    public function getVariations()
+    {
+        return $this->variations;
+    }
+
+    public function addVariation($variation)
+    {
+        $this->variations[] = $variation;
     }
 }

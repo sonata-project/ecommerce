@@ -11,13 +11,13 @@ file that was distributed with this source code.
 
 <h1>{% trans 'title_delivery_step_basket' from 'BasketBundle' %}</h1>
 
-<form action="{% url 'sonata_basket_delivery' %}" method="POST" >
+<form action="{{ url('sonata_basket_delivery') }}" method="POST" >
     {{ form|render_hidden }}
 
     <div>
         <h2>{% trans 'title_delivery_addresses' from 'BasketBundle' %}</h2>
         {{ form.delivery_address|render_errors }}
-        {{ form.delivery_address|render([], [], 'BasketBundle:Basket:render_delivery_address.twig') }}
+        {{ form.delivery_address|render({}, {}, 'BasketBundle:Basket:render_delivery_address.twig') }}
     </div>
 
     <div>
@@ -27,7 +27,7 @@ file that was distributed with this source code.
             <p>{% trans 'message_no_deliery_methods_available' from 'BasketBundle' %}</p>
         {% else %}
             {{ form.delivery_method|render_errors }}
-            {{ form.delivery_method|render([], [], 'BasketBundle:Basket:render_delivery_address.twig') }}
+            {{ form.delivery_method|render({}, {}, 'BasketBundle:Basket:render_delivery_address.twig') }}
         {% endif %}
     </div>
 

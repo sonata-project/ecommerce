@@ -25,7 +25,6 @@ class Poolest extends \PHPUnit_Framework_TestCase
         $transformer = new BasketTransformer;
         $pool->addTransformer('basket', $transformer);
 
-
         $transformer = new OrderTransformer;
         $pool->addTransformer('order', $transformer);
 

@@ -14,17 +14,96 @@ namespace Sonata\Bundle\PaymentBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Sonata\Component\Payment\Transaction;
+use Application\PaymentBundle\Entity\Transaction;
 
 class PaymentController extends Controller
 {
 
-    public function errorAction() {
+    public function errorAction()
+    {
 
+        $request    = $this->get('request');
+        $bank       = $request->get('bank');
+        $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
+
+        // build the transaction
+        $transaction = new Transaction;
+        $transaction->setPaymentCode($bank);
+        $transaction->setCreatedAt(new \DateTime);
+        $transaction->setParameters(array_replace($request->query->all(), $request->request->all()));
+
+        // set the transaction reference
+        $payment->applyTransactionId($transaction);
+
+        // retrieve the related order
+        $reference  = $payment->getOrderReference($transaction);
+        $em         = $this->get('doctrine.orm.entity_manager');
+        $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
+
+        if(!$order) {
+
+            throw new NotFoundHttpException(sprintf('Order %s', $reference));
+        }
+
+        $transaction->setOrder($order);
+
+        // control the handshake value
+        if(!$payment->isRequestValid($transaction)) {
+            
+            throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
+        }
+
+        // ask the payment handler the error
+        $payment->handleError($transaction);
+
+        // save the payment transaction
+        $em->persist($transaction);
+        $em->flush();
+
+        // todo : should I close the order at this point ?
+        //        or this logic should be handle by the payment method
+
+        // reset the basket and rebuilt from the order information
+        $basket = $this->get('sonata.basket');
+        $basket->reset();
+
+        $user   = $this->get('doctrine_user.auth')->getUser();
+        $basket = $payment->getTransformer('order')->transformIntoBasket($user, $order, $basket);
+
+        $this->get('session')->set('sonata/basket', $basket);
+
+        return $this->render('PaymentBundle:Payment:error.twig', array(
+            'order' => $order,
+            'basket' => $basket
+        ));
+        
     }
 
-    public function confirmationAction() {
 
+    public function confirmationAction()
+    {
+        $request    = $this->get('request');
+        $bank       = $request->get('bank');
+        $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
+
+        // build the transaction
+        $transaction = new Transaction;
+        $transaction->setPaymentCode($bank);
+        $transaction->setParameters(array_replace($request->query->all(), $request->request->all()));
+
+        $reference = $payment->getOrderReference($transaction);
+
+        $em = $this->get('doctrine.orm.entity_manager');
+        $order = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
+
+        if(!$order) {
+
+            throw new NotFoundHttpException(sprintf('Order %s', $reference));
+        }
+
+        return $this->render('PaymentBundle:Payment:confirmation.twig', array(
+            'order' => $order,
+        ));
     }
     
     /**
@@ -36,9 +115,9 @@ class PaymentController extends Controller
     public function callbankAction()
     {
 
-        $basket     = $this->container->get('sonata.basket');
-        $request    = $this->container->get('request');
-        $user       = $this->container->get('user');
+        $basket     = $this->get('sonata.basket');
+        $request    = $this->get('request');
+        $user       = $this->get('doctrine_user.auth')->getUser();
 
         if($request->getMethod() !== 'POST') {
             $this->redirect($this->generateUrl('sonata_basket_index'));
@@ -53,7 +132,7 @@ class PaymentController extends Controller
         // check if the basket is valid/compatible with the bank gateway
         if (!$payment->isBasketValid($basket)) {
 
-            $this->container->get('session')->setFlash('notice', $this->containe->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'sonata_payment'));
+            $this->get('session')->setFlash('notice', $this->containe->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'sonata_payment'));
 
             $this->redirect($this->generateUrl('sonata_basket_index'));
         }
@@ -62,9 +141,12 @@ class PaymentController extends Controller
         $order = $payment->getTransformer('basket')->transformIntoOrder($user, $basket);
 
         // save the order
-        $em = $this->container->getDoctrine_Orm_EntityManagerService(); // todo : find a way to know which EM is linked to the order
+        $em = $this->get('doctrine.orm.entity_manager'); // todo : find a way to know which EM is linked to the order
         $em->persist($order);
         $em->flush();
+
+        // assign correct reference number
+        $this->get('sonata.generator')->order($order);
 
         $basket->reset();
         
@@ -80,31 +162,43 @@ class PaymentController extends Controller
     public function callbackAction()
     {
         
-        $request    = $this->container->get('request');
+        $request    = $this->get('request');
+        $bank       = $request->get('bank');
+        $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
 
-        $bank = $request->getParameter('bank');
-
-        $payment = $this->container->get(sprintf('sonata.payment.%s', $bank));
-
+        // build the transaction
         $transaction = new Transaction;
-        
-        //  merge the get and post request, post > get
-        $transaction->setParameters($request->query->add($request->request->all()));
-        
-        $reference = $payment->getOrderReference($transaction);
+        $transaction->setPaymentCode($bank);
+        $transaction->setCreatedAt(new \DateTime);
+        $transaction->setParameters(array_replace($request->query->all(), $request->request->all()));
 
-        // get the order from the database
-        $em = $this->container->getDoctrine_Orm_EntityManagerService(); // todo : find a way to know which EM is linked to the order
+        // set the transaction reference
+        $payment->applyTransactionId($transaction);
 
-        $transaction->setOrder($em->getRepository('OrderBundle::Order')->findOneByReference($reference));
+        // retrieve the related order
+        $reference  = $payment->getOrderReference($transaction);
+        $em         = $this->get('doctrine.orm.entity_manager');
+        $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
-        $response = $payment->callback($transaction);
+        if(!$order) {
 
-        $em->persist($transaction->getOrder());
+            throw new NotFoundHttpException(sprintf('Order %s', $reference));
+        }
+
+        $transaction->setOrder($order);
+
+        if(!$payment->isCallbackValid($transaction)) {
+
+            // ask the payment handler the error
+            $response = $payment->handleError($transaction);
+        }
+
+        $response = $payment->sendConfirmationReceipt($transaction);
+
+        $em = $this->get('doctrine.orm.entity_manager'); // todo : find a way to know which EM is linked to the order
+        $em->persist($transaction);
         $em->flush();
-
-        // todo : persist the transaction element ....
-
+        
         return $response;
     }
 

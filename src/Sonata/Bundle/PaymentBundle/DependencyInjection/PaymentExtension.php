@@ -36,8 +36,10 @@ class PaymentExtension extends Extension {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('payment.xml');
 
+        // create the payment method pool
         $pool_definition = new Definition('Sonata\Component\Payment\Pool');
 
+        // define the payment method
         foreach($config['methods'] as $code => $method)
         {
             if(!$method['enabled'])
@@ -52,12 +54,18 @@ class PaymentExtension extends Extension {
             $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
             $definition->addMethodCall('setTranslator', array(new Reference('translator')));
 
-            foreach($method['transformers'] as $name => $service_id) {
+            foreach((array)$method['transformers'] as $name => $service_id) {
                 $definition->addMethodCall('addTransformer', array($name, new Reference($service_id)));
             }
 
+            // todo : refactor this into proper files
+            foreach((array)$method['dependencies'] as $service_id => $setter) {
+
+                $definition->addMethodCall($setter, array(new Reference($service_id)));
+            }
+
             $definition->addMethodCall('setRouter', array(new Reference('router')));
-            
+
             $id         = sprintf('sonata.payment.method.%s', $method['name']);
 
             // add the delivery method as a service
@@ -69,12 +77,14 @@ class PaymentExtension extends Extension {
 
         $container->setDefinition('sonata.payment.pool', $pool_definition);
 
+        // define the payment selector
         $definition = new Definition($config['selector']['class']);
         $definition->addMethodCall('setLogger', array(new Reference('logger')));
         $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
         $definition->addMethodCall('setPaymentPool', array(new Reference('sonata.payment.pool')));
 
         $container->setDefinition('sonata.payment.selector', $definition);
+
     }
 
     public function transformerLoad($config, ContainerBuilder $container) {
@@ -107,6 +117,18 @@ class PaymentExtension extends Extension {
 
         $container->setDefinition('sonata.transformer', $pool_definition);
     }
+
+    public function generatorLoad($config, ContainerBuilder $container) {
+
+        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader->load('generator.xml');
+
+        $definition = new Definition($config['class']);
+        $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
+
+        $container->setDefinition('sonata.generator', $definition);
+    }
+
 
     /**
      * Returns the base path for the XSD files.

@@ -13,10 +13,10 @@ file that was distributed with this source code.
 
 <div>
     {{ category.description }}
-<div>
+</div>
 
 
-{% render "ProductBundle:Category:listSubCategories" with ['category_id': category.id] %}
+{% render "ProductBundle:Category:listSubCategories" with {'category_id': category.id} %}
 
-{% render "ProductBundle:Category:listProducts" with ['category_id': category.id] %}
+{% render "ProductBundle:Category:listProducts" with {'category_id': category.id} %}
 

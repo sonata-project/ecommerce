@@ -13,13 +13,36 @@ namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketElement;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
+    public function getBasketElement($product = null)
+    {
+        if(!$product)
+        {
+            $product = new Product;
+        }
+        
+        $classmetadata = new \stdClass;
+        $classmetadata->discriminatorValue = 'test';
+
+        $repository = $this->getMock('ProductRepository', array('getClassMetadata'));
+        $repository
+            ->expects($this->once())
+            ->method('getClassMetadata')
+            ->will($this->returnValue($classmetadata));
+
+
+        $basket_element = new BasketElement;
+        $basket_element->setProduct($product, $repository);
+
+        return $basket_element;
+    }
     public function testPrice()
     {
-        $basket_element = new BasketElement;
-        $basket_element->setProduct(new Product);
+
+        $basket_element = $this->getBasketElement();
 
         $this->assertEquals(19.6, $basket_element->getVat(), 'BasketElement returns the correct VAT');
         $this->assertEquals(1, $basket_element->getQuantity(), 'BasketElement returns the correct default quantity');
@@ -35,8 +58,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
     public function testOptions()
     {
-        $basket_element = new BasketElement;
-        $basket_element->setProduct(new Product);
+        $basket_element = $this->getBasketElement();
 
 //        $this->assertEquals(true, $basket_element->hasOption('option1'), 'BasketElement has one option : option1');
 //        $this->assertEquals(false, $basket_element->hasOption('fake'), 'BasketElement has not option : fake');
@@ -47,8 +69,8 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
     public function testQuantity()
     {
-        $basket_element = new BasketElement;
-        $basket_element->setProduct(new Product);
+        $basket_element = $this->getBasketElement();
+
         $basket_element->setQuantity(10);
 
         $this->assertEquals(19.6, $basket_element->getVat(), 'BasketElement returns the correct VAT');
@@ -58,8 +80,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
     public function testValidatity()
     {
         $product = new Product;
-        $basket_element = new BasketElement;
-        $basket_element->setProduct($product);
+        $basket_element = $this->getBasketElement($product);
         
         $this->assertEquals(true, $basket_element->isValid(), 'BasketElement is valid');
 

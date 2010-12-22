@@ -28,11 +28,9 @@ class Basket implements \Serializable
 
     protected $cptElement = 0;
 
+    protected $inBuild = false;
+
     protected $product_pool;
-
-    protected $delivery_address;
-
-    protected $delivery_method;
 
     protected $payment_address;
 
@@ -40,11 +38,15 @@ class Basket implements \Serializable
 
     protected $payment_method_code;
 
-    protected $inBuild = false;
-
     protected $payment_address_id;
 
+    protected $delivery_address;
+
+    protected $delivery_method;
+
     protected $delivery_address_id;
+
+    protected $delivery_method_code;
 
     public function setProductPool($pool)
     {
@@ -149,6 +151,7 @@ class Basket implements \Serializable
     public function setDeliveryAddress(Address $address = null)
     {
         $this->delivery_address = $address;
+        $this->delivery_address_id = $address ? $address->getId() : null;
     }
 
     /**
@@ -170,7 +173,7 @@ class Basket implements \Serializable
     public function setPaymentMethod(Payment $method = null)
     {
         $this->payment_method = $method;
-        $this->payment_method_code = $method->getCode();
+        $this->payment_method_code = $method ? $method->getCode() : null;
     }
 
     /**
@@ -192,6 +195,7 @@ class Basket implements \Serializable
     public function setPaymentAddress(Address $address = null)
     {
         $this->payment_address = $address;
+        $this->payment_address_id = $address ? $address->getId() : null;
     }
 
     /**
@@ -228,19 +232,22 @@ class Basket implements \Serializable
      * reset basket
      *
      */
-    public function reset()
+    public function reset($full = true)
     {
-        $this->elements = array();
-        $this->pos = array();
-        $this->cptElement = 0;
-        $this->is_fresh = true;
 
         $this->delivery_address = null;
         $this->delivery_method = null;
+        $this->delivery_method_code = null;
 
         $this->payment_address = null;
         $this->payment_method = null;
+        $this->payment_method_code = null;
 
+        if($full) {
+            $this->elements = array();
+            $this->pos = array();
+            $this->cptElement = 0;
+        }
     }
 
     /**
@@ -262,7 +269,7 @@ class Basket implements \Serializable
      */
     public function setElements($elements)
     {
-        $this->element = $elements;
+        $this->elements = $elements;
     }
     /**
      * count number of element in the basket
@@ -344,6 +351,8 @@ class Basket implements \Serializable
     public function addProduct(Product $product)
     {
 
+        $this->reset(false);
+
         $args = func_get_args();
         array_shift($args);
 
@@ -379,6 +388,8 @@ class Basket implements \Serializable
     public function addBasketElement($basket_element)
     {
 
+        $this->reset(false);
+        
         $basket_element->setPos($this->cptElement);
 
         $this->elements[$this->cptElement] = $basket_element;
@@ -479,7 +490,7 @@ class Basket implements \Serializable
             return 0;
         }
 
-        return $method->getDeliveryPrice($this, $vat);
+        return $method->getTotal($this, $vat);
     }
 
     /**
@@ -553,13 +564,14 @@ class Basket implements \Serializable
     {
         
         return serialize(array(
-            'elements'          => $this->elements,
-            'pos'               => $this->pos,
-            'delivery_address_id'  => $this->delivery_address_id,
-            'delivery_method'   => $this->delivery_method,
-            'payment_address_id'   => $this->payment_address_id,
-            'payment_method_code'    => $this->payment_method_code,
-            'cptElement'        => $this->cptElement,
+            'elements'              => $this->elements,
+            'pos'                   => $this->pos,
+            'delivery_address_id'   => $this->delivery_address_id,
+            'delivery_method'       => $this->delivery_method,
+            'payment_address_id'    => $this->payment_address_id,
+            'payment_method_code'   => $this->payment_method_code,
+            'cptElement'            => $this->cptElement,
+            'delivery_method_code'  => $this->delivery_method_code
         ));
     }
     
@@ -567,14 +579,22 @@ class Basket implements \Serializable
     {
 
         $data = unserialize($data);
-        
-        $this->elements         = $data['elements'];
-        $this->pos              = $data['pos'];
-        $this->delivery_address_id = $data['delivery_address_id'];
-        $this->delivery_method  = $data['delivery_method'];
-        $this->payment_address_id  = $data['payment_address_id'];
-        $this->payment_method_code   = $data['payment_method_code'];
-        $this->cptElement       = $data['cptElement'];
+
+        $properties = array(
+            'elements',
+            'pos',
+            'delivery_address_id',
+            'delivery_method',
+            'delivery_method_code',
+            'payment_address_id',
+            'payment_method_code',
+            'cptElement',
+        );
+
+        foreach($properties as $property)
+        {
+            $this->$property = isset($data[$property]) ? $data[$property] : $this->$property;
+        }
     }
 
     public function setDeliveryAddressId($delivery_address_id)

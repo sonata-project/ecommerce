@@ -74,7 +74,7 @@ class BasketElement implements \Serializable
     /**
      * Define the related product
      *
-     * @param trShopProduct $product
+     * @param Product $product
      * @return BasketElement
      */
     public function setProduct(ProductInterface $product, $product_repository)

@@ -39,7 +39,7 @@ class BasketController extends Controller
 
         // always clone the basket, so the one in session is never altered
         $form = new Form('basket', clone $this->get('sonata.basket'), $this->get('validator'));
-        $form->setValidationGroups(array('basket'));
+        $form->setValidationGroups(array('elements'));
 
         $elements = new FieldGroup('elements');
         
@@ -109,6 +109,7 @@ class BasketController extends Controller
         if($form->isValid()) {
 
             $basket = $form->getData();
+            $basket->reset(false); // remove delivery and payment information
             $basket->clean(); // clean the basket
 
             // update the basket store in session
@@ -377,7 +378,6 @@ class BasketController extends Controller
 
         $form = $this->getDeliveryForm($basket, $delivery_addresses, $delivery_methods);
 
-
         if($this->get('request')->getMethod() == 'POST') {
             $form->bind($this->get('request')->get('shipping'));
 
@@ -401,8 +401,30 @@ class BasketController extends Controller
     public function finalReviewStepAction()
     {
 
+        $basket = $this->get('sonata.basket');
+        
+        if($this->get('request')->getMethod() == 'POST' ) {
+
+            $violations = $this->get('validator')->validate($basket, array('elements', 'delivery', 'payment'));
+            if ($violations->count() > 0) {
+                // basket not valid
+
+                // todo : add flash message
+
+                return $this->redirect($this->generateUrl('sonata_basket_index'));
+            }
+
+            if($this->get('request')->get('tac'))
+            {
+                // send the basket to the payment callback
+                return $this->forward('PaymentBundle:Payment:callbank');
+            }
+
+        }
+
         return $this->render('BasketBundle:Basket:final_review_step.twig', array(
-            'basket' => $this->get('sonata.basket')
+            'basket'    => $basket,
+            'tac_error' => $this->get('request')->getMethod() == 'POST'
         ));
     }
 }

@@ -15,14 +15,14 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     protected $reference;
 
     /**
-     * @var integer $user_id
+     * @var integer $user
      */
-    protected $user_id;
+    protected $user;
 
     /**
-     * @var string $bank_handler
+     * @var string $payment_method
      */
-    protected $bank_handler;
+    protected $payment_method;
 
     /**
      * @var string $delivery_method
@@ -184,13 +184,13 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     protected $shipping_mobile;
 
-    /**
-     * @var Application\DoctrineUserBundle\Entity\User
-     */
-    protected $user;
-
     protected $order_elements;
 
+
+    protected $created_at;
+
+    protected $updated_at;
+    
     /**
      * Set reference
      *
@@ -212,43 +212,23 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     }
 
     /**
-     * Set user_id
+     * Set payment_method
      *
-     * @param integer $userId
+     * @param string $payment_method
      */
-    public function setUserId($userId)
+    public function setPaymentMethod($payment_method)
     {
-        $this->user_id = $userId;
+        $this->payment_method = $payment_method;
     }
 
     /**
-     * Get user_id
+     * Get payment_method
      *
-     * @return integer $userId
+     * @return string $payment_method
      */
-    public function getUserId()
+    public function getPaymentMethod()
     {
-        return $this->user_id;
-    }
-
-    /**
-     * Set bank_handler
-     *
-     * @param string $bankHandler
-     */
-    public function setBankHandler($bankHandler)
-    {
-        $this->bank_handler = $bankHandler;
-    }
-
-    /**
-     * Get bank_handler
-     *
-     * @return string $bankHandler
-     */
-    public function getBankHandler()
-    {
-        return $this->bank_handler;
+        return $this->payment_method;
     }
 
     /**
@@ -919,6 +899,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     public function addOrderElement($order_element)
     {
         $this->order_elements[] = $order_element;
+        $order_element->setOrder($this);
     }
 
     /**
@@ -972,4 +953,33 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
         return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
     }
 
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Add order_elements
+     *
+     * @param Application\OrderBundle\Entity\OrderElement $orderElements
+     */
+    public function addOrderElements(\Application\OrderBundle\Entity\OrderElement $orderElements)
+    {
+        $this->order_elements[] = $orderElements;
+    }
 }

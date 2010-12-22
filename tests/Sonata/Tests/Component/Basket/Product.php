@@ -10,7 +10,7 @@
  */
 namespace Sonata\Tests\Component\Basket;
 
-use Sonata\Component\Product\BaseProduct;
+use Sonata\Bundle\ProductBundle\Entity\BaseProduct;
 
 class Product extends BaseProduct
 {
@@ -33,6 +33,11 @@ class Product extends BaseProduct
 
     public function getElementOptions() {
         return array();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
 }

@@ -2,7 +2,6 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\Bundle\OrderBundle\Entity\BaseOrderElement">
 
-        <field name="order_id"          type="integer"      column="order_id"/>
         <field name="product_id"        type="integer"      column="product_id"/>
         <field name="product_type"      type="string"       column="product_type"          length="255"/>
 
@@ -10,27 +9,33 @@
         <field name="price"             type="decimal"      column="price"          scale="4"/>
         <field name="vat"               type="decimal"      column="vat"            scale="4"/>
         <field name="designation"       type="string"       column="designation"    length="255"/>
-        <field name="description"       type="text"         column="description"/>
-        <field name="serialize"         type="text"         column="serialize"/>
-        <field name="type"              type="integer"      column="type"/>
+        <field name="description"       type="text"         column="description"    />
+        <field name="serialize"         type="array"        column="serialize"      nullable="true"/>
         <field name="status"            type="integer"      column="status"/>
         <field name="delivery_status"   type="integer"      column="delivery_status"/>
-        <field name="behavior_class"    type="string"       column="behavior_class" length="255"/>
-        <field name="validated_at"      type="datetime"     column="validated_at"/>
+        <field name="validated_at"      type="datetime"     column="validated_at" nullable="true"/>
 
-        <one-to-many
-            field="product"
-            target-entity="Application\ProductBundle\Entity\Product"
+        <field name="updated_at"  nullable="true"  column="updated_at"     type="datetime" />
+        <field name="created_at"  nullable="true"  column="created_at"     type="datetime" />
+
+        <many-to-one
+            field="order"
+            target-entity="Application\OrderBundle\Entity\Order"
             mapped-by="order_elements"
-            orphan-removal="">
+            >
+
+            <cascade>
+                <cascade-all />
+            </cascade>
 
             <join-columns>
                 <join-column
-                    name="product_id"
+                    name="order_id"
                     referenced-column-name="id"
-                    on-delete="SET NULL"/>
+                    on-delete="CASCADE"
+                />
             </join-columns>
-        </one-to-many>
-
+        </many-to-one>
+        
     </mapped-superclass>
 </doctrine-mapping>

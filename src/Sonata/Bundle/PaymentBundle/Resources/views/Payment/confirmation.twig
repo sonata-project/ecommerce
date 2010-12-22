@@ -1,0 +1,30 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% if order.is_validated %}
+    <h1>{% trans 'title_validation_confirmation_payment' from 'PaymentBundle' %}</h1>
+
+    <p>
+        {% trans 'message_validation_payment' from 'PaymentBundle' %}
+    </p>
+
+
+{% else %}
+
+    <h1>{% trans 'title_not_validated_confirmation_payment' from 'PaymentBundle' %}</h1>
+
+    <p>
+        {% trans 'message_not_validated_payment' from 'PaymentBundle' %}
+    </p>
+
+{% endif %}
+
+<a href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ order.reference }}</a>

@@ -8,7 +8,7 @@
         <property name="elements">
            <constraint name="Sonata\Component\Form\BasketElementCollection" >
                <option name="groups" >
-                    <value>basket</value>
+                    <value>elements</value>
                </option>
            </constraint>
         </property>
@@ -32,7 +32,7 @@
         <property name="payment_method">
            <constraint name="NotNull" >
                <option name="groups" >
-                    <value>billing</value>
+                    <value>payment</value>
                </option>
            </constraint>
         </property>
@@ -40,7 +40,7 @@
         <property name="payment_address">
            <constraint name="NotNull" >
                <option name="groups" >
-                    <value>billing</value>
+                    <value>payment</value>
                </option>
            </constraint>
         </property>

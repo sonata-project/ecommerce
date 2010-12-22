@@ -15,7 +15,7 @@ file that was distributed with this source code.
 {% if basket.hasElements %}
     {{ form|render_errors }}
 
-    <form action="{% url 'sonata_basket_update' %}" method="POST" >
+    <form action="{{ url('sonata_basket_update') }}" method="POST" >
         {{ form|render_hidden }}
 
         <table>
@@ -33,10 +33,10 @@ file that was distributed with this source code.
             <tbody>
                 {# call each product controller to render its own view #}
                 {% for basket_element in basket.getElements %}
-                    {% render 'ProductBundle:Product:renderFormBasketElement' with [
+                    {% render 'ProductBundle:Product:renderFormBasketElement' with {
                         'field_group': form.elements.get(basket_element.pos),
                         'basket_element' : basket_element
-                    ] %}
+                    } %}
                 {% endfor %}
             </tbody>
             <tfoot>
@@ -50,7 +50,7 @@ file that was distributed with this source code.
 
         <input type="submit" value="{% trans 'btn_update_basket' from 'BasketBundle' %}" />
 
-        <a href="{% url 'sonata_basket_authentification' %}">{% trans 'link_next_step' from 'BasketBundle' %}</a>
+        <a href="{{ url('sonata_basket_authentification') }}">{% trans 'link_next_step' from 'BasketBundle' %}</a>
 
     </form>
 
@@ -63,12 +63,3 @@ file that was distributed with this source code.
 {% if form.isValid %}
 
 {% endif %}
-
-{#
-<h2>Debug</h2>
-<ul>
-    {% for basket_element in basket.getElements %}
-        <li><a href="{% url 'sonata_product_view' with ['product_id': basket_element.product.id, 'slug': basket_element.product.slug] %}">{{ basket_element.name }}</a> - qty : {{ basket_element.quantity }} - price : {{ basket_element.getPrice(true) }} TTC - {{ basket_element.price  }} HT</li>
-    {% endfor %}
-</ul>
-#}

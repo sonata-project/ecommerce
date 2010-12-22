@@ -10,6 +10,8 @@
 
 namespace Sonata\Component\Payment;
 
+use Application\PaymentBundle\Entity\Transaction;
+
 /**
  * A free delivery method, used this only for testing
  *
@@ -38,7 +40,8 @@ abstract class BasePayment implements PaymentInterface
     /**
     * Generate a check value
     */
-    public function generateUrlCheck($order) {
+    public function generateUrlCheck($order)
+    {
 
         return sha1(
             $order->getReference().
@@ -48,37 +51,44 @@ abstract class BasePayment implements PaymentInterface
         );
     }
 
-    public function getCode() {
+    public function getCode()
+    {
 
         return $this->code;
     }
 
-    public function setCode($code) {
+    public function setCode($code)
+    {
 
         $this->code = $code;
     }
 
-    public function getName() {
+    public function getName()
+    {
 
         return $this->name;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
 
         $this->name = $name;
     }
 
-    public function setOptions($options) {
+    public function setOptions($options)
+    {
 
         $this->options = $options;
     }
 
-    public function getOptions() {
+    public function getOptions()
+    {
 
         return $this->options;
     }
 
-    public function getOption($name, $default = null) {
+    public function getOption($name, $default = null)
+    {
 
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
@@ -89,7 +99,8 @@ abstract class BasePayment implements PaymentInterface
      * @param string $value
      * @return string the encoded value
      */
-    public function encodeString($value) {
+    public function encodeString($value)
+    {
 
         return $value;
     }
@@ -100,7 +111,8 @@ abstract class BasePayment implements PaymentInterface
      * @param Basket $basket
      * @param Product $product
      */
-    public function isAddableProduct($basket, $product) {
+    public function isAddableProduct($basket, $product)
+    {
 
         return true;
     }
@@ -110,7 +122,8 @@ abstract class BasePayment implements PaymentInterface
      *
      * @return boolean
      */
-    public function isBasketValid($basket) {
+    public function isBasketValid($basket)
+    {
         
         return true;
     }
@@ -119,41 +132,49 @@ abstract class BasePayment implements PaymentInterface
      *
      * @return boolean true if callback ok else false
      */
-    public function isCallbackValid($transaction) {
+    public function isCallbackValid($transaction)
+    {
 
         return false;
     }
 
-    public function setLogger($logger) {
+    public function setLogger($logger)
+    {
 
         $this->logger = $logger;
     }
 
-    public function getLogger() {
+    public function getLogger()
+    {
         
         return $this->logger;
     }
 
-    public function setRouter($router) {
+    public function setRouter($router)
+    {
         $this->router = $router;
     }
 
-    public function getRouter() {
+    public function getRouter()
+    {
         return $this->router;
     }
 
-    public function addTransformer($id, $transformer) {
+    public function addTransformer($id, $transformer)
+    {
 
         $this->transformers[$id] = $transformer;
 
     }
 
-    public function getTransformer($name) {
+    public function getTransformer($name)
+    {
 
-        return isset($this->transformers[$name]) ? $this->transformer[$name] : false;
+        return isset($this->transformers[$name]) ? $this->transformers[$name] : false;
     }
 
-    public function callback($transaction) {
+    public function callback($transaction)
+    {
 
         // check if the order exists
         if(!$transaction->getOrder()) {

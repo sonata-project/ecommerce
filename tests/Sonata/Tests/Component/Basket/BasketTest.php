@@ -27,29 +27,30 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket = new Basket;
         
-        $repository = $this->getMock('ProductRepository', array('basketMergeProduct', 'basketAddProduct', 'basketCalculatePrice', 'isAddableToBasket'));
+        $repository = $this->getMock('ProductRepository', array('getClassMetadata', 'basketMergeProduct', 'basketAddProduct', 'basketCalculatePrice', 'isAddableToBasket'));
         $repository->expects($this->any())
             ->method('basketAddProduct')
-            ->will($this->returnCallback(function($bsket, $product, $params = array()) use ($basket) {
+            ->will($this->returnCallback(function($bsket, $product, $params = array()) use ($basket, $repository) {
 
            
                 $basket_element = new BasketElement;
                 $basket_element->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
-                $basket_element->setProduct($product);
+                $basket_element->setProduct($product, $repository);
 
                 $basket->addBasketElement($basket_element);
 
                 return $basket_element;
             }));
 
+
         $repository->expects($this->any())
             ->method('basketMergeProduct')
-            ->will($this->returnCallback(function($baskt, $product, $params = array()) use ($basket) {
+            ->will($this->returnCallback(function($baskt, $product, $params = array()) use ($basket, $repository) {
 
 
                 $basket_element = new BasketElement;
                 $basket_element->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
-                $basket_element->setProduct($product);
+                $basket_element->setProduct($product, $repository);
 
                 $basket->addBasketElement($basket_element);
 

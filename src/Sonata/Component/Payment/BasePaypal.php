@@ -34,14 +34,22 @@ abstract class BasePaypal extends BasePayment
     const PAYMENT_STATUS_PROCESSED          = 'Processed';
     const PAYMENT_STATUS_VOIDED             = 'Voided';
 
+
+    /**
+     *
+     * Object than manager http client
+     */
+    protected $web_connector_provider = null;
+
     /**
      * return true if the request contains a valid `check` parameter
      *
      * @param  $order
      * @return bool return true if the transaction contains a valid `check` parameter
      */
-    public function isRequestValid($transaction) {
-        $checkUrl = $transaction->getParameter('check');
+    public function isRequestValid($transaction)
+    {
+        $checkUrl = $transaction->get('check');
         
         $checkPrivate = $this->generateUrlCheck($transaction->getOrder());
 
@@ -54,9 +62,17 @@ abstract class BasePaypal extends BasePayment
      *
      * @return mixed
      */
-    public function applyTransactionId($transaction) {
+    public function applyTransactionId($transaction)
+    {
 
-        $transaction->setTransactionId($transaction->get('txn_id', null));
+        $transaction_id = $transaction->get('txn_id', null);
+
+        if(!$transaction_id) {
+            // no transaction id provided
+            $transaction_id = -1;
+        }
+        
+        $transaction->setTransactionId($transaction_id);
     }
 
     /**
@@ -64,7 +80,8 @@ abstract class BasePaypal extends BasePayment
      *
      * @return string
      */
-    public function getOrderReference($transaction) {
+    public function getOrderReference($transaction)
+    {
         $order = $transaction->get('order', null);
 
         if($this->getLogger())
@@ -80,7 +97,8 @@ abstract class BasePaypal extends BasePayment
      *
      * @throws RuntimeException
      */
-    public function checkPaypalFiles() {
+    public function checkPaypalFiles()
+    {
 
         $key_file           = $this->getOption('key_file');
         $cert_file          = $this->getOption('cert_file');
@@ -91,10 +109,10 @@ abstract class BasePaypal extends BasePayment
         // key file
         if (!file_exists($key_file)) {
             if($this->getLogger()) {
-                $this->getLogger()->emerg('Merchant key file not found');
+                $this->getLogger()->emerg(sprintf('Merchant key file not found : %s', $key_file));
             }
 
-            throw new \RuntimeException('Merchant key file not found');
+            throw new \RuntimeException(sprintf('Merchant key file not found : %s', $key_file));
         }
 
         if (!is_readable($key_file)) {
@@ -164,7 +182,8 @@ abstract class BasePaypal extends BasePayment
      * @param  $hash
      * @return string the encrypted data
      */
-    public function encryptViaBuffer($hash) {
+    public function encryptViaBuffer($hash)
+    {
         $this->checkPaypalFiles();
 
         $key_file           = $this->getOption('key_file');
@@ -222,14 +241,14 @@ abstract class BasePaypal extends BasePayment
      * @param  $hash
      * @return string  the encrypted data
      */
-    public function encryptViaFile($hash) {
+    public function encryptViaFile($hash)
+    {
         $this->checkPaypalFiles();
 
         $key_file         = $this->getOption('key_file');
         $cert_file        = $this->getOption('cert_file');
         $openssl          = $this->getOption('openssl');
         $paypal_cert_file = $this->getOption('paypal_cert_file');
-
 
         // create tmp file
         $filename = tempnam(sys_get_temp_dir(), 'sonata_paypal_');
@@ -274,7 +293,8 @@ abstract class BasePaypal extends BasePayment
      * @static
      * @return array
      */
-    public static function getPaymentStatusList() {
+    public static function getPaymentStatusList()
+    {
         return array(
             self::PAYMENT_STATUS_CANCELED_REVERSAL  => 'A reversal has been cancelled. For example, you won a dispute with the customer, and the funds for the transaction that was reversed have been returned to you',
             self::PAYMENT_STATUS_COMPLETED          => 'The payment has been completed, and the funds have been added successfully to your account balance',
@@ -286,5 +306,15 @@ abstract class BasePaypal extends BasePayment
             self::PAYMENT_STATUS_PROCESSED          => 'A payment has been accepted.',
             self::PAYMENT_STATUS_VOIDED             => 'This authorization has been voided.'
         );
+    }
+
+    public function setWebConnectorProvider($web_connector_provider)
+    {
+        $this->web_connector_provider = $web_connector_provider;
+    }
+
+    public function getWebConnectorProvider()
+    {
+        return $this->web_connector_provider;
     }
 }

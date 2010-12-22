@@ -14,8 +14,6 @@ namespace Sonata\Bundle\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Sonata\Component\Payment\Transaction;
-
 class CategoryAdminController extends Controller
 {
 

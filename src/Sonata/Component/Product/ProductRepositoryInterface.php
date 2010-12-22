@@ -26,8 +26,8 @@ interface ProductRepositoryInterface {
     /**
      * Merge a product with another when the product is already present into the basket
      *
-     * @param Basket $tr_shop_basket
-     * @param Product $tr_shop_product
+     * @param Basket $basket
+     * @param Product $product
      *
      * @return BasketElement
      */
@@ -35,7 +35,7 @@ interface ProductRepositoryInterface {
 
     /**
      * @abstract
-     * @param trShopBasketElement $tr_shop_basket_element
+     * @param BasketElement $basket_element
      *
      * @return boolean true if the basket element is still valid
      */

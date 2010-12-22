@@ -30,7 +30,7 @@ file that was distributed with this source code.
 
 {% block product_basket %}
 
-    <form action="{% url 'sonata_basket_add_product' %}" method="POST" >
+    <form action="{{ url('sonata_basket_add_product') }}" method="POST" >
         {{ form|render_hidden }}
 
         {% trans 'label_quantity' from 'Productbundle' %} {{ form.quantity|render }}
