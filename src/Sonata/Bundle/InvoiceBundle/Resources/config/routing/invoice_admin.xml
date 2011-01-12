@@ -8,11 +8,11 @@
         <default key="_controller">InvoiceBundle:InvoiceAdmin:index</default>
     </route>
 
-    <route id="sonata_admin_invoice_view" pattern="/:reference">
+    <route id="sonata_admin_invoice_view" pattern="/{reference}">
         <default key="_controller">InvoiceBundle:InvoiceAdmin:view</default>
     </route>
 
-    <route id="sonata_admin_invoice_update" pattern="/:reference/update">
+    <route id="sonata_admin_invoice_update" pattern="/{reference}/update">
         <default key="_controller">InvoiceBundle:InvoiceAdmin:update</default>
     </route>
 </routes>

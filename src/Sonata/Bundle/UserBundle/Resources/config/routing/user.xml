@@ -12,7 +12,7 @@
         <default key="_controller">UserBundle:User:addresses</default>
     </route>
 
-    <route id="sonata_user_address_edit" pattern="/address/edit/:address_id">
+    <route id="sonata_user_address_edit" pattern="/address/edit/{address_id}">
         <default key="_controller">UserBundle:User:editAddress</default>
     </route>
 

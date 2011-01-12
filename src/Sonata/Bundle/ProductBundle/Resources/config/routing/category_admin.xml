@@ -8,7 +8,7 @@
         <default key="_controller">ProductBundle:CategoryAdmin:index</default>
     </route>
 
-    <route id="sonata_admin_category_edit" pattern="/:category_id/edit">
+    <route id="sonata_admin_category_edit" pattern="/{category_id}/edit">
         <default key="_controller">ProductBundle:CategoryAdmin:edit</default>
     </route>
 
