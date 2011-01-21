@@ -14,7 +14,7 @@ namespace Sonata\Bundle\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Bundle\BaseApplicationBundle\Tool\DoctrinePager as Pager;
+use Bundle\Sonata\BaseApplicationBundle\Tool\DoctrinePager as Pager;
 use Doctrine\ORM\Query\Expr;
 
 class CategoryController extends Controller
@@ -28,8 +28,8 @@ class CategoryController extends Controller
     public function indexAction()
     {
         $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('ProductBundle:Category');
-        $class          = $em->getClassMetaData('ProductBundle:Category')->name;
+        $repository     = $em->getRepository('Application\ProductBundle\Entity\Category');
+        $class          = $em->getClassMetaData('Application\ProductBundle\Entity\Category')->name;
 
         $query_buidler = $repository
             ->createQueryBuilder('c')
@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->init();
 
-        return $this->render('ProductBundle:Category:index.twig', array(
+        return $this->render('ProductBundle:Category:index.twig.html', array(
             'pager' => $pager,
         ));
         
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
 
         $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('ProductBundle:Category');
+        $repository     = $em->getRepository('Application\ProductBundle\Entity\Category');
 
         $category = $repository->findOneById($category_id);
 
@@ -67,7 +67,7 @@ class CategoryController extends Controller
             throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $category_id));
         }
 
-        return $this->render('ProductBundle:Category:view.twig', array(
+        return $this->render('ProductBundle:Category:view.twig.html', array(
            'category' => $category
         ));
     }
@@ -81,8 +81,8 @@ class CategoryController extends Controller
     public function listSubCategoriesAction($category_id)
     {
         $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('ProductBundle:Category');
-        $class          = $em->getClassMetaData('ProductBundle:Category')->name;
+        $repository     = $em->getRepository('Application\ProductBundle\Entity\Category');
+        $class          = $em->getClassMetaData('Application\ProductBundle\Entity\Category')->name;
 
         $query_buidler = $repository
             ->createQueryBuilder('c')
@@ -95,7 +95,7 @@ class CategoryController extends Controller
         $pager->setMaxPerPage(30);
         $pager->init();
 
-        return $this->render('ProductBundle:Category:list_sub_categories.twig', array(
+        return $this->render('ProductBundle:Category:list_sub_categories.twig.html', array(
             'pager' => $pager
         ));
     }
@@ -110,8 +110,8 @@ class CategoryController extends Controller
     {
 
         $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('ProductBundle:Product');
-        $class          = $em->getClassMetaData('ProductBundle:Product')->name;
+        $repository     = $em->getRepository('Application\ProductBundle\Entity\Product');
+        $class          = $em->getClassMetaData('Application\ProductBundle\Entity\Product')->name;
         
         $query_buidler = $repository
             ->createQueryBuilder('p')
@@ -126,7 +126,7 @@ class CategoryController extends Controller
         $pager->setMaxPerPage(30);
         $pager->init();
 
-        return $this->render('ProductBundle:Category:list_products.twig', array(
+        return $this->render('ProductBundle:Category:list_products.twig.html', array(
             'pager' => $pager
         ));
     }
@@ -135,11 +135,11 @@ class CategoryController extends Controller
     public function listSideMenuCategoriesAction($category = null, $depth = 1, $deep = 0)
     {
         $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('ProductBundle:Category');
+        $repository     = $em->getRepository('Application\ProductBundle\Entity\Category');
 
         $category = $category ?: $repository->getRootCategory();
 
-        return $this->render('ProductBundle:Category:side_menu_category.twig', array(
+        return $this->render('ProductBundle:Category:side_menu_category.twig.html', array(
           'root_category' => $category,
           'depth'         => $depth,
           'deep'          => $deep + 1

@@ -93,7 +93,7 @@ class BasketController extends Controller
         }
 
         
-        return $this->render('BasketBundle:Basket:index.twig', array(
+        return $this->render('BasketBundle:Basket:index.twig.html', array(
             'basket' => $this->get('sonata.basket'),
             'form'   => $form
         ));
@@ -141,7 +141,7 @@ class BasketController extends Controller
         // retrieve the product
         $product = $this
             ->get('doctrine.orm.default_entity_manager')
-            ->find('ProductBundle:Product', $params['product_id']);
+            ->find('Application\ProductBundle\Entity\Product', $params['product_id']);
 
         if(!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $params['product_id']));
@@ -185,7 +185,7 @@ class BasketController extends Controller
     public function headerPreviewAction()
     {
 
-        return $this->render('BasketBundle:Basket:header_preview.twig', array(
+        return $this->render('BasketBundle:Basket:header_preview.twig.html', array(
              'basket' => $this->get('sonata.basket')
         ));
     }
@@ -211,7 +211,7 @@ class BasketController extends Controller
 
         $transformer = new EntityToIDTransformer(array(
             'em' =>  $this->get('doctrine.orm.default_entity_manager'),
-            'className' => 'BasketBundle:Address'
+            'className' => 'Application\BasketBundle\Entity\Address'
         ));
 
         $field = new ChoiceField('payment_address', array(
@@ -257,7 +257,7 @@ class BasketController extends Controller
 
         $payment_addresses = $this
             ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT a FROM BasketBundle:Address a INDEX BY a.id WHERE a.type = :type AND a.user = :user')
+            ->createQuery('SELECT a FROM Bundle\BasketBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.user = :user')
             ->setParameters(array(
                 'type' => \Application\BasketBundle\Entity\Address::TYPE_BILLING,
                 'user' => $user->getId())
@@ -292,7 +292,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('BasketBundle:Basket:payment_step.twig', array(
+        return $this->render('BasketBundle:Basket:payment_step.twig.html', array(
             'basket' => $basket,
             'form'   => $form,
             'user'   => $user,
@@ -307,7 +307,7 @@ class BasketController extends Controller
 
         $transformer = new EntityToIDTransformer(array(
             'em' =>  $this->get('doctrine.orm.default_entity_manager'),
-            'className' => 'BasketBundle:Address'
+            'className' => 'Application\BasketBundle\Entity\Address'
         ));
 
         $field = new ChoiceField('delivery_address', array(
@@ -354,7 +354,7 @@ class BasketController extends Controller
 
         $delivery_addresses = $this
             ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT a FROM BasketBundle:Address a INDEX BY a.id WHERE a.type = :type AND a.user = :user')
+            ->createQuery('SELECT a FROM Application\BasketBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.user = :user')
             ->setParameters(array(
                 'type' => \Application\BasketBundle\Entity\Address::TYPE_DELIVERY,
                 'user' => $user->getId())
@@ -390,7 +390,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('BasketBundle:Basket:delivery_step.twig', array(
+        return $this->render('BasketBundle:Basket:delivery_step.twig.html', array(
             'basket' => $basket,
             'form'   => $form,
             'user'   => $user,
@@ -422,7 +422,7 @@ class BasketController extends Controller
 
         }
 
-        return $this->render('BasketBundle:Basket:final_review_step.twig', array(
+        return $this->render('BasketBundle:Basket:final_review_step.twig.html', array(
             'basket'    => $basket,
             'tac_error' => $this->get('request')->getMethod() == 'POST'
         ));

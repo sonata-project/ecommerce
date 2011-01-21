@@ -42,23 +42,7 @@
         <field name="updated_at"  nullable="true"  column="updated_at"     type="datetime" />
         <field name="created_at"  nullable="true"  column="created_at"     type="datetime" />
 
-        <one-to-many
-            field="order_elements"
-            target-entity="Application\OrderBundle\Entity\OrderElement"
-            mapped-by="order"
-            >
 
-            <cascade>
-                <cascade-all />
-            </cascade>
-
-            <join-columns>
-                <join-column
-                    name="id"
-                    referenced-column-name="order_id"
-                    on-delete="CASCADE"/>
-            </join-columns>
-        </one-to-many>
         
     </mapped-superclass>
 </doctrine-mapping>

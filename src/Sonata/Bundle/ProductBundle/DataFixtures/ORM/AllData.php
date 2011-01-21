@@ -19,7 +19,7 @@ use Application\ProductBundle\Entity\Bottle as Product;
 
 use Application\BasketBundle\Entity\Address;
 use Application\ProductBundle\Entity\Delivery;
-use Application\DoctrineUserBundle\Entity\User;
+use Application\FOS\UserBundle\Entity\User;
 use Application\ProductBundle\Entity\ProductCategory;
 
 class AllData implements FixtureInterface

@@ -72,7 +72,7 @@ class PaymentController extends Controller
 
         $this->get('session')->set('sonata/basket', $basket);
 
-        return $this->render('PaymentBundle:Payment:error.twig', array(
+        return $this->render('PaymentBundle:Payment:error.twig.html', array(
             'order' => $order,
             'basket' => $basket
         ));
@@ -101,7 +101,7 @@ class PaymentController extends Controller
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
 
-        return $this->render('PaymentBundle:Payment:confirmation.twig', array(
+        return $this->render('PaymentBundle:Payment:confirmation.twig.html', array(
             'order' => $order,
         ));
     }

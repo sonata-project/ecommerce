@@ -9,35 +9,6 @@
 
         <field name="updated_at"    column="updated_at"     type="datetime" />
         <field name="created_at"    column="created_at"     type="datetime" />
-
-        <many-to-one
-            field="Product"
-            target-entity="Application\ProductBundle\Entity\Product"
-            inversed-by="ProductCategories"
-            >
-
-            <join-column
-               name="product_id"
-               referenced-column-name="id"
-               on-delete="CASCADE"
-               on-update="CASCADE"
-            />
-        </many-to-one>
-
-        <many-to-one
-            field="Category"
-            target-entity="Application\ProductBundle\Entity\Category"
-            inversed-by="ProductCategories"
-            >
-
-            <join-column
-               name="category_id"
-               referenced-column-name="id"
-               on-delete="CASCADE"
-               on-update="CASCADE"
-            />
-        </many-to-one>
-
     </mapped-superclass>
     
 </doctrine-mapping>

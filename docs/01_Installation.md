@@ -42,7 +42,7 @@ Installation
             new Application\DeliveryBundle\DeliveryBundle(),
             new Application\BasketBundle\BasketBundle(),
             new Application\InvoiceBundle\InvoiceBundle(),
-            new Application\MediaBundle\MediaBundle(),
+            new Application\Sonata\MediaBundle\MediaBundle(),
             new Application\OrderBundle\OrderBundle(),
             new Application\PaymentBundle\PaymentBundle(),
             new Application\ProductBundle\ProductBundle(),
@@ -87,7 +87,7 @@ Installation
 
             class:
                 model:
-                    user: Application\DoctrineUserBundle\Entity\User # you must define your own user class
+                    user: Application\FOS\UserBundle\Entity\User # you must define your own user class
 
         sonata_payment.config:
             methods:

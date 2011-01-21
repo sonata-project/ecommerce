@@ -11,32 +11,5 @@
         <field name="designation"       type="string"   column="designation"        length="255"/>
         <field name="description"       type="text"     column="description"/>
 
-        <one-to-many
-            field="invoice"
-            target-entity="Application\InvoiceBundle\Entity\Invoice"
-            mapped-by="invoice_elements"
-            orphan-removal="">
-
-            <join-columns>
-                <join-column
-                    name="invoice_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"/>
-            </join-columns>
-        </one-to-many>
-
-        <one-to-many
-            field="order_element"
-            target-entity="Application\OrderBundle\Entity\OrderElement"
-            mapped-by="invoice_element"
-            orphan-removal="">
-            <join-columns>
-                <join-column
-                    name="order_element_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"/>
-            </join-columns>
-        </one-to-many>
-        
     </mapped-superclass>
 </doctrine-mapping>

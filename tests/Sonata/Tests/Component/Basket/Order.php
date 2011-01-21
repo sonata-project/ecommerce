@@ -14,6 +14,6 @@ namespace Sonata\Tests\Component\Basket;
 use Sonata\Component\Payment\BasePayment;
 
 
-class Order extends \Sonata\Bundle\OrderBundle\Entity\BaseOrder {
+class Order extends \Sonata\OrderBundle\Entity\BaseOrder {
 
 }

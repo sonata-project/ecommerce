@@ -10,7 +10,7 @@
  */
 namespace Sonata\Tests\Component\Basket;
 
-use Sonata\Bundle\ProductBundle\Entity\BaseProductRepository;
+use Sonata\ProductBundle\Entity\BaseProductRepository;
 
 class ProductRepository extends BaseProductRepository
 {

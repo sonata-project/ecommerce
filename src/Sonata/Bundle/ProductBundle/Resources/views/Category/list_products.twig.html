@@ -1,0 +1,22 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<h2>{% trans 'title_list_products' from 'CategoryBundle' %}</h2>
+
+{% if pager.count == 0 %}
+    {% trans 'no_products_available' from 'CategoryBundle' %}
+{% else %}
+    <ul>
+        {% for product in pager.getResults %}
+            <li><a href="{{ url('sonata_product_view', {'product_id': product.id, 'slug': product.slug}) }}">{{ product.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -18,24 +18,5 @@
         <field name="updated_at"  nullable="true"  column="updated_at"     type="datetime" />
         <field name="created_at"  nullable="true"  column="created_at"     type="datetime" />
 
-        <many-to-one
-            field="order"
-            target-entity="Application\OrderBundle\Entity\Order"
-            mapped-by="order_elements"
-            >
-
-            <cascade>
-                <cascade-all />
-            </cascade>
-
-            <join-columns>
-                <join-column
-                    name="order_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"
-                />
-            </join-columns>
-        </many-to-one>
-        
     </mapped-superclass>
 </doctrine-mapping>

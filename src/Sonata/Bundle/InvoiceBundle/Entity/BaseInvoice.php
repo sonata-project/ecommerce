@@ -432,16 +432,16 @@ abstract class BaseInvoice
         return $this->mobile;
     }
     /**
-     * @var Application\DoctrineUserBundle\Entity\User
+     * @var Application\FOS\UserBundle\Entity\User
      */
     protected $user;
 
     /**
      * Set user
      *
-     * @param Application\DoctrineUserBundle\Entity\User $user
+     * @param Application\FOS\UserBundle\Entity\User $user
      */
-    public function setUser(\Application\DoctrineUserBundle\Entity\User $user)
+    public function setUser(\Application\FOS\UserBundle\Entity\User $user)
     {
         $this->user = $user;
     }
@@ -449,7 +449,7 @@ abstract class BaseInvoice
     /**
      * Get user
      *
-     * @return Application\DoctrineUserBundle\Entity\User $user
+     * @return Application\FOS\UserBundle\Entity\User $user
      */
     public function getUser()
     {

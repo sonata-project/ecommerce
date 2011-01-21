@@ -23,7 +23,7 @@ class ProductController extends Controller
     {
 
         $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('ProductBundle:Product');
+        $repository     = $em->getRepository('Application\ProductBundle\Entity\Product');
 
         $product = is_object($product_id) ? $product_id : $repository->findOneById($product_id);
 

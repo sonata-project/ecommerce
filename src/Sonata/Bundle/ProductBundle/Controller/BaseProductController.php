@@ -33,7 +33,7 @@ abstract class BaseProductController extends Controller
             $form = $repository->getAddBasketForm($product, $this->get('validator'));
         }
 
-        return $this->render(sprintf('ProductBundle:%s:view.twig', ucfirst($this->getProductCode($product))), array(
+        return $this->render(sprintf('ProductBundle:%s:view.twig.html', ucfirst($this->getProductCode($product))), array(
            'product' => $product,
            'form'    => $form,
         ));
@@ -42,7 +42,7 @@ abstract class BaseProductController extends Controller
     public function renderFormBasketElementAction($field_group, $basket_element)
     {
 
-        return $this->render(sprintf('ProductBundle:%s:form_basket_element.twig', ucfirst($this->getProductCode($basket_element->getProduct()))), array(
+        return $this->render(sprintf('ProductBundle:%s:form_basket_element.twig.html', ucfirst($this->getProductCode($basket_element->getProduct()))), array(
            'field_group'    => $field_group,
            'basket_element' => $basket_element,
         ));
@@ -50,7 +50,7 @@ abstract class BaseProductController extends Controller
 
     public function renderFinalReviewBasketElementAction($basket_element)
     {
-        return $this->render(sprintf('ProductBundle:%s:final_review_basket_element.twig', ucfirst($this->getProductCode($basket_element->getProduct()))), array(
+        return $this->render(sprintf('ProductBundle:%s:final_review_basket_element.twig.html', ucfirst($this->getProductCode($basket_element->getProduct()))), array(
            'basket_element' => $basket_element,
         ));
 

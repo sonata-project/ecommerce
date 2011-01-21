@@ -874,7 +874,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     /**
      * Set user
      *
-     * @param Application\DoctrineUserBundle\Entity\User $user
+     * @param Application\FOS\UserBundle\Entity\User $user
      */
     public function setUser($user)
     {
@@ -884,7 +884,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     /**
      * Get user
      *
-     * @return Application\DoctrineUserBundle\Entity\User $user
+     * @return Application\FOS\UserBundle\Entity\User $user
      */
     public function getUser()
     {

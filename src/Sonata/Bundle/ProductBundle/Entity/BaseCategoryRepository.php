@@ -35,7 +35,7 @@ class BaseCategoryRepository extends \Doctrine\ORM\EntityRepository
 
         $this->categories = $this
             ->getEntityManager()
-            ->createQuery('SELECT c FROM ProductBundle:Category c INDEX BY c.id')
+            ->createQuery('SELECT c FROM Application\ProductBundle\Entity\Category c INDEX BY c.id')
             ->execute();
 
         $root = new $class;
