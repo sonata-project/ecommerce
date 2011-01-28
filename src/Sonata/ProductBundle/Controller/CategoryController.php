@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
         $query_buidler = $repository
             ->createQueryBuilder('c')
-            ->where('c.Parent IS NULL');
+            ->where('c.parent IS NULL');
 
 
         $pager = new Pager($class);
@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->init();
 
-        return $this->render('ProductBundle:Category:index.twig.html', array(
+        return $this->render('SonataProductBundle:Category:index.twig.html', array(
             'pager' => $pager,
         ));
         
@@ -67,7 +67,7 @@ class CategoryController extends Controller
             throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $category_id));
         }
 
-        return $this->render('ProductBundle:Category:view.twig.html', array(
+        return $this->render('SonataProductBundle:Category:view.twig.html', array(
            'category' => $category
         ));
     }
@@ -86,7 +86,7 @@ class CategoryController extends Controller
 
         $query_buidler = $repository
             ->createQueryBuilder('c')
-            ->where('c.Parent = :category_id');
+            ->where('c.parent = :category_id');
 
         $pager = new Pager($class);
         $pager->setQueryBuilder($query_buidler);
@@ -95,7 +95,7 @@ class CategoryController extends Controller
         $pager->setMaxPerPage(30);
         $pager->init();
 
-        return $this->render('ProductBundle:Category:list_sub_categories.twig.html', array(
+        return $this->render('SonataProductBundle:Category:list_sub_categories.twig.html', array(
             'pager' => $pager
         ));
     }
@@ -115,9 +115,9 @@ class CategoryController extends Controller
         
         $query_buidler = $repository
             ->createQueryBuilder('p')
-            ->leftJoin('p.ProductCategories', 'pc')
+            ->leftJoin('p.productCategories', 'pc')
             ->leftJoin('p.image', 'i')
-            ->where('pc.Category = :category_id');
+            ->where('pc.category = :category_id');
 
         $pager = new Pager($class);
         $pager->setQueryBuilder($query_buidler);
@@ -126,7 +126,7 @@ class CategoryController extends Controller
         $pager->setMaxPerPage(30);
         $pager->init();
 
-        return $this->render('ProductBundle:Category:list_products.twig.html', array(
+        return $this->render('SonataProductBundle:Category:list_products.twig.html', array(
             'pager' => $pager
         ));
     }
@@ -139,7 +139,7 @@ class CategoryController extends Controller
 
         $category = $category ?: $repository->getRootCategory();
 
-        return $this->render('ProductBundle:Category:side_menu_category.twig.html', array(
+        return $this->render('SonataProductBundle:Category:side_menu_category.twig.html', array(
           'root_category' => $category,
           'depth'         => $depth,
           'deep'          => $deep + 1

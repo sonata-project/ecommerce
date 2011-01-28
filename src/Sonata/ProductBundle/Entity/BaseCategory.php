@@ -24,7 +24,7 @@ abstract class BaseCategory
     /**
      * @var text $sub_description
      */
-    protected $sub_description;
+    protected $subDescription;
 
     /**
      * @var boolean $enabled
@@ -34,12 +34,12 @@ abstract class BaseCategory
     /**
      * @var datetime $updated_at
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * @var datetime $created_at
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
      * @var text $description
@@ -56,9 +56,9 @@ abstract class BaseCategory
      */
     protected $position;
 
-    protected $Children;
+    protected $children;
 
-    protected $Parent;
+    protected $parent;
 
     /**
      * Set sub_description
@@ -67,7 +67,7 @@ abstract class BaseCategory
      */
     public function setSubDescription($subDescription)
     {
-        $this->sub_description = $subDescription;
+        $this->subDescription = $subDescription;
     }
 
     /**
@@ -77,7 +77,7 @@ abstract class BaseCategory
      */
     public function getSubDescription()
     {
-        return $this->sub_description;
+        return $this->subDescription;
     }
 
     /**
@@ -107,7 +107,7 @@ abstract class BaseCategory
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -117,7 +117,7 @@ abstract class BaseCategory
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -127,7 +127,7 @@ abstract class BaseCategory
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -137,7 +137,7 @@ abstract class BaseCategory
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -226,7 +226,7 @@ abstract class BaseCategory
      */
     public function addChildren(\Application\Sonata\ProductBundle\Entity\Category $children, $nested = false)
     {
-        $this->Children[] = $children;
+        $this->children[] = $children;
 
 //        if(!$nested) {
 //            $children->setParent($this, true);
@@ -235,9 +235,9 @@ abstract class BaseCategory
 
     public function disableChildrenLazyLoading()
     {
-        if(is_object($this->Children))
+        if(is_object($this->children))
         {
-            $this->Children->setInitialized(true);
+            $this->children->setInitialized(true);
         }
     }
 
@@ -248,13 +248,13 @@ abstract class BaseCategory
      */
     public function getChildren()
     {
-        return $this->Children;
+        return $this->children;
     }
 
     public function hasChildren()
     {
         
-        return count($this->Children) > 0;
+        return count($this->children) > 0;
     }
 
     /**
@@ -264,7 +264,7 @@ abstract class BaseCategory
      */
     public function setParent(\Application\Sonata\ProductBundle\Entity\Category $parent, $nested = false)
     {
-        $this->Parent = $parent;
+        $this->parent = $parent;
 
         if(!$nested) {
             $parent->addChildren($this, true);
@@ -278,6 +278,6 @@ abstract class BaseCategory
      */
     public function getParent()
     {
-        return $this->Parent;
+        return $this->parent;
     }
 }

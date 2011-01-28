@@ -5,19 +5,19 @@
     xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
 
     <route id="sonata_customer_dashboard" pattern="/dashboard">
-        <default key="_controller">SonataCustomerBundle:User:dashboard</default>
+        <default key="_controller">SonataCustomerBundle:Customer:dashboard</default>
     </route>
 
     <route id="sonata_customer_addresses" pattern="/address">
-        <default key="_controller">SonataCustomerBundle:User:addresses</default>
+        <default key="_controller">SonataCustomerBundle:Customer:addresses</default>
     </route>
 
     <route id="sonata_customer_address_edit" pattern="/address/edit/{address_id}">
-        <default key="_controller">SonataCustomerBundle:User:editAddress</default>
+        <default key="_controller">SonataCustomerBundle:Customer:editAddress</default>
     </route>
 
     <route id="sonata_customer_address_update" pattern="/address/update">
-        <default key="_controller">SonataCustomerBundle:User:updateAddress</default>
+        <default key="_controller">SonataCustomerBundle:Customer:updateAddress</default>
     </route>
 
 </routes>

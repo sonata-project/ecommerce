@@ -74,7 +74,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     /**
      * @var string $country
      */
-    protected $country_code;
+    protected $countryCode;
 
     /**
      * @var string $phone
@@ -84,17 +84,17 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     /**
      * @var datetime $updated_at
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * @var datetime $created_at
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
-     * @var Application\SandboxBundle\Entity\User
+     * @var 
      */
-    protected $user;
+    protected $customer;
 
 
     /**
@@ -127,6 +127,12 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
         $this->type = $type;
     }
 
+    public function getTypeCode()
+    {
+        $types = self::getTypesList();
+
+        return isset($types[$this->getType()]) ? $types[$this->getType()] : null;
+    }
     /**
      * Get type
      *
@@ -182,9 +188,9 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      *
      * @param string $addr1
      */
-    public function setAddr1($addr1)
+    public function setAddress1($address1)
     {
-        $this->addr1 = $addr1;
+        $this->address1 = $address1;
     }
 
     /**
@@ -204,7 +210,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     public function setAddress2($address2)
     {
-        $this->addr2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
@@ -224,7 +230,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     public function setAddress3($address3)
     {
-        $this->addr3 = $address3;
+        $this->address3 = $address3;
     }
 
     /**
@@ -282,9 +288,9 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      *
      * @param string $country
      */
-    public function setCountryCode($country_code)
+    public function setCountryCode($countryCode)
     {
-        $this->country_code = $country_code;
+        $this->countryCode = $countryCode;
     }
 
     /**
@@ -294,7 +300,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     public function getCountryCode()
     {
-        return $this->country_code;
+        return $this->countryCode;
     }
 
     /**
@@ -324,7 +330,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -334,7 +340,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -344,7 +350,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -354,37 +360,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
-    }
-
-    /**
-     * Set user
-     *
-     * @param Application\SandboxBundle\Entity\User $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * Get user
-     *
-     * @return Application\SandboxBundle\Entity\User $user
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-    
-    /**
-     * Set address1
-     *
-     * @param string $address1
-     */
-    public function setAddress1($address1)
-    {
-        $this->address1 = $address1;
+        return $this->createdAt;
     }
 
     public function setName($name)
@@ -402,12 +378,24 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     public function getFullAddress($sep = "\n")
     {
 
-        return sprintf("%s, %s, %s, %s",
-            $this->getName(),
+        return sprintf("%s %s, %s, %s, %s (%s)",
+            $this->getFirstname(),
+            $this->getLastname(),
             $this->getAddress1(),
             $this->getPostcode(),
-            $this->getCity()
+            $this->getCity(),
+            $this->getCountryCode()
         );
+    }
+
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+    }
+
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 
 }

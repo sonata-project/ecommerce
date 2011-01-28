@@ -16,7 +16,7 @@ file that was distributed with this source code.
 
             {% if category.hasChildren and deep < depth%}
                 
-                {% render 'ProductBundle:Category:listSideMenuCategories' with {
+                {% render 'SonataProductBundle:Category:listSideMenuCategories' with {
                     'category': category,
                     'deep' : deep,
                     'depth': depth

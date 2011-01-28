@@ -9,9 +9,9 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\ProductBundle\Entity\Package"
+        name="Application\Sonata\ProductBundle\Entity\Package"
         table="product__package"
-        repository-class="Application\ProductBundle\Entity\PackageRepository">
+        repository-class="Application\Sonata\ProductBundle\Entity\PackageRepository">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

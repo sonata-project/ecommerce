@@ -18,7 +18,7 @@ abstract class BasePackage
     /**
      * @var integer $product_id
      */
-    protected $product_id;
+    protected $productId;
 
     /**
      * @var decimal $width
@@ -48,12 +48,12 @@ abstract class BasePackage
     /**
      * @var datetime $updated_at
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * @var datetime $created_at
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
      * Set product_id
@@ -62,7 +62,7 @@ abstract class BasePackage
      */
     public function setProductId($productId)
     {
-        $this->product_id = $productId;
+        $this->productId = $productId;
     }
 
     /**
@@ -72,7 +72,7 @@ abstract class BasePackage
      */
     public function getProductId()
     {
-        return $this->product_id;
+        return $this->productId;
     }
 
     /**
@@ -182,7 +182,7 @@ abstract class BasePackage
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -192,7 +192,7 @@ abstract class BasePackage
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -202,7 +202,7 @@ abstract class BasePackage
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -212,6 +212,6 @@ abstract class BasePackage
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 }

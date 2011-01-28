@@ -19,8 +19,8 @@
 
         <many-to-one
             field="order"
-            target-entity="Application\OrderBundle\Entity\Order"
-            mapped-by="order_elements"
+            target-entity="Application\Sonata\OrderBundle\Entity\Order"
+            mapped-by="orderElements"
             >
 
             <cascade>

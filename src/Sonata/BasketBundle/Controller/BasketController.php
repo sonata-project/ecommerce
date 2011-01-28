@@ -13,7 +13,6 @@ namespace Sonata\BasketBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 use Symfony\Component\Form\Form;
@@ -38,12 +37,11 @@ class BasketController extends Controller
     {
 
         // always clone the basket, so the one in session is never altered
-        $form = new Form('basket', clone $this->get('sonata.basket'), $this->get('validator'));
-        $form->setValidationGroups(array('elements'));
+        $form = new Form('basket', clone $this->get('sonata.basket'), $this->get('validator'), array('validation_groups' => 'elements'));
 
-        $elements = new FieldGroup('elements');
+        $elements = new FieldGroup('basketElements');
         
-        foreach($this->get('sonata.basket')->getElements() as $basket_element) {
+        foreach($this->get('sonata.basket')->getBasketElements() as $basket_element) {
 
             // ask each product repository to populate an empty group field instance
             // so each line can be tweaked depends on the product logic
@@ -92,8 +90,7 @@ class BasketController extends Controller
             }
         }
 
-        
-        return $this->render('BasketBundle:Basket:index.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:index.twig.html', array(
             'basket' => $this->get('sonata.basket'),
             'form'   => $form
         ));
@@ -118,7 +115,7 @@ class BasketController extends Controller
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
-        return $this->forward('BasketBundle:Basket:index', array(
+        return $this->forward('SonataBasketBundle:Basket:index', array(
            'form' => $form
         ));
     }
@@ -169,7 +166,7 @@ class BasketController extends Controller
         }
         
         // an error occur, forward the request to the view
-        return $this->forward('ProductBundle:Product:view', array(
+        return $this->forward('SonataProductBundle:Product:view', array(
             'product_id' => $product,
             'slug'       => $product->getSlug(),
         ));
@@ -178,40 +175,43 @@ class BasketController extends Controller
     public function resetAction()
     {
         $this->get('sonata.basket')->reset();
-
+        
         return $this->redirect($this->generateUrl('sonata_basket_index'));
     }
 
     public function headerPreviewAction()
     {
 
-        return $this->render('BasketBundle:Basket:header_preview.twig.html', array(
+//        throw new \Exception();
+        return $this->render('SonataBasketBundle:Basket:header_preview.twig.html', array(
              'basket' => $this->get('sonata.basket')
         ));
     }
 
     public function authentificationStepAction()
     {
+
         // todo : code the connection bit
-        $user = $this
+        $customers = $this
             ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT u FROM DoctrineUserBundle:User u')
+            ->createQuery('SELECT c FROM Application\Sonata\CustomerBundle\Entity\Customer c')
             ->setMaxResults(1)
             ->execute();
 
-        $this->container->get('doctrine_user.auth')->login($user[0]);
+        $this->get('sonata.basket')->setCustomer(count($customers) > 0 ? $customers[0] : null);
 
         return $this->redirect($this->generateUrl('sonata_basket_delivery'));
     }
 
     public function getPaymentForm($basket, $payment_addresses, $payment_methods)
     {
-        $form = new Form('payment', $basket, $this->get('validator'));
-        $form->setValidationGroups(array('payment'));
+        $form = new Form('payment', $basket, $this->get('validator'), array(
+            'validation_groups' => 'payment'
+        ));
 
         $transformer = new EntityToIDTransformer(array(
             'em' =>  $this->get('doctrine.orm.default_entity_manager'),
-            'className' => 'Application\BasketBundle\Entity\Address'
+            'className' => 'Application\Sonata\BasketBundle\Entity\Address'
         ));
 
         $field = new ChoiceField('payment_address', array(
@@ -244,7 +244,7 @@ class BasketController extends Controller
     {
         $basket = clone $this->get('sonata.basket');
 
-        if($basket->countElements() == 0) {
+        if($basket->countBasketElements() == 0) {
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
@@ -257,7 +257,7 @@ class BasketController extends Controller
 
         $payment_addresses = $this
             ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT a FROM Bundle\BasketBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.user = :user')
+            ->createQuery('SELECT a FROM Application\Sonata\BasketBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.user = :user')
             ->setParameters(array(
                 'type' => \Application\BasketBundle\Entity\Address::TYPE_BILLING,
                 'user' => $user->getId())
@@ -292,7 +292,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('BasketBundle:Basket:payment_step.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:payment_step.twig.html', array(
             'basket' => $basket,
             'form'   => $form,
             'user'   => $user,
@@ -302,15 +302,14 @@ class BasketController extends Controller
 
     public function getDeliveryForm($basket, $delivery_addresses, $delivery_methods)
     {
-        $form = new Form('shipping', $basket, $this->get('validator'));
-        $form->setValidationGroups(array('delivery'));
+        $form = new Form('shipping', $basket, $this->get('validator'), array('validation_groups' => 'delivery'));
 
         $transformer = new EntityToIDTransformer(array(
             'em' =>  $this->get('doctrine.orm.default_entity_manager'),
-            'className' => 'Application\BasketBundle\Entity\Address'
+            'className' => 'Application\Sonata\BasketBundle\Entity\Address'
         ));
 
-        $field = new ChoiceField('delivery_address', array(
+        $field = new ChoiceField('deliveryAddress', array(
             'expanded' => true,
             'choices' => array_map(function($address)  { return $address->getFullAddress('<br />'); }, $delivery_addresses),
             'value_transformer' => $transformer,
@@ -323,7 +322,7 @@ class BasketController extends Controller
             $choices[$method->getCode()] = $method->getName();
         }
 
-        $field = new ChoiceField('delivery_method', array(
+        $field = new ChoiceField('deliveryMethod', array(
             'expanded' => true,
             'choices' => $choices,
             'value_transformer' => new DeliveryMethodTransformer(array(
@@ -341,23 +340,23 @@ class BasketController extends Controller
 
         $basket = clone $this->get('sonata.basket');
 
-        if($basket->countElements() == 0) {
+        if($basket->countBasketElements() == 0) {
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
-        $user = $this->container->get('doctrine_user.auth')->getUser();
+        $customer = $basket->getCustomer();
 
-        if(!$user) {
-            throw new HttpException('Invalid user');
+        if(!$customer) {
+            throw new NotFoundHttpException('customer not found');
         }
 
         $delivery_addresses = $this
             ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT a FROM Application\BasketBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.user = :user')
+            ->createQuery('SELECT a FROM Application\Sonata\CustomerBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.customer = :customer')
             ->setParameters(array(
-                'type' => \Application\BasketBundle\Entity\Address::TYPE_DELIVERY,
-                'user' => $user->getId())
+                'type' => \Application\Sonata\CustomerBundle\Entity\Address::TYPE_DELIVERY,
+                'customer' => $customer->getId())
             )
             ->execute();
 
@@ -390,10 +389,10 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('BasketBundle:Basket:delivery_step.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:delivery_step.twig.html', array(
             'basket' => $basket,
             'form'   => $form,
-            'user'   => $user,
+            'customer'   => $customer,
             'delivery_methods' => $delivery_methods
         ));
     }
@@ -417,12 +416,12 @@ class BasketController extends Controller
             if($this->get('request')->get('tac'))
             {
                 // send the basket to the payment callback
-                return $this->forward('PaymentBundle:Payment:callbank');
+                return $this->forward('SonataPaymentBundle:Payment:callbank');
             }
 
         }
 
-        return $this->render('BasketBundle:Basket:final_review_step.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:final_review_step.twig.html', array(
             'basket'    => $basket,
             'tac_error' => $this->get('request')->getMethod() == 'POST'
         ));

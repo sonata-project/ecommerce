@@ -9,7 +9,7 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\CustomerBundle\Entity\Customer"
+        name="Application\Sonata\CustomerBundle\Entity\Customer"
         table="invoice__invoice"
         repository-class="Application\CustomerBundle\Entity\CustomerRepository">
 

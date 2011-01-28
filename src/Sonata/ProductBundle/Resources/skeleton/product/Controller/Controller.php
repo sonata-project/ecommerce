@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Application\ProductBundle\Controller;
+namespace Application\Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Application\ProductBundle\Entity\{{ product }};
+use Application\Sonata\ProductBundle\Entity\{{ product }};
 
-use Application\ProductBundle\Product\{{ product }}\{{ product }}AddBasketForm;
-use Application\ProductBundle\Product\{{ product }}\{{ product }}AddBasket;
+use Application\Sonata\ProductBundle\Product\{{ product }}\{{ product }}AddBasketForm;
+use Application\Sonata\ProductBundle\Product\{{ product }}\{{ product }}AddBasket;
 
 /**
  *

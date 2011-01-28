@@ -24,7 +24,8 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class DeliveryExtension extends Extension {
+class DeliveryExtension extends Extension
+{
 
     /**
      * Loads the delivery configuration.
@@ -32,42 +33,46 @@ class DeliveryExtension extends Extension {
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function configLoad($config, ContainerBuilder $container) {
+    public function configLoad($configs, ContainerBuilder $container)
+    {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('delivery.xml');
 
-        $pool_definition = new Definition($config['pool']['class']);
-        
-        foreach($config['pool']['methods'] as $method)
-        {
-            if(!$method['enabled'])
+        foreach($configs as $config) {
+            $pool_definition = new Definition($config['pool']['class']);
+
+
+            foreach($config['pool']['methods'] as $method)
             {
-                continue;
+                if(!$method['enabled'])
+                {
+                    continue;
+                }
+
+                $definition = new Definition($method['class']);
+                $definition->addMethodCall('setName', array($method['name']));
+                $definition->addMethodCall('setCode', array($method['id']));
+                $definition->addMethodCall('setEnabled', array($method['enabled']));
+                $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
+
+                $id         = sprintf('sonata.delivery.method.%s', $method['name']);
+
+                // add the delivery method as a service
+                $container->setDefinition(sprintf('sonata.delivery.method.%s', $method['name']), $definition);
+
+                // add the delivery method in the method pool
+                $pool_definition->addMethodCall('addMethod', array(new Reference($id)));
             }
 
-            $definition = new Definition($method['class']);
-            $definition->addMethodCall('setName', array($method['name']));
-            $definition->addMethodCall('setCode', array($method['id']));
-            $definition->addMethodCall('setEnabled', array($method['enabled']));
-            $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
+            $container->setDefinition('sonata.delivery.pool',$pool_definition);
 
-            $id         = sprintf('sonata.delivery.method.%s', $method['name']);
+            $definition = new Definition($config['selector']['class']);
+            $definition->addMethodCall('setLogger', array(new Reference('logger')));
+            $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
+            $definition->addMethodCall('setDeliveryPool', array(new Reference('sonata.delivery.pool')));
 
-            // add the delivery method as a service
-            $container->setDefinition(sprintf('sonata.delivery.method.%s', $method['name']), $definition);
-
-            // add the delivery method in the method pool
-            $pool_definition->addMethodCall('addMethod', array(new Reference($id)));
+            $container->setDefinition('sonata.delivery.selector', $definition);
         }
-
-        $container->setDefinition('sonata.delivery.pool',$pool_definition);
-
-        $definition = new Definition($config['selector']['class']);
-        $definition->addMethodCall('setLogger', array(new Reference('logger')));
-        $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
-        $definition->addMethodCall('setDeliveryPool', array(new Reference('sonata.delivery.pool')));
-
-        $container->setDefinition('sonata.delivery.selector', $definition);
     }
 
     /**
@@ -75,17 +80,20 @@ class DeliveryExtension extends Extension {
      *
      * @return string The XSD base path
      */
-    public function getXsdValidationBasePath() {
+    public function getXsdValidationBasePath()
+    {
 
         return __DIR__.'/../Resources/config/schema';
     }
 
-    public function getNamespace() {
+    public function getNamespace()
+    {
 
         return 'http://www.sonata-project.org/schema/dic/sonata-delivery';
     }
 
-    public function getAlias() {
+    public function getAlias()
+    {
         
         return 'sonata_delivery';
     }

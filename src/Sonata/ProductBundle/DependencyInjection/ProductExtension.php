@@ -32,19 +32,22 @@ class ProductExtension extends Extension {
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function configLoad($config, ContainerBuilder $container) {
+    public function configLoad($configs, ContainerBuilder $container)
+    {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('product.xml');
 
         $definition = new Definition('Sonata\Component\Product\Pool');
 
-        foreach($config['products'] as $product) {
+        foreach($configs as $config) {
+            foreach($config['products'] as $product) {
 
-            $definition->addMethodCall('addProduct', array($product));
+                $definition->addMethodCall('addProduct', array($product));
+            }
+
+            $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
+            $container->setDefinition('sonata.product.pool', $definition);
         }
-
-        $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
-        $container->setDefinition('sonata.product.pool', $definition);
     }
 
     /**
@@ -52,15 +55,18 @@ class ProductExtension extends Extension {
      *
      * @return string The XSD base path
      */
-    public function getXsdValidationBasePath() {
+    public function getXsdValidationBasePath()
+    {
         return __DIR__.'/../Resources/config/schema';
     }
 
-    public function getNamespace() {
+    public function getNamespace()
+    {
         return 'http://www.sonata-project.org/schema/dic/sonata-product';
     }
 
-    public function getAlias() {
+    public function getAlias()
+    {
         return "sonata_product";
     }
 }

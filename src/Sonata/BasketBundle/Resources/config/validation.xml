@@ -5,7 +5,7 @@
         http://www.symfony-project.org/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sonata\Component\Basket\Basket">
-        <property name="elements">
+        <property name="basketElements">
            <constraint name="Sonata\Component\Form\BasketElementCollection" >
                <option name="groups" >
                     <value>elements</value>
@@ -13,7 +13,7 @@
            </constraint>
         </property>
 
-        <property name="delivery_method">
+        <property name="deliveryMethod">
            <constraint name="NotNull" >
                <option name="groups" >
                     <value>delivery</value>
@@ -21,7 +21,7 @@
            </constraint>
         </property>
 
-        <property name="delivery_address">
+        <property name="deliveryAddress">
            <constraint name="NotNull" >
                <option name="groups" >
                     <value>delivery</value>
@@ -29,7 +29,7 @@
            </constraint>
         </property>
 
-        <property name="payment_method">
+        <property name="paymentMethod">
            <constraint name="NotNull" >
                <option name="groups" >
                     <value>payment</value>
@@ -37,7 +37,7 @@
            </constraint>
         </property>
 
-        <property name="payment_address">
+        <property name="paymentAddress">
            <constraint name="NotNull" >
                <option name="groups" >
                     <value>payment</value>

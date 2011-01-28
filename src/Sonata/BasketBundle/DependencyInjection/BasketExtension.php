@@ -32,43 +32,47 @@ class BasketExtension extends Extension
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function configLoad($config, ContainerBuilder $container)
+    public function configLoad($configs, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('basket.xml');
 
-        // define the basket loader service
-        $definition = new Definition('Sonata\\Component\\Basket\\Loader');
-        $definition
-            ->addArgument($config['class'])
-            ->addMethodCall('setSession',       array(new Reference('session')))   // store the basket into session
-            ->addMethodCall('setProductPool',   array(new Reference('sonata.product.pool')))
-            ->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')))
-            ->addMethodCall('setPaymentPool',   array(new Reference('sonata.payment.pool')))
-            ->addMethodCall('setDeliveryPool',  array(new Reference('sonata.delivery.pool')))
-        ;
+        foreach($configs as $config) {
+            // define the basket loader service
+            $definition = new Definition('Sonata\\Component\\Basket\\Loader');
+            $definition
+                ->addArgument($config['class'])
+                ->addMethodCall('setSession',       array(new Reference('session')))   // store the basket into session
+                ->addMethodCall('setProductPool',   array(new Reference('sonata.product.pool')))
+                ->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')))
+                ->addMethodCall('setPaymentPool',   array(new Reference('sonata.payment.pool')))
+                ->addMethodCall('setDeliveryPool',  array(new Reference('sonata.delivery.pool')))
+            ;
 
-        $container->setDefinition('sonata.basket.loader', $definition);
+            $container->setDefinition('sonata.basket.loader', $definition);
 
-        // define the basket service which depends on the basket loader (load the basket from the session)
-        $definition = new Definition();
-        $definition
-            ->setFactoryService('sonata.basket.loader')
-            ->setFactoryMethod('getBasket')
-        ;
+            // define the basket service which depends on the basket loader (load the basket from the session)
+            $definition = new Definition($config['class']);
+            $definition
+//                ->setSynthetic(true)
+                ->setFactoryService('sonata.basket.loader')
+                ->setFactoryMethod('getBasket')
+            ;
 
-        $container->setDefinition('sonata.basket', $definition);
+            $container->setDefinition('sonata.basket', $definition);
 
 
-        // initialize the basket elements validator
-        $definition = new Definition('Sonata\\Component\\Form\\BasketElementCollectionValidator');
-        $definition
-            ->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')))
-            ->addMethodCall('setBasket', array(new Reference('sonata.basket')))
-            ->addTag('validator.constraint_validator', array('alias' => 'sonata_basket_element_collection_validator'))
-         ;
+            // initialize the basket elements validator
+            $definition = new Definition('Sonata\\Component\\Form\\BasketElementCollectionValidator');
+            $definition
+                ->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')))
+                ->addMethodCall('setBasket', array(new Reference('sonata.basket')))
+                ->addTag('validator.constraint_validator', array('alias' => 'sonata_basket_element_collection_validator'))
+             ;
 
-        $container->setDefinition('sonata.basket.elements.validator', $definition);
+            $container->setDefinition('sonata.basket.elements.validator', $definition);
+        }
+
     }
 
 

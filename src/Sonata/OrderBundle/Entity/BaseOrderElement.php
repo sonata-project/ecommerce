@@ -45,7 +45,7 @@ abstract class BaseOrderElement
     /**
      * @var integer $product_id
      */
-    protected $product_id;
+    protected $productId;
 
     /**
      * @var integer $status
@@ -55,12 +55,12 @@ abstract class BaseOrderElement
     /**
      * @var integer $delivery_status
      */
-    protected $delivery_status;
+    protected $deliveryStatus;
 
     /**
      * @var datetime $validated_at
      */
-    protected $validated_at;
+    protected $validatedAt;
 
     /**
      * @var Sonata\ProductBundle\Entity\BaseProduct
@@ -70,11 +70,11 @@ abstract class BaseOrderElement
     /**
      * @var string $product_type
      */
-    protected $product_type;
+    protected $productType;
 
-    protected $created_at;
+    protected $createdAt;
 
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * Set order
@@ -223,7 +223,7 @@ abstract class BaseOrderElement
      */
     public function setProductId($productId)
     {
-        $this->product_id = $productId;
+        $this->productId = $productId;
     }
 
     /**
@@ -233,7 +233,7 @@ abstract class BaseOrderElement
      */
     public function getProductId()
     {
-        return $this->product_id;
+        return $this->productId;
     }
 
     /**
@@ -263,7 +263,7 @@ abstract class BaseOrderElement
      */
     public function setDeliveryStatus($deliveryStatus)
     {
-        $this->delivery_status = $deliveryStatus;
+        $this->deliveryStatus = $deliveryStatus;
     }
 
     /**
@@ -273,7 +273,7 @@ abstract class BaseOrderElement
      */
     public function getDeliveryStatus()
     {
-        return $this->delivery_status;
+        return $this->deliveryStatus;
     }
 
     /**
@@ -283,7 +283,7 @@ abstract class BaseOrderElement
      */
     public function setValidatedAt($validatedAt)
     {
-        $this->validated_at = $validatedAt;
+        $this->validatedAt = $validatedAt;
     }
 
     /**
@@ -293,7 +293,7 @@ abstract class BaseOrderElement
      */
     public function getValidatedAt()
     {
-        return $this->validated_at;
+        return $this->validatedAt;
     }
 
     /**
@@ -323,7 +323,7 @@ abstract class BaseOrderElement
      */
     public function setProductType($productType)
     {
-        $this->product_type = $productType;
+        $this->productType = $productType;
     }
 
     /**
@@ -333,26 +333,26 @@ abstract class BaseOrderElement
      */
     public function getProductType()
     {
-        return $this->product_type;
+        return $this->productType;
     }
 
     public function setCreatedAt($created_at)
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $created_at;
     }
 
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     public function setUpdatedAt($updated_at)
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updated_at;
     }
 
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 }

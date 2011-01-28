@@ -27,7 +27,7 @@ file that was distributed with this source code.
     <tbody>
         {# call each product controller to render its own view #}
         {% for basket_element in basket.getElements %}
-            {% render 'ProductBundle:Product:renderFinalReviewBasketElement' with {
+            {% render 'SonataProductBundle:Product:renderFinalReviewBasketElement' with {
                 'basket_element' : basket_element
             } %}
         {% endfor %}

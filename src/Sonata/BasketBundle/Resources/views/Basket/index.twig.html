@@ -12,7 +12,7 @@ file that was distributed with this source code.
 
 <h1>{% trans 'title_basket' from 'BasketBundle' %}</h1>
 
-{% if basket.hasElements %}
+{% if basket.hasBasketElements %}
     {{ form_errors(form) }}
 
     <form action="{{ url('sonata_basket_update') }}" method="POST" >
@@ -32,9 +32,9 @@ file that was distributed with this source code.
             #}
             <tbody>
                 {# call each product controller to render its own view #}
-                {% for basket_element in basket.getElements %}
-                    {% render 'ProductBundle:Product:renderFormBasketElement' with {
-                        'field_group': form.elements.get(basket_element.pos),
+                {% for basket_element in basket.getBasketElements %}
+                    {% render 'SonataProductBundle:Product:renderFormBasketElement' with {
+                        'field_group': form.basketElements.get(basket_element.pos),
                         'basket_element' : basket_element
                     } %}
                 {% endfor %}

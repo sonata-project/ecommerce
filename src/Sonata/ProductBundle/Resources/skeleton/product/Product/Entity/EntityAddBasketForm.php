@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Application\ProductBundle\Product\{{ product }};
+namespace Application\Sonata\ProductBundle\Product\{{ product }};
 
 
 use Symfony\Component\Form\Form;

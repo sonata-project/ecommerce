@@ -5,8 +5,8 @@
         <field name="firstname"     type="string"   column="firstname"  length="255"/>
         <field name="lastname"      type="string"   column="lastname"   length="255"/>
 
-        <field name="updated_at"    column="updated_at"     type="datetime" nullable="true"/>
-        <field name="created_at"    column="created_at"     type="datetime" nullable="true"/>
+        <field name="updatedAt"    column="updated_at"     type="datetime" nullable="true"/>
+        <field name="createdAt"    column="created_at"     type="datetime" nullable="true"/>
         
     </mapped-superclass>
 </doctrine-mapping>

@@ -4,7 +4,7 @@
     xsi="http://www.w3.org/2001/XMLSchema-instance"
     schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sonata\Bundle\PaymentBundle\Entity\BaseTransaction" >
+    <mapped-superclass name="Sonata\PaymentBundle\Entity\BaseTransaction" >
 
         <field name="transaction_id"    type="string"       column="transaction_id"   length="255"/>
         <field name="state"             type="integer"      column="state"    />
@@ -15,7 +15,7 @@
 
         <many-to-one
             field="order"
-            target-entity="Application\OrderBundle\Entity\Order"
+            target-entity="Application\Sonata\OrderBundle\Entity\Order"
             inverted-by="transactions"
             orphan-removal="false">
 

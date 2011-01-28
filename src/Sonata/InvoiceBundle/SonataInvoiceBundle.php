@@ -11,40 +11,9 @@
 namespace Sonata\InvoiceBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Doctrine\Common\EventSubscriber;
 
-class SonataInvoiceBundle extends Bundle implements EventSubscriber
+class SonataInvoiceBundle extends Bundle
 {
-
-    public function boot()
-    {
-
-        $evm = $this->container->get('doctrine.orm.entity_manager')->getEventManager();
-
-        $evm->addEventSubscriber($this);
-    }
-
-    public function getSubscribedEvents()
-    {
-        return array(
-            'loadClassMetadata'
-        );
-    }
-
-    public function loadClassMetadata($eventArgs) {
-        $metadata = $eventArgs->getClassMetadata();
-
-        if($metadata->name == 'Sonata\InvoiceBundle\Entity\BaseInvoice') {
-            $metadata->mapManyToOne(array(
-                'fieldName'     => 'user',
-                'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),
-                'invertedBy'    => 'invoices',
-                'cascade' => array(
-                    'persist'
-                ),
-            ));
-        }
-    }
 
     /**
      * {@inheritdoc}

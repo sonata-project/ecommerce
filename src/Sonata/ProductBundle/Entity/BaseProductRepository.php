@@ -221,7 +221,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
      * @param  $product
      * @param  $validator
      * @param array $options
-     * @return Application\ProductBundle\Products\Bottle\BottleAddBasketForm
+     * @return Application\Sonata\ProductBundle\Products\Bottle\BottleAddBasketForm
      */
     public function getAddBasketForm($product, $validator, $options = array())
     {

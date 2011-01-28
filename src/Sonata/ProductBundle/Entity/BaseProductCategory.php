@@ -23,12 +23,12 @@ abstract class BaseProductCategory
     /**
      * @var datetime $updated_at
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * @var datetime $created_at
      */
-    protected $created_at;
+    protected $createdAt;
 
 
     /**
@@ -58,7 +58,7 @@ abstract class BaseProductCategory
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -68,7 +68,7 @@ abstract class BaseProductCategory
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -78,7 +78,7 @@ abstract class BaseProductCategory
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -88,18 +88,18 @@ abstract class BaseProductCategory
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
      * @var Application\Sonata\ProductBundle\Entity\Product
      */
-    protected $Product;
+    protected $product;
 
     /**
      * @var Application\Sonata\ProductBundle\Entity\Category
      */
-    protected $Category;
+    protected $category;
 
     /**
      * Set Product
@@ -108,7 +108,7 @@ abstract class BaseProductCategory
      */
     public function setProduct(\Application\Sonata\ProductBundle\Entity\Product $product)
     {
-        $this->Product = $product;
+        $this->product = $product;
     }
 
     /**
@@ -118,7 +118,7 @@ abstract class BaseProductCategory
      */
     public function getProduct()
     {
-        return $this->Product;
+        return $this->product;
     }
 
     /**
@@ -128,7 +128,7 @@ abstract class BaseProductCategory
      */
     public function setCategory(\Application\Sonata\ProductBundle\Entity\Category $category)
     {
-        $this->Category = $category;
+        $this->category = $category;
     }
 
     /**
@@ -138,6 +138,6 @@ abstract class BaseProductCategory
      */
     public function getCategory()
     {
-        return $this->Category;
+        return $this->category;
     }
 }

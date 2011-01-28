@@ -2,8 +2,8 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\OrderBundle\Entity\BaseOrderElement">
 
-        <field name="product_id"        type="integer"      column="product_id"/>
-        <field name="product_type"      type="string"       column="product_type"          length="255"/>
+        <field name="productId"        type="integer"      column="product_id"/>
+        <field name="productType"      type="string"       column="product_type"          length="255"/>
 
         <field name="quantity"          type="integer"      column="quantity"/>
         <field name="price"             type="decimal"      column="price"          scale="4"/>
@@ -12,11 +12,11 @@
         <field name="description"       type="text"         column="description"    />
         <field name="serialize"         type="array"        column="serialize"      nullable="true"/>
         <field name="status"            type="integer"      column="status"/>
-        <field name="delivery_status"   type="integer"      column="delivery_status"/>
-        <field name="validated_at"      type="datetime"     column="validated_at" nullable="true"/>
+        <field name="deliveryStatus"   type="integer"      column="delivery_status"/>
+        <field name="validatedAt"      type="datetime"     column="validated_at" nullable="true"/>
 
-        <field name="updated_at"  nullable="true"  column="updated_at"     type="datetime" />
-        <field name="created_at"  nullable="true"  column="created_at"     type="datetime" />
+        <field name="updatedAt"  nullable="true"  column="updated_at"     type="datetime" />
+        <field name="createdAt"  nullable="true"  column="created_at"     type="datetime" />
 
     </mapped-superclass>
 </doctrine-mapping>

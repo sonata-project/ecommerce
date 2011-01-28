@@ -16,8 +16,8 @@
         <field name="stock"         column="stock"          type="integer"  nullable="false" />
         <field name="enabled"       column="enabled"        type="boolean"  nullable="false" />
 
-        <field name="updated_at"    column="updated_at"     type="datetime" />
-        <field name="created_at"    column="created_at"     type="datetime" />
+        <field name="updatedAt"    column="updated_at"     type="datetime" />
+        <field name="createdAt"    column="created_at"     type="datetime" />
 
     </mapped-superclass>
 </doctrine-mapping>

@@ -11,9 +11,8 @@
 namespace Sonata\OrderBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Doctrine\Common\EventSubscriber;
 
-class SonataOrderBundle extends Bundle implements EventSubscriber
+class SonataOrderBundle extends Bundle
 {
 
     /**
@@ -30,31 +29,5 @@ class SonataOrderBundle extends Bundle implements EventSubscriber
     public function getPath()
     {
         return strtr(__DIR__, '\\', '/');
-    }
-
-    public function boot() {
-
-        $evm = $this->container->get('doctrine.orm.entity_manager')->getEventManager();
-
-        $evm->addEventSubscriber($this);
-    }
-
-    public function getSubscribedEvents() {
-        return array(
-            'loadClassMetadata'
-        );
-    }
-
-    public function loadClassMetadata($eventArgs) {
-        $metadata = $eventArgs->getClassMetadata();
-
-        if($metadata->name == 'Sonata\OrderBundle\Entity\BaseOrder') {
-            
-            $metadata->mapManyToOne(array(
-                'fieldName'     => 'user',
-                'targetEntity'  => $this->container->getParameter('doctrine_user.user_class'),
-                'invertedBy'    => 'orders',
-            ));
-        }
     }
 }

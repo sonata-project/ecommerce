@@ -8,7 +8,7 @@
         <default key="_controller">SonataBasketBundle:Basket:index</default>
     </route>
 
-    <route id="sonata_basket_add_product" pattern="/add-porduct">
+    <route id="sonata_basket_add_product" pattern="/add-product">
         <default key="_controller">SonataBasketBundle:Basket:addProduct</default>
     </route>
 

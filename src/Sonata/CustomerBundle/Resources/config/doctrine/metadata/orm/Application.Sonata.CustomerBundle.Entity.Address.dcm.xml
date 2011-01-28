@@ -9,13 +9,33 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\CustomerBundle\Entity\Address"
+        name="Application\Sonata\CustomerBundle\Entity\Address"
         table="customer__address"
-        repository-class="Application\CustomerBundle\Entity\CustomerRepository">
+        repository-class="Application\Sonata\CustomerBundle\Entity\CustomerRepository">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
+
+        <many-to-one
+            field="customer"
+            target-entity="Application\Sonata\CustomerBundle\Entity\Customer"
+            inversed-by="addresses"
+            >
+
+            <cascade>
+                <cascade-all />
+            </cascade>
+
+            <join-columns>
+                <join-column
+                    name="customer_id"
+                    referenced-column-name="id"
+                    on-delete="CASCADE"/>
+            </join-columns>
+
+        </many-to-one>
+
 
     </entity>
 </doctrine-mapping>

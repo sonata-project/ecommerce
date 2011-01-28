@@ -15,11 +15,11 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 use Application\Sonata\ProductBundle\Entity\Category;
-use Application\ProductBundle\Entity\Bottle as Product;
+use Application\Sonata\ProductBundle\Entity\Bottle as Product;
 
-use Application\BasketBundle\Entity\Address;
-use Application\ProductBundle\Entity\Delivery;
-use Application\FOS\UserBundle\Entity\User;
+use Application\Sonata\CustomerBundle\Entity\Address;
+use Application\Sonata\ProductBundle\Entity\Delivery;
+use Application\Sonata\CustomerBundle\Entity\Customer;
 use Application\Sonata\ProductBundle\Entity\ProductCategory;
 
 class AllData implements FixtureInterface
@@ -30,15 +30,14 @@ class AllData implements FixtureInterface
         $ratio = 1;
 
         foreach(range(0, 200 * $ratio) as $id) {
-            $user = new User;
-            $user->setUsername('user'.$id);
-            $user->setEmail('user'.$id.'@fakedomain.com');
-            $user->setIsActive(true);
-            $user->setPassword('test');
-
+            $customer = new Customer;
+            $customer->setFirstname('user'.$id);
+            $customer->setLastname('lastname'.$id);
+            
             foreach(range(0, 2 * $ratio) as $di) {
                 $address = new Address;
-                $address->setUser($user);
+                $address->setName($customer->getFullname().' - billing '.$di);
+                $address->setCustomer($customer);
                 $address->setCurrent($di == 1);
                 $address->setType(Address::TYPE_BILLING);
                 $address->setFirstname(sprintf('John %d %d', $id, $di));
@@ -56,7 +55,8 @@ class AllData implements FixtureInterface
 
             foreach(range(0, 2 * $ratio) as $di) {
                 $address = new Address;
-                $address->setUser($user);
+                $address->setCustomer($customer);
+                $address->setName($customer->getFullname().' - delivery '.$di);
                 $address->setCurrent($di == 1);
                 $address->setType(Address::TYPE_DELIVERY);
                 $address->setFirstname(sprintf('John %d %d', $id, $di));
@@ -73,7 +73,7 @@ class AllData implements FixtureInterface
             }
 
 
-            $manager->persist($user);
+            $manager->persist($customer);
 
             if($id % 100 == 0) {
                 $manager->flush();

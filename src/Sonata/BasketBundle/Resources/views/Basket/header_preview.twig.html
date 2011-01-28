@@ -10,9 +10,9 @@ file that was distributed with this source code.
 #}
 
 <div>
-    {% if basket.hasElements %}
+    {% if basket.hasBasketElements %}
 
-        {% trans 'message_basket_elements_preview' with {'price': basket.getTotal(true), 'count_item': basket.countElements} from 'BasketBundle' %}
+        {% trans 'message_basket_elements_preview' with {'price': basket.getTotal(true), 'count_item': basket.countBasketElements} from 'BasketBundle' %}
         <a href="{{ url('sonata_basket_index') }}">{% trans 'view_basket' %}</a>
         
     {% else %}

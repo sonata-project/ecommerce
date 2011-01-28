@@ -130,7 +130,7 @@ class GenerateProductCommand extends Command
 
 sonata_product.config:
     products:
-        - { id: $product_code, name: $product, enabled: true, class: Application\ProductBundle\Entity\\$product }
+        - { id: $product_code, name: $product, enabled: true, class: Application\Sonata\ProductBundle\Entity\\$product }
 
 <info>2. Tweak the product to match its functional requirements</info>
 

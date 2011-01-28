@@ -23,12 +23,12 @@ abstract class BaseDelivery
     /**
      * @var boolean $per_item
      */
-    protected $per_item;
+    protected $perItem;
 
     /**
      * @var string $country
      */
-    protected $country_code;
+    protected $countryCode;
 
     /**
      * @var string $zone
@@ -43,12 +43,12 @@ abstract class BaseDelivery
     /**
      * @var datetime $updated_at
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * @var datetime $created_at
      */
-    protected $created_at;
+    protected $createdAt;
 
     protected $product;
     
@@ -101,7 +101,7 @@ abstract class BaseDelivery
      */
     public function setPerItem($perItem)
     {
-        $this->per_item = $perItem;
+        $this->perItem = $perItem;
     }
 
     /**
@@ -111,7 +111,7 @@ abstract class BaseDelivery
      */
     public function getPerItem()
     {
-        return $this->per_item;
+        return $this->perItem;
     }
 
     /**
@@ -119,9 +119,9 @@ abstract class BaseDelivery
      *
      * @param string $country
      */
-    public function setCountryCode($country_code)
+    public function setCountryCode($countryCode)
     {
-        $this->country_code = $country_code;
+        $this->countryCode = $countryCode;
     }
 
     /**
@@ -131,7 +131,7 @@ abstract class BaseDelivery
      */
     public function getCountryCode()
     {
-        return $this->country_code;
+        return $this->countryCode;
     }
 
     /**
@@ -181,7 +181,7 @@ abstract class BaseDelivery
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -191,7 +191,7 @@ abstract class BaseDelivery
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -201,7 +201,7 @@ abstract class BaseDelivery
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -211,6 +211,6 @@ abstract class BaseDelivery
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 }

@@ -22,12 +22,12 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     /**
      * @var string $payment_method
      */
-    protected $payment_method;
+    protected $paymentMethod;
 
     /**
      * @var string $delivery_method
      */
-    protected $delivery_method;
+    protected $deliveryMethod;
 
     /**
      * @var string $currency
@@ -42,17 +42,17 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     /**
      * @var integer $payment_status
      */
-    protected $payment_status;
+    protected $paymentStatus;
 
     /**
      * @var integer $delivery_status
      */
-    protected $delivery_status;
+    protected $deliveryStatus;
 
     /**
      * @var datetime $validated_at
      */
-    protected $validated_at;
+    protected $validatedAt;
 
     /**
      * @var string $username
@@ -62,135 +62,143 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     /**
      * @var decimal $total_inc
      */
-    protected $total_inc;
+    protected $totalInc;
 
     /**
      * @var decimal $total_excl
      */
-    protected $total_excl;
+    protected $totalExcl;
 
     /**
      * @var decimal $delivery_cost
      */
-    protected $delivery_cost;
+    protected $deliveryCost;
 
     /**
      * @var string $billing_name
      */
-    protected $billing_name;
+    protected $billingName;
 
     /**
      * @var string $billing_phone
      */
-    protected $billing_phone;
+    protected $billingPhone;
 
     /**
      * @var string $billing_address1
      */
-    protected $billing_address1;
+    protected $billingAddress1;
 
     /**
      * @var string $billing_address2
      */
-    protected $billing_address2;
+    protected $billingAddress2;
 
     /**
      * @var string $billing_address3
      */
-    protected $billing_address3;
+    protected $billingAddress3;
 
     /**
      * @var string $billing_city
      */
-    protected $billing_city;
+    protected $billingCity;
 
     /**
      * @var string $billing_postcode
      */
-    protected $billing_postcode;
+    protected $billingPostcode;
 
     /**
      * @var string $billing_country
      */
-    protected $billing_country_code;
+    protected $billingCountryCode;
 
     /**
      * @var string $billing_fax
      */
-    protected $billing_fax;
+    protected $billingFax;
 
     /**
      * @var string $billing_email
      */
-    protected $billing_email;
+    protected $billingEmail;
 
     /**
      * @var string $billing_mobile
      */
-    protected $billing_mobile;
+    protected $billingMobile;
 
     /**
      * @var string $shipping_name
      */
-    protected $shipping_name;
+    protected $shippingName;
 
     /**
      * @var string $shipping_phone
      */
-    protected $shipping_phone;
+    protected $shippingPhone;
 
     /**
      * @var string $shipping_address1
      */
-    protected $shipping_address1;
+    protected $shippingAddress1;
 
     /**
      * @var string $shipping_address2
      */
-    protected $shipping_address2;
+    protected $shippingAddress2;
 
     /**
      * @var string $shipping_address3
      */
-    protected $shipping_address3;
+    protected $shippingAddress3;
 
     /**
      * @var string $shipping_city
      */
-    protected $shipping_city;
+    protected $shippingCity;
 
     /**
      * @var string $shipping_postcode
      */
-    protected $shipping_postcode;
+    protected $shippingPostcode;
 
     /**
      * @var string $shipping_country
      */
-    protected $shipping_country_code;
+    protected $shippingCountryCode;
 
     /**
      * @var string $shipping_fax
      */
-    protected $shipping_fax;
+    protected $shippingFax;
 
     /**
      * @var string $shipping_email
      */
-    protected $shipping_email;
+    protected $shippingEmail;
 
     /**
      * @var string $shipping_mobile
      */
-    protected $shipping_mobile;
+    protected $shippingMobile;
 
-    protected $order_elements;
+    protected $orderElements;
 
 
-    protected $created_at;
+    protected $createdAt;
 
-    protected $updated_at;
-    
+    protected $updatedAt;
+
+    protected $customer;
+
+
+    public function __construct()
+    {
+        $this->orderElements     = new \Doctrine\Common\Collections\ArrayCollection;
+    }
+
     /**
      * Set reference
      *
@@ -218,7 +226,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setPaymentMethod($payment_method)
     {
-        $this->payment_method = $payment_method;
+        $this->paymentMethod = $payment_method;
     }
 
     /**
@@ -228,7 +236,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getPaymentMethod()
     {
-        return $this->payment_method;
+        return $this->paymentMethod;
     }
 
     /**
@@ -238,7 +246,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setDeliveryMethod($deliveryMethod)
     {
-        $this->delivery_method = $deliveryMethod;
+        $this->deliveryMethod = $deliveryMethod;
     }
 
     /**
@@ -248,7 +256,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getDeliveryMethod()
     {
-        return $this->delivery_method;
+        return $this->deliveryMethod;
     }
 
     /**
@@ -298,7 +306,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setPaymentStatus($paymentStatus)
     {
-        $this->payment_status = $paymentStatus;
+        $this->paymentStatus = $paymentStatus;
     }
 
     /**
@@ -308,7 +316,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getPaymentStatus()
     {
-        return $this->payment_status;
+        return $this->paymentStatus;
     }
 
     /**
@@ -318,7 +326,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setDeliveryStatus($deliveryStatus)
     {
-        $this->delivery_status = $deliveryStatus;
+        $this->deliveryStatus = $deliveryStatus;
     }
 
     /**
@@ -328,7 +336,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getDeliveryStatus()
     {
-        return $this->delivery_status;
+        return $this->deliveryStatus;
     }
 
     /**
@@ -338,7 +346,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setValidatedAt($validatedAt)
     {
-        $this->validated_at = $validatedAt;
+        $this->validatedAt = $validatedAt;
     }
 
     /**
@@ -348,7 +356,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getValidatedAt()
     {
-        return $this->validated_at;
+        return $this->validatedAt;
     }
 
     /**
@@ -378,7 +386,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setTotalInc($totalInc)
     {
-        $this->total_inc = $totalInc;
+        $this->totalInc = $totalInc;
     }
 
     /**
@@ -388,7 +396,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getTotalInc()
     {
-        return $this->total_inc;
+        return $this->totalInc;
     }
 
     /**
@@ -398,7 +406,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setTotalExcl($totalExcl)
     {
-        $this->total_excl = $totalExcl;
+        $this->totalExcl = $totalExcl;
     }
 
     /**
@@ -408,7 +416,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getTotalExcl()
     {
-        return $this->total_excl;
+        return $this->totalExcl;
     }
 
     /**
@@ -418,7 +426,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setDeliveryCost($deliveryCost)
     {
-        $this->delivery_cost = $deliveryCost;
+        $this->deliveryCost = $deliveryCost;
     }
 
     /**
@@ -428,7 +436,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getDeliveryCost()
     {
-        return $this->delivery_cost;
+        return $this->deliveryCost;
     }
 
     /**
@@ -438,7 +446,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingName($billingName)
     {
-        $this->billing_name = $billingName;
+        $this->billingName = $billingName;
     }
 
     /**
@@ -448,7 +456,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingName()
     {
-        return $this->billing_name;
+        return $this->billingName;
     }
 
     /**
@@ -458,7 +466,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingPhone($billingPhone)
     {
-        $this->billing_phone = $billingPhone;
+        $this->billingPhone = $billingPhone;
     }
 
     /**
@@ -468,7 +476,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingPhone()
     {
-        return $this->billing_phone;
+        return $this->billingPhone;
     }
 
     /**
@@ -478,7 +486,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingAddress1($billingAddress1)
     {
-        $this->billing_address1 = $billingAddress1;
+        $this->billingAddress1 = $billingAddress1;
     }
 
     /**
@@ -488,7 +496,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingAddress1()
     {
-        return $this->billing_address1;
+        return $this->billingAddress1;
     }
 
     /**
@@ -498,7 +506,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingAddress2($billingAddress2)
     {
-        $this->billing_address2 = $billingAddress2;
+        $this->billingAddress2 = $billingAddress2;
     }
 
     /**
@@ -508,7 +516,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingAddress2()
     {
-        return $this->billing_address2;
+        return $this->billingAddress2;
     }
 
     /**
@@ -518,7 +526,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingAddress3($billingAddress3)
     {
-        $this->billing_address3 = $billingAddress3;
+        $this->billingAddress3 = $billingAddress3;
     }
 
     /**
@@ -528,7 +536,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingAddress3()
     {
-        return $this->billing_address3;
+        return $this->billingAddress3;
     }
 
     /**
@@ -538,7 +546,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingCity($billingCity)
     {
-        $this->billing_city = $billingCity;
+        $this->billingCity = $billingCity;
     }
 
     /**
@@ -548,7 +556,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingCity()
     {
-        return $this->billing_city;
+        return $this->billingCity;
     }
 
     /**
@@ -558,7 +566,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingPostcode($billingPostcode)
     {
-        $this->billing_postcode = $billingPostcode;
+        $this->billingPostcode = $billingPostcode;
     }
 
     /**
@@ -568,7 +576,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingPostcode()
     {
-        return $this->billing_postcode;
+        return $this->billingPostcode;
     }
 
     /**
@@ -578,7 +586,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingCountryCode($billingCountryCode)
     {
-        $this->billing_country_code = $billingCountryCode;
+        $this->billingCountryCode = $billingCountryCode;
     }
 
     /**
@@ -588,7 +596,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingCountryCode()
     {
-        return $this->billing_country_code;
+        return $this->billingCountryCode;
     }
 
     /**
@@ -598,7 +606,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingFax($billingFax)
     {
-        $this->billing_fax = $billingFax;
+        $this->billingFax = $billingFax;
     }
 
     /**
@@ -608,7 +616,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingFax()
     {
-        return $this->billing_fax;
+        return $this->billingFax;
     }
 
     /**
@@ -618,7 +626,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingEmail($billingEmail)
     {
-        $this->billing_email = $billingEmail;
+        $this->billingEmail = $billingEmail;
     }
 
     /**
@@ -628,7 +636,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingEmail()
     {
-        return $this->billing_email;
+        return $this->billingEmail;
     }
 
     /**
@@ -638,7 +646,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setBillingMobile($billingMobile)
     {
-        $this->billing_mobile = $billingMobile;
+        $this->billingMobile = $billingMobile;
     }
 
     /**
@@ -648,7 +656,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getBillingMobile()
     {
-        return $this->billing_mobile;
+        return $this->billingMobile;
     }
 
     /**
@@ -658,7 +666,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingName($shippingName)
     {
-        $this->shipping_name = $shippingName;
+        $this->shippingName = $shippingName;
     }
 
     /**
@@ -668,7 +676,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingName()
     {
-        return $this->shipping_name;
+        return $this->shippingName;
     }
 
     /**
@@ -678,7 +686,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingPhone($shippingPhone)
     {
-        $this->shipping_phone = $shippingPhone;
+        $this->shippingPhone = $shippingPhone;
     }
 
     /**
@@ -688,7 +696,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingPhone()
     {
-        return $this->shipping_phone;
+        return $this->shippingPhone;
     }
 
     /**
@@ -698,7 +706,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingAddress1($shippingAddress1)
     {
-        $this->shipping_address1 = $shippingAddress1;
+        $this->shippingAddress1 = $shippingAddress1;
     }
 
     /**
@@ -708,7 +716,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingAddress1()
     {
-        return $this->shipping_address1;
+        return $this->shippingAddress1;
     }
 
     /**
@@ -718,7 +726,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingAddress2($shippingAddress2)
     {
-        $this->shipping_address2 = $shippingAddress2;
+        $this->shippingAddress2 = $shippingAddress2;
     }
 
     /**
@@ -728,7 +736,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingAddress2()
     {
-        return $this->shipping_address2;
+        return $this->shippingAddress2;
     }
 
     /**
@@ -738,7 +746,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingAddress3($shippingAddress3)
     {
-        $this->shipping_address3 = $shippingAddress3;
+        $this->shippingAddress3 = $shippingAddress3;
     }
 
     /**
@@ -748,7 +756,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingAddress3()
     {
-        return $this->shipping_address3;
+        return $this->shippingAddress3;
     }
 
     /**
@@ -758,7 +766,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingCity($shippingCity)
     {
-        $this->shipping_city = $shippingCity;
+        $this->shippingCity = $shippingCity;
     }
 
     /**
@@ -768,7 +776,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingCity()
     {
-        return $this->shipping_city;
+        return $this->shippingCity;
     }
 
     /**
@@ -778,7 +786,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingPostcode($shippingPostcode)
     {
-        $this->shipping_postcode = $shippingPostcode;
+        $this->shippingPostcode = $shippingPostcode;
     }
 
     /**
@@ -788,7 +796,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingPostcode()
     {
-        return $this->shipping_postcode;
+        return $this->shippingPostcode;
     }
 
     /**
@@ -798,7 +806,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingCountryCode($shippingCountryCode)
     {
-        $this->shipping_country_code = $shippingCountryCode;
+        $this->shippingCountryCode = $shippingCountryCode;
     }
 
     /**
@@ -808,7 +816,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingCountryCode()
     {
-        return $this->shipping_country_code;
+        return $this->shippingCountryCode;
     }
 
     /**
@@ -818,7 +826,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingFax($shippingFax)
     {
-        $this->shipping_fax = $shippingFax;
+        $this->shippingFax = $shippingFax;
     }
 
     /**
@@ -828,7 +836,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingFax()
     {
-        return $this->shipping_fax;
+        return $this->shippingFax;
     }
 
     /**
@@ -838,7 +846,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingEmail($shippingEmail)
     {
-        $this->shipping_email = $shippingEmail;
+        $this->shippingEmail = $shippingEmail;
     }
 
     /**
@@ -848,7 +856,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingEmail()
     {
-        return $this->shipping_email;
+        return $this->shippingEmail;
     }
 
     /**
@@ -858,7 +866,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function setShippingMobile($shippingMobile)
     {
-        $this->shipping_mobile = $shippingMobile;
+        $this->shippingMobile = $shippingMobile;
     }
 
     /**
@@ -868,7 +876,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function getShippingMobile()
     {
-        return $this->shipping_mobile;
+        return $this->shippingMobile;
     }
 
     /**
@@ -893,12 +901,12 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
 
     public function getOrderElements()
     {
-        return $this->order_elements;    
+        return $this->orderElements;
     }
 
     public function addOrderElement($order_element)
     {
-        $this->order_elements[] = $order_element;
+        $this->orderElements[] = $order_element;
         $order_element->setOrder($this);
     }
 
@@ -955,22 +963,22 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
 
     public function setCreatedAt($created_at)
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $created_at;
     }
 
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     public function setUpdatedAt($updated_at)
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updated_at;
     }
 
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -980,6 +988,21 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      */
     public function addOrderElements(\Application\Sonata\OrderBundle\Entity\OrderElement $orderElements)
     {
-        $this->order_elements[] = $orderElements;
+        $this->orderElements[] = $orderElements;
+    }
+
+    public function setOrderElements($orderElements)
+    {
+        $this->orderElements = $orderElements;
+    }
+
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+    }
+
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

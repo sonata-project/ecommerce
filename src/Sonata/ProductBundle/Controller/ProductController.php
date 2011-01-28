@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         $code = $this->get('sonata.product.pool')->getProductCode($product);
 
-        $action = sprintf('ProductBundle:%s:view', ucfirst($code));
+        $action = sprintf('SonataProductBundle:%s:view', ucfirst($code));
         $response = $this->forward($action, array(
             'product' => $product
         ));
@@ -57,7 +57,7 @@ class ProductController extends Controller
     {
 
         $code   = $this->get('sonata.product.pool')->getProductCode($basket_element->getProduct());
-        $action = sprintf('ProductBundle:%s:renderFormBasketElement', ucfirst($code)) ;
+        $action = sprintf('SonataProductBundle:%s:renderFormBasketElement', ucfirst($code)) ;
 
         $response = $this->forward($action, array(
             'field_group'     => $field_group,
@@ -79,7 +79,7 @@ class ProductController extends Controller
     public function renderFinalReviewBasketElementAction($basket_element)
     {
         $code   = $this->get('sonata.product.pool')->getProductCode($basket_element->getProduct());
-        $action = sprintf('ProductBundle:%s:renderFinalReviewBasketElement', ucfirst($code)) ;
+        $action = sprintf('SonataProductBundle:%s:renderFinalReviewBasketElement', ucfirst($code)) ;
 
         $response = $this->forward($action, array(
             'basket_element'  => $basket_element,

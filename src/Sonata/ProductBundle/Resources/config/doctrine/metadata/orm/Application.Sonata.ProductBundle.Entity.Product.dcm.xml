@@ -37,7 +37,7 @@
 
         <one-to-many
             field="package"
-            target-entity="Application\ProductBundle\Entity\Package"
+            target-entity="Application\Sonata\ProductBundle\Entity\Package"
             mapped-by="Product"
             >
 
@@ -56,7 +56,7 @@
 
         <one-to-many
             field="delivery"
-            target-entity="Application\ProductBundle\Entity\Delivery"
+            target-entity="Application\Sonata\ProductBundle\Entity\Delivery"
             mapped-by="product"
             fetch="LAZY">
 
@@ -74,7 +74,7 @@
         </one-to-many>
 
         <one-to-many
-            field="ProductCategories"
+            field="productCategories"
             target-entity="Application\Sonata\ProductBundle\Entity\ProductCategory"
             mapped-by="Product"
             inverted-by="Product">

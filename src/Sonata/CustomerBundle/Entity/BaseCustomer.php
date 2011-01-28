@@ -55,6 +55,10 @@ abstract class BaseCustomer
         return $this->firstname;
     }
 
+    public function getFullname()
+    {
+        return $this->getFirstname(). ' ' . $this->getLastname();
+    }
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
@@ -83,5 +87,10 @@ abstract class BaseCustomer
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function __toString()
+    {
+        return $this->getFirstname().' '.$this->getLastname();
     }
 }

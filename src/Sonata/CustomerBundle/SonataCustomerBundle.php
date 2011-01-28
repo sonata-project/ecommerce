@@ -8,13 +8,29 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\UserBundle;
+namespace Sonata\CustomerBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class UserBundle extends Bundle {
+class SonataCustomerBundle extends Bundle {
 
     public function boot() {
 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNamespace()
+    {
+        return __NAMESPACE__;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPath()
+    {
+        return strtr(__DIR__, '\\', '/');
     }
 }

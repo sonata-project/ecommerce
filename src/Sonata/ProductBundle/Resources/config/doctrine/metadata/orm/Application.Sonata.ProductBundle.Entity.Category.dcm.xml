@@ -18,7 +18,7 @@
         </id>
 
         <many-to-one
-            field="Parent"
+            field="parent"
             target-entity="Application\Sonata\ProductBundle\Entity\Category"
             inverted-by="Children"
             orphan-removal="false">
@@ -37,7 +37,7 @@
         </many-to-one>
 
         <one-to-many
-            field="Children"
+            field="children"
             target-entity="Application\Sonata\ProductBundle\Entity\Category"
             mapped-by="Parent"
             orphan-removal="false"

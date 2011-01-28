@@ -3,46 +3,44 @@
     <mapped-superclass name="Sonata\OrderBundle\Entity\BaseOrder">
 
         <field name="reference"           nullable="true"   type="string"   column="reference"          length="255"/>
-        <field name="payment_method"      nullable="true"   type="string"   column="payment_method"     length="255"/>
-        <field name="delivery_method"     nullable="true"   type="string"   column="delivery_method"    length="255"/>
+        <field name="paymentMethod"      nullable="true"   type="string"   column="payment_method"     length="255"/>
+        <field name="deliveryMethod"     nullable="true"   type="string"   column="delivery_method"    length="255"/>
         <field name="currency"            nullable="true"   type="string"   column="currency"           length="3"/>
         <field name="status"              nullable="true"   type="integer"  column="status"/>
-        <field name="payment_status"      nullable="true"   type="integer"  column="payment_status"/>
-        <field name="delivery_status"     nullable="true"   type="integer"  column="delivery_status"/>
-        <field name="validated_at"        nullable="true"   type="datetime" column="validated_at"/>
+        <field name="paymentStatus"      nullable="true"   type="integer"  column="payment_status"/>
+        <field name="deliveryStatus"     nullable="true"   type="integer"  column="delivery_status"/>
+        <field name="validatedAt"        nullable="true"   type="datetime" column="validated_at"/>
         <field name="username"            nullable="true"   type="string"   column="username"           length="255"/>
-        <field name="total_inc"           nullable="true"   type="decimal"  column="total_inc"          scale="4"/>
-        <field name="total_excl"          nullable="true"   type="decimal"  column="total_excl"         scale="4"/>
-        <field name="delivery_cost"       nullable="true"   type="decimal"  column="delivery_cost"      scale="4"/>
+        <field name="totalInc"           nullable="true"   type="decimal"  column="total_inc"          scale="4"/>
+        <field name="totalExcl"          nullable="true"   type="decimal"  column="total_excl"         scale="4"/>
+        <field name="deliveryCost"       nullable="true"   type="decimal"  column="delivery_cost"      scale="4"/>
 
-        <field name="billing_name"         nullable="true"  type="string"   column="billing_name"       length="255"/>
-        <field name="billing_phone"        nullable="true"  type="string"   column="billing_phone"      length="255"/>
-        <field name="billing_address1"     nullable="true"  type="string"   column="billing_address1"   length="255"/>
-        <field name="billing_address2"     nullable="true"  type="string"   column="billing_address2"   length="255"/>
-        <field name="billing_address3"     nullable="true"  type="string"   column="billing_address3"   length="255"/>
-        <field name="billing_city"         nullable="true"  type="string"   column="billing_city"       length="255"/>
-        <field name="billing_postcode"     nullable="true"  type="string"   column="billing_postcode"   length="255"/>
-        <field name="billing_country_code" nullable="true"  type="string"   column="billing_country_code"    length="255"/>
-        <field name="billing_fax"          nullable="true"  type="string"   column="billing_fax"        length="255"/>
-        <field name="billing_email"        nullable="true"  type="string"   column="billing_email"      length="255"/>
-        <field name="billing_mobile"       nullable="true"  type="string"   column="billing_mobile"     length="255"/>
+        <field name="billingName"         nullable="true"  type="string"   column="billing_name"       length="255"/>
+        <field name="billingPhone"        nullable="true"  type="string"   column="billing_phone"      length="255"/>
+        <field name="billingAddress1"     nullable="true"  type="string"   column="billing_address1"   length="255"/>
+        <field name="billingAddress2"     nullable="true"  type="string"   column="billing_address2"   length="255"/>
+        <field name="billingAddress3"     nullable="true"  type="string"   column="billing_address3"   length="255"/>
+        <field name="billingCity"         nullable="true"  type="string"   column="billing_city"       length="255"/>
+        <field name="billingPostcode"     nullable="true"  type="string"   column="billing_postcode"   length="255"/>
+        <field name="billingCountryCode" nullable="true"  type="string"   column="billing_country_code"    length="255"/>
+        <field name="billingFax"          nullable="true"  type="string"   column="billing_fax"        length="255"/>
+        <field name="billingEmail"        nullable="true"  type="string"   column="billing_email"      length="255"/>
+        <field name="billingMobile"       nullable="true"  type="string"   column="billing_mobile"     length="255"/>
 
-        <field name="shipping_name"         nullable="true" type="string"   column="shipping_name"      length="255"/>
-        <field name="shipping_phone"        nullable="true" type="string"   column="shipping_phone"     length="255"/>
-        <field name="shipping_address1"     nullable="true" type="string"   column="shipping_address1"  length="255"/>
-        <field name="shipping_address2"     nullable="true" type="string"   column="shipping_address2"  length="255"/>
-        <field name="shipping_address3"     nullable="true" type="string"   column="shipping_address3"  length="255"/>
-        <field name="shipping_city"         nullable="true" type="string"   column="shipping_city"      length="255"/>
-        <field name="shipping_postcode"     nullable="true" type="string"   column="shipping_postcode"  length="255"/>
-        <field name="shipping_country_code" nullable="true" type="string"   column="shipping_country_code"   length="255"/>
-        <field name="shipping_fax"          nullable="true" type="string"   column="shipping_fax"       length="255"/>
-        <field name="shipping_email"        nullable="true" type="string"   column="shipping_email"     length="255"/>
-        <field name="shipping_mobile"       nullable="true" type="string"   column="shipping_mobile"    length="255"/>
+        <field name="shippingName"         nullable="true" type="string"   column="shipping_name"      length="255"/>
+        <field name="shippingPhone"        nullable="true" type="string"   column="shipping_phone"     length="255"/>
+        <field name="shippingAddress1"     nullable="true" type="string"   column="shipping_address1"  length="255"/>
+        <field name="shippingAddress2"     nullable="true" type="string"   column="shipping_address2"  length="255"/>
+        <field name="shippingAddress3"     nullable="true" type="string"   column="shipping_address3"  length="255"/>
+        <field name="shippingCity"         nullable="true" type="string"   column="shipping_city"      length="255"/>
+        <field name="shippingPostcode"     nullable="true" type="string"   column="shipping_postcode"  length="255"/>
+        <field name="shippingCountryCode" nullable="true" type="string"   column="shipping_country_code"   length="255"/>
+        <field name="shippingFax"          nullable="true" type="string"   column="shipping_fax"       length="255"/>
+        <field name="shippingEmail"        nullable="true" type="string"   column="shipping_email"     length="255"/>
+        <field name="shippingMobile"       nullable="true" type="string"   column="shipping_mobile"    length="255"/>
 
-        <field name="updated_at"  nullable="true"  column="updated_at"     type="datetime" />
-        <field name="created_at"  nullable="true"  column="created_at"     type="datetime" />
+        <field name="updatedAt"  nullable="true"  column="updated_at"     type="datetime" />
+        <field name="createdAt"  nullable="true"  column="created_at"     type="datetime" />
 
-
-        
     </mapped-superclass>
 </doctrine-mapping>

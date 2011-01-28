@@ -9,9 +9,9 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\ProductBundle\Entity\{{ product }}"
+        name="Application\Sonata\ProductBundle\Entity\{{ product }}"
         table="product__product"
-        repository-class="Application\ProductBundle\Entity\{{ product }}Repository">
+        repository-class="Application\Sonata\ProductBundle\Entity\{{ product }}Repository">
 
         <!--
             Define your product here

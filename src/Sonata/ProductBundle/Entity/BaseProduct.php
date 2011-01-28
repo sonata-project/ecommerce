@@ -58,12 +58,12 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     /**
      * @var datetime $updated_at
      */
-    protected $updated_at;
+    protected $updatedAt;
 
     /**
      * @var datetime $created_at
      */
-    protected $created_at;
+    protected $createdAt;
 
     protected $image;
 
@@ -84,6 +84,11 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     protected $variations = array();
 
     protected $categories = array();
+
+    /**
+     * @var Application\Sonata\ProductBundle\Entity\ProductCategory
+     */
+    protected $productCategories;
 
     /**
      * Set sku
@@ -252,7 +257,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -262,7 +267,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
@@ -272,7 +277,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -282,7 +287,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -390,10 +395,6 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     {
         return $this->type;
     }
-    /**
-     * @var Application\Sonata\ProductBundle\Entity\ProductCategory
-     */
-    protected $ProductCategories;
 
     /**
      * Add ProductCategories
@@ -402,7 +403,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     public function addProductCategories(\Application\Sonata\ProductBundle\Entity\ProductCategory $productCategories)
     {
-        $this->ProductCategories[] = $productCategories;
+        $this->productCategories[] = $productCategories;
     }
 
     /**
@@ -412,7 +413,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      */
     public function getProductCategories()
     {
-        return $this->ProductCategories;
+        return $this->productCategories;
     }
 
     public function isEnabled()
