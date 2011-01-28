@@ -6,61 +6,63 @@ Installation
     * Symfony2
     * PHP 5.3.2
 
-* add the DoctrineUserBundle bundle (user management) and follow DoctrineUserBundle README
+* add the FOSUserBundle bundle (user management) and follow FOSUserBundle README
 
-        git submodule add git://github.com/knplabs/DoctrineUserBundle.git src/Bundle/DoctrineUserBundle
+        git submodule add git://github.com/FriendsOfSymfony/UserBundle.git src/FOS/UserBundle
 
-* add the EasyExtendsBundle bundle (user management) and follow EasyExtendsBundle README
+* add the SonataEasyExtendsBundle bundle (user management) and follow EasyExtendsBundle README
 
-        git submodule add git://github.com/sonata-project/EasyExtendsBundle.git src/Bundle/EasyExtendsBundle
+        git submodule add git://github.com/sonata-project/EasyExtendsBundle.git src/Sonata/EasyExtendsBundle
 
-* add the MediaBundle bundle (media management) and follow MediaBundle README
+* add the SonataMediaBundle bundle (media management) and follow MediaBundle README
 
-        git submodule add git://github.com/sonata-project/MediaBundle.git src/Bundle/MediaBundle
+        git submodule add git://github.com/sonata-project/MediaBundle.git src/Sonata/MediaBundle
 
 
 * add the following bundle in your kernel::registerBundles() method
 
-        new Bundle\DoctrineUserBundle\DoctrineUserBundle(),
-        new Bundle\EasyExtendsBundle\EasyExtendsBundle(),
+        new FOS\UserBundle\FOSUserBundle(),
+        new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
-        new Sonata\Bundle\ProductBundle\ProductBundle(),
-        new Sonata\Bundle\BasketBundle\BasketBundle(),
-        new Sonata\Bundle\OrderBundle\OrderBundle(),
-        new Sonata\Bundle\InvoiceBundle\InvoiceBundle(),
-        new Sonata\Bundle\MediaBundle\MediaBundle(),
-        new Sonata\Bundle\DeliveryBundle\DeliveryBundle(),
-        new Sonata\Bundle\PaymentBundle\PaymentBundle(),
+        new Sonata\ProductBundle\SonataProductBundle(),
+        new Sonata\BasketBundle\SonataBasketBundle(),
+        new Sonata\OrderBundle\SonataOrderBundle(),
+        new Sonata\InvoiceBundle\SonataInvoiceBundle(),
+        new Sonata\MediaBundle\SonataMediaBundle(),
+        new Sonata\DeliveryBundle\SonataDeliveryBundle(),
+        new Sonata\PaymentBundle\SonataPaymentBundle(),
 
 
 * run the easy-extends:generate command, this command will generate the Application entities required by the Sonata's Bundles
 
-        php yourproject/console easy-extends:generate
+        php yourproject/console sonata:easy-extends:generate
 
 * then add the following bundles in your kernel::registerBundles() method
 
-            new Application\DeliveryBundle\DeliveryBundle(),
-            new Application\BasketBundle\BasketBundle(),
-            new Application\InvoiceBundle\InvoiceBundle(),
-            new Application\Sonata\MediaBundle\MediaBundle(),
-            new Application\OrderBundle\OrderBundle(),
-            new Application\PaymentBundle\PaymentBundle(),
-            new Application\ProductBundle\ProductBundle(),
-            new Application\UrlShortenerBundle\UrlShortenerBundle(),
-
+        new Application\Sonata\DeliveryBundle\SonataDeliveryBundle(),
+        new Application\Sonata\BasketBundle\SonataBasketBundle(),
+        new Application\Sonata\InvoiceBundle\SonataInvoiceBundle(),
+        new Application\Sonata\MediaBundle\SonataMediaBundle(),
+        new Application\Sonata\OrderBundle\SonataOrderBundle(),
+        new Application\Sonata\PaymentBundle\SonataPaymentBundle(),
+        new Application\Sonata\ProductBundle\SonataProductBundle(),
 
   You can use this bundle to extends entities or template files
 
-* add the following dir mappings in your kernel::registerBundleDirs() method
-
-        'Sonata\\Contrib'       => __DIR__.'/../src/sonata/src/Sonata/Contrib',
-        'Sonata\\Bundle'        => __DIR__.'/../src/sonata/src/Sonata/Bundle',
-
 * add the following autoload information into the autoload.php file
 
-        'Sonata\\Contrib'       => __DIR__.'/../src/sonata/src/Sonata/Contrib',
-        'Sonata\\Bundle'        => __DIR__.'/../src/sonata/src/Sonata/Bundle',
-        'Imagine'               => __DIR__.'/vendor/lib',
+        // sonata core bundle
+        'Sonata\\BasketBundle'               => __DIR__.'/vendor/sonata/src',
+        'Sonata\\Component'                  => __DIR__.'/vendor/sonata/src',
+        'Sonata\\Contrib'                    => __DIR__.'/vendor/sonata/src',
+        'Sonata\\CustomerBundle'             => __DIR__.'/vendor/sonata/src',
+        'Sonata\\DeliveryBundle'             => __DIR__.'/vendor/sonata/src',
+        'Sonata\\InvoiceBundle'              => __DIR__.'/vendor/sonata/src',
+        'Sonata\\OrderBundle'                => __DIR__.'/vendor/sonata/src',
+        'Sonata\\PaymentBundle'              => __DIR__.'/vendor/sonata/src',
+        'Sonata\\ProductBundle'              => __DIR__.'/vendor/sonata/src',
+        'Sonata'                             => __DIR__,
+        'FOS'                                => __DIR__,
 
 * edit your config.yml and add the following lines
 
@@ -83,7 +85,7 @@ Installation
 
         sonata_product.config:
             products:
-                - { id: bottle, name: Bottle, enabled: true, class: Application\ProductBundle\Entity\Bottle }
+                - { id: bottle, name: Bottle, enabled: true, class: Application\Sonata\ProductBundle\Entity\Bottle }
 
             class:
                 model:
@@ -105,44 +107,42 @@ Installation
 
         # sonata front controller
         sonata_user:
-            resource: Sonata/Bundle/UserBundle/Resources/config/routing/user.xml
+            resource: @SonataUserBundle/Resources/config/routing/user.xml
             prefix: /shop/user
 
         sonata_order:
-            resource: Sonata/Bundle/OrderBundle/Resources/config/routing/order.xml
+            resource: @SonataOrderBundle/Resources/config/routing/order.xml
             prefix: /shop/user/invoice
 
         sonata_product:
-            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/product.xml
+            resource: @SonataProductBundle/Resources/config/routing/product.xml
             prefix: /shop/product
 
         sonata_category:
-            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/category.xml
+            resource: @SonataProductBundle/Resources/config/routing/category.xml
             prefix: /shop/category
 
         sonata_payment:
-            resource: Sonata/Bundle/PaymentBundle/Resources/config/routing/payment.xml
+            resource: @SonataPaymentBundle/Resources/config/routing/payment.xml
             prefix: /shop/payment
 
         sonata_invoice:
-            resource: Sonata/Bundle/InvoiceBundle/Resources/config/routing/invoice.xml
+            resource: @SonataInvoiceBundle/Resources/config/routing/invoice.xml
             prefix: /shop/user/invoice
-
 
         # sonata admin controller
         sonata_admin_product:
-            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/product_admin.xml
+            resource: @SonataProductBundle/Resources/config/routing/product_admin.xml
             prefix: /admin/shop/product
 
         sonata_admin_product:
-            resource: Sonata/Bundle/ProductBundle/Resources/config/routing/category_admin.xml
+            resource: @SonataProductBundle/Resources/config/routing/category_admin.xml
             prefix: /admin/shop/category
 
-
         sonata_admin_order:
-            resource: Sonata/Bundle/OrderBundle/Resources/config/routing/order_admin.xml
+            resource: @SonataOrderBundle/Resources/config/routing/order_admin.xml
             prefix: /admin/shop/order
 
         sonata_admin_order:
-            resource: Sonata/Bundle/InvoiceBundle/Resources/config/routing/invoice_admin.xml
+            resource: @SonataInvoiceBundle/Resources/config/routing/invoice_admin.xml
             prefix: /admin/shop/invoice

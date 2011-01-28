@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 class Basket implements \Serializable 
 {
 
-    protected $elements = array();
+    protected $basketElements = array();
 
     protected $pos = array();
 
@@ -30,32 +30,36 @@ class Basket implements \Serializable
 
     protected $inBuild = false;
 
-    protected $product_pool;
+    protected $productPool;
 
-    protected $payment_address;
+    protected $paymentAddress;
 
-    protected $payment_method;
+    protected $paymentMethod;
 
-    protected $payment_method_code;
+    protected $paymentMethodCode;
 
-    protected $payment_address_id;
+    protected $paymentAddressId;
 
-    protected $delivery_address;
+    protected $deliveryAddress;
 
-    protected $delivery_method;
+    protected $deliveryMethod;
 
-    protected $delivery_address_id;
+    protected $deliveryAddressId;
 
-    protected $delivery_method_code;
+    protected $deliveryMethodCode;
+
+    protected $customer;
+
+    protected $customerId;
 
     public function setProductPool($pool)
     {
-        $this->product_pool = $pool;
+        $this->productPool = $pool;
     }
 
     public function getProductPool()
     {
-        return $this->product_pool;
+        return $this->productPool;
     }
 
     /**
@@ -66,7 +70,7 @@ class Basket implements \Serializable
     public function isEmpty()
     {
 
-        return count($this->getElements()) == 0;
+        return count($this->getBasketElements()) == 0;
     }
 
     /**
@@ -77,14 +81,14 @@ class Basket implements \Serializable
      * @param boolean $elements_only
      * @return boolean
      */
-    public function isValid($elements_only = false)
+    public function isValid($elementsOnly = false)
     {
         if ($this->isEmpty()) {
 
             return false;
         }
 
-        foreach ($this->elements as $element)
+        foreach ($this->getBasketElements() as $element)
         {
             if ($element->isValid() === false) {
 
@@ -92,7 +96,7 @@ class Basket implements \Serializable
             }
         }
 
-        if ($elements_only) {
+        if ($elementsOnly) {
 
             return true;
         }
@@ -129,7 +133,7 @@ class Basket implements \Serializable
      */
     public function setDeliveryMethod(Delivery $method = null)
     {
-        $this->delivery_method = $method;
+        $this->deliveryMethod = $method;
     }
 
     /**
@@ -140,7 +144,7 @@ class Basket implements \Serializable
     public function getDeliveryMethod()
     {
 
-        return $this->delivery_method;
+        return $this->deliveryMethod;
     }
 
     /**
@@ -150,8 +154,8 @@ class Basket implements \Serializable
      */
     public function setDeliveryAddress(Address $address = null)
     {
-        $this->delivery_address = $address;
-        $this->delivery_address_id = $address ? $address->getId() : null;
+        $this->deliveryAddress = $address;
+        $this->deliveryAddressId = $address ? $address->getId() : null;
     }
 
     /**
@@ -162,7 +166,7 @@ class Basket implements \Serializable
     public function getDeliveryAddress()
     {
 
-        return $this->delivery_address;
+        return $this->deliveryAddress;
     }
 
     /**
@@ -172,8 +176,8 @@ class Basket implements \Serializable
      */
     public function setPaymentMethod(Payment $method = null)
     {
-        $this->payment_method = $method;
-        $this->payment_method_code = $method ? $method->getCode() : null;
+        $this->paymentMethod = $method;
+        $this->paymentMethodCode = $method ? $method->getCode() : null;
     }
 
     /**
@@ -184,7 +188,7 @@ class Basket implements \Serializable
     public function getPaymentMethod()
     {
 
-        return $this->payment_method;
+        return $this->paymentMethod;
     }
 
     /**
@@ -194,8 +198,8 @@ class Basket implements \Serializable
      */
     public function setPaymentAddress(Address $address = null)
     {
-        $this->payment_address = $address;
-        $this->payment_address_id = $address ? $address->getId() : null;
+        $this->paymentAddress = $address;
+        $this->paymentAddressId = $address ? $address->getId() : null;
     }
 
     /**
@@ -206,7 +210,7 @@ class Basket implements \Serializable
     public function getPaymentAddress()
     {
 
-        return $this->payment_address;
+        return $this->paymentAddress;
     }
 
     /**
@@ -235,18 +239,22 @@ class Basket implements \Serializable
     public function reset($full = true)
     {
 
-        $this->delivery_address = null;
-        $this->delivery_method = null;
-        $this->delivery_method_code = null;
+        $this->deliveryAddressId = null;
+        $this->deliveryAddress = null;
+        $this->deliveryMethod = null;
+        $this->deliveryMethodCode = null;
 
-        $this->payment_address = null;
-        $this->payment_method = null;
-        $this->payment_method_code = null;
+        $this->paymentAddressId = null;
+        $this->paymentAddress = null;
+        $this->paymentMethod = null;
+        $this->paymentMethodCode = null;
 
         if($full) {
-            $this->elements = array();
+            $this->basketElements = array();
             $this->pos = array();
             $this->cptElement = 0;
+            $this->customerId = null;
+            $this->customer = null;
         }
     }
 
@@ -255,10 +263,10 @@ class Basket implements \Serializable
      *
      * @return array BasketElement
      */
-    public function getElements()
+    public function getBasketElements()
     {
 
-        return $this->elements;
+        return $this->basketElements;
     }
 
     /**
@@ -267,19 +275,19 @@ class Basket implements \Serializable
      * @param  $elements
      * @return void
      */
-    public function setElements($elements)
+    public function setBasketElements($elements)
     {
-        $this->elements = $elements;
+        $this->basketElements = $elements;
     }
     /**
      * count number of element in the basket
      *
      * @return integer
      */
-    public function countElements()
+    public function countBasketElements()
     {
 
-        return count($this->elements);
+        return count($this->basketElements);
     }
 
     /**
@@ -287,10 +295,10 @@ class Basket implements \Serializable
      *
      * @return boolean
      */
-    public function hasElements()
+    public function hasBasketElements()
     {
 
-        return $this->countElements() > 0;
+        return $this->countBasketElements() > 0;
     }
 
     /**
@@ -309,7 +317,7 @@ class Basket implements \Serializable
             $pos = $this->pos[$product];
         }
 
-        return isset($this->elements[$pos]) ? $this->elements[$pos] : null;
+        return isset($this->basketElements[$pos]) ? $this->basketElements[$pos] : null;
     }
 
     /**
@@ -325,14 +333,14 @@ class Basket implements \Serializable
 
         if ($element instanceof Product) {
             $pos = $this->pos[$element->getId()];
-            $element = $this->elements[$pos];
+            $element = $this->basketElements[$pos];
         }
         else
         {
             $pos = $element->getPos();
         }
 
-        unset($this->elements[$pos]);
+        unset($this->basketElements[$pos]);
 
         if (!$this->inBuild) {
             $this->buildPrices();
@@ -385,15 +393,15 @@ class Basket implements \Serializable
      *
      * @param BasketElement $basket_element
      */
-    public function addBasketElement($basket_element)
+    public function addBasketElement($basketElement)
     {
 
         $this->reset(false);
         
-        $basket_element->setPos($this->cptElement);
+        $basketElement->setPos($this->cptElement);
 
-        $this->elements[$this->cptElement] = $basket_element;
-        $this->pos[$basket_element->getProduct()->getId()] = $this->cptElement;
+        $this->basketElements[$this->cptElement] = $basketElement;
+        $this->pos[$basketElement->getProduct()->getId()] = $this->cptElement;
         
         $this->cptElement++;
 
@@ -407,8 +415,8 @@ class Basket implements \Serializable
      */
     public function hasRecurrentPayment()
     {
-        foreach ($this->elements as $element) {
-            $product = $element->getProduct();
+        foreach ($this->getBasketElements() as $basketElement) {
+            $product = $basketElement->getProduct();
             if ($product instanceof Product) {
                 if ($product->isRecurrentPayment() === true) {
 
@@ -431,22 +439,22 @@ class Basket implements \Serializable
      *
      * @return float
      */
-    public function getTotal($vat = false, $recurrent_only = null)
+    public function getTotal($vat = false, $recurrentOnly = null)
     {
         $total = 0;
-        foreach ($this->elements as $element) {
+        foreach ($this->getBasketElements() as $basketElement) {
 
-            $product = $element->getProduct();
+            $product = $basketElement->getProduct();
 
-            if ($recurrent_only === true && $product->isRecurrentPayment() === false) {
+            if ($recurrentOnly === true && $product->isRecurrentPayment() === false) {
                 continue;
             }
 
-            if ($recurrent_only === false && $product->isRecurrentPayment() === true) {
+            if ($recurrentOnly === false && $product->isRecurrentPayment() === true) {
                 continue;
             }
 
-            $total += $element->getTotal($vat);
+            $total += $basketElement->getTotal($vat);
         }
 
         $total += $this->getDeliveryPrice($vat);
@@ -462,14 +470,14 @@ class Basket implements \Serializable
     public function getVatAmount()
     {
         $vat = 0;
-        foreach ($this->elements as $element) {
-            $vat += $element->getVatAmount();
+        foreach ($this->getBasketElements() as $basketElement) {
+            $vat += $basketElement->getVatAmount();
         }
 
-        $delivery_method = $this->getDeliveryMethod();
+        $deliveryMethod = $this->getDeliveryMethod();
 
-        if ($delivery_method instanceof Delivery) {
-            $vat += $delivery_method->getVatAmount($this);
+        if ($deliveryMethod instanceof Delivery) {
+            $vat += $deliveryMethod->getVatAmount($this);
         }
 
         return $vat;
@@ -507,11 +515,11 @@ class Basket implements \Serializable
 
         $pos = $this->pos[$product->getId()];
 
-        if (!array_key_exists($pos, $this->elements)) {
+        if (!array_key_exists($pos, $this->getBasketElements())) {
             return false;
         }
 
-        if ($this->elements[$pos] instanceof BasketElement) {
+        if ($this->basketElements[$pos] instanceof BasketElement) {
             return true;
         }
 
@@ -526,19 +534,19 @@ class Basket implements \Serializable
     {
         $this->inBuild = true;
 
-        foreach ($this->elements as $element) {
-            $product = $element->getProduct();
+        foreach ($this->getBasketElements() as $basketElement) {
+            $product = $basketElement->getProduct();
 
             if (!is_object($product)) {
-                $this->removeElement($element);
+                $this->removeElement($basketElement);
                 
                 continue;
             }
 
             $repository = $this->getProductPool()->getRepository($product);
             if($repository) {
-                $price = $repository->basketCalculatePrice($this, $element);
-                $element->setPrice($price);
+                $price = $repository->basketCalculatePrice($this, $basketElement);
+                $basketElement->setPrice($price);
             }
             
         }
@@ -553,9 +561,9 @@ class Basket implements \Serializable
     public function clean()
     {
 
-        foreach($this->getElements() as $basket_element) {
-            if($basket_element->getDelete()) {
-                $this->removeElement($basket_element);
+        foreach($this->getBasketElements() as $basketElement) {
+            if($basketElement->getDelete()) {
+                $this->removeElement($basketElement);
             }
         }
     }
@@ -564,14 +572,16 @@ class Basket implements \Serializable
     {
         
         return serialize(array(
-            'elements'              => $this->elements,
+            'basketElements'        => $this->getBasketElements(),
             'pos'                   => $this->pos,
-            'delivery_address_id'   => $this->delivery_address_id,
-            'delivery_method'       => $this->delivery_method,
-            'payment_address_id'    => $this->payment_address_id,
-            'payment_method_code'   => $this->payment_method_code,
+            'deliveryAddressId'     => $this->deliveryAddressId,
+            'deliveryMethod'        => $this->deliveryMethod,
+            'paymentAddressId'      => $this->paymentAddressId,
+            'paymentMethodCode'     => $this->paymentMethodCode,
             'cptElement'            => $this->cptElement,
-            'delivery_method_code'  => $this->delivery_method_code
+            'deliveryMethodCode'    => $this->deliveryMethodCode,
+            'customerId'            => $this->customerId,
+
         ));
     }
     
@@ -581,14 +591,15 @@ class Basket implements \Serializable
         $data = unserialize($data);
 
         $properties = array(
-            'elements',
+            'basketElements',
             'pos',
-            'delivery_address_id',
-            'delivery_method',
-            'delivery_method_code',
-            'payment_address_id',
-            'payment_method_code',
+            'deliveryAddressId',
+            'deliveryMethod',
+            'deliveryMethodCode',
+            'paymentAddressId',
+            'paymentMethodCode',
             'cptElement',
+            'customerId',
         );
 
         foreach($properties as $property)
@@ -597,34 +608,55 @@ class Basket implements \Serializable
         }
     }
 
-    public function setDeliveryAddressId($delivery_address_id)
+    public function setDeliveryAddressId($deliveryAddressId)
     {
-        $this->delivery_address_id = $delivery_address_id;
+        $this->deliveryAddressId = $deliveryAddressId;
     }
 
     public function getDeliveryAddressId()
     {
-        return $this->delivery_address_id;
+        return $this->deliveryAddressId;
     }
 
-    public function setPaymentAddressId($payment_address_id)
+    public function setPaymentAddressId($paymentAddressId)
     {
-        $this->payment_address_id = $payment_address_id;
+        $this->paymentAddressId = $paymentAddressId;
     }
 
     public function getPaymentAddressId()
     {
-        return $this->payment_address_id;
+        return $this->paymentAddressId;
     }
 
-    public function setPaymentMethodCode($payment_method_code)
+    public function setPaymentMethodCode($paymentMethodCode)
     {
-        $this->payment_method_code = $payment_method_code;
+        $this->paymentMethodCode = $paymentMethodCode;
     }
 
     public function getPaymentMethodCode()
     {
-        return $this->payment_method_code;
+        return $this->paymentMethodCode;
+    }
+
+    public function setCustomer($customer)
+    {
+        $this->customer = $customer;
+        $this->customerId = $customer ? $customer->getId() : null;
+    }
+
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+    }
+
+    public function getCustomerId()
+    {
+        return $this->customerId;
     }
 
 }

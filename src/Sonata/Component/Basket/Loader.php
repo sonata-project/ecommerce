@@ -14,21 +14,21 @@ class Loader
 {
     protected $session;
 
-    protected $product_pool;
+    protected $productPool;
 
-    protected $basket_class;
+    protected $basketClass;
 
     protected $basket;
 
-    protected $entity_manager;
+    protected $entityManager;
 
-    protected $delivery_pool;
+    protected $deliveryPool;
 
-    protected $payment_pool;
+    protected $paymentPool;
 
     public function __construct($class)
     {
-        $this->basket_class = $class;
+        $this->basketClass = $class;
     }
 
     public function setSession($session)
@@ -49,52 +49,63 @@ class Loader
 
             if(!$basket) {
 
-                if(!class_exists($this->basket_class)) {
-                    throw new \RuntimeException(sprintf('unable to load the class %s', $this->basket_class));
+                if(!class_exists($this->basketClass)) {
+                    throw new \RuntimeException(sprintf('unable to load the class %s', $this->basketClass));
                 }
 
-                $basket = new $this->basket_class;
+                $basket = new $this->basketClass;
             }
 
             $basket->setProductPool($this->getProductPool());
 
             try {
-                foreach($basket->getElements() as $element) {
-                    if($element->getProduct() === null) { // restore information
+                foreach($basket->getBasketElements() as $basketElement) {
+                    if($basketElement->getProduct() === null) { // restore information
 
-                        if($element->getProductCode() == null) {
+                        if($basketElement->getProductCode() == null) {
                             throw new \RuntimeException('the product code is empty');
                         }
 
-                        $repository = $this->getProductPool()->getRepository($element->getProductCode());
-                        $element->setProductRepository($repository);
+                        $repository = $this->getProductPool()->getRepository($basketElement->getProductCode());
+                        $basketElement->setProductRepository($repository);
                     }
                 }
 
 
-                $delivery_address_id = $basket->getDeliveryAddressId();
+                // load the delivery address
+                $deliveryAddressId = $basket->getDeliveryAddressId();
 
-                if($delivery_address_id) {
-                    $address = $this->getEntityManager()->find('BasketBundle:Address', $delivery_address_id);
+                if($deliveryAddressId) {
+                    $address = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Address', $deliveryAddressId);
 
                     $basket->setDeliveryAddress($address);
                 }
 
-
-                $billing_address_id = $basket->getPaymentAddressId();
-                if($billing_address_id) {
-                    $address = $this->getEntityManager()->find('BasketBundle:Address', $billing_address_id);
+                // load the payment address
+                $paymentAddressId = $basket->getPaymentAddressId();
+                if($paymentAddressId) {
+                    $address = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Address', $paymentAddressId);
 
                     $basket->setPaymentAddress($address);
                 }
 
-                $payment_method_code = $basket->getPaymentMethodCode();
-                if($payment_method_code) {
-                    $basket->setPaymentMethod($this->getPaymentPool()->getMethod($payment_method_code));
+                // load the payment method
+                $paymentMethodCode = $basket->getPaymentMethodCode();
+                if($paymentMethodCode) {
+                    $basket->setPaymentMethod($this->getPaymentPool()->getMethod($paymentMethodCode));
+                }
+
+                // customer
+                $customerId = $basket->getCustomerId();
+                if($customerId) {
+                    $customer = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Customer', $customerId);
+
+                    $basket->setCustomer($customer);
                 }
 
             } catch(\Exception $e) {
 
+                throw $e;
                 // something went wrong while loading the basket
                 $basket->reset();
             }
@@ -108,54 +119,54 @@ class Loader
         return $this->basket;
     }
 
-    public function setProductPool($product_pool)
+    public function setProductPool($productPool)
     {
-        $this->product_pool = $product_pool;
+        $this->productPool = $productPool;
     }
 
     public function getProductPool()
     {
-        return $this->product_pool;
+        return $this->productPool;
     }
 
-    public function setBasketClass($basket_class)
+    public function setBasketClass($basketClass)
     {
-        $this->basket_class = $basket_class;
+        $this->basketClass = $basketClass;
     }
 
     public function getBasketClass()
     {
-        return $this->basket_class;
+        return $this->basketClass;
     }
 
-    public function setEntityManager($entity_manager)
+    public function setEntityManager($entityManager)
     {
-        $this->entity_manager = $entity_manager;
+        $this->entityManager = $entityManager;
     }
 
     public function getEntityManager()
     {
-        return $this->entity_manager;
+        return $this->entityManager;
     }
 
-    public function setDeliveryPool($delivery_pool)
+    public function setDeliveryPool($deliveryPool)
     {
-        $this->delivery_pool = $delivery_pool;
+        $this->deliveryPool = $deliveryPool;
     }
 
     public function getDeliveryPool()
     {
-        return $this->delivery_pool;
+        return $this->deliveryPool;
     }
 
-    public function setPaymentPool($payment_pool)
+    public function setPaymentPool($paymentPool)
     {
-        $this->payment_pool = $payment_pool;
+        $this->paymentPool = $paymentPool;
     }
 
     public function getPaymentPool()
     {
-        return $this->payment_pool;
+        return $this->paymentPool;
     }
 
 }

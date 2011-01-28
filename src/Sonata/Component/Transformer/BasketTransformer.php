@@ -77,7 +77,7 @@ class BasketTransformer extends BaseTransformer {
 
         // add a custom class_instance for testing purpose.
         // todo : find a cleaner way to do that
-        $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : new \Application\OrderBundle\Entity\Order;
+        $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : new \Application\Sonata\OrderBundle\Entity\Order;
 
         $order->setUser($user);
 

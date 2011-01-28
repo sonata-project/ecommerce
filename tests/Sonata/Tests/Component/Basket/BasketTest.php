@@ -124,17 +124,17 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() return true');
 
-        $this->assertTrue($basket->hasElements(), '::hasElement() return true ');
-        $this->assertEquals(1, $basket->countElements(), '::countElements() return 1');
-        $this->assertNotEmpty($basket->getElements(), '::getElements() is not empty');
+        $this->assertTrue($basket->hasBasketElements(), '::hasElement() return true ');
+        $this->assertEquals(1, $basket->countBasketElements(), '::countElements() return 1');
+        $this->assertNotEmpty($basket->getBasketElements(), '::getElements() is not empty');
 
         $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $element = $basket->getElement($product), '::getElement() - return a BasketElement');
 
         $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basket->removeElement($element), '::removeElement() - return the removed BasketElement');
 
-        $this->assertFalse($basket->hasElements(), '::hasElement() return false');
-        $this->assertEquals(0, $basket->countElements(), '::countElements() return 0');
-        $this->assertEmpty($basket->getElements(), '::getElements() is empty');
+        $this->assertFalse($basket->hasBasketElements(), '::hasElement() return false');
+        $this->assertEquals(0, $basket->countBasketElements(), '::countElements() return 0');
+        $this->assertEmpty($basket->geBaskettElements(), '::getElements() is empty');
 
         $basket_element = $basket->addProduct($product, array('quantity' => 0));
         $this->assertEquals(0, $basket_element->getQuantity(),  '::getQuantity() return 1 after adding the product');
@@ -184,8 +184,8 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('a:7:', $data, 'the serialize array has 7 elements');
 
         $basket->reset();
-        $this->assertTrue(count($basket->getElements()) == 0, '::reset() remove all elements');
+        $this->assertTrue(count($basket->getBasketElements()) == 0, '::reset() remove all elements');
         $basket->unserialize($data);
-        $this->assertTrue(count($basket->getElements()) == 1, '::unserialize() restore elements');
+        $this->assertTrue(count($basket->getBasketElements()) == 1, '::unserialize() restore elements');
     }
 }

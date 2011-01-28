@@ -19,4 +19,12 @@ class BasketElementCollection extends Constraint
     public function validatedBy() {
         return 'sonata_basket_element_collection_validator';
     }
+
+        /**
+     * {@inheritDoc}
+     */
+    public function targets()
+    {
+        return self::PROPERTY_CONSTRAINT;
+    }
 }

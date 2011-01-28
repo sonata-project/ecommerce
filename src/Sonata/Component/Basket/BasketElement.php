@@ -16,7 +16,7 @@ use Sonata\Component\Product\ProductInterface;
 class BasketElement implements \Serializable
 {
 
-    protected $product_id = null;
+    protected $productId = null;
 
     protected $product = null;
 
@@ -30,9 +30,9 @@ class BasketElement implements \Serializable
 
     protected $pos = null;
 
-    protected $product_repository = null;
+    protected $productRepository = null;
 
-    protected $product_code = null;
+    protected $productCode = null;
 
     /*
      * use by the validation framework
@@ -77,17 +77,17 @@ class BasketElement implements \Serializable
      * @param Product $product
      * @return BasketElement
      */
-    public function setProduct(ProductInterface $product, $product_repository)
+    public function setProduct(ProductInterface $product, $productRepository)
     {
 
         $this->product      = $product;
-        $this->product_id   = $product->getId();
-        $this->product_code = $product_repository->getClassMetadata()->discriminatorValue;
+        $this->productId    = $product->getId();
+        $this->productCode  = $productRepository->getClassMetadata()->discriminatorValue;
         $this->name         = $product->getName();
         $this->price        = $product->getPrice();
         $this->options      = $product->getOptions();
 
-        $this->product_repository = $product_repository;
+        $this->productRepository = $productRepository;
         
         return $this;
     }
@@ -102,7 +102,7 @@ class BasketElement implements \Serializable
 
         if($this->product == null && $this->getProductRepository())
         {
-            $this->product      = $this->getProductRepository()->findOneById($this->product_id);
+            $this->product      = $this->getProductRepository()->findOneById($this->productId);
         }
         
         return $this->product;
@@ -115,7 +115,7 @@ class BasketElement implements \Serializable
      */
     public function getProductId()
     {
-        return $this->product_id;
+        return $this->productId;
     }
 
     /**
@@ -125,10 +125,10 @@ class BasketElement implements \Serializable
      * @param  $product_id
      * @return void
      */
-    public function setProductId($product_id)
+    public function setProductId($productId)
     {
         if(!$this->getProduct()) {
-            $this->product_id = $product_id;
+            $this->productId = $productId;
         }
     }
 
@@ -306,13 +306,13 @@ class BasketElement implements \Serializable
     {
 
         return serialize(array(
-            'product_id' => $this->product_id,
-            'pos'        => $this->pos,
-            'price'      => $this->price,
-            'quantity'   => $this->quantity,
-            'options'    => $this->options,
-            'name'       => $this->name,
-            'product_code' => $this->product_code,
+            'productId'   => $this->productId,
+            'pos'         => $this->pos,
+            'price'       => $this->price,
+            'quantity'    => $this->quantity,
+            'options'     => $this->options,
+            'name'        => $this->name,
+            'productCode' => $this->productCode,
         ));
     }
 
@@ -321,32 +321,32 @@ class BasketElement implements \Serializable
 
         $data = unserialize($data);
 
-        $this->product_id   = $data['product_id'];
+        $this->productId    = $data['productId'];
         $this->pos          = $data['pos'];
         $this->price        = $data['price'];
         $this->quantity     = $data['quantity'];
         $this->options      = $data['options'];
         $this->name         = $data['name'];
-        $this->product_code = $data['product_code'];
+        $this->productCode  = $data['productCode'];
     }
 
-    public function setProductRepository($product_repository)
+    public function setProductRepository($productRepository)
     {
-        $this->product_repository = $product_repository;
+        $this->productRepository = $productRepository;
     }
 
     public function getProductRepository()
     {
-        return $this->product_repository;
+        return $this->productRepository;
     }
 
-    public function setProductCode($product_code)
+    public function setProductCode($productCode)
     {
-        $this->product_code = $product_code;
+        $this->productCode = $productCode;
     }
 
     public function getProductCode()
     {
-        return $this->product_code;
+        return $this->productCode;
     }
 }
