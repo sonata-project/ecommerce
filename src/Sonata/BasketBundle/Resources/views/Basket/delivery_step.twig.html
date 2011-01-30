@@ -16,18 +16,18 @@ file that was distributed with this source code.
 
     <div>
         <h2>{% trans 'title_delivery_addresses' from 'BasketBundle' %}</h2>
-        {{ form_errors(form.delivery_address) }}
-        {{ form_field(form.delivery_address, {}, {}, 'BasketBundle:Basket:render_delivery_address.twig') }}
+        {{ form_errors(form.deliveryAddress) }}
+        {{ form_field(form.deliveryAddress, {}, {}, 'SonataBasketBundle:Basket:render_delivery_address.twig.html') }}
     </div>
 
     <div>
         <h2>{% trans 'title_delivery_methods' from 'BasketBundle' %}</h2>
 
-        {% if delivery_methods.length > 0 %}
-            <p>{% trans 'message_no_deliery_methods_available' from 'BasketBundle' %}</p>
+        {% if delivery_methods|length == 0 %}
+            <p>{% trans 'message_no_delivery_methods_available' from 'BasketBundle' %}</p>
         {% else %}
-            {{ form_errors(form.delivery_method) }}
-            {{ form_field(form.delivery_method, {}, {}, 'BasketBundle:Basket:render_delivery_address.twig') }}
+            {{ form_errors(form.deliveryMethod) }}
+            {{ form_field(form.deliveryMethod, {}, {}, 'SonataBasketBundle:Basket:render_delivery_address.twig.html') }}
         {% endif %}
     </div>
 

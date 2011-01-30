@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 
 <tr>
-    {% if field_group.hasErrors %} {# global error the product is not active anymore #}
+    {% if fieldGroup.hasErrors %} {# global error the product is not active anymore #}
         <td colspan="4">{% block product_error %}{% trans 'message_product_not_available' from 'ProductBundle' %}{% endblock %}</td>
     {% else %}
         <td>{% block product_description %}{% endblock %}</td>

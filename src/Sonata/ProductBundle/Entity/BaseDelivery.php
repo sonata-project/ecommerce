@@ -53,7 +53,7 @@ abstract class BaseDelivery
     protected $product;
     
     /**
-     * Set product_id
+     * Set productId
      *
      * @param integer $productId
      */
@@ -65,7 +65,7 @@ abstract class BaseDelivery
     }
 
     /**
-     * Get product_id
+     * Get productId
      *
      * @return integer $productId
      */

@@ -15,7 +15,7 @@ abstract class BaseInvoice
     /**
      * @var integer $user_id
      */
-    protected $user_id;
+    protected $customerId;
 
     /**
      * @var string $currency
@@ -28,14 +28,14 @@ abstract class BaseInvoice
     protected $status;
 
     /**
-     * @var decimal $total_inc
+     * @var decimal $totalInc
      */
-    protected $total_inc;
+    protected $totalInc;
 
     /**
-     * @var decimal $total_excl
+     * @var decimal $totalExcl
      */
-    protected $total_excl;
+    protected $totalExcl;
 
     /**
      * @var string $name
@@ -173,43 +173,43 @@ abstract class BaseInvoice
     }
 
     /**
-     * Set total_inc
+     * Set totalInc
      *
      * @param decimal $totalInc
      */
     public function setTotalInc($totalInc)
     {
-        $this->total_inc = $totalInc;
+        $this->totalInc = $totalInc;
     }
 
     /**
-     * Get total_inc
+     * Get totalInc
      *
      * @return decimal $totalInc
      */
     public function getTotalInc()
     {
-        return $this->total_inc;
+        return $this->totalInc;
     }
 
     /**
-     * Set total_excl
+     * Set totalExcl
      *
      * @param decimal $totalExcl
      */
     public function setTotalExcl($totalExcl)
     {
-        $this->total_excl = $totalExcl;
+        $this->totalExcl = $totalExcl;
     }
 
     /**
-     * Get total_excl
+     * Get totalExcl
      *
      * @return decimal $totalExcl
      */
     public function getTotalExcl()
     {
-        return $this->total_excl;
+        return $this->totalExcl;
     }
 
     /**

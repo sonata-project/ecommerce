@@ -12,7 +12,7 @@ file that was distributed with this source code.
 <ul>
     {% for category in root_category.getChildren() %}
         <li>
-            <a href="{{ url('sonata_category_view', {'slug': category.slug, 'category_id': category.id}) }}">{{ category.name }}</a>
+            <a href="{{ url('sonata_category_view', {'slug': category.slug, 'categoryId': category.id}) }}">{{ category.name }}</a>
 
             {% if category.hasChildren and deep < depth%}
                 

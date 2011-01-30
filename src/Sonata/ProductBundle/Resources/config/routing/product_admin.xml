@@ -5,19 +5,19 @@
     xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
 
 
-    <route id="sonata_admin_product_variations" pattern="/{product_id}/variations">
+    <route id="sonata_admin_product_variations" pattern="/{productId}/variations">
         <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
-    <route id="sonata_admin_product_delivery_index" pattern="/{product_id}/delivery">
+    <route id="sonata_admin_product_delivery_index" pattern="/{productId}/delivery">
         <default key="_controller">SonataProductBundle:ProductAdmin:deliveryIndex</default>
     </route>
 
-    <route id="sonata_admin_product_delivery_edit" pattern="/{product_id}/delivery/{delivery_id}/edit">
+    <route id="sonata_admin_product_delivery_edit" pattern="/{productId}/delivery/{deliveryId}/edit">
         <default key="_controller">SonataProductBundle:ProductAdmin:deliveryEdit</default>
     </route>
 
-    <route id="sonata_admin_product_delivery_update" pattern="/{product_id}/delivery/update">
+    <route id="sonata_admin_product_delivery_update" pattern="/{productId}/delivery/update">
         <default key="_controller">SonataProductBundle:ProductAdmin:deliveryUpdate</default>
     </route>
 </routes>

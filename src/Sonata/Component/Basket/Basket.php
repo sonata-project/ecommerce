@@ -391,7 +391,7 @@ class Basket implements \Serializable
     /**
      * Add a basket element into the current basket
      *
-     * @param BasketElement $basket_element
+     * @param BasketElement $basketElement
      */
     public function addBasketElement($basketElement)
     {

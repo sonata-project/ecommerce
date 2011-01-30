@@ -17,20 +17,20 @@ file that was distributed with this source code.
     <div>
         <h2>{% trans 'title_delivery_addresses' from 'BasketBundle' %}</h2>
         {{ form_errors(form.payment_address) }}
-        {{ form_field(form.payment_address, {}, {}, 'BasketBundle:Basket:render_payment_address.twig') }}
+        {{ form_field(form.payment_address, {}, {}, 'SonataBasketBundle:Basket:render_payment_address.twig.html') }}
     </div>
 
     <div>
         <h2>{% trans 'title_delivery_methods' from 'BasketBundle' %}</h2>
 
-        {% if delivery_methods.length > 0 %}
-            <p>{% trans 'message_no_deliery_methods_available' from 'BasketBundle' %}</p>
+        {% if paymentMethods|length == 0 %}
+            <p>{% trans 'message_no_delivery_methods_available' from 'BasketBundle' %}</p>
         {% else %}
             {{ form_errors(form.payment_method) }}
-            {{ form_field(form.payment_method, {}, {}, 'BasketBundle:Basket:render_payment_address.twig') }}
+            {{ form_field(form.payment_method, {}, {}, 'SonataBasketBundle:Basket:render_payment_address.twig.html') }}
         {% endif %}
     </div>
 
-    <input type="submit" value="{% trans 'btn_update_payment_step' from 'BasketBundle' %}" />
+    <input type="submit" value="{% trans 'btn_update_payment_step' from 'SonataBasketBundle' %}" />
 
 </form>

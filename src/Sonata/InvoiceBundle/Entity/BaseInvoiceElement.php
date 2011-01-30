@@ -8,14 +8,14 @@ namespace Sonata\InvoiceBundle\Entity;
 abstract class BaseInvoiceElement
 {
     /**
-     * @var integer $invoice_id
+     * @var integer $invoiceId
      */
-    protected $invoice_id;
+    protected $invoiceId;
 
     /**
-     * @var integer $order_element_id
+     * @var OrderElement $orderElement
      */
-    protected $order_element_id;
+    protected $orderElement;
 
     /**
      * @var integer $quantity
@@ -53,48 +53,43 @@ abstract class BaseInvoiceElement
     protected $invoice;
 
     /**
-     * @var Sonata\OrderBundle\Entity\OrderElement
-     */
-    protected $order_element;
-
-    /**
-     * Set invoice_id
+     * Set invoiceId
      *
      * @param integer $invoiceId
      */
     public function setInvoiceId($invoiceId)
     {
-        $this->invoice_id = $invoiceId;
+        $this->invoiceId = $invoiceId;
     }
 
     /**
-     * Get invoice_id
+     * Get invoiceId
      *
      * @return integer $invoiceId
      */
     public function getInvoiceId()
     {
-        return $this->invoice_id;
+        return $this->invoiceId;
     }
 
     /**
-     * Set order_element_id
+     * Set orderElement
      *
-     * @param integer $orderElementId
+     * @param OrderElement $orderElement
      */
-    public function setOrderElementId($orderElementId)
+    public function setOrderElement($orderElement)
     {
-        $this->order_element_id = $orderElementId;
+        $this->orderElement = $orderElement;
     }
 
     /**
-     * Get order_element_id
+     * Get orderElement
      *
-     * @return integer $orderElementId
+     * @return OrderElement $orderElement
      */
-    public function getOrderElementId()
+    public function getOrderElement()
     {
-        return $this->order_element_id;
+        return $this->orderElement;
     }
 
     /**
@@ -247,13 +242,4 @@ abstract class BaseInvoiceElement
         $this->order_element[] = $orderElement;
     }
 
-    /**
-     * Get order_element
-     *
-     * @return Doctrine\Common\Collections\Collection $orderElement
-     */
-    public function getOrderElement()
-    {
-        return $this->order_element;
-    }
 }

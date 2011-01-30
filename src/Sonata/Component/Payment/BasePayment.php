@@ -31,11 +31,13 @@ abstract class BasePayment implements PaymentInterface
 
     protected $logger;
 
-    protected $is_debug;
+    protected $isDebug;
 
     protected $enabled;
     
     protected $translator;
+
+    protected $description;
 
     /**
     * Generate a check value
@@ -237,5 +239,15 @@ abstract class BasePayment implements PaymentInterface
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

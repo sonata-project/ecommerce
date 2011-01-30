@@ -17,7 +17,6 @@ namespace Sonata\Component\Delivery;
 abstract class BaseDelivery implements DeliveryInterface
 {
 
-
     protected $vat;
 
     protected $price;
@@ -31,6 +30,8 @@ abstract class BaseDelivery implements DeliveryInterface
     protected $enabled;
 
     protected $priority;
+
+    protected $description;
 
     /**
      * return status list
@@ -147,5 +148,15 @@ abstract class BaseDelivery implements DeliveryInterface
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

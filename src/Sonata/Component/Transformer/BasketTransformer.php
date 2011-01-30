@@ -11,28 +11,31 @@
 namespace Sonata\Component\Transformer;
 
 
-class BasketTransformer extends BaseTransformer {
+class BasketTransformer extends BaseTransformer
+{
 
 
     /**
      * transform a basket into order
      *
-     * @param  $user
+     * @param  $customer
      * @param  $basket
      * @return Order
      */
-    public function transformIntoOrder($user, $basket) {
+    public function transformIntoOrder($customer, $basket)
+    {
 
-        // User
-        if (!is_object($user)) {
+        // Customer
+        if (!is_object($customer)) {
 
             if($this->getLogger()) {
-                $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the user is not valid');
+                $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the customer is not valid');
             }
 
-            throw new \RuntimeException('Invalid user');
+            throw new \RuntimeException('Invalid customer');
         }
 
+        // Basket
         if (!$basket) {
 
             if($this->getLogger()) {
@@ -41,11 +44,10 @@ class BasketTransformer extends BaseTransformer {
 
             throw new \RuntimeException('Invalid basket');
         }
-
         
         // Billing
-        $billing_address = $basket->getPaymentAddress();
-        if (!$billing_address instanceof  \Sonata\Component\Basket\AddressInterface) {
+        $billingAddress = $basket->getPaymentAddress();
+        if (!$billingAddress instanceof  \Sonata\Component\Basket\AddressInterface) {
 
             if($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the billing address is not valid');
@@ -55,8 +57,8 @@ class BasketTransformer extends BaseTransformer {
         }
 
         // Shipping
-        $delivery_method = $basket->getDeliveryMethod();
-        if (!$delivery_method instanceof \Sonata\Component\Delivery\DeliveryInterface) {
+        $deliveryMethod = $basket->getDeliveryMethod();
+        if (!$deliveryMethod instanceof \Sonata\Component\Delivery\DeliveryInterface) {
 
             if($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the delivery method is not valid');
@@ -65,8 +67,8 @@ class BasketTransformer extends BaseTransformer {
             throw new \RuntimeException('Invalid delivery method');
         }
 
-        $delivery_address = $basket->getDeliveryAddress();
-        if ($delivery_method->isAddressRequired() && !$delivery_address instanceof \Sonata\Component\Basket\AddressInterface) {
+        $deliveryAddress = $basket->getDeliveryAddress();
+        if ($deliveryMethod->isAddressRequired() && !$deliveryAddress instanceof \Sonata\Component\Basket\AddressInterface) {
 
             if($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the shipping address is not valid');
@@ -79,29 +81,29 @@ class BasketTransformer extends BaseTransformer {
         // todo : find a cleaner way to do that
         $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : new \Application\Sonata\OrderBundle\Entity\Order;
 
-        $order->setUser($user);
+        $order->setCustomer($customer);
 
-        $order->setUsername($user->getUsername());
+        $order->setUsername($customer->getFullname());
 
-        if ($delivery_method->isAddressRequired()) {
-            $order->setShippingAddress1($delivery_address->getAddress1());
-            $order->setShippingAddress2($delivery_address->getAddress2());
-            $order->setShippingAddress3($delivery_address->getAddress3());
-            $order->setShippingPostcode($delivery_address->getPostcode());
-            $order->setShippingCity($delivery_address->getCity());
-            $order->setShippingCountryCode($delivery_address->getCountryCode());
-            $order->setShippingName($delivery_address->getName());
-            $order->setShippingPhone($delivery_address->getPhone());
+        if ($deliveryMethod->isAddressRequired()) {
+            $order->setShippingAddress1($deliveryAddress->getAddress1());
+            $order->setShippingAddress2($deliveryAddress->getAddress2());
+            $order->setShippingAddress3($deliveryAddress->getAddress3());
+            $order->setShippingPostcode($deliveryAddress->getPostcode());
+            $order->setShippingCity($deliveryAddress->getCity());
+            $order->setShippingCountryCode($deliveryAddress->getCountryCode());
+            $order->setShippingName($deliveryAddress->getName());
+            $order->setShippingPhone($deliveryAddress->getPhone());
         }
 
-        $order->setBillingAddress1($billing_address->getAddress1());
-        $order->setBillingAddress2($billing_address->getAddress2());
-        $order->setBillingAddress3($billing_address->getAddress3());
-        $order->setBillingPostcode($billing_address->getPostcode());
-        $order->setBillingCity($billing_address->getCity());
-        $order->setBillingCountryCode($billing_address->getCountryCode());
-        $order->setBillingName($billing_address->getName());
-        $order->setBillingPhone($billing_address->getPhone());
+        $order->setBillingAddress1($billingAddress->getAddress1());
+        $order->setBillingAddress2($billingAddress->getAddress2());
+        $order->setBillingAddress3($billingAddress->getAddress3());
+        $order->setBillingPostcode($billingAddress->getPostcode());
+        $order->setBillingCity($billingAddress->getCity());
+        $order->setBillingCountryCode($billingAddress->getCountryCode());
+        $order->setBillingName($billingAddress->getName());
+        $order->setBillingPhone($billingAddress->getPhone());
 
         $order->setTotalExcl($basket->getTotal());
         $order->setTotalInc($basket->getTotal(true));
@@ -117,14 +119,14 @@ class BasketTransformer extends BaseTransformer {
 
         $order->setStatus(\Sonata\Component\Order\OrderInterface::STATUS_OPEN);
 
-        $order->setPaymentStatus(\Application\PaymentBundle\Entity\Transaction::STATUS_OPEN);
+        $order->setPaymentStatus(\Application\Sonata\PaymentBundle\Entity\Transaction::STATUS_OPEN);
         $order->setPaymentMethod($basket->getPaymentMethod()->getCode());
 
-        foreach ($basket->getElements() as $basket_element)
+        foreach ($basket->getBasketElements() as $basketElement)
         {
-            $order_element = $basket_element->getProductRepository()->createOrderElement($basket_element);
+            $orderElement = $basketElement->getProductRepository()->createOrderElement($basketElement);
 
-            $order->addOrderElement($order_element);
+            $order->addOrderElement($orderElement);
         }
 
 

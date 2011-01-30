@@ -16,9 +16,9 @@ namespace Sonata\Component\Payment;
  */
 class Selector
 {
-    protected $payment_pool;
+    protected $paymentPool;
 
-    protected $product_pool;
+    protected $productPool;
 
     protected $logger;
 
@@ -33,20 +33,20 @@ class Selector
         return $this->logger;
     }
 
-    public function setProductPool($product_pool)
+    public function setProductPool($productPool)
     {
-        $this->product_pool = $product_pool;
+        $this->productPool = $productPool;
     }
 
     public function getProductPool()
     {
-        return $this->product_pool;
+        return $this->productPool;
     }
 
-    public function getAvailableMethods($basket, $payment_address)
+    public function getAvailableMethods($basket, $paymentAddress)
     {
 
-        if (!$payment_address) {
+        if (!$paymentAddress) {
 
             return false;
         }
@@ -54,13 +54,13 @@ class Selector
         return $this->getPaymentPool()->getMethods();
     }
 
-    public function setPaymentPool($payment_pool)
+    public function setPaymentPool($paymentPool)
     {
-        $this->payment_pool = $payment_pool;
+        $this->paymentPool = $paymentPool;
     }
 
     public function getPaymentPool()
     {
-        return $this->payment_pool;
+        return $this->paymentPool;
     }
 }

@@ -39,19 +39,19 @@ abstract class BaseProductController extends Controller
         ));
     }
 
-    public function renderFormBasketElementAction($field_group, $basket_element)
+    public function renderFormBasketElementAction($fieldGroup, $basketElement)
     {
 
-        return $this->render(sprintf('SonataProductBundle:%s:form_basket_element.twig.html', ucfirst($this->getProductCode($basket_element->getProduct()))), array(
-           'field_group'    => $field_group,
-           'basket_element' => $basket_element,
+        return $this->render(sprintf('SonataProductBundle:%s:form_basket_element.twig.html', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
+           'fieldGroup'    => $fieldGroup,
+           'basketElement' => $basketElement,
         ));
     }
 
-    public function renderFinalReviewBasketElementAction($basket_element)
+    public function renderFinalReviewBasketElementAction($basketElement)
     {
-        return $this->render(sprintf('SonataProductBundle:%s:final_review_basket_element.twig.html', ucfirst($this->getProductCode($basket_element->getProduct()))), array(
-           'basket_element' => $basket_element,
+        return $this->render(sprintf('SonataProductBundle:%s:final_review_basket_element.twig.html', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
+           'basketElement' => $basketElement,
         ));
 
     }
@@ -62,23 +62,23 @@ abstract class BaseProductController extends Controller
     }
 
 
-    public function viewVariationsAction($product_id, $slug) {
+    public function viewVariationsAction($productId, $slug) {
 
     }
 
-    public function viewBasketElement($basket_element) {
+    public function viewBasketElement($basketElement) {
 
     }
 
-    public function viewBasketElementConfirmation($basket_element) {
+    public function viewBasketElementConfirmation($basketElement) {
 
     }
 
-    public function viewOrderElement($order_element) {
+    public function viewOrderElement($orderElement) {
 
     }
 
-    public function viewEditOrderElement($order_element) {
+    public function viewEditOrderElement($orderElement) {
 
     }
     

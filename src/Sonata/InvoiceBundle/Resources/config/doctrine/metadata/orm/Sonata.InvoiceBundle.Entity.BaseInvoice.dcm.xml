@@ -3,11 +3,10 @@
     <mapped-superclass name="Sonata\InvoiceBundle\Entity\BaseInvoice">
 
         <field name="reference"     type="string"   column="reference"  length="255"/>
-        <field name="user_id"       type="integer"  column="user_id"    length="4"/>
         <field name="currency"      type="string"   column="currency"   length="3"/>
         <field name="status"        type="integer"  column="status"/>
-        <field name="total_inc"     type="decimal"  column="total_inc"  scale="4"/>
-        <field name="total_excl"    type="decimal"  column="total_excl" scale="4"/>
+        <field name="totalInc"      type="decimal"  column="total_inc"  scale="4"/>
+        <field name="totalExcl"     type="decimal"  column="total_excl" scale="4"/>
         <field name="name"          type="string"   column="name"       length="255"/>
         <field name="phone"         type="string"   column="phone"      length="255"/>
         <field name="address1"      type="string"   column="address1"   length="255"/>

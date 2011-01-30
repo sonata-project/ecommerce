@@ -51,20 +51,20 @@ class CategoryController extends Controller
      * Display one category
      *
      * @throws NotFoundHttpException
-     * @param  $category_id
+     * @param  $categoryId
      * @param  $slug
      * @return Response
      */
-    public function viewAction($category_id, $slug)
+    public function viewAction($categoryId, $slug)
     {
 
         $em             = $this->get('doctrine.orm.default_entity_manager');
         $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
 
-        $category = $repository->findOneById($category_id);
+        $category = $repository->findOneById($categoryId);
 
         if(!$category) {
-            throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $category_id));
+            throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $categoryId));
         }
 
         return $this->render('SonataProductBundle:Category:view.twig.html', array(
@@ -75,10 +75,10 @@ class CategoryController extends Controller
     /**
      * List categories from one categories
      *
-     * @param  $category_id
+     * @param  $categoryId
      * @return void
      */
-    public function listSubCategoriesAction($category_id)
+    public function listSubCategoriesAction($categoryId)
     {
         $em             = $this->get('doctrine.orm.default_entity_manager');
         $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
@@ -90,7 +90,7 @@ class CategoryController extends Controller
 
         $pager = new Pager($class);
         $pager->setQueryBuilder($query_buidler);
-        $pager->setParameter('category_id', $category_id);
+        $pager->setParameter('category_id', $categoryId);
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->setMaxPerPage(30);
         $pager->init();
@@ -103,10 +103,10 @@ class CategoryController extends Controller
     /**
      * List the product related to one category
      * 
-     * @param  $category_id
+     * @param  $categoryId
      * @return
      */
-    public function listProductsAction($category_id)
+    public function listProductsAction($categoryId)
     {
 
         $em             = $this->get('doctrine.orm.default_entity_manager');
@@ -121,7 +121,7 @@ class CategoryController extends Controller
 
         $pager = new Pager($class);
         $pager->setQueryBuilder($query_buidler);
-        $pager->setParameter('category_id', $category_id);
+        $pager->setParameter('category_id', $categoryId);
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->setMaxPerPage(30);
         $pager->init();

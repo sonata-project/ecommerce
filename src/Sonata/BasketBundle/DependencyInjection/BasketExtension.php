@@ -67,7 +67,7 @@ class BasketExtension extends Extension
             $definition
                 ->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')))
                 ->addMethodCall('setBasket', array(new Reference('sonata.basket')))
-                ->addTag('validator.constraint_validator', array('alias' => 'sonata_basket_element_collection_validator'))
+                ->addTag('validator.constraint_validator', array('alias' => 'sonata_basketElement_collection_validator'))
              ;
 
             $container->setDefinition('sonata.basket.elements.validator', $definition);

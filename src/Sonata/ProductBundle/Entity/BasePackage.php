@@ -16,7 +16,7 @@ namespace Sonata\ProductBundle\Entity;
 abstract class BasePackage
 {
     /**
-     * @var integer $product_id
+     * @var integer $productId
      */
     protected $productId;
 
@@ -56,7 +56,7 @@ abstract class BasePackage
     protected $createdAt;
 
     /**
-     * Set product_id
+     * Set productId
      *
      * @param integer $productId
      */
@@ -66,7 +66,7 @@ abstract class BasePackage
     }
 
     /**
-     * Get product_id
+     * Get productId
      *
      * @return integer $productId
      */

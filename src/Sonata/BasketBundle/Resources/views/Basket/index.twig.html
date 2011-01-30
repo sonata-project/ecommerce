@@ -32,10 +32,10 @@ file that was distributed with this source code.
             #}
             <tbody>
                 {# call each product controller to render its own view #}
-                {% for basket_element in basket.getBasketElements %}
+                {% for basketElement in basket.getBasketElements %}
                     {% render 'SonataProductBundle:Product:renderFormBasketElement' with {
-                        'field_group': form.basketElements.get(basket_element.pos),
-                        'basket_element' : basket_element
+                        'fieldGroup': form.basketElements.get(basketElement.pos),
+                        'basketElement' : basketElement
                     } %}
                 {% endfor %}
             </tbody>

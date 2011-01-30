@@ -43,7 +43,7 @@ abstract class BaseOrderElement
     protected $serialize;
 
     /**
-     * @var integer $product_id
+     * @var integer $productId
      */
     protected $productId;
 
@@ -217,7 +217,7 @@ abstract class BaseOrderElement
     }
 
     /**
-     * Set product_id
+     * Set productId
      *
      * @param integer $productId
      */
@@ -227,7 +227,7 @@ abstract class BaseOrderElement
     }
 
     /**
-     * Get product_id
+     * Get productId
      *
      * @return integer $productId
      */

@@ -32,7 +32,7 @@
         </one-to-many>
 
         <one-to-many
-            field="order_element"
+            field="orderElement"
             target-entity="Application\Sonata\OrderBundle\Entity\OrderElement"
             mapped-by="invoice_element"
             orphan-removal="">

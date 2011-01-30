@@ -18,7 +18,7 @@ class AddBasket
     /**
      * @validation:NotBlank()
      */
-    private $product_id;
+    private $productId;
 
     /**
      * @validation:NotBlank()
@@ -44,17 +44,17 @@ class AddBasket
     /**
      * The product id is only set if there is not product attached to this object
      *
-     * @param  integet $product_id the product id
+     * @param  integet $productId the product id
      */
-    public function setProductId($product_id)
+    public function setProductId($productId)
     {
 
         // never erase this value
-        if($this->product_id !== null) {
+        if($this->productId !== null) {
            return;
         }
 
-        $this->product_id = $product_id;
+        $this->productId = $productId;
     }
 
     /**
@@ -64,7 +64,7 @@ class AddBasket
      */
     public function setProduct($product)
     {
-        $this->product_id = $product->getId();
+        $this->productId = $product->getId();
         $this->product = $product;
     }
 

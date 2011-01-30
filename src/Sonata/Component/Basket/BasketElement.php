@@ -122,7 +122,7 @@ class BasketElement implements \Serializable
      * Never call this method, use the setProduct instead. This method is only used
      * by the form framework
      * 
-     * @param  $product_id
+     * @param  $productId
      * @return void
      */
     public function setProductId($productId)

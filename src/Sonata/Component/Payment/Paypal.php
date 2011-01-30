@@ -287,12 +287,12 @@ class Paypal extends BasePaypal
 
     public function isBasketValid($basket)
     {
-        if ($basket->countElements() == 0) {
+        if ($basket->countBasketElements() == 0) {
 
             return false;
         }
 
-        foreach ($basket->getElements() as $element) {
+        foreach ($basket->getBasketElements() as $element) {
             $product = $element->getProduct();
             if ($product->isRecurrentPayment() === true) {
 

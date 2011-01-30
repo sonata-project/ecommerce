@@ -12,7 +12,8 @@
 namespace Sonata\Component\Transformer;
 
 
-abstract class BaseTransformer {
+abstract class BaseTransformer
+{
 
     /**
      * @var instance logger
@@ -22,7 +23,7 @@ abstract class BaseTransformer {
     /**
      * @var the product pool
      */
-    protected $product_pool;
+    protected $productPool;
 
     /**
      * @var the transformer option
@@ -30,32 +31,38 @@ abstract class BaseTransformer {
     protected $options;
 
     
-    public function setLogger($logger) {
+    public function setLogger($logger)
+    {
 
         $this->logger = $logger;
     }
 
-    public function getLogger() {
+    public function getLogger()
+    {
 
         return $this->logger;
     }
 
-    public function setProductPool($pool) {
+    public function setProductPool($pool)
+    {
 
-        $this->product_pool = $pool;
+        $this->productPool = $pool;
     }
 
-    public function getProductPool() {
+    public function getProductPool()
+    {
 
-        return $this->product_pool;
+        return $this->productPool;
     }
 
-    public function setOptions($options) {
+    public function setOptions($options)
+    {
 
         $this->options = $options;
     }
 
-    public function getOption($name, $default = null) {
+    public function getOption($name, $default = null)
+    {
 
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }

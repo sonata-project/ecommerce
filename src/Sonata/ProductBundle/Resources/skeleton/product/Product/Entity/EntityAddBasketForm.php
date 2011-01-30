@@ -26,7 +26,7 @@ class {{ product }}AddBasketForm extends Form
 {
     public function configure()
     {
-        $this->add(new HiddenField('product_id'));
+        $this->add(new HiddenField('productId'));
         $this->add(new TextField('quantity'));
     }
 }

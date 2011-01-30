@@ -25,7 +25,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     protected $paymentMethod;
 
     /**
-     * @var string $delivery_method
+     * @var string $deliveryMethod
      */
     protected $deliveryMethod;
 
@@ -60,12 +60,12 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     protected $username;
 
     /**
-     * @var decimal $total_inc
+     * @var decimal $totalInc
      */
     protected $totalInc;
 
     /**
-     * @var decimal $total_excl
+     * @var decimal $totalExcl
      */
     protected $totalExcl;
 
@@ -85,17 +85,17 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     protected $billingPhone;
 
     /**
-     * @var string $billing_address1
+     * @var string $billingAddress1
      */
     protected $billingAddress1;
 
     /**
-     * @var string $billing_address2
+     * @var string $billingAddress2
      */
     protected $billingAddress2;
 
     /**
-     * @var string $billing_address3
+     * @var string $billingAddress3
      */
     protected $billingAddress3;
 
@@ -380,7 +380,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     }
 
     /**
-     * Set total_inc
+     * Set totalInc
      *
      * @param decimal $totalInc
      */
@@ -390,7 +390,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     }
 
     /**
-     * Get total_inc
+     * Get totalInc
      *
      * @return decimal $totalInc
      */
@@ -400,7 +400,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     }
 
     /**
-     * Set total_excl
+     * Set totalExcl
      *
      * @param decimal $totalExcl
      */
@@ -410,7 +410,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     }
 
     /**
-     * Get total_excl
+     * Get totalExcl
      *
      * @return decimal $totalExcl
      */
@@ -904,10 +904,10 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
         return $this->orderElements;
     }
 
-    public function addOrderElement($order_element)
+    public function addOrderElement($orderElement)
     {
-        $this->orderElements[] = $order_element;
-        $order_element->setOrder($this);
+        $this->orderElements[] = $orderElement;
+        $orderElement->setOrder($this);
     }
 
     /**

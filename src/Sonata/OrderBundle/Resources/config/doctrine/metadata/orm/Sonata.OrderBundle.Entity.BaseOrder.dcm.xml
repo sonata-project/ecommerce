@@ -2,15 +2,15 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\OrderBundle\Entity\BaseOrder">
 
-        <field name="reference"           nullable="true"   type="string"   column="reference"          length="255"/>
+        <field name="reference"          nullable="true"   type="string"   column="reference"          length="255"/>
         <field name="paymentMethod"      nullable="true"   type="string"   column="payment_method"     length="255"/>
         <field name="deliveryMethod"     nullable="true"   type="string"   column="delivery_method"    length="255"/>
-        <field name="currency"            nullable="true"   type="string"   column="currency"           length="3"/>
-        <field name="status"              nullable="true"   type="integer"  column="status"/>
+        <field name="currency"           nullable="true"   type="string"   column="currency"           length="3"/>
+        <field name="status"             nullable="true"   type="integer"  column="status"/>
         <field name="paymentStatus"      nullable="true"   type="integer"  column="payment_status"/>
         <field name="deliveryStatus"     nullable="true"   type="integer"  column="delivery_status"/>
         <field name="validatedAt"        nullable="true"   type="datetime" column="validated_at"/>
-        <field name="username"            nullable="true"   type="string"   column="username"           length="255"/>
+        <field name="username"           nullable="true"   type="string"   column="username"           length="255"/>
         <field name="totalInc"           nullable="true"   type="decimal"  column="total_inc"          scale="4"/>
         <field name="totalExcl"          nullable="true"   type="decimal"  column="total_excl"         scale="4"/>
         <field name="deliveryCost"       nullable="true"   type="decimal"  column="delivery_cost"      scale="4"/>
@@ -22,7 +22,7 @@
         <field name="billingAddress3"     nullable="true"  type="string"   column="billing_address3"   length="255"/>
         <field name="billingCity"         nullable="true"  type="string"   column="billing_city"       length="255"/>
         <field name="billingPostcode"     nullable="true"  type="string"   column="billing_postcode"   length="255"/>
-        <field name="billingCountryCode" nullable="true"  type="string"   column="billing_country_code"    length="255"/>
+        <field name="billingCountryCode"  nullable="true"  type="string"   column="billing_country_code"    length="255"/>
         <field name="billingFax"          nullable="true"  type="string"   column="billing_fax"        length="255"/>
         <field name="billingEmail"        nullable="true"  type="string"   column="billing_email"      length="255"/>
         <field name="billingMobile"       nullable="true"  type="string"   column="billing_mobile"     length="255"/>

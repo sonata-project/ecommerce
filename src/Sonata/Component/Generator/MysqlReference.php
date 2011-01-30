@@ -14,7 +14,7 @@ namespace Sonata\Component\Generator;
 class MysqlReference implements ReferenceInterface
 {
 
-    protected $entity_manager;
+    protected $entityManager;
 
     /**
      * Append a valid reference number to the invoice, the order must be persisted first
@@ -94,14 +94,14 @@ class MysqlReference implements ReferenceInterface
         return $reference;
     }
 
-    public function setEntityManager($entity_manager)
+    public function setEntityManager($entityManager)
     {
-        $this->entity_manager = $entity_manager;
+        $this->entityManager = $entityManager;
     }
 
     public function getEntityManager()
     {
-        return $this->entity_manager;
+        return $this->entityManager;
     }
 
 }

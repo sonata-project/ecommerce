@@ -17,15 +17,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductAdminController extends Controller
 {
-    public function deliveryIndexAction($product_id) {
+    public function deliveryIndexAction($productId) {
 
     }
 
-    public function deliveryEditAction($product_id, $delivery_id) {
+    public function deliveryEditAction($productId, $delivery_id) {
 
     }
 
-    public function deliveryUpdateAction($product_id) {
+    public function deliveryUpdateAction($productId) {
 
     }
 }

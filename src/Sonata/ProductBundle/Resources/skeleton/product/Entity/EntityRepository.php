@@ -48,37 +48,37 @@ class {{ product }}Repository extends \Sonata\ProductBundle\Entity\BaseProductRe
     /**
      * generate the field group use to render the basket element line in the basket form
      *
-     * @param  $field_group
+     * @param  $fieldGroup
      * @return Symfony\Component\Form\FieldGroup
      */
-    public function generateFieldGroupBasketElement(\Symfony\Component\Form\FieldGroup $field_group, $basket_element)
+    public function generateFieldGroupBasketElement(\Symfony\Component\Form\FieldGroup $fieldGroup, $basketElement)
     {
         // required widgets
-        $field_group->add(new \Symfony\Component\Form\CheckboxField('delete'));
-        $field_group->add(new \Symfony\Component\Form\HiddenField('productId'));
-        $field_group->add(new \Symfony\Component\Form\TextField('quantity'));
+        $fieldGroup->add(new \Symfony\Component\Form\CheckboxField('delete'));
+        $fieldGroup->add(new \Symfony\Component\Form\HiddenField('productId'));
+        $fieldGroup->add(new \Symfony\Component\Form\TextField('quantity'));
 
 
         // add here your custom widget
-        //$field_group->add(new \Symfony\Component\Form\CheckboxField('custom_option1'));
+        //$fieldGroup->add(new \Symfony\Component\Form\CheckboxField('custom_option1'));
 
 
-        return $field_group;
+        return $fieldGroup;
     }
 
     /**
-     * return an array of errors if any, you can also manipulate the basket_element if require
-     * please not you always work with a clone version of the basket_element.
+     * return an array of errors if any, you can also manipulate the basketElement if require
+     * please not you always work with a clone version of the basketElement.
      *
      * If the basket is valid it will then replace the one in session
      *
-     * @param  $basket_element
+     * @param  $basketElement
      * @return array
      */
-    public function validateFormBasketElement($basket_element)
+    public function validateFormBasketElement($basketElement)
     {
 
-        $errors = parent::validateFormBasketElement($basket_element);
+        $errors = parent::validateFormBasketElement($basketElement);
 
         // add here your own validation
 

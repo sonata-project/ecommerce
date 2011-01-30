@@ -65,10 +65,12 @@ class PaymentController extends Controller
 
         // reset the basket and rebuilt from the order information
         $basket = $this->get('sonata.basket');
+
+        $customer = $basket->getCustomer();
+        
         $basket->reset();
 
-        $user   = $this->get('doctrine_user.auth')->getUser();
-        $basket = $payment->getTransformer('order')->transformIntoBasket($user, $order, $basket);
+        $basket   = $payment->getTransformer('order')->transformIntoBasket($customer, $order, $basket);
 
         $this->get('session')->set('sonata/basket', $basket);
 
@@ -117,7 +119,7 @@ class PaymentController extends Controller
 
         $basket     = $this->get('sonata.basket');
         $request    = $this->get('request');
-        $user       = $this->get('doctrine_user.auth')->getUser();
+        $customer   = $basket->getCustomer();
 
         if($request->getMethod() !== 'POST') {
             $this->redirect($this->generateUrl('sonata_basket_index'));
@@ -138,7 +140,7 @@ class PaymentController extends Controller
         }
 
         // transform the basket into order
-        $order = $payment->getTransformer('basket')->transformIntoOrder($user, $basket);
+        $order = $payment->getTransformer('basket')->transformIntoOrder($customer, $basket);
 
         // save the order
         $em = $this->get('doctrine.orm.entity_manager'); // todo : find a way to know which EM is linked to the order

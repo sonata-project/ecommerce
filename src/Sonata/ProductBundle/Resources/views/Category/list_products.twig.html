@@ -16,7 +16,7 @@ file that was distributed with this source code.
 {% else %}
     <ul>
         {% for product in pager.getResults %}
-            <li><a href="{{ url('sonata_product_view', {'product_id': product.id, 'slug': product.slug}) }}">{{ product.name }}</a></li>
+            <li><a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}">{{ product.name }}</a></li>
         {% endfor %}
     </ul>
 {% endif %}

@@ -22,17 +22,17 @@ class OrderTransformer extends BaseTransformer
 
         
         // We are free to convert !
-        foreach ($order->getOrderElements() as $order_element) {
+        foreach ($order->getOrderElements() as $orderElement) {
 
-            $repository = $this->getProductPool()->getRepository($order_element->getProductType());
-            $product    = $repository->find($order_element->getProductId());
+            $repository = $this->getProductPool()->getRepository($orderElement->getProductType());
+            $product    = $repository->find($orderElement->getProductId());
 
             if (!$product) {
 
                 continue;
             }
 
-            $repository->basketAddProduct($basket, $product, $order_element);
+            $repository->basketAddProduct($basket, $product, $orderElement);
 
         }
 

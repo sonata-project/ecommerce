@@ -19,22 +19,26 @@ use Application\PaymentBundle\Entity\Transaction;
 class ProductController extends Controller
 {
 
-    public function viewAction($product_id, $slug)
+    public function viewAction($productId, $slug)
     {
 
         $em             = $this->get('doctrine.orm.default_entity_manager');
         $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Product');
 
-        $product = is_object($product_id) ? $product_id : $repository->findOneById($product_id);
+        $product = is_object($productId) ? $productId : $repository->findOneById($productId);
 
         if(!$product) {
-            throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $product_id));
+            throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
         }
 
         // generate the session
         $this->get('session')->start();
 
         $code = $this->get('sonata.product.pool')->getProductCode($product);
+
+        if(!$code) {
+            throw new NotFoundHttpException(sprintf('Unable to find the product code with product.id=%d', $productId));
+        }
 
         $action = sprintf('SonataProductBundle:%s:view', ucfirst($code));
         $response = $this->forward($action, array(
@@ -53,21 +57,21 @@ class ProductController extends Controller
         return $response;
     }
 
-    public function renderFormBasketElementAction($field_group, $basket_element)
+    public function renderFormBasketElementAction($fieldGroup, $basketElement)
     {
 
-        $code   = $this->get('sonata.product.pool')->getProductCode($basket_element->getProduct());
+        $code   = $this->get('sonata.product.pool')->getProductCode($basketElement->getProduct());
         $action = sprintf('SonataProductBundle:%s:renderFormBasketElement', ucfirst($code)) ;
 
         $response = $this->forward($action, array(
-            'field_group'     => $field_group,
-            'basket_element'  => $basket_element,
+            'fieldGroup'     => $fieldGroup,
+            'basketElement'  => $basketElement,
         ));
 
         if($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
                 $code,
-                $basket_element->getProductId(),
+                $basketElement->getProductId(),
                 $action,
                 $response->getContent()
             ));
@@ -76,19 +80,19 @@ class ProductController extends Controller
         return $response;
     }
 
-    public function renderFinalReviewBasketElementAction($basket_element)
+    public function renderFinalReviewBasketElementAction($basketElement)
     {
-        $code   = $this->get('sonata.product.pool')->getProductCode($basket_element->getProduct());
+        $code   = $this->get('sonata.product.pool')->getProductCode($basketElement->getProduct());
         $action = sprintf('SonataProductBundle:%s:renderFinalReviewBasketElement', ucfirst($code)) ;
 
         $response = $this->forward($action, array(
-            'basket_element'  => $basket_element,
+            'basketElement'  => $basketElement,
         ));
 
         if($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
                 $code,
-                $basket_element->getProductId(),
+                $basketElement->getProductId(),
                 $action,
                 $response->getContent()
             ));
@@ -97,7 +101,7 @@ class ProductController extends Controller
         return $response;
     }
     
-    public function viewVariationsAction($product_id, $slug) {
+    public function viewVariationsAction($productId, $slug) {
 
     }
 }

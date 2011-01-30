@@ -76,22 +76,22 @@ class BasketElementCollectionValidator extends ConstraintValidator
     /**
      * The validator asks each product repository to validate the related basket element
      *
-     * @param  $basket_elements
+     * @param  $basketElements
      * @param Constraint $constraint
      * @return bool
      */
-    public function isValid($basket_elements, Constraint $constraint)
+    public function isValid($basketElements, Constraint $constraint)
     {
         $walker = $this->context->getGraphWalker();
         $group = $this->context->getGroup();
         $propertyPath = $this->context->getPropertyPath();
 
-        foreach($basket_elements as $pos => $basket_element) {
+        foreach($basketElements as $pos => $basketElement) {
 
             $errors = $this
                 ->getProductPool()
-                ->getRepository($basket_element->getProduct())
-                ->validateFormBasketElement($basket_element);
+                ->getRepository($basketElement->getProduct())
+                ->validateFormBasketElement($basketElement);
 
             // global error, the all line is invalid
             if($errors['global']) {

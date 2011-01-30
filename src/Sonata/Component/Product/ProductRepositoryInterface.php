@@ -35,11 +35,11 @@ interface ProductRepositoryInterface {
 
     /**
      * @abstract
-     * @param BasketElement $basket_element
+     * @param BasketElement $basketElement
      *
      * @return boolean true if the basket element is still valid
      */
-    public function isValidBasketElement($basket_element);
+    public function isValidBasketElement($basketElement);
 
     /**
      * This method return the return price of basket element, this method
@@ -48,10 +48,10 @@ interface ProductRepositoryInterface {
      *
      * @abstract
      * @param  $basket
-     * @param  $basket_element
-     * @return return the unit price of the basket_element
+     * @param  $basketElement
+     * @return return the unit price of the basketElement
      */
-    public function basketCalculatePrice($basket, $basket_element);
+    public function basketCalculatePrice($basket, $basketElement);
 
     /**
      * Return true if the product can be added to the provided basket

@@ -26,9 +26,9 @@ file that was distributed with this source code.
     #}
     <tbody>
         {# call each product controller to render its own view #}
-        {% for basket_element in basket.getElements %}
+        {% for basketElement in basket.BasketElements %}
             {% render 'SonataProductBundle:Product:renderFinalReviewBasketElement' with {
-                'basket_element' : basket_element
+                'basketElement' : basketElement
             } %}
         {% endfor %}
 
@@ -81,7 +81,7 @@ file that was distributed with this source code.
         </td>
         <td class="validation_box">
             <h3>{% trans 'title_payment_method' from 'BasketBundle' %}</h3>
-            @{{ basket.paymentmethod.name }}@ :
+            {{ basket.paymentmethod.name }} :
             <em>{{ basket.paymentmethod.description }}</em>
         </td>
     </tr>

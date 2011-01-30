@@ -22,7 +22,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
     protected $options            = array();
 
-    protected $variation_fields   = array();
+    protected $variationFields   = array();
 
 
     public function setOptions($options)
@@ -50,25 +50,25 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     ////////////////////////////////////////////////
     //   ORDER RELATED FUNCTIONS
 
-    public function createOrderElement($basket_element)
+    public function createOrderElement($basketElement)
     {
-        $product = $basket_element->getProduct();
+        $product = $basketElement->getProduct();
 
-        $order_element = new \Application\Sonata\OrderBundle\Entity\OrderElement;
-        $order_element->setQuantity($basket_element->getQuantity());
-        $order_element->setPrice($basket_element->getTotal(false));
-        $order_element->setVat($basket_element->getVat());
-        $order_element->setDesignation($basket_element->getName());
-        $order_element->setDescription($product->getDescription());
-        $order_element->setSerialize(null);
-        $order_element->setProductId($product->getId());
-        $order_element->setProductType($this->getProductType());
-        $order_element->setStatus(OrderInterface::STATUS_PENDING);
-        $order_element->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
-        $order_element->setCreatedAt(new \DateTime);
+        $orderElement = new \Application\Sonata\OrderBundle\Entity\OrderElement;
+        $orderElement->setQuantity($basketElement->getQuantity());
+        $orderElement->setPrice($basketElement->getTotal(false));
+        $orderElement->setVat($basketElement->getVat());
+        $orderElement->setDesignation($basketElement->getName());
+        $orderElement->setDescription($product->getDescription());
+        $orderElement->setSerialize(null);
+        $orderElement->setProductId($product->getId());
+        $orderElement->setProductType($this->getProductType());
+        $orderElement->setStatus(OrderInterface::STATUS_PENDING);
+        $orderElement->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
+        $orderElement->setCreatedAt(new \DateTime);
 
         // todo : create a serialized version of the product element
-        $order_element->setSerialize(array('todo'));
+        $orderElement->setSerialize(array('todo'));
 
         // we save product information
 //        foreach($product->toArray(false) as $name => $value)
@@ -78,28 +78,28 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 //            continue;
 //          }
 //
-//          $order_element_option = new OrderElementOption;
-//          $order_element_option->setName('product_'.$name);
-//          $order_element_option->setValue($value);
+//          $orderElement_option = new OrderElementOption;
+//          $orderElement_option->setName('product_'.$name);
+//          $orderElement_option->setValue($value);
 //
-//          $order_element->addOption($order_element_option);
+//          $orderElement->addOption($orderElement_option);
 //        }
 
-//        $order_element_option = new OrderElementOption;
-//        $order_element_option->setName('product_is_recurrent');
-//        $order_element_option->setValue($product->isRecurrentPayment() ? '1' : '0');
+//        $orderElement_option = new OrderElementOption;
+//        $orderElement_option->setName('product_is_recurrent');
+//        $orderElement_option->setValue($product->isRecurrentPayment() ? '1' : '0');
 
-//        // we save basket_element options
-//        foreach($basket_element->getOptions() as $name => $value)
+//        // we save basketElement options
+//        foreach($basketElement->getOptions() as $name => $value)
 //        {
-//          $order_element_option = new OrderElementOption;
-//          $order_element_option->setName($name);
-//          $order_element_option->setValue($value);
+//          $orderElement_option = new OrderElementOption;
+//          $orderElement_option->setName($name);
+//          $orderElement_option->setValue($value);
 //
-//          $order_element->addOption($order_element_option);
+//          $orderElement->addOption($orderElement_option);
 //        }
 
-        return $order_element;
+        return $orderElement;
     }
 
 
@@ -113,7 +113,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     public function isVariateBy($name)
     {
 
-        return in_array($name, $this->variation_fields);
+        return in_array($name, $this->variationFields);
     }
 
 
@@ -129,13 +129,13 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     public function setVariationFields($fields)
     {
 
-        $this->variation_fields = $fields;
+        $this->variationFields = $fields;
     }
 
     public function getVariationFields()
     {
 
-        return $this->variation_fields;
+        return $this->variationFields;
     }
 
     public function createVariation($product)
@@ -181,7 +181,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     public function copyProductVariation(Product $product, $force_copy = false)
     {
 
-        $variation_fields = array_merge(array('id'), $this->getVariationFields());
+        $variationFields = array_merge(array('id'), $this->getVariationFields());
 
         // fields to copy
         $values = array(
@@ -193,7 +193,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
         if(!$force_copy) {
 
-            foreach($variation_fields as $field) {
+            foreach($variationFields as $field) {
 
                 if(!array_key_exists($field, $values)) {
                    continue;
@@ -240,15 +240,15 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
 
     /**
-     * return an array of errors if any, you can also manipulate the basket_element if require
-     * please not you always work with a clone version of the basket_element.
+     * return an array of errors if any, you can also manipulate the basketElement if require
+     * please not you always work with a clone version of the basketElement.
      *
      * If the basket is valid it will then replace the one in session
      *
-     * @param  $basket_element
+     * @param  $basketElement
      * @return array
      */
-    public function validateFormBasketElement($basket_element)
+    public function validateFormBasketElement($basketElement)
     {
 
         // initialize the errors array
@@ -258,13 +258,13 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         );
 
         // the item is flagged as deleted, no need to validate the item
-        if($basket_element->getDelete()) {
+        if($basketElement->getDelete()) {
 
             return $errors;
         }
 
         // refresh the product from the database
-        $product = $basket_element->getProduct();
+        $product = $basketElement->getProduct();
 
         // check if the product is still enabled
         if(!$product) {
@@ -278,7 +278,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         }
 
         // check if the product is still enabled
-        if(!$basket_element->getProduct()->isEnabled()) {
+        if(!$basketElement->getProduct()->isEnabled()) {
             $errors['global'] = array(
                 'The product is not enabled anymore',
                 array(),
@@ -289,22 +289,22 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         }
 
         // check if the quantity is numeric
-        if(!is_numeric($basket_element->getQuantity())) {
+        if(!is_numeric($basketElement->getQuantity())) {
             $errors['fields']['quantity'] = array(
                 'The product quantity is not a numeric value',
-                array('{{ quantity }}' => $basket_element->getQuantity()),
-                $basket_element->getQuantity() // todo : not sure about the third element
+                array('{{ quantity }}' => $basketElement->getQuantity()),
+                $basketElement->getQuantity() // todo : not sure about the third element
             );
 
             return $errors;
         }
 
         // check if the product is still available
-        if($this->getStockAvailable($basket_element->getProduct()) < $basket_element->getQuantity()) {
+        if($this->getStockAvailable($basketElement->getProduct()) < $basketElement->getQuantity()) {
             $errors['fields']['quantity'] = array(
                 'The product quantity ({{ quantity }}) is not valid',
-                array('{{ quantity }}' => $basket_element->getQuantity()),
-                $basket_element->getQuantity() // todo : not sure about the third element
+                array('{{ quantity }}' => $basketElement->getQuantity()),
+                $basketElement->getQuantity() // todo : not sure about the third element
             );
         }
 
@@ -332,12 +332,12 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
         $class = $this->getBasketElementClass();
         
-        $basket_element = new $class;
-        $basket_element->setProduct($product, $this);
-        $basket_element->setQuantity($values->getQuantity());
+        $basketElement = new $class;
+        $basketElement->setProduct($product, $this);
+        $basketElement->setQuantity($values->getQuantity());
 
         if($values instanceof \Application\Sonata\OrderBundle\Entity\OrderElement) {
-            // restore the basket_element from an order element
+            // restore the basketElement from an order element
             // ie: an error occur during the payment process
 
             // tweak the code here
@@ -347,19 +347,19 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
             // tweak the code here
         }
 
-        $basket_element_options = $product->getOptions();
+        $basketElement_options = $product->getOptions();
         // add the default product options to the basket element
-        if (is_array($basket_element_options) && !empty($basket_element_options)) {
+        if (is_array($basketElement_options) && !empty($basketElement_options)) {
 
-            foreach ($basket_element_options as $option => $value) {
-                $basket_element->setOption($option, $value);
+            foreach ($basketElement_options as $option => $value) {
+                $basketElement->setOption($option, $value);
             }
 
         }
 
-        $basket->addBasketElement($basket_element);
+        $basket->addBasketElement($basketElement);
 
-        return $basket_element;
+        return $basketElement;
     }
 
 
@@ -379,21 +379,21 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
             return false;
         }
 
-        $basket_element = $basket->getElement($product);
-        $basket_element->setQuantity($basket_element->getQuantity() + $values->getQuantity());
+        $basketElement = $basket->getElement($product);
+        $basketElement->setQuantity($basketElement->getQuantity() + $values->getQuantity());
 
-        return $basket_element;
+        return $basketElement;
     }
 
     /**
      * @abstract
-     * @param BasketElement $basket_element
+     * @param BasketElement $basketElement
      *
      * @return boolean true if the basket element is still valid
      */
-    public function isValidBasketElement($basket_element)
+    public function isValidBasketElement($basketElement)
     {
-        $product = $basket_element->getProduct();
+        $product = $basketElement->getProduct();
 
         if (!$product instanceof Product) {
 
@@ -410,14 +410,14 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 
     /**
      * @param Basket $basket
-     * @param BasketElement $basket_element
+     * @param BasketElement $basketElement
      *
      * @return float price of the basket element
      */
-    public function basketCalculatePrice($basket, $basket_element)
+    public function basketCalculatePrice($basket, $basketElement)
     {
 
-        return $basket_element->getProduct()->getPrice();
+        return $basketElement->getProduct()->getPrice();
     }
 
     /**

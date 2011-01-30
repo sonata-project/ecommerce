@@ -16,20 +16,20 @@ namespace Sonata\Component\Delivery;
  */
 class Selector
 {
-    protected $delivery_pool;
+    protected $deliveryPool;
 
-    protected $product_pool;
+    protected $productPool;
 
     protected $logger;
 
-    public function setDeliveryPool($delivery_pool)
+    public function setDeliveryPool($deliveryPool)
     {
-        $this->delivery_pool = $delivery_pool;
+        $this->deliveryPool = $deliveryPool;
     }
 
     public function getDeliveryPool()
     {
-        return $this->delivery_pool;
+        return $this->deliveryPool;
     }
 
     public function setLogger($logger)
@@ -42,9 +42,9 @@ class Selector
         return $this->logger;
     }
 
-    public function setProductPool($product_pool)
+    public function setProductPool($productPool)
     {
-        $this->product_pool = $product_pool;
+        $this->productPool = $productPool;
     }
 
     public function getProductPool()
@@ -52,67 +52,68 @@ class Selector
         return $this->product_pool;
     }
 
-    public function getAvailableMethods($basket, $delivery_address)
+    public function getAvailableMethods($basket, $deliveryAddress)
     {
         $instances = array();
 
         // no address defined !
-        if (!$delivery_address) {
+        if (!$deliveryAddress) {
 
             return false;
         }
 
         // STEP 1 : We get product's delivery methods
-        foreach ($basket->getElements() as $basket_element) {
-            $product = $basket_element->getProduct();
+        foreach ($basket->getBasketElements() as $basketElement) {
+            $product = $basketElement->getProduct();
 
             if (!$product) {
 
-                $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d does not exist', $basket_element->getProductId()));
+                $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d does not exist', $basketElement->getProductId()));
                 
                 return false;
             }
 
             $product_deliveries = $product->getDelivery();
 
-            foreach ($product_deliveries as $product_delivery) {
+
+            foreach ($product_deliveries as $productDelivery) {
 
                 // delivery method already selected
-                if (array_key_exists($product_delivery->getCode(), $instances)) {
+                if (array_key_exists($productDelivery->getCode(), $instances)) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s already selected', $basket_element->getProductId(), $product_delivery->getCode()));
+                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s already selected', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
                 }
                 
-                $delivery_method = $this->getDeliveryPool()->getMethod($product_delivery->getCode());
+                $deliveryMethod = $this->getDeliveryPool()->getMethod($productDelivery->getCode());
                 
-                if (!$delivery_method) {
+                if (!$deliveryMethod) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code: %s does not exist', $basket_element->getProductId(), $product_delivery->getCode()));
+                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code: %s does not exist', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
                 }
 
                 // product delivery not enable
-                if (!$delivery_method->getEnabled()) {
+                if (!$deliveryMethod->getEnabled()) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s is not enabled', $basket_element->getProductId(), $product_delivery->getCode()));
+                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s is not enabled', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
                 }
 
                 // the product is not deliverable at the $shipping_address
-                if ($delivery_address->getCountryCode() != $product_delivery->getCountryCode()) {
+                if ($deliveryAddress->getCountryCode() != $productDelivery->getCountryCode()) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basket_element->getProductId(), $product_delivery->getCode(), $delivery_address->getCountryCode(), $product_delivery->getCountryCode()));
+                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basketElement->getProductId(), $productDelivery->getCode(), $deliveryAddress->getCountryCode(), $productDelivery->getCountryCode()));
                     
                     continue;
                 }
 
-                $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s selected', $basket_element->getProductId(), $product_delivery->getCode()));
+                $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s selected', $basketElement->getProductId(), $productDelivery->getCode()));
                 
-                $instances[$product_delivery->getCode()] = $delivery_method;
+                $instances[$productDelivery->getCode()] = $deliveryMethod;
             }
         }
 
