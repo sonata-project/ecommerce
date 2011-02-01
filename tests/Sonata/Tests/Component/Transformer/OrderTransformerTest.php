@@ -27,22 +27,22 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
         $products[] = new \Sonata\Tests\Component\Basket\Product;
         $products[] = new \Sonata\Tests\Component\Basket\Product;
 
-        $basket_elements = array();
+        $basketElements = array();
 
-        $basket_element = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
-        $basket_element->expects($this->any())
+        $basketElement = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
+        $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue($products[0]));
 
 
-        $basket_elements[] = $basket_element;
+        $basketElements[] = $basketElement;
 
-        $basket_element = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
-        $basket_element->expects($this->any())
+        $basketElement = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
+        $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue($products[0]));
 
-        $basket_elements[] = $basket_element;
+        $basketElements[] = $basketElement;
         
         // Mock the product repository
         $repository = $this->getMock('ProductRepository', array('find', 'basketAddProduct', 'basketCalculatePrice'));
@@ -53,7 +53,7 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
 
         $repository->expects($this->exactly(2))
             ->method('basketAddProduct')
-            ->will($this->onConsecutiveCalls($basket_elements[0], $basket_elements[1]));
+            ->will($this->onConsecutiveCalls($basketElements[0], $basketElements[1]));
 
         $repository->expects($this->exactly(5))
             ->method('basketCalculatePrice')

@@ -17,7 +17,7 @@ class BasketElementCollection extends Constraint
 {
 
     public function validatedBy() {
-        return 'sonata_basketElement_collection_validator';
+        return 'sonata_basket_element_collection_validator';
     }
 
         /**

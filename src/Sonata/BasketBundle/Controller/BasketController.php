@@ -92,7 +92,7 @@ class BasketController extends Controller
 
         return $this->render('SonataBasketBundle:Basket:index.twig.html', array(
             'basket' => $this->get('sonata.basket'),
-            'form'   => $form
+            'form'   => $form,
         ));
     }
 

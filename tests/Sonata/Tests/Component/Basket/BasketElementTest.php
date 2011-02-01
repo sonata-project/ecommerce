@@ -34,58 +34,58 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($classmetadata));
 
 
-        $basket_element = new BasketElement;
-        $basket_element->setProduct($product, $repository);
+        $basketElement = new BasketElement;
+        $basketElement->setProduct($product, $repository);
 
-        return $basket_element;
+        return $basketElement;
     }
     public function testPrice()
     {
 
-        $basket_element = $this->getBasketElement();
+        $basketElement = $this->getBasketElement();
 
-        $this->assertEquals(19.6, $basket_element->getVat(), 'BasketElement returns the correct VAT');
-        $this->assertEquals(1, $basket_element->getQuantity(), 'BasketElement returns the correct default quantity');
+        $this->assertEquals(19.6, $basketElement->getVat(), 'BasketElement returns the correct VAT');
+        $this->assertEquals(1, $basketElement->getQuantity(), 'BasketElement returns the correct default quantity');
 
-        $this->assertEquals(15, $basket_element->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
-        $this->assertEquals(17.94, $basket_element->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
+        $this->assertEquals(15, $basketElement->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
+        $this->assertEquals(17.94, $basketElement->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
 
-        $this->assertEquals(15, $basket_element->getTotal(), 'BasketElement return the correct price w/o VAT');
-        $this->assertEquals(17.94, $basket_element->getTotal(true), 'BasketElement return the correct price w VAT');
+        $this->assertEquals(15, $basketElement->getTotal(), 'BasketElement return the correct price w/o VAT');
+        $this->assertEquals(17.94, $basketElement->getTotal(true), 'BasketElement return the correct price w VAT');
 
-        $this->assertEquals(2.94, $basket_element->getVatAmount(), 'BasketElement returns the correct VAT amount');
+        $this->assertEquals(2.94, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
     }
 
     public function testOptions()
     {
-        $basket_element = $this->getBasketElement();
+        $basketElement = $this->getBasketElement();
 
-//        $this->assertEquals(true, $basket_element->hasOption('option1'), 'BasketElement has one option : option1');
-//        $this->assertEquals(false, $basket_element->hasOption('fake'), 'BasketElement has not option : fake');
+//        $this->assertEquals(true, $basketElement->hasOption('option1'), 'BasketElement has one option : option1');
+//        $this->assertEquals(false, $basketElement->hasOption('fake'), 'BasketElement has not option : fake');
 
-        $this->assertEquals('toto', $basket_element->getOption('option1'), 'option1 option = toto');
-        $this->assertEquals(null, $basket_element->getOption('fake'), 'fake option = null');
+        $this->assertEquals('toto', $basketElement->getOption('option1'), 'option1 option = toto');
+        $this->assertEquals(null, $basketElement->getOption('fake'), 'fake option = null');
     }
 
     public function testQuantity()
     {
-        $basket_element = $this->getBasketElement();
+        $basketElement = $this->getBasketElement();
 
-        $basket_element->setQuantity(10);
+        $basketElement->setQuantity(10);
 
-        $this->assertEquals(19.6, $basket_element->getVat(), 'BasketElement returns the correct VAT');
-        $this->assertEquals(179.4, $basket_element->getTotal(true), 'BasketElement returns the correct price w/ VAT');
+        $this->assertEquals(19.6, $basketElement->getVat(), 'BasketElement returns the correct VAT');
+        $this->assertEquals(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
     }
 
     public function testValidatity()
     {
         $product = new Product;
-        $basket_element = $this->getBasketElement($product);
+        $basketElement = $this->getBasketElement($product);
         
-        $this->assertEquals(true, $basket_element->isValid(), 'BasketElement is valid');
+        $this->assertEquals(true, $basketElement->isValid(), 'BasketElement is valid');
 
         $product->enabled = false;
-        $this->assertEquals(false, $basket_element->isValid(), 'BasketElement returns the correct default quantity');
+        $this->assertEquals(false, $basketElement->isValid(), 'BasketElement returns the correct default quantity');
     }
 
 }

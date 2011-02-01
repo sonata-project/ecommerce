@@ -45,7 +45,7 @@ class AllData implements FixtureInterface
                 $address->setAddress1(sprintf('%d sonata street', $id));
                 $address->setPostcode(12342);
                 $address->setCity('Symfony City');
-                $address->setCountryCode('FRA');
+                $address->setCountryCode('FR');
                 $address->setPhone('42');
                 $address->setCreatedAt(new \DateTime());
                 $address->setUpdatedAt(new \DateTime());
@@ -64,7 +64,7 @@ class AllData implements FixtureInterface
                 $address->setAddress1(sprintf('%d sonata street', $id));
                 $address->setPostcode(12342);
                 $address->setCity('Symfony City');
-                $address->setCountryCode('FRA');
+                $address->setCountryCode('FR');
                 $address->setPhone('42');
                 $address->setCreatedAt(new \DateTime());
                 $address->setUpdatedAt(new \DateTime());

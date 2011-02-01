@@ -33,13 +33,13 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnCallback(function($bsket, $product, $params = array()) use ($basket, $repository) {
 
            
-                $basket_element = new BasketElement;
-                $basket_element->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
-                $basket_element->setProduct($product, $repository);
+                $basketElement = new BasketElement;
+                $basketElement->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
+                $basketElement->setProduct($product, $repository);
 
-                $basket->addBasketElement($basket_element);
+                $basket->addBasketElement($basketElement);
 
-                return $basket_element;
+                return $basketElement;
             }));
 
 
@@ -48,13 +48,13 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnCallback(function($baskt, $product, $params = array()) use ($basket, $repository) {
 
 
-                $basket_element = new BasketElement;
-                $basket_element->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
-                $basket_element->setProduct($product, $repository);
+                $basketElement = new BasketElement;
+                $basketElement->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
+                $basketElement->setProduct($product, $repository);
 
-                $basket->addBasketElement($basket_element);
+                $basket->addBasketElement($basketElement);
 
-                return $basket_element;
+                return $basketElement;
             }));
                 
 
@@ -83,16 +83,16 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
-        $basket_element = $basket->addProduct($product);
+        $basketElement = $basket->addProduct($product);
         
-        $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basket_element, '::addProduct() - return a BasketElement');
-        $this->assertEquals(1, $basket_element->getQuantity(), '::getQuantity() - return 1');
+        $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basketElement, '::addProduct() - return a BasketElement');
+        $this->assertEquals(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
         $this->assertEquals(15, $basket->getTotal(), '::getTotal() w/o vat return 15');
         $this->assertEquals(17.94, $basket->getTotal(true), '::getTotal() w/ vat return 17.94');
 
-        $basket_element->setQuantity(2);
+        $basketElement->setQuantity(2);
 
-        $this->assertEquals(2, $basket_element->getQuantity(), '::getQuantity() - return 2');
+        $this->assertEquals(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
         $this->assertEquals(30, $basket->getTotal(), '::getTotal() w/o vat return 30');
         $this->assertEquals(35.88, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
@@ -136,12 +136,12 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $basket->countBasketElements(), '::countElements() return 0');
         $this->assertEmpty($basket->geBaskettElements(), '::getElements() is empty');
 
-        $basket_element = $basket->addProduct($product, array('quantity' => 0));
-        $this->assertEquals(0, $basket_element->getQuantity(),  '::getQuantity() return 1 after adding the product');
-        $basket_element = $basket->mergeProduct($product, array('quantity' => 3));
+        $basketElement = $basket->addProduct($product, array('quantity' => 0));
+        $this->assertEquals(0, $basketElement->getQuantity(),  '::getQuantity() return 1 after adding the product');
+        $basketElement = $basket->mergeProduct($product, array('quantity' => 3));
 
-        $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basket_element, '::mergeProduct() - return the a BasketElement');
-        $this->assertEquals(3, $basket_element->getQuantity(),  '::getQuantity() return 3 after product mege');
+        $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basketElement, '::mergeProduct() - return the a BasketElement');
+        $this->assertEquals(3, $basketElement->getQuantity(),  '::getQuantity() return 3 after product mege');
 
         $this->assertEquals(165, $basket->getTotal(), '::getTotal() - return 150');        
 
@@ -157,13 +157,13 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             ->method('getId')
             ->will($this->returnValue(3));
 
-        $basket_element = $this->getMock('BasketElement', array('getProduct', 'setPos'));
-        $basket_element->expects($this->exactly(2))
+        $basketElement = $this->getMock('BasketElement', array('getProduct', 'setPos'));
+        $basketElement->expects($this->exactly(2))
             ->method('getProduct')
             ->will($this->returnValue($product))
         ;
 
-        $basket_element->expects($this->once())
+        $basketElement->expects($this->once())
             ->method('setPos')
         ;
 
@@ -176,7 +176,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket->setProductPool($product_pool);
 
-        $basket->addBasketElement($basket_element);
+        $basket->addBasketElement($basketElement);
 
         $data = $basket->serialize();
 

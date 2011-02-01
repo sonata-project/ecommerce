@@ -21,7 +21,7 @@ class ProductAdminController extends Controller
 
     }
 
-    public function deliveryEditAction($productId, $delivery_id) {
+    public function deliveryEditAction($productId, $deliveryId) {
 
     }
 

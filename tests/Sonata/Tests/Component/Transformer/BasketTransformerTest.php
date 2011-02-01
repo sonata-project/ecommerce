@@ -89,32 +89,32 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals('Invalid basket', $e->getMessage());
         }
 
-        $billing_address = new \Sonata\Tests\Component\Basket\Address;
+        $billingAddress = new \Sonata\Tests\Component\Basket\Address;
         $shipping_address = new \Sonata\Tests\Component\Basket\Address;
-        $delivery_method = new \Sonata\Tests\Component\Basket\Delivery;
+        $deliveryMethod = new \Sonata\Tests\Component\Basket\Delivery;
 
-        $basket_elements = array();
+        $basketElements = array();
 
-        $basket_element = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
-        $basket_element->expects($this->any())
+        $basketElement = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
+        $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue($products[0]));
 
 
-        $basket_elements[] = $basket_element;
+        $basketElements[] = $basketElement;
 
-        $basket_element = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
-        $basket_element->expects($this->any())
+        $basketElement = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
+        $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue($products[0]));
 
-        $basket_elements[] = $basket_element;
+        $basketElements[] = $basketElement;
 
         $basket = $this->getMock('Basket', array('getDeliveryPrice','getTotal', 'getBillingAddress', 'getDeliveryMethod', 'getShippingAddress', 'getElements'));
         
         $basket->expects($this->once())
             ->method('getBillingAddress')
-            ->will($this->returnValue($billing_address));
+            ->will($this->returnValue($billingAddress));
 
         $basket->expects($this->once())
             ->method('getShippingAddress')
@@ -122,7 +122,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 
         $basket->expects($this->exactly(2))
             ->method('getDeliveryMethod')
-            ->will($this->returnValue($delivery_method));
+            ->will($this->returnValue($deliveryMethod));
 
         $basket->expects($this->exactly(2))
             ->method('getTotal')
@@ -134,7 +134,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 
         $basket->expects($this->once())
             ->method('getElements')
-            ->will($this->returnValue($basket_elements));
+            ->will($this->returnValue($basketElements));
 
         $order = $this->getMock('Sonata\\Tests\\Component\\Basket\\Order');
 

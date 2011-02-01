@@ -31,13 +31,13 @@ class CategoryController extends Controller
         $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
         $class          = $em->getClassMetaData('Application\Sonata\ProductBundle\Entity\Category')->name;
 
-        $query_buidler = $repository
+        $queryBuilder = $repository
             ->createQueryBuilder('c')
             ->where('c.parent IS NULL');
 
 
         $pager = new Pager($class);
-        $pager->setQueryBuilder($query_buidler);
+        $pager->setQueryBuilder($queryBuilder);
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->init();
 
@@ -84,13 +84,13 @@ class CategoryController extends Controller
         $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
         $class          = $em->getClassMetaData('Application\Sonata\ProductBundle\Entity\Category')->name;
 
-        $query_buidler = $repository
+        $queryBuilder = $repository
             ->createQueryBuilder('c')
-            ->where('c.parent = :category_id');
+            ->where('c.parent = :categoryId');
 
         $pager = new Pager($class);
-        $pager->setQueryBuilder($query_buidler);
-        $pager->setParameter('category_id', $categoryId);
+        $pager->setQueryBuilder($queryBuilder);
+        $pager->setParameter('categoryId', $categoryId);
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->setMaxPerPage(30);
         $pager->init();
@@ -113,15 +113,15 @@ class CategoryController extends Controller
         $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Product');
         $class          = $em->getClassMetaData('Application\Sonata\ProductBundle\Entity\Product')->name;
         
-        $query_buidler = $repository
+        $queryBuilder = $repository
             ->createQueryBuilder('p')
             ->leftJoin('p.productCategories', 'pc')
             ->leftJoin('p.image', 'i')
-            ->where('pc.category = :category_id');
+            ->where('pc.category = :categoryId');
 
         $pager = new Pager($class);
-        $pager->setQueryBuilder($query_buidler);
-        $pager->setParameter('category_id', $categoryId);
+        $pager->setQueryBuilder($queryBuilder);
+        $pager->setParameter('categoryId', $categoryId);
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->setMaxPerPage(30);
         $pager->init();
