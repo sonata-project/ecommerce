@@ -41,11 +41,11 @@ class PaymentExtension extends Extension
         // create the payment method pool
         $pool_definition = new Definition('Sonata\Component\Payment\Pool');
 
-        foreach($configs as $config) {
+        foreach ($configs as $config) {
             // define the payment method
-            foreach($config['methods'] as $code => $method)
+            foreach ($config['methods'] as $code => $method)
             {
-                if(!$method['enabled'])
+                if (!$method['enabled'])
                 {
                     continue;
                 }
@@ -57,12 +57,12 @@ class PaymentExtension extends Extension
                 $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
                 $definition->addMethodCall('setTranslator', array(new Reference('translator')));
 
-                foreach((array)$method['transformers'] as $name => $service_id) {
+                foreach ((array)$method['transformers'] as $name => $service_id) {
                     $definition->addMethodCall('addTransformer', array($name, new Reference($service_id)));
                 }
 
                 // todo : refactor this into proper files
-                foreach((array)$method['dependencies'] as $service_id => $setter) {
+                foreach ((array)$method['dependencies'] as $service_id => $setter) {
 
                     $definition->addMethodCall($setter, array(new Reference($service_id)));
                 }
@@ -98,10 +98,10 @@ class PaymentExtension extends Extension
 
         $pool_definition = new Definition('Sonata\Component\Transformer\Pool');
 
-        foreach($configs as $config) {
-            foreach($config['types'] as $type)
+        foreach ($configs as $config) {
+            foreach ($config['types'] as $type)
             {
-                if(!$type['enabled'])
+                if (!$type['enabled'])
                 {
                     continue;
                 }
@@ -130,7 +130,7 @@ class PaymentExtension extends Extension
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('generator.xml');
 
-        foreach($configs as $config) {
+        foreach ($configs as $config) {
             $definition = new Definition($config['class']);
             $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
 

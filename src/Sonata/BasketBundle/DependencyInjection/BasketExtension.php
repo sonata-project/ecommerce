@@ -37,7 +37,7 @@ class BasketExtension extends Extension
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('basket.xml');
 
-        foreach($configs as $config) {
+        foreach ($configs as $config) {
             // define the basket loader service
             $definition = new Definition('Sonata\\Component\\Basket\\Loader');
             $definition

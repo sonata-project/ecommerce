@@ -21,13 +21,13 @@ abstract class BaseProductController extends Controller
 
     public function viewAction($product) {
 
-        if(!is_object($product)) {
+        if (!is_object($product)) {
             throw new NotFoundHttpException('invalid product instance');
         }
 
         $form = $this->get('session')->getFlash('sonata.product.form');
 
-        if(!$form) {
+        if (!$form) {
             $repository = $this->get('sonata.product.pool')->getRepository($product);
 
             $form = $repository->getAddBasketForm($product, $this->get('validator'));

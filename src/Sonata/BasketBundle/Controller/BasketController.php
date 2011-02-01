@@ -41,7 +41,7 @@ class BasketController extends Controller
 
         $elements = new FieldGroup('basketElements');
         
-        foreach($this->get('sonata.basket')->getBasketElements() as $basketElement) {
+        foreach ($this->get('sonata.basket')->getBasketElements() as $basketElement) {
 
             // ask each product repository to populate an empty group field instance
             // so each line can be tweaked depends on the product logic
@@ -69,7 +69,7 @@ class BasketController extends Controller
         $form = $form ?: $this->getBasketForm();
 
         // always validate the basket
-        if(!$form->isBound())
+        if (!$form->isBound())
         {
             // todo : move this somewhere else
             if ($violations = $this->get('validator')->validate($form, $form->getValidationGroups())) {
@@ -103,7 +103,7 @@ class BasketController extends Controller
         $form = $this->getBasketForm();
         $form->bind($params);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
 
             $basket = $form->getData();
             $basket->reset(false); // remove delivery and payment information
@@ -127,7 +127,7 @@ class BasketController extends Controller
         // start the session
         $this->get('session')->start();
 
-        if($request->getMethod() != 'POST') {
+        if ($request->getMethod() != 'POST') {
             
             throw new ForbiddenHttpException('invalid request');
         }
@@ -139,7 +139,7 @@ class BasketController extends Controller
             ->get('doctrine.orm.default_entity_manager')
             ->find('Application\Sonata\ProductBundle\Entity\Product', $params['productId']);
 
-        if(!$product) {
+        if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $params['productId']));
         }
 
@@ -151,11 +151,11 @@ class BasketController extends Controller
         $form->bind($params);
 
         // if the form is valid add the product to the basket
-        if($form->isValid()) {
+        if ($form->isValid()) {
 
             $basket = $this->get('sonata.basket');
 
-            if($basket->hasProduct($product)) {
+            if ($basket->hasProduct($product)) {
                 $repository->basketMergeProduct($basket,  $product, $form->getData());
             } else {
                 $repository->basketAddProduct($basket,  $product, $form->getData());
@@ -222,7 +222,7 @@ class BasketController extends Controller
 
         $choices = array();
 
-        foreach($paymentMethods as $method) {
+        foreach ($paymentMethods as $method) {
             $choices[$method->getCode()] = $method->getName();
         }
 
@@ -243,14 +243,14 @@ class BasketController extends Controller
     {
         $basket = clone $this->get('sonata.basket');
 
-        if($basket->countBasketElements() == 0) {
+        if ($basket->countBasketElements() == 0) {
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
         $customer = $basket->getCustomer();
 
-        if(!$customer) {
+        if (!$customer) {
             throw new HttpException('Invalid customer');
         }
 
@@ -270,7 +270,7 @@ class BasketController extends Controller
             ->get('sonata.payment.selector')
             ->getAvailableMethods($basket, $paymentAddress);
 
-        if($paymentMethods === false) {
+        if ($paymentMethods === false) {
 
             // something went wrong while selecting
             // redirect the user to the basket index (validation)
@@ -279,10 +279,10 @@ class BasketController extends Controller
 
         $form = $this->getPaymentForm($basket, $paymentAddresses, $paymentMethods);
 
-        if($this->get('request')->getMethod() == 'POST') {
+        if ($this->get('request')->getMethod() == 'POST') {
             $form->bind($this->get('request')->get('payment'));
 
-            if($form->isValid()) {
+            if ($form->isValid()) {
 
                 // update the basket store in session
                 $this->get('session')->set('sonata/basket', $form->getData());
@@ -317,7 +317,7 @@ class BasketController extends Controller
 
         $choices = array();
 
-        foreach($deliveryMethods as $method) {
+        foreach ($deliveryMethods as $method) {
             $choices[$method->getCode()] = $method->getName();
         }
 
@@ -339,14 +339,14 @@ class BasketController extends Controller
 
         $basket = clone $this->get('sonata.basket');
 
-        if($basket->countBasketElements() == 0) {
+        if ($basket->countBasketElements() == 0) {
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
         $customer = $basket->getCustomer();
 
-        if(!$customer) {
+        if (!$customer) {
             throw new NotFoundHttpException('customer not found');
         }
 
@@ -367,7 +367,7 @@ class BasketController extends Controller
             ->get('sonata.delivery.selector')
             ->getAvailableMethods($basket, $deliveryAddress);
         
-        if($deliveryMethods === false) {
+        if ($deliveryMethods === false) {
 
             // something went wrong while selecting
             // redirect the user to the basket index (validation)
@@ -376,10 +376,10 @@ class BasketController extends Controller
 
         $form = $this->getDeliveryForm($basket, $deliveryAddresses, $deliveryMethods);
 
-        if($this->get('request')->getMethod() == 'POST') {
+        if ($this->get('request')->getMethod() == 'POST') {
             $form->bind($this->get('request')->get('shipping'));
 
-            if($form->isValid()) {
+            if ($form->isValid()) {
 
                 // update the basket store in session
                 $this->get('session')->set('sonata/basket', $form->getData());
@@ -410,9 +410,9 @@ class BasketController extends Controller
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
-        if($this->get('request')->getMethod() == 'POST' ) {
+        if ($this->get('request')->getMethod() == 'POST' ) {
 
-            if($this->get('request')->get('tac')) {
+            if ($this->get('request')->get('tac')) {
                 // send the basket to the payment callback
                 return $this->forward('SonataPaymentBundle:Payment:callbank');
             }

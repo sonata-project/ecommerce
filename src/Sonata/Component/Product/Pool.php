@@ -94,7 +94,7 @@ class Pool
             
             $class =  $this->products[$product]['class'];
         }
-        else if($product instanceof ProductInterface) {
+        else if ($product instanceof ProductInterface) {
 
             $class = get_class($product);
         } else {

@@ -19,7 +19,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
     public function getBasketElement($product = null)
     {
-        if(!$product)
+        if (!$product)
         {
             $product = new Product;
         }

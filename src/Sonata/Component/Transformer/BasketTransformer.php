@@ -28,7 +28,7 @@ class BasketTransformer extends BaseTransformer
         // Customer
         if (!is_object($customer)) {
 
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the customer is not valid');
             }
 
@@ -38,7 +38,7 @@ class BasketTransformer extends BaseTransformer
         // Basket
         if (!$basket) {
 
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the basket is not defined');
             }
 
@@ -49,7 +49,7 @@ class BasketTransformer extends BaseTransformer
         $billingAddress = $basket->getPaymentAddress();
         if (!$billingAddress instanceof  \Sonata\Component\Basket\AddressInterface) {
 
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the billing address is not valid');
             }
 
@@ -60,7 +60,7 @@ class BasketTransformer extends BaseTransformer
         $deliveryMethod = $basket->getDeliveryMethod();
         if (!$deliveryMethod instanceof \Sonata\Component\Delivery\DeliveryInterface) {
 
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the delivery method is not valid');
             }
 
@@ -70,7 +70,7 @@ class BasketTransformer extends BaseTransformer
         $deliveryAddress = $basket->getDeliveryAddress();
         if ($deliveryMethod->isAddressRequired() && !$deliveryAddress instanceof \Sonata\Component\Basket\AddressInterface) {
 
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the shipping address is not valid');
             }
 

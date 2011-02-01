@@ -71,9 +71,9 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         $orderElement->setSerialize(array('todo'));
 
         // we save product information
-//        foreach($product->toArray(false) as $name => $value)
+//        foreach ($product->toArray(false) as $name => $value)
 //        {
-//          if(is_null($value) || strlen(trim($value)) == 0)
+//          if (is_null($value) || strlen(trim($value)) == 0)
 //          {
 //            continue;
 //          }
@@ -90,7 +90,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
 //        $orderElement_option->setValue($product->isRecurrentPayment() ? '1' : '0');
 
 //        // we save basketElement options
-//        foreach($basketElement->getOptions() as $name => $value)
+//        foreach ($basketElement->getOptions() as $name => $value)
 //        {
 //          $orderElement_option = new OrderElementOption;
 //          $orderElement_option->setName($name);
@@ -141,7 +141,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     public function createVariation($product)
     {
 
-        if($product->isVariation()) {
+        if ($product->isVariation()) {
 
             throw \RuntimeException('Cannot create a variation from a variation product');
         }
@@ -158,12 +158,12 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
     public function copyVariation($product, $name = 'all', $force_copy = false)
     {
 
-        if($product->isVariation()) {
+        if ($product->isVariation()) {
 
             return;
         }
 
-        switch($name) {
+        switch ($name) {
           case 'product':
                 $this->copyProductVariation($product, $force_copy);
 
@@ -191,11 +191,11 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
             'Enabled' => $product->getEnabled()
         );
 
-        if(!$force_copy) {
+        if (!$force_copy) {
 
-            foreach($variationFields as $field) {
+            foreach ($variationFields as $field) {
 
-                if(!array_key_exists($field, $values)) {
+                if (!array_key_exists($field, $values)) {
                    continue;
                 }
 
@@ -203,9 +203,9 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
             }
         }
 
-        foreach($product->getVariations() as $variation) {
+        foreach ($product->getVariations() as $variation) {
 
-            foreach($values as $name => $value) {
+            foreach ($values as $name => $value) {
 
                 call_user_func(array($variation, 'set'.$name), $value );
             }
@@ -258,7 +258,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         );
 
         // the item is flagged as deleted, no need to validate the item
-        if($basketElement->getDelete()) {
+        if ($basketElement->getDelete()) {
 
             return $errors;
         }
@@ -267,7 +267,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         $product = $basketElement->getProduct();
 
         // check if the product is still enabled
-        if(!$product) {
+        if (!$product) {
             $errors['global'] = array(
                 'The product is not available anymore',
                 array(),
@@ -278,7 +278,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         }
 
         // check if the product is still enabled
-        if(!$basketElement->getProduct()->isEnabled()) {
+        if (!$basketElement->getProduct()->isEnabled()) {
             $errors['global'] = array(
                 'The product is not enabled anymore',
                 array(),
@@ -289,7 +289,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         }
 
         // check if the quantity is numeric
-        if(!is_numeric($basketElement->getQuantity())) {
+        if (!is_numeric($basketElement->getQuantity())) {
             $errors['fields']['quantity'] = array(
                 'The product quantity is not a numeric value',
                 array('{{ quantity }}' => $basketElement->getQuantity()),
@@ -300,7 +300,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         }
 
         // check if the product is still available
-        if($this->getStockAvailable($basketElement->getProduct()) < $basketElement->getQuantity()) {
+        if ($this->getStockAvailable($basketElement->getProduct()) < $basketElement->getQuantity()) {
             $errors['fields']['quantity'] = array(
                 'The product quantity ({{ quantity }}) is not valid',
                 array('{{ quantity }}' => $basketElement->getQuantity()),
@@ -336,7 +336,7 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         $basketElement->setProduct($product, $this);
         $basketElement->setQuantity($values->getQuantity());
 
-        if($values instanceof \Application\Sonata\OrderBundle\Entity\OrderElement) {
+        if ($values instanceof \Application\Sonata\OrderBundle\Entity\OrderElement) {
             // restore the basketElement from an order element
             // ie: an error occur during the payment process
 

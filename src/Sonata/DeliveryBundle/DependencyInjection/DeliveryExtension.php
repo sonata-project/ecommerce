@@ -38,13 +38,13 @@ class DeliveryExtension extends Extension
         $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
         $loader->load('delivery.xml');
 
-        foreach($configs as $config) {
+        foreach ($configs as $config) {
             $pool_definition = new Definition($config['pool']['class']);
 
 
-            foreach($config['pool']['methods'] as $method)
+            foreach ($config['pool']['methods'] as $method)
             {
-                if(!$method['enabled'])
+                if (!$method['enabled'])
                 {
                     continue;
                 }

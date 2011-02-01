@@ -86,7 +86,7 @@ class BasketElementCollectionValidator extends ConstraintValidator
         $group = $this->context->getGroup();
         $propertyPath = $this->context->getPropertyPath();
 
-        foreach($basketElements as $pos => $basketElement) {
+        foreach ($basketElements as $pos => $basketElement) {
 
             $errors = $this
                 ->getProductPool()
@@ -94,7 +94,7 @@ class BasketElementCollectionValidator extends ConstraintValidator
                 ->validateFormBasketElement($basketElement);
 
             // global error, the all line is invalid
-            if($errors['global']) {
+            if ($errors['global']) {
                 $this->context->setPropertyPath(sprintf('%s[%d]', $propertyPath, $pos));
                 $this->context->setGroup($group);
 
@@ -105,9 +105,9 @@ class BasketElementCollectionValidator extends ConstraintValidator
                 );
             }
 
-            if(is_array($errors['fields']) && count($errors['fields']) > 0) {
+            if (is_array($errors['fields']) && count($errors['fields']) > 0) {
 
-                foreach($errors['fields'] as $name => $error) {
+                foreach ($errors['fields'] as $name => $error) {
                     $this->context->setPropertyPath(sprintf('%s[%d][%s]', $propertyPath, $pos, $name));
                     $this->context->setGroup($group);
 

@@ -39,8 +39,8 @@ class ProductExtension extends Extension {
 
         $definition = new Definition('Sonata\Component\Product\Pool');
 
-        foreach($configs as $config) {
-            foreach($config['products'] as $product) {
+        foreach ($configs as $config) {
+            foreach ($config['products'] as $product) {
 
                 $definition->addMethodCall('addProduct', array($product));
             }

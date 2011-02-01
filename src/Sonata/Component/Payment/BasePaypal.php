@@ -67,7 +67,7 @@ abstract class BasePaypal extends BasePayment
 
         $transaction_id = $transaction->get('txn_id', null);
 
-        if(!$transaction_id) {
+        if (!$transaction_id) {
             // no transaction id provided
             $transaction_id = -1;
         }
@@ -84,7 +84,7 @@ abstract class BasePaypal extends BasePayment
     {
         $order = $transaction->get('order', null);
 
-        if($this->getLogger())
+        if ($this->getLogger())
         {
             $this->getLogger()->notice(sprintf("[BasePaypalPayment::loadOrder] order=%s", $order));
         }
@@ -108,7 +108,7 @@ abstract class BasePaypal extends BasePayment
 
         // key file
         if (!file_exists($key_file)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg(sprintf('Merchant key file not found : %s', $key_file));
             }
 
@@ -116,7 +116,7 @@ abstract class BasePaypal extends BasePayment
         }
 
         if (!is_readable($key_file)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('Merchant key file is not readable');
             }
 
@@ -125,7 +125,7 @@ abstract class BasePaypal extends BasePayment
 
         // cert file
         if (!file_exists($cert_file)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('Merchant certificat file not found');
             }
 
@@ -133,7 +133,7 @@ abstract class BasePaypal extends BasePayment
         }
 
         if (!is_readable($cert_file)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('Merchant certificat file is not readable');
             }
 
@@ -142,7 +142,7 @@ abstract class BasePaypal extends BasePayment
 
         // paypal cert file
         if (!file_exists($paypal_cert_file)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('PayPal certificate file not found');
             }
 
@@ -150,7 +150,7 @@ abstract class BasePaypal extends BasePayment
         }
 
         if (!is_readable($cert_file)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('PayPal certificate file is not readable');
             }
 
@@ -159,7 +159,7 @@ abstract class BasePaypal extends BasePayment
 
         // open ssl
         if (!file_exists($openssl)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('openssl command not found');
             }
 
@@ -167,7 +167,7 @@ abstract class BasePaypal extends BasePayment
         }
 
         if (!is_executable($openssl)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('openssl is not executable');
             }
 
@@ -196,7 +196,7 @@ abstract class BasePaypal extends BasePayment
             "-outform der -nodetach -binary | $openssl smime -encrypt " .
             "-des3 -binary -outform pem $paypal_cert_file";
 
-        if($this->getLogger()) {
+        if ($this->getLogger()) {
             $this->getLogger()->debug(sprintf("[BasePaypalPayment::encrypt] command line=%s", $openssl_cmd));
         }
 
@@ -227,7 +227,7 @@ abstract class BasePaypal extends BasePayment
             return $output;
         }
 
-        if($this->getLogger()) {
+        if ($this->getLogger()) {
             $this->getLogger()->emerg("Encrypting paypal data failed, Command line encryption failed \n cmd=$openssl_cmd \n hash=" . print_r($hash, 1));
         }
 
@@ -259,7 +259,7 @@ abstract class BasePaypal extends BasePayment
         }
 
         if (!@file_put_contents($filename, $contents)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg(sprintf('encryptViaFile, unable to create buffer file : %s', $filename));
             }
             
@@ -271,14 +271,14 @@ abstract class BasePaypal extends BasePayment
             " | $openssl smime -encrypt " .
             "-des3 -binary -outform pem $paypal_cert_file";
 
-        if($this->getLogger()) {
+        if ($this->getLogger()) {
           $this->getLogger()->debug(sprintf('[BasePaypalPayment::encryptViaFile] command line=%s', $openssl_cmd));
         }
 
         $output = shell_exec($openssl_cmd);
 
         if (!@unlink($filename)) {
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
               $this->getLogger()->emerg(sprintf('[BasePaypalPayment::encryptViaFile] unable to delete temporary file, %s', $filename));
             }
 

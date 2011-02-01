@@ -35,7 +35,7 @@ class SonataProductBundle extends Bundle implements EventSubscriber
 
         $metadata = $eventArgs->getClassMetadata();
 
-        if($metadata->name !== 'Application\Sonata\ProductBundle\Entity\Product') {
+        if ($metadata->name !== 'Application\Sonata\ProductBundle\Entity\Product') {
 
             return;
         }
@@ -45,7 +45,7 @@ class SonataProductBundle extends Bundle implements EventSubscriber
 
         $map = array();
 
-        foreach($this->container->get('sonata.product.pool')->getProductDefinitions() as $code => $definition) {
+        foreach ($this->container->get('sonata.product.pool')->getProductDefinitions() as $code => $definition) {
             $map[$code] = $definition['class'];
         }
 

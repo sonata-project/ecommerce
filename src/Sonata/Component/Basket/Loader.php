@@ -44,12 +44,12 @@ class Loader
     public function getBasket()
     {
 
-        if(!$this->basket) {
+        if (!$this->basket) {
             $basket = $this->getSession()->get('sonata/basket');
 
-            if(!$basket) {
+            if (!$basket) {
 
-                if(!class_exists($this->basketClass)) {
+                if (!class_exists($this->basketClass)) {
                     throw new \RuntimeException(sprintf('unable to load the class %s', $this->basketClass));
                 }
 
@@ -59,10 +59,10 @@ class Loader
             $basket->setProductPool($this->getProductPool());
 
             try {
-                foreach($basket->getBasketElements() as $basketElement) {
-                    if($basketElement->getProduct() === null) { // restore information
+                foreach ($basket->getBasketElements() as $basketElement) {
+                    if ($basketElement->getProduct() === null) { // restore information
 
-                        if($basketElement->getProductCode() == null) {
+                        if ($basketElement->getProductCode() == null) {
                             throw new \RuntimeException('the product code is empty');
                         }
 
@@ -75,7 +75,7 @@ class Loader
                 // load the delivery address
                 $deliveryAddressId = $basket->getDeliveryAddressId();
 
-                if($deliveryAddressId) {
+                if ($deliveryAddressId) {
                     $address = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Address', $deliveryAddressId);
 
                     $basket->setDeliveryAddress($address);
@@ -83,7 +83,7 @@ class Loader
 
                 // load the payment address
                 $paymentAddressId = $basket->getPaymentAddressId();
-                if($paymentAddressId) {
+                if ($paymentAddressId) {
                     $address = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Address', $paymentAddressId);
 
                     $basket->setPaymentAddress($address);
@@ -91,13 +91,13 @@ class Loader
 
                 // load the payment method
                 $paymentMethodCode = $basket->getPaymentMethodCode();
-                if($paymentMethodCode) {
+                if ($paymentMethodCode) {
                     $basket->setPaymentMethod($this->getPaymentPool()->getMethod($paymentMethodCode));
                 }
 
                 // customer
                 $customerId = $basket->getCustomerId();
-                if($customerId) {
+                if ($customerId) {
                     $customer = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Customer', $customerId);
 
                     $basket->setCustomer($customer);

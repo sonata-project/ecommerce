@@ -40,7 +40,7 @@ class PaymentController extends Controller
         $em         = $this->get('doctrine.orm.entity_manager');
         $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
-        if(!$order) {
+        if (!$order) {
 
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
@@ -48,7 +48,7 @@ class PaymentController extends Controller
         $transaction->setOrder($order);
 
         // control the handshake value
-        if(!$payment->isRequestValid($transaction)) {
+        if (!$payment->isRequestValid($transaction)) {
             
             throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
         }
@@ -98,7 +98,7 @@ class PaymentController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
         $order = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
-        if(!$order) {
+        if (!$order) {
 
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
@@ -121,11 +121,11 @@ class PaymentController extends Controller
         $request    = $this->get('request');
         $customer   = $basket->getCustomer();
 
-        if($request->getMethod() !== 'POST') {
+        if ($request->getMethod() !== 'POST') {
             $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
-        if(!$basket->isValid()) {
+        if (!$basket->isValid()) {
             $this->redirect($this->generateUrl('sonata_basket_index'));
         }
         
@@ -182,14 +182,14 @@ class PaymentController extends Controller
         $em         = $this->get('doctrine.orm.entity_manager');
         $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
-        if(!$order) {
+        if (!$order) {
 
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
 
         $transaction->setOrder($order);
 
-        if(!$payment->isCallbackValid($transaction)) {
+        if (!$payment->isCallbackValid($transaction)) {
 
             // ask the payment handler the error
             $response = $payment->handleError($transaction);

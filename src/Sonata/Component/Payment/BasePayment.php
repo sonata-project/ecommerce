@@ -179,7 +179,7 @@ abstract class BasePayment implements PaymentInterface
     {
 
         // check if the order exists
-        if(!$transaction->getOrder()) {
+        if (!$transaction->getOrder()) {
             $transaction->setStatusCode(Transaction::STATUS_ORDER_UNKNOWN);
             $transaction->setState(Transaction::STATE_KO);
 
@@ -187,7 +187,7 @@ abstract class BasePayment implements PaymentInterface
         }
 
         // check if the request is valid
-        if(!$this->isRequestValid($transaction)) {
+        if (!$this->isRequestValid($transaction)) {
             $transaction->setStatusCode(Transaction::STATUS_WRONG_REQUEST);
             $transaction->setState(Transaction::STATE_KO);
 
@@ -195,7 +195,7 @@ abstract class BasePayment implements PaymentInterface
         }
 
         // check if the callback is valid
-        if(!$this->isCallbackValid($transaction)) {
+        if (!$this->isCallbackValid($transaction)) {
             $transaction->setStatusCode(Transaction::STATUS_WRONG_CALLBACK);
             $transaction->setState(Transaction::STATE_KO);
 
@@ -206,7 +206,7 @@ abstract class BasePayment implements PaymentInterface
         $this->applyTransactionId($transaction);
 
         // send the confirmation request to the bank
-        if(!($response = $this->sendConfirmationReceipt($transaction))) {
+        if (!($response = $this->sendConfirmationReceipt($transaction))) {
 
             $response = $this->handleError($transaction);
 

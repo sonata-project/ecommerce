@@ -249,7 +249,7 @@ class Basket implements \Serializable
         $this->paymentMethod = null;
         $this->paymentMethodCode = null;
 
-        if($full) {
+        if ($full) {
             $this->basketElements = array();
             $this->pos = array();
             $this->cptElement = 0;
@@ -544,7 +544,7 @@ class Basket implements \Serializable
             }
 
             $repository = $this->getProductPool()->getRepository($product);
-            if($repository) {
+            if ($repository) {
                 $price = $repository->basketCalculatePrice($this, $basketElement);
                 $basketElement->setPrice($price);
             }
@@ -561,8 +561,8 @@ class Basket implements \Serializable
     public function clean()
     {
 
-        foreach($this->getBasketElements() as $basketElement) {
-            if($basketElement->getDelete()) {
+        foreach ($this->getBasketElements() as $basketElement) {
+            if ($basketElement->getDelete()) {
                 $this->removeElement($basketElement);
             }
         }
@@ -602,7 +602,7 @@ class Basket implements \Serializable
             'customerId',
         );
 
-        foreach($properties as $property)
+        foreach ($properties as $property)
         {
             $this->$property = isset($data[$property]) ? $data[$property] : $this->$property;
         }

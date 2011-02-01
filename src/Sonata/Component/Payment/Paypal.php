@@ -195,14 +195,14 @@ class Paypal extends BasePaypal
         switch ($transaction->getStatusCode()) {
             case Transaction::STATUS_ORDER_UNKNOWN:
 
-                if($this->getLogger()) {
+                if ($this->getLogger()) {
                     $this->getLogger()->emerg('[Paypal:handlerError] ERROR_ORDER_UNKNOWN');
                 }
 
                 break;
             case Transaction::STATUS_ERROR_VALIDATION:
 
-                if($this->getLogger()) {
+                if ($this->getLogger()) {
                     $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_ERROR_VALIDATION - Order %s - Paypal reject the postback validation', $order->getReference()));
                 }
                 
@@ -212,7 +212,7 @@ class Paypal extends BasePaypal
                 // cancelled
                 $order->setStatus(OrderInterface::STATUS_CANCELLED);
 
-                if($this->getLogger()) {
+                if ($this->getLogger()) {
                     $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_CANCELLED - Order %s - The Order has been cancelled, see callback dump for more information', $order->getReference()));
                 }
 
@@ -222,7 +222,7 @@ class Paypal extends BasePaypal
                 // pending
                 $order->setStatus(OrderInterface::STATUS_PENDING);
 
-                if($this->getLogger()) {
+                if ($this->getLogger()) {
                     $reasons = self::getPendingReasonsList();
                     $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_PENDING - Order %s - reason code : %s - reason : %s', $order->getReference(), $reasons[$transaction->get('pending_reason')], $transaction->get('pending_reason')));
                 }
@@ -230,18 +230,18 @@ class Paypal extends BasePaypal
                 break;
             default:
 
-                if($this->getLogger()) {
+                if ($this->getLogger()) {
                     $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_PENDING - uncaught error code %s', $transaction->getErrorCode()));
                 }
         }
 
         $transaction->setState(Transaction::STATE_KO);
 
-        if($order->getStatus() === null) {
+        if ($order->getStatus() === null) {
             $order->setStatus(OrderInterface::STATUS_CANCELLED);
         }
 
-        if($transaction->getStatusCode() == null) {
+        if ($transaction->getStatusCode() == null) {
             $transaction->setStatusCode(Transaction::STATUS_UNKNOWN);
         }
     }
@@ -249,7 +249,7 @@ class Paypal extends BasePaypal
     public function sendConfirmationReceipt($transaction)
     {
 
-        if(!$transaction->isValid()) {
+        if (!$transaction->isValid()) {
 
             return new \Symfony\Component\HttpFoundation\Response('');
         }
@@ -277,7 +277,7 @@ class Paypal extends BasePaypal
 
             $transaction->getOrder()->setPaymentStatus(OrderInterface::STATUS_ERROR);
 
-            if($this->getLogger()) {
+            if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Paypal::sendAccuseReception] Paypal failed to check the postback');
             }
         }

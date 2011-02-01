@@ -63,7 +63,7 @@ class CategoryController extends Controller
 
         $category = $repository->findOneById($categoryId);
 
-        if(!$category) {
+        if (!$category) {
             throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $categoryId));
         }
 

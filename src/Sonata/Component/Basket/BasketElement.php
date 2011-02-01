@@ -100,7 +100,7 @@ class BasketElement implements \Serializable
     public function getProduct()
     {
 
-        if($this->product == null && $this->getProductRepository())
+        if ($this->product == null && $this->getProductRepository())
         {
             $this->product      = $this->getProductRepository()->findOneById($this->productId);
         }
@@ -127,7 +127,7 @@ class BasketElement implements \Serializable
      */
     public function setProductId($productId)
     {
-        if(!$this->getProduct()) {
+        if (!$this->getProduct()) {
             $this->productId = $productId;
         }
     }

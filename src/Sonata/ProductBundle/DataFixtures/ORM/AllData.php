@@ -29,12 +29,12 @@ class AllData implements FixtureInterface
 
         $ratio = 1;
 
-        foreach(range(0, 200 * $ratio) as $id) {
+        foreach (range(0, 200 * $ratio) as $id) {
             $customer = new Customer;
             $customer->setFirstname('user'.$id);
             $customer->setLastname('lastname'.$id);
             
-            foreach(range(0, 2 * $ratio) as $di) {
+            foreach (range(0, 2 * $ratio) as $di) {
                 $address = new Address;
                 $address->setName($customer->getFullname().' - billing '.$di);
                 $address->setCustomer($customer);
@@ -53,7 +53,7 @@ class AllData implements FixtureInterface
                 $manager->persist($address);
             }
 
-            foreach(range(0, 2 * $ratio) as $di) {
+            foreach (range(0, 2 * $ratio) as $di) {
                 $address = new Address;
                 $address->setCustomer($customer);
                 $address->setName($customer->getFullname().' - delivery '.$di);
@@ -75,7 +75,7 @@ class AllData implements FixtureInterface
 
             $manager->persist($customer);
 
-            if($id % 100 == 0) {
+            if ($id % 100 == 0) {
                 $manager->flush();
             }
         }
@@ -83,7 +83,7 @@ class AllData implements FixtureInterface
         $manager->flush();
 
         $id = 1;
-        foreach(range(0, 5 * $ratio) as $level_1_id) {
+        foreach (range(0, 5 * $ratio) as $level_1_id) {
 
             $categories = array();
             $products = array();
@@ -102,7 +102,7 @@ class AllData implements FixtureInterface
             
             $manager->persist($category);
 
-            foreach(range(0, 10 * $ratio) as $product) {
+            foreach (range(0, 10 * $ratio) as $product) {
                 
                 $id++;
                 $product = new Product();
@@ -150,7 +150,7 @@ class AllData implements FixtureInterface
 
             $manager->flush();
 
-            foreach(range(0, 2 * $ratio) as $level_2_id) {
+            foreach (range(0, 2 * $ratio) as $level_2_id) {
                 $cat2 = new Category();
                 $cat2->setName($category->getName().' : '.$level_2_id);
                 $cat2->setSlug($category->getSlug().'-'.$level_2_id);
@@ -161,7 +161,7 @@ class AllData implements FixtureInterface
 
                 $categories[] = $cat2;
 
-                foreach(range(0, 2 * $ratio) as $level_3_id) {
+                foreach (range(0, 2 * $ratio) as $level_3_id) {
                     $id++;
                     $cat3 = new Category();
                     $cat3->setName($cat2->getName().' : '.$level_3_id);
@@ -186,8 +186,8 @@ class AllData implements FixtureInterface
             }
             $manager->flush();
 
-            foreach($categories as $category) {
-                foreach($products as $product) {
+            foreach ($categories as $category) {
+                foreach ($products as $product) {
                     $product_category = new ProductCategory;
                     $product_category->setProduct($product);
                     $product_category->setCategory($category);

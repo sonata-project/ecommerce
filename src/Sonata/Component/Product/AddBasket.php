@@ -50,7 +50,7 @@ class AddBasket
     {
 
         // never erase this value
-        if($this->productId !== null) {
+        if ($this->productId !== null) {
            return;
         }
 

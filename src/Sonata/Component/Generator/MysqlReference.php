@@ -24,7 +24,7 @@ class MysqlReference implements ReferenceInterface
     public function invoice($invoice)
     {
 
-        if(!$invoice->getId()) {
+        if (!$invoice->getId()) {
             throw new \RuntimeException('The invoice is not persisted into the database');
         }
 
@@ -42,7 +42,7 @@ class MysqlReference implements ReferenceInterface
      */
     public function order($order)
     {
-        if(!$order->getId()) {
+        if (!$order->getId()) {
             throw new \RuntimeException('The order is not persisted into the database');
         }
 

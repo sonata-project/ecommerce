@@ -53,7 +53,7 @@ class SonataBasketBundle extends Bundle implements EventSubscriber
     {
         $metadata = $eventArgs->getClassMetadata();
 
-        if($metadata->name == 'Sonata\BasketBundle\Entity\BaseAddress') {
+        if ($metadata->name == 'Sonata\BasketBundle\Entity\BaseAddress') {
 //            var_dump('hetre'); die();
             $metadata->mapManyToOne(array(
                 'fieldName'     => 'user',

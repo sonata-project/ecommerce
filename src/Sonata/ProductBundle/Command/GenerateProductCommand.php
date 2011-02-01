@@ -54,7 +54,7 @@ class GenerateProductCommand extends Command
             $this->container->getKernelService()->getRootDir()
         );
 
-        if(!is_dir($bundle_dir)) {
+        if (!is_dir($bundle_dir)) {
             throw new Exception('Please initialize a ProductBundle first in the Application directory');
         }
 
@@ -91,18 +91,18 @@ class GenerateProductCommand extends Command
             sprintf('%s/Product/%s',         $bundle_dir, $input->getArgument('product')),
         );
         
-        foreach($dirs as $dir ) {
+        foreach ($dirs as $dir ) {
             $filesystem->mkdirs($dir);
         }
 
         $output->writeln(' > renaming skeleton files');
 
         
-        foreach($renames as $from => $to) {
+        foreach ($renames as $from => $to) {
             $from = sprintf($from, $bundle_dir);
             $to = sprintf($to, $bundle_dir, $input->getArgument('product'));
             
-            if(is_file($to) || is_dir($to)) {
+            if (is_file($to) || is_dir($to)) {
 
 //                $output->writeln(sprintf(' <info>-</info> deleting unused file : <comment>%s</comment>', basename($from)));
                 $filesystem->remove($from);

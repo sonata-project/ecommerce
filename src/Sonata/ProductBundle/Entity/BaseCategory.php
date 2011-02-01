@@ -228,14 +228,14 @@ abstract class BaseCategory
     {
         $this->children[] = $children;
 
-//        if(!$nested) {
+//        if (!$nested) {
 //            $children->setParent($this, true);
 //        }
     }
 
     public function disableChildrenLazyLoading()
     {
-        if(is_object($this->children))
+        if (is_object($this->children))
         {
             $this->children->setInitialized(true);
         }
@@ -266,7 +266,7 @@ abstract class BaseCategory
     {
         $this->parent = $parent;
 
-        if(!$nested) {
+        if (!$nested) {
             $parent->addChildren($this, true);
         }
     }

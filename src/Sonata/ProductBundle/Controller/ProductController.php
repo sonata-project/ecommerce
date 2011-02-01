@@ -27,7 +27,7 @@ class ProductController extends Controller
 
         $product = is_object($productId) ? $productId : $repository->findOneById($productId);
 
-        if(!$product) {
+        if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
         }
 
@@ -36,7 +36,7 @@ class ProductController extends Controller
 
         $code = $this->get('sonata.product.pool')->getProductCode($product);
 
-        if(!$code) {
+        if (!$code) {
             throw new NotFoundHttpException(sprintf('Unable to find the product code with product.id=%d', $productId));
         }
 
@@ -45,7 +45,7 @@ class ProductController extends Controller
             'product' => $product
         ));
 
-        if($this->get('kernel')->isDebug()) {
+        if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
                 $code,
                 $product->getId(),
@@ -68,7 +68,7 @@ class ProductController extends Controller
             'basketElement'  => $basketElement,
         ));
 
-        if($this->get('kernel')->isDebug()) {
+        if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
                 $code,
                 $basketElement->getProductId(),
@@ -89,7 +89,7 @@ class ProductController extends Controller
             'basketElement'  => $basketElement,
         ));
 
-        if($this->get('kernel')->isDebug()) {
+        if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
                 $code,
                 $basketElement->getProductId(),
