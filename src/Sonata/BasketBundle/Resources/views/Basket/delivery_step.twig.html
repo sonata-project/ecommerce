@@ -23,7 +23,7 @@ file that was distributed with this source code.
     <div>
         <h2>{% trans 'title_delivery_methods' from 'BasketBundle' %}</h2>
 
-        {% if delivery_methods|length == 0 %}
+        {% if deliveryMethods|length == 0 %}
             <p>{% trans 'message_no_delivery_methods_available' from 'BasketBundle' %}</p>
         {% else %}
             {{ form_errors(form.deliveryMethod) }}

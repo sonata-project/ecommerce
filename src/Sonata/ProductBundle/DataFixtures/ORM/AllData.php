@@ -124,7 +124,7 @@ class AllData implements FixtureInterface
                 // add product delivery
 
                 $delivery = new Delivery;
-                $delivery->setCountryCode('FRA');
+                $delivery->setCountryCode('FR');
                 $delivery->setCode('free');
                 $delivery->setEnabled(true);
                 $delivery->setPerItem(2);
@@ -135,7 +135,7 @@ class AllData implements FixtureInterface
                 $manager->persist($delivery);
                 
                 $delivery = new Delivery;
-                $delivery->setCountryCode('GBR');
+                $delivery->setCountryCode('GB');
                 $delivery->setCode('free');
                 $delivery->setEnabled(true);
                 $delivery->setPerItem(2);

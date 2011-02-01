@@ -131,6 +131,6 @@ class Selector
             }
         }
 
-        return $final_instances;
+        return count($final_instances) == 0 ? false : $final_instances;
     }
 }

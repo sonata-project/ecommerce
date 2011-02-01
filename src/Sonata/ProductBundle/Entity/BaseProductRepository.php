@@ -235,7 +235,10 @@ class BaseProductRepository extends \Doctrine\ORM\EntityRepository
         // create the form
         $class = $this->getAddBasketFormClass();
 
-        return new $class('basket', $product_basket, $validator, $options);
+        return new $class('basket', array_merge($options, array(
+            'data' => $product_basket,
+            'validator' => $validator,
+        )));
     }
 
 

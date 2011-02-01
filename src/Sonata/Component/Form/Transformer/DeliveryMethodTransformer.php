@@ -11,15 +11,17 @@
 
 namespace Sonata\Component\Form\Transformer;
 
-use Symfony\Component\Form\ValueTransformer\BaseValueTransformer;
+use Symfony\Component\Form\ValueTransformer\ValueTransformerInterface;
 use Symfony\Component\Form\ValueTransformer\TransformationFailedException;
+use Symfony\Component\Form\Configurable;
+
 
 /**
  * Transform a method code into a method instance
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class DeliveryMethodTransformer extends BaseValueTransformer
+class DeliveryMethodTransformer extends Configurable implements ValueTransformerInterface
 {
     protected function configure()
     {

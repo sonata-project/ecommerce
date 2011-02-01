@@ -51,19 +51,18 @@ class {{ product }}Repository extends \Sonata\ProductBundle\Entity\BaseProductRe
      * @param  $fieldGroup
      * @return Symfony\Component\Form\FieldGroup
      */
-    public function generateFieldGroupBasketElement(\Symfony\Component\Form\FieldGroup $fieldGroup, $basketElement)
+    public function generateFieldGroupBasketElement(\Symfony\Component\Form\Form $form, $basketElement)
     {
         // required widgets
-        $fieldGroup->add(new \Symfony\Component\Form\CheckboxField('delete'));
-        $fieldGroup->add(new \Symfony\Component\Form\HiddenField('productId'));
-        $fieldGroup->add(new \Symfony\Component\Form\TextField('quantity'));
+        $form->add(new \Symfony\Component\Form\CheckboxField('delete'));
+        $form->add(new \Symfony\Component\Form\HiddenField('productId'));
+        $form->add(new \Symfony\Component\Form\TextField('quantity'));
 
 
         // add here your custom widget
         //$fieldGroup->add(new \Symfony\Component\Form\CheckboxField('custom_option1'));
 
-
-        return $fieldGroup;
+        return $form;
     }
 
     /**

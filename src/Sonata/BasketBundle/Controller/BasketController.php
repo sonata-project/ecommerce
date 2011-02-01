@@ -16,14 +16,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FieldGroup;
 use Symfony\Component\Form\ChoiceField;
 use Symfony\Component\Form\CollectionField;
-use Symfony\Bundle\DoctrineBundle\Form\ValueTransformer\CollectionToChoiceTransformer;
-use Symfony\Bundle\DoctrineBundle\Form\ValueTransformer\EntityToIDTransformer;
+use Symfony\Component\Form\EntityChoiceField;
 
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
+use Sonata\Component\Basket\InvalidBasketStateException;
 
 class BasketController extends Controller
 {
@@ -37,9 +36,13 @@ class BasketController extends Controller
     {
 
         // always clone the basket, so the one in session is never altered
-        $form = new Form('basket', clone $this->get('sonata.basket'), $this->get('validator'), array('validation_groups' => 'elements'));
+        $form = new Form('basket', array(
+            'data' => clone $this->get('sonata.basket'),
+            'validator' => $this->get('validator'),
+            'validation_groups' => 'elements'
+        ));
 
-        $elements = new FieldGroup('basketElements');
+        $elements = new Form('basketElements');
         
         foreach ($this->get('sonata.basket')->getBasketElements() as $basketElement) {
 
@@ -49,8 +52,9 @@ class BasketController extends Controller
                 ->get('sonata.product.pool')
                 ->getRepository($basketElement->getProduct())
                 ->generateFieldGroupBasketElement(
-                    new FieldGroup($basketElement->getPos()),
-                    $basketElement
+                    new Form($basketElement->getPos()), array(
+                        'data' => $basketElement
+                    )
                 );
 
             $elements->add($fieldGroup);
@@ -98,10 +102,9 @@ class BasketController extends Controller
 
     public function updateAction()
     {
-        $params = $this->get('request')->get('basket');
 
         $form = $this->getBasketForm();
-        $form->bind($params);
+        $form->bind($this->get('request'));
 
         if ($form->isValid()) {
 
@@ -148,7 +151,7 @@ class BasketController extends Controller
 
         // load and bind the form
         $form = $repository->getAddBasketForm($product, $this->get('validator'));
-        $form->bind($params);
+        $form->bind($request);
 
         // if the form is valid add the product to the basket
         if ($form->isValid()) {
@@ -202,39 +205,61 @@ class BasketController extends Controller
         return $this->redirect($this->generateUrl('sonata_basket_delivery'));
     }
 
-    public function getPaymentForm($basket, $paymentAddresses, $paymentMethods)
+    public function getPaymentForm($basket)
     {
-        $form = new Form('payment', $basket, $this->get('validator'), array(
+
+        $form = new Form('payment', array(
+            'data'      => $basket,
+            'validator' => $this->get('validator'),
             'validation_groups' => 'payment'
         ));
 
-        $transformer = new EntityToIDTransformer(array(
-            'em' =>  $this->get('doctrine.orm.default_entity_manager'),
-            'className' => 'Application\Sonata\CustomerBundle\Entity\Address'
-        ));
+        // retrieve addresses
+        $addresses = $this
+            ->get('doctrine.orm.default_entity_manager')
+            ->createQuery('SELECT a FROM Application\Sonata\CustomerBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.customer = :customer')
+            ->setParameters(array(
+                'type' => \Application\Sonata\CustomerBundle\Entity\Address::TYPE_BILLING,
+                'customer' => $basket->getCustomer()->getId())
+            )->execute();
 
-        $field = new ChoiceField('payment_address', array(
-            'expanded' => true,
-            'choices' => array_map(function($address)  { return $address->getFullAddress('<br />'); }, $paymentAddresses),
-            'value_transformer' => $transformer,
-        ));
-        $form->add($field);
+        $form->add(new EntityChoiceField('paymentAddress', array(
+            'em'        =>  $this->get('doctrine.orm.default_entity_manager'),
+            'class'     => 'Application\Sonata\CustomerBundle\Entity\Address',
+            'expanded'  => true,
+            'property'  => 'fullAddress',
+            'choices' => $addresses
+        )));
+
+        // assign default address
+        $address = $basket->getPaymentAddress() ?: current($addresses);
+        $basket->setPaymentAddress($address);
+
+        // retrieve the default payment methods
+        $methods = $this
+            ->get('sonata.payment.selector')
+            ->getAvailableMethods($basket, $address);
+
+        if ($methods === false) {
+
+            // something went wrong while selecting
+            // redirect the user to the basket index (validation)
+            throw new InvalidBasketStateException('no payment method available');
+        }
 
         $choices = array();
 
-        foreach ($paymentMethods as $method) {
+        foreach ($methods as $method) {
             $choices[$method->getCode()] = $method->getName();
         }
 
-        $field = new ChoiceField('payment_method', array(
+        $form->add(new ChoiceField('paymentMethod', array(
             'expanded' => true,
             'choices' => $choices,
             'value_transformer' => new PaymentMethodTransformer(array(
                 'payment_pool' => $this->get('sonata.payment.pool')
             )),
-        ));
-
-        $form->add($field);
+        )));
 
         return $form;
     }
@@ -254,33 +279,19 @@ class BasketController extends Controller
             throw new HttpException('Invalid customer');
         }
 
-        $paymentAddresses = $this
-            ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT a FROM Application\Sonata\CustomerBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.customer = :customer')
-            ->setParameters(array(
-                'type' => \Application\Sonata\CustomerBundle\Entity\Address::TYPE_BILLING,
-                'customer' => $customer->getId())
-            )
-            ->execute();
+        try {
+            $form = $this->getPaymentForm($basket);
+        } catch(InvalidBasketStateException $e) {
 
-        $paymentAddress = $basket->getPaymentAddress() ?: current($paymentAddresses);
-        $basket->setPaymentAddress($paymentAddress);
-
-        $paymentMethods = $this
-            ->get('sonata.payment.selector')
-            ->getAvailableMethods($basket, $paymentAddress);
-
-        if ($paymentMethods === false) {
-
-            // something went wrong while selecting
-            // redirect the user to the basket index (validation)
+            if($this->container->getParameter('kernel.debug')) {
+                throw $e;
+            }
+            
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
-        $form = $this->getPaymentForm($basket, $paymentAddresses, $paymentMethods);
-
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bind($this->get('request')->get('payment'));
+            $form->bind($this->get('request'));
 
             if ($form->isValid()) {
 
@@ -295,41 +306,63 @@ class BasketController extends Controller
             'basket' => $basket,
             'form'   => $form,
             'customer'   => $customer,
-            'paymentMethods' => $paymentMethods
+            'paymentMethods' => $form->get('paymentMethod')->getOption('choices')
         ));
     }
 
-    public function getDeliveryForm($basket, $deliveryAddresses, $deliveryMethods)
+    public function getDeliveryForm($basket)
     {
-        $form = new Form('shipping', $basket, $this->get('validator'), array('validation_groups' => 'delivery'));
-
-        $transformer = new EntityToIDTransformer(array(
-            'em' =>  $this->get('doctrine.orm.default_entity_manager'),
-            'className' => 'Application\Sonata\CustomerBundle\Entity\Address'
+        $form = new Form('shipping', array(
+            'data'      => $basket,
+            'validator' => $this->get('validator'),
+            'validation_groups' => 'delivery'
         ));
 
-        $field = new ChoiceField('deliveryAddress', array(
-            'expanded' => true,
-            'choices' => array_map(function($address)  { return $address->getFullAddress('<br />'); }, $deliveryAddresses),
-            'value_transformer' => $transformer,
-        ));
-        $form->add($field);
+        // retrieve addresses
+        $addresses = $this
+            ->get('doctrine.orm.default_entity_manager')
+            ->createQuery('SELECT a FROM Application\Sonata\CustomerBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.customer = :customer')
+            ->setParameters(array(
+                'type' => \Application\Sonata\CustomerBundle\Entity\Address::TYPE_DELIVERY,
+                'customer' => $basket->getCustomer()->getId())
+            )->execute();
+
+        $form->add(new EntityChoiceField('deliveryAddress', array(
+            'em'        =>  $this->get('doctrine.orm.default_entity_manager'),
+            'class'     => 'Application\Sonata\CustomerBundle\Entity\Address',
+            'expanded'  => true,
+            'property'  => 'fullAddress',
+            'choices'   => $addresses,
+        )));
+
+        $address = $basket->getDeliveryAddress() ?: current($addresses);
+
+        $basket->setDeliveryAddress($address);
+
+        $methods = $this
+            ->get('sonata.delivery.selector')
+            ->getAvailableMethods($basket, $address);
+
+        if ($methods === false) {
+
+            // something went wrong while selecting
+            // redirect the user to the basket index (validation)
+            throw new InvalidBasketStateException('no delivery method available');
+        }
 
         $choices = array();
 
-        foreach ($deliveryMethods as $method) {
+        foreach ($methods as $method) {
             $choices[$method->getCode()] = $method->getName();
         }
 
-        $field = new ChoiceField('deliveryMethod', array(
+        $form->add(new ChoiceField('deliveryMethod', array(
             'expanded' => true,
             'choices' => $choices,
             'value_transformer' => new DeliveryMethodTransformer(array(
                 'delivery_pool' => $this->get('sonata.delivery.pool')
             )),
-        ));
-        
-        $form->add($field);
+        )));
 
         return $form;
     }
@@ -350,34 +383,10 @@ class BasketController extends Controller
             throw new NotFoundHttpException('customer not found');
         }
 
-        $deliveryAddresses = $this
-            ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT a FROM Application\Sonata\CustomerBundle\Entity\Address a INDEX BY a.id WHERE a.type = :type AND a.customer = :customer')
-            ->setParameters(array(
-                'type' => \Application\Sonata\CustomerBundle\Entity\Address::TYPE_DELIVERY,
-                'customer' => $customer->getId())
-            )
-            ->execute();
-
-        $deliveryAddress = $basket->getDeliveryAddress() ?: current($deliveryAddresses);
-
-        $basket->setDeliveryAddress($deliveryAddress);
-        
-        $deliveryMethods = $this
-            ->get('sonata.delivery.selector')
-            ->getAvailableMethods($basket, $deliveryAddress);
-        
-        if ($deliveryMethods === false) {
-
-            // something went wrong while selecting
-            // redirect the user to the basket index (validation)
-            return $this->redirect($this->generateUrl('sonata_basket_index'));
-        }
-
-        $form = $this->getDeliveryForm($basket, $deliveryAddresses, $deliveryMethods);
+        $form = $this->getDeliveryForm($basket);
 
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bind($this->get('request')->get('shipping'));
+            $form->bind($this->get('request'));
 
             if ($form->isValid()) {
 
@@ -392,7 +401,7 @@ class BasketController extends Controller
             'basket' => $basket,
             'form'   => $form,
             'customer'   => $customer,
-            'delivery_methods' => $deliveryMethods
+            'deliveryMethods' => $form->get('deliveryMethod')->getOption('choices')
         ));
     }
 
