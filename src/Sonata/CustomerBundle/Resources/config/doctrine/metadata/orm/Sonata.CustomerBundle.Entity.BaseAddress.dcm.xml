@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\CustomerBundle\Entity\BaseAddress" >
 
-        <field name="current"       type="boolean"  column="current"/>
+        <field name="current"       type="boolean"  column="is_current"/>
         <field name="type"          type="integer"  column="type"/>
         <field name="name"          type="string"   column="name"  length="255"/>
         <field name="firstname"     type="string"   column="firstname"  length="255"/>

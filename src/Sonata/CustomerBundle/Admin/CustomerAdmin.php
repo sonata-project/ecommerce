@@ -17,17 +17,22 @@ class CustomerAdmin extends EntityAdmin
 {
 
     protected $class = 'Application\Sonata\CustomerBundle\Entity\Customer';
-
-    protected $formFields = array(
+    protected $baseControllerName = 'SonataCustomerBundle:CustomerAdmin';
+    
+    protected $form = array(
         'firstname',
         'lastname'
     );
 
-    protected $listFields = array(
-        'name' => array('code' => '__toString', 'identifier' => true),
+    protected $list = array(
+        'name' => array('code' => '__toString', 'identifier' => true, 'type' => 'string'),
         'createdAt'
     );
 
-    protected $baseControllerName = 'SonataCustomerBundle:CustomerAdmin';
+    protected $filter = array(
+        'name' => array('type' => 'string'),
+//        'createdAt'
+    );
+
 
 }

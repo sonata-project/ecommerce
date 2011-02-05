@@ -12,13 +12,19 @@
 namespace Sonata\CustomerBundle\Admin;
 
 use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
+use Sonata\BaseApplicationBundle\Form\FormMapper;
+use Sonata\BaseApplicationBundle\Datagrid\DatagridMapper;
+use Sonata\BaseApplicationBundle\Datagrid\ListMapper;
+
+use Application\Sonata\CustomerBundle\Entity\Address;
 
 class AddressAdmin extends EntityAdmin
 {
 
     protected $class = 'Application\Sonata\CustomerBundle\Entity\Address';
+    protected $baseControllerName = 'SonataCustomerBundle:AddressAdmin';
 
-    protected $formFields = array(
+    protected $form = array(
         'firstname',
         'lastname',
         'name',
@@ -29,7 +35,7 @@ class AddressAdmin extends EntityAdmin
         'postcode',
         'phone',
         'countryCode' => array('type' => 'country'),
-        'customer',
+        'customer'  => array('edit' => 'list'),
         'type',
         'current'
     );
@@ -47,21 +53,26 @@ class AddressAdmin extends EntityAdmin
 
     );
 
-    protected $listFields = array(
-        'fulladdress' => array('code' => 'getFullAddress', 'identifier' => true),
+    protected $list = array(
+        'fulladdress' => array('code' => 'getFullAddress', 'identifier' => true, 'type' => 'string'),
         'name',
         'current',
-        'typeCode',
+        'typeCode' => array('type' => 'string'),
         'customer'
     );
 
-    protected $baseControllerName = 'SonataCustomerBundle:AddressAdmin';
-
-    public function configureFormFields()
+    public function configureFormFields(FormMapper $form)
     {
-        $this->formFields['type']->setType('choice');
-        $this->formFields['type']->mergeOption('form_field_options', array(
-            'choices' => \Application\Sonata\CustomerBundle\Entity\Address::getTypesList()
-        ));
+        $form->add('type', array('choices' => Address::getTypesList()), array('type' => 'choice'));
+    }
+
+    public function configureDatagridFilters(DatagridMapper $datagrid)
+    {
+
+    }
+
+    public function configureListFields(ListMapper $list)
+    {
+
     }
 }

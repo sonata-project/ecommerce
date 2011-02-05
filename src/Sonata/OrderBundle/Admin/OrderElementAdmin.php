@@ -17,9 +17,9 @@ class OrderElementAdmin extends EntityAdmin
 {
 
     protected $class = 'Application\Sonata\OrderBundle\Entity\OrderElement';
+    protected $baseControllerName = 'SonataOrderBundle:OrderElementAdmin';
 
-
-    protected $formFields = array(
+    protected $form = array(
 //        'product',
         'productType',
         'quantity',
@@ -31,6 +31,6 @@ class OrderElementAdmin extends EntityAdmin
         'deliveryStatus'
     );
 
-    protected $baseControllerName = 'SonataOrderBundle:OrderElementAdmin';
+
     
 }

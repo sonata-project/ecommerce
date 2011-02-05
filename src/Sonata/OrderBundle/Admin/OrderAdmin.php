@@ -17,10 +17,11 @@ class OrderAdmin extends EntityAdmin
 {
 
     protected $class = 'Application\Sonata\OrderBundle\Entity\Order';
+    protected $baseControllerName = 'SonataOrderBundle:OrderAdmin';
 
-    protected $listFields = array(
+    protected $list = array(
         'id' => array('identifier' => true),
-        'reference',
+        'reference' => array('identifier' => true),
         'customer',
         'status',
         'paymentStatus',
@@ -28,7 +29,12 @@ class OrderAdmin extends EntityAdmin
         'totalExcl'
     );
 
-    protected $formFields = array(
+    protected $filter = array(
+        'reference',
+//        'customer'
+    );
+
+    protected $form = array(
         'currency',
         'status',
         'paymentStatus',
@@ -58,6 +64,6 @@ class OrderAdmin extends EntityAdmin
         'customer' => array('edit' => 'list')
     );
 
-    protected $baseControllerName = 'SonataOrderBundle:OrderAdmin';
+
     
 }

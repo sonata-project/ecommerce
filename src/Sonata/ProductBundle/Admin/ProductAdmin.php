@@ -17,24 +17,29 @@ class ProductAdmin extends EntityAdmin
 {
 
     protected $class = 'Application\Sonata\ProductBundle\Entity\Product';
+    protected $baseControllerName = 'SonataProductBundle:ProductAdmin';
 
-    protected $listFields = array(
+    protected $list = array(
         'enabled',
         'name' => array('identifier' => true),
         'price',
         'stock',
     );
 
-    protected $formFields = array(
+    protected $form = array(
         'name',
         'sku' => array('type' => 'string'),
         'description',
         'price',
         'vat',
         'stock',
-        'image' => array('type' => 'list')
+        'image' => array('edit' => 'list')
     );
 
-     protected $baseControllerName = 'SonataProductBundle:ProductAdmin';
+    protected $filter = array(
+        'name',
+//        'price',
+        'enabled'
+    );
 
 }
