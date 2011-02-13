@@ -9,6 +9,8 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 
+use Symfony\Component\DependencyInjection\Loader\FileLocator;
+
 /*
  * This file is part of the Sonata package.
  *
@@ -35,7 +37,7 @@ class DeliveryExtension extends Extension
      */
     public function configLoad($configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('delivery.xml');
 
         foreach ($configs as $config) {

@@ -14,7 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
-class ProductAdminController extends BaseProductAdminController
+class ProductDeliveryAdminController extends BaseProductAdminController
 {
 
 }

@@ -18,12 +18,13 @@ use Sonata\BaseApplicationBundle\Datagrid\ListMapper;
 
 use Application\Sonata\CustomerBundle\Entity\Address;
 
-class AddressAdmin extends EntityAdmin
+class AddressAdmin extends BaseCustomerAdmin
 {
 
     protected $class = 'Application\Sonata\CustomerBundle\Entity\Address';
     protected $baseControllerName = 'SonataCustomerBundle:AddressAdmin';
-
+    protected $parentAssociationMapping = 'customer';
+    
     protected $form = array(
         'firstname',
         'lastname',
@@ -35,7 +36,6 @@ class AddressAdmin extends EntityAdmin
         'postcode',
         'phone',
         'countryCode' => array('type' => 'country'),
-        'customer'  => array('edit' => 'list'),
         'type',
         'current'
     );
@@ -58,12 +58,15 @@ class AddressAdmin extends EntityAdmin
         'name',
         'current',
         'typeCode' => array('type' => 'string'),
-        'customer'
     );
 
     public function configureFormFields(FormMapper $form)
     {
         $form->add('type', array('choices' => Address::getTypesList()), array('type' => 'choice'));
+
+        if(!$this->isChild()) {
+            $form->add('customer', array(),  array('edit' => 'list'));
+        }
     }
 
     public function configureDatagridFilters(DatagridMapper $datagrid)
@@ -73,6 +76,14 @@ class AddressAdmin extends EntityAdmin
 
     public function configureListFields(ListMapper $list)
     {
+        if(!$this->isChild()) {
+            $list->add('customer');
+        }
+    }
 
+    public function getSideMenu($action)
+    {
+
+        return $this->getEditSideMenu();
     }
 }

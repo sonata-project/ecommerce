@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\FileLocator;
 
 /**
  * BasketExtension.
@@ -34,7 +35,7 @@ class BasketExtension extends Extension
      */
     public function configLoad($configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('basket.xml');
 
         foreach ($configs as $config) {

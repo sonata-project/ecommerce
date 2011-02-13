@@ -14,7 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Application\PaymentBundle\Entity\Transaction;
+use Application\Sonata\PaymentBundle\Entity\Transaction;
 
 class ProductController extends Controller
 {

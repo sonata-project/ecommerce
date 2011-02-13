@@ -17,7 +17,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-
+use Symfony\Component\DependencyInjection\Loader\FileLocator;
+    
 /**
  * UrlShortenerExtension.
  *
@@ -35,7 +36,7 @@ class PaymentExtension extends Extension
      */
     public function configLoad($configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('payment.xml');
 
         // create the payment method pool
@@ -93,7 +94,7 @@ class PaymentExtension extends Extension
     public function transformerLoad($configs, ContainerBuilder $container)
     {
 
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('transformer.xml');
 
         $pool_definition = new Definition('Sonata\Component\Transformer\Pool');
@@ -127,7 +128,7 @@ class PaymentExtension extends Extension
     public function generatorLoad($configs, ContainerBuilder $container)
     {
 
-        $loader = new XmlFileLoader($container, __DIR__.'/../Resources/config');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('generator.xml');
 
         foreach ($configs as $config) {

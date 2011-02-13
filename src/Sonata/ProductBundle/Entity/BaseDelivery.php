@@ -60,8 +60,6 @@ abstract class BaseDelivery
     public function setProduct($product)
     {
         $this->product = $product;
-
-        $product->addDelivery($this);
     }
 
     /**
@@ -212,5 +210,16 @@ abstract class BaseDelivery
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    public function prePresist()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+    }
+
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime;
     }
 }

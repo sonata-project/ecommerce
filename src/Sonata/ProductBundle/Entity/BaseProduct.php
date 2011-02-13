@@ -425,7 +425,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      *
      * @param Application\Sonata\MediaBundle\Entity\Media $image
      */
-    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image)
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
     {
         $this->image = $image;
     }
@@ -453,5 +453,21 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     public function addVariation($variation)
     {
         $this->variations[] = $variation;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime;
+    }
+
+    public function prePersist()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 }

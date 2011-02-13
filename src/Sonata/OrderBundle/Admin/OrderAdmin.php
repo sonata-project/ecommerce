@@ -12,12 +12,16 @@
 namespace Sonata\OrderBundle\Admin;
 
 use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
+use Sonata\BaseApplicationBundle\Form\FormMapper;
+use Sonata\BaseApplicationBundle\Datagrid\DatagridMapper;
+use Sonata\BaseApplicationBundle\Datagrid\ListMapper;
 
 class OrderAdmin extends EntityAdmin
 {
 
     protected $class = 'Application\Sonata\OrderBundle\Entity\Order';
     protected $baseControllerName = 'SonataOrderBundle:OrderAdmin';
+    protected $parentAssociationMapping = 'customer';
 
     protected $list = array(
         'id' => array('identifier' => true),
@@ -61,9 +65,14 @@ class OrderAdmin extends EntityAdmin
         'shippingEmail',
         'shippingMobile',
         'orderElements' => array('edit' => 'inline', 'inline' => 'table'),
-        'customer' => array('edit' => 'list')
+//        'customer' => array('edit' => 'list')
     );
 
 
-    
+    public function configureFormFields(FormMapper $form)
+    {
+        if(!$this->isChild()) {
+            $form->add('customer', array(), array('edit' => 'list'));
+        }
+    }
 }

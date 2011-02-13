@@ -11,9 +11,10 @@
 
 namespace Sonata\ProductBundle\Admin;
 
-use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
+use Knplabs\MenuBundle\Menu;
+use Knplabs\MenuBundle\MenuItem;
 
-class ProductAdmin extends EntityAdmin
+class ProductAdmin extends BaseProductAdmin
 {
 
     protected $class = 'Application\Sonata\ProductBundle\Entity\Product';
@@ -42,4 +43,51 @@ class ProductAdmin extends EntityAdmin
         'enabled'
     );
 
+
+    public function getSideMenu($action, $childAdmin = false)
+    {
+
+        if ($childAdmin || in_array($action, array('edit'))) {
+            return $this->getEditSideMenu();
+        }
+
+        return false;
+    }
+
+    public function getEditSideMenu()
+    {
+
+        $menu = new Menu;
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $productId = $this->container->get('request')->get('id');
+
+        $menu->addChild(
+            $this->trans('link_edit_product', array(), 'SonataProductBundle'),
+            $admin->generateUrl('edit', array('id' => $productId))
+        );
+
+        $menu->addChild(
+            $this->trans('link_variation_list', array(), 'SonataProductBundle'),
+            $admin->generateUrl('variation_list', array('id' => $productId))
+        );
+
+        $menu->addChild(
+            $this->trans('link_variation_list', array(), 'SonataProductBundle'),
+            $admin->generateUrl('variation_list', array('id' => $productId))
+        );
+
+        $menu->addChild(
+            $this->trans('link_category_list', array(), 'SonataProductBundle'),
+            $admin->generateUrl('category', array('id' => $productId))
+        );
+
+        $menu->addChild(
+            $this->trans('link_delivery_list', array(), 'SonataProductBundle'),
+            $admin->generateUrl('product_delivery.list', array('id' => $productId))
+        );
+
+        return $menu;
+    }
 }
