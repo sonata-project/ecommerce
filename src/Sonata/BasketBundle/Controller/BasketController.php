@@ -94,7 +94,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:index.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
             'basket' => $this->get('sonata.basket'),
             'form'   => $form,
         ));
@@ -185,7 +185,7 @@ class BasketController extends Controller
     {
 
 //        throw new \Exception();
-        return $this->render('SonataBasketBundle:Basket:header_preview.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:header_preview.html.twig', array(
              'basket' => $this->get('sonata.basket')
         ));
     }
@@ -302,7 +302,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:payment_step.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:payment_step.html.twig', array(
             'basket' => $basket,
             'form'   => $form,
             'customer'   => $customer,
@@ -397,7 +397,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:delivery_step.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:delivery_step.html.twig', array(
             'basket' => $basket,
             'form'   => $form,
             'customer'   => $customer,
@@ -427,7 +427,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:final_review_step.twig.html', array(
+        return $this->render('SonataBasketBundle:Basket:final_review_step.html.twig', array(
             'basket'    => $basket,
             'tac_error' => $this->get('request')->getMethod() == 'POST'
         ));
