@@ -12,12 +12,12 @@
 namespace Sonata\ProductBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Resource\FileResource;
+use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\FileLocator;
+use Symfony\Component\Config\FileLocator;
     
 /**
  * ProductExtension.
@@ -25,7 +25,8 @@ use Symfony\Component\DependencyInjection\Loader\FileLocator;
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class ProductExtension extends Extension {
+class SonataProductExtension extends Extension
+{
 
     /**
      * Loads the product configuration.
@@ -33,22 +34,22 @@ class ProductExtension extends Extension {
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function configLoad($configs, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container)
     {
+        $config = call_user_func_array('array_merge_recursive', $config);
+        
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('product.xml');
 
         $definition = new Definition('Sonata\Component\Product\Pool');
 
-        foreach ($configs as $config) {
-            foreach ($config['products'] as $product) {
+        foreach ($config['products'] as $product) {
 
-                $definition->addMethodCall('addProduct', array($product));
-            }
-
-            $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
-            $container->setDefinition('sonata.product.pool', $definition);
+            $definition->addMethodCall('addProduct', array($product));
         }
+
+        $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
+        $container->setDefinition('sonata.product.pool', $definition);
     }
 
     /**

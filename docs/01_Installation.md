@@ -66,7 +66,7 @@ Installation
 
 * edit your config.yml and add the following lines
 
-        sonata_delivery.config:
+        sonata_delivery:
             pool: # all available delivery method
                 class: Sonata\Component\Delivery\Pool
                 methods:
@@ -75,15 +75,15 @@ Installation
             selector:
                 class: Sonata\Component\Delivery\Selector
             
-        sonata_payment.config:
+        sonata_payment:
             methods:
                 - { id: free, name: Free, enabled: true, class: Sonata\Component\Payment\Free }
 
-        sonata_basket.config:
+        sonata_basket
             class: Sonata\Component\Basket\Basket
 
 
-        sonata_product.config:
+        sonata_product:
             products:
                 - { id: bottle, name: Bottle, enabled: true, class: Application\Sonata\ProductBundle\Entity\Bottle }
 
@@ -91,7 +91,7 @@ Installation
                 model:
                     user: Application\FOS\UserBundle\Entity\User # you must define your own user class
 
-        sonata_payment.config:
+        sonata_payment:
             methods:
                 free:
                     name: Free

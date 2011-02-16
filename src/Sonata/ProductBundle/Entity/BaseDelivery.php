@@ -212,7 +212,7 @@ abstract class BaseDelivery
         return $this->createdAt;
     }
 
-    public function prePresist()
+    public function prePersist()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;

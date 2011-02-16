@@ -73,7 +73,7 @@ class BasketController extends Controller
         $form = $form ?: $this->getBasketForm();
 
         // always validate the basket
-        if (!$form->isBound())
+        if (!$form->isSubmitted())
         {
             // todo : move this somewhere else
             if ($violations = $this->get('validator')->validate($form, $form->getValidationGroups())) {

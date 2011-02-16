@@ -34,7 +34,7 @@ class DeliveryMethodTransformer extends Configurable implements ValueTransformer
      * @param array $ids
      * @param Collection $collection
      */
-    public function reverseTransform($value, $originalValue)
+    public function reverseTransform($value)
     {
 
        return $this->getOption('delivery_pool')->getMethod($value);

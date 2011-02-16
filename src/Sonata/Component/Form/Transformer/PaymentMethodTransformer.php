@@ -33,7 +33,7 @@ class PaymentMethodTransformer extends Configurable implements ValueTransformerI
      * @param array $ids
      * @param Collection $collection
      */
-    public function reverseTransform($value, $originalValue)
+    public function reverseTransform($value)
     {
 
        return $this->getOption('payment_pool')->getMethod($value);
