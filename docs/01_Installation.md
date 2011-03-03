@@ -130,19 +130,62 @@ Installation
             resource: @SonataInvoiceBundle/Resources/config/routing/invoice.xml
             prefix: /shop/user/invoice
 
-        # sonata admin controller
-        sonata_admin_product:
-            resource: @SonataProductBundle/Resources/config/routing/product_admin.xml
-            prefix: /admin/shop/product
+* add these lines into the admin (AdminBundle)
 
-        sonata_admin_product:
-            resource: @SonataProductBundle/Resources/config/routing/category_admin.xml
-            prefix: /admin/shop/category
+        product:
+            label:      Product
+            group:      Shop
+            class:      Sonata\ProductBundle\Admin\ProductAdmin
+            entity:     Application\Sonata\ProductBundle\Entity\Product
+            controller: SonataProductBundle:ProductAdmin
+            children:
+                product_delivery:
+                    label:      Product Delivery
+                    group:      Shop
+                    class:      Sonata\ProductBundle\Admin\ProductDeliveryAdmin
+                    entity:     Application\Sonata\ProductBundle\Entity\Delivery
+                    controller: SonataProductBundle:ProductDeliveryAdmin
 
-        sonata_admin_order:
-            resource: @SonataOrderBundle/Resources/config/routing/order_admin.xml
-            prefix: /admin/shop/order
+        order:
+            label:      Order
+            group:      Shop
+            class:      Sonata\OrderBundle\Admin\OrderAdmin
+            entity:     Application\Sonata\OrderBundle\Entity\Order
+            controller: SonataOrderBundle:OrderAdmin
+            children:
+                order_element:
+                    label:      Order Element
+                    group:      Shop
+                    class:      Sonata\OrderBundle\Admin\OrderElementAdmin
+                    entity:     Application\Sonata\OrderBundle\Entity\OrderElement
+                    controller: SonataOrderBundle:OrderElementAdmin
 
-        sonata_admin_order:
-            resource: @SonataInvoiceBundle/Resources/config/routing/invoice_admin.xml
-            prefix: /admin/shop/invoice
+        order_element:
+            label:      Order Element
+            group:      Shop
+            class:      Sonata\OrderBundle\Admin\OrderElementAdmin
+            entity:     Application\Sonata\OrderBundle\Entity\OrderElement
+            controller: SonataOrderBundle:OrderElementAdmin
+            options:
+                show_in_dashboard: false
+
+        customer:
+            label:      Customer
+            group:      Shop
+            class:      Sonata\CustomerBundle\Admin\CustomerAdmin
+            entity:     Application\Sonata\CustomerBundle\Entity\Customer
+            controller: SonataCustomerBundle:CustomerAdmin
+            children:
+                order:
+                    label:      Order
+                    group:      Shop
+                    class:      Sonata\OrderBundle\Admin\OrderAdmin
+                    entity:     Application\Sonata\OrderBundle\Entity\Order
+                    controller: SonataOrderBundle:OrderAdmin
+
+                address:
+                    label:      Address
+                    group:      Shop
+                    class:      Sonata\CustomerBundle\Admin\AddressAdmin
+                    entity:     Application\Sonata\CustomerBundle\Entity\Address
+                    controller: SonataCustomerBundle:AddressAdmin

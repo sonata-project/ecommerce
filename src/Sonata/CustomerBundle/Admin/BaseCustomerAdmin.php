@@ -11,7 +11,7 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
-use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\EntityAdmin;
 
     
 abstract class BaseCustomerAdmin extends EntityAdmin

@@ -14,8 +14,6 @@ namespace Sonata\ProductBundle\Admin;
 class ProductDeliveryAdmin extends BaseProductAdmin
 {
 
-    protected $class = 'Application\Sonata\ProductBundle\Entity\Delivery';
-    protected $baseControllerName = 'SonataProductBundle:ProductDeliveryAdmin';
     protected $parentAssociationMapping = 'product';
     
     protected $list = array(

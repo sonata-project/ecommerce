@@ -56,13 +56,11 @@ class SonataBasketExtension extends Extension
         // define the basket service which depends on the basket loader (load the basket from the session)
         $definition = new Definition($config['class']);
         $definition
-//                ->setSynthetic(true)
             ->setFactoryService('sonata.basket.loader')
             ->setFactoryMethod('getBasket')
         ;
 
         $container->setDefinition('sonata.basket', $definition);
-
 
         // initialize the basket elements validator
         $definition = new Definition('Sonata\\Component\\Form\\BasketElementCollectionValidator');
@@ -73,9 +71,7 @@ class SonataBasketExtension extends Extension
          ;
 
         $container->setDefinition('sonata.basket.elements.validator', $definition);
-
     }
-
 
     /**
      * Returns the base path for the XSD files.

@@ -17,9 +17,6 @@ use Knplabs\MenuBundle\MenuItem;
 class CustomerAdmin extends BaseCustomerAdmin
 {
 
-    protected $class = 'Application\Sonata\CustomerBundle\Entity\Customer';
-    protected $baseControllerName = 'SonataCustomerBundle:CustomerAdmin';
-
     protected $form = array(
         'firstname',
         'lastname'

@@ -11,16 +11,13 @@
 
 namespace Sonata\OrderBundle\Admin;
 
-use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
-use Sonata\BaseApplicationBundle\Form\FormMapper;
-use Sonata\BaseApplicationBundle\Datagrid\DatagridMapper;
-use Sonata\BaseApplicationBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class OrderAdmin extends EntityAdmin
 {
-
-    protected $class = 'Application\Sonata\OrderBundle\Entity\Order';
-    protected $baseControllerName = 'SonataOrderBundle:OrderAdmin';
     protected $parentAssociationMapping = 'customer';
 
     protected $list = array(

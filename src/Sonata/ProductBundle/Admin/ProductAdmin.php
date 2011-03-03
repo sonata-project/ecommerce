@@ -17,9 +17,6 @@ use Knplabs\MenuBundle\MenuItem;
 class ProductAdmin extends BaseProductAdmin
 {
 
-    protected $class = 'Application\Sonata\ProductBundle\Entity\Product';
-    protected $baseControllerName = 'SonataProductBundle:ProductAdmin';
-
     protected $list = array(
         'enabled',
         'name' => array('identifier' => true),
@@ -90,4 +87,6 @@ class ProductAdmin extends BaseProductAdmin
 
         return $menu;
     }
+
+    
 }

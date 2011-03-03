@@ -11,13 +11,11 @@
 
 namespace Sonata\OrderBundle\Admin;
 
-use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\EntityAdmin;
 
 class OrderElementAdmin extends EntityAdmin
 {
 
-    protected $class = 'Application\Sonata\OrderBundle\Entity\OrderElement';
-    protected $baseControllerName = 'SonataOrderBundle:OrderElementAdmin';
     protected $parent = 'order';
 
     protected $form = array(

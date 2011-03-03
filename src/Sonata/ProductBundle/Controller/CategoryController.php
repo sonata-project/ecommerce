@@ -14,7 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Sonata\BaseApplicationBundle\Tool\DoctrinePager as Pager;
+use Sonata\AdminBundle\Tool\DoctrinePager as Pager;
 use Doctrine\ORM\Query\Expr;
 
 class CategoryController extends Controller

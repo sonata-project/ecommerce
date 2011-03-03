@@ -11,7 +11,7 @@
 
 namespace Sonata\ProductBundle\Admin;
 
-use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\EntityAdmin;
 use Knplabs\MenuBundle\Menu;
 use Knplabs\MenuBundle\MenuItem;
     

@@ -11,10 +11,10 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
-use Sonata\BaseApplicationBundle\Admin\EntityAdmin;
-use Sonata\BaseApplicationBundle\Form\FormMapper;
-use Sonata\BaseApplicationBundle\Datagrid\DatagridMapper;
-use Sonata\BaseApplicationBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 
 use Application\Sonata\CustomerBundle\Entity\Address;
 
