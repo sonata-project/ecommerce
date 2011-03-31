@@ -22,7 +22,7 @@ class AddressAdmin extends BaseCustomerAdmin
 {
 
     protected $class = 'Application\Sonata\CustomerBundle\Entity\Address';
-    protected $baseControllerName = 'SonataCustomerBundle:AddressAdmin';
+    protected $baseControllerName = 'SonataCustomer:AddressAdmin';
     protected $parentAssociationMapping = 'customer';
     
     protected $form = array(

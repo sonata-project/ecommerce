@@ -107,27 +107,27 @@ Installation
 
         # sonata front controller
         sonata_user:
-            resource: @SonataUserBundle/Resources/config/routing/user.xml
+            resource: @SonataUser/Resources/config/routing/user.xml
             prefix: /shop/user
 
         sonata_order:
-            resource: @SonataOrderBundle/Resources/config/routing/order.xml
+            resource: @SonataOrder/Resources/config/routing/order.xml
             prefix: /shop/user/invoice
 
         sonata_product:
-            resource: @SonataProductBundle/Resources/config/routing/product.xml
+            resource: @SonataProduct/Resources/config/routing/product.xml
             prefix: /shop/product
 
         sonata_category:
-            resource: @SonataProductBundle/Resources/config/routing/category.xml
+            resource: @SonataProduct/Resources/config/routing/category.xml
             prefix: /shop/category
 
         sonata_payment:
-            resource: @SonataPaymentBundle/Resources/config/routing/payment.xml
+            resource: @SonataPayment/Resources/config/routing/payment.xml
             prefix: /shop/payment
 
         sonata_invoice:
-            resource: @SonataInvoiceBundle/Resources/config/routing/invoice.xml
+            resource: @SonataInvoice/Resources/config/routing/invoice.xml
             prefix: /shop/user/invoice
 
 * add these lines into the admin (AdminBundle)

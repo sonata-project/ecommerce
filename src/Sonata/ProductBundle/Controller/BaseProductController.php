@@ -33,7 +33,7 @@ abstract class BaseProductController extends Controller
             $form = $repository->getAddBasketForm($product, $this->get('validator'));
         }
 
-        return $this->render(sprintf('SonataProductBundle:%s:view.html.twig', ucfirst($this->getProductCode($product))), array(
+        return $this->render(sprintf('SonataProduct:%s:view.html.twig', ucfirst($this->getProductCode($product))), array(
            'product' => $product,
            'form'    => $form,
         ));
@@ -42,7 +42,7 @@ abstract class BaseProductController extends Controller
     public function renderFormBasketElementAction($fieldGroup, $basketElement)
     {
 
-        return $this->render(sprintf('SonataProductBundle:%s:form_basket_element.html.twig', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
+        return $this->render(sprintf('SonataProduct:%s:form_basket_element.html.twig', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
            'fieldGroup'    => $fieldGroup,
            'basketElement' => $basketElement,
         ));
@@ -50,7 +50,7 @@ abstract class BaseProductController extends Controller
 
     public function renderFinalReviewBasketElementAction($basketElement)
     {
-        return $this->render(sprintf('SonataProductBundle:%s:final_review_basket_element.html.twig', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
+        return $this->render(sprintf('SonataProduct:%s:final_review_basket_element.html.twig', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
            'basketElement' => $basketElement,
         ));
 

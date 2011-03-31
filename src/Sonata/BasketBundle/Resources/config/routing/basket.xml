@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<routes xmlns="http://www.symfony-project.org/schema/routing"
+<routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="sonata_basket_index" pattern="/">
-        <default key="_controller">SonataBasketBundle:Basket:index</default>
+        <default key="_controller">SonataBasket:Basket:index</default>
     </route>
 
     <route id="sonata_basket_add_product" pattern="/add-product">
-        <default key="_controller">SonataBasketBundle:Basket:addProduct</default>
+        <default key="_controller">SonataBasket:Basket:addProduct</default>
     </route>
 
     <route id="sonata_basket_update" pattern="/update">
-        <default key="_controller">SonataBasketBundle:Basket:update</default>
+        <default key="_controller">SonataBasket:Basket:update</default>
     </route>
 
     <route id="sonata_basket_reset" pattern="/reset">
-        <default key="_controller">SonataBasketBundle:Basket:reset</default>
+        <default key="_controller">SonataBasket:Basket:reset</default>
     </route>
 
     <route id="sonata_basket_authentification" pattern="/step/authentification">
-        <default key="_controller">SonataBasketBundle:Basket:authentificationStep</default>
+        <default key="_controller">SonataBasket:Basket:authentificationStep</default>
     </route>
 
     <route id="sonata_basket_delivery" pattern="/step/delivery">
-        <default key="_controller">SonataBasketBundle:Basket:deliveryStep</default>
+        <default key="_controller">SonataBasket:Basket:deliveryStep</default>
     </route>
 
     <route id="sonata_basket_payment" pattern="/step/payment">
-        <default key="_controller">SonataBasketBundle:Basket:paymentStep</default>
+        <default key="_controller">SonataBasket:Basket:paymentStep</default>
     </route>
 
     <route id="sonata_basket_final" pattern="/step/final-review">
-        <default key="_controller">SonataBasketBundle:Basket:finalReviewStep</default>
+        <default key="_controller">SonataBasket:Basket:finalReviewStep</default>
     </route>
 
 </routes>

@@ -1,9 +1,9 @@
 <?php
 
 $vendor_dir = __DIR__.'/../../src/vendor';
-require_once $vendor_dir.'/symfony/src/Symfony/Component/HttpFoundation/UniversalClassLoader.php';
+require_once $vendor_dir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
-use Symfony\Component\HttpFoundation\UniversalClassLoader;
+use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(

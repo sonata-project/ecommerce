@@ -14,11 +14,12 @@ namespace Sonata\BasketBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\ChoiceField;
 use Symfony\Component\Form\CollectionField;
 use Symfony\Component\Form\EntityChoiceField;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
@@ -94,7 +95,7 @@ class BasketController extends Controller
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
+        return $this->render('SonataBasket:Basket:index.html.twig', array(
             'basket' => $this->get('sonata.basket'),
             'form'   => $form,
         ));
@@ -115,10 +116,10 @@ class BasketController extends Controller
             // update the basket store in session
             $this->get('session')->set('sonata/basket', $basket);
 
-            return $this->redirect($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
-        return $this->forward('SonataBasketBundle:Basket:index', array(
+        return $this->forward('SonataBasket:Basket:index', array(
            'form' => $form
         ));
     }
@@ -164,11 +165,11 @@ class BasketController extends Controller
                 $repository->basketAddProduct($basket,  $product, $form->getData());
             }
 
-            return $this->redirect($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
         
         // an error occur, forward the request to the view
-        return $this->forward('SonataProductBundle:Product:view', array(
+        return $this->forward('SonataProduct:Product:view', array(
             'productId' => $product,
             'slug'       => $product->getSlug(),
         ));
@@ -178,14 +179,14 @@ class BasketController extends Controller
     {
         $this->get('sonata.basket')->reset();
         
-        return $this->redirect($this->generateUrl('sonata_basket_index'));
+        return new RedirectResponse($this->generateUrl('sonata_basket_index'));
     }
 
     public function headerPreviewAction()
     {
 
 //        throw new \Exception();
-        return $this->render('SonataBasketBundle:Basket:header_preview.html.twig', array(
+        return $this->render('SonataBasket:Basket:header_preview.html.twig', array(
              'basket' => $this->get('sonata.basket')
         ));
     }
@@ -202,7 +203,7 @@ class BasketController extends Controller
 
         $this->get('sonata.basket')->setCustomer(count($customers) > 0 ? $customers[0] : null);
 
-        return $this->redirect($this->generateUrl('sonata_basket_delivery'));
+        return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
     }
 
     public function getPaymentForm($basket)
@@ -270,7 +271,7 @@ class BasketController extends Controller
 
         if ($basket->countBasketElements() == 0) {
 
-            return $this->redirect($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         $customer = $basket->getCustomer();
@@ -287,7 +288,7 @@ class BasketController extends Controller
                 throw $e;
             }
             
-            return $this->redirect($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         if ($this->get('request')->getMethod() == 'POST') {
@@ -298,11 +299,11 @@ class BasketController extends Controller
                 // update the basket store in session
                 $this->get('session')->set('sonata/basket', $form->getData());
 
-                return $this->redirect($this->generateUrl('sonata_basket_final'));
+                return new RedirectResponse($this->generateUrl('sonata_basket_final'));
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:payment_step.html.twig', array(
+        return $this->render('SonataBasket:Basket:payment_step.html.twig', array(
             'basket' => $basket,
             'form'   => $form,
             'customer'   => $customer,
@@ -374,7 +375,7 @@ class BasketController extends Controller
 
         if ($basket->countBasketElements() == 0) {
 
-            return $this->redirect($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         $customer = $basket->getCustomer();
@@ -393,11 +394,11 @@ class BasketController extends Controller
                 // update the basket store in session
                 $this->get('session')->set('sonata/basket', $form->getData());
 
-                return $this->redirect($this->generateUrl('sonata_basket_payment'));
+                return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:delivery_step.html.twig', array(
+        return $this->render('SonataBasket:Basket:delivery_step.html.twig', array(
             'basket' => $basket,
             'form'   => $form,
             'customer'   => $customer,
@@ -416,18 +417,18 @@ class BasketController extends Controller
 
             // todo : add flash message
 
-            return $this->redirect($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         if ($this->get('request')->getMethod() == 'POST' ) {
 
             if ($this->get('request')->get('tac')) {
                 // send the basket to the payment callback
-                return $this->forward('SonataPaymentBundle:Payment:callbank');
+                return $this->forward('SonataPayment:Payment:callbank');
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:final_review_step.html.twig', array(
+        return $this->render('SonataBasket:Basket:final_review_step.html.twig', array(
             'basket'    => $basket,
             'tac_error' => $this->get('request')->getMethod() == 'POST'
         ));

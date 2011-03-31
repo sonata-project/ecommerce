@@ -14,7 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Sonata\AdminBundle\Tool\DoctrinePager as Pager;
+use Sonata\AdminBundle\Datagrid\ORM\Pager;
 use Doctrine\ORM\Query\Expr;
 
 class CategoryController extends Controller
@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $pager->setPage($this->get('request')->get('page', 1));
         $pager->init();
 
-        return $this->render('SonataProductBundle:Category:index.html.twig', array(
+        return $this->render('SonataProduct:Category:index.html.twig', array(
             'pager' => $pager,
         ));
         
@@ -67,7 +67,7 @@ class CategoryController extends Controller
             throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $categoryId));
         }
 
-        return $this->render('SonataProductBundle:Category:view.html.twig', array(
+        return $this->render('SonataProduct:Category:view.html.twig', array(
            'category' => $category
         ));
     }
@@ -95,7 +95,7 @@ class CategoryController extends Controller
         $pager->setMaxPerPage(30);
         $pager->init();
 
-        return $this->render('SonataProductBundle:Category:list_sub_categories.html.twig', array(
+        return $this->render('SonataProduct:Category:list_sub_categories.html.twig', array(
             'pager' => $pager
         ));
     }
@@ -126,7 +126,7 @@ class CategoryController extends Controller
         $pager->setMaxPerPage(30);
         $pager->init();
 
-        return $this->render('SonataProductBundle:Category:list_products.html.twig', array(
+        return $this->render('SonataProduct:Category:list_products.html.twig', array(
             'pager' => $pager
         ));
     }
@@ -139,7 +139,7 @@ class CategoryController extends Controller
 
         $category = $category ?: $repository->getRootCategory();
 
-        return $this->render('SonataProductBundle:Category:side_menu_category.html.twig', array(
+        return $this->render('SonataProduct:Category:side_menu_category.html.twig', array(
           'root_category' => $category,
           'depth'         => $depth,
           'deep'          => $deep + 1

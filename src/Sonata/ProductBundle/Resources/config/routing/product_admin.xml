@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<routes xmlns="http://www.symfony-project.org/schema/routing"
+<routes xmlns="http://symfony.com/schema/routing"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.symfony-project.org/schema/routing http://www.symfony-project.org/schema/routing/routing-1.0.xsd">
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
 
     <route id="sonata_admin_product_variations" pattern="/{productId}/variations">
-        <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
+        <default key="_controller">SonataProduct:ProductAdmin:edit</default>
     </route>
 
     <route id="sonata_admin_product_delivery_index" pattern="/{productId}/delivery">
-        <default key="_controller">SonataProductBundle:ProductAdmin:deliveryIndex</default>
+        <default key="_controller">SonataProduct:ProductAdmin:deliveryIndex</default>
     </route>
 
     <route id="sonata_admin_product_delivery_edit" pattern="/{productId}/delivery/{deliveryId}/edit">
-        <default key="_controller">SonataProductBundle:ProductAdmin:deliveryEdit</default>
+        <default key="_controller">SonataProduct:ProductAdmin:deliveryEdit</default>
     </route>
 
     <route id="sonata_admin_product_delivery_update" pattern="/{productId}/delivery/update">
-        <default key="_controller">SonataProductBundle:ProductAdmin:deliveryUpdate</default>
+        <default key="_controller">SonataProduct:ProductAdmin:deliveryUpdate</default>
     </route>
 </routes>

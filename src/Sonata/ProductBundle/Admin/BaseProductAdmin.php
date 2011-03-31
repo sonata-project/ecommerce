@@ -11,11 +11,13 @@
 
 namespace Sonata\ProductBundle\Admin;
 
-use Sonata\AdminBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Route\RouteCollection;
+
 use Knplabs\MenuBundle\Menu;
 use Knplabs\MenuBundle\MenuItem;
     
-abstract class BaseProductAdmin extends EntityAdmin
+abstract class BaseProductAdmin extends Admin
 {
     
     /**
@@ -25,7 +27,7 @@ abstract class BaseProductAdmin extends EntityAdmin
      */
     public function getEditTemplate()
     {
-        return 'SonataProductBundle:ProductAdmin:edit.html.twig';
+        return 'SonataProduct:ProductAdmin:edit.html.twig';
     }
 
     /**
@@ -35,29 +37,17 @@ abstract class BaseProductAdmin extends EntityAdmin
      */
     public function getListTemplate()
     {
-        return 'SonataProductBundle:ProductAdmin:list.html.twig';
+        return 'SonataProduct:ProductAdmin:list.html.twig';
     }
 
-    public function configureUrls()
-    {
 
+    public function configureRoutes(RouteCollection $collection)
+    {
         $admin = $this->isChild() ? $this->getParent() : $this;
         
-        $this->urls['duplicate'] = array(
-            'name'      => $admin->getBaseRouteName().'_duplicate',
-            'pattern'   => $admin->getBaseRoutePattern().'/{id}/duplicate',
-        );
-
-        $this->urls['variation_list'] = array(
-            'name'      => $admin->getBaseRouteName().'_variation_list',
-            'pattern'   => $admin->getBaseRoutePattern().'/{id}/variation-list',
-        );
-
-        $this->urls['category'] = array(
-            'name'      => $admin->getBaseRouteName().'_category',
-            'pattern'   => $admin->getBaseRoutePattern().'/{id}/category',
-        );
-
+        $collection->add('duplicate', $admin->getRouterIdParameter().'/duplicate');
+        $collection->add('variation_list', $admin->getRouterIdParameter().'/variation-list');
+        $collection->add('category', $admin->getRouterIdParameter().'/category');
     }
 
 }
