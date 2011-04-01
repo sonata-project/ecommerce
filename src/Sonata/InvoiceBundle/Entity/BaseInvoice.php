@@ -1,11 +1,20 @@
 <?php
-
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Sonata\InvoiceBundle\Entity;
+
+use Sonata\Component\Invoice\InvoiceInterface;
 
 /**
  * Sonata\InvoiceBundle\Entity\BaseInvoice
  */
-abstract class BaseInvoice
+abstract class BaseInvoice implements InvoiceInterface
 {
     /**
      * @var string $reference
@@ -13,7 +22,7 @@ abstract class BaseInvoice
     protected $reference;
 
     /**
-     * @var integer $user_id
+     * @var integer $userId
      */
     protected $customerId;
 
@@ -93,6 +102,11 @@ abstract class BaseInvoice
     protected $mobile;
 
     /**
+     * @var Application\FOS\UserBundle\Entity\User
+     */
+    protected $user;
+
+    /**
      * Set reference
      *
      * @param string $reference
@@ -113,23 +127,23 @@ abstract class BaseInvoice
     }
 
     /**
-     * Set user_id
+     * Set userId
      *
      * @param integer $userId
      */
     public function setUserId($userId)
     {
-        $this->user_id = $userId;
+        $this->userId = $userId;
     }
 
     /**
-     * Get user_id
+     * Get userId
      *
      * @return integer $userId
      */
     public function getUserId()
     {
-        return $this->user_id;
+        return $this->userId;
     }
 
     /**
@@ -431,10 +445,6 @@ abstract class BaseInvoice
     {
         return $this->mobile;
     }
-    /**
-     * @var Application\FOS\UserBundle\Entity\User
-     */
-    protected $user;
 
     /**
      * Set user

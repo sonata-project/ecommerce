@@ -11,8 +11,10 @@
 
 namespace Sonata\Component\Payment;
 
-use Application\PaymentBundle\Entity\Transaction;
+use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Product\ProductInterface;
 
 /**
  * A free delivery method, used this only for testing
@@ -35,11 +37,10 @@ class Paypal extends BasePaypal
 
     /**
      *
-     * @param  $basket
-     * @param  $user
+     * @param OrderInterface
      * @return Response object
      */
-    public function callbank($order)
+    public function callbank(OrderInterface $order)
     {
 
         $params = array(
@@ -135,72 +136,76 @@ class Paypal extends BasePaypal
      * 3. Your server must then validate the notification to ensure that it is legitimate.
      *
      *
-     *
+     * @param TransactionInterface $transaction
      * @return integer the order status
      */
-    public function isCallbackValid($transaction)
+    public function isCallbackValid(TransactionInterface $transaction)
     {
         $order          = $transaction->getOrder();
 
         if (!$this->isRequestValid($transaction)) {
 
-            $transaction->setState(Transaction::STATE_KO);
-            $transaction->setStatusCode(Transaction::STATUS_WRONG_CALLBACK);
+            $transaction->setState(TransactionInterface::STATE_KO);
+            $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
             
             return false;
         }
 
         if ($order->isValidated()) {
 
-            $transaction->setState(Transaction::STATE_KO);
-            $transaction->setStatusCode(Transaction::STATUS_WRONG_CALLBACK);
+            $transaction->setState(TransactionInterface::STATE_KO);
+            $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
             
             return false;
         }
 
         if ($transaction->get('payment_status') === 'Pending') {
 
-            $transaction->setState(Transaction::STATE_OK);
-            $transaction->setStatusCode(Transaction::STATUS_PENDING);
+            $transaction->setState(TransactionInterface::STATE_OK);
+            $transaction->setStatusCode(TransactionInterface::STATUS_PENDING);
 
             return true;
         }
 
         if ($transaction->get('payment_status') === 'Completed') {
 
-            $transaction->setState(Transaction::STATE_OK);
-            $transaction->setStatusCode(Transaction::STATUS_VALIDATED);
+            $transaction->setState(TransactionInterface::STATE_OK);
+            $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
             return true;
         }
 
         if ($transaction->get('payment_status') === 'Cancelled') {
 
-            $transaction->setState(Transaction::STATE_OK);
-            $transaction->setStatusCode(Transaction::STATUS_CANCELLED);
+            $transaction->setState(TransactionInterface::STATE_OK);
+            $transaction->setStatusCode(TransactionInterface::STATUS_CANCELLED);
 
             return true;
         }
 
-        $transaction->setState(Transaction::STATE_KO);
-        $transaction->setStatusCode(Transaction::STATUS_UNKNOWN);
+        $transaction->setState(TransactionInterface::STATE_KO);
+        $transaction->setStatusCode(TransactionInterface::STATUS_UNKNOWN);
 
         return false;
     }
 
-    public function handleError($transaction)
+    /**
+     * @param TransactionInterface $transaction
+     * @return void
+     */
+    public function handleError(TransactionInterface $transaction)
     {
         $order = $transaction->getOrder();
 
         switch ($transaction->getStatusCode()) {
-            case Transaction::STATUS_ORDER_UNKNOWN:
+            case TransactionInterface::STATUS_ORDER_UNKNOWN:
 
                 if ($this->getLogger()) {
                     $this->getLogger()->emerg('[Paypal:handlerError] ERROR_ORDER_UNKNOWN');
                 }
 
                 break;
-            case Transaction::STATUS_ERROR_VALIDATION:
+            case TransactionInterface::STATUS_ERROR_VALIDATION:
 
                 if ($this->getLogger()) {
                     $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_ERROR_VALIDATION - Order %s - Paypal reject the postback validation', $order->getReference()));
@@ -208,7 +213,7 @@ class Paypal extends BasePaypal
                 
                 break;
 
-            case Transaction::STATUS_CANCELLED:
+            case TransactionInterface::STATUS_CANCELLED:
                 // cancelled
                 $order->setStatus(OrderInterface::STATUS_CANCELLED);
 
@@ -218,7 +223,7 @@ class Paypal extends BasePaypal
 
                 break;
 
-            case Transaction::STATUS_PENDING:
+            case TransactionInterface::STATUS_PENDING:
                 // pending
                 $order->setStatus(OrderInterface::STATUS_PENDING);
 
@@ -235,18 +240,22 @@ class Paypal extends BasePaypal
                 }
         }
 
-        $transaction->setState(Transaction::STATE_KO);
+        $transaction->setState(TransactionInterface::STATE_KO);
 
         if ($order->getStatus() === null) {
             $order->setStatus(OrderInterface::STATUS_CANCELLED);
         }
 
         if ($transaction->getStatusCode() == null) {
-            $transaction->setStatusCode(Transaction::STATUS_UNKNOWN);
+            $transaction->setStatusCode(TransactionInterface::STATUS_UNKNOWN);
         }
     }
 
-    public function sendConfirmationReceipt($transaction)
+    /**
+     * @param TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
 
         if (!$transaction->isValid()) {
@@ -265,15 +274,15 @@ class Paypal extends BasePaypal
         $client->request('POST', $this->getOption('url_action'), $params);
 
         if ($client->getResponse()->getContent() == 'VERIFIED') {
-            $transaction->setState(Transaction::STATE_OK);
-            $transaction->setStatusCode(Transaction::STATUS_VALIDATED);
+            $transaction->setState(TransactionInterface::STATE_OK);
+            $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
             $transaction->getOrder()->setValidatedAt(new \DateTime);
             $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
-            $transaction->getOrder()->setPaymentStatus(Transaction::STATUS_VALIDATED);
+            $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
         } else {
-            $transaction->setState(Transaction::STATE_KO);
-            $transaction->setStatusCode(PaymentInterface::STATUS_ERROR_VALIDATION);
+            $transaction->setState(TransactionInterface::STATE_KO);
+            $transaction->setStatusCode(TransactionInterface::STATUS_ERROR_VALIDATION);
 
             $transaction->getOrder()->setPaymentStatus(OrderInterface::STATUS_ERROR);
 
@@ -285,7 +294,11 @@ class Paypal extends BasePaypal
         return new \Symfony\Component\HttpFoundation\Response('');
     }
 
-    public function isBasketValid($basket)
+    /**
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @return bool
+     */
+    public function isBasketValid(BasketInterface $basket)
     {
         if ($basket->countBasketElements() == 0) {
 
@@ -303,7 +316,12 @@ class Paypal extends BasePaypal
         return true;
     }
 
-    public function isAddableProduct($basket, $product)
+    /**
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @return bool
+     */
+    public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
         if (!$product->isRecurrentPayment()) {
 
@@ -313,6 +331,10 @@ class Paypal extends BasePaypal
         return false;
     }
 
+    /**
+     * @static
+     * @return array
+     */
     public static function getPendingReasonsList()
     {
 

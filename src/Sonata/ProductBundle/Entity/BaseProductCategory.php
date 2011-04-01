@@ -10,10 +10,14 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\Component\Product\ProductCategoryInterface;
+use Sonata\Component\Product\CategoryInterface;
+use Sonata\Component\Product\ProductInterface;
+    
 /**
  * Sonata\ProductBundle\Entity\BaseProductCategory
  */
-abstract class BaseProductCategory
+abstract class BaseProductCategory implements ProductCategoryInterface
 {
     /**
      * @var boolean $enabled
@@ -21,15 +25,24 @@ abstract class BaseProductCategory
     protected $enabled;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
     protected $createdAt;
 
+    /**
+     * @var ProductInterface
+     */
+    protected $product;
+
+    /**
+     * @var CategoryInterface
+     */
+    protected $category;
 
     /**
      * Set enabled
@@ -52,17 +65,17 @@ abstract class BaseProductCategory
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime $updatedAt
      */
@@ -72,17 +85,17 @@ abstract class BaseProductCategory
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime $createdAt
      */
@@ -92,21 +105,11 @@ abstract class BaseProductCategory
     }
 
     /**
-     * @var Application\Sonata\ProductBundle\Entity\Product
-     */
-    protected $product;
-
-    /**
-     * @var Application\Sonata\ProductBundle\Entity\Category
-     */
-    protected $category;
-
-    /**
      * Set Product
      *
-     * @param Application\Sonata\ProductBundle\Entity\Product $product
+     * @param ProductInterface $product
      */
-    public function setProduct(\Application\Sonata\ProductBundle\Entity\Product $product)
+    public function setProduct(ProductInterface $product)
     {
         $this->product = $product;
     }
@@ -114,7 +117,7 @@ abstract class BaseProductCategory
     /**
      * Get Product
      *
-     * @return Application\Sonata\ProductBundle\Entity\Product $product
+     * @return ProductInterface $product
      */
     public function getProduct()
     {
@@ -124,9 +127,9 @@ abstract class BaseProductCategory
     /**
      * Set Category
      *
-     * @param Application\Sonata\ProductBundle\Entity\Category $category
+     * @param CategoryInterface $category
      */
-    public function setCategory(\Application\Sonata\ProductBundle\Entity\Category $category)
+    public function setCategory(CategoryInterface $category)
     {
         $this->category = $category;
     }
@@ -134,7 +137,7 @@ abstract class BaseProductCategory
     /**
      * Get Category
      *
-     * @return Application\Sonata\ProductBundle\Entity\Category $category
+     * @return CategoryInterface $category
      */
     public function getCategory()
     {

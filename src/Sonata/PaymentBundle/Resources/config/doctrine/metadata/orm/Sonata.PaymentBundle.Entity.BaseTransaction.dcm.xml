@@ -6,12 +6,12 @@
 
     <mapped-superclass name="Sonata\PaymentBundle\Entity\BaseTransaction" >
 
-        <field name="transaction_id"    type="string"       column="transaction_id"   length="255"/>
+        <field name="transactionId"     type="string"       column="transaction_id"   length="255"/>
         <field name="state"             type="integer"      column="state"    />
         <field name="parameters"        type="array"        column="parameters" />
-        <field name="status_code"       type="integer"      column="status_code"/>
-        <field name="payment_code"      type="string"       column="payment_code" length="32" />
-        <field name="created_at"        type="datetime"     column="created_at"/>
+        <field name="statusCode"       type="integer"      column="status_code"/>
+        <field name="paymentCode"      type="string"       column="payment_code" length="32" />
+        <field name="createdAt"        type="datetime"     column="created_at"/>
 
         <many-to-one
             field="order"

@@ -11,94 +11,107 @@
 
 namespace Sonata\Component\Product;
 
-interface ProductInterface {
+interface ProductInterface
+{
 
     /**
      * @abstract
      * @return integer the product id
      */
-    public function getId();
+    function getId();
 
     /**
      * @abstract
      * @return float the product price
      */
-    public function getPrice();
+    function getPrice();
 
     /**
      * @abstract
      * @param  $price the product price
      * @return void
      */
-    public function setPrice($price);
+    function setPrice($price);
 
     /**
      * @abstract
      * @return float the vat price
      */
-    public function getVat();
+    function getVat();
 
     /**
      * @abstract
      * @param $vat the product vat
      * @return void
      */
-    public function setVat($vat);
+    function setVat($vat);
 
     /**
      * @abstract
      * @return string the product name
      */
-    public function getName();
+    function getName();
 
     /**
      * @abstract
      * @return
      */
-    public function setName($name);
+    function setName($name);
 
     /**
      * @abstract
      * @return string the product name
      */
-    public function getParent();
+    function getParent();
 
     /**
      * @abstract
      * @return
      */
-    public function setParent($parent);
+    function setType($name);
+
+    /**
+     * @abstract
+     * @return string the product code
+     */
+    function getType();
+
+    /**
+     * @abstract
+     * @return
+     */
+    function setParent(ProductInterface $parent);
 
     /**
      * @abstract
      * @return array the product options
      */
-    public function getOptions();
+    function getOptions();
 
     /**
      * @abstract
      * @param  $option array
      * @return void
      */
-    public function setOptions($options);
+    function setOptions(array $options);
 
     /**
      * @abstract
      * @return boolean , true is the product is enabled (ready to be sell)
      */
-    public function getEnabled();
+    function getEnabled();
 
     /**
      * @abstract
      */
-    public function setEnabled($enabled);
+    function setEnabled($enabled);
 
     /**
      * Return true if the product is recurrent
      * @abstract
      * @return void
      */
-    public function isRecurrentPayment();
+    function isRecurrentPayment();
 
     /**
      * Return true if the product is a variation, linked to a main product
@@ -106,6 +119,6 @@ interface ProductInterface {
      * @abstract
      * @return void
      */
-    public function isVariation();
+    function isVariation();
 
 }

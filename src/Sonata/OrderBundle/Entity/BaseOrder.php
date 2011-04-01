@@ -2,12 +2,13 @@
 
 namespace Sonata\OrderBundle\Entity;
 
-use \Sonata\Component\Order\OrderInterface;
-
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Order\OrderElementInterface;
+    
 /**
  * Sonata\OrderBundle\Entity\BaseOrder
  */
-class BaseOrder implements \Sonata\Component\Order\OrderInterface
+abstract class BaseOrder implements OrderInterface
 {
     /**
      * @var string $reference
@@ -224,9 +225,9 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      *
      * @param string $payment_method
      */
-    public function setPaymentMethod($payment_method)
+    public function setPaymentMethod($paymentMethod)
     {
-        $this->paymentMethod = $payment_method;
+        $this->paymentMethod = $paymentMethod;
     }
 
     /**
@@ -344,7 +345,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
      *
      * @param datetime $validatedAt
      */
-    public function setValidatedAt($validatedAt)
+    public function setValidatedAt(\DateTime $validatedAt = null)
     {
         $this->validatedAt = $validatedAt;
     }
@@ -904,7 +905,7 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
         return $this->orderElements;
     }
 
-    public function addOrderElement($orderElement)
+    public function addOrderElement(OrderElementInterface $orderElement)
     {
         $this->orderElements[] = $orderElement;
         $orderElement->setOrder($this);
@@ -961,9 +962,9 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
         return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
     }
 
-    public function setCreatedAt($created_at)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
-        $this->createdAt = $created_at;
+        $this->createdAt = $createdAt;
     }
 
     public function getCreatedAt()
@@ -971,9 +972,9 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt($updated_at)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
-        $this->updatedAt = $updated_at;
+        $this->updatedAt = $updatedAt;
     }
 
     public function getUpdatedAt()
@@ -984,9 +985,9 @@ class BaseOrder implements \Sonata\Component\Order\OrderInterface
     /**
      * Add order_elements
      *
-     * @param Application\Sonata\OrderBundle\Entity\OrderElement $orderElements
+     * @param OrderElementInterface $orderElements
      */
-    public function addOrderElements(\Application\Sonata\OrderBundle\Entity\OrderElement $orderElements)
+    public function addOrderElements(OrderElementInterface $orderElements)
     {
         $this->orderElements[] = $orderElements;
     }

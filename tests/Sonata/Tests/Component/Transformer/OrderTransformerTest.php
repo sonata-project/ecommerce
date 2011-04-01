@@ -45,7 +45,7 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
         $basketElements[] = $basketElement;
         
         // Mock the product repository
-        $repository = $this->getMock('ProductRepository', array('find', 'basketAddProduct', 'basketCalculatePrice'));
+        $repository = $this->getMock('Doctrine\ORM\EntityRepository', array('find', 'basketAddProduct', 'basketCalculatePrice'));
 
         $repository->expects($this->exactly(2))
             ->method('find')
@@ -126,6 +126,6 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
 
         $basket = $transformer->transformIntoBasket($user, $order, $basket);
 
-        $this->assertEquals(2, count($basket->getElements()), '::getElements() return 2 elements');
+        $this->assertEquals(2, count($basket->getBasketElements()), '::getElements() return 2 elements');
     }
 }

@@ -18,7 +18,6 @@ class Pool
 {
     protected $methods = array();
 
-
     /**
      * add a delivery method into the pool
      *

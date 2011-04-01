@@ -27,10 +27,17 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket = new Basket;
         
-        $repository = $this->getMock('ProductRepository', array('getClassMetadata', 'basketMergeProduct', 'basketAddProduct', 'basketCalculatePrice', 'isAddableToBasket'));
+        $repository = $this->getMock(
+            'Sonata\Tests\Component\Basket\ProductRepository',
+            array('getClassMetadata', 'basketMergeProduct', 'basketAddProduct', 'basketCalculatePrice', 'isAddableToBasket'),
+            array(),
+            'ProductRepository',
+            true
+        );
+
         $repository->expects($this->any())
             ->method('basketAddProduct')
-            ->will($this->returnCallback(function($bsket, $product, $params = array()) use ($basket, $repository) {
+            ->will($this->returnCallback(function($basket, $product, $params = array()) use ($basket, $repository) {
 
            
                 $basketElement = new BasketElement;

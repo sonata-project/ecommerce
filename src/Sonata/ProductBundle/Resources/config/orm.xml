@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.category.manager.class">Sonata\ProductBundle\Entity\CategoryManager</parameter>
+        <parameter key="sonata.delivery.manager.class">Sonata\ProductBundle\Entity\DeliveryManager</parameter>
+        <parameter key="sonata.package.manager.class">Sonata\ProductBundle\Entity\PackageManager</parameter>
+        <parameter key="sonata.product.manager.class">Sonata\ProductBundle\Entity\ProductManager</parameter>
+        <parameter key="sonata.product_category.manager.class">Sonata\ProductBundle\Entity\ProductCategoryManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.product.entity_manager" alias="doctrine.orm.default_entity_manager" />
+
+        <service id="sonata.category.manager" class="%sonata.category.manager.class%">
+            <argument type="service" id="sonata.product.entity_manager" />
+            <argument>Application\Sonata\ProductBundle\Entity\Category</argument>
+        </service>
+
+        <service id="sonata.delivery.manager" class="%sonata.delivery.manager.class%">
+            <argument type="service" id="sonata.product.entity_manager" />
+            <argument>Application\Sonata\ProductBundle\Entity\Delivery</argument>
+        </service>
+
+        <service id="sonata.category.manager" class="%sonata.package.manager.class%">
+            <argument type="service" id="sonata.product.entity_manager" />
+            <argument>Application\Sonata\ProductBundle\Entity\Package</argument>
+        </service>
+        
+        <service abstract="true" id="sonata.product.manager" class="%sonata.product.manager.class%">
+            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="sonata.product.pool" />
+        </service>
+
+        <service id="sonata.product_category.product" class="%sonata.product_category.manager.class%">
+            <argument type="service" id="sonata.entity_manager" />
+            <argument>Application\Sonata\ProductBundle\Entity\ProductCategory</argument>
+        </service>
+
+    </services>
+
+</container>

@@ -10,10 +10,9 @@
 
 namespace Sonata\ProductBundle\Entity;
 
-/**
- * Sonata\ProductBundle\Entity\BaseCategory
- */
-abstract class BaseCategory
+use Sonata\Component\Product\CategoryInterface;
+
+abstract class BaseCategory implements CategoryInterface
 {
 
     /**
@@ -32,12 +31,12 @@ abstract class BaseCategory
     protected $enabled;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
     protected $createdAt;
 
@@ -101,17 +100,17 @@ abstract class BaseCategory
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime $updatedAt
      */
@@ -121,17 +120,17 @@ abstract class BaseCategory
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime $createdAt
      */
@@ -219,12 +218,13 @@ abstract class BaseCategory
     {
         return $this->position;
     }
+    
     /**
      * Add Children
      *
      * @param Application\Sonata\ProductBundle\Entity\Category $children
      */
-    public function addChildren(\Application\Sonata\ProductBundle\Entity\Category $children, $nested = false)
+    public function addChildren(CategoryInterface $children, $nested = false)
     {
         $this->children[] = $children;
 
@@ -251,6 +251,10 @@ abstract class BaseCategory
         return $this->children;
     }
 
+    /**
+     *
+     * @return boolean
+     */
     public function hasChildren()
     {
         
@@ -260,9 +264,10 @@ abstract class BaseCategory
     /**
      * Set Parent
      *
-     * @param Application\Sonata\ProductBundle\Entity\Category $parent
+     * @param CategoryInterface
+     * @param boolean
      */
-    public function setParent(\Application\Sonata\ProductBundle\Entity\Category $parent, $nested = false)
+    public function setParent(CategoryInterface $parent, $nested = false)
     {
         $this->parent = $parent;
 

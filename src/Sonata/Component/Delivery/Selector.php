@@ -10,6 +10,9 @@
 
 namespace Sonata\Component\Delivery;
 
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Customer\AddressInterface;
+
 /**
  * The selector selects available delivery methods depends on the provided basket
  *
@@ -49,10 +52,10 @@ class Selector
 
     public function getProductPool()
     {
-        return $this->product_pool;
+        return $this->productPool;
     }
 
-    public function getAvailableMethods($basket, $deliveryAddress)
+    public function getAvailableMethods(BasketInterface $basket, AddressInterface $deliveryAddress)
     {
         $instances = array();
 
@@ -73,10 +76,10 @@ class Selector
                 return false;
             }
 
-            $product_deliveries = $product->getDelivery();
+            $productDeliveries = $product->getDelivery();
 
 
-            foreach ($product_deliveries as $productDelivery) {
+            foreach ($productDeliveries as $productDelivery) {
 
                 // delivery method already selected
                 if (array_key_exists($productDelivery->getCode(), $instances)) {
@@ -119,18 +122,18 @@ class Selector
 
         // STEP 2 : We select the delivery methods with the highest priority
         $priority = 0;
-        $final_instances = array();
+        $finalInstances = array();
         foreach ($instances as $instance) {
             if ($instance->getPriority() > $priority) {
-                $final_instances = array();
+                $finalInstances = array();
                 $priority = $instance->getPriority();
             }
 
             if ($priority == $instance->getPriority()) {
-                $final_instances[] = $instance;
+                $finalInstances[] = $instance;
             }
         }
 
-        return count($final_instances) == 0 ? false : $final_instances;
+        return count($finalInstances) == 0 ? false : $finalInstances;
     }
 }

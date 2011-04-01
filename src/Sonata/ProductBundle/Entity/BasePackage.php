@@ -10,10 +10,12 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\Component\Product\PackageInterface;
+    
 /**
  * Sonata\ProductBundle\Entity\BasePackage
  */
-abstract class BasePackage
+abstract class BasePackage implements PackageInterface
 {
     /**
      * @var integer $productId
@@ -46,12 +48,12 @@ abstract class BasePackage
     protected $enabled;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
     protected $createdAt;
 
@@ -176,17 +178,17 @@ abstract class BasePackage
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime $updatedAt
      */
@@ -196,17 +198,17 @@ abstract class BasePackage
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime $createdAt
      */

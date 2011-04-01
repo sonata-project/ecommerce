@@ -2,10 +2,12 @@
 
 namespace Sonata\CustomerBundle\Entity;
 
+use Sonata\Component\Customer\CustomerInterface;
+
 /**
  * Sonata\BasketBundle\Entity\BaseAddress
  */
-abstract class BaseCustomer
+abstract class BaseCustomer implements CustomerInterface
 {
 
     /**
@@ -20,12 +22,12 @@ abstract class BaseCustomer
 
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
     protected $createdAt;
 
@@ -35,7 +37,7 @@ abstract class BaseCustomer
     protected $user;
 
 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
@@ -69,7 +71,7 @@ abstract class BaseCustomer
         return $this->lastname;
     }
 
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }

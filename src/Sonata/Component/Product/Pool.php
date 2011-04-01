@@ -22,6 +22,10 @@ class Pool
     protected $em = null;
 
 
+    public function __construct($em)
+    {
+        $this->em = $em;
+    }
     /**
      * add a delivery method into the pool
      *
@@ -32,15 +36,6 @@ class Pool
     {
         $this->products[$definition['id']] = $definition;
         $this->classes[$definition['class']] = $definition['id'];
-    }
-
-    /**
-     * define the entity manager
-     * 
-     * @return void
-     */
-    public function setEntityManager($em) {
-        $this->em = $em;
     }
 
     /**

@@ -11,6 +11,9 @@
 
 namespace Sonata\Component\Generator;
 
+use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Order\OrderInterface;
+
 class MysqlReference implements ReferenceInterface
 {
 
@@ -21,17 +24,17 @@ class MysqlReference implements ReferenceInterface
      *
      * @param Invoice $invoice
      */
-    public function invoice($invoice)
+    public function invoice(InvoiceInterface $invoice)
     {
 
         if (!$invoice->getId()) {
             throw new \RuntimeException('The invoice is not persisted into the database');
         }
 
-        $table_name = $this->getEntityManager()->getClassMetadata(get_class($invoice))->table['name'];
+        $tableName = $this->getEntityManager()->getClassMetadata(get_class($invoice))->table['name'];
         $connection = $this->getEntityManager()->getConnection();
 
-        $this->generateReference($table_name, $connection, $invoice);
+        $this->generateReference($tableName, $connection, $invoice);
 
     }
 
@@ -40,34 +43,34 @@ class MysqlReference implements ReferenceInterface
      *
      * @param Order $order
      */
-    public function order($order)
+    public function order(OrderInterface $order)
     {
         if (!$order->getId()) {
             throw new \RuntimeException('The order is not persisted into the database');
         }
 
-        $table_name = $this->getEntityManager()->getClassMetadata(get_class($order))->table['name'];
+        $tableName = $this->getEntityManager()->getClassMetadata(get_class($order))->table['name'];
         $connection = $this->getEntityManager()->getConnection();
 
-        $this->generateReference($table_name, $connection, $order);
+        $this->generateReference($tableName, $connection, $order);
        
     }
 
     /**
      * generate a correct reference number
      *
-     * @param  $table_name
+     * @param  $tableName
      * @param  $connection
      * @param  $object
      * @return Exception|string
      */
-    protected function generateReference($table_name, $connection, $object)
+    protected function generateReference($tableName, $connection, $object)
     {
         $date = new \DateTime;
 
-        $sql = sprintf("SELECT count(id) as counter FROM %s WHERE created_at >= '%s' AND reference IS NOT NULL", $table_name, $date->format('Y-m-d'));
+        $sql = sprintf("SELECT count(id) as counter FROM %s WHERE created_at >= '%s' AND reference IS NOT NULL", $tableName, $date->format('Y-m-d'));
 
-        $connection->exec(sprintf('LOCK TABLES %s WRITE', $table_name));
+        $connection->exec(sprintf('LOCK TABLES %s WRITE', $tableName));
 
         try {
             $statement = $connection->query($sql);
@@ -80,7 +83,7 @@ class MysqlReference implements ReferenceInterface
               $row['counter'] + 1
             );
 
-            $connection->update($table_name, array('reference' => $reference), array('id' => $object->getId()));
+            $connection->update($tableName, array('reference' => $reference), array('id' => $object->getId()));
             $object->setReference($reference);
 
         } catch(\Exception $e) {

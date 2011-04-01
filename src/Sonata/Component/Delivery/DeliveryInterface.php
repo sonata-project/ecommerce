@@ -10,7 +10,8 @@
 
 namespace Sonata\Component\Delivery;
 
-interface DeliveryInterface {
+interface DeliveryInterface
+{
 
     const STATUS_OPEN       = 1;
     const STATUS_SENT       = 2;
@@ -22,26 +23,26 @@ interface DeliveryInterface {
      * @abstract
      * @return float the delivery base price
      */
-    public function getPrice();
+    function getPrice();
 
     /**
      * @abstract
      * @return float the vat linked to the delivery
      */
-    public function getVat();
+    function getVat();
 
     /**
      * @abstract
      * @return string the name of the delivery method
      */
-    public function getName();
+    function getName();
 
 
     /**
      * @abstract
      * @return boolean return true an address is required to use this delivery method
      */
-    public function isAddressRequired();
+    function isAddressRequired();
 
     /**
      * Return the delivery price
@@ -50,7 +51,7 @@ interface DeliveryInterface {
      * @param  $vat set to true if the VAT should be included
      * @return float
      */
-    public function getTotal($price, $vat = false);
+    function getTotal($price, $vat = false);
 
     /**
      * Return the vat amount
@@ -59,7 +60,7 @@ interface DeliveryInterface {
      * @param  $vat set to true if the VAT should be included
      * @return float
      */
-    public function getVatAmount($basket);
+    function getVatAmount($basket);
 
     
 }

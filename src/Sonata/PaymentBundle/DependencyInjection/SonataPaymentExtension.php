@@ -37,6 +37,9 @@ class SonataPaymentExtension extends Extension
     public function load(array $config, ContainerBuilder $container)
     {
 
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('orm.xml');
+
         $config = call_user_func_array('array_merge_recursive', $config);
         
         if(isset($config['payment'])) {

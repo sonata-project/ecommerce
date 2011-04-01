@@ -2,14 +2,14 @@
 
 namespace Sonata\CustomerBundle\Entity;
 
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\CustomerInterface;
+
 /**
  * Sonata\BasketBundle\Entity\BaseAddress
  */
-abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
+abstract class BaseAddress implements AddressInterface
 {
-    const TYPE_BILLING  = 1;
-    const TYPE_DELIVERY = 2;
-    const TYPE_CONTACT  = 3;
 
     public static function getTypesList()
     {
@@ -30,7 +30,6 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
      */
     protected $name;
 
-    
     /**
      * @var integer $type
      */
@@ -82,12 +81,12 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     protected $phone;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
     protected $createdAt;
 
@@ -324,17 +323,17 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime $updatedAt
      */
@@ -344,17 +343,17 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime $createdAt
      */
@@ -388,7 +387,7 @@ abstract class BaseAddress implements \Sonata\Component\Basket\AddressInterface
         );
     }
 
-    public function setCustomer($customer)
+    public function setCustomer(CustomerInterface $customer)
     {
         $this->customer = $customer;
     }

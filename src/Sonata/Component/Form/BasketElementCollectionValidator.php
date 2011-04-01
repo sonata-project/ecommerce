@@ -13,6 +13,8 @@ namespace Sonata\Component\Form;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
 
+use Sonata\Component\Product\Pool as ProductPool;
+use Sonata\Component\Basket\BasketInterface;
 
 class BasketElementCollectionValidator extends ConstraintValidator
 {
@@ -22,7 +24,7 @@ class BasketElementCollectionValidator extends ConstraintValidator
      *
      * @var
      */
-    protected $product_pool;
+    protected $productPool;
 
     /**
      * the basket
@@ -30,14 +32,13 @@ class BasketElementCollectionValidator extends ConstraintValidator
      */
     protected $basket;
 
-
     /**
      * set the basket
      *
-     * @param  \Sonata\Component\Basket\Basket $basket
+     * @param BasketInterface $basket
      * @return void
      */
-    public function setBasket(\Sonata\Component\Basket\Basket $basket)
+    public function setBasket(BasketInterface $basket)
     {
         $this->basket = $basket;
     }
@@ -55,12 +56,12 @@ class BasketElementCollectionValidator extends ConstraintValidator
     /**
      * set the product pool
      *
-     * @param  \Sonata\Component\Product\Pool $product_pool
+     * @param  \Sonata\Component\Product\Pool $productPool
      * @return void
      */
-    public function setProductPool(\Sonata\Component\Product\Pool $product_pool)
+    public function setProductPool(ProductPool $productPool)
     {
-        $this->product_pool = $product_pool;
+        $this->productPool = $productPool;
     }
 
     /**
@@ -70,7 +71,7 @@ class BasketElementCollectionValidator extends ConstraintValidator
      */
     public function getProductPool()
     {
-        return $this->product_pool;
+        return $this->productPool;
     }
 
     /**

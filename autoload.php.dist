@@ -1,6 +1,6 @@
 <?php
 
-$vendor_dir = __DIR__.'/../../src/vendor';
+$vendor_dir = __DIR__.'/../../vendor';
 require_once $vendor_dir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
 use Symfony\Component\ClassLoader\UniversalClassLoader;

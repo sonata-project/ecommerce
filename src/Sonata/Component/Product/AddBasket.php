@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Product;
 
-
 class AddBasket
 {
 
@@ -62,7 +61,7 @@ class AddBasket
      *
      * @param  $product
      */
-    public function setProduct($product)
+    public function setProduct(ProductInterface $product)
     {
         $this->productId = $product->getId();
         $this->product = $product;

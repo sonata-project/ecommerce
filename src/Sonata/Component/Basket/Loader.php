@@ -10,6 +10,12 @@
 
 namespace Sonata\Component\Basket;
 
+use Sonata\Component\Product\Pool;
+use Symfony\Component\HttpFoundation\Session;
+use Sonata\Component\Customer\AddressManagerInterface;
+use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Payment\Pool as PaymentPool;
+
 class Loader
 {
     protected $session;
@@ -20,27 +26,28 @@ class Loader
 
     protected $basket;
 
-    protected $entityManager;
+    protected $addressManager;
+
+    protected $productManager;
 
     protected $deliveryPool;
 
     protected $paymentPool;
 
-    public function __construct($class)
+    public function __construct($class, Session $session, Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool, PaymentPool $paymentPool)
     {
-        $this->basketClass = $class;
+        $this->basketClass      = $class;
+        $this->addressManager   = $addressManager;
+        $this->deliveryPool     = $deliveryPool;
+        $this->paymentPool      = $paymentPool;
+        $this->session          = $session;
+        $this->productPool      = $productPool;
     }
 
-    public function setSession($session)
-    {
-        $this->session = $session;
-    }
-
-    public function getSession()
-    {
-        return $this->session;
-    }
-
+    /**
+     * @throws \Exception|\RuntimeException
+     * @return Sonata\Component\Basket\BasketInterface
+     */
     public function getBasket()
     {
 
@@ -119,19 +126,9 @@ class Loader
         return $this->basket;
     }
 
-    public function setProductPool($productPool)
-    {
-        $this->productPool = $productPool;
-    }
-
     public function getProductPool()
     {
         return $this->productPool;
-    }
-
-    public function setBasketClass($basketClass)
-    {
-        $this->basketClass = $basketClass;
     }
 
     public function getBasketClass()
@@ -139,29 +136,9 @@ class Loader
         return $this->basketClass;
     }
 
-    public function setEntityManager($entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
-    public function getEntityManager()
-    {
-        return $this->entityManager;
-    }
-
-    public function setDeliveryPool($deliveryPool)
-    {
-        $this->deliveryPool = $deliveryPool;
-    }
-
     public function getDeliveryPool()
     {
         return $this->deliveryPool;
-    }
-
-    public function setPaymentPool($paymentPool)
-    {
-        $this->paymentPool = $paymentPool;
     }
 
     public function getPaymentPool()
@@ -169,4 +146,18 @@ class Loader
         return $this->paymentPool;
     }
 
+    public function getAddressManager()
+    {
+        return $this->addressManager;
+    }
+
+    public function getProductManager()
+    {
+        return $this->productManager;
+    }
+
+    public function getSession()
+    {
+        return $this->session;
+    }
 }

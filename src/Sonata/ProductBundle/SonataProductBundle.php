@@ -51,5 +51,4 @@ class SonataProductBundle extends Bundle implements EventSubscriber
 
         $metadata->setDiscriminatorMap($map);
     }
-
 }

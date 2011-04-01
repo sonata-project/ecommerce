@@ -17,21 +17,23 @@ namespace Sonata\Component\Delivery;
 class FreeDelivery extends BaseDelivery
 {
 
-    public function getVat() {
-
+    public function getVat()
+    {
         return 0;
     }
 
-    public function getPrice() {
-
+    public function getPrice()
+    {
         return 0;
     }
 
-    public function isAddressRequired() {
+    public function isAddressRequired()
+    {
         return true;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'Free delivery';
     }
     

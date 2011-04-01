@@ -8,56 +8,63 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Component\Basket;
+namespace Sonata\Component\Customer;
 
-interface AddressInterface {
+interface AddressInterface
+{
 
+    const TYPE_BILLING  = 1;
+    const TYPE_DELIVERY = 2;
+    const TYPE_CONTACT  = 3;
+
+    function getId();
+    
     /**
      * @abstract
      * @return string return the address name
      */
-    public function getName();
+    function getName();
 
     /**
      * @abstract
      * @return string return the address (line 1)
      */
-    public function getAddress1();
+    function getAddress1();
 
     /**
      * @abstract
      * @return string return the address (line 1)
      */
-    public function getAddress2();
+    function getAddress2();
 
     /**
      * @abstract
      * @return string return the address (line 1)
      */
-    public function getAddress3();
+    function getAddress3();
 
     /**
      * @abstract
      * @return string return the postcode
      */
-    public function getPostcode();
+    function getPostcode();
 
     /**
      * @abstract
      * @return string return the city
      */
-    public function getCity();
+    function getCity();
 
     /**
      * @abstract
      * @return string return the ISO country code
      */
-    public function getCountryCode();
+    function getCountryCode();
 
     /**
      * @abstract
      * @return string return the phone number linked to the address
      */
-    public function getPhone();
+    function getPhone();
 
 }

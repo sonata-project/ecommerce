@@ -10,6 +10,11 @@
 
 namespace Sonata\Component\Payment;
 
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Product\ProductInterface;
+
 /**
  *
  * Ressources :
@@ -39,7 +44,7 @@ abstract class BasePaypal extends BasePayment
      *
      * Object than manager http client
      */
-    protected $web_connector_provider = null;
+    protected $webConnectorProvider = null;
 
     /**
      * return true if the request contains a valid `check` parameter
@@ -47,7 +52,7 @@ abstract class BasePaypal extends BasePayment
      * @param  $order
      * @return bool return true if the transaction contains a valid `check` parameter
      */
-    public function isRequestValid($transaction)
+    public function isRequestValid(TransactionInterface $transaction)
     {
         $checkUrl = $transaction->get('check');
         
@@ -62,17 +67,17 @@ abstract class BasePaypal extends BasePayment
      *
      * @return mixed
      */
-    public function applyTransactionId($transaction)
+    public function applyTransactionId(TransactionInterface $transaction)
     {
 
-        $transaction_id = $transaction->get('txn_id', null);
+        $transactionId = $transaction->get('txn_id', null);
 
-        if (!$transaction_id) {
+        if (!$transactionId) {
             // no transaction id provided
-            $transaction_id = -1;
+            $transactionId = -1;
         }
         
-        $transaction->setTransactionId($transaction_id);
+        $transaction->setTransactionId($transactionId);
     }
 
     /**
@@ -80,7 +85,7 @@ abstract class BasePaypal extends BasePayment
      *
      * @return string
      */
-    public function getOrderReference($transaction)
+    public function getOrderReference(TransactionInterface $transaction)
     {
         $order = $transaction->get('order', null);
 
@@ -308,13 +313,13 @@ abstract class BasePaypal extends BasePayment
         );
     }
 
-    public function setWebConnectorProvider($web_connector_provider)
+    public function setWebConnectorProvider($webConnectorProvider)
     {
-        $this->web_connector_provider = $web_connector_provider;
+        $this->webConnectorProvider = $webConnectorProvider;
     }
 
     public function getWebConnectorProvider()
     {
-        return $this->web_connector_provider;
+        return $this->webConnectorProvider;
     }
 }

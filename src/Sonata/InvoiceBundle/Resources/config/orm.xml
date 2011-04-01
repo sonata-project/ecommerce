@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.invoice.manager.class">Sonata\InvoiceBundle\Entity\InvoiceManager</parameter>
+        <parameter key="sonata.invoice_element.manager.class">Sonata\InvoiceBundle\Entity\InvoiceElementManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.invoice.entity_manager" alias="doctrine.orm.default_entity_manager" />
+
+        <service id="sonata.invoice.manager" class="%sonata.invoice.manager.class%">
+            <argument type="service" id="sonata.invoice.entity_manager" />
+            <argument>Application\Sonata\InvoiceBundle\Entity\Invoice</argument>
+        </service>
+
+        <service id="sonata.invoice_element.manager" class="%sonata.invoice_element.manager.class%">
+            <argument type="service" id="sonata.invoice.entity_manager" />
+            <argument>Application\Sonata\InvoiceBundle\Entity\InvoiceElement</argument>
+        </service>
+    </services>
+
+</container>

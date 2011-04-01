@@ -10,12 +10,17 @@
 
 namespace Sonata\Component\Payment;
 
-interface PaymentInterface {
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Product\ProductInterface;
 
-    public function getName();
+interface PaymentInterface
+{
 
-    public function getCode();
+    function getName();
 
+    function getCode();
 
     /**
      * Send information to the bank, this method should handle
@@ -23,57 +28,63 @@ interface PaymentInterface {
      *
      * @return Response
      */
-    public function callbank($order);
+    function callbank(OrderInterface $order);
 
     /**
      *
+     * @param TransactionInterface $transaction
      * @return boolean true if callback ok else false
      */
-    public function isCallbackValid($transaction);
+    function isCallbackValid(TransactionInterface $transaction);
 
     /**
      * Method called when an error occurs
      *
+     * @param TransactionInterface $transaction
      * @return Response 
      */
-    public function handleError($transaction);
+    function handleError(TransactionInterface $transaction);
 
     /**
      * Send post back confirmation to the bank when the bank callback the site
      *
+     * @param TransactionInterface $transaction
      * @return Response, false otherwise
      */
-    public function sendConfirmationReceipt($transaction);
+    function sendConfirmationReceipt(TransactionInterface $transaction);
 
     /**
      * Test if the request variables are valid for the current request
      *
      * WARNING : this methods does not check if the callback is valid
      *
+     * @param TransactionInterface $transaction
      * @return boolean true if all parameter are ok
      */
-    public function isRequestValid($transaction);
+    function isRequestValid(TransactionInterface $transaction);
 
     /**
      * return true is the basket is valid for the current bank gateway
      *
+     * @param TransactionInterface $transaction
      * @return boolean
      */
-    public function isBasketValid($basket);
+    function isBasketValid(BasketInterface $basket);
 
     /**
      * return true if the product can be added to the basket
      *
-     * @param Basket $basket
-     * @param Product $product
+     * @param BasketInterface $basket
+     * @param ProductInterface $product
      */
-    public function isAddableProduct($basket, $product);
+    function isAddableProduct(BasketInterface $basket, ProductInterface $product);
 
     /**
      * return the transaction id from the bank
-     *
+     * 
+     * @param TransactionInterface $transaction
      */
-    public function applyTransactionId($transaction);
+    function applyTransactionId(TransactionInterface $transaction);
 
     /**
      * encode value for the bank
@@ -81,14 +92,14 @@ interface PaymentInterface {
      * @param string $value
      * @return string the encoded value
      */
-    public function encodeString($value);
+    function encodeString($value);
 
     /**
      * return the order reference from the transaction
      * 
      * @abstract
-     * @param  $transaction
+     * @param TransactionInterface $transaction
      * @return string
      */
-    public function getOrderReference($transaction);
+    function getOrderReference(TransactionInterface $transaction);
 }

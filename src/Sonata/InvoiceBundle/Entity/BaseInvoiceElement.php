@@ -1,16 +1,28 @@
 <?php
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Sonata\InvoiceBundle\Entity;
+
+use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Invoice\InvoiceElementInterface;
+use Sonata\Component\Order\OrderElementInterface;
 
 /**
  * Sonata\InvoiceBundle\Entity\BaseInvoiceElement
  */
-abstract class BaseInvoiceElement
+abstract class BaseInvoiceElement implements InvoiceElementInterface
 {
     /**
-     * @var integer $invoiceId
+     * @var InvoiceInterface $invoiceId
      */
-    protected $invoiceId;
+    protected $invoice;
 
     /**
      * @var OrderElement $orderElement
@@ -48,18 +60,13 @@ abstract class BaseInvoiceElement
     protected $description;
 
     /**
-     * @var Sonata\InvoiceBundle\Entity\Invoice
-     */
-    protected $invoice;
-
-    /**
      * Set invoiceId
      *
-     * @param integer $invoiceId
+     * @param integer $invoice
      */
-    public function setInvoiceId($invoiceId)
+    public function setInvoice(InvoiceInterface $invoice)
     {
-        $this->invoiceId = $invoiceId;
+        $this->invoice = $invoice;
     }
 
     /**
@@ -67,9 +74,9 @@ abstract class BaseInvoiceElement
      *
      * @return integer $invoiceId
      */
-    public function getInvoiceId()
+    public function getInvoice()
     {
-        return $this->invoiceId;
+        return $this->invoice;
     }
 
     /**
@@ -77,7 +84,7 @@ abstract class BaseInvoiceElement
      *
      * @param OrderElement $orderElement
      */
-    public function setOrderElement($orderElement)
+    public function setOrderElement(OrderElementInterface $orderElement)
     {
         $this->orderElement = $orderElement;
     }
@@ -210,36 +217,6 @@ abstract class BaseInvoiceElement
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Add invoice
-     *
-     * @param Sonata\InvoiceBundle\Entity\Invoice $invoice
-     */
-    public function addInvoice(\Application\Sonata\InvoiceBundle\Entity\Invoice $invoice)
-    {
-        $this->invoice[] = $invoice;
-    }
-
-    /**
-     * Get invoice
-     *
-     * @return Doctrine\Common\Collections\Collection $invoice
-     */
-    public function getInvoice()
-    {
-        return $this->invoice;
-    }
-
-    /**
-     * Add order_element
-     *
-     * @param Sonata\OrderBundle\Entity\OrderElement $orderElement
-     */
-    public function addOrderElement(\Application\Sonata\OrderBundle\Entity\OrderElement $orderElement)
-    {
-        $this->order_element[] = $orderElement;
     }
 
 }

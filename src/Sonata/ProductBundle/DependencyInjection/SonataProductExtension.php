@@ -40,16 +40,14 @@ class SonataProductExtension extends Extension
         
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('product.xml');
+        $loader->load('orm.xml');
 
-        $definition = new Definition('Sonata\Component\Product\Pool');
+        $definition = $container->getDefinition('sonata.product.pool');
 
         foreach ($config['products'] as $product) {
 
             $definition->addMethodCall('addProduct', array($product));
         }
-
-        $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
-        $container->setDefinition('sonata.product.pool', $definition);
     }
 
     /**

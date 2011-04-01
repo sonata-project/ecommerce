@@ -12,8 +12,9 @@
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Product\ProductManagerInterface;
 
-class BasketElement implements \Serializable
+class BasketElement implements \Serializable, BasketElementInterface
 {
 
     protected $productId = null;
@@ -30,7 +31,7 @@ class BasketElement implements \Serializable
 
     protected $pos = null;
 
-    protected $productRepository = null;
+    protected $productManager = null;
 
     protected $productCode = null;
 
@@ -77,19 +78,14 @@ class BasketElement implements \Serializable
      * @param Product $product
      * @return BasketElement
      */
-    public function setProduct(ProductInterface $product, $productRepository)
+    public function setProduct(ProductInterface $product)
     {
-
         $this->product      = $product;
         $this->productId    = $product->getId();
-        $this->productCode  = $productRepository->getClassMetadata()->discriminatorValue;
+        $this->productCode  = $product->getType();
         $this->name         = $product->getName();
         $this->price        = $product->getPrice();
         $this->options      = $product->getOptions();
-
-        $this->productRepository = $productRepository;
-        
-        return $this;
     }
 
     /**
@@ -330,15 +326,23 @@ class BasketElement implements \Serializable
         $this->productCode  = $data['productCode'];
     }
 
-    public function setProductRepository($productRepository)
+    /**
+     * @return \Sonata\Component\Product\ProductManagerInterface
+     */
+    public function getProductManager()
     {
-        $this->productRepository = $productRepository;
+        return $this->productManager;
     }
 
-    public function getProductRepository()
+    /**
+     * @param \Sonata\Component\Product\ProductManagerInterface $productManager
+     * @return void
+     */
+    public function setProductManager(ProductManagerInterface $productManager)
     {
-        return $this->productRepository;
+        return $this->productManager = $productManager;
     }
+
 
     public function setProductCode($productCode)
     {

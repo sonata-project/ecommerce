@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.order.manager.class">Sonata\OrderBundle\Entity\OrderManager</parameter>
+        <parameter key="sonata.order_element.manager.class">Sonata\OrderBundle\Entity\OrderElementManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.order.manager" class="%sonata.order.manager.class%">
+            <argument type="service" id="sonata.entity_manager" />
+            <argument>Application\Sonata\OrderBundle\Entity\Order</argument>
+        </service>
+
+        <service id="sonata.order_element.manager" class="%sonata.order_element.manager.class%">
+            <argument type="service" id="sonata.entity_manager" />
+            <argument>Application\Sonata\OrderBundle\Entity\OrderElement</argument>
+        </service>
+    </services>
+
+</container>

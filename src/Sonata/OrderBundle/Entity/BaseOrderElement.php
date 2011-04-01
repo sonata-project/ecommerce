@@ -2,10 +2,13 @@
 
 namespace Sonata\OrderBundle\Entity;
 
+use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Product\ProductInterface;
+    
 /**
  * Sonata\OrderBundle\Entity\BaseOrderElement
  */
-abstract class BaseOrderElement
+abstract class BaseOrderElement implements OrderElementInterface
 {
     /**
      * @var integer $order
@@ -281,7 +284,7 @@ abstract class BaseOrderElement
      *
      * @param datetime $validatedAt
      */
-    public function setValidatedAt($validatedAt)
+    public function setValidatedAt(\DateTime $validatedAt = null)
     {
         $this->validatedAt = $validatedAt;
     }
@@ -301,7 +304,7 @@ abstract class BaseOrderElement
      *
      * @param Sonata\ProductBundle\Entity\BaseProduct $product
      */
-    public function addProduct(\Application\Sonata\ProductBundle\Entity\Product $product)
+    public function setProduct(ProductInterface $product)
     {
         $this->product[] = $product;
     }
@@ -336,9 +339,9 @@ abstract class BaseOrderElement
         return $this->productType;
     }
 
-    public function setCreatedAt($created_at)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
-        $this->createdAt = $created_at;
+        $this->createdAt = $createdAt;
     }
 
     public function getCreatedAt()
@@ -346,9 +349,9 @@ abstract class BaseOrderElement
         return $this->createdAt;
     }
 
-    public function setUpdatedAt($updated_at)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
-        $this->updatedAt = $updated_at;
+        $this->updatedAt = $updatedAt;
     }
 
     public function getUpdatedAt()

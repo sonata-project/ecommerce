@@ -10,10 +10,13 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\Component\Product\DeliveryInterface;
+use Sonata\Component\Product\ProductInterface;
+
 /**
  * Sonata\ProductBundle\Entity\BaseDelivery
  */
-abstract class BaseDelivery
+abstract class BaseDelivery implements DeliveryInterface
 {
     /**
      * @var string $code
@@ -21,7 +24,7 @@ abstract class BaseDelivery
     protected $code;
 
     /**
-     * @var boolean $per_item
+     * @var boolean $perItem
      */
     protected $perItem;
 
@@ -41,12 +44,12 @@ abstract class BaseDelivery
     protected $enabled;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
     protected $createdAt;
 
@@ -57,7 +60,7 @@ abstract class BaseDelivery
      *
      * @param integer $productId
      */
-    public function setProduct($product)
+    public function setProduct(ProductInterface $product)
     {
         $this->product = $product;
     }
@@ -173,17 +176,17 @@ abstract class BaseDelivery
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime $updatedAt
      */
@@ -193,17 +196,17 @@ abstract class BaseDelivery
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime $createdAt
      */

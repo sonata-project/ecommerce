@@ -12,14 +12,15 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Payment\PaymentInterface as Payment;
-use Sonata\Component\Delivery\DeliveryInterface as Delivery;
-use Sonata\Component\Basket\AddressInterface as Address;
-use Sonata\Component\Product\ProductInterface as Product;
+use Sonata\Component\Payment\PaymentInterface;
+use Sonata\Component\Delivery\DeliveryInterface;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Product\Pool;
 
-use Symfony\Component\Validator\Mapping\ClassMetadata;
-
-class Basket implements \Serializable 
+class Basket implements \Serializable, BasketInterface
 {
 
     protected $basketElements = array();
@@ -52,7 +53,7 @@ class Basket implements \Serializable
 
     protected $customerId;
 
-    public function setProductPool($pool)
+    public function setProductPool(Pool $pool)
     {
         $this->productPool = $pool;
     }
@@ -101,22 +102,22 @@ class Basket implements \Serializable
             return true;
         }
 
-        if (!$this->getPaymentAddress() instanceof Address) {
+        if (!$this->getPaymentAddress() instanceof AddressInterface) {
 
             return false;
         }
 
-        if (!$this->getPaymentMethod() instanceof Payment) {
+        if (!$this->getPaymentMethod() instanceof PaymentInterface) {
 
             return false;
         }
 
-        if (!$this->getDeliveryMethod() instanceof Delivery) {
+        if (!$this->getDeliveryMethod() instanceof DeliveryInterface) {
 
             return false;
         }
 
-        if (!$this->getDeliveryAddress() instanceof Address) {
+        if (!$this->getDeliveryAddress() instanceof AddressInterface) {
             if ($this->getDeliveryMethod()->isAddressRequired()) {
 
                 return false;
@@ -131,7 +132,7 @@ class Basket implements \Serializable
      *
      * @param Delivery $method
      */
-    public function setDeliveryMethod(Delivery $method = null)
+    public function setDeliveryMethod(DeliveryInterface $method = null)
     {
         $this->deliveryMethod = $method;
     }
@@ -152,7 +153,7 @@ class Basket implements \Serializable
      *
      * @param Address $address
      */
-    public function setDeliveryAddress(Address $address = null)
+    public function setDeliveryAddress(AddressInterface $address = null)
     {
         $this->deliveryAddress = $address;
         $this->deliveryAddressId = $address ? $address->getId() : null;
@@ -174,7 +175,7 @@ class Basket implements \Serializable
      *
      * @param Payment $method
      */
-    public function setPaymentMethod(Payment $method = null)
+    public function setPaymentMethod(PaymentInterface $method = null)
     {
         $this->paymentMethod = $method;
         $this->paymentMethodCode = $method ? $method->getCode() : null;
@@ -196,7 +197,7 @@ class Basket implements \Serializable
      *
      * @param Address $address
      */
-    public function setPaymentAddress(Address $address = null)
+    public function setPaymentAddress(AddressInterface $address = null)
     {
         $this->paymentAddress = $address;
         $this->paymentAddressId = $address ? $address->getId() : null;
@@ -220,7 +221,7 @@ class Basket implements \Serializable
      *
      * @return boolean
      */
-    public function isAddable($product)
+    public function isAddable(ProductInterface $product)
     {
         $args = array_merge(array($this), func_get_args());
 
@@ -308,7 +309,7 @@ class Basket implements \Serializable
      *
      * @return Product
      */
-    public function getElement($product) {
+    public function getElement(ProductInterface $product) {
         if (is_object($product)) {
             $pos = $this->pos[$product->getId()];
         }
@@ -328,10 +329,10 @@ class Basket implements \Serializable
      *
      * @return BasketElement
      */
-    public function removeElement($element)
+    public function removeElement(BasketElementInterface $element)
     {
 
-        if ($element instanceof Product) {
+        if ($element instanceof ProductInterface) {
             $pos = $this->pos[$element->getId()];
             $element = $this->basketElements[$pos];
         }
@@ -356,7 +357,7 @@ class Basket implements \Serializable
      *
      * @return BasketElement
      */
-    public function addProduct(Product $product)
+    public function addProduct(ProductInterface $product)
     {
 
         $this->reset(false);
@@ -378,7 +379,7 @@ class Basket implements \Serializable
      * @param Product $product
      * @return BasketElement
      */
-    public function mergeProduct(Product $product)
+    public function mergeProduct(ProductInterface $product)
     {
 
         $args = func_get_args();
@@ -393,7 +394,7 @@ class Basket implements \Serializable
      *
      * @param BasketElement $basketElement
      */
-    public function addBasketElement($basketElement)
+    public function addBasketElement(BasketElementInterface $basketElement)
     {
 
         $this->reset(false);
@@ -417,7 +418,7 @@ class Basket implements \Serializable
     {
         foreach ($this->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();
-            if ($product instanceof Product) {
+            if ($product instanceof ProductInterface) {
                 if ($product->isRecurrentPayment() === true) {
 
                     return true;
@@ -494,7 +495,7 @@ class Basket implements \Serializable
     {
 
         $method = $this->getDeliveryMethod();
-        if (!$method instanceof Delivery) {
+        if (!$method instanceof DeliveryInterface) {
             return 0;
         }
 
@@ -507,7 +508,7 @@ class Basket implements \Serializable
      * @param Product $product
      * @return boolean
      */
-    public function hasProduct(Product $product)
+    public function hasProduct(ProductInterface $product)
     {
         if (!array_key_exists($product->getId(), $this->pos)) {
             return false;
@@ -638,7 +639,7 @@ class Basket implements \Serializable
         return $this->paymentMethodCode;
     }
 
-    public function setCustomer($customer)
+    public function setCustomer(CustomerInterface $customer)
     {
         $this->customer = $customer;
         $this->customerId = $customer ? $customer->getId() : null;

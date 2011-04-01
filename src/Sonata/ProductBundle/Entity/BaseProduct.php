@@ -10,10 +10,16 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Delivery\DeliveryInterface;
+use Sonata\MediaBundle\Model\MediaInterface;
+   
+use Sonata\Component\Product\ProductCategoryInterface;
+
 /**
  * Sonata\ProductBundle\Entity\BaseProduct
  */
-abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
+abstract class BaseProduct implements ProductInterface
 {
     /**
      * @var text $sku
@@ -56,12 +62,12 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     protected $enabled;
 
     /**
-     * @var datetime $updated_at
+     * @var datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $created_at
+     * @var datetime $createdAt
      */
     protected $createdAt;
 
@@ -251,17 +257,17 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     }
 
     /**
-     * Set updated_at
+     * Set updatedAt
      *
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
     /**
-     * Get updated_at
+     * Get updatedAt
      *
      * @return datetime $updatedAt
      */
@@ -271,17 +277,17 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
     }
 
     /**
-     * Set created_at
+     * Set createdAt
      *
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * Get created_at
+     * Get createdAt
      *
      * @return datetime $createdAt
      */
@@ -315,7 +321,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      *
      * @param Sonata\ProductBundle\Entity\BaseDelivery $delivery
      */
-    public function addDelivery($delivery)
+    public function addDelivery(DeliveryInterface $delivery)
     {
         $this->delivery[] = $delivery;
     }
@@ -335,7 +341,8 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      * @abstract
      * @return string the product name
      */
-    public function getParent() {
+    public function getParent()
+    {
 
         return $this->parent;
     }
@@ -344,7 +351,8 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      * @abstract
      * @return
      */
-    public function setParent($parent) {
+    public function setParent(ProductInterface $parent)
+    {
         $this->parent = $parent;
     }
 
@@ -353,7 +361,8 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      * @abstract
      * @return string the product name
      */
-    public function getOptions() {
+    public function getOptions()
+    {
 
         return $this->options;
     }
@@ -362,11 +371,13 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      * @abstract
      * @return
      */
-    public function setOptions($options) {
+    public function setOptions(array $options)
+    {
         $this->$options = $options;
     }
 
-    public function isVariation() {
+    public function isVariation()
+    {
 
         return $this->getParent() !== null;
     }
@@ -401,7 +412,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      *
      * @param Application\Sonata\ProductBundle\Entity\ProductCategory $productCategories
      */
-    public function addProductCategories(\Application\Sonata\ProductBundle\Entity\ProductCategory $productCategories)
+    public function addProductCategories(ProductCategoryInterface $productCategories)
     {
         $this->productCategories[] = $productCategories;
     }
@@ -425,7 +436,7 @@ abstract class BaseProduct implements \Sonata\Component\Product\ProductInterface
      *
      * @param Application\Sonata\MediaBundle\Entity\Media $image
      */
-    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    public function setImage(MediaInterface $image = null)
     {
         $this->image = $image;
     }

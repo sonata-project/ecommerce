@@ -11,51 +11,39 @@
 
 namespace Sonata\PaymentBundle\Entity;
 
-
+use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Payment\PaymentInterface;
+use Sonata\Component\Order\OrderInterface;
 
 /**
  * The Transaction class represents a callback request from the bank.
  *
  * The object contains :
  *   - the order            : the related order
- *   - the transaction_id   : the transaction token from the bank
+ *   - the transactionId    : the transaction token from the bank
  *   - the state            : the current state of the transaction, only OK or KO
  *   - the status           : the current status of the transaction
  *   - the error code       : the current error code of the transaction from the payment handler
  *
  */
-class BaseTransaction 
+class BaseTransaction implements TransactionInterface
 {
-
-    const STATE_OK = 1;
-    const STATE_KO = 2;
-
-    const STATUS_ORDER_UNKNOWN   = -1;  // the order is unknow
-    const STATUS_OPEN             = 0;  // created but not validated
-    const STATUS_PENDING          = 1;  // the bank send a 'pending-like' status, so the payment is not validated, but the user payed
-    const STATUS_VALIDATED        = 2;  // the bank confirm the payment
-    const STATUS_CANCELLED        = 3;  // the user cancelled the payment
-    const STATUS_UNKNOWN          = 4;  // the bank sent a unknown code ...
-    const STATUS_ERROR_VALIDATION = 9;  // something wrong happen when the bank validate the postback
-    const STATUS_WRONG_CALLBACK   = 10; // something wrong is sent from the bank. hack or the bank change something ...
-    const STATUS_WRONG_REQUEST    = 11; // the callback request is not valid
 
     protected $order;
 
-    protected $transaction_id;
+    protected $transactionId;
 
     protected $state;
 
     protected $parameters = array();
 
-    protected $status_code;
+    protected $statusCode;
 
-    protected $created_at;
+    protected $createdAt;
 
-    protected $payment_code;
+    protected $paymentCode;
 
-    public function setOrder($order)
+    public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
     }
@@ -75,45 +63,43 @@ class BaseTransaction
         return $this->state;
     }
 
-    public function setTransactionId($transaction_id)
+    public function setTransactionId($transactionId)
     {
-        $this->transaction_id = $transaction_id;
+        $this->transactionId = $transactionId;
     }
 
     public function getTransactionId()
     {
-        return $this->transaction_id;
+        return $this->transactionId;
     }
 
     public function isValid() {
-        return $this->state == self::STATE_OK;
+        return $this->state == TransactionInterface::STATE_OK;
     }
 
-    public function setParameters($parameters)
+    public function setParameters(array $parameters)
     {
         $this->parameters = $parameters;
     }
 
     public function getParameters()
     {
-
         return $this->parameters;
     }
 
     public function get($name, $default = null)
     {
-
         return isset($this->parameters[$name]) ? $this->parameters[$name] : $default;
     }
 
-    public function setStatusCode($status_code)
+    public function setStatusCode($statusCode)
     {
-        $this->status_code = $status_code;
+        $this->statusCode = $statusCode;
     }
 
     public function getStatusCode()
     {
-        return $this->status_code;
+        return $this->statusCode;
     }
 
     /**
@@ -124,33 +110,33 @@ class BaseTransaction
     public static function getStatusList()
     {
         return array(
-            PaymentInterface::STATUS_ORDER_UNKNOWN     => 'order_unknown',
-            PaymentInterface::STATUS_OPEN              => 'open',
-            PaymentInterface::STATUS_PENDING           => 'pending',
-            PaymentInterface::STATUS_VALIDATED         => 'validated',
-            PaymentInterface::STATUS_CANCELLED         => 'cancelled',
-            PaymentInterface::STATUS_ERROR_VALIDATION  => 'error_validation',
-            PaymentInterface::STATUS_WRONG_CALLBACK    => 'wrong_callback',
+            TransactionInterface::STATUS_ORDER_UNKNOWN     => 'order_unknown',
+            TransactionInterface::STATUS_OPEN              => 'open',
+            TransactionInterface::STATUS_PENDING           => 'pending',
+            TransactionInterface::STATUS_VALIDATED         => 'validated',
+            TransactionInterface::STATUS_CANCELLED         => 'cancelled',
+            TransactionInterface::STATUS_ERROR_VALIDATION  => 'error_validation',
+            TransactionInterface::STATUS_WRONG_CALLBACK    => 'wrong_callback',
         );
     }
 
-    public function setCreatedAt($created_at)
+    public function setCreatedAt(\DateTime $createdAt = null)
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
     }
 
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setPaymentCode($payment_code)
+    public function setPaymentCode($paymentCode)
     {
-        $this->payment_code = $payment_code;
+        $this->paymentCode = $paymentCode;
     }
 
     public function getPaymentCode()
     {
-        return $this->payment_code;
+        return $this->paymentCode;
     }
 }

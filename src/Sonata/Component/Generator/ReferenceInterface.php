@@ -11,11 +11,13 @@
 
 namespace Sonata\Component\Generator;
 
+use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Order\OrderInterface;
+
 interface ReferenceInterface
 {
 
-    public function invoice($invoice);
+    function invoice(InvoiceInterface $invoice);
 
-    public function order($order);
-
+    function order(OrderInterface $order);
 }
