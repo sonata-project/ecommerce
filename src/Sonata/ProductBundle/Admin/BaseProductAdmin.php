@@ -14,8 +14,8 @@ namespace Sonata\ProductBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-use Knplabs\MenuBundle\Menu;
-use Knplabs\MenuBundle\MenuItem;
+use Knplabs\Bundle\MenuBundle\Menu;
+use Knplabs\Bundle\MenuBundle\MenuItem;
     
 abstract class BaseProductAdmin extends Admin
 {
@@ -40,7 +40,6 @@ abstract class BaseProductAdmin extends Admin
         return 'SonataProduct:ProductAdmin:list.html.twig';
     }
 
-
     public function configureRoutes(RouteCollection $collection)
     {
         $admin = $this->isChild() ? $this->getParent() : $this;
@@ -49,5 +48,4 @@ abstract class BaseProductAdmin extends Admin
         $collection->add('variation_list', $admin->getRouterIdParameter().'/variation-list');
         $collection->add('category', $admin->getRouterIdParameter().'/category');
     }
-
 }

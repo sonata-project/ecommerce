@@ -11,8 +11,8 @@
 
 namespace Sonata\ProductBundle\Admin;
 
-use Knplabs\MenuBundle\Menu;
-use Knplabs\MenuBundle\MenuItem;
+use Knplabs\Bundle\MenuBundle\Menu;
+use Knplabs\Bundle\MenuBundle\MenuItem;
 
 class ProductAdmin extends BaseProductAdmin
 {
