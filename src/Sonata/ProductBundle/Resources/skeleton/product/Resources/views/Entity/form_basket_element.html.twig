@@ -12,11 +12,11 @@ file that was distributed with this source code.
 
 {#
     Default product template file, you can
-      => customize the global template : Product:Product:form_basket_element.html.twig
+      => customize the global template : ProductBundle:Product:form_basket_element.html.twig
       => rewrite your own template
 #}
 
-{% extends 'SonataProduct:Product:form_basket_element.html.twig' %}
+{% extends 'SonataProductBundle:Product:form_basket_element.html.twig' %}
 
 {% block product_description %}
     <b>{{ basketElement.name }}</b> <br />

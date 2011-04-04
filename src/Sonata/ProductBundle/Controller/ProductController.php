@@ -40,7 +40,7 @@ class ProductController extends Controller
             throw new NotFoundHttpException(sprintf('Unable to find the product code with product.id=%d', $productId));
         }
 
-        $action = sprintf('SonataProduct:%s:view', ucfirst($code));
+        $action = sprintf('SonataProductBundle:%s:view', ucfirst($code));
         $response = $this->forward($action, array(
             'product' => $product
         ));
@@ -61,7 +61,7 @@ class ProductController extends Controller
     {
 
         $code   = $this->get('sonata.product.pool')->getProductCode($basketElement->getProduct());
-        $action = sprintf('SonataProduct:%s:renderFormBasketElement', ucfirst($code)) ;
+        $action = sprintf('SonataProductBundle:%s:renderFormBasketElement', ucfirst($code)) ;
 
         $response = $this->forward($action, array(
             'fieldGroup'     => $fieldGroup,
@@ -83,7 +83,7 @@ class ProductController extends Controller
     public function renderFinalReviewBasketElementAction($basketElement)
     {
         $code   = $this->get('sonata.product.pool')->getProductCode($basketElement->getProduct());
-        $action = sprintf('SonataProduct:%s:renderFinalReviewBasketElement', ucfirst($code)) ;
+        $action = sprintf('SonataProductBundle:%s:renderFinalReviewBasketElement', ucfirst($code)) ;
 
         $response = $this->forward($action, array(
             'basketElement'  => $basketElement,

@@ -13,7 +13,8 @@ namespace Sonata\PaymentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
+    
 use Application\Sonata\PaymentBundle\Entity\Transaction;
 
 class PaymentController extends Controller
@@ -38,7 +39,7 @@ class PaymentController extends Controller
         // retrieve the related order
         $reference  = $payment->getOrderReference($transaction);
         $em         = $this->get('doctrine.orm.entity_manager');
-        $order      = $em->getRepository('Order:Order')->findOneByReference($reference);
+        $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
         if (!$order) {
 
@@ -74,7 +75,7 @@ class PaymentController extends Controller
 
         $this->get('session')->set('sonata/basket', $basket);
 
-        return $this->render('Payment:Payment:error.html.twig', array(
+        return $this->render('PaymentBundle:Payment:error.html.twig', array(
             'order' => $order,
             'basket' => $basket
         ));
@@ -96,14 +97,14 @@ class PaymentController extends Controller
         $reference = $payment->getOrderReference($transaction);
 
         $em = $this->get('doctrine.orm.entity_manager');
-        $order = $em->getRepository('Order:Order')->findOneByReference($reference);
+        $order = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
         if (!$order) {
 
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
 
-        return $this->render('Payment:Payment:confirmation.html.twig', array(
+        return $this->render('PaymentBundle:Payment:confirmation.html.twig', array(
             'order' => $order,
         ));
     }
@@ -122,11 +123,11 @@ class PaymentController extends Controller
         $customer   = $basket->getCustomer();
 
         if ($request->getMethod() !== 'POST') {
-            new RedirectResponse($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         if (!$basket->isValid()) {
-            new RedirectResponse($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
         
         $payment = $basket->getPaymentMethod();
@@ -136,7 +137,7 @@ class PaymentController extends Controller
 
             $this->get('session')->setFlash('notice', $this->containe->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'sonata_payment'));
 
-            new RedirectResponse($this->generateUrl('sonata_basket_index'));
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         // transform the basket into order
@@ -180,7 +181,7 @@ class PaymentController extends Controller
         // retrieve the related order
         $reference  = $payment->getOrderReference($transaction);
         $em         = $this->get('doctrine.orm.entity_manager');
-        $order      = $em->getRepository('Order:Order')->findOneByReference($reference);
+        $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
         if (!$order) {
 

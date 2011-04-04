@@ -5,19 +5,19 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="sonata_payment_confirmation" pattern="/confirmation">
-        <default key="_controller">SonataPayment:Payment:confirmation</default>
+        <default key="_controller">SonataPaymentBundle:Payment:confirmation</default>
     </route>
 
     <route id="sonata_payment_error" pattern="/error">
-        <default key="_controller">SonataPayment:Payment:error</default>
+        <default key="_controller">SonataPaymentBundle:Payment:error</default>
     </route>
 
     <route id="sonata_payment_callbank" pattern="/callbank">
-        <default key="_controller">SonataPayment:Payment:callbank</default>
+        <default key="_controller">SonataPaymentBundle:Payment:callbank</default>
     </route>
 
     <route id="sonata_payment_callback" pattern="/callback">
-        <default key="_controller">SonataPayment:Payment:callback</default>
+        <default key="_controller">SonataPaymentBundle:Payment:callback</default>
     </route>
 
 </routes>

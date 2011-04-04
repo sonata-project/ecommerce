@@ -24,7 +24,7 @@ abstract class BaseCustomerAdmin extends EntityAdmin
 //     */
 //    public function getEditTemplate()
 //    {
-//        return 'SonataProduct:ProductAdmin:edit.html.twig';
+//        return 'SonataProductBundle:ProductAdmin:edit.html.twig';
 //    }
 //
 //    /**
@@ -34,6 +34,6 @@ abstract class BaseCustomerAdmin extends EntityAdmin
 //     */
 //    public function getListTemplate()
 //    {
-//        return 'SonataProduct:ProductAdmin:list.html.twig';
+//        return 'SonataProductBundle:ProductAdmin:list.html.twig';
 //    }
 }

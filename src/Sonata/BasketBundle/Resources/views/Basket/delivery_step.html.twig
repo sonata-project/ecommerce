@@ -17,7 +17,7 @@ file that was distributed with this source code.
     <div>
         <h2>{% trans 'title_delivery_addresses' from 'BasketBundle' %}</h2>
         {{ form_errors(form.deliveryAddress) }}
-        {{ form_field(form.deliveryAddress, {}, {}, 'SonataBasket:Basket:render_delivery_address.html.twig') }}
+        {{ form_field(form.deliveryAddress, {}, {}, 'SonataBasketBundle:Basket:render_delivery_address.html.twig') }}
     </div>
 
     <div>
@@ -27,7 +27,7 @@ file that was distributed with this source code.
             <p>{% trans 'message_no_delivery_methods_available' from 'BasketBundle' %}</p>
         {% else %}
             {{ form_errors(form.deliveryMethod) }}
-            {{ form_field(form.deliveryMethod, {}, {}, 'SonataBasket:Basket:render_delivery_address.html.twig') }}
+            {{ form_field(form.deliveryMethod, {}, {}, 'SonataBasketBundle:Basket:render_delivery_address.html.twig') }}
         {% endif %}
     </div>
 

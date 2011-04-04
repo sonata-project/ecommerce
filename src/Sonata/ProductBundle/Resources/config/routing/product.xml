@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="sonata_product_view" pattern="/{productId}/{slug}">
-        <default key="_controller">SonataProduct:Product:view</default>
+        <default key="_controller">SonataProductBundle:Product:view</default>
     </route>
 
     <route id="sonata_product_view_variations" pattern="/{productId}/{slug}/variations">
-        <default key="_controller">SonataProduct:Product:view</default>
+        <default key="_controller">SonataProductBundle:Product:view</default>
     </route>
 
 </routes>

@@ -5,15 +5,15 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="sonata_invoice_index" pattern="/">
-        <default key="_controller">SonataInvoice:Invoice:index</default>
+        <default key="_controller">SonataInvoiceBundle:Invoice:index</default>
     </route>
 
     <route id="sonata_invoice_view" pattern="/{reference}">
-        <default key="_controller">SonataInvoice:Invoice:view</default>
+        <default key="_controller">SonataInvoiceBundle:Invoice:view</default>
     </route>
 
     <route id="sonata_invoice_download" pattern="/{reference}/download">
-        <default key="_controller">SonataInvoice:Invoice:download</default>
+        <default key="_controller">SonataInvoiceBundle:Invoice:download</default>
     </route>
 
 </routes>

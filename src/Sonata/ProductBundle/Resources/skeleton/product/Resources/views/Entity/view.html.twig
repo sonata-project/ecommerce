@@ -12,11 +12,11 @@ file that was distributed with this source code.
 
 {#
     Default product template file, you can
-      => customize the global template : Product:Product:view.html.twig
+      => customize the global template : ProductBundle:Product:view.html.twig
       => rewrite your own template
 #}
 
-{% extends 'SonataProduct:Product:view.html.twig' %}
+{% extends 'SonataProductBundle:Product:view.html.twig' %}
 
 {% block product_title %}{{ product.name }}{% endblock %}
 

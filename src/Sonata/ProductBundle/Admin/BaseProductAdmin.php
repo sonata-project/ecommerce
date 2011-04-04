@@ -17,7 +17,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Knplabs\Bundle\MenuBundle\Menu;
 use Knplabs\Bundle\MenuBundle\MenuItem;
     
-abstract class BaseProductAdmin extends Admin
+abstract class BaseProductAdmin extends EntityAdmin
 {
     
     /**
@@ -27,7 +27,7 @@ abstract class BaseProductAdmin extends Admin
      */
     public function getEditTemplate()
     {
-        return 'SonataProduct:ProductAdmin:edit.html.twig';
+        return 'SonataProductBundle:ProductAdmin:edit.html.twig';
     }
 
     /**
@@ -37,11 +37,10 @@ abstract class BaseProductAdmin extends Admin
      */
     public function getListTemplate()
     {
-        return 'SonataProduct:ProductAdmin:list.html.twig';
+        return 'SonataProductBundle:ProductAdmin:list.html.twig';
     }
 
     public function configureRoutes(RouteCollection $collection)
-    {
         $admin = $this->isChild() ? $this->getParent() : $this;
         
         $collection->add('duplicate', $admin->getRouterIdParameter().'/duplicate');

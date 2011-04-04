@@ -5,27 +5,27 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="sonata_admin_order_index" pattern="/">
-        <default key="_controller">SonataOrder:OrderAdmin:index</default>
+        <default key="_controller">SonataOrderBundle:OrderAdmin:index</default>
     </route>
 
     <route id="sonata_admin_order_view" pattern="/{reference}">
-        <default key="_controller">SonataOrder:OrderAdmin:view</default>
+        <default key="_controller">SonataOrderBundle:OrderAdmin:view</default>
     </route>
 
     <route id="sonata_admin_order_view" pattern="/{reference}/download">
-        <default key="_controller">SonataOrder:OrderAdmin:download</default>
+        <default key="_controller">SonataOrderBundle:OrderAdmin:download</default>
     </route>
 
     <route id="sonata_admin_order_update" pattern="/{reference}/update">
-        <default key="_controller">SonataOrder:OrderAdmin:update</default>
+        <default key="_controller">SonataOrderBundle:OrderAdmin:update</default>
     </route>
 
     <route id="sonata_admin_order_element_view" pattern="/{reference}/element/{id}">
-        <default key="_controller">SonataOrder:OrderAdmin:viewOrderElement</default>
+        <default key="_controller">SonataOrderBundle:OrderAdmin:viewOrderElement</default>
     </route>
 
     <route id="sonata_admin_order_element_update" pattern="/{reference}/element/{id}/update">
-        <default key="_controller">SonataOrder:OrderAdmin:updateOrderElement</default>
+        <default key="_controller">SonataOrderBundle:OrderAdmin:updateOrderElement</default>
     </route>
 
 </routes>
