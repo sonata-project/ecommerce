@@ -29,7 +29,7 @@ interface OrderInterface
      * @return integer the order id
      */
     function getId();
-    
+
     /**
      * Set reference
      *
@@ -508,14 +508,14 @@ interface OrderInterface
     /**
      * Set user
      *
-     * @param Application\FOS\UserBundle\Entity\User $user
+     * @param Application\Sonata\UserBundle\Entity\User $user
      */
     function setUser($user);
 
     /**
      * Get user
      *
-     * @return Application\FOS\UserBundle\Entity\User $user
+     * @return Application\Sonata\UserBundle\Entity\User $user
      */
     function getUser();
 

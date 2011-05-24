@@ -74,7 +74,7 @@ Installation
 
             selector:
                 class: Sonata\Component\Delivery\Selector
-            
+
         sonata_payment:
             methods:
                 - { id: free, name: Free, enabled: true, class: Sonata\Component\Payment\Free }
@@ -89,7 +89,7 @@ Installation
 
             class:
                 model:
-                    user: Application\FOS\UserBundle\Entity\User # you must define your own user class
+                    user: Application\Sonata\UserBundle\Entity\User # you must define your own user class
 
         sonata_payment:
             methods:
@@ -102,7 +102,7 @@ Installation
                         order: sonata.transformer.order
             selector:
                 class: Sonata\Component\Payment\Selector
-        
+
 * add the current lines in your routing.yml files
 
         # sonata front controller

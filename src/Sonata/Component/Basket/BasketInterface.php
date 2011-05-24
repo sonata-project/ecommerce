@@ -18,7 +18,7 @@ use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\Pool;
-    
+
 interface BasketInterface
 {
 
@@ -163,26 +163,6 @@ interface BasketInterface
     function removeElement(BasketElementInterface $element);
 
     /**
-     * Add an element into the basket, the product behavior manage this action
-     *
-     * @param Product $product
-     *
-     * @return BasketElement
-     */
-    function addProduct(ProductInterface $product);
-
-    /**
-     * Merge one Product with another Product, the product
-     * must have the same id.
-     *
-     * The product behavior manages this action
-     *
-     * @param Product $product
-     * @return BasketElement
-     */
-    function mergeProduct(ProductInterface $product);
-
-    /**
      * Add a basket element into the current basket
      *
      * @param BasketElement $basketElement
@@ -247,7 +227,7 @@ interface BasketInterface
     function setDeliveryAddressId($deliveryAddressId);
 
     function getDeliveryAddressId();
-    
+
     function setPaymentAddressId($paymentAddressId);
 
     function getPaymentAddressId();

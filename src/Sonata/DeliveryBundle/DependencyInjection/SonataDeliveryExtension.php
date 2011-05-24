@@ -38,7 +38,7 @@ class SonataDeliveryExtension extends Extension
     public function load(array $config, ContainerBuilder $container)
     {
         $config = call_user_func_array('array_merge_recursive', $config);
-        
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('delivery.xml');
 
@@ -68,12 +68,8 @@ class SonataDeliveryExtension extends Extension
 
         $container->setDefinition('sonata.delivery.pool',$pool_definition);
 
-        $definition = new Definition($config['selector']['class']);
-        $definition->addMethodCall('setLogger', array(new Reference('logger')));
-        $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
-        $definition->addMethodCall('setDeliveryPool', array(new Reference('sonata.delivery.pool')));
-
-        $container->setDefinition('sonata.delivery.selector', $definition);
+        $container->getDefinition('sonata.delivery.selector')
+          ->setClass($config['selector']['class']);
     }
 
     /**
@@ -95,7 +91,7 @@ class SonataDeliveryExtension extends Extension
 
     public function getAlias()
     {
-        
+
         return 'sonata_delivery';
     }
 }

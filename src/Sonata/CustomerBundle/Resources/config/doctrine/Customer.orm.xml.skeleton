@@ -10,7 +10,7 @@
     -->
     <entity
         name="Application\Sonata\CustomerBundle\Entity\Customer"
-        table="invoice__invoice"
+        table="customer__customer"
         repository-class="Application\CustomerBundle\Entity\CustomerRepository">
 
         <id name="id" type="integer" column="id">

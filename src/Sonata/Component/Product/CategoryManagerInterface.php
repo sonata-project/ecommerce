@@ -25,7 +25,7 @@ interface CategoryManagerInterface
     /**
      * Deletes a category
      *
-     * @param Category
+     * @param \Sonata\Component\Product\CategoryInterface $category
      * @return void
      */
     function deleteCategory(CategoryInterface $category);
@@ -48,8 +48,18 @@ interface CategoryManagerInterface
     /**
      * Updates a category
      *
-     * @param Category $category
+     * @param \Sonata\Component\Product\CategoryInterface $category
      * @return void
      */
     function updateCategory(CategoryInterface $category);
+
+
+    /**
+     * Returns the root categories
+     *
+     * @abstract
+     * @param array $criteria
+     * @return void
+     */
+    function getRootCategoriesPager($page = 1, $limit = 25);
 }

@@ -8,10 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Sonata\CategoryBundle\Entity;
+namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\CategoryManagerInterface;
 use Sonata\Component\Product\CategoryInterface;
+
+use Sonata\AdminBundle\Datagrid\ORM\ProxyQuery;
+use Sonata\AdminBundle\Datagrid\ORM\Pager;
+
 use Doctrine\ORM\EntityManager;
 
 class CategoryManager implements CategoryManagerInterface
@@ -19,7 +23,7 @@ class CategoryManager implements CategoryManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
@@ -70,9 +74,20 @@ class CategoryManager implements CategoryManagerInterface
      * @param array $criteria
      * @return Category
      */
-    public function findCategoryBy(array $criteria)
+    public function findOneCategoryBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * Finds one category by the given criteria
+     *
+     * @param array $criteria
+     * @return Category
+     */
+    public function findCategoryBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -85,5 +100,39 @@ class CategoryManager implements CategoryManagerInterface
     {
         $this->em->remove($category);
         $this->em->flush();
+    }
+
+    public function getRootCategoriesPager($page = 1, $limit = 25)
+    {
+        $page = (int)$page == 0 ? 1 : (int)$page;
+
+        $queryBuiler = $this->em->createQueryBuilder()
+            ->select('c')
+            ->from($this->class, 'c')
+            ->andWhere('c.parent IS NULL');
+
+        $pager = new Pager($limit);
+        $pager->setQuery(new ProxyQuery($queryBuiler));
+        $pager->setPage($page);
+        $pager->init();
+
+        return $pager;
+    }
+
+    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25)
+    {
+
+        $queryBuiler = $this->em->createQueryBuilder()
+            ->select('c')
+            ->from($this->class, 'c')
+            ->where('c.parent = :categoryId')
+            ->setParameter('categoryId', $categoryId);
+
+        $pager = new Pager($limit);
+        $pager->setQuery(new ProxyQuery($queryBuiler));
+        $pager->setPage($page);
+        $pager->init();
+
+        return $pager;
     }
 }

@@ -10,6 +10,7 @@
 namespace Sonata\InvoiceBundle\Entity;
 
 use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Customer\CustomerInterface;
 
 /**
  * Sonata\InvoiceBundle\Entity\BaseInvoice
@@ -24,7 +25,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * @var integer $userId
      */
-    protected $customerId;
+    protected $customer;
 
     /**
      * @var string $currency
@@ -102,7 +103,7 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $mobile;
 
     /**
-     * @var Application\FOS\UserBundle\Entity\User
+     * @var Application\Sonata\UserBundle\Entity\User
      */
     protected $user;
 
@@ -129,21 +130,21 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Set userId
      *
-     * @param integer $userId
+     * @param integer $customer
      */
-    public function setUserId($userId)
+    public function setCustomer(CustomerInterface $customer)
     {
-        $this->userId = $userId;
+        $this->customer = $customer;
     }
 
     /**
      * Get userId
      *
-     * @return integer $userId
+     * @return integer $customer
      */
-    public function getUserId()
+    public function getCustomer()
     {
-        return $this->userId;
+        return $this->customer;
     }
 
     /**
@@ -449,9 +450,9 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Set user
      *
-     * @param Application\FOS\UserBundle\Entity\User $user
+     * @param Application\Sonata\UserBundle\Entity\User $user
      */
-    public function setUser(\Application\FOS\UserBundle\Entity\User $user)
+    public function setUser(\Application\Sonata\UserBundle\Entity\User $user)
     {
         $this->user = $user;
     }
@@ -459,7 +460,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Get user
      *
-     * @return Application\FOS\UserBundle\Entity\User $user
+     * @return Application\Sonata\UserBundle\Entity\User $user
      */
     public function getUser()
     {

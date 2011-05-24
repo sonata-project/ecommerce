@@ -4,7 +4,10 @@ namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
-    
+use Sonata\Component\Payment\PaymentInterface;
+use Sonata\Component\Delivery\DeliveryInterface;
+use Sonata\Component\Customer\CustomerInterface;
+
 /**
  * Sonata\OrderBundle\Entity\BaseOrder
  */
@@ -225,7 +228,7 @@ abstract class BaseOrder implements OrderInterface
      *
      * @param string $payment_method
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setPaymentMethod(PaymentInterface $paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
     }
@@ -245,7 +248,7 @@ abstract class BaseOrder implements OrderInterface
      *
      * @param string $deliveryMethod
      */
-    public function setDeliveryMethod($deliveryMethod)
+    public function setDeliveryMethod(DeliveryInterface $deliveryMethod)
     {
         $this->deliveryMethod = $deliveryMethod;
     }
@@ -883,7 +886,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * Set user
      *
-     * @param Application\FOS\UserBundle\Entity\User $user
+     * @param Application\Sonata\UserBundle\Entity\User $user
      */
     public function setUser($user)
     {
@@ -893,7 +896,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * Get user
      *
-     * @return Application\FOS\UserBundle\Entity\User $user
+     * @return Application\Sonata\UserBundle\Entity\User $user
      */
     public function getUser()
     {
@@ -997,7 +1000,7 @@ abstract class BaseOrder implements OrderInterface
         $this->orderElements = $orderElements;
     }
 
-    public function setCustomer($customer)
+    public function setCustomer(CustomerInterface $customer)
     {
         $this->customer = $customer;
     }

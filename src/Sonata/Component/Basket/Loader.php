@@ -50,7 +50,6 @@ class Loader
      */
     public function getBasket()
     {
-
         if (!$this->basket) {
             $basket = $this->getSession()->get('sonata/basket');
 
@@ -112,14 +111,13 @@ class Loader
 
             } catch(\Exception $e) {
 
-                throw $e;
                 // something went wrong while loading the basket
                 $basket->reset();
             }
 
 
             $this->getSession()->set('sonata/basket', $basket);
-            
+
             $this->basket = $basket;
         }
 

@@ -20,7 +20,7 @@ interface InvoiceElementManagerInterface
      *
      * @return InvoiceElement
      */
-    function createInvoicElement();
+    function createInvoiceElement();
 
     /**
      * Deletes a invoiceElement
@@ -28,7 +28,7 @@ interface InvoiceElementManagerInterface
      * @param Invoiceelement $invoiceeElement
      * @return void
      */
-    function deleteInvoiceelement(InvoiceElementInterface $invoiceElement);
+    function deleteInvoiceElement(InvoiceElementInterface $invoiceElement);
 
     /**
      * Finds one invoiceElement by the given criteria
@@ -36,7 +36,7 @@ interface InvoiceElementManagerInterface
      * @param array $criteria
      * @return InvoiceelementInterface
      */
-    function findInvoiceelementBy(array $criteria);
+    function findInvoiceElementBy(array $criteria);
 
     /**
      * Returns the invoiceElement's fully qualified class name

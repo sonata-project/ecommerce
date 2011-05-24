@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
-    
+
 /**
  * ProductExtension.
  *
@@ -37,17 +37,14 @@ class SonataProductExtension extends Extension
     public function load(array $config, ContainerBuilder $container)
     {
         $config = call_user_func_array('array_merge_recursive', $config);
-        
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('product.xml');
         $loader->load('orm.xml');
 
-        $definition = $container->getDefinition('sonata.product.pool');
-
-        foreach ($config['products'] as $product) {
-
-            $definition->addMethodCall('addProduct', array($product));
-        }
+        $pool = $container->getDefinition('sonata.product.pool');
+        // this value is altered by the AddProductProviderPass class
+        $pool->addMethodCall('__hack', $config['products']);
     }
 
     /**

@@ -13,14 +13,10 @@ namespace Sonata\BasketBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
-
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\ChoiceField;
-use Symfony\Component\Form\CollectionField;
-use Symfony\Component\Form\EntityChoiceField;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-    
+
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Basket\InvalidBasketStateException;
@@ -35,64 +31,51 @@ class BasketController extends Controller
      */
     public function getBasketForm()
     {
-
         // always clone the basket, so the one in session is never altered
-        $form = new Form('basket', array(
-            'data' => clone $this->get('sonata.basket'),
-            'validator' => $this->get('validator'),
-            'validation_groups' => 'elements'
-        ));
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'basket');
+        $basketElementsBuilder = $formBuilder->create('basketElements', 'form');
 
-        $elements = new Form('basketElements');
-        
         foreach ($this->get('sonata.basket')->getBasketElements() as $basketElement) {
+            $basketElementBuilder = $basketElementsBuilder->create($basketElement->getPos(), 'form');
+
+            $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
             // ask each product repository to populate an empty group field instance
             // so each line can be tweaked depends on the product logic
-            $fieldGroup = $this
-                ->get('sonata.product.pool')
-                ->getRepository($basketElement->getProduct())
-                ->generateFieldGroupBasketElement(
-                    new Form($basketElement->getPos()), array(
-                        'data' => $basketElement
-                    )
-                );
+            $provider->defineBasketElementForm($basketElement, $basketElementBuilder);
 
-            $elements->add($fieldGroup);
+            $basketElementsBuilder->add($basketElementBuilder);
         }
 
-        $form->add($elements);
-        
-        return $form;
+        $formBuilder->add($basketElementsBuilder);
+
+        return $formBuilder->getForm();
     }
 
     public function indexAction($form = null)
     {
-        // make sure the session is enabled
-        $this->get('session')->start();
-
         $form = $form ?: $this->getBasketForm();
 
         // always validate the basket
-        if (!$form->isSubmitted())
+        if (!$form->isBound())
         {
             // todo : move this somewhere else
-            if ($violations = $this->get('validator')->validate($form, $form->getValidationGroups())) {
-
-                foreach ($violations as $violation) {
-                    $propertyPath = new \Symfony\Component\Form\PropertyPath($violation->getPropertyPath());
-                    $iterator = $propertyPath->getIterator();
-
-                    if ($iterator->current() == 'data') {
-                        $type = \Symfony\Component\Form\Form::DATA_ERROR;
-                        $iterator->next(); // point at the first data element
-                    } else {
-                        $type = \Symfony\Component\Form\Form::FIELD_ERROR;
-                    }
-
-                    $form->addError(new \Symfony\Component\Form\FieldError($violation->getMessageTemplate(), $violation->getMessageParameters()), $iterator, $type);
-                }
-            }
+//            if ($violations = $this->get('validator')->validate($form->getDa, $form->getValidationGroups())) {
+//
+//                foreach ($violations as $violation) {
+//                    $propertyPath = new \Symfony\Component\Form\PropertyPath($violation->getPropertyPath());
+//                    $iterator = $propertyPath->getIterator();
+//
+//                    if ($iterator->current() == 'data') {
+//                        $type = \Symfony\Component\Form\Form::DATA_ERROR;
+//                        $iterator->next(); // point at the first data element
+//                    } else {
+//                        $type = \Symfony\Component\Form\Form::FIELD_ERROR;
+//                    }
+//
+//                    $form->addError(new \Symfony\Component\Form\FieldError($violation->getMessageTemplate(), $violation->getMessageParameters()), $iterator, $type);
+//                }
+//            }
         }
 
         return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
@@ -127,47 +110,39 @@ class BasketController extends Controller
     public function addProductAction()
     {
         $request = $this->get('request');
-
-        // start the session
-        $this->get('session')->start();
+        $params = $request->get('add_basket');
 
         if ($request->getMethod() != 'POST') {
-            
-            throw new ForbiddenHttpException('invalid request');
+            throw new MethodNotAllowedHttpException('POST');
         }
 
-        $params = $request->get('basket');
-
         // retrieve the product
-        $product = $this
-            ->get('doctrine.orm.default_entity_manager')
-            ->find('Application\Sonata\ProductBundle\Entity\Product', $params['productId']);
+        $product = $this->get('sonata.product.collection.manager')->findOneBy(array('id' => $params['productId']));
 
         if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $params['productId']));
         }
 
-        // retrieve the custom repository for the product type
-        $repository = $this->get('sonata.product.pool')->getRepository($product);
+        // retrieve the custom provider for the product type
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         // load and bind the form
-        $form = $repository->getAddBasketForm($product, $this->get('validator'));
-        $form->bind($request);
+        $form = $provider->defineAddBasketForm($product, $this->get('form.factory')->createNamedBuilder('form', 'add_basket'))->getForm();
+        $form->bindRequest($request);
 
         // if the form is valid add the product to the basket
         if ($form->isValid()) {
-
             $basket = $this->get('sonata.basket');
 
             if ($basket->hasProduct($product)) {
-                $repository->basketMergeProduct($basket,  $product, $form->getData());
+                $provider->basketMergeProduct($basket,  $product, $form->getData());
             } else {
-                $repository->basketAddProduct($basket,  $product, $form->getData());
+                $provider->basketAddProduct($basket,  $product, $form->getData());
             }
 
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
-        
+
         // an error occur, forward the request to the view
         return $this->forward('SonataProductBundle:Product:view', array(
             'productId' => $product,
@@ -178,7 +153,7 @@ class BasketController extends Controller
     public function resetAction()
     {
         $this->get('sonata.basket')->reset();
-        
+
         return new RedirectResponse($this->generateUrl('sonata_basket_index'));
     }
 
@@ -264,7 +239,7 @@ class BasketController extends Controller
 
         return $form;
     }
-    
+
     public function paymentStepAction()
     {
         $basket = clone $this->get('sonata.basket');
@@ -287,7 +262,7 @@ class BasketController extends Controller
             if($this->container->getParameter('kernel.debug')) {
                 throw $e;
             }
-            
+
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 

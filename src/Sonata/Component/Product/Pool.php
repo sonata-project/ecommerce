@@ -10,113 +10,107 @@
 
 namespace Sonata\Component\Product;
 
-/**
- * The pool stored a group of available payment method
- *
- */
 class Pool
 {
     protected $products = array();
-    protected $classes = array();
-
-    protected $em = null;
 
 
-    public function __construct($em)
-    {
-        $this->em = $em;
-    }
     /**
      * add a delivery method into the pool
      *
-     * @param  $instance
+     * @param string $code
+     * @param \Sonata\Component\Product\ProductDefinition $productDescription
      * @return void
      */
-    public function addProduct($definition)
+    public function addProduct($code, ProductDefinition $productDescription)
     {
-        $this->products[$definition['id']] = $definition;
-        $this->classes[$definition['class']] = $definition['id'];
+        $this->products[$code] = $productDescription;
     }
 
     /**
-     * define the entity manager
-     *
-     * @return void
+     * @param string $code
+     * @return \Sonata\Component\Product\ProductProviderInterface
      */
-    public function getEntityManager() {
-        return $this->em;
-    }
-
-
-    /**
-     *
-     * @return array of delivery methods
-     */
-    public function getProductDefinitions()
+    public function getProvider($code)
     {
+        if ($code instanceof ProductInterface) {
+            $code = $this->getProductCode($code);
 
-        return $this->products;
+            if (!$code) {
+                throw new \RuntimeException(sprintf('The class is not linked to a ProductProvider!'));
+            }
+        }
+
+        return $this->getProduct($code)->getProvider();
     }
 
     /**
-     * return a Delivery Object
-     *
-     * @param  $code
-     * @return array
+     * @param string $code
+     * @return \Sonata\Component\Product\ProductManagerInterface
      */
-    public function getProductDefinition($code)
+    public function getManager($code)
     {
+        if ($code instanceof ProductInterface) {
+            $code = $this->getProductCode($code);
 
-        return isset($this->products[$code]) ? $this->products[$code] : null;
+            if (!$code) {
+                throw new \RuntimeException(sprintf('The class is not linked to a ProductProvider!'));
+            }
+        }
+
+        return $this->getProduct($code)->getManager();
     }
 
-    public function getProductCode($product)
+    public function getProductCode(ProductInterface $product)
     {
         $class = get_class($product);
-        
-        return isset($this->classes[$class]) ? $this->classes[$class] : null;
+        foreach ($this->products as $code => $productDescription) {
+            if ($productDescription->getManager()->getClass() == $class) {
+                return $code;
+            }
+        }
+
+        return null;
     }
 
     /**
-     * @throws RuntimeException
-     * @param  $product ProductInterface|product code|product class
+     * @param string $code
+     * @return boolean
+     */
+    public function hasProvider($code)
+    {
+        return isset($this->product[$code]);
+    }
+
+    /**
+     *
+     * @param string $code
+     * @return boolean
+     */
+    public function hasProduct($code)
+    {
+        return isset($this->products[$code]);
+    }
+
+    /**
+     *
+     * @param string $code
+     * @return \Sonata\Component\Product\ProductDescription
+     */
+    public function getProduct($code)
+    {
+        if (!$this->hasProduct($code)) {
+            throw new \RuntimeException(sprintf('The product `%s` does not exist!', $code));
+        }
+
+        return $this->products[$code];
+    }
+
+    /**
      * @return array
      */
-    public function getRepository($product)
-    {
-        // code
-        if (is_string($product) && strpos($product, '\\') === false) {
-            
-            $class =  $this->products[$product]['class'];
-        }
-        else if ($product instanceof ProductInterface) {
-
-            $class = get_class($product);
-        } else {
-            
-            $class = $product;
-        }
-
-        return $this->getEntityManager()->getRepository($class);
-    }
-
-    public function setClasses($classes)
-    {
-        $this->classes = $classes;
-    }
-
-    public function getClasses()
-    {
-        return $this->classes;
-    }
-
-    public function setProducts($products)
-    {
-        $this->products = $products;
-    }
-
     public function getProducts()
     {
-        return $this->products;
+      return $this->products;
     }
 }

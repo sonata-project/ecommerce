@@ -41,10 +41,11 @@ interface BasketElementInterface
     /**
      * Define the related product
      *
-     * @param Product $product
-     * @return BasketElement
+     * @param string $code
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @return false
      */
-    function setProduct(ProductInterface $product);
+    function setProduct($code, ProductInterface $product);
 
     /**
      * Return the related product
@@ -55,7 +56,7 @@ interface BasketElementInterface
 
     /**
      * return the product id
-     * 
+     *
      * @return null
      */
     function getProductId();
@@ -63,7 +64,7 @@ interface BasketElementInterface
     /**
      * Never call this method, use the setProduct instead. This method is only used
      * by the form framework
-     * 
+     *
      * @param  $productId
      * @return void
      */
@@ -144,7 +145,7 @@ interface BasketElementInterface
 
     /**
      * return the quantity
-     * 
+     *
      * @return int
      */
     function getQuantity();
@@ -181,17 +182,4 @@ interface BasketElementInterface
      * @return \Sonata\Component\Product\ProductManagerInterface
      */
     function getProductManager();
-
-    /**
-     * @abstract
-     * @param string $productCode
-     * @return void
-     */
-    function setProductCode($productCode);
-
-    /**
-     * @abstract
-     * @return string
-     */
-    function getProductCode();
 }

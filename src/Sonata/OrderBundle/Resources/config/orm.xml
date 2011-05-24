@@ -10,13 +10,15 @@
     </parameters>
 
     <services>
+        <service id="sonata.order.entity_manager" alias="doctrine.orm.default_entity_manager" />
+
         <service id="sonata.order.manager" class="%sonata.order.manager.class%">
-            <argument type="service" id="sonata.entity_manager" />
+            <argument type="service" id="sonata.order.entity_manager" />
             <argument>Application\Sonata\OrderBundle\Entity\Order</argument>
         </service>
 
         <service id="sonata.order_element.manager" class="%sonata.order_element.manager.class%">
-            <argument type="service" id="sonata.entity_manager" />
+            <argument type="service" id="sonata.order.entity_manager" />
             <argument>Application\Sonata\OrderBundle\Entity\OrderElement</argument>
         </service>
     </services>

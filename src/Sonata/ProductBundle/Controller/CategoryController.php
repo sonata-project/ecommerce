@@ -27,24 +27,12 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
-        $class          = $em->getClassMetaData('Application\Sonata\ProductBundle\Entity\Category')->name;
-
-        $queryBuilder = $repository
-            ->createQueryBuilder('c')
-            ->where('c.parent IS NULL');
-
-
-        $pager = new Pager($class);
-        $pager->setQueryBuilder($queryBuilder);
-        $pager->setPage($this->get('request')->get('page', 1));
-        $pager->init();
+        $pager = $this->get('sonata.category.manager')
+            ->getRootCategoriesPager($this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:index.html.twig', array(
             'pager' => $pager,
         ));
-        
     }
 
     /**
@@ -57,7 +45,6 @@ class CategoryController extends Controller
      */
     public function viewAction($categoryId, $slug)
     {
-
         $em             = $this->get('doctrine.orm.default_entity_manager');
         $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
 
@@ -80,20 +67,8 @@ class CategoryController extends Controller
      */
     public function listSubCategoriesAction($categoryId)
     {
-        $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
-        $class          = $em->getClassMetaData('Application\Sonata\ProductBundle\Entity\Category')->name;
-
-        $queryBuilder = $repository
-            ->createQueryBuilder('c')
-            ->where('c.parent = :categoryId');
-
-        $pager = new Pager($class);
-        $pager->setQueryBuilder($queryBuilder);
-        $pager->setParameter('categoryId', $categoryId);
-        $pager->setPage($this->get('request')->get('page', 1));
-        $pager->setMaxPerPage(30);
-        $pager->init();
+        $pager = $this->get('sonata.category.manager')
+            ->getSubCategoriesPager($categoryId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:list_sub_categories.html.twig', array(
             'pager' => $pager
@@ -102,29 +77,14 @@ class CategoryController extends Controller
 
     /**
      * List the product related to one category
-     * 
+     *
      * @param  $categoryId
      * @return
      */
     public function listProductsAction($categoryId)
     {
-
-        $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Product');
-        $class          = $em->getClassMetaData('Application\Sonata\ProductBundle\Entity\Product')->name;
-        
-        $queryBuilder = $repository
-            ->createQueryBuilder('p')
-            ->leftJoin('p.productCategories', 'pc')
-            ->leftJoin('p.image', 'i')
-            ->where('pc.category = :categoryId');
-
-        $pager = new Pager($class);
-        $pager->setQueryBuilder($queryBuilder);
-        $pager->setParameter('categoryId', $categoryId);
-        $pager->setPage($this->get('request')->get('page', 1));
-        $pager->setMaxPerPage(30);
-        $pager->init();
+        $pager = $this->get('sonata.product.collection.manager')
+            ->getProductsByCategoryIdPager($categoryId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:list_products.html.twig', array(
             'pager' => $pager

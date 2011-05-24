@@ -9,6 +9,8 @@
  */
 namespace Sonata\Component\Invoice;
 
+use Sonata\Component\Customer\CustomerInterface;
+
 interface InvoiceInterface
 {
 
@@ -29,34 +31,10 @@ interface InvoiceInterface
     function getReference();
 
     /**
-     * Set user_id
-     *
-     * @param integer $userId
-     */
-       
-    
-    function setUserId($userId);
-
-    /**
-     * Get user_id
-     *
-     * @return integer $userId
-     */
-       
-    
-    
-    
-    
-    function getUserId();
-
-    /**
      * Set currency
      *
      * @param string $currency
      */
-       
-    
-    
     function setCurrency($currency);
 
     /**
@@ -64,7 +42,7 @@ interface InvoiceInterface
      *
      * @return string $currency
      */
-       function getCurrency();
+     function getCurrency();
 
     /**
      * Set status
@@ -265,14 +243,14 @@ interface InvoiceInterface
     /**
      * Set user
      *
-     * @param Application\FOS\UserBundle\Entity\User $user
+     * @param \Sonata\Component\Customer\CustomerInterface $user
      */
-    function setUser($user);
+    function setCustomer(CustomerInterface $customer);
 
     /**
      * Get user
      *
-     * @return Application\FOS\UserBundle\Entity\User $user
+     * @return Application\Sonata\UserBundle\Entity\User $user
      */
-    function getUser();
+    function getCustomer();
 }

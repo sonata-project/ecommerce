@@ -27,13 +27,14 @@ abstract class BaseProductController extends Controller
 
         $form = $this->get('session')->getFlash('sonata.product.form');
 
-        if (!$form) {
-            $repository = $this->get('sonata.product.pool')->getRepository($product);
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-            $form = $repository->getAddBasketForm($product, $this->get('validator'));
+        if (!$form) {
+           $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'add_basket');
+           $form = $provider->defineAddBasketForm($product, $formBuilder)->getForm()->createView();
         }
 
-        return $this->render(sprintf('SonataProductBundle:%s:view.html.twig', ucfirst($this->getProductCode($product))), array(
+        return $this->render(sprintf('%s:view.html.twig', 'SonataProductBundle:Amazon' /*$provider->getBaseControllerName()*/), array(
            'product' => $product,
            'form'    => $form,
         ));
@@ -41,8 +42,9 @@ abstract class BaseProductController extends Controller
 
     public function renderFormBasketElementAction($fieldGroup, $basketElement)
     {
+        $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
-        return $this->render(sprintf('SonataProductBundle:%s:form_basket_element.html.twig', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
+        return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), array(
            'fieldGroup'    => $fieldGroup,
            'basketElement' => $basketElement,
         ));
@@ -50,17 +52,12 @@ abstract class BaseProductController extends Controller
 
     public function renderFinalReviewBasketElementAction($basketElement)
     {
-        return $this->render(sprintf('SonataProductBundle:%s:final_review_basket_element.html.twig', ucfirst($this->getProductCode($basketElement->getProduct()))), array(
+        $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
+
+        return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), array(
            'basketElement' => $basketElement,
         ));
-
     }
-
-    public function getProductCode($product) {
-        
-        return $this->get('sonata.product.pool')->getProductCode($product);
-    }
-
 
     public function viewVariationsAction($productId, $slug) {
 
@@ -81,5 +78,5 @@ abstract class BaseProductController extends Controller
     public function viewEditOrderElement($orderElement) {
 
     }
-    
+
 }

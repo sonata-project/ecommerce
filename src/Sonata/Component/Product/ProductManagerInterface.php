@@ -11,33 +11,46 @@
 
 namespace Sonata\Component\Product;
 
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Basket\BasketElementInterface;
-
 interface ProductManagerInterface
 {
     /**
      * Creates an empty medie instance
      *
-     * @return Product
+     * @return \Sonata\Component\Product\ProductInterface
      */
-    function createProduct();
+    function create();
 
     /**
      * Deletes a product
      *
-     * @param Product $product
+     * @param \Sonata\Component\Product\ProductInterface $product
      * @return void
      */
-    function deleteProduct(ProductInterface $product);
+    function delete(ProductInterface $product);
+
+    /**
+     * Saves a product
+     *
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @return void
+     */
+    function save(ProductInterface $product);
 
     /**
      * Finds one product by the given criteria
      *
      * @param array $criteria
-     * @return ProductInterface
+     * @return array
      */
-    function findProductBy(array $criteria);
+    function findBy(array $criteria = array());
+
+    /**
+     * Finds one product by the given criteria
+     *
+     * @param array $criteria
+     * @return \Sonata\Component\Product\ProductInterface
+     */
+    function findOneBy(array $criteria = array());
 
     /**
      * Returns the product's fully qualified class name
@@ -45,63 +58,4 @@ interface ProductManagerInterface
      * @return string
      */
     function getClass();
-
-    /**
-     * Updates a product
-     *
-     * @param Product $product
-     * @return void
-     */
-    function updateProduct(ProductInterface $product);
-    
-    /**
-     * return true if the basket element is still valid
-     *
-     * @param Basket $basket
-     * @param Product $product
-     *
-     * @return BasketElement
-     */
-    public function basketAddProduct(BasketInterface $basket, ProductInterface $product, array $values);
-
-    /**
-     * Merge a product with another when the product is already present into the basket
-     *
-     * @param Basket $basket
-     * @param Product $product
-     *
-     * @return BasketElement
-     */
-    public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, array $values);
-
-    /**
-     * @abstract
-     * @param BasketElement $basketElement
-     *
-     * @return boolean true if the basket element is still valid
-     */
-    public function isValidBasketElement(BasketElementInterface $basketElement);
-
-    /**
-     * This method return the return price of basket element, this method
-     * allow to update the price of the basket element depend on the presence
-     * of another product
-     *
-     * @abstract
-     * @param  $basket
-     * @param  $basketElement
-     * @return return the unit price of the basketElement
-     */
-    public function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement);
-
-    /**
-     * Return true if the product can be added to the provided basket
-     *
-     * @abstract
-     * @param Sonata\Component\Basket\Basket $basket
-     * @param Sonata\Component\Product\ProductInterface $product
-     * @param array $options
-     * @return boolean
-     */
-    public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array());
 }

@@ -9,10 +9,10 @@ file that was distributed with this source code.
 
 #}
 
-<h2>{% trans 'title_list_products' from 'CategoryBundle' %}</h2>
+<h2>{% trans from 'CategoryBundle' %}title_list_products{% endtrans %}</h2>
 
 {% if pager.count == 0 %}
-    {% trans 'no_products_available' from 'CategoryBundle' %}
+    {% trans from 'CategoryBundle' %}no_products_available{% endtrans %}
 {% else %}
     <ul>
         {% for product in pager.getResults %}

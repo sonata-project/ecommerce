@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{% trans 'title_category_list' from 'CategoryBundle' %}</h1>
+<h1>{% trans from 'CategoryBundle' %}title_category_list{% endtrans %}</h1>
 
 <ul>
     {% for category in pager.getResults %}

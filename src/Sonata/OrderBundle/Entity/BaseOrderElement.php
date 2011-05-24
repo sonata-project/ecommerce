@@ -2,9 +2,10 @@
 
 namespace Sonata\OrderBundle\Entity;
 
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Product\ProductInterface;
-    
+
 /**
  * Sonata\OrderBundle\Entity\BaseOrderElement
  */
@@ -84,7 +85,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param Order $order
      */
-    public function setOrder($order)
+    public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
     }
@@ -318,7 +319,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     {
         return $this->product;
     }
-    
+
     /**
      * Set product_type
      *

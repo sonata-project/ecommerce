@@ -13,6 +13,7 @@ namespace Sonata\Component\Basket;
 
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\Component\Product\ProductProviderInterface;
 
 class BasketElement implements \Serializable, BasketElementInterface
 {
@@ -36,14 +37,14 @@ class BasketElement implements \Serializable, BasketElementInterface
     protected $productCode = null;
 
     /*
-     * use by the validation framework
+     * used by the validation framework
      */
     protected $delete = false;
 
     /**
      * the position in the basket stack
      *
-     * @param unknown_type $pos
+     * @param integer $pos
      */
     public function setPos($pos)
     {
@@ -53,11 +54,10 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * return the pos of the current basket element
      *
-     * @return int
+     * @return integer
      */
     public function getPos()
     {
-
         return $this->pos;
     }
 
@@ -68,17 +68,16 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getName()
     {
-
         return $this->name;
     }
 
     /**
      * Define the related product
      *
-     * @param Product $product
+     * @param \Sonata\Component\Product\ProductInterface $product
      * @return BasketElement
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct($code, ProductInterface $product)
     {
         $this->product      = $product;
         $this->productId    = $product->getId();
@@ -95,18 +94,17 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getProduct()
     {
-
-        if ($this->product == null && $this->getProductRepository())
+        if ($this->product == null && $this->getProductManager())
         {
-            $this->product      = $this->getProductRepository()->findOneById($this->productId);
+            $this->product = $this->getProductManager()->findOneBy(array('id' => $this->productId));
         }
-        
+
         return $this->product;
     }
 
     /**
      * return the product id
-     * 
+     *
      * @return null
      */
     public function getProductId()
@@ -117,7 +115,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * Never call this method, use the setProduct instead. This method is only used
      * by the form framework
-     * 
+     *
      * @param  $productId
      * @return void
      */
@@ -131,12 +129,10 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * Return the VAT amount
      *
-     *
-     * @return $float
+     * @return float
      */
     public function getVatAmount()
     {
-
         $tva = $this->getTotal(true) - $this->getTotal();
 
         return bcadd($tva, 0, 2);
@@ -150,7 +146,6 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getVat()
     {
-
         $product = $this->getProduct();
         if (!$product instanceof ProductInterface) {
             return 0;
@@ -193,7 +188,6 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getTotal($tva = false)
     {
-
         return $this->getUnitPrice($tva) * $this->getQuantity();
     }
 
@@ -204,7 +198,6 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getOptions()
     {
-
         return $this->options;
     }
 
@@ -216,7 +209,6 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getOption($name)
     {
-
         if (!array_key_exists($name, $this->options)) {
 
             return null;
@@ -258,12 +250,11 @@ class BasketElement implements \Serializable, BasketElementInterface
 
     /**
      * return the quantity
-     * 
+     *
      * @return int
      */
     public function getQuantity()
     {
-
         return $this->quantity;
     }
 
@@ -300,7 +291,6 @@ class BasketElement implements \Serializable, BasketElementInterface
 
     public function serialize()
     {
-
         return serialize(array(
             'productId'   => $this->productId,
             'pos'         => $this->pos,
@@ -308,13 +298,11 @@ class BasketElement implements \Serializable, BasketElementInterface
             'quantity'    => $this->quantity,
             'options'     => $this->options,
             'name'        => $this->name,
-            'productCode' => $this->productCode,
         ));
     }
 
     public function unserialize($data)
     {
-
         $data = unserialize($data);
 
         $this->productId    = $data['productId'];
@@ -323,7 +311,6 @@ class BasketElement implements \Serializable, BasketElementInterface
         $this->quantity     = $data['quantity'];
         $this->options      = $data['options'];
         $this->name         = $data['name'];
-        $this->productCode  = $data['productCode'];
     }
 
     /**
@@ -341,16 +328,5 @@ class BasketElement implements \Serializable, BasketElementInterface
     public function setProductManager(ProductManagerInterface $productManager)
     {
         return $this->productManager = $productManager;
-    }
-
-
-    public function setProductCode($productCode)
-    {
-        $this->productCode = $productCode;
-    }
-
-    public function getProductCode()
-    {
-        return $this->productCode;
     }
 }

@@ -11,15 +11,6 @@ use Sonata\Component\Customer\CustomerInterface;
 abstract class BaseAddress implements AddressInterface
 {
 
-    public static function getTypesList()
-    {
-        return array(
-            self::TYPE_BILLING  => 'type_billing',
-            self::TYPE_DELIVERY => 'type_delivery',
-            self::TYPE_CONTACT  => 'type_contact',
-        );
-    }
-
     /**
      * @var boolean $current
      */
@@ -91,9 +82,18 @@ abstract class BaseAddress implements AddressInterface
     protected $createdAt;
 
     /**
-     * @var 
+     * @var
      */
     protected $customer;
+
+    public static function getTypesList()
+    {
+        return array(
+            self::TYPE_BILLING  => 'type_billing',
+            self::TYPE_DELIVERY => 'type_delivery',
+            self::TYPE_CONTACT  => 'type_contact',
+        );
+    }
 
 
     /**
@@ -364,19 +364,16 @@ abstract class BaseAddress implements AddressInterface
 
     public function setName($name)
     {
-
         $this->name = $name;
     }
 
     public function getName()
     {
-
         return $this->name;
     }
 
     public function getFullAddress($sep = "\n")
     {
-
         return sprintf("%s %s, %s, %s, %s (%s)",
             $this->getFirstname(),
             $this->getLastname(),

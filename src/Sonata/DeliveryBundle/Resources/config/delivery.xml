@@ -4,5 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <services>
+        <service id="sonata.delivery.selector" class="FAKE">
+            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="sonata.delivery.pool" />
 
+            <call method="setUserManager">
+                <argument type="service" id="logger" />
+            </call>
+        </service>
+    </services>
 </container>

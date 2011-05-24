@@ -12,6 +12,9 @@ namespace Sonata\Component\Delivery;
 
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Product\Pool as ProductPool;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 /**
  * The selector selects available delivery methods depends on the provided basket
@@ -25,17 +28,25 @@ class Selector
 
     protected $logger;
 
-    public function setDeliveryPool($deliveryPool)
+    /**
+     * @param \Sonata\Component\Delivery\Pool $deliveryPool
+     * @param \Sonata\Component\Product\Pool $productPool
+     */
+    public function __construct(DeliveryPool $deliveryPool, ProductPool $productPool)
     {
+        $this->productPool = $productPool;
         $this->deliveryPool = $deliveryPool;
     }
 
+    /**
+     * @return \Sonata\Component\Delivery\Pool
+     */
     public function getDeliveryPool()
     {
         return $this->deliveryPool;
     }
 
-    public function setLogger($logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -45,11 +56,16 @@ class Selector
         return $this->logger;
     }
 
-    public function setProductPool($productPool)
+    public function log($message)
     {
-        $this->productPool = $productPool;
+        if ($this->logger) {
+            $this->logger->info($message);
+        }
     }
 
+    /**
+     * @return \Sonata\Component\Product\Pool
+     */
     public function getProductPool()
     {
         return $this->productPool;
@@ -71,8 +87,8 @@ class Selector
 
             if (!$product) {
 
-                $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d does not exist', $basketElement->getProductId()));
-                
+                $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d does not exist', $basketElement->getProductId()));
+
                 return false;
             }
 
@@ -84,16 +100,16 @@ class Selector
                 // delivery method already selected
                 if (array_key_exists($productDelivery->getCode(), $instances)) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s already selected', $basketElement->getProductId(), $productDelivery->getCode()));
+                    $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s already selected', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
                 }
-                
+
                 $deliveryMethod = $this->getDeliveryPool()->getMethod($productDelivery->getCode());
-                
+
                 if (!$deliveryMethod) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code: %s does not exist', $basketElement->getProductId(), $productDelivery->getCode()));
+                    $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code: %s does not exist', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
                 }
@@ -101,7 +117,7 @@ class Selector
                 // product delivery not enable
                 if (!$deliveryMethod->getEnabled()) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s is not enabled', $basketElement->getProductId(), $productDelivery->getCode()));
+                    $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s is not enabled', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
                 }
@@ -109,13 +125,13 @@ class Selector
                 // the product is not deliverable at the $shipping_address
                 if ($deliveryAddress->getCountryCode() != $productDelivery->getCountryCode()) {
 
-                    $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basketElement->getProductId(), $productDelivery->getCode(), $deliveryAddress->getCountryCode(), $productDelivery->getCountryCode()));
-                    
+                    $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basketElement->getProductId(), $productDelivery->getCode(), $deliveryAddress->getCountryCode(), $productDelivery->getCountryCode()));
+
                     continue;
                 }
 
-                $this->getLogger()->info(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s selected', $basketElement->getProductId(), $productDelivery->getCode()));
-                
+                $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s selected', $basketElement->getProductId(), $productDelivery->getCode()));
+
                 $instances[$productDelivery->getCode()] = $deliveryMethod;
             }
         }

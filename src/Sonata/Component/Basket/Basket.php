@@ -70,7 +70,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function isEmpty()
     {
-
         return count($this->getBasketElements()) == 0;
     }
 
@@ -79,47 +78,39 @@ class Basket implements \Serializable, BasketInterface
      *
      * if $element_only is set to true, only elements are checked
      *
-     * @param boolean $elements_only
+     * @param boolean $elementsOnly
      * @return boolean
      */
     public function isValid($elementsOnly = false)
     {
         if ($this->isEmpty()) {
-
             return false;
         }
 
-        foreach ($this->getBasketElements() as $element)
-        {
+        foreach ($this->getBasketElements() as $element) {
             if ($element->isValid() === false) {
-
                 return false;
             }
         }
 
         if ($elementsOnly) {
-
             return true;
         }
 
         if (!$this->getPaymentAddress() instanceof AddressInterface) {
-
             return false;
         }
 
         if (!$this->getPaymentMethod() instanceof PaymentInterface) {
-
             return false;
         }
 
         if (!$this->getDeliveryMethod() instanceof DeliveryInterface) {
-
             return false;
         }
 
         if (!$this->getDeliveryAddress() instanceof AddressInterface) {
             if ($this->getDeliveryMethod()->isAddressRequired()) {
-
                 return false;
             }
         }
@@ -144,7 +135,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getDeliveryMethod()
     {
-
         return $this->deliveryMethod;
     }
 
@@ -166,7 +156,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getDeliveryAddress()
     {
-
         return $this->deliveryAddress;
     }
 
@@ -188,7 +177,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getPaymentMethod()
     {
-
         return $this->paymentMethod;
     }
 
@@ -210,7 +198,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getPaymentAddress()
     {
-
         return $this->paymentAddress;
     }
 
@@ -239,7 +226,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function reset($full = true)
     {
-
         $this->deliveryAddressId = null;
         $this->deliveryAddress = null;
         $this->deliveryMethod = null;
@@ -266,13 +252,12 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getBasketElements()
     {
-
         return $this->basketElements;
     }
 
     /**
      * Warning : this method should be only used by the validation framework
-     * 
+     *
      * @param  $elements
      * @return void
      */
@@ -287,7 +272,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function countBasketElements()
     {
-
         return count($this->basketElements);
     }
 
@@ -298,7 +282,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function hasBasketElements()
     {
-
         return $this->countBasketElements() > 0;
     }
 
@@ -312,9 +295,7 @@ class Basket implements \Serializable, BasketInterface
     public function getElement(ProductInterface $product) {
         if (is_object($product)) {
             $pos = $this->pos[$product->getId()];
-        }
-        else
-        {
+        } else {
             $pos = $this->pos[$product];
         }
 
@@ -331,13 +312,10 @@ class Basket implements \Serializable, BasketInterface
      */
     public function removeElement(BasketElementInterface $element)
     {
-
         if ($element instanceof ProductInterface) {
             $pos = $this->pos[$element->getId()];
             $element = $this->basketElements[$pos];
-        }
-        else
-        {
+        } else {
             $pos = $element->getPos();
         }
 
@@ -351,59 +329,19 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * Add an element into the basket, the product behavior manage this action
-     *
-     * @param Product $product
-     *
-     * @return BasketElement
-     */
-    public function addProduct(ProductInterface $product)
-    {
-
-        $this->reset(false);
-
-        $args = func_get_args();
-        array_shift($args);
-
-        $args = array_merge(array($this, $product), count($args) == 0 ? array(array()) : $args);
-        
-        return call_user_func_array(array($this->getProductPool()->getRepository($product), 'basketAddProduct'), $args);
-    }
-
-    /**
-     * Merge one Product with another Product, the product
-     * must have the same id.
-     *
-     * The product behavior manages this action
-     *
-     * @param Product $product
-     * @return BasketElement
-     */
-    public function mergeProduct(ProductInterface $product)
-    {
-
-        $args = func_get_args();
-        array_shift($args);
-        $args = array_merge(array($this, $product), count($args) == 0 ? array(array()) : $args);
-
-        return call_user_func_array(array($this->getProductPool()->getRepository($product), 'basketMergeProduct'), $args);
-    }
-
-    /**
      * Add a basket element into the current basket
      *
      * @param BasketElement $basketElement
      */
     public function addBasketElement(BasketElementInterface $basketElement)
     {
-
         $this->reset(false);
-        
+
         $basketElement->setPos($this->cptElement);
 
         $this->basketElements[$this->cptElement] = $basketElement;
         $this->pos[$basketElement->getProduct()->getId()] = $this->cptElement;
-        
+
         $this->cptElement++;
 
         $this->buildPrices();
@@ -444,7 +382,6 @@ class Basket implements \Serializable, BasketInterface
     {
         $total = 0;
         foreach ($this->getBasketElements() as $basketElement) {
-
             $product = $basketElement->getProduct();
 
             if ($recurrentOnly === true && $product->isRecurrentPayment() === false) {
@@ -493,7 +430,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getDeliveryPrice($vat = false)
     {
-
         $method = $this->getDeliveryMethod();
         if (!$method instanceof DeliveryInterface) {
             return 0;
@@ -540,16 +476,13 @@ class Basket implements \Serializable, BasketInterface
 
             if (!is_object($product)) {
                 $this->removeElement($basketElement);
-                
+
                 continue;
             }
 
-            $repository = $this->getProductPool()->getRepository($product);
-            if ($repository) {
-                $price = $repository->basketCalculatePrice($this, $basketElement);
-                $basketElement->setPrice($price);
-            }
-            
+            $provider = $this->getProductPool()->getProvider($product);
+            $price    = $provider->basketCalculatePrice($this, $basketElement);
+            $basketElement->setPrice($price);
         }
 
         $this->inBuild = false;
@@ -561,7 +494,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function clean()
     {
-
         foreach ($this->getBasketElements() as $basketElement) {
             if ($basketElement->getDelete()) {
                 $this->removeElement($basketElement);
@@ -571,7 +503,6 @@ class Basket implements \Serializable, BasketInterface
 
     public function serialize()
     {
-        
         return serialize(array(
             'basketElements'        => $this->getBasketElements(),
             'pos'                   => $this->pos,
@@ -582,13 +513,11 @@ class Basket implements \Serializable, BasketInterface
             'cptElement'            => $this->cptElement,
             'deliveryMethodCode'    => $this->deliveryMethodCode,
             'customerId'            => $this->customerId,
-
         ));
     }
-    
+
     public function unserialize($data)
     {
-
         $data = unserialize($data);
 
         $properties = array(
@@ -659,5 +588,4 @@ class Basket implements \Serializable, BasketInterface
     {
         return $this->customerId;
     }
-
 }

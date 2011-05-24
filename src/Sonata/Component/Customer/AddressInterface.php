@@ -18,7 +18,7 @@ interface AddressInterface
     const TYPE_CONTACT  = 3;
 
     function getId();
-    
+
     /**
      * @abstract
      * @return string return the address name
@@ -33,13 +33,13 @@ interface AddressInterface
 
     /**
      * @abstract
-     * @return string return the address (line 1)
+     * @return string return the address (line 2)
      */
     function getAddress2();
 
     /**
      * @abstract
-     * @return string return the address (line 1)
+     * @return string return the address (line 3)
      */
     function getAddress3();
 

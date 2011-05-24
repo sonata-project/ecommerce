@@ -9,23 +9,22 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{% trans 'title_basket' from 'BasketBundle' %}</h1>
+<h1>{% trans from 'BasketBundle' %}title_basket{% endtrans %}</h1>
 
 {% if basket.hasBasketElements %}
     {{ form_errors(form) }}
 
     <form action="{{ url('sonata_basket_update') }}" method="POST" >
-        {{ form_hidden(form) }}
 
         <table>
             {#
             <thead>
                 <tr>
-                    <td>{% trans 'header_basket_information' from 'BasketBundle'%}</td>
-                    <td>{% trans 'header_basket_price' from 'BasketBundle'%}</td>
-                    <td>{% trans 'header_basket_quantity' from 'BasketBundle'%}</td>
-                    <td>{% trans 'header_basket_total' from 'BasketBundle'%}</td>
-                    <td>{% trans 'header_basket_delete' from 'BasketBundle'%}</td>
+                    <td>{% trans from 'BasketBundle'%}header_basket_information{% endtrans %}</td>
+                    <td>{% trans from 'BasketBundle'%}header_basket_price{% endtrans %}</td>
+                    <td>{% trans from 'BasketBundle'%}header_basket_quantity{% endtrans %}</td>
+                    <td>{% trans from 'BasketBundle'%}header_basket_total{% endtrans %}</td>
+                    <td>{% trans from 'BasketBundle'%}header_basket_delete{% endtrans %}</td>
                 </tr>
             </thead>
             #}
@@ -47,15 +46,16 @@ file that was distributed with this source code.
             </tfoot>
         </table>
 
-        <input type="submit" value="{% trans 'btn_update_basket' from 'BasketBundle' %}" />
+        <input type="submit" value="{% trans from 'BasketBundle' %}btn_update_basket{% endtrans %}" />
 
-        <a href="{{ url('sonata_basket_authentification') }}">{% trans 'link_next_step' from 'BasketBundle' %}</a>
+        <a href="{{ url('sonata_basket_authentification') }}">{% trans from 'BasketBundle' %}link_next_step{% endtrans %}</a>
 
+        {{ form_rest(form) }}
     </form>
 
 {% else %}
 
-    <p>{% trans 'message_basket_is_empty' from 'BasketBundle' %}</p>
+    <p>{% trans from 'BasketBundle' %}message_basket_is_empty{% endtrans %}</p>
 
 {% endif %}
 

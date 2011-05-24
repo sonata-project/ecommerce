@@ -10,16 +10,20 @@
 
 namespace Sonata\ProductBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+use Sonata\ProductBundle\DependencyInjection\AddProductProviderPass;
+
 
 class SonataProductBundle extends Bundle implements EventSubscriber
 {
-
-    public function boot() {
-
+    public function boot()
+    {
         $evm = $this->container->get('doctrine.orm.entity_manager')->getEventManager();
-
         $evm->addEventSubscriber($this);
     }
 
@@ -32,23 +36,28 @@ class SonataProductBundle extends Bundle implements EventSubscriber
 
     public function loadClassMetadata($eventArgs)
     {
-
         $metadata = $eventArgs->getClassMetadata();
 
         if ($metadata->name !== 'Application\Sonata\ProductBundle\Entity\Product') {
-
             return;
         }
 
-        $metadata->setDiscriminatorColumn(array('name' => 'type', 'type' => 'string', 'length' => 16));
-        $metadata->setInheritanceType(\Doctrine\ORM\Mapping\ClassMetadataInfo::INHERITANCE_TYPE_SINGLE_TABLE);
+        $metadata->setDiscriminatorColumn(array('name' => 'type', 'type' => 'string', 'length' => 64));
+        $metadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_SINGLE_TABLE);
 
         $map = array();
 
-        foreach ($this->container->get('sonata.product.pool')->getProductDefinitions() as $code => $definition) {
-            $map[$code] = $definition['class'];
+        foreach ($this->container->get('sonata.product.pool')->getProducts() as $code => $products) {
+            $map[$code] = $products->getManager()->getClass();
         }
 
         $metadata->setDiscriminatorMap($map);
+    }
+
+    public function build(ContainerBuilder $container)
+    {
+
+        parent::build($container);
+        $container->addCompilerPass(new AddProductProviderPass());
     }
 }

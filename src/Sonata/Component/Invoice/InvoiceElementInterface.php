@@ -25,16 +25,9 @@ interface InvoiceElementInterface
     /**
      * Get invoice
      *
-     * @return Doctrine\Common\Collections\Collection $invoice
+     * @return \Sonata\Component\Invoice\InvoiceInterface $invoice
      */
     function getInvoice();
-
-    /**
-     * Get invoiceId
-     *
-     * @return integer $invoiceId
-     */
-    function getInvoiceId();
 
     /**
      * Set orderElement
