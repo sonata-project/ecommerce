@@ -16,7 +16,6 @@ namespace Sonata\Component\Delivery;
  */
 class FreeDelivery extends BaseDelivery
 {
-
     public function getVat()
     {
         return 0;
@@ -36,5 +35,4 @@ class FreeDelivery extends BaseDelivery
     {
         return 'Free delivery';
     }
-    
 }

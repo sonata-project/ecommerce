@@ -35,7 +35,6 @@ class Pool
      */
     public function getMethods()
     {
-        
         return $this->methods;
     }
 

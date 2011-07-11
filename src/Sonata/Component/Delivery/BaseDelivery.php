@@ -16,7 +16,6 @@ namespace Sonata\Component\Delivery;
  */
 abstract class BaseDelivery implements DeliveryInterface
 {
-
     protected $vat;
 
     protected $price;
@@ -40,7 +39,6 @@ abstract class BaseDelivery implements DeliveryInterface
      */
     public static function getStatusList()
     {
-
         return array(
             self::STATUS_OPEN       => 'open',
             self::STATUS_SENT       => 'sent',
@@ -52,49 +50,41 @@ abstract class BaseDelivery implements DeliveryInterface
 
     public function getCode()
     {
-
         return $this->code;
     }
 
     public function setCode($code)
     {
-
         $this->code = $code;
     }
 
     public function getName()
     {
-
         return $this->name;
     }
 
     public function setName($name)
     {
-
         $this->name = $name;
     }
 
     public function setVat($vat)
     {
-
         $this->vat = $vat;
     }
 
     public function getVat()
     {
-
         return $this->vat;
     }
 
     public function getPrice()
     {
-
         return $this->price;
     }
 
     public function setPrice($price)
     {
-
         $this->price = $price;
     }
 
@@ -115,7 +105,6 @@ abstract class BaseDelivery implements DeliveryInterface
 
     public function getTotal($basket, $vat = false)
     {
-
         if ($vat) {
             return bcadd($this->getPrice() * (1 + $this->getVat() / 100), 0, 2);
         }
