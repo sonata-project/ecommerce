@@ -14,7 +14,7 @@ namespace Sonata\PaymentBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-    
+
 use Application\Sonata\PaymentBundle\Entity\Transaction;
 
 class PaymentController extends Controller
@@ -50,7 +50,7 @@ class PaymentController extends Controller
 
         // control the handshake value
         if (!$payment->isRequestValid($transaction)) {
-            
+
             throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
         }
 
@@ -68,7 +68,7 @@ class PaymentController extends Controller
         $basket = $this->get('sonata.basket');
 
         $customer = $basket->getCustomer();
-        
+
         $basket->reset();
 
         $basket   = $payment->getTransformer('order')->transformIntoBasket($customer, $order, $basket);
@@ -79,7 +79,7 @@ class PaymentController extends Controller
             'order' => $order,
             'basket' => $basket
         ));
-        
+
     }
 
 
@@ -108,7 +108,7 @@ class PaymentController extends Controller
             'order' => $order,
         ));
     }
-    
+
     /**
      *
      * this action redirect the user to the bank
@@ -117,7 +117,6 @@ class PaymentController extends Controller
      */
     public function callbankAction()
     {
-
         $basket     = $this->get('sonata.basket');
         $request    = $this->get('request');
         $customer   = $basket->getCustomer();
@@ -129,7 +128,7 @@ class PaymentController extends Controller
         if (!$basket->isValid()) {
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
-        
+
         $payment = $basket->getPaymentMethod();
 
         // check if the basket is valid/compatible with the bank gateway
@@ -152,7 +151,7 @@ class PaymentController extends Controller
         $this->get('sonata.generator')->order($order);
 
         $basket->reset();
-        
+
         // the payment must handle everything when calling the bank
         return $payment->callbank($order);
     }
@@ -164,7 +163,7 @@ class PaymentController extends Controller
      */
     public function callbackAction()
     {
-        
+
         $request    = $this->get('request');
         $bank       = $request->get('bank');
         $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
@@ -201,7 +200,7 @@ class PaymentController extends Controller
         $em = $this->get('doctrine.orm.entity_manager'); // todo : find a way to know which EM is linked to the order
         $em->persist($transaction);
         $em->flush();
-        
+
         return $response;
     }
 

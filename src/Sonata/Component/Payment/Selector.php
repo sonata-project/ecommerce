@@ -10,6 +10,9 @@
 
 namespace Sonata\Component\Payment;
 
+use Sonata\Component\Payment\Pool as PaymentPool;
+use Sonata\Component\Product\Pool as ProductPool;
+
 /**
  * The selector selects available payment methods depends on the provided basket
  *
@@ -22,6 +25,12 @@ class Selector
 
     protected $logger;
 
+    public function __construct(PaymentPool $paymentPool, ProductPool $productPool, $logger = null)
+    {
+        $this->paymentPool = $paymentPool;
+        $this->productPool = $productPool;
+        $this->logger = $logger;
+    }
 
     public function setLogger($logger)
     {
@@ -33,11 +42,6 @@ class Selector
         return $this->logger;
     }
 
-    public function setProductPool($productPool)
-    {
-        $this->productPool = $productPool;
-    }
-
     public function getProductPool()
     {
         return $this->productPool;
@@ -45,18 +49,11 @@ class Selector
 
     public function getAvailableMethods($basket, $paymentAddress)
     {
-
         if (!$paymentAddress) {
-
             return false;
         }
 
         return $this->getPaymentPool()->getMethods();
-    }
-
-    public function setPaymentPool($paymentPool)
-    {
-        $this->paymentPool = $paymentPool;
     }
 
     public function getPaymentPool()

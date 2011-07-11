@@ -5,8 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.payment.generator.mysql" class="Sonata\Component\Generator\MysqlReference">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
+        <service id="sonata.payment.selector.simple" class="Sonata\Component\Payment\Selector">
+            <argument type="service" id="sonata.payment.pool" />
+            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="logger" />
         </service>
     </services>
 

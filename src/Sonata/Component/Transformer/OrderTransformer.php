@@ -10,30 +10,27 @@
 
 namespace Sonata\Component\Transformer;
 
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Basket\BasketInterface;
 
 class OrderTransformer extends BaseTransformer
 {
-
-    public function transformIntoBasket($user, $order, $basket)
+    public function transformIntoBasket(CustomerInterface $customer, OrderInterface $order, BasketInterface $basket)
     {
-
         // we reset the current basket
         $basket->reset();
 
-        
         // We are free to convert !
         foreach ($order->getOrderElements() as $orderElement) {
-
             $repository = $this->getProductPool()->getRepository($orderElement->getProductType());
             $product    = $repository->find($orderElement->getProductId());
 
             if (!$product) {
-
                 continue;
             }
 
             $repository->basketAddProduct($basket, $product, $orderElement);
-
         }
 
         $basket->buildPrices();

@@ -35,7 +35,6 @@ class Pool
      */
     public function getTransformers()
     {
-
         return $this->methods;
     }
 
@@ -47,7 +46,6 @@ class Pool
      */
     public function getTransformer($type)
     {
-
         return isset($this->methods[$type]) ? $this->methods[$type] : null;
     }
 }

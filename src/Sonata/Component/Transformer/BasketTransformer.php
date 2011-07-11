@@ -10,11 +10,11 @@
 
 namespace Sonata\Component\Transformer;
 
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Basket\BasketInterface;
 
 class BasketTransformer extends BaseTransformer
 {
-
-
     /**
      * transform a basket into order
      *
@@ -22,12 +22,10 @@ class BasketTransformer extends BaseTransformer
      * @param  $basket
      * @return Order
      */
-    public function transformIntoOrder($customer, $basket)
+    public function transformIntoOrder(CustomerInterface $customer = null, BasketInterface $basket = null)
     {
-
         // Customer
         if (!is_object($customer)) {
-
             if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the customer is not valid');
             }
@@ -37,14 +35,13 @@ class BasketTransformer extends BaseTransformer
 
         // Basket
         if (!$basket) {
-
             if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the basket is not defined');
             }
 
             throw new \RuntimeException('Invalid basket');
         }
-        
+
         // Billing
         $billingAddress = $basket->getPaymentAddress();
         if (!$billingAddress instanceof  \Sonata\Component\Basket\AddressInterface) {
@@ -82,7 +79,6 @@ class BasketTransformer extends BaseTransformer
         $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : new \Application\Sonata\OrderBundle\Entity\Order;
 
         $order->setCustomer($customer);
-
         $order->setUsername($customer->getFullname());
 
         if ($deliveryMethod->isAddressRequired()) {
@@ -113,7 +109,7 @@ class BasketTransformer extends BaseTransformer
         $order->setDeliveryStatus(\Sonata\Component\Delivery\DeliveryInterface::STATUS_OPEN);
 
         $order->setCreatedAt(new \DateTime);
-        
+
         // todo : handle the currency
         //$order->setCurrency(Product::getDefaultCurrency());
 
@@ -122,13 +118,11 @@ class BasketTransformer extends BaseTransformer
         $order->setPaymentStatus(\Application\Sonata\PaymentBundle\Entity\Transaction::STATUS_OPEN);
         $order->setPaymentMethod($basket->getPaymentMethod()->getCode());
 
-        foreach ($basket->getBasketElements() as $basketElement)
-        {
+        foreach ($basket->getBasketElements() as $basketElement) {
             $orderElement = $basketElement->getProductRepository()->createOrderElement($basketElement);
 
             $order->addOrderElement($orderElement);
         }
-
 
         return $order;
     }

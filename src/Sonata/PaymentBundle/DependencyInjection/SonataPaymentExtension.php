@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
-    
+
 /**
  * UrlShortenerExtension.
  *
@@ -27,7 +27,6 @@ use Symfony\Component\Config\FileLocator;
  */
 class SonataPaymentExtension extends Extension
 {
-
     /**
      * Loads the delivery configuration.
      *
@@ -36,129 +35,75 @@ class SonataPaymentExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
+        $loader->load('payment.xml');
+        $loader->load('generator.xml');
+        $loader->load('transformer.xml');
+        $loader->load('selector.xml');
 
         $config = call_user_func_array('array_merge_recursive', $config);
-        
-        if(isset($config['payment'])) {
-            $this->configurePayment($config['payment'], $container);
-        }
 
-        if(isset($config['generator'])) {
-            $this->configureGenerator($config['generator'], $container);
+        if(isset($config['services'])) {
+            $this->configurePayment($config['services'], $container);
         }
 
         if(isset($config['selector'])) {
             $this->configureSelector($config['selector'], $container);
         }
 
-        if(isset($config['transformer'])) {
-            $this->configureTransformer($config['transformer'], $container);
+        if(isset($config['transformers'])) {
+            $this->configureTransformer($config['transformers'], $container);
         }
     }
 
-    public function configurePayment($config, ContainerBuilder $container)
+    public function configurePayment($services, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('payment.xml');
-
         // create the payment method pool
-        $pool_definition = new Definition($config['class']);
+        $pool = $container->getDefinition('sonata.payment.pool');
 
         // define the payment method
-        foreach ($config['methods'] as $code => $method)
-        {
-            if (!$method['enabled'])
-            {
+        foreach ($services as $id => $settings) {
+            $enabled  = isset($settings['enabled']) ? $settings['enabled'] : true;
+            $name     = isset($settings['name']) ? $settings['name'] : 'n/a';
+            $options  = isset($settings['options']) ? $settings['options'] : array();
+
+            if (!$enabled) {
+                $container->removeDefinition($id);
                 continue;
             }
 
-            $definition = new Definition($method['class']);
-            $definition->addMethodCall('setName', array($method['name']));
-            $definition->addMethodCall('setCode', array($method['id']));
-            $definition->addMethodCall('setEnabled', array($method['enabled']));
-            $definition->addMethodCall('setOptions', array(isset($method['options']) ? $method['options'] : array()));
-            $definition->addMethodCall('setTranslator', array(new Reference('translator')));
+            $definition = $container->getDefinition($id);
 
-            foreach ((array)$method['transformers'] as $name => $service_id) {
-                $definition->addMethodCall('addTransformer', array($name, new Reference($service_id)));
+            $definition->addMethodCall('setName', array($name));
+            $definition->addMethodCall('setCode', array($id));
+            $definition->addMethodCall('setEnabled', array($enabled));
+            $definition->addMethodCall('setOptions', array($options));
+
+            foreach ((array)$settings['transformers'] as $name => $serviceId) {
+                $definition->addMethodCall('addTransformer', array($name, new Reference($serviceId)));
             }
-
-            // todo : refactor this into proper files
-            foreach ((array)$method['dependencies'] as $service_id => $setter) {
-
-                $definition->addMethodCall($setter, array(new Reference($service_id)));
-            }
-
-            $definition->addMethodCall('setRouter', array(new Reference('router')));
-
-            $id         = sprintf('sonata.payment.method.%s', $method['name']);
-
-            // add the delivery method as a service
-            $container->setDefinition($id, $definition);
 
             // add the delivery method in the method pool
-            $pool_definition->addMethodCall('addMethod', array(new Reference($id)));
+            $pool->addMethodCall('addMethod', array(new Reference($id)));
         }
-
-        $container->setDefinition('sonata.payment.pool', $pool_definition);
-
     }
 
-    public function configureGenerator($config, ContainerBuilder $container)
-    {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('generator.xml');
-
-        $definition = new Definition($config['class']);
-        $definition->addMethodCall('setEntityManager', array(new Reference('doctrine.orm.default_entity_manager')));
-
-        $container->setDefinition('sonata.generator', $definition);
-
-    }
-
-    public function configureSelector($config, ContainerBuilder $container)
+    public function configureSelector($selector, ContainerBuilder $container)
     {
         // define the payment selector
-        $definition = new Definition($config['class']);
-        $definition->addMethodCall('setLogger', array(new Reference('logger')));
-        $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
-        $definition->addMethodCall('setPaymentPool', array(new Reference('sonata.payment.pool')));
+        $definition = $container->getDefinition($selector);
 
         $container->setDefinition('sonata.payment.selector', $definition);
     }
 
-    public function configureTransformer($config, ContainerBuilder $container)
+    public function configureTransformer($transformers, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('transformer.xml');
+        $pool = $container->getDefinition('sonata.payment.transformer.pool');
 
-        $pool_definition = new Definition($config['class']);
-
-        foreach ($config['types'] as $type)
-        {
-            if (!$type['enabled'])
-            {
-                continue;
-            }
-
-            $definition = new Definition($type['class']);
-            $definition->addMethodCall('setLogger', array(new Reference('logger')));
-            $definition->addMethodCall('setOptions', array($type));
-            $definition->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')));
-
-            $id         = sprintf('sonata.transformer.%s', $type['id']);
-
-            // add the delivery method as a service
-            $container->setDefinition($id, $definition);
-
-            // add the delivery method in the method pool
-            $pool_definition->addMethodCall('addTransformer', array($type['id'], new Reference($id)));
+        foreach ($transformers as $type => $id) {
+            $pool->addMethodCall('addTransformer', array($type, new Reference($id)));
         }
-
-        $container->setDefinition('sonata.transformer', $pool_definition);
     }
 
     /**
@@ -168,19 +113,16 @@ class SonataPaymentExtension extends Extension
      */
     public function getXsdValidationBasePath()
     {
-
         return __DIR__.'/../Resources/config/schema';
     }
 
     public function getNamespace()
     {
-
         return 'http://www.sonata-project.org/schema/dic/sonata-payment';
     }
 
     public function getAlias()
     {
-        
         return 'sonata_payment';
     }
 }

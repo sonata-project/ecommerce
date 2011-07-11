@@ -13,11 +13,16 @@ namespace Sonata\Component\Generator;
 
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderInterface;
+use Doctrine\ORM\EntityManager;
 
 class MysqlReference implements ReferenceInterface
 {
-
     protected $entityManager;
+
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * Append a valid reference number to the invoice, the order must be persisted first
@@ -26,16 +31,14 @@ class MysqlReference implements ReferenceInterface
      */
     public function invoice(InvoiceInterface $invoice)
     {
-
         if (!$invoice->getId()) {
             throw new \RuntimeException('The invoice is not persisted into the database');
         }
 
-        $tableName = $this->getEntityManager()->getClassMetadata(get_class($invoice))->table['name'];
-        $connection = $this->getEntityManager()->getConnection();
+        $tableName = $this->entityManager->getClassMetadata(get_class($invoice))->table['name'];
+        $connection = $this->entityManager->getConnection();
 
         $this->generateReference($tableName, $connection, $invoice);
-
     }
 
     /**
@@ -49,11 +52,10 @@ class MysqlReference implements ReferenceInterface
             throw new \RuntimeException('The order is not persisted into the database');
         }
 
-        $tableName = $this->getEntityManager()->getClassMetadata(get_class($order))->table['name'];
-        $connection = $this->getEntityManager()->getConnection();
+        $tableName = $this->entityManager->getClassMetadata(get_class($order))->table['name'];
+        $connection = $this->entityManager->getConnection();
 
         $this->generateReference($tableName, $connection, $order);
-       
     }
 
     /**
@@ -77,10 +79,10 @@ class MysqlReference implements ReferenceInterface
             $row = $statement->fetch();
 
             $reference = sprintf('%02d%02d%02d%04d',
-              $date->format('y'),
-              $date->format('n'),
-              $date->format('j'),
-              $row['counter'] + 1
+                $date->format('y'),
+                $date->format('n'),
+                $date->format('j'),
+                $row['counter'] + 1
             );
 
             $connection->update($tableName, array('reference' => $reference), array('id' => $object->getId()));
@@ -89,22 +91,11 @@ class MysqlReference implements ReferenceInterface
         } catch(\Exception $e) {
             $connection->exec(sprintf('UNLOCK TABLES'));
 
-            return $e;
+            throw $e;
         }
 
         $connection->exec(sprintf('UNLOCK TABLES'));
 
         return $reference;
     }
-
-    public function setEntityManager($entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
-    public function getEntityManager()
-    {
-        return $this->entityManager;
-    }
-
 }

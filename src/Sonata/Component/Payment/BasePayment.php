@@ -13,7 +13,7 @@ namespace Sonata\Component\Payment;
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
-
+use Symfony\Component\Translation\TranslatorInterface;
 
 abstract class BasePayment implements PaymentInterface
 {
@@ -33,10 +33,16 @@ abstract class BasePayment implements PaymentInterface
     protected $isDebug;
 
     protected $enabled;
-    
+
     protected $translator;
 
     protected $description;
+
+    public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
+    {
+        $this->router = $router;
+        $this->translator = $translator;
+    }
 
     /**
     * Generate a check value
@@ -97,7 +103,6 @@ abstract class BasePayment implements PaymentInterface
         return $value;
     }
 
-
     public function setLogger($logger)
     {
         $this->logger = $logger;
@@ -105,17 +110,7 @@ abstract class BasePayment implements PaymentInterface
 
     public function getLogger()
     {
-        
         return $this->logger;
-    }
-
-    /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     * @return void
-     */
-    public function setRouter(RouterInterface $router)
-    {
-        $this->router = $router;
     }
 
     /**
@@ -142,7 +137,6 @@ abstract class BasePayment implements PaymentInterface
      */
     public function callback(TransactionInterface $transaction)
     {
-
         // check if the order exists
         if (!$transaction->getOrder()) {
             $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_UNKNOWN);
@@ -184,11 +178,6 @@ abstract class BasePayment implements PaymentInterface
         }
 
         return $response;
-    }
-
-    public function setTranslator($translator)
-    {
-        $this->translator = $translator;
     }
 
     public function getTranslator()
