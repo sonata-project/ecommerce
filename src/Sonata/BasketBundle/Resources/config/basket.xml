@@ -4,7 +4,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-
     <services>
         <service id="sonata.basket.loader" class="Sonata\Component\Basket\Loader">
             <argument>Sonata\Component\Basket\Basket</argument>
@@ -14,5 +13,7 @@
             <argument type="service" id="sonata.delivery.pool" />
             <argument type="service" id="sonata.payment.pool" />
         </service>
+
+        <service id="sonata.basket" class="Sonata\Component\Basket\Basket" factory-service="sonata.basket.loader" factory-method="getBasket"/>
     </services>
 </container>
