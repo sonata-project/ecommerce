@@ -20,12 +20,10 @@ namespace Application\Sonata\ProductBundle\Entity;
  */
 class {{ product }} extends Product
 {
-
     public function isRecurrentPayment()
     {
         return false;
     }
-
 
     /**
      * @var integer $id
