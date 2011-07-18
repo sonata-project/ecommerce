@@ -24,6 +24,7 @@ Installation
         new FOS\UserBundle\FOSUserBundle(),
         new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
+        new Sonata\CustomerBundle\SonataCustomerBundle(),
         new Sonata\ProductBundle\SonataProductBundle(),
         new Sonata\BasketBundle\SonataBasketBundle(),
         new Sonata\OrderBundle\SonataOrderBundle(),
@@ -35,10 +36,18 @@ Installation
 
 * run the easy-extends:generate command, this command will generate the Application entities required by the Sonata's Bundles
 
-        php yourproject/console sonata:easy-extends:generate
+        php app/console sonata:easy-extends:generate SonataCustomerBundle
+        php app/console sonata:easy-extends:generate SonataDeliveryBundle
+        php app/console sonata:easy-extends:generate SonataBasketBundle
+        php app/console sonata:easy-extends:generate SonataInvoiceBundle
+        php app/console sonata:easy-extends:generate SonataMediaBundle
+        php app/console sonata:easy-extends:generate SonataOrderBundle
+        php app/console sonata:easy-extends:generate SonataPaymentBundle
+        php app/console sonata:easy-extends:generate SonataProductBundle
 
 * then add the following bundles in your kernel::registerBundles() method
 
+        new Application\Sonata\CustomerBundle\SonataCustomerBundle(),
         new Application\Sonata\DeliveryBundle\SonataDeliveryBundle(),
         new Application\Sonata\BasketBundle\SonataBasketBundle(),
         new Application\Sonata\InvoiceBundle\SonataInvoiceBundle(),
@@ -67,41 +76,77 @@ Installation
 * edit your config.yml and add the following lines
 
         sonata_delivery:
-            pool: # all available delivery method
-                class: Sonata\Component\Delivery\Pool
-                methods:
-                    - { id: free, name: Free, enabled: true, class: Sonata\Component\Delivery\FreeDelivery }
-
-            selector:
-                class: Sonata\Component\Delivery\Selector
-
-        sonata_payment:
-            methods:
-                - { id: free, name: Free, enabled: true, class: Sonata\Component\Payment\Free }
-
-        sonata_basket
-            class: Sonata\Component\Basket\Basket
-
-
-        sonata_product:
-            products:
-                - { id: bottle, name: Bottle, enabled: true, class: Application\Sonata\ProductBundle\Entity\Bottle }
-
-            class:
-                model:
-                    user: Application\Sonata\UserBundle\Entity\User # you must define your own user class
-
-        sonata_payment:
-            methods:
-                free:
+            services:
+                sonata.delivery.method.free:
                     name: Free
                     enabled: true
-                    class: Sonata\Component\Payment\Free
+                    priority: 1
+
+            selector: sonata.delivery.method.free
+
+        sonata_payment:
+            services:
+                sonata.payment.method.paypal:
+                    name:     Paypal
+                    id:       paypal
+                    enabled:  true
+
                     transformers:
-                        basket: sonata.transformer.basket
-                        order: sonata.transformer.order
-            selector:
-                class: Sonata\Component\Payment\Selector
+                        basket: sonata.payment.transformer.basket
+                        order:  sonata.payment.transformer.order
+
+                    options:
+                        web_connector_name: curl
+
+                        account:            your_paypal_account@fake.com
+                        cert_id:            fake
+                        paypal_cert_file:   %kernel.root_dir%/paypal_cert_pem_sandbox.txt
+                        url_action:         https://www.sandbox.paypal.com/cgi-bin/webscr
+
+                        debug: true
+                        class_order:        Application\Sonata\OrderBundle\Entity\Order
+                        url_callback:       sonata_payment_callback
+                        url_return_ko:      sonata_payment_error
+                        url_return_ok:      sonata_payment_confirmation
+
+                        method:             encryptViaBuffer # encryptViaFile || encryptViaBuffer
+
+                        key_file:           %kernel.root_dir%/my-prvkey.pem
+                        cert_file:          %kernel.root_dir%/my-pubcert.pem
+
+                        openssl:            /opt/local/bin/openssl
+
+
+            # service which find the correct payment methods for a basket
+            selector: sonata.payment.selector.simple
+
+            # service which generate the correct order and invoice number
+            generator: sonata.payment.generator.mysql
+
+            transformers:
+                order:  sonata.payment.transformer.order
+                basket: sonata.payment.transformer.basket
+
+        services:
+            # Register dedicated Product Managers
+#            sonata.product.manager.amazon:
+#                class: Sonata\ProductBundle\Entity\ProductManager
+#                arguments:
+#                    - Application\Sonata\ProductBundle\Entity\Amazon
+#                    - @sonata.product.entity_manager
+#
+#            sonata.product.manager.bottle:
+#                class: Sonata\ProductBundle\Entity\ProductManager
+#                arguments:
+#                    - Application\Sonata\ProductBundle\Entity\Bottle
+#                    - @sonata.product.entity_manager
+#
+#            # Register dedicated Product Providers
+#            sonata.product.type.amazon:
+#                class: Application\Sonata\ProductBundle\Entity\AmazonProductProvider
+#
+#            sonata.product.type.bottle:
+#                class: Application\Sonata\ProductBundle\Entity\BottleProductProvider
 
 * add the current lines in your routing.yml files
 
