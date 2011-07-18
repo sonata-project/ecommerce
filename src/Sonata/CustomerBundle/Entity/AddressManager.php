@@ -20,7 +20,7 @@ class AddressManager implements AddressManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
@@ -36,7 +36,7 @@ class AddressManager implements AddressManagerInterface
      *
      * @return Address
      */
-    public function createAddress()
+    public function create()
     {
         $class = $this->class;
 
@@ -49,7 +49,7 @@ class AddressManager implements AddressManagerInterface
      * @param Address $address
      * @return void
      */
-    public function updateAddress(AddressInterface $address)
+    public function save(AddressInterface $address)
     {
         $this->em->persist($address);
         $this->em->flush();
@@ -71,7 +71,12 @@ class AddressManager implements AddressManagerInterface
      * @param array $criteria
      * @return Address
      */
-    public function findAddressBy(array $criteria)
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
+    }
+
+    public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
     }
@@ -82,7 +87,7 @@ class AddressManager implements AddressManagerInterface
      * @param Address $address
      * @return void
      */
-    public function deleteAddress(AddressInterface $address)
+    public function delete(AddressInterface $address)
     {
         $this->em->remove($address);
         $this->em->flush();

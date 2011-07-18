@@ -13,6 +13,7 @@ namespace Sonata\Component\Basket;
 use Sonata\Component\Product\Pool;
 use Symfony\Component\HttpFoundation\Session;
 use Sonata\Component\Customer\AddressManagerInterface;
+use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Payment\Pool as PaymentPool;
 
@@ -30,11 +31,14 @@ class Loader
 
     protected $productManager;
 
+    protected $customerManager;
+
     protected $deliveryPool;
 
     protected $paymentPool;
 
-    public function __construct($class, Session $session, Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool, PaymentPool $paymentPool)
+    public function __construct($class, Session $session, Pool $productPool, AddressManagerInterface $addressManager,
+        DeliveryPool $deliveryPool, PaymentPool $paymentPool, CustomerManagerInterface $customerManager)
     {
         $this->basketClass      = $class;
         $this->addressManager   = $addressManager;
@@ -42,6 +46,7 @@ class Loader
         $this->paymentPool      = $paymentPool;
         $this->session          = $session;
         $this->productPool      = $productPool;
+        $this->customerManager  = $customerManager;
     }
 
     /**
@@ -72,17 +77,16 @@ class Loader
                             throw new \RuntimeException('the product code is empty');
                         }
 
-                        $repository = $this->getProductPool()->getRepository($basketElement->getProductCode());
-                        $basketElement->setProductRepository($repository);
+                        $productDefinition = $this->getProductPool()->getProduct($basketElement->getProductCode());
+                        $basketElement->setProductDefinition($productDefinition);
                     }
                 }
-
 
                 // load the delivery address
                 $deliveryAddressId = $basket->getDeliveryAddressId();
 
                 if ($deliveryAddressId) {
-                    $address = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Address', $deliveryAddressId);
+                    $address = $this->addressManager->findOneBy(array('id' => $deliveryAddressId));
 
                     $basket->setDeliveryAddress($address);
                 }
@@ -90,7 +94,7 @@ class Loader
                 // load the payment address
                 $paymentAddressId = $basket->getPaymentAddressId();
                 if ($paymentAddressId) {
-                    $address = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Address', $paymentAddressId);
+                    $address = $this->addressManager->findOneBy(array('id' => $paymentAddressId));
 
                     $basket->setPaymentAddress($address);
                 }
@@ -104,17 +108,16 @@ class Loader
                 // customer
                 $customerId = $basket->getCustomerId();
                 if ($customerId) {
-                    $customer = $this->getEntityManager()->find('Application\Sonata\CustomerBundle\Entity\Customer', $customerId);
+                    $customer = $this->customerManager->findOneBy(array('id' => $customerId));
 
                     $basket->setCustomer($customer);
                 }
-
             } catch(\Exception $e) {
 
+                throw $e;
                 // something went wrong while loading the basket
-                $basket->reset();
+//                $basket->reset();
             }
-
 
             $this->getSession()->set('sonata/basket', $basket);
 

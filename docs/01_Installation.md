@@ -61,17 +61,8 @@ Installation
 * add the following autoload information into the autoload.php file
 
         // sonata core bundle
-        'Sonata\\BasketBundle'               => __DIR__.'/vendor/sonata/src',
-        'Sonata\\Component'                  => __DIR__.'/vendor/sonata/src',
-        'Sonata\\Contrib'                    => __DIR__.'/vendor/sonata/src',
-        'Sonata\\CustomerBundle'             => __DIR__.'/vendor/sonata/src',
-        'Sonata\\DeliveryBundle'             => __DIR__.'/vendor/sonata/src',
-        'Sonata\\InvoiceBundle'              => __DIR__.'/vendor/sonata/src',
-        'Sonata\\OrderBundle'                => __DIR__.'/vendor/sonata/src',
-        'Sonata\\PaymentBundle'              => __DIR__.'/vendor/sonata/src',
-        'Sonata\\ProductBundle'              => __DIR__.'/vendor/sonata/src',
-        'Sonata'                             => __DIR__,
-        'FOS'                                => __DIR__,
+        'Sonata'              => array(__DIR__.'/vendor/sonata/src', __DIR__),
+        'FOS'                 => __DIR__,
 
 * edit your config.yml and add the following lines
 

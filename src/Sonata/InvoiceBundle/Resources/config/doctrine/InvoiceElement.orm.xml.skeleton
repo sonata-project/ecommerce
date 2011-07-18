@@ -11,7 +11,7 @@
     <entity
         name="Application\Sonata\InvoiceBundle\Entity\InvoiceElement"
         table="invoice__invoice_element"
-        repository-class="Application\Sonata\InvoiceBundle\Entity\InvoiceElementRepository">
+        >
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
@@ -43,6 +43,6 @@
                     on-delete="CASCADE"/>
             </join-columns>
         </one-to-many>
-        
+
     </entity>
 </doctrine-mapping>

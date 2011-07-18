@@ -11,16 +11,14 @@
 
 namespace Sonata\Component\Customer;
 
-
 interface CustomerManagerInterface
 {
-
     /**
      * Creates an empty customer instance
      *
      * @return Customer
      */
-    function createCustomer();
+    function create();
 
     /**
      * Deletes a customer
@@ -28,7 +26,7 @@ interface CustomerManagerInterface
      * @param Customer $customer
      * @return void
      */
-    function deleteCustomer(CustomerInterface $customer);
+    function delete(CustomerInterface $customer);
 
     /**
      * Finds one customer by the given criteria
@@ -36,7 +34,15 @@ interface CustomerManagerInterface
      * @param array $criteria
      * @return CustomerInterface
      */
-    function findCustomerBy(array $criteria);
+    function findOneBy(array $criteria);
+
+    /**
+     * Finds many customers by the given criteria
+     *
+     * @param array $criteria
+     * @return CustomerInterface
+     */
+    function findBy(array $criteria);
 
     /**
      * Returns the customer's fully qualified class name
@@ -46,10 +52,10 @@ interface CustomerManagerInterface
     function getClass();
 
     /**
-     * Updates a customer
+     * Saves a customer
      *
      * @param Customer $customer
      * @return void
      */
-    function updateCustomer(CustomerInterface $customer);
+    function save(CustomerInterface $customer);
 }

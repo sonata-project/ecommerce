@@ -12,6 +12,7 @@
             <argument type="service" id="sonata.address.manager" />
             <argument type="service" id="sonata.delivery.pool" />
             <argument type="service" id="sonata.payment.pool" />
+            <argument type="service" id="sonata.customer.manager" />
         </service>
 
         <service id="sonata.basket" class="Sonata\Component\Basket\Basket" factory-service="sonata.basket.loader" factory-method="getBasket"/>

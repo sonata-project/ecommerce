@@ -26,7 +26,10 @@ use Application\Sonata\OrderBundle\Entity\OrderElement;
 abstract class BaseProductProvider implements ProductProviderInterface
 {
     protected $options           = array();
+
     protected $variationFields   = array();
+
+    protected $code;
 
     /**
      * @param array $options
@@ -244,7 +247,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array())
     {
         // create the product form
-        return $formBuilder
+        $formBuilder
             ->setData(array(
                 'quantity'   => 1,
                 'productId'  => $product->getId()
@@ -262,8 +265,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array())
     {
-
-        return $formBuilder
+        $formBuilder
             ->setData(array(
                 'quantity' => $basketElement->getQuantity(),
                 'id'       => $basketElement->getProductId()
@@ -271,7 +273,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('delete', 'checkbox')
             ->add('quantity', 'text')
             ->add('id', 'hidden');
-
     }
 
     /**
@@ -368,7 +369,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             // ie: an error occur during the payment process
             throw new \RuntimeException('not implemented');
         } else if(is_array($values)) {
-            $basketElement->setProduct($product, $this);
+            $basketElement->setProduct($this->getCode(), $product);
             $basketElement->setQuantity($values['quantity']);
         } else {
             throw new \RuntimeException('invalid data');
@@ -403,7 +404,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
 
         $basketElement = $basket->getElement($product);
-        $basketElement->setQuantity($basketElement->getQuantity() + $values->getQuantity());
+        if (!$basketElement) {
+            throw new \RuntimeExeption('no basket element related to product.id : %s', $product->getId());
+        }
+
+        $basketElement->setQuantity($basketElement->getQuantity() + $values['quantity']);
 
         return $basketElement;
     }
@@ -491,5 +496,15 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function getStockAvailable(ProductInterface $product)
     {
         return $product->getStock();
+    }
+
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
     }
 }

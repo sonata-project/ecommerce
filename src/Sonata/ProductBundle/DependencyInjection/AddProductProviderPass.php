@@ -46,6 +46,8 @@ class AddProductProviderPass implements CompilerPassInterface
                 $definition->setPublic(false);
                 $container->setDefinition($code, $definition);
 
+                $container->getDefinition($options['provider'])->addMethodCall('setCode', array($code));
+
                 $pool->addMethodCall('addProduct', array($code, new Reference($code)));
             }
         }

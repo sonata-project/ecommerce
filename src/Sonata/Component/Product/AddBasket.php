@@ -47,7 +47,6 @@ class AddBasket
      */
     public function setProductId($productId)
     {
-
         // never erase this value
         if ($this->productId !== null) {
            return;

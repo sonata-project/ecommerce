@@ -24,13 +24,15 @@ interface ProductProviderInterface
     /**
      * @param \Sonata\Component\Product\ProductInterface $product
      * @param \Symfony\Component\Form\FormBuilder $formBuilder
+     * @param array $options
      * @return void
      */
     function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array());
 
     /**
-     * @param \Sonata\Component\Product\ProductInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @param \Symfony\Component\Form\FormBuilder $formBuilder
+     * @param array $options
      * @return void
      */
     function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array());

@@ -9,12 +9,12 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{% trans from 'BasketBundle' %}title_basket{% endtrans %}</h1>
+<h1>{% trans from 'BasketBundle' %}sonata.basket.title_basket{% endtrans %}</h1>
 
 {% if basket.hasBasketElements %}
     {{ form_errors(form) }}
 
-    <form action="{{ url('sonata_basket_update') }}" method="POST" >
+    <form action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">
 
         <table>
             {#
@@ -32,10 +32,13 @@ file that was distributed with this source code.
                 {# call each product controller to render its own view #}
                 {% for basketElement in basket.getBasketElements %}
                     {% render 'SonataProductBundle:Product:renderFormBasketElement' with {
-                        'fieldGroup': form.basketElements.get(basketElement.pos),
+                        'formView':       form.basketElements.getChild(basketElement.pos),
                         'basketElement' : basketElement
                     } %}
                 {% endfor %}
+
+                {# mark the widget as rendered ... TODO: create a custom widget type ...#}
+                {% set dummy = form.basketElements.setrendered %}
             </tbody>
             <tfoot>
                 <tr>
@@ -46,19 +49,12 @@ file that was distributed with this source code.
             </tfoot>
         </table>
 
-        <input type="submit" value="{% trans from 'BasketBundle' %}btn_update_basket{% endtrans %}" />
+        <input type="submit" value="{% trans from 'BasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}" />
 
-        <a href="{{ url('sonata_basket_authentification') }}">{% trans from 'BasketBundle' %}link_next_step{% endtrans %}</a>
+        <a href="{{ url('sonata_basket_authentification') }}">{% trans from 'BasketBundle' %}sonata.basket.link_next_step{% endtrans %}</a>
 
         {{ form_rest(form) }}
     </form>
-
 {% else %}
-
-    <p>{% trans from 'BasketBundle' %}message_basket_is_empty{% endtrans %}</p>
-
-{% endif %}
-
-{% if form.isValid %}
-
+    <p>{% trans from 'BasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}</p>
 {% endif %}

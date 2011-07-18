@@ -20,7 +20,7 @@ class OrderManager implements OrderManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
@@ -36,7 +36,7 @@ class OrderManager implements OrderManagerInterface
      *
      * @return Order
      */
-    public function createOrder()
+    public function create()
     {
         $class = $this->class;
 
@@ -49,7 +49,7 @@ class OrderManager implements OrderManagerInterface
      * @param Order $order
      * @return void
      */
-    public function updateOrder(OrderInterface $order)
+    public function save(OrderInterface $order)
     {
         $this->em->persist($order);
         $this->em->flush();
@@ -71,9 +71,20 @@ class OrderManager implements OrderManagerInterface
      * @param array $criteria
      * @return Order
      */
-    public function findOrderBy(array $criteria)
+    public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * Finds one order by the given criteria
+     *
+     * @param array $criteria
+     * @return Order
+     */
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -82,7 +93,7 @@ class OrderManager implements OrderManagerInterface
      * @param Order $order
      * @return void
      */
-    public function deleteOrder(OrderInterface $order)
+    public function delete(OrderInterface $order)
     {
         $this->em->remove($order);
         $this->em->flush();

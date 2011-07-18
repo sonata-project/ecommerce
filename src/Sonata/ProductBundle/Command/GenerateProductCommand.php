@@ -11,21 +11,21 @@
 
 namespace Sonata\ProductBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
-use Symfony\Bundle\FrameworkBundle\Util\Filesystem;
-use Symfony\Bundle\FrameworkBundle\Generator\Generator;
+use Symfony\Component\HttpKernel\Util\Filesystem;
+use Sonata\EasyExtendsBundle\Generator\Mustache;
 
 /**
  * Create a new Product
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class GenerateProductCommand extends Command
+class GenerateProductCommand extends ContainerAwareCommand
 {
     /**
      * @see Command
@@ -51,7 +51,7 @@ class GenerateProductCommand extends Command
 
         // find a better way to detect the Application folder
         $bundle_dir = sprintf("%s/../src/Application/ProductBundle",
-            $this->container->getKernelService()->getRootDir()
+            $this->getContainer()->getKernelService()->getRootDir()
         );
 
         if (!is_dir($bundle_dir)) {

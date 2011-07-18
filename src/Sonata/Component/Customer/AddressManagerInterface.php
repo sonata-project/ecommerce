@@ -18,7 +18,7 @@ interface AddressManagerInterface
      *
      * @return Address
      */
-    function createAddress();
+    function create();
 
     /**
      * Deletes a address
@@ -26,7 +26,15 @@ interface AddressManagerInterface
      * @param Address $address
      * @return void
      */
-    function deleteAddress(AddressInterface $address);
+    function delete(AddressInterface $address);
+
+    /**
+     * Finds one address by the given criteria
+     *
+     * @param array $criteria
+     * @return array
+     */
+    function findBy(array $criteria);
 
     /**
      * Finds one address by the given criteria
@@ -34,7 +42,7 @@ interface AddressManagerInterface
      * @param array $criteria
      * @return AddressInterface
      */
-    function findAddressBy(array $criteria);
+    function findOneBy(array $criteria);
 
     /**
      * Returns the address's fully qualified class name
@@ -44,11 +52,10 @@ interface AddressManagerInterface
     function getClass();
 
     /**
-     * Updates a address
+     * Saves an address
      *
      * @param Address $address
      * @return void
      */
-    function updateAddress(AddressInterface $address);
-
+    function save(AddressInterface $address);
 }

@@ -13,7 +13,6 @@ namespace Sonata\Component\Customer;
 
 interface CustomerInterface
 {
-
     function setCreatedAt(\DateTime $createdAt = null);
 
     function getCreatedAt();

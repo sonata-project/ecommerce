@@ -20,7 +20,7 @@ class CustomerManager implements CustomerManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
@@ -36,7 +36,7 @@ class CustomerManager implements CustomerManagerInterface
      *
      * @return Customer
      */
-    public function createCustomer()
+    public function create()
     {
         $class = $this->class;
 
@@ -49,7 +49,7 @@ class CustomerManager implements CustomerManagerInterface
      * @param Customer $customer
      * @return void
      */
-    public function updateCustomer(CustomerInterface $customer)
+    public function save(CustomerInterface $customer)
     {
         $this->em->persist($customer);
         $this->em->flush();
@@ -71,9 +71,20 @@ class CustomerManager implements CustomerManagerInterface
      * @param array $criteria
      * @return Customer
      */
-    public function findCustomerBy(array $criteria)
+    public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * Finds many customers by the given criteria
+     *
+     * @param array $criteria
+     * @return Customer
+     */
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -82,7 +93,7 @@ class CustomerManager implements CustomerManagerInterface
      * @param Customer $customer
      * @return void
      */
-    public function deleteCustomer(CustomerInterface $customer)
+    public function delete(CustomerInterface $customer)
     {
         $this->em->remove($customer);
         $this->em->flush();

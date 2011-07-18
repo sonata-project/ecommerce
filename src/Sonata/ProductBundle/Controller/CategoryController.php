@@ -94,10 +94,7 @@ class CategoryController extends Controller
 
     public function listSideMenuCategoriesAction($category = null, $depth = 1, $deep = 0)
     {
-        $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
-
-        $category = $category ?: $repository->getRootCategory();
+        $category = $category ?: $this->get('sonata.category.manager')->getRootCategory();
 
         return $this->render('SonataProductBundle:Category:side_menu_category.html.twig', array(
           'root_category' => $category,

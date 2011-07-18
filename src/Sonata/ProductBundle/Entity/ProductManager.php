@@ -117,6 +117,7 @@ class ProductManager implements ProductManagerInterface
             ->where('pc.category = :categoryId')
             ->setParameter('categoryId', $categoryId);
 
+
         $pager = new Pager($limit);
         $pager->setQuery(new ProxyQuery($queryBuilder));
         $pager->setPage($page);

@@ -20,7 +20,7 @@ class TransactionManager implements TransactionManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
@@ -36,7 +36,7 @@ class TransactionManager implements TransactionManagerInterface
      *
      * @return Transaction
      */
-    public function createTransaction()
+    public function create()
     {
         $class = $this->class;
 
@@ -49,7 +49,7 @@ class TransactionManager implements TransactionManagerInterface
      * @param Transaction $transaction
      * @return void
      */
-    public function updateTransaction(TransactionInterface $transaction)
+    public function save(TransactionInterface $transaction)
     {
         $this->em->persist($transaction);
         $this->em->flush();
@@ -71,9 +71,20 @@ class TransactionManager implements TransactionManagerInterface
      * @param array $criteria
      * @return Transaction
      */
-    public function findTransactionBy(array $criteria)
+    public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * Finds many transaction by the given criteria
+     *
+     * @param array $criteria
+     * @return Transaction
+     */
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -82,7 +93,7 @@ class TransactionManager implements TransactionManagerInterface
      * @param Transaction $transaction
      * @return void
      */
-    public function deleteTransaction(TransactionInterface $transaction)
+    public function delete(TransactionInterface $transaction)
     {
         $this->em->remove($transaction);
         $this->em->flush();

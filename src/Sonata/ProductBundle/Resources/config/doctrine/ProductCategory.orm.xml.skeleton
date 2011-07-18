@@ -11,7 +11,7 @@
     <entity
         name="Application\Sonata\ProductBundle\Entity\ProductCategory"
         table="product__product_category"
-        repository-class="Application\Sonata\ProductBundle\Entity\ProductCategoryRepository">
+        >
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

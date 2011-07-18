@@ -11,7 +11,7 @@
     <entity
         name="Application\Sonata\OrderBundle\Entity\OrderElement"
         table="order__order_element"
-        repository-class="Application\Sonata\OrderBundle\Entity\OrderElementRepository">
+        >
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

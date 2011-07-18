@@ -13,10 +13,10 @@ namespace Sonata\Component\Basket;
 
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\Component\Product\ProductDefinition;
 
 interface BasketElementInterface
 {
-
     /**
      * the position in the basket stack
      *
@@ -41,11 +41,10 @@ interface BasketElementInterface
     /**
      * Define the related product
      *
-     * @param string $code
      * @param \Sonata\Component\Product\ProductInterface $product
      * @return false
      */
-    function setProduct($code, ProductInterface $product);
+    function setProduct($productCode, ProductInterface $product);
 
     /**
      * Return the related product
@@ -172,14 +171,16 @@ interface BasketElementInterface
 
     /**
      * @abstract
-     * @param \Sonata\Component\Product\ProductManagerInterface $productManager
+     * @param \Sonata\Component\Product\ProductDefinition $productDefinition
      * @return void
      */
-    function setProductManager(ProductManagerInterface $productManager);
+    function setProductDefinition(ProductDefinition $productDefinition);
 
     /**
      * @abstract
      * @return \Sonata\Component\Product\ProductManagerInterface
      */
     function getProductManager();
+
+    function getProductCode();
 }

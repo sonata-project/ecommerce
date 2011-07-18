@@ -11,16 +11,14 @@
 
 namespace Sonata\Component\Payment;
 
-
-interface PaymentManagerInterface
+interface TransactionManagerInterface
 {
-
     /**
      * Creates an empty transaction instance
      *
      * @return Transaction
      */
-    function createTransaction();
+    function create();
 
     /**
      * Deletes a transaction
@@ -28,7 +26,7 @@ interface PaymentManagerInterface
      * @param transaction * $transaction
      * @return void
      */
-    function deleteTransaction(TransactionInterface $transaction);
+    function delete(TransactionInterface $transaction);
 
     /**
      * Finds one transaction by the given criteria
@@ -36,7 +34,15 @@ interface PaymentManagerInterface
      * @param array $criteria
      * @return TransactionInterface
      */
-    function findTransactionBy(array $criteria);
+    function findOneBy(array $criteria);
+
+    /**
+     * Finds many transaction by the given criteria
+     *
+     * @param array $criteria
+     * @return TransactionInterface
+     */
+    function findBy(array $criteria);
 
     /**
      * Returns the transaction's fully qualified class name
@@ -51,5 +57,5 @@ interface PaymentManagerInterface
      * @param Transaction $transaction
      * @return void
      */
-    function updateTransaction(TransactionInterface $transaction);
+    function save(TransactionInterface $transaction);
 }

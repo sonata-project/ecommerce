@@ -28,7 +28,6 @@ use Sonata\Component\Order\OrderInterface;
  */
 class BaseTransaction implements TransactionInterface
 {
-
     protected $order;
 
     protected $transactionId;

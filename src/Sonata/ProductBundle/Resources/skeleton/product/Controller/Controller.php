@@ -16,14 +16,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Application\Sonata\ProductBundle\Entity\{{ product }};
 
-use Application\Sonata\ProductBundle\Product\{{ product }}\{{ product }}AddBasketForm;
 use Application\Sonata\ProductBundle\Product\{{ product }}\{{ product }}AddBasket;
 
 /**
  *
  * overwrite methods from the BaseProductController if you want to change the behavior
  * for the current product
- * 
+ *
  */
 class {{ product }}Controller extends \Sonata\ProductBundle\Controller\BaseProductController
 {

@@ -11,16 +11,14 @@
 
 namespace Sonata\Component\Invoice;
 
-
 interface InvoiceElementManagerInterface
 {
-
     /**
      * Creates an empty invoiceElement instance
      *
      * @return InvoiceElement
      */
-    function createInvoiceElement();
+    function create();
 
     /**
      * Deletes a invoiceElement
@@ -28,7 +26,7 @@ interface InvoiceElementManagerInterface
      * @param Invoiceelement $invoiceeElement
      * @return void
      */
-    function deleteInvoiceElement(InvoiceElementInterface $invoiceElement);
+    function delete(InvoiceElementInterface $invoiceElement);
 
     /**
      * Finds one invoiceElement by the given criteria
@@ -36,7 +34,15 @@ interface InvoiceElementManagerInterface
      * @param array $criteria
      * @return InvoiceelementInterface
      */
-    function findInvoiceElementBy(array $criteria);
+    function findOneBy(array $criteria);
+
+    /**
+     * Finds one invoiceElement by the given criteria
+     *
+     * @param array $criteria
+     * @return InvoiceelementInterface
+     */
+    function findBy(array $criteria);
 
     /**
      * Returns the invoiceElement's fully qualified class name
@@ -51,5 +57,5 @@ interface InvoiceElementManagerInterface
      * @param Invoiceelement $invoiceElement
      * @return void
      */
-    function updateInvoiceElement(InvoiceElementInterface $invoiceElement);
+    function save(InvoiceElementInterface $invoiceElement);
 }

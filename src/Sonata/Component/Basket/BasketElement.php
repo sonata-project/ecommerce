@@ -14,10 +14,10 @@ namespace Sonata\Component\Basket;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
+use Sonata\Component\Product\ProductDefinition;
 
 class BasketElement implements \Serializable, BasketElementInterface
 {
-
     protected $productId = null;
 
     protected $product = null;
@@ -32,7 +32,7 @@ class BasketElement implements \Serializable, BasketElementInterface
 
     protected $pos = null;
 
-    protected $productManager = null;
+    protected $productDefinition = null;
 
     protected $productCode = null;
 
@@ -77,11 +77,11 @@ class BasketElement implements \Serializable, BasketElementInterface
      * @param \Sonata\Component\Product\ProductInterface $product
      * @return BasketElement
      */
-    public function setProduct($code, ProductInterface $product)
+    public function setProduct($productCode, ProductInterface $product)
     {
         $this->product      = $product;
         $this->productId    = $product->getId();
-        $this->productCode  = $product->getType();
+        $this->productCode  = $productCode;
         $this->name         = $product->getName();
         $this->price        = $product->getPrice();
         $this->options      = $product->getOptions();
@@ -94,9 +94,9 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getProduct()
     {
-        if ($this->product == null && $this->getProductManager())
+        if ($this->product == null && $this->hasProductDefinition())
         {
-            $this->product = $this->getProductManager()->findOneBy(array('id' => $this->productId));
+            $this->product = $this->getProductDefinition()->getManager()->findOneBy(array('id' => $this->productId));
         }
 
         return $this->product;
@@ -298,6 +298,7 @@ class BasketElement implements \Serializable, BasketElementInterface
             'quantity'    => $this->quantity,
             'options'     => $this->options,
             'name'        => $this->name,
+            'productCode' => $this->productCode
         ));
     }
 
@@ -311,6 +312,7 @@ class BasketElement implements \Serializable, BasketElementInterface
         $this->quantity     = $data['quantity'];
         $this->options      = $data['options'];
         $this->name         = $data['name'];
+        $this->productCode  = $data['productCode'];
     }
 
     /**
@@ -318,15 +320,41 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getProductManager()
     {
-        return $this->productManager;
+        return $this->productDefinition->getManager();
+    }
+
+    public function getProductProvider()
+    {
+        return $this->productDefinition->getProvider();
     }
 
     /**
-     * @param \Sonata\Component\Product\ProductManagerInterface $productManager
+     * @param \Sonata\Component\Product\ProductDefinition $productDefinition
      * @return void
      */
-    public function setProductManager(ProductManagerInterface $productManager)
+    public function setProductDefinition(ProductDefinition $productDefinition)
     {
-        return $this->productManager = $productManager;
+        $this->productDefinition = $productDefinition;
+    }
+
+    /**
+     * @return \Sonata\Component\Product\ProductDefinition
+     */
+    public function getProductDefinition()
+    {
+        return $this->productDefinition;
+    }
+
+    public function getProductCode()
+    {
+        return $this->productCode;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasProductDefinition()
+    {
+        return $this->productDefinition instanceof ProductDefinition;
     }
 }

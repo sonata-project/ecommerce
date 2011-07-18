@@ -11,16 +11,14 @@
 
 namespace Sonata\Component\Order;
 
-
 interface OrderElementManagerInterface
 {
-
     /**
      * Creates an empty orderElement instance
      *
      * @return OrderElement
      */
-    function createOrderElement();
+    function create();
 
     /**
      * Deletes a orderElement
@@ -28,7 +26,7 @@ interface OrderElementManagerInterface
      * @param OrderElement $orderElement
      * @return void
      */
-    function deleteOrderElement(OrderElementInterface $orderElement);
+    function delete(OrderElementInterface $orderElement);
 
     /**
      * Finds one orderElement by the given criteria
@@ -36,7 +34,15 @@ interface OrderElementManagerInterface
      * @param array $criteria
      * @return OrderElementInterface
      */
-    function findOrderElementBy(array $criteria);
+    function findOneBy(array $criteria);
+
+    /**
+     * Finds one orderElement by the given criteria
+     *
+     * @param array $criteria
+     * @return OrderElementInterface
+     */
+    function findBy(array $criteria);
 
     /**
      * Returns the orderElement's fully qualified class name
@@ -51,5 +57,5 @@ interface OrderElementManagerInterface
      * @param OrderElement $orderElement
      * @return void
      */
-    function updateOrderElement(OrderElementInterface $orderElement);
+    function save(OrderElementInterface $orderElement);
 }

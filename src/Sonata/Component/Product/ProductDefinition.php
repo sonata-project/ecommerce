@@ -38,5 +38,4 @@ class ProductDefinition
     {
       return $this->provider;
     }
-
 }

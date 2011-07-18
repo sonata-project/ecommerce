@@ -11,7 +11,7 @@
     <entity
         name="Application\Sonata\InvoiceBundle\Entity\Invoice"
         table="invoice__invoice"
-        repository-class="Application\Sonata\InvoiceBundle\Entity\InvoiceRepository">
+        >
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

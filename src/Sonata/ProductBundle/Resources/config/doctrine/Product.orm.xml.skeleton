@@ -11,7 +11,7 @@
     <entity
         name="Application\Sonata\ProductBundle\Entity\Product"
         table="product__product"
-        repository-class="Application\Sonata\ProductBundle\Entity\ProductRepository">
+        >
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
@@ -76,8 +76,8 @@
         <one-to-many
             field="productCategories"
             target-entity="Application\Sonata\ProductBundle\Entity\ProductCategory"
-            mapped-by="Product"
-            inverted-by="Product">
+            mapped-by="product"
+            inverted-by="product">
 
             <cascade-type>
                 <cascade-all />

@@ -20,7 +20,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
@@ -36,7 +36,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
      *
      * @return InvoiceElement
      */
-    public function createInvoiceElement()
+    public function create()
     {
         $class = $this->class;
 
@@ -49,7 +49,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
      * @param InvoiceElement $invoice
      * @return void
      */
-    public function updateInvoiceElement(InvoiceElementInterface $invoice)
+    public function save(InvoiceElementInterface $invoice)
     {
         $this->em->persist($invoice);
         $this->em->flush();
@@ -66,14 +66,25 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     }
 
     /**
-     * Finds one invoiceElement by the given criteria
+     * Finds one InvoiceElement by the given criteria
      *
      * @param array $criteria
      * @return InvoiceElement
      */
-    public function findInvoiceElementBy(array $criteria)
+    public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * Finds many InvoiceElements by the given criteria
+     *
+     * @param array $criteria
+     * @return InvoiceElement
+     */
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -82,7 +93,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
      * @param InvoiceElement $invoiceElement
      * @return void
      */
-    public function deleteInvoiceElement(InvoiceElementInterface $invoice)
+    public function delete(InvoiceElementInterface $invoice)
     {
         $this->em->remove($invoice);
         $this->em->flush();

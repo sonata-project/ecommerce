@@ -20,7 +20,7 @@ class OrderElementManager implements OrderElementManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
@@ -36,7 +36,7 @@ class OrderElementManager implements OrderElementManagerInterface
      *
      * @return OrderElement
      */
-    public function createOrderElement()
+    public function create()
     {
         $class = $this->class;
 
@@ -49,7 +49,7 @@ class OrderElementManager implements OrderElementManagerInterface
      * @param OrderElement $orderElement
      * @return void
      */
-    public function updateOrderElement(OrderElementInterface $orderElement)
+    public function save(OrderElementInterface $orderElement)
     {
         $this->em->persist($orderElement);
         $this->em->flush();
@@ -71,9 +71,20 @@ class OrderElementManager implements OrderElementManagerInterface
      * @param array $criteria
      * @return OrderElement
      */
-    public function findOrderElementBy(array $criteria)
+    public function findOneBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * Finds many OrderElement by the given criteria
+     *
+     * @param array $criteria
+     * @return OrderElement
+     */
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
     }
 
     /**
@@ -82,7 +93,7 @@ class OrderElementManager implements OrderElementManagerInterface
      * @param OrderElement $orderElement
      * @return void
      */
-    public function deleteOrderElement(OrderElementInterface $orderElement)
+    public function delete(OrderElementInterface $orderElement)
     {
         $this->em->remove($orderElement);
         $this->em->flush();

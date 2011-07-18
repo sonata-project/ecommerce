@@ -15,13 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Application\Sonata\PaymentBundle\Entity\Transaction;
+use Sonata\Component\Basket\BasketElement;
+use Symfony\Component\Form\FormView;
 
 class ProductController extends Controller
 {
-
     public function viewAction($productId, $slug)
     {
-
         $product = is_object($productId) ? $productId : $this->get('sonata.product.collection.manager')->findOneBy(array('id' =>  $productId));
 
         if (!$product) {
@@ -47,20 +47,18 @@ class ProductController extends Controller
         return $response;
     }
 
-    public function renderFormBasketElementAction($fieldGroup, $basketElement)
+    public function renderFormBasketElementAction(FormView $formView, BasketElement $basketElement)
     {
-
-        $code   = $this->get('sonata.product.pool')->getProductCode($basketElement->getProduct());
-        $action = sprintf('SonataProductBundle:%s:renderFormBasketElement', ucfirst($code)) ;
+        $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
-            'fieldGroup'     => $fieldGroup,
+            'formView'       => $formView,
             'basketElement'  => $basketElement,
         ));
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
-                $code,
+                $basketElement->getProductCode(),
                 $basketElement->getProductId(),
                 $action,
                 $response->getContent()
@@ -70,10 +68,9 @@ class ProductController extends Controller
         return $response;
     }
 
-    public function renderFinalReviewBasketElementAction($basketElement)
+    public function renderFinalReviewBasketElementAction(BasketElement $basketElement)
     {
-        $code   = $this->get('sonata.product.pool')->getProductCode($basketElement->getProduct());
-        $action = sprintf('SonataProductBundle:%s:renderFinalReviewBasketElement', ucfirst($code)) ;
+        $action = sprintf('SonataProductBundle:%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
             'basketElement'  => $basketElement,
@@ -81,7 +78,7 @@ class ProductController extends Controller
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
-                $code,
+                $basketElement->getProductCode(),
                 $basketElement->getProductId(),
                 $action,
                 $response->getContent()
@@ -91,7 +88,8 @@ class ProductController extends Controller
         return $response;
     }
 
-    public function viewVariationsAction($productId, $slug) {
+    public function viewVariationsAction($productId, $slug)
+    {
 
     }
 }

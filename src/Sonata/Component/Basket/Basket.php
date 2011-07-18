@@ -292,7 +292,8 @@ class Basket implements \Serializable, BasketInterface
      *
      * @return Product
      */
-    public function getElement(ProductInterface $product) {
+    public function getElement(ProductInterface $product)
+    {
         if (is_object($product)) {
             $pos = $this->pos[$product->getId()];
         } else {

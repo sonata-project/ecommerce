@@ -23,7 +23,6 @@ use Sonata\Component\Basket\InvalidBasketStateException;
 
 class BasketController extends Controller
 {
-
     /**
      * return the basket form
      *
@@ -80,13 +79,12 @@ class BasketController extends Controller
 
         return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
             'basket' => $this->get('sonata.basket'),
-            'form'   => $form,
+            'form'   => $form->createView(),
         ));
     }
 
     public function updateAction()
     {
-
         $form = $this->getBasketForm();
         $form->bind($this->get('request'));
 
@@ -126,8 +124,11 @@ class BasketController extends Controller
         // retrieve the custom provider for the product type
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'add_basket');
+        $provider->defineAddBasketForm($product, $formBuilder);
+
         // load and bind the form
-        $form = $provider->defineAddBasketForm($product, $this->get('form.factory')->createNamedBuilder('form', 'add_basket'))->getForm();
+        $form = $formBuilder->getForm();
         $form->bindRequest($request);
 
         // if the form is valid add the product to the basket
@@ -159,7 +160,6 @@ class BasketController extends Controller
 
     public function headerPreviewAction()
     {
-
 //        throw new \Exception();
         return $this->render('SonataBasketBundle:Basket:header_preview.html.twig', array(
              'basket' => $this->get('sonata.basket')
@@ -168,7 +168,6 @@ class BasketController extends Controller
 
     public function authentificationStepAction()
     {
-
         // todo : code the connection bit
         $customers = $this
             ->get('doctrine.orm.default_entity_manager')
@@ -183,7 +182,6 @@ class BasketController extends Controller
 
     public function getPaymentForm($basket)
     {
-
         $form = new Form('payment', array(
             'data'      => $basket,
             'validator' => $this->get('validator'),
@@ -345,7 +343,6 @@ class BasketController extends Controller
 
     public function deliveryStepAction()
     {
-
         $basket = clone $this->get('sonata.basket');
 
         if ($basket->countBasketElements() == 0) {
@@ -383,7 +380,6 @@ class BasketController extends Controller
 
     public function finalReviewStepAction()
     {
-
         $basket = $this->get('sonata.basket');
 
         $violations = $this->get('validator')->validate($basket, array('elements', 'delivery', 'payment'));
@@ -396,7 +392,6 @@ class BasketController extends Controller
         }
 
         if ($this->get('request')->getMethod() == 'POST' ) {
-
             if ($this->get('request')->get('tac')) {
                 // send the basket to the payment callback
                 return $this->forward('SonataPaymentBundle:Payment:callbank');

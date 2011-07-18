@@ -11,7 +11,7 @@
     <entity
         name="Application\Sonata\CustomerBundle\Entity\Address"
         table="customer__address"
-        repository-class="Application\Sonata\CustomerBundle\Entity\CustomerRepository">
+        >
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

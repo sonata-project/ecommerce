@@ -23,6 +23,7 @@ class CategoryManager implements CategoryManagerInterface
     protected $em;
     protected $repository;
     protected $class;
+    protected $categories = null;
 
     public function __construct(EntityManager $em, $class)
     {
@@ -134,5 +135,44 @@ class CategoryManager implements CategoryManagerInterface
         $pager->init();
 
         return $pager;
+    }
+
+    public function getRootCategory()
+    {
+        $this->loadCategories();
+
+        return $this->categories[0];
+    }
+
+    public function loadCategories()
+    {
+        if ($this->categories !== null) {
+            return;
+        }
+
+        $class = $this->getClass();
+
+        $this->categories = $this->em->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
+            ->execute();
+
+        $root = new $class;
+        $root->setName('root');
+
+        foreach ($this->categories as $category) {
+
+            $parent = $category->getParent();
+
+            $category->disableChildrenLazyLoading();
+
+            if (!$parent) {
+                $root->addChildren($category);
+
+                continue;
+            }
+
+            $parent->addChildren($category);
+        }
+
+        $this->categories[0] = $root;
     }
 }

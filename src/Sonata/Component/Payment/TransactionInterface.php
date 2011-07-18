@@ -27,7 +27,6 @@ use Sonata\Component\Order\OrderInterface;
  */
 interface TransactionInterface
 {
-
     const STATE_OK = 1;
     const STATE_KO = 2;
 

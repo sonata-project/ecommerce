@@ -13,25 +13,28 @@ namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sonata\Component\Basket\BasketElement;
+use Symfony\Component\Form\FormView;
+use Sonata\Component\Order\OrderElementInterface;
 
 use Application\Sonata\PaymentBundle\Entity\Transaction;
 
 abstract class BaseProductController extends Controller
 {
-
-    public function viewAction($product) {
-
+    public function viewAction($product)
+    {
         if (!is_object($product)) {
             throw new NotFoundHttpException('invalid product instance');
         }
 
-        $form = $this->get('session')->getFlash('sonata.product.form');
-
+        $form     = $this->get('session')->getFlash('sonata.product.form');
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         if (!$form) {
-           $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'add_basket');
-           $form = $provider->defineAddBasketForm($product, $formBuilder)->getForm()->createView();
+            $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'add_basket');
+            $provider->defineAddBasketForm($product, $formBuilder);
+
+            $form = $formBuilder->getForm()->createView();
         }
 
         return $this->render(sprintf('%s:view.html.twig', 'SonataProductBundle:Amazon' /*$provider->getBaseControllerName()*/), array(
@@ -40,43 +43,47 @@ abstract class BaseProductController extends Controller
         ));
     }
 
-    public function renderFormBasketElementAction($fieldGroup, $basketElement)
+    public function renderFormBasketElementAction(FormView $formView, BasketElement $basketElement)
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
         return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), array(
-           'fieldGroup'    => $fieldGroup,
-           'basketElement' => $basketElement,
+            'formView'    => $formView,
+            'basketElement' => $basketElement,
         ));
     }
 
-    public function renderFinalReviewBasketElementAction($basketElement)
+    public function renderFinalReviewBasketElementAction(BasketElement $basketElement)
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
         return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), array(
-           'basketElement' => $basketElement,
+            'basketElement' => $basketElement,
         ));
     }
 
-    public function viewVariationsAction($productId, $slug) {
+    public function viewVariationsAction($productId, $slug)
+    {
 
     }
 
-    public function viewBasketElement($basketElement) {
+    public function viewBasketElement(BasketElement $basketElement)
+    {
 
     }
 
-    public function viewBasketElementConfirmation($basketElement) {
+    public function viewBasketElementConfirmation(BasketElement $basketElement)
+    {
 
     }
 
-    public function viewOrderElement($orderElement) {
+    public function viewOrderElement(OrderElementInterface $orderElement)
+    {
 
     }
 
-    public function viewEditOrderElement($orderElement) {
+    public function viewEditOrderElement(OrderElementInterface $orderElement)
+    {
 
     }
-
 }
