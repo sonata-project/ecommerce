@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="sonata.basket.validator.basket_element_collection" class="Sonata\Component\Form\BasketElementCollectionValidator">
+            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="validator.validator_factory" />
+
+            <tag name="validator.constraint_validator" alias="sonata_basket_element_collection_validator" />
+        </service>
+
+    </services>
+
+</container>

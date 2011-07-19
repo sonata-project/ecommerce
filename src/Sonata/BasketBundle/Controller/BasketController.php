@@ -31,11 +31,17 @@ class BasketController extends Controller
     public function getBasketForm()
     {
         // always clone the basket, so the one in session is never altered
+        $basket = clone $this->get('sonata.basket');
+
         $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'basket');
+        $formBuilder->setData($basket);
+        $formBuilder->setAttribute('validation_groups', array('elements'));
+
         $basketElementsBuilder = $formBuilder->create('basketElements', 'form');
 
-        foreach ($this->get('sonata.basket')->getBasketElements() as $basketElement) {
+        foreach ($basket->getBasketElements() as $basketElement) {
             $basketElementBuilder = $basketElementsBuilder->create($basketElement->getPos(), 'form');
+            $basketElementBuilder->setErrorBubbling(false);
 
             $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
@@ -86,7 +92,7 @@ class BasketController extends Controller
     public function updateAction()
     {
         $form = $this->getBasketForm();
-        $form->bind($this->get('request'));
+        $form->bindRequest($this->get('request'));
 
         if ($form->isValid()) {
 

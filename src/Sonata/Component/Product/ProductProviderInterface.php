@@ -13,12 +13,16 @@ namespace Sonata\Component\Product;
 
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Symfony\Component\Form\FormBuilder;
 
 interface ProductProviderInterface
 {
-
+    /**
+     * @abstract
+     * @return string
+     */
     function getBaseControllerName();
 
     /**
@@ -45,7 +49,7 @@ interface ProductProviderInterface
      * @param array $values
      * @return \Sonata\Component\Basket\BasketElementInterface
      */
-    public function basketAddProduct(BasketInterface $basket, ProductInterface $product, array $values = array());
+    public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * Merge a product with another when the product is already present into the basket
@@ -55,7 +59,7 @@ interface ProductProviderInterface
      * @param array $values
      * @return BasketElement
      */
-    public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, array $values = array());
+    public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * @abstract

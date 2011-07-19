@@ -12,6 +12,7 @@ file that was distributed with this source code.
 <h1>{% trans from 'BasketBundle' %}sonata.basket.title_basket{% endtrans %}</h1>
 
 {% if basket.hasBasketElements %}
+
     {{ form_errors(form) }}
 
     <form action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">

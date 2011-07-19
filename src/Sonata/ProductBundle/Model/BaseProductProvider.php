@@ -18,7 +18,7 @@ use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElement;
-
+use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\Form\FormBuilder;
 
 use Application\Sonata\OrderBundle\Entity\OrderElement;
@@ -163,7 +163,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function createVariation(ProductInterface $product)
     {
         if ($product->isVariation()) {
-            throw \RuntimeException('Cannot create a variation from a variation product');
+            throw new \RuntimeException('Cannot create a variation from a variation product');
         }
 
         $variation = clone $product;
@@ -236,6 +236,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /////////////////////////////////////////////////////
     // BASKET RELATED FUNCTIONS
 
+    public function createBasketElement()
+    {
+        return new BasketElement();
+    }
+    
     /**
      * This function return the form used in the product view page
      *
@@ -246,16 +251,16 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array())
     {
+        $basketElement = $this->createBasketElement();
+        $basketElement->setProduct($this->getCode(), $product);
+        $basketElement->setQuantity(1);
+
         // create the product form
         $formBuilder
-            ->setData(array(
-                'quantity'   => 1,
-                'productId'  => $product->getId()
-            ))
+            ->setData($basketElement)
             ->add('quantity', 'text')
             ->add('productId', 'hidden');
     }
-
 
     /**
      * @param \Sonata\Component\Basket\BasketElementInterface $product
@@ -266,13 +271,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array())
     {
         $formBuilder
-            ->setData(array(
-                'quantity' => $basketElement->getQuantity(),
-                'id'       => $basketElement->getProductId()
-            ))
             ->add('delete', 'checkbox')
             ->add('quantity', 'text')
-            ->add('id', 'hidden');
+            ->add('productId', 'hidden');
     }
 
     /**
@@ -281,71 +282,57 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * If the basket is valid it will then replace the one in session
      *
+     * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @return array
      */
-    public function validateFormBasketElement(BasketElementInterface $basketElement)
+    public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement)
     {
-        // initialize the errors array
-        $errors = array(
-            'global' => false,    // global error, ie the basket element is not valid anymore
-            'fields' => array(),  // error per field
-        );
-
         // the item is flagged as deleted, no need to validate the item
         if ($basketElement->getDelete()) {
-
-            return $errors;
+            return;
         }
 
         // refresh the product from the database
         $product = $basketElement->getProduct();
 
-        // check if the product is still enabled
+        // check if the product is still in database
         if (!$product) {
-            $errors['global'] = array(
-                'The product is not available anymore',
-                array(),
-                null
-            );
+            $errorElement->addViolation('The product is not available anymore');
 
-            return $errors;
+            return;
         }
 
         // check if the product is still enabled
         if (!$basketElement->getProduct()->isEnabled()) {
-            $errors['global'] = array(
-                'The product is not enabled anymore',
-                array(),
-                null
-            );
+            $errorElement->addViolation('The product is not enabled anymore');
 
-            return $errors;
+            return;
         }
 
         // check if the quantity is numeric
         if (!is_numeric($basketElement->getQuantity())) {
-            $errors['fields']['quantity'] = array(
-                'The product quantity is not a numeric value',
-                array('{{ quantity }}' => $basketElement->getQuantity()),
-                $basketElement->getQuantity() // todo : not sure about the third element
-            );
+            $errorElement
+                ->with('quantity')
+                    ->addViolation('The product quantity is not a numeric value')
+                ->end();
 
-            return $errors;
+            return;
         }
 
-        // check if the product is still available
-        if ($this->getStockAvailable($basketElement->getProduct()) < $basketElement->getQuantity()) {
-            $errors['fields']['quantity'] = array(
-                'The product quantity ({{ quantity }}) is not valid',
-                array('{{ quantity }}' => $basketElement->getQuantity()),
-                $basketElement->getQuantity() // todo : not sure about the third element
-            );
-        }
-
-        // add here your own validation check
-
-        return $errors;
+        $errorElement
+            ->with('quantity')
+                ->assertMin(
+                    array('limit' => 1),
+                    'The product quantity ({{ quantity }}) is not valid',
+                    array('{{ quantity }}' => $basketElement->getQuantity())
+                )
+                ->assertMax(
+                    array('limit' => $this->getStockAvailable($basketElement->getProduct())),
+                    'The product quantity ({{ quantity }}) is not valid',
+                    array('{{ quantity }}' => $basketElement->getQuantity())
+                )
+            ->end();
     }
 
     /**
@@ -356,23 +343,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param array $values
      * @return \Sonata\Component\Basket\BasketElementInterface
      */
-    public function basketAddProduct(BasketInterface $basket, ProductInterface $product, array $values = array())
+    public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
     {
         if ($basket->hasProduct($product)) {
             return false;
-        }
-
-        $basketElement = new BasketElement;
-
-        if ($values instanceof OrderElementInterface) {
-            // restore the basketElement from an order element
-            // ie: an error occur during the payment process
-            throw new \RuntimeException('not implemented');
-        } else if(is_array($values)) {
-            $basketElement->setProduct($this->getCode(), $product);
-            $basketElement->setQuantity($values['quantity']);
-        } else {
-            throw new \RuntimeException('invalid data');
         }
 
         $basketElementOptions = $product->getOptions();
@@ -397,7 +371,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param array $values
      * @return \Sonata\Component\Basket\BasketElementInterface
      */
-    public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, array $values = array())
+    public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement)
     {
         if (!$basket->hasProduct($product)) {
             return false;
@@ -408,7 +382,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             throw new \RuntimeExeption('no basket element related to product.id : %s', $product->getId());
         }
 
-        $basketElement->setQuantity($basketElement->getQuantity() + $values['quantity']);
+        $basketElement->setQuantity($basketElement->getQuantity() + $newBasketElement->getQuantity());
 
         return $basketElement;
     }

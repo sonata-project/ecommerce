@@ -15,63 +15,22 @@ use Symfony\Component\Validator\Constraint;
 
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Basket\BasketInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 class BasketElementCollectionValidator extends ConstraintValidator
 {
-
-    /**
-     * the product pool
-     *
-     * @var
-     */
     protected $productPool;
 
-    /**
-     * the basket
-     * @var
-     */
     protected $basket;
 
-    /**
-     * set the basket
-     *
-     * @param BasketInterface $basket
-     * @return void
-     */
-    public function setBasket(BasketInterface $basket)
-    {
-        $this->basket = $basket;
-    }
+    protected $constraintValidatorFactory;
 
-    /**
-     * return the basket
-     *
-     * @return \Sonata\Component\Basket\Basket
-     */
-    public function getBasket()
+    public function __construct(ProductPool $productPool, ConstraintValidatorFactory $constraintValidatorFactory)
     {
-        return $this->basket;
-    }
-
-    /**
-     * set the product pool
-     *
-     * @param  \Sonata\Component\Product\Pool $productPool
-     * @return void
-     */
-    public function setProductPool(ProductPool $productPool)
-    {
-        $this->productPool = $productPool;
-    }
-
-    /**
-     * return the product pool
-     * 
-     * @return \Sonata\Component\Product\Pool
-     */
-    public function getProductPool()
-    {
-        return $this->productPool;
+        $this->productPool  = $productPool;
+        $this->constraintValidatorFactory = $constraintValidatorFactory;
     }
 
     /**
@@ -83,44 +42,36 @@ class BasketElementCollectionValidator extends ConstraintValidator
      */
     public function isValid($basketElements, Constraint $constraint)
     {
-        $walker = $this->context->getGraphWalker();
         $group = $this->context->getGroup();
         $propertyPath = $this->context->getPropertyPath();
 
         foreach ($basketElements as $pos => $basketElement) {
+            // update the property path value
+            $this->context->setPropertyPath(sprintf('%s[%d]', $propertyPath, $pos));
 
-            $errors = $this
-                ->getProductPool()
-                ->getRepository($basketElement->getProduct())
-                ->validateFormBasketElement($basketElement);
+            // create a new ErrorElement object
+            $errorElement = new ErrorElement(
+                $basketElement,
+                $this->constraintValidatorFactory,
+                $this->context,
+                $group
+            );
 
-            // global error, the all line is invalid
-            if ($errors['global']) {
-                $this->context->setPropertyPath(sprintf('%s[%d]', $propertyPath, $pos));
-                $this->context->setGroup($group);
-
-                $this->context->addViolation(
-                    $errors['global'][0],
-                    $errors['global'][1],
-                    $errors['global'][2]
-                );
-            }
-
-            if (is_array($errors['fields']) && count($errors['fields']) > 0) {
-
-                foreach ($errors['fields'] as $name => $error) {
-                    $this->context->setPropertyPath(sprintf('%s[%d][%s]', $propertyPath, $pos, $name));
-                    $this->context->setGroup($group);
-
-                    $this->context->addViolation(
-                        $error[0],
-                        $error[1],
-                        $error[2]
-                    );
-                }
-            }
+            // validate the basket element through the related service provider
+            $this->productPool
+                ->getProvider($basketElement->getProductCode())
+                ->validateFormBasketElement($errorElement, $basketElement);
         }
 
-        return count($this->context->getViolations()) == 0;
+        $this->context->setPropertyPath($propertyPath);
+        $this->context->setGroup($group);
+
+        if (count($this->context->getViolations()) == 0) {
+            return true;
+        }
+
+        $this->setMessage($constraint->message, array());
+
+        return false;
     }
 }

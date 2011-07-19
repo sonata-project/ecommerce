@@ -18,6 +18,7 @@
                <option name="groups" >
                     <value>delivery</value>
                </option>
+
            </constraint>
         </property>
 
@@ -44,7 +45,6 @@
                </option>
            </constraint>
         </property>
-
     </class>
 
 </constraint-mapping>

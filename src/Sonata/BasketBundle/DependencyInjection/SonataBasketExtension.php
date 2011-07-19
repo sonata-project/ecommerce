@@ -38,16 +38,7 @@ class SonataBasketExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('basket.xml');
-
-        // initialize the basket elements validator
-        $definition = new Definition('Sonata\\Component\\Form\\BasketElementCollectionValidator');
-        $definition
-            ->addMethodCall('setProductPool', array(new Reference('sonata.product.pool')))
-            ->addMethodCall('setBasket', array(new Reference('sonata.basket')))
-            ->addTag('validator.constraint_validator', array('alias' => 'sonata_basket_element_collection_validator'))
-        ;
-
-        $container->setDefinition('sonata.basket.elements.validator', $definition);
+        $loader->load('validator.xml');
     }
 
     /**
