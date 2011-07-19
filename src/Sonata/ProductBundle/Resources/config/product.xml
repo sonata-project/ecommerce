@@ -6,12 +6,19 @@
 
     <parameters>
         <parameter key="sonata.product.pool.class">Sonata\Component\Product\Pool</parameter>
+        <parameter key="sonata.product.subscriber.orm.class">Sonata\Component\Subscriber\ORMInheritanceSubscriber</parameter>
     </parameters>
 
     <services>
         <service id="sonata.product.pool" class="%sonata.product.pool.class%">
 
         </service>
+
+        <service id="sonata.product.subscriber.orm" class="%sonata.product.subscriber.orm.class%">
+            <argument type="collection" />
+            <tag name="doctrine.event_subscriber" />
+        </service>
+
     </services>
 
 </container>

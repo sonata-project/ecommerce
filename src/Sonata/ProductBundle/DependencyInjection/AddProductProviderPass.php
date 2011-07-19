@@ -34,6 +34,7 @@ class AddProductProviderPass implements CompilerPassInterface
         $calls = $pool->getMethodCalls();
         $pool->setMethodCalls(array());
 
+        $map = array();
         foreach($calls as $method => $arguments) {
             if ($arguments[0] !== '__hack')  {
                 $pool->addMethodCall($arguments[0], $arguments[1]);
@@ -49,7 +50,11 @@ class AddProductProviderPass implements CompilerPassInterface
                 $container->getDefinition($options['provider'])->addMethodCall('setCode', array($code));
 
                 $pool->addMethodCall('addProduct', array($code, new Reference($code)));
+
+                $map[$code] = $container->getDefinition($options['manager'])->getArgument(0);
             }
         }
+
+        $container->getDefinition('sonata.product.subscriber.orm')->replaceArgument(0, $map);
     }
 }
