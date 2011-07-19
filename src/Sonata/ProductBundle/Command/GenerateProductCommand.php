@@ -132,7 +132,7 @@ class GenerateProductCommand extends ContainerAwareCommand
             - @sonata.product.entity_manager
 
     {{ service }}.type:
-        class: Application\Sonata\ProductBundle\Entity\{{ product }}ProductProvider
+        class: Application\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
 
 <info>2. Add this service configuration</info>
 
