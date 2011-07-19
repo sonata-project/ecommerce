@@ -240,7 +240,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         return new BasketElement();
     }
-    
+
     /**
      * This function return the form used in the product view page
      *

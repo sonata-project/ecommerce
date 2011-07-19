@@ -13,7 +13,7 @@ namespace Sonata\ProductBundle\Entity;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Delivery\DeliveryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
-   
+
 use Sonata\Component\Product\ProductCategoryInterface;
 
 /**
@@ -480,5 +480,10 @@ abstract class BaseProduct implements ProductInterface
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
+    }
+
+    public function isRecurrentPayment()
+    {
+        return false;
     }
 }

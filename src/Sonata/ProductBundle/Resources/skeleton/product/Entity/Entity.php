@@ -20,18 +20,5 @@ namespace Application\Sonata\ProductBundle\Entity;
  */
 class {{ product }} extends Product
 {
-    /**
-     * @var integer $id
-     */
-    private $id;
-    
-    /**
-     * Return true if the product is recurrent
-     * @abstract
-     * @return bool
-     */
-    public function isRecurrentPayment()
-    {
-        return false;
-    }
+
 }
