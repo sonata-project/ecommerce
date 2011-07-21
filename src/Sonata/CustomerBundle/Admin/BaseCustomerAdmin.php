@@ -11,12 +11,12 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
-use Sonata\AdminBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\Admin;
 
-    
-abstract class BaseCustomerAdmin extends EntityAdmin
+
+abstract class BaseCustomerAdmin extends Admin
 {
-    
+
 //    /**
 //     * return the edit template
 //     *
