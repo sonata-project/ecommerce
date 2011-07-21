@@ -10,10 +10,8 @@
 
 namespace Sonata\Component\Product;
 
-
 interface ProductCategoryInterface
 {
-
     /**
      * Set enabled
      *

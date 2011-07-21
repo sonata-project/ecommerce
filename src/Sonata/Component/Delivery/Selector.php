@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
  * The selector selects available delivery methods depends on the provided basket
  *
  */
-class Selector
+class Selector implements DeliverySelectorInterface
 {
     protected $deliveryPool;
 
@@ -71,14 +71,17 @@ class Selector
         return $this->productPool;
     }
 
-    public function getAvailableMethods(BasketInterface $basket, AddressInterface $deliveryAddress)
+    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null)
     {
         $instances = array();
 
+        if (!$basket) {
+            return $instances;
+        }
+
         // no address defined !
         if (!$deliveryAddress) {
-
-            return false;
+            return $instances;
         }
 
         // STEP 1 : We get product's delivery methods
@@ -86,7 +89,6 @@ class Selector
             $product = $basketElement->getProduct();
 
             if (!$product) {
-
                 $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d does not exist', $basketElement->getProductId()));
 
                 return false;
@@ -94,12 +96,10 @@ class Selector
 
             $productDeliveries = $product->getDelivery();
 
-
             foreach ($productDeliveries as $productDelivery) {
 
                 // delivery method already selected
                 if (array_key_exists($productDelivery->getCode(), $instances)) {
-
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s already selected', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
@@ -108,7 +108,6 @@ class Selector
                 $deliveryMethod = $this->getDeliveryPool()->getMethod($productDelivery->getCode());
 
                 if (!$deliveryMethod) {
-
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code: %s does not exist', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
@@ -116,7 +115,6 @@ class Selector
 
                 // product delivery not enable
                 if (!$deliveryMethod->getEnabled()) {
-
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s is not enabled', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
@@ -124,7 +122,6 @@ class Selector
 
                 // the product is not deliverable at the $shipping_address
                 if ($deliveryAddress->getCountryCode() != $productDelivery->getCountryCode()) {
-
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basketElement->getProductId(), $productDelivery->getCode(), $deliveryAddress->getCountryCode(), $productDelivery->getCountryCode()));
 
                     continue;

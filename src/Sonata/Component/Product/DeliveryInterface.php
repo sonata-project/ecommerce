@@ -10,10 +10,8 @@
 
 namespace Sonata\Component\Product;
 
-
 interface DeliveryInterface
 {
-
     /**
      * Set productId
      *
@@ -125,5 +123,4 @@ interface DeliveryInterface
      * @return datetime $createdAt
      */
     function getCreatedAt();
-
 }

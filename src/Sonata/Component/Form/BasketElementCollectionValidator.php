@@ -36,7 +36,7 @@ class BasketElementCollectionValidator extends ConstraintValidator
     /**
      * The validator asks each product repository to validate the related basket element
      *
-     * @param  $basketElements
+     * @param BasketElement $basketElements
      * @param Constraint $constraint
      * @return bool
      */

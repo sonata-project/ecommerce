@@ -9,28 +9,24 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{% trans 'title_payment_step_basket' from 'BasketBundle' %}</h1>
+<h1>{{ 'sonata.basket.title_payment_step_basket'|trans({}, 'BasketBundle') }}</h1>
 
 <form action="{{ url('sonata_basket_payment') }}" method="POST" >
-    {{ form_hidden(form) }}
-
     <div>
-        <h2>{% trans 'title_delivery_addresses' from 'BasketBundle' %}</h2>
+        <h2>{{ 'sonata.basket.title_delivery_addresses'|trans({}, 'BasketBundle') }}</h2>
+
         {{ form_errors(form.paymentAddress) }}
-        {{ form_field(form.paymentAddress, {}, {}, 'SonataBasketBundle:Basket:render_payment_address.html.twig') }}
+        {{ form_widget(form.paymentAddress) }}
     </div>
 
     <div>
-        <h2>{% trans 'title_delivery_methods' from 'BasketBundle' %}</h2>
+        <h2>{{ 'sonata.basket.title_delivery_methods'|trans({}, 'BasketBundle') }}</h2>
 
-        {% if paymentMethods|length == 0 %}
-            <p>{% trans 'message_no_delivery_methods_available' from 'BasketBundle' %}</p>
-        {% else %}
-            {{ form_errors(form.paymentMethod) }}
-            {{ form_field(form.paymentMethod, {}, {}, 'SonataBasketBundle:Basket:render_payment_address.html.twig') }}
-        {% endif %}
+        {{ form_errors(form.paymentMethod) }}
+        {{ form_widget(form.paymentMethod) }}
     </div>
 
-    <input type="submit" value="{% trans 'btn_update_payment_step' from 'SonataBasketBundle' %}" />
+    {{ form_rest(form) }}
 
+    <input type="submit" value="{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'BasketBundle') }}" />
 </form>

@@ -11,40 +11,30 @@
 
 namespace Sonata\Component\Form\Transformer;
 
-use Symfony\Component\Form\ValueTransformer\ValueTransformerInterface;
-use Symfony\Component\Form\ValueTransformer\TransformationFailedException;
-use Symfony\Component\Form\Configurable;
-    
+use Symfony\Component\Form\DataTransformerInterface;
+use Sonata\Component\Payment\Pool as PaymentPool;
+
 /**
  * Transform a method code into a method instance
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class PaymentMethodTransformer extends Configurable implements ValueTransformerInterface
+class PaymentMethodTransformer implements DataTransformerInterface
 {
-    protected function configure()
-    {
-        $this->addRequiredOption('payment_pool');
+    protected $paymentPool;
 
-        parent::configure();
+    public function __construct(PaymentPool $paymentPool)
+    {
+        $this->paymentPool = $paymentPool;
     }
 
-    /**
-     * @param array $ids
-     * @param Collection $collection
-     */
     public function reverseTransform($value)
     {
-
-       return $this->getOption('payment_pool')->getMethod($value);
+        return $this->paymentPool->getMethod($value);
     }
 
-    /**
-     * @param Collection $value
-     */
     public function transform($value)
     {
-
         return $value ? $value->getCode() : null;
     }
 }

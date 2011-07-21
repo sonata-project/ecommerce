@@ -10,7 +10,6 @@ use Sonata\Component\Customer\CustomerInterface;
  */
 abstract class BaseAddress implements AddressInterface
 {
-
     /**
      * @var boolean $current
      */
@@ -94,7 +93,6 @@ abstract class BaseAddress implements AddressInterface
             self::TYPE_CONTACT  => 'type_contact',
         );
     }
-
 
     /**
      * Set current
@@ -394,4 +392,8 @@ abstract class BaseAddress implements AddressInterface
         return $this->customer;
     }
 
+    public function __toString()
+    {
+        return sprintf("%s - %s", $this->getName(), $this->getFullAddress());
+    }
 }

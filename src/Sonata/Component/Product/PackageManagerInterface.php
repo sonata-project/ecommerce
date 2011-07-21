@@ -11,10 +11,8 @@
 
 namespace Sonata\Component\Product;
 
-
 interface PackageManagerInterface
 {
-
     /**
      * Creates an empty medie instance
      *

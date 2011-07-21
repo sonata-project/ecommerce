@@ -39,6 +39,7 @@ class SonataBasketExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('basket.xml');
         $loader->load('validator.xml');
+        $loader->load('form.xml');
     }
 
     /**

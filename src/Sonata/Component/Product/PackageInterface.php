@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Product;
 
-
 interface PackageInterface
 {
     /**

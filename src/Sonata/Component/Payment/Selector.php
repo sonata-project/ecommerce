@@ -12,12 +12,14 @@ namespace Sonata\Component\Payment;
 
 use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Product\Pool as ProductPool;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Customer\AddressInterface;
 
 /**
  * The selector selects available payment methods depends on the provided basket
  *
  */
-class Selector
+class Selector implements PaymentSelectorInterface
 {
     protected $paymentPool;
 
@@ -47,7 +49,7 @@ class Selector
         return $this->productPool;
     }
 
-    public function getAvailableMethods($basket, $paymentAddress)
+    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $paymentAddress = null)
     {
         if (!$paymentAddress) {
             return false;

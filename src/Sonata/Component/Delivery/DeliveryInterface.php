@@ -12,7 +12,6 @@ namespace Sonata\Component\Delivery;
 
 interface DeliveryInterface
 {
-
     const STATUS_OPEN       = 1;
     const STATUS_SENT       = 2;
     const STATUS_CANCELLED  = 3;
@@ -37,7 +36,6 @@ interface DeliveryInterface
      */
     function getName();
 
-
     /**
      * @abstract
      * @return boolean return true an address is required to use this delivery method
@@ -61,6 +59,4 @@ interface DeliveryInterface
      * @return float
      */
     function getVatAmount($basket);
-
-    
 }

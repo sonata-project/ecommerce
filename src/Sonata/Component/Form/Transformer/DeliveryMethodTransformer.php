@@ -11,41 +11,30 @@
 
 namespace Sonata\Component\Form\Transformer;
 
-use Symfony\Component\Form\ValueTransformer\ValueTransformerInterface;
-use Symfony\Component\Form\ValueTransformer\TransformationFailedException;
-use Symfony\Component\Form\Configurable;
-
+use Symfony\Component\Form\DataTransformerInterface;
+use \Sonata\Component\Delivery\Pool as DeliveryPool;
 
 /**
  * Transform a method code into a method instance
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class DeliveryMethodTransformer extends Configurable implements ValueTransformerInterface
+class DeliveryMethodTransformer implements DataTransformerInterface
 {
-    protected function configure()
-    {
-        $this->addRequiredOption('delivery_pool');
+    protected $deliveryPool;
 
-        parent::configure();
+    public function __construct(DeliveryPool $deliveryPool)
+    {
+        $this->deliveryPool = $deliveryPool;
     }
 
-    /**
-     * @param array $ids
-     * @param Collection $collection
-     */
     public function reverseTransform($value)
     {
-
-       return $this->getOption('delivery_pool')->getMethod($value);
+        return $this->deliveryPool->getMethod($value);
     }
 
-    /**
-     * @param Collection $value
-     */
     public function transform($value)
     {
-
         return $value ? $value->getCode() : null;
     }
 }

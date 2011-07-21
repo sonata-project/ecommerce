@@ -14,7 +14,6 @@ class Pool
 {
     protected $products = array();
 
-
     /**
      * add a delivery method into the pool
      *

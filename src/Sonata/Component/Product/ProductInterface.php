@@ -13,7 +13,6 @@ namespace Sonata\Component\Product;
 
 interface ProductInterface
 {
-
     /**
      * @abstract
      * @return integer the product id
@@ -120,5 +119,4 @@ interface ProductInterface
      * @return void
      */
     function isVariation();
-
 }

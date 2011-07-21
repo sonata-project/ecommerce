@@ -22,7 +22,6 @@ use Sonata\Component\Product\Pool;
 
 class Basket implements \Serializable, BasketInterface
 {
-
     protected $basketElements = array();
 
     protected $pos = array();

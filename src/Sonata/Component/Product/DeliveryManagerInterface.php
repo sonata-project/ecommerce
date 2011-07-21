@@ -11,10 +11,8 @@
 
 namespace Sonata\Component\Product;
 
-
 interface DeliveryManagerInterface
 {
-
     /**
      * Creates an empty delivery instance
      *

@@ -12,7 +12,6 @@ namespace Sonata\Component\Customer;
 
 interface AddressInterface
 {
-
     const TYPE_BILLING  = 1;
     const TYPE_DELIVERY = 2;
     const TYPE_CONTACT  = 3;

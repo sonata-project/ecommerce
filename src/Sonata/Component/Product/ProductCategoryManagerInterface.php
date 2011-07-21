@@ -11,10 +11,8 @@
 
 namespace Sonata\Component\Product;
 
-
 interface ProductCategoryManagerInterface
 {
-
     /**
      * Creates an empty ProductCategory instance
      *
