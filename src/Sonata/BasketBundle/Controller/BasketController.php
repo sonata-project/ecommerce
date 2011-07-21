@@ -171,7 +171,6 @@ class BasketController extends Controller
             $form->bindRequest($this->get('request'));
 
             if ($form->isValid()) {
-
                 // update the basket store in session
                 $this->get('session')->set('sonata/basket', $form->getData());
 

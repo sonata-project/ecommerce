@@ -70,7 +70,7 @@ class ProductController extends Controller
 
     public function renderFinalReviewBasketElementAction(BasketElement $basketElement)
     {
-        $action = sprintf('SonataProductBundle:%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
+        $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
             'basketElement'  => $basketElement,

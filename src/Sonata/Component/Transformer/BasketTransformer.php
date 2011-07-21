@@ -12,14 +12,34 @@ namespace Sonata\Component\Transformer;
 
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Delivery\DeliveryInterface;
+use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Product\Pool;
 
 class BasketTransformer extends BaseTransformer
 {
+    protected $orderManager;
+
+    /**
+     * @param \Sonata\Component\Order\OrderManagerInterface $orderManager
+     * @param Pool $productPool
+     * @param null $logger
+     */
+    public function __construct(OrderManagerInterface $orderManager, Pool $productPool, $logger = null)
+    {
+        parent::__construct($productPool, $logger);
+
+        $this->orderManager = $orderManager;
+    }
+
     /**
      * transform a basket into order
      *
-     * @param  $customer
-     * @param  $basket
+     * @param CustomerInterface $customer
+     * @param BasketInterface $basket
      * @return Order
      */
     public function transformIntoOrder(CustomerInterface $customer = null, BasketInterface $basket = null)
@@ -44,8 +64,7 @@ class BasketTransformer extends BaseTransformer
 
         // Billing
         $billingAddress = $basket->getPaymentAddress();
-        if (!$billingAddress instanceof  \Sonata\Component\Basket\AddressInterface) {
-
+        if (!$billingAddress instanceof AddressInterface) {
             if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the billing address is not valid');
             }
@@ -55,8 +74,7 @@ class BasketTransformer extends BaseTransformer
 
         // Shipping
         $deliveryMethod = $basket->getDeliveryMethod();
-        if (!$deliveryMethod instanceof \Sonata\Component\Delivery\DeliveryInterface) {
-
+        if (!$deliveryMethod instanceof DeliveryInterface) {
             if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the delivery method is not valid');
             }
@@ -65,8 +83,7 @@ class BasketTransformer extends BaseTransformer
         }
 
         $deliveryAddress = $basket->getDeliveryAddress();
-        if ($deliveryMethod->isAddressRequired() && !$deliveryAddress instanceof \Sonata\Component\Basket\AddressInterface) {
-
+        if ($deliveryMethod->isAddressRequired() && !$deliveryAddress instanceof AddressInterface) {
             if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the shipping address is not valid');
             }
@@ -76,7 +93,7 @@ class BasketTransformer extends BaseTransformer
 
         // add a custom class_instance for testing purpose.
         // todo : find a cleaner way to do that
-        $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : new \Application\Sonata\OrderBundle\Entity\Order;
+        $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : $this->orderManager->create();
 
         $order->setCustomer($customer);
         $order->setUsername($customer->getFullname());
@@ -106,20 +123,20 @@ class BasketTransformer extends BaseTransformer
 
         $order->setDeliveryCost($basket->getDeliveryPrice(true));
         $order->setDeliveryMethod($basket->getDeliveryMethod()->getCode());
-        $order->setDeliveryStatus(\Sonata\Component\Delivery\DeliveryInterface::STATUS_OPEN);
+        $order->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
 
         $order->setCreatedAt(new \DateTime);
 
         // todo : handle the currency
         //$order->setCurrency(Product::getDefaultCurrency());
 
-        $order->setStatus(\Sonata\Component\Order\OrderInterface::STATUS_OPEN);
+        $order->setStatus(OrderInterface::STATUS_OPEN);
 
-        $order->setPaymentStatus(\Application\Sonata\PaymentBundle\Entity\Transaction::STATUS_OPEN);
+        $order->setPaymentStatus(TransactionInterface::STATUS_OPEN);
         $order->setPaymentMethod($basket->getPaymentMethod()->getCode());
 
         foreach ($basket->getBasketElements() as $basketElement) {
-            $orderElement = $basketElement->getProductRepository()->createOrderElement($basketElement);
+            $orderElement = $basketElement->getProductProvider()->createOrderElement($basketElement);
 
             $order->addOrderElement($orderElement);
         }

@@ -55,6 +55,9 @@ class SonataPaymentExtension extends Extension
         if(isset($config['transformers'])) {
             $this->configureTransformer($config['transformers'], $container);
         }
+
+        $generator = isset($config['generator']) ? $config['generator'] : 'sonata.payment.generator.mysql';
+        $container->setDefinition('sonata.generator', $container->getDefinition($generator));
     }
 
     public function configurePayment($services, ContainerBuilder $container)

@@ -9,18 +9,16 @@ file that was distributed with this source code.
 
 #}
 
-
-<h1>{% trans 'title_basket' from 'BasketBundle' %}</h1>
-
+<h1>{{ 'sonata.basket.title_basket'|trans({}, 'BasketBundle') }}</h1>
 
 <table>
     {#
     <thead>
         <tr>
-            <td>{% trans 'header_basket_information' from 'BasketBundle'%}</td>
-            <td>{% trans 'header_basket_price' from 'BasketBundle'%}</td>
-            <td>{% trans 'header_basket_quantity' from 'BasketBundle'%}</td>
-            <td>{% trans 'header_basket_total' from 'BasketBundle'%}</td>
+            <td>{{ 'header_basket_information'|trans({}, 'BasketBundle') }}</td>
+            <td>{{ 'header_basket_price' from |trans({}, 'BasketBundle') }}</td>
+            <td>{{ 'header_basket_quantity'|trans({}, 'BasketBundle') }}</td>
+            <td>{{ 'header_basket_total'|trans({}, 'BasketBundle') }}</td>
         </tr>
     </thead>
     #}
@@ -33,7 +31,7 @@ file that was distributed with this source code.
         {% endfor %}
 
         <tr>
-            <td>{% trans 'label_delivery_charge' from 'BasketBundle' %}</td>
+            <td>{{ 'sonata.basket.label_delivery_charge'|trans({}, 'BasketBundle') }}</td>
             <td>{{ basket.getDeliveryPrice(false) }}</td>
             <td></td>
             <td>{{ basket.getDeliveryPrice(true) }}</td>
@@ -41,15 +39,15 @@ file that was distributed with this source code.
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3">{% trans 'total_wo_vat' from 'BasketBundle' %}</td>
+            <td colspan="3">{{ 'sonata.basket.total_wo_vat'|trans({}, 'BasketBundle') }}</td>
             <td><b>{{ basket.getTotal(false) }}</b></td>
         </tr>
         <tr>
-            <td colspan="3">{% trans 'total_vat' from 'BasketBundle' %}</td>
+            <td colspan="3">{{ 'sonata.basket.total_vat'|trans({}, 'BasketBundle') }}</td>
             <td><b>{{ basket.getVatAmount() }}</b></td>
         </tr>
         <tr>
-            <td colspan="3">{% trans 'total_w_vat' from 'BasketBundle' %}</td>
+            <td colspan="3">{{ 'sonata.basket.total_w_vat'|trans({}, 'BasketBundle') }}</td>
             <td><b>{{ basket.getTotal(true) }}</b></td>
         </tr>
     </tfoot>
@@ -58,16 +56,16 @@ file that was distributed with this source code.
 <table>
     <tr>
         <td class="basket_validation_box">
-            <h3>{% trans 'title_delivery_address' from 'BasketBundle' %}</h3>
+            <h3>{{ 'sonata.basket.title_delivery_address'|trans({}, 'BasketBundle') }}</h3>
             {% if basket.deliverymethod.isAddressRequired() %}
                 {{ basket.deliveryaddress.getFullAddress("<br />") }}
                 <br />
             {% else %}
-                {% trans 'title_delivery_address_not_required' from 'BasketBundle' %}
+                {{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'BasketBundle') }}
             {% endif %}
         </td>
         <td class="basket_validation_box">
-            <h3>{% trans 'title_payment_address' from 'BasketBundle' %}</h3>
+            <h3>{{ 'sonata.basket.title_payment_address'|trans({}, 'BasketBundle') }}</h3>
             {{  basket.paymentaddress.name }}
 
             {{  basket.paymentaddress.getFullAddress("<br />") }}
@@ -75,12 +73,12 @@ file that was distributed with this source code.
     </tr>
     <tr>
         <td class="basket_validation_box">
-            <h3>{% trans 'title_delivery_method' from 'BasketBundle' %}</h3>
+            <h3>{{ 'sonata.basket.title_delivery_method'|trans({}, 'BasketBundle') }}</h3>
             {{ basket.deliverymethod.name }} :
             <em>{{ basket.deliverymethod.description }}</em>
         </td>
         <td class="validation_box">
-            <h3>{% trans 'title_payment_method' from 'BasketBundle' %}</h3>
+            <h3>{{ 'sonata.basket.title_payment_method'|trans({}, 'BasketBundle') }}</h3>
             {{ basket.paymentmethod.name }} :
             <em>{{ basket.paymentmethod.description }}</em>
         </td>
@@ -88,17 +86,17 @@ file that was distributed with this source code.
 </table>
 
 <div class="basket_tac">
-    <h3>{% trans 'order_terms_and_conditions_title' from 'BasketBundle' %}</h3>
+    <h3>{{ 'sonata.basket.order_terms_and_conditions_title'|trans({}, 'BasketBundle') }}</h3>
     <form action="{{ url('sonata_basket_final') }}" method="POST">
 
         <input type="checkbox" name="tac" id="basket_tac"/>
         <label for="basket_tac">
-            {% trans 'label_terms_and_condition' from 'BasketBundle' %}
-            <a href="/page/terms-and-conditions">{% trans 'link_terms_and_condition' from 'BasketBundle' %}</a>
+            {{ 'sonata.basket.label_terms_and_condition'|trans({}, 'BasketBundle') }}
+            <a href="/page/terms-and-conditions">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'BasketBundle') }}</a>
         </label>
         <br />
 
-        <input type="submit" value="{% trans 'label_process_to_payment' from 'BasketBundle' %}" />
+        <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'BasketBundle') }}" />
 
         <div style="clear:both"></div>
     </form>

@@ -18,6 +18,7 @@
         <service id="sonata.payment.transformer.basket" class="Sonata\Component\Transformer\BasketTransformer">
             <tag name="sonata.payment.transformer" />
 
+            <argument type="service" id="sonata.order.manager" />
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="logger" />
         </service>

@@ -77,7 +77,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setDescription($product->getDescription());
         $orderElement->setSerialize(null);
         $orderElement->setProductId($product->getId());
-        $orderElement->setProductType($this->getProductType());
+        $orderElement->setProductType($this->getCode());
         $orderElement->setStatus(OrderInterface::STATUS_PENDING);
         $orderElement->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
         $orderElement->setCreatedAt(new \DateTime);

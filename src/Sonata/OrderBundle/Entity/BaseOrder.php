@@ -19,11 +19,6 @@ abstract class BaseOrder implements OrderInterface
     protected $reference;
 
     /**
-     * @var integer $user
-     */
-    protected $user;
-
-    /**
      * @var string $payment_method
      */
     protected $paymentMethod;
@@ -228,7 +223,7 @@ abstract class BaseOrder implements OrderInterface
      *
      * @param string $payment_method
      */
-    public function setPaymentMethod(PaymentInterface $paymentMethod)
+    public function setPaymentMethod($paymentMethod)
     {
         $this->paymentMethod = $paymentMethod;
     }
@@ -248,7 +243,7 @@ abstract class BaseOrder implements OrderInterface
      *
      * @param string $deliveryMethod
      */
-    public function setDeliveryMethod(DeliveryInterface $deliveryMethod)
+    public function setDeliveryMethod($deliveryMethod)
     {
         $this->deliveryMethod = $deliveryMethod;
     }

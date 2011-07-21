@@ -12,8 +12,6 @@
 namespace Sonata\Component\Order;
 
 use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Component\Payment\PaymentInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
 
 interface OrderInterface
 {
@@ -49,7 +47,7 @@ interface OrderInterface
      *
      * @param string $payment_method
      */
-    function setPaymentMethod(PaymentInterface $paymentMethod);
+    function setPaymentMethod($paymentMethod);
 
     /**
      * Get payment_method
@@ -63,7 +61,7 @@ interface OrderInterface
      *
      * @param string $deliveryMethod
      */
-    function setDeliveryMethod(DeliveryInterface $deliveryMethod);
+    function setDeliveryMethod($deliveryMethod);
 
     /**
      * Get delivery_method
