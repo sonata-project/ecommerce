@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
-    
+
 /**
  * UrlShortenerExtension.
  *
@@ -27,7 +27,6 @@ use Symfony\Component\Config\FileLocator;
  */
 class SonataCustomerExtension extends Extension
 {
-
     /**
      * Loads the customer configuration.
      *
@@ -38,6 +37,7 @@ class SonataCustomerExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
+        $loader->load('admin.xml');
     }
 
     /**
@@ -47,19 +47,16 @@ class SonataCustomerExtension extends Extension
      */
     public function getXsdValidationBasePath()
     {
-
         return __DIR__.'/../Resources/config/schema';
     }
 
     public function getNamespace()
     {
-
         return 'http://www.sonata-project.org/schema/dic/sonata-payment';
     }
 
     public function getAlias()
     {
-        
         return 'sonata_customer';
     }
 }

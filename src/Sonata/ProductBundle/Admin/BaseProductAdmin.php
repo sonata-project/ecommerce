@@ -14,12 +14,8 @@ namespace Sonata\ProductBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-use Knplabs\Bundle\MenuBundle\Menu;
-use Knplabs\Bundle\MenuBundle\MenuItem;
-
-abstract class BaseProductAdmin extends EntityAdmin
+abstract class BaseProductAdmin extends Admin
 {
-
     /**
      * return the edit template
      *

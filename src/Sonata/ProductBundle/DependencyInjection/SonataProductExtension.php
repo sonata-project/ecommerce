@@ -27,7 +27,6 @@ use Symfony\Component\Config\FileLocator;
  */
 class SonataProductExtension extends Extension
 {
-
     /**
      * Loads the product configuration.
      *
@@ -41,6 +40,7 @@ class SonataProductExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('product.xml');
         $loader->load('orm.xml');
+        $loader->load('admin.xml');
 
         $pool = $container->getDefinition('sonata.product.pool');
         // this value is altered by the AddProductProviderPass class

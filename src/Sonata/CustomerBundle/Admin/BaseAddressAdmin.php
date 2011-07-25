@@ -9,12 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\CustomerBundle\Controller;
+namespace Sonata\CustomerBundle\Admin;
 
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sonata\AdminBundle\Admin\Admin;
 
-class CustomerAdminController extends Controller
+abstract class BaseAddressAdmin extends Admin
 {
-
 }

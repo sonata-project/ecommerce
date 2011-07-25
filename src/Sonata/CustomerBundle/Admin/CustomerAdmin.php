@@ -11,12 +11,11 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
-use Knplabs\Bundle\MenuBundle\Menu;
-use Knplabs\Bundle\MenuBundle\MenuItem;
+use Sonata\AdminBundle\Admin\Admin;
+use Knp\Bundle\MenuBundle\MenuItem;
 
 class CustomerAdmin extends BaseCustomerAdmin
 {
-
     protected $form = array(
         'firstname',
         'lastname'
@@ -28,45 +27,34 @@ class CustomerAdmin extends BaseCustomerAdmin
     );
 
     protected $filter = array(
-        'name' => array('type' => 'string'),
+        'firstname' => array('type' => 'string'),
+        'lastname' => array('type' => 'string'),
 //        'createdAt'
     );
 
-    public function getSideMenu($action, $childAdmin = false)
+    public function configureSideMenu(MenuItem $menu, $action, Admin $childAdmin = null)
     {
-
-        if ($childAdmin || in_array($action, array('edit'))) {
-            return $this->getEditSideMenu();
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
         }
-
-        return false;
-    }
-
-    public function getEditSideMenu()
-    {
-        $translator = $this->container->get('translator');
-
-        $menu = new Menu;
 
         $admin = $this->isChild() ? $this->getParent() : $this;
 
-        $customerId = $this->container->get('request')->get('id');
+        $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $translator->trans('link_customer_edit', array(), 'SonataCustomerBundle'),
-            $admin->generateUrl('edit', array('id' => $customerId))
+            $this->trans('sonata.customer.link_customer_edit', array(), 'SonataCustomerBundle'),
+            $admin->generateUrl('edit', array('id' => $id))
         );
 
         $menu->addChild(
-            $translator->trans('link_address_list', array(), 'SonataCustomerBundle'),
-            $admin->generateUrl('address.list', array('id' => $customerId))
+            $this->trans('sonata.customer.link_address_list', array(), 'SonataCustomerBundle'),
+            $admin->generateUrl('sonata.customer.admin.address.list', array('id' => $id))
         );
 
         $menu->addChild(
-            $translator->trans('link_order_list', array(), 'SonataCustomerBundle'),
-            $admin->generateUrl('order.list', array('id' => $customerId))
+            $this->trans('sonata.customer.link_order_list', array(), 'SonataCustomerBundle'),
+            $admin->generateUrl('sonata.customer.admin.order.list', array('id' => $id))
         );
-
-        return $menu;
     }
 }

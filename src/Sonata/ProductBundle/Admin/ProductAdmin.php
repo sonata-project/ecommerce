@@ -11,12 +11,11 @@
 
 namespace Sonata\ProductBundle\Admin;
 
-use Knplabs\Bundle\MenuBundle\Menu;
-use Knplabs\Bundle\MenuBundle\MenuItem;
+use Sonata\AdminBundle\Admin\Admin;
+use Knp\Bundle\MenuBundle\MenuItem;
 
 class ProductAdmin extends BaseProductAdmin
 {
-
     protected $list = array(
         'enabled',
         'name' => array('identifier' => true),
@@ -40,53 +39,34 @@ class ProductAdmin extends BaseProductAdmin
         'enabled'
     );
 
-
-    public function getSideMenu($action, $childAdmin = false)
+    public function configureSideMenu(MenuItem $menu, $action, Admin $childAdmin = null)
     {
-
-        if ($childAdmin || in_array($action, array('edit'))) {
-            return $this->getEditSideMenu();
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
         }
-
-        return false;
-    }
-
-    public function getEditSideMenu()
-    {
-
-        $menu = new Menu;
 
         $admin = $this->isChild() ? $this->getParent() : $this;
 
-        $productId = $this->container->get('request')->get('id');
+        $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('link_edit_product', array(), 'SonataProductBundle'),
-            $admin->generateUrl('edit', array('id' => $productId))
+            $this->trans('sonata.product.link_product_edit', array(), 'SonataProductBundle'),
+            $admin->generateUrl('edit', array('id' => $id))
         );
 
         $menu->addChild(
-            $this->trans('link_variation_list', array(), 'SonataProductBundle'),
-            $admin->generateUrl('variation_list', array('id' => $productId))
+            $this->trans('sonata.product.link_variation_list', array(), 'SonataProductBundle'),
+            $admin->generateUrl('sonata.product.admin.variation.list', array('id' => $id))
         );
 
         $menu->addChild(
-            $this->trans('link_variation_list', array(), 'SonataProductBundle'),
-            $admin->generateUrl('variation_list', array('id' => $productId))
+            $this->trans('sonata.product.link_category_list', array(), 'SonataProductBundle'),
+            $admin->generateUrl('sonata.product.admin.category.list', array('id' => $id))
         );
 
         $menu->addChild(
-            $this->trans('link_category_list', array(), 'SonataProductBundle'),
-            $admin->generateUrl('category', array('id' => $productId))
+            $this->trans('sonata.product.link_delivery_list', array(), 'SonataProductBundle'),
+            $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id))
         );
-
-        $menu->addChild(
-            $this->trans('link_delivery_list', array(), 'SonataProductBundle'),
-            $admin->generateUrl('product_delivery.list', array('id' => $productId))
-        );
-
-        return $menu;
     }
-
-    
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- CUSTOMER -->
+        <parameter key="sonata.customer.admin.customer.class">Sonata\CustomerBundle\Admin\CustomerAdmin</parameter>
+        <parameter key="sonata.customer.admin.customer.entity">Application\Sonata\CustomerBundle\Entity\Customer</parameter>
+
+        <!-- ADDRESS -->
+        <parameter key="sonata.customer.admin.address.class">Sonata\CustomerBundle\Admin\AddressAdmin</parameter>
+        <parameter key="sonata.customer.admin.address.entity">Application\Sonata\CustomerBundle\Entity\Address</parameter>
+
+        <!-- ORDER -->
+        <parameter key="sonata.customer.admin.order.class">Sonata\OrderBundle\Admin\OrderAdmin</parameter>
+        <parameter key="sonata.customer.admin.order.entity">Application\Sonata\OrderBundle\Entity\Order</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.customer.admin.customer" class="%sonata.customer.admin.customer.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="customer"/>
+            <argument />
+            <argument>%sonata.customer.admin.customer.entity%</argument>
+            <argument />
+
+            <call method="addChild">
+                <argument type="service" id="sonata.customer.admin.address" />
+            </call>
+
+            <call method="addChild">
+                <argument type="service" id="sonata.customer.admin.order" />
+            </call>
+        </service>
+
+        <service id="sonata.customer.admin.address" class="%sonata.customer.admin.address.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="address"/>
+            <argument />
+            <argument>%sonata.customer.admin.address.entity%</argument>
+            <argument />
+        </service>
+
+        <service id="sonata.customer.admin.order" class="%sonata.customer.admin.order.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order"/>
+            <argument />
+            <argument>%sonata.customer.admin.order.entity%</argument>
+            <argument />
+        </service>
+    </services>
+
+</container>

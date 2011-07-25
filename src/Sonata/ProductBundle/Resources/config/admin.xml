@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- PRODUCT -->
+        <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
+        <parameter key="sonata.product.admin.product.entity">Application\Sonata\ProductBundle\Entity\Product</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.product.admin.product" class="%sonata.product.admin.product.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product"/>
+            <argument />
+            <argument>%sonata.product.admin.product.entity%</argument>
+            <argument />
+        </service>
+    </services>
+
+</container>

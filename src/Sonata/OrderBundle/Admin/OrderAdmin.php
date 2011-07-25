@@ -11,12 +11,10 @@
 
 namespace Sonata\OrderBundle\Admin;
 
-use Sonata\AdminBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 
-class OrderAdmin extends EntityAdmin
+class OrderAdmin extends Admin
 {
     protected $parentAssociationMapping = 'customer';
 
@@ -68,7 +66,7 @@ class OrderAdmin extends EntityAdmin
 
     public function configureFormFields(FormMapper $form)
     {
-        if(!$this->isChild()) {
+        if (!$this->isChild()) {
             $form->add('customer', array(), array('edit' => 'list'));
         }
     }

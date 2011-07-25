@@ -63,6 +63,7 @@ class Pool
     public function getProductCode(ProductInterface $product)
     {
         $class = get_class($product);
+
         foreach ($this->products as $code => $productDescription) {
             if ($productDescription->getManager()->getClass() == $class) {
                 return $code;
@@ -110,6 +111,6 @@ class Pool
      */
     public function getProducts()
     {
-      return $this->products;
+        return $this->products;
     }
 }

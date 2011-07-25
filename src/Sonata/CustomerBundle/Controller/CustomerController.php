@@ -16,21 +16,23 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CustomerController extends Controller
 {
-
-
-    public function dashboardAction() {
-
-    }
-
-    public function addressesAction() {
+    public function dashboardAction()
+    {
 
     }
 
-    public function editAddressAction($address_id) {
+    public function addressesAction()
+    {
 
     }
 
-    public function updateAddressAction() {
+    public function editAddressAction($address_id)
+    {
+
+    }
+
+    public function updateAddressAction()
+    {
 
     }
 }

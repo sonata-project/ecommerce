@@ -16,7 +16,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class InvoiceController extends Controller
 {
-
     public function indexAction()
     {
 
