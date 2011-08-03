@@ -2,11 +2,18 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\CustomerBundle\Entity\BaseCustomer" >
 
-        <field name="firstname"     type="string"   column="firstname"  length="255"/>
-        <field name="lastname"      type="string"   column="lastname"   length="255"/>
+        <field name="title"         type="integer"  column="title"/>
+        <field name="firstname"     type="string"   column="firstname"      length="255"/>
+        <field name="lastname"      type="string"   column="lastname"       length="255"/>
+        <field name="email"         type="string"   column="email"          length="255"/>
+        <field name="birthDate"     type="string"   column="birth_date"     length="255"/>
+        <field name="birthPlace"    type="string"   column="birth_place"    length="255"/>
+        <field name="phoneNumber"   type="string"   column="phone_number"   length="255"/>
+        <field name="mobileNumber"  type="string"   column="mobile_number"  length="255"/>
+        <field name="faxNumber"     type="string"   column="fax_number"     length="255"/>
 
-        <field name="updatedAt"    column="updated_at"     type="datetime" nullable="true"/>
-        <field name="createdAt"    column="created_at"     type="datetime" nullable="true"/>
-        
+        <field name="updatedAt"     type="datetime" column="updated_at"     nullable="true"/>
+        <field name="createdAt"     type="datetime" column="created_at"     nullable="true"/>
+
     </mapped-superclass>
 </doctrine-mapping>
