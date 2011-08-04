@@ -36,7 +36,7 @@ abstract class BaseCustomer implements CustomerInterface
     protected $email;
 
     /**
-     * @var string $birthDate
+     * @var datetime $birthDate
      */
     protected $birthDate;
 
@@ -157,7 +157,7 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->birthDate;
     }
 
-    public function setBirthDate($birthDate)
+    public function setBirthDate(\DateTime $birthDate)
     {
         $this->birthDate = $birthDate;
     }

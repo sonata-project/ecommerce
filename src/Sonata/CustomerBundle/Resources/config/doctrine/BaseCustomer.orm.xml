@@ -6,7 +6,7 @@
         <field name="firstname"     type="string"   column="firstname"      length="255"/>
         <field name="lastname"      type="string"   column="lastname"       length="255"/>
         <field name="email"         type="string"   column="email"          length="255"/>
-        <field name="birthDate"     type="string"   column="birth_date"     length="255"/>
+        <field name="birthDate"     type="datetime" column="birth_date"     nullable="true"/>
         <field name="birthPlace"    type="string"   column="birth_place"    length="255"/>
         <field name="phoneNumber"   type="string"   column="phone_number"   length="255"/>
         <field name="mobileNumber"  type="string"   column="mobile_number"  length="255"/>
