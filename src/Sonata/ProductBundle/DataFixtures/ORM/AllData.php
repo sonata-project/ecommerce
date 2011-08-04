@@ -26,7 +26,7 @@ class AllData implements FixtureInterface
 {
     public function load($manager)
     {
-
+        /*
         $ratio = 1;
 
         foreach (range(0, 200 * $ratio) as $id) {
@@ -204,6 +204,6 @@ class AllData implements FixtureInterface
         }
 
         $manager->flush();
-
+        */
     }
 }
