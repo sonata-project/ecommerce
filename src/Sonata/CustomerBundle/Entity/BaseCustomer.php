@@ -83,7 +83,6 @@ abstract class BaseCustomer implements CustomerInterface
     public function __construct()
     {
         $this->title = self::TITLE_MR;
-        $this->addresses = new ArrayCollection();
     }
 
     public function __toString()
@@ -157,7 +156,7 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTime $birthDate)
+    public function setBirthDate(\DateTime $birthDate = null)
     {
         $this->birthDate = $birthDate;
     }
@@ -239,7 +238,7 @@ abstract class BaseCustomer implements CustomerInterface
 
     public function getAddresses()
     {
-        return $this->addresses;
+        return $this->addresses ?: $this->addresses = new ArrayCollection();
     }
 
     public function getAddressesByType($type)
