@@ -17,5 +17,43 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <many-to-one
+            field="user"
+            target-entity="Application\Sonata\UserBundle\Entity\User"
+            inversed-by="customers"
+            >
+
+            <cascade>
+                <cascade-all />
+            </cascade>
+
+            <join-columns>
+                <join-column
+                    name="user_id"
+                    referenced-column-name="id"
+                    on-delete="CASCADE"/>
+            </join-columns>
+
+        </many-to-one>
+
+        <one-to-many
+            field="addresses"
+            target-entity="Application\Sonata\CustomerBundle\Entity\Address"
+            mapped-by="customers"
+            >
+
+            <cascade>
+                <cascade-all />
+            </cascade>
+
+            <join-columns>
+                <join-column
+                    name="customer_id"
+                    referenced-column-name="id"
+                    on-delete="CASCADE"/>
+            </join-columns>
+
+        </one-to-many>
+
     </entity>
 </doctrine-mapping>
