@@ -85,6 +85,22 @@ abstract class BaseAddress implements AddressInterface
      */
     protected $customer;
 
+    public function __construct()
+    {
+        $this->setCurrent(false);
+    }
+
+    public function prePersist()
+    {
+        $this->setCreatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime);
+    }
+
+    public function preUpdate()
+    {
+        $this->setUpdatedAt(new \DateTime);
+    }
+
     public static function getTypesList()
     {
         return array(

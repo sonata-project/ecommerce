@@ -4,19 +4,23 @@
 
         <field name="current"       type="boolean"  column="is_current"/>
         <field name="type"          type="integer"  column="type"/>
-        <field name="name"          type="string"   column="name"  length="255"/>
-        <field name="firstname"     type="string"   column="firstname"  length="255"/>
-        <field name="lastname"      type="string"   column="lastname"   length="255"/>
-        <field name="address1"      type="string"   column="address1"      length="255"/>
-        <field name="address2"      type="string"   column="address2"    nullable="true"  length="255"/>
-        <field name="address3"      type="string"   column="address3"    nullable="true"  length="255"/>
-        <field name="postcode"      type="string"   column="postcode"   length="12"/>
-        <field name="city"          type="string"   column="city"       length="255"/>
-        <field name="countryCode"   type="string"   column="country_code"    length="3"/>
-        <field name="phone"         type="string"   column="phone"      nullable="true" length="255"/>
+        <field name="name"          type="string"   column="name"           length="255"    nullable="true"/>
+        <field name="firstname"     type="string"   column="firstname"      length="255"    nullable="true"/>
+        <field name="lastname"      type="string"   column="lastname"       length="255"    nullable="true"/>
+        <field name="address1"      type="string"   column="address1"       length="255"/>
+        <field name="address2"      type="string"   column="address2"       length="255"    nullable="true"/>
+        <field name="address3"      type="string"   column="address3"       length="255"    nullable="true"/>
+        <field name="postcode"      type="string"   column="postcode"       length="12"/>
+        <field name="city"          type="string"   column="city"           length="255"/>
+        <field name="countryCode"   type="string"   column="country_code"   length="3"/>
+        <field name="phone"         type="string"   column="phone"          length="255"    nullable="true"/>
 
-        <field name="updatedAt"    column="updated_at"     type="datetime" nullable="true"/>
-        <field name="createdAt"    column="created_at"     type="datetime" nullable="true"/>
-        
+        <field name="updatedAt"     type="datetime" column="updated_at"     nullable="true"/>
+        <field name="createdAt"     type="datetime" column="created_at"     nullable="true"/>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist" />
+            <lifecycle-callback type="preUpdate" method="preUpdate" />
+        </lifecycle-callbacks>
     </mapped-superclass>
 </doctrine-mapping>

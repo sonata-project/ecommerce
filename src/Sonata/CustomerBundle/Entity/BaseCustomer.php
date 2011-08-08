@@ -234,6 +234,8 @@ abstract class BaseCustomer implements CustomerInterface
 
     public function addAddress(AddressInterface $address)
     {
+        $address->setCustomer($this);
+
         $this->addresses[] = $address;
     }
 
