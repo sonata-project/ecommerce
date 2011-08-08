@@ -83,6 +83,7 @@ abstract class BaseCustomer implements CustomerInterface
     public function __construct()
     {
         $this->title = self::TITLE_MR;
+        $this->addresses = new ArrayCollection();
     }
 
     public function __toString()
@@ -238,7 +239,7 @@ abstract class BaseCustomer implements CustomerInterface
 
     public function getAddresses()
     {
-        return $this->addresses ?: $this->addresses = new ArrayCollection();
+        return $this->addresses;
     }
 
     public function getAddressesByType($type)
