@@ -91,6 +91,17 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->getFirstname().' '.$this->getLastname();
     }
 
+    public function prePersist()
+    {
+        $this->setCreatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime);
+    }
+
+    public function preUpdate()
+    {
+        $this->setUpdatedAt(new \DateTime);
+    }
+
     public function getTitle()
     {
         return $this->title;
