@@ -97,6 +97,11 @@ abstract class BaseProduct implements ProductInterface
     protected $productCategories;
 
     /**
+     * @var type $type
+     */
+    protected $type;
+
+    /**
      * Set sku
      *
      * @param text $sku
@@ -343,7 +348,6 @@ abstract class BaseProduct implements ProductInterface
      */
     public function getParent()
     {
-
         return $this->parent;
     }
 
@@ -356,14 +360,12 @@ abstract class BaseProduct implements ProductInterface
         $this->parent = $parent;
     }
 
-
     /**
      * @abstract
      * @return string the product name
      */
     public function getOptions()
     {
-
         return $this->options;
     }
 
@@ -373,19 +375,13 @@ abstract class BaseProduct implements ProductInterface
      */
     public function setOptions(array $options)
     {
-        $this->$options = $options;
+        $this->options = $options;
     }
 
     public function isVariation()
     {
-
         return $this->getParent() !== null;
     }
-
-    /**
-     * @var type $type
-     */
-    protected $type;
 
     /**
      * Set type
@@ -431,6 +427,7 @@ abstract class BaseProduct implements ProductInterface
     {
         return $this->getEnabled();
     }
+
     /**
      * Set image
      *
