@@ -81,9 +81,9 @@ class GenerateProductCommand extends ContainerAwareCommand
             '%s/Controller/Controller.php'                 => '%s/Controller/Controller.php',
 
             // templates
-            '%s/Resources/views/Entity/view.html.twig'                          => '%s/Resources/views/%s/view.hmtl.twig',
+            '%s/Resources/views/Entity/view.html.twig'                          => '%s/Resources/views/%s/view.html.twig',
             '%s/Resources/views/Entity/form_basket_element.html.twig'           => '%s/Resources/views/%s/form_basket_element.html.twig',
-            '%s/Resources/views/Entity/final_review_basket_element.html.twig'   => '%s/Resources/views/%s/final_review_basket_element.hmtl.twig',
+            '%s/Resources/views/Entity/final_review_basket_element.html.twig'   => '%s/Resources/views/%s/final_review_basket_element.html.twig',
         );
 
         $dirs = array(
