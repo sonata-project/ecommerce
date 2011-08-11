@@ -39,7 +39,7 @@
         <one-to-many
             field="addresses"
             target-entity="Application\Sonata\CustomerBundle\Entity\Address"
-            mapped-by="customers"
+            mapped-by="customer"
             >
 
             <cascade>
