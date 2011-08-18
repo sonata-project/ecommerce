@@ -12,32 +12,44 @@
 namespace Sonata\ProductBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Knp\Bundle\MenuBundle\MenuItem;
 
-class ProductAdmin extends BaseProductAdmin
+class ProductAdmin extends Admin
 {
-    protected $list = array(
-        'enabled',
-        'name' => array('identifier' => true),
-        'price',
-        'stock',
-    );
+    public function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('name')
+            ->add('sku')
+            ->add('description')
+            ->add('price')
+            ->add('vat')
+            ->add('stock')
+            ->add('image', 'sonata_type_model', array(), array('edit' => 'list'))
+        ;
+    }
 
-    protected $form = array(
-        'name',
-        'sku' => array('type' => 'string'),
-        'description',
-        'price',
-        'vat',
-        'stock',
-        'image' => array('edit' => 'list')
-    );
+    public function configureListFields(ListMapper $list)
+    {
+        $list
+            ->add('enabled')
+            ->addIdentifier('name')
+            ->add('price')
+            ->add('stock')
+        ;
+    }
 
-    protected $filter = array(
-        'name',
-//        'price',
-        'enabled'
-    );
+    public function configureDatagridFilters(DatagridMapper $filter)
+    {
+        $filter
+            ->add('name')
+//            ->add('price')
+            ->add('enabled')
+        ;
+    }
 
     public function configureSideMenu(MenuItem $menu, $action, Admin $childAdmin = null)
     {
@@ -50,22 +62,22 @@ class ProductAdmin extends BaseProductAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('sonata.product.link_product_edit', array(), 'SonataProductBundle'),
+            $this->trans('link_product_edit', array(), 'SonataProductBundle'),
             $admin->generateUrl('edit', array('id' => $id))
         );
 
         $menu->addChild(
-            $this->trans('sonata.product.link_variation_list', array(), 'SonataProductBundle'),
-            $admin->generateUrl('sonata.product.admin.variation.list', array('id' => $id))
-        );
-
-        $menu->addChild(
-            $this->trans('sonata.product.link_category_list', array(), 'SonataProductBundle'),
+            $this->trans('link_category_list', array(), 'SonataProductBundle'),
             $admin->generateUrl('sonata.product.admin.category.list', array('id' => $id))
         );
 
+//        $menu->addChild(
+//            $this->trans('link_variation_list', array(), 'SonataProductBundle'),
+//            $admin->generateUrl('sonata.product.admin.variation.list', array('id' => $id))
+//        );
+
         $menu->addChild(
-            $this->trans('sonata.product.link_delivery_list', array(), 'SonataProductBundle'),
+            $this->trans('link_delivery_list', array(), 'SonataProductBundle'),
             $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id))
         );
     }

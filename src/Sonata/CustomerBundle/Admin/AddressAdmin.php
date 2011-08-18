@@ -11,70 +11,58 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
-use Sonata\AdminBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-
 use Application\Sonata\CustomerBundle\Entity\Address;
 
-class AddressAdmin extends BaseAddressAdmin
+class AddressAdmin extends Admin
 {
     protected $parentAssociationMapping = 'customer';
 
-    protected $form = array(
-        'firstname',
-        'lastname',
-        'name',
-        'city',
-        'address1',
-        'address2',
-        'address3',
-        'postcode',
-        'phone',
-        'countryCode' => array('type' => 'country'),
-        'type',
-        'current'
-    );
-
-    protected $formGroups = array(
-        'Advanced' => array(
-            'fields' => array('type', 'current', 'name')
-        ),
-        'Contact' => array(
-            'fields' => array('customer', 'firstname', 'lastname', 'phone')
-        ),
-        'Address' => array(
-            'fields' => array('address1', 'address2', 'address3', 'postcode', 'city','countryCode')
-        ),
-
-    );
-
-    protected $list = array(
-        'fulladdress' => array('code' => 'getFullAddress', 'identifier' => true, 'type' => 'string'),
-        'name',
-        'current',
-        'typeCode' => array('type' => 'string'),
-    );
-
-    public function configureFormFields(FormMapper $form)
+    public function configureFormFields(FormMapper $formMapper)
     {
-        $form->add('type', array('choices' => Address::getTypesList()), array('type' => 'choice'));
+        $formMapper
+            ->with($this->trans('address_form_group_advanced_label', array(), 'SonataCustomerBundle'))
+                ->add('type', 'choice', array('choices' => Address::getTypesList()))
+                ->add('current')
+                ->add('name')
+            ->end();
+
+        $formMapper
+            ->with($this->trans('address_form_group_contact_label', array(), 'SonataCustomerBundle'))
+                ->add('firstname')
+                ->add('lastname')
+                ->add('phone')
+            ->end()
+        ;
 
         if (!$this->isChild()) {
-            $form->add('customer', array(),  array('edit' => 'list'));
+            $formMapper->with($this->trans('address_form_group_contact_label', array(), 'SonataCustomerBundle'))
+                ->add('customer', 'sonata_type_model', array(),  array('edit' => 'list'))
+            ->end()
+            ;
         }
-    }
 
-    public function configureDatagridFilters(DatagridMapper $datagrid)
-    {
-
+        $formMapper
+            ->with($this->trans('address_form_group_address_label', array(), 'SonataCustomerBundle'))
+                ->add('address1')
+                ->add('address2')
+                ->add('address3')
+                ->add('postcode')
+                ->add('city')
+                ->add('countryCode', 'country')
+            ->end()
+        ;
     }
 
     public function configureListFields(ListMapper $list)
     {
-        if (!$this->isChild()) {
-            $list->add('customer');
-        }
+        $list
+            ->addIdentifier('fulladdress', 'string', array('code' => 'getFullAddress'))
+            ->addIdentifier('name')
+            ->add('current')
+            ->add('typeCode', 'string')
+        ;
     }
 }

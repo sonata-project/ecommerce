@@ -12,25 +12,46 @@
 namespace Sonata\CustomerBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Knp\Bundle\MenuBundle\MenuItem;
 
-class CustomerAdmin extends BaseCustomerAdmin
+class CustomerAdmin extends Admin
 {
-    protected $form = array(
-        'firstname',
-        'lastname'
-    );
+    public function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('firstname')
+            ->add('lastname')
+        ;
+    }
 
-    protected $list = array(
-        'name' => array('code' => '__toString', 'identifier' => true, 'type' => 'string'),
-        'createdAt'
-    );
+    public function configureListFields(ListMapper $list)
+    {
+        $list
+            ->addIdentifier('name', 'string', array('code' => '__toString'))
+            ->add('createdAt')
+        ;
+    }
 
-    protected $filter = array(
-        'firstname' => array('type' => 'string'),
-        'lastname' => array('type' => 'string'),
-//        'createdAt'
-    );
+    public function configureShowFields(ShowMapper $filter)
+    {
+        $filter
+            ->add('firstname')
+            ->add('lastname')
+        ;
+    }
+
+
+    public function configureDatagridFilters(DatagridMapper $filter)
+    {
+        $filter
+            ->add('firstname')
+            ->add('lastname')
+        ;
+    }
 
     public function configureSideMenu(MenuItem $menu, $action, Admin $childAdmin = null)
     {
@@ -43,17 +64,17 @@ class CustomerAdmin extends BaseCustomerAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('sonata.customer.link_customer_edit', array(), 'SonataCustomerBundle'),
+            $this->trans('link_customer_edit', array(), 'SonataCustomerBundle'),
             $admin->generateUrl('edit', array('id' => $id))
         );
 
         $menu->addChild(
-            $this->trans('sonata.customer.link_address_list', array(), 'SonataCustomerBundle'),
+            $this->trans('link_address_list', array(), 'SonataCustomerBundle'),
             $admin->generateUrl('sonata.customer.admin.address.list', array('id' => $id))
         );
 
         $menu->addChild(
-            $this->trans('sonata.customer.link_order_list', array(), 'SonataCustomerBundle'),
+            $this->trans('link_order_list', array(), 'SonataCustomerBundle'),
             $admin->generateUrl('sonata.customer.admin.order.list', array('id' => $id))
         );
     }
