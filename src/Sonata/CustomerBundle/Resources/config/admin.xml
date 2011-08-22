@@ -11,10 +11,6 @@
         <!-- ADDRESS -->
         <parameter key="sonata.customer.admin.address.class">Sonata\CustomerBundle\Admin\AddressAdmin</parameter>
         <parameter key="sonata.customer.admin.address.entity">Application\Sonata\CustomerBundle\Entity\Address</parameter>
-
-        <!-- ORDER -->
-        <parameter key="sonata.customer.admin.order.class">Sonata\OrderBundle\Admin\OrderAdmin</parameter>
-        <parameter key="sonata.customer.admin.order.entity">Application\Sonata\OrderBundle\Entity\Order</parameter>
     </parameters>
 
     <services>
@@ -29,7 +25,7 @@
             </call>
 
             <call method="addChild">
-                <argument type="service" id="sonata.customer.admin.order" />
+                <argument type="service" id="sonata.order.admin.order" />
             </call>
         </service>
 
@@ -37,13 +33,6 @@
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="address"/>
             <argument />
             <argument>%sonata.customer.admin.address.entity%</argument>
-            <argument />
-        </service>
-
-        <service id="sonata.customer.admin.order" class="%sonata.customer.admin.order.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order"/>
-            <argument />
-            <argument>%sonata.customer.admin.order.entity%</argument>
             <argument />
         </service>
     </services>
