@@ -23,10 +23,6 @@
             mapped-by="order"
             >
 
-            <cascade>
-                <cascade-all />
-            </cascade>
-
             <join-columns>
                 <join-column
                     name="id"
@@ -40,10 +36,6 @@
             target-entity="Application\Sonata\CustomerBundle\Entity\Customer"
             inversed-by="orders"
             >
-
-            <cascade>
-                <cascade-all />
-            </cascade>
 
             <join-columns>
                 <join-column

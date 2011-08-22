@@ -23,10 +23,6 @@
             mapped-by="orderElements"
             >
 
-            <cascade>
-                <cascade-all />
-            </cascade>
-
             <join-columns>
                 <join-column
                     name="order_id"
