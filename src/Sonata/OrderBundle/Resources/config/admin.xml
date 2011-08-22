@@ -14,10 +14,6 @@
             <argument />
             <argument>%sonata.order.admin.order.entity%</argument>
             <argument />
-
-            <call method="setModelManager">
-                <argument type="service" id="sonata.order.admin.order.manager" />
-            </call>
         </service>
     </services>
 
