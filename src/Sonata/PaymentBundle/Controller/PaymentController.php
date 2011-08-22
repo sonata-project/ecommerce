@@ -128,7 +128,7 @@ class PaymentController extends Controller
         if (!$payment->isBasketValid($basket)) {
             $this->get('session')->setFlash(
                 'notice',
-                $this->containe->get('translator')->trans('sonata.payment.basket_not_valid_with_current_payment_method', array(), 'SonataPaymentBundle')
+                $this->container->get('translator')->trans('sonata.payment.basket_not_valid_with_current_payment_method', array(), 'SonataPaymentBundle')
             );
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));
