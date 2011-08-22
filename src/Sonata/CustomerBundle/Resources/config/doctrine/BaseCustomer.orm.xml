@@ -8,9 +8,9 @@
         <field name="email"         type="string"   column="email"          length="255"/>
         <field name="birthDate"     type="datetime" column="birth_date"     nullable="true"/>
         <field name="birthPlace"    type="string"   column="birth_place"    length="255"/>
-        <field name="phoneNumber"   type="string"   column="phone_number"   length="255"/>
-        <field name="mobileNumber"  type="string"   column="mobile_number"  length="255"/>
-        <field name="faxNumber"     type="string"   column="fax_number"     length="255"/>
+        <field name="phoneNumber"   type="string"   column="phone_number"   length="255"    nullable="true"/>
+        <field name="mobileNumber"  type="string"   column="mobile_number"  length="255"    nullable="true"/>
+        <field name="faxNumber"     type="string"   column="fax_number"     length="255"    nullable="true"/>
 
         <field name="updatedAt"     type="datetime" column="updated_at"     nullable="true"/>
         <field name="createdAt"     type="datetime" column="created_at"     nullable="true"/>
