@@ -202,6 +202,16 @@ class BasketElement implements \Serializable, BasketElementInterface
     }
 
     /**
+     * Define the options
+     *
+     * @param array $options
+     */
+    public function setOptions(array $options = array())
+    {
+        $this->options = $options;
+    }
+
+    /**
      * return a option value depends on the $name
      *
      * @param string $name

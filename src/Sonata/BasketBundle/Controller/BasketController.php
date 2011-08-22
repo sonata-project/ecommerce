@@ -64,7 +64,7 @@ class BasketController extends Controller
             $basket->reset(false); // remove delivery and payment information
             $basket->clean(); // clean the basket
 
-            // update the basket store in session
+            // update the basket stored in session
             $this->get('session')->set('sonata/basket', $basket);
 
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));

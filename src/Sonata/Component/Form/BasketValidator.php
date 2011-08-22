@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory;
 use Sonata\AdminBundle\Validator\ErrorElement;
 
-class BasketElementCollectionValidator extends ConstraintValidator
+class BasketValidator extends ConstraintValidator
 {
     protected $productPool;
 
@@ -36,16 +36,16 @@ class BasketElementCollectionValidator extends ConstraintValidator
     /**
      * The validator asks each product repository to validate the related basket element
      *
-     * @param BasketElement $basketElements
+     * @param Basket $basket
      * @param Constraint $constraint
      * @return bool
      */
-    public function isValid($basketElements, Constraint $constraint)
+    public function isValid($basket, Constraint $constraint)
     {
         $group = $this->context->getGroup();
         $propertyPath = $this->context->getPropertyPath();
 
-        foreach ($basketElements as $pos => $basketElement) {
+        foreach ($basket->getBasketElements() as $pos => $basketElement) {
             // update the property path value
             $this->context->setPropertyPath(sprintf('%s[%d]', $propertyPath, $pos));
 
@@ -60,7 +60,7 @@ class BasketElementCollectionValidator extends ConstraintValidator
             // validate the basket element through the related service provider
             $this->productPool
                 ->getProvider($basketElement->getProductCode())
-                ->validateFormBasketElement($errorElement, $basketElement);
+                ->validateFormBasketElement($errorElement, $basketElement, $basket);
         }
 
         $this->context->setPropertyPath($propertyPath);

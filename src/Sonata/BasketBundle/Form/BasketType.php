@@ -43,4 +43,9 @@ class BasketType extends AbstractType
 
         $builder->add($basketElementsBuilder);
     }
+
+    public function getName()
+    {
+        return 'sonata_basket';
+    }
 }

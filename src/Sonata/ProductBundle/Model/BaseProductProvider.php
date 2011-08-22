@@ -284,9 +284,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      * @return array
      */
-    public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement)
+    public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket)
     {
         // the item is flagged as deleted, no need to validate the item
         if ($basketElement->getDelete()) {

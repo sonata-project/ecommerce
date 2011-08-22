@@ -6,11 +6,11 @@
 
     <services>
 
-        <service id="sonata.basket.validator.basket_element_collection" class="Sonata\Component\Form\BasketElementCollectionValidator">
+        <service id="sonata.basket.validator.basket" class="Sonata\Component\Form\BasketValidator">
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="validator.validator_factory" />
 
-            <tag name="validator.constraint_validator" alias="sonata_basket_element_collection_validator" />
+            <tag name="validator.constraint_validator" alias="sonata_basket_validator" />
         </service>
 
     </services>

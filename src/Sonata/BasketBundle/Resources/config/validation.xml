@@ -5,13 +5,11 @@
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sonata\Component\Basket\Basket">
-        <property name="basketElements">
-           <constraint name="Sonata\Component\Form\BasketElementCollection" >
-               <option name="groups" >
-                    <value>elements</value>
-               </option>
-           </constraint>
-        </property>
+        <constraint name="Sonata\Component\Form\Basket">
+            <option name="groups" >
+                <value>elements</value>
+            </option>
+        </constraint>
 
         <property name="deliveryMethod">
            <constraint name="NotNull" >

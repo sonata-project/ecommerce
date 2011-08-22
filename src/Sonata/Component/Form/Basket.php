@@ -12,12 +12,20 @@ namespace Sonata\Component\Form;
 
 use Symfony\Component\Validator\Constraint;
 
-class BasketElementCollection extends Constraint
+class Basket extends Constraint
 {
-    public $message = "Basket Elements not valid";
+    public $message = "Basket not valid";
 
     public function validatedBy()
     {
-        return 'sonata_basket_element_collection_validator';
+        return 'sonata_basket_validator';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTargets()
+    {
+        return self::CLASS_CONSTRAINT;
     }
 }
