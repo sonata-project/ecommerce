@@ -20,12 +20,12 @@ class InvoiceAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with($this->trans('form_group_main_label', array(), 'SonataInvoiceBundle'))
+            ->with($this->trans('form_invoice.group_main_label', array(), 'SonataAdminBundle'))
                 ->add('reference')
                 ->add('currency')
                 ->add('status')
             ->end()
-            ->with($this->trans('form_group_billing_label', array(), 'SonataInvoiceBundle'), array('collapsed' => true))
+            ->with($this->trans('form_invoice.group_billing_label', array(), 'SonataAdminBundle'), array('collapsed' => true))
                 ->add('name')
                 ->add('phone')
                 ->add('address1')
@@ -42,7 +42,7 @@ class InvoiceAdmin extends Admin
 
         if (!$this->isChild()) {
             $formMapper
-                ->with($this->trans('form_group_misc_label', array(), 'SonataInvoiceBundle'))
+                ->with($this->trans('form_invoice.group_misc_label', array(), 'SonataAdminBundle'))
                     ->add('customer', 'sonata_type_model', array(), array('edit' => 'list'))
                 ->end()
             ;

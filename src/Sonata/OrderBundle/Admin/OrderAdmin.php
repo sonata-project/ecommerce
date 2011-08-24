@@ -23,14 +23,14 @@ class OrderAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with($this->trans('form_group_main_label', array(), 'SonataOrderBundle'))
+            ->with($this->trans('form_address.group_main_label', array(), 'SonataAdminBundle'))
                 ->add('currency')
                 ->add('status')
                 ->add('paymentStatus')
                 ->add('deliveryStatus')
                 ->add('validatedAt')
             ->end()
-            ->with($this->trans('form_group_billing_label', array(), 'SonataOrderBundle'))
+            ->with($this->trans('form_address.group_billing_label', array(), 'SonataAdminBundle'), array('collapsed' => true))
                 ->add('billingName')
                 ->add('billingAddress1')
                 ->add('billingAddress2')
@@ -42,7 +42,7 @@ class OrderAdmin extends Admin
                 ->add('billingEmail')
                 ->add('billingMobile')
             ->end()
-            ->with($this->trans('form_group_shipping_label', array(), 'SonataOrderBundle'))
+            ->with($this->trans('form_address.group_shipping_label', array(), 'SonataAdminBundle'), array('collapsed' => true))
                 ->add('shippingName')
                 ->add('shippingAddress1')
                 ->add('shippingAddress2')
@@ -54,14 +54,14 @@ class OrderAdmin extends Admin
                 ->add('shippingEmail')
                 ->add('shippingMobile')
             ->end()
-            ->with($this->trans('form_group_misc_label', array(), 'SonataOrderBundle'))
+            ->with($this->trans('form_address.group_misc_label', array(), 'SonataAdminBundle'), array('collapsed' => true))
                 ->add('orderElements', 'sonata_type_model', array(), array('edit' => 'inline', 'inline' => 'table'))
             ->end()
         ;
         
         if (!$this->isChild()) {
             $formMapper
-                ->with($this->trans('form_group_misc_label', array(), 'SonataOrderBundle'))
+                ->with($this->trans('form_address.group_misc_label', array(), 'SonataAdminBundle'))
                     ->add('customer', 'sonata_type_model', array(), array('edit' => 'list'))
                 ->end()
             ;
