@@ -7,16 +7,16 @@
                 <target>Ecommerce</target>
             </trans-unit>
 
-            <trans-unit id="slidemenu.link_product_edit">
-                <source>slidemenu.link_product_edit</source>
+            <trans-unit id="sidemenu.link_product_edit">
+                <source>sidemenu.link_product_edit</source>
                 <target>Product</target>
             </trans-unit>
-            <trans-unit id="slidemenu.link_category_list">
-                <source>slidemenu.link_category_list</source>
+            <trans-unit id="sidemenu.link_category_list">
+                <source>sidemenu.link_category_list</source>
                 <target>Categories</target>
             </trans-unit>
-            <trans-unit id="slidemenu.link_delivery_list">
-                <source>slidemenu.link_delivery_list</source>
+            <trans-unit id="sidemenu.link_delivery_list">
+                <source>sidemenu.link_delivery_list</source>
                 <target>Delivries</target>
             </trans-unit>
             

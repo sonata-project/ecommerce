@@ -2,12 +2,12 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="slidemenu.link_customer_edit">
-                <source>slidemenu.link_customer_edit</source>
+            <trans-unit id="sidemenu.link_customer_edit">
+                <source>sidemenu.link_customer_edit</source>
                 <target>Customer</target>
             </trans-unit>
-            <trans-unit id="slidemenu.link_address_list">
-                <source>slidemenu.link_address_list</source>
+            <trans-unit id="sidemenu.link_address_list">
+                <source>sidemenu.link_address_list</source>
                 <target>Addresses</target>
             </trans-unit>
 
