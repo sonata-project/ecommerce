@@ -52,6 +52,8 @@ class Basket implements \Serializable, BasketInterface
 
     protected $customerId;
 
+    protected $options = array();
+
     public function setProductPool(Pool $pool)
     {
         $this->productPool = $pool;
@@ -241,6 +243,7 @@ class Basket implements \Serializable, BasketInterface
             $this->cptElement = 0;
             $this->customerId = null;
             $this->customer = null;
+            $this->options = array();
         }
     }
 
@@ -356,6 +359,7 @@ class Basket implements \Serializable, BasketInterface
     {
         foreach ($this->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();
+
             if ($product instanceof ProductInterface) {
                 if ($product->isRecurrentPayment() === true) {
 
@@ -381,6 +385,7 @@ class Basket implements \Serializable, BasketInterface
     public function getTotal($vat = false, $recurrentOnly = null)
     {
         $total = 0;
+
         foreach ($this->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();
 
@@ -408,6 +413,7 @@ class Basket implements \Serializable, BasketInterface
     public function getVatAmount()
     {
         $vat = 0;
+
         foreach ($this->getBasketElements() as $basketElement) {
             $vat += $basketElement->getVatAmount();
         }
@@ -431,6 +437,7 @@ class Basket implements \Serializable, BasketInterface
     public function getDeliveryPrice($vat = false)
     {
         $method = $this->getDeliveryMethod();
+
         if (!$method instanceof DeliveryInterface) {
             return 0;
         }
@@ -513,6 +520,7 @@ class Basket implements \Serializable, BasketInterface
             'cptElement'            => $this->cptElement,
             'deliveryMethodCode'    => $this->deliveryMethodCode,
             'customerId'            => $this->customerId,
+            'options'               => $this->options,
         ));
     }
 
@@ -530,10 +538,10 @@ class Basket implements \Serializable, BasketInterface
             'paymentMethodCode',
             'cptElement',
             'customerId',
+            'options',
         );
 
-        foreach ($properties as $property)
-        {
+        foreach ($properties as $property) {
             $this->$property = isset($data[$property]) ? $data[$property] : $this->$property;
         }
     }
@@ -587,5 +595,15 @@ class Basket implements \Serializable, BasketInterface
     public function getCustomerId()
     {
         return $this->customerId;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    public function setOptions($options)
+    {
+        $this->options = $options;
     }
 }
