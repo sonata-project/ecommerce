@@ -62,12 +62,12 @@ class ProductAdmin extends Admin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('sidemenu.link_product_edit', array(), 'SonataAdminBundle'),
+            $this->trans('sidemenu.link_product_edit'),
             $admin->generateUrl('edit', array('id' => $id))
         );
 
         $menu->addChild(
-            $this->trans('sidemenu.link_category_list', array(), 'SonataAdminBundle'),
+            $this->trans('sidemenu.link_category_list'),
             $admin->generateUrl('sonata.product.admin.category.list', array('id' => $id))
         );
 
@@ -77,7 +77,7 @@ class ProductAdmin extends Admin
 //        );
 
         $menu->addChild(
-            $this->trans('sidemenu.link_delivery_list', array(), 'SonataAdminBundle'),
+            $this->trans('sidemenu.link_delivery_list'),
             $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id))
         );
     }

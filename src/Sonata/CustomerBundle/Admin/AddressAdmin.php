@@ -23,14 +23,14 @@ class AddressAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with($this->trans('form_address.group_advanced_label', array(), 'SonataAdminBundle'))
+            ->with($this->trans('form_address.group_advanced_label'))
                 ->add('type', 'choice', array('choices' => Address::getTypesList()))
                 ->add('current')
                 ->add('name')
             ->end();
 
         $formMapper
-            ->with($this->trans('form_address.group_contact_label', array(), 'SonataAdminBundle'))
+            ->with($this->trans('form_address.group_contact_label'))
                 ->add('firstname')
                 ->add('lastname')
                 ->add('phone')
@@ -38,14 +38,14 @@ class AddressAdmin extends Admin
         ;
 
         if (!$this->isChild()) {
-            $formMapper->with($this->trans('form_address.group_contact_label', array(), 'SonataAdminBundle'))
+            $formMapper->with($this->trans('form_address.group_contact_label'))
                 ->add('customer', 'sonata_type_model', array(),  array('edit' => 'list'))
             ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('form_address.group_address_label', array(), 'SonataAdminBundle'))
+            ->with($this->trans('form_address.group_address_label'))
                 ->add('address1')
                 ->add('address2')
                 ->add('address3')

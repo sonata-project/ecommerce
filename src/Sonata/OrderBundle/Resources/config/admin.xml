@@ -6,6 +6,7 @@
     <parameters>
         <parameter key="sonata.order.admin.order.class">Sonata\OrderBundle\Admin\OrderAdmin</parameter>
         <parameter key="sonata.order.admin.order.entity">Application\Sonata\OrderBundle\Entity\Order</parameter>
+        <parameter key="sonata.order.admin.order.controller">SonataAdminBundle:CRUD</parameter>
     </parameters>
 
     <services>
@@ -13,7 +14,7 @@
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order"/>
             <argument />
             <argument>%sonata.order.admin.order.entity%</argument>
-            <argument />
+            <argument>%sonata.order.admin.order.controller%</argument>
         </service>
     </services>
 
