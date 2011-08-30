@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="sonata_ecommerce">
+                <source>sonata_ecommerce</source>
+                <target>Ecommerce</target>
+            </trans-unit>
+
+            <trans-unit id="sidemenu.link_product_edit">
+                <source>sidemenu.link_product_edit</source>
+                <target>Produit</target>
+            </trans-unit>
+            <trans-unit id="sidemenu.link_category_list">
+                <source>sidemenu.link_category_list</source>
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="sidemenu.link_delivery_list">
+                <source>sidemenu.link_delivery_list</source>
+                <target>Livraisons</target>
+            </trans-unit>
+            
+            <trans-unit id="breadcrumb.link_product_list">
+                <source>breadcrumb.link_product_list</source>
+                <target>Produit</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_product_edit">
+                <source>breadcrumb.link_product_edit</source>
+                <target>Edition</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

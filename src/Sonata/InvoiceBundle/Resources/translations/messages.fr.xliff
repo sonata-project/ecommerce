@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="breadcrumb.link_invoice_list">
+                <source>breadcrumb.link_invoice_list</source>
+                <target>Facture</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_invoice_edit">
+                <source>breadcrumb.link_invoice_edit</source>
+                <target>Edition</target>
+            </trans-unit>
+
+            <trans-unit id="form_invoice.group_main_label">
+                <source>form_invoice.group_main_label</source>
+                <target>Général</target>
+            </trans-unit>
+            <trans-unit id="form_invoice.group_billing_label">
+                <source>form_invoice.group_billing_label</source>
+                <target>Facturation</target>
+            </trans-unit>
+            <trans-unit id="form_invoice.group_misc_label">
+                <source>form_invoice.group_misc_label</source>
+                <target>Divers</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

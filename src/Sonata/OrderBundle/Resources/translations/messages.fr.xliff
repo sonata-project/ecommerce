@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="sidemenu.link_order_list">
+                <source>sidemenu.link_order_list</source>
+                <target>Commandes</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_order_list">
+                <source>breadcrumb.link_order_list</source>
+                <target>Commandes</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_order_edit">
+                <source>breadcrumb.link_order_edit</source>
+                <target>Edition</target>
+            </trans-unit>
+
+            <trans-unit id="form_address.group_main_label">
+                <source>form_address.group_main_label</source>
+                <target>Générale</target>
+            </trans-unit>
+            <trans-unit id="form_address.group_billing_label">
+                <source>form_address.group_billing_label</source>
+                <target>Facturation</target>
+            </trans-unit>
+            <trans-unit id="form_address.group_shipping_label">
+                <source>form_address.group_shipping_label</source>
+                <target>Expédition</target>
+            </trans-unit>
+            <trans-unit id="form_address.group_misc_label">
+                <source>form_address.group_misc_label</source>
+                <target>Divers</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
