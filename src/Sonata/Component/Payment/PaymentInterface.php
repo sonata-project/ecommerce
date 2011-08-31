@@ -14,25 +14,35 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 interface PaymentInterface
 {
 
+    /**
+     * @abstract
+     * @return string
+     */
     function getName();
 
+    /**
+     * @abstract
+     * @return string
+     */
     function getCode();
 
     /**
      * Send information to the bank, this method should handle
      * everything when called
      *
-     * @return Response
+     * @param \Sonata\Component\Order\OrderInterface $order
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     function callbank(OrderInterface $order);
 
     /**
      *
-     * @param TransactionInterface $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return boolean true if callback ok else false
      */
     function isCallbackValid(TransactionInterface $transaction);
@@ -40,16 +50,16 @@ interface PaymentInterface
     /**
      * Method called when an error occurs
      *
-     * @param TransactionInterface $transaction
-     * @return Response 
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     function handleError(TransactionInterface $transaction);
 
     /**
      * Send post back confirmation to the bank when the bank callback the site
      *
-     * @param TransactionInterface $transaction
-     * @return Response, false otherwise
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
     function sendConfirmationReceipt(TransactionInterface $transaction);
 
@@ -58,7 +68,7 @@ interface PaymentInterface
      *
      * WARNING : this methods does not check if the callback is valid
      *
-     * @param TransactionInterface $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return boolean true if all parameter are ok
      */
     function isRequestValid(TransactionInterface $transaction);
@@ -66,7 +76,7 @@ interface PaymentInterface
     /**
      * return true is the basket is valid for the current bank gateway
      *
-     * @param TransactionInterface $transaction
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      * @return boolean
      */
     function isBasketValid(BasketInterface $basket);
@@ -74,15 +84,15 @@ interface PaymentInterface
     /**
      * return true if the product can be added to the basket
      *
-     * @param BasketInterface $basket
-     * @param ProductInterface $product
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Product\ProductInterface $product
      */
     function isAddableProduct(BasketInterface $basket, ProductInterface $product);
 
     /**
      * return the transaction id from the bank
-     * 
-     * @param TransactionInterface $transaction
+     *
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      */
     function applyTransactionId(TransactionInterface $transaction);
 
@@ -96,9 +106,9 @@ interface PaymentInterface
 
     /**
      * return the order reference from the transaction
-     * 
+     *
      * @abstract
-     * @param TransactionInterface $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return string
      */
     function getOrderReference(TransactionInterface $transaction);

@@ -10,6 +10,8 @@
 
 namespace Sonata\Component\Payment;
 
+use Sonata\Component\Payment\PaymentInterface;
+
 /**
  * The pool stored a group of available payment method
  *
@@ -18,14 +20,13 @@ class Pool
 {
     protected $methods = array();
 
-
     /**
      * add a delivery method into the pool
      *
-     * @param  $instance
+     * @param  \Sonata\Component\Payment\PaymentInterface $instance
      * @return void
      */
-    public function addMethod($instance)
+    public function addMethod(PaymentInterface $instance)
     {
         $this->methods[$instance->getCode()] = $instance;
     }
@@ -36,7 +37,6 @@ class Pool
      */
     public function getMethods()
     {
-        
         return $this->methods;
     }
 
@@ -48,7 +48,6 @@ class Pool
      */
     public function getMethod($code)
     {
-        
         return isset($this->methods[$code]) ? $this->methods[$code] : null;
     }
 }

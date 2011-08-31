@@ -122,7 +122,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * set the Delivery method
      *
-     * @param Delivery $method
+     * @param DeliveryInterface $method
      */
     public function setDeliveryMethod(DeliveryInterface $method = null)
     {
@@ -132,7 +132,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      *
      *
-     * @return Delivery
+     * @return DeliveryInterface
      */
     public function getDeliveryMethod()
     {
@@ -142,7 +142,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * set the Delivery address
      *
-     * @param Address $address
+     * @param AddressInterface $address
      */
     public function setDeliveryAddress(AddressInterface $address = null)
     {
@@ -163,7 +163,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * set Payment method
      *
-     * @param Payment $method
+     * @param PaymentInterface $method
      */
     public function setPaymentMethod(PaymentInterface $method = null)
     {
@@ -174,7 +174,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      *
      *
-     * @return Payment
+     * @return PaymentInterface
      */
     public function getPaymentMethod()
     {
@@ -184,7 +184,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * set the Payment address
      *
-     * @param Address $address
+     * @param AddressInterface $address
      */
     public function setPaymentAddress(AddressInterface $address = null)
     {
@@ -195,7 +195,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      *
      *
-     * @return Address
+     * @return AddressInterface
      */
     public function getPaymentAddress()
     {
@@ -205,7 +205,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * Check if the product can be added to the basket
      *
-     * @param Product $product
+     * @param ProductInterface $product
      *
      * @return boolean
      */
@@ -292,7 +292,7 @@ class Basket implements \Serializable, BasketInterface
      *
      * @param mixed $product
      *
-     * @return Product
+     * @return ProductInterface
      */
     public function getElement(ProductInterface $product)
     {
@@ -311,7 +311,7 @@ class Basket implements \Serializable, BasketInterface
      *
      * @param mixed $element
      *
-     * @return BasketElement
+     * @return BasketElementInterface
      */
     public function removeElement(BasketElementInterface $element)
     {
@@ -334,7 +334,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * Add a basket element into the current basket
      *
-     * @param BasketElement $basketElement
+     * @param BasketElementInterface $basketElement
      */
     public function addBasketElement(BasketElementInterface $basketElement)
     {
@@ -377,8 +377,8 @@ class Basket implements \Serializable, BasketInterface
      * if $recurrent_only = true, return price for recurent product only
      * if $recurrent_only = false, return price for non recurent product only
      *
-     * @param boolean $tva
-     * @param boolean $recurrent_only
+     * @param boolean $vat
+     * @param boolean $recurrentOnly
      *
      * @return float
      */
@@ -431,7 +431,7 @@ class Basket implements \Serializable, BasketInterface
      * return the Delivery price
      *
      *
-     * @param Boolean $tva
+     * @param Boolean $vat
      * @return float
      */
     public function getDeliveryPrice($vat = false)
@@ -448,7 +448,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * check if the basket contains $product
      *
-     * @param Product $product
+     * @param ProductInterface $product
      * @return boolean
      */
     public function hasProduct(ProductInterface $product)
@@ -547,7 +547,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param $deliveryAddressId
+     * @param int $deliveryAddressId
      * @return void
      */
     public function setDeliveryAddressId($deliveryAddressId)
@@ -556,7 +556,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return
+     * @return int
      */
     public function getDeliveryAddressId()
     {
