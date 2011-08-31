@@ -546,64 +546,130 @@ class Basket implements \Serializable, BasketInterface
         }
     }
 
+    /**
+     * @param $deliveryAddressId
+     * @return void
+     */
     public function setDeliveryAddressId($deliveryAddressId)
     {
         $this->deliveryAddressId = $deliveryAddressId;
     }
 
+    /**
+     * @return
+     */
     public function getDeliveryAddressId()
     {
         return $this->deliveryAddressId;
     }
 
+    /**
+     * @param $paymentAddressId
+     * @return void
+     */
     public function setPaymentAddressId($paymentAddressId)
     {
         $this->paymentAddressId = $paymentAddressId;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPaymentAddressId()
     {
         return $this->paymentAddressId;
     }
 
+    /**
+     * @param string $paymentMethodCode
+     * @return void
+     */
     public function setPaymentMethodCode($paymentMethodCode)
     {
         $this->paymentMethodCode = $paymentMethodCode;
     }
 
+    /**
+     * @return
+     */
     public function getPaymentMethodCode()
     {
         return $this->paymentMethodCode;
     }
 
+    /**
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @return void
+     */
     public function setCustomer(CustomerInterface $customer)
     {
         $this->customer = $customer;
         $this->customerId = $customer ? $customer->getId() : null;
     }
 
+    /**
+     * @return
+     */
     public function getCustomer()
     {
         return $this->customer;
     }
 
+    /**
+     * @param $customerId
+     * @return void
+     */
     public function setCustomerId($customerId)
     {
         $this->customerId = $customerId;
     }
 
+    /**
+     * @return
+     */
     public function getCustomerId()
     {
         return $this->customerId;
     }
 
+    /**
+     * @return array
+     */
     public function getOptions()
     {
         return $this->options;
     }
 
+    /**
+     * @param $options
+     * @return void
+     */
     public function setOptions($options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @param $name
+     * @param null $default
+     * @return null
+     */
+    public function getOption($name, $default = null)
+    {
+        if (!array_key_exists($name, $this->options)) {
+            return $default;
+        }
+
+        return $this->options[$name];
+    }
+
+    /**
+     * @param $name
+     * @param mixed $value
+     * @return void
+     */
+    public function setOption($name, $value)
+    {
+        $this->options[$name] = $value;
     }
 }
