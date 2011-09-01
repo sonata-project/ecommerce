@@ -106,13 +106,12 @@ class PaymentController extends Controller
      *
      * this action redirect the user to the bank
      *
-     * @return void
+     * @return Response
      */
     public function callbankAction()
     {
         $basket     = $this->get('sonata.basket');
         $request    = $this->get('request');
-        $customer   = $basket->getCustomer();
 
         if ($request->getMethod() !== 'POST') {
             return $this->redirect($this->generateUrl('sonata_basket_index'));
@@ -135,7 +134,7 @@ class PaymentController extends Controller
         }
 
         // transform the basket into order
-        $order = $payment->getTransformer('basket')->transformIntoOrder($customer, $basket);
+        $order = $payment->getTransformer('basket')->transformIntoOrder($basket);
 
         // save the order
         $this->get('sonata.order.manager')->save($order);
@@ -156,7 +155,6 @@ class PaymentController extends Controller
      */
     public function callbackAction()
     {
-
         $request    = $this->get('request');
         $bank       = $request->get('bank');
         $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
@@ -196,5 +194,4 @@ class PaymentController extends Controller
 
         return $response;
     }
-
 }
