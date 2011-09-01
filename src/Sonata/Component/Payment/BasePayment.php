@@ -41,9 +41,9 @@ abstract class BasePayment implements PaymentInterface
     {
         return sha1(
             $order->getReference().
-            $order->getCreatedAt()->format("d/m/Y:G:i:s").
+            $order->getCreatedAt()->format("m/d/Y:G:i:s").
             $order->getId().
-            $this->getOption('shop_url_key')
+            $this->getOption('shop_secret_key')
         );
     }
 
@@ -80,6 +80,15 @@ abstract class BasePayment implements PaymentInterface
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
+    }
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function hasOption($name)
+    {
+        return array_key_exists($name, $this->options);
     }
 
     /**
