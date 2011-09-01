@@ -107,7 +107,6 @@ class ProductServiceInterfaceTest extends \PHPUnit_Framework_TestCase
         $product->setName('test');
         $product->setVat(5.5);
         $product->setPrice(4);
-tig
 
         // copy the information into the variation
         $provider->copyVariation($product, 'all');
