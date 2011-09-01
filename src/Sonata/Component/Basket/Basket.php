@@ -211,12 +211,13 @@ class Basket implements \Serializable, BasketInterface
      */
     public function isAddable(ProductInterface $product)
     {
-        $args = array_merge(array($this), func_get_args());
-
         /*
         * We ask the product repository if it can be added to the basket
         */
-        $isAddableBehavior = call_user_func_array(array($this->getProductPool()->getRepository($product), 'isAddableToBasket'), $args);
+        $isAddableBehavior = call_user_func_array(
+            array($this->getProductPool()->getProvider($product), 'isAddableToBasket'),
+            array_merge(array($this), func_get_args())
+        );
 
         return $isAddableBehavior;
     }
@@ -420,7 +421,7 @@ class Basket implements \Serializable, BasketInterface
 
         $deliveryMethod = $this->getDeliveryMethod();
 
-        if ($deliveryMethod instanceof Delivery) {
+        if ($deliveryMethod instanceof DeliveryInterface) {
             $vat += $deliveryMethod->getVatAmount($this);
         }
 

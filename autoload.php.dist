@@ -8,13 +8,14 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     'Symfony'                        => $vendor_dir.'/symfony/src',
-    'Doctrine\\Common\\DataFixtures' => __DIR__.'/vendor/doctrine-data-fixtures/lib',
-    'Doctrine\\Common'               => __DIR__.'/vendor/doctrine-common/lib',
-    'Doctrine\\DBAL'                 => __DIR__.'/vendor/doctrine-dbal/lib',
+    'Doctrine\\Common\\DataFixtures' => $vendor_dir.'/doctrine-data-fixtures/lib',
+    'Doctrine\\Common'               => $vendor_dir.'/doctrine-common/lib',
+    'Doctrine\\DBAL'                 => $vendor_dir.'/doctrine-dbal/lib',
     'Doctrine'                       => $vendor_dir.'/doctrine/lib',
-    'Zend'                           => __DIR__.'/vendor/zend/library',
+    'Zend'                           => $vendor_dir.'/zend/library',
     'Sonata\\Tests'                  => __DIR__.'/tests',
     'Sonata'                         => __DIR__.'/src',
+    'Application'                    => $vendor_dir.'/../app',
 ));
 
 $loader->register();

@@ -14,85 +14,58 @@ namespace Sonata\Tests\Component\Basket;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Product\Pool;
-use Sonata\Tests\Component\Basket\ProductRepository;
+use Sonata\Component\Product\ProductDefinition;
 use Sonata\Tests\Component\Basket\Delivery;
 use Sonata\Tests\Component\Basket\Payment;
+use Sonata\Component\Product\ProductManagerInterface;
 
 class BasketTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function testBasket()
+    public function getMockProduct()
     {
-        $product = new Product;
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product->expects($this->any())->method('getId')->will($this->returnValue(42));
+        $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
+        $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
+        $product->expects($this->any())->method('getVat')->will($this->returnValue(19.6));
+        $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
+        $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
+        $product->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
 
+        return $product;
+    }
+
+    public function testTotal()
+    {
         $basket = new Basket;
-        
-        $repository = $this->getMock(
-            'Sonata\Tests\Component\Basket\ProductRepository',
-            array('getClassMetadata', 'basketMergeProduct', 'basketAddProduct', 'basketCalculatePrice', 'isAddableToBasket'),
-            array(),
-            'ProductRepository',
-            true
-        );
 
-        $repository->expects($this->any())
-            ->method('basketAddProduct')
-            ->will($this->returnCallback(function($basket, $product, $params = array()) use ($basket, $repository) {
+        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
 
-           
-                $basketElement = new BasketElement;
-                $basketElement->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
-                $basketElement->setProduct($product, $repository);
-
-                $basket->addBasketElement($basketElement);
-
-                return $basketElement;
-            }));
-
-
-        $repository->expects($this->any())
-            ->method('basketMergeProduct')
-            ->will($this->returnCallback(function($baskt, $product, $params = array()) use ($basket, $repository) {
-
-
-                $basketElement = new BasketElement;
-                $basketElement->setQuantity(isset($params['quantity']) ? $params['quantity'] : 1);
-                $basketElement->setProduct($product, $repository);
-
-                $basket->addBasketElement($basketElement);
-
-                return $basketElement;
-            }));
-                
-
-        $repository->expects($this->any())
+        $provider->expects($this->any())
             ->method('basketCalculatePrice')
             ->will($this->returnValue(15));
 
-        $repository->expects($this->any())
-            ->method('isAddableToBasket')
-            ->will($this->returnValue(true));
+        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
-        $entity_manager = $this->getMock('EntityManager', array('getRepository'));
-        $entity_manager->expects($this->any())
-            ->method('getRepository')
-            ->will($this->returnValue($repository));
+        $definition = new ProductDefinition($provider, $manager);
 
+        $product = $this->getMockProduct();
 
         $pool = new Pool;
-        $pool->addProduct(array(
-            'id'         => 'fake_product',
-            'class'      => 'Sonata\\Tests\Component\\Basket\\Product',
-        ));
-        $pool->setEntityManager($entity_manager);
+        $pool->addProduct('product_code', $definition);
 
         $basket->setProductPool($pool);
 
         $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
-        $basketElement = $basket->addProduct($product);
-        
-        $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basketElement, '::addProduct() - return a BasketElement');
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $product);
+
+        $basket->addBasketElement($basketElement);
+
+        $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
+
         $this->assertEquals(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
         $this->assertEquals(15, $basket->getTotal(), '::getTotal() w/o vat return 15');
         $this->assertEquals(17.94, $basket->getTotal(true), '::getTotal() w/ vat return 17.94');
@@ -109,11 +82,59 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(150, $basket->getTotal(), '::getTotal() - return 150');
         $this->assertEquals(179.40, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
         $this->assertEquals(29.4, $basket->getVatAmount(),  '::getVatAmount() w/o vat return 29.4');
+    }
+
+    public function testBasket()
+    {
+        $basket = new Basket;
+
+        // create the provider mock
+        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+
+        $provider->expects($this->any())
+            ->method('basketCalculatePrice')
+            ->will($this->returnValue(15));
+
+        $provider->expects($this->any())
+            ->method('isAddableToBasket')
+            ->will($this->returnValue(true));
+
+        // create the product manager mock
+        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
+
+        $definition = new ProductDefinition($provider, $manager);
+
+
+        // retrieve the product mock
+        $product = $this->getMockProduct();
+
+        $pool = new Pool;
+        $pool->addProduct('product_code', $definition);
+
+        $basket->setProductPool($pool);
+
+        // check if the product is part of the basket
+        $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
+
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $product);
+
+        $basket->addBasketElement($basketElement);
+
+        $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
+
+        $delivery = new Delivery;
+        $basket->setDeliveryMethod($delivery);
+
 
         $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check');
 
-        $payment = new Payment;
+        $payment = $this->getMock('Sonata\Component\Payment\PaymentInterface');
+        $payment->expects($this->any())->method('getVat')->will($this->returnValue(19.6));
+        $payment->expects($this->any())->method('getPrice')->will($this->returnValue(120));
+
         $basket->setPaymentMethod($payment);
 
         $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
@@ -141,16 +162,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($basket->hasBasketElements(), '::hasElement() return false');
         $this->assertEquals(0, $basket->countBasketElements(), '::countElements() return 0');
-        $this->assertEmpty($basket->geBaskettElements(), '::getElements() is empty');
-
-        $basketElement = $basket->addProduct($product, array('quantity' => 0));
-        $this->assertEquals(0, $basketElement->getQuantity(),  '::getQuantity() return 1 after adding the product');
-        $basketElement = $basket->mergeProduct($product, array('quantity' => 3));
-
-        $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basketElement, '::mergeProduct() - return the a BasketElement');
-        $this->assertEquals(3, $basketElement->getQuantity(),  '::getQuantity() return 3 after product mege');
-
-        $this->assertEquals(165, $basket->getTotal(), '::getTotal() - return 150');        
+        $this->assertEmpty($basket->getBasketElements(), '::getElements() is empty');
 
         $basket->reset();
         $this->assertFalse($basket->isValid(), '::isValid() return false after reset');
@@ -158,37 +170,30 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
     public function testSerialize()
     {
+        $product = $this->getMockProduct();
 
-        $product = $this->getMock('Product', array('getId'));
-        $product->expects($this->exactly(1), array('getId'))
-            ->method('getId')
-            ->will($this->returnValue(3));
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $product);
 
-        $basketElement = $this->getMock('BasketElement', array('getProduct', 'setPos'));
-        $basketElement->expects($this->exactly(2))
-            ->method('getProduct')
-            ->will($this->returnValue($product))
-        ;
+        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
-        $basketElement->expects($this->once())
-            ->method('setPos')
-        ;
+        $definition = new ProductDefinition($provider, $manager);
 
-        $product_pool = $this->getMock('ProductPool', array('getRepository'));
-        $product_pool->expects($this->any())
-            ->method('getRepository')
-            ->will($this->returnValue(false));
+        $pool = new Pool;
+        $pool->addProduct('product_code', $definition);
 
         $basket = new Basket;
 
-        $basket->setProductPool($product_pool);
+        $basket->setProductPool($pool);
 
         $basket->addBasketElement($basketElement);
 
         $data = $basket->serialize();
 
         $this->assertTrue(is_string($data));
-        $this->assertStringStartsWith('a:7:', $data, 'the serialize array has 7 elements');
+        $this->assertStringStartsWith('a:10:', $data, 'the serialize array has 7 elements');
 
         $basket->reset();
         $this->assertTrue(count($basket->getBasketElements()) == 0, '::reset() remove all elements');

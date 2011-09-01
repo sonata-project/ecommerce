@@ -26,7 +26,6 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getVat')->will($this->returnValue(19.6));
         $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('option1' => 'toto')));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
-//        $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);

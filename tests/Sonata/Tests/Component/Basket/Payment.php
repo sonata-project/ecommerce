@@ -12,6 +12,12 @@
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Payment\BasePayment;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Product\ProductInterface;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class Payment extends BasePayment {
     public function isAddressRequired() {
@@ -42,87 +48,47 @@ class Payment extends BasePayment {
     }
 
     /**
-     * return the transaction id from the bank
+     * Send information to the bank, this method should handle
+     * everything when called
      *
+     * @param \Sonata\Component\Order\OrderInterface $order
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function applyTransactionId($transaction) {
-        // TODO: Implement getTransactionId() method.
+    function callbank(OrderInterface $order)
+    {
+        // TODO: Implement callbank() method.
     }
 
     /**
-     * return true if the product can be added to the basket
      *
-     * @param Basket $basket
-     * @param Product $product
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return boolean true if callback ok else false
      */
-    public function isAddableProduct($basket, $product) {
-        // TODO: Implement isAddableProduct() method.
+    function isCallbackValid(TransactionInterface $transaction)
+    {
+        // TODO: Implement isCallbackValid() method.
     }
 
     /**
-     * return true is the basket is valid for the current bank gateway
+     * Method called when an error occurs
      *
-     * @return boolean
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function isBasketValid($basket) {
-        // TODO: Implement isBasketValid() method.
-    }
-
-    /**
-     * Test if the request variables are valid for the current request
-     *
-     * WARNING : this methods does not check if the callback is valid
-     *
-     * @return boolean true if all parameter are ok
-     */
-    public function isRequestOk($transaction) {
-        // TODO: Implement isRequestOk() method.
+    function handleError(TransactionInterface $transaction)
+    {
+        // TODO: Implement handleError() method.
     }
 
     /**
      * Send post back confirmation to the bank when the bank callback the site
      *
-     * @return boolean true if ok
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
-    public function sendConfirmationReceipt($transaction) {
+    function sendConfirmationReceipt(TransactionInterface $transaction)
+    {
         // TODO: Implement sendConfirmationReceipt() method.
-    }
-
-    /**
-     * Method called when an error occurs
-     */
-    public function handleError($transaction) {
-        // TODO: Implement handleError() method.
-    }
-
-    /**
-     *
-     * @return boolean true if callback ok else false
-     */
-    public function isCallbackValid($transaction) {
-        // TODO: Implement isCallbackValid() method.
-    }
-
-    /**
-     * Send information to the bank, this method should handle
-     * everything when called
-     */
-    public function callbank($order) {
-        // TODO: Implement callBank() method.
-    }
-
-    public function getCode() {
-        // TODO: Implement getCode() method.
-    }
-
-    /**
-     * return the order reference from the transaction
-     *
-     * @param  $transaction
-     * @return string
-     */
-    public function getOrderReference($transaction) {
-        // TODO: Implement getOrderReference() method.
     }
 
     /**
@@ -130,12 +96,55 @@ class Payment extends BasePayment {
      *
      * WARNING : this methods does not check if the callback is valid
      *
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return boolean true if all parameter are ok
      */
-    public function isRequestValid($transaction) {
+    function isRequestValid(TransactionInterface $transaction)
+    {
         // TODO: Implement isRequestValid() method.
     }
 
+    /**
+     * return true is the basket is valid for the current bank gateway
+     *
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @return boolean
+     */
+    function isBasketValid(BasketInterface $basket)
+    {
+        // TODO: Implement isBasketValid() method.
+    }
 
+    /**
+     * return true if the product can be added to the basket
+     *
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Product\ProductInterface $product
+     */
+    function isAddableProduct(BasketInterface $basket, ProductInterface $product)
+    {
+        // TODO: Implement isAddableProduct() method.
+    }
+
+    /**
+     * return the transaction id from the bank
+     *
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     */
+    function applyTransactionId(TransactionInterface $transaction)
+    {
+        // TODO: Implement applyTransactionId() method.
+    }
+
+    /**
+     * return the order reference from the transaction
+     *
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return string
+     */
+    function getOrderReference(TransactionInterface $transaction)
+    {
+        // TODO: Implement getOrderReference() method.
+    }
 
 }

@@ -59,6 +59,7 @@ class ProductServiceInterfaceTest extends \PHPUnit_Framework_TestCase
         $provider = new ProductServiceInterfaceTest_ProductProvider;
 
         $orderElement = $provider->createOrderElement($basketElement);
+
         $this->assertInstanceOf('Sonata\Component\Order\OrderElementInterface', $orderElement);
         $this->assertEquals(OrderInterface::STATUS_PENDING, $orderElement->getStatus());
         $this->assertEquals('Product name', $orderElement->getDesignation());

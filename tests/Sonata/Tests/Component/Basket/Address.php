@@ -12,7 +12,7 @@
 
 namespace Sonata\Tests\Component\Basket;
 
-use Sonata\Component\Basket\AddressInterface;
+use Sonata\Component\Customer\AddressInterface;
 
 class Address implements AddressInterface {
     public function getPhone() {
@@ -46,4 +46,10 @@ class Address implements AddressInterface {
     public function getName() {
         return "home";
     }
+
+    function getId()
+    {
+        // TODO: Implement getId() method.
+    }
+
 }
