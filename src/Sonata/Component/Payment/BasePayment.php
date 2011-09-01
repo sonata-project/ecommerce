@@ -17,14 +17,11 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 abstract class BasePayment implements PaymentInterface
 {
-
     protected $name;
 
     protected $code;
 
     protected $options;
-
-    protected $router;
 
     protected $transformers;
 
@@ -34,15 +31,8 @@ abstract class BasePayment implements PaymentInterface
 
     protected $enabled;
 
-    protected $translator;
-
     protected $description;
 
-    public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
-    {
-        $this->router = $router;
-        $this->translator = $translator;
-    }
 
     /**
     * Generate a check value
@@ -113,14 +103,6 @@ abstract class BasePayment implements PaymentInterface
         return $this->logger;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\RouterInterface
-     */
-    public function getRouter()
-    {
-        return $this->router;
-    }
-
     public function addTransformer($id, $transformer)
     {
         $this->transformers[$id] = $transformer;
@@ -178,11 +160,6 @@ abstract class BasePayment implements PaymentInterface
         }
 
         return $response;
-    }
-
-    public function getTranslator()
-    {
-        return $this->translator;
     }
 
     public function setEnabled($enabled)

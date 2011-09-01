@@ -47,7 +47,6 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassPayment()
     {
-
         $delivery = new PassPayment;
         $delivery->setCode('free_1');
 

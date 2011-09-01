@@ -14,6 +14,8 @@ use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  *
@@ -28,7 +30,6 @@ use Sonata\Component\Product\ProductInterface;
  */
 abstract class BasePaypal extends BasePayment
 {
-
     const PAYMENT_STATUS_CANCELED_REVERSAL  = 'Canceled_Reversal';
     const PAYMENT_STATUS_COMPLETED          = 'Completed';
     const PAYMENT_STATUS_DENIED             = 'Denied';
@@ -39,6 +40,9 @@ abstract class BasePaypal extends BasePayment
     const PAYMENT_STATUS_PROCESSED          = 'Processed';
     const PAYMENT_STATUS_VOIDED             = 'Voided';
 
+    protected $router;
+
+    protected $translator;
 
     /**
      *
@@ -47,50 +51,59 @@ abstract class BasePaypal extends BasePayment
     protected $webConnectorProvider = null;
 
     /**
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param null|\Symfony\Component\Translation\TranslatorInterface $translator
+     */
+    public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
+    {
+        $this->router = $router;
+        $this->translator = $translator;
+    }
+
+    /**
      * return true if the request contains a valid `check` parameter
      *
-     * @param  $order
-     * @return bool return true if the transaction contains a valid `check` parameter
+     * @param TransactionInterface $transaction
+     * @return bool
      */
     public function isRequestValid(TransactionInterface $transaction)
     {
         $checkUrl = $transaction->get('check');
-        
+
         $checkPrivate = $this->generateUrlCheck($transaction->getOrder());
 
         return $checkUrl == $checkPrivate;
     }
 
     /**
-     *
      * return the transaction_id sent by the bank
      *
-     * @return mixed
+     * @param TransactionInterface $transaction
+     * @return void
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {
-
         $transactionId = $transaction->get('txn_id', null);
 
         if (!$transactionId) {
             // no transaction id provided
             $transactionId = -1;
         }
-        
+
         $transaction->setTransactionId($transactionId);
     }
 
     /**
      * return the order reference from the transaction object
      *
+     * @param TransactionInterface $transaction
      * @return string
      */
     public function getOrderReference(TransactionInterface $transaction)
     {
         $order = $transaction->get('order', null);
 
-        if ($this->getLogger())
-        {
+        if ($this->getLogger()) {
             $this->getLogger()->notice(sprintf("[BasePaypalPayment::loadOrder] order=%s", $order));
         }
 
@@ -104,12 +117,10 @@ abstract class BasePaypal extends BasePayment
      */
     public function checkPaypalFiles()
     {
-
         $key_file           = $this->getOption('key_file');
         $cert_file          = $this->getOption('cert_file');
         $paypal_cert_file   = $this->getOption('paypal_cert_file');
         $openssl            = $this->getOption('openssl');
-
 
         // key file
         if (!file_exists($key_file)) {
@@ -181,7 +192,7 @@ abstract class BasePaypal extends BasePayment
     }
 
     /**
-     * Encrypt paypal information using openssl with a buffer 
+     * Encrypt paypal information using openssl with a buffer
      *
      * @throws RuntimeException
      * @param  $hash
@@ -258,8 +269,7 @@ abstract class BasePaypal extends BasePayment
         // create tmp file
         $filename = tempnam(sys_get_temp_dir(), 'sonata_paypal_');
         $contents = "";
-        foreach ($hash as $name => $value)
-        {
+        foreach ($hash as $name => $value) {
             $contents .= $name . '=' . $value . "\n";
         }
 
@@ -267,7 +277,7 @@ abstract class BasePaypal extends BasePayment
             if ($this->getLogger()) {
                 $this->getLogger()->emerg(sprintf('encryptViaFile, unable to create buffer file : %s', $filename));
             }
-            
+
             throw new \RuntimeException(sprintf('unable to create buffer file : %s', $filename));
         }
 

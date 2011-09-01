@@ -10,6 +10,12 @@
 
 namespace Sonata\Component\Payment;
 
+use Symfony\Component\HttpFoundation\Response;
+use Sonata\Component\Payment\PaymentInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Payment\TransactionInterface;
 
 class PassPayment extends BasePayment
 {
@@ -19,104 +25,100 @@ class PassPayment extends BasePayment
      * @param string $value
      * @return string the encoded value
      */
-    public function encodeString($value) {
+    public function encodeString($value)
+    {
         return $value;
     }
 
     /**
-     * return the transaction id from the bank
-     *
+     * @return int
      */
-    public function getTransactionId() {
+    public function getTransactionId()
+    {
         return 1;
     }
 
     /**
-     * return true if the product can be added to the basket
-     *
-     * @param Basket $basket
-     * @param Product $product
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @return bool
      */
-    public function isAddableProduct($basket, $product) {
-
+    public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
+    {
         return true;
     }
 
     /**
-     * return true is the basket is valid for the current bank gateway
-     *
-     * @return boolean
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @return bool
      */
-    public function isBasketValid( $basket) {
-
+    public function isBasketValid(BasketInterface $basket)
+    {
         return true;
     }
 
     /**
-     * Test if the request variables are valid for the current request
-     *
-     * WARNING : this methods does not check if the callback is valid
-     *
-     * @return boolean true if all parameter are ok
+     * @param TransactionInterface $transaction
+     * @return bool
      */
-    public function isRequestValid($transaction) {
-
+    public function isRequestValid(TransactionInterface $transaction)
+    {
         return true;
     }
 
     /**
-     * Send post back confirmation to the bank when the bank callback the site
-     *
-     * @return boolean true if ok
+     * @param TransactionInterface $transaction
+     * @return void
      */
-    public function sendConfirmationReceipt($state) {
-        
-    }
-
-    /**
-     * Method called when an error occurs
-     */
-    public function handleError($code) {
+    public function sendConfirmationReceipt(TransactionInterface $transaction)
+    {
 
     }
 
     /**
-     *
-     * @return boolean true if callback ok else false
+     * @param TransactionInterface $transaction
+     * @return void
      */
-    public function isCallbackValid($transaction) {
+    public function handleError(TransactionInterface $transaction)
+    {
+
+    }
+
+    /**
+     * @param TransactionInterface $transaction
+     * @return bool
+     */
+    public function isCallbackValid(TransactionInterface $transaction)
+    {
         return true;
     }
 
     /**
-     * Send information to the bank, this method should handle
-     * everything when called
+     * @param \Sonata\Component\Order\OrderInterface $order
+     * @return void
      */
-    public function callbank($order) {
-
-        $response = new Symfony\Component\HttpFoundation\Response;
+    public function callbank(OrderInterface $order)
+    {
+        $response = new Response;
         $response->setRedirect($this->router->generateUrl('url_return_ok'));
         $response->setPrivate(true);
-
     }
 
     /**
-     * return the order reference from the transaction
-     *
-     * @param  $transaction
+     * @param TransactionInterface $transaction
      * @return string
      */
-    public function getOrderReference($transaction) {
-
+    public function getOrderReference(TransactionInterface $transaction)
+    {
         return $transaction->get('reference');
     }
 
     /**
-     * return the transaction id from the bank
-     *
+     * @param TransactionInterface $transaction
+     * @return void
      */
-    public function applyTransactionId($transaction) {
-
+    public function applyTransactionId(TransactionInterface $transaction)
+    {
         $transaction->setTransactionId($transaction->get('transaction_id'));
     }
 }
