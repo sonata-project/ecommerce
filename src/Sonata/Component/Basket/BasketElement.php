@@ -169,6 +169,7 @@ class BasketElement implements \Serializable, BasketElementInterface
 
         $product = $this->getProduct();
         if (!$product instanceof ProductInterface) {
+            var_dump('jere');
             return 0;
         }
 
@@ -221,11 +222,15 @@ class BasketElement implements \Serializable, BasketElementInterface
     public function getOption($name)
     {
         if (!array_key_exists($name, $this->options)) {
-
             return null;
         }
 
         return $this->options[$name];
+    }
+
+    public function hasOption($name)
+    {
+        return array_key_exists($name, $this->options);
     }
 
     /**

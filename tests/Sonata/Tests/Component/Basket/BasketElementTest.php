@@ -19,14 +19,16 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
     public function getBasketElement($product = null)
     {
-        if (!$product) {
-            $product = new Product;
-        }
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product->expects($this->any())->method('getId')->will($this->returnValue(42));
+        $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
+        $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
+        $product->expects($this->any())->method('getVat')->will($this->returnValue(19.6));
+        $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('option1' => 'toto')));
+        $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
+//        $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
-        $classmetadata = new \stdClass;
-        $classmetadata->discriminatorValue = 'test';
-
-        $basketElement = new BasketElement;
+        $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
         return $basketElement;
@@ -52,8 +54,8 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
     {
         $basketElement = $this->getBasketElement();
 
-//        $this->assertEquals(true, $basketElement->hasOption('option1'), 'BasketElement has one option : option1');
-//        $this->assertEquals(false, $basketElement->hasOption('fake'), 'BasketElement has not option : fake');
+        $this->assertEquals(true, $basketElement->hasOption('option1'), 'BasketElement has one option : option1');
+        $this->assertEquals(false, $basketElement->hasOption('fake'), 'BasketElement has not option : fake');
 
         $this->assertEquals('toto', $basketElement->getOption('option1'), 'option1 option = toto');
         $this->assertEquals(null, $basketElement->getOption('fake'), 'fake option = null');
@@ -72,12 +74,12 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
     public function testValidatity()
     {
         $product = new Product;
-        $basketElement = $this->getBasketElement($product);
-        
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $product);
+
         $this->assertEquals(true, $basketElement->isValid(), 'BasketElement is valid');
 
         $product->enabled = false;
         $this->assertEquals(false, $basketElement->isValid(), 'BasketElement returns the correct default quantity');
     }
-
 }
