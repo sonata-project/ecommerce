@@ -148,7 +148,7 @@ interface BasketInterface
      *
      * @param mixed $product
      *
-     * @return Product
+     * @return BasketElementInterface
      */
     function getElement(ProductInterface $product);
 
@@ -158,14 +158,14 @@ interface BasketInterface
      *
      * @param mixed $element
      *
-     * @return BasketElement
+     * @return BasketElementInterface
      */
     function removeElement(BasketElementInterface $element);
 
     /**
      * Add a basket element into the current basket
      *
-     * @param BasketElement $basketElement
+     * @param BasketElementInterface $basketElement
      */
     function addBasketElement(BasketElementInterface $basketElement);
 

@@ -63,7 +63,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @return \Application\Sonata\OrderBundle\Entity\OrderElement
+     * @return \Sonata\Component\Order\OrderElementInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement)
     {
@@ -75,7 +75,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setVat($basketElement->getVat());
         $orderElement->setDesignation($basketElement->getName());
         $orderElement->setDescription($product->getDescription());
-        $orderElement->setSerialize(null);
         $orderElement->setProductId($product->getId());
         $orderElement->setProductType($this->getCode());
         $orderElement->setStatus(OrderInterface::STATUS_PENDING);
@@ -263,7 +262,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $product
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @param \Symfony\Component\Form\FormBuilder $formBuilder
      * @param array $options
      * @return void
@@ -305,7 +304,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
 
         // check if the product is still enabled
-        if (!$basketElement->getProduct()->isEnabled()) {
+        if (!$basketElement->getProduct()->getEnabled()) {
             $errorElement->addViolation('The product is not enabled anymore');
 
             return;
@@ -341,8 +340,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      * @param \Sonata\Component\Product\ProductInterface $product
-     * @param array $values
-     * @return \Sonata\Component\Basket\BasketElementInterface
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @return bool|\Sonata\Component\Basket\BasketElementInterface
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
     {
@@ -367,10 +366,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * Merge a product with another when the product is already present into the basket
      *
+     * @throws \RuntimeExeption
      * @param \Sonata\Component\Basket\BasketInterface $basket
      * @param \Sonata\Component\Product\ProductInterface $product
-     * @param array $values
-     * @return \Sonata\Component\Basket\BasketElementInterface
+     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     * @return bool|\Sonata\Component\Basket\Product
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement)
     {
@@ -380,7 +380,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $basketElement = $basket->getElement($product);
         if (!$basketElement) {
-            throw new \RuntimeExeption('no basket element related to product.id : %s', $product->getId());
+            throw new \RuntimeException('no basket element related to product.id : %s', $product->getId());
         }
 
         $basketElement->setQuantity($basketElement->getQuantity() + $newBasketElement->getQuantity());
@@ -398,10 +398,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $product = $basketElement->getProduct();
 
         if (!$product instanceof ProductInterface) {
-            return false;
-        }
-
-        if (!$product->isValid()) {
             return false;
         }
 
@@ -473,11 +469,18 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $product->getStock();
     }
 
+    /**
+     * @param $code
+     * @return void
+     */
     public function setCode($code)
     {
         $this->code = $code;
     }
 
+    /**
+     * @return
+     */
     public function getCode()
     {
         return $this->code;

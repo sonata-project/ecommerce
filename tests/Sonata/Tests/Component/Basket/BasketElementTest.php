@@ -19,29 +19,21 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
     public function getBasketElement($product = null)
     {
-        if (!$product)
-        {
+        if (!$product) {
             $product = new Product;
         }
-        
+
         $classmetadata = new \stdClass;
         $classmetadata->discriminatorValue = 'test';
 
-        $repository = $this->getMock('ProductRepository', array('getClassMetadata'));
-        $repository
-            ->expects($this->once())
-            ->method('getClassMetadata')
-            ->will($this->returnValue($classmetadata));
-
-
         $basketElement = new BasketElement;
-        $basketElement->setProduct($product, $repository);
+        $basketElement->setProduct('product_code', $product);
 
         return $basketElement;
     }
+
     public function testPrice()
     {
-
         $basketElement = $this->getBasketElement();
 
         $this->assertEquals(19.6, $basketElement->getVat(), 'BasketElement returns the correct VAT');

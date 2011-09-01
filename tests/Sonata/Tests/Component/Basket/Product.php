@@ -20,7 +20,6 @@ class Product extends BaseProduct
     public $price = 15;
     public $vat = 19.6;
 
-
     public function getOptions() {
         return array(
             'option1' => 'toto',
@@ -40,4 +39,8 @@ class Product extends BaseProduct
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        return $this->id = $id;
+    }
 }

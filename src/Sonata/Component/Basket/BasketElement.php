@@ -74,8 +74,9 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * Define the related product
      *
+     * @param string $productCode
      * @param \Sonata\Component\Product\ProductInterface $product
-     * @return BasketElement
+     * @return void
      */
     public function setProduct($productCode, ProductInterface $product)
     {
@@ -90,7 +91,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * Return the related product
      *
-     * @return Product
+     * @return \Sonata\Component\Product\ProductInterface
      */
     public function getProduct()
     {

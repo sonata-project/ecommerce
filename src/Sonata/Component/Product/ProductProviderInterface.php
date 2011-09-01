@@ -44,20 +44,22 @@ interface ProductProviderInterface
     /**
      * return true if the basket element is still valid
      *
+     * @abstract
      * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param array $values
-     * @return \Sonata\Component\Basket\BasketElementInterface
+     * @param ProductInterface $product
+     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     * @return void
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * Merge a product with another when the product is already present into the basket
      *
+     * @abstract
      * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param array $values
-     * @return BasketElement
+     * @param ProductInterface $product
+     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     * @return void
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 

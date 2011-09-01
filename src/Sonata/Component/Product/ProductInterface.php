@@ -119,4 +119,10 @@ interface ProductInterface
      * @return void
      */
     function isVariation();
+
+    /**
+     * @abstract
+     * @return string
+     */
+    function getDescription();
 }
