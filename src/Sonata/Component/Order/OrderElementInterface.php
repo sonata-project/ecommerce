@@ -172,6 +172,12 @@ interface OrderElementInterface
     function getProduct();
 
     /**
+     * @abstract
+     * @return void
+     */
+    function getProductId();
+
+    /**
      * Set product_type
      *
      * @param string $productType

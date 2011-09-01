@@ -11,9 +11,7 @@
 
 namespace Sonata\Tests\Component\Transformer;
 
-use Sonata\Component\Transformer\Pool;
 use Sonata\Component\Transformer\BasketTransformer;
-use Sonata\Component\Transformer\OrderTransformer;
 use Sonata\Component\Basket\Basket;
 use Sonata\OrderBundle\Entity\BaseOrder;
 

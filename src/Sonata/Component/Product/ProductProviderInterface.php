@@ -50,7 +50,7 @@ interface ProductProviderInterface
      * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
      * @return void
      */
-    public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
+    function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * Merge a product with another when the product is already present into the basket
@@ -61,7 +61,7 @@ interface ProductProviderInterface
      * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
      * @return void
      */
-    public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
+    function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * @abstract
@@ -69,7 +69,7 @@ interface ProductProviderInterface
      *
      * @return boolean true if the basket element is still valid
      */
-    public function isValidBasketElement(BasketElementInterface $basketElement);
+    function isValidBasketElement(BasketElementInterface $basketElement);
 
     /**
      * This method return the return price of basket element, this method
@@ -81,7 +81,7 @@ interface ProductProviderInterface
      * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @return return the unit price of the basketElement
      */
-    public function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement);
+    function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement);
 
     /**
      * Return true if the product can be added to the provided basket
@@ -92,5 +92,14 @@ interface ProductProviderInterface
      * @param array $options
      * @return boolean
      */
-    public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array());
+    function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array());
+
+    /**
+     * Returns a BasketElement
+     *
+     * @abstract
+     * @param bool|ProductInterface $product
+     * @return void
+     */
+    function createBasketElement(ProductInterface $product = null);
 }

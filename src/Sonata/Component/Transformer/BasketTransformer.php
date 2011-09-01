@@ -17,7 +17,7 @@ use Sonata\Component\Delivery\DeliveryInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Product\Pool;
+use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Payment\PaymentInterface;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
@@ -27,15 +27,16 @@ class BasketTransformer extends BaseTransformer
 
     protected $logger;
 
+    protected $productPool;
+
     /**
      * @param \Sonata\Component\Order\OrderManagerInterface $orderManager
      * @param \Sonata\Component\Product\Pool $productPool
      * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      */
-    public function __construct(OrderManagerInterface $orderManager, Pool $productPool, LoggerInterface $logger = null)
+    public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, LoggerInterface $logger = null)
     {
-        parent::__construct($productPool);
-
+        $this->productPool = $productPool;
         $this->orderManager = $orderManager;
         $this->logger = $logger;
     }

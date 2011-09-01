@@ -11,24 +11,12 @@
 
 namespace Sonata\Component\Transformer;
 
-use Sonata\Component\Product\Pool;
-
 abstract class BaseTransformer
 {
-    /**
-     * @var the product pool
-     */
-    protected $productPool;
-
     /**
      * @var the transformer option
      */
     protected $options;
-
-    public function __construct(Pool $productPool)
-    {
-        $this->productPool = $productPool;
-    }
 
     public function setLogger($logger)
     {
@@ -38,16 +26,6 @@ abstract class BaseTransformer
     public function getLogger()
     {
         return $this->logger;
-    }
-
-    public function setProductPool($pool)
-    {
-        $this->productPool = $pool;
-    }
-
-    public function getProductPool()
-    {
-        return $this->productPool;
     }
 
     public function setOptions($options)

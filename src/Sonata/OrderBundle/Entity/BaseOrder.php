@@ -878,26 +878,6 @@ abstract class BaseOrder implements OrderInterface
         return $this->shippingMobile;
     }
 
-    /**
-     * Set user
-     *
-     * @param Application\Sonata\UserBundle\Entity\User $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-    /**
-     * Get user
-     *
-     * @return Application\Sonata\UserBundle\Entity\User $user
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
     public function getOrderElements()
     {
         return $this->orderElements;

@@ -11,21 +11,24 @@
 
 namespace Sonata\Tests\Component\Transformer;
 
-use Sonata\Component\Transformer\Pool;
+use Sonata\Component\Transformer\Pool as TransformerPool;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;
 
-
-class Poolest extends \PHPUnit_Framework_TestCase
+class PoolTest extends \PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
-        $pool = new Pool;
+        $pool = new TransformerPool;
 
-        $transformer = new BasketTransformer;
+        $transformer = new BasketTransformer(
+            $this->getMock('Sonata\Component\Order\OrderManagerInterface'),
+            $this->getMock('Sonata\Component\Product\Pool')
+        );
+
         $pool->addTransformer('basket', $transformer);
 
-        $transformer = new OrderTransformer;
+        $transformer = new OrderTransformer($this->getMock('Sonata\Component\Product\Pool'));
         $pool->addTransformer('order', $transformer);
 
         $this->assertEquals(2, count($pool->getTransformers()), 'Pool return 2 elements');

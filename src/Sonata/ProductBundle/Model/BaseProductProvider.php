@@ -235,9 +235,16 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /////////////////////////////////////////////////////
     // BASKET RELATED FUNCTIONS
 
-    public function createBasketElement()
+    public function createBasketElement(ProductInterface $product = null)
     {
-        return new BasketElement();
+        $basketElement = new BasketElement();
+
+        if ($product) {
+            $basketElement->setProduct($this->code, $product);
+            $basketElement->setQuantity(1);
+        }
+
+        return $basketElement;
     }
 
     /**
@@ -250,9 +257,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array())
     {
-        $basketElement = $this->createBasketElement();
-        $basketElement->setProduct($this->getCode(), $product);
-        $basketElement->setQuantity(1);
+        $basketElement = $this->createBasketElement($product);
 
         // create the product form
         $formBuilder

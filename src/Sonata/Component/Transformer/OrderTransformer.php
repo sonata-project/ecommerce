@@ -13,24 +13,44 @@ namespace Sonata\Component\Transformer;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Product\Pool as ProductPool;
 
 class OrderTransformer extends BaseTransformer
 {
-    public function transformIntoBasket(CustomerInterface $customer, OrderInterface $order, BasketInterface $basket)
+    /**
+     * @var the product pool
+     */
+    protected $productPool;
+
+    /**
+     * @var the transformer option
+     */
+    protected $options;
+
+    public function __construct(ProductPool $productPool)
+    {
+        $this->productPool = $productPool;
+    }
+
+    public function transformIntoBasket(OrderInterface $order, BasketInterface $basket)
     {
         // we reset the current basket
-        $basket->reset();
+        $basket->reset(true);
 
         // We are free to convert !
         foreach ($order->getOrderElements() as $orderElement) {
-            $repository = $this->getProductPool()->getRepository($orderElement->getProductType());
-            $product    = $repository->find($orderElement->getProductId());
+            $provider   = $this->productPool->getProvider($orderElement->getProductType());
+            $manager    = $this->productPool->getManager($orderElement->getProductType());
+
+            $product    = $manager->findBy(array('id' => $orderElement->getProductId()));
 
             if (!$product) {
                 continue;
             }
 
-            $repository->basketAddProduct($basket, $product, $orderElement);
+            $basketElement = $provider->createBasketElement($product);
+
+            $provider->basketAddProduct($basket, $product, $basketElement);
         }
 
         $basket->buildPrices();

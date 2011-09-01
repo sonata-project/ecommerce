@@ -43,28 +43,28 @@ interface OrderInterface
     function getReference();
 
     /**
-     * Set payment_method
+     * Set payment method
      *
-     * @param string $payment_method
+     * @param string $paymentMethod
      */
     function setPaymentMethod($paymentMethod);
 
     /**
-     * Get payment_method
+     * Get payment method
      *
-     * @return string $payment_method
+     * @return string
      */
     function getPaymentMethod();
 
     /**
-     * Set delivery_method
+     * Set delivery method
      *
      * @param string $deliveryMethod
      */
     function setDeliveryMethod($deliveryMethod);
 
     /**
-     * Get delivery_method
+     * Get delivery method
      *
      * @return string $deliveryMethod
      */
@@ -99,42 +99,42 @@ interface OrderInterface
     function getStatus();
 
     /**
-     * Set payment_status
+     * Set payment status
      *
      * @param integer $paymentStatus
      */
     function setPaymentStatus($paymentStatus);
 
     /**
-     * Get payment_status
+     * Get payment status
      *
      * @return integer $paymentStatus
      */
     function getPaymentStatus();
 
     /**
-     * Set delivery_status
+     * Set delivery status
      *
      * @param integer $deliveryStatus
      */
     function setDeliveryStatus($deliveryStatus);
 
     /**
-     * Get delivery_status
+     * Get delivery status
      *
      * @return integer $deliveryStatus
      */
     function getDeliveryStatus();
 
     /**
-     * Set validated_at
+     * Set validated at
      *
      * @param datetime $validatedAt
      */
     function setValidatedAt(\DateTime $validatedAt = null);
 
     /**
-     * Get validated_at
+     * Get validated at
      *
      * @return datetime $validatedAt
      */
@@ -183,343 +183,329 @@ interface OrderInterface
     function getTotalExcl();
 
     /**
-     * Set delivery_cost
+     * Set delivery cost
      *
      * @param decimal $deliveryCost
      */
     function setDeliveryCost($deliveryCost);
 
     /**
-     * Get delivery_cost
+     * Get delivery cost
      *
      * @return decimal $deliveryCost
      */
     function getDeliveryCost();
 
     /**
-     * Set billing_name
+     * Set billing name
      *
      * @param string $billingName
      */
     function setBillingName($billingName);
 
     /**
-     * Get billing_name
+     * Get billing name
      *
      * @return string $billingName
      */
     function getBillingName();
 
     /**
-     * Set billing_phone
+     * Set billing phone
      *
      * @param string $billingPhone
      */
     function setBillingPhone($billingPhone);
 
     /**
-     * Get billing_phone
+     * Get billing phone
      *
      * @return string $billingPhone
      */
     function getBillingPhone();
 
     /**
-     * Set billing_address1
+     * Set billing address1
      *
      * @param string $billingAddress1
      */
     function setBillingAddress1($billingAddress1);
 
     /**
-     * Get billing_address1
+     * Get billing address1
      *
      * @return string $billingAddress1
      */
     function getBillingAddress1();
 
     /**
-     * Set billing_address2
+     * Set billing address2
      *
      * @param string $billingAddress2
      */
     function setBillingAddress2($billingAddress2);
 
     /**
-     * Get billing_address2
+     * Get billing address2
      *
      * @return string $billingAddress2
      */
     function getBillingAddress2();
 
     /**
-     * Set billing_address3
+     * Set billing address3
      *
      * @param string $billingAddress3
      */
     function setBillingAddress3($billingAddress3);
 
     /**
-     * Get billing_address3
+     * Get billing address3
      *
      * @return string $billingAddress3
      */
     function getBillingAddress3();
 
     /**
-     * Set billing_city
+     * Set billing city
      *
      * @param string $billingCity
      */
     function setBillingCity($billingCity);
 
     /**
-     * Get billing_city
+     * Get billing city
      *
      * @return string $billingCity
      */
     function getBillingCity();
 
     /**
-     * Set billing_postcode
+     * Set billing postcode
      *
      * @param string $billingPostcode
      */
     function setBillingPostcode($billingPostcode);
 
     /**
-     * Get billing_postcode
+     * Get billing postcode
      *
      * @return string $billingPostcode
      */
     function getBillingPostcode();
 
     /**
-     * Set billing_country_code
+     * Set billing country code
      *
      * @param string $billingCountry
      */
     function setBillingCountryCode($billingCountryCode);
     /**
-     * Get billing_country
+     * Get billing country
      *
      * @return string $billingCountryCode
      */
     function getBillingCountryCode();
 
     /**
-     * Set billing_fax
+     * Set billing fax
      *
      * @param string $billingFax
      */
     function setBillingFax($billingFax);
 
     /**
-     * Get billing_fax
+     * Get billing fax
      *
      * @return string $billingFax
      */
     function getBillingFax();
 
     /**
-     * Set billing_email
+     * Set billing email
      *
      * @param string $billingEmail
      */
     function setBillingEmail($billingEmail);
 
     /**
-     * Get billing_email
+     * Get billing email
      *
      * @return string $billingEmail
      */
     function getBillingEmail();
 
     /**
-     * Set billing_mobile
+     * Set billing mobile
      *
      * @param string $billingMobile
      */
     function setBillingMobile($billingMobile);
 
     /**
-     * Get billing_mobile
+     * Get billing mobile
      *
      * @return string $billingMobile
      */
     function getBillingMobile();
 
     /**
-     * Set shipping_name
+     * Set shipping name
      *
      * @param string $shippingName
      */
     function setShippingName($shippingName);
 
     /**
-     * Get shipping_name
+     * Get shipping name
      *
      * @return string $shippingName
      */
     function getShippingName();
 
     /**
-     * Set shipping_phone
+     * Set shipping phone
      *
      * @param string $shippingPhone
      */
     function setShippingPhone($shippingPhone);
 
     /**
-     * Get shipping_phone
+     * Get shipping phone
      *
      * @return string $shippingPhone
      */
     function getShippingPhone();
 
     /**
-     * Set shipping_address1
+     * Set shipping address1
      *
      * @param string $shippingAddress1
      */
     function setShippingAddress1($shippingAddress1);
 
     /**
-     * Get shipping_address1
+     * Get shipping address1
      *
      * @return string $shippingAddress1
      */
     function getShippingAddress1();
 
     /**
-     * Set shipping_address2
+     * Set shipping address2
      *
      * @param string $shippingAddress2
      */
     function setShippingAddress2($shippingAddress2);
 
     /**
-     * Get shipping_address2
+     * Get shipping address2
      *
      * @return string $shippingAddress2
      */
     function getShippingAddress2();
 
     /**
-     * Set shipping_address3
+     * Set shipping address3
      *
      * @param string $shippingAddress3
      */
     function setShippingAddress3($shippingAddress3);
 
     /**
-     * Get shipping_address3
+     * Get shipping address3
      *
      * @return string $shippingAddress3
      */
     function getShippingAddress3();
 
     /**
-     * Set shipping_city
+     * Set shipping city
      *
      * @param string $shippingCity
      */
     function setShippingCity($shippingCity);
 
     /**
-     * Get shipping_city
+     * Get shipping city
      *
      * @return string $shippingCity
      */
     function getShippingCity();
 
     /**
-     * Set shipping_postcode
+     * Set shipping postcode
      *
      * @param string $shippingPostcode
      */
     function setShippingPostcode($shippingPostcode);
 
     /**
-     * Get shipping_postcode
+     * Get shipping postcode
      *
      * @return string $shippingPostcode
      */
     function getShippingPostcode();
 
     /**
-     * Set shipping_country
+     * Set shipping country
      *
      * @param string $shippingCountry
      */
     function setShippingCountryCode($shippingCountryCode);
 
     /**
-     * Get shipping_country
+     * Get shipping country
      *
      * @return string $shippingCountry
      */
     function getShippingCountryCode();
 
     /**
-     * Set shipping_fax
+     * Set shipping fax
      *
      * @param string $shippingFax
      */
     function setShippingFax($shippingFax);
 
     /**
-     * Get shipping_fax
+     * Get shipping fax
      *
      * @return string $shippingFax
      */
     function getShippingFax();
 
     /**
-     * Set shipping_email
+     * Set shipping email
      *
      * @param string $shippingEmail
      */
     function setShippingEmail($shippingEmail);
 
     /**
-     * Get shipping_email
+     * Get shipping email
      *
      * @return string $shippingEmail
      */
     function getShippingEmail();
 
     /**
-     * Set shipping_mobile
+     * Set shipping mobile
      *
      * @param string $shippingMobile
      */
     function setShippingMobile($shippingMobile);
 
     /**
-     * Get shipping_mobile
+     * Get shipping mobile
      *
      * @return string $shippingMobile
      */
     function getShippingMobile();
 
     /**
-     * Set user
-     *
-     * @param Application\Sonata\UserBundle\Entity\User $user
-     */
-    function setUser($user);
-
-    /**
-     * Get user
-     *
-     * @return Application\Sonata\UserBundle\Entity\User $user
-     */
-    function getUser();
-
-    /**
      * @abstract
-     * @return void
+     * @return array of
      */
     function getOrderElements();
 
@@ -566,16 +552,34 @@ interface OrderInterface
      */
     function isError();
 
+    /**
+     * @abstract
+     * @param \DateTime|null $createdAt
+     * @return void
+     */
     function setCreatedAt(\DateTime $createdAt = null);
 
+    /**
+     * @abstract
+     * @return void
+     */
     function getCreatedAt();
 
+    /**
+     * @abstract
+     * @param \DateTime|null $updatedAt
+     * @return void
+     */
     function setUpdatedAt(\DateTime $updatedAt = null);
 
+    /**
+     * @abstract
+     * @return void
+     */
     function getUpdatedAt();
 
     /**
-     * Add order_elements
+     * Add order elements
      *
      * @param OrderElementInterface $orderElements
      */
@@ -590,14 +594,14 @@ interface OrderInterface
 
     /**
      * @abstract
-     * @param CustomerInterface $customer
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
      * @return void
      */
     function setCustomer(CustomerInterface $customer);
 
     /**
      * @abstract
-     * @return CustomerInterface
+     * @return \Sonata\Component\Customer\CustomerInterface
      */
     function getCustomer();
 }
