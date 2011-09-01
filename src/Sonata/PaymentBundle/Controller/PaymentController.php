@@ -174,16 +174,14 @@ class PaymentController extends Controller
         $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
         if (!$order) {
-
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
 
         $transaction->setOrder($order);
 
         if (!$payment->isCallbackValid($transaction)) {
-
             // ask the payment handler the error
-            $response = $payment->handleError($transaction);
+            return $payment->handleError($transaction);
         }
 
         $response = $payment->sendConfirmationReceipt($transaction);
