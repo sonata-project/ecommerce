@@ -16,9 +16,18 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Payment\TransactionInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class PassPayment extends BasePayment
 {
+
+    protected $router;
+
+    public function __construct(RouterInterface $router)
+    {
+        $this->router = $router;
+    }
+
     /**
      * encode value for the bank
      *
@@ -67,21 +76,25 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return void
+     * Method called when an error occurs
+     *
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function sendConfirmationReceipt(TransactionInterface $transaction)
+    function handleError(TransactionInterface $transaction)
     {
-
+        return new Response();
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return void
+     * Send post back confirmation to the bank when the bank callback the site
+     *
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
-    public function handleError(TransactionInterface $transaction)
+    function sendConfirmationReceipt(TransactionInterface $transaction)
     {
-
+        return new Response();
     }
 
     /**
@@ -95,13 +108,16 @@ class PassPayment extends BasePayment
 
     /**
      * @param \Sonata\Component\Order\OrderInterface $order
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function callbank(OrderInterface $order)
     {
-        $response = new Response;
-        $response->setRedirect($this->router->generateUrl('url_return_ok'));
-        $response->setPrivate(true);
+        $response = new Response('', 302, array(
+            'Location' => $this->router->generate($this->getOption('url_return_ok'), array(), true)
+        ));
+        $response->setPrivate();
+
+        return $response;
     }
 
     /**
