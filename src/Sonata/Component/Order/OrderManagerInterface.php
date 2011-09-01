@@ -16,14 +16,14 @@ interface OrderManagerInterface
     /**
      * Creates an empty order instance
      *
-     * @return Order
+     * @return OrderInterface
      */
     function create();
 
     /**
      * Deletes a order
      *
-     * @param Order $order
+     * @param OrderInterface $order
      * @return void
      */
     function delete(OrderInterface $order);

@@ -50,23 +50,34 @@ class Loader
     }
 
     /**
+     * @throws \RuntimeException
+     * @return \Sonata\Component\Basket\BasketInterface
+     */
+    private function getBasketInstance()
+    {
+        $basket = $this->getSession()->get('sonata/basket');
+
+        if (!$basket) {
+
+            if (!class_exists($this->basketClass)) {
+                throw new \RuntimeException(sprintf('unable to load the class %s', $this->basketClass));
+            }
+
+            $basket = new $this->basketClass;
+        }
+
+        return $basket;
+    }
+
+    /**
      * @throws \Exception|\RuntimeException
-     * @return Sonata\Component\Basket\BasketInterface
+     * @return \Sonata\Component\Basket\BasketInterface
      */
     public function getBasket()
     {
         if (!$this->basket) {
-            $basket = $this->getSession()->get('sonata/basket');
 
-            if (!$basket) {
-
-                if (!class_exists($this->basketClass)) {
-                    throw new \RuntimeException(sprintf('unable to load the class %s', $this->basketClass));
-                }
-
-                $basket = new $this->basketClass;
-            }
-
+            $basket = $this->getBasketInstance();
             $basket->setProductPool($this->getProductPool());
 
             try {
@@ -89,6 +100,11 @@ class Loader
                     $address = $this->addressManager->findOneBy(array('id' => $deliveryAddressId));
 
                     $basket->setDeliveryAddress($address);
+                }
+
+                $deliveryMethodCode = $basket->getDeliveryMethodCode();
+                if ($deliveryMethodCode) {
+                    $basket->setDeliveryMethod($this->getDeliveryPool()->getMethod($deliveryMethodCode));
                 }
 
                 // load the payment address

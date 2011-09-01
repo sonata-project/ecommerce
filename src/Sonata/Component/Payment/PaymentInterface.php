@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface PaymentInterface
 {
-
     /**
      * @abstract
      * @return string

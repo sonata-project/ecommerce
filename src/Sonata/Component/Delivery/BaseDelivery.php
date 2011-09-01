@@ -10,6 +10,8 @@
 
 namespace Sonata\Component\Delivery;
 
+use Sonata\Component\Basket\BasketInterface;
+
 /**
  * A free delivery method, used this only for testing
  *
@@ -103,7 +105,7 @@ abstract class BaseDelivery implements DeliveryInterface
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    public function getTotal($basket, $vat = false)
+    public function getTotal(BasketInterface $basket, $vat = false)
     {
         if ($vat) {
             return bcadd($this->getPrice() * (1 + $this->getVat() / 100), 0, 2);
@@ -112,7 +114,7 @@ abstract class BaseDelivery implements DeliveryInterface
         return bcadd($this->getPrice(), 0, 2);
     }
 
-    public function getVatAmount($basket)
+    public function getVatAmount(BasketInterface $basket)
     {
         $vat = $this->getTotal($basket, true) - $this->getTotal($basket);
 

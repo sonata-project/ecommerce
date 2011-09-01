@@ -18,32 +18,39 @@ use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool;
+use Sonata\Component\Payment\PaymentInterface;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class BasketTransformer extends BaseTransformer
 {
     protected $orderManager;
 
+    protected $logger;
+
     /**
      * @param \Sonata\Component\Order\OrderManagerInterface $orderManager
-     * @param Pool $productPool
-     * @param null $logger
+     * @param \Sonata\Component\Product\Pool $productPool
+     * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      */
-    public function __construct(OrderManagerInterface $orderManager, Pool $productPool, $logger = null)
+    public function __construct(OrderManagerInterface $orderManager, Pool $productPool, LoggerInterface $logger = null)
     {
-        parent::__construct($productPool, $logger);
+        parent::__construct($productPool);
 
         $this->orderManager = $orderManager;
+        $this->logger = $logger;
     }
 
     /**
      * transform a basket into order
      *
-     * @param CustomerInterface $customer
-     * @param BasketInterface $basket
-     * @return Order
+     * @throws \RuntimeException
+     * @param null|\Sonata\Component\Basket\BasketInterface $basket
+     * @return null|\Sonata\Component\Order\OrderInterface
      */
-    public function transformIntoOrder(CustomerInterface $customer = null, BasketInterface $basket = null)
+    public function transformIntoOrder(BasketInterface $basket)
     {
+        $customer = $basket->getCustomer();
+
         // Customer
         if (!is_object($customer)) {
             if ($this->getLogger()) {
@@ -53,23 +60,24 @@ class BasketTransformer extends BaseTransformer
             throw new \RuntimeException('Invalid customer');
         }
 
-        // Basket
-        if (!$basket) {
-            if ($this->getLogger()) {
-                $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the basket is not defined');
-            }
-
-            throw new \RuntimeException('Invalid basket');
-        }
-
         // Billing
         $billingAddress = $basket->getPaymentAddress();
+
         if (!$billingAddress instanceof AddressInterface) {
             if ($this->getLogger()) {
                 $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the billing address is not valid');
             }
 
             throw new \RuntimeException('Invalid billing address');
+        }
+
+        $paymentMethod = $basket->getPaymentMethod();
+        if (!$paymentMethod instanceof PaymentInterface) {
+            if ($this->getLogger()) {
+                $this->getLogger()->emerg('[Sonata\Component\Payment\PaymentInterface::transform] the payment method is not valid');
+            }
+
+            throw new \RuntimeException('Invalid payment method');
         }
 
         // Shipping
@@ -88,12 +96,11 @@ class BasketTransformer extends BaseTransformer
                 $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the shipping address is not valid');
             }
 
-            throw new \RuntimeException('Invalid delivery method');
+            throw new \RuntimeException('Invalid delivery address');
         }
 
         // add a custom class_instance for testing purpose.
-        // todo : find a cleaner way to do that
-        $order = $this->getOption('order_instance') ? $this->getOption('order_instance') : $this->orderManager->create();
+        $order = $this->orderManager->create();
 
         $order->setCustomer($customer);
         $order->setUsername($customer->getFullname());

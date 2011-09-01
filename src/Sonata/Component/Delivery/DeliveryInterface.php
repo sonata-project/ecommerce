@@ -10,6 +10,8 @@
 
 namespace Sonata\Component\Delivery;
 
+use Sonata\Component\Basket\BasketInterface;
+
 interface DeliveryInterface
 {
     const STATUS_OPEN       = 1;
@@ -46,17 +48,24 @@ interface DeliveryInterface
      * Return the delivery price
      *
      * @abstract
-     * @param  $vat set to true if the VAT should be included
-     * @return float
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param bool $vat
+     * @return void
      */
-    function getTotal($price, $vat = false);
+    function getTotal(BasketInterface $basket, $vat = false);
 
     /**
      * Return the vat amount
      *
      * @abstract
-     * @param  $vat set to true if the VAT should be included
-     * @return float
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @return void
      */
-    function getVatAmount($basket);
+    function getVatAmount(BasketInterface $basket);
+
+    /**
+     * @abstract
+     * @return string
+     */
+    function getCode();
 }

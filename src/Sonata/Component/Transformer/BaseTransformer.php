@@ -16,11 +16,6 @@ use Sonata\Component\Product\Pool;
 abstract class BaseTransformer
 {
     /**
-     * @var instance logger
-     */
-    protected $logger;
-
-    /**
      * @var the product pool
      */
     protected $productPool;
@@ -30,10 +25,9 @@ abstract class BaseTransformer
      */
     protected $options;
 
-    public function __construct(Pool $productPool, $logger = null)
+    public function __construct(Pool $productPool)
     {
         $this->productPool = $productPool;
-        $this->logger = $logger;
     }
 
     public function setLogger($logger)

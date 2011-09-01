@@ -193,7 +193,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $data = $basket->serialize();
 
         $this->assertTrue(is_string($data));
-        $this->assertStringStartsWith('a:10:', $data, 'the serialize array has 7 elements');
+        $this->assertStringStartsWith('a:9:', $data, 'the serialize array has 9 elements');
 
         $basket->reset();
         $this->assertTrue(count($basket->getBasketElements()) == 0, '::reset() remove all elements');

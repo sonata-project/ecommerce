@@ -14,10 +14,109 @@ namespace Sonata\Tests\Component\Transformer;
 use Sonata\Component\Transformer\Pool;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;
+use Sonata\Component\Basket\Basket;
+use Sonata\OrderBundle\Entity\BaseOrder;
 
+class BasketTransformerTest_Order extends BaseOrder
+{
+    /**
+     * @return integer the order id
+     */
+    function getId()
+    {
+        // TODO: Implement getId() method.
+    }
+}
 
 class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @return \Sonata\Component\Transformer\BasketTransformer
+     */
+    public function getBasketTransform()
+    {
+        $order = new BasketTransformerTest_Order;
+        $orderManager = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $orderManager->expects($this->any())->method('create')->will($this->returnValue($order));
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+
+        $basketTransform = new BasketTransformer($orderManager, $productPool);
+
+        return $basketTransform;
+    }
+
+    public function testInvalidCustomer()
+    {
+        $this->setExpectedException('RuntimeException', 'Invalid customer');
+
+        $basket = new Basket;
+
+        $this->getBasketTransform()->transformIntoOrder($basket);
+    }
+
+    public function testInvalidBillingAddress()
+    {
+        $this->setExpectedException('RuntimeException', 'Invalid billing address');
+
+        $basket   = new Basket;
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+
+        $basket->setCustomer($customer);
+
+        $this->getBasketTransform()->transformIntoOrder($basket);
+    }
+
+    public function testInvalidPaymentMethod()
+    {
+        $this->setExpectedException('RuntimeException', 'Invalid payment method');
+
+        $basket   = new Basket;
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
+
+        $basket->setCustomer($customer);
+        $basket->setPaymentAddress($billingAddress);
+
+        $this->getBasketTransform()->transformIntoOrder($basket);
+    }
+
+    public function testInvalidDeliveryMethod()
+    {
+        $this->setExpectedException('RuntimeException', 'Invalid delivery method');
+
+        $basket   = new Basket;
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
+        $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
+
+        $basket->setCustomer($customer);
+        $basket->setPaymentAddress($billingAddress);
+        $basket->setPaymentMethod($paymentMethod);
+
+        $this->getBasketTransform()->transformIntoOrder($basket);
+    }
+
+    public function testInvalidDeliveryAddress()
+    {
+        $this->setExpectedException('RuntimeException', 'Invalid delivery address');
+
+        $basket   = new Basket;
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
+        $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod->expects($this->once())->method('isAddressRequired')->will($this->returnValue(true));
+
+        $basket->setCustomer($customer);
+        $basket->setPaymentAddress($billingAddress);
+        $basket->setDeliveryMethod($deliveryMethod);
+        $basket->setPaymentMethod($paymentMethod);
+
+        $this->getBasketTransform()->transformIntoOrder($basket);
+    }
+
     /**
      * useless test ....
      *
@@ -26,123 +125,22 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     public function testOrder()
     {
 
-        $logger = $this->getMock('Logger', array('emerg'));
-        $logger
-            ->expects($this->any())
-            ->method('emerg');
+        $basket   = new Basket;
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod->expects($this->exactly(2))->method('isAddressRequired')->will($this->returnValue(true));
+        $deliveryAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
+        $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
 
-        // Mock the user
-        $user = $this->getMock('User', array('getId', 'getUsername'));
-        $user
-            ->expects($this->any())
-            ->method('getId')
-            ->will($this->returnValue(42));
+        $basket->setCustomer($customer);
+        $basket->setPaymentAddress($billingAddress);
+        $basket->setDeliveryMethod($deliveryMethod);
+        $basket->setDeliveryAddress($deliveryAddress);
+        $basket->setPaymentMethod($paymentMethod);
 
-        $user
-            ->expects($this->once())
-            ->method('getUsername')
-            ->will($this->returnValue('rande'));
+        $order = $this->getBasketTransform()->transformIntoOrder($basket);
 
-        $products = array();
-
-        $products[] = new \Sonata\Tests\Component\Basket\Product;
-        $products[] = new \Sonata\Tests\Component\Basket\Product;
-
-
-        // Mock the product repository
-        $repository = $this->getMock('ProductRepository', array('createOrderElement'));
-
-        $repository->expects($this->exactly(2))
-            ->method('createOrderElement')
-            ->will($this->onConsecutiveCalls($this->getMock('OrderElement'), $this->getMock('OrderElement')));
-
-        $product_pool = new  \Sonata\Component\Product\Pool;
-        $product_pool->addProduct(array(
-            'id'            => 'test',
-            'class'         => 'Sonata\\Tests\\Component\\Basket\\Product',
-        ));
-
-        $entity_manager = $this->getMock('EntityManager', array('getRepository'));
-        $entity_manager->expects($this->any())
-            ->method('getRepository')
-            ->will($this->returnValue($repository));
-
-        $product_pool->setEntityManager($entity_manager);
-
-        $transformer = new BasketTransformer;
-        $transformer->setProductPool($product_pool);
-        $transformer->setLogger($logger);
-
-        try {
-            $transformer->transformIntoOrder(null, null);
-            $this->fail('::transformIntoOrder() should raise an error if the user is null');
-        } catch (\RuntimeException $e) {
-            // ok ? no pass method in PHPUnit ?
-            $this->assertEquals('Invalid user', $e->getMessage());
-        }
-        
-        try {
-            $transformer->transformIntoOrder($user, null);
-            $this->fail('::transformIntoOrder() should raise an error if the basket is null');
-        } catch (\RuntimeException $e) {
-            // ok ? no pass method in PHPUnit ?
-            $this->assertEquals('Invalid basket', $e->getMessage());
-        }
-
-        $billingAddress = new \Sonata\Tests\Component\Basket\Address;
-        $shipping_address = new \Sonata\Tests\Component\Basket\Address;
-        $deliveryMethod = new \Sonata\Tests\Component\Basket\Delivery;
-
-        $basketElements = array();
-
-        $basketElement = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
-        $basketElement->expects($this->any())
-            ->method('getProduct')
-            ->will($this->returnValue($products[0]));
-
-
-        $basketElements[] = $basketElement;
-
-        $basketElement = $this->getMock('Sonata\\Component\\Basket\\BasketElement');
-        $basketElement->expects($this->any())
-            ->method('getProduct')
-            ->will($this->returnValue($products[0]));
-
-        $basketElements[] = $basketElement;
-
-        $basket = $this->getMock('Basket', array('getDeliveryPrice','getTotal', 'getBillingAddress', 'getDeliveryMethod', 'getShippingAddress', 'getElements'));
-        
-        $basket->expects($this->once())
-            ->method('getBillingAddress')
-            ->will($this->returnValue($billingAddress));
-
-        $basket->expects($this->once())
-            ->method('getShippingAddress')
-            ->will($this->returnValue($shipping_address));
-
-        $basket->expects($this->exactly(2))
-            ->method('getDeliveryMethod')
-            ->will($this->returnValue($deliveryMethod));
-
-        $basket->expects($this->exactly(2))
-            ->method('getTotal')
-            ->will($this->onConsecutiveCalls(12, 14.78));
-
-        $basket->expects($this->exactly(1))
-            ->method('getDeliveryPrice')
-            ->will($this->returnValue(2));
-
-        $basket->expects($this->once())
-            ->method('getElements')
-            ->will($this->returnValue($basketElements));
-
-        $order = $this->getMock('Sonata\\Tests\\Component\\Basket\\Order');
-
-        $order->expects($this->exactly(2))
-            ->method('addOrderElement');
-
-        $transformer->setOptions(array('class_order' => get_class($order), 'order_instance' => $order));
-
-        $order = $transformer->transformIntoOrder($user, $basket);
+        $this->assertInstanceOf('Sonata\Component\Order\OrderInterface', $order, '::transformIntoOrder() returns an OrderInstance object');
     }
 }

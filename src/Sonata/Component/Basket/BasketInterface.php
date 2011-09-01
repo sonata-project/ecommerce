@@ -22,8 +22,17 @@ use Sonata\Component\Product\Pool;
 interface BasketInterface
 {
 
+    /**
+     * @abstract
+     * @param \Sonata\Component\Product\Pool $pool
+     * @return void
+     */
     function setProductPool(Pool $pool);
 
+    /**
+     * @abstract
+     * @return \Sonata\Component\Product\Pool
+     */
     function getProductPool();
 
     /**
@@ -38,7 +47,7 @@ interface BasketInterface
      *
      * if $element_only is set to true, only elements are checked
      *
-     * @param boolean $elements_only
+     * @param boolean $elementsOnly
      * @return boolean
      */
     function isValid($elementsOnly = false);
@@ -46,63 +55,62 @@ interface BasketInterface
     /**
      * set the Delivery method
      *
-     * @param Delivery $method
+     * @param \Sonata\Component\Delivery\DeliveryInterface $method
      */
     function setDeliveryMethod(DeliveryInterface $method = null);
 
     /**
      *
-     *
-     * @return Delivery
+     * @return \Sonata\Component\Delivery\DeliveryInterface
      */
     function getDeliveryMethod();
 
     /**
      * set the Delivery address
      *
-     * @param Address $address
+     * @param \Sonata\Component\Customer\AddressInterface $address
      */
     function setDeliveryAddress(AddressInterface $address = null);
 
     /**
      *
      *
-     * @return Address
+     * @return \Sonata\Component\Customer\AddressInterface
      */
     function getDeliveryAddress();
 
     /**
      * set Payment method
      *
-     * @param Payment $method
+     * @param \Sonata\Component\Payment\PaymentInterface $method
      */
     function setPaymentMethod(PaymentInterface $method = null);
 
     /**
      *
      *
-     * @return Payment
+     * @return \Sonata\Component\Payment\PaymentInterface
      */
     function getPaymentMethod();
 
     /**
      * set the Payment address
      *
-     * @param Address $address
+     * @param \Sonata\Component\Customer\AddressInterface $address
      */
     function setPaymentAddress(AddressInterface $address = null);
 
     /**
      *
      *
-     * @return Address
+     * @return \Sonata\Component\Customer\AddressInterface
      */
     function getPaymentAddress();
 
     /**
      * Check if the product can be added to the basket
      *
-     * @param Product $product
+     * @param \Sonata\Component\Product\ProductInterface $product
      *
      * @return boolean
      */
@@ -111,6 +119,9 @@ interface BasketInterface
     /**
      * reset basket
      *
+     * @abstract
+     * @param bool $full
+     * @return void
      */
     function reset($full = true);
 
@@ -146,8 +157,8 @@ interface BasketInterface
     /**
      * return the BasketElement depends on the $product or the position from the element stacks
      *
-     * @param mixed $product
-     *
+     * @abstract
+     * @param \Sonata\Component\Product\ProductInterface $product
      * @return BasketElementInterface
      */
     function getElement(ProductInterface $product);
@@ -182,8 +193,8 @@ interface BasketInterface
      * if $recurrent_only = true, return price for recurent product only
      * if $recurrent_only = false, return price for non recurent product only
      *
-     * @param boolean $tva
-     * @param boolean $recurrent_only
+     * @param boolean $vat
+     * @param boolean $recurrentOnly
      *
      * @return float
      */
@@ -199,7 +210,7 @@ interface BasketInterface
      * return the Delivery price
      *
      *
-     * @param Boolean $tva
+     * @param boolean $vat
      * @return float
      */
     function getDeliveryPrice($vat = false);
@@ -207,7 +218,7 @@ interface BasketInterface
     /**
      * check if the basket contains $product
      *
-     * @param Product $product
+     * @param \Sonata\Component\Product\ProductInterface $product
      * @return boolean
      */
     function hasProduct(ProductInterface $product);
@@ -232,9 +243,9 @@ interface BasketInterface
 
     function getPaymentAddressId();
 
-    function setPaymentMethodCode($paymentMethodCode);
-
     function getPaymentMethodCode();
+
+    function getDeliveryMethodCode();
 
     function setCustomer(CustomerInterface $customer);
 

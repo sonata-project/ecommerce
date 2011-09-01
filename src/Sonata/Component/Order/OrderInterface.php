@@ -517,8 +517,17 @@ interface OrderInterface
      */
     function getUser();
 
+    /**
+     * @abstract
+     * @return void
+     */
     function getOrderElements();
 
+    /**
+     * @abstract
+     * @param OrderElementInterface $orderElement
+     * @return void
+     */
     function addOrderElement(OrderElementInterface $orderElement);
 
     /**
@@ -572,6 +581,11 @@ interface OrderInterface
      */
     function addOrderElements(OrderElementInterface $orderElements);
 
+    /**
+     * @abstract
+     * @param $orderElements
+     * @return array
+     */
     function setOrderElements($orderElements);
 
     /**

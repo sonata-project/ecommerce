@@ -515,7 +515,6 @@ class Basket implements \Serializable, BasketInterface
             'basketElements'        => $this->getBasketElements(),
             'pos'                   => $this->pos,
             'deliveryAddressId'     => $this->deliveryAddressId,
-            'deliveryMethod'        => $this->deliveryMethod,
             'paymentAddressId'      => $this->paymentAddressId,
             'paymentMethodCode'     => $this->paymentMethodCode,
             'cptElement'            => $this->cptElement,
@@ -533,7 +532,6 @@ class Basket implements \Serializable, BasketInterface
             'basketElements',
             'pos',
             'deliveryAddressId',
-            'deliveryMethod',
             'deliveryMethodCode',
             'paymentAddressId',
             'paymentMethodCode',
@@ -582,20 +580,19 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param string $paymentMethodCode
-     * @return void
-     */
-    public function setPaymentMethodCode($paymentMethodCode)
-    {
-        $this->paymentMethodCode = $paymentMethodCode;
-    }
-
-    /**
      * @return
      */
     public function getPaymentMethodCode()
     {
         return $this->paymentMethodCode;
+    }
+
+    /**
+     * @return string
+     */
+    function getDeliveryMethodCode()
+    {
+        return $this->deliveryMethod;
     }
 
     /**
