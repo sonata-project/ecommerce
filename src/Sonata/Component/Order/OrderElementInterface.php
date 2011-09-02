@@ -104,16 +104,29 @@ interface OrderElementInterface
     /**
      * Set serialize
      *
-     * @param text $serialize
+     * @param text $options
      */
-    function setSerialize($serialize);
+    function setOptions($options);
 
     /**
      * Get serialize
      *
-     * @return text $serialize
+     * @return text $options
      */
-    function getSerialize();
+    function getOptions();
+
+    /**
+     * @abstract
+     * @param $rawProduct
+     * @return void
+     */
+    function setRawProduct($rawProduct);
+
+    /**
+     * @abstract
+     * @return void
+     */
+    function getRawProduct();
 
     /**
      * Set status

@@ -80,42 +80,30 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setStatus(OrderInterface::STATUS_PENDING);
         $orderElement->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
         $orderElement->setCreatedAt(new \DateTime);
-
-        // todo : create a serialized version of the product element
-        $orderElement->setSerialize(array('todo'));
-
-        // we save product information
-//        foreach ($product->toArray(false) as $name => $value)
-//        {
-//          if (is_null($value) || strlen(trim($value)) == 0)
-//          {
-//            continue;
-//          }
-//
-//          $orderElement_option = new OrderElementOption;
-//          $orderElement_option->setName('product_'.$name);
-//          $orderElement_option->setValue($value);
-//
-//          $orderElement->addOption($orderElement_option);
-//        }
-
-//        $orderElement_option = new OrderElementOption;
-//        $orderElement_option->setName('product_is_recurrent');
-//        $orderElement_option->setValue($product->isRecurrentPayment() ? '1' : '0');
-
-//        // we save basketElement options
-//        foreach ($basketElement->getOptions() as $name => $value)
-//        {
-//          $orderElement_option = new OrderElementOption;
-//          $orderElement_option->setName($name);
-//          $orderElement_option->setValue($value);
-//
-//          $orderElement->addOption($orderElement_option);
-//        }
+        $orderElement->setOptions($basketElement->getOptions());
+        $orderElement->setRawProduct($this->getRawProduct($product));
 
         return $orderElement;
     }
 
+    /**
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @return array
+     */
+    public function getRawProduct(ProductInterface $product)
+    {
+        $data = array(
+            'id'          => $product->getId(),
+            'description' => $product->getDescription(),
+            'name'        => $product->getName(),
+            'price'       => $product->getPrice(),
+            'vat'         => $product->getVat(),
+            'enabled'     => $product->getEnabled(),
+            'options'     => $product->getOptions(),
+        );
+
+        return $data;
+    }
 
     ////////////////////////////////////////////////
     //   VARIATION RELATED FUNCTIONS

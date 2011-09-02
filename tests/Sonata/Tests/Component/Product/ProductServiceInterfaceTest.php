@@ -46,11 +46,11 @@ class ProductServiceInterfaceTest extends \PHPUnit_Framework_TestCase
     public function testOrderElement()
     {
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-        $product->expects($this->exactly(2))->method('getId')->will($this->returnValue(42));
-        $product->expects($this->once())->method('getName')->will($this->returnValue('Product name'));
-        $product->expects($this->once())->method('getPrice')->will($this->returnValue(9.99));
-        $product->expects($this->once())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
-        $product->expects($this->once())->method('getDescription')->will($this->returnValue('product description'));
+        $product->expects($this->exactly(3))->method('getId')->will($this->returnValue(42));
+        $product->expects($this->exactly(2))->method('getName')->will($this->returnValue('Product name'));
+        $product->expects($this->exactly(2))->method('getPrice')->will($this->returnValue(9.99));
+        $product->expects($this->exactly(2))->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
+        $product->expects($this->exactly(2))->method('getDescription')->will($this->returnValue('product description'));
 
 
         $basketElement = new BasketElement();

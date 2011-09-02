@@ -10,7 +10,8 @@
         <field name="vat"               type="decimal"      column="vat"            scale="4"/>
         <field name="designation"       type="string"       column="designation"    length="255"/>
         <field name="description"       type="text"         column="description"    />
-        <field name="serialize"         type="array"        column="serialize"      nullable="true"/>
+        <field name="options"           type="array"        column="options"          nullable="true"/>
+        <field name="rawProduct"        type="array"        column="raw_product"      nullable="true"/>
         <field name="status"            type="integer"      column="status"/>
         <field name="deliveryStatus"    type="integer"      column="delivery_status"/>
         <field name="validatedAt"       type="datetime"     column="validated_at" nullable="true"/>

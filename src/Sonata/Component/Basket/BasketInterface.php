@@ -128,7 +128,7 @@ interface BasketInterface
     /**
      * return BasketElements
      *
-     * @return array BasketElement
+     * @return \Sonata\Component\Basket\BasketElementInterface[]
      */
     function getBasketElements();
 

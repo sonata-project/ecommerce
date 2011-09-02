@@ -42,9 +42,14 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $description;
 
     /**
-     * @var text $serialize
+     * @var array $options
      */
-    protected $serialize;
+    protected $options;
+
+    /**
+     * @var array $options
+     */
+    protected $rawProduct;
 
     /**
      * @var integer $productId
@@ -79,6 +84,12 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $createdAt;
 
     protected $updatedAt;
+
+    public function __construct()
+    {
+        $this->rawProduct = array();
+        $this->options = array();
+    }
 
     /**
      * Set order
@@ -198,26 +209,6 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set serialize
-     *
-     * @param text $serialize
-     */
-    public function setSerialize($serialize)
-    {
-        $this->serialize = $serialize;
-    }
-
-    /**
-     * Get serialize
-     *
-     * @return text $serialize
-     */
-    public function getSerialize()
-    {
-        return $this->serialize;
     }
 
     /**
@@ -358,5 +349,37 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param array $options
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $rawProduct
+     */
+    public function setRawProduct($rawProduct)
+    {
+        $this->rawProduct = $rawProduct;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRawProduct()
+    {
+        return $this->rawProduct;
     }
 }

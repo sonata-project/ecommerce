@@ -144,10 +144,4 @@ interface TransactionInterface
      * @return string
      */
     function getPaymentCode();
-
-    /**
-     * @abstract
-     * @return string
-     */
-    function getStatus();
 }
