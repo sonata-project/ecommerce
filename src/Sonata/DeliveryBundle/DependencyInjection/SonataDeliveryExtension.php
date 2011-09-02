@@ -57,9 +57,14 @@ class SonataDeliveryExtension extends Extension
 
             $name    = isset($options['name']) ? (string)$options['name'] : "n/a";
             $enabled = isset($options['enabled']) ? (bool)$options['enabled'] : true;
+            $code      = isset($options['code']) ? $options['code'] : false;
+
+            if (!$code) {
+                throw new \RuntimeException('Please provide an id argument to the delivery name');
+            }
 
             $definition->addMethodCall('setName', array($name));
-            $definition->addMethodCall('setCode', array($id));
+            $definition->addMethodCall('setCode', array($code));
             $definition->addMethodCall('setEnabled', array($enabled));
 
             // add the delivery method in the method pool

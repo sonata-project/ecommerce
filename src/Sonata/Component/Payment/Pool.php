@@ -43,7 +43,7 @@ class Pool
     /**
      * return a Delivery Object
      *
-     * @param  $code
+     * @param string $code
      * @return Sonata\Component\Payment\PaymentInterface
      */
     public function getMethod($code)

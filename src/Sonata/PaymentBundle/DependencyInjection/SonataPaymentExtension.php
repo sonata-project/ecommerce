@@ -72,6 +72,12 @@ class SonataPaymentExtension extends Extension
             $name     = isset($settings['name']) ? $settings['name'] : 'n/a';
             $options  = isset($settings['options']) ? $settings['options'] : array();
 
+            $code  = isset($settings['code']) ? $settings['code'] : false;
+
+            if (!$code) {
+                throw new \RuntimeException('Please provide a code for the payment handler');
+            }
+
             if (!$enabled) {
                 $container->removeDefinition($id);
                 continue;
@@ -80,7 +86,7 @@ class SonataPaymentExtension extends Extension
             $definition = $container->getDefinition($id);
 
             $definition->addMethodCall('setName', array($name));
-            $definition->addMethodCall('setCode', array($id));
+            $definition->addMethodCall('setCode', array($code));
             $definition->addMethodCall('setEnabled', array($enabled));
             $definition->addMethodCall('setOptions', array($options));
 
