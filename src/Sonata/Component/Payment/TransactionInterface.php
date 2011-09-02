@@ -73,7 +73,7 @@ interface TransactionInterface
 
     /**
      *
-     * @param integer $transactionId
+     * @return integer
      */
     function getTransactionId();
 
@@ -128,7 +128,7 @@ interface TransactionInterface
 
     /**
      * @abstract
-     * @return DateTime
+     * @return \DateTime
      */
     function getCreatedAt();
 
@@ -141,7 +141,13 @@ interface TransactionInterface
 
     /**
      * @abstract
-     * @return void
+     * @return string
      */
     function getPaymentCode();
+
+    /**
+     * @abstract
+     * @return string
+     */
+    function getStatus();
 }

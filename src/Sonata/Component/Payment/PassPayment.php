@@ -17,15 +17,22 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Buzz\Browser;
 
 class PassPayment extends BasePayment
 {
-
     protected $router;
 
-    public function __construct(RouterInterface $router)
+    protected $browser;
+
+    /**
+     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param \Buzz\Browser $browser
+     */
+    public function __construct(RouterInterface $router, Browser $browser = null)
     {
         $this->router = $router;
+        $this->browser = $browser;
     }
 
     /**
@@ -94,7 +101,9 @@ class PassPayment extends BasePayment
      */
     function sendConfirmationReceipt(TransactionInterface $transaction)
     {
-        return new Response();
+        $transaction->setStatusCode(TransactionInterface::STATE_OK);
+
+        return new Response('ok');
     }
 
     /**
@@ -112,8 +121,19 @@ class PassPayment extends BasePayment
      */
     public function callbank(OrderInterface $order)
     {
+        // call the callback handler ...
+        $response = $this->browser->get($this->router->generate($this->getOption('url_callback'), array(), true));
+
+        $url = $response->getContent() == 'ok' ? 'url_return_ok' : 'url_return_ko';
+
+        $params = array(
+            'bank' => $this->getCode(),
+            'reference' => $order->getReference(),
+        );
+
+        // redirect the user to the correct page
         $response = new Response('', 302, array(
-            'Location' => $this->router->generate($this->getOption('url_return_ok'), array(), true)
+            'Location' => $this->router->generate($url, $params, true)
         ));
         $response->setPrivate();
 

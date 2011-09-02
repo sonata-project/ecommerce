@@ -13,6 +13,11 @@ namespace Sonata\Tests\Component\Payment;
 
 use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Payment\Pool;
+use Buzz\Message\Response;
+use Buzz\Message\Request;
+use Buzz\Browser;
+use Buzz\Client\ClientInterface;
+use Buzz\Client\Mock\FIFO;
 
 class PassPaymentTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,23 +29,23 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
     public function testPassPayment()
     {
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
-        $router->expects($this->once())->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
+        $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
-        $payment = new PassPayment($router);
+        $response = new Response;
+        $response->setContent('ok');
+
+        $client = new FIFO;
+        $client->sendToQueue($response);
+
+        $browser = new Browser($client);
+        $payment = new PassPayment($router, $browser);
         $payment->setCode('free_1');
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(function($name) {
-            if ($name == 'reference') {
-                return '0001231';
-            }
 
-            if ($name == 'transaction_id') {
-                return 1;
-            }
-        }));
+        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(array($this, 'callback')));
 
         $transaction->expects($this->once())->method('setTransactionId');
 
@@ -63,5 +68,16 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($payment->getOrderReference($transaction), '0001231');
 
         $payment->applyTransactionId($transaction);
+    }
+
+    public function callback($name)
+    {
+        if ($name == 'reference') {
+            return '0001231';
+        }
+
+        if ($name == 'transaction_id') {
+            return 1;
+        }
     }
 }

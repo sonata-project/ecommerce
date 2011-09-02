@@ -14,6 +14,7 @@ use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 abstract class BasePayment implements PaymentInterface
 {
@@ -33,10 +34,10 @@ abstract class BasePayment implements PaymentInterface
 
     protected $description;
 
-
     /**
-    * Generate a check value
-    */
+     * @param \Sonata\Component\Order\OrderInterface $order
+     * @return string
+     */
     public function generateUrlCheck(OrderInterface $order)
     {
         return sha1(
@@ -67,16 +68,28 @@ abstract class BasePayment implements PaymentInterface
         $this->name = $name;
     }
 
-    public function setOptions($options)
+    /**
+     * @param $options
+     * @return void
+     */
+    public function setOptions(array $options)
     {
         $this->options = $options;
     }
 
+    /**
+     * @return
+     */
     public function getOptions()
     {
         return $this->options;
     }
 
+    /**
+     * @param string $name
+     * @param null $default
+     * @return null
+     */
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
@@ -102,11 +115,18 @@ abstract class BasePayment implements PaymentInterface
         return $value;
     }
 
-    public function setLogger($logger)
+    /**
+     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @return void
+     */
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
+    /**
+     * @return \Symfony\Component\HttpKernel\Log\LoggerInterface
+     */
     public function getLogger()
     {
         return $this->logger;
@@ -171,21 +191,35 @@ abstract class BasePayment implements PaymentInterface
         return $response;
     }
 
+    /**
+     * @param boolean $enabled
+     * @return void
+     */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
 
+    /**
+     * @return boolean
+     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
+    /**
+     * @param string $description
+     * @return void
+     */
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
+    /**
+     * @return
+     */
     public function getDescription()
     {
         return $this->description;
