@@ -18,7 +18,19 @@ use Buzz\Message\Request;
 use Buzz\Browser;
 use Buzz\Client\ClientInterface;
 use Buzz\Client\Mock\FIFO;
+use Sonata\OrderBundle\Entity\BaseOrder;
 
+class PassPaymentTest_Order extends BaseOrder
+{
+    /**
+     * @return integer the order id
+     */
+    function getId()
+    {
+        // TODO: Implement getId() method.
+    }
+
+}
 class PassPaymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -43,24 +55,38 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
-
         $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(array($this, 'callback')));
-
         $transaction->expects($this->once())->method('setTransactionId');
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $date = new \DateTime();
+        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+
+        $order = new PassPaymentTest_Order;
+        $order->setCreatedAt($date);
+
 
         $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
-        $this->assertTrue($payment->isCallbackValid($transaction));
 
+        $this->assertFalse($payment->isCallbackValid($transaction));
+        $this->assertFalse($payment->sendConfirmationReceipt($transaction));
+
+
+        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
+
+        $this->assertTrue($payment->isCallbackValid($transaction));
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
+
+
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
 
         $response = $payment->callbank($order);
+
         $this->assertTrue($response->headers->has('Location'));
         $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));
         $this->assertFalse($response->isCacheable());
@@ -78,6 +104,10 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
 
         if ($name == 'transaction_id') {
             return 1;
+        }
+
+        if ($name == 'check') {
+            return '1d4b8187e3b9dbad8336b253176ba3284760757b';
         }
     }
 }

@@ -111,6 +111,11 @@ class PaymentController extends Controller
         }
 
         if (!$basket->isValid()) {
+            $this->get('session')->setFlash(
+                'error',
+                $this->container->get('translator')->trans('basket_not_valid', array(), 'SonataPaymentBundle')
+            );
+
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
@@ -119,8 +124,8 @@ class PaymentController extends Controller
         // check if the basket is valid/compatible with the bank gateway
         if (!$payment->isBasketValid($basket)) {
             $this->get('session')->setFlash(
-                'notice',
-                $this->container->get('translator')->trans('sonata.payment.basket_not_valid_with_current_payment_method', array(), 'SonataPaymentBundle')
+                'error',
+                $this->container->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'SonataPaymentBundle')
             );
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));
@@ -167,12 +172,17 @@ class PaymentController extends Controller
 
         $transaction->setOrder($order);
 
+        // check if the callback is valid
         if (!$payment->isCallbackValid($transaction)) {
             // ask the payment handler the error
             return $payment->handleError($transaction);
         }
 
         $response = $payment->sendConfirmationReceipt($transaction);
+
+        if ($transaction->getState() == TransactionInterface::STATE_KO) {
+            return $payment->handleError($transaction);
+        }
 
         $this->getTransactionManager()->save($transaction);
         $this->getOrderManager()->save($transaction->getOrder());

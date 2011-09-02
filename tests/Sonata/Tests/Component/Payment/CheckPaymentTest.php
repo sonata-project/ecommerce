@@ -50,10 +50,18 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
 
+        $date = new \DateTime();
+        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+
+        $order = new CheckPaymentTest_Order;
+        $order->setCreatedAt($date);
+
+        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(array($this, 'callback')));
         $transaction->expects($this->once())->method('setTransactionId');
+        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
@@ -70,7 +78,12 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 
     public function testCallbank()
     {
+        $date = new \DateTime();
+        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+
         $order = new CheckPaymentTest_Order;
+        $order->setCreatedAt($date);
 
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
@@ -107,13 +120,12 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 
         // first call : the order is not set
         $response = $payment->sendConfirmationReceipt($transaction);
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
-        $this->assertEquals('ko', $response->getContent());
+        $this->assertFalse($response, '::sendConfirmationReceipt return false on invalid order');
 
         // second call : the order is set
         $response = $payment->sendConfirmationReceipt($transaction);
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
-        $this->assertEquals('ok', $response->getContent());
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, '::sendConfirmationReceipt return a Response object');
+        $this->assertEquals('ok', $response->getContent(), '::getContent returns ok');
     }
 
     public function callback($name)
@@ -124,6 +136,10 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 
         if ($name == 'transaction_id') {
             return 1;
+        }
+
+        if ($name == 'check') {
+            return '1d4b8187e3b9dbad8336b253176ba3284760757b';
         }
     }
 }

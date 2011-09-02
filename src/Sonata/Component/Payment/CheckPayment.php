@@ -90,7 +90,9 @@ class CheckPayment extends BasePayment
      */
     function handleError(TransactionInterface $transaction)
     {
-        return new Response();
+        return new Response('ko', 200, array(
+            'Content-Type' => 'text/plain',
+        ));
     }
 
     /**
@@ -106,7 +108,7 @@ class CheckPayment extends BasePayment
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_UNKNOWN);
 
-            return new Response('ko');
+            return false;
         }
 
         $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
@@ -116,7 +118,10 @@ class CheckPayment extends BasePayment
         $order->setPaymentStatus(TransactionInterface::STATUS_PENDING);
         $order->setValidatedAt($transaction->getCreatedAt());
 
-        return new Response('ok');
+        return new Response('ok', 200, array(
+            'Content-Type' => 'text/plain',
+        ));
+
     }
 
     /**
@@ -125,7 +130,18 @@ class CheckPayment extends BasePayment
      */
     public function isCallbackValid(TransactionInterface $transaction)
     {
-        return true;
+        if (!$transaction->getOrder()) {
+            return false;
+        }
+
+        if ($transaction->get('check') == $this->generateUrlCheck($transaction->getOrder())) {
+            return true;
+        }
+
+        $transaction->setState(TransactionInterface::STATE_KO);
+        $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
+
+        return false;
     }
 
     /**
@@ -137,7 +153,7 @@ class CheckPayment extends BasePayment
         $params = array(
             'bank'       => $this->getCode(),
             'reference'  => $order->getReference(),
-            'hash'       => $this->generateUrlCheck($order)
+            'check'      => $this->generateUrlCheck($order)
         );
 
         // call the callback handler ...
@@ -149,7 +165,8 @@ class CheckPayment extends BasePayment
 
         // redirect the user to the correct page
         $response = new Response('', 302, array(
-            'Location' => $this->router->generate($this->getOption($routeName), $params, true)
+            'Location' => $this->router->generate($this->getOption($routeName), $params, true),
+            'Content-Type' => 'text/plain',
         ));
         $response->setPrivate();
 
