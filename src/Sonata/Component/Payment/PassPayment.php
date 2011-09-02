@@ -111,6 +111,7 @@ class PassPayment extends BasePayment
         $transaction->setStatusCode(TransactionInterface::STATE_OK);
         $order->setStatus(OrderInterface::STATUS_VALIDATED);
         $order->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
+        $order->setValidatedAt($transaction->getCreatedAt());
 
         return new Response('ok');
     }

@@ -111,6 +111,7 @@ class CheckPayment extends BasePayment
         $transaction->setStatusCode(TransactionInterface::STATE_OK);
         $order->setStatus(OrderInterface::STATUS_PENDING);
         $order->setPaymentStatus(TransactionInterface::STATUS_PENDING);
+        $order->setValidatedAt($transaction->getCreatedAt());
 
         return new Response('ok');
     }
