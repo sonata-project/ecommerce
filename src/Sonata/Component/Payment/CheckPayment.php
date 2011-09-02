@@ -19,7 +19,7 @@ use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Buzz\Browser;
 
-class PassPayment extends BasePayment
+class CheckPayment extends BasePayment
 {
     protected $router;
 
@@ -29,7 +29,7 @@ class PassPayment extends BasePayment
      * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Buzz\Browser $browser
      */
-    public function __construct(RouterInterface $router, Browser $browser = null)
+    public function __construct(RouterInterface $router, Browser $browser)
     {
         $this->router = $router;
         $this->browser = $browser;
@@ -109,8 +109,8 @@ class PassPayment extends BasePayment
         }
 
         $transaction->setStatusCode(TransactionInterface::STATE_OK);
-        $order->setStatus(OrderInterface::STATUS_VALIDATED);
-        $order->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
+        $order->setStatus(OrderInterface::STATUS_PENDING);
+        $order->setPaymentStatus(TransactionInterface::STATUS_PENDING);
 
         return new Response('ok');
     }
