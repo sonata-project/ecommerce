@@ -127,6 +127,7 @@ class Basket implements \Serializable, BasketInterface
     public function setDeliveryMethod(DeliveryInterface $method = null)
     {
         $this->deliveryMethod = $method;
+        $this->deliveryMethodCode = $method->getCode();
     }
 
     /**
@@ -592,7 +593,7 @@ class Basket implements \Serializable, BasketInterface
      */
     function getDeliveryMethodCode()
     {
-        return $this->deliveryMethod;
+        return $this->deliveryMethodCode;
     }
 
     /**

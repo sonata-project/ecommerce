@@ -109,9 +109,9 @@ class Loader
 
                 // load the payment address
                 $paymentAddressId = $basket->getPaymentAddressId();
+
                 if ($paymentAddressId) {
                     $address = $this->addressManager->findOneBy(array('id' => $paymentAddressId));
-
                     $basket->setPaymentAddress($address);
                 }
 
@@ -135,9 +135,10 @@ class Loader
 //                $basket->reset();
             }
 
-            $this->getSession()->set('sonata/basket', $basket);
 
             $this->basket = $basket;
+
+            $this->getSession()->set('sonata/basket', $this->basket);
         }
 
         return $this->basket;
