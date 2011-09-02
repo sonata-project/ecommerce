@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- define clients -->
+        <service id="sonata.payment.browser.client.curl" class="Buzz\Client\Curl" public="false"/>
+
+        <service id="sonata.payment.browser.client.file_get_content" class="Buzz\Client\FileGetContents" public="false"/>
+
+        <!-- define browser -->
+        <service id="sonata.payment.browser.curl" class="Buzz\Browser" public="false">
+            <argument type="service" id="sonata.payment.browser.client.curl"/>
+        </service>
+
+        <service id="sonata.payment.browser.file_get_content" class="Buzz\Browser" public="false">
+            <argument type="service" id="sonata.payment.browser.client.file_get_content"/>
+        </service>
+    </services>
+
+</container>

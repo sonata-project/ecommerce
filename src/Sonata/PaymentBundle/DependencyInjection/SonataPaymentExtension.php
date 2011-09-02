@@ -41,6 +41,7 @@ class SonataPaymentExtension extends Extension
         $loader->load('generator.xml');
         $loader->load('transformer.xml');
         $loader->load('selector.xml');
+        $loader->load('browser.xml');
 
         $config = call_user_func_array('array_merge_recursive', $config);
 
@@ -89,6 +90,18 @@ class SonataPaymentExtension extends Extension
 
             // add the delivery method in the method pool
             $pool->addMethodCall('addMethod', array(new Reference($id)));
+        }
+
+        if (isset($services['sonata.payment.method.pass'])) {
+            $browser = isset($services['sonata.payment.method.pass']['browser']) ? $services['sonata.payment.method.pass']['browser'] : 'sonata.payment.browser.curl';
+            $container->getDefinition('sonata.payment.method.pass')
+                ->replaceArgument(1, new Reference($browser));
+        }
+
+        if (isset($services['sonata.payment.method.check'])) {
+            $browser = isset($services['sonata.payment.method.check']['browser']) ? $services['sonata.payment.method.check']['browser'] : 'sonata.payment.browser.curl';
+            $container->getDefinition('sonata.payment.method.check')
+                ->replaceArgument(1, new Reference($browser));
         }
     }
 

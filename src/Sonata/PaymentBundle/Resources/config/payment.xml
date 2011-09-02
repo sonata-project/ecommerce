@@ -16,10 +16,18 @@
             <argument type="service" id="translator" on-invalid="null"/>
         </service>
 
+        <service id="sonata.payment.method.check" class="Sonata\Component\Payment\CheckPayment">
+            <tag name="sonata.payment.method" />
+
+            <argument type="service" id="router" />
+            <argument />
+        </service>
+
         <service id="sonata.payment.method.pass" class="Sonata\Component\Payment\PassPayment">
             <tag name="sonata.payment.method" />
 
             <argument type="service" id="router" />
+            <argument />
         </service>
     </services>
 
