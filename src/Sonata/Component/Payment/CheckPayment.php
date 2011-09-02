@@ -103,12 +103,15 @@ class CheckPayment extends BasePayment
     {
         $order = $transaction->getOrder();
         if (!$order) {
-            $transaction->setStatusCode(TransactionInterface::STATE_KO);
+            $transaction->setState(TransactionInterface::STATE_KO);
+            $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_UNKNOWN);
 
             return new Response('ko');
         }
 
-        $transaction->setStatusCode(TransactionInterface::STATE_OK);
+        $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
+        $transaction->setState(TransactionInterface::STATE_OK);
+
         $order->setStatus(OrderInterface::STATUS_PENDING);
         $order->setPaymentStatus(TransactionInterface::STATUS_PENDING);
         $order->setValidatedAt($transaction->getCreatedAt());
@@ -131,20 +134,22 @@ class CheckPayment extends BasePayment
      */
     public function callbank(OrderInterface $order)
     {
-        // call the callback handler ...
-        $response = $this->browser->get($this->router->generate($this->getOption('url_callback'), array(), true));
-
-        $url = $response->getContent() == 'ok' ? 'url_return_ok' : 'url_return_ko';
-
         $params = array(
-            'bank'           => $this->getCode(),
-            'reference'      => $order->getReference(),
-            'transaction_id' => $this->getTransactionId()
+            'bank'       => $this->getCode(),
+            'reference'  => $order->getReference(),
+            'hash'       => $this->generateUrlCheck($order)
         );
+
+        // call the callback handler ...
+        $url = $this->router->generate($this->getOption('url_callback'), $params, true);
+
+        $response = $this->browser->get($url);
+
+        $routeName = $response->getContent() == 'ok' ? 'url_return_ok' : 'url_return_ko';
 
         // redirect the user to the correct page
         $response = new Response('', 302, array(
-            'Location' => $this->router->generate($url, $params, true)
+            'Location' => $this->router->generate($this->getOption($routeName), $params, true)
         ));
         $response->setPrivate();
 
@@ -166,6 +171,6 @@ class CheckPayment extends BasePayment
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {
-        $transaction->setTransactionId($transaction->get('transaction_id'));
+        $transaction->setTransactionId('n/a');
     }
 }

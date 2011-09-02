@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Sonata\TransactionBundle\Entity;
+namespace Sonata\PaymentBundle\Entity;
 
 use Sonata\Component\Payment\TransactionManagerInterface;
 use Sonata\Component\Payment\TransactionInterface;
@@ -25,10 +25,6 @@ class TransactionManager implements TransactionManagerInterface
     {
         $this->em    = $em;
         $this->class = $class;
-
-        if(class_exists($class)) {
-            $this->repository = $this->em->getRepository($class);
-        }
     }
 
     /**
@@ -44,9 +40,17 @@ class TransactionManager implements TransactionManagerInterface
     }
 
     /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->em->getRepository($this->class);
+    }
+
+    /**
      * Updates a transaction
      *
-     * @param Transaction $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return void
      */
     public function save(TransactionInterface $transaction)
@@ -73,7 +77,7 @@ class TransactionManager implements TransactionManagerInterface
      */
     public function findOneBy(array $criteria)
     {
-        return $this->repository->findOneBy($criteria);
+        return $this->getRepository()->findOneBy($criteria);
     }
 
     /**
@@ -84,13 +88,13 @@ class TransactionManager implements TransactionManagerInterface
      */
     public function findBy(array $criteria)
     {
-        return $this->repository->findBy($criteria);
+        return $this->getRepository()->findBy($criteria);
     }
 
     /**
      * Deletes a transaction
      *
-     * @param Transaction $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return void
      */
     public function delete(TransactionInterface $transaction)

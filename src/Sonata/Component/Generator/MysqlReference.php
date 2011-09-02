@@ -27,7 +27,9 @@ class MysqlReference implements ReferenceInterface
     /**
      * Append a valid reference number to the invoice, the order must be persisted first
      *
-     * @param Invoice $invoice
+     * @throws \RuntimeException
+     * @param \Sonata\Component\Invoice\InvoiceInterface $invoice
+     * @return void
      */
     public function invoice(InvoiceInterface $invoice)
     {
@@ -44,7 +46,9 @@ class MysqlReference implements ReferenceInterface
     /**
      * Append a valid reference number to the order, the order must be persisted first
      *
-     * @param Order $order
+     * @throws \RuntimeException
+     * @param \Sonata\Component\Order\OrderInterface $order
+     * @return void
      */
     public function order(OrderInterface $order)
     {
