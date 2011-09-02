@@ -14,29 +14,24 @@ namespace Sonata\PaymentBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Payment\PaymentInterface;
+use Sonata\Component\Order\OrderInterface;
 
 class PaymentController extends Controller
 {
     public function errorAction()
     {
-        $request    = $this->get('request');
-        $bank       = $request->get('bank');
-        $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
-        $transaction = $this->get('sonata.transaction.manager')->create();
-        $orderManager = $this->get('sonata.order.manager');
+        // retrieve the payment handler
+        $payment    = $this->getPaymentHandler();
 
-        // build the transaction
-        $transaction->setPaymentCode($bank);
-        $transaction->setCreatedAt(new \DateTime);
-        $transaction->setParameters(array_replace($request->query->all(), $request->request->all()));
-
-        // set the transaction reference
-        $payment->applyTransactionId($transaction);
+        // retrieve the transaction
+        $transaction = $this->createTransaction($payment);
 
         // retrieve the related order
         $reference  = $payment->getOrderReference($transaction);
 
-        $order      = $orderManager->findOneby(array(
+        $order      = $this->getOrderManager()->findOneby(array(
             'reference' => $reference
         ));
 
@@ -52,10 +47,10 @@ class PaymentController extends Controller
         }
 
         // ask the payment handler the error
-        $payment->handleError($transaction);
+        $response = $payment->handleError($transaction);
 
         // save the payment transaction
-        $orderManager->save($transaction);
+        $this->getOrderManager()->save($transaction);
 
         // todo : should I close the order at this point ?
         //        or this logic should be handle by the payment method
@@ -64,8 +59,6 @@ class PaymentController extends Controller
         $basket = $this->get('sonata.basket');
 
         $customer = $basket->getCustomer();
-
-        $basket->reset();
 
         $basket   = $payment->getTransformer('order')->transformIntoBasket($customer, $order, $basket);
 
@@ -151,30 +144,25 @@ class PaymentController extends Controller
     /**
      * this action handler the callback sent from the bank
      *
-     * @return void
+     * @return Response
      */
     public function callbackAction()
     {
-        $request    = $this->get('request');
-        $bank       = $request->get('bank');
-        $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
+        // retrieve the payment handler
+        $payment = $this->getPaymentHandler();
 
         // build the transaction
-        $transaction = $this->get('sonata.transaction.manager')->create();
-        $transaction->setPaymentCode($bank);
-        $transaction->setCreatedAt(new \DateTime);
-        $transaction->setParameters(array_replace($request->query->all(), $request->request->all()));
-
-        // set the transaction reference
-        $payment->applyTransactionId($transaction);
+        $transaction = $this->createTransaction($payment);
 
         // retrieve the related order
         $reference  = $payment->getOrderReference($transaction);
-        $em         = $this->get('doctrine.orm.entity_manager');
-        $order      = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
 
-        if (!$order) {
-            throw new NotFoundHttpException(sprintf('Order %s', $reference));
+        $order = $this->getOrderManager()->findOneBy(array(
+            'reference' => $reference
+        ));
+
+        if (!$order instanceof OrderInterface) {
+            throw new NotFoundHttpException(sprintf('Unable to find the Order %s', $reference));
         }
 
         $transaction->setOrder($order);
@@ -186,10 +174,55 @@ class PaymentController extends Controller
 
         $response = $payment->sendConfirmationReceipt($transaction);
 
-        $em = $this->get('doctrine.orm.entity_manager'); // todo : find a way to know which EM is linked to the order
-        $em->persist($transaction);
-        $em->flush();
+        $this->getTransactionManager()->save($transaction);
+        $this->getOrderManager()->save($transaction->getOrder());
 
         return $response;
+    }
+
+    /**
+     * @param \Sonata\Component\Payment\PaymentInterface $payment
+     * @return \Sonata\Component\Payment\TransactionInterface
+     */
+    public function createTransaction(PaymentInterface $payment)
+    {
+        $transaction = $this->get('sonata.transaction.manager')->create();
+        $transaction->setPaymentCode($payment->getCode());
+        $transaction->setCreatedAt(new \DateTime);
+        $transaction->setParameters(array_replace($this->getRequest()->query->all(), $this->getRequest()->request->all()));
+
+        $payment->applyTransactionId($transaction);
+
+        return $transaction;
+    }
+
+    /**
+     * @return object|\Sonata\Component\Payment\PaymentInterface
+     */
+    public function getPaymentHandler()
+    {
+        $payment = $this->get(sprintf('sonata.payment.method.%s', $this->getRequest()->get('bank')));
+
+        if (!$payment instanceof PaymentInterface) {
+            throw new NotFoundHttpException();
+        }
+
+        return $payment;
+    }
+
+    /**
+     * @return object|\Sonata\Component\Order\OrderManagerInterface
+     */
+    public function getOrderManager()
+    {
+        return $this->get('sonata.order.manager');
+    }
+
+    /**
+     * @return object|\Sonata\Component\Payment\TransactionManagerInterface
+     */
+    public function getTransactionManager()
+    {
+        return $this->get('sonata.transaction.manager');
     }
 }
