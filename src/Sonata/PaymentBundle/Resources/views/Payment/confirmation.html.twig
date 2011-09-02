@@ -9,22 +9,23 @@ file that was distributed with this source code.
 
 #}
 
-{% if order.is_validated %}
-    <h1>{% trans 'title_validation_confirmation_payment' from 'PaymentBundle' %}</h1>
+<div class="sonata-payment-confirmation">
+    {% if order.isvalidated %}
+        <h1>{{ 'title_validation_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</h1>
 
-    <p>
-        {% trans 'message_validation_payment' from 'PaymentBundle' %}
-    </p>
+        <p>
+            {{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}
+        </p>
 
+    {% else %}
 
-{% else %}
+        <h1>{{ 'title_not_validated_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</h1>
 
-    <h1>{% trans 'title_not_validated_confirmation_payment' from 'PaymentBundle' %}</h1>
+        <p>
+            {{ 'message_not_validated_payment'|trans({}, 'SonataPaymentBundle') }}
+        </p>
 
-    <p>
-        {% trans 'message_not_validated_payment' from 'PaymentBundle' %}
-    </p>
+    {% endif %}
 
-{% endif %}
-
-<a href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ order.reference }}</a>
+    <a href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ order.reference }}</a>
+</div>

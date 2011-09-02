@@ -15,5 +15,4 @@
     <route id="sonata_order_download" pattern="/{reference}/download">
         <default key="_controller">SonataOrderBundle:Order:view</default>
     </route>
-
 </routes>

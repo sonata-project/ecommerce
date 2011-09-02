@@ -64,7 +64,7 @@ class PaymentController extends Controller
 
         $this->get('session')->set('sonata/basket', $basket);
 
-        return $this->render('PaymentBundle:Payment:error.html.twig', array(
+        return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
             'order' => $order,
             'basket' => $basket
         ));
@@ -72,25 +72,20 @@ class PaymentController extends Controller
 
     public function confirmationAction()
     {
-        $request    = $this->get('request');
-        $bank       = $request->get('bank');
-        $payment    = $this->get(sprintf('sonata.payment.method.%s', $bank));
-        $transaction = $this->get('sonata.transaction.manager')->create();
-
-        // build the transaction
-        $transaction->setPaymentCode($bank);
-        $transaction->setParameters(array_replace($request->query->all(), $request->request->all()));
+        $payment = $this->getPaymentHandler();
+        $transaction = $this->createTransaction($payment);
 
         $reference = $payment->getOrderReference($transaction);
 
-        $em = $this->get('doctrine.orm.entity_manager');
-        $order = $em->getRepository('OrderBundle:Order')->findOneByReference($reference);
+        $order = $this->getOrderManager()->findOneBy(array(
+            'reference' => $reference
+        ));
 
         if (!$order) {
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
 
-        return $this->render('PaymentBundle:Payment:confirmation.html.twig', array(
+        return $this->render('SonataPaymentBundle:Payment:confirmation.html.twig', array(
             'order' => $order,
         ));
     }
