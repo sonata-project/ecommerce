@@ -65,13 +65,10 @@ class PaymentController extends Controller
         $this->getOrderManager()->save($order);
 
         // rebuilt from the order information
-        $basket = $this->get('sonata.basket');
-
-        $basket = $payment->getTransformer('order')->transformIntoBasket($order, $basket);
+        $payment->getTransformer('order')->transformIntoBasket($order, $this->get('sonata.basket'));
 
         return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
             'order' => $order,
-            'basket' => $basket
         ));
     }
 
@@ -82,12 +79,22 @@ class PaymentController extends Controller
 
         $reference = $payment->getOrderReference($transaction);
 
+        if (!$payment->isRequestValid($transaction)) {
+            throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
+        }
+
         $order = $this->getOrderManager()->findOneBy(array(
             'reference' => $reference
         ));
 
         if (!$order) {
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
+        }
+
+        if (!($order->isValidated() || $order->isPending())) {
+            return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
+                'order' => $order,
+            ));
         }
 
         return $this->render('SonataPaymentBundle:Payment:confirmation.html.twig', array(
