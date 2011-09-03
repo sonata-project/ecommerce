@@ -101,5 +101,5 @@ interface ProductProviderInterface
      * @param bool|ProductInterface $product
      * @return void
      */
-    function createBasketElement(ProductInterface $product = null);
+    function createBasketElement(ProductInterface $product = null, array $options = array());
 }

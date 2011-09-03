@@ -42,16 +42,18 @@ class OrderTransformer extends BaseTransformer
             $provider   = $this->productPool->getProvider($orderElement->getProductType());
             $manager    = $this->productPool->getManager($orderElement->getProductType());
 
-            $product    = $manager->findBy(array('id' => $orderElement->getProductId()));
+            $product    = $manager->findOneBy(array('id' => $orderElement->getProductId()));
 
             if (!$product) {
                 continue;
             }
 
-            $basketElement = $provider->createBasketElement($product);
+            $basketElement = $provider->createBasketElement($product, $orderElement->getOptions());
 
             $provider->basketAddProduct($basket, $product, $basketElement);
         }
+
+        $basket->setCustomer($order->getCustomer());
 
         $basket->buildPrices();
 

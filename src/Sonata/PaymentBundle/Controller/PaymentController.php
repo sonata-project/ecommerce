@@ -20,6 +20,13 @@ use Sonata\Component\Order\OrderInterface;
 
 class PaymentController extends Controller
 {
+    /**
+     * This action is called by the user after the callbank
+     * In most case the order is already cancelled by a previous callback
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
     public function errorAction()
     {
         // retrieve the payment handler
@@ -46,23 +53,21 @@ class PaymentController extends Controller
             throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
         }
 
-        // ask the payment handler the error
-        $response = $payment->handleError($transaction);
+        if ($order->isCancellable()) {
+            $order->setStatus(OrderInterface::STATUS_STOPPED);
+        }
+
+        $transaction->setState(TransactionInterface::STATE_OK);
+        $transaction->setStatusCode(TransactionInterface::STATUS_CANCELLED);
 
         // save the payment transaction
-        $this->getOrderManager()->save($transaction);
+        $this->getTransactionManager()->save($transaction);
+        $this->getOrderManager()->save($order);
 
-        // todo : should I close the order at this point ?
-        //        or this logic should be handle by the payment method
-
-        // reset the basket and rebuilt from the order information
+        // rebuilt from the order information
         $basket = $this->get('sonata.basket');
 
-        $customer = $basket->getCustomer();
-
-        $basket   = $payment->getTransformer('order')->transformIntoBasket($customer, $order, $basket);
-
-        $this->get('session')->set('sonata/basket', $basket);
+        $basket = $payment->getTransformer('order')->transformIntoBasket($order, $basket);
 
         return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
             'order' => $order,

@@ -9,8 +9,8 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{% trans 'title_error_payment' from 'PaymentBundle' %}</h1>
+<h1>{{ 'title_error_payment'|trans({}, 'SonataPaymentBundle') }}</h1>
 
 <p>
-    {% trans 'message_error_payment' from 'PaymentBundle' %}
+    {{ 'message_error_payment'|trans({}, 'SonataPaymentBundle') }}
 </p>
