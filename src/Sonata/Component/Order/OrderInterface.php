@@ -15,7 +15,6 @@ use Sonata\Component\Customer\CustomerInterface;
 
 interface OrderInterface
 {
-
     const STATUS_OPEN       = 0; // created but not validated
     const STATUS_PENDING    = 1; // waiting from action from the user
     const STATUS_VALIDATED  = 2; // the order is validated does not mean the payment is ok

@@ -39,6 +39,7 @@ interface TransactionInterface
     const STATUS_ERROR_VALIDATION = 9;  // something wrong happen when the bank validate the postback
     const STATUS_WRONG_CALLBACK   = 10; // something wrong is sent from the bank. hack or the bank change something ...
     const STATUS_WRONG_REQUEST    = 11; // the callback request is not valid
+    const STATUS_ORDER_NOT_OPEN   = 12; // the order is not open (so a previous transaction already alter the order)
 
     /**
      * @abstract

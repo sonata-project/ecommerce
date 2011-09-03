@@ -930,6 +930,9 @@ abstract class BaseOrder implements OrderInterface
         return in_array($this->getStatus(), array(OrderInterface::STATUS_OPEN));
     }
 
+    /**
+     * @return bool
+     */
     public function isCancellable()
     {
         return $this->isOpen() || $this->isPending();

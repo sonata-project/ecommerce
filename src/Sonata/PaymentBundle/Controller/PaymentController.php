@@ -183,17 +183,8 @@ class PaymentController extends Controller
 
         $transaction->setOrder($order);
 
-        // check if the callback is valid
-        if (!$payment->isCallbackValid($transaction)) {
-            // ask the payment handler the error
-            return $payment->handleError($transaction);
-        }
-
-        $response = $payment->sendConfirmationReceipt($transaction);
-
-        if ($transaction->getState() == TransactionInterface::STATE_KO) {
-            return $payment->handleError($transaction);
-        }
+        // start the payment callback
+        $response = $payment->callback($transaction);
 
         $this->getTransactionManager()->save($transaction);
         $this->getOrderManager()->save($transaction->getOrder());
@@ -209,10 +200,7 @@ class PaymentController extends Controller
     {
         $transaction = $this->get('sonata.transaction.manager')->create();
         $transaction->setPaymentCode($payment->getCode());
-        $transaction->setCreatedAt(new \DateTime);
         $transaction->setParameters(array_replace($this->getRequest()->query->all(), $this->getRequest()->request->all()));
-
-        $payment->applyTransactionId($transaction);
 
         return $transaction;
     }

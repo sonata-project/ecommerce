@@ -90,6 +90,8 @@ class CheckPayment extends BasePayment
      */
     function handleError(TransactionInterface $transaction)
     {
+        $transaction->getOrder()->setPaymentStatus($transaction->getStatusCode());
+
         return new Response('ko', 200, array(
             'Content-Type' => 'text/plain',
         ));

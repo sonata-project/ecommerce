@@ -17,6 +17,12 @@ file that was distributed with this source code.
             {{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}
         </p>
 
+    {% elseif order.ispending %}
+        <h1>{{ 'title_pending_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</h1>
+
+        <p>
+            {{ 'message_pending_payment'|trans({}, 'SonataPaymentBundle') }}
+        </p>
     {% else %}
 
         <h1>{{ 'title_not_validated_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</h1>

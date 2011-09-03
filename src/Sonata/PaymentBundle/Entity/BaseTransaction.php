@@ -42,60 +42,110 @@ class BaseTransaction implements TransactionInterface
 
     protected $paymentCode;
 
+    public function __construct()
+    {
+        $this->createdAt     = new \DateTime;
+        $this->transactionId = 'n/a';
+    }
+
+    /**
+     * @param \Sonata\Component\Order\OrderInterface $order
+     * @return void
+     */
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
     }
 
+    /**
+     * @return \Sonata\Component\Order\OrderInterface
+     */
     public function getOrder()
     {
         return $this->order;
     }
 
+    /**
+     * @param int $state
+     * @return void
+     */
     public function setState($state)
     {
         $this->state = $state;
     }
 
+    /**
+     * @return int
+     */
     public function getState()
     {
         return $this->state;
     }
 
+    /**
+     * @param string $transactionId
+     * @return void
+     */
     public function setTransactionId($transactionId)
     {
         $this->transactionId = $transactionId;
     }
 
+    /**
+     * @return string
+     */
     public function getTransactionId()
     {
         return $this->transactionId;
     }
 
-    public function isValid() {
+    /**
+     * @return bool
+     */
+    public function isValid()
+    {
         return $this->state == TransactionInterface::STATE_OK;
     }
 
+    /**
+     * @param array $parameters
+     * @return void
+     */
     public function setParameters(array $parameters)
     {
         $this->parameters = $parameters;
     }
 
+    /**
+     * @return array
+     */
     public function getParameters()
     {
         return $this->parameters;
     }
 
+    /**
+     * @param $name
+     * @param null $default
+     * @return null
+     */
     public function get($name, $default = null)
     {
         return isset($this->parameters[$name]) ? $this->parameters[$name] : $default;
     }
 
+    /**
+     * @param $statusCode
+     * @return void
+     */
     public function setStatusCode($statusCode)
     {
         $this->statusCode = $statusCode;
     }
 
+    /**
+     * @return
+     */
     public function getStatusCode()
     {
         return $this->statusCode;
@@ -114,26 +164,43 @@ class BaseTransaction implements TransactionInterface
             TransactionInterface::STATUS_PENDING           => 'pending',
             TransactionInterface::STATUS_VALIDATED         => 'validated',
             TransactionInterface::STATUS_CANCELLED         => 'cancelled',
+            TransactionInterface::STATUS_UNKNOWN           => 'status_unknow',
             TransactionInterface::STATUS_ERROR_VALIDATION  => 'error_validation',
             TransactionInterface::STATUS_WRONG_CALLBACK    => 'wrong_callback',
+            TransactionInterface::STATUS_WRONG_REQUEST     => 'wrong_request',
+            TransactionInterface::STATUS_ORDER_NOT_OPEN    => 'order_to_open',
         );
     }
 
+    /**
+     * @param \DateTime|null $createdAt
+     * @return void
+     */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param int $paymentCode
+     * @return void
+     */
     public function setPaymentCode($paymentCode)
     {
         $this->paymentCode = $paymentCode;
     }
 
+    /**
+     * @return
+     */
     public function getPaymentCode()
     {
         return $this->paymentCode;

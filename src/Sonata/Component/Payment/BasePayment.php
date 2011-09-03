@@ -172,20 +172,20 @@ abstract class BasePayment implements PaymentInterface
             return $this->handleError($transaction);
         }
 
-        // apply the transaction id and define the order to the transaction object
+        // apply the transaction id
         $this->applyTransactionId($transaction);
+
+        // if the order is not open, then something already happen ... (duplicate callback)
+        if (!$transaction->getOrder()->isOpen()) {
+            $transaction->setState(TransactionInterface::STATE_OK); // the transaction is valid, but not the order state
+            $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_NOT_OPEN);
+
+            return $this->handleError($transaction);
+        }
 
         // send the confirmation request to the bank
         if (!($response = $this->sendConfirmationReceipt($transaction))) {
-
             $response = $this->handleError($transaction);
-
-            $transaction->getOrder()->setStatus($transaction->getStatus());
-
-        } else {
-
-            $transaction->getOrder()->setStatus($transaction->getStatus());
-            $transaction->getOrder()->setValidatedAt(new \Datetime);
         }
 
         return $response;
