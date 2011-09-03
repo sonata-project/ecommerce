@@ -72,6 +72,10 @@ class PaymentController extends Controller
         ));
     }
 
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
     public function confirmationAction()
     {
         $payment = $this->getPaymentHandler();
@@ -106,7 +110,7 @@ class PaymentController extends Controller
      *
      * this action redirect the user to the bank
      *
-     * @return Response
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function callbankAction()
     {
@@ -156,7 +160,7 @@ class PaymentController extends Controller
     /**
      * this action handler the callback sent from the bank
      *
-     * @return Response
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function callbackAction()
     {
