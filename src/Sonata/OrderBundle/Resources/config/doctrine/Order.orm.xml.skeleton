@@ -23,6 +23,12 @@
             mapped-by="order"
             >
 
+            <orphan-removal>true</orphan-removal>
+
+            <cascade>
+                <cascade-persist />
+            </cascade>
+
             <join-columns>
                 <join-column
                     name="id"
