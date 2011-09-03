@@ -18,16 +18,16 @@ class InvoiceController extends Controller
 {
     public function indexAction()
     {
-
+        throw new \RuntimeException('not implemented');
     }
 
     public function viewAction($reference)
     {
-
+        throw new \RuntimeException('not implemented');
     }
 
     public function downloadAction($reference)
     {
-
+        throw new \RuntimeException('not implemented');
     }
 }
