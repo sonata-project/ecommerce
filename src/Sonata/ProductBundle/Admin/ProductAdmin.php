@@ -15,10 +15,14 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Knp\Menu\MenuItem;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class ProductAdmin extends Admin
 {
+    /**
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @return void
+     */
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -32,6 +36,10 @@ class ProductAdmin extends Admin
         ;
     }
 
+    /**
+     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
+     * @return void
+     */
     public function configureListFields(ListMapper $list)
     {
         $list
@@ -42,6 +50,10 @@ class ProductAdmin extends Admin
         ;
     }
 
+    /**
+     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     * @return void
+     */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter
@@ -51,7 +63,13 @@ class ProductAdmin extends Admin
         ;
     }
 
-    public function configureSideMenu(MenuItem $menu, $action, Admin $childAdmin = null)
+    /**
+     * @param \Knp\Menu\ItemInterface $menu
+     * @param $action
+     * @param null|\Sonata\AdminBundle\Admin\Admin $childAdmin
+     * @return
+     */
+    public function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
     {
         if (!$childAdmin && !in_array($action, array('edit'))) {
             return;

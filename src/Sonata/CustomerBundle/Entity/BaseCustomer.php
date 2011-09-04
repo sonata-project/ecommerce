@@ -88,7 +88,7 @@ abstract class BaseCustomer implements CustomerInterface
 
     public function __toString()
     {
-        return $this->getFirstname().' '.$this->getLastname();
+        return $this->getFullname();
     }
 
     public function prePersist()
@@ -100,6 +100,11 @@ abstract class BaseCustomer implements CustomerInterface
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime);
+    }
+
+    public function getAdminTitle()
+    {
+        return $this->getFullname();
     }
 
     public function getTitle()

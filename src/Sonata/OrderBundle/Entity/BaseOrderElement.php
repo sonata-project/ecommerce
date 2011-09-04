@@ -382,4 +382,12 @@ abstract class BaseOrderElement implements OrderElementInterface
     {
         return $this->rawProduct;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getDesignation();
+    }
 }
