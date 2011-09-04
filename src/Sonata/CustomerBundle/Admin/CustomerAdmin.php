@@ -16,7 +16,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Knp\Bundle\MenuBundle\MenuItem;
+use Knp\Menu\MenuItem;
 
 class CustomerAdmin extends Admin
 {
@@ -65,17 +65,17 @@ class CustomerAdmin extends Admin
 
         $menu->addChild(
             $this->trans('sidemenu.link_customer_edit'),
-            $admin->generateUrl('edit', array('id' => $id))
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
         );
 
         $menu->addChild(
             $this->trans('sidemenu.link_address_list'),
-            $admin->generateUrl('sonata.customer.admin.address.list', array('id' => $id))
+            array('uri' => $admin->generateUrl('sonata.customer.admin.address.list', array('id' => $id)))
         );
 
         $menu->addChild(
             $this->trans('sidemenu.link_order_list'),
-            $admin->generateUrl('sonata.order.admin.order.list', array('id' => $id))
+            array('uri' => $admin->generateUrl('sonata.order.admin.order.list', array('id' => $id)))
         );
     }
 }

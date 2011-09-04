@@ -15,7 +15,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Knp\Bundle\MenuBundle\MenuItem;
+use Knp\Menu\MenuItem;
 
 class ProductAdmin extends Admin
 {
@@ -63,22 +63,22 @@ class ProductAdmin extends Admin
 
         $menu->addChild(
             $this->trans('sidemenu.link_product_edit'),
-            $admin->generateUrl('edit', array('id' => $id))
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
         );
 
         $menu->addChild(
             $this->trans('sidemenu.link_category_list'),
-            $admin->generateUrl('sonata.product.admin.category.list', array('id' => $id))
+            array('uri' => $admin->generateUrl('sonata.product.admin.category.list', array('id' => $id)))
         );
 
 //        $menu->addChild(
 //            $this->trans('link_variation_list', array(), 'SonataProductBundle'),
-//            $admin->generateUrl('sonata.product.admin.variation.list', array('id' => $id))
+//            array('uri' => $admin->generateUrl('sonata.product.admin.variation.list', array('id' => $id)))
 //        );
 
         $menu->addChild(
             $this->trans('sidemenu.link_delivery_list'),
-            $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id))
+            array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
         );
     }
 }
