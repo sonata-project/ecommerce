@@ -196,6 +196,7 @@ abstract class BaseOrder implements OrderInterface
     public function __construct()
     {
         $this->orderElements     = new \Doctrine\Common\Collections\ArrayCollection;
+        $this->createdAt         = new \DateTime;
     }
 
     /**

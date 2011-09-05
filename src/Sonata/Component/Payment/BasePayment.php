@@ -40,6 +40,10 @@ abstract class BasePayment implements PaymentInterface
      */
     public function generateUrlCheck(OrderInterface $order)
     {
+        if (!$order->getCreatedAt() instanceof \DateTime) {
+            throw new \RuntimeException(sprintf('The order must have a creation date - id:%s, reference:%s ', $order->getId(), $order->getReference()));
+        }
+
         return sha1(
             $order->getReference().
             $order->getCreatedAt()->format("m/d/Y:G:i:s").

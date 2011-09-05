@@ -173,6 +173,10 @@ class PaymentController extends Controller
         // retrieve the related order
         $reference  = $payment->getOrderReference($transaction);
 
+        if (!$reference) {
+            throw new NotFoundHttpException(sprintf('Unable to find the order reference'));
+        }
+
         $order = $this->getOrderManager()->findOneBy(array(
             'reference' => $reference
         ));
