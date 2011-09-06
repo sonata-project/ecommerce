@@ -88,7 +88,7 @@ class CheckPayment extends BasePayment
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    function handleError(TransactionInterface $transaction)
+    public function handleError(TransactionInterface $transaction)
     {
         $transaction->getOrder()->setPaymentStatus($transaction->getStatusCode());
 
@@ -103,7 +103,7 @@ class CheckPayment extends BasePayment
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
-    function sendConfirmationReceipt(TransactionInterface $transaction)
+    public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         $order = $transaction->getOrder();
         if (!$order) {
@@ -168,7 +168,6 @@ class CheckPayment extends BasePayment
         // redirect the user to the correct page
         $response = new Response('', 302, array(
             'Location' => $this->router->generate($this->getOption($routeName), $params, true),
-            'Content-Type' => 'text/plain',
         ));
         $response->setPrivate();
 

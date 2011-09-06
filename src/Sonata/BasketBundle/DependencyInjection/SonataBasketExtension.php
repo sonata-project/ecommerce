@@ -40,6 +40,10 @@ class SonataBasketExtension extends Extension
         $loader->load('basket.xml');
         $loader->load('validator.xml');
         $loader->load('form.xml');
+
+        $basketLoader = isset($config['loader']) ? $config['loader'] : 'sonata.basket.loader.standard';
+
+        $container->setAlias('sonata.basket.loader', $basketLoader);
     }
 
     /**

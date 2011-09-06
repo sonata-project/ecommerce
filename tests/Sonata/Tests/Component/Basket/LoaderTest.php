@@ -45,6 +45,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $deliveryPool = new DeliveryPool;
         $paymentPool = new PaymentPool;
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
 
         $loader = new Loader(
             'Sonata\\Component\\Basket\\Basket',
@@ -53,7 +54,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             $addressManager,
             $deliveryPool,
             $paymentPool,
-            $customerManager
+            $customerManager,
+            $securityContext
         );
 
         $basket = $loader->getBasket();

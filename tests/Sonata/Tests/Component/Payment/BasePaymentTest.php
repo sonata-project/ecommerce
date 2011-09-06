@@ -44,7 +44,7 @@ class BasePaymentTest extends \PHPUnit_Framework_TestCase
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getReference')->will($this->returnValue('000123'));
-        $order->expects($this->once())->method('getCreatedAt')->will($this->returnValue($date));
+        $order->expects($this->exactly(2))->method('getCreatedAt')->will($this->returnValue($date));
         $order->expects($this->once())->method('getId')->will($this->returnValue(2));
 
         $this->assertEquals('2a084bbe95bb3842813499d4b5b1bfdf82e5a980', $payment->generateUrlCheck($order));

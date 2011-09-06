@@ -116,8 +116,6 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * useless test ....
-     *
      * @return void
      */
     public function testOrder()

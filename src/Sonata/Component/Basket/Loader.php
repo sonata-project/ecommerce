@@ -82,68 +82,8 @@ class Loader
     {
         if (!$this->basket) {
 
-            $basket = $this->getBasketInstance();
-            $basket->setProductPool($this->productPool);
-
             try {
-                foreach ($basket->getBasketElements() as $basketElement) {
-                    if ($basketElement->getProduct() === null) { // restore information
-
-                        if ($basketElement->getProductCode() == null) {
-                            throw new \RuntimeException('the product code is empty');
-                        }
-
-                        $productDefinition = $this->productPool->getProduct($basketElement->getProductCode());
-                        $basketElement->setProductDefinition($productDefinition);
-                    }
-                }
-
-                // load the delivery address
-                $deliveryAddressId = $basket->getDeliveryAddressId();
-
-                if ($deliveryAddressId) {
-                    $address = $this->addressManager->findOneBy(array('id' => $deliveryAddressId));
-
-                    $basket->setDeliveryAddress($address);
-                }
-
-                $deliveryMethodCode = $basket->getDeliveryMethodCode();
-                if ($deliveryMethodCode) {
-                    $basket->setDeliveryMethod($this->deliveryPool->getMethod($deliveryMethodCode));
-                }
-
-                // load the payment address
-                $paymentAddressId = $basket->getPaymentAddressId();
-
-                if ($paymentAddressId) {
-                    $address = $this->addressManager->findOneBy(array('id' => $paymentAddressId));
-                    $basket->setPaymentAddress($address);
-                }
-
-                // load the payment method
-                $paymentMethodCode = $basket->getPaymentMethodCode();
-                if ($paymentMethodCode) {
-                    $basket->setPaymentMethod($this->paymentPool->getMethod($paymentMethodCode));
-                }
-
-                // customer
-                $customerId = $basket->getCustomerId();
-                $user = $this->securityContext->getToken()->getUser();
-
-                if ($customerId) {
-                    $customer = $this->customerManager->findOneBy(array('id' => $customerId));
-
-                    if ($customer && $customer->getUser()->getId() != $user->getId()) {
-                        throw new \RuntimeException('Invalid basket state');
-                    }
-
-                    $basket->setCustomer($customer);
-                }
-
-                if (!$basket->getCustomer()) {
-                    $basket->setCustomer($this->customerManager->getMainCustomer($user));
-                }
-
+                $this->basket = $this->buildBasket();
             } catch(\Exception $e) {
 
                 throw $e;
@@ -151,12 +91,79 @@ class Loader
 //                $basket->reset();
             }
 
-
-            $this->basket = $basket;
-
             $this->session->set('sonata/basket', $this->basket);
         }
 
         return $this->basket;
+    }
+
+    /**
+     * @throws \RuntimeException
+     * @return \Sonata\Component\Basket\BasketInterface
+     */
+    protected function buildBasket()
+    {
+        $basket = $this->getBasketInstance();
+        $basket->setProductPool($this->productPool);
+
+        foreach ($basket->getBasketElements() as $basketElement) {
+            if ($basketElement->getProduct() === null) { // restore information
+
+                if ($basketElement->getProductCode() == null) {
+                    throw new \RuntimeException('the product code is empty');
+                }
+
+                $productDefinition = $this->productPool->getProduct($basketElement->getProductCode());
+                $basketElement->setProductDefinition($productDefinition);
+            }
+        }
+
+        // load the delivery address
+        $deliveryAddressId = $basket->getDeliveryAddressId();
+
+        if ($deliveryAddressId) {
+            $address = $this->addressManager->findOneBy(array('id' => $deliveryAddressId));
+
+            $basket->setDeliveryAddress($address);
+        }
+
+        $deliveryMethodCode = $basket->getDeliveryMethodCode();
+        if ($deliveryMethodCode) {
+            $basket->setDeliveryMethod($this->deliveryPool->getMethod($deliveryMethodCode));
+        }
+
+        // load the payment address
+        $paymentAddressId = $basket->getPaymentAddressId();
+
+        if ($paymentAddressId) {
+            $address = $this->addressManager->findOneBy(array('id' => $paymentAddressId));
+            $basket->setPaymentAddress($address);
+        }
+
+        // load the payment method
+        $paymentMethodCode = $basket->getPaymentMethodCode();
+        if ($paymentMethodCode) {
+            $basket->setPaymentMethod($this->paymentPool->getMethod($paymentMethodCode));
+        }
+
+        // customer
+        $customerId = $basket->getCustomerId();
+        $user = $this->securityContext->getToken()->getUser();
+
+        if ($customerId) {
+            $customer = $this->customerManager->findOneBy(array('id' => $customerId));
+
+            if ($customer && $customer->getUser()->getId() != $user->getId()) {
+                throw new \RuntimeException('Invalid basket state');
+            }
+
+            $basket->setCustomer($customer);
+        }
+
+        if (!$basket->getCustomer()) {
+            $basket->setCustomer($this->customerManager->getMainCustomer($user));
+        }
+
+        return $basket;
     }
 }
