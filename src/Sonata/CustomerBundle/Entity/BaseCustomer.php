@@ -80,10 +80,18 @@ abstract class BaseCustomer implements CustomerInterface
      */
     protected $addresses;
 
+    protected $orders;
+
+    protected $isFake;
+
+    protected $isComplete;
+
     public function __construct()
     {
-        $this->title = self::TITLE_MR;
-        $this->addresses = new ArrayCollection();
+        $this->title        = self::TITLE_MR;
+        $this->addresses    = new ArrayCollection();
+        $this->isFake       = false;
+        $this->isComplete   = true;
     }
 
     public function __toString()
@@ -271,5 +279,56 @@ abstract class BaseCustomer implements CustomerInterface
         }
 
         return $addresses;
+    }
+
+    /**
+     * @param $orders
+     * @return void
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
+    }
+
+    /**
+     * @return
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param bool $isComplete
+     * @return void
+     */
+    public function setIsComplete($isComplete)
+    {
+        $this->isComplete = $isComplete;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsComplete()
+    {
+        return $this->isComplete;
+    }
+
+    /**
+     * @param bool $isFake
+     * @return void
+     */
+    public function setIsFake($isFake)
+    {
+        $this->isFake = $isFake;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsFake()
+    {
+        return $this->isFake;
     }
 }

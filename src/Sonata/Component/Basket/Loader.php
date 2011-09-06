@@ -16,6 +16,7 @@ use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Payment\Pool as PaymentPool;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class Loader
 {
@@ -37,8 +38,11 @@ class Loader
 
     protected $paymentPool;
 
+    protected $securityContext;
+
     public function __construct($class, Session $session, Pool $productPool, AddressManagerInterface $addressManager,
-        DeliveryPool $deliveryPool, PaymentPool $paymentPool, CustomerManagerInterface $customerManager)
+        DeliveryPool $deliveryPool, PaymentPool $paymentPool, CustomerManagerInterface $customerManager,
+        SecurityContextInterface $securityContext)
     {
         $this->basketClass      = $class;
         $this->addressManager   = $addressManager;
@@ -47,6 +51,7 @@ class Loader
         $this->session          = $session;
         $this->productPool      = $productPool;
         $this->customerManager  = $customerManager;
+        $this->securityContext  = $securityContext;
     }
 
     /**
@@ -55,7 +60,7 @@ class Loader
      */
     private function getBasketInstance()
     {
-        $basket = $this->getSession()->get('sonata/basket');
+        $basket = $this->session->get('sonata/basket');
 
         if (!$basket) {
 
@@ -78,7 +83,7 @@ class Loader
         if (!$this->basket) {
 
             $basket = $this->getBasketInstance();
-            $basket->setProductPool($this->getProductPool());
+            $basket->setProductPool($this->productPool);
 
             try {
                 foreach ($basket->getBasketElements() as $basketElement) {
@@ -88,7 +93,7 @@ class Loader
                             throw new \RuntimeException('the product code is empty');
                         }
 
-                        $productDefinition = $this->getProductPool()->getProduct($basketElement->getProductCode());
+                        $productDefinition = $this->productPool->getProduct($basketElement->getProductCode());
                         $basketElement->setProductDefinition($productDefinition);
                     }
                 }
@@ -104,7 +109,7 @@ class Loader
 
                 $deliveryMethodCode = $basket->getDeliveryMethodCode();
                 if ($deliveryMethodCode) {
-                    $basket->setDeliveryMethod($this->getDeliveryPool()->getMethod($deliveryMethodCode));
+                    $basket->setDeliveryMethod($this->deliveryPool->getMethod($deliveryMethodCode));
                 }
 
                 // load the payment address
@@ -118,16 +123,27 @@ class Loader
                 // load the payment method
                 $paymentMethodCode = $basket->getPaymentMethodCode();
                 if ($paymentMethodCode) {
-                    $basket->setPaymentMethod($this->getPaymentPool()->getMethod($paymentMethodCode));
+                    $basket->setPaymentMethod($this->paymentPool->getMethod($paymentMethodCode));
                 }
 
                 // customer
                 $customerId = $basket->getCustomerId();
+                $user = $this->securityContext->getToken()->getUser();
+
                 if ($customerId) {
                     $customer = $this->customerManager->findOneBy(array('id' => $customerId));
 
+                    if ($customer && $customer->getUser()->getId() != $user->getId()) {
+                        throw new \RuntimeException('Invalid basket state');
+                    }
+
                     $basket->setCustomer($customer);
                 }
+
+                if (!$basket->getCustomer()) {
+                    $basket->setCustomer($this->customerManager->getMainCustomer($user));
+                }
+
             } catch(\Exception $e) {
 
                 throw $e;
@@ -138,44 +154,9 @@ class Loader
 
             $this->basket = $basket;
 
-            $this->getSession()->set('sonata/basket', $this->basket);
+            $this->session->set('sonata/basket', $this->basket);
         }
 
         return $this->basket;
-    }
-
-    public function getProductPool()
-    {
-        return $this->productPool;
-    }
-
-    public function getBasketClass()
-    {
-        return $this->basketClass;
-    }
-
-    public function getDeliveryPool()
-    {
-        return $this->deliveryPool;
-    }
-
-    public function getPaymentPool()
-    {
-        return $this->paymentPool;
-    }
-
-    public function getAddressManager()
-    {
-        return $this->addressManager;
-    }
-
-    public function getProductManager()
-    {
-        return $this->productManager;
-    }
-
-    public function getSession()
-    {
-        return $this->session;
     }
 }

@@ -21,7 +21,7 @@ class Pool
     protected $methods = array();
 
     /**
-     * add a delivery method into the pool
+     * add a payment method into the pool
      *
      * @param  \Sonata\Component\Payment\PaymentInterface $instance
      * @return void
@@ -33,7 +33,7 @@ class Pool
 
     /**
      *
-     * @return array of delivery methods
+     * @return array of payment methods
      */
     public function getMethods()
     {
@@ -41,7 +41,7 @@ class Pool
     }
 
     /**
-     * return a Delivery Object
+     * return a PaymentInterface Object
      *
      * @param string $code
      * @return Sonata\Component\Payment\PaymentInterface

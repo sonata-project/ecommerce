@@ -14,6 +14,7 @@ use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use FOS\UserBundle\Model\UserInterface;
 
 class CustomerManager implements CustomerManagerInterface
 {
@@ -21,14 +22,22 @@ class CustomerManager implements CustomerManagerInterface
     protected $repository;
     protected $class;
 
+    /**
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param $class
+     */
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
         $this->class = $class;
+    }
 
-        if(class_exists($class)) {
-            $this->repository = $this->em->getRepository($class);
-        }
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    public function getRepository()
+    {
+        return $this->em->getRepository($this->class);
     }
 
     /**
@@ -46,7 +55,7 @@ class CustomerManager implements CustomerManagerInterface
     /**
      * Updates a customer
      *
-     * @param Customer $customer
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
      * @return void
      */
     public function save(CustomerInterface $customer)
@@ -69,33 +78,57 @@ class CustomerManager implements CustomerManagerInterface
      * Finds one customer by the given criteria
      *
      * @param array $criteria
-     * @return Customer
+     * @return CustomerInterface
      */
     public function findOneBy(array $criteria)
     {
-        return $this->repository->findOneBy($criteria);
+        return $this->getRepository()->findOneBy($criteria);
     }
 
     /**
      * Finds many customers by the given criteria
      *
      * @param array $criteria
-     * @return Customer
+     * @return CustomerInterface[]
      */
     public function findBy(array $criteria)
     {
-        return $this->repository->findBy($criteria);
+        return $this->getRepository()->findBy($criteria);
     }
 
     /**
      * Deletes a customer
      *
-     * @param Customer $customer
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
      * @return void
      */
     public function delete(CustomerInterface $customer)
     {
         $this->em->remove($customer);
         $this->em->flush();
+    }
+
+    /**
+     * Returns the main customer linked to the user, created it if done
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $user
+     * @return Customer|CustomerInterface
+     */
+    public function getMainCustomer(UserInterface $user)
+    {
+        $customer = $this->findOneBy(array(
+            'user' => $user->getId()
+        ));
+
+        if (!$customer) {
+            $customer = $this->create();
+            $customer->setUser($user);
+            $customer->setEmail($user->getEmail());
+            $customer->setIsComplete(false);
+
+            $this->save($customer);
+        }
+
+        return $customer;
     }
 }
