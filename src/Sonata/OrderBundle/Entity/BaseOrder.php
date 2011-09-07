@@ -200,6 +200,14 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getReference();
+    }
+
+    /**
      * Set reference
      *
      * @param string $reference
@@ -992,5 +1000,17 @@ abstract class BaseOrder implements OrderInterface
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    public static function getStatusList()
+    {
+        return array(
+            self::STATUS_OPEN      => 'status_open',
+            self::STATUS_PENDING   => 'status_pending',
+            self::STATUS_VALIDATED => 'status_validated',
+            self::STATUS_CANCELLED => 'status_cancelled',
+            self::STATUS_ERROR     => 'status_error',
+            self::STATUS_STOPPED   => 'status_stopped',
+        );
     }
 }

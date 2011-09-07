@@ -225,4 +225,16 @@ abstract class BaseDelivery implements DeliveryInterface
     {
         $this->updatedAt = new \DateTime;
     }
+
+    public static function getStatusList()
+    {
+        return array(
+            self::STATUS_OPEN      => 'status_open',
+            self::STATUS_PENDING   => 'status_pending',
+            self::STATUS_VALIDATED => 'status_validated',
+            self::STATUS_CANCELLED => 'status_cancelled',
+            self::STATUS_ERROR     => 'status_error',
+            self::STATUS_STOPPED   => 'status_stopped',
+        );
+    }
 }
