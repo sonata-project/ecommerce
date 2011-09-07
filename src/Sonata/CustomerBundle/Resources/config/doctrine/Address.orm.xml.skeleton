@@ -24,7 +24,7 @@
             >
 
             <cascade>
-                <cascade-all />
+                <cascade-persist />
             </cascade>
 
             <join-columns>
