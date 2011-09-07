@@ -11,22 +11,41 @@
 
 namespace Sonata\OrderBundle\Admin;
 
-use Sonata\AdminBundle\Admin\EntityAdmin;
+use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
-class OrderElementAdmin extends EntityAdmin
+use Application\Sonata\OrderBundle\Entity\OrderElement;
+
+class OrderElementAdmin extends Admin
 {
+    protected $parentAssociationMapping = 'order';
 
-    protected $parent = 'order';
+    public function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->with($this->trans('order_element.form.group_main_label', array(), 'SonataOrderBundle'))
+                ->add('productType')
+                ->add('quantity')
+                ->add('price')
+                ->add('vat')
+                ->add('designation')
+                ->add('description')
+                ->add('status', 'choice', array('choices' => OrderElement::getStatusList()))
+                ->add('deliveryStatus', 'choice', array('choices' => OrderElement::getDeliveryStatusList()))
+            ->end()
+        ;
+    }
 
-    protected $form = array(
-//        'product',
-        'productType',
-        'quantity',
-        'price',
-        'vat',
-        'designation',
-        'description',
-        'status',
-        'deliveryStatus'
-    );
+    public function configureListFields(ListMapper $list)
+    {
+        $list
+            ->addIdentifier('id')
+            ->add('order')
+            ->add('productType')
+            ->add('status')
+            ->add('deliveryStatus')
+        ;
+    }
 }

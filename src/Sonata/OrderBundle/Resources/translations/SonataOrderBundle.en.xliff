@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="order.form.group_main_label">
+                <source>order.form.group_main_label</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="order.form.group_billing_label">
+                <source>order.form.group_billing_label</source>
+                <target>Billing</target>
+            </trans-unit>
+            <trans-unit id="order.form.group_shipping_label">
+                <source>order.form.group_shipping_label</source>
+                <target>Shipping</target>
+            </trans-unit>
+            <trans-unit id="order.form.group_misc_label">
+                <source>order.form.group_misc_label</source>
+                <target>Misc</target>
+            </trans-unit>
+            <trans-unit id="order.sidemenu.link_order_edit">
+                <source>order.sidemenu.link_order_edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="order.sidemenu.link_order_elements_list">
+                <source>order.sidemenu.link_order_elements_list</source>
+                <target>Elements</target>
+            </trans-unit>
+
+            <trans-unit id="order_element.form.group_main_label">
+                <source>order_element.form.group_main_label</source>
+                <target>General</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

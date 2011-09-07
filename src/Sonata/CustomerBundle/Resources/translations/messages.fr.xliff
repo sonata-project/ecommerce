@@ -2,15 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="sidemenu.link_customer_edit">
-                <source>sidemenu.link_customer_edit</source>
-                <target>Client</target>
-            </trans-unit>
-            <trans-unit id="sidemenu.link_address_list">
-                <source>sidemenu.link_address_list</source>
-                <target>Adresses</target>
-            </trans-unit>
-
             <trans-unit id="breadcrumb.link_customer_list">
                 <source>breadcrumb.link_customer_list</source>
                 <target>Client</target>
@@ -26,19 +17,6 @@
             <trans-unit id="breadcrumb.link_address_edit">
                 <source>breadcrumb.link_address_edit</source>
                 <target>Edition</target>
-            </trans-unit>
-
-            <trans-unit id="form_address.group_advanced_label">
-                <source>form_address.group_advanced_label</source>
-                <target>Avancée</target>
-            </trans-unit>
-            <trans-unit id="form_address.group_contact_label">
-                <source>form_address.group_contact_label</source>
-                <target>Contact</target>
-            </trans-unit>
-            <trans-unit id="form_address.group_address_label">
-                <source>form_address.group_address_label</source>
-                <target>Adresse</target>
             </trans-unit>
         </body>
     </file>

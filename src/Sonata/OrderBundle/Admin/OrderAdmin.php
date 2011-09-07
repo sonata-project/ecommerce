@@ -16,6 +16,11 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
+use Application\Sonata\OrderBundle\Entity\Order;
+use Application\Sonata\ProductBundle\Entity\Delivery;
+
+use Knp\Menu\ItemInterface as MenuItemInterface;
+
 class OrderAdmin extends Admin
 {
     protected $parentAssociationMapping = 'customer';
@@ -23,14 +28,14 @@ class OrderAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with($this->trans('form_address.group_main_label'))
+            ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
                 ->add('currency')
-                ->add('status')
+                ->add('status', 'choice', array('choices' => Order::getStatusList()))
                 ->add('paymentStatus')
-                ->add('deliveryStatus')
+                ->add('deliveryStatus', 'choice', array('choices' => Delivery::getStatusList()))
                 ->add('validatedAt')
             ->end()
-            ->with($this->trans('form_address.group_billing_label'), array('collapsed' => true))
+            ->with($this->trans('order.form.group_billing_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
                 ->add('billingName')
                 ->add('billingAddress1')
                 ->add('billingAddress2')
@@ -42,7 +47,7 @@ class OrderAdmin extends Admin
                 ->add('billingEmail')
                 ->add('billingMobile')
             ->end()
-            ->with($this->trans('form_address.group_shipping_label'), array('collapsed' => true))
+            ->with($this->trans('order.form.group_shipping_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
                 ->add('shippingName')
                 ->add('shippingAddress1')
                 ->add('shippingAddress2')
@@ -54,14 +59,11 @@ class OrderAdmin extends Admin
                 ->add('shippingEmail')
                 ->add('shippingMobile')
             ->end()
-            ->with($this->trans('form_address.group_misc_label'), array('collapsed' => true))
-                ->add('orderElements', 'sonata_type_model', array(), array('edit' => 'inline', 'inline' => 'table'))
-            ->end()
         ;
         
         if (!$this->isChild()) {
             $formMapper
-                ->with($this->trans('form_address.group_misc_label'))
+                ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
                     ->add('customer', 'sonata_type_model', array(), array('edit' => 'list'))
                 ->end()
             ;
@@ -75,6 +77,7 @@ class OrderAdmin extends Admin
             ->addIdentifier('reference')
             ->add('customer')
             ->add('status')
+            ->add('deliveryStatus')
             ->add('paymentStatus')
             ->add('validatedAt')
             ->add('totalExcl')
@@ -87,5 +90,32 @@ class OrderAdmin extends Admin
             ->add('reference')
 //            ->add('customer')
         ;
+    }
+
+    /**
+     * @param \Knp\Menu\MenuItemInterface $menu
+     * @param $action
+     * @param null|\Sonata\AdminBundle\Admin\Admin $childAdmin
+     * @return
+     */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+
+        $menu->addChild(
+            $this->trans('order.sidemenu.link_order_edit', array(), 'SonataOrderBundle'),
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('order.sidemenu.link_order_elements_list', array(), 'SonataOrderBundle'),
+            array('uri' => $admin->generateUrl('sonata.order.admin.order_element.list', array('id' => $id)))
+        );
     }
 }
