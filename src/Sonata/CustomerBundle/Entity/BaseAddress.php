@@ -386,16 +386,32 @@ abstract class BaseAddress implements AddressInterface
         return $this->name;
     }
 
-    public function getFullAddress($sep = "\n")
+    public function getFullAddress($sep = ", ")
     {
-        return sprintf("%s %s, %s, %s, %s (%s)",
-            $this->getFirstname(),
-            $this->getLastname(),
+        $values = array_map('trim', array(
+            sprintf("%s %s", $this->getFirstname(), $this->getLastname()),
             $this->getAddress1(),
             $this->getPostcode(),
-            $this->getCity(),
-            $this->getCountryCode()
-        );
+            $this->getCity()
+        ));
+
+        foreach ($values as $key => $val) {
+            if (!$val) {
+                unset($values[$key]);
+            }
+        }
+
+        $fullAddress = implode($sep, $values);
+
+        if ($countryCode = trim($this->getCountryCode())) {
+            if ($fullAddress) {
+                $fullAddress .= " ";
+            }
+
+            $fullAddress .= sprintf("(%s)", $countryCode);
+        }
+
+        return $fullAddress;
     }
 
     public function setCustomer(CustomerInterface $customer)
@@ -410,6 +426,6 @@ abstract class BaseAddress implements AddressInterface
 
     public function __toString()
     {
-        return sprintf("%s - %s", $this->getName(), $this->getFullAddress());
+        return trim(sprintf("%s - %s", $this->getName(), $this->getFullAddress()));
     }
 }
