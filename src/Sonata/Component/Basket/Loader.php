@@ -58,7 +58,7 @@ class Loader
      * @throws \RuntimeException
      * @return \Sonata\Component\Basket\BasketInterface
      */
-    private function getBasketInstance()
+    protected function getBasketInstance()
     {
         $basket = $this->session->get('sonata/basket');
 
