@@ -301,7 +301,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function setProduct(ProductInterface $product)
     {
-        $this->product[] = $product;
+        $this->product = $product;
     }
 
     /**
