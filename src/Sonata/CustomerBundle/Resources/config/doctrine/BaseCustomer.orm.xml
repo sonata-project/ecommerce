@@ -15,8 +15,6 @@
         <field name="updatedAt"     type="datetime" column="updated_at"     nullable="true"/>
         <field name="createdAt"     type="datetime" column="created_at"     nullable="true"/>
 
-        <field name="isComplete"    type="boolean" column="is_complete"         nullable="true"/>
-
         <!-- set this flag for testing only -->
         <field name="isFake"        type="boolean" column="is_fake"         nullable="true"/>
 
