@@ -67,18 +67,6 @@ interface ProductInterface
      * @abstract
      * @return
      */
-    function setType($name);
-
-    /**
-     * @abstract
-     * @return string the product code
-     */
-    function getType();
-
-    /**
-     * @abstract
-     * @return
-     */
     function setParent(ProductInterface $parent);
 
     /**

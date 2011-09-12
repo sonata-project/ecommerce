@@ -107,28 +107,4 @@ class CustomerManager implements CustomerManagerInterface
         $this->em->remove($customer);
         $this->em->flush();
     }
-
-    /**
-     * Returns the main customer linked to the user, created it if done
-     *
-     * @param \FOS\UserBundle\Model\UserInterface $user
-     * @return Customer|CustomerInterface
-     */
-    public function getMainCustomer(UserInterface $user)
-    {
-        $customer = $this->findOneBy(array(
-            'user' => $user->getId()
-        ));
-
-        if (!$customer) {
-            $customer = $this->create();
-            $customer->setUser($user);
-            $customer->setEmail($user->getEmail());
-            $customer->setIsComplete(false);
-
-            $this->save($customer);
-        }
-
-        return $customer;
-    }
 }

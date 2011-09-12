@@ -148,7 +148,9 @@ class Loader
 
         // customer
         $customerId = $basket->getCustomerId();
-        $user = $this->securityContext->getToken()->getUser();
+        $user = $this->securityContext
+            ->getToken()
+            ->getUser();
 
         if ($customerId) {
             $customer = $this->customerManager->findOneBy(array('id' => $customerId));
@@ -158,10 +160,6 @@ class Loader
             }
 
             $basket->setCustomer($customer);
-        }
-
-        if (!$basket->getCustomer()) {
-            $basket->setCustomer($this->customerManager->getMainCustomer($user));
         }
 
         return $basket;

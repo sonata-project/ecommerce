@@ -84,14 +84,11 @@ abstract class BaseCustomer implements CustomerInterface
 
     protected $isFake;
 
-    protected $isComplete;
-
     public function __construct()
     {
         $this->title        = self::TITLE_MR;
         $this->addresses    = new ArrayCollection();
         $this->isFake       = false;
-        $this->isComplete   = true;
     }
 
     public function __toString()
@@ -125,6 +122,10 @@ abstract class BaseCustomer implements CustomerInterface
         $this->title = $title;
     }
 
+    /**
+     * @static
+     * @return array
+     */
     public static function getTitlesList()
     {
         return array(
@@ -296,23 +297,6 @@ abstract class BaseCustomer implements CustomerInterface
     public function getOrders()
     {
         return $this->orders;
-    }
-
-    /**
-     * @param bool $isComplete
-     * @return void
-     */
-    public function setIsComplete($isComplete)
-    {
-        $this->isComplete = $isComplete;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsComplete()
-    {
-        return $this->isComplete;
     }
 
     /**

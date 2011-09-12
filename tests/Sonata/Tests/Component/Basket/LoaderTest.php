@@ -45,7 +45,20 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $deliveryPool = new DeliveryPool;
         $paymentPool = new PaymentPool;
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
+
+        $user = $this->getMock('FOS\UserBundle\Model');
+
+        $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        $token->expects($this->once())
+            ->method('getUser')
+            ->will($this->returnValue($user))
+        ;
+
         $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
+        $securityContext->expects($this->once())
+            ->method('getToken')
+            ->will($this->returnValue($token))
+        ;
 
         $loader = new Loader(
             'Sonata\\Component\\Basket\\Basket',
