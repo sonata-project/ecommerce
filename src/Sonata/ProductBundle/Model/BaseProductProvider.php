@@ -100,7 +100,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
             'vat'         => $product->getVat(),
             'enabled'     => $product->getEnabled(),
             'options'     => $product->getOptions(),
-            'type'        => $product->getType()
         );
 
         return $data;

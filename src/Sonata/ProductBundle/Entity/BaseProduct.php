@@ -97,11 +97,6 @@ abstract class BaseProduct implements ProductInterface
     protected $productCategories;
 
     /**
-     * @var type $type
-     */
-    protected $type;
-
-    /**
      * Set sku
      *
      * @param text $sku
@@ -381,26 +376,6 @@ abstract class BaseProduct implements ProductInterface
     public function isVariation()
     {
         return $this->getParent() !== null;
-    }
-
-    /**
-     * Set type
-     *
-     * @param type $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * Get type
-     *
-     * @return type $type
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
