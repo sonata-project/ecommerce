@@ -12,22 +12,21 @@ namespace Sonata\Component\Order;
 
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
-
+use Sonata\Component\Customer\CustomerInterface;
 
 interface OrderElementInterface
 {
-
     /**
      * Set order
      *
-     * @param OrderInterface $order
+     * @param \Sonata\Component\Order\OrderInterface $order
      */
     function setOrder(OrderInterface $order);
 
     /**
      * Get order
      *
-     * @return Order $order
+     * @return \Sonata\Component\Order\OrderInterface
      */
     function getOrder();
 
