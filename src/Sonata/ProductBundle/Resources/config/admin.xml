@@ -15,14 +15,19 @@
         <!-- DELIVERY -->
         <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeleveryAdmin</parameter>
         <parameter key="sonata.product.admin.delivery.entity">Application\Sonata\ProductBundle\Entity\Delivery</parameter>
+
+        <parameter key="sonata.product.admin.product.manager">Sonata\ProductBundle\Model\DoctrineModelManager</parameter>
     </parameters>
 
     <services>
+        <service id="sonata.product.entity_manager" alias="doctrine.orm.default_entity_manager" />
+
         <service id="sonata.product.admin.product" class="%sonata.product.admin.product.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product"/>
             <argument />
             <argument>%sonata.product.admin.product.entity%</argument>
-            <argument />
+            <argument>SonataProductBundle:ProductAdmin</argument>
+            <argument type="service" id="sonata.product.pool" />
 
             <call method="addChild">
                 <argument type="service" id="sonata.product.admin.category" />
@@ -45,6 +50,11 @@
             <argument />
             <argument>%sonata.product.admin.delivery.entity%</argument>
             <argument />
+        </service>
+
+        <service id="sonata.product.admin.product.manager" class="%sonata.product.admin.product.manager%">
+            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="sonata.product.pool" />
         </service>
     </services>
 

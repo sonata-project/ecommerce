@@ -16,24 +16,112 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Sonata\Component\Product\Pool;
 
 class ProductAdmin extends Admin
 {
+    protected $pool;
+
+    protected $baseRouteName    = 'admin_sonata_product_product';
+
+    protected $baseRoutePattern = '/sonata/product/product';
+
+    /**
+     * @param $code
+     * @param $class
+     * @param $baseControllerName
+     * @param \Sonata\Component\Product\Pool $pool
+     */
+    public function __construct($code, $class, $baseControllerName, Pool $pool)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+
+        $this->pool = $pool;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        if ($this->hasSubject()) {
+            return get_class($this->getSubject());
+        } else if($class = $this->getProductClass()) {
+            return $class;
+        }
+
+        return parent::getClass();
+    }
+
+    /**
+     * Returns the product class from the provided request
+     * @return string
+     */
+    public function getProductClass()
+    {
+        if($this->hasRequest()) {
+            $code = $this->getRequest()->get('provider');
+
+            if ($code) {
+                return $this->pool->getManager($code)->getClass();
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the subject, if none is set try to load one from the request
+     *
+     * @return object $object the subject
+     */
+    public function getSubject()
+    {
+        if ($this->subject === null && $this->hasRequest()) {
+            $id = $this->request->get($this->getIdParameter());
+            if (!is_numeric($id)) {
+                $this->subject = false;
+            } else {
+                $this->subject = $this->getModelManager()->find($this->getProductClass(), $id);
+            }
+        }
+
+        return $this->subject;
+    }
+
     /**
      * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
      * @return void
      */
-    public function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('name')
-            ->add('sku')
-            ->add('description')
-            ->add('price')
-            ->add('vat')
-            ->add('stock')
-            ->add('image', 'sonata_type_model', array(), array('edit' => 'list'))
-        ;
+        $product = $this->getSubject();
+
+        if (!$product) {
+            $product = $this->getNewInstance();
+        }
+
+        $provider = $this->pool->getProvider($product);
+
+        if ($product->getId() > 0) {
+            $provider->buildEditForm($formMapper);
+        } else {
+            $provider->buildCreateForm($formMapper);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getPersistentParameters()
+    {
+        if (!$this->hasRequest()) {
+            return array();
+        }
+
+        return array(
+            'provider' => $this->getRequest()->get('provider'),
+        );
     }
 
     /**

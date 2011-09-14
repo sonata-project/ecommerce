@@ -20,6 +20,7 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\Form\FormBuilder;
+use Sonata\AdminBundle\Form\FormMapper;
 
 use Application\Sonata\OrderBundle\Entity\OrderElement;
 
@@ -147,6 +148,38 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @return void
+     */
+    public function buildEditForm(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('name')
+            ->add('sku')
+            ->add('description')
+            ->add('price', 'number')
+            ->add('vat', 'number')
+            ->add('stock', 'integer')
+            ->add('image', 'sonata_type_model', array(), array(
+                'edit' => 'list',
+                'link_parameters' => array(
+                    'context' => 'sonata_product',
+                    'filter' => array('context' => array('value' => 'sonata_product'))
+                )
+            ))
+        ;
+    }
+
+    /**
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @return void
+     */
+    public function buildCreateForm(FormMapper $formMapper)
+    {
+        $this->buildEditForm($formMapper);
+    }
+
+    /**
      * @throws \RuntimeException
      * @param \Sonata\Component\Product\ProductInterface $product
      * @return \Sonata\Component\Product\ProductInterface
@@ -235,6 +268,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $basketElement;
     }
 
+    /**
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param null|\Sonata\Component\Product\ProductInterface $product
+     * @param array $options
+     * @return void
+     */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = array())
     {
         if ($product) {
@@ -290,7 +329,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @return array
+     * @return void
      */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket)
     {

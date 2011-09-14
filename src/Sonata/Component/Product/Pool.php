@@ -27,7 +27,7 @@ class Pool
     }
 
     /**
-     * @param string $code
+     * @param ProductInterface|string $code
      * @return \Sonata\Component\Product\ProductProviderInterface
      */
     public function getProvider($code)
@@ -44,7 +44,7 @@ class Pool
     }
 
     /**
-     * @param string $code
+     * @param ProductInterface|string $code
      * @return \Sonata\Component\Product\ProductManagerInterface
      */
     public function getManager($code)
@@ -60,6 +60,10 @@ class Pool
         return $this->getProduct($code)->getManager();
     }
 
+    /**
+     * @param ProductInterface $product
+     * @return int|null|string
+     */
     public function getProductCode(ProductInterface $product)
     {
         $class = get_class($product);

@@ -7,14 +7,14 @@
 
     <mapped-superclass name="Sonata\ProductBundle\Entity\BaseProduct" >
 
-        <field name="sku"           column="sku"            type="text"     nullable="true" length="255"/>
-        <field name="slug"          column="slug"           type="text"     nullable="true" length="255"/>
+        <field name="sku"           column="sku"            type="string"     nullable="true" length="255"/>
+        <field name="slug"          column="slug"           type="string"     nullable="true" length="255"/>
         <field name="name"          column="name"           type="string"   nullable="false" length="255"/>
-        <field name="description"   column="description"    type="text"     nullable="false" length="1024"/>
-        <field name="price"         column="price"          type="decimal"  nullable="false" />
-        <field name="vat"           column="vat"            type="decimal"  nullable="false" />
-        <field name="stock"         column="stock"          type="integer"  nullable="false" />
-        <field name="enabled"       column="enabled"        type="boolean"  nullable="false" />
+        <field name="description"   column="description"    type="text"     nullable="true" length="1024"/>
+        <field name="price"         column="price"          type="decimal"  nullable="true" />
+        <field name="vat"           column="vat"            type="decimal"  nullable="true" />
+        <field name="stock"         column="stock"          type="integer"  nullable="true" />
+        <field name="enabled"       column="enabled"        type="boolean"  nullable="true" />
 
         <field name="updatedAt"    column="updated_at"     type="datetime" />
         <field name="createdAt"    column="created_at"     type="datetime" />

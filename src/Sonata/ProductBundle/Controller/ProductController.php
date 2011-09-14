@@ -20,6 +20,12 @@ use Symfony\Component\Form\FormView;
 
 class ProductController extends Controller
 {
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @param $productId
+     * @param $slug
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
     public function viewAction($productId, $slug)
     {
         $product = is_object($productId) ? $productId : $this->get('sonata.product.collection.manager')->findOneBy(array('id' =>  $productId));
@@ -47,6 +53,11 @@ class ProductController extends Controller
         return $response;
     }
 
+    /**
+     * @param \Symfony\Component\Form\FormView $formView
+     * @param \Sonata\Component\Basket\BasketElement $basketElement
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
     public function renderFormBasketElementAction(FormView $formView, BasketElement $basketElement)
     {
         $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName()) ;
@@ -68,6 +79,10 @@ class ProductController extends Controller
         return $response;
     }
 
+    /**
+     * @param \Sonata\Component\Basket\BasketElement $basketElement
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
     public function renderFinalReviewBasketElementAction(BasketElement $basketElement)
     {
         $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
@@ -88,6 +103,11 @@ class ProductController extends Controller
         return $response;
     }
 
+    /**
+     * @param $productId
+     * @param $slug
+     * @return void
+     */
     public function viewVariationsAction($productId, $slug)
     {
 

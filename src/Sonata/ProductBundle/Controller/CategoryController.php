@@ -19,7 +19,6 @@ use Doctrine\ORM\Query\Expr;
 
 class CategoryController extends Controller
 {
-
     /**
      * List the main categories
      *
@@ -62,8 +61,8 @@ class CategoryController extends Controller
     /**
      * List categories from one categories
      *
-     * @param  $categoryId
-     * @return void
+     * @param $categoryId
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function listSubCategoriesAction($categoryId)
     {
@@ -78,8 +77,8 @@ class CategoryController extends Controller
     /**
      * List the product related to one category
      *
-     * @param  $categoryId
-     * @return
+     * @param $categoryId
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function listProductsAction($categoryId)
     {
@@ -91,7 +90,12 @@ class CategoryController extends Controller
         ));
     }
 
-
+    /**
+     * @param null $category
+     * @param int $depth
+     * @param int $deep
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
     public function listSideMenuCategoriesAction($category = null, $depth = 1, $deep = 0)
     {
         $category = $category ?: $this->get('sonata.category.manager')->getRootCategory();

@@ -15,6 +15,7 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
 
+use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\FormBuilder;
 
 interface ProductProviderInterface
@@ -95,11 +96,24 @@ interface ProductProviderInterface
     function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array());
 
     /**
-     * Returns a BasketElement
-     *
      * @abstract
-     * @param bool|ProductInterface $product
+     * @param null|ProductInterface $product
+     * @param array $options
      * @return void
      */
     function createBasketElement(ProductInterface $product = null, array $options = array());
+
+    /**
+     * @abstract
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @return void
+     */
+    function buildEditForm(FormMapper $formMapper);
+
+    /**
+     * @abstract
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @return void
+     */
+    function buildCreateForm(FormMapper $formMapper);
 }

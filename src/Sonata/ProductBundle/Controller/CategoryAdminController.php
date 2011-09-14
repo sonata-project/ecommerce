@@ -17,16 +17,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CategoryAdminController extends Controller
 {
 
-    public function indexAction() {
-
-    }
-
-    public function editAction($category_id) {
-
-    }
-
-    public function updateAction() {
-
-    }
-
 }

@@ -17,7 +17,7 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <one-to-one
+        <many-to-one
             field="image"
             target-entity="Application\Sonata\MediaBundle\Entity\Media"
              >
@@ -33,7 +33,7 @@
                 />
             </join-columns>
 
-        </one-to-one>
+        </many-to-one>
 
         <one-to-many
             field="package"
