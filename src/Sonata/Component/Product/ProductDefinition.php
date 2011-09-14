@@ -17,6 +17,10 @@ class ProductDefinition
 
     protected $provider;
 
+    /**
+     * @param ProductProviderInterface $provider
+     * @param ProductManagerInterface $manager
+     */
     public function __construct(ProductProviderInterface $provider, ProductManagerInterface $manager)
     {
         $this->provider = $provider;
@@ -24,11 +28,11 @@ class ProductDefinition
     }
 
     /**
-     * @return \Sonata\Component\ProductProductManagerInterface
+     * @return \Sonata\Component\ProductManagerInterface
      */
     public function getManager()
     {
-      return $this->manager;
+        return $this->manager;
     }
 
     /**
@@ -36,6 +40,6 @@ class ProductDefinition
      */
     public function getProvider()
     {
-      return $this->provider;
+        return $this->provider;
     }
 }
