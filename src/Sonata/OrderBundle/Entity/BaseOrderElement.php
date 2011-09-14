@@ -389,6 +389,22 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
+     * @param $name
+     * @param null $default
+     * @return mixed
+     */
+    public function getRawProductValue($name, $default = null)
+    {
+        $values = $this->getRawProduct();
+
+        if (array_key_exists($name, $values)) {
+            return $values[$name];
+        }
+
+        return $default;
+    }
+
+    /**
      * @return array
      */
     public function getRawProduct()

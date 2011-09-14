@@ -350,7 +350,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * Set validated_at
      *
-     * @param datetime $validatedAt
+     * @param \DateTime $validatedAt
      */
     public function setValidatedAt(\DateTime $validatedAt = null)
     {
@@ -957,21 +957,35 @@ abstract class BaseOrder implements OrderInterface
         return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
     }
 
+    /**
+     * @param \DateTime|null $createdAt
+     * @return void
+     */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param \DateTime|null $updatedAt
+     * @return void
+     */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @return \DateTime|null
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -980,23 +994,34 @@ abstract class BaseOrder implements OrderInterface
     /**
      * Add order_elements
      *
-     * @param OrderElementInterface $orderElements
+     * @param \Sonata\Component\Order\OrderElementInterface $orderElements
      */
     public function addOrderElements(OrderElementInterface $orderElements)
     {
         $this->orderElements[] = $orderElements;
     }
 
+    /**
+     * @param array $orderElements
+     * @return void
+     */
     public function setOrderElements($orderElements)
     {
         $this->orderElements = $orderElements;
     }
 
+    /**
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @return void
+     */
     public function setCustomer(CustomerInterface $customer)
     {
         $this->customer = $customer;
     }
 
+    /**
+     * @return \Sonata\Component\Customer\CustomerInterface
+     */
     public function getCustomer()
     {
         return $this->customer;
