@@ -591,7 +591,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * @return string
      */
-    function getDeliveryMethodCode()
+    public function getDeliveryMethodCode()
     {
         return $this->deliveryMethodCode;
     }
