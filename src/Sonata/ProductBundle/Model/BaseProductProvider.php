@@ -95,7 +95,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
         $orderElement->setCreatedAt(new \DateTime);
         $orderElement->setOptions($basketElement->getOptions());
-        $orderElement->setRawProduct($this->getRawProduct($product));
+        $orderElement->setRawProduct(json_decode($this->getRawProduct($product, 'json')));
 
         return $orderElement;
     }
