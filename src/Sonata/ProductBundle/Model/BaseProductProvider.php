@@ -40,7 +40,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param \JMS\SerializerBundle\Serializer\Serializer $serializer
      */
-    function __construct(Serializer $serializer)
+    public function __construct(Serializer $serializer)
     {
         $this->serializer = $serializer;
     }
