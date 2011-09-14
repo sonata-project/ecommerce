@@ -5,6 +5,7 @@ Installation
 
     * Symfony2
     * PHP 5.3.2
+    * https://github.com/schmittjoh/JMSSerializerBundle
 
 * add the FOSUserBundle bundle (user management) and follow FOSUserBundle README
 

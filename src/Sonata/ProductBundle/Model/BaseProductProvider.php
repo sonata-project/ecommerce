@@ -23,6 +23,9 @@ use Symfony\Component\Form\FormBuilder;
 
 use Application\Sonata\OrderBundle\Entity\OrderElement;
 
+use JMS\SerializerBundle\SerializerInterface;
+use JMS\SerializerBundle\Serializer\Serializer;
+
 abstract class BaseProductProvider implements ProductProviderInterface
 {
     protected $options           = array();
@@ -30,6 +33,16 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $variationFields   = array();
 
     protected $code;
+
+    protected $serializer;
+
+    /**
+     * @param \JMS\SerializerBundle\Serializer\Serializer $serializer
+     */
+    function __construct(Serializer $serializer)
+    {
+        $this->serializer = $serializer;
+    }
 
     /**
      * @param array $options
@@ -88,21 +101,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * @param \Sonata\Component\Product\ProductInterface $product
+     * @param string $format
      * @return array
      */
-    public function getRawProduct(ProductInterface $product)
+    public function getRawProduct(ProductInterface $product, $format = 'json')
     {
-        $data = array(
-            'id'          => $product->getId(),
-            'description' => $product->getDescription(),
-            'name'        => $product->getName(),
-            'price'       => $product->getPrice(),
-            'vat'         => $product->getVat(),
-            'enabled'     => $product->getEnabled(),
-            'options'     => $product->getOptions(),
-        );
-
-        return $data;
+        return $this->serializer->serialize($product, $format);
     }
 
     ////////////////////////////////////////////////

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<serializer>
+    <class name="Sonata\ProductBundle\Entity\BaseProduct" exclusion-policy="ALL">
+        <property name="id" type="integer" expose="true" />
+        <property name="sku" type="string" expose="true" />
+        <property name="slug" type="string" expose="true" />
+        <property name="name" type="string" expose="true" />
+        <property name="description" type="string" expose="true" />
+        <property name="price" type="double" expose="true" />
+        <property name="vat" type="double" expose="true" />
+        <property name="stock" type="integer" expose="true" />
+        <property name="enabled" type="boolean" expose="true" />
+        <property name="updatedAt" type="datetime" expose="true" />
+        <property name="createdAt" type="datetime" expose="true" />
+
+        <property name="image" type="Sonata\MediaBundle\Model\MediaInterface" expose="false" />
+        <property name="package" type="Sonata\Component\Product\PackageInterface" expose="false" />
+        <property name="delivery" type="Sonata\Component\Product\DeliveryInterface" expose="false" />
+        <property name="productCategories" type="Sonata\ProductBundle\Entity\ProductCategoryInterface" expose="false" />
+
+        <property name="parent" expose="false" />
+        <property name="variations" expose="false" />
+
+    </class>
+</serializer>
