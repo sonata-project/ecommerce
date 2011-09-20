@@ -83,7 +83,7 @@ class Pool
      */
     public function hasProvider($code)
     {
-        return isset($this->product[$code]);
+        return isset($this->products[$code]);
     }
 
     /**
