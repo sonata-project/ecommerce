@@ -110,6 +110,17 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $this->serializer->serialize($product, $format);
     }
 
+    /**
+     * @param \Application\Sonata\OrderBundle\Entity\OrderElement $orderElement
+     * @param string $type
+     * @param string $format
+     * @return \Sonata\Component\Product\ProductInterface
+     */
+    public function getProductFromRaw(OrderElement $orderElement, $type, $format = 'json')
+    {
+        return $this->serializer->deserialize(json_encode($orderElement->getRawProduct()), $type, $format);
+    }
+
     ////////////////////////////////////////////////
     //   VARIATION RELATED FUNCTIONS
 
