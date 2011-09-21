@@ -12,8 +12,22 @@
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Payment\BasePayment;
+use Sonata\OrderBundle\Entity\BaseOrder;
 
+class Order extends BaseOrder
+{
+    /**
+     * @var integer $id
+     */
+    protected $id;
 
-class Order extends \Sonata\OrderBundle\Entity\BaseOrder {
-
+    /**
+     * Get id
+     *
+     * @return integer $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
