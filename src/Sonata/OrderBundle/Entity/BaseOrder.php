@@ -328,6 +328,15 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
+     * @return string
+     */
+    public function getPaymentStatusName()
+    {
+        $statusList = self::getStatusList();
+        return $statusList[$this->getPaymentStatus()];
+    }
+
+    /**
      * Set delivery_status
      *
      * @param integer $deliveryStatus
@@ -345,6 +354,15 @@ abstract class BaseOrder implements OrderInterface
     public function getDeliveryStatus()
     {
         return $this->deliveryStatus;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeliveryStatusName()
+    {
+        $statusList = self::getStatusList();
+        return $statusList[$this->getDeliveryStatus()];
     }
 
     /**
@@ -1027,6 +1045,19 @@ abstract class BaseOrder implements OrderInterface
         return $this->customer;
     }
 
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        $statusList = self::getStatusList();
+        return $statusList[$this->getStatus()];
+    }
+
+    /**
+     * @static
+     * @return array
+     */
     public static function getStatusList()
     {
         return array(

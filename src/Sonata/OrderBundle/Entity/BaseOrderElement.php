@@ -420,11 +420,38 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->getDesignation();
     }
 
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        $statusList = self::getStatusList();
+        return $statusList[$this->getStatus()];
+    }
+
+    /**
+     * @static
+     * @return array
+     */
     public static function getStatusList()
     {
         return Order::getStatusList();
     }
 
+    /**
+     * @return string
+     */
+    public function getDeliveryStatusName()
+    {
+        $statusList = self::getDeliveryStatusList();
+        return $statusList[$this->deliveryStatus];
+    }
+
+
+    /**
+     * @static
+     * @return array
+     */
     public static function getDeliveryStatusList()
     {
         return Delivery::getStatusList();
