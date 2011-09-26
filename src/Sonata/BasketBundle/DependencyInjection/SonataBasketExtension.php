@@ -37,12 +37,19 @@ class SonataBasketExtension extends Extension
         $config = call_user_func_array('array_merge_recursive', $config);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('orm.xml');
+        $loader->load('basketEntity.xml');
+        $loader->load('basketSession.xml');
         $loader->load('basket.xml');
         $loader->load('validator.xml');
         $loader->load('form.xml');
 
+        $basketBuilder = isset($config['builder']) ? $config['builder'] : 'sonata.basket.builder.standard';
+        $basketFactory = isset($config['factory']) ? $config['factory'] : 'sonata.basket.session.factory';
         $basketLoader = isset($config['loader']) ? $config['loader'] : 'sonata.basket.loader.standard';
 
+        $container->setAlias('sonata.basket.builder', $basketBuilder);
+        $container->setAlias('sonata.basket.factory', $basketFactory);
         $container->setAlias('sonata.basket.loader', $basketLoader);
     }
 

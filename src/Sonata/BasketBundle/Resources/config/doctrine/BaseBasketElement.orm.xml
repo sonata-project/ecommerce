@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Sonata\BasketBundle\Entity\BaseBasketElement">
+
+        <field name="productId" column="product_id" type="integer"/>
+        <field name="pos" column="pos" type="integer"/>
+        <field name="price" column="price" type="string" length="255"/>
+        <field name="quantity" column="quantity" type="integer"/>
+        <field name="options" column="options" type="json"/>
+        <field name="name" column="name" type="string" length="255"/>
+        <field name="productCode" column="product_code" type="string" length="255"/>
+
+    </mapped-superclass>
+
+</doctrine-mapping>

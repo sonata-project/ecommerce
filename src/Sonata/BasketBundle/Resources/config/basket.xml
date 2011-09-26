@@ -5,15 +5,22 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.basket.loader.standard" class="Sonata\Component\Basket\Loader">
-            <argument>Sonata\Component\Basket\Basket</argument>
-            <argument type="service" id="session" />
+        <service id="sonata.basket.builder.standard" class="Sonata\Component\Basket\BasketBuilder">
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="sonata.address.manager" />
             <argument type="service" id="sonata.delivery.pool" />
             <argument type="service" id="sonata.payment.pool" />
-            <argument type="service" id="sonata.customer.manager" />
-            <argument type="service" id="security.context" />
+        </service>
+
+        <service id="sonata.customer.selector" class="Sonata\Component\Customer\CustomerSelector">
+            <argument type="service" id="sonata.customer.manager"/>
+            <argument type="service" id="session" />
+            <argument type="service" id="security.context"/>
+        </service>
+
+        <service id="sonata.basket.loader.standard" class="Sonata\Component\Basket\Loader">
+            <argument type="service" id="sonata.basket.factory" />
+            <argument type="service" id="sonata.customer.selector" />
         </service>
 
         <service id="sonata.basket" class="Sonata\Component\Basket\Basket" factory-service="sonata.basket.loader" factory-method="getBasket"/>
