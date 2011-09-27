@@ -52,6 +52,8 @@ class AddProductProviderPass implements CompilerPassInterface
                 $pool->addMethodCall('addProduct', array($code, new Reference($code)));
 
                 $map[$code] = $container->getDefinition($options['manager'])->getArgument(0);
+
+                $container->getDefinition($options['provider'])->addMethodCall('setBasketElementManager', array(new Reference('sonata.basket_element.manager')));
             }
         }
 

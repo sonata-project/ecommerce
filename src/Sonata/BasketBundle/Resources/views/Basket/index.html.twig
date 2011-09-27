@@ -33,7 +33,7 @@ file that was distributed with this source code.
                 {# call each product controller to render its own view #}
                 {% for basketElement in basket.getBasketElements %}
                     {% render 'SonataProductBundle:Product:renderFormBasketElement' with {
-                        'formView':       form.basketElements.getChild(basketElement.pos),
+                        'formView':       form.basketElements.getChild(basketElement.position),
                         'basketElement' : basketElement
                     } %}
                 {% endfor %}

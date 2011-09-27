@@ -20,16 +20,16 @@ interface BasketElementInterface
     /**
      * the position in the basket stack
      *
-     * @param unknown_type $pos
+     * @param integer $position
      */
-    function setPos($pos);
+    function setPosition($position);
 
     /**
      * return the pos of the current basket element
      *
      * @return int
      */
-    function getPos();
+    function getPosition();
 
     /**
      * return the name of the basket element
@@ -42,7 +42,7 @@ interface BasketElementInterface
      * Define the related product
      *
      * @abstract
-     * @param $productCode
+     * @param string $productCode
      * @param \Sonata\Component\Product\ProductInterface $product
      * @return void
      */

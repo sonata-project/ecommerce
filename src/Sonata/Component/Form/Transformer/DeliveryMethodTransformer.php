@@ -12,7 +12,7 @@
 namespace Sonata\Component\Form\Transformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use \Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Delivery\Pool as DeliveryPool;
 
 /**
  * Transform a method code into a method instance

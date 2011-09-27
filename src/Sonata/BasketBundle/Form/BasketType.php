@@ -14,6 +14,7 @@ namespace Sonata\BasketBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Form\EventListener\BasketResizeFormListener;
 
 class BasketType extends AbstractType
 {
@@ -26,22 +27,12 @@ class BasketType extends AbstractType
             throw new \RunTimeException('Please provide a BasketInterface instance');
         }
 
-        $basketElementsBuilder = $builder->create('basketElements', 'form');
-
-        // ask each product repository to populate an empty group field instance
-        // so each line can be tweaked depends on the product logic
-        foreach ($basket->getBasketElements() as $basketElement) {
-            $basketElementBuilder = $basketElementsBuilder->create($basketElement->getPos(), 'form');
-            $basketElementBuilder->setErrorBubbling(false);
-
-            $provider = $basketElement->getProductProvider();
-
-            $provider->defineBasketElementForm($basketElement, $basketElementBuilder);
-
-            $basketElementsBuilder->add($basketElementBuilder);
-        }
-
-        $builder->add($basketElementsBuilder);
+        // should create a custom basket elements here
+        $basketElementBuilder = $builder->create('basketElements', 'form', array(
+            'by_reference' => false
+        ));
+        $basketElementBuilder->addEventSubscriber(new BasketResizeFormListener($builder->getFormFactory(), $basket));
+        $builder->add($basketElementBuilder);
     }
 
     public function getName()

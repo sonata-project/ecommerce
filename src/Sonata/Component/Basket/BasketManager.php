@@ -3,6 +3,8 @@
 namespace Sonata\Component\Basket;
 
 use Doctrine\ORM\EntityManager;
+use Sonata\Component\Customer\CustomerInterface;
+use Doctrine\ORM\NoResultException;
 
 class BasketManager implements BasketManagerInterface
 {
@@ -93,5 +95,25 @@ class BasketManager implements BasketManagerInterface
     {
         $this->em->remove($basket);
         $this->em->flush();
+    }
+
+    /**
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @return mixed|null
+     */
+    public function loadBasketPerCustomer(CustomerInterface $customer)
+    {
+        try {
+            return $this->em->createQueryBuilder()
+                ->select('b, be')
+                ->from($this->class, 'b')
+                ->leftJoin('b.basketElements', 'be', null, null, 'be.position')
+                ->where('b.customer = :customer')
+                ->setParameter('customer', $customer->getId())
+                ->getQuery()
+                ->getSingleResult();
+        } catch(NoResultException $e) {
+            return null;
+        }
     }
 }

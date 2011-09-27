@@ -38,8 +38,8 @@ class SonataBasketExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
-        $loader->load('basketEntity.xml');
-        $loader->load('basketSession.xml');
+        $loader->load('basket_entity.xml');
+        $loader->load('basket_session.xml');
         $loader->load('basket.xml');
         $loader->load('validator.xml');
         $loader->load('form.xml');

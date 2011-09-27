@@ -13,6 +13,7 @@ namespace Sonata\Component\Product;
 
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Sonata\AdminBundle\Form\FormMapper;
@@ -20,6 +21,19 @@ use Symfony\Component\Form\FormBuilder;
 
 interface ProductProviderInterface
 {
+    /**
+     * @abstract
+     * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
+     * @return void
+     */
+    function setBasketElementManager(BasketElementManagerInterface $basketElementManager);
+
+    /**
+     * @abstract
+     * @return \Sonata\Component\Basket\BasketElementManagerInterface
+     */
+    function getBasketElementManager();
+
     /**
      * @abstract
      * @return string

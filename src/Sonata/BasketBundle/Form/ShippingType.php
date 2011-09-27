@@ -85,4 +85,9 @@ class ShippingType extends AbstractType
 
         $builder->add($sub);
     }
+
+    public function getName()
+    {
+        return 'sonata_shipping_type';
+    }
 }

@@ -22,7 +22,7 @@ use Sonata\Component\Product\Pool;
 
 class Basket implements \Serializable, BasketInterface
 {
-    protected $basketElements = array();
+    protected $basketElements;
 
     protected $pos = array();
 
@@ -265,9 +265,13 @@ class Basket implements \Serializable, BasketInterface
      * @param  $elements
      * @return void
      */
-    public function setBasketElements($elements)
+    public function setBasketElements($basketElements)
     {
-        $this->basketElements = $elements;
+        foreach($basketElements as $basketElement) {
+            $basketElement->setBasket($this);
+        }
+
+        $this->basketElements = $basketElements;
     }
     /**
      * count number of element in the basket
@@ -304,6 +308,15 @@ class Basket implements \Serializable, BasketInterface
             $pos = $this->pos[$product];
         }
 
+        return $this->getElement($pos);
+    }
+
+    /**
+     * @param $pos
+     * @return BasketElementInterface|null
+     */
+    public function getElementByPos($pos)
+    {
         return isset($this->basketElements[$pos]) ? $this->basketElements[$pos] : null;
     }
 
@@ -321,7 +334,7 @@ class Basket implements \Serializable, BasketInterface
             $pos = $this->pos[$element->getId()];
             $element = $this->basketElements[$pos];
         } else {
-            $pos = $element->getPos();
+            $pos = $element->getPosition();
         }
 
         unset($this->basketElements[$pos]);
@@ -342,7 +355,7 @@ class Basket implements \Serializable, BasketInterface
     {
         $this->reset(false);
 
-        $basketElement->setPos($this->cptElement);
+        $basketElement->setPosition($this->cptElement);
 
         $this->basketElements[$this->cptElement] = $basketElement;
         $this->pos[$basketElement->getProduct()->getId()] = $this->cptElement;

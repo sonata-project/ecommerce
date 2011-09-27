@@ -37,7 +37,7 @@ class BasketSessionFactory implements BasketFactoryInterface
     /**
      * Load the basket
      *
-     * @param \Sonata\Component\Customer\CustomerInterface
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
      * @return \Sonata\Component\Basket\BasketInterface
      */
     public function load(CustomerInterface $customer)
@@ -52,13 +52,13 @@ class BasketSessionFactory implements BasketFactoryInterface
 
         $this->basketBuilder->build($basket);
 
-        return $basket;
+        return clone $basket;
     }
 
     /**
      * Save the basket
      *
-     * @param \Sonata\Component\Basket\BasketInterface
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      * @return void
      */
     public function save(BasketInterface $basket)
@@ -69,7 +69,7 @@ class BasketSessionFactory implements BasketFactoryInterface
     /**
      * Get the name of the session variable
      *
-     * @param Sonata\Component\Customer\CustomerInterface $customer
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
      * @return string
      */
     protected function getSessionVarName(CustomerInterface $customer)

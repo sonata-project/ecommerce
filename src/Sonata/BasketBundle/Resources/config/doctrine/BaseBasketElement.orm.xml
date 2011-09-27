@@ -7,7 +7,7 @@
     <mapped-superclass name="Sonata\BasketBundle\Entity\BaseBasketElement">
 
         <field name="productId" column="product_id" type="integer"/>
-        <field name="pos" column="pos" type="integer"/>
+        <field name="position" column="position" type="integer"/>
         <field name="price" column="price" type="string" length="255"/>
         <field name="quantity" column="quantity" type="integer"/>
         <field name="options" column="options" type="json"/>

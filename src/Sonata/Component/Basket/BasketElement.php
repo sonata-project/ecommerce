@@ -30,7 +30,7 @@ class BasketElement implements \Serializable, BasketElementInterface
 
     protected $name = null;
 
-    protected $pos = null;
+    protected $position = null;
 
     protected $productDefinition = null;
 
@@ -44,11 +44,11 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * the position in the basket stack
      *
-     * @param integer $pos
+     * @param integer $position
      */
-    public function setPos($pos)
+    public function setPosition($position)
     {
-        $this->pos = $pos;
+        $this->position = $position;
     }
 
     /**
@@ -56,9 +56,9 @@ class BasketElement implements \Serializable, BasketElementInterface
      *
      * @return integer
      */
-    public function getPos()
+    public function getPosition()
     {
-        return $this->pos;
+        return $this->position;
     }
 
     /**
@@ -105,7 +105,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * return the product id
      *
-     * @return null
+     * @return mixed
      */
     public function getProductId()
     {
@@ -150,7 +150,6 @@ class BasketElement implements \Serializable, BasketElementInterface
 
     /**
      * Return the VAT
-     *
      *
      * @return $float
      */

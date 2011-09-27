@@ -13,7 +13,7 @@ namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Basket\BasketElementInterface;
 use Symfony\Component\Form\FormView;
 use Sonata\Component\Order\OrderElementInterface;
 
@@ -43,7 +43,7 @@ abstract class BaseProductController extends Controller
         ));
     }
 
-    public function renderFormBasketElementAction(FormView $formView, BasketElement $basketElement)
+    public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement)
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
@@ -53,7 +53,7 @@ abstract class BaseProductController extends Controller
         ));
     }
 
-    public function renderFinalReviewBasketElementAction(BasketElement $basketElement)
+    public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement)
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
@@ -67,12 +67,12 @@ abstract class BaseProductController extends Controller
 
     }
 
-    public function viewBasketElement(BasketElement $basketElement)
+    public function viewBasketElement(BasketElementInterface $basketElement)
     {
 
     }
 
-    public function viewBasketElementConfirmation(BasketElement $basketElement)
+    public function viewBasketElementConfirmation(BasketElementInterface $basketElement)
     {
 
     }

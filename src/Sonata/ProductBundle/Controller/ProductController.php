@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Application\Sonata\PaymentBundle\Entity\Transaction;
-use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Basket\BasketElementInterface;
 use Symfony\Component\Form\FormView;
 
 class ProductController extends Controller
@@ -55,10 +55,10 @@ class ProductController extends Controller
 
     /**
      * @param \Symfony\Component\Form\FormView $formView
-     * @param \Sonata\Component\Basket\BasketElement $basketElement
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
-    public function renderFormBasketElementAction(FormView $formView, BasketElement $basketElement)
+    public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement)
     {
         $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName()) ;
 
@@ -80,10 +80,10 @@ class ProductController extends Controller
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketElement $basketElement
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
-    public function renderFinalReviewBasketElementAction(BasketElement $basketElement)
+    public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement)
     {
         $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
 

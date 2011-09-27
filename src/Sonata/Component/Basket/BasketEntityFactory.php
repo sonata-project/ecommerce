@@ -37,7 +37,7 @@ class BasketEntityFactory implements BasketFactoryInterface
     /**
      * Load the basket
      *
-     * @param \Sonata\Component\Customer\CustomerInterface
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
      * @return \Sonata\Component\Basket\BasketInterface
      */
     public function load(CustomerInterface $customer)
@@ -45,9 +45,7 @@ class BasketEntityFactory implements BasketFactoryInterface
         $basket = null;
 
         if ($customer->getId()) {
-            $basket = $this->basketManager->findOneBy(array(
-                'customer' => $customer->getId()
-            ));
+            $basket = $this->basketManager->loadBasketPerCustomer($customer);
         }
 
         if (!$basket) {
@@ -64,7 +62,7 @@ class BasketEntityFactory implements BasketFactoryInterface
     /**
      * Save the basket
      *
-     * @param \Sonata\Component\Basket\BasketInterface
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      * @return void
      */
     public function save(BasketInterface $basket)

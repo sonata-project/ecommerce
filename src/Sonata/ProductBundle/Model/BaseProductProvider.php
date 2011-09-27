@@ -23,8 +23,9 @@ use Symfony\Component\Form\FormBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 
 use Application\Sonata\OrderBundle\Entity\OrderElement;
+use Sonata\Component\Basket\BasketElementManagerInterface;
 
-use JMS\SerializerBundle\SerializerInterface;
+use JMS\SerializerBundle\Serializer\SerializerInterface;
 use JMS\SerializerBundle\Serializer\Serializer;
 
 abstract class BaseProductProvider implements ProductProviderInterface
@@ -36,6 +37,25 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $code;
 
     protected $serializer;
+
+    protected $basketElementManager;
+
+    /**
+     * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
+     * @return void
+     */
+    function setBasketElementManager(BasketElementManagerInterface $basketElementManager)
+    {
+        $this->basketElementManager = $basketElementManager;
+    }
+
+    /**
+     * @return \Sonata\Component\Basket\BasketElementManagerInterface
+     */
+    function getBasketElementManager()
+    {
+        return $this->basketElementManager;
+    }
 
     /**
      * @param \JMS\SerializerBundle\Serializer\Serializer $serializer
@@ -262,7 +282,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function createBasketElement(ProductInterface $product = null, array $options = array())
     {
-        $basketElement = new BasketElement();
+        $basketElement = $this->getBasketElementManager()->create();
         $this->buildBasketElement($basketElement, $product, $options);
 
         return $basketElement;

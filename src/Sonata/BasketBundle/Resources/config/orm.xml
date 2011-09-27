@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="sonata.basket.entity.class">Application\Sonata\BasketBundle\Entity\Basket</parameter>
+        <parameter key="sonata.basket_element.entity.class">Application\Sonata\BasketBundle\Entity\BasketElement</parameter>
     </parameters>
 
     <services>
@@ -13,5 +14,11 @@
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument>%sonata.basket.entity.class%</argument>
         </service>
+
+        <service id="sonata.basket_element.manager" class="Sonata\Component\Basket\BasketElementManager">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument>%sonata.basket_element.entity.class%</argument>
+        </service>
+
     </services>
 </container>
