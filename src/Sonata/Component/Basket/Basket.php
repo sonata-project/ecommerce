@@ -267,12 +267,9 @@ class Basket implements \Serializable, BasketInterface
      */
     public function setBasketElements($basketElements)
     {
-        foreach($basketElements as $basketElement) {
-            $basketElement->setBasket($this);
-        }
-
         $this->basketElements = $basketElements;
     }
+
     /**
      * count number of element in the basket
      *

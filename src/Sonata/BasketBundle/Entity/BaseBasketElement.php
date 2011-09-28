@@ -33,12 +33,15 @@ abstract class BaseBasketElement extends BasketElement
     }
 
     /**
-     * Get price
-     *
-     * @return string $price
+     * @param array $basketElements
+     * @return void
      */
-//    public function getPrice()
-//    {
-//        return $this->price;
-//    }
+    public function setBasketElements($basketElements)
+    {
+        foreach($basketElements as $basketElement) {
+            $basketElement->setBasket($this);
+        }
+
+        $this->basketElements = $basketElements;
+    }
 }
