@@ -73,7 +73,7 @@ class BasketResizeFormListener implements EventSubscriberInterface
             $basketElementBuilder = $this->factory->createNamedBuilder('form', $basketElement->getPosition(), $basketElement, array(
                 'property_path' => '['.$basketElement->getPosition().']',
             ));
-//            $basketElementBuilder->setErrorBubbling(false);
+            $basketElementBuilder->setErrorBubbling(false);
 
             $provider = $basketElement->getProductProvider();
             $provider->defineBasketElementForm($basketElement, $basketElementBuilder);
