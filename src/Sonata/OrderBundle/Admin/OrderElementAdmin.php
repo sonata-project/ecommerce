@@ -44,8 +44,8 @@ class OrderElementAdmin extends Admin
             ->addIdentifier('id')
             ->add('order')
             ->add('productType')
-            ->add('status')
-            ->add('deliveryStatus')
+            ->add('getStatusName', 'text', array('name' => 'status','stortable' => 'status'))
+            ->add('getDeliveryStatusName', 'text', array('name' => 'deliveryStatus','stortable' => 'deliveryStatus'))
         ;
     }
 }

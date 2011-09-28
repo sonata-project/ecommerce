@@ -12,8 +12,13 @@
 namespace Sonata\BasketBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sonata\BasketBundle\DependencyInjection\Compiler\GlobalVariableCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class SonataBasketBundle extends Bundle
 {
-
+    public function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new GlobalVariableCompilerPass);
+    }
 }

@@ -254,6 +254,66 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->status;
     }
 
+
+    /**
+     *
+     * return true if the order is validated
+     *
+     * @return boolean
+     */
+    public function isValidated()
+    {
+        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_VALIDATED;
+    }
+
+    /**
+     *
+     *
+     * @return boolean true if cancelled, else false
+     */
+    public function isCancelled()
+    {
+        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_CANCELLED;
+    }
+
+    /**
+     *
+     *
+     * @return boolean true if pending, else false
+     */
+    public function isPending()
+    {
+        return in_array($this->getStatus(), array(OrderInterface::STATUS_PENDING));
+    }
+
+    /**
+     * Return true if the order is open
+     *
+     * @return boolean
+     */
+    public function isOpen()
+    {
+        return in_array($this->getStatus(), array(OrderInterface::STATUS_OPEN));
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCancellable()
+    {
+        return $this->isOpen() || $this->isPending();
+    }
+
+    /**
+     * Return true if the order has an error
+     *
+     * @return boolean
+     */
+    public function isError()
+    {
+        return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
+    }
+
     /**
      * Set delivery_status
      *
@@ -334,21 +394,35 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->productType;
     }
 
+    /**
+     * @param \DateTime|null $createdAt
+     * @return void
+     */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param \DateTime|null $createdAt
+     * @return void
+     */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -420,11 +494,38 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->getDesignation();
     }
 
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        $statusList = self::getStatusList();
+        return $statusList[$this->getStatus()];
+    }
+
+    /**
+     * @static
+     * @return array
+     */
     public static function getStatusList()
     {
         return Order::getStatusList();
     }
 
+    /**
+     * @return string
+     */
+    public function getDeliveryStatusName()
+    {
+        $statusList = self::getDeliveryStatusList();
+        return $statusList[$this->deliveryStatus];
+    }
+
+
+    /**
+     * @static
+     * @return array
+     */
     public static function getDeliveryStatusList()
     {
         return Delivery::getStatusList();

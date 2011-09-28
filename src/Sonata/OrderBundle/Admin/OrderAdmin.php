@@ -76,9 +76,9 @@ class OrderAdmin extends Admin
             ->addIdentifier('id')
             ->addIdentifier('reference')
             ->add('customer')
-            ->add('status')
-            ->add('deliveryStatus')
-            ->add('paymentStatus')
+            ->add('getStatusName', 'text', array('name' => 'status', 'sortable' => 'status'))
+            ->add('getDeliveryStatusName', 'text', array('name' => 'deliveryStatus', 'sortable' => 'deliveryStatus'))
+            ->add('getPaymentStatusName', 'text', array('name' => 'paymentStatus', 'sortable' => 'paymentStatus'))
             ->add('validatedAt')
             ->add('totalExcl')
         ;

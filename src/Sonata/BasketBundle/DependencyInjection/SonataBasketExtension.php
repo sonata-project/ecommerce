@@ -43,6 +43,7 @@ class SonataBasketExtension extends Extension
         $loader->load('basket.xml');
         $loader->load('validator.xml');
         $loader->load('form.xml');
+        $loader->load('twig.xml');
 
         $basketBuilder = isset($config['builder']) ? $config['builder'] : 'sonata.basket.builder.standard';
         $basketFactory = isset($config['factory']) ? $config['factory'] : 'sonata.basket.session.factory';
