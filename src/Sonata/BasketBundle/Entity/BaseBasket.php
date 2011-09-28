@@ -11,4 +11,17 @@ abstract class BaseBasket extends Basket
     {
         $this->basketElements = new ArrayCollection;
     }
+
+    /**
+     * @param array $basketElements
+     * @return void
+     */
+    public function setBasketElements($basketElements)
+    {
+        foreach($basketElements as $basketElement) {
+            $basketElement->setBasket($this);
+        }
+
+        $this->basketElements = $basketElements;
+    }
 }

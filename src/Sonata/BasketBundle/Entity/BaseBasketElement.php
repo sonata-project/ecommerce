@@ -31,17 +31,4 @@ abstract class BaseBasketElement extends BasketElement
     {
         $this->basket = $basket;
     }
-
-    /**
-     * @param array $basketElements
-     * @return void
-     */
-    public function setBasketElements($basketElements)
-    {
-        foreach($basketElements as $basketElement) {
-            $basketElement->setBasket($this);
-        }
-
-        $this->basketElements = $basketElements;
-    }
 }
