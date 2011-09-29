@@ -10,83 +10,91 @@
 
 namespace Sonata\Component\Customer;
 
+use FOS\UserBundle\Model\UserInterface;
 
 interface CustomerInterface
 {
     /**
-     * @abstract
+     * Set createdAt
+     *
      * @param \DateTime|null $createdAt
-     * @return void
      */
     function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * @abstract
-     * @return \DateTime
+     * Get createdAt
+     *
+     * @return \DateTime createdAt
      */
     function getCreatedAt();
 
     /**
-     * @abstract
+     * Set firstname
+     *
      * @param string $firstname
-     * @return void
      */
     function setFirstname($firstname);
 
     /**
-     * @abstract
-     * @return void
+     * Get firstname
+     *
+     * @return string $firstname
      */
     function getFirstname();
 
     /**
-     * @abstract
-     * @return void
+     * Get full name
+     *
+     * @return string
      */
     function getFullname();
 
     /**
-     * @abstract
-     * @param $lastname
-     * @return void
+     * Set lastname
+     *
+     * @param string $lastname
      */
     function setLastname($lastname);
 
     /**
-     * @abstract
-     * @return void
+     * Get lastname
+     *
+     * @return string $lastname
      */
     function getLastname();
 
     /**
-     * @abstract
+     * Set updatedAt
+     *
      * @param \DateTime|null $updatedAt
-     * @return void
      */
     function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * @abstract
-     * @return \DateTime
+     * Get updatedAt
+     *
+     * @return \DateTime $updatedAt
      */
     function getUpdatedAt();
 
     /**
-     * @abstract
-     * @param $user
-     * @return void
+     * Set user
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $user
      */
-    function setUser($user);
+    function setUser(UserInterface $user);
 
     /**
-     * @abstract
-     * @return void
+     * Get user
+     *
+     * @return \FOS\UserBundle\Model\UserInterface $user
      */
     function getUser();
 
     /**
-     * @abstract
-     * @return void
+     * Get id
+     *
+     * @return integer $id
      */
     function getId();
 }

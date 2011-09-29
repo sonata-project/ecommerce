@@ -5,6 +5,7 @@ namespace Sonata\CustomerBundle\Entity;
 use Sonata\Component\Customer\CustomerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\Component\Customer\AddressInterface;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Sonata\CustomerBundle\Entity\BaseCustomer
@@ -36,7 +37,7 @@ abstract class BaseCustomer implements CustomerInterface
     protected $email;
 
     /**
-     * @var datetime $birthDate
+     * @var \DateTime $birthDate
      */
     protected $birthDate;
 
@@ -61,33 +62,40 @@ abstract class BaseCustomer implements CustomerInterface
     protected $faxNumber;
 
     /**
-     * @var datetime $updatedAt
+     * @var \DateTime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
 
     /**
-     * @var Application\SandboxBundle\Entity\User
+     * @var \FOS\UserBundle\Model\UserInterface $user
      */
     protected $user;
 
     /**
-     * @var Collection
+     * @var \Doctrine\Common\Collections\ArrayCollection $addresses
      */
     protected $addresses;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection $orders
+     */
     protected $orders;
 
+    /**
+     * @var boolean $isFake
+     */
     protected $isFake;
 
     public function __construct()
     {
         $this->title        = self::TITLE_MR;
         $this->addresses    = new ArrayCollection();
+        $this->orders       = new ArrayCollection();
         $this->isFake       = false;
     }
 
@@ -112,11 +120,21 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->getFullname();
     }
 
+    /**
+     * Get title
+     *
+     * @return integer $title
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
+    /**
+     * Set title
+     *
+     * @param integer $title
+     */
     public function setTitle($title)
     {
         $this->title = $title;
@@ -135,6 +153,11 @@ abstract class BaseCustomer implements CustomerInterface
         );
     }
 
+    /**
+     * Get title name
+     *
+     * @return string
+     */
     public function getTitleName()
     {
         $list = self::getTitlesList();
@@ -142,140 +165,271 @@ abstract class BaseCustomer implements CustomerInterface
         return isset($list[$this->title]) ? $list[$this->title] : '';
     }
 
+    /**
+     * Get firstname
+     *
+     * @return string $firstname
+     */
     public function getFirstname()
     {
         return $this->firstname;
     }
 
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     */
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
     }
 
+    /**
+     * Get lastname
+     *
+     * @return string $lastname
+     */
     public function getLastname()
     {
         return $this->lastname;
     }
 
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     */
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
     }
 
+    /**
+     * Get full name
+     *
+     * @return string
+     */
     public function getFullname()
     {
         return $this->getFirstname(). ' ' . $this->getLastname();
     }
 
+    /**
+     * Get email
+     *
+     * @return string $email
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
+    /**
+     * Get birthDate
+     *
+     * @return \DateTime $birthDate
+     */
     public function getBirthDate()
     {
         return $this->birthDate;
     }
 
+    /**
+     * Set birthDate
+     *
+     * @param \DateTime|null $birthDate
+     */
     public function setBirthDate(\DateTime $birthDate = null)
     {
         $this->birthDate = $birthDate;
     }
 
+    /**
+     * Get birthPlace
+     *
+     * @return string $birthPlace
+     */
     public function getBirthPlace()
     {
         return $this->birthPlace;
     }
 
+    /**
+     * Set birthPlace
+     *
+     * @param string $birthPlace
+     */
     public function setBirthPlace($birthPlace)
     {
         $this->birthPlace = $birthPlace;
     }
 
+    /**
+     * Get phoneNumber
+     *
+     * @return string $phoneNumber
+     */
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
 
+    /**
+     * Set phoneNumber
+     *
+     * @param string $phoneNumber
+     */
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }
 
+    /**
+     * Get mobileNumber
+     *
+     * @return string $mobileNumber
+     */
     public function getMobileNumber()
     {
         return $this->mobileNumber;
     }
 
+    /**
+     * Set mobileNumber
+     *
+     * @param string $mobileNumber
+     */
     public function setMobileNumber($mobileNumber)
     {
         $this->mobileNumber = $mobileNumber;
     }
 
+    /**
+     * Get faxNumber
+     *
+     * @return string $faxNumber
+     */
     public function getFaxNumber()
     {
         return $this->faxNumber;
     }
 
+    /**
+     * Set faxNumber
+     *
+     * @param string $faxNumber
+     */
     public function setFaxNumber($faxNumber)
     {
         $this->faxNumber = $faxNumber;
     }
 
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime createdAt
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime|null $createdAt
+     */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime $updatedAt
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime|null $updatedAt
+     */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function setUser($user)
+    /**
+     * Set user
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $user
+     */
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
 
+    /**
+     * Get user
+     *
+     * @return \FOS\UserBundle\Model\UserInterface $user
+     */
     public function getUser()
     {
         return $this->user;
     }
 
+    /**
+     * Add address to addresses
+     *
+     * @param \Sonata\Component\Customer\AddressInterface $address
+     */
     public function addAddress(AddressInterface $address)
     {
         $address->setCustomer($this);
 
-        $this->addresses[] = $address;
+        $this->addresses->add($address);
     }
 
+    /**
+     * Get addresses
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection $addresses
+     */
     public function getAddresses()
     {
         return $this->addresses;
     }
 
+    /**
+     * Get addresses by type
+     *
+     * @param integer $type
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
     public function getAddressesByType($type)
     {
-        $addresses = array();
+        $addresses = new ArrayCollection();
 
         foreach ($this->getAddresses() as $address) {
             if ($type == $address->getType()) {
-                $addresses[] = $address;
+                $addresses->add($address);
             }
         }
 
@@ -283,8 +437,9 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * @param $orders
-     * @return void
+     * Set orders
+     *
+     * @param \Doctrine\Common\Collections\ArrayCollection $orders
      */
     public function setOrders($orders)
     {
@@ -292,7 +447,9 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * @return
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection $orders
      */
     public function getOrders()
     {
@@ -300,8 +457,9 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * @param bool $isFake
-     * @return void
+     * Set isFake
+     *
+     * @param boolean $isFake
      */
     public function setIsFake($isFake)
     {
@@ -309,7 +467,9 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * @return bool
+     * Get isFake
+     *
+     * @return boolean $isFake
      */
     public function getIsFake()
     {
