@@ -101,21 +101,21 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement)
     {
-        $product = $basketElement->getProduct();
-
         $orderElement = new OrderElement;
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setPrice($basketElement->getTotal(false));
         $orderElement->setVat($basketElement->getVat());
         $orderElement->setDesignation($basketElement->getName());
-        $orderElement->setDescription($product->getDescription());
-        $orderElement->setProductId($product->getId());
         $orderElement->setProductType($this->getCode());
         $orderElement->setStatus(OrderInterface::STATUS_PENDING);
         $orderElement->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
         $orderElement->setCreatedAt(new \DateTime);
         $orderElement->setOptions($basketElement->getOptions());
-        $orderElement->setRawProduct(json_decode($this->getRawProduct($product, 'json')));
+        
+        $product = $basketElement->getProduct();
+        $orderElement->setDescription($product->getDescription());
+        $orderElement->setProductId($product->getId());
+        $orderElement->setRawProduct($this->getRawProduct($product, 'json'));
 
         return $orderElement;
     }
@@ -127,7 +127,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function getRawProduct(ProductInterface $product, $format = 'json')
     {
-        return $this->serializer->serialize($product, $format);
+        return json_decode($this->serializer->serialize($product, $format));
     }
 
     /**

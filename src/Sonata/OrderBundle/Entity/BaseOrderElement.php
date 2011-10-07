@@ -242,6 +242,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function setStatus($status)
     {
         $this->status = $status;
+        if ($this->getStatus() == OrderInterface::STATUS_VALIDATED) {
+            $this->setValidatedAt(new \DateTime);
+        }
     }
 
     /**
