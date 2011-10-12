@@ -458,6 +458,16 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
+     * @param $name
+     * @param $value
+     * @return void
+     */
+    public function setOption($name, $value)
+    {
+        $this->options[$name] = $value;
+    }
+
+    /**
      * @param array $rawProduct
      */
     public function setRawProduct($rawProduct)
