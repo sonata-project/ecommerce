@@ -11,8 +11,8 @@
         <field name="slug"          column="slug"           type="string"     nullable="true" length="255"/>
         <field name="name"          column="name"           type="string"   nullable="false" length="255"/>
         <field name="description"   column="description"    type="text"     nullable="true" length="1024"/>
-        <field name="price"         column="price"          type="decimal"  nullable="true" />
-        <field name="vat"           column="vat"            type="decimal"  nullable="true" />
+        <field name="price"         column="price"          type="decimal" precision="10" scale="2" nullable="true" />
+        <field name="vat"           column="vat"            type="decimal" precision="10" scale="2" nullable="true" />
         <field name="stock"         column="stock"          type="integer"  nullable="true" />
         <field name="enabled"       column="enabled"        type="boolean"  nullable="true" />
 
