@@ -22,9 +22,9 @@ class ProductAdmin extends Admin
 {
     protected $pool;
 
-    protected $baseRouteName    = 'admin_sonata_product_product';
-
-    protected $baseRoutePattern = '/sonata/product/product';
+//    protected $baseRouteName    = 'admin_sonata_product_product';
+//
+//    protected $baseRoutePattern = '/sonata/product/product';
 
     /**
      * @param $code
@@ -53,6 +53,11 @@ class ProductAdmin extends Admin
         return parent::getClass();
     }
 
+    public function getProductType()
+    {
+        return $this->getRequest()->get('provider');
+    }
+
     /**
      * Returns the product class from the provided request
      * @return string
@@ -60,7 +65,7 @@ class ProductAdmin extends Admin
     public function getProductClass()
     {
         if($this->hasRequest()) {
-            $code = $this->getRequest()->get('provider');
+            $code = $this->getProductType();
 
             if ($code) {
                 return $this->pool->getManager($code)->getClass();
@@ -120,7 +125,7 @@ class ProductAdmin extends Admin
         }
 
         return array(
-            'provider' => $this->getRequest()->get('provider'),
+            'provider' => $this->getProductType(),
         );
     }
 
