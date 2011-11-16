@@ -17,7 +17,7 @@
 
     <services>
         <service id="sonata.customer.admin.customer" class="%sonata.customer.admin.customer.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="customer"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="customer" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.customer.admin.customer.entity%</argument>
             <argument>%sonata.customer.admin.customer.controller%</argument>
@@ -33,7 +33,7 @@
         </service>
 
         <service id="sonata.customer.admin.address" class="%sonata.customer.admin.address.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="address"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="address" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.customer.admin.address.entity%</argument>
             <argument>%sonata.customer.admin.address.controller%</argument>

@@ -18,8 +18,15 @@ use Application\Sonata\CustomerBundle\Entity\Address;
 
 class AddressAdmin extends Admin
 {
-    protected $parentAssociationMapping = 'customer';
+    public function configure()
+    {
+        $this->parentAssociationMapping = 'customer';
+        $this->setTranslationDomain('SonataCustomerBundle');
+    }
 
+    /**
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     */
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -56,6 +63,9 @@ class AddressAdmin extends Admin
         ;
     }
 
+    /**
+     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
+     */
     public function configureListFields(ListMapper $list)
     {
         $list

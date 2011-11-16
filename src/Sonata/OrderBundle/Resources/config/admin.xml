@@ -15,7 +15,7 @@
 
     <services>
         <service id="sonata.order.admin.order" class="%sonata.order.admin.order.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.order.admin.order.entity%</argument>
             <argument>%sonata.order.admin.order.controller%</argument>
@@ -25,7 +25,7 @@
         </service>
 
         <service id="sonata.order.admin.order_element" class="%sonata.order.admin.order_element.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="orderElement" show_in_dashboard="false"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="orderElement" show_in_dashboard="false"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.order.admin.order_element.entity%</argument>
             <argument>%sonata.order.admin.order_element.controller%</argument>

@@ -20,7 +20,11 @@ use Application\Sonata\OrderBundle\Entity\OrderElement;
 
 class OrderElementAdmin extends Admin
 {
-    protected $parentAssociationMapping = 'order';
+    public function configure()
+    {
+        $this->parentAssociationMapping = 'order';
+        $this->setTranslationDomain('SonataOrderBundle');
+    }
 
     public function configureFormFields(FormMapper $formMapper)
     {

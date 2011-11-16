@@ -23,7 +23,11 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class OrderAdmin extends Admin
 {
-    protected $parentAssociationMapping = 'customer';
+    public function configure()
+    {
+        $this->parentAssociationMapping = 'customer';
+        $this->setTranslationDomain('SonataOrderBundle');
+    }
 
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -60,7 +64,7 @@ class OrderAdmin extends Admin
                 ->add('shippingMobile')
             ->end()
         ;
-        
+
         if (!$this->isChild()) {
             $formMapper
                 ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))

@@ -22,10 +22,6 @@ class ProductAdmin extends Admin
 {
     protected $pool;
 
-//    protected $baseRouteName    = 'admin_sonata_product_product';
-//
-//    protected $baseRoutePattern = '/sonata/product/product';
-
     /**
      * @param $code
      * @param $class
@@ -37,6 +33,12 @@ class ProductAdmin extends Admin
         parent::__construct($code, $class, $baseControllerName);
 
         $this->pool = $pool;
+    }
+
+
+    public function configure()
+    {
+        $this->setTranslationDomain('SonataProductBundle');
     }
 
     /**

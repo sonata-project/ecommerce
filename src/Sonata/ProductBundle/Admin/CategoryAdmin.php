@@ -17,6 +17,14 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class CategoryAdmin extends Admin
 {
+    public function configure()
+    {
+        $this->setTranslationDomain('SonataProductBundle');
+    }
+
+    /**
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     */
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -28,6 +36,9 @@ class CategoryAdmin extends Admin
         ;
     }
 
+    /**
+     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
+     */
     public function configureListFields(ListMapper $list)
     {
         $list

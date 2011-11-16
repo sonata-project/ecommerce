@@ -20,6 +20,11 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class CustomerAdmin extends Admin
 {
+    public function configure()
+    {
+        $this->setTranslationDomain('SonataOrderBundle');
+    }
+
     /**
      * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
      * @return void
