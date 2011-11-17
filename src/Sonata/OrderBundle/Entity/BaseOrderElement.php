@@ -543,4 +543,41 @@ abstract class BaseOrderElement implements OrderElementInterface
     {
         return Delivery::getStatusList();
     }
+
+    /**
+     * Return the price
+     *
+     * if $tva = true, return the price with vat
+     *
+     * @param boolean $tva
+     * @return float
+     */
+    public function getUnitPrice($tva = false)
+    {
+        $price = $this->price;
+        $product = $this->product;
+
+        if (!$product instanceof ProductInterface) {
+            return 0;
+        }
+
+        if ($tva) {
+            $price = $price * (1 + $product->getVat() / 100);
+        }
+
+        return bcadd($price, 0, 2);
+    }
+
+    /**
+     * Return the total (price * quantity)
+     *
+     * if $tva = true, return the price with vat
+     *
+     * @param boolean $tva
+     * @return float
+     */
+    public function getTotal($tva = false)
+    {
+        return $this->getUnitPrice($tva) * $this->getQuantity();
+    }
 }
