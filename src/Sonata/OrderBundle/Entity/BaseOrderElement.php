@@ -555,14 +555,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function getUnitPrice($tva = false)
     {
         $price = $this->price;
-        $product = $this->product;
-
-        if (!$product instanceof ProductInterface) {
-            return 0;
-        }
 
         if ($tva) {
-            $price = $price * (1 + $product->getVat() / 100);
+            $price = $price * (1 + $this->vat / 100);
         }
 
         return bcadd($price, 0, 2);
