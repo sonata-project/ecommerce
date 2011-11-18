@@ -22,7 +22,7 @@ class CustomerAdmin extends Admin
 {
     public function configure()
     {
-        $this->setTranslationDomain('SonataOrderBundle');
+        $this->setTranslationDomain('SonataCustomerBundle');
     }
 
     /**
