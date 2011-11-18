@@ -102,6 +102,12 @@ class ProductAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+
+        // this admin class works only from a request scope
+        if (!$this->hasRequest()) {
+            return;
+        }
+
         $product = $this->getSubject();
 
         if (!$product) {
