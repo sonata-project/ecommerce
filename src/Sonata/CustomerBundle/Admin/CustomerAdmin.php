@@ -90,17 +90,17 @@ class CustomerAdmin extends Admin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_customer_edit', array(), 'SonataCustomerBundle'),
+            $this->trans('customer.sidemenu.link_customer_edit'),
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
         );
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_address_list', array(), 'SonataCustomerBundle'),
+            $this->trans('customer.sidemenu.link_address_list'),
             array('uri' => $admin->generateUrl('sonata.customer.admin.address.list', array('id' => $id)))
         );
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_order_list', array(), 'SonataCustomerBundle'),
+            $this->trans('customer.sidemenu.link_order_list'),
             array('uri' => $admin->generateUrl('sonata.order.admin.order.list', array('id' => $id)))
         );
     }
