@@ -48,8 +48,8 @@ class OrderElementAdmin extends Admin
             ->addIdentifier('id')
             ->add('order')
             ->add('productType')
-            ->add('getStatusName', 'text', array('name' => 'status','stortable' => 'status'))
-            ->add('getDeliveryStatusName', 'text', array('name' => 'deliveryStatus','stortable' => 'deliveryStatus'))
+            ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'status'))
+            ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'deliveryStatus'))
         ;
     }
 }
