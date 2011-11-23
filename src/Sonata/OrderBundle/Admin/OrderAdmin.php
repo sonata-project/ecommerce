@@ -83,7 +83,7 @@ class OrderAdmin extends Admin
             ->add('customer')
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'deliveryStatus'))
-            ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'paymentStatus'))
+            ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataPaymentBundle', 'sortable' => 'paymentStatus'))
             ->add('validatedAt')
             ->add('totalExcl')
         ;
