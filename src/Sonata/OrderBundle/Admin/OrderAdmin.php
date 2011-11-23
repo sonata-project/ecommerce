@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 use Application\Sonata\OrderBundle\Entity\Order;
 use Application\Sonata\ProductBundle\Entity\Delivery;
+use Application\Sonata\PaymentBundle\Entity\Transaction;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
@@ -34,9 +35,9 @@ class OrderAdmin extends Admin
         $formMapper
             ->with($this->trans('order.form.group_main_label'))
                 ->add('currency')
-                ->add('status', 'choice', array('choices' => Order::getStatusList()))
-                ->add('paymentStatus')
-                ->add('deliveryStatus', 'choice', array('choices' => Delivery::getStatusList()))
+                ->add('status', 'sonata_type_translatable_choice', array('choices' => Order::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
+                ->add('paymentStatus', 'sonata_type_translatable_choice', array('choices' => Transaction::getStatusList(), 'catalogue' => 'SonataPaymentBundle'))
+                ->add('deliveryStatus', 'sonata_type_translatable_choice', array('choices' => Delivery::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
                 ->add('validatedAt')
             ->end()
             ->with($this->trans('order.form.group_billing_label'), array('collapsed' => true))
