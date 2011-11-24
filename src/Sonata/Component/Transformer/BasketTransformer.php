@@ -20,6 +20,7 @@ use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Payment\PaymentInterface;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Sonata\Component\Order\OrderElementInterface
 
 class BasketTransformer extends BaseTransformer
 {
@@ -145,6 +146,10 @@ class BasketTransformer extends BaseTransformer
 
         foreach ($basket->getBasketElements() as $basketElement) {
             $orderElement = $basketElement->getProductProvider()->createOrderElement($basketElement);
+
+            if (!$orderElement instanceof OrderElementInterface) {
+                continue;
+            }
 
             $order->addOrderElement($orderElement);
         }

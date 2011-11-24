@@ -547,16 +547,16 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Return the price
      *
-     * if $tva = true, return the price with vat
+     * if $vat = true, return the price with vat
      *
-     * @param boolean $tva
+     * @param boolean $vat
      * @return float
      */
-    public function getUnitPrice($tva = false)
+    public function getUnitPrice($vat = false)
     {
         $price = $this->price;
 
-        if ($tva) {
+        if ($vat) {
             $price = $price * (1 + $this->vat / 100);
         }
 
@@ -566,13 +566,23 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Return the total (price * quantity)
      *
-     * if $tva = true, return the price with vat
+     * if $vat = true, return the price with vat
      *
-     * @param boolean $tva
+     * @param boolean $vat
      * @return float
      */
-    public function getTotal($tva = false)
+    public function getTotal($vat = false)
     {
-        return $this->getUnitPrice($tva) * $this->getQuantity();
+        return $this->getUnitPrice($vat) * $this->getQuantity();
+    }
+
+    /**
+     * Returns the total with vat due to limitation of AdminBundle
+     *
+     * @return float
+     */
+    public function getTotalWithVat()
+    {
+        return $this->getTotal(true);
     }
 }

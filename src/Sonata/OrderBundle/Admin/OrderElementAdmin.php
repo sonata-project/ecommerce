@@ -36,8 +36,8 @@ class OrderElementAdmin extends Admin
                 ->add('vat')
                 ->add('designation')
                 ->add('description')
-                ->add('status', 'choice', array('choices' => OrderElement::getStatusList()))
-                ->add('deliveryStatus', 'choice', array('choices' => OrderElement::getDeliveryStatusList()))
+                ->add('status', 'sonata_type_translatable_choice', array('catalogue' => 'SonataOrderBundle', 'choices' => OrderElement::getStatusList()))
+                ->add('deliveryStatus', 'sonata_type_translatable_choice', array('catalogue' => 'SonataOrderBundle', 'choices' => OrderElement::getDeliveryStatusList()))
             ->end()
         ;
     }
@@ -50,6 +50,8 @@ class OrderElementAdmin extends Admin
             ->add('productType')
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'deliveryStatus'))
+            ->add('getTotalWithVat')
+            ->add('getTotal')
         ;
     }
 }
