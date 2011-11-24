@@ -20,7 +20,7 @@ use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Payment\PaymentInterface;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
-use Sonata\Component\Order\OrderElementInterface
+use Sonata\Component\Order\OrderElementInterface;
 
 class BasketTransformer extends BaseTransformer
 {
