@@ -50,8 +50,8 @@ class OrderElementAdmin extends Admin
             ->add('productType')
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'deliveryStatus'))
-            ->add('getTotalWithVat')
-            ->add('getTotal')
+            ->add('getTotalWithVat', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
+            ->add('getTotal', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
         ;
     }
 }

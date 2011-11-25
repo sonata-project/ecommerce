@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Application\Sonata\OrderBundle\Entity\Order;
 use Application\Sonata\ProductBundle\Entity\Delivery;
 use Application\Sonata\PaymentBundle\Entity\Transaction;
+use Application\Sonata\ProductBundle\Entity\Product;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
@@ -85,7 +86,7 @@ class OrderAdmin extends Admin
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'deliveryStatus'))
             ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataPaymentBundle', 'sortable' => 'paymentStatus'))
             ->add('validatedAt')
-            ->add('totalExcl')
+            ->add('totalExcl', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
         ;
     }
 
@@ -93,7 +94,7 @@ class OrderAdmin extends Admin
     {
         $filter
             ->add('reference')
-//            ->add('customer')
+            ->add('customer')
         ;
     }
 

@@ -146,7 +146,7 @@ class ProductAdmin extends Admin
         $list
             ->add('enabled')
             ->addIdentifier('name')
-            ->add('price')
+            ->add('price', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
             ->add('stock')
         ;
     }
