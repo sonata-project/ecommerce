@@ -42,10 +42,13 @@ class BaseTransaction implements TransactionInterface
 
     protected $paymentCode;
 
+    protected $information;
+
     public function __construct()
     {
         $this->createdAt     = new \DateTime;
         $this->transactionId = 'n/a';
+        $this->information   = 'Transaction created';
     }
 
     /**
@@ -55,6 +58,8 @@ class BaseTransaction implements TransactionInterface
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
+
+        $this->addInformation(sprintf('The transaction is linked to the Order : id = %s / Reference = %s', $order->getId(), $order->getReference()));
     }
 
     /**
@@ -72,6 +77,14 @@ class BaseTransaction implements TransactionInterface
     public function setState($state)
     {
         $this->state = $state;
+
+        if ($state == self::STATE_OK) {
+            $this->addInformation('The transaction state is OK');
+        } elseif ($state ==self::STATE_OK) {
+            $this->addInformation('The transaction state is KO');
+        } else {
+            $this->addInformation('The transaction state is UNKNOWN');
+        }
     }
 
     /**
@@ -89,6 +102,7 @@ class BaseTransaction implements TransactionInterface
     public function setTransactionId($transactionId)
     {
         $this->transactionId = $transactionId;
+        $this->addInformation('The transactionId is '.$transactionId);
     }
 
     /**
@@ -204,5 +218,29 @@ class BaseTransaction implements TransactionInterface
     public function getPaymentCode()
     {
         return $this->paymentCode;
+    }
+
+    /**
+     * @param $information
+     */
+    public function addInformation($information)
+    {
+        $this->information .= "\n".$information;
+    }
+
+    /**
+     * @param $information
+     */
+    public function setInformation($information)
+    {
+        $this->information = $information;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInformation()
+    {
+        return $this->information;
     }
 }

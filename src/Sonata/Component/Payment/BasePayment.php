@@ -26,6 +26,9 @@ abstract class BasePayment implements PaymentInterface
 
     protected $transformers;
 
+    /**
+     * @var \Symfony\Component\HttpKernel\Log\LoggerInterface
+     */
     protected $logger;
 
     protected $isDebug;
@@ -156,6 +159,7 @@ abstract class BasePayment implements PaymentInterface
         if (!$transaction->getOrder()) {
             $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_UNKNOWN);
             $transaction->setState(TransactionInterface::STATE_KO);
+            $transaction->setInformation('The order does not exist');
 
             return $this->handleError($transaction);
         }
@@ -164,6 +168,7 @@ abstract class BasePayment implements PaymentInterface
         if (!$this->isRequestValid($transaction)) {
             $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_REQUEST);
             $transaction->setState(TransactionInterface::STATE_KO);
+            $transaction->setInformation('The request is not valid');
 
             return $this->handleError($transaction);
         }
@@ -172,6 +177,7 @@ abstract class BasePayment implements PaymentInterface
         if (!$this->isCallbackValid($transaction)) {
             $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
             $transaction->setState(TransactionInterface::STATE_KO);
+            $transaction->setInformation('The callbak reference is not valid');
 
             return $this->handleError($transaction);
         }
@@ -183,12 +189,15 @@ abstract class BasePayment implements PaymentInterface
         if (!$transaction->getOrder()->isOpen()) {
             $transaction->setState(TransactionInterface::STATE_OK); // the transaction is valid, but not the order state
             $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_NOT_OPEN);
+            $transaction->setInformation('The order is not open, then something already happen ... (duplicate callback)');
 
             return $this->handleError($transaction);
         }
 
         // send the confirmation request to the bank
         if (!($response = $this->sendConfirmationReceipt($transaction))) {
+            $transaction->setInformation('Fail to send the confirmation receipt');
+
             $response = $this->handleError($transaction);
         }
 
@@ -227,5 +236,26 @@ abstract class BasePayment implements PaymentInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param TransactionInterface $transaction
+     * @return mixed
+     */
+    public function report(TransactionInterface $transaction)
+    {
+        if (!$this->logger) {
+            return;
+        }
+
+        if ($transaction->getState() == TransactionInterface::STATE_KO) {
+            $method = 'crit';
+        } else {
+            $method = 'info';
+        }
+
+        foreach (explode($transaction->getInformation(), "\n") as $message) {
+            call_user_func(array($this->logger, $method), $message);
+        }
     }
 }

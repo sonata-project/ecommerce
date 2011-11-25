@@ -18,6 +18,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Buzz\Browser;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class CheckPayment extends BasePayment
 {
@@ -29,9 +30,10 @@ class CheckPayment extends BasePayment
      * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Buzz\Browser $browser
      */
-    public function __construct(RouterInterface $router, Browser $browser)
+    public function __construct(RouterInterface $router, LoggerInterface $logger, Browser $browser)
     {
-        $this->router = $router;
+        $this->router  = $router;
+        $this->logger  = $logger;
         $this->browser = $browser;
     }
 
@@ -92,6 +94,8 @@ class CheckPayment extends BasePayment
     {
         $transaction->getOrder()->setPaymentStatus($transaction->getStatusCode());
 
+        $this->report($transaction);
+
         return new Response('ko', 200, array(
             'Content-Type' => 'text/plain',
         ));
@@ -109,6 +113,7 @@ class CheckPayment extends BasePayment
         if (!$order) {
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_UNKNOWN);
+            $transaction->addInformation('The order does not exist');
 
             return false;
         }
@@ -142,6 +147,7 @@ class CheckPayment extends BasePayment
 
         $transaction->setState(TransactionInterface::STATE_KO);
         $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
+        $transaction->addInformation('The callback is not valid');
 
         return false;
     }
@@ -163,7 +169,14 @@ class CheckPayment extends BasePayment
 
         $response = $this->browser->get($url);
 
-        $routeName = $response->getContent() == 'ok' ? 'url_return_ok' : 'url_return_ko';
+        if ($response->getContent() == 'ok') {
+            $routeName = 'url_return_ok';
+        } else {
+            $routeName = 'url_return_ko';
+
+            $this->logger->crit('The CheckPayment received a ko result : %s', $response->getContent());
+        }
+
 
         // redirect the user to the correct page
         $response = new Response('', 302, array(

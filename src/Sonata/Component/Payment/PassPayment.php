@@ -88,7 +88,7 @@ class PassPayment extends BasePayment
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    function handleError(TransactionInterface $transaction)
+    public function handleError(TransactionInterface $transaction)
     {
         return new Response('ko', 200, array(
             'Content-Type' => 'text/plain',
@@ -101,7 +101,7 @@ class PassPayment extends BasePayment
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
-    function sendConfirmationReceipt(TransactionInterface $transaction)
+    public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         $order = $transaction->getOrder();
         if (!$order) {

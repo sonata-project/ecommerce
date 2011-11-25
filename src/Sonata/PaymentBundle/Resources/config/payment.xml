@@ -20,6 +20,7 @@
             <tag name="sonata.payment.method" />
 
             <argument type="service" id="router" />
+            <argument type="service" id="logger" />
             <argument />
         </service>
 

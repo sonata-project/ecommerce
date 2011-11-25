@@ -145,4 +145,22 @@ interface TransactionInterface
      * @return string
      */
     function getPaymentCode();
+
+    /**
+     * @abstract
+     * @return string
+     */
+    function getInformation();
+
+    /**
+     * @abstract
+     * @param string $message
+     */
+    function setInformation($message);
+
+    /**
+     * @abstract
+     * @param $message
+     */
+    function addInformation($message);
 }
