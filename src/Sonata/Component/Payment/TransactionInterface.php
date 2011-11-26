@@ -30,7 +30,7 @@ interface TransactionInterface
     const STATE_OK = 1;
     const STATE_KO = 2;
 
-    const STATUS_ORDER_UNKNOWN   = -1;  // the order is unknow
+    const STATUS_ORDER_UNKNOWN    = -1;  // the order is unknow
     const STATUS_OPEN             = 0;  // created but not validated
     const STATUS_PENDING          = 1;  // the bank send a 'pending-like' status, so the payment is not validated, but the user payed
     const STATUS_VALIDATED        = 2;  // the bank confirm the payment
@@ -163,4 +163,9 @@ interface TransactionInterface
      * @param $message
      */
     function addInformation($message);
+
+    /**
+     * @abstract
+     */
+    function getStatusName();
 }

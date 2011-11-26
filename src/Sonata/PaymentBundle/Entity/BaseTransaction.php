@@ -49,6 +49,7 @@ class BaseTransaction implements TransactionInterface
         $this->createdAt     = new \DateTime;
         $this->transactionId = 'n/a';
         $this->information   = 'Transaction created';
+        $this->setStatusCode(self::STATUS_OPEN);
     }
 
     /**
@@ -59,7 +60,7 @@ class BaseTransaction implements TransactionInterface
     {
         $this->order = $order;
 
-        $this->addInformation(sprintf('The transaction is linked to the Order : id = %s / Reference = %s', $order->getId(), $order->getReference()));
+        $this->addInformation(sprintf('The transaction is linked to the Order : id = `%s` / Reference = `%s`', $order->getId(), $order->getReference()));
     }
 
     /**
@@ -79,11 +80,11 @@ class BaseTransaction implements TransactionInterface
         $this->state = $state;
 
         if ($state == self::STATE_OK) {
-            $this->addInformation('The transaction state is OK');
+            $this->addInformation('The transaction state is `OK`');
         } elseif ($state ==self::STATE_OK) {
-            $this->addInformation('The transaction state is KO');
+            $this->addInformation('The transaction state is `KO`');
         } else {
-            $this->addInformation('The transaction state is UNKNOWN');
+            $this->addInformation('The transaction state is `UNKNOWN`');
         }
     }
 
@@ -102,7 +103,7 @@ class BaseTransaction implements TransactionInterface
     public function setTransactionId($transactionId)
     {
         $this->transactionId = $transactionId;
-        $this->addInformation('The transactionId is '.$transactionId);
+        $this->addInformation(sprintf('The transactionId is `%s`', $transactionId));
     }
 
     /**
@@ -155,6 +156,8 @@ class BaseTransaction implements TransactionInterface
     public function setStatusCode($statusCode)
     {
         $this->statusCode = $statusCode;
+
+        $this->addInformation(sprintf('Update status code to `%s` (%s)', $statusCode, $this->getStatusName()));
     }
 
     /**
@@ -163,6 +166,20 @@ class BaseTransaction implements TransactionInterface
     public function getStatusCode()
     {
         return $this->statusCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        $list = self::getStatusList();
+
+        if (!isset($list[$this->getStatusCode()])) {
+            return 'n/a';
+        }
+
+        return $list[$this->getStatusCode()];
     }
 
     /**
@@ -210,6 +227,7 @@ class BaseTransaction implements TransactionInterface
     public function setPaymentCode($paymentCode)
     {
         $this->paymentCode = $paymentCode;
+
     }
 
     /**
