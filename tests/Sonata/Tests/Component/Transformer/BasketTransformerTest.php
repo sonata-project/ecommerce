@@ -14,6 +14,7 @@ namespace Sonata\Tests\Component\Transformer;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Basket\Basket;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class BasketTransformerTest_Order extends BaseOrder
 {
@@ -40,7 +41,8 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 
         $productPool = $this->getMock('Sonata\Component\Product\Pool');
 
-        $basketTransform = new BasketTransformer($orderManager, $productPool);
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $basketTransform = new BasketTransformer($orderManager, $productPool, $logger);
 
         return $basketTransform;
     }
