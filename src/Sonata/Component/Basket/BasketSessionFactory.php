@@ -52,6 +52,8 @@ class BasketSessionFactory implements BasketFactoryInterface
 
         $this->basketBuilder->build($basket);
 
+        // always clone the basket so it can be only savec by calling
+        // the save method
         return clone $basket;
     }
 
