@@ -19,7 +19,7 @@ use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface;
 
-class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
+class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testLoadWithNoBasket()
     {
