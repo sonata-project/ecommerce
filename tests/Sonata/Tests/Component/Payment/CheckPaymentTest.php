@@ -30,7 +30,6 @@ class CheckPaymentTest_Order extends BaseOrder
     {
         // TODO: Implement getId() method.
     }
-
 }
 
 class CheckPaymentTest extends \PHPUnit_Framework_TestCase
@@ -43,9 +42,10 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
     public function testPassPayment()
     {
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
 
         $browser = new Browser();
-        $payment = new CheckPayment($router, $browser);
+        $payment = new CheckPayment($router, $logger, $browser);
         $payment->setCode('free_1');
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
@@ -88,14 +88,15 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
-        $response = new Response;
-        $response->setContent('ok');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
 
-        $client = new FIFO;
-        $client->sendToQueue($response);
+        $client = $this->getMock('Buzz\Client\ClientInterface');
+        $client->expects($this->once())->method('send')->will($this->returnCallback(function($request, $response) {
+            $response->setContent('ok');
+        }));
 
         $browser = new Browser($client);
-        $payment = new CheckPayment($router, $browser);
+        $payment = new CheckPayment($router, $logger, $browser);
 
         $response = $payment->callbank($order);
 
@@ -113,9 +114,10 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->onConsecutiveCalls(null, $order));
 
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
-
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $browser = new Browser();
-        $payment = new CheckPayment($router, $browser);
+
+        $payment = new CheckPayment($router, $logger, $browser);
         $payment->setCode('free_1');
 
         // first call : the order is not set

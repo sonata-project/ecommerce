@@ -15,8 +15,8 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
-
 use Sonata\AdminBundle\Form\FormMapper;
+
 use Symfony\Component\Form\FormBuilder;
 
 interface ProductProviderInterface

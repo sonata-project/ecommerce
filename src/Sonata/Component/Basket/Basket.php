@@ -24,7 +24,7 @@ class Basket implements \Serializable, BasketInterface
 {
     protected $basketElements;
 
-    protected $pos = array();
+    protected $positions = array();
 
     protected $cptElement = 0;
 
@@ -54,11 +54,22 @@ class Basket implements \Serializable, BasketInterface
 
     protected $options = array();
 
+    public function __construct()
+    {
+        $this->basketElements = array();
+    }
+
+    /**
+     * @param \Sonata\Component\Product\Pool $pool
+     */
     public function setProductPool(Pool $pool)
     {
         $this->productPool = $pool;
     }
 
+    /**
+     * @return mixed
+     */
     public function getProductPool()
     {
         return $this->productPool;
@@ -241,7 +252,7 @@ class Basket implements \Serializable, BasketInterface
 
         if ($full) {
             $this->basketElements = array();
-            $this->pos = array();
+            $this->positions = array();
             $this->cptElement = 0;
             $this->customerId = null;
             $this->customer = null;
@@ -299,13 +310,13 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getElement(ProductInterface $product)
     {
-        if (is_object($product)) {
-            $pos = $this->pos[$product->getId()];
-        } else {
-            $pos = $this->pos[$product];
+        if (!$this->hasProduct($product)) {
+            throw new \RuntimeException('The product does not exist');
         }
 
-        return $this->getElement($pos);
+        $pos = $this->positions[$product->getId()];
+
+        return $this->getElementByPos($pos);
     }
 
     /**
@@ -321,23 +332,18 @@ class Basket implements \Serializable, BasketInterface
      * delete an element from the basket depend on the $element. Element
      * can be a product or a basket element
      *
-     * @param mixed $element
+     * @param BasketElementInterface $element
      *
      * @return BasketElementInterface
      */
     public function removeElement(BasketElementInterface $element)
     {
-        if ($element instanceof ProductInterface) {
-            $pos = $this->pos[$element->getId()];
-            $element = $this->basketElements[$pos];
-        } else {
-            $pos = $element->getPosition();
-        }
+        $pos = $element->getPosition();
 
         $this->cptElement--;
 
         unset(
-            $this->pos[$element->getProduct()->getId()],
+            $this->positions[$element->getProduct()->getId()],
             $this->basketElements[$pos]
         );
 
@@ -360,7 +366,7 @@ class Basket implements \Serializable, BasketInterface
         $basketElement->setPosition($this->cptElement);
 
         $this->basketElements[$this->cptElement] = $basketElement;
-        $this->pos[$basketElement->getProduct()->getId()] = $this->cptElement;
+        $this->positions[$basketElement->getProduct()->getId()] = $this->cptElement;
 
         $this->cptElement++;
 
@@ -379,7 +385,6 @@ class Basket implements \Serializable, BasketInterface
 
             if ($product instanceof ProductInterface) {
                 if ($product->isRecurrentPayment() === true) {
-
                     return true;
                 }
             }
@@ -470,11 +475,11 @@ class Basket implements \Serializable, BasketInterface
      */
     public function hasProduct(ProductInterface $product)
     {
-        if (!array_key_exists($product->getId(), $this->pos)) {
+        if (!array_key_exists($product->getId(), $this->positions)) {
             return false;
         }
 
-        $pos = $this->pos[$product->getId()];
+        $pos = $this->positions[$product->getId()];
 
         if (!array_key_exists($pos, $this->getBasketElements())) {
             return false;
@@ -529,7 +534,7 @@ class Basket implements \Serializable, BasketInterface
     {
         return serialize(array(
             'basketElements'        => $this->getBasketElements(),
-            'pos'                   => $this->pos,
+            'positions'             => $this->positions,
             'deliveryAddressId'     => $this->deliveryAddressId,
             'paymentAddressId'      => $this->paymentAddressId,
             'paymentMethodCode'     => $this->paymentMethodCode,
@@ -546,7 +551,7 @@ class Basket implements \Serializable, BasketInterface
 
         $properties = array(
             'basketElements',
-            'pos',
+            'positions',
             'deliveryAddressId',
             'deliveryMethodCode',
             'paymentAddressId',

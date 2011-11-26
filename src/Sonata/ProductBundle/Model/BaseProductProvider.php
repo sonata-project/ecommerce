@@ -26,7 +26,6 @@ use Application\Sonata\OrderBundle\Entity\OrderElement;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 
 use JMS\SerializerBundle\Serializer\SerializerInterface;
-use JMS\SerializerBundle\Serializer\Serializer;
 
 abstract class BaseProductProvider implements ProductProviderInterface
 {
@@ -58,9 +57,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \JMS\SerializerBundle\Serializer\Serializer $serializer
+     * @param \JMS\SerializerBundle\Serializer\SerializerInterface $serializer
      */
-    public function __construct(Serializer $serializer)
+    public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
     }
@@ -111,7 +110,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
         $orderElement->setCreatedAt(new \DateTime);
         $orderElement->setOptions($basketElement->getOptions());
-        
+
         $product = $basketElement->getProduct();
         $orderElement->setDescription($product->getDescription());
         $orderElement->setProductId($product->getId());

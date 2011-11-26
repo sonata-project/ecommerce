@@ -174,7 +174,7 @@ class CheckPayment extends BasePayment
         } else {
             $routeName = 'url_return_ko';
 
-            $this->logger->crit('The CheckPayment received a ko result : %s', $response->getContent());
+            $this->logger->crit(sprintf('The CheckPayment received a ko result : %s', $response->getContent()));
         }
 
 

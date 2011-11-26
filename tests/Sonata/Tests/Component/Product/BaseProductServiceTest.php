@@ -18,7 +18,7 @@ use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Delivery\DeliveryInterface;
 
-class ProductServiceInterfaceTest_ProductProvider extends BaseProductProvider
+class BaseProductServiceTest_ProductProvider extends BaseProductProvider
 {
     /**
      * @return string
@@ -29,12 +29,24 @@ class ProductServiceInterfaceTest_ProductProvider extends BaseProductProvider
     }
 }
 
-class ProductServiceInterfaceTest extends \PHPUnit_Framework_TestCase
+class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @return BaseProductServiceTest_ProductProvider
+     */
+    public function getBaseProvider()
+    {
+        $serializer = $this->getMock('JMS\SerializerBundle\Serializer\SerializerInterface');
+
+        $provider = new BaseProductServiceTest_ProductProvider($serializer);
+
+        return $provider;
+    }
 
     public function testOptions()
     {
-        $provider = new ProductServiceInterfaceTest_ProductProvider;
+        $provider = $this->getBaseProvider();
 
         $this->assertInternalType('array', $provider->getOptions());
         $this->assertNull($provider->getOption('foo'));
@@ -46,17 +58,17 @@ class ProductServiceInterfaceTest extends \PHPUnit_Framework_TestCase
     public function testOrderElement()
     {
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-        $product->expects($this->exactly(3))->method('getId')->will($this->returnValue(42));
-        $product->expects($this->exactly(2))->method('getName')->will($this->returnValue('Product name'));
-        $product->expects($this->exactly(2))->method('getPrice')->will($this->returnValue(9.99));
-        $product->expects($this->exactly(2))->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
-        $product->expects($this->exactly(2))->method('getDescription')->will($this->returnValue('product description'));
+        $product->expects($this->any())->method('getId')->will($this->returnValue(42));
+        $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
+        $product->expects($this->any())->method('getPrice')->will($this->returnValue(9.99));
+        $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
+        $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
 
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
-        $provider = new ProductServiceInterfaceTest_ProductProvider;
+        $provider = $this->getBaseProvider();
 
         $orderElement = $provider->createOrderElement($basketElement);
 
@@ -68,7 +80,7 @@ class ProductServiceInterfaceTest extends \PHPUnit_Framework_TestCase
 
     public function testVariation()
     {
-        $provider = new ProductServiceInterfaceTest_ProductProvider;
+        $provider = $this->getBaseProvider();
 
         $this->assertInternalType('array', $provider->getVariationFields());
 
@@ -82,7 +94,7 @@ class ProductServiceInterfaceTest extends \PHPUnit_Framework_TestCase
 
     public function testDuplicate()
     {
-        $provider = new ProductServiceInterfaceTest_ProductProvider;
+        $provider = $this->getBaseProvider();
         $provider->setVariationFields(array('Name', 'Price'));
 
         $product = new \Sonata\Tests\Component\Basket\Product;

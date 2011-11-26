@@ -16,8 +16,6 @@ use Sonata\Component\Payment\Pool;
 use Buzz\Message\Response;
 use Buzz\Message\Request;
 use Buzz\Browser;
-use Buzz\Client\ClientInterface;
-use Buzz\Client\Mock\FIFO;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
 class PassPaymentTest_Order extends BaseOrder
@@ -43,11 +41,7 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
-        $response = new Response;
-        $response->setContent('ok');
-
-        $client = new FIFO;
-        $client->sendToQueue($response);
+        $client = $this->getMock('Buzz\Client\ClientInterface');
 
         $browser = new Browser($client);
         $payment = new PassPayment($router, $browser);

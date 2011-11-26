@@ -314,7 +314,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     {
         return serialize(array(
             'productId'   => $this->productId,
-            'pos'         => $this->pos,
+            'position'    => $this->position,
             'price'       => $this->price,
             'quantity'    => $this->quantity,
             'options'     => $this->options,
@@ -328,7 +328,7 @@ class BasketElement implements \Serializable, BasketElementInterface
         $data = unserialize($data);
 
         $this->productId    = $data['productId'];
-        $this->pos          = $data['pos'];
+        $this->position     = $data['position'];
         $this->price        = $data['price'];
         $this->quantity     = $data['quantity'];
         $this->options      = $data['options'];
