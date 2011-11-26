@@ -247,8 +247,16 @@ interface BasketInterface
 
     function getDeliveryMethodCode();
 
+    /**
+     * @abstract
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     */
     function setCustomer(CustomerInterface $customer);
 
+    /**
+     * @abstract
+     * @param \Sonata\Component\Customer\CustomerInterface
+     */
     function getCustomer();
 
     function setCustomerId($customerId);

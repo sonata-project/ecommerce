@@ -59,7 +59,7 @@ class CustomerSelector implements CustomerSelectorInterface
         ));
 
         if (!$customer) {
-            $basket = $this->session->get('sonata/basket/factory/customer/new');
+            $basket = $this->getBasket();
 
             if ($basket && $basket->getCustomer()) {
                 $customer = $basket->getCustomer();
@@ -67,5 +67,13 @@ class CustomerSelector implements CustomerSelectorInterface
         }
 
         return $customer ?: $this->customerManager->create();
+    }
+
+    /**
+     * @return \Sonata\Component\Basket\BasketInterface
+     */
+    private function getBasket()
+    {
+        return $this->session->get('sonata/basket/factory/customer/new');
     }
 }
