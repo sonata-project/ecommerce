@@ -78,9 +78,15 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
         $deliveryMethod_high->setEnabled(true);
         $deliveryMethod_high->setPriority(2);
 
+        $deliveryMethod_high_bis = new Delivery();
+        $deliveryMethod_high_bis->setCode('ups_high_bis');
+        $deliveryMethod_high_bis->setEnabled(true);
+        $deliveryMethod_high_bis->setPriority(2);
+
         $deliveryPool = new DeliveryPool;
         $deliveryPool->addMethod($deliveryMethod_low);
         $deliveryPool->addMethod($deliveryMethod_high);
+        $deliveryPool->addMethod($deliveryMethod_high_bis);
 
         $productPool = new ProductPool;
 
@@ -90,9 +96,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
         $productDelivery_high = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $productDelivery_high->expects($this->any())->method('getCode')->will($this->returnValue('ups_high'));
 
+        $productDelivery_high_bis = $this->getMock('Sonata\Component\Product\DeliveryInterface');
+        $productDelivery_high_bis->expects($this->any())->method('getCode')->will($this->returnValue('ups_high_bis'));
+
 
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-        $product->expects($this->once())->method('getDelivery')->will($this->returnValue(array($productDelivery_low, $productDelivery_high)));
+        $product->expects($this->once())->method('getDelivery')->will($this->returnValue(array($productDelivery_low, $productDelivery_high, $productDelivery_high_bis)));
 
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
@@ -103,10 +112,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
         $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
 
         $selector = new Selector($deliveryPool, $productPool);
+        $selector->setLogger($this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface'));
 
         $instances = $selector->getAvailableMethods($basket, $address);
-        $this->assertCount(2, $instances);
-        $this->assertEquals($instances[0]->getCode(), 'ups_high');
-        $this->assertEquals($instances[1]->getCode(), 'ups_low');
+        $this->assertCount(3, $instances);
+        $this->assertEquals($instances[0]->getCode(), 'ups_high_bis');
+        $this->assertEquals($instances[1]->getCode(), 'ups_high');
+        $this->assertEquals($instances[2]->getCode(), 'ups_low');
     }
 }
