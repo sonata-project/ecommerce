@@ -10,7 +10,7 @@
 
 namespace Sonata\ProductBundle\Model;
 
-use Sonata\AdminBundle\Model\ORM\ModelManager;
+use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\Component\Product\Pool;
 

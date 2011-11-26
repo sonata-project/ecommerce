@@ -85,4 +85,9 @@ class PaymentType extends AbstractType
 
         $builder->add($sub);
     }
+
+    public function getName()
+    {
+        return 'sonata_payment';
+    }
 }

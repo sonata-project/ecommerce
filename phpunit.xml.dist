@@ -14,19 +14,17 @@
     <testsuites>
         <testsuite name="Sonata Test Suite">
             <directory>./tests/Sonata/</directory>
-            <directory>./Sonata/Contrib/*/Tests/</directory>
-            <directory>./Sonata/Bundle/*/Tests/</directory>
-
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src/Symfony/</directory>
+            <directory>./src</directory>
             <exclude>
-                <directory>./src/Symfony/Bundle/*/Resources</directory>
-                <file>./src/Symfony/Component/HttpKernel/bootstrap.php</file>
-                <file>./src/Symfony/Component/HttpKernel/Resources/bin/packager.php</file>
+                <directory>./tests</directory>
+                <directory>./src/Sonata/*/DataFixtures/</directory>
+                <directory>./src/Sonata/*/Resources/</directory>
+
             </exclude>
         </whitelist>
     </filter>

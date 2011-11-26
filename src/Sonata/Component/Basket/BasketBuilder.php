@@ -36,8 +36,7 @@ class BasketBuilder implements BasketBuilderInterface
      * @param \Sonata\Component\Delivery\Pool $deliveryPool
      * @param \Sonata\Component\Payment\Pool $paymentPool
      */
-    public function __construct(Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool,
-        PaymentPool $paymentPool)
+    public function __construct(Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool, PaymentPool $paymentPool)
     {
         $this->productPool      = $productPool;
         $this->addressManager   = $addressManager;
@@ -58,7 +57,7 @@ class BasketBuilder implements BasketBuilderInterface
             if ($basketElement->getProduct() === null) {
                 // restore information
                 if ($basketElement->getProductCode() == null) {
-                    throw new \RuntimeException('the product code is empty');
+                    throw new \RuntimeException('The product code is empty');
                 }
 
                 $productDefinition = $this->productPool->getProduct($basketElement->getProductCode());
