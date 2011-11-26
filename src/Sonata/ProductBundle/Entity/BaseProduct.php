@@ -11,7 +11,7 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
+use Sonata\Component\Product\DeliveryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 use Sonata\Component\Product\ProductCategoryInterface;
@@ -62,24 +62,24 @@ abstract class BaseProduct implements ProductInterface
     protected $enabled;
 
     /**
-     * @var datetime $updatedAt
+     * @var \DateTime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
 
     protected $image;
 
     /**
-     * @var Sonata\ProductBundle\Entity\BasePackage
+     * @var \Sonata\ProductBundle\Entity\BasePackage
      */
     protected $package;
 
     /**
-     * @var Sonata\ProductBundle\Entity\BaseDelivery
+     * @var \Sonata\ProductBundle\Entity\BaseDelivery
      */
     protected $delivery;
 
@@ -92,7 +92,7 @@ abstract class BaseProduct implements ProductInterface
     protected $categories = array();
 
     /**
-     * @var Application\Sonata\ProductBundle\Entity\ProductCategory
+     * @var \Application\Sonata\ProductBundle\Entity\ProductCategory
      */
     protected $productCategories;
 
@@ -259,7 +259,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -269,7 +269,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -279,7 +279,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -289,7 +289,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -299,7 +299,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Add package
      *
-     * @param Sonata\ProductBundle\Entity\BasePackage $package
+     * @param \Sonata\ProductBundle\Entity\BasePackage $package
      */
     public function addPackage($package)
     {
@@ -309,7 +309,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get package
      *
-     * @return Doctrine\Common\Collections\Collection $package
+     * @return \Doctrine\Common\Collections\Collection $package
      */
     public function getPackage()
     {
@@ -319,7 +319,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Add delivery
      *
-     * @param Sonata\ProductBundle\Entity\BaseDelivery $delivery
+     * @param \Sonata\Component\Product\DeliveryInterface $delivery
      */
     public function addDelivery(DeliveryInterface $delivery)
     {
@@ -329,7 +329,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get delivery
      *
-     * @return Doctrine\Common\Collections\Collection $delivery
+     * @return \Doctrine\Common\Collections\Collection $delivery
      */
     public function getDelivery()
     {
@@ -338,7 +338,6 @@ abstract class BaseProduct implements ProductInterface
 
 
     /**
-     * @abstract
      * @return string the product name
      */
     public function getParent()
@@ -347,8 +346,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * @abstract
-     * @return
+     * @param \Sonata\Component\Product\ProductInterface $parent
      */
     public function setParent(ProductInterface $parent)
     {
@@ -356,7 +354,6 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * @abstract
      * @return string the product name
      */
     public function getOptions()
@@ -365,7 +362,6 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * @abstract
      * @return
      */
     public function setOptions(array $options)
