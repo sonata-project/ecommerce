@@ -44,7 +44,7 @@ class Pool
      * return a Delivery Object
      *
      * @param string $code
-     * @return Sonata\Component\Delivery\DeliveryInterface
+     * @return \Sonata\Component\Delivery\DeliveryInterface
      */
     public function getMethod($code)
     {

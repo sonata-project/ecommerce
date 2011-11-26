@@ -46,17 +46,26 @@ class Selector implements DeliverySelectorInterface
         return $this->deliveryPool;
     }
 
+    /**
+     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
+    /**
+     * @return mixed
+     */
     public function getLogger()
     {
         return $this->logger;
     }
 
-    public function log($message)
+    /**
+     * @param $message
+     */
+    protected function log($message)
     {
         if ($this->logger) {
             $this->logger->info($message);
@@ -71,6 +80,11 @@ class Selector implements DeliverySelectorInterface
         return $this->productPool;
     }
 
+    /**
+     * @param null|\Sonata\Component\Basket\BasketInterface $basket
+     * @param null|\Sonata\Component\Customer\AddressInterface $deliveryAddress
+     * @return array|bool
+     */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null)
     {
         $instances = array();
@@ -85,18 +99,19 @@ class Selector implements DeliverySelectorInterface
         }
 
         // STEP 1 : We get product's delivery methods
+        /** @var $basketElement \Sonata\Component\Basket\BasketElementInterface */
         foreach ($basket->getBasketElements() as $basketElement) {
+
             $product = $basketElement->getProduct();
 
             if (!$product) {
                 $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d does not exist', $basketElement->getProductId()));
 
-                return false;
+                return $instances;
             }
 
-            $productDeliveries = $product->getDelivery();
-
-            foreach ($productDeliveries as $productDelivery) {
+            /** @var $productDelivery \Sonata\Component\Product\DeliveryInterface */
+            foreach ($product->getDelivery() as $productDelivery) {
 
                 // delivery method already selected
                 if (array_key_exists($productDelivery->getCode(), $instances)) {
@@ -120,7 +135,7 @@ class Selector implements DeliverySelectorInterface
                     continue;
                 }
 
-                // the product is not deliverable at the $shipping_address
+                // the product is not deliverable at the $shippingAddress
                 if ($deliveryAddress->getCountryCode() != $productDelivery->getCountryCode()) {
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basketElement->getProductId(), $productDelivery->getCode(), $deliveryAddress->getCountryCode(), $productDelivery->getCountryCode()));
 
@@ -129,24 +144,29 @@ class Selector implements DeliverySelectorInterface
 
                 $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s selected', $basketElement->getProductId(), $productDelivery->getCode()));
 
-                $instances[$productDelivery->getCode()] = $deliveryMethod;
+                $instances[$deliveryMethod->getCode()] = $deliveryMethod;
             }
         }
 
         // STEP 2 : We select the delivery methods with the highest priority
-        $priority = 0;
-        $finalInstances = array();
-        foreach ($instances as $instance) {
-            if ($instance->getPriority() > $priority) {
-                $finalInstances = array();
-                $priority = $instance->getPriority();
-            }
+        $instances = array_values($instances);
+        usort($instances, array('Sonata\Component\Delivery\Selector', 'sort'));
 
-            if ($priority == $instance->getPriority()) {
-                $finalInstances[] = $instance;
-            }
+        return $instances;
+    }
+
+    /**
+     * @static
+     * @param DeliveryInterface $a
+     * @param DeliveryInterface $b
+     * @return int
+     */
+    public static function sort(DeliveryInterface $a, DeliveryInterface $b)
+    {
+        if ($a->getPriority() === $b->getPriority()) {
+            return 0;
         }
 
-        return count($finalInstances) == 0 ? false : $finalInstances;
+        return $a->getPriority() > $b->getPriority() ? -1 : 1;
     }
 }

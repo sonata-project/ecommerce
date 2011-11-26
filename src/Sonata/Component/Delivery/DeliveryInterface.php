@@ -68,4 +68,16 @@ interface DeliveryInterface
      * @return string
      */
     function getCode();
+
+    /**
+     * @abstract
+     * @return boolean
+     */
+    function getEnabled();
+
+    /**
+     * @abstract
+     * @return boolean
+     */
+    function getPriority();
 }

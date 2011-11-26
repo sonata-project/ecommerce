@@ -11,7 +11,6 @@
 
 namespace Sonata\Tests\Component\Delivery;
 
-use Sonata\Component\Delivery\Delivery;
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Delivery\Pool;
 

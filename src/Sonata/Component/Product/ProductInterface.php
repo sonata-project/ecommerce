@@ -11,6 +11,8 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\Component\Product\DeliveryInterface;
+
 interface ProductInterface
 {
     /**
@@ -113,4 +115,16 @@ interface ProductInterface
      * @return string
      */
     function getDescription();
+
+    /**
+     * @abstract
+     * @param \Sonata\Component\Product\DeliveryInterface $delivery
+     */
+    function addDelivery(DeliveryInterface $delivery);
+
+    /**
+     * @abstract
+     * @return array
+     */
+    function getDelivery();
 }
