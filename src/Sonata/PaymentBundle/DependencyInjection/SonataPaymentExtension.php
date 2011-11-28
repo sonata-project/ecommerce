@@ -107,7 +107,7 @@ class SonataPaymentExtension extends Extension
         if (isset($services['sonata.payment.method.check'])) {
             $browser = isset($services['sonata.payment.method.check']['browser']) ? $services['sonata.payment.method.check']['browser'] : 'sonata.payment.browser.curl';
             $container->getDefinition('sonata.payment.method.check')
-                ->replaceArgument(1, new Reference($browser));
+                ->replaceArgument(2, new Reference($browser));
         }
     }
 
