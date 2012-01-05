@@ -206,7 +206,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function __toString()
     {
-        return $this->getReference();
+        return $this->getReference() ?: 'n/a';
     }
 
     /**

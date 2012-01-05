@@ -504,7 +504,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function __toString()
     {
-        return $this->getDesignation();
+        return $this->getDesignation() ?: 'n/a';
     }
 
     /**
