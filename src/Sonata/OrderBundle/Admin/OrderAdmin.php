@@ -15,11 +15,11 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 use Application\Sonata\OrderBundle\Entity\Order;
 use Application\Sonata\ProductBundle\Entity\Delivery;
 use Application\Sonata\PaymentBundle\Entity\Transaction;
-use Application\Sonata\ProductBundle\Entity\Product;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
@@ -96,6 +96,11 @@ class OrderAdmin extends Admin
             ->add('reference')
             ->add('customer')
         ;
+    }
+
+    public function configureRoutes(RouteCollection $collection)
+    {
+        $collection->remove('create');
     }
 
     /**

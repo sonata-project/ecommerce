@@ -27,9 +27,9 @@
             </call>
 
 <!--             comment it because of admin limit (nested menus) => rande ;) -->
-<!--            <call method="addChild">
+            <call method="addChild">
                 <argument type="service" id="sonata.order.admin.order" />
-            </call>-->
+            </call>
         </service>
 
         <service id="sonata.customer.admin.address" class="%sonata.customer.admin.address.class%">
