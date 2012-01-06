@@ -28,12 +28,24 @@ class CategoryAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('enabled')
+            ->add('enabled', null, array('required' => false))
             ->add('name')
             ->add('description')
             ->add('subDescription')
             ->add('position')
         ;
+
+        if ($this == $this->getRoot()) {
+            $formMapper
+                ->add('children', 'sonata_type_collection', array(
+                    'by_reference' => false
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable'  => 'position'
+                ))
+            ;
+        }
     }
 
     /**

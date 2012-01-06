@@ -147,6 +147,10 @@ abstract class BaseCategory implements CategoryInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        if (!$this->getSlug()) {
+            $this->setSlug($name);
+        }
     }
 
     /**
@@ -186,7 +190,7 @@ abstract class BaseCategory implements CategoryInterface
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->slug = self::slugify(trim($slug));
     }
 
     /**
@@ -197,6 +201,39 @@ abstract class BaseCategory implements CategoryInterface
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/
+     *
+     * @static
+     * @param  $text
+     * @return mixed|string
+     */
+    static public function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        if (function_exists('iconv')) {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 
     /**
@@ -218,7 +255,7 @@ abstract class BaseCategory implements CategoryInterface
     {
         return $this->position;
     }
-    
+
     /**
      * Add Children
      *
@@ -228,15 +265,14 @@ abstract class BaseCategory implements CategoryInterface
     {
         $this->children[] = $children;
 
-//        if (!$nested) {
-//            $children->setParent($this, true);
-//        }
+        if (!$nested) {
+            $children->setParent($this, true);
+        }
     }
 
     public function disableChildrenLazyLoading()
     {
-        if (is_object($this->children))
-        {
+        if (is_object($this->children)) {
             $this->children->setInitialized(true);
         }
     }
@@ -252,12 +288,24 @@ abstract class BaseCategory implements CategoryInterface
     }
 
     /**
+     * @param $children
+     * @return void
+     */
+    public function setChildren($children)
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+
+        foreach ($children as $category) {
+            $this->addChildren($category);
+        }
+    }
+
+    /**
      *
      * @return boolean
      */
     public function hasChildren()
     {
-        
         return count($this->children) > 0;
     }
 
@@ -284,5 +332,16 @@ abstract class BaseCategory implements CategoryInterface
     public function getParent()
     {
         return $this->parent;
+    }
+
+    public function prePersist()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+    }
+
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime;
     }
 }

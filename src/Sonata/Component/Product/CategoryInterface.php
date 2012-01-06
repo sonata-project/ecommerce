@@ -141,6 +141,12 @@ interface CategoryInterface
 
     /**
      *
+     * @return void
+     */
+    function setChildren($children);
+
+    /**
+     *
      * @return boolean
      */
     function hasChildren();

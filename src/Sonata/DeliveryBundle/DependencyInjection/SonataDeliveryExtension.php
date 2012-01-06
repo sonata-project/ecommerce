@@ -56,7 +56,6 @@ class SonataDeliveryExtension extends Extension
             }
 
             $name    = isset($options['name']) ? (string)$options['name'] : "n/a";
-            $enabled = isset($options['enabled']) ? (bool)$options['enabled'] : true;
             $code      = isset($options['code']) ? $options['code'] : false;
 
             if (!$code) {
