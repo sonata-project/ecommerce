@@ -39,6 +39,9 @@ class ProductAdmin extends Admin
     public function configure()
     {
         $this->setTranslationDomain('SonataProductBundle');
+
+        $this->baseRouteName = 'admin_sonata_product_product';
+        $this->baseRoutePattern = '/sonata/product/product';
     }
 
     /**
@@ -102,7 +105,6 @@ class ProductAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-
         // this admin class works only from a request scope
         if (!$this->hasRequest()) {
             return;

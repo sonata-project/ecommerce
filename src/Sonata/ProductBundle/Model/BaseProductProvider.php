@@ -40,6 +40,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $basketElementManager;
 
     /**
+     * @param \JMS\SerializerBundle\Serializer\SerializerInterface $serializer
+     */
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
+    /**
      * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
      * @return void
      */
@@ -54,14 +62,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
     function getBasketElementManager()
     {
         return $this->basketElementManager;
-    }
-
-    /**
-     * @param \JMS\SerializerBundle\Serializer\SerializerInterface $serializer
-     */
-    public function __construct(SerializerInterface $serializer)
-    {
-        $this->serializer = $serializer;
     }
 
     /**
