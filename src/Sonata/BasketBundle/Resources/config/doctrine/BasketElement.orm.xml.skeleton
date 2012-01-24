@@ -17,5 +17,20 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <many-to-one
+            field="basket"
+            target-entity="Application\Sonata\BasketBundle\Entity\Basket"
+            inversed-by="basketElements"
+            >
+
+            <join-columns>
+                <join-column
+                    name="basket_id"
+                    referenced-column-name="id"
+                    on-delete="CASCADE"/>
+            </join-columns>
+
+        </many-to-one>
+
     </entity>
 </doctrine-mapping>
