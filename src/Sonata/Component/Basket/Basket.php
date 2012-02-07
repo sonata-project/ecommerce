@@ -481,12 +481,10 @@ class Basket implements \Serializable, BasketInterface
 
         $pos = $this->positions[$product->getId()];
 
-        if (!array_key_exists($pos, $this->getBasketElements())) {
-            return false;
-        }
-
-        if ($this->basketElements[$pos] instanceof BasketElement) {
-            return true;
+        foreach ($this->getBasketElements() as $basketElement) {
+            if ($pos == $basketElement->getPosition()) {
+                return true;
+            }
         }
 
         return false;
