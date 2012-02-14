@@ -361,8 +361,6 @@ class Basket implements \Serializable, BasketInterface
      */
     public function addBasketElement(BasketElementInterface $basketElement)
     {
-        $this->reset(false);
-
         $basketElement->setPosition($this->cptElement);
 
         $this->basketElements[$this->cptElement] = $basketElement;
