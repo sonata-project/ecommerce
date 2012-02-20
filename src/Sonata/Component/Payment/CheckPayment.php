@@ -38,17 +38,6 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * encode value for the bank
-     *
-     * @param string $value
-     * @return string the encoded value
-     */
-    public function encodeString($value)
-    {
-        return $value;
-    }
-
-    /**
      * @return int
      */
     public function getTransactionId()

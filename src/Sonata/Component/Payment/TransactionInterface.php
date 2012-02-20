@@ -99,6 +99,7 @@ interface TransactionInterface
      *
      * @param string $name
      * @param mixed $default
+     * @return mixed
      */
     function get($name, $default = null);
 
