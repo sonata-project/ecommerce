@@ -459,6 +459,15 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @param $name
+     * @return bool
+     */
+    public function hasOption($name)
+    {
+        return isset($this->options[$name]);
+    }
+
+    /**
+     * @param $name
      * @param $value
      * @return void
      */

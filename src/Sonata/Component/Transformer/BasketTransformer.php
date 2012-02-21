@@ -137,7 +137,7 @@ class BasketTransformer extends BaseTransformer
         $order->setCreatedAt(new \DateTime);
 
         // todo : handle the currency
-        //$order->setCurrency(Product::getDefaultCurrency());
+        $order->setCurrency('EUR');
 
         $order->setStatus(OrderInterface::STATUS_OPEN);
 
