@@ -9,12 +9,11 @@ abstract class BaseBasket extends Basket
 {
     public function __construct()
     {
-        $this->basketElements = new ArrayCollection;
+        $this->reset(true);
     }
 
     /**
-     * @param array $basketElements
-     * @return void
+     * {@inheritdoc}
      */
     public function setBasketElements($basketElements)
     {
@@ -23,5 +22,17 @@ abstract class BaseBasket extends Basket
         }
 
         $this->basketElements = $basketElements;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset($full = true)
+    {
+        parent::reset($full);
+
+        if ($full) {
+            $this->basketElements = new ArrayCollection;
+        }
     }
 }
