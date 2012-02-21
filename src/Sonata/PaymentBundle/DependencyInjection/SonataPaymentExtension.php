@@ -67,7 +67,8 @@ class SonataPaymentExtension extends Extension
         $implemented = array(
             'pass'     => 'sonata.payment.method.pass',
             'check'    => 'sonata.payment.method.check',
-            'scellius' => 'sonata.payment.method.scellius'
+            'scellius' => 'sonata.payment.method.scellius',
+            'paypal'   => 'sonata.payment.method.paypal',
         );
 
         // define the payment method
