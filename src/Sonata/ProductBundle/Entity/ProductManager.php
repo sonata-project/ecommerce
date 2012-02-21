@@ -14,8 +14,8 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\Pool;
 
-use Sonata\AdminBundle\Datagrid\ORM\ProxyQuery;
-use Sonata\AdminBundle\Datagrid\ORM\Pager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
 use Doctrine\ORM\EntityManager;
 
