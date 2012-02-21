@@ -60,7 +60,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param \Sonata\Component\Product\Pool $pool
+     * {@inheritdoc}
      */
     public function setProductPool(Pool $pool)
     {
@@ -68,7 +68,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getProductPool()
     {
@@ -76,9 +76,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * test is the basket has elements
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isEmpty()
     {
@@ -86,12 +84,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * Check is the basket is valid : elements, Payment and Delivery information
-     *
-     * if $element_only is set to true, only elements are checked
-     *
-     * @param boolean $elementsOnly
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isValid($elementsOnly = false)
     {
@@ -131,9 +124,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * set the Delivery method
-     *
-     * @param DeliveryInterface $method
+     * {@inheritdoc}
      */
     public function setDeliveryMethod(DeliveryInterface $method = null)
     {
@@ -142,9 +133,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     *
-     *
-     * @return DeliveryInterface
+     * {@inheritdoc}
      */
     public function getDeliveryMethod()
     {
@@ -152,9 +141,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * set the Delivery address
-     *
-     * @param AddressInterface $address
+     * {@inheritdoc}
      */
     public function setDeliveryAddress(AddressInterface $address = null)
     {
@@ -163,9 +150,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     *
-     *
-     * @return Address
+     * {@inheritdoc}
      */
     public function getDeliveryAddress()
     {
@@ -173,9 +158,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * set Payment method
-     *
-     * @param PaymentInterface $method
+     * {@inheritdoc}
      */
     public function setPaymentMethod(PaymentInterface $method = null)
     {
@@ -184,9 +167,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     *
-     *
-     * @return PaymentInterface
+     * {@inheritdoc}
      */
     public function getPaymentMethod()
     {
@@ -194,9 +175,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * set the Payment address
-     *
-     * @param AddressInterface $address
+     * {@inheritdoc}
      */
     public function setPaymentAddress(AddressInterface $address = null)
     {
@@ -205,9 +184,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     *
-     *
-     * @return AddressInterface
+     * {@inheritdoc}
      */
     public function getPaymentAddress()
     {
@@ -215,11 +192,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * Check if the product can be added to the basket
-     *
-     * @param ProductInterface $product
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isAddable(ProductInterface $product)
     {
@@ -235,8 +208,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * reset basket
-     *
+     * {@inheritdoc}
      */
     public function reset($full = true)
     {
@@ -261,9 +233,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * return BasketElements
-     *
-     * @return array BasketElement
+     * {@inheritdoc}
      */
     public function getBasketElements()
     {
@@ -271,10 +241,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * Warning : this method should be only used by the validation framework
-     *
-     * @param  $elements
-     * @return void
+     * {@inheritdoc}
      */
     public function setBasketElements($basketElements)
     {
@@ -282,9 +249,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * count number of element in the basket
-     *
-     * @return integer
+     * {@inheritdoc}
      */
     public function countBasketElements()
     {
@@ -292,9 +257,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * return true if the basket has some elements ...
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function hasBasketElements()
     {
@@ -302,11 +265,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * return the BasketElement depends on the $product or the position from the element stacks
-     *
-     * @param mixed $product
-     *
-     * @return ProductInterface
+     * {@inheritdoc}
      */
     public function getElement(ProductInterface $product)
     {
@@ -320,8 +279,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param $pos
-     * @return BasketElementInterface|null
+     * {@inheritdoc}
      */
     public function getElementByPos($pos)
     {
@@ -329,12 +287,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * delete an element from the basket depend on the $element. Element
-     * can be a product or a basket element
-     *
-     * @param BasketElementInterface $element
-     *
-     * @return BasketElementInterface
+     * {@inheritdoc}
      */
     public function removeElement(BasketElementInterface $element)
     {
@@ -355,9 +308,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * Add a basket element into the current basket
-     *
-     * @param BasketElementInterface $basketElement
+     * {@inheritdoc}
      */
     public function addBasketElement(BasketElementInterface $basketElement)
     {
@@ -372,9 +323,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * return true if the basket has a least one recurrent product (subscription)
-     *
-     *  @return boolean
+     * {@inheritdoc}
      */
     public function hasRecurrentPayment()
     {
@@ -392,15 +341,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * return the total of the basket
-     * if $vat = true, return price with vat
-     * if $recurrent_only = true, return price for recurent product only
-     * if $recurrent_only = false, return price for non recurent product only
-     *
-     * @param boolean $vat
-     * @param boolean $recurrentOnly
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getTotal($vat = false, $recurrentOnly = null)
     {
@@ -426,9 +367,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * return the VAT of the current basket
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getVatAmount()
     {
@@ -448,11 +387,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * return the Delivery price
-     *
-     *
-     * @param Boolean $vat
-     * @return float
+     * {@inheritdoc}
      */
     public function getDeliveryPrice($vat = false)
     {
@@ -466,10 +401,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * check if the basket contains $product
-     *
-     * @param ProductInterface $product
-     * @return boolean
+     * {@inheritdoc}
      */
     public function hasProduct(ProductInterface $product)
     {
@@ -489,8 +421,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * Compute the price of the basket
-     *
+     * {@inheritdoc}
      */
     public function buildPrices()
     {
@@ -514,8 +445,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * remove basket element market as deleted
-     * @return void
+     * {@inheritdoc}
      */
     public function clean()
     {
@@ -526,6 +456,9 @@ class Basket implements \Serializable, BasketInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function serialize()
     {
         return serialize(array(
@@ -541,6 +474,9 @@ class Basket implements \Serializable, BasketInterface
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function unserialize($data)
     {
         $data = unserialize($data);
@@ -563,8 +499,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param int $deliveryAddressId
-     * @return void
+     * {@inheritdoc}
      */
     public function setDeliveryAddressId($deliveryAddressId)
     {
@@ -572,7 +507,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getDeliveryAddressId()
     {
@@ -580,8 +515,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param $paymentAddressId
-     * @return void
+     * {@inheritdoc}
      */
     public function setPaymentAddressId($paymentAddressId)
     {
@@ -589,7 +523,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getPaymentAddressId()
     {
@@ -597,7 +531,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return
+     * {@inheritdoc}
      */
     public function getPaymentMethodCode()
     {
@@ -605,7 +539,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getDeliveryMethodCode()
     {
@@ -613,8 +547,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
-     * @return void
+     * {@inheritdoc}
      */
     public function setCustomer(CustomerInterface $customer)
     {
@@ -623,7 +556,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return
+     * {@inheritdoc}
      */
     public function getCustomer()
     {
@@ -631,8 +564,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param $customerId
-     * @return void
+     * {@inheritdoc}
      */
     public function setCustomerId($customerId)
     {
@@ -640,7 +572,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return
+     * {@inheritdoc}
      */
     public function getCustomerId()
     {
@@ -648,7 +580,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getOptions()
     {
@@ -656,8 +588,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param $options
-     * @return void
+     * {@inheritdoc}
      */
     public function setOptions($options)
     {
@@ -665,9 +596,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param $name
-     * @param null $default
-     * @return null
+     * {@inheritdoc}
      */
     public function getOption($name, $default = null)
     {
@@ -679,9 +608,7 @@ class Basket implements \Serializable, BasketInterface
     }
 
     /**
-     * @param $name
-     * @param mixed $value
-     * @return void
+     * {@inheritdoc}
      */
     public function setOption($name, $value)
     {
