@@ -332,6 +332,11 @@ class ScelliusPayment extends BasePayment
     {
         $data = $this->getResponseData($transaction);
 
+        $parameters = $transaction->getParameters();
+        $parameters['DECODED_DATA'] = $data;
+
+        $transaction->setParameters($parameters);
+
         if ($data['code'] == -1) {
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_ERROR_VALIDATION);
@@ -375,11 +380,14 @@ class ScelliusPayment extends BasePayment
      */
     private function getResponseData(TransactionInterface $transaction)
     {
-        $cmd = sprintf('%s %s message=%s ',
+        $cmd = sprintf('cd %s && %s %s message=%s ',
+            $this->getOption('base_folder'),
             $this->getOption('response_command'),
             $this->getOption('pathfile'),
             $this->encodeString($transaction->get('DATA'))
         );
+
+        $this->logger->debug(sprintf('Response Command : %s', $cmd));
 
         $process = new Process($cmd);
         $process->run();
@@ -481,7 +489,7 @@ class ScelliusPayment extends BasePayment
             throw new \RuntimeException('Invalid currency provided');
         }
 
-        return bcmul(1, $amount, $list[$currency]['fraction']);
+        return (int) (100 * bcmul(1, $amount, $list[$currency]['fraction']));
     }
 
     /**
@@ -522,7 +530,7 @@ class ScelliusPayment extends BasePayment
             // runtime parameters
             'amount'                    => $this->getAmount($order->getTotalInc(), $order->getCurrency()),
             'currency_code'             => $this->getCurrencyCode($order->getCurrency()),
-            'transaction_id'            => $order->getReference(),
+            'transaction_id'            => '',
             'normal_return_url'         => $this->router->generate($this->getOption('url_return_ok'), $params, true),
             'cancel_return_url'         => $this->router->generate($this->getOption('url_return_ko'), $params, true),
             'automatic_response_url'    => $this->router->generate($this->getOption('url_callback'), $params, true),
@@ -542,7 +550,9 @@ class ScelliusPayment extends BasePayment
             $cmdLineOptions[] = sprintf('%s=%s', $option, $this->encodeString($value));
         }
 
-        $cmd = sprintf('%s %s', $this->getOption('request_command'), join(' ', $cmdLineOptions));
+        $cmd = sprintf('cd %s && %s %s', $this->getOption('base_folder'), $this->getOption('request_command'), join(' ', $cmdLineOptions));
+
+        $this->logger->debug(sprintf('Running command : %s', $cmd));
 
         $process = new Process($cmd);
         $process->run();
@@ -551,6 +561,10 @@ class ScelliusPayment extends BasePayment
         //    - code=0  : la fonction génère une page html contenue dans la variable buffer
         //    - code=-1 : La fonction retourne un message d'erreur dans la variable error
         $data = explode ("!", $process->getOutput());
+
+        if (count($data) != 5) {
+            throw new \RuntimeException('Invalid data count');
+        }
 
         if ($data[1] == 0) {
             $scellius = array(
