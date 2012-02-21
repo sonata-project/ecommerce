@@ -18,10 +18,9 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Processor;
 
 /**
- * UrlShortenerExtension.
- *
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -33,8 +32,12 @@ class SonataPaymentExtension extends Extension
      * @param array            $config    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
+        $processor = new Processor();
+        $configuration = new Configuration();
+        $config = $processor->processConfiguration($configuration, $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('payment.xml');
@@ -43,31 +46,34 @@ class SonataPaymentExtension extends Extension
         $loader->load('selector.xml');
         $loader->load('browser.xml');
 
-        $config = call_user_func_array('array_merge_recursive', $config);
+        $this->configurePayment($config['services'], $container);
+        $this->configureSelector($config['selector'], $container);
+        $this->configureTransformer($config['transformers'], $container);
 
-        if(isset($config['services'])) {
-            $this->configurePayment($config['services'], $container);
-        }
-
-        if(isset($config['selector'])) {
-            $this->configureSelector($config['selector'], $container);
-        }
-
-        if(isset($config['transformers'])) {
-            $this->configureTransformer($config['transformers'], $container);
-        }
-
-        $generator = isset($config['generator']) ? $config['generator'] : 'sonata.payment.generator.mysql';
-        $container->setDefinition('sonata.generator', $container->getDefinition($generator));
+        $container->setAlias('sonata.generator', $config['generator']);
     }
 
+    /**
+     * @throws \RuntimeException
+     * @param $services
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @return void
+     */
     public function configurePayment($services, ContainerBuilder $container)
     {
         // create the payment method pool
         $pool = $container->getDefinition('sonata.payment.pool');
 
+        $implemented = array(
+            'pass'     => 'sonata.payment.method.pass',
+            'check'    => 'sonata.payment.method.check',
+            'scellius' => 'sonata.payment.method.scellius'
+        );
+
         // define the payment method
         foreach ($services as $id => $settings) {
+            $id = $implemented[$id];
+
             $enabled  = isset($settings['enabled']) ? $settings['enabled'] : true;
             $name     = isset($settings['name']) ? $settings['name'] : 'n/a';
             $options  = isset($settings['options']) ? $settings['options'] : array();
@@ -98,27 +104,32 @@ class SonataPaymentExtension extends Extension
             $pool->addMethodCall('addMethod', array(new Reference($id)));
         }
 
-        if (isset($services['sonata.payment.method.pass'])) {
-            $browser = isset($services['sonata.payment.method.pass']['browser']) ? $services['sonata.payment.method.pass']['browser'] : 'sonata.payment.browser.curl';
+        if (isset($services['pass'])) {
             $container->getDefinition('sonata.payment.method.pass')
-                ->replaceArgument(1, new Reference($browser));
+                ->replaceArgument(1, new Reference($services['pass']['browser']));
         }
 
-        if (isset($services['sonata.payment.method.check'])) {
-            $browser = isset($services['sonata.payment.method.check']['browser']) ? $services['sonata.payment.method.check']['browser'] : 'sonata.payment.browser.curl';
+        if (isset($services['check'])) {
             $container->getDefinition('sonata.payment.method.check')
-                ->replaceArgument(2, new Reference($browser));
+                ->replaceArgument(2, new Reference($services['check']['browser']));
         }
     }
 
+    /**
+     * @param $selector
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @return void
+     */
     public function configureSelector($selector, ContainerBuilder $container)
     {
-        // define the payment selector
-        $definition = $container->getDefinition($selector);
-
-        $container->setDefinition('sonata.payment.selector', $definition);
+        $container->setAlias('sonata.payment.selector', $selector);
     }
 
+    /**
+     * @param $transformers
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @return void
+     */
     public function configureTransformer($transformers, ContainerBuilder $container)
     {
         $pool = $container->getDefinition('sonata.payment.transformer.pool');
@@ -126,25 +137,5 @@ class SonataPaymentExtension extends Extension
         foreach ($transformers as $type => $id) {
             $pool->addMethodCall('addTransformer', array($type, new Reference($id)));
         }
-    }
-
-    /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
-     */
-    public function getXsdValidationBasePath()
-    {
-        return __DIR__.'/../Resources/config/schema';
-    }
-
-    public function getNamespace()
-    {
-        return 'http://www.sonata-project.org/schema/dic/sonata-payment';
-    }
-
-    public function getAlias()
-    {
-        return 'sonata_payment';
     }
 }

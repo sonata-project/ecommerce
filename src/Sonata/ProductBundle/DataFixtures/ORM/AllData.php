@@ -22,9 +22,11 @@ use Application\Sonata\ProductBundle\Entity\Delivery;
 use Application\Sonata\CustomerBundle\Entity\Customer;
 use Application\Sonata\ProductBundle\Entity\ProductCategory;
 
+use Doctrine\Common\Persistence\ObjectManager;
+
 class AllData implements FixtureInterface
 {
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         /*
         $ratio = 1;
@@ -33,7 +35,7 @@ class AllData implements FixtureInterface
             $customer = new Customer;
             $customer->setFirstname('user'.$id);
             $customer->setLastname('lastname'.$id);
-            
+
             foreach (range(0, 2 * $ratio) as $di) {
                 $address = new Address;
                 $address->setName($customer->getFullname().' - billing '.$di);
@@ -89,7 +91,7 @@ class AllData implements FixtureInterface
             $products = array();
 
             $id++;
-            
+
             $category = new Category();
             $category->setName('Category '.$level_1_id);
             $category->setSlug('category-'.$level_1_id);
@@ -99,11 +101,11 @@ class AllData implements FixtureInterface
             $category->setUpdatedAt(new \DateTime());
 
             $categories[] = $category;
-            
+
             $manager->persist($category);
 
             foreach (range(0, 10 * $ratio) as $product) {
-                
+
                 $id++;
                 $product = new Product();
                 $product->setName('product '.$id);
@@ -118,7 +120,7 @@ class AllData implements FixtureInterface
                 $product->setUpdatedAt(new \DateTime());
 
                 $products[] = $product;
-                
+
                 $manager->persist($product);
 
                 // add product delivery
@@ -133,7 +135,7 @@ class AllData implements FixtureInterface
                 $delivery->setUpdatedAt(new \DateTime());
 
                 $manager->persist($delivery);
-                
+
                 $delivery = new Delivery;
                 $delivery->setCountryCode('GB');
                 $delivery->setCode('free');
@@ -172,7 +174,7 @@ class AllData implements FixtureInterface
                     $cat3->setUpdatedAt(new \DateTime());
 
                     $cat3->setParent($cat2);
-                    
+
                     $manager->persist($cat3);
 
                     $categories[] = $cat3;

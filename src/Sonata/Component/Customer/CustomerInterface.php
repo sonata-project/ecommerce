@@ -97,4 +97,10 @@ interface CustomerInterface
      * @return integer $id
      */
     function getId();
+
+
+    /**
+     * @return void
+     */
+    function getEmail();
 }

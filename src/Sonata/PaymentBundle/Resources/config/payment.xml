@@ -30,6 +30,14 @@
             <argument type="service" id="router" />
             <argument />
         </service>
+
+        <service id="sonata.payment.method.scellius" class="Sonata\Component\Payment\ScelliusPayment">
+            <tag name="sonata.payment.method" />
+
+            <argument type="service" id="router" />
+            <argument type="service" id="logger" />
+            <argument type="service" id="templating" />
+        </service>
     </services>
 
 </container>
