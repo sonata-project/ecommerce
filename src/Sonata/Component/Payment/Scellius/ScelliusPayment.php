@@ -584,8 +584,10 @@ class ScelliusPayment extends BasePayment
         }
 
         return $this->templating->renderResponse($this->getOption('template'), array(
-            'order'    => $order,
-            'scellius' => $scellius
+            'order'      => $order,
+            'scellius'   => $scellius,
+            'debug'      => $this->debug,
+            'parameters' => $cmdLineParameters,
         ));
     }
 

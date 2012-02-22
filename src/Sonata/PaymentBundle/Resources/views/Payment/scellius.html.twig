@@ -10,7 +10,28 @@
         <h1>{{ order.reference }}</h1>
 
         <div>
-            {{ scellius.content }}
+            {% if scellius.valid %}
+                {{ scellius.content | raw }}
+            {% endif %}
         </div>
+
+        {% if debug %}
+            <h2>Only visible on debug</h2>
+            <h3>Command line parameters</h3>
+            <table>
+                {% for name, value in parameters %}
+                    <tr>
+                        <td>{{ name }}</td><td> {{ value }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% if not scellius.valid %}
+                <h3>Error Message</h3>
+                <div>
+                    {{ scellius.content | raw }}
+                </div>
+            {% endif %}
+        {% endif %}
+
     </body>
 </html>
