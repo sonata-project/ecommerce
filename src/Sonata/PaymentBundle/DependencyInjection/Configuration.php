@@ -129,17 +129,21 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('name')->defaultValue('Scellius')->cannotBeEmpty()->end()
                             ->scalarNode('enabled')->isRequired()->cannotBeEmpty()->end()
                             ->scalarNode('code')->defaultValue('scellius')->cannotBeEmpty()->end()
+                            ->scalarNode('generator')->defaultValue('sonata.payment.provider.scellius.none_generator')->end()
+
                             ->arrayNode('transformers')
                                 ->children()
                                     ->scalarNode('basket')->defaultValue('sonata.payment.transformer.basket')->cannotBeEmpty()->end()
                                     ->scalarNode('order')->defaultValue('sonata.payment.transformer.order')->cannotBeEmpty()->end()
                                 ->end()
                             ->end()
+
                             ->arrayNode('options')
                                 ->children()
                                     ->scalarNode('url_callback')->defaultValue('sonata_payment_callback')->cannotBeEmpty()->end()
                                     ->scalarNode('url_return_ko')->defaultValue('sonata_payment_error')->cannotBeEmpty()->end()
                                     ->scalarNode('url_return_ok')->defaultValue('sonata_payment_confirmation')->cannotBeEmpty()->end()
+
 
                                     ->scalarNode('template')->defaultValue('SonataPaymentBundle:Payment:scellius.html.twig')->cannotBeEmpty()->end()
                                     ->scalarNode('shop_secret_key')->cannotBeEmpty()->end()
@@ -152,7 +156,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('payment_means')->cannotBeEmpty()->end()
                                     ->scalarNode('base_folder')->cannotBeEmpty()->end()
 
-                                    ->scalarNode('header_fla')->defaultValue('no')->cannotBeEmpty()->end()
+                                    ->scalarNode('header_flag')->defaultValue('no')->cannotBeEmpty()->end()
                                     ->scalarNode('capture_day')->defaultValue('')->end()
                                     ->scalarNode('capture_mode')->defaultValue('')->end()
 

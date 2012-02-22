@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Component\Payment;
+namespace Sonata\Component\Payment\Scellius;
 
 use Symfony\Component\HttpFoundation\Response;
 use Sonata\Component\Payment\PaymentInterface;
@@ -20,6 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Sonata\Component\Payment\BasePayment;
 
 class ScelliusPayment extends BasePayment
 {
@@ -33,15 +34,19 @@ class ScelliusPayment extends BasePayment
 
     protected $responseCommand;
 
+    protected $transactionGenerator;
+
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router
      * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
      */
-    public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating)
+    public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, ScelliusTransactionGeneratorInterface $transactionGenerator, $debug)
     {
         $this->templating   = $templating;
         $this->router       = $router;
+        $this->debug        = $debug;
+        $this->transactionGenerator = $transactionGenerator;
 
         $this->setLogger($logger);
     }
@@ -511,7 +516,7 @@ class ScelliusPayment extends BasePayment
             'pathfile'                  => $this->getOption('pathfile'),
             'language'                  => $this->getOption('language'),
             'payment_means'             => $this->getOption('payment_means'),
-            'header_fla'                => $this->getOption('header_fla'),
+            'header_flag'               => $this->getOption('header_flag'),
             'capture_day'               => $this->getOption('capture_day'),
             'capture_mode'              => $this->getOption('capture_mode'),
             'bgcolor'                   => $this->getOption('bgcolor'),
@@ -530,7 +535,7 @@ class ScelliusPayment extends BasePayment
             // runtime parameters
             'amount'                    => $this->getAmount($order->getTotalInc(), $order->getCurrency()),
             'currency_code'             => $this->getCurrencyCode($order->getCurrency()),
-            'transaction_id'            => '',
+            'transaction_id'            => $this->transactionGenerator->generate($order),
             'normal_return_url'         => $this->router->generate($this->getOption('url_return_ok'), $params, true),
             'cancel_return_url'         => $this->router->generate($this->getOption('url_return_ko'), $params, true),
             'automatic_response_url'    => $this->router->generate($this->getOption('url_callback'), $params, true),

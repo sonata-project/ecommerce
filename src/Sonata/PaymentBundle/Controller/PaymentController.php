@@ -83,16 +83,16 @@ class PaymentController extends Controller
 
         $reference = $payment->getOrderReference($transaction);
 
-        if (!$payment->isRequestValid($transaction)) {
-            throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
-        }
-
         $order = $this->getOrderManager()->findOneBy(array(
             'reference' => $reference
         ));
 
         if (!$order) {
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
+        }
+
+        if (!$payment->isRequestValid($transaction)) {
+            throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
         }
 
         if (!($order->isValidated() || $order->isPending())) {
@@ -151,7 +151,8 @@ class PaymentController extends Controller
         // assign correct reference number
         $this->get('sonata.generator')->order($order);
 
-        $basket->reset();
+
+//        $basket->reset();
 
         // the payment must handle everything when calling the bank
         return $payment->callbank($order);

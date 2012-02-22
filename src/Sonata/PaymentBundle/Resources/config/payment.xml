@@ -31,13 +31,18 @@
             <argument />
         </service>
 
-        <service id="sonata.payment.method.scellius" class="Sonata\Component\Payment\ScelliusPayment">
+        <service id="sonata.payment.method.scellius" class="Sonata\Component\Payment\Scellius\ScelliusPayment">
             <tag name="sonata.payment.method" />
 
             <argument type="service" id="router" />
             <argument type="service" id="logger" />
             <argument type="service" id="templating" />
+            <argument />
+            <argument>%kernel.debug%</argument>
         </service>
+
+        <service id="sonata.payment.provider.scellius.none_generator" class="Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator" />
+        <service id="sonata.payment.provider.scellius.order_generator" class="Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator" />
     </services>
 
 </container>

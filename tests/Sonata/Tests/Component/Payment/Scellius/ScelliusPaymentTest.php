@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\Tests\Component\Payment\Scellius;
 
-use Sonata\Component\Payment\ScelliusPayment;
+use Sonata\Component\Payment\Scellius\ScelliusPayment;
 use Sonata\Component\Payment\Pool;
 use Buzz\Message\Response;
 use Buzz\Message\Request;
@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface;
 
 class ScelliusPaymentTest_Order extends BaseOrder
 {
@@ -50,11 +51,13 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
-        $payment = new ScelliusPayment($router, $logger, $templating);
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
         $payment->setOptions(array(
-            'response_command' => sprintf('cat %s/scellius/response_ok.txt', __DIR__)
+            'base_folder'    => __DIR__,
+            'response_command' => 'cat response_ok.txt'
         ));
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
@@ -105,6 +108,8 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
@@ -114,10 +119,11 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $order->setId(2);
         $order->setReference('FR');
 
-        $payment = new ScelliusPayment($router, $logger, $templating);
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
         $payment->setOptions(array(
-            'request_command' => sprintf('cat %s/scellius/request_ok.txt', __DIR__)
+            'base_folder'    => __DIR__,
+            'request_command' => 'cat request_ok.txt'
         ));
 
         $payment->callbank($order);
@@ -128,6 +134,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidCallbank')));
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
@@ -146,10 +153,11 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $order->setCurrency('EUR');
         $order->setCustomer($customer);
 
-        $payment = new ScelliusPayment($router, $logger, $templating);
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
         $payment->setOptions(array(
-            'request_command' => sprintf('cat %s/scellius/request_ok.txt', __DIR__)
+            'base_folder'    => __DIR__,
+            'request_command' => 'cat request_ok.txt',
         ));
 
         $response = $payment->callbank($order);
@@ -165,8 +173,9 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
-        $payment = new ScelliusPayment($router, $logger, $templating);
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
 
         $this->assertEquals($expected, $payment->encodeString($data));
     }

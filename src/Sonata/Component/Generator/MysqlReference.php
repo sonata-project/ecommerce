@@ -82,7 +82,7 @@ class MysqlReference implements ReferenceInterface
             $statement = $connection->query($sql);
             $row = $statement->fetch();
 
-            $reference = sprintf('%02d%02d%02d%04d',
+            $reference = sprintf('%02d%02d%02d%06d',
                 $date->format('y'),
                 $date->format('n'),
                 $date->format('j'),

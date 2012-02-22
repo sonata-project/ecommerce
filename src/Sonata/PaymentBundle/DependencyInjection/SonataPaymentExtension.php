@@ -114,6 +114,12 @@ class SonataPaymentExtension extends Extension
             $container->getDefinition('sonata.payment.method.check')
                 ->replaceArgument(2, new Reference($services['check']['browser']));
         }
+
+        if (isset($services['scellius'])) {
+            $container->getDefinition('sonata.payment.method.scellius')
+                ->replaceArgument(3, new Reference($services['scellius']['generator']));
+        }
+
     }
 
     /**

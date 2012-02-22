@@ -1,1 +1,1 @@
-!0!asd!<div>message</div>
+!0!!<div>message</div>!%
