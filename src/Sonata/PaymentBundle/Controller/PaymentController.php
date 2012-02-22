@@ -91,6 +91,8 @@ class PaymentController extends Controller
             throw new NotFoundHttpException(sprintf('Order %s', $reference));
         }
 
+        $transaction->setOrder($order);
+
         if (!$payment->isRequestValid($transaction)) {
             throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
         }
@@ -150,7 +152,6 @@ class PaymentController extends Controller
 
         // assign correct reference number
         $this->get('sonata.generator')->order($order);
-
 
 //        $basket->reset();
 
