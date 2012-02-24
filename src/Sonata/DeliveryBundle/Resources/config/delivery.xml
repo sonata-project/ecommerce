@@ -21,8 +21,14 @@
             </call>
         </service>
 
-        <service id="sonata.delivery.method.free" class="Sonata\Component\Delivery\FreeDelivery">
+        <service id="sonata.delivery.method.free_address_required" class="Sonata\Component\Delivery\FreeDelivery">
             <tag name="sonata.delivery.method" />
+            <argument>true</argument>
+        </service>
+
+        <service id="sonata.delivery.method.free_address_not_required" class="Sonata\Component\Delivery\FreeDelivery">
+            <tag name="sonata.delivery.method" />
+            <argument>false</argument>
         </service>
     </services>
 </container>

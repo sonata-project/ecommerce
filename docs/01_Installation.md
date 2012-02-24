@@ -69,12 +69,12 @@ Installation
 
         sonata_delivery:
             services:
-                sonata.delivery.method.free:
+                sonata.delivery.method.free_address_required:
                     name: Free
                     enabled: true
                     priority: 1
 
-            selector: sonata.delivery.method.free
+            selector: sonata.delivery.method.free_address_required
 
         sonata_payment:
             services:

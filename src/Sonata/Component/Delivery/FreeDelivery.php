@@ -16,21 +16,53 @@ namespace Sonata\Component\Delivery;
  */
 class FreeDelivery extends BaseDelivery
 {
+    protected $isAddressRequired;
+
+    /**
+     * Constructor
+     *
+     * @param boolean $isAddressRequired
+     */
+    public function __construct($isAddressRequired)
+    {
+        $this->isAddressRequired = $isAddressRequired;
+    }
+
+    /**
+     * Get vat
+     *
+     * @return float
+     */
     public function getVat()
     {
         return 0;
     }
 
+    /**
+     * Get price
+     *
+     * @return float
+     */
     public function getPrice()
     {
         return 0;
     }
 
+    /**
+     * Is address required?
+     *
+     * @return boolean
+     */
     public function isAddressRequired()
     {
-        return true;
+        return $this->isAddressRequired;
     }
 
+    /**
+     * Get name
+     *
+     * @return string
+     */
     public function getName()
     {
         return 'Free delivery';
