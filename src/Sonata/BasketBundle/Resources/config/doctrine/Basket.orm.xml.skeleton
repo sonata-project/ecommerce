@@ -17,44 +17,5 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <one-to-one
-            field="customer"
-            target-entity="Application\Sonata\CustomerBundle\Entity\Customer"
-             >
-
-            <cascade-type>
-                <cascade-persist />
-            </cascade-type>
-
-            <join-columns>
-                <join-column
-                    name="customer_id"
-                    on-delete="CASCADE"
-                />
-            </join-columns>
-
-        </one-to-one>
-
-        <one-to-many
-            field="basketElements"
-            target-entity="Application\Sonata\BasketBundle\Entity\BasketElement"
-            mapped-by="basket"
-            >
-
-            <orphan-removal>true</orphan-removal>
-
-            <cascade>
-                <cascade-persist />
-            </cascade>
-
-            <join-columns>
-                <join-column
-                    name="basket_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"/>
-            </join-columns>
-
-        </one-to-many>
-
     </entity>
 </doctrine-mapping>

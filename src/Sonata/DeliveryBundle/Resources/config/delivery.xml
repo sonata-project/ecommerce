@@ -12,7 +12,7 @@
     <services>
         <service id="sonata.delivery.pool" class="%sonata.delivery.pool.class%" />
 
-        <service id="sonata.delivery.selector" class="%sonata.delivery.selector.class%">
+        <service id="sonata.delivery.selector.default" class="%sonata.delivery.selector.class%">
             <argument type="service" id="sonata.delivery.pool" />
             <argument type="service" id="sonata.product.pool" />
 

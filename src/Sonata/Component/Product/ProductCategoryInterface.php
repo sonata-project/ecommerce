@@ -29,21 +29,21 @@ interface ProductCategoryInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \DateTime $updatedAt
      */
     function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \DateTime $updatedAt
      */
     function getUpdatedAt();
 
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \DateTime $createdAt
      */
     function setCreatedAt(\DateTime $createdAt = null);
 
@@ -57,7 +57,7 @@ interface ProductCategoryInterface
     /**
      * Set Product
      *
-     * @param ProductInterfacet $product
+     * @param ProductInterface $product
      */
     function setProduct(ProductInterface $product);
     /**

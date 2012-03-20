@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ProductBundle\DependencyInjection;
+namespace Sonata\ProductBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class AddProductProviderPass implements CompilerPassInterface
+class AddProductProviderCompilerPass implements CompilerPassInterface
 {
     /**
      * {@inheritDoc}

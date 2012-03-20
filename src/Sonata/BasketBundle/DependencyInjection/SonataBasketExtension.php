@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -17,6 +18,9 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Processor;
+
+use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
 
 /**
  * BasketExtension.
@@ -29,14 +33,16 @@ class SonataBasketExtension extends Extension
     /**
      * Loads the url shortener configuration.
      *
-     * @param array            $config    An array of configuration settings
+     * @param array            $configs    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-        $config = call_user_func_array('array_merge_recursive', $config);
+        $processor = new Processor();
+        $configuration = new Configuration();
+        $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('basket_entity.xml');
         $loader->load('basket_session.xml');
@@ -45,32 +51,78 @@ class SonataBasketExtension extends Extension
         $loader->load('form.xml');
         $loader->load('twig.xml');
 
-        $basketBuilder = isset($config['builder']) ? $config['builder'] : 'sonata.basket.builder.standard';
-        $basketFactory = isset($config['factory']) ? $config['factory'] : 'sonata.basket.session.factory';
-        $basketLoader = isset($config['loader']) ? $config['loader'] : 'sonata.basket.loader.standard';
+        $container->setAlias('sonata.basket.builder', $config['builder']);
+        $container->setAlias('sonata.basket.factory', $config['factory']);
+        $container->setAlias('sonata.basket.loader', $config['loader']);
 
-        $container->setAlias('sonata.basket.builder', $basketBuilder);
-        $container->setAlias('sonata.basket.factory', $basketFactory);
-        $container->setAlias('sonata.basket.loader', $basketLoader);
+        $this->registerParameters($container, $config);
+        $this->registerDoctrineMapping($config);
     }
 
     /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param $config
+     * @return void
      */
-    public function getXsdValidationBasePath()
+    public function registerParameters(ContainerBuilder $container, array $config)
     {
-        return __DIR__.'/../Resources/config/schema';
+        $container->setParameter('sonata.basket.basket.class', $config['class']['basket']);
+        $container->setParameter('sonata.basket.basket_element.class', $config['class']['basket_element']);
     }
 
-    public function getNamespace()
+    /**
+     * @param array $config
+     * @return void
+     */
+    public function registerDoctrineMapping(array $config)
     {
-        return 'http://www.sonata-project.org/schema/dic/sonata-basket';
-    }
+        if (!class_exists($config['class']['basket'])) {
+            return;
+        }
 
-    public function getAlias()
-    {
-        return "sonata_basket";
+        $collector = DoctrineCollector::getInstance();
+
+        $collector->addAssociation($config['class']['basket'], 'mapManyToOne', array(
+             'fieldName'    => 'customer',
+             'targetEntity' => $config['class']['customer'],
+             'cascade'      => array(),
+             'mappedBy'     => NULL,
+             'inversedBy'   => NULL,
+             'joinColumns'  => array(
+                 array(
+                     'name' => 'customer_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                     'unique' => true,
+                 ),
+             ),
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['basket'], 'mapOneToMany', array(
+             'fieldName'     => 'basketElements',
+             'targetEntity'  => $config['class']['basket_element'],
+             'cascade'       => array(
+                 'persist',
+             ),
+             'mappedBy'      => 'basket',
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['basket_element'], 'mapManyToOne', array(
+            'fieldName'      => 'basket',
+            'targetEntity'   => $config['class']['basket'],
+            'cascade'        => array(),
+            'mappedBy'       => NULL,
+            'inversedBy'     => 'basketElements',
+            'joinColumns'    => array(
+                array(
+                    'name' => 'basket_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
     }
 }

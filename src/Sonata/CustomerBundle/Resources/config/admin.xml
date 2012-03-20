@@ -6,12 +6,10 @@
     <parameters>
         <!-- CUSTOMER -->
         <parameter key="sonata.customer.admin.customer.class">Sonata\CustomerBundle\Admin\CustomerAdmin</parameter>
-        <parameter key="sonata.customer.admin.customer.entity">Application\Sonata\CustomerBundle\Entity\Customer</parameter>
         <parameter key="sonata.customer.admin.customer.controller">SonataAdminBundle:CRUD</parameter>
 
         <!-- ADDRESS -->
         <parameter key="sonata.customer.admin.address.class">Sonata\CustomerBundle\Admin\AddressAdmin</parameter>
-        <parameter key="sonata.customer.admin.address.entity">Application\Sonata\CustomerBundle\Entity\Address</parameter>
         <parameter key="sonata.customer.admin.address.controller">SonataAdminBundle:CRUD</parameter>
     </parameters>
 
@@ -26,7 +24,6 @@
                 <argument type="service" id="sonata.customer.admin.address" />
             </call>
 
-<!--             comment it because of admin limit (nested menus) => rande ;) -->
             <call method="addChild">
                 <argument type="service" id="sonata.order.admin.order" />
             </call>

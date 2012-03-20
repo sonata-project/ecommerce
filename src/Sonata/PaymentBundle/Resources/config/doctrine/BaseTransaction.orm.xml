@@ -6,29 +6,13 @@
 
     <mapped-superclass name="Sonata\PaymentBundle\Entity\BaseTransaction" >
 
-        <field name="transactionId"     type="string"       column="transaction_id"   length="255"/>
-        <field name="state"             type="integer"      column="state"    />
-        <field name="parameters"        type="json"        column="parameters" />
-        <field name="statusCode"       type="integer"      column="status_code"/>
-        <field name="paymentCode"      type="string"       column="payment_code" length="32" />
-        <field name="createdAt"        type="datetime"     column="created_at"/>
-        <field name="information"        type="text"     column="information"/>
+        <field name="transactionId"  type="string"    column="transaction_id"   length="255"/>
+        <field name="state"          type="integer"   column="state"    />
+        <field name="parameters"     type="json"      column="parameters" />
+        <field name="statusCode"     type="integer"   column="status_code"/>
+        <field name="paymentCode"    type="string"    column="payment_code" length="32" />
+        <field name="createdAt"      type="datetime"  column="created_at"/>
+        <field name="information"    type="text"      column="information"/>
 
-        <many-to-one
-            field="order"
-            target-entity="Application\Sonata\OrderBundle\Entity\Order"
-            inverted-by="transactions"
-            orphan-removal="false">
-
-
-            <join-columns>
-                <join-column
-                    name="order_id"
-                    referenced-column-name="id"
-                    on-delete="SET NULL"
-                />
-            </join-columns>
-        </many-to-one>
-
-    </mapped-superclass>
+     </mapped-superclass>
 </doctrine-mapping>

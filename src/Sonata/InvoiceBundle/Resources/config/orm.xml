@@ -14,12 +14,12 @@
 
         <service id="sonata.invoice.manager" class="%sonata.invoice.manager.class%">
             <argument type="service" id="sonata.invoice.entity_manager" />
-            <argument>Application\Sonata\InvoiceBundle\Entity\Invoice</argument>
+            <argument>%sonata.invoice.invoice.class%</argument>
         </service>
 
         <service id="sonata.invoice_element.manager" class="%sonata.invoice_element.manager.class%">
             <argument type="service" id="sonata.invoice.entity_manager" />
-            <argument>Application\Sonata\InvoiceBundle\Entity\InvoiceElement</argument>
+            <argument>%sonata.invoice.invoice_element.class%</argument>
         </service>
     </services>
 

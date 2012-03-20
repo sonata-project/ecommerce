@@ -307,7 +307,7 @@ class ScelliusPayment extends BasePayment
      */
     public function isRequestValid(TransactionInterface $transaction)
     {
-        return $transaction->get('check') == $this->generateUrlCheck($transaction->getOrder());
+        return $transaction->get('check') === $this->generateUrlCheck($transaction->getOrder());
     }
 
     /**

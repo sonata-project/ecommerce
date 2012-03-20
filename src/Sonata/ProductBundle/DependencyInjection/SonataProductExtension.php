@@ -19,6 +19,9 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 
+use Symfony\Component\Config\Definition\Processor;
+use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+
 /**
  * ProductExtension.
  *
@@ -30,12 +33,14 @@ class SonataProductExtension extends Extension
     /**
      * Loads the product configuration.
      *
-     * @param array            $config    An array of configuration settings
+     * @param array            $configs    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-        $config = call_user_func_array('array_merge_recursive', $config);
+        $processor = new Processor();
+        $configuration = new Configuration();
+        $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('product.xml');
@@ -45,25 +50,179 @@ class SonataProductExtension extends Extension
         $pool = $container->getDefinition('sonata.product.pool');
         // this value is altered by the AddProductProviderPass class
         $pool->addMethodCall('__hack', $config['products']);
+
+        $this->registerParameters($container, $config);
+        $this->registerDoctrineMapping($config);
+    }
+
+        /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $config
+     * @return void
+     */
+    public function registerParameters(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('sonata.product.product.class', $config['class']['product']);
+        $container->setParameter('sonata.product.package.class', $config['class']['package']);
+        $container->setParameter('sonata.product.product_category.class', $config['class']['product_category']);
+        $container->setParameter('sonata.product.category.class', $config['class']['category']);
+        $container->setParameter('sonata.product.delivery.class', $config['class']['delivery']);
+
+        $container->setParameter('sonata.product.admin.product.entity', $config['class']['product']);
+        $container->setParameter('sonata.product.admin.package.entity', $config['class']['package']);
+        $container->setParameter('sonata.product.admin.product_category.entity', $config['class']['product_category']);
+        $container->setParameter('sonata.product.admin.category.entity', $config['class']['category']);
+        $container->setParameter('sonata.product.admin.delivery.entity', $config['class']['delivery']);
     }
 
     /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
+     * @param array $config
+     * @return void
      */
-    public function getXsdValidationBasePath()
+    public function registerDoctrineMapping(array $config)
     {
-        return __DIR__.'/../Resources/config/schema';
-    }
+        if (!class_exists($config['class']['product'])) {
+            return;
+        }
 
-    public function getNamespace()
-    {
-        return 'http://www.sonata-project.org/schema/dic/sonata-product';
-    }
+        $collector = DoctrineCollector::getInstance();
 
-    public function getAlias()
-    {
-        return "sonata_product";
+        /**
+         * CATEGORY
+         */
+        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
+            'fieldName'     => 'children',
+            'targetEntity'  => $config['class']['category'],
+            'cascade'       => array(
+                'remove',
+                'persist',
+            ),
+            'mappedBy'      => 'parent',
+            'orphanRemoval' => true,
+            'orderBy'       => array(
+                'position'  => 'ASC',
+            ),
+        ));
+
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
+            'fieldName'     => 'parent',
+            'targetEntity'  => $config['class']['category'],
+            'cascade'       => array(
+                'remove',
+                'persist',
+                'refresh',
+                'merge',
+                'detach',
+            ),
+            'mappedBy'      => NULL,
+            'inversedBy'    => NULL,
+            'joinColumns'   => array(
+                array(
+                 'name'     => 'parent_id',
+                 'referencedColumnName' => 'id',
+                 'onDelete' => 'CASCADE',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        /**
+         * DELIVERY
+         */
+        $collector->addAssociation($config['class']['delivery'], 'mapManyToOne', array(
+            'fieldName'    => 'product',
+            'targetEntity' => $config['class']['product'],
+            'cascade'      => array(),
+            'mappedBy'     => NULL,
+            'inversedBy'   => NULL,
+            'joinColumns'  => array(
+                array(
+                    'name' => 'product_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        /**
+         * PRODUCT DELIVERY
+         */
+        $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
+             'fieldName'    => 'product',
+             'targetEntity' => $config['class']['product'],
+             'cascade'      => array(),
+             'mappedBy'     => NULL,
+             'inversedBy'   => 'ProductCategories',
+             'joinColumns'  => array(
+                 array(
+                     'name' => 'product_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                     'onUpdate' => 'CASCADE',
+                 ),
+             ),
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
+             'fieldName'    => 'category',
+             'targetEntity' => $config['class']['category'],
+             'cascade'      => array(),
+             'mappedBy'     => NULL,
+             'inversedBy'   => 'ProductCategories',
+             'joinColumns'  => array(
+                 array(
+                     'name' => 'category_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                     'onUpdate' => 'CASCADE',
+                 ),
+             ),
+             'orphanRemoval' => false,
+        ));
+
+        /**
+         * PRODUCT
+         */
+        $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
+             'fieldName'     => 'package',
+             'targetEntity'  => $config['class']['package'],
+             'cascade'       => array(),
+             'mappedBy'      => 'Product',
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
+             'fieldName'     => 'delivery',
+             'targetEntity'  => $config['class']['delivery'],
+             'cascade'       => array(),
+             'mappedBy'      => 'product',
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
+             'fieldName'     => 'productCategories',
+             'targetEntity'  => $config['class']['product_category'],
+             'cascade'       => array(),
+             'mappedBy'      => 'product',
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['product'], 'mapManyToOne', array(
+             'fieldName'     => 'image',
+             'targetEntity'  => $config['class']['media'],
+             'cascade'       => array(),
+             'mappedBy'      => NULL,
+             'inversedBy'    => NULL,
+             'joinColumns'   => array(
+                 array(
+                     'name' => 'image_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'SET NULL',
+                 ),
+             ),
+             'orphanRemoval' => false,
+        ));
     }
 }

@@ -19,6 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
 
 /**
  *
@@ -46,20 +47,32 @@ class SonataPaymentExtension extends Extension
         $loader->load('selector.xml');
         $loader->load('browser.xml');
 
-        $this->configurePayment($config['services'], $container);
-        $this->configureSelector($config['selector'], $container);
-        $this->configureTransformer($config['transformers'], $container);
+        $this->registerDoctrineMapping($config);
+        $this->registerParameters($container, $config);
+        $this->configurePayment($container, $config['services']);
+        $this->configureSelector($container, $config['selector']);
+        $this->configureTransformer($container, $config['transformers']);
 
         $container->setAlias('sonata.generator', $config['generator']);
     }
 
     /**
-     * @throws \RuntimeException
-     * @param $services
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param $config
      * @return void
      */
-    public function configurePayment($services, ContainerBuilder $container)
+    public function registerParameters(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('sonata.payment.transaction.class', $config['class']['transaction']);
+    }
+
+    /**
+     * @throws \RuntimeException
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $services
+     * @return void
+     */
+    public function configurePayment(ContainerBuilder $container, array $services)
     {
         // create the payment method pool
         $pool = $container->getDefinition('sonata.payment.pool');
@@ -123,21 +136,21 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param $selector
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param $selector
      * @return void
      */
-    public function configureSelector($selector, ContainerBuilder $container)
+    public function configureSelector(ContainerBuilder $container, $selector)
     {
         $container->setAlias('sonata.payment.selector', $selector);
     }
 
     /**
-     * @param $transformers
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $transformers
      * @return void
      */
-    public function configureTransformer($transformers, ContainerBuilder $container)
+    public function configureTransformer(ContainerBuilder $container, array $transformers)
     {
         $pool = $container->getDefinition('sonata.payment.transformer.pool');
 
@@ -145,4 +158,34 @@ class SonataPaymentExtension extends Extension
             $pool->addMethodCall('addTransformer', array($type, new Reference($id)));
         }
     }
+
+    /**
+     * @param array $config
+     * @return void
+     */
+    public function registerDoctrineMapping(array $config)
+    {
+        if (!class_exists($config['class']['transaction'])) {
+            return;
+        }
+
+        $collector = DoctrineCollector::getInstance();
+
+        $collector->addAssociation($config['class']['transaction'], 'mapManyToOne', array(
+            'fieldName'    => 'order',
+            'targetEntity' => $config['class']['order'],
+            'cascade'      => array(),
+            'mappedBy'     => NULL,
+            'inversedBy'   => NULL,
+            'joinColumns'  => array(
+                array(
+                    'name' => 'order_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'SET NULL',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+    }
+
 }

@@ -17,39 +17,5 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <one-to-many
-            field="orderElements"
-            target-entity="Application\Sonata\OrderBundle\Entity\OrderElement"
-            mapped-by="order"
-            >
-
-            <orphan-removal>true</orphan-removal>
-
-            <cascade>
-                <cascade-persist />
-            </cascade>
-
-            <join-columns>
-                <join-column
-                    name="id"
-                    referenced-column-name="order_id"
-                    on-delete="CASCADE"/>
-            </join-columns>
-        </one-to-many>
-
-        <many-to-one
-            field="customer"
-            target-entity="Application\Sonata\CustomerBundle\Entity\Customer"
-            inversed-by="orders"
-            >
-
-            <join-columns>
-                <join-column
-                    name="customer_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"/>
-            </join-columns>
-
-        </many-to-one>
     </entity>
 </doctrine-mapping>

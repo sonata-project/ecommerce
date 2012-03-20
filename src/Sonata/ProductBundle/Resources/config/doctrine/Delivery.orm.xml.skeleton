@@ -17,24 +17,5 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <many-to-one
-            field="product"
-            target-entity="Application\Sonata\ProductBundle\Entity\Product"
-            mapped-by="delivery"
-            >
-
-            <cascade-type>
-                <cascade-all />
-            </cascade-type>
-
-            <join-columns>
-                <join-column
-                    name="product_id"
-                    referenced-column-name="id"
-                    on-delete="CASCADE"
-                />
-            </join-columns>
-        </many-to-one>
-
     </entity>
 </doctrine-mapping>

@@ -17,33 +17,5 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <many-to-one
-            field="product"
-            target-entity="Application\Sonata\ProductBundle\Entity\Product"
-            inversed-by="ProductCategories"
-            >
-
-            <join-column
-               name="product_id"
-               referenced-column-name="id"
-               on-delete="CASCADE"
-               on-update="CASCADE"
-            />
-        </many-to-one>
-
-        <many-to-one
-            field="category"
-            target-entity="Application\Sonata\ProductBundle\Entity\Category"
-            inversed-by="ProductCategories"
-            >
-
-            <join-column
-               name="category_id"
-               referenced-column-name="id"
-               on-delete="CASCADE"
-               on-update="CASCADE"
-            />
-        </many-to-one>
-
     </entity>
 </doctrine-mapping>

@@ -5,7 +5,6 @@
 
     <parameters>
         <parameter key="sonata.invoice.admin.invoice.class">Sonata\InvoiceBundle\Admin\InvoiceAdmin</parameter>
-        <parameter key="sonata.invoice.admin.invoice.entity">Application\Sonata\InvoiceBundle\Entity\Invoice</parameter>
     </parameters>
 
     <services>

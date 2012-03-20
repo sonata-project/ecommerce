@@ -18,10 +18,11 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
-    
+use Symfony\Component\Config\Definition\Processor;
+
+use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+
 /**
- * UrlShortenerExtension.
- *
  *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -31,36 +32,89 @@ class SonataInvoiceExtension extends Extension
     /**
      * Loads the order configuration.
      *
-     * @param array            $config    An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
+        $processor = new Processor();
+        $configuration = new Configuration();
+        $config = $processor->processConfiguration($configuration, $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('admin.xml');
+
+        $this->registerParameters($container, $config);
+        $this->registerDoctrineMapping($config);
     }
 
     /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $config
+     * @return void
      */
-    public function getXsdValidationBasePath()
+    public function registerParameters(ContainerBuilder $container, array $config)
     {
+        $container->setParameter('sonata.invoice.invoice.class', $config['class']['invoice']);
+        $container->setParameter('sonata.invoice.invoice_element.class', $config['class']['invoice_element']);
 
-        return __DIR__.'/../Resources/config/schema';
+        $container->setParameter('sonata.invoice.admin.invoice.entity', $config['class']['invoice']);
+        $container->setParameter('sonata.invoice.admin.invoice_element.entity', $config['class']['invoice_element']);
     }
 
-    public function getNamespace()
+    /**
+     * @param array $config
+     * @return void
+     */
+    public function registerDoctrineMapping(array $config)
     {
+        if (!class_exists($config['class']['invoice'])) {
+            return;
+        }
 
-        return 'http://www.sonata-project.org/schema/dic/sonata-payment';
-    }
+        $collector = DoctrineCollector::getInstance();
 
-    public function getAlias()
-    {
-        
-        return 'sonata_invoice';
+        /**
+         * INVOICE
+         */
+        $collector->addAssociation($config['class']['invoice'], 'mapManyToOne', array(
+             'fieldName'     => 'customer',
+             'targetEntity'  => $config['class']['customer'],
+             'cascade'       => array(
+                 'persist',
+                 'refresh',
+                 'merge',
+                 'detach',
+             ),
+             'mappedBy'     => NULL,
+             'inversedBy'   => 'orders',
+             'joinColumns'  => array(
+                 array(
+                     'name' => 'customer_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                 ),
+             ),
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['invoice_element'], 'mapOneToMany', array(
+             'fieldName'     => 'invoice',
+             'targetEntity'  => $config['class']['invoice'],
+             'cascade'       => array(
+                 'persist',
+             ),
+             'mappedBy'      => 'invoice_elements',
+             'orphanRemoval' => true,
+        ));
+
+        $collector->addAssociation($config['class']['invoice_element'], 'mapOneToMany', array(
+            'fieldName' => 'orderElement',
+            'targetEntity' => $config['class']['order_element'],
+            'cascade' => array(),
+            'mappedBy' => 'invoice_element',
+            'orphanRemoval' => true,
+        ));
     }
 }

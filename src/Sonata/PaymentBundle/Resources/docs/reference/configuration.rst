@@ -123,11 +123,15 @@ Full Configuration Options
             order:  sonata.payment.transformer.order
             basket: sonata.payment.transformer.basket
 
+        class:
+            order:          Application\Sonata\OrderBundle\Entity\Order
+            transaction:    Application\Sonata\PaymentBundle\Entity\Transaction
+
     # Enable Doctrine to map the provided entities
     doctrine:
         orm:
             entity_managers:
                 default:
                     mappings:
-                        #ApplicationSonataPaymentBundle: ~
+                        ApplicationSonataPaymentBundle: ~
                         SonataPaymentBundle: ~

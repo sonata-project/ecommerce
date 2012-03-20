@@ -14,12 +14,12 @@
 
         <service id="sonata.address.manager" class="%sonata.address.manager.class%">
             <argument type="service" id="sonata.customer.entity_manager" />
-            <argument>Application\Sonata\CustomerBundle\Entity\Address</argument>
+            <argument>%sonata.customer.address.class%</argument>
         </service>
 
         <service id="sonata.customer.manager" class="%sonata.customer.manager.class%">
             <argument type="service" id="sonata.customer.entity_manager" />
-            <argument>Application\Sonata\CustomerBundle\Entity\Customer</argument>
+            <argument>%sonata.customer.customer.class%</argument>
         </service>
     </services>
 

@@ -4,20 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="sonata.basket.entity.class">Application\Sonata\BasketBundle\Entity\Basket</parameter>
-        <parameter key="sonata.basket_element.entity.class">Application\Sonata\BasketBundle\Entity\BasketElement</parameter>
-    </parameters>
-
     <services>
         <service id="sonata.basket.manager" class="Sonata\Component\Basket\BasketManager">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument>%sonata.basket.entity.class%</argument>
+            <argument>%sonata.basket.basket.class%</argument>
         </service>
 
         <service id="sonata.basket_element.manager" class="Sonata\Component\Basket\BasketElementManager">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument>%sonata.basket_element.entity.class%</argument>
+            <argument>%sonata.basket.basket_element.class%</argument>
         </service>
 
     </services>

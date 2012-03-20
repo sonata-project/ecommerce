@@ -12,6 +12,7 @@ namespace Sonata\PaymentBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -28,17 +29,34 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $node = $treeBuilder->root('sonata_payment');
 
-        $node->children()
-            ->scalarNode('selector')->defaultValue('sonata.payment.selector.simple')->cannotBeEmpty()->end()
-            ->scalarNode('generator')->defaultValue('sonata.payment.generator.mysql')->cannotBeEmpty()->end()
-            ->arrayNode('transformers')
-                ->children()
-                    ->scalarNode('order')->defaultValue('sonata.payment.transformer.order')->cannotBeEmpty()->end()
-                    ->scalarNode('basket')->defaultValue('sonata.payment.transformer.basket')->cannotBeEmpty()->end()
+        $node
+            ->children()
+                ->scalarNode('selector')->defaultValue('sonata.payment.selector.simple')->cannotBeEmpty()->end()
+                ->scalarNode('generator')->defaultValue('sonata.payment.generator.mysql')->cannotBeEmpty()->end()
+                ->arrayNode('transformers')
+                    ->children()
+                        ->scalarNode('order')->defaultValue('sonata.payment.transformer.order')->cannotBeEmpty()->end()
+                        ->scalarNode('basket')->defaultValue('sonata.payment.transformer.basket')->cannotBeEmpty()->end()
+                    ->end()
                 ->end()
             ->end()
+        ;
 
-            ->arrayNode('services')
+        $this->addPaymentSection($node);
+        $this->addModelSection($node);
+
+        return $treeBuilder;
+    }
+
+    /**
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addPaymentSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('services')
                 ->children()
                     ->arrayNode('paypal')
                         ->children()
@@ -179,11 +197,27 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
-
                 ->end()
             ->end()
         ;
+    }
 
-        return $treeBuilder;
+    /**
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addModelSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('class')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('order')->defaultValue('Application\\Sonata\\OrderBundle\\Entity\\Order')->end()
+                        ->scalarNode('transaction')->defaultValue('Application\\Sonata\\PaymentBundle\\Entity\\Transaction')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 }

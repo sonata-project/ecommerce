@@ -8,8 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Processor;
 
 /*
  * This file is part of the Sonata package.
@@ -32,62 +32,53 @@ class SonataDeliveryExtension extends Extension
     /**
      * Loads the delivery configuration.
      *
-     * @param array            $config    An array of configuration settings
+     * @param array            $configs    An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-        $config = call_user_func_array('array_merge_recursive', $config);
+        $processor = new Processor();
+        $configuration = new Configuration();
+        $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('delivery.xml');
         $loader->load('delivery_orm.xml');
 
+        $container->setAlias('sonata.delivery.selector', $config['selector']);
+
+        $this->configureDelivery($container, $config['services']);
+    }
+
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array $services
+     * @return void
+     */
+    public function configureDelivery(ContainerBuilder $container, array $services)
+    {
         $pool = $container->getDefinition('sonata.delivery.pool');
 
-        foreach ($config['services'] as $id => $options) {
-            $definition = $container->getDefinition($id);
+        $implemented = array(
+            'free_address_required'     => 'sonata.delivery.method.free_address_required',
+            'free_address_not_required' => 'sonata.delivery.method.free_address_not_required',
+        );
 
-            $enabled = isset($options['enabled']) ? (bool)$options['enabled'] : true;
-
-            if (!$enabled) {
+        foreach ($implemented as $key => $id) {
+            if (!isset($services[$key]) || $services[$key]['enabled'] == false) {
                 $container->removeDefinition($id);
                 continue;
             }
 
-            $name    = isset($options['name']) ? (string)$options['name'] : "n/a";
-            $code      = isset($options['code']) ? $options['code'] : false;
+            $definition = $container->getDefinition($id);
 
-            if (!$code) {
-                throw new \RuntimeException('Please provide an id argument to the delivery name');
-            }
-
-            $definition->addMethodCall('setName', array($name));
-            $definition->addMethodCall('setCode', array($code));
-            $definition->addMethodCall('setEnabled', array($enabled));
+            $definition->addMethodCall('setName', array($services[$key]['name']));
+            $definition->addMethodCall('setCode', array($services[$key]['code']));
+            $definition->addMethodCall('setEnabled', array($services[$key]['enabled']));
+            $definition->addMethodCall('setPriority', array($services[$key]['priority']));
 
             // add the delivery method in the method pool
             $pool->addMethodCall('addMethod', array(new Reference($id)));
         }
-    }
-
-    /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
-     */
-    public function getXsdValidationBasePath()
-    {
-        return __DIR__.'/../Resources/config/schema';
-    }
-
-    public function getNamespace()
-    {
-        return 'http://www.sonata-project.org/schema/dic/sonata-delivery';
-    }
-
-    public function getAlias()
-    {
-        return 'sonata_delivery';
     }
 }

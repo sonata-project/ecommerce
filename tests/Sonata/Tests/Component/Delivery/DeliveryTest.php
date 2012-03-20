@@ -20,17 +20,17 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
     {
         $pool = new Pool;
 
-        $delivery = new FreeDelivery;
+        $delivery = new FreeDelivery(true);
         $delivery->setCode('free_1');
 
         $pool->addMethod($delivery);
 
-        $delivery = new FreeDelivery;
+        $delivery = new FreeDelivery(true);
         $delivery->setCode('free_2');
 
         $pool->addMethod($delivery);
 
-        $delivery = new FreeDelivery;
+        $delivery = new FreeDelivery(true);
         $delivery->setCode('free_2');  // same code
 
         $pool->addMethod($delivery);
@@ -47,8 +47,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testFreeDelivery()
     {
-
-        $delivery = new FreeDelivery;
+        $delivery = new FreeDelivery(true);
         $delivery->setCode('free_1');
 
         $this->assertEquals(0, $delivery->getPrice(), 'FreeDelivery.price = 0');

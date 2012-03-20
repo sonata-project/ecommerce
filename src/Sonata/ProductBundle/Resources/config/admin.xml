@@ -6,15 +6,12 @@
     <parameters>
         <!-- PRODUCT -->
         <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
-        <parameter key="sonata.product.admin.product.entity">Application\Sonata\ProductBundle\Entity\Product</parameter>
 
         <!-- CATEGORY -->
         <parameter key="sonata.product.admin.category.class">Sonata\ProductBundle\Admin\CategoryAdmin</parameter>
-        <parameter key="sonata.product.admin.category.entity">Application\Sonata\ProductBundle\Entity\Category</parameter>
 
         <!-- DELIVERY -->
         <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeleveryAdmin</parameter>
-        <parameter key="sonata.product.admin.delivery.entity">Application\Sonata\ProductBundle\Entity\Delivery</parameter>
 
         <parameter key="sonata.product.admin.product.manager">Sonata\ProductBundle\Model\DoctrineModelManager</parameter>
     </parameters>

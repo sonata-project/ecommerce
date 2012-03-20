@@ -13,13 +13,16 @@ namespace Sonata\ProductBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-use Sonata\ProductBundle\DependencyInjection\AddProductProviderPass;
+use Sonata\ProductBundle\DependencyInjection\Compiler\AddProductProviderCompilerPass;
 
 class SonataProductBundle extends Bundle
 {
+    /**
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @return void
+     */
     public function build(ContainerBuilder $container)
     {
-        parent::build($container);
-        $container->addCompilerPass(new AddProductProviderPass());
+        $container->addCompilerPass(new AddProductProviderCompilerPass());
     }
 }

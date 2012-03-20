@@ -5,21 +5,21 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sonata.order.manager.class">Sonata\OrderBundle\Entity\OrderManager</parameter>
-        <parameter key="sonata.order_element.manager.class">Sonata\OrderBundle\Entity\OrderElementManager</parameter>
+        <parameter key="sonata.order.order.manager.class">Sonata\OrderBundle\Entity\OrderManager</parameter>
+        <parameter key="sonata.order.order_element.manager.class">Sonata\OrderBundle\Entity\OrderElementManager</parameter>
     </parameters>
 
     <services>
         <service id="sonata.order.entity_manager" alias="doctrine.orm.default_entity_manager" />
 
-        <service id="sonata.order.manager" class="%sonata.order.manager.class%">
+        <service id="sonata.order.manager" class="%sonata.order.order.manager.class%">
             <argument type="service" id="sonata.order.entity_manager" />
-            <argument>Application\Sonata\OrderBundle\Entity\Order</argument>
+            <argument>%sonata.order.order.class%</argument>
         </service>
 
-        <service id="sonata.order_element.manager" class="%sonata.order_element.manager.class%">
+        <service id="sonata.order.order_element.manager" class="%sonata.order.order_element.manager.class%">
             <argument type="service" id="sonata.order.entity_manager" />
-            <argument>Application\Sonata\OrderBundle\Entity\OrderElement</argument>
+            <argument>%sonata.order.order_element.class%</argument>
         </service>
     </services>
 

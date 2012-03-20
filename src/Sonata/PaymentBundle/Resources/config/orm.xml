@@ -13,7 +13,7 @@
 
         <service id="sonata.transaction.manager" class="%sonata.transaction.manager.class%">
             <argument type="service" id="sonata.transaction.entity_manager" />
-            <argument>Application\Sonata\PaymentBundle\Entity\Transaction</argument>
+            <argument>%sonata.payment.transaction.class%</argument>
         </service>
     </services>
 

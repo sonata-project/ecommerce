@@ -11,7 +11,7 @@
     <entity
         name="Application\Sonata\PaymentBundle\Entity\Transaction"
         table="payment__transaction"
-        repository-class="Doctrine\ORM\EntityRepository">
+        >
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

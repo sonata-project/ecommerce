@@ -17,27 +17,27 @@
 
         <service id="sonata.category.manager" class="%sonata.category.manager.class%">
             <argument type="service" id="sonata.product.entity_manager" />
-            <argument>Application\Sonata\ProductBundle\Entity\Category</argument>
+            <argument>%sonata.product.category.class%</argument>
         </service>
 
         <service id="sonata.delivery.manager" class="%sonata.delivery.manager.class%">
             <argument type="service" id="sonata.product.entity_manager" />
-            <argument>Application\Sonata\ProductBundle\Entity\Delivery</argument>
+            <argument>%sonata.product.delivery.class%</argument>
         </service>
 
         <service id="sonata.package.manager" class="%sonata.package.manager.class%">
             <argument type="service" id="sonata.product.entity_manager" />
-            <argument>Application\Sonata\ProductBundle\Entity\Package</argument>
+            <argument>%sonata.product.package.class%</argument>
         </service>
 
         <service id="sonata.product.collection.manager" class="%sonata.product.collection.manager.class%">
-            <argument>Application\Sonata\ProductBundle\Entity\Product</argument>
+            <argument>%sonata.product.product.class%</argument>
             <argument type="service" id="sonata.product.entity_manager" />
         </service>
 
         <service id="sonata.product_category.product" class="%sonata.product_category.manager.class%">
             <argument type="service" id="sonata.product.entity_manager" />
-            <argument>Application\Sonata\ProductBundle\Entity\ProductCategory</argument>
+            <argument>%sonata.product.product_category.class%</argument>
         </service>
 
     </services>
