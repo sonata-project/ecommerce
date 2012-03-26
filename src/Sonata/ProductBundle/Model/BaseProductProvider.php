@@ -126,7 +126,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function getRawProduct(ProductInterface $product, $format = 'json')
     {
-        return json_decode($this->serializer->serialize($product, $format));
+        return json_decode($this->serializer->serialize($product, $format), true);
     }
 
     /**
