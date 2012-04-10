@@ -13,14 +13,19 @@ namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sonata\Component\Basket\BasketElementInterface;
 use Symfony\Component\Form\FormView;
-use Sonata\Component\Order\OrderElementInterface;
 
-use Application\Sonata\PaymentBundle\Entity\Transaction;
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Basket\BasketInterface;
 
 abstract class BaseProductController extends Controller
 {
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @param $product
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
     public function viewAction($product)
     {
         if (!is_object($product)) {
@@ -43,22 +48,35 @@ abstract class BaseProductController extends Controller
         ));
     }
 
-    public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement)
+    /**
+     * @param \Symfony\Component\Form\FormView $formView
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
+    public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
         return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), array(
-            'formView'    => $formView,
+            'formView'      => $formView,
             'basketElement' => $basketElement,
+            'basket'        => $basket
         ));
     }
 
-    public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement)
+    /**
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
+    public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
         return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), array(
             'basketElement' => $basketElement,
+            'basket'        => $basket
         ));
     }
 

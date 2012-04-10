@@ -5,15 +5,15 @@
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sonata\BasketBundle\Entity\BaseBasket">
-
-        <field name="positions" column="positions" type="json" nullable="true"/>
-        <field name="deliveryAddressId" column="delivery_address_id" type="integer" nullable="true"/>
-        <field name="paymentAddressId" column="payment_address_id" type="integer" nullable="true"/>
-        <field name="paymentMethodCode" column="payment_method_code" type="string" length="255" nullable="true"/>
-        <field name="cptElement" column="cpt_element" type="integer" nullable="true"/>
-        <field name="deliveryMethodCode" column="delivery_method_code" type="string" length="255" nullable="true"/>
-        <field name="options" column="options" type="json" nullable="true"/>
-
+        <field name="positions"          column="positions"            type="json"    nullable="true"/>
+        <field name="deliveryAddressId"  column="delivery_address_id"  type="integer" nullable="true"/>
+        <field name="paymentAddressId"   column="payment_address_id"   type="integer" nullable="true"/>
+        <field name="paymentMethodCode"  column="payment_method_code"  type="string"  nullable="true"  length="255" />
+        <field name="cptElement"         column="cpt_element"          type="integer" nullable="true"/>
+        <field name="deliveryMethodCode" column="delivery_method_code" type="string"  nullable="true"  length="255" />
+        <field name="options"            column="options"              type="json"    nullable="true"/>
+        <field name="locale"             column="locale"               type="string"  nullable="true"  length="6" />
+        <field name="currency"           column="currency"             type="string"  nullable="true"  length="3" />
     </mapped-superclass>
 
 </doctrine-mapping>

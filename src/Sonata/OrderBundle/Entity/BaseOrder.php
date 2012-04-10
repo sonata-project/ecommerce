@@ -187,13 +187,13 @@ abstract class BaseOrder implements OrderInterface
 
     protected $orderElements;
 
-
     protected $createdAt;
 
     protected $updatedAt;
 
     protected $customer;
 
+    protected $locale;
 
     public function __construct()
     {
@@ -202,7 +202,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function __toString()
     {
@@ -210,9 +210,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set reference
-     *
-     * @param string $reference
+     * {@inheritdoc}
      */
     public function setReference($reference)
     {
@@ -220,9 +218,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get reference
-     *
-     * @return string $reference
+     * {@inheritdoc}
      */
     public function getReference()
     {
@@ -230,9 +226,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set payment_method
-     *
-     * @param string $payment_method
+     * {@inheritdoc}
      */
     public function setPaymentMethod($paymentMethod)
     {
@@ -240,9 +234,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get payment_method
-     *
-     * @return string $payment_method
+     * {@inheritdoc}
      */
     public function getPaymentMethod()
     {
@@ -250,9 +242,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set delivery_method
-     *
-     * @param string $deliveryMethod
+     * {@inheritdoc}
      */
     public function setDeliveryMethod($deliveryMethod)
     {
@@ -260,9 +250,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get delivery_method
-     *
-     * @return string $deliveryMethod
+     * {@inheritdoc}
      */
     public function getDeliveryMethod()
     {
@@ -270,9 +258,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set currency
-     *
-     * @param string $currency
+     * {@inheritdoc}
      */
     public function setCurrency($currency)
     {
@@ -280,9 +266,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get currency
-     *
-     * @return string $currency
+     * {@inheritdoc}
      */
     public function getCurrency()
     {
@@ -290,9 +274,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set status
-     *
-     * @param integer $status
+     * {@inheritdoc}
      */
     public function setStatus($status)
     {
@@ -300,9 +282,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get status
-     *
-     * @return integer $status
+     * {@inheritdoc}
      */
     public function getStatus()
     {
@@ -310,9 +290,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set payment_status
-     *
-     * @param integer $paymentStatus
+     * {@inheritdoc}
      */
     public function setPaymentStatus($paymentStatus)
     {
@@ -320,9 +298,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get payment_status
-     *
-     * @return integer $paymentStatus
+     * {@inheritdoc}
      */
     public function getPaymentStatus()
     {
@@ -339,9 +315,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set delivery_status
-     *
-     * @param integer $deliveryStatus
+     * {@inheritdoc}
      */
     public function setDeliveryStatus($deliveryStatus)
     {
@@ -349,9 +323,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get delivery_status
-     *
-     * @return integer $deliveryStatus
+     * {@inheritdoc}
      */
     public function getDeliveryStatus()
     {
@@ -368,9 +340,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set validated_at
-     *
-     * @param \DateTime $validatedAt
+     * {@inheritdoc}
      */
     public function setValidatedAt(\DateTime $validatedAt = null)
     {
@@ -378,9 +348,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get validated_at
-     *
-     * @return datetime $validatedAt
+     * {@inheritdoc}
      */
     public function getValidatedAt()
     {
@@ -388,9 +356,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set username
-     *
-     * @param string $username
+     * {@inheritdoc}
      */
     public function setUsername($username)
     {
@@ -398,9 +364,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get username
-     *
-     * @return string $username
+     * {@inheritdoc}
      */
     public function getUsername()
     {
@@ -408,9 +372,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set totalInc
-     *
-     * @param decimal $totalInc
+     * {@inheritdoc}
      */
     public function setTotalInc($totalInc)
     {
@@ -418,9 +380,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get totalInc
-     *
-     * @return decimal $totalInc
+     * {@inheritdoc}
      */
     public function getTotalInc()
     {
@@ -428,9 +388,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set totalExcl
-     *
-     * @param decimal $totalExcl
+     * {@inheritdoc}
      */
     public function setTotalExcl($totalExcl)
     {
@@ -438,9 +396,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get totalExcl
-     *
-     * @return decimal $totalExcl
+     * {@inheritdoc}
      */
     public function getTotalExcl()
     {
@@ -448,9 +404,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set delivery_cost
-     *
-     * @param decimal $deliveryCost
+     * {@inheritdoc}
      */
     public function setDeliveryCost($deliveryCost)
     {
@@ -458,9 +412,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get delivery_cost
-     *
-     * @return decimal $deliveryCost
+     * {@inheritdoc}
      */
     public function getDeliveryCost()
     {
@@ -468,9 +420,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_name
-     *
-     * @param string $billingName
+     * {@inheritdoc}
      */
     public function setBillingName($billingName)
     {
@@ -478,9 +428,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_name
-     *
-     * @return string $billingName
+     * {@inheritdoc}
      */
     public function getBillingName()
     {
@@ -488,9 +436,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_phone
-     *
-     * @param string $billingPhone
+     * {@inheritdoc}
      */
     public function setBillingPhone($billingPhone)
     {
@@ -498,9 +444,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_phone
-     *
-     * @return string $billingPhone
+     * {@inheritdoc}
      */
     public function getBillingPhone()
     {
@@ -508,9 +452,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_address1
-     *
-     * @param string $billingAddress1
+     * {@inheritdoc}
      */
     public function setBillingAddress1($billingAddress1)
     {
@@ -518,9 +460,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_address1
-     *
-     * @return string $billingAddress1
+     * {@inheritdoc}
      */
     public function getBillingAddress1()
     {
@@ -528,9 +468,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_address2
-     *
-     * @param string $billingAddress2
+     * {@inheritdoc}
      */
     public function setBillingAddress2($billingAddress2)
     {
@@ -538,9 +476,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_address2
-     *
-     * @return string $billingAddress2
+     * {@inheritdoc}
      */
     public function getBillingAddress2()
     {
@@ -548,9 +484,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_address3
-     *
-     * @param string $billingAddress3
+     * {@inheritdoc}
      */
     public function setBillingAddress3($billingAddress3)
     {
@@ -558,9 +492,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_address3
-     *
-     * @return string $billingAddress3
+     * {@inheritdoc}
      */
     public function getBillingAddress3()
     {
@@ -568,9 +500,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_city
-     *
-     * @param string $billingCity
+     * {@inheritdoc}
      */
     public function setBillingCity($billingCity)
     {
@@ -578,9 +508,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_city
-     *
-     * @return string $billingCity
+     * {@inheritdoc}
      */
     public function getBillingCity()
     {
@@ -588,9 +516,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_postcode
-     *
-     * @param string $billingPostcode
+     * {@inheritdoc}
      */
     public function setBillingPostcode($billingPostcode)
     {
@@ -598,9 +524,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_postcode
-     *
-     * @return string $billingPostcode
+     * {@inheritdoc}
      */
     public function getBillingPostcode()
     {
@@ -608,9 +532,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_country_code
-     *
-     * @param string $billingCountry
+     * {@inheritdoc}
      */
     public function setBillingCountryCode($billingCountryCode)
     {
@@ -618,9 +540,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_country
-     *
-     * @return string $billingCountryCode
+     * {@inheritdoc}
      */
     public function getBillingCountryCode()
     {
@@ -628,9 +548,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_fax
-     *
-     * @param string $billingFax
+     * {@inheritdoc}
      */
     public function setBillingFax($billingFax)
     {
@@ -638,9 +556,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_fax
-     *
-     * @return string $billingFax
+     * {@inheritdoc}
      */
     public function getBillingFax()
     {
@@ -648,9 +564,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_email
-     *
-     * @param string $billingEmail
+     * {@inheritdoc}
      */
     public function setBillingEmail($billingEmail)
     {
@@ -658,9 +572,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_email
-     *
-     * @return string $billingEmail
+     * {@inheritdoc}
      */
     public function getBillingEmail()
     {
@@ -668,9 +580,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set billing_mobile
-     *
-     * @param string $billingMobile
+     * {@inheritdoc}
      */
     public function setBillingMobile($billingMobile)
     {
@@ -678,9 +588,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get billing_mobile
-     *
-     * @return string $billingMobile
+     * {@inheritdoc}
      */
     public function getBillingMobile()
     {
@@ -688,9 +596,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_name
-     *
-     * @param string $shippingName
+     * {@inheritdoc}
      */
     public function setShippingName($shippingName)
     {
@@ -698,9 +604,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_name
-     *
-     * @return string $shippingName
+     * {@inheritdoc}
      */
     public function getShippingName()
     {
@@ -708,9 +612,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_phone
-     *
-     * @param string $shippingPhone
+     * {@inheritdoc}
      */
     public function setShippingPhone($shippingPhone)
     {
@@ -718,9 +620,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_phone
-     *
-     * @return string $shippingPhone
+     * {@inheritdoc}
      */
     public function getShippingPhone()
     {
@@ -728,9 +628,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_address1
-     *
-     * @param string $shippingAddress1
+     * {@inheritdoc}
      */
     public function setShippingAddress1($shippingAddress1)
     {
@@ -738,9 +636,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_address1
-     *
-     * @return string $shippingAddress1
+     * {@inheritdoc}
      */
     public function getShippingAddress1()
     {
@@ -748,9 +644,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_address2
-     *
-     * @param string $shippingAddress2
+     * {@inheritdoc}
      */
     public function setShippingAddress2($shippingAddress2)
     {
@@ -758,9 +652,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_address2
-     *
-     * @return string $shippingAddress2
+     * {@inheritdoc}
      */
     public function getShippingAddress2()
     {
@@ -768,9 +660,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_address3
-     *
-     * @param string $shippingAddress3
+     * {@inheritdoc}
      */
     public function setShippingAddress3($shippingAddress3)
     {
@@ -778,9 +668,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_address3
-     *
-     * @return string $shippingAddress3
+     * {@inheritdoc}
      */
     public function getShippingAddress3()
     {
@@ -788,9 +676,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_city
-     *
-     * @param string $shippingCity
+     * {@inheritdoc}
      */
     public function setShippingCity($shippingCity)
     {
@@ -798,9 +684,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_city
-     *
-     * @return string $shippingCity
+     * {@inheritdoc}
      */
     public function getShippingCity()
     {
@@ -808,9 +692,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_postcode
-     *
-     * @param string $shippingPostcode
+     * {@inheritdoc}
      */
     public function setShippingPostcode($shippingPostcode)
     {
@@ -818,9 +700,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_postcode
-     *
-     * @return string $shippingPostcode
+     * {@inheritdoc}
      */
     public function getShippingPostcode()
     {
@@ -828,9 +708,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_country
-     *
-     * @param string $shippingCountry
+     * {@inheritdoc}
      */
     public function setShippingCountryCode($shippingCountryCode)
     {
@@ -838,9 +716,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_country
-     *
-     * @return string $shippingCountry
+     * {@inheritdoc}
      */
     public function getShippingCountryCode()
     {
@@ -848,9 +724,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_fax
-     *
-     * @param string $shippingFax
+     * {@inheritdoc}
      */
     public function setShippingFax($shippingFax)
     {
@@ -858,9 +732,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_fax
-     *
-     * @return string $shippingFax
+     * {@inheritdoc}
      */
     public function getShippingFax()
     {
@@ -868,9 +740,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_email
-     *
-     * @param string $shippingEmail
+     * {@inheritdoc}
      */
     public function setShippingEmail($shippingEmail)
     {
@@ -878,9 +748,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_email
-     *
-     * @return string $shippingEmail
+     * {@inheritdoc}
      */
     public function getShippingEmail()
     {
@@ -888,9 +756,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set shipping_mobile
-     *
-     * @param string $shippingMobile
+     * {@inheritdoc}
      */
     public function setShippingMobile($shippingMobile)
     {
@@ -898,20 +764,24 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get shipping_mobile
-     *
-     * @return string $shippingMobile
+     * {@inheritdoc}
      */
     public function getShippingMobile()
     {
         return $this->shippingMobile;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOrderElements()
     {
         return $this->orderElements;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addOrderElement(OrderElementInterface $orderElement)
     {
         $this->orderElements[] = $orderElement;
@@ -919,10 +789,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     *
-     * return true if the order is validated
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isValidated()
     {
@@ -930,9 +797,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     *
-     *
-     * @return boolean true if cancelled, else false
+     * {@inheritdoc}
      */
     public function isCancelled()
     {
@@ -940,9 +805,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     *
-     *
-     * @return boolean true if pending, else false
+     * {@inheritdoc}
      */
     public function isPending()
     {
@@ -950,9 +813,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Return true if the order is open
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isOpen()
     {
@@ -960,7 +821,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function isCancellable()
     {
@@ -968,9 +829,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Return true if the order has an error
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isError()
     {
@@ -978,8 +837,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @param \DateTime|null $createdAt
-     * @return void
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -987,7 +845,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -995,8 +853,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @param \DateTime|null $updatedAt
-     * @return void
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -1004,7 +861,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @return \DateTime|null
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -1012,9 +869,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Add order_elements
-     *
-     * @param \Sonata\Component\Order\OrderElementInterface $orderElements
+     * {@inheritdoc}
      */
     public function addOrderElements(OrderElementInterface $orderElements)
     {
@@ -1022,8 +877,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @param array $orderElements
-     * @return void
+     * {@inheritdoc}
      */
     public function setOrderElements($orderElements)
     {
@@ -1031,8 +885,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
-     * @return void
+     * {@inheritdoc}
      */
     public function setCustomer(CustomerInterface $customer)
     {
@@ -1040,7 +893,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * @return \Sonata\Component\Customer\CustomerInterface
+     * {@inheritdoc}
      */
     public function getCustomer()
     {
@@ -1070,5 +923,21 @@ abstract class BaseOrder implements OrderInterface
             self::STATUS_ERROR     => 'status_error',
             self::STATUS_STOPPED   => 'status_stopped',
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }

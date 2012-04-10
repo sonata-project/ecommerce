@@ -13,10 +13,10 @@ namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-use Application\Sonata\PaymentBundle\Entity\Transaction;
-use Sonata\Component\Basket\BasketElementInterface;
 use Symfony\Component\Form\FormView;
+
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketInterface;
 
 class ProductController extends Controller
 {
@@ -56,15 +56,17 @@ class ProductController extends Controller
     /**
      * @param \Symfony\Component\Form\FormView $formView
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
-    public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement)
+    public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
     {
         $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
             'formView'       => $formView,
             'basketElement'  => $basketElement,
+            'basket'         => $basket
         ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -81,14 +83,16 @@ class ProductController extends Controller
 
     /**
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
-    public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement)
+    public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
     {
         $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
             'basketElement'  => $basketElement,
+            'basket'         => $basket
         ));
 
         if ($this->get('kernel')->isDebug()) {

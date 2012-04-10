@@ -22,7 +22,7 @@ file that was distributed with this source code.
         </td>
         <td>
             {% block product_unit_price %}
-                {{ basketElement.getUnitPrice(true) }}
+                {{ basketElement.getUnitPrice(true)|number_format_currency(basket.currency, {}, {}, basket.locale) }}
             {% endblock %}
         </td>
         <td>
@@ -33,7 +33,7 @@ file that was distributed with this source code.
         </td>
         <td>
             {% block product_total %}
-                {{ basketElement.getTotal(true) }}
+                {{ basketElement.getTotal(true)|number_format_currency(basket.currency, {}, {}, basket.locale) }}
             {% endblock %}
         </td>
     {% endif %}

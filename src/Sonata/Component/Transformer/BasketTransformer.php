@@ -106,6 +106,7 @@ class BasketTransformer extends BaseTransformer
 
         $order->setCustomer($customer);
         $order->setUsername($customer->getFullname());
+        $order->setLocale($customer->getLocale());
 
         if ($deliveryMethod->isAddressRequired()) {
             $order->setShippingAddress1($deliveryAddress->getAddress1());
@@ -136,8 +137,7 @@ class BasketTransformer extends BaseTransformer
 
         $order->setCreatedAt(new \DateTime);
 
-        // todo : handle the currency
-        $order->setCurrency('EUR');
+        $order->setCurrency($basket->getCurrency());
 
         $order->setStatus(OrderInterface::STATUS_OPEN);
 

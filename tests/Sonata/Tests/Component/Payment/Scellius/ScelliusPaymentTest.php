@@ -71,6 +71,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
+        $order->setLocale('es');
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(array($this, 'callback')));
@@ -118,6 +119,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
+        $order->setLocale('es');
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
@@ -152,6 +154,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $order->setReference('FR');
         $order->setCurrency('EUR');
         $order->setCustomer($customer);
+        $order->setLocale('es');
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');

@@ -36,6 +36,7 @@ class OrderAdmin extends Admin
         $formMapper
             ->with($this->trans('order.form.group_main_label'))
                 ->add('currency')
+                ->add('locale')
                 ->add('status', 'sonata_type_translatable_choice', array('choices' => Order::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
                 ->add('paymentStatus', 'sonata_type_translatable_choice', array('choices' => Transaction::getStatusList(), 'catalogue' => 'SonataPaymentBundle'))
                 ->add('deliveryStatus', 'sonata_type_translatable_choice', array('choices' => Delivery::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
@@ -82,6 +83,7 @@ class OrderAdmin extends Admin
             ->addIdentifier('id')
             ->addIdentifier('reference')
             ->add('customer')
+            ->add('locale')
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'deliveryStatus'))
             ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataPaymentBundle', 'sortable' => 'paymentStatus'))
@@ -95,6 +97,7 @@ class OrderAdmin extends Admin
         $filter
             ->add('reference')
             ->add('customer')
+            ->add('locale')
         ;
     }
 

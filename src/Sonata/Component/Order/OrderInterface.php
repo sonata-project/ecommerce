@@ -84,6 +84,17 @@ interface OrderInterface
     function getCurrency();
 
     /**
+     * @return string
+     */
+    function getLocale();
+
+    /**
+     * @param string $locale
+     * @return void
+     */
+    function setLocale($locale);
+
+    /**
      * Set status
      *
      * @param integer $status

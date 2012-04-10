@@ -66,7 +66,15 @@ class CustomerSelector implements CustomerSelectorInterface
             }
         }
 
-        return $customer ?: $this->customerManager->create();
+        if (!$customer) {
+            $customer = $this->customerManager->create();
+        }
+
+        if (!$customer->getLocale()) {
+            $customer->setLocale($this->session->getLocale());
+        }
+
+        return $customer;
     }
 
     /**

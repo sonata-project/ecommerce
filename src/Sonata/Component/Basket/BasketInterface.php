@@ -262,4 +262,26 @@ interface BasketInterface
     function setCustomerId($customerId);
 
     function getCustomerId();
+
+    /**
+     * @return string
+     */
+    function getLocale();
+
+    /**
+     * @param string $locale
+     * @return void
+     */
+    function setLocale($locale);
+
+    /**
+     * @return void
+     */
+    function getCurrency();
+
+    /**
+     * @param string $currency
+     * @return void
+     */
+    function setCurrency($currency);
 }

@@ -103,4 +103,15 @@ interface CustomerInterface
      * @return void
      */
     function getEmail();
+
+    /**
+     * @return string
+     */
+    function getLocale();
+
+    /**
+     * @param string $locale
+     * @return void
+     */
+    function setLocale($locale);
 }

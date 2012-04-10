@@ -46,9 +46,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @return bool
+     * {@inheritdoc}
      */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
@@ -56,8 +54,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @return bool
+     * {@inheritdoc}
      */
     public function isBasketValid(BasketInterface $basket)
     {
@@ -65,8 +62,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return bool
+     * {@inheritdoc}
      */
     public function isRequestValid(TransactionInterface $transaction)
     {
@@ -74,10 +70,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * Method called when an error occurs
-     *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return \Symfony\Component\HttpFoundation\Response
+     * {@inheritdoc}
      */
     public function handleError(TransactionInterface $transaction)
     {
@@ -91,10 +84,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * Send post back confirmation to the bank when the bank callback the site
-     *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return \Symfony\Component\HttpFoundation\Response, false otherwise
+     * {@inheritdoc}
      */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
@@ -121,8 +111,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return bool
+     * {@inheritdoc}
      */
     public function isCallbackValid(TransactionInterface $transaction)
     {
@@ -142,8 +131,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
-     * @return \Symfony\Component\HttpFoundation\Response
+     * {@inheritdoc}
      */
     public function callbank(OrderInterface $order)
     {
@@ -166,7 +154,6 @@ class CheckPayment extends BasePayment
             $this->logger->crit(sprintf('The CheckPayment received a ko result : %s', $response->getContent()));
         }
 
-
         // redirect the user to the correct page
         $response = new Response('', 302, array(
             'Location' => $this->router->generate($this->getOption($routeName), $params, true),
@@ -177,8 +164,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return string
+     * {@inheritdoc}
      */
     public function getOrderReference(TransactionInterface $transaction)
     {
@@ -186,8 +172,7 @@ class CheckPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return void
+     * {@inheritdoc}
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {

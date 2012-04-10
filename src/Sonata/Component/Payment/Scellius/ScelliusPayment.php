@@ -274,6 +274,7 @@ class ScelliusPayment extends BasePayment
             '90' => 'Service temporairement indisponible',
         );
     }
+
     /**
      * @return int
      */
@@ -283,9 +284,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @return bool
+     * {@inheritdoc}
      */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
@@ -293,8 +292,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @return bool
+     * {@inheritdoc}
      */
     public function isBasketValid(BasketInterface $basket)
     {
@@ -302,8 +300,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return bool
+     * {@inheritdoc}
      */
     public function isRequestValid(TransactionInterface $transaction)
     {
@@ -311,10 +308,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * Method called when an error occurs
-     *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return \Symfony\Component\HttpFoundation\Response
+     * {@inheritdoc}
      */
     public function handleError(TransactionInterface $transaction)
     {
@@ -328,10 +322,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * Send post back confirmation to the bank when the bank callback the site
-     *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return \Symfony\Component\HttpFoundation\Response, false otherwise
+     * {@inheritdoc}
      */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
@@ -444,8 +435,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return bool
+     * {@inheritdoc}
      */
     public function isCallbackValid(TransactionInterface $transaction)
     {
@@ -499,7 +489,23 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @param \Sonata\Component\Order\OrderInterface $order
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return string
+     */
+    public function getLanguage(OrderInterface $order)
+    {
+        $language = substr($order->getLocale(), 0, 2);
+
+        $languages = self::getLanguageCodes();
+
+        if (!isset($languages[$language])) {
+            return $this->getOption('language', 'en');
+        }
+
+        return $language;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function callbank(OrderInterface $order)
     {
@@ -514,7 +520,7 @@ class ScelliusPayment extends BasePayment
             'merchant_id'               => $this->getOption('merchant_id'),
             'merchant_country'          => $this->getOption('merchant_country'),
             'pathfile'                  => $this->getOption('pathfile'),
-            'language'                  => $this->getOption('language'),
+            'language'                  => $this->getLanguage($order),
             'payment_means'             => $this->getOption('payment_means'),
             'header_flag'               => $this->getOption('header_flag'),
             'capture_day'               => $this->getOption('capture_day'),
@@ -592,8 +598,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param $string
-     * @return string
+     * {@inheritdoc}
      */
     public function encodeString($string)
     {
@@ -601,8 +606,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return string
+     * {@inheritdoc}
      */
     public function getOrderReference(TransactionInterface $transaction)
     {

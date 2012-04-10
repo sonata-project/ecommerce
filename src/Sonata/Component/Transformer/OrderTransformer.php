@@ -37,6 +37,9 @@ class OrderTransformer extends BaseTransformer
         // we reset the current basket
         $basket->reset(true);
 
+        $basket->setCurrency($order->getCurrency());
+        $basket->setLocale($order->getLocale());
+
         // We are free to convert !
         foreach ($order->getOrderElements() as $orderElement) {
             $provider   = $this->productPool->getProvider($orderElement->getProductType());

@@ -86,6 +86,8 @@ abstract class BaseCustomer implements CustomerInterface
      */
     protected $orders;
 
+    protected $locale;
+
     /**
      * @var boolean $isFake
      */
@@ -99,6 +101,9 @@ abstract class BaseCustomer implements CustomerInterface
         $this->isFake       = false;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return $this->getFullname();
@@ -121,9 +126,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get title
-     *
-     * @return integer $title
+     * {@inheritdoc}
      */
     public function getTitle()
     {
@@ -131,9 +134,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set title
-     *
-     * @param integer $title
+     * {@inheritdoc}
      */
     public function setTitle($title)
     {
@@ -166,9 +167,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get firstname
-     *
-     * @return string $firstname
+     * {@inheritdoc}
      */
     public function getFirstname()
     {
@@ -176,9 +175,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set firstname
-     *
-     * @param string $firstname
+     * {@inheritdoc}
      */
     public function setFirstname($firstname)
     {
@@ -186,9 +183,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get lastname
-     *
-     * @return string $lastname
+     * {@inheritdoc}
      */
     public function getLastname()
     {
@@ -196,9 +191,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set lastname
-     *
-     * @param string $lastname
+     * {@inheritdoc}
      */
     public function setLastname($lastname)
     {
@@ -206,9 +199,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get full name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getFullname()
     {
@@ -216,9 +207,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get email
-     *
-     * @return string $email
+     * {@inheritdoc}
      */
     public function getEmail()
     {
@@ -226,9 +215,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
+     * {@inheritdoc}
      */
     public function setEmail($email)
     {
@@ -236,9 +223,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get birthDate
-     *
-     * @return \DateTime $birthDate
+     * {@inheritdoc}
      */
     public function getBirthDate()
     {
@@ -246,9 +231,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set birthDate
-     *
-     * @param \DateTime|null $birthDate
+     * {@inheritdoc}
      */
     public function setBirthDate(\DateTime $birthDate = null)
     {
@@ -256,9 +239,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get birthPlace
-     *
-     * @return string $birthPlace
+     * {@inheritdoc}
      */
     public function getBirthPlace()
     {
@@ -266,9 +247,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set birthPlace
-     *
-     * @param string $birthPlace
+     * {@inheritdoc}
      */
     public function setBirthPlace($birthPlace)
     {
@@ -276,9 +255,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get phoneNumber
-     *
-     * @return string $phoneNumber
+     * {@inheritdoc}
      */
     public function getPhoneNumber()
     {
@@ -286,9 +263,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set phoneNumber
-     *
-     * @param string $phoneNumber
+     * {@inheritdoc}
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -296,9 +271,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get mobileNumber
-     *
-     * @return string $mobileNumber
+     * {@inheritdoc}
      */
     public function getMobileNumber()
     {
@@ -306,9 +279,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set mobileNumber
-     *
-     * @param string $mobileNumber
+     * {@inheritdoc}
      */
     public function setMobileNumber($mobileNumber)
     {
@@ -316,9 +287,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get faxNumber
-     *
-     * @return string $faxNumber
+     * {@inheritdoc}
      */
     public function getFaxNumber()
     {
@@ -326,9 +295,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set faxNumber
-     *
-     * @param string $faxNumber
+     * {@inheritdoc}
      */
     public function setFaxNumber($faxNumber)
     {
@@ -336,9 +303,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime createdAt
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -346,9 +311,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime|null $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -356,9 +319,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get updatedAt
-     *
-     * @return \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -366,9 +327,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime|null $updatedAt
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -376,9 +335,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set user
-     *
-     * @param \FOS\UserBundle\Model\UserInterface $user
+     * {@inheritdoc}
      */
     public function setUser(UserInterface $user)
     {
@@ -386,9 +343,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get user
-     *
-     * @return \FOS\UserBundle\Model\UserInterface $user
+     * {@inheritdoc}
      */
     public function getUser()
     {
@@ -396,9 +351,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Add address to addresses
-     *
-     * @param \Sonata\Component\Customer\AddressInterface $address
+     * {@inheritdoc}
      */
     public function addAddress(AddressInterface $address)
     {
@@ -408,9 +361,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get addresses
-     *
-     * @return \Doctrine\Common\Collections\ArrayCollection $addresses
+     * {@inheritdoc}
      */
     public function getAddresses()
     {
@@ -418,10 +369,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get addresses by type
-     *
-     * @param integer $type
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * {@inheritdoc}
      */
     public function getAddressesByType($type)
     {
@@ -437,9 +385,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set orders
-     *
-     * @param \Doctrine\Common\Collections\ArrayCollection $orders
+     * {@inheritdoc}
      */
     public function setOrders($orders)
     {
@@ -447,9 +393,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get orders
-     *
-     * @return \Doctrine\Common\Collections\ArrayCollection $orders
+     * {@inheritdoc}
      */
     public function getOrders()
     {
@@ -457,9 +401,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Set isFake
-     *
-     * @param boolean $isFake
+     * {@inheritdoc}
      */
     public function setIsFake($isFake)
     {
@@ -467,12 +409,26 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get isFake
-     *
-     * @return boolean $isFake
+     * {@inheritdoc}
      */
     public function getIsFake()
     {
         return $this->isFake;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }

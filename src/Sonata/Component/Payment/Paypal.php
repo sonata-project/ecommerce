@@ -36,9 +36,7 @@ class Paypal extends BasePaypal
     const PENDING_REASON_OTHER = 'other';
 
     /**
-     *
-     * @param OrderInterface
-     * @return Response object
+     * {@inheritdoc}
      */
     public function callbank(OrderInterface $order)
     {
@@ -82,7 +80,6 @@ class Paypal extends BasePaypal
             // user link
             'cancel_return' => $this->router->generate($this->getOption('url_return_ko'), $params, true),
             'return'        => $this->router->generate($this->getOption('url_return_ok'), $params, true),
-
         );
 
         if ($this->getOption('debug', false)) {
@@ -136,18 +133,17 @@ class Paypal extends BasePaypal
      * 3. Your server must then validate the notification to ensure that it is legitimate.
      *
      *
-     * @param TransactionInterface $transaction
-     * @return integer the order status
+     * {@inheritdoc}
      */
     public function isCallbackValid(TransactionInterface $transaction)
     {
-        $order          = $transaction->getOrder();
+        $order  = $transaction->getOrder();
 
         if (!$this->isRequestValid($transaction)) {
 
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
-            
+
             return false;
         }
 
@@ -155,7 +151,7 @@ class Paypal extends BasePaypal
 
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
-            
+
             return false;
         }
 
@@ -190,8 +186,7 @@ class Paypal extends BasePaypal
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return void
+     * {@inheritdoc}
      */
     public function handleError(TransactionInterface $transaction)
     {
@@ -210,7 +205,7 @@ class Paypal extends BasePaypal
                 if ($this->getLogger()) {
                     $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_ERROR_VALIDATION - Order %s - Paypal reject the postback validation', $order->getReference()));
                 }
-                
+
                 break;
 
             case TransactionInterface::STATUS_CANCELLED:
@@ -252,8 +247,7 @@ class Paypal extends BasePaypal
     }
 
     /**
-     * @param TransactionInterface $transaction
-     * @return \Symfony\Component\HttpFoundation\Response
+     * {@inheritdoc}
      */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
@@ -295,8 +289,7 @@ class Paypal extends BasePaypal
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @return bool
+     * {@inheritdoc}
      */
     public function isBasketValid(BasketInterface $basket)
     {
@@ -317,9 +310,7 @@ class Paypal extends BasePaypal
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @return bool
+     * {@inheritdoc}
      */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
@@ -337,7 +328,6 @@ class Paypal extends BasePaypal
      */
     public static function getPendingReasonsList()
     {
-
         return array(
             self::PENDING_REASON_ADRESS         => 'The payment is pending because your customer did not include a confirmed shipping address and your Payment Receiving Preferences is set yo allow you to manually accept or deny each of these payments. To change your preference, go to the Preferences section of your Profile.',
             self::PENDING_REASON_AUTHORIZATION  => 'You set <PaymentAction> Authorization</PaymentAction> on SetExpressCheckoutRequest and have not yet captured funds.',

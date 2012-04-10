@@ -46,6 +46,8 @@ class BasketSessionFactory implements BasketFactoryInterface
 
         if (!$basket) {
             $basket = $this->basketManager->create();
+            $basket->setLocale($customer->getLocale());
+            $basket->setCurrency('EUR'); // TODO : handle multiple concurrencies
         }
 
         $basket->setCustomer($customer);

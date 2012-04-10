@@ -106,7 +106,6 @@ interface PaymentInterface
     /**
      * return the order reference from the transaction
      *
-     * @abstract
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      * @return string
      */

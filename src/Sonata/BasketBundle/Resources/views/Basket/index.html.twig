@@ -34,7 +34,8 @@ file that was distributed with this source code.
                 {% for basketElement in basket.getBasketElements %}
                     {% render 'SonataProductBundle:Product:renderFormBasketElement' with {
                         'formView':       form.basketElements.getChild(basketElement.position),
-                        'basketElement' : basketElement
+                        'basketElement':  basketElement,
+                        'basket':         basket
                     } %}
                 {% endfor %}
 
@@ -44,7 +45,7 @@ file that was distributed with this source code.
             <tfoot>
                 <tr>
                     <td colspan="3"></td>
-                    <td><b>{{ basket.getTotal(true) }}</b></td>
+                    <td><b>{{ basket.getTotal(true)|number_format_currency(basket.currency, {}, {}, basket.locale) }}</b></td>
                     <td></td>
                 </tr>
             </tfoot>

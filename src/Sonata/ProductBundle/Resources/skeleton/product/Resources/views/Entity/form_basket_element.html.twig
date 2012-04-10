@@ -30,7 +30,7 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block product_total %}
-    {{ basketElement.getTotal(true) }}
+    {{ basketElement.getTotal(true)|number_format_currency(basket.currency, {}, {}, basket.locale) }}
 {% endblock %}
 
 {% block product_delete %}

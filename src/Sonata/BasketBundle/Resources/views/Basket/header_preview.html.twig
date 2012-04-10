@@ -11,7 +11,7 @@ file that was distributed with this source code.
 
 <div>
     {% if basket.hasBasketElements %}
-        {% trans with {'price': basket.getTotal(true), 'count_item': basket.countBasketElements} from 'BasketBundle' %}message_basket_elements_preview{% endtrans %}
+        {% trans with {'price': basket.getTotal(true)|number_format_currency(basket.currency, {}, {}, basket.locale), 'count_item': basket.countBasketElements} from 'BasketBundle' %}message_basket_elements_preview{% endtrans %}
         <a href="{{ url('sonata_basket_index') }}">{% trans from 'BasketBundle' %}view_basket{% endtrans %}</a>
     {% else %}
         {% trans from 'BasketBundle' %}message_no_basket_elements{% endtrans %}

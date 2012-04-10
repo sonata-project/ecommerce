@@ -34,6 +34,7 @@ class CustomerAdmin extends Admin
         $formMapper
             ->add('firstname')
             ->add('lastname')
+            ->add('locale')
         ;
     }
 
@@ -46,6 +47,7 @@ class CustomerAdmin extends Admin
         $list
             ->addIdentifier('name', 'string', array('code' => '__toString'))
             ->add('createdAt')
+            ->add('locale')
         ;
     }
 
@@ -58,6 +60,7 @@ class CustomerAdmin extends Admin
         $filter
             ->add('firstname')
             ->add('lastname')
+            ->add('locale')
         ;
     }
 
@@ -70,6 +73,7 @@ class CustomerAdmin extends Admin
         $filter
             ->add('firstname')
             ->add('lastname')
+            ->add('locale')
         ;
     }
 

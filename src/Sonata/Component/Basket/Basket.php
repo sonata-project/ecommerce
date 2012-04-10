@@ -54,6 +54,10 @@ class Basket implements \Serializable, BasketInterface
 
     protected $options = array();
 
+    protected $locale;
+
+    protected $currency;
+
     public function __construct()
     {
         $this->basketElements = array();
@@ -613,5 +617,37 @@ class Basket implements \Serializable, BasketInterface
     public function setOption($name, $value)
     {
         $this->options[$name] = $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }
