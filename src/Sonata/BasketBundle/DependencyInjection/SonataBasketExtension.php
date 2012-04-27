@@ -106,7 +106,7 @@ class SonataBasketExtension extends Extension
                  'persist',
              ),
              'mappedBy'      => 'basket',
-             'orphanRemoval' => false,
+             'orphanRemoval' => true,
         ));
 
         $collector->addAssociation($config['class']['basket_element'], 'mapManyToOne', array(
