@@ -312,7 +312,9 @@ class ScelliusPayment extends BasePayment
      */
     public function handleError(TransactionInterface $transaction)
     {
-        $transaction->getOrder()->setPaymentStatus($transaction->getStatusCode());
+        if ($transaction->getOrder()->isOpen()) {
+            $transaction->getOrder()->setPaymentStatus($transaction->getStatusCode());
+        }
 
         $this->report($transaction);
 
@@ -387,6 +389,10 @@ class ScelliusPayment extends BasePayment
 
         $process = new Process($cmd);
         $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException(sprintf('Error %d when executing Scellius command: "%s".', $process->getExitCode(), trim($process->getErrorOutput())));
+        }
 
         //Sortie de la fonction : !code!error!v1!v2!v3!...!v29
         //  - code = 0  : la fonction retourne les données de la transaction dans les variables v1, v2, ...
@@ -567,6 +573,10 @@ class ScelliusPayment extends BasePayment
 
         $process = new Process($cmd);
         $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException(sprintf('Error %d when executing Scellius command: "%s".', $process->getExitCode(), trim($process->getErrorOutput())));
+        }
 
         //sortie de la fonction : $result=!code!error!buffer!
         //    - code=0  : la fonction génère une page html contenue dans la variable buffer
