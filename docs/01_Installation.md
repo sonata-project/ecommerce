@@ -9,15 +9,15 @@ Installation
 
 * add the FOSUserBundle bundle (user management) and follow FOSUserBundle README
 
-        git submodule add git://github.com/FriendsOfSymfony/UserBundle.git src/FOS/UserBundle
+        git submodule add git://github.com/FriendsOfSymfony/FOSUserBundle.git src/FOS/UserBundle
 
 * add the SonataEasyExtendsBundle bundle (user management) and follow EasyExtendsBundle README
 
-        git submodule add git://github.com/sonata-project/EasyExtendsBundle.git src/Sonata/EasyExtendsBundle
+        git submodule add git://github.com/sonata-project/SonataEasyExtendsBundle.git src/Sonata/EasyExtendsBundle
 
 * add the SonataMediaBundle bundle (media management) and follow MediaBundle README
 
-        git submodule add git://github.com/sonata-project/MediaBundle.git src/Sonata/MediaBundle
+        git submodule add git://github.com/sonata-project/SonataMediaBundle.git src/Sonata/MediaBundle
 
 
 * add the following bundle in your kernel::registerBundles() method
