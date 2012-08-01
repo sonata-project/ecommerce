@@ -224,5 +224,9 @@ class SonataProductExtension extends Extension
              ),
              'orphanRemoval' => false,
         ));
+
+        $collector->addIndex($config['class']['product'], 'enabled', array(
+            'enabled'
+        ));
     }
 }

@@ -186,6 +186,14 @@ class SonataPaymentExtension extends Extension
             ),
             'orphanRemoval' => false,
         ));
+
+        $collector->addIndex($config['class']['transaction'], 'status_code', array(
+            'status_code'
+        ));
+
+        $collector->addIndex($config['class']['transaction'], 'state', array(
+            'state'
+        ));
     }
 
 }

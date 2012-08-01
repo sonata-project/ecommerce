@@ -114,5 +114,21 @@ class SonataOrderExtension extends Extension
             ),
             'orphanRemoval' => false,
         ));
+
+        $collector->addIndex($config['class']['order_element'], 'product_type', array(
+            'product_type'
+        ));
+
+        $collector->addIndex($config['class']['order_element'], 'status', array(
+            'status'
+        ));
+
+        $collector->addIndex($config['class']['order'], 'status', array(
+            'status'
+        ));
+
+        $collector->addIndex($config['class']['order'], 'payment_status', array(
+            'payment_status'
+        ));
     }
 }
