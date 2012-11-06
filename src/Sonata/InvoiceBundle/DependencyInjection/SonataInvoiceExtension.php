@@ -93,7 +93,7 @@ class SonataInvoiceExtension extends Extension
                  array(
                      'name' => 'customer_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
+                     'onDelete' => 'SET NULL',
                  ),
              ),
              'orphanRemoval' => false,
