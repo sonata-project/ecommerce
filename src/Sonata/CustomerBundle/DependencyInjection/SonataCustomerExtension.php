@@ -106,7 +106,7 @@ class SonataCustomerExtension extends Extension
                 array(
                     'name' => 'user_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete' => 'SET NULL',
                 ),
             ),
             'orphanRemoval' => false,
