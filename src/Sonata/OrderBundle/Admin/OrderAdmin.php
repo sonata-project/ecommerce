@@ -12,6 +12,7 @@
 namespace Sonata\OrderBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -107,12 +108,9 @@ class OrderAdmin extends Admin
     }
 
     /**
-     * @param \Knp\Menu\MenuItemInterface $menu
-     * @param $action
-     * @param null|\Sonata\AdminBundle\Admin\Admin $childAdmin
-     * @return
+     * {@inheritdoc}
      */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, Admin $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
         if (!$childAdmin && !in_array($action, array('edit'))) {
             return;

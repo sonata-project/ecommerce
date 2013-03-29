@@ -22,6 +22,7 @@ use Sonata\Component\Basket\InvalidBasketStateException;
 use Sonata\Component\Delivery\DeliverySelectorInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ArrayChoiceList;
 use Sonata\AdminBundle\Model\ModelManagerInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class ShippingType extends AbstractType
 {
@@ -41,7 +42,10 @@ class ShippingType extends AbstractType
         $this->deliveryPool     = $deliveryPool;
     }
 
-    public function buildForm(FormBuilder $builder, array $options)
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $basket = $builder->getData();
 
@@ -86,6 +90,9 @@ class ShippingType extends AbstractType
         $builder->add($sub);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sonata_shipping_type';

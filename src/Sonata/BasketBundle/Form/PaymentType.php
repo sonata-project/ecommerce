@@ -22,6 +22,7 @@ use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Payment\PaymentSelectorInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ArrayChoiceList;
 use Sonata\AdminBundle\Model\ModelManagerInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class PaymentType extends AbstractType
 {
@@ -41,7 +42,10 @@ class PaymentType extends AbstractType
         $this->paymentPool      = $paymentPool;
     }
 
-    public function buildForm(FormBuilder $builder, array $options)
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $basket = $builder->getData();
 
@@ -86,6 +90,9 @@ class PaymentType extends AbstractType
         $builder->add($sub);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sonata_payment';

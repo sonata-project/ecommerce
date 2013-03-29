@@ -15,10 +15,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class BasketType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // always clone the basket, so the one in session is never altered
         $basket = $builder->getData();
@@ -35,6 +39,9 @@ class BasketType extends AbstractType
         $builder->add($basketElementBuilder);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sonata_basket';
