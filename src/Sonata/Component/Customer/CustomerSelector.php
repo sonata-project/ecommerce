@@ -3,7 +3,7 @@
 namespace Sonata\Component\Customer;
 
 use Sonata\Component\Customer\CustomerManagerInterface;
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use FOS\UserBundle\Model\UserInterface;
 
@@ -15,7 +15,7 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $customerManager;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session
+     * @var \Symfony\Component\HttpFoundation\Session\Session
      */
     protected $session;
 
@@ -26,7 +26,7 @@ class CustomerSelector implements CustomerSelectorInterface
 
     /**
      * @param \Sonata\Component\Customer\CustomerManagerInterface $customerManager
-     * @param \Symfony\Component\HttpFoundation\Session $session
+     * @param \Symfony\Component\HttpFoundation\Session\Session $session
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      */
     public function __construct(CustomerManagerInterface $customerManager, Session $session, SecurityContextInterface $securityContext)

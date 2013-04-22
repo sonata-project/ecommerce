@@ -44,6 +44,6 @@ class BasketType extends AbstractType
      */
     public function getName()
     {
-        return 'sonata_basket';
+        return 'sonata_basket_basket';
     }
 }

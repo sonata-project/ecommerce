@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Basket;
 
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
 
 class BasketEntityFactory implements BasketFactoryInterface
@@ -27,14 +27,14 @@ class BasketEntityFactory implements BasketFactoryInterface
     protected $basketBuilder;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session
+     * @var \Symfony\Component\HttpFoundation\Session\Session
      */
     protected $session;
 
     /**
      * @param \Sonata\Component\Basket\BasketManagerInterface $basketManager
      * @param \Sonata\Component\Basket\BasketBuilderInterface $basketBuilder
-     * @param \Symfony\Component\HttpFoundation\Session $session
+     * @param \Symfony\Component\HttpFoundation\Session\Session $session
      */
     public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, Session $session)
     {

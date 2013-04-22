@@ -25,7 +25,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Application\Sonata\OrderBundle\Entity\OrderElement;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 
-use JMS\SerializerBundle\Serializer\SerializerInterface;
+use JMS\Serializer\SerializerInterface;
 
 abstract class BaseProductProvider implements ProductProviderInterface
 {
