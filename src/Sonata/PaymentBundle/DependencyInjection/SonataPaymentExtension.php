@@ -81,6 +81,7 @@ class SonataPaymentExtension extends Extension
             'pass'     => 'sonata.payment.method.pass',
             'check'    => 'sonata.payment.method.check',
             'scellius' => 'sonata.payment.method.scellius',
+            'ogone'    => 'sonata.payment.method.ogone',
             'paypal'   => 'sonata.payment.method.paypal',
         );
 

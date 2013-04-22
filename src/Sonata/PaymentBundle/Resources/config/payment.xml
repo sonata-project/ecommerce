@@ -43,6 +43,16 @@
 
         <service id="sonata.payment.provider.scellius.none_generator" class="Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator" />
         <service id="sonata.payment.provider.scellius.order_generator" class="Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator" />
+
+        <service id="sonata.payment.method.ogone" class="Sonata\Component\Payment\Ogone\OgonePayment">
+            <tag name="sonata.payment.method" />
+
+            <argument type="service" id="router" />
+            <argument type="service" id="logger" />
+            <argument type="service" id="templating" />
+            <argument>%kernel.debug%</argument>
+        </service>
+
     </services>
 
 </container>
