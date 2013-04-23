@@ -130,7 +130,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ok', $response->getContent(), '::getContent returns ok');
     }
 
-    public function callback($name)
+    public static function callback($name)
     {
         if ($name == 'reference') {
             return '0001231';

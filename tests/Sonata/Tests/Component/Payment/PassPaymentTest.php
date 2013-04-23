@@ -90,7 +90,7 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    public function callback($name)
+    public static function callback($name)
     {
         if ($name == 'reference') {
             return '0001231';

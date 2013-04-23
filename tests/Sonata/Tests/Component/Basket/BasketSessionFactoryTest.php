@@ -14,10 +14,10 @@ namespace Sonata\Tests\Component\Basket;
 use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketSessionFactory;
-use Symfony\Component\HttpFoundation\Session;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,8 +35,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-        $session = new Session($storage);
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $session);
 
@@ -58,8 +57,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-        $session = new Session($storage);
+        $session = new Session();
         $session->set('sonata/basket/factory/customer/1', $basket);
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $session);
@@ -75,8 +73,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 
         $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-        $session = new Session($storage);
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getId')->will($this->returnValue(1));

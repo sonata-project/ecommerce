@@ -71,7 +71,7 @@ class CustomerSelector implements CustomerSelectorInterface
         }
 
         if (!$customer->getLocale()) {
-            $customer->setLocale($this->session->getLocale());
+            $customer->setLocale($this->session->get('_locale'));
         }
 
         return $customer;

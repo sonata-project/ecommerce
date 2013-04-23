@@ -14,10 +14,10 @@ namespace Sonata\Tests\Component\Basket;
 use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketEntityFactory;
-use Symfony\Component\HttpFoundation\Session;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
-use Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,8 +36,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-        $session = new Session($storage);
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
 
@@ -60,8 +59,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-        $session = new Session($storage);
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
 
@@ -80,8 +78,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-        $session = new Session($storage);
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
         $factory->save($basket);
@@ -96,8 +93,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-        $session = new Session($storage);
+        $session = new Session();
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
         $factory->save($basket);

@@ -11,14 +11,24 @@
 
 namespace Sonata\Tests\Component\Customer;
 
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Sonata\Component\Customer\CustomerSelector;
-use FOS\UserBundle\Model\UserInterface;
-use Sonata\Tests\Component\Customer\ValidUser;
 use Sonata\Component\Basket\Basket;
+use FOS\UserBundle\Model\User as BaseUser;
 
-class User {}
+class ValidUser extends BaseUser
+{
+}
+
+class User
+{
+    public function getId()
+    {
+        return 1;
+    }
+}
+
 
 class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,9 +38,7 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('create')->will($this->returnValue($customer));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-
-        $session = new Session($storage);
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(false));
@@ -49,9 +57,8 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
     public function testInvalidUserType()
     {
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
 
-        $session = new Session($storage);
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue(new User()));
@@ -72,11 +79,9 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
-        $session = new Session($storage);
-
-        $user = new ValidUser;
+        $user = new ValidUser();
 
         $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
@@ -100,11 +105,9 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(false));
         $customerManager->expects($this->once())->method('create')->will($this->returnValue($customer));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
-        $session = new Session($storage);
-
-        $user = new ValidUser;
+        $user = new ValidUser();
 
         $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
@@ -127,15 +130,13 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(false));
 
-        $storage = $this->getMock('Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface');
-
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->exactly(2))->method('getCustomer')->will($this->returnValue($customer));
 
-        $session = new Session($storage);
+        $session = new Session();
         $session->set('sonata/basket/factory/customer/new', $basket);
 
-        $user = new ValidUser;
+        $user = new ValidUser();
 
         $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));

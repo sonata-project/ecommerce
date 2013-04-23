@@ -2,7 +2,7 @@
 
 namespace Sonata\Component\Basket;
 
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
 
 class BasketSessionFactory implements BasketFactoryInterface
@@ -18,7 +18,7 @@ class BasketSessionFactory implements BasketFactoryInterface
     protected $basketBuilder;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session
+     * @var \Symfony\Component\HttpFoundation\Session\Session
      */
     protected $session;
 

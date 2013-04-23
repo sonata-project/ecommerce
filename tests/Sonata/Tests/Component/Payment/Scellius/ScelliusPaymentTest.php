@@ -57,7 +57,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $payment->setCode('free_1');
         $payment->setOptions(array(
             'base_folder'    => __DIR__,
-            'response_command' => 'cat response_ok.txt'
+            'response_command' => 'cat response_ok.txt && echo '
         ));
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
@@ -125,7 +125,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $payment->setCode('free_1');
         $payment->setOptions(array(
             'base_folder'    => __DIR__,
-            'request_command' => 'cat request_ok.txt'
+            'request_command' => 'cat request_ok.txt && echo '
         ));
 
         $payment->callbank($order);
@@ -160,7 +160,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $payment->setCode('free_1');
         $payment->setOptions(array(
             'base_folder'    => __DIR__,
-            'request_command' => 'cat request_ok.txt',
+            'request_command' => 'cat request_ok.txt && echo ',
         ));
 
         $response = $payment->callbank($order);
@@ -205,7 +205,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         return new \Symfony\Component\HttpFoundation\Response();
     }
 
-    public function callback($name)
+    public static function callback($name)
     {
         if ($name == 'reference') {
             return '0001231';

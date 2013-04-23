@@ -70,15 +70,20 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
     }
 
-    public function testValidatity()
+    public function testValiditity()
     {
-        $product = new Product;
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product->expects($this->once())->method('getEnabled')->will($this->returnValue(true));
+
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
         $this->assertEquals(true, $basketElement->isValid(), 'BasketElement is valid');
 
-        $product->enabled = false;
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product->expects($this->once())->method('getEnabled')->will($this->returnValue(false));
+        $basketElement->setProduct('product_code', $product);
+
         $this->assertEquals(false, $basketElement->isValid(), 'BasketElement returns the correct default quantity');
     }
 }
