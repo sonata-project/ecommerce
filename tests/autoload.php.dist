@@ -6,14 +6,14 @@ $autoload = __DIR__.'/../../../../app/autoload.php';
 if (is_file($autoload)) {
     include $autoload;
 } else {
-    $vendorDir = __DIR__.'/../../../../vendor';
-    require_once $vendorDir.'/symfony/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+    $vendorDir = __DIR__.'/vendor';
+    require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
     $loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
     $loader->registerNamespaces(array(
-        'Symfony'  => array($vendorDir.'/symfony/symfony/src'),
+        'Symfony'  => array($vendorDir.'/symfony/src'),
         'Knp'      => array($vendorDir.'/knpmenu/src'),
-        'FOS'      => array($vendorDir.'/friendsofsymfony/user-bundle'),
+        'FOS'      => array($vendorDir),
         'JMS'      => array($vendorDir),
         'Buzz'     => array($vendorDir.'/buzz/lib'),
         'Doctrine' => array(
