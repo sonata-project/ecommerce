@@ -95,6 +95,6 @@ class PaymentType extends AbstractType
      */
     public function getName()
     {
-        return 'sonata_payment';
+        return 'sonata_basket_payment';
     }
 }

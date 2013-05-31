@@ -95,6 +95,6 @@ class ShippingType extends AbstractType
      */
     public function getName()
     {
-        return 'sonata_shipping_type';
+        return 'sonata_basket_shipping';
     }
 }

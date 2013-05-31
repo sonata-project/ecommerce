@@ -39,6 +39,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addModelSection($node);
+        $this->addFormSection($node);
 
         return $treeBuilder;
     }
@@ -57,6 +58,57 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('basket')->defaultValue('Application\\Sonata\\BasketBundle\\Entity\\Basket')->end()
                         ->scalarNode('basket_element')->defaultValue('Application\\Sonata\\BasketBundle\\Entity\\BasketElement')->end()
                         ->scalarNode('customer')->defaultValue('Application\\Sonata\\CustomerBundle\\Entity\\Customer')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addFormSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('basket')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('form')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('type')->defaultValue('sonata_basket_basket')->end()
+                                ->scalarNode('name')->defaultValue('sonata_basket_basket_form')->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('shipping')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('form')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('type')->defaultValue('sonata_basket_shipping')->end()
+                                ->scalarNode('name')->defaultValue('sonata_basket_shipping_form')->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('payment')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('form')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('type')->defaultValue('sonata_basket_payment')->end()
+                                ->scalarNode('name')->defaultValue('sonata_basket_payment_form')->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end()
