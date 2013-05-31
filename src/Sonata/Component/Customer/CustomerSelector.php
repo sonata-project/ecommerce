@@ -39,6 +39,8 @@ class CustomerSelector implements CustomerSelectorInterface
     /**
      * Get the customer
      *
+     * @throws \RuntimeException
+     *
      * @return \Sonata\Component\Customer\CustomerInterface
      */
     public function get()

@@ -20,6 +20,9 @@ class OrderScelliusTransactionGenerator implements ScelliusTransactionGeneratorI
 {
     /**
      * @param \Sonata\Component\Order\OrderInterface $order
+     *
+     * @throws \RuntimeException
+     *
      * @return string
      */
     public function generate(OrderInterface $order)

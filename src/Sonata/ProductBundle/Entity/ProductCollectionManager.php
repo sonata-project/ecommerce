@@ -25,6 +25,9 @@ class ProductCollectionManager extends ProductManager
      * Deletes a product
      *
      * @param \Sonata\Component\Product\ProductInterface $product
+     *
+     * @throws \RuntimeException
+     *
      * @return void
      */
     public function delete(ProductInterface $product)

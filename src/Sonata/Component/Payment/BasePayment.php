@@ -39,6 +39,9 @@ abstract class BasePayment implements PaymentInterface
 
     /**
      * @param \Sonata\Component\Order\OrderInterface $order
+     *
+     * @throws \RuntimeException
+     *
      * @return string
      */
     public function generateUrlCheck(OrderInterface $order)

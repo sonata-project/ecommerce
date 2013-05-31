@@ -374,6 +374,9 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @param TransactionInterface $transaction
+     *
+     * @throws \RuntimeException
+     *
      * @return array
      */
     private function getResponseData(TransactionInterface $transaction)

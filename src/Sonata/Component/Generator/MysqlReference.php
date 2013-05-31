@@ -65,9 +65,12 @@ class MysqlReference implements ReferenceInterface
     /**
      * generate a correct reference number
      *
-     * @param  $tableName
-     * @param  $connection
-     * @param  $object
+     * @param $tableName
+     * @param $connection
+     * @param $object
+     *
+     * @throws \Exception
+     *
      * @return Exception|string
      */
     protected function generateReference($tableName, $connection, $object)

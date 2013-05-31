@@ -162,6 +162,8 @@ class PaymentController extends Controller
     /**
      * this action handler the callback sent from the bank
      *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function callbackAction()
@@ -212,6 +214,8 @@ class PaymentController extends Controller
     }
 
     /**
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
      * @return object|\Sonata\Component\Payment\PaymentInterface
      */
     public function getPaymentHandler()

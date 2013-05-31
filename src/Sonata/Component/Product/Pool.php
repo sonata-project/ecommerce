@@ -28,6 +28,9 @@ class Pool
 
     /**
      * @param ProductInterface|string $code
+     *
+     * @throws \RuntimeException
+     *
      * @return \Sonata\Component\Product\ProductProviderInterface
      */
     public function getProvider($code)
@@ -45,6 +48,9 @@ class Pool
 
     /**
      * @param ProductInterface|string $code
+     *
+     * @throws \RuntimeException
+     *
      * @return \Sonata\Component\Product\ProductManagerInterface
      */
     public function getManager($code)
@@ -97,8 +103,10 @@ class Pool
     }
 
     /**
-     *
      * @param string $code
+     *
+     * @throws \RuntimeException
+     *
      * @return \Sonata\Component\Product\ProductDescription
      */
     public function getProduct($code)

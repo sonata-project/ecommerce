@@ -48,6 +48,8 @@ class BasketBuilder implements BasketBuilderInterface
      * Build a basket
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
+     *
+     * @throws \RuntimeException
      */
     public function build(BasketInterface $basket)
     {

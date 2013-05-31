@@ -194,8 +194,11 @@ abstract class BasePaypal extends BasePayment
     /**
      * Encrypt paypal information using openssl with a buffer
      *
-     * @throws RuntimeException
-     * @param  $hash
+     *
+     * @param $hash
+     *
+     * @throws \RuntimeException
+     *
      * @return string the encrypted data
      */
     public function encryptViaBuffer($hash)
@@ -253,8 +256,11 @@ abstract class BasePaypal extends BasePayment
     /**
      * Encrypt paypal information using openssl with a temporary file
      *
-     * @throws RuntimeException
-     * @param  $hash
+     *
+     * @param $hash
+     *
+     * @throws \RuntimeException
+     *
      * @return string  the encrypted data
      */
     public function encryptViaFile($hash)

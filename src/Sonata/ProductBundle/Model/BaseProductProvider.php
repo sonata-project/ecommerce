@@ -441,10 +441,13 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * Merge a product with another when the product is already present into the basket
      *
-     * @throws \RuntimeExeption
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
+     *
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param \Sonata\Component\Product\ProductInterface      $product
      * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     *
+     * @throws \RuntimeException
+     *
      * @return bool|\Sonata\Component\Basket\Product
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement)
