@@ -40,7 +40,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $basketElementManager;
 
     /**
-     * @param \JMS\SerializerBundle\Serializer\SerializerInterface $serializer
+     * @param \JMS\Serializer\SerializerInterface $serializer
      */
     public function __construct(SerializerInterface $serializer)
     {
