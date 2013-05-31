@@ -13,8 +13,8 @@ namespace Sonata\ProductBundle\Entity;
 use Sonata\Component\Product\CategoryManagerInterface;
 use Sonata\Component\Product\CategoryInterface;
 
-use Sonata\AdminBundle\Datagrid\ORM\ProxyQuery;
-use Sonata\AdminBundle\Datagrid\ORM\Pager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
 use Doctrine\ORM\EntityManager;
 
