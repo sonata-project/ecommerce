@@ -16,11 +16,11 @@ file that was distributed with this source code.
 
             {% if category.hasChildren and deep < depth%}
                 
-                {% render 'SonataProductBundle:Category:listSideMenuCategories' with {
+                {% render controller('SonataProductBundle:Category:listSideMenuCategories', {
                     'category': category,
                     'deep' : deep,
                     'depth': depth
-                } %}
+                }) %}
 
             {% endif %}
 

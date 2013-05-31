@@ -25,10 +25,10 @@ file that was distributed with this source code.
     <tbody>
         {# call each product controller to render its own view #}
         {% for basketElement in basket.BasketElements %}
-            {% render 'SonataProductBundle:Product:renderFinalReviewBasketElement' with {
+            {% render controller('SonataProductBundle:Product:renderFinalReviewBasketElement', {
                 'basketElement' : basketElement,
                 'basket': basket
-            } %}
+            }) %}
         {% endfor %}
 
         <tr>
