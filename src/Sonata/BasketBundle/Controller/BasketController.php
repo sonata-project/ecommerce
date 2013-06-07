@@ -24,11 +24,12 @@ class BasketController extends Controller
 {
     public function indexAction($form = null)
     {
-        $form = $form ?: $this->createForm('sonata_basket_basket', clone $this->get('sonata.basket'), array('validation_groups' => array('elements')));
+        $form = $form ?: $this->createForm('sonata_basket_basket', clone $this->get('sonata.basket'), array(
+            'validation_groups' => array('elements')
+        ));
 
         // always validate the basket
-        if (!$form->isBound())
-        {
+        if (!$form->isBound()) {
             // todo : move this somewhere else
 //            if ($violations = $this->get('validator')->validate($form->getDa, $form->getValidationGroups())) {
 //
