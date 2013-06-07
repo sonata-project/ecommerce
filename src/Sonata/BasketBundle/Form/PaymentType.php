@@ -20,7 +20,7 @@ use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 
 use Sonata\Component\Payment\PaymentSelectorInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -82,10 +82,10 @@ class PaymentType extends AbstractType
 
         $sub = $builder->create('paymentMethod', 'choice', array(
             'expanded'     => true,
-            'choice_list'  => new ArrayChoiceList($choices),
+            'choice_list'  => new SimpleChoiceList($choices),
         ));
 
-        $sub->prependClientTransformer(new PaymentMethodTransformer($this->paymentPool));
+        $sub->addViewTransformer(new PaymentMethodTransformer($this->paymentPool), true);
 
         $builder->add($sub);
     }

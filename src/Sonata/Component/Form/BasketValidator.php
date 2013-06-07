@@ -38,16 +38,18 @@ class BasketValidator extends ConstraintValidator
      *
      * @param Basket $basket
      * @param Constraint $constraint
-     * @return bool
      */
-    public function isValid($basket, Constraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
+        /*
+         * @todo : check 2.3 compatibility
+         */
         $group = $this->context->getGroup();
-        $propertyPath = $this->context->getPropertyPath();
+        $contextPropertyPath = $this->context->getPropertyPath();
 
         foreach ($basket->getBasketElements() as $pos => $basketElement) {
             // update the property path value
-            $this->context->setPropertyPath(sprintf('%s[%d]', $propertyPath, $pos));
+            $propertyPath = sprintf('%s[%d]', $contextPropertyPath, $pos);
 
             // create a new ErrorElement object
             $errorElement = new ErrorElement(
@@ -63,15 +65,16 @@ class BasketValidator extends ConstraintValidator
                 ->validateFormBasketElement($errorElement, $basketElement, $basket);
         }
 
-        $this->context->setPropertyPath($propertyPath);
-        $this->context->setGroup($group);
-
-        if (count($this->context->getViolations()) == 0) {
-            return true;
+        if (isset($propertyPath)) {
+            $contextPropertyPath = $propertyPath;
         }
 
-        $this->setMessage($constraint->message, array());
+        $this->context->setGroup($group);
 
-        return false;
+        if (count($this->context->getViolations()) > 0) {
+            $context->addViolationAt($contextPropertyPath, $constraint->message, array(), null);
+        }
+
+        return;
     }
 }

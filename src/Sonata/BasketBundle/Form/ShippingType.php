@@ -20,7 +20,7 @@ use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Sonata\Component\Basket\InvalidBasketStateException;
 use Sonata\Component\Delivery\DeliverySelectorInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -82,10 +82,10 @@ class ShippingType extends AbstractType
 
         $sub = $builder->create('deliveryMethod', 'choice', array(
             'expanded'  => true,
-            'choice_list'   => new ArrayChoiceList($choices),
+            'choice_list'   => new SimpleChoiceList($choices),
         ));
 
-        $sub->prependClientTransformer(new DeliveryMethodTransformer($this->deliveryPool));
+        $sub->addViewTransformer(new DeliveryMethodTransformer($this->deliveryPool), true);
 
         $builder->add($sub);
     }

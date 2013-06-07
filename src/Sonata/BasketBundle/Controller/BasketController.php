@@ -33,7 +33,7 @@ class BasketController extends Controller
 //            if ($violations = $this->get('validator')->validate($form->getDa, $form->getValidationGroups())) {
 //
 //                foreach ($violations as $violation) {
-//                    $propertyPath = new \Symfony\Component\Form\PropertyPath($violation->getPropertyPath());
+//                    $propertyPath = new \Symfony\Component\PropertyAccess\PropertyPath($violation->getPropertyPath());
 //                    $iterator = $propertyPath->getIterator();
 //
 //                    if ($iterator->current() == 'data') {
@@ -44,6 +44,7 @@ class BasketController extends Controller
 //                    }
 //
 //                    $form->addError(new \Symfony\Component\Form\FieldError($violation->getMessageTemplate(), $violation->getMessageParameters()), $iterator, $type);
+//                    // WARNING: ConstraintValidator::getMessageParameters() and ConstraintValidator::getMessageTemplate() has been removed in 2.3 (see https://github.com/symfony/symfony/blob/master/UPGRADE-2.1.md#validator)
 //                }
 //            }
         }
@@ -57,7 +58,7 @@ class BasketController extends Controller
     public function updateAction()
     {
         $form = $this->createForm('sonata_basket_basket', clone $this->get('sonata.basket'), array('validation_groups' => array('elements')));
-        $form->bindRequest($this->get('request'));
+        $form->bind($this->get('request'));
 
         if ($form->isValid()) {
             $basket = $form->getData();
@@ -99,7 +100,7 @@ class BasketController extends Controller
 
         // load and bind the form
         $form = $formBuilder->getForm();
-        $form->bindRequest($request);
+        $form->bind($request);
 
         // if the form is valid add the product to the basket
         if ($form->isValid()) {
@@ -168,7 +169,7 @@ class BasketController extends Controller
         ));
 
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bindRequest($this->get('request'));
+            $form->bind($this->get('request'));
 
             if ($form->isValid()) {
                 // update the basket store in session
@@ -204,7 +205,7 @@ class BasketController extends Controller
         ));
 
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bindRequest($this->get('request'));
+            $form->bind($this->get('request'));
 
             if ($form->isValid()) {
                 // update the basket store in session

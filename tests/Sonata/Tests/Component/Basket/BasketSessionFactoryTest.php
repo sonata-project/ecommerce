@@ -14,7 +14,7 @@ namespace Sonata\Tests\Component\Basket;
 use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketSessionFactory;
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface;

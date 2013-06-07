@@ -32,7 +32,7 @@ abstract class BaseProductController extends Controller
             throw new NotFoundHttpException('invalid product instance');
         }
 
-        $form     = $this->get('session')->getFlash('sonata.product.form');
+        $form     = $this->get('session')->getFlashBag()->get('sonata.product.form');
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         if (!$form) {

@@ -11,7 +11,7 @@
 
 namespace Sonata\Tests\Component\Customer;
 
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Sonata\Component\Customer\CustomerSelector;
 use FOS\UserBundle\Model\UserInterface;

@@ -124,7 +124,7 @@ class PaymentController extends Controller
         }
 
         if (!$basket->isValid()) {
-            $this->get('session')->setFlash(
+            $this->get('session')->getFlashBag()->set(
                 'error',
                 $this->container->get('translator')->trans('basket_not_valid', array(), 'SonataPaymentBundle')
             );
@@ -136,7 +136,7 @@ class PaymentController extends Controller
 
         // check if the basket is valid/compatible with the bank gateway
         if (!$payment->isBasketValid($basket)) {
-            $this->get('session')->setFlash(
+            $this->get('session')->getFlashBag()->set(
                 'error',
                 $this->container->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'SonataPaymentBundle')
             );

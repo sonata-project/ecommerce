@@ -397,13 +397,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $errorElement
             ->with('quantity')
-                ->assertMin(
-                    array('limit' => 1),
-                    'The product quantity ({{ quantity }}) is not valid',
-                    array('{{ quantity }}' => $basketElement->getQuantity())
-                )
-                ->assertMax(
-                    array('limit' => $this->getStockAvailable($basketElement->getProduct())),
+                ->assertRange(
+                    array(
+                        'min' => 1,
+                        'max' => $this->getStockAvailable($basketElement->getProduct())
+                    ),
                     'The product quantity ({{ quantity }}) is not valid',
                     array('{{ quantity }}' => $basketElement->getQuantity())
                 )
