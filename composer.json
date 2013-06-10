@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Sonata\\": "Sonata/src/"
+            "Sonata\\": "src/"
         }
     }
 }
