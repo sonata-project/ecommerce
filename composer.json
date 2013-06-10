@@ -1,0 +1,20 @@
+{
+    "name": "sonata-project/ecommerce",
+    "description": "E-Commerce solution provided by Sonata",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Rabaix",
+            "email": "thomas.rabaix@sonata-project.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require" : {
+        "php" : ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Sonata\\": "src/Sonata/"
+        }
+    }
+}
