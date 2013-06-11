@@ -46,7 +46,7 @@ class AddressAdmin extends Admin
 
         if (!$this->isChild()) {
             $formMapper->with($this->trans('address.form.group_contact_label', array(), 'SonataCustomerBundle'))
-                ->add('customer', 'sonata_type_model', array(),  array('edit' => 'list'))
+                ->add('customer', 'sonata_type_model_list')
             ->end()
             ;
         }

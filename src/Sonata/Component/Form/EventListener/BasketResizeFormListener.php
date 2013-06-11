@@ -71,8 +71,9 @@ class BasketResizeFormListener implements EventSubscriberInterface
         }
 
         foreach ($basketElements as $basketElement) {
-            $basketElementBuilder = $this->factory->createNamedBuilder('form', $basketElement->getPosition(), $basketElement, array(
-                'property_path' => '['.$basketElement->getPosition().']',
+            $basketElementBuilder = $this->factory->createNamedBuilder($basketElement->getPosition(), 'form', $basketElement, array(
+                'property_path'     => '['.$basketElement->getPosition().']',
+                'auto_initialize'   => false,
             ));
             $basketElementBuilder->setErrorBubbling(false);
 
@@ -84,10 +85,9 @@ class BasketResizeFormListener implements EventSubscriberInterface
     }
 
     /**
-     * @param \Symfony\Component\Form\Event\DataEvent $event
-     * @return void
+     * @param FormEvent $event
      */
-    public function preBind(DataEvent $event)
+    public function preBind(FormEvent $event)
     {
         $form = $event->getForm();
         $data = $event->getData();

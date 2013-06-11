@@ -295,20 +295,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function removeElement(BasketElementInterface $element)
     {
-        $pos = $element->getPosition();
-
-        $this->cptElement--;
-
-        unset(
-            $this->positions[$element->getProduct()->getId()],
-            $this->basketElements[$pos]
-        );
-
-        if (!$this->inBuild) {
-            $this->buildPrices();
-        }
-
-        return $element;
+        return $this->removeBasketElement($element);
     }
 
     /**
@@ -324,6 +311,27 @@ class Basket implements \Serializable, BasketInterface
         $this->cptElement++;
 
         $this->buildPrices();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeBasketElement(BasketElementInterface $basketElement)
+    {
+        $pos = $element->getPosition();
+
+        $this->cptElement--;
+
+        unset(
+            $this->positions[$element->getProduct()->getId()],
+            $this->basketElements[$pos]
+        );
+
+        if (!$this->inBuild) {
+            $this->buildPrices();
+        }
+
+        return $element;
     }
 
     /**
@@ -553,7 +561,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer)
+    public function setCustomer(CustomerInterface $customer = null)
     {
         $this->customer = $customer;
         $this->customerId = $customer ? $customer->getId() : null;

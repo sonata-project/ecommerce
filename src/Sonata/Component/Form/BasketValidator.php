@@ -36,10 +36,10 @@ class BasketValidator extends ConstraintValidator
     /**
      * The validator asks each product repository to validate the related basket element
      *
-     * @param Basket $basket
-     * @param Constraint $constraint
+     * @param BasketInterface   $basket
+     * @param Constraint        $constraint
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($basket, Constraint $constraint)
     {
         /*
          * @todo : check 2.3 compatibility
@@ -69,7 +69,7 @@ class BasketValidator extends ConstraintValidator
             $contextPropertyPath = $propertyPath;
         }
 
-        $this->context->setGroup($group);
+//        $this->context->setGroup($group);
 
         if (count($this->context->getViolations()) > 0) {
             $context->addViolationAt($contextPropertyPath, $constraint->message, array(), null);

@@ -167,11 +167,23 @@ interface BasketInterface
      * delete an element from the basket depend on the $element. Element
      * can be a product or a basket element
      *
+     * @deprecated Use RemoveBasketElement instead
+     *
      * @param mixed $element
      *
      * @return BasketElementInterface
      */
     function removeElement(BasketElementInterface $element);
+
+    /**
+     * delete an element from the basket depend on the $element. Element
+     * can be a product or a basket element
+     *
+     * @param mixed $element
+     *
+     * @return BasketElementInterface
+     */
+    function removeBasketElement(BasketElementInterface $element);
 
     /**
      * Add a basket element into the current basket
@@ -251,7 +263,7 @@ interface BasketInterface
      * @abstract
      * @param \Sonata\Component\Customer\CustomerInterface $customer
      */
-    function setCustomer(CustomerInterface $customer);
+    function setCustomer(CustomerInterface $customer = null);
 
     /**
      * @abstract

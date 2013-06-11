@@ -190,8 +190,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('price', 'number')
             ->add('vat', 'number')
             ->add('stock', 'integer')
-            ->add('image', 'sonata_type_model', array(), array(
-                'edit' => 'list',
+            ->add('image', 'sonata_type_model_list', array(), array(
                 'link_parameters' => array(
                     'context' => 'sonata_product',
                     'filter' => array('context' => array('value' => 'sonata_product'))
@@ -290,6 +289,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /////////////////////////////////////////////////////
     // BASKET RELATED FUNCTIONS
 
+    /**
+     * (non-PHPdoc)
+     * @see \Sonata\Component\Product\ProductProviderInterface::createBasketElement()
+     */
     public function createBasketElement(ProductInterface $product = null, array $options = array())
     {
         $basketElement = $this->getBasketElementManager()->create();

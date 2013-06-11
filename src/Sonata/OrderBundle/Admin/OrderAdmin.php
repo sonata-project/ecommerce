@@ -72,7 +72,7 @@ class OrderAdmin extends Admin
         if (!$this->isChild()) {
             $formMapper
                 ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
-                    ->add('customer', 'sonata_type_model', array(), array('edit' => 'list'))
+                    ->add('customer', 'sonata_type_model_list')
                 ->end()
             ;
         }

@@ -36,13 +36,13 @@ abstract class BaseProductController extends Controller
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         if (!$form) {
-            $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'add_basket');
+            $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class')));
             $provider->defineAddBasketForm($product, $formBuilder);
 
             $form = $formBuilder->getForm()->createView();
         }
 
-        return $this->render(sprintf('%s:view.html.twig', 'SonataProductBundle:Amazon' /*$provider->getBaseControllerName()*/), array(
+        return $this->render(sprintf('%s:view.html.twig', $provider->getBaseControllerName()), array(
            'product' => $product,
            'form'    => $form,
         ));

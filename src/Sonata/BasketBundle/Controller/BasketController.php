@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Basket\InvalidBasketStateException;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
 class BasketController extends Controller
 {
@@ -83,7 +84,7 @@ class BasketController extends Controller
         $params  = $request->get('add_basket');
 
         if ($request->getMethod() != 'POST') {
-            throw new MethodNotAllowedHttpException('POST');
+            throw new MethodNotAllowedException(array('POST'));
         }
 
         // retrieve the product
@@ -96,7 +97,7 @@ class BasketController extends Controller
         // retrieve the custom provider for the product type
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        $formBuilder = $this->get('form.factory')->createNamedBuilder('form', 'add_basket');
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class')));
         $provider->defineAddBasketForm($product, $formBuilder);
 
         // load and bind the form

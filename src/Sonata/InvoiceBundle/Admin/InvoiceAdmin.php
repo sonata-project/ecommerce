@@ -48,7 +48,7 @@ class InvoiceAdmin extends Admin
         if (!$this->isChild()) {
             $formMapper
                 ->with($this->trans('form_invoice.group_misc_label'))
-                    ->add('customer', 'sonata_type_model', array(), array('edit' => 'list'))
+                    ->add('customer', 'sonata_type_model_list')
                 ->end()
             ;
         }
