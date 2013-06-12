@@ -6,6 +6,8 @@ use Sonata\Component\Customer\CustomerManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
 {
@@ -25,15 +27,22 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $securityContext;
 
     /**
+     * @var string
+     */
+    protected $locale;
+
+    /**
      * @param \Sonata\Component\Customer\CustomerManagerInterface $customerManager
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
+     * @param LocaleDetectorInterface $localeDetector
      */
-    public function __construct(CustomerManagerInterface $customerManager, Session $session, SecurityContextInterface $securityContext)
+    public function __construct(CustomerManagerInterface $customerManager, Session $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
     {
-        $this->customerManager = $customerManager;
-        $this->session = $session;
-        $this->securityContext = $securityContext;
+        $this->customerManager  = $customerManager;
+        $this->session          = $session;
+        $this->securityContext  = $securityContext;
+        $this->locale           = $localeDetector->getLocale();
     }
 
     /**
@@ -47,6 +56,7 @@ class CustomerSelector implements CustomerSelectorInterface
     {
         if (true !== $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             // user is not authenticated
+            //TODO set locale to customer (cf. end of function)
             return $this->customerManager->create();
         }
 
@@ -73,7 +83,7 @@ class CustomerSelector implements CustomerSelectorInterface
         }
 
         if (!$customer->getLocale()) {
-            $customer->setLocale($this->session->getLocale());
+            $customer->setLocale($this->locale);
         }
 
         return $customer;

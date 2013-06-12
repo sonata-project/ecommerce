@@ -54,8 +54,8 @@ class ShippingType extends AbstractType
         }
 
         $addresses = $this->addressManager->findBy(array(
-            'customer' => $basket->getCustomer()->getId(),
-            'type'        => AddressInterface::TYPE_DELIVERY
+            'customer'      => $basket->getCustomer()->getId(),
+            'type'          => AddressInterface::TYPE_DELIVERY
         ));
 
         $builder->add('deliveryAddress', 'sonata_type_model', array(

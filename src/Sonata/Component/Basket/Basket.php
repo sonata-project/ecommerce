@@ -316,7 +316,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function removeBasketElement(BasketElementInterface $basketElement)
+    public function removeBasketElement(BasketElementInterface $element)
     {
         $pos = $element->getPosition();
 

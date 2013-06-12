@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Basket\InvalidBasketStateException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+use Sonata\Component\Customer\CustomerSelector;
 
 class BasketController extends Controller
 {
@@ -140,14 +141,9 @@ class BasketController extends Controller
 
     public function authentificationStepAction()
     {
-        // todo : code the connection bit
-        $customers = $this
-            ->get('doctrine.orm.default_entity_manager')
-            ->createQuery('SELECT c FROM Application\Sonata\CustomerBundle\Entity\Customer c')
-            ->setMaxResults(1)
-            ->execute();
+        $customer = $this->get('sonata.customer.selector')->get();
 
-        $this->get('sonata.basket')->setCustomer(count($customers) > 0 ? $customers[0] : null);
+        $this->get('sonata.basket')->setCustomer($customer);
 
         return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
     }
