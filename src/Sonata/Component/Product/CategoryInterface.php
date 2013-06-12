@@ -97,6 +97,34 @@ interface CategoryInterface
     function getDescription();
 
     /**
+     * Set RAW description.
+     *
+     * @param text $rawDescription
+     */
+    function setRawDescription($rawDescription);
+
+    /**
+     * Get RAW description.
+     *
+     * @return text $rawDescription
+     */
+    function getRawDescription();
+
+    /**
+     * Set description formatter.
+     *
+     * @param text $descriptionFormatter
+     */
+    function setDescriptionFormatter($descriptionFormatter);
+
+    /**
+     * Get description formatter.
+     *
+     * @return text $descriptionFormatter
+     */
+    function getDescriptionFormatter();
+
+    /**
      * Set slug
      *
      * @param string $slug

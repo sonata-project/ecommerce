@@ -46,6 +46,16 @@ abstract class BaseCategory implements CategoryInterface
     protected $description;
 
     /**
+     * @var text $rawDescription
+     */
+    protected $rawDescription;
+
+    /**
+     * @var text $descriptionFormatter
+     */
+    protected $descriptionFormatter;
+
+    /**
      * @var string $slug
      */
     protected $slug;
@@ -181,6 +191,46 @@ abstract class BaseCategory implements CategoryInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set RAW description.
+     *
+     * @param text $rawDescription
+     */
+    public function setRawDescription($rawDescription)
+    {
+        $this->rawDescription = $rawDescription;
+    }
+
+    /**
+     * Get RAW description.
+     *
+     * @return text $rawDescription
+     */
+    public function getRawDescription()
+    {
+        return $this->rawDescription;
+    }
+
+    /**
+     * Set description formatter.
+     *
+     * @param text $descriptionFormatter
+     */
+    public function setDescriptionFormatter($descriptionFormatter)
+    {
+        $this->descriptionFormatter = $descriptionFormatter;
+    }
+
+    /**
+     * Get description formatter.
+     *
+     * @return text $descriptionFormatter
+     */
+    public function getDescriptionFormatter()
+    {
+        return $this->descriptionFormatter;
     }
 
     /**

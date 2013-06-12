@@ -7,7 +7,11 @@
     <mapped-superclass name="Sonata\ProductBundle\Entity\BaseCategory" >
 
         <field name="name"              type="string"   column="name"               length="255"/>
-        <field name="description"       type="text"     column="description"        nullable="true"/>
+
+        <field name="description"          column="description"           type="text"   nullable="true" />
+        <field name="rawDescription"       column="raw_description"       type="text"   nullable="true" />
+        <field name="descriptionFormatter" column="description_formatter" type="string" nullable="true" />
+
         <field name="subDescription"   type="text"     column="sub_description"    nullable="true"/>
         <field name="enabled"           type="boolean"  column="enabled"/>
         <field name="slug"              type="string"   column="slug"               length="255"/>

@@ -14,6 +14,7 @@ namespace Sonata\ProductBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 
 class CategoryAdmin extends Admin
 {
@@ -30,7 +31,11 @@ class CategoryAdmin extends Admin
         $formMapper
             ->add('enabled', null, array('required' => false))
             ->add('name')
-            ->add('description')
+            ->add('descriptionFormatter', 'sonata_formatter_type_selector', array(
+                'source' => 'rawDescription',
+                'target' => 'description'
+            ))
+            ->add('rawDescription', null, array('attr' => array('class' => 'span10', 'rows' => 20)))
             ->add('subDescription')
             ->add('position')
         ;
@@ -60,5 +65,39 @@ class CategoryAdmin extends Admin
             ->add('updatedAt')
             ->add('createdAt')
         ;
+    }
+
+    /**
+     * @param \Sonata\FormatterBundle\Formatter\Pool $formatterPool
+     *
+     * @return void
+     */
+    public function setPoolFormatter(FormatterPool $formatterPool)
+    {
+        $this->formatterPool = $formatterPool;
+    }
+
+    /**
+     * @return \Sonata\FormatterBundle\Formatter\Pool
+     */
+    public function getPoolFormatter()
+    {
+        return $this->formatterPool;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($category)
+    {
+        $category->setDescription($this->getPoolFormatter()->transform($category->getDescriptionFormatter(), $category->getRawDescription()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($category)
+    {
+        $category->setDescription($this->getPoolFormatter()->transform($category->getDescriptionFormatter(), $category->getRawDescription()));
     }
 }
