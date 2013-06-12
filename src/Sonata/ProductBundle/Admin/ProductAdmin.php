@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\Component\Product\Pool;
+use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 
 class ProductAdmin extends Admin
 {
@@ -199,5 +200,39 @@ class ProductAdmin extends Admin
             $this->trans('sidemenu.link_delivery_list'),
             array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
         );
+    }
+
+    /**
+     * @param \Sonata\FormatterBundle\Formatter\Pool $formatterPool
+     *
+     * @return void
+     */
+    public function setPoolFormatter(FormatterPool $formatterPool)
+    {
+        $this->formatterPool = $formatterPool;
+    }
+
+    /**
+     * @return \Sonata\FormatterBundle\Formatter\Pool
+     */
+    public function getPoolFormatter()
+    {
+        return $this->formatterPool;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($product)
+    {
+        $product->setDescription($this->getPoolFormatter()->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($product)
+    {
+        $product->setDescription($this->getPoolFormatter()->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
     }
 }

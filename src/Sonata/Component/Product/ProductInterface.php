@@ -111,10 +111,46 @@ interface ProductInterface
     function isVariation();
 
     /**
-     * @abstract
-     * @return string
+     * Set description
+     *
+     * @param text $description
+     */
+    function setDescription($description);
+
+    /**
+     * Get description
+     *
+     * @return text $description
      */
     function getDescription();
+
+    /**
+     * Set RAW description.
+     *
+     * @param text $rawDescription
+     */
+    function setRawDescription($rawDescription);
+
+    /**
+     * Get RAW description.
+     *
+     * @return text $rawDescription
+     */
+    function getRawDescription();
+
+    /**
+     * Set description formatter.
+     *
+     * @param text $descriptionFormatter
+     */
+    function setDescriptionFormatter($descriptionFormatter);
+
+    /**
+     * Get description formatter.
+     *
+     * @return text $descriptionFormatter
+     */
+    function getDescriptionFormatter();
 
     /**
      * @abstract

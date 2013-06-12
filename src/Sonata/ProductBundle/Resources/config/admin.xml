@@ -33,6 +33,10 @@
             <call method="addChild">
                 <argument type="service" id="sonata.product.admin.delivery" />
             </call>
+
+            <call method="setPoolFormatter">
+                <argument type="service" id="sonata.formatter.pool" />
+            </call>
         </service>
 
         <service id="sonata.product.admin.category" class="%sonata.product.admin.category.class%">

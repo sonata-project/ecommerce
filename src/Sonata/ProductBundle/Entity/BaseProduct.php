@@ -42,6 +42,16 @@ abstract class BaseProduct implements ProductInterface
     protected $description;
 
     /**
+     * @var text $rawDescription
+     */
+    protected $rawDescription;
+
+    /**
+     * @var text $descriptionFormatter
+     */
+    protected $descriptionFormatter;
+
+    /**
      * @var decimal $price
      */
     protected $price;
@@ -174,6 +184,46 @@ abstract class BaseProduct implements ProductInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set RAW description.
+     *
+     * @param text $rawDescription
+     */
+    public function setRawDescription($rawDescription)
+    {
+        $this->rawDescription = $rawDescription;
+    }
+
+    /**
+     * Get RAW description.
+     *
+     * @return text $rawDescription
+     */
+    public function getRawDescription()
+    {
+        return $this->rawDescription;
+    }
+
+    /**
+     * Set description formatter.
+     *
+     * @param text $descriptionFormatter
+     */
+    public function setDescriptionFormatter($descriptionFormatter)
+    {
+        $this->descriptionFormatter = $descriptionFormatter;
+    }
+
+    /**
+     * Get description formatter.
+     *
+     * @return text $descriptionFormatter
+     */
+    public function getDescriptionFormatter()
+    {
+        return $this->descriptionFormatter;
     }
 
     /**

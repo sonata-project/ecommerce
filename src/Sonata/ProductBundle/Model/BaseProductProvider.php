@@ -186,7 +186,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $formMapper
             ->add('name')
             ->add('sku')
-            ->add('description')
+            ->add('descriptionFormatter', 'sonata_formatter_type_selector', array(
+                    'source' => 'rawDescription',
+                    'target' => 'description'
+                ))
+            ->add('rawDescription', null, array('attr' => array('class' => 'span10', 'rows' => 20)))
             ->add('price', 'number')
             ->add('vat', 'number')
             ->add('stock', 'integer')
