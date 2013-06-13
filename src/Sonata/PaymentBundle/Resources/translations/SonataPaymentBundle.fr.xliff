@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2011-11-24T15:32:30Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.0.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="status_stopped">
+        <source>status_stopped</source>
+        <target>Arrêtée</target>
+      </trans-unit>
+      <trans-unit id="status_open">
+        <source>status_open</source>
+        <target>En cours</target>
+      </trans-unit>
+      <trans-unit id="status_pending">
+        <source>status_pending</source>
+        <target>En attente</target>
+      </trans-unit>
+      <trans-unit id="status_validated">
+        <source>status_validated</source>
+        <target>Validée</target>
+      </trans-unit>
+      <trans-unit id="status_cancelled">
+        <source>status_cancelled</source>
+        <target>Annulée</target>
+      </trans-unit>
+      <trans-unit id="status_error">
+        <source>status_error</source>
+        <target>En erreur</target>
+      </trans-unit>
+      <trans-unit id="contract_status_sent_to_user">
+        <source>contract_status_sent_to_user</source>
+        <target>Envoyé au client</target>
+      </trans-unit>
+      <trans-unit id="contract_status_to_send">
+        <source>contract_status_to_send</source>
+        <target>A envoyer</target>
+      </trans-unit>
+      <trans-unit id="contract_status_waiting_customer">
+        <source>contract_status_waiting_customer</source>
+        <target>En attente du client</target>
+      </trans-unit>
+      <trans-unit id="contract_status_validated">
+        <source>contract_status_validated</source>
+        <target>Validé</target>
+      </trans-unit>
+      <trans-unit id="contract_status_canceled">
+        <source>contract_status_canceled</source>
+        <target>Annulé</target>
+      </trans-unit>
+      <trans-unit id="contract_status_expired">
+        <source>contract_status_expired</source>
+        <target>Expiré</target>
+      </trans-unit>
+
+      <trans-unit id="order_unknown">
+        <source>order_unknown</source>
+        <target>Statut de commande inconnue</target>
+      </trans-unit>
+      <trans-unit id="open">
+        <source>open</source>
+        <target>Statut ouvert</target>
+      </trans-unit>
+      <trans-unit id="pending">
+        <source>pending</source>
+        <target>Statut en attente</target>
+      </trans-unit>
+      <trans-unit id="validated">
+        <source>validated</source>
+        <target>Statut validé</target>
+      </trans-unit>
+      <trans-unit id="cancelled">
+        <source>cancelled</source>
+        <target>Statut annulé</target>
+      </trans-unit>
+      <trans-unit id="status_unknow">
+        <source>status_unknow</source>
+        <target>Statut inconnu</target>
+      </trans-unit>
+      <trans-unit id="error_validation">
+        <source>error_validation</source>
+        <target>Statut d'erreur de validation</target>
+      </trans-unit>
+      <trans-unit id="wrong_callback">
+        <source>wrong_callback</source>
+        <target>Statut d'erreur de callback</target>
+      </trans-unit>
+      <trans-unit id="wrong_request">
+        <source>wrong_request</source>
+        <target>Statut d'erreur de requête</target>
+      </trans-unit>
+      <trans-unit id="order_to_open">
+        <source>order_to_open</source>
+        <target>Statut de commande à ouvrir</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
