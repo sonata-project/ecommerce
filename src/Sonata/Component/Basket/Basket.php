@@ -473,17 +473,30 @@ class Basket implements \Serializable, BasketInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        $arrayRep = array(
             'basketElements'        => $this->getBasketElements(),
             'positions'             => $this->positions,
-            'deliveryAddressId'     => $this->deliveryAddressId,
             'paymentAddressId'      => $this->paymentAddressId,
             'paymentMethodCode'     => $this->paymentMethodCode,
             'cptElement'            => $this->cptElement,
             'deliveryMethodCode'    => $this->deliveryMethodCode,
             'customerId'            => $this->customerId,
             'options'               => $this->options,
-        ));
+        );
+
+        if (null !== $this->deliveryAddressId) {
+            $arrayRep['deliveryAddressId'] = $this->deliveryAddressId;
+        } elseif (null !== $this->deliveryAddress) {
+            $arrayRep['deliveryAddress'] = $this->deliveryAddress;
+        }
+
+        if (null !== $this->paymentAddressId) {
+            $arrayRep['paymentAddressId'] = $this->paymentAddressId;
+        } elseif (null !== $this->paymentAddress) {
+            $arrayRep['paymentAddress'] = $this->paymentAddress;
+        }
+
+        return serialize($arrayRep);
     }
 
     /**
@@ -496,8 +509,10 @@ class Basket implements \Serializable, BasketInterface
         $properties = array(
             'basketElements',
             'positions',
+            'deliveryAddress',
             'deliveryAddressId',
             'deliveryMethodCode',
+            'paymentAddress',
             'paymentAddressId',
             'paymentMethodCode',
             'cptElement',

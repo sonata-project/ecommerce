@@ -145,7 +145,7 @@ class BasketController extends Controller
 
         $this->get('sonata.basket')->setCustomer($customer);
 
-        return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
+        return new RedirectResponse($this->generateUrl('sonata_basket_delivery_address'));
     }
 
     public function paymentStepAction()
@@ -170,8 +170,12 @@ class BasketController extends Controller
             $form->bind($this->get('request'));
 
             if ($form->isValid()) {
-                // update the basket store in session
-                $this->get('session')->set('sonata/basket', $form->getData());
+                if (null === $basket->getPaymentAddress()) {
+                    $basket->setPaymentAddress($basket->getDeliveryAddress());
+                }
+
+                // save the basket
+                $this->get('sonata.basket.factory')->save($basket);
 
                 return new RedirectResponse($this->generateUrl('sonata_basket_final'));
             }
@@ -201,22 +205,54 @@ class BasketController extends Controller
         $form = $this->createForm('sonata_basket_shipping', $basket, array(
             'validation_groups' => array('delivery')
         ));
+        $template = 'SonataBasketBundle:Basket:delivery_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
             $form->bind($this->get('request'));
 
             if ($form->isValid()) {
-                // update the basket store in session
-                $this->get('session')->set('sonata/basket', $form->getData());
+                // save the basket
+                $this->get('sonata.basket.factory')->save($form->getData());
+
 
                 return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
             }
         }
 
-        return $this->render('SonataBasketBundle:Basket:delivery_step.html.twig', array(
+        return $this->render($template, array(
             'basket'   => $basket,
             'form'     => $form->createView(),
             'customer' => $customer,
+        ));
+    }
+
+    public function deliveryAddressStepAction()
+    {
+        $basket = $this->get('sonata.basket');
+
+        if ($basket->countBasketElements() == 0) {
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
+        }
+
+//         var_dump($this->get('sonata.basket'), 'null'); exit;
+        // Show address creation form
+        $form = $this->createForm('sonata_basket_address');
+        $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
+
+        if ($this->get('request')->getMethod() == 'POST') {
+            $form->bind($this->get('request'));
+
+            if ($form->isValid()) {
+                $basket->setDeliveryAddress($form->getData());
+                // save the basket
+                $this->get('sonata.basket.factory')->save($basket);
+
+                return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
+            }
+        }
+
+        return $this->render($template, array(
+            'form'     => $form->createView(),
         ));
     }
 
@@ -231,7 +267,10 @@ class BasketController extends Controller
         if ($violations->count() > 0) {
             // basket not valid
 
-            // todo : add flash message
+            // todo : add flash message in template
+            foreach($violations as $violation) {
+                $this->get('session')->getFlashBag()->add('error', 'Errors: '.$violation->getMessage());
+            }
 
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }

@@ -58,12 +58,21 @@ class ShippingType extends AbstractType
             'type'          => AddressInterface::TYPE_DELIVERY
         ));
 
-        $builder->add('deliveryAddress', 'sonata_type_model', array(
-            'model_manager' => $this->modelManager,
-            'class'         => $this->addressManager->getClass(),
-            'choices'       => $addresses,
-            'expanded'      => true
-        ));
+//         $builder->add('deliveryAddress', 'sonata_type_model', array(
+//             'model_manager' => $this->modelManager,
+//             'class'         => $this->addressManager->getClass(),
+//             'choices'       => $addresses,
+//             'expanded'      => true
+//         ));
+
+//         if (count($addresses) > 0) {
+//             $builder->add('deliveryAddress', 'choice', array(
+//                 'choices'       => $addresses,
+//                 'expanded'      => true
+//             ));
+//         } else {
+//             $builder->add('deliveryAddress', 'sonata_basket_address');
+//         }
 
         $address = $basket->getDeliveryAddress() ?: current($addresses);
         $basket->setDeliveryAddress($address ?: null);

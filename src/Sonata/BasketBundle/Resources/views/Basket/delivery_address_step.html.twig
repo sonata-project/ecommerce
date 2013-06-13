@@ -1,0 +1,19 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'BasketBundle') }}</h1>
+
+{# <form action="{{ url('sonata_basket_delivery') }}" method="POST" >#}
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_rest(form) }}
+    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'BasketBundle') }}" />
+{{ form_end(form) }}
