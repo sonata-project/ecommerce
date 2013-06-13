@@ -480,7 +480,6 @@ class Basket implements \Serializable, BasketInterface
             'paymentMethodCode'     => $this->paymentMethodCode,
             'cptElement'            => $this->cptElement,
             'deliveryMethodCode'    => $this->deliveryMethodCode,
-            'customerId'            => $this->customerId,
             'options'               => $this->options,
         );
 
@@ -494,6 +493,12 @@ class Basket implements \Serializable, BasketInterface
             $arrayRep['paymentAddressId'] = $this->paymentAddressId;
         } elseif (null !== $this->paymentAddress) {
             $arrayRep['paymentAddress'] = $this->paymentAddress;
+        }
+
+        if (null !== $this->customerId) {
+            $arrayRep['customerId'] = $this->customerId;
+        } elseif (null !== $this->customer) {
+            $arrayRep['customer'] = $this->customer;
         }
 
         return serialize($arrayRep);
@@ -516,6 +521,7 @@ class Basket implements \Serializable, BasketInterface
             'paymentAddressId',
             'paymentMethodCode',
             'cptElement',
+            'customer',
             'customerId',
             'options',
         );

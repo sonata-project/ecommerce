@@ -26,6 +26,18 @@ interface AddressInterface
 
     /**
      * @abstract
+     * @return string return the address firstname
+     */
+    function getFirstname();
+
+    /**
+     * @abstract
+     * @return string return the address lastname
+     */
+    function getLastname();
+
+/**
+     * @abstract
      * @return string return the address (line 1)
      */
     function getAddress1();

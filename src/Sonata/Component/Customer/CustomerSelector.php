@@ -54,21 +54,20 @@ class CustomerSelector implements CustomerSelectorInterface
      */
     public function get()
     {
-        if (true !== $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
-            // user is not authenticated
-            //TODO set locale to customer (cf. end of function)
-            return $this->customerManager->create();
+        $customer = null;
+
+        if (true === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+            // user is authenticated
+            $user = $this->securityContext->getToken()->getUser();
+
+            if (!$user instanceof UserInterface) {
+                throw new \RuntimeException('User must be an instance of FOS\UserBundle\Model\UserInterface');
+            }
+
+            $customer = $this->customerManager->findOneBy(array(
+                'user' => $user->getId()
+            ));
         }
-
-        $user = $this->securityContext->getToken()->getUser();
-
-        if (!$user instanceof UserInterface) {
-            throw new \RuntimeException('User must be an instance of FOS\UserBundle\Model\UserInterface');
-        }
-
-        $customer = $this->customerManager->findOneBy(array(
-            'user' => $user->getId()
-        ));
 
         if (!$customer) {
             $basket = $this->getBasket();

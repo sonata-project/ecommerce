@@ -21,6 +21,7 @@ use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Basket\InvalidBasketStateException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Sonata\Component\Customer\CustomerSelector;
+use Sonata\Component\Customer\AddressInterface;
 
 class BasketController extends Controller
 {
@@ -171,9 +172,11 @@ class BasketController extends Controller
 
             if ($form->isValid()) {
                 if (null === $basket->getPaymentAddress()) {
-                    $basket->setPaymentAddress($basket->getDeliveryAddress());
+                    // If no payment address is specified, we assume it's the same as the delivery
+                    $paymentAddress = clone $basket->getDeliveryAddress();
+                    $paymentAddress->setType(AddressInterface::TYPE_BILLING);
+                    $basket->setPaymentAddress($paymentAddress);
                 }
-
                 // save the basket
                 $this->get('sonata.basket.factory')->save($basket);
 
@@ -234,7 +237,12 @@ class BasketController extends Controller
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
-//         var_dump($this->get('sonata.basket'), 'null'); exit;
+        $customer = $basket->getCustomer();
+
+        if (!$customer) {
+            throw new NotFoundHttpException('customer not found');
+        }
+
         // Show address creation form
         $form = $this->createForm('sonata_basket_address');
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
@@ -243,7 +251,14 @@ class BasketController extends Controller
             $form->bind($this->get('request'));
 
             if ($form->isValid()) {
-                $basket->setDeliveryAddress($form->getData());
+
+                $address = $form->getData();
+                $address->setType(AddressInterface::TYPE_DELIVERY);
+
+                $customer->addAddress($address);
+
+                $basket->setCustomer($customer);
+                $basket->setDeliveryAddress($address);
                 // save the basket
                 $this->get('sonata.basket.factory')->save($basket);
 

@@ -52,7 +52,6 @@ class OrderManager implements OrderManagerInterface
     public function save(OrderInterface $order)
     {
         $this->em->persist($order->getCustomer());
-//        $this->em->persist($order);
         $this->em->persist($order);
         $this->em->flush();
     }
