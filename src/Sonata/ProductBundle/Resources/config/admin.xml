@@ -6,12 +6,15 @@
     <parameters>
         <!-- PRODUCT -->
         <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
+        <parameter key="sonata.product.admin.product.controller">SonataAdminBundle:CRUD</parameter>
 
         <!-- CATEGORY -->
         <parameter key="sonata.product.admin.category.class">Sonata\ProductBundle\Admin\CategoryAdmin</parameter>
+        <parameter key="sonata.product.admin.category.controller">SonataAdminBundle:CRUD</parameter>
 
         <!-- DELIVERY -->
         <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeleveryAdmin</parameter>
+        <parameter key="sonata.product.admin.delivery.controller">SonataAdminBundle:CRUD</parameter>
 
         <parameter key="sonata.product.admin.product.manager">Sonata\ProductBundle\Model\DoctrineModelManager</parameter>
     </parameters>
@@ -23,8 +26,7 @@
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.product.admin.product.entity%</argument>
-            <argument>SonataProductBundle:ProductAdmin</argument>
-            <argument type="service" id="sonata.product.pool" />
+            <argument>%sonata.product.admin.product.controller%</argument>
 
             <call method="addChild">
                 <argument type="service" id="sonata.product.admin.category" />
@@ -37,13 +39,17 @@
             <call method="setPoolFormatter">
                 <argument type="service" id="sonata.formatter.pool" />
             </call>
+
+            <call method="setProductPool">
+                <argument type="service" id="sonata.product.pool" />
+            </call>
         </service>
 
         <service id="sonata.product.admin.category" class="%sonata.product.admin.category.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="category" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.product.admin.category.entity%</argument>
-            <argument />
+            <argument>%sonata.product.admin.category.controller%</argument>
 
             <call method="setPoolFormatter">
                 <argument type="service" id="sonata.formatter.pool" />
@@ -54,7 +60,7 @@
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="delivery" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.product.admin.delivery.entity%</argument>
-            <argument />
+            <argument>%sonata.product.admin.delivery.controller%</argument>
         </service>
 
         <service id="sonata.product.admin.product.manager" class="%sonata.product.admin.product.manager%">

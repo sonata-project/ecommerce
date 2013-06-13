@@ -22,26 +22,24 @@ use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 
 class ProductAdmin extends Admin
 {
-    protected $pool;
+    /**
+     * @var \Sonata\Component\Product\Pool
+     */
+    protected $productPool;
 
     /**
-     * @param $code
-     * @param $class
-     * @param $baseControllerName
-     * @param \Sonata\Component\Product\Pool $pool
+     * @var \Sonata\FormatterBundle\Formatter\Pool
      */
-    public function __construct($code, $class, $baseControllerName, Pool $pool)
-    {
-        parent::__construct($code, $class, $baseControllerName);
+    protected $poolFormatter;
 
-        $this->pool = $pool;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->setTranslationDomain('SonataProductBundle');
 
-        $this->baseRouteName = 'admin_sonata_product_product';
+        $this->baseRouteName    = 'admin_sonata_product_product';
         $this->baseRoutePattern = '/sonata/product/product';
     }
 
@@ -59,13 +57,17 @@ class ProductAdmin extends Admin
         return parent::getClass();
     }
 
+    /**
+     * @return string
+     */
     public function getProductType()
     {
         return $this->getRequest()->get('provider');
     }
 
     /**
-     * Returns the product class from the provided request
+     * Returns the product class from the provided request.
+     *
      * @return string
      */
     public function getProductClass()
@@ -74,7 +76,7 @@ class ProductAdmin extends Admin
             $code = $this->getProductType();
 
             if ($code) {
-                return $this->pool->getManager($code)->getClass();
+                return $this->getProductPool()->getManager($code)->getClass();
             }
         }
 
@@ -82,29 +84,9 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * Returns the subject, if none is set try to load one from the request
-     *
-     * @return object $object the subject
+     * {@inheritDoc}
      */
-    public function getSubject()
-    {
-        if ($this->subject === null && $this->hasRequest()) {
-            $id = $this->request->get($this->getIdParameter());
-            if (!is_numeric($id)) {
-                $this->subject = false;
-            } else {
-                $this->subject = $this->getModelManager()->find($this->getProductClass(), $id);
-            }
-        }
-
-        return $this->subject;
-    }
-
-    /**
-     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
-     * @return void
-     */
-    protected function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper)
     {
         // this admin class works only from a request scope
         if (!$this->hasRequest()) {
@@ -117,7 +99,7 @@ class ProductAdmin extends Admin
             $product = $this->getNewInstance();
         }
 
-        $provider = $this->pool->getProvider($product);
+        $provider = $this->getProductPool()->getProvider($product);
 
         if ($product->getId() > 0) {
             $provider->buildEditForm($formMapper);
@@ -127,7 +109,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
     public function getPersistentParameters()
     {
@@ -141,8 +123,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Datagrid\ListMapper $list
-     * @return void
+     * {@inheritDoc}
      */
     public function configureListFields(ListMapper $list)
     {
@@ -155,14 +136,14 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     *
      * @return void
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter
             ->add('name')
-//            ->add('price')
             ->add('enabled')
         ;
     }
@@ -190,15 +171,26 @@ class ProductAdmin extends Admin
             array('uri' => $admin->generateUrl('sonata.product.admin.category.list', array('id' => $id)))
         );
 
-//        $menu->addChild(
-//            $this->trans('link_variation_list', array(), 'SonataProductBundle'),
-//            array('uri' => $admin->generateUrl('sonata.product.admin.variation.list', array('id' => $id)))
-//        );
-
         $menu->addChild(
             $this->trans('sidemenu.link_delivery_list'),
             array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
         );
+    }
+
+    /**
+     * @param \Sonata\Component\Product\Pool $productPool
+     */
+    public function setProductPool(Pool $productPool)
+    {
+        $this->productPool = $productPool;
+    }
+
+    /**
+     * @return \Sonata\Component\Product\Pool
+     */
+    public function getProductPool()
+    {
+        return $this->productPool;
     }
 
     /**
