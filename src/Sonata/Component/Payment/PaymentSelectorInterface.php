@@ -15,5 +15,5 @@ use Sonata\Component\Customer\AddressInterface;
 
 interface PaymentSelectorInterface
 {
-    function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
+    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
 }

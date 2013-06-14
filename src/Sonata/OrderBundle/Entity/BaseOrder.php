@@ -4,8 +4,6 @@ namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
-use Sonata\Component\Payment\PaymentInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
 use Sonata\Component\Customer\CustomerInterface;
 
 use Application\Sonata\PaymentBundle\Entity\Transaction;
@@ -311,6 +309,7 @@ abstract class BaseOrder implements OrderInterface
     public function getPaymentStatusName()
     {
         $statusList = Transaction::getStatusList();
+
         return $statusList[$this->getPaymentStatus()];
     }
 
@@ -336,6 +335,7 @@ abstract class BaseOrder implements OrderInterface
     public function getDeliveryStatusName()
     {
         $statusList = self::getStatusList();
+
         return $statusList[$this->getDeliveryStatus()];
     }
 
@@ -906,6 +906,7 @@ abstract class BaseOrder implements OrderInterface
     public function getStatusName()
     {
         $statusList = self::getStatusList();
+
         return $statusList[$this->getStatus()];
     }
 

@@ -13,7 +13,6 @@ namespace Sonata\PaymentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
@@ -201,7 +200,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * @param \Sonata\Component\Payment\PaymentInterface $payment
+     * @param  \Sonata\Component\Payment\PaymentInterface     $payment
      * @return \Sonata\Component\Payment\TransactionInterface
      */
     public function createTransaction(PaymentInterface $payment)

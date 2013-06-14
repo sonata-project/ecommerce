@@ -18,44 +18,44 @@ interface CustomerManagerInterface
      *
      * @return Customer
      */
-    function create();
+    public function create();
 
     /**
      * Deletes a customer
      *
-     * @param Customer $customer
+     * @param  Customer $customer
      * @return void
      */
-    function delete(CustomerInterface $customer);
+    public function delete(CustomerInterface $customer);
 
     /**
      * Finds one customer by the given criteria
      *
-     * @param array $criteria
+     * @param  array             $criteria
      * @return CustomerInterface
      */
-    function findOneBy(array $criteria);
+    public function findOneBy(array $criteria);
 
     /**
      * Finds many customers by the given criteria
      *
-     * @param array $criteria
+     * @param  array             $criteria
      * @return CustomerInterface
      */
-    function findBy(array $criteria);
+    public function findBy(array $criteria);
 
     /**
      * Returns the customer's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Saves a customer
      *
-     * @param Customer $customer
+     * @param  Customer $customer
      * @return void
      */
-    function save(CustomerInterface $customer);
+    public function save(CustomerInterface $customer);
 }

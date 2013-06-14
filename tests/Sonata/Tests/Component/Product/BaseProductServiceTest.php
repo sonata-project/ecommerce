@@ -11,19 +11,16 @@
 
 namespace Sonata\Tests\Component\Product;
 
-use Sonata\Component\Product\Pool;
-
 use Sonata\ProductBundle\Model\BaseProductProvider;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
 
 class BaseProductServiceTest_ProductProvider extends BaseProductProvider
 {
     /**
      * @return string
      */
-    function getBaseControllerName()
+    public function getBaseControllerName()
     {
         // TODO: Implement getBaseControllerName() method.
     }
@@ -63,7 +60,6 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(9.99));
         $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
-
 
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);

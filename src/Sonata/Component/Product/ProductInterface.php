@@ -19,88 +19,88 @@ interface ProductInterface
      * @abstract
      * @return integer the product id
      */
-    function getId();
+    public function getId();
 
     /**
      * @abstract
      * @return float the product price
      */
-    function getPrice();
+    public function getPrice();
 
     /**
      * @abstract
      * @param  $price the product price
      * @return void
      */
-    function setPrice($price);
+    public function setPrice($price);
 
     /**
      * @abstract
      * @return float the vat price
      */
-    function getVat();
+    public function getVat();
 
     /**
      * @abstract
      * @param $vat the product vat
      * @return void
      */
-    function setVat($vat);
+    public function setVat($vat);
 
     /**
      * @abstract
      * @return string the product name
      */
-    function getName();
+    public function getName();
 
     /**
      * @abstract
      * @return
      */
-    function setName($name);
+    public function setName($name);
 
     /**
      * @abstract
      * @return string the product name
      */
-    function getParent();
+    public function getParent();
 
     /**
      * @abstract
      * @return
      */
-    function setParent(ProductInterface $parent);
+    public function setParent(ProductInterface $parent);
 
     /**
      * @abstract
      * @return array the product options
      */
-    function getOptions();
+    public function getOptions();
 
     /**
      * @abstract
      * @param  $option array
      * @return void
      */
-    function setOptions(array $options);
+    public function setOptions(array $options);
 
     /**
      * @abstract
      * @return boolean , true is the product is enabled (ready to be sell)
      */
-    function getEnabled();
+    public function getEnabled();
 
     /**
      * @abstract
      */
-    function setEnabled($enabled);
+    public function setEnabled($enabled);
 
     /**
      * Return true if the product is recurrent
      * @abstract
      * @return void
      */
-    function isRecurrentPayment();
+    public function isRecurrentPayment();
 
     /**
      * Return true if the product is a variation, linked to a main product
@@ -108,59 +108,59 @@ interface ProductInterface
      * @abstract
      * @return void
      */
-    function isVariation();
+    public function isVariation();
 
     /**
      * Set description
      *
      * @param text $description
      */
-    function setDescription($description);
+    public function setDescription($description);
 
     /**
      * Get description
      *
      * @return text $description
      */
-    function getDescription();
+    public function getDescription();
 
     /**
      * Set RAW description.
      *
      * @param text $rawDescription
      */
-    function setRawDescription($rawDescription);
+    public function setRawDescription($rawDescription);
 
     /**
      * Get RAW description.
      *
      * @return text $rawDescription
      */
-    function getRawDescription();
+    public function getRawDescription();
 
     /**
      * Set description formatter.
      *
      * @param text $descriptionFormatter
      */
-    function setDescriptionFormatter($descriptionFormatter);
+    public function setDescriptionFormatter($descriptionFormatter);
 
     /**
      * Get description formatter.
      *
      * @return text $descriptionFormatter
      */
-    function getDescriptionFormatter();
+    public function getDescriptionFormatter();
 
     /**
      * @abstract
      * @param \Sonata\Component\Product\DeliveryInterface $delivery
      */
-    function addDelivery(DeliveryInterface $delivery);
+    public function addDelivery(DeliveryInterface $delivery);
 
     /**
      * @abstract
      * @return array
      */
-    function getDelivery();
+    public function getDelivery();
 }

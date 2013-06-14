@@ -13,7 +13,6 @@ namespace Sonata\OrderBundle\Entity;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 
 class OrderManager implements OrderManagerInterface
 {
@@ -26,7 +25,7 @@ class OrderManager implements OrderManagerInterface
         $this->em    = $em;
         $this->class = $class;
 
-        if(class_exists($class)) {
+        if (class_exists($class)) {
             $this->repository = $this->em->getRepository($class);
         }
     }
@@ -46,7 +45,7 @@ class OrderManager implements OrderManagerInterface
     /**
      * Updates a order
      *
-     * @param Order $order
+     * @param  Order $order
      * @return void
      */
     public function save(OrderInterface $order)
@@ -69,7 +68,7 @@ class OrderManager implements OrderManagerInterface
     /**
      * Finds one order by the given criteria
      *
-     * @param array $criteria
+     * @param  array $criteria
      * @return Order
      */
     public function findOneBy(array $criteria)
@@ -80,7 +79,7 @@ class OrderManager implements OrderManagerInterface
     /**
      * Finds one order by the given criteria
      *
-     * @param array $criteria
+     * @param  array $criteria
      * @return Order
      */
     public function findBy(array $criteria)
@@ -91,7 +90,7 @@ class OrderManager implements OrderManagerInterface
     /**
      * Deletes a order
      *
-     * @param Order $order
+     * @param  Order $order
      * @return void
      */
     public function delete(OrderInterface $order)

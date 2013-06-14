@@ -18,7 +18,7 @@ use Sonata\ProductBundle\DependencyInjection\Compiler\AddProductProviderCompiler
 class SonataProductBundle extends Bundle
 {
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @return void
      */
     public function build(ContainerBuilder $container)

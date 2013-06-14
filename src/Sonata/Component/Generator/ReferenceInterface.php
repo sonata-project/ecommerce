@@ -17,7 +17,7 @@ use Sonata\Component\Order\OrderInterface;
 interface ReferenceInterface
 {
 
-    function invoice(InvoiceInterface $invoice);
+    public function invoice(InvoiceInterface $invoice);
 
-    function order(OrderInterface $order);
+    public function order(OrderInterface $order);
 }

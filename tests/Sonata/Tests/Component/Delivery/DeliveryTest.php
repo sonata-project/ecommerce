@@ -39,7 +39,6 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Sonata\\Component\\Delivery\\FreeDelivery', $pool->getMethod('free_2'), 'Pool return an FreeDelivery Instance');
     }
 
-
     /**
      * useless test ....
      *

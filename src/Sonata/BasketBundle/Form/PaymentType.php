@@ -12,28 +12,47 @@
 namespace Sonata\BasketBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+use Symfony\Component\Form\FormBuilderInterface;
+
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
-
 use Sonata\Component\Payment\PaymentSelectorInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Sonata\AdminBundle\Model\ModelManagerInterface;
-use Symfony\Component\Form\FormBuilderInterface;
 
 class PaymentType extends AbstractType
 {
+    /**
+     * @var AddressManagerInterface
+     */
     protected $addressManager;
 
+    /**
+     * @var PaymentPool
+     */
     protected $paymentPool;
 
+    /**
+     * @var PaymentSelectorInterface
+     */
     protected $paymentSelector;
 
+    /**
+     * @var ModelManagerInterface
+     */
     protected $modelManager;
 
+    /**
+     * Constructor
+     *
+     * @param AddressManagerInterface  $addressManager
+     * @param ModelManagerInterface    $modelManager
+     * @param PaymentPool              $paymentPool
+     * @param PaymentSelectorInterface $paymentSelector
+     */
     public function __construct(AddressManagerInterface $addressManager, ModelManagerInterface $modelManager, PaymentPool $paymentPool, PaymentSelectorInterface $paymentSelector)
     {
         $this->addressManager   = $addressManager;

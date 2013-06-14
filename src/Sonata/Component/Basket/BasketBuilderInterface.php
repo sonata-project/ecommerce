@@ -9,5 +9,5 @@ interface BasketBuilderInterface
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      */
-    function build(BasketInterface $basket);
+    public function build(BasketInterface $basket);
 }

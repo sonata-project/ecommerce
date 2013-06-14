@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Invoice;
 
-
 interface InvoiceManagerInterface
 {
 
@@ -20,36 +19,36 @@ interface InvoiceManagerInterface
      *
      * @return Invoice
      */
-    function createInvoice();
+    public function createInvoice();
 
     /**
      * Deletes a invoice
      *
-     * @param Invoice $invoice
+     * @param  Invoice $invoice
      * @return void
      */
-    function deleteInvoice(InvoiceInterface $invoice);
+    public function deleteInvoice(InvoiceInterface $invoice);
 
     /**
      * Finds one invoice by the given criteria
      *
-     * @param array $criteria
+     * @param  array            $criteria
      * @return InvoiceInterface
      */
-    function findInvoiceBy(array $criteria);
+    public function findInvoiceBy(array $criteria);
 
     /**
      * Returns the invoice's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates a invoice
      *
-     * @param Invoice $invoice
+     * @param  Invoice $invoice
      * @return void
      */
-    function updateInvoice(InvoiceInterface $invoice);
+    public function updateInvoice(InvoiceInterface $invoice);
 }

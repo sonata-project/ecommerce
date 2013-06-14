@@ -16,66 +16,66 @@ interface AddressInterface
     const TYPE_DELIVERY = 2;
     const TYPE_CONTACT  = 3;
 
-    function getId();
+    public function getId();
 
     /**
      * @abstract
      * @return string return the address name
      */
-    function getName();
+    public function getName();
 
     /**
      * @abstract
      * @return string return the address firstname
      */
-    function getFirstname();
+    public function getFirstname();
 
     /**
      * @abstract
      * @return string return the address lastname
      */
-    function getLastname();
+    public function getLastname();
 
 /**
      * @abstract
      * @return string return the address (line 1)
      */
-    function getAddress1();
+    public function getAddress1();
 
     /**
      * @abstract
      * @return string return the address (line 2)
      */
-    function getAddress2();
+    public function getAddress2();
 
     /**
      * @abstract
      * @return string return the address (line 3)
      */
-    function getAddress3();
+    public function getAddress3();
 
     /**
      * @abstract
      * @return string return the postcode
      */
-    function getPostcode();
+    public function getPostcode();
 
     /**
      * @abstract
      * @return string return the city
      */
-    function getCity();
+    public function getCity();
 
     /**
      * @abstract
      * @return string return the ISO country code
      */
-    function getCountryCode();
+    public function getCountryCode();
 
     /**
      * @abstract
      * @return string return the phone number linked to the address
      */
-    function getPhone();
+    public function getPhone();
 
 }

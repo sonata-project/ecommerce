@@ -19,7 +19,7 @@ class ProductDefinition
 
     /**
      * @param ProductProviderInterface $provider
-     * @param ProductManagerInterface $manager
+     * @param ProductManagerInterface  $manager
      */
     public function __construct(ProductProviderInterface $provider, ProductManagerInterface $manager)
     {

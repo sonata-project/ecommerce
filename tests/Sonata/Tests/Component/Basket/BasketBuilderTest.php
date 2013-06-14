@@ -79,7 +79,6 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
         $basketBuidler->build($basket);
     }
 
-
     public function testBuild()
     {
         $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');

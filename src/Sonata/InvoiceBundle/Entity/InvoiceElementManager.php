@@ -13,7 +13,6 @@ namespace Sonata\InvoiceBundle\Entity;
 use Sonata\Component\Invoice\InvoiceElementManagerInterface;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 
 class InvoiceElementManager implements InvoiceElementManagerInterface
 {
@@ -26,7 +25,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
         $this->em    = $em;
         $this->class = $class;
 
-        if(class_exists($class)) {
+        if (class_exists($class)) {
             $this->repository = $this->em->getRepository($class);
         }
     }
@@ -46,7 +45,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     /**
      * Updates a invoiceElement
      *
-     * @param InvoiceElement $invoice
+     * @param  InvoiceElement $invoice
      * @return void
      */
     public function save(InvoiceElementInterface $invoice)
@@ -68,7 +67,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     /**
      * Finds one InvoiceElement by the given criteria
      *
-     * @param array $criteria
+     * @param  array          $criteria
      * @return InvoiceElement
      */
     public function findOneBy(array $criteria)
@@ -79,7 +78,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     /**
      * Finds many InvoiceElements by the given criteria
      *
-     * @param array $criteria
+     * @param  array          $criteria
      * @return InvoiceElement
      */
     public function findBy(array $criteria)
@@ -90,7 +89,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     /**
      * Deletes a invoice
      *
-     * @param InvoiceElement $invoiceElement
+     * @param  InvoiceElement $invoiceElement
      * @return void
      */
     public function delete(InvoiceElementInterface $invoice)

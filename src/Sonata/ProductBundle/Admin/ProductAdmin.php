@@ -37,7 +37,6 @@ class ProductAdmin extends Admin
         $this->pool = $pool;
     }
 
-
     public function configure()
     {
         $this->setTranslationDomain('SonataProductBundle');
@@ -53,7 +52,7 @@ class ProductAdmin extends Admin
     {
         if ($this->hasSubject()) {
             return get_class($this->getSubject());
-        } else if($class = $this->getProductClass()) {
+        } elseif ($class = $this->getProductClass()) {
             return $class;
         }
 
@@ -71,7 +70,7 @@ class ProductAdmin extends Admin
      */
     public function getProductClass()
     {
-        if($this->hasRequest()) {
+        if ($this->hasRequest()) {
             $code = $this->getProductType();
 
             if ($code) {
@@ -102,7 +101,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
      * @return void
      */
     protected function configureFormFields(FormMapper $formMapper)
@@ -142,7 +141,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
+     * @param  \Sonata\AdminBundle\Datagrid\ListMapper $list
      * @return void
      */
     public function configureListFields(ListMapper $list)
@@ -156,7 +155,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
      * @return void
      */
     public function configureDatagridFilters(DatagridMapper $filter)

@@ -18,36 +18,36 @@ interface PackageManagerInterface
      *
      * @return Package
      */
-    function createPackage();
+    public function createPackage();
 
     /**
      * Deletes a package
      *
-     * @param Package $package
+     * @param  Package $package
      * @return void
      */
-    function deletePackage(PackageInterface $package);
+    public function deletePackage(PackageInterface $package);
 
     /**
      * Finds one package by the given criteria
      *
-     * @param array $criteria
+     * @param  array            $criteria
      * @return PackageInterface
      */
-    function findPackageBy(array $criteria);
+    public function findPackageBy(array $criteria);
 
     /**
      * Returns the package's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates a package
      *
-     * @param Package $package
+     * @param  Package $package
      * @return void
      */
-    function updatePackage(PackageInterface $package);
+    public function updatePackage(PackageInterface $package);
 }

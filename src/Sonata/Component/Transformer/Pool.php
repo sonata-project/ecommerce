@@ -41,7 +41,7 @@ class Pool
     /**
      * return a Transformer Object
      *
-     * @param  string $type
+     * @param  string                                       $type
      * @return Sonata\Component\Transformer\BaseTransformer
      */
     public function getTransformer($type)

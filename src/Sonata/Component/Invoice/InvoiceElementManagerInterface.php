@@ -18,44 +18,44 @@ interface InvoiceElementManagerInterface
      *
      * @return InvoiceElement
      */
-    function create();
+    public function create();
 
     /**
      * Deletes a invoiceElement
      *
-     * @param Invoiceelement $invoiceeElement
+     * @param  Invoiceelement $invoiceeElement
      * @return void
      */
-    function delete(InvoiceElementInterface $invoiceElement);
+    public function delete(InvoiceElementInterface $invoiceElement);
 
     /**
      * Finds one invoiceElement by the given criteria
      *
-     * @param array $criteria
+     * @param  array                   $criteria
      * @return InvoiceelementInterface
      */
-    function findOneBy(array $criteria);
+    public function findOneBy(array $criteria);
 
     /**
      * Finds one invoiceElement by the given criteria
      *
-     * @param array $criteria
+     * @param  array                   $criteria
      * @return InvoiceelementInterface
      */
-    function findBy(array $criteria);
+    public function findBy(array $criteria);
 
     /**
      * Returns the invoiceElement's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates a invoiceElement
      *
-     * @param Invoiceelement $invoiceElement
+     * @param  Invoiceelement $invoiceElement
      * @return void
      */
-    function save(InvoiceElementInterface $invoiceElement);
+    public function save(InvoiceElementInterface $invoiceElement);
 }

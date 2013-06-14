@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Payment\PaymentInterface;
@@ -24,88 +23,88 @@ interface BasketInterface
 
     /**
      * @abstract
-     * @param \Sonata\Component\Product\Pool $pool
+     * @param  \Sonata\Component\Product\Pool $pool
      * @return void
      */
-    function setProductPool(Pool $pool);
+    public function setProductPool(Pool $pool);
 
     /**
      * @abstract
      * @return \Sonata\Component\Product\Pool
      */
-    function getProductPool();
+    public function getProductPool();
 
     /**
      * test is the basket has elements
      *
      * @return boolean
      */
-    function isEmpty();
+    public function isEmpty();
 
     /**
      * Check is the basket is valid : elements, Payment and Delivery information
      *
      * if $element_only is set to true, only elements are checked
      *
-     * @param boolean $elementsOnly
+     * @param  boolean $elementsOnly
      * @return boolean
      */
-    function isValid($elementsOnly = false);
+    public function isValid($elementsOnly = false);
 
     /**
      * set the Delivery method
      *
      * @param \Sonata\Component\Delivery\DeliveryInterface $method
      */
-    function setDeliveryMethod(DeliveryInterface $method = null);
+    public function setDeliveryMethod(DeliveryInterface $method = null);
 
     /**
      *
      * @return \Sonata\Component\Delivery\DeliveryInterface
      */
-    function getDeliveryMethod();
+    public function getDeliveryMethod();
 
     /**
      * set the Delivery address
      *
      * @param \Sonata\Component\Customer\AddressInterface $address
      */
-    function setDeliveryAddress(AddressInterface $address = null);
+    public function setDeliveryAddress(AddressInterface $address = null);
 
     /**
      *
      *
      * @return \Sonata\Component\Customer\AddressInterface
      */
-    function getDeliveryAddress();
+    public function getDeliveryAddress();
 
     /**
      * set Payment method
      *
      * @param \Sonata\Component\Payment\PaymentInterface $method
      */
-    function setPaymentMethod(PaymentInterface $method = null);
+    public function setPaymentMethod(PaymentInterface $method = null);
 
     /**
      *
      *
      * @return \Sonata\Component\Payment\PaymentInterface
      */
-    function getPaymentMethod();
+    public function getPaymentMethod();
 
     /**
      * set the Payment address
      *
      * @param \Sonata\Component\Customer\AddressInterface $address
      */
-    function setPaymentAddress(AddressInterface $address = null);
+    public function setPaymentAddress(AddressInterface $address = null);
 
     /**
      *
      *
      * @return \Sonata\Component\Customer\AddressInterface
      */
-    function getPaymentAddress();
+    public function getPaymentAddress();
 
     /**
      * Check if the product can be added to the basket
@@ -114,23 +113,23 @@ interface BasketInterface
      *
      * @return boolean
      */
-    function isAddable(ProductInterface $product);
+    public function isAddable(ProductInterface $product);
 
     /**
      * reset basket
      *
      * @abstract
-     * @param bool $full
+     * @param  bool $full
      * @return void
      */
-    function reset($full = true);
+    public function reset($full = true);
 
     /**
      * return BasketElements
      *
      * @return \Sonata\Component\Basket\BasketElementInterface[]
      */
-    function getBasketElements();
+    public function getBasketElements();
 
     /**
      * Warning : this method should be only used by the validation framework
@@ -138,30 +137,30 @@ interface BasketInterface
      * @param  $elements
      * @return void
      */
-    function setBasketElements($elements);
+    public function setBasketElements($elements);
 
     /**
      * count number of element in the basket
      *
      * @return integer
      */
-    function countBasketElements();
+    public function countBasketElements();
 
     /**
      * return true if the basket has some elements ...
      *
      * @return boolean
      */
-    function hasBasketElements();
+    public function hasBasketElements();
 
     /**
      * return the BasketElement depends on the $product or the position from the element stacks
      *
      * @abstract
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return BasketElementInterface
      */
-    function getElement(ProductInterface $product);
+    public function getElement(ProductInterface $product);
 
     /**
      * delete an element from the basket depend on the $element. Element
@@ -173,7 +172,7 @@ interface BasketInterface
      *
      * @return BasketElementInterface
      */
-    function removeElement(BasketElementInterface $element);
+    public function removeElement(BasketElementInterface $element);
 
     /**
      * delete an element from the basket depend on the $element. Element
@@ -183,21 +182,21 @@ interface BasketInterface
      *
      * @return BasketElementInterface
      */
-    function removeBasketElement(BasketElementInterface $element);
+    public function removeBasketElement(BasketElementInterface $element);
 
     /**
      * Add a basket element into the current basket
      *
      * @param BasketElementInterface $basketElement
      */
-    function addBasketElement(BasketElementInterface $basketElement);
+    public function addBasketElement(BasketElementInterface $basketElement);
 
     /**
      * return true if the basket has a least one recurrent product (subscription)
      *
      *  @return boolean
      */
-    function hasRecurrentPayment();
+    public function hasRecurrentPayment();
 
     /**
      * return the total of the basket
@@ -210,90 +209,90 @@ interface BasketInterface
      *
      * @return float
      */
-    function getTotal($vat = false, $recurrentOnly = null);
+    public function getTotal($vat = false, $recurrentOnly = null);
 
     /**
      * return the VAT of the current basket
      *
      * @return float
      */
-    function getVatAmount();
+    public function getVatAmount();
     /**
      * return the Delivery price
      *
      *
-     * @param boolean $vat
+     * @param  boolean $vat
      * @return float
      */
-    function getDeliveryPrice($vat = false);
+    public function getDeliveryPrice($vat = false);
 
     /**
      * check if the basket contains $product
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return boolean
      */
-    function hasProduct(ProductInterface $product);
+    public function hasProduct(ProductInterface $product);
 
     /**
      * Compute the price of the basket
      *
      */
-    function buildPrices();
+    public function buildPrices();
 
     /**
      * remove basket element market as deleted
      * @return void
      */
-    function clean();
+    public function clean();
 
-    function setDeliveryAddressId($deliveryAddressId);
+    public function setDeliveryAddressId($deliveryAddressId);
 
-    function getDeliveryAddressId();
+    public function getDeliveryAddressId();
 
-    function setPaymentAddressId($paymentAddressId);
+    public function setPaymentAddressId($paymentAddressId);
 
-    function getPaymentAddressId();
+    public function getPaymentAddressId();
 
-    function getPaymentMethodCode();
+    public function getPaymentMethodCode();
 
-    function getDeliveryMethodCode();
+    public function getDeliveryMethodCode();
 
     /**
      * @abstract
      * @param \Sonata\Component\Customer\CustomerInterface $customer
      */
-    function setCustomer(CustomerInterface $customer = null);
+    public function setCustomer(CustomerInterface $customer = null);
 
     /**
      * @abstract
      * @param \Sonata\Component\Customer\CustomerInterface
      */
-    function getCustomer();
+    public function getCustomer();
 
-    function setCustomerId($customerId);
+    public function setCustomerId($customerId);
 
-    function getCustomerId();
+    public function getCustomerId();
 
     /**
      * @return string
      */
-    function getLocale();
+    public function getLocale();
 
     /**
-     * @param string $locale
+     * @param  string $locale
      * @return void
      */
-    function setLocale($locale);
+    public function setLocale($locale);
 
     /**
      * @return void
      */
-    function getCurrency();
+    public function getCurrency();
 
     /**
-     * @param string $currency
+     * @param  string $currency
      * @return void
      */
-    function setCurrency($currency);
+    public function setCurrency($currency);
 }

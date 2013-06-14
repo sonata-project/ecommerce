@@ -30,7 +30,7 @@ class CategoryManager implements CategoryManagerInterface
         $this->em    = $em;
         $this->class = $class;
 
-        if(class_exists($class)) {
+        if (class_exists($class)) {
             $this->repository = $this->em->getRepository($class);
         }
     }
@@ -50,7 +50,7 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * Updates a category
      *
-     * @param Category $category
+     * @param  Category $category
      * @return void
      */
     public function updateCategory(CategoryInterface $category)
@@ -72,7 +72,7 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * Finds one category by the given criteria
      *
-     * @param array $criteria
+     * @param  array    $criteria
      * @return Category
      */
     public function findOneCategoryBy(array $criteria)
@@ -83,7 +83,7 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * Finds one category by the given criteria
      *
-     * @param array $criteria
+     * @param  array    $criteria
      * @return Category
      */
     public function findCategoryBy(array $criteria)
@@ -94,7 +94,7 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * Deletes a category
      *
-     * @param Category $category
+     * @param  Category $category
      * @return void
      */
     public function deleteCategory(CategoryInterface $category)
@@ -105,7 +105,7 @@ class CategoryManager implements CategoryManagerInterface
 
     public function getRootCategoriesPager($page = 1, $limit = 25)
     {
-        $page = (int)$page == 0 ? 1 : (int)$page;
+        $page = (int) $page == 0 ? 1 : (int) $page;
 
         $queryBuiler = $this->em->createQueryBuilder()
             ->select('c')

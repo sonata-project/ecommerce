@@ -18,36 +18,36 @@ interface ProductCategoryManagerInterface
      *
      * @return ProductCategory
      */
-    function createProductCategory();
+    public function createProductCategory();
 
     /**
      * Deletes a ProductCategory
      *
-     * @param ProductCategory $productCategory
+     * @param  ProductCategory $productCategory
      * @return void
      */
-    function deleteProductCategory(ProductCategoryInterface $productCategory);
+    public function deleteProductCategory(ProductCategoryInterface $productCategory);
 
     /**
      * Finds one ProductCategory by the given criteria
      *
-     * @param array $criteria
+     * @param  array                    $criteria
      * @return ProductcategoryInterface
      */
-    function findProductCategoryBy(array $criteria);
+    public function findProductCategoryBy(array $criteria);
 
     /**
      * Returns the ProductCategory's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates a ProductCategory
      *
-     * @param ProductCategory $productCategory
+     * @param  ProductCategory $productCategory
      * @return void
      */
-    function updateProductCategory(ProductCategoryInterface $productCategory);
+    public function updateProductCategory(ProductCategoryInterface $productCategory);
 }

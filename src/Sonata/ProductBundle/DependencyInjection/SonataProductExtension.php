@@ -12,9 +12,7 @@
 namespace Sonata\ProductBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
@@ -33,7 +31,7 @@ class SonataProductExtension extends Extension
     /**
      * Loads the product configuration.
      *
-     * @param array            $configs    An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
     public function load(array $configs, ContainerBuilder $container)
@@ -56,8 +54,8 @@ class SonataProductExtension extends Extension
     }
 
         /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array $config
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param  array                                                   $config
      * @return void
      */
     public function registerParameters(ContainerBuilder $container, array $config)
@@ -76,7 +74,7 @@ class SonataProductExtension extends Extension
     }
 
     /**
-     * @param array $config
+     * @param  array $config
      * @return void
      */
     public function registerDoctrineMapping(array $config)

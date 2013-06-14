@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Product;
 
-
 interface CategoryManagerInterface
 {
 
@@ -20,46 +19,45 @@ interface CategoryManagerInterface
      *
      * @return Category
      */
-    function createCategory();
+    public function createCategory();
 
     /**
      * Deletes a category
      *
-     * @param \Sonata\Component\Product\CategoryInterface $category
+     * @param  \Sonata\Component\Product\CategoryInterface $category
      * @return void
      */
-    function deleteCategory(CategoryInterface $category);
+    public function deleteCategory(CategoryInterface $category);
 
     /**
      * Finds one category by the given criteria
      *
-     * @param array $criteria
+     * @param  array             $criteria
      * @return CategoryInterface
      */
-    function findCategoryBy(array $criteria);
+    public function findCategoryBy(array $criteria);
 
     /**
      * Returns the category's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates a category
      *
-     * @param \Sonata\Component\Product\CategoryInterface $category
+     * @param  \Sonata\Component\Product\CategoryInterface $category
      * @return void
      */
-    function updateCategory(CategoryInterface $category);
-
+    public function updateCategory(CategoryInterface $category);
 
     /**
      * Returns the root categories
      *
      * @abstract
-     * @param array $criteria
+     * @param  array $criteria
      * @return void
      */
-    function getRootCategoriesPager($page = 1, $limit = 25);
+    public function getRootCategoriesPager($page = 1, $limit = 25);
 }

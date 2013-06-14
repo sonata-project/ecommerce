@@ -18,7 +18,7 @@ use Sonata\Component\Order\OrderInterface;
 class NodeScelliusTransactionGenerator implements ScelliusTransactionGeneratorInterface
 {
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param  \Sonata\Component\Order\OrderInterface $order
      * @return string
      */
     public function generate(OrderInterface $order)

@@ -9,5 +9,5 @@ interface CustomerSelectorInterface
      *
      * @return \Sonata\Component\Customer\CustomerInterface
      */
-    function get();
+    public function get();
 }

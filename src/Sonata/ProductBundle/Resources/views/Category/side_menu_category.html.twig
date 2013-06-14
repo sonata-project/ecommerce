@@ -15,7 +15,7 @@ file that was distributed with this source code.
             <a href="{{ url('sonata_category_view', {'slug': category.slug, 'categoryId': category.id}) }}">{{ category.name }}</a>
 
             {% if category.hasChildren and deep < depth%}
-                
+
                 {% render controller('SonataProductBundle:Category:listSideMenuCategories', {
                     'category': category,
                     'deep' : deep,
@@ -27,6 +27,3 @@ file that was distributed with this source code.
         </li>
     {% endfor %}
 </ul>
-
-
-

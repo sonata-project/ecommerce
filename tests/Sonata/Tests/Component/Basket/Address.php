@@ -9,45 +9,53 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Customer\AddressInterface;
 
-class Address implements AddressInterface {
-    public function getPhone() {
+class Address implements AddressInterface
+{
+    public function getPhone()
+    {
         return "+33472123123";
     }
 
-    public function getCountryCode() {
+    public function getCountryCode()
+    {
         return "FRA";
     }
 
-    public function getCity() {
+    public function getCity()
+    {
         return "PARIS";
     }
 
-    public function getPostcode() {
+    public function getPostcode()
+    {
         return "75002";
     }
 
-    public function getAddress3() {
+    public function getAddress3()
+    {
         return "Av des champs elysées";
     }
 
-    public function getAddress2() {
+    public function getAddress2()
+    {
         return "";
     }
 
-    public function getAddress1() {
+    public function getAddress1()
+    {
         return "";
     }
 
-    public function getName() {
+    public function getName()
+    {
         return "home";
     }
 
-    function getId()
+    public function getId()
     {
         // TODO: Implement getId() method.
     }

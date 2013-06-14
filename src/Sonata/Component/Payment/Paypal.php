@@ -85,8 +85,7 @@ class Paypal extends BasePaypal
         if ($this->getOption('debug', false)) {
 
             $html = '<html><body>' . "\n";
-        }
-        else {
+        } else {
             $html = '<html><body onload="document.getElementById(\'submit_button\').disabled = \'disabled\'; document.getElementById(\'formPaiement\').submit();">' . "\n";
         }
 
@@ -99,7 +98,6 @@ class Paypal extends BasePaypal
         $html .= '<p>' . $this->translator->trans('process_to_paiement_bank_page', array(), 'PaymentBundle') . '</p>';
         $html .= '<input type="submit" id="submit_button" value="' . $this->translator->trans('process_to_paiement_btn', array(), 'PaymentBundle') . '" />';
         $html .= '</form>';
-
 
         $html .= '</body></html>';
 
@@ -253,7 +251,6 @@ class Paypal extends BasePaypal
     {
 
         if (!$transaction->isValid()) {
-
             return new \Symfony\Component\HttpFoundation\Response('');
         }
 
@@ -294,14 +291,12 @@ class Paypal extends BasePaypal
     public function isBasketValid(BasketInterface $basket)
     {
         if ($basket->countBasketElements() == 0) {
-
             return false;
         }
 
         foreach ($basket->getBasketElements() as $element) {
             $product = $element->getProduct();
             if ($product->isRecurrentPayment() === true) {
-
                 return false;
             }
         }
@@ -315,7 +310,6 @@ class Paypal extends BasePaypal
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
         if (!$product->isRecurrentPayment()) {
-
             return true;
         }
 

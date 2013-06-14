@@ -17,67 +17,67 @@ interface ProductCategoryInterface
      *
      * @param boolean $enabled
      */
-    function setEnabled($enabled);
+    public function setEnabled($enabled);
 
     /**
      * Get enabled
      *
      * @return boolean $enabled
      */
-    function getEnabled();
+    public function getEnabled();
 
     /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
      */
-    function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
      * @return \DateTime $updatedAt
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 
     /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
      */
-    function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Get createdAt
      *
      * @return datetime $createdAt
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * Set Product
      *
      * @param ProductInterface $product
      */
-    function setProduct(ProductInterface $product);
+    public function setProduct(ProductInterface $product);
     /**
      * Get Product
      *
      * @return Application\Sonata\ProductBundle\Entity\Product $product
      */
-    function getProduct();
+    public function getProduct();
 
     /**
      * Set Category
      *
      * @param CategoryInterface $category
      */
-    function setCategory(CategoryInterface $category);
+    public function setCategory(CategoryInterface $category);
 
     /**
      * Get Category
      *
      * @return Application\Sonata\ProductBundle\Entity\Category $category
      */
-    function getCategory();
+    public function getCategory();
 }

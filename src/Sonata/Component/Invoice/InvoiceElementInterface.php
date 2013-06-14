@@ -20,111 +20,111 @@ interface InvoiceElementInterface
      *
      * @param integer $invoiceId
      */
-    function setInvoice(InvoiceInterface $invoiceId);
+    public function setInvoice(InvoiceInterface $invoiceId);
 
     /**
      * Get invoice
      *
      * @return \Sonata\Component\Invoice\InvoiceInterface $invoice
      */
-    function getInvoice();
+    public function getInvoice();
 
     /**
      * Set orderElement
      *
      * @param OrderElement $orderElement
      */
-    function setOrderElement(OrderElementInterface $orderElement);
+    public function setOrderElement(OrderElementInterface $orderElement);
 
     /**
      * Get orderElement
      *
      * @return OrderElement $orderElement
      */
-    function getOrderElement();
+    public function getOrderElement();
 
     /**
      * Set quantity
      *
      * @param integer $quantity
      */
-    function setQuantity($quantity);
+    public function setQuantity($quantity);
 
     /**
      * Get quantity
      *
      * @return integer $quantity
      */
-    function getQuantity();
+    public function getQuantity();
 
     /**
      * Set price
      *
      * @param decimal $price
      */
-    function setPrice($price);
+    public function setPrice($price);
 
     /**
      * Get price
      *
      * @return decimal $price
      */
-    function getPrice();
+    public function getPrice();
 
     /**
      * Set vat
      *
      * @param decimal $vat
      */
-    function setVat($vat);
+    public function setVat($vat);
 
     /**
      * Get vat
      *
      * @return decimal $vat
      */
-    function getVat();
+    public function getVat();
 
     /**
      * Set total
      *
      * @param decimal $total
      */
-    function setTotal($total);
+    public function setTotal($total);
 
     /**
      * Get total
      *
      * @return decimal $total
      */
-    function getTotal();
+    public function getTotal();
 
     /**
      * Set designation
      *
      * @param string $designation
      */
-    function setDesignation($designation);
+    public function setDesignation($designation);
 
     /**
      * Get designation
      *
      * @return string $designation
      */
-    function getDesignation();
+    public function getDesignation();
 
     /**
      * Set description
      *
      * @param text $description
      */
-    function setDescription($description);
+    public function setDescription($description);
 
     /**
      * Get description
      *
      * @return text $description
      */
-    function getDescription();
+    public function getDescription();
 
 }

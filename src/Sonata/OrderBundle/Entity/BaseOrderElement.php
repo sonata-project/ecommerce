@@ -257,7 +257,6 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->status;
     }
 
-
     /**
      *
      * return true if the order is validated
@@ -398,7 +397,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param \DateTime|null $createdAt
+     * @param  \DateTime|null $createdAt
      * @return void
      */
     public function setCreatedAt(\DateTime $createdAt = null)
@@ -415,7 +414,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param \DateTime|null $createdAt
+     * @param  \DateTime|null $createdAt
      * @return void
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
@@ -449,7 +448,7 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @param $name
-     * @param null $default
+     * @param  null $default
      * @return null
      */
     public function getOption($name, $default = null)
@@ -486,7 +485,7 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @param $name
-     * @param null $default
+     * @param  null  $default
      * @return mixed
      */
     public function getRawProductValue($name, $default = null)
@@ -522,6 +521,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function getStatusName()
     {
         $statusList = self::getStatusList();
+
         return $statusList[$this->getStatus()];
     }
 
@@ -540,9 +540,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function getDeliveryStatusName()
     {
         $statusList = self::getDeliveryStatusList();
+
         return $statusList[$this->deliveryStatus];
     }
-
 
     /**
      * @static
@@ -558,7 +558,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * if $vat = true, return the price with vat
      *
-     * @param boolean $vat
+     * @param  boolean $vat
      * @return float
      */
     public function getUnitPrice($vat = false)
@@ -577,7 +577,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * if $vat = true, return the price with vat
      *
-     * @param boolean $vat
+     * @param  boolean $vat
      * @return float
      */
     public function getTotal($vat = false)

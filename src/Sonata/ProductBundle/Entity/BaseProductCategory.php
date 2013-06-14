@@ -13,7 +13,7 @@ namespace Sonata\ProductBundle\Entity;
 use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
-    
+
 /**
  * Sonata\ProductBundle\Entity\BaseProductCategory
  */

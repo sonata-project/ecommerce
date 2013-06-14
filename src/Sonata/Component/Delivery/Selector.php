@@ -30,7 +30,7 @@ class Selector implements DeliverySelectorInterface
 
     /**
      * @param \Sonata\Component\Delivery\Pool $deliveryPool
-     * @param \Sonata\Component\Product\Pool $productPool
+     * @param \Sonata\Component\Product\Pool  $productPool
      */
     public function __construct(DeliveryPool $deliveryPool, ProductPool $productPool)
     {
@@ -81,8 +81,8 @@ class Selector implements DeliverySelectorInterface
     }
 
     /**
-     * @param null|\Sonata\Component\Basket\BasketInterface $basket
-     * @param null|\Sonata\Component\Customer\AddressInterface $deliveryAddress
+     * @param  null|\Sonata\Component\Basket\BasketInterface    $basket
+     * @param  null|\Sonata\Component\Customer\AddressInterface $deliveryAddress
      * @return array|bool
      */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null)
@@ -157,8 +157,8 @@ class Selector implements DeliverySelectorInterface
 
     /**
      * @static
-     * @param DeliveryInterface $a
-     * @param DeliveryInterface $b
+     * @param  DeliveryInterface $a
+     * @param  DeliveryInterface $b
      * @return int
      */
     public static function sort(DeliveryInterface $a, DeliveryInterface $b)

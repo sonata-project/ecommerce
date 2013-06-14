@@ -17,8 +17,6 @@ use Buzz\Message\Response;
 use Buzz\Message\Request;
 use Buzz\Browser;
 use Buzz\Client\ClientInterface;
-use Buzz\Client\Mock\FIFO;
-use Sonata\Component\Order\OrderInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
 class CheckPaymentTest_Order extends BaseOrder
@@ -26,7 +24,7 @@ class CheckPaymentTest_Order extends BaseOrder
     /**
      * @return integer the order id
      */
-    function getId()
+    public function getId()
     {
         // TODO: Implement getId() method.
     }

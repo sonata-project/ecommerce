@@ -386,7 +386,6 @@ abstract class BaseProduct implements ProductInterface
         return $this->delivery;
     }
 
-
     /**
      * @return string the product name
      */

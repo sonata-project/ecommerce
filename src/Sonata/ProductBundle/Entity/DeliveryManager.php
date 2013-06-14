@@ -19,13 +19,13 @@ class DeliveryManager implements DeliveryManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
         $this->class = $class;
 
-        if(class_exists($class)) {
+        if (class_exists($class)) {
             $this->repository = $this->em->getRepository($class);
         }
     }
@@ -45,7 +45,7 @@ class DeliveryManager implements DeliveryManagerInterface
     /**
      * Updates a delivery
      *
-     * @param Delivery $delivery
+     * @param  Delivery $delivery
      * @return void
      */
     public function updateDelivery(DeliveryInterface $delivery)
@@ -67,7 +67,7 @@ class DeliveryManager implements DeliveryManagerInterface
     /**
      * Finds one delivery by the given criteria
      *
-     * @param array $criteria
+     * @param  array    $criteria
      * @return Delivery
      */
     public function findDeliveryBy(array $criteria)
@@ -78,7 +78,7 @@ class DeliveryManager implements DeliveryManagerInterface
     /**
      * Deletes a delivery
      *
-     * @param Delivery $delivery
+     * @param  Delivery $delivery
      * @return void
      */
     public function deleteDelivery(DeliveryInterface $delivery)

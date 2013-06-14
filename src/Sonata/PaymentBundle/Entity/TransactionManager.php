@@ -50,7 +50,7 @@ class TransactionManager implements TransactionManagerInterface
     /**
      * Updates a transaction
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
      * @return void
      */
     public function save(TransactionInterface $transaction)
@@ -72,7 +72,7 @@ class TransactionManager implements TransactionManagerInterface
     /**
      * Finds one transaction by the given criteria
      *
-     * @param array $criteria
+     * @param  array       $criteria
      * @return Transaction
      */
     public function findOneBy(array $criteria)
@@ -83,7 +83,7 @@ class TransactionManager implements TransactionManagerInterface
     /**
      * Finds many transaction by the given criteria
      *
-     * @param array $criteria
+     * @param  array       $criteria
      * @return Transaction
      */
     public function findBy(array $criteria)
@@ -94,7 +94,7 @@ class TransactionManager implements TransactionManagerInterface
     /**
      * Deletes a transaction
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
      * @return void
      */
     public function delete(TransactionInterface $transaction)

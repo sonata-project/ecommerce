@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Transformer;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\Pool as ProductPool;

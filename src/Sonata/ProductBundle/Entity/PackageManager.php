@@ -19,13 +19,13 @@ class PackageManager implements PackageManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
         $this->class = $class;
 
-        if(class_exists($class)) {
+        if (class_exists($class)) {
             $this->repository = $this->em->getRepository($class);
         }
     }
@@ -45,7 +45,7 @@ class PackageManager implements PackageManagerInterface
     /**
      * Updates a package
      *
-     * @param Package $package
+     * @param  Package $package
      * @return void
      */
     public function updatePackage(PackageInterface $package)
@@ -67,7 +67,7 @@ class PackageManager implements PackageManagerInterface
     /**
      * Finds one package by the given criteria
      *
-     * @param array $criteria
+     * @param  array   $criteria
      * @return Package
      */
     public function findPackageBy(array $criteria)
@@ -78,7 +78,7 @@ class PackageManager implements PackageManagerInterface
     /**
      * Deletes a package
      *
-     * @param Package $package
+     * @param  Package $package
      * @return void
      */
     public function deletePackage(PackageInterface $package)

@@ -15,7 +15,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  *
@@ -35,13 +34,13 @@ class AddProductProviderCompilerPass implements CompilerPassInterface
         $pool->setMethodCalls(array());
 
         $map = array();
-        foreach($calls as $method => $arguments) {
-            if ($arguments[0] !== '__hack')  {
+        foreach ($calls as $method => $arguments) {
+            if ($arguments[0] !== '__hack') {
                 $pool->addMethodCall($arguments[0], $arguments[1]);
                 continue;
             }
 
-            foreach($arguments[1] as $code => $options) {
+            foreach ($arguments[1] as $code => $options) {
                 // define a new ProductDefinition
                 $definition = new Definition('Sonata\Component\Product\ProductDefinition', array(new Reference($options['provider']), new Reference($options['manager'])));
                 $definition->setPublic(false);

@@ -12,7 +12,7 @@ interface BasketFactoryInterface
      * @param \Sonata\Component\Customer\CustomerInterface
      * @return \Sonata\Component\Basket\BasketInterface
      */
-    function load(CustomerInterface $customer);
+    public function load(CustomerInterface $customer);
 
     /**
      * Save the basket
@@ -20,5 +20,5 @@ interface BasketFactoryInterface
      * @param \Sonata\Component\Basket\BasketInterface
      * @return void
      */
-    function save(BasketInterface $basket);
+    public function save(BasketInterface $basket);
 }

@@ -18,44 +18,44 @@ interface ProductManagerInterface
      *
      * @return \Sonata\Component\Product\ProductInterface
      */
-    function create();
+    public function create();
 
     /**
      * Deletes a product
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return void
      */
-    function delete(ProductInterface $product);
+    public function delete(ProductInterface $product);
 
     /**
      * Saves a product
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return void
      */
-    function save(ProductInterface $product);
+    public function save(ProductInterface $product);
 
     /**
      * Finds one product by the given criteria
      *
-     * @param array $criteria
+     * @param  array $criteria
      * @return array
      */
-    function findBy(array $criteria = array());
+    public function findBy(array $criteria = array());
 
     /**
      * Finds one product by the given criteria
      *
-     * @param array $criteria
+     * @param  array                                      $criteria
      * @return \Sonata\Component\Product\ProductInterface
      */
-    function findOneBy(array $criteria = array());
+    public function findOneBy(array $criteria = array());
 
     /**
      * Returns the product's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 }

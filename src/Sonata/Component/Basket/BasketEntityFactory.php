@@ -32,8 +32,8 @@ class BasketEntityFactory implements BasketFactoryInterface
     protected $session;
 
     /**
-     * @param \Sonata\Component\Basket\BasketManagerInterface $basketManager
-     * @param \Sonata\Component\Basket\BasketBuilderInterface $basketBuilder
+     * @param \Sonata\Component\Basket\BasketManagerInterface   $basketManager
+     * @param \Sonata\Component\Basket\BasketBuilderInterface   $basketBuilder
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      */
     public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, Session $session)
@@ -46,7 +46,7 @@ class BasketEntityFactory implements BasketFactoryInterface
     /**
      * Load the basket
      *
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @param  \Sonata\Component\Customer\CustomerInterface $customer
      * @return \Sonata\Component\Basket\BasketInterface
      */
     public function load(CustomerInterface $customer)
@@ -73,7 +73,7 @@ class BasketEntityFactory implements BasketFactoryInterface
     /**
      * Save the basket
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Sonata\Component\Basket\BasketInterface $basket
      * @return void
      */
     public function save(BasketInterface $basket)

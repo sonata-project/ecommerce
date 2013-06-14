@@ -18,44 +18,44 @@ interface OrderManagerInterface
      *
      * @return OrderInterface
      */
-    function create();
+    public function create();
 
     /**
      * Deletes a order
      *
-     * @param OrderInterface $order
+     * @param  OrderInterface $order
      * @return void
      */
-    function delete(OrderInterface $order);
+    public function delete(OrderInterface $order);
 
     /**
      * Finds one order by the given criteria
      *
-     * @param array $criteria
+     * @param  array          $criteria
      * @return OrderInterface
      */
-    function findOneBy(array $criteria);
+    public function findOneBy(array $criteria);
 
     /**
      * Finds many orders by the given criteria
      *
-     * @param array $criteria
+     * @param  array          $criteria
      * @return OrderInterface
      */
-    function findBy(array $criteria);
+    public function findBy(array $criteria);
 
     /**
      * Returns the order's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates a order
      *
-     * @param Order $order
+     * @param  Order $order
      * @return void
      */
-    function save(OrderInterface $order);
+    public function save(OrderInterface $order);
 }

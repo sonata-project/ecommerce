@@ -20,17 +20,20 @@ class Product extends BaseProduct
     public $price = 15;
     public $vat = 19.6;
 
-    public function getOptions() {
+    public function getOptions()
+    {
         return array(
             'option1' => 'toto',
         );
     }
 
-    public function isRecurrentPayment() {
+    public function isRecurrentPayment()
+    {
         return false;
     }
 
-    public function getElementOptions() {
+    public function getElementOptions()
+    {
         return array();
     }
 

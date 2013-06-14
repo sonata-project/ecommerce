@@ -18,36 +18,36 @@ interface DeliveryManagerInterface
      *
      * @return Delivery
      */
-    function createDelivery();
+    public function createDelivery();
 
     /**
      * Deletes a delivery
      *
-     * @param Delivery $delivery
+     * @param  Delivery $delivery
      * @return void
      */
-    function deleteDelivery(DeliveryInterface $delivery);
+    public function deleteDelivery(DeliveryInterface $delivery);
 
     /**
      * Finds one delivery by the given criteria
      *
-     * @param array $criteria
+     * @param  array             $criteria
      * @return DeliveryInterface
      */
-    function findDeliveryBy(array $criteria);
+    public function findDeliveryBy(array $criteria);
 
     /**
      * Returns the delivery's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates a delivery
      *
-     * @param Delivery $delivery
+     * @param  Delivery $delivery
      * @return void
      */
-    function updateDelivery(DeliveryInterface $delivery);
+    public function updateDelivery(DeliveryInterface $delivery);
 }

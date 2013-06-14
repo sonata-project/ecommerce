@@ -18,116 +18,116 @@ interface DeliveryInterface
     const STATUS_CANCELLED  = 3; // the order is cancelled
     const STATUS_ERROR      = 4; // the order has an error
     const STATUS_STOPPED    = 5; // use if the subscription has been cancelled/stopped
-    
+
     /**
      * Set productId
      *
      * @param integer $productId
      */
-    function setProduct(ProductInterface $product);
+    public function setProduct(ProductInterface $product);
 
     /**
      * Get productId
      *
      * @return integer $productId
      */
-    function getProduct();
+    public function getProduct();
 
     /**
      * Set class_name
      *
      * @param string $className
      */
-    function setCode($code);
+    public function setCode($code);
 
     /**
      * Get class_name
      *
      * @return string $className
      */
-    function getCode();
+    public function getCode();
 
     /**
      * Set per_item
      *
      * @param boolean $perItem
      */
-    function setPerItem($perItem);
+    public function setPerItem($perItem);
 
     /**
      * Get per_item
      *
      * @return boolean $perItem
      */
-    function getPerItem();
+    public function getPerItem();
 
     /**
      * Set country
      *
      * @param string $country
      */
-    function setCountryCode($countryCode);
+    public function setCountryCode($countryCode);
 
     /**
      * Get country
      *
      * @return string $country
      */
-    function getCountryCode();
+    public function getCountryCode();
 
     /**
      * Set zone
      *
      * @param string $zone
      */
-    function setZone($zone);
+    public function setZone($zone);
 
     /**
      * Get zone
      *
      * @return string $zone
      */
-    function getZone();
+    public function getZone();
 
     /**
      * Set enabled
      *
      * @param boolean $enabled
      */
-    function setEnabled($enabled);
+    public function setEnabled($enabled);
 
     /**
      * Get enabled
      *
      * @return boolean $enabled
      */
-    function getEnabled();
+    public function getEnabled();
 
     /**
      * Set updatedAt
      *
      * @param datetime $updatedAt
      */
-    function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
      * @return datetime $updatedAt
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 
     /**
      * Set createdAt
      *
      * @param datetime $createdAt
      */
-    function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Get createdAt
      *
      * @return datetime $createdAt
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 }

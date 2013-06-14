@@ -27,7 +27,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
      * @return void
      */
     public function configureFormFields(FormMapper $formMapper)
@@ -40,7 +40,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
+     * @param  \Sonata\AdminBundle\Datagrid\ListMapper $list
      * @return void
      */
     public function configureListFields(ListMapper $list)
@@ -53,7 +53,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Show\ShowMapper $filter
+     * @param  \Sonata\AdminBundle\Show\ShowMapper $filter
      * @return void
      */
     public function configureShowFields(ShowMapper $filter)
@@ -66,7 +66,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
      * @return void
      */
     public function configureDatagridFilters(DatagridMapper $filter)

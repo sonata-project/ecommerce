@@ -54,7 +54,7 @@ abstract class BaseDelivery implements DeliveryInterface
     protected $createdAt;
 
     protected $product;
-    
+
     /**
      * Set productId
      *

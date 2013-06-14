@@ -49,7 +49,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      * @return void
      */
     private function addPaymentSection(ArrayNodeDefinition $node)
@@ -162,7 +162,6 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('url_return_ko')->defaultValue('sonata_payment_error')->cannotBeEmpty()->end()
                                     ->scalarNode('url_return_ok')->defaultValue('sonata_payment_confirmation')->cannotBeEmpty()->end()
 
-
                                     ->scalarNode('template')->defaultValue('SonataPaymentBundle:Payment:scellius.html.twig')->cannotBeEmpty()->end()
                                     ->scalarNode('shop_secret_key')->cannotBeEmpty()->end()
                                     ->scalarNode('request_command')->cannotBeEmpty()->end()
@@ -203,7 +202,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      * @return void
      */
     private function addModelSection(ArrayNodeDefinition $node)

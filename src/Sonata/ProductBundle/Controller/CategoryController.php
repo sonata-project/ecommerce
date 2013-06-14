@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Sonata\AdminBundle\Datagrid\ORM\Pager;
-use Doctrine\ORM\Query\Expr;
 
 class CategoryController extends Controller
 {
@@ -91,9 +90,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param null $category
-     * @param int $depth
-     * @param int $deep
+     * @param  null                                                $category
+     * @param  int                                                 $depth
+     * @param  int                                                 $deep
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function listSideMenuCategoriesAction($category = null, $depth = 1, $deep = 0)

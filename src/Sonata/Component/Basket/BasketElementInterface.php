@@ -22,54 +22,54 @@ interface BasketElementInterface
      *
      * @param integer $position
      */
-    function setPosition($position);
+    public function setPosition($position);
 
     /**
      * return the pos of the current basket element
      *
      * @return int
      */
-    function getPosition();
+    public function getPosition();
 
     /**
      * return the name of the basket element
      *
      * @return string
      */
-    function getName();
+    public function getName();
 
     /**
      * Define the related product
      *
      * @abstract
-     * @param string $productCode
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  string                                     $productCode
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return void
      */
-    function setProduct($productCode, ProductInterface $product);
+    public function setProduct($productCode, ProductInterface $product);
 
     /**
      * Return the related product
      *
      * @return \Sonata\Component\Product\ProductInterface
      */
-    function getProduct();
+    public function getProduct();
 
     /**
      * return the product id
      *
      * @return null
      */
-    function getProductId();
+    public function getProductId();
 
     /**
      * Never call this method, use the setProduct instead. This method is only used
      * by the form framework
      *
-     * @param int $productId
+     * @param  int  $productId
      * @return void
      */
-    function setProductId($productId);
+    public function setProductId($productId);
 
     /**
      * Return the VAT amount
@@ -77,7 +77,7 @@ interface BasketElementInterface
      *
      * @return $float
      */
-    function getVatAmount();
+    public function getVatAmount();
 
     /**
      * Return the VAT
@@ -85,108 +85,108 @@ interface BasketElementInterface
      *
      * @return $float
      */
-    function getVat();
+    public function getVat();
 
     /**
      * Return the price
      *
      * if $tva = true, return the price with vat
      *
-     * @param boolean $tva
+     * @param  boolean $tva
      * @return float
      */
-    function getUnitPrice($tva = false);
+    public function getUnitPrice($tva = false);
 
     /**
      * Return the total (price * quantity)
      *
      * if $tva = true, return the price with vat
      *
-     * @param boolean $tva
+     * @param  boolean $tva
      * @return float
      */
-    function getTotal($tva = false);
+    public function getTotal($tva = false);
 
     /**
      * return the basket element options array
      *
      * @return array
      */
-    function getOptions();
+    public function getOptions();
 
     /**
      * return a option value depends on the $name
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
-    function getOption($name);
+    public function getOption($name);
 
     /**
      * Define the option value
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
      */
-    function setOption($name, $value);
+    public function setOption($name, $value);
 
     /**
      * Define the price
      *
      * @param float $price
      */
-    function setPrice($price);
+    public function setPrice($price);
 
     /**
      * Define the quantity
      *
      * @param float $price
      */
-    function setQuantity($quantity);
+    public function setQuantity($quantity);
 
     /**
      * return the quantity
      *
      * @return int
      */
-    function getQuantity();
+    public function getQuantity();
 
     /**
      * Check if the basket element is still valid
      *
      * @return boolean
      */
-    function isValid();
+    public function isValid();
 
     /**
      * @abstract
-     * @param boolean $delete
+     * @param  boolean $delete
      * @return void
      */
-    function setDelete($delete);
+    public function setDelete($delete);
 
     /**
      * @abstract
      * @return booelan
      */
-    function getDelete();
+    public function getDelete();
 
     /**
      * @abstract
-     * @param \Sonata\Component\Product\ProductDefinition $productDefinition
+     * @param  \Sonata\Component\Product\ProductDefinition $productDefinition
      * @return void
      */
-    function setProductDefinition(ProductDefinition $productDefinition);
+    public function setProductDefinition(ProductDefinition $productDefinition);
 
     /**
      * @abstract
      * @return \Sonata\Component\Product\ProductManagerInterface
      */
-    function getProductManager();
+    public function getProductManager();
 
     /**
      * @abstract
      * @return string
      */
-    function getProductCode();
+    public function getProductCode();
 }

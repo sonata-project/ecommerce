@@ -17,179 +17,179 @@ interface CategoryInterface
      *
      * @param text $subDescription
      */
-    function setSubDescription($subDescription);
+    public function setSubDescription($subDescription);
 
     /**
      * Get sub_description
      *
      * @return text $subDescription
      */
-    function getSubDescription();
+    public function getSubDescription();
 
     /**
      * Set enabled
      *
      * @param boolean $enabled
      */
-    function setEnabled($enabled);
+    public function setEnabled($enabled);
 
     /**
      * Get enabled
      *
      * @return boolean $enabled
      */
-    function getEnabled();
+    public function getEnabled();
 
     /**
      * Set updatedAt
      *
      * @param Datetime $updatedAt
      */
-    function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
      * @return Datetime $updatedAt
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 
     /**
      * Set createdAt
      *
      * @param datetime $createdAt
      */
-    function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Get createdAt
      *
      * @return Datetime $createdAt
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * Set name
      *
      * @param string $name
      */
-    function setName($name);
+    public function setName($name);
 
     /**
      * Get name
      *
      * @return string $name
      */
-    function getName();
+    public function getName();
 
     /**
      * Set description
      *
      * @param text $description
      */
-    function setDescription($description);
+    public function setDescription($description);
 
     /**
      * Get description
      *
      * @return text $description
      */
-    function getDescription();
+    public function getDescription();
 
     /**
      * Set RAW description.
      *
      * @param text $rawDescription
      */
-    function setRawDescription($rawDescription);
+    public function setRawDescription($rawDescription);
 
     /**
      * Get RAW description.
      *
      * @return text $rawDescription
      */
-    function getRawDescription();
+    public function getRawDescription();
 
     /**
      * Set description formatter.
      *
      * @param text $descriptionFormatter
      */
-    function setDescriptionFormatter($descriptionFormatter);
+    public function setDescriptionFormatter($descriptionFormatter);
 
     /**
      * Get description formatter.
      *
      * @return text $descriptionFormatter
      */
-    function getDescriptionFormatter();
+    public function getDescriptionFormatter();
 
     /**
      * Set slug
      *
      * @param string $slug
      */
-    function setSlug($slug);
+    public function setSlug($slug);
 
     /**
      * Get slug
      *
      * @return string $slug
      */
-    function getSlug();
+    public function getSlug();
 
     /**
      * Set position
      *
      * @param integer $position
      */
-    function setPosition($position);
+    public function setPosition($position);
 
     /**
      * Get position
      *
      * @return integer $position
      */
-    function getPosition();
+    public function getPosition();
 
     /**
      * Add Children
      *
      * @param CaregoryInterface $children
-     * @param boolean $nested
+     * @param boolean           $nested
      */
-    function addChildren(CategoryInterface $children, $nested = false);
+    public function addChildren(CategoryInterface $children, $nested = false);
 
     /**
      * Get Children
      *
      * @return Doctrine\Common\Collections\Collection $children
      */
-    function getChildren();
+    public function getChildren();
 
     /**
      *
      * @return void
      */
-    function setChildren($children);
+    public function setChildren($children);
 
     /**
      *
      * @return boolean
      */
-    function hasChildren();
+    public function hasChildren();
 
     /**
      * Set Parent
      *
      * @param CaregoryInterface $parent
      */
-    function setParent(CategoryInterface $parent, $nested = false);
+    public function setParent(CategoryInterface $parent, $nested = false);
 
     /**
      * Get Parent
      *
      * @return CaregoryInterface
      */
-    function getParent();
+    public function getParent();
 }

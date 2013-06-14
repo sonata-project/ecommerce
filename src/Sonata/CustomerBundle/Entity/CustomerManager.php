@@ -14,7 +14,6 @@ use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use FOS\UserBundle\Model\UserInterface;
 
 class CustomerManager implements CustomerManagerInterface
 {
@@ -55,7 +54,7 @@ class CustomerManager implements CustomerManagerInterface
     /**
      * Updates a customer
      *
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @param  \Sonata\Component\Customer\CustomerInterface $customer
      * @return void
      */
     public function save(CustomerInterface $customer)
@@ -77,7 +76,7 @@ class CustomerManager implements CustomerManagerInterface
     /**
      * Finds one customer by the given criteria
      *
-     * @param array $criteria
+     * @param  array             $criteria
      * @return CustomerInterface
      */
     public function findOneBy(array $criteria)
@@ -88,7 +87,7 @@ class CustomerManager implements CustomerManagerInterface
     /**
      * Finds many customers by the given criteria
      *
-     * @param array $criteria
+     * @param  array               $criteria
      * @return CustomerInterface[]
      */
     public function findBy(array $criteria)
@@ -99,7 +98,7 @@ class CustomerManager implements CustomerManagerInterface
     /**
      * Deletes a customer
      *
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @param  \Sonata\Component\Customer\CustomerInterface $customer
      * @return void
      */
     public function delete(CustomerInterface $customer)

@@ -13,7 +13,7 @@ class BasketManager implements BasketManagerInterface
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param string $class
+     * @param string                      $class
      */
     public function __construct(EntityManager $em, $class)
     {
@@ -36,7 +36,7 @@ class BasketManager implements BasketManagerInterface
     /**
      * Updates a basket
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Sonata\Component\Basket\BasketInterface $basket
      * @return void
      */
     public function save(BasketInterface $basket)
@@ -56,7 +56,7 @@ class BasketManager implements BasketManagerInterface
     /**
      * Finds one basket by the given criteria
      *
-     * @param array $criteria
+     * @param  array                                    $criteria
      * @return \Sonata\Component\Basket\BasketInterface
      */
     public function findOneBy(array $criteria)
@@ -77,7 +77,7 @@ class BasketManager implements BasketManagerInterface
     /**
      * Finds many baskets by the given criteria
      *
-     * @param array $criteria
+     * @param  array                                      $criteria
      * @return \Sonata\Component\Basket\BasketInterface[]
      */
     public function findBy(array $criteria)
@@ -88,7 +88,7 @@ class BasketManager implements BasketManagerInterface
     /**
      * Deletes a basket
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Sonata\Component\Basket\BasketInterface $basket
      * @return void
      */
     public function delete(BasketInterface $basket)
@@ -98,7 +98,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @param  \Sonata\Component\Customer\CustomerInterface $customer
      * @return mixed|null
      */
     public function loadBasketPerCustomer(CustomerInterface $customer)
@@ -112,7 +112,7 @@ class BasketManager implements BasketManagerInterface
                 ->setParameter('customer', $customer->getId())
                 ->getQuery()
                 ->getSingleResult();
-        } catch(NoResultException $e) {
+        } catch (NoResultException $e) {
             return null;
         }
     }

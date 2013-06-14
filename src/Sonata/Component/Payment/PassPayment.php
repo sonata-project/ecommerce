@@ -11,7 +11,6 @@
 namespace Sonata\Component\Payment;
 
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
@@ -27,7 +26,7 @@ class PassPayment extends BasePayment
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \Buzz\Browser $browser
+     * @param \Buzz\Browser                              $browser
      */
     public function __construct(RouterInterface $router, Browser $browser = null)
     {
@@ -38,7 +37,7 @@ class PassPayment extends BasePayment
     /**
      * encode value for the bank
      *
-     * @param string $value
+     * @param  string $value
      * @return string the encoded value
      */
     public function encodeString($value)
@@ -55,8 +54,8 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Basket\BasketInterface   $basket
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return bool
      */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
@@ -65,7 +64,7 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Sonata\Component\Basket\BasketInterface $basket
      * @return bool
      */
     public function isBasketValid(BasketInterface $basket)
@@ -74,7 +73,7 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return bool
      */
     public function isRequestValid(TransactionInterface $transaction)
@@ -85,7 +84,7 @@ class PassPayment extends BasePayment
     /**
      * Method called when an error occurs
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleError(TransactionInterface $transaction)
@@ -98,8 +97,8 @@ class PassPayment extends BasePayment
     /**
      * Send post back confirmation to the bank when the bank callback the site
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return \Symfony\Component\HttpFoundation\Response, false otherwise
+     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
+     * @return \Symfony\Component\HttpFoundation\Response,    false otherwise
      */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
@@ -124,7 +123,7 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return bool
      */
     public function isCallbackValid(TransactionInterface $transaction)
@@ -144,7 +143,7 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param  \Sonata\Component\Order\OrderInterface     $order
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function callbank(OrderInterface $order)
@@ -174,7 +173,7 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return string
      */
     public function getOrderReference(TransactionInterface $transaction)
@@ -183,7 +182,7 @@ class PassPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return void
      */
     public function applyTransactionId(TransactionInterface $transaction)

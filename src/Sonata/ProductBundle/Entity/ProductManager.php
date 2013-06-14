@@ -35,7 +35,7 @@ class ProductManager implements ProductManagerInterface
     /**
      * Finds one product by the given criteria
      *
-     * @param array $criteria
+     * @param  array            $criteria
      * @return ProductInterface
      */
     public function findOneBy(array $criteria = array())
@@ -46,7 +46,7 @@ class ProductManager implements ProductManagerInterface
     /**
      * Finds products by the given criteria
      *
-     * @param array $criteria
+     * @param  array            $criteria
      * @return ProductInterface
      */
     public function findBy(array $criteria = array())
@@ -57,7 +57,7 @@ class ProductManager implements ProductManagerInterface
     /**
      * Saves a product
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return void
      */
     public function save(ProductInterface $product)
@@ -79,7 +79,7 @@ class ProductManager implements ProductManagerInterface
     /**
      * Deletes a product
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return void
      */
     public function delete(ProductInterface $product)
@@ -101,9 +101,9 @@ class ProductManager implements ProductManagerInterface
     }
 
     /**
-     * @param int $categoryId
-     * @param int $page
-     * @param int $limit
+     * @param  int                                    $categoryId
+     * @param  int                                    $page
+     * @param  int                                    $limit
      * @return \Sonata\AdminBundle\Datagrid\ORM\Pager
      */
     public function getProductsByCategoryIdPager($categoryId, $page = 1, $limit = 25)
@@ -116,7 +116,6 @@ class ProductManager implements ProductManagerInterface
             ->leftJoin('p.image', 'i')
             ->where('pc.category = :categoryId')
             ->setParameter('categoryId', $categoryId);
-
 
         $pager = new Pager($limit);
         $pager->setQuery(new ProxyQuery($queryBuilder));

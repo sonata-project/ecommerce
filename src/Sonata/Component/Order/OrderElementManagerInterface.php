@@ -18,44 +18,44 @@ interface OrderElementManagerInterface
      *
      * @return OrderElement
      */
-    function create();
+    public function create();
 
     /**
      * Deletes a orderElement
      *
-     * @param OrderElement $orderElement
+     * @param  OrderElement $orderElement
      * @return void
      */
-    function delete(OrderElementInterface $orderElement);
+    public function delete(OrderElementInterface $orderElement);
 
     /**
      * Finds one orderElement by the given criteria
      *
-     * @param array $criteria
+     * @param  array                 $criteria
      * @return OrderElementInterface
      */
-    function findOneBy(array $criteria);
+    public function findOneBy(array $criteria);
 
     /**
      * Finds one orderElement by the given criteria
      *
-     * @param array $criteria
+     * @param  array                 $criteria
      * @return OrderElementInterface
      */
-    function findBy(array $criteria);
+    public function findBy(array $criteria);
 
     /**
      * Returns the orderElement's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Updates an orderElement
      *
-     * @param OrderElement $orderElement
+     * @param  OrderElement $orderElement
      * @return void
      */
-    function save(OrderElementInterface $orderElement);
+    public function save(OrderElementInterface $orderElement);
 }

@@ -43,7 +43,7 @@ class Pool
     /**
      * return a PaymentInterface Object
      *
-     * @param string $code
+     * @param  string                                    $code
      * @return Sonata\Component\Payment\PaymentInterface
      */
     public function getMethod($code)

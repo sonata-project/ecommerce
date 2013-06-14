@@ -31,7 +31,7 @@ class Loader
     protected $basket;
 
     /**
-     * @param \Sonata\Component\Basket\BasketFactoryInterface $basketFactory
+     * @param \Sonata\Component\Basket\BasketFactoryInterface      $basketFactory
      * @param \Sonata\Component\Customer\CustomerSelectorInterface $customerSelector
      */
     public function __construct(BasketFactoryInterface $basketFactory, CustomerSelectorInterface $customerSelector)
@@ -51,7 +51,7 @@ class Loader
         if (!$this->basket) {
             try {
                 $this->basket = $this->basketFactory->load($this->customerSelector->get());
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 // something went wrong while loading the basket
                 throw $e;
             }

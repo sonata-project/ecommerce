@@ -12,7 +12,6 @@
 namespace Sonata\PaymentBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
@@ -68,8 +67,8 @@ class SonataPaymentExtension extends Extension
 
     /**
      * @throws \RuntimeException
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array $services
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param  array                                                   $services
      * @return void
      */
     public function configurePayment(ContainerBuilder $container, array $services)
@@ -110,7 +109,7 @@ class SonataPaymentExtension extends Extension
             $definition->addMethodCall('setEnabled', array($enabled));
             $definition->addMethodCall('setOptions', array($options));
 
-            foreach ((array)$settings['transformers'] as $name => $serviceId) {
+            foreach ((array) $settings['transformers'] as $name => $serviceId) {
                 $definition->addMethodCall('addTransformer', array($name, new Reference($serviceId)));
             }
 
@@ -146,8 +145,8 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array $transformers
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param  array                                                   $transformers
      * @return void
      */
     public function configureTransformer(ContainerBuilder $container, array $transformers)
@@ -160,7 +159,7 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param array $config
+     * @param  array $config
      * @return void
      */
     public function registerDoctrineMapping(array $config)

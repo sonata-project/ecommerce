@@ -11,13 +11,6 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\Component\Product\Pool;
-
-use Sonata\AdminBundle\Datagrid\ORM\ProxyQuery;
-use Sonata\AdminBundle\Datagrid\ORM\Pager;
-
-use Doctrine\ORM\EntityManager;
 
 class ProductCollectionManager extends ProductManager
 {

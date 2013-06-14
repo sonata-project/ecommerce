@@ -12,7 +12,6 @@
 namespace Sonata\PaymentBundle\Entity;
 
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 
 /**
@@ -53,7 +52,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param  \Sonata\Component\Order\OrderInterface $order
      * @return void
      */
     public function setOrder(OrderInterface $order)
@@ -72,7 +71,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param int $state
+     * @param  int  $state
      * @return void
      */
     public function setState($state)
@@ -97,7 +96,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param string $transactionId
+     * @param  string $transactionId
      * @return void
      */
     public function setTransactionId($transactionId)
@@ -123,7 +122,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param array $parameters
+     * @param  array $parameters
      * @return void
      */
     public function setParameters(array $parameters)
@@ -141,7 +140,7 @@ class BaseTransaction implements TransactionInterface
 
     /**
      * @param $name
-     * @param null $default
+     * @param  null $default
      * @return null
      */
     public function get($name, $default = null)
@@ -204,7 +203,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param \DateTime|null $createdAt
+     * @param  \DateTime|null $createdAt
      * @return void
      */
     public function setCreatedAt(\DateTime $createdAt = null)
@@ -221,7 +220,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param int $paymentCode
+     * @param  int  $paymentCode
      * @return void
      */
     public function setPaymentCode($paymentCode)

@@ -14,7 +14,6 @@ namespace Sonata\OrderBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 use Application\Sonata\OrderBundle\Entity\OrderElement;
 

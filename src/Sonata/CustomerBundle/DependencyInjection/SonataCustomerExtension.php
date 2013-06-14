@@ -12,9 +12,7 @@
 namespace Sonata\CustomerBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
@@ -31,7 +29,7 @@ class SonataCustomerExtension extends Extension
     /**
      * Loads the customer configuration.
      *
-     * @param array            $configs    An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
     public function load(array $configs, ContainerBuilder $container)
@@ -49,8 +47,8 @@ class SonataCustomerExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array $config
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param  array                                                   $config
      * @return void
      */
     public function registerParameters(ContainerBuilder $container, array $config)
@@ -63,7 +61,7 @@ class SonataCustomerExtension extends Extension
     }
 
     /**
-     * @param array $config
+     * @param  array $config
      * @return void
      */
     public function registerDoctrineMapping(array $config)
@@ -111,7 +109,6 @@ class SonataCustomerExtension extends Extension
             ),
             'orphanRemoval' => false,
         ));
-
 
         $collector->addAssociation($config['class']['address'], 'mapManyToOne', array(
             'fieldName'    => 'customer',

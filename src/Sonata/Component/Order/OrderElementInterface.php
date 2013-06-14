@@ -12,7 +12,6 @@ namespace Sonata\Component\Order;
 
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Customer\CustomerInterface;
 
 interface OrderElementInterface
 {
@@ -21,211 +20,211 @@ interface OrderElementInterface
      *
      * @param \Sonata\Component\Order\OrderInterface $order
      */
-    function setOrder(OrderInterface $order);
+    public function setOrder(OrderInterface $order);
 
     /**
      * Get order
      *
      * @return \Sonata\Component\Order\OrderInterface
      */
-    function getOrder();
+    public function getOrder();
 
     /**
      * Set quantity
      *
      * @param integer $quantity
      */
-    function setQuantity($quantity);
+    public function setQuantity($quantity);
 
     /**
      * Get quantity
      *
      * @return integer $quantity
      */
-    function getQuantity();
+    public function getQuantity();
 
     /**
      * Set price
      *
      * @param decimal $price
      */
-    function setPrice($price);
+    public function setPrice($price);
 
     /**
      * Get price
      *
      * @return decimal $price
      */
-    function getPrice();
+    public function getPrice();
 
     /**
      * Set vat
      *
      * @param decimal $vat
      */
-    function setVat($vat);
+    public function setVat($vat);
 
     /**
      * Get vat
      *
      * @return decimal $vat
      */
-    function getVat();
+    public function getVat();
 
     /**
      * Set designation
      *
      * @param string $designation
      */
-    function setDesignation($designation);
+    public function setDesignation($designation);
 
     /**
      * Get designation
      *
      * @return string $designation
      */
-    function getDesignation();
+    public function getDesignation();
 
     /**
      * Set description
      *
      * @param text $description
      */
-    function setDescription($description);
+    public function setDescription($description);
 
     /**
      * Get description
      *
      * @return text $description
      */
-    function getDescription();
+    public function getDescription();
 
     /**
      * Set serialize
      *
      * @param text $options
      */
-    function setOptions($options);
+    public function setOptions($options);
 
     /**
      * Get serialize
      *
      * @return text $options
      */
-    function getOptions();
+    public function getOptions();
 
     /**
      * @abstract
      * @param $rawProduct
      * @return void
      */
-    function setRawProduct($rawProduct);
+    public function setRawProduct($rawProduct);
 
     /**
      * @abstract
      * @return void
      */
-    function getRawProduct();
+    public function getRawProduct();
 
     /**
      * Set status
      *
      * @param integer $status
      */
-    function setStatus($status);
+    public function setStatus($status);
 
     /**
      * Get status
      *
      * @return integer $status
      */
-    function getStatus();
+    public function getStatus();
 
     /**
      * Set delivery_status
      *
      * @param integer $deliveryStatus
      */
-    function setDeliveryStatus($deliveryStatus);
+    public function setDeliveryStatus($deliveryStatus);
 
     /**
      * Get delivery_status
      *
      * @return integer $deliveryStatus
      */
-    function getDeliveryStatus();
+    public function getDeliveryStatus();
 
     /**
      * Set validated_at
      *
      * @param datetime $validatedAt
      */
-    function setValidatedAt(\DateTime $validatedAt = null);
+    public function setValidatedAt(\DateTime $validatedAt = null);
 
     /**
      * Get validated_at
      *
      * @return datetime $validatedAt
      */
-    function getValidatedAt();
+    public function getValidatedAt();
 
     /**
      * Add product
      *
      * @param ProductInterface $product
      */
-    function setProduct(ProductInterface $product);
+    public function setProduct(ProductInterface $product);
 
     /**
      * Get product
      *
      * @return ProductInterface $product
      */
-    function getProduct();
+    public function getProduct();
 
     /**
      * @abstract
      * @return void
      */
-    function getProductId();
+    public function getProductId();
 
     /**
      * Set product_type
      *
      * @param string $productType
      */
-    function setProductType($productType);
+    public function setProductType($productType);
 
     /**
      * Get product_type
      *
      * @return string $productType
      */
-    function getProductType();
+    public function getProductType();
 
     /**
      * @abstract
-     * @param \DateTime|null $createdAt
+     * @param  \DateTime|null $createdAt
      * @return void
      */
-    function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * @abstract
      * @return DateTime
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * @abstract
-     * @param \DateTime|null $updatedAt
+     * @param  \DateTime|null $updatedAt
      * @return void
      */
-    function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * @abstract
      * @return DateTime
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 }

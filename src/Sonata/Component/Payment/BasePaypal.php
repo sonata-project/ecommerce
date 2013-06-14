@@ -11,9 +11,6 @@
 namespace Sonata\Component\Payment;
 
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Product\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -51,7 +48,7 @@ abstract class BasePaypal extends BasePayment
     protected $webConnectorProvider = null;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param \Symfony\Component\Routing\RouterInterface              $router
      * @param null|\Symfony\Component\Translation\TranslatorInterface $translator
      */
     public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
@@ -63,7 +60,7 @@ abstract class BasePaypal extends BasePayment
     /**
      * return true if the request contains a valid `check` parameter
      *
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return bool
      */
     public function isRequestValid(TransactionInterface $transaction)
@@ -78,7 +75,7 @@ abstract class BasePaypal extends BasePayment
     /**
      * return the transaction_id sent by the bank
      *
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return void
      */
     public function applyTransactionId(TransactionInterface $transaction)
@@ -96,7 +93,7 @@ abstract class BasePaypal extends BasePayment
     /**
      * return the order reference from the transaction object
      *
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return string
      */
     public function getOrderReference(TransactionInterface $transaction)
@@ -210,7 +207,6 @@ abstract class BasePaypal extends BasePayment
         $paypal_cert_file   = $this->getOption('paypal_cert_file');
         $openssl            = $this->getOption('openssl');
 
-
         $openssl_cmd = "$openssl smime -sign -signer $cert_file -inkey $key_file " .
             "-outform der -nodetach -binary | $openssl smime -encrypt " .
             "-des3 -binary -outform pem $paypal_cert_file";
@@ -261,7 +257,7 @@ abstract class BasePaypal extends BasePayment
      *
      * @throws \RuntimeException
      *
-     * @return string  the encrypted data
+     * @return string the encrypted data
      */
     public function encryptViaFile($hash)
     {

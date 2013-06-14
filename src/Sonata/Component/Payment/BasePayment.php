@@ -12,8 +12,6 @@ namespace Sonata\Component\Payment;
 
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 abstract class BasePayment implements PaymentInterface
@@ -96,8 +94,8 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param string $name
-     * @param null $default
+     * @param  string $name
+     * @param  null   $default
      * @return null
      */
     public function getOption($name, $default = null)
@@ -117,7 +115,7 @@ abstract class BasePayment implements PaymentInterface
     /**
      * encode value for the bank
      *
-     * @param string $value
+     * @param  string $value
      * @return string the encoded value
      */
     public function encodeString($value)
@@ -126,7 +124,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @param  \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      * @return void
      */
     public function setLogger(LoggerInterface $logger)
@@ -153,7 +151,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return Response
      */
     public function callback(TransactionInterface $transaction)
@@ -208,7 +206,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param boolean $enabled
+     * @param  boolean $enabled
      * @return void
      */
     public function setEnabled($enabled)
@@ -225,7 +223,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param string $description
+     * @param  string $description
      * @return void
      */
     public function setDescription($description)
@@ -242,7 +240,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return mixed
      */
     public function report(TransactionInterface $transaction)

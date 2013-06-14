@@ -11,7 +11,6 @@
 
 namespace Sonata\ProductBundle\DataFixtures\ORM;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 
 use Application\Sonata\ProductBundle\Entity\Category;
@@ -73,7 +72,6 @@ class AllData implements FixtureInterface
 
                 $manager->persist($address);
             }
-
 
             $manager->persist($customer);
 
@@ -183,7 +181,6 @@ class AllData implements FixtureInterface
                 $category->addChildren($cat2);
 
                 $manager->persist($cat2);
-
 
             }
             $manager->flush();

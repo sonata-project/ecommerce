@@ -6,7 +6,6 @@ use Sonata\Component\Product\Pool;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Payment\Pool as PaymentPool;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class BasketBuilder implements BasketBuilderInterface
 {
@@ -31,10 +30,10 @@ class BasketBuilder implements BasketBuilderInterface
     protected $paymentPool;
 
     /**
-     * @param \Sonata\Component\Product\Pool $productPool
+     * @param \Sonata\Component\Product\Pool                     $productPool
      * @param \Sonata\Component\Customer\AddressManagerInterface $addressManager
-     * @param \Sonata\Component\Delivery\Pool $deliveryPool
-     * @param \Sonata\Component\Payment\Pool $paymentPool
+     * @param \Sonata\Component\Delivery\Pool                    $deliveryPool
+     * @param \Sonata\Component\Payment\Pool                     $paymentPool
      */
     public function __construct(Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool, PaymentPool $paymentPool)
     {

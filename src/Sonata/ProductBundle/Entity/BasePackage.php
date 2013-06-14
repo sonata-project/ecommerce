@@ -11,7 +11,7 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\PackageInterface;
-    
+
 /**
  * Sonata\ProductBundle\Entity\BasePackage
  */

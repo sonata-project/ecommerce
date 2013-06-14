@@ -23,7 +23,7 @@ use Sonata\ProductBundle\Entity\BaseDelivery;
 
 class Delivery extends \Sonata\Component\Delivery\BaseDelivery
 {
-    function isAddressRequired()
+    public function isAddressRequired()
     {
         return false;
     }
@@ -98,7 +98,6 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $productDelivery_high_bis = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $productDelivery_high_bis->expects($this->any())->method('getCode')->will($this->returnValue('ups_high_bis'));
-
 
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $product->expects($this->once())->method('getDelivery')->will($this->returnValue(array($productDelivery_low, $productDelivery_high, $productDelivery_high_bis)));

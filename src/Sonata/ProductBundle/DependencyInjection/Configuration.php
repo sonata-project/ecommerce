@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      * @return void
      */
     private function addProductSection(ArrayNodeDefinition $node)
@@ -57,7 +57,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      * @return void
      */
     private function addModelSection(ArrayNodeDefinition $node)

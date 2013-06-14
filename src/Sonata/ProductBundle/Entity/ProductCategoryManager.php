@@ -19,13 +19,13 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     protected $em;
     protected $repository;
     protected $class;
-    
+
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;
         $this->class = $class;
 
-        if(class_exists($class)) {
+        if (class_exists($class)) {
             $this->repository = $this->em->getRepository($class);
         }
     }
@@ -45,7 +45,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Updates a productCategory
      *
-     * @param ProductCategory $productCategory
+     * @param  ProductCategory $productCategory
      * @return void
      */
     public function updateProductCategory(ProductCategoryInterface $productCategory)
@@ -67,7 +67,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Finds one productCategory by the given criteria
      *
-     * @param array $criteria
+     * @param  array           $criteria
      * @return ProductCategory
      */
     public function findProductCategoryBy(array $criteria)
@@ -78,7 +78,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Deletes an productCategory
      *
-     * @param ProductCategory $productCategory
+     * @param  ProductCategory $productCategory
      * @return void
      */
     public function deleteProductCategory(ProductCategoryInterface $productCategory)

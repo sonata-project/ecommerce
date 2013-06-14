@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Transformer;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\DeliveryInterface;
@@ -31,8 +30,8 @@ class BasketTransformer extends BaseTransformer
     protected $productPool;
 
     /**
-     * @param \Sonata\Component\Order\OrderManagerInterface $orderManager
-     * @param \Sonata\Component\Product\Pool $productPool
+     * @param \Sonata\Component\Order\OrderManagerInterface          $orderManager
+     * @param \Sonata\Component\Product\Pool                         $productPool
      * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      */
     public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, LoggerInterface $logger = null)
@@ -46,7 +45,7 @@ class BasketTransformer extends BaseTransformer
      * transform a basket into order
      *
      * @throws \RuntimeException
-     * @param null|\Sonata\Component\Basket\BasketInterface $basket
+     * @param  null|\Sonata\Component\Basket\BasketInterface $basket
      * @return null|\Sonata\Component\Order\OrderInterface
      */
     public function transformIntoOrder(BasketInterface $basket)

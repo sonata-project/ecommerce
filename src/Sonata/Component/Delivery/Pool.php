@@ -23,7 +23,7 @@ class Pool
     /**
      * add a delivery method into the pool
      *
-     * @param \Sonata\Component\Delivery\DeliveryInterface $instance
+     * @param  \Sonata\Component\Delivery\DeliveryInterface $instance
      * @return void
      */
     public function addMethod(DeliveryInterface $instance)
@@ -43,7 +43,7 @@ class Pool
     /**
      * return a Delivery Object
      *
-     * @param string $code
+     * @param  string                                       $code
      * @return \Sonata\Component\Delivery\DeliveryInterface
      */
     public function getMethod($code)

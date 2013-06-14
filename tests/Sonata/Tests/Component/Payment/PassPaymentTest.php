@@ -12,9 +12,7 @@
 namespace Sonata\Tests\Component\Payment;
 
 use Sonata\Component\Payment\PassPayment;
-use Sonata\Component\Payment\Pool;
 use Buzz\Message\Response;
-use Buzz\Message\Request;
 use Buzz\Browser;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
@@ -23,7 +21,7 @@ class PassPaymentTest_Order extends BaseOrder
     /**
      * @return integer the order id
      */
-    function getId()
+    public function getId()
     {
         // TODO: Implement getId() method.
     }
@@ -61,7 +59,6 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $order = new PassPaymentTest_Order;
         $order->setCreatedAt($date);
 
-
         $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
@@ -70,12 +67,10 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($payment->isCallbackValid($transaction));
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
-
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $this->assertTrue($payment->isCallbackValid($transaction));
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
-
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
 

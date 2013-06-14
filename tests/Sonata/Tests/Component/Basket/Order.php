@@ -8,10 +8,8 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Basket;
 
-use Sonata\Component\Payment\BasePayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
 class Order extends BaseOrder

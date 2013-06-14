@@ -12,19 +12,24 @@
 namespace Sonata\BasketBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
-use Sonata\Component\Basket\InvalidBasketStateException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
-use Sonata\Component\Customer\CustomerSelector;
+
 use Sonata\Component\Customer\AddressInterface;
 
+/**
+ * This controller manages the Basket operation and most of the order process
+ */
 class BasketController extends Controller
 {
+    /**
+     * Shows the basket
+     *
+     * @param  Form                                       $form
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function indexAction($form = null)
     {
         $form = $form ?: $this->createForm('sonata_basket_basket', clone $this->get('sonata.basket'), array(
@@ -59,6 +64,11 @@ class BasketController extends Controller
         ));
     }
 
+    /**
+     * Update basket form rendering & saving
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function updateAction()
     {
         $form = $this->createForm('sonata_basket_basket', clone $this->get('sonata.basket'), array('validation_groups' => array('elements')));
@@ -69,8 +79,8 @@ class BasketController extends Controller
             $basket->reset(false); // remove delivery and payment information
             $basket->clean(); // clean the basket
 
-            // update the basket stored in session
-            $this->get('session')->set('sonata/basket', $basket);
+            // update the basket
+            $this->get('sonata.basket.factory')->save($basket);
 
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
@@ -80,6 +90,13 @@ class BasketController extends Controller
         ));
     }
 
+    /**
+     * Adds a product to the basket
+     *
+     * @throws MethodNotAllowedException
+     * @throws NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addProductAction()
     {
         $request = $this->get('request');
@@ -126,6 +143,11 @@ class BasketController extends Controller
         ));
     }
 
+    /**
+     * Resets (empties) the basket
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function resetAction()
     {
         $this->get('sonata.basket')->reset();
@@ -133,6 +155,11 @@ class BasketController extends Controller
         return new RedirectResponse($this->generateUrl('sonata_basket_index'));
     }
 
+    /**
+     * Displays a header preview of the basket
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function headerPreviewAction()
     {
         return $this->render('SonataBasketBundle:Basket:header_preview.html.twig', array(
@@ -140,15 +167,30 @@ class BasketController extends Controller
         ));
     }
 
+    /**
+     * Order process step 1: retrieve the customer associated with the logged in user if there's one
+     * or create an empty customer and put it in the basket
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function authentificationStepAction()
     {
         $customer = $this->get('sonata.customer.selector')->get();
 
-        $this->get('sonata.basket')->setCustomer($customer);
+        $basket = $this->get('sonata.basket');
+        $basket->setCustomer($customer);
+
+        $this->get('sonata.basket.factory')->save($basket);
 
         return new RedirectResponse($this->generateUrl('sonata_basket_delivery_address'));
     }
 
+    /**
+     * Order process step 5: choose payment mode
+     *
+     * @throws HttpException
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function paymentStepAction()
     {
         $basket = clone $this->get('sonata.basket');
@@ -191,6 +233,12 @@ class BasketController extends Controller
         ));
     }
 
+    /**
+     * Order process step 4: choose delivery mode
+     *
+     * @throws NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function deliveryStepAction()
     {
         $basket = clone $this->get('sonata.basket');
@@ -217,7 +265,6 @@ class BasketController extends Controller
                 // save the basket
                 $this->get('sonata.basket.factory')->save($form->getData());
 
-
                 return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
             }
         }
@@ -229,6 +276,12 @@ class BasketController extends Controller
         ));
     }
 
+    /**
+     * Order process step 2: choose an adress from existing ones or create a new one
+     *
+     * @throws NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function deliveryAddressStepAction()
     {
         $basket = $this->get('sonata.basket');
@@ -271,6 +324,11 @@ class BasketController extends Controller
         ));
     }
 
+    /**
+     * Order process step 6: order's review & conditions acceptance checkbox
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function finalReviewStepAction()
     {
         $basket = $this->get('sonata.basket');
@@ -282,9 +340,9 @@ class BasketController extends Controller
         if ($violations->count() > 0) {
             // basket not valid
 
-            // todo : add flash message in template
-            foreach($violations as $violation) {
-                $this->get('session')->getFlashBag()->add('error', 'Errors: '.$violation->getMessage());
+            // todo : add flash message rendering in template
+            foreach ($violations as $violation) {
+                $this->get('session')->getFlashBag()->add('error', 'Error: '.$violation->getMessage());
             }
 
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));

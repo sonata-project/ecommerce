@@ -17,8 +17,8 @@ interface DeliverySelectorInterface
 {
     /**
      * @abstract
-     * @param null|\Sonata\Component\Basket\BasketInterface $basket
+     * @param null|\Sonata\Component\Basket\BasketInterface    $basket
      * @param null|\Sonata\Component\Customer\AddressInterface $deliveryAddress
      */
-    function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
+    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
 }

@@ -13,8 +13,6 @@ namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketElement;
 
-use Doctrine\ORM\Mapping\ClassMetadata;
-
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
     public function getBasketElement($product = null)

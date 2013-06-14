@@ -21,7 +21,7 @@ class BasketTransformerTest_Order extends BaseOrder
     /**
      * @return integer the order id
      */
-    function getId()
+    public function getId()
     {
         // TODO: Implement getId() method.
     }

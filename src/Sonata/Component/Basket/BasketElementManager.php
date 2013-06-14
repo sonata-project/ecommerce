@@ -11,7 +11,7 @@ class BasketElementManager implements BasketElementManagerInterface
 
     /**
      * @param \Doctrine\ORM\EntityManager $em
-     * @param string $class
+     * @param string                      $class
      */
     public function __construct(EntityManager $em, $class)
     {
@@ -34,7 +34,7 @@ class BasketElementManager implements BasketElementManagerInterface
     /**
      * Updates a basket element
      *
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @return void
      */
     public function save(BasketElementInterface $basketElement)
@@ -54,7 +54,7 @@ class BasketElementManager implements BasketElementManagerInterface
     /**
      * Finds one basket by the given criteria
      *
-     * @param array $criteria
+     * @param  array                                           $criteria
      * @return \Sonata\Component\Basket\BasketElementInterface
      */
     public function findOneBy(array $criteria)
@@ -75,7 +75,7 @@ class BasketElementManager implements BasketElementManagerInterface
     /**
      * Finds many basket elements by the given criteria
      *
-     * @param array $criteria
+     * @param  array                                             $criteria
      * @return \Sonata\Component\Basket\BasketElementInterface[]
      */
     public function findBy(array $criteria)
@@ -86,7 +86,7 @@ class BasketElementManager implements BasketElementManagerInterface
     /**
      * Deletes a basket
      *
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @return void
      */
     public function delete(BasketElementInterface $basketElement)

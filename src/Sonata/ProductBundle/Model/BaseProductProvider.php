@@ -48,10 +48,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
+     * @param  \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
      * @return void
      */
-    function setBasketElementManager(BasketElementManagerInterface $basketElementManager)
+    public function setBasketElementManager(BasketElementManagerInterface $basketElementManager)
     {
         $this->basketElementManager = $basketElementManager;
     }
@@ -59,13 +59,13 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @return \Sonata\Component\Basket\BasketElementManagerInterface
      */
-    function getBasketElementManager()
+    public function getBasketElementManager()
     {
         return $this->basketElementManager;
     }
 
     /**
-     * @param array $options
+     * @param  array $options
      * @return void
      */
     public function setOptions(array $options = array())
@@ -82,8 +82,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param string $name
-     * @param mixed $default
+     * @param  string     $name
+     * @param  mixed      $default
      * @return array|null
      */
     public function getOption($name, $default = null)
@@ -95,7 +95,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     //   ORDER RELATED FUNCTIONS
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @return \Sonata\Component\Order\OrderElementInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement)
@@ -120,8 +120,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param string $format
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  string                                     $format
      * @return array
      */
     public function getRawProduct(ProductInterface $product, $format = 'json')
@@ -130,9 +130,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Application\Sonata\OrderBundle\Entity\OrderElement $orderElement
-     * @param string $type
-     * @param string $format
+     * @param  \Application\Sonata\OrderBundle\Entity\OrderElement $orderElement
+     * @param  string                                              $type
+     * @param  string                                              $format
      * @return \Sonata\Component\Product\ProductInterface
      */
     public function getProductFromRaw(OrderElement $orderElement, $type, $format = 'json')
@@ -161,7 +161,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param array $fields
+     * @param  array $fields
      * @return void
      */
     public function setVariationFields(array $fields = array())
@@ -178,7 +178,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
      * @return void
      */
     public function buildEditForm(FormMapper $formMapper)
@@ -204,7 +204,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
      * @return void
      */
     public function buildCreateForm(FormMapper $formMapper)
@@ -214,7 +214,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * @throws \RuntimeException
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return \Sonata\Component\Product\ProductInterface
      */
     public function createVariation(ProductInterface $product)
@@ -234,8 +234,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * @param \Sonata\Component\Product\ProductInterface $product
-     * @param string $name
-     * @param bool $forceCopy
+     * @param string                                     $name
+     * @param bool                                       $forceCopy
      * @return
      */
     public function copyVariation(ProductInterface $product, $name = 'all', $forceCopy = false)
@@ -247,17 +247,19 @@ abstract class BaseProductProvider implements ProductProviderInterface
         switch ($name) {
             case 'product':
                 $this->copyProductVariation($product, $forceCopy);
+
                 return;
 
             case 'all':
                 $this->copyProductVariation($product, $forceCopy);
+
                 return;
         }
     }
 
     /**
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param bool $forceCopy
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  bool                                       $forceCopy
      * @return void
      */
     public function copyProductVariation(ProductInterface $product, $forceCopy = false)
@@ -306,9 +308,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param null|\Sonata\Component\Product\ProductInterface $product
-     * @param array $options
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  null|\Sonata\Component\Product\ProductInterface $product
+     * @param  array                                           $options
      * @return void
      */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = array())
@@ -327,9 +329,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * This function return the form used in the product view page
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param \Symfony\Component\Form\FormBuilder $formBuilder
-     * @param array $options
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  \Symfony\Component\Form\FormBuilder        $formBuilder
+     * @param  array                                      $options
      * @return void
      */
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array())
@@ -344,9 +346,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Symfony\Component\Form\FormBuilder $formBuilder
-     * @param array $options
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  \Symfony\Component\Form\FormBuilder             $formBuilder
+     * @param  array                                           $options
      * @return void
      */
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array())
@@ -363,9 +365,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * If the basket is valid it will then replace the one in session
      *
-     * @param \Sonata\AdminBundle\Validator\ErrorElement $errorElement
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Sonata\AdminBundle\Validator\ErrorElement      $errorElement
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  \Sonata\Component\Basket\BasketInterface        $basket
      * @return void
      */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket)
@@ -418,9 +420,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * Returns true if the basket element is still valid
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  \Sonata\Component\Basket\BasketInterface             $basket
+     * @param  \Sonata\Component\Product\ProductInterface           $product
+     * @param  \Sonata\Component\Basket\BasketElementInterface      $basketElement
      * @return bool|\Sonata\Component\Basket\BasketElementInterface
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
@@ -441,7 +443,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         return $basketElement;
     }
-
 
     /**
      * Merge a product with another when the product is already present into the basket
@@ -488,7 +489,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      *
      * @return float price of the basket element
@@ -502,9 +503,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * Return true if the product can be added to the provided basket
      *
      * @abstract
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param array $options
+     * @param  \Sonata\Component\Basket\BasketInterface   $basket
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  array                                      $options
      * @return boolean
      */
     public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array())
@@ -515,7 +516,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * return a fresh product instance (so information are reloaded: enabled and stock ...)
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param  \Sonata\Component\Product\ProductInterface $product
      * @return \Sonata\Component\Product\ProductInterface
      */
     public function reloadProduct(ProductInterface $product)
@@ -524,7 +525,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param integer $id
+     * @param  integer $id
      * @return bool
      */
     public function findOneById($id)
@@ -544,8 +545,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * return the stock available for the current product
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @return int the stock available
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @return int                                        the stock available
      */
     public function getStockAvailable(ProductInterface $product)
     {

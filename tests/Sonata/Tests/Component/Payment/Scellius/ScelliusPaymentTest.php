@@ -12,28 +12,24 @@
 namespace Sonata\Tests\Component\Payment\Scellius;
 
 use Sonata\Component\Payment\Scellius\ScelliusPayment;
-use Sonata\Component\Payment\Pool;
 use Buzz\Message\Response;
-use Buzz\Message\Request;
-use Buzz\Browser;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface;
 
 class ScelliusPaymentTest_Order extends BaseOrder
 {
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
     /**
      * @return integer the order id
      */
-    function getId()
+    public function getId()
     {
         return $this->id;
     }

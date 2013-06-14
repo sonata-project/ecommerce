@@ -24,60 +24,60 @@ interface DeliveryInterface
      * @abstract
      * @return float the delivery base price
      */
-    function getPrice();
+    public function getPrice();
 
     /**
      * @abstract
      * @return float the vat linked to the delivery
      */
-    function getVat();
+    public function getVat();
 
     /**
      * @abstract
      * @return string the name of the delivery method
      */
-    function getName();
+    public function getName();
 
     /**
      * @abstract
      * @return boolean return true an address is required to use this delivery method
      */
-    function isAddressRequired();
+    public function isAddressRequired();
 
     /**
      * Return the delivery price
      *
      * @abstract
-     * @param \Sonata\Component\Basket\BasketInterface $basket
-     * @param bool $vat
+     * @param  \Sonata\Component\Basket\BasketInterface $basket
+     * @param  bool                                     $vat
      * @return void
      */
-    function getTotal(BasketInterface $basket, $vat = false);
+    public function getTotal(BasketInterface $basket, $vat = false);
 
     /**
      * Return the vat amount
      *
      * @abstract
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Sonata\Component\Basket\BasketInterface $basket
      * @return void
      */
-    function getVatAmount(BasketInterface $basket);
+    public function getVatAmount(BasketInterface $basket);
 
     /**
      * @abstract
      * @return string
      */
-    function getCode();
+    public function getCode();
 
     /**
      * @abstract
      * @return boolean
      */
-    function getEnabled();
+    public function getEnabled();
 
     /**
      * @abstract
      * @return boolean
      */
-    function getPriority();
+    public function getPriority();
 }

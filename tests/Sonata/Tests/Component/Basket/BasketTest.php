@@ -105,7 +105,6 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $definition = new ProductDefinition($provider, $manager);
 
-
         // retrieve the product mock
         $product = $this->getMockProduct();
 
@@ -126,7 +125,6 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $delivery = new Delivery;
         $basket->setDeliveryMethod($delivery);
-
 
         $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check');

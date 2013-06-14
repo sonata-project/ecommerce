@@ -18,44 +18,44 @@ interface AddressManagerInterface
      *
      * @return Address
      */
-    function create();
+    public function create();
 
     /**
      * Deletes a address
      *
-     * @param Address $address
+     * @param  Address $address
      * @return void
      */
-    function delete(AddressInterface $address);
+    public function delete(AddressInterface $address);
 
     /**
      * Finds one address by the given criteria
      *
-     * @param array $criteria
+     * @param  array $criteria
      * @return array
      */
-    function findBy(array $criteria);
+    public function findBy(array $criteria);
 
     /**
      * Finds one address by the given criteria
      *
-     * @param array $criteria
+     * @param  array            $criteria
      * @return AddressInterface
      */
-    function findOneBy(array $criteria);
+    public function findOneBy(array $criteria);
 
     /**
      * Returns the address's fully qualified class name
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 
     /**
      * Saves an address
      *
-     * @param Address $address
+     * @param  Address $address
      * @return void
      */
-    function save(AddressInterface $address);
+    public function save(AddressInterface $address);
 }

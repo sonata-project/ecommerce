@@ -49,9 +49,9 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\Form\FormView $formView
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Symfony\Component\Form\FormView                    $formView
+     * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
+     * @param  \Sonata\Component\Basket\BasketInterface            $basket
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
@@ -66,8 +66,8 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
+     * @param  \Sonata\Component\Basket\BasketInterface            $basket
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)

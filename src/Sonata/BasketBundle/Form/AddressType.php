@@ -12,12 +12,14 @@
 namespace Sonata\BasketBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Form\EventListener\BasketResizeFormListener;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * @author Hugo Briand <briand@ekino.com>
+ *
+ * Adress form type (used for deliveryAddressStep in Order process)
+ */
 class AddressType extends AbstractType
 {
     protected $addressClass;

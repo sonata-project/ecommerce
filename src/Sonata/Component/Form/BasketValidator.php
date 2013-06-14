@@ -15,7 +15,6 @@ use Symfony\Component\Validator\Constraint;
 
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Basket\BasketInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory;
 use Sonata\AdminBundle\Validator\ErrorElement;
 
@@ -36,8 +35,8 @@ class BasketValidator extends ConstraintValidator
     /**
      * The validator asks each product repository to validate the related basket element
      *
-     * @param BasketInterface   $basket
-     * @param Constraint        $constraint
+     * @param BasketInterface $basket
+     * @param Constraint      $constraint
      */
     public function validate($basket, Constraint $constraint)
     {

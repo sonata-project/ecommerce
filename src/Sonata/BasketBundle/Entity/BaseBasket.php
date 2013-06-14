@@ -17,7 +17,7 @@ abstract class BaseBasket extends Basket
      */
     public function setBasketElements($basketElements)
     {
-        foreach($basketElements as $basketElement) {
+        foreach ($basketElements as $basketElement) {
             $basketElement->setBasket($this);
         }
 

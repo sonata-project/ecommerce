@@ -13,7 +13,6 @@ namespace Sonata\Component\Payment;
 
 use Sonata\Component\Order\OrderInterface;
 
-
 /**
  * The Transaction class represents a callback request from the bank.
  *
@@ -43,130 +42,130 @@ interface TransactionInterface
 
     /**
      * @abstract
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param  \Sonata\Component\Order\OrderInterface $order
      * @return void
      */
-    function setOrder(OrderInterface $order);
+    public function setOrder(OrderInterface $order);
 
     /**
      * @abstract
      * @return \Sonata\Component\Order\OrderInterface
      */
-    function getOrder();
+    public function getOrder();
 
     /**
      * @abstract
-     * @param integer $state
+     * @param  integer $state
      * @return void
      */
-    function setState($state);
+    public function setState($state);
 
     /**
      *
      * @return integer
      */
-    function getState();
+    public function getState();
 
     /**
      * @param integer $transactionId
      */
-    function setTransactionId($transactionId);
+    public function setTransactionId($transactionId);
 
     /**
      *
      * @return integer
      */
-    function getTransactionId();
+    public function getTransactionId();
 
     /**
      *
      * @return boolean
      */
-    function isValid();
+    public function isValid();
 
     /**
      *
      * @param array $parameters
      */
-    function setParameters(array $parameters);
+    public function setParameters(array $parameters);
 
     /**
      * @return array
      */
-    function getParameters();
+    public function getParameters();
 
     /**
      *
-     * @param string $name
-     * @param mixed $default
+     * @param  string $name
+     * @param  mixed  $default
      * @return mixed
      */
-    function get($name, $default = null);
+    public function get($name, $default = null);
 
     /**
      *
      * @param integer $statusCode
      */
-    function setStatusCode($statusCode);
+    public function setStatusCode($statusCode);
 
     /**
      * return integer
      */
-    function getStatusCode();
+    public function getStatusCode();
 
     /**
      * return status list
      *
      * @return array
      */
-    static function getStatusList();
+    public static function getStatusList();
 
     /**
      * @abstract
-     * @param \DateTime|null $createdAt
+     * @param  \DateTime|null $createdAt
      * @return void
      */
-    function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * @abstract
      * @return \DateTime
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * @abstract
-     * @param integer $paymentCode
+     * @param  integer $paymentCode
      * @return void
      */
-    function setPaymentCode($paymentCode);
+    public function setPaymentCode($paymentCode);
 
     /**
      * @abstract
      * @return string
      */
-    function getPaymentCode();
+    public function getPaymentCode();
 
     /**
      * @abstract
      * @return string
      */
-    function getInformation();
+    public function getInformation();
 
     /**
      * @abstract
      * @param string $message
      */
-    function setInformation($message);
+    public function setInformation($message);
 
     /**
      * @abstract
      * @param $message
      */
-    function addInformation($message);
+    public function addInformation($message);
 
     /**
      * @abstract
      */
-    function getStatusName();
+    public function getStatusName();
 }

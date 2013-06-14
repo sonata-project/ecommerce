@@ -13,8 +13,6 @@ namespace Sonata\Tests\PaymentBundle\Entity;
 
 use Sonata\PaymentBundle\Entity\BaseTransaction;
 use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Payment\PaymentInterface;
 
 class Transaction extends BaseTransaction
 {

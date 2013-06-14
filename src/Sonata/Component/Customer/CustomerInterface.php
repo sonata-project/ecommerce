@@ -19,99 +19,98 @@ interface CustomerInterface
      *
      * @param \DateTime|null $createdAt
      */
-    function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Get createdAt
      *
      * @return \DateTime createdAt
      */
-    function getCreatedAt();
+    public function getCreatedAt();
 
     /**
      * Set firstname
      *
      * @param string $firstname
      */
-    function setFirstname($firstname);
+    public function setFirstname($firstname);
 
     /**
      * Get firstname
      *
      * @return string $firstname
      */
-    function getFirstname();
+    public function getFirstname();
 
     /**
      * Get full name
      *
      * @return string
      */
-    function getFullname();
+    public function getFullname();
 
     /**
      * Set lastname
      *
      * @param string $lastname
      */
-    function setLastname($lastname);
+    public function setLastname($lastname);
 
     /**
      * Get lastname
      *
      * @return string $lastname
      */
-    function getLastname();
+    public function getLastname();
 
     /**
      * Set updatedAt
      *
      * @param \DateTime|null $updatedAt
      */
-    function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
      * @return \DateTime $updatedAt
      */
-    function getUpdatedAt();
+    public function getUpdatedAt();
 
     /**
      * Set user
      *
      * @param \FOS\UserBundle\Model\UserInterface $user
      */
-    function setUser(UserInterface $user);
+    public function setUser(UserInterface $user);
 
     /**
      * Get user
      *
      * @return \FOS\UserBundle\Model\UserInterface $user
      */
-    function getUser();
+    public function getUser();
 
     /**
      * Get id
      *
      * @return integer $id
      */
-    function getId();
-
+    public function getId();
 
     /**
      * @return void
      */
-    function getEmail();
+    public function getEmail();
 
     /**
      * @return string
      */
-    function getLocale();
+    public function getLocale();
 
     /**
-     * @param string $locale
+     * @param  string $locale
      * @return void
      */
-    function setLocale($locale);
+    public function setLocale($locale);
 }

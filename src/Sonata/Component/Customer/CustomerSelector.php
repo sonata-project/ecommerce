@@ -6,7 +6,6 @@ use Sonata\Component\Customer\CustomerManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
@@ -32,10 +31,10 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $locale;
 
     /**
-     * @param \Sonata\Component\Customer\CustomerManagerInterface $customerManager
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @param \Sonata\Component\Customer\CustomerManagerInterface       $customerManager
+     * @param \Symfony\Component\HttpFoundation\Session\Session         $session
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
-     * @param LocaleDetectorInterface $localeDetector
+     * @param LocaleDetectorInterface                                   $localeDetector
      */
     public function __construct(CustomerManagerInterface $customerManager, Session $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
     {

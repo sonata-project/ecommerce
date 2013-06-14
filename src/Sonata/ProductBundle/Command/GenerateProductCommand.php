@@ -13,7 +13,6 @@ namespace Sonata\ProductBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
@@ -92,7 +91,7 @@ class GenerateProductCommand extends ContainerAwareCommand
             sprintf('%s/Provider',           $bundle_dir),
         );
 
-        foreach ($dirs as $dir ) {
+        foreach ($dirs as $dir) {
             $filesystem->mkdir($dir);
         }
 

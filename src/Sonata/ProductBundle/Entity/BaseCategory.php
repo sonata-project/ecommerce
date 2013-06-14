@@ -260,7 +260,7 @@ abstract class BaseCategory implements CategoryInterface
      * @param  $text
      * @return mixed|string
      */
-    static public function slugify($text)
+    public static function slugify($text)
     {
         // replace non letter or digits by -
         $text = preg_replace('~[^\\pL\d]+~u', '-', $text);

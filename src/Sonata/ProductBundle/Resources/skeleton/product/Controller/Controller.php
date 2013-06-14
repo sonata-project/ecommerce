@@ -12,7 +12,6 @@
 namespace Application\Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Application\Sonata\ProductBundle\Entity\{{ product }};
 
@@ -24,7 +23,7 @@ use Application\Sonata\ProductBundle\Product\{{ product }}\{{ product }}AddBaske
  * for the current product
  *
  */
-class {{ product }}Controller extends \Sonata\ProductBundle\Controller\BaseProductController
+class Controller product }}Controller extends \Sonata\ProductBundle\Controller\BaseProductController
 {
 
 }

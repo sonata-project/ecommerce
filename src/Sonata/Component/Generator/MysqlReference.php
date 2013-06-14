@@ -28,7 +28,7 @@ class MysqlReference implements ReferenceInterface
      * Append a valid reference number to the invoice, the order must be persisted first
      *
      * @throws \RuntimeException
-     * @param \Sonata\Component\Invoice\InvoiceInterface $invoice
+     * @param  \Sonata\Component\Invoice\InvoiceInterface $invoice
      * @return void
      */
     public function invoice(InvoiceInterface $invoice)
@@ -47,7 +47,7 @@ class MysqlReference implements ReferenceInterface
      * Append a valid reference number to the order, the order must be persisted first
      *
      * @throws \RuntimeException
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param  \Sonata\Component\Order\OrderInterface $order
      * @return void
      */
     public function order(OrderInterface $order)
@@ -95,7 +95,7 @@ class MysqlReference implements ReferenceInterface
             $connection->update($tableName, array('reference' => $reference), array('id' => $object->getId()));
             $object->setReference($reference);
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $connection->exec(sprintf('UNLOCK TABLES'));
 
             throw $e;

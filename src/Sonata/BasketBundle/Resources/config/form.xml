@@ -11,7 +11,7 @@
 
         <service id="sonata.basket.form.type.address" class="Sonata\BasketBundle\Form\AddressType">
             <tag name="form.type" alias="sonata_basket_address" />
-            
+
             <argument>%sonata.customer.address.class%</argument>
         </service>
 

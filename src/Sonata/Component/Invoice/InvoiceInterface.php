@@ -14,28 +14,28 @@ use Sonata\Component\Customer\CustomerInterface;
 interface InvoiceInterface
 {
 
-    function getId();
+    public function getId();
 
     /**
      * Set reference
      *
      * @param string $reference
      */
-    function setReference($reference);
+    public function setReference($reference);
 
     /**
      * Get reference
      *
      * @return string $reference
      */
-    function getReference();
+    public function getReference();
 
     /**
      * Set currency
      *
      * @param string $currency
      */
-    function setCurrency($currency);
+    public function setCurrency($currency);
 
     /**
      * Get currency
@@ -49,208 +49,208 @@ interface InvoiceInterface
      *
      * @param integer $status
      */
-    function setStatus($status);
+    public function setStatus($status);
 
     /**
      * Get status
      *
      * @return integer $status
      */
-    function getStatus();
+    public function getStatus();
 
     /**
      * Set totalInc
      *
      * @param decimal $totalInc
      */
-    function setTotalInc($totalInc);
+    public function setTotalInc($totalInc);
 
     /**
      * Get totalInc
      *
      * @return decimal $totalInc
      */
-    function getTotalInc();
+    public function getTotalInc();
 
     /**
      * Set totalExcl
      *
      * @param decimal $totalExcl
      */
-    function setTotalExcl($totalExcl);
+    public function setTotalExcl($totalExcl);
 
     /**
      * Get totalExcl
      *
      * @return decimal $totalExcl
      */
-    function getTotalExcl();
+    public function getTotalExcl();
 
     /**
      * Set name
      *
      * @param string $name
      */
-    function setName($name);
+    public function setName($name);
 
     /**
      * Get name
      *
      * @return string $name
      */
-    function getName();
+    public function getName();
 
     /**
      * Set phone
      *
      * @param string $phone
      */
-    function setPhone($phone);
+    public function setPhone($phone);
 
     /**
      * Get phone
      *
      * @return string $phone
      */
-    function getPhone();
+    public function getPhone();
 
     /**
      * Set address1
      *
      * @param string $address1
      */
-    function setAddress1($address1);
+    public function setAddress1($address1);
 
     /**
      * Get address1
      *
      * @return string $address1
      */
-    function getAddress1();
+    public function getAddress1();
 
     /**
      * Set address2
      *
      * @param string $address2
      */
-    function setAddress2($address2);
+    public function setAddress2($address2);
 
     /**
      * Get address2
      *
      * @return string $address2
      */
-    function getAddress2();
+    public function getAddress2();
 
     /**
      * Set address3
      *
      * @param string $address3
      */
-    function setAddress3($address3);
+    public function setAddress3($address3);
 
     /**
      * Get address3
      *
      * @return string $address3
      */
-    function getAddress3();
+    public function getAddress3();
 
     /**
      * Set city
      *
      * @param string $city
      */
-    function setCity($city);
+    public function setCity($city);
 
     /**
      * Get city
      *
      * @return string $city
      */
-    function getCity();
+    public function getCity();
 
     /**
      * Set postcode
      *
      * @param string $postcode
      */
-    function setPostcode($postcode);
+    public function setPostcode($postcode);
 
     /**
      * Get postcode
      *
      * @return string $postcode
      */
-    function getPostcode();
+    public function getPostcode();
 
     /**
      * Set country
      *
      * @param string $country
      */
-    function setCountry($country);
+    public function setCountry($country);
 
     /**
      * Get country
      *
      * @return string $country
      */
-    function getCountry();
+    public function getCountry();
 
     /**
      * Set fax
      *
      * @param string $fax
      */
-    function setFax($fax);
+    public function setFax($fax);
 
     /**
      * Get fax
      *
      * @return string $fax
      */
-    function getFax();
+    public function getFax();
 
     /**
      * Set email
      *
      * @param string $email
      */
-    function setEmail($email);
+    public function setEmail($email);
 
     /**
      * Get email
      *
      * @return string $email
      */
-    function getEmail();
+    public function getEmail();
 
     /**
      * Set mobile
      *
      * @param string $mobile
      */
-    function setMobile($mobile);
+    public function setMobile($mobile);
 
     /**
      * Get mobile
      *
      * @return string $mobile
      */
-    function getMobile();
+    public function getMobile();
 
     /**
      * Set user
      *
      * @param \Sonata\Component\Customer\CustomerInterface $user
      */
-    function setCustomer(CustomerInterface $customer);
+    public function setCustomer(CustomerInterface $customer);
 
     /**
      * Get user
      *
      * @return Application\Sonata\UserBundle\Entity\User $user
      */
-    function getCustomer();
+    public function getCustomer();
 }

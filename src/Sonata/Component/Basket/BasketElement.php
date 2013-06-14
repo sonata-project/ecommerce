@@ -12,8 +12,6 @@
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Product\ProductDefinition;
 
 class BasketElement implements \Serializable, BasketElementInterface

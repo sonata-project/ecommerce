@@ -11,7 +11,6 @@
 namespace Sonata\Component\Payment;
 
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
@@ -28,7 +27,7 @@ class CheckPayment extends BasePayment
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \Buzz\Browser $browser
+     * @param \Buzz\Browser                              $browser
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, Browser $browser)
     {

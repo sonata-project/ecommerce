@@ -11,7 +11,6 @@
 namespace Sonata\Component\Payment\Scellius;
 
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
@@ -37,8 +36,8 @@ class ScelliusPayment extends BasePayment
     protected $transactionGenerator;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @param \Symfony\Component\Routing\RouterInterface                 $router
+     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface          $logger
      * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, ScelliusTransactionGeneratorInterface $transactionGenerator, $debug)
@@ -497,7 +496,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param  \Sonata\Component\Order\OrderInterface $order
      * @return string
      */
     public function getLanguage(OrderInterface $order)
@@ -627,7 +626,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return void
      */
     public function applyTransactionId(TransactionInterface $transaction)

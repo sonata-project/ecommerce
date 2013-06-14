@@ -11,24 +11,25 @@
 
 namespace Sonata\Component\Product;
 
+use Symfony\Component\Validator\Constraints as Validation;
+
 class AddBasket
 {
 
     /**
-     * @validation:NotBlank()
+     * @Validation\NotBlank()
      */
     private $productId;
 
     /**
-     * @validation:NotBlank()
-     * @validation:AssertType("object")
+     * @Validation\NotBlank()
+     * @Validation\Type(type="object")
      */
     private $product;
 
     /**
-     * @validation:NotBlank()
-     * @validation:Min(1)
-     * @validation:Max(64)
+     * @Validation\NotBlank()
+     * @Validation\Range(min=1, max=64)
      */
     private $quantity;
 
@@ -43,7 +44,7 @@ class AddBasket
     /**
      * The product id is only set if there is not product attached to this object
      *
-     * @param  integet $productId the product id
+     * @param integet $productId the product id
      */
     public function setProductId($productId)
     {
@@ -69,7 +70,7 @@ class AddBasket
     /**
      * Set the quantity
      *
-     * @param  integer $quantity
+     * @param integer $quantity
      */
     public function setQuantity($quantity)
     {

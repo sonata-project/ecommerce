@@ -13,7 +13,6 @@ namespace Sonata\CustomerBundle\Entity;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
 
 class AddressManager implements AddressManagerInterface
 {
@@ -26,7 +25,7 @@ class AddressManager implements AddressManagerInterface
         $this->em    = $em;
         $this->class = $class;
 
-        if(class_exists($class)) {
+        if (class_exists($class)) {
             $this->repository = $this->em->getRepository($class);
         }
     }
@@ -46,7 +45,7 @@ class AddressManager implements AddressManagerInterface
     /**
      * Updates an address
      *
-     * @param Address $address
+     * @param  Address $address
      * @return void
      */
     public function save(AddressInterface $address)
@@ -68,7 +67,7 @@ class AddressManager implements AddressManagerInterface
     /**
      * Finds one address by the given criteria
      *
-     * @param array $criteria
+     * @param  array   $criteria
      * @return Address
      */
     public function findBy(array $criteria)
@@ -84,7 +83,7 @@ class AddressManager implements AddressManagerInterface
     /**
      * Deletes an address
      *
-     * @param Address $address
+     * @param  Address $address
      * @return void
      */
     public function delete(AddressInterface $address)

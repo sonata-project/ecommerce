@@ -12,15 +12,9 @@
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\Basket;
-use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Product\Pool;
 use Sonata\Tests\Component\Basket\Delivery;
 use Sonata\Tests\Component\Basket\Payment;
-
-use Sonata\Component\Customer\AddressManagerInterface;
-use Sonata\Component\Customer\CustomerManagerInterface;
-use Sonata\Component\Delivery\Pool as DeliveryPool;
-use Sonata\Component\Payment\Pool as PaymentPool;
 
 use Sonata\Component\Basket\Loader;
 
