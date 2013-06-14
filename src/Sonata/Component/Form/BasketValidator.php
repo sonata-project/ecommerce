@@ -20,12 +20,27 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 
 class BasketValidator extends ConstraintValidator
 {
+    /**
+     * @var ProductPool
+     */
     protected $productPool;
 
+    /**
+     * @var BasketInterface
+     */
     protected $basket;
 
+    /**
+     * @var ConstraintValidatorFactory
+     */
     protected $constraintValidatorFactory;
 
+    /**
+     * Constructor
+     *
+     * @param ProductPool $productPool
+     * @param ConstraintValidatorFactory $constraintValidatorFactory
+     */
     public function __construct(ProductPool $productPool, ConstraintValidatorFactory $constraintValidatorFactory)
     {
         $this->productPool  = $productPool;
@@ -71,7 +86,7 @@ class BasketValidator extends ConstraintValidator
 //        $this->context->setGroup($group);
 
         if (count($this->context->getViolations()) > 0) {
-            $context->addViolationAt($contextPropertyPath, $constraint->message, array(), null);
+            $this->context->addViolationAt($contextPropertyPath, $constraint->message, array(), null);
         }
 
         return;
