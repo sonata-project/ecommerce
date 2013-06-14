@@ -6,6 +6,14 @@
                 <source>sonata_ecommerce</source>
                 <target>Ecommerce</target>
             </trans-unit>
+            <trans-unit id="product">
+                <source>product</source>
+                <target>Product</target>
+            </trans-unit>
+            <trans-unit id="category">
+                <source>category</source>
+                <target>Category</target>
+            </trans-unit>
 
             <trans-unit id="sidemenu.link_product_edit">
                 <source>sidemenu.link_product_edit</source>
@@ -27,6 +35,81 @@
             <trans-unit id="breadcrumb.link_product_edit">
                 <source>breadcrumb.link_product_edit</source>
                 <target>Edit</target>
+            </trans-unit>
+
+            <trans-unit id="list.label_enabled">
+                <source>list.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="list.label_price">
+                <source>list.label_price</source>
+                <target>Price</target>
+            </trans-unit>
+            <trans-unit id="list.label_stock">
+                <source>list.label_stock</source>
+                <target>Stock</target>
+            </trans-unit>
+            <trans-unit id="list.label_position">
+                <source>list.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="list.label_created_at">
+                <source>list.label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="list.label_updated_at">
+                <source>list.label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_enabled">
+                <source>filter.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="filter.label_name">
+                <source>filter.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="form.label_enabled">
+                <source>form.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="form.label_sku">
+                <source>form.label_sku</source>
+                <target>Sku</target>
+            </trans-unit>
+            <trans-unit id="form.label_description_formatter">
+                <source>form.label_description_formatter</source>
+                <target>Description format</target>
+            </trans-unit>
+            <trans-unit id="form.label_raw_description">
+                <source>form.label_raw_description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="form.label_price">
+                <source>form.label_price</source>
+                <target>Price</target>
+            </trans-unit>
+            <trans-unit id="form.label_vat">
+                <source>form.label_vat</source>
+                <target>VAT</target>
+            </trans-unit>
+            <trans-unit id="form.label_stock">
+                <source>form.label_stock</source>
+                <target>Stock</target>
+            </trans-unit>
+            <trans-unit id="form.label_image">
+                <source>form.label_image</source>
+                <target>Image</target>
             </trans-unit>
         </body>
     </file>
