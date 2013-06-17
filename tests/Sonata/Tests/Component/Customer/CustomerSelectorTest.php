@@ -43,7 +43,10 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(false));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext);
+        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+
+        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
         $customer = $customerSelector->get();
 
@@ -67,7 +70,10 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext);
+        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+
+        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
         $customerSelector->get();
     }
@@ -90,7 +96,10 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext);
+        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+
+        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
         $customer = $customerSelector->get();
 
@@ -116,7 +125,10 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext);
+        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+
+        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
         $customer = $customerSelector->get();
 
@@ -145,7 +157,10 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext);
+        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+
+        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
         $customer = $customerSelector->get();
 

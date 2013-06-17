@@ -24,7 +24,6 @@
                 <directory>./tests</directory>
                 <directory>./src/Sonata/*/DataFixtures/</directory>
                 <directory>./src/Sonata/*/Resources/</directory>
-
             </exclude>
         </whitelist>
     </filter>
