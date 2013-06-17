@@ -17,6 +17,15 @@
     <property name="dir.docs.rst"                value="${dir.docs}/rst" />
     <property name="dir.docs.php"                value="${dir.docs}/php" />
 
+   <!-- Build settings -->
+   <property name="file.reports.cs"              value="${dir.reports.check}/checkstyle.xml" />
+   <property name="file.reports.pmd"             value="${dir.reports.check}/pmd.xml" />
+   <property name="file.reports.cpd"             value="${dir.reports.check}/cpd.xml" />
+   <property name="file.reports.phpunit"         value="${dir.reports.test.unit}/phpunit.xml" />
+   <property name="file.reports.coverage.clover" value="${dir.reports.test.coverage}/clover.xml" />
+   <property name="file.reports.coverage.html"   value="${dir.reports.test.coverage}/html" />
+   <property name="option.composer.mode"         value="install --dev" />
+
     <!-- Source paths -->
     <property name="dir.src"                     value="${project.basedir}" />
     <property name="dir.src.rst"                 value="${dir.src}/Resources/doc" />
@@ -86,7 +95,7 @@
             <fileset refid="sourcecode" />
             <config name="error_severity"   value="1"/>
             <config name="warning_severity" value="5"/>
-            <formatter type="checkstyle" outfile="${dir.reports.check}/checkstyle.xml" />
+            <formatter type="checkstyle" outfile="${file.reports.cs}" />
         </phpcodesniffer>
 
     </target>
@@ -98,7 +107,7 @@
 
         <phpcpd>
             <fileset refid="sourcecode" />
-            <formatter type="pmd" outfile="${dir.reports.check}/cpd.xml" />
+            <formatter type="pmd" outfile="${file.reports.cpd}" />
         </phpcpd>
 
     </target>
@@ -119,7 +128,7 @@
 
         <phpmd rulesets="${config.pmd}">
             <fileset refid="sourcecode" />
-            <formatter type="xml" outfile="${dir.reports.check}/pmd.xml" />
+            <formatter type="xml" outfile="${file.reports.pmd}" />
         </phpmd>
 
     </target>
@@ -134,8 +143,7 @@
         <mkdir dir="${dir.reports.test}" />
 
         <echo msg="Installing/Updating vendors..." />
-        <exec command="composer update --dev" passthru="true"/>
-
+        <exec command="composer ${option.composer.mode}" passthru="true"/>
     </target>
 
     <!-- Prepare unit test environment -->
@@ -153,9 +161,9 @@
             depends="test:prepare, test:unit:prepare">
 
         <exec executable="phpunit" logoutput="true">
-            <arg line="--log-junit ${dir.reports.test.unit}/phpunit.xml" />
-            <arg line="--coverage-clover ${dir.reports.test.coverage}/clover.xml" />
-            <arg line="--coverage-html ${dir.reports.test.coverage}/html" />
+            <arg line="--log-junit ${file.reports.phpunit}" />
+            <arg line="--coverage-clover ${file.reports.coverage.clover}" />
+            <arg line="--coverage-html ${file.reports.coverage…html}" />
             <arg line="-c ${config.phpunit}" />
         </exec>
 
