@@ -4,7 +4,6 @@
     <!-- Config files -->
     <property name="dir.config"                  value="${project.basedir}" />
     <property name="config.phpunit"              value="${dir.config}/phpunit.xml.dist" />
-    <property name="config.pmd"                  value="${dir.config}/pmd.xml.dist" />
 
     <!-- Build paths -->
     <property name="dir.build"                   value="${project.basedir}/build" />
@@ -156,7 +155,6 @@
         <exec executable="phpunit" logoutput="true">
             <arg line="--log-junit ${dir.reports.test.unit}/phpunit.xml" />
             <arg line="--coverage-clover ${dir.reports.test.coverage}/clover.xml" />
-            <arg line="--coverage-html ${dir.reports.test.coverage}/html" />
             <arg line="-c ${config.phpunit}" />
         </exec>
 
