@@ -18,6 +18,9 @@ use Sonata\Component\Delivery\DeliveryInterface;
  */
 class Pool
 {
+    /**
+     * @var array
+     */
     protected $methods = array();
 
     /**
@@ -32,7 +35,6 @@ class Pool
     }
 
     /**
-     *
      * @return array of delivery methods
      */
     public function getMethods()

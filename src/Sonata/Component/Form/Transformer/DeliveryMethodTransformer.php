@@ -21,6 +21,9 @@ use Sonata\Component\Delivery\Pool as DeliveryPool;
  */
 class DeliveryMethodTransformer implements DataTransformerInterface
 {
+    /**
+     * @var DeliveryPool
+     */
     protected $deliveryPool;
 
     public function __construct(DeliveryPool $deliveryPool)
@@ -28,11 +31,17 @@ class DeliveryMethodTransformer implements DataTransformerInterface
         $this->deliveryPool = $deliveryPool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function reverseTransform($value)
     {
         return $this->deliveryPool->getMethod($value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function transform($value)
     {
         return $value ? $value->getCode() : null;

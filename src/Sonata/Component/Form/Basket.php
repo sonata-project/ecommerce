@@ -14,8 +14,14 @@ use Symfony\Component\Validator\Constraint;
 
 class Basket extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = "Basket not valid";
 
+    /**
+     * {@inheritDoc}
+     */
     public function validatedBy()
     {
         return 'sonata_basket_validator';

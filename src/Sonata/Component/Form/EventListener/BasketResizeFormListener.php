@@ -26,8 +26,14 @@ class BasketResizeFormListener implements EventSubscriberInterface
      */
     private $factory;
 
+    /**
+     * @var BasketInterface
+     */
     private $basket;
 
+    /**
+     * @var array
+     */
     private $removed = array();
 
     public function __construct(FormFactoryInterface $factory, BasketInterface $basket)
@@ -36,6 +42,9 @@ class BasketResizeFormListener implements EventSubscriberInterface
         $this->basket   = $basket;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public static function getSubscribedEvents()
     {
         return array(
@@ -44,6 +53,9 @@ class BasketResizeFormListener implements EventSubscriberInterface
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();

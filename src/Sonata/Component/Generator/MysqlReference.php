@@ -17,6 +17,9 @@ use Doctrine\ORM\EntityManager;
 
 class MysqlReference implements ReferenceInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $entityManager;
 
     public function __construct(EntityManager $entityManager)

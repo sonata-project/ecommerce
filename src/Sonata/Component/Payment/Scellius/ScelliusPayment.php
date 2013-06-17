@@ -23,16 +23,24 @@ use Sonata\Component\Payment\BasePayment;
 
 class ScelliusPayment extends BasePayment
 {
+    /**
+     * @var RouterInterface
+     */
     protected $router;
 
+    /**
+     * @var array
+     */
     protected $parameters;
 
+    /**
+     * @var EngineInterface
+     */
     protected $templating;
 
-    protected $requestCommand;
-
-    protected $responseCommand;
-
+    /**
+     * @var ScelliusTransactionGeneratorInterface
+     */
     protected $transactionGenerator;
 
     /**

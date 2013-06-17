@@ -16,6 +16,9 @@ namespace Sonata\Component\Delivery;
  */
 class FreeDelivery extends BaseDelivery
 {
+    /**
+     * @var bool
+     */
     protected $isAddressRequired;
 
     /**

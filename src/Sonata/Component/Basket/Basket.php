@@ -19,42 +19,99 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Product\Pool;
 
+/**
+ * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ */
 class Basket implements \Serializable, BasketInterface
 {
+    /**
+     * @var array
+     */
     protected $basketElements;
 
+    /**
+     * @var array
+     */
     protected $positions = array();
 
+    /**
+     * @var int
+     */
     protected $cptElement = 0;
 
+    /**
+     * @var boolean
+     */
     protected $inBuild = false;
 
+    /**
+     * @var Pool
+     */
     protected $productPool;
 
+    /**
+     * @var AddressInterface
+     */
     protected $paymentAddress;
 
+    /**
+     * @var PaymentInterface
+     */
     protected $paymentMethod;
 
+    /**
+     * @var string
+     */
     protected $paymentMethodCode;
 
+    /**
+     * @var int
+     */
     protected $paymentAddressId;
 
+    /**
+     * @var AddressInterface
+     */
     protected $deliveryAddress;
 
+    /**
+     * @var DeliveryInterface
+     */
     protected $deliveryMethod;
 
+    /**
+     * @var int
+     */
     protected $deliveryAddressId;
 
+    /**
+     * @var string
+     */
     protected $deliveryMethodCode;
 
+    /**
+     * @var CustomerInterface
+     */
     protected $customer;
 
+    /**
+     * @var int
+     */
     protected $customerId;
 
+    /**
+     * @var array
+     */
     protected $options = array();
 
+    /**
+     * @var string
+     */
     protected $locale;
 
+    /**
+     * @var string
+     */
     protected $currency;
 
     public function __construct()

@@ -22,10 +22,19 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
  */
 class Selector implements DeliverySelectorInterface
 {
+    /**
+     * @var DeliveryPool
+     */
     protected $deliveryPool;
 
+    /**
+     * @var ProductPool
+     */
     protected $productPool;
 
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
     /**
@@ -55,7 +64,7 @@ class Selector implements DeliverySelectorInterface
     }
 
     /**
-     * @return mixed
+     * @return LoggerInterface
      */
     public function getLogger()
     {
@@ -63,7 +72,7 @@ class Selector implements DeliverySelectorInterface
     }
 
     /**
-     * @param $message
+     * @param string $message
      */
     protected function log($message)
     {

@@ -16,8 +16,13 @@ use Sonata\Component\Order\OrderInterface;
 
 interface ReferenceInterface
 {
-
+    /**
+     * @param InvoiceInterface $invoice
+     */
     public function invoice(InvoiceInterface $invoice);
 
+    /**
+     * @param OrderInterface $order
+     */
     public function order(OrderInterface $order);
 }

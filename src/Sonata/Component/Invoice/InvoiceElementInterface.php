@@ -14,7 +14,6 @@ use Sonata\Component\Invoice\InvoiceInterface;
 
 interface InvoiceElementInterface
 {
-
     /**
      * Set invoiceId
      *

@@ -6,7 +6,14 @@ use Doctrine\ORM\EntityManager;
 
 class BasketElementManager implements BasketElementManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+
+    /**
+     * @var string
+     */
     protected $class;
 
     /**

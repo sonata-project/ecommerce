@@ -21,6 +21,9 @@ use Sonata\Component\Payment\Pool as PaymentPool;
  */
 class PaymentMethodTransformer implements DataTransformerInterface
 {
+    /**
+     * @var PaymentPool
+     */
     protected $paymentPool;
 
     public function __construct(PaymentPool $paymentPool)
@@ -28,11 +31,17 @@ class PaymentMethodTransformer implements DataTransformerInterface
         $this->paymentPool = $paymentPool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function reverseTransform($value)
     {
         return $this->paymentPool->getMethod($value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function transform($value)
     {
         return $value ? $value->getCode() : null;

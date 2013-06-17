@@ -16,12 +16,24 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 abstract class BasePayment implements PaymentInterface
 {
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $code;
 
+    /**
+     * @var array
+     */
     protected $options;
 
+    /**
+     * @var array
+     */
     protected $transformers;
 
     /**
@@ -29,10 +41,19 @@ abstract class BasePayment implements PaymentInterface
      */
     protected $logger;
 
+    /**
+     * @var bool
+     */
     protected $isDebug;
 
+    /**
+     * @var bool
+     */
     protected $enabled;
 
+    /**
+     * @var string
+     */
     protected $description;
 
     /**

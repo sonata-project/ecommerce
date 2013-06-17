@@ -16,26 +16,55 @@ use Sonata\Component\Product\ProductDefinition;
 
 class BasketElement implements \Serializable, BasketElementInterface
 {
+    /**
+     * @var int
+     */
     protected $productId = null;
 
+    /**
+     * @var ProductInterface
+     */
     protected $product = null;
 
+    /**
+     * @var float
+     */
     protected $price = null;
 
+    /**
+     * @var int
+     */
     protected $quantity = 1;
 
+    /**
+     * @var array
+     */
     protected $options = array();
 
+    /**
+     * @var string
+     */
     protected $name = null;
 
+    /**
+     * @var int
+     */
     protected $position = null;
 
+    /**
+     * @var ProductDefinition
+     */
     protected $productDefinition = null;
 
+    /**
+     * @var string
+     */
     protected $productCode = null;
 
     /*
      * used by the validation framework
+     *
+     * @var bool
      */
     protected $delete = false;
 

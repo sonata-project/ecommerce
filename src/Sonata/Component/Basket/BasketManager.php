@@ -8,7 +8,14 @@ use Doctrine\ORM\NoResultException;
 
 class BasketManager implements BasketManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+
+    /**
+     * @var string
+     */
     protected $class;
 
     /**
