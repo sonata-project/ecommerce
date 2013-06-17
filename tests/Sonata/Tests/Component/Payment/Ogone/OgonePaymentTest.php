@@ -9,36 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment\Scellius;
+namespace Sonata\Tests\Component\Payment\Ogone;
 
-use Sonata\Component\Payment\Scellius\ScelliusPayment;
-use Buzz\Message\Response;
 use Sonata\OrderBundle\Entity\BaseOrder;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface;
+use Sonata\Component\Payment\Ogone\OgonePayment;
 
-class ScelliusPaymentTest_Order extends BaseOrder
+
+class OgonePaymentTest_Order extends BaseOrder
 {
 
-    public function setId($id)
+    function setId($id)
     {
         $this->id = $id;
     }
     /**
      * @return integer the order id
      */
-    public function getId()
+    function getId()
     {
         return $this->id;
     }
 
 }
-class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
+class OgonePaymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * useless test ....
      *
      * @return void
      */
@@ -47,13 +42,21 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
-        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $router->expects($this->once())->method('generate')->will($this->returnValue('http://www.google.com'));
 
-        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
-        $payment->setCode('free_1');
+        $payment = new OgonePayment($router, $logger, $templating, true);
+        $payment->setCode('ogone_1');
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'response_command' => 'cat response_ok.txt && echo '
+            'url_return_ok'    => "sonata_payment_confirmation",
+            'url_return_ko' => "",
+            'url_callback' => "",
+            'template' => "",
+            'form_url' => "",
+            'sha_key' => "",
+            'sha-out_key' => "",
+            'pspid' => "",
+            'home_url' => "",
+            'catalog_url' => "",
         ));
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
@@ -63,7 +66,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new ScelliusPaymentTest_Order;
+        $order = new OgonePaymentTest_Order();
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
@@ -75,7 +78,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
 
-        $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        $this->assertEquals('ogone_1', $payment->getCode(), 'Ogone Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
@@ -84,47 +87,6 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
-
-//        $response = $payment->callbank($order);
-//
-//        $this->assertTrue($response->headers->has('Location'));
-//        $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));
-//        $this->assertFalse($response->isCacheable());
-//
-//        $this->assertEquals($payment->getOrderReference($transaction), '0001231');
-//
-//        $payment->applyTransactionId($transaction);
-    }
-
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testInvalidCurrencyCallbankPayment()
-    {
-        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
-        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
-
-        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
-
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
-
-        $order = new ScelliusPaymentTest_Order;
-        $order->setCreatedAt($date);
-        $order->setId(2);
-        $order->setReference('FR');
-        $order->setLocale('es');
-
-        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
-        $payment->setCode('free_1');
-        $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'request_command' => 'cat request_ok.txt && echo '
-        ));
-
-        $payment->callbank($order);
     }
 
     public function testValidCallbankPayment()
@@ -132,7 +94,6 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidCallbank')));
-        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
@@ -141,10 +102,8 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $customer   = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customer->expects($this->once())->method('getId')->will($this->returnValue(42));
-        $customer->expects($this->once())->method('getEmail')->will($this->returnValue('contact@sonata-project.org'));
 
-        $order = new ScelliusPaymentTest_Order;
+        $order = new OgonePaymentTest_Order();
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
@@ -152,11 +111,19 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $order->setCustomer($customer);
         $order->setLocale('es');
 
-        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
-        $payment->setCode('free_1');
+        $payment = new OgonePayment($router, $logger, $templating, true);
+        $payment->setCode('ogone_1');
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'request_command' => 'cat request_ok.txt && echo ',
+            'url_return_ok'    => "",
+            'url_return_ko' => "",
+            'url_callback' => "",
+            'template' => "",
+            'form_url' => "",
+            'sha_key' => "",
+            'sha-out_key' => "",
+            'pspid' => "",
+            'home_url' => "",
+            'catalog_url' => "",
         ));
 
         $response = $payment->callbank($order);
@@ -172,9 +139,21 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
-        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
-        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
+        $payment = new OgonePayment($router, $logger, $templating, true);
+        $payment->setCode('ogone_1');
+        $payment->setOptions(array(
+                'url_return_ok'    => "",
+                'url_return_ko' => "",
+                'url_callback' => "",
+                'template' => "",
+                'form_url' => "",
+                'sha_key' => "",
+                'sha-out_key' => "",
+                'pspid' => "",
+                'home_url' => "",
+                'catalog_url' => "",
+        ));
 
         $this->assertEquals($expected, $payment->encodeString($data));
     }
@@ -183,19 +162,19 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('valid', 'valid'),
-            array('!@#$', '!@\#\$'),
+            array('!@#$', '!@#$'),
             array('foo=bar', 'foo=bar'),
         );
     }
 
     public function callbackValidCallbank($template, $params)
     {
-        if (!$params['scellius']['valid']) {
-            throw new \RuntimeException('Scellius validation should be ok');
+        if (!$params['shasign']) {
+            throw new \RuntimeException('Ogone validation should be ok');
         }
 
-        if ($params['scellius']['content'] != '<div>message</div>') {
-            throw new \RuntimeException('Invalid scellius html message');
+        if ($params['fields']['orderId'] != 'FR') {
+            throw new \RuntimeException('Invalid ogone orderId');
         }
 
         return new \Symfony\Component\HttpFoundation\Response();
@@ -203,16 +182,40 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
 
     public static function callback($name)
     {
-        if ($name == 'reference') {
-            return '0001231';
+        $params = array(
+                'orderID' => 'FR',
+                'currency' => null,
+                'amount' => 'amount',
+                'PM' => 'PM',
+                'ACCEPTANCE' => 'ACCEPTANCE',
+                'STATUS' => 'STATUS',
+                'CARDNO' => 'CARDNO',
+                'ED' => 'ED',
+                'CN' => 'CN',
+                'TRXDATE' => 'TRXDATE',
+                'PAYID' => 'PAYID',
+                'NCERROR' => 'NCERROR',
+                'BRAND' => 'BRAND',
+                'IP' => 'IP',
+        );
+
+        if (strcasecmp('shasign', $name) === 0) {
+            uksort($params, 'strcasecmp');
+
+            $shaKey = "";
+
+            $shasignStr = "";
+            foreach ($params as $key => $param) {
+                if (null !== $param && "" !== $param) {
+                    $shasignStr .= strtoupper($key)."=".$param.$shaKey;
+                }
+            }
+
+            return strtoupper(sha1($shasignStr));
         }
 
-        if ($name == 'transaction_id') {
-            return 1;
-        }
+        $params['check'] = "56384d4138b4219e554aa3cc781151686064e699";
 
-        if ($name == 'check') {
-            return '56384d4138b4219e554aa3cc781151686064e699';
-        }
+        return $params[$name];
     }
 }

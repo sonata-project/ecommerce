@@ -3,6 +3,10 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
+    <parameters>
+        <parameter key="sonata.customer.selector.class">Sonata\Component\Customer\CustomerSelector</parameter>
+    </parameters>
 
     <services>
         <service id="sonata.basket.builder.standard" class="Sonata\Component\Basket\BasketBuilder">
@@ -12,7 +16,7 @@
             <argument type="service" id="sonata.payment.pool" />
         </service>
 
-        <service id="sonata.customer.selector" class="Sonata\Component\Customer\CustomerSelector">
+        <service id="sonata.customer.selector" class="%sonata.customer.selector.class%">
             <argument type="service" id="sonata.customer.manager"/>
             <argument type="service" id="session" />
             <argument type="service" id="security.context"/>

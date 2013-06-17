@@ -15,6 +15,41 @@ use Sonata\ProductBundle\Model\BaseProductProvider;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Order\OrderInterface;
 
+use Sonata\ProductBundle\Entity\BaseProduct;
+
+class Product extends BaseProduct
+{
+    public $enabled = true;
+    public $id = 1;
+    public $name = 'fake name';
+    public $price = 15;
+    public $vat = 19.6;
+
+    public function getOptions() {
+        return array(
+            'option1' => 'toto',
+        );
+    }
+
+    public function isRecurrentPayment() {
+        return false;
+    }
+
+    public function getElementOptions() {
+        return array();
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        return $this->id = $id;
+    }
+}
+
 class BaseProductServiceTest_ProductProvider extends BaseProductProvider
 {
     /**
@@ -34,7 +69,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function getBaseProvider()
     {
-        $serializer = $this->getMock('JMS\SerializerBundle\Serializer\SerializerInterface');
+        $serializer = $this->getMock('JMS\Serializer\SerializerInterface');
 
         $provider = new BaseProductServiceTest_ProductProvider($serializer);
 
@@ -93,7 +128,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $provider = $this->getBaseProvider();
         $provider->setVariationFields(array('Name', 'Price'));
 
-        $product = new \Sonata\Tests\Component\Basket\Product;
+        $product = new Product;
         $product->id = 2;
 
         $variation = $provider->createVariation($product);

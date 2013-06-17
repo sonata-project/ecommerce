@@ -45,4 +45,17 @@ INFO;
 
         $this->assertEquals($expected, $transaction->getInformation());
     }
+
+    public function testParametersEncoding()
+    {
+        $transaction = new Transaction();
+
+        $inParams = array(
+            "aerẑerüioRazeioj" => iconv('UTF-8', 'ISO-8859-1', "ôûêîÖüïë"),
+            "abcdef" => "ghijkl"
+        );
+
+        $transaction->setParameters($inParams);
+        $this->assertEquals($inParams, $transaction->getParameters());
+    }
 }

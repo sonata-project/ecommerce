@@ -4,19 +4,30 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="sonata.payment.pool.class">Sonata\Component\Payment\Pool</parameter>
+        <parameter key="sonata.payment.method.paypal.class">Sonata\Component\Payment\Paypal</parameter>
+        <parameter key="sonata.payment.method.check.class">Sonata\Component\Payment\CheckPayment</parameter>
+        <parameter key="sonata.payment.method.pass.class">Sonata\Component\Payment\PassPayment</parameter>
+        <parameter key="sonata.payment.method.scellius.class">Sonata\Component\Payment\Scellius\ScelliusPayment</parameter>
+        <parameter key="sonata.payment.provider.scellius.none_generator.class">Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator</parameter>
+        <parameter key="sonata.payment.provider.scellius.order_generator.class">Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator</parameter>
+        <parameter key="sonata.payment.method.ogone.class">Sonata\Component\Payment\Ogone\OgonePayment</parameter>
+    </parameters>
+
     <services>
-        <service id="sonata.payment.pool" class="Sonata\Component\Payment\Pool">
+        <service id="sonata.payment.pool" class="%sonata.payment.pool.class%">
 
         </service>
 
-        <service id="sonata.payment.method.paypal" class="Sonata\Component\Payment\Paypal">
+        <service id="sonata.payment.method.paypal" class="%sonata.payment.method.paypal.class%">
             <tag name="sonata.payment.method" />
 
             <argument type="service" id="router" />
             <argument type="service" id="translator" on-invalid="null"/>
         </service>
 
-        <service id="sonata.payment.method.check" class="Sonata\Component\Payment\CheckPayment">
+        <service id="sonata.payment.method.check" class="%sonata.payment.method.check.class%">
             <tag name="sonata.payment.method" />
 
             <argument type="service" id="router" />
@@ -24,14 +35,14 @@
             <argument />
         </service>
 
-        <service id="sonata.payment.method.pass" class="Sonata\Component\Payment\PassPayment">
+        <service id="sonata.payment.method.pass" class="%sonata.payment.method.pass.class%">
             <tag name="sonata.payment.method" />
 
             <argument type="service" id="router" />
             <argument />
         </service>
 
-        <service id="sonata.payment.method.scellius" class="Sonata\Component\Payment\Scellius\ScelliusPayment">
+        <service id="sonata.payment.method.scellius" class="%sonata.payment.method.scellius.class%">
             <tag name="sonata.payment.method" />
 
             <argument type="service" id="router" />
@@ -41,8 +52,18 @@
             <argument>%kernel.debug%</argument>
         </service>
 
-        <service id="sonata.payment.provider.scellius.none_generator" class="Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator" />
-        <service id="sonata.payment.provider.scellius.order_generator" class="Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator" />
+        <service id="sonata.payment.provider.scellius.none_generator" class="%sonata.payment.provider.scellius.none_generator.class%" />
+        <service id="sonata.payment.provider.scellius.order_generator" class="%sonata.payment.provider.scellius.order_generator.class%" />
+
+        <service id="sonata.payment.method.ogone" class="%sonata.payment.method.ogone.class%">
+            <tag name="sonata.payment.method" />
+
+            <argument type="service" id="router" />
+            <argument type="service" id="logger" />
+            <argument type="service" id="templating" />
+            <argument>%kernel.debug%</argument>
+        </service>
+
     </services>
 
 </container>

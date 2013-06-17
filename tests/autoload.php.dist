@@ -1,12 +1,12 @@
 <?php
 
 // try to reuse lib defined in a current symfony2 project
-$autoload = __DIR__.'/../../../app/autoload.php';
+$autoload = __DIR__.'/../../../../app/autoload.php';
 
 if (is_file($autoload)) {
     include $autoload;
 } else {
-    $vendorDir = __DIR__.'/../../../vendor';
+    $vendorDir = __DIR__.'/vendor';
     require_once $vendorDir.'/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
     $loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
@@ -26,7 +26,7 @@ if (is_file($autoload)) {
         'Sonata'   => array(
             $vendorDir.'/../../src',
             $vendorDir,
-            __DIR__,
+            __DIR__.'/../src',
         )
     ));
     $loader->register();

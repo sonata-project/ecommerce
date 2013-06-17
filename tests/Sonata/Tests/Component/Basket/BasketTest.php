@@ -18,6 +18,27 @@ use Sonata\Component\Product\ProductDefinition;
 use Sonata\Tests\Component\Basket\Delivery;
 use Sonata\Tests\Component\Basket\Payment;
 use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\Component\Delivery\BaseDelivery;
+
+
+class Delivery extends BaseDelivery {
+    public function isAddressRequired() {
+        return true;
+    }
+
+    public function getName() {
+        return "delivery 1";
+    }
+
+    public function getVat() {
+        return 19.60;
+    }
+
+    public function getPrice() {
+        return 120;
+    }
+
+}
 
 class BasketTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,6 +54,21 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
 
         return $product;
+    }
+
+    public function getMockAddress()
+    {
+        $address = $this->getMock('Sonata\Component\Customer\AddressInterface', array(), array(), 'BasketTest_Address');
+        $address->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
+        $address->expects($this->any())->method('getAddress1')->will($this->returnValue('Address1'));
+        $address->expects($this->any())->method('getAddress2')->will($this->returnValue('Address2'));
+        $address->expects($this->any())->method('getAddress3')->will($this->returnValue('Address3'));
+        $address->expects($this->any())->method('getPostcode')->will($this->returnValue("75001"));
+        $address->expects($this->any())->method('getCity')->will($this->returnValue("Paris"));
+        $address->expects($this->any())->method('getCountryCode')->will($this->returnValue("FR"));
+        $address->expects($this->any())->method('getPhone')->will($this->returnValue("0123456789"));
+
+        return $address;
     }
 
     public function testTotal()
@@ -76,7 +112,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(30, $basket->getTotal(), '::getTotal() w/o vat return 30');
         $this->assertEquals(35.88, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
-        $delivery = new Delivery;
+        $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
         $this->assertEquals(150, $basket->getTotal(), '::getTotal() - return 150');
@@ -123,7 +159,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
-        $delivery = new Delivery;
+        $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
         $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
@@ -138,7 +174,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check');
 
-        $address = new Address;
+        $address = $this->getMockAddress();
         $basket->setPaymentAddress($address);
         $basket->setDeliveryAddress($address);
 
