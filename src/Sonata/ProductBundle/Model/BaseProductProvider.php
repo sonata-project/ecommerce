@@ -22,7 +22,6 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Application\Sonata\OrderBundle\Entity\OrderElement;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 
 use JMS\Serializer\SerializerInterface;
@@ -100,7 +99,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement)
     {
-        $orderElement = new OrderElement;
+        $orderElementClass = $this->getBasketElementManager()->getClass();
+        $orderElement = new $orderElementClass;
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setPrice($basketElement->getTotal(false));
         $orderElement->setVat($basketElement->getVat());

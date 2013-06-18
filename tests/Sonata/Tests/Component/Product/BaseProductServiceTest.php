@@ -12,6 +12,7 @@
 namespace Sonata\Tests\Component\Product;
 
 use Sonata\ProductBundle\Model\BaseProductProvider;
+use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Order\OrderInterface;
 
@@ -61,6 +62,11 @@ class BaseProductServiceTest_ProductProvider extends BaseProductProvider
     }
 }
 
+class BaseOrderElementTest_ProductProvider extends BaseOrderElement
+{
+    
+}
+
 class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -70,8 +76,14 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
     public function getBaseProvider()
     {
         $serializer = $this->getMock('JMS\Serializer\SerializerInterface');
+        $serializer->expects($this->any())->method('serialize')->will($this->returnValue('{}'));
 
         $provider = new BaseProductServiceTest_ProductProvider($serializer);
+        
+        $basketElementManager = $this->getMock('\Sonata\Component\Basket\BasketElementManagerInterface');
+        $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Tests\Component\Product\BaseOrderElementTest_ProductProvider'));
+        
+        $provider->setBasketElementManager($basketElementManager);
 
         return $provider;
     }
