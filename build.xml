@@ -162,8 +162,8 @@
 
         <exec executable="phpunit" logoutput="true">
             <arg line="--log-junit ${file.reports.phpunit}" />
-            <arg line="--coverage-clover ${file.reports.coverage.clover}" />
-            <arg line="--coverage-html ${file.reports.coverage…html}" />
+            <!-- <arg line="--coverage-clover ${file.reports.coverage.clover}" />
+            <arg line="--coverage-html ${file.reports.coverage…html}" /> -->
             <arg line="-c ${config.phpunit}" />
         </exec>
 
