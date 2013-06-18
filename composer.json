@@ -18,9 +18,14 @@
         "symfony/routing": ">=2.2,<2.4-dev",
         "symfony/config": ">=2.2,<2.4-dev",
         "symfony/console": ">=2.2,<2.4-dev",
+        "symfony/process": ">=2.2,<2.4-dev",
         "symfony/twig-bridge": ">=2.2,<2.4-dev",
         "twig/twig": ">=1.12,<2.0-dev",
         
+        "sonata-project/admin-bundle": ">=2.2,<2.4-dev",
+        "sonata-project/intl-bundle": ">=2.2,<2.4-dev",
+        
+        "kriswallsmith/buzz": "dev-master",
         "knplabs/knp-menu-bundle": "~1.1",
         "doctrine/common": ">=2.2,<3.0",
         "friendsofsymfony/user-bundle": "1.3.*"
