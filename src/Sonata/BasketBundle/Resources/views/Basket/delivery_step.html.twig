@@ -9,23 +9,23 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'BasketBundle') }}</h1>
+<h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
 <form action="{{ url('sonata_basket_delivery') }}" method="POST" >
 {#     <div>#}
-{#         <h2>{{ 'sonata.basket.title_delivery_addresses'|trans({}, 'BasketBundle') }}</h2>#}
+{#         <h2>{{ 'sonata.basket.title_delivery_addresses'|trans({}, 'SonataBasketBundle') }}</h2>#}
 
 {#         {{ form_errors(form.deliveryAddress) }}#}
 {#         {{ form_widget(form.deliveryAddress) }}#}
 {#     </div>#}
 
     <div>
-        <h2>{{ 'sonata.basket.title_delivery_methods'|trans({}, 'BasketBundle') }}</h2>
+        <h2>{{ 'sonata.basket.title_delivery_methods'|trans({}, 'SonataBasketBundle') }}</h2>
 
         {{ form_errors(form.deliveryMethod) }}
         {{ form_widget(form.deliveryMethod) }}
     </div>
 
     {{ form_rest(form) }}
-    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'BasketBundle') }}" />
+    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}" />
 </form>

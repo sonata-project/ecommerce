@@ -9,10 +9,10 @@ file that was distributed with this source code.
 
 #}
 
-<h2>{% trans from 'CategoryBundle' %}title_list_products{% endtrans %}</h2>
+<h2>{% trans from 'SonataProductBundle' %}title_list_products{% endtrans %}</h2>
 
 {% if pager.count == 0 %}
-    {% trans from 'CategoryBundle' %}no_products_available{% endtrans %}
+    {% trans from 'SonataProductBundle' %}no_products_available{% endtrans %}
 {% else %}
     <ul>
         {% for product in pager.getResults %}

@@ -9,11 +9,11 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'BasketBundle') }}</h1>
+<h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
 {# <form action="{{ url('sonata_basket_delivery') }}" method="POST" >#}
 {{ form_start(form) }}
     {{ form_errors(form) }}
     {{ form_rest(form) }}
-    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'BasketBundle') }}" />
+    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}" />
 {{ form_end(form) }}

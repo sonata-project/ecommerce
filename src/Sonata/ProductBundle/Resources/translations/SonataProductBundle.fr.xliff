@@ -2,6 +2,46 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
+      <trans-unit id="43efccf4233a4e34951362f6e877e2fc2f2033e1" resname="title_select_provider">
+        <jms:reference-file line="14">views/ProductAdmin/select_provider.html.twig</jms:reference-file>
+        <source>title_select_provider</source>
+        <target state="new">Sélectionner un type</target>
+      </trans-unit>
+      <trans-unit id="1b9c4ad816837d8157ddce8bc091c25a43534a51" resname="sonata.basket.message_product_not_available">
+        <jms:reference-file line="14">views/Product/form_basket_element.html.twig</jms:reference-file>
+        <source>sonata.basket.message_product_not_available</source>
+        <target state="new">Le produit est indisponible.</target>
+      </trans-unit>
+      <trans-unit id="86d31e1a805f93dc2b8f3008b81d7d9be61c4166" resname="sonata.product.btn_add_to_basket">
+        <jms:reference-file line="34">views/Entity/view.html.twig</jms:reference-file>
+        <source>sonata.product.btn_add_to_basket</source>
+        <target state="new">Ajouter au panier</target>
+      </trans-unit>
+      <trans-unit id="3831ab0a2988bb64112fc0303230d9e1f6486ed0" resname="no_products_available">
+        <jms:reference-file line="15">views/Category/list_products.html.twig</jms:reference-file>
+        <source>no_products_available</source>
+        <target state="new">Aucun produit disponible</target>
+      </trans-unit>
+      <trans-unit id="4dc7a3a416170f873433f74a7d4c88ee56ffc1e3" resname="no_sub_categories_available">
+        <jms:reference-file line="15">views/Category/list_sub_categories.html.twig</jms:reference-file>
+        <source>no_sub_categories_available</source>
+        <target state="new">Aucune sous-catégorie disponible</target>
+      </trans-unit>
+      <trans-unit id="00b0661d85801c9dae0ddc7620e333c08eeb082d" resname="title_category_list">
+        <jms:reference-file line="12">views/Category/index.html.twig</jms:reference-file>
+        <source>title_category_list</source>
+        <target state="new">Catégories</target>
+      </trans-unit>
+      <trans-unit id="3f202b5b6f5a80347a815726f552d1b566028488" resname="title_list_products">
+        <jms:reference-file line="12">views/Category/list_products.html.twig</jms:reference-file>
+        <source>title_list_products</source>
+        <target state="new">Produits</target>
+      </trans-unit>
+      <trans-unit id="9f496102cc4785f2503a5acc63ed5b15d9757fc7" resname="title_sub_categories">
+        <jms:reference-file line="12">views/Category/list_sub_categories.html.twig</jms:reference-file>
+        <source>title_sub_categories</source>
+        <target state="new">Sous-catégories</target>
+      </trans-unit>
             <trans-unit id="sonata_ecommerce">
                 <source>sonata_ecommerce</source>
                 <target>Ecommerce</target>
@@ -9,7 +49,7 @@
 
             <trans-unit id="sidemenu.link_product_edit">
                 <source>sidemenu.link_product_edit</source>
-                <target>Produit</target>
+                <target>Production</target>
             </trans-unit>
             <trans-unit id="sidemenu.link_category_list">
                 <source>sidemenu.link_category_list</source>

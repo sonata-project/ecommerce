@@ -2,6 +2,22 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
+      <trans-unit id="90102c15654e1771dcaf28d71f701c0c8c5775fc" resname="address.form.group_address_label">
+        <jms:reference-file line="55">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+        <source>address.form.group_address_label</source>
+        <target state="new">Adresse</target>
+      </trans-unit>
+      <trans-unit id="23e57d9e09cd1425d01740bcdd270dc56afbbc27" resname="address.form.group_advanced_label">
+        <jms:reference-file line="33">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+        <source>address.form.group_advanced_label</source>
+        <target state="new">Général</target>
+      </trans-unit>
+      <trans-unit id="2b601a2737ecf193ab5efb6194d61a3d8d43ebaf" resname="address.form.group_contact_label">
+        <jms:reference-file line="40">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+        <jms:reference-file line="48">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+        <source>address.form.group_contact_label</source>
+        <target state="new">Contact</target>
+      </trans-unit>
             <trans-unit id="breadcrumb.link_customer_list">
                 <source>breadcrumb.link_customer_list</source>
                 <target>Client</target>

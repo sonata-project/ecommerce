@@ -35,7 +35,7 @@ class OrderAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with($this->trans('order.form.group_main_label'))
+            ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
                 ->add('currency')
                 ->add('locale')
                 ->add('status', 'sonata_type_translatable_choice', array('choices' => Order::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
@@ -43,7 +43,7 @@ class OrderAdmin extends Admin
                 ->add('deliveryStatus', 'sonata_type_translatable_choice', array('choices' => Delivery::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
                 ->add('validatedAt')
             ->end()
-            ->with($this->trans('order.form.group_billing_label'), array('collapsed' => true))
+            ->with($this->trans('order.form.group_billing_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
                 ->add('billingName')
                 ->add('billingAddress1')
                 ->add('billingAddress2')
@@ -55,7 +55,7 @@ class OrderAdmin extends Admin
                 ->add('billingEmail')
                 ->add('billingMobile')
             ->end()
-            ->with($this->trans('order.form.group_shipping_label'), array('collapsed' => true))
+            ->with($this->trans('order.form.group_shipping_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
                 ->add('shippingName')
                 ->add('shippingAddress1')
                 ->add('shippingAddress2')

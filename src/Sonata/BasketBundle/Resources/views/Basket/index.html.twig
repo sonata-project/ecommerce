@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 
-<h1>{% trans from 'BasketBundle' %}sonata.basket.title_basket{% endtrans %}</h1>
+<h1>{% trans from 'SonataBasketBundle' %}sonata.basket.title_basket{% endtrans %}</h1>
 
 {% if basket.hasBasketElements %}
 
@@ -21,11 +21,11 @@ file that was distributed with this source code.
             {#
             <thead>
                 <tr>
-                    <td>{% trans from 'BasketBundle'%}header_basket_information{% endtrans %}</td>
-                    <td>{% trans from 'BasketBundle'%}header_basket_price{% endtrans %}</td>
-                    <td>{% trans from 'BasketBundle'%}header_basket_quantity{% endtrans %}</td>
-                    <td>{% trans from 'BasketBundle'%}header_basket_total{% endtrans %}</td>
-                    <td>{% trans from 'BasketBundle'%}header_basket_delete{% endtrans %}</td>
+                    <td>{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</td>
+                    <td>{% trans from 'SonataBasketBundle'%}header_basket_price{% endtrans %}</td>
+                    <td>{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</td>
+                    <td>{% trans from 'SonataBasketBundle'%}header_basket_total{% endtrans %}</td>
+                    <td>{% trans from 'SonataBasketBundle'%}header_basket_delete{% endtrans %}</td>
                 </tr>
             </thead>
             #}
@@ -51,12 +51,12 @@ file that was distributed with this source code.
             </tfoot>
         </table>
 
-        <input type="submit" value="{% trans from 'BasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}" />
+        <input type="submit" value="{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}" />
 
-        <a href="{{ url('sonata_basket_authentification') }}">{% trans from 'BasketBundle' %}sonata.basket.link_next_step{% endtrans %}</a>
+        <a href="{{ url('sonata_basket_authentification') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}</a>
 
         {{ form_rest(form) }}
     </form>
 {% else %}
-    <p>{% trans from 'BasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}</p>
+    <p>{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}</p>
 {% endif %}

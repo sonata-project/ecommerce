@@ -11,7 +11,7 @@ file that was distributed with this source code.
 
 <tr>
     {% if formView.vars.errors|length > 0 %} {# global error the product is not active anymore #}
-        <td colspan="4">{% block product_error %}{{ "sonata.basket.message_product_not_available"|trans({}, 'ProductBundle')}}{% endblock %}</td>
+        <td colspan="4">{% block product_error %}{{ "sonata.basket.message_product_not_available"|trans({}, 'SonataProductBundle')}}{% endblock %}</td>
     {% else %}
         <td>
             {{ form_widget(formView.productId) }}
