@@ -24,7 +24,7 @@
    <property name="file.reports.phpunit"         value="${dir.reports.test.unit}/phpunit.xml" />
    <property name="file.reports.coverage.clover" value="${dir.reports.test.coverage}/clover.xml" />
    <property name="file.reports.coverage.html"   value="${dir.reports.test.coverage}/html" />
-   <property name="option.composer.mode"         value="install --dev" />
+   <property name="option.composer.mode"         value="install --dev --prefer-source" />
 
     <!-- Source paths -->
     <property name="dir.src"                     value="${project.basedir}" />
