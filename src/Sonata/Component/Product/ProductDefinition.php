@@ -13,8 +13,14 @@ namespace Sonata\Component\Product;
 
 class ProductDefinition
 {
+    /**
+     * @var ProductManagerInterface
+     */
     protected $manager;
 
+    /**
+     * @var ProductProviderInterface
+     */
     protected $provider;
 
     /**

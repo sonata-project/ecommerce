@@ -21,6 +21,9 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class CustomerAdmin extends Admin
 {
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->setTranslationDomain('SonataCustomerBundle');

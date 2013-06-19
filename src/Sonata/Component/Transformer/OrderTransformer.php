@@ -17,20 +17,28 @@ use Sonata\Component\Product\Pool as ProductPool;
 class OrderTransformer extends BaseTransformer
 {
     /**
-     * @var the product pool
+     * @var ProductPool the product pool
      */
     protected $productPool;
 
     /**
-     * @var the transformer option
+     * @var array the transformer option
      */
     protected $options;
 
+    /**
+     * @param ProductPool $productPool
+     */
     public function __construct(ProductPool $productPool)
     {
         $this->productPool = $productPool;
     }
 
+    /**
+     * @param  OrderInterface  $order
+     * @param  BasketInterface $basket
+     * @return BasketInterface
+     */
     public function transformIntoBasket(OrderInterface $order, BasketInterface $basket)
     {
         // we reset the current basket

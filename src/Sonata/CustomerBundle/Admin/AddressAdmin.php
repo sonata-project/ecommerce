@@ -18,6 +18,9 @@ use Application\Sonata\CustomerBundle\Entity\Address;
 
 class AddressAdmin extends Admin
 {
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->parentAssociationMapping = 'customer';

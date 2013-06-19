@@ -17,8 +17,19 @@ use Doctrine\ORM\EntityRepository;
 
 class CustomerManager implements CustomerManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+
+    /**
+     * @var EntityRepository
+     */
     protected $repository;
+
+    /**
+     * @var string
+     */
     protected $class;
 
     /**

@@ -14,6 +14,7 @@ use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 /**
  * The selector selects available payment methods depends on the provided basket
@@ -21,34 +22,60 @@ use Sonata\Component\Customer\AddressInterface;
  */
 class Selector implements PaymentSelectorInterface
 {
+    /**
+     * @var PaymentPool
+     */
     protected $paymentPool;
 
+    /**
+     * @var ProductPool
+     */
     protected $productPool;
 
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
-    public function __construct(PaymentPool $paymentPool, ProductPool $productPool, $logger = null)
+    /**
+     * @param PaymentPool     $paymentPool
+     * @param ProductPool     $productPool
+     * @param LoggerInterface $logger
+     */
+    public function __construct(PaymentPool $paymentPool, ProductPool $productPool, LoggerInterface $logger = null)
     {
         $this->paymentPool = $paymentPool;
         $this->productPool = $productPool;
         $this->logger = $logger;
     }
 
-    public function setLogger($logger)
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
+    /**
+     * @return \Symfony\Component\HttpKernel\Log\LoggerInterface
+     */
     public function getLogger()
     {
         return $this->logger;
     }
 
+    /**
+     * @return \Sonata\Component\Product\Pool
+     */
     public function getProductPool()
     {
         return $this->productPool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $paymentAddress = null)
     {
         if (!$paymentAddress) {
@@ -58,6 +85,9 @@ class Selector implements PaymentSelectorInterface
         return $this->getPaymentPool()->getMethods();
     }
 
+    /**
+     * @return PaymentPool|null
+     */
     public function getPaymentPool()
     {
         return $this->paymentPool;

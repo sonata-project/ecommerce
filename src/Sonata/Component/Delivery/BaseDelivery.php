@@ -157,8 +157,8 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * Returns the option $name
      *
-     * @param string $name
-     * @param mixed $default
+     * @param  string $name
+     * @param  mixed  $default
      * @return mixed
      */
     public function getOption($name, $default = null)

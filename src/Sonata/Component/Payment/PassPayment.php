@@ -20,8 +20,14 @@ use Buzz\Browser;
 
 class PassPayment extends BasePayment
 {
+    /**
+     * @var RouterInterface
+     */
     protected $router;
 
+    /**
+     * @var Browser
+     */
     protected $browser;
 
     /**

@@ -18,18 +18,21 @@ class AddBasket
 
     /**
      * @Validation\NotBlank()
+     * @var int
      */
     private $productId;
 
     /**
      * @Validation\NotBlank()
      * @Validation\Type(type="object")
+     * @var ProductInterface
      */
     private $product;
 
     /**
      * @Validation\NotBlank()
      * @Validation\Range(min=1, max=64)
+     * @var int
      */
     private $quantity;
 
@@ -59,7 +62,7 @@ class AddBasket
     /**
      * Set the related product
      *
-     * @param  $product
+     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product)
     {

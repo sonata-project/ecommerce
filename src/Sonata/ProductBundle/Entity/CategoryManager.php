@@ -20,11 +20,28 @@ use Doctrine\ORM\EntityManager;
 
 class CategoryManager implements CategoryManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+    /**
+     * @var EntityRepository
+     */
     protected $repository;
+    /**
+     * @var string
+     */
     protected $class;
+
+    /**
+     * @var array
+     */
     protected $categories = null;
 
+    /**
+     * @param EntityManager $em
+     * @param string        $class
+     */
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;

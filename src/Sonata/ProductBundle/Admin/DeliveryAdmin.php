@@ -15,8 +15,11 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-class DeleveryAdmin extends Admin
+class DeliveryAdmin extends Admin
 {
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->setTranslationDomain('SonataProductBundle');

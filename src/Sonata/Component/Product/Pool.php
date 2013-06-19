@@ -12,6 +12,9 @@ namespace Sonata\Component\Product;
 
 class Pool
 {
+    /**
+     * @var array
+     */
     protected $products = array();
 
     /**
@@ -93,6 +96,7 @@ class Pool
     }
 
     /**
+     * Tells if a product with $code is in the pool
      *
      * @param  string  $code
      * @return boolean

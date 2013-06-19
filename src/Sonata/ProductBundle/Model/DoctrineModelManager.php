@@ -19,6 +19,9 @@ use Sonata\Component\Product\Pool;
  */
 class DoctrineModelManager extends ModelManager
 {
+    /**
+     * @var Pool
+     */
     protected $pool;
 
     /**
@@ -32,16 +35,25 @@ class DoctrineModelManager extends ModelManager
         $this->pool = $pool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function create($object)
     {
         $this->pool->getManager($object)->save($object);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function update($object)
     {
         $this->pool->getManager($object)->save($object);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function delete($object)
     {
         $this->pool->getManager($object)->delete($object);

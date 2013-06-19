@@ -11,14 +11,12 @@
 namespace Sonata\Component\Payment\Ogone;
 
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
-use Symfony\Component\Process\Process;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sonata\Component\Payment\BasePayment;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -30,15 +28,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class OgonePayment extends BasePayment
 {
+    /**
+     * @var RouterInterface
+     */
     protected $router;
 
-    protected $parameters;
-
+    /**
+     * @var EngineInterface
+     */
     protected $templating;
-
-    protected $requestCommand;
-
-    protected $responseCommand;
 
     /**
      * Constructor
@@ -183,7 +181,7 @@ class OgonePayment extends BasePayment
     }
 
     /**
-     * @param TransactionInterface $transaction
+     * @param  TransactionInterface $transaction
      * @return void
      */
     public function applyTransactionId(TransactionInterface $transaction)
@@ -194,8 +192,8 @@ class OgonePayment extends BasePayment
     /**
      * Tells if $order matches $params
      *
-     * @param OrderInterface $order
-     * @param array $params
+     * @param  OrderInterface $order
+     * @param  array          $params
      * @return boolean
      */
     protected function compareOrderToParams(OrderInterface $order, array $params)
@@ -208,8 +206,8 @@ class OgonePayment extends BasePayment
     /**
      * Signs the payment transaction
      *
-     * @param  array $params
-     * @param  bool  $out    Should we use the out sha key?
+     * @param  array  $params
+     * @param  bool   $out    Should we use the out sha key?
      * @return string
      */
     protected function getShaSign(array $params, $out = false)
@@ -231,7 +229,7 @@ class OgonePayment extends BasePayment
     /**
      * Returns form parameters for callbank
      *
-     * @param OrderInterface $order
+     * @param  OrderInterface $order
      * @return array
      */
     protected function getFormParameters(OrderInterface $order)
@@ -292,7 +290,7 @@ class OgonePayment extends BasePayment
     /**
      * Gets formatted address lines from $order
      *
-     * @param OrderInterface $order
+     * @param  OrderInterface $order
      * @return string
      */
     protected function getAddress(OrderInterface $order)

@@ -16,7 +16,6 @@ use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketSessionFactory;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
-use Symfony\Component\HttpFoundation\SessionStorage\SessionStorageInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase

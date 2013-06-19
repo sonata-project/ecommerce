@@ -17,11 +17,17 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class InvoiceAdmin extends Admin
 {
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->setTranslationDomain('SonataInvoiceBundle');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -54,6 +60,9 @@ class InvoiceAdmin extends Admin
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureListFields(ListMapper $list)
     {
         $list

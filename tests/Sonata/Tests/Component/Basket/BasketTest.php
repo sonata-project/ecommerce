@@ -20,21 +20,25 @@ use Sonata\Tests\Component\Basket\Payment;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Delivery\BaseDelivery;
 
-
-class Delivery extends BaseDelivery {
-    public function isAddressRequired() {
+class Delivery extends BaseDelivery
+{
+    public function isAddressRequired()
+    {
         return true;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return "delivery 1";
     }
 
-    public function getVat() {
+    public function getVat()
+    {
         return 19.60;
     }
 
-    public function getPrice() {
+    public function getPrice()
+    {
         return 120;
     }
 

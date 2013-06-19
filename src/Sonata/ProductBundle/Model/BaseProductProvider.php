@@ -28,14 +28,29 @@ use JMS\Serializer\SerializerInterface;
 
 abstract class BaseProductProvider implements ProductProviderInterface
 {
+    /**
+     * @var array
+     */
     protected $options           = array();
 
+    /**
+     * @var array
+     */
     protected $variationFields   = array();
 
+    /**
+     * @var string
+     */
     protected $code;
 
+    /**
+     * @var SerializerInterface
+     */
     protected $serializer;
 
+    /**
+     * @var BasketElementManagerInterface
+     */
     protected $basketElementManager;
 
     /**

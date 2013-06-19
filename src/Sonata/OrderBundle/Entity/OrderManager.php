@@ -16,10 +16,23 @@ use Doctrine\ORM\EntityManager;
 
 class OrderManager implements OrderManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+    /**
+     * @var EntityRepository
+     */
     protected $repository;
+    /**
+     * @var string
+     */
     protected $class;
 
+    /**
+     * @param EntityManager $em
+     * @param string        $class
+     */
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;

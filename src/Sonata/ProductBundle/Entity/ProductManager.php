@@ -12,7 +12,6 @@ namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\Component\Product\Pool;
 
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
@@ -21,11 +20,23 @@ use Doctrine\ORM\EntityManager;
 
 class ProductManager implements ProductManagerInterface
 {
-
-    protected $pool;
+    /**
+     * @var EntityManager
+     */
     protected $em;
+    /**
+     * @var EntityRepository
+     */
+    protected $repository;
+    /**
+     * @var string
+     */
     protected $class;
 
+    /**
+     * @param string        $class
+     * @param EntityManager $em
+     */
     public function __construct($class, EntityManager $em)
     {
         $this->em    = $em;

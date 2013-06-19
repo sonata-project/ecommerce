@@ -26,17 +26,20 @@ class Product extends BaseProduct
     public $price = 15;
     public $vat = 19.6;
 
-    public function getOptions() {
+    public function getOptions()
+    {
         return array(
             'option1' => 'toto',
         );
     }
 
-    public function isRecurrentPayment() {
+    public function isRecurrentPayment()
+    {
         return false;
     }
 
-    public function getElementOptions() {
+    public function getElementOptions()
+    {
         return array();
     }
 
@@ -64,7 +67,7 @@ class BaseProductServiceTest_ProductProvider extends BaseProductProvider
 
 class BaseOrderElementTest_ProductProvider extends BaseOrderElement
 {
-    
+
 }
 
 class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
@@ -79,10 +82,10 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $serializer->expects($this->any())->method('serialize')->will($this->returnValue('{}'));
 
         $provider = new BaseProductServiceTest_ProductProvider($serializer);
-        
+
         $basketElementManager = $this->getMock('\Sonata\Component\Basket\BasketElementManagerInterface');
         $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Tests\Component\Product\BaseOrderElementTest_ProductProvider'));
-        
+
         $provider->setBasketElementManager($basketElementManager);
 
         return $provider;

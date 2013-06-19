@@ -14,18 +14,17 @@ namespace Sonata\Tests\Component\Payment\Ogone;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\Component\Payment\Ogone\OgonePayment;
 
-
 class OgonePaymentTest_Order extends BaseOrder
 {
 
-    function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
     }
     /**
      * @return integer the order id
      */
-    function getId()
+    public function getId()
     {
         return $this->id;
     }

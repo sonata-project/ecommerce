@@ -13,13 +13,27 @@ namespace Sonata\InvoiceBundle\Entity;
 use Sonata\Component\Invoice\InvoiceElementManagerInterface;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 class InvoiceElementManager implements InvoiceElementManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+    /**
+     * @var EntityRepository
+     */
     protected $repository;
+    /**
+     * @var string
+     */
     protected $class;
 
+    /**
+     * @param EntityManager $em
+     * @param string        $class
+     */
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;

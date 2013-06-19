@@ -29,7 +29,6 @@ class User
     }
 }
 
-
 class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
 {
     public function testUserNotConnected()

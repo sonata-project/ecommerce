@@ -38,7 +38,7 @@ class BasketValidator extends ConstraintValidator
     /**
      * Constructor
      *
-     * @param ProductPool $productPool
+     * @param ProductPool                $productPool
      * @param ConstraintValidatorFactory $constraintValidatorFactory
      */
     public function __construct(ProductPool $productPool, ConstraintValidatorFactory $constraintValidatorFactory)

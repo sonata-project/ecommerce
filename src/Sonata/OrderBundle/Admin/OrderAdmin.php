@@ -26,12 +26,18 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class OrderAdmin extends Admin
 {
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->parentAssociationMapping = 'customer';
         $this->setTranslationDomain('SonataOrderBundle');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -78,6 +84,9 @@ class OrderAdmin extends Admin
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureListFields(ListMapper $list)
     {
         $list
@@ -93,6 +102,9 @@ class OrderAdmin extends Admin
         ;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter
@@ -102,6 +114,9 @@ class OrderAdmin extends Admin
         ;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');

@@ -23,10 +23,19 @@ use Sonata\Component\Order\OrderElementInterface;
 
 class BasketTransformer extends BaseTransformer
 {
+    /**
+     * @var OrderManagerInterface
+     */
     protected $orderManager;
 
+    /**
+     * @var LoggerInterface
+     */
     protected $logger;
 
+    /**
+     * @var ProductPool
+     */
     protected $productPool;
 
     /**

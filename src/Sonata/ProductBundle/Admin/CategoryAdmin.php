@@ -18,6 +18,9 @@ use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 
 class CategoryAdmin extends Admin
 {
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->setTranslationDomain('SonataProductBundle');

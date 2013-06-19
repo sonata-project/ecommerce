@@ -12,16 +12,27 @@ namespace Sonata\Component\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\Common\EventArgs;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 
 class ORMInheritanceSubscriber implements EventSubscriber
 {
+    /**
+     * @var array
+     */
     protected $map = array();
 
+    /**
+     * @param array $map
+     */
     public function __construct($map)
     {
         $this->map = $map;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getSubscribedEvents()
     {
         return array(
@@ -29,7 +40,10 @@ class ORMInheritanceSubscriber implements EventSubscriber
         );
     }
 
-    public function loadClassMetadata($eventArgs)
+    /**
+     * @param LoadClassMetadataEventArgs $eventArgs
+     */
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
 

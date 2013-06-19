@@ -13,7 +13,7 @@
         <parameter key="sonata.product.admin.category.controller">SonataAdminBundle:CRUD</parameter>
 
         <!-- DELIVERY -->
-        <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeleveryAdmin</parameter>
+        <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeliveryAdmin</parameter>
         <parameter key="sonata.product.admin.delivery.controller">SonataAdminBundle:CRUD</parameter>
 
         <parameter key="sonata.product.admin.product.manager">Sonata\ProductBundle\Model\DoctrineModelManager</parameter>

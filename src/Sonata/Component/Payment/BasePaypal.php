@@ -37,13 +37,20 @@ abstract class BasePaypal extends BasePayment
     const PAYMENT_STATUS_PROCESSED          = 'Processed';
     const PAYMENT_STATUS_VOIDED             = 'Voided';
 
+    /**
+     * @var RouterInterface
+     */
     protected $router;
 
+    /**
+     * @var TranslatorInterface
+     */
     protected $translator;
 
     /**
      *
-     * Object than manager http client
+     * Object that manages http client
+     * @todo Check if it really is used
      */
     protected $webConnectorProvider = null;
 
@@ -325,11 +332,19 @@ abstract class BasePaypal extends BasePayment
         );
     }
 
+    /**
+     * @todo check if used
+     * @param unknown $webConnectorProvider
+     */
     public function setWebConnectorProvider($webConnectorProvider)
     {
         $this->webConnectorProvider = $webConnectorProvider;
     }
 
+    /**
+     * @todo check if used
+     * @return unknown $webConnectorProvider
+     */
     public function getWebConnectorProvider()
     {
         return $this->webConnectorProvider;

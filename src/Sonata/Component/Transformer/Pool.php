@@ -16,6 +16,9 @@ namespace Sonata\Component\Transformer;
  */
 class Pool
 {
+    /**
+     * @var array
+     */
     protected $transformer = array();
 
     /**

@@ -80,27 +80,43 @@ abstract class BaseProductController extends Controller
         ));
     }
 
-    public function viewVariationsAction($productId, $slug)
+    /**
+     * @param string $productId
+     * @param string $slug
+     */
+    abstract public function viewVariationsAction($productId, $slug)
     {
 
     }
 
-    public function viewBasketElement(BasketElementInterface $basketElement)
+    /**
+     * @param BasketElementInterface $basketElement
+     */
+    abstract public function viewBasketElement(BasketElementInterface $basketElement)
     {
 
     }
 
-    public function viewBasketElementConfirmation(BasketElementInterface $basketElement)
+    /**
+     * @param BasketElementInterface $basketElement
+     */
+    abstract public function viewBasketElementConfirmation(BasketElementInterface $basketElement)
     {
 
     }
 
-    public function viewOrderElement(OrderElementInterface $orderElement)
+    /**
+     * @param OrderElementInterface $orderElement
+     */
+    abstract public function viewOrderElement(OrderElementInterface $orderElement)
     {
 
     }
 
-    public function viewEditOrderElement(OrderElementInterface $orderElement)
+    /**
+     * @param OrderElementInterface $orderElement
+     */
+    abstract public function viewEditOrderElement(OrderElementInterface $orderElement)
     {
 
     }

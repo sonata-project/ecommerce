@@ -11,6 +11,8 @@
 
 namespace Sonata\Component\Transformer;
 
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
+
 abstract class BaseTransformer
 {
     /**
@@ -18,21 +20,36 @@ abstract class BaseTransformer
      */
     protected $options;
 
-    public function setLogger($logger)
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
+    /**
+     * @return \Symfony\Component\HttpKernel\Log\LoggerInterface
+     */
     public function getLogger()
     {
         return $this->logger;
     }
 
-    public function setOptions($options)
+    /**
+     * @param array $options
+     */
+    public function setOptions(array $options)
     {
         $this->options = $options;
     }
 
+    /**
+     * @param string $name
+     * @param mixed  $default
+     *
+     * @return mixed string
+     */
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;

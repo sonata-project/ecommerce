@@ -27,20 +27,44 @@ use Sonata\Component\Order\OrderInterface;
  */
 class BaseTransaction implements TransactionInterface
 {
+    /**
+     * @var OrderInterface
+     */
     protected $order;
 
+    /**
+     * @var int
+     */
     protected $transactionId;
 
+    /**
+     * @var int
+     */
     protected $state;
 
+    /**
+     * @var array
+     */
     protected $parameters = array();
 
+    /**
+     * @var string
+     */
     protected $statusCode;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var string
+     */
     protected $paymentCode;
 
+    /**
+     * @var string
+     */
     protected $information;
 
     public function __construct()

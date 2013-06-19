@@ -14,6 +14,11 @@ use Sonata\Component\Customer\CustomerInterface;
 interface InvoiceInterface
 {
 
+    /**
+     * Returns id
+     *
+     * @return int $id
+     */
     public function getId();
 
     /**

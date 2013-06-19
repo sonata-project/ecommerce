@@ -25,6 +25,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class AllData implements FixtureInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function load(ObjectManager $manager)
     {
         /*

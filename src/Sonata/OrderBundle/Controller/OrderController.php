@@ -15,16 +15,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class OrderController extends Controller
 {
+    /**
+     * @throws \RuntimeException
+     */
     public function indexAction()
     {
         throw new \RuntimeException('not implemented');
     }
 
+    /**
+     * @param  unknown           $reference
+     * @throws \RuntimeException
+     */
     public function viewAction($reference)
     {
         throw new \RuntimeException('not implemented');
     }
 
+    /**
+     * @param  unknown           $reference
+     * @throws \RuntimeException
+     */
     public function downloadAction($reference)
     {
         throw new \RuntimeException('not implemented');

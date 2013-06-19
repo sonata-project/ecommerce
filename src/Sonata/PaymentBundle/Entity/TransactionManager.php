@@ -17,10 +17,23 @@ use Doctrine\ORM\EntityRepository;
 
 class TransactionManager implements TransactionManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+    /**
+     * @var EntityRepository
+     */
     protected $repository;
+    /**
+     * @var string
+     */
     protected $class;
 
+    /**
+     * @param EntityManager $em
+     * @param string        $class
+     */
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;

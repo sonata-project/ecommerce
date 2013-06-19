@@ -13,13 +13,29 @@ namespace Sonata\CustomerBundle\Entity;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 class AddressManager implements AddressManagerInterface
 {
+    /**
+     * @var EntityManager
+     */
     protected $em;
+
+    /**
+     * @var EntityRepository
+     */
     protected $repository;
+
+    /**
+     * @var string
+     */
     protected $class;
 
+    /**
+     * @param EntityManager $em
+     * @param string        $class
+     */
     public function __construct(EntityManager $em, $class)
     {
         $this->em    = $em;

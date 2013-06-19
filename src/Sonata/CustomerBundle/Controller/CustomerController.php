@@ -13,6 +13,10 @@ namespace Sonata\CustomerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * @todo Check if it is used
+ *
+ */
 class CustomerController extends Controller
 {
     public function dashboardAction()

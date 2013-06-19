@@ -21,13 +21,20 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class CheckPayment extends BasePayment
 {
+    /**
+     * @var RouterInterface
+     */
     protected $router;
 
+    /**
+     * @var Browser
+     */
     protected $browser;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \Buzz\Browser                              $browser
+     * @param RouterInterface $router
+     * @param LoggerInterface $logger
+     * @param Browser         $browser
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, Browser $browser)
     {

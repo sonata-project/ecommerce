@@ -18,6 +18,9 @@ use Sonata\Component\Payment\PaymentInterface;
  */
 class Pool
 {
+    /**
+     * @var array
+     */
     protected $methods = array();
 
     /**
