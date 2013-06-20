@@ -84,7 +84,7 @@ abstract class BaseProductController extends Controller
      * @param string $productId
      * @param string $slug
      */
-    abstract public function viewVariationsAction($productId, $slug)
+    public function viewVariationsAction($productId, $slug)
     {
 
     }
@@ -92,7 +92,7 @@ abstract class BaseProductController extends Controller
     /**
      * @param BasketElementInterface $basketElement
      */
-    abstract public function viewBasketElement(BasketElementInterface $basketElement)
+    public function viewBasketElement(BasketElementInterface $basketElement)
     {
 
     }
@@ -100,7 +100,7 @@ abstract class BaseProductController extends Controller
     /**
      * @param BasketElementInterface $basketElement
      */
-    abstract public function viewBasketElementConfirmation(BasketElementInterface $basketElement)
+    public function viewBasketElementConfirmation(BasketElementInterface $basketElement)
     {
 
     }
@@ -108,7 +108,7 @@ abstract class BaseProductController extends Controller
     /**
      * @param OrderElementInterface $orderElement
      */
-    abstract public function viewOrderElement(OrderElementInterface $orderElement)
+    public function viewOrderElement(OrderElementInterface $orderElement)
     {
 
     }
@@ -116,7 +116,7 @@ abstract class BaseProductController extends Controller
     /**
      * @param OrderElementInterface $orderElement
      */
-    abstract public function viewEditOrderElement(OrderElementInterface $orderElement)
+    public function viewEditOrderElement(OrderElementInterface $orderElement)
     {
 
     }
