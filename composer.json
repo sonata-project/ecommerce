@@ -26,7 +26,7 @@
         "sonata-project/admin-bundle": ">=2.2,<2.4-dev",
         "sonata-project/intl-bundle": ">=2.2,<2.4-dev",
         
-        "kriswallsmith/buzz": "dev-master",
+        "kriswallsmith/buzz": "0.*",
         "knplabs/knp-menu-bundle": "~1.1",
         "friendsofsymfony/user-bundle": "1.3.*",
         "jms/serializer": "dev-master"
