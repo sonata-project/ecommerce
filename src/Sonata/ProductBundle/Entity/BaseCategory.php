@@ -69,6 +69,16 @@ abstract class BaseCategory implements CategoryInterface
 
     protected $parent;
 
+    protected $products;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * Set sub_description
      *

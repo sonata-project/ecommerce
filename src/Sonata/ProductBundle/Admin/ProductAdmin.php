@@ -144,6 +144,7 @@ class ProductAdmin extends Admin
             ->addIdentifier('name')
             ->add('enabled', null, array('editable' => true))
             ->add('price', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
+            ->add('categories')
         ;
     }
 
@@ -158,6 +159,7 @@ class ProductAdmin extends Admin
             ->add('name')
             ->add('sku')
             ->add('enabled')
+            ->add('categories', null, array('field_options' => array('expanded' => true, 'multiple' => true)))
         ;
     }
 
@@ -177,11 +179,6 @@ class ProductAdmin extends Admin
         $menu->addChild(
             $this->trans('sidemenu.link_product_edit', array(), 'SonataProductBundle'),
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
-        );
-
-        $menu->addChild(
-            $this->trans('sidemenu.link_category_list', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.category.list', array('id' => $id)))
         );
 
         $menu->addChild(

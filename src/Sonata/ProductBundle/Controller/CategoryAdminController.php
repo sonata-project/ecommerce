@@ -11,7 +11,7 @@
 
 namespace Sonata\ProductBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sonata\AdminBundle\Controller\CRUDController as Controller;
 
 class CategoryAdminController extends Controller
 {

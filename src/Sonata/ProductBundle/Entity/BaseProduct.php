@@ -443,6 +443,14 @@ abstract class BaseProduct implements ProductInterface
         return $this->productCategories;
     }
 
+    /**
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
     public function isEnabled()
     {
         return $this->getEnabled();

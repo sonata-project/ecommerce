@@ -201,22 +201,30 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         $formMapper
             ->with('Product')
-            ->add('name')
-            ->add('sku')
-            ->add('descriptionFormatter', 'sonata_formatter_type_selector', array(
+                ->add('name')
+                ->add('sku')
+                ->add('descriptionFormatter', 'sonata_formatter_type_selector', array(
                     'source' => 'rawDescription',
                     'target' => 'description'
                 ))
-            ->add('rawDescription', null, array('attr' => array('class' => 'span10', 'rows' => 20)))
-            ->add('price', 'number')
-            ->add('vat', 'number')
-            ->add('stock', 'integer')
-            ->add('image', 'sonata_type_model_list', array(), array(
-                'link_parameters' => array(
-                    'context' => 'sonata_product',
-                    'filter' => array('context' => array('value' => 'sonata_product'))
-                )
-            ))
+                ->add('rawDescription', null, array('attr' => array('class' => 'span10', 'rows' => 20)))
+                ->add('price', 'number')
+                ->add('vat', 'number')
+                ->add('stock', 'integer')
+                ->add('image', 'sonata_type_model_list', array(), array(
+                    'link_parameters' => array(
+                        'context' => 'sonata_product',
+                        'filter'  => array('context' => array('value' => 'sonata_product'))
+                    )
+                ))
+                ->add('enabled')
+            ->end()
+            ->with('Categories')
+                ->add('categories', 'sonata_type_model', array(
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                ))
             ->end()
         ;
     }
