@@ -10,6 +10,7 @@
 
 namespace Sonata\ProductBundle\Model;
 
+use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
@@ -225,6 +226,23 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function buildCreateForm(FormMapper $formMapper)
     {
         $this->buildEditForm($formMapper);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('name')
+            ->add('sku')
+            ->add('description')
+            ->add('price')
+            ->add('number')
+            ->add('vat')
+            ->add('stock')
+            ->add('enabled')
+        ;
     }
 
     /**

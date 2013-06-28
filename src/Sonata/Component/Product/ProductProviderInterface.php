@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
@@ -115,6 +116,13 @@ interface ProductProviderInterface
      * @return void
      */
     public function createBasketElement(ProductInterface $product = null, array $options = array());
+
+    /**
+     * @abstract
+     * @param  \Sonata\AdminBundle\Show\ShowMapper $showMapper
+     * @return void
+     */
+    public function configureShowFields(ShowMapper $showMapper);
 
     /**
      * @abstract

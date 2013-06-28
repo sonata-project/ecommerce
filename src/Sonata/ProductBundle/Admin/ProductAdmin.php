@@ -17,8 +17,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Product\Pool;
 use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
+use Sonata\Component\Product\ProductInterface;
 
 class ProductAdmin extends Admin
 {
@@ -93,13 +95,8 @@ class ProductAdmin extends Admin
             return;
         }
 
-        $product = $this->getSubject();
-
-        if (!$product) {
-            $product = $this->getNewInstance();
-        }
-
-        $provider = $this->getProductPool()->getProvider($product);
+        $product  = $this->getProduct();
+        $provider = $this->getProductProvider($product);
 
         if ($product->getId() > 0) {
             $provider->buildEditForm($formMapper);
@@ -120,6 +117,22 @@ class ProductAdmin extends Admin
         return array(
             'provider' => $this->getProductType(),
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        // this admin class works only from a request scope
+        if (!$this->hasRequest()) {
+            return;
+        }
+
+        $product  = $this->getProduct();
+        $provider = $this->getProductProvider($product);
+
+        $provider->configureShowFields($showMapper);
     }
 
     /**
@@ -225,5 +238,33 @@ class ProductAdmin extends Admin
     public function preUpdate($product)
     {
         $product->setDescription($this->getPoolFormatter()->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
+    }
+
+    /**
+     * Return the Product Provider.
+     *
+     * @param ProductInterface $product
+     *
+     * @return \Sonata\Component\Product\ProductProviderInterface
+     */
+    public function getProductProvider(ProductInterface $product)
+    {
+        return $this->getProductPool()->getProvider($product);
+    }
+
+    /**
+     * Return the current Product.
+     *
+     * @return ProductInterface
+     */
+    public function getProduct()
+    {
+        $product = $this->getSubject();
+
+        if (!$product) {
+            $product = $this->getNewInstance();
+        }
+
+        return $product;
     }
 }
