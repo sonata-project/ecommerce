@@ -6,11 +6,11 @@
     <parameters>
         <!-- PRODUCT -->
         <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
-        <parameter key="sonata.product.admin.product.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="sonata.product.admin.product.controller">SonataProductBundle:ProductAdmin</parameter>
 
         <!-- CATEGORY -->
         <parameter key="sonata.product.admin.category.class">Sonata\ProductBundle\Admin\CategoryAdmin</parameter>
-        <parameter key="sonata.product.admin.category.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="sonata.product.admin.category.controller">SonataProductBundle:CategoryAdmin</parameter>
 
         <!-- DELIVERY -->
         <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeliveryAdmin</parameter>

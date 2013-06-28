@@ -141,10 +141,9 @@ class ProductAdmin extends Admin
     public function configureListFields(ListMapper $list)
     {
         $list
-            ->add('enabled')
             ->addIdentifier('name')
+            ->add('enabled', null, array('editable' => true))
             ->add('price', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
-            ->add('stock')
         ;
     }
 
@@ -157,6 +156,7 @@ class ProductAdmin extends Admin
     {
         $filter
             ->add('name')
+            ->add('sku')
             ->add('enabled')
         ;
     }

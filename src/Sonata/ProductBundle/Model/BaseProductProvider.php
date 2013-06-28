@@ -200,6 +200,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function buildEditForm(FormMapper $formMapper)
     {
         $formMapper
+            ->with('Product')
             ->add('name')
             ->add('sku')
             ->add('descriptionFormatter', 'sonata_formatter_type_selector', array(
@@ -216,6 +217,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'filter' => array('context' => array('value' => 'sonata_product'))
                 )
             ))
+            ->end()
         ;
     }
 
