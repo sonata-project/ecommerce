@@ -15,6 +15,7 @@ use Sonata\Component\Product\DeliveryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 use Sonata\Component\Product\ProductCategoryInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Sonata\ProductBundle\Entity\BaseProduct
@@ -100,7 +101,7 @@ abstract class BaseProduct implements ProductInterface
     protected $variations = array();
 
     /**
-     * @var \Application\Sonata\ProductBundle\Entity\ProductCategory
+     * @var Collection
      */
     protected $productCategories;
 
@@ -424,11 +425,44 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Add ProductCategories
      *
-     * @param Application\Sonata\ProductBundle\Entity\ProductCategory $productCategories
+     * @param Application\Sonata\ProductBundle\Entity\ProductCategory $productCategory
      */
-    public function addProductCategories(ProductCategoryInterface $productCategories)
+    public function addProductCategory(ProductCategoryInterface $productCategory)
     {
-        $this->productCategories[] = $productCategories;
+        $productCategory->setProduct($this);
+        $this->productCategories[] = $productCategory;
+    }
+
+    /**
+     * Add ProductCategory
+     *
+     * @param ProductCategoryInterface $productCategory
+     */
+    public function addProductCategorie(ProductCategoryInterface $productCategory)
+    {
+        $this->addProductCategory($productCategory);
+    }
+
+    /**
+     * Remove ProductCategories
+     *
+     * @param Application\Sonata\ProductBundle\Entity\ProductCategory $productCategory
+     */
+    public function removeProductCategory(ProductCategoryInterface $productCategory)
+    {
+        if ($this->productCategories->has($productCategory)) {
+            $this->productCategories->remove($productCategory);
+        }
+    }
+
+    /**
+     * Set ProductCategories
+     *
+     * @param Collection $productCategories
+     */
+    public function setProductCategory(Collection $productCategories)
+    {
+        $this->productCategories = $productCategories;
     }
 
     /**

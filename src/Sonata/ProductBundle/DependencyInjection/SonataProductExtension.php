@@ -124,6 +124,18 @@ class SonataProductExtension extends Extension
             'orphanRemoval' => false,
         ));
 
+        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
+            'fieldName'     => 'productCategories',
+            'targetEntity'  => $config['class']['product_category'],
+            'cascade'       => array(
+                'all'
+            ),
+            'mappedBy'      => 'category',
+            'orphanRemoval' => false,
+        ));
+
+
+
         /**
          * DELIVERY
          */
@@ -149,7 +161,9 @@ class SonataProductExtension extends Extension
         $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
              'fieldName'    => 'product',
              'targetEntity' => $config['class']['product'],
-             'cascade'      => array(),
+             'cascade'      => array(
+                'persist',
+             ),
              'mappedBy'     => NULL,
              'inversedBy'   => 'productCategories',
              'joinColumns'  => array(
@@ -166,7 +180,9 @@ class SonataProductExtension extends Extension
         $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
              'fieldName'    => 'category',
              'targetEntity' => $config['class']['category'],
-             'cascade'      => array(),
+             'cascade'      => array(
+                'persist',
+             ),
              'mappedBy'     => NULL,
              'inversedBy'   => 'productCategories',
              'joinColumns'  => array(
@@ -202,7 +218,9 @@ class SonataProductExtension extends Extension
         $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
              'fieldName'     => 'productCategories',
              'targetEntity'  => $config['class']['product_category'],
-             'cascade'       => array(),
+             'cascade'       => array(
+                'persist'
+             ),
              'mappedBy'      => 'product',
              'orphanRemoval' => false,
         ));

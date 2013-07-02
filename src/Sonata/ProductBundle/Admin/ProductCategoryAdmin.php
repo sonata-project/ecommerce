@@ -44,6 +44,7 @@ class ProductCategoryAdmin extends Admin
     {
         $formMapper
             ->add('category')
+            ->add('enabled')
         ;
     }
 

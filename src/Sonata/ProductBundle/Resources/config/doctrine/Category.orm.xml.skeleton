@@ -20,8 +20,7 @@
         <one-to-many
             field="productCategories"
             target-entity="Application\Sonata\ProductBundle\Entity\ProductCategory"
-            mapped-by="category"
-            inverted-by="category">
+            mapped-by="category">
 
             <cascade-type>
                 <cascade-all />
