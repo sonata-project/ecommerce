@@ -55,6 +55,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $basketElementManager;
 
     /**
+     * @var string
+     */
+    protected $orderElementClassName;
+
+    /**
      * @param \JMS\Serializer\SerializerInterface $serializer
      */
     public function __construct(SerializerInterface $serializer)
@@ -69,6 +74,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function setBasketElementManager(BasketElementManagerInterface $basketElementManager)
     {
         $this->basketElementManager = $basketElementManager;
+    }
+
+    /**
+     * @param string $orderElementClassName
+     */
+    public function setOrderElementClassName($orderElementClassName)
+    {
+        $this->orderElementClassName = $orderElementClassName;
     }
 
     /**
@@ -115,8 +128,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement)
     {
-        $orderElementClass = $this->getBasketElementManager()->getClass();
-        $orderElement = new $orderElementClass;
+        $orderElement = new $this->orderElementClassName;
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setPrice($basketElement->getTotal(false));
         $orderElement->setVat($basketElement->getVat());
