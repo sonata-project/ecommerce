@@ -220,10 +220,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 ->add('enabled')
             ->end()
             ->with('Categories')
-                ->add('categories', 'sonata_type_model', array(
+                ->add('productCategories', 'sonata_type_model', array(
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true,
+                    'by_reference' => false,
                 ))
             ->end()
         ;

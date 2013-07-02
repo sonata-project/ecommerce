@@ -12,6 +12,10 @@
         <parameter key="sonata.product.admin.category.class">Sonata\ProductBundle\Admin\CategoryAdmin</parameter>
         <parameter key="sonata.product.admin.category.controller">SonataProductBundle:CategoryAdmin</parameter>
 
+        <!-- PRODUCTCATEGORY -->
+        <parameter key="sonata.product.admin.product_category.class">Sonata\ProductBundle\Admin\ProductCategoryAdmin</parameter>
+        <parameter key="sonata.product.admin.product_category.controller">SonataProductBundle:ProductCategoryAdmin</parameter>
+
         <!-- DELIVERY -->
         <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeliveryAdmin</parameter>
         <parameter key="sonata.product.admin.delivery.controller">SonataAdminBundle:CRUD</parameter>
@@ -29,7 +33,7 @@
             <argument>%sonata.product.admin.product.controller%</argument>
 
             <call method="addChild">
-                <argument type="service" id="sonata.product.admin.category" />
+                <argument type="service" id="sonata.product.admin.product_category" />
             </call>
 
             <call method="addChild">
@@ -54,6 +58,13 @@
             <call method="setPoolFormatter">
                 <argument type="service" id="sonata.formatter.pool" />
             </call>
+        </service>
+
+        <service id="sonata.product.admin.product_category" class="%sonata.product.admin.product_category.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product_category" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument />
+            <argument>%sonata.product.admin.product_category.entity%</argument>
+            <argument>%sonata.product.admin.product_category.controller%</argument>
         </service>
 
         <service id="sonata.product.admin.delivery" class="%sonata.product.admin.delivery.class%">

@@ -69,7 +69,7 @@ abstract class BaseCategory implements CategoryInterface
 
     protected $parent;
 
-    protected $products;
+    protected $productCategories;
 
     /**
      * @return string

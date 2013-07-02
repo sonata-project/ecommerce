@@ -144,7 +144,7 @@ class ProductAdmin extends Admin
             ->addIdentifier('name')
             ->add('enabled', null, array('editable' => true))
             ->add('price', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
-            ->add('categories')
+            ->add('productCategories', null, array('associated_tostring' => 'getCategory'))
         ;
     }
 
@@ -159,7 +159,7 @@ class ProductAdmin extends Admin
             ->add('name')
             ->add('sku')
             ->add('enabled')
-            ->add('categories', null, array('field_options' => array('expanded' => true, 'multiple' => true)))
+            ->add('productCategories.category', null, array('field_options' => array('expanded' => true, 'multiple' => true)))
         ;
     }
 

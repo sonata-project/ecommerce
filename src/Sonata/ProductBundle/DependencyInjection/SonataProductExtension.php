@@ -124,13 +124,6 @@ class SonataProductExtension extends Extension
             'orphanRemoval' => false,
         ));
 
-        $collector->addAssociation($config['class']['category'], 'mapManyToMany', array(
-            'fieldName'     => 'products',
-            'targetEntity'  => $config['class']['product'],
-            'cascade'       => array( ),
-            'mappedBy'      => 'categories',
-        ));
-
         /**
          * DELIVERY
          */
@@ -150,31 +143,41 @@ class SonataProductExtension extends Extension
             'orphanRemoval' => false,
         ));
 
-        $collector->addAssociation($config['class']['product'], 'mapManyToMany', array(
-            'fieldName' => 'categories',
-            'targetEntity' => $config['class']['category'],
-            'cascade' =>
-            array(
-                1 => 'persist',
-            ),
-            'joinTable' =>
-            array(
-                'name' => 'product__product_category',
-                'joinColumns' =>
-                array(
-                    array(
-                        'name' => 'product_id',
-                        'referencedColumnName' => 'id',
-                    ),
-                ),
-                'inverseJoinColumns' =>
-                array(
-                    array(
-                        'name' => 'category_id',
-                        'referencedColumnName' => 'id',
-                    ),
-                ),
-            ),
+        /**
+         * PRODUCT CATEGORY
+         */
+        $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
+             'fieldName'    => 'product',
+             'targetEntity' => $config['class']['product'],
+             'cascade'      => array(),
+             'mappedBy'     => NULL,
+             'inversedBy'   => 'productCategories',
+             'joinColumns'  => array(
+                 array(
+                     'name' => 'product_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                     'onUpdate' => 'CASCADE',
+                 ),
+             ),
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
+             'fieldName'    => 'category',
+             'targetEntity' => $config['class']['category'],
+             'cascade'      => array(),
+             'mappedBy'     => NULL,
+             'inversedBy'   => 'productCategories',
+             'joinColumns'  => array(
+                 array(
+                     'name' => 'category_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                     'onUpdate' => 'CASCADE',
+                 ),
+             ),
+             'orphanRemoval' => false,
         ));
 
         /**

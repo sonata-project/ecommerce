@@ -99,8 +99,6 @@ abstract class BaseProduct implements ProductInterface
 
     protected $variations = array();
 
-    protected $categories = array();
-
     /**
      * @var \Application\Sonata\ProductBundle\Entity\ProductCategory
      */
@@ -444,13 +442,10 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * @return array
+     * Tells if product is enabled
+     *
+     * @return boolean
      */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
     public function isEnabled()
     {
         return $this->getEnabled();
