@@ -54,6 +54,11 @@ class Product extends BaseProduct
     }
 }
 
+class OrderElement extends BaseOrderElement
+{
+
+}
+
 class BaseProductServiceTest_ProductProvider extends BaseProductProvider
 {
     /**
@@ -87,6 +92,8 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Tests\Component\Product\BaseOrderElementTest_ProductProvider'));
 
         $provider->setBasketElementManager($basketElementManager);
+
+        $provider->setOrderElementClassName(get_class(new OrderElement()));
 
         return $provider;
     }
