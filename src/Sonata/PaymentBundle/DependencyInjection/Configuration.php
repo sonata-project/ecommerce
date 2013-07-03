@@ -172,6 +172,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('language')->cannotBeEmpty()->end()
                                     ->scalarNode('payment_means')->cannotBeEmpty()->end()
                                     ->scalarNode('base_folder')->cannotBeEmpty()->end()
+                                    ->scalarNode('data')->defaultValue('')->end()
 
                                     ->scalarNode('header_flag')->defaultValue('no')->cannotBeEmpty()->end()
                                     ->scalarNode('capture_day')->defaultValue('')->end()

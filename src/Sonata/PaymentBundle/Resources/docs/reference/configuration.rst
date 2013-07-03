@@ -93,7 +93,7 @@ Full Configuration Options
                     language:           fr
                     payment_means:      %scellius.means%
                     header_fla:         no
-
+                    data:
 
                     capture_day:
                     capture_mode:

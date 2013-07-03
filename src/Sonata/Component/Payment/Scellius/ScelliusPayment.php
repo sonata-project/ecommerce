@@ -565,7 +565,7 @@ class ScelliusPayment extends BasePayment
             'customer_id'               => $order->getCustomer()->getId(),
             'customer_email'            => $order->getCustomer()->getEmail(),
             'customer_ip_address'       => '',
-            'data'                      => '',
+            'data'                      => $this->getOption('data'),
             'return_context'            => '',
             'target'                    => '',
             'order_id'                  => $order->getReference()
