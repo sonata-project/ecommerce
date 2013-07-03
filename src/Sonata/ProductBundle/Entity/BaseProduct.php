@@ -90,9 +90,9 @@ abstract class BaseProduct implements ProductInterface
     protected $package;
 
     /**
-     * @var \Sonata\ProductBundle\Entity\BaseDelivery
+     * @var Collection
      */
-    protected $delivery;
+    protected $deliveries;
 
     protected $parent;
 
@@ -372,7 +372,30 @@ abstract class BaseProduct implements ProductInterface
      */
     public function addDelivery(DeliveryInterface $delivery)
     {
-        $this->delivery[] = $delivery;
+        $delivery->setProduct($this);
+        $this->deliveries[] = $delivery;
+    }
+
+    /**
+     * Adds a delivery (grammar mixup)
+     *
+     * @param DeliveryInterface $delivery
+     */
+    public function addDeliverie(DeliveryInterface $delivery)
+    {
+        $this->addDelivery($delivery);
+    }
+
+    /**
+     * Remove delivery
+     *
+     * @param \Sonata\Component\Product\DeliveryInterface $delivery
+     */
+    public function removeDelivery(DeliveryInterface $delivery)
+    {
+        if ($this->deliveries->contains($delivery)) {
+            $this->deliveries->remove($delivery);
+        }
     }
 
     /**
@@ -380,9 +403,19 @@ abstract class BaseProduct implements ProductInterface
      *
      * @return \Doctrine\Common\Collections\Collection $delivery
      */
-    public function getDelivery()
+    public function getDeliveries()
     {
-        return $this->delivery;
+        return $this->deliveries;
+    }
+
+    /**
+     * Set deliveries
+     *
+     * @param Collection $deliveries
+     */
+    public function setDeliveries(Collection $deliveries)
+    {
+        $this->deliveries = $deliveries;
     }
 
     /**

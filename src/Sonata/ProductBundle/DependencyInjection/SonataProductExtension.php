@@ -142,9 +142,11 @@ class SonataProductExtension extends Extension
         $collector->addAssociation($config['class']['delivery'], 'mapManyToOne', array(
             'fieldName'    => 'product',
             'targetEntity' => $config['class']['product'],
-            'cascade'      => array(),
+            'cascade'      => array(
+                'persist'
+            ),
             'mappedBy'     => NULL,
-            'inversedBy'   => NULL,
+            'inversedBy'   => 'deliveries',
             'joinColumns'  => array(
                 array(
                     'name' => 'product_id',
@@ -208,9 +210,11 @@ class SonataProductExtension extends Extension
         ));
 
         $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
-             'fieldName'     => 'delivery',
+             'fieldName'     => 'deliveries',
              'targetEntity'  => $config['class']['delivery'],
-             'cascade'       => array(),
+             'cascade'       => array(
+                 'persist'
+             ),
              'mappedBy'      => 'product',
              'orphanRemoval' => false,
         ));

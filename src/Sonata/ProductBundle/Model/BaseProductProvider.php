@@ -240,6 +240,15 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'inline' => 'table'
                 ))
             ->end()
+            ->with('Deliveries')
+                ->add('deliveries', 'sonata_type_collection', array(
+                    'required' => false,
+                    'by_reference' => false,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ))
+            ->end()
         ;
     }
 

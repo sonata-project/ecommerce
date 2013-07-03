@@ -164,30 +164,6 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
-    {
-        if (!$childAdmin && !in_array($action, array('edit'))) {
-            return;
-        }
-
-        $admin = $this->isChild() ? $this->getParent() : $this;
-
-        $id = $admin->getRequest()->get('id');
-
-        $menu->addChild(
-            $this->trans('sidemenu.link_product_edit', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
-        );
-
-        $menu->addChild(
-            $this->trans('sidemenu.link_delivery_list', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
-        );
-    }
-
-    /**
      * @param \Sonata\Component\Product\Pool $productPool
      */
     public function setProductPool(Pool $productPool)

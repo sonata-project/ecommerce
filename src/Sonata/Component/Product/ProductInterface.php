@@ -162,5 +162,5 @@ interface ProductInterface
      * @abstract
      * @return array
      */
-    public function getDelivery();
+    public function getDeliveries();
 }
