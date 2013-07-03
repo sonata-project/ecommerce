@@ -426,6 +426,6 @@ abstract class BaseAddress implements AddressInterface
 
     public function __toString()
     {
-        return trim(sprintf("%s - %s", $this->getName(), $this->getFullAddress()));
+        return $this->getName();
     }
 }

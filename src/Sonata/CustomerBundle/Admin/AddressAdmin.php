@@ -18,6 +18,8 @@ use Application\Sonata\CustomerBundle\Entity\Address;
 
 class AddressAdmin extends Admin
 {
+    protected $translationDomain = "SonataCustomerBundle";
+
     /**
      * {@inheritDoc}
      */
@@ -34,7 +36,7 @@ class AddressAdmin extends Admin
     {
         $formMapper
             ->with($this->trans('address.form.group_advanced_label', array(), 'SonataCustomerBundle'))
-                ->add('type', 'choice', array('choices' => Address::getTypesList()))
+                ->add('type', 'choice', array('choices' => Address::getTypesList(), 'translation_domain' => 'SonataCustomerBundle'))
                 ->add('current')
                 ->add('name')
             ->end();
@@ -75,7 +77,7 @@ class AddressAdmin extends Admin
             ->addIdentifier('fulladdress', 'string', array('code' => 'getFullAddress'))
             ->addIdentifier('name')
             ->add('current')
-            ->add('typeCode', 'string')
+            ->add('typeCode', 'trans', array('catalogue' => $this->translationDomain))
         ;
     }
 }
