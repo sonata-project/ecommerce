@@ -1,0 +1,5 @@
+{% block form_label %}
+{% spaceless %}
+    <label for="{{ id }}">{{ id|trans({}, 'SonataBasketBundle') }}</label>
+{% endspaceless %}
+{% endblock form_label %}

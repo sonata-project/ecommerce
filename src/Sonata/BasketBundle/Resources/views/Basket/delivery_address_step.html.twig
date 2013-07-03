@@ -11,7 +11,9 @@ file that was distributed with this source code.
 
 <h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
-{# <form action="{{ url('sonata_basket_delivery') }}" method="POST" >#}
+
+{% form_theme form 'SonataBasketBundle:Form:label.html.twig' %}
+
 {{ form_start(form) }}
     {{ form_errors(form) }}
     {{ form_rest(form) }}

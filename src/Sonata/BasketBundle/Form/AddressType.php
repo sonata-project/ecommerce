@@ -38,16 +38,16 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label' => 'sonata_address_name_label'))
-            ->add('firstname', null, array('label' => 'sonata_address_firstname_label'))
-            ->add('lastname', null, array('label' => 'sonata_address_lastname_label'))
-            ->add('address1', null, array('label' => 'sonata_address_address1_label'))
-            ->add('address2', null, array('label' => 'sonata_address_address2_label'))
-            ->add('address3', null, array('label' => 'sonata_address_address3_label'))
-            ->add('postcode', null, array('label' => 'sonata_address_postcode_label'))
-            ->add('city', null, array('label' => 'sonata_address_city_label'))
-            ->add('countryCode', null, array('label' => 'sonata_address_countrycode_label'))
-            ->add('phone', null, array('label' => 'sonata_address_phone_label'))
+            ->add('name')
+            ->add('firstname')
+            ->add('lastname')
+            ->add('address1')
+            ->add('address2')
+            ->add('address3')
+            ->add('postcode')
+            ->add('city')
+            ->add('countryCode')
+            ->add('phone')
         ;
     }
 
