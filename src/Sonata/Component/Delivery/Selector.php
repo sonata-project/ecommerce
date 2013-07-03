@@ -120,7 +120,7 @@ class Selector implements DeliverySelectorInterface
             }
 
             /** @var $productDelivery \Sonata\Component\Product\DeliveryInterface */
-            foreach ($product->getDelivery() as $productDelivery) {
+            foreach ($product->getDeliveries() as $productDelivery) {
 
                 // delivery method already selected
                 if (array_key_exists($productDelivery->getCode(), $instances)) {
