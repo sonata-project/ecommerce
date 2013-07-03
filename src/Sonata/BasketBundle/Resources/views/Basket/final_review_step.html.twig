@@ -59,7 +59,7 @@ file that was distributed with this source code.
         <td class="basket_validation_box">
             <h3>{{ 'sonata.basket.title_delivery_address'|trans({}, 'SonataBasketBundle') }}</h3>
             {% if basket.deliverymethod.isAddressRequired() %}
-                {{ basket.deliveryaddress.getFullAddress("<br />") }}
+                {{ basket.deliveryaddress.getFullAddress("<br />")|raw }}
                 <br />
             {% else %}
                 {{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}
@@ -69,7 +69,7 @@ file that was distributed with this source code.
             <h3>{{ 'sonata.basket.title_payment_address'|trans({}, 'SonataBasketBundle') }}</h3>
             {{  basket.paymentaddress.name }}
 
-            {{  basket.paymentaddress.getFullAddress("<br />") }}
+            {{  basket.paymentaddress.getFullAddress("<br />")|raw }}
         </td>
     </tr>
     <tr>

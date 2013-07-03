@@ -13,7 +13,7 @@ file that was distributed with this source code.
     <td>
         {% block product_description %}
             <b>{{ basketElement.name }}</b> <br />
-            {{ basketElement.product.description }}
+            {{ basketElement.product.description|raw }}
         {% endblock %}
     </td>
     <td>
