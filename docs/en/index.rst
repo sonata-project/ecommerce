@@ -6,6 +6,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+    Installation <reference/installation>
     Project Architecture <reference/architecture>
-    Processes <reference/processes>
+    Payment <reference/payment/processes>
+        Paypal <reference/payment/Paypal>
 
