@@ -1,3 +1,9 @@
+=============================
+Sonata ECommerce Architecture
+=============================
+
+.. image:: ../../images/dcEntities.svg
+
 Product
 -------
 

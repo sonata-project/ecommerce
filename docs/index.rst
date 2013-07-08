@@ -9,9 +9,10 @@ Welcome to Sonata E-Commerce's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
+   :titlesonly:
 
-    Home <en/index>
+    English <en/index>
 
 
 Indices and tables

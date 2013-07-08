@@ -1,4 +1,15 @@
+=======
 Payment
+=======
+
+Methods
+-------
+.. toctree::
+    :maxdepth: 2
+
+    Paypal <paypal>
+
+Process
 -------
 
 Regardless of the payment method, the payment process is as follows:

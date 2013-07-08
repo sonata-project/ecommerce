@@ -8,6 +8,5 @@ Contents:
 
     Installation <reference/installation>
     Project Architecture <reference/architecture>
-    Payment <reference/payment/processes>
-        Paypal <reference/payment/Paypal>
+    Payment <reference/payment/index>
 
