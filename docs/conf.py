@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# Write the Docs documentation build configuration file, created by
-# sphinx-quickstart on Mon Apr  8 08:54:37 2013.
+# Sonata E-Commerce documentation build configuration file, created by
+# sphinx-quickstart on Mon Jul  8 16:33:57 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
 #
@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sonata ECommerce'
-copyright = u'2013, Sonata-Project'
+project = u'Sonata E-Commerce'
+copyright = u'2013, Thomas Rabaix'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -64,11 +64,7 @@ release = '1.0'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = [
-    '_build',
-    'tests',
-    'build',
-]
+exclude_patterns = ['_build']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -110,7 +106,7 @@ html_theme = 'default'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = project
+#html_title = None
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -171,7 +167,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'SECommercedoc'
+htmlhelp_basename = 'SonataE-Commercedoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -190,7 +186,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'SonataECommerce.tex', u'Sonata ECommerce Documentation',
+  ('index', 'SonataE-Commerce.tex', u'Sonata E-Commerce Documentation',
    u'Thomas Rabaix', 'manual'),
 ]
 
@@ -220,7 +216,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'SonataECommerce', u'Sonata ECommerce Documentation',
+    ('index', 'sonatae-commerce', u'Sonata E-Commerce Documentation',
      [u'Thomas Rabaix'], 1)
 ]
 
@@ -234,8 +230,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'SonataECommerce', u'Sonata ECommerce Documentation',
-     u'Thomas Rabaix', 'SonataECommerce', 'One line description of project.',
+  ('index', 'SonataE-Commerce', u'Sonata E-Commerce Documentation',
+   u'Thomas Rabaix', 'SonataE-Commerce', 'One line description of project.',
    'Miscellaneous'),
 ]
 
