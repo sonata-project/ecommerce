@@ -2,7 +2,18 @@
 Installation
 ============
 
-- Check dependencies are installed :
+Quick Install
+=============
+
+If you want to create a quick and running sonata ecommerce project, we strongly advise that you use our sandbox:
+See `Sonata Sandbox installation <https://github.com/sonata-project/sandbox>`_.
+
+Manual Install
+==============
+
+You already have a project and want to add ecommerce capabilities to it? Follow these instructions:
+
+- Check dependencies are installed:
 
     - Symfony2
     - PHP 5.3.2
