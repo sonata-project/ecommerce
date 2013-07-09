@@ -2,6 +2,8 @@
 Ogone setup
 ===========
 
+Here's how to configure Ogone for sonata ecommerce:
+
 1. Go to the Ogone configuration portal: 
     1. ``Technical Settings`` -> ``Global Security Parameters`` ; set ``Hash Algorithm`` to ``SHA-1``
     2. ``Technical Settings`` -> ``Data and origin verification`` ; add your various domain(s) URL(s) separated by ';' (no spaces)

@@ -1,5 +1,5 @@
 =========
-Tutorials
+Cook Book
 =========
 
 .. toctree::

@@ -1,9 +1,4 @@
-=============================
-Sonata ECommerce Architecture
-=============================
-
-.. image:: ../images/dcEntities.svg
-
+=======
 Product
 =======
 
@@ -29,17 +24,4 @@ A ``ProductManager`` is responsable of the ``Product`` lifecycle with the databa
 A ``CollectionProductManager`` is responsable of retrieving a set of different products.
 
   - Retrieve products
-
-Customer #TODO
-==============
-
-Basket #TODO
-============
-
-Order #TODO
-===========
-
-Invoice #TODO
-=============
-
 

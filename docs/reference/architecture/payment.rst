@@ -2,15 +2,9 @@
 Payment
 =======
 
-Methods
-=======
-.. toctree::
-    :maxdepth: 2
+Payment can be quite a complicated subject. One of our main goals was to provide a system that could interconnect with any payment institution (or be overridden to do so easily). The other one was, of course, security. You don't want for instance a user to be able to access a URL on your application that will automatically change its order's status from waiting to paid.
 
-    Scellius (Credit Card) #TODO <scellius>
-    Ogone (Credit Card) <ogone>
-    Paypal <paypal>
-    Check #TODO <check>
+You'll find here the payment processes described, so you can understand them and be more comfortable with all of it when you'll digg in.
 
 Interaction with payment institution
 ====================================

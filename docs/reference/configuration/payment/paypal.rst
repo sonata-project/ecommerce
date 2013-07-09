@@ -2,6 +2,8 @@
 Paypal setup
 ============
 
+Here's how to configure paypal for sonata ecommerce:
+
 1. Activate IPN notification service
 
 url : http://youwebsite.com/shop/payment/callback
