@@ -2,7 +2,7 @@
 Sonata ECommerce Architecture
 =============================
 
-.. image:: ../../images/dcEntities.svg
+.. image:: ../images/dcEntities.svg
 
 Product
 =======
