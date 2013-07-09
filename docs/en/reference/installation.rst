@@ -5,28 +5,26 @@ Installation
 
     - Symfony2
     - PHP 5.3.2
-    - https://github.com/schmittjoh/JMSSerializerBundle
 
-- add the FOSUserBundle bundle (user management) and follow FOSUserBundle README
-
-::
-
-        git submodule add git://github.com/FriendsOfSymfony/FOSUserBundle.git src/FOS/UserBundle
-
-- add the SonataEasyExtendsBundle bundle (user management) and follow EasyExtendsBundle README
+- Add the project to your composer.json
 
 ::
 
-        git submodule add git://github.com/sonata-project/SonataEasyExtendsBundle.git src/Sonata/EasyExtendsBundle
+    "require" {
+        ...
+        "sonata-project/ecommerce": "2.3.*",
+        ...
+    }
+    
+- Run composer install
 
-- add the SonataMediaBundle bundle (media management) and follow MediaBundle README
+- Follow FOSUserBundle README to set it up
 
-::
+- Follow EasyExtendsBundle README
 
-        git submodule add git://github.com/sonata-project/SonataMediaBundle.git src/Sonata/MediaBundle
+- Follow MediaBundle README
 
-
-- add the following bundle in your kernel::registerBundles() method
+- Add the following bundles in your ``kernel::registerBundles()`` method
 
 ::
 
@@ -43,7 +41,7 @@ Installation
         new Sonata\PaymentBundle\SonataPaymentBundle(),
 
 
-- run the easy-extends:generate command, this command will generate the Application entities required by the Sonata's Bundles
+- Run the ``easy-extends:generate`` command, this command will generate the Application entities required by the Sonata's Bundles
 
 ::
 
@@ -56,7 +54,7 @@ Installation
         php app/console sonata:easy-extends:generate SonataPaymentBundle
         php app/console sonata:easy-extends:generate SonataProductBundle
 
-- then add the following bundles in your kernel::registerBundles() method
+- Then add the following bundles in your ``kernel::registerBundles()`` method
 
 ::
 
@@ -69,17 +67,9 @@ Installation
         new Application\Sonata\PaymentBundle\SonataPaymentBundle(),
         new Application\Sonata\ProductBundle\SonataProductBundle(),
 
-You can use this bundle to extends entities or template files
+You can use these bundles to extend entities or template files
 
-- add the following autoload information into the autoload.php file
-
-::
-
-        // sonata core bundle
-        'Sonata'              => array(__DIR__.'/vendor/sonata/src', __DIR__),
-        'FOS'                 => __DIR__,
-
-- edit your config.yml and add the following lines
+- Edit your ``config.yml`` and add the following lines
 
 ::
 
@@ -156,7 +146,7 @@ You can use this bundle to extends entities or template files
     #           sonata.product.type.bottle:
     #                class: Application\Sonata\ProductBundle\Entity\BottleProductProvider
 
-- add the current lines in your routing.yml files
+- Add the current lines in your ``routing.yml`` files
 
 ::
 
@@ -185,7 +175,7 @@ You can use this bundle to extends entities or template files
             resource: @SonataInvoiceBundle/Resources/config/routing/invoice.xml
             prefix: /shop/user/invoice
 
-- add these lines into the admin (AdminBundle)
+- Add these lines into the admin (AdminBundle)
 
 ::
 
