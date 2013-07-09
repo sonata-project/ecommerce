@@ -275,6 +275,7 @@ class Paypal extends BasePaypal
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_ERROR_VALIDATION);
 
+            // TODO error in status -> setting payment status to an order status value
             $transaction->getOrder()->setPaymentStatus(OrderInterface::STATUS_ERROR);
 
             if ($this->getLogger()) {
