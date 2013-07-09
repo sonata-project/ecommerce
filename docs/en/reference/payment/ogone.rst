@@ -1,5 +1,6 @@
+===========
 Ogone setup
------------
+===========
 
 1. Go to the Ogone configuration portal: 
     1. ``Technical Settings`` -> ``Global Security Parameters`` ; set ``Hash Algorithm`` to ``SHA-1``

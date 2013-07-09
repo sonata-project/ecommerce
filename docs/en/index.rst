@@ -1,7 +1,6 @@
+=====================================================
 Welcome to Sonata E-Commerce's English documentation!
 =====================================================
-
-Contents:
 
 .. toctree::
    :maxdepth: 2

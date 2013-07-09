@@ -1,5 +1,6 @@
+============
 Paypal setup
-------------
+============
 
 1. Activate IPN notification service
 

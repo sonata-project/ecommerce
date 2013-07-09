@@ -3,7 +3,7 @@ Payment
 =======
 
 Methods
--------
+=======
 .. toctree::
     :maxdepth: 2
 
@@ -13,7 +13,7 @@ Methods
     Check #TODO <check>
 
 Interaction with payment institution
-------------------------------------
+====================================
 
 Regardless of the payment method, the payment process is as follows:
 
@@ -35,7 +35,7 @@ If the user didn't simply close the window, he's redirected to our website : thi
 .. image:: ../../../images/dsPayment.svg
 
 Data transformation during payment
-----------------------------------
+==================================
 
 - Before calling the payment institution:
     - The basket is transformed into an order via the basketTransformer linked to the payment method chosen by the user and the order is saved.

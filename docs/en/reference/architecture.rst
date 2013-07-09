@@ -5,7 +5,7 @@ Sonata ECommerce Architecture
 .. image:: ../../images/dcEntities.svg
 
 Product
--------
+=======
 
 A ``Product`` defines the data related to one entry in the persistency layer. An application
 can have different types of product. A product is always linked to a ``ProductProvider``.
@@ -29,3 +29,17 @@ A ``ProductManager`` is responsable of the ``Product`` lifecycle with the databa
 A ``CollectionProductManager`` is responsable of retrieving a set of different products.
 
   - Retrieve products
+
+Customer #TODO
+==============
+
+Basket #TODO
+============
+
+Order #TODO
+===========
+
+Invoice #TODO
+=============
+
+
