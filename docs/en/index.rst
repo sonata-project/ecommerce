@@ -8,4 +8,5 @@ Welcome to Sonata E-Commerce's English documentation!
     Installation <reference/installation>
     Project Architecture <reference/architecture>
     Payment <reference/payment/index>
+    Tutorials <reference/tutorials/index>
 
