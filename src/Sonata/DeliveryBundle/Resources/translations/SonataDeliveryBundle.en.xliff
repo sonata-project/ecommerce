@@ -2,6 +2,15 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+          
+            <!-- Begin - Titles -->
+            <trans-unit id="delivery">
+                <source>delivery</source>
+                <target>Delivery</target>
+            </trans-unit>
+            <!-- End - Titles -->
+            
+            <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_delivery_list">
                 <source>breadcrumb.link_delivery_list</source>
                 <target>Delivery</target>
@@ -9,6 +18,8 @@
             <trans-unit id="breadcrumb.link_delivery_edit">
                 <source>breadcrumb.link_delivery_edit</source>
                 <target>Edit</target>
+            <!-- End - Breadcrumb translations -->
+
             </trans-unit>
         </body>
     </file>
