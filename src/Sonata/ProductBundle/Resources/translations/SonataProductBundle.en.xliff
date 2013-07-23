@@ -2,46 +2,48 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
-      <trans-unit id="43efccf4233a4e34951362f6e877e2fc2f2033e1" resname="title_select_provider">
-        <jms:reference-file line="14">views/ProductAdmin/select_provider.html.twig</jms:reference-file>
-        <source>title_select_provider</source>
-        <target state="new">Select a provider</target>
-      </trans-unit>
-      <trans-unit id="1b9c4ad816837d8157ddce8bc091c25a43534a51" resname="sonata.basket.message_product_not_available">
-        <jms:reference-file line="14">views/Product/form_basket_element.html.twig</jms:reference-file>
-        <source>sonata.basket.message_product_not_available</source>
-        <target state="new">The product is not available.</target>
-      </trans-unit>
-      <trans-unit id="86d31e1a805f93dc2b8f3008b81d7d9be61c4166" resname="sonata.product.btn_add_to_basket">
-        <jms:reference-file line="34">views/Entity/view.html.twig</jms:reference-file>
-        <source>sonata.product.btn_add_to_basket</source>
-        <target state="new">Add to cart</target>
-      </trans-unit>
-      <trans-unit id="3831ab0a2988bb64112fc0303230d9e1f6486ed0" resname="no_products_available">
-        <jms:reference-file line="15">views/Category/list_products.html.twig</jms:reference-file>
-        <source>no_products_available</source>
-        <target state="new">No products available</target>
-      </trans-unit>
-      <trans-unit id="4dc7a3a416170f873433f74a7d4c88ee56ffc1e3" resname="no_sub_categories_available">
-        <jms:reference-file line="15">views/Category/list_sub_categories.html.twig</jms:reference-file>
-        <source>no_sub_categories_available</source>
-        <target state="new">No subcategories available</target>
-      </trans-unit>
-      <trans-unit id="00b0661d85801c9dae0ddc7620e333c08eeb082d" resname="title_category_list">
-        <jms:reference-file line="12">views/Category/index.html.twig</jms:reference-file>
-        <source>title_category_list</source>
-        <target state="new">Categories</target>
-      </trans-unit>
-      <trans-unit id="3f202b5b6f5a80347a815726f552d1b566028488" resname="title_list_products">
-        <jms:reference-file line="12">views/Category/list_products.html.twig</jms:reference-file>
-        <source>title_list_products</source>
-        <target state="new">Products</target>
-      </trans-unit>
-      <trans-unit id="9f496102cc4785f2503a5acc63ed5b15d9757fc7" resname="title_sub_categories">
-        <jms:reference-file line="12">views/Category/list_sub_categories.html.twig</jms:reference-file>
-        <source>title_sub_categories</source>
-        <target state="new">Subcategories</target>
-      </trans-unit>
+
+            <!-- Begin - Title translations -->
+            <trans-unit id="43efccf4233a4e34951362f6e877e2fc2f2033e1" resname="title_select_provider">
+                <jms:reference-file line="14">views/ProductAdmin/select_provider.html.twig</jms:reference-file>
+                <source>title_select_provider</source>
+                <target state="new">Select a provider</target>
+            </trans-unit>
+            <trans-unit id="1b9c4ad816837d8157ddce8bc091c25a43534a51" resname="sonata.basket.message_product_not_available">
+                <jms:reference-file line="14">views/Product/form_basket_element.html.twig</jms:reference-file>
+                <source>sonata.basket.message_product_not_available</source>
+                <target state="new">The product is not available.</target>
+            </trans-unit>
+            <trans-unit id="86d31e1a805f93dc2b8f3008b81d7d9be61c4166" resname="sonata.product.btn_add_to_basket">
+                <jms:reference-file line="34">views/Entity/view.html.twig</jms:reference-file>
+                <source>sonata.product.btn_add_to_basket</source>
+                <target state="new">Add to cart</target>
+            </trans-unit>
+            <trans-unit id="3831ab0a2988bb64112fc0303230d9e1f6486ed0" resname="no_products_available">
+                <jms:reference-file line="15">views/Category/list_products.html.twig</jms:reference-file>
+                <source>no_products_available</source>
+                <target state="new">No products available</target>
+            </trans-unit>
+            <trans-unit id="4dc7a3a416170f873433f74a7d4c88ee56ffc1e3" resname="no_sub_categories_available">
+                <jms:reference-file line="15">views/Category/list_sub_categories.html.twig</jms:reference-file>
+                <source>no_sub_categories_available</source>
+                <target state="new">No subcategories available</target>
+            </trans-unit>
+            <trans-unit id="00b0661d85801c9dae0ddc7620e333c08eeb082d" resname="title_category_list">
+                <jms:reference-file line="12">views/Category/index.html.twig</jms:reference-file>
+                <source>title_category_list</source>
+                <target state="new">Categories</target>
+            </trans-unit>
+            <trans-unit id="3f202b5b6f5a80347a815726f552d1b566028488" resname="title_list_products">
+                <jms:reference-file line="12">views/Category/list_products.html.twig</jms:reference-file>
+                <source>title_list_products</source>
+                <target state="new">Products</target>
+            </trans-unit>
+            <trans-unit id="9f496102cc4785f2503a5acc63ed5b15d9757fc7" resname="title_sub_categories">
+                <jms:reference-file line="12">views/Category/list_sub_categories.html.twig</jms:reference-file>
+                <source>title_sub_categories</source>
+                <target state="new">Subcategories</target>
+            </trans-unit>
             <trans-unit id="sonata_ecommerce">
                 <source>sonata_ecommerce</source>
                 <target>Ecommerce</target>
@@ -54,7 +56,17 @@
                 <source>category</source>
                 <target>Category</target>
             </trans-unit>
+            <trans-unit id="delivery">
+                <source>delivery</source>
+                <target>Delivery</target>
+            </trans-unit>
+            <trans-unit id="sonata.product.label_quantity">
+                <source>sonata.product.label_quantity</source>
+                <target>Quantity</target>
+            </trans-unit>
+            <!-- End - Title translations -->
 
+            <!-- Begin - Sidemenu translations -->
             <trans-unit id="sidemenu.link_product_edit">
                 <source>sidemenu.link_product_edit</source>
                 <target>Product</target>
@@ -67,16 +79,9 @@
                 <source>sidemenu.link_delivery_list</source>
                 <target>Deliveries</target>
             </trans-unit>
-            
-            <trans-unit id="breadcrumb.link_product_list">
-                <source>breadcrumb.link_product_list</source>
-                <target>Product</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_product_edit">
-                <source>breadcrumb.link_product_edit</source>
-                <target>Edit</target>
-            </trans-unit>
+            <!-- End - Sidemenu translations -->
 
+            <!-- Begin - List translations -->
             <trans-unit id="list.label_enabled">
                 <source>list.label_enabled</source>
                 <target>Enabled</target>
@@ -105,7 +110,29 @@
                 <source>list.label_updated_at</source>
                 <target>Updated at</target>
             </trans-unit>
+            <trans-unit id="list.label_code">
+                <source>list.label_code</source>
+                <target>Code</target>
+            </trans-unit>
+            <trans-unit id="list.label_per_item">
+                <source>list.label_per_item</source>
+                <target>Per item</target>
+            </trans-unit>
+            <trans-unit id="list.label_country_code">
+                <source>list.label_country_code</source>
+                <target>Country code</target>
+            </trans-unit>
+            <trans-unit id="list.label_zone">
+                <source>list.label_zone</source>
+                <target>Zone</target>
+            </trans-unit>
+            <trans-unit id="list.label_product_categories">
+                <source>list.label_product_categories</source>
+                <target>Categories</target>
+            </trans-unit>
+            <!-- End - List translations -->
 
+            <!-- Begin - Filter translations -->
             <trans-unit id="filter.label_enabled">
                 <source>filter.label_enabled</source>
                 <target>Enabled</target>
@@ -114,7 +141,76 @@
                 <source>filter.label_name</source>
                 <target>Name</target>
             </trans-unit>
+            <trans-unit id="filter.label_sku">
+                <source>filter.label_sku</source>
+                <target>SKU</target>
+            </trans-unit>
+            <trans-unit id="filter.label_product_categories_category">
+                <source>filter.label_product_categories_category</source>
+                <target>Categories</target>
+            </trans-unit>
+            <!-- End - Filter translations -->
 
+            <!-- Begin - Breadcrumb translations -->
+            <trans-unit id="breadcrumb.link_delivery_history">
+                <source>breadcrumb.link_delivery_history</source>
+                <target>Revision history</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_product_list">
+                <source>breadcrumb.link_product_list</source>
+                <target>Product</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_product_edit">
+                <source>breadcrumb.link_product_edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_delivery_list">
+                <source>breadcrumb.link_delivery_list</source>
+                <target>Deliveries</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_list">
+                <source>breadcrumb.link_category_list</source>
+                <target>Categories</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_product_create">
+                <source>breadcrumb.link_product_create</source>
+                <target>Create product</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_history">
+                <source>breadcrumb.link_category_history</source>
+                <target>Category history</target>
+            </trans-unit>
+            <!-- End - Breadcrumb translations -->
+
+            <!-- Begin - Form translations -->
+            <trans-unit id="form.label_sub_description">
+                <source>form.label_sub_description</source>
+                <target>Sub description</target>
+            </trans-unit>
+            <trans-unit id="form.label_position">
+                <source>form.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="form.label_children">
+                <source>form.label_children</source>
+                <target>Children</target>
+            </trans-unit>
+            <trans-unit id="form.label_code">
+                <source>form.label_code</source>
+                <target>Code</target>
+            </trans-unit>
+            <trans-unit id="form.label_per_item">
+                <source>form.label_per_item</source>
+                <target>Per item</target>
+            </trans-unit>
+            <trans-unit id="form.label_country_code">
+                <source>form.label_country_code</source>
+                <target>Country code</target>
+            </trans-unit>
+            <trans-unit id="form.label_zone">
+                <source>form.label_zone</source>
+                <target>Zone</target>
+            </trans-unit>
             <trans-unit id="form.label_name">
                 <source>form.label_name</source>
                 <target>Name</target>
@@ -151,6 +247,20 @@
                 <source>form.label_image</source>
                 <target>Image</target>
             </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>Category</target>
+            </trans-unit>
+            <trans-unit id="form.label_product_categories">
+                <source>form.label_product_categories</source>
+                <target>Categories</target>
+            </trans-unit>
+            <trans-unit id="form.label_deliveries">
+                <source>form.label_deliveries</source>
+                <target>Deliveries</target>
+            </trans-unit>
+            <!-- Begin - Form translations -->
+
         </body>
     </file>
 </xliff>
