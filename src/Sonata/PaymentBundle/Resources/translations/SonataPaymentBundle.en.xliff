@@ -114,42 +114,48 @@
         <source>contract_status_expired</source>
         <target>Expired</target>
       </trans-unit>
+
+      <trans-unit id="order_unknown">
+        <source>order_unknown</source>
+        <target>Order unknown</target>
+      </trans-unit>
       <trans-unit id="open">
         <source>open</source>
-        <target>open</target>
+        <target>Open</target>
       </trans-unit>
       <trans-unit id="pending">
         <source>pending</source>
-        <target>pending</target>
+        <target>Pending</target>
       </trans-unit>
       <trans-unit id="validated">
         <source>validated</source>
-        <target>validated</target>
+        <target>Validated</target>
       </trans-unit>
       <trans-unit id="cancelled">
         <source>cancelled</source>
-        <target>cancelled</target>
+        <target>Cancelled</target>
       </trans-unit>
       <trans-unit id="status_unknow">
         <source>status_unknow</source>
-        <target>status_unknow</target>
+        <target>Unkown</target>
       </trans-unit>
       <trans-unit id="error_validation">
         <source>error_validation</source>
-        <target>error_validation</target>
+        <target>Error validation</target>
       </trans-unit>
       <trans-unit id="wrong_callback">
         <source>wrong_callback</source>
-        <target>wrong_callback</target>
+        <target>Wrong callback</target>
       </trans-unit>
       <trans-unit id="wrong_request">
         <source>wrong_request</source>
-        <target>wrong_request</target>
+        <target>Wrong request</target>
       </trans-unit>
       <trans-unit id="order_to_open">
         <source>order_to_open</source>
-        <target>order_to_open</target>
+        <target>Order to open</target>
       </trans-unit>
+
     </body>
   </file>
 </xliff>

@@ -117,43 +117,43 @@
 
       <trans-unit id="order_unknown">
         <source>order_unknown</source>
-        <target>Statut de commande inconnue</target>
+        <target>Commande inconnue</target>
       </trans-unit>
       <trans-unit id="open">
         <source>open</source>
-        <target>Statut ouvert</target>
+        <target>Ouvert</target>
       </trans-unit>
       <trans-unit id="pending">
         <source>pending</source>
-        <target>Statut en attente</target>
+        <target>En attente</target>
       </trans-unit>
       <trans-unit id="validated">
         <source>validated</source>
-        <target>Statut validé</target>
+        <target>Validé</target>
       </trans-unit>
       <trans-unit id="cancelled">
         <source>cancelled</source>
-        <target>Statut annulé</target>
+        <target>Annulé</target>
       </trans-unit>
       <trans-unit id="status_unknow">
         <source>status_unknow</source>
-        <target>Statut inconnu</target>
+        <target>Inconnu</target>
       </trans-unit>
       <trans-unit id="error_validation">
         <source>error_validation</source>
-        <target>Statut d'erreur de validation</target>
+        <target>Erreur de validation</target>
       </trans-unit>
       <trans-unit id="wrong_callback">
         <source>wrong_callback</source>
-        <target>Statut d'erreur de callback</target>
+        <target>Erreur de callback</target>
       </trans-unit>
       <trans-unit id="wrong_request">
         <source>wrong_request</source>
-        <target>Statut d'erreur de requête</target>
+        <target>Erreur de requête</target>
       </trans-unit>
       <trans-unit id="order_to_open">
         <source>order_to_open</source>
-        <target>Statut de commande à ouvrir</target>
+        <target>Commande à ouvrir</target>
       </trans-unit>
     </body>
   </file>
