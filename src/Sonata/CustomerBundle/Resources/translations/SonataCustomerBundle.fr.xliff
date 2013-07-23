@@ -2,22 +2,137 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
-      <trans-unit id="90102c15654e1771dcaf28d71f701c0c8c5775fc" resname="address.form.group_address_label">
-        <jms:reference-file line="55">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
-        <source>address.form.group_address_label</source>
-        <target state="new">Adresse</target>
-      </trans-unit>
-      <trans-unit id="23e57d9e09cd1425d01740bcdd270dc56afbbc27" resname="address.form.group_advanced_label">
-        <jms:reference-file line="33">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
-        <source>address.form.group_advanced_label</source>
-        <target state="new">Général</target>
-      </trans-unit>
-      <trans-unit id="2b601a2737ecf193ab5efb6194d61a3d8d43ebaf" resname="address.form.group_contact_label">
-        <jms:reference-file line="40">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
-        <jms:reference-file line="48">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
-        <source>address.form.group_contact_label</source>
-        <target state="new">Contact</target>
-      </trans-unit>
+            <!-- Begin - Titles -->
+            <trans-unit id="customer">
+                <source>customer</source>
+                <target>Client</target>
+            </trans-unit>
+            <trans-unit id="address">
+                <source>address</source>
+                <target>Address</target>
+            </trans-unit>
+            <!-- End - Titles -->
+
+            <!-- Begin - Form translations -->
+            <trans-unit id="90102c15654e1771dcaf28d71f701c0c8c5775fc" resname="address.form.group_address_label">
+                <jms:reference-file line="55">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+                <source>address.form.group_address_label</source>
+                <target state="new">Adresse</target>
+            </trans-unit>
+            <trans-unit id="23e57d9e09cd1425d01740bcdd270dc56afbbc27" resname="address.form.group_advanced_label">
+                <jms:reference-file line="33">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+                <source>address.form.group_advanced_label</source>
+                <target state="new">Général</target>
+            </trans-unit>
+            <trans-unit id="2b601a2737ecf193ab5efb6194d61a3d8d43ebaf" resname="address.form.group_contact_label">
+                <jms:reference-file line="40">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+                <jms:reference-file line="48">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+                <source>address.form.group_contact_label</source>
+                <target state="new">Contact</target>
+            </trans-unit>
+
+            <trans-unit id="form_address.group_advanced_label">
+                <source>form_address.group_advanced_label</source>
+                <target>Avancée</target>
+            </trans-unit>
+            <trans-unit id="form_address.group_contact_label">
+                <source>form_address.group_contact_label</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="form_address.group_address_label">
+                <source>form_address.group_address_label</source>
+                <target>Adresse</target>
+            </trans-unit>
+
+            <trans-unit id="address.form.group_advanced_label">
+                <source>address.form.group_advanced_label</source>
+                <target>Avancée</target>
+            </trans-unit>
+            <trans-unit id="address.form.group_contact_label">
+                <source>address.form.group_contact_label</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="address.form.group_address_label">
+                <source>address.form.group_address_label</source>
+                <target>Adresse</target>
+            </trans-unit>
+            
+            <!-- Begin - Customer // Address form-->
+            <trans-unit id="form.label_firstname">
+                <source>form.label_firstname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="form.label_lastname">
+                <source>form.label_lastname</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="form.label_locale">
+                <source>form.label_locale</source>
+                <target>Locale</target>
+            </trans-unit>
+            <trans-unit id="form.label_type">
+                <source>form.label_type</source>
+                <target>Type</target>
+            </trans-unit>
+            <trans-unit id="form.label_current">
+                <source>form.label_current</source>
+                <target>Actuelle</target>
+            </trans-unit>
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="form.label_phone">
+                <source>form.label_phone</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="form.label_address1">
+                <source>form.label_address1</source>
+                <target>Adresse 1</target>
+            </trans-unit>
+            <trans-unit id="form.label_address2">
+                <source>form.label_address2</source>
+                <target>Adresse 2</target>
+            </trans-unit>
+            <trans-unit id="form.label_address3">
+                <source>form.label_address3</source>
+                <target>Adresse 3</target>
+            </trans-unit>
+            <trans-unit id="form.label_postcode">
+                <source>form.label_postcode</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="form.label_city">
+                <source>form.label_city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="form.label_country_code">
+                <source>form.label_country_code</source>
+                <target>Code pays</target>
+            </trans-unit>
+            <trans-unit id="form.label_customer">
+                <source>form.label_customer</source>
+                <target>Client</target>
+            </trans-unit>
+            <!-- End - Customer // Address form-->
+            <!-- End - Form translations -->
+
+            <!-- Begin - Show customer translations -->
+            <trans-unit id="show.label_firstname">
+                <source>show.label_firstname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="show.label_lastname">
+                <source>show.label_lastname</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="show.label_locale">
+                <source>show.label_locale</source>
+                <target>Locale</target>
+            </trans-unit>
+            <!-- End - Show customer translations -->
+
+            <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_customer_list">
                 <source>breadcrumb.link_customer_list</source>
                 <target>Client</target>
@@ -34,6 +149,13 @@
                 <source>breadcrumb.link_address_edit</source>
                 <target>Edition</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_address_create">
+                <source>breadcrumb.link_address_create</source>
+                <target>Création d'adresse</target>
+            </trans-unit>
+            <!-- End - Breadcrumb translations -->
+            
+            <!-- Begin - Sidemenu translations -->
             <trans-unit id="customer.sidemenu.link_customer_edit">
                 <source>customer.sidemenu.link_customer_edit</source>
                 <target>Client</target>
@@ -46,18 +168,49 @@
                 <source>customer.sidemenu.link_order_list</source>
                 <target>Commandes</target>
             </trans-unit>
-            <trans-unit id="address.form.group_advanced_label">
-                <source>address.form.group_advanced_label</source>
-                <target>Avancée</target>
+            <!-- End - Sidemenu translations -->
+
+            <!-- Begin - List translations -->
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>Nom</target>
             </trans-unit>
-            <trans-unit id="address.form.group_contact_label">
-                <source>address.form.group_contact_label</source>
-                <target>Contact</target>
+            <trans-unit id="list.label_created_at">
+                <source>list.label_created_at</source>
+                <target>Créé le</target>
             </trans-unit>
-            <trans-unit id="address.form.group_address_label">
-                <source>address.form.group_address_label</source>
-                <target>Adresse</target>
+            <trans-unit id="list.label_locale">
+                <source>list.label_locale</source>
+                <target>Locale</target>
             </trans-unit>
+            <trans-unit id="list.label_fulladdress">
+                <source>list.label_fulladdress</source>
+                <target>Adresse complète</target>
+            </trans-unit>
+            <trans-unit id="list.label_current">
+                <source>list.label_current</source>
+                <target>Actuelle</target>
+            </trans-unit>
+            <trans-unit id="list.label_type_code">
+                <source>list.label_type_code</source>
+                <target>Type</target>
+            </trans-unit>
+            <!-- End - List translations -->
+
+            <!-- Begin - Filter translations -->
+            <trans-unit id="filter.label_firstname">
+                <source>filter.label_firstname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="filter.label_lastname">
+                <source>filter.label_lastname</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="filter.label_locale">
+                <source>filter.label_locale</source>
+                <target>Locale</target>
+            </trans-unit>
+            <!-- End - Filter translations -->
         </body>
     </file>
 </xliff>
