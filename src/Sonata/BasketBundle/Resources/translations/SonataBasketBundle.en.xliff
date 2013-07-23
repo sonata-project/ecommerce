@@ -200,6 +200,48 @@
         <source>sonata_address_postcode_label</source>
         <target state="new">Postcode</target>
       </trans-unit>
+
+      <trans-unit id="sonata_basket_address_firstname" resname="sonata_basket_address_firstname">
+        <source>sonata_basket_address_firstname</source>
+        <target state="new">Firstname</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_name" resname="sonata_basket_address_name">
+        <source>sonata_basket_address_name</source>
+        <target state="new">Address name</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_lastname" resname="sonata_basket_address_lastname">
+        <source>sonata_basket_address_lastname</source>
+        <target state="new">Lastname</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_address1" resname="sonata_basket_address_address1">
+        <source>sonata_basket_address_address1</source>
+        <target state="new">Address 1</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_address2" resname="sonata_basket_address_address2">
+        <source>sonata_basket_address_address2</source>
+        <target state="new">Address 2</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_address3" resname="sonata_basket_address_address3">
+        <source>sonata_basket_address_address3</source>
+        <target state="new">Address 3</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_postcode" resname="sonata_basket_address_postcode">
+        <source>sonata_basket_address_postcode</source>
+        <target state="new">Postcode</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_city" resname="sonata_basket_address_city">
+        <source>sonata_basket_address_city</source>
+        <target state="new">City</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_countryCode" resname="sonata_basket_address_countryCode">
+        <source>sonata_basket_address_countryCode</source>
+        <target state="new">Country code</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_phone" resname="sonata_basket_address_phone">
+        <source>sonata_basket_address_phone</source>
+        <target state="new">Phone</target>
+      </trans-unit>
+      
     </body>
   </file>
 </xliff>
