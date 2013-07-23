@@ -9,7 +9,7 @@
             </trans-unit>
             <trans-unit id="address">
                 <source>address</source>
-                <target>Address</target>
+                <target>Adresse</target>
             </trans-unit>
             <!-- End - Titles -->
 
@@ -211,6 +211,22 @@
                 <target>Locale</target>
             </trans-unit>
             <!-- End - Filter translations -->
+
+            <!-- Begin - Type translations -->
+            <trans-unit id="type_delivery">
+                <source>type_delivery</source>
+                <target>Livraison</target>
+            </trans-unit>
+            <trans-unit id="type_billing">
+                <source>type_billing</source>
+                <target>Facturation</target>
+            </trans-unit>
+            <trans-unit id="type_contact">
+                <source>type_contact</source>
+                <target>Contact</target>
+            </trans-unit>
+            <!-- End - Type translations -->
+
         </body>
     </file>
 </xliff>
