@@ -2,6 +2,15 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+
+            <!-- Begin - Titles -->
+            <trans-unit id="invoice">
+                <source>invoice</source>
+                <target>Invoice</target>
+            </trans-unit>
+            <!-- End - Titles -->
+
+            <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_invoice_list">
                 <source>breadcrumb.link_invoice_list</source>
                 <target>Invoice</target>
@@ -10,7 +19,9 @@
                 <source>breadcrumb.link_invoice_edit</source>
                 <target>Edit</target>
             </trans-unit>
+            <!-- End - Breadcrumb translations -->
 
+            <!-- Begin - Form translations -->
             <trans-unit id="form_invoice.group_main_label">
                 <source>form_invoice.group_main_label</source>
                 <target>General</target>
@@ -23,6 +34,70 @@
                 <source>form_invoice.group_misc_label</source>
                 <target>Miscellaneous</target>
             </trans-unit>
+
+            <trans-unit id="form.label_reference">
+                <source>form.label_reference</source>
+                <target>Reference</target>
+            </trans-unit>
+            <trans-unit id="form.label_currency">
+                <source>form.label_currency</source>
+                <target>Currency</target>
+            </trans-unit>
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Status</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="form.label_phone">
+                <source>form.label_phone</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="form.label_address1">
+                <source>form.label_address1</source>
+                <target>Address 1</target>
+            </trans-unit>
+            <trans-unit id="form.label_address2">
+                <source>form.label_address2</source>
+                <target>Address 2</target>
+            </trans-unit>
+            <trans-unit id="form.label_address3">
+                <source>form.label_address3</source>
+                <target>Address 3</target>
+            </trans-unit>
+            <trans-unit id="form.label_city">
+                <source>form.label_city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="form.label_postcode">
+                <source>form.label_postcode</source>
+                <target>Postcode</target>
+            </trans-unit>
+            <trans-unit id="form.label_country">
+                <source>form.label_country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="form.label_fax">
+                <source>form.label_fax</source>
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="form.label_email">
+                <source>form.label_email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="form.label_mobile">
+                <source>form.label_mobile</source>
+                <target>Mobile</target>
+            </trans-unit>
+            <trans-unit id="form.label_customer">
+                <source>form.label_customer</source>
+                <target>Customer</target>
+            </trans-unit>
+            <!-- End - Form translations -->
+
         </body>
     </file>
 </xliff>
