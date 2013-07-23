@@ -48,7 +48,12 @@
                 <source>breadcrumb.link_orderelement_edit</source>
                 <target>Édition</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_order_history">
+                <source>breadcrumb.link_order_history</source>
+                <target>Historique des révisions</target>
+            </trans-unit>
             <!-- End - Breadcrumb translations -->
+
 
             <!-- Begin - Form translations -->
             <trans-unit id="878a14d416d07ee86d3251fbf00c39fc5750b440" resname="order_element.form.group_main_label">
@@ -99,6 +104,201 @@
             </trans-unit>
             <!-- End - Filters translations -->
 
+            <!-- Begin - List translations -->
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>ID</target>
+            </trans-unit>
+            <trans-unit id="list.label_reference">
+                <source>list.label_reference</source>
+                <target>Référence</target>
+            </trans-unit>
+            <trans-unit id="list.label_customer">
+                <source>list.label_customer</source>
+                <target>Client</target>
+            </trans-unit>
+            <trans-unit id="list.label_locale">
+                <source>list.label_locale</source>
+                <target>Locale</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_status_name">
+                <source>list.label_get_status_name</source>
+                <target>Statut</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_delivery_status_name">
+                <source>list.label_get_delivery_status_name</source>
+                <target>Statut de livraison</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_payment_status_name">
+                <source>list.label_get_payment_status_name</source>
+                <target>Statut du paiement</target>
+            </trans-unit>
+            <trans-unit id="list.label_validated_at">
+                <source>list.label_validated_at</source>
+                <target>Validé le</target>
+            </trans-unit>
+            <trans-unit id="list.label_total_excl">
+                <source>list.label_total_excl</source>
+                <target>Total sans TVA</target>
+            </trans-unit>
+            <!-- End - List translations -->
+
+            <!-- Begin - Status translations -->
+            <trans-unit id="status_open">
+                <source>status_open</source>
+                <target>Ouvert</target>
+            </trans-unit>
+            <trans-unit id="status_pending">
+                <source>status_pending</source>
+                <target>En attente</target>
+            </trans-unit>
+            <trans-unit id="status_order_unknown">
+                <source>status_order_unknown</source>
+                <target>Commande inconnue</target>
+            </trans-unit>
+            <trans-unit id="status_validated">
+                <source>status_validated</source>
+                <target>Validé</target>
+            </trans-unit>
+            <trans-unit id="status_cancelled">
+                <source>status_cancelled</source>
+                <target>Annulé</target>
+            </trans-unit>
+            <trans-unit id="status_unknown">
+                <source>status_unknown</source>
+                <target>Inconnu</target>
+            </trans-unit>
+            <trans-unit id="status_error_validation">
+                <source>status_error_validation</source>
+                <target>Erreur de validation</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_callback">
+                <source>status_wrong_callback</source>
+                <target>Callback erroné</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_request">
+                <source>status_wrong_request</source>
+                <target>Requête erronée</target>
+            </trans-unit>
+            <trans-unit id="status_order_not_open">
+                <source>status_order_not_open</source>
+                <target>Commande non ouverte</target>
+            </trans-unit>
+            <!-- End - Status translations -->
+
+
+            <trans-unit id="form.label_locale">
+                <source>form.label_locale</source>
+                <target>Locale</target>
+            </trans-unit>
+            <trans-unit id="form.label_currency">
+                <source>form.label_currency</source>
+                <target>Devise</target>
+            </trans-unit>
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Statut</target>
+            </trans-unit>
+            <trans-unit id="form.label_payment_status">
+                <source>form.label_payment_status</source>
+                <target>Statut de paiement</target>
+            </trans-unit>
+            <trans-unit id="form.label_delivery_status">
+                <source>form.label_delivery_status</source>
+                <target>Statut de livraison</target>
+            </trans-unit>
+            <trans-unit id="form.label_validated_at">
+                <source>form.label_validated_at</source>
+                <target>Validé le</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_name">
+                <source>form.label_billing_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_phone">
+                <source>form.label_billing_phone</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_address1">
+                <source>form.label_billing_address1</source>
+                <target>Adresse 1</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_address2">
+                <source>form.label_billing_address2</source>
+                <target>Adresse 2</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_address3">
+                <source>form.label_billing_address3</source>
+                <target>Adresse 3</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_postcode">
+                <source>form.label_billing_postcode</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_city">
+                <source>form.label_billing_city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_country_code">
+                <source>form.label_billing_country_code</source>
+                <target>Code pays</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_fax">
+                <source>form.label_billing_fax</source>
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_mobile">
+                <source>form.label_billing_mobile</source>
+                <target>Mobile</target>
+            </trans-unit>
+            <trans-unit id="form.label_billing_email">
+                <source>form.label_billing_email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_name">
+                <source>form.label_shipping_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_phone">
+                <source>form.label_shipping_phone</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_address1">
+                <source>form.label_shipping_address1</source>
+                <target>Adresse 1</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_address2">
+                <source>form.label_shipping_address2</source>
+                <target>Adresse 2</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_address3">
+                <source>form.label_shipping_address3</source>
+                <target>Adresse 3</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_postcode">
+                <source>form.label_shipping_postcode</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_city">
+                <source>form.label_shipping_city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_country_code">
+                <source>form.label_shipping_country_code</source>
+                <target>Code pays</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_fax">
+                <source>form.label_shipping_fax</source>
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_mobile">
+                <source>form.label_shipping_mobile</source>
+                <target>Mobile</target>
+            </trans-unit>
+            <trans-unit id="form.label_shipping_email">
+                <source>form.label_shipping_email</source>
+                <target>Email</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
