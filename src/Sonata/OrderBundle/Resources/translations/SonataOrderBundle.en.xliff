@@ -2,26 +2,36 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
-      <trans-unit id="136794a92f1e3148a524a63cb5101c2d7411f94b" resname="order.form.group_main_label">
-        <jms:reference-file line="74">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
-        <source>order.form.group_main_label</source>
-        <target state="new">General</target>
-      </trans-unit>
-      <trans-unit id="e8ba9488c7df4b48e264b4988e63852b47c04e37" resname="order.sidemenu.link_order_edit">
-        <jms:reference-file line="124">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
-        <source>order.sidemenu.link_order_edit</source>
-        <target state="new">Edit</target>
-      </trans-unit>
-      <trans-unit id="73d1b31b433b627332e73ed718df1b80ea7defa3" resname="order.sidemenu.link_order_elements_list">
-        <jms:reference-file line="129">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
-        <source>order.sidemenu.link_order_elements_list</source>
-        <target state="new">Elements</target>
-      </trans-unit>
-      <trans-unit id="878a14d416d07ee86d3251fbf00c39fc5750b440" resname="order_element.form.group_main_label">
-        <jms:reference-file line="32">OrderBundle/Admin/OrderElementAdmin.php</jms:reference-file>
-        <source>order_element.form.group_main_label</source>
-        <target state="new">General</target>
-      </trans-unit>
+
+            <!-- Begin - Titles -->
+            <trans-unit id="order">
+                <source>order</source>
+                <target>Order</target>
+            </trans-unit>
+            <!-- End - Titles -->
+
+            <!-- Begin - Sidemenu translations -->
+            <trans-unit id="e8ba9488c7df4b48e264b4988e63852b47c04e37" resname="order.sidemenu.link_order_edit">
+                <jms:reference-file line="124">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
+                <source>order.sidemenu.link_order_edit</source>
+                <target state="new">Edit</target>
+            </trans-unit>
+            <trans-unit id="73d1b31b433b627332e73ed718df1b80ea7defa3" resname="order.sidemenu.link_order_elements_list">
+                <jms:reference-file line="129">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
+                <source>order.sidemenu.link_order_elements_list</source>
+                <target state="new">Elements</target>
+            </trans-unit>
+            <trans-unit id="order.sidemenu.link_order_edit">
+                <source>order.sidemenu.link_order_edit</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="order.sidemenu.link_order_elements_list">
+                <source>order.sidemenu.link_order_elements_list</source>
+                <target>Elements</target>
+            </trans-unit>
+            <!-- End - Sidemenu translations -->
+
+            <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_order_list">
                 <source>breadcrumb.link_order_list</source>
                 <target>Orders</target>
@@ -37,6 +47,25 @@
             <trans-unit id="breadcrumb.link_orderelement_edit">
                 <source>breadcrumb.link_orderelement_edit</source>
                 <target>Edit</target>
+            </trans-unit>
+            <!-- End - Breadcrumb translations -->
+
+            <!-- Begin - Form translations -->
+            <trans-unit id="878a14d416d07ee86d3251fbf00c39fc5750b440" resname="order_element.form.group_main_label">
+                <jms:reference-file line="32">OrderBundle/Admin/OrderElementAdmin.php</jms:reference-file>
+                <source>order_element.form.group_main_label</source>
+                <target state="new">General</target>
+            </trans-unit>
+            <trans-unit id="order_element.form.group_main_label">
+                <source>order_element.form.group_main_label</source>
+                <target>General</target>
+            </trans-unit>
+
+
+            <trans-unit id="136794a92f1e3148a524a63cb5101c2d7411f94b" resname="order.form.group_main_label">
+                <jms:reference-file line="74">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
+                <source>order.form.group_main_label</source>
+                <target state="new">General</target>
             </trans-unit>
             <trans-unit id="order.form.group_main_label">
                 <source>order.form.group_main_label</source>
@@ -54,19 +83,23 @@
                 <source>order.form.group_misc_label</source>
                 <target>Misc</target>
             </trans-unit>
-            <trans-unit id="order.sidemenu.link_order_edit">
-                <source>order.sidemenu.link_order_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="order.sidemenu.link_order_elements_list">
-                <source>order.sidemenu.link_order_elements_list</source>
-                <target>Elements</target>
-            </trans-unit>
+            <!-- Begin - Form translations -->
 
-            <trans-unit id="order_element.form.group_main_label">
-                <source>order_element.form.group_main_label</source>
-                <target>General</target>
+            <!-- Begin - Filters translations -->
+            <trans-unit id="filter.label_reference">
+                <source>filter.label_reference</source>
+                <target>Reference</target>
             </trans-unit>
+            <trans-unit id="filter.label_customer">
+                <source>filter.label_customer</source>
+                <target>Customer</target>
+            </trans-unit>
+            <trans-unit id="filter.label_locale">
+                <source>filter.label_locale</source>
+                <target>Locale</target>
+            </trans-unit>
+            <!-- End - Filters translations -->
+
         </body>
     </file>
 </xliff>
