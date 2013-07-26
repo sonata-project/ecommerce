@@ -13,8 +13,6 @@ file that was distributed with this source code.
 
 <form action="{{ url('sonata_basket_payment') }}" method="POST" >
     <div>
-        <h2>{{ 'sonata.basket.title_delivery_methods'|trans({}, 'SonataBasketBundle') }}</h2>
-
         {{ form_errors(form.paymentMethod) }}
         {{ form_widget(form.paymentMethod) }}
     </div>
