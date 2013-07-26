@@ -35,6 +35,8 @@ class InvoiceAdmin extends Admin
                 ->add('reference')
                 ->add('currency')
                 ->add('status')
+                ->add('totalInc')
+                ->add('totalExcl')
             ->end()
             ->with($this->trans('form_invoice.group_billing_label', array(), 'SonataInvoiceBundle'), array('collapsed' => true))
                 ->add('name')
