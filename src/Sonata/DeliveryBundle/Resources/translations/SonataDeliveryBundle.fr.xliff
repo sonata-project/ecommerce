@@ -20,6 +20,49 @@
               <target>Edition</target>
           </trans-unit>
           <!-- End - Breadcrumb translations -->
+          
+                      <!-- Begin - Status translations -->
+            <trans-unit id="status_open">
+                <source>status_open</source>
+                <target>Ouvert</target>
+            </trans-unit>
+            <trans-unit id="status_pending">
+                <source>status_pending</source>
+                <target>En attente</target>
+            </trans-unit>
+            <trans-unit id="status_order_unknown">
+                <source>status_order_unknown</source>
+                <target>Commande inconnue</target>
+            </trans-unit>
+            <trans-unit id="status_validated">
+                <source>status_validated</source>
+                <target>Validé</target>
+            </trans-unit>
+            <trans-unit id="status_cancelled">
+                <source>status_cancelled</source>
+                <target>Annulé</target>
+            </trans-unit>
+            <trans-unit id="status_unknown">
+                <source>status_unknown</source>
+                <target>Inconnu</target>
+            </trans-unit>
+            <trans-unit id="status_error_validation">
+                <source>status_error_validation</source>
+                <target>Erreur de validation</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_callback">
+                <source>status_wrong_callback</source>
+                <target>Callback erroné</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_request">
+                <source>status_wrong_request</source>
+                <target>Requête erronée</target>
+            </trans-unit>
+            <trans-unit id="status_order_not_open">
+                <source>status_order_not_open</source>
+                <target>Commande non ouverte</target>
+            </trans-unit>
+            <!-- End - Status translations -->
         </body>
     </file>
 </xliff>
