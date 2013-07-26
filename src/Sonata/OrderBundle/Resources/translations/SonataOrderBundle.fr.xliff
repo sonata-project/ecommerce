@@ -184,6 +184,14 @@
                 <source>status_order_not_open</source>
                 <target>Commande non ouverte</target>
             </trans-unit>
+            <trans-unit id="status_error">
+                <source>status_error</source>
+                <target>En erreur</target>
+            </trans-unit>
+            <trans-unit id="status_stopped">
+                <source>status_stopped</source>
+                <target>Arrêté</target>
+            </trans-unit>
             <!-- End - Status translations -->
 
 

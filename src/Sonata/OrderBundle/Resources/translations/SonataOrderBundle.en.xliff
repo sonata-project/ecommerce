@@ -184,6 +184,14 @@
                 <source>status_order_not_open</source>
                 <target>Order not open</target>
             </trans-unit>
+            <trans-unit id="status_error">
+                <source>status_error</source>
+                <target>In error</target>
+            </trans-unit>
+            <trans-unit id="status_stopped">
+                <source>status_stopped</source>
+                <target>Stopped</target>
+            </trans-unit>
             <!-- End - Status translations -->
 
 
