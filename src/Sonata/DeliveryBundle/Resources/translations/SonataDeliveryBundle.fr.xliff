@@ -21,7 +21,7 @@
           </trans-unit>
           <!-- End - Breadcrumb translations -->
           
-                      <!-- Begin - Status translations -->
+          <!-- Begin - Status translations -->
             <trans-unit id="status_open">
                 <source>status_open</source>
                 <target>Ouvert</target>
@@ -62,7 +62,16 @@
                 <source>status_order_not_open</source>
                 <target>Commande non ouverte</target>
             </trans-unit>
+            <trans-unit id="status_error">
+                <source>status_error</source>
+                <target>En erreur</target>
+            </trans-unit>
+            <trans-unit id="status_stopped">
+                <source>status_stopped</source>
+                <target>Arrêté</target>
+            </trans-unit>
             <!-- End - Status translations -->
+
         </body>
     </file>
 </xliff>

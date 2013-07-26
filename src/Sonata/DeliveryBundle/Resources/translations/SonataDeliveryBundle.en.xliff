@@ -9,7 +9,7 @@
                 <target>Delivery</target>
             </trans-unit>
             <!-- End - Titles -->
-            
+
             <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_delivery_list">
                 <source>breadcrumb.link_delivery_list</source>
@@ -18,9 +18,10 @@
             <trans-unit id="breadcrumb.link_delivery_edit">
                 <source>breadcrumb.link_delivery_edit</source>
                 <target>Edit</target>
+            </trans-unit>
             <!-- End - Breadcrumb translations -->
-            
-                        <!-- Begin - Status translations -->
+
+            <!-- Begin - Status translations -->
             <trans-unit id="status_open">
                 <source>status_open</source>
                 <target>Open</target>
@@ -61,9 +62,16 @@
                 <source>status_order_not_open</source>
                 <target>Order not open</target>
             </trans-unit>
+            <trans-unit id="status_error">
+                <source>status_error</source>
+                <target>In error</target>
+            </trans-unit>
+            <trans-unit id="status_stopped">
+                <source>status_stopped</source>
+                <target>Stopped</target>
+            </trans-unit>
             <!-- End - Status translations -->
 
-            </trans-unit>
         </body>
     </file>
 </xliff>
