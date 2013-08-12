@@ -47,6 +47,15 @@
                 <source>form.label_status</source>
                 <target>Status</target>
             </trans-unit>
+            <trans-unit id="form.label_total_inc">
+                <source>form.label_total_inc</source>
+                <target>Total incl. VAT</target>
+            </trans-unit>
+            <trans-unit id="form.label_total_excl">
+                <source>form.label_total_excl</source>
+                <target>Total excl. VAT</target>
+            </trans-unit>
+
 
             <trans-unit id="form.label_name">
                 <source>form.label_name</source>
