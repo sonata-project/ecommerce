@@ -34,11 +34,13 @@ class CategoryAdmin extends Admin
         $formMapper
             ->add('enabled', null, array('required' => false))
             ->add('name')
-            ->add('descriptionFormatter', 'sonata_formatter_type_selector', array(
-                'source' => 'rawDescription',
-                'target' => 'description'
+            ->add('description', 'sonata_formatter_type', array(
+                'source_field'         => 'rawDescription',
+                'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+                'format_field'         => 'descriptionFormatter',
+                'target_field'         => 'description',
+                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
             ))
-            ->add('rawDescription', null, array('attr' => array('class' => 'span10', 'rows' => 20)))
             ->add('subDescription')
             ->add('position')
         ;
