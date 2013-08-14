@@ -11,6 +11,7 @@ namespace Sonata\InvoiceBundle\Entity;
 
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Invoice\InvoiceElementInterface;
 
 /**
  * Sonata\InvoiceBundle\Entity\BaseInvoice
@@ -106,6 +107,11 @@ abstract class BaseInvoice implements InvoiceInterface
      * @var Application\Sonata\UserBundle\Entity\User
      */
     protected $user;
+
+    /**
+     * @var array
+     */
+    protected $elements = array();
 
     /**
      * Set reference
@@ -465,5 +471,30 @@ abstract class BaseInvoice implements InvoiceInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getInvoiceElements()
+    {
+        return $this->elements;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addInvoiceElement(InvoiceElementInterface $element)
+    {
+        $this->elements[] = $element;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setInvoiceElements(array $elements)
+    {
+        $this->elements = $elements;
+        return $this;
     }
 }
