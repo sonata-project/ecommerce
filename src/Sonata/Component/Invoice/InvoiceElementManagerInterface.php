@@ -16,14 +16,14 @@ interface InvoiceElementManagerInterface
     /**
      * Creates an empty invoiceElement instance
      *
-     * @return InvoiceElement
+     * @return InvoiceElementInterface
      */
     public function create();
 
     /**
      * Deletes a invoiceElement
      *
-     * @param  Invoiceelement $invoiceeElement
+     * @param  InvoiceElementInterface $invoiceElement
      * @return void
      */
     public function delete(InvoiceElementInterface $invoiceElement);
@@ -32,7 +32,7 @@ interface InvoiceElementManagerInterface
      * Finds one invoiceElement by the given criteria
      *
      * @param  array                   $criteria
-     * @return InvoiceelementInterface
+     * @return InvoiceElementInterface
      */
     public function findOneBy(array $criteria);
 
@@ -40,7 +40,7 @@ interface InvoiceElementManagerInterface
      * Finds one invoiceElement by the given criteria
      *
      * @param  array                   $criteria
-     * @return InvoiceelementInterface
+     * @return InvoiceElementInterface
      */
     public function findBy(array $criteria);
 
@@ -54,7 +54,7 @@ interface InvoiceElementManagerInterface
     /**
      * Updates a invoiceElement
      *
-     * @param  Invoiceelement $invoiceElement
+     * @param  InvoiceElementInterface $invoiceElement
      * @return void
      */
     public function save(InvoiceElementInterface $invoiceElement);

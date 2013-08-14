@@ -258,4 +258,25 @@ interface InvoiceInterface
      * @return Application\Sonata\UserBundle\Entity\User $user
      */
     public function getCustomer();
+
+    /**
+     * Returns all the invoice elements
+     *
+     * @return array
+     */
+    public function getInvoiceElements();
+
+    /**
+     * Adds an invoice element to the invoice
+     *
+     * @param InvoiceElementInterface $element
+     */
+    public function addInvoiceElement(InvoiceElementInterface $element);
+
+    /**
+     * Sets the invoice elements collection
+     *
+     * @param array $elements
+     */
+    public function setInvoiceElements(array $elements);
 }
