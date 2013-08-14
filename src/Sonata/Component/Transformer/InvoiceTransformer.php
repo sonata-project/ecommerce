@@ -30,6 +30,7 @@ class InvoiceTransformer extends BaseTransformer
      */
     public function transformFromOrder(OrderInterface $order, InvoiceInterface $invoice)
     {
+        $invoice->setName($order->getBillingName());
         $invoice->setAddress1($order->getBillingAddress1());
         $invoice->setAddress2($order->getBillingAddress2());
         $invoice->setAddress3($order->getBillingAddress3());
@@ -53,6 +54,8 @@ class InvoiceTransformer extends BaseTransformer
             $invoiceElement->setInvoice($invoice);
             $invoice->addInvoiceElement($invoiceElement);
         }
+
+        $invoice->setStatus(InvoiceInterface::STATUS_OPEN);
     }
 
     /**

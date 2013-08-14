@@ -13,6 +13,9 @@ use Sonata\Component\Customer\CustomerInterface;
 
 interface InvoiceInterface
 {
+    const STATUS_OPEN     = 0; // created but not paid
+    const STATUS_PAID     = 1; // the invoice has been paid
+    const STATUS_CONFLICT = 2; // there is a conflict about this invoice
 
     /**
      * Returns id

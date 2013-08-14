@@ -127,11 +127,17 @@ class SonataInvoiceExtension extends Extension
              'orphanRemoval' => true,
         ));
 
-        $collector->addAssociation($config['class']['invoice_element'], 'mapOneToOne', array(
+        $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', array(
             'fieldName' => 'orderElement',
             'targetEntity' => $config['class']['order_element'],
             'cascade' => array(),
-            'orphanRemoval' => true,
+            'joinColumns'  => array(
+                 array(
+                     'name' => 'order_element_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                 ),
+             ),
         ));
     }
 }

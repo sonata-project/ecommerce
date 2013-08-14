@@ -99,6 +99,13 @@ class OrderAdmin extends Admin
             ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataPaymentBundle', 'sortable' => 'paymentStatus'))
             ->add('validatedAt')
             ->add('totalExcl', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'generateInvoice' => array(
+                        'template' => 'SonataOrderBundle:Admin:generate_invoice.html.twig'
+                    )
+                )
+            ))
         ;
     }
 
@@ -120,6 +127,7 @@ class OrderAdmin extends Admin
     public function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
+        $collection->add('generateInvoice');
     }
 
     /**

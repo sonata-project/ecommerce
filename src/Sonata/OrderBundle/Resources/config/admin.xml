@@ -5,7 +5,7 @@
 
     <parameters>
         <parameter key="sonata.order.admin.order.class">Sonata\OrderBundle\Admin\OrderAdmin</parameter>
-        <parameter key="sonata.order.admin.order.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="sonata.order.admin.order.controller">SonataOrderBundle:OrderCRUD</parameter>
 
         <parameter key="sonata.order.admin.order_element.class">Sonata\OrderBundle\Admin\OrderElementAdmin</parameter>
         <parameter key="sonata.order.admin.order_element.controller">SonataAdminBundle:CRUD</parameter>

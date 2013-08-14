@@ -18,6 +18,12 @@
             <argument type="service" id="logger" />
         </service>
 
+        <service id="sonata.payment.transformer.invoice" class="Sonata\Component\Transformer\InvoiceTransformer">
+            <tag name="sonata.payment.transformer" />
+
+            <argument type="service" id="sonata.invoice_element.manager" />
+        </service>
+
         <service id="sonata.payment.transformer.basket" class="%sonata.basket_transformer.class%">
             <tag name="sonata.payment.transformer" />
 
