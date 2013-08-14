@@ -111,7 +111,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * @var array
      */
-    protected $elements = array();
+    protected $invoiceElements = array();
 
     /**
      * Set reference
@@ -478,7 +478,7 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     public function getInvoiceElements()
     {
-        return $this->elements;
+        return $this->invoiceElements;
     }
 
     /**
@@ -486,7 +486,7 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     public function addInvoiceElement(InvoiceElementInterface $element)
     {
-        $this->elements[] = $element;
+        $this->invoiceElements[] = $element;
     }
 
     /**
@@ -494,7 +494,7 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     public function setInvoiceElements(array $elements)
     {
-        $this->elements = $elements;
+        $this->invoiceElements = $elements;
         return $this;
     }
 }

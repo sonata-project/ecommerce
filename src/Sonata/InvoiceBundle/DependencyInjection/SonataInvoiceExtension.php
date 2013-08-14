@@ -86,7 +86,6 @@ class SonataInvoiceExtension extends Extension
                  'detach',
              ),
              'mappedBy'     => NULL,
-             'inversedBy'   => 'orders',
              'joinColumns'  => array(
                  array(
                      'name' => 'customer_id',
@@ -97,21 +96,41 @@ class SonataInvoiceExtension extends Extension
              'orphanRemoval' => false,
         ));
 
-        $collector->addAssociation($config['class']['invoice_element'], 'mapOneToMany', array(
+        $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', array(
              'fieldName'     => 'invoice',
              'targetEntity'  => $config['class']['invoice'],
              'cascade'       => array(
                  'persist',
+                 'refresh',
+                 'merge',
+                 'detach',
              ),
-             'mappedBy'      => 'invoice_elements',
+             'mappedBy'     => NULL,
+             'inversedBy'   => 'invoiceElements',
+             'joinColumns'  => array(
+                 array(
+                     'name' => 'invoice_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'CASCADE',
+                 ),
+             ),
+             'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['invoice'], 'mapOneToMany', array(
+             'fieldName'     => 'invoiceElements',
+             'targetEntity'  => $config['class']['invoice_element'],
+             'cascade'       => array(
+                 'persist',
+             ),
+             'mappedBy'      => 'invoice',
              'orphanRemoval' => true,
         ));
 
-        $collector->addAssociation($config['class']['invoice_element'], 'mapOneToMany', array(
+        $collector->addAssociation($config['class']['invoice_element'], 'mapOneToOne', array(
             'fieldName' => 'orderElement',
             'targetEntity' => $config['class']['order_element'],
             'cascade' => array(),
-            'mappedBy' => 'invoice_element',
             'orphanRemoval' => true,
         ));
     }
