@@ -50,12 +50,17 @@ INFO;
     {
         $transaction = new Transaction();
 
-        $inParams = array(
+        $inParams = array('params' => array(
             "aerẑerüioRazeioj" => iconv('UTF-8', 'ISO-8859-1', "ôûêîÖüïë"),
             "abcdef" => "ghijkl"
-        );
+        ));
+
+        $expectedParams = array('params' => array(
+            "aerẑerüioRazeioj" => "ôûêîÖüïë",
+            "abcdef" => "ghijkl"
+        ));
 
         $transaction->setParameters($inParams);
-        $this->assertEquals($inParams, $transaction->getParameters());
+        $this->assertEquals($expectedParams, $transaction->getParameters());
     }
 }
