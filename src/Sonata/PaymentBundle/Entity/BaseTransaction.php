@@ -151,11 +151,7 @@ class BaseTransaction implements TransactionInterface
      */
     public function setParameters(array $parameters)
     {
-        $decodedParams = array();
-        foreach ($parameters as $key => $value) {
-            $decodedParams[mb_check_encoding($key, 'UTF-8') ? $key: utf8_encode($key)] = mb_check_encoding($value, 'UTF-8') ? $value : utf8_encode($value);
-        }
-        $this->parameters = $parameters;
+        $this->parameters = $this->cleanupEncoding($parameters);
     }
 
     /**
@@ -287,5 +283,23 @@ class BaseTransaction implements TransactionInterface
     public function getInformation()
     {
         return $this->information;
+    }
+
+    /**
+     * Cleans up $toDecode keys & values
+     *
+     * @param array $toDecode
+     *
+     * @return array
+     */
+    protected function cleanupEncoding(array $toDecode)
+    {
+        $decodedParams = array();
+        foreach ($toDecode as $key => $value) {
+            $decodedValue = is_array($value) ? $this->cleanupEncoding($value) : (mb_check_encoding($value, 'UTF-8') ? $value : utf8_encode($value));
+            $decodedParams[mb_check_encoding($key, 'UTF-8') ? $key: utf8_encode($key)] = $decodedValue;
+        }
+
+        return $decodedParams;
     }
 }
