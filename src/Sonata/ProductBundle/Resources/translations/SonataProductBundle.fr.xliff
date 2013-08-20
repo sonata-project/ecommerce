@@ -176,12 +176,20 @@
                 <source>breadcrumb.link_product_create</source>
                 <target>Création de produit</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_category_history">
+                <source>breadcrumb.link_category_history</source>
+                <target>Historique des catégories</target>
+            </trans-unit>
             <!-- End - Breadcrumb translations -->
 
             <!-- Begin - Form translations -->
             <trans-unit id="form.label_sub_description">
                 <source>form.label_sub_description</source>
                 <target>Sous description</target>
+            </trans-unit>
+            <trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target>Description</target>
             </trans-unit>
             <trans-unit id="form.label_position">
                 <source>form.label_position</source>

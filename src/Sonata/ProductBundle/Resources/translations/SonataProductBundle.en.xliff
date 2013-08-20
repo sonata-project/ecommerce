@@ -187,6 +187,10 @@
                 <source>form.label_sub_description</source>
                 <target>Sub description</target>
             </trans-unit>
+            <trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target>Description</target>
+            </trans-unit>
             <trans-unit id="form.label_position">
                 <source>form.label_position</source>
                 <target>Position</target>
