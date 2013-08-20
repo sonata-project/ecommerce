@@ -241,7 +241,23 @@
         <source>sonata_basket_address_phone</source>
         <target state="new">Phone</target>
       </trans-unit>
-      
+
+      <trans-unit id="header_basket_information" resname="header_basket_information">
+        <source>header_basket_information</source>
+        <target state="new">Cart elements</target>
+      </trans-unit>
+      <trans-unit id="header_basket_price" resname="header_basket_price">
+        <source>header_basket_price</source>
+        <target state="new">Price</target>
+      </trans-unit>
+      <trans-unit id="header_basket_quantity" resname="header_basket_quantity">
+        <source>header_basket_quantity</source>
+        <target state="new">Quantity</target>
+      </trans-unit>
+      <trans-unit id="header_basket_total" resname="header_basket_total">
+        <source>header_basket_total</source>
+        <target state="new">Total</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
