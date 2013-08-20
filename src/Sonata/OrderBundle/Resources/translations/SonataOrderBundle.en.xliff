@@ -54,6 +54,13 @@
             </trans-unit>
             <!-- End - Breadcrumb translations -->
 
+            <!-- Begin - Global translations -->
+            <trans-unit id="order_invoice_generate_success">
+                <source>order_invoice_generate_success</source>
+                <target>Invoice generated with success</target>
+            </trans-unit>
+           <!-- End - Global translations -->
+
             <!-- Begin - Form translations -->
             <trans-unit id="878a14d416d07ee86d3251fbf00c39fc5750b440" resname="order_element.form.group_main_label">
                 <jms:reference-file line="32">OrderBundle/Admin/OrderElementAdmin.php</jms:reference-file>
@@ -141,6 +148,10 @@
                 <source>list.label_total_excl</source>
                 <target>Total excl. VAT</target>
             </trans-unit>
+            <trans-unit id="list.label__action">
+                <source>list.label__action</source>
+                <target>Action</target>
+            </trans-unit>
             <!-- End - List translations -->
 
             <!-- Begin - Status translations -->
@@ -219,6 +230,10 @@
                 <source>form.label_validated_at</source>
                 <target>Validated at</target>
             </trans-unit>
+            <trans-unit id="form.label_customer">
+                <source>form.label_customer</source>
+                <target>Customer</target>
+            </trans-unit>
             <trans-unit id="form.label_billing_name">
                 <source>form.label_billing_name</source>
                 <target>Name</target>
@@ -261,7 +276,7 @@
             </trans-unit>
             <trans-unit id="form.label_billing_email">
                 <source>form.label_billing_email</source>
-                <target>Em-ail</target>
+                <target>E-mail</target>
             </trans-unit>
             <trans-unit id="form.label_shipping_name">
                 <source>form.label_shipping_name</source>

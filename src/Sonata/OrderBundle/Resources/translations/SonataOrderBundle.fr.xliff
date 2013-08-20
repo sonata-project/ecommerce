@@ -10,7 +10,7 @@
             </trans-unit>
             <!-- End - Titles -->
 
-            <!-- Begin - Sidemenu translations -->            
+            <!-- Begin - Sidemenu translations -->
             <trans-unit id="e8ba9488c7df4b48e264b4988e63852b47c04e37" resname="order.sidemenu.link_order_edit">
                 <jms:reference-file line="124">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
                 <source>order.sidemenu.link_order_edit</source>
@@ -54,6 +54,12 @@
             </trans-unit>
             <!-- End - Breadcrumb translations -->
 
+            <!-- Begin - Global translations -->
+            <trans-unit id="order_invoice_generate_success">
+                <source>order_invoice_generate_success</source>
+                <target>Facture générée avec succès</target>
+            </trans-unit>
+           <!-- End - Global translations -->
 
             <!-- Begin - Form translations -->
             <trans-unit id="878a14d416d07ee86d3251fbf00c39fc5750b440" resname="order_element.form.group_main_label">
@@ -141,6 +147,10 @@
                 <source>list.label_total_excl</source>
                 <target>Total sans TVA</target>
             </trans-unit>
+            <trans-unit id="list.label__action">
+                <source>list.label__action</source>
+                <target>Action</target>
+            </trans-unit>
             <!-- End - List translations -->
 
             <!-- Begin - Status translations -->
@@ -218,6 +228,10 @@
             <trans-unit id="form.label_validated_at">
                 <source>form.label_validated_at</source>
                 <target>Validé le</target>
+            </trans-unit>
+            <trans-unit id="form.label_customer">
+                <source>form.label_customer</source>
+                <target>Client</target>
             </trans-unit>
             <trans-unit id="form.label_billing_name">
                 <source>form.label_billing_name</source>
