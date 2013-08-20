@@ -12,16 +12,16 @@ file that was distributed with this source code.
 <h1>{{ 'sonata.basket.title_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
 <table>
-    {#
+    
     <thead>
         <tr>
             <td>{{ 'header_basket_information'|trans({}, 'SonataBasketBundle') }}</td>
-            <td>{{ 'header_basket_price' from |trans({}, 'SonataBasketBundle') }}</td>
+            <td>{{ 'header_basket_price'|trans({}, 'SonataBasketBundle') }}</td>
             <td>{{ 'header_basket_quantity'|trans({}, 'SonataBasketBundle') }}</td>
             <td>{{ 'header_basket_total'|trans({}, 'SonataBasketBundle') }}</td>
         </tr>
     </thead>
-    #}
+    
     <tbody>
         {# call each product controller to render its own view #}
         {% for basketElement in basket.BasketElements %}
