@@ -3,25 +3,25 @@
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
 
-          <!-- Begin - Titles -->
-          <trans-unit id="delivery">
-              <source>delivery</source>
-              <target>Livraison</target>
-          </trans-unit>
-          <!-- End - Titles -->
+            <!-- Begin - Titles -->
+            <trans-unit id="delivery">
+                <source>delivery</source>
+                <target>Livraison</target>
+            </trans-unit>
+            <!-- End - Titles -->
 
-          <!-- Begin - Breadcrumb translations -->
-          <trans-unit id="breadcrumb.link_delivery_list">
-              <source>breadcrumb.link_delivery_list</source>
-              <target>Livraison</target>
-          </trans-unit>
-          <trans-unit id="breadcrumb.link_delivery_edit">
-              <source>breadcrumb.link_delivery_edit</source>
-              <target>Edition</target>
-          </trans-unit>
-          <!-- End - Breadcrumb translations -->
-          
-          <!-- Begin - Status translations -->
+            <!-- Begin - Breadcrumb translations -->
+            <trans-unit id="breadcrumb.link_delivery_list">
+                <source>breadcrumb.link_delivery_list</source>
+                <target>Livraison</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_delivery_edit">
+                <source>breadcrumb.link_delivery_edit</source>
+                <target>Edition</target>
+            </trans-unit>
+            <!-- End - Breadcrumb translations -->
+
+            <!-- Begin - Status translations -->
             <trans-unit id="status_open">
                 <source>status_open</source>
                 <target>Ouvert</target>
