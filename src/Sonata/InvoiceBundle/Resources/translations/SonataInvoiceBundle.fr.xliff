@@ -3,7 +3,6 @@
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
 
-
             <!-- Begin - Titles -->
             <trans-unit id="invoice">
                 <source>invoice</source>
@@ -22,6 +21,29 @@
             </trans-unit>
             <!-- End - Breadcrumb translations -->
 
+            <!-- Begin - List translations -->
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>ID</target>
+            </trans-unit>
+            <trans-unit id="list.label_reference">
+                <source>list.label_reference</source>
+                <target>Référence</target>
+            </trans-unit>
+            <trans-unit id="list.label_customer">
+                <source>list.label_customer</source>
+                <target>Client</target>
+            </trans-unit>
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
+                <target>Statut</target>
+            </trans-unit>
+            <trans-unit id="list.label_total_excl">
+                <source>list.label_total_excl</source>
+                <target>Total sans TVA</target>
+            </trans-unit>
+            <!-- End - List translations -->
+
             <!-- Begin - Form translations -->
             <trans-unit id="form_invoice.group_main_label">
                 <source>form_invoice.group_main_label</source>
@@ -35,7 +57,6 @@
                 <source>form_invoice.group_misc_label</source>
                 <target>Divers</target>
             </trans-unit>
-
 
             <trans-unit id="form.label_reference">
                 <source>form.label_reference</source>
