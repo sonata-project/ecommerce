@@ -44,6 +44,10 @@
                 <source>breadcrumb.link_orderelement_list</source>
                 <target>Elements</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_order_element_list">
+                <source>breadcrumb.link_order_element_list</source>
+                <target>Elements</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_orderelement_edit">
                 <source>breadcrumb.link_orderelement_edit</source>
                 <target>Edit</target>
@@ -94,7 +98,7 @@
                 <source>order.form.group_misc_label</source>
                 <target>Misc</target>
             </trans-unit>
-            <!-- Begin - Form translations -->
+            <!-- End - Form translations -->
 
             <!-- Begin - Filters translations -->
             <trans-unit id="filter.label_reference">
@@ -151,6 +155,22 @@
             <trans-unit id="list.label__action">
                 <source>list.label__action</source>
                 <target>Action</target>
+            </trans-unit>
+            <trans-unit id="list.label_product_type">
+                <source>list.label_product_type</source>
+                <target>Product type</target>
+            </trans-unit>
+            <trans-unit id="list.label_order">
+                <source>list.label_order</source>
+                <target>Order</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_total_with_vat">
+                <source>list.label_get_total_with_vat</source>
+                <target>Total incl. VAT</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_total">
+                <source>list.label_get_total</source>
+                <target>Total excl. VAT</target>
             </trans-unit>
             <!-- End - List translations -->
 

@@ -44,6 +44,10 @@
                 <source>breadcrumb.link_orderelement_list</source>
                 <target>Éléments</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_order_element_list">
+                <source>breadcrumb.link_order_element_list</source>
+                <target>Éléments</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_orderelement_edit">
                 <source>breadcrumb.link_orderelement_edit</source>
                 <target>Édition</target>
@@ -150,6 +154,22 @@
             <trans-unit id="list.label__action">
                 <source>list.label__action</source>
                 <target>Action</target>
+            </trans-unit>
+            <trans-unit id="list.label_product_type">
+                <source>list.label_product_type</source>
+                <target>Type de produit</target>
+            </trans-unit>
+            <trans-unit id="list.label_order">
+                <source>list.label_order</source>
+                <target>Commande</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_total_with_vat">
+                <source>list.label_get_total_with_vat</source>
+                <target>Total avec TVA</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_total">
+                <source>list.label_get_total</source>
+                <target>Total sans TVA</target>
             </trans-unit>
             <!-- End - List translations -->
 
