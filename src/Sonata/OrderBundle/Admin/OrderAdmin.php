@@ -99,13 +99,6 @@ class OrderAdmin extends Admin
             ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataPaymentBundle', 'sortable' => 'paymentStatus'))
             ->add('validatedAt')
             ->add('totalExcl', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'generateInvoice' => array(
-                        'template' => 'SonataOrderBundle:Admin:generate_invoice.html.twig'
-                    )
-                )
-            ))
         ;
     }
 
@@ -151,6 +144,11 @@ class OrderAdmin extends Admin
         $menu->addChild(
             $this->trans('order.sidemenu.link_order_elements_list', array(), 'SonataOrderBundle'),
             array('uri' => $admin->generateUrl('sonata.order.admin.order_element.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('order.sidemenu.link_order_invoice_generate', array(), 'SonataOrderBundle'),
+            array('uri' => $admin->generateUrl('generateInvoice', array('id' => $id)))
         );
     }
 }
