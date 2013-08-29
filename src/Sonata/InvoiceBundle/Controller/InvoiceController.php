@@ -12,6 +12,9 @@
 namespace Sonata\InvoiceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sonata\Component\Invoice\InvoiceManagerInterface;
+use Sonata\Component\Transformer\InvoiceTransformer;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class InvoiceController extends Controller
 {
@@ -24,12 +27,26 @@ class InvoiceController extends Controller
     }
 
     /**
-     * @param  string            $reference
-     * @throws \RuntimeException
+     * @param string $reference
      */
     public function viewAction($reference)
     {
-        throw new \RuntimeException('not implemented');
+        $invoice = $this->getInvoiceManager()->findInvoiceBy(array('reference' => $reference));
+
+        if (null === $invoice) {
+            $invoice = $this->getInvoiceManager()->createInvoice();
+            $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+
+            if (null === $order) {
+                throw new NotFoundHttpException("Order with reference ".$reference." could not be found.");
+            }
+
+            $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
+        }
+
+        return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(
+            'invoice' => $invoice,
+        ));
     }
 
     /**
@@ -39,5 +56,29 @@ class InvoiceController extends Controller
     public function downloadAction($reference)
     {
         throw new \RuntimeException('not implemented');
+    }
+
+    /**
+     * @return InvoiceManagerInterface
+     */
+    protected function getInvoiceManager()
+    {
+        return $this->get('sonata.invoice.manager');
+    }
+
+    /**
+     * @return OrderManagerInterface
+     */
+    protected function getOrderManager()
+    {
+        return $this->get('sonata.order.manager');
+    }
+
+    /**
+     * @return InvoiceTransformer
+     */
+    protected function getInvoiceTransformer()
+    {
+        return $this->get('sonata.payment.transformer.invoice');
     }
 }

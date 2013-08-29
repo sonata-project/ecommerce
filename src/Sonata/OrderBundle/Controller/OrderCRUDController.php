@@ -4,7 +4,7 @@ namespace Sonata\OrderBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Sonata\Component\Transformer\InvoiceTransformer;
-use Sonata\InvoiceBundle\Entity\InvoiceManager;
+use Sonata\Component\Invoice\InvoiceManagerInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -30,7 +30,7 @@ class OrderCRUDController extends CRUDController
     }
 
     /**
-     * @return InvoiceManager
+     * @return InvoiceManagerInterface
      */
     protected function getInvoiceManager()
     {

@@ -12,6 +12,8 @@
 namespace Sonata\OrderBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sonata\Component\Order\OrderManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderController extends Controller
 {
@@ -24,12 +26,23 @@ class OrderController extends Controller
     }
 
     /**
-     * @param  unknown           $reference
-     * @throws \RuntimeException
+     * @param string $reference
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws NotFoundHttpException
      */
     public function viewAction($reference)
     {
-        throw new \RuntimeException('not implemented');
+        $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+
+        if (null === $order) {
+            throw new NotFoundHttpException("Order with reference ".$reference." could not be found.");
+        }
+
+        return $this->render('SonataOrderBundle:Order:view.html.twig', array(
+            'order' => $order
+        ));
     }
 
     /**
@@ -39,5 +52,13 @@ class OrderController extends Controller
     public function downloadAction($reference)
     {
         throw new \RuntimeException('not implemented');
+    }
+
+    /**
+     * @return OrderManagerInterface
+     */
+    protected function getOrderManager()
+    {
+        return $this->get('sonata.order.manager');
     }
 }
