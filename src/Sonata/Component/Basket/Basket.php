@@ -537,6 +537,8 @@ class Basket implements \Serializable, BasketInterface
             'cptElement'            => $this->cptElement,
             'deliveryMethodCode'    => $this->deliveryMethodCode,
             'options'               => $this->options,
+            'locale'                => $this->locale,
+            'currency'              => $this->currency,
         );
 
         if (null !== $this->deliveryAddressId) {
@@ -580,6 +582,8 @@ class Basket implements \Serializable, BasketInterface
             'customer',
             'customerId',
             'options',
+            'locale',
+            'currency'
         );
 
         foreach ($properties as $property) {

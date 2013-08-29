@@ -231,11 +231,29 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $data = $basket->serialize();
 
         $this->assertTrue(is_string($data));
-        $this->assertStringStartsWith('a:7:', $data, 'the serialize array has 7 elements');
+        $this->assertStringStartsWith('a:9:', $data, 'the serialize array has 9 elements');
 
         $basket->reset();
         $this->assertTrue(count($basket->getBasketElements()) == 0, '::reset() remove all elements');
         $basket->unserialize($data);
         $this->assertTrue(count($basket->getBasketElements()) == 1, '::unserialize() restore elements');
+
+        // Ensurring all needed keys are present
+        $expectedKeys = array(
+            'basketElements',
+            'positions',
+            'deliveryMethodCode',
+            'paymentMethodCode',
+            'cptElement',
+            'options',
+            'locale',
+            'currency'
+        );
+
+        $basketData = unserialize($data);
+
+        foreach ($expectedKeys as $key) {
+            $this->assertArrayHasKey($key, $basketData);
+        }
     }
 }
