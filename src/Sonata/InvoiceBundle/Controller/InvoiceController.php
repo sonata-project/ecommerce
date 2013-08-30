@@ -42,6 +42,7 @@ class InvoiceController extends Controller
             }
 
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
+            $this->getInvoiceManager()->updateInvoice($invoice);
         }
 
         return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(

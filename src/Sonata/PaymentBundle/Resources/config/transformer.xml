@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="sonata.basket_transformer.class">Sonata\Component\Transformer\BasketTransformer</parameter>
+        <parameter key="sonata.invoice_transformer.class">Sonata\Component\Transformer\InvoiceTransformer</parameter>
     </parameters>
 
     <services>
@@ -18,7 +19,7 @@
             <argument type="service" id="logger" />
         </service>
 
-        <service id="sonata.payment.transformer.invoice" class="Sonata\Component\Transformer\InvoiceTransformer">
+        <service id="sonata.payment.transformer.invoice" class="%sonata.invoice_transformer.class%">
             <tag name="sonata.payment.transformer" />
 
             <argument type="service" id="sonata.invoice_element.manager" />
