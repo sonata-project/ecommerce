@@ -240,7 +240,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'by_reference' => false,
                 ), array(
                     'edit' => 'inline',
-                    'inline' => 'table'
+                    'inline' => 'table',
+                    'link_parameters' => array('provider' => $this->getCode())
                 ))
             ->end()
             ->with('Deliveries')
@@ -249,7 +250,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'by_reference' => false,
                 ), array(
                     'edit' => 'inline',
-                    'inline' => 'table'
+                    'inline' => 'table',
+                    'link_parameters' => array('provider' => $this->getCode())
                 ))
             ->end()
         ;
