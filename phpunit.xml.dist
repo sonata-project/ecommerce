@@ -21,6 +21,7 @@
         <whitelist>
             <directory>./src</directory>
             <exclude>
+                <directory suffix="Interface.php">./src</directory>
                 <directory>./tests</directory>
                 <directory>./src/Sonata/*/DataFixtures/</directory>
                 <directory>./src/Sonata/*/Resources/</directory>
