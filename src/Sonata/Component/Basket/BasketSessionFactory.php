@@ -4,6 +4,7 @@ namespace Sonata\Component\Basket;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 
 class BasketSessionFactory implements BasketFactoryInterface
 {
@@ -18,6 +19,11 @@ class BasketSessionFactory implements BasketFactoryInterface
     protected $basketBuilder;
 
     /**
+     * @var \Sonata\Component\Currency\CurrencyDetectorInterface
+     */
+    protected $currencyDetector;
+
+    /**
      * @var \Symfony\Component\HttpFoundation\Session\Session
      */
     protected $session;
@@ -27,11 +33,12 @@ class BasketSessionFactory implements BasketFactoryInterface
      * @param \Sonata\Component\Basket\BasketBuilderInterface   $basketBuilder
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      */
-    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, Session $session)
+    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, Session $session)
     {
-        $this->basketManager = $basketManager;
-        $this->basketBuilder = $basketBuilder;
-        $this->session = $session;
+        $this->basketManager    = $basketManager;
+        $this->basketBuilder    = $basketBuilder;
+        $this->currencyDetector = $currencyDetector;
+        $this->session          = $session;
     }
 
     /**
@@ -47,7 +54,7 @@ class BasketSessionFactory implements BasketFactoryInterface
         if (!$basket) {
             $basket = $this->basketManager->create();
             $basket->setLocale($customer->getLocale());
-            $basket->setCurrency('EUR'); // TODO : handle multiple concurrencies
+            $basket->setCurrency($this->currencyDetector->getCurrency()->getLabel());
         }
 
         $basket->setCustomer($customer);

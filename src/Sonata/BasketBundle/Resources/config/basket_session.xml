@@ -8,6 +8,7 @@
         <service id="sonata.basket.session.factory" class="Sonata\Component\Basket\BasketSessionFactory">
             <argument type="service" id="sonata.basket.manager"/>
             <argument type="service" id="sonata.basket.builder"/>
+            <argument type="service" id="sonata.price.currency.detector"/>
             <argument type="service" id="session" />
         </service>
     </services>

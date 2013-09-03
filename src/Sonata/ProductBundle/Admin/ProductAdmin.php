@@ -21,6 +21,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Product\Pool;
 use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 
 class ProductAdmin extends Admin
 {
@@ -33,6 +34,19 @@ class ProductAdmin extends Admin
      * @var \Sonata\FormatterBundle\Formatter\Pool
      */
     protected $poolFormatter;
+
+    /**
+     * @var CurrencyDetectorInterface
+     */
+    protected $currencyDetector;
+
+    /**
+     * @param CurrencyDetectorInterface $currencyDetector
+     */
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    {
+        $this->currencyDetector = $currencyDetector;
+    }
 
     /**
      * {@inheritDoc}
@@ -143,7 +157,7 @@ class ProductAdmin extends Admin
         $list
             ->addIdentifier('name')
             ->add('enabled', null, array('editable' => true))
-            ->add('price', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
+            ->add('price', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
             ->add('productCategories', null, array('associated_tostring' => 'getCategory'))
         ;
     }

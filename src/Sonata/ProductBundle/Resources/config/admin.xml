@@ -47,6 +47,10 @@
             <call method="setProductPool">
                 <argument type="service" id="sonata.product.pool" />
             </call>
+            
+            <call method="setCurrencyDetector">
+                <argument type="service" id="sonata.price.currency.detector" />
+            </call>
         </service>
 
         <service id="sonata.product.admin.category" class="%sonata.product.admin.category.class%">

@@ -16,9 +16,23 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
 use Application\Sonata\OrderBundle\Entity\OrderElement;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 
 class OrderElementAdmin extends Admin
 {
+    /**
+     * @var CurrencyDetectorInterface
+     */
+    protected $currencyDetector;
+
+    /**
+     * @param CurrencyDetectorInterface $currencyDetector
+     */
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    {
+        $this->currencyDetector = $currencyDetector;
+    }
+
     public function configure()
     {
         $this->parentAssociationMapping = 'order';
@@ -49,8 +63,8 @@ class OrderElementAdmin extends Admin
             ->add('productType')
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'deliveryStatus'))
-            ->add('getTotalWithVat', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
-            ->add('getTotal', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
+            ->add('getTotalWithVat', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('getTotal', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
         ;
     }
 }

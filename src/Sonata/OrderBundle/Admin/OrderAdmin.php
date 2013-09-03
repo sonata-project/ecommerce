@@ -23,9 +23,23 @@ use Application\Sonata\ProductBundle\Entity\Delivery;
 use Application\Sonata\PaymentBundle\Entity\Transaction;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 
 class OrderAdmin extends Admin
 {
+    /**
+     * @var CurrencyDetectorInterface
+     */
+    protected $currencyDetector;
+
+    /**
+     * @param CurrencyDetectorInterface $currencyDetector
+     */
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    {
+        $this->currencyDetector = $currencyDetector;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -98,7 +112,7 @@ class OrderAdmin extends Admin
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataDeliveryBundle', 'sortable' => 'deliveryStatus'))
             ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataPaymentBundle', 'sortable' => 'paymentStatus'))
             ->add('validatedAt')
-            ->add('totalExcl', 'currency', array('currency' => 'EUR')) // for now the currency is not handled
+            ->add('totalExcl', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
         ;
     }
 
