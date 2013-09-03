@@ -64,6 +64,7 @@ Going in depths
     :maxdepth: 2
     
     product
+    currency
     customer
     basket
     order

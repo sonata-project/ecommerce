@@ -10,6 +10,7 @@ Enjoy!
     :maxdepth: 2
     
     product
+    price
     customer
     basket
     order
