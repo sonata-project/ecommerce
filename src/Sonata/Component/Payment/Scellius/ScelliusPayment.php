@@ -555,8 +555,8 @@ class ScelliusPayment extends BasePayment
             'templatefile'              => $this->getOption('templatefile'),
 
             // runtime parameters
-            'amount'                    => $this->getAmount($order->getTotalInc(), $order->getCurrency()),
-            'currency_code'             => $this->getCurrencyCode($order->getCurrency()),
+            'amount'                    => $this->getAmount($order->getTotalInc(), $order->getCurrency()->getLabel()),
+            'currency_code'             => $this->getCurrencyCode($order->getCurrency()->getLabel()),
             'transaction_id'            => $this->transactionGenerator->generate($order),
             'normal_return_url'         => $this->router->generate($this->getOption('url_return_ok'), $params, true),
             'cancel_return_url'         => $this->router->generate($this->getOption('url_return_ko'), $params, true),

@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface;
+use Sonata\Component\Currency\Currency;
 
 class ScelliusPaymentTest_Order extends BaseOrder
 {
@@ -32,6 +33,14 @@ class ScelliusPaymentTest_Order extends BaseOrder
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getCurrency()
+    {
+        if (null === $this->currency) {
+            return new Currency();
+        }
+        return $this->currency;
     }
 
 }
@@ -148,7 +157,10 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
-        $order->setCurrency('EUR');
+
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $order->setCurrency($currency);
         $order->setCustomer($customer);
         $order->setLocale('es');
 

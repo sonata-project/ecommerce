@@ -10,6 +10,7 @@
 namespace Sonata\InvoiceBundle\Entity;
 
 use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 
@@ -29,7 +30,7 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $customer;
 
     /**
-     * @var string $currency
+     * @var CurrencyInterface $currency
      */
     protected $currency;
 
@@ -156,9 +157,9 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Set currency
      *
-     * @param string $currency
+     * @param CurrencyInterface $currency
      */
-    public function setCurrency($currency)
+    public function setCurrency(CurrencyInterface $currency)
     {
         $this->currency = $currency;
     }
@@ -166,7 +167,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Get currency
      *
-     * @return string $currency
+     * @return CurrencyInterface $currency
      */
     public function getCurrency()
     {

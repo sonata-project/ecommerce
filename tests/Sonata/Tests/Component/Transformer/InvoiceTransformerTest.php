@@ -1,6 +1,7 @@
 <?php
 
 use Sonata\Component\Transformer\InvoiceTransformer;
+use Sonata\Component\Currency\Currency;
 /*
  * This file is part of the Sonata package.
 *
@@ -40,7 +41,10 @@ class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
         $order->expects($this->once())->method('getBillingPhone');
         $order->expects($this->once())->method('getReference');
 
-        $order->expects($this->once())->method('getCurrency');
+
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $order->expects($this->once())->method('getCurrency')->will($this->returnValue($currency));
         $order->expects($this->once())->method('getTotalExcl');
         $order->expects($this->once())->method('getTotalInc');
 

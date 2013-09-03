@@ -5,6 +5,7 @@ namespace Sonata\OrderBundle\Entity;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Currency\CurrencyInterface;
 
 use Application\Sonata\PaymentBundle\Entity\Transaction;
 
@@ -29,7 +30,7 @@ abstract class BaseOrder implements OrderInterface
     protected $deliveryMethod;
 
     /**
-     * @var string $currency
+     * @var CurrencyInterface $currency
      */
     protected $currency;
 
@@ -258,7 +259,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrency(CurrencyInterface $currency)
     {
         $this->currency = $currency;
     }

@@ -13,6 +13,7 @@ namespace Sonata\Tests\Component\Payment\Ogone;
 
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\Component\Payment\Ogone\OgonePayment;
+use Sonata\Component\Currency\Currency;
 
 class OgonePaymentTest_Order extends BaseOrder
 {
@@ -106,7 +107,10 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
-        $order->setCurrency('EUR');
+
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $order->setCurrency($currency);
         $order->setCustomer($customer);
         $order->setLocale('es');
 

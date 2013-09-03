@@ -12,6 +12,7 @@
 namespace Sonata\Component\Order;
 
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Currency\CurrencyInterface;
 
 interface OrderInterface
 {
@@ -72,14 +73,14 @@ interface OrderInterface
     /**
      * Set currency
      *
-     * @param string $currency
+     * @param CurrencyInterface $currency
      */
-    public function setCurrency($currency);
+    public function setCurrency(CurrencyInterface $currency);
 
     /**
      * Get currency
      *
-     * @return string $currency
+     * @return CurrencyInterface $currency
      */
     public function getCurrency();
 

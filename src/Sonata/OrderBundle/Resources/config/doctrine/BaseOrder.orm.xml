@@ -5,7 +5,7 @@
         <field name="reference"            nullable="true"   type="string"   column="reference"          length="255"/>
         <field name="paymentMethod"        nullable="true"   type="string"   column="payment_method"     length="255"/>
         <field name="deliveryMethod"       nullable="true"   type="string"   column="delivery_method"    length="255"/>
-        <field name="currency"             nullable="true"   type="string"   column="currency"           length="3"/>
+        <field name="currency"             nullable="true"   type="currency" column="currency" />
         <field name="status"               nullable="true"   type="integer"  column="status"/>
         <field name="paymentStatus"        nullable="true"   type="integer"  column="payment_status"/>
         <field name="deliveryStatus"       nullable="true"   type="integer"  column="delivery_status"/>

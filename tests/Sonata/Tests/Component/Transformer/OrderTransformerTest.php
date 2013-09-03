@@ -13,6 +13,7 @@ namespace Sonata\Tests\Component\Transformer;
 
 use Sonata\Component\Transformer\OrderTransformer;
 use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Currency\Currency;
 
 class OrderTransformerTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,6 +45,10 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElement)));
         $order->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
+
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $order->expects($this->once())->method('getCurrency')->will($this->returnValue($currency));
 
         $transformer = new OrderTransformer($pool);
         $transformer->transformIntoBasket($order, $basket);

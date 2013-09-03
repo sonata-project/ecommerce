@@ -15,6 +15,7 @@ use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Basket\Basket;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Sonata\Component\Currency\Currency;
 
 class BasketTransformerTest_Order extends BaseOrder
 {
@@ -53,6 +54,10 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 
         $basket = new Basket;
 
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $basket->setCurrency($currency);
+
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
@@ -65,6 +70,10 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 
         $basket->setCustomer($customer);
 
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $basket->setCurrency($currency);
+
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
@@ -75,6 +84,10 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $basket   = new Basket;
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
+
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $basket->setCurrency($currency);
 
         $basket->setCustomer($customer);
         $basket->setPaymentAddress($billingAddress);
@@ -95,6 +108,10 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $basket->setPaymentAddress($billingAddress);
         $basket->setPaymentMethod($paymentMethod);
 
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $basket->setCurrency($currency);
+
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
@@ -113,6 +130,10 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $basket->setPaymentAddress($billingAddress);
         $basket->setDeliveryMethod($deliveryMethod);
         $basket->setPaymentMethod($paymentMethod);
+
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $basket->setCurrency($currency);
 
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
@@ -136,6 +157,10 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $basket->setDeliveryMethod($deliveryMethod);
         $basket->setDeliveryAddress($deliveryAddress);
         $basket->setPaymentMethod($paymentMethod);
+
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $basket->setCurrency($currency);
 
         $order = $this->getBasketTransform()->transformIntoOrder($basket);
 

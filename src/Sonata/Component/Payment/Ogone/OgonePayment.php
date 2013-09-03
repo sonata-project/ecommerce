@@ -238,7 +238,7 @@ class OgonePayment extends BasePayment
             'PSPID'         => $this->getOption('pspid'),
             'orderId'       => $order->getReference(),
             'amount'        => $order->getTotalInc()*100,
-            'currency'      => $order->getCurrency(),
+            'currency'      => $order->getCurrency()->getLabel(),
             'language'      => $order->getLocale(),
             'CN'            => $order->getBillingName(),
             'EMAIL'         => $order->getBillingEmail(),

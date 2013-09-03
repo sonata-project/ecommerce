@@ -18,6 +18,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Product\Pool;
+use Sonata\Component\Currency\CurrencyInterface;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -110,7 +111,7 @@ class Basket implements \Serializable, BasketInterface
     protected $locale;
 
     /**
-     * @var string
+     * @var CurrencyInterface
      */
     protected $currency;
 
@@ -727,7 +728,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrency(CurrencyInterface $currency)
     {
         $this->currency = $currency;
     }

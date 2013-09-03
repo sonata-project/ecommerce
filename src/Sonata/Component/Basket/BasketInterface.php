@@ -17,6 +17,7 @@ use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\Pool;
+use Sonata\Component\Currency\CurrencyInterface;
 
 interface BasketInterface
 {
@@ -286,13 +287,13 @@ interface BasketInterface
     public function setLocale($locale);
 
     /**
-     * @return void
+     * @return CurrencyInterface
      */
     public function getCurrency();
 
     /**
-     * @param  string $currency
+     * @param  CurrencyInterface $currency
      * @return void
      */
-    public function setCurrency($currency);
+    public function setCurrency(CurrencyInterface $currency);
 }

@@ -45,7 +45,7 @@ file that was distributed with this source code.
             <tfoot>
                 <tr>
                     <td colspan="3"></td>
-                    <td><b>{{ basket.getTotal(true)|number_format_currency(basket.currency, {}, {}, basket.locale) }}</b></td>
+                    <td><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                     <td></td>
                 </tr>
             </tfoot>
