@@ -17,6 +17,7 @@ use Sonata\Component\Basket\BasketEntityFactory;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sonata\Component\Currency\Currency;
 
 class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,7 +38,15 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
-        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
+        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+        $currencyDetector->expects($this->any())
+            ->method('getCurrency')
+            ->will($this->returnValue($currency))
+        ;
+
+        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
         $basket = $factory->load($customer);
 
@@ -60,7 +69,15 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
-        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
+        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+        $currencyDetector->expects($this->any())
+            ->method('getCurrency')
+            ->will($this->returnValue($currency))
+        ;
+
+        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
         $basket = $factory->load($customer);
 
@@ -79,7 +96,15 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
-        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
+        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+        $currencyDetector->expects($this->any())
+            ->method('getCurrency')
+            ->will($this->returnValue($currency))
+        ;
+
+        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
     }
 
@@ -94,7 +119,15 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $session = new Session();
 
-        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $session);
+        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+        $currencyDetector->expects($this->any())
+            ->method('getCurrency')
+            ->will($this->returnValue($currency))
+        ;
+
+        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
 
         $this->assertEquals($basket, $session->get('sonata/basket/factory/customer/new'));
