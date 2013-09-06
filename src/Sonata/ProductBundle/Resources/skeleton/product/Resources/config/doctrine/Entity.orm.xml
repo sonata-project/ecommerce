@@ -11,6 +11,7 @@
     <entity
         name="Application\Sonata\ProductBundle\Entity\{{ product }}"
         table="product__product"
+        repository-class="Application\Sonata\ProductBundle\Repository\{{ product }}Repository"
         >
 
         <!--

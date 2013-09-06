@@ -73,6 +73,7 @@ class GenerateProductCommand extends ContainerAwareCommand
         $renames = array(
             // entity
             '%s/Entity/Entity.php'                         => '%s/Entity/%s.php',
+            '%s/Repository/Repository.php'                 => '%s/Repository/%sRepository.php',
             '%s/Provider/EntityProductProvider.php'        => '%s/Provider/%sProductProvider.php',
             '%s/Resources/config/doctrine/Entity.orm.xml'  => '%s/Resources/config/doctrine/%s.orm.xml',
 
