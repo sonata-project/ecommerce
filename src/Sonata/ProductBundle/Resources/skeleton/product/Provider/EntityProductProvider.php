@@ -22,7 +22,7 @@ use Sonata\ProductBundle\Model\BaseProductProvider;
  *
  * @author <yourname> <youremail>
  */
-class EntityProductProvider product }}ProductProvider extends BaseProductProvider
+class {{ product }}ProductProvider extends BaseProductProvider
 {
     public function getBaseControllerName()
     {

@@ -18,7 +18,7 @@ namespace Application\Sonata\ProductBundle\Entity;
  *
  * @author <yourname> <youremail>
  */
-class Entity product }} extends Product
+class {{ product }} extends Product
 {
 
 }

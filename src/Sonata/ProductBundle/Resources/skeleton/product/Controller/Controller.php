@@ -23,7 +23,7 @@ use Application\Sonata\ProductBundle\Product\{{ product }}\{{ product }}AddBaske
  * for the current product
  *
  */
-class Controller product }}Controller extends \Sonata\ProductBundle\Controller\BaseProductController
+class {{ product }}Controller extends \Sonata\ProductBundle\Controller\BaseProductController
 {
 
 }
