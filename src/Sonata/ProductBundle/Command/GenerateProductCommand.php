@@ -37,6 +37,7 @@ class GenerateProductCommand extends ContainerAwareCommand
                 new InputArgument('service_id', InputArgument::REQUIRED, 'The service id to define'),
             ))
             ->setName('sonata:product:generate')
+            ->setDescription('Generates required files for a new Product')
         ;
     }
 
