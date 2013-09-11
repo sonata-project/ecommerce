@@ -1,4 +1,0 @@
-Scellius setup
-==============
-
-``In progress``

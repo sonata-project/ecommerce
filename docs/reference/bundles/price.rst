@@ -2,6 +2,16 @@
 Price
 =====
 
+Presentation
+============
+
+``In Progress``
+
+Price bundle handles everything related to prices, (right now, only currencies, but it will soon be extended to add taxes, ...
+
+Configuration
+=============
+
 Price bundle configuration is as follows:
 
 ::
