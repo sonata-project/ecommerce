@@ -67,7 +67,8 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * Updates a category
      *
-     * @param  Category $category
+     * @param \Sonata\Component\Product\CategoryInterface $category
+     *
      * @return void
      */
     public function updateCategory(CategoryInterface $category)
@@ -111,7 +112,8 @@ class CategoryManager implements CategoryManagerInterface
     /**
      * Deletes a category
      *
-     * @param  Category $category
+     * @param \Sonata\Component\Product\CategoryInterface $category
+     *
      * @return void
      */
     public function deleteCategory(CategoryInterface $category)

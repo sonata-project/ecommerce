@@ -44,12 +44,12 @@ abstract class BaseDelivery implements DeliveryInterface
     protected $enabled;
 
     /**
-     * @var datetime $updatedAt
+     * @var \DateTime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
 
@@ -58,7 +58,7 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * Set productId
      *
-     * @param integer $productId
+     * @param \Sonata\Component\Product\ProductInterface $product
      */
     public function setProduct(ProductInterface $product)
     {
@@ -76,9 +76,9 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set class_name
+     * Set code
      *
-     * @param string $className
+     * @param $code
      */
     public function setCode($code)
     {
@@ -116,9 +116,9 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set country
+     * Set country code
      *
-     * @param string $country
+     * @param $countryCode
      */
     public function setCountryCode($countryCode)
     {
@@ -178,7 +178,7 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -188,7 +188,7 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -198,7 +198,7 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -208,7 +208,7 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {

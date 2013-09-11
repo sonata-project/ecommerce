@@ -58,7 +58,8 @@ class DeliveryManager implements DeliveryManagerInterface
     /**
      * Updates a delivery
      *
-     * @param  Delivery $delivery
+     * @param \Sonata\Component\Product\DeliveryInterface $delivery
+     *
      * @return void
      */
     public function updateDelivery(DeliveryInterface $delivery)
@@ -91,7 +92,8 @@ class DeliveryManager implements DeliveryManagerInterface
     /**
      * Deletes a delivery
      *
-     * @param  Delivery $delivery
+     * @param \Sonata\Component\Product\DeliveryInterface $delivery
+     *
      * @return void
      */
     public function deleteDelivery(DeliveryInterface $delivery)

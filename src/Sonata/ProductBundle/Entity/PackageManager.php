@@ -58,7 +58,8 @@ class PackageManager implements PackageManagerInterface
     /**
      * Updates a package
      *
-     * @param  Package $package
+     * @param \Sonata\Component\Product\PackageInterface $package
+     *
      * @return void
      */
     public function updatePackage(PackageInterface $package)
@@ -91,7 +92,8 @@ class PackageManager implements PackageManagerInterface
     /**
      * Deletes a package
      *
-     * @param  Package $package
+     * @param \Sonata\Component\Product\PackageInterface $package
+     *
      * @return void
      */
     public function deletePackage(PackageInterface $package)

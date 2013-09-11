@@ -48,12 +48,12 @@ abstract class BasePackage implements PackageInterface
     protected $enabled;
 
     /**
-     * @var datetime $updatedAt
+     * @var \DateTime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
 
@@ -180,7 +180,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -190,7 +190,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -200,7 +200,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -210,7 +210,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {

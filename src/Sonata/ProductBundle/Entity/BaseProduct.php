@@ -443,7 +443,11 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * @return
+     * Set product options
+     *
+     * @param array $options
+     *
+     * @return void
      */
     public function setOptions(array $options)
     {
@@ -458,7 +462,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Add ProductCategories
      *
-     * @param Application\Sonata\ProductBundle\Entity\ProductCategory $productCategory
+     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
      */
     public function addProductCategory(ProductCategoryInterface $productCategory)
     {
@@ -479,7 +483,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Remove ProductCategories
      *
-     * @param Application\Sonata\ProductBundle\Entity\ProductCategory $productCategory
+     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
      */
     public function removeProductCategory(ProductCategoryInterface $productCategory)
     {
@@ -521,7 +525,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set image
      *
-     * @param Application\Sonata\MediaBundle\Entity\Media $image
+     * @param \Sonata\MediaBundle\Model\MediaInterface $image
      */
     public function setImage(MediaInterface $image = null)
     {

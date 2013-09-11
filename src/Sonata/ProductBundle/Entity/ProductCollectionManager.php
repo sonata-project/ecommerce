@@ -31,7 +31,9 @@ class ProductCollectionManager extends ProductManager
     /**
      * Creates an empty medie instance
      *
-     * @return \Sonata\Component\Product\ProductInterface
+     * @throws \RuntimeException
+     *
+     * @return void
      */
     public function create()
     {
@@ -41,7 +43,11 @@ class ProductCollectionManager extends ProductManager
     /**
      * Creates an empty medie instance
      *
-     * @return \Sonata\Component\Product\ProductInterface
+     * @param \Sonata\Component\Product\ProductInterface $product
+     *
+     * @throws \RuntimeException
+     *
+     * @return void
      */
     public function save(ProductInterface $product)
     {

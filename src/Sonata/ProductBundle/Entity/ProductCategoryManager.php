@@ -58,7 +58,8 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Updates a productCategory
      *
-     * @param  ProductCategory $productCategory
+     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
+     *
      * @return void
      */
     public function updateProductCategory(ProductCategoryInterface $productCategory)
@@ -91,7 +92,8 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Deletes an productCategory
      *
-     * @param  ProductCategory $productCategory
+     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
+     *
      * @return void
      */
     public function deleteProductCategory(ProductCategoryInterface $productCategory)

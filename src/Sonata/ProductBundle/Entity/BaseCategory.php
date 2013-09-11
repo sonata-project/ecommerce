@@ -10,18 +10,18 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\Component\Product\CategoryInterface;
 
 abstract class BaseCategory implements CategoryInterface
 {
-
     /**
      * @var string $label
      */
     protected $name;
 
     /**
-     * @var text $sub_description
+     * @var string $sub_description
      */
     protected $subDescription;
 
@@ -31,27 +31,27 @@ abstract class BaseCategory implements CategoryInterface
     protected $enabled;
 
     /**
-     * @var datetime $updatedAt
+     * @var \DateTime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $createdAt
+     * @var \DateTime $createdAt
      */
     protected $createdAt;
 
     /**
-     * @var text $description
+     * @var string $description
      */
     protected $description;
 
     /**
-     * @var text $rawDescription
+     * @var string $rawDescription
      */
     protected $rawDescription;
 
     /**
-     * @var text $descriptionFormatter
+     * @var string $descriptionFormatter
      */
     protected $descriptionFormatter;
 
@@ -82,7 +82,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Set sub_description
      *
-     * @param text $subDescription
+     * @param string $subDescription
      */
     public function setSubDescription($subDescription)
     {
@@ -92,7 +92,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get sub_description
      *
-     * @return text $subDescription
+     * @return string $subDescription
      */
     public function getSubDescription()
     {
@@ -122,7 +122,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -132,7 +132,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \DateTime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -142,7 +142,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -152,7 +152,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \DateTime $createdAt
      */
     public function getCreatedAt()
     {
@@ -186,7 +186,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -196,7 +196,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get description
      *
-     * @return text $description
+     * @return string $description
      */
     public function getDescription()
     {
@@ -206,7 +206,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Set RAW description.
      *
-     * @param text $rawDescription
+     * @param string $rawDescription
      */
     public function setRawDescription($rawDescription)
     {
@@ -216,7 +216,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get RAW description.
      *
-     * @return text $rawDescription
+     * @return string $rawDescription
      */
     public function getRawDescription()
     {
@@ -226,7 +226,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Set description formatter.
      *
-     * @param text $descriptionFormatter
+     * @param string $descriptionFormatter
      */
     public function setDescriptionFormatter($descriptionFormatter)
     {
@@ -236,7 +236,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get description formatter.
      *
-     * @return text $descriptionFormatter
+     * @return string $descriptionFormatter
      */
     public function getDescriptionFormatter()
     {
@@ -319,7 +319,8 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Add Children
      *
-     * @param Application\Sonata\ProductBundle\Entity\Category $children
+     * @param CategoryInterface $children
+     * @param boolean           $nested
      */
     public function addChildren(CategoryInterface $children, $nested = false)
     {
@@ -340,7 +341,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get Children
      *
-     * @return Doctrine\Common\Collections\Collection $children
+     * @return \Doctrine\Common\Collections\Collection $children
      */
     public function getChildren()
     {
@@ -348,12 +349,13 @@ abstract class BaseCategory implements CategoryInterface
     }
 
     /**
+     * Set children
+     *
      * @param $children
-     * @return void
      */
     public function setChildren($children)
     {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->children = new ArrayCollection();
 
         foreach ($children as $category) {
             $this->addChildren($category);
@@ -361,6 +363,7 @@ abstract class BaseCategory implements CategoryInterface
     }
 
     /**
+     * Return true if category has children
      *
      * @return boolean
      */
@@ -372,8 +375,8 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Set Parent
      *
-     * @param CategoryInterface
-     * @param boolean
+     * @param CategoryInterface $parent
+     * @param boolean           $nested
      */
     public function setParent(CategoryInterface $parent, $nested = false)
     {
@@ -387,7 +390,7 @@ abstract class BaseCategory implements CategoryInterface
     /**
      * Get Parent
      *
-     * @return Application\Sonata\ProductBundle\Entity\Category $parent
+     * @return \Application\Sonata\ProductBundle\Entity\Category $parent
      */
     public function getParent()
     {
