@@ -23,12 +23,12 @@ use Doctrine\Common\Collections\Collection;
 abstract class BaseProduct implements ProductInterface
 {
     /**
-     * @var text $sku
+     * @var string $sku
      */
     protected $sku;
 
     /**
-     * @var text $slug
+     * @var string $slug
      */
     protected $slug;
 
@@ -38,27 +38,27 @@ abstract class BaseProduct implements ProductInterface
     protected $name;
 
     /**
-     * @var text $description
+     * @var string $description
      */
     protected $description;
 
     /**
-     * @var text $rawDescription
+     * @var string $rawDescription
      */
     protected $rawDescription;
 
     /**
-     * @var text $descriptionFormatter
+     * @var string $descriptionFormatter
      */
     protected $descriptionFormatter;
 
     /**
-     * @var decimal $price
+     * @var float $price
      */
     protected $price;
 
     /**
-     * @var decimal $vat
+     * @var float $vat
      */
     protected $vat;
 
@@ -108,7 +108,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set sku
      *
-     * @param text $sku
+     * @param string $sku
      */
     public function setSku($sku)
     {
@@ -118,7 +118,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get sku
      *
-     * @return text $sku
+     * @return string $sku
      */
     public function getSku()
     {
@@ -128,7 +128,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set slug
      *
-     * @param text $slug
+     * @param string $slug
      */
     public function setSlug($slug)
     {
@@ -138,7 +138,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get slug
      *
-     * @return text $slug
+     * @return string $slug
      */
     public function getSlug()
     {
@@ -168,7 +168,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -178,7 +178,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get description
      *
-     * @return text $description
+     * @return string $description
      */
     public function getDescription()
     {
@@ -188,7 +188,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set RAW description.
      *
-     * @param text $rawDescription
+     * @param string $rawDescription
      */
     public function setRawDescription($rawDescription)
     {
@@ -198,7 +198,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get RAW description.
      *
-     * @return text $rawDescription
+     * @return string $rawDescription
      */
     public function getRawDescription()
     {
@@ -208,7 +208,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set description formatter.
      *
-     * @param text $descriptionFormatter
+     * @param string $descriptionFormatter
      */
     public function setDescriptionFormatter($descriptionFormatter)
     {
@@ -218,7 +218,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get description formatter.
      *
-     * @return text $descriptionFormatter
+     * @return string $descriptionFormatter
      */
     public function getDescriptionFormatter()
     {
@@ -228,7 +228,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set price
      *
-     * @param decimal $price
+     * @param float $price
      */
     public function setPrice($price)
     {
@@ -238,7 +238,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get price
      *
-     * @return decimal $price
+     * @return float $price
      */
     public function getPrice()
     {
@@ -248,7 +248,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Set vat
      *
-     * @param decimal $vat
+     * @param float $vat
      */
     public function setVat($vat)
     {
@@ -258,7 +258,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get vat
      *
-     * @return decimal $vat
+     * @return float $vat
      */
     public function getVat()
     {
@@ -505,7 +505,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get ProductCategories
      *
-     * @return Doctrine\Common\Collections\Collection $productCategories
+     * @return \Doctrine\Common\Collections\Collection $productCategories
      */
     public function getProductCategories()
     {
@@ -535,7 +535,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * Get image
      *
-     * @return Application\Sonata\MediaBundle\Entity\Media $image
+     * @return \Application\Sonata\MediaBundle\Entity\Media $image
      */
     public function getImage()
     {

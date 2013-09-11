@@ -23,22 +23,22 @@ abstract class BasePackage implements PackageInterface
     protected $productId;
 
     /**
-     * @var decimal $width
+     * @var float $width
      */
     protected $width;
 
     /**
-     * @var decimal $height
+     * @var float $height
      */
     protected $height;
 
     /**
-     * @var decimal $length
+     * @var float $length
      */
     protected $length;
 
     /**
-     * @var decimal $weight
+     * @var float $weight
      */
     protected $weight;
 
@@ -80,7 +80,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Set width
      *
-     * @param decimal $width
+     * @param float $width
      */
     public function setWidth($width)
     {
@@ -90,7 +90,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Get width
      *
-     * @return decimal $width
+     * @return float $width
      */
     public function getWidth()
     {
@@ -100,7 +100,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Set height
      *
-     * @param decimal $height
+     * @param float $height
      */
     public function setHeight($height)
     {
@@ -110,7 +110,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Get height
      *
-     * @return decimal $height
+     * @return float $height
      */
     public function getHeight()
     {
@@ -120,7 +120,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Set length
      *
-     * @param decimal $length
+     * @param float $length
      */
     public function setLength($length)
     {
@@ -130,7 +130,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Get length
      *
-     * @return decimal $length
+     * @return float $length
      */
     public function getLength()
     {
@@ -140,7 +140,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Set weight
      *
-     * @param decimal $weight
+     * @param float $weight
      */
     public function setWeight($weight)
     {
@@ -150,7 +150,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * Get weight
      *
-     * @return decimal $weight
+     * @return float $weight
      */
     public function getWeight()
     {
