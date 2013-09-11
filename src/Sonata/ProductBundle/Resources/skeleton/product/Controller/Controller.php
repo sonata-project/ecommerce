@@ -11,19 +11,14 @@
 
 namespace Application\Sonata\ProductBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Application\Sonata\ProductBundle\Entity\{{ product }};
-
-use Application\Sonata\ProductBundle\Product\{{ product }}\{{ product }}AddBasket;
+use Sonata\ProductBundle\Controller\BaseProductController;
 
 /**
- *
- * overwrite methods from the BaseProductController if you want to change the behavior
+ * Overwrite methods from the BaseProductController if you want to change the behavior
  * for the current product
  *
  */
-class {{ product }}Controller extends \Sonata\ProductBundle\Controller\BaseProductController
+class {{ product }}Controller extends BaseProductController
 {
 
 }

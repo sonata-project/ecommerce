@@ -78,8 +78,8 @@ class GenerateProductCommand extends ContainerAwareCommand
             '%s/Provider/EntityProductProvider.php'        => '%s/Provider/%sProductProvider.php',
             '%s/Resources/config/doctrine/Entity.orm.xml'  => '%s/Resources/config/doctrine/%s.orm.xml',
 
-            // behavior
-            '%s/Controller/Controller.php'                 => '%s/Controller/Controller.php',
+            // controller
+            '%s/Controller/Controller.php'                 => '%s/Controller/%sController.php',
 
             // templates
             '%s/Resources/views/Entity/view.html.twig'                          => '%s/Resources/views/%s/view.html.twig',
