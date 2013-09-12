@@ -63,7 +63,7 @@
                 <source>order_invoice_generate_success</source>
                 <target>Facture générée avec succès</target>
             </trans-unit>
-           <!-- End - Global translations -->
+            <!-- End - Global translations -->
 
             <!-- Begin - Form translations -->
             <trans-unit id="878a14d416d07ee86d3251fbf00c39fc5750b440" resname="order_element.form.group_main_label">
@@ -224,7 +224,6 @@
             </trans-unit>
             <!-- End - Status translations -->
 
-
             <trans-unit id="form.label_locale">
                 <source>form.label_locale</source>
                 <target>Locale</target>
@@ -341,6 +340,8 @@
                 <source>form.label_shipping_email</source>
                 <target>Email</target>
             </trans-unit>
+            <!-- End - Filters translations -->
+
         </body>
     </file>
 </xliff>

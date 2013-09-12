@@ -63,7 +63,7 @@
                 <source>order_invoice_generate_success</source>
                 <target>Invoice generated with success</target>
             </trans-unit>
-           <!-- End - Global translations -->
+            <!-- End - Global translations -->
 
             <!-- Begin - Form translations -->
             <trans-unit id="878a14d416d07ee86d3251fbf00c39fc5750b440" resname="order_element.form.group_main_label">
@@ -75,7 +75,6 @@
                 <source>order_element.form.group_main_label</source>
                 <target>General</target>
             </trans-unit>
-
 
             <trans-unit id="136794a92f1e3148a524a63cb5101c2d7411f94b" resname="order.form.group_main_label">
                 <jms:reference-file line="74">OrderBundle/Admin/OrderAdmin.php</jms:reference-file>
@@ -225,7 +224,6 @@
             </trans-unit>
             <!-- End - Status translations -->
 
-
             <trans-unit id="form.label_locale">
                 <source>form.label_locale</source>
                 <target>Locale</target>
@@ -342,6 +340,8 @@
                 <source>form.label_shipping_email</source>
                 <target>E-mail</target>
             </trans-unit>
+            <!-- End - Filters translations -->
+
         </body>
     </file>
 </xliff>

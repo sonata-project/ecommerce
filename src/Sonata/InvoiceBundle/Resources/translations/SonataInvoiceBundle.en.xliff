@@ -79,7 +79,6 @@
                 <target>Total excl. VAT</target>
             </trans-unit>
 
-
             <trans-unit id="form.label_name">
                 <source>form.label_name</source>
                 <target>Name</target>
