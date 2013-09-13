@@ -19,7 +19,8 @@ Here's how to configure Ogone for sonata ecommerce:
 
 2. Configure the payment gateway according to the values you'll get with your Ogone account (or you'll fill in the Ogone admin)
 
-::
+.. code-block:: yaml
+    :linenos:
 
     sonata_payment:
         services:

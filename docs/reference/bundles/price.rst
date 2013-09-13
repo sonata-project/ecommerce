@@ -14,14 +14,11 @@ Configuration
 
 Price bundle configuration is as follows:
 
-::
-
-      sonata_price:
-        currency: EUR # Or any value present in array_keys(Intl::getCurrencyBundle()->getCurrencyNames)
-
-
 .. code-block:: yaml
+    :linenos:
 
+    sonata_price:
+        currency: EUR # Or any value present in array_keys(Intl::getCurrencyBundle()->getCurrencyNames)
     doctrine:
         dbal:
             # ...

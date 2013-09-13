@@ -27,8 +27,9 @@ There are two ways to deal with Basket storage:
 
 To enable DB storage, you'll need to change the following configuration values:
 
-::
- 
+.. code-block:: yaml
+    :linenos:
+
     sonata_basket:
         # ...
         factory: sonata.basket.entity.factory     # This is where you switch to DB stored Basket ; sonata.basket.session.factory for session
@@ -49,4 +50,38 @@ To enable DB storage, you'll need to change the following configuration values:
 Configuration
 =============
 
-``In Progress``
+Here's the full default configuration for SonataBasketBundle:
+
+.. code-block:: yaml
+    :linenos:
+
+    sonata_basket:
+
+        # Services
+        builder:            sonata.basket.builder.standard
+        factory:            sonata.basket.session.factory
+        loader:             sonata.basket.loader.standard
+
+        # Model
+        class:
+            basket:         Application\\Sonata\\BasketBundle\\Entity\\Basket
+            basket_element: Application\\Sonata\\BasketBundle\\Entity\\BasketElement
+            customer:       Application\\Sonata\\CustomerBundle\\Entity\\Customer
+
+        # Forms
+        basket:
+            form:
+                type:       sonata_basket_basket
+                name:       sonata_basket_basket_form
+        shipping:
+            form:
+                type:       sonata_basket_shipping
+                name:       sonata_basket_shipping_form
+        payment:
+            form:
+                type:       sonata_basket_payment
+                name:       sonata_basket_payment_form
+
+
+As you can see, you can override the builder, factory & loader services ; basket, basket_element & customer classes and the various forms.
+Moreover, you're able to override the rest of the bundle by extending it (through SonataEasyExtendsBundle for instance).
