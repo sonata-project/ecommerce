@@ -6,6 +6,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 
+/**
+ * @todo Refacto (add an abstract class with the properties & constructor)
+ */
 class BasketSessionFactory implements BasketFactoryInterface
 {
     /**
