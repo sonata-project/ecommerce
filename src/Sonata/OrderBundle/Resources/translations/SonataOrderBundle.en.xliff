@@ -8,6 +8,10 @@
                 <source>order</source>
                 <target>Order</target>
             </trans-unit>
+            <trans-unit id="sonata.order.title_order">
+                <source>sonata.order.title_order</source>
+                <target>Your order</target>
+            </trans-unit>
             <!-- End - Titles -->
 
             <!-- Begin - Sidemenu translations -->
@@ -62,6 +66,10 @@
             <trans-unit id="order_invoice_generate_success">
                 <source>order_invoice_generate_success</source>
                 <target>Invoice generated with success</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view_invoice">
+                <source>sonata.order.view_invoice</source>
+                <target>View your invoice</target>
             </trans-unit>
             <!-- End - Global translations -->
 
