@@ -8,6 +8,10 @@
                 <source>invoice</source>
                 <target>Invoice</target>
             </trans-unit>
+            <trans-unit id="sonata.invoice.title_invoice">
+                <source>sonata.invoice.title_invoice</source>
+                <target>Your invoice</target>
+            </trans-unit>
             <!-- End - Titles -->
 
             <!-- Begin - Breadcrumb translations -->
