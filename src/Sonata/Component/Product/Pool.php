@@ -75,10 +75,9 @@ class Pool
      */
     public function getProductCode(ProductInterface $product)
     {
-        $class = get_class($product);
-
         foreach ($this->products as $code => $productDescription) {
-            if ($productDescription->getManager()->getClass() == $class) {
+            $className = $productDescription->getManager()->getClass();
+            if ($product instanceof $className) {
                 return $code;
             }
         }
