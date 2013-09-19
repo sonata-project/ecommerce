@@ -225,7 +225,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 ->add('price', 'number')
                 ->add('vat', 'number')
                 ->add('stock', 'integer')
-                ->add('image', 'sonata_type_model_list', array(), array(
+                ->add('image', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
                     'link_parameters' => array(
                         'context'  => 'sonata_product',
                         'filter'   => array('context' => array('value' => 'sonata_product')),
