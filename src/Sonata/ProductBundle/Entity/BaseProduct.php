@@ -132,7 +132,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->slug = self::slugify(trim($slug));
     }
 
     /**
@@ -153,6 +153,10 @@ abstract class BaseProduct implements ProductInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        if (!$this->getSlug()) {
+            $this->setSlug($name);
+        }
     }
 
     /**
@@ -576,5 +580,38 @@ abstract class BaseProduct implements ProductInterface
     public function isRecurrentPayment()
     {
         return false;
+    }
+
+    /**
+     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/
+     *
+     * @static
+     * @param  $text
+     * @return mixed|string
+     */
+    public static function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        if (function_exists('iconv')) {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }
