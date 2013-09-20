@@ -14,6 +14,8 @@ namespace Sonata\OrderBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sonata\Component\Customer\CustomerInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class OrderController extends Controller
 {
@@ -40,6 +42,8 @@ class OrderController extends Controller
             throw new NotFoundHttpException("Order with reference ".$reference." could not be found.");
         }
 
+        $this->checkAccess($order->getCustomer());
+
         return $this->render('SonataOrderBundle:Order:view.html.twig', array(
             'order' => $order
         ));
@@ -52,6 +56,22 @@ class OrderController extends Controller
     public function downloadAction($reference)
     {
         throw new \RuntimeException('not implemented');
+    }
+
+    /**
+     * Checks that the current logged in user has access to given invoice
+     *
+     * @param CustomerInterface $customer The linked customer
+     *
+     * @throws UnauthorizedHttpException
+     */
+    protected function checkAccess(CustomerInterface $customer)
+    {
+        if (!($user = $this->getUser())
+        || !$customer->getUser()
+        || $customer->getUser()->getId() !== $user->getId()) {
+            throw new AccessDeniedHttpException();
+        }
     }
 
     /**

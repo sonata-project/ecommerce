@@ -12,9 +12,13 @@
 namespace Sonata\InvoiceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\Component\Transformer\InvoiceTransformer;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Customer\CustomerInterface;
 
 class InvoiceController extends Controller
 {
@@ -27,15 +31,18 @@ class InvoiceController extends Controller
     }
 
     /**
-     * @param string $reference
+     * @param string $reference Order/Invoice reference
      */
     public function viewAction($reference)
     {
         $invoice = $this->getInvoiceManager()->findInvoiceBy(array('reference' => $reference));
 
         if (null === $invoice) {
-            $invoice = $this->getInvoiceManager()->createInvoice();
             $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+
+            $this->checkAccess($order->getCustomer());
+
+            $invoice = $this->getInvoiceManager()->createInvoice();
 
             if (null === $order) {
                 throw new NotFoundHttpException("Order with reference ".$reference." could not be found.");
@@ -43,6 +50,8 @@ class InvoiceController extends Controller
 
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
             $this->getInvoiceManager()->updateInvoice($invoice);
+        } else {
+            $this->checkAccess($invoice->getCustomer());
         }
 
         return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(
@@ -57,6 +66,22 @@ class InvoiceController extends Controller
     public function downloadAction($reference)
     {
         throw new \RuntimeException('not implemented');
+    }
+
+    /**
+     * Checks that the current logged in user has access to given invoice
+     *
+     * @param CustomerInterface $customer The linked customer
+     *
+     * @throws UnauthorizedHttpException
+     */
+    protected function checkAccess(CustomerInterface $customer)
+    {
+        if (!($user = $this->getUser())
+            || !$customer->getUser()
+            || $customer->getUser()->getId() !== $user->getId()) {
+            throw new AccessDeniedHttpException();
+        }
     }
 
     /**

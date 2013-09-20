@@ -54,6 +54,7 @@ class CustomerSelector implements CustomerSelectorInterface
     public function get()
     {
         $customer = null;
+        $user     = null;
 
         if (true === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             // user is authenticated
@@ -82,6 +83,10 @@ class CustomerSelector implements CustomerSelectorInterface
 
         if (!$customer->getLocale()) {
             $customer->setLocale($this->locale);
+        }
+
+        if ($user && $customer) {
+            $customer->setUser($user);
         }
 
         return $customer;
