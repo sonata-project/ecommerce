@@ -5,7 +5,8 @@ Basket
 Presentation
 ============
 
-The BasketBundle handles everything related to the Basket and the Order process (user workflow). It offers Basket, Address, Payment & Shipping forms, all the needed controller actions, and exposes Basket's handling services such as Provider, Factory and Loader.
+The BasketBundle handles everything related to the Basket and the Order process (user workflow).
+It offers Basket, Address, Payment & Shipping forms, all the needed controller actions, and exposes Basket's handling services such as Provider, Factory and Loader.
 
 Several actions are provided by the controller:
 

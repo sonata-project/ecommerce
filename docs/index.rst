@@ -5,7 +5,10 @@ Welcome to Sonata E-Commerce's documentation!
 Introduction
 ============
 
-Sonata e-commerce is a group of Symfony2 bundles & PHP components allowing you to add e-commerce capabilities to your Symfony2 application. It integrates well with several other Sonata bundles, such as Sonata Admin Bundle and Sonata Notification Bundle.
+Sonata e-commerce is an open source e-commerce solution based on symfony.
+Sonata e-commerce is a group of Symfony2 bundles & PHP components allowing you to add e-commerce capabilities to your Symfony2 application.
+It's also compatible with several other Sonata bundles, such as Sonata Admin Bundle and Sonata Notification Bundle.
+
 With this vendor, you'll be able to manage a whole e-commerce process:
 
 * **Catalog**
