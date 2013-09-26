@@ -49,16 +49,16 @@
             <!-- End - List translations -->
 
             <!-- Begin - Form translations -->
-            <trans-unit id="form_invoice.group_main_label">
-                <source>form_invoice.group_main_label</source>
+            <trans-unit id="invoice.form.group_main_label">
+                <source>invoice.form.group_main_label</source>
                 <target>Général</target>
             </trans-unit>
-            <trans-unit id="form_invoice.group_billing_label">
-                <source>form_invoice.group_billing_label</source>
+            <trans-unit id="invoice.form.group_billing_label">
+                <source>invoice.form.group_billing_label</source>
                 <target>Facturation</target>
             </trans-unit>
-            <trans-unit id="form_invoice.group_misc_label">
-                <source>form_invoice.group_misc_label</source>
+            <trans-unit id="invoice.form.group_misc_label">
+                <source>invoice.form.group_misc_label</source>
                 <target>Divers</target>
             </trans-unit>
 

@@ -497,6 +497,13 @@ abstract class BaseInvoice implements InvoiceInterface
     public function setInvoiceElements(array $elements)
     {
         $this->invoiceElements = $elements;
-        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getReference() ?: 'n/a';
     }
 }

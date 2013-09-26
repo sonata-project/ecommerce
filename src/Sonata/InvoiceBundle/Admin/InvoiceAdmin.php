@@ -30,15 +30,23 @@ class InvoiceAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        if (!$this->isChild()) {
+            $formMapper
+                ->with($this->trans('invoice.form.group_main_label', array(), 'SonataInvoiceBundle'))
+                    ->add('customer', 'sonata_type_model_list')
+                ->end()
+            ;
+        }
+
         $formMapper
-            ->with($this->trans('form_invoice.group_main_label', array(), 'SonataInvoiceBundle'))
+            ->with($this->trans('invoice.form.group_main_label', array(), 'SonataInvoiceBundle'))
                 ->add('reference')
                 ->add('currency', 'sonata_currency')
                 ->add('status')
                 ->add('totalInc')
                 ->add('totalExcl')
             ->end()
-            ->with($this->trans('form_invoice.group_billing_label', array(), 'SonataInvoiceBundle'), array('collapsed' => true))
+            ->with($this->trans('invoice.form.group_billing_label', array(), 'SonataInvoiceBundle'), array('collapsed' => true))
                 ->add('name')
                 ->add('phone')
                 ->add('address1')
@@ -52,14 +60,6 @@ class InvoiceAdmin extends Admin
                 ->add('mobile')
             ->end()
         ;
-
-        if (!$this->isChild()) {
-            $formMapper
-                ->with($this->trans('form_invoice.group_misc_label', array(), 'SonataInvoiceBundle'))
-                    ->add('customer', 'sonata_type_model_list')
-                ->end()
-            ;
-        }
     }
 
     /**
