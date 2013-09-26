@@ -34,7 +34,7 @@ class Currency implements CurrencyInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getLabel()
     {
@@ -47,6 +47,7 @@ class Currency implements CurrencyInterface
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 

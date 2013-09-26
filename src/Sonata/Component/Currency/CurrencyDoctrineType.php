@@ -26,10 +26,7 @@ class CurrencyDoctrineType extends StringType
     const CURRENCY = 'currency'; // modify to match your type name
 
     /**
-     * @param mixed                                     $value
-     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
-     *
-     * @return Sonata\Component\Currency\CurrencyInterface
+     * {@inheritdoc}
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
@@ -39,14 +36,12 @@ class CurrencyDoctrineType extends StringType
 
         $currency = new Currency();
         $currency->setLabel($value);
+
         return $currency;
     }
 
     /**
-     * @param mixed                                     $value
-     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
@@ -57,13 +52,17 @@ class CurrencyDoctrineType extends StringType
         return $value->getLabel();
     }
 
-    /** @override */
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultLength(AbstractPlatform $platform)
     {
         return 3;
     }
 
-    /** @override */
+    /**
+     * {@inheritdoc}
+     */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         $field['length'] = $this->getDefaultLength($platform);
@@ -74,7 +73,7 @@ class CurrencyDoctrineType extends StringType
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
