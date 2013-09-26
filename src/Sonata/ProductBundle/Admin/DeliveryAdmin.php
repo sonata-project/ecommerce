@@ -32,7 +32,7 @@ class DeliveryAdmin extends Admin
     {
         $formMapper
             ->add('enabled')
-            ->add('code')
+            ->add('code', 'sonata_delivery_choice')
             ->add('perItem')
             ->add('countryCode', 'country')
             ->add('zone')
