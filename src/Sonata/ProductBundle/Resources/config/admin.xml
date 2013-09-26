@@ -47,7 +47,7 @@
             <call method="setProductPool">
                 <argument type="service" id="sonata.product.pool" />
             </call>
-            
+
             <call method="setCurrencyDetector">
                 <argument type="service" id="sonata.price.currency.detector" />
             </call>
@@ -65,14 +65,14 @@
         </service>
 
         <service id="sonata.product.admin.product_category" class="%sonata.product.admin.product_category.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product_category" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="product_category" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.product.admin.product_category.entity%</argument>
             <argument>%sonata.product.admin.product_category.controller%</argument>
         </service>
 
         <service id="sonata.product.admin.delivery" class="%sonata.product.admin.delivery.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="delivery" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="delivery" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.product.admin.delivery.entity%</argument>
             <argument>%sonata.product.admin.delivery.controller%</argument>

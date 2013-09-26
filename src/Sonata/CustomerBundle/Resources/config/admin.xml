@@ -30,7 +30,7 @@
         </service>
 
         <service id="sonata.customer.admin.address" class="%sonata.customer.admin.address.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="address" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <tag name="sonata.admin" manager_type="orm" show_in_dashboard="false" group="sonata_ecommerce" label="address" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.customer.admin.address.entity%</argument>
             <argument>%sonata.customer.admin.address.controller%</argument>
