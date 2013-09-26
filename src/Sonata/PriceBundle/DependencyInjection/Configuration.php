@@ -23,7 +23,7 @@ use Symfony\Component\Intl\Intl;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {

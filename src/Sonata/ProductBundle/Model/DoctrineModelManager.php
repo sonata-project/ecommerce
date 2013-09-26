@@ -36,7 +36,7 @@ class DoctrineModelManager extends ModelManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function create($object)
     {
@@ -44,7 +44,7 @@ class DoctrineModelManager extends ModelManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function update($object)
     {
@@ -52,7 +52,7 @@ class DoctrineModelManager extends ModelManager
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function delete($object)
     {

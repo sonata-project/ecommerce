@@ -35,7 +35,7 @@ class CurrencyDetector implements CurrencyDetectorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCurrency()
     {

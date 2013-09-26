@@ -52,7 +52,7 @@ class Currency implements CurrencyInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
 //     public function getSymbol()
 //     {

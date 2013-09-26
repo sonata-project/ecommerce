@@ -21,7 +21,7 @@ class AddressAdmin extends Admin
     protected $translationDomain = "SonataCustomerBundle";
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {

@@ -32,7 +32,7 @@ class PaymentMethodTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function reverseTransform($value)
     {
@@ -40,7 +40,7 @@ class PaymentMethodTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function transform($value)
     {

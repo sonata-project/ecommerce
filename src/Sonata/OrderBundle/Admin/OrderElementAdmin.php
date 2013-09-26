@@ -33,7 +33,7 @@ class OrderElementAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {
@@ -42,7 +42,7 @@ class OrderElementAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -61,7 +61,7 @@ class OrderElementAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureListFields(ListMapper $list)
     {

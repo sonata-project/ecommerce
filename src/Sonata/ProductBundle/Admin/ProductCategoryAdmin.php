@@ -27,7 +27,7 @@ class ProductCategoryAdmin extends Admin
     protected $parentAssociationMapping = 'product';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {
@@ -38,7 +38,7 @@ class ProductCategoryAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -49,7 +49,7 @@ class ProductCategoryAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureListFields(ListMapper $list)
     {

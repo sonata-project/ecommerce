@@ -10,7 +10,7 @@ use Sonata\Component\Product\ProductInterface;
 class CurrencyPriceCalculator implements CurrencyPriceCalculatorInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPriceForProductInCurrency(ProductInterface $product, CurrencyInterface $currency)
     {

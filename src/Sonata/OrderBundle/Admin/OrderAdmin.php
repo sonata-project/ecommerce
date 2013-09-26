@@ -37,7 +37,7 @@ class OrderAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {
@@ -46,7 +46,7 @@ class OrderAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -95,7 +95,7 @@ class OrderAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureListFields(ListMapper $list)
     {
@@ -113,7 +113,7 @@ class OrderAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
@@ -131,7 +131,7 @@ class OrderAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureRoutes(RouteCollection $collection)
     {

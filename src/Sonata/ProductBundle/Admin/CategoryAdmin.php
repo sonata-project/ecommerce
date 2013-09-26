@@ -19,7 +19,7 @@ use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 class CategoryAdmin extends Admin
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {

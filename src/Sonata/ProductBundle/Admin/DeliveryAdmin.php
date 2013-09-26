@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 class DeliveryAdmin extends Admin
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {

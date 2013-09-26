@@ -269,7 +269,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureShowFields(ShowMapper $showMapper)
     {

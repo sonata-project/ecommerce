@@ -22,7 +22,7 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 class CustomerAdmin extends Admin
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {

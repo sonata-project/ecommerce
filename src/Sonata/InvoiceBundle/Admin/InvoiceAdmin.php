@@ -19,7 +19,7 @@ use Sonata\InvoiceBundle\Entity\BaseInvoice;
 class InvoiceAdmin extends Admin
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {
@@ -27,7 +27,7 @@ class InvoiceAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -64,7 +64,7 @@ class InvoiceAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureListFields(ListMapper $list)
     {

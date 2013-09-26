@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class SonataPriceBundle extends Bundle
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {

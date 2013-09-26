@@ -20,7 +20,7 @@ class Basket extends Constraint
     public $message = "Basket not valid";
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function validatedBy()
     {
@@ -28,7 +28,7 @@ class Basket extends Constraint
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTargets()
     {

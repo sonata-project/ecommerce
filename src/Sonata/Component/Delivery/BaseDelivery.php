@@ -75,7 +75,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCode()
     {
@@ -91,7 +91,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -107,7 +107,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setVat($vat)
     {
@@ -115,7 +115,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getVat()
     {
@@ -123,7 +123,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPrice()
     {
@@ -167,7 +167,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTotal(BasketInterface $basket, $vat = false)
     {
@@ -179,7 +179,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getVatAmount(BasketInterface $basket)
     {
@@ -197,7 +197,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getEnabled()
     {
@@ -213,7 +213,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPriority()
     {

@@ -476,7 +476,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getInvoiceElements()
     {
@@ -484,7 +484,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function addInvoiceElement(InvoiceElementInterface $element)
     {
@@ -492,7 +492,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setInvoiceElements(array $elements)
     {

@@ -74,7 +74,7 @@ class Selector implements PaymentSelectorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $paymentAddress = null)
     {

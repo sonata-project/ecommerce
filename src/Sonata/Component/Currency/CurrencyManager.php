@@ -19,7 +19,7 @@ use Sonata\Component\Currency\CurrencyManagerInterface;
 class CurrencyManager implements CurrencyManagerInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function findOneByLabel($currencyLabel)
     {

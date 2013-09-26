@@ -23,7 +23,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {

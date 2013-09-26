@@ -38,7 +38,7 @@ class CurrencyFormType extends CurrencyType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -48,7 +48,7 @@ class CurrencyFormType extends CurrencyType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -56,7 +56,7 @@ class CurrencyFormType extends CurrencyType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {

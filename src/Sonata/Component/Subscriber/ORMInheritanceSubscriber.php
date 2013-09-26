@@ -31,7 +31,7 @@ class ORMInheritanceSubscriber implements EventSubscriber
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getSubscribedEvents()
     {

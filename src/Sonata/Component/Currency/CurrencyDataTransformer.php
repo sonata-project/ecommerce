@@ -40,7 +40,7 @@ class CurrencyDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function transform($value)
     {
@@ -52,7 +52,7 @@ class CurrencyDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function reverseTransform($value)
     {

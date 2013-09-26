@@ -49,7 +49,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure()
     {
@@ -100,7 +100,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -120,7 +120,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPersistentParameters()
     {
@@ -150,7 +150,7 @@ class ProductAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureListFields(ListMapper $list)
     {
