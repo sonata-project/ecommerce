@@ -21,7 +21,7 @@ use Symfony\Component\Intl\Intl;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyType extends StringType
+class CurrencyDoctrineType extends StringType
 {
     const CURRENCY = 'currency'; // modify to match your type name
 

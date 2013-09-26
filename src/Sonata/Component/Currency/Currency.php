@@ -28,6 +28,11 @@ class Currency implements CurrencyInterface
      */
 //     protected $symbol;
 
+    public function __toString()
+    {
+        return $this->getLabel();
+    }
+
     /**
      * {@inheritDoc}
      */

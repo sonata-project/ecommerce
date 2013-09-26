@@ -7,6 +7,8 @@
     <parameters>
         <parameter key="sonata.price.currency.detector.class">Sonata\Component\Currency\CurrencyDetector</parameter>
         <parameter key="sonata.price.currency.manager.class">Sonata\Component\Currency\CurrencyManager</parameter>
+        <parameter key="sonata.price.currency.data_transformer.class">Sonata\Component\Currency\CurrencyDataTransformer</parameter>
+        <parameter key="sonata.price.currency.form_type.class">Sonata\Component\Currency\CurrencyFormType</parameter>
     </parameters>
 
     <services>
@@ -16,6 +18,15 @@
         <service id="sonata.price.currency.detector" class="%sonata.price.currency.detector.class%">
             <argument>%sonata.price.currency%</argument>
             <argument type="service" id="sonata.price.currency.manager" />
+        </service>
+
+        <service id="sonata.price.currency.data_transformer" class="%sonata.price.currency.data_transformer.class%">
+            <argument type="service" id="sonata.price.currency.manager" />
+        </service>
+
+        <service id="sonata.price.currency.form_type" class="%sonata.price.currency.form_type.class%">
+            <argument type="service" id="sonata.price.currency.data_transformer"/>
+            <tag name="form.type" alias="sonata_currency" />
         </service>
     </services>
 

@@ -33,7 +33,7 @@ class InvoiceAdmin extends Admin
         $formMapper
             ->with($this->trans('form_invoice.group_main_label', array(), 'SonataInvoiceBundle'))
                 ->add('reference')
-                ->add('currency')
+                ->add('currency', 'sonata_currency')
                 ->add('status')
                 ->add('totalInc')
                 ->add('totalExcl')
