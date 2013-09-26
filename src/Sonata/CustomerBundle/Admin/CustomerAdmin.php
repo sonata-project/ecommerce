@@ -36,10 +36,21 @@ class CustomerAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('user', 'sonata_type_model_list')
-            ->add('firstname')
-            ->add('lastname')
-            ->add('locale', 'country')
+            ->with('customer.group.general')
+                ->add('user', 'sonata_type_model_list')
+                ->add('firstname')
+                ->add('lastname')
+                ->add('locale', 'locale')
+                ->add('birthDate')
+                ->add('birthPlace')
+            ->end()
+            ->with('customer.group.contact')
+                ->add('email')
+                ->add('phoneNumber')
+                ->add('mobileNumber')
+                ->add('faxNumber')
+                ->add('isFake')
+            ->end()
         ;
     }
 
@@ -63,9 +74,21 @@ class CustomerAdmin extends Admin
     public function configureShowFields(ShowMapper $filter)
     {
         $filter
-            ->add('firstname')
-            ->add('lastname')
-            ->add('locale')
+            ->with('customer.group.general')
+                ->add('user', 'sonata_type_model_list')
+                ->add('firstname')
+                ->add('lastname')
+                ->add('locale', 'locale')
+                ->add('birthDate')
+                ->add('birthPlace')
+            ->end()
+            ->with('customer.group.contact')
+                ->add('email')
+                ->add('phoneNumber')
+                ->add('mobileNumber')
+                ->add('faxNumber')
+                ->add('isFake')
+            ->end()
         ;
     }
 
