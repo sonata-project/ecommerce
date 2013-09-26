@@ -57,7 +57,7 @@ class OrderAdmin extends Admin
         $formMapper
             ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
                 ->add('currency', 'sonata_currency')
-                ->add('locale')
+                ->add('locale', 'locale')
                 ->add('status', 'sonata_type_translatable_choice', array('choices' => Order::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
                 ->add('paymentStatus', 'sonata_type_translatable_choice', array('choices' => Transaction::getStatusList(), 'catalogue' => 'SonataPaymentBundle'))
                 ->add('deliveryStatus', 'sonata_type_translatable_choice', array('choices' => Delivery::getStatusList(), 'catalogue' => 'SonataDeliveryBundle'))

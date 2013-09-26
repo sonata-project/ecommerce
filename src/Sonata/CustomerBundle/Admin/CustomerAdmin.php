@@ -35,13 +35,17 @@ class CustomerAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        $now = new \DateTime();
+
         $formMapper
             ->with('customer.group.general')
                 ->add('user', 'sonata_type_model_list')
                 ->add('firstname')
                 ->add('lastname')
                 ->add('locale', 'locale')
-                ->add('birthDate')
+                ->add('birthDate', null,  array(
+                    'years' => range(1900, $now->format('Y')),
+                ))
                 ->add('birthPlace')
             ->end()
             ->with('customer.group.contact')
@@ -62,8 +66,13 @@ class CustomerAdmin extends Admin
     {
         $list
             ->addIdentifier('name', 'string', array('code' => '__toString'))
+            ->add('user')
+            ->add('email')
+            ->add('phoneNumber')
+            ->add('mobileNumber')
             ->add('createdAt')
             ->add('locale')
+            ->add('isFake')
         ;
     }
 
@@ -101,7 +110,7 @@ class CustomerAdmin extends Admin
         $filter
             ->add('firstname')
             ->add('lastname')
-            ->add('locale')
+            ->add('locale', null, array(), 'locale')
         ;
     }
 
