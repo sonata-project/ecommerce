@@ -506,4 +506,16 @@ abstract class BaseInvoice implements InvoiceInterface
     {
         return $this->getReference() ?: 'n/a';
     }
+
+    /**
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        return array(
+            self::STATUS_OPEN     => 'status_open',
+            self::STATUS_PAID     => 'status_paid',
+            self::STATUS_CONFLICT => 'status_conflict',
+        );
+    }
 }

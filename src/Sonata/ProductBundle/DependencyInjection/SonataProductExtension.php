@@ -44,6 +44,7 @@ class SonataProductExtension extends Extension
         $loader->load('product.xml');
         $loader->load('orm.xml');
         $loader->load('admin.xml');
+        $loader->load('form.xml');
 
         $pool = $container->getDefinition('sonata.product.pool');
         // this value is altered by the AddProductProviderPass class
@@ -53,7 +54,7 @@ class SonataProductExtension extends Extension
         $this->registerDoctrineMapping($config);
     }
 
-        /**
+    /**
      * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param  array                                                   $config
      * @return void

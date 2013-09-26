@@ -45,6 +45,7 @@ class SonataPaymentExtension extends Extension
         $loader->load('transformer.xml');
         $loader->load('selector.xml');
         $loader->load('browser.xml');
+        $loader->load('form.xml');
 
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);

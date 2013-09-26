@@ -15,7 +15,6 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-use Application\Sonata\OrderBundle\Entity\OrderElement;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 
 class OrderElementAdmin extends Admin
@@ -33,12 +32,18 @@ class OrderElementAdmin extends Admin
         $this->currencyDetector = $currencyDetector;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configure()
     {
         $this->parentAssociationMapping = 'order';
         $this->setTranslationDomain('SonataOrderBundle');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -49,12 +54,15 @@ class OrderElementAdmin extends Admin
                 ->add('vat')
                 ->add('designation')
                 ->add('description')
-                ->add('status', 'sonata_type_translatable_choice', array('catalogue' => 'SonataOrderBundle', 'choices' => OrderElement::getStatusList()))
-                ->add('deliveryStatus', 'sonata_type_translatable_choice', array('catalogue' => 'SonataOrderBundle', 'choices' => OrderElement::getDeliveryStatusList()))
+                ->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))
+                ->add('deliveryStatus', 'sonata_product_delivery_status', array('translation_domain' => 'SonataDeliveryBundle'))
             ->end()
         ;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureListFields(ListMapper $list)
     {
         $list

@@ -14,6 +14,7 @@ namespace Sonata\InvoiceBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\InvoiceBundle\Entity\BaseInvoice;
 
 class InvoiceAdmin extends Admin
 {
@@ -42,7 +43,7 @@ class InvoiceAdmin extends Admin
             ->with($this->trans('invoice.form.group_main_label', array(), 'SonataInvoiceBundle'))
                 ->add('reference')
                 ->add('currency', 'sonata_currency')
-                ->add('status')
+                ->add('status', 'sonata_invoice_status', array('translation_domain' => 'SonataInvoiceBundle'))
                 ->add('totalInc')
                 ->add('totalExcl')
             ->end()

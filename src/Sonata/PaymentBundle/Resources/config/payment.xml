@@ -16,9 +16,7 @@
     </parameters>
 
     <services>
-        <service id="sonata.payment.pool" class="%sonata.payment.pool.class%">
-
-        </service>
+        <service id="sonata.payment.pool" class="%sonata.payment.pool.class%" />
 
         <service id="sonata.payment.method.paypal" class="%sonata.payment.method.paypal.class%">
             <tag name="sonata.payment.method" />

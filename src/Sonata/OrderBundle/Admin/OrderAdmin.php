@@ -18,10 +18,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-use Application\Sonata\OrderBundle\Entity\Order;
-use Application\Sonata\ProductBundle\Entity\Delivery;
-use Application\Sonata\PaymentBundle\Entity\Transaction;
-
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 
@@ -54,13 +50,21 @@ class OrderAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        if (!$this->isChild()) {
+            $formMapper
+                ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
+                    ->add('customer', 'sonata_type_model_list')
+                ->end()
+            ;
+        }
+
         $formMapper
             ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
                 ->add('currency', 'sonata_currency')
                 ->add('locale', 'locale')
-                ->add('status', 'sonata_type_translatable_choice', array('choices' => Order::getStatusList(), 'catalogue' => 'SonataOrderBundle'))
-                ->add('paymentStatus', 'sonata_type_translatable_choice', array('choices' => Transaction::getStatusList(), 'catalogue' => 'SonataPaymentBundle'))
-                ->add('deliveryStatus', 'sonata_type_translatable_choice', array('choices' => Delivery::getStatusList(), 'catalogue' => 'SonataDeliveryBundle'))
+                ->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))
+                ->add('paymentStatus', 'sonata_payment_transaction_status', array('translation_domain' => 'SonataPaymentBundle'))
+                ->add('deliveryStatus', 'sonata_product_delivery_status', array('translation_domain' => 'SonataDeliveryBundle'))
                 ->add('validatedAt')
             ->end()
             ->with($this->trans('order.form.group_billing_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
@@ -88,14 +92,6 @@ class OrderAdmin extends Admin
                 ->add('shippingMobile')
             ->end()
         ;
-
-        if (!$this->isChild()) {
-            $formMapper
-                ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
-                    ->add('customer', 'sonata_type_model_list')
-                ->end()
-            ;
-        }
     }
 
     /**

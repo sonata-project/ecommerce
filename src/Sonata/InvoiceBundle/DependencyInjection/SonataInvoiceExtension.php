@@ -42,6 +42,7 @@ class SonataInvoiceExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('admin.xml');
+        $loader->load('form.xml');
 
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
