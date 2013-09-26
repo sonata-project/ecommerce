@@ -1,49 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\Component\Basket;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 
-/**
- * @todo Refacto (add an abstract class with the properties & constructor)
- */
-class BasketSessionFactory implements BasketFactoryInterface
+class BasketSessionFactory extends BaseBasketFactory
 {
-    /**
-     * @var \Sonata\Component\Basket\BasketManagerInterface
-     */
-    protected $basketManager;
-
-    /**
-     * @var \Sonata\Component\Basket\BasketBuilderInterface
-     */
-    protected $basketBuilder;
-
-    /**
-     * @var \Sonata\Component\Currency\CurrencyDetectorInterface
-     */
-    protected $currencyDetector;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
-     */
-    protected $session;
-
-    /**
-     * @param \Sonata\Component\Basket\BasketManagerInterface   $basketManager
-     * @param \Sonata\Component\Basket\BasketBuilderInterface   $basketBuilder
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
-     */
-    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, Session $session)
-    {
-        $this->basketManager    = $basketManager;
-        $this->basketBuilder    = $basketBuilder;
-        $this->currencyDetector = $currencyDetector;
-        $this->session          = $session;
-    }
-
     /**
      * Load the basket
      *

@@ -15,45 +15,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 
-/**
- * @todo Refacto (add an abstract class with the properties & constructor)
- */
-class BasketEntityFactory implements BasketFactoryInterface
+
+class BasketEntityFactory extends BaseBasketFactory
 {
-    /**
-     * @var \Sonata\Component\Basket\BasketManagerInterface
-     */
-    protected $basketManager;
-
-    /**
-     * @var \Sonata\Component\Basket\BasketBuilderInterface
-     */
-    protected $basketBuilder;
-
-    /**
-     * @var \Sonata\Component\Currency\CurrencyDetectorInterface
-     */
-    protected $currencyDetector;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
-     */
-    protected $session;
-
-    /**
-     * @param \Sonata\Component\Basket\BasketManagerInterface      $basketManager
-     * @param \Sonata\Component\Basket\BasketBuilderInterface      $basketBuilder
-     * @param \Sonata\Component\Currency\CurrencyDetectorInterface $currencyDetector
-     * @param \Symfony\Component\HttpFoundation\Session\Session    $session
-     */
-    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, Session $session)
-    {
-        $this->basketManager    = $basketManager;
-        $this->basketBuilder    = $basketBuilder;
-        $this->currencyDetector = $currencyDetector;
-        $this->session          = $session;
-    }
-
     /**
      * Load the basket
      *
