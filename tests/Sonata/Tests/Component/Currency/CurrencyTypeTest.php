@@ -15,14 +15,14 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Sonata\Component\Currency\Currency;
 
-class CurrencyTypeTest extends \PHPUnit_Framework_TestCase
+class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
         if (Type::hasType('currency')) {
-            Type::overrideType('currency', 'Sonata\Component\Currency\CurrencyType');
+            Type::overrideType('currency', 'Sonata\Component\Currency\CurrencyDoctrineType');
         } else {
-            Type::addType('currency', 'Sonata\Component\Currency\CurrencyType');
+            Type::addType('currency', 'Sonata\Component\Currency\CurrencyDoctrineType');
         }
 
     }
