@@ -12,6 +12,7 @@
 namespace Sonata\Tests\Component\Customer;
 
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Sonata\Component\Customer\CustomerSelector;
 use Sonata\Component\Basket\Basket;
@@ -37,7 +38,7 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('create')->will($this->returnValue($customer));
 
-        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
 
         $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(false));
@@ -144,7 +145,7 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->exactly(2))->method('getCustomer')->will($this->returnValue($customer));
 
-        $session = new Session();
+        $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/new', $basket);
 
         $user = new ValidUser();

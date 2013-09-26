@@ -4,6 +4,7 @@ namespace Sonata\Component\Customer;
 
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use FOS\UserBundle\Model\UserInterface;
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
@@ -31,12 +32,12 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $locale;
 
     /**
-     * @param \Sonata\Component\Customer\CustomerManagerInterface       $customerManager
-     * @param \Symfony\Component\HttpFoundation\Session\Session         $session
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
-     * @param LocaleDetectorInterface                                   $localeDetector
+     * @param CustomerManagerInterface $customerManager
+     * @param SessionInterface         $session
+     * @param SecurityContextInterface $securityContext
+     * @param LocaleDetectorInterface  $localeDetector
      */
-    public function __construct(CustomerManagerInterface $customerManager, Session $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
+    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
     {
         $this->customerManager  = $customerManager;
         $this->session          = $session;

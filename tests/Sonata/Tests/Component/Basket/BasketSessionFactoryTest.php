@@ -18,6 +18,7 @@ use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Currency\Currency;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -65,7 +66,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
 
-        $session = new Session();
+        $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/1', $basket);
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
@@ -89,7 +90,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 
         $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
 
-        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getId')->will($this->returnValue(1));

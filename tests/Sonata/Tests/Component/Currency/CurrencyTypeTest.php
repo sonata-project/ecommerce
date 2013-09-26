@@ -14,6 +14,7 @@ namespace Sonata\Test\Component\Currency\Types;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Currency\CurrencyDoctrineType;
 
 class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +25,6 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
         } else {
             Type::addType('currency', 'Sonata\Component\Currency\CurrencyDoctrineType');
         }
-
     }
 
     public function testConvertToDatabaseValue()

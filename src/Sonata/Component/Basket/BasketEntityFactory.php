@@ -11,18 +11,55 @@
 
 namespace Sonata\Component\Basket;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-
-class BasketEntityFactory extends BaseBasketFactory
+/**
+ * @todo Refacto (add an abstract class with the properties & constructor)
+ */
+class BasketEntityFactory implements BasketFactoryInterface
 {
+    /**
+     * @var \Sonata\Component\Basket\BasketManagerInterface
+     */
+    protected $basketManager;
+
+    /**
+     * @var \Sonata\Component\Basket\BasketBuilderInterface
+     */
+    protected $basketBuilder;
+
+    /**
+     * @var \Sonata\Component\Currency\CurrencyDetectorInterface
+     */
+    protected $currencyDetector;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\Session
+     */
+    protected $session;
+
+    /**
+     * @param BasketManagerInterface    $basketManager
+     * @param BasketBuilderInterface    $basketBuilder
+     * @param CurrencyDetectorInterface $currencyDetector
+     * @param SessionInterface          $session
+     */
+    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, SessionInterface $session)
+    {
+        $this->basketManager    = $basketManager;
+        $this->basketBuilder    = $basketBuilder;
+        $this->currencyDetector = $currencyDetector;
+        $this->session          = $session;
+    }
+
     /**
      * Load the basket
      *
-     * @param  \Sonata\Component\Customer\CustomerInterface $customer
-     * @return \Sonata\Component\Basket\BasketInterface
+     * @param  CustomerInterface $customer
+     *
+     * @return BasketInterface
      */
     public function load(CustomerInterface $customer)
     {
@@ -48,7 +85,8 @@ class BasketEntityFactory extends BaseBasketFactory
     /**
      * Save the basket
      *
-     * @param  \Sonata\Component\Basket\BasketInterface $basket
+     * @param BasketInterface $basket
+     *
      * @return void
      */
     public function save(BasketInterface $basket)

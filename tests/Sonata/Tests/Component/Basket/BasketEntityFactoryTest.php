@@ -117,7 +117,12 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
 
-        $session = new Session();
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
+        $tester = $this;
+        $session->expects($this->once())->method('set')->will($this->returnCallback(function($key, $value) use ($tester, $basket) {
+            $tester->assertEquals($basket, $value);
+            $tester->assertEquals('sonata/basket/factory/customer/new', $key);
+        }));
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
@@ -129,7 +134,5 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
-
-        $this->assertEquals($basket, $session->get('sonata/basket/factory/customer/new'));
     }
 }
