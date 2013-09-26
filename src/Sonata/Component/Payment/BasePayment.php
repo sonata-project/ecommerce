@@ -12,6 +12,7 @@ namespace Sonata\Component\Payment;
 
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 abstract class BasePayment implements PaymentInterface
@@ -77,6 +78,9 @@ abstract class BasePayment implements PaymentInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCode()
     {
         return $this->code;
@@ -87,6 +91,9 @@ abstract class BasePayment implements PaymentInterface
         $this->code = $code;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
@@ -98,8 +105,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param $options
-     * @return void
+     * {@inheritdoc}
      */
     public function setOptions(array $options)
     {
@@ -107,7 +113,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @return
+     * {@inheritdoc}
      */
     public function getOptions()
     {
@@ -115,9 +121,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param  string $name
-     * @param  null   $default
-     * @return null
+     * {@inheritdoc}
      */
     public function getOption($name, $default = null)
     {
@@ -134,10 +138,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * encode value for the bank
-     *
-     * @param  string $value
-     * @return string the encoded value
+     * {@inheritdoc}
      */
     public function encodeString($value)
     {
@@ -173,6 +174,7 @@ abstract class BasePayment implements PaymentInterface
 
     /**
      * @param  TransactionInterface $transaction
+     *
      * @return Response
      */
     public function callback(TransactionInterface $transaction)
@@ -244,8 +246,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param  string $description
-     * @return void
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -253,7 +254,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @return
+     * @return string
      */
     public function getDescription()
     {
@@ -261,8 +262,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param  TransactionInterface $transaction
-     * @return mixed
+     * @param TransactionInterface $transaction
      */
     public function report(TransactionInterface $transaction)
     {

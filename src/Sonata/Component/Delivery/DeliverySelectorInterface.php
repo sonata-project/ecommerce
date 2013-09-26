@@ -16,7 +16,6 @@ use Sonata\Component\Customer\AddressInterface;
 interface DeliverySelectorInterface
 {
     /**
-     * @abstract
      * @param null|\Sonata\Component\Basket\BasketInterface    $basket
      * @param null|\Sonata\Component\Customer\AddressInterface $deliveryAddress
      */

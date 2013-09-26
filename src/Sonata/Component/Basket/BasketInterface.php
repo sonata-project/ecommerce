@@ -23,14 +23,11 @@ interface BasketInterface
 {
 
     /**
-     * @abstract
      * @param  \Sonata\Component\Product\Pool $pool
-     * @return void
      */
     public function setProductPool(Pool $pool);
 
     /**
-     * @abstract
      * @return \Sonata\Component\Product\Pool
      */
     public function getProductPool();
@@ -48,6 +45,7 @@ interface BasketInterface
      * if $element_only is set to true, only elements are checked
      *
      * @param  boolean $elementsOnly
+     *
      * @return boolean
      */
     public function isValid($elementsOnly = false);
@@ -119,9 +117,7 @@ interface BasketInterface
     /**
      * reset basket
      *
-     * @abstract
-     * @param  bool $full
-     * @return void
+     * @param boolean $full
      */
     public function reset($full = true);
 
@@ -135,8 +131,7 @@ interface BasketInterface
     /**
      * Warning : this method should be only used by the validation framework
      *
-     * @param  $elements
-     * @return void
+     * @param array $elements
      */
     public function setBasketElements($elements);
 
@@ -157,8 +152,8 @@ interface BasketInterface
     /**
      * return the BasketElement depends on the $product or the position from the element stacks
      *
-     * @abstract
-     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param \Sonata\Component\Product\ProductInterface $product
+     *
      * @return BasketElementInterface
      */
     public function getElement(ProductInterface $product);
@@ -221,8 +216,8 @@ interface BasketInterface
     /**
      * return the Delivery price
      *
-     *
      * @param  boolean $vat
+     *
      * @return float
      */
     public function getDeliveryPrice($vat = false);
@@ -231,6 +226,7 @@ interface BasketInterface
      * check if the basket contains $product
      *
      * @param  \Sonata\Component\Product\ProductInterface $product
+     *
      * @return boolean
      */
     public function hasProduct(ProductInterface $product);
@@ -243,36 +239,57 @@ interface BasketInterface
 
     /**
      * remove basket element market as deleted
-     * @return void
      */
     public function clean();
 
+    /**
+     * @param integer $deliveryAddressId
+     */
     public function setDeliveryAddressId($deliveryAddressId);
 
+    /**
+     * @return integer
+     */
     public function getDeliveryAddressId();
 
+    /**
+     * @param integer $paymentAddressId
+     */
     public function setPaymentAddressId($paymentAddressId);
 
+    /**
+     * @return integer
+     */
     public function getPaymentAddressId();
 
+    /**
+     * @return string
+     */
     public function getPaymentMethodCode();
 
+    /**
+     * @return string
+     */
     public function getDeliveryMethodCode();
 
     /**
-     * @abstract
      * @param \Sonata\Component\Customer\CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer = null);
 
     /**
-     * @abstract
      * @param \Sonata\Component\Customer\CustomerInterface
      */
     public function getCustomer();
 
+    /**
+     * @param integer $customerId
+     */
     public function setCustomerId($customerId);
 
+    /**
+     * @return integer
+     */
     public function getCustomerId();
 
     /**
@@ -282,7 +299,6 @@ interface BasketInterface
 
     /**
      * @param  string $locale
-     * @return void
      */
     public function setLocale($locale);
 
@@ -293,7 +309,6 @@ interface BasketInterface
 
     /**
      * @param  CurrencyInterface $currency
-     * @return void
      */
     public function setCurrency(CurrencyInterface $currency);
 }

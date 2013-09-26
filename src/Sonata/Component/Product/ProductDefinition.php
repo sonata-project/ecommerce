@@ -34,7 +34,7 @@ class ProductDefinition
     }
 
     /**
-     * @return \Sonata\Component\ProductManagerInterface
+     * @return ProductManagerInterface
      */
     public function getManager()
     {
@@ -42,7 +42,7 @@ class ProductDefinition
     }
 
     /**
-     * @return \Sonata\Component\ProductProviderInterface
+     * @return ProductProviderInterface
      */
     public function getProvider()
     {

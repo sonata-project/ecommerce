@@ -16,88 +16,73 @@ use Sonata\Component\Product\DeliveryInterface;
 interface ProductInterface
 {
     /**
-     * @abstract
      * @return integer the product id
      */
     public function getId();
 
     /**
-     * @abstract
      * @return float the product price
      */
     public function getPrice();
 
     /**
-     * @abstract
-     * @param  $price the product price
-     * @return void
+     * @param float $price the product price
      */
     public function setPrice($price);
 
     /**
-     * @abstract
      * @return float the vat price
      */
     public function getVat();
 
     /**
-     * @abstract
-     * @param $vat the product vat
-     * @return void
+     * @param float $vat the product vat
      */
     public function setVat($vat);
 
     /**
-     * @abstract
      * @return string the product name
      */
     public function getName();
 
     /**
-     * @abstract
-     * @return
+     * @param string $name
      */
     public function setName($name);
 
     /**
-     * @abstract
      * @return string the product name
      */
     public function getParent();
 
     /**
-     * @abstract
-     * @return
+     * @param ProductInterface $parent
      */
     public function setParent(ProductInterface $parent);
 
     /**
-     * @abstract
      * @return array the product options
      */
     public function getOptions();
 
     /**
-     * @abstract
-     * @param  $option array
-     * @return void
+     * @param array $options
      */
     public function setOptions(array $options);
 
     /**
-     * @abstract
      * @return boolean , true is the product is enabled (ready to be sell)
      */
     public function getEnabled();
 
     /**
-     * @abstract
+     * @param boolean $enabled
      */
     public function setEnabled($enabled);
 
     /**
      * Return true if the product is recurrent
-     * @abstract
+     *
      * @return void
      */
     public function isRecurrentPayment();
@@ -105,61 +90,58 @@ interface ProductInterface
     /**
      * Return true if the product is a variation, linked to a main product
      *
-     * @abstract
-     * @return void
+     * @return boolean
      */
     public function isVariation();
 
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description);
 
     /**
      * Get description
      *
-     * @return text $description
+     * @return string $description
      */
     public function getDescription();
 
     /**
      * Set RAW description.
      *
-     * @param text $rawDescription
+     * @param string $rawDescription
      */
     public function setRawDescription($rawDescription);
 
     /**
      * Get RAW description.
      *
-     * @return text $rawDescription
+     * @return string $rawDescription
      */
     public function getRawDescription();
 
     /**
      * Set description formatter.
      *
-     * @param text $descriptionFormatter
+     * @param string $descriptionFormatter
      */
     public function setDescriptionFormatter($descriptionFormatter);
 
     /**
      * Get description formatter.
      *
-     * @return text $descriptionFormatter
+     * @return string $descriptionFormatter
      */
     public function getDescriptionFormatter();
 
     /**
-     * @abstract
-     * @param \Sonata\Component\Product\DeliveryInterface $delivery
+     * @param DeliveryInterface $delivery
      */
     public function addDelivery(DeliveryInterface $delivery);
 
     /**
-     * @abstract
      * @return array
      */
     public function getDeliveries();

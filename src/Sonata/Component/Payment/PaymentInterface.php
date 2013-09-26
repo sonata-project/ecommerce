@@ -19,13 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 interface PaymentInterface
 {
     /**
-     * @abstract
      * @return string
      */
     public function getName();
 
     /**
-     * @abstract
      * @return string
      */
     public function getCode();
@@ -50,6 +48,7 @@ interface PaymentInterface
      * Method called when an error occurs
      *
      * @param  \Sonata\Component\Payment\TransactionInterface $transaction
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleError(TransactionInterface $transaction);
@@ -68,7 +67,8 @@ interface PaymentInterface
      * WARNING : this methods does not check if the callback is valid
      *
      * @param  \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return boolean                                        true if all parameter are ok
+     *
+     * @return boolean true if all parameter are ok
      */
     public function isRequestValid(TransactionInterface $transaction);
 
@@ -76,6 +76,7 @@ interface PaymentInterface
      * return true is the basket is valid for the current bank gateway
      *
      * @param  \Sonata\Component\Basket\BasketInterface $basket
+     *
      * @return boolean
      */
     public function isBasketValid(BasketInterface $basket);
@@ -107,6 +108,7 @@ interface PaymentInterface
      * return the order reference from the transaction
      *
      * @param  \Sonata\Component\Payment\TransactionInterface $transaction
+     *
      * @return string
      */
     public function getOrderReference(TransactionInterface $transaction);

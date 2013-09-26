@@ -60,17 +60,17 @@ abstract class BaseOrder implements OrderInterface
     protected $username;
 
     /**
-     * @var decimal $totalInc
+     * @var float $totalInc
      */
     protected $totalInc;
 
     /**
-     * @var decimal $totalExcl
+     * @var float $totalExcl
      */
     protected $totalExcl;
 
     /**
-     * @var decimal $delivery_cost
+     * @var float $delivery_cost
      */
     protected $deliveryCost;
 

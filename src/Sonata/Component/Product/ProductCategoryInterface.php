@@ -50,7 +50,7 @@ interface ProductCategoryInterface
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \Datetime $createdAt
      */
     public function getCreatedAt();
 

@@ -26,8 +26,7 @@ class Pool
     /**
      * add a payment method into the pool
      *
-     * @param  \Sonata\Component\Payment\PaymentInterface $instance
-     * @return void
+     * @param PaymentInterface $instance
      */
     public function addMethod(PaymentInterface $instance)
     {
@@ -46,8 +45,9 @@ class Pool
     /**
      * return a PaymentInterface Object
      *
-     * @param  string                                    $code
-     * @return Sonata\Component\Payment\PaymentInterface
+     * @param  string $code
+     *
+     * @return PaymentInterface
      */
     public function getMethod($code)
     {

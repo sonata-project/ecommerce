@@ -29,56 +29,56 @@ interface PackageInterface
     /**
      * Set width
      *
-     * @param decimal $width
+     * @param float $width
      */
     public function setWidth($width);
 
     /**
      * Get width
      *
-     * @return decimal $width
+     * @return float $width
      */
     public function getWidth();
 
     /**
      * Set height
      *
-     * @param decimal $height
+     * @param float $height
      */
     public function setHeight($height);
 
     /**
      * Get height
      *
-     * @return decimal $height
+     * @return float $height
      */
     public function getHeight();
 
     /**
      * Set length
      *
-     * @param decimal $length
+     * @param float $length
      */
     public function setLength($length);
 
     /**
      * Get length
      *
-     * @return decimal $length
+     * @return float $length
      */
     public function getLength();
 
     /**
      * Set weight
      *
-     * @param decimal $weight
+     * @param float $weight
      */
     public function setWeight($weight);
 
     /**
      * Get weight
      *
-     * @return decimal $weight
+     * @return float $weight
      */
     public function getWeight();
 
@@ -99,28 +99,28 @@ interface PackageInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \Datetime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \Datetime $updatedAt
      */
     public function getUpdatedAt();
 
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \Datetime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \Datetime $createdAt
      */
     public function getCreatedAt();
 }

@@ -25,12 +25,12 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $quantity;
 
     /**
-     * @var decimal $price
+     * @var float $price
      */
     protected $price;
 
     /**
-     * @var decimal $vat
+     * @var float $vat
      */
     protected $vat;
 
@@ -40,7 +40,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $designation;
 
     /**
-     * @var text $description
+     * @var string $description
      */
     protected $description;
 
@@ -70,12 +70,12 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $deliveryStatus;
 
     /**
-     * @var datetime $validated_at
+     * @var \DateTime $validated_at
      */
     protected $validatedAt;
 
     /**
-     * @var Sonata\ProductBundle\Entity\BaseProduct
+     * @var ProductInterface
      */
     protected $product;
 
@@ -97,7 +97,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Set order
      *
-     * @param Order $order
+     * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order)
     {
@@ -137,7 +137,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Set price
      *
-     * @param decimal $price
+     * @param float $price
      */
     public function setPrice($price)
     {
@@ -147,7 +147,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Get price
      *
-     * @return decimal $price
+     * @return float $price
      */
     public function getPrice()
     {
@@ -157,7 +157,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Set vat
      *
-     * @param decimal $vat
+     * @param float $vat
      */
     public function setVat($vat)
     {
@@ -167,7 +167,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Get vat
      *
-     * @return decimal $vat
+     * @return float $vat
      */
     public function getVat()
     {
@@ -197,7 +197,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -207,7 +207,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Get description
      *
-     * @return text $description
+     * @return string $description
      */
     public function getDescription()
     {
@@ -269,8 +269,6 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     *
-     *
      * @return boolean true if cancelled, else false
      */
     public function isCancelled()
@@ -279,8 +277,6 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     *
-     *
      * @return boolean true if pending, else false
      */
     public function isPending()
@@ -339,7 +335,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Set validated_at
      *
-     * @param datetime $validatedAt
+     * @param \DateTime $validatedAt
      */
     public function setValidatedAt(\DateTime $validatedAt = null)
     {
@@ -349,7 +345,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Get validated_at
      *
-     * @return datetime $validatedAt
+     * @return \DateTime $validatedAt
      */
     public function getValidatedAt()
     {
@@ -359,7 +355,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Add product
      *
-     * @param Sonata\ProductBundle\Entity\BaseProduct $product
+     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product)
     {
@@ -369,7 +365,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Get product
      *
-     * @return Doctrine\Common\Collections\Collection $product
+     * @return ProductInterface $product
      */
     public function getProduct()
     {
@@ -398,7 +394,6 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @param  \DateTime|null $createdAt
-     * @return void
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -415,7 +410,6 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @param  \DateTime|null $createdAt
-     * @return void
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -447,9 +441,10 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param $name
-     * @param  null $default
-     * @return null
+     * @param string $name
+     * @param mixed $default
+     *
+     * @return mixed
      */
     public function getOption($name, $default = null)
     {
@@ -457,7 +452,8 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
+     *
      * @return bool
      */
     public function hasOption($name)
@@ -466,9 +462,8 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param $name
-     * @param $value
-     * @return void
+     * @param string $name
+     * @param mixed  $value
      */
     public function setOption($name, $value)
     {
@@ -484,8 +479,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param $name
-     * @param  null  $default
+     * @param string $name
+     * @param string $default
+     *
      * @return mixed
      */
     public function getRawProductValue($name, $default = null)
@@ -558,7 +554,8 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * if $vat = true, return the price with vat
      *
-     * @param  boolean $vat
+     * @param boolean $vat
+     *
      * @return float
      */
     public function getUnitPrice($vat = false)
@@ -578,6 +575,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      * if $vat = true, return the price with vat
      *
      * @param  boolean $vat
+     *
      * @return float
      */
     public function getTotal($vat = false)

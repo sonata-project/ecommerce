@@ -70,28 +70,28 @@ interface InvoiceInterface
     /**
      * Set totalInc
      *
-     * @param decimal $totalInc
+     * @param float $totalInc
      */
     public function setTotalInc($totalInc);
 
     /**
      * Get totalInc
      *
-     * @return decimal $totalInc
+     * @return float $totalInc
      */
     public function getTotalInc();
 
     /**
      * Set totalExcl
      *
-     * @param decimal $totalExcl
+     * @param float $totalExcl
      */
     public function setTotalExcl($totalExcl);
 
     /**
      * Get totalExcl
      *
-     * @return decimal $totalExcl
+     * @return float $totalExcl
      */
     public function getTotalExcl();
 
@@ -252,14 +252,14 @@ interface InvoiceInterface
     /**
      * Set user
      *
-     * @param \Sonata\Component\Customer\CustomerInterface $user
+     * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer);
 
     /**
      * Get user
      *
-     * @return Application\Sonata\UserBundle\Entity\User $user
+     * @return CustomerInterface
      */
     public function getCustomer();
 

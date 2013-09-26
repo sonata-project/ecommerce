@@ -22,12 +22,11 @@ class Pool
     protected $transformer = array();
 
     /**
-     * add a delivery method into the pool
+     * add a tranformer into into the pool
      *
-     * @param  $instance
-     * @return void
+     * @param BaseTransformer $instance
      */
-    public function addTransformer($type, $instance)
+    public function addTransformer($type, BaseTransformer $instance)
     {
         $this->methods[$type] = $instance;
     }
@@ -44,8 +43,9 @@ class Pool
     /**
      * return a Transformer Object
      *
-     * @param  string                                       $type
-     * @return Sonata\Component\Transformer\BaseTransformer
+     * @param  string $type
+     *
+     * @return BaseTransformer
      */
     public function getTransformer($type)
     {

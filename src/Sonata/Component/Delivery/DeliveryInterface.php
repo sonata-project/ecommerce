@@ -21,25 +21,21 @@ interface DeliveryInterface
     const STATUS_RETURNED   = 5;
 
     /**
-     * @abstract
      * @return float the delivery base price
      */
     public function getPrice();
 
     /**
-     * @abstract
      * @return float the vat linked to the delivery
      */
     public function getVat();
 
     /**
-     * @abstract
      * @return string the name of the delivery method
      */
     public function getName();
 
     /**
-     * @abstract
      * @return boolean return true an address is required to use this delivery method
      */
     public function isAddressRequired();
@@ -47,37 +43,34 @@ interface DeliveryInterface
     /**
      * Return the delivery price
      *
-     * @abstract
      * @param  \Sonata\Component\Basket\BasketInterface $basket
      * @param  bool                                     $vat
-     * @return void
+     *
+     * @return float
      */
     public function getTotal(BasketInterface $basket, $vat = false);
 
     /**
      * Return the vat amount
      *
-     * @abstract
      * @param  \Sonata\Component\Basket\BasketInterface $basket
-     * @return void
+     *
+     * @return float
      */
     public function getVatAmount(BasketInterface $basket);
 
     /**
-     * @abstract
      * @return string
      */
     public function getCode();
 
     /**
-     * @abstract
      * @return boolean
      */
     public function getEnabled();
 
     /**
-     * @abstract
-     * @return boolean
+     * @return integer
      */
     public function getPriority();
 }

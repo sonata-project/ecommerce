@@ -106,28 +106,28 @@ interface DeliveryInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \Datetime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \Datetime $updatedAt
      */
     public function getUpdatedAt();
 
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \Datetime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \Datetime $createdAt
      */
     public function getCreatedAt();
 }

@@ -169,9 +169,6 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * {@inheritDoc}
      */
-    /**
-     * {@inheritDoc}
-     */
     public function getTotal(BasketInterface $basket, $vat = false)
     {
         if ($vat) {

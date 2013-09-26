@@ -339,7 +339,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \Datetime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -349,7 +349,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get updatedAt
      *
-     * @return datetime $updatedAt
+     * @return \Datetime $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -359,7 +359,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \Datetime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -369,7 +369,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get createdAt
      *
-     * @return datetime $createdAt
+     * @return \Datetime $createdAt
      */
     public function getCreatedAt()
     {

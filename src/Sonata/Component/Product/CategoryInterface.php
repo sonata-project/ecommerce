@@ -15,14 +15,14 @@ interface CategoryInterface
     /**
      * Set sub_description
      *
-     * @param text $subDescription
+     * @param string $subDescription
      */
     public function setSubDescription($subDescription);
 
     /**
      * Get sub_description
      *
-     * @return text $subDescription
+     * @return string $subDescription
      */
     public function getSubDescription();
 
@@ -43,28 +43,28 @@ interface CategoryInterface
     /**
      * Set updatedAt
      *
-     * @param Datetime $updatedAt
+     * @param \Datetime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt
      *
-     * @return Datetime $updatedAt
+     * @return \Datetime $updatedAt
      */
     public function getUpdatedAt();
 
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \Datetime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
      * Get createdAt
      *
-     * @return Datetime $createdAt
+     * @return \Datetime $createdAt
      */
     public function getCreatedAt();
 
@@ -85,42 +85,42 @@ interface CategoryInterface
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description);
 
     /**
      * Get description
      *
-     * @return text $description
+     * @return string $description
      */
     public function getDescription();
 
     /**
      * Set RAW description.
      *
-     * @param text $rawDescription
+     * @param string $rawDescription
      */
     public function setRawDescription($rawDescription);
 
     /**
      * Get RAW description.
      *
-     * @return text $rawDescription
+     * @return string $rawDescription
      */
     public function getRawDescription();
 
     /**
      * Set description formatter.
      *
-     * @param text $descriptionFormatter
+     * @param string $descriptionFormatter
      */
     public function setDescriptionFormatter($descriptionFormatter);
 
     /**
      * Get description formatter.
      *
-     * @return text $descriptionFormatter
+     * @return string $descriptionFormatter
      */
     public function getDescriptionFormatter();
 
@@ -155,7 +155,7 @@ interface CategoryInterface
     /**
      * Add Children
      *
-     * @param CaregoryInterface $children
+     * @param CategoryInterface $children
      * @param boolean           $nested
      */
     public function addChildren(CategoryInterface $children, $nested = false);
@@ -163,7 +163,7 @@ interface CategoryInterface
     /**
      * Get Children
      *
-     * @return Doctrine\Common\Collections\Collection $children
+     * @return array $children
      */
     public function getChildren();
 
@@ -182,14 +182,15 @@ interface CategoryInterface
     /**
      * Set Parent
      *
-     * @param CaregoryInterface $parent
+     * @param CategoryInterface $parent
+     * @param boolean           $nested
      */
     public function setParent(CategoryInterface $parent, $nested = false);
 
     /**
      * Get Parent
      *
-     * @return CaregoryInterface
+     * @return CategoryInterface
      */
     public function getParent();
 }

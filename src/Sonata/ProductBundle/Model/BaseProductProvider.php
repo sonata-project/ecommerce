@@ -575,10 +575,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * Return true if the product can be added to the provided basket
      *
-     * @abstract
      * @param  \Sonata\Component\Basket\BasketInterface   $basket
      * @param  \Sonata\Component\Product\ProductInterface $product
      * @param  array                                      $options
+     *
      * @return boolean
      */
     public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array())

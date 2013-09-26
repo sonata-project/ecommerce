@@ -35,17 +35,17 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     protected $quantity;
 
     /**
-     * @var decimal $price
+     * @var float $price
      */
     protected $price;
 
     /**
-     * @var decimal $vat
+     * @var float $vat
      */
     protected $vat;
 
     /**
-     * @var decimal $total
+     * @var float $total
      */
     protected $total;
 
@@ -55,14 +55,14 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     protected $designation;
 
     /**
-     * @var text $description
+     * @var string $description
      */
     protected $description;
 
     /**
      * Set invoiceId
      *
-     * @param integer $invoice
+     * @param InvoiceInterface $invoice
      */
     public function setInvoice(InvoiceInterface $invoice)
     {
@@ -82,7 +82,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Set orderElement
      *
-     * @param OrderElement $orderElement
+     * @param OrderElementInterface $orderElement
      */
     public function setOrderElement(OrderElementInterface $orderElement)
     {
@@ -92,7 +92,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Get orderElement
      *
-     * @return OrderElement $orderElement
+     * @return OrderElementInterface $orderElement
      */
     public function getOrderElement()
     {
@@ -122,7 +122,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Set price
      *
-     * @param decimal $price
+     * @param float $price
      */
     public function setPrice($price)
     {
@@ -132,7 +132,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Get price
      *
-     * @return decimal $price
+     * @return float $price
      */
     public function getPrice()
     {
@@ -142,7 +142,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Set vat
      *
-     * @param decimal $vat
+     * @param float $vat
      */
     public function setVat($vat)
     {
@@ -152,7 +152,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Get vat
      *
-     * @return decimal $vat
+     * @return float $vat
      */
     public function getVat()
     {
@@ -162,7 +162,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Set total
      *
-     * @param decimal $total
+     * @param float $total
      */
     public function setTotal($total)
     {
@@ -172,7 +172,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Get total
      *
-     * @return decimal $total
+     * @return float $total
      */
     public function getTotal()
     {
@@ -202,7 +202,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Set description
      *
-     * @param text $description
+     * string $description
      */
     public function setDescription($description)
     {
@@ -212,11 +212,10 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Get description
      *
-     * @return text $description
+     * @return string $description
      */
     public function getDescription()
     {
         return $this->description;
     }
-
 }

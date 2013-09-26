@@ -140,14 +140,14 @@ interface OrderInterface
     /**
      * Set validated at
      *
-     * @param datetime $validatedAt
+     * @param \Datetime $validatedAt
      */
     public function setValidatedAt(\DateTime $validatedAt = null);
 
     /**
      * Get validated at
      *
-     * @return datetime $validatedAt
+     * @return \Datetime $validatedAt
      */
     public function getValidatedAt();
 
@@ -168,42 +168,42 @@ interface OrderInterface
     /**
      * Set totalInc
      *
-     * @param decimal $totalInc
+     * @param float $totalInc
      */
     public function setTotalInc($totalInc);
 
     /**
      * Get totalInc
      *
-     * @return decimal $totalInc
+     * @return float $totalInc
      */
     public function getTotalInc();
 
     /**
      * Set totalExcl
      *
-     * @param decimal $totalExcl
+     * @param float $totalExcl
      */
     public function setTotalExcl($totalExcl);
 
     /**
      * Get totalExcl
      *
-     * @return decimal $totalExcl
+     * @return float $totalExcl
      */
     public function getTotalExcl();
 
     /**
      * Set delivery cost
      *
-     * @param decimal $deliveryCost
+     * @param float $deliveryCost
      */
     public function setDeliveryCost($deliveryCost);
 
     /**
      * Get delivery cost
      *
-     * @return decimal $deliveryCost
+     * @return float $deliveryCost
      */
     public function getDeliveryCost();
 
@@ -308,9 +308,10 @@ interface OrderInterface
     /**
      * Set billing country code
      *
-     * @param string $billingCountry
+     * @param string $billingCountryCode
      */
     public function setBillingCountryCode($billingCountryCode);
+
     /**
      * Get billing country
      *
@@ -461,7 +462,7 @@ interface OrderInterface
     /**
      * Set shipping country
      *
-     * @param string $shippingCountry
+     * @param string $shippingCountryCode
      */
     public function setShippingCountryCode($shippingCountryCode);
 
@@ -515,15 +516,12 @@ interface OrderInterface
     public function getShippingMobile();
 
     /**
-     * @abstract
-     * @return array of
+     * @return array
      */
     public function getOrderElements();
 
     /**
-     * @abstract
-     * @param  OrderElementInterface $orderElement
-     * @return void
+     * @param OrderElementInterface $orderElement
      */
     public function addOrderElement(OrderElementInterface $orderElement);
 
@@ -536,15 +534,11 @@ interface OrderInterface
     public function isValidated();
 
     /**
-     *
-     *
      * @return boolean true if cancelled, else false
      */
     public function isCancelled();
 
     /**
-     *
-     *
      * @return boolean true if pending, else false
      */
     public function isPending();
@@ -564,28 +558,22 @@ interface OrderInterface
     public function isError();
 
     /**
-     * @abstract
      * @param  \DateTime|null $createdAt
-     * @return void
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * @abstract
-     * @return void
+     * @return \DateTime
      */
     public function getCreatedAt();
 
     /**
-     * @abstract
      * @param  \DateTime|null $updatedAt
-     * @return void
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * @abstract
-     * @return void
+     * @return \DateTime
      */
     public function getUpdatedAt();
 
@@ -597,22 +585,19 @@ interface OrderInterface
     public function addOrderElements(OrderElementInterface $orderElements);
 
     /**
-     * @abstract
-     * @param $orderElements
+     * @param array $orderElements
+     *
      * @return array
      */
     public function setOrderElements($orderElements);
 
     /**
-     * @abstract
-     * @param  \Sonata\Component\Customer\CustomerInterface $customer
-     * @return void
+     * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer);
 
     /**
-     * @abstract
-     * @return \Sonata\Component\Customer\CustomerInterface
+     * @return CustomerInterface
      */
     public function getCustomer();
 }

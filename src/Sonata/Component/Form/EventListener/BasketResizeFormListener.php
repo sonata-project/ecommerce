@@ -66,9 +66,9 @@ class BasketResizeFormListener implements EventSubscriberInterface
 
     /**
      * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
+     *
      * @param $form
      * @param $basketElements
-     * @return
      */
     private function buildBasketElements($form, $basketElements)
     {

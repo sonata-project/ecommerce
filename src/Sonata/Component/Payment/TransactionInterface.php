@@ -41,22 +41,17 @@ interface TransactionInterface
     const STATUS_ORDER_NOT_OPEN   = 12; // the order is not open (so a previous transaction already alter the order)
 
     /**
-     * @abstract
      * @param  \Sonata\Component\Order\OrderInterface $order
-     * @return void
      */
     public function setOrder(OrderInterface $order);
 
     /**
-     * @abstract
      * @return \Sonata\Component\Order\OrderInterface
      */
     public function getOrder();
 
     /**
-     * @abstract
      * @param  integer $state
-     * @return void
      */
     public function setState($state);
 
@@ -98,6 +93,7 @@ interface TransactionInterface
      *
      * @param  string $name
      * @param  mixed  $default
+     *
      * @return mixed
      */
     public function get($name, $default = null);
@@ -121,51 +117,44 @@ interface TransactionInterface
     public static function getStatusList();
 
     /**
-     * @abstract
      * @param  \DateTime|null $createdAt
+     *
      * @return void
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * @abstract
      * @return \DateTime
      */
     public function getCreatedAt();
 
     /**
-     * @abstract
-     * @param  integer $paymentCode
-     * @return void
+     * @param string $paymentCode
      */
     public function setPaymentCode($paymentCode);
 
     /**
-     * @abstract
      * @return string
      */
     public function getPaymentCode();
 
     /**
-     * @abstract
      * @return string
      */
     public function getInformation();
 
     /**
-     * @abstract
      * @param string $message
      */
     public function setInformation($message);
 
     /**
-     * @abstract
-     * @param $message
+     * @param string $message
      */
     public function addInformation($message);
 
     /**
-     * @abstract
+     * @return string
      */
     public function getStatusName();
 }

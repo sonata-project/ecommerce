@@ -19,63 +19,52 @@ interface AddressInterface
     public function getId();
 
     /**
-     * @abstract
      * @return string return the address name
      */
     public function getName();
 
     /**
-     * @abstract
      * @return string return the address firstname
      */
     public function getFirstname();
 
     /**
-     * @abstract
      * @return string return the address lastname
      */
     public function getLastname();
 
-/**
-     * @abstract
+    /**
      * @return string return the address (line 1)
      */
     public function getAddress1();
 
     /**
-     * @abstract
      * @return string return the address (line 2)
      */
     public function getAddress2();
 
     /**
-     * @abstract
      * @return string return the address (line 3)
      */
     public function getAddress3();
 
     /**
-     * @abstract
      * @return string return the postcode
      */
     public function getPostcode();
 
     /**
-     * @abstract
      * @return string return the city
      */
     public function getCity();
 
     /**
-     * @abstract
      * @return string return the ISO country code
      */
     public function getCountryCode();
 
     /**
-     * @abstract
      * @return string return the phone number linked to the address
      */
     public function getPhone();
-
 }

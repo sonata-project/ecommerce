@@ -318,7 +318,6 @@ class Paypal extends BasePaypal
     }
 
     /**
-     * @static
      * @return array
      */
     public static function getPendingReasonsList()

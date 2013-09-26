@@ -32,9 +32,7 @@ class FreeDelivery extends BaseDelivery
     }
 
     /**
-     * Get vat
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getVat()
     {
@@ -42,9 +40,7 @@ class FreeDelivery extends BaseDelivery
     }
 
     /**
-     * Get price
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getPrice()
     {
@@ -52,9 +48,7 @@ class FreeDelivery extends BaseDelivery
     }
 
     /**
-     * Is address required?
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function isAddressRequired()
     {
@@ -62,9 +56,7 @@ class FreeDelivery extends BaseDelivery
     }
 
     /**
-     * Get name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {

@@ -41,10 +41,8 @@ interface BasketElementInterface
     /**
      * Define the related product
      *
-     * @abstract
-     * @param  string                                     $productCode
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @return void
+     * @param  string           $productCode
+     * @param  ProductInterface $product
      */
     public function setProduct($productCode, ProductInterface $product);
 
@@ -58,7 +56,7 @@ interface BasketElementInterface
     /**
      * return the product id
      *
-     * @return null
+     * @return integer
      */
     public function getProductId();
 
@@ -67,7 +65,6 @@ interface BasketElementInterface
      * by the form framework
      *
      * @param  int  $productId
-     * @return void
      */
     public function setProductId($productId);
 
@@ -140,7 +137,7 @@ interface BasketElementInterface
     /**
      * Define the quantity
      *
-     * @param float $price
+     * @param float $quantity
      */
     public function setQuantity($quantity);
 
@@ -159,33 +156,26 @@ interface BasketElementInterface
     public function isValid();
 
     /**
-     * @abstract
-     * @param  boolean $delete
-     * @return void
+     * @param boolean $delete
      */
     public function setDelete($delete);
 
     /**
-     * @abstract
-     * @return booelan
+     * @return boolean
      */
     public function getDelete();
 
     /**
-     * @abstract
      * @param  \Sonata\Component\Product\ProductDefinition $productDefinition
-     * @return void
      */
     public function setProductDefinition(ProductDefinition $productDefinition);
 
     /**
-     * @abstract
      * @return \Sonata\Component\Product\ProductManagerInterface
      */
     public function getProductManager();
 
     /**
-     * @abstract
      * @return string
      */
     public function getProductCode();

@@ -55,9 +55,7 @@ interface CategoryManagerInterface
     /**
      * Returns the root categories
      *
-     * @abstract
      * @param  array $criteria
-     * @return void
      */
     public function getRootCategoriesPager($page = 1, $limit = 25);
 }

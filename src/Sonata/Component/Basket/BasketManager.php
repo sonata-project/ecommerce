@@ -29,9 +29,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * Creates an empty basket instance
-     *
-     * @return \Sonata\Component\Basket\BasketInterface
+     * {@inheritdoc}
      */
     public function create()
     {
@@ -41,10 +39,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * Updates a basket
-     *
-     * @param  \Sonata\Component\Basket\BasketInterface $basket
-     * @return void
+     * {@inheritdoc}
      */
     public function save(BasketInterface $basket)
     {
@@ -61,10 +56,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * Finds one basket by the given criteria
-     *
-     * @param  array                                    $criteria
-     * @return \Sonata\Component\Basket\BasketInterface
+     * {@inheritdoc}
      */
     public function findOneBy(array $criteria)
     {
@@ -72,9 +64,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * Returns the basket's fully qualified class name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getClass()
     {
@@ -82,10 +72,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * Finds many baskets by the given criteria
-     *
-     * @param  array                                      $criteria
-     * @return \Sonata\Component\Basket\BasketInterface[]
+     * {@inheritdoc}
      */
     public function findBy(array $criteria)
     {
@@ -93,10 +80,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * Deletes a basket
-     *
-     * @param  \Sonata\Component\Basket\BasketInterface $basket
-     * @return void
+     * {@inheritdoc}
      */
     public function delete(BasketInterface $basket)
     {
@@ -105,8 +89,7 @@ class BasketManager implements BasketManagerInterface
     }
 
     /**
-     * @param  \Sonata\Component\Customer\CustomerInterface $customer
-     * @return mixed|null
+     * {@inheritdoc}
      */
     public function loadBasketPerCustomer(CustomerInterface $customer)
     {

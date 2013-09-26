@@ -90,9 +90,7 @@ class Selector implements DeliverySelectorInterface
     }
 
     /**
-     * @param  null|\Sonata\Component\Basket\BasketInterface    $basket
-     * @param  null|\Sonata\Component\Customer\AddressInterface $deliveryAddress
-     * @return array|bool
+     * {@inheritdoc}
      */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null)
     {
@@ -165,9 +163,9 @@ class Selector implements DeliverySelectorInterface
     }
 
     /**
-     * @static
      * @param  DeliveryInterface $a
      * @param  DeliveryInterface $b
+     *
      * @return int
      */
     public static function sort(DeliveryInterface $a, DeliveryInterface $b)

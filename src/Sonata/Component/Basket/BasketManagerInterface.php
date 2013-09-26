@@ -26,14 +26,14 @@ interface BasketManagerInterface
      * Updates a basket
      *
      * @param  \Sonata\Component\Basket\BasketInterface $basket
-     * @return void
      */
     public function save(BasketInterface $basket);
 
     /**
      * Finds one basket by the given criteria
      *
-     * @param  array                                    $criteria
+     * @param  array $criteria
+     *
      * @return \Sonata\Component\Basket\BasketInterface
      */
     public function findOneBy(array $criteria);
@@ -48,7 +48,8 @@ interface BasketManagerInterface
     /**
      * Finds many baskets by the given criteria
      *
-     * @param  array                                      $criteria
+     * @param  array $criteria
+     *
      * @return \Sonata\Component\Basket\BasketInterface[]
      */
     public function findBy(array $criteria);
@@ -57,12 +58,10 @@ interface BasketManagerInterface
      * Deletes a basket
      *
      * @param  \Sonata\Component\Basket\BasketInterface $basket
-     * @return void
      */
     public function delete(BasketInterface $basket);
 
     /**
-     * @abstract
      * @param \Sonata\Component\Customer\CustomerInterface $customer
      */
     public function loadBasketPerCustomer(CustomerInterface $customer);

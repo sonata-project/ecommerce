@@ -13,6 +13,7 @@ use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Invoice\InvoiceElementInterface;
+use Sonata\UserBundle\Model\UserInterface;
 
 /**
  * Sonata\InvoiceBundle\Entity\BaseInvoice
@@ -40,12 +41,12 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $status;
 
     /**
-     * @var decimal $totalInc
+     * @var float $totalInc
      */
     protected $totalInc;
 
     /**
-     * @var decimal $totalExcl
+     * @var float $totalExcl
      */
     protected $totalExcl;
 
@@ -105,7 +106,7 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $mobile;
 
     /**
-     * @var Application\Sonata\UserBundle\Entity\User
+     * @var UserInterface
      */
     protected $user;
 
@@ -136,10 +137,10 @@ abstract class BaseInvoice implements InvoiceInterface
 
     /**
      * Set userId
-     *
-     * @param integer $customer
+     *R
+     * @param CustomerInterface $customer
      */
-    public function setCustomer(CustomerInterface $customer)
+    public function setCustomer(CustomerInterface $customer = null)
     {
         $this->customer = $customer;
     }
@@ -197,7 +198,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Set totalInc
      *
-     * @param decimal $totalInc
+     * @param float $totalInc
      */
     public function setTotalInc($totalInc)
     {
@@ -207,7 +208,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Get totalInc
      *
-     * @return decimal $totalInc
+     * @return float $totalInc
      */
     public function getTotalInc()
     {
@@ -217,7 +218,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Set totalExcl
      *
-     * @param decimal $totalExcl
+     * @param float $totalExcl
      */
     public function setTotalExcl($totalExcl)
     {
@@ -227,7 +228,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Get totalExcl
      *
-     * @return decimal $totalExcl
+     * @return float $totalExcl
      */
     public function getTotalExcl()
     {
@@ -457,9 +458,9 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Set user
      *
-     * @param Application\Sonata\UserBundle\Entity\User $user
+     * @param UserInterface $user
      */
-    public function setUser(\Application\Sonata\UserBundle\Entity\User $user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
@@ -467,7 +468,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * Get user
      *
-     * @return Application\Sonata\UserBundle\Entity\User $user
+     * @return UserInterface $user
      */
     public function getUser()
     {

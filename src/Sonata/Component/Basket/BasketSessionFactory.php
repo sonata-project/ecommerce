@@ -53,10 +53,7 @@ class BasketSessionFactory extends BaseBasketFactory
     }
 
     /**
-     * Load the basket
-     *
-     * @param  \Sonata\Component\Customer\CustomerInterface $customer
-     * @return \Sonata\Component\Basket\BasketInterface
+     * {@inheritdoc}
      */
     public function load(CustomerInterface $customer)
     {
@@ -78,10 +75,7 @@ class BasketSessionFactory extends BaseBasketFactory
     }
 
     /**
-     * Save the basket
-     *
-     * @param  \Sonata\Component\Basket\BasketInterface $basket
-     * @return void
+     * {@inheritdoc}
      */
     public function save(BasketInterface $basket)
     {

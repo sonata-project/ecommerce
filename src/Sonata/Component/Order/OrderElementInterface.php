@@ -46,28 +46,28 @@ interface OrderElementInterface
     /**
      * Set price
      *
-     * @param decimal $price
+     * @param float $price
      */
     public function setPrice($price);
 
     /**
      * Get price
      *
-     * @return decimal $price
+     * @return float $price
      */
     public function getPrice();
 
     /**
      * Set vat
      *
-     * @param decimal $vat
+     * @param float $vat
      */
     public function setVat($vat);
 
     /**
      * Get vat
      *
-     * @return decimal $vat
+     * @return float $vat
      */
     public function getVat();
 
@@ -88,41 +88,38 @@ interface OrderElementInterface
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description);
 
     /**
      * Get description
      *
-     * @return text $description
+     * @return string $description
      */
     public function getDescription();
 
     /**
      * Set serialize
      *
-     * @param text $options
+     * @param string $options
      */
     public function setOptions($options);
 
     /**
      * Get serialize
      *
-     * @return text $options
+     * @return string $options
      */
     public function getOptions();
 
     /**
-     * @abstract
-     * @param $rawProduct
-     * @return void
+     * @param string $rawProduct
      */
     public function setRawProduct($rawProduct);
 
     /**
-     * @abstract
-     * @return void
+     * @return string
      */
     public function getRawProduct();
 
@@ -157,14 +154,14 @@ interface OrderElementInterface
     /**
      * Set validated_at
      *
-     * @param datetime $validatedAt
+     * @param \Datetime $validatedAt
      */
     public function setValidatedAt(\DateTime $validatedAt = null);
 
     /**
      * Get validated_at
      *
-     * @return datetime $validatedAt
+     * @return \Datetime $validatedAt
      */
     public function getValidatedAt();
 
@@ -183,8 +180,7 @@ interface OrderElementInterface
     public function getProduct();
 
     /**
-     * @abstract
-     * @return void
+     * @return integer
      */
     public function getProductId();
 
@@ -203,28 +199,22 @@ interface OrderElementInterface
     public function getProductType();
 
     /**
-     * @abstract
-     * @param  \DateTime|null $createdAt
-     * @return void
+     * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * @abstract
-     * @return DateTime
+     * @return \Datetime
      */
     public function getCreatedAt();
 
     /**
-     * @abstract
-     * @param  \DateTime|null $updatedAt
-     * @return void
+     * @param \Datetime
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * @abstract
-     * @return DateTime
+     * @return \Datetime
      */
     public function getUpdatedAt();
 }

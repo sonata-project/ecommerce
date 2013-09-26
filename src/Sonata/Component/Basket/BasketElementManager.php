@@ -27,9 +27,7 @@ class BasketElementManager implements BasketElementManagerInterface
     }
 
     /**
-     * Creates an empty basket element instance
-     *
-     * @return \Sonata\Component\Basket\BasketElementInterface
+     * {@inheritdoc}
      */
     public function create()
     {
@@ -39,10 +37,7 @@ class BasketElementManager implements BasketElementManagerInterface
     }
 
     /**
-     * Updates a basket element
-     *
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @return void
+     * {@inheritdoc}
      */
     public function save(BasketElementInterface $basketElement)
     {
@@ -59,10 +54,7 @@ class BasketElementManager implements BasketElementManagerInterface
     }
 
     /**
-     * Finds one basket by the given criteria
-     *
-     * @param  array                                           $criteria
-     * @return \Sonata\Component\Basket\BasketElementInterface
+     * {@inheritdoc}
      */
     public function findOneBy(array $criteria)
     {
@@ -70,9 +62,7 @@ class BasketElementManager implements BasketElementManagerInterface
     }
 
     /**
-     * Returns the basket element's fully qualified class name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getClass()
     {
@@ -80,10 +70,7 @@ class BasketElementManager implements BasketElementManagerInterface
     }
 
     /**
-     * Finds many basket elements by the given criteria
-     *
-     * @param  array                                             $criteria
-     * @return \Sonata\Component\Basket\BasketElementInterface[]
+     * {@inheritdoc}
      */
     public function findBy(array $criteria)
     {
@@ -91,10 +78,7 @@ class BasketElementManager implements BasketElementManagerInterface
     }
 
     /**
-     * Deletes a basket
-     *
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @return void
+     * {@inheritdoc}
      */
     public function delete(BasketElementInterface $basketElement)
     {

@@ -55,11 +55,7 @@ class BasketEntityFactory implements BasketFactoryInterface
     }
 
     /**
-     * Load the basket
-     *
-     * @param  CustomerInterface $customer
-     *
-     * @return BasketInterface
+     * {@inheritdoc}
      */
     public function load(CustomerInterface $customer)
     {
@@ -83,11 +79,7 @@ class BasketEntityFactory implements BasketFactoryInterface
     }
 
     /**
-     * Save the basket
-     *
-     * @param BasketInterface $basket
-     *
-     * @return void
+     * {@inheritdoc}
      */
     public function save(BasketInterface $basket)
     {
