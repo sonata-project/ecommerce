@@ -14,7 +14,7 @@ use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * The selector selects available payment methods depends on the provided basket
@@ -58,7 +58,7 @@ class Selector implements PaymentSelectorInterface
     }
 
     /**
-     * @return \Symfony\Component\HttpKernel\Log\LoggerInterface
+     * @return LoggerInterface
      */
     public function getLogger()
     {

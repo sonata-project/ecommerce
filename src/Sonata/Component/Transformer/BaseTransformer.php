@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Transformer;
 
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 abstract class BaseTransformer
 {
@@ -19,6 +19,11 @@ abstract class BaseTransformer
      * @var the transformer option
      */
     protected $options;
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * @param LoggerInterface $logger
@@ -29,7 +34,7 @@ abstract class BaseTransformer
     }
 
     /**
-     * @return \Symfony\Component\HttpKernel\Log\LoggerInterface
+     * @return LoggerInterface
      */
     public function getLogger()
     {

@@ -18,7 +18,7 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Payment\PaymentInterface;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Order\OrderElementInterface;
 
 class BasketTransformer extends BaseTransformer
@@ -39,9 +39,9 @@ class BasketTransformer extends BaseTransformer
     protected $productPool;
 
     /**
-     * @param \Sonata\Component\Order\OrderManagerInterface          $orderManager
-     * @param \Sonata\Component\Product\Pool                         $productPool
-     * @param null|\Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @param OrderManagerInterface $orderManager
+     * @param ProductPool           $productPool
+     * @param LoggerInterface       $logger
      */
     public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, LoggerInterface $logger = null)
     {
@@ -64,7 +64,7 @@ class BasketTransformer extends BaseTransformer
         // Customer
         if (!is_object($customer)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the customer is not valid');
+                $this->getLogger()->emergency('[Sonata\Component\Payment\Transform\Basket::transform] the customer is not valid');
             }
 
             throw new \RuntimeException('Invalid customer');
@@ -75,7 +75,7 @@ class BasketTransformer extends BaseTransformer
 
         if (!$billingAddress instanceof AddressInterface) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('[Sonata\Component\Payment\Transform\Basket::transform] the billing address is not valid');
+                $this->getLogger()->emergency('[Sonata\Component\Payment\Transform\Basket::transform] the billing address is not valid');
             }
 
             throw new \RuntimeException('Invalid billing address');
@@ -84,7 +84,7 @@ class BasketTransformer extends BaseTransformer
         $paymentMethod = $basket->getPaymentMethod();
         if (!$paymentMethod instanceof PaymentInterface) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('[Sonata\Component\Payment\PaymentInterface::transform] the payment method is not valid');
+                $this->getLogger()->emergency('[Sonata\Component\Payment\PaymentInterface::transform] the payment method is not valid');
             }
 
             throw new \RuntimeException('Invalid payment method');
@@ -94,7 +94,7 @@ class BasketTransformer extends BaseTransformer
         $deliveryMethod = $basket->getDeliveryMethod();
         if (!$deliveryMethod instanceof DeliveryInterface) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the delivery method is not valid');
+                $this->getLogger()->emergency('[Sonata\Component\Delivery\DeliveryInterface::transform] the delivery method is not valid');
             }
 
             throw new \RuntimeException('Invalid delivery method');
@@ -103,7 +103,7 @@ class BasketTransformer extends BaseTransformer
         $deliveryAddress = $basket->getDeliveryAddress();
         if ($deliveryMethod->isAddressRequired() && !$deliveryAddress instanceof AddressInterface) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('[Sonata\Component\Delivery\DeliveryInterface::transform] the shipping address is not valid');
+                $this->getLogger()->emergency('[Sonata\Component\Delivery\DeliveryInterface::transform] the shipping address is not valid');
             }
 
             throw new \RuntimeException('Invalid delivery address');

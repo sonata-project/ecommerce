@@ -17,7 +17,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Buzz\Browser;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 class CheckPayment extends BasePayment
 {
@@ -157,7 +157,7 @@ class CheckPayment extends BasePayment
         } else {
             $routeName = 'url_return_ko';
 
-            $this->logger->crit(sprintf('The CheckPayment received a ko result : %s', $response->getContent()));
+            $this->logger->critical(sprintf('The CheckPayment received a ko result : %s', $response->getContent()));
         }
 
         // redirect the user to the correct page

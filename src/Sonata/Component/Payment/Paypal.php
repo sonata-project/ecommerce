@@ -194,14 +194,14 @@ class Paypal extends BasePaypal
             case TransactionInterface::STATUS_ORDER_UNKNOWN:
 
                 if ($this->getLogger()) {
-                    $this->getLogger()->emerg('[Paypal:handlerError] ERROR_ORDER_UNKNOWN');
+                    $this->getLogger()->emergency('[Paypal:handlerError] ERROR_ORDER_UNKNOWN');
                 }
 
                 break;
             case TransactionInterface::STATUS_ERROR_VALIDATION:
 
                 if ($this->getLogger()) {
-                    $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_ERROR_VALIDATION - Order %s - Paypal reject the postback validation', $order->getReference()));
+                    $this->getLogger()->emergency(sprintf('[Paypal:handlerError] STATUS_ERROR_VALIDATION - Order %s - Paypal reject the postback validation', $order->getReference()));
                 }
 
                 break;
@@ -211,7 +211,7 @@ class Paypal extends BasePaypal
                 $order->setStatus(OrderInterface::STATUS_CANCELLED);
 
                 if ($this->getLogger()) {
-                    $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_CANCELLED - Order %s - The Order has been cancelled, see callback dump for more information', $order->getReference()));
+                    $this->getLogger()->emergency(sprintf('[Paypal:handlerError] STATUS_CANCELLED - Order %s - The Order has been cancelled, see callback dump for more information', $order->getReference()));
                 }
 
                 break;
@@ -222,14 +222,14 @@ class Paypal extends BasePaypal
 
                 if ($this->getLogger()) {
                     $reasons = self::getPendingReasonsList();
-                    $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_PENDING - Order %s - reason code : %s - reason : %s', $order->getReference(), $reasons[$transaction->get('pending_reason')], $transaction->get('pending_reason')));
+                    $this->getLogger()->emergency(sprintf('[Paypal:handlerError] STATUS_PENDING - Order %s - reason code : %s - reason : %s', $order->getReference(), $reasons[$transaction->get('pending_reason')], $transaction->get('pending_reason')));
                 }
 
                 break;
             default:
 
                 if ($this->getLogger()) {
-                    $this->getLogger()->emerg(sprintf('[Paypal:handlerError] STATUS_PENDING - uncaught error code %s', $transaction->getErrorCode()));
+                    $this->getLogger()->emergency(sprintf('[Paypal:handlerError] STATUS_PENDING - uncaught error code %s', $transaction->getErrorCode()));
                 }
         }
 
@@ -249,14 +249,13 @@ class Paypal extends BasePaypal
      */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
-
         if (!$transaction->isValid()) {
             return new \Symfony\Component\HttpFoundation\Response('');
         }
 
         $params = $transaction->getParameters();
         $params['cmd'] = '_notify-validate';
-
+        $this->getLogger()->
         // retrieve the client
         $client = $this
             ->getWebConnectorProvider()
@@ -279,7 +278,7 @@ class Paypal extends BasePaypal
             $transaction->getOrder()->setPaymentStatus(OrderInterface::STATUS_ERROR);
 
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('[Paypal::sendAccuseReception] Paypal failed to check the postback');
+                $this->getLogger()->emergency('[Paypal::sendAccuseReception] Paypal failed to check the postback');
             }
         }
 

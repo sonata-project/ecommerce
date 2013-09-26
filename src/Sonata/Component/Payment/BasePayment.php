@@ -13,7 +13,7 @@ namespace Sonata\Component\Payment;
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 abstract class BasePayment implements PaymentInterface
 {
@@ -38,7 +38,7 @@ abstract class BasePayment implements PaymentInterface
     protected $transformers;
 
     /**
-     * @var \Symfony\Component\HttpKernel\Log\LoggerInterface
+     * @var \Psr\Log\LoggerInterface;
      */
     protected $logger;
 
@@ -146,8 +146,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param  \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
-     * @return void
+     * @param LoggerInterface $logger
      */
     public function setLogger(LoggerInterface $logger)
     {
@@ -155,7 +154,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @return \Symfony\Component\HttpKernel\Log\LoggerInterface
+     * @return LoggerInterface
      */
     public function getLogger()
     {

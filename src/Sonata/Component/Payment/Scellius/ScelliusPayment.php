@@ -16,7 +16,7 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Sonata\Component\Payment\BasePayment;
@@ -44,9 +44,11 @@ class ScelliusPayment extends BasePayment
     protected $transactionGenerator;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface                 $router
-     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface          $logger
-     * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
+     * @param RouterInterface                       $router
+     * @param LoggerInterface                       $logger
+     * @param EngineInterface                       $templating
+     * @param ScelliusTransactionGeneratorInterface $transactionGenerator
+     * @param boolean                               $debug
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, ScelliusTransactionGeneratorInterface $transactionGenerator, $debug)
     {

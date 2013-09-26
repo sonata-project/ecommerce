@@ -129,7 +129,7 @@ abstract class BasePaypal extends BasePayment
         // key file
         if (!file_exists($key_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg(sprintf('Merchant key file not found : %s', $key_file));
+                $this->getLogger()->emergency(sprintf('Merchant key file not found : %s', $key_file));
             }
 
             throw new \RuntimeException(sprintf('Merchant key file not found : %s', $key_file));
@@ -137,7 +137,7 @@ abstract class BasePaypal extends BasePayment
 
         if (!is_readable($key_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('Merchant key file is not readable');
+                $this->getLogger()->emergency('Merchant key file is not readable');
             }
 
             throw new \RuntimeException('Merchant key file is not readable');
@@ -146,7 +146,7 @@ abstract class BasePaypal extends BasePayment
         // cert file
         if (!file_exists($cert_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('Merchant certificat file not found');
+                $this->getLogger()->emergency('Merchant certificat file not found');
             }
 
             throw new \RuntimeException('Merchant certificat file not found');
@@ -154,7 +154,7 @@ abstract class BasePaypal extends BasePayment
 
         if (!is_readable($cert_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('Merchant certificat file is not readable');
+                $this->getLogger()->emergency('Merchant certificat file is not readable');
             }
 
             throw new \RuntimeException('Merchant certificat file is not readable');
@@ -163,7 +163,7 @@ abstract class BasePaypal extends BasePayment
         // paypal cert file
         if (!file_exists($paypal_cert_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('PayPal certificate file not found');
+                $this->getLogger()->emergency('PayPal certificate file not found');
             }
 
             throw new \RuntimeException('PayPal certificate file not found');
@@ -171,7 +171,7 @@ abstract class BasePaypal extends BasePayment
 
         if (!is_readable($cert_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('PayPal certificate file is not readable');
+                $this->getLogger()->emergency('PayPal certificate file is not readable');
             }
 
             throw new \RuntimeException('PayPal certificate file is not readable');
@@ -180,7 +180,7 @@ abstract class BasePaypal extends BasePayment
         // open ssl
         if (!file_exists($openssl)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('openssl command not found');
+                $this->getLogger()->emergency('openssl command not found');
             }
 
             throw new \RuntimeException('openssl command not found');
@@ -188,7 +188,7 @@ abstract class BasePaypal extends BasePayment
 
         if (!is_executable($openssl)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg('openssl is not executable');
+                $this->getLogger()->emergency('openssl is not executable');
             }
 
             throw new \RuntimeException('openssl is not executable');
@@ -250,7 +250,7 @@ abstract class BasePaypal extends BasePayment
         }
 
         if ($this->getLogger()) {
-            $this->getLogger()->emerg("Encrypting paypal data failed, Command line encryption failed \n cmd=$openssl_cmd \n hash=" . print_r($hash, 1));
+            $this->getLogger()->emergency("Encrypting paypal data failed, Command line encryption failed \n cmd=$openssl_cmd \n hash=" . print_r($hash, 1));
         }
 
         throw new \RuntimeException('Encrypting paypal data failed');
@@ -284,7 +284,7 @@ abstract class BasePaypal extends BasePayment
 
         if (!@file_put_contents($filename, $contents)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emerg(sprintf('encryptViaFile, unable to create buffer file : %s', $filename));
+                $this->getLogger()->emergency(sprintf('encryptViaFile, unable to create buffer file : %s', $filename));
             }
 
             throw new \RuntimeException(sprintf('unable to create buffer file : %s', $filename));
@@ -303,7 +303,7 @@ abstract class BasePaypal extends BasePayment
 
         if (!@unlink($filename)) {
             if ($this->getLogger()) {
-              $this->getLogger()->emerg(sprintf('[BasePaypalPayment::encryptViaFile] unable to delete temporary file, %s', $filename));
+              $this->getLogger()->emergency(sprintf('[BasePaypalPayment::encryptViaFile] unable to delete temporary file, %s', $filename));
             }
 
         }
