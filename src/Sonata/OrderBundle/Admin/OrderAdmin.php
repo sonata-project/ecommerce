@@ -123,8 +123,14 @@ class OrderAdmin extends Admin
     {
         $filter
             ->add('reference')
-            ->add('customer')
-            ->add('locale')
+        ;
+
+        if (!$this->isChild()) {
+            $filter->add('customer.lastname');
+        }
+
+        $filter
+            ->add('locale', null, array(), 'country')
         ;
     }
 

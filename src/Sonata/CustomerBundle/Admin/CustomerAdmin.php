@@ -36,9 +36,10 @@ class CustomerAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('user', 'sonata_type_model_list')
             ->add('firstname')
             ->add('lastname')
-            ->add('locale')
+            ->add('locale', 'country')
         ;
     }
 

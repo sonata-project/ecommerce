@@ -34,7 +34,7 @@ class DeliveryAdmin extends Admin
             ->add('enabled')
             ->add('code')
             ->add('perItem')
-            ->add('countryCode')
+            ->add('countryCode', 'country')
             ->add('zone')
         ;
     }
@@ -48,7 +48,7 @@ class DeliveryAdmin extends Admin
             ->addIdentifier('code')
             ->add('enabled')
             ->add('perItem')
-            ->add('countryCode', 'country')
+            ->add('countryCode')
             ->add('zone')
         ;
     }
