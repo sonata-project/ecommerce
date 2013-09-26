@@ -45,7 +45,7 @@
       <trans-unit id="1f57b5faf097ab0fdcb392d736f71cbaccb77ba7" resname="sonata.basket.label_terms_and_condition">
         <jms:reference-file line="95">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.label_terms_and_condition</source>
-        <target state="new">Terms and conditions of use</target>
+        <target state="new">I accept the terms and conditions of use</target>
       </trans-unit>
       <trans-unit id="92bc7e75059b0e0b3afc926c7afcdccea3deae26" resname="sonata.basket.link_next_step">
         <jms:reference-file line="56">views/Basket/index.html.twig</jms:reference-file>
@@ -55,7 +55,7 @@
       <trans-unit id="152c0e7c5687e4e043256b542598a66b01830c38" resname="sonata.basket.link_terms_and_condition">
         <jms:reference-file line="96">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.link_terms_and_condition</source>
-        <target state="new">Terms and conditions of use</target>
+        <target state="new">Read the terms and conditions of use</target>
       </trans-unit>
       <trans-unit id="2a12e76f6584b27a62663b22e70b0eef238152dd" resname="sonata.basket.message_basket_is_empty">
         <jms:reference-file line="61">views/Basket/index.html.twig</jms:reference-file>
@@ -257,6 +257,10 @@
       <trans-unit id="header_basket_total" resname="header_basket_total">
         <source>header_basket_total</source>
         <target state="new">Total</target>
+      </trans-unit>
+      <trans-unit id="header_basket_total" resname="header_basket_delete">
+        <source>header_basket_delete</source>
+        <target state="new"><![CDATA[<i class="icon-trash"></i>]]></target>
       </trans-unit>
     </body>
   </file>

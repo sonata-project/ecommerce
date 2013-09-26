@@ -17,8 +17,8 @@ file that was distributed with this source code.
 
     <form action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">
 
-        <table>
-            {#
+        <table class="table table-bordered">
+
             <thead>
                 <tr>
                     <td>{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</td>
@@ -28,7 +28,7 @@ file that was distributed with this source code.
                     <td>{% trans from 'SonataBasketBundle'%}header_basket_delete{% endtrans %}</td>
                 </tr>
             </thead>
-            #}
+
             <tbody>
                 {# call each product controller to render its own view #}
                 {% for basketElement in basket.getBasketElements %}
@@ -51,9 +51,9 @@ file that was distributed with this source code.
             </tfoot>
         </table>
 
-        <input type="submit" value="{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}" />
+        <input type="submit" value="{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}" class="btn" />
 
-        <a href="{{ url('sonata_basket_authentification') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}</a>
+        <a href="{{ url('sonata_basket_authentification') }}" class="btn">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}</a>
 
         {{ form_rest(form) }}
     </form>

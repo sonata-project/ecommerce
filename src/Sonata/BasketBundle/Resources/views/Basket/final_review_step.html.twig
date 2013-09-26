@@ -11,7 +11,7 @@ file that was distributed with this source code.
 
 <h1>{{ 'sonata.basket.title_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
-<table>
+<table class="table table-bordered">
 
     <thead>
         <tr>
@@ -54,7 +54,7 @@ file that was distributed with this source code.
     </tfoot>
 </table>
 
-<table>
+<table class="table table-bordered">
     <tr>
         <td class="basket_validation_box">
             <h3>{{ 'sonata.basket.title_delivery_address'|trans({}, 'SonataBasketBundle') }}</h3>
@@ -62,13 +62,11 @@ file that was distributed with this source code.
                 {{ basket.deliveryaddress.getFullAddress("<br />")|raw }}
                 <br />
             {% else %}
-                {{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}
+                <i>{{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}</i>
             {% endif %}
         </td>
         <td class="basket_validation_box">
-            <h3>{{ 'sonata.basket.title_payment_address'|trans({}, 'SonataBasketBundle') }}</h3>
-            {{  basket.paymentaddress.name }}
-
+            <h3>{{ 'sonata.basket.title_payment_address'|trans({}, 'SonataBasketBundle') }} ~ {{  basket.paymentaddress.name }}</h3>
             {{  basket.paymentaddress.getFullAddress("<br />")|raw }}
         </td>
     </tr>
@@ -86,18 +84,19 @@ file that was distributed with this source code.
     </tr>
 </table>
 
-<div class="basket_tac">
+<div class="basket_tac well pagination-centered">
     <h3>{{ 'sonata.basket.order_terms_and_conditions_title'|trans({}, 'SonataBasketBundle') }}</h3>
     <form action="{{ url('sonata_basket_final') }}" method="POST">
 
-        <input type="checkbox" name="tac" id="basket_tac"/>
         <label for="basket_tac">
-            {{ 'sonata.basket.label_terms_and_condition'|trans({}, 'SonataBasketBundle') }}
-            <a href="/page/terms-and-conditions">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</a>
+            <input type="checkbox" name="tac" id="basket_tac"/>
+            <strong>{{ 'sonata.basket.label_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</strong> <br />
+            <i><a href="/page/terms-and-conditions">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</a></i>
         </label>
-        <br />
 
-        <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" />
+        <br />
+        <br />
+        <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" class="btn btn-large btn-primary" />
 
         <div style="clear:both"></div>
     </form>
