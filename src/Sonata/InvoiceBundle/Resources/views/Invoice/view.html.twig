@@ -15,48 +15,103 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block content %}
-    <table class="table table-bordered">
-        <tr>
-            <th>Reference</th>
-            <td>{{ invoice.reference }}</td>
-        </tr>
-        <tr>
-            <th>Currency</th>
-            <td>{{ invoice.currency.label}}</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>{{ invoice.status }}</td>
-        </tr>
-        <tr>
-            <th>Total inc</th>
-            <td>{{ invoice.totalInc }}</td>
-        </tr>
-        <tr>
-            <th>Total exc</th>
-            <td>{{ invoice.totalExcl}}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ invoice.name }}</td>
-        </tr>
-        <tr>
-            <th>Phone</th>
-            <td>{{ invoice.phone }}</td>
-        </tr>
-        <tr>
-            <th>Address</th>
-            <td>{{ invoice.address1 }}</td>
-        </tr>
-        <tr>
-            <th>City</th>
-            <td>{{ invoice.city }}</td>
-        </tr>
-        <tr>
-            <th>Postcode</th>
-            <td>{{ invoice.postcode }}</td>
-        </tr>
-    </table>
+    <!-- Invoice -->
+    <div class="row">
+        <!-- Billing address -->
+        <div class="span7">
+            <h5>Billing address</h5>
+            <table class="table table-bordered">
+                <tr>
+                    <td>{{ invoice.name }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Address 1</th>
+                    <td>{{ invoice.address1 }}</td>
+                </tr>
+                <tr>
+                    <th>Address 2</th>
+                    <td>{{ invoice.address2 }}</td>
+                </tr>
+                <tr>
+                    <th>Address 3</th>
+                    <td>{{ invoice.address3 }}</td>
+                </tr>
+                <tr>
+                    <th>Postcode</th>
+                    <td>{{ invoice.postcode }}</td>
+                </tr>
+                <tr>
+                    <th>City & Country</th>
+                    <td>{{ invoice.city ~ ' - ' ~ invoice.country }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ invoice.phone }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- References -->
+        <div class="span3">
+            <h5>References</h5>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Invoice</th>
+                    <td>{{ invoice.reference }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Invoice elements -->
+    <div class="row">
+        <div class="span10">
+            <h5>Elements</h5>
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <th>Label</th>
+                    <th>Quantity</th>
+                    <th>Unit price</th>
+                    <th>VAT</th>
+                    <th>Total inc. VAT</th>
+                </tr>
+
+                {% for element in invoice.invoiceElements %}
+                    <tr>
+                        <td>{{ element.id }}</td>
+                        <td>{{ element.designation }}</td>
+                        <td>{{ element.quantity }}</td>
+                        <td>{{ element.price }}</td>
+                        <td>{{ element.vat }}</td>
+                        <td>{{ element.total }}</td>
+                    </tr>
+                {% endfor %}
+
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                    <th>Total excl. VAT</th>
+                    <td>{{ invoice.totalExcl }}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                    <th>Total inc. VAT</th>
+                    <td>{{ invoice.totalInc }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="row">
+        <div class="span6">
+            <h5>Payment</h5>
+
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block footer %}
