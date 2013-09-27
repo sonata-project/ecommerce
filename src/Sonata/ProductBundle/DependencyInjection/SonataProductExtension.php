@@ -246,6 +246,34 @@ class SonataProductExtension extends Extension
              'orphanRemoval' => false,
         ));
 
+        $collector->addAssociation($config['class']['product'], 'mapManyToOne', array(
+            'fieldName'    => 'parent',
+            'targetEntity' => $config['class']['product'],
+            'cascade'      => array(
+                'persist'
+            ),
+            'mappedBy'     => NULL,
+            'inversedBy'   => 'variations',
+            'joinColumns'  => array(
+                array(
+                    'name' => 'parent_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
+            'fieldName'     => 'variations',
+            'targetEntity'  => $config['class']['product'],
+            'cascade'       => array(
+                'persist'
+            ),
+            'mappedBy'      => 'parent',
+            'orphanRemoval' => false,
+        ));
+
         $collector->addIndex($config['class']['product'], 'enabled', array(
             'enabled'
         ));

@@ -94,11 +94,17 @@ abstract class BaseProduct implements ProductInterface
      */
     protected $deliveries;
 
+    /**
+     * @var ProductInterface
+     */
     protected $parent;
 
     protected $options = array();
 
-    protected $variations = array();
+    /**
+     * @var array
+     */
+    protected $variations;
 
     /**
      * @var Collection
@@ -458,6 +464,11 @@ abstract class BaseProduct implements ProductInterface
         $this->options = $options;
     }
 
+    /**
+     * Return true if the product is a variation, linked to a main product.
+     *
+     * @return boolean
+     */
     public function isVariation()
     {
         return $this->getParent() !== null;
@@ -546,17 +557,32 @@ abstract class BaseProduct implements ProductInterface
         return $this->image;
     }
 
-    public function setVariations($variations)
+    /**
+     * Set the Product variations.
+     *
+     * @param array $variations
+     */
+    public function setVariations(array $variations)
     {
         $this->variations = $variations;
     }
 
+    /**
+     * Get the variations.
+     *
+     * @return array
+     */
     public function getVariations()
     {
         return $this->variations;
     }
 
-    public function addVariation($variation)
+    /**
+     * Add a Product variation.
+     *
+     * @param ProductInterface $product
+     */
+    public function addVariation(ProductInterface $variation)
     {
         $this->variations[] = $variation;
     }

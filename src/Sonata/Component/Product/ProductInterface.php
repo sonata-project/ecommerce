@@ -145,4 +145,25 @@ interface ProductInterface
      * @return array
      */
     public function getDeliveries();
+
+    /**
+     * Set the Product variations.
+     *
+     * @param array $variations
+     */
+    public function setVariations(array $variations);
+
+    /**
+     * Get the variations.
+     *
+     * @return array
+     */
+    public function getVariations();
+
+    /**
+     * Add a Product variation.
+     *
+     * @param ProductInterface $product
+     */
+    public function addVariation(ProductInterface $product);
 }
