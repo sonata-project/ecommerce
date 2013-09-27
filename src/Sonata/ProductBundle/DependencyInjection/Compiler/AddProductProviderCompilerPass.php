@@ -54,6 +54,10 @@ class AddProductProviderCompilerPass implements CompilerPassInterface
 
                 $container->getDefinition($options['provider'])->addMethodCall('setBasketElementManager', array(new Reference('sonata.basket_element.manager')));
                 $container->getDefinition($options['provider'])->addMethodCall('setOrderElementClassName', array($container->getParameter('sonata.order.order_element.class')));
+
+                if (array_key_exists('variations', $options)) {
+                    $container->getDefinition($options['provider'])->addMethodCall('setVariationFields', array($options['variations']['fields']));
+                }
             }
         }
 
