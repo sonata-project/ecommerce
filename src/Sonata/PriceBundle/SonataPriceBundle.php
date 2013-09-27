@@ -13,6 +13,9 @@ namespace Sonata\PriceBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * @codeCoverageIgnore
+ */
 class SonataPriceBundle extends Bundle
 {
     /**

@@ -13,12 +13,14 @@ namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
 use Sonata\Tests\Component\Basket\Delivery;
 use Sonata\Tests\Component\Basket\Payment;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Delivery\BaseDelivery;
+use Sonata\Tests\Component\Product\Product;
 
 class Delivery extends BaseDelivery
 {
@@ -92,6 +94,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $product = $this->getMockProduct();
 
+        $product->expects($this->any())
+            ->method('isRecurrentPayment')
+            ->will($this->returnValue(false));
+
         $pool = new Pool;
         $pool->addProduct('product_code', $definition);
 
@@ -116,6 +122,24 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(30, $basket->getTotal(), '::getTotal() w/o vat return 30');
         $this->assertEquals(35.88, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
+        // Reccurent payments
+        $this->assertEquals(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
+
+        $newProduct = $this->getMockProduct();
+        $newProduct->expects($this->any())
+            ->method('isRecurrentPayment')
+            ->will($this->returnValue(true));
+
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $newProduct);
+
+        $basket->addBasketElement($basketElement);
+
+        $this->assertEquals(30, $basket->getTotal(false, false), '::getTotal() for non-recurrent payments only');
+
+        $basket->removeElement($basketElement);
+
+        // Delivery
         $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
@@ -126,32 +150,9 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
     public function testBasket()
     {
-        $basket = new Basket;
+        $basket = $this->getPreparedBasket();
 
-        // create the provider mock
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
-
-        $provider->expects($this->any())
-            ->method('basketCalculatePrice')
-            ->will($this->returnValue(15));
-
-        $provider->expects($this->any())
-            ->method('isAddableToBasket')
-            ->will($this->returnValue(true));
-
-        // create the product manager mock
-        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
-        $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
-
-        $definition = new ProductDefinition($provider, $manager);
-
-        // retrieve the product mock
         $product = $this->getMockProduct();
-
-        $pool = new Pool;
-        $pool->addProduct('product_code', $definition);
-
-        $basket->setProductPool($pool);
 
         // check if the product is part of the basket
         $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
@@ -163,27 +164,51 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
-        $delivery = new Delivery();
-        $basket->setDeliveryMethod($delivery);
-
+        // Covering all of the isValid method
         $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
-        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check');
+        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
 
-        $payment = $this->getMock('Sonata\Component\Payment\PaymentInterface');
-        $payment->expects($this->any())->method('getVat')->will($this->returnValue(19.6));
-        $payment->expects($this->any())->method('getPrice')->will($this->returnValue(120));
+        $invalidBasketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $invalidBasketElement->expects($this->any())
+            ->method('isValid')
+            ->will($this->returnValue(false));
+        $invalidBasketElement->expects($this->any())
+            ->method('getPosition')
+            ->will($this->returnValue(1));
+        $invalidBasketElement->expects($this->any())
+            ->method('getProduct')
+            ->will($this->returnValue($product));
 
-        $basket->setPaymentMethod($payment);
+        $basket->addBasketElement($invalidBasketElement);
+        $this->assertFalse($basket->isValid(true), '::isValid() return false if an element is invalid');
 
-        $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
-        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check');
+        $basket->setBasketElements(array());
+        $basket->addBasketElement($basketElement);
+        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
 
-        $address = $this->getMockAddress();
-        $basket->setPaymentAddress($address);
-        $basket->setDeliveryAddress($address);
+        $basket->setPaymentAddress($this->getMockAddress());
+        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment method is invalid');
 
-        $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
-        $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check');
+        $basket->setPaymentMethod($this->getMock('Sonata\Component\Payment\PaymentInterface'));
+        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery method is invalid');
+
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod->expects($this->any())
+            ->method('isAddressRequired')
+            ->will($this->returnValue(false));
+        $basket->setDeliveryMethod($deliveryMethod);
+        $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check because delivery method doesn\'t require an address');
+
+        $requiredDelivery = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $requiredDelivery->expects($this->any())
+            ->method('isAddressRequired')
+            ->will($this->returnValue(true));
+        $basket->setDeliveryMethod($requiredDelivery);
+        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery address is invalid');
+
+        $basket->setDeliveryAddress($this->getMockAddress());
+        $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check because everything is fine');
+
 
         $this->assertTrue($basket->isAddable($product), '::isAddable() return true');
         $this->assertFalse($basket->hasRecurrentPayment(), '::hasRecurrentPayment() return false');
@@ -228,15 +253,14 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket->addBasketElement($basketElement);
 
+        $basket->setDeliveryAddress($this->getMockAddress());
+        $basket->setPaymentAddress($this->getMockAddress());
+        $basket->setCustomer($this->getMock('Sonata\Component\Customer\CustomerInterface'));
+
         $data = $basket->serialize();
 
         $this->assertTrue(is_string($data));
-        $this->assertStringStartsWith('a:9:', $data, 'the serialize array has 9 elements');
-
-        $basket->reset();
-        $this->assertTrue(count($basket->getBasketElements()) == 0, '::reset() remove all elements');
-        $basket->unserialize($data);
-        $this->assertTrue(count($basket->getBasketElements()) == 1, '::unserialize() restore elements');
+        $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensurring all needed keys are present
         $expectedKeys = array(
@@ -247,7 +271,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             'cptElement',
             'options',
             'locale',
-            'currency'
+            'currency',
+            'deliveryAddress',
+            'paymentAddress',
+            'customer'
         );
 
         $basketData = unserialize($data);
@@ -255,5 +282,205 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         foreach ($expectedKeys as $key) {
             $this->assertArrayHasKey($key, $basketData);
         }
+
+        $basket->setDeliveryAddressId(1);
+        $basket->setPaymentAddressId(2);
+        $basket->setCustomerId(3);
+
+        $data = $basket->serialize();
+
+        $this->assertTrue(is_string($data));
+        $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
+
+        // Ensurring all needed keys are present
+        $expectedKeys = array(
+            'basketElements',
+            'positions',
+            'deliveryMethodCode',
+            'paymentMethodCode',
+            'cptElement',
+            'options',
+            'locale',
+            'currency',
+            'deliveryAddressId',
+            'paymentAddressId',
+            'customerId'
+        );
+
+        $basketData = unserialize($data);
+
+        foreach ($expectedKeys as $key) {
+            $this->assertArrayHasKey($key, $basketData);
+        }
+
+        $basket->reset();
+        $this->assertTrue(count($basket->getBasketElements()) == 0, '::reset() remove all elements');
+        $basket->unserialize($data);
+        $this->assertTrue(count($basket->getBasketElements()) == 1, '::unserialize() restore elements');
+    }
+
+    /**
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage The product does not exist
+     */
+    public function testGetElementRaisesException()
+    {
+        $basket = new Basket();
+        $basket->getElement(new Product());
+    }
+
+    public function testHasRecurrentPayment()
+    {
+        $basket = $this->getPreparedBasket();
+
+        $product = $this->getMockProduct();
+        $product->expects($this->once())
+            ->method('isRecurrentPayment')
+            ->will($this->returnValue(true));
+
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $product);
+
+        $basket->addBasketElement($basketElement);
+
+        $this->assertTrue($basket->hasRecurrentPayment());
+    }
+
+    public function testHasProduct()
+    {
+        $basket = $this->getPreparedBasket();
+
+        $product = $this->getMockProduct();
+
+        $this->assertFalse($basket->hasProduct($product), '::hasProduct false because basket is empty');
+
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($product));
+        $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(1042));
+
+        $basket->addBasketElement($basketElement);
+
+        $this->assertFalse($basket->hasProduct($product), '::hasProduct false because position invalid');
+
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $product);
+
+        $basket->addBasketElement($basketElement);
+
+        $this->assertTrue($basket->hasProduct($product), '::hasProduct true');
+    }
+
+    public function testBuildPrices()
+    {
+        $basket = $this->getPreparedBasket();
+
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockAddress()));
+        $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
+
+        $basket->addBasketElement($basketElement);
+
+        $basket->buildPrices();
+
+        $this->assertEquals(0, count($basket->getBasketElements()));
+    }
+
+    public function testClean()
+    {
+        $basket = $this->getPreparedBasket();
+
+        $product = $this->getMockProduct();
+
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($product));
+        $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
+
+        $deletedBasketElement = clone $basketElement;
+        $deletedBasketElement->expects($this->any())->method('getDelete')->will($this->returnValue(true));
+
+        $basket->addBasketElement($basketElement);
+        $basket->addBasketElement($deletedBasketElement);
+
+        $basket->clean();
+
+        $this->assertEquals(1, count($basket->getBasketElements()));
+    }
+
+    public function testGettersSetters()
+    {
+        $basket = $this->getPreparedBasket();
+
+        $product = $this->getMockProduct();
+
+        $basketElement = new BasketElement();
+        $basketElement->setProduct('product_code', $product);
+
+        $basket->setBasketElements(array($basketElement));
+        $this->assertEquals(array($basketElement), $basket->getBasketElements());
+
+        $basket->setDeliveryAddressId(1);
+        $this->assertEquals(1, $basket->getDeliveryAddressId());
+
+        $basket->setPaymentAddressId(1);
+        $this->assertEquals(1, $basket->getPaymentAddressId());
+
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod->expects($this->any())
+            ->method('getCode')
+            ->will($this->returnValue(1));
+        $basket->setDeliveryMethod($deliveryMethod);
+        $this->assertEquals(1, $basket->getDeliveryMethodCode());
+
+        $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
+        $paymentMethod->expects($this->any())
+            ->method('getCode')
+            ->will($this->returnValue(1));
+        $basket->setPaymentMethod($paymentMethod);
+        $this->assertEquals(1, $basket->getPaymentMethodCode());
+
+        $basket->setCustomerId(1);
+        $this->assertEquals(1, $basket->getCustomerId());
+
+        $options = array('option1' => 'value1', 'option2' => 'value2');
+        $basket->setOptions($options);
+        $this->assertNull($basket->getOption('unexisting_option'));
+        $this->assertEquals(42, $basket->getOption('unexisting_option', 42));
+        $this->assertEquals('value1', $basket->getOption('option1'));
+        $this->assertEquals($options, $basket->getOptions());
+
+        $basket->setOption('option3', 'value3');
+        $this->assertEquals('value3', $basket->getOption('option3'));
+
+        $basket->setLocale('en');
+        $this->assertEquals('en', $basket->getLocale());
+    }
+
+    protected function getPreparedBasket()
+    {
+        $basket = new Basket();
+
+        // create the provider mock
+        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+
+        $provider->expects($this->any())
+            ->method('basketCalculatePrice')
+            ->will($this->returnValue(15));
+
+        $provider->expects($this->any())
+            ->method('isAddableToBasket')
+            ->will($this->returnValue(true));
+
+        // create the product manager mock
+        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
+
+        $definition = new ProductDefinition($provider, $manager);
+
+        $pool = new Pool;
+        $pool->addProduct('product_code', $definition);
+
+        $basket->setProductPool($pool);
+
+        return $basket;
     }
 }

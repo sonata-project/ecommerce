@@ -306,7 +306,10 @@ class Basket implements \Serializable, BasketInterface
      */
     public function setBasketElements($basketElements)
     {
-        $this->basketElements = $basketElements;
+        $this->basketElements = array();
+        foreach ($basketElements as $basketElement) {
+            $this->addBasketElement($basketElement);
+        }
     }
 
     /**
@@ -499,7 +502,7 @@ class Basket implements \Serializable, BasketInterface
         foreach ($this->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();
 
-            if (!is_object($product)) {
+            if (!$product instanceof ProductInterface) {
                 $this->removeElement($basketElement);
 
                 continue;
@@ -533,7 +536,6 @@ class Basket implements \Serializable, BasketInterface
         $arrayRep = array(
             'basketElements'        => $this->getBasketElements(),
             'positions'             => $this->positions,
-            'paymentAddressId'      => $this->paymentAddressId,
             'paymentMethodCode'     => $this->paymentMethodCode,
             'cptElement'            => $this->cptElement,
             'deliveryMethodCode'    => $this->deliveryMethodCode,
