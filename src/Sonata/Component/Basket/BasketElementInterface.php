@@ -115,9 +115,10 @@ interface BasketElementInterface
      * return a option value depends on the $name
      *
      * @param  string $name
+     * @param  mixed  $default Default value if option not found
      * @return mixed
      */
-    public function getOption($name);
+    public function getOption($name, $default = null);
 
     /**
      * Define the option value

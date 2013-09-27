@@ -381,10 +381,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param  null|\Sonata\Component\Product\ProductInterface $product
-     * @param  array                                           $options
-     * @return void
+     * {@inheritdoc}
      */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = array())
     {

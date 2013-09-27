@@ -12,6 +12,7 @@
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Product\ProductDefinition;
 
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
@@ -83,5 +84,71 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $basketElement->setProduct('product_code', $product);
 
         $this->assertEquals(false, $basketElement->isValid(), 'BasketElement returns the correct default quantity');
+    }
+
+    public function testGettersSetters()
+    {
+        $basketElement = new BasketElement();
+
+        $this->assertEquals(0, $basketElement->getVat());
+        $this->assertEquals(0, $basketElement->getUnitPrice());
+        $this->assertFalse($basketElement->isValid());
+
+        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+
+        $productDefinition = new ProductDefinition($provider, $manager);
+
+        // Tests getProduct
+        $this->assertNull($basketElement->getProduct());
+
+        $basketElement->setProductDefinition($productDefinition);
+
+        $this->assertNull($basketElement->getProduct());
+
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product->expects($this->any())
+            ->method('getId')
+            ->will($this->returnValue(42));
+
+        $basketElement->setProduct('product_code', $product);
+        $this->assertEquals($product, $basketElement->getProduct());
+
+        // Tests setProductId
+        $basketElement->setProductId(42);
+        $this->assertEquals(42, $basketElement->getProductId());
+
+        $basketElement->setProductId(24);
+        $this->assertNull($basketElement->getProductId());
+
+        $manager->expects($this->any())
+            ->method('findOneBy')
+            ->will($this->returnValue($product));
+
+        $basketElement->setProductDefinition(new ProductDefinition($provider, $manager));
+
+        $basketElement->setProductId(42);
+        $basketElement->setProduct('product_code', $product); // Done by the provider hereby mocked, hence we do it manually
+        $this->assertEquals($product->getId(), $basketElement->getProductId());
+
+        // Options
+        $options = array('option1' => 'value1', 'option2' => 'value2');
+        $basketElement->setOptions($options);
+        $this->assertNull($basketElement->getOption('unexisting_option'));
+        $this->assertEquals(42, $basketElement->getOption('unexisting_option', 42));
+        $this->assertEquals('value1', $basketElement->getOption('option1'));
+        $this->assertEquals($options, $basketElement->getOptions());
+
+        $basketElement->setOption('option3', 'value3');
+        $this->assertEquals('value3', $basketElement->getOption('option3'));
+
+
+        // Other getters & setters
+        $this->assertEquals($provider, $basketElement->getProductProvider());
+        $this->assertEquals($manager, $basketElement->getProductManager());
+        $this->assertEquals('product_code', $basketElement->getProductCode());
+
+        $basketElement->setDelete(false);
+        $this->assertFalse($basketElement->getDelete());
     }
 }

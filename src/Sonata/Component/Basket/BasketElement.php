@@ -214,10 +214,10 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function getOption($name)
+    public function getOption($name, $default = null)
     {
         if (!array_key_exists($name, $this->options)) {
-            return null;
+            return $default;
         }
 
         return $this->options[$name];

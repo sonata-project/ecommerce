@@ -120,4 +120,12 @@ interface ProductProviderInterface
      * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
      */
     public function buildCreateForm(FormMapper $formMapper);
+
+    /**
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  null|\Sonata\Component\Product\ProductInterface $product
+     * @param  array                                           $options
+     * @return void
+     */
+    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = array());
 }
