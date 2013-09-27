@@ -14,17 +14,19 @@ namespace Sonata\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\FormView;
-
+use Symfony\Component\HttpFoundation\Response;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 
 class ProductController extends Controller
 {
     /**
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @param $productId
      * @param $slug
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     *
+     * @throws NotFoundHttpException
+     *
+     * @return Response
      */
     public function viewAction($productId, $slug)
     {
@@ -57,7 +59,8 @@ class ProductController extends Controller
      * @param  \Symfony\Component\Form\FormView                    $formView
      * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
      * @param  \Sonata\Component\Basket\BasketInterface            $basket
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     *
+     * @return Response
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
     {
@@ -84,7 +87,8 @@ class ProductController extends Controller
     /**
      * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
      * @param  \Sonata\Component\Basket\BasketInterface            $basket
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     *
+     * @return Response
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
     {
@@ -110,10 +114,35 @@ class ProductController extends Controller
     /**
      * @param $productId
      * @param $slug
-     * @return void
+     *
+     * @throws NotFoundHttpException
+     *
+     * @return Response
      */
     public function viewVariationsAction($productId, $slug)
     {
+        $product = is_object($productId) ? $productId : $this->get('sonata.product.collection.manager')->findOneBy(array('id' =>  $productId));
 
+        if (!$product) {
+            throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
+        }
+
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
+
+        $action = sprintf('%s:viewVariations', $provider->getBaseControllerName());
+        $response = $this->forward($action, array(
+            'product' => $product
+        ));
+
+        if ($this->get('kernel')->isDebug()) {
+            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
+                $this->get('sonata.product.pool')->getProductCode($product),
+                $product->getId(),
+                $action,
+                $response->getContent()
+            ));
+        }
+
+        return $response;
     }
 }

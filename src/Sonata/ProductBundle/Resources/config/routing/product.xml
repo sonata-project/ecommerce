@@ -9,7 +9,7 @@
     </route>
 
     <route id="sonata_product_view_variations" pattern="/{productId}/{slug}/variations">
-        <default key="_controller">SonataProductBundle:Product:view</default>
+        <default key="_controller">SonataProductBundle:Product:viewVariations</default>
     </route>
 
 </routes>

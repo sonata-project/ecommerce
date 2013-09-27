@@ -14,7 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\FormView;
-
+use Symfony\Component\HttpFoundation\Response;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Basket\BasketInterface;
@@ -22,9 +22,11 @@ use Sonata\Component\Basket\BasketInterface;
 abstract class BaseProductController extends Controller
 {
     /**
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @param $product
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     *
+     * @throws NotFoundHttpException
+     *
+     * @return Response
      */
     public function viewAction($product)
     {
@@ -49,10 +51,11 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param  \Symfony\Component\Form\FormView                    $formView
-     * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
-     * @param  \Sonata\Component\Basket\BasketInterface            $basket
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @param FormView               $formView
+     * @param BasketElementInterface $basketElement
+     * @param BasketInterface        $basket
+     *
+     * @return Response
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
     {
@@ -66,9 +69,10 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
-     * @param  \Sonata\Component\Basket\BasketInterface            $basket
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @param BasketElementInterface $basketElement
+     * @param BasketInterface        $basket
+     *
+     * @return Response
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
     {
@@ -81,12 +85,23 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param string $productId
-     * @param string $slug
+     * @param $product
+     *
+     * @throws NotFoundHttpException
+     *
+     * @return Response
      */
-    public function viewVariationsAction($productId, $slug)
+    public function viewVariationsAction($product)
     {
+        if (!is_object($product)) {
+            throw new NotFoundHttpException('invalid product instance');
+        }
 
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
+
+        return $this->render(sprintf('%s:view_variations.html.twig', $provider->getBaseControllerName()), array(
+            'product' => $product,
+        ));
     }
 
     /**
