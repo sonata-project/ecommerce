@@ -14,7 +14,7 @@ use Sonata\OrderBundle\Entity\OrderManager;
 use Application\Sonata\OrderBundle\Entity\OrderElement;
 
 /**
- * Class CurrencyDataTransformerTest
+ * Class OrderManagerTest
  *
  * @package Sonata\Test\OrderBundle\Entity
  *
@@ -28,6 +28,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $orderManager = new OrderManager($em, 'Application\Sonata\OrderBundle\Entity\OrderElement');
 
         $this->assertEquals('Application\Sonata\OrderBundle\Entity\OrderElement', $orderManager->getClass());
+
         unset($orderManager, $em);
     }
 
@@ -37,6 +38,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $orderManager = new OrderManager($em, 'Application\Sonata\OrderBundle\Entity\OrderElement');
         $orderElement = $orderManager->create();
         $this->assertInstanceOf('Application\Sonata\OrderBundle\Entity\OrderElement', $orderElement);
+
         unset($orderManager, $em, $orderElement);
     }
 
@@ -50,6 +52,8 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $orderManager = new OrderManager($em, 'Application\Sonata\OrderBundle\Entity\OrderElement');
         $orderElement = $this->getMock('Sonata\Component\Order\OrderInterface');
         $orderManager->save($orderElement);
+
+        unset($em, $orderManager, $orderElement);
     }
 
     public function testDelete()
@@ -62,6 +66,8 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $orderManager = new OrderManager($em, 'Application\Sonata\OrderBundle\Entity\OrderElement');
         $orderElement = $this->getMock('Sonata\Component\Order\OrderInterface');
         $orderManager->delete($orderElement);
+
+        unset($em, $orderManager, $orderElement);
     }
 
 }
