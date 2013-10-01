@@ -15,8 +15,8 @@ use Doctrine\ORM\EntityManager as BaseEntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sonata\Component\Generator\MysqlReference;
 
-use Application\Sonata\InvoiceBundle\Entity\Invoice;
-use Application\Sonata\OrderBundle\Entity\Order;
+use Sonata\InvoiceBundle\Entity\BaseInvoice;
+use Sonata\OrderBundle\Entity\BaseOrder;
 
 class EntityManager extends BaseEntityManager
 {
@@ -29,20 +29,44 @@ class EntityManager extends BaseEntityManager
     }
 }
 
-class InvoiceMock extends Invoice
+class InvoiceMock extends BaseInvoice
 {
+    protected $id;
+
     public function setId($id)
     {
         $this->id = $id;
     }
+
+    /**
+     * Returns id
+     *
+     * @return int $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }
 
-class OrderMock extends Order
+class OrderMock extends BaseOrder
 {
+    protected $id;
+
     public function setId($id)
     {
         $this->id = $id;
     }
+
+    /**
+     * @return integer the order id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }
 
 /**
