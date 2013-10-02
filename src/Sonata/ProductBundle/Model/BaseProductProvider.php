@@ -128,6 +128,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement)
     {
+        /** @var \Sonata\OrderBundle\Entity\BaseOrderElement $orderElement */
         $orderElement = new $this->orderElementClassName;
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setPrice($basketElement->getTotal(false));

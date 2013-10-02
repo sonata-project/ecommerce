@@ -18,10 +18,13 @@ abstract class BaseBasket extends Basket
     public function setBasketElements($basketElements)
     {
         foreach ($basketElements as $basketElement) {
-            $basketElement->setBasket($this);
-        }
+            if (!$basketElement instanceof \Sonata\Component\Basket\BasketElementInterface) {
+                continue;
+            }
 
-        $this->basketElements = $basketElements;
+            $basketElement->setBasket($this);
+            $this->addBasketElement($basketElement);
+        }
     }
 
     /**

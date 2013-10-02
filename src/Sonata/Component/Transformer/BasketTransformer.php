@@ -10,6 +10,7 @@
 
 namespace Sonata\Component\Transformer;
 
+use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\DeliveryInterface;
@@ -59,10 +60,10 @@ class BasketTransformer extends BaseTransformer
      */
     public function transformIntoOrder(BasketInterface $basket)
     {
+        // Customer
         $customer = $basket->getCustomer();
 
-        // Customer
-        if (!is_object($customer)) {
+        if (!$customer instanceof CustomerInterface) {
             if ($this->getLogger()) {
                 $this->getLogger()->emergency('[Sonata\Component\Payment\Transform\Basket::transform] the customer is not valid');
             }
