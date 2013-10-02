@@ -72,7 +72,7 @@ class OrderMock extends BaseOrder
 /**
  * Class MysqlReferenceTest
  *
- * @package Sonata\Test\OrderBundle\Entity
+ * @package Sonata\Test\Component\Generator
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
