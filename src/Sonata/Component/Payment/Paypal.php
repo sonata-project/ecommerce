@@ -114,6 +114,18 @@ class Paypal extends BasePaypal
     }
 
     /**
+     * Default encryption method
+     *
+     * @param $hash
+     *
+     * @return string
+     */
+    public function encrypt($hash)
+    {
+        return $this->encryptViaBuffer($hash);
+    }
+
+    /**
      *
      * From paypal documentation:
      *
@@ -229,7 +241,7 @@ class Paypal extends BasePaypal
             default:
 
                 if ($this->getLogger()) {
-                    $this->getLogger()->emergency(sprintf('[Paypal:handlerError] STATUS_PENDING - uncaught error code %s', $transaction->getErrorCode()));
+                    $this->getLogger()->emergency(sprintf('[Paypal:handlerError] STATUS_PENDING - uncaught error'));
                 }
         }
 

@@ -12,6 +12,7 @@
 namespace Sonata\Component\Product;
 
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
@@ -128,4 +129,17 @@ interface ProductProviderInterface
      * @return void
      */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = array());
+
+    /**
+     * return an array of errors if any, you can also manipulate the basketElement if require
+     * please not you always work with a clone version of the basketElement.
+     *
+     * If the basket is valid it will then replace the one in session
+     *
+     * @param  \Sonata\AdminBundle\Validator\ErrorElement      $errorElement
+     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  \Sonata\Component\Basket\BasketInterface        $basket
+     * @return void
+     */
+    public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket);
 }

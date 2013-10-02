@@ -430,15 +430,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * return an array of errors if any, you can also manipulate the basketElement if require
-     * please not you always work with a clone version of the basketElement.
-     *
-     * If the basket is valid it will then replace the one in session
-     *
-     * @param  \Sonata\AdminBundle\Validator\ErrorElement      $errorElement
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param  \Sonata\Component\Basket\BasketInterface        $basket
-     * @return void
+     * {@inheritdoc}
      */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket)
     {

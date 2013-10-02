@@ -38,6 +38,7 @@ class CurrencyDataTransformerTest extends \PHPUnit_Framework_TestCase
         $currency->setLabel("EUR");
 
         $this->assertEquals("EUR", $this->currencyDataTransformer->transform($currency));
+        $this->assertEquals("EUR", $this->currencyDataTransformer->transform("EUR"));
     }
 
     public function testReverseTransform()

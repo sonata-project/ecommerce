@@ -27,6 +27,11 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testGetName()
+    {
+        $this->assertEquals("currency", Type::getType('currency')->getName());
+    }
+
     public function testConvertToDatabaseValue()
     {
         $platform = new MockPlatform();
@@ -40,6 +45,16 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage 'currency' type only handles values of type Sonata\Component\Currency\CurrencyInterface ; value of type string given
+     */
+    public function testConvertToDatabaseValueException()
+    {
+        $platform = new MockPlatform();
+        Type::getType('currency')->convertToDatabaseValue("EUR", $platform);
+    }
+
     public function testConvertToPHPValue()
     {
         $platform = new MockPlatform();
@@ -51,6 +66,16 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
             $currency,
             Type::getType('currency')->convertToPHPValue('EUR', $platform)
         );
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage '42' is not a supported currency.
+     */
+    public function testConvertToPHPValueException()
+    {
+        $platform = new MockPlatform();
+        Type::getType('currency')->convertToPHPValue('42', $platform);
     }
 
     public function testGetDefaultLength()

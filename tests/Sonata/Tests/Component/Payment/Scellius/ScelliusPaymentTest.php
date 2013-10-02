@@ -105,6 +105,119 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
 //        $payment->applyTransactionId($transaction);
     }
 
+    public function testSendConfirmationReceipt()
+    {
+        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
+        $payment->setOptions(array(
+            'base_folder'    => __DIR__,
+            'response_command' => 'cat response_ko.txt && echo '
+        ));
+
+        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction->expects($this->any())->method('get')->will($this->returnValue('" >> /dev/null'));
+        $transaction->expects($this->any())->method('getParameters')->will($this->returnValue(array()));
+        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($this->getMock('Sonata\Component\Order\OrderInterface')));
+
+        $this->assertFalse($payment->sendConfirmationReceipt($transaction));
+
+        $payment->setOptions(array(
+            'base_folder'    => __DIR__,
+            'response_command' => 'cat response_nok.txt && echo '
+        ));
+
+        $this->assertFalse($payment->sendConfirmationReceipt($transaction));
+
+        $payment->setOptions(array(
+            'base_folder'    => __DIR__,
+            'response_command' => 'cat response_code_nok.txt && echo '
+        ));
+
+        $this->assertFalse($payment->sendConfirmationReceipt($transaction));
+
+        $payment->setOptions(array(
+            'base_folder'    => __DIR__,
+            'response_command' => 'cat response_ok.txt && echo '
+        ));
+
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
+    }
+
+    public function testIsCallbackValid()
+    {
+        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
+
+        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
+
+        $check = sha1(
+            $order->getReference().
+            $order->getCreatedAt()->format("m/d/Y:G:i:s").
+            $order->getId()
+        );
+
+        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction->expects($this->once())->method('getOrder')->will($this->returnValue(null));
+
+        $this->assertFalse($payment->isCallbackValid($transaction));
+
+        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->once())->method('get')->will($this->returnValue($check));
+
+        $this->assertTrue($payment->isCallbackValid($transaction));
+
+        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->once())->method('get')->will($this->returnValue('untest'));
+        $transaction->expects($this->once())->method('setState');
+        $transaction->expects($this->once())->method('setStatusCode');
+        $transaction->expects($this->once())->method('addInformation');
+
+        $this->assertFalse($payment->isCallbackValid($transaction));
+    }
+
+    public function testGetOrderReference()
+    {
+        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
+
+        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction->expects($this->once())->method('get')->will($this->returnValue("reference"));
+
+        $this->assertEquals("reference", $payment->getOrderReference($transaction));
+    }
+
+    public function testApplyTransactionId()
+    {
+        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+
+        $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
+
+        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction->expects($this->once())->method('setTransactionId');
+
+        $payment->applyTransactionId($transaction);
+    }
+
+
+
     /**
      * @expectedException \RuntimeException
      */

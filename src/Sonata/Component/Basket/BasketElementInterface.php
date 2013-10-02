@@ -177,6 +177,11 @@ interface BasketElementInterface
     public function getProductManager();
 
     /**
+     * @return \Sonata\Component\Product\ProductProviderInterface
+     */
+    public function getProductProvider();
+
+    /**
      * @return string
      */
     public function getProductCode();

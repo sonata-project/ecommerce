@@ -11,6 +11,7 @@
 
 namespace Sonata\Tests\Component\Currency;
 
+use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Currency\CurrencyInterface;
 
@@ -58,6 +59,24 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+    }
+
+    /**
+     * @covers Sonata\Component\Currency\CurrencyDetector::__construct
+     */
+    public function testConstruct()
+    {
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+
+        $currencyManager = $this->getMock('Sonata\Component\Currency\CurrencyManagerInterface');
+        $currencyManager->expects($this->any())
+            ->method('findOneByLabel')
+            ->will($this->returnValue($currency))
+        ;
+
+        $currencyDetector = new CurrencyDetector('EUR', $currencyManager);
+        $this->assertEquals('EUR', $currencyDetector->getCurrency()->getLabel());
     }
 
     /**
