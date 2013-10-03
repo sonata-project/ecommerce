@@ -42,7 +42,14 @@ class ORMInheritanceSubscriberTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($subscriber->loadClassMetadata($metadata));
         unset($fakedMetadata);
 
-        $metadata->name = 'Application\Sonata\ProductBundle\Entity\Product';
+
+        $classMetadata = $this->getMockBuilder('Doctrine\ORM\Mapping\ClassMetadata')->disableOriginalConstructor()->getMock();
+        $classMetadata->name = 'Application\Sonata\ProductBundle\Entity\Product';
+        $metadata = $this->getMockBuilder('Doctrine\ORM\Event\LoadClassMetadataEventArgs')->disableOriginalConstructor()->getMock();
+        $metadata->expects($this->any())
+            ->method('getClassMetadata')
+            ->will($this->returnValue($classMetadata));
+
         try {
             $subscriber->loadClassMetadata($metadata);
         }
