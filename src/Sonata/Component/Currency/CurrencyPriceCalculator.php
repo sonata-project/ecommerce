@@ -12,8 +12,12 @@ class CurrencyPriceCalculator implements CurrencyPriceCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getPriceForProductInCurrency(ProductInterface $product, CurrencyInterface $currency)
+    public function getPrice(ProductInterface $product, CurrencyInterface $currency)
     {
-        // TODO Auto-generated method stub
+        if (null === $product->getCurrency() || !$currency->equals($product->getCurrency())) {
+            throw new UnavailableForCurrencyException($product, $currency);
+        }
+
+        return $product->getPrice();
     }
 }

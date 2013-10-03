@@ -31,4 +31,14 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('EUR', $currency->getLabel());
         $this->assertEquals('EUR', $currency->__toString());
     }
+
+    public function testEquals()
+    {
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+
+        $this->assertFalse($currency->equals(null));
+        $this->assertFalse($currency->equals(new Currency()));
+        $this->assertTrue($currency->equals($currency));
+    }
 }

@@ -26,5 +26,5 @@ interface CurrencyPriceCalculatorInterface
      *
      * @return float
      */
-    public function getPriceForProductInCurrency(ProductInterface $product, CurrencyInterface $currency);
+    public function getPrice(ProductInterface $product, CurrencyInterface $currency);
 }

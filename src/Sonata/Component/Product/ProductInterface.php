@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\DeliveryInterface;
 
 interface ProductInterface
@@ -39,6 +40,16 @@ interface ProductInterface
      * @param float $vat the product vat
      */
     public function setVat($vat);
+
+    /**
+     * @return CurrencyInterface
+     */
+    public function getCurrency();
+
+    /**
+     * @param CurrencyInterface $currency
+     */
+    public function setCurrency(CurrencyInterface $currency);
 
     /**
      * @return string the product name

@@ -24,6 +24,15 @@ interface CurrencyInterface
     public function getLabel();
 
     /**
+     * Currency comparison
+     *
+     * @param mixed $currency
+     *
+     * @return bool
+     */
+    public function equals($currency);
+
+    /**
      * Returns currency's symbol
      *
      * @return string

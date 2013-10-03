@@ -50,6 +50,17 @@ class Currency implements CurrencyInterface
 
         return $this;
     }
+    /**
+     * {@inheritdoc}
+     */
+    public function equals($currency)
+    {
+        if (!$currency instanceof CurrencyInterface) {
+            return false;
+        }
+
+        return $this->getLabel() === $currency->getLabel();
+    }
 
     /**
      * {@inheritdoc}

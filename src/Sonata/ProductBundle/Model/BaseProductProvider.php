@@ -11,6 +11,7 @@
 namespace Sonata\ProductBundle\Model;
 
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
@@ -60,11 +61,32 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $orderElementClassName;
 
     /**
+     * @var CurrencyPriceCalculatorInterface
+     */
+    protected $currencyPriceCalculator;
+
+    /**
      * @param \JMS\Serializer\SerializerInterface $serializer
      */
     public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
+    }
+
+    /**
+     * @param \Sonata\Component\Currency\CurrencyPriceCalculatorInterface $currencyPriceCalculator
+     */
+    public function setCurrencyPriceCalculator(CurrencyPriceCalculatorInterface $currencyPriceCalculator)
+    {
+        $this->currencyPriceCalculator = $currencyPriceCalculator;
+    }
+
+    /**
+     * @return \Sonata\Component\Currency\CurrencyPriceCalculatorInterface
+     */
+    public function getCurrencyPriceCalculator()
+    {
+        return $this->currencyPriceCalculator;
     }
 
     /**
@@ -559,7 +581,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement)
     {
-        return $basketElement->getProduct()->getPrice();
+        return $this->currencyPriceCalculator->getPrice($basketElement->getProduct(), $basket->getCurrency());
     }
 
     /**

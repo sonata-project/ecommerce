@@ -10,6 +10,7 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\DeliveryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
@@ -61,6 +62,11 @@ abstract class BaseProduct implements ProductInterface
      * @var float $vat
      */
     protected $vat;
+
+    /**
+     * @var CurrencyInterface
+     */
+    protected $currency;
 
     /**
      * @var integer $stock
@@ -639,5 +645,21 @@ abstract class BaseProduct implements ProductInterface
         }
 
         return $text;
+    }
+
+    /**
+     * @return CurrencyInterface
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param CurrencyInterface $currency
+     */
+    public function setCurrency(CurrencyInterface $currency)
+    {
+        $this->currency = $currency;
     }
 }
