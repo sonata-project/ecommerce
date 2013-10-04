@@ -146,11 +146,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param  string                                          $format
+     *
      * @return \Sonata\Component\Order\OrderElementInterface
      */
-    public function createOrderElement(BasketElementInterface $basketElement)
+    public function createOrderElement(BasketElementInterface $basketElement, $format = 'json')
     {
-        /** @var \Sonata\OrderBundle\Entity\BaseOrderElement $orderElement */
         $orderElement = new $this->orderElementClassName;
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setPrice($basketElement->getTotal(false));
@@ -165,7 +166,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $product = $basketElement->getProduct();
         $orderElement->setDescription($product->getDescription());
         $orderElement->setProductId($product->getId());
-        $orderElement->setRawProduct($this->getRawProduct($product, 'json'));
+        $orderElement->setRawProduct($this->getRawProduct($product, $format));
 
         return $orderElement;
     }
@@ -539,7 +540,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @throws \RuntimeException
      *
-     * @return bool|\Sonata\Component\Basket\Product
+     * @return bool|\Sonata\Component\Basket\BasketElementInterface
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement)
     {
