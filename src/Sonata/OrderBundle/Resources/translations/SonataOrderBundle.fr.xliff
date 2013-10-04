@@ -350,6 +350,84 @@
             </trans-unit>
             <!-- End - Filters translations -->
 
+            <!-- Begin - View order translations -->
+            <trans-unit id="cd1ee80f02c42f829921dc83968295ac4d8510db" resname="sonata.order.title_order">
+                <jms:reference-file line="12">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.title_order</source>
+                <target state="new">Your order</target>
+            </trans-unit>
+            <trans-unit id="36000a45fc8c65b3c47545c617de17bed6cab9de" resname="sonata.order.view.date">
+                <jms:reference-file line="28">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.date</source>
+                <target state="new">Date</target>
+            </trans-unit>
+            <trans-unit id="97532e6518b1c14657955f3601b99964ba282c7a" resname="sonata.order.view.delivery">
+                <jms:reference-file line="58">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.delivery</source>
+                <target state="new">Delivery</target>
+            </trans-unit>
+            <trans-unit id="94d1fc884974388ab2c688de4f69855cecf70f3e" resname="sonata.order.view.element.id">
+                <jms:reference-file line="41">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.element.id</source>
+                <target state="new">Id</target>
+            </trans-unit>
+            <trans-unit id="3f4c1b82b82d06274a3f49f6d2ec1127098161e4" resname="sonata.order.view.element.label">
+                <jms:reference-file line="42">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.element.label</source>
+                <target state="new">Designation</target>
+            </trans-unit>
+            <trans-unit id="991270ceefdb44d46828f8d21378a1bd01b2faa5" resname="sonata.order.view.element.price">
+                <jms:reference-file line="45">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.element.price</source>
+                <target state="new">Price</target>
+            </trans-unit>
+            <trans-unit id="bcb4846503acd3dea96344216d8e81652faf765f" resname="sonata.order.view.element.quantity">
+                <jms:reference-file line="43">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.element.quantity</source>
+                <target state="new">Quantity</target>
+            </trans-unit>
+            <trans-unit id="277f523ef6efc0fc9e404c50034cdef5419f095d" resname="sonata.order.view.element.vat">
+                <jms:reference-file line="44">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.element.vat</source>
+                <target state="new">VAT</target>
+            </trans-unit>
+            <trans-unit id="0d8e6d0b0089db43dc9d66a1a964cfafe619f2bc" resname="sonata.order.view.order_with_id">
+                <jms:reference-file line="16">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.order_with_id</source>
+                <target state="new">Order %orderId%</target>
+            </trans-unit>
+            <trans-unit id="a0b5d7384824f5373e64ca62b45f757675b0ee8f" resname="sonata.order.view.reference">
+                <jms:reference-file line="24">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.reference</source>
+                <target state="new">Reference</target>
+            </trans-unit>
+            <trans-unit id="95d3b4325093e065eee7badfc5fa6056f356bf93" resname="sonata.order.view.subtitle_elements">
+                <jms:reference-file line="38">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.subtitle_elements</source>
+                <target state="new">Elements</target>
+            </trans-unit>
+            <trans-unit id="36498027d83725da64faef070ae33db9b7247c1b" resname="sonata.order.view.subtitle_references">
+                <jms:reference-file line="21">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.subtitle_references</source>
+                <target state="new">References</target>
+            </trans-unit>
+            <trans-unit id="aae02f3d2e0327f4695b565ab7e42ffe3e419316" resname="sonata.order.view.total_excl">
+                <jms:reference-file line="68">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.total_excl</source>
+                <target state="new">Total (excl.)</target>
+            </trans-unit>
+            <trans-unit id="0efa45b159be342065975981d83d4c9ed1cc8118" resname="sonata.order.view.total_inc">
+                <jms:reference-file line="63">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view.total_inc</source>
+                <target state="new">Total (inc.)</target>
+            </trans-unit>
+            <trans-unit id="295ef31a9968633e8a3918d8039c47c2a4fd2ffd" resname="sonata.order.view_invoice">
+                <jms:reference-file line="18">views/Order/view.html.twig</jms:reference-file>
+                <source>sonata.order.view_invoice</source>
+                <target state="new">Your invoice is available here.</target>
+            </trans-unit>
+            <!-- End - Order view translations -->
+
         </body>
     </file>
 </xliff>

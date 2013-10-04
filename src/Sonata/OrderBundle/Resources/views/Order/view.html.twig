@@ -11,4 +11,63 @@ file that was distributed with this source code.
 
 <h1>{% trans from 'SonataOrderBundle' %}sonata.order.title_order{% endtrans %}</h1>
 
-<a href="{{ url('sonata_invoice_view', {'reference' : order.reference}) }}">{% trans from 'SonataOrderBundle' %}sonata.order.view_invoice{% endtrans %}</a>
+<div class="row">
+    <div class="span6">
+        <p>{% trans with {'%orderId%' : order.id} from 'SonataOrderBundle' %}sonata.order.view.order_with_id{% endtrans %}</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Primum divisit ineleganter; Sedulo, inquam, faciam. Sin tantum modo ad indicia veteris memoriae cognoscenda, curiosorum. Duo Reges: constructio interrete. Iam doloris medicamenta illa Epicurea tamquam de narthecio proment: Si gravis, brevis; Sed quae tandem ista ratio est? Restinguet citius, si ardentem acceperit. Quos quidem tibi studiose et diligenter tractandos magnopere censeo. Nihil minus, contraque illa hereditate dives ob eamque rem laetus. Re mihi non aeque satisfacit, et quidem locis pluribus. Quorum altera prosunt, nocent altera. Rationis enim perfectio est virtus;</p>
+        <p><a href="{{ url('sonata_invoice_view', {'reference' : order.reference}) }}">{% trans from 'SonataOrderBundle' %}sonata.order.view_invoice{% endtrans %}</a></p>
+    </div>
+    <div class="span4">
+        <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_references{% endtrans %}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %}</th>
+                <td>{{ order.reference }}</td>
+            </tr>
+            <tr>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.date{% endtrans %}</th>
+                <td>{{ order.createdAt|date('Y-m-d') }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Elements -->
+<div class="row">
+    <div class="span10">
+        <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_elements{% endtrans %}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.id{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.vat{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.price{% endtrans %}</th>
+            </tr>
+            {% for element in order.orderElements %}
+                <tr>
+                    <td>{{ element.id }}</td>
+                    <td>{{ element.designation }}</td>
+                    <td>{{ element.quantity }}</td>
+                    <td>{{ element.vat }}</td>
+                    <td>{{ element.price }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3">&nbsp;</td>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
+                <td>{{ order.deliveryCost }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
+                <td>{{ order.totalInc }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">&nbsp;</td>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
+                <td>{{ order.totalExcl }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
