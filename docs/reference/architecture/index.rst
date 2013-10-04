@@ -37,6 +37,23 @@ Currently, the order process is implemented as follows:
 
 - When the payment is completed, we edit an invoice, which can be printed out as a PDF or HTML file.
 
+Price computation
+-----------------
+
+Well... We're entering the depths of it, aren't we? To be crystal clear, we'll try to answer the basic questions:
+
+**When?**
+    Each time you add a product (ie. BasketElement) to your Basket, the BasketElement price is calculated & the Basket price is calculated as well.
+
+**Based on?**
+    The price is computed based on defined product price, VAT if any, quantity, and currency.
+
+**Who/How?**
+    As you can see below, when the BasketElements of the basket are altered (added/removed), the buildPrices method is called, which for each element will compute its price. To do that, we go through the product provider of the basket element's product (which you can override easily in your implementation), and then through the currency price calculator (whose default behavior is only to check that the given product supports the current currency). 
+
+.. image:: ../../images/dsPrice.svg
+
+
 Basket <-> Order transformations and storage
 --------------------------------------------
 
