@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="sonata.product.pool.class">Sonata\Component\Product\Pool</parameter>
         <parameter key="sonata.product.subscriber.orm.class">Sonata\Component\Subscriber\ORMInheritanceSubscriber</parameter>
+        <parameter key="sonata.product.seo_iterator.class">Sonata\Component\Product\SeoProductIterator</parameter>
     </parameters>
 
     <services>
@@ -17,6 +18,13 @@
         <service id="sonata.product.subscriber.orm" class="%sonata.product.subscriber.orm.class%">
             <argument type="collection" />
             <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <service id="sonata.product.seo_iterator" class="%sonata.product.seo_iterator.class%">
+            <argument type="service" id="sonata.product.entity_manager" />
+            <argument>%sonata.product.product.class%</argument>
+            <argument type="service" id="router" />
+            <argument>sonata_product_view</argument>
         </service>
 
     </services>
