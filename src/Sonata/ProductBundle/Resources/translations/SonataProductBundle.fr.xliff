@@ -265,6 +265,12 @@
             </trans-unit>
             <!-- Begin - Form translations -->
 
+            <!-- Begin - Product view translations -->
+            <trans-unit id="sonata_product_price">
+                <source>sonata_product_price</source>
+                <target>Prix</target>
+            </trans-unit>
+            <!-- End - Product view translations -->
         </body>
     </file>
 </xliff>

@@ -263,8 +263,14 @@
                 <source>form.label_deliveries</source>
                 <target>Deliveries</target>
             </trans-unit>
-            <!-- Begin - Form translations -->
+            <!-- End - Form translations -->
 
+            <!-- Begin - Product view translations -->
+            <trans-unit id="sonata_product_price">
+                <source>sonata_product_price</source>
+                <target>Price</target>
+            </trans-unit>
+            <!-- End - Product view translations -->
         </body>
     </file>
 </xliff>

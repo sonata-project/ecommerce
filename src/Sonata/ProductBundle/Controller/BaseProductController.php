@@ -44,10 +44,16 @@ abstract class BaseProductController extends Controller
             $form = $formBuilder->getForm()->createView();
         }
 
-        return $this->render(sprintf('%s:view.html.twig', $provider->getBaseControllerName()), array(
-           'product' => $product,
-           'form'    => $form,
-        ));
+        $currency = $this->get('sonata.price.currency.detector')->getCurrency();
+
+        return $this->render(
+            sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
+            array(
+                'product'  => $product,
+                'currency' => $currency,
+                'form'     => $form,
+            )
+        );
     }
 
     /**

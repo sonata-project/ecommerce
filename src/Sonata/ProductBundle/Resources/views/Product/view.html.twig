@@ -9,24 +9,52 @@ file that was distributed with this source code.
 
 #}
 
+{#
+    This template embeds micro-data tags for product semantic description, see http://schema.org/Product
+#}
 
-<h2>{% block product_title %}Product title{% endblock %}</h2>
+<div class="row" itemscope itemtype="http://schema.org/Product">
+    <h2 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h2>
 
-<div>
-    <div style="float: left">
-        {% block product_image %}{% thumbnail product.image, 'preview' %}{% endblock%}
+    <div class="span6">
+        <div class="row">
+            <div style="float: left">
+                {% block product_image %}{% thumbnail product.image, 'preview' with {'itemprop':'image'} %}{% endblock%}
+            </div>
+            <span itemprop="description">
+                {% block product_description %}{{ product.rawDescription|raw }}{% endblock %}
+            </span>
+        </div>
+
+        <div>
+            {% block product_gallery %}Block 'product_gallery' to override{% endblock %}
+        </div>
     </div>
-    {% block product_description %}Product description{% endblock %}
+
+    <div class="span4">
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            {% block product_price %}
+                {% block product_price_label %}{% trans from 'SonataProductBundle' %}sonata_product_price{% endtrans %}{% endblock %}
+                <span itemprop="price">{% block product_price_price %}{{ product.price|number_format_currency(currency) }}{% endblock %}</span>
+            {% endblock %}
+        </div>
+        <div>
+            {% block product_delivery %}Block 'product_delivery' to override{% endblock %}
+        </div>
+        <div>
+            {% block product_basket %}
+                <form class="form-inline" action="{{ url('sonata_basket_add_product') }}" method="POST" >
+                    {% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %}
+                    {{ form_widget(form.quantity, {'attr': {'class':'input-small'}}) }}
+
+                    <button type="submit" class="btn btn-small btn-primary" >
+                        <i class="icon-shopping-cart icon-white"></i>{% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}
+                    </button>
+
+                    {{ form_rest(form) }}
+                </form>
+            {% endblock %}
+        </div>
+    </div>
 </div>
 
-<div>
-    {% block product_gallery %}Product gallery{% endblock %}
-</div>
-
-<div>
-    {% block product_basket %}Product bakset{% endblock %}
-</div>
-
-<div>
-    {% block product_delivery %}Product delivery{% endblock %}
-</div>
