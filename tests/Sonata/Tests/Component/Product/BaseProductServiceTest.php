@@ -138,10 +138,10 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $provider->getVariationFields());
     }
 
-    public function testDuplicate()
+    public function testProductDuplicate()
     {
         $provider = $this->getBaseProvider();
-        $provider->setVariationFields(array('Name', 'Price'));
+        $provider->setVariationFields(array('name', 'price'));
 
         $product = new Product;
         $product->id = 2;
@@ -168,13 +168,13 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $product->setPrice(4);
 
         // copy the information into the variation
-        $provider->copyVariation($product, 'all');
+        $provider->copyVariation($product, 'product');
 
         $this->assertEquals(4, $product->getPrice(), '::getPrice() return 4');
 
-        // price should be unchanged
         $variations = $product->getVariations();
 
+        // price should be unchanged
         $this->assertEquals(11, $variations[0]->getPrice(), '::getPrice() return 11');
         $this->assertEquals(12, $variations[1]->getPrice(), '::getPrice() return 12');
         $this->assertEquals(13, $variations[2]->getPrice(), '::getPrice() return 13');
@@ -183,6 +183,16 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5.5, $variations[0]->getVat(), '::getVat() return 5.5');
         $this->assertEquals(5.5, $variations[1]->getVat(), '::getVat() return 5.5');
         $this->assertEquals(5.5, $variations[2]->getVat(), '::getVat() return 5.5');
+
+        // copy the information into the variation, and force price update
+        $provider->copyVariation($product, 'product', true);
+
+        $variations = $product->getVariations();
+
+        // price should be changed
+        $this->assertEquals(4, $variations[0]->getPrice(), '::getPrice() return 4');
+        $this->assertEquals(4, $variations[1]->getPrice(), '::getPrice() return 4');
+        $this->assertEquals(4, $variations[2]->getPrice(), '::getPrice() return 4');
     }
 
     public function testArrayProduct()

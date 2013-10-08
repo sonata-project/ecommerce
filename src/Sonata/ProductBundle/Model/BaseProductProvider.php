@@ -310,9 +310,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @throws \RuntimeException
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @return \Sonata\Component\Product\ProductInterface
+     * {@inheritdoc}
      */
     public function createVariation(ProductInterface $product)
     {
@@ -330,10 +328,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param string                                     $name
-     * @param bool                                       $forceCopy
-     * @return
+     * {@inheritdoc}
      */
     public function copyVariation(ProductInterface $product, $name = 'all', $forceCopy = false)
     {
@@ -347,33 +342,45 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
                 return;
 
-            case 'all':
-                $this->copyProductVariation($product, $forceCopy);
+            case 'product_deliveries':
+                $this->copyProductDeliveriesVariation($product, $forceCopy);
 
                 return;
+
+            case 'product_categories':
+                $this->copyProductCategoriesVariation($product, $forceCopy);
+
+                break;
+
+            case 'product_pictures':
+                $this->copyProductImagesVariation($product, $forceCopy);
+
+                break;
+
+            case 'all':
+                $this->copyProductVariation($product, $forceCopy);
+                $this->copyProductDeliveriesVariation($product, $forceCopy);
+                $this->copyProductCategoriesVariation($product, $forceCopy);
+                $this->copyProductImagesVariation($product, $forceCopy);
+
+                return;
+
+            default:
+                throw new \RuntimeException(sprintf('"%s" argument is incorrect. Accepted values : "all", "product_deliveries", "product_categories" and "product_pictures".', $name));
         }
     }
 
     /**
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  bool                                       $forceCopy
-     * @return void
+     * {@inheritdoc}
      */
     public function copyProductVariation(ProductInterface $product, $forceCopy = false)
     {
-        $variationFields = array_merge(array('id'), $this->getVariationFields());
+        $variationFields = array_merge(array('id', 'parent'), $this->getVariationFields());
 
-        // fields to copy
-        $values = array(
-            'Name'    => $product->getName(),
-            'Price'   => $product->getPrice(),
-            'Vat'     => $product->getVat(),
-            'Enabled' => $product->getEnabled()
-        );
+        $values = $product->toArray();
 
         if (!$forceCopy) {
             foreach ($variationFields as $field) {
-
                 if (!array_key_exists($field, $values)) {
                    continue;
                 }
@@ -384,9 +391,37 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         foreach ($product->getVariations() as $variation) {
             foreach ($values as $name => $value) {
-                call_user_func(array($variation, 'set'.$name), $value );
+                $callable = array($variation, sprintf('set%s', $name));
+
+                if (is_callable($callable)) {
+                    call_user_func($callable, $value);
+                }
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function copyProductDeliveriesVariation(ProductInterface $product, $forceCopy = false)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function copyProductCategoriesVariation(ProductInterface $product, $forceCopy = false)
+    {
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function copyProductImagesVariation(ProductInterface $product, $forceCopy = false)
+    {
+
     }
 
     /////////////////////////////////////////////////////

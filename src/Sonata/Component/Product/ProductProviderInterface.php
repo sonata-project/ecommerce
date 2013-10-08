@@ -17,7 +17,7 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-
+use Sonata\Component\Product\ProductInterface;
 use Symfony\Component\Form\FormBuilder;
 
 interface ProductProviderInterface
@@ -142,4 +142,56 @@ interface ProductProviderInterface
      * @return void
      */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket);
+
+    /**
+     * Creates a variation from a given Product.
+     *
+     * @param \Sonata\Component\Product\ProductInterface $product
+     *
+     * @throws \RuntimeException
+     *
+     * @return \Sonata\Component\Product\ProductInterface
+     */
+    public function createVariation(ProductInterface $product);
+
+    /**
+     * Copy chosen data from a Product to its variations.
+     *
+     * @param \Sonata\Component\Product\ProductInterface $product   A parent Product instance
+     * @param string                                     $name      What data to copy? Accepted values are : 'all', 'product_deliveries', 'product_categories', 'product_pictures'
+     * @param bool                                       $forceCopy
+     */
+    public function copyVariation(ProductInterface $product, $name = 'all', $forceCopy = false);
+
+    /**
+     * Copy base Product data to variations.
+     *
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  bool                                       $forceCopy
+     */
+    public function copyProductVariation(ProductInterface $product, $forceCopy = false);
+
+    /**
+     * Copy base Product deliveries to variations.
+     *
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  bool                                       $forceCopy
+     */
+    public function copyProductDeliveriesVariation(ProductInterface $product, $forceCopy = false);
+
+    /**
+     * Copy base Product categories to variations.
+     *
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  bool                                       $forceCopy
+     */
+    public function copyProductCategoriesVariation(ProductInterface $product, $forceCopy = false);
+
+    /**
+     * Copy base Product images to variations.
+     *
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param  bool                                       $forceCopy
+     */
+    public function copyProductImagesVariation(ProductInterface $product, $forceCopy = false);
 }
