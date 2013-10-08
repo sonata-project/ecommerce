@@ -34,8 +34,7 @@
       <trans-unit id="011049e52bcb1bd754b0583b509c8879a8f45297" resname="message_validation_payment">
         <jms:reference-file line="17">views/Payment/confirmation.html.twig</jms:reference-file>
         <source>message_validation_payment</source>
-        <target state="new"><![CDATA[Votre paiement est confirmé et votre commande a été traitée!<br/>
-            Vos produits arriveront à leur destinatation dans 2 à 5 jours ouvrés.<br/>
+        <target state="new"><![CDATA[Votre paiement est confirmé!<br/>
             Vous pouvez visualiser l'historique de vos commandes sur la page 'Mon compte' en cliquant sur 'Historique'<br/>
             Merci d'acheter avec nous en ligne!]]>
         </target>

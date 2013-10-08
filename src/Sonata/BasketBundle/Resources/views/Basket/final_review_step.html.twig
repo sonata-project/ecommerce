@@ -15,12 +15,26 @@ file that was distributed with this source code.
 
     <thead>
         <tr>
-            <td>{{ 'header_basket_information'|trans({}, 'SonataBasketBundle') }}</td>
-            <td>{{ 'header_basket_price'|trans({}, 'SonataBasketBundle') }}</td>
-            <td>{{ 'header_basket_quantity'|trans({}, 'SonataBasketBundle') }}</td>
-            <td>{{ 'header_basket_total'|trans({}, 'SonataBasketBundle') }}</td>
+            <th>{{ 'header_basket_information'|trans({}, 'SonataBasketBundle') }}</th>
+            <th>{{ 'header_basket_price'|trans({}, 'SonataBasketBundle') }}</th>
+            <th>{{ 'header_basket_quantity'|trans({}, 'SonataBasketBundle') }}</th>
+            <th>{{ 'header_basket_total'|trans({}, 'SonataBasketBundle') }}</th>
         </tr>
     </thead>
+    <tfoot>
+        <tr>
+            <td colspan="3">{{ 'sonata.basket.total_wo_vat'|trans({}, 'SonataBasketBundle') }}</td>
+            <td><b>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+        </tr>
+        <tr>
+            <td colspan="3">{{ 'sonata.basket.total_vat'|trans({}, 'SonataBasketBundle') }}</td>
+            <td><b>{{ basket.getVatAmount()|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+        </tr>
+        <tr>
+            <td colspan="3">{{ 'sonata.basket.total_w_vat'|trans({}, 'SonataBasketBundle') }}</td>
+            <td><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+        </tr>
+    </tfoot>
 
     <tbody>
         {# call each product controller to render its own view #}
@@ -38,20 +52,6 @@ file that was distributed with this source code.
             <td>{{ basket.getDeliveryPrice(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</td>
         </tr>
     </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3">{{ 'sonata.basket.total_wo_vat'|trans({}, 'SonataBasketBundle') }}</td>
-            <td><b>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
-        </tr>
-        <tr>
-            <td colspan="3">{{ 'sonata.basket.total_vat'|trans({}, 'SonataBasketBundle') }}</td>
-            <td><b>{{ basket.getVatAmount()|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
-        </tr>
-        <tr>
-            <td colspan="3">{{ 'sonata.basket.total_w_vat'|trans({}, 'SonataBasketBundle') }}</td>
-            <td><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
-        </tr>
-    </tfoot>
 </table>
 
 <table class="table table-bordered">
@@ -97,7 +97,5 @@ file that was distributed with this source code.
         <br />
         <br />
         <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" class="btn btn-large btn-primary" />
-
-        <div style="clear:both"></div>
     </form>
 </div>

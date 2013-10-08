@@ -12,9 +12,10 @@ file that was distributed with this source code.
 <div class="sonata-payment-confirmation">
     {% if order.isvalidated %}
         <h1>{{ 'title_validation_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</h1>
-
         <p>
-            {% autoescape false %}{{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}{% endautoescape %}
+            {% autoescape false %}
+                {{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}
+            {% endautoescape %}
         </p>
 
     {% elseif order.ispending %}
