@@ -14,7 +14,7 @@ file that was distributed with this source code.
         <h1>{{ 'title_validation_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</h1>
 
         <p>
-            {{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}
+            {% autoescape false %}{{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}{% endautoescape %}
         </p>
 
     {% elseif order.ispending %}
@@ -33,5 +33,5 @@ file that was distributed with this source code.
 
     {% endif %}
 
-    <a href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ order.reference }}</a>
+    {{ 'message_view_order_payment'|trans({}, 'SonataPaymentBundle') }} <a href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ order.reference }}</a>
 </div>

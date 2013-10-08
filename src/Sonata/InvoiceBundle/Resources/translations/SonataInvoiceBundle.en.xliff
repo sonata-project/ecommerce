@@ -133,6 +133,10 @@
             </trans-unit>
             <!-- End - Form translations -->
 
+            <trans-unit id="subtitle_payment">
+                <source>subtitle_payment</source>
+                <target>Payment</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -34,7 +34,11 @@
       <trans-unit id="011049e52bcb1bd754b0583b509c8879a8f45297" resname="message_validation_payment">
         <jms:reference-file line="17">views/Payment/confirmation.html.twig</jms:reference-file>
         <source>message_validation_payment</source>
-        <target state="new">Your payment is confirmed.</target>
+        <target state="new"><![CDATA[Your payment is confirmed and your order has been processed!<br/>
+            Your products will arrive at their destination within 2-5 working days.<br/>
+            You can view your order history by going to the 'My Account' page and by clicking on 'History'.<br/>
+            Thanks for shopping with us online!]]>
+        </target>
       </trans-unit>
       <trans-unit id="a4b7061a1581378be9c33cceb69c2e3b483750c6" resname="title_error_payment">
         <jms:reference-file line="12">views/Payment/error.html.twig</jms:reference-file>
@@ -155,7 +159,10 @@
         <source>order_to_open</source>
         <target>Order to open</target>
       </trans-unit>
-
+      <trans-unit id="method">
+        <source>method</source>
+        <target>Method</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

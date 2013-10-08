@@ -18,8 +18,12 @@ file that was distributed with this source code.
         <p><a href="{{ url('sonata_invoice_view', {'reference' : order.reference}) }}">{% trans from 'SonataOrderBundle' %}sonata.order.view_invoice{% endtrans %}</a></p>
     </div>
     <div class="span4">
-        <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_references{% endtrans %}</h4>
+        <p>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_references{% endtrans %}</p>
         <table class="table table-bordered">
+            <tr>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.invoice{% endtrans %}</th>
+                <td>{{ order.reference }}</td>
+            </tr>
             <tr>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %}</th>
                 <td>{{ order.reference }}</td>
@@ -35,14 +39,14 @@ file that was distributed with this source code.
 <!-- Elements -->
 <div class="row">
     <div class="span10">
-        <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_elements{% endtrans %}</h4>
+        <p>{% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %}</p>
         <table class="table table-bordered">
             <tr>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.id{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</th>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.vat{% endtrans %}</th>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.price{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
             </tr>
             {% for element in order.orderElements %}
                 <tr>
@@ -54,19 +58,17 @@ file that was distributed with this source code.
                 </tr>
             {% endfor %}
             <tr>
-                <td colspan="3">&nbsp;</td>
+                <td colspan="3" rowspan="3">&nbsp;</td>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
                 <td>{{ order.deliveryCost }}</td>
             </tr>
             <tr>
-                <td colspan="3">&nbsp;</td>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
-                <td>{{ order.totalInc }}</td>
-            </tr>
-            <tr>
-                <td colspan="3">&nbsp;</td>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
                 <td>{{ order.totalExcl }}</td>
+            </tr>
+            <tr>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
+                <td>{{ order.totalInc }}</td>
             </tr>
         </table>
     </div>

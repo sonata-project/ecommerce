@@ -26,27 +26,28 @@ file that was distributed with this source code.
                     <td></td>
                 </tr>
                 <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.billing.address1{% endtrans %}</th>
+                    <td rowspan="8">&nbsp;</td>
+                    <td>{{ invoice.customer.firstName }}</td>
+                </tr>
+                <tr>
+                    <td>{{ invoice.customer.lastName }}</td>
+                </tr>
+                <tr>
                     <td>{{ invoice.address1 }}</td>
                 </tr>
                 <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.billing.address2{% endtrans %}</th>
                     <td>{{ invoice.address2 }}</td>
                 </tr>
                 <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.billing.address3{% endtrans %}</th>
                     <td>{{ invoice.address3 }}</td>
                 </tr>
                 <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.billing.postcode{% endtrans %}</th>
                     <td>{{ invoice.postcode }}</td>
                 </tr>
                 <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.billing.city_country{% endtrans %}</th>
-                    <td>{{ invoice.city ~ ' - ' ~ invoice.country }}</td>
+                    <td>{{ invoice.city ~ ' in ' ~ invoice.country | country }}</td>
                 </tr>
                 <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.billing.phone{% endtrans %}</th>
                     <td>{{ invoice.phone }}</td>
                 </tr>
             </table>
@@ -59,6 +60,10 @@ file that was distributed with this source code.
                 <tr>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.references.invoice{% endtrans %}</th>
                     <td>{{ invoice.reference }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.references.date{% endtrans %}</th>
+                    <td></td>
                 </tr>
             </table>
         </div>
@@ -74,7 +79,7 @@ file that was distributed with this source code.
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.label{% endtrans %}</th>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.quantity{% endtrans %}</th>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.unit_price{% endtrans %}</th>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.vat{% endtrans %}</th>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_ex_vat{% endtrans %}</th>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_inc_vat{% endtrans %}</th>
                 </tr>
 
@@ -84,8 +89,8 @@ file that was distributed with this source code.
                         <td>{{ element.designation }}</td>
                         <td>{{ element.quantity }}</td>
                         <td>{{ element.price }}</td>
-                        <td>{{ element.vat }}</td>
                         <td>{{ element.total }}</td>
+                        <td></td>
                     </tr>
                 {% endfor %}
 
@@ -107,13 +112,14 @@ file that was distributed with this source code.
     <!-- Payment -->
     <div class="row">
         <div class="span6">
-            <h5>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_payment{% endtrans %}</h5>
-
+            <p>{% trans from 'SonataInvoiceBundle' %}subtitle_payment{% endtrans %}</p>
+            <table class="table table-bordered">
+                <tr>
+                    <th>{% trans from 'SonataPaymentBundle' %}method{% endtrans %}</th>
+                    <td></td>
+                </tr>
+            </table>
         </div>
     </div>
 
-{% endblock %}
-
-{% block footer %}
-    <p>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.footer{% endtrans %}</p>
 {% endblock %}
