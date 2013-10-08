@@ -641,4 +641,74 @@ abstract class BaseProduct implements ProductInterface
 
         return $text;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        return array(
+            'sku'                  => $this->sku,
+            'slug'                 => $this->slug,
+            'name'                 => $this->name,
+            'description'          => $this->description,
+            'rawDescription'       => $this->rawDescription,
+            'descriptionFormatter' => $this->descriptionFormatter,
+            'price'                => $this->price,
+            'vat'                  => $this->vat,
+            'stock'                => $this->stock,
+            'enabled'              => $this->enabled,
+            'options'              => $this->options,
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromArray($array)
+    {
+        if (array_key_exists('sku', $array)) {
+            $this->sku = $array['sku'];
+        }
+
+        if (array_key_exists('slug', $array)) {
+            $this->slug = $array['slug'];
+        }
+
+        if (array_key_exists('name', $array)) {
+            $this->name = $array['name'];
+        }
+
+        if (array_key_exists('description', $array)) {
+            $this->description = $array['description'];
+        }
+
+        if (array_key_exists('rawDescription', $array)) {
+            $this->rawDescription = $array['rawDescription'];
+        }
+
+        if (array_key_exists('descriptionFormatter', $array)) {
+            $this->descriptionFormatter = $array['descriptionFormatter'];
+        }
+
+        if (array_key_exists('price', $array)) {
+            $this->price = $array['price'];
+        }
+
+        if (array_key_exists('vat', $array)) {
+            $this->vat = $array['vat'];
+        }
+
+        if (array_key_exists('stock', $array)) {
+            $this->stock = $array['stock'];
+        }
+
+        if (array_key_exists('enabled', $array)) {
+            $this->enabled = $array['enabled'];
+        }
+
+        if (array_key_exists('options', $array)) {
+            $this->options = $array['options'];
+        }
+    }
 }

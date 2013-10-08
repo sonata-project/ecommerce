@@ -26,13 +26,6 @@ class Product extends BaseProduct
     public $price = 15;
     public $vat = 19.6;
 
-    public function getOptions()
-    {
-        return array(
-            'option1' => 'toto',
-        );
-    }
-
     public function isRecurrentPayment()
     {
         return false;
@@ -190,5 +183,40 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(5.5, $variations[0]->getVat(), '::getVat() return 5.5');
         $this->assertEquals(5.5, $variations[1]->getVat(), '::getVat() return 5.5');
         $this->assertEquals(5.5, $variations[2]->getVat(), '::getVat() return 5.5');
+    }
+
+    public function testArrayProduct()
+    {
+        $product = new Product;
+
+        $arrayProduct = array(
+            'sku'                  => 'productSku',
+            'slug'                 => 'productSlug',
+            'name'                 => 'productName',
+            'description'          => 'productDescription',
+            'rawDescription'       => 'productRawDescription',
+            'descriptionFormatter' => 'productDescriptionFormatter',
+            'price'                => 123.45,
+            'vat'                  => 678.90,
+            'stock'                => 12345,
+            'enabled'              => 1,
+            'options'              => array('key1' => 'value1', 'key2' => array('value2', 'value3')),
+        );
+
+        $product->fromArray($arrayProduct);
+
+        $this->assertEquals($arrayProduct, $product->toArray());
+
+        $this->assertEquals($product->getSku(),                  $arrayProduct['sku']);
+        $this->assertEquals($product->getSlug(),                 $arrayProduct['slug']);
+        $this->assertEquals($product->getName(),                 $arrayProduct['name']);
+        $this->assertEquals($product->getDescription(),          $arrayProduct['description']);
+        $this->assertEquals($product->getRawDescription(),       $arrayProduct['rawDescription']);
+        $this->assertEquals($product->getDescriptionFormatter(), $arrayProduct['descriptionFormatter']);
+        $this->assertEquals($product->getPrice(),                $arrayProduct['price']);
+        $this->assertEquals($product->getVat(),                  $arrayProduct['vat']);
+        $this->assertEquals($product->getStock(),                $arrayProduct['stock']);
+        $this->assertEquals($product->getEnabled(),              $arrayProduct['enabled']);
+        $this->assertEquals($product->getOptions(),              $arrayProduct['options']);
     }
 }

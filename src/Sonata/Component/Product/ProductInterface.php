@@ -167,4 +167,18 @@ interface ProductInterface
      * @param ProductInterface $product
      */
     public function addVariation(ProductInterface $product);
+
+    /**
+     * Returns Product base data as an array.
+     *
+     * @return array
+     */
+    public function toArray();
+
+    /**
+     * Populate entity from an array.
+     *
+     * @param array $array
+     */
+    public function fromArray($array);
 }
