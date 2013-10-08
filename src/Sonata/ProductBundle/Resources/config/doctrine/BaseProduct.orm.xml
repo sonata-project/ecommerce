@@ -17,7 +17,6 @@
 
         <field name="price"         column="price"          type="decimal"  precision="10" scale="2" nullable="true" />
         <field name="vat"           column="vat"            type="decimal"  precision="10" scale="2" nullable="true" />
-        <field name="currency"      column="currency"       type="currency" nullable="true" />
         <field name="stock"         column="stock"          type="integer"  nullable="true" />
         <field name="enabled"       column="enabled"        type="boolean"  nullable="true" />
 

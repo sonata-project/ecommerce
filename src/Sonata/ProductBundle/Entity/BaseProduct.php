@@ -64,11 +64,6 @@ abstract class BaseProduct implements ProductInterface
     protected $vat;
 
     /**
-     * @var CurrencyInterface
-     */
-    protected $currency;
-
-    /**
      * @var integer $stock
      */
     protected $stock;
@@ -645,21 +640,5 @@ abstract class BaseProduct implements ProductInterface
         }
 
         return $text;
-    }
-
-    /**
-     * @return CurrencyInterface
-     */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
-
-    /**
-     * @param CurrencyInterface $currency
-     */
-    public function setCurrency(CurrencyInterface $currency)
-    {
-        $this->currency = $currency;
     }
 }

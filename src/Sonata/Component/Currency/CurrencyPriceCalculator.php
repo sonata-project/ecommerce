@@ -14,10 +14,6 @@ class CurrencyPriceCalculator implements CurrencyPriceCalculatorInterface
      */
     public function getPrice(ProductInterface $product, CurrencyInterface $currency)
     {
-        if (null === $product->getCurrency() || !$currency->equals($product->getCurrency())) {
-            throw new UnavailableForCurrencyException($product, $currency);
-        }
-
         return $product->getPrice();
     }
 }

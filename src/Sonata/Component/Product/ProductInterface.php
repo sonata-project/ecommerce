@@ -42,16 +42,6 @@ interface ProductInterface
     public function setVat($vat);
 
     /**
-     * @return CurrencyInterface
-     */
-    public function getCurrency();
-
-    /**
-     * @param CurrencyInterface $currency
-     */
-    public function setCurrency(CurrencyInterface $currency);
-
-    /**
      * @return string the product name
      */
     public function getName();

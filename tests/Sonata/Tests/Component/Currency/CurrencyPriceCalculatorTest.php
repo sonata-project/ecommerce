@@ -34,31 +34,8 @@ class CurrencyPriceCalculatorTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $product->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
         $product->expects($this->once())->method('getPrice')->will($this->returnValue(42.0));
 
         $this->assertEquals(42.0, $currencyPriceCalculator->getPrice($product, $currency));
     }
-
-    /**
-     * @expectedException Sonata\Component\Currency\UnavailableForCurrencyException
-     * @expectedExceptionMessage Product 'product_name' is not available for currency 'EUR'
-     */
-    public function testGetPriceException()
-    {
-        $currencyPriceCalculator = new CurrencyPriceCalculator();
-
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-
-        $currency = new Currency();
-        $currency->setLabel('EUR');
-
-        $product->expects($this->any())->method('getCurrency')->will($this->returnValue(null));
-        $product->expects($this->any())->method('getPrice')->will($this->returnValue(42.0));
-        $product->expects($this->once())->method('getName')->will($this->returnValue('product_name'));
-
-        $currencyPriceCalculator->getPrice($product, $currency);
-    }
-
-
 }
