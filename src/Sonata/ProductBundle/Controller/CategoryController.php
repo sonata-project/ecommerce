@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function indexAction()
     {
-        $pager = $this->get('sonata.category.manager')
+        $pager = $this->get('sonata.classification.manager.category')
             ->getRootCategoriesPager($this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:index.html.twig', array(
@@ -37,16 +37,15 @@ class CategoryController extends Controller
      * Display one category
      *
      * @throws NotFoundHttpException
-     * @param  $categoryId
-     * @param  $slug
+     *
+     * @param $categoryId
+     * @param $slug
+     *
      * @return Response
      */
     public function viewAction($categoryId, $slug)
     {
-        $em             = $this->get('doctrine.orm.default_entity_manager');
-        $repository     = $em->getRepository('Application\Sonata\ProductBundle\Entity\Category');
-
-        $category = $repository->findOneById($categoryId);
+        $category = $this->get('sonata.classification.manager.category')->findOneBy(array('id' => $categoryId));
 
         if (!$category) {
             throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $categoryId));
@@ -61,11 +60,12 @@ class CategoryController extends Controller
      * List categories from one categories
      *
      * @param $categoryId
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function listSubCategoriesAction($categoryId)
     {
-        $pager = $this->get('sonata.category.manager')
+        $pager = $this->get('sonata.classification.manager.category')
             ->getSubCategoriesPager($categoryId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:list_sub_categories.html.twig', array(
@@ -90,14 +90,15 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param  null                                                $category
-     * @param  int                                                 $depth
-     * @param  int                                                 $deep
+     * @param  null $category
+     * @param  int  $depth
+     * @param  int  $deep
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function listSideMenuCategoriesAction($category = null, $depth = 1, $deep = 0)
     {
-        $category = $category ?: $this->get('sonata.category.manager')->getRootCategory();
+        $category = $category ?: $this->get('sonata.classification.manager.category')->getRootCategory();
 
         return $this->render('SonataProductBundle:Category:side_menu_category.html.twig', array(
           'root_category' => $category,

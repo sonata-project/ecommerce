@@ -16,14 +16,14 @@ interface ProductCategoryManagerInterface
     /**
      * Creates an empty ProductCategory instance
      *
-     * @return ProductCategory
+     * @return ProductCategoryInterface
      */
     public function createProductCategory();
 
     /**
      * Deletes a ProductCategory
      *
-     * @param  ProductCategory $productCategory
+     * @param  ProductCategoryInterface $productCategory
      * @return void
      */
     public function deleteProductCategory(ProductCategoryInterface $productCategory);
@@ -32,7 +32,7 @@ interface ProductCategoryManagerInterface
      * Finds one ProductCategory by the given criteria
      *
      * @param  array                    $criteria
-     * @return ProductcategoryInterface
+     * @return ProductCategoryInterface
      */
     public function findProductCategoryBy(array $criteria);
 
@@ -46,7 +46,7 @@ interface ProductCategoryManagerInterface
     /**
      * Updates a ProductCategory
      *
-     * @param  ProductCategory $productCategory
+     * @param  ProductCategoryInterface $productCategory
      * @return void
      */
     public function updateProductCategory(ProductCategoryInterface $productCategory);

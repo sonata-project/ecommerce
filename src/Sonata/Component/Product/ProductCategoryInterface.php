@@ -10,6 +10,8 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\ClassificationBundle\Model\CategoryInterface;
+
 interface ProductCategoryInterface
 {
     /**
@@ -63,7 +65,7 @@ interface ProductCategoryInterface
     /**
      * Get Product
      *
-     * @return Application\Sonata\ProductBundle\Entity\Product $product
+     * @return ProductInterface
      */
     public function getProduct();
 
@@ -77,7 +79,7 @@ interface ProductCategoryInterface
     /**
      * Get Category
      *
-     * @return Application\Sonata\ProductBundle\Entity\Category $category
+     * @return CategoryInterface $category
      */
     public function getCategory();
 }

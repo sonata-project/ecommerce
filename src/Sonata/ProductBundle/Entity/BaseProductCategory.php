@@ -10,8 +10,8 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
-use Sonata\Component\Product\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
@@ -50,9 +50,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Set enabled
-     *
-     * @param boolean $enabled
+     * {@inheritdoc}
      */
     public function setEnabled($enabled)
     {
@@ -60,9 +58,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Get enabled
-     *
-     * @return boolean $enabled
+     * {@inheritdoc}
      */
     public function getEnabled()
     {
@@ -70,9 +66,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -80,9 +74,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Get updatedAt
-     *
-     * @return \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -90,9 +82,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -100,9 +90,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -110,9 +98,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Set Product
-     *
-     * @param ProductInterface $product
+     * {@inheritdoc}
      */
     public function setProduct(ProductInterface $product)
     {
@@ -120,9 +106,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Get Product
-     *
-     * @return ProductInterface $product
+     * {@inheritdoc}
      */
     public function getProduct()
     {
@@ -130,9 +114,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Set Category
-     *
-     * @param CategoryInterface $category
+     * {@inheritdoc}
      */
     public function setCategory(CategoryInterface $category)
     {
@@ -140,9 +122,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     }
 
     /**
-     * Get Category
-     *
-     * @return CategoryInterface $category
+     * {@inheritdoc}
      */
     public function getCategory()
     {

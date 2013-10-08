@@ -86,55 +86,17 @@ class SonataProductExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        /**
-         * CATEGORY
-         */
-        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
-            'fieldName'     => 'children',
-            'targetEntity'  => $config['class']['category'],
-            'cascade'       => array(
-                'remove',
-                'persist',
-            ),
-            'mappedBy'      => 'parent',
-            'orphanRemoval' => true,
-            'orderBy'       => array(
-                'position'  => 'ASC',
-            ),
-        ));
 
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
-            'fieldName'     => 'parent',
-            'targetEntity'  => $config['class']['category'],
-            'cascade'       => array(
-                'remove',
-                'persist',
-                'refresh',
-                'merge',
-                'detach',
-            ),
-            'mappedBy'      => NULL,
-            'inversedBy'    => NULL,
-            'joinColumns'   => array(
-                array(
-                 'name'     => 'parent_id',
-                 'referencedColumnName' => 'id',
-                 'onDelete' => 'CASCADE',
-                ),
-            ),
-            'orphanRemoval' => false,
-        ));
-
-        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
-            'fieldName'     => 'productCategories',
-            'targetEntity'  => $config['class']['product_category'],
-            'cascade'       => array(
-                'all'
-            ),
-            'mappedBy'      => 'category',
-            'orphanRemoval' => false,
-        ));
-
+//        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
+//            'fieldName'     => 'productCategories',
+//            'targetEntity'  => $config['class']['product_category'],
+//            'cascade'       => array(
+//                'all'
+//            ),
+//            'mappedBy'      => 'category',
+//            'orphanRemoval' => false,
+//        ));
+//
 
 
         /**

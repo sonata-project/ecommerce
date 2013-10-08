@@ -10,6 +10,7 @@
  */
 namespace Sonata\ProductBundle\Entity;
 
+use Doctrine\ORM\EntityRepository;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
 use Doctrine\ORM\EntityManager;
@@ -46,7 +47,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Creates an empty productCategory instance
      *
-     * @return ProductCategory
+     * @return ProductCategoryInterface
      */
     public function createProductCategory()
     {
@@ -58,7 +59,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Updates a productCategory
      *
-     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
+     * @param ProductCategoryInterface $productCategory
      *
      * @return void
      */
@@ -81,8 +82,9 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Finds one productCategory by the given criteria
      *
-     * @param  array           $criteria
-     * @return ProductCategory
+     * @param  array $criteria
+     *
+     * @return ProductCategoryInterface
      */
     public function findProductCategoryBy(array $criteria)
     {
@@ -92,7 +94,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Deletes an productCategory
      *
-     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
+     * @param ProductCategoryInterface $productCategory
      *
      * @return void
      */

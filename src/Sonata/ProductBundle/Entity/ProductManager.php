@@ -10,6 +10,7 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 
@@ -46,7 +47,8 @@ class ProductManager implements ProductManagerInterface
     /**
      * Finds one product by the given criteria
      *
-     * @param  array            $criteria
+     * @param array $criteria
+     *
      * @return ProductInterface
      */
     public function findOneBy(array $criteria = array())
@@ -57,7 +59,8 @@ class ProductManager implements ProductManagerInterface
     /**
      * Finds products by the given criteria
      *
-     * @param  array            $criteria
+     * @param array $criteria
+     *
      * @return ProductInterface
      */
     public function findBy(array $criteria = array())
@@ -90,7 +93,8 @@ class ProductManager implements ProductManagerInterface
     /**
      * Deletes a product
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param ProductInterface $product
+     *
      * @return void
      */
     public function delete(ProductInterface $product)
@@ -102,7 +106,7 @@ class ProductManager implements ProductManagerInterface
     /**
      * Creates an empty medie instance
      *
-     * @return Product
+     * @return ProductInterface
      */
     public function create()
     {
@@ -112,10 +116,11 @@ class ProductManager implements ProductManagerInterface
     }
 
     /**
-     * @param  int                                    $categoryId
-     * @param  int                                    $page
-     * @param  int                                    $limit
-     * @return \Sonata\AdminBundle\Datagrid\ORM\Pager
+     * @param int $categoryId
+     * @param int $page
+     * @param int $limit
+     *
+     * @return PagerInterface
      */
     public function getProductsByCategoryIdPager($categoryId, $page = 1, $limit = 25)
     {
