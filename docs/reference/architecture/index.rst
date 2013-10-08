@@ -49,7 +49,7 @@ Well... We're entering the depths of it, aren't we? To be crystal clear, we'll t
     The price is computed based on defined product price, VAT if any, quantity, and currency.
 
 **Who/How?**
-    As you can see below, when the BasketElements of the basket are altered (added/removed), the buildPrices method is called, which for each element will compute its price. To do that, we go through the product provider of the basket element's product (which you can override easily in your implementation), and then through the currency price calculator (whose default behavior is only to check that the given product supports the current currency). 
+    As you can see below, when the BasketElements of the basket are altered (added/removed), the buildPrices method is called, which for each element will compute its price. To do that, we go through the product provider of the basket element's product (which you can override easily in your implementation), and then through the currency price calculator (whose default behavior is only to return the product's price).
 
 .. image:: ../../images/dsPrice.svg
 
@@ -79,7 +79,7 @@ Going in depths
 
 .. toctree::
     :maxdepth: 2
-    
+
     product
     currency
     customer
