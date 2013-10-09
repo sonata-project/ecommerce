@@ -11,13 +11,13 @@
 
 namespace Sonata\BasketBundle\Form;
 
+use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
 use Symfony\Component\Form\AbstractType;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
-use Sonata\Component\Delivery\DeliverySelectorInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,7 +35,7 @@ class ShippingType extends AbstractType
     protected $deliveryPool;
 
     /**
-     * @var DeliverySelectorInterface
+     * @var ServiceDeliverySelectorInterface
      */
     protected $deliverySelector;
 
@@ -47,12 +47,12 @@ class ShippingType extends AbstractType
     /**
      * Constructor
      *
-     * @param AddressManagerInterface   $addressManager
-     * @param ModelManagerInterface     $modelManager
-     * @param DeliveryPool              $deliveryPool
-     * @param DeliverySelectorInterface $deliverySelector
+     * @param AddressManagerInterface          $addressManager
+     * @param ModelManagerInterface            $modelManager
+     * @param DeliveryPool                     $deliveryPool
+     * @param ServiceDeliverySelectorInterface $deliverySelector
      */
-    public function __construct(AddressManagerInterface $addressManager, ModelManagerInterface $modelManager, DeliveryPool $deliveryPool, DeliverySelectorInterface $deliverySelector)
+    public function __construct(AddressManagerInterface $addressManager, ModelManagerInterface $modelManager, DeliveryPool $deliveryPool, ServiceDeliverySelectorInterface $deliverySelector)
     {
         $this->addressManager   = $addressManager;
         $this->modelManager     = $modelManager;
