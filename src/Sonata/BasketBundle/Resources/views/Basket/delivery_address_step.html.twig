@@ -14,8 +14,8 @@ file that was distributed with this source code.
 
 {% form_theme form 'SonataBasketBundle:Form:label.html.twig' %}
 
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
     {{ form_errors(form) }}
     {{ form_rest(form) }}
-    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}" class="btn"/>
+    <button type="submit" class="btn btn-success">{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}</button>
 {{ form_end(form) }}

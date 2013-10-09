@@ -115,6 +115,12 @@
         <source>sonata.basket.title_delivery_step_basket</source>
         <target state="new">Votre livraison</target>
       </trans-unit>
+        <trans-unit id="64169791bd6d18df1134e93f300d1dfc368d014f" resname="sonata.basket.title_address_delivery_step_basket">
+            <jms:reference-file line="12">views/Basket/delivery_address_step.html.twig</jms:reference-file>
+            <jms:reference-file line="12">views/Basket/delivery_step.html.twig</jms:reference-file>
+            <source>sonata.basket.title_address_delivery_step_basket</source>
+            <target state="new">Addresse de livraison sélectionnée</target>
+        </trans-unit>
       <trans-unit id="699f1f06549ab20e5cabe71dbec55f8fee512b5c" resname="sonata.basket.title_payment_address">
         <jms:reference-file line="69">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_payment_address</source>
@@ -201,6 +207,14 @@
         <target state="new">Code postal</target>
       </trans-unit>
 
+      <trans-unit id="sonata_basket_address_addresses" resname="sonata_basket_address_addresses">
+        <source>sonata_basket_address_addresses</source>
+        <target state="new">Choisir existante</target>
+      </trans-unit>
+      <trans-unit id="sonata_basket_address_useselected" resname="sonata_basket_address_useselected">
+        <source>sonata_basket_address_useselected</source>
+        <target state="new">Utiliser l'adresse sélectionnée</target>
+      </trans-unit>
       <trans-unit id="sonata_basket_address_firstname" resname="sonata_basket_address_firstname">
         <source>sonata_basket_address_firstname</source>
         <target state="new">Prénom</target>

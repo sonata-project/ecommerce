@@ -13,6 +13,7 @@ namespace Sonata\BasketBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -37,16 +38,37 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $addresses = $options['addresses'];
+
+        if (count($addresses) > 0) {
+            $builder->add('addresses', 'choice', array(
+                    'choices'  => $addresses,
+                    'expanded' => false,
+                    'multiple' => false,
+                    'mapped'   => false,
+                ))
+                ->add('useSelected', 'submit', array(
+                        'attr'               => array(
+                            'class' => 'btn btn-primary',
+                            'style' => 'margin-bottom:20px;'
+                        ),
+                        'label'              => 'sonata_basket_address_useselected',
+                        'translation_domain' => 'SonataBasketBundle',
+                        'validation_groups'  => false
+                    )
+                );
+        }
+
         $builder
             ->add('name')
-            ->add('firstname')
-            ->add('lastname')
-            ->add('address1')
+            ->add('firstname', null, array('required' => !count($addresses)))
+            ->add('lastname', null, array('required' => !count($addresses)))
+            ->add('address1', null, array('required' => !count($addresses)))
             ->add('address2')
             ->add('address3')
-            ->add('postcode')
-            ->add('city')
-            ->add('countryCode', 'country')
+            ->add('postcode', null, array('required' => !count($addresses)))
+            ->add('city', null, array('required' => !count($addresses)))
+            ->add('countryCode', 'country', array('required' => !count($addresses)))
             ->add('phone')
         ;
     }
@@ -57,9 +79,12 @@ class AddressType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => $this->addressClass
+            'data_class' => $this->addressClass,
+            'addresses'  => array(),
         ));
     }
+
+
 
     /**
      * {@inheritdoc}

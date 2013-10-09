@@ -296,19 +296,24 @@ class BasketController extends Controller
             throw new NotFoundHttpException('customer not found');
         }
 
-        // Show address creation form
-        $form = $this->createForm('sonata_basket_address');
+        $addresses = $customer->getAddressesByType(AddressInterface::TYPE_DELIVERY);
+
+        // Show address creation / selection form
+        $form = $this->createForm('sonata_basket_address', null, array('addresses' => $addresses->toArray()));
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
             $form->bind($this->get('request'));
 
             if ($form->isValid()) {
+                if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
+                    $address = $addresses[$form->get('addresses')->getData()];
+                } else {
+                    $address = $form->getData();
+                    $address->setType(AddressInterface::TYPE_DELIVERY);
 
-                $address = $form->getData();
-                $address->setType(AddressInterface::TYPE_DELIVERY);
-
-                $customer->addAddress($address);
+                    $customer->addAddress($address);
+                }
 
                 $basket->setCustomer($customer);
                 $basket->setDeliveryAddress($address);
@@ -320,7 +325,8 @@ class BasketController extends Controller
         }
 
         return $this->render($template, array(
-            'form'     => $form->createView(),
+            'form'      => $form->createView(),
+            'addresses' => $addresses
         ));
     }
 

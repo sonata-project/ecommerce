@@ -11,6 +11,10 @@ file that was distributed with this source code.
 
 <h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
+<h4>{{ 'sonata.basket.title_address_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}</h4>
+{{ basket.deliveryaddress.getFullAddress("<br />")|raw }}
+
+
 <form action="{{ url('sonata_basket_delivery') }}" method="POST" >
 {#     <div>#}
 {#         <h2>{{ 'sonata.basket.title_delivery_addresses'|trans({}, 'SonataBasketBundle') }}</h2>#}
@@ -27,5 +31,5 @@ file that was distributed with this source code.
     </div>
 
     {{ form_rest(form) }}
-    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}" class="btn"/>
+    <input type="submit" value="{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}" class="btn btn-primary"/>
 </form>
