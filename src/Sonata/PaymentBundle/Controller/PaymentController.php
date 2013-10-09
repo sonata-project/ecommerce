@@ -199,6 +199,11 @@ class PaymentController extends Controller
         return $response;
     }
 
+    public function termsAction()
+    {
+        return $this->render('SonataPaymentBundle:Payment:terms.html.twig');
+    }
+
     /**
      * @param  \Sonata\Component\Payment\PaymentInterface     $payment
      * @return \Sonata\Component\Payment\TransactionInterface

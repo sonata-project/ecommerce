@@ -20,4 +20,7 @@
         <default key="_controller">SonataPaymentBundle:Payment:callback</default>
     </route>
 
+    <route id="sonata_payment_terms" pattern="/terms-and-conditions">
+        <default key="_controller">SonataPaymentBundle:Payment:terms</default>
+    </route>
 </routes>

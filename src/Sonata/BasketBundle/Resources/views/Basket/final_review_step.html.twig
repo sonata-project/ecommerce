@@ -91,7 +91,7 @@ file that was distributed with this source code.
         <label for="basket_tac">
             <input type="checkbox" name="tac" id="basket_tac"/>
             <strong>{{ 'sonata.basket.label_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</strong> <br />
-            <i><a href="/page/terms-and-conditions">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</a></i>
+            <i><a href="{{ path('sonata_payment_terms') }}" target="_blank">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</a></i>
         </label>
 
         <br />
