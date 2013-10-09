@@ -123,4 +123,18 @@ interface DeliveryInterface
      * @return \Datetime $createdAt
      */
     public function getCreatedAt();
+
+    /**
+     * Returns Delivery base data as an array.
+     *
+     * @return array
+     */
+    public function toArray();
+
+    /**
+     * Populate entity from an array.
+     *
+     * @param array $array
+     */
+    public function fromArray($array);
 }
