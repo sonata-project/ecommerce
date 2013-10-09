@@ -12,13 +12,14 @@ namespace Sonata\Component\Delivery;
 
 use Sonata\Component\Basket\BasketInterface;
 
-interface DeliveryInterface
+interface ServiceDeliveryInterface
 {
     const STATUS_OPEN       = 1;
-    const STATUS_SENT       = 2;
-    const STATUS_CANCELLED  = 3;
-    const STATUS_COMPLETED  = 4;
-    const STATUS_RETURNED   = 5;
+    const STATUS_PENDING    = 2;
+    const STATUS_SENT       = 3;
+    const STATUS_CANCELLED  = 4;
+    const STATUS_COMPLETED  = 5;
+    const STATUS_RETURNED   = 6;
 
     /**
      * @return float the delivery base price

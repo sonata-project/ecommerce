@@ -14,6 +14,7 @@ use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\DeliveryInterface;
+use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
@@ -93,9 +94,9 @@ class BasketTransformer extends BaseTransformer
 
         // Shipping
         $deliveryMethod = $basket->getDeliveryMethod();
-        if (!$deliveryMethod instanceof DeliveryInterface) {
+        if (!$deliveryMethod instanceof ServiceDeliveryInterface) {
             if ($this->getLogger()) {
-                $this->getLogger()->emergency('[Sonata\Component\Delivery\DeliveryInterface::transform] the delivery method is not valid');
+                $this->getLogger()->emergency('[Sonata\Component\Delivery\ServiceDeliveryInterface::transform] the delivery method is not valid');
             }
 
             throw new \RuntimeException('Invalid delivery method');
@@ -104,7 +105,7 @@ class BasketTransformer extends BaseTransformer
         $deliveryAddress = $basket->getDeliveryAddress();
         if ($deliveryMethod->isAddressRequired() && !$deliveryAddress instanceof AddressInterface) {
             if ($this->getLogger()) {
-                $this->getLogger()->emergency('[Sonata\Component\Delivery\DeliveryInterface::transform] the shipping address is not valid');
+                $this->getLogger()->emergency('[Sonata\Component\Delivery\ServiceDeliveryInterface::transform] the shipping address is not valid');
             }
 
             throw new \RuntimeException('Invalid delivery address');
@@ -142,7 +143,7 @@ class BasketTransformer extends BaseTransformer
 
         $order->setDeliveryCost($basket->getDeliveryPrice(true));
         $order->setDeliveryMethod($basket->getDeliveryMethod()->getCode());
-        $order->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
+        $order->setDeliveryStatus(ServiceDeliveryInterface::STATUS_OPEN);
 
         $order->setCreatedAt(new \DateTime);
 

@@ -11,8 +11,8 @@
 
 namespace Sonata\Component\Basket;
 
+use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Payment\PaymentInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Basket\BasketInterface;
@@ -76,7 +76,7 @@ class Basket implements \Serializable, BasketInterface
     protected $deliveryAddress;
 
     /**
-     * @var DeliveryInterface
+     * @var ServiceDeliveryInterface
      */
     protected $deliveryMethod;
 
@@ -171,7 +171,7 @@ class Basket implements \Serializable, BasketInterface
             return false;
         }
 
-        if (!$this->getDeliveryMethod() instanceof DeliveryInterface) {
+        if (!$this->getDeliveryMethod() instanceof ServiceDeliveryInterface) {
             return false;
         }
 
@@ -187,7 +187,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryMethod(DeliveryInterface $method = null)
+    public function setDeliveryMethod(ServiceDeliveryInterface $method = null)
     {
         $this->deliveryMethod = $method;
         $this->deliveryMethodCode = $method ? $method->getCode() : null;
@@ -451,7 +451,7 @@ class Basket implements \Serializable, BasketInterface
 
         $deliveryMethod = $this->getDeliveryMethod();
 
-        if ($deliveryMethod instanceof DeliveryInterface) {
+        if ($deliveryMethod instanceof ServiceDeliveryInterface) {
             $vat += $deliveryMethod->getVatAmount($this);
         }
 
@@ -465,7 +465,7 @@ class Basket implements \Serializable, BasketInterface
     {
         $method = $this->getDeliveryMethod();
 
-        if (!$method instanceof DeliveryInterface) {
+        if (!$method instanceof ServiceDeliveryInterface) {
             return 0;
         }
 

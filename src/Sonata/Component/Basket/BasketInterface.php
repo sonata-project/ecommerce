@@ -11,8 +11,8 @@
 
 namespace Sonata\Component\Basket;
 
+use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Payment\PaymentInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Product\ProductInterface;
@@ -53,13 +53,13 @@ interface BasketInterface
     /**
      * set the Delivery method
      *
-     * @param \Sonata\Component\Delivery\DeliveryInterface $method
+     * @param ServiceDeliveryInterface $method
      */
-    public function setDeliveryMethod(DeliveryInterface $method = null);
+    public function setDeliveryMethod(ServiceDeliveryInterface $method = null);
 
     /**
      *
-     * @return \Sonata\Component\Delivery\DeliveryInterface
+     * @return ServiceDeliveryInterface
      */
     public function getDeliveryMethod();
 

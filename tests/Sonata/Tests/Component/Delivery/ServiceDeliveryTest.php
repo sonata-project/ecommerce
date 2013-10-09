@@ -11,11 +11,13 @@
 
 namespace Sonata\Tests\Component\Delivery;
 
+use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Delivery\Pool;
+use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 
-class DeliveryTest extends \PHPUnit_Framework_TestCase
+class ServiceDeliveryTest extends \PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
@@ -43,15 +45,15 @@ class DeliveryTest extends \PHPUnit_Framework_TestCase
     public function testGetStatusList()
     {
         $statusList = array(
-            BaseDelivery::STATUS_OPEN      => 'status_open',
-            BaseDelivery::STATUS_PENDING   => 'status_pending',
-            BaseDelivery::STATUS_VALIDATED => 'status_validated',
-            BaseDelivery::STATUS_CANCELLED => 'status_cancelled',
-            BaseDelivery::STATUS_ERROR     => 'status_error',
-            BaseDelivery::STATUS_STOPPED   => 'status_stopped',
+            ServiceDeliveryInterface::STATUS_OPEN      => 'status_open',
+            ServiceDeliveryInterface::STATUS_PENDING      => 'status_pending',
+            ServiceDeliveryInterface::STATUS_SENT   => 'status_sent',
+            ServiceDeliveryInterface::STATUS_CANCELLED => 'status_cancelled',
+            ServiceDeliveryInterface::STATUS_COMPLETED     => 'status_completed',
+            ServiceDeliveryInterface::STATUS_RETURNED   => 'status_returned',
         );
-
         $this->assertEquals($statusList, BaseDelivery::getStatusList());
+        $this->assertEquals($statusList, BaseServiceDelivery::getStatusList());
     }
 
     public function testGetOption()

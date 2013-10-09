@@ -14,13 +14,13 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Product\Pool as ProductPool;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * The selector selects available delivery methods depends on the provided basket
  *
  */
-class Selector implements DeliverySelectorInterface
+class Selector implements ServiceDeliverySelectorInterface
 {
     /**
      * @var DeliveryPool
@@ -56,7 +56,7 @@ class Selector implements DeliverySelectorInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
+     * @param LoggerInterface
      */
     public function setLogger(LoggerInterface $logger)
     {
@@ -163,12 +163,12 @@ class Selector implements DeliverySelectorInterface
     }
 
     /**
-     * @param  DeliveryInterface $a
-     * @param  DeliveryInterface $b
+     * @param ServiceDeliveryInterface $a
+     * @param ServiceDeliveryInterface $b
      *
      * @return int
      */
-    public static function sort(DeliveryInterface $a, DeliveryInterface $b)
+    public static function sort(ServiceDeliveryInterface $a, ServiceDeliveryInterface $b)
     {
         if ($a->getPriority() === $b->getPriority()) {
             return 0;

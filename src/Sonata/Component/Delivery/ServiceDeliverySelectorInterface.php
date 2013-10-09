@@ -13,7 +13,7 @@ namespace Sonata\Component\Delivery;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 
-interface DeliverySelectorInterface
+interface ServiceDeliverySelectorInterface
 {
     /**
      * @param null|\Sonata\Component\Basket\BasketInterface    $basket

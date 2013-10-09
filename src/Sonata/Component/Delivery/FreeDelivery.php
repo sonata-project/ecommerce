@@ -14,7 +14,7 @@ namespace Sonata\Component\Delivery;
  * A free delivery method, used this only for testing
  *
  */
-class FreeDelivery extends BaseDelivery
+class FreeDelivery extends BaseServiceDelivery
 {
     /**
      * @var bool

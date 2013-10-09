@@ -23,7 +23,7 @@ interface DeliveryManagerInterface
     /**
      * Deletes a delivery
      *
-     * @param  Delivery $delivery
+     * @param  DeliveryInterface $delivery
      * @return void
      */
     public function deleteDelivery(DeliveryInterface $delivery);
@@ -46,8 +46,7 @@ interface DeliveryManagerInterface
     /**
      * Updates a delivery
      *
-     * @param  Delivery $delivery
-     * @return void
+     * @param  DeliveryInterface $delivery
      */
     public function updateDelivery(DeliveryInterface $delivery);
 }

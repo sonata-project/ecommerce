@@ -87,18 +87,6 @@ class SonataProductExtension extends Extension
         $collector = DoctrineCollector::getInstance();
 
 
-//        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
-//            'fieldName'     => 'productCategories',
-//            'targetEntity'  => $config['class']['product_category'],
-//            'cascade'       => array(
-//                'all'
-//            ),
-//            'mappedBy'      => 'category',
-//            'orphanRemoval' => false,
-//        ));
-//
-
-
         /**
          * DELIVERY
          */

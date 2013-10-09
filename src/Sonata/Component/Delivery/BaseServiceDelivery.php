@@ -16,7 +16,7 @@ use Sonata\Component\Basket\BasketInterface;
  * A free delivery method, used this only for testing
  *
  */
-abstract class BaseDelivery implements DeliveryInterface
+abstract class BaseServiceDelivery implements ServiceDeliveryInterface
 {
     /**
      * @var float
@@ -66,11 +66,12 @@ abstract class BaseDelivery implements DeliveryInterface
     public static function getStatusList()
     {
         return array(
-            self::STATUS_OPEN       => 'open',
-            self::STATUS_SENT       => 'sent',
-            self::STATUS_CANCELLED  => 'cancelled',
-            self::STATUS_COMPLETED  => 'delivered',
-            self::STATUS_RETURNED   => 'returned',
+            self::STATUS_OPEN       => 'status_open',
+            self::STATUS_PENDING    => 'status_pending',
+            self::STATUS_SENT       => 'status_sent',
+            self::STATUS_CANCELLED  => 'status_cancelled',
+            self::STATUS_COMPLETED  => 'status_completed',
+            self::STATUS_RETURNED   => 'status_returned',
         );
     }
 

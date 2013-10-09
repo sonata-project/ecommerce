@@ -10,8 +10,6 @@
 
 namespace Sonata\Component\Delivery;
 
-use Sonata\Component\Delivery\DeliveryInterface;
-
 /**
  * The pool stored a group of available delivery method
  *
@@ -26,10 +24,9 @@ class Pool
     /**
      * add a delivery method into the pool
      *
-     * @param  \Sonata\Component\Delivery\DeliveryInterface $instance
-     * @return void
+     * @param  ServiceDeliveryInterface $instance
      */
-    public function addMethod(DeliveryInterface $instance)
+    public function addMethod(ServiceDeliveryInterface $instance)
     {
         $this->methods[$instance->getCode()] = $instance;
     }
@@ -43,10 +40,11 @@ class Pool
     }
 
     /**
-     * return a Delivery Object
+     * return a ServiceDeliveryInterface Object
      *
-     * @param  string                                       $code
-     * @return \Sonata\Component\Delivery\DeliveryInterface
+     * @param string $code
+     *
+     * @return ServiceDeliveryInterface
      */
     public function getMethod($code)
     {

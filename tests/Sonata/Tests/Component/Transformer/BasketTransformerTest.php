@@ -123,7 +123,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
-        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->once())->method('isAddressRequired')->will($this->returnValue(true));
 
         $basket->setCustomer($customer);
@@ -147,7 +147,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $basket   = new Basket;
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
-        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->exactly(2))->method('isAddressRequired')->will($this->returnValue(true));
         $deliveryAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');

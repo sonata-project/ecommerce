@@ -13,16 +13,12 @@ namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
-use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Tests\Component\Basket\Delivery;
-use Sonata\Tests\Component\Basket\Payment;
-use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\Component\Delivery\BaseDelivery;
+use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Tests\Component\Product\Product;
 
-class Delivery extends BaseDelivery
+class Delivery extends BaseServiceDelivery
 {
     public function isAddressRequired()
     {
@@ -192,14 +188,14 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->setPaymentMethod($this->getMock('Sonata\Component\Payment\PaymentInterface'));
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery method is invalid');
 
-        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->any())
             ->method('isAddressRequired')
             ->will($this->returnValue(false));
         $basket->setDeliveryMethod($deliveryMethod);
         $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check because delivery method doesn\'t require an address');
 
-        $requiredDelivery = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $requiredDelivery = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $requiredDelivery->expects($this->any())
             ->method('isAddressRequired')
             ->will($this->returnValue(true));
@@ -424,7 +420,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->setPaymentAddressId(1);
         $this->assertEquals(1, $basket->getPaymentAddressId());
 
-        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\DeliveryInterface');
+        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->any())
             ->method('getCode')
             ->will($this->returnValue(1));

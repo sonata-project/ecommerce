@@ -12,6 +12,7 @@ namespace Sonata\ProductBundle\Model;
 
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
+use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
@@ -159,7 +160,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setDesignation($basketElement->getName());
         $orderElement->setProductType($this->getCode());
         $orderElement->setStatus(OrderInterface::STATUS_PENDING);
-        $orderElement->setDeliveryStatus(DeliveryInterface::STATUS_OPEN);
+        $orderElement->setDeliveryStatus(ServiceDeliveryInterface::STATUS_OPEN);
         $orderElement->setCreatedAt(new \DateTime);
         $orderElement->setOptions($basketElement->getOptions());
 
@@ -182,12 +183,13 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  \Application\Sonata\OrderBundle\Entity\OrderElement $orderElement
-     * @param  string                                              $type
-     * @param  string                                              $format
+     * @param  OrderElementInterface $orderElement
+     * @param  string                $type
+     * @param  string                $format
+     *
      * @return \Sonata\Component\Product\ProductInterface
      */
-    public function getProductFromRaw(OrderElement $orderElement, $type, $format = 'json')
+    public function getProductFromRaw(OrderElementInterface $orderElement, $type, $format = 'json')
     {
         return $this->serializer->deserialize(json_encode($orderElement->getRawProduct()), $type, $format);
     }
