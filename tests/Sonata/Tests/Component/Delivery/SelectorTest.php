@@ -21,7 +21,7 @@ use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 
-class Delivery extends \Sonata\Component\Delivery\BaseServiceDelivery
+class ServiceDelivery extends \Sonata\Component\Delivery\BaseServiceDelivery
 {
     public function isAddressRequired()
     {
@@ -68,17 +68,17 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testAvailableMethods()
     {
-        $deliveryMethod_low = new Delivery();
+        $deliveryMethod_low = new ServiceDelivery();
         $deliveryMethod_low->setCode('ups_low');
         $deliveryMethod_low->setEnabled(true);
         $deliveryMethod_low->setPriority(1);
 
-        $deliveryMethod_high = new Delivery();
+        $deliveryMethod_high = new ServiceDelivery();
         $deliveryMethod_high->setCode('ups_high');
         $deliveryMethod_high->setEnabled(true);
         $deliveryMethod_high->setPriority(2);
 
-        $deliveryMethod_high_bis = new Delivery();
+        $deliveryMethod_high_bis = new ServiceDelivery();
         $deliveryMethod_high_bis->setCode('ups_high_bis');
         $deliveryMethod_high_bis->setEnabled(true);
         $deliveryMethod_high_bis->setPriority(2);
