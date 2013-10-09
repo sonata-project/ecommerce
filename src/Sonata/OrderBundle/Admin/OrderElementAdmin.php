@@ -16,6 +16,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Product\Pool;
 
 class OrderElementAdmin extends Admin
 {
@@ -25,11 +26,24 @@ class OrderElementAdmin extends Admin
     protected $currencyDetector;
 
     /**
+     * @var Pool
+     */
+    protected $productPool;
+
+    /**
      * @param CurrencyDetectorInterface $currencyDetector
      */
     public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
     {
         $this->currencyDetector = $currencyDetector;
+    }
+
+    /**
+     * @param Pool $pool
+     */
+    public function setProductPool(Pool $productPool)
+    {
+        $this->productPool = $productPool;
     }
 
     /**
@@ -48,12 +62,12 @@ class OrderElementAdmin extends Admin
     {
         $formMapper
             ->with($this->trans('order_element.form.group_main_label', array(), 'SonataOrderBundle'))
-                ->add('productType')
+                ->add('productType', 'choice', array('choices' => array_keys($this->productPool->getProducts())))
                 ->add('quantity')
                 ->add('price')
                 ->add('vat')
                 ->add('designation')
-                ->add('description')
+                ->add('description', null, array('required' => false))
                 ->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))
                 ->add('deliveryStatus', 'sonata_product_delivery_status', array('translation_domain' => 'SonataDeliveryBundle'))
             ->end()

@@ -92,7 +92,7 @@ class CustomerAdmin extends Admin
                 ->add('birthPlace')
             ->end()
             ->with('customer.group.contact')
-                ->add('email')
+                ->add('email', 'email')
                 ->add('phoneNumber')
                 ->add('mobileNumber')
                 ->add('faxNumber')

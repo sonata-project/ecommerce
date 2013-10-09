@@ -227,6 +227,14 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getValidationStatusList()
+    {
+        return array_keys(self::getStatusList());
+    }
+
+    /**
      * @param  \DateTime|null $createdAt
      * @return void
      */

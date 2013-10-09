@@ -928,6 +928,14 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getValidationStatusList()
+    {
+        return array_keys(self::getStatusList());
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setLocale($locale)

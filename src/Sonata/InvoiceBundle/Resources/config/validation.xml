@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+
+    <class name="Sonata\Component\Invoice\InvoiceInterface">
+        <getter property="totalInc">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="totalExcl">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="reference">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="currency">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="status">
+            <constraint name="NotNull" />
+            <constraint name="Choice">
+                <option name="callback">
+                    <value>Sonata\InvoiceBundle\Entity\BaseInvoice</value>
+                    <value>getValidationStatusList</value>
+                </option>
+            </constraint>
+        </getter>
+
+        <getter property="name">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="address1">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="city">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="postcode">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="country">
+            <constraint name="NotNull" />
+            <constraint name="Country" />
+        </getter>
+
+        <getter property="email">
+            <constraint name="Email" />
+        </getter>
+    </class>
+
+</constraint-mapping>

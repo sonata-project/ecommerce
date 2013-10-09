@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+
+    <class name="Sonata\Component\Product\ProductInterface">
+        <getter property="price">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="vat">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="name">
+            <constraint name="NotNull" />
+        </getter>
+
+    </class>
+
+</constraint-mapping>

@@ -37,7 +37,7 @@ class AddressAdmin extends Admin
         $formMapper
             ->with($this->trans('address.form.group_advanced_label', array(), 'SonataCustomerBundle'))
                 ->add('type', 'choice', array('choices' => Address::getTypesList(), 'translation_domain' => 'SonataCustomerBundle'))
-                ->add('current')
+                ->add('current', null, array('required' => false))
                 ->add('name')
             ->end();
 

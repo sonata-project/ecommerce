@@ -518,4 +518,12 @@ abstract class BaseInvoice implements InvoiceInterface
             self::STATUS_CONFLICT => 'status_conflict',
         );
     }
+
+    /**
+     * @return array
+     */
+    public static function getValidationStatusList()
+    {
+        return array_keys(self::getStatusList());
+    }
 }

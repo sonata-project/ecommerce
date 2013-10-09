@@ -236,4 +236,12 @@ abstract class BaseDelivery implements DeliveryInterface
     {
         return BaseServiceDelivery::getStatusList();
     }
+
+    /**
+     * @return array
+     */
+    public static function getValidationStatusList()
+    {
+        return array_keys(self::getStatusList());
+    }
 }
