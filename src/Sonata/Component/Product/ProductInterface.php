@@ -11,101 +11,73 @@
 
 namespace Sonata\Component\Product;
 
-use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\MediaBundle\Model\MediaInterface;
+use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 interface ProductInterface
 {
     /**
-     * @return integer the product id
+     * Get id.
+     *
+     * @return integer
      */
     public function getId();
 
     /**
-     * @return float the product price
+     * Set sku.
+     *
+     * @param string $sku
      */
-    public function getPrice();
+    public function setSku($sku);
 
     /**
-     * @param float $price the product price
+     * Get sku.
+     *
+     * @return string
      */
-    public function setPrice($price);
+    public function getSku();
 
     /**
-     * @return float the vat price
+     * Set slug.
+     *
+     * @param string $slug
      */
-    public function getVat();
+    public function setSlug($slug);
 
     /**
-     * @param float $vat the product vat
+     * Get slug.
+     *
+     * @return string
      */
-    public function setVat($vat);
+    public function getSlug();
 
     /**
-     * @return string the product name
-     */
-    public function getName();
-
-    /**
+     * Set name.
+     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * @return string the product name
-     */
-    public function getParent();
-
-    /**
-     * @param ProductInterface $parent
-     */
-    public function setParent(ProductInterface $parent);
-
-    /**
-     * @return array the product options
-     */
-    public function getOptions();
-
-    /**
-     * @param array $options
-     */
-    public function setOptions(array $options);
-
-    /**
-     * @return boolean , true is the product is enabled (ready to be sell)
-     */
-    public function getEnabled();
-
-    /**
-     * @param boolean $enabled
-     */
-    public function setEnabled($enabled);
-
-    /**
-     * Return true if the product is recurrent
+     * Get name.
      *
-     * @return void
+     * @return string
      */
-    public function isRecurrentPayment();
+    public function getName();
 
     /**
-     * Return true if the product is a variation, linked to a main product
-     *
-     * @return boolean
-     */
-    public function isVariation();
-
-    /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      */
     public function setDescription($description);
 
     /**
-     * Get description
+     * Get description.
      *
-     * @return string $description
+     * @return string
      */
     public function getDescription();
 
@@ -119,7 +91,7 @@ interface ProductInterface
     /**
      * Get RAW description.
      *
-     * @return string $rawDescription
+     * @return string
      */
     public function getRawDescription();
 
@@ -133,40 +105,275 @@ interface ProductInterface
     /**
      * Get description formatter.
      *
-     * @return string $descriptionFormatter
+     * @return string
      */
     public function getDescriptionFormatter();
 
     /**
+     * Set price.
+     *
+     * @param float $price
+     */
+    public function setPrice($price);
+
+    /**
+     * Get price.
+     *
+     * @return float
+     */
+    public function getPrice();
+
+    /**
+     * Set vat.
+     *
+     * @param float $vat
+     */
+    public function setVat($vat);
+
+    /**
+     * Get vat
+     *
+     * @return float
+     */
+    public function getVat();
+
+    /**
+     * Set stock.
+     *
+     * @param integer $stock
+     */
+    public function setStock($stock);
+
+    /**
+     * Get stock.
+     *
+     * @return integer
+     */
+    public function getStock();
+
+    /**
+     * Set enabled.
+     *
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled);
+
+    /**
+     * Get enabled.
+     *
+     * @return boolean
+     */
+    public function getEnabled();
+
+    /**
+     * Set updatedAt.
+     *
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt = null);
+
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt();
+
+    /**
+     * Set createdAt.
+     *
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt = null);
+
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt();
+
+    /**
+     * Add a Package to collection.
+     *
+     * @param PackageInterface $package
+     */
+    public function addPackage(PackageInterface $package);
+
+    /**
+     * Remove a Package from collection.
+     *
+     * @param PackageInterface $package
+     */
+    public function removePackage(PackageInterface $package);
+
+    /**
+     * Get Package collection.
+     *
+     * @return ArrayCollection
+     */
+    public function getPackages();
+
+    /**
+     * Set Package collection.
+     *
+     * @param ArrayCollection $package
+     */
+    public function setPackages(ArrayCollection $packages);
+
+    /**
+     * Add a Delivery to collection.
+     *
      * @param DeliveryInterface $delivery
      */
     public function addDelivery(DeliveryInterface $delivery);
 
     /**
-     * @return array
+     * Remove a Delivery from collection.
+     *
+     * @param DeliveryInterface $delivery
+     */
+    public function removeDelivery(DeliveryInterface $delivery);
+
+    /**
+     * Get Delivery collection.
+     *
+     * @return ArrayCollection
      */
     public function getDeliveries();
 
     /**
-     * Set the Product variations.
+     * Set Delivery collection.
      *
-     * @param array $variations
+     * @param ArrayCollection $deliveries
      */
-    public function setVariations(array $variations);
+    public function setDeliveries(ArrayCollection $deliveries);
 
     /**
-     * Get the variations.
+     * Add a ProductCategory to collection.
      *
-     * @return array
+     * @param ProductCategoryInterface $productCategory
+     */
+    public function addProductCategory(ProductCategoryInterface $productCategory);
+
+    /**
+     * Remove a ProductCategory from collection.
+     *
+     * @param ProductCategoryInterface $productCategory
+     */
+    public function removeProductCategory(ProductCategoryInterface $productCategory);
+
+    /**
+     * Get ProductCategories collection.
+     *
+     * @return ArrayCollection
+     */
+    public function getProductCategories();
+
+    /**
+     * Set ProductCategory collection.
+     *
+     * @param ArrayCollection $productCategories
+     */
+    public function setProductCategories(ArrayCollection $productCategories);
+
+    /**
+     * Add a variation to collection.
+     *
+     * @param ProductInterface $variation
+     */
+    public function addVariation(ProductInterface $variation);
+
+    /**
+     * Remove a variation from collection.
+     *
+     * @param ProductInterface $variation
+     */
+    public function removeVariation(ProductInterface $variation);
+
+    /**
+     * Get variation collection.
+     *
+     * @return ArrayCollection
      */
     public function getVariations();
 
     /**
-     * Add a Product variation.
+     * Set variation collection.
      *
-     * @param ProductInterface $product
+     * @param ArrayCollection $variations
      */
-    public function addVariation(ProductInterface $product);
+    public function setVariations(ArrayCollection $variations);
+
+    /**
+     * Set Media.
+     *
+     * @param MediaInterface $image
+     */
+    public function setImage(MediaInterface $image = null);
+
+    /**
+     * Get Media.
+     *
+     * @return MediaInterface
+     */
+    public function getImage();
+
+    /**
+     * Get parent Product.
+     *
+     * @return ProductInterface
+     */
+    public function getParent();
+
+    /**
+     * Set parent Product.
+     *
+     * @param ProductInterface $parent
+     */
+    public function setParent(ProductInterface $parent);
+
+    /**
+     * Get Product options.
+     *
+     * @return array
+     */
+    public function getOptions();
+
+    /**
+     * Set Product options.
+     *
+     * @param array $options
+     */
+    public function setOptions(array $options);
+
+    /**
+     * Get Product name.
+     *
+     * @return string
+     */
+    public function __toString();
+
+    /**
+     * Return true if the Product is a variation, linked to a main Product.
+     *
+     * @return boolean
+     */
+    public function isVariation();
+
+    /**
+     * Return true if Product is enabled.
+     *
+     * @return boolean
+     */
+    public function isEnabled();
+
+    /**
+     * Return true if the Product is recurrent.
+     *
+     * @return boolean
+     */
+    public function isRecurrentPayment();
 
     /**
      * Returns Product base data as an array.

@@ -10,13 +10,12 @@
 
 namespace Sonata\ProductBundle\Entity;
 
-use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;
-use Sonata\MediaBundle\Model\MediaInterface;
-
 use Sonata\Component\Product\ProductCategoryInterface;
-use Doctrine\Common\Collections\Collection;
+use Sonata\MediaBundle\Model\MediaInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Sonata\ProductBundle\Entity\BaseProduct
@@ -24,98 +23,113 @@ use Doctrine\Common\Collections\Collection;
 abstract class BaseProduct implements ProductInterface
 {
     /**
-     * @var string $sku
+     * @var string
      */
     protected $sku;
 
     /**
-     * @var string $slug
+     * @var string
      */
     protected $slug;
 
     /**
-     * @var string $name
+     * @var string
      */
     protected $name;
 
     /**
-     * @var string $description
+     * @var string
      */
     protected $description;
 
     /**
-     * @var string $rawDescription
+     * @var string
      */
     protected $rawDescription;
 
     /**
-     * @var string $descriptionFormatter
+     * @var string
      */
     protected $descriptionFormatter;
 
     /**
-     * @var float $price
+     * @var float
      */
     protected $price;
 
     /**
-     * @var float $vat
+     * @var float
      */
     protected $vat;
 
     /**
-     * @var integer $stock
+     * @var integer
      */
     protected $stock;
 
     /**
-     * @var boolean $enabled
+     * @var boolean
      */
     protected $enabled;
 
     /**
-     * @var \DateTime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
-    protected $image;
-
     /**
-     * @var \Sonata\ProductBundle\Entity\BasePackage
+     * @var ArrayCollection
      */
-    protected $package;
+    protected $packages;
 
     /**
-     * @var Collection
+     * @var ArrayCollection
      */
     protected $deliveries;
+
+    /**
+     * @var ArrayCollection
+     */
+    protected $productCategories;
+
+    /**
+     * @var MediaInterface
+     */
+    protected $image;
 
     /**
      * @var ProductInterface
      */
     protected $parent;
 
-    protected $options = array();
-
     /**
-     * @var array
+     * @var ArrayCollection
      */
     protected $variations;
 
     /**
-     * @var Collection
+     * @var array
      */
-    protected $productCategories;
+    protected $options = array();
 
     /**
-     * Set sku
-     *
-     * @param string $sku
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->package           = new ArrayCollection();
+        $this->deliveries        = new ArrayCollection();
+        $this->productCategories = new ArrayCollection();
+        $this->variations        = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setSku($sku)
     {
@@ -123,9 +137,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get sku
-     *
-     * @return string $sku
+     * {@inheritdoc}
      */
     public function getSku()
     {
@@ -133,9 +145,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
+     * {@inheritdoc}
      */
     public function setSlug($slug)
     {
@@ -143,9 +153,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get slug
-     *
-     * @return string $slug
+     * {@inheritdoc}
      */
     public function getSlug()
     {
@@ -153,9 +161,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -167,9 +173,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string $name
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -177,9 +181,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
@@ -187,9 +189,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get description
-     *
-     * @return string $description
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -197,9 +197,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set RAW description.
-     *
-     * @param string $rawDescription
+     * {@inheritdoc}
      */
     public function setRawDescription($rawDescription)
     {
@@ -207,9 +205,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get RAW description.
-     *
-     * @return string $rawDescription
+     * {@inheritdoc}
      */
     public function getRawDescription()
     {
@@ -217,9 +213,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set description formatter.
-     *
-     * @param string $descriptionFormatter
+     * {@inheritdoc}
      */
     public function setDescriptionFormatter($descriptionFormatter)
     {
@@ -227,9 +221,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get description formatter.
-     *
-     * @return string $descriptionFormatter
+     * {@inheritdoc}
      */
     public function getDescriptionFormatter()
     {
@@ -237,9 +229,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set price
-     *
-     * @param float $price
+     * {@inheritdoc}
      */
     public function setPrice($price)
     {
@@ -247,9 +237,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get price
-     *
-     * @return float $price
+     * {@inheritdoc}
      */
     public function getPrice()
     {
@@ -257,9 +245,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set vat
-     *
-     * @param float $vat
+     * {@inheritdoc}
      */
     public function setVat($vat)
     {
@@ -267,9 +253,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get vat
-     *
-     * @return float $vat
+     * {@inheritdoc}
      */
     public function getVat()
     {
@@ -277,9 +261,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set stock
-     *
-     * @param integer $stock
+     * {@inheritdoc}
      */
     public function setStock($stock)
     {
@@ -287,9 +269,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get stock
-     *
-     * @return integer $stock
+     * {@inheritdoc}
      */
     public function getStock()
     {
@@ -297,9 +277,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set enabled
-     *
-     * @param boolean $enabled
+     * {@inheritdoc}
      */
     public function setEnabled($enabled)
     {
@@ -307,9 +285,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get enabled
-     *
-     * @return boolean $enabled
+     * {@inheritdoc}
      */
     public function getEnabled()
     {
@@ -317,9 +293,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -327,9 +301,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get updatedAt
-     *
-     * @return \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -337,9 +309,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -347,9 +317,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get createdAt
-     *
-     * @return \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -357,50 +325,51 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Add package
-     *
-     * @param \Sonata\ProductBundle\Entity\BasePackage $package
+     * {@inheritdoc}
      */
-    public function addPackage($package)
+    public function addPackage(PackageInterface $package)
     {
-        $this->package[] = $package;
+        $this->packages[] = $package;
     }
 
     /**
-     * Get package
-     *
-     * @return \Doctrine\Common\Collections\Collection $package
+     * {@inheritdoc}
      */
-    public function getPackage()
+    public function removePackage(PackageInterface $package)
     {
-        return $this->package;
+        if ($this->packages->contains($package)) {
+            $this->packages->remove($package);
+        }
     }
 
     /**
-     * Add delivery
-     *
-     * @param \Sonata\Component\Product\DeliveryInterface $delivery
+     * {@inheritdoc}
+     */
+    public function getPackages()
+    {
+        return $this->packages;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPackages(ArrayCollection $packages)
+    {
+        $this->packages = $packages;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function addDelivery(DeliveryInterface $delivery)
     {
         $delivery->setProduct($this);
+
         $this->deliveries[] = $delivery;
     }
 
     /**
-     * Adds a delivery (grammar mixup)
-     *
-     * @param DeliveryInterface $delivery
-     */
-    public function addDeliverie(DeliveryInterface $delivery)
-    {
-        $this->addDelivery($delivery);
-    }
-
-    /**
-     * Remove delivery
-     *
-     * @param \Sonata\Component\Product\DeliveryInterface $delivery
+     * {@inheritdoc}
      */
     public function removeDelivery(DeliveryInterface $delivery)
     {
@@ -410,9 +379,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Get delivery
-     *
-     * @return \Doctrine\Common\Collections\Collection $delivery
+     * {@inheritdoc}
      */
     public function getDeliveries()
     {
@@ -420,108 +387,35 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Set deliveries
-     *
-     * @param Collection $deliveries
+     * {@inheritdoc}
      */
-    public function setDeliveries(Collection $deliveries)
+    public function setDeliveries(ArrayCollection $deliveries)
     {
         $this->deliveries = $deliveries;
     }
 
     /**
-     * @return string the product name
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @param \Sonata\Component\Product\ProductInterface $parent
-     */
-    public function setParent(ProductInterface $parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @return string the product name
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * Set product options
-     *
-     * @param array $options
-     *
-     * @return void
-     */
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
-    }
-
-    /**
-     * Return true if the product is a variation, linked to a main product.
-     *
-     * @return boolean
-     */
-    public function isVariation()
-    {
-        return $this->getParent() !== null;
-    }
-
-    /**
-     * Add ProductCategories
-     *
-     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
+     * {@inheritdoc}
      */
     public function addProductCategory(ProductCategoryInterface $productCategory)
     {
         $productCategory->setProduct($this);
+
         $this->productCategories[] = $productCategory;
     }
 
     /**
-     * Add ProductCategory
-     *
-     * @param ProductCategoryInterface $productCategory
-     */
-    public function addProductCategorie(ProductCategoryInterface $productCategory)
-    {
-        $this->addProductCategory($productCategory);
-    }
-
-    /**
-     * Remove ProductCategories
-     *
-     * @param \Sonata\Component\Product\ProductCategoryInterface $productCategory
+     * {@inheritdoc}
      */
     public function removeProductCategory(ProductCategoryInterface $productCategory)
     {
-        if ($this->productCategories->has($productCategory)) {
+        if ($this->productCategories->contains($productCategory)) {
             $this->productCategories->remove($productCategory);
         }
     }
 
     /**
-     * Set ProductCategories
-     *
-     * @param Collection $productCategories
-     */
-    public function setProductCategory(Collection $productCategories)
-    {
-        $this->productCategories = $productCategories;
-    }
-
-    /**
-     * Get ProductCategories
-     *
-     * @return \Doctrine\Common\Collections\Collection $productCategories
+     * {@inheritdoc}
      */
     public function getProductCategories()
     {
@@ -529,49 +423,35 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Tells if product is enabled
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
-    public function isEnabled()
+    public function setProductCategories(ArrayCollection $productCategories)
     {
-        return $this->getEnabled();
+        $this->productCategories = $productCategories;
     }
 
     /**
-     * Set image
-     *
-     * @param \Sonata\MediaBundle\Model\MediaInterface $image
+     * {@inheritdoc}
      */
-    public function setImage(MediaInterface $image = null)
+    public function addVariation(ProductInterface $variation)
     {
-        $this->image = $image;
+        $variation->setParent($this);
+
+        $this->variations[] = $variation;
     }
 
     /**
-     * Get image
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media $image
+     * {@inheritdoc}
      */
-    public function getImage()
+    public function removeVariation(ProductInterface $variation)
     {
-        return $this->image;
+        if ($this->variations->contains($variation)) {
+            $this->variations->remove($variation);
+        }
     }
 
     /**
-     * Set the Product variations.
-     *
-     * @param array $variations
-     */
-    public function setVariations(array $variations)
-    {
-        $this->variations = $variations;
-    }
-
-    /**
-     * Get the variations.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getVariations()
     {
@@ -579,18 +459,91 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * Add a Product variation.
-     *
-     * @param ProductInterface $product
+     * {@inheritdoc}
      */
-    public function addVariation(ProductInterface $variation)
+    public function setVariations(ArrayCollection $variations)
     {
-        $this->variations[] = $variation;
+        $this->variations = $variations;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setImage(MediaInterface $image = null)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setParent(ProductInterface $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         return (string) $this->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isVariation()
+    {
+        return $this->getParent() !== null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return $this->getEnabled();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRecurrentPayment()
+    {
+        return false;
     }
 
     public function preUpdate()
@@ -602,11 +555,6 @@ abstract class BaseProduct implements ProductInterface
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
-    }
-
-    public function isRecurrentPayment()
-    {
-        return false;
     }
 
     /**

@@ -153,7 +153,7 @@ class SonataProductExtension extends Extension
          * PRODUCT
          */
         $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
-             'fieldName'     => 'package',
+             'fieldName'     => 'packages',
              'targetEntity'  => $config['class']['package'],
              'cascade'       => array(),
              'mappedBy'      => 'Product',
