@@ -122,7 +122,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function __construct()
     {
-        $this->package           = new ArrayCollection();
+        $this->packages          = new ArrayCollection();
         $this->deliveries        = new ArrayCollection();
         $this->productCategories = new ArrayCollection();
         $this->variations        = new ArrayCollection();
