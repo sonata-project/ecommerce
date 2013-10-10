@@ -23,6 +23,12 @@
             <call method="setCurrencyDetector">
                 <argument type="service" id="sonata.price.currency.detector" />
             </call>
+            <call method="setInvoiceManager">
+                <argument type="service" id="sonata.invoice.manager" />
+            </call>
+            <call method="setOrderManager">
+                <argument type="service" id="sonata.order.manager" />
+            </call>
         </service>
 
         <service id="sonata.order.admin.order_element" class="%sonata.order.admin.order_element.class%">

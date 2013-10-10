@@ -428,6 +428,25 @@
             </trans-unit>
             <!-- End - Order view translations -->
 
+            <!-- Begin - Order admin confirm invoice generation translations -->
+            <trans-unit id="sonata.order.invoice_generate_confirm_title">
+                <source>sonata.order.invoice_generate_confirm_title</source>
+                <target>Génération de facture</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.invoice_generate_confirm_message">
+                <source>sonata.order.invoice_generate_confirm_message</source>
+                <target>Vous êtes sur le point de générer une facture pour cette commande. Êtes-vous sûr de vouloir continuer?</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.invoice_generate_confirm_cancel">
+                <source>sonata.order.invoice_generate_confirm_cancel</source>
+                <target>Retour à la commande</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.invoice_generate_confirm_confirm">
+                <source>sonata.order.invoice_generate_confirm_confirm</source>
+                <target>Générer la facture</target>
+            </trans-unit>
+            <!-- End - Order admin confirm invoice generation translations -->
+
         </body>
     </file>
 </xliff>

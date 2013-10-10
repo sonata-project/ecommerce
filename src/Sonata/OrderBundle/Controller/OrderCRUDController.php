@@ -17,16 +17,25 @@ class OrderCRUDController extends CRUDController
             throw new InvalidParameterException("Missing 'id' parameter");
         }
 
+        if (null === $this->getRequest()->get('confirm')) {
+            return $this->render('SonataOrderBundle:OrderAdmin:invoice_generate_confirm.html.twig', array('id' => $id));
+        }
+
         $order = $this->admin->getObject($id);
-        $invoice = $this->getInvoiceManager()->createInvoice();
 
-        $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
+        $invoice = $this->getInvoiceManager()->findInvoiceBy(array('reference' => $order->getReference()));
 
-        $this->getInvoiceManager()->updateInvoice($invoice);
+        if (null === $invoice) {
+            $invoice = $this->getInvoiceManager()->createInvoice();
 
-        $this->addFlash('sonata_flash_success', 'order_invoice_generate_success');
+            $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
 
-        return $this->redirectTo($order);
+            $this->getInvoiceManager()->updateInvoice($invoice);
+
+            $this->addFlash('sonata_flash_success', 'order_invoice_generate_success');
+        }
+
+        return $this->redirect($this->generateUrl('admin_sonata_invoice_invoice_edit', array('id' => $invoice->getId())));
     }
 
     /**

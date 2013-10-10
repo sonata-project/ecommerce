@@ -20,6 +20,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Invoice\InvoiceManagerInterface;
+use Sonata\Component\Order\OrderManagerInterface;
 
 class OrderAdmin extends Admin
 {
@@ -29,11 +31,37 @@ class OrderAdmin extends Admin
     protected $currencyDetector;
 
     /**
+     * @var InvoiceManagerInterface
+     */
+    protected $invoiceManager;
+
+    /**
+     * @var OrderManagerInterface
+     */
+    protected $orderManager;
+
+    /**
      * @param CurrencyDetectorInterface $currencyDetector
      */
     public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
     {
         $this->currencyDetector = $currencyDetector;
+    }
+
+    /**
+     * @param InvoiceManagerInterface $invoiceManager
+     */
+    public function setInvoiceManager(InvoiceManagerInterface $invoiceManager)
+    {
+        $this->invoiceManager = $invoiceManager;
+    }
+
+    /**
+     * @param OrderManagerInterface $orderManager
+     */
+    public function setOrderManager(OrderManagerInterface $orderManager)
+    {
+        $this->orderManager = $orderManager;
     }
 
     /**
@@ -162,9 +190,19 @@ class OrderAdmin extends Admin
             array('uri' => $admin->generateUrl('sonata.order.admin.order_element.list', array('id' => $id)))
         );
 
-        $menu->addChild(
-            $this->trans('order.sidemenu.link_order_invoice_generate', array(), 'SonataOrderBundle'),
-            array('uri' => $admin->generateUrl('generateInvoice', array('id' => $id)))
-        );
+        $order = $this->orderManager->findOneBy(array('id' => $id));
+        $invoice = $this->invoiceManager->findInvoiceBy(array('reference' => $order->getReference()));
+
+        if (null === $invoice) {
+            $menu->addChild(
+                $this->trans('order.sidemenu.link_order_invoice_generate', array(), 'SonataOrderBundle'),
+                array('uri' => $admin->generateUrl('generateInvoice', array('id' => $id)))
+            );
+        } else {
+            $menu->addChild(
+                $this->trans('order.sidemenu.link_order_invoice_edit', array(), 'SonataOrderBundle'),
+                array('uri' => $admin->getRouteGenerator()->generate('admin_sonata_invoice_invoice_edit', array('id' => $invoice->getId())))
+            );
+        }
     }
 }
