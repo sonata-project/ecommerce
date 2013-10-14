@@ -14,7 +14,7 @@ file that was distributed with this source code.
 <div class="row">
     <div class="span6">
         <p>{% trans with {'%orderId%' : order.id} from 'SonataOrderBundle' %}sonata.order.view.order_with_id{% endtrans %}</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Primum divisit ineleganter; Sedulo, inquam, faciam. Sin tantum modo ad indicia veteris memoriae cognoscenda, curiosorum. Duo Reges: constructio interrete. Iam doloris medicamenta illa Epicurea tamquam de narthecio proment: Si gravis, brevis; Sed quae tandem ista ratio est? Restinguet citius, si ardentem acceperit. Quos quidem tibi studiose et diligenter tractandos magnopere censeo. Nihil minus, contraque illa hereditate dives ob eamque rem laetus. Re mihi non aeque satisfacit, et quidem locis pluribus. Quorum altera prosunt, nocent altera. Rationis enim perfectio est virtus;</p>
+
         <p><a href="{{ url('sonata_invoice_view', {'reference' : order.reference}) }}">{% trans from 'SonataOrderBundle' %}sonata.order.view_invoice{% endtrans %}</a></p>
     </div>
     <div class="span4">
