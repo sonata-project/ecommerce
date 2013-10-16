@@ -44,10 +44,6 @@
                 <source>title_sub_categories</source>
                 <target state="new">Subcategories</target>
             </trans-unit>
-            <trans-unit id="sonata_ecommerce">
-                <source>sonata_ecommerce</source>
-                <target>Ecommerce</target>
-            </trans-unit>
             <trans-unit id="product">
                 <source>product</source>
                 <target>Product</target>
