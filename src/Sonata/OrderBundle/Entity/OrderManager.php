@@ -13,6 +13,7 @@ namespace Sonata\OrderBundle\Entity;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Doctrine\ORM\EntityManager;
+use Sonata\UserBundle\Model\UserInterface;
 
 class OrderManager implements OrderManagerInterface
 {
@@ -99,6 +100,20 @@ class OrderManager implements OrderManagerInterface
     {
         return $this->repository->findBy($criteria);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findForUser(UserInterface $user)
+    {
+        $qb = $this->repository->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'c')
+            ->where('c.user = :user')
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()->execute();
+    }
+
 
     /**
      * Deletes a order

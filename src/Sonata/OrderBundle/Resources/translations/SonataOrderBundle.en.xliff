@@ -426,6 +426,10 @@
                 <source>sonata.order.view_invoice</source>
                 <target state="new">Your invoice is available here.</target>
             </trans-unit>
+            <trans-unit id="sonata.order.view.status">
+                <source>sonata.order.view.status</source>
+                <target state="new">Status</target>
+            </trans-unit>
             <!-- End - Order view translations -->
 
             <!-- Begin - Order admin confirm invoice generation translations -->
@@ -446,6 +450,17 @@
                 <target>Generate invoice</target>
             </trans-unit>
             <!-- End - Order admin confirm invoice generation translations -->
+
+            <!-- Begin - Order front translations -->
+            <trans-unit id="order_list">
+                <source>order_list</source>
+                <target>My orders</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.list.no_orders">
+                <source>sonata.order.list.no_orders</source>
+                <target>You don't have any order yet.</target>
+            </trans-unit>
+            <!-- End - Order front translations -->
 
         </body>
     </file>

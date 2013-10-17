@@ -11,6 +11,8 @@
 
 namespace Sonata\Component\Order;
 
+use Sonata\UserBundle\Model\UserInterface;
+
 interface OrderManagerInterface
 {
     /**
@@ -35,6 +37,15 @@ interface OrderManagerInterface
      * @return OrderInterface
      */
     public function findOneBy(array $criteria);
+
+    /**
+     * Finds orders belonging to given user
+     *
+     * @param UserInterface $user
+     *
+     * @return OrderInterface[]
+     */
+    public function findForUser(UserInterface $user);
 
     /**
      * Finds many orders by the given criteria

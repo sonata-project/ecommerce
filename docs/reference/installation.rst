@@ -85,6 +85,14 @@ You can use these bundles to extend entities or template files
 
 ::
 
+            sonata_user:
+                #... Your conf
+                profile:
+                    menu:
+                        - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
+                        - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
+                        - { route: 'sonata_order_index', label: 'order_list', domain: 'SonataOrderBundle'}
+
             sonata_delivery:
                 services:
                     sonata.delivery.method.free_address_required:

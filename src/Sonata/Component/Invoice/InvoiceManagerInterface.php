@@ -13,7 +13,6 @@ namespace Sonata\Component\Invoice;
 
 interface InvoiceManagerInterface
 {
-
     /**
      * Creates an empty invoice instance
      *

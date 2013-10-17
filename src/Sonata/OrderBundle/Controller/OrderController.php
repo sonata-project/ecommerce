@@ -20,11 +20,23 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class OrderController extends Controller
 {
     /**
-     * @throws \RuntimeException
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws AccessDeniedException
      */
     public function indexAction()
     {
-        throw new \RuntimeException('not implemented');
+        $user = $this->getUser();
+
+        if (!$user) {
+            throw new AccessDeniedException();
+        }
+
+        $orders = $this->getOrderManager()->findForUser($user);
+
+        return $this->render('SonataOrderBundle:Order:index.html.twig', array(
+            'orders' => $orders
+        ));
     }
 
     /**
