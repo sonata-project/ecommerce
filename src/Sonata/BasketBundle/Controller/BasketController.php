@@ -107,7 +107,7 @@ class BasketController extends Controller
         }
 
         // retrieve the product
-        $product = $this->get('sonata.product.collection.manager')->findOneBy(array('id' => $params['productId']));
+        $product = $this->get('sonata.product.set.manager')->findOneBy(array('id' => $params['productId']));
 
         if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $params['productId']));

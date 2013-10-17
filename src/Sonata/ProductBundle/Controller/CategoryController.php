@@ -81,7 +81,7 @@ class CategoryController extends Controller
      */
     public function listProductsAction($categoryId)
     {
-        $pager = $this->get('sonata.product.collection.manager')
+        $pager = $this->get('sonata.product.set.manager')
             ->getProductsByCategoryIdPager($categoryId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:list_products.html.twig', array(

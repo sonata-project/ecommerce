@@ -12,7 +12,7 @@ namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\ProductInterface;
 
-class ProductCollectionManager extends ProductManager
+class ProductSetManager extends ProductManager
 {
     /**
      * Deletes a product
@@ -25,7 +25,7 @@ class ProductCollectionManager extends ProductManager
      */
     public function delete(ProductInterface $product)
     {
-        throw new \RuntimeException('A ProductCollectionManager cannot delete a product');
+        throw new \RuntimeException('A ProductSetManager cannot delete a product');
     }
 
     /**
@@ -37,7 +37,7 @@ class ProductCollectionManager extends ProductManager
      */
     public function create()
     {
-        throw new \RuntimeException('A ProductCollectionManager cannot create a product');
+        throw new \RuntimeException('A ProductSetManager cannot create a product');
     }
 
     /**
@@ -51,6 +51,6 @@ class ProductCollectionManager extends ProductManager
      */
     public function save(ProductInterface $product)
     {
-        throw new \RuntimeException('A ProductCollectionManager cannot save a product');
+        throw new \RuntimeException('A ProductSetManager cannot save a product');
     }
 }

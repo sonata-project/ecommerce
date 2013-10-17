@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="sonata.delivery.manager.class">Sonata\ProductBundle\Entity\DeliveryManager</parameter>
         <parameter key="sonata.package.manager.class">Sonata\ProductBundle\Entity\PackageManager</parameter>
-        <parameter key="sonata.product.collection.manager.class">Sonata\ProductBundle\Entity\ProductCollectionManager</parameter>
+        <parameter key="sonata.product.set.manager.class">Sonata\ProductBundle\Entity\ProductSetManager</parameter>
         <parameter key="sonata.product_category.manager.class">Sonata\ProductBundle\Entity\ProductCategoryManager</parameter>
     </parameters>
 
@@ -24,7 +24,7 @@
             <argument>%sonata.product.package.class%</argument>
         </service>
 
-        <service id="sonata.product.collection.manager" class="%sonata.product.collection.manager.class%">
+        <service id="sonata.product.set.manager" class="%sonata.product.set.manager.class%">
             <argument>%sonata.product.product.class%</argument>
             <argument type="service" id="sonata.product.entity_manager" />
         </service>
