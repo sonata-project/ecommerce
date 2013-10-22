@@ -15,7 +15,6 @@ use Sonata\ProductBundle\Model\BaseProductProvider;
 use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Order\OrderInterface;
-
 use Sonata\ProductBundle\Entity\BaseProduct;
 
 class Product extends BaseProduct
@@ -124,7 +123,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $orderElement->getQuantity());
     }
 
-    public function testVariation()
+    public function testVariationFields()
     {
         $provider = $this->getBaseProvider();
 
@@ -132,67 +131,55 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $provider->setVariationFields(array('name', 'price'));
 
-        $this->assertTrue($provider->hasVariationFields(), '::hasVariationFields() return true' );
-        $this->assertTrue($provider->isVariateBy('name'), '::isVariateBy() return true for existing field');
-        $this->assertFalse($provider->isVariateBy('fake'), '::isVariateBy() return false for non existing field');
+        $this->assertTrue($provider->hasVariationFields());
+        $this->assertTrue($provider->isVariateBy('name'));
+        $this->assertFalse($provider->isVariateBy('fake'));
         $this->assertInternalType('array', $provider->getVariationFields());
     }
 
-    public function testProductDuplicate()
+    public function testVariationCreation()
     {
         $provider = $this->getBaseProvider();
         $provider->setVariationFields(array('name', 'price'));
 
-        $product = new Product;
+        $product = new Product();
+        $product->id = 2;
+
+        $variation = $provider->createVariation($product, false);
+
+        $this->assertNull($variation->getId());
+        $this->assertEquals('fake name (duplicated)', $variation->getName());
+        $this->assertEquals($product->getId(), $variation->getParent()->getId());
+        $this->assertFalse($variation->isEnabled());
+        $this->assertTrue($variation->isVariation());
+
+        $this->assertEquals(1, count($product->getVariations()));
+        $this->assertEquals(0, count($variation->getVariations()));
+    }
+
+    public function testProductDataSynchronization()
+    {
+        $provider = $this->getBaseProvider();
+        $provider->setVariationFields(array('price'));
+
+        $product = new Product();
         $product->id = 2;
 
         $variation = $provider->createVariation($product);
-        $variation->setPrice(11);
-        $product->addVariation($variation);
 
-        $this->assertNull($variation->getId());
-        $this->assertEquals('fake name (duplicated)', $variation->getName(), '::getName() return the duplicated name');
-
-        $variation = $provider->createVariation($product);
-        $variation->setPrice(12);
-        $product->addVariation($variation);
-
-        $variation = $provider->createVariation($product);
-        $variation->setPrice(13);
-        $product->addVariation($variation);
-
-        $this->assertEquals(count($product->getVariations()), 3,  '::getVariations() returns 3 elements');
-
-        $product->setName('test');
+        $product->setName('Product new name');
+        $product->setPrice(50);
         $product->setVat(5.5);
-        $product->setPrice(4);
 
-        // copy the information into the variation
-        $provider->copyVariation($product, 'product');
+        $provider->synchronizeVariationsProduct($product);
 
-        $this->assertEquals(4, $product->getPrice(), '::getPrice() return 4');
+        $this->assertEquals($product->getName(), $variation->getName());
+        $this->assertEquals(15, $variation->getPrice());
+        $this->assertEquals($product->getVat(), $variation->getVat());
+        $this->assertTrue($variation->isEnabled());
 
-        $variations = $product->getVariations();
-
-        // price should be unchanged
-        $this->assertEquals(11, $variations[0]->getPrice(), '::getPrice() return 11');
-        $this->assertEquals(12, $variations[1]->getPrice(), '::getPrice() return 12');
-        $this->assertEquals(13, $variations[2]->getPrice(), '::getPrice() return 13');
-
-        // vat should be updated
-        $this->assertEquals(5.5, $variations[0]->getVat(), '::getVat() return 5.5');
-        $this->assertEquals(5.5, $variations[1]->getVat(), '::getVat() return 5.5');
-        $this->assertEquals(5.5, $variations[2]->getVat(), '::getVat() return 5.5');
-
-        // copy the information into the variation, and force price update
-        $provider->copyVariation($product, 'product', true);
-
-        $variations = $product->getVariations();
-
-        // price should be changed
-        $this->assertEquals(4, $variations[0]->getPrice(), '::getPrice() return 4');
-        $this->assertEquals(4, $variations[1]->getPrice(), '::getPrice() return 4');
-        $this->assertEquals(4, $variations[2]->getPrice(), '::getPrice() return 4');
+        $this->assertEquals(1, count($product->getVariations()));
+        $this->assertEquals(0, count($variation->getVariations()));
     }
 
     public function testArrayProduct()

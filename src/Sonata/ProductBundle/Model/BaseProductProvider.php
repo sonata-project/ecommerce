@@ -10,13 +10,14 @@
 
 namespace Sonata\ProductBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
+use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
@@ -314,7 +315,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function createVariation(ProductInterface $product)
+    public function createVariation(ProductInterface $product, $copyDependencies = true)
     {
         if ($product->isVariation()) {
             throw new \RuntimeException('Cannot create a variation from a variation product');
@@ -323,8 +324,22 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $variation = clone $product;
         $variation->setParent($product);
         $variation->setId(null);
-        $variation->setEnabled(false);
         $variation->setName(sprintf('%s (duplicated)', $product->getName()));
+        $variation->setVariations(new ArrayCollection());
+
+        $product->addVariation($variation);
+
+        $variationCollection = new ArrayCollection(array($variation));
+
+        $this->synchronizeVariationsProduct($product, $variationCollection);
+
+        if ($copyDependencies) {
+            $this->synchronizeVariationsDeliveries($product, $variationCollection);
+            $this->synchronizeVariationsCategories($product, $variationCollection);
+            $this->synchronizeVariationsMedias($product, $variationCollection);
+        }
+
+        $variation->setEnabled(false);
 
         return $variation;
     }
@@ -332,66 +347,36 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function copyVariation(ProductInterface $product, $name = 'all', $forceCopy = false)
+    public function synchronizeVariations(ProductInterface $product, ArrayCollection $variations = null)
     {
-        if ($product->isVariation()) {
-            return;
-        }
-
-        switch ($name) {
-            case 'product':
-                $this->copyProductVariation($product, $forceCopy);
-
-                return;
-
-            case 'product_deliveries':
-                $this->copyProductDeliveriesVariation($product, $forceCopy);
-
-                return;
-
-            case 'product_categories':
-                $this->copyProductCategoriesVariation($product, $forceCopy);
-
-                break;
-
-            case 'product_pictures':
-                $this->copyProductImagesVariation($product, $forceCopy);
-
-                break;
-
-            case 'all':
-                $this->copyProductVariation($product, $forceCopy);
-                $this->copyProductDeliveriesVariation($product, $forceCopy);
-                $this->copyProductCategoriesVariation($product, $forceCopy);
-                $this->copyProductImagesVariation($product, $forceCopy);
-
-                return;
-
-            default:
-                throw new \RuntimeException(sprintf('"%s" argument is incorrect. Accepted values : "all", "product_deliveries", "product_categories" and "product_pictures".', $name));
-        }
+        $this->synchronizeVariationsProduct($product, $variations);
+        $this->synchronizeVariationsDeliveries($product, $variations);
+        $this->synchronizeVariationsCategories($product, $variations);
+        $this->synchronizeVariationsMedias($product, $variations);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function copyProductVariation(ProductInterface $product, $forceCopy = false)
+    public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null)
     {
         $variationFields = array_merge(array('id', 'parent'), $this->getVariationFields());
 
         $values = $product->toArray();
 
-        if (!$forceCopy) {
-            foreach ($variationFields as $field) {
-                if (!array_key_exists($field, $values)) {
-                   continue;
-                }
-
-                unset($values[$field]);
+        foreach ($variationFields as $field) {
+            if (!array_key_exists($field, $values)) {
+                continue;
             }
+
+            unset($values[$field]);
         }
 
-        foreach ($product->getVariations() as $variation) {
+        if (!$variations) {
+            $variations = $product->getVariations();
+        }
+
+        foreach ($variations as $variation) {
             foreach ($values as $name => $value) {
                 $callable = array($variation, sprintf('set%s', $name));
 
@@ -405,25 +390,25 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function copyProductDeliveriesVariation(ProductInterface $product, $forceCopy = false)
+    public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null)
     {
-
+        // TODO: Implement synchronizeVariationsDeliveries() method.
     }
 
     /**
      * {@inheritdoc}
      */
-    public function copyProductCategoriesVariation(ProductInterface $product, $forceCopy = false)
+    public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null)
     {
-
+        // TODO: Implement synchronizeVariationsCategories() method.
     }
 
     /**
      * {@inheritdoc}
      */
-    public function copyProductImagesVariation(ProductInterface $product, $forceCopy = false)
+    public function synchronizeVariationsMedias(ProductInterface $product, ArrayCollection $variations = null)
     {
-
+        // TODO: Implement synchronizeVariationsMedias() method.
     }
 
     /////////////////////////////////////////////////////

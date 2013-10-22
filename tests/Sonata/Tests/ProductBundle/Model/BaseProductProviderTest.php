@@ -57,22 +57,6 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCopyVariation()
-    {
-        // Test a product which is already a variation and therefor, can't be copied
-        $productProvider = $this->createNewProductProvider();
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
-                ->disableOriginalConstructor()
-                ->getMock();
-        $product->expects($this->any())
-            ->method('isVariation')
-            ->will($this->returnValue(true));
-
-        $this->assertNull($productProvider->copyVariation($product));
-
-        // Test if a non product is
-    }
-
     public function testBuildBasketElement()
     {
         $basketElement = new BasketElement();

@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\Component\Basket\BasketInterface;
@@ -144,54 +145,54 @@ interface ProductProviderInterface
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket);
 
     /**
-     * Creates a variation from a given Product.
+     * Creates a variation from a given Product and its dependencies.
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param ProductInterface $product          Product to duplicate
+     * @param boolean          $copyDependencies If false, duplicates only Product (without dependencies)
      *
      * @throws \RuntimeException
      *
      * @return \Sonata\Component\Product\ProductInterface
      */
-    public function createVariation(ProductInterface $product);
+    public function createVariation(ProductInterface $product, $copyDependencies = true);
 
     /**
-     * Copy chosen data from a Product to its variations.
+     * Synchronizes all parent Product data to its variations (or a single one if $targetVariation is specified).
      *
-     * @param \Sonata\Component\Product\ProductInterface $product   A parent Product instance
-     * @param string                                     $name      What data to copy? Accepted values are : 'all', 'product_deliveries', 'product_categories', 'product_pictures'
-     * @param bool                                       $forceCopy
+     * @param ProductInterface $product    Parent Product
+     * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function copyVariation(ProductInterface $product, $name = 'all', $forceCopy = false);
+    public function synchronizeVariations(ProductInterface $product, ArrayCollection $variations = null);
 
     /**
-     * Copy base Product data to variations.
+     * Synchronizes parent Product data to its variations (or a single one if $targetVariation is specified).
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  bool                                       $forceCopy
+     * @param ProductInterface $product    Parent Product
+     * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function copyProductVariation(ProductInterface $product, $forceCopy = false);
+    public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null);
 
     /**
-     * Copy base Product deliveries to variations.
+     * Synchronizes parent Product deliveries to its variations (or a single one if $targetVariation is specified).
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  bool                                       $forceCopy
+     * @param ProductInterface $product    Parent Product
+     * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function copyProductDeliveriesVariation(ProductInterface $product, $forceCopy = false);
+    public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null);
 
     /**
-     * Copy base Product categories to variations.
+     * Synchronizes parent Product categories to its variations (or a single one if $targetVariation is specified).
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  bool                                       $forceCopy
+     * @param ProductInterface $product    Parent Product
+     * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function copyProductCategoriesVariation(ProductInterface $product, $forceCopy = false);
+    public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null);
 
     /**
-     * Copy base Product images to variations.
+     * Synchronizes parent Product media to its variations (or a single one if $targetVariation is specified).
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  bool                                       $forceCopy
+     * @param ProductInterface $product    Parent Product
+     * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function copyProductImagesVariation(ProductInterface $product, $forceCopy = false);
+    public function synchronizeVariationsMedias(ProductInterface $product, ArrayCollection $variations = null);
 }
