@@ -1,0 +1,48 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-order-block-recent-order">
+        {% if settings.title %}
+            <h3 class="sonata-order-block-recent-order">{{ settings.title }}</h3>
+        {% endif %}
+
+        <table class="sonata-order-block-order-container table table-condensed">
+            {% for order in orders %}
+                {% set rowClass = 'error' %}
+                {% if order.status is constant('Sonata\\Component\\Order\\OrderInterface::STATUS_VALIDATED') %}
+                    {% set rowClass = 'success' %}
+                {% elseif order.status is constant('Sonata\\Component\\Order\\OrderInterface::STATUS_OPEN') or order.status is constant('Sonata\\Component\\Order\\OrderInterface::STATUS_PENDING') %}
+                    {% set rowClass = 'info' %}
+                {% endif %}
+                <tr class="{{ rowClass }}">
+                    {% if context.getSetting('mode') == 'admin' %}
+                        <td><a href="{{ url('admin_sonata_order_order_edit', { 'id': order.id }) }}">{{ order.reference }}</a></td>
+                    {% else %}
+                        <td><a href="{{ url('sonata_order_view', { 'id': order.id }) }}">{{ order.reference }}</a></td>
+                    {% endif %}
+                    <td>{{ order.statusName|trans({}, 'SonataOrderBundle') }}</td>
+                    <td>{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
+                    <td>{{ order.createdAt|date() }}</td>
+                </tr>
+            {% else %}
+                <li>{{ 'no_order_found'|trans({}, 'SonataOrderBundle') }}</li>
+            {% endfor %}
+        </table>
+
+        {% if context.getSetting('mode') == 'admin' %}
+            <a href="{{ url('admin_sonata_order_order_list') }}">{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+        {% else %}
+            <a href="{{ url('sonata_order_archive') }}">{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+        {% endif %}
+    </div>
+{% endblock %}

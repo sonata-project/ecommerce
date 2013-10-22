@@ -50,10 +50,14 @@ interface OrderManagerInterface
     /**
      * Finds many orders by the given criteria
      *
-     * @param  array          $criteria
-     * @return OrderInterface
+     * @param array $criteria
+     * @param array $orderBy
+     * @param null  $limit
+     * @param null  $offset
+     *
+     * @return mixed
      */
-    public function findBy(array $criteria);
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
 
     /**
      * Returns the order's fully qualified class name

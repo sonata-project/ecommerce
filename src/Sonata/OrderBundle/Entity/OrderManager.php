@@ -91,14 +91,11 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * Finds one order by the given criteria
-     *
-     * @param  array $criteria
-     * @return Order
+     * {@inheritdoc}
      */
-    public function findBy(array $criteria)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->repository->findBy($criteria);
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     /**
