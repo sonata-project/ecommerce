@@ -11,6 +11,9 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\Component\Product\ProductInterface;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
+
 interface ProductCategoryManagerInterface
 {
     /**
@@ -50,4 +53,20 @@ interface ProductCategoryManagerInterface
      * @return void
      */
     public function updateProductCategory(ProductCategoryInterface $productCategory);
+
+    /**
+     * Adds a Category to a Product.
+     *
+     * @param ProductInterface  $product
+     * @param CategoryInterface $category
+     */
+    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category);
+
+    /**
+     * Removes a Category from a Product.
+     *
+     * @param ProductInterface  $product
+     * @param CategoryInterface $category
+     */
+    public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category);
 }

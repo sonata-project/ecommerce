@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
+use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
@@ -51,6 +52,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @var SerializerInterface
      */
     protected $serializer;
+
+    /**
+     * @var \Sonata\Component\Product\ProductCategoryManagerInterface
+     */
+    protected $productCategoryManager;
 
     /**
      * @var BasketElementManagerInterface
@@ -114,6 +120,22 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function getBasketElementManager()
     {
         return $this->basketElementManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductCategoryManager(ProductCategoryManagerInterface $productCategoryManager)
+    {
+        $this->productCategoryManager = $productCategoryManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductCategoryManager()
+    {
+        return $this->productCategoryManager;
     }
 
     /**

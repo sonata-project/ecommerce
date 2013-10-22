@@ -20,6 +20,7 @@ use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Component\Form\FormBuilder;
+use Sonata\Component\Product\ProductCategoryManagerInterface;
 
 interface ProductProviderInterface
 {
@@ -32,6 +33,16 @@ interface ProductProviderInterface
      * @return \Sonata\Component\Basket\BasketElementManagerInterface
      */
     public function getBasketElementManager();
+
+    /**
+     * @param ProductCategoryManagerInterface $productCategoryManager
+     */
+    public function setProductCategoryManager(ProductCategoryManagerInterface $productCategoryManager);
+
+    /**
+     * @return ProductCategoryManagerInterface
+     */
+    public function getProductCategoryManager();
 
     /**
      * @return string

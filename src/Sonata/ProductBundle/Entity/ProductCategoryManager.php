@@ -11,9 +11,11 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
 use Doctrine\ORM\EntityManager;
+use Sonata\Component\Product\ProductInterface;
 
 class ProductCategoryManager implements ProductCategoryManagerInterface
 {
@@ -102,5 +104,38 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     {
         $this->em->remove($productCategory);
         $this->em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category)
+    {
+        if ($this->findProductCategoryBy(array('category' => $category, 'product' => $product))) {
+            return;
+        }
+
+        $productCategory = $this->createProductCategory();
+
+        $productCategory->setProduct($product);
+        $productCategory->setCategory($category);
+
+        $product->addProductCategory($productCategory);
+
+        $this->updateProductCategory($productCategory);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category)
+    {
+        if (!$productCategory = $this->findProductCategoryBy(array('category' => $category, 'product' => $product))) {
+            return;
+        }
+
+        $product->removeProductCategory($productCategory);
+
+        $this->deleteProductCategory($productCategory);
     }
 }
