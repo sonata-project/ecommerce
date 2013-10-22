@@ -44,14 +44,16 @@ abstract class BaseProductController extends Controller
             $form = $formBuilder->getForm()->createView();
         }
 
+        $crossSellingProducts = $this->get('sonata.product.finder')->getCrossSellingSimilarProducts($product);
         $currency = $this->get('sonata.price.currency.detector')->getCurrency();
 
         return $this->render(
             sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
             array(
-                'product'  => $product,
-                'currency' => $currency,
-                'form'     => $form,
+                'product'       => $product,
+                'currency'      => $currency,
+                'similar_cross' => $crossSellingProducts,
+                'form'          => $form,
             )
         );
     }

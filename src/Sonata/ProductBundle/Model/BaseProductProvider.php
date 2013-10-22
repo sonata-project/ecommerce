@@ -273,6 +273,16 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'link_parameters' => array('provider' => $this->getCode())
                 ))
             ->end()
+            ->with('Collections')
+                ->add('productCollections', 'sonata_type_collection', array(
+                    'required' => false,
+                    'by_reference' => false,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'link_parameters' => array('provider' => $this->getCode())
+                ))
+            ->end()
             ->with('Deliveries')
                 ->add('deliveries', 'sonata_type_collection', array(
                     'required' => false,
@@ -353,6 +363,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->synchronizeVariationsDeliveries($product, $variations);
         $this->synchronizeVariationsCategories($product, $variations);
         $this->synchronizeVariationsMedias($product, $variations);
+        $this->synchronizeVariationsCollections($product, $variations);
     }
 
     /**
@@ -401,6 +412,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null)
     {
         // TODO: Implement synchronizeVariationsCategories() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null)
+    {
+        // TODO: Implement synchronizeVariationsCollections() method.
     }
 
     /**

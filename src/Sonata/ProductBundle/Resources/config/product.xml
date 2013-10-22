@@ -8,6 +8,7 @@
         <parameter key="sonata.product.pool.class">Sonata\Component\Product\Pool</parameter>
         <parameter key="sonata.product.subscriber.orm.class">Sonata\Component\Subscriber\ORMInheritanceSubscriber</parameter>
         <parameter key="sonata.product.seo_iterator.class">Sonata\Component\Product\SeoProductIterator</parameter>
+        <parameter key="sonata.product.finder.class">Sonata\Component\Product\ProductFinder</parameter>
     </parameters>
 
     <services>
@@ -25,6 +26,10 @@
             <argument>%sonata.product.product.class%</argument>
             <argument type="service" id="router" />
             <argument>sonata_product_view</argument>
+        </service>
+
+        <service id="sonata.product.finder" class="%sonata.product.finder.class%">
+            <argument type="service" id="sonata.product.set.manager" />
         </service>
 
     </services>

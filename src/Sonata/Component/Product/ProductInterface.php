@@ -278,6 +278,34 @@ interface ProductInterface
     public function setProductCategories(ArrayCollection $productCategories);
 
     /**
+     * Add a ProductCollection to collection.
+     *
+     * @param ProductCollectionInterface $productCollection
+     */
+    public function addProductCollection(ProductCollectionInterface $productCollection);
+
+    /**
+     * Remove a ProductCollection from collection.
+     *
+     * @param ProductCollectionInterface $productCollection
+     */
+    public function removeProductCollection(ProductCollectionInterface $productCollection);
+
+    /**
+     * Get ProductCollections collection.
+     *
+     * @return ArrayCollection
+     */
+    public function getProductCollections();
+
+    /**
+     * Set ProductCollection collection.
+     *
+     * @param ArrayCollection $productCollections
+     */
+    public function setProductCollections(ArrayCollection $productCollections);
+
+    /**
      * Add a variation to collection.
      *
      * @param ProductInterface $variation

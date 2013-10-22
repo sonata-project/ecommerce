@@ -10,6 +10,7 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
@@ -113,6 +114,36 @@ class ProductManager implements ProductManagerInterface
         $class = $this->getClass();
 
         return new $class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findInSameCollections($productCollections)
+    {
+        $collections = array();
+        $productIds  = array();
+
+        foreach ($productCollections as $pCollection) {
+            $collections[] = $pCollection->getCollection();
+            if (false === array_search($pCollection->getProduct()->getId(), $productIds)) {
+                $productIds[] = $pCollection->getProduct()->getId();
+            }
+        }
+
+        $queryBuilder = $this->em->createQueryBuilder('p')
+            ->select('p')
+            ->distinct()
+            ->from($this->getClass(), 'p')
+            ->leftJoin('p.productCollections', 'pc')
+            ->where('pc.collection IN (:collections)')
+            ->andWhere('p.id NOT IN (:productIds)')
+            //->groupBy('p.id')
+            ->setParameter('collections', array_values($collections))
+            ->setParameter('productIds', array_values($productIds))
+        ;
+
+        return $queryBuilder->getQuery()->execute();
     }
 
     /**

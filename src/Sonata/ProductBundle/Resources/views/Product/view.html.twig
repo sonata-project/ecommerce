@@ -58,3 +58,21 @@ file that was distributed with this source code.
     </div>
 </div>
 
+<!-- Cross selling -->
+<div class="row">
+    {% block product_cross_selling %}
+        {% if similar_cross|length > 0 %}
+            <h2>{% trans from "SonataProductBundle" %}sonata.product.cross_selling.title{% endtrans %}</h2>
+            <ul>
+            {% for similar_product in similar_cross %}
+                {% block similar_product %}
+                    <li><a href="{{ path('sonata_product_view', {'productId': similar_product.id, 'slug': similar_product.slug }) }}">{{ similar_product.name }}</a></li>
+                {% endblock %}
+            {% endfor %}
+            </ul>
+        {% else %}
+            {% trans from "SonataProductBundle" %}sonata.product.cross_selling.no_match{% endtrans %}
+        {% endif %}
+    {% endblock %}
+</div>
+<!-- End Cross selling -->

@@ -17,6 +17,7 @@
         <property name="package" type="Sonata\Component\Product\PackageInterface" expose="false" />
         <property name="delivery" type="Sonata\Component\Product\DeliveryInterface" expose="false" />
         <property name="productCategories" type="Sonata\ProductBundle\Entity\ProductCategoryInterface" expose="false" />
+        <property name="productCollections" type="Sonata\ProductBundle\Entity\ProductCollectionInterface" expose="false" />
 
         <property name="parent" expose="false" />
         <property name="variations" expose="false" />

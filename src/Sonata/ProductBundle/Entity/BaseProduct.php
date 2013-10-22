@@ -10,6 +10,7 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -113,6 +114,11 @@ abstract class BaseProduct implements ProductInterface
     protected $variations;
 
     /**
+     * @var ArrayCollection
+     */
+    protected $productCollections;
+
+    /**
      * @var array
      */
     protected $options = array();
@@ -122,10 +128,45 @@ abstract class BaseProduct implements ProductInterface
      */
     public function __construct()
     {
-        $this->packages          = new ArrayCollection();
-        $this->deliveries        = new ArrayCollection();
-        $this->productCategories = new ArrayCollection();
-        $this->variations        = new ArrayCollection();
+        $this->packages           = new ArrayCollection();
+        $this->deliveries         = new ArrayCollection();
+        $this->productCategories  = new ArrayCollection();
+        $this->productCollections = new ArrayCollection();
+        $this->variations         = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductCollection(ProductCollectionInterface $productCollection)
+    {
+        $this->productCollections->add($productCollection);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductCollection(ProductCollectionInterface $productCollection)
+    {
+        if ($this->productCollections->contains($productCollection)) {
+            $this->productCollections->removeElement($productCollection);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductCollections()
+    {
+        return $this->productCollections;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductCollections(ArrayCollection $productCollections)
+    {
+        $this->productCollections = $productCollections;
     }
 
     /**

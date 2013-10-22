@@ -159,6 +159,7 @@ class ProductAdmin extends Admin
             ->add('enabled', null, array('editable' => true))
             ->add('price', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
             ->add('productCategories', null, array('associated_tostring' => 'getCategory'))
+            ->add('productCollections', null, array('associated_tostring' => 'getCollection'))
         ;
     }
 
@@ -174,6 +175,7 @@ class ProductAdmin extends Admin
             ->add('sku')
             ->add('enabled')
             ->add('productCategories.category', null, array('field_options' => array('expanded' => true, 'multiple' => true)))
+            ->add('productCollections.collection', null, array('field_options' => array('expanded' => true, 'multiple' => true)))
         ;
     }
 

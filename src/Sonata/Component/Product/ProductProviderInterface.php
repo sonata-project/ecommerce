@@ -189,6 +189,14 @@ interface ProductProviderInterface
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null);
 
     /**
+     * Synchronizes parent Product collections to its variations (or a single one if $targetVariation is specified).
+     *
+     * @param ProductInterface $product    Parent Product
+     * @param ArrayCollection  $variations Optional target variations to synchronize
+     */
+    public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null);
+
+    /**
      * Synchronizes parent Product media to its variations (or a single one if $targetVariation is specified).
      *
      * @param ProductInterface $product    Parent Product

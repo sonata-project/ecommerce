@@ -77,7 +77,9 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('product')->defaultValue('Application\\Sonata\\ProductBundle\\Entity\\Product')->end()
                         ->scalarNode('package')->defaultValue('Application\\Sonata\\ProductBundle\\Entity\\Package')->end()
                         ->scalarNode('product_category')->defaultValue('Application\\Sonata\\ProductBundle\\Entity\\ProductCategory')->end()
+                        ->scalarNode('product_collection')->defaultValue('Application\\Sonata\\ProductBundle\\Entity\\ProductCollection')->end()
                         ->scalarNode('category')->defaultValue('Application\\Sonata\\ClassificationBundle\\Entity\\Category')->end()
+                        ->scalarNode('collection')->defaultValue('Application\\Sonata\\ClassificationBundle\\Entity\\Collection')->end()
                         ->scalarNode('delivery')->defaultValue('Application\\Sonata\\ProductBundle\\Entity\\Delivery')->end()
 
                         ->scalarNode('user')->defaultValue('Application\\Sonata\\UserBundle\\Entity\\User')->end()

@@ -53,6 +53,15 @@ interface ProductManagerInterface
     public function findOneBy(array $criteria = array());
 
     /**
+     * Returns the products in the same collections as those specified in $productCollections
+     *
+     * @param mixed $productCollections
+     *
+     * @return array
+     */
+    public function findInSameCollections($productCollections);
+
+    /**
      * Returns the product's fully qualified class name
      *
      * @return string
