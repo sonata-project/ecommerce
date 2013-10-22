@@ -39,10 +39,14 @@ interface CustomerManagerInterface
     /**
      * Finds many customers by the given criteria
      *
-     * @param  array             $criteria
+     * @param array   $criteria
+     * @param array   $orderBy
+     * @param integer $limit
+     * @param integer $offset
+     *
      * @return CustomerInterface
      */
-    public function findBy(array $criteria);
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
 
     /**
      * Returns the customer's fully qualified class name

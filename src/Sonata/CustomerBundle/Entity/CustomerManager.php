@@ -96,14 +96,11 @@ class CustomerManager implements CustomerManagerInterface
     }
 
     /**
-     * Finds many customers by the given criteria
-     *
-     * @param  array               $criteria
-     * @return CustomerInterface[]
+     * {@inheritdoc}
      */
-    public function findBy(array $criteria)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->getRepository()->findBy($criteria);
+        return $this->getRepository()->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     /**

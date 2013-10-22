@@ -1,0 +1,40 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-customer-block-recent-customer">
+        {% if settings.title %}
+            <h3 class="sonata-customer-block-recent-customer">{{ settings.title }}</h3>
+        {% endif %}
+
+        {% if customers|length > 0 %}
+            <table class="sonata-customer-block-customer-container table table-condensed">
+                {% for customer in customers %}
+                    <tr>
+                        {% if context.getSetting('mode') == 'admin' %}
+                            <td><a href="{{ url('admin_sonata_customer_customer_edit', { 'id': customer.id }) }}">{{ customer }}</a></td>
+                        {% else %}
+                            <td><a href="{{ url('sonata_customer_view', { 'id': customer.id }) }}">{{ customer }}</a></td>
+                        {% endif %}
+                        <td>{{ customer.createdAt|date() }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>{{ 'no_customer_found'|trans({}, 'SonataCustomerBundle') }}</p>
+        {% endif %}
+
+        {% if context.getSetting('mode') == 'admin' %}
+            <a href="{{ url('admin_sonata_customer_customer_list') }}" class="btn btn-primary btn-small"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_customers'|trans({}, 'SonataCustomerBundle') }}</a>
+        {% endif %}
+    </div>
+{% endblock %}

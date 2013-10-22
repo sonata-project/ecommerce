@@ -39,6 +39,7 @@ class SonataCustomerExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('block.xml');
         $loader->load('orm.xml');
         $loader->load('admin.xml');
 
