@@ -79,10 +79,13 @@ class OrderElementAdmin extends Admin
      */
     public function configureListFields(ListMapper $list)
     {
-        $list
-            ->addIdentifier('id')
-            ->add('order')
-            ->add('productType')
+        $list->addIdentifier('id');
+
+        if (!$list->getAdmin()->isChild()) {
+            $list->add('order');
+        }
+
+        $list->add('productType')
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'stortable' => 'deliveryStatus'))
             ->add('getTotalWithVat', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))

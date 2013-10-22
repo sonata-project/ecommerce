@@ -127,16 +127,25 @@ class OrderAdmin extends Admin
      */
     public function configureListFields(ListMapper $list)
     {
+        $currency = $this->currencyDetector->getCurrency()->getLabel();
+
         $list
             ->addIdentifier('id')
-            ->addIdentifier('reference')
-            ->add('customer')
+            ->addIdentifier('reference');
+
+        if (!$list->getAdmin()->isChild()) {
+            $list->addIdentifier('customer');
+        }
+
+        $list->add('paymentMethod')
+            ->add('deliveryMethod')
             ->add('locale')
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataDeliveryBundle', 'sortable' => 'deliveryStatus'))
             ->add('getPaymentStatusName', 'trans', array('name' => 'paymentStatus', 'catalogue' => 'SonataPaymentBundle', 'sortable' => 'paymentStatus'))
             ->add('validatedAt')
-            ->add('totalExcl', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('totalInc', 'currency', array('currency' => $currency))
+            ->add('totalExcl', 'currency', array('currency' => $currency))
         ;
     }
 
