@@ -358,6 +358,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $variation->setId(null);
         $variation->setName(sprintf('%s (duplicated)', $product->getName()));
         $variation->setVariations(new ArrayCollection());
+        $variation->setDeliveries(new ArrayCollection());
+        $variation->setProductCategories(new ArrayCollection());
+        $variation->setPackages(new ArrayCollection());
 
         $product->addVariation($variation);
 
@@ -368,6 +371,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         if ($copyDependencies) {
             $this->synchronizeVariationsDeliveries($product, $variationCollection);
             $this->synchronizeVariationsCategories($product, $variationCollection);
+            $this->synchronizeVariationsPackages($product, $variationCollection);
             $this->synchronizeVariationsMedias($product, $variationCollection);
         }
 
@@ -384,6 +388,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->synchronizeVariationsProduct($product, $variations);
         $this->synchronizeVariationsDeliveries($product, $variations);
         $this->synchronizeVariationsCategories($product, $variations);
+        $this->synchronizeVariationsPackages($product, $variations);
         $this->synchronizeVariationsMedias($product, $variations);
         $this->synchronizeVariationsCollections($product, $variations);
     }
@@ -442,6 +447,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null)
     {
         // TODO: Implement synchronizeVariationsCollections() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null)
+    {
+        // TODO: Implement synchronizeVariationsPackages() method.
     }
 
     /**
