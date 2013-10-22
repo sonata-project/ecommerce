@@ -11,6 +11,7 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\ProductCollectionInterface;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -469,6 +470,22 @@ abstract class BaseProduct implements ProductInterface
     public function setProductCategories(ArrayCollection $productCategories)
     {
         $this->productCategories = $productCategories;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategories()
+    {
+        $categories = new ArrayCollection();
+
+        foreach ($this->productCategories as $productCategory) {
+            if (!$categories->contains($productCategory)) {
+                $categories->add($productCategory->getCategory());
+            }
+        }
+
+        return $categories;
     }
 
     /**

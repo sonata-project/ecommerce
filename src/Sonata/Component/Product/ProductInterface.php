@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -304,6 +305,13 @@ interface ProductInterface
      * @param ArrayCollection $productCollections
      */
     public function setProductCollections(ArrayCollection $productCollections);
+
+    /**
+     * Get Categories collection.
+     *
+     * @return ArrayCollection
+     */
+    public function getCategories();
 
     /**
      * Add a variation to collection.
