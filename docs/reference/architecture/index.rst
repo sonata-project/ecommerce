@@ -2,7 +2,7 @@
 Sonata ECommerce Architecture
 =============================
 
-Congrats! You've successfully installed your sonata ecommerce solution! Now, time to digg in. Here's an overview of the architecture of the library.
+Congrats! You've successfully installed your Sonata e-commerce solution! Now, time to digg in. Here's an overview of the architecture of the library.
 
 Below, you'll find a simple Class Diagram, representing the relationships between the different entities. Be warned however! Some of those aren't DB relations, as they shouldn't be (you'll get more details as you keep reading).
 
@@ -57,17 +57,17 @@ Well... We're entering the depths of it, aren't we? To be crystal clear, we'll t
 Basket <-> Order transformations and storage
 --------------------------------------------
 
-#TODO
+``#TODO``
 
 Basket -> Order
 ~~~~~~~~~~~~~~~
 
-#TODO
+``#TODO``
 
 Order -> Basket
 ~~~~~~~~~~~~~~~
 
-#TODO
+``#TODO``
 
 Order -> Invoice
 ~~~~~~~~~~~~~~~~
@@ -87,4 +87,3 @@ Going in depths
     order
     payment
     invoice
-

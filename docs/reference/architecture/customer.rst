@@ -1,8 +1,8 @@
-==============
-Customer #TODO
-==============
+========
+Customer
+========
 
-Clic on the image to view a bigger version.
+Click on the image to view a bigger version.
 
 .. image:: ../../images/dcCustomer.svg
     :width: 75 %
