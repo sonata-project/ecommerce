@@ -1,10 +1,71 @@
-=============
-Product #TODO
-=============
+======================
+Product #TODO complete
+======================
 
 Presentation
 ============
 
+The SonataProductBundle basically manages the Product-related entities & managers, offers AdminBundle integration and provides a basic controller and basic views to display the products.
+
+It offers a console command to easily generate a new product type in your application:
+
+.. code-block:: bash
+    :linenos:
+
+    Usage:
+     sonata:product:generate product service_id
+
+    Arguments:
+     product               The product to create
+     service_id            The service id to define
+
+    Options:
+     --help (-h)           Display this help message.
+     --quiet (-q)          Do not output any message.
+     --verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+     --version (-V)        Display this application version.
+     --ansi                Force ANSI output.
+     --no-ansi             Disable ANSI output.
+     --no-interaction (-n) Do not ask any interactive question.
+     --shell (-s)          Launch the shell.
+     --process-isolation   Launch commands from shell as a separate process.
+     --env (-e)            The Environment name. (default: "dev")
+     --no-debug            Switches off debug mode.
+
+
+
 Configuration
 =============
 
+The bundle allows you to configure the entity classes ; you'll also need to register the doctrine mapping.
+
+.. code-block:: yaml
+    :linenos:
+
+    sonata_product:
+        products:
+            # Prototype
+            id:
+                provider:             ~ # Required
+                manager:              ~ # Required
+                variations:
+                    fields:               [] # Required
+        class:
+            product:              Application\Sonata\ProductBundle\Entity\Product
+            package:              Application\Sonata\ProductBundle\Entity\Package
+            product_category:     Application\Sonata\ProductBundle\Entity\ProductCategory
+            product_collection:   Application\Sonata\ProductBundle\Entity\ProductCollection
+            category:             Application\Sonata\ClassificationBundle\Entity\Category
+            collection:           Application\Sonata\ClassificationBundle\Entity\Collection
+            delivery:             Application\Sonata\ProductBundle\Entity\Delivery
+            user:                 Application\Sonata\UserBundle\Entity\User
+            media:                Application\Sonata\MediaBundle\Entity\Media
+
+    # Enable Doctrine to map the provided entities
+    doctrine:
+        orm:
+            entity_managers:
+                default:
+                    mappings:
+                        ApplicationSonataProductBundle: ~
+                        SonataProductBundle: ~
