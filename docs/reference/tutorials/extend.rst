@@ -1,15 +1,16 @@
-========================
-Extend the bundles #TODO
-========================
+==================
+Extend the bundles
+==================
+
+``#TODO``
+
+Create your custom payment method
+=================================
+
+``#TODO``
 
 
-Create your custom payment method #TODO
-=======================================
+Override the default order process
+==================================
 
-``In Progress``
-
-
-Override the default order process #TODO
-========================================
-
-``In Progress``
+``#TODO``

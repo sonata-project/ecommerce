@@ -1,11 +1,11 @@
-=================================
-Interact with other bundles #TODO
-=================================
+===========================
+Interact with other bundles
+===========================
 
-``In Progress``
+``#TODO``
 
 
-Link with FOSUserBundle #TODO
-=============================
+Link with FOSUserBundle
+=======================
 
-``In Progress``
+``#TODO``
