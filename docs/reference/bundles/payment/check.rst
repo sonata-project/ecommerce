@@ -1,5 +1,15 @@
-=================
-Check setup #TODO
-=================
+===========
+Check setup
+===========
 
-``In Progress``
+``#TODO``
+
+Presentation
+============
+
+``#TODO``
+
+Configuration
+=============
+
+``#TODO``

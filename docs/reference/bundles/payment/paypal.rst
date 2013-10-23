@@ -2,19 +2,27 @@
 Paypal setup
 ============
 
-Here's how to configure paypal for sonata ecommerce:
+Presentation
+============
+
+``#TODO``
+
+Configuration
+=============
+
+Here's how to configure paypal for Sonata e-commerce:
 
 1. Activate IPN notification service
 
-url : http://youwebsite.com/shop/payment/callback
+URL: http://youwebsite.com/shop/payment/callback
 
 2. Retrieve paypal public certificate (paypal_cert_pem.txt)
 
   - Go to https://www.paypal.com/fr/cgi-bin/webscr?cmd=_profile-website-cert 
-  - Click download
-  - Put this file somewhere in your project.
+  - Click *Download*
+  - Put this file somewhere in your project
   
-3. Generate your private and public keys
+3. Generate your private and public keys [f1]_
 
 .. code-block:: bash
     :linenos:
@@ -25,8 +33,8 @@ url : http://youwebsite.com/shop/payment/callback
 
 Then:
     - Go to https://www.paypal.com/fr/cgi-bin/webscr?cmd=_profile-website-cert 
-    - Press upload
-    - Select the my-pubcert.pem file
+    - Press *Upload*
+    - Select the ``my-pubcert.pem`` file
 
 4. Configure the payment gateway
 
@@ -60,4 +68,7 @@ Then:
                 transformers:
                     basket: sonata.transformer.basket
                     order: sonata.transformer.order
-                    
+
+.. rubric:: Footnotes
+
+.. [#f1] A good way to do it is explained here: http://help.ubuntu.com/community/SSH/OpenSSH/Keys

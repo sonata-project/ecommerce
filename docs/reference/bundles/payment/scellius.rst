@@ -1,13 +1,13 @@
-====================
-Scellius setup #TODO
-====================
+==============
+Scellius setup
+==============
 
 Presentation
 ============
 
-``In progress``
+``#TODO``
 
 Configuration
 =============
 
-``In progress``
+``#TODO``

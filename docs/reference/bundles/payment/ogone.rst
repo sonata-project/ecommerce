@@ -2,7 +2,15 @@
 Ogone setup
 ===========
 
-Here's how to configure Ogone for sonata ecommerce:
+Presentation
+============
+
+``#TODO``
+
+Configuration
+=============
+
+Here's how to configure Ogone for Sonata e-commerce:
 
 1. Go to the Ogone configuration portal: 
     1. ``Technical Settings`` -> ``Global Security Parameters`` ; set ``Hash Algorithm`` to ``SHA-1``
@@ -57,4 +65,3 @@ Here's how to configure Ogone for sonata ecommerce:
             # If you've overridden the OgonePayment class
             sonata.payment.method.ogone.class:      "Application\\Sonata\\Component\\Payment\\Ogone\\OgonePayment"
             #...
-
