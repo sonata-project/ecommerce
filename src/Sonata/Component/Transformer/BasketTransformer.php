@@ -73,7 +73,7 @@ class BasketTransformer extends BaseTransformer
         }
 
         // Billing
-        $billingAddress = $basket->getPaymentAddress();
+        $billingAddress = $basket->getBillingAddress();
 
         if (!$billingAddress instanceof AddressInterface) {
             if ($this->getLogger()) {

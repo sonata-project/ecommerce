@@ -36,7 +36,7 @@
            </constraint>
         </getter>
 
-        <getter property="paymentAddress">
+        <getter property="billingAddress">
            <constraint name="NotNull" >
                <option name="groups" >
                     <value>payment</value>

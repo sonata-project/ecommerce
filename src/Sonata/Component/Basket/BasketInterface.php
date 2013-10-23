@@ -96,14 +96,14 @@ interface BasketInterface
      *
      * @param \Sonata\Component\Customer\AddressInterface $address
      */
-    public function setPaymentAddress(AddressInterface $address = null);
+    public function setBillingAddress(AddressInterface $address = null);
 
     /**
      *
      *
      * @return \Sonata\Component\Customer\AddressInterface
      */
-    public function getPaymentAddress();
+    public function getBillingAddress();
 
     /**
      * Check if the product can be added to the basket
@@ -253,14 +253,14 @@ interface BasketInterface
     public function getDeliveryAddressId();
 
     /**
-     * @param integer $paymentAddressId
+     * @param integer $billingAddressId
      */
-    public function setPaymentAddressId($paymentAddressId);
+    public function setBillingAddressId($billingAddressId);
 
     /**
      * @return integer
      */
-    public function getPaymentAddressId();
+    public function getBillingAddressId();
 
     /**
      * @return string

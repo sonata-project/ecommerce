@@ -53,7 +53,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * @var AddressInterface
      */
-    protected $paymentAddress;
+    protected $billingAddress;
 
     /**
      * @var PaymentInterface
@@ -68,7 +68,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * @var int
      */
-    protected $paymentAddressId;
+    protected $billingAddressId;
 
     /**
      * @var AddressInterface
@@ -163,7 +163,7 @@ class Basket implements \Serializable, BasketInterface
             return true;
         }
 
-        if (!$this->getPaymentAddress() instanceof AddressInterface) {
+        if (!$this->getBillingAddress() instanceof AddressInterface) {
             return false;
         }
 
@@ -238,18 +238,18 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaymentAddress(AddressInterface $address = null)
+    public function setBillingAddress(AddressInterface $address = null)
     {
-        $this->paymentAddress = $address;
-        $this->paymentAddressId = $address ? $address->getId() : null;
+        $this->billingAddress = $address;
+        $this->billingAddressId = $address ? $address->getId() : null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPaymentAddress()
+    public function getBillingAddress()
     {
-        return $this->paymentAddress;
+        return $this->billingAddress;
     }
 
     /**
@@ -278,8 +278,8 @@ class Basket implements \Serializable, BasketInterface
         $this->deliveryMethod = null;
         $this->deliveryMethodCode = null;
 
-        $this->paymentAddressId = null;
-        $this->paymentAddress = null;
+        $this->billingAddressId = null;
+        $this->billingAddress = null;
         $this->paymentMethod = null;
         $this->paymentMethodCode = null;
 
@@ -553,10 +553,10 @@ class Basket implements \Serializable, BasketInterface
             $arrayRep['deliveryAddress'] = $this->deliveryAddress;
         }
 
-        if (null !== $this->paymentAddressId) {
-            $arrayRep['paymentAddressId'] = $this->paymentAddressId;
-        } elseif (null !== $this->paymentAddress) {
-            $arrayRep['paymentAddress'] = $this->paymentAddress;
+        if (null !== $this->billingAddressId) {
+            $arrayRep['billingAddressId'] = $this->billingAddressId;
+        } elseif (null !== $this->billingAddress) {
+            $arrayRep['billingAddress'] = $this->billingAddress;
         }
 
         if (null !== $this->customerId) {
@@ -581,8 +581,8 @@ class Basket implements \Serializable, BasketInterface
             'deliveryAddress',
             'deliveryAddressId',
             'deliveryMethodCode',
-            'paymentAddress',
-            'paymentAddressId',
+            'billingAddress',
+            'billingAddressId',
             'paymentMethodCode',
             'cptElement',
             'customer',
@@ -616,17 +616,17 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaymentAddressId($paymentAddressId)
+    public function setBillingAddressId($billingAddressId)
     {
-        $this->paymentAddressId = $paymentAddressId;
+        $this->billingAddressId = $billingAddressId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPaymentAddressId()
+    public function getBillingAddressId()
     {
-        return $this->paymentAddressId;
+        return $this->billingAddressId;
     }
 
     /**

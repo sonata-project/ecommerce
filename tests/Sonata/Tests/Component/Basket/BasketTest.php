@@ -182,7 +182,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->addBasketElement($basketElement);
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
 
-        $basket->setPaymentAddress($this->getMockAddress());
+        $basket->setBillingAddress($this->getMockAddress());
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment method is invalid');
 
         $basket->setPaymentMethod($this->getMock('Sonata\Component\Payment\PaymentInterface'));
@@ -250,7 +250,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->addBasketElement($basketElement);
 
         $basket->setDeliveryAddress($this->getMockAddress());
-        $basket->setPaymentAddress($this->getMockAddress());
+        $basket->setBillingAddress($this->getMockAddress());
         $basket->setCustomer($this->getMock('Sonata\Component\Customer\CustomerInterface'));
 
         $data = $basket->serialize();
@@ -269,7 +269,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             'locale',
             'currency',
             'deliveryAddress',
-            'paymentAddress',
+            'billingAddress',
             'customer'
         );
 
@@ -280,7 +280,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         }
 
         $basket->setDeliveryAddressId(1);
-        $basket->setPaymentAddressId(2);
+        $basket->setBillingAddressId(2);
         $basket->setCustomerId(3);
 
         $data = $basket->serialize();
@@ -299,7 +299,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             'locale',
             'currency',
             'deliveryAddressId',
-            'paymentAddressId',
+            'billingAddressId',
             'customerId'
         );
 
@@ -417,8 +417,8 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->setDeliveryAddressId(1);
         $this->assertEquals(1, $basket->getDeliveryAddressId());
 
-        $basket->setPaymentAddressId(1);
-        $this->assertEquals(1, $basket->getPaymentAddressId());
+        $basket->setBillingAddressId(1);
+        $this->assertEquals(1, $basket->getBillingAddressId());
 
         $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->any())

@@ -90,7 +90,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $basket->setCurrency($currency);
 
         $basket->setCustomer($customer);
-        $basket->setPaymentAddress($billingAddress);
+        $basket->setBillingAddress($billingAddress);
 
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
@@ -105,7 +105,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
 
         $basket->setCustomer($customer);
-        $basket->setPaymentAddress($billingAddress);
+        $basket->setBillingAddress($billingAddress);
         $basket->setPaymentMethod($paymentMethod);
 
         $currency = new Currency();
@@ -127,7 +127,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $deliveryMethod->expects($this->once())->method('isAddressRequired')->will($this->returnValue(true));
 
         $basket->setCustomer($customer);
-        $basket->setPaymentAddress($billingAddress);
+        $basket->setBillingAddress($billingAddress);
         $basket->setDeliveryMethod($deliveryMethod);
         $basket->setPaymentMethod($paymentMethod);
 
@@ -153,7 +153,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
 
         $basket->setCustomer($customer);
-        $basket->setPaymentAddress($billingAddress);
+        $basket->setBillingAddress($billingAddress);
         $basket->setDeliveryMethod($deliveryMethod);
         $basket->setDeliveryAddress($deliveryAddress);
         $basket->setPaymentMethod($paymentMethod);

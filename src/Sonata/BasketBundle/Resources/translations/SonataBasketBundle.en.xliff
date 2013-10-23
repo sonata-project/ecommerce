@@ -67,9 +67,9 @@
         <source>sonata.basket.message_no_delivery_addresses_available</source>
         <target state="new">No delivery addresses available</target>
       </trans-unit>
-      <trans-unit id="296fda19c63e06494fb57fa6f225479fc32f5c08" resname="sonata.basket.message_no_payment_addresses_available">
+      <trans-unit id="296fda19c63e06494fb57fa6f225479fc32f5c08" resname="sonata.basket.message_no_billing_addresses_available">
         <jms:reference-file line="60">views/Form/fields.html.twig</jms:reference-file>
-        <source>sonata.basket.message_no_payment_addresses_available</source>
+        <source>sonata.basket.message_no_billing_addresses_available</source>
         <target state="new">No payment addresses available</target>
       </trans-unit>
       <trans-unit id="ebe3f67d4be368664ab021bc0048cbc85f44f6f6" resname="sonata.basket.order_terms_and_conditions_title">
@@ -121,9 +121,9 @@
         <source>sonata.basket.title_address_delivery_step_basket</source>
         <target state="new">Selected delivery address</target>
       </trans-unit>
-      <trans-unit id="699f1f06549ab20e5cabe71dbec55f8fee512b5c" resname="sonata.basket.title_payment_address">
+      <trans-unit id="699f1f06549ab20e5cabe71dbec55f8fee512b5c" resname="sonata.basket.title_billing_address">
         <jms:reference-file line="69">views/Basket/final_review_step.html.twig</jms:reference-file>
-        <source>sonata.basket.title_payment_address</source>
+        <source>sonata.basket.title_billing_address</source>
         <target state="new">Payment address</target>
       </trans-unit>
       <trans-unit id="93c1ea7d3e9c28f24e28171aba4ffe0f40798d7d" resname="sonata.basket.title_payment_method">

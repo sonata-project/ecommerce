@@ -77,15 +77,15 @@ class PaymentType extends AbstractType
             'type'     => AddressInterface::TYPE_BILLING
         ));
 
-        $builder->add('paymentAddress', 'sonata_type_model', array(
+        $builder->add('billingAddress', 'sonata_type_model', array(
             'model_manager' => $this->modelManager,
             'class'         => $this->addressManager->getClass(),
             'choices'       => $addresses,
             'expanded'      => true
         ));
 
-        $address = $basket->getPaymentAddress() ?: current($addresses);
-        $basket->setPaymentAddress($address ?: null);
+        $address = $basket->getBillingAddress() ?: current($addresses);
+        $basket->setBillingAddress($address ?: null);
 
         $methods = $this->paymentSelector->getAvailableMethods($basket, $basket->getDeliveryAddress());
 

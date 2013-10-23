@@ -82,11 +82,11 @@ class BasketBuilder implements BasketBuilderInterface
         }
 
         // load the payment address
-        $paymentAddressId = $basket->getPaymentAddressId();
+        $billingAddressId = $basket->getBillingAddressId();
 
-        if ($paymentAddressId) {
-            $address = $this->addressManager->findOneBy(array('id' => $paymentAddressId));
-            $basket->setPaymentAddress($address);
+        if ($billingAddressId) {
+            $address = $this->addressManager->findOneBy(array('id' => $billingAddressId));
+            $basket->setBillingAddress($address);
         }
 
         // load the payment method

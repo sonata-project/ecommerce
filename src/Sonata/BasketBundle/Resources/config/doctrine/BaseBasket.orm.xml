@@ -7,7 +7,7 @@
     <mapped-superclass name="Sonata\BasketBundle\Entity\BaseBasket">
         <field name="positions"          column="positions"            type="json"     nullable="true"/>
         <field name="deliveryAddressId"  column="delivery_address_id"  type="integer"  nullable="true"/>
-        <field name="paymentAddressId"   column="payment_address_id"   type="integer"  nullable="true"/>
+        <field name="billingAddressId"   column="billing_address_id"   type="integer"  nullable="true"/>
         <field name="paymentMethodCode"  column="payment_method_code"  type="string"   nullable="true"  length="255" />
         <field name="cptElement"         column="cpt_element"          type="integer"  nullable="true"/>
         <field name="deliveryMethodCode" column="delivery_method_code" type="string"   nullable="true"  length="255" />

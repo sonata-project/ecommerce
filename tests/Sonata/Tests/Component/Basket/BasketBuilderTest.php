@@ -108,12 +108,12 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
 
         $basket->expects($this->once())->method('getDeliveryAddressId')->will($this->returnValue(1));
         $basket->expects($this->once())->method('getDeliveryMethodCode')->will($this->returnValue('ups'));
-        $basket->expects($this->once())->method('getPaymentAddressId')->will($this->returnValue(2));
+        $basket->expects($this->once())->method('getBillingAddressId')->will($this->returnValue(2));
         $basket->expects($this->once())->method('getPaymentMethodCode')->will($this->returnValue('credit_cart'));
 
         $basket->expects($this->once())->method('setDeliveryAddress');
         $basket->expects($this->once())->method('setDeliveryMethod');
-        $basket->expects($this->once())->method('setPaymentAddress');
+        $basket->expects($this->once())->method('setBillingAddress');
         $basket->expects($this->once())->method('setPaymentMethod');
 
         $basketBuidler->build($basket);

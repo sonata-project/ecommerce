@@ -31,7 +31,7 @@
 {% endspaceless %}
 {% endblock _sonata_basket_shipping_deliveryAddress_widget %}
 
-{% block _sonata_basket_payment_paymentAddress_widget %}
+{% block _sonata_basket_payment_billingAddress_widget %}
 {% spaceless %}
     {% if expanded %}
         <div {{ block('widget_container_attributes') }}>
@@ -57,7 +57,7 @@
     {% endif %}
 
     {% if choices|length == 0 %}
-        <p>{{ 'sonata.basket.message_no_payment_addresses_available'|trans({}, 'SonataBasketBundle') }}</p>
+        <p>{{ 'sonata.basket.message_no_billing_addresses_available'|trans({}, 'SonataBasketBundle') }}</p>
     {% endif %}
 {% endspaceless %}
-{% endblock _sonata_basket_payment_paymentAddress_widget %}
+{% endblock _sonata_basket_payment_billingAddress_widget %}
