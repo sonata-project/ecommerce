@@ -11,16 +11,16 @@
 
 namespace Sonata\Tests\Component\Product;
 
-use Application\Sonata\ClassificationBundle\Entity\Category;
-use Application\Sonata\ProductBundle\Entity\Package;
-use Application\Sonata\ProductBundle\Entity\ProductCategory;
+use Sonata\ClassificationBundle\Entity\BaseCategory;
+use Sonata\ProductBundle\Entity\BaseDelivery;
+use Sonata\ProductBundle\Entity\BasePackage;
+use Sonata\ProductBundle\Entity\BaseProductCategory;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
 use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
-use Application\Sonata\ProductBundle\Entity\Delivery;
 
 class Product extends BaseProduct
 {
@@ -50,6 +50,11 @@ class Product extends BaseProduct
         return $this->id = $id;
     }
 }
+
+class ProductCategory extends BaseProductCategory { }
+class Category extends BaseCategory { }
+class Package extends BasePackage { }
+class Delivery extends BaseDelivery { }
 
 class OrderElement extends BaseOrderElement
 {
