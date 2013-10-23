@@ -409,7 +409,7 @@ abstract class BaseProduct implements ProductInterface
     {
         $delivery->setProduct($this);
 
-        $this->deliveries[] = $delivery;
+        $this->deliveries->add($delivery);
     }
 
     /**
@@ -418,7 +418,7 @@ abstract class BaseProduct implements ProductInterface
     public function removeDelivery(DeliveryInterface $delivery)
     {
         if ($this->deliveries->contains($delivery)) {
-            $this->deliveries->remove($delivery);
+            $this->deliveries->removeElement($delivery);
         }
     }
 
