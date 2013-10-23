@@ -22,14 +22,14 @@ class OrderController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws AccessDeniedException
+     * @throws AccessDeniedHttpException
      */
     public function indexAction()
     {
         $user = $this->getUser();
 
         if (!$user) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         $orders = $this->getOrderManager()->findForUser($user);
@@ -44,14 +44,14 @@ class OrderController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws NotFoundHttpException
+     * @throws AccessDeniedHttpException
      */
     public function viewAction($reference)
     {
         $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
 
         if (null === $order) {
-            throw new NotFoundHttpException("Order with reference ".$reference." could not be found.");
+            throw new AccessDeniedHttpException();
         }
 
         $this->checkAccess($order->getCustomer());
@@ -75,7 +75,7 @@ class OrderController extends Controller
      *
      * @param CustomerInterface $customer The linked customer
      *
-     * @throws UnauthorizedHttpException
+     * @throws AccessDeniedHttpException
      */
     protected function checkAccess(CustomerInterface $customer)
     {

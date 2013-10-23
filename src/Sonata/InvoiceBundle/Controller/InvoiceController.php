@@ -12,7 +12,7 @@
 namespace Sonata\InvoiceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Sonata\Component\Invoice\InvoiceManagerInterface;
@@ -31,7 +31,11 @@ class InvoiceController extends Controller
     }
 
     /**
-     * @param string $reference Order/Invoice reference
+     * @param string $reference
+     *
+     * @return Response
+     * 
+     * @throws AccessDeniedHttpException
      */
     public function viewAction($reference)
     {
@@ -40,13 +44,13 @@ class InvoiceController extends Controller
         if (null === $invoice) {
             $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
 
+            if (null === $order) {
+                throw new AccessDeniedHttpException();
+            }
+
             $this->checkAccess($order->getCustomer());
 
             $invoice = $this->getInvoiceManager()->createInvoice();
-
-            if (null === $order) {
-                throw new NotFoundHttpException("Order with reference ".$reference." could not be found.");
-            }
 
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
             $this->getInvoiceManager()->updateInvoice($invoice);
@@ -73,7 +77,7 @@ class InvoiceController extends Controller
      *
      * @param CustomerInterface $customer The linked customer
      *
-     * @throws UnauthorizedHttpException
+     * @throws AccessDeniedHttpException
      */
     protected function checkAccess(CustomerInterface $customer)
     {
