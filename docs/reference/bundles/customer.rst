@@ -17,18 +17,18 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
 .. code-block:: yaml
     :linenos:
 
-            sonata_customer:
-                class:
-                    customer: 'Application\\Sonata\\CustomerBundle\\Entity\\Customer'
-                    address:  'Application\\Sonata\\CustomerBundle\\Entity\\Address'
-                    order:    'Application\\Sonata\\OrderBundle\\Entity\\Order'
-                    user:     'Application\\Sonata\\UserBundle\\Entity\\User'
+    sonata_customer:
+        class:
+            customer:             Application\Sonata\CustomerBundle\Entity\Customer
+            address:              Application\Sonata\CustomerBundle\Entity\Address
+            order:                Application\Sonata\OrderBundle\Entity\Order
+            user:                 Application\Sonata\UserBundle\Entity\User
 
-            # Enable Doctrine to map the provided entities
-            doctrine:
-                orm:
-                    entity_managers:
-                        default:
-                            mappings:
-                                ApplicationSonataCustomerBundle: ~
-                                SonataCustomerBundle: ~
+    # Enable Doctrine to map the provided entities
+    doctrine:
+        orm:
+            entity_managers:
+                default:
+                    mappings:
+                        ApplicationSonataCustomerBundle: ~
+                        SonataCustomerBundle: ~
