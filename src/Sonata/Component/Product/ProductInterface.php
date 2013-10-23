@@ -237,6 +237,20 @@ interface ProductInterface
     public function removeDelivery(DeliveryInterface $delivery);
 
     /**
+     * Add a Delivery to collection. Alias for addDelivery needed by the AdminBundle
+     *
+     * @param DeliveryInterface $delivery
+     */
+    public function addDeliverie(DeliveryInterface $delivery);
+
+    /**
+     * Remove a Delivery from collection. Alias for removeDelivery needed by the AdminBundle
+     *
+     * @param DeliveryInterface $delivery
+     */
+    public function removeDeliverie(DeliveryInterface $delivery);
+
+    /**
      * Get Delivery collection.
      *
      * @return ArrayCollection
@@ -263,6 +277,20 @@ interface ProductInterface
      * @param ProductCategoryInterface $productCategory
      */
     public function removeProductCategory(ProductCategoryInterface $productCategory);
+
+    /**
+     * Add a ProductCategory to collection. Alias for addProductCategory needed for AdminBundle.
+     *
+     * @param ProductCategoryInterface $productCategory
+     */
+    public function addProductCategorie(ProductCategoryInterface $productCategory);
+
+    /**
+     * Remove a ProductCategory from collection. Alias for removeProductCategory needed for AdminBundle.
+     *
+     * @param ProductCategoryInterface $productCategory
+     */
+    public function removeProductCategorie(ProductCategoryInterface $productCategory);
 
     /**
      * Get ProductCategories collection.

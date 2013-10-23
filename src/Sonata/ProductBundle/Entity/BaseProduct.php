@@ -141,7 +141,9 @@ abstract class BaseProduct implements ProductInterface
      */
     public function addProductCollection(ProductCollectionInterface $productCollection)
     {
-        $this->productCollections->add($productCollection);
+        $productCollection->setProduct($this);
+
+        $this->productCollections[] = $productCollection;
     }
 
     /**
@@ -434,6 +436,38 @@ abstract class BaseProduct implements ProductInterface
     public function setDeliveries(ArrayCollection $deliveries)
     {
         $this->deliveries = $deliveries;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addDeliverie(DeliveryInterface $delivery)
+    {
+        $this->addDelivery($delivery);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeDeliverie(DeliveryInterface $delivery)
+    {
+        $this->removeDelivery($delivery);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProductCategorie(ProductCategoryInterface $productCategory)
+    {
+        $this->addProductCategory($productCategory);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeProductCategorie(ProductCategoryInterface $productCategory)
+    {
+        $this->removeProductCategory($productCategory);
     }
 
     /**
