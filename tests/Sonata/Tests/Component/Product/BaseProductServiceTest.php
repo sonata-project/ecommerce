@@ -11,6 +11,9 @@
 
 namespace Sonata\Tests\Component\Product;
 
+use Application\Sonata\ClassificationBundle\Entity\Category;
+use Application\Sonata\ProductBundle\Entity\ProductCategory;
+use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
 use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\Component\Basket\BasketElement;
@@ -82,8 +85,11 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $basketElementManager = $this->getMock('\Sonata\Component\Basket\BasketElementManagerInterface');
         $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Tests\Component\Product\BaseOrderElementTest_ProductProvider'));
-
         $provider->setBasketElementManager($basketElementManager);
+
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $productCategoryManager = new ProductCategoryManager($em, 'Application\Sonata\ProductBundle\Entity\ProductCategory');
+        $provider->setProductCategoryManager($productCategoryManager);
 
         $provider->setOrderElementClassName(get_class(new OrderElement()));
 
@@ -155,6 +161,9 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, count($product->getVariations()));
         $this->assertEquals(0, count($variation->getVariations()));
+        $this->assertEquals(0, count($variation->getPackages()));
+        $this->assertEquals(0, count($variation->getDeliveries()));
+        $this->assertEquals(0, count($variation->getProductCategories()));
     }
 
     public function testProductDataSynchronization()
@@ -180,6 +189,45 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, count($product->getVariations()));
         $this->assertEquals(0, count($variation->getVariations()));
+    }
+
+    public function testProductCategoriesSynchronization()
+    {
+        $provider = $this->getBaseProvider();
+
+        $product = new Product();
+
+        $category1 = new Category();
+        $productCategory1 = new ProductCategory();
+        $productCategory1->setCategory($category1);
+        $product->addProductCategory($productCategory1);
+
+        $variation = $provider->createVariation($product, false);
+
+        $this->assertEquals(0, count($variation->getProductCategories()));
+
+//        $provider->synchronizeVariationsCategories($product);
+//        $this->assertEquals(1, count($variation->getProductCategories()));
+
+//        $category2 = new Category();
+//        $productCategory2 = new ProductCategory();
+//        $productCategory2->setCategory($category2);
+//        $product->addProductCategory($productCategory2);
+
+//        $this->assertEquals(1, count($variation->getProductCategories()));
+
+//        $provider->synchronizeVariationsCategories($product);
+//        $this->assertEquals(2, count($variation->getProductCategories()));
+
+//        $product->removeProductCategory($productCategory1);
+//        $this->assertEquals(2, count($variation->getProductCategories()));
+//        $this->assertTrue($variation->getProductCategories()->contains($productCategory1));
+//        $this->assertTrue($variation->getProductCategories()->contains($productCategory2));
+
+//        $provider->synchronizeVariationsCategories($product);
+//        $this->assertEquals(1, count($variation->getProductCategories()));
+//        $this->assertFalse($variation->getProductCategories()->contains($productCategory1));
+//        $this->assertTrue($variation->getProductCategories()->contains($productCategory2));
     }
 
     public function testArrayProduct()

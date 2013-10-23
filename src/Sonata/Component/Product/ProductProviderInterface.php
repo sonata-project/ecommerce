@@ -209,7 +209,7 @@ interface ProductProviderInterface
 
     /**
      * Synchronizes parent Product packages to its variations (or a single one if $targetVariation is specified).
-     * 
+     *
      * @param ProductInterface $product    Parent Product
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */

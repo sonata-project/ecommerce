@@ -438,7 +438,30 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null)
     {
-        // TODO: Implement synchronizeVariationsCategories() method.
+        if (!$variations) {
+            $variations = $product->getVariations();
+        }
+
+        $productCategories = $product->getCategories();
+
+        /** @var ProductInterface $variation */
+        foreach ($variations as $variation) {
+            $variationCategories = $variation->getCategories();
+
+            // browsing Product categories and add missing categories
+            foreach ($productCategories as $productCategory) {
+                if ($productCategory && !$variationCategories->contains($productCategory)) {
+                    $this->productCategoryManager->addCategoryToProduct($variation, $productCategory);
+                }
+            }
+
+            // browsing variation categories and remove excessing categories
+            foreach ($variationCategories as $variationCategory) {
+                if ($variationCategory && !$productCategories->contains($variationCategory)) {
+                    $this->productCategoryManager->removeCategoryFromProduct($variation, $variationCategory);
+                }
+            }
+        }
     }
 
     /**
