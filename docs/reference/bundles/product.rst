@@ -1,6 +1,6 @@
-======================
-Product #TODO complete
-======================
+=======
+Product
+=======
 
 Presentation
 ============
@@ -31,8 +31,6 @@ It offers a console command to easily generate a new product type in your applic
      --process-isolation   Launch commands from shell as a separate process.
      --env (-e)            The Environment name. (default: "dev")
      --no-debug            Switches off debug mode.
-
-
 
 Configuration
 =============
