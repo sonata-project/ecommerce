@@ -17,7 +17,7 @@
             <trans-unit id="86d31e1a805f93dc2b8f3008b81d7d9be61c4166" resname="sonata.product.btn_add_to_basket">
                 <jms:reference-file line="34">views/Entity/view.html.twig</jms:reference-file>
                 <source>sonata.product.btn_add_to_basket</source>
-                <target state="new">Add to cart</target>
+                <target state="new">Add to basket</target>
             </trans-unit>
             <trans-unit id="3831ab0a2988bb64112fc0303230d9e1f6486ed0" resname="no_products_available">
                 <jms:reference-file line="15">views/Category/list_products.html.twig</jms:reference-file>

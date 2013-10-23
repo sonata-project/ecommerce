@@ -19,7 +19,7 @@
       <trans-unit id="12df9b565d0af26a361f1df2aaa9b0aed5358fe9" resname="sonata.basket.btn_update_basket">
         <jms:reference-file line="54">views/Basket/index.html.twig</jms:reference-file>
         <source>sonata.basket.btn_update_basket</source>
-        <target state="new">Update the cart</target>
+        <target state="new">Update the basket</target>
       </trans-unit>
       <trans-unit id="decb92cb49201393c7ecf8fbeffa6f01ff5dc2c7" resname="sonata.basket.btn_update_delivery_step">
         <jms:reference-file line="18">views/Basket/delivery_address_step.html.twig</jms:reference-file>
@@ -60,7 +60,7 @@
       <trans-unit id="2a12e76f6584b27a62663b22e70b0eef238152dd" resname="sonata.basket.message_basket_is_empty">
         <jms:reference-file line="61">views/Basket/index.html.twig</jms:reference-file>
         <source>sonata.basket.message_basket_is_empty</source>
-        <target state="new">Your cart is empty</target>
+        <target state="new">Your basket is empty</target>
       </trans-unit>
       <trans-unit id="e002ab6e330bdba9e92ed99d70e454ffdb08a028" resname="sonata.basket.message_no_delivery_addresses_available">
         <jms:reference-file line="29">views/Form/fields.html.twig</jms:reference-file>
@@ -81,7 +81,7 @@
         <jms:reference-file line="12">views/Basket/final_review_step.html.twig</jms:reference-file>
         <jms:reference-file line="12">views/Basket/index.html.twig</jms:reference-file>
         <source>sonata.basket.title_basket</source>
-        <target state="new">Your cart</target>
+        <target state="new">Your basket</target>
       </trans-unit>
       <trans-unit id="eb05eb21a5bb7c9e57cdceaeb4bcec0208301fa6" resname="sonata.basket.title_delivery_address">
         <jms:reference-file line="60">views/Basket/final_review_step.html.twig</jms:reference-file>
@@ -154,7 +154,7 @@
       <trans-unit id="c78e3658e8ebe29002d29c8d6aa61b72224d601a" resname="view_basket">
         <jms:reference-file line="15">views/Basket/header_preview.html.twig</jms:reference-file>
         <source>view_basket</source>
-        <target state="new">Your cart</target>
+        <target state="new">Your basket</target>
       </trans-unit>
       <trans-unit id="1283a93f8e2f711f4f4b165f2953a8a0eb7205af" resname="sonata_address_address1_label">
         <jms:reference-file line="42">BasketBundle/Form/AddressType.php</jms:reference-file>
@@ -258,7 +258,7 @@
 
       <trans-unit id="header_basket_information" resname="header_basket_information">
         <source>header_basket_information</source>
-        <target state="new">Cart elements</target>
+        <target state="new">Basket elements</target>
       </trans-unit>
       <trans-unit id="header_basket_price" resname="header_basket_price">
         <source>header_basket_price</source>
