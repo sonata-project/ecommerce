@@ -17,17 +17,17 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
 .. code-block:: yaml
     :linenos:
 
-        sonata_order:
-            class:
-                order:          'Application\\Sonata\\OrderBundle\\Entity\\Order'
-                order_element:  'Application\\Sonata\\OrderBundle\\Entity\\OrderElement'
-                customer:       'Application\\Sonata\\CustomerBundle\\Entity\\Customer'
+    sonata_order:
+        class:
+            order:                Application\Sonata\OrderBundle\Entity\Order
+            order_element:        Application\Sonata\OrderBundle\Entity\OrderElement
+            customer:             Application\Sonata\CustomerBundle\Entity\Customer
 
-        # Enable Doctrine to map the provided entities
-        doctrine:
-            orm:
-                entity_managers:
-                    default:
-                        mappings:
-                            ApplicationSonataOrderBundle: ~
-                            SonataOrderBundle: ~
+    # Enable Doctrine to map the provided entities
+    doctrine:
+        orm:
+            entity_managers:
+                default:
+                    mappings:
+                        ApplicationSonataOrderBundle: ~
+                        SonataOrderBundle: ~
