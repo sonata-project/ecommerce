@@ -477,7 +477,30 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null)
     {
-        // TODO: Implement synchronizeVariationsPackages() method.
+        if (!$variations) {
+            $variations = $product->getVariations();
+        }
+
+        $productPackages = $product->getPackages();
+
+        /** @var ProductInterface $variation */
+        foreach ($variations as $variation) {
+            $variationPackages = $variation->getPackages();
+
+            // browsing Product packages and add missing packages
+            foreach ($productPackages as $productPackage) {
+                if ($productPackage && !$variationPackages->contains($productPackage)) {
+                    $variation->addPackage($productPackage);
+                }
+            }
+
+            // browsing variation packages and remove excessing packages
+            foreach ($variationPackages as $variationPackage) {
+                if ($variationPackage && !$productPackages->contains($variationPackage)) {
+                    $variation->removePackage($variationPackage);
+                }
+            }
+        }
     }
 
     /**

@@ -12,6 +12,7 @@
 namespace Sonata\Tests\Component\Product;
 
 use Application\Sonata\ClassificationBundle\Entity\Category;
+use Application\Sonata\ProductBundle\Entity\Package;
 use Application\Sonata\ProductBundle\Entity\ProductCategory;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
@@ -228,6 +229,41 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 //        $this->assertEquals(1, count($variation->getProductCategories()));
 //        $this->assertFalse($variation->getProductCategories()->contains($productCategory1));
 //        $this->assertTrue($variation->getProductCategories()->contains($productCategory2));
+    }
+
+    public function testProductPackagesSynchronization()
+    {
+        $provider = $this->getBaseProvider();
+
+        $product = new Product();
+
+        $package1 = new Package();
+        $product->addPackage($package1);
+
+        $variation = $provider->createVariation($product, false);
+
+        $this->assertEquals(0, count($variation->getPackages()));
+
+        $provider->synchronizeVariationsPackages($product);
+        $this->assertEquals(1, count($variation->getPackages()));
+
+        $package2 = new Package();
+        $product->addPackage($package2);
+
+        $this->assertEquals(1, count($variation->getPackages()));
+
+        $provider->synchronizeVariationsPackages($product);
+        $this->assertEquals(2, count($variation->getPackages()));
+
+        $product->removePackage($package1);
+        $this->assertEquals(2, count($variation->getPackages()));
+        $this->assertTrue($variation->getPackages()->contains($package1));
+        $this->assertTrue($variation->getPackages()->contains($package2));
+
+        $provider->synchronizeVariationsPackages($product);
+        $this->assertEquals(1, count($variation->getPackages()));
+        $this->assertFalse($variation->getPackages()->contains($package1));
+        $this->assertTrue($variation->getPackages()->contains($package2));
     }
 
     public function testArrayProduct()

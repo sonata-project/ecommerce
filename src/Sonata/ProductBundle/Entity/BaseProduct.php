@@ -373,7 +373,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function addPackage(PackageInterface $package)
     {
-        $this->packages[] = $package;
+        $this->packages->add($package);
     }
 
     /**
@@ -382,7 +382,7 @@ abstract class BaseProduct implements ProductInterface
     public function removePackage(PackageInterface $package)
     {
         if ($this->packages->contains($package)) {
-            $this->packages->remove($package);
+            $this->packages->removeElement($package);
         }
     }
 
