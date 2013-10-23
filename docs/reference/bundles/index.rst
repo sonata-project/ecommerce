@@ -1,8 +1,8 @@
-========================
-Sonata ECommerce Bundles
-========================
+=========================
+Sonata e-commerce bundles
+=========================
 
-Here are the various bundles composing Sonata E-Commerce.
+Here are the various bundles composing Sonata e-commerce:
 
 .. toctree::
     :maxdepth: 2
@@ -13,6 +13,5 @@ Here are the various bundles composing Sonata E-Commerce.
     basket
     delivery
     order
-    Payment <payment/index>
+    payment <payment/index>
     invoice
-

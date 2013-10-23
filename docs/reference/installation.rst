@@ -2,18 +2,18 @@
 Installation
 ============
 
-Quick Install
+Quick install
 =============
-In case you need to work with sonata-ecommerce for a new project, we strongly advise that you use our sandbox:
-See `Sonata Sandbox installation <https://github.com/sonata-project/sandbox>`_.
+In case you need to work with Sonata e-commerce for a new project, we strongly advise that you use our demo:
+See `Sonata demo installation <https://github.com/sonata-project/sandbox>`_.
 
 
-Manual Install
+Manual install
 ==============
 
 You already have a project and want to add e-commerce capabilities to it? Follow these instructions:
 
-- First, Check that these dependencies are installed:
+- First, check that these dependencies are installed:
 
     - Symfony2
     - PHP 5.3.2
@@ -28,15 +28,16 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         ...
     }
     
-- Run composer install
 
-- Follow FOSUserBundle README to set it up
+- Run ``composer install`` command
 
-- Follow EasyExtendsBundle README
+- Follow the FOSUserBundle README to set it up
 
-- Follow MediaBundle README
+- Follow the EasyExtendsBundle README
 
-- Add the following bundles in your ``kernel::registerBundles()`` method
+- Follow the MediaBundle README
+
+- Add the following bundles in your ``kernel::registerBundles()`` method:
 
 ::
 
@@ -53,7 +54,7 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         new Sonata\PaymentBundle\SonataPaymentBundle(),
 
 
-- Run the ``easy-extends:generate`` command, this command will generate the Application entities required by the Sonata's Bundles
+- Run the ``easy-extends:generate`` commands. These commands will generate the Application entities required by the Sonata's bundles.
 
 ::
 
@@ -66,7 +67,7 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         php app/console sonata:easy-extends:generate SonataPaymentBundle
         php app/console sonata:easy-extends:generate SonataProductBundle
 
-- Then add the following bundles in your ``kernel::registerBundles()`` method
+- Then add the following bundles in your ``kernel::registerBundles()`` method:
 
 ::
 
@@ -79,9 +80,9 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         new Application\Sonata\PaymentBundle\SonataPaymentBundle(),
         new Application\Sonata\ProductBundle\SonataProductBundle(),
 
-You can use these bundles to extend entities or template files
+You can use these bundles to extend entities or template files.
 
-- Edit your ``config.yml`` and add the following lines
+- Edit your ``config.yml`` and add the following lines:
 
 ::
 
@@ -166,7 +167,7 @@ You can use these bundles to extend entities or template files
     #           sonata.product.type.bottle:
     #                class: Application\Sonata\ProductBundle\Entity\BottleProductProvider
 
-- Add the current lines in your ``routing.yml`` files
+- Add the current lines in your ``routing.yml`` files:
 
 ::
 
@@ -256,3 +257,5 @@ You can use these bundles to extend entities or template files
                     class:      Sonata\CustomerBundle\Admin\AddressAdmin
                     entity:     Application\Sonata\CustomerBundle\Entity\Address
                     controller: SonataCustomerBundle:AddressAdmin
+
+That's it. Your application boosted with Sonata e-commerce is now ready to rumble! ;-)
