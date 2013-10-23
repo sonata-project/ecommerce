@@ -1,22 +1,22 @@
-=============================================
-Welcome to Sonata E-Commerce's documentation!
-=============================================
+=====================================================
+Welcome to Sonata e-commerce's bundles documentation!
+=====================================================
 
 Introduction
 ============
 
-Sonata e-commerce is an open source e-commerce solution based on symfony.
+Sonata is an open source e-commerce solution based on top of Symfony2.
 Sonata e-commerce is a group of Symfony2 bundles & PHP components allowing you to add e-commerce capabilities to your Symfony2 application.
-It's also compatible with several other Sonata bundles, such as Sonata Admin Bundle and Sonata Notification Bundle.
+It's also and fully compatible with several other Sonata bundles, such as SonataAdminBundle and SonataNotificationBundle.
 
 With this vendor, you'll be able to manage a whole e-commerce process:
 
 * **Catalog**
     Manage your product catalog (Products, Variations, Categories, ...)
-* **Order process**
-    Basket, Customers, Orders and Invoices
+* **Complete order process**
+    Customers, Basket, Orders and Invoices
 * **Payment**
-    Several payment means are at your disposal, and it's extendable!
+    Several payment means are at your disposal and extendable!
 
 It is splitted in 8 bundles:
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Sonata E-Commerce documentation build configuration file, created by
+# Sonata e-commerce's bundles documentation build configuration file, created by
 # sphinx-quickstart on Mon Jul  8 16:33:57 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sonata E-Commerce'
+project = u'Sonata e-commerce'
 copyright = u'2013, Thomas Rabaix'
 
 # The version info for the project you're documenting, acts as replacement for
