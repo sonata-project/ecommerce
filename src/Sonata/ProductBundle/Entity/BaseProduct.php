@@ -477,7 +477,7 @@ abstract class BaseProduct implements ProductInterface
     {
         $productCategory->setProduct($this);
 
-        $this->productCategories[] = $productCategory;
+        $this->productCategories->add($productCategory);
     }
 
     /**
@@ -486,7 +486,7 @@ abstract class BaseProduct implements ProductInterface
     public function removeProductCategory(ProductCategoryInterface $productCategory)
     {
         if ($this->productCategories->contains($productCategory)) {
-            $this->productCategories->remove($productCategory);
+            $this->productCategories->removeElement($productCategory);
         }
     }
 

@@ -210,17 +210,17 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 //        $provider->synchronizeVariationsCategories($product);
 //        $this->assertEquals(1, count($variation->getProductCategories()));
 
-//        $category2 = new Category();
-//        $productCategory2 = new ProductCategory();
-//        $productCategory2->setCategory($category2);
-//        $product->addProductCategory($productCategory2);
+        $category2 = new Category();
+        $productCategory2 = new ProductCategory();
+        $productCategory2->setCategory($category2);
+        $product->addProductCategory($productCategory2);
 
 //        $this->assertEquals(1, count($variation->getProductCategories()));
 
 //        $provider->synchronizeVariationsCategories($product);
 //        $this->assertEquals(2, count($variation->getProductCategories()));
 
-//        $product->removeProductCategory($productCategory1);
+        $product->removeProductCategory($productCategory1);
 //        $this->assertEquals(2, count($variation->getProductCategories()));
 //        $this->assertTrue($variation->getProductCategories()->contains($productCategory1));
 //        $this->assertTrue($variation->getProductCategories()->contains($productCategory2));
