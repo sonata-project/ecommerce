@@ -382,6 +382,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $variation->setVariations(new ArrayCollection());
         $variation->setDeliveries(new ArrayCollection());
         $variation->setProductCategories(new ArrayCollection());
+        $variation->setProductCollections(new ArrayCollection());
         $variation->setPackages(new ArrayCollection());
 
         $product->addVariation($variation);

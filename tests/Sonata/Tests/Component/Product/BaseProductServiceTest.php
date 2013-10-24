@@ -12,10 +12,13 @@
 namespace Sonata\Tests\Component\Product;
 
 use Sonata\ClassificationBundle\Entity\BaseCategory;
+use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 use Sonata\ProductBundle\Entity\BasePackage;
 use Sonata\ProductBundle\Entity\BaseProductCategory;
+use Sonata\ProductBundle\Entity\BaseProductCollection;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
+use Sonata\ProductBundle\Entity\ProductCollectionManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
 use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\Component\Basket\BasketElement;
@@ -62,6 +65,26 @@ class ProductCategory extends BaseProductCategory
 }
 
 class Category extends BaseCategory
+{
+    protected $id;
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+}
+
+class ProductCollection extends BaseProductCollection
+{
+    protected $id;
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+}
+
+class Collection extends BaseCollection
 {
     protected $id;
 
@@ -220,7 +243,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $em         = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $productCategoryManager = new ProductCategoryManager($em, 'Application\Sonata\ProductBundle\Entity\ProductCategory');
+        $productCategoryManager = new ProductCategoryManager($em, 'Sonata\Tests\Component\Product\ProductCategory');
         $provider->setProductCategoryManager($productCategoryManager);
 
         $product = new Product();
@@ -260,6 +283,55 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 //        $this->assertEquals(1, count($variation->getProductCategories()));
 //        $this->assertFalse($variation->getProductCategories()->contains($productCategory1));
 //        $this->assertTrue($variation->getProductCategories()->contains($productCategory2));
+    }
+
+    public function testProductCollectionsSynchronization()
+    {
+        $provider = $this->getBaseProvider();
+
+        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
+        $em         = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
+
+        $productCollectionManager = new ProductCollectionManager($em, 'Sonata\Tests\Component\Product\ProductCollection');
+        $provider->setProductCollectionManager($productCollectionManager);
+
+        $product = new Product();
+
+        $collection1 = new Collection();
+        $collection1->setId(1);
+        $productCollection1 = new ProductCollection();
+        $productCollection1->setId(1);
+        $productCollection1->setCollection($collection1);
+        $product->addProductCollection($productCollection1);
+
+        $variation = $provider->createVariation($product, false);
+        $this->assertEquals(0, count($variation->getProductCollections()));
+
+        $provider->synchronizeVariationsCollections($product);
+        $this->assertEquals(1, count($variation->getProductCollections()));
+
+        $collection2 = new Collection();
+        $collection2->setId(2);
+        $productCollection2 = new ProductCollection();
+        $productCollection2->setId(2);
+        $productCollection2->setCollection($collection2);
+        $product->addProductCollection($productCollection2);
+
+        $this->assertEquals(1, count($variation->getProductCollections()));
+
+        $provider->synchronizeVariationsCollections($product);
+        $this->assertEquals(2, count($variation->getProductCollections()));
+
+        $product->removeProductCollection($productCollection1);
+        $this->assertEquals(2, count($variation->getProductCollections()));
+
+        $repository->expects($this->any())->method('findOneBy')->will($this->returnValue($productCollection1));
+
+        $provider->synchronizeVariationsCollections($product);
+//        $this->assertEquals(1, count($variation->getProductCollections()));
+//        $this->assertFalse($variation->getProductCollections()->contains($productCollection1));
+//        $this->assertTrue($variation->getProductCollections()->contains($productCollection2));
     }
 
     public function testProductPackagesSynchronization()
