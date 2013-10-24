@@ -57,17 +57,21 @@ Well... We're entering the depths of it, aren't we? To be crystal clear, we'll t
 Basket <-> Order transformations and storage
 --------------------------------------------
 
-``#TODO``
+Along the checkout process, once the Basket has been validated by the Customer and is about to be paid for, we'll transform the Basket (which is submitted to change) into an Order (which will be fixed in time). Hence, Basket & Order entities are quite similar, but we'll need to copy data from one to the other. We can't afford having relationships / dependencies that may evolve later in the Order entity, hence we copy or serialize those.
 
 Basket -> Order
 ~~~~~~~~~~~~~~~
 
-``#TODO``
+At the Order instance construction depending on the Basket, we'll compute the final Order price, based on BasketElements, Delivery, etc. We use the ``BasketTransformer::transformIntoOrder`` method to do so. This will check for the Basket validity and create an Order instance based on that.
+
+You may, of course, override this transformer and the associated service (service id is ``sonata.payment.transformer.basket``).
 
 Order -> Basket
 ~~~~~~~~~~~~~~~
 
-``#TODO``
+You may need sometimes to rebuild a basket from a previous Order. In order to do so, the ``OrderTransformer::transformIntoBasket`` method does the job. Based on the stored product id, you'll be able to rebuild a Basket with the potentially new information (if you changed your product) of your website.
+
+You may, of course, override this transformer and the associated service (service id is ``sonata.payment.transformer.order``).
 
 Order -> Invoice
 ~~~~~~~~~~~~~~~~
