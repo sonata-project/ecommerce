@@ -11,9 +11,11 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Doctrine\ORM\EntityManager;
+use Sonata\Component\Product\ProductInterface;
 
 class ProductCollectionManager implements ProductCollectionManagerInterface
 {
@@ -102,5 +104,38 @@ class ProductCollectionManager implements ProductCollectionManagerInterface
     {
         $this->em->remove($productCollection);
         $this->em->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection)
+    {
+        if ($this->findProductCollectionBy(array('collection' => $collection, 'product' => $product))) {
+            return;
+        }
+
+        $productCollection = $this->createProductCollection();
+
+        $productCollection->setProduct($product);
+        $productCollection->setCollection($collection);
+
+        $product->addProductCollection($productCollection);
+
+        $this->updateProductCollection($productCollection);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection)
+    {
+        if (!$productCollection = $this->findProductCollectionBy(array('collection' => $collection, 'product' => $product))) {
+            return;
+        }
+
+        $product->removeProductCollection($productCollection);
+
+        $this->deleteProductCollection($productCollection);
     }
 }

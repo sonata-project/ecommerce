@@ -26,6 +26,7 @@ use Sonata\Component\Basket\BasketElement;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\Component\Product\ProductCollectionManagerInterface;
 
 use Sonata\Component\Basket\BasketElementManagerInterface;
 
@@ -54,9 +55,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $serializer;
 
     /**
-     * @var \Sonata\Component\Product\ProductCategoryManagerInterface
+     * @var ProductCategoryManagerInterface
      */
     protected $productCategoryManager;
+
+    /**
+     * @var ProductCollectionManagerInterface
+     */
+    protected $productCollectionManager;
 
     /**
      * @var BasketElementManagerInterface
@@ -136,6 +142,22 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function getProductCategoryManager()
     {
         return $this->productCategoryManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductCollectionManager(ProductCollectionManagerInterface $productCollectionManager)
+    {
+        $this->productCollectionManager = $productCollectionManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductCollectionManager()
+    {
+        return $this->productCollectionManager;
     }
 
     /**
@@ -492,7 +514,30 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null)
     {
-        // TODO: Implement synchronizeVariationsCollections() method.
+        if (!$variations) {
+            $variations = $product->getVariations();
+        }
+
+        $productCollections = $product->getCollections();
+
+        /** @var ProductInterface $variation */
+        foreach ($variations as $variation) {
+            $variationCollections = $variation->getCollections();
+
+            // browsing Product categories and add missing categories
+            foreach ($productCollections as $productCollection) {
+                if ($productCollection && !$variationCollections->contains($productCollection)) {
+                    $this->productCollectionManager->addCollectionToProduct($variation, $productCollection);
+                }
+            }
+
+            // browsing variation categories and remove excessing categories
+            foreach ($variationCollections as $variationCollection) {
+                if ($variationCollection && !$productCollections->contains($variationCollection)) {
+                    $this->productCollectionManager->removeCollectionFromProduct($variation, $variationCollection);
+                }
+            }
+        }
     }
 
     /**

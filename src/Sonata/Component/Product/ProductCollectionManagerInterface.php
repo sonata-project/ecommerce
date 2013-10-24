@@ -11,6 +11,8 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\ClassificationBundle\Model\CollectionInterface;
+
 interface ProductCollectionManagerInterface
 {
     /**
@@ -53,4 +55,20 @@ interface ProductCollectionManagerInterface
      * @return void
      */
     public function updateProductCollection(ProductCollectionInterface $productCollection);
+
+    /**
+     * Adds a Category to a Product.
+     *
+     * @param ProductInterface    $product
+     * @param CollectionInterface $collection
+     */
+    public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection);
+
+    /**
+     * Removes a Category from a Product.
+     *
+     * @param ProductInterface    $product
+     * @param CollectionInterface $collection
+     */
+    public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection);
 }

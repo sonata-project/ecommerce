@@ -335,6 +335,13 @@ interface ProductInterface
     public function setProductCollections(ArrayCollection $productCollections);
 
     /**
+     * Get Collections collection.
+     *
+     * @return ArrayCollection
+     */
+    public function getCollections();
+
+    /**
      * Get Categories collection.
      *
      * @return ArrayCollection

@@ -143,7 +143,7 @@ abstract class BaseProduct implements ProductInterface
     {
         $productCollection->setProduct($this);
 
-        $this->productCollections[] = $productCollection;
+        $this->productCollections->add($productCollection);
     }
 
     /**
@@ -170,6 +170,22 @@ abstract class BaseProduct implements ProductInterface
     public function setProductCollections(ArrayCollection $productCollections)
     {
         $this->productCollections = $productCollections;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCollections()
+    {
+        $collections = new ArrayCollection();
+
+        foreach ($this->productCollections as $productCollection) {
+            if (!$collections->contains($productCollection)) {
+                $collections->add($productCollection->getCollection());
+            }
+        }
+
+        return $collections;
     }
 
     /**
@@ -529,7 +545,7 @@ abstract class BaseProduct implements ProductInterface
     {
         $variation->setParent($this);
 
-        $this->variations[] = $variation;
+        $this->variations->add($variation);
     }
 
     /**
@@ -538,7 +554,7 @@ abstract class BaseProduct implements ProductInterface
     public function removeVariation(ProductInterface $variation)
     {
         if ($this->variations->contains($variation)) {
-            $this->variations->remove($variation);
+            $this->variations->removeElement($variation);
         }
     }
 
