@@ -70,6 +70,18 @@
                 <source>status_stopped</source>
                 <target>Stopped</target>
             </trans-unit>
+            <trans-unit id="status_returned">
+                <source>status_returned</source>
+                <target>Returned</target>
+            </trans-unit>
+            <trans-unit id="status_completed">
+                <source>status_completed</source>
+                <target>Completed</target>
+            </trans-unit>
+            <trans-unit id="status_sent">
+                <source>status_sent</source>
+                <target>Sent</target>
+            </trans-unit>
             <!-- End - Status translations -->
 
         </body>

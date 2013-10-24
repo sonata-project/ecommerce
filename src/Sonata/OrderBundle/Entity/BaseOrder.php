@@ -2,6 +2,7 @@
 
 namespace Sonata\OrderBundle\Entity;
 
+use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Customer\CustomerInterface;
@@ -335,7 +336,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function getDeliveryStatusName()
     {
-        $statusList = self::getStatusList();
+        $statusList = BaseServiceDelivery::getStatusList();
 
         return $statusList[$this->getDeliveryStatus()];
     }
