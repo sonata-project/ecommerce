@@ -2,7 +2,7 @@
 Product
 =======
 
-A ``Product`` defines the data related to one entry in the persistency layer. An application
+A ``Product`` defines the data related to one entry in the persistence layer. An application
 can have different types of product. A product is always linked to a ``ProductProvider``.
 
 The link between the ``Product`` and the ``ProductProvider`` is done through the discriminator
@@ -14,6 +14,7 @@ A ``ProductProvider`` is responsible of the ``Product`` lifecycle across the app
   - Forms manager: front and backend
   - Add a product into the basket
   - Create an OrderElement upon the ``Product`` information
+  - Create variations
 
 A ``ProductManager`` is responsible of the ``Product`` lifecycle with the database:
 
@@ -30,3 +31,14 @@ Product Variations
 ==================
 
 #TODO
+=======
+Product variations
+==================
+
+A ``Product`` can be duplicated. For instance, you can have a ``Product`` variated in many
+colors but all the others parameters are the same.
+
+The ``ProductProvider`` is responsible of the variation creation.
+
+The variations are related to a parent ``Product``. When you edit some data in your parent
+``Product``, you can synchronize them with the ``ProductProvider``.
