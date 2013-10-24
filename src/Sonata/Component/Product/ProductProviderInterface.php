@@ -225,12 +225,4 @@ interface ProductProviderInterface
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null);
-
-    /**
-     * Synchronizes parent Product media to its variations (or a single one if $targetVariation is specified).
-     *
-     * @param ProductInterface $product    Parent Product
-     * @param ArrayCollection  $variations Optional target variations to synchronize
-     */
-    public function synchronizeVariationsMedias(ProductInterface $product, ArrayCollection $variations = null);
 }

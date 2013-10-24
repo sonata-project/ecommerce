@@ -395,7 +395,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
             $this->synchronizeVariationsDeliveries($product, $variationCollection);
             $this->synchronizeVariationsCategories($product, $variationCollection);
             $this->synchronizeVariationsPackages($product, $variationCollection);
-            $this->synchronizeVariationsMedias($product, $variationCollection);
         }
 
         $variation->setEnabled(false);
@@ -412,7 +411,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->synchronizeVariationsDeliveries($product, $variations);
         $this->synchronizeVariationsCategories($product, $variations);
         $this->synchronizeVariationsPackages($product, $variations);
-        $this->synchronizeVariationsMedias($product, $variations);
         $this->synchronizeVariationsCollections($product, $variations);
     }
 
@@ -570,14 +568,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 }
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function synchronizeVariationsMedias(ProductInterface $product, ArrayCollection $variations = null)
-    {
-        // TODO: Implement synchronizeVariationsMedias() method.
     }
 
     /////////////////////////////////////////////////////
