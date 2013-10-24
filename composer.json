@@ -20,7 +20,6 @@
         "symfony/twig-bridge": "~2.3",
 
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
-        "sonata-project/block-bundle": "~2.2@dev",
         "sonata-project/media-bundle": "2.2.*@dev",
         "sonata-project/user-bundle": "2.2.*@dev",
         "sonata-project/intl-bundle": "~2.1",
