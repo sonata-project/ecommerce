@@ -32,6 +32,11 @@ It offers a console command to easily generate a new product type in your applic
      --env (-e)            The Environment name. (default: "dev")
      --no-debug            Switches off debug mode.
 
+Product / SonataSeoBundle integration
+=====================================
+
+#TODO
+
 Configuration
 =============
 
