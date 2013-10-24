@@ -11,6 +11,7 @@
 
 namespace Sonata\ProductBundle\Controller;
 
+use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\FormView;
@@ -46,6 +47,9 @@ abstract class BaseProductController extends Controller
 
         $crossSellingProducts = $this->get('sonata.product.finder')->getCrossSellingSimilarProducts($product);
         $currency = $this->get('sonata.price.currency.detector')->getCurrency();
+
+        // Add twitter/FB metadata
+        $this->updateSeoMeta($product, $currency);
 
         return $this->render(
             sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
@@ -142,5 +146,17 @@ abstract class BaseProductController extends Controller
     public function viewEditOrderElement(OrderElementInterface $orderElement)
     {
 
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param string|null      $currency
+     */
+    protected function updateSeoMeta(ProductInterface $product, $currency = null)
+    {
+        $seoPage = $this->get('sonata.seo.page');
+
+        $this->get('sonata.product.seo.facebook')->alterPage($seoPage, $product, $currency);
+        $this->get('sonata.product.seo.twitter')->alterPage($seoPage, $product, $currency);
     }
 }

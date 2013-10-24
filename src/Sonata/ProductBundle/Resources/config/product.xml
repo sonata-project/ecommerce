@@ -9,6 +9,9 @@
         <parameter key="sonata.product.subscriber.orm.class">Sonata\Component\Subscriber\ORMInheritanceSubscriber</parameter>
         <parameter key="sonata.product.seo_iterator.class">Sonata\Component\Product\SeoProductIterator</parameter>
         <parameter key="sonata.product.finder.class">Sonata\Component\Product\ProductFinder</parameter>
+
+        <parameter key="sonata.product.seo.twitter.class">Sonata\ProductBundle\Seo\Services\Twitter</parameter>
+        <parameter key="sonata.product.seo.facebook.class">Sonata\ProductBundle\Seo\Services\Facebook</parameter>
     </parameters>
 
     <services>
@@ -32,6 +35,14 @@
             <argument type="service" id="sonata.product.set.manager" />
         </service>
 
+        <service id="sonata.product.seo.twitter" class="%sonata.product.seo.twitter.class%">
+            <argument type="service" id="sonata.media.pool" />
+            <argument type="service" id="request" strict="false" />
+        </service>
+        <service id="sonata.product.seo.facebook" class="%sonata.product.seo.facebook.class%">
+            <argument type="service" id="sonata.media.pool" />
+            <argument type="service" id="request" strict="false" />
+        </service>
     </services>
 
 </container>
