@@ -30,11 +30,6 @@ A ``ProductFinder`` is responsible for finding matching products to a given one.
 Product Variations
 ==================
 
-#TODO
-=======
-Product variations
-==================
-
 A ``Product`` can be duplicated. For instance, you can have a ``Product`` variated in many
 colors but all the others parameters are the same.
 
