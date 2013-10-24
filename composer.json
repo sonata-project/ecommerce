@@ -24,7 +24,7 @@
         "sonata-project/user-bundle": "2.2.*@dev",
         "sonata-project/intl-bundle": "~2.1",
         "sonata-project/seo-bundle": "~1",
-        "sonata-project/classification-bundle": "~1",
+        "sonata-project/classification-bundle": "~2.2",
 
         "kriswallsmith/buzz": "0.*",
         "knplabs/knp-menu-bundle": "~1.1",
