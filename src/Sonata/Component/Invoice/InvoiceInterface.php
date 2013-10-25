@@ -26,6 +26,30 @@ interface InvoiceInterface
     public function getId();
 
     /**
+     * @return \DateTime
+     */
+    public function getCreatedAt();
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt);
+
+    /**
+     * Set payment method
+     *
+     * @param string $paymentMethod
+     */
+    public function setPaymentMethod($paymentMethod);
+
+    /**
+     * Get payment method
+     *
+     * @return string
+     */
+    public function getPaymentMethod();
+
+    /**
      * Set reference
      *
      * @param string $reference

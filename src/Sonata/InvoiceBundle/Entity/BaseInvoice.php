@@ -106,6 +106,16 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $mobile;
 
     /**
+     * @var string $paymentMethod
+     */
+    protected $paymentMethod;
+
+    /**
+     * @var \DateTime
+     */
+    protected $createdAt;
+
+    /**
      * @var UserInterface
      */
     protected $user;
@@ -114,6 +124,46 @@ abstract class BaseInvoice implements InvoiceInterface
      * @var array
      */
     protected $invoiceElements = array();
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        $this->paymentMethod = $paymentMethod;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
 
     /**
      * Set reference

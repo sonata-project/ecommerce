@@ -49,6 +49,8 @@ class InvoiceTransformer extends BaseTransformer
         $invoice->setTotalExcl($order->getTotalExcl());
         $invoice->setTotalInc($order->getTotalInc());
 
+        $invoice->setPaymentMethod($order->getPaymentMethod());
+
         foreach ($order->getOrderElements() as $orderElement) {
             $invoiceElement = $this->createInvoiceElementFromOrderElement($orderElement);
             $invoiceElement->setInvoice($invoice);

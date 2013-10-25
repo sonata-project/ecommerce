@@ -27,20 +27,21 @@ file that was distributed with this source code.
                 </tr>
                 <tr>
                     <td rowspan="8">&nbsp;</td>
-                    <td>{{ invoice.customer.firstName }}</td>
-                </tr>
-                <tr>
-                    <td>{{ invoice.customer.lastName }}</td>
+                    <td>{{ invoice.customer.firstName ~ " " ~ invoice.customer.lastName }}</td>
                 </tr>
                 <tr>
                     <td>{{ invoice.address1 }}</td>
                 </tr>
+                {% if invoice.address2 %}
                 <tr>
                     <td>{{ invoice.address2 }}</td>
                 </tr>
+                {% endif %}
+                {% if invoice.address3 %}
                 <tr>
                     <td>{{ invoice.address3 }}</td>
                 </tr>
+                {% endif %}
                 <tr>
                     <td>{{ invoice.postcode }}</td>
                 </tr>
@@ -63,7 +64,7 @@ file that was distributed with this source code.
                 </tr>
                 <tr>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.references.date{% endtrans %}</th>
-                    <td></td>
+                    <td>{{ invoice.createdAt|date() }}</td>
                 </tr>
             </table>
         </div>
@@ -88,22 +89,28 @@ file that was distributed with this source code.
                         <td>{{ element.id }}</td>
                         <td>{{ element.designation }}</td>
                         <td>{{ element.quantity }}</td>
-                        <td>{{ element.price }}</td>
-                        <td>{{ element.total }}</td>
-                        <td></td>
+                        <td>{{ element.price|number_format_currency(invoice.currency) }}</td>
+                        <td>{{ (element.total - element.vat*element.quantity)|number_format_currency(invoice.currency) }}</td>
+                        <td>{{ element.total|number_format_currency(invoice.currency) }}</td>
                     </tr>
                 {% endfor %}
 
                 <tr>
                     <td colspan="4">&nbsp;</td>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_exc_vat{% endtrans %}</th>
-                    <td>{{ invoice.totalExcl }}</td>
+                    <td>{{ invoice.totalExcl|number_format_currency(invoice.currency) }}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.vat{% endtrans %}</th>
+                    <td>{{ (invoice.totalInc - invoice.totalExcl)|number_format_currency(invoice.currency) }}</td>
                 </tr>
 
                 <tr>
                     <td colspan="4">&nbsp;</td>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_inc_vat{% endtrans %}</th>
-                    <td>{{ invoice.totalInc }}</td>
+                    <td>{{ invoice.totalInc|number_format_currency(invoice.currency) }}</td>
                 </tr>
             </table>
         </div>
@@ -116,7 +123,7 @@ file that was distributed with this source code.
             <table class="table table-bordered">
                 <tr>
                     <th>{% trans from 'SonataPaymentBundle' %}method{% endtrans %}</th>
-                    <td></td>
+                    <td>{{ invoice.paymentMethod }}</td>
                 </tr>
             </table>
         </div>
