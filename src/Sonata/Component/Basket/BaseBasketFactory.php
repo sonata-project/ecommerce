@@ -12,7 +12,7 @@
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Currency\CurrencyDetectorInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Class BaseBasketFactory
@@ -39,7 +39,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface
     protected $currencyDetector;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     protected $session;
 
@@ -47,9 +47,9 @@ abstract class BaseBasketFactory implements BasketFactoryInterface
      * @param BasketManagerInterface    $basketManager
      * @param BasketBuilderInterface    $basketBuilder
      * @param CurrencyDetectorInterface $currencyDetector
-     * @param Session                   $session
+     * @param SessionInterface          $session
      */
-    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, Session $session)
+    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, SessionInterface $session)
     {
         $this->basketManager    = $basketManager;
         $this->basketBuilder    = $basketBuilder;
