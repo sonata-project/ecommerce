@@ -221,7 +221,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
         $productProvider = $this->createNewProductProvider();
 
-        $this->assertInternalType('bool', $productProvider->isAddableToBasket($basket, $product));
+        $this->assertTrue($productProvider->isAddableToBasket($basket, $product));
     }
 
     /**

@@ -177,14 +177,15 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
     {
         $provider = $this->getBaseProvider();
 
-        $this->assertInternalType('array', $provider->getVariationFields());
+        $this->assertEmpty($provider->getVariationFields());
 
         $provider->setVariationFields(array('name', 'price'));
 
         $this->assertTrue($provider->hasVariationFields());
         $this->assertTrue($provider->isVariateBy('name'));
         $this->assertFalse($provider->isVariateBy('fake'));
-        $this->assertInternalType('array', $provider->getVariationFields());
+        $this->assertNotEmpty($provider->getVariationFields());
+        $this->assertEquals(array('name', 'price'), $provider->getVariationFields());
     }
 
     public function testVariationCreation()

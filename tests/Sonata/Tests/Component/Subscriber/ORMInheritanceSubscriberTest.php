@@ -25,7 +25,7 @@ class ORMInheritanceSubscriberTest extends \PHPUnit_Framework_TestCase
     public function testGetSubscribedEvents()
     {
         $subscriber = new ORMInheritanceSubscriber(array());
-        $this->assertInternalType('array', $subscriber->getSubscribedEvents());
+        $this->assertCount(1, $subscriber->getSubscribedEvents());
     }
 
     public function testLoadClassMetadata()
