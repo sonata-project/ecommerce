@@ -34,7 +34,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
 
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
@@ -64,7 +64,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
 
         $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/1', $basket);
@@ -93,7 +93,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
 
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
