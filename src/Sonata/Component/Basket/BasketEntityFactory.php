@@ -66,9 +66,13 @@ class BasketEntityFactory implements BasketFactoryInterface
         }
 
         if (!$basket) {
-            $basket = $this->basketManager->create();
-            $basket->setLocale($customer->getLocale());
-            $basket->setCurrency($this->currencyDetector->getCurrency());
+            $basket = $this->loadFromSession();
+
+            if (!$basket) {
+                $basket = $this->basketManager->create();
+                $basket->setLocale($customer->getLocale());
+                $basket->setCurrency($this->currencyDetector->getCurrency());
+            }
         }
 
         $basket->setCustomer($customer);
@@ -86,7 +90,17 @@ class BasketEntityFactory implements BasketFactoryInterface
         if ($basket->getCustomerId()) {
             $this->basketManager->save($basket);
         } else {
-            $this->session->set('sonata/basket/factory/customer/new', $basket);
+            $this->session->set(BasketSessionFactory::SESSION_BASE_NAME.'new', $basket);
         }
+    }
+
+    /**
+     * Loads the basket in session (for authenticating users)
+     *
+     * @return BasketInterface
+     */
+    protected function loadFromSession()
+    {
+        return $this->session->get(BasketSessionFactory::SESSION_BASE_NAME.'new');
     }
 }

@@ -18,6 +18,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketSessionFactory extends BaseBasketFactory
 {
+    const SESSION_BASE_NAME = "sonata/basket/factory/customer/";
+
     /**
      * @var \Sonata\Component\Basket\BasketManagerInterface
      */
@@ -60,9 +62,13 @@ class BasketSessionFactory extends BaseBasketFactory
         $basket = $this->session->get($this->getSessionVarName($customer));
 
         if (!$basket) {
-            $basket = $this->basketManager->create();
-            $basket->setLocale($customer->getLocale());
-            $basket->setCurrency($this->currencyDetector->getCurrency());
+            $basket = $this->session->get($this->getSessionVarName());
+
+            if (!$basket) {
+                $basket = $this->basketManager->create();
+                $basket->setLocale($customer->getLocale());
+                $basket->setCurrency($this->currencyDetector->getCurrency());
+            }
         }
 
         $basket->setCustomer($customer);
@@ -88,8 +94,12 @@ class BasketSessionFactory extends BaseBasketFactory
      * @param  \Sonata\Component\Customer\CustomerInterface $customer
      * @return string
      */
-    protected function getSessionVarName(CustomerInterface $customer)
+    protected function getSessionVarName(CustomerInterface $customer = null)
     {
-        return sprintf('sonata/basket/factory/customer/%s', $customer->getId() ?: 'new');
+        if (null === $customer || null === $customer->getId()) {
+            return self::SESSION_BASE_NAME."new";
+        }
+
+        return self::SESSION_BASE_NAME.$customer->getId();
     }
 }
