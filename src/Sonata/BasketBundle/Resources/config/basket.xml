@@ -29,5 +29,11 @@
         </service>
 
         <service id="sonata.basket" class="Sonata\Component\Basket\Basket" factory-service="sonata.basket.loader" factory-method="getBasket"/>
+
+        <service id="sonata.basket.block.nb_items" class="Sonata\BasketBundle\Block\BasketBlockService">
+            <tag name="sonata.block" />
+            <argument>sonata.basket.block.nb_items</argument>
+            <argument type="service" id="templating" />
+        </service>
     </services>
 </container>

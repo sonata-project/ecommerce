@@ -1,0 +1,10 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div>
+        <a href="{{ path('sonata_basket_index') }}">
+            <i class="icon-shopping-cart"></i>
+            {{ 'sonata.basket.title_basket'|trans({}, 'SonataBasketBundle') }} ({{ sonata_basket.basket.countBasketElements }})
+        </a>
+    </div>
+{% endblock %}
