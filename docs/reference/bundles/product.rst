@@ -35,7 +35,11 @@ It offers a console command to easily generate a new product type in your applic
 Product / SonataSeoBundle integration
 =====================================
 
-#TODO
+To enhance your project interactions with third parties web communities, the SonataProductBundle ships with SonataSeoBundle.
+
+You can easily write your own microformats implementation, and, to do so, we recommend to write your own service in which you can inject, at least, a ProductInterface entity and a SeoPageInterface entity.
+
+Concrete examples of implementation as `Facebook Open Graph <http://developers.facebook.com/docs/opengraph/>`_ or `Twitter Cards <https://dev.twitter.com/docs/cards>`_ have been developed as working examples in the Sonata Demo.
 
 Configuration
 =============
