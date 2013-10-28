@@ -23,15 +23,15 @@ file that was distributed with this source code.
     </thead>
     <tfoot>
         <tr>
-            <td colspan="3">{{ 'sonata.basket.total_wo_vat'|trans({}, 'SonataBasketBundle') }}</td>
+            <th colspan="3" style="text-align: right">{{ 'sonata.basket.total_wo_vat'|trans({}, 'SonataBasketBundle') }}</th>
             <td><b>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
         </tr>
         <tr>
-            <td colspan="3">{{ 'sonata.basket.total_vat'|trans({}, 'SonataBasketBundle') }}</td>
+            <th colspan="3" style="text-align: right">{{ 'sonata.basket.total_vat'|trans({}, 'SonataBasketBundle') }}</th>
             <td><b>{{ basket.getVatAmount()|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
         </tr>
         <tr>
-            <td colspan="3">{{ 'sonata.basket.total_w_vat'|trans({}, 'SonataBasketBundle') }}</td>
+            <th colspan="3" style="text-align: right">{{ 'sonata.basket.total_w_vat'|trans({}, 'SonataBasketBundle') }}</th>
             <td><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
         </tr>
     </tfoot>
