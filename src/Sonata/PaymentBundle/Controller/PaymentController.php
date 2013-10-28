@@ -152,7 +152,7 @@ class PaymentController extends Controller
         // assign correct reference number
         $this->get('sonata.generator')->order($order);
 
-//        $basket->reset();
+        $basket->reset();
 
         // the payment must handle everything when calling the bank
         return $payment->callbank($order);
