@@ -53,11 +53,6 @@ abstract class BasePayment implements PaymentInterface
     protected $enabled;
 
     /**
-     * @var string
-     */
-    protected $description;
-
-    /**
      * @param \Sonata\Component\Order\OrderInterface $order
      *
      * @throws \RuntimeException
@@ -242,22 +237,6 @@ abstract class BasePayment implements PaymentInterface
     public function getEnabled()
     {
         return $this->enabled;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**

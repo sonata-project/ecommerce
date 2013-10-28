@@ -54,11 +54,6 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     protected $priority;
 
     /**
-     * @var string
-     */
-    protected $description;
-
-    /**
      * return status list
      *
      * @return array
@@ -219,21 +214,5 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     public function getPriority()
     {
         return $this->priority;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 }
