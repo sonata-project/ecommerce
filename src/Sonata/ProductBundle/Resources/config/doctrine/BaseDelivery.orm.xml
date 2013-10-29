@@ -2,10 +2,10 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\ProductBundle\Entity\BaseDelivery" >
 
-        <field name="code"          type="string"   column="code"     length="255"/>
-        <field name="perItem"      type="boolean"  column="per_item" nullable="true"/>
-        <field name="countryCode"  type="string"   column="country_code"        length="3"/>
-        <field name="zone"          type="string"   column="zone"  nullable="true"         length="5"/>
+        <field name="code"          type="string"   column="code"           length="255"/>
+        <field name="perItem"       type="boolean"  column="per_item"       nullable="true"/>
+        <field name="countryCode"   type="string"   column="country_code"   length="3"/>
+        <field name="zone"          type="string"   column="zone"           nullable="true"         length="5"/>
         <field name="enabled"       type="boolean"  column="enabled"/>
 
         <field name="updatedAt"    column="updated_at"     type="datetime" />

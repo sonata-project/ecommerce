@@ -16,7 +16,25 @@
         <getter property="name">
             <constraint name="NotNull" />
         </getter>
+    </class>
 
+    <class name="Sonata\Component\Product\DeliveryInterface">
+        <getter property="code">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="countryCode">
+            <constraint name="NotNull" />
+            <constraint name="Country" />
+        </getter>
+
+        <getter property="zone">
+            <constraint name="NotNull" />
+            <constraint name="Length">
+                <option name="min">5</option>
+                <option name="max">5</option>
+            </constraint>
+        </getter>
     </class>
 
 </constraint-mapping>

@@ -23,12 +23,6 @@
 
         <getter property="status">
             <constraint name="NotNull" />
-            <constraint name="Choice">
-                <option name="callback">
-                    <value>Sonata\InvoiceBundle\Entity\BaseInvoice</value>
-                    <value>getValidationStatusList</value>
-                </option>
-            </constraint>
         </getter>
 
         <getter property="name">
@@ -54,6 +48,27 @@
 
         <getter property="email">
             <constraint name="Email" />
+        </getter>
+    </class>
+
+    <class name="Sonata\Component\Invoice\InvoiceElementInterface">
+        <getter property="quantity">
+            <constraint name="NotNull" />
+            <constraint name="GreaterThanOrEqual">
+                <option name="value">0</option>
+            </constraint>
+        </getter>
+
+        <getter property="price">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="total">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="vat">
+            <constraint name="NotNull" />
         </getter>
     </class>
 

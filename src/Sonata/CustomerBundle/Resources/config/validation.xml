@@ -12,6 +12,41 @@
         <getter property="email">
             <constraint name="Email" />
         </getter>
+
+        <getter property="locale">
+            <constraint name="Locale" />
+        </getter>
+
+        <getter property="updatedAt">
+            <constraint name="DateTime" />
+        </getter>
+
+        <getter property="createdAt">
+            <constraint name="DateTime" />
+        </getter>
+    </class>
+
+    <class name="Sonata\Component\Customer\AddressInterface">
+        <getter property="name">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="address1">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="postcode">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="city">
+            <constraint name="NotNull" />
+        </getter>
+
+        <getter property="countryCode">
+            <constraint name="NotNull" />
+            <constraint name="Country" />
+        </getter>
     </class>
 
 </constraint-mapping>
