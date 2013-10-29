@@ -46,16 +46,16 @@ class Twitter implements ServiceInterface
     public function alterPage(SeoPageInterface $seoPage, ProductInterface $product, $currency = null)
     {
         $seoPage->addMeta('name', 'twitter:card', 'product')
-            ->addMeta('name', 'twitter:site', $product->getName())
+            ->addMeta('name', 'twitter:site', '@sonataproject')
+            ->addMeta('name', 'twitter:creator', '@th0masr')
             ->addMeta('name', 'twitter:title', $product->getName())
             ->addMeta('name', 'twitter:description', substr($product->getDescription(), 0, 200));
 
         if (null !== $currency) {
             $seoPage->addMeta('name', 'twitter:label1', 'Price')
                 ->addMeta('name', 'twitter:data1', sprintf('%.2f%s', $product->getPrice(), $currency))
-                // TODO provide useful information
-                ->addMeta('name', 'twitter:label2', 'Price')
-                ->addMeta('name', 'twitter:data2', sprintf('%.2f%s', $product->getPrice(), $currency));
+                ->addMeta('name', 'twitter:label2', 'SKU')
+                ->addMeta('name', 'twitter:data2', $product->getSku());
         }
 
         $seoPage->addMeta('name', 'twitter:domain', $this->request->getHost());
