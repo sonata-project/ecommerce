@@ -401,6 +401,10 @@
                 <source>sonata.order.view.reference</source>
                 <target state="new">Order</target>
             </trans-unit>
+            <trans-unit resname="sonata.order.view.elements">
+                <source>sonata.order.view.elements</source>
+                <target state="new">Order elements</target>
+            </trans-unit>
             <trans-unit id="95d3b4325093e065eee7badfc5fa6056f356bf93" resname="sonata.order.view.subtitle_elements">
                 <jms:reference-file line="38">views/Order/view.html.twig</jms:reference-file>
                 <source>sonata.order.view.subtitle_elements</source>
@@ -415,6 +419,10 @@
                 <jms:reference-file line="68">views/Order/view.html.twig</jms:reference-file>
                 <source>sonata.order.view.total_excl</source>
                 <target state="new">Total excl. VAT</target>
+            </trans-unit>
+            <trans-unit resname="sonata.order.view.total_vat">
+                <source>sonata.order.view.total_vat</source>
+                <target state="new">Total VAT</target>
             </trans-unit>
             <trans-unit id="0efa45b159be342065975981d83d4c9ed1cc8118" resname="sonata.order.view.total_inc">
                 <jms:reference-file line="63">views/Order/view.html.twig</jms:reference-file>
