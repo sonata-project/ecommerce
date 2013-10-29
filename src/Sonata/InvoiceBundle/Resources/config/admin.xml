@@ -13,6 +13,10 @@
             <argument />
             <argument>%sonata.invoice.admin.invoice.entity%</argument>
             <argument />
+
+            <call method="setCurrencyDetector">
+                <argument type="service" id="sonata.price.currency.detector" />
+            </call>
         </service>
     </services>
 

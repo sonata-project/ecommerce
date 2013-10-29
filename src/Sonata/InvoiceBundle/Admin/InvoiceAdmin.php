@@ -14,10 +14,24 @@ namespace Sonata\InvoiceBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 
 class InvoiceAdmin extends Admin
 {
+    /**
+     * @var CurrencyDetectorInterface
+     */
+    protected $currencyDetector;
+
+    /**
+     * @param CurrencyDetectorInterface $currencyDetector
+     */
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    {
+        $this->currencyDetector = $currencyDetector;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -44,8 +58,8 @@ class InvoiceAdmin extends Admin
                 ->add('reference')
                 ->add('currency', 'sonata_currency')
                 ->add('status', 'sonata_invoice_status', array('translation_domain' => 'SonataInvoiceBundle'))
-                ->add('totalInc')
                 ->add('totalExcl')
+                ->add('totalInc')
             ->end()
             ->with($this->trans('invoice.form.group_billing_label', array(), 'SonataInvoiceBundle'), array('collapsed' => true))
                 ->add('name')
@@ -73,7 +87,8 @@ class InvoiceAdmin extends Admin
             ->addIdentifier('reference')
             ->add('customer')
             ->add('status')
-            ->add('totalExcl')
+            ->add('totalExcl', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('totalInc', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
         ;
     }
 }
