@@ -11,6 +11,7 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\PackageInterface;
+use Sonata\Component\Product\ProductInterface;
 
 /**
  * Sonata\ProductBundle\Entity\BasePackage
@@ -18,9 +19,9 @@ use Sonata\Component\Product\PackageInterface;
 abstract class BasePackage implements PackageInterface
 {
     /**
-     * @var integer $productId
+     * @var ProductInterface
      */
-    protected $productId;
+    protected $product;
 
     /**
      * @var float $width
@@ -58,23 +59,19 @@ abstract class BasePackage implements PackageInterface
     protected $createdAt;
 
     /**
-     * Set productId
-     *
-     * @param integer $productId
+     * {@inheritdoc}
      */
-    public function setProductId($productId)
+    public function setProduct(ProductInterface $product)
     {
-        $this->productId = $productId;
+        $this->product = $product;
     }
 
     /**
-     * Get productId
-     *
-     * @return integer $productId
+     * {@inheritdoc}
      */
-    public function getProductId()
+    public function getProduct()
     {
-        return $this->productId;
+        return $this->product;
     }
 
     /**

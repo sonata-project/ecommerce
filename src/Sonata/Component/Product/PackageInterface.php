@@ -15,16 +15,16 @@ interface PackageInterface
     /**
      * Set productId
      *
-     * @param integer $productId
+     * @param ProductInterface $product
      */
-    public function setProductId($productId);
+    public function setProduct(ProductInterface $product);
 
     /**
      * Get productId
      *
-     * @return integer $productId
+     * @return ProductInterface
      */
-    public function getProductId();
+    public function getProduct();
 
     /**
      * Set width

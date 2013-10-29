@@ -113,6 +113,27 @@ class SonataProductExtension extends Extension
         ));
 
         /**
+         * PACKAGE
+         */
+        $collector->addAssociation($config['class']['package'], 'mapManyToOne', array(
+            'fieldName'    => 'product',
+            'targetEntity' => $config['class']['product'],
+            'cascade'      => array(
+                'persist'
+            ),
+            'mappedBy'     => NULL,
+            'inversedBy'   => 'packages',
+            'joinColumns'  => array(
+                array(
+                    'name' => 'product_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        /**
          * PRODUCT CATEGORY
          */
         $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
@@ -198,11 +219,13 @@ class SonataProductExtension extends Extension
          * PRODUCT
          */
         $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
-             'fieldName'     => 'packages',
-             'targetEntity'  => $config['class']['package'],
-             'cascade'       => array(),
-             'mappedBy'      => 'Product',
-             'orphanRemoval' => false,
+            'fieldName'     => 'packages',
+            'targetEntity'  => $config['class']['package'],
+            'cascade'       => array(
+               'persist'
+            ),
+            'mappedBy'      => 'product',
+            'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(

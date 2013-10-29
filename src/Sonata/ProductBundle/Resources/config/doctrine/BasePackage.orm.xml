@@ -3,7 +3,6 @@
 
     <mapped-superclass name="Sonata\ProductBundle\Entity\BasePackage" >
 
-        <field name="productId"    type="integer"  column="product_id"/>
         <field name="width"         type="decimal"  column="width"          scale="4"/>
         <field name="height"        type="decimal"  column="height"         scale="4"/>
         <field name="length"        type="decimal"  column="length"         scale="4"/>
