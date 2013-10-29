@@ -1,212 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2013-06-14T11:32:06Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
-    <header>
-      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
-    </header>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="SonataBasketBundle.en.xliff">
     <body>
       <trans-unit id="e26248f7b1498942580a22a8a53b2c619048125b" resname="message_basket_elements_preview">
-        <jms:reference-file line="14">views/Basket/header_preview.html.twig</jms:reference-file>
         <source>message_basket_elements_preview</source>
         <target state="new">Prévisualisation des éléments</target>
       </trans-unit>
       <trans-unit id="cf78416a4dc4aa65b4ef63d122db9967885e2e10" resname="message_no_basket_elements">
-        <jms:reference-file line="17">views/Basket/header_preview.html.twig</jms:reference-file>
         <source>message_no_basket_elements</source>
         <target state="new">Aucun élément dans le panier</target>
       </trans-unit>
       <trans-unit id="12df9b565d0af26a361f1df2aaa9b0aed5358fe9" resname="sonata.basket.btn_update_basket">
-        <jms:reference-file line="54">views/Basket/index.html.twig</jms:reference-file>
         <source>sonata.basket.btn_update_basket</source>
         <target state="new">Mettre à jour le panier</target>
       </trans-unit>
       <trans-unit id="decb92cb49201393c7ecf8fbeffa6f01ff5dc2c7" resname="sonata.basket.btn_update_delivery_step">
-        <jms:reference-file line="18">views/Basket/delivery_address_step.html.twig</jms:reference-file>
-        <jms:reference-file line="30">views/Basket/delivery_step.html.twig</jms:reference-file>
         <source>sonata.basket.btn_update_delivery_step</source>
         <target state="new">Mettre à jour l'étape de livraison</target>
       </trans-unit>
       <trans-unit id="5ed1241d5ed173d83373dc9c4c2fd3e144ea1d07" resname="sonata.basket.btn_update_payment_step">
-        <jms:reference-file line="31">views/Basket/payment_step.html.twig</jms:reference-file>
         <source>sonata.basket.btn_update_payment_step</source>
         <target state="new">Mettre à jour l'étape de paiement</target>
       </trans-unit>
       <trans-unit id="0413ad7e017d8943abc6d2335cc2b6a61f41613e" resname="sonata.basket.label_delivery_charge">
-        <jms:reference-file line="35">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.label_delivery_charge</source>
         <target state="new">Coûts de la livraison</target>
       </trans-unit>
       <trans-unit id="20bcd505fa1931c1ec7c3c10f4d45a8416abf069" resname="sonata.basket.label_process_to_payment">
-        <jms:reference-file line="100">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.label_process_to_payment</source>
         <target state="new">Procéder au paiement</target>
       </trans-unit>
       <trans-unit id="1f57b5faf097ab0fdcb392d736f71cbaccb77ba7" resname="sonata.basket.label_terms_and_condition">
-        <jms:reference-file line="95">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.label_terms_and_condition</source>
         <target state="new">Conditions générales de vente</target>
       </trans-unit>
       <trans-unit id="92bc7e75059b0e0b3afc926c7afcdccea3deae26" resname="sonata.basket.link_next_step">
-        <jms:reference-file line="56">views/Basket/index.html.twig</jms:reference-file>
         <source>sonata.basket.link_next_step</source>
         <target state="new">Prochaine étape</target>
       </trans-unit>
       <trans-unit id="152c0e7c5687e4e043256b542598a66b01830c38" resname="sonata.basket.link_terms_and_condition">
-        <jms:reference-file line="96">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.link_terms_and_condition</source>
         <target state="new">Conditions générales de vente</target>
       </trans-unit>
       <trans-unit id="2a12e76f6584b27a62663b22e70b0eef238152dd" resname="sonata.basket.message_basket_is_empty">
-        <jms:reference-file line="61">views/Basket/index.html.twig</jms:reference-file>
         <source>sonata.basket.message_basket_is_empty</source>
         <target state="new">Votre panier est vide</target>
       </trans-unit>
       <trans-unit id="e002ab6e330bdba9e92ed99d70e454ffdb08a028" resname="sonata.basket.message_no_delivery_addresses_available">
-        <jms:reference-file line="29">views/Form/fields.html.twig</jms:reference-file>
         <source>sonata.basket.message_no_delivery_addresses_available</source>
         <target state="new">Aucune adresse de livraison n'est disponible</target>
       </trans-unit>
       <trans-unit id="296fda19c63e06494fb57fa6f225479fc32f5c08" resname="sonata.basket.message_no_billing_addresses_available">
-        <jms:reference-file line="60">views/Form/fields.html.twig</jms:reference-file>
         <source>sonata.basket.message_no_billing_addresses_available</source>
         <target state="new">Aucune adresse de facturation n'est disponible</target>
       </trans-unit>
       <trans-unit id="ebe3f67d4be368664ab021bc0048cbc85f44f6f6" resname="sonata.basket.order_terms_and_conditions_title">
-        <jms:reference-file line="90">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.order_terms_and_conditions_title</source>
         <target state="new">Conditions générales de vente</target>
       </trans-unit>
       <trans-unit id="10f5ee9494857e91bd3474767fd84b4497e1b977" resname="sonata.basket.title_basket">
-        <jms:reference-file line="12">views/Basket/final_review_step.html.twig</jms:reference-file>
-        <jms:reference-file line="12">views/Basket/index.html.twig</jms:reference-file>
         <source>sonata.basket.title_basket</source>
         <target state="new">Panier</target>
       </trans-unit>
       <trans-unit id="eb05eb21a5bb7c9e57cdceaeb4bcec0208301fa6" resname="sonata.basket.title_delivery_address">
-        <jms:reference-file line="60">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_delivery_address</source>
         <target state="new">Adresse de livraison</target>
       </trans-unit>
       <trans-unit id="572dd9a2c9abb24b912b8a2ee7ce6b5697da112c" resname="sonata.basket.title_delivery_address_not_required">
-        <jms:reference-file line="65">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_delivery_address_not_required</source>
         <target state="new">Adresse de livraison non obligatoire</target>
       </trans-unit>
       <trans-unit id="468ce5b84c0ddabd3869d850587a7c9388c8c1a3" resname="sonata.basket.title_delivery_addresses">
-        <jms:reference-file line="16">views/Basket/payment_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_delivery_addresses</source>
         <target state="new">Adresses de livraison</target>
       </trans-unit>
       <trans-unit id="25a8f2708980d1a5e7587a23aaca945d6fd36ef6" resname="sonata.basket.title_delivery_method">
-        <jms:reference-file line="77">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_delivery_method</source>
         <target state="new">Méthode de livraison</target>
       </trans-unit>
       <trans-unit id="2a0fed4fc9e1a9ed97f9ba2dfd7112d565ecd18b" resname="sonata.basket.title_delivery_methods">
-        <jms:reference-file line="23">views/Basket/delivery_step.html.twig</jms:reference-file>
-        <jms:reference-file line="23">views/Basket/payment_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_delivery_methods</source>
         <target state="new">Méthodes de livraison</target>
       </trans-unit>
-      <trans-unit id="64169791bd6d18df1134e93f300d1dfc368d014f" resname="sonata.basket.title_delivery_step_basket">
-        <jms:reference-file line="12">views/Basket/delivery_address_step.html.twig</jms:reference-file>
-        <jms:reference-file line="12">views/Basket/delivery_step.html.twig</jms:reference-file>
+      <trans-unit id="sonata.basket.title_delivery_step_basket" resname="sonata.basket.title_delivery_step_basket">
         <source>sonata.basket.title_delivery_step_basket</source>
         <target state="new">Votre livraison</target>
       </trans-unit>
-        <trans-unit id="64169791bd6d18df1134e93f300d1dfc368d014f" resname="sonata.basket.title_address_delivery_step_basket">
-            <jms:reference-file line="12">views/Basket/delivery_address_step.html.twig</jms:reference-file>
-            <jms:reference-file line="12">views/Basket/delivery_step.html.twig</jms:reference-file>
-            <source>sonata.basket.title_address_delivery_step_basket</source>
-            <target state="new">Addresse de livraison sélectionnée</target>
-        </trans-unit>
+      <trans-unit id="sonata.basket.title_address_delivery_step_basket" resname="sonata.basket.title_address_delivery_step_basket">
+        <source>sonata.basket.title_address_delivery_step_basket</source>
+        <target state="new">Addresse de livraison sélectionnée</target>
+      </trans-unit>
       <trans-unit id="699f1f06549ab20e5cabe71dbec55f8fee512b5c" resname="sonata.basket.title_billing_address">
-        <jms:reference-file line="69">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_billing_address</source>
         <target state="new">Adresse de facturation</target>
       </trans-unit>
       <trans-unit id="93c1ea7d3e9c28f24e28171aba4ffe0f40798d7d" resname="sonata.basket.title_payment_method">
-        <jms:reference-file line="82">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_payment_method</source>
         <target state="new">Méthode de paiement</target>
       </trans-unit>
       <trans-unit id="0aa37596f723fc7a513491bff51b89cf45c59dc5" resname="sonata.basket.title_payment_step_basket">
-        <jms:reference-file line="12">views/Basket/payment_step.html.twig</jms:reference-file>
         <source>sonata.basket.title_payment_step_basket</source>
-        <target state="new">Votre payment</target>
+        <target state="new">Votre paiement</target>
       </trans-unit>
       <trans-unit id="5ad185d0311a32e9e3945458bb455870eba3da94" resname="sonata.basket.total_vat">
-        <jms:reference-file line="47">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.total_vat</source>
         <target state="new">Total TVA</target>
       </trans-unit>
       <trans-unit id="0f598eca7df63556d5a9abdb7293103cb8a8ec6b" resname="sonata.basket.total_w_vat">
-        <jms:reference-file line="51">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.total_w_vat</source>
         <target state="new">Total avec TVA</target>
       </trans-unit>
       <trans-unit id="cc84be38aa3f007bbb24e63282ec7efcf28ee46d" resname="sonata.basket.total_wo_vat">
-        <jms:reference-file line="43">views/Basket/final_review_step.html.twig</jms:reference-file>
         <source>sonata.basket.total_wo_vat</source>
         <target state="new">Total sans TVA</target>
       </trans-unit>
       <trans-unit id="c78e3658e8ebe29002d29c8d6aa61b72224d601a" resname="view_basket">
-        <jms:reference-file line="15">views/Basket/header_preview.html.twig</jms:reference-file>
         <source>view_basket</source>
         <target state="new">Votre panier</target>
       </trans-unit>
       <trans-unit id="1283a93f8e2f711f4f4b165f2953a8a0eb7205af" resname="sonata_address_address1_label">
-        <jms:reference-file line="42">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_address1_label</source>
         <target state="new">Adresse 1</target>
       </trans-unit>
       <trans-unit id="6dc4be2382b3c8af1d3eab310e6933fa5f935ef0" resname="sonata_address_address2_label">
-        <jms:reference-file line="43">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_address2_label</source>
         <target state="new">Adresse 2</target>
       </trans-unit>
       <trans-unit id="ca888a64439e943fa0b8ea16989f467f84e35b59" resname="sonata_address_address3_label">
-        <jms:reference-file line="44">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_address3_label</source>
         <target state="new">Adresse 3</target>
       </trans-unit>
       <trans-unit id="a169ac07b64f046daf96e16c502d300fc1ae1c2f" resname="sonata_address_city_label">
-        <jms:reference-file line="46">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_city_label</source>
         <target state="new">Ville</target>
       </trans-unit>
       <trans-unit id="e0a91735c43e073cc2940eb2783d3e10f3010489" resname="sonata_address_countrycode_label">
-        <jms:reference-file line="47">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_countrycode_label</source>
         <target state="new">Pays</target>
       </trans-unit>
       <trans-unit id="fdc1365631fe66b1b6683e9ff003112448efc718" resname="sonata_address_firstname_label">
-        <jms:reference-file line="40">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_firstname_label</source>
         <target state="new">Prénom</target>
       </trans-unit>
       <trans-unit id="3c940a83993b5f445c99b2162774abd76179d058" resname="sonata_address_lastname_label">
-        <jms:reference-file line="41">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_lastname_label</source>
         <target state="new">Nom</target>
       </trans-unit>
       <trans-unit id="c3b479f6960708d6752ef31cbf8d540ab062b05a" resname="sonata_address_name_label">
-        <jms:reference-file line="39">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_name_label</source>
         <target state="new">Nom de l'adresse</target>
       </trans-unit>
       <trans-unit id="e6aebb368ce986132f3ece29ef25a1b75d8b3cd5" resname="sonata_address_phone_label">
-        <jms:reference-file line="48">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_phone_label</source>
         <target state="new">Téléphone</target>
       </trans-unit>
       <trans-unit id="b85d8925e68ed138d71c9377d3c729bee0b99a8f" resname="sonata_address_postcode_label">
-        <jms:reference-file line="45">BasketBundle/Form/AddressType.php</jms:reference-file>
         <source>sonata_address_postcode_label</source>
         <target state="new">Code postal</target>
       </trans-unit>
-
       <trans-unit id="sonata_basket_address_addresses" resname="sonata_basket_address_addresses">
         <source>sonata_basket_address_addresses</source>
         <target state="new">Choisir existante</target>
@@ -255,7 +206,6 @@
         <source>sonata_basket_address_phone</source>
         <target state="new">Téléphone</target>
       </trans-unit>
-
       <trans-unit id="header_basket_information" resname="header_basket_information">
         <source>header_basket_information</source>
         <target state="new">Eléments du panier</target>
@@ -271,6 +221,10 @@
       <trans-unit id="header_basket_total" resname="header_basket_total">
         <source>header_basket_total</source>
         <target state="new">Total</target>
+      </trans-unit>
+      <trans-unit id="header_basket_delete" resname="header_basket_delete">
+        <source>header_basket_delete</source>
+        <target state="new"><![CDATA[<i class="icon-trash"></i>]]></target>
       </trans-unit>
     </body>
   </file>
