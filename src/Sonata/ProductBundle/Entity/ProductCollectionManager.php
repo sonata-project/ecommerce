@@ -119,6 +119,7 @@ class ProductCollectionManager implements ProductCollectionManagerInterface
 
         $productCollection->setProduct($product);
         $productCollection->setCollection($collection);
+        $productCollection->setEnabled(true);
 
         $product->addProductCollection($productCollection);
 

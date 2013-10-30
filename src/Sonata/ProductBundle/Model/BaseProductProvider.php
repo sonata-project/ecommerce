@@ -378,7 +378,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $variation = clone $product;
         $variation->setParent($product);
         $variation->setId(null);
-        $variation->setName(sprintf('%s (duplicated)', $product->getName()));
         $variation->setVariations(new ArrayCollection());
         $variation->setDeliveries(new ArrayCollection());
         $variation->setProductCategories(new ArrayCollection());
@@ -393,11 +392,13 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         if ($copyDependencies) {
             $this->synchronizeVariationsDeliveries($product, $variationCollection);
-            $this->synchronizeVariationsCategories($product, $variationCollection);
             $this->synchronizeVariationsPackages($product, $variationCollection);
+            $this->synchronizeVariationsCategories($product, $variationCollection);
+            $this->synchronizeVariationsCollections($product, $variationCollection);
         }
 
         $variation->setEnabled(false);
+        $variation->setName(sprintf('%s (duplicated)', $product->getName()));
 
         return $variation;
     }
@@ -461,17 +462,18 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $variation) {
             $variationDeliveries = $variation->getDeliveries();
 
-            // browsing Product packages and add missing packages
-            foreach ($productDeliveries as $productDelivery) {
-                if ($productDelivery && !$variationDeliveries->contains($productDelivery)) {
-                    $variation->addDelivery($productDelivery);
-                }
-            }
-
-            // browsing variation packages and remove excessing packages
+            // browsing variation deliveries and remove excessing deliveries
             foreach ($variationDeliveries as $productDelivery) {
                 if ($productDelivery && !$productDeliveries->contains($productDelivery)) {
                     $variation->removeDelivery($productDelivery);
+                }
+            }
+
+            // browsing Product deliveries and add missing deliveries
+            foreach ($productDeliveries as $productDelivery) {
+                if ($productDelivery && !$variationDeliveries->contains($productDelivery)) {
+                    $delivery = clone $productDelivery;
+                    $variation->addDelivery($delivery);
                 }
             }
         }
@@ -492,17 +494,17 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $variation) {
             $variationCategories = $variation->getCategories();
 
-            // browsing Product categories and add missing categories
-            foreach ($productCategories as $productCategory) {
-                if ($productCategory && !$variationCategories->contains($productCategory)) {
-                    $this->productCategoryManager->addCategoryToProduct($variation, $productCategory);
-                }
-            }
-
             // browsing variation categories and remove excessing categories
             foreach ($variationCategories as $variationCategory) {
                 if ($variationCategory && !$productCategories->contains($variationCategory)) {
                     $this->productCategoryManager->removeCategoryFromProduct($variation, $variationCategory);
+                }
+            }
+
+            // browsing Product categories and add missing categories
+            foreach ($productCategories as $productCategory) {
+                if ($productCategory && !$variationCategories->contains($productCategory)) {
+                    $this->productCategoryManager->addCategoryToProduct($variation, $productCategory);
                 }
             }
         }
@@ -523,17 +525,17 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $variation) {
             $variationCollections = $variation->getCollections();
 
-            // browsing Product categories and add missing categories
-            foreach ($productCollections as $productCollection) {
-                if ($productCollection && !$variationCollections->contains($productCollection)) {
-                    $this->productCollectionManager->addCollectionToProduct($variation, $productCollection);
-                }
-            }
-
-            // browsing variation categories and remove excessing categories
+            // browsing variation collections and remove excessing collections
             foreach ($variationCollections as $variationCollection) {
                 if ($variationCollection && !$productCollections->contains($variationCollection)) {
                     $this->productCollectionManager->removeCollectionFromProduct($variation, $variationCollection);
+                }
+            }
+
+            // browsing Product collections and add missing collections
+            foreach ($productCollections as $productCollection) {
+                if ($productCollection && !$variationCollections->contains($productCollection)) {
+                    $this->productCollectionManager->addCollectionToProduct($variation, $productCollection);
                 }
             }
         }
@@ -554,17 +556,18 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $variation) {
             $variationPackages = $variation->getPackages();
 
-            // browsing Product packages and add missing packages
-            foreach ($productPackages as $productPackage) {
-                if ($productPackage && !$variationPackages->contains($productPackage)) {
-                    $variation->addPackage($productPackage);
-                }
-            }
-
             // browsing variation packages and remove excessing packages
             foreach ($variationPackages as $variationPackage) {
                 if ($variationPackage && !$productPackages->contains($variationPackage)) {
                     $variation->removePackage($variationPackage);
+                }
+            }
+
+            // browsing Product packages and add missing packages
+            foreach ($productPackages as $productPackage) {
+                if ($productPackage && !$variationPackages->contains($productPackage)) {
+                    $package = clone $productPackage;
+                    $variation->addPackage($package);
                 }
             }
         }

@@ -119,6 +119,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
 
         $productCategory->setProduct($product);
         $productCategory->setCategory($category);
+        $productCategory->setEnabled(true);
 
         $product->addProductCategory($productCategory);
 

@@ -389,6 +389,8 @@ abstract class BaseProduct implements ProductInterface
      */
     public function addPackage(PackageInterface $package)
     {
+        $package->setProduct($this);
+
         $this->packages->add($package);
     }
 

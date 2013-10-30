@@ -54,12 +54,15 @@ abstract class BaseDelivery implements DeliveryInterface
      */
     protected $createdAt;
 
+    /**
+     * @var ProductInterface
+     */
     protected $product;
 
     /**
      * Set productId
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product)
     {
