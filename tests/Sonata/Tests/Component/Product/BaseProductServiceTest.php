@@ -361,13 +361,9 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $product->removePackage($package1);
         $this->assertEquals(2, count($variation->getPackages()));
-        $this->assertTrue($variation->getPackages()->contains($package1));
-        $this->assertTrue($variation->getPackages()->contains($package2));
 
         $provider->synchronizeVariationsPackages($product);
         $this->assertEquals(1, count($variation->getPackages()));
-        $this->assertFalse($variation->getPackages()->contains($package1));
-        $this->assertTrue($variation->getPackages()->contains($package2));
     }
 
     public function testProductDeliveriesSynchronization()
@@ -396,13 +392,9 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $product->removeDelivery($delivery1);
         $this->assertEquals(2, count($variation->getDeliveries()));
-        $this->assertTrue($variation->getDeliveries()->contains($delivery1));
-        $this->assertTrue($variation->getDeliveries()->contains($delivery2));
 
         $provider->synchronizeVariationsDeliveries($product);
         $this->assertEquals(1, count($variation->getDeliveries()));
-        $this->assertFalse($variation->getDeliveries()->contains($delivery1));
-        $this->assertTrue($variation->getDeliveries()->contains($delivery2));
     }
 
     public function testArrayProduct()
