@@ -5,7 +5,8 @@ namespace Sonata\ProductBundle\Seo\Services;
 use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\MediaBundle\Provider\Pool;
-use Symfony\Component\HttpFoundation\Request;
+use Sonata\IntlBundle\Templating\Helper\NumberHelper;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 
 /**
  * TwitterService.
@@ -20,18 +21,60 @@ class Twitter implements ServiceInterface
     protected $mediaPool;
 
     /**
-     * @var Request
+     * @var NumberHelper
      */
-    protected $request;
+    protected $numberHelper;
 
     /**
-     * @param Pool    $mediaPool
-     * @param Request $request
+     * @var CurrencyDetectorInterface
      */
-    public function __construct(Pool $mediaPool, Request $request)
+    protected $currencyDetector;
+
+    /**
+     * @var string|null
+     */
+    protected $site;
+
+    /**
+     * @var string|null
+     */
+    protected $creator;
+
+    /**
+     * @var string|null
+     */
+    protected $domain;
+
+    /**
+     * @var string|null
+     */
+    protected $mediaPrefix;
+
+    /**
+     * @var string|null
+     */
+    protected $mediaFormat;
+
+    /**
+     * @param Pool                      $mediaPool
+     * @param NumberHelper              $numberHelper
+     * @param CurrencyDetectorInterface $currencyDetector
+     * @param string                    $site
+     * @param string                    $creator
+     * @param string                    $domain
+     * @param string                    $mediaPrefix
+     * @param string                    $mediaFormat
+     */
+    public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $site, $creator, $domain, $mediaPrefix, $mediaFormat)
     {
         $this->mediaPool = $mediaPool;
-        $this->request = $request;
+        $this->numberHelper = $numberHelper;
+        $this->currencyDetector = $currencyDetector;
+        $this->site = $site;
+        $this->creator = $creator;
+        $this->domain = $domain;
+        $this->mediaPrefix = $mediaPrefix;
+        $this->mediaFormat = $mediaFormat;
     }
 
     /**
@@ -39,33 +82,25 @@ class Twitter implements ServiceInterface
      *
      * @param SeoPageInterface $seoPage
      * @param ProductInterface $product
-     * @param string|null      $currency
      *
      * @return void
      */
-    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product, $currency = null)
+    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product)
     {
         $seoPage->addMeta('name', 'twitter:card', 'product')
-            ->addMeta('name', 'twitter:site', '@sonataproject')
-            ->addMeta('name', 'twitter:creator', '@th0masr')
             ->addMeta('name', 'twitter:title', $product->getName())
-            ->addMeta('name', 'twitter:description', substr($product->getDescription(), 0, 200));
+            ->addMeta('name', 'twitter:description', substr($product->getDescription(), 0, 200))
+            ->addMeta('name', 'twitter:label1', 'Price')
+            ->addMeta('name', 'twitter:data1', $this->numberHelper->formatCurrency($product->getPrice(), $this->currencyDetector->getCurrency()))
+            ->addMeta('name', 'twitter:label2', 'SKU')
+            ->addMeta('name', 'twitter:data2', $product->getSku())
+            ->addMeta('name', 'twitter:site', $this->site)
+            ->addMeta('name', 'twitter:creator', $this->creator)
+            ->addMeta('name', 'twitter:domain', $this->domain);
 
-        if (null !== $currency) {
-            $seoPage->addMeta('name', 'twitter:label1', 'Price')
-                ->addMeta('name', 'twitter:data1', sprintf('%.2f%s', $product->getPrice(), $currency))
-                ->addMeta('name', 'twitter:label2', 'SKU')
-                ->addMeta('name', 'twitter:data2', $product->getSku());
-        }
-
-        $seoPage->addMeta('name', 'twitter:domain', $this->request->getHost());
-
-        // If a media is available, we add the image data
         if ($image = $product->getImage()) {
-            $format = 'reference';
             $provider = $this->mediaPool->getProvider($image->getProviderName());
-
-            $seoPage->addMeta('property', 'twitter:image:src', $provider->generatePublicUrl($image, $format));
+            $seoPage->addMeta('property', 'twitter:image:src', sprintf('%s%s', $this->mediaPrefix, $provider->generatePublicUrl($image, $this->mediaFormat)));
         }
     }
 }

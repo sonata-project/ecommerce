@@ -5,7 +5,8 @@ namespace Sonata\ProductBundle\Seo\Services;
 use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\MediaBundle\Provider\Pool;
-use Symfony\Component\HttpFoundation\Request;
+use Sonata\IntlBundle\Templating\Helper\NumberHelper;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 
 /**
  * FacebookService.
@@ -20,51 +21,71 @@ class Facebook implements ServiceInterface
     protected $mediaPool;
 
     /**
-     * @var Request
+     * @var NumberHelper
      */
-    protected $request;
+    protected $numberHelper;
 
     /**
-     * @param Pool    $mediaPool
-     * @param Request $request
+     * @var CurrencyDetectorInterface
      */
-    public function __construct(Pool $mediaPool, Request $request)
+    protected $currencyDetector;
+
+    /**
+     * @var string|null
+     */
+    protected $domain;
+
+    /**
+     * @var string|null
+     */
+    protected $mediaPrefix;
+
+    /**
+     * @var string|null
+     */
+    protected $mediaFormat;
+
+    /**
+     * @param Pool                      $mediaPool
+     * @param NumberHelper              $numberHelper
+     * @param CurrencyDetectorInterface $currencyDetector
+     * @param string                    $domain
+     * @param                           $mediaPrefix
+     * @param                           $mediaFormat
+     */
+    public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $domain, $mediaPrefix, $mediaFormat)
     {
         $this->mediaPool = $mediaPool;
-        $this->request = $request;
+        $this->numberHelper = $numberHelper;
+        $this->currencyDetector = $currencyDetector;
+        $this->domain = $domain;
+        $this->mediaPrefix = $mediaPrefix;
+        $this->mediaFormat = $mediaFormat;
     }
 
     /**
-     * Add the meta information
-     *
      * @param SeoPageInterface $seoPage
      * @param ProductInterface $product
-     * @param string|null      $currency
-     *
-     * @return void
      */
-    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product, $currency = null)
+    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product)
     {
         $this->registerHeaders($seoPage);
 
         $seoPage->addMeta('property', 'og:type', 'og:product')
             ->addMeta('property', 'og:title', $product->getName())
             ->addMeta('property', 'og:description', $product->getDescription())
-            ->addMeta('property', 'og:url', $this->request->getUri());
+            ->addMeta('property', 'og:url', $this->domain)
+            ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))
+            ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency());
 
         // If a media is available, we add the opengraph image data
         if ($image = $product->getImage()) {
-            $format = 'reference';
             $provider = $this->mediaPool->getProvider($image->getProviderName());
 
-            $seoPage->addMeta('property', 'og:image:type', $provider->generatePublicUrl($image, $format))
+            $seoPage->addMeta('property', 'og:image', sprintf('%s%s', $this->mediaPrefix, $provider->generatePublicUrl($image, $this->mediaFormat)))
                 ->addMeta('property', 'og:image:width', $image->getWidth())
-                ->addMeta('property', 'og:image:height', $image->getHeight());
-        }
-
-        if (null !== $currency) {
-            $seoPage->addMeta('property', 'product:price:amount', $product->getPrice())
-                ->addMeta('property', 'product:price:currency', $currency);
+                ->addMeta('property', 'og:image:height', $image->getHeight())
+                ->addMeta('property', 'og:image:type', $image->getContentType());
         }
     }
 

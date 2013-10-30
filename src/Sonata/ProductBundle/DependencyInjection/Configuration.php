@@ -31,6 +31,7 @@ class Configuration implements ConfigurationInterface
 
         $this->addProductSection($node);
         $this->addModelSection($node);
+        $this->addSeoSection($node);
 
         return $treeBuilder;
     }
@@ -88,5 +89,30 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+    }
+
+    /**
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addSeoSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('seo')
+                    ->children()
+                        ->arrayNode('product')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('site')->defaultValue('@sonataproject')->end()
+                                ->scalarNode('creator')->defaultValue('@th0masr')->end()
+                                ->scalarNode('domain')->defaultValue('http://demo.sonata-project.org')->end()
+                                ->scalarNode('media_prefix')->defaultValue('http://demo.sonata-project.org')->end()
+                                ->scalarNode('media_format')->defaultValue('reference')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }

@@ -25,26 +25,18 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $mediaPool = $this->getMockBuilder('Sonata\MediaBundle\Provider\Pool')->disableOriginalConstructor()->getMock();
         $seoPage = new SeoPage('test');
         $extension = new SeoExtension($seoPage, 'UTF-8');
-        $request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->disableOriginalConstructor()->getMock();
+        $numberHelper = $this->getMockBuilder('Sonata\IntlBundle\Templating\Helper\NumberHelper')->disableOriginalConstructor()->getMock();
+        $currencyDetector = $this->getMockBuilder('Sonata\Component\Currency\CurrencyDetectorInterface')->disableOriginalConstructor()->getMock();
         $product = new ProductTwitterMock();
 
-        $twitterService = new Twitter($mediaPool, $request);
+        $twitterService = new Twitter($mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'test', 'test', 'reference');
         ob_start();
         $twitterService->alterPage($seoPage, $product, null);
         $extension->renderMetadatas();
         $content = ob_get_contents();
         ob_end_clean();
 
-        $this->assertContains('twitter:', $content);
-        // Check that the price does not appear when no currency provided
-        $this->assertNotContains('twitter:label1', $content);
-
-        // Check the currency appear when provided
-        ob_start();
-        $twitterService->alterPage($seoPage, $product, 'TestCurrency');
-        $extension->renderMetadatas();
-        $content = ob_get_contents();
-        ob_end_clean();
-        $this->assertContains('TestCurrency', $content);
+        $this->assertContains('twitter:label1', $content);
+        $this->assertNotContains('twitter:image:src', $content);
     }
 }

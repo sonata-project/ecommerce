@@ -52,6 +52,7 @@ class SonataProductExtension extends Extension
 
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
+        $this->registerSeoParameters($container, $config);
     }
 
     /**
@@ -305,5 +306,18 @@ class SonataProductExtension extends Extension
         $collector->addIndex($config['class']['product'], 'enabled', array(
             'enabled'
         ));
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    protected function registerSeoParameters(ContainerBuilder $container, array $config)
+    {
+        $productSeo = $config['seo']['product'];
+
+        foreach ($productSeo as $key => $value) {
+            $container->setParameter(sprintf('sonata.product.seo.product.%s', $key), $value);
+        }
     }
 }

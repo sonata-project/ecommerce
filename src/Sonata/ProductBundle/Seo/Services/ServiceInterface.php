@@ -17,9 +17,8 @@ interface ServiceInterface
      *
      * @param SeoPageInterface $seoPage
      * @param ProductInterface $product
-     * @param string|null      $currency
      *
      * @return void
      */
-    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product, $currency = null);
+    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product);
 }
