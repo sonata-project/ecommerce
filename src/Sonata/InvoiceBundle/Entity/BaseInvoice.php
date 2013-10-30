@@ -558,6 +558,16 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
+     * @return string
+     */
+    public function getStatusName()
+    {
+        $statusList = self::getStatusList();
+
+        return $statusList[$this->getStatus()];
+    }
+
+    /**
      * @return array
      */
     public static function getStatusList()

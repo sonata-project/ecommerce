@@ -38,8 +38,8 @@
                 <source>list.label_customer</source>
                 <target>Client</target>
             </trans-unit>
-            <trans-unit id="list.label_status">
-                <source>list.label_status</source>
+            <trans-unit id="list.label_get_status_name">
+                <source>list.label_get_status_name</source>
                 <target>Statut</target>
             </trans-unit>
             <trans-unit id="list.label_total_excl">
@@ -132,6 +132,21 @@
                 <target>Client</target>
             </trans-unit>
             <!-- End - Form translations -->
+
+            <!-- Begin - Status translations -->
+            <trans-unit id="status_open">
+                <source>status_open</source>
+                <target>Ouvert</target>
+            </trans-unit>
+            <trans-unit id="status_paid">
+                <source>status_paid</source>
+                <target>Payé</target>
+            </trans-unit>
+            <trans-unit id="status_conflict">
+                <source>status_conflict</source>
+                <target>En conflict</target>
+            </trans-unit>
+            <!-- End - Status translations -->
 
             <trans-unit id="subtitle_payment">
                 <source>subtitle_payment</source>
