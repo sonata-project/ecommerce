@@ -114,6 +114,10 @@ class ProductAdmin extends Admin
 
         if ($product->getId() > 0) {
             $provider->buildEditForm($formMapper);
+
+            if ($product->isVariation()) {
+                $provider->removeNonVariationFields($formMapper);
+            }
         } else {
             $provider->buildCreateForm($formMapper);
         }

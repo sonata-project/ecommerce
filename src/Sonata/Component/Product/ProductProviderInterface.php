@@ -146,6 +146,11 @@ interface ProductProviderInterface
     public function buildCreateForm(FormMapper $formMapper);
 
     /**
+     * @param FormMapper $formMapper
+     */
+    public function removeNonVariationFields(FormMapper $formMapper);
+
+    /**
      * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @param  null|\Sonata\Component\Product\ProductInterface $product
      * @param  array                                           $options

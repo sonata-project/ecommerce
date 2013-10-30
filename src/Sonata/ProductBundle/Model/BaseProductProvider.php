@@ -352,6 +352,29 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function removeNonVariationFields(FormMapper $formMapper)
+    {
+        $fields = $formMapper->getFormBuilder()->all();
+
+        $fieldsToKeep = array_merge(array(
+            'name',
+            'sku',
+            'productCategories',
+            'productCollections',
+            'deliveries',
+            'packages',
+        ), $this->getVariationFields());
+
+        foreach ($fields as $field) {
+            if (!in_array($field->getName(), $fieldsToKeep)) {
+                $formMapper->remove($field->getName());
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
