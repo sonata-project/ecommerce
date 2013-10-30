@@ -136,6 +136,27 @@ class ProductAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+
+        if (
+            $this->hasRoute('edit')   && $this->isGranted('EDIT') &&
+            $this->hasRoute('delete') && $this->isGranted('DELETE')
+        ) {
+            $actions['createVariation'] = array(
+                'label'            => $this->trans('action_create_variation', array(), 'SonataProductBundle'),
+                'ask_confirmation' => true
+            );
+
+        }
+
+        return $actions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         // this admin class works only from a request scope
