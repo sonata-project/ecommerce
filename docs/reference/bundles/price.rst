@@ -1,3 +1,6 @@
+.. index::
+    single: Price
+
 =====
 Price
 =====
@@ -6,6 +9,8 @@ Presentation
 ============
 
 Price bundle handles everything related to prices, (right now, only currencies, but it will soon be extended to add taxes, ...)
+
+You may get more details about the currencies here: :doc:`../architecture/currency`.
 
 Configuration
 =============

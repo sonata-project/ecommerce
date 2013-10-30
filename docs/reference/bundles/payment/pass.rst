@@ -1,3 +1,6 @@
+.. index::
+    single: Payment; Pass
+
 ==========
 Pass setup
 ==========

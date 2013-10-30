@@ -1,3 +1,6 @@
+.. index::
+    single: Customer
+
 ========
 Customer
 ========
@@ -9,6 +12,8 @@ Presentation
 The SonataCustomerBundle basically manages the Customer-related entities & managers, offers AdminBundle integration and provides a basic controller and basic views to display the customers.
 Moreover, the RecentCustomers admin dashboard block is present in this bundle as well.
 
+
+You may get more details about the architecture here: :doc:`../architecture/customer`.
 
 Configuration
 =============

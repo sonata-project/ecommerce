@@ -1,3 +1,6 @@
+.. index::
+    single: Payment; Ogone
+
 ===========
 Ogone setup
 ===========

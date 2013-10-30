@@ -1,3 +1,7 @@
+.. index::
+    single: Product
+    single: Product; ProductVariations
+
 =======
 Product
 =======

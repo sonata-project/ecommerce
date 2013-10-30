@@ -1,3 +1,6 @@
+.. index::
+    single: Payment; Check
+
 ===========
 Check setup
 ===========

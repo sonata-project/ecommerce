@@ -1,3 +1,6 @@
+.. index::
+    single: Invoice
+
 =======
 Invoice
 =======
@@ -8,6 +11,8 @@ Presentation
 The InvoiceBundle manages everything related to the invoices: it basically implements the Invoice components by offering DB entities, and an Admin page to view the invoices in the BO. It also offers the possibility to view a generated Invoice from the front office with a specific template.
 
 The Invoice generation, however, is not processed by this specific bundle, but by the PaymentBundle, as are all other entity transformations.
+
+You may get more details about the architecture here: :doc:`../architecture/invoice`.
 
 Configuration
 =============

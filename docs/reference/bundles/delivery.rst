@@ -1,3 +1,6 @@
+.. index::
+    single: Delivery
+
 ========
 Delivery
 ========

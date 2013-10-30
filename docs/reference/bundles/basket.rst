@@ -1,3 +1,6 @@
+.. index::
+    single: Basket
+
 ======
 Basket
 ======
@@ -47,6 +50,7 @@ To enable DB storage, you'll need to change the following configuration values:
                         SonataBasketBundle: ~
 
 
+You may get more details about the architecture here: :doc:`../architecture/basket`.
 
 Configuration
 =============

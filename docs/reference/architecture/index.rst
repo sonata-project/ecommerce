@@ -1,3 +1,11 @@
+.. index::
+    single: Class Diagram
+    single: Order
+    single: Payment
+    single: Price
+    single: Delivery
+    single: Invoice
+
 =============================
 Sonata ECommerce Architecture
 =============================

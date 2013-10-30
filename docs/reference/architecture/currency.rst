@@ -1,3 +1,7 @@
+.. index::
+   single: Price
+   single: Currency
+
 ========
 Currency
 ========
