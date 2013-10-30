@@ -27,13 +27,6 @@ interface ProductInterface
     public function getId();
 
     /**
-     * Set id.
-     *
-     * @param integer $id
-     */
-    public function setId($id);
-
-    /**
      * Set sku.
      *
      * @param string $sku
