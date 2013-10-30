@@ -67,4 +67,35 @@ interface AddressInterface
      * @return string return the phone number linked to the address
      */
     public function getPhone();
+
+    /**
+     * @return bool Is it the current address?
+     */
+    public function getCurrent();
+
+    /**
+     * Sets if this address is the current
+     *
+     * @param boolean $current
+     */
+    public function setCurrent($current);
+
+    /**
+     * Gets address' customer
+     *
+     * @return CustomerInterface
+     */
+    public function getCustomer();
+
+    /**
+     * Sets address' customer
+     *
+     * @param CustomerInterface $customer
+     */
+    public function setCustomer(CustomerInterface $customer);
+
+    /**
+     * @return int Address' type
+     */
+    public function getType();
 }

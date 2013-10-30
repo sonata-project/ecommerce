@@ -97,6 +97,23 @@ class AddressManager implements AddressManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setCurrent(AddressInterface $address)
+    {
+        foreach ($address->getCustomer()->getAddressesByType(AddressInterface::TYPE_DELIVERY) as $custAddress) {
+            if ($custAddress->getCurrent()) {
+                $custAddress->setCurrent(false);
+                $this->save($custAddress);
+                break;
+            }
+        }
+
+        $address->setCurrent(true);
+        $this->save($address);
+    }
+
+    /**
      * Deletes an address
      *
      * @param  Address $address
@@ -104,6 +121,20 @@ class AddressManager implements AddressManagerInterface
      */
     public function delete(AddressInterface $address)
     {
+        if ($address->getCurrent()) {
+            $custAddresses = $address->getCustomer()->getAddressesByType(AddressInterface::TYPE_DELIVERY);
+
+            if (count($custAddresses) > 1) {
+                foreach ($custAddresses as $currentAddress) {
+                    if ($currentAddress->getId() !== $address->getId()) {
+                        $currentAddress->setCurrent(true);
+                        $this->save($currentAddress);
+                        break;
+                    }
+                }
+            }
+        }
+
         $this->em->remove($address);
         $this->em->flush();
     }

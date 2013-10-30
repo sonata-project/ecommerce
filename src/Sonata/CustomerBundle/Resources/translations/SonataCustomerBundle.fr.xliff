@@ -56,7 +56,7 @@
                 <source>address.form.group_address_label</source>
                 <target>Adresse</target>
             </trans-unit>
-            
+
             <!-- Begin - Customer // Address form-->
             <trans-unit id="form.label_firstname">
                 <source>form.label_firstname</source>
@@ -154,7 +154,7 @@
                 <target>Création d'adresse</target>
             </trans-unit>
             <!-- End - Breadcrumb translations -->
-            
+
             <!-- Begin - Sidemenu translations -->
             <trans-unit id="customer.sidemenu.link_customer_edit">
                 <source>customer.sidemenu.link_customer_edit</source>
@@ -167,6 +167,11 @@
             <trans-unit id="customer.sidemenu.link_order_list">
                 <source>customer.sidemenu.link_order_list</source>
                 <target>Commandes</target>
+            </trans-unit>
+                <!-- User sidemenu -->
+            <trans-unit id="link_list_addresses">
+                <source>link_list_addresses</source>
+                <target>Addresses</target>
             </trans-unit>
             <!-- End - Sidemenu translations -->
 

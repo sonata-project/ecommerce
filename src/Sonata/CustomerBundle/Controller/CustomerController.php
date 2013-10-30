@@ -11,31 +11,189 @@
 
 namespace Sonata\CustomerBundle\Controller;
 
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\AddressManagerInterface;
+use Sonata\Component\Customer\CustomerManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
- * @todo Check if it is used
+ * Class CustomerController
  *
+ * @package Sonata\CustomerBundle\Controller
+ *
+ * @author  Hugo Briand <briand@ekino.com>
  */
 class CustomerController extends Controller
 {
-    public function dashboardAction()
-    {
-
-    }
-
+    /**
+     * Lists customer's addresses
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addressesAction()
     {
+        $customer = $this->getCustomer();
 
+        if (null === $customer) {
+            // Customer not yet created, the user didn't order yet
+            $customer = $this->getCustomerManager()->create();
+            $customer->setUser($user);
+            $this->getCustomerManager()->save($customer);
+
+            $addresses = array();
+        } else {
+            $addresses = $this->getAddressManager()->findBy(array('customer' => $customer));
+        }
+
+        return $this->render('SonataCustomerBundle:Addresses:list.html.twig', array(
+                'addresses' => $addresses,
+                'customer'  => $customer
+            ));
     }
 
-    public function editAddressAction($address_id)
+    /**
+     * Adds an address to current customer
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function addAddressAction()
     {
-
+        return $this->updateAddress();
     }
 
-    public function updateAddressAction()
+    /**
+     * Controller action to edit address $id
+     *
+     * @param $id
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editAddressAction($id)
     {
+        return $this->updateAddress($id);
+    }
 
+    /**
+     * Deletes address $id
+     *
+     * @param $id The address to delete
+     *
+     * @return RedirectResponse
+     */
+    public function deleteAddressAction($id)
+    {
+        $address = $this->getAddressManager()->findOneBy(array('id' => $id));
+
+        $this->checkAddress($address);
+
+        $this->getAddressManager()->delete($address);
+
+        $this->get('session')->getFlashBag()->add('success', 'sonata_customer_address_delete');
+
+        return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
+    }
+
+    /**
+     * Sets address $id to current
+     *
+     * @param $id
+     *
+     * @return RedirectResponse
+     */
+    public function setCurrentAddressAction($id)
+    {
+        $address = $this->getAddressManager()->findOneBy(array('id' => $id));
+        $this->checkAddress($address);
+
+        $this->getAddressManager()->setCurrent($address);
+
+        return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
+    }
+
+    /**
+     * Updates or create an address
+     *
+     * @param int $id Address id
+     *
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function updateAddress($id = null)
+    {
+        $customer = $this->getCustomer();
+
+        // Show address creation/edition form
+        if (null === $id) {
+            $form = $this->createForm('sonata_basket_address');
+        } else {
+            $address = $this->getAddressManager()->findOneBy(array('id' => $id));
+            $this->checkAddress($address);
+
+            $form = $this->createForm('sonata_basket_address', $address);
+        }
+        $template = 'SonataCustomerBundle:Addresses:new.html.twig';
+
+        if ($this->get('request')->getMethod() == 'POST') {
+            $form->bind($this->get('request'));
+
+            if ($form->isValid()) {
+                $address = $form->getData();
+                $address->setType(AddressInterface::TYPE_DELIVERY);
+
+                $customer->addAddress($address);
+
+                $this->getCustomerManager()->save($customer);
+
+                $this->get('session')->getFlashBag()->add('success', $id ? 'sonata_address_edit_success' : 'sonata_address_add_success');
+
+                return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
+            }
+        }
+
+        return $this->render($template, array(
+            'form'      => $form->createView()
+        ));
+    }
+
+    /**
+     * Checks if $address is valid
+     *
+     * @param AddressInterface $address
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
+     */
+    protected function checkAddress(AddressInterface $address = null)
+    {
+        if (null === $address
+            || $address->getCustomer()->getId() !== $this->getCustomer()->getId()) {
+            throw new UnauthorizedHttpException();
+        }
+    }
+
+    /**
+     * @return \Sonata\Component\Customer\CustomerInterface
+     */
+    protected function getCustomer()
+    {
+        $user = $this->getUser();
+
+        return $this->getCustomerManager()->findOneBy(array('user' => $user));
+    }
+
+    /**
+     * @return AddressManagerInterface
+     */
+    protected function getAddressManager()
+    {
+        return $this->get('sonata.address.manager');
+    }
+
+    /**
+     * @return CustomerManagerInterface
+     */
+    protected function getCustomerManager()
+    {
+        return $this->get('sonata.customer.manager');
     }
 }

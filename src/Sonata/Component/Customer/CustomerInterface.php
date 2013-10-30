@@ -113,4 +113,11 @@ interface CustomerInterface
      * @return void
      */
     public function setLocale($locale);
+
+    /**
+     * @param $type
+     *
+     * @return array
+     */
+    public function getAddressesByType($type);
 }

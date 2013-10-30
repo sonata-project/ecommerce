@@ -149,8 +149,8 @@ abstract class BaseCustomer implements CustomerInterface
     {
         return array(
             self::TITLE_MLLE => 'sonata_customer_title_mlle',
-            self::TITLE_MME => 'sonata_customer_title_mme',
-            self::TITLE_MR => 'sonata_customer_title_mr',
+            self::TITLE_MME  => 'sonata_customer_title_mme',
+            self::TITLE_MR   => 'sonata_customer_title_mr',
         );
     }
 
@@ -356,6 +356,10 @@ abstract class BaseCustomer implements CustomerInterface
     public function addAddress(AddressInterface $address)
     {
         $address->setCustomer($this);
+
+        if (count($this->addresses) === 0) {
+            $address->setCurrent(true);
+        }
 
         $this->addresses->add($address);
 

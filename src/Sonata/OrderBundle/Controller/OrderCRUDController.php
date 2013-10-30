@@ -29,7 +29,6 @@ class OrderCRUDController extends CRUDController
             $invoice = $this->getInvoiceManager()->createInvoice();
 
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
-
             $this->getInvoiceManager()->updateInvoice($invoice);
 
             $this->addFlash('sonata_flash_success', 'order_invoice_generate_success');

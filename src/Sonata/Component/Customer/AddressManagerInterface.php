@@ -29,6 +29,13 @@ interface AddressManagerInterface
     public function delete(AddressInterface $address);
 
     /**
+     * Sets $address the current customer address
+     *
+     * @param AddressInterface $address
+     */
+    public function setCurrent(AddressInterface $address);
+
+    /**
      * Finds one address by the given criteria
      *
      * @param  array $criteria
