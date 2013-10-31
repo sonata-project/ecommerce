@@ -12,8 +12,6 @@ The InvoiceBundle manages everything related to the invoices: it basically imple
 
 The Invoice generation, however, is not processed by this specific bundle, but by the PaymentBundle, as are all other entity transformations.
 
-You may get more details about the architecture here: :doc:`../architecture/invoice`.
-
 Configuration
 =============
 
@@ -21,3 +19,6 @@ Default order to invoice transformer is provided in ``Sonata\Component\Transform
 
 Currently, a raw HTML representation for invoices is provided ; would you like to generate a PDF ? We encourage you to check out PDF generation bundles taking HTML as inputs.
 The invoice rendering template is ``SonataInvoiceBundle:Invoice:view.html.twig`` ; you can override it by using Symfony bundle override rules.
+
+
+For more information about our biases regarding *invoice*, you can read: :doc:`../architecture/invoice`.
