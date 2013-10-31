@@ -6,11 +6,11 @@
     single: Delivery
     single: Invoice
 
-=============================
-Sonata ECommerce Architecture
-=============================
+==============================
+Sonata e-commerce Architecture
+==============================
 
-Congrats! You've successfully installed your Sonata e-commerce solution! Now, time to digg in. Here's an overview of the architecture of the library.
+Congratulations! You've successfully installed the e-commerce bundles of Sonata! Now, it's time to digg in. Here's an overview of the architecture of the library.
 
 Below, you'll find a simple Class Diagram, representing the relationships between the different entities. Be warned however! Some of those aren't DB relations, as they shouldn't be (you'll get more details as you keep reading).
 
