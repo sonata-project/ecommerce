@@ -11,8 +11,6 @@ Presentation
 
 The SonataProductBundle basically manages the Product-related entities & managers, offers AdminBundle integration and provides a basic controller and basic views to display the products.
 
-You may get more details about the architecture here: :doc:`../architecture/product`.
-
 It offers a console command to easily generate a new product type in your application:
 
 .. code-block:: bash
@@ -82,3 +80,5 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
                     mappings:
                         ApplicationSonataProductBundle: ~
                         SonataProductBundle: ~
+
+For more information about our biases regarding *product*, you can read: :doc:`../architecture/product`.
