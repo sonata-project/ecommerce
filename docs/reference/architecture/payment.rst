@@ -22,7 +22,7 @@ Redirects the user to the payment institution (through the payment method's call
 
 This is a secured, server-to-server call ; this is where we'll check the payment's return (depending on the payment institution's security policies), and update the order's status depending on the feedback given by the payment institution.
     
-    - (Optionnaly) If everything is well, Sonata e-commerce sends a request to the server to notify it that we did indeed handle its callback.
+    - (Optionnaly) If everything is well, we send a request to the server to notify it that we did indeed handle its callback.
     - If the payment method doesn't handle this case, we simply update our data and don't notify the server.
 
 3. User's return

@@ -24,11 +24,12 @@ Order process (customer workflow)
 
 Currently, the order process is implemented as follows:
 - The customer chooses a product
-- He adds it to the basket (which can be stored either in session or in DB)
+- He adds it to the basket (which can be stored either in session or in DataBase)
 - The customer proceeds to checkout
-- He fills in his informations (name, address, ...) (variant: we can also display a login/register form)
-
-    Nota: The customer doesn't have to create an account: it can be a one-time order. In that case, we store his informations in the basket.
+- And he is invited to complete his profile, Sonata provides two options for this:
+    
+    The customer creats an account/authenticate on the website (option set by default when you installed the sonata framework) 
+    Or he fills a list of information in a one-time order. In that case, we store his informations in the basket, and he needs to fill the form for each order he will make.
 
 - He selects his delivery option
 
@@ -40,8 +41,8 @@ Currently, the order process is implemented as follows:
 
 - He processes to payment
 
-    There, the Basket is transformed into an order. This implies that all that concerns the basket is serialized and duplicated into the order.
-    This is done so, if/when the customer's informations and/or the product's informations change. If the order has been checked out, it has to be fixed in time, hence the serialization.
+    There, the Basket is transformed into an order. This implies that the data that concerns the basket is serialized and duplicated into an order.
+    This process is made in case the customer's informations and/or the product's informations change. If the order has been checked out, it has to be fixed in time, hence the serialization.
 
 - When the payment is completed, we edit an invoice, which can be printed out as a PDF or HTML file.
 
@@ -65,12 +66,12 @@ Well... We're entering the depths of it, aren't we? To be crystal clear, we'll t
 Basket <-> Order transformations and storage
 --------------------------------------------
 
-Along the checkout process, once the Basket has been validated by the Customer and is about to be paid for, we'll transform the Basket (which is submitted to change) into an Order (which will be fixed in time). Hence, Basket & Order entities are quite similar, but we'll need to copy data from one to the other. We can't afford having relationships / dependencies that may evolve later in the Order entity, hence we copy or serialize those.
+Along the checkout process, once the Basket has been validated by the Customer and is about to be paid for, we'll transform the Basket (which is submitted to change) into an Order (which will be fixed in time). Therefore, Basket & Order entities are quite similar, but we'll need to copy data from one to the other. We can't afford having relationships / dependencies that may evolve later in the Order entity, therefore we copy or serialize those.
 
 Basket -> Order
 ~~~~~~~~~~~~~~~
 
-At the Order instance construction depending on the Basket, we'll compute the final Order price, based on BasketElements, Delivery, etc. We use the ``BasketTransformer::transformIntoOrder`` method to do so. This will check for the Basket validity and create an Order instance based on that.
+At the Order instance construction depending on the Basket, we'll compute the final Order price, based on BasketElements, Delivery, etc. We use the ``BasketTransformer::transformIntoOrder`` method to do so. This will check the Basket validity and create an Order instance based on that.
 
 You may, of course, override this transformer and the associated service (service id is ``sonata.payment.transformer.basket``).
 
