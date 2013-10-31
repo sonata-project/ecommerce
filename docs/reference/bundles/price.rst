@@ -10,8 +10,6 @@ Presentation
 
 Price bundle handles everything related to prices, (right now, only currencies, but it will soon be extended to add taxes, ...)
 
-You may get more details about the currencies here: :doc:`../architecture/currency`.
-
 Configuration
 =============
 
@@ -33,3 +31,5 @@ You can also change the services class (defined as parameters):
 
 * ``sonata.price.currency.detector.class`` for the currency detector
 * ``sonata.price.currency.manager.class`` for the currency manager (finding the CurrencyInterface item matching the currency label)
+
+For more information about our biases regarding *price*, you can read: :doc:`../architecture/currency`.
