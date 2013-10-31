@@ -357,7 +357,7 @@ class BasketController extends Controller
         if ($this->get('request')->getMethod() == 'POST' ) {
             if ($this->get('request')->get('tac')) {
                 // send the basket to the payment callback
-                return $this->forward('SonataPaymentBundle:Payment:callbank');
+                return $this->forward('SonataPaymentBundle:Payment:sendbank');
             }
         }
 

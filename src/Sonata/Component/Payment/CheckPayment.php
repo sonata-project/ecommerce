@@ -139,7 +139,7 @@ class CheckPayment extends BasePayment
     /**
      * {@inheritdoc}
      */
-    public function callbank(OrderInterface $order)
+    public function sendbank(OrderInterface $order)
     {
         $params = array(
             'bank'       => $this->getCode(),

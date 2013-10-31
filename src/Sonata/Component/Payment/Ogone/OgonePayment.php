@@ -154,7 +154,7 @@ class OgonePayment extends BasePayment
     /**
      * {@inheritdoc}
      */
-    public function callbank(OrderInterface $order)
+    public function sendbank(OrderInterface $order)
     {
         return $this->templating->renderResponse($this->getOption('template'), array(
             'form_url'  => $this->getOption('form_url'),
@@ -227,7 +227,7 @@ class OgonePayment extends BasePayment
     }
 
     /**
-     * Returns form parameters for callbank
+     * Returns form parameters for sendbank
      *
      * @param  OrderInterface $order
      * @return array

@@ -20,7 +20,7 @@ use Sonata\Component\Order\OrderInterface;
 class PaymentController extends Controller
 {
     /**
-     * This action is called by the user after the callbank
+     * This action is called by the user after the sendbank
      * In most case the order is already cancelled by a previous callback
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
@@ -113,7 +113,7 @@ class PaymentController extends Controller
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
-    public function callbankAction()
+    public function sendbankAction()
     {
         $basket     = $this->get('sonata.basket');
         $request    = $this->get('request');
@@ -155,7 +155,7 @@ class PaymentController extends Controller
         $basket->reset();
 
         // the payment must handle everything when calling the bank
-        return $payment->callbank($order);
+        return $payment->sendbank($order);
     }
 
     /**

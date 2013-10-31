@@ -12,8 +12,8 @@
         <default key="_controller">SonataPaymentBundle:Payment:error</default>
     </route>
 
-    <route id="sonata_payment_callbank" pattern="/callbank">
-        <default key="_controller">SonataPaymentBundle:Payment:callbank</default>
+    <route id="sonata_payment_sendbank" pattern="/sendbank">
+        <default key="_controller">SonataPaymentBundle:Payment:sendbank</default>
     </route>
 
     <route id="sonata_payment_callback" pattern="/callback">

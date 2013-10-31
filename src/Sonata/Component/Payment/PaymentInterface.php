@@ -35,7 +35,7 @@ interface PaymentInterface
      * @param  \Sonata\Component\Order\OrderInterface     $order
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function callbank(OrderInterface $order);
+    public function sendbank(OrderInterface $order);
 
     /**
      *
