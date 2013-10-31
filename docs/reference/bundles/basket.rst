@@ -49,9 +49,6 @@ To enable DB storage, you'll need to change the following configuration values:
                         ApplicationSonataBasketBundle: ~
                         SonataBasketBundle: ~
 
-
-You may get more details about the architecture here: :doc:`../architecture/basket`.
-
 Configuration
 =============
 
@@ -90,3 +87,5 @@ Here's the full default configuration for SonataBasketBundle:
 
 As you can see, you can override the builder, factory & loader services ; basket, basket_element & customer classes and the various forms.
 Moreover, you're able to override the rest of the bundle by extending it (through SonataEasyExtendsBundle for instance).
+
+For more information about our biases regarding *basket*, you can read: :doc:`../architecture/basket`.
