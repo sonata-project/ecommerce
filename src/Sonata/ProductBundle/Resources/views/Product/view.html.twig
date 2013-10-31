@@ -34,26 +34,42 @@ file that was distributed with this source code.
     <div class="span4">
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
             {% block product_price %}
-                {% block product_price_label %}{% trans from 'SonataProductBundle' %}sonata_product_price{% endtrans %}{% endblock %}
-                <span itemprop="price">{% block product_price_price %}{{ product.price|number_format_currency(currency) }}{% endblock %}</span>
+                {% block product_price_label %}
+                    {% if product.hasVariations %}
+                        {% trans from 'SonataProductBundle' %}sonata_product_variation_min_price{% endtrans %}
+                    {% else %}
+                        {% trans from 'SonataProductBundle' %}sonata_product_price{% endtrans %}
+                    {% endif %}
+                {% endblock %}
+                <span itemprop="price">
+                    {% block product_price_price %}
+                        {% if product.hasVariations %}
+                            {{ product.cheaperVariation.price|number_format_currency(currency) }}
+                        {% else %}
+                            {{ product.price|number_format_currency(currency) }}
+                        {% endif %}
+                    {% endblock %}
+                </span>
             {% endblock %}
         </div>
         <div>
             {% block product_delivery %}Block 'product_delivery' to override{% endblock %}
         </div>
         <div>
-            {% block product_basket %}
-                <form class="form-inline" action="{{ url('sonata_basket_add_product') }}" method="POST" >
-                    {% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %}
-                    {{ form_widget(form.quantity, {'attr': {'class':'input-small'}}) }}
+            {% if product.isSalable %}
+                {% block product_basket %}
+                    <form class="form-inline" action="{{ url('sonata_basket_add_product') }}" method="POST" >
+                        {% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %}
+                        {{ form_widget(form.quantity, {'attr': {'class':'input-small'}}) }}
 
-                    <button type="submit" class="btn btn-small btn-primary" >
-                        <i class="icon-shopping-cart icon-white"></i>{% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}
-                    </button>
+                        <button type="submit" class="btn btn-small btn-primary" >
+                            <i class="icon-shopping-cart icon-white"></i>{% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}
+                        </button>
 
-                    {{ form_rest(form) }}
-                </form>
-            {% endblock %}
+                        {{ form_rest(form) }}
+                    </form>
+                {% endblock %}
+            {% endif %}
         </div>
     </div>
 </div>
@@ -64,11 +80,13 @@ file that was distributed with this source code.
         {% if similar_cross|length > 0 %}
             <h2>{% trans from "SonataProductBundle" %}sonata.product.cross_selling.title{% endtrans %}</h2>
             <ul>
-            {% for similar_product in similar_cross %}
-                {% block similar_product %}
-                    <li><a href="{{ path('sonata_product_view', {'productId': similar_product.id, 'slug': similar_product.slug }) }}">{{ similar_product.name }}</a></li>
-                {% endblock %}
-            {% endfor %}
+            {% block similar_product %}
+                {% for similar_product in similar_cross %}
+                    {% if similar_product.isMaster %}
+                        <li><a href="{{ path('sonata_product_view', {'productId': similar_product.id, 'slug': similar_product.slug }) }}">{{ similar_product.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endblock %}
             </ul>
         {% else %}
             {% trans from "SonataProductBundle" %}sonata.product.cross_selling.no_match{% endtrans %}

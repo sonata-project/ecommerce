@@ -278,6 +278,10 @@
                 <source>sonata.product.cross_selling.title</source>
                 <target>Produits de la même collection</target>
             </trans-unit>
+            <trans-unit id="sonata_product_variation_min_price">
+                <source>sonata_product_variation_min_price</source>
+                <target>À partir de</target>
+            </trans-unit>
             <!-- End - Product view translations -->
         </body>
     </file>
