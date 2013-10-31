@@ -377,6 +377,13 @@ interface ProductInterface
     public function setVariations(ArrayCollection $variations);
 
     /**
+     * Return true if Product has variation(s).
+     *
+     * @return bool
+     */
+    public function hasVariations();
+
+    /**
      * Set Media.
      *
      * @param MediaInterface $image
@@ -426,6 +433,13 @@ interface ProductInterface
     public function __toString();
 
     /**
+     * Return true if the Product is a master (parent of variation(s) or single product).
+     *
+     * @return boolean
+     */
+    public function isMaster();
+
+    /**
      * Return true if the Product is a variation, linked to a main Product.
      *
      * @return boolean
@@ -438,6 +452,20 @@ interface ProductInterface
      * @return boolean
      */
     public function isEnabled();
+
+    /**
+     * Return true if Product can be sold.
+     *
+     * @return boolean
+     */
+    public function isSalable();
+
+    /**
+     * Return the cheaper variation, if any.
+     *
+     * @return ProductInterface
+     */
+    public function getCheaperVariation();
 
     /**
      * Return true if the Product is recurrent.

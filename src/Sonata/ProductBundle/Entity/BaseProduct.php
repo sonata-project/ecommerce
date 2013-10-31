@@ -579,6 +579,14 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function hasVariations()
+    {
+        return count($this->variations) > 0;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setImage(MediaInterface $image = null)
     {
         $this->image = $image;
@@ -635,9 +643,17 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function isMaster()
+    {
+        return null === $this->parent;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isVariation()
     {
-        return $this->getParent() !== null;
+        return null !== $this->parent;
     }
 
     /**
@@ -646,6 +662,35 @@ abstract class BaseProduct implements ProductInterface
     public function isEnabled()
     {
         return $this->getEnabled();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSalable()
+    {
+        // Product is enabled and is a variation or a single product.
+        return $this->isEnabled() && ($this->isVariation() || !$this->hasVariations());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCheaperVariation()
+    {
+        if (!$this->hasVariations()) {
+            return null;
+        }
+
+        $returnVariation = $this->variations[0];
+
+        foreach ($this->variations as $variation) {
+            if ($variation->getPrice() <= $returnVariation->getPrice()) {
+                $returnVariation = $variation;
+            }
+        }
+
+        return $returnVariation;
     }
 
     /**

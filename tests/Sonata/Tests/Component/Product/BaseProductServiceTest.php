@@ -11,6 +11,7 @@
 
 namespace Sonata\Tests\Component\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\ProductBundle\Entity\BaseDelivery;
@@ -120,7 +121,6 @@ class BaseOrderElementTest_ProductProvider extends BaseOrderElement
 
 class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @return BaseProductServiceTest_ProductProvider
      */
@@ -138,6 +138,20 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $provider->setOrderElementClassName(get_class(new OrderElement()));
 
         return $provider;
+    }
+
+    public function testProductSalableStatus()
+    {
+        $product = new Product();
+
+        $product->setEnabled(false);
+        $this->assertFalse($product->isSalable());
+
+        $product->setEnabled(true);
+        $this->assertTrue($product->isSalable());
+
+        $product->setVariations(new ArrayCollection(array(new Product())));
+        $this->assertFalse($product->isSalable());
     }
 
     public function testOptions()
