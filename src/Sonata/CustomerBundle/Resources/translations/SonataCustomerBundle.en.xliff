@@ -14,21 +14,13 @@
             <!-- End - Titles -->
 
             <!-- Begin - Form translations -->
-            <trans-unit id="90102c15654e1771dcaf28d71f701c0c8c5775fc" resname="address.form.group_address_label">
-                <jms:reference-file line="55">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+            <trans-unit id="address.form.group_address_label">
                 <source>address.form.group_address_label</source>
-                <target state="new">Address</target>
+                <target>Address</target>
             </trans-unit>
-            <trans-unit id="23e57d9e09cd1425d01740bcdd270dc56afbbc27" resname="address.form.group_advanced_label">
-                <jms:reference-file line="33">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
-                <source>address.form.group_advanced_label</source>
-                <target state="new">General</target>
-            </trans-unit>
-            <trans-unit id="2b601a2737ecf193ab5efb6194d61a3d8d43ebaf" resname="address.form.group_contact_label">
-                <jms:reference-file line="40">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
-                <jms:reference-file line="48">CustomerBundle/Admin/AddressAdmin.php</jms:reference-file>
+            <trans-unit id="address.form.group_contact_label">
                 <source>address.form.group_contact_label</source>
-                <target state="new">Contact</target>
+                <target>Contact</target>
             </trans-unit>
 
             <trans-unit id="form_address.group_advanced_label">
@@ -43,18 +35,9 @@
                 <source>form_address.group_address_label</source>
                 <target>Address</target>
             </trans-unit>
-
             <trans-unit id="address.form.group_advanced_label">
                 <source>address.form.group_advanced_label</source>
                 <target>Advanced</target>
-            </trans-unit>
-            <trans-unit id="address.form.group_contact_label">
-                <source>address.form.group_contact_label</source>
-                <target>Contact</target>
-            </trans-unit>
-            <trans-unit id="address.form.group_address_label">
-                <source>address.form.group_address_label</source>
-                <target>Address</target>
             </trans-unit>
 
             <!-- Begin - Customer // Address form-->
@@ -114,6 +97,38 @@
                 <source>form.label_customer</source>
                 <target>Customer</target>
             </trans-unit>
+            <trans-unit id="form.label_user">
+                <source>form.label_user</source>
+                <target>Username</target>
+            </trans-unit>
+            <trans-unit id="form.label_birth_date">
+                <source>form.label_birth_date</source>
+                <target>Birthdate</target>
+            </trans-unit>
+            <trans-unit id="form.label_birth_place">
+                <source>form.label_birth_place</source>
+                <target>Birthplace</target>
+            </trans-unit>
+            <trans-unit id="form.label_email">
+                <source>form.label_email</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="form.label_phone_number">
+                <source>form.label_phone_number</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="form.label_mobile_number">
+                <source>form.label_mobile_number</source>
+                <target>Mobile</target>
+            </trans-unit>
+            <trans-unit id="form.label_fax_number">
+                <source>form.label_fax_number</source>
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="form.label_is_fake">
+                <source>form.label_is_fake</source>
+                <target>Is fake</target>
+            </trans-unit>
             <!-- End - Customer // Address form-->
             <!-- End - Form translations -->
 
@@ -168,7 +183,18 @@
                 <source>customer.sidemenu.link_order_list</source>
                 <target>Orders</target>
             </trans-unit>
-                <!-- User sidemenu -->
+            <trans-unit id="view_all_customers">
+                <source>view_all_customers</source>
+                <target>View all customers</target>
+            </trans-unit>
+            <trans-unit id="customer.group.general">
+                <source>customer.group.general</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="customer.group.contact">
+                <source>customer.group.contact</source>
+                <target>Contact</target>
+            </trans-unit>
             <trans-unit id="link_list_addresses">
                 <source>link_list_addresses</source>
                 <target>Addresses</target>
@@ -199,6 +225,38 @@
             <trans-unit id="list.label_type_code">
                 <source>list.label_type_code</source>
                 <target>Type</target>
+            </trans-unit>
+            <trans-unit id="list.label_user">
+                <source>list.label_user</source>
+                <target>Username</target>
+            </trans-unit>
+            <trans-unit id="list.label_email">
+                <source>list.label_email</source>
+                <target>E-mail address</target>
+            </trans-unit>
+            <trans-unit id="list.label_phone_number">
+                <source>list.label_phone_number</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="list.label_mobile_number">
+                <source>list.label_mobile_number</source>
+                <target>Mobile</target>
+            </trans-unit>
+            <trans-unit id="list.label_is_fake">
+                <source>list.label_is_fake</source>
+                <target>Is fake</target>
+            </trans-unit>
+            <trans-unit id="list.label_birth_date">
+                <source>list.label_birth_date</source>
+                <target>Birthdate</target>
+            </trans-unit>
+            <trans-unit id="list.label_birth_place">
+                <source>list.label_birth_place</source>
+                <target>Birthplace</target>
+            </trans-unit>
+            <trans-unit id="list.label_fax_number">
+                <source>list.label_fax_number</source>
+                <target>Fax</target>
             </trans-unit>
             <!-- End - List translations -->
 

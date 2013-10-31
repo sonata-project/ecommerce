@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="SonataInvoiceBundle.en.xliff">
         <body>
 
             <!-- Begin - Titles -->
@@ -11,6 +11,10 @@
             <trans-unit id="sonata.invoice.title_invoice">
                 <source>sonata.invoice.title_invoice</source>
                 <target>Votre facture</target>
+            </trans-unit>
+            <trans-unit id="subtitle_payment">
+                <source>subtitle_payment</source>
+                <target>Paiement</target>
             </trans-unit>
             <!-- End - Titles -->
 
@@ -45,6 +49,10 @@
             <trans-unit id="list.label_total_excl">
                 <source>list.label_total_excl</source>
                 <target>Total sans TVA</target>
+            </trans-unit>
+            <trans-unit id="list.label_total_inc">
+                <source>list.label_total_inc</source>
+                <target>Total avec TVA</target>
             </trans-unit>
             <!-- End - List translations -->
 
@@ -147,11 +155,6 @@
                 <target>En conflict</target>
             </trans-unit>
             <!-- End - Status translations -->
-
-            <trans-unit id="subtitle_payment">
-                <source>subtitle_payment</source>
-                <target>Paiement</target>
-            </trans-unit>
         </body>
     </file>
 </xliff>

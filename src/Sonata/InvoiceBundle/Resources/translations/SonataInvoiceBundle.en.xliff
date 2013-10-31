@@ -12,6 +12,10 @@
                 <source>sonata.invoice.title_invoice</source>
                 <target>Your invoice</target>
             </trans-unit>
+            <trans-unit id="subtitle_payment">
+                <source>subtitle_payment</source>
+                <target>Payment</target>
+            </trans-unit>
             <!-- End - Titles -->
 
             <!-- Begin - Breadcrumb translations -->
@@ -45,6 +49,10 @@
             <trans-unit id="list.label_total_excl">
                 <source>list.label_total_excl</source>
                 <target>Total excl. VAT</target>
+            </trans-unit>
+            <trans-unit id="list.label_total_inc">
+                <source>list.label_total_inc</source>
+                <target>Total incl. VAT</target>
             </trans-unit>
             <!-- End - List translations -->
 
@@ -121,7 +129,7 @@
             </trans-unit>
             <trans-unit id="form.label_email">
                 <source>form.label_email</source>
-                <target>Email</target>
+                <target>E-mail</target>
             </trans-unit>
             <trans-unit id="form.label_mobile">
                 <source>form.label_mobile</source>
@@ -147,11 +155,6 @@
                 <target>Conflict</target>
             </trans-unit>
             <!-- End - Status translations -->
-
-            <trans-unit id="subtitle_payment">
-                <source>subtitle_payment</source>
-                <target>Payment</target>
-            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1,73 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2011-11-24T15:32:30Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
-    <header>
-      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.0.0-DEV"/>
-      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
-    </header>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="SonataPaymentBundle.en.xliff">
     <body>
-      <trans-unit id="1bfef9218ec083c6f99cbb4e2411243f43c2efa3" resname="basket_not_valid">
-        <jms:reference-file line="129">PaymentBundle/Controller/PaymentController.php</jms:reference-file>
+      <trans-unit id="basket_not_valid">
         <source>basket_not_valid</source>
-        <target state="new">Le panier n'est pas valide.</target>
+        <target>Le panier n'est pas valide.</target>
       </trans-unit>
-      <trans-unit id="f2fb5758edf5643804fb252be12ad2e152ed3542" resname="basket_not_valid_with_current_payment_method">
-        <jms:reference-file line="141">PaymentBundle/Controller/PaymentController.php</jms:reference-file>
+      <trans-unit id="basket_not_valid_with_current_payment_method">
         <source>basket_not_valid_with_current_payment_method</source>
-        <target state="new">Le panier n'est pas valide avec la méthode paiement actuelle.</target>
+        <target>Le panier n'est pas valide avec la méthode paiement actuelle.</target>
       </trans-unit>
-      <trans-unit id="7f412e0e1fa06cc69fbaca8e84dc7469646d4dc5" resname="message_error_payment">
-        <jms:reference-file line="15">views/Payment/error.html.twig</jms:reference-file>
+      <trans-unit id="message_error_payment">
         <source>message_error_payment</source>
-        <target state="new">Erreur du paiement.</target>
+        <target>Erreur du paiement.</target>
       </trans-unit>
-      <trans-unit id="02d4c2620041180056b9d8d7c32bb87bb9b0cd17" resname="message_not_validated_payment">
-        <jms:reference-file line="31">views/Payment/confirmation.html.twig</jms:reference-file>
+      <trans-unit id="message_not_validated_payment">
         <source>message_not_validated_payment</source>
-        <target state="new">Paiement non valide.</target>
+        <target>Paiement non valide.</target>
       </trans-unit>
-      <trans-unit id="66f963d8fb95c407c6e042ff5cacdb0ebbbe9edc" resname="message_pending_payment">
-        <jms:reference-file line="24">views/Payment/confirmation.html.twig</jms:reference-file>
+      <trans-unit id="message_pending_payment">
         <source>message_pending_payment</source>
-        <target state="new">Paiement en attente.</target>
+        <target>Paiement en attente.</target>
       </trans-unit>
-      <trans-unit id="011049e52bcb1bd754b0583b509c8879a8f45297" resname="message_validation_payment">
-        <jms:reference-file line="17">views/Payment/confirmation.html.twig</jms:reference-file>
+      <trans-unit id="message_validation_payment">
         <source>message_validation_payment</source>
-        <target state="new"><![CDATA[Votre paiement est confirmé!<br/>
-            Vous pouvez visualiser l'historique de vos commandes sur la page 'Mon compte' en cliquant sur 'Historique'<br/>
-            Merci d'acheter avec nous en ligne!]]>
+        <target><![CDATA[Votre paiement est confirmé!<br/>
+            Vous pouvez visualiser l'historique de vos commandes en allant sur la pagede votre compte puis en cliquant sur 'Commandes'<br/>
+            Merci d'avoir acheté en ligne avec nous !]]>
         </target>
       </trans-unit>
-      <trans-unit id="a4b7061a1581378be9c33cceb69c2e3b483750c6" resname="title_error_payment">
-        <jms:reference-file line="12">views/Payment/error.html.twig</jms:reference-file>
+      <trans-unit id="title_error_payment">
         <source>title_error_payment</source>
-        <target state="new">Erreur de paiement</target>
+        <target>Erreur de paiement</target>
       </trans-unit>
-      <trans-unit id="3f4668483e3f6be9a6252738fe53008cbf822cde" resname="title_not_validated_confirmation_payment">
-        <jms:reference-file line="28">views/Payment/confirmation.html.twig</jms:reference-file>
+      <trans-unit id="title_not_validated_confirmation_payment">
         <source>title_not_validated_confirmation_payment</source>
-        <target state="new">Confirmation de paiement non valide</target>
+        <target>Confirmation de paiement non valide</target>
       </trans-unit>
-      <trans-unit id="eb3a410319d810b9b19b4e51aeb646eafa4eefad" resname="title_pending_confirmation_payment">
-        <jms:reference-file line="21">views/Payment/confirmation.html.twig</jms:reference-file>
+      <trans-unit id="title_pending_confirmation_payment">
         <source>title_pending_confirmation_payment</source>
-        <target state="new">Confirmation de paiement en attente</target>
+        <target>Confirmation de paiement en attente</target>
       </trans-unit>
-      <trans-unit id="e6521d193df1143163024fd83db0e0f4f24e4276" resname="title_validation_confirmation_payment">
-        <jms:reference-file line="14">views/Payment/confirmation.html.twig</jms:reference-file>
+      <trans-unit id="title_validation_confirmation_payment">
         <source>title_validation_confirmation_payment</source>
-        <target state="new">Confirmation de paiement valide</target>
+        <target>Confirmation de paiement valide</target>
       </trans-unit>
-      <trans-unit id="134afb4f8065ada3108c6da8db9c6b65200b6f41" resname="process_to_paiement_bank_page">
-        <jms:reference-file line="99">Component/Payment/Paypal.php</jms:reference-file>
+      <trans-unit id="process_to_paiement_bank_page">
         <source>process_to_paiement_bank_page</source>
-        <target state="new">Procéder au paiement (page blanche)</target>
+        <target>Procéder au paiement (page blanche)</target>
       </trans-unit>
-      <trans-unit id="54c292a92f711e778e0a626850fd95801b36e514" resname="process_to_paiement_btn">
-        <jms:reference-file line="100">Component/Payment/Paypal.php</jms:reference-file>
+      <trans-unit id="process_to_paiement_btn">
         <source>process_to_paiement_btn</source>
-        <target state="new">Payer</target>
+        <target>Payer</target>
       </trans-unit>
       <trans-unit id="status_stopped">
         <source>status_stopped</source>
@@ -117,7 +101,6 @@
         <source>contract_status_expired</source>
         <target>Expiré</target>
       </trans-unit>
-
       <trans-unit id="order_unknown">
         <source>order_unknown</source>
         <target>Commande inconnue</target>
@@ -161,6 +144,10 @@
       <trans-unit id="payment.method">
         <source>payment.method</source>
         <target>Méthode</target>
+      </trans-unit>
+      <trans-unit id="message_view_order_payment">
+          <source>message_view_order_payment</source>
+          <target>Vous pouvez vérifier votre commande :</target>
       </trans-unit>
     </body>
   </file>
