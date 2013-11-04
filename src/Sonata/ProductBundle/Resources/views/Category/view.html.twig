@@ -10,7 +10,9 @@ file that was distributed with this source code.
 #}
 
 <h1>{{ category.name }}</h1>
-
+{% if category.media %}
+    {% thumbnail category.media, 'reference' %}
+{% endif %}
 <div>
     {{ category.description|raw }}
 </div>
