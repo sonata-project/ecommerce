@@ -10,7 +10,7 @@ In the ``Classification`` menu, select ``Categories``.
 
 On the top right of the page, click on ``Add new``.
 
-Fill in the form providing, at least, a name. You can also add a picture on the fly, or use a previously uploaded media.
+Fill in the form providing, at least, a name. You can also add a picture on the fly. If don't specify the ``position`` field value, categories will be displayed in the order they were created.
 
 Sub-category
 ============
