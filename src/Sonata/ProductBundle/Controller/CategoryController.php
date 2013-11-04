@@ -81,11 +81,18 @@ class CategoryController extends Controller
      */
     public function listProductsAction($categoryId)
     {
+        $category = $this->get('sonata.classification.manager.category')->findOneBy(array('id' => $categoryId));
+
+        if (!$category) {
+            throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $categoryId));
+        }
+
         $pager = $this->get('sonata.product.set.manager')
             ->getProductsByCategoryIdPager($categoryId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:list_products.html.twig', array(
-            'pager' => $pager
+            'pager' => $pager,
+            'category' => $category,
         ));
     }
 

@@ -17,7 +17,8 @@ file that was distributed with this source code.
     {{ category.description|raw }}
 </div>
 
-
-{% render controller("SonataProductBundle:Category:listSubCategories", {'categoryId': category.id}) %}
+{% if category.hasChildren %}
+    {% render controller("SonataProductBundle:Category:listSubCategories", {'categoryId': category.id}) %}
+{% endif %}
 
 {% render controller("SonataProductBundle:Category:listProducts", {'categoryId': category.id}) %}
