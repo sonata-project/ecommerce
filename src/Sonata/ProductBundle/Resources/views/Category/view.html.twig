@@ -15,9 +15,12 @@ file that was distributed with this source code.
 {% if category.media %}
     {% thumbnail category.media, 'reference' %}
 {% endif %}
-<div>
-    {{ category.description|raw }}
-</div>
+
+{% if category.description %}
+    <p class="lead">
+        {{ category.description|raw }}
+    </p>
+{% endif %}
 
 {% if category.hasChildren %}
     {% render controller("SonataProductBundle:Category:listSubCategories", {'categoryId': category.id}) %}
