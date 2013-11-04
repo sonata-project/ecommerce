@@ -97,6 +97,38 @@ class CategoryController extends Controller
     }
 
     /**
+     * @param int $categoryId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function displayBreadcrumbAction($categoryId)
+    {
+        $categories = $this->get('sonata.classification.manager.category')->getCategories();
+
+        if (!isset($categories[$categoryId])) {
+            throw new NotFoundHttpException(sprintf('Unable to find the category with id=%d', $categoryId));
+        }
+
+        $sorted = array(
+            $categories[$categoryId]
+        );
+        $selectedCategoryId = $categoryId;
+
+        while ($category = $categories[$categoryId]->getParent()) {
+            $sorted[] = $category;
+            $categoryId = $category->getId();
+        }
+
+        $sorted = array_reverse($sorted, true);
+
+        return $this->render('SonataProductBundle:Category:display_breadcrumb.html.twig', array(
+            'categories' => $sorted,
+            'selectedCategoryId' => $selectedCategoryId,
+        ));
+    }
+
+    /**
      * @param  null $category
      * @param  int  $depth
      * @param  int  $deep

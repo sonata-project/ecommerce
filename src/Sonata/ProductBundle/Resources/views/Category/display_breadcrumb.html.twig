@@ -1,0 +1,17 @@
+<ul class="breadcrumb">
+    <li><a href="{{ path('sonata_category_index') }}"><i class="icon-home"></i></a><span class="divider">&raquo;</span></li>
+    {% for category in categories %}
+        <li>
+            {% if category.id != selectedCategoryId %}
+                <a href="{{ url('sonata_category_view', {'categoryId': category.id, 'slug': category.slug}) }}">
+            {% endif %}
+
+            {{ category.name }}
+
+            {% if category.id != selectedCategoryId %}
+                </a>
+                <span class="divider">&raquo;</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

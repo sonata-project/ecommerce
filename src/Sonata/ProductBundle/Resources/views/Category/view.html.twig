@@ -9,6 +9,8 @@ file that was distributed with this source code.
 
 #}
 
+{% render controller("SonataProductBundle:Category:displayBreadcrumb", {'categoryId': category.id}) %}
+
 <h1>{{ category.name }}</h1>
 {% if category.media %}
     {% thumbnail category.media, 'reference' %}
