@@ -1,12 +1,11 @@
-=========
-Cook Book
-=========
-
-``#TODO``
+============
+Installation
+============
 
 .. toctree::
    :maxdepth: 2
 
+    Install Sonata Demo <install>
     Create your own Product prototype <product>
     Extend Sonata ECommerce <extend>
     Interact with other bundles <interact>

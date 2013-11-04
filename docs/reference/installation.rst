@@ -4,8 +4,7 @@ Installation
 
 Quick install
 =============
-In case you need to work with Sonata e-commerce for a new project, we strongly advise that you use our demo:
-See `Sonata demo installation <https://github.com/sonata-project/sandbox>`_.
+In case you need to work with Sonata e-commerce for a new project, we strongly advise that you use our demo: see :doc:`tutorials/install`.
 
 
 Manual install
