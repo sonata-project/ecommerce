@@ -39,7 +39,7 @@ class CustomerController extends Controller
         if (null === $customer) {
             // Customer not yet created, the user didn't order yet
             $customer = $this->getCustomerManager()->create();
-            $customer->setUser($user);
+            $customer->setUser($this->getUser());
             $this->getCustomerManager()->save($customer);
 
             $addresses = array();
