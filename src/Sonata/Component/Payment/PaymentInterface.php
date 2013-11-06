@@ -14,6 +14,7 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Transformer\BaseTransformer;
 use Symfony\Component\HttpFoundation\Response;
 
 interface PaymentInterface
@@ -36,6 +37,13 @@ interface PaymentInterface
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function sendbank(OrderInterface $order);
+
+    /**
+     * @param  TransactionInterface $transaction
+     *
+     * @return Response
+     */
+    public function callback(TransactionInterface $transaction);
 
     /**
      *
@@ -112,4 +120,13 @@ interface PaymentInterface
      * @return string
      */
     public function getOrderReference(TransactionInterface $transaction);
+
+    /**
+     * Gets the transformer for $name
+     *
+     * @param $name
+     *
+     * @return BaseTransformer
+     */
+    public function getTransformer($name);
 }

@@ -539,6 +539,11 @@ interface OrderInterface
     public function isCancelled();
 
     /**
+     * @return boolean true if the order can be cancelled
+     */
+    public function isCancellable();
+
+    /**
      * @return boolean true if pending, else false
      */
     public function isPending();

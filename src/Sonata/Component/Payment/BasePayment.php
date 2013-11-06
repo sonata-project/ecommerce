@@ -161,15 +161,16 @@ abstract class BasePayment implements PaymentInterface
         $this->transformers[$id] = $transformer;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTransformer($name)
     {
         return isset($this->transformers[$name]) ? $this->transformers[$name] : false;
     }
 
     /**
-     * @param  TransactionInterface $transaction
-     *
-     * @return Response
+     * {@inheritdoc}
      */
     public function callback(TransactionInterface $transaction)
     {

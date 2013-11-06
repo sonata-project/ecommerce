@@ -94,7 +94,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
 
-//        $response = $payment->callbank($order);
+//        $response = $payment->sendbank($order);
 //
 //        $this->assertTrue($response->headers->has('Location'));
 //        $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));
@@ -221,7 +221,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \RuntimeException
      */
-    public function testInvalidCurrencyCallbankPayment()
+    public function testInvalidCurrencySendbankPayment()
     {
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
@@ -246,14 +246,14 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
             'request_command' => 'cat request_ok.txt && echo '
         ));
 
-        $payment->callbank($order);
+        $payment->sendbank($order);
     }
 
-    public function testValidCallbankPayment()
+    public function testValidSendbankPayment()
     {
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidCallbank')));
+        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidsendbank')));
         $generator  = $this->getMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
@@ -284,7 +284,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
             'request_command' => 'cat request_ok.txt && echo ',
         ));
 
-        $response = $payment->callbank($order);
+        $response = $payment->sendbank($order);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
     }
@@ -313,7 +313,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function callbackValidCallbank($template, $params)
+    public function callbackValidSendbank($template, $params)
     {
         if (!$params['scellius']['valid']) {
             throw new \RuntimeException('Scellius validation should be ok');

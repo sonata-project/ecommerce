@@ -74,7 +74,7 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
 
-        $response = $payment->callbank($order);
+        $response = $payment->sendbank($order);
 
         $this->assertTrue($response->headers->has('Location'));
         $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));

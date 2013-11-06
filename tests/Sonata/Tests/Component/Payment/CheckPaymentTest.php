@@ -74,7 +74,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    public function testCallbank()
+    public function testSendbank()
     {
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('30/11/1981'));
@@ -96,7 +96,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $browser = new Browser($client);
         $payment = new CheckPayment($router, $logger, $browser);
 
-        $response = $payment->callbank($order);
+        $response = $payment->sendbank($order);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
         $this->assertEquals(302, $response->getStatusCode());

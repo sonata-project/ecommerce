@@ -11,11 +11,15 @@
 
 namespace Sonata\PaymentBundle\Controller;
 
+use Doctrine\ORM\EntityNotFoundException;
+use Sonata\Component\Payment\PaymentHandler;
+use Sonata\Component\Payment\PaymentHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class PaymentController extends Controller
 {
@@ -23,48 +27,19 @@ class PaymentController extends Controller
      * This action is called by the user after the sendbank
      * In most case the order is already cancelled by a previous callback
      *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function errorAction()
     {
-        // retrieve the payment handler
-        $payment    = $this->getPaymentHandler();
-
-        // retrieve the transaction
-        $transaction = $this->createTransaction($payment);
-
-        // retrieve the related order
-        $reference  = $payment->getOrderReference($transaction);
-
-        $order      = $this->getOrderManager()->findOneby(array(
-            'reference' => $reference
-        ));
-
-        if (!$order) {
-            throw new NotFoundHttpException(sprintf('Order %s', $reference));
+        try {
+            $order = $this->getPaymentHandler()->handleError($this->getRequest(), $this->getBasket());
+        } catch (EntityNotFoundException $ex) {
+            throw new NotFoundHttpException($ex->getMessage());
+        } catch (\InvalidTransactionException $ex) {
+            throw new UnauthorizedHttpException($ex->getMessage());
         }
-
-        $transaction->setOrder($order);
-
-        // control the handshake value
-        if (!$payment->isRequestValid($transaction)) {
-            throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
-        }
-
-        if ($order->isCancellable()) {
-            $order->setStatus(OrderInterface::STATUS_STOPPED);
-        }
-
-        $transaction->setState(TransactionInterface::STATE_OK);
-        $transaction->setStatusCode(TransactionInterface::STATUS_CANCELLED);
-
-        // save the payment transaction
-        $this->getTransactionManager()->save($transaction);
-        $this->getOrderManager()->save($order);
-
-        // rebuilt from the order information
-        $payment->getTransformer('order')->transformIntoBasket($order, $this->get('sonata.basket'));
 
         return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
             'order' => $order,
@@ -73,27 +48,17 @@ class PaymentController extends Controller
 
     /**
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function confirmationAction()
     {
-        $payment = $this->getPaymentHandler();
-        $transaction = $this->createTransaction($payment);
-
-        $reference = $payment->getOrderReference($transaction);
-
-        $order = $this->getOrderManager()->findOneBy(array(
-            'reference' => $reference
-        ));
-
-        if (!$order) {
-            throw new NotFoundHttpException(sprintf('Order %s', $reference));
-        }
-
-        $transaction->setOrder($order);
-
-        if (!$payment->isRequestValid($transaction)) {
-            throw new NotFoundHttpException(sprintf('Invalid check - Order %s', $reference));
+        try {
+            $order = $this->getPaymentHandler()->handleConfirmation($this->getRequest());
+        } catch (EntityNotFoundException $ex) {
+            throw new NotFoundHttpException($ex->getMessage());
+        } catch (\InvalidTransactionException $ex) {
+            throw new UnauthorizedHttpException($ex->getMessage());
         }
 
         if (!($order->isValidated() || $order->isPending())) {
@@ -108,7 +73,6 @@ class PaymentController extends Controller
     }
 
     /**
-     *
      * this action redirect the user to the bank
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
@@ -116,9 +80,8 @@ class PaymentController extends Controller
     public function sendbankAction()
     {
         $basket     = $this->get('sonata.basket');
-        $request    = $this->get('request');
 
-        if ($request->getMethod() !== 'POST') {
+        if ($this->get('request')->getMethod() !== 'POST') {
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
@@ -143,16 +106,8 @@ class PaymentController extends Controller
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
-        // transform the basket into order
-        $order = $payment->getTransformer('basket')->transformIntoOrder($basket);
-
-        // save the order
-        $this->get('sonata.order.manager')->save($order);
-
-        // assign correct reference number
-        $this->get('sonata.generator')->order($order);
-
-        $basket->reset();
+        // transform the basket into order & reset basket
+        $order = $this->getPaymentHandler()->getSendbankOrder($this->getBasket());
 
         // the payment must handle everything when calling the bank
         return $payment->sendbank($order);
@@ -167,34 +122,13 @@ class PaymentController extends Controller
      */
     public function callbackAction()
     {
-        // retrieve the payment handler
-        $payment = $this->getPaymentHandler();
-
-        // build the transaction
-        $transaction = $this->createTransaction($payment);
-
-        // retrieve the related order
-        $reference  = $payment->getOrderReference($transaction);
-
-        if (!$reference) {
-            throw new NotFoundHttpException(sprintf('Unable to find the order reference'));
+        try {
+            $response = $this->getPaymentHandler()->getPaymentCallbackResponse($this->getRequest());
+        } catch (EntityNotFoundException $ex) {
+            throw new NotFoundHttpException($ex->getMessage());
+        } catch (\InvalidTransactionException $ex) {
+            throw new UnauthorizedHttpException($ex->getMessage());
         }
-
-        $order = $this->getOrderManager()->findOneBy(array(
-            'reference' => $reference
-        ));
-
-        if (!$order instanceof OrderInterface) {
-            throw new NotFoundHttpException(sprintf('Unable to find the Order %s', $reference));
-        }
-
-        $transaction->setOrder($order);
-
-        // start the payment callback
-        $response = $payment->callback($transaction);
-
-        $this->getTransactionManager()->save($transaction);
-        $this->getOrderManager()->save($transaction->getOrder());
 
         return $response;
     }
@@ -205,47 +139,18 @@ class PaymentController extends Controller
     }
 
     /**
-     * @param  \Sonata\Component\Payment\PaymentInterface     $payment
-     * @return \Sonata\Component\Payment\TransactionInterface
+     * @return \Sonata\Component\Basket\Basket
      */
-    public function createTransaction(PaymentInterface $payment)
+    protected function getBasket()
     {
-        $transaction = $this->get('sonata.transaction.manager')->create();
-        $transaction->setPaymentCode($payment->getCode());
-        $transaction->setParameters(array_replace($this->getRequest()->query->all(), $this->getRequest()->request->all()));
-
-        return $transaction;
+        return $this->get('sonata.basket');
     }
 
     /**
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return object|\Sonata\Component\Payment\PaymentInterface
+     * @return PaymentHandlerInterface
      */
-    public function getPaymentHandler()
+    protected function getPaymentHandler()
     {
-        $payment = $this->get(sprintf('sonata.payment.method.%s', $this->getRequest()->get('bank')));
-
-        if (!$payment instanceof PaymentInterface) {
-            throw new NotFoundHttpException();
-        }
-
-        return $payment;
-    }
-
-    /**
-     * @return object|\Sonata\Component\Order\OrderManagerInterface
-     */
-    public function getOrderManager()
-    {
-        return $this->get('sonata.order.manager');
-    }
-
-    /**
-     * @return object|\Sonata\Component\Payment\TransactionManagerInterface
-     */
-    public function getTransactionManager()
-    {
-        return $this->get('sonata.transaction.manager');
+        return $this->get('sonata.payment.handler');
     }
 }

@@ -86,6 +86,18 @@ class Selector implements PaymentSelectorInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getPayment($bank)
+    {
+        if (!array_key_exists($bank, $this->getPaymentPool()->getMethods())) {
+            throw new PaymentNotFoundException($bank);
+        }
+
+        return $this->getPaymentPool()->getMethod($bank);
+    }
+
+    /**
      * @return PaymentPool|null
      */
     public function getPaymentPool()

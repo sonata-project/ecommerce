@@ -60,9 +60,9 @@ class BasePaymentTest_Payment extends BasePayment
      * @param  \Sonata\Component\Order\OrderInterface     $order
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function callbank(OrderInterface $order)
+    public function sendbank(OrderInterface $order)
     {
-        // TODO: Implement callbank() method.
+        // TODO: Implement sendbank() method.
     }
 
     /**

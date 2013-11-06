@@ -25,7 +25,7 @@ use Sonata\Component\Order\OrderInterface;
  */
 class PaypalTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCallbank()
+    public function testSendbank()
     {
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
@@ -42,10 +42,10 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
 
-        $callbank = $paypal->callbank($order);
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $callbank);
+        $sendbank = $paypal->sendbank($order);
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $sendbank);
 
-        $this->assertContains('<input type="hidden" name="cmd" value="_s-xclick">', $callbank->getContent());
+        $this->assertContains('<input type="hidden" name="cmd" value="_s-xclick">', $sendbank->getContent());
     }
 
     public function testIsCallbackValid()

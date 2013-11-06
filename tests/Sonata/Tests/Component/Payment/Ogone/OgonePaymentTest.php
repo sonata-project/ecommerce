@@ -89,11 +89,11 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
     }
 
-    public function testValidCallbankPayment()
+    public function testValidSendbankPayment()
     {
         $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidCallbank')));
+        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidsendbank')));
 
         $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
@@ -129,7 +129,7 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
             'catalog_url' => "",
         ));
 
-        $response = $payment->callbank($order);
+        $response = $payment->sendbank($order);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
     }
@@ -170,7 +170,7 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function callbackValidCallbank($template, $params)
+    public function callbackValidsendbank($template, $params)
     {
         if (!$params['shasign']) {
             throw new \RuntimeException('Ogone validation should be ok');
