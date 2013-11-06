@@ -15,7 +15,7 @@ namespace Sonata\Component\Payment;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class InvalidTransactionException extends \Exception
+class InvalidTransactionException extends \InvalidArgumentException
 {
     /**
      * Constructor

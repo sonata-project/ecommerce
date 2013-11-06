@@ -21,7 +21,7 @@ use Exception;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class PaymentNotFoundException extends \Exception
+class PaymentNotFoundException extends \InvalidArgumentException
 {
     /**
      * Constructor
