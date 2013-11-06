@@ -92,7 +92,7 @@ file that was distributed with this source code.
             <ul>
             {% block similar_product %}
                 {% for similar_product in similar_cross %}
-                    {% if similar_product.isMaster %}
+                    {% if similar_product.isMaster and similar_product.isEnabled %}
                         <li><a href="{{ path('sonata_product_view', {'productId': similar_product.id, 'slug': similar_product.slug }) }}">{{ similar_product.name }}</a></li>
                     {% endif %}
                 {% endfor %}
