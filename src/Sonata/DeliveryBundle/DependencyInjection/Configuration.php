@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('sonata_payment');
+        $node = $treeBuilder->root('sonata_delivery');
 
         $node
             ->children()

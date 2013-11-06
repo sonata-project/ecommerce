@@ -42,7 +42,6 @@ class SonataDeliveryExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('delivery.xml');
-        $loader->load('delivery_orm.xml');
         $loader->load('form.xml');
 
         $container->setAlias('sonata.delivery.selector', $config['selector']);

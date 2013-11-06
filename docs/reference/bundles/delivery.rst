@@ -24,3 +24,21 @@ You can override the Delivery selector and pool classes through the following pa
 * ``sonata.delivery.pool.class``
 
 You can also add your own delivery methods to the delivery pool by tagging your services with the following tag name: ``sonata.delivery.method``.
+
+Default configuration:
+
+.. code-block:: yaml
+
+    sonata_delivery:
+        selector:             sonata.delivery.selector.default
+        services:
+            free_address_required:
+                name:                 free_address_required
+                enabled:              false
+                code:                 free_address_required
+                priority:             10
+            free_address_not_required:
+                name:                 free_address_not_required
+                enabled:              false
+                code:                 free_address_not_required
+                priority:             10
