@@ -291,6 +291,19 @@
                 <target>Attention : ce produit n'est pas disponible actuellement !</target>
             </trans-unit>
             <!-- End - Product view translations -->
+
+            <trans-unit id="flash_batch_create_variation_success">
+                <source>flash_batch_create_variation_success</source>
+                <target>Création de la variation du produit réussie!</target>
+            </trans-unit>
+            <trans-unit id="flash_batch_create_variation_error">
+                <source>flash_batch_create_variation_error</source>
+                <target>Création de la variation du produit en erreur!</target>
+            </trans-unit>
+            <trans-unit id="action_create_variation">
+                <source>action_create_variation</source>
+                <target>Créer une variation</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
