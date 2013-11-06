@@ -274,6 +274,10 @@
                 <source>sonata_product_price</source>
                 <target>Prix</target>
             </trans-unit>
+            <trans-unit id="sonata_product_variations">
+                <source>sonata_product_variations</source>
+                <target>Variations</target>
+            </trans-unit>
             <trans-unit id="sonata.product.cross_selling.title">
                 <source>sonata.product.cross_selling.title</source>
                 <target>Produits de la même collection</target>
