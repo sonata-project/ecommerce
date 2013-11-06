@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Payment;
 
 use Doctrine\ORM\EntityNotFoundException;
@@ -18,7 +17,6 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 
 /**
  * Class PaymentHandler
@@ -161,7 +159,7 @@ class PaymentHandler implements PaymentHandlerInterface
             throw new InvalidTransactionException();
         }
 
-        $order      = $this->orderManager->findOneby(array(
+        $order = $this->orderManager->findOneby(array(
             'reference' => $reference
         ));
 
