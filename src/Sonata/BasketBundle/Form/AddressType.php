@@ -60,7 +60,7 @@ class AddressType extends AbstractType
         }
 
         $builder
-            ->add('name')
+            ->add('name', null, array('required' => !count($addresses)))
             ->add('firstname', null, array('required' => !count($addresses)))
             ->add('lastname', null, array('required' => !count($addresses)))
             ->add('address1', null, array('required' => !count($addresses)))
@@ -83,8 +83,6 @@ class AddressType extends AbstractType
             'addresses'  => array(),
         ));
     }
-
-
 
     /**
      * {@inheritdoc}
