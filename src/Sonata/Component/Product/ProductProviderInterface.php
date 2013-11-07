@@ -136,19 +136,15 @@ interface ProductProviderInterface
     public function configureShowFields(ShowMapper $showMapper);
 
     /**
-     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * @param FormMapper $formMapper
+     * @param boolean    $isVariation
      */
-    public function buildEditForm(FormMapper $formMapper);
-
-    /**
-     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
-     */
-    public function buildCreateForm(FormMapper $formMapper);
+    public function buildEditForm(FormMapper $formMapper, $isVariation = false);
 
     /**
      * @param FormMapper $formMapper
      */
-    public function removeNonVariationFields(FormMapper $formMapper);
+    public function buildCreateForm(FormMapper $formMapper);
 
     /**
      * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement

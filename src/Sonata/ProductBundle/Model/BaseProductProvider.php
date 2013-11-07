@@ -277,36 +277,48 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
-     * @return void
+     * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $formMapper)
+    public function buildEditForm(FormMapper $formMapper, $isVariation = false)
     {
+        $formMapper->with('Product');
+
+        $formMapper->add('name');
+        $formMapper->add('sku');
+
+        if (!$isVariation || in_array('description', $this->variationFields)) {
+            $formMapper->add('description', 'sonata_formatter_type', array(
+                'source_field'         => 'rawDescription',
+                'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+                'format_field'         => 'descriptionFormatter',
+                'target_field'         => 'description',
+                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
+            ));
+        }
+
         $formMapper
-            ->with('Product')
-                ->add('name')
-                ->add('sku')
-                ->add('description', 'sonata_formatter_type', array(
-                    'source_field'         => 'rawDescription',
-                    'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
-                    'format_field'         => 'descriptionFormatter',
-                    'target_field'         => 'description',
-                    'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
-                ))
-                ->add('price', 'number')
-                ->add('vat', 'number')
-                ->add('stock', 'integer')
-                ->add('image', 'sonata_type_model_list', array(
-                    'required' => false
-                ), array(
-                    'link_parameters' => array(
-                        'context'  => 'sonata_product',
-                        'filter'   => array('context' => array('value' => 'sonata_product')),
-                        'provider' => ''
-                    )
-                ))
-                ->add('enabled')
-            ->end()
+            ->add('price', 'number')
+            ->add('vat',   'number')
+            ->add('stock', 'integer')
+        ;
+
+        if (!$isVariation || in_array('image', $this->variationFields)) {
+            $formMapper->add('image', 'sonata_type_model_list', array(
+                'required' => false
+            ), array(
+                'link_parameters' => array(
+                    'context'  => 'sonata_product',
+                    'filter'   => array('context' => array('value' => 'sonata_product')),
+                    'provider' => ''
+                )
+            ));
+        }
+
+        $formMapper->add('enabled');
+
+        $formMapper->end();
+
+        $formMapper
             ->with('Categories')
                 ->add('productCategories', 'sonata_type_collection', array(
                     'required' => false,
@@ -341,35 +353,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
-     * @return void
+     * {@inheritdoc}
      */
     public function buildCreateForm(FormMapper $formMapper)
     {
         $this->buildEditForm($formMapper);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeNonVariationFields(FormMapper $formMapper)
-    {
-        $fields = $formMapper->getFormBuilder()->all();
-
-        $fieldsToKeep = array_merge(array(
-            'name',
-            'sku',
-            'productCategories',
-            'productCollections',
-            'deliveries',
-            'packages',
-        ), $this->getVariationFields());
-
-        foreach ($fields as $field) {
-            if (!in_array($field->getName(), $fieldsToKeep)) {
-                $formMapper->remove($field->getName());
-            }
-        }
     }
 
     /**

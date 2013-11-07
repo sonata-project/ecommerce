@@ -113,11 +113,7 @@ class ProductAdmin extends Admin
         $provider = $this->getProductProvider($product);
 
         if ($product->getId() > 0) {
-            $provider->buildEditForm($formMapper);
-
-            if ($product->isVariation()) {
-                $provider->removeNonVariationFields($formMapper);
-            }
+            $provider->buildEditForm($formMapper, $product->isVariation());
         } else {
             $provider->buildCreateForm($formMapper);
         }
@@ -218,40 +214,6 @@ class ProductAdmin extends Admin
     public function getProductPool()
     {
         return $this->productPool;
-    }
-
-    /**
-     * @param \Sonata\FormatterBundle\Formatter\Pool $formatterPool
-     *
-     * @return void
-     */
-    public function setPoolFormatter(FormatterPool $formatterPool)
-    {
-        $this->formatterPool = $formatterPool;
-    }
-
-    /**
-     * @return \Sonata\FormatterBundle\Formatter\Pool
-     */
-    public function getPoolFormatter()
-    {
-        return $this->formatterPool;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prePersist($product)
-    {
-        $product->setDescription($this->getPoolFormatter()->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function preUpdate($product)
-    {
-        $product->setDescription($this->getPoolFormatter()->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
     }
 
     /**
