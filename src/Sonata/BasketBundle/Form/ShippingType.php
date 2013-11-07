@@ -12,6 +12,7 @@
 namespace Sonata\BasketBundle\Form;
 
 use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
+use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Component\Form\AbstractType;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
@@ -24,11 +25,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ShippingType extends AbstractType
 {
-    /**
-     * @var AddressManagerInterface
-     */
-    protected $addressManager;
-
     /**
      * @var DeliveryPool
      */
@@ -47,14 +43,12 @@ class ShippingType extends AbstractType
     /**
      * Constructor
      *
-     * @param AddressManagerInterface          $addressManager
      * @param ModelManagerInterface            $modelManager
      * @param DeliveryPool                     $deliveryPool
      * @param ServiceDeliverySelectorInterface $deliverySelector
      */
-    public function __construct(AddressManagerInterface $addressManager, ModelManagerInterface $modelManager, DeliveryPool $deliveryPool, ServiceDeliverySelectorInterface $deliverySelector)
+    public function __construct(ModelManagerInterface $modelManager, DeliveryPool $deliveryPool, ServiceDeliverySelectorInterface $deliverySelector)
     {
-        $this->addressManager   = $addressManager;
         $this->modelManager     = $modelManager;
         $this->deliverySelector = $deliverySelector;
         $this->deliveryPool     = $deliveryPool;
@@ -68,34 +62,14 @@ class ShippingType extends AbstractType
         $basket = $builder->getData();
 
         if (!$basket instanceof BasketInterface) {
-            throw new \RunTimeException('Please provide a BasketInterface instance');
+            throw new \RuntimeException('Please provide a BasketInterface instance');
         }
 
-        $addresses = $this->addressManager->findBy(array(
-            'customer'      => $basket->getCustomer()->getId(),
-            'type'          => AddressInterface::TYPE_DELIVERY
-        ));
-
-//         $builder->add('deliveryAddress', 'sonata_type_model', array(
-//             'model_manager' => $this->modelManager,
-//             'class'         => $this->addressManager->getClass(),
-//             'choices'       => $addresses,
-//             'expanded'      => true
-//         ));
-
-//         if (count($addresses) > 0) {
-//             $builder->add('deliveryAddress', 'choice', array(
-//                 'choices'       => $addresses,
-//                 'expanded'      => true
-//             ));
-//         } else {
-//             $builder->add('deliveryAddress', 'sonata_basket_address');
-//         }
-
-        $address = $basket->getDeliveryAddress() ?: current($addresses);
-        $basket->setDeliveryAddress($address ?: null);
-
         $methods = $this->deliverySelector->getAvailableMethods($basket, $basket->getDeliveryAddress());
+
+        if (count($methods) === 0) {
+            throw new UndeliverableCountryException($basket->getDeliveryAddress());
+        }
 
         $choices = array();
         foreach ($methods as $method) {

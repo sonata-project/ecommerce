@@ -11,10 +11,12 @@
 
 namespace Sonata\BasketBundle\Controller;
 
+use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
 use Sonata\Component\Customer\AddressInterface;
@@ -253,9 +255,18 @@ class BasketController extends Controller
             throw new NotFoundHttpException('customer not found');
         }
 
-        $form = $this->createForm('sonata_basket_shipping', $basket, array(
-            'validation_groups' => array('delivery')
-        ));
+        try {
+            $form = $this->createForm('sonata_basket_shipping', $basket, array(
+                'validation_groups' => array('delivery')
+            ));
+        } catch (UndeliverableCountryException $ex) {
+            $countryName = Intl::getRegionBundle()->getCountryName($ex->getAddress()->getCountryCode());
+            $message = $this->get('translator')->trans('sonata_undeliverable_country', array('%country%' => $countryName), 'SonataBasketBundle');
+            $this->get('session')->getFlashBag()->add('error', $message);
+
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
+        }
+
         $template = 'SonataBasketBundle:Basket:delivery_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
@@ -313,6 +324,8 @@ class BasketController extends Controller
                     $address->setType(AddressInterface::TYPE_DELIVERY);
 
                     $customer->addAddress($address);
+
+                    $this->get('sonata.customer.manager')->save($customer);
                 }
 
                 $basket->setCustomer($customer);

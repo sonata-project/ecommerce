@@ -1,231 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="SonataBasketBundle.en.xliff">
-    <body>
-      <trans-unit id="message_basket_elements_preview">
-        <source>message_basket_elements_preview</source>
-        <target>Prévisualisation des éléments</target>
-      </trans-unit>
-      <trans-unit id="message_no_basket_elements">
-        <source>message_no_basket_elements</source>
-        <target>Aucun élément dans le panier</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.btn_update_basket">
-        <source>sonata.basket.btn_update_basket</source>
-        <target>Mettre à jour le panier</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.btn_update_delivery_step">
-        <source>sonata.basket.btn_update_delivery_step</source>
-        <target>Mettre à jour l'étape de livraison</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.btn_update_payment_step">
-        <source>sonata.basket.btn_update_payment_step</source>
-        <target>Mettre à jour l'étape de paiement</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.label_delivery_charge">
-        <source>sonata.basket.label_delivery_charge</source>
-        <target>Coûts de la livraison</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.label_process_to_payment">
-        <source>sonata.basket.label_process_to_payment</source>
-        <target>Procéder au paiement</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.label_terms_and_condition">
-        <source>sonata.basket.label_terms_and_condition</source>
-        <target>Conditions générales de vente</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.link_next_step">
-        <source>sonata.basket.link_next_step</source>
-        <target>Prochaine étape</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.link_terms_and_condition">
-        <source>sonata.basket.link_terms_and_condition</source>
-        <target>Conditions générales de vente</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.message_basket_is_empty">
-        <source>sonata.basket.message_basket_is_empty</source>
-        <target>Votre panier est vide</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.message_no_delivery_addresses_available">
-        <source>sonata.basket.message_no_delivery_addresses_available</source>
-        <target>Aucune adresse de livraison n'est disponible</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.message_no_billing_addresses_available">
-        <source>sonata.basket.message_no_billing_addresses_available</source>
-        <target>Aucune adresse de facturation n'est disponible</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.order_terms_and_conditions_title">
-        <source>sonata.basket.order_terms_and_conditions_title</source>
-        <target>Conditions générales de vente</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_basket">
-        <source>sonata.basket.title_basket</source>
-        <target>Panier</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_delivery_address">
-        <source>sonata.basket.title_delivery_address</source>
-        <target>Adresse de livraison</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_delivery_address_not_required">
-        <source>sonata.basket.title_delivery_address_not_required</source>
-        <target>Adresse de livraison non obligatoire</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_delivery_addresses">
-        <source>sonata.basket.title_delivery_addresses</source>
-        <target>Adresses de livraison</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_delivery_method">
-        <source>sonata.basket.title_delivery_method</source>
-        <target>Méthode de livraison</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_delivery_methods">
-        <source>sonata.basket.title_delivery_methods</source>
-        <target>Méthodes de livraison</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_delivery_step_basket">
-        <source>sonata.basket.title_delivery_step_basket</source>
-        <target>Votre livraison</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_address_delivery_step_basket">
-        <source>sonata.basket.title_address_delivery_step_basket</source>
-        <target>Addresse de livraison sélectionnée</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_billing_address">
-        <source>sonata.basket.title_billing_address</source>
-        <target>Adresse de facturation</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_payment_method">
-        <source>sonata.basket.title_payment_method</source>
-        <target>Méthode de paiement</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.title_payment_step_basket">
-        <source>sonata.basket.title_payment_step_basket</source>
-        <target>Votre paiement</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.total_vat">
-        <source>sonata.basket.total_vat</source>
-        <target>Total TVA</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.total_w_vat">
-        <source>sonata.basket.total_w_vat</source>
-        <target>Total avec TVA</target>
-      </trans-unit>
-      <trans-unit id="sonata.basket.total_wo_vat">
-        <source>sonata.basket.total_wo_vat</source>
-        <target>Total sans TVA</target>
-      </trans-unit>
-      <trans-unit id="view_basket">
-        <source>view_basket</source>
-        <target>Votre panier</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_address1_label">
-        <source>sonata_address_address1_label</source>
-        <target>Adresse 1</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_address2_label">
-        <source>sonata_address_address2_label</source>
-        <target>Adresse 2</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_address3_label">
-        <source>sonata_address_address3_label</source>
-        <target>Adresse 3</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_city_label">
-        <source>sonata_address_city_label</source>
-        <target>Ville</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_countrycode_label">
-        <source>sonata_address_countrycode_label</source>
-        <target>Pays</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_firstname_label">
-        <source>sonata_address_firstname_label</source>
-        <target>Prénom</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_lastname_label">
-        <source>sonata_address_lastname_label</source>
-        <target>Nom</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_name_label">
-        <source>sonata_address_name_label</source>
-        <target>Nom de l'adresse</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_phone_label">
-        <source>sonata_address_phone_label</source>
-        <target>Téléphone</target>
-      </trans-unit>
-      <trans-unit id="sonata_address_postcode_label">
-        <source>sonata_address_postcode_label</source>
-        <target>Code postal</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_addresses">
-        <source>sonata_basket_address_addresses</source>
-        <target>Choisir existante</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_useselected">
-        <source>sonata_basket_address_useselected</source>
-        <target>Utiliser l'adresse sélectionnée</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_firstname">
-        <source>sonata_basket_address_firstname</source>
-        <target>Prénom</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_name">
-        <source>sonata_basket_address_name</source>
-        <target>Nom de l'adresse</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_lastname">
-        <source>sonata_basket_address_lastname</source>
-        <target>Nom</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_address1">
-        <source>sonata_basket_address_address1</source>
-        <target>Adresse 1</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_address2">
-        <source>sonata_basket_address_address2</source>
-        <target>Adresse 2</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_address3">
-        <source>sonata_basket_address_address3</source>
-        <target>Adresse 3</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_postcode">
-        <source>sonata_basket_address_postcode</source>
-        <target>Code postal</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_city">
-        <source>sonata_basket_address_city</source>
-        <target>Ville</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_countryCode">
-        <source>sonata_basket_address_countryCode</source>
-        <target>Code pays</target>
-      </trans-unit>
-      <trans-unit id="sonata_basket_address_phone">
-        <source>sonata_basket_address_phone</source>
-        <target>Téléphone</target>
-      </trans-unit>
-      <trans-unit id="header_basket_information">
-        <source>header_basket_information</source>
-        <target>Eléments du panier</target>
-      </trans-unit>
-      <trans-unit id="header_basket_price">
-        <source>header_basket_price</source>
-        <target>Prix</target>
-      </trans-unit>
-      <trans-unit id="header_basket_quantity">
-        <source>header_basket_quantity</source>
-        <target>Quantité</target>
-      </trans-unit>
-      <trans-unit id="header_basket_total">
-        <source>header_basket_total</source>
-        <target>Total</target>
-      </trans-unit>
-      <trans-unit id="header_basket_delete">
-        <source>header_basket_delete</source>
-        <target><![CDATA[<i class="icon-trash"></i>]]></target>
-      </trans-unit>
-    </body>
-  </file>
+    <file source-language="en" target-language="fr" datatype="plaintext" original="SonataBasketBundle.en.xliff">
+        <body>
+            <trans-unit id="message_basket_elements_preview">
+                <source>message_basket_elements_preview</source>
+                <target>Prévisualisation des éléments</target>
+            </trans-unit>
+            <trans-unit id="message_no_basket_elements">
+                <source>message_no_basket_elements</source>
+                <target>Aucun élément dans le panier</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.btn_update_basket">
+                <source>sonata.basket.btn_update_basket</source>
+                <target>Mettre à jour le panier</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.btn_update_delivery_step">
+                <source>sonata.basket.btn_update_delivery_step</source>
+                <target>Mettre à jour l'étape de livraison</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.btn_update_payment_step">
+                <source>sonata.basket.btn_update_payment_step</source>
+                <target>Mettre à jour l'étape de paiement</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.label_delivery_charge">
+                <source>sonata.basket.label_delivery_charge</source>
+                <target>Coûts de la livraison</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.label_process_to_payment">
+                <source>sonata.basket.label_process_to_payment</source>
+                <target>Procéder au paiement</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.label_terms_and_condition">
+                <source>sonata.basket.label_terms_and_condition</source>
+                <target>Conditions générales de vente</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.link_next_step">
+                <source>sonata.basket.link_next_step</source>
+                <target>Prochaine étape</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.link_terms_and_condition">
+                <source>sonata.basket.link_terms_and_condition</source>
+                <target>Conditions générales de vente</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_basket_is_empty">
+                <source>sonata.basket.message_basket_is_empty</source>
+                <target>Votre panier est vide</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_no_delivery_addresses_available">
+                <source>sonata.basket.message_no_delivery_addresses_available</source>
+                <target>Aucune adresse de livraison n'est disponible</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_no_billing_addresses_available">
+                <source>sonata.basket.message_no_billing_addresses_available</source>
+                <target>Aucune adresse de facturation n'est disponible</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.order_terms_and_conditions_title">
+                <source>sonata.basket.order_terms_and_conditions_title</source>
+                <target>Conditions générales de vente</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_basket">
+                <source>sonata.basket.title_basket</source>
+                <target>Panier</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_address">
+                <source>sonata.basket.title_delivery_address</source>
+                <target>Adresse de livraison</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_address_not_required">
+                <source>sonata.basket.title_delivery_address_not_required</source>
+                <target>Adresse de livraison non obligatoire</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_addresses">
+                <source>sonata.basket.title_delivery_addresses</source>
+                <target>Adresses de livraison</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_method">
+                <source>sonata.basket.title_delivery_method</source>
+                <target>Méthode de livraison</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_methods">
+                <source>sonata.basket.title_delivery_methods</source>
+                <target>Méthodes de livraison</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_step_basket">
+                <source>sonata.basket.title_delivery_step_basket</source>
+                <target>Votre livraison</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_address_delivery_step_basket">
+                <source>sonata.basket.title_address_delivery_step_basket</source>
+                <target>Addresse de livraison sélectionnée</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_billing_address">
+                <source>sonata.basket.title_billing_address</source>
+                <target>Adresse de facturation</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_payment_method">
+                <source>sonata.basket.title_payment_method</source>
+                <target>Méthode de paiement</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_payment_step_basket">
+                <source>sonata.basket.title_payment_step_basket</source>
+                <target>Votre paiement</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.total_vat">
+                <source>sonata.basket.total_vat</source>
+                <target>Total TVA</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.total_w_vat">
+                <source>sonata.basket.total_w_vat</source>
+                <target>Total avec TVA</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.total_wo_vat">
+                <source>sonata.basket.total_wo_vat</source>
+                <target>Total sans TVA</target>
+            </trans-unit>
+            <trans-unit id="view_basket">
+                <source>view_basket</source>
+                <target>Votre panier</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_address1_label">
+                <source>sonata_address_address1_label</source>
+                <target>Adresse 1</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_address2_label">
+                <source>sonata_address_address2_label</source>
+                <target>Adresse 2</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_address3_label">
+                <source>sonata_address_address3_label</source>
+                <target>Adresse 3</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_city_label">
+                <source>sonata_address_city_label</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_countrycode_label">
+                <source>sonata_address_countrycode_label</source>
+                <target>Pays</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_firstname_label">
+                <source>sonata_address_firstname_label</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_lastname_label">
+                <source>sonata_address_lastname_label</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_name_label">
+                <source>sonata_address_name_label</source>
+                <target>Nom de l'adresse</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_phone_label">
+                <source>sonata_address_phone_label</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="sonata_address_postcode_label">
+                <source>sonata_address_postcode_label</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_addresses">
+                <source>sonata_basket_address_addresses</source>
+                <target>Choisir existante</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_useselected">
+                <source>sonata_basket_address_useselected</source>
+                <target>Utiliser l'adresse sélectionnée</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_firstname">
+                <source>sonata_basket_address_firstname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_name">
+                <source>sonata_basket_address_name</source>
+                <target>Nom de l'adresse</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_lastname">
+                <source>sonata_basket_address_lastname</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_address1">
+                <source>sonata_basket_address_address1</source>
+                <target>Adresse 1</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_address2">
+                <source>sonata_basket_address_address2</source>
+                <target>Adresse 2</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_address3">
+                <source>sonata_basket_address_address3</source>
+                <target>Adresse 3</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_postcode">
+                <source>sonata_basket_address_postcode</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_city">
+                <source>sonata_basket_address_city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_countryCode">
+                <source>sonata_basket_address_countryCode</source>
+                <target>Code pays</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_phone">
+                <source>sonata_basket_address_phone</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="header_basket_information">
+                <source>header_basket_information</source>
+                <target>Eléments du panier</target>
+            </trans-unit>
+            <trans-unit id="header_basket_price">
+                <source>header_basket_price</source>
+                <target>Prix</target>
+            </trans-unit>
+            <trans-unit id="header_basket_quantity">
+                <source>header_basket_quantity</source>
+                <target>Quantité</target>
+            </trans-unit>
+            <trans-unit id="header_basket_total">
+                <source>header_basket_total</source>
+                <target>Total</target>
+            </trans-unit>
+            <trans-unit id="header_basket_delete">
+                <source>header_basket_delete</source>
+                <target><![CDATA[<i class="icon-trash"></i>]]></target>
+            </trans-unit>
+            <trans-unit id="sonata_undeliverable_country">
+                <source>sonata_undeliverable_country</source>
+                <target>Le pays %country% n'est pas desservi par nos modes de livrioson pour un ou plusieurs éléments de votre panier.</target>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
