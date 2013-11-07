@@ -14,6 +14,12 @@ file that was distributed with this source code.
 #}
 
 <div class="row" itemscope itemtype="http://schema.org/Product">
+    {%  if product.stock == 0 %}
+        <div class="alert alert-error">
+            {% trans from 'SonataProductBundle' %}sonata_product_out_of_stock{% endtrans %}
+        </div>
+    {% endif %}
+
     <h2 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h2>
 
     <div class="span6">

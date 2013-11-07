@@ -286,6 +286,10 @@
                 <source>sonata_product_variation_min_price</source>
                 <target>À partir de</target>
             </trans-unit>
+            <trans-unit id="sonata_product_out_of_stock">
+                <source>sonata_product_out_of_stock</source>
+                <target>Attention : ce produit n'est pas disponible actuellement !</target>
+            </trans-unit>
             <!-- End - Product view translations -->
         </body>
     </file>
