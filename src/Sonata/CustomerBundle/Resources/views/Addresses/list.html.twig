@@ -40,7 +40,9 @@
                         <div class="btn-group">
                             <a class="btn btn-danger"
                                href="{{ url('sonata_customer_address_delete', {'id': address.id}) }}"
-                               onclick="return confirm('{{ 'sonata.address.list.delete_confirm' }}');">{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete{% endtrans %}</a>
+                               onclick="return confirm('{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete_confirm{% endtrans %}');">
+                                {% trans from 'SonataCustomerBundle' %}sonata.address.list.delete{% endtrans %}
+                            </a>
                             <a class="btn btn-info{% if address.current %} disabled{% endif %}" href="{{ url('sonata_customer_address_setcurrent', {'id': address.id}) }}">{% trans from 'SonataCustomerBundle' %}sonata.address.list.set_current{% endtrans %}</a>
                         </div>
                     </td>

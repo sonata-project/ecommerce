@@ -407,6 +407,10 @@
                 <source>sonata.order.view.order_with_id</source>
                 <target>Commande N°%orderId%</target>
             </trans-unit>
+            <trans-unit id="sonata.order.view.invoice">
+                <source>sonata.order.view.invoice</source>
+                <target>Facture</target>
+            </trans-unit>
             <trans-unit id="sonata.order.view.reference">
                 <source>sonata.order.view.reference</source>
                 <target>Références</target>

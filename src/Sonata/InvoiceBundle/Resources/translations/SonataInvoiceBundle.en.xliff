@@ -155,6 +155,65 @@
                 <target>Conflict</target>
             </trans-unit>
             <!-- End - Status translations -->
+
+            <!-- Begin - Invoice view -->
+            <trans-unit id="sonata.invoice.subtitle_billing">
+                <source>sonata.invoice.subtitle_billing</source>
+                <target>Billing address</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.subtitle_references">
+                <source>sonata.invoice.subtitle_references</source>
+                <target>References</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.references.date">
+                <source>sonata.invoice.references.date</source>
+                <target>Date</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.references.date">
+                <source>sonata.invoice.references.date</source>
+                <target>Date</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.subtitle_elements">
+                <source>sonata.invoice.subtitle_elements</source>
+                <target>Invoice elements</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.id">
+                <source>sonata.invoice.elements.id</source>
+                <target>ID</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.label">
+                <source>sonata.invoice.elements.label</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.quantity">
+                <source>sonata.invoice.elements.quantity</source>
+                <target>Quantity</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.unit_price">
+                <source>sonata.invoice.elements.unit_price</source>
+                <target>Unit price</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.total_ex_vat">
+                <source>sonata.invoice.elements.total_ex_vat</source>
+                <target>Total excl. TVA</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.total_inc_vat">
+                <source>sonata.invoice.elements.total_inc_vat</source>
+                <target>Total incl. TVA</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.total_exc_vat">
+                <source>sonata.invoice.total_exc_vat</source>
+                <target>Total excl. TVA</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.vat">
+                <source>sonata.invoice.vat</source>
+                <target>VAT</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.total_inc_vat">
+                <source>sonata.invoice.total_inc_vat</source>
+                <target>Total incl. TVA</target>
+            </trans-unit>
+            <!-- End - Invoice View -->
         </body>
     </file>
 </xliff>
