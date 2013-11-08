@@ -76,7 +76,7 @@ class RecentOrdersBlockService extends BaseBlockService
             $criteria['customer'] = $this->customerManager->findOneBy(array('user' => $this->securityContext->getToken()->getUser()));
         }
 
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderPrivateResponse($blockContext->getTemplate(), array(
             'context'   => $blockContext,
             'settings'  => $blockContext->getSettings(),
             'block'     => $blockContext->getBlock(),
