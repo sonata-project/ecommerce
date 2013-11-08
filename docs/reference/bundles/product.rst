@@ -81,4 +81,4 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
                         ApplicationSonataProductBundle: ~
                         SonataProductBundle: ~
 
-For more information about our biases regarding *product*, you can read: :doc:`../architecture/product`.
+For more information about our position regarding *product*, you can read: :doc:`../architecture/product`.

@@ -32,4 +32,4 @@ You can also change the services class (defined as parameters):
 * ``sonata.price.currency.detector.class`` for the currency detector
 * ``sonata.price.currency.manager.class`` for the currency manager (finding the CurrencyInterface item matching the currency label)
 
-For more information about our biases regarding *price*, you can read: :doc:`../architecture/currency`.
+For more information about our position regarding *price*, you can read: :doc:`../architecture/currency`.
