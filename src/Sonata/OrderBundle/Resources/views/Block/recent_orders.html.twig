@@ -29,7 +29,7 @@ file that was distributed with this source code.
                         {% if context.getSetting('mode') == 'admin' %}
                             <td><a href="{{ url('admin_sonata_order_order_edit', { 'id': order.id }) }}">{{ order.reference }}</a></td>
                         {% else %}
-                            <td><a href="{{ url('sonata_order_view', { 'id': order.id }) }}">{{ order.reference }}</a></td>
+                            <td><a href="{{ url('sonata_order_view', { 'reference': order.reference }) }}">{{ order.reference }}</a></td>
                         {% endif %}
                         <td>{{ order.statusName|trans({}, 'SonataOrderBundle') }}</td>
                         <td>{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
@@ -37,14 +37,18 @@ file that was distributed with this source code.
                     </tr>
                 {% endfor %}
             </table>
+            {% if context.getSetting('mode') == 'admin' %}
+                <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-small"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+            {% else %}
+                <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-small"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+            {% endif %}
         {% else %}
-            <p>{{ 'no_order_found'|trans({}, 'SonataOrderBundle') }}</p>
+            {% if context.getSetting('mode') == 'admin' %}
+                <p>{{ 'no_order_found'|trans({}, 'SonataOrderBundle') }}</p>
+            {% else %}
+                <p>{{ 'sonata.order.list.no_orders'|trans({}, 'SonataOrderBundle') }}</p>
+            {% endif %}
         {% endif %}
 
-        {% if context.getSetting('mode') == 'admin' %}
-            <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-small"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
-        {% else %}
-            <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-small"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
-        {% endif %}
     </div>
 {% endblock %}

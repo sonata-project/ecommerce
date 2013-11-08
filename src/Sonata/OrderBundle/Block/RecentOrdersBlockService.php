@@ -12,6 +12,7 @@
 namespace Sonata\OrderBundle\Block;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,23 +23,44 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
+ * Class RecentOrdersBlockService
  *
- * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ * @package Sonata\OrderBundle\Block
+ *
+ * @author  Thomas Rabaix
+ * @author  Hugo Briand <briand@ekino.com>
  */
 class RecentOrdersBlockService extends BaseBlockService
 {
-    protected $manager;
+    /**
+     * @var OrderManagerInterface
+     */
+    protected $orderManager;
+
+    /**
+     * @var CustomerManagerInterface
+     */
+    protected $customerManager;
+
+    /**
+     * @var SecurityContextInterface
+     */
+    protected $securityContext;
 
     /**
      * @param string                $name
      * @param EngineInterface       $templating
      * @param OrderManagerInterface $manager
      */
-    public function __construct($name, EngineInterface $templating, OrderManagerInterface $manager)
+    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, SecurityContextInterface $securityContext)
     {
-        $this->manager = $manager;
+        $this->orderManager    = $orderManager;
+        $this->customerManager = $customerManager;
+        $this->securityContext = $securityContext;
+
 
         parent::__construct($name, $templating);
     }
@@ -48,15 +70,17 @@ class RecentOrdersBlockService extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $criteria = array(
-//            'mode' => $blockContext->getSetting('mode')
-        );
+        $criteria = array();
+
+        if ('admin' !== $blockContext->getSetting('mode')) {
+            $criteria['customer'] = $this->customerManager->findOneBy(array('user' => $this->securityContext->getToken()->getUser()));
+        }
 
         return $this->renderResponse($blockContext->getTemplate(), array(
             'context'   => $blockContext,
             'settings'  => $blockContext->getSettings(),
             'block'     => $blockContext->getBlock(),
-            'orders'    => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'))
+            'orders'    => $this->orderManager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'))
         ), $response);
     }
 
@@ -65,7 +89,6 @@ class RecentOrdersBlockService extends BaseBlockService
      */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
-        // TODO: Implement validateBlock() method.
     }
 
     /**
@@ -104,7 +127,6 @@ class RecentOrdersBlockService extends BaseBlockService
             'number'     => 5,
             'mode'       => 'public',
             'title'      => 'Recent Orders',
-//            'tags'      => 'Recent Orders',
             'template'   => 'SonataOrderBundle:Block:recent_orders.html.twig'
         ));
     }

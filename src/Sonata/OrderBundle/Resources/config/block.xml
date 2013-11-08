@@ -11,6 +11,8 @@
             <argument>sonata.order.block.recent_orders</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="sonata.order.manager" />
+            <argument type="service" id="sonata.customer.manager" />
+            <argument type="service" id="security.context" />
         </service>
     </services>
 
