@@ -384,6 +384,20 @@ interface ProductInterface
     public function hasVariations();
 
     /**
+     * Return true if Product has enabled variation(s).
+     *
+     * @return bool
+     */
+    public function hasEnabledVariations();
+
+    /**
+     * Return the list of enabled product variations
+     *
+     * @return ArrayCollection
+     */
+    public function getEnabledVariations();
+
+    /**
      * Set Media.
      *
      * @param MediaInterface $image

@@ -62,6 +62,16 @@ interface ProductManagerInterface
     public function findInSameCollections($productCollections);
 
     /**
+     * Retrieve an active product from its id and its slug
+     *
+     * @param int $id
+     * @param string $slug
+     *
+     * @return ProductInterface|null
+     */
+    public function findEnabledFromIdAndSlug($id, $slug);
+
+    /**
      * Returns the product's fully qualified class name
      *
      * @return string

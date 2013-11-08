@@ -117,6 +117,11 @@ abstract class BaseProduct implements ProductInterface
     /**
      * @var ArrayCollection
      */
+    protected $enabledVariations;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $productCollections;
 
     /**
@@ -134,6 +139,7 @@ abstract class BaseProduct implements ProductInterface
         $this->productCategories  = new ArrayCollection();
         $this->productCollections = new ArrayCollection();
         $this->variations         = new ArrayCollection();
+        $this->enabledVariations  = new ArrayCollection();
     }
 
     /**
@@ -582,6 +588,34 @@ abstract class BaseProduct implements ProductInterface
     public function hasVariations()
     {
         return count($this->variations) > 0;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEnabledVariations()
+    {
+        foreach ($this->variations as $variation) {
+            if ($variation->isEnabled()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnabledVariations()
+    {
+        if (!count($this->enabledVariations)) {
+            foreach ($this->variations as $variation) {
+                $this->enabledVariations[] = $variation;
+            }
+        }
+
+        return $this->enabledVariations;
     }
 
     /**

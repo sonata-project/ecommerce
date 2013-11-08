@@ -30,10 +30,14 @@ class ProductController extends Controller
      */
     public function viewAction($productId, $slug)
     {
-        $product = is_object($productId) ? $productId : $this->get('sonata.product.set.manager')->findOneBy(array('id' =>  $productId, 'enabled' => true));
+        $product = is_object($productId) ? $productId : $this->get('sonata.product.set.manager')->findEnabledFromIdAndSlug($productId, $slug);
 
         if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
+        }
+
+        if ($product->hasVariations() && !$product->hasEnabledVariations()) {
+            throw new NotFoundHttpException('Product has no activated variation');
         }
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
@@ -121,7 +125,7 @@ class ProductController extends Controller
      */
     public function viewVariationsAction($productId, $slug)
     {
-        $product = is_object($productId) ? $productId : $this->get('sonata.product.set.manager')->findOneBy(array('id' =>  $productId));
+        $product = is_object($productId) ? $productId : $this->get('sonata.product.set.manager')->findEnabledFromIdAndSlug($productId, $slug);
 
         if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));

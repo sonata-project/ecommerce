@@ -171,4 +171,23 @@ class ProductManager implements ProductManagerInterface
 
         return $pager;
     }
+
+    /**
+     * Retrieve an active product from its id and its slug
+     *
+     * @param int    $id
+     * @param string $slug
+     *
+     * @return ProductInterface|null
+     */
+    public function findEnabledFromIdAndSlug($id, $slug)
+    {
+        return $this->em
+            ->getRepository($this->getClass())
+            ->findOneBy(array(
+                'id' => $id,
+                'slug' => $slug,
+                'enabled' => true
+            ));
+    }
 }
