@@ -304,6 +304,14 @@
                 <source>action_create_variation</source>
                 <target>Create a variation</target>
             </trans-unit>
+            <trans-unit id="no_product_found">
+                <source>no_product_found</source>
+                <target>No product found</target>
+            </trans-unit>
+            <trans-unit id="view_all_products">
+                <source>view_all_products</source>
+                <target>View products</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
