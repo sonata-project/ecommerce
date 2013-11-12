@@ -663,14 +663,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         // check if the product is still in database
         if (!$product) {
-            $errorElement->addViolation('The product is not available anymore');
+            $errorElement->addViolation('product_not_available');
 
             return;
         }
 
         // check if the product is still enabled
         if (!$basketElement->getProduct()->getEnabled()) {
-            $errorElement->addViolation('The product is not enabled anymore');
+            $errorElement->addViolation('product_not_enabled');
 
             return;
         }
@@ -679,7 +679,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         if (!is_numeric($basketElement->getQuantity())) {
             $errorElement
                 ->with('quantity')
-                    ->addViolation('The product quantity is not a numeric value')
+                    ->addViolation('product_quantity_not_numeric')
                 ->end();
 
             return;
@@ -690,10 +690,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 ->assertRange(
                     array(
                         'min' => 1,
-                        'max' => $this->getStockAvailable($basketElement->getProduct())
-                    ),
-                    'The product quantity ({{ quantity }}) is not valid',
-                    array('{{ quantity }}' => $basketElement->getQuantity())
+                        'max' => $this->getStockAvailable($basketElement->getProduct()),
+                        'minMessage' => 'basket_quantity_limit_min',
+                        'maxMessage' => 'basket_quantity_limit_max'
+                    )
                 )
             ->end();
     }

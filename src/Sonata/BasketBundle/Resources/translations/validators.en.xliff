@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="product_not_available">
+                <source>product_not_available</source>
+                <target>The product is not available.</target>
+            </trans-unit>
+            <trans-unit id="product_not_enabled">
+                <source>product_not_enabled</source>
+                <target>The product is not enabled.</target>
+            </trans-unit>
+            <trans-unit id="product_quantity_not_numeric">
+                <source>product_quantity_not_numeric</source>
+                <target>The product quantity is not a numeric value.</target>
+            </trans-unit>
+            <trans-unit id="basket_quantity_limit_min">
+                <source>basket_quantity_limit_min</source>
+                <target>You should have at least {{ limit }} items in your basket</target>
+            </trans-unit>
+            <trans-unit id="basket_quantity_limit_max">
+                <source>basket_quantity_limit_max</source>
+                <target>There is only {{ limit }} products left in stock, you tried to order {{ value }}.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

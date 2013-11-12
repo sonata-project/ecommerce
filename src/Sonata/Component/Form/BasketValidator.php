@@ -26,11 +26,6 @@ class BasketValidator extends ConstraintValidator
     protected $productPool;
 
     /**
-     * @var BasketInterface
-     */
-    protected $basket;
-
-    /**
      * @var ConstraintValidatorFactory
      */
     protected $constraintValidatorFactory;
@@ -55,23 +50,16 @@ class BasketValidator extends ConstraintValidator
      */
     public function validate($basket, Constraint $constraint)
     {
-        /*
-         * @todo : check 2.3 compatibility
-         */
-        $group = $this->context->getGroup();
-        $contextPropertyPath = $this->context->getPropertyPath();
-
         foreach ($basket->getBasketElements() as $pos => $basketElement) {
-            // update the property path value
-            $propertyPath = sprintf('%s[%d]', $contextPropertyPath, $pos);
-
             // create a new ErrorElement object
             $errorElement = new ErrorElement(
-                $basketElement,
+                $basket,
                 $this->constraintValidatorFactory,
                 $this->context,
-                $group
+                $this->context->getGroup()
             );
+
+            $errorElement->with('basketElements['.$pos.']');
 
             // validate the basket element through the related service provider
             $this->productPool
@@ -79,16 +67,8 @@ class BasketValidator extends ConstraintValidator
                 ->validateFormBasketElement($errorElement, $basketElement, $basket);
         }
 
-        if (isset($propertyPath)) {
-            $contextPropertyPath = $propertyPath;
-        }
-
-//        $this->context->setGroup($group);
-
         if (count($this->context->getViolations()) > 0) {
-            $this->context->addViolationAt($contextPropertyPath, $constraint->message, array(), null);
+            $this->context->addViolationAt('basketElements', $constraint->message);
         }
-
-        return;
     }
 }

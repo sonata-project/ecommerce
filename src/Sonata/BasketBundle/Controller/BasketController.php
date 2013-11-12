@@ -13,6 +13,9 @@ namespace Sonata\BasketBundle\Controller;
 
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DomCrawler\Form;
+use Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapper;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -40,24 +43,12 @@ class BasketController extends Controller
 
         // always validate the basket
         if (!$form->isBound()) {
-            // todo : move this somewhere else
-//            if ($violations = $this->get('validator')->validate($form->getDa, $form->getValidationGroups())) {
-//
-//                foreach ($violations as $violation) {
-//                    $propertyPath = new \Symfony\Component\PropertyAccess\PropertyPath($violation->getPropertyPath());
-//                    $iterator = $propertyPath->getIterator();
-//
-//                    if ($iterator->current() == 'data') {
-//                        $type = \Symfony\Component\Form\Form::DATA_ERROR;
-//                        $iterator->next(); // point at the first data element
-//                    } else {
-//                        $type = \Symfony\Component\Form\Form::FIELD_ERROR;
-//                    }
-//
-//                    $form->addError(new \Symfony\Component\Form\FieldError($violation->getMessageTemplate(), $violation->getMessageParameters()), $iterator, $type);
-//                    // WARNING: ConstraintValidator::getMessageParameters() and ConstraintValidator::getMessageTemplate() has been removed in 2.3 (see https://github.com/symfony/symfony/blob/master/UPGRADE-2.1.md#validator)
-//                }
-//            }
+            if ($violations = $this->get('validator')->validate($form)) {
+                $violationMapper = new ViolationMapper();
+                foreach ($violations as $violation) {
+                    $violationMapper->mapViolation($violation, $form, true);
+                }
+            }
         }
 
         return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
