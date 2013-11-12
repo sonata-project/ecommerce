@@ -1,16 +1,14 @@
-==================
-Extend the bundles
-==================
+=======================
+Extend Sonata ECommerce
+=======================
+Override
+--------
+As a framework, Sonata Ecommerce bundles claims to stick with best practises so extending them won't be more difficult than explained on `Symfony recommendations`_.
 
-``#TODO``
+Contribute
+----------
+Feel free to fork any project on `github`_ and submit your pull requests as long as it respects the `Symfony coding standards`_.
 
-Create your custom payment method
-=================================
-
-``#TODO``
-
-
-Override the default order process
-==================================
-
-``#TODO``
+.. _Symfony recommendations: http://symfony.com/doc/current/cookbook/bundles/inheritance.html
+.. _github: https://github.com/sonata-project
+.. _Symfony coding standards: http://symfony.com/doc/current/contributing/index.html

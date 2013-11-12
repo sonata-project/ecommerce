@@ -10,6 +10,8 @@ In order to introduce you the way Sonata Ecommerce will allow you to create easi
     Install Sonata Demo <install>
     Create a category <create-category>
     Create a product <create-product>
+    Create a delivery method <create-delivery-method>
+    Create a payment method <create-payment-method>
     Extend Sonata ECommerce <extend>
     Interact with other bundles <interact>
 
