@@ -8,7 +8,7 @@ Invoice
 Presentation
 ============
 
-The InvoiceBundle manages everything related to the invoices: it basically implements the Invoice components by offering DB entities, and an Admin page to view the invoices in the BO. It also offers the possibility to view a generated Invoice from the front office with a specific template.
+The InvoiceBundle manages everything related to the invoices: it basically implements the Invoice components by offering DB entities, and an Admin page to view the invoices in the Back end. It also offers the possibility to view a generated Invoice from the front office with a specific template.
 
 The Invoice generation, however, is not processed by this specific bundle, but by the PaymentBundle, as are all other entity transformations.
 
@@ -21,4 +21,4 @@ Currently, a raw HTML representation for invoices is provided ; would you like t
 The invoice rendering template is ``SonataInvoiceBundle:Invoice:view.html.twig`` ; you can override it by using Symfony bundle override rules.
 
 
-For more information about our biases regarding *invoice*, you can read: :doc:`../architecture/invoice`.
+For more information about our position regarding *invoice*, you can read: :doc:`../architecture/invoice`.
