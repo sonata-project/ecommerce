@@ -17,12 +17,20 @@ file that was distributed with this source code.
         {% endif %}
 
         {% if products|length > 0 %}
-            <ul>
+            <ul class="thumbnails">
                 {% for product in products %}
-                    <li>
-                        <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}">{{ product.name }}</a>
-                        - {{ product.price|number_format_currency(currency) }}
-                    </li>
+                    {% if product.hasEnabledVariations or not product.hasVariations%}
+                        <li class="span4">
+                            <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}" class="thumbnail">
+                                {% if product.image %}
+                                    {% thumbnail product.image, 'preview' with {'itemprop': 'image'} %}
+                                {% endif %}
+                                {{ product.name }}
+                                —
+                                {{ product.price|number_format_currency(currency) }}
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
 

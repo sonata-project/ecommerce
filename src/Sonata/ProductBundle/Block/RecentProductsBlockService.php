@@ -18,6 +18,7 @@ use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\ProductBundle\Repository\BaseProductRepository;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -56,14 +57,8 @@ class RecentProductsBlockService extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $products = $this->entityManager
-            ->getRepository('Application\Sonata\ProductBundle\Entity\Product')
-            ->findBy(array(
-                'enabled' => true,
-                'parent'  => null,
-            ), array(
-                'createdAt' => 'DESC'
-            ), $blockContext->getSetting('number'));
+        $products = $this->getProductRepository()
+            ->findLastProducts($blockContext->getSetting('number'));
 
         return $this->renderResponse($blockContext->getTemplate(), array(
             'context'   => $blockContext,
@@ -113,5 +108,15 @@ class RecentProductsBlockService extends BaseBlockService
             'title'      => 'Recent products',
             'template'   => 'SonataProductBundle:Block:recent_products.html.twig'
         ));
+    }
+
+    /**
+     * Returns the Base ProductRepository.
+     *
+     * @return BaseProductRepository
+     */
+    protected function getProductRepository()
+    {
+        return $this->entityManager->getRepository('Application\Sonata\ProductBundle\Entity\Product');
     }
 }

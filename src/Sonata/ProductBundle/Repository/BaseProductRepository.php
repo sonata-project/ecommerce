@@ -18,4 +18,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class BaseProductRepository extends EntityRepository
 {
+    /**
+     * Returns an array of last products.
+     *
+     * @param int $limit Number max of required results
+     *
+     * @return array
+     */
+    public function findLastProducts($limit = 5)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.enabled = :enabled')
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameters(array(
+                'enabled' => true
+            ))
+            ->getQuery()
+            ->execute();
+    }
 }
