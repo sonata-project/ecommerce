@@ -261,7 +261,7 @@ class BasketController extends Controller
             ));
         } catch (UndeliverableCountryException $ex) {
             $countryName = Intl::getRegionBundle()->getCountryName($ex->getAddress()->getCountryCode());
-            $message = $this->get('translator')->trans('sonata_undeliverable_country', array('%country%' => $countryName), 'SonataBasketBundle');
+            $message = $this->get('translator')->trans('undeliverable_country', array('%country%' => $countryName), 'SonataBasketBundle');
             $this->get('session')->getFlashBag()->add('error', $message);
 
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));

@@ -270,24 +270,24 @@
             <!-- End - Form translations -->
 
             <!-- Begin - Product view translations -->
-            <trans-unit id="sonata_product_price">
-                <source>sonata_product_price</source>
+            <trans-unit id="product_price">
+                <source>product_price</source>
                 <target>Price</target>
             </trans-unit>
-            <trans-unit id="sonata_product_variations">
-                <source>sonata_product_variations</source>
+            <trans-unit id="product_variations">
+                <source>product_variations</source>
                 <target>Variations</target>
             </trans-unit>
             <trans-unit id="sonata.product.cross_selling.title">
                 <source>sonata.product.cross_selling.title</source>
                 <target>Products in the same collection</target>
             </trans-unit>
-            <trans-unit id="sonata_product_variation_min_price">
-                <source>sonata_product_variation_min_price</source>
+            <trans-unit id="product_variation_min_price">
+                <source>product_variation_min_price</source>
                 <target>From</target>
             </trans-unit>
-            <trans-unit id="sonata_product_out_of_stock">
-                <source>sonata_product_out_of_stock</source>
+            <trans-unit id="product_out_of_stock">
+                <source>product_out_of_stock</source>
                 <target>Warning : this product is currently out of stock !</target>
             </trans-unit>
             <!-- End - Product view translations -->

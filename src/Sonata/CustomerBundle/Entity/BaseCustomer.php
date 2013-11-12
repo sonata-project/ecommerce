@@ -148,9 +148,9 @@ abstract class BaseCustomer implements CustomerInterface
     public static function getTitlesList()
     {
         return array(
-            self::TITLE_MLLE => 'sonata_customer_title_mlle',
-            self::TITLE_MME  => 'sonata_customer_title_mme',
-            self::TITLE_MR   => 'sonata_customer_title_mr',
+            self::TITLE_MLLE => 'customer_title_mlle',
+            self::TITLE_MME  => 'customer_title_mme',
+            self::TITLE_MR   => 'customer_title_mr',
         );
     }
 

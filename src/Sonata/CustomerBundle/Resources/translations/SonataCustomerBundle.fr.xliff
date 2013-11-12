@@ -311,8 +311,8 @@
                 <source>sonata.address.list.no_addresses</source>
                 <target>Vous n'avez aucune adresse disponible.</target>
             </trans-unit>
-            <trans-unit id="sonata_address_add_success">
-                <source>sonata_address_add_success</source>
+            <trans-unit id="address_add_success">
+                <source>address_add_success</source>
                 <target>Votre adresse a bien été ajoutée !</target>
             </trans-unit>
             <trans-unit id="address_name_label">
@@ -351,8 +351,8 @@
                 <source>sonata.address.list.delete_confirm</source>
                 <target>Êtes-vous sûr de vouloir supprimer cette adresse ?</target>
             </trans-unit>
-            <trans-unit id="sonata_customer_address_delete">
-                <source>sonata_customer_address_delete</source>
+            <trans-unit id="customer_address_delete">
+                <source>customer_address_delete</source>
                 <target>L'adresse a bien été supprimée !</target>
             </trans-unit>
             <trans-unit id="sonata.address.list.set_current">

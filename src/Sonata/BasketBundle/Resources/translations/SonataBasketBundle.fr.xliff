@@ -118,92 +118,92 @@
                 <source>view_basket</source>
                 <target>Votre panier</target>
             </trans-unit>
-            <trans-unit id="sonata_address_address1_label">
-                <source>sonata_address_address1_label</source>
+            <trans-unit id="address_address1_label">
+                <source>address_address1_label</source>
                 <target>Adresse 1</target>
             </trans-unit>
-            <trans-unit id="sonata_address_address2_label">
-                <source>sonata_address_address2_label</source>
+            <trans-unit id="address_address2_label">
+                <source>address_address2_label</source>
                 <target>Adresse 2</target>
             </trans-unit>
-            <trans-unit id="sonata_address_address3_label">
-                <source>sonata_address_address3_label</source>
+            <trans-unit id="address_address3_label">
+                <source>address_address3_label</source>
                 <target>Adresse 3</target>
             </trans-unit>
-            <trans-unit id="sonata_address_city_label">
-                <source>sonata_address_city_label</source>
+            <trans-unit id="address_city_label">
+                <source>address_city_label</source>
                 <target>Ville</target>
             </trans-unit>
-            <trans-unit id="sonata_address_countrycode_label">
-                <source>sonata_address_countrycode_label</source>
+            <trans-unit id="address_countrycode_label">
+                <source>address_countrycode_label</source>
                 <target>Pays</target>
             </trans-unit>
-            <trans-unit id="sonata_address_firstname_label">
-                <source>sonata_address_firstname_label</source>
+            <trans-unit id="address_firstname_label">
+                <source>address_firstname_label</source>
                 <target>Prénom</target>
             </trans-unit>
-            <trans-unit id="sonata_address_lastname_label">
-                <source>sonata_address_lastname_label</source>
+            <trans-unit id="address_lastname_label">
+                <source>address_lastname_label</source>
                 <target>Nom</target>
             </trans-unit>
-            <trans-unit id="sonata_address_name_label">
-                <source>sonata_address_name_label</source>
+            <trans-unit id="address_name_label">
+                <source>address_name_label</source>
                 <target>Nom de l'adresse</target>
             </trans-unit>
-            <trans-unit id="sonata_address_phone_label">
-                <source>sonata_address_phone_label</source>
+            <trans-unit id="address_phone_label">
+                <source>address_phone_label</source>
                 <target>Téléphone</target>
             </trans-unit>
-            <trans-unit id="sonata_address_postcode_label">
-                <source>sonata_address_postcode_label</source>
+            <trans-unit id="address_postcode_label">
+                <source>address_postcode_label</source>
                 <target>Code postal</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_addresses">
-                <source>sonata_basket_address_addresses</source>
+            <trans-unit id="basket_address_addresses">
+                <source>basket_address_addresses</source>
                 <target>Choisir existante</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_useselected">
-                <source>sonata_basket_address_useselected</source>
+            <trans-unit id="basket_address_useselected">
+                <source>basket_address_useselected</source>
                 <target>Utiliser l'adresse sélectionnée</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_firstname">
-                <source>sonata_basket_address_firstname</source>
+            <trans-unit id="basket_address_firstname">
+                <source>basket_address_firstname</source>
                 <target>Prénom</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_name">
-                <source>sonata_basket_address_name</source>
+            <trans-unit id="basket_address_name">
+                <source>basket_address_name</source>
                 <target>Nom de l'adresse</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_lastname">
-                <source>sonata_basket_address_lastname</source>
+            <trans-unit id="basket_address_lastname">
+                <source>basket_address_lastname</source>
                 <target>Nom</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_address1">
-                <source>sonata_basket_address_address1</source>
+            <trans-unit id="basket_address_address1">
+                <source>basket_address_address1</source>
                 <target>Adresse 1</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_address2">
-                <source>sonata_basket_address_address2</source>
+            <trans-unit id="basket_address_address2">
+                <source>basket_address_address2</source>
                 <target>Adresse 2</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_address3">
-                <source>sonata_basket_address_address3</source>
+            <trans-unit id="basket_address_address3">
+                <source>basket_address_address3</source>
                 <target>Adresse 3</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_postcode">
-                <source>sonata_basket_address_postcode</source>
+            <trans-unit id="basket_address_postcode">
+                <source>basket_address_postcode</source>
                 <target>Code postal</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_city">
-                <source>sonata_basket_address_city</source>
+            <trans-unit id="basket_address_city">
+                <source>basket_address_city</source>
                 <target>Ville</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_countryCode">
-                <source>sonata_basket_address_countryCode</source>
+            <trans-unit id="basket_address_countryCode">
+                <source>basket_address_countryCode</source>
                 <target>Code pays</target>
             </trans-unit>
-            <trans-unit id="sonata_basket_address_phone">
-                <source>sonata_basket_address_phone</source>
+            <trans-unit id="basket_address_phone">
+                <source>basket_address_phone</source>
                 <target>Téléphone</target>
             </trans-unit>
             <trans-unit id="header_basket_information">
@@ -226,8 +226,8 @@
                 <source>header_basket_delete</source>
                 <target><![CDATA[<i class="icon-trash"></i>]]></target>
             </trans-unit>
-            <trans-unit id="sonata_undeliverable_country">
-                <source>sonata_undeliverable_country</source>
+            <trans-unit id="undeliverable_country">
+                <source>undeliverable_country</source>
                 <target>Le pays %country% n'est pas desservi par nos modes de livrioson pour un ou plusieurs éléments de votre panier.</target>
             </trans-unit>
         </body>

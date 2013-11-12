@@ -16,7 +16,7 @@ file that was distributed with this source code.
 <div class="row" itemscope itemtype="http://schema.org/Product">
     {%  if not product.hasVariations and product.getStock == 0 %}
         <div class="alert alert-error">
-            {% trans from 'SonataProductBundle' %}sonata_product_out_of_stock{% endtrans %}
+            {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
         </div>
     {% endif %}
 
@@ -42,9 +42,9 @@ file that was distributed with this source code.
             {% block product_price %}
                 {% block product_price_label %}
                     {% if product.hasVariations %}
-                        {% trans from 'SonataProductBundle' %}sonata_product_variation_min_price{% endtrans %}
+                        {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
                     {% else %}
-                        {% trans from 'SonataProductBundle' %}sonata_product_price{% endtrans %}
+                        {% trans from 'SonataProductBundle' %}product_price{% endtrans %}
                     {% endif %}
                 {% endblock %}
                 <span itemprop="price">
@@ -59,7 +59,7 @@ file that was distributed with this source code.
             {% endblock %}
 
             {% if product.hasEnabledVariations %}
-                {% block variations_label %}<h3>{% trans from 'SonataProductBundle' %}sonata_product_variations{% endtrans %}</h3>{% endblock %}
+                {% block variations_label %}<h3>{% trans from 'SonataProductBundle' %}product_variations{% endtrans %}</h3>{% endblock %}
 
                 <ul>
                     {% for variation in product.enabledVariations %}
