@@ -2,7 +2,7 @@
 Installation
 ============
 
-In order to introduce you the way Sonata Ecommerce will allow you to create easily an ecommerce web application, we have written this tutorial based on an existing website to make it more clear. This website is the `NFL Europe online store`_.
+In order to introduce you the way Sonata e-Commerce will allow you to create easily an e-Commerce web application, we have written this tutorial based on an existing website to make it more clear. The website is the `NFL Europe online store`_.
 
 .. toctree::
    :maxdepth: 2

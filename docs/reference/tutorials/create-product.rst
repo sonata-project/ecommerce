@@ -4,13 +4,17 @@ Create a product
 
 Before we start adding any products, we will have to create a *prototype*. A *prototype* is mandatory for any product definition. It can be compared to its skeleton in the application.
 
-In our case, we will need two kind of items : a mug prototype that will have no specific option and a jersey one, which can provide various sizes.
+In our case, we will need two kind of items : 
+* a mug prototype that will have no specific options, 
+* a jersey one, which can provide various sizes.
 
 In order to ease that work, a command has been implemented to create the required files quickly.
 
 Without variation
 =================
-We will start the fastest way : the mug prototype. This step will is splitted in two parts : the "files" configuration to provide every elements required and the "backoffice" configuration, to create the product itself.
+We will start the fastest way : the mug prototype. This step will be splitted in two parts : 
+* the "files" configuration to provide every elements required 
+* the "backoffice" configuration, to create the product itself.
 
 Configuration files
 -------------------
@@ -52,26 +56,27 @@ And finally, add in the ``app/config/sonata/sonata_product.yml`` the following d
 
 Once you are done with this, edit the ``src/Application/Sonata/ProductBundle/Entity/Mug.php`` to make it inherits the ``Product`` class.
 
-Back office configuration
+Backoffice configuration
 -------------------------
-Now that we have all the required files, we can process to the creation of the product itself. Go to the admin dashboard and select "Product" in the "E-Commerce" menu. After clicking on "Add new" on the top right of the page, a list with 3 items type should be displayed :
+Now that we have all the required files, we can process the creation of the product itself. 
+Go to the admin dashboard and select "Product" in the "e-Commerce" menu. After clicking on "Add new" on the top right of the page, a list with 3 items type should be displayed:
 ::
 
     sonata.ecommerce_demo.product.goodie
     sonata.ecommerce_demo.product.training
     sonata.ecommerce_demo.product.mug
 
-This the list of enabled product prototypes for your application (the "goodie" and "training" are part of the original sandbox). So we will select the "mug" one.
+The "goodie" and "training" are part of the original sandbox so we will select the "mug" one.
 
 In the first tab, note that the VAT field must be a percent.
 
-Now switch to the "Categories" tab, and attach our product to the correct category, "Arizona Cardinals" in our case. Don't forget to enable the relation by ticking the checkbox.
+Now switch to the "Categories" tab, and attach our product to the correct category, "Arizona Cardinals" in our case. Don't forget to enable the relation by checking the checkbox.
 
 We will repeat the same process in the "Collection" tab using the "Mugs" collection that we have previously created.
 
 Since the delivery part is covered in a whole chapter, we won't provide any information about it for now.
 
-You should now be able to browse your first product in the frontend part !
+You should now be able to browse your first product in the frontoffice part !
 
 With variation(s)
 =================
