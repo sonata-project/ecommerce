@@ -2,7 +2,6 @@
 namespace Sonata\Component\Currency;
 
 use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
-use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 
 /**

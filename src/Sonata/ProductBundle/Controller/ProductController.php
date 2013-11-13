@@ -60,9 +60,9 @@ class ProductController extends Controller
     }
 
     /**
-     * @param  \Symfony\Component\Form\FormView                    $formView
-     * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
-     * @param  \Sonata\Component\Basket\BasketInterface            $basket
+     * @param \Symfony\Component\Form\FormView                $formView
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
      *
      * @return Response
      */
@@ -89,8 +89,8 @@ class ProductController extends Controller
     }
 
     /**
-     * @param  \Sonata\Component\Basket\BasketElementInterface     $basketElement
-     * @param  \Sonata\Component\Basket\BasketInterface            $basket
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
      *
      * @return Response
      */

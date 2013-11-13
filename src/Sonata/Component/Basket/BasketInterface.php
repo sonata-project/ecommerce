@@ -23,7 +23,7 @@ interface BasketInterface
 {
 
     /**
-     * @param  \Sonata\Component\Product\Pool $pool
+     * @param \Sonata\Component\Product\Pool $pool
      */
     public function setProductPool(Pool $pool);
 
@@ -44,7 +44,7 @@ interface BasketInterface
      *
      * if $element_only is set to true, only elements are checked
      *
-     * @param  boolean $elementsOnly
+     * @param boolean $elementsOnly
      *
      * @return boolean
      */
@@ -216,7 +216,7 @@ interface BasketInterface
     /**
      * return the Delivery price
      *
-     * @param  boolean $vat
+     * @param boolean $vat
      *
      * @return float
      */
@@ -225,7 +225,7 @@ interface BasketInterface
     /**
      * check if the basket contains $product
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param \Sonata\Component\Product\ProductInterface $product
      *
      * @return boolean
      */
@@ -298,7 +298,7 @@ interface BasketInterface
     public function getLocale();
 
     /**
-     * @param  string $locale
+     * @param string $locale
      */
     public function setLocale($locale);
 
@@ -308,7 +308,7 @@ interface BasketInterface
     public function getCurrency();
 
     /**
-     * @param  CurrencyInterface $currency
+     * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency);
 }

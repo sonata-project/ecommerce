@@ -64,7 +64,7 @@ interface ProductManagerInterface
     /**
      * Retrieve an active product from its id and its slug
      *
-     * @param int $id
+     * @param int    $id
      * @param string $slug
      *
      * @return ProductInterface|null

@@ -9,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Currency;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * Class CurrencyDataTransformer
@@ -62,6 +60,5 @@ class CurrencyDataTransformer implements DataTransformerInterface
 
         return $this->currencyManager->findOneByLabel($value);
     }
-
 
 }

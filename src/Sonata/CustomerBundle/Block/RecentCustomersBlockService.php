@@ -35,8 +35,8 @@ class RecentCustomersBlockService extends BaseBlockService
     protected $manager;
 
     /**
-     * @param string                $name
-     * @param EngineInterface       $templating
+     * @param string                   $name
+     * @param EngineInterface          $templating
      * @param CustomerManagerInterface $manager
      */
     public function __construct($name, EngineInterface $templating, CustomerManagerInterface $manager)

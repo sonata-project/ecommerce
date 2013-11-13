@@ -26,7 +26,7 @@ use Sonata\Component\Product\ProductCollectionManagerInterface;
 interface ProductProviderInterface
 {
     /**
-     * @param  \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
+     * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
      */
     public function setBasketElementManager(BasketElementManagerInterface $basketElementManager);
 
@@ -61,34 +61,34 @@ interface ProductProviderInterface
     public function getBaseControllerName();
 
     /**
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  \Symfony\Component\Form\FormBuilder        $formBuilder
-     * @param  array                                      $options
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param \Symfony\Component\Form\FormBuilder        $formBuilder
+     * @param array                                      $options
      */
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array());
 
     /**
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param  \Symfony\Component\Form\FormBuilder             $formBuilder
-     * @param  array                                           $options
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Symfony\Component\Form\FormBuilder             $formBuilder
+     * @param array                                           $options
      */
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array());
 
     /**
      * return true if the basket element is still valid
      *
-     * @param  \Sonata\Component\Basket\BasketInterface        $basket
-     * @param  ProductInterface                                $product
-     * @param  \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param ProductInterface                                $product
+     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * Merge a product with another when the product is already present into the basket
      *
-     * @param  \Sonata\Component\Basket\BasketInterface        $basket
-     * @param  ProductInterface                                $product
-     * @param  \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param ProductInterface                                $product
+     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
@@ -104,8 +104,8 @@ interface ProductProviderInterface
      * allow to update the price of the basket element depend on the presence
      * of another product
      *
-     * @param  \Sonata\Component\Basket\BasketInterface        $basket
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      *
      * @return float the unit price of the basketElement
      */
@@ -114,24 +114,24 @@ interface ProductProviderInterface
     /**
      * Return true if the product can be added to the provided basket
      *
-     * @param  \Sonata\Component\Basket\BasketInterface   $basket
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  array                                      $options
+     * @param \Sonata\Component\Basket\BasketInterface   $basket
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param array                                      $options
      *
      * @return boolean
      */
     public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array());
 
     /**
-     * @param  null|ProductInterface $product
-     * @param  array                 $options
+     * @param null|ProductInterface $product
+     * @param array                 $options
      *
      * @return BasketElementInterface
      */
     public function createBasketElement(ProductInterface $product = null, array $options = array());
 
     /**
-     * @param  \Sonata\AdminBundle\Show\ShowMapper $showMapper
+     * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
      */
     public function configureShowFields(ShowMapper $showMapper);
 

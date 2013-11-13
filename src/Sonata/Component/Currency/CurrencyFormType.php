@@ -32,7 +32,7 @@ class CurrencyFormType extends CurrencyType
      *
      * @param CurrencyDataTransformer $currencyTransformer
      */
-    function __construct(CurrencyDataTransformer $currencyTransformer)
+    public function __construct(CurrencyDataTransformer $currencyTransformer)
     {
         $this->currencyTransformer = $currencyTransformer;
     }

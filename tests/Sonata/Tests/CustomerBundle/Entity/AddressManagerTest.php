@@ -8,11 +8,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\CustomerBundle\Entity;
 
 use Sonata\CustomerBundle\Entity\AddressManager;
-
 
 /**
  * Class AddressManagerTest

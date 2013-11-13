@@ -8,12 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Currency;
 
 use Exception;
 use Sonata\Component\Product\ProductInterface;
-
 
 /**
  * Class UnavailableForCurrencyException

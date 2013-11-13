@@ -18,8 +18,6 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Basket\BasketElementInterface;
-use Sonata\Component\Delivery\ServiceDeliveryInterface;
-use Sonata\ProductBundle\Entity\BaseDelivery;
 
 class ServiceDelivery extends \Sonata\Component\Delivery\BaseServiceDelivery
 {

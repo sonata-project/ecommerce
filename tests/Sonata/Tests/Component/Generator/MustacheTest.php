@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\Component\Generator;
 
 use Sonata\Component\Generator\Mustache;

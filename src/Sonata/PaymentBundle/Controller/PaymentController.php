@@ -12,13 +12,9 @@
 namespace Sonata\PaymentBundle\Controller;
 
 use Doctrine\ORM\EntityNotFoundException;
-use Sonata\Component\Payment\PaymentHandler;
 use Sonata\Component\Payment\PaymentHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Payment\PaymentInterface;
-use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class PaymentController extends Controller

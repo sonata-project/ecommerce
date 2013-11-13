@@ -205,7 +205,6 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->setDeliveryAddress($this->getMockAddress());
         $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check because everything is fine');
 
-
         $this->assertTrue($basket->isAddable($product), '::isAddable() return true');
         $this->assertFalse($basket->hasRecurrentPayment(), '::hasRecurrentPayment() return false');
 

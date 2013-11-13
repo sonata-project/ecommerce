@@ -87,4 +87,3 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->currency->getLabel(), $this->object->getCurrency()->getLabel());
     }
 }
-?>

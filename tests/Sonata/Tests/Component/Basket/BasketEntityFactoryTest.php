@@ -119,7 +119,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
         $tester = $this;
-        $session->expects($this->once())->method('set')->will($this->returnCallback(function($key, $value) use ($tester, $basket) {
+        $session->expects($this->once())->method('set')->will($this->returnCallback(function ($key, $value) use ($tester, $basket) {
             $tester->assertEquals($basket, $value);
             $tester->assertEquals('sonata/basket/factory/customer/new', $key);
         }));

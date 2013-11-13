@@ -13,7 +13,6 @@ namespace Sonata\Component\Currency;
 
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\DBALException;
 use Symfony\Component\Intl\Intl;
 
 /**

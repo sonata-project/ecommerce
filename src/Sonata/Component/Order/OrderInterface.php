@@ -563,7 +563,7 @@ interface OrderInterface
     public function isError();
 
     /**
-     * @param  \DateTime|null $createdAt
+     * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
@@ -573,7 +573,7 @@ interface OrderInterface
     public function getCreatedAt();
 
     /**
-     * @param  \DateTime|null $updatedAt
+     * @param \DateTime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 

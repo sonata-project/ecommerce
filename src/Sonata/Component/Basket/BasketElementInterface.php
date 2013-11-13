@@ -41,8 +41,8 @@ interface BasketElementInterface
     /**
      * Define the related product
      *
-     * @param  string           $productCode
-     * @param  ProductInterface $product
+     * @param string           $productCode
+     * @param ProductInterface $product
      */
     public function setProduct($productCode, ProductInterface $product);
 
@@ -64,7 +64,7 @@ interface BasketElementInterface
      * Never call this method, use the setProduct instead. This method is only used
      * by the form framework
      *
-     * @param  int  $productId
+     * @param int $productId
      */
     public function setProductId($productId);
 
@@ -167,7 +167,7 @@ interface BasketElementInterface
     public function getDelete();
 
     /**
-     * @param  \Sonata\Component\Product\ProductDefinition $productDefinition
+     * @param \Sonata\Component\Product\ProductDefinition $productDefinition
      */
     public function setProductDefinition(ProductDefinition $productDefinition);
 

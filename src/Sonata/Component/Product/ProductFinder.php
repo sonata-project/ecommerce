@@ -8,12 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Product;
-
-use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
-use Sonata\ProductBundle\Entity\ProductCollectionManager;
-
 
 /**
  * Class ProductFinder

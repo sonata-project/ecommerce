@@ -18,7 +18,6 @@ use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
-use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
@@ -191,8 +190,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     //   ORDER RELATED FUNCTIONS
 
     /**
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param  string                                          $format
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param string                                          $format
      *
      * @return \Sonata\Component\Order\OrderElementInterface
      */
@@ -228,9 +227,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  OrderElementInterface $orderElement
-     * @param  string                $type
-     * @param  string                $format
+     * @param OrderElementInterface $orderElement
+     * @param string                $type
+     * @param string                $format
      *
      * @return \Sonata\Component\Product\ProductInterface
      */
@@ -783,9 +782,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * Return true if the product can be added to the provided basket
      *
-     * @param  \Sonata\Component\Basket\BasketInterface   $basket
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  array                                      $options
+     * @param \Sonata\Component\Basket\BasketInterface   $basket
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param array                                      $options
      *
      * @return boolean
      */

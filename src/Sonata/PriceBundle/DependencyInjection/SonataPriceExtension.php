@@ -18,7 +18,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 
 use Symfony\Component\Config\Definition\Processor;
-use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -44,8 +43,8 @@ class SonataPriceExtension extends Extension
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $config
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array                                                   $config
      *
      * @return void
      */

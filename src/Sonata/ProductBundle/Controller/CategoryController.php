@@ -129,9 +129,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param  null $category
-     * @param  int  $depth
-     * @param  int  $deep
+     * @param null $category
+     * @param int  $depth
+     * @param int  $deep
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
@@ -149,7 +149,7 @@ class CategoryController extends Controller
     /**
      * Wrapper to retrieve an active category from its ID and slug if provided
      *
-     * @param int $categoryId
+     * @param int         $categoryId
      * @param null|string $slug
      *
      * @return \Sonata\ClassificationBundle\Model\CategoryInterface|null

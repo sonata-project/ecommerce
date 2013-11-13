@@ -8,13 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\Component\Currency\Types;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
-use Sonata\Component\Currency\UnavailableForCurrencyException;
-
 
 /**
  * Class CurrencyPriceCalculatorTest

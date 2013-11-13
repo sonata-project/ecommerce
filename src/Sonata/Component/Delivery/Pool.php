@@ -24,7 +24,7 @@ class Pool
     /**
      * add a delivery method into the pool
      *
-     * @param  ServiceDeliveryInterface $instance
+     * @param ServiceDeliveryInterface $instance
      */
     public function addMethod(ServiceDeliveryInterface $instance)
     {

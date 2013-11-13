@@ -90,9 +90,9 @@ class CollectionController extends Controller
     }
 
     /**
-     * @param  null $collection
-     * @param  int  $depth
-     * @param  int  $deep
+     * @param null $collection
+     * @param int  $depth
+     * @param int  $deep
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */

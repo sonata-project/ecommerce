@@ -46,7 +46,7 @@ interface DeliveryManagerInterface
     /**
      * Updates a delivery
      *
-     * @param  DeliveryInterface $delivery
+     * @param DeliveryInterface $delivery
      */
     public function updateDelivery(DeliveryInterface $delivery);
 }

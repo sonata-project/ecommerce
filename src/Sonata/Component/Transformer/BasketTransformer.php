@@ -13,7 +13,6 @@ namespace Sonata\Component\Transformer;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
-use Sonata\Component\Delivery\DeliveryInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;

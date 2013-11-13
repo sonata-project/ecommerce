@@ -8,11 +8,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Delivery;
 
 use Sonata\Component\Delivery\FreeDelivery;
-
 
 /**
  * Class FreeDeliveryTest

@@ -8,12 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Form\Transformer;
 
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Payment\PassPayment;
-
 
 /**
  * Class PaymentMethodTransformerTest

@@ -8,11 +8,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketElementManager;
-
 
 /**
  * Class BasketElementManagerTest

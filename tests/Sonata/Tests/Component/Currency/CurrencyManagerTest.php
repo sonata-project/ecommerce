@@ -50,4 +50,3 @@ class CurrencyManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("EUR", $this->object->findOneByLabel("EUR")->getLabel());
     }
 }
-?>

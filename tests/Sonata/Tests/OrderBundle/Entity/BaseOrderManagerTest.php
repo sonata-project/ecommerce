@@ -14,7 +14,7 @@ use Sonata\OrderBundle\Entity\OrderManager;
 
 class OrderElement
 {
-    
+
 }
 
 /**

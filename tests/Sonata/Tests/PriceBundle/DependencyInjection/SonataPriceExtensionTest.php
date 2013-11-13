@@ -12,9 +12,7 @@
 namespace Sonata\Tests\PriceBundle\DependencyInjection;
 
 use Sonata\PriceBundle\DependencyInjection\SonataPriceExtension;
-use Symfony\Component\Yaml\Parser;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 
 /**
  * @author Hugo Briand <briand@ekino.com>

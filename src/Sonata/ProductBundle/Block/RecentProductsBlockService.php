@@ -39,9 +39,9 @@ class RecentProductsBlockService extends BaseBlockService
     protected $currencyDetector;
 
     /**
-     * @param string                    $name
-     * @param EngineInterface           $templating
-     * @param EntityManager             $entityManager
+     * @param string          $name
+     * @param EngineInterface $templating
+     * @param EntityManager   $entityManager
      * @parem CurrencyDetectorInterface $currencyDetector
      */
     public function __construct($name, EngineInterface $templating, EntityManager $entityManager, CurrencyDetectorInterface $currencyDetector)

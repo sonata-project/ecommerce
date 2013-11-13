@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Currency\CurrencyDetectorInterface;

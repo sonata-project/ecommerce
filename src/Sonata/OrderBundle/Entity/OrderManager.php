@@ -111,7 +111,6 @@ class OrderManager implements OrderManagerInterface
         return $qb->getQuery()->execute();
     }
 
-
     /**
      * Deletes a order
      *

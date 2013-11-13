@@ -8,11 +8,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\Component\Currency\Types;
 
 use Sonata\Component\Currency\CurrencyFormType;
-
 
 /**
  * Class CurrencyFormTypeTest

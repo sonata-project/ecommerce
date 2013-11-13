@@ -142,7 +142,6 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $basketElement->setOption('option3', 'value3');
         $this->assertEquals('value3', $basketElement->getOption('option3'));
 
-
         // Other getters & setters
         $this->assertEquals($provider, $basketElement->getProductProvider());
         $this->assertEquals($manager, $basketElement->getProductManager());

@@ -10,7 +10,6 @@
 
 namespace Sonata\ProductBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;

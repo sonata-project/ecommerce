@@ -25,7 +25,7 @@ interface ProductCollectionManagerInterface
     /**
      * Deletes a ProductCollection
      *
-     * @param  ProductCollectionInterface $productCollection
+     * @param ProductCollectionInterface $productCollection
      *
      * @return void
      */
@@ -34,7 +34,7 @@ interface ProductCollectionManagerInterface
     /**
      * Finds one ProductCollection by the given criteria
      *
-     * @param  array $criteria
+     * @param array $criteria
      *
      * @return ProductCollectionInterface
      */
@@ -50,7 +50,7 @@ interface ProductCollectionManagerInterface
     /**
      * Updates a ProductCollection
      *
-     * @param  ProductCollectionInterface $productCollection
+     * @param ProductCollectionInterface $productCollection
      *
      * @return void
      */

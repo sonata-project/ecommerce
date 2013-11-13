@@ -41,7 +41,6 @@ class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
         $order->expects($this->once())->method('getBillingPhone');
         $order->expects($this->once())->method('getReference');
 
-
         $currency = new Currency();
         $currency->setLabel('EUR');
         $order->expects($this->once())->method('getCurrency')->will($this->returnValue($currency));

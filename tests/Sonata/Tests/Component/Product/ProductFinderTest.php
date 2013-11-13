@@ -8,11 +8,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Product;
 
 use Sonata\Component\Product\ProductFinder;
-
 
 /**
  * Class ProductFinderTest

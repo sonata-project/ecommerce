@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Form\Type;
 
-
 use Sonata\Component\Delivery\Pool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -47,7 +46,7 @@ class DeliveryChoiceType extends AbstractType
     {
         $choices = array();
 
-        foreach($this->pool->getMethods() as $name => $instance) {
+        foreach ($this->pool->getMethods() as $name => $instance) {
             $choices[$name] = $instance->getName();
         }
 

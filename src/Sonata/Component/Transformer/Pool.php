@@ -43,7 +43,7 @@ class Pool
     /**
      * return a Transformer Object
      *
-     * @param  string $type
+     * @param string $type
      *
      * @return BaseTransformer
      */

@@ -13,7 +13,6 @@ namespace Sonata\OrderBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sonata\Component\Order\OrderManagerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sonata\Component\Customer\CustomerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 

@@ -61,7 +61,6 @@ class RecentOrdersBlockService extends BaseBlockService
         $this->customerManager = $customerManager;
         $this->securityContext = $securityContext;
 
-
         parent::__construct($name, $templating);
     }
 

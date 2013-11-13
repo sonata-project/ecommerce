@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\ProductBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -38,8 +37,7 @@ class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase
         try {
             $cmdTester->execute(array('command' => $cmd->getName()));
             $this->fail('The command without arguments should throw a \RuntimeException');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf('\RuntimeException', $e);
         }
 
@@ -49,8 +47,7 @@ class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase
                 'product' => 'Test'
             ));
             $this->fail('The command without "service_id" argument should throw a \RuntimeException');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf('\RuntimeException', $e);
         }
 
@@ -61,8 +58,7 @@ class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase
                 'product' => 'Test',
                 'service_id' => 2
             ));
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('No exception should be thrown when all arguments are provided');
         } */
     }

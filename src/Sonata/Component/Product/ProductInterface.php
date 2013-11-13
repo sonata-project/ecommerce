@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Product;
 
-use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;

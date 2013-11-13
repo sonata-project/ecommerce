@@ -45,7 +45,7 @@ class Pool
     /**
      * return a PaymentInterface Object
      *
-     * @param  string $code
+     * @param string $code
      *
      * @return PaymentInterface
      */

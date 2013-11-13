@@ -8,12 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Delivery;
 
 use Exception;
 use Sonata\Component\Customer\AddressInterface;
-
 
 /**
  * Class UndeliverableCountryException

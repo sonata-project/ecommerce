@@ -393,7 +393,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param  \DateTime|null $createdAt
+     * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -409,7 +409,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param  \DateTime|null $createdAt
+     * @param \DateTime|null $createdAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
@@ -442,7 +442,7 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @param string $name
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      */
@@ -574,7 +574,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * if $vat = true, return the price with vat
      *
-     * @param  boolean $vat
+     * @param boolean $vat
      *
      * @return float
      */

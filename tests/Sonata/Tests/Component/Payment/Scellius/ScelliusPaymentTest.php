@@ -40,6 +40,7 @@ class ScelliusPaymentTest_Order extends BaseOrder
         if (null === $this->currency) {
             return new Currency();
         }
+
         return $this->currency;
     }
 
@@ -215,8 +216,6 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
 
         $payment->applyTransactionId($transaction);
     }
-
-
 
     /**
      * @expectedException \RuntimeException

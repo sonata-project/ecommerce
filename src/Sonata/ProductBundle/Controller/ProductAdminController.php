@@ -46,8 +46,7 @@ class ProductAdminController extends Controller
     {
         $manager = $this->getProductManager();
 
-        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE'))
-        {
+        if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
             throw new AccessDeniedException();
         }
 

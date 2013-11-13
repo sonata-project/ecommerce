@@ -84,7 +84,7 @@ class ProductCollectionManager implements ProductCollectionManagerInterface
     /**
      * Finds one productCollection by the given criteria
      *
-     * @param  array $criteria
+     * @param array $criteria
      *
      * @return ProductCollectionInterface
      */

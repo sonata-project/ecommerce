@@ -44,8 +44,8 @@ interface ServiceDeliveryInterface
     /**
      * Return the delivery price
      *
-     * @param  \Sonata\Component\Basket\BasketInterface $basket
-     * @param  bool                                     $vat
+     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param bool                                     $vat
      *
      * @return float
      */
@@ -54,7 +54,7 @@ interface ServiceDeliveryInterface
     /**
      * Return the vat amount
      *
-     * @param  \Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      *
      * @return float
      */

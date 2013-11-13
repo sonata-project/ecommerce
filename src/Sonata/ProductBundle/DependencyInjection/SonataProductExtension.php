@@ -92,7 +92,6 @@ class SonataProductExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-
         /**
          * DELIVERY
          */

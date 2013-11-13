@@ -15,7 +15,6 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
-use Sonata\InvoiceBundle\Entity\BaseInvoice;
 
 class InvoiceAdmin extends Admin
 {

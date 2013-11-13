@@ -11,7 +11,6 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\ProductCollectionInterface;
-use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;

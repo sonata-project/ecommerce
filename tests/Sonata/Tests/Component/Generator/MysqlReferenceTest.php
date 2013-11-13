@@ -86,8 +86,7 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
         try {
             $mysqlReference->invoice($invoice);
             $this->fail('->invoice() call should raise a \RuntimeException for a new entity');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf('\RuntimeException', $e);
         }
 
@@ -95,8 +94,7 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
 
         try {
             $this->assertNull($mysqlReference->invoice($invoice));
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->fail('->invoice() should return a NULL value but should now throw an \Exception');
         }
     }
@@ -109,8 +107,7 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
         try {
             $mysqlReference->order($order);
             $this->fail('->order() call should raise a \RuntimeException for a new entity');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf('\RuntimeException', $e);
         }
 
@@ -118,9 +115,7 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
 
         try {
             $this->assertNull($mysqlReference->order($order));
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->fail('->order() should return a NULL value but should not throw an \Exception');
         }
     }

@@ -39,7 +39,7 @@ interface PaymentInterface
     public function sendbank(OrderInterface $order);
 
     /**
-     * @param  TransactionInterface $transaction
+     * @param TransactionInterface $transaction
      *
      * @return Response
      */
@@ -55,7 +55,7 @@ interface PaymentInterface
     /**
      * Method called when an error occurs
      *
-     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -74,7 +74,7 @@ interface PaymentInterface
      *
      * WARNING : this methods does not check if the callback is valid
      *
-     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
      * @return boolean true if all parameter are ok
      */
@@ -83,7 +83,7 @@ interface PaymentInterface
     /**
      * return true is the basket is valid for the current bank gateway
      *
-     * @param  \Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Basket\BasketInterface $basket
      *
      * @return boolean
      */
@@ -115,7 +115,7 @@ interface PaymentInterface
     /**
      * return the order reference from the transaction
      *
-     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
      * @return string
      */

@@ -8,13 +8,11 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Payment;
 
 use Sonata\Component\Payment\Paypal;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Order\OrderInterface;
-
 
 /**
  * Class PaypalTest
@@ -92,9 +90,9 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function() use ($check) {
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
                     $asked = func_get_arg(0);
-                    switch($asked) {
+                    switch ($asked) {
                         case 'check':
                             return $check;
                         case 'payment_status':
@@ -107,9 +105,9 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function() use ($check) {
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
                     $asked = func_get_arg(0);
-                    switch($asked) {
+                    switch ($asked) {
                         case 'check':
                             return $check;
                         case 'payment_status':
@@ -122,9 +120,9 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function() use ($check) {
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
                     $asked = func_get_arg(0);
-                    switch($asked) {
+                    switch ($asked) {
                         case 'check':
                             return $check;
                         case 'payment_status':

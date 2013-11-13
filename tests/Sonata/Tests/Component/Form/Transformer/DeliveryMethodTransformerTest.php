@@ -8,12 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Form\Transformer;
 
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
-
 
 /**
  * Class DeliveryMethodTransformerTest

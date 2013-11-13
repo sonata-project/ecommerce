@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Currency;
 
-
 /**
  * @author Hugo Briand <briand@ekino.com>
  */

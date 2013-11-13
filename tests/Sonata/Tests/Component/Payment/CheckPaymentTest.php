@@ -89,7 +89,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
 
         $client = $this->getMock('Buzz\Client\ClientInterface');
-        $client->expects($this->once())->method('send')->will($this->returnCallback(function($request, $response) {
+        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response) {
             $response->setContent('ok');
         }));
 

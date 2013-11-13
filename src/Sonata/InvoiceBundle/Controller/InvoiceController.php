@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\Component\Transformer\InvoiceTransformer;
-use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Customer\CustomerInterface;
 
 class InvoiceController extends Controller
@@ -34,7 +33,7 @@ class InvoiceController extends Controller
      * @param string $reference
      *
      * @return Response
-     * 
+     *
      * @throws AccessDeniedHttpException
      */
     public function viewAction($reference)

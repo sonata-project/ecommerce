@@ -8,12 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Form\EventListener;
 
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
 use Symfony\Component\Form\FormEvents;
-
 
 /**
  * Class BasketResizeFormListenerTest
@@ -156,6 +154,7 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($productProvider));
 
         $elements[] = $basketElement;
+
         return $elements;
     }
 }

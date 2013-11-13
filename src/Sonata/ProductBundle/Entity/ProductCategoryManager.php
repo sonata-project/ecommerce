@@ -84,7 +84,7 @@ class ProductCategoryManager implements ProductCategoryManagerInterface
     /**
      * Finds one productCategory by the given criteria
      *
-     * @param  array $criteria
+     * @param array $criteria
      *
      * @return ProductCategoryInterface
      */

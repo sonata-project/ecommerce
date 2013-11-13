@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\ProductBundle\Model;
 
 use Sonata\ProductBundle\Model\BaseProductProvider;
@@ -51,8 +50,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         try {
             $productProvider->createVariation($product); // Product simulates a variation
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf('RuntimeException', $e);
         }
     }
@@ -174,8 +172,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         try {
             $productProvider->basketMergeProduct($basket, $product, $basketElement);
             $this->fail('->basketMergeProduct() should throw a \RuntimeException for an invalid product ID');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertInstanceOf('\RuntimeException', $e);
         }
 

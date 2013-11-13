@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Product;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,7 +15,6 @@ use Exporter\Source\DoctrineDBALConnectionSourceIterator;
 use Exporter\Source\SourceIteratorInterface;
 use Exporter\Source\SymfonySitemapSourceIterator;
 use Symfony\Component\Routing\RouterInterface;
-
 
 /**
  * Class SeoProductIterator

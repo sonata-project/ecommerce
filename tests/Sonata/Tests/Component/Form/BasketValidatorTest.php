@@ -8,12 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Tests\Component\Form;
 
 use Sonata\Component\Form\BasketValidator;
 use Symfony\Component\Validator\Constraints\NotBlank;
-
 
 /**
  * Class BasketValidatorTest
