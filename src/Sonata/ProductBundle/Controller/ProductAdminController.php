@@ -56,9 +56,6 @@ class ProductAdminController extends Controller
             foreach ($products as $product) {
                 $productProvider = $this->getProductPool()->getProvider($product);
 
-                $productProvider->setProductCategoryManager($this->getProductCategoryManager());
-                $productProvider->setProductCollectionManager($this->getProductCollectionManager());
-
                 $variation = $productProvider->createVariation($product);
 
                 $manager->persist($variation);
@@ -94,25 +91,5 @@ class ProductAdminController extends Controller
     protected function getProductManager()
     {
         return $this->get('sonata.product.entity_manager');
-    }
-
-    /**
-     * Return the ProductCategory manager.
-     *
-     * @return \Sonata\Component\Product\ProductCategoryManagerInterface
-     */
-    protected function getProductCategoryManager()
-    {
-        return $this->get('sonata.product_category.product');
-    }
-
-    /**
-     * Return the ProductCollection manager.
-     *
-     * @return \Sonata\Component\Product\ProductCollectionManagerInterface
-     */
-    protected function getProductCollectionManager()
-    {
-        return $this->get('sonata.product_collection.product');
     }
 }
