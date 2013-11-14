@@ -292,17 +292,36 @@
             </trans-unit>
             <!-- End - Product view translations -->
 
-            <trans-unit id="flash_batch_create_variation_success">
-                <source>flash_batch_create_variation_success</source>
+            <!-- Begin - Product create variations -->
+            <trans-unit id="product.sidemenu.link_add_variation">
+                <source>product.sidemenu.link_add_variation</source>
+                <target>Ajouter une variation</target>
+            </trans-unit>
+            <trans-unit id="product.title.create_variations">
+                <source>product.title.create_variations</source>
+                <target>Création de variations</target>
+            </trans-unit>
+            <trans-unit id="product.submit.create_variations">
+                <source>product.submit.create_variations</source>
+                <target>Créer les variations</target>
+            </trans-unit>
+            <trans-unit id="variations_number">
+                <source>variations_number</source>
+                <target>Nombre de variations</target>
+            </trans-unit>
+            <trans-unit id="flash_create_variation_success">
+                <source>flash_create_variation_success</source>
                 <target>Création de la variation du produit réussie!</target>
             </trans-unit>
-            <trans-unit id="flash_batch_create_variation_error">
-                <source>flash_batch_create_variation_error</source>
+            <trans-unit id="flash_create_variation_error">
+                <source>flash_create_variation_error</source>
                 <target>Création de la variation du produit en erreur!</target>
             </trans-unit>
-            <trans-unit id="action_create_variation">
-                <source>action_create_variation</source>
-                <target>Créer une variation</target>
+            <!-- End - Product create variations -->
+
+            <trans-unit id="product.sidemenu.link_product_edit">
+                <source>product.sidemenu.link_product_edit</source>
+                <target>Product</target>
             </trans-unit>
             <trans-unit id="no_product_found">
                 <source>no_product_found</source>

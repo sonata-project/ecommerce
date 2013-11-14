@@ -14,6 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProductAdminController extends Controller
@@ -42,35 +43,80 @@ class ProductAdminController extends Controller
         return parent::createAction();
     }
 
-    public function batchActionCreateVariation(ProxyQueryInterface $productQuery)
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function showVariationsAction()
     {
-        $manager = $this->getProductManager();
+        $id = $this->getRequest()->get($this->admin->getIdParameter());
+
+        if (!$product = $this->admin->getObject($id)) {
+            throw new NotFoundHttpException('Product not found.');
+        }
+
+        return $this->render('SonataProductBundle:ProductAdmin:variations.html.twig', array(
+            'product' => $product,
+        ));
+    }
+
+    /**
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function createVariationAction()
+    {
+        $id = $this->getRequest()->get($this->admin->getIdParameter());
+
+        if (!$product = $this->admin->getObject($id)) {
+            throw new NotFoundHttpException('Product not found.');
+        }
 
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
             throw new AccessDeniedException();
         }
 
-        $products = $productQuery->execute();
+        $form = $this->createFormBuilder(null, array())
+            ->add('number', 'integer', array(
+                'required' => true,
+                'label'    => $this->getTranslator()->trans('variations_number', array(), 'SonataProductBundle')))
+            ->getForm();
 
-        try {
-            foreach ($products as $product) {
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->submit($this->getRequest());
+
+            if ($form->isValid()) {
+                $number = $form->get('number')->getData();
+
+                $manager         = $this->getProductManager();
                 $productProvider = $this->getProductPool()->getProvider($product);
 
-                $variation = $productProvider->createVariation($product);
+                for ($i = 1; $i <= $number; $i++) {
+                    try {
+                        $variation = $productProvider->createVariation($product);
 
-                $manager->persist($variation);
+                        $manager->persist($variation);
+                    } catch (\Exception $e) {
+                        $this->addFlash('sonata_flash_error', 'flash_create_variation_error');
+
+                        return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
+                    }
+                }
+
+                $manager->flush();
+
+                $this->addFlash('sonata_flash_success', 'flash_create_variation_success');
+
+                return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
             }
-
-            $manager->flush();
-        } catch (\Exception $e) {
-            $this->addFlash('sonata_flash_error', 'flash_batch_create_variation_error');
-
-            return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
         }
 
-        $this->addFlash('sonata_flash_success', 'flash_batch_create_variation_success');
-
-        return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
+        return $this->render('SonataProductBundle:ProductAdmin:create_variation.html.twig', array(
+            'object' => $product,
+            'form'   => $form->createView(),
+            'action' => 'edit',
+        ));
     }
 
     /**
@@ -81,6 +127,16 @@ class ProductAdminController extends Controller
     protected function getProductPool()
     {
         return $this->get('sonata.product.pool');
+    }
+
+    /**
+     * Return the Product Pool.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Translation\Translator
+     */
+    protected function getTranslator()
+    {
+        return $this->get('translator');
     }
 
     /**

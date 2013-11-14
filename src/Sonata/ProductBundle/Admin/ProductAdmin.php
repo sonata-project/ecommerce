@@ -12,13 +12,16 @@
 namespace Sonata\ProductBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class ProductAdmin extends Admin
 {
@@ -99,6 +102,16 @@ class ProductAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->add('createVariation', $this->getRouterIdParameter() . '/variation/create')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function configureFormFields(FormMapper $formMapper)
     {
         // this admin class works only from a request scope
@@ -119,6 +132,33 @@ class ProductAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id      = $admin->getRequest()->get('id');
+        $product = $this->getObject($id);
+
+        $menu->addChild(
+            $this->trans('product.sidemenu.link_product_edit', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
+
+        if (!$product->isVariation()) {
+            $menu->addChild(
+                $this->trans('product.sidemenu.link_add_variation', array(), 'SonataProductBundle'),
+                array('uri' => $admin->generateUrl('createVariation', array('id' => $id)))
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPersistentParameters()
     {
         if (!$this->hasRequest()) {
@@ -128,27 +168,6 @@ class ProductAdmin extends Admin
         return array(
             'provider' => $this->getProductType(),
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBatchActions()
-    {
-        $actions = parent::getBatchActions();
-
-        if (
-            $this->hasRoute('edit')   && $this->isGranted('EDIT') &&
-            $this->hasRoute('delete') && $this->isGranted('DELETE')
-        ) {
-            $actions['createVariation'] = array(
-                'label'            => $this->trans('action_create_variation', array(), 'SonataProductBundle'),
-                'ask_confirmation' => true
-            );
-
-        }
-
-        return $actions;
     }
 
     /**
