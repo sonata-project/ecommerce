@@ -8,7 +8,7 @@ Paypal setup
 Presentation
 ============
 
-``#TODO``
+Paypal is a CreditCard and web payment provider. Here's how to configure it in order to use it in your application.
 
 Configuration
 =============
