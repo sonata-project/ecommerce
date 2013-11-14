@@ -1,19 +1,23 @@
 ============
-Installation
+Introduction
 ============
 
-In order to introduce you the way Sonata e-Commerce will allow you to create easily an e-Commerce web application, we have written this tutorial based on an existing website to make it more clear. The website is the `NFL Europe online store`_.
+In order to help you manage e-commerce web application based on Sonata, you'll find here tutorials that will help you deal with the installation and the understanding of the e-commerce bundles of Sonata.
+
+This first tutorial provides a simple use case that allows you selling jerseys and mugs.
+
+At the moment, let's make it simple! Other use cases will be added shortly.
+
+So, let's get started!
 
 .. toctree::
    :maxdepth: 2
 
-    Install Sonata Demo <install>
+    Install the Sonata demo <install>
     Create a category <create-category>
     Create a collection <create-collection>
     Create a product <create-product>
     Create a delivery method <create-delivery-method>
     Create a payment method <create-payment-method>
-    Extend Sonata ECommerce <extend>
+    Extend the e-commerce part of Sonata <extend>
     Interact with other bundles <interact>
-
-.. _NFL Europe online store: http://europe.nflshop.com/

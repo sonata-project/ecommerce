@@ -2,18 +2,24 @@
 Create a category
 =================
 
-Single category
+Category
 ===============
-Browse the Sonata demo and go to the admin dashboard (default accesses are ``admin``/``admin``).
+Browse the Sonata demo and go to the admin dashboard.
+Default login and password are ``admin``/``admin``.
 
-In the ``Classification`` menu, select ``Categories``.
+* In the ``Classification`` menu, select ``Categories``,
+* On the top right of the page, click on the ``Add new`` button.
+* Fill in the form with at least a name and a media.
 
-On the top right of the page, click on ``Add new``.
+Note: If you don't specify the ``position`` for a category, categories will be displayed in the order they are created.
 
-Fill in the form providing, at least, a name. You can also add a picture on the fly. If don't specify the ``position`` field value, categories will be displayed in the order they were created.
-
-We will then create a root category named "Teams" and enable it.
+We will then create a root category named *Dishes* and enable it.
 
 Sub-category
 ============
-Repeat the `Single category`_ process, and provide the parent category for two sub categories : "AFC" and "NFC". In those subcategories, we will create a "New England Patriots" in the "AFC" category, and the "Arizona Cardinals" and the "NFC" one in order to have a three level tree. Once again, don't forget to enable it and then check that everything is properly displayed in the frontend.
+Repeat the process explained below providing the parent category for two sub-categories:
+
+* Bowl
+* Spoon
+
+Once again, don't forget to enable them and then check that everything is properly displayed in the frontoffice.
