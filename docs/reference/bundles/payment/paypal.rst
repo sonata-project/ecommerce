@@ -21,10 +21,10 @@ URL: http://youwebsite.com/shop/payment/callback
 
 2. Retrieve paypal public certificate (paypal_cert_pem.txt)
 
-  - Go to https://www.paypal.com/fr/cgi-bin/webscr?cmd=_profile-website-cert 
+  - Go to https://www.paypal.com/fr/cgi-bin/webscr?cmd=_profile-website-cert
   - Click *Download*
   - Put this file somewhere in your project
-  
+
 3. Generate your private and public keys [f1]_
 
 .. code-block:: bash
@@ -35,7 +35,7 @@ URL: http://youwebsite.com/shop/payment/callback
     $ openssl req -new -key my-prvkey.pem -x509 -days 365 -out my-pubcert.pem
 
 Then:
-    - Go to https://www.paypal.com/fr/cgi-bin/webscr?cmd=_profile-website-cert 
+    - Go to https://www.paypal.com/fr/cgi-bin/webscr?cmd=_profile-website-cert
     - Press *Upload*
     - Select the ``my-pubcert.pem`` file
 
@@ -54,7 +54,7 @@ Then:
                 options:
                     cert_id:            CERTIFICATE ID # related to the cert_file file
                     account:            PAYPAL ACCOUNT NUMBER
-                    debug:              false 
+                    debug:              false
                     class_order:        Application\Sonata\OrderBundle\Entity\Order
                     url_callback:       sonata_payment_callback
                     url_return_ko:      sonata_payment_error
@@ -74,4 +74,4 @@ Then:
 
 .. rubric:: Footnotes
 
-.. [#f1] A good way to do it is explained here: http://help.ubuntu.com/community/SSH/OpenSSH/Keys
+.. [f1] A good way to do it is explained here: http://help.ubuntu.com/community/SSH/OpenSSH/Keys
