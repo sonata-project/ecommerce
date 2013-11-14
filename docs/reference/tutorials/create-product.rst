@@ -14,6 +14,7 @@ In order to ease that work, a command has been implemented to create the require
 Without variation
 =================
 We will start the fastest way : the mug prototype. This step will be splitted in two parts : 
+
 * the "files" configuration to provide every elements required 
 * the "backoffice" configuration, to create the product itself.
 
@@ -69,7 +70,7 @@ Go to the admin dashboard and select "Product" in the "e-Commerce" menu. After c
 
 The "goodie" and "training" are part of the original sandbox so we will select the "mug" one.
 
-In the first tab, note that the VAT field must be a percent.
+In the first tab, note that the VAT type of field must be a percent.
 
 Now switch to the "Categories" tab, and attach our product to the correct category, "Arizona Cardinals" in our case. Don't forget to enable the relation by checking the checkbox.
 
@@ -86,7 +87,7 @@ Configuration files
 -------------------
 In order to create a product with a variation (a jersey in our example), we will have to repeat the same steps as explained in the previous chapter, in the "Configuration files" part. For the purpose of this exemple, we will use ``Jersey`` as entity name and ``sonata.ecommerce_demo.product.jersey`` as service name.
 
-Once you've completed the whole process, we will now learn how to add variable fields. In our case, it will be the size. To do so, add the "size" property in the entity (``src/Application/Sonata/ProductBundle/Entity/Jersey.php``)
+Once you've completed the whole process, we will learn how to add variable fields. In our case, it will be the size. To do so, add the "size" property in the entity (``src/Application/Sonata/ProductBundle/Entity/Jersey.php``)
 ::
 
     /**
