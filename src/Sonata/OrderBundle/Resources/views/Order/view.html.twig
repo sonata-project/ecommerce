@@ -9,16 +9,34 @@ file that was distributed with this source code.
 
 #}
 
+{% block sonata_order_title %}
 <h1>{% trans from 'SonataOrderBundle' %}sonata.order.title_order{% endtrans %}</h1>
+<p><a href="{{ url('sonata_invoice_view', {'reference' : order.reference}) }}">{% trans from 'SonataOrderBundle' %}sonata.order.view_invoice{% endtrans %}</a></p>
+{% endblock %}
 
+{% block sonata_order_top %}
 <div class="row">
-    <div class="span6">
-        <p>{% trans with {'%orderId%' : order.id} from 'SonataOrderBundle' %}sonata.order.view.order_with_id{% endtrans %}</p>
-
-        <p><a href="{{ url('sonata_invoice_view', {'reference' : order.reference}) }}">{% trans from 'SonataOrderBundle' %}sonata.order.view_invoice{% endtrans %}</a></p>
+    <div class="span8">
+        {% block sonata_order_top_left %}
+        <div class="row-fluid">
+            <div class="span6">
+                {% block sonata_order_delivery %}
+                <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_title{% endtrans %}</h4>
+                <p>{{ order.getFullDelivery('<br/>')|raw }}</p>
+                {% endblock %}
+            </div>
+            <div class="span6">
+                {% block sonata_order_billing %}
+                <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.billing_title{% endtrans %}</h4>
+                <p>{{ order.getFullBilling('<br/>')|raw }}</p>
+                {% endblock %}
+            </div>
+        </div>
+        {% endblock %}
     </div>
     <div class="span4">
-        <p>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_references{% endtrans %}</p>
+        {% block sonata_order_top_right %}
+        <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_references{% endtrans %}</h4>
         <table class="table table-bordered">
             <tr>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.invoice{% endtrans %}</th>
@@ -33,30 +51,38 @@ file that was distributed with this source code.
                 <td>{{ order.createdAt|date('Y-m-d') }}</td>
             </tr>
         </table>
+        {% endblock %}
     </div>
 </div>
+{% endblock %}
 
+{% block sonata_order_elements %}
 <!-- Elements -->
 <div class="row">
-    <div class="span10">
-        <p>{% trans from 'SonataOrderBundle' %}sonata.order.view.elements{% endtrans %}</p>
+    <div class="span12">
+        <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.elements{% endtrans %}</h4>
         <table class="table table-bordered">
             <tr>
+                {% block sonata_order_elements_header %}
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.id{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
+                {% endblock %}
             </tr>
             {% for element in order.orderElements %}
                 <tr>
+                    {% block sonata_order_element %}
                     <td>{{ element.id }}</td>
                     <td>{{ element.designation }}</td>
                     <td>{{ element.quantity }}</td>
                     <td>{{ element.vat|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                     <td>{{ element.price|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                    {% endblock %}
                 </tr>
             {% endfor %}
+            {% block sonata_order_elements_sumup %}
             <tr>
                 <td colspan="3" rowspan="4">&nbsp;</td>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
@@ -74,6 +100,11 @@ file that was distributed with this source code.
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
                 <td>{{ order.totalInc|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
             </tr>
+            {% endblock %}
         </table>
     </div>
 </div>
+{% endblock %}
+
+{% block sonata_order_footer %}
+{% endblock %}

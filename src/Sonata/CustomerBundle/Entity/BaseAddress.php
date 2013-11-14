@@ -85,6 +85,42 @@ abstract class BaseAddress implements AddressInterface
      */
     protected $customer;
 
+    /**
+     * Formats an address in an array form
+     *
+     * @param array  $address The address array (required keys: firstname, lastname, address1, postcode, city, country_code)
+     * @param string $sep     The address separator
+     *
+     * @return string
+     */
+    public static function formatAddress(array $address, $sep = ", ")
+    {
+        $values = array_map('trim', array(
+                sprintf("%s %s", $address['firstname'], $address['lastname']),
+                $address['address1'],
+                $address['postcode'],
+                $address['city']
+            ));
+
+        foreach ($values as $key => $val) {
+            if (!$val) {
+                unset($values[$key]);
+            }
+        }
+
+        $fullAddress = implode($sep, $values);
+
+        if ($countryCode = trim($address['country_code'])) {
+            if ($fullAddress) {
+                $fullAddress .= " ";
+            }
+
+            $fullAddress .= sprintf("(%s)", $countryCode);
+        }
+
+        return $fullAddress;
+    }
+
     public function __construct()
     {
         $this->setCurrent(false);
@@ -386,32 +422,23 @@ abstract class BaseAddress implements AddressInterface
         return $this->name;
     }
 
+    /**
+     * @param string $sep
+     *
+     * @return string
+     */
     public function getFullAddress($sep = ", ")
     {
-        $values = array_map('trim', array(
-            sprintf("%s %s", $this->getFirstname(), $this->getLastname()),
-            $this->getAddress1(),
-            $this->getPostcode(),
-            $this->getCity()
-        ));
-
-        foreach ($values as $key => $val) {
-            if (!$val) {
-                unset($values[$key]);
-            }
-        }
-
-        $fullAddress = implode($sep, $values);
-
-        if ($countryCode = trim($this->getCountryCode())) {
-            if ($fullAddress) {
-                $fullAddress .= " ";
-            }
-
-            $fullAddress .= sprintf("(%s)", $countryCode);
-        }
-
-        return $fullAddress;
+        return self::formatAddress(
+            array(
+                'firstname'    => $this->getFirstName(),
+                'lastname'     => $this->getLastname(),
+                'address1'     => $this->getAddress1(),
+                'postcode'     => $this->getPostcode(),
+                'city'         => $this->getCity(),
+                'country_code' => $this->getCountryCode()
+            ), $sep
+        );
     }
 
     public function setCustomer(CustomerInterface $customer)
