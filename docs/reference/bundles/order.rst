@@ -36,4 +36,7 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
                         ApplicationSonataOrderBundle: ~
                         SonataOrderBundle: ~
 
-For more information about our position regarding *order*, you can read: :doc:`../architecture/order`.
+Architecture
+============
+
+For more information about our position regarding the *order* architecture, you can read: :doc:`../architecture/order`.

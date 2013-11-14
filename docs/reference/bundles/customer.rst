@@ -36,4 +36,7 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
                         ApplicationSonataCustomerBundle: ~
                         SonataCustomerBundle: ~
 
-For more information about our position regarding *customer*, you can read: :doc:`../architecture/customer`.
+Architecture
+============
+
+For more information about our position regarding the *customer* architecture, you can read: :doc:`../architecture/customer`.
