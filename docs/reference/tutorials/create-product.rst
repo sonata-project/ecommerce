@@ -4,7 +4,8 @@ Create a product
 
 Before we start adding any products, we will have to create a *prototype*. A *prototype* is mandatory for any product definition. It can be compared to its skeleton in the application.
 
-In our case, we will need two kind of items : 
+In our case, we will need two kind of items:
+
 * a mug prototype that will have no specific options, 
 * a jersey one, which can provide various sizes.
 
