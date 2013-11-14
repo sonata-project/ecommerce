@@ -9,6 +9,7 @@ In order to introduce you the way Sonata e-Commerce will allow you to create eas
 
     Install Sonata Demo <install>
     Create a category <create-category>
+    Create a collection <create-collection>
     Create a product <create-product>
     Create a delivery method <create-delivery-method>
     Create a payment method <create-payment-method>
