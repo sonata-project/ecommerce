@@ -190,12 +190,12 @@ class OrderAdmin extends Admin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('order.sidemenu.link_order_edit', array(), 'SonataOrderBundle'),
+            $this->trans('sonata.order.sidemenu.link_order_edit', array(), 'SonataOrderBundle'),
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
         );
 
         $menu->addChild(
-            $this->trans('order.sidemenu.link_order_elements_list', array(), 'SonataOrderBundle'),
+            $this->trans('sonata.order.sidemenu.link_order_elements_list', array(), 'SonataOrderBundle'),
             array('uri' => $admin->generateUrl('sonata.order.admin.order_element.list', array('id' => $id)))
         );
 
@@ -204,12 +204,12 @@ class OrderAdmin extends Admin
 
         if (null === $invoice) {
             $menu->addChild(
-                $this->trans('order.sidemenu.link_order_invoice_generate', array(), 'SonataOrderBundle'),
+                $this->trans('sonata.order.sidemenu.link_order_invoice_generate', array(), 'SonataOrderBundle'),
                 array('uri' => $admin->generateUrl('generateInvoice', array('id' => $id)))
             );
         } else {
             $menu->addChild(
-                $this->trans('order.sidemenu.link_order_invoice_edit', array(), 'SonataOrderBundle'),
+                $this->trans('sonata.order.sidemenu.link_order_invoice_edit', array(), 'SonataOrderBundle'),
                 array('uri' => $admin->getRouteGenerator()->generate('admin_sonata_invoice_invoice_edit', array('id' => $invoice->getId())))
             );
         }

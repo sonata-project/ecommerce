@@ -124,7 +124,7 @@ class BasketTransformer extends BaseTransformer
             $order->setShippingPostcode($deliveryAddress->getPostcode());
             $order->setShippingCity($deliveryAddress->getCity());
             $order->setShippingCountryCode($deliveryAddress->getCountryCode());
-            $order->setShippingName($deliveryAddress->getName());
+            $order->setShippingName($deliveryAddress->getFirstname()." ".$deliveryAddress->getLastname());
             $order->setShippingPhone($deliveryAddress->getPhone());
         }
 
@@ -134,7 +134,7 @@ class BasketTransformer extends BaseTransformer
         $order->setBillingPostcode($billingAddress->getPostcode());
         $order->setBillingCity($billingAddress->getCity());
         $order->setBillingCountryCode($billingAddress->getCountryCode());
-        $order->setBillingName($billingAddress->getName());
+        $order->setBillingName($billingAddress->getFirstname()." ".$billingAddress->getLastname());
         $order->setBillingPhone($billingAddress->getPhone());
 
         $order->setTotalExcl($basket->getTotal());

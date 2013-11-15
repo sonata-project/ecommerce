@@ -8,7 +8,7 @@ Ogone setup
 Presentation
 ============
 
-``#TODO``
+Ogone is a CreditCard payment provider. Here's how to configure it in order to use it in your application.
 
 Configuration
 =============

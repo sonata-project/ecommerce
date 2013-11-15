@@ -9,6 +9,7 @@ use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyInterface;
 
 use Application\Sonata\PaymentBundle\Entity\Transaction;
+use Sonata\CustomerBundle\Entity\BaseAddress;
 
 /**
  * Sonata\OrderBundle\Entity\BaseOrder
@@ -207,6 +208,50 @@ abstract class BaseOrder implements OrderInterface
     public function __toString()
     {
         return $this->getReference() ?: 'n/a';
+    }
+
+    /**
+     * Returns formatted delivery address
+     *
+     * @param string $sep
+     *
+     * @return string
+     */
+    public function getFullDelivery($sep = ", ")
+    {
+        return BaseAddress::formatAddress(
+            array(
+                'firstname'    => $this->getShippingName(),
+                'lastname'     => "",
+                'address1'     => $this->getShippingAddress1(),
+                'postcode'     => $this->getShippingPostcode(),
+                'city'         => $this->getShippingCity(),
+                'country_code' => $this->getShippingCountryCode()
+            ),
+            $sep
+        );
+    }
+
+    /**
+     * Returns formatted billing address
+     *
+     * @param string $sep
+     *
+     * @return string
+     */
+    public function getFullBilling($sep = ", ")
+    {
+        return BaseAddress::formatAddress(
+            array(
+                'firstname'    => $this->getBillingName(),
+                'lastname'     => "",
+                'address1'     => $this->getBillingAddress1(),
+                'postcode'     => $this->getBillingPostcode(),
+                'city'         => $this->getBillingCity(),
+                'country_code' => $this->getBillingCountryCode()
+            ),
+            $sep
+        );
     }
 
     /**

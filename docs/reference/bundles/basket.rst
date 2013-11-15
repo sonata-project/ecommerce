@@ -20,9 +20,9 @@ Several actions are provided by the controller:
 * ``deliveryAddressStep``: (step 2) renders the delivery address form and handles its submission
 * ``deliveryStep``: (step 3) renders the delivery method (shipping) selection form and handles its submission
 * ``paymentStep``: (step 4) renders the payment method selection form and handles its submission
-* ``finalReviewStep``: (step 5) renders the terms & conditions acceptance form and handles its submission
-* ``headerPreview``: Renders the preview of the basket
-* ``authentificationStep``: Retrieves the customer and links it to the basket
+* ``finalReviewStep``: (step 5) renders the basket status before payment, terms & conditions acceptance form and handles its submission
+* ``headerPreview``: Renders the preview of the basket (to put in a header)
+* ``authentificationStep``: Retrieves the customer related to the logged in user and links it to the basket ; this will redirect to the authentication form if the user is not logged in.
 
 There are two ways to deal with Basket storage:
 
@@ -48,6 +48,8 @@ To enable DB storage, you'll need to change the following configuration values:
                     mappings:
                         ApplicationSonataBasketBundle: ~
                         SonataBasketBundle: ~
+
+Please note that if you don't do so, you won't be able to retrieve a user's basket if he loggs in from a different computer. Default factory is set to session factory.
 
 Configuration
 =============
@@ -88,4 +90,7 @@ Here's the full default configuration for SonataBasketBundle:
 As you can see, you can override the builder, factory & loader services ; basket, basket_element & customer classes and the various forms.
 Moreover, you're able to override the rest of the bundle by extending it (through SonataEasyExtendsBundle for instance).
 
-For more information about our position regarding *basket*, you can read: :doc:`../architecture/basket`.
+Architecture
+============
+
+For more information about our position regarding the *basket* architecture, you can read: :doc:`../architecture/basket`.

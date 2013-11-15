@@ -11,7 +11,7 @@ Presentation
 
 The SonataOrderBundle basically manages the Order-related entities & managers, offers AdminBundle integration and provides a basic controller and basic views to display the orders.
 
-Moreover, the RecentOrders admin dashboard block is present in this bundle as well.
+Moreover, the RecentOrders admin & front dashboard block is present in this bundle as well.
 
 Configuration
 =============
@@ -36,4 +36,7 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
                         ApplicationSonataOrderBundle: ~
                         SonataOrderBundle: ~
 
-For more information about our position regarding *order*, you can read: :doc:`../architecture/order`.
+Architecture
+============
+
+For more information about our position regarding the *order* architecture, you can read: :doc:`../architecture/order`.

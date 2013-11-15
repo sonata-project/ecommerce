@@ -16,6 +16,7 @@ You already have a project and want to add e-commerce capabilities to it? Follow
 
     - Symfony2
     - PHP 5.3.2
+    - Composer
 
 - Add the project to your composer.json
 
@@ -29,12 +30,13 @@ You already have a project and want to add e-commerce capabilities to it? Follow
     
 
 - Run ``composer install`` command
-
 - Follow the FOSUserBundle README to set it up
-
-- Follow the EasyExtendsBundle README
-
-- Follow the MediaBundle README
+- Follow the SonataUserBundle README
+- Follow the SonataEasyExtendsBundle README
+- Follow the SonataMediaBundle README
+- Follow the SonataAdminBundle README
+- Follow the SonataBlockBundle README
+- Follow the SonataPageBundle README
 
 - Add the following bundles in your ``kernel::registerBundles()`` method:
 
