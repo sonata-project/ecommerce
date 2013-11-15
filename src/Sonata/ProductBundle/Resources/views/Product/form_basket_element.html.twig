@@ -20,7 +20,7 @@ file that was distributed with this source code.
                 {{ basketElement.product.description|raw }}
             {% endblock %}
         </td>
-        <td>
+        <td class="number">
             {% block product_unit_price %}
                 {{ basketElement.getUnitPrice(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}
             {% endblock %}
@@ -31,7 +31,7 @@ file that was distributed with this source code.
                 {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini'}}) }}
             {% endblock %}
         </td>
-        <td>
+        <td class="number">
             {% block product_total %}
                 {{ basketElement.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}
             {% endblock %}

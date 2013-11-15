@@ -32,7 +32,7 @@ file that was distributed with this source code.
                             <td><a href="{{ url('sonata_order_view', { 'reference': order.reference }) }}">{{ order.reference }}</a></td>
                         {% endif %}
                         <td>{{ order.statusName|trans({}, 'SonataOrderBundle') }}</td>
-                        <td>{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
+                        <td class="number">{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
                         <td>{{ order.createdAt|date() }}</td>
                     </tr>
                 {% endfor %}
