@@ -46,7 +46,7 @@ file that was distributed with this source code.
                     <td>{{ invoice.postcode }}</td>
                 </tr>
                 <tr>
-                    <td>{{ invoice.city ~ ' in ' ~ invoice.country | country }}</td>
+                    <td>{{ invoice.city }} ({{ invoice.country | country }})</td>
                 </tr>
                 <tr>
                     <td>{{ invoice.phone }}</td>
