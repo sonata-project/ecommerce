@@ -15,7 +15,7 @@ Configuration
 
 Here's how to configure Ogone for Sonata e-commerce:
 
-1. Go to the Ogone configuration portal: 
+1. Go to the Ogone configuration portal:
     1. ``Technical Settings`` -> ``Global Security Parameters`` ; set ``Hash Algorithm`` to ``SHA-1``
     2. ``Technical Settings`` -> ``Data and origin verification`` ; add your various domain(s) URL(s) separated by ';' (no spaces)
     3. ``Technical Settings`` -> ``Data and origin verification`` ; fill in your SHA-IN pass phrase (keep it, you'll need it for your app config)
@@ -26,18 +26,17 @@ Here's how to configure Ogone for Sonata e-commerce:
                 1. If the payment's status is "accepted", "on hold" or "uncertain" -> ``{your_host}/payment/callback``
                 2. If the payment's status is "cancelled by the client" or "too many rejections by the acquirer". -> ``{your_host}/payment/error``
         3. ``SHA-OUT pass phrase`` ; fill in with the same key as the one you've given for the SHA-IN
-            
+
 
 2. Configure the payment gateway according to the values you'll get with your Ogone account (or you'll fill in the Ogone admin)
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_payment:
         services:
-        
+
             # ...
-        
+
             ogone:
                 name:                   ogone
                 enabled:                true
@@ -61,10 +60,10 @@ Here's how to configure Ogone for Sonata e-commerce:
                     sha-out_key:        "%ogone.sha-out_key%"
 
             # ...
-            
+
         parameters:
             # ...
-            
+
             # If you've overridden the OgonePayment class
             sonata.payment.method.ogone.class:      "Application\\Sonata\\Component\\Payment\\Ogone\\OgonePayment"
             #...

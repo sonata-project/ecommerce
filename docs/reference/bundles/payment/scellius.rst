@@ -14,7 +14,6 @@ Configuration
 =============
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_payment:
         # ...
@@ -59,4 +58,3 @@ Configuration
                     advert:
                     background_id:
                     templatefile:
-            

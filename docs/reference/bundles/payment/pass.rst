@@ -8,7 +8,7 @@ Pass setup
 Presentation
 ============
 
-Pass payment simulates a payment provider inside the application. If the application uses it, it will call itself over HTTP (it needs to be self-reachable through its URL) and systematically validate the payment. This is the method used by default by the Sonata demo. 
+Pass payment simulates a payment provider inside the application. If the application uses it, it will call itself over HTTP (it needs to be self-reachable through its URL) and systematically validate the payment. This is the method used by default by the Sonata demo.
 
 You may want to use this for free products for instance, this will allow you to keep a track of the "payment" transactions even though they didn't occur.
 
@@ -16,7 +16,6 @@ Configuration
 =============
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_payment:
         # ...
@@ -36,4 +35,3 @@ Configuration
                     url_callback:         sonata_payment_callback
                     url_return_ko:        sonata_payment_error
                     url_return_ok:        sonata_payment_confirmation
-            

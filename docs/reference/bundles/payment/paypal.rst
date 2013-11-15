@@ -28,7 +28,6 @@ URL: http://youwebsite.com/shop/payment/callback
 3. Generate your private and public keys [f1]_
 
 .. code-block:: bash
-    :linenos:
 
     $ cd yoursite/keys
     $ sudo openssl genrsa -out my-prvkey.pem 1024
@@ -42,7 +41,6 @@ Then:
 4. Configure the payment gateway
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_payment.config:
         methods:

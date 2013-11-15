@@ -22,15 +22,14 @@ Methods
     Paypal <paypal>
     Check <check>
     Pass <pass>
-    
-    
+
+
 Configuration
 =============
 
 Here's the full default configuration for SonataPaymentBundle:
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_payment:
         selector:             sonata.payment.selector.simple

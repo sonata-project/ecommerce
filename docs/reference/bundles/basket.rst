@@ -32,7 +32,6 @@ There are two ways to deal with Basket storage:
 To enable DB storage, you'll need to change the following configuration values:
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_basket:
         # ...
@@ -57,7 +56,6 @@ Configuration
 Here's the full default configuration for SonataBasketBundle:
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_basket:
 

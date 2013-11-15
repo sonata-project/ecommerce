@@ -14,7 +14,6 @@ The SonataProductBundle basically manages the Product-related entities & manager
 It offers a console command to easily generate a new product type in your application:
 
 .. code-block:: bash
-    :linenos:
 
     Usage:
      sonata:product:generate product service_id
@@ -51,7 +50,6 @@ Configuration
 The bundle allows you to configure the entity classes ; you'll also need to register the doctrine mapping.
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_product:
         products:

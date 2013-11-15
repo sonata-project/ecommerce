@@ -14,7 +14,6 @@ Configuration
 =============
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_payment:
         # ...
@@ -34,4 +33,3 @@ Configuration
                     url_callback:         sonata_payment_callback
                     url_return_ko:        sonata_payment_error
                     url_return_ok:        sonata_payment_confirmation
-                    

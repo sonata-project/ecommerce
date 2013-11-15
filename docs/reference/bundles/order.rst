@@ -19,7 +19,6 @@ Configuration
 The bundle allows you to configure the entity classes ; you'll also need to register the doctrine mapping.
 
 .. code-block:: yaml
-    :linenos:
 
     sonata_order:
         class:
