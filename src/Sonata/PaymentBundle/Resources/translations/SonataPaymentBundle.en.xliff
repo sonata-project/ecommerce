@@ -35,7 +35,7 @@
       </trans-unit>
       <trans-unit id="title_not_validated_confirmation_payment">
         <source>title_not_validated_confirmation_payment</source>
-        <target>Confirmation payment unvalid</target>
+        <target>Confirmation payment invalid</target>
       </trans-unit>
       <trans-unit id="title_pending_confirmation_payment">
         <source>title_pending_confirmation_payment</source>
@@ -121,9 +121,9 @@
         <source>cancelled</source>
         <target>Cancelled</target>
       </trans-unit>
-      <trans-unit id="status_unknow">
-        <source>status_unknow</source>
-        <target>Unkown</target>
+      <trans-unit id="status_unknown">
+        <source>status_unknown</source>
+        <target>Unknown</target>
       </trans-unit>
       <trans-unit id="error_validation">
         <source>error_validation</source>

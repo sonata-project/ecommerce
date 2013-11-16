@@ -44,7 +44,7 @@ class InvoiceManager implements InvoiceManagerInterface
     }
 
     /**
-     * Creates an empty medie instance
+     * Creates an empty Invoice instance
      *
      * @return Invoice
      */
@@ -58,7 +58,7 @@ class InvoiceManager implements InvoiceManagerInterface
     /**
      * Updates a invoice
      *
-     * @param  Invoice $invoice
+     * @param  InvoiceInterface $invoice
      * @return void
      */
     public function updateInvoice(InvoiceInterface $invoice)
@@ -91,7 +91,7 @@ class InvoiceManager implements InvoiceManagerInterface
     /**
      * Deletes a invoice
      *
-     * @param  Invoice $invoice
+     * @param  InvoiceInterface $invoice
      * @return void
      */
     public function deleteInvoice(InvoiceInterface $invoice)

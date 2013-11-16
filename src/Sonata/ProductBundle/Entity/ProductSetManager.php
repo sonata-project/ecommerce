@@ -29,7 +29,7 @@ class ProductSetManager extends ProductManager
     }
 
     /**
-     * Creates an empty medie instance
+     * Creates an empty ProductSet instance
      *
      * @throws \RuntimeException
      *
@@ -41,7 +41,7 @@ class ProductSetManager extends ProductManager
     }
 
     /**
-     * Creates an empty medie instance
+     * Creates an empty ProductSet instance
      *
      * @param \Sonata\Component\Product\ProductInterface $product
      *

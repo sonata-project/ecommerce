@@ -41,7 +41,7 @@ class TransactionManager implements TransactionManagerInterface
     }
 
     /**
-     * Creates an empty medie instance
+     * Creates an empty Transaction instance
      *
      * @return Transaction
      */

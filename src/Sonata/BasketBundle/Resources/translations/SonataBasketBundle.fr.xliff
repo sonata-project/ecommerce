@@ -88,7 +88,7 @@
             </trans-unit>
             <trans-unit id="sonata.basket.title_address_delivery_step_basket">
                 <source>sonata.basket.title_address_delivery_step_basket</source>
-                <target>Addresse de livraison sélectionnée</target>
+                <target>Adresse de livraison sélectionnée</target>
             </trans-unit>
             <trans-unit id="sonata.basket.title_billing_address">
                 <source>sonata.basket.title_billing_address</source>

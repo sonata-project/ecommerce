@@ -61,7 +61,7 @@ class AddressManager implements AddressManagerInterface
     /**
      * Updates an address
      *
-     * @param  Address $address
+     * @param  AddressInterface $address
      * @return void
      */
     public function save(AddressInterface $address)
@@ -116,7 +116,7 @@ class AddressManager implements AddressManagerInterface
     /**
      * Deletes an address
      *
-     * @param  Address $address
+     * @param  AddressInterface $address
      * @return void
      */
     public function delete(AddressInterface $address)

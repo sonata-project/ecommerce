@@ -14,7 +14,7 @@ interface AddressManagerInterface
 {
 
     /**
-     * Creates an empty medie instance
+     * Creates an empty Address instance
      *
      * @return Address
      */
@@ -23,7 +23,7 @@ interface AddressManagerInterface
     /**
      * Deletes a address
      *
-     * @param  Address $address
+     * @param  AddressInterface $address
      * @return void
      */
     public function delete(AddressInterface $address);
@@ -61,7 +61,7 @@ interface AddressManagerInterface
     /**
      * Saves an address
      *
-     * @param  Address $address
+     * @param  AddressInterface $address
      * @return void
      */
     public function save(AddressInterface $address);

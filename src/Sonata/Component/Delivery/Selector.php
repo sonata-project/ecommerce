@@ -56,7 +56,7 @@ class Selector implements ServiceDeliverySelectorInterface
     }
 
     /**
-     * @param LoggerInterface
+     * @param LoggerInterface $logger
      */
     public function setLogger(LoggerInterface $logger)
     {

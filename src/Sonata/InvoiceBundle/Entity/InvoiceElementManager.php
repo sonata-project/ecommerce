@@ -59,7 +59,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     /**
      * Updates a invoiceElement
      *
-     * @param  InvoiceElement $invoice
+     * @param  InvoiceElementInterface $invoice
      * @return void
      */
     public function save(InvoiceElementInterface $invoice)
@@ -103,7 +103,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     /**
      * Deletes a invoice
      *
-     * @param  InvoiceElement $invoiceElement
+     * @param  InvoiceElementInterface $invoiceElement
      * @return void
      */
     public function delete(InvoiceElementInterface $invoice)

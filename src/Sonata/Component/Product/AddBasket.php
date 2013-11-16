@@ -47,7 +47,7 @@ class AddBasket
     /**
      * The product id is only set if there is not product attached to this object
      *
-     * @param integet $productId the product id
+     * @param integer $productId the product id
      */
     public function setProductId($productId)
     {

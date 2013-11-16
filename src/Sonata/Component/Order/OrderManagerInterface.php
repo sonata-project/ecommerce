@@ -69,7 +69,7 @@ interface OrderManagerInterface
     /**
      * Updates a order
      *
-     * @param  Order $order
+     * @param  OrderInterface $order
      * @return void
      */
     public function save(OrderInterface $order);

@@ -409,7 +409,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param \DateTime|null $createdAt
+     * @param \DateTime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {

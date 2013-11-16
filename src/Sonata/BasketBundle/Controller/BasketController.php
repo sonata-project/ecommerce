@@ -165,7 +165,7 @@ class BasketController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function authentificationStepAction()
+    public function authenticationStepAction()
     {
         $customer = $this->get('sonata.customer.selector')->get();
 

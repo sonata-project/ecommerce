@@ -16,7 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  *
- * Ressources :
+ * Resources :
  *
  * Paypal Encryption
  *  https://www.paypal.com/IntegrationCenter/ic_button-encryption.html#Createanencryptedbutton
@@ -146,18 +146,18 @@ abstract class BasePaypal extends BasePayment
         // cert file
         if (!file_exists($cert_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emergency('Merchant certificat file not found');
+                $this->getLogger()->emergency('Merchant certificate file not found');
             }
 
-            throw new \RuntimeException('Merchant certificat file not found');
+            throw new \RuntimeException('Merchant certificate file not found');
         }
 
         if (!is_readable($cert_file)) {
             if ($this->getLogger()) {
-                $this->getLogger()->emergency('Merchant certificat file is not readable');
+                $this->getLogger()->emergency('Merchant certificate file is not readable');
             }
 
-            throw new \RuntimeException('Merchant certificat file is not readable');
+            throw new \RuntimeException('Merchant certificate file is not readable');
         }
 
         // paypal cert file

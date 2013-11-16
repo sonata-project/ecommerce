@@ -267,7 +267,7 @@ class Paypal extends BasePaypal
 
         $params = $transaction->getParameters();
         $params['cmd'] = '_notify-validate';
-        $this->getLogger()->
+        //$this->getLogger()->
         // retrieve the client
         $client = $this
             ->getWebConnectorProvider()

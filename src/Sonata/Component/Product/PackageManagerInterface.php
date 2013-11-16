@@ -14,7 +14,7 @@ namespace Sonata\Component\Product;
 interface PackageManagerInterface
 {
     /**
-     * Creates an empty medie instance
+     * Creates an empty Package instance
      *
      * @return Package
      */
@@ -23,7 +23,7 @@ interface PackageManagerInterface
     /**
      * Deletes a package
      *
-     * @param  Package $package
+     * @param  PackageInterface $package
      * @return void
      */
     public function deletePackage(PackageInterface $package);
@@ -46,7 +46,7 @@ interface PackageManagerInterface
     /**
      * Updates a package
      *
-     * @param  Package $package
+     * @param  PackageInterface $package
      * @return void
      */
     public function updatePackage(PackageInterface $package);

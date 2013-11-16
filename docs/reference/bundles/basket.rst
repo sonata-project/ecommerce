@@ -22,7 +22,7 @@ Several actions are provided by the controller:
 * ``paymentStep``: (step 4) renders the payment method selection form and handles its submission
 * ``finalReviewStep``: (step 5) renders the basket status before payment, terms & conditions acceptance form and handles its submission
 * ``headerPreview``: Renders the preview of the basket (to put in a header)
-* ``authentificationStep``: Retrieves the customer related to the logged in user and links it to the basket ; this will redirect to the authentication form if the user is not logged in.
+* ``authenticationStep``: Retrieves the customer related to the logged in user and links it to the basket ; this will redirect to the authentication form if the user is not logged in.
 
 There are two ways to deal with Basket storage:
 

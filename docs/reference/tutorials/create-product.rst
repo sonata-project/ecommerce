@@ -14,7 +14,7 @@ In order to create these 2 prototypes, a command has been implemented to quickly
 Product without variation
 =========================
 
-We will start with the easiest way: the *bowl prototype*. This step will be splitted in two parts:
+We will start with the easiest way: the *bowl prototype*. This step will be split in two parts:
 
 * configuration via *files'* edition, to provide every required element
 * configuration via the *backoffice*, to create the product itself
