@@ -58,7 +58,7 @@ class OrderElementManager implements OrderElementManagerInterface
     /**
      * Updates a orderElement
      *
-     * @param  OrderElement $orderElement
+     * @param  OrderElementInterface $orderElement
      * @return void
      */
     public function save(OrderElementInterface $orderElement)
@@ -102,7 +102,7 @@ class OrderElementManager implements OrderElementManagerInterface
     /**
      * Deletes an orderElement
      *
-     * @param  OrderElement $orderElement
+     * @param  OrderElementInterface $orderElement
      * @return void
      */
     public function delete(OrderElementInterface $orderElement)

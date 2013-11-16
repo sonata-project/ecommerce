@@ -22,8 +22,9 @@ class Pool
     protected $transformer = array();
 
     /**
-     * add a tranformer into into the pool
+     * Add a transformer into into the pool
      *
+     * @param string          $type
      * @param BaseTransformer $instance
      */
     public function addTransformer($type, BaseTransformer $instance)

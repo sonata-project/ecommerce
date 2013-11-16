@@ -217,7 +217,7 @@ interface ProductInterface
     /**
      * Set Package collection.
      *
-     * @param ArrayCollection $package
+     * @param ArrayCollection $packages
      */
     public function setPackages(ArrayCollection $packages);
 

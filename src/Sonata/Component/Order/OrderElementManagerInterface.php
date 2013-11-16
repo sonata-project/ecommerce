@@ -23,7 +23,7 @@ interface OrderElementManagerInterface
     /**
      * Deletes a orderElement
      *
-     * @param  OrderElement $orderElement
+     * @param  OrderElementInterface $orderElement
      * @return void
      */
     public function delete(OrderElementInterface $orderElement);
@@ -54,7 +54,7 @@ interface OrderElementManagerInterface
     /**
      * Updates an orderElement
      *
-     * @param  OrderElement $orderElement
+     * @param  OrderElementInterface $orderElement
      * @return void
      */
     public function save(OrderElementInterface $orderElement);

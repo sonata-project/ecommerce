@@ -36,17 +36,17 @@ abstract class BaseAddress implements AddressInterface
     protected $lastname;
 
     /**
-     * @var string $addr1
+     * @var string $address1
      */
     protected $address1;
 
     /**
-     * @var string $addr2
+     * @var string $address2
      */
     protected $address2;
 
     /**
-     * @var string $addr3
+     * @var string $address3
      */
     protected $address3;
 
@@ -159,7 +159,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get current
      *
-     * @return boolean $current
+     * @return boolean
      */
     public function getCurrent()
     {
@@ -205,7 +205,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get firstname
      *
-     * @return string $firstname
+     * @return string
      */
     public function getFirstname()
     {
@@ -225,7 +225,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get lastname
      *
-     * @return string $lastname
+     * @return string
      */
     public function getLastname()
     {
@@ -233,9 +233,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set addr1
+     * Set address1
      *
-     * @param string $addr1
+     * @param string $address1
      */
     public function setAddress1($address1)
     {
@@ -243,9 +243,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get addr1
+     * Get address1
      *
-     * @return string $addr1
+     * @return string
      */
     public function getAddress1()
     {
@@ -253,9 +253,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set addr2
+     * Set address2
      *
-     * @param string $addr2
+     * @param string $address2
      */
     public function setAddress2($address2)
     {
@@ -263,9 +263,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get addr2
+     * Get address2
      *
-     * @return string $addr2
+     * @return string
      */
     public function getAddress2()
     {
@@ -273,9 +273,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set addr3
+     * Set address3
      *
-     * @param string $addr3
+     * @param string $address3
      */
     public function setAddress3($address3)
     {
@@ -283,9 +283,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get addr3
+     * Get address3
      *
-     * @return string $addr3
+     * @return string
      */
     public function getAddress3()
     {
@@ -305,7 +305,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get postcode
      *
-     * @return string $postcode
+     * @return string
      */
     public function getPostcode()
     {
@@ -325,7 +325,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get city
      *
-     * @return string $city
+     * @return string
      */
     public function getCity()
     {
@@ -333,9 +333,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set country
+     * Set countryCode
      *
-     * @param string $country
+     * @param string $countryCode
      */
     public function setCountryCode($countryCode)
     {
@@ -343,9 +343,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get country
+     * Get countryCode
      *
-     * @return string $country
+     * @return string
      */
     public function getCountryCode()
     {
@@ -365,7 +365,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get phone
      *
-     * @return string $phone
+     * @return string
      */
     public function getPhone()
     {
@@ -385,7 +385,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get updatedAt
      *
-     * @return \Datetime $updatedAt
+     * @return \Datetime
      */
     public function getUpdatedAt()
     {
@@ -405,7 +405,7 @@ abstract class BaseAddress implements AddressInterface
     /**
      * Get createdAt
      *
-     * @return \Datetime $createdAt
+     * @return \Datetime
      */
     public function getCreatedAt()
     {

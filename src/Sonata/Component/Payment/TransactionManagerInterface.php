@@ -16,14 +16,14 @@ interface TransactionManagerInterface
     /**
      * Creates an empty transaction instance
      *
-     * @return Transaction
+     * @return TransactionInterface
      */
     public function create();
 
     /**
      * Deletes a transaction
      *
-     * @param  transaction * $transaction
+     * @param  TransactionInterface $transaction
      * @return void
      */
     public function delete(TransactionInterface $transaction);
@@ -54,7 +54,7 @@ interface TransactionManagerInterface
     /**
      * Updates a transaction
      *
-     * @param  Transaction $transaction
+     * @param  TransactionInterface $transaction
      * @return void
      */
     public function save(TransactionInterface $transaction);

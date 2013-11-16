@@ -23,7 +23,7 @@ interface CustomerManagerInterface
     /**
      * Deletes a customer
      *
-     * @param  Customer $customer
+     * @param  CustomerInterface $customer
      * @return void
      */
     public function delete(CustomerInterface $customer);
@@ -58,7 +58,7 @@ interface CustomerManagerInterface
     /**
      * Saves a customer
      *
-     * @param  Customer $customer
+     * @param  CustomerInterface $customer
      * @return void
      */
     public function save(CustomerInterface $customer);

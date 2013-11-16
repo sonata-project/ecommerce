@@ -197,8 +197,8 @@ interface BasketInterface
     /**
      * return the total of the basket
      * if $vat = true, return price with vat
-     * if $recurrent_only = true, return price for recurent product only
-     * if $recurrent_only = false, return price for non recurent product only
+     * if $recurrent_only = true, return price for recurrent product only
+     * if $recurrent_only = false, return price for non recurrent product only
      *
      * @param boolean $vat
      * @param boolean $recurrentOnly

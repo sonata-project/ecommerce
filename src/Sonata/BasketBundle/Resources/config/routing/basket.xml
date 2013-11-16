@@ -20,8 +20,8 @@
         <default key="_controller">SonataBasketBundle:Basket:reset</default>
     </route>
 
-    <route id="sonata_basket_authentification" pattern="/step/authentification">
-        <default key="_controller">SonataBasketBundle:Basket:authentificationStep</default>
+    <route id="sonata_basket_authentication" pattern="/step/authentication">
+        <default key="_controller">SonataBasketBundle:Basket:authenticationStep</default>
     </route>
 
     <route id="sonata_basket_delivery_address" pattern="/step/address">

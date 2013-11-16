@@ -28,7 +28,7 @@ Currently, the order process is implemented as follows:
 - The customer proceeds to checkout
 - And he is invited to complete his profile, Sonata provides two options for this:
     
-    The customer creats an account/authenticate on the website (option set by default when you installed the sonata framework) 
+    The customer creates an account/authenticate on the website (option set by default when you installed the sonata framework)
     Or he fills a list of information in a one-time order. In that case, we store his informations in the basket, and he needs to fill the form for each order he will make.
 
 - He selects his delivery option

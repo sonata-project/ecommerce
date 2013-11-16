@@ -45,7 +45,7 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * Creates an empty medie instance
+     * Creates an empty order instance
      *
      * @return Order
      */
@@ -59,7 +59,7 @@ class OrderManager implements OrderManagerInterface
     /**
      * Updates a order
      *
-     * @param  Order $order
+     * @param  OrderInterface $order
      * @return void
      */
     public function save(OrderInterface $order)
@@ -114,7 +114,7 @@ class OrderManager implements OrderManagerInterface
     /**
      * Deletes a order
      *
-     * @param  Order $order
+     * @param  OrderInterface $order
      * @return void
      */
     public function delete(OrderInterface $order)

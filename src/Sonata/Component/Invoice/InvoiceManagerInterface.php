@@ -23,7 +23,7 @@ interface InvoiceManagerInterface
     /**
      * Deletes a invoice
      *
-     * @param  Invoice $invoice
+     * @param  InvoiceInterface $invoice
      * @return void
      */
     public function deleteInvoice(InvoiceInterface $invoice);
@@ -46,7 +46,7 @@ interface InvoiceManagerInterface
     /**
      * Updates a invoice
      *
-     * @param  Invoice $invoice
+     * @param  InvoiceInterface $invoice
      * @return void
      */
     public function updateInvoice(InvoiceInterface $invoice);

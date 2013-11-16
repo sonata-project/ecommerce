@@ -39,7 +39,7 @@ class OrderElementAdmin extends Admin
     }
 
     /**
-     * @param Pool $pool
+     * @param Pool $productPool
      */
     public function setProductPool(Pool $productPool)
     {

@@ -179,7 +179,6 @@ class PaymentHandler implements PaymentHandlerInterface
 
     /**
      * @param Request $request
-     * @param         $bank
      *
      * @return \Sonata\Component\Payment\TransactionInterface
      *

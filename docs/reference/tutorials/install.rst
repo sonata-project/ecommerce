@@ -66,7 +66,7 @@ Notes:
 * The ``update-core-routes`` populates the database with pages from the routing information. 
 * The ``create-snapshots`` create a snapshot (a public page version) from the created pages.
 
-For more information about these last commands, we recommand you to read the `dedicated documentation`_. 
+For more information about these last commands, we recommend you to read the `dedicated documentation`_.
 
 Fixtures
 ========

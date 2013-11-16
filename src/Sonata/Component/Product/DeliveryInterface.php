@@ -13,23 +13,23 @@ namespace Sonata\Component\Product;
 interface DeliveryInterface
 {
     /**
-     * Set productId
+     * Set product
      *
-     * @param integer $productId
+     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
     /**
-     * Get productId
+     * Get product
      *
-     * @return integer $productId
+     * @return ProductInterface
      */
     public function getProduct();
 
     /**
      * Set class_name
      *
-     * @param string $className
+     * @param string $code
      */
     public function setCode($code);
 
@@ -55,9 +55,9 @@ interface DeliveryInterface
     public function getPerItem();
 
     /**
-     * Set country
+     * Set country code
      *
-     * @param string $country
+     * @param string $countryCode
      */
     public function setCountryCode($countryCode);
 

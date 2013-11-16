@@ -121,8 +121,8 @@
         <source>cancelled</source>
         <target>Annulé</target>
       </trans-unit>
-      <trans-unit id="status_unknow">
-        <source>status_unknow</source>
+      <trans-unit id="status_unknown">
+        <source>status_unknown</source>
         <target>Inconnu</target>
       </trans-unit>
       <trans-unit id="error_validation">

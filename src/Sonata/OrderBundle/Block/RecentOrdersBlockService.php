@@ -51,9 +51,11 @@ class RecentOrdersBlockService extends BaseBlockService
     protected $securityContext;
 
     /**
-     * @param string                $name
-     * @param EngineInterface       $templating
-     * @param OrderManagerInterface $manager
+     * @param string                   $name
+     * @param EngineInterface          $templating
+     * @param OrderManagerInterface    $orderManager
+     * @param CustomerManagerInterface $customerManager
+     * @param SecurityContextInterface $securityContext
      */
     public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, SecurityContextInterface $securityContext)
     {

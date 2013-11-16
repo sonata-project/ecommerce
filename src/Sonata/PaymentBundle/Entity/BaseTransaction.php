@@ -184,7 +184,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return
+     * @return string
      */
     public function getStatusCode()
     {
@@ -218,7 +218,7 @@ class BaseTransaction implements TransactionInterface
             TransactionInterface::STATUS_PENDING           => 'pending',
             TransactionInterface::STATUS_VALIDATED         => 'validated',
             TransactionInterface::STATUS_CANCELLED         => 'cancelled',
-            TransactionInterface::STATUS_UNKNOWN           => 'status_unknow',
+            TransactionInterface::STATUS_UNKNOWN           => 'status_unknown',
             TransactionInterface::STATUS_ERROR_VALIDATION  => 'error_validation',
             TransactionInterface::STATUS_WRONG_CALLBACK    => 'wrong_callback',
             TransactionInterface::STATUS_WRONG_REQUEST     => 'wrong_request',
@@ -262,7 +262,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return
+     * @return string
      */
     public function getPaymentCode()
     {

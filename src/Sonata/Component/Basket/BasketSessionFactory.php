@@ -74,7 +74,7 @@ class BasketSessionFactory extends BaseBasketFactory
 
         $this->basketBuilder->build($basket);
 
-        // always clone the basket so it can be only savec by calling
+        // always clone the basket so it can be only saved by calling
         // the save method
         return clone $basket;
     }

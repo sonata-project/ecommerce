@@ -834,7 +834,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param $code
+     * @param string $code
      * @return void
      */
     public function setCode($code)
@@ -843,7 +843,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @return
+     * @return string
      */
     public function getCode()
     {
