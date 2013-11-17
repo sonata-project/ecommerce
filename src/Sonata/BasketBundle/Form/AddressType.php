@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Hugo Briand <briand@ekino.com>
  *
- * Adress form type (used for deliveryAddressStep in Order process)
+ * Address form type (used for deliveryAddressStep in Order process)
  */
 class AddressType extends AbstractType
 {

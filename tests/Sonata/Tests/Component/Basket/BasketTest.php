@@ -118,7 +118,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(30, $basket->getTotal(), '::getTotal() w/o vat return 30');
         $this->assertEquals(35.88, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
-        // Reccurent payments
+        // Recurrent payments
         $this->assertEquals(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
 
         $newProduct = $this->getMockProduct();

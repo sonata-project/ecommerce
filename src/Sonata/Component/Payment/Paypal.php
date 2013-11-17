@@ -25,7 +25,7 @@ class Paypal extends BasePaypal
 
     // PayPal pending reason
     // From PP_OrderManagement_IntegrationGuide, March 2008 p58
-    const PENDING_REASON_ADRESS = 'address';
+    const PENDING_REASON_ADDRESS = 'address';
     const PENDING_REASON_AUTHORIZATION = 'authorization';
     const PENDING_REASON_ECHECK = 'echeck';
     const PENDING_REASON_INTL = 'intl';
@@ -334,7 +334,7 @@ class Paypal extends BasePaypal
     public static function getPendingReasonsList()
     {
         return array(
-            self::PENDING_REASON_ADRESS         => 'The payment is pending because your customer did not include a confirmed shipping address and your Payment Receiving Preferences is set yo allow you to manually accept or deny each of these payments. To change your preference, go to the Preferences section of your Profile.',
+            self::PENDING_REASON_ADDRESS        => 'The payment is pending because your customer did not include a confirmed shipping address and your Payment Receiving Preferences is set yo allow you to manually accept or deny each of these payments. To change your preference, go to the Preferences section of your Profile.',
             self::PENDING_REASON_AUTHORIZATION  => 'You set <PaymentAction> Authorization</PaymentAction> on SetExpressCheckoutRequest and have not yet captured funds.',
             self::PENDING_REASON_ECHECK         => 'The payment is pending because it was made by an eCheck that has not yet cleared. ',
             self::PENDING_REASON_INTL           => 'The payment is pending because you hold a non-U.S. account and do not have a withdrawal mechanism. You must manually accept or deny this payment from your Account Overview.',

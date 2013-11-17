@@ -99,7 +99,7 @@ interface CustomerInterface
     public function getId();
 
     /**
-     * @return void
+     * @return string
      */
     public function getEmail();
 

@@ -171,7 +171,7 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_PENDING));
-        $transaction->expects($this->any())->method('get')->will($this->returnValue(Paypal::PENDING_REASON_ADRESS));
+        $transaction->expects($this->any())->method('get')->will($this->returnValue(Paypal::PENDING_REASON_ADDRESS));
 
         $paypal->handleError($transaction);
     }
