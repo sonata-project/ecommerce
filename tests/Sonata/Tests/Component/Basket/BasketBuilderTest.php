@@ -40,7 +40,7 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
 
         $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
 
-        $basketBuidler = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
+        $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
         $basketElement_1 = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
 
@@ -49,7 +49,7 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));
 
-        $basketBuidler->build($basket);
+        $basketBuilder->build($basket);
     }
 
     /**
@@ -66,7 +66,7 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
 
         $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
 
-        $basketBuidler = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
+        $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
         $basketElement_1 = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement_1->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('non_existent_product_code'));
@@ -76,7 +76,7 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));
 
-        $basketBuidler->build($basket);
+        $basketBuilder->build($basket);
     }
 
     public function testBuild()
@@ -95,7 +95,7 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
         $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->exactly(2))->method('findOneBy')->will($this->returnValue($address));
-        $basketBuidler = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
+        $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
         $basketElement_1 = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement_1->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('test'));
@@ -116,6 +116,6 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
         $basket->expects($this->once())->method('setBillingAddress');
         $basket->expects($this->once())->method('setPaymentMethod');
 
-        $basketBuidler->build($basket);
+        $basketBuilder->build($basket);
     }
 }

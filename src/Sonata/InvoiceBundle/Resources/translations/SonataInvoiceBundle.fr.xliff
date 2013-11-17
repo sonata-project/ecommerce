@@ -175,7 +175,7 @@
             </trans-unit>
             <trans-unit id="sonata.invoice.subtitle_elements">
                 <source>sonata.invoice.subtitle_elements</source>
-                <target>Eléments de la facture</target>
+                <target>Éléments de la facture</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.elements.id">
                 <source>sonata.invoice.elements.id</source>

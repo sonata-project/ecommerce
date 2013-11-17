@@ -278,7 +278,7 @@ class BasketController extends Controller
     }
 
     /**
-     * Order process step 2: choose an adress from existing ones or create a new one
+     * Order process step 2: choose an address from existing ones or create a new one
      *
      * @throws NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response

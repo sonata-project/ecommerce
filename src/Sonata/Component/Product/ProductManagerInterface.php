@@ -14,7 +14,7 @@ namespace Sonata\Component\Product;
 interface ProductManagerInterface
 {
     /**
-     * Creates an empty medie instance
+     * Creates an empty Product instance
      *
      * @return \Sonata\Component\Product\ProductInterface
      */

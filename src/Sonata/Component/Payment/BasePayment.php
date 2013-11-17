@@ -196,7 +196,7 @@ abstract class BasePayment implements PaymentInterface
         if (!$this->isCallbackValid($transaction)) {
             $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
             $transaction->setState(TransactionInterface::STATE_KO);
-            $transaction->setInformation('The callbak reference is not valid');
+            $transaction->setInformation('The callback reference is not valid');
 
             return $this->handleError($transaction);
         }

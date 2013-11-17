@@ -208,7 +208,7 @@
             </trans-unit>
             <trans-unit id="header_basket_information">
                 <source>header_basket_information</source>
-                <target>Eléments du panier</target>
+                <target>Éléments du panier</target>
             </trans-unit>
             <trans-unit id="header_basket_price">
                 <source>header_basket_price</source>
@@ -228,7 +228,7 @@
             </trans-unit>
             <trans-unit id="undeliverable_country">
                 <source>undeliverable_country</source>
-                <target>Le pays %country% n'est pas desservi par nos modes de livrioson pour un ou plusieurs éléments de votre panier.</target>
+                <target>Le pays %country% n'est pas desservi par nos modes de livraison pour un ou plusieurs éléments de votre panier.</target>
             </trans-unit>
         </body>
     </file>

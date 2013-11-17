@@ -42,7 +42,7 @@
             </trans-unit>
             <trans-unit id="category">
                 <source>category</source>
-                <target>Categorie</target>
+                <target>Catégorie</target>
             </trans-unit>
             <trans-unit id="delivery">
                 <source>delivery</source>

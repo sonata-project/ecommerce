@@ -25,7 +25,7 @@
       <trans-unit id="message_validation_payment">
         <source>message_validation_payment</source>
         <target><![CDATA[Votre paiement est confirmé!<br/>
-            Vous pouvez visualiser l'historique de vos commandes en allant sur la pagede votre compte puis en cliquant sur 'Commandes'<br/>
+            Vous pouvez visualiser l'historique de vos commandes en allant sur la page de votre compte puis en cliquant sur 'Commandes'<br/>
             Merci d'avoir acheté en ligne avec nous !]]>
         </target>
       </trans-unit>

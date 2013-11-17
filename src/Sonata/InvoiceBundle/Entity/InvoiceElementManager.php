@@ -103,7 +103,7 @@ class InvoiceElementManager implements InvoiceElementManagerInterface
     /**
      * Deletes a invoice
      *
-     * @param  InvoiceElementInterface $invoiceElement
+     * @param  InvoiceElementInterface $invoice
      * @return void
      */
     public function delete(InvoiceElementInterface $invoice)

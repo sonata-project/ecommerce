@@ -16,7 +16,7 @@ interface ScelliusTransactionGeneratorInterface
 {
     /**
      * @param  \Sonata\Component\Order\OrderInterface $order
-     * @return void
+     * @return string
      */
     public function generate(OrderInterface $order);
 }

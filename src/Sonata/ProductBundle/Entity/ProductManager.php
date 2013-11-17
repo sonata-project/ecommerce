@@ -104,7 +104,7 @@ class ProductManager implements ProductManagerInterface
     }
 
     /**
-     * Creates an empty medie instance
+     * Creates an empty Product instance
      *
      * @return ProductInterface
      */

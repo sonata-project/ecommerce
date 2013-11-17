@@ -21,7 +21,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.sidemenu.link_order_elements_list">
                 <source>sonata.order.sidemenu.link_order_elements_list</source>
-                <target>Eléments</target>
+                <target>Éléments</target>
             </trans-unit>
             <trans-unit id="sonata.order.sidemenu.link_order_invoice_list">
                 <source>sonata.order.sidemenu.link_order_invoice_edit</source>
@@ -425,7 +425,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.subtitle_elements">
                 <source>sonata.order.view.subtitle_elements</source>
-                <target>Eléments</target>
+                <target>Éléments</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.subtitle_references">
                 <source>sonata.order.view.subtitle_references</source>
