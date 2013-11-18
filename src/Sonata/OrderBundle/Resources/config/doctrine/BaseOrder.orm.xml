@@ -43,5 +43,9 @@
         <field name="updatedAt"  nullable="true"  column="updated_at"     type="datetime" />
         <field name="createdAt"  nullable="true"  column="created_at"     type="datetime" />
 
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersist" />
+            <lifecycle-callback type="preUpdate" method="preUpdate" />
+        </lifecycle-callbacks>
     </mapped-superclass>
 </doctrine-mapping>

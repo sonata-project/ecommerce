@@ -8,8 +8,8 @@ use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyInterface;
 
-use Application\Sonata\PaymentBundle\Entity\Transaction;
 use Sonata\CustomerBundle\Entity\BaseAddress;
+use Sonata\PaymentBundle\Entity\BaseTransaction;
 
 /**
  * Sonata\OrderBundle\Entity\BaseOrder
@@ -199,7 +199,17 @@ abstract class BaseOrder implements OrderInterface
     public function __construct()
     {
         $this->orderElements     = new \Doctrine\Common\Collections\ArrayCollection;
-        $this->createdAt         = new \DateTime;
+    }
+
+    public function prePersist()
+    {
+        $this->setCreatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime);
+    }
+
+    public function preUpdate()
+    {
+        $this->setUpdatedAt(new \DateTime);
     }
 
     /**
@@ -355,7 +365,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function getPaymentStatusName()
     {
-        $statusList = Transaction::getStatusList();
+        $statusList = BaseTransaction::getStatusList();
 
         return $statusList[$this->getPaymentStatus()];
     }
