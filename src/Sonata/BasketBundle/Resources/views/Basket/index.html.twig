@@ -68,5 +68,5 @@ file that was distributed with this source code.
         {{ form_rest(form) }}
     </form>
 {% else %}
-    <p>{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}</p>
+    <p>{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}. <a href="{{ path('sonata_category_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.</p>
 {% endif %}

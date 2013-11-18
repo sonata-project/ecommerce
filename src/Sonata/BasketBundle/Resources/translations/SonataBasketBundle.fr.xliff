@@ -46,6 +46,10 @@
                 <source>sonata.basket.message_basket_is_empty</source>
                 <target>Votre panier est vide</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.message_basket_go_back_shopping">
+                <source>sonata.basket.message_basket_go_back_shopping</source>
+                <target>Continuer vos achats</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.message_no_delivery_addresses_available">
                 <source>sonata.basket.message_no_delivery_addresses_available</source>
                 <target>Aucune adresse de livraison n'est disponible</target>
