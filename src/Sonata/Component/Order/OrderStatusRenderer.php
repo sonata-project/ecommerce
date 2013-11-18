@@ -1,0 +1,88 @@
+<?php
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+
+namespace Sonata\Component\Order;
+
+use Sonata\Component\Delivery\BaseServiceDelivery;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Status\StatusClassRendererInterface;
+
+
+/**
+ * Class OrderStatusRenderer
+ *
+ * @package Sonata\Component\Order
+ *
+ * @author Hugo Briand <briand@ekino.com>
+ */
+class OrderStatusRenderer implements StatusClassRendererInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function handlesObject($object, $statusType = null)
+    {
+        return ($object instanceof OrderInterface || $object instanceof OrderElementInterface)
+            && in_array($statusType, array('delivery', 'payment', null));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatusClass($object, $statusType = null, $default = "")
+    {
+        if (!$this->handlesObject($object, $statusType)) {
+            return $default;
+        }
+
+        switch ($statusType) {
+            case 'delivery':
+                switch ($object->getDeliveryStatus()) {
+                    case BaseServiceDelivery::STATUS_COMPLETED:
+                    case BaseServiceDelivery::STATUS_SENT:
+                    case BaseServiceDelivery::STATUS_RETURNED:
+                        return 'success';
+                    case BaseServiceDelivery::STATUS_OPEN:
+                    case BaseServiceDelivery::STATUS_PENDING:
+                        return 'info';
+                    default:
+                        return $default;
+                }
+                break;
+            case 'payment':
+                switch ($object->getPaymentStatus()) {
+                    case TransactionInterface::STATUS_OPEN:
+                    case TransactionInterface::STATUS_VALIDATED:
+                    case TransactionInterface::STATE_OK:
+                        return 'success';
+                    case TransactionInterface::STATUS_PENDING:
+                        return 'info';
+                    default:
+                        return $default;
+                }
+                break;
+            default:
+                switch ($object->getStatus()) {
+                    case OrderInterface::STATUS_OPEN:
+                    case OrderInterface::STATUS_VALIDATED:
+                        return 'success';
+                    case OrderInterface::STATUS_PENDING:
+                        return 'info';
+                    default:
+                        return $default;
+                }
+                break;
+        }
+
+        return $default;
+    }
+
+}

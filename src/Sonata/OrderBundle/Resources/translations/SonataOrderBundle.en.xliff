@@ -379,13 +379,29 @@
             <!-- End - Filters translations -->
 
             <!-- Begin - View order translations -->
-            <trans-unit id="sonata.order.view.date">
-                <source>sonata.order.view.date</source>
-                <target>Date</target>
+            <trans-unit id="sonata.order.view.created_at">
+                <source>sonata.order.view.created_at</source>
+                <target>Creation date</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.validated_at">
+                <source>sonata.order.view.validated_at</source>
+                <target>Validation date</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.updated_at">
+                <source>sonata.order.view.updated_at</source>
+                <target>Last update date</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.delivery">
                 <source>sonata.order.view.delivery</source>
                 <target>Delivery</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.delivery_title">
+                <source>sonata.order.view.delivery_title</source>
+                <target>Delivery Address</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.billing_title">
+                <source>sonata.order.view.billing_title</source>
+                <target>Billing Address</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.element.id">
                 <source>sonata.order.view.element.id</source>
@@ -394,6 +410,10 @@
             <trans-unit id="sonata.order.view.element.label">
                 <source>sonata.order.view.element.label</source>
                 <target>Label</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.element.unit_price">
+                <source>sonata.order.view.element.unit_price</source>
+                <target>Unit Price</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.element.price">
                 <source>sonata.order.view.element.price</source>
@@ -427,9 +447,9 @@
                 <source>sonata.order.view.subtitle_elements</source>
                 <target>Elements</target>
             </trans-unit>
-            <trans-unit id="sonata.order.view.subtitle_references">
-                <source>sonata.order.view.subtitle_references</source>
-                <target>References</target>
+            <trans-unit id="sonata.order.view.subtitle_dates">
+                <source>sonata.order.view.subtitle_dates</source>
+                <target>Dates</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.total_excl">
                 <source>sonata.order.view.total_excl</source>
@@ -445,11 +465,27 @@
             </trans-unit>
             <trans-unit id="sonata.order.view_invoice">
                 <source>sonata.order.view_invoice</source>
-                <target>Your invoice is available here.</target>
+                <target>Your invoice</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.status">
                 <source>sonata.order.view.status</source>
                 <target>Status</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.subtitle_statuses">
+                <source>sonata.order.view.subtitle_statuses</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.order_status">
+                <source>sonata.order.view.order_status</source>
+                <target>Order</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.payment_status">
+                <source>sonata.order.view.payment_status</source>
+                <target>Payment</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.delivery_status">
+                <source>sonata.order.view.delivery_status</source>
+                <target>Delivery</target>
             </trans-unit>
             <!-- End - Order view translations -->
 
