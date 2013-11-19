@@ -154,14 +154,28 @@ class ProductManager implements ProductManagerInterface
      */
     public function getProductsByCategoryIdPager($categoryId, $page = 1, $limit = 25)
     {
-        $queryBuilder = $this->em
-            ->createQueryBuilder('p')
-            ->from($this->getClass(), 'p')
-            ->select('p')
-            ->leftJoin('p.productCategories', 'pc')
-            ->leftJoin('p.image', 'i')
-            ->where('pc.category = :categoryId')
-            ->setParameter('categoryId', $categoryId);
+        $queryBuilder = $this->queryProductsByCategoryIdPager($categoryId);
+
+        $pager = new Pager($limit);
+        $pager->setQuery(new ProxyQuery($queryBuilder));
+        $pager->setPage($page);
+        $pager->init();
+
+        return $pager;
+    }
+
+    /**
+     * @param int $categoryId
+     * @param int $page
+     * @param int $limit
+     *
+     * @return Pager
+     */
+    public function getActiveProductsByCategoryIdPager($categoryId, $page = 1, $limit = 25)
+    {
+        $queryBuilder = $this->queryProductsByCategoryIdPager($categoryId);
+        $queryBuilder->andWhere('p.enabled = :enabled')
+            ->setParameter('enabled', true);
 
         $pager = new Pager($limit);
         $pager->setQuery(new ProxyQuery($queryBuilder));
@@ -188,5 +202,22 @@ class ProductManager implements ProductManagerInterface
                 'slug' => $slug,
                 'enabled' => true
             ));
+    }
+
+    /**
+     * @param int $categoryId
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function queryProductsByCategoryIdPager($categoryId)
+    {
+        return $this->em
+            ->createQueryBuilder('p')
+            ->from($this->getClass(), 'p')
+            ->select('p')
+            ->leftJoin('p.productCategories', 'pc')
+            ->leftJoin('p.image', 'i')
+            ->where('pc.category = :categoryId')
+            ->setParameter('categoryId', $categoryId);
     }
 }

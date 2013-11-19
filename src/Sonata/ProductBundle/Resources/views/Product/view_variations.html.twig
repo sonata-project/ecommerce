@@ -15,7 +15,7 @@ file that was distributed with this source code.
     {% trans from 'SonataProductBundle' %}no_variations_available{% endtrans %}
 {% else %}
     <ul>
-        {% for variation in product.variations %}
+        {% for variation in product.enabledVariations %}
             <li><a href="{{ url('sonata_product_view', {'productId': variation.id, 'slug': variation.slug}) }}">{{ variation.name }}</a></li>
         {% endfor %}
     </ul>
