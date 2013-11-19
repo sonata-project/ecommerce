@@ -76,7 +76,8 @@ class CategoryController extends Controller
     /**
      * List the product related to one category
      *
-     * @param $categoryId
+     * @param int $categoryId
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function listProductsAction($categoryId)
@@ -88,7 +89,7 @@ class CategoryController extends Controller
         }
 
         $pager = $this->get('sonata.product.set.manager')
-            ->getProductsByCategoryIdPager($categoryId, $this->get('request')->get('page'));
+            ->getActiveProductsByCategoryIdPager($categoryId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Category:list_products.html.twig', array(
             'pager' => $pager,

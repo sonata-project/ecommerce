@@ -610,6 +610,10 @@ abstract class BaseProduct implements ProductInterface
     {
         if (!count($this->enabledVariations)) {
             foreach ($this->variations as $variation) {
+                if (!$variation->isEnabled()) {
+                    continue;
+                }
+
                 $this->enabledVariations[] = $variation;
             }
         }
