@@ -409,6 +409,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $variation->setEnabled(false);
         $variation->setName(sprintf('%s (duplicated)', $product->getName()));
+        $variation->setSku(sprintf('%s_DUPLICATE', $product->getSku()));
 
         return $variation;
     }
