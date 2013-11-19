@@ -10,6 +10,8 @@
 
 namespace Sonata\Test\ProductBundle\Model;
 
+use Sonata\Component\Product\ProductInterface;
+use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
 use Sonata\Component\Basket\BasketElement;
 
@@ -23,6 +25,28 @@ class ProductProviderTest extends BaseProductProvider
         return 'DumbTestController';
     }
 
+}
+
+class ProductTest extends BaseProduct implements ProductInterface
+{
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    /**
+     * Get id.
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function isVariation()
+    {
+        return false;
+    }
 }
 
 /**
@@ -53,6 +77,16 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         } catch (\Exception $e) {
             $this->assertInstanceOf('RuntimeException', $e);
         }
+    }
+
+    public function testVariationSkuDuplication()
+    {
+        $productProvider = $this->createNewProductProvider();
+        $product = new ProductTest();
+        $product->setSku('TESTING_SKU');
+        $variation = $productProvider->createVariation($product);
+
+        $this->assertEquals('TESTING_SKU_DUPLICATE', $variation->getSku());
     }
 
     public function testBuildBasketElement()
@@ -228,6 +262,6 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     {
         $serializer = $this->getMockBuilder('JMS\Serializer\Serializer')->disableOriginalConstructor()->getMock();
 
-        return  new ProductProviderTest($serializer);
+        return new ProductProviderTest($serializer);
     }
 }
