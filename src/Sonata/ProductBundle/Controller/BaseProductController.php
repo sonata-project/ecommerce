@@ -45,7 +45,7 @@ abstract class BaseProductController extends Controller
             $form = $formBuilder->getForm()->createView();
         }
 
-        $crossSellingProducts = $this->get('sonata.product.finder')->getCrossSellingSimilarProducts($product);
+        $crossSellingProducts = $this->get('sonata.product.finder')->getCrossSellingSimilarParentProducts($product);
         $currency = $this->get('sonata.price.currency.detector')->getCurrency();
 
         // Add twitter/FB metadata
