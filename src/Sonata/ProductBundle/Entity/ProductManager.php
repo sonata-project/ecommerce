@@ -120,29 +120,20 @@ class ProductManager implements ProductManagerInterface
      */
     public function findInSameCollections($productCollections)
     {
-        $collections = array();
-        $productIds  = array();
+        return $this->queryInSameCollections($productCollections)
+            ->getQuery()
+            ->execute();
+    }
 
-        foreach ($productCollections as $pCollection) {
-            $collections[] = $pCollection->getCollection();
-            if (false === array_search($pCollection->getProduct()->getId(), $productIds)) {
-                $productIds[] = $pCollection->getProduct()->getId();
-            }
-        }
-
-        $queryBuilder = $this->em->createQueryBuilder('p')
-            ->select('p')
-            ->distinct()
-            ->from($this->getClass(), 'p')
-            ->leftJoin('p.productCollections', 'pc')
-            ->where('pc.collection IN (:collections)')
-            ->andWhere('p.id NOT IN (:productIds)')
-            //->groupBy('p.id')
-            ->setParameter('collections', array_values($collections))
-            ->setParameter('productIds', array_values($productIds))
-        ;
-
-        return $queryBuilder->getQuery()->execute();
+    /**
+     * {@inheritdoc}
+     */
+    public function findParentsInSameCollections($productCollections)
+    {
+        return $this->queryInSameCollections($productCollections)
+            ->andWhere('p.parent IS NULL')
+            ->getQuery()
+            ->execute();
     }
 
     /**
@@ -219,5 +210,33 @@ class ProductManager implements ProductManagerInterface
             ->leftJoin('p.image', 'i')
             ->where('pc.category = :categoryId')
             ->setParameter('categoryId', $categoryId);
+    }
+
+    /**
+     * @param array $productCollections
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function queryInSameCollections($productCollections)
+    {
+        $collections = array();
+        $productIds  = array();
+
+        foreach ($productCollections as $pCollection) {
+            $collections[] = $pCollection->getCollection();
+            if (false === array_search($pCollection->getProduct()->getId(), $productIds)) {
+                $productIds[] = $pCollection->getProduct()->getId();
+            }
+        }
+
+        return $this->em->createQueryBuilder('p')
+            ->select('p')
+            ->distinct()
+            ->from($this->getClass(), 'p')
+            ->leftJoin('p.productCollections', 'pc')
+            ->where('pc.collection IN (:collections)')
+            ->andWhere('p.id NOT IN (:productIds)')
+            ->setParameter('collections', array_values($collections))
+            ->setParameter('productIds', array_values($productIds));
     }
 }

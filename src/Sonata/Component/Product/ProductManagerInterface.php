@@ -62,6 +62,15 @@ interface ProductManagerInterface
     public function findInSameCollections($productCollections);
 
     /**
+     * Returns the parent products in the same collections as those specified in $productCollections
+     *
+     * @param mixed $productCollections
+     *
+     * @return array
+     */
+    public function findParentsInSameCollections($productCollections);
+
+    /**
      * Retrieve an active product from its id and its slug
      *
      * @param int    $id

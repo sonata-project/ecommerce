@@ -29,6 +29,15 @@ interface ProductFinderInterface
     public function getCrossSellingSimilarProducts(ProductInterface $product);
 
     /**
+     * Gets similar parent products as $product in a cross selling fashion
+     *
+     * @param ProductInterface $product
+     *
+     * @return ProductInterface[]
+     */
+    public function getCrossSellingSimilarParentProducts(ProductInterface $product);
+
+    /**
      * Gets similar product as $product in an up selling fashion
      *
      * @param ProductInterface $product
