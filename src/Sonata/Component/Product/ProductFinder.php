@@ -45,9 +45,9 @@ class ProductFinder implements ProductFinderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCrossSellingSimilarParentProducts(ProductInterface $product)
+    public function getCrossSellingSimilarParentProducts(ProductInterface $product, $limit = null)
     {
-        return $this->pManager->findParentsInSameCollections($product->getProductCollections());
+        return $this->pManager->findParentsInSameCollections($product->getProductCollections(), $limit);
     }
 
     /**

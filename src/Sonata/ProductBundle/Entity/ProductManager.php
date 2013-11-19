@@ -118,9 +118,9 @@ class ProductManager implements ProductManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findInSameCollections($productCollections)
+    public function findInSameCollections($productCollections, $limit = null)
     {
-        return $this->queryInSameCollections($productCollections)
+        return $this->queryInSameCollections($productCollections, $limit)
             ->getQuery()
             ->execute();
     }
@@ -128,9 +128,9 @@ class ProductManager implements ProductManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findParentsInSameCollections($productCollections)
+    public function findParentsInSameCollections($productCollections, $limit = null)
     {
-        return $this->queryInSameCollections($productCollections)
+        return $this->queryInSameCollections($productCollections, $limit)
             ->andWhere('p.parent IS NULL')
             ->getQuery()
             ->execute();
@@ -214,10 +214,11 @@ class ProductManager implements ProductManagerInterface
 
     /**
      * @param array $productCollections
+     * @param null|int $limit
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function queryInSameCollections($productCollections)
+    protected function queryInSameCollections($productCollections, $limit = null)
     {
         $collections = array();
         $productIds  = array();
@@ -229,7 +230,7 @@ class ProductManager implements ProductManagerInterface
             }
         }
 
-        return $this->em->createQueryBuilder('p')
+        $queryBuilder = $this->em->createQueryBuilder('p')
             ->select('p')
             ->distinct()
             ->from($this->getClass(), 'p')
@@ -238,5 +239,11 @@ class ProductManager implements ProductManagerInterface
             ->andWhere('p.id NOT IN (:productIds)')
             ->setParameter('collections', array_values($collections))
             ->setParameter('productIds', array_values($productIds));
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder;
     }
 }
