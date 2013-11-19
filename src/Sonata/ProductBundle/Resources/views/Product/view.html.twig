@@ -49,7 +49,7 @@ file that was distributed with this source code.
                 {% endblock %}
                 <span itemprop="price">
                     {% block product_price_price %}
-                        {% if product.hasVariations %}
+                        {% if product.hasEnabledVariations %}
                             {{ product.cheaperVariation.price|number_format_currency(currency) }}
                         {% else %}
                             {{ product.price|number_format_currency(currency) }}
@@ -98,8 +98,23 @@ file that was distributed with this source code.
             <ul>
             {% block similar_product %}
                 {% for similar_product in similar_cross %}
-                    {% if similar_product.isMaster and similar_product.isEnabled %}
-                        <li><a href="{{ path('sonata_product_view', {'productId': similar_product.id, 'slug': similar_product.slug }) }}">{{ similar_product.name }}</a></li>
+                    {% if similar_product.hasEnabledVariations or not similar_product.hasVariations%}
+                        <li class="span3" itemscope itemtype="http://schema.org/Product">
+                            <a href="{{ url('sonata_product_view', {'productId': similar_product.id, 'slug': similar_product.slug}) }}" class="thumbnail">
+                                {% if similar_product.image %}
+                                    {% thumbnail similar_product.image, 'preview' with {'itemprop': 'image'} %}
+                                {% endif %}
+
+                                <h3 itemprop="name">{{ similar_product.name }}</h3>
+                                <p itemprop="price">
+                                    {% if product.hasEnabledVariations %}
+                                        {{ similar_product.cheaperVariation.price|number_format_currency(currency) }}
+                                    {% else %}
+                                        {{ similar_product.price|number_format_currency(currency) }}
+                                    {% endif %}
+                                </p>
+                            </a>
+                        </li>
                     {% endif %}
                 {% endfor %}
             {% endblock %}
