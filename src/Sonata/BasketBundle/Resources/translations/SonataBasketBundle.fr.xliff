@@ -30,6 +30,10 @@
                 <source>sonata.basket.label_process_to_payment</source>
                 <target>Procéder au paiement</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.label_confirm_tac">
+                <source>sonata.basket.label_confirm_tac</source>
+                <target>Vous devez accepter les conditions générales de vente pour continuer</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.label_terms_and_condition">
                 <source>sonata.basket.label_terms_and_condition</source>
                 <target>Conditions générales de vente</target>

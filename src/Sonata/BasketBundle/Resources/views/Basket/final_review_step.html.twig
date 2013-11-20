@@ -84,7 +84,7 @@ file that was distributed with this source code.
 
 <div class="basket_tac well pagination-centered">
     <h3>{{ 'sonata.basket.order_terms_and_conditions_title'|trans({}, 'SonataBasketBundle') }}</h3>
-    <form action="{{ url('sonata_basket_final') }}" method="POST">
+    <form action="{{ url('sonata_basket_final') }}" method="POST" onsubmit="ctrlForm(this)">
 
         <label for="basket_tac">
             <input type="checkbox" name="tac" id="basket_tac"/>
@@ -97,3 +97,15 @@ file that was distributed with this source code.
         <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" class="btn btn-large btn-primary" />
     </form>
 </div>
+
+<script>
+    function ctrlForm(form) {
+        if (!form.tac.checked) {
+            alert("{{ 'sonata.basket.label_confirm_tac'|trans({}, 'SonataBasketBundle') }}");
+
+            return false;
+        }
+
+        return true;
+    }
+</script>
