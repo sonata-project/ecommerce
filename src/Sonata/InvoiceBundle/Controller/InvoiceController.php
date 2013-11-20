@@ -38,27 +38,26 @@ class InvoiceController extends Controller
      */
     public function viewAction($reference)
     {
+        $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+
+        if (null === $order) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $this->checkAccess($order->getCustomer());
+
         $invoice = $this->getInvoiceManager()->findInvoiceBy(array('reference' => $reference));
 
         if (null === $invoice) {
-            $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
-
-            if (null === $order) {
-                throw new AccessDeniedHttpException();
-            }
-
-            $this->checkAccess($order->getCustomer());
-
             $invoice = $this->getInvoiceManager()->createInvoice();
 
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
             $this->getInvoiceManager()->updateInvoice($invoice);
-        } else {
-            $this->checkAccess($invoice->getCustomer());
         }
 
         return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(
             'invoice' => $invoice,
+            'order'   => $order,
         ));
     }
 
