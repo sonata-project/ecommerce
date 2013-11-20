@@ -51,7 +51,6 @@ class AddressType extends AbstractType
                             'class' => 'btn btn-primary',
                             'style' => 'margin-bottom:20px;'
                         ),
-                        'label'              => 'basket_address_useselected',
                         'translation_domain' => 'SonataBasketBundle',
                         'validation_groups'  => false
                     )
