@@ -173,10 +173,6 @@
                 <source>sonata.invoice.references.date</source>
                 <target>Date</target>
             </trans-unit>
-            <trans-unit id="sonata.invoice.subtitle_elements">
-                <source>sonata.invoice.subtitle_elements</source>
-                <target>Invoice elements</target>
-            </trans-unit>
             <trans-unit id="sonata.invoice.elements.id">
                 <source>sonata.invoice.elements.id</source>
                 <target>ID</target>
