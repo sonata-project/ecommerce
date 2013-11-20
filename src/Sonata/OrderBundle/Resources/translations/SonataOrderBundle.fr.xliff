@@ -131,16 +131,16 @@
                 <source>list.label_locale</source>
                 <target>Locale</target>
             </trans-unit>
-            <trans-unit id="list.label_get_status_name">
-                <source>list.label_get_status_name</source>
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
                 <target>Statut</target>
             </trans-unit>
-            <trans-unit id="list.label_get_delivery_status_name">
-                <source>list.label_get_delivery_status_name</source>
+            <trans-unit id="list.label_delivery_status">
+                <source>list.label_delivery_status</source>
                 <target>Statut de livraison</target>
             </trans-unit>
-            <trans-unit id="list.label_get_payment_status_name">
-                <source>list.label_get_payment_status_name</source>
+            <trans-unit id="list.label_payment_status">
+                <source>list.label_payment_status</source>
                 <target>Statut du paiement</target>
             </trans-unit>
             <trans-unit id="list.label_validated_at">
