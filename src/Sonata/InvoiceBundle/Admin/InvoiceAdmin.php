@@ -85,7 +85,7 @@ class InvoiceAdmin extends Admin
             ->addIdentifier('id')
             ->addIdentifier('reference')
             ->add('customer')
-            ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataInvoiceBundle', 'sortable' => 'status'))
+            ->add('status', 'string', array('template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig'))
             ->add('totalExcl', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
             ->add('totalInc', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
         ;
