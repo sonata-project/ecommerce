@@ -11,6 +11,7 @@
 
 namespace Sonata\BasketBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -77,13 +78,15 @@ class PaymentType extends AbstractType
             'type'     => AddressInterface::TYPE_BILLING
         ));
 
-        $builder->add('billingAddress', 'sonata_type_model', array(
-            'model_manager' => $this->modelManager,
-            'class'         => $this->addressManager->getClass(),
-            'choices'       => $addresses,
-            'expanded'      => true
+        /*
+         * TODO: implement billing address choice
+        $builder->add('billingAddress', 'entity', array(
+            'class' => $this->addressManager->getClass(),
+            'choices' => $addresses,
+            'expanded' => true,
         ));
 
+         */
         $address = $basket->getBillingAddress() ?: current($addresses);
         $basket->setBillingAddress($address ?: null);
 

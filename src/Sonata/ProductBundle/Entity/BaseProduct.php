@@ -715,14 +715,14 @@ abstract class BaseProduct implements ProductInterface
      */
     public function getCheaperVariation()
     {
-        if (!$this->hasVariations()) {
+        if (!$this->hasEnabledVariations()) {
             return null;
         }
 
-        $returnVariation = $this->variations[0];
+        $returnVariation = null;
 
         foreach ($this->variations as $variation) {
-            if ($variation->getPrice() <= $returnVariation->getPrice()) {
+            if ($variation->isEnabled() && $variation->getPrice() <= ($returnVariation ? $returnVariation->getPrice() : PHP_INT_MAX)) {
                 $returnVariation = $variation;
             }
         }

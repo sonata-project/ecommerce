@@ -95,9 +95,25 @@ abstract class BaseAddress implements AddressInterface
      */
     public static function formatAddress(array $address, $sep = ", ")
     {
+        $address = array_merge(
+            array(
+                'firstname'    => "",
+                'lastname'     => "",
+                'address1'     => "",
+                'address2'     => "",
+                'address3'     => "",
+                'postcode'     => "",
+                'city'         => "",
+                'country_code' => "",
+            ),
+            $address
+        );
+
         $values = array_map('trim', array(
                 sprintf("%s %s", $address['firstname'], $address['lastname']),
                 $address['address1'],
+                $address['address2'],
+                $address['address3'],
                 $address['postcode'],
                 $address['city']
             ));
