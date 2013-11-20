@@ -147,7 +147,11 @@
       </trans-unit>
       <trans-unit id="message_view_order_payment">
         <source>message_view_order_payment</source>
-        <target>You can check your order:</target>
+        <target>Check your order</target>
+      </trans-unit>
+      <trans-unit id="message_view_user_profile">
+        <source>message_view_user_profile</source>
+        <target>Go to your profile</target>
       </trans-unit>
     </body>
   </file>
