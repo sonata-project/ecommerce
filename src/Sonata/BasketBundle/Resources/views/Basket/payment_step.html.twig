@@ -24,5 +24,10 @@ file that was distributed with this source code.
     </div>
 
     {{ form_rest(form) }}
-    <input type="submit" value="{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}" class="btn btn-success"/>
+
+    <div class="well">
+        <a href="{{ url('sonata_basket_delivery') }}" class="btn"><i class="icon-arrow-left"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
+
+        <button type="submit" class="btn btn-primary pull-right">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}&nbsp;<i class="icon-arrow-right icon-white"></i></button>
+    </div>
 </form>

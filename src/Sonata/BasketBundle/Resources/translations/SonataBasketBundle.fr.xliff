@@ -38,6 +38,10 @@
                 <source>sonata.basket.label_terms_and_condition</source>
                 <target>Conditions générales de vente</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.link_previous_step">
+                <source>sonata.basket.link_previous_step</source>
+                <target>Étape précédente</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.link_next_step">
                 <source>sonata.basket.link_next_step</source>
                 <target>Prochaine étape</target>

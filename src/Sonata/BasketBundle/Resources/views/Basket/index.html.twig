@@ -61,9 +61,11 @@ file that was distributed with this source code.
             </tfoot>
         </table>
 
-        <input type="submit" value="{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}" class="btn btn-success" />
+        <div class="well">
+            <button type="submit" class="btn btn-success"><i class="icon-refresh icon-white"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
 
-        <a href="{{ url('sonata_basket_authentication') }}" class="btn btn-primary">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;<i class="icon-arrow-right icon-white"></i></a>
+            <a href="{{ url('sonata_basket_authentication') }}" class="btn btn-primary pull-right">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;<i class="icon-arrow-right icon-white"></i></a>
+        </div>
 
         {{ form_rest(form) }}
     </form>
