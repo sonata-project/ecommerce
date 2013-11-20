@@ -74,8 +74,8 @@ class AddressAdmin extends Admin
     public function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('fulladdress', 'string', array('code' => 'getFullAddress'))
             ->addIdentifier('name')
+            ->add('fulladdress', 'string', array('code' => 'getFullAddressHtml', 'template' => "SonataCustomerBundle:Admin:list_address.html.twig"))
             ->add('current')
             ->add('typeCode', 'trans', array('catalogue' => $this->translationDomain))
         ;
