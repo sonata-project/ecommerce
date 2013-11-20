@@ -30,6 +30,10 @@
                 <source>sonata.basket.label_process_to_payment</source>
                 <target>Process to payment</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.label_confirm_tac">
+                <source>sonata.basket.label_confirm_tac</source>
+                <target>You must validate the terms and conditions to go on</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.label_terms_and_condition">
                 <source>sonata.basket.label_terms_and_condition</source>
                 <target>I accept the terms and conditions of use</target>
