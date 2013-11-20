@@ -20,9 +20,15 @@ file that was distributed with this source code.
         <!-- Billing address -->
         <div class="span7">
             <h5>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_billing{% endtrans %}</h5>
+            <p>{{ invoice.getFullBilling('<br/>')|raw }}</p>
+{#
             <table class="table table-bordered">
                 <tr>
                     <td>{{ invoice.name }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
                     <td></td>
                 </tr>
                 <tr>
@@ -52,6 +58,7 @@ file that was distributed with this source code.
                     <td>{{ invoice.phone }}</td>
                 </tr>
             </table>
+#}
         </div>
 
         <!-- References -->

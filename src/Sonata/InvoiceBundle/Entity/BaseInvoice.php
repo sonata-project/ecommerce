@@ -13,6 +13,7 @@ use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Invoice\InvoiceElementInterface;
+use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\UserBundle\Model\UserInterface;
 
 /**
@@ -131,6 +132,30 @@ abstract class BaseInvoice implements InvoiceInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * Returns formatted billing address
+     *
+     * @param string $sep
+     *
+     * @return string
+     */
+    public function getFullBilling($sep = ", ")
+    {
+        return BaseAddress::formatAddress(
+            array(
+                'firstname'    => $this->getCustomer()->getFirstname(),
+                'lastname'     => $this->getCustomer()->getLastname(),
+                'address1'     => $this->getAddress1(),
+                'address2'     => $this->getAddress2(),
+                'address3'     => $this->getAddress3(),
+                'postcode'     => $this->getPostcode(),
+                'city'         => $this->getCity(),
+                'country_code' => $this->getCountry()
+            ),
+            $sep
+        );
     }
 
     /**
