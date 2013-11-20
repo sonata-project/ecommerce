@@ -10,129 +10,110 @@ file that was distributed with this source code.
 #}
 
 
-{% block header %}
-    <h2>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.title_invoice{% endtrans %}</h2>
+{% block sonata_invoice_title %}
+    <div class="row-fluid">
+        <h3>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.title_invoice{% endtrans %} - {{ invoice.reference }}</h3>
+    </div>
 {% endblock %}
 
 {% block content %}
     <!-- Invoice -->
-    <div class="row">
+    <div class="row-fluid">
+        {% block sonata_invoice_top_left %}
         <!-- Billing address -->
-        <div class="span7">
+        <div class="span6">
             <h5>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_billing{% endtrans %}</h5>
             <p>{{ invoice.getFullBilling('<br/>')|raw }}</p>
-{#
-            <table class="table table-bordered">
-                <tr>
-                    <td>{{ invoice.name }}</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td rowspan="8">&nbsp;</td>
-                    <td>{{ invoice.customer.firstName ~ " " ~ invoice.customer.lastName }}</td>
-                </tr>
-                <tr>
-                    <td>{{ invoice.address1 }}</td>
-                </tr>
-                {% if invoice.address2 %}
-                <tr>
-                    <td>{{ invoice.address2 }}</td>
-                </tr>
-                {% endif %}
-                {% if invoice.address3 %}
-                <tr>
-                    <td>{{ invoice.address3 }}</td>
-                </tr>
-                {% endif %}
-                <tr>
-                    <td>{{ invoice.postcode }}</td>
-                </tr>
-                <tr>
-                    <td>{{ invoice.city }} ({{ invoice.country | country }})</td>
-                </tr>
-                <tr>
-                    <td>{{ invoice.phone }}</td>
-                </tr>
-            </table>
-#}
         </div>
+        {% endblock %}
 
         <!-- References -->
-        <div class="span3">
-            <h5>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_references{% endtrans %}</h5>
+        {% block sonata_invoice_top_right %}
+        {% set date_time_size = constant('IntlDateFormatter::SHORT') %}
+
+        <div class="span6">
+            {#<h5>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_references{% endtrans %}</h5>#}
             <table class="table table-bordered">
-                <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.references.invoice{% endtrans %}</th>
-                    <td>{{ invoice.reference }}</td>
-                </tr>
                 <tr>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.references.date{% endtrans %}</th>
-                    <td>{{ invoice.createdAt|date() }}</td>
+                    <td>{{ invoice.createdAt|format_datetime(null, null, date_time_size, date_time_size) }}</td>
                 </tr>
-            </table>
-        </div>
-    </div>
-
-    <!-- Invoice elements -->
-    <div class="row">
-        <div class="span10">
-            <table class="table table-bordered">
                 <tr>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.id{% endtrans %}</th>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.label{% endtrans %}</th>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.quantity{% endtrans %}</th>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.unit_price{% endtrans %}</th>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_ex_vat{% endtrans %}</th>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_inc_vat{% endtrans %}</th>
+                    <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
+                    <td><span class="label{{ order|status_class('payment', 'important') ? ' label-'~order|status_class('payment', 'important') : '' }}">{{ order.paymentStatusName|trans({}, 'SonataPaymentBundle') }}</span></td>
                 </tr>
-
-                {% for element in invoice.invoiceElements %}
-                    <tr>
-                        <td class="number">{{ element.id }}</td>
-                        <td>{{ element.designation }}</td>
-                        <td class="number">{{ element.quantity }}</td>
-                        <td class="number">{{ element.price|number_format_currency(invoice.currency) }}</td>
-                        <td class="number">{{ (element.total - element.vat*element.quantity)|number_format_currency(invoice.currency) }}</td>
-                        <td class="number">{{ element.total|number_format_currency(invoice.currency) }}</td>
-                    </tr>
-                {% endfor %}
-
                 <tr>
-                    <td colspan="4">&nbsp;</td>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_exc_vat{% endtrans %}</th>
-                    <td class="number">{{ invoice.totalExcl|number_format_currency(invoice.currency) }}</td>
+                    <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</th>
+                    <td><span class="label{{ order|status_class('delivery', 'important') ? ' label-'~order|status_class('delivery', 'important') : '' }}">{{ order.deliveryStatusName|trans({}, 'SonataDeliveryBundle') }}</span></td>
                 </tr>
-
-                <tr>
-                    <td colspan="4">&nbsp;</td>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.vat{% endtrans %}</th>
-                    <td class="number">{{ (invoice.totalInc - invoice.totalExcl)|number_format_currency(invoice.currency) }}</td>
-                </tr>
-
-                <tr>
-                    <td colspan="4">&nbsp;</td>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_inc_vat{% endtrans %}</th>
-                    <td class="number">{{ invoice.totalInc|number_format_currency(invoice.currency) }}</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <!-- Payment -->
-    <div class="row">
-        <div class="span6">
-            <h5>{% trans from 'SonataInvoiceBundle' %}subtitle_payment{% endtrans %}</h5>
-            <table class="table table-bordered">
                 <tr>
                     <th>{% trans from 'SonataPaymentBundle' %}method{% endtrans %}</th>
                     <td>{{ invoice.paymentMethod }}</td>
                 </tr>
             </table>
         </div>
+        {% endblock %}
+
     </div>
+
+    {% block sonata_invoice_elements %}
+    <!-- Invoice elements -->
+    <div class="row">
+        <div class="span12">
+            <table class="table table-bordered">
+                {% block sonata_invoice_elements_header %}
+                <tr>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.label{% endtrans %}</th>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.quantity{% endtrans %}</th>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.unit_price{% endtrans %}</th>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_ex_vat{% endtrans %}</th>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_inc_vat{% endtrans %}</th>
+                </tr>
+                {% endblock %}
+
+                {% for element in invoice.invoiceElements %}
+                    {% block sonata_invoice_element_row %}
+                    <tr>
+                        <td>{{ element.designation }}</td>
+                        <td class="number">{{ element.quantity }}</td>
+                        <td class="number">{{ element.price|number_format_currency(invoice.currency) }}</td>
+                        <td class="number">{{ (element.total - element.vat*element.quantity)|number_format_currency(invoice.currency) }}</td>
+                        <td class="number">{{ element.total|number_format_currency(invoice.currency) }}</td>
+                    </tr>
+                    {% endblock %}
+                {% endfor %}
+
+                {% block sonata_invoice_elements_sumup %}
+                <tr>
+                    <td colspan="3" rowspan="4">&nbsp;</td>
+                    <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
+                    <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                </tr>
+
+                <tr>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_exc_vat{% endtrans %}</th>
+                    <td class="number">{{ invoice.totalExcl|number_format_currency(invoice.currency) }}</td>
+                </tr>
+
+                <tr>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.vat{% endtrans %}</th>
+                    <td class="number">{{ (invoice.totalInc - invoice.totalExcl)|number_format_currency(invoice.currency) }}</td>
+                </tr>
+
+                <tr>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_inc_vat{% endtrans %}</th>
+                    <td class="number">{{ invoice.totalInc|number_format_currency(invoice.currency) }}</td>
+                </tr>
+                {% endblock %}
+            </table>
+        </div>
+    </div>
+    {% endblock %}
+
+{% endblock %}
+
+{% block footer %}
+
+    {% render(controller('SonataPaymentBundle:Payment:terms')) %}
 
 {% endblock %}
