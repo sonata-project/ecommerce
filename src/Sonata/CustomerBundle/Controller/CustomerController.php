@@ -14,8 +14,10 @@ namespace Sonata\CustomerBundle\Controller;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
+use Sonata\CustomerBundle\Entity\BaseAddress;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 /**
@@ -35,16 +37,28 @@ class CustomerController extends Controller
     public function addressesAction()
     {
         $customer = $this->getCustomer();
+        $addresses = array();
 
         if (null === $customer) {
             // Customer not yet created, the user didn't order yet
             $customer = $this->getCustomerManager()->create();
             $customer->setUser($this->getUser());
             $this->getCustomerManager()->save($customer);
-
-            $addresses = array();
         } else {
-            $addresses = $this->getAddressManager()->findBy(array('customer' => $customer));
+            $custAddresses = $this->getAddressManager()->findBy(array('customer' => $customer));
+
+            $typeCodes = BaseAddress::getTypesList();
+
+            // This allows to specify the display order
+            $addresses = array(
+                $typeCodes[AddressInterface::TYPE_DELIVERY] => array(),
+                $typeCodes[AddressInterface::TYPE_BILLING]  => array(),
+                $typeCodes[AddressInterface::TYPE_CONTACT]  => array(),
+            );
+
+            foreach ($custAddresses as $address) {
+                $addresses[$address->getTypeCode()][] = $address;
+            }
         }
 
         return $this->render('SonataCustomerBundle:Addresses:list.html.twig', array(
@@ -84,6 +98,10 @@ class CustomerController extends Controller
      */
     public function deleteAddressAction($id)
     {
+        if ($this->getRequest()->getMethod() !== 'POST') {
+            throw new MethodNotAllowedHttpException(array('POST'));
+        }
+
         $address = $this->getAddressManager()->findOneBy(array('id' => $id));
 
         $this->checkAddress($address);
