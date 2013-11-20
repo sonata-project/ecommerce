@@ -457,6 +457,14 @@ abstract class BaseAddress implements AddressInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function getFullAddressHtml()
+    {
+        return $this->getFullAddress("<br/>");
+    }
+
     public function setCustomer(CustomerInterface $customer)
     {
         $this->customer = $customer;
