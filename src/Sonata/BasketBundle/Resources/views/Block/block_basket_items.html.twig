@@ -2,8 +2,8 @@
 
 {% block block %}
     <div>
+        <i class="icon-shopping-cart"></i>
         <a href="{{ path('sonata_basket_index') }}">
-            <i class="icon-shopping-cart"></i>
             {{ 'sonata.basket.title_basket'|trans({}, 'SonataBasketBundle') }} ({{ sonata_basket.basket.countBasketElements }})
         </a>
     </div>
