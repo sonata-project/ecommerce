@@ -217,4 +217,15 @@ interface OrderElementInterface
      * @return \Datetime
      */
     public function getUpdatedAt();
+
+    /**
+     * Return the total (price * quantity)
+     *
+     * if $vat = true, return the price with vat
+     *
+     * @param boolean $vat
+     *
+     * @return float
+     */
+    public function getTotal($vat = false);
 }

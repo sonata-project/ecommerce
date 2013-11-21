@@ -104,7 +104,7 @@ file that was distributed with this source code.
                 <tr>
                     {% block sonata_order_element %}
                         <td>{{ element.designation }}</td>
-                        <td class="number">{{ element.unitPrice(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                        <td class="number">{{ element.unitPrice(false)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                         <td class="number">{{ element.quantity }}</td>
                         <td class="number">{{ element.total|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                         <td class="number">{{ element.total(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
