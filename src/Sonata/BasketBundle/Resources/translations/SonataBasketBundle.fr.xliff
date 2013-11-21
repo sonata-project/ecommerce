@@ -230,13 +230,29 @@
                 <source>header_basket_quantity</source>
                 <target>Quantité</target>
             </trans-unit>
-            <trans-unit id="header_basket_total">
-                <source>header_basket_total</source>
-                <target>Total</target>
-            </trans-unit>
             <trans-unit id="header_basket_delete">
                 <source>header_basket_delete</source>
                 <target><![CDATA[<i class="icon-trash"></i>]]></target>
+            </trans-unit>
+            <trans-unit id="header_basket_total_excl">
+                <source>header_basket_total_excl</source>
+                <target>Total excl. TVA</target>
+            </trans-unit>
+            <trans-unit id="header_basket_total_inc">
+                <source>header_basket_total_inc</source>
+                <target>Total inc. TVA</target>
+            </trans-unit>
+            <trans-unit id="footer_basket_total_excl">
+                <source>footer_basket_total_excl</source>
+                <target>Total excl. TVA</target>
+            </trans-unit>
+            <trans-unit id="footer_basket_total_vat">
+                <source>footer_basket_total_vat</source>
+                <target>TVA</target>
+            </trans-unit>
+            <trans-unit id="footer_basket_total_inc">
+                <source>footer_basket_total_inc</source>
+                <target>Total inc. TVA</target>
             </trans-unit>
             <trans-unit id="undeliverable_country">
                 <source>undeliverable_country</source>
