@@ -75,7 +75,7 @@ class InvoiceTransformer extends BaseTransformer
         $invoice->setDesignation($orderElement->getDesignation());
         $invoice->setPrice($orderElement->getPrice());
         $invoice->setQuantity($orderElement->getQuantity());
-        $invoice->setTotal($orderElement->getPrice() * $orderElement->getQuantity());
+        $invoice->setTotal($orderElement->getTotal());
         $invoice->setVat($orderElement->getVat());
 
         return $invoice;

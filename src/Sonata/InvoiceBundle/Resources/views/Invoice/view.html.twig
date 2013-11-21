@@ -64,8 +64,8 @@ file that was distributed with this source code.
                 {% block sonata_invoice_elements_header %}
                 <tr>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.label{% endtrans %}</th>
-                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.quantity{% endtrans %}</th>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.unit_price{% endtrans %}</th>
+                    <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.quantity{% endtrans %}</th>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_ex_vat{% endtrans %}</th>
                     <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_inc_vat{% endtrans %}</th>
                 </tr>
@@ -75,9 +75,9 @@ file that was distributed with this source code.
                     {% block sonata_invoice_element_row %}
                     <tr>
                         <td>{{ element.designation }}</td>
-                        <td class="number">{{ element.quantity }}</td>
                         <td class="number">{{ element.price|number_format_currency(invoice.currency) }}</td>
-                        <td class="number">{{ (element.total - element.vat*element.quantity)|number_format_currency(invoice.currency) }}</td>
+                        <td class="number">{{ element.quantity }}</td>
+                        <td class="number">{{ element.total(false)|number_format_currency(invoice.currency) }}</td>
                         <td class="number">{{ element.total|number_format_currency(invoice.currency) }}</td>
                     </tr>
                     {% endblock %}

@@ -174,8 +174,12 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
      *
      * @return float $total
      */
-    public function getTotal()
+    public function getTotal($vat = true)
     {
+        if ($vat) {
+            return $this->total * (1 + $this->getVat()/100);
+        }
+
         return $this->total;
     }
 
