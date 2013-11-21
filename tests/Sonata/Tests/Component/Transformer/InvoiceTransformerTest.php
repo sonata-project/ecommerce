@@ -20,8 +20,8 @@ class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
         $orderElement = $this->getMock('Sonata\Component\Order\OrderElementInterface');
         $orderElement->expects($this->once())->method('getDescription');
         $orderElement->expects($this->once())->method('getDesignation');
-        $orderElement->expects($this->exactly(2))->method('getPrice')->will($this->returnValue(42));
-        $orderElement->expects($this->exactly(2))->method('getQuantity')->will($this->returnValue(3));
+        $orderElement->expects($this->once())->method('getPrice')->will($this->returnValue(42));
+        $orderElement->expects($this->once())->method('getQuantity')->will($this->returnValue(3));
         $orderElement->expects($this->once())->method('getVat');
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
