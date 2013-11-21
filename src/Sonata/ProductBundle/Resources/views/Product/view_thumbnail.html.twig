@@ -1,0 +1,27 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<div class="thumbnail" itemscope itemtype="http://schema.org/Product">
+    <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}">
+        {% if product.image %}
+            {% thumbnail product.image, 'small' with {'itemprop': 'image', 'width': '100%'} %}
+        {% endif %}
+
+        <h4 itemprop="name">{{ product.name }}</h4>
+        <p itemprop="price">
+            {% if product.hasEnabledVariations %}
+                {{ product.cheaperVariation.price|number_format_currency(currency) }}
+            {% else %}
+                {{ product.price|number_format_currency(currency) }}
+            {% endif %}
+        </p>
+    </a>
+</div>

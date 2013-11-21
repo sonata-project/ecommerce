@@ -630,7 +630,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         // create the product form
         $formBuilder
             ->setData($basketElement)
-            ->add('quantity', 'text')
+            ->add('quantity', 'integer')
             ->add('productId', 'hidden');
     }
 
@@ -644,7 +644,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         $formBuilder
             ->add('delete', 'checkbox')
-            ->add('quantity', 'text')
+            ->add('quantity', 'integer')
             ->add('productId', 'hidden');
     }
 
