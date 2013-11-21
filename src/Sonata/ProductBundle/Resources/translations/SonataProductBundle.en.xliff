@@ -280,7 +280,7 @@
             </trans-unit>
             <trans-unit id="sonata.product.cross_selling.title">
                 <source>sonata.product.cross_selling.title</source>
-                <target>Products in the same collection</target>
+                <target>In the same collection</target>
             </trans-unit>
             <trans-unit id="product_variation_min_price">
                 <source>product_variation_min_price</source>
