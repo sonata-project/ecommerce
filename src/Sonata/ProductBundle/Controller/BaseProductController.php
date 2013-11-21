@@ -35,15 +35,12 @@ abstract class BaseProductController extends Controller
             throw new NotFoundHttpException('invalid product instance');
         }
 
-        $form     = $this->get('session')->getFlashBag()->get('sonata.product.form');
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        if (!$form) {
-            $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class')));
-            $provider->defineAddBasketForm($product, $formBuilder);
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class')));
+        $provider->defineAddBasketForm($product, $formBuilder);
 
-            $form = $formBuilder->getForm()->createView();
-        }
+        $form = $formBuilder->getForm()->createView();
 
         $crossSellingProducts = $this->get('sonata.product.finder')->getCrossSellingSimilarParentProducts($product, 4);
         $currency = $this->get('sonata.price.currency.detector')->getCurrency();
