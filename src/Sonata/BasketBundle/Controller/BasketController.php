@@ -308,7 +308,7 @@ class BasketController extends Controller
 
             if ($form->isValid()) {
                 if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
-                    $address = $addresses[$form->get('addresses')->getData()];
+                    $address = $form->get('addresses')->getData();
                 } else {
                     $address = $form->getData();
                     $address->setType(AddressInterface::TYPE_DELIVERY);
