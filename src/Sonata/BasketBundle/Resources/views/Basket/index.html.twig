@@ -55,17 +55,15 @@ file that was distributed with this source code.
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3"></td>
+                    <td colspan="3" rowspan="3"></td>
                     <th>{% trans from 'SonataBasketBundle'%}footer_basket_total_excl{% endtrans %}</th>
                     <td colspan="2" class="number"><b>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                 </tr>
                 <tr>
-                    <td colspan="3"></td>
                     <th>{% trans from 'SonataBasketBundle'%}footer_basket_total_vat{% endtrans %}</th>
                     <td colspan="2" class="number"><b>{{ (basket.getTotal(true) - basket.getTotal(false))|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                 </tr>
                 <tr>
-                    <td colspan="3"></td>
                     <th>{% trans from 'SonataBasketBundle'%}footer_basket_total_inc{% endtrans %}</th>
                     <td colspan="2" class="number"><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                 </tr>

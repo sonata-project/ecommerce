@@ -40,9 +40,21 @@ class AddressType extends AbstractType
         $addresses = $options['addresses'];
 
         if (count($addresses) > 0) {
-            $builder->add('addresses', 'choice', array(
+            $defaultAddress = null;
+
+            foreach ($addresses as $id => $address) {
+                if ($address->getCurrent()) {
+                    $defaultAddress = $address;
+                    break;
+                }
+            }
+
+            $builder->add('addresses', 'entity', array(
                     'choices'  => $addresses,
-                    'expanded' => false,
+                    'preferred_choices' => array($defaultAddress),
+                    'class'    => $this->addressClass,
+                    'property' => 'fullAddressHtml',
+                    'expanded' => true,
                     'multiple' => false,
                     'mapped'   => false,
                 ))
