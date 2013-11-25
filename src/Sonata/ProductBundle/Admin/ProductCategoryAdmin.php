@@ -49,7 +49,7 @@ class ProductCategoryAdmin extends Admin
     public function configureListFields(ListMapper $list)
     {
         if (!$this->isChild()) {
-            $list->addIndentifier('id')->addIdentifier('product');
+            $list->addIdentifier('id')->addIdentifier('product');
         }
 
         $list
