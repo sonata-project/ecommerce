@@ -110,6 +110,10 @@
                 <source>sonata.basket.title_address_delivery_step_basket</source>
                 <target>Selected delivery address</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.title_address_billing_step_basket">
+                <source>sonata.basket.title_address_billing_step_basket</source>
+                <target>Selected billing address</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.title_billing_address">
                 <source>sonata.basket.title_billing_address</source>
                 <target>Billing address</target>

@@ -11,13 +11,13 @@ file that was distributed with this source code.
 
 <h1>{{ 'sonata.basket.title_payment_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
-<h4>{{ 'sonata.basket.title_address_payment_step_basket'|trans({}, 'SonataBasketBundle') }}</h4>
+<h4>{{ 'sonata.basket.title_address_billing_step_basket'|trans({}, 'SonataBasketBundle') }}</h4>
 {{ basket.billingAddress.getFullAddress("<br />")|raw }}
 
 
 <form action="{{ url('sonata_basket_payment') }}" method="POST" >
     <div>
-        <h2>{{ 'sonata.basket.title_payment_methods'|trans({}, 'SonataBasketBundle') }}</h2>
+        <h2>{{ 'sonata.basket.title_payment_method'|trans({}, 'SonataBasketBundle') }}</h2>
 
         {{ form_errors(form.paymentMethod) }}
         {{ form_widget(form.paymentMethod) }}
