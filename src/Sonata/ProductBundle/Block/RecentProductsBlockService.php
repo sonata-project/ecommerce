@@ -58,7 +58,7 @@ class RecentProductsBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $products = $this->getProductRepository()
-            ->findLastProducts($blockContext->getSetting('number'));
+            ->findLastActiveProducts($blockContext->getSetting('number'));
 
         return $this->renderResponse($blockContext->getTemplate(), array(
             'context'   => $blockContext,
