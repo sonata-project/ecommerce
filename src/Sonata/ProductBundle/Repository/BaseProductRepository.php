@@ -25,10 +25,29 @@ class BaseProductRepository extends EntityRepository
      *
      * @return array
      */
-    public function findLastProducts($limit = 5)
+    public function findLastActiveProducts($limit = 5)
     {
+        $rootEnabledProducts = $this->createQueryBuilder('pr')
+            ->select('pr.id')
+            ->where('pr.parent is null and pr.enabled = :enabled');
+        $enabledChildren = $this->createQueryBuilder('pc')
+            ->select('pc.id')
+            ->innerJoin('pc.parent', 'pa')
+            ->where('pa.enabled = :enabled');
+
+        $eb = $this->getEntityManager()->getExpressionBuilder();
+
         return $this->createQueryBuilder('p')
-            ->where('p.enabled = :enabled')
+            ->select('p', 'i')
+            ->leftJoin('p.image', 'i')
+            ->where(
+                $eb->orX(
+                    $eb->in('p.id', $rootEnabledProducts->getDQL()),
+                    $eb->in('p.id', $enabledChildren->getDQL())
+                )
+            )
+            ->andWhere('p.price is not null and p.price != 0')
+            ->andWhere('p.stock is not null and p.stock != 0')
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->setParameters(array(
