@@ -197,6 +197,13 @@ class BasketController extends Controller
             throw new HttpException('Invalid customer');
         }
 
+        if (null === $basket->getBillingAddress()) {
+            // If no payment address is specified, we assume it's the same as the delivery
+            $billingAddress = clone $basket->getDeliveryAddress();
+            $billingAddress->setType(AddressInterface::TYPE_BILLING);
+            $basket->setBillingAddress($billingAddress);
+        }
+
         $form = $this->createForm('sonata_basket_payment', $basket, array(
             'validation_groups' => array('delivery')
         ));
@@ -205,12 +212,6 @@ class BasketController extends Controller
             $form->bind($this->get('request'));
 
             if ($form->isValid()) {
-                if (null === $basket->getBillingAddress()) {
-                    // If no payment address is specified, we assume it's the same as the delivery
-                    $billingAddress = clone $basket->getDeliveryAddress();
-                    $billingAddress->setType(AddressInterface::TYPE_BILLING);
-                    $basket->setBillingAddress($billingAddress);
-                }
                 // save the basket
                 $this->get('sonata.basket.factory')->save($basket);
 
