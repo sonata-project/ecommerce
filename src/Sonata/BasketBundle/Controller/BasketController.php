@@ -267,7 +267,7 @@ class BasketController extends Controller
                 // save the basket
                 $this->get('sonata.basket.factory')->save($form->getData());
 
-                return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
+                return new RedirectResponse($this->generateUrl('sonata_basket_payment_address'));
             }
         }
 
@@ -325,6 +325,62 @@ class BasketController extends Controller
                 $this->get('sonata.basket.factory')->save($basket);
 
                 return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
+            }
+        }
+
+        return $this->render($template, array(
+            'form'      => $form->createView(),
+            'addresses' => $addresses
+        ));
+    }
+
+    /**
+     * Order process step 4: choose a billing address from existing ones or create a new one
+     *
+     * @throws NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function paymentAddressStepAction()
+    {
+        $basket = $this->get('sonata.basket');
+
+        if ($basket->countBasketElements() == 0) {
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
+        }
+
+        $customer = $basket->getCustomer();
+
+        if (!$customer) {
+            throw new NotFoundHttpException('customer not found');
+        }
+
+        $addresses = $customer->getAddressesByType(AddressInterface::TYPE_BILLING);
+
+        // Show address creation / selection form
+        $form = $this->createForm('sonata_basket_address', null, array('addresses' => $addresses->toArray()));
+        $template = 'SonataBasketBundle:Basket:payment_address_step.html.twig';
+
+        if ($this->get('request')->getMethod() == 'POST') {
+            $form->bind($this->get('request'));
+
+            if ($form->isValid()) {
+                if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
+                    $address = $form->get('addresses')->getData();
+                } else {
+                    $address = $form->getData();
+                    $address->setType(AddressInterface::TYPE_BILLING);
+
+                    $customer->addAddress($address);
+
+                    $this->get('sonata.customer.manager')->save($customer);
+                }
+
+                $basket->setCustomer($customer);
+                $basket->setBillingAddress($address);
+                // save the basket
+                $this->get('sonata.basket.factory')->save($basket);
+
+                return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
             }
         }
 

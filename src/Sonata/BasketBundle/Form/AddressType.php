@@ -40,9 +40,9 @@ class AddressType extends AbstractType
         $addresses = $options['addresses'];
 
         if (count($addresses) > 0) {
-            $defaultAddress = null;
+            $defaultAddress = current($addresses);
 
-            foreach ($addresses as $id => $address) {
+            foreach ($addresses as $address) {
                 if ($address->getCurrent()) {
                     $defaultAddress = $address;
                     break;

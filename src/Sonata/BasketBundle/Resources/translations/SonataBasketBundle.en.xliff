@@ -94,6 +94,10 @@
                 <source>sonata.basket.delivery_create_new_title</source>
                 <target>Add new delivery address</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.billing_create_new_title">
+                <source>sonata.basket.billing_create_new_title</source>
+                <target>Add new billing address</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.title_delivery_method">
                 <source>sonata.basket.title_delivery_method</source>
                 <target>Delivery method</target>

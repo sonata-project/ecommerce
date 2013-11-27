@@ -24,12 +24,16 @@
         <default key="_controller">SonataBasketBundle:Basket:authenticationStep</default>
     </route>
 
-    <route id="sonata_basket_delivery_address" pattern="/step/address">
+    <route id="sonata_basket_delivery_address" pattern="/step/delivery/address">
         <default key="_controller">SonataBasketBundle:Basket:deliveryAddressStep</default>
     </route>
 
     <route id="sonata_basket_delivery" pattern="/step/delivery">
         <default key="_controller">SonataBasketBundle:Basket:deliveryStep</default>
+    </route>
+
+    <route id="sonata_basket_payment_address" pattern="/step/payment/address">
+        <default key="_controller">SonataBasketBundle:Basket:paymentAddressStep</default>
     </route>
 
     <route id="sonata_basket_payment" pattern="/step/payment">
