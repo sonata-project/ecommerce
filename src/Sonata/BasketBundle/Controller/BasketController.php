@@ -227,7 +227,7 @@ class BasketController extends Controller
     }
 
     /**
-     * Order process step 4: choose delivery mode
+     * Order process step 3: choose delivery mode
      *
      * @throws NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
