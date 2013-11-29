@@ -202,6 +202,10 @@
                 <source>sonata_basket_address_name</source>
                 <target>Address name</target>
             </trans-unit>
+            <trans-unit id="sonata_basket_address_type">
+                <source>sonata_basket_address_type</source>
+                <target>Address type</target>
+            </trans-unit>
             <trans-unit id="sonata_basket_address_lastname">
                 <source>sonata_basket_address_lastname</source>
                 <target>Lastname</target>
