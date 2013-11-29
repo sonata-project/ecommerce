@@ -148,7 +148,7 @@ class CustomerController extends Controller
             $address = $this->getAddressManager()->findOneBy(array('id' => $id));
             $this->checkAddress($address);
 
-            $form = $this->createForm('sonata_basket_address', $address);
+            $form = $this->createForm('sonata_basket_address', $address, array('choose_type' => true));
         }
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
 
@@ -157,7 +157,6 @@ class CustomerController extends Controller
 
             if ($form->isValid()) {
                 $address = $form->getData();
-                $address->setType(AddressInterface::TYPE_DELIVERY);
 
                 $customer->addAddress($address);
 
@@ -170,7 +169,7 @@ class CustomerController extends Controller
         }
 
         return $this->render($template, array(
-            'form'      => $form->createView()
+            'form' => $form->createView()
         ));
     }
 
