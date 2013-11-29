@@ -101,7 +101,7 @@ class AddressManager implements AddressManagerInterface
      */
     public function setCurrent(AddressInterface $address)
     {
-        foreach ($address->getCustomer()->getAddressesByType(AddressInterface::TYPE_DELIVERY) as $custAddress) {
+        foreach ($address->getCustomer()->getAddressesByType($address->getType()) as $custAddress) {
             if ($custAddress->getCurrent()) {
                 $custAddress->setCurrent(false);
                 $this->save($custAddress);
