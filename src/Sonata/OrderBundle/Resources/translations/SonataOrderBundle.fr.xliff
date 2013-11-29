@@ -183,6 +183,14 @@
                 <source>list.label_delivery_method</source>
                 <target>Méthode de livraison</target>
             </trans-unit>
+            <trans-unit id="list.label_get_status_name">
+                <source>list.label_get_status_name</source>
+                <target>Statut</target>
+            </trans-unit>
+            <trans-unit id="list.label_get_delivery_status_name">
+                <source>list.label_get_delivery_status_name</source>
+                <target>Statut de livraison</target>
+            </trans-unit>            
             <!-- End - List translations -->
 
             <!-- Begin - Status translations -->
