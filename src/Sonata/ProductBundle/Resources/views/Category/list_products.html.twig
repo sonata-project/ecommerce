@@ -19,8 +19,8 @@ file that was distributed with this source code.
     {% endif %}
 {% else %}
     <ul>
-        {% for product in pager.getResults %}
-            {% if product.isMaster %}
+        {% for product in pager.getResults if product.isMaster %}
+            {% if not product.hasVariations or product.hasVariations and product.hasEnabledVariations %}
                 <li><a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}">{{ product.name }}</a></li>
             {% endif %}
         {% endfor %}
