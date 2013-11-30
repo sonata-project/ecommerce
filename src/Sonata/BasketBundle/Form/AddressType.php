@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Application\Sonata\CustomerBundle\Entity\Address;
-
 /**
  * @author Hugo Briand <briand@ekino.com>
  *
@@ -73,9 +71,9 @@ class AddressType extends AbstractType
 
         $builder->add('name', null, array('required' => !count($addresses)));
 
-        if ($options['choose_type']) {
+        if (isset($options['types'])) {
             $builder->add('type', 'choice', array(
-                    'choices'            => Address::getTypesList(),
+                    'choices' => $options['types'],
                     'translation_domain' => 'SonataCustomerBundle')
             );
         }
@@ -100,8 +98,7 @@ class AddressType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class'  => $this->addressClass,
-            'addresses'   => array(),
-            'choose_type' => false
+            'addresses'   => array()
         ));
     }
 
