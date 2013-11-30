@@ -129,6 +129,58 @@
                 <source>form.label_is_fake</source>
                 <target>Est factice</target>
             </trans-unit>
+            <trans-unit id="sonata_customer_address_addresses">
+                <source>sonata_customer_address_addresses</source>
+                <target>Choisir existante</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_useselected">
+                <source>sonata_customer_address_useselected</source>
+                <target>Utiliser l'adresse sélectionnée</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_firstname">
+                <source>sonata_customer_address_firstname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_name">
+                <source>sonata_customer_address_name</source>
+                <target>Nom de l'adresse</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_type">
+                <source>sonata_customer_address_type</source>
+                <target>Type d'adresse</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_lastname">
+                <source>sonata_customer_address_lastname</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_address1">
+                <source>sonata_customer_address_address1</source>
+                <target>Adresse 1</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_address2">
+                <source>sonata_customer_address_address2</source>
+                <target>Adresse 2</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_address3">
+                <source>sonata_customer_address_address3</source>
+                <target>Adresse 3</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_postcode">
+                <source>sonata_customer_address_postcode</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_city">
+                <source>sonata_customer_address_city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_countryCode">
+                <source>sonata_customer_address_countryCode</source>
+                <target>Code pays</target>
+            </trans-unit>
+            <trans-unit id="sonata_customer_address_phone">
+                <source>sonata_customer_address_phone</source>
+                <target>Téléphone</target>
+            </trans-unit>
             <!-- End - Customer // Address form-->
             <!-- End - Form translations -->
 
@@ -314,6 +366,10 @@
             <trans-unit id="address_add_success">
                 <source>address_add_success</source>
                 <target>Votre adresse a bien été ajoutée !</target>
+            </trans-unit>
+            <trans-unit id="address_edit_success">
+                <source>address_edit_success</source>
+                <target>Votre adresse a bien été mise à jour !</target>
             </trans-unit>
             <trans-unit id="address_name_label">
                 <source>address_name_label</source>

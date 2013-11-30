@@ -143,12 +143,12 @@ class CustomerController extends Controller
 
         // Show address creation/edition form
         if (null === $id) {
-            $form = $this->createForm('sonata_basket_address');
+            $form = $this->createForm('sonata_customer_address');
         } else {
             $address = $this->getAddressManager()->findOneBy(array('id' => $id));
             $this->checkAddress($address);
 
-            $form = $this->createForm('sonata_basket_address', $address, array('choose_type' => true));
+            $form = $this->createForm('sonata_customer_address', $address);
         }
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
 
