@@ -29,11 +29,17 @@ class BaseProductRepository extends EntityRepository
     {
         $rootEnabledProducts = $this->createQueryBuilder('pr')
             ->select('pr.id')
-            ->where('pr.parent is null and pr.enabled = :enabled');
+            ->where('pr.parent is null and pr.enabled = :enabled')
+            ->andWhere('pr.stock is not null and pr.stock != 0')
+            ->andWhere('pr.price is not null and pr.price != 0');
+
         $enabledChildren = $this->createQueryBuilder('pc')
             ->select('pc.id')
             ->innerJoin('pc.parent', 'pa')
-            ->where('pa.enabled = :enabled');
+            ->where('pa.enabled = :enabled')
+            ->andWhere('pc.enabled = :enabled')
+            ->andWhere('pc.stock is not null and pc.stock != 0')
+            ->andWhere('pc.price is not null and pc.price != 0');
 
         $eb = $this->getEntityManager()->getExpressionBuilder();
 
@@ -46,8 +52,6 @@ class BaseProductRepository extends EntityRepository
                     $eb->in('p.id', $enabledChildren->getDQL())
                 )
             )
-            ->andWhere('p.price is not null and p.price != 0')
-            ->andWhere('p.stock is not null and p.stock != 0')
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->setParameters(array(
