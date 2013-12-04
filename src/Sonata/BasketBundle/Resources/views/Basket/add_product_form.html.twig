@@ -14,7 +14,7 @@ file that was distributed with this source code.
         <div class="control-group">
             <label class="control-label" style="width: auto;">{% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %}</label>
             <div class="controls" style="margin-left: 80px;">
-                {{ form_widget(form.quantity, {'attr': {'class':'input-small'}}) }}
+                {{ form_widget(form.quantity, {'attr': {'class':'input-small', 'min': 1}}) }}
             </div>
         </div>
 

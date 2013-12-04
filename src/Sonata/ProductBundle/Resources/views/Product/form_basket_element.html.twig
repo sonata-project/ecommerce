@@ -28,7 +28,7 @@ file that was distributed with this source code.
         <td>
             {% block product_quantity %}
                 {{ form_errors(formView.quantity) }}
-                {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini'}}) }}
+                {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}}) }}
             {% endblock %}
         </td>
         <td class="number">
