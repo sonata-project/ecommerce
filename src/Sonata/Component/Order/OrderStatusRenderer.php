@@ -13,7 +13,7 @@ namespace Sonata\Component\Order;
 
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Status\StatusClassRendererInterface;
+use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
 
 
 /**
@@ -28,22 +28,18 @@ class OrderStatusRenderer implements StatusClassRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function handlesObject($object, $statusType = null)
+    public function handlesObject($object, $statusName = null)
     {
         return ($object instanceof OrderInterface || $object instanceof OrderElementInterface)
-            && in_array($statusType, array('delivery', 'payment', null));
+            && in_array($statusName, array('delivery', 'payment', null));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getStatusClass($object, $statusType = null, $default = "")
+    public function getStatusClass($object, $statusName = null, $default = "")
     {
-        if (!$this->handlesObject($object, $statusType)) {
-            return $default;
-        }
-
-        switch ($statusType) {
+        switch ($statusName) {
             case 'delivery':
                 switch ($object->getDeliveryStatus()) {
                     case BaseServiceDelivery::STATUS_COMPLETED:
@@ -81,8 +77,5 @@ class OrderStatusRenderer implements StatusClassRendererInterface
                 }
                 break;
         }
-
-        return $default;
     }
-
 }

@@ -9,7 +9,7 @@
  */
 
 
-namespace Sonata\OrderBundle\DependencyInjection\Compiler;
+namespace Sonata\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
