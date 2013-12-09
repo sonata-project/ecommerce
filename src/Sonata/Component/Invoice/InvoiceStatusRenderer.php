@@ -11,8 +11,7 @@
 
 namespace Sonata\Component\Invoice;
 
-use Sonata\Component\Invoice\InvoiceInterface;
-use Sonata\Component\Status\StatusClassRendererInterface;
+use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
 
 
 /**
@@ -28,7 +27,7 @@ class InvoiceStatusRenderer implements StatusClassRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function handlesObject($object, $statusType = null)
+    public function handlesObject($object, $statusName = null)
     {
         return $object instanceof InvoiceInterface;
     }
@@ -36,12 +35,8 @@ class InvoiceStatusRenderer implements StatusClassRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function getStatusClass($object, $statusType = null, $default = "")
+    public function getStatusClass($object, $statusName = null, $default = "")
     {
-        if (!$this->handlesObject($object, $statusType)) {
-            return $default;
-        }
-
         switch ($object->getStatus()) {
             case InvoiceInterface::STATUS_CONFLICT:
                 return 'important';

@@ -10,17 +10,8 @@
 
 namespace Sonata\OrderBundle;
 
-use Sonata\OrderBundle\DependencyInjection\Compiler\StatusRendererCompilerPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataOrderBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new StatusRendererCompilerPass());
-    }
-
 }
