@@ -12,5 +12,5 @@ file that was distributed with this source code.
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    <span class="label{{ object|status_class('payment', 'important') ? ' label-'~object|status_class('payment', 'important') : '' }}">{{ object.paymentStatusName|trans([], 'SonataPaymentBundle') }}</span>
+    <span class="label{{ object|sonata_status_class('payment', 'important') ? ' label-'~object|sonata_status_class('payment', 'important') : '' }}">{{ object.paymentStatusName|trans([], 'SonataPaymentBundle') }}</span>
 {% endblock %}

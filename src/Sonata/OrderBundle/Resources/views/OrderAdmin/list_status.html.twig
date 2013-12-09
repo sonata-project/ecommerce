@@ -12,5 +12,5 @@ file that was distributed with this source code.
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    <span class="label{{ object|status_class(null, 'important') ? ' label-'~object|status_class(null, 'important') : '' }}">{{ object.statusName|trans([], 'SonataOrderBundle') }}</span>
+    <span class="label{{ object|sonata_status_class(null, 'important') ? ' label-'~object|sonata_status_class(null, 'important') : '' }}">{{ object.statusName|trans([], 'SonataOrderBundle') }}</span>
 {% endblock %}

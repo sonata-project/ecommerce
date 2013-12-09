@@ -40,11 +40,11 @@ file that was distributed with this source code.
                 </tr>
                 <tr>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
-                    <td><span class="label{{ order|status_class('payment', 'important') ? ' label-'~order|status_class('payment', 'important') : '' }}">{{ order.paymentStatusName|trans({}, 'SonataPaymentBundle') }}</span></td>
+                    <td><span class="label{{ order|sonata_status_class('payment', 'important') ? ' label-'~order|sonata_status_class('payment', 'important') : '' }}">{{ order.paymentStatusName|trans({}, 'SonataPaymentBundle') }}</span></td>
                 </tr>
                 <tr>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</th>
-                    <td><span class="label{{ order|status_class('delivery', 'important') ? ' label-'~order|status_class('delivery', 'important') : '' }}">{{ order.deliveryStatusName|trans({}, 'SonataDeliveryBundle') }}</span></td>
+                    <td><span class="label{{ order|sonata_status_class('delivery', 'important') ? ' label-'~order|sonata_status_class('delivery', 'important') : '' }}">{{ order.deliveryStatusName|trans({}, 'SonataDeliveryBundle') }}</span></td>
                 </tr>
                 <tr>
                     <th>{% trans from 'SonataPaymentBundle' %}method{% endtrans %}</th>
