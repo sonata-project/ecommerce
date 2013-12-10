@@ -100,6 +100,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('seo')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('product')
                             ->addDefaultsIfNotSet()
