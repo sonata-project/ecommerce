@@ -25,6 +25,11 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     protected $enabled;
 
     /**
+     * @var boolean $main
+     */
+    protected $main;
+
+    /**
      * @var \DateTime $updatedAt
      */
     protected $updatedAt;
@@ -63,6 +68,22 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMain($main)
+    {
+        $this->main = $main;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMain()
+    {
+        return $this->main;
     }
 
     /**
