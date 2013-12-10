@@ -16,6 +16,8 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 
 class ProductAdminController extends Controller
 {
@@ -79,9 +81,14 @@ class ProductAdminController extends Controller
 
         $form = $this->createFormBuilder(null, array())
             ->add('number', 'integer', array(
-                'required' => true,
-                'label'    => $this->getTranslator()->trans('variations_number', array(), 'SonataProductBundle'),
-                'attr'     => array('min' => 1)))
+                'required'    => true,
+                'label'       => $this->getTranslator()->trans('variations_number', array(), 'SonataProductBundle'),
+                'attr'        => array('min' => 1),
+                'constraints' => array(
+                    new NotBlank(),
+                    new Range(array('min' => 1)),
+                ),
+            ))
             ->getForm();
 
         if ($this->getRequest()->isMethod('POST')) {
