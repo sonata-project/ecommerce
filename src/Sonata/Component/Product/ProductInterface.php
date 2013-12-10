@@ -474,13 +474,6 @@ interface ProductInterface
     public function isSalable();
 
     /**
-     * Return the cheaper variation, if any.
-     *
-     * @return ProductInterface
-     */
-    public function getCheapestVariation();
-
-    /**
      * Return true if the Product is recurrent.
      *
      * @return boolean

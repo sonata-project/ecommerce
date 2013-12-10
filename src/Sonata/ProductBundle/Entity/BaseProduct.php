@@ -711,35 +711,6 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * @deprecated
-     * @see getCheapestVariation
-     */
-    public function getCheaperVariation()
-    {
-        return $this->getCheapestVariation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCheapestVariation()
-    {
-        if (!$this->hasEnabledVariations()) {
-            return null;
-        }
-
-        $returnVariation = null;
-
-        foreach ($this->variations as $variation) {
-            if ($variation->isEnabled() && $variation->getPrice() <= ($returnVariation ? $returnVariation->getPrice() : PHP_INT_MAX)) {
-                $returnVariation = $variation;
-            }
-        }
-
-        return $returnVariation;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function isRecurrentPayment()
