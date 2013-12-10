@@ -29,6 +29,20 @@ interface ProductCategoryInterface
     public function getEnabled();
 
     /**
+     * Set if product category is the main category
+     *
+     * @param boolean $main
+     */
+    public function setMain($main);
+
+    /**
+     * Get if product category is the main category
+     *
+     * @return boolean $main
+     */
+    public function getMain();
+
+    /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt

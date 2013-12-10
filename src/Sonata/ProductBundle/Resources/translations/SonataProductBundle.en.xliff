@@ -219,6 +219,10 @@
                 <source>form.label_enabled</source>
                 <target>Enabled</target>
             </trans-unit>
+            <trans-unit id="form.label_main">
+                <source>form.label_main</source>
+                <target>Main</target>
+            </trans-unit>
             <trans-unit id="form.label_sku">
                 <source>form.label_sku</source>
                 <target>Sku</target>
