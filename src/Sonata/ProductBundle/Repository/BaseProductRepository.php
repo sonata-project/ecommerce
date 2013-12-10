@@ -45,6 +45,7 @@ class BaseProductRepository extends EntityRepository
 
         return $this->createQueryBuilder('p')
             ->select('p', 'i')
+            ->distinct()
             ->leftJoin('p.image', 'i')
             ->where(
                 $eb->orX(
