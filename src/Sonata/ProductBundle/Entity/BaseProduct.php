@@ -711,9 +711,18 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @deprecated
+     * @see getCheapestVariation
      */
     public function getCheaperVariation()
+    {
+        return $this->getCheapestVariation();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCheapestVariation()
     {
         if (!$this->hasEnabledVariations()) {
             return null;

@@ -478,7 +478,7 @@ interface ProductInterface
      *
      * @return ProductInterface
      */
-    public function getCheaperVariation();
+    public function getCheapestVariation();
 
     /**
      * Return true if the Product is recurrent.
