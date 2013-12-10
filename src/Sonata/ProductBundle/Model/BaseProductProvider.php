@@ -13,6 +13,7 @@ namespace Sonata\ProductBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
@@ -21,7 +22,6 @@ use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Basket\BasketElement;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -79,7 +79,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $currencyPriceCalculator;
 
     /**
-     * @param \JMS\Serializer\SerializerInterface $serializer
+     * @param \JMS\Serializer\SerializerInterface               $serializer
      */
     public function __construct(SerializerInterface $serializer)
     {
@@ -781,6 +781,19 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
+     * Calculate the product price depending on the currency
+     *
+     * @param ProductInterface  $product
+     * @param CurrencyInterface $currency
+     *
+     * @return float
+     */
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency = null)
+    {
+        return $this->currencyPriceCalculator->getPrice($product, $currency);
+    }
+
+    /**
      * Return true if the product can be added to the provided basket
      *
      * @param \Sonata\Component\Basket\BasketInterface   $basket
@@ -849,5 +862,27 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCheapestEnabledVariation(ProductInterface $product)
+    {
+        if (!$product->hasEnabledVariations()) {
+            return null;
+        }
+
+        $variations = $product->getEnabledVariations();
+
+        $result = null;
+
+        foreach ($variations as $productVariation) {
+            if (null === $result || $productVariation->getPrice() < $result->getPrice()) {
+                $result = $productVariation;
+            }
+        }
+
+        return $result;
     }
 }

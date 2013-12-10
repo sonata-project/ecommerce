@@ -18,10 +18,8 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\Component\Product\ProductInterface;
 use Symfony\Component\Form\FormBuilder;
-use Sonata\Component\Product\ProductCategoryManagerInterface;
-use Sonata\Component\Product\ProductCollectionManagerInterface;
+use Sonata\Component\Currency\CurrencyInterface;
 
 interface ProductProviderInterface
 {
@@ -110,6 +108,16 @@ interface ProductProviderInterface
      * @return float the unit price of the basketElement
      */
     public function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement);
+
+    /**
+     * Calculate the product price depending on the currency
+     *
+     * @param ProductInterface  $product
+     * @param CurrencyInterface $currency
+     *
+     * @return float
+     */
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency);
 
     /**
      * Return true if the product can be added to the provided basket
@@ -226,4 +234,13 @@ interface ProductProviderInterface
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null);
+
+    /**
+     * Fetch the cheapest variation if provided/existing
+     *
+     * @param ProductInterface $product
+     *
+     * @return null|ProductInterface
+     */
+    public function getCheapestEnabledVariation(ProductInterface $product);
 }

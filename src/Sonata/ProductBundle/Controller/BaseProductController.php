@@ -51,7 +51,9 @@ abstract class BaseProductController extends Controller
         return $this->render(
             sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
             array(
+                'provider'      => $provider,
                 'product'       => $product,
+                'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
                 'currency'      => $currency,
                 'similar_cross' => $crossSellingProducts,
                 'form'          => $form,
