@@ -836,10 +836,10 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function validateOneMainCategory(ExecutionContext $context)
+    public function hasOneMainCategory()
     {
         if ($this->getCategories()->count() == 0) {
-            return;
+            return false;
         }
 
         $has = false;
@@ -847,7 +847,7 @@ abstract class BaseProduct implements ProductInterface
         foreach ($this->getProductCategories() as $productCategory) {
             if ($productCategory->getMain()) {
                 if ($has) {
-                    $has = true;
+                    $has = false;
                     break;
                 }
 
@@ -855,7 +855,19 @@ abstract class BaseProduct implements ProductInterface
             }
         }
 
-        if (!$has) {
+        return $has;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateOneMainCategory(ExecutionContext $context)
+    {
+        if ($this->getCategories()->count() == 0) {
+            return;
+        }
+
+        if (!$this->hasOneMainCategory()) {
             $context->addViolation('sonata.product.must_have_one_main_category');
         }
     }

@@ -496,6 +496,13 @@ interface ProductInterface
     public function fromArray($array);
 
     /**
+     * Returns if product has one main category
+     *
+     * @return bool
+     */
+    public function hasOneMainCategory();
+
+    /**
      * Validates if product has one main category
      *
      * @param ExecutionContext $context
