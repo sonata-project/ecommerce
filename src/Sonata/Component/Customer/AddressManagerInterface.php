@@ -10,59 +10,14 @@
 
 namespace Sonata\Component\Customer;
 
-interface AddressManagerInterface
+use Sonata\CoreBundle\Entity\ManagerInterface;
+
+interface AddressManagerInterface extends ManagerInterface
 {
-
-    /**
-     * Creates an empty Address instance
-     *
-     * @return Address
-     */
-    public function create();
-
-    /**
-     * Deletes a address
-     *
-     * @param  AddressInterface $address
-     * @return void
-     */
-    public function delete(AddressInterface $address);
-
     /**
      * Sets $address the current customer address
      *
      * @param AddressInterface $address
      */
     public function setCurrent(AddressInterface $address);
-
-    /**
-     * Finds one address by the given criteria
-     *
-     * @param  array $criteria
-     * @return array
-     */
-    public function findBy(array $criteria);
-
-    /**
-     * Finds one address by the given criteria
-     *
-     * @param  array            $criteria
-     * @return AddressInterface
-     */
-    public function findOneBy(array $criteria);
-
-    /**
-     * Returns the address's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass();
-
-    /**
-     * Saves an address
-     *
-     * @param  AddressInterface $address
-     * @return void
-     */
-    public function save(AddressInterface $address);
 }

@@ -14,6 +14,8 @@
 
     <services>
         <service id="sonata.price.currency.manager" class="%sonata.price.currency.manager.class%">
+            <argument>%sonata.price.currency.manager.class%</argument>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
         <service id="sonata.price.currency.calculator" class="%sonata.price.currency.calculator.class%" />
