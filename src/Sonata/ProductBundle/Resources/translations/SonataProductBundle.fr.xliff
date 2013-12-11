@@ -251,6 +251,10 @@
                 <source>form.label_image</source>
                 <target>Image</target>
             </trans-unit>
+            <trans-unit id="form.label_gallery">
+                <source>form.label_gallery</source>
+                <target>Gallerie</target>
+            </trans-unit>
             <trans-unit id="form.label_category">
                 <source>form.label_category</source>
                 <target>Catégorie</target>

@@ -207,7 +207,7 @@ class ProductManager implements ProductManagerInterface
             ->from($this->getClass(), 'p')
             ->select('p')
             ->leftJoin('p.productCategories', 'pc')
-            ->leftJoin('p.image', 'i')
+            ->leftJoin('p.gallery', 'g')
             ->where('pc.category = :categoryId')
             ->setParameter('categoryId', $categoryId);
     }
