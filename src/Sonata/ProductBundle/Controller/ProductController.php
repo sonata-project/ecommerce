@@ -152,4 +152,50 @@ class ProductController extends Controller
 
         return $response;
     }
+
+    /**
+     * Displays breadcrumb for a product
+     *
+     * @param int $productId
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function displayBreadcrumbAction($productId)
+    {
+        $product = $this->get('sonata.product.set.manager')->findOneBy(
+            array('id' => $productId, 'enabled' => true)
+        );
+
+        if (!$product) {
+            throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
+        }
+
+        $categories = $this->get('sonata.classification.manager.category')->getCategories();
+
+        $selectedCategory = $product->getMainCategory();
+
+        if (!$selectedCategory) {
+            throw new NotFoundHttpException(sprintf('Product "%d" has no main category', $productId));
+        }
+
+        $categoryId = $selectedCategory->getId();
+
+        $sorted = array(
+            $categories[$categoryId]
+        );
+
+        while ($category = $categories[$categoryId]->getParent()) {
+            $sorted[] = $category;
+            $categoryId = $category->getId();
+        }
+
+        $sorted = array_reverse($sorted, true);
+
+        return $this->render('SonataProductBundle:Product:display_breadcrumb.html.twig', array(
+            'categories' => $sorted,
+            'product'    => $product,
+        ));
+    }
 }

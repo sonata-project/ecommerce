@@ -1,0 +1,12 @@
+<ul class="breadcrumb">
+    <li><a href="{{ path('sonata_category_index') }}"><i class="icon-home"></i></a><span class="divider">&raquo;</span></li>
+    {% for category in categories %}
+        <li>
+            <a href="{{ url('sonata_category_view', {'categoryId': category.id, 'slug': category.slug}) }}">
+                {{ category.name }}
+            </a>
+            <span class="divider">&raquo;</span>
+        </li>
+    {% endfor %}
+    <li>{{ product.name }}</li>
+</ul>

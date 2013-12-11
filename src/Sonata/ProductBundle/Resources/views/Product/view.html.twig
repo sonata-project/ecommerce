@@ -12,7 +12,7 @@ file that was distributed with this source code.
 {% block product %}
     <!-- Begin product display -->
     <div class="row-fluid" itemscope itemtype="http://schema.org/Product">
-    {% sonata_template_box 'This is the product view template. Feel free to override it.' %}
+        {% sonata_template_box 'This is the product view template. Feel free to override it.' %}
 
         {% block product_errors %}
             {%  if not provider.hasVariations(product) and product.getStock == 0 %}
@@ -22,7 +22,9 @@ file that was distributed with this source code.
             {% endif %}
         {% endblock %}
 
-        <h2 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h2>
+        <h1 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h1>
+
+        {% render controller("SonataProductBundle:Product:displayBreadcrumb", {'productId': product.id}) %}
 
         <!-- Begin product details -->
         <div class="span8">
