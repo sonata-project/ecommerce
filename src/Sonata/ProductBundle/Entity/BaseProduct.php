@@ -613,7 +613,16 @@ abstract class BaseProduct implements ProductInterface
     public function getImage()
     {
         if ($this->getGallery() && count($media = $this->getGallery()->getGalleryHasMedias()) > 0) {
-            return $media[0]->getMedia();
+            $minPosition = PHP_INT_MAX;
+            $firstMedia = null;
+
+            foreach ($media as $ghm) {
+                if ($ghm->getPosition() < $minPosition) {
+                    $firstMedia = $ghm->getMedia();
+                }
+            }
+
+            return $firstMedia;
         }
 
         return null;
