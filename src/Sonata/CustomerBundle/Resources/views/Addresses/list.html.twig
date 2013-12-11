@@ -5,6 +5,8 @@
 
 {% block sonata_profile_content %}
 
+    {% sonata_template_box 'This is the customer addresses list template. Feel free to override it.' %}
+
     {% block sonata_profile_address_flash %}
         {% for success in app.session.flashBag.get('success') %}
             <div class="alert alert-success">

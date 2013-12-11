@@ -12,6 +12,8 @@ file that was distributed with this source code.
 {% if similar_cross|length > 0 %}
     <h3>{% trans from "SonataProductBundle" %}sonata.product.cross_selling.title{% endtrans %}</h3>
 
+    {% sonata_template_box 'This is the similar product view template. Feel free to override it.' %}
+
     {% block similar_products %}
         <ul>
             {% for similar_product in similar_cross if provider.hasEnabledVariations(similar_product) or not provider.hasVariations(similar_product) %}

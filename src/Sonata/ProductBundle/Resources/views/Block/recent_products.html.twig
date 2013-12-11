@@ -18,6 +18,9 @@ file that was distributed with this source code.
                     <h3>{{ settings.title }}</h3>
                 {% endif %}
             </div>
+
+            {% sonata_template_box 'This is the recent products block. Feel free to override it.' %}
+
             <div class="span2" style="text-align: right">
                 <a href="{{ url('sonata_category_index') }}"> {{ 'view_all_products'|trans({}, 'SonataProductBundle') }}</a>
             </div>

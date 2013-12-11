@@ -10,10 +10,11 @@ file that was distributed with this source code.
 #}
 {% extends "SonataUserBundle:Profile:action.html.twig" %}
 
-
 {% block sonata_profile_title %}{% trans from 'SonataCustomerBundle' %}address_new{% endtrans %}{% endblock %}
 
 {% block sonata_profile_content %}
+
+{% sonata_template_box 'This is the customer address creation template. Feel free to override it.' %}
 
 {% form_theme form 'SonataCustomerBundle:Form:label.html.twig' %}
 
