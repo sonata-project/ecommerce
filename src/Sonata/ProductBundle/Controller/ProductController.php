@@ -39,7 +39,6 @@ class ProductController extends Controller
         /** @var \Sonata\Component\Product\Pool $productPool */
         $productPool = $this->get('sonata.product.pool');
         $provider = $productPool->getProvider($product);
-        echo get_class($provider); exit;
 
         if ($provider->hasVariations($product) && !$provider->hasEnabledVariations($product)) {
             throw new NotFoundHttpException('Product has no activated variation');
