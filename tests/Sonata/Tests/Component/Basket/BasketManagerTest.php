@@ -24,7 +24,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
     public function testCreateAndGetClass()
     {
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
-        $basketMgr = new BasketManager($em, 'Sonata\Component\Basket\Basket');
+        $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $em);
 
         $this->assertInstanceOf('Sonata\Component\Basket\Basket', $basketMgr->create());
         $this->assertEquals('Sonata\Component\Basket\Basket', $basketMgr->getClass());
@@ -36,22 +36,10 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
         $em->expects($this->once())->method('persist');
         $em->expects($this->once())->method('flush');
 
-        $basketMgr = new BasketManager($em, 'Sonata\Component\Basket\Basket');
+        $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $em);
 
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basketMgr->save($basketElement);
-    }
-
-    public function testGetRepository()
-    {
-        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
-
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
-        $em->expects($this->once())->method('getRepository')->will($this->returnValue($repository));
-
-        $basketMgr = new BasketManager($em, 'Sonata\Component\Basket\Basket');
-
-        $this->assertInstanceOf('Doctrine\ORM\EntityRepository', $basketMgr->getRepository());
     }
 
     public function testFind()
@@ -63,7 +51,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $basketMgr = new BasketManager($em, 'Sonata\Component\Basket\Basket');
+        $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $em);
         $basketMgr->findBy(array());
         $basketMgr->findOneBy(array());
     }
@@ -74,7 +62,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
         $em->expects($this->once())->method('remove');
         $em->expects($this->once())->method('flush');
 
-        $basketMgr = new BasketManager($em, 'Sonata\Component\Basket\Basket');
+        $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $em);
 
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basketMgr->delete($basketElement);
