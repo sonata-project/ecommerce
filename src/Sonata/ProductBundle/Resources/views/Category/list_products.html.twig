@@ -22,7 +22,7 @@ file that was distributed with this source code.
 {% else %}
     <ul>
         {% for product in pager.getResults if product.isMaster %}
-            {% if not product.hasVariations or product.hasVariations and product.hasEnabledVariations %}
+            {% if not provider.hasVariations(product) or provider.hasVariations(product) and provider.hasEnabledVariations(product) %}
                 <li><a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}">{{ product.name }}</a></li>
             {% endif %}
         {% endfor %}

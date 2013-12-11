@@ -78,7 +78,8 @@ class CategoryController extends Controller
      *
      * @param int $categoryId
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function listProductsAction($categoryId)
     {
@@ -91,10 +92,16 @@ class CategoryController extends Controller
         $pager = $this->get('sonata.product.set.manager')
             ->getActiveProductsByCategoryIdPager($categoryId, $this->get('request')->get('page'));
 
-        return $this->render('SonataProductBundle:Category:list_products.html.twig', array(
+        $viewParams = array(
             'pager' => $pager,
             'category' => $category,
-        ));
+        );
+
+        if (count($pager)) {
+            $viewParams['provider'] = $this->get('sonata.product.pool')->getProvider($pager->getCurrent());
+        }
+
+        return $this->render('SonataProductBundle:Category:list_products.html.twig', $viewParams);
     }
 
     /**
