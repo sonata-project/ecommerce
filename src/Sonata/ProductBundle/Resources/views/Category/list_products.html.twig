@@ -13,6 +13,8 @@ file that was distributed with this source code.
     <h2>{% trans from 'SonataProductBundle' %}title_list_products{% endtrans %}</h2>
 {% endif %}
 
+{% sonata_template_box 'This is the category products list template. Feel free to override it.' %}
+
 {% if pager.count == 0 %}
     {% if not category.hasChildren %}
         {% trans from 'SonataProductBundle' %}no_products_available{% endtrans %}
