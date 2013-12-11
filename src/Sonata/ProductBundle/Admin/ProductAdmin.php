@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
@@ -258,5 +259,15 @@ class ProductAdmin extends Admin
         }
 
         return $product;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $errorElement
+            ->assertCallback(array('validateOneMainCategory'))
+        ;
     }
 }

@@ -17,6 +17,7 @@ use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * Sonata\ProductBundle\Entity\BaseProduct
@@ -829,6 +830,33 @@ abstract class BaseProduct implements ProductInterface
 
         if (array_key_exists('options', $array)) {
             $this->options = $array['options'];
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateOneMainCategory(ExecutionContext $context)
+    {
+        if ($this->getCategories()->count() == 0) {
+            return;
+        }
+
+        $has = false;
+
+        foreach ($this->getProductCategories() as $productCategory) {
+            if ($productCategory->getMain()) {
+                if ($has) {
+                    $has = true;
+                    break;
+                }
+
+                $has = true;
+            }
+        }
+
+        if (!$has) {
+            $context->addViolation('sonata.product.must_have_one_main_category');
         }
     }
 }
