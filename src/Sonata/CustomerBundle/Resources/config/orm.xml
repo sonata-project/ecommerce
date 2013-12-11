@@ -13,13 +13,13 @@
         <service id="sonata.customer.entity_manager" alias="doctrine.orm.default_entity_manager" />
 
         <service id="sonata.address.manager" class="%sonata.address.manager.class%">
-            <argument type="service" id="sonata.customer.entity_manager" />
             <argument>%sonata.customer.address.class%</argument>
+            <argument type="service" id="sonata.customer.entity_manager" />
         </service>
 
         <service id="sonata.customer.manager" class="%sonata.customer.manager.class%">
-            <argument type="service" id="sonata.customer.entity_manager" />
             <argument>%sonata.customer.customer.class%</argument>
+            <argument type="service" id="sonata.customer.entity_manager" />
         </service>
     </services>
 

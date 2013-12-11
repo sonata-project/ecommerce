@@ -42,7 +42,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
 
-        $addressManager = new AddressManager($em, "");
+        $addressManager = new AddressManager('', $em);
 
         $addressManager->setCurrent($address);
     }
@@ -66,7 +66,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
 
-        $addressManager = new AddressManager($em, "");
+        $addressManager = new AddressManager('', $em);
 
         $addressManager->delete($address);
     }
