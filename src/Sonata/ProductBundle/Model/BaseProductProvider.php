@@ -242,6 +242,54 @@ abstract class BaseProductProvider implements ProductProviderInterface
     //   VARIATION RELATED FUNCTIONS
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasVariations(ProductInterface $product)
+    {
+        return $this->hasVariationFields() && 0 < count($product->getVariations());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEnabledVariations(ProductInterface $product)
+    {
+        if (!$this->hasVariationFields() || !$this->hasVariations($product)) {
+            return false;
+        }
+
+        foreach ($product->getVariations() as $variation) {
+            /** @var ProductInterface $variation */
+            if ($variation->isEnabled()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEnabledVariations(ProductInterface $product)
+    {
+        $result = new ArrayCollection();
+
+        if (!$this->hasVariationFields() || !$this->hasVariations($product)) {
+            return $result;
+        }
+
+        foreach ($product->getVariations() as $variation) {
+            /** @var ProductInterface $variation */
+            if ($variation->isEnabled()) {
+                $result->add($variation);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @param  $name
      * @return bool return true if the field $name is a variation
      */
@@ -781,12 +829,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * Calculate the product price depending on the currency
-     *
-     * @param ProductInterface  $product
-     * @param CurrencyInterface $currency
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function calculatePrice(ProductInterface $product, CurrencyInterface $currency = null)
     {
@@ -869,11 +912,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function getCheapestEnabledVariation(ProductInterface $product)
     {
-        if (!$product->hasEnabledVariations()) {
+        if (!$this->hasEnabledVariations($product)) {
             return null;
         }
 
-        $variations = $product->getEnabledVariations();
+        $variations = $this->getEnabledVariations($product);
 
         $result = null;
 

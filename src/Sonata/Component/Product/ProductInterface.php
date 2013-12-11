@@ -12,8 +12,6 @@
 namespace Sonata\Component\Product;
 
 use Sonata\MediaBundle\Model\MediaInterface;
-use Sonata\Component\Product\PackageInterface;
-use Sonata\Component\Product\DeliveryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\ExecutionContext;
 
@@ -375,27 +373,6 @@ interface ProductInterface
      * @param ArrayCollection $variations
      */
     public function setVariations(ArrayCollection $variations);
-
-    /**
-     * Return true if Product has variation(s).
-     *
-     * @return bool
-     */
-    public function hasVariations();
-
-    /**
-     * Return true if Product has enabled variation(s).
-     *
-     * @return bool
-     */
-    public function hasEnabledVariations();
-
-    /**
-     * Return the list of enabled product variations
-     *
-     * @return ArrayCollection
-     */
-    public function getEnabledVariations();
 
     /**
      * Set Media.

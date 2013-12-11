@@ -18,6 +18,7 @@ use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Product\Pool;
 use Sonata\ProductBundle\Repository\BaseProductRepository;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +35,11 @@ class RecentProductsBlockService extends BaseBlockService
     protected $entityManager;
 
     /**
+     * @var Pool
+     */
+    protected $pool;
+
+    /**
      * @var CurrencyDetectorInterface
      */
     protected $currencyDetector;
@@ -42,11 +48,13 @@ class RecentProductsBlockService extends BaseBlockService
      * @param string          $name
      * @param EngineInterface $templating
      * @param EntityManager   $entityManager
+     * @param Pool            $pool
      * @param CurrencyDetectorInterface $currencyDetector
      */
-    public function __construct($name, EngineInterface $templating, EntityManager $entityManager, CurrencyDetectorInterface $currencyDetector)
+    public function __construct($name, EngineInterface $templating, EntityManager $entityManager, Pool $pool, CurrencyDetectorInterface $currencyDetector)
     {
         $this->entityManager    = $entityManager;
+        $this->pool             = $pool;
         $this->currencyDetector = $currencyDetector;
 
         parent::__construct($name, $templating);
@@ -60,13 +68,19 @@ class RecentProductsBlockService extends BaseBlockService
         $products = $this->getProductRepository()
             ->findLastActiveProducts($blockContext->getSetting('number'));
 
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        $params = array(
             'context'   => $blockContext,
             'settings'  => $blockContext->getSettings(),
             'block'     => $blockContext->getBlock(),
             'products'  => $products,
             'currency'  => $this->currencyDetector->getCurrency(),
-        ), $response);
+        );
+
+        if (count($products)) {
+            $params['provider']  = $this->pool->getProvider($products[0]);
+        }
+
+        return $this->renderResponse($blockContext->getTemplate(), $params, $response);
     }
 
     /**

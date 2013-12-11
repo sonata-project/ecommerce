@@ -112,12 +112,12 @@ interface ProductProviderInterface
     /**
      * Calculate the product price depending on the currency
      *
-     * @param ProductInterface  $product
-     * @param CurrencyInterface $currency
+     * @param ProductInterface          $product
+     * @param CurrencyInterface|null    $currency
      *
      * @return float
      */
-    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency);
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency = null);
 
     /**
      * Return true if the product can be added to the provided basket
@@ -234,6 +234,33 @@ interface ProductProviderInterface
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null);
+
+    /**
+     * Check if the product has variations
+     *
+     * @param ProductInterface $product
+     *
+     * @return bool
+     */
+    public function hasVariations(ProductInterface $product);
+
+    /**
+     * Return true if Product has enabled variation(s).
+     *
+     * @param ProductInterface $product
+     *
+     * @return bool
+     */
+    public function hasEnabledVariations(ProductInterface $product);
+
+    /**
+     * Return the list of enabled product variations
+     *
+     * @param ProductInterface $product
+     *
+     * @return ArrayCollection
+     */
+    public function getEnabledVariations(ProductInterface $product);
 
     /**
      * Fetch the cheapest variation if provided/existing

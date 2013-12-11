@@ -11,9 +11,10 @@ file that was distributed with this source code.
 
 {% if similar_cross|length > 0 %}
     <h3>{% trans from "SonataProductBundle" %}sonata.product.cross_selling.title{% endtrans %}</h3>
+
     {% block similar_products %}
         <ul>
-            {% for similar_product in similar_cross if similar_product.hasEnabledVariations or not similar_product.hasVariations%}
+            {% for similar_product in similar_cross if provider.hasEnabledVariations(similar_product) or not provider.hasVariations(similar_product) %}
                 {% block similar_product %}
                     <li class="span3">
                         {% include "SonataProductBundle:Product:view_thumbnail.html.twig" with {product: similar_product} %}
