@@ -348,6 +348,13 @@ interface ProductInterface
     public function getCategories();
 
     /**
+     * Returns product main category
+     *
+     * @return CategoryInterface
+     */
+    public function getMainCategory();
+
+    /**
      * Add a variation to collection.
      *
      * @param ProductInterface $variation

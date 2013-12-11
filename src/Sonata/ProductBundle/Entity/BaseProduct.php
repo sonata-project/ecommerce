@@ -550,6 +550,18 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function getMainCategory()
+    {
+        foreach ($this->getProductCategories() as $productCategory) {
+            if ($productCategory->getMain()) {
+                return $productCategory->getCategory();
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addVariation(ProductInterface $variation)
     {
         $variation->setParent($this);

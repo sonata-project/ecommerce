@@ -11,9 +11,10 @@ file that was distributed with this source code.
 
 {% sonata_template_box 'This is the product category template. Feel free to override it.' %}
 
+<h1>{{ category.name }}</h1>
+
 {% render controller("SonataProductBundle:Category:displayBreadcrumb", {'categoryId': category.id}) %}
 
-<h1>{{ category.name }}</h1>
 {% if category.media %}
     {% thumbnail category.media, 'reference' %}
 {% endif %}
