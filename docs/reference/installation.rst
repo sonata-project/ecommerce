@@ -55,33 +55,6 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         new Sonata\PaymentBundle\SonataPaymentBundle(),
         new Sonata\PriceBundle\SonataPriceBundle(),
 
-- Run the ``easy-extends:generate`` commands. These commands will generate the Application entities required by the Sonata's bundles.
-
-::
-
-        php app/console sonata:easy-extends:generate SonataCustomerBundle
-        php app/console sonata:easy-extends:generate SonataDeliveryBundle
-        php app/console sonata:easy-extends:generate SonataBasketBundle
-        php app/console sonata:easy-extends:generate SonataInvoiceBundle
-        php app/console sonata:easy-extends:generate SonataMediaBundle
-        php app/console sonata:easy-extends:generate SonataOrderBundle
-        php app/console sonata:easy-extends:generate SonataPaymentBundle
-        php app/console sonata:easy-extends:generate SonataProductBundle
-
-- Then add the following bundles in your ``kernel::registerBundles()`` method:
-
-::
-
-        new Application\Sonata\CustomerBundle\SonataCustomerBundle(),
-        new Application\Sonata\DeliveryBundle\SonataDeliveryBundle(),
-        new Application\Sonata\BasketBundle\SonataBasketBundle(),
-        new Application\Sonata\InvoiceBundle\SonataInvoiceBundle(),
-        new Application\Sonata\MediaBundle\SonataMediaBundle(),
-        new Application\Sonata\OrderBundle\SonataOrderBundle(),
-        new Application\Sonata\PaymentBundle\SonataPaymentBundle(),
-        new Application\Sonata\ProductBundle\SonataProductBundle(),
-
-You can use these bundles to extend entities or template files.
 
 - Edit your ``config.yml`` and add the following lines:
 
@@ -97,45 +70,31 @@ You can use these bundles to extend entities or template files.
 
             sonata_delivery:
                 services:
-                    sonata.delivery.method.free_address_required:
+                    free_address_required:
                         name: Free
                         enabled: true
                         priority: 1
+                        code: free
 
-                selector: sonata.delivery.method.free_address_required
+                selector: sonata.delivery.selector.default
 
             sonata_payment:
                 services:
-                    sonata.payment.method.paypal:
-                        name:     Paypal
-                        id:       paypal
-                        enabled:  true
+                    pass:
+                        name:    Pass
+                        enabled: true
+                        code:    pass
+                        browser: sonata.payment.browser.curl
 
                         transformers:
                             basket: sonata.payment.transformer.basket
                             order:  sonata.payment.transformer.order
 
                         options:
-                            web_connector_name: curl
-
-                            account:            your_paypal_account@fake.com
-                            cert_id:            fake
-                            paypal_cert_file:   %kernel.root_dir%/paypal_cert_pem_sandbox.txt
-                            url_action:         https://www.sandbox.paypal.com/cgi-bin/webscr
-
-                            debug: true
-                            class_order:        Application\Sonata\OrderBundle\Entity\Order
-                            url_callback:       sonata_payment_callback
-                            url_return_ko:      sonata_payment_error
-                            url_return_ok:      sonata_payment_confirmation
-
-                            method:             encryptViaBuffer # encryptViaFile || encryptViaBuffer
-
-                            key_file:           %kernel.root_dir%/my-prvkey.pem
-                            cert_file:          %kernel.root_dir%/my-pubcert.pem
-
-                            openssl:            /opt/local/bin/openssl
-
+                            shop_secret_key: assdsds
+                            url_callback:    sonata_payment_callback
+                            url_return_ko:   sonata_payment_error
+                            url_return_ok:   sonata_payment_confirmation
 
                 # service which find the correct payment methods for a basket
                 selector: sonata.payment.selector.simple
@@ -167,6 +126,35 @@ You can use these bundles to extend entities or template files.
     #
     #           sonata.product.type.bottle:
     #                class: Application\Sonata\ProductBundle\Entity\BottleProductProvider
+
+- Run the ``easy-extends:generate`` commands. These commands will generate the Application entities required by the Sonata's bundles.
+
+::
+
+        php app/console sonata:easy-extends:generate SonataCustomerBundle
+        php app/console sonata:easy-extends:generate SonataDeliveryBundle
+        php app/console sonata:easy-extends:generate SonataBasketBundle
+        php app/console sonata:easy-extends:generate SonataInvoiceBundle
+        php app/console sonata:easy-extends:generate SonataMediaBundle
+        php app/console sonata:easy-extends:generate SonataOrderBundle
+        php app/console sonata:easy-extends:generate SonataPaymentBundle
+        php app/console sonata:easy-extends:generate SonataProductBundle
+
+- Then add the following bundles in your ``kernel::registerBundles()`` method:
+
+::
+
+        new Application\Sonata\CustomerBundle\SonataCustomerBundle(),
+        new Application\Sonata\DeliveryBundle\SonataDeliveryBundle(),
+        new Application\Sonata\BasketBundle\SonataBasketBundle(),
+        new Application\Sonata\InvoiceBundle\SonataInvoiceBundle(),
+        new Application\Sonata\MediaBundle\SonataMediaBundle(),
+        new Application\Sonata\OrderBundle\SonataOrderBundle(),
+        new Application\Sonata\PaymentBundle\SonataPaymentBundle(),
+        new Application\Sonata\ProductBundle\SonataProductBundle(),
+
+You can use these bundles to extend entities or template files.
+
 
 - Add the current lines in your ``routing.yml`` files:
 
