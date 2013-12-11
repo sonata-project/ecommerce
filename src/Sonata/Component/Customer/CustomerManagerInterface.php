@@ -11,55 +11,8 @@
 
 namespace Sonata\Component\Customer;
 
-interface CustomerManagerInterface
+use Sonata\CoreBundle\Entity\ManagerInterface;
+
+interface CustomerManagerInterface extends ManagerInterface
 {
-    /**
-     * Creates an empty customer instance
-     *
-     * @return Customer
-     */
-    public function create();
-
-    /**
-     * Deletes a customer
-     *
-     * @param  CustomerInterface $customer
-     * @return void
-     */
-    public function delete(CustomerInterface $customer);
-
-    /**
-     * Finds one customer by the given criteria
-     *
-     * @param  array             $criteria
-     * @return CustomerInterface
-     */
-    public function findOneBy(array $criteria);
-
-    /**
-     * Finds many customers by the given criteria
-     *
-     * @param array   $criteria
-     * @param array   $orderBy
-     * @param integer $limit
-     * @param integer $offset
-     *
-     * @return CustomerInterface
-     */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null);
-
-    /**
-     * Returns the customer's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass();
-
-    /**
-     * Saves a customer
-     *
-     * @param  CustomerInterface $customer
-     * @return void
-     */
-    public function save(CustomerInterface $customer);
 }

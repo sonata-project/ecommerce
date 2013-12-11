@@ -10,11 +10,12 @@
  */
 
 namespace Sonata\Component\Currency;
+use Sonata\CoreBundle\Entity\ManagerInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-interface CurrencyManagerInterface
+interface CurrencyManagerInterface extends ManagerInterface
 {
     /**
      * Finds the currency matching $currencyLabel

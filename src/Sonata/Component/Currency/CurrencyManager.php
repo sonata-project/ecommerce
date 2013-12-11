@@ -12,11 +12,12 @@
 namespace Sonata\Component\Currency;
 
 use Sonata\Component\Currency\CurrencyManagerInterface;
+use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyManager implements CurrencyManagerInterface
+class CurrencyManager extends DoctrineBaseManager implements CurrencyManagerInterface
 {
     /**
      * {@inheritdoc}
