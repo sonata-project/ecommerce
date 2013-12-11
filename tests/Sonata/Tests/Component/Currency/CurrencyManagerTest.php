@@ -20,33 +20,12 @@ use Sonata\Component\Currency\CurrencyManager;
  */
 class CurrencyManagerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var CurrencyManager
-     */
-    protected $object;
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new CurrencyManager();
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-    /**
-     * @covers Sonata\Component\Currency\CurrencyManager::findOneByLabel
-     */
     public function testFindOneByLabel()
     {
-        $this->assertEquals("EUR", $this->object->findOneByLabel("EUR")->getLabel());
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+
+        $currencyManager = new CurrencyManager('Sonata\Component\Basket\Basket', $em);
+
+        $this->assertEquals("EUR", $currencyManager->findOneByLabel("EUR")->getLabel());
     }
 }
