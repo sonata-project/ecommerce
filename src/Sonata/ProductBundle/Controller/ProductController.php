@@ -36,24 +36,28 @@ class ProductController extends Controller
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
         }
 
-        if ($product->hasVariations() && !$product->hasEnabledVariations()) {
+        /** @var \Sonata\Component\Product\Pool $productPool */
+        $productPool = $this->get('sonata.product.pool');
+        $provider = $productPool->getProvider($product);
+        echo get_class($provider); exit;
+
+        if ($provider->hasVariations($product) && !$provider->hasEnabledVariations($product)) {
             throw new NotFoundHttpException('Product has no activated variation');
         }
 
-        $provider = $this->get('sonata.product.pool')->getProvider($product);
-
         $action = sprintf('%s:view', $provider->getBaseControllerName());
         $response = $this->forward($action, array(
+            'provider' => $provider,
             'product' => $product
         ));
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
-                $this->get('sonata.product.pool')->getProductCode($product),
-                $product->getId(),
-                $action,
-                $response->getContent()
-            ));
+                    $this->get('sonata.product.pool')->getProductCode($product),
+                    $product->getId(),
+                    $action,
+                    $response->getContent()
+                ));
         }
 
         return $response;
@@ -71,18 +75,18 @@ class ProductController extends Controller
         $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
-            'formView'       => $formView,
-            'basketElement'  => $basketElement,
-            'basket'         => $basket
-        ));
+                'formView'       => $formView,
+                'basketElement'  => $basketElement,
+                'basket'         => $basket
+            ));
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
-                $basketElement->getProductCode(),
-                $basketElement->getProductId(),
-                $action,
-                $response->getContent()
-            ));
+                    $basketElement->getProductCode(),
+                    $basketElement->getProductId(),
+                    $action,
+                    $response->getContent()
+                ));
         }
 
         return $response;
@@ -99,17 +103,17 @@ class ProductController extends Controller
         $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
-            'basketElement'  => $basketElement,
-            'basket'         => $basket
-        ));
+                'basketElement'  => $basketElement,
+                'basket'         => $basket
+            ));
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
-                $basketElement->getProductCode(),
-                $basketElement->getProductId(),
-                $action,
-                $response->getContent()
-            ));
+                    $basketElement->getProductCode(),
+                    $basketElement->getProductId(),
+                    $action,
+                    $response->getContent()
+                ));
         }
 
         return $response;
@@ -135,16 +139,16 @@ class ProductController extends Controller
 
         $action = sprintf('%s:viewVariations', $provider->getBaseControllerName());
         $response = $this->forward($action, array(
-            'product' => $product
-        ));
+                'product' => $product
+            ));
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
-                $this->get('sonata.product.pool')->getProductCode($product),
-                $product->getId(),
-                $action,
-                $response->getContent()
-            ));
+                    $this->get('sonata.product.pool')->getProductCode($product),
+                    $product->getId(),
+                    $action,
+                    $response->getContent()
+                ));
         }
 
         return $response;

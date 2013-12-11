@@ -17,8 +17,8 @@ file that was distributed with this source code.
 
         <h4 itemprop="name">{{ product.name }}</h4>
         <p itemprop="price">
-            {% if product.hasEnabledVariations %}
-                {{ product.cheaperVariation.price|number_format_currency(currency) }}
+            {% if provider.hasEnabledVariations(product) %}
+                {{ cheapest_variation.price|number_format_currency(currency) }}
             {% else %}
                 {{ product.price|number_format_currency(currency) }}
             {% endif %}

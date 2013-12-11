@@ -593,38 +593,6 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasEnabledVariations()
-    {
-        foreach ($this->variations as $variation) {
-            if ($variation->isEnabled()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEnabledVariations()
-    {
-        if (!count($this->enabledVariations)) {
-            foreach ($this->variations as $variation) {
-                if (!$variation->isEnabled()) {
-                    continue;
-                }
-
-                $this->enabledVariations[] = $variation;
-            }
-        }
-
-        return $this->enabledVariations;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setImage(MediaInterface $image = null)
     {
         $this->image = $image;

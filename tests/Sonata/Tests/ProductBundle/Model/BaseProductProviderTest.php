@@ -255,6 +255,154 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($productProvider->isAddableToBasket($basket, $product));
     }
 
+    public function testHasVariationsValidCase()
+    {
+        $productMock = new ProductTest();
+        $variationMock = new ProductTest();
+        $productMock->addVariation($variationMock);
+
+        $productProvider = $this->createNewProductProvider();
+        $productProvider->setVariationFields(array('test'));
+
+        $this->assertTrue($productProvider->hasVariations($productMock));
+    }
+
+    public function testHasVariationsWithNoVariation()
+    {
+        $productMock = new ProductTest();
+
+        $productProvider = $this->createNewProductProvider();
+        $productProvider->setVariationFields(array('test'));
+
+        $this->assertFalse($productProvider->hasVariations($productMock));
+    }
+
+    public function testHasVariationsWithNoVariationFields()
+    {
+        $productMock = new ProductTest();
+        $variationMock = new ProductTest();
+        $productMock->addVariation($variationMock);
+
+        $productProvider = $this->createNewProductProvider();
+
+        $this->assertFalse($productProvider->hasVariations($productMock));
+    }
+
+    public function testHasEnabledVariationsWhithNoVariation()
+    {
+        $productMock = new ProductTest();
+        $productProvider = $this->createNewProductProvider();
+        $this->assertFalse($productProvider->hasEnabledVariations($productMock));
+    }
+
+    public function testHasEnabledVariationsWhithNoEnabledVariation()
+    {
+        $productMock = new ProductTest();
+        $productMock->setEnabled(true);
+        $variationMock = new ProductTest();
+        $variationMock->setEnabled(false);
+        $productMock->addVariation($variationMock);
+
+        $productProvider = $this->createNewProductProvider();
+        $productProvider->setVariationFields(array('test'));
+
+        $this->assertFalse($productProvider->hasEnabledVariations($productMock));
+    }
+
+    public function testHasEnabledVariationsWhithEnabledVariation()
+    {
+        $productMock = new ProductTest();
+        $productMock->setEnabled(true);
+        $variationMock = new ProductTest();
+        $variationMock->setEnabled(true);
+        $productMock->addVariation($variationMock);
+
+        $productProvider = $this->createNewProductProvider();
+        $productProvider->setVariationFields(array('test'));
+
+        $this->assertTrue($productProvider->hasEnabledVariations($productMock));
+    }
+
+    public function testHasEnabledVariationsWhithNoVariationFields()
+    {
+        $productMock = new ProductTest();
+        $productMock->setEnabled(true);
+        $variationMock = new ProductTest();
+        $variationMock->setEnabled(true);
+        $productMock->addVariation($variationMock);
+
+        $productProvider = $this->createNewProductProvider();
+
+        $this->assertFalse($productProvider->hasEnabledVariations($productMock));
+    }
+
+    public function testGetEnabledVariationWithNoVariation()
+    {
+        $productMock = new ProductTest();
+        $provider = $this->createNewProductProvider();
+        $provider->setVariationFields(array('test'));
+
+        $variations = $provider->getEnabledVariations($productMock);
+        $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
+        $this->assertEquals(0, count($variations));
+    }
+
+    public function testGetEnabledVariationWithVariation()
+    {
+        $productMock = new ProductTest();
+        $variationMock = new ProductTest();
+        $variationMock->setEnabled(true);
+        $productMock->addVariation($variationMock);
+
+        $provider = $this->createNewProductProvider();
+        $provider->setVariationFields(array('test'));
+
+        $variations = $provider->getEnabledVariations($productMock);
+        $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
+        $this->assertEquals(1, count($variations));
+        $this->assertInstanceOf('\Sonata\Component\Product\ProductInterface', $variations[0]);
+    }
+
+    public function testGetCheapestEnabledVariationWithNoVariation()
+    {
+        $product = new ProductTest();
+        $provider = $this->createNewProductProvider();
+        $provider->setVariationFields(array('test'));
+
+        $this->assertNull($provider->getCheapestEnabledVariation($product));
+    }
+
+    public function testGetCheapestEnabledVariationWithNoEnabledVariation()
+    {
+        $product = new ProductTest();
+        $variationMock = new ProductTest();
+        $variationMock->setEnabled(false);
+        $product->addVariation($variationMock);
+
+        $provider = $this->createNewProductProvider();
+        $provider->setVariationFields(array('test'));
+
+        $this->assertNull($provider->getCheapestEnabledVariation($product));
+    }
+
+    public function testGetCheapestEnabledVariationWithVariations()
+    {
+        $product = new ProductTest();
+        $variationA = new ProductTest();
+        $variationA->setEnabled(false);
+        $variationA->setPrice(20);
+        $variationB = new ProductTest();
+        $variationB->setEnabled(true);
+        $variationB->setPrice(1000);
+        $product->addVariation($variationA);
+        $product->addVariation($variationB);
+
+        $provider = $this->createNewProductProvider();
+        $provider->setVariationFields(array('test'));
+
+        $this->assertEquals($variationB, $provider->getCheapestEnabledVariation($product));
+    }
+
     /**
      * @return ProductProviderTest
      */

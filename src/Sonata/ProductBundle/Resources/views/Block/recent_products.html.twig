@@ -11,40 +11,47 @@ file that was distributed with this source code.
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-    <div class="row">
-        {% if settings.title %}
-            <h3 class="">{{ settings.title }}</h3>
-        {% endif %}
+    <section>
+        <div class="row">
+            <div class="span10">
+                {% if settings.title %}
+                    <h3>{{ settings.title }}</h3>
+                {% endif %}
+            </div>
+            <div class="span2" style="text-align: right">
+                <a href="{{ url('sonata_category_index') }}"> {{ 'view_all_products'|trans({}, 'SonataProductBundle') }}</a>
+            </div>
+        </div>
 
-        {% if products|length > 0 %}
-            <ul class="thumbnails">
-                {% for product in products %}
-                    {% if product.hasEnabledVariations or not product.hasVariations %}
-                        <li class="span3" itemscope itemtype="http://schema.org/Product">
-                            <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}" class="thumbnail">
-                                <div style="min-height: 100px; max-height: 100px; text-align: center">
-                                    {% if product.image %}
-                                        {% thumbnail product.image, 'preview' with {'itemprop': 'image'} %}
-                                    {% endif %}
-                                </div>
-                                <div class="row" itemprop="name" style="min-height: 40px; max-height: 40px">{{ product.name }}</div>
-                                <div class="row" itemprop="price" style="text-align: right">
-                                    {% if not product.hasVariations %}
-                                        {{ product.price|number_format_currency(currency) }}
-                                    {% else %}
-                                        {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
-                                        {{ product.cheapestVariation.price|number_format_currency(currency) }}
-                                    {% endif %}
-                                </div>
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-
-            <a href="{{ url('sonata_category_index') }}"> {{ 'view_all_products'|trans({}, 'SonataProductBundle') }}</a>
-        {% else %}
-            <p>{{ 'no_product_found'|trans({}, 'SonataProductBundle') }}</p>
-        {% endif %}
-    </div>
+        <div class="row">
+            {% if products|length > 0 %}
+                <ul class="thumbnails">
+                    {% for product in products %}
+                        {% if provider.hasEnabledVariations(product) or not provider.hasVariations(product) %}
+                            <li class="span3" itemscope itemtype="http://schema.org/Product">
+                                <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}" class="thumbnail">
+                                    <div style="min-height: 100px; max-height: 100px; text-align: center">
+                                        {% if product.image %}
+                                            {% thumbnail product.image, 'preview' with {'itemprop': 'image'} %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="row" itemprop="name" style="min-height: 40px; max-height: 40px">{{ product.name }}</div>
+                                    <div class="row" itemprop="price" style="text-align: right">
+                                        {% if not provider.hasVariations(product) %}
+                                            {{ product.price|number_format_currency(currency) }}
+                                        {% else %}
+                                            {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
+                                            {{ provider.cheapestVariation(product).price|number_format_currency(currency) }}
+                                        {% endif %}
+                                    </div>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>{{ 'no_product_found'|trans({}, 'SonataProductBundle') }}</p>
+            {% endif %}
+        </div>
+    </section>
 {% endblock %}
