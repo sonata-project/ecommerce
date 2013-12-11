@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\ExecutionContext;
@@ -375,14 +376,21 @@ interface ProductInterface
     public function setVariations(ArrayCollection $variations);
 
     /**
-     * Set Media.
+     * Set Gallery.
      *
-     * @param MediaInterface $image
+     * @param GalleryInterface $gallery
      */
-    public function setImage(MediaInterface $image = null);
+    public function setGallery(GalleryInterface $gallery = null);
 
     /**
-     * Get Media.
+     * Get Gallery.
+     *
+     * @return GalleryInterface
+     */
+    public function getGallery();
+
+    /**
+     * Gets the product main image
      *
      * @return MediaInterface
      */

@@ -15,6 +15,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
+use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\ExecutionContext;
@@ -100,9 +101,9 @@ abstract class BaseProduct implements ProductInterface
     protected $productCategories;
 
     /**
-     * @var MediaInterface
+     * @var GalleryInterface
      */
-    protected $image;
+    protected $gallery;
 
     /**
      * @var ProductInterface
@@ -593,9 +594,17 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setImage(MediaInterface $image = null)
+    public function setGallery(GalleryInterface $gallery = null)
     {
-        $this->image = $image;
+        $this->gallery = $gallery;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
     }
 
     /**
@@ -603,7 +612,11 @@ abstract class BaseProduct implements ProductInterface
      */
     public function getImage()
     {
-        return $this->image;
+        if ($this->getGallery() && count($media = $this->getGallery()->getGalleryHasMedias()) > 0) {
+            return $media[0]->getMedia();
+        }
+
+        return null;
     }
 
     /**
