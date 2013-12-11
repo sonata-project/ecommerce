@@ -15,6 +15,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\DeliveryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\ExecutionContext;
 
 interface ProductInterface
 {
@@ -493,4 +494,13 @@ interface ProductInterface
      * @param array $array
      */
     public function fromArray($array);
+
+    /**
+     * Validates if product has one main category
+     *
+     * @param ExecutionContext $context
+     *
+     * @return void
+     */
+    public function validateOneMainCategory(ExecutionContext $context);
 }
