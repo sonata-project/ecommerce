@@ -27,7 +27,7 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         "sonata-project/ecommerce": "2.3.*",
         ...
     }
-    
+
 
 - Run ``composer install`` command
 - Follow the FOSUserBundle README to set it up
@@ -53,7 +53,7 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         new Sonata\MediaBundle\SonataMediaBundle(),
         new Sonata\DeliveryBundle\SonataDeliveryBundle(),
         new Sonata\PaymentBundle\SonataPaymentBundle(),
-
+        new Sonata\PriceBundle\SonataPriceBundle(),
 
 - Run the ``easy-extends:generate`` commands. These commands will generate the Application entities required by the Sonata's bundles.
 
