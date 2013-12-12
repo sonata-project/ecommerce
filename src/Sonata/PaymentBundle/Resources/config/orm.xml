@@ -12,8 +12,8 @@
         <service id="sonata.transaction.entity_manager" alias="doctrine.orm.default_entity_manager" />
 
         <service id="sonata.transaction.manager" class="%sonata.transaction.manager.class%">
-            <argument type="service" id="sonata.transaction.entity_manager" />
             <argument>%sonata.payment.transaction.class%</argument>
+            <argument type="service" id="sonata.transaction.entity_manager" />
         </service>
     </services>
 
