@@ -26,8 +26,8 @@
         </service>
 
         <service id="sonata.product.set.manager" class="%sonata.product.set.manager.class%">
-            <argument type="service" id="sonata.product.entity_manager" />
             <argument>%sonata.product.product.class%</argument>
+            <argument type="service" id="sonata.product.entity_manager" />
         </service>
 
         <service id="sonata.product_category.product" class="%sonata.product_category.manager.class%">
