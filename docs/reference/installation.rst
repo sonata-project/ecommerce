@@ -106,6 +106,14 @@ You already have a project and want to add e-commerce capabilities to it? Follow
                     order:  sonata.payment.transformer.order
                     basket: sonata.payment.transformer.basket
 
+            # Doctrine Configuration
+            doctrine:
+                # ...
+                dbal:
+                    types:
+                        # ...
+                        currency: Sonata\Component\Currency\CurrencyDoctrineType
+
             services:
                 # Register dedicated Product Managers
     #           sonata.product.manager.amazon:
@@ -126,6 +134,7 @@ You already have a project and want to add e-commerce capabilities to it? Follow
     #
     #           sonata.product.type.bottle:
     #                class: Application\Sonata\ProductBundle\Entity\BottleProductProvider
+
 
 - Run the ``easy-extends:generate`` commands. These commands will generate the Application entities required by the Sonata's bundles.
 
