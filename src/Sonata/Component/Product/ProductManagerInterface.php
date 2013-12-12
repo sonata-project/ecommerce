@@ -11,47 +11,10 @@
 
 namespace Sonata\Component\Product;
 
-interface ProductManagerInterface
+use Sonata\CoreBundle\Entity\ManagerInterface;
+
+interface ProductManagerInterface extends ManagerInterface
 {
-    /**
-     * Creates an empty Product instance
-     *
-     * @return \Sonata\Component\Product\ProductInterface
-     */
-    public function create();
-
-    /**
-     * Deletes a product
-     *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @return void
-     */
-    public function delete(ProductInterface $product);
-
-    /**
-     * Saves a product
-     *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @return void
-     */
-    public function save(ProductInterface $product);
-
-    /**
-     * Finds one product by the given criteria
-     *
-     * @param  array $criteria
-     * @return array
-     */
-    public function findBy(array $criteria = array());
-
-    /**
-     * Finds one product by the given criteria
-     *
-     * @param  array                                      $criteria
-     * @return \Sonata\Component\Product\ProductInterface
-     */
-    public function findOneBy(array $criteria = array());
-
     /**
      * Returns the products in the same collections as those specified in $productCollections
      *
@@ -79,11 +42,4 @@ interface ProductManagerInterface
      * @return ProductInterface|null
      */
     public function findEnabledFromIdAndSlug($id, $slug);
-
-    /**
-     * Returns the product's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass();
 }

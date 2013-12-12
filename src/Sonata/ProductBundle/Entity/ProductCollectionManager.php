@@ -16,106 +16,20 @@ use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Doctrine\ORM\EntityManager;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 
-class ProductCollectionManager implements ProductCollectionManagerInterface
+class ProductCollectionManager extends DoctrineBaseManager implements ProductCollectionManagerInterface
 {
-    /**
-     * @var EntityManager
-     */
-    protected $em;
-    /**
-     * @var EntityRepository
-     */
-    protected $repository;
-    /**
-     * @var string
-     */
-    protected $class;
-
-    /**
-     * @param EntityManager $em
-     * @param string        $class
-     */
-    public function __construct(EntityManager $em, $class)
-    {
-        $this->em    = $em;
-        $this->class = $class;
-
-        if (class_exists($class)) {
-            $this->repository = $this->em->getRepository($class);
-        }
-    }
-
-    /**
-     * Creates an empty productCollection instance
-     *
-     * @return ProductCollectionInterface
-     */
-    public function createProductCollection()
-    {
-        $class = $this->class;
-
-        return new $class;
-    }
-
-    /**
-     * Updates a productCollection
-     *
-     * @param ProductCollectionInterface $productCollection
-     *
-     * @return void
-     */
-    public function updateProductCollection(ProductCollectionInterface $productCollection)
-    {
-        $this->em->persist($productCollection);
-        $this->em->flush();
-    }
-
-    /**
-     * Returns the productCollection's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass()
-    {
-        return $this->class;
-    }
-
-    /**
-     * Finds one productCollection by the given criteria
-     *
-     * @param array $criteria
-     *
-     * @return ProductCollectionInterface
-     */
-    public function findProductCollectionBy(array $criteria)
-    {
-        return $this->repository->findOneBy($criteria);
-    }
-
-    /**
-     * Deletes an productCollection
-     *
-     * @param ProductCollectionInterface $productCollection
-     *
-     * @return void
-     */
-    public function deleteProductCollection(ProductCollectionInterface $productCollection)
-    {
-        $this->em->remove($productCollection);
-        $this->em->flush();
-    }
-
     /**
      * {@inheritdoc}
      */
     public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection)
     {
-        if ($this->findProductCollectionBy(array('collection' => $collection, 'product' => $product))) {
+        if ($this->findOneBy(array('collection' => $collection, 'product' => $product))) {
             return;
         }
 
-        $productCollection = $this->createProductCollection();
+        $productCollection = $this->create();
 
         $productCollection->setProduct($product);
         $productCollection->setCollection($collection);
@@ -123,7 +37,7 @@ class ProductCollectionManager implements ProductCollectionManagerInterface
 
         $product->addProductCollection($productCollection);
 
-        $this->updateProductCollection($productCollection);
+        $this->save($productCollection);
     }
 
     /**
@@ -131,12 +45,12 @@ class ProductCollectionManager implements ProductCollectionManagerInterface
      */
     public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection)
     {
-        if (!$productCollection = $this->findProductCollectionBy(array('collection' => $collection, 'product' => $product))) {
+        if (!$productCollection = $this->findOneBy(array('collection' => $collection, 'product' => $product))) {
             return;
         }
 
         $product->removeProductCollection($productCollection);
 
-        $this->deleteProductCollection($productCollection);
+        $this->delete($productCollection);
     }
 }

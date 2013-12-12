@@ -258,7 +258,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $em         = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $productCategoryManager = new ProductCategoryManager($em, 'Sonata\Tests\Component\Product\ProductCategory');
+        $productCategoryManager = new ProductCategoryManager('Sonata\Tests\Component\Product\ProductCategory', $em);
         $provider->setProductCategoryManager($productCategoryManager);
 
         $product = new Product();
@@ -308,7 +308,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $em         = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $productCollectionManager = new ProductCollectionManager($em, 'Sonata\Tests\Component\Product\ProductCollection');
+        $productCollectionManager = new ProductCollectionManager('Sonata\Tests\Component\Product\ProductCollection', $em);
         $provider->setProductCollectionManager($productCollectionManager);
 
         $product = new Product();
