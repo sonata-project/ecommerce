@@ -11,43 +11,8 @@
 
 namespace Sonata\Component\Product;
 
-interface PackageManagerInterface
+use Sonata\CoreBundle\Entity\ManagerInterface;
+
+interface PackageManagerInterface extends ManagerInterface
 {
-    /**
-     * Creates an empty Package instance
-     *
-     * @return Package
-     */
-    public function createPackage();
-
-    /**
-     * Deletes a package
-     *
-     * @param  PackageInterface $package
-     * @return void
-     */
-    public function deletePackage(PackageInterface $package);
-
-    /**
-     * Finds one package by the given criteria
-     *
-     * @param  array            $criteria
-     * @return PackageInterface
-     */
-    public function findPackageBy(array $criteria);
-
-    /**
-     * Returns the package's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass();
-
-    /**
-     * Updates a package
-     *
-     * @param  PackageInterface $package
-     * @return void
-     */
-    public function updatePackage(PackageInterface $package);
 }

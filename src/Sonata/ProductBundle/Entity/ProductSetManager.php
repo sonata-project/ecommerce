@@ -17,13 +17,12 @@ class ProductSetManager extends ProductManager
     /**
      * Deletes a product
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param ProductInterface $productSet
+     * @param bool             $andFlush
      *
      * @throws \RuntimeException
-     *
-     * @return void
      */
-    public function delete(ProductInterface $product)
+    public function delete($productSet, $andFlush = true)
     {
         throw new \RuntimeException('A ProductSetManager cannot delete a product');
     }
@@ -32,8 +31,6 @@ class ProductSetManager extends ProductManager
      * Creates an empty ProductSet instance
      *
      * @throws \RuntimeException
-     *
-     * @return void
      */
     public function create()
     {
@@ -43,13 +40,12 @@ class ProductSetManager extends ProductManager
     /**
      * Creates an empty ProductSet instance
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param ProductInterface $productSet
+     * @param bool             $andFlush
      *
      * @throws \RuntimeException
-     *
-     * @return void
      */
-    public function save(ProductInterface $product)
+    public function save($productSet, $andFlush = true)
     {
         throw new \RuntimeException('A ProductSetManager cannot save a product');
     }

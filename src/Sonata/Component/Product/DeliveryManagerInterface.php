@@ -11,42 +11,8 @@
 
 namespace Sonata\Component\Product;
 
-interface DeliveryManagerInterface
+use Sonata\CoreBundle\Entity\ManagerInterface;
+
+interface DeliveryManagerInterface extends ManagerInterface
 {
-    /**
-     * Creates an empty delivery instance
-     *
-     * @return Delivery
-     */
-    public function createDelivery();
-
-    /**
-     * Deletes a delivery
-     *
-     * @param  DeliveryInterface $delivery
-     * @return void
-     */
-    public function deleteDelivery(DeliveryInterface $delivery);
-
-    /**
-     * Finds one delivery by the given criteria
-     *
-     * @param  array             $criteria
-     * @return DeliveryInterface
-     */
-    public function findDeliveryBy(array $criteria);
-
-    /**
-     * Returns the delivery's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass();
-
-    /**
-     * Updates a delivery
-     *
-     * @param DeliveryInterface $delivery
-     */
-    public function updateDelivery(DeliveryInterface $delivery);
 }

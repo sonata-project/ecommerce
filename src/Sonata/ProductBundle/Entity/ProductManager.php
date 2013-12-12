@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,108 +14,12 @@ namespace Sonata\ProductBundle\Entity;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
-
+use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
-use Doctrine\ORM\EntityManager;
-
-class ProductManager implements ProductManagerInterface
+class ProductManager extends DoctrineBaseManager implements ProductManagerInterface
 {
-    /**
-     * @var EntityManager
-     */
-    protected $em;
-    /**
-     * @var EntityRepository
-     */
-    protected $repository;
-    /**
-     * @var string
-     */
-    protected $class;
-
-    /**
-     * @param string        $class
-     * @param EntityManager $em
-     */
-    public function __construct($class, EntityManager $em)
-    {
-        $this->em    = $em;
-        $this->class = $class;
-    }
-
-    /**
-     * Finds one product by the given criteria
-     *
-     * @param array $criteria
-     *
-     * @return ProductInterface
-     */
-    public function findOneBy(array $criteria = array())
-    {
-       return $this->em->getRepository($this->class)->findOneBy($criteria);
-    }
-
-    /**
-     * Finds products by the given criteria
-     *
-     * @param array $criteria
-     *
-     * @return ProductInterface
-     */
-    public function findBy(array $criteria = array())
-    {
-       return $this->em->getRepository($this->class)->findBy($criteria);
-    }
-
-    /**
-     * Saves a product
-     *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @return void
-     */
-    public function save(ProductInterface $product)
-    {
-        $this->em->persist($product);
-        $this->em->flush();
-    }
-
-    /**
-     * Returns the product's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass()
-    {
-        return $this->class;
-    }
-
-    /**
-     * Deletes a product
-     *
-     * @param ProductInterface $product
-     *
-     * @return void
-     */
-    public function delete(ProductInterface $product)
-    {
-        $this->em->remove($product);
-        $this->em->flush();
-    }
-
-    /**
-     * Creates an empty Product instance
-     *
-     * @return ProductInterface
-     */
-    public function create()
-    {
-        $class = $this->getClass();
-
-        return new $class;
-    }
-
     /**
      * {@inheritdoc}
      */
