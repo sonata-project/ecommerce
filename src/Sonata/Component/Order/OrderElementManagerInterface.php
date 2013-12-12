@@ -11,51 +11,8 @@
 
 namespace Sonata\Component\Order;
 
-interface OrderElementManagerInterface
+use Sonata\CoreBundle\Entity\ManagerInterface;
+
+interface OrderElementManagerInterface extends ManagerInterface
 {
-    /**
-     * Creates an empty orderElement instance
-     *
-     * @return OrderElement
-     */
-    public function create();
-
-    /**
-     * Deletes a orderElement
-     *
-     * @param  OrderElementInterface $orderElement
-     * @return void
-     */
-    public function delete(OrderElementInterface $orderElement);
-
-    /**
-     * Finds one orderElement by the given criteria
-     *
-     * @param  array                 $criteria
-     * @return OrderElementInterface
-     */
-    public function findOneBy(array $criteria);
-
-    /**
-     * Finds one orderElement by the given criteria
-     *
-     * @param  array                 $criteria
-     * @return OrderElementInterface
-     */
-    public function findBy(array $criteria);
-
-    /**
-     * Returns the orderElement's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass();
-
-    /**
-     * Updates an orderElement
-     *
-     * @param  OrderElementInterface $orderElement
-     * @return void
-     */
-    public function save(OrderElementInterface $orderElement);
 }

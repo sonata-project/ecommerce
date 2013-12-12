@@ -13,49 +13,11 @@ namespace Sonata\OrderBundle\Entity;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Doctrine\ORM\EntityManager;
+use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 use Sonata\UserBundle\Model\UserInterface;
 
-class OrderManager implements OrderManagerInterface
+class OrderManager extends DoctrineBaseManager implements OrderManagerInterface
 {
-    /**
-     * @var EntityManager
-     */
-    protected $em;
-    /**
-     * @var EntityRepository
-     */
-    protected $repository;
-    /**
-     * @var string
-     */
-    protected $class;
-
-    /**
-     * @param EntityManager $em
-     * @param string        $class
-     */
-    public function __construct(EntityManager $em, $class)
-    {
-        $this->em    = $em;
-        $this->class = $class;
-
-        if (class_exists($class)) {
-            $this->repository = $this->em->getRepository($class);
-        }
-    }
-
-    /**
-     * Creates an empty order instance
-     *
-     * @return Order
-     */
-    public function create()
-    {
-        $class = $this->class;
-
-        return new $class;
-    }
-
     /**
      * Updates a order
      *
@@ -70,35 +32,6 @@ class OrderManager implements OrderManagerInterface
     }
 
     /**
-     * Returns the order's fully qualified class name
-     *
-     * @return string
-     */
-    public function getClass()
-    {
-        return $this->class;
-    }
-
-    /**
-     * Finds one order by the given criteria
-     *
-     * @param  array $criteria
-     * @return Order
-     */
-    public function findOneBy(array $criteria)
-    {
-        return $this->repository->findOneBy($criteria);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
-    {
-        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function findForUser(UserInterface $user)
@@ -109,17 +42,5 @@ class OrderManager implements OrderManagerInterface
             ->setParameter('user', $user);
 
         return $qb->getQuery()->execute();
-    }
-
-    /**
-     * Deletes a order
-     *
-     * @param  OrderInterface $order
-     * @return void
-     */
-    public function delete(OrderInterface $order)
-    {
-        $this->em->remove($order);
-        $this->em->flush();
     }
 }
