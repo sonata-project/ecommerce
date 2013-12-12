@@ -46,13 +46,13 @@ class InvoiceController extends Controller
 
         $this->checkAccess($order->getCustomer());
 
-        $invoice = $this->getInvoiceManager()->findInvoiceBy(array('reference' => $reference));
+        $invoice = $this->getInvoiceManager()->findOneBy(array('reference' => $reference));
 
         if (null === $invoice) {
-            $invoice = $this->getInvoiceManager()->createInvoice();
+            $invoice = $this->getInvoiceManager()->create();
 
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
-            $this->getInvoiceManager()->updateInvoice($invoice);
+            $this->getInvoiceManager()->save($invoice);
         }
 
         return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(

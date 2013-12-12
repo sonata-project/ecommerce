@@ -23,13 +23,13 @@ class OrderCRUDController extends CRUDController
 
         $order = $this->admin->getObject($id);
 
-        $invoice = $this->getInvoiceManager()->findInvoiceBy(array('reference' => $order->getReference()));
+        $invoice = $this->getInvoiceManager()->findOneBy(array('reference' => $order->getReference()));
 
         if (null === $invoice) {
-            $invoice = $this->getInvoiceManager()->createInvoice();
+            $invoice = $this->getInvoiceManager()->create();
 
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
-            $this->getInvoiceManager()->updateInvoice($invoice);
+            $this->getInvoiceManager()->save($invoice);
 
             $this->addFlash('sonata_flash_success', $this->get('translator')->trans('order_invoice_generate_success', array(), 'SonataOrderBundle'));
         }

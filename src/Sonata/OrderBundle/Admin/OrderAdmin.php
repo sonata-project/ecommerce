@@ -200,7 +200,7 @@ class OrderAdmin extends Admin
         );
 
         $order = $this->orderManager->findOneBy(array('id' => $id));
-        $invoice = $this->invoiceManager->findInvoiceBy(array('reference' => $order->getReference()));
+        $invoice = $this->invoiceManager->findOneBy(array('reference' => $order->getReference()));
 
         if (null === $invoice) {
             $menu->addChild(
