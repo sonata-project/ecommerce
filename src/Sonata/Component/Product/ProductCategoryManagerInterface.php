@@ -19,10 +19,11 @@ interface ProductCategoryManagerInterface extends ManagerInterface
     /**
      * Adds a Category to a Product.
      *
-     * @param ProductInterface  $product
-     * @param CategoryInterface $category
+     * @param ProductInterface  $product  A Product entity
+     * @param CategoryInterface $category A Category entity
+     * @param boolean           $main     Add as the main category?
      */
-    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category);
+    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false);
 
     /**
      * Removes a Category from a Product.

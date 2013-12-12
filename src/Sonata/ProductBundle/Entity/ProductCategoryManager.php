@@ -23,7 +23,7 @@ class ProductCategoryManager extends DoctrineBaseManager implements ProductCateg
     /**
      * {@inheritdoc}
      */
-    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category)
+    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false)
     {
         if ($this->findOneBy(array('category' => $category, 'product' => $product))) {
             return;
@@ -34,6 +34,7 @@ class ProductCategoryManager extends DoctrineBaseManager implements ProductCateg
         $productCategory->setProduct($product);
         $productCategory->setCategory($category);
         $productCategory->setEnabled(true);
+        $productCategory->setMain($main);
 
         $product->addProductCategory($productCategory);
 
