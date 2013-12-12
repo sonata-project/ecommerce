@@ -11,24 +11,19 @@
 namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderManagerInterface;
-use Sonata\Component\Order\OrderInterface;
-use Doctrine\ORM\EntityManager;
 use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 use Sonata\UserBundle\Model\UserInterface;
 
 class OrderManager extends DoctrineBaseManager implements OrderManagerInterface
 {
     /**
-     * Updates a order
-     *
-     * @param  OrderInterface $order
-     * @return void
+     * {@inheritdoc}
      */
-    public function save(OrderInterface $order)
+    public function save($order, $andFlush = true)
     {
         $this->em->persist($order->getCustomer());
-        $this->em->persist($order);
-        $this->em->flush();
+
+        parent::save($order, $andFlush);
     }
 
     /**
