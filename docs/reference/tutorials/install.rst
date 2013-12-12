@@ -19,6 +19,8 @@ Start by cloning the demo repository:
 
     cd the/path/to/your/repositories_root
     git clone http://github.com/sonata-project/sandbox.git sonata-demo
+    cd sonata-demo
+    git checkout -b 2.3-develop
 
 
 Remove existing git files and initialise your new project:
@@ -63,7 +65,7 @@ By default, the Sonata Page bundle is activated, so you need to run 3 commands b
 
 Notes:
 
-* The ``update-core-routes`` populates the database with pages from the routing information. 
+* The ``update-core-routes`` populates the database with pages from the routing information.
 * The ``create-snapshots`` create a snapshot (a public page version) from the created pages.
 
 For more information about these last commands, we recommend you to read the `dedicated documentation`_.
