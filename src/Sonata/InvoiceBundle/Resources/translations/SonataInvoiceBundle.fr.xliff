@@ -165,9 +165,9 @@
                 <source>sonata.invoice.subtitle_references</source>
                 <target>Références</target>
             </trans-unit>
-            <trans-unit id="sonata.invoice.references.invoice">
-                <source>sonata.invoice.references.invoice</source>
-                <target>Invoice</target>
+            <trans-unit id="sonata.invoice.references.date">
+                <source>sonata.invoice.references.date</source>
+                <target>Date</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.references.invoice">
                 <source>sonata.invoice.references.invoice</source>
