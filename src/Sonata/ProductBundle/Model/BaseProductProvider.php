@@ -547,7 +547,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             $variations = $product->getVariations();
         }
 
-        $productCategories = $product->getCategories();
+        $productCategories = $product->getProductCategories();
 
         /** @var ProductInterface $variation */
         foreach ($variations as $variation) {
@@ -562,8 +562,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
             // browsing Product categories and add missing categories
             foreach ($productCategories as $productCategory) {
-                if ($productCategory && !$variationCategories->contains($productCategory)) {
-                    $this->productCategoryManager->addCategoryToProduct($variation, $productCategory);
+                $category = $productCategory->getCategory();
+
+                if ($productCategory && !$variationCategories->contains($category)) {
+                    $main = $productCategory->getMain();
+                    $this->productCategoryManager->addCategoryToProduct($variation, $category, $main);
                 }
             }
         }
