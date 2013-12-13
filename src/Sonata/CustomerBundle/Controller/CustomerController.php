@@ -137,7 +137,7 @@ class CustomerController extends Controller
      *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function updateAddress($id = null)
+    protected function updateAddress($id = null)
     {
         $customer = $this->getCustomer();
 
