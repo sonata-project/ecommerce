@@ -30,7 +30,7 @@
             </trans-unit>
             <trans-unit id="title_list_products">
                 <source>title_list_products</source>
-                <target>Produits</target>
+                <target>Liste des produits</target>
             </trans-unit>
             <trans-unit id="title_sub_categories">
                 <source>title_sub_categories</source>
