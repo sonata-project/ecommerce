@@ -10,7 +10,7 @@
 
     <services>
         <service id="sonata.payment.generator.mysql" class="%sonata.payment.generator.mysql.class%">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
     </services>
 

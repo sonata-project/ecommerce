@@ -30,7 +30,7 @@
         </service>
 
         <service id="sonata.product.seo_iterator" class="%sonata.product.seo_iterator.class%">
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
             <argument>%sonata.product.product.class%</argument>
             <argument type="service" id="router" />
             <argument>sonata_product_view</argument>

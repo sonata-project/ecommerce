@@ -12,6 +12,7 @@
 namespace Sonata\ProductBundle\Block;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
@@ -20,6 +21,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Product\Pool;
 use Sonata\ProductBundle\Repository\BaseProductRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -30,9 +32,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class RecentProductsBlockService extends BaseBlockService
 {
     /**
-     * @var EntityManager
+     * @var EntityRepository
      */
-    protected $entityManager;
+    protected $productRepository;
 
     /**
      * @var Pool
@@ -45,17 +47,17 @@ class RecentProductsBlockService extends BaseBlockService
     protected $currencyDetector;
 
     /**
-     * @param string          $name
-     * @param EngineInterface $templating
-     * @param EntityManager   $entityManager
-     * @param Pool            $pool
+     * @param string                    $name
+     * @param EngineInterface           $templating
+     * @param RegistryInterface         $registry
+     * @param Pool                      $pool
      * @param CurrencyDetectorInterface $currencyDetector
      */
-    public function __construct($name, EngineInterface $templating, EntityManager $entityManager, Pool $pool, CurrencyDetectorInterface $currencyDetector)
+    public function __construct($name, EngineInterface $templating, RegistryInterface $registry, Pool $pool, CurrencyDetectorInterface $currencyDetector)
     {
-        $this->entityManager    = $entityManager;
-        $this->pool             = $pool;
-        $this->currencyDetector = $currencyDetector;
+        $this->productRepository = $registry->getEntityManager()->getRepository('Application\Sonata\ProductBundle\Entity\Product');
+        $this->pool              = $pool;
+        $this->currencyDetector  = $currencyDetector;
 
         parent::__construct($name, $templating);
     }
@@ -131,6 +133,6 @@ class RecentProductsBlockService extends BaseBlockService
      */
     protected function getProductRepository()
     {
-        return $this->entityManager->getRepository('Application\Sonata\ProductBundle\Entity\Product');
+        return $this->productRepository;
     }
 }

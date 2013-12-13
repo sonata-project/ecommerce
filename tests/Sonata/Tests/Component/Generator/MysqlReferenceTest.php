@@ -135,14 +135,15 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
             ->method('getClassMetadata')
             ->will($this->returnValue($metadata));
 
-        $em->expects($this->any())
-            ->method('getConnection')
-            ->will($this->returnValue($connection));
-
         $connection->expects($this->any())
             ->method('query')
             ->will($this->returnValue(new \PDOStatement()));
 
-        return new MysqlReference($em);
+        $registry = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
+        $registry->expects($this->any())->method('getEntityManager')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getConnection')->will($this->returnValue($connection));
+
+
+        return new MysqlReference($registry);
     }
 }
