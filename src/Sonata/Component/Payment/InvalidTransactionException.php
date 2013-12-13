@@ -24,7 +24,7 @@ class InvalidTransactionException extends \InvalidArgumentException
      * @param int       $code
      * @param Exception $previous
      */
-    public function __construct($orderReference = null, $code = 0, Exception $previous = null)
+    public function __construct($orderReference = null, $code = 0, \Exception $previous = null)
     {
         $message = $orderReference ? sprintf("Invalid check - order ref: %s", $orderReference) : "Unable to find reference";
         parent::__construct($message, $code, $previous);

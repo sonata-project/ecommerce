@@ -13,7 +13,7 @@ namespace Sonata\InvoiceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\Component\Transformer\InvoiceTransformer;
@@ -34,14 +34,14 @@ class InvoiceController extends Controller
      *
      * @return Response
      *
-     * @throws AccessDeniedHttpException
+     * @throws AccessDeniedException
      */
     public function viewAction($reference)
     {
         $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
 
         if (null === $order) {
-            throw new AccessDeniedHttpException();
+            throw new AccessDeniedException();
         }
 
         $this->checkAccess($order->getCustomer());
@@ -75,14 +75,14 @@ class InvoiceController extends Controller
      *
      * @param CustomerInterface $customer The linked customer
      *
-     * @throws AccessDeniedHttpException
+     * @throws AccessDeniedException
      */
     protected function checkAccess(CustomerInterface $customer)
     {
         if (!($user = $this->getUser())
             || !$customer->getUser()
             || $customer->getUser()->getId() !== $user->getId()) {
-            throw new AccessDeniedHttpException();
+            throw new AccessDeniedException();
         }
     }
 

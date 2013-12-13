@@ -12,23 +12,24 @@
 namespace Sonata\OrderBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Customer\CustomerInterface;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class OrderController extends Controller
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws AccessDeniedHttpException
+     * @throws AccessDeniedException
      */
     public function indexAction()
     {
         $user = $this->getUser();
 
         if (!$user) {
-            throw new AccessDeniedHttpException();
+            throw new AccessDeniedException();
         }
 
         $orders = $this->getOrderManager()->findForUser($user);
@@ -43,14 +44,14 @@ class OrderController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @throws AccessDeniedHttpException
+     * @throws AccessDeniedException
      */
     public function viewAction($reference)
     {
         $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
 
         if (null === $order) {
-            throw new AccessDeniedHttpException();
+            throw new AccessDeniedException();
         }
 
         $this->checkAccess($order->getCustomer());
@@ -74,14 +75,14 @@ class OrderController extends Controller
      *
      * @param CustomerInterface $customer The linked customer
      *
-     * @throws AccessDeniedHttpException
+     * @throws AccessDeniedException
      */
     protected function checkAccess(CustomerInterface $customer)
     {
         if (!($user = $this->getUser())
         || !$customer->getUser()
         || $customer->getUser()->getId() !== $user->getId()) {
-            throw new AccessDeniedHttpException();
+            throw new AccessDeniedException();
         }
     }
 

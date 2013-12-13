@@ -63,6 +63,7 @@ class GenerateProductCommand extends ContainerAwareCommand
         $output->writeln(' > mirroring skeleton files');
 
         $filesystem = new Filesystem();
+        //TODO replace __DIR__ with a FW solution to get the path
         $filesystem->mirror(__DIR__.'/../Resources/skeleton/product', $bundle_dir);
 
         $output->writeln(' > mustaching skeleton files');

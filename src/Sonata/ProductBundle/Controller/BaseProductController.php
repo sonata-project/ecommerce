@@ -116,38 +116,6 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param BasketElementInterface $basketElement
-     */
-    public function viewBasketElement(BasketElementInterface $basketElement)
-    {
-
-    }
-
-    /**
-     * @param BasketElementInterface $basketElement
-     */
-    public function viewBasketElementConfirmation(BasketElementInterface $basketElement)
-    {
-
-    }
-
-    /**
-     * @param OrderElementInterface $orderElement
-     */
-    public function viewOrderElement(OrderElementInterface $orderElement)
-    {
-
-    }
-
-    /**
-     * @param OrderElementInterface $orderElement
-     */
-    public function viewEditOrderElement(OrderElementInterface $orderElement)
-    {
-
-    }
-
-    /**
      * @param ProductInterface $product
      * @param string|null      $currency
      */
