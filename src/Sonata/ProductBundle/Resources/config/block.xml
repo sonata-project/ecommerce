@@ -10,7 +10,7 @@
 
             <argument>sonata.product.block.recent_products</argument>
             <argument type="service" id="templating" />
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="sonata.price.currency.detector" />
         </service>
