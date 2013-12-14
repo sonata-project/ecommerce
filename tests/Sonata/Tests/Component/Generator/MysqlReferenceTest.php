@@ -140,7 +140,7 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(new \PDOStatement()));
 
         $registry = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
-        $registry->expects($this->any())->method('getEntityManager')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManager')->will($this->returnValue($em));
         $registry->expects($this->any())->method('getConnection')->will($this->returnValue($connection));
 
 

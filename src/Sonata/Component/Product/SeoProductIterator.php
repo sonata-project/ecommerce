@@ -41,7 +41,7 @@ class SeoProductIterator implements SourceIteratorInterface
      */
     public function __construct(RegistryInterface $registry, $class, RouterInterface $router, $routeName)
     {
-        $tableName = $registry->getEntityManager()->getClassMetadata($class)->table['name'];
+        $tableName = $registry->getManager()->getClassMetadata($class)->table['name'];
 
         $dql = "SELECT p.id as productId, p.slug as slug,  p.updated_at as lastmod, 'weekly' as changefreq, '0.5' as priority "
             ."FROM ".$tableName." p "

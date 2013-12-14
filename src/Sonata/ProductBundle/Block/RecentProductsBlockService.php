@@ -55,7 +55,7 @@ class RecentProductsBlockService extends BaseBlockService
      */
     public function __construct($name, EngineInterface $templating, RegistryInterface $registry, Pool $pool, CurrencyDetectorInterface $currencyDetector)
     {
-        $this->productRepository = $registry->getEntityManager()->getRepository('Application\Sonata\ProductBundle\Entity\Product');
+        $this->productRepository = $registry->getManager()->getRepository('Application\Sonata\ProductBundle\Entity\Product');
         $this->pool              = $pool;
         $this->currencyDetector  = $currencyDetector;
 
