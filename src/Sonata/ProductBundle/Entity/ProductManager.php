@@ -23,6 +23,14 @@ use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 class ProductManager extends DoctrineBaseManager implements ProductManagerInterface
 {
     /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->em;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function findInSameCollections($productCollections, $limit = null)

@@ -11,6 +11,8 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\Component\Form\Type\VariationFormTypeInterface;
+
 class ProductDefinition
 {
     /**
@@ -24,13 +26,20 @@ class ProductDefinition
     protected $provider;
 
     /**
-     * @param ProductProviderInterface $provider
-     * @param ProductManagerInterface  $manager
+     * @var VariationFormTypeInterface
      */
-    public function __construct(ProductProviderInterface $provider, ProductManagerInterface $manager)
+    protected $variationFormType;
+
+    /**
+     * @param ProductProviderInterface      $provider
+     * @param ProductManagerInterface       $manager
+     * @param VariationFormTypeInterface   $variationFormType
+     */
+    public function __construct(ProductProviderInterface $provider, ProductManagerInterface $manager, VariationFormTypeInterface $variationFormType)
     {
-        $this->provider = $provider;
-        $this->manager  = $manager;
+        $this->provider          = $provider;
+        $this->manager           = $manager;
+        $this->variationFormType = $variationFormType;
     }
 
     /**
@@ -47,5 +56,13 @@ class ProductDefinition
     public function getProvider()
     {
         return $this->provider;
+    }
+
+    /**
+     * @return VariationFormTypeInterface
+     */
+    public function getVariationFormType()
+    {
+        return $this->variationFormType;
     }
 }

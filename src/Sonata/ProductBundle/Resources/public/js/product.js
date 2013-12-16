@@ -75,6 +75,37 @@ Sonata.Product = {
     
     addBasketProcessPrice: function(price) {
         this.targets.productPrice.text(price);
+    },
+
+    getUriFromTree: function(productTree, selectsList) {
+        selectsList.change(function() {
+            selectedValues = {};
+
+            selectsList.each(function() {
+                name = cleanFieldId($(this).attr('id'));
+                selectedValues[name] = $(this).val();
+            });
+
+            uri = null;
+
+            for (var name in selectedValues) {
+                if (typeof productTree[name][selectedValues[name]] == 'undefined') {
+                    break;
+                }
+
+                uri = productTree[name][selectedValues[name]];
+            }
+
+            if (typeof uri['uri'][0] == 'undefined') {
+                return false;
+            }
+
+            return document.location = uri['uri'][0];
+        });
+
+        function cleanFieldId(name) {
+            return name.substring('sonata_product_training_'.length);
+        }
     }
 }
 
