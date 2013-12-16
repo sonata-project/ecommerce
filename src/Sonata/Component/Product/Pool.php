@@ -54,6 +54,26 @@ class Pool
      *
      * @throws \RuntimeException
      *
+     * @return \Sonata\Component\Product\ProductProviderInterface
+     */
+    public function getVariationFormType($code)
+    {
+        if ($code instanceof ProductInterface) {
+            $code = $this->getProductCode($code);
+
+            if (!$code) {
+                throw new \RuntimeException(sprintf('The class is not linked to a ProductProvider!'));
+            }
+        }
+
+        return $this->getProduct($code)->getVariationFormType();
+    }
+
+    /**
+     * @param ProductInterface|string $code
+     *
+     * @throws \RuntimeException
+     *
      * @return \Sonata\Component\Product\ProductManagerInterface
      */
     public function getManager($code)

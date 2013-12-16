@@ -78,6 +78,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket = new Basket;
 
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $formType = $this->getMock('Sonata\Component\Form\Type\VariationFormTypeInterface');
 
         $provider->expects($this->any())
             ->method('basketCalculatePrice')
@@ -86,7 +87,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
-        $definition = new ProductDefinition($provider, $manager);
+        $definition = new ProductDefinition($provider, $manager, $formType);
 
         $product = $this->getMockProduct();
 
@@ -229,6 +230,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
     public function testSerialize()
     {
         $product = $this->getMockProduct();
+        $formType = $this->getMock('Sonata\Component\Form\Type\VariationFormTypeInterface');
 
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
@@ -237,7 +239,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
-        $definition = new ProductDefinition($provider, $manager);
+        $definition = new ProductDefinition($provider, $manager, $formType);
 
         $pool = new Pool;
         $pool->addProduct('product_code', $definition);
@@ -454,8 +456,8 @@ class BasketTest extends \PHPUnit_Framework_TestCase
     {
         $basket = new Basket();
 
-        // create the provider mock
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $formType = $this->getMock('Sonata\Component\Form\Type\VariationFormTypeInterface');
 
         $provider->expects($this->any())
             ->method('basketCalculatePrice')
@@ -469,7 +471,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
-        $definition = new ProductDefinition($provider, $manager);
+        $definition = new ProductDefinition($provider, $manager, $formType);
 
         $pool = new Pool;
         $pool->addProduct('product_code', $definition);
