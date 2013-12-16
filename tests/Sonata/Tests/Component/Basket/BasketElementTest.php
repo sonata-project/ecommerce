@@ -96,8 +96,9 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $formType = $this->getMock('Sonata\Component\Form\Type\VariationFormTypeInterface');
 
-        $productDefinition = new ProductDefinition($provider, $manager);
+        $productDefinition = new ProductDefinition($provider, $manager, $formType);
 
         // Tests getProduct
         $this->assertNull($basketElement->getProduct());
@@ -125,7 +126,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
             ->method('findOneBy')
             ->will($this->returnValue($product));
 
-        $basketElement->setProductDefinition(new ProductDefinition($provider, $manager));
+        $basketElement->setProductDefinition(new ProductDefinition($provider, $manager, $formType));
 
         $basketElement->setProductId(42);
         $basketElement->setProduct('product_code', $product); // Done by the provider hereby mocked, hence we do it manually

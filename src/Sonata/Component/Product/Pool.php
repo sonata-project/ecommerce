@@ -18,11 +18,10 @@ class Pool
     protected $products = array();
 
     /**
-     * add a delivery method into the pool
+     * Add a delivery method into the pool
      *
-     * @param  string                                      $code
-     * @param  \Sonata\Component\Product\ProductDefinition $productDescription
-     * @return void
+     * @param  string            $code
+     * @param  ProductDefinition $productDescription
      */
     public function addProduct($code, ProductDefinition $productDescription)
     {
@@ -47,6 +46,26 @@ class Pool
         }
 
         return $this->getProduct($code)->getProvider();
+    }
+
+    /**
+     * @param ProductInterface|string $code
+     *
+     * @throws \RuntimeException
+     *
+     * @return \Sonata\Component\Product\ProductProviderInterface
+     */
+    public function getVariationFormType($code)
+    {
+        if ($code instanceof ProductInterface) {
+            $code = $this->getProductCode($code);
+
+            if (!$code) {
+                throw new \RuntimeException(sprintf('The class is not linked to a ProductProvider!'));
+            }
+        }
+
+        return $this->getProduct($code)->getVariationFormType();
     }
 
     /**

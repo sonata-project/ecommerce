@@ -42,7 +42,7 @@ class AddProductProviderCompilerPass implements CompilerPassInterface
 
             foreach ($arguments[1] as $code => $options) {
                 // define a new ProductDefinition
-                $definition = new Definition('Sonata\Component\Product\ProductDefinition', array(new Reference($options['provider']), new Reference($options['manager'])));
+                $definition = new Definition('Sonata\Component\Product\ProductDefinition', array(new Reference($options['provider']), new Reference($options['manager']), new Reference($options['form_type'])));
                 $definition->setPublic(false);
                 $container->setDefinition($code, $definition);
 

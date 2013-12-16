@@ -50,6 +50,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('provider')->isRequired()->end()
                             ->scalarNode('manager')->isRequired()->end()
+                            ->scalarNode('form_type')->isRequired()->end()
                             ->arrayNode('variations')
                                 ->children()
                                     ->arrayNode('fields')

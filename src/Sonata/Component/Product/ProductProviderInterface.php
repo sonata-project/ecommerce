@@ -279,4 +279,9 @@ interface ProductProviderInterface
      * @return int                                        the stock available
      */
     public function getStockAvailable(ProductInterface $product);
+
+    /**
+     * @return array
+     */
+    public function getVariationFields();
 }

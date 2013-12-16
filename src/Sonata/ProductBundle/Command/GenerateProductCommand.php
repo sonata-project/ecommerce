@@ -77,9 +77,13 @@ class GenerateProductCommand extends ContainerAwareCommand
 
         Mustache::renderDir($bundle_dir, array(
             'product' => $input->getArgument('product'),
+            'product_lowercased' => strtolower($input->getArgument('product')),
         ));
 
         $renames = array(
+            // form type
+            '%s/Form/Type/ProductVariationFormType.php'    => '%s/Form/Type/%sVariationFormType.php',
+
             // entity
             '%s/Entity/Entity.php'                         => '%s/Entity/%s.php',
             '%s/Repository/Repository.php'                 => '%s/Repository/%sRepository.php',
@@ -97,7 +101,7 @@ class GenerateProductCommand extends ContainerAwareCommand
 
         $dirs = array(
             sprintf('%s/Resources/views/%s', $bundle_dir, $input->getArgument('product')),
-            sprintf('%s/Product/%s',         $bundle_dir, $input->getArgument('product')),
+            //sprintf('%s/Product/%s',         $bundle_dir, $input->getArgument('product')),
             sprintf('%s/Provider',           $bundle_dir),
         );
 
@@ -147,6 +151,12 @@ class GenerateProductCommand extends ContainerAwareCommand
         arguments:
             - @serializer
 
+    {{ service }}.form_type:
+        class: Application\Sonata\ProductBundle\Form\Type\{{ product }}VariationsFormType
+        arguments:
+            - @sonata.ecommerce_demo.product.{{ product_lowercased }}.manager
+            - @sonata.intl.templating.helper.datetime
+
 <info>2. Add this service configuration</info>
 
 <comment>sonata_product:</comment>
@@ -154,6 +164,7 @@ class GenerateProductCommand extends ContainerAwareCommand
         {{ service }}:
             provider: {{ service }}.type
             manager: {{ service }}.manager
+            form_type: {{ service }}.form_type
 
 
 <info>3. Tweak the product to match its functional requirements</info>
@@ -162,7 +173,7 @@ class GenerateProductCommand extends ContainerAwareCommand
 
 
 CONFIG
-, array('service' => $service, 'product' => $product)
+, array('service' => $service, 'product' => $product, 'product_lowercased' => strtolower($product))
 ));
     }
 }

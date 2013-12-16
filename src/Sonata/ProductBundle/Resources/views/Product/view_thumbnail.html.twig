@@ -17,7 +17,7 @@ file that was distributed with this source code.
 
         <h4 itemprop="name">{{ product.name }}</h4>
         <p itemprop="price">
-            {% if provider.hasEnabledVariations(product) %}
+            {% if sonata_product_has_enabled_variations(product) %}
                 {{ sonata_product_cheapest_variation_price(product)|number_format_currency(currency) }}
             {% else %}
                 {{ product.price|number_format_currency(currency) }}

@@ -12,7 +12,6 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\QueryBuilder;
-use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
@@ -22,6 +21,14 @@ use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
 class ProductManager extends DoctrineBaseManager implements ProductManagerInterface
 {
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->em;
+    }
+
     /**
      * {@inheritdoc}
      */
