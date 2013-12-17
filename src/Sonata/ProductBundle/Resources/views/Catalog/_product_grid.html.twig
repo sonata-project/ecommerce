@@ -33,7 +33,7 @@ file that was distributed with this source code.
                         {{ product.price|number_format_currency(currency) }}
                     {% else %}
                         {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
-                        {{ provider.cheapestVariation(product).price|number_format_currency(currency) }}
+                        {{ provider.cheapestEnabledVariation(product).price|number_format_currency(currency) }}
                     {% endif %}
                 </span>
             </p>
