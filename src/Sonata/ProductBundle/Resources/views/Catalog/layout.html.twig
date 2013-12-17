@@ -1,0 +1,61 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<div class="row">
+
+    <div class="span3">
+
+        {% block product_filter %}{% endblock %}
+
+    </div>
+
+    <div class="span9">
+
+        {% sonata_template_box 'This is the catalog template. Feel free to override it.' %}
+
+        {% if pager.count == 0 %}
+
+            {% block no_products %}
+                <div class="no-products-available">
+                    {% trans from 'SonataProductBundle' %}no_products_available{% endtrans %}
+                </div>
+            {% endblock %}
+
+        {% else %}
+
+            <div class="sonata-product-navigation-bar clearfix">
+                <div class="pull-left">
+                    <h4>
+                        {% if category is defined %}
+                            {{ category.name }}
+                        {% else %}
+                            Catalog
+                        {% endif %}
+                    </h4>
+                </div>
+                <div class="pull-right">
+                    {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+                </div>
+            </div>
+
+            {% block products %}{% endblock %}
+
+            <div class="sonata-product-navigation-bar clearfix">
+                <div class="pull-right">
+                    {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
