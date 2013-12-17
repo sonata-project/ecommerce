@@ -1,0 +1,24 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<div class="product-grid">
+
+    <ul class="thumbnails">
+
+        {% for product in pager.getResults if product.isMaster %}
+            {% if not provider.hasVariations(product) or provider.hasVariations(product) and provider.hasEnabledVariations(product) %}
+                {% include 'SonataProductBundle:Catalog:_product_grid.html.twig' %}
+            {% endif %}
+        {% endfor %}
+
+    </ul>
+
+</div>

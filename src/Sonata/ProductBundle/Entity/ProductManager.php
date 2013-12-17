@@ -67,7 +67,7 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      *
      * @return Pager
      */
-    public function getActiveProductsByCategoryIdPager($categoryId, $page = 1, $limit = 25)
+    public function getActiveProductsByCategoryIdPager($categoryId = null, $page = 1, $limit = 9)
     {
         $queryBuilder = $this->queryProductsByCategoryIdPager($categoryId);
         $queryBuilder->andWhere('p.enabled = :enabled')
@@ -105,16 +105,22 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    protected function queryProductsByCategoryIdPager($categoryId)
+    protected function queryProductsByCategoryIdPager($categoryId = null)
     {
-        return $this->em
+        $queryBuilder = $this->em
             ->createQueryBuilder('p')
             ->from($this->getClass(), 'p')
             ->select('p')
-            ->leftJoin('p.productCategories', 'pc')
-            ->leftJoin('p.gallery', 'g')
-            ->where('pc.category = :categoryId')
-            ->setParameter('categoryId', $categoryId);
+            ->leftJoin('p.gallery', 'g');
+
+        if ($categoryId) {
+            $queryBuilder
+                ->leftJoin('p.productCategories', 'pc')
+                ->andWhere('pc.category = :categoryId')
+                ->setParameter('categoryId', $categoryId);
+        }
+
+        return $queryBuilder;
     }
 
     /**
