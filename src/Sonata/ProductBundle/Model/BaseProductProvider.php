@@ -23,6 +23,7 @@ use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Product\ProductCollectionManagerInterface;
@@ -828,15 +829,19 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement)
     {
-        return $this->currencyPriceCalculator->getPrice($basketElement->getProduct(), $basket->getCurrency());
+        return $this->calculatePrice($basketElement->getProduct(), $basket->getCurrency(), $basketElement->getQuantity());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency = null)
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1)
     {
-        return $this->currencyPriceCalculator->getPrice($product, $currency);
+        if (!is_int($quantity) || $quantity < 1) {
+            throw new InvalidParameterException("Expected integer >= 1 for quantity, ".$quantity." given.");
+        }
+
+        return floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency), $quantity));
     }
 
     /**
@@ -883,10 +888,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * return the stock available for the current product
-     *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @return int                                        the stock available
+     * {@inheritdoc}
      */
     public function getStockAvailable(ProductInterface $product)
     {

@@ -114,10 +114,11 @@ interface ProductProviderInterface
      *
      * @param ProductInterface          $product
      * @param CurrencyInterface|null    $currency
+     * @param int                       $quantity Defaults to one
      *
      * @return float
      */
-    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency = null);
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1);
 
     /**
      * Return true if the product can be added to the provided basket
@@ -270,4 +271,12 @@ interface ProductProviderInterface
      * @return null|ProductInterface
      */
     public function getCheapestEnabledVariation(ProductInterface $product);
+
+    /**
+     * return the stock available for the current product
+     *
+     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @return int                                        the stock available
+     */
+    public function getStockAvailable(ProductInterface $product);
 }

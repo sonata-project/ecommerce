@@ -10,6 +10,7 @@
 
 namespace Sonata\Test\ProductBundle\Model;
 
+use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
@@ -403,6 +404,18 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($variationB, $provider->getCheapestEnabledVariation($product));
     }
 
+    public function testCalculatePrice()
+    {
+        $product = new ProductTest();
+        $product->setPrice(42);
+
+        $provider = $this->createNewProductProvider();
+
+        $this->assertEquals(42*4, $provider->calculatePrice($product, 4));
+        $this->assertEquals(42*4, $provider->calculatePrice($product, 4.32));
+        $this->assertEquals(42, $provider->calculatePrice($product));
+    }
+
     /**
      * @return ProductProviderTest
      */
@@ -410,6 +423,10 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     {
         $serializer = $this->getMockBuilder('JMS\Serializer\Serializer')->disableOriginalConstructor()->getMock();
 
-        return new ProductProviderTest($serializer);
+        $provider = new ProductProviderTest($serializer);
+
+        $provider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
+
+        return $provider;
     }
 }

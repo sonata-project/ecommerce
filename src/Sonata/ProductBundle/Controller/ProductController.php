@@ -12,6 +12,8 @@
 namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +32,7 @@ class ProductController extends Controller
      */
     public function viewAction($productId, $slug)
     {
-        $product = is_object($productId) ? $productId : $this->get('sonata.product.set.manager')->findEnabledFromIdAndSlug($productId, $slug);
+        $product = $this->get('sonata.product.set.manager')->findEnabledFromIdAndSlug($productId, $slug);
 
         if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
@@ -89,6 +91,55 @@ class ProductController extends Controller
         }
 
         return $response;
+    }
+
+    /**
+     * Returns price for $productId in given $quantity and stock information
+     * as JSON.
+     *
+     * @param $productId
+     * @param $quantity
+     *
+     * @return JsonResponse
+     */
+    public function getPriceStockForQuantityAction($productId, $quantity)
+    {
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            throw new BadRequestHttpException;
+        }
+
+        $product = $this->get('sonata.product.set.manager')->findOneBy(array('id' => $productId, 'enabled' => true));
+
+        if (!$product) {
+            throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
+        }
+
+        $errors = array();
+
+        /** @var \Sonata\Component\Product\Pool $productPool */
+        $productPool = $this->get('sonata.product.pool');
+        $provider = $productPool->getProvider($product);
+
+        if ($provider->hasVariations($product)) {
+            $errors['variations'] = "This is a master product, it has no price";
+        }
+
+        $stock = $provider->getStockAvailable($product) ?: 0;
+
+        if ($quantity > $stock) {
+            $errors['stock'] = $this->get('translator')->trans('product_out_of_stock_quantity', array(), "SonataProductBundle");
+        }
+
+        $currency = $this->get('sonata.basket')->getCurrency();
+
+        $price = $provider->calculatePrice($product, $currency, $quantity);
+
+        return new JsonResponse(array(
+            'stock'      => $stock,
+            'price'      => $price,
+            'price_text' => $this->get('sonata.intl.templating.helper.number')->formatCurrency($price, $currency),
+            'errors'     => $errors
+        ));
     }
 
     /**

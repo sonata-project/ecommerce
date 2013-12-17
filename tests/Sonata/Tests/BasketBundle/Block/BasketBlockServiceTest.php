@@ -11,6 +11,7 @@
 namespace Sonata\Tests\BasketBundle\Block;
 
 use Sonata\BasketBundle\Block\BasketBlockService;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class BasketBlockServiceTest
@@ -24,9 +25,18 @@ class BasketBlockServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetName()
     {
         $engineInterfaceMock = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')->disableOriginalConstructor()->getMock();
-        $customerManagerInterfaceMock = $this->getMockBuilder('Sonata\Component\Customer\CustomerManagerInterface')->disableOriginalConstructor()->getMock();
         $block = new BasketBlockService('test', $engineInterfaceMock);
 
         $this->assertEquals('Basket items', $block->getName());
+    }
+
+    public function testExecute()
+    {
+        $engineInterfaceMock = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')->disableOriginalConstructor()->getMock();
+        $engineInterfaceMock->expects($this->once())->method('renderResponse')->will($this->returnValue(new Response()));
+        $context = $this->getMock('Sonata\BlockBundle\Block\BlockContextInterface');
+        $block = new BasketBlockService('test', $engineInterfaceMock);
+
+        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $block->execute($context));
     }
 }
