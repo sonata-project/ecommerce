@@ -37,6 +37,8 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
     {
         return $this->queryInSameCollections($productCollections, $limit)
             ->andWhere('p.parent IS NULL')
+            ->andWhere('p.enabled = :enabled')
+            ->setParameter('enabled', true)
             ->getQuery()
             ->execute();
     }
