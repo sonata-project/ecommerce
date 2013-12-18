@@ -14,10 +14,13 @@ file that was distributed with this source code.
     <ul class="thumbnails">
 
         {% for product in pager.getResults if product.isMaster %}
-            {% set provider = product|provider %}
+
+            {% set provider = product|sonata_product_provider %}
+
             {% if not provider.hasVariations(product) or provider.hasVariations(product) and provider.hasEnabledVariations(product) %}
                 {% include 'SonataProductBundle:Catalog:_product_grid.html.twig' %}
             {% endif %}
+
         {% endfor %}
 
     </ul>
