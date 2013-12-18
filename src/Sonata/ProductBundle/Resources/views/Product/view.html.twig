@@ -14,7 +14,7 @@ file that was distributed with this source code.
         jQuery(document).ready(function() {
             Sonata.Product.init({
                 url: {
-                    infoStockPrice: '{{ path('sonata_product_price_stock', {'productId': product.id, 'quantity': 1}) }}'
+                    infoStockPrice: '{{ path('sonata_product_price_stock', {'productId': product.id}) }}'
                 },
                 targets: {
                     inputAddBasket:  $('#add_basket_quantity'),
