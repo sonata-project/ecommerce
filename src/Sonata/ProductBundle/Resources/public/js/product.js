@@ -63,7 +63,7 @@ Sonata.Product = {
     },
     
     buildInfoStockPriceUrl: function(quantity) {
-        return this.url.infoStockPrice.substr(0, this.url.infoStockPrice.length-1)+quantity;
+        return this.url.infoStockPrice+'?quantity='+quantity;
     },
     
     addBasketAddErrors: function(errors) {

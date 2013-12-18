@@ -94,18 +94,17 @@ class ProductController extends Controller
     }
 
     /**
-     * Returns price for $productId in given $quantity and stock information
+     * Returns price for $productId in given quantity and stock information
      * as JSON.
      *
      * @param $productId
-     * @param $quantity
      *
      * @return JsonResponse
      */
-    public function getPriceStockForQuantityAction($productId, $quantity)
+    public function getPriceStockForQuantityAction($productId)
     {
-        if (!$this->getRequest()->isXmlHttpRequest()) {
-            throw new BadRequestHttpException;
+        if (!$this->getRequest()->isXmlHttpRequest() || !($quantity = (int) $this->getRequest()->query->get('quantity'))) {
+            throw new BadRequestHttpException("Request needs to be XHR and have a quantity parameter");
         }
 
         $product = $this->get('sonata.product.set.manager')->findOneBy(array('id' => $productId, 'enabled' => true));
