@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.product.provider.twig" class="Sonata\ProductBundle\Twig\Extension\ProductProviderExtension" public="false">
+        <service id="sonata.product.provider.twig" class="Sonata\ProductBundle\Twig\Extension\ProductExtension" public="false">
             <argument type="service" id="sonata.product.pool" />
             <tag name="twig.extension" />
         </service>

@@ -17,7 +17,7 @@ use Sonata\Component\Product\ProductProviderInterface;
 /**
  * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
  */
-class ProductProviderExtension extends \Twig_Extension
+class ProductExtension extends \Twig_Extension
 {
     /**
      * @var ProductPool
@@ -40,7 +40,7 @@ class ProductProviderExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('provider', array($this, 'getProductProvider')),
+            new \Twig_SimpleFilter('sonata_product_provider', array($this, 'getProductProvider')),
         );
     }
 
@@ -61,6 +61,6 @@ class ProductProviderExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'sonata_product_provider';
+        return 'sonata_product';
     }
 }

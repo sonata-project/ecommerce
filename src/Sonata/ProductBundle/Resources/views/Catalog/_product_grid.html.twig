@@ -11,7 +11,8 @@ file that was distributed with this source code.
 
 {% spaceless %}
 
-    {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
+    {% set link     = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
+    {% set provider = product|sonata_product_provider %}
 
     <li class="span4" itemscope itemtype="http://schema.org/Product">
 

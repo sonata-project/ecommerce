@@ -11,9 +11,12 @@
 
 namespace Sonata\ProductBundle\Controller;
 
+use Application\Sonata\ClassificationBundle\Entity\Category;
+use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\ProductBundle\Entity\ProductSetManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CatalogController extends Controller
 {
@@ -22,18 +25,44 @@ class CatalogController extends Controller
      */
     public function indexAction()
     {
-        $maxPerPage = 9;
+        $page        = $this->getRequest()->get('page', 1);
+        $displayMax  = $this->getRequest()->get('max', 9);
+        $displayMode = $this->getRequest()->get('mode', 'grid');
 
-        $categoryId = $this->getRequest()->get('category');
+        if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
+            throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
+        }
 
-        $pager = $this->getProductSetManager()
-            ->getActiveProductsByCategoryIdPager($categoryId, $this->getRequest()->get('page'), $maxPerPage);
+        $category = $this->retrieveCategoryFromQueryString();
+
+        $pager = $this->getProductSetManager()->getCategoryActiveProductsPager($category, $page, $displayMax);
 
         return $this->render('SonataProductBundle:Catalog:index.html.twig', array(
-            'display_mode' => $this->getRequest()->get('mode', 'grid'),
+            'display_mode' => $displayMode,
             'pager'        => $pager,
-            'provider'     => $this->get('sonata.product.pool')->getProvider($pager->getCurrent()),
             'currency'     => $this->getCurrencyDetector()->getCurrency(),
+            'category'     => $category,
+        ));
+    }
+
+    /**
+     * Retrieve Category from its id and slug, if any.
+     *
+     * @return Category|null
+     */
+    protected function retrieveCategoryFromQueryString()
+    {
+        $categoryId   = $this->getRequest()->get('category_id');
+        $categorySlug = $this->getRequest()->get('category_slug');
+
+        if (!$categoryId || !$categorySlug) {
+            return null;
+        }
+
+        return $this->getCategoryManager()->findOneBy(array(
+            'id'      => $categoryId,
+            'slug'    => $categorySlug,
+            'enabled' => true,
         ));
     }
 
@@ -51,5 +80,13 @@ class CatalogController extends Controller
     protected function getCurrencyDetector()
     {
         return $this->get('sonata.price.currency.detector');
+    }
+
+    /**
+     * @return CategoryManager
+     */
+    protected function getCategoryManager()
+    {
+        return $this->get('sonata.classification.manager.category');
     }
 }

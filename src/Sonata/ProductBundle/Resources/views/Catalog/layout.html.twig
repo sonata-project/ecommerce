@@ -34,10 +34,10 @@ file that was distributed with this source code.
             <div class="sonata-product-navigation-bar clearfix">
                 <div class="pull-left">
                     <h4>
-                        {% if category is defined %}
+                        {% if category %}
                             {{ category.name }}
                         {% else %}
-                            Catalog
+                            {% trans from 'SonataProductBundle' %}catalog_root_title{% endtrans %}
                         {% endif %}
                     </h4>
                 </div>

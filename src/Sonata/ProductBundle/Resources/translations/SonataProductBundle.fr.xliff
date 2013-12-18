@@ -343,6 +343,10 @@
                 <source>view_all_products</source>
                 <target>Voir tous les produits</target>
             </trans-unit>
+            <trans-unit id="catalog_root_title">
+                <source>catalog_root_title</source>
+                <target>Catalogue</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
