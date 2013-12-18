@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="sonata.product.twig.extension" class="sonata.product.twig.extension.class" public="false">
+        <service id="sonata.product.twig.extension" class="%sonata.product.twig.extension.class%" public="false">
             <tag name="twig.extension" />
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="router"/>
