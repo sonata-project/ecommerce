@@ -11,6 +11,7 @@
 
 namespace Sonata\ProductBundle\Twig\Extension;
 
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductProviderInterface;
@@ -41,11 +42,12 @@ class ProductExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('sonata_product_provider',               array($this, 'getProductProvider')),
-            new \Twig_SimpleFunction('sonata_product_has_variations',         array($this, 'hasVariations')),
-            new \Twig_SimpleFunction('sonata_product_has_enabled_variations', array($this, 'hasEnabledVariations')),
-            new \Twig_SimpleFunction('sonata_product_cheapest_variation',     array($this, 'getCheapestEnabledVariation')),
-            new \Twig_SimpleFunction('sonata_product_price',                  array($this, 'getProductPrice')),
+            new \Twig_SimpleFunction('sonata_product_provider',                 array($this, 'getProductProvider')),
+            new \Twig_SimpleFunction('sonata_product_has_variations',           array($this, 'hasVariations')),
+            new \Twig_SimpleFunction('sonata_product_has_enabled_variations',   array($this, 'hasEnabledVariations')),
+            new \Twig_SimpleFunction('sonata_product_cheapest_variation',       array($this, 'getCheapestEnabledVariation')),
+            new \Twig_SimpleFunction('sonata_product_cheapest_variation_price', array($this, 'getCheapestEnabledVariationPrice')),
+            new \Twig_SimpleFunction('sonata_product_price',                    array($this, 'getProductPrice')),
         );
     }
 
@@ -56,7 +58,7 @@ class ProductExtension extends \Twig_Extension
      *
      * @return ProductProviderInterface
      */
-    public function getProductProvider($product)
+    public function getProductProvider(ProductInterface $product)
     {
         return $this->productPool->getProvider($product);
     }
@@ -68,7 +70,7 @@ class ProductExtension extends \Twig_Extension
      *
      * @return bool
      */
-    public function hasVariations($product)
+    public function hasVariations(ProductInterface $product)
     {
         return $this->productPool->getProvider($product)->hasVariations($product);
     }
@@ -80,7 +82,7 @@ class ProductExtension extends \Twig_Extension
      *
      * @return bool
      */
-    public function hasEnabledVariations($product)
+    public function hasEnabledVariations(ProductInterface $product)
     {
         return $this->productPool->getProvider($product)->hasEnabledVariations($product);
     }
@@ -88,11 +90,11 @@ class ProductExtension extends \Twig_Extension
     /**
      * Return the cheapest variation of the product (or itself if none).
      *
-     * @param $product
+     * @param ProductInterface $product
      *
      * @return ProductInterface
      */
-    public function getCheapestEnabledVariation($product)
+    public function getCheapestEnabledVariation(ProductInterface $product)
     {
         if (!$this->productPool->getProvider($product)->hasVariations($product)) {
             return $product;
@@ -102,14 +104,26 @@ class ProductExtension extends \Twig_Extension
     }
 
     /**
+     * Return the cheapest variation price of the product (or itself if none).
+     *
+     * @param ProductInterface $product
+     *
+     * @return ProductInterface
+     */
+    public function getCheapestEnabledVariationPrice(ProductInterface $product)
+    {
+        return $this->productPool->getProvider($product)->getCheapestEnabledVariation($product)->getPrice();
+    }
+
+    /**
      * Return the calculated price of the product.
      *
-     * @param $product
-     * @param $currency
+     * @param ProductInterface  $product  A product instance
+     * @param CurrencyInterface $currency A currency instance
      *
      * @return float
      */
-    public function getProductPrice($product, $currency)
+    public function getProductPrice(ProductInterface $product, CurrencyInterface $currency)
     {
         return $this->productPool->getProvider($product)->calculatePrice($product, $currency);
     }
