@@ -10,6 +10,7 @@
 
 namespace Sonata\Test\ProductBundle\Model;
 
+use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
