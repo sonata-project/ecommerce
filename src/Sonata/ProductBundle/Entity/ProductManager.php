@@ -11,7 +11,9 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\CoreBundle\Entity\DoctrineBaseManager;
@@ -44,35 +46,18 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
     }
 
     /**
-     * @param int $categoryId
-     * @param int $page
-     * @param int $limit
+     * Returns active products for a given category.
      *
-     * @return PagerInterface
-     */
-    public function getProductsByCategoryIdPager($categoryId, $page = 1, $limit = 25)
-    {
-        $queryBuilder = $this->queryProductsByCategoryIdPager($categoryId);
-
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
-    }
-
-    /**
-     * @param int $categoryId
-     * @param int $page
-     * @param int $limit
+     * @param CategoryInterface $category
+     * @param int               $page
+     * @param int               $limit
      *
      * @return Pager
      */
-    public function getActiveProductsByCategoryIdPager($categoryId, $page = 1, $limit = 25)
+    public function getCategoryActiveProductsPager(CategoryInterface $category = null, $page = 1, $limit = 9)
     {
-        $queryBuilder = $this->queryProductsByCategoryIdPager($categoryId);
-        $queryBuilder->andWhere('p.enabled = :enabled')
+        $queryBuilder = $this->getCategoryProductsQueryBuilder($category)
+            ->andWhere('p.enabled = :enabled')
             ->setParameter('enabled', true);
 
         $pager = new Pager($limit);
@@ -103,20 +88,28 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
     }
 
     /**
-     * @param int $categoryId
+     * Returns QueryBuilder for products.
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @param CategoryInterface $category
+     *
+     * @return QueryBuilder
      */
-    protected function queryProductsByCategoryIdPager($categoryId)
+    protected function getCategoryProductsQueryBuilder(CategoryInterface $category = null)
     {
-        return $this->em
+        $queryBuilder = $this->em
             ->createQueryBuilder('p')
             ->from($this->getClass(), 'p')
             ->select('p')
-            ->leftJoin('p.productCategories', 'pc')
-            ->leftJoin('p.gallery', 'g')
-            ->where('pc.category = :categoryId')
-            ->setParameter('categoryId', $categoryId);
+            ->leftJoin('p.gallery', 'g');
+
+        if ($category) {
+            $queryBuilder
+                ->leftJoin('p.productCategories', 'pc')
+                ->andWhere('pc.category = :categoryId')
+                ->setParameter('categoryId', $category->getId());
+        }
+
+        return $queryBuilder;
     }
 
     /**
