@@ -11,8 +11,7 @@ file that was distributed with this source code.
 
 {% spaceless %}
 
-    {% set link     = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
-    {% set provider = product|sonata_product_provider %}
+    {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
 
     <li class="span4" itemscope itemtype="http://schema.org/Product">
 
@@ -30,11 +29,13 @@ file that was distributed with this source code.
 
             <p>
                 <span itemprop="price">
-                    {% if not provider.hasVariations(product) %}
-                        {{ product.price|number_format_currency(currency) }}
+                    {% if not sonata_product_has_variations(product) %}
+                        {{ sonata_product_price(product, currency)|number_format_currency(currency) }}
                     {% else %}
                         {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
-                        {{ provider.cheapestEnabledVariation(product).price|number_format_currency(currency) }}
+
+                        {% set cheapest_variation = sonata_product_cheapest_variation(product) %}
+                        {{ sonata_product_price(cheapest_variation, currency)|number_format_currency(currency) }}
                     {% endif %}
                 </span>
             </p>

@@ -12,6 +12,7 @@
 namespace Sonata\ProductBundle\Twig\Extension;
 
 use Sonata\Component\Product\Pool as ProductPool;
+use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 
 /**
@@ -37,10 +38,14 @@ class ProductExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFilters()
+    public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFilter('sonata_product_provider', array($this, 'getProductProvider')),
+            new \Twig_SimpleFunction('sonata_product_provider',               array($this, 'getProductProvider')),
+            new \Twig_SimpleFunction('sonata_product_has_variations',         array($this, 'hasVariations')),
+            new \Twig_SimpleFunction('sonata_product_has_enabled_variations', array($this, 'hasEnabledVariations')),
+            new \Twig_SimpleFunction('sonata_product_cheapest_variation',     array($this, 'getCheapestEnabledVariation')),
+            new \Twig_SimpleFunction('sonata_product_price',                  array($this, 'getProductPrice')),
         );
     }
 
@@ -54,6 +59,59 @@ class ProductExtension extends \Twig_Extension
     public function getProductProvider($product)
     {
         return $this->productPool->getProvider($product);
+    }
+
+    /**
+     * Check if the product has variations.
+     *
+     * @param ProductInterface $product
+     *
+     * @return bool
+     */
+    public function hasVariations($product)
+    {
+        return $this->productPool->getProvider($product)->hasVariations($product);
+    }
+
+    /**
+     * Check if the product has enabled variations.
+     *
+     * @param ProductInterface $product
+     *
+     * @return bool
+     */
+    public function hasEnabledVariations($product)
+    {
+        return $this->productPool->getProvider($product)->hasEnabledVariations($product);
+    }
+
+    /**
+     * Return the cheapest variation of the product (or itself if none).
+     *
+     * @param $product
+     *
+     * @return ProductInterface
+     */
+    public function getCheapestEnabledVariation($product)
+    {
+        if (!$this->productPool->getProvider($product)->hasVariations($product)) {
+            return $product;
+        }
+
+        return $this->productPool->getProvider($product)->getCheapestEnabledVariation($product);
+    }
+
+    /**
+     * Return the calculated price of the product.
+     *
+     * @param $product
+     * @param $currency
+     *
+     * @return float
+     */
+    public function getProductPrice($product, $currency)
+    {
+        return $this->productPool->getProvider($product)->calculatePrice($product, $currency);
     }
 
     /**
