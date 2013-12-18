@@ -9,6 +9,24 @@ file that was distributed with this source code.
 
 #}
 
+{% block product_javascript_init %}
+    <script>
+        jQuery(document).ready(function() {
+            Sonata.Product.init({
+                url: {
+                    infoStockPrice: '{{ path('sonata_product_price_stock', {'productId': product.id, 'quantity': 1}) }}'
+                },
+                targets: {
+                    inputAddBasket:  $('#add_basket_quantity'),
+                    productPrice:    $('#sonata_product_price'),
+                    submitBasketBtn: $('#sonata_add_basket_submit'),
+                    addBasketError:  $('#sonata_add_basket_error')
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block product %}
     <!-- Begin product display -->
     <div class="row-fluid" itemscope itemtype="http://schema.org/Product">
@@ -69,7 +87,7 @@ file that was distributed with this source code.
 
                                 </dt>
 
-                                <dd itemprop="price" style="margin-left: 110px;">
+                                <dd itemprop="price" style="margin-left: 110px;" id="sonata_product_price">
                                     {% block product_price_price %}
                                         {% if provider.hasEnabledVariations(product) %}
                                             {{ cheapest_variation.price|number_format_currency(currency) }}
@@ -107,6 +125,7 @@ file that was distributed with this source code.
                         <hr/>
 
                         {% block product_basket %}
+                            <div class="alert alert-error" id="sonata_add_basket_error" style="display:none;"></div>
                             {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
                         {% endblock %}
 

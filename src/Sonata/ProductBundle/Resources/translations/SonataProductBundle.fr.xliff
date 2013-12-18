@@ -298,6 +298,10 @@
                 <source>product_out_of_stock</source>
                 <target>Attention : ce produit n'est pas disponible actuellement !</target>
             </trans-unit>
+            <trans-unit id="product_out_of_stock_quantity">
+                <source>product_out_of_stock_quantity</source>
+                <target>Il n'y a pas assez de stock pour répondre à la quantité demandée.</target>
+            </trans-unit>
             <!-- End - Product view translations -->
 
             <!-- Begin - Product create variations -->
