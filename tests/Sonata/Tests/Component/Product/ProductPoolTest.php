@@ -21,6 +21,7 @@ class ProductPoolTest extends \PHPUnit_Framework_TestCase
         $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
         $productManager1 = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
         $productManager2 = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $formType = $this->getMock('Sonata\Component\Form\Type\VariationFormTypeInterface');
 
         // we need products from different objects to test ProductPool
         $product1 = $this->getMock('Sonata\Component\Product\ProductInterface');
@@ -34,8 +35,8 @@ class ProductPoolTest extends \PHPUnit_Framework_TestCase
             ->method('getClass')
             ->will($this->returnValue($product2));
 
-        $definition1 = new ProductDefinition($productProvider, $productManager1);
-        $definition2 = new ProductDefinition($productProvider, $productManager2);
+        $definition1 = new ProductDefinition($productProvider, $productManager1, $formType);
+        $definition2 = new ProductDefinition($productProvider, $productManager2, $formType);
 
         $productPool = new Pool;
         $productPool->addProduct('product1', $definition1);
