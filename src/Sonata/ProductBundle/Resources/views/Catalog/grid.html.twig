@@ -15,9 +15,7 @@ file that was distributed with this source code.
 
         {% for product in pager.getResults if product.isMaster %}
 
-            {% set provider = product|sonata_product_provider %}
-
-            {% if not provider.hasVariations(product) or provider.hasVariations(product) and provider.hasEnabledVariations(product) %}
+            {% if not sonata_product_has_variations(product) or (sonata_product_has_variations(product) and sonata_product_has_enabled_variations(product)) %}
                 {% include 'SonataProductBundle:Catalog:_product_grid.html.twig' %}
             {% endif %}
 
