@@ -409,11 +409,43 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $product = new ProductTest();
         $product->setPrice(42);
 
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(42*4, $provider->calculatePrice($product, 4));
-        $this->assertEquals(42*4, $provider->calculatePrice($product, 4.32));
-        $this->assertEquals(42, $provider->calculatePrice($product));
+        $this->assertEquals(42*4, $provider->calculatePrice($product, $currency, 4));
+        $this->assertEquals(42, $provider->calculatePrice($product, $currency));
+    }
+
+    /**
+     * @expectedException Sonata\CoreBundle\Exception\InvalidParameterException
+     * @expectedExceptionMessage Expected integer >= 1 for quantity, 4.32 given.
+     */
+    public function testCalculatePriceException()
+    {
+        $product = new ProductTest();
+
+        $currency = new Currency();
+
+        $provider = $this->createNewProductProvider();
+
+        $provider->calculatePrice($product, $currency, 4.32);
+    }
+
+    /**
+     * @expectedException Sonata\CoreBundle\Exception\InvalidParameterException
+     * @expectedExceptionMessage Expected integer >= 1 for quantity, 0.32 given.
+     */
+    public function testCalculatePriceExceptionLessThanOne()
+    {
+        $product = new ProductTest();
+
+        $currency = new Currency();
+
+        $provider = $this->createNewProductProvider();
+
+        $provider->calculatePrice($product, $currency, 0.32);
     }
 
     /**
