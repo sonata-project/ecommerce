@@ -1,6 +1,7 @@
 .. index::
     single: Product
     single: Product; ProductVariations
+    single: Product; ProductTemplate
 
 =======
 Product
@@ -41,3 +42,38 @@ The ``ProductProvider`` is responsible of the variation creation.
 
 The variations are related to a parent ``Product``. When you edit some data in your parent
 ``Product``, you can synchronize them with the ``ProductProvider``.
+
+Product Template
+================
+
+Here are the blocks you can override in the product template.
+
+First of all, these main product blocks are encapsulated by the ``product`` block.
+
+  - ``product_errors`` block shows the product page errors (unavailable stock, ...),
+  - ``product_title`` block displays product title,
+
+  - ``product_details`` block defines product image, description text and product gallery in the following blocks:
+    - ``product_image`` block displays current product image,
+    - ``product_description`` block displays product description text,
+    - ``product_gallery`` block display product gallery if defined.
+
+On the right side, there is the following blocks encapsulated in the ``product_right`` block:
+
+  - ``product_properties`` block displays various information on the product (price, variations, ...) in the blocks listed below:
+    - ``product_properties_before_price`` block can help you to display additional information before all of them,
+    - ``product_price_label`` block displays product price label,
+    - ``product_price_price`` block displays product price value,
+    - ``product_properties_after_price`` block can help you to display additional information after the blocks listed above.
+
+  - ``product_variations`` block displays product variations information and the following blocks are encapsulated in:
+    - ``variations_label`` block displays the product variation title,
+    - ``product_variations_list`` block displays variations products list,
+
+  - ``product_delivery`` block displays product delivery information,
+  - ``product_basket`` block displays quantity information and "add to basket" button.
+
+Additionally, you can override those template blocks:
+
+  - ``product_cross`` block that can be overrided in you do not want to displays cross-selling block and the following is encapsulated in:
+    - ``product_cross_selling`` block that includes cross selling block.
