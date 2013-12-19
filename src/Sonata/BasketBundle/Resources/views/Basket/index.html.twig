@@ -12,13 +12,7 @@ file that was distributed with this source code.
 <h1>{% trans from 'SonataBasketBundle' %}sonata.basket.title_basket{% endtrans %}</h1>
 
 {% block sonata_flash_messages %}
-    {% for type in ['success', 'error', 'warning'] %}
-        {% for message in app.session.flashBag.get(type) %}
-            <div class="alert alert-{{ type }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
 {% endblock %}
 
 {% sonata_template_box 'This is the basket page template. Feel free to override it.' %}
