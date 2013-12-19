@@ -178,13 +178,13 @@ You can use these bundles to extend entities or template files.
             resource: @SonataOrderBundle/Resources/config/routing/order.xml
             prefix: /shop/user/invoice
 
+        sonata_product_catalog:
+            resource: @SonataProductBundle/Resources/config/routing/catalog.xml
+            prefix: /shop/catalog
+
         sonata_product:
             resource: @SonataProductBundle/Resources/config/routing/product.xml
             prefix: /shop/product
-
-        sonata_category:
-            resource: @SonataProductBundle/Resources/config/routing/category.xml
-            prefix: /shop/category
 
         sonata_payment:
             resource: @SonataPaymentBundle/Resources/config/routing/payment.xml

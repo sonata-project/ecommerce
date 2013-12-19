@@ -2,6 +2,7 @@
     single: Product
     single: Product; ProductVariations
     single: Product; ProductTemplate
+    single: Product; ProductHelpers
 
 =======
 Product
@@ -77,3 +78,15 @@ Additionally, you can override those template blocks:
 
   - ``product_cross`` block that can be overrided in you do not want to displays cross-selling block and the following is encapsulated in:
     - ``product_cross_selling`` block that includes cross selling block.
+
+Product Helpers
+===============
+
+Some Twig helpers are available for your templates.
+
+  - ``sonata_product_provider`` gives you the related ``ProductProvider`` for a given ``Product``.
+  - ``sonata_product_has_variations`` returns true or false if the ``Product`` has variations.
+  - ``sonata_product_has_enabled_variations`` returns true or false if the ``Product`` has enabled variations.
+  - ``sonata_product_cheapest_variation`` returns cheapest variation, based on its price.
+  - ``sonata_product_cheapest_variation_price`` returns the price of the cheapest variation.
+  - ``sonata_product_price`` calculates the price of a ``Product``.
