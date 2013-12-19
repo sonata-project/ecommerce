@@ -247,7 +247,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function hasVariations(ProductInterface $product)
     {
-        return $this->hasVariationFields() && 0 < count($product->getVariations());
+        return 0 < count($product->getVariations());
     }
 
     /**
@@ -255,7 +255,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function hasEnabledVariations(ProductInterface $product)
     {
-        if (!$this->hasVariationFields() || !$this->hasVariations($product)) {
+        if (!$this->hasVariations($product)) {
             return false;
         }
 
@@ -276,7 +276,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         $result = new ArrayCollection();
 
-        if (!$this->hasVariationFields() || !$this->hasVariations($product)) {
+        if (!$this->hasVariations($product)) {
             return $result;
         }
 
