@@ -16,7 +16,11 @@ file that was distributed with this source code.
         {% for product in pager.getResults if product.isMaster %}
 
             {% if not sonata_product_has_variations(product) or (sonata_product_has_variations(product) and sonata_product_has_enabled_variations(product)) %}
-                {% include 'SonataProductBundle:Catalog:_product_grid.html.twig' %}
+
+                <li class="span4" itemscope itemtype="http://schema.org/Product">
+                    {% include 'SonataProductBundle:Catalog:_product_grid.html.twig' %}
+                </li>
+
             {% endif %}
 
         {% endfor %}
