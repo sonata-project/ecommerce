@@ -31,7 +31,7 @@ class OrderManager extends DoctrineBaseManager implements OrderManagerInterface
      */
     public function findForUser(UserInterface $user)
     {
-        $qb = $this->repository->createQueryBuilder('o')
+        $qb = $this->getRepository()->createQueryBuilder('o')
             ->leftJoin('o.customer', 'c')
             ->where('c.user = :user')
             ->setParameter('user', $user);
