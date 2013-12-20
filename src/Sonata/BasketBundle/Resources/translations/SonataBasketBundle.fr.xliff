@@ -10,6 +10,10 @@
                 <source>message_no_basket_elements</source>
                 <target>Aucun élément dans le panier</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.product.added">
+                <source>sonata.basket.product.added</source>
+                <target>Votre produit a été ajouté !</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.btn_update_basket">
                 <source>sonata.basket.btn_update_basket</source>
                 <target>Mettre à jour le panier</target>
