@@ -13,6 +13,12 @@ file that was distributed with this source code.
 
     <div class="span3">
 
+        {% block product_category %}
+            <div class="well" style="padding: 8px 0;">
+                {{ sonata_block_render({'type': 'sonata.product.block.categories_menu'}, {'current_uri': app.request.requestUri}) }}
+            </div>
+        {% endblock %}
+
         {% block product_filter %}{% endblock %}
 
     </div>

@@ -32,4 +32,11 @@ interface ProductCategoryManagerInterface extends ManagerInterface
      * @param CategoryInterface $category
      */
     public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category);
+
+    /**
+     * Gets the category tree
+     *
+     * @return CategoryInterface[]
+     */
+    public function getCategoryTree();
 }

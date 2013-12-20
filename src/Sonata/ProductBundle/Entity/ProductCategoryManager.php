@@ -54,4 +54,45 @@ class ProductCategoryManager extends DoctrineBaseManager implements ProductCateg
 
         $this->delete($productCategory);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategoryTree()
+    {
+        $qb = $this->getRepository()->createQueryBuilder('pc')
+            ->select('c, pc')
+            ->leftJoin('pc.category', 'c')
+            ->where('pc.enabled = true')
+            ->andWhere('c.enabled = true')
+            ->groupBy('c.id')
+        ;
+
+        $pCategories = $qb->getQuery()->execute();
+
+        $categoryTree = array();
+
+        foreach ($pCategories as $category) {
+            $this->putInTree($category->getCategory(), $categoryTree);
+        }
+
+        return $categoryTree;
+    }
+
+    /**
+     * Finds $category place in $tree
+     *
+     * @param CategoryInterface $category
+     * @param array             $tree
+     */
+    protected function putInTree(CategoryInterface $category, array &$tree)
+    {
+        if (null === $category->getParent()) {
+            $tree[$category->getId()] = $category;
+        } else {
+            $this->putInTree($category->getParent(), $tree);
+        }
+    }
+
+
 }
