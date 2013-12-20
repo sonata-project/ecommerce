@@ -61,7 +61,6 @@ class CatalogController extends Controller
 
         return $this->getCategoryManager()->findOneBy(array(
             'id'      => $categoryId,
-            'slug'    => $categorySlug,
             'enabled' => true,
         ));
     }
