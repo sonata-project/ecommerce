@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <div class="row-fluid">
+        <div class="span8 offset2">
+            <h3>{% trans from 'SonataBasketBundle' %}sonata.basket.product.added{% endtrans %}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="modal-body">
+    {% block product_details %}
+        <div class="row-fluid" itemtype="http://schema.org/Product">
+            <div class="span3 offset1">
+                {% block product_image %}{% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded', 'style': 'margin: 0 10px 10px 0;'} %}{% endblock%}
+            </div>
+
+            <div class="span7">
+                <h4 itemprop="name" style="margin-top: 0px;">{% block product_title %}{{ product.name }}{% endblock %}</h4>
+
+                {% block product_properties %}
+                    {{ render(controller(provider.baseControllerName ~ ':renderProperties', {product: product})) }}
+                {% endblock %}
+
+                <dl class="dl-horizontal" style="margin-bottom: 0;">
+                    <dt style="width: auto;">{{ 'header_basket_quantity'|trans([], 'SonataBasketBundle') }}</dt>
+                    <dd style="margin-left: 110px;">{{ quantity }}</dd>
+
+                    <dt style="width: auto;">{{ 'header_basket_price'|trans([], 'SonataBasketBundle') }}</dt>
+                    <dd style="margin-left: 110px;">{{ price|number_format_currency(currency) }}</dd>
+                </dl>
+            </div>
+        </div>
+    {% endblock %}
+</div>
+
+<div class="modal-footer">
+    <div class="row-fluid">
+        <div class="span5">
+            <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}" class="btn" style="margin-top: 5px;">&larr; Continue shopping</a>
+        </div>
+        <div class="span5 offset1">
+            <a href="{{ url('sonata_basket_index') }}" class="btn btn-primary btn-large">Proceed to checkout</a>
+        </div>
+    </div>
+</div>

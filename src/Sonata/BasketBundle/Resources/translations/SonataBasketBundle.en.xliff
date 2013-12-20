@@ -10,6 +10,10 @@
                 <source>message_no_basket_elements</source>
                 <target>There is no basket elements</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.product.added">
+                <source>sonata.basket.product.added</source>
+                <target>Your item has been added!</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.btn_update_basket">
                 <source>sonata.basket.btn_update_basket</source>
                 <target>Update the basket</target>
