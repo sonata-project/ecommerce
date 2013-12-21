@@ -47,6 +47,7 @@ class SonataProductExtension extends Extension
         $loader->load('admin.xml');
         $loader->load('form.xml');
         $loader->load('twig.xml');
+        $loader->load('menu.xml');
 
         $pool = $container->getDefinition('sonata.product.pool');
         // this value is altered by the AddProductProviderPass class

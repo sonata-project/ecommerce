@@ -13,6 +13,15 @@
             <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.price.currency.detector" />
         </service>
+
+        <service id="sonata.product.block.categories_menu" class="Sonata\ProductBundle\Block\CategoriesMenuBlockService">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.categories_menu</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="knp_menu.menu_provider" />
+            <argument type="service" id="sonata.product.menu.categories_menu_builder" />
+        </service>
     </services>
 
 </container>
