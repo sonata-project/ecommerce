@@ -9,6 +9,11 @@
             <argument type="service" id="sonata.product_category.product" />
             <argument type="service" id="router" />
         </service>
+
+        <service id="sonata.product.menu.catalog_breadcrumb_menu_builder" class="Sonata\ProductBundle\Menu\CatalogBreadcrumbMenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="translator" />
+        </service>
     </services>
 
 </container>
