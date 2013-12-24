@@ -42,8 +42,6 @@ file that was distributed with this source code.
 
         <h1 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h1>
 
-        {% render controller("SonataProductBundle:Product:displayBreadcrumb", {'productId': product.id}) %}
-
         <!-- Begin product details -->
         <div class="col-sm-8">
 
