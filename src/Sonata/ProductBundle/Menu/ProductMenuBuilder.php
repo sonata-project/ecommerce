@@ -90,7 +90,7 @@ class ProductMenuBuilder
      * @param array         $options
      * @param strubg        $currentUri
      */
-    protected function fillMenu(ItemInterface $menu, array $categories, array $options = array(), $currentUri = null)
+    protected function fillMenu(ItemInterface $menu, $categories, array $options = array(), $currentUri = null)
     {
         foreach ($categories as $category) {
             if (null === $category->getParent()) {
