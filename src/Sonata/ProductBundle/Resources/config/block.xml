@@ -20,7 +20,16 @@
             <argument>sonata.product.block.categories_menu</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="knp_menu.menu_provider" />
-            <argument type="service" id="sonata.product.menu.categories_menu_builder" />
+            <argument type="service" id="sonata.product.menu.product_menu_builder" />
+        </service>
+
+        <service id="sonata.product.block.filters_menu" class="Sonata\ProductBundle\Block\FiltersMenuBlockService">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.product_menu</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="knp_menu.menu_provider" />
+            <argument type="service" id="sonata.product.menu.product_menu_builder" />
         </service>
     </services>
 

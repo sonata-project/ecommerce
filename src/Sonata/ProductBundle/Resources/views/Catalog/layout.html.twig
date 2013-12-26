@@ -17,7 +17,13 @@ file that was distributed with this source code.
             {{ sonata_block_render({'type': 'sonata.product.block.categories_menu'}, {'current_uri': app.request.requestUri}) }}
         {% endblock %}
 
-        {% block product_filter %}{% endblock %}
+        {% block product_filter %}
+            {% if provider %}
+                <div class="well" style="padding: 8px 0;">
+                    {{ sonata_block_render({'type': 'sonata.product.block.filters_menu'}, {'product_provider': provider, 'current_uri': app.request.requestUri}) }}
+                </div>
+            {% endif %}
+        {% endblock %}
 
     </div>
 

@@ -12,6 +12,7 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\UnexpectedResultException;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
@@ -46,6 +47,20 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
     }
 
     /**
+     * Returns partial product example (only to get its class) from $category
+     *
+     * @param CategoryInterface $category
+     * @return ProductInterface|null
+     */
+    public function findProductForCategory(CategoryInterface $category)
+    {
+        return $this->getCategoryProductsQueryBuilder($category)
+            ->select('partial p.{id}')
+            ->setMaxResults(1)
+        ->getQuery()->getOneOrNullResult();
+    }
+
+    /**
      * Returns active products for a given category.
      *
      * @param CategoryInterface $category
@@ -54,11 +69,17 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      *
      * @return Pager
      */
-    public function getCategoryActiveProductsPager(CategoryInterface $category = null, $page = 1, $limit = 9)
+    public function getCategoryActiveProductsPager(CategoryInterface $category = null, $page = 1, $limit = 9, $filter = null, $option = null)
     {
         $queryBuilder = $this->getCategoryProductsQueryBuilder($category)
             ->andWhere('p.enabled = :enabled')
             ->setParameter('enabled', true);
+
+        if (null !== $filter) {
+            // TODO manage various filter types
+            $queryBuilder->andWhere(sprintf("p.%s %s :%s", $filter, '>', $filter))
+                ->setParameter(sprintf(":%s", $filter), $option);
+        }
 
         $pager = new Pager($limit);
         $pager->setQuery(new ProxyQuery($queryBuilder));

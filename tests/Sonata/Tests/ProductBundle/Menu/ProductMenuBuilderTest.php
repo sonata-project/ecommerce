@@ -46,4 +46,28 @@ class ProductMenuBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Knp\Menu\ItemInterface', $genMenu);
     }
 
+    public function testCreateFiltersMenu()
+    {
+        $menu = $this->getMock('Knp\Menu\ItemInterface');
+        $factory = $this->getMock('Knp\Menu\FactoryInterface');
+
+        $factory->expects($this->once())
+            ->method('createItem')
+            ->will($this->returnValue($menu));
+
+        $categoryManager = $this->getMock('Sonata\Component\Product\ProductCategoryManagerInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
+
+        $builder = new ProductMenuBuilder($factory, $categoryManager, $router);
+
+        $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+
+        $productProvider->expects($this->once())
+            ->method('getFilters')
+            ->will($this->returnValue(array()));
+
+        $genMenu = $builder->createFiltersMenu($productProvider);
+
+        $this->assertInstanceOf('Knp\Menu\ItemInterface', $genMenu);
+    }
 }

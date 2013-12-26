@@ -110,7 +110,7 @@ class Pool
      *
      * @throws \RuntimeException
      *
-     * @return \Sonata\Component\Product\ProductDescription
+     * @return \Sonata\Component\Product\ProductDefinition
      */
     public function getProduct($code)
     {
