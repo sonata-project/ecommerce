@@ -11,9 +11,10 @@
 
 namespace Sonata\ProductBundle\Controller;
 
-use Application\Sonata\ClassificationBundle\Entity\Category;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Currency\CurrencyDetector;
+use Sonata\Component\Product\Pool;
 use Sonata\ProductBundle\Entity\ProductSetManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,6 +29,8 @@ class CatalogController extends Controller
         $page        = $this->getRequest()->get('page', 1);
         $displayMax  = $this->getRequest()->get('max', 9);
         $displayMode = $this->getRequest()->get('mode', 'grid');
+        $filter      = $this->getRequest()->get('filter');
+        $option      = $this->getRequest()->get('option');
 
         if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
             throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
@@ -35,20 +38,23 @@ class CatalogController extends Controller
 
         $category = $this->retrieveCategoryFromQueryString();
 
-        $pager = $this->getProductSetManager()->getCategoryActiveProductsPager($category, $page, $displayMax);
+        $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title'));
+
+        $pager = $this->getProductSetManager()->getCategoryActiveProductsPager($category, $page, $displayMax, $filter, $option);
 
         return $this->render('SonataProductBundle:Catalog:index.html.twig', array(
             'display_mode' => $displayMode,
             'pager'        => $pager,
             'currency'     => $this->getCurrencyDetector()->getCurrency(),
             'category'     => $category,
+            'provider'     => $this->getProviderFromCategory($category),
         ));
     }
 
     /**
      * Retrieve Category from its id and slug, if any.
      *
-     * @return Category|null
+     * @return CategoryInterface|null
      */
     protected function retrieveCategoryFromQueryString()
     {
@@ -63,6 +69,32 @@ class CatalogController extends Controller
             'id'      => $categoryId,
             'enabled' => true,
         ));
+    }
+
+    /**
+     * Gets the product provider associated with $category if any
+     *
+     * @param CategoryInterface $category
+     *
+     * @return null|\Sonata\Component\Product\ProductProviderInterface
+     */
+    protected function getProviderFromCategory(CategoryInterface $category = null)
+    {
+        if (null === $category) {
+            return null;
+        }
+
+        $product = $this->getProductSetManager()->findProductForCategory($category);
+
+        return $product ? $this->getProductPool()->getProvider($product) : null;
+    }
+
+    /**
+     * @return Pool
+     */
+    protected function getProductPool()
+    {
+        return $this->get('sonata.product.pool');
     }
 
     /**

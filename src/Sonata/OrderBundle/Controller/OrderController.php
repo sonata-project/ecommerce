@@ -34,6 +34,8 @@ class OrderController extends Controller
 
         $orders = $this->getOrderManager()->findForUser($user);
 
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', array(), "SonataOrderBundle"));
+
         return $this->render('SonataOrderBundle:Order:index.html.twig', array(
             'orders' => $orders
         ));
@@ -55,6 +57,8 @@ class OrderController extends Controller
         }
 
         $this->checkAccess($order->getCustomer());
+
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_view_title', array(), "SonataOrderBundle"));
 
         return $this->render('SonataOrderBundle:Order:view.html.twig', array(
             'order' => $order

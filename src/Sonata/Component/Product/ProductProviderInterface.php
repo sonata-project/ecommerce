@@ -279,4 +279,11 @@ interface ProductProviderInterface
      * @return int                                        the stock available
      */
     public function getStockAvailable(ProductInterface $product);
+
+    /**
+     * Gets the fields on which the product might be filtered in the catalog view
+     *
+     * @return mixed
+     */
+    public function getFilters();
 }

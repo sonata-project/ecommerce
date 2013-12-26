@@ -10,6 +10,10 @@
                 <source>message_no_basket_elements</source>
                 <target>There is no basket elements</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.product.added">
+                <source>sonata.basket.product.added</source>
+                <target>Your item has been added!</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.btn_update_basket">
                 <source>sonata.basket.btn_update_basket</source>
                 <target>Update the basket</target>
@@ -277,6 +281,23 @@
             <trans-unit id="undeliverable_country">
                 <source>undeliverable_country</source>
                 <target>%country% is not in our delivery zone for one or several products in your basket.</target>
+            </trans-unit>
+
+            <trans-unit id="basket_index_title">
+                <source>basket_index_title</source>
+                <target>Your basket</target>
+            </trans-unit>
+            <trans-unit id="basket_delivery_title">
+                <source>basket_delivery_title</source>
+                <target>Your delivery</target>
+            </trans-unit>
+            <trans-unit id="basket_payment_title">
+                <source>basket_payment_title</source>
+                <target>Your payment</target>
+            </trans-unit>
+            <trans-unit id="basket_review_title">
+                <source>basket_review_title</source>
+                <target>Review your order</target>
             </trans-unit>
         </body>
     </file>

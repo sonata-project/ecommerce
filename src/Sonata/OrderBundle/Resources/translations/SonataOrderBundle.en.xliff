@@ -190,7 +190,7 @@
             <trans-unit id="list.label_get_delivery_status_name">
                 <source>list.label_get_delivery_status_name</source>
                 <target>Delivery status</target>
-            </trans-unit>            
+            </trans-unit>
             <!-- End - List translations -->
 
             <!-- Begin - Status translations -->
@@ -530,6 +530,17 @@
                 <target>View all orders</target>
             </trans-unit>
             <!-- End - Order front translations -->
+
+            <!-- Begin - Order page titles translations -->
+            <trans-unit id="order_index_title">
+                <source>order_index_title</source>
+                <target>Your orders</target>
+            </trans-unit>
+            <trans-unit id="order_view_title">
+                <source>order_view_title</source>
+                <target>Your order</target>
+            </trans-unit>
+            <!-- End - Order page titles translations -->
         </body>
     </file>
 </xliff>
