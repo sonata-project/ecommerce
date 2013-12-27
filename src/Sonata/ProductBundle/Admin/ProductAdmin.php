@@ -194,7 +194,10 @@ class ProductAdmin extends Admin
     {
         $list
             ->addIdentifier('name')
-            ->add('enabled', null, array('editable' => true))
+            ->add('enabled', null, array(
+                'editable'     => true,
+                'confirmation' => true,
+            ))
             ->add('price', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
             ->add('productCategories', null, array('associated_tostring' => 'getCategory'))
             ->add('productCollections', null, array('associated_tostring' => 'getCollection'))
