@@ -9,14 +9,20 @@ file that was distributed with this source code.
 
 #}
 
-<tr>
+<tr{% if formView.quantity.vars.errors|length > 0 %} class="error unavailable"{% endif %}>
     {% if formView.vars.errors|length > 0 %} {# global error the product is not active anymore #}
         <td colspan="4">{% block product_error %}{{ "sonata.basket.message_product_not_available"|trans({}, 'SonataProductBundle')}}{% endblock %}</td>
     {% else %}
         <td>
             {{ form_widget(formView.productId) }}
+            {% block product_name %}
+                <strong><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></strong>
+            {% endblock %}
+            {% if formView.quantity.vars.errors|length > 0 %}
+                <span>{{ form_errors(formView.quantity) }}</span>
+            {% endif %}
             {% block product_description %}
-                <b><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></b> <br />
+                <br />
                 {{ basketElement.product.description|raw }}
             {% endblock %}
         </td>
@@ -27,7 +33,6 @@ file that was distributed with this source code.
         </td>
         <td>
             {% block product_quantity %}
-                {{ form_errors(formView.quantity) }}
                 {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}}) }}
             {% endblock %}
         </td>
