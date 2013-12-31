@@ -31,7 +31,7 @@ file that was distributed with this source code.
     <form action="{{ url('sonata_basket_add_product') }}" method="POST">
         {% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %} {{ form_widget(form.quantity) }}
 
-        <button type="submit" class="btn btn-primary"><i class="icon-white icon-shopping-cart"></i> {% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}</button>
+        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-shopping-cart"></i> {% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}</button>
 
         {{ form_rest(form) }}
     </form>

@@ -11,19 +11,17 @@ file that was distributed with this source code.
 
 <div class="row">
 
-    <div class="span3">
+    <div class="col-sm-3">
 
         {% block product_category %}
-            <div class="well" style="padding: 8px 0;">
-                {{ sonata_block_render({'type': 'sonata.product.block.categories_menu'}, {'current_uri': app.request.requestUri}) }}
-            </div>
+            {{ sonata_block_render({'type': 'sonata.product.block.categories_menu'}, {'current_uri': app.request.requestUri}) }}
         {% endblock %}
 
         {% block product_filter %}{% endblock %}
 
     </div>
 
-    <div class="span9">
+    <div class="col-sm-9">
 
         {% sonata_template_box 'This is the catalog template. Feel free to override it.' %}
 
@@ -37,8 +35,8 @@ file that was distributed with this source code.
 
         {% else %}
 
-            <div class="sonata-product-navigation-bar clearfix">
-                <div class="pull-left">
+            <div class="row sonata-product-navigation-bar clearfix">
+                <div class="col-sm-9">
                     <h4>
                         {% if category %}
                             {{ category.name }}
@@ -47,15 +45,15 @@ file that was distributed with this source code.
                         {% endif %}
                     </h4>
                 </div>
-                <div class="pull-right">
+                <div class="col-sm-3">
                     {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
                 </div>
             </div>
 
             {% block products %}{% endblock %}
 
-            <div class="sonata-product-navigation-bar clearfix">
-                <div class="pull-right">
+            <div class="row sonata-product-navigation-bar clearfix">
+                <div class="col-sm-3 col-sm-offset-9">
                     {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
                 </div>
             </div>

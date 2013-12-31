@@ -11,7 +11,7 @@ file that was distributed with this source code.
 
 
 {% block sonata_invoice_title %}
-    <div class="row-fluid">
+    <div class="row">
         <h3>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.title_invoice{% endtrans %} - {{ invoice.reference }}</h3>
     </div>
 {% endblock %}
@@ -20,12 +20,20 @@ file that was distributed with this source code.
     {% sonata_template_box 'This is the invoice view template.' %}
 
     <!-- Invoice -->
-    <div class="row-fluid">
+    <div class="row">
         {% block sonata_invoice_top_left %}
         <!-- Billing address -->
-        <div class="span6">
-            <h5>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_billing{% endtrans %}</h5>
-            <p>{{ invoice.getFullBilling('<br/>')|raw }}</p>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_billing{% endtrans %}</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ invoice.getFullBilling('<br/>')|raw }}
+                </div>
+            </div>
         </div>
         {% endblock %}
 
@@ -33,7 +41,7 @@ file that was distributed with this source code.
         {% block sonata_invoice_top_right %}
         {% set date_time_size = constant('IntlDateFormatter::SHORT') %}
 
-        <div class="span6">
+        <div class="col-sm-6">
             {#<h5>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.subtitle_references{% endtrans %}</h5>#}
             <table class="table table-bordered">
                 <tr>
@@ -42,11 +50,11 @@ file that was distributed with this source code.
                 </tr>
                 <tr>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
-                    <td><span class="label{{ order|sonata_status_class('payment', 'important') ? ' label-'~order|sonata_status_class('payment', 'important') : '' }}">{{ order.paymentStatusName|trans({}, 'SonataPaymentBundle') }}</span></td>
+                    <td><span class="label{{ order|sonata_status_class('payment', 'danger') ? ' label-'~order|sonata_status_class('payment', 'danger') : '' }}">{{ order.paymentStatusName|trans({}, 'SonataPaymentBundle') }}</span></td>
                 </tr>
                 <tr>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</th>
-                    <td><span class="label{{ order|sonata_status_class('delivery', 'important') ? ' label-'~order|sonata_status_class('delivery', 'important') : '' }}">{{ order.deliveryStatusName|trans({}, 'SonataDeliveryBundle') }}</span></td>
+                    <td><span class="label{{ order|sonata_status_class('delivery', 'danger') ? ' label-'~order|sonata_status_class('delivery', 'danger') : '' }}">{{ order.deliveryStatusName|trans({}, 'SonataDeliveryBundle') }}</span></td>
                 </tr>
                 <tr>
                     <th>{% trans from 'SonataPaymentBundle' %}method{% endtrans %}</th>
@@ -61,7 +69,7 @@ file that was distributed with this source code.
     {% block sonata_invoice_elements %}
     <!-- Invoice elements -->
     <div class="row">
-        <div class="span12">
+        <div class="col-sm-12">
             <table class="table table-bordered">
                 {% block sonata_invoice_elements_header %}
                 <tr>
