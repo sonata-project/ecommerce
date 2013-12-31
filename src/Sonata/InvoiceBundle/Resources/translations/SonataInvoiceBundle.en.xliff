@@ -210,6 +210,13 @@
                 <target>Total incl. TVA</target>
             </trans-unit>
             <!-- End - Invoice View -->
+            <!-- Begin - Invoice page titles translations -->
+            <trans-unit id="invoice_view_title">
+                <source>invoice_view_title</source>
+                <target>Your invoice</target>
+            </trans-unit>
+            <!-- End - Invoice page titles translations -->
+
         </body>
     </file>
 </xliff>

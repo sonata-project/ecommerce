@@ -51,6 +51,8 @@ class BasketController extends Controller
             }
         }
 
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_index_title', array(), "SonataBasketBundle"));
+
         return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
             'basket' => $this->get('sonata.basket'),
             'form'   => $form->createView(),
@@ -220,6 +222,8 @@ class BasketController extends Controller
             }
         }
 
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), "SonataBasketBundle"));
+
         return $this->render('SonataBasketBundle:Basket:payment_step.html.twig', array(
             'basket' => $basket,
             'form'   => $form->createView(),
@@ -271,6 +275,8 @@ class BasketController extends Controller
                 return new RedirectResponse($this->generateUrl('sonata_basket_payment_address'));
             }
         }
+
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), "SonataBasketBundle"));
 
         return $this->render($template, array(
             'basket'   => $basket,
@@ -329,6 +335,8 @@ class BasketController extends Controller
             }
         }
 
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), "SonataBasketBundle"));
+
         return $this->render($template, array(
             'form'      => $form->createView(),
             'addresses' => $addresses
@@ -385,6 +393,8 @@ class BasketController extends Controller
             }
         }
 
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), "SonataBasketBundle"));
+
         return $this->render($template, array(
             'form'      => $form->createView(),
             'addresses' => $addresses
@@ -421,6 +431,8 @@ class BasketController extends Controller
                 return $this->forward('SonataPaymentBundle:Payment:sendbank');
             }
         }
+
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_review_title', array(), "SonataBasketBundle"));
 
         return $this->render('SonataBasketBundle:Basket:final_review_step.html.twig', array(
             'basket'    => $basket,
