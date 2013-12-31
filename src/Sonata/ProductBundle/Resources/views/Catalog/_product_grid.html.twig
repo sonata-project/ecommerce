@@ -9,35 +9,4 @@ file that was distributed with this source code.
 
 #}
 
-{% spaceless %}
-
-    {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
-
-    <div class="thumbnail">
-
-        <div class="product-thumbnail">
-            {% if product.image %}
-                <a href="{{ link }}">{% thumbnail product.image, 'preview' with {'itemprop': 'image'} %}</a>
-            {% else %}
-                {# default product picture goes here #}
-            {% endif %}
-        </div>
-
-        <h5 itemprop="name"><a href="{{ link }}">{{ product.name|truncate(18, false, '…') }}</a></h5>
-
-        <p>
-            <span itemprop="price">
-                {% if not sonata_product_has_variations(product) %}
-                    {{ sonata_product_price(product, currency)|number_format_currency(currency) }}
-                {% else %}
-                    {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
-
-                    {% set cheapest_variation = sonata_product_cheapest_variation(product) %}
-                    {{ sonata_product_price(cheapest_variation, currency)|number_format_currency(currency) }}
-                {% endif %}
-            </span>
-        </p>
-
-    </div>
-
-{% endspaceless %}
+{% extends "SonataProductBundle:Product:view_thumbnail.html.twig" %}

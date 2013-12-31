@@ -36,8 +36,8 @@ file that was distributed with this source code.
 
 
     <div class="well">
-        <a class="btn" href="{{ url('sonata_user_profile_show') }}"><i class="icon-home"></i>&nbsp;{{ 'message_view_user_profile'|trans({}, 'SonataPaymentBundle') }}</a>
+        <a class="btn btn-default" href="{{ url('sonata_user_profile_show') }}"><i class="glyphicon glyphicon-home"></i>&nbsp;{{ 'message_view_user_profile'|trans({}, 'SonataPaymentBundle') }}</a>
 
-        <a class="btn btn-primary pull-right" href="{{ url('sonata_order_view', {'reference' : order.reference }) }}"><i class="icon-file icon-white"></i>&nbsp;{{ 'message_view_order_payment'|trans({}, 'SonataPaymentBundle') }}</a>
+        <a class="btn btn-primary pull-right" href="{{ url('sonata_order_view', {'reference' : order.reference }) }}"><i class="glyphicon glyphicon-file icon-white"></i>&nbsp;{{ 'message_view_order_payment'|trans({}, 'SonataPaymentBundle') }}</a>
     </div>
 </div>

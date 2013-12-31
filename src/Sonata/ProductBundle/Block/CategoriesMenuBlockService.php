@@ -63,18 +63,8 @@ class CategoriesMenuBlockService extends MenuBlockService
         parent::setDefaultSettings($resolver);
 
         $resolver->setDefaults(array(
-            'menu_class'   => "nav nav-list",
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFormSettingsKeys()
-    {
-        return array_merge(parent::getFormSettingsKeys(), array(
-            array('menu_class', 'text', array('required' => false)),
-        ));
+                'menu_template' => "SonataBlockBundle:Block:block_side_menu_template.html.twig",
+            ));
     }
 
     /**
@@ -85,7 +75,13 @@ class CategoriesMenuBlockService extends MenuBlockService
         $menu = parent::getMenu($settings);
 
         if (null === $menu || "" === $menu) {
-            $menu = $this->menuBuilder->createCategoryMenu(array('childrenAttributes' => array('class' => $settings['menu_class'])), $settings['current_uri']);
+            $menu = $this->menuBuilder->createCategoryMenu(
+                array(
+                    'childrenAttributes' => array('class' => $settings['menu_class']),
+                    'attributes'         => array('class' => $settings['children_class']),
+                ),
+                $settings['current_uri']
+            );
         }
 
         return $menu;

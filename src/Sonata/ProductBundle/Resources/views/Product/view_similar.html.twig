@@ -9,22 +9,28 @@ file that was distributed with this source code.
 
 #}
 
+<div class="panel panel-default">
 {% if similar_cross|length > 0 %}
-    <h3>{% trans from "SonataProductBundle" %}sonata.product.cross_selling.title{% endtrans %}</h3>
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h3>{% trans from "SonataProductBundle" %}sonata.product.cross_selling.title{% endtrans %}</h3>
+        </div>
+    </div>
 
-    {% sonata_template_box 'This is the similar product view template. Feel free to override it.' %}
+    <div class="panel-body">
+        {% sonata_template_box 'This is the similar product view template. Feel free to override it.' %}
 
-    {% block similar_products %}
-        <ul>
+        {% block similar_products %}
             {% for similar_product in similar_cross if provider.hasEnabledVariations(similar_product) or not provider.hasVariations(similar_product) %}
                 {% block similar_product %}
-                    <li class="span3">
+                    <div class="col-sm-3">
                         {% include "SonataProductBundle:Product:view_thumbnail.html.twig" with {product: similar_product} %}
-                    </li>
+                    </div>
                 {% endblock %}
             {% endfor %}
-        </ul>
-    {% endblock %}
-{% else %}
-    {% trans from "SonataProductBundle" %}sonata.product.cross_selling.no_match{% endtrans %}
-{% endif %}
+        {% endblock %}
+    {% else %}
+        {% trans from "SonataProductBundle" %}sonata.product.cross_selling.no_match{% endtrans %}
+    {% endif %}
+    </div>
+</div>

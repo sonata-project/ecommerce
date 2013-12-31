@@ -18,33 +18,54 @@ file that was distributed with this source code.
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 {{ form_errors(form) }}
 
-<div class="row-fluid">
+<div class="row">
     {% if form.addresses is defined %}
-        <div class="span6">
-            <h4>{% trans from 'SonataBasketBundle' %}sonata.basket.delivery_use_existing_title{% endtrans %}</h4>
-            {% for address in form.addresses %}
-                <div class="well">
-                    <label for="{{ address.vars.id }}" class="radio">
-                        {{ form_widget(address, {'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys))}) }}
-                        {{ address.vars.label|raw }}
-                    </label>
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>{% trans from 'SonataBasketBundle' %}sonata.basket.delivery_use_existing_title{% endtrans %}</h4>
+                    </div>
                 </div>
-            {% endfor %}
-
-            {{ form_widget(form.useSelected) }}
+                <ul class="list-group">
+                    {% for address in form.addresses %}
+                        <li class="list-group-item">
+                            <div class="radio">
+                                <label for="{{ address.vars.id }}">
+                                    {{ form_widget(address, {'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys))}) }}
+                                    {{ address.vars.label|raw }}
+                                </label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="panel-body">
+                    {{ form_widget(form.useSelected) }}
+                </div>
+            </div>
         </div>
-        <div class="span6">
-            <h4>{% trans from 'SonataBasketBundle' %}sonata.basket.billing_create_new_title{% endtrans %}</h4>
-            {{ form_rest(form) }}
+        <div class="col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>{% trans from 'SonataBasketBundle' %}sonata.basket.billing_create_new_title{% endtrans %}</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ form_rest(form) }}
+                </div>
+            </div>
         </div>
     {% else %}
-        {{ form_rest(form) }}
+        <div class="col-lg-12">
+            {{ form_rest(form) }}
+        </div>
     {% endif %}
 </div>
 
 <div class="well">
-    <a href="{{ url('sonata_basket_delivery') }}" class="btn"><i class="icon-arrow-left"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
+    <a href="{{ url('sonata_basket_delivery') }}" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
 
-    <button type="submit" class="btn btn-primary pull-right">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}&nbsp;<i class="icon-arrow-right icon-white"></i></button>
+    <button type="submit" class="btn btn-primary pull-right">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}&nbsp;<i class="glyphicon glyphicon-arrow-right icon-white"></i></button>
 </div>
 {{ form_end(form) }}

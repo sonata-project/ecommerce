@@ -9,19 +9,29 @@ file that was distributed with this source code.
 
 #}
 
-<div class="row-fluid">
+<div class="row">
     <form class="form-horizontal" action="{{ url('sonata_basket_add_product') }}" method="POST">
-        <div class="control-group">
-            <label class="control-label" style="width: auto;">{% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %}</label>
-            <div class="controls" style="margin-left: 80px;">
-                {{ form_widget(form.quantity, {'attr': {'class':'input-small', 'min': 1}}) }}
-            </div>
+        <div class="form-group">
+            {{ form_row(form.quantity, {'attr': {'class':'input-sm', 'min': 1}, 'horizontal_input_wrapper_class': 'col-lg-4', 'horizontal_label_class': 'col-lg-4 col-lg-offset-2'}) }}
         </div>
 
-        <div class="control-group">
-            <button type="submit" class="btn btn-small btn-primary" id="sonata_add_basket_submit">
-                <i class="icon-shopping-cart icon-white"></i>{% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}
-            </button>
+        <div class="form-group">
+            <div class="col-lg-4 col-lg-offset-2">
+                <span id="sonata_product_price" itemprop="price" class="lead pull-right">
+                    {% block product_price_price %}
+                        {% if provider.hasEnabledVariations(product) %}
+                            {{ cheapest_variation.price|number_format_currency(currency) }}
+                        {% else %}
+                            {{ product.price|number_format_currency(currency) }}
+                        {% endif %}
+                    {% endblock %}
+                </span>
+            </div>
+            <div class="col-lg-6">
+                <button type="submit" class="btn btn-primary" id="sonata_add_basket_submit">
+                    <i class="glyphicon glyphicon-shopping-cart icon-white"></i>{% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}
+                </button>
+            </div>
         </div>
 
         {{ form_rest(form) }}

@@ -252,7 +252,7 @@
             </trans-unit>
             <trans-unit id="header_basket_delete">
                 <source>header_basket_delete</source>
-                <target><![CDATA[<i class="icon-trash"></i>]]></target>
+                <target><![CDATA[<i class="glyphicon glyphicon-trash"></i>]]></target>
             </trans-unit>
             <trans-unit id="header_basket_total_excl">
                 <source>header_basket_total_excl</source>
