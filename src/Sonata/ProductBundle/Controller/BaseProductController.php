@@ -23,11 +23,11 @@ use Sonata\Component\Basket\BasketInterface;
 abstract class BaseProductController extends Controller
 {
     /**
-     * @param $product
+     * @param \Sonata\Component\Product\ProductInterface $product
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @throws \RuntimeException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function viewAction($product)
     {
@@ -35,10 +35,38 @@ abstract class BaseProductController extends Controller
             throw new NotFoundHttpException('invalid product instance');
         }
 
-        $provider = $this->get('sonata.product.pool')->getProvider($product);
+        /** @var \Sonata\Component\Product\Pool $productPool */
+        $productPool = $this->get('sonata.product.pool');
+        $provider = $productPool->getProvider($product);
 
         $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class')));
         $provider->defineAddBasketForm($product, $formBuilder);
+
+        $variationForm = null;
+        $rootProduct = $product;
+
+        if ($product->getParent()) {
+            $rootProduct = $product->getParent();
+        }
+
+        // There is only one combination available so we forward the user
+        $enabledVariations = $provider->getEnabledVariations($rootProduct);
+        $nbEnabledVariations = count($enabledVariations);
+
+        if (1 == $nbEnabledVariations && $rootProduct == $product) {
+            return $this->redirect($this->generateUrl('sonata_product_view', array(
+                'productId' => $enabledVariations[0]->getId(),
+                'slug' => $enabledVariations[0]->getSlug(),
+            )));
+        }
+        // Product is a parent one but has no activated variation
+        elseif (!$nbEnabledVariations && $provider->hasVariations($rootProduct) && $rootProduct != $product) {
+            throw new \RuntimeException(sprintf('Product "%s" has no enabled variation', $rootProduct));
+        }
+
+        $formType = $productPool->getVariationFormType($rootProduct);
+        $formType->setProduct($rootProduct);
+        $variationForm = $this->createForm($formType, $product)->createView();
 
         $form = $formBuilder->getForm()->createView();
 
@@ -51,12 +79,13 @@ abstract class BaseProductController extends Controller
         return $this->render(
             sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
             array(
-                'provider'      => $provider,
+                'parent_product' => $rootProduct,
                 'product'       => $product,
                 'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
                 'currency'      => $currency,
                 'similar_cross' => $crossSellingProducts,
                 'form'          => $form,
+                'variation_form' => $variationForm,
             )
         );
     }
@@ -113,6 +142,38 @@ abstract class BaseProductController extends Controller
         return $this->render(sprintf('%s:view_variations.html.twig', $provider->getBaseControllerName()), array(
             'product' => $product,
         ));
+    }
+
+    /**
+     * @param BasketElementInterface $basketElement
+     */
+    public function viewBasketElement(BasketElementInterface $basketElement)
+    {
+
+    }
+
+    /**
+     * @param BasketElementInterface $basketElement
+     */
+    public function viewBasketElementConfirmation(BasketElementInterface $basketElement)
+    {
+
+    }
+
+    /**
+     * @param OrderElementInterface $orderElement
+     */
+    public function viewOrderElement(OrderElementInterface $orderElement)
+    {
+
+    }
+
+    /**
+     * @param OrderElementInterface $orderElement
+     */
+    public function viewEditOrderElement(OrderElementInterface $orderElement)
+    {
+
     }
 
     /**

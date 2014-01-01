@@ -83,8 +83,9 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
         $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $formType = $this->getMock('Sonata\Component\Form\Type\VariationFormTypeInterface');
 
-        $definition = new ProductDefinition($productProvider, $productManager);
+        $definition = new ProductDefinition($productProvider, $productManager, $formType);
 
         $productPool = new ProductPool;
         $productPool->addProduct('test', $definition);

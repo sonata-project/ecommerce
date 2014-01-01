@@ -9,21 +9,21 @@ file that was distributed with this source code.
 
 #}
 
-<div class="row-fluid">
-    <form class="form-horizontal" action="{{ url('sonata_basket_add_product') }}" method="POST">
-        <div class="control-group">
-            <label class="control-label" style="width: auto;">{% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %}</label>
-            <div class="controls" style="margin-left: 80px;">
-                {{ form_widget(form.quantity, {'attr': {'class':'input-small', 'min': 1}}) }}
-            </div>
+<form class="form-horizontal" action="{{ url('sonata_basket_add_product') }}" method="POST">
+    <div class="control-group">
+        <label class="control-label">{% trans from 'SonataProductBundle' %}sonata.product.label_quantity{% endtrans %}</label>
+        <div class="controls">
+            {{ form_widget(form.quantity, {'attr': {'class':'input-small', 'min': 1}}) }}
         </div>
+    </div>
 
-        <div class="control-group">
-            <button type="submit" class="btn btn-small btn-primary" id="sonata_add_basket_submit">
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-small btn-primary">
                 <i class="icon-shopping-cart icon-white"></i>{% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}
             </button>
         </div>
+    </div>
 
-        {{ form_rest(form) }}
-    </form>
-</div>
+    {{ form_rest(form) }}
+</form>
