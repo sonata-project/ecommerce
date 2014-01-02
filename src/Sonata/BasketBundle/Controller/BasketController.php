@@ -121,20 +121,35 @@ class BasketController extends Controller
         // if the form is valid add the product to the basket
         if ($form->isValid()) {
             $basket = $this->get('sonata.basket');
+            $basketElement = $form->getData();
+
+            $quantity = $basketElement->getQuantity();
+            $currency = $this->get('sonata.basket')->getCurrency();
+            $price = $provider->calculatePrice($product, $currency, $quantity);
 
             if ($basket->hasProduct($product)) {
-                $provider->basketMergeProduct($basket,  $product, $form->getData());
+                $provider->basketMergeProduct($basket, $product, $basketElement);
             } else {
-                $provider->basketAddProduct($basket,  $product, $form->getData());
+                $provider->basketAddProduct($basket, $product, $basketElement);
             }
 
-            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
+            if ($request->isXmlHttpRequest() && $provider->getOption('product_add_modal')) {
+                return $this->render('SonataBasketBundle:Basket:add_product_popin.html.twig', array(
+                    'product'  => $product,
+                    'price'    => $price,
+                    'currency' => $currency,
+                    'quantity' => $quantity,
+                    'provider' => $provider,
+                ));
+            } else {
+                return new RedirectResponse($this->generateUrl('sonata_basket_index'));
+            }
         }
 
         // an error occur, forward the request to the view
         return $this->forward('SonataProductBundle:Product:view', array(
             'productId' => $product,
-            'slug'       => $product->getSlug(),
+            'slug'      => $product->getSlug(),
         ));
     }
 

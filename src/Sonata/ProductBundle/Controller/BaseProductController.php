@@ -62,6 +62,22 @@ abstract class BaseProductController extends Controller
     }
 
     /**
+     * Renders product properties
+     *
+     * @param ProductInterface $product
+     *
+     * @return Response
+     */
+    public function renderPropertiesAction(ProductInterface $product)
+    {
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
+
+        return $this->render(sprintf('%s:properties.html.twig', $provider->getBaseControllerName()), array(
+            'product' => $product
+        ));
+    }
+
+    /**
      * @param FormView               $formView
      * @param BasketElementInterface $basketElement
      * @param BasketInterface        $basket
