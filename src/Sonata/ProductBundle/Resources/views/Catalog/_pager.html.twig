@@ -13,29 +13,25 @@ file that was distributed with this source code.
 
     {% if pager.haveToPaginate %}
 
-        <div class="pagination">
+        <ul class="pagination">
 
-            <ul>
+            {% if pager.page > 1 %}
+                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': 1}) }}" {% if pager.isFirstPage %}class="disabled"{% endif %}>&laquo;</a></li>
+                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.previousPage}) }}" {% if pager.isFirstPage %}class="disabled"{% endif %}>&lsaquo;</a></li>
+            {% endif %}
 
-                {% if pager.page > 1 %}
-                    <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': 1}) }}" {% if pager.isFirstPage %}class="disabled"{% endif %}>&laquo;</a></li>
-                    <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.previousPage}) }}" {% if pager.isFirstPage %}class="disabled"{% endif %}>&lsaquo;</a></li>
-                {% endif %}
+            {% for page in pager.links(5) %}
+                <li {% if pager.page == page %}class="active"{% endif %}>
+                    <a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': page}) }}">{{ page }}</a>
+                </li>
+            {% endfor %}
 
-                {% for page in pager.links(5) %}
-                    <li {% if pager.page == page %}class="active"{% endif %}>
-                        <a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': page}) }}">{{ page }}</a>
-                    </li>
-                {% endfor %}
+            {% if pager.page < pager.lastPage %}
+                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.nextPage}) }}" {% if pager.isLastPage %}class="disabled"{% endif %}>&rsaquo;</a></li>
+                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.lastPage}) }}" {% if pager.isLastPage %}class="disabled"{% endif %}>&raquo;</a></li>
+            {% endif %}
 
-                {% if pager.page < pager.lastPage %}
-                    <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.nextPage}) }}" {% if pager.isLastPage %}class="disabled"{% endif %}>&rsaquo;</a></li>
-                    <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.lastPage}) }}" {% if pager.isLastPage %}class="disabled"{% endif %}>&raquo;</a></li>
-                {% endif %}
-
-            </ul>
-
-        </div>
+        </ul>
 
     {% endif %}
 

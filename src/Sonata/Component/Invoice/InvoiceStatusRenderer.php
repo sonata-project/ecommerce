@@ -39,7 +39,7 @@ class InvoiceStatusRenderer implements StatusClassRendererInterface
     {
         switch ($object->getStatus()) {
             case InvoiceInterface::STATUS_CONFLICT:
-                return 'important';
+                return 'danger';
             case InvoiceInterface::STATUS_OPEN:
                 return 'warning';
             case InvoiceInterface::STATUS_PAID:

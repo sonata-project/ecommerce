@@ -29,12 +29,12 @@ file that was distributed with this source code.
 
 {% block product %}
     <!-- Begin product display -->
-    <div class="row-fluid" itemscope itemtype="http://schema.org/Product">
+    <div class="row" itemscope itemtype="http://schema.org/Product">
         {% sonata_template_box 'This is the product view template. Feel free to override it.' %}
 
         {% block product_errors %}
             {%  if not provider.hasVariations(product) and product.getStock == 0 %}
-                <div class="alert alert-error">
+                <div class="alert alert-danger">
                     {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
                 </div>
             {% endif %}
@@ -45,17 +45,17 @@ file that was distributed with this source code.
         {% render controller("SonataProductBundle:Product:displayBreadcrumb", {'productId': product.id}) %}
 
         <!-- Begin product details -->
-        <div class="span8">
+        <div class="col-sm-8">
 
             {% block product_details %}
-                <div class="row-fluid">
+                <div class="row">
                     {% block product_image %}{% thumbnail product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded', 'style': 'float:left; margin: 0 10px 10px 0;'} %}{% endblock%}
                     <span itemprop="description">
                 {% block product_description %}{{ product.rawDescription|raw }}{% endblock %}
             </span>
                 </div>
 
-                <div class="row-fluid">
+                <div class="row">
                     {% block product_gallery %}Block 'product_gallery' to override{% endblock %}
                 </div>
             {% endblock %}
@@ -64,44 +64,10 @@ file that was distributed with this source code.
         <!-- End product details -->
 
         <!-- Begin right product display -->
-        <div class="span4 well">
+        <div class="col-sm-3 col-sm-offset-1 panel panel-default">
 
             {% block product_right %}
                 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-
-                    {% block product_properties %}
-                        <div class="row-fluid">
-                            <dl class="dl-horizontal" style="margin-bottom: 0;">
-
-                                {% block product_properties_before_price %}{% endblock %}
-
-                                <dt style="width: auto;">
-
-                                    {% block product_price_label %}
-                                        {% if provider.hasVariations(product) %}
-                                            {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
-                                        {% else %}
-                                            {% trans from 'SonataProductBundle' %}product_price{% endtrans %}
-                                        {% endif %}
-                                    {% endblock %}
-
-                                </dt>
-
-                                <dd itemprop="price" style="margin-left: 110px;" id="sonata_product_price">
-                                    {% block product_price_price %}
-                                        {% if provider.hasEnabledVariations(product) %}
-                                            {{ cheapest_variation.price|number_format_currency(currency) }}
-                                        {% else %}
-                                            {{ product.price|number_format_currency(currency) }}
-                                        {% endif %}
-                                    {% endblock %}
-                                </dd>
-
-                                {% block product_properties_after_price %}{% endblock %}
-
-                            </dl>
-                        </div>
-                    {% endblock %}
 
                     {% block product_variations %}
                         {% if provider.hasEnabledVariations(product) %}
@@ -122,14 +88,18 @@ file that was distributed with this source code.
 
                     {% if product.isSalable %}
 
-                        <hr/>
-
                         {% block product_basket %}
-                            <div class="alert alert-error" id="sonata_add_basket_error" style="display:none;"></div>
+                            <div class="row">&nbsp;</div>
+                            <div class="alert alert-danger" id="sonata_add_basket_error" style="display:none;"></div>
                             {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
                         {% endblock %}
 
                     {% endif %}
+
+                    {% block product_properties %}
+                        {# We advise using bootstrap 3 list-groups: see http://getbootstrap.com/components/#panels #}
+                    {% endblock %}
+
                 </div>
             {% endblock %}
 

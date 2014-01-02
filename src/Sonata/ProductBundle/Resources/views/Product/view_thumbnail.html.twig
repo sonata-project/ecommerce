@@ -9,19 +9,38 @@ file that was distributed with this source code.
 
 #}
 
-<div class="thumbnail" itemscope itemtype="http://schema.org/Product">
-    <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}">
-        {% if product.image %}
-            {% thumbnail product.image, 'small' with {'itemprop': 'image', 'width': '100%'} %}
-        {% endif %}
+{% spaceless %}
 
-        <h4 itemprop="name">{{ product.name }}</h4>
-        <p itemprop="price">
-            {% if provider.hasEnabledVariations(product) %}
-                {{ sonata_product_cheapest_variation_price(product)|number_format_currency(currency) }}
-            {% else %}
-                {{ product.price|number_format_currency(currency) }}
-            {% endif %}
-        </p>
-    </a>
-</div>
+    {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
+
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="product-thumbnail">
+                {% if product.image %}
+                    <a class="img-responsive" href="{{ link }}">{% thumbnail product.image, 'preview' with {'itemprop': 'image'} %}</a>
+                {% else %}
+                    {# default product picture goes here #}
+                {% endif %}
+            </div>
+
+            <h5 itemprop="name"><a href="{{ link }}">{{ product.name|truncate(18, false, '…') }}</a></h5>
+
+            <p>
+            <span itemprop="price">
+                {% if not sonata_product_has_variations(product) %}
+                    {{ sonata_product_price(product, currency)|number_format_currency(currency) }}
+                {% else %}
+                    {% trans from 'SonataProductBundle' %}product_variation_min_price{% endtrans %}
+
+                    {% set cheapest_variation = sonata_product_cheapest_variation(product) %}
+                    {{ sonata_product_price(cheapest_variation, currency)|number_format_currency(currency) }}
+                {% endif %}
+            </span>
+            </p>
+
+        </div>
+
+    </div>
+
+{% endspaceless %}

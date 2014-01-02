@@ -12,6 +12,7 @@ namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
 use Doctrine\ORM\EntityManager;
@@ -20,6 +21,27 @@ use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 
 class ProductCategoryManager extends DoctrineBaseManager implements ProductCategoryManagerInterface
 {
+//    const CATEGORY_PRODUCT_TYPE = 'product';
+
+    /**
+     * @var \Sonata\ClassificationBundle\Model\CategoryManagerInterface
+     */
+    protected $categoryManager;
+
+    /**
+     * Constructor
+     *
+     * @param string                   $class
+     * @param EntityManager            $em
+     * @param CategoryManagerInterface $categoryManager
+    public function __construct($class, EntityManager $em, CategoryManagerInterface $categoryManager)
+    {
+        parent::__construct($class, $em);
+
+        $this->categoryManager = $categoryManager;
+    }
+     */
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +50,12 @@ class ProductCategoryManager extends DoctrineBaseManager implements ProductCateg
         if ($this->findOneBy(array('category' => $category, 'product' => $product))) {
             return;
         }
+//
+//        if (null !== $category->getType() && self::CATEGORY_PRODUCT_TYPE !== $category->getType()) {
+//            // Should we throw an exception instead?
+//            $category->setType(self::CATEGORY_PRODUCT_TYPE);
+//            $this->categoryManager->save($category);
+//        }
 
         $productCategory = $this->create();
 

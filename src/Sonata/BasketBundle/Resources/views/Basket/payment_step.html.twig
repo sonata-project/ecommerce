@@ -13,23 +13,43 @@ file that was distributed with this source code.
 
 <h1>{{ 'sonata.basket.title_payment_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
 
-<h4>{{ 'sonata.basket.title_address_billing_step_basket'|trans({}, 'SonataBasketBundle') }}</h4>
-{{ basket.billingAddress.getFullAddress("<br />")|raw }}
-
-
 <form action="{{ url('sonata_basket_payment') }}" method="POST" >
-    <div>
-        <h2>{{ 'sonata.basket.title_payment_method'|trans({}, 'SonataBasketBundle') }}</h2>
-
-        {{ form_errors(form.paymentMethod) }}
-        {{ form_widget(form.paymentMethod) }}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>{{ 'sonata.basket.title_address_billing_step_basket'|trans({}, 'SonataBasketBundle') }}</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ basket.billingAddress.getFullAddress("<br />")|raw }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>{{ 'sonata.basket.title_payment_method'|trans({}, 'SonataBasketBundle') }}</h4>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ form_errors(form.paymentMethod) }}
+                    {{ form_widget(form.paymentMethod) }}
+                    {{ form_rest(form) }}
+                </div>
+            </div>
+        </div>
     </div>
 
-    {{ form_rest(form) }}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well">
+                <a href="{{ url('sonata_basket_payment_address') }}" class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
 
-    <div class="well">
-        <a href="{{ url('sonata_basket_payment_address') }}" class="btn"><i class="icon-arrow-left"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
-
-        <button type="submit" class="btn btn-primary pull-right">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}&nbsp;<i class="icon-arrow-right icon-white"></i></button>
+                <button type="submit" class="btn btn-primary pull-right">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}&nbsp;<i class="glyphicon glyphicon-arrow-right icon-white"></i></button>
+            </div>
+        </div>
     </div>
 </form>
