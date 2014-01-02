@@ -17,6 +17,7 @@ So, let's get started!
     Create a category <create-category>
     Create a collection <create-collection>
     Create a product <create-product>
+    Basic options for product providers <product-provider-options>
     Create a delivery method <create-delivery-method>
     Create a payment method <create-payment-method>
     Extend the e-commerce part of Sonata <extend>

@@ -62,6 +62,22 @@ abstract class BaseProductController extends Controller
     }
 
     /**
+     * Renders product properties
+     *
+     * @param ProductInterface $product
+     *
+     * @return Response
+     */
+    public function renderPropertiesAction(ProductInterface $product)
+    {
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
+
+        return $this->render(sprintf('%s:properties.html.twig', $provider->getBaseControllerName()), array(
+            'product' => $product
+        ));
+    }
+
+    /**
      * @param FormView               $formView
      * @param BasketElementInterface $basketElement
      * @param BasketInterface        $basket
@@ -123,6 +139,7 @@ abstract class BaseProductController extends Controller
     {
         $seoPage = $this->get('sonata.seo.page');
 
+        $seoPage->setTitle($product->getName());
         $this->get('sonata.product.seo.facebook')->alterPage($seoPage, $product, $currency);
         $this->get('sonata.product.seo.twitter')->alterPage($seoPage, $product, $currency);
     }

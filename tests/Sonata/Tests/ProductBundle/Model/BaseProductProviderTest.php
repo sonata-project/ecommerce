@@ -279,17 +279,6 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($productProvider->hasVariations($productMock));
     }
 
-    public function testHasVariationsWithNoVariationFields()
-    {
-        $productMock = new ProductTest();
-        $variationMock = new ProductTest();
-        $productMock->addVariation($variationMock);
-
-        $productProvider = $this->createNewProductProvider();
-
-        $this->assertFalse($productProvider->hasVariations($productMock));
-    }
-
     public function testHasEnabledVariationsWhithNoVariation()
     {
         $productMock = new ProductTest();
@@ -323,19 +312,6 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $productProvider->setVariationFields(array('test'));
 
         $this->assertTrue($productProvider->hasEnabledVariations($productMock));
-    }
-
-    public function testHasEnabledVariationsWhithNoVariationFields()
-    {
-        $productMock = new ProductTest();
-        $productMock->setEnabled(true);
-        $variationMock = new ProductTest();
-        $variationMock->setEnabled(true);
-        $productMock->addVariation($variationMock);
-
-        $productProvider = $this->createNewProductProvider();
-
-        $this->assertFalse($productProvider->hasEnabledVariations($productMock));
     }
 
     public function testGetEnabledVariationWithNoVariation()
