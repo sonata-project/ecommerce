@@ -27,6 +27,12 @@ file that was distributed with this source code.
     </script>
 {% endblock %}
 
+{% block breadcrumb %}
+    <div class="row-fluid clearfix">
+        {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'product': product }) }}
+    </div>
+{% endblock %}
+
 {% block product %}
     <!-- Begin product display -->
     <div class="row-fluid" itemscope itemtype="http://schema.org/Product">
@@ -41,8 +47,6 @@ file that was distributed with this source code.
         {% endblock %}
 
         <h1 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h1>
-
-        {% render controller("SonataProductBundle:Product:displayBreadcrumb", {'productId': product.id}) %}
 
         <!-- Begin product details -->
         <div class="span8">
