@@ -35,6 +35,8 @@ class CatalogController extends Controller
 
         $category = $this->retrieveCategoryFromQueryString();
 
+        $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title'));
+
         $pager = $this->getProductSetManager()->getCategoryActiveProductsPager($category, $page, $displayMax);
 
         return $this->render('SonataProductBundle:Catalog:index.html.twig', array(

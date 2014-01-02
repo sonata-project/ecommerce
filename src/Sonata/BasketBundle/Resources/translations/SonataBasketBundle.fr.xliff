@@ -278,6 +278,23 @@
                 <source>undeliverable_country</source>
                 <target>Le pays %country% n'est pas desservi par nos modes de livraison pour un ou plusieurs éléments de votre panier.</target>
             </trans-unit>
+
+            <trans-unit id="basket_index_title">
+                <source>basket_index_title</source>
+                <target>Votre panier</target>
+            </trans-unit>
+            <trans-unit id="basket_delivery_title">
+                <source>basket_delivery_title</source>
+                <target>Livraison</target>
+            </trans-unit>
+            <trans-unit id="basket_payment_title">
+                <source>basket_payment_title</source>
+                <target>Paiement</target>
+            </trans-unit>
+            <trans-unit id="basket_review_title">
+                <source>basket_review_title</source>
+                <target>Votre commande</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
