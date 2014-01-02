@@ -933,4 +933,23 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         return $result;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
+    {
+        return array(
+            'price' => array(
+                0,
+                10,
+                20,
+                50,
+                100,
+                200,
+                500,
+                1000
+            )
+        );
+    }
 }

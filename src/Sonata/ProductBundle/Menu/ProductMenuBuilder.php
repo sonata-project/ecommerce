@@ -14,6 +14,8 @@ namespace Sonata\ProductBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
+use Sonata\Component\Product\ProductProviderInterface;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 
@@ -56,6 +58,38 @@ class ProductMenuBuilder
     }
 
     /**
+     * Generates the filters menu based on $productProvider
+     *
+     * @param ProductProviderInterface $productProvider
+     * @param array                    $itemOptions
+     * @param string                   $currentUri
+     *
+     * @return mixed
+     */
+    public function createFiltersMenu(ProductProviderInterface $productProvider, array $itemOptions = array(), $currentUri = null)
+    {
+        $menu = $this->factory->createItem('filters', $itemOptions);
+
+        $filters = $productProvider->getFilters();
+
+        foreach ($filters as $filter => $options) {
+            $menuItem = $menu->addChild($filter, array_merge(array('attributes' => array('class' => 'nav-header')), $itemOptions));
+
+            foreach ($options as $option) {
+                $filterItemOptions = array_merge(array('uri' => $this->getFilterUri($currentUri, $filter, $option)), $itemOptions);
+
+                $menuItem->addChild(
+                    $this->getFilterName($filter, $option),
+                    $filterItemOptions
+                );
+            }
+            $menuItem->setCurrentUri($currentUri);
+        }
+
+        return $menu;
+    }
+
+    /**
      * @param array  $itemOptions The options given to the created menuItem
      * @param string $currentUri  The current URI
      *
@@ -83,12 +117,37 @@ class ProductMenuBuilder
     }
 
     /**
+     * Generates the name of the filter based on $filter and $option
+     *
+     * @param $filter
+     * @param $option
+     * @return string
+     */
+    protected function getFilterName($filter, $option)
+    {
+        return sprintf("%s_%s", $filter, $option);
+    }
+
+    /**
+     * Generates the filter uri
+     *
+     * @param $currentUri
+     * @param $filter
+     * @param $option
+     * @return string
+     */
+    protected function getFilterUri($currentUri, $filter, $option)
+    {
+        return sprintf("%s?filter=%s&option=%s", false !== ($pos = strpos($currentUri, '?')) ? substr($currentUri, 0, $pos) : $currentUri, $filter, $option);
+    }
+
+    /**
      * Recursive method to fill $menu with $categories
      *
      * @param ItemInterface $menu
      * @param array         $categories
      * @param array         $options
-     * @param strubg        $currentUri
+     * @param string        $currentUri
      */
     protected function fillMenu(ItemInterface $menu, $categories, array $options = array(), $currentUri = null)
     {
