@@ -40,6 +40,6 @@ class InvoiceStatusRendererTest extends \PHPUnit_Framework_TestCase
         $invoice  = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
 
         $invoice->expects($this->once())->method('getStatus')->will($this->returnValue(array_rand(BaseInvoice::getStatusList())));
-        $this->assertContains($renderer->getStatusClass($invoice, '', 'error'), array('important', 'warning', 'success'));
+        $this->assertContains($renderer->getStatusClass($invoice, '', 'error'), array('danger', 'warning', 'success'));
     }
 }
