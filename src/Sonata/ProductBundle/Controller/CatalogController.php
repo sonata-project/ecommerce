@@ -40,11 +40,12 @@ class CatalogController extends Controller
 
         $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title'));
 
-        $pager = $this->getProductSetManager()->getCategoryActiveProductsPager($category, $page, $displayMax, $filter, $option);
+        $pager = $this->get('knp_paginator');
+        $pagination = $pager->paginate($this->getProductSetManager()->getCategoryActiveProductsQueryBuilder($category, $filter, $option), $page, $displayMax);
 
         return $this->render('SonataProductBundle:Catalog:index.html.twig', array(
             'display_mode' => $displayMode,
-            'pager'        => $pager,
+            'pager'        => $pagination,
             'currency'     => $this->getCurrencyDetector()->getCurrency(),
             'category'     => $category,
             'provider'     => $this->getProviderFromCategory($category),

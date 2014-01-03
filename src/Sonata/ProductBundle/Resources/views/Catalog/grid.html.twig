@@ -11,7 +11,7 @@ file that was distributed with this source code.
 
 <div class="product-grid">
 
-        {% for product in pager.getResults if product.isMaster %}
+        {% for product in pager if product.isMaster %}
 
             {% if not sonata_product_has_variations(product) or (sonata_product_has_variations(product) and sonata_product_has_enabled_variations(product)) %}
 

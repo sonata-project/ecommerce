@@ -10,29 +10,5 @@ file that was distributed with this source code.
 #}
 
 {% spaceless %}
-
-    {% if pager.haveToPaginate %}
-
-        <ul class="pagination">
-
-            {% if pager.page > 1 %}
-                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': 1}) }}" {% if pager.isFirstPage %}class="disabled"{% endif %}>&laquo;</a></li>
-                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.previousPage}) }}" {% if pager.isFirstPage %}class="disabled"{% endif %}>&lsaquo;</a></li>
-            {% endif %}
-
-            {% for page in pager.links(5) %}
-                <li {% if pager.page == page %}class="active"{% endif %}>
-                    <a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': page}) }}">{{ page }}</a>
-                </li>
-            {% endfor %}
-
-            {% if pager.page < pager.lastPage %}
-                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.nextPage}) }}" {% if pager.isLastPage %}class="disabled"{% endif %}>&rsaquo;</a></li>
-                <li><a href="{{ url('sonata_catalog_index', {'display_mode': display_mode, 'page': pager.lastPage}) }}" {% if pager.isLastPage %}class="disabled"{% endif %}>&raquo;</a></li>
-            {% endif %}
-
-        </ul>
-
-    {% endif %}
-
+    {{ knp_pagination_render(pager, null, {}, {'pagination_class': 'pagination pull-right'}) }}
 {% endspaceless %}
