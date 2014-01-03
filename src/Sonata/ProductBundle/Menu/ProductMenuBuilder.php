@@ -152,6 +152,10 @@ class ProductMenuBuilder
     protected function fillMenu(ItemInterface $menu, $categories, array $options = array(), $currentUri = null)
     {
         foreach ($categories as $category) {
+            if (false === $category->getEnabled()) {
+                continue;
+            }
+
             if (null === $category->getParent()) {
                 $fullOptions = array_merge(array('attributes' => array('class' => 'nav-header')), $options);
             } else {
