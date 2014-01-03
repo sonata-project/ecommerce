@@ -165,7 +165,6 @@ class SonataProductExtension extends Extension
                 'persist',
              ),
              'mappedBy'     => NULL,
-             'inversedBy'   => 'productCategories',
              'joinColumns'  => array(
                  array(
                      'name' => 'category_id',

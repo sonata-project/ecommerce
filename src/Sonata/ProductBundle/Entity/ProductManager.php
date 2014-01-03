@@ -13,13 +13,12 @@ namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\UnexpectedResultException;
-use Sonata\AdminBundle\Datagrid\PagerInterface;
+
+use Knp\Component\Pager\Paginator;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\CoreBundle\Entity\DoctrineBaseManager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
 class ProductManager extends DoctrineBaseManager implements ProductManagerInterface
 {
@@ -64,12 +63,12 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      * Returns active products for a given category.
      *
      * @param CategoryInterface $category
-     * @param int               $page
-     * @param int               $limit
+     * @param string            $filter
+     * @param mixed             $option
      *
-     * @return Pager
+     * @return QueryBuilder
      */
-    public function getCategoryActiveProductsPager(CategoryInterface $category = null, $page = 1, $limit = 9, $filter = null, $option = null)
+    public function getCategoryActiveProductsQueryBuilder(CategoryInterface $category = null, $filter = null, $option = null)
     {
         $queryBuilder = $this->getCategoryProductsQueryBuilder($category)
             ->andWhere('p.enabled = :enabled')
@@ -81,12 +80,7 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
                 ->setParameter(sprintf(":%s", $filter), $option);
         }
 
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
+        return $queryBuilder;
     }
 
     /**
@@ -99,8 +93,7 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      */
     public function findEnabledFromIdAndSlug($id, $slug)
     {
-        return $this->em
-            ->getRepository($this->getClass())
+        return $this->getRepository()
             ->findOneBy(array(
                 'id' => $id,
                 'slug' => $slug,
@@ -117,10 +110,7 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      */
     protected function getCategoryProductsQueryBuilder(CategoryInterface $category = null)
     {
-        $queryBuilder = $this->em
-            ->createQueryBuilder('p')
-            ->from($this->getClass(), 'p')
-            ->select('p')
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
             ->leftJoin('p.gallery', 'g');
 
         if ($category) {
@@ -151,10 +141,8 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
             }
         }
 
-        $queryBuilder = $this->em->createQueryBuilder('p')
-            ->select('p')
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
             ->distinct()
-            ->from($this->getClass(), 'p')
             ->leftJoin('p.productCollections', 'pc')
             ->where('pc.collection IN (:collections)')
             ->andWhere('p.id NOT IN (:productIds)')
