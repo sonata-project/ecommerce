@@ -42,7 +42,7 @@ file that was distributed with this source code.
         {% else %}
 
             <div class="row sonata-product-navigation-bar clearfix">
-                <div class="col-sm-9">
+                <div class="col-sm-3">
                     <h4>
                         {% if category %}
                             {{ category.name }}
@@ -51,7 +51,7 @@ file that was distributed with this source code.
                         {% endif %}
                     </h4>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-9 pull-right">
                     {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
                 </div>
             </div>
@@ -59,7 +59,7 @@ file that was distributed with this source code.
             {% block products %}{% endblock %}
 
             <div class="row sonata-product-navigation-bar clearfix">
-                <div class="col-sm-3 col-sm-offset-9">
+                <div class="col-sm-9 col-sm-offset-3 pull-right">
                     {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
                 </div>
             </div>
