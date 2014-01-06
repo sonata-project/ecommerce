@@ -153,6 +153,78 @@
             <source>message_view_user_profile</source>
             <target>Aller à votre profil</target>
         </trans-unit>
+        <trans-unit id="debug_payment_title">
+            <source>debug_payment_title</source>
+            <target>Simulateur de paiement</target>
+        </trans-unit>
+      <trans-unit id="debug_payment_alert_title">
+        <source>debug_payment_alert_title</source>
+        <target>Attention!</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_alert_text">
+        <source>debug_payment_alert_text</source>
+        <target>Ce moyen de paiement est réservé au développement. Ne pas utiliser en production.</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_help">
+        <source>debug_payment_help</source>
+        <target><![CDATA[
+            Ce simulateur vous aide à comprendre le fonctionnement du processus de paiement, choississez une action&nbsp;:
+            <br />
+            <ul>
+                <li><strong>Accepter le paiement</strong>&nbsp;: Simule un processus valide (paiement validé par la banque après l'envoi par l'utilisateur)&nbsp;;</li>
+                <li><strong>Refuser le paiement</strong>&nbsp;: Simule un processus invalide (paiement refusé par la banque après l'envoi par l'utilisateur)&nbsp;;</li>
+                <li><strong>Annuler le paiement</strong>&nbsp;: Simule une annulation (paiement annulé par l'utilisateur avant l'envoi à la banque).</li>
+            </ul>
+        ]]></target>
+      </trans-unit>
+      <trans-unit id="debug_payment_ok_action">
+        <source>debug_payment_ok_action</source>
+        <target>Action de la banque : Accepter le paiement</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_ko_action">
+        <source>debug_payment_ko_action</source>
+        <target>Action de la banque : Refuser le paiement</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_cancel_action">
+        <source>debug_payment_cancel_action</source>
+        <target>Action de l'utilisateur : Annuler le paiement</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_data_title">
+        <source>debug_payment_data_title</source>
+        <target>Détails de la commande</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_data_header">
+        <source>debug_payment_data_header</source>
+        <target>Voici quelques informations utiles enregistrées dans votre commande actuelle.</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_id">
+        <source>debug_payment_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_reference">
+        <source>debug_payment_reference</source>
+        <target>Référence</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_status">
+        <source>debug_payment_status</source>
+        <target>Etat de la commande</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_payment_status">
+        <source>debug_payment_payment_status</source>
+        <target>Etat du paiement</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_delivery_status">
+        <source>debug_payment_delivery_status</source>
+        <target>Etat de la livraison</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_payment_method">
+        <source>debug_payment_payment_method</source>
+        <target>Méthode de paiement</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_delivery_method">
+        <source>debug_payment_delivery_method</source>
+        <target>Méthode de livraison</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

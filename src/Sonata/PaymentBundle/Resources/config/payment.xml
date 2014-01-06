@@ -13,6 +13,7 @@
         <parameter key="sonata.payment.method.scellius.class">Sonata\Component\Payment\Scellius\ScelliusPayment</parameter>
         <parameter key="sonata.payment.provider.scellius.none_generator.class">Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator</parameter>
         <parameter key="sonata.payment.provider.scellius.order_generator.class">Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator</parameter>
+        <parameter key="sonata.payment.method.debug.class">Sonata\Component\Payment\Debug\DebugPayment</parameter>
         <parameter key="sonata.payment.method.ogone.class">Sonata\Component\Payment\Ogone\OgonePayment</parameter>
     </parameters>
 
@@ -53,6 +54,13 @@
 
         <service id="sonata.payment.provider.scellius.none_generator" class="%sonata.payment.provider.scellius.none_generator.class%" />
         <service id="sonata.payment.provider.scellius.order_generator" class="%sonata.payment.provider.scellius.order_generator.class%" />
+
+        <service id="sonata.payment.method.debug" class="%sonata.payment.method.debug.class%">
+            <tag name="sonata.payment.method" />
+
+            <argument type="service" id="router" />
+            <argument />
+        </service>
 
         <service id="sonata.payment.method.ogone" class="%sonata.payment.method.ogone.class%">
             <tag name="sonata.payment.method" />
