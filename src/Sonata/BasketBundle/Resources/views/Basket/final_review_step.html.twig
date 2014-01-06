@@ -56,33 +56,51 @@ file that was distributed with this source code.
     </tbody>
 </table>
 
-<table class="table table-bordered">
-    <tr>
-        <td class="basket_validation_box">
-            <h3>{{ 'sonata.basket.title_delivery_address'|trans({}, 'SonataBasketBundle') }}</h3>
-            {% if basket.deliverymethod.isAddressRequired() %}
-                {{ basket.deliveryaddress.getFullAddress("<br />")|raw }}
-                <br />
-            {% else %}
-                <i>{{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}</i>
-            {% endif %}
-        </td>
-        <td class="basket_validation_box">
-            <h3>{{ 'sonata.basket.title_billing_address'|trans({}, 'SonataBasketBundle') }} ~ {{  basket.billingaddress.name }}</h3>
-            {{  basket.billingaddress.getFullAddress("<br />")|raw }}
-        </td>
-    </tr>
-    <tr>
-        <td class="basket_validation_box">
-            <h3>{{ 'sonata.basket.title_delivery_method'|trans({}, 'SonataBasketBundle') }}</h3>
-            {{ basket.deliverymethod.name }}
-        </td>
-        <td class="validation_box">
-            <h3>{{ 'sonata.basket.title_payment_method'|trans({}, 'SonataBasketBundle') }}</h3>
-            {{ basket.paymentmethod.name }}
-        </td>
-    </tr>
-</table>
+<div class="row">
+    <!-- Delivery information -->
+    <div class="col-lg-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>{{ 'sonata.basket.title_delivery'|trans({}, 'SonataBasketBundle') }}</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                {% if basket.deliverymethod.isAddressRequired() %}
+                    <address>
+                        <strong>{{  basket.deliveryaddress.name }}</strong><br/>
+                        {{ basket.deliveryaddress.getFullAddress("<br />")|raw }}
+                    </address>
+                {% else %}
+                    <i>{{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}</i>
+                {% endif %}
+            </div>
+            <div class="panel-footer">
+                {{ basket.deliverymethod.name }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment information -->
+    <div class="col-lg-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>{{ 'sonata.basket.title_billing'|trans({}, 'SonataBasketBundle') }}</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <strong>{{  basket.billingaddress.name }}</strong><br/>
+                    {{  basket.billingaddress.getFullAddress("<br />")|raw }}
+                </address>
+            </div>
+            <div class="panel-footer">
+                {{ basket.paymentmethod.name }}
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="basket_tac well pagination-centered text-center">
     <h3>{{ 'sonata.basket.order_terms_and_conditions_title'|trans({}, 'SonataBasketBundle') }}</h3>

@@ -41,29 +41,34 @@ file that was distributed with this source code.
 
         {% else %}
 
-            <div class="row sonata-product-navigation-bar clearfix">
-                <div class="col-sm-3">
-                    <h4>
-                        {% if category %}
-                            {{ category.name }}
-                        {% else %}
-                            {% trans from 'SonataProductBundle' %}catalog_root_title{% endtrans %}
-                        {% endif %}
-                    </h4>
+            <div class="panel panel-default sonata-product-navigation-bar">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h4 class="panel-title">
+                                {% if category %}
+                                    {{ category.name }}
+                                {% else %}
+                                    {% trans from 'SonataProductBundle' %}catalog_root_title{% endtrans %}
+                                {% endif %}
+                            </h4>
+                        </div>
+                        <div class="col-sm-9">
+                            {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-9 pull-right">
-                    {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+
+                {% block products %}{% endblock %}
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3 pull-right">
+                            {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            {% block products %}{% endblock %}
-
-            <div class="row sonata-product-navigation-bar clearfix">
-                <div class="col-sm-9 col-sm-offset-3 pull-right">
-                    {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
-                </div>
-            </div>
-
         {% endif %}
 
     </div>
