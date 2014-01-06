@@ -82,8 +82,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('category')->defaultValue('Application\\Sonata\\ClassificationBundle\\Entity\\Category')->end()
                         ->scalarNode('collection')->defaultValue('Application\\Sonata\\ClassificationBundle\\Entity\\Collection')->end()
                         ->scalarNode('delivery')->defaultValue('Application\\Sonata\\ProductBundle\\Entity\\Delivery')->end()
-
-                        ->scalarNode('user')->defaultValue('Application\\Sonata\\UserBundle\\Entity\\User')->end()
                         ->scalarNode('gallery')->defaultValue('Application\\Sonata\\MediaBundle\\Entity\\Gallery')->end()
                     ->end()
                 ->end()

@@ -15,6 +15,29 @@ The Invoice generation, however, is not processed by this specific bundle, but b
 Configuration
 =============
 
+The bundle allows you to configure the entity classes ; you'll also need to register the doctrine mapping.
+
+.. code-block:: yaml
+
+    sonata_invoice:
+        class:
+            invoice:              Application\Sonata\InvoiceBundle\Entity\Invoice
+            invoice_element:      Application\Sonata\InvoiceBundle\Entity\InvoiceElement
+            order_element:        Application\Sonata\OrderBundle\Entity\OrderElement
+            customer:             Application\Sonata\CustomerBundle\Entity\Customer
+
+    # Enable Doctrine to map the provided entities
+    doctrine:
+        orm:
+            entity_managers:
+                default:
+                    mappings:
+                        ApplicationSonataInvoiceBundle: ~
+                        SonataInvoiceBundle: ~
+
+Transformer
+===========
+
 Default order to invoice transformer is provided in ``Sonata\Component\Transformer\InvoiceTransformer::transformFromOrder`` ; service id is ``sonata.payment.transformer.invoice`` and you can override it by setting its class name parameter (``sonata.invoice_transformer.class``).
 
 Currently, a raw HTML representation for invoices is provided ; would you like to generate a PDF ? We encourage you to check out PDF generation bundles taking HTML as inputs.
