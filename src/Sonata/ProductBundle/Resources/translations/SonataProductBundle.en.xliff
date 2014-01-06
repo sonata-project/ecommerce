@@ -347,6 +347,10 @@
                 <source>catalog_root_title</source>
                 <target>Catalog</target>
             </trans-unit>
+            <trans-unit id="list.label_is_variation">
+                <source>list.label_is_variation</source>
+                <target>Is Variation?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
