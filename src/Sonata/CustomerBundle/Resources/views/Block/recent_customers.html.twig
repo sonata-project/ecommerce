@@ -25,7 +25,7 @@ file that was distributed with this source code.
                         {% else %}
                             <td><a href="{{ url('sonata_customer_view', { 'id': customer.id }) }}">{{ customer }}</a></td>
                         {% endif %}
-                        <td>{{ customer.createdAt|date() }}</td>
+                        <td>{{ customer.createdAt|format_datetime() }}</td>
                     </tr>
                 {% endfor %}
             </table>

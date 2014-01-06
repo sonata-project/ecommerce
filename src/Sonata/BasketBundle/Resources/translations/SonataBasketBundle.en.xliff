@@ -78,9 +78,9 @@
                 <source>sonata.basket.title_basket</source>
                 <target>Your basket</target>
             </trans-unit>
-            <trans-unit id="sonata.basket.title_delivery_address">
-                <source>sonata.basket.title_delivery_address</source>
-                <target>Delivery address</target>
+            <trans-unit id="sonata.basket.title_delivery">
+                <source>sonata.basket.title_delivery</source>
+                <target>Delivery</target>
             </trans-unit>
             <trans-unit id="sonata.basket.title_delivery_address_not_required">
                 <source>sonata.basket.title_delivery_address_not_required</source>
@@ -122,9 +122,9 @@
                 <source>sonata.basket.title_address_billing_step_basket</source>
                 <target>Selected billing address</target>
             </trans-unit>
-            <trans-unit id="sonata.basket.title_billing_address">
-                <source>sonata.basket.title_billing_address</source>
-                <target>Billing address</target>
+            <trans-unit id="sonata.basket.title_billing">
+                <source>sonata.basket.title_billing</source>
+                <target>Billing</target>
             </trans-unit>
             <trans-unit id="sonata.basket.title_payment_method">
                 <source>sonata.basket.title_payment_method</source>
@@ -265,6 +265,10 @@
             <trans-unit id="header_basket_total_inc">
                 <source>header_basket_total_inc</source>
                 <target>Total inc. VAT</target>
+            </trans-unit>
+            <trans-unit id="header_basket_total">
+                <source>header_basket_total</source>
+                <target>Total</target>
             </trans-unit>
             <trans-unit id="footer_basket_total_excl">
                 <source>footer_basket_total_excl</source>

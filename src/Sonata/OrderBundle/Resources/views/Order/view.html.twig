@@ -14,7 +14,7 @@ file that was distributed with this source code.
     <div class="col-sm-8">
         <h3>{% trans from 'SonataOrderBundle' %}sonata.order.title_order{% endtrans %} - {{ order.reference }}</h3>
     </div>
-    <div class="col-sm-3 col-sm-offset-1 pull-right" style="margin-top:15px;">
+    <div class="col-sm-2 pull-right" style="margin-top:15px;">
         <a href="{{ url('sonata_invoice_view', {'reference' : order.reference}) }}" class="btn btn-primary"><i class="glyphicon glyphicon-file icon-white"></i>&nbsp;{% trans from 'SonataOrderBundle' %}sonata.order.view_invoice{% endtrans %}</a>
     </div>
 </div>
@@ -22,103 +22,100 @@ file that was distributed with this source code.
 
 {% block sonata_order_top %}
 {% sonata_template_box 'This is the order view template. Feel free to override it.' %}
-
 <div class="row">
-    <div class="row">
-        {% block sonata_order_dates_statuses %}
-            <div class="col-sm-6">
-                {% block sonata_order_dates %}
-                    {% set date_time_size = constant('IntlDateFormatter::SHORT') %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_dates{% endtrans %}</h4>
-                            </div>
+    {% block sonata_order_dates_statuses %}
+        <div class="col-sm-6">
+            {% block sonata_order_dates %}
+                {% set date_time_size = constant('IntlDateFormatter::SHORT') %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_dates{% endtrans %}</h4>
                         </div>
+                    </div>
 
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
-                                <td>{{ order.createdAt|format_datetime(null, null, date_time_size, date_time_size) }}</td>
-                            </tr>
-                            <tr>
-                                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.validated_at{% endtrans %}</th>
-                                <td>
-                                    {% if order.validatedAt %}
-                                        {{ order.validatedAt|format_datetime(null, null, date_time_size, date_time_size) }}
-                                    {% else %}
-                                        /
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.updated_at{% endtrans %}</th>
-                                <td>{{ order.updatedAt|format_datetime(null, null, date_time_size, date_time_size) }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                {% endblock %}
-            </div>
-            <div class="col-sm-6">
-                {% block sonata_order_statuses %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_statuses{% endtrans %}</h4>
-                            </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
+                            <td>{{ order.createdAt|format_datetime(null, null, date_time_size, date_time_size) }}</td>
+                        </tr>
+                        <tr>
+                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.validated_at{% endtrans %}</th>
+                            <td>
+                                {% if order.validatedAt %}
+                                    {{ order.validatedAt|format_datetime(null, null, date_time_size, date_time_size) }}
+                                {% else %}
+                                    /
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.updated_at{% endtrans %}</th>
+                            <td>{{ order.updatedAt|format_datetime(null, null, date_time_size, date_time_size) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            {% endblock %}
+        </div>
+        <div class="col-sm-6">
+            {% block sonata_order_statuses %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_statuses{% endtrans %}</h4>
                         </div>
+                    </div>
 
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.order_status{% endtrans %}</th>
-                                <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans({}, 'SonataOrderBundle') }}</span></td>
-                            </tr>
-                            <tr>
-                                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
-                                <td><span class="label{{ order|sonata_status_class('payment', 'danger') ? ' label-'~order|sonata_status_class('payment', 'danger') : '' }}">{{ order.paymentStatusName|trans({}, 'SonataPaymentBundle') }}</span></td>
-                            </tr>
-                            <tr>
-                                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</th>
-                                <td><span class="label{{ order|sonata_status_class('delivery', 'danger') ? ' label-'~order|sonata_status_class('delivery', 'danger') : '' }}">{{ order.deliveryStatusName|trans({}, 'SonataDeliveryBundle') }}</span></td>
-                            </tr>
-                        </table>
-                    </div>
-                {% endblock %}
-            </div>
-        {% endblock %}
-    </div>
-    <div class="row">
-        {% block sonata_order_top_right %}
-            <div class="col-sm-6">
-                {% block sonata_order_delivery %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_title{% endtrans %}</h4>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            {{ order.getFullDelivery('<br/>')|raw }}
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.order_status{% endtrans %}</th>
+                            <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans({}, 'SonataOrderBundle') }}</span></td>
+                        </tr>
+                        <tr>
+                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
+                            <td><span class="label{{ order|sonata_status_class('payment', 'danger') ? ' label-'~order|sonata_status_class('payment', 'danger') : '' }}">{{ order.paymentStatusName|trans({}, 'SonataPaymentBundle') }}</span></td>
+                        </tr>
+                        <tr>
+                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</th>
+                            <td><span class="label{{ order|sonata_status_class('delivery', 'danger') ? ' label-'~order|sonata_status_class('delivery', 'danger') : '' }}">{{ order.deliveryStatusName|trans({}, 'SonataDeliveryBundle') }}</span></td>
+                        </tr>
+                    </table>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+</div>
+<div class="row">
+    {% block sonata_order_top_right %}
+        <div class="col-sm-6">
+            {% block sonata_order_delivery %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_title{% endtrans %}</h4>
                         </div>
                     </div>
-                {% endblock %}
-            </div>
-            <div class="col-sm-6">
-                {% block sonata_order_billing %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.billing_title{% endtrans %}</h4>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            {{ order.getFullBilling('<br/>')|raw }}
+                    <div class="panel-body">
+                        {{ order.getFullDelivery('<br/>')|raw }}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+        <div class="col-sm-6">
+            {% block sonata_order_billing %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.billing_title{% endtrans %}</h4>
                         </div>
                     </div>
-                {% endblock %}
-            </div>
-        {% endblock %}
-    </div>
+                    <div class="panel-body">
+                        {{ order.getFullBilling('<br/>')|raw }}
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
 </div>
 {% endblock %}
 

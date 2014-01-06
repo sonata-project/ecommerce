@@ -19,7 +19,7 @@
             {% for type,addressesByType in addresses if addressesByType|length > 0 %}
 
                 {% block sonata_profile_address_typelist %}
-                    <tr>
+                    <tr class="active">
                         <th colspan="4">{{ type|trans({}, 'SonataCustomerBundle') }}</th>
                     </tr>
                     {% block sonata_profile_address_table_headers %}
