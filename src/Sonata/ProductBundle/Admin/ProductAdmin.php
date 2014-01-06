@@ -55,9 +55,6 @@ class ProductAdmin extends Admin
     public function configure()
     {
         $this->setTranslationDomain('SonataProductBundle');
-
-        $this->baseRouteName    = 'admin_sonata_product_product';
-        $this->baseRoutePattern = '/sonata/product/product';
     }
 
     /**
@@ -103,16 +100,6 @@ class ProductAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection
-            ->add('createVariation', $this->getRouterIdParameter() . '/variation/create')
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureFormFields(FormMapper $formMapper)
     {
         // this admin class works only from a request scope
@@ -149,11 +136,12 @@ class ProductAdmin extends Admin
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
         );
 
-        if (!$product->isVariation()) {
+        if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
             $menu->addChild(
-                $this->trans('product.sidemenu.link_add_variation', array(), 'SonataProductBundle'),
-                array('uri' => $admin->generateUrl('createVariation', array('id' => $id)))
+                $this->trans('product.sidemenu.view_variations'),
+                array('uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', array('id' => $id)))
             );
+
         }
     }
 
@@ -181,6 +169,10 @@ class ProductAdmin extends Admin
             return;
         }
 
+        if ($this->isChild()) { // variation
+            return;
+        }
+
         $product  = $this->getProduct();
         $provider = $this->getProductProvider($product);
 
@@ -194,10 +186,12 @@ class ProductAdmin extends Admin
     {
         $list
             ->addIdentifier('name')
+            ->add('isVariation', 'boolean')
             ->add('enabled', null, array('editable' => true))
             ->add('price', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
             ->add('productCategories', null, array('associated_tostring' => 'getCategory'))
             ->add('productCollections', null, array('associated_tostring' => 'getCollection'))
+
         ;
     }
 

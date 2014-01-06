@@ -19,60 +19,19 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
-class ProductAdminController extends Controller
+class ProductVariationAdminController extends Controller
 {
-    /**
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response|\Symfony\Component\HttpFoundation\Response
-     */
-    public function createAction()
-    {
-        if (false === $this->admin->isGranted('CREATE')) {
-            throw new AccessDeniedException();
-        }
-
-        $parameters = $this->admin->getPersistentParameters();
-
-        if (!$parameters['provider']) {
-            return $this->render('SonataProductBundle:ProductAdmin:select_provider.html.twig', array(
-                'providers'     => $this->get('sonata.product.pool')->getProducts(),
-                'base_template' => $this->getBaseTemplate(),
-                'admin'         => $this->admin,
-                'action'        => 'create'
-            ));
-        }
-
-        return parent::createAction();
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function showVariationsAction()
-    {
-        $id = $this->getRequest()->get($this->admin->getIdParameter());
-
-        if (!$product = $this->admin->getObject($id)) {
-            throw new NotFoundHttpException('Product not found.');
-        }
-
-        return $this->render('SonataProductBundle:ProductAdmin:variations.html.twig', array(
-            'product' => $product,
-        ));
-    }
 
     /**
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function createVariationAction()
+    public function createAction()
     {
-        $id = $this->getRequest()->get($this->admin->getIdParameter());
 
-        if (!$product = $this->admin->getObject($id)) {
-            throw new NotFoundHttpException('Product not found.');
+        if (!$this->admin->getParent()) {
+            throw new \RuntimeException('The admin cannot be call directly, it must be embedded');
         }
 
         if (!$this->admin->isGranted('EDIT') || !$this->admin->isGranted('DELETE')) {
@@ -91,6 +50,9 @@ class ProductAdminController extends Controller
             ))
             ->getForm();
 
+        // product is the main product object, used to create a set of variation
+        $product = $this->admin->getParent()->getSubject();
+
         if ($this->getRequest()->isMethod('POST')) {
             $form->submit($this->getRequest());
 
@@ -108,7 +70,7 @@ class ProductAdminController extends Controller
                     } catch (\Exception $e) {
                         $this->addFlash('sonata_flash_error', 'flash_create_variation_error');
 
-                        return new RedirectResponse($this->admin->generateObjectUrl('edit', $product));
+                        return new RedirectResponse($this->admin->generateUrl('create'));
                     }
                 }
 
@@ -116,7 +78,7 @@ class ProductAdminController extends Controller
 
                 $this->addFlash('sonata_flash_success', 'flash_create_variation_success');
 
-                return new RedirectResponse($this->admin->generateObjectUrl('variation', $product));
+                return new RedirectResponse($this->admin->generateUrl('list'));
             }
         }
 

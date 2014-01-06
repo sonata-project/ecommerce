@@ -8,6 +8,9 @@
         <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
         <parameter key="sonata.product.admin.product.controller">SonataProductBundle:ProductAdmin</parameter>
 
+        <parameter key="sonata.product.admin.product.variation.class">Sonata\ProductBundle\Admin\ProductVariationAdmin</parameter>
+        <parameter key="sonata.product.admin.product.variation.controller">SonataProductBundle:ProductVariationAdmin</parameter>
+
         <!-- PRODUCTCATEGORY -->
         <parameter key="sonata.product.admin.product_category.class">Sonata\ProductBundle\Admin\ProductCategoryAdmin</parameter>
         <parameter key="sonata.product.admin.product_category.controller">SonataProductBundle:ProductCategoryAdmin</parameter>
@@ -36,13 +39,33 @@
                 <argument type="service" id="sonata.product.admin.product_category" />
             </call>
 
-            <call method="addChild">
-                <argument type="service" id="sonata.product.admin.product_collection" />
-            </call>
+            <!--<call method="addChild">-->
+                <!--<argument type="service" id="sonata.product.admin.product_collection" />-->
+            <!--</call>-->
+
+            <!--<call method="addChild">-->
+                <!--<argument type="service" id="sonata.product.admin.delivery" />-->
+            <!--</call>-->
 
             <call method="addChild">
-                <argument type="service" id="sonata.product.admin.delivery" />
+                <argument type="service" id="sonata.product.admin.product.variation" />
             </call>
+
+            <call method="setProductPool">
+                <argument type="service" id="sonata.product.pool" />
+            </call>
+
+            <call method="setCurrencyDetector">
+                <argument type="service" id="sonata.price.currency.detector" />
+            </call>
+        </service>
+
+        <service id="sonata.product.admin.product.variation" class="%sonata.product.admin.product.variation.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_menu="false"  show_in_dashboard="false" label="product_variation"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+
+            <argument />
+            <argument>%sonata.product.admin.product.entity%</argument>
+            <argument>%sonata.product.admin.product.variation.controller%</argument>
 
             <call method="setProductPool">
                 <argument type="service" id="sonata.product.pool" />
