@@ -67,8 +67,7 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
             category:             Application\Sonata\ClassificationBundle\Entity\Category
             collection:           Application\Sonata\ClassificationBundle\Entity\Collection
             delivery:             Application\Sonata\ProductBundle\Entity\Delivery
-            user:                 Application\Sonata\UserBundle\Entity\User
-            media:                Application\Sonata\MediaBundle\Entity\Media
+            gallery:              Application\Sonata\MediaBundle\Entity\Gallery
 
     # Enable Doctrine to map the provided entities
     doctrine:

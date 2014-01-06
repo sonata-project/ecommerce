@@ -66,9 +66,9 @@ Here's the full default configuration for SonataBasketBundle:
 
         # Model
         class:
-            basket:         Application\\Sonata\\BasketBundle\\Entity\\Basket
-            basket_element: Application\\Sonata\\BasketBundle\\Entity\\BasketElement
-            customer:       Application\\Sonata\\CustomerBundle\\Entity\\Customer
+            basket:         Application\Sonata\BasketBundle\Entity\Basket
+            basket_element: Application\Sonata\BasketBundle\Entity\BasketElement
+            customer:       Application\Sonata\CustomerBundle\Entity\Customer
 
         # Forms
         basket:
