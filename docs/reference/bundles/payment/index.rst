@@ -22,6 +22,7 @@ Methods
     Paypal <paypal>
     Check <check>
     Pass <pass>
+    Debug (dev environment only) <debug>
 
 
 Configuration
@@ -147,3 +148,24 @@ Here's the full default configuration for SonataPaymentBundle:
         class:
             order:                Application\Sonata\OrderBundle\Entity\Order
             transaction:          Application\Sonata\PaymentBundle\Entity\Transaction
+
+If you want to use the ``DebugPayment`` method, you need to add its configuration in the ``dev`` config file.
+
+.. code-block:: yaml
+
+    sonata_payment:
+        services:
+            debug:
+                name:    Debug Payment
+                enabled: true
+                code:    debug
+                browser: sonata.payment.browser.curl
+
+                transformers:
+                    basket: sonata.payment.transformer.basket
+                    order:  sonata.payment.transformer.order
+
+                options:
+                    url_callback:  sonata_payment_callback
+                    url_return_ko: sonata_payment_error
+                    url_return_ok: sonata_payment_confirmation

@@ -78,6 +78,7 @@ class SonataPaymentExtension extends Extension
         $pool = $container->getDefinition('sonata.payment.pool');
 
         $implemented = array(
+            'debug'    => 'sonata.payment.method.debug',
             'pass'     => 'sonata.payment.method.pass',
             'check'    => 'sonata.payment.method.check',
             'scellius' => 'sonata.payment.method.scellius',
@@ -117,6 +118,11 @@ class SonataPaymentExtension extends Extension
 
             // add the delivery method in the method pool
             $pool->addMethodCall('addMethod', array(new Reference($id)));
+        }
+
+        if (isset($services['debug'])) {
+            $container->getDefinition('sonata.payment.method.debug')
+                ->replaceArgument(1, new Reference($services['debug']['browser']));
         }
 
         if (isset($services['pass'])) {
