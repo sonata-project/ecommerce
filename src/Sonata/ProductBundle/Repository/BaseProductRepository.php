@@ -44,8 +44,9 @@ class BaseProductRepository extends EntityRepository
         $eb = $this->getEntityManager()->getExpressionBuilder();
 
         return $this->createQueryBuilder('p')
-            ->select('p', 'g')
+            ->select('p', 'i', 'g')
             ->distinct()
+            ->leftJoin('p.image', 'i')
             ->leftJoin('p.gallery', 'g')
             ->where(
                 $eb->orX(
