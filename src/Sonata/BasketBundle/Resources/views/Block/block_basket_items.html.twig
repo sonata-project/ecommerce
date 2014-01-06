@@ -1,7 +1,7 @@
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-    <div>
+    <div class="row pull-right">
         <span class="glyphicon glyphicon-shopping-cart"></span>
         <a href="{{ path('sonata_basket_index') }}">
             {{ 'sonata.basket.title_basket'|trans({}, 'SonataBasketBundle') }} ({{ sonata_basket.basket.countBasketElements }})

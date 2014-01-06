@@ -23,7 +23,7 @@ file that was distributed with this source code.
         <table class="table table-bordered">
             <tr>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %}</th>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.date{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.status{% endtrans %}</th>
                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
             </tr>
@@ -31,7 +31,7 @@ file that was distributed with this source code.
             {% for order in orders %}
                 <tr>
                     <td><a href="{{ url('sonata_order_view', {'reference' : order.reference}) }}">{{ order.reference }}</a></td>
-                    <td>{{ order.createdAt|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ order.createdAt|format_datetime() }}</td>
                     <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
                     <td class="number">{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
                 </tr>
