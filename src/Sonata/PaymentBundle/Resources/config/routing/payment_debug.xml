@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="sonata_payment_debug" pattern="/payment/{check}/{reference}">
+        <default key="_controller">SonataPaymentBundle:DebugPayment:payment</default>
+    </route>
+
+    <route id="sonata_payment_debug_process" pattern="/payment/{check}/{reference}/{action}">
+        <default key="_controller">SonataPaymentBundle:DebugPayment:processPayment</default>
+    </route>
+
+</routes>
