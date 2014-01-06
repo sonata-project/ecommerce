@@ -261,6 +261,22 @@ class SonataProductExtension extends Extension
         ));
 
         $collector->addAssociation($config['class']['product'], 'mapManyToOne', array(
+            'fieldName'     => 'image',
+            'targetEntity'  => $config['class']['media'],
+            'cascade'       => array(),
+            'mappedBy'      => NULL,
+            'inversedBy'    => NULL,
+            'joinColumns'   => array(
+                array(
+                    'name' => 'image_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'SET NULL',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['product'], 'mapManyToOne', array(
              'fieldName'     => 'gallery',
              'targetEntity'  => $config['class']['gallery'],
              'cascade'       => array(),

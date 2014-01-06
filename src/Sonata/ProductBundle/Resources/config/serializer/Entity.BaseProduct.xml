@@ -13,6 +13,7 @@
         <property name="updatedAt" type="datetime" expose="true" />
         <property name="createdAt" type="datetime" expose="true" />
 
+        <property name="image" type="Sonata\MediaBundle\Model\MediaInterface" expose="false" />
         <property name="gallery" type="Sonata\MediaBundle\Model\GalleryInterface" expose="false" />
         <property name="package" type="Sonata\Component\Product\PackageInterface" expose="false" />
         <property name="delivery" type="Sonata\Component\Product\DeliveryInterface" expose="false" />
