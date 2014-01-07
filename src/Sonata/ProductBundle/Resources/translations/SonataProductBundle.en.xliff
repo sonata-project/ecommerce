@@ -12,6 +12,10 @@
                 <source>sonata.basket.message_product_not_available</source>
                 <target>The product is not available.</target>
             </trans-unit>
+            <trans-unit id="sonata.product.sku">
+                <source>sonata.product.sku</source>
+                <target>Reference</target>
+            </trans-unit>
             <trans-unit id="sonata.product.btn_add_to_basket">
                 <source>sonata.product.btn_add_to_basket</source>
                 <target>Add to basket</target>

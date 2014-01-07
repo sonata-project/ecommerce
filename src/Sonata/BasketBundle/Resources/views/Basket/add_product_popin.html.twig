@@ -18,6 +18,13 @@
                     <div class="col-md-7 col-md-offset-1">
                         <h4 itemprop="name" style="margin-top: 0px;">{% block product_title %}{{ product.name }}{% endblock %}</h4>
 
+                        {% block product_sku %}
+                            <dl class="dl-horizontal" style="margin-bottom: 0;">
+                                <dt style="width: auto;">{{ 'sonata.product.sku'|trans([], 'SonataProductBundle') }}</dt>
+                                <dd style="margin-left: 110px; word-wrap: break-word;">{{ product.sku }}</dd>
+                            </dl>
+                        {% endblock %}
+
                         {% block product_properties %}
                             {{ render(controller(provider.baseControllerName ~ ':renderProperties', {product: product})) }}
                         {% endblock %}
