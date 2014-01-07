@@ -17,12 +17,17 @@ use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Product\Pool;
 use Sonata\ProductBundle\Entity\ProductSetManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CatalogController extends Controller
 {
     /**
      * Index action for catalog.
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
      */
     public function indexAction()
     {
