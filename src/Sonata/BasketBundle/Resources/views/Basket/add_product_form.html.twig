@@ -36,7 +36,7 @@ file that was distributed with this source code.
                 </span>
             </div>
             <div class="col-lg-6">
-                <button type="submit" class="btn btn-primary" id="sonata_add_basket_submit">
+                <button type="submit" class="btn btn-primary" id="sonata_add_basket_submit"{% if product.stock == 0 %} disabled{% endif %}>
                     <i class="glyphicon glyphicon-shopping-cart icon-white"></i>{% trans from 'SonataProductBundle' %}sonata.product.btn_add_to_basket{% endtrans %}
                 </button>
             </div>
