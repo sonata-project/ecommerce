@@ -72,6 +72,7 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
     {
         $queryBuilder = $this->getCategoryProductsQueryBuilder($category)
             ->andWhere('p.enabled = :enabled')
+            ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
             ->setParameter('enabled', true);
 
         if (null !== $filter) {
