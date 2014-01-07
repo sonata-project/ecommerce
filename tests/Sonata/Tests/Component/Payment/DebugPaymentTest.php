@@ -11,13 +11,20 @@
 
 namespace Sonata\Tests\Component\Payment;
 
-use Application\Sonata\PaymentBundle\Entity\Transaction;
 use Sonata\Component\Payment\Debug\DebugPayment;
 use Buzz\Browser;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Sonata\PaymentBundle\Entity\BaseTransaction;
 
 class DebugPaymentTest_Order extends BaseOrder
+{
+    public function getId()
+    {
+    }
+}
+
+class DebugPaymentTest_Transaction extends BaseTransaction
 {
     public function getId()
     {
@@ -64,7 +71,7 @@ class DebugPaymentTest extends \PHPUnit_Framework_TestCase
 
         $transactionManager->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new Transaction()));
+            ->will($this->returnValue(new DebugPaymentTest_Transaction()));
 
         return $transactionManager;
     }
