@@ -350,6 +350,18 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('stock', 'integer')
         ;
 
+        if (!$isVariation || in_array('image', $this->variationFields)) {
+            $formMapper->add('image', 'sonata_type_model_list', array(
+                'required' => false
+            ), array(
+                'link_parameters' => array(
+                    'context'  => 'sonata_product',
+                    'filter'   => array('context' => array('value' => 'sonata_product')),
+                    'provider' => ''
+                )
+            ));
+        }
+
         if (!$isVariation || in_array('gallery', $this->variationFields)) {
             $formMapper->add('gallery', 'sonata_type_model_list', array(
                 'required' => false
@@ -877,6 +889,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         $results = $this->createQueryBuilder('p')
             ->addSelect('i')
+            ->addSelect('g')
+            ->leftJoin('p.image', 'i')
             ->leftJoin('p.gallery', 'g')
             ->andWhere('p.id = :id')
             ->getQuery()

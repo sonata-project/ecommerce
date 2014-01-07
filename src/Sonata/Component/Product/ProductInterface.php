@@ -397,6 +397,13 @@ interface ProductInterface
     public function getGallery();
 
     /**
+     * Sets product main image.
+     *
+     * @param MediaInterface $image
+     */
+    public function setImage(MediaInterface $image = null);
+
+    /**
      * Gets the product main image
      *
      * @return MediaInterface

@@ -111,6 +111,7 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
     protected function getCategoryProductsQueryBuilder(CategoryInterface $category = null)
     {
         $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->leftJoin('p.image', 'i')
             ->leftJoin('p.gallery', 'g');
 
         if ($category) {

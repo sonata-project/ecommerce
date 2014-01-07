@@ -42,46 +42,26 @@ class Product extends BaseProduct
  */
 class BaseProductTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetImage()
+    public function testGetImageAndGetGallery()
     {
         $product = new Product();
 
         $this->assertNull($product->getImage());
 
+        // Test gallery
         $gallery = $this->getMock('Sonata\MediaBundle\Model\GalleryInterface');
         $product->setGallery($gallery);
 
         $this->assertNull($product->getImage());
+        $this->assertInstanceOf('Sonata\MediaBundle\Model\GalleryInterface', $product->getGallery());
 
-        $media = $this->getMock('Sonata\MediaBundle\Model\MediaInterface');
-
-        $galleryHasMedia = $this->getMock('Sonata\MediaBundle\Model\GalleryHasMediaInterface');
-        $galleryHasMedia->expects($this->exactly(2))
-            ->method('getMedia')
-            ->will($this->returnValue($media));
-        $galleryHasMedia->expects($this->exactly(2))
-            ->method('getPosition')
-            ->will($this->returnValue(10));
-
-        $galleryHasMedia2 = $this->getMock('Sonata\MediaBundle\Model\GalleryHasMediaInterface');
-
-        $media->expects($this->once())
+        // Test getImage
+        $image = $this->getMock('Sonata\MediaBundle\Model\MediaInterface');
+        $image->expects($this->any())
             ->method('getName')
             ->will($this->returnValue("correctMedia"));
 
-        $galleryHasMedia2->expects($this->exactly(2))
-            ->method('getMedia')
-            ->will($this->returnValue($media));
-        $galleryHasMedia2->expects($this->exactly(2))
-            ->method('getPosition')
-            ->will($this->returnValue(2));
-
-        $gallery = $this->getMock('Sonata\MediaBundle\Model\GalleryInterface');
-        $gallery->expects($this->exactly(2))
-            ->method('getGalleryHasMedias')
-            ->will($this->returnValue(array($galleryHasMedia, $galleryHasMedia2)));
-
-        $product->setGallery($gallery);
+        $product->setImage($image);
 
         $this->assertInstanceOf('Sonata\MediaBundle\Model\MediaInterface', $product->getImage());
         $this->assertEquals("correctMedia", $product->getImage()->getName());

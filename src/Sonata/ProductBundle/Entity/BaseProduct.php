@@ -101,6 +101,11 @@ abstract class BaseProduct implements ProductInterface
     protected $productCategories;
 
     /**
+     * @var MediaInterface
+     */
+    protected $image;
+
+    /**
      * @var GalleryInterface
      */
     protected $gallery;
@@ -606,6 +611,22 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
+    public function setImage(MediaInterface $image = null)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setGallery(GalleryInterface $gallery = null)
     {
         $this->gallery = $gallery;
@@ -617,27 +638,6 @@ abstract class BaseProduct implements ProductInterface
     public function getGallery()
     {
         return $this->gallery;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImage()
-    {
-        if ($this->getGallery() && count($media = $this->getGallery()->getGalleryHasMedias()) > 0) {
-            $minPosition = PHP_INT_MAX;
-            $firstMedia = null;
-
-            foreach ($media as $ghm) {
-                if ($ghm->getPosition() < $minPosition) {
-                    $firstMedia = $ghm->getMedia();
-                }
-            }
-
-            return $firstMedia;
-        }
-
-        return null;
     }
 
     /**
