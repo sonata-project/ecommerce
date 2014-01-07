@@ -32,6 +32,7 @@ class ProductCategoryAdmin extends Admin
         $this->baseRoutePattern = '/sonata/product/productcategory';
     }
 
+
     /**
      * {@inheritdoc}
      */
@@ -50,7 +51,11 @@ class ProductCategoryAdmin extends Admin
     public function configureListFields(ListMapper $list)
     {
         if (!$this->isChild()) {
-            $list->addIdentifier('id')->addIdentifier('product');
+            $list
+                ->addIdentifier('id')
+                ->addIdentifier('product', null, array(
+                    'admin_code' => 'sonata.product.admin.product'
+                ));
         }
 
         $list
