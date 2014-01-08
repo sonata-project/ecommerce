@@ -69,7 +69,7 @@ file that was distributed with this source code.
         <div class="well">
             <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-refresh icon-white"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
 
-            <a href="{{ url('sonata_basket_authentication') }}" class="btn btn-primary pull-right"{% if form.vars.errors is not empty %} disabled{% endif %}>{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;<i class="glyphicon glyphicon-arrow-right icon-white"></i></a>
+            <a href="{{ url('sonata_basket_delivery_address') }}" class="btn btn-primary pull-right"{% if form.vars.errors is not empty %} disabled{% endif %}>{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;<i class="glyphicon glyphicon-arrow-right icon-white"></i></a>
         </div>
 
         {{ form_rest(form) }}
