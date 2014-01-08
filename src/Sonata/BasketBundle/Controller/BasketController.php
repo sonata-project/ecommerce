@@ -308,16 +308,17 @@ class BasketController extends Controller
      */
     public function deliveryAddressStepAction()
     {
-        $basket = $this->get('sonata.basket');
-
-        if ($basket->countBasketElements() == 0) {
-            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
-        }
-
-        $customer = $basket->getCustomer();
+        $customer = $this->get('sonata.customer.selector')->get();
 
         if (!$customer) {
             throw new NotFoundHttpException('customer not found');
+        }
+
+        $basket = $this->get('sonata.basket');
+        $basket->setCustomer($customer);
+
+        if ($basket->countBasketElements() == 0) {
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         $addresses = $customer->getAddressesByType(AddressInterface::TYPE_DELIVERY);
