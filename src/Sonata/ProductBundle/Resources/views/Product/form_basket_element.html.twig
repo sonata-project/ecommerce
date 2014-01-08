@@ -49,7 +49,7 @@ file that was distributed with this source code.
     {% endif %}
     <td>
         {% block product_delete %}
-            {{ form_widget(formView.delete) }}
+            {{ form_widget(formView.delete, {'label_render': false}) }}
         {% endblock %}
     </td>
 </tr>
