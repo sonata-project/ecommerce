@@ -30,80 +30,82 @@ file that was distributed with this source code.
 {% block product %}
     <!-- Begin product display -->
     <div class="row" itemscope itemtype="http://schema.org/Product">
-        {% sonata_template_box 'This is the product view template. Feel free to override it.' %}
+        <div class="col-lg-12">
+            {% sonata_template_box 'This is the product view template. Feel free to override it.' %}
 
-        {% block product_errors %}
-            {%  if not provider.hasVariations(product) and sonata_product_stock(product) == 0 %}
-                <div class="alert alert-danger">
-                    {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
-                </div>
-            {% endif %}
-        {% endblock %}
-
-        <h1 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h1>
-
-        <!-- Begin product details -->
-        <div class="col-sm-8">
-
-            {% block product_details %}
-                <div class="row">
-                    {% block product_image %}{% thumbnail product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded', 'style': 'float:left; margin: 0 10px 10px 0;'} %}{% endblock%}
-                    <span itemprop="description">
-                {% block product_description %}{{ product.rawDescription|raw }}{% endblock %}
-            </span>
-                </div>
-
-                <div class="row">
-                    {% block product_gallery %}Block 'product_gallery' to override{% endblock %}
-                </div>
+            {% block product_errors %}
+                {%  if not provider.hasVariations(product) and sonata_product_stock(product) == 0 %}
+                    <div class="alert alert-danger">
+                        {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
+                    </div>
+                {% endif %}
             {% endblock %}
 
-        </div>
-        <!-- End product details -->
+            <h1 itemprop="name">{% block product_title %}{{ product.name }}{% endblock %}</h1>
 
-        <!-- Begin right product display -->
-        <div class="col-sm-3 col-sm-offset-1 panel panel-default">
+            <!-- Begin product details -->
+            <div class="col-sm-8">
 
-            {% block product_right %}
-                <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                {% block product_details %}
+                    <div class="row">
+                        {% block product_image %}{% thumbnail product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded', 'style': 'float:left; margin: 0 10px 10px 0;'} %}{% endblock%}
+                        <span itemprop="description">
+                            {% block product_description %}{{ product.rawDescription|raw }}{% endblock %}
+                        </span>
+                    </div>
 
-                    {% block product_variations %}
-                        {% if provider.hasEnabledVariations(product) %}
-                            {% block variations_label %}<h4>{% trans from 'SonataProductBundle' %}product_variations{% endtrans %}</h4>{% endblock %}
+                    <div class="row">
+                        {% block product_gallery %}Block 'product_gallery' to override{% endblock %}
+                    </div>
+                {% endblock %}
 
-                            {% block product_variations_list %}
-                                {% include "SonataProductBundle:Product:list_variations.html.twig" with {variations: provider.enabledVariations(product) } %}
+            </div>
+            <!-- End product details -->
+
+            <!-- Begin right product display -->
+            <div class="col-sm-3 col-sm-offset-1 panel panel-default">
+
+                {% block product_right %}
+                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+                        {% block product_variations %}
+                            {% if provider.hasEnabledVariations(product) %}
+                                {% block variations_label %}<h4>{% trans from 'SonataProductBundle' %}product_variations{% endtrans %}</h4>{% endblock %}
+
+                                {% block product_variations_list %}
+                                    {% include "SonataProductBundle:Product:list_variations.html.twig" with {variations: provider.enabledVariations(product) } %}
+                                {% endblock %}
+
+                            {% endif %}
+                        {% endblock %}
+
+                        {% block product_delivery %}
+                            <div>
+                                Block 'product_delivery' to override
+                            </div>
+                        {% endblock %}
+
+                        {% if product.isSalable %}
+
+                            {% block product_basket %}
+                                <div class="row">&nbsp;</div>
+                                <div class="alert alert-danger" id="sonata_add_basket_error" style="display:none;"></div>
+                                {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
                             {% endblock %}
 
                         {% endif %}
-                    {% endblock %}
 
-                    {% block product_delivery %}
-                        <div>
-                            Block 'product_delivery' to override
-                        </div>
-                    {% endblock %}
-
-                    {% if product.isSalable %}
-
-                        {% block product_basket %}
-                            <div class="row">&nbsp;</div>
-                            <div class="alert alert-danger" id="sonata_add_basket_error" style="display:none;"></div>
-                            {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
+                        {% block product_properties %}
+                            {# We advise using bootstrap 3 list-groups: see http://getbootstrap.com/components/#panels #}
                         {% endblock %}
 
-                    {% endif %}
+                    </div>
+                {% endblock %}
 
-                    {% block product_properties %}
-                        {# We advise using bootstrap 3 list-groups: see http://getbootstrap.com/components/#panels #}
-                    {% endblock %}
-
-                </div>
-            {% endblock %}
-
+            </div>
+            <!-- End right product display -->
         </div>
-        <!-- End right product display -->
-
+        <!-- End column line to encapsulate sonata_template_box and product details / right blocks -->
     </div>
     <!-- End product display -->
 {% endblock %}
@@ -111,7 +113,7 @@ file that was distributed with this source code.
 
 {% block product_cross %}
     <!-- Cross selling -->
-    <div class="row">
+    <div>
         {% block product_cross_selling %}
             {% include "SonataProductBundle:Product:view_similar.html.twig" %}
         {% endblock %}
