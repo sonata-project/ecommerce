@@ -90,3 +90,4 @@ Some Twig helpers are available for your templates.
   - ``sonata_product_cheapest_variation`` returns cheapest variation, based on its price.
   - ``sonata_product_cheapest_variation_price`` returns the price of the cheapest variation.
   - ``sonata_product_price`` calculates the price of a ``Product``.
+  - ``sonata_product_stock`` gets the available stock of a ``Product``.
