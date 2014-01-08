@@ -48,6 +48,7 @@ class ProductExtension extends \Twig_Extension
             new \Twig_SimpleFunction('sonata_product_cheapest_variation',       array($this, 'getCheapestEnabledVariation')),
             new \Twig_SimpleFunction('sonata_product_cheapest_variation_price', array($this, 'getCheapestEnabledVariationPrice')),
             new \Twig_SimpleFunction('sonata_product_price',                    array($this, 'getProductPrice')),
+            new \Twig_SimpleFunction('sonata_product_stock',                    array($this, 'getProductStock')),
         );
     }
 
@@ -126,6 +127,18 @@ class ProductExtension extends \Twig_Extension
     public function getProductPrice(ProductInterface $product, CurrencyInterface $currency)
     {
         return $this->productPool->getProvider($product)->calculatePrice($product, $currency);
+    }
+
+    /**
+     * Return the available stock of the product.
+     *
+     * @param ProductInterface $product  A product instance
+     *
+     * @return int
+     */
+    public function getProductStock(ProductInterface $product)
+    {
+        return $this->productPool->getProvider($product)->getStockAvailable($product);
     }
 
     /**
