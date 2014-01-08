@@ -54,7 +54,7 @@ class AddressExtension extends \Twig_Extension
      * Gets the HTML of an address
      *
      * @param \Twig_Environment $environment
-     * @param mixed             $address Instance of AddresInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionnally name, address2, address3)
+     * @param mixed             $address Instance of AddressInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionnally name, address2, address3)
      * @param bool              $showName
      * @param bool              $showEdit
      */
