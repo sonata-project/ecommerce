@@ -4,7 +4,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sonata\Component\Customer\CustomerInterface">
+    <class name="Sonata\CustomerBundle\Entity\Customer">
         <getter property="firstname">
             <constraint name="NotNull" />
         </getter>
@@ -26,7 +26,7 @@
         </getter>
     </class>
 
-    <class name="Sonata\Component\Customer\AddressInterface">
+    <class name="Sonata\CustomerBundle\Entity\Address">
         <getter property="name">
             <constraint name="NotNull" />
         </getter>

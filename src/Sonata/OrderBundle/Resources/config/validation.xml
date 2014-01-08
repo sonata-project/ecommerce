@@ -4,7 +4,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sonata\Component\Order\OrderInterface">
+    <class name="Sonata\OrderBundle\Entity\BaseOrder">
         <getter property="totalInc">
             <constraint name="NotNull" />
         </getter>
@@ -84,7 +84,7 @@
         </getter>
     </class>
 
-    <class name="Sonata\Component\Order\OrderElementInterface">
+    <class name="Sonata\OrderBundle\Entity\BaseOrderElement">
         <getter property="productType">
             <constraint name="NotNull" />
         </getter>
