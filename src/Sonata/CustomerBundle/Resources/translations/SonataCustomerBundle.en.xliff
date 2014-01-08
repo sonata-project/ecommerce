@@ -137,6 +137,10 @@
                 <source>sonata_customer_address_useselected</source>
                 <target>Use selected address</target>
             </trans-unit>
+            <trans-unit id="sonata_customer_address_edit">
+                <source>sonata_customer_address_edit</source>
+                <target>Edit</target>
+            </trans-unit>
             <trans-unit id="sonata_customer_address_firstname">
                 <source>sonata_customer_address_firstname</source>
                 <target>Firstname</target>

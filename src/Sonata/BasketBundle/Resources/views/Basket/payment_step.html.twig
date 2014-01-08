@@ -23,7 +23,7 @@ file that was distributed with this source code.
                     </div>
                 </div>
                 <div class="panel-body">
-                    {{ basket.billingAddress.getFullAddress("<br />")|raw }}
+                    {{ sonata_address_render(basket.billingAddress) }}
                 </div>
             </div>
         </div>

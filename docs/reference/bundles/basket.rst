@@ -17,7 +17,7 @@ Several actions are provided by the controller:
 * ``update``: Validates the submitted update basket form
 * ``reset``: Empties the basket
 * ``addProduct``: As the name says, handles the add product to basket form submission
-* ``deliveryAddressStep``: (step 2) renders the delivery address form and handles its submission
+* ``deliveryAddressStep``: (step 2) renders the delivery address form and handles its submission (the user needs to be authenticated)
 * ``deliveryStep``: (step 3) renders the delivery method (shipping) selection form and handles its submission
 * ``paymentStep``: (step 4) renders the payment method selection form and handles its submission
 * ``finalReviewStep``: (step 5) renders the basket status before payment, terms & conditions acceptance form and handles its submission
