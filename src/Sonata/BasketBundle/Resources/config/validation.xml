@@ -5,20 +5,6 @@
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sonata\Component\Basket\Basket">
-        <constraint name="Sonata\Component\Form\Basket">
-            <option name="groups" >
-                <value>elements</value>
-            </option>
-        </constraint>
-    </class>
-
-    <class name="Sonata\Component\Basket\BasketInterface">
-        <!--<constraint name="Sonata\Component\Form\Basket">-->
-            <!--<option name="groups" >-->
-                <!--<value>elements</value>-->
-            <!--</option>-->
-        <!--</constraint>-->
-
         <getter property="deliveryMethod">
            <constraint name="NotNull" >
                <option name="groups" >
@@ -53,7 +39,7 @@
         </getter>
     </class>
 
-    <class name="Sonata\Component\Customer\AddressInterface">
+    <class name="Sonata\CustomerBundle\Entity\BaseAddress">
         <getter property="firstname">
             <constraint name="NotNull">
                 <option name="groups">
