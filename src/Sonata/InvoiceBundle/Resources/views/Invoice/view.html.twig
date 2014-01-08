@@ -33,7 +33,7 @@ file that was distributed with this source code.
                     </div>
                 </div>
                 <div class="panel-body">
-                    {{ invoice.getFullBilling('<br/>')|raw }}
+                    {{ sonata_address_render(invoice.billingAsArray) }}
                 </div>
             </div>
         </div>

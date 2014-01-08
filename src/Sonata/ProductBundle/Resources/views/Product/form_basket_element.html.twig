@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 
-<tr{% if formView.quantity.vars.errors|length > 0 %} class="error unavailable"{% endif %}>
+<tr{% if formView.quantity.vars.errors|length > 0 %} class="danger unavailable"{% endif %}>
     {% if formView.vars.errors|length > 0 %} {# global error the product is not active anymore #}
         <td colspan="4">{% block product_error %}{{ "sonata.basket.message_product_not_available"|trans({}, 'SonataProductBundle')}}{% endblock %}</td>
     {% else %}
@@ -19,7 +19,7 @@ file that was distributed with this source code.
                 <strong><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></strong>
             {% endblock %}
             {% if formView.quantity.vars.errors|length > 0 %}
-                <span>{{ form_errors(formView.quantity) }}</span>
+                <span class="has-error">{{ form_errors(formView.quantity) }}</span>
             {% endif %}
             {% block product_description %}
                 <br />
@@ -33,7 +33,9 @@ file that was distributed with this source code.
         </td>
         <td>
             {% block product_quantity %}
-                {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}}) }}
+                <div{% if formView.quantity.vars.errors|length > 0 %} class="has-error"{% endif %}>
+                    {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}, 'horizontal_input_wrapper_class': 'col-lg-12'}) }}
+                </div>
             {% endblock %}
         </td>
         <td class="number">
@@ -49,7 +51,7 @@ file that was distributed with this source code.
     {% endif %}
     <td>
         {% block product_delete %}
-            {{ form_widget(formView.delete) }}
+            {{ form_widget(formView.delete, {'label_render': false}) }}
         {% endblock %}
     </td>
 </tr>

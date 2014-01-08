@@ -53,13 +53,13 @@ class AddressType extends AbstractType
                     'choices'  => $addresses,
                     'preferred_choices' => array($defaultAddress),
                     'class'    => $this->addressClass,
-                    'property' => 'fullAddressHtml',
+                    'property' => 'addressArrayForRender',
                     'expanded' => true,
                     'multiple' => false,
                     'mapped'   => false,
                 ))
                 ->add('useSelected', 'submit', array(
-                        'attr'               => array(
+                        'attr' => array(
                             'class' => 'btn btn-primary',
                             'style' => 'margin-bottom:20px;'
                         ),

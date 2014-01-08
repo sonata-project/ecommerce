@@ -143,18 +143,23 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     public function getFullBilling($sep = ", ")
     {
-        return BaseAddress::formatAddress(
-            array(
-                'firstname'    => $this->getCustomer()->getFirstname(),
-                'lastname'     => $this->getCustomer()->getLastname(),
-                'address1'     => $this->getAddress1(),
-                'address2'     => $this->getAddress2(),
-                'address3'     => $this->getAddress3(),
-                'postcode'     => $this->getPostcode(),
-                'city'         => $this->getCity(),
-                'country_code' => $this->getCountry()
-            ),
-            $sep
+        return BaseAddress::formatAddress($this->getBillingAsArray(), $sep);
+    }
+
+    /**
+     * @return array
+     */
+    public function getBillingAsArray()
+    {
+        return array(
+            'firstname'    => $this->getCustomer()->getFirstname(),
+            'lastname'     => $this->getCustomer()->getLastname(),
+            'address1'     => $this->getAddress1(),
+            'address2'     => $this->getAddress2(),
+            'address3'     => $this->getAddress3(),
+            'postcode'     => $this->getPostcode(),
+            'city'         => $this->getCity(),
+            'country_code' => $this->getCountry()
         );
     }
 

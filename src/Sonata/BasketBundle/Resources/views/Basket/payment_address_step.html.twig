@@ -33,14 +33,14 @@ file that was distributed with this source code.
                             <div class="radio">
                                 <label for="{{ address.vars.id }}">
                                     {{ form_widget(address, {'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys))}) }}
-                                    {{ address.vars.label|raw }}
+                                    {{ sonata_address_render(address.vars.label, true, true) }}
                                 </label>
                             </div>
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="panel-body">
-                    {{ form_widget(form.useSelected) }}
+                    {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn btn-primary'}}) }}
                 </div>
             </div>
         </div>

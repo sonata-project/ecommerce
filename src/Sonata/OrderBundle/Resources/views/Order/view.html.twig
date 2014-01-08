@@ -96,7 +96,7 @@ file that was distributed with this source code.
                         </div>
                     </div>
                     <div class="panel-body">
-                        {{ order.getFullDelivery('<br/>')|raw }}
+                        {{ sonata_address_render(order.deliveryAsArray) }}
                     </div>
                 </div>
             {% endblock %}
@@ -110,7 +110,7 @@ file that was distributed with this source code.
                         </div>
                     </div>
                     <div class="panel-body">
-                        {{ order.getFullBilling('<br/>')|raw }}
+                        {{ sonata_address_render(order.billingAsArray) }}
                     </div>
                 </div>
             {% endblock %}

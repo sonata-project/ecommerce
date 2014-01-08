@@ -4,7 +4,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sonata\Component\Payment\TransactionInterface">
+    <class name="Sonata\PaymentBundle\Entity\BaseTransaction">
         <getter property="transactionId">
             <constraint name="NotNull" />
         </getter>

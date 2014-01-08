@@ -229,16 +229,21 @@ abstract class BaseOrder implements OrderInterface
      */
     public function getFullDelivery($sep = ", ")
     {
-        return BaseAddress::formatAddress(
-            array(
-                'firstname'    => $this->getShippingName(),
-                'lastname'     => "",
-                'address1'     => $this->getShippingAddress1(),
-                'postcode'     => $this->getShippingPostcode(),
-                'city'         => $this->getShippingCity(),
-                'country_code' => $this->getShippingCountryCode()
-            ),
-            $sep
+        return BaseAddress::formatAddress($this->getDeliveryAsArray(), $sep);
+    }
+
+    /**
+     * @return array
+     */
+    public function getDeliveryAsArray()
+    {
+        return array(
+            'firstname'    => $this->getShippingName(),
+            'lastname'     => "",
+            'address1'     => $this->getShippingAddress1(),
+            'postcode'     => $this->getShippingPostcode(),
+            'city'         => $this->getShippingCity(),
+            'country_code' => $this->getShippingCountryCode()
         );
     }
 
@@ -251,16 +256,18 @@ abstract class BaseOrder implements OrderInterface
      */
     public function getFullBilling($sep = ", ")
     {
-        return BaseAddress::formatAddress(
-            array(
-                'firstname'    => $this->getBillingName(),
-                'lastname'     => "",
-                'address1'     => $this->getBillingAddress1(),
-                'postcode'     => $this->getBillingPostcode(),
-                'city'         => $this->getBillingCity(),
-                'country_code' => $this->getBillingCountryCode()
-            ),
-            $sep
+        return BaseAddress::formatAddress($this->getBillingAsArray(),$sep);
+    }
+
+    public function getBillingAsArray()
+    {
+        return array(
+            'firstname'    => $this->getBillingName(),
+            'lastname'     => "",
+            'address1'     => $this->getBillingAddress1(),
+            'postcode'     => $this->getBillingPostcode(),
+            'city'         => $this->getBillingCity(),
+            'country_code' => $this->getBillingCountryCode()
         );
     }
 
