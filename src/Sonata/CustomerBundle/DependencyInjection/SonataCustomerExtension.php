@@ -43,6 +43,7 @@ class SonataCustomerExtension extends Extension
         $loader->load('orm.xml');
         $loader->load('admin.xml');
         $loader->load('form.xml');
+        $loader->load('twig.xml');
 
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);

@@ -445,15 +445,25 @@ abstract class BaseAddress implements AddressInterface
      */
     public function getFullAddress($sep = ", ")
     {
-        return self::formatAddress(
-            array(
-                'firstname'    => $this->getFirstName(),
-                'lastname'     => $this->getLastname(),
-                'address1'     => $this->getAddress1(),
-                'postcode'     => $this->getPostcode(),
-                'city'         => $this->getCity(),
-                'country_code' => $this->getCountryCode()
-            ), $sep
+        return self::formatAddress($this->getAddressArrayForRender(), $sep);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAddressArrayForRender()
+    {
+        return array(
+            'id'           => $this->getId(),
+            'name'         => $this->getName(),
+            'firstname'    => $this->getFirstName(),
+            'lastname'     => $this->getLastname(),
+            'address1'     => $this->getAddress1(),
+            'address2'     => $this->getAddress2(),
+            'address3'     => $this->getAddress3(),
+            'postcode'     => $this->getPostcode(),
+            'city'         => $this->getCity(),
+            'country_code' => $this->getCountryCode()
         );
     }
 

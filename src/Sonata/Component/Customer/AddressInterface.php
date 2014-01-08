@@ -98,4 +98,11 @@ interface AddressInterface
      * @return int Address' type
      */
     public function getType();
+
+    /**
+     * Returns the HTML string representation of the address
+     *
+     * @return string
+     */
+    public function getFullAddressHtml();
 }
