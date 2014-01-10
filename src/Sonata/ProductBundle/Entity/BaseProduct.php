@@ -41,6 +41,11 @@ abstract class BaseProduct implements ProductInterface
     protected $name;
 
     /**
+     * @var boolean
+     */
+    protected $priceIncVat;
+
+    /**
      * @var string
      */
     protected $description;
@@ -730,6 +735,22 @@ abstract class BaseProduct implements ProductInterface
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
+    }
+
+    /**
+     * @param mixed $priceIncVat
+     */
+    public function setPriceIncVat($priceIncVat)
+    {
+        $this->priceIncVat = $priceIncVat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriceIncVat()
+    {
+        return $this->priceIncVat;
     }
 
     /**
