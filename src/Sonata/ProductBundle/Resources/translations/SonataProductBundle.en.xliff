@@ -355,6 +355,15 @@
                 <source>list.label_is_variation</source>
                 <target>Is Variation?</target>
             </trans-unit>
+            <trans-unit id="form.label_price_inc_vat">
+                <source>form.label_price_inc_vat</source>
+                <target>Price inc. Vat</target>
+            </trans-unit>
+            <trans-unit id="show.label_price_inc_vat">
+                <source>show.label_price_inc_vat</source>
+                <target>Price inc. Vat</target>
+            </trans-unit>
         </body>
+
     </file>
 </xliff>

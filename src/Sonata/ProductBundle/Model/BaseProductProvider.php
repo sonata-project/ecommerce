@@ -346,6 +346,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $formMapper
             ->add('price', 'number')
+            ->add('priceIncVat')
             ->add('vat',   'number')
             ->add('stock', 'integer')
         ;
