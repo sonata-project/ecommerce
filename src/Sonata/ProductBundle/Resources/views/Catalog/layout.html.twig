@@ -11,7 +11,7 @@ file that was distributed with this source code.
 
 {% sonata_template_box 'This is the catalog template. Feel free to override it.' %}
 
-{% block breadcrumb %}
+{% block sonata_page_breadcrumb %}
     <div class="row-fluid clearfix">
         {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'category': category, 'current_uri': app.request.requestUri }) }}
     </div>

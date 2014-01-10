@@ -12,10 +12,7 @@
 namespace Sonata\ProductBundle\Block;
 
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\SeoBundle\Block\BaseBreadcrumbMenuBlockService;
-use Symfony\Component\HttpFoundation\Response;
-use Sonata\ClassificationBundle\Model\CategoryInterface;
-use Sonata\Component\Product\ProductInterface;
+use Sonata\SeoBundle\Block\Breadcrumb\BaseBreadcrumbMenuBlockService;
 
 /**
  * BlockService for product catalog breadcrumb.
@@ -24,16 +21,6 @@ use Sonata\Component\Product\ProductInterface;
  */
 class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
 {
-    /**
-     * @var CategoryInterface
-     */
-    protected $category;
-
-    /**
-     * @var ProductInterface
-     */
-    protected $product;
-
     /**
      * {@inheritdoc}
      */
@@ -45,24 +32,66 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
     /**
      * {@inheritdoc}
      */
-    protected function getMenu()
+    protected function getMenu(BlockContextInterface $blockContext)
     {
-        $parameters = array(
-            'category' => $this->category,
-            'product'  => $this->product,
-        );
+        $menu = $this->getRootMenu($blockContext);
 
-        return $this->menuBuilder->getBreadcrumbMenu($parameters);
-    }
+        $menu->addChild('sonata_product_catalog_breadcrumb', array(
+            'route'  => 'sonata_catalog_index',
+            'extras' => array('translation_domain' => 'SonataProductBundle'),
+        ));
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
-    {
-        $this->category = $blockContext->getBlock()->getSetting('category');
-        $this->product  = $blockContext->getBlock()->getSetting('product');
+        $categories = array();
+        $product    = null;
 
-        return parent::execute($blockContext, $response);
+        if ($category = $blockContext->getBlock()->getSetting('category')) {
+            $sorted = array($category);
+
+            while ($c = $category->getParent()) {
+                $sorted[] = $c;
+                $category = $c;
+            }
+
+            $categories = array_reverse($sorted, true);
+        }
+
+        if ($product = $blockContext->getBlock()->getSetting('product')) {
+            $category = $product->getMainCategory();
+
+            $sorted = array($category);
+
+            while ($c = $category->getParent()) {
+                $sorted[] = $c;
+                $category = $c;
+            }
+
+            $category = null;
+
+            $categories = array_reverse($sorted, true);
+        }
+
+        if (count($categories) > 0) {
+            foreach ($categories as $category) {
+                $menu->addChild($category->getName(), array(
+                    'route'           => 'sonata_catalog_category',
+                    'routeParameters' => array(
+                        'category_id'   => $category->getId(),
+                        'category_slug' => $category->getSlug(),
+                    ),
+                ));
+            }
+        }
+
+        if ($product) {
+            $menu->addChild($product->getName(), array(
+                'route'           => 'sonata_product_view',
+                'routeParameters' => array(
+                    'productId' => $product->getId(),
+                    'slug'      => $product->getSlug(),
+                ),
+            ));
+        }
+
+        return $menu;
     }
 }

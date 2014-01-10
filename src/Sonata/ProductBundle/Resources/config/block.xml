@@ -13,7 +13,7 @@
             <argument>sonata.product.block.breadcrumb</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="knp_menu.menu_provider" />
-            <argument type="service" id="sonata.product.menu.catalog_breadcrumb_menu_builder" />
+            <argument type="service" id="knp_menu.factory" />
         </service>
 
         <service id="sonata.product.block.recent_products" class="Sonata\ProductBundle\Block\RecentProductsBlockService">
