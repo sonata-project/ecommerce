@@ -839,9 +839,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @return float price of the basket element
      */
-    public function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement)
+    public function basketElementCalculateUnitPrice(BasketInterface $basket, BasketElementInterface $basketElement)
     {
-        return $this->calculatePrice($basketElement->getProduct(), $basket->getCurrency(), $basketElement->getQuantity());
+        return $this->calculatePrice($basketElement->getProduct(), $basket->getCurrency(), 1);
     }
 
     /**

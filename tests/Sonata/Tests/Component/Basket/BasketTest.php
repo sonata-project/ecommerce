@@ -80,7 +80,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
 
         $provider->expects($this->any())
-            ->method('basketCalculatePrice')
+            ->method('basketElementCalculateUnitPrice')
             ->will($this->returnValue(15));
 
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
@@ -109,12 +109,16 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
 
         $this->assertEquals(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
+        $this->assertEquals(15, $basketElement->getUnitPrice(), '::getQuantity() - return 2');
+        $this->assertEquals(15, $basketElement->getTotal(), '::getQuantity() - return 2');
         $this->assertEquals(15, $basket->getTotal(), '::getTotal() w/o vat return 15');
         $this->assertEquals(17.94, $basket->getTotal(true), '::getTotal() w/ vat return 17.94');
 
         $basketElement->setQuantity(2);
 
         $this->assertEquals(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
+        $this->assertEquals(15, $basketElement->getUnitPrice(), '::getQuantity() - return 2');
+        $this->assertEquals(30, $basketElement->getTotal(), '::getQuantity() - return 2');
         $this->assertEquals(30, $basket->getTotal(), '::getTotal() w/o vat return 30');
         $this->assertEquals(35.88, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
