@@ -10,6 +10,7 @@
 
 namespace Sonata\Component\Transformer;
 
+use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\Pool as ProductPool;
@@ -49,6 +50,9 @@ class OrderTransformer extends BaseTransformer
 
         // We are free to convert !
         foreach ($order->getOrderElements() as $orderElement) {
+            /**
+             * @var $orderElement OrderElementInterface
+             */
             $provider   = $this->productPool->getProvider($orderElement->getProductType());
             $manager    = $this->productPool->getManager($orderElement->getProductType());
 
@@ -59,6 +63,7 @@ class OrderTransformer extends BaseTransformer
             }
 
             $basketElement = $provider->createBasketElement($product, $orderElement->getOptions());
+            $basketElement->setQuantity($orderElement->getQuantity());
 
             $provider->basketAddProduct($basket, $product, $basketElement);
         }

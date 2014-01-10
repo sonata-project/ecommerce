@@ -21,7 +21,7 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
         $provider->expects($this->once())->method('basketAddProduct')->will($this->returnValue(true));
-        $provider->expects($this->once())->method('createBasketElement')->will($this->returnValue(new BasketElement()));
+        $provider->expects($this->once())->method('createBasketElement')->will($this->returnValue($basketElement = new BasketElement()));
 
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
@@ -41,6 +41,7 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
         $orderElement->expects($this->exactly(2))->method('getProductType');
         $orderElement->expects($this->exactly(1))->method('getProductId')->will($this->returnValue(2));
         $orderElement->expects($this->exactly(1))->method('getOptions')->will($this->returnValue(array()));
+        $orderElement->expects($this->exactly(1))->method('getQuantity')->will($this->returnValue(2));
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElement)));
@@ -52,5 +53,7 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
 
         $transformer = new OrderTransformer($pool);
         $transformer->transformIntoBasket($order, $basket);
+
+        $this->assertEquals(2, $basketElement->getQuantity());
     }
 }
