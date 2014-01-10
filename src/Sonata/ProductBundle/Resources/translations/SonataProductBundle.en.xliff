@@ -363,6 +363,10 @@
                 <source>show.label_price_inc_vat</source>
                 <target>Price inc. Vat</target>
             </trans-unit>
+            <trans-unit id="sonata_product_catalog_breadcrumb">
+                <source>sonata_product_catalog_breadcrumb</source>
+                <target>Catalog</target>
+            </trans-unit>
         </body>
 
     </file>
