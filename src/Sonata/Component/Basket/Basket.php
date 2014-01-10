@@ -511,9 +511,9 @@ class Basket implements \Serializable, BasketInterface
             $provider = $this->getProductPool()->getProvider($product);
 
             // BasketElement prices might depends on other basket elements
-            $price    = $provider->basketCalculatePrice($this, $basketElement);
+            $unitPrice = $provider->basketElementCalculateUnitPrice($this, $basketElement);
 
-            $basketElement->setPrice($price);
+            $basketElement->setPrice($unitPrice);
         }
 
         $this->inBuild = false;

@@ -107,7 +107,7 @@ interface ProductProviderInterface
      *
      * @return float the unit price of the basketElement
      */
-    public function basketCalculatePrice(BasketInterface $basket, BasketElementInterface $basketElement);
+    public function basketElementCalculateUnitPrice(BasketInterface $basket, BasketElementInterface $basketElement);
 
     /**
      * Calculate the product price depending on the currency
