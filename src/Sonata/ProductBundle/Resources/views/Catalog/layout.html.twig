@@ -67,13 +67,15 @@ file that was distributed with this source code.
 
                 {% block products %}{% endblock %}
 
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3 pull-right">
-                            {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+                {% if pager.paginationData.pageCount > 1 %}
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3 pull-right">
+                                {% include 'SonataProductBundle:Catalog:_pager.html.twig' %}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         {% endif %}
 

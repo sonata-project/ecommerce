@@ -425,6 +425,103 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $provider->calculatePrice($product, $currency, 0.32);
     }
 
+    public function testGetVariationsChoices()
+    {
+        $product = new ProductTest();
+        $product->setEnabled(true);
+
+        $variation = new ProductTest();
+        $variation->setEnabled(true);
+        $variation->setName("variation");
+        $variation->setPrice(84);
+
+        $variation2 = clone $variation;
+        $variation2->setName("avariation");
+        $variation2->setPrice(42);
+
+        $provider = $this->createNewProductProvider();
+
+        $this->assertEquals(array(), $provider->getVariationsChoices($product));
+
+        $product->addVariation($variation);
+        $product->addVariation($variation2);
+
+        $provider->setVariationFields(array('price', 'name'));
+
+        $expected = array(
+            'price' => array(
+                1 => 42,
+                0 => 84
+            ),
+            'name' => array(
+                1 => "avariation",
+                0 => "variation"
+            )
+        );
+
+        $this->assertEquals($expected, $provider->getVariationsChoices($product));
+    }
+
+    public function testGetVariatedProperties()
+    {
+        $product = new ProductTest();
+        $product->setEnabled(true);
+
+        $variation = new ProductTest();
+        $variation->setEnabled(true);
+        $variation->setName("variation");
+        $variation->setPrice(84);
+
+        $variation2 = clone $variation;
+        $variation2->setName("avariation");
+        $variation2->setPrice(42);
+
+        $provider = $this->createNewProductProvider();
+
+        $this->assertEquals(array(), $provider->getVariatedProperties($product));
+
+        $product->addVariation($variation);
+        $product->addVariation($variation2);
+
+        $provider->setVariationFields(array('price', 'name'));
+
+        $expected = array(
+            'price' => 84,
+            'name'  => "variation"
+        );
+
+        $this->assertEquals($expected, $provider->getVariatedProperties($variation));
+    }
+
+    public function testGetVariation()
+    {
+        $product = new ProductTest();
+        $product->setEnabled(true);
+
+        $variation = new ProductTest();
+        $variation->setEnabled(true);
+        $variation->setName("variation");
+        $variation->setPrice(84);
+
+        $variation2 = clone $variation;
+        $variation2->setName("avariation");
+        $variation2->setPrice(42);
+
+        $provider = $this->createNewProductProvider();
+
+        $product->addVariation($variation);
+        $product->addVariation($variation2);
+
+        $provider->setVariationFields(array('price', 'name'));
+
+        $expected = array(
+            'price' => 84,
+            'name'  => "variation"
+        );
+
+        $this->assertEquals($variation2, $provider->getVariation($product, array('price' => 42, 'name' => "avariation")));
+    }
+
     /**
      * @return ProductProviderTest
      */
