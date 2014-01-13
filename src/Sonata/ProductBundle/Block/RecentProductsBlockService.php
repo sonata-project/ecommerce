@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
+ * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class RecentProductsBlockService extends BaseBlockService
 {

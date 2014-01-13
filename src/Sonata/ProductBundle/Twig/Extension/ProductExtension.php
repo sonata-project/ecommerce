@@ -17,7 +17,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 
 /**
- * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
+ * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class ProductExtension extends \Twig_Extension
 {
