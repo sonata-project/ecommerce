@@ -20,7 +20,7 @@ use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
  * @package Sonata\Component\Invoice
  *
  * @author Hugo Briand <briand@ekino.com>
- * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
+ * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class InvoiceStatusRenderer implements StatusClassRendererInterface
 {

@@ -17,7 +17,7 @@ use Sonata\SeoBundle\Block\Breadcrumb\BaseBreadcrumbMenuBlockService;
 /**
  * BlockService for product catalog breadcrumb.
  *
- * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
+ * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
 {

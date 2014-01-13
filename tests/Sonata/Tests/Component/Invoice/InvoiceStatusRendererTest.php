@@ -19,7 +19,7 @@ use Sonata\InvoiceBundle\Entity\BaseInvoice;
  * @package Sonata\Tests\Component\Invoice
  *
  * @author Hugo Briand <briand@ekino.com>
- * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
+ * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class InvoiceStatusRendererTest extends \PHPUnit_Framework_TestCase
 {
