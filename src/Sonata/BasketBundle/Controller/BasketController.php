@@ -128,18 +128,20 @@ class BasketController extends Controller
             $price = $provider->calculatePrice($product, $currency, $quantity);
 
             if ($basket->hasProduct($product)) {
-                $provider->basketMergeProduct($basket, $product, $basketElement);
+                $basketElement = $provider->basketMergeProduct($basket, $product, $basketElement);
             } else {
-                $provider->basketAddProduct($basket, $product, $basketElement);
+                $basketElement = $provider->basketAddProduct($basket, $product, $basketElement);
             }
 
             if ($request->isXmlHttpRequest() && $provider->getOption('product_add_modal')) {
                 return $this->render('SonataBasketBundle:Basket:add_product_popin.html.twig', array(
-                    'product'  => $product,
-                    'price'    => $price,
-                    'currency' => $currency,
-                    'quantity' => $quantity,
-                    'provider' => $provider,
+                    'basketElement' => $basketElement,
+                    'locale'        => $basket->getLocale(),
+                    'product'       => $product,
+                    'price'         => $price,
+                    'currency'      => $currency,
+                    'quantity'      => $quantity,
+                    'provider'      => $provider,
                 ));
             } else {
                 return new RedirectResponse($this->generateUrl('sonata_basket_index'));

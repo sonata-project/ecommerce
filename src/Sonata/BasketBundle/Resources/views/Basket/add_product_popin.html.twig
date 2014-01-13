@@ -30,11 +30,14 @@
                         {% endblock %}
 
                         <dl class="dl-horizontal" style="margin-bottom: 0;">
+                            <dt style="width: auto;">{{ 'header_basket_unit_price'|trans([], 'SonataBasketBundle') }}</dt>
+                            <dd style="margin-left: 110px;">{{ basketElement.getUnitPrice(true)|number_format_currency(currency.label, {}, {}, locale) }}</dd>
+
                             <dt style="width: auto;">{{ 'header_basket_quantity'|trans([], 'SonataBasketBundle') }}</dt>
                             <dd style="margin-left: 110px;">{{ quantity }}</dd>
 
-                            <dt style="width: auto;">{{ 'header_basket_price'|trans([], 'SonataBasketBundle') }}</dt>
-                            <dd style="margin-left: 110px;">{{ price|number_format_currency(currency) }}</dd>
+                            <dt style="width: auto;">{{ 'sonata_basket_total_price'|trans([], 'SonataBasketBundle') }}</dt>
+                            <dd style="margin-left: 110px;">{{ price|number_format_currency(currency.label, {}, {}, locale) }}</dd>
                         </dl>
                     </div>
                 </div>
