@@ -10,7 +10,7 @@
  */
 
 namespace Sonata\Component\Currency;
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

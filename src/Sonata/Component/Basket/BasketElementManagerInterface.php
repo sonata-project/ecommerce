@@ -2,7 +2,7 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface BasketElementManagerInterface extends ManagerInterface
 {

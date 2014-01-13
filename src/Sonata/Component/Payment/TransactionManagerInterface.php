@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface TransactionManagerInterface extends ManagerInterface
 {

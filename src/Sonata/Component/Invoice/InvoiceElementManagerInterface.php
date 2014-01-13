@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Invoice;
 
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface InvoiceElementManagerInterface extends ManagerInterface
 {

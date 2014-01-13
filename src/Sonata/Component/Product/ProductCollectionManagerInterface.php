@@ -12,7 +12,7 @@
 namespace Sonata\Component\Product;
 
 use Sonata\ClassificationBundle\Model\CollectionInterface;
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface ProductCollectionManagerInterface extends ManagerInterface
 {
