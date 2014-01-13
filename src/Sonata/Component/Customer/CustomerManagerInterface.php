@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Customer;
 
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface CustomerManagerInterface extends ManagerInterface
 {

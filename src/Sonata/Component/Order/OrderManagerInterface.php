@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Order;
 
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 use Sonata\UserBundle\Model\UserInterface;
 
 interface OrderManagerInterface extends ManagerInterface

@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Product;
 
-use Sonata\CoreBundle\Entity\ManagerInterface;
+use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface ProductManagerInterface extends ManagerInterface
 {
