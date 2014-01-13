@@ -14,7 +14,7 @@ namespace Sonata\ProductBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @author Sylvain Deloux <sylvain.deloux@fullsix.com>
+ * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class BaseProductRepository extends EntityRepository
 {
