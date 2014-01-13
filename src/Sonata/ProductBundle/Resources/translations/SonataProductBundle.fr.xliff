@@ -364,6 +364,10 @@
                 <source>show.label_price_inc_vat</source>
                 <target>Prix avec TVA</target>
             </trans-unit>
+            <trans-unit id="sonata_product_catalog_breadcrumb">
+                <source>sonata_product_catalog_breadcrumb</source>
+                <target>Catalogue</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

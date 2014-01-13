@@ -12,6 +12,7 @@
 namespace Sonata\ProductBundle\Block;
 
 use Knp\Menu\Provider\MenuProviderInterface;
+use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\ProductBundle\Menu\ProductMenuBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -81,9 +82,11 @@ class FiltersMenuBlockService extends MenuBlockService
     /**
      * {@inheritdoc}
      */
-    protected function getMenu(array $settings)
+    protected function getMenu(BlockContextInterface $blockContext)
     {
-        $menu = parent::getMenu($settings);
+        $settings = $blockContext->getSettings();
+
+        $menu = parent::getMenu($blockContext);
 
         if (null === $menu || "" === $menu) {
             $menu = $this->menuBuilder->createFiltersMenu($settings['product_provider'], array('childrenAttributes' => array('class' => $settings['menu_class'])), $settings['current_uri']);

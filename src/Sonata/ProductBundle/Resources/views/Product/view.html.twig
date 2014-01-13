@@ -27,6 +27,12 @@ file that was distributed with this source code.
     </script>
 {% endblock %}
 
+{% block breadcrumb %}
+    <div class="row-fluid clearfix">
+        {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'product': product, 'current_uri': app.request.requestUri }) }}
+    </div>
+{% endblock %}
+
 {% block product %}
     <!-- Begin product display -->
     <div class="row" itemscope itemtype="http://schema.org/Product">
