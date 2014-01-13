@@ -18,6 +18,7 @@ use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ExecutionContext;
 
 /**
@@ -59,6 +60,21 @@ abstract class BaseProduct implements ProductInterface
      * @var string
      */
     protected $descriptionFormatter;
+
+    /**
+     * @var string
+     */
+    protected $shortDescription;
+
+    /**
+     * @var string
+     */
+    protected $rawShortDescription;
+
+    /**
+     * @var string
+     */
+    protected $shortDescriptionFormatter;
 
     /**
      * @var float
@@ -303,6 +319,54 @@ abstract class BaseProduct implements ProductInterface
     public function getDescriptionFormatter()
     {
         return $this->descriptionFormatter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRawShortDescription($rawShortDescription)
+    {
+        $this->rawShortDescription = $rawShortDescription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRawShortDescription()
+    {
+        return $this->rawShortDescription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShortDescriptionFormatter($shortDescriptionFormatter)
+    {
+        $this->shortDescriptionFormatter = $shortDescriptionFormatter;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShortDescriptionFormatter()
+    {
+        return $this->shortDescriptionFormatter;
     }
 
     /**
@@ -791,7 +855,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function toArray()
     {
-        return array(
+        $baseArrayRep = array(
             'sku'                  => $this->sku,
             'slug'                 => $this->slug,
             'name'                 => $this->name,
@@ -804,6 +868,8 @@ abstract class BaseProduct implements ProductInterface
             'enabled'              => $this->enabled,
             'options'              => $this->options,
         );
+
+        return $baseArrayRep;
     }
 
     /**
@@ -811,48 +877,9 @@ abstract class BaseProduct implements ProductInterface
      */
     public function fromArray($array)
     {
-        if (array_key_exists('sku', $array)) {
-            $this->sku = $array['sku'];
-        }
-
-        if (array_key_exists('slug', $array)) {
-            $this->slug = $array['slug'];
-        }
-
-        if (array_key_exists('name', $array)) {
-            $this->name = $array['name'];
-        }
-
-        if (array_key_exists('description', $array)) {
-            $this->description = $array['description'];
-        }
-
-        if (array_key_exists('rawDescription', $array)) {
-            $this->rawDescription = $array['rawDescription'];
-        }
-
-        if (array_key_exists('descriptionFormatter', $array)) {
-            $this->descriptionFormatter = $array['descriptionFormatter'];
-        }
-
-        if (array_key_exists('price', $array)) {
-            $this->price = $array['price'];
-        }
-
-        if (array_key_exists('vat', $array)) {
-            $this->vat = $array['vat'];
-        }
-
-        if (array_key_exists('stock', $array)) {
-            $this->stock = $array['stock'];
-        }
-
-        if (array_key_exists('enabled', $array)) {
-            $this->enabled = $array['enabled'];
-        }
-
-        if (array_key_exists('options', $array)) {
-            $this->options = $array['options'];
+        $accessor = PropertyAccess::createPropertyAccessor();
+        foreach ($array as $key => $value) {
+            $accessor->setValue($this, $key, $value);
         }
     }
 

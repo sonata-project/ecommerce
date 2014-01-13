@@ -11,6 +11,7 @@
 
 namespace Sonata\ProductBundle\Controller;
 
+use Sonata\Component\Form\Type\VariationChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -19,6 +20,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ProductController extends Controller
 {
@@ -42,8 +44,12 @@ class ProductController extends Controller
         $productPool = $this->get('sonata.product.pool');
         $provider = $productPool->getProvider($product);
 
-        if ($provider->hasVariations($product) && !$provider->hasEnabledVariations($product)) {
-            throw new NotFoundHttpException('Product has no activated variation');
+        if ($provider->hasVariations($product)) {
+            if (!$provider->hasEnabledVariations($product)) {
+                throw new NotFoundHttpException('Product has no activated variation');
+            }
+            // We display the cheapest variation
+            $product = $provider->getCheapestEnabledVariation($product);
         }
 
         $action = sprintf('%s:view', $provider->getBaseControllerName());
@@ -198,6 +204,74 @@ class ProductController extends Controller
                     $action,
                     $response->getContent()
                 ));
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param $productId
+     * @param $slug
+     *
+     * @throws NotFoundHttpException
+     *
+     * @return Response
+     */
+    public function variationToProductAction($productId, $slug)
+    {
+        $product = is_object($productId) ? $productId : $this->get('sonata.product.set.manager')->findEnabledFromIdAndSlug($productId, $slug);
+
+        if (!$product) {
+            throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
+        }
+
+        if (null !== $product->getParent()) {
+            // We need the master product
+            $product = $product->getParent();
+        }
+
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
+
+        $data = $this->getRequest()->query->get('sonata_product_variation_choices');
+
+        $choices = $provider->getVariationsChoices($product, array_keys($data));
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $currentValues = array();
+
+        foreach ($choices as $field => $values) {
+            $currentValues[$field] = array_search($accessor->getValue($product, $field), $values);
+        }
+
+        $form = $this->createForm('sonata_product_variation_choices', $currentValues, array(
+            'product' => $product,
+            'fields'  => array_keys($data)
+        ));
+
+        $form->handleRequest($this->getRequest());
+
+        $selectedVariation = $form->getData();
+
+        // Retrieving correct values
+        foreach ($selectedVariation as $key => $value) {
+            $selectedVariation[$key] = $choices[$key][$value];
+        }
+
+        $variation = $provider->getVariation($product, $selectedVariation);
+
+        $action = sprintf('%s:variationToProduct', $provider->getBaseControllerName());
+        $response = $this->forward($action, array(
+            'product'   => $product,
+            'variation' => $variation
+        ));
+
+        if ($this->get('kernel')->isDebug() && !($response instanceof JsonResponse)) {
+            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
+                $this->get('sonata.product.pool')->getProductCode($product),
+                $product->getId(),
+                $action,
+                $response->getContent()
+            ));
         }
 
         return $response;

@@ -286,4 +286,32 @@ interface ProductProviderInterface
      * @return mixed
      */
     public function getFilters();
+
+    /**
+     * Gets the possible values for $fields (or variation fields if not set)
+     *
+     * @param ProductInterface $product
+     * @param array            $fields
+     *
+     * @return array
+     */
+    public function getVariationsChoices(ProductInterface $product, array $fields = array());
+
+    /**
+     * Gets the properties values of $product amongst variation fields or $fields if set
+     *
+     * @param ProductInterface $product
+     * @param array            $fields
+     *
+     * @return array
+     */
+    public function getVariatedProperties(ProductInterface $product, array $fields = array());
+
+    /**
+     * Gets the variation matching $choices from master product $product
+     *
+     * @param ProductInterface $product
+     * @param array            $choices
+     */
+    public function getVariation(ProductInterface $product, array $choices = array());
 }

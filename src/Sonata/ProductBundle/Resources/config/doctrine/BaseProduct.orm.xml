@@ -17,6 +17,10 @@
         <field name="rawDescription"       column="raw_description"       type="text"   nullable="true" />
         <field name="descriptionFormatter" column="description_formatter" type="string" nullable="true" />
 
+        <field name="shortDescription"          column="short_description"           type="text"   nullable="true" />
+        <field name="rawShortDescription"       column="raw_short_description"       type="text"   nullable="true" />
+        <field name="shortDescriptionFormatter" column="short_description_formatter" type="string" nullable="true" />
+
         <field name="price"         column="price"          type="decimal"  precision="10" scale="2" nullable="true" />
         <field name="vat"           column="vat"            type="decimal"  precision="10" scale="2" nullable="true" />
         <field name="stock"         column="stock"          type="integer"  nullable="true" />
