@@ -8,10 +8,10 @@
     <mapped-superclass name="Sonata\ProductBundle\Entity\BaseProduct"
                        repository-class="Sonata\ProductBundle\Repository\BaseProductRepository">
 
-        <field name="sku"           column="sku"            type="string"     nullable="true" length="255"/>
-        <field name="slug"          column="slug"           type="string"     nullable="true" length="255"/>
-        <field name="name"          column="name"           type="string"   nullable="false" length="255"/>
-        <field name="priceIncVat"          column="price_inc_vat"           type="boolean" />
+        <field name="sku"               column="sku"            type="string"     nullable="true" length="255"/>
+        <field name="slug"              column="slug"           type="string"     nullable="true" length="255"/>
+        <field name="name"              column="name"           type="string"   nullable="false" length="255"/>
+        <field name="priceIncludingVat" column="price_inc_vat"  type="boolean" />
 
         <field name="description"          column="description"           type="text"   nullable="true" />
         <field name="rawDescription"       column="raw_description"       type="text"   nullable="true" />
@@ -22,7 +22,7 @@
         <field name="shortDescriptionFormatter" column="short_description_formatter" type="string" nullable="true" />
 
         <field name="price"         column="price"          type="decimal"  precision="10" scale="2" nullable="true" />
-        <field name="vat"           column="vat"            type="decimal"  precision="10" scale="2" nullable="true" />
+        <field name="vatRate"       column="vat_rate"       type="decimal"  precision="10" scale="2" nullable="true" />
         <field name="stock"         column="stock"          type="integer"  nullable="true" />
         <field name="enabled"       column="enabled"        type="boolean"  nullable="true" />
 

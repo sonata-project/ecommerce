@@ -11,11 +11,13 @@
 
 namespace Sonata\Component\Basket;
 
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductDefinition;
+use Sonata\Component\Product\PriceComputableInterface;
 
-interface BasketElementInterface
+interface BasketElementInterface extends PriceComputableInterface
 {
     /**
      * the position in the basket stack
@@ -69,40 +71,22 @@ interface BasketElementInterface
     public function setProductId($productId);
 
     /**
-     * Return the VAT amount
-     *
+     * Returns the VAT amount
      *
      * @return $float
      */
     public function getVatAmount();
 
     /**
-     * Return the VAT
-     *
-     *
-     * @return $float
-     */
-    public function getVat();
-
-    /**
-     * Return the price
-     *
-     * if $tva = true, return the price with vat
-     *
-     * @param  boolean $tva
-     * @return float
-     */
-    public function getUnitPrice($tva = false);
-
-    /**
      * Return the total (price * quantity)
      *
-     * if $tva = true, return the price with vat
+     * if $vat = true, return the price with vat
      *
-     * @param  boolean $tva
+     * @param boolean $vat Returns price including VAT?
+     *
      * @return float
      */
-    public function getTotal($tva = false);
+    public function getTotal($vat = false);
 
     /**
      * return the basket element options array
@@ -127,27 +111,6 @@ interface BasketElementInterface
      * @param mixed  $value
      */
     public function setOption($name, $value);
-
-    /**
-     * Define the price
-     *
-     * @param float $price
-     */
-    public function setPrice($price);
-
-    /**
-     * Define the quantity
-     *
-     * @param float $quantity
-     */
-    public function setQuantity($quantity);
-
-    /**
-     * return the quantity
-     *
-     * @return int
-     */
-    public function getQuantity();
 
     /**
      * Check if the basket element is still valid

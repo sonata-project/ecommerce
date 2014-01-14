@@ -40,9 +40,19 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     protected $price;
 
     /**
-     * @var float $vat
+     * @var float $unitPrice
      */
-    protected $vat;
+    protected $unitPrice;
+
+    /**
+     * @var boolean
+     */
+    protected $priceIncludingVat;
+
+    /**
+     * @var float $vatRate
+     */
+    protected $vatRate;
 
     /**
      * @var float $total
@@ -100,9 +110,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set quantity
-     *
-     * @param integer $quantity
+     * {@inheritdoc}
      */
     public function setQuantity($quantity)
     {
@@ -110,9 +118,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get quantity
-     *
-     * @return integer $quantity
+     * {@inheritdoc}
      */
     public function getQuantity()
     {
@@ -120,9 +126,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set price
-     *
-     * @param float $price
+     * {@inheritdoc}
      */
     public function setPrice($price)
     {
@@ -130,33 +134,53 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get price
-     *
-     * @return float $price
+     * {@inheritdoc}
      */
-    public function getPrice()
+    public function getPrice($vat = false)
     {
-        return $this->price;
+        $price = $this->price;
+
+        if (!$vat && true === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        if ($vat && false === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        return $price;
     }
 
     /**
-     * Set vat
-     *
-     * @param float $vat
+     * {@inheritdoc}
      */
-    public function setVat($vat)
+    public function setIsPriceIncludingVat($priceIncludingVat)
     {
-        $this->vat = $vat;
+        $this->priceIncludingVat = $priceIncludingVat;
     }
 
     /**
-     * Get vat
-     *
-     * @return float $vat
+     * {@inheritdoc}
      */
-    public function getVat()
+    public function isPriceIncludingVat()
     {
-        return $this->vat;
+        return $this->priceIncludingVat;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVatRate($vatRate)
+    {
+        $this->vatRate = $vatRate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVatRate()
+    {
+        return $this->vatRate;
     }
 
     /**
@@ -170,17 +194,47 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setUnitPrice($unitPrice)
+    {
+        $this->unitPrice = $unitPrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUnitPrice($vat = false)
+    {
+        $price = $this->unitPrice;
+
+        if (!$vat && true === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        if ($vat && false === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        return $price;
+    }
+
+    /**
      * Get total
+     *
+     * @param boolean $vat
      *
      * @return float $total
      */
     public function getTotal($vat = true)
     {
-        if ($vat) {
-            return $this->total * (1 + $this->getVat()/100);
+        $total = $this->total;
+
+        if (!$vat) {
+            $total = bcmul($total, bcsub(1, bcdiv($this->getVatRate(), 100)));
         }
 
-        return $this->total;
+        return $total;
     }
 
     /**

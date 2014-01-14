@@ -2,6 +2,9 @@
 
 use Sonata\Component\Transformer\InvoiceTransformer;
 use Sonata\Component\Currency\Currency;
+
+use Sonata\Component\Delivery\Pool as DeliveryPool;
+
 /*
  * This file is part of the Sonata package.
 *
@@ -22,7 +25,7 @@ class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
         $orderElement->expects($this->once())->method('getDesignation');
         $orderElement->expects($this->once())->method('getPrice')->will($this->returnValue(42));
         $orderElement->expects($this->once())->method('getQuantity')->will($this->returnValue(3));
-        $orderElement->expects($this->once())->method('getVat');
+        $orderElement->expects($this->once())->method('getVatRate');
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElement)));
@@ -54,7 +57,9 @@ class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
         $invoiceElementManager = $this->getMock('Sonata\Component\Invoice\InvoiceElementManagerInterface');
         $invoiceElementManager->expects($this->once())->method('create')->will($this->returnValue($invoiceElement));
 
-        $invoiceTransformer = new InvoiceTransformer($invoiceElementManager);
+        $deliveryPool = new DeliveryPool();
+
+        $invoiceTransformer = new InvoiceTransformer($invoiceElementManager, $deliveryPool);
         $invoiceTransformer->transformFromOrder($order, $invoice);
     }
 }

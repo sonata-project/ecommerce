@@ -200,8 +200,8 @@ interface BasketInterface
      * if $recurrent_only = true, return price for recurrent product only
      * if $recurrent_only = false, return price for non recurrent product only
      *
-     * @param boolean $vat
-     * @param boolean $recurrentOnly
+     * @param boolean $vat           Returns price including VAT?
+     * @param boolean $recurrentOnly Is recurrent only?
      *
      * @return float
      */

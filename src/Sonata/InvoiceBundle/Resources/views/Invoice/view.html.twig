@@ -84,7 +84,6 @@ file that was distributed with this source code.
                         <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.label{% endtrans %}</th>
                         <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.unit_price{% endtrans %}</th>
                         <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.quantity{% endtrans %}</th>
-                        <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_ex_vat{% endtrans %}</th>
                         <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.elements.total_inc_vat{% endtrans %}</th>
                     </tr>
                     {% endblock %}
@@ -93,28 +92,32 @@ file that was distributed with this source code.
                         {% block sonata_invoice_element_row %}
                         <tr>
                             <td>{{ element.designation }}</td>
-                            <td class="number">{{ element.price|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
+                            <td class="number">{{ element.unitPrice(true)|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
                             <td class="number">{{ element.quantity }}</td>
-                            <td class="number">{{ element.total(false)|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
-                            <td class="number">{{ element.total|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
+                            <td class="number">{{ element.total(true)|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
                         </tr>
                         {% endblock %}
                     {% endfor %}
 
                     {% block sonata_invoice_elements_sumup %}
                     <tr>
-                        <td colspan="3" rowspan="3">&nbsp;</td>
-                        <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_exc_vat{% endtrans %}</th>
+                        <td colspan="2" rowspan="4">&nbsp;</td>
+                        <th style="text-align: right">{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
+                        <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, invoice.locale) }}</td>
+                    </tr>
+
+                    <tr>
+                        <th style="text-align: right">{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_exc_vat{% endtrans %}</th>
                         <td class="number">{{ invoice.totalExcl|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
                     </tr>
 
                     <tr>
-                        <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.vat{% endtrans %}</th>
+                        <th style="text-align: right">{% trans from 'SonataInvoiceBundle' %}sonata.invoice.vat{% endtrans %}</th>
                         <td class="number">{{ (invoice.totalInc - invoice.totalExcl)|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
                     </tr>
 
                     <tr>
-                        <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_inc_vat{% endtrans %}</th>
+                        <th style="text-align: right">{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_inc_vat{% endtrans %}</th>
                         <td class="number">{{ invoice.totalInc|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
                     </tr>
                     {% endblock %}

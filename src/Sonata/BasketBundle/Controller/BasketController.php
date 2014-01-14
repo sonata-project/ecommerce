@@ -125,7 +125,7 @@ class BasketController extends Controller
 
             $quantity = $basketElement->getQuantity();
             $currency = $this->get('sonata.basket')->getCurrency();
-            $price = $provider->calculatePrice($product, $currency, $quantity);
+            $price = $provider->calculatePrice($product, $currency, false, $quantity);
 
             if ($basket->hasProduct($product)) {
                 $basketElement = $provider->basketMergeProduct($basket, $product, $basketElement);

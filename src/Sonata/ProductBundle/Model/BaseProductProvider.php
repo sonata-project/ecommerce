@@ -193,8 +193,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     //   ORDER RELATED FUNCTIONS
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param string                                          $format
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement A basket element instance
+     * @param string                                          $format        A format to obtain raw product
      *
      * @return \Sonata\Component\Order\OrderElementInterface
      */
@@ -202,8 +202,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         $orderElement = new $this->orderElementClassName;
         $orderElement->setQuantity($basketElement->getQuantity());
-        $orderElement->setPrice($basketElement->getTotal(false));
-        $orderElement->setVat($basketElement->getVat());
+        $orderElement->setUnitPrice($basketElement->getUnitPrice(true));
+        $orderElement->setPrice($basketElement->getPrice(true));
+        $orderElement->setIsPriceIncludingVat($basketElement->isPriceIncludingVat());
+        $orderElement->setVatRate($basketElement->getVatRate());
         $orderElement->setDesignation($basketElement->getName());
         $orderElement->setProductType($this->getCode());
         $orderElement->setStatus(OrderInterface::STATUS_PENDING);
@@ -439,8 +441,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $formMapper
             ->add('price', 'number')
-            ->add('priceIncVat')
-            ->add('vat',   'number')
+            ->add('priceIncludingVat')
+            ->add('vatRate', 'number')
             ->add('stock', 'integer')
         ;
 
@@ -525,7 +527,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('description')
             ->add('price')
             ->add('number')
-            ->add('vat')
+            ->add('vatRate')
             ->add('stock')
             ->add('enabled')
         ;
@@ -874,6 +876,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
             }
         }
 
+        $this->updateComputationPricesFields($basket, $basketElement, $product);
+
         $basket->addBasketElement($basketElement);
 
         return $basketElement;
@@ -904,6 +908,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $basketElement->setQuantity($basketElement->getQuantity() + $newBasketElement->getQuantity());
 
+        $this->updateComputationPricesFields($basket, $basketElement, $product);
+
         return $basketElement;
     }
 
@@ -924,26 +930,29 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     *
-     * @return float price of the basket element
+     * {@inheritdoc}
      */
-    public function basketElementCalculateUnitPrice(BasketInterface $basket, BasketElementInterface $basketElement)
+    public function updateComputationPricesFields(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product)
     {
-        return $this->calculatePrice($basketElement->getProduct(), $basket->getCurrency(), 1);
+        $unitPrice = $this->calculatePrice($product, $basket->getCurrency(), $product->isPriceIncludingVat(), 1);
+        $price = $this->calculatePrice($product, $basket->getCurrency(), $product->isPriceIncludingVat(), $basketElement->getQuantity());
+
+        $basketElement->setUnitPrice($unitPrice);
+        $basketElement->setPrice($price);
+        $basketElement->setIsPriceIncludingVat($product->isPriceIncludingVat());
+        $basketElement->setVatRate($product->getVatRate());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1, $precision = 3)
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $vat = false, $quantity = 1)
     {
         if (!is_int($quantity) || $quantity < 1) {
             throw new InvalidParameterException("Expected integer >= 1 for quantity, ".$quantity." given.");
         }
 
-        return floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency), $quantity, $precision));
+        return floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency, $vat), $quantity));
     }
 
     /**

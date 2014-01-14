@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Basket;
 
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductDefinition;
 
@@ -29,7 +30,22 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * @var float
      */
+    protected $unitPrice = null;
+
+    /**
+     * @var float
+     */
     protected $price = null;
+
+    /**
+     * @var boolean
+     */
+    protected $priceIncludingVat;
+
+    /**
+     * @var float
+     */
+    protected $vatRate = null;
 
     /**
      * @var int
@@ -150,49 +166,57 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getVatAmount()
     {
-        $tva = $this->getTotal(true) - $this->getTotal();
-
-        return bcadd($tva, 0, 2);
+        return bcsub($this->getTotal(true), $this->getTotal(false));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getVat()
+    public function setVatRate($vatRate)
     {
-        $product = $this->getProduct();
-        if (!$product instanceof ProductInterface) {
-            return 0;
-        }
-
-        return $product->getVat();
+        $this->vatRate = $vatRate;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUnitPrice($tva = false)
+    public function getVatRate()
     {
-        $price = $this->price;
-
-        $product = $this->getProduct();
-        if (!$product instanceof ProductInterface) {
-            return 0;
-        }
-
-        if ($tva) {
-            $price = $price * (1 + $product->getVat() / 100);
-        }
-
-        return bcadd($price, 0, 2);
+        return $this->vatRate;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTotal($tva = false)
+    public function setUnitPrice($unitPrice)
     {
-        return $this->getUnitPrice($tva) * $this->getQuantity();
+        $this->unitPrice = $unitPrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUnitPrice($vat = false)
+    {
+        $price = $this->unitPrice;
+
+        if (!$vat && true === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        if ($vat && false === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        return $price;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotal($vat = false)
+    {
+        return $this->getUnitPrice($vat) * $this->getQuantity();
     }
 
     /**
@@ -250,6 +274,40 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
+    public function getPrice($vat = false)
+    {
+        $price = $this->price;
+
+        if (!$vat && true === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        if ($vat && false === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        return $price;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIsPriceIncludingVat($priceIncludingVat)
+    {
+        $this->priceIncludingVat = $priceIncludingVat;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPriceIncludingVat()
+    {
+        return $this->priceIncludingVat;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity > 0 ? $quantity : 1;
@@ -302,13 +360,16 @@ class BasketElement implements \Serializable, BasketElementInterface
     public function serialize()
     {
         return serialize(array(
-            'productId'   => $this->productId,
-            'position'    => $this->position,
-            'price'       => $this->price,
-            'quantity'    => $this->quantity,
-            'options'     => $this->options,
-            'name'        => $this->name,
-            'productCode' => $this->productCode
+            'productId'         => $this->productId,
+            'position'          => $this->position,
+            'unitPrice'         => $this->unitPrice,
+            'price'             => $this->price,
+            'priceIncludingVat' => $this->priceIncludingVat,
+            'quantity'          => $this->quantity,
+            'vatRate'           => $this->vatRate,
+            'options'           => $this->options,
+            'name'              => $this->name,
+            'productCode'       => $this->productCode
         ));
     }
 
@@ -319,13 +380,16 @@ class BasketElement implements \Serializable, BasketElementInterface
     {
         $data = unserialize($data);
 
-        $this->productId    = $data['productId'];
-        $this->position     = $data['position'];
-        $this->price        = $data['price'];
-        $this->quantity     = $data['quantity'];
-        $this->options      = $data['options'];
-        $this->name         = $data['name'];
-        $this->productCode  = $data['productCode'];
+        $this->productId         = $data['productId'];
+        $this->position          = $data['position'];
+        $this->unitPrice         = $data['unitPrice'];
+        $this->price             = $data['price'];
+        $this->priceIncludingVat = $data['priceIncludingVat'];
+        $this->vatRate           = $data['vatRate'];
+        $this->quantity          = $data['quantity'];
+        $this->options           = $data['options'];
+        $this->name              = $data['name'];
+        $this->productCode       = $data['productCode'];
     }
 
     /**

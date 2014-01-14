@@ -25,9 +25,9 @@ class Delivery extends BaseDelivery
         return "delivery 1";
     }
 
-    public function getVat()
+    public function getVatRate()
     {
-        return 19.60;
+        return 19.6;
     }
 
     public function getPrice()

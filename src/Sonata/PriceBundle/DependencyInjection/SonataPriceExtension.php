@@ -51,5 +51,6 @@ class SonataPriceExtension extends Extension
     public function registerParameters(ContainerBuilder $container, array $config)
     {
         $container->setParameter('sonata.price.currency', $config['currency']);
+        $container->setParameter('sonata.price.precision', $config['precision']);
     }
 }

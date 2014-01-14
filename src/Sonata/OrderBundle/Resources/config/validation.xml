@@ -97,7 +97,7 @@
             <constraint name="NotNull" />
         </getter>
 
-        <getter property="vat">
+        <getter property="vatRate">
             <constraint name="NotNull" />
         </getter>
 

@@ -8,6 +8,8 @@
 
         <field name="productId" column="product_id" type="integer"/>
         <field name="position" column="position" type="integer"/>
+        <field name="vatRate" column="vat_rate" type="string" length="255"/>
+        <field name="unitPrice" column="unit_price" type="string" length="255"/>
         <field name="price" column="price" type="string" length="255"/>
         <field name="quantity" column="quantity" type="integer"/>
         <field name="options" column="options" type="json"/>

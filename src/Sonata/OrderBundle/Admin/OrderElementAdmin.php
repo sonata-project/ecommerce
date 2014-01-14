@@ -65,7 +65,7 @@ class OrderElementAdmin extends Admin
                 ->add('productType', 'choice', array('choices' => array_keys($this->productPool->getProducts())))
                 ->add('quantity')
                 ->add('price')
-                ->add('vat')
+                ->add('vatRate')
                 ->add('designation')
                 ->add('description', null, array('required' => false))
                 ->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))

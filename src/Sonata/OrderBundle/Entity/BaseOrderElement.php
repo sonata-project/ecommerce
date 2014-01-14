@@ -30,9 +30,19 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $price;
 
     /**
-     * @var float $vat
+     * @var float $unitPrice
      */
-    protected $vat;
+    protected $unitPrice;
+
+    /**
+     * @var boolean
+     */
+    protected $priceIncludingVat;
+
+    /**
+     * @var float $vatRate
+     */
+    protected $vatRate;
 
     /**
      * @var string $designation
@@ -126,9 +136,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set quantity
-     *
-     * @param integer $quantity
+     * {@inheritdoc}
      */
     public function setQuantity($quantity)
     {
@@ -136,9 +144,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get quantity
-     *
-     * @return integer $quantity
+     * {@inheritdoc}
      */
     public function getQuantity()
     {
@@ -146,9 +152,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set price
-     *
-     * @param float $price
+     * {@inheritdoc}
      */
     public function setPrice($price)
     {
@@ -156,33 +160,53 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get price
-     *
-     * @return float $price
+     * {@inheritdoc}
      */
-    public function getPrice()
+    public function getPrice($vat = false)
     {
-        return $this->price;
+        $price = $this->price;
+
+        if (!$vat && true === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        if ($vat && false === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        return $price;
     }
 
     /**
-     * Set vat
-     *
-     * @param float $vat
+     * {@inheritdoc}
      */
-    public function setVat($vat)
+    public function setIsPriceIncludingVat($priceIncludingVat)
     {
-        $this->vat = $vat;
+        $this->priceIncludingVat = $priceIncludingVat;
     }
 
     /**
-     * Get vat
-     *
-     * @return float $vat
+     * {@inheritdoc}
      */
-    public function getVat()
+    public function isPriceIncludingVat()
     {
-        return $this->vat;
+        return $this->priceIncludingVat;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVatRate($vatRate)
+    {
+        $this->vatRate = $vatRate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVatRate()
+    {
+        return $this->vatRate;
     }
 
     /**
@@ -561,23 +585,29 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Return the price
-     *
-     * if $vat = true, return the price with vat
-     *
-     * @param boolean $vat
-     *
-     * @return float
+     * {@inheritdoc}
+     */
+    public function setUnitPrice($unitPrice)
+    {
+        $this->unitPrice = $unitPrice;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getUnitPrice($vat = false)
     {
-        $price = $this->price;
+        $price = $this->unitPrice;
 
-        if ($vat) {
-            $price = $price * (1 + $this->vat / 100);
+        if (!$vat && true === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
         }
 
-        return bcadd($price, 0, 2);
+        if ($vat && false === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        return $price;
     }
 
     /**
@@ -591,7 +621,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function getTotal($vat = false)
     {
-        return $this->getUnitPrice($vat) * $this->getQuantity();
+        return bcmul($this->getUnitPrice($vat), $this->getQuantity());
     }
 
     /**
