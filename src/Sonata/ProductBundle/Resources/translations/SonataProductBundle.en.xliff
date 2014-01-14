@@ -345,7 +345,7 @@
             </trans-unit>
             <trans-unit id="view_all_products">
                 <source>view_all_products</source>
-                <target>View products</target>
+                <target>View all products</target>
             </trans-unit>
             <trans-unit id="catalog_root_title">
                 <source>catalog_root_title</source>
