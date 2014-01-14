@@ -11,67 +11,63 @@
         {% include 'SonataCoreBundle:FlashMessage:render.html.twig' with {domain: 'SonataCustomerBundle'} %}
     {% endblock %}
 
+    {% block sonata_profile_address_actions %}
+        <div class="panel" style="height: 35px;">
+            <div class="pull-right btn-group">
+                <a class="btn btn-success" href="{{ url('sonata_customer_address_add') }}"><i class="glyphicon glyphicon-plus-sign icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.add{% endtrans %}</a>
+            </div>
+        </div>
+    {% endblock %}
+
     {% if addresses|length > 0 %}
 
         {% block sonata_profile_address_list %}
-        <table class="table table-bordered">
 
             {% for type,addressesByType in addresses if addressesByType|length > 0 %}
 
                 {% block sonata_profile_address_typelist %}
-                    <tr class="active">
-                        <th colspan="4">{{ type|trans({}, 'SonataCustomerBundle') }}</th>
-                    </tr>
-                    {% block sonata_profile_address_table_headers %}
-                        <tr>
-                            <th>{% trans from 'SonataCustomerBundle' %}address_name_label{% endtrans %}</th>
-                            <th>{% trans from 'SonataCustomerBundle' %}address_full_label{% endtrans %}</th>
-                            <th>{% trans from 'SonataCustomerBundle' %}address_current_label{% endtrans %}</th>
-                            <th>{% trans from 'SonataCustomerBundle' %}address_actions_label{% endtrans %}</th>
-                        </tr>
-                    {% endblock %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3 class="panel-title">{{ type|trans({}, 'SonataCustomerBundle') }}</h3></div>
 
-                    {% for address in addressesByType %}
-                        {% block sonata_profile_address_row %}
-                        <tr>
-                            <td><a href="{{ url('sonata_customer_address_edit', {'id' : address.id}) }}">{{ address.name }}</a></td>
-                            <td><a href="{{ url('sonata_customer_address_edit', {'id' : address.id}) }}">{{ address.fullAddress('<br/>')|raw }}</a></td>
-                            <td>
-                                {% if address.current %}
-                                    <i class="glyphicon glyphicon-ok-circle"></i>&nbsp;
-                                    {% trans from 'SonataCustomerBundle' %}address_is_current{% endtrans %}
-                                {% else %}
-                                    <i class="glyphicon glyphicon-ban-circle"></i>&nbsp;
-                                    {% trans from 'SonataCustomerBundle' %}address_is_not_current{% endtrans %}
-                                {% endif %}
-                            </td>
-                            <td>
-                                <form action="{{ url('sonata_customer_address_delete', {'id': address.id}) }}" method="post" onsubmit="return confirm('{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete_confirm{% endtrans %}');">
-                                    <div class="btn-group">
-                                        <button type="submit"
-                                                class="btn btn-danger">
-                                            <i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete{% endtrans %}
-                                        </button>
-                                        <a class="btn btn-info{% if address.current %} disabled{% endif %}" href="{{ address.current ? '#' : url('sonata_customer_address_setcurrent', {'id': address.id}) }}"><i class="glyphicon glyphicon-ok icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.set_current{% endtrans %}</a>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
+                        <table class="table">
+                            {% block sonata_profile_address_table_headers %}
+                                <tr>
+                                    <th>{% trans from 'SonataCustomerBundle' %}address_full_label{% endtrans %}</th>
+                                    <th>{% trans from 'SonataCustomerBundle' %}address_actions_label{% endtrans %}</th>
+                                </tr>
+                            {% endblock %}
+
+                            {% for address in addressesByType %}
+                                {% block sonata_profile_address_row %}
+                                <tr>
+                                    <td><a href="{{ url('sonata_customer_address_edit', {'id' : address.id}) }}">{{ sonata_address_render(address, true, false) }}</a></td>
+                                    <td style="width: 30%;">
+                                        <form action="{{ url('sonata_customer_address_delete', {'id': address.id}) }}" method="post" onsubmit="return confirm('{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete_confirm{% endtrans %}');">
+                                            <div class="btn-group">
+                                                <button type="submit"
+                                                        class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete{% endtrans %}
+                                                </button>
+                                                {% if addressesByType|length > 1 %}
+                                                    {% if address.current %}
+                                                        <a class="btn btn-default disabled" href="#"><i class="glyphicon glyphicon-ok icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}address_list_default{% endtrans %}</a>
+                                                    {% else %}
+                                                        <a class="btn btn-primary" href="{{ url('sonata_customer_address_setcurrent', {'id': address.id}) }}">{% trans from 'SonataCustomerBundle' %}address_list_set_current{% endtrans %}</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endblock %}
+                            {% endfor %}
                         {% endblock %}
-                    {% endfor %}
-                {% endblock %}
+                    </table>
+                </div>
             {% endfor %}
-
-        </table>
         {% endblock %}
     {% else %}
         <p>{% trans from 'SonataCustomerBundle' %}sonata.address.list.no_addresses{% endtrans %}</p>
     {% endif %}
-
-    {% block sonata_profile_address_actions %}
-    <div class="btn-group">
-        <a class="btn btn-success" href="{{ url('sonata_customer_address_add') }}"><i class="glyphicon glyphicon-plus-sign icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.add{% endtrans %}</a>
-    </div>
-    {% endblock %}
 
 {% endblock %}

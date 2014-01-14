@@ -387,9 +387,9 @@
                 <source>address_type_label</source>
                 <target>Type</target>
             </trans-unit>
-            <trans-unit id="address_current_label">
-                <source>address_current_label</source>
-                <target>Default?</target>
+            <trans-unit id="address_list_default">
+                <source>address_list_default</source>
+                <target>Default</target>
             </trans-unit>
             <trans-unit id="address_is_current">
                 <source>address_is_current</source>
@@ -415,8 +415,8 @@
                 <source>customer_address_delete</source>
                 <target>The address has been deleted successfully!</target>
             </trans-unit>
-            <trans-unit id="sonata.address.list.set_current">
-                <source>sonata.address.list.set_current</source>
+            <trans-unit id="address_list_set_current">
+                <source>address_list_set_current</source>
                 <target>Set default</target>
             </trans-unit>
             <!-- End - Addresses translations -->
