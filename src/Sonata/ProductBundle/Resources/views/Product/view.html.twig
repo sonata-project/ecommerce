@@ -30,7 +30,7 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block breadcrumb %}
-    <div class="row-fluid clearfix">
+    <div class="row clearfix">
         {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'product': product, 'current_uri': app.request.requestUri }) }}
     </div>
 {% endblock %}
@@ -52,17 +52,20 @@ file that was distributed with this source code.
         </div>
     </div>
     <div class="row" itemscope itemtype="http://schema.org/Product">
+        {% block product_left %}
         <div class="col-lg-8">
-            {% block product_details %}
+            {% block product_carousel %}
                 <div class="row">
-                    {% block product_image %}{% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'float:left; margin: 0 10px 10px 0;'} %}{% endblock%}
-                </div>
-
-                <div class="row">
-                    {% block product_gallery %}Block 'product_gallery' to override{% endblock %}
+                    {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
+                        {% include "SonataProductBundle:Product:carousel.html.twig" %}
+                    {% else %}
+                        {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'float:left; margin: 0 10px 10px 0;'} %}
+                    {% endif %}
                 </div>
             {% endblock %}
         </div>
+        {% endblock %}
+        {% block product_right %}
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -119,6 +122,7 @@ file that was distributed with this source code.
                 </div>
             </div>
         </div>
+        {% endblock %}
     </div>
 {% endblock %}
 
