@@ -16,4 +16,8 @@
         <default key="_controller">SonataProductBundle:Product:viewVariations</default>
     </route>
 
+    <route id="sonata_product_variation_product" pattern="/{productId}/{slug}/variation">
+        <default key="_controller">SonataProductBundle:Product:variationToProduct</default>
+    </route>
+
 </routes>

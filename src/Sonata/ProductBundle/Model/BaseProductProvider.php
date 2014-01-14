@@ -19,6 +19,7 @@ use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
@@ -31,6 +32,7 @@ use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 
 use JMS\Serializer\SerializerInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 abstract class BaseProductProvider implements ProductProviderInterface
 {
@@ -291,6 +293,87 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getVariatedProperties(ProductInterface $product, array $fields = array())
+    {
+        if (null === $product->getParent()) {
+            // This is not a variation, hence no properties variated
+            return array();
+        }
+
+        $fields = $this->getMergedFields($fields);
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        $properties = array();
+
+        foreach ($fields as $field) {
+            $properties[$field] = $accessor->getValue($product, $field);
+        }
+
+        return $properties;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariationsChoices(ProductInterface $product, array $fields = array())
+    {
+        if (!($this->hasEnabledVariations($product) || $product->getParent())) {
+            // Product is neither master nor a variation, not concerned
+            return array();
+        }
+
+        $fields = $this->getMergedFields($fields);
+
+        // We retrieve the variations fresh from DB so we may find the values
+        $variations = $this->getEnabledVariations($product->getParent() ?: $product);
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        $choices = array();
+        foreach ($variations as $mVariation) {
+            foreach ($fields as $field) {
+                $variationValue = $accessor->getValue($mVariation, $field);
+                if (!array_key_exists($field, $choices) || !in_array($variationValue, $choices[$field])) {
+                    $choices = array_merge_recursive($choices, array($field => array($variationValue)));
+                }
+            }
+        }
+
+        // Sort options
+        foreach ($fields as $field) {
+            natcasesort($choices[$field]);
+        }
+
+        return $choices;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariation(ProductInterface $product, array $choices = array())
+    {
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        foreach ($this->getEnabledVariations($product) as $variation) {
+            foreach ($choices as $choice => $value) {
+                if (!in_array($choice, $this->getVariationFields())) {
+                    throw new \RuntimeException("The field '".$choice."' is not among the variation fields");
+                }
+
+                if ($accessor->getValue($variation, $choice) !== $value) {
+                    continue 2;
+                }
+            }
+            return $variation;
+        }
+
+        return null;
+    }
+
+    /**
      * @param  $name
      * @return bool return true if the field $name is a variation
      */
@@ -340,6 +423,16 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
                 'format_field'         => 'descriptionFormatter',
                 'target_field'         => 'description',
+                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
+            ));
+        }
+
+        if (!$isVariation || in_array('short_description', $this->variationFields)) {
+            $formMapper->add('shortDescription', 'sonata_formatter_type', array(
+                'source_field'         => 'rawShortDescription',
+                'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+                'format_field'         => 'shortDescriptionFormatter',
+                'target_field'         => 'shortDescription',
                 'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
             ));
         }
@@ -498,24 +591,20 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $values = $product->toArray();
 
         foreach ($variationFields as $field) {
-            if (!array_key_exists($field, $values)) {
-                continue;
+            if (array_key_exists($field, $values)) {
+                unset($values[$field]);
             }
-
-            unset($values[$field]);
         }
 
         if (!$variations) {
             $variations = $product->getVariations();
         }
 
+        $accessor = PropertyAccess::createPropertyAccessor();
+
         foreach ($variations as $variation) {
             foreach ($values as $name => $value) {
-                $callable = array($variation, sprintf('set%s', $name));
-
-                if (is_callable($callable)) {
-                    call_user_func($callable, $value);
-                }
+                $accessor->setValue($variation, $name, $value);
             }
         }
     }
@@ -966,5 +1055,29 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 1000
             )
         );
+    }
+
+    /**
+     * Checks $fields if specified, returns variation fields otherwise
+     *
+     * @param array $fields
+     *
+     * @return array
+     * @throws \RuntimeException
+     */
+    protected function getMergedFields(array $fields)
+    {
+        if (0 === count($fields)) {
+            // If we didn't specify the fields (filtered), we get all variation fields possible values
+            $fields = $this->getVariationFields();
+        } else {
+            foreach ($fields as $field) {
+                if (!in_array($field, $this->getVariationFields())) {
+                    throw new \RuntimeException("The field '".$field."' is not among the variation fields");
+                }
+            }
+        }
+
+        return $fields;
     }
 }

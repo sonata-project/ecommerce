@@ -417,7 +417,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $arrayProduct = array(
             'sku'                  => 'productSku',
-            'slug'                 => 'productSlug',
+            'slug'                 => 'productslug',
             'name'                 => 'productName',
             'description'          => 'productDescription',
             'rawDescription'       => 'productRawDescription',

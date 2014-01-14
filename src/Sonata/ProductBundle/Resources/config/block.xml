@@ -42,6 +42,15 @@
             <argument type="service" id="knp_menu.menu_provider" />
             <argument type="service" id="sonata.product.menu.product_menu_builder" />
         </service>
+
+        <service id="sonata.product.block.variations_form" class="Sonata\ProductBundle\Block\VariationsFormBlockService">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.variations_form</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="form.factory" />
+        </service>
     </services>
 
 </container>

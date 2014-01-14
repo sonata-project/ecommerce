@@ -157,4 +157,19 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
 
         return $queryBuilder;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findVariations(ProductInterface $product)
+    {
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->where('p.parent = :parent')
+            ->andWhere('p.enabled = :enabled')
+            ->setParameter('parent', $product)
+            ->setParameter('enabled', true)
+        ;
+
+        return $queryBuilder->getQuery()->execute();
+    }
 }

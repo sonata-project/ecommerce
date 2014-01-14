@@ -42,4 +42,11 @@ interface ProductManagerInterface extends ManagerInterface
      * @return ProductInterface|null
      */
     public function findEnabledFromIdAndSlug($id, $slug);
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return array
+     */
+    public function findVariations(ProductInterface $product);
 }

@@ -191,6 +191,10 @@
                 <source>form.label_description</source>
                 <target>Description</target>
             </trans-unit>
+            <trans-unit id="form.label_short_description">
+                <source>form.label_short_description</source>
+                <target>Short Description</target>
+            </trans-unit>
             <trans-unit id="form.label_position">
                 <source>form.label_position</source>
                 <target>Position</target>
@@ -282,6 +286,14 @@
             <!-- End - Form translations -->
 
             <!-- Begin - Product view translations -->
+            <trans-unit id="variation_not_found">
+                <source>variation_not_found</source>
+                <target>Sorry, the product you're looking for is unavailable.</target>
+            </trans-unit>
+            <trans-unit id="product_show_variation">
+                <source>product_show_variation</source>
+                <target>View variation</target>
+            </trans-unit>
             <trans-unit id="product_price">
                 <source>product_price</source>
                 <target>Price</target>
