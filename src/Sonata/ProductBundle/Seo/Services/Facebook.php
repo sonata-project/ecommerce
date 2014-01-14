@@ -2,6 +2,7 @@
 
 namespace Sonata\ProductBundle\Seo\Services;
 
+use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\MediaBundle\Provider\Pool;
@@ -80,13 +81,22 @@ class Facebook implements ServiceInterface
 
         // If a media is available, we add the opengraph image data
         if ($image = $product->getImage()) {
-            $provider = $this->mediaPool->getProvider($image->getProviderName());
-
-            $seoPage->addMeta('property', 'og:image', sprintf('%s%s', $this->mediaPrefix, $provider->generatePublicUrl($image, $this->mediaFormat)))
-                ->addMeta('property', 'og:image:width', $image->getWidth())
-                ->addMeta('property', 'og:image:height', $image->getHeight())
-                ->addMeta('property', 'og:image:type', $image->getContentType());
+            $this->addImageInfo($image, $seoPage);
         }
+    }
+
+    /**
+     * @param MediaInterface   $image
+     * @param SeoPageInterface $seoPage
+     */
+    protected function addImageInfo(MediaInterface $image, SeoPageInterface $seoPage)
+    {
+        $provider = $this->mediaPool->getProvider($image->getProviderName());
+
+        $seoPage->addMeta('property', 'og:image', sprintf('%s%s', $this->mediaPrefix, $provider->generatePublicUrl($image, $this->mediaFormat)))
+            ->addMeta('property', 'og:image:width', $image->getWidth())
+            ->addMeta('property', 'og:image:height', $image->getHeight())
+            ->addMeta('property', 'og:image:type', $image->getContentType());
     }
 
     /**
