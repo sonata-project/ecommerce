@@ -255,8 +255,8 @@
                 <source>form.label_price</source>
                 <target>Price</target>
             </trans-unit>
-            <trans-unit id="form.label_vat">
-                <source>form.label_vat</source>
+            <trans-unit id="form.label_vat_rate">
+                <source>form.label_vat_rate</source>
                 <target>VAT</target>
             </trans-unit>
             <trans-unit id="form.label_stock">
@@ -375,12 +375,12 @@
                 <source>list.label_is_variation</source>
                 <target>Is Variation?</target>
             </trans-unit>
-            <trans-unit id="form.label_price_inc_vat">
-                <source>form.label_price_inc_vat</source>
+            <trans-unit id="form.label_price_including_vat">
+                <source>form.label_price_including_vat</source>
                 <target>Price inc. Vat</target>
             </trans-unit>
-            <trans-unit id="show.label_price_inc_vat">
-                <source>show.label_price_inc_vat</source>
+            <trans-unit id="show.label_price_including_vat">
+                <source>show.label_price_including_vat</source>
                 <target>Price inc. Vat</target>
             </trans-unit>
             <trans-unit id="sonata_product_catalog_breadcrumb">

@@ -136,15 +136,15 @@
             </trans-unit>
             <trans-unit id="sonata.basket.total_vat">
                 <source>sonata.basket.total_vat</source>
-                <target>Total vat</target>
+                <target>Total VAT</target>
             </trans-unit>
             <trans-unit id="sonata.basket.total_w_vat">
                 <source>sonata.basket.total_w_vat</source>
-                <target>Total incl. vat</target>
+                <target>Total incl. VAT</target>
             </trans-unit>
             <trans-unit id="sonata.basket.total_wo_vat">
                 <source>sonata.basket.total_wo_vat</source>
-                <target>Total excl. vat</target>
+                <target>Total excl. VAT</target>
             </trans-unit>
             <trans-unit id="view_basket">
                 <source>view_basket</source>

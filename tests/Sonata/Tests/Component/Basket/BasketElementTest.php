@@ -12,22 +12,61 @@
 namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Currency\Currency;
+use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductDefinition;
+use Sonata\ProductBundle\Model\BaseProductProvider;
+
+class ProductProviderTest extends BaseProductProvider
+{
+    /**
+     * @return string
+     */
+    public function getBaseControllerName()
+    {
+        return 'DumbTestController';
+    }
+
+}
 
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Sets up unit test
+     */
+    public function setUp()
+    {
+        bcscale(3);
+    }
+
     public function getBasketElement($product = null)
     {
         $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
         $product->expects($this->any())->method('getId')->will($this->returnValue(42));
         $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
-        $product->expects($this->any())->method('getVat')->will($this->returnValue(19.6));
+        $product->expects($this->any())->method('isPriceIncludingVat')->will($this->returnValue(false));
+        $product->expects($this->any())->method('getVatRate')->will($this->returnValue(19.6));
         $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('option1' => 'toto')));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
+        $productProvider = new ProductProviderTest($this->getMock('JMS\Serializer\SerializerInterface'));
+        $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+
+        $productDefinition = new ProductDefinition($productProvider, $productManager);
+
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
+        $basketElement->setProductDefinition($productDefinition);
+
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+
+        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+
+        $productProvider->updateComputationPricesFields($basket, $basketElement, $product);
 
         return $basketElement;
     }
@@ -36,16 +75,16 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
     {
         $basketElement = $this->getBasketElement();
 
-        $this->assertEquals(19.6, $basketElement->getVat(), 'BasketElement returns the correct VAT');
+        $this->assertEquals(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
         $this->assertEquals(1, $basketElement->getQuantity(), 'BasketElement returns the correct default quantity');
 
         $this->assertEquals(15, $basketElement->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
-        $this->assertEquals(17.94, $basketElement->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
+        $this->assertEquals(17.940, $basketElement->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
 
         $this->assertEquals(15, $basketElement->getTotal(), 'BasketElement return the correct price w/o VAT');
-        $this->assertEquals(17.94, $basketElement->getTotal(true), 'BasketElement return the correct price w VAT');
+        $this->assertEquals(17.940, $basketElement->getTotal(true), 'BasketElement return the correct price w VAT');
 
-        $this->assertEquals(2.94, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
+        $this->assertEquals(2.940, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
     }
 
     public function testOptions()
@@ -62,10 +101,10 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
     public function testQuantity()
     {
         $basketElement = $this->getBasketElement();
-
         $basketElement->setQuantity(10);
 
-        $this->assertEquals(19.6, $basketElement->getVat(), 'BasketElement returns the correct VAT');
+        $this->assertEquals(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
+        $this->assertEquals(150, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT');
         $this->assertEquals(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
     }
 
@@ -88,10 +127,17 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
     public function testGettersSetters()
     {
-        $basketElement = new BasketElement();
+        $currency = $this->getMock('Sonata\Component\Currency\Currency');
+        $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
 
-        $this->assertEquals(0, $basketElement->getVat());
-        $this->assertEquals(0, $basketElement->getUnitPrice());
+        $productDefinition = new ProductDefinition($productProvider, $productManager);
+
+        $basketElement = new BasketElement();
+        $basketElement->setProductDefinition($productDefinition);
+
+        $this->assertEquals(0, $basketElement->getVatRate());
+        $this->assertEquals(0, $basketElement->getUnitPrice($currency));
         $this->assertFalse($basketElement->isValid());
 
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');

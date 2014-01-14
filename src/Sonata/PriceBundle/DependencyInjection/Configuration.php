@@ -31,8 +31,22 @@ class Configuration implements ConfigurationInterface
         $node = $treeBuilder->root('sonata_price');
 
         $this->addPriceSection($node);
+        $this->addPrecisionSection($node);
 
         return $treeBuilder;
+    }
+
+    /**
+     * Sets the price precision section
+     * Precision parameter will be given to bcscale() used in bundle boot() method
+     *
+     * @param ArrayNodeDefinition $node
+     *
+     * @return void
+     */
+    private function addPrecisionSection(ArrayNodeDefinition $node)
+    {
+        $node->children()->scalarNode('precision')->defaultValue(3)->end();
     }
 
     /**

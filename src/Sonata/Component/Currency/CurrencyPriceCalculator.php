@@ -12,8 +12,18 @@ class CurrencyPriceCalculator implements CurrencyPriceCalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function getPrice(ProductInterface $product, CurrencyInterface $currency)
+    public function getPrice(ProductInterface $product, CurrencyInterface $currency, $vat = false)
     {
-        return $product->getPrice();
+        $price = $product->getPrice();
+
+        if ($vat && false === $product->isPriceIncludingVat()) {
+            $price = $price * (1 + $product->getVatRate() / 100);
+        }
+
+        if (!$vat && true === $product->isPriceIncludingVat()) {
+            $price = $price * (1 - $product->getVatRate() / 100);
+        }
+
+        return $price;
     }
 }

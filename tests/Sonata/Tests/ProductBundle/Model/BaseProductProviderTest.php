@@ -166,6 +166,11 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
             ->method('hasProduct')
             ->will($this->returnValue(true));
 
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+
+        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+
         $this->assertFalse($productProvider->basketAddProduct($basket, $product, $basketElement));
 
         // Test with product having options
@@ -173,6 +178,11 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $basket->expects($this->any())
             ->method('hasProduct')
             ->will($this->returnValue(false));
+
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+
+        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
         $basketElement = new BasketElement();
         $product->expects($this->any())
@@ -190,16 +200,30 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     {
         // Test a product not in the basket
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+
+        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
         $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
         $productProvider = $this->createNewProductProvider();
 
         $this->assertFalse($productProvider->basketMergeProduct($basket, $product, $basketElement));
 
         // Test an invalid product ID in the basket
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+
+        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
         $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
         $productProvider = $this->createNewProductProvider();
         $basket->expects($this->any())
             ->method('getElement')
@@ -214,8 +238,15 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         // Test a valid workflow
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+
+        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
         $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
         $newBasketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
         $productProvider = $this->createNewProductProvider();
         $basket->expects($this->any())
@@ -384,17 +415,15 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     public function testCalculatePrice()
     {
         $product = new ProductTest();
-        $product->setPrice(42.123);
+        $product->setPrice(42);
 
         $currency = new Currency();
         $currency->setLabel("EUR");
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(42.123*4, $provider->calculatePrice($product, $currency, 4));
-        $this->assertEquals(42.123, $provider->calculatePrice($product, $currency));
-        $this->assertEquals(42, $provider->calculatePrice($product, $currency, 1, 0), "Precision parameter to 0 returns rounded value");
-        $this->assertEquals(42.12*2, $provider->calculatePrice($product, $currency, 2, 2), "Precision parameter to 2 returns slightly different value");
+        $this->assertEquals(42*4, $provider->calculatePrice($product, $currency, false, 4));
+        $this->assertEquals(42, $provider->calculatePrice($product, $currency, false));
     }
 
     /**
@@ -409,7 +438,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $provider->calculatePrice($product, $currency, 4.32);
+        $provider->calculatePrice($product, $currency, false, 4.32);
     }
 
     /**
@@ -424,7 +453,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $provider->calculatePrice($product, $currency, 0.32);
+        $provider->calculatePrice($product, $currency, false, 0.32);
     }
 
     public function testGetVariationsChoices()

@@ -12,8 +12,9 @@ namespace Sonata\Component\Order;
 
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Product\PriceComputableInterface;
 
-interface OrderElementInterface
+interface OrderElementInterface extends PriceComputableInterface
 {
     /**
      * Set order
@@ -28,48 +29,6 @@ interface OrderElementInterface
      * @return \Sonata\Component\Order\OrderInterface
      */
     public function getOrder();
-
-    /**
-     * Set quantity
-     *
-     * @param integer $quantity
-     */
-    public function setQuantity($quantity);
-
-    /**
-     * Get quantity
-     *
-     * @return integer $quantity
-     */
-    public function getQuantity();
-
-    /**
-     * Set price
-     *
-     * @param float $price
-     */
-    public function setPrice($price);
-
-    /**
-     * Get price
-     *
-     * @return float $price
-     */
-    public function getPrice();
-
-    /**
-     * Set vat
-     *
-     * @param float $vat
-     */
-    public function setVat($vat);
-
-    /**
-     * Get vat
-     *
-     * @return float $vat
-     */
-    public function getVat();
 
     /**
      * Set designation

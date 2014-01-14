@@ -44,7 +44,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * @var boolean
      */
-    protected $priceIncVat;
+    protected $priceIncludingVat;
 
     /**
      * @var string
@@ -84,7 +84,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * @var float
      */
-    protected $vat;
+    protected $vatRate;
 
     /**
      * @var integer
@@ -380,7 +380,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getPrice()
+    public function getPrice($vat = false)
     {
         return $this->price;
     }
@@ -388,17 +388,49 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setVat($vat)
+    public function setUnitPrice($unitPrice)
     {
-        $this->vat = $vat;
+        $this->setPrice($unitPrice);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getVat()
+    public function getUnitPrice($vat = false)
     {
-        return $this->vat;
+        return $this->getPrice($vat);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuantity($quantity)
+    {
+        throw new \InvalidMethodCallException('This method is not used');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuantity()
+    {
+        throw new \InvalidMethodCallException('This method is not used');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVatRate($vatRate)
+    {
+        $this->vatRate = $vatRate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVatRate()
+    {
+        return $this->vatRate;
     }
 
     /**
@@ -802,19 +834,19 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * @param mixed $priceIncVat
+     * {@inheritdoc}
      */
-    public function setPriceIncVat($priceIncVat)
+    public function setIsPriceIncludingVat($priceIncludingVat)
     {
-        $this->priceIncVat = $priceIncVat;
+        $this->priceIncludingVat = $priceIncludingVat;
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getPriceIncVat()
+    public function isPriceIncludingVat()
     {
-        return $this->priceIncVat;
+        return $this->priceIncludingVat;
     }
 
     /**
@@ -863,7 +895,7 @@ abstract class BaseProduct implements ProductInterface
             'rawDescription'       => $this->rawDescription,
             'descriptionFormatter' => $this->descriptionFormatter,
             'price'                => $this->price,
-            'vat'                  => $this->vat,
+            'vatRate'              => $this->vatRate,
             'stock'                => $this->stock,
             'enabled'              => $this->enabled,
             'options'              => $this->options,

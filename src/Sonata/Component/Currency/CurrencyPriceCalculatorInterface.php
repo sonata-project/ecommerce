@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Currency;
 
+use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
@@ -21,10 +22,11 @@ interface CurrencyPriceCalculatorInterface
     /**
      * Returns the price of $product for given $currency
      *
-     * @param ProductInterface  $product
-     * @param CurrencyInterface $currency
+     * @param ProductInterface  $product  A product instance
+     * @param CurrencyInterface $currency A currency instance
+     * @param boolean           $vat      Return price including VAT?
      *
      * @return float
      */
-    public function getPrice(ProductInterface $product, CurrencyInterface $currency);
+    public function getPrice(ProductInterface $product, CurrencyInterface $currency, $vat = false);
 }

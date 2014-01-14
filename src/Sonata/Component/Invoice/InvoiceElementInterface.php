@@ -11,8 +11,9 @@ namespace Sonata\Component\Invoice;
 
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Product\PriceComputableInterface;
 
-interface InvoiceElementInterface
+interface InvoiceElementInterface extends PriceComputableInterface
 {
     /**
      * Set invoiceId
@@ -41,48 +42,6 @@ interface InvoiceElementInterface
      * @return OrderElementInterface $orderElement
      */
     public function getOrderElement();
-
-    /**
-     * Set quantity
-     *
-     * @param integer $quantity
-     */
-    public function setQuantity($quantity);
-
-    /**
-     * Get quantity
-     *
-     * @return integer $quantity
-     */
-    public function getQuantity();
-
-    /**
-     * Set price
-     *
-     * @param float $price
-     */
-    public function setPrice($price);
-
-    /**
-     * Get price
-     *
-     * @return float $price
-     */
-    public function getPrice();
-
-    /**
-     * Set vat
-     *
-     * @param float $vat
-     */
-    public function setVat($vat);
-
-    /**
-     * Get vat
-     *
-     * @return float $vat
-     */
-    public function getVat();
 
     /**
      * Set total

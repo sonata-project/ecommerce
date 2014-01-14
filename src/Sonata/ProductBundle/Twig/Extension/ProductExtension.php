@@ -121,12 +121,13 @@ class ProductExtension extends \Twig_Extension
      *
      * @param ProductInterface  $product  A product instance
      * @param CurrencyInterface $currency A currency instance
+     * @param boolean           $vat      Returns price including VAT?
      *
      * @return float
      */
-    public function getProductPrice(ProductInterface $product, CurrencyInterface $currency)
+    public function getProductPrice(ProductInterface $product, CurrencyInterface $currency, $vat = false)
     {
-        return $this->productPool->getProvider($product)->calculatePrice($product, $currency);
+        return $this->productPool->getProvider($product)->calculatePrice($product, $currency, $vat, 1);
     }
 
     /**

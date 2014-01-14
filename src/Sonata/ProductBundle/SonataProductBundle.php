@@ -25,4 +25,11 @@ class SonataProductBundle extends Bundle
     {
         $container->addCompilerPass(new AddProductProviderCompilerPass());
     }
+
+    /**
+     * Boots the Bundle.
+     */
+    public function boot()
+    {
+    }
 }
