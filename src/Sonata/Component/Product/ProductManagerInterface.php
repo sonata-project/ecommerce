@@ -49,4 +49,12 @@ interface ProductManagerInterface extends ManagerInterface
      * @return array
      */
     public function findVariations(ProductInterface $product);
+
+    /**
+     * Updated stock value for a given Product.
+     *
+     * @param ProductInterface|int $product
+     * @param int                  $diff
+     */
+    public function updateStock($product, $diff);
 }

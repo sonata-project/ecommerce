@@ -315,4 +315,13 @@ interface ProductProviderInterface
      * @param array            $choices
      */
     public function getVariation(ProductInterface $product, array $choices = array());
+
+    /**
+     * Update the stock value of a given Product id.
+     *
+     * @param ProductInterface|int    $product
+     * @param ProductManagerInterface $productManager
+     * @param int                     $diff
+     */
+    public function updateStock($product, ProductManagerInterface $productManager, $diff);
 }

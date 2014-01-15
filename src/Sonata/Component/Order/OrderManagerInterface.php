@@ -24,4 +24,13 @@ interface OrderManagerInterface extends ManagerInterface
      * @return OrderInterface[]
      */
     public function findForUser(UserInterface $user);
+
+    /**
+     * Return an Order from its id with its related OrderElements.
+     *
+     * @param int $orderId
+     *
+     * @return OrderInterface
+     */
+    public function getOrder($orderId);
 }
