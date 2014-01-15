@@ -114,11 +114,12 @@ interface ProductProviderInterface
      *
      * @param ProductInterface          $product
      * @param CurrencyInterface|null    $currency
-     * @param int                       $quantity Defaults to one
+     * @param int                       $quantity  Defaults to one
+     * @param int                       $precision The precision of the arbitrary number for the multiplication (see http://www.php.net/manual/en/function.bcscale.php)
      *
      * @return float
      */
-    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1);
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1, $precision = 3);
 
     /**
      * Return true if the product can be added to the provided basket
