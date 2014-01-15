@@ -27,11 +27,17 @@ file that was distributed with this source code.
     <div class="col-lg-12">
         <form id="form_add_basket" class="form-horizontal" action="{{ url('sonata_basket_add_product') }}" method="POST"{% if provider.getOption('product_add_modal') %} data-target="#add_basket_modal"{% endif %}>
 
-            {{ form_row(form.quantity, {'attr': {'min': 1}}) }}
+            {% if sonata_product_stock(product) == 0 %}
+                {% set quantityAttrs = {'min': 1, 'disabled': true} %}
+            {% else %}
+                {% set quantityAttrs = {'min': 1} %}
+            {% endif %}
+
+            {{ form_row(form.quantity, {'attr': quantityAttrs}) }}
 
             <div class="form-group">
                 <div class="col-lg-6 col-xs-6">
-                    <span id="sonata_product_pricue" class="lead">
+                    <span id="sonata_product_price" class="lead">
                         {% block product_price_price %}
                             {% if provider.hasEnabledVariations(product) %}
                                 {{ cheapest_variation.price|number_format_currency(currency) }}

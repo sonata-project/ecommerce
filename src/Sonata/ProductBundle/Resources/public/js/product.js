@@ -8,6 +8,7 @@
 var Sonata = Sonata || {};
 
 Sonata.Product = {
+
     /**
      * URLs to use when performing ajax operations
      *
@@ -77,7 +78,7 @@ Sonata.Product = {
     },
 
     initAddBasket: function() {
-        this.targets.inputAddBasket.change(jQuery.proxy(this.changeAddBasket, this));
+        this.targets.inputAddBasket.on('input', jQuery.proxy(this.changeAddBasket, this));
     },
 
     changeAddBasket: function(event) {

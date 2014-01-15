@@ -41,14 +41,6 @@ file that was distributed with this source code.
     <div class="row">
         <div class="col-lg-12">
             {% sonata_template_box 'This is the product view template. Feel free to override it.' %}
-
-            {% block product_errors %}
-                {%  if not provider.hasVariations(product) and sonata_product_stock(product) == 0 %}
-                    <div class="alert alert-danger">
-                        {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
-                    </div>
-                {% endif %}
-            {% endblock %}
         </div>
     </div>
     <div class="row" itemscope itemtype="http://schema.org/Product">
@@ -86,6 +78,14 @@ file that was distributed with this source code.
                     {% endif %}
                 {% endblock %}
                 <div class="panel-body">
+                    {% block product_errors %}
+                        {%  if not provider.hasVariations(product) and sonata_product_stock(product) == 0 %}
+                            <div class="alert alert-danger">
+                                {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
                     <div itemprop="description">
                         {% block product_description_short %}
                             {{ product.rawShortDescription|raw }}
