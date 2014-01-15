@@ -45,83 +45,93 @@ file that was distributed with this source code.
     </div>
     <div class="row" itemscope itemtype="http://schema.org/Product">
         {% block product_left %}
-        <div class="col-lg-8">
-            {% block product_carousel %}
-                <div class="row">
-                    {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
-                        {% include "SonataProductBundle:Product:carousel.html.twig" %}
-                    {% else %}
-                        {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'float:left; margin: 0 10px 10px 0;'} %}
-                    {% endif %}
-                </div>
-            {% endblock %}
-        </div>
+            <div class="col-lg-8">
+                {% block product_carousel %}
+                    <div class="row">
+                        {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
+                            {% include "SonataProductBundle:Product:carousel.html.twig" %}
+                        {% else %}
+                            {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'float:left; margin: 0 10px 10px 0;'} %}
+                        {% endif %}
+                    </div>
+                {% endblock %}
+            </div>
         {% endblock %}
         {% block product_right %}
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 itemprop="name" class="panel-title"">{% block product_title %}{{ product.name }}{% endblock %}</h3>
-                </div>
-                {% block product_properties %}
-                    {% if provider.variatedProperties(product, variations_properties)|length > 0 %}
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 itemprop="name" class="panel-title"
+                        ">{% block product_title %}{{ product.name }}{% endblock %}</h3>
+                    </div>
+
+                    {% block product_properties %}
                         <ul class="list-group">
-                            {% for property, value in provider.variatedProperties(product, variations_properties) %}
+                            {% block product_generic_properties %}
                                 <li class="list-group-item">
-                                    <small class="list-group-item-text">{{ property|trans({}, "SonataProductBundle") }}:&nbsp;{{ value|trans({}, "SonataProductBundle") }}</small>
+                                    {% block product_unit_price %}
+                                        <small class="list-group-item-text">
+                                            {{ 'product_price'|trans({}, "SonataProductBundle") }}:&nbsp;
+                                            <span itemprop="price">{{ product.price|number_format_currency(currency) }}</span>
+                                        </small><br/>
+                                    {% endblock %}
+                                    {% block product_reference %}
+                                        <small class="list-group-item-text">
+                                            {{ 'product_reference'|trans({}, "SonataProductBundle") }}:&nbsp;
+                                            <span itemprop="sku">{{ product.sku }}</span>
+                                        </small>
+                                    {% endblock %}
                                 </li>
-                            {% endfor %}
+                            {% endblock %}
                             <li class="list-group-item">
-                                <small class="list-group-item-text">{{ 'product_price'|trans({}, "SonataProductBundle") }}:&nbsp;<span itemprop="price">{{ product.price|number_format_currency(currency) }}</span></small>
+                                <span itemprop="description">
+                                    {% block product_description_short %}
+                                        {{ product.rawShortDescription|raw }}
+                                    {% endblock %}
+                                </span>
                             </li>
+                            {% block product_errors %}
+                                {% if not provider.hasVariations(product) and sonata_product_stock(product) == 0 %}
+                                    <li class="list-group-item">
+                                        <span class="text-danger">
+                                            {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
+                                        </span>
+                                    </li>
+                                {% endif %}
+                                <li class="list-group-item text-danger" id="sonata_add_basket_error" style="display:none;"></li>
+                            {% endblock %}
                         </ul>
-                    {% endif %}
-                {% endblock %}
-                <div class="panel-body">
-                    {% block product_errors %}
-                        {%  if not provider.hasVariations(product) and sonata_product_stock(product) == 0 %}
-                            <div class="alert alert-danger">
-                                {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
-                            </div>
-                        {% endif %}
                     {% endblock %}
 
-                    <div itemprop="description">
-                        {% block product_description_short %}
-                            {{ product.rawShortDescription|raw }}
+                    <div class="panel-footer">
+                        {% block product_variations_list %}
+                            {% block  product_variations_form_block %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        {{ sonata_block_render({'type': 'sonata.product.block.variations_form'}, {'product': product, 'variations_properties': variations_properties}) }}
+                                    </div>
+                                </div>
+                            {% endblock %}
                         {% endblock %}
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    {% block product_variations_list %}
-                        {% block  product_variations_form_block %}
+
+                        {% block product_delivery %}
                             <div class="row">
+                                Block 'product_delivery' to override
+                            </div>
+                        {% endblock %}
+
+                        {% if product.isSalable %}
+                            <div itemprop="offers" class="row" itemscope itemtype="http://schema.org/Offer">
                                 <div class="col-lg-12">
-                                    {{ sonata_block_render({'type': 'sonata.product.block.variations_form'}, {'product': product, 'variations_properties': variations_properties}) }}
+                                    {% block product_basket %}
+                                        {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
+                                    {% endblock %}
                                 </div>
                             </div>
-                        {% endblock %}
-                    {% endblock %}
-
-                    {% block product_delivery %}
-                        <div class="row">
-                            Block 'product_delivery' to override
-                        </div>
-                    {% endblock %}
-
-                    {% if product.isSalable %}
-                        <div itemprop="offers" class="row" itemscope itemtype="http://schema.org/Offer">
-                            <div class="col-lg-12">
-                                {% block product_basket %}
-                                    <div class="alert alert-danger" id="sonata_add_basket_error" style="display:none;"></div>
-                                    {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
-                                {% endblock %}
-                            </div>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
         {% endblock %}
     </div>
 {% endblock %}
