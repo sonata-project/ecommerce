@@ -384,15 +384,17 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     public function testCalculatePrice()
     {
         $product = new ProductTest();
-        $product->setPrice(42);
+        $product->setPrice(42.123);
 
         $currency = new Currency();
         $currency->setLabel("EUR");
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(42*4, $provider->calculatePrice($product, $currency, 4));
-        $this->assertEquals(42, $provider->calculatePrice($product, $currency));
+        $this->assertEquals(42.123*4, $provider->calculatePrice($product, $currency, 4));
+        $this->assertEquals(42.123, $provider->calculatePrice($product, $currency));
+        $this->assertEquals(42, $provider->calculatePrice($product, $currency, 1, 0), "Precision parameter to 0 returns rounded value");
+        $this->assertEquals(42.12*2, $provider->calculatePrice($product, $currency, 2, 2), "Precision parameter to 2 returns slightly different value");
     }
 
     /**
