@@ -937,13 +937,13 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1)
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1, $precision = 3)
     {
         if (!is_int($quantity) || $quantity < 1) {
             throw new InvalidParameterException("Expected integer >= 1 for quantity, ".$quantity." given.");
         }
 
-        return floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency), $quantity));
+        return floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency), $quantity, $precision));
     }
 
     /**
