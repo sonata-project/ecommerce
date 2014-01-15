@@ -164,7 +164,9 @@ class CustomerController extends Controller
 
                 $this->get('session')->getFlashBag()->add('success', $id ? 'address_edit_success' : 'address_add_success');
 
-                return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
+                $url = $this->get('session')->get('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
+
+                return new RedirectResponse($url);
             }
         }
 
