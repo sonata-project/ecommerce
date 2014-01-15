@@ -39,4 +39,18 @@ class OrderManager extends DoctrineBaseManager implements OrderManagerInterface
 
         return $qb->getQuery()->execute();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder($orderId)
+    {
+        $qb = $this->getRepository()->createQueryBuilder('o')
+            ->select('o')
+            ->innerJoin('o.orderElements', 'oe')
+            ->where('o.id = :id')
+            ->setParameter('id', $orderId);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

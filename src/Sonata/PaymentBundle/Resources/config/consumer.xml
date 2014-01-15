@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.payment.consumer.order_process.class">Sonata\PaymentBundle\Consumer\PaymentProcessOrderConsumer</parameter>
+        <parameter key="sonata.payment.consumer.order_element_process.class">Sonata\PaymentBundle\Consumer\PaymentProcessOrderElementConsumer</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.payment.consumer.order_process" class="%sonata.payment.consumer.order_process.class%" >
+            <tag name="sonata.notification.consumer" type="sonata_payment_order_process" />
+
+            <argument type="service" id="sonata.order.manager" />
+            <argument type="service" id="sonata.transaction.manager" />
+            <argument type="service" id="sonata.notification.backend" />
+        </service>
+
+        <service id="sonata.payment.consumer.order_element_process" class="%sonata.payment.consumer.order_element_process.class%" >
+            <tag name="sonata.notification.consumer" type="sonata_payment_order_element_process" />
+
+            <argument type="service" id="sonata.order.order_element.manager" />
+            <argument type="service" id="sonata.product.pool" />
+        </service>
+    </services>
+
+</container>
