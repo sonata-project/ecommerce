@@ -1080,4 +1080,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         return $fields;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updateStock($product, ProductManagerInterface $productManager, $diff)
+    {
+        $productManager->updateStock($product, $diff);
+    }
 }

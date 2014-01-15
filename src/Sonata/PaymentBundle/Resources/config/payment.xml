@@ -76,6 +76,7 @@
             <argument type="service" id="sonata.payment.selector" />
             <argument type="service" id="sonata.generator" />
             <argument type="service" id="sonata.transaction.manager" />
+            <argument type="service" id="sonata.notification.backend" />
         </service>
 
     </services>
