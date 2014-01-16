@@ -57,7 +57,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm);
+        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -91,7 +93,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm);
+        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -137,7 +141,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm);
+        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -174,7 +180,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm);
+        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -213,7 +221,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm);
+        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -247,7 +257,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm);
+        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
 
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())
@@ -293,7 +305,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm);
+        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
 
         $request = new Request();
 
