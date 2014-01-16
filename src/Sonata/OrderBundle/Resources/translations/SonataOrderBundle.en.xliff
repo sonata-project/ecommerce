@@ -387,6 +387,14 @@
             <!-- End - Filters translations -->
 
             <!-- Begin - View order translations -->
+            <trans-unit id="sonata.order.view.in_progress_title">
+                <source>sonata.order.view.in_progress_title</source>
+                <target>Current orders</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.done_title">
+                <source>sonata.order.view.done_title</source>
+                <target>Past orders</target>
+            </trans-unit>
             <trans-unit id="sonata.order.view.created_at">
                 <source>sonata.order.view.created_at</source>
                 <target>Creation date</target>
@@ -445,7 +453,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.reference">
                 <source>sonata.order.view.reference</source>
-                <target>Order</target>
+                <target>Reference</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.elements">
                 <source>sonata.order.view.elements</source>
@@ -485,15 +493,15 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.order_status">
                 <source>sonata.order.view.order_status</source>
-                <target>Order</target>
+                <target>Order status</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.payment_status">
                 <source>sonata.order.view.payment_status</source>
-                <target>Payment</target>
+                <target>Payment status</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.delivery_status">
                 <source>sonata.order.view.delivery_status</source>
-                <target>Delivery</target>
+                <target>Delivery status</target>
             </trans-unit>
             <!-- End - Order view translations -->
 

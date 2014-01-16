@@ -34,6 +34,7 @@ class OrderManager extends DoctrineBaseManager implements OrderManagerInterface
         $qb = $this->getRepository()->createQueryBuilder('o')
             ->leftJoin('o.customer', 'c')
             ->where('c.user = :user')
+            ->orderBy('o.createdAt', 'DESC')
             ->setParameter('user', $user);
 
         return $qb->getQuery()->execute();
