@@ -387,6 +387,14 @@
             <!-- End - Filters translations -->
 
             <!-- Begin - View order translations -->
+            <trans-unit id="sonata.order.view.in_progress_title">
+                <source>sonata.order.view.in_progress_title</source>
+                <target>Commandes en cours</target>
+            </trans-unit>
+            <trans-unit id="sonata.order.view.done_title">
+                <source>sonata.order.view.done_title</source>
+                <target>Commandes précédentes</target>
+            </trans-unit>
             <trans-unit id="sonata.order.view.created_at">
                 <source>sonata.order.view.created_at</source>
                 <target>Date de création</target>
@@ -485,15 +493,15 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.order_status">
                 <source>sonata.order.view.order_status</source>
-                <target>Commande</target>
+                <target>Statut Commande</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.payment_status">
                 <source>sonata.order.view.payment_status</source>
-                <target>Paiement</target>
+                <target>Statut Paiement</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.delivery_status">
                 <source>sonata.order.view.delivery_status</source>
-                <target>Livraison</target>
+                <target>Statut Livraison</target>
             </trans-unit>
             <!-- End - Order view translations -->
 
