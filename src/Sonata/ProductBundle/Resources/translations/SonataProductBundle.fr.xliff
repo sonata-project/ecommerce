@@ -367,7 +367,6 @@
                 <source>list.label_is_variation</source>
                 <target>Variation?</target>
             </trans-unit>
-
             <trans-unit id="form.label_price_inc_vat">
                 <source>form.label_price_inc_vat</source>
                 <target>Prix avec TVA</target>
@@ -379,6 +378,14 @@
             <trans-unit id="sonata_product_catalog_breadcrumb">
                 <source>sonata_product_catalog_breadcrumb</source>
                 <target>Catalogue</target>
+            </trans-unit>
+            <trans-unit id="sonata.product.sku">
+                <source>sonata.product.sku</source>
+                <target>Référence</target>
+            </trans-unit>
+            <trans-unit id="product.sidemenu.view_variations">
+                <source>product.sidemenu.view_variations</source>
+                <target>Variations</target>
             </trans-unit>
         </body>
     </file>
