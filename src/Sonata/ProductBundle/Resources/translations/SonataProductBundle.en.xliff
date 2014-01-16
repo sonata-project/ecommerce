@@ -379,7 +379,14 @@
                 <source>sonata_product_catalog_breadcrumb</source>
                 <target>Catalog</target>
             </trans-unit>
+            <trans-unit id="sonata.product.sku">
+                <source>sonata.product.sku</source>
+                <target>Reference</target>
+            </trans-unit>
+            <trans-unit id="product.sidemenu.view_variations">
+                <source>product.sidemenu.view_variations</source>
+                <target>Variations</target>
+            </trans-unit>
         </body>
-
     </file>
 </xliff>
