@@ -353,6 +353,9 @@ class BasketController extends Controller
             }
         }
 
+        // Set URL to be redirected to once edited address
+        $this->get('session')->set('sonata_address_redirect', $this->generateUrl('sonata_basket_delivery_address'));
+
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), "SonataBasketBundle"));
 
         return $this->render($template, array(
@@ -410,6 +413,9 @@ class BasketController extends Controller
                 return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
             }
         }
+
+        // Set URL to be redirected to once edited address
+        $this->get('session')->set('sonata_address_redirect', $this->generateUrl('sonata_basket_payment_address'));
 
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), "SonataBasketBundle"));
 
