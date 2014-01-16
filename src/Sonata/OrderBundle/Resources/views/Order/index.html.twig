@@ -20,25 +20,69 @@ file that was distributed with this source code.
 
     {% if orders|length > 0 %}
 
-        <table class="table table-bordered">
-            <tr>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %}</th>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.status{% endtrans %}</th>
-                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
-            </tr>
+        {% set looped = false %}
 
-            {% for order in orders %}
-                <tr>
-                    <td><a href="{{ url('sonata_order_view', {'reference' : order.reference}) }}">{{ order.reference }}</a></td>
-                    <td>{{ order.createdAt|format_datetime() }}</td>
-                    <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
-                    <td class="number">{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
-                </tr>
-            {% endfor %}
+        {% for order in orders
+            if order.status is constant('STATUS_PENDING', order) or order.status is constant('STATUS_OPEN', order) %}
 
-        </table>
+            {% set looped = true %}
+
+            {% if loop.first %}
+                <h3>{% trans from 'SonataOrderBundle' %}sonata.order.view.in_progress_title{% endtrans %}</h3>
+                <table class="table table-bordered">
+                    {{ block('order_list_heading') }}
+            {% endif %}
+
+            {{ block('order_list_row') }}
+        {% endfor %}
+
+        {% if looped %}
+            {% set looped = false %}
+            </table>
+        {% endif %}
+
+        {% for order in orders
+            if order.status is not constant('STATUS_PENDING', order) and order.status is not constant('STATUS_OPEN', order) %}
+
+            {% set looped = true %}
+
+            {% if loop.first %}
+                <h3>{% trans from 'SonataOrderBundle' %}sonata.order.view.done_title{% endtrans %}</h3>
+                <table class="table table-bordered">
+                    {{ block('order_list_heading') }}
+            {% endif %}
+
+            {{ block('order_list_row') }}
+        {% endfor %}
+
+        {% if looped %}
+            </table>
+        {% endif %}
+
     {% else %}
         <p>{% trans from 'SonataOrderBundle' %}sonata.order.list.no_orders{% endtrans %}</p>
     {% endif %}
+{% endblock %}
+
+
+{% block order_list_heading %}
+    <tr>
+        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %}</th>
+        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
+        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.status{% endtrans %}</th>
+        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
+        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</th>
+        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
+    </tr>
+{% endblock %}
+
+{% block order_list_row %}
+    <tr>
+        <td><a href="{{ url('sonata_order_view', {'reference' : order.reference}) }}">{{ order.reference }}</a></td>
+        <td>{{ order.createdAt|format_datetime() }}</td>
+        <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
+        <td><span class="label{{ order|sonata_status_class('payment', 'danger') ? ' label-'~order|sonata_status_class('payment', 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
+        <td><span class="label{{ order|sonata_status_class('delivery', 'danger') ? ' label-'~order|sonata_status_class('delivery', 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
+        <td class="number">{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
+    </tr>
 {% endblock %}
