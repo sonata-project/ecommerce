@@ -77,6 +77,11 @@ abstract class BaseOrder implements OrderInterface
     protected $deliveryCost;
 
     /**
+     * @var float $deliverVat
+     */
+    protected $deliveryVat;
+
+    /**
      * @var string $billing_name
      */
     protected $billingName;
@@ -482,6 +487,27 @@ abstract class BaseOrder implements OrderInterface
     {
         return $this->deliveryCost;
     }
+
+    /**
+     * Set delivery VAT
+     *
+     * @param float $deliveryVat
+     */
+    public function setDeliveryVat($deliveryVat)
+    {
+        $this->deliveryVat = $deliveryVat;
+    }
+
+    /**
+     * Get delivery VAT
+     *
+     * @return float $deliveryVat
+     */
+    public function getDeliveryVat()
+    {
+        return $this->deliveryVat;
+    }
+
 
     /**
      * {@inheritdoc}

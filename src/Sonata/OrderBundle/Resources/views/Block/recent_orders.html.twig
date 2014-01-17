@@ -33,7 +33,7 @@ file that was distributed with this source code.
                         {% endif %}
                         <td class="number">{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
                         <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
-                        <td>{{ order.createdAt|format_datetime() }}</td>
+                        <td>{{ order.createdAt|format_datetime(null, order.locale) }}</td>
                     </tr>
                 {% endfor %}
             </table>

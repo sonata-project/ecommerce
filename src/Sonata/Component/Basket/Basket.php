@@ -475,6 +475,20 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
+    public function getDeliveryVat()
+    {
+        $method = $this->getDeliveryMethod();
+
+        if (!$method instanceof ServiceDeliveryInterface) {
+            return 0;
+        }
+
+        return $method->getVat();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasProduct(ProductInterface $product)
     {
         if (!array_key_exists($product->getId(), $this->positions)) {

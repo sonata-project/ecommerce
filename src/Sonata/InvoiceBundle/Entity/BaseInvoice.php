@@ -122,6 +122,11 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $user;
 
     /**
+     * @var string
+     */
+    protected $locale;
+
+    /**
      * @var array
      */
     protected $invoiceElements = array();
@@ -596,6 +601,27 @@ abstract class BaseInvoice implements InvoiceInterface
 
         return $statusList[$this->getStatus()];
     }
+
+    /**
+     * Gets the locale
+     *
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Sets the locale
+     *
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
 
     /**
      * @return array

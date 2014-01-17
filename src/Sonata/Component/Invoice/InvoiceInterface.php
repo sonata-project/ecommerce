@@ -288,6 +288,20 @@ interface InvoiceInterface
     public function getCustomer();
 
     /**
+     * Gets the locale
+     *
+     * @return string
+     */
+    public function getLocale();
+
+    /**
+     * Sets the locale
+     *
+     * @param string $locale
+     */
+    public function setLocale($locale);
+
+    /**
      * Returns all the invoice elements
      *
      * @return array
