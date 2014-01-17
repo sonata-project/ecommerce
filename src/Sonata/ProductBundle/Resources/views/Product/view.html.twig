@@ -104,14 +104,12 @@ file that was distributed with this source code.
                     {% endblock %}
 
                     <div class="panel-footer">
-                        {% block product_variations_list %}
-                            {% block  product_variations_form_block %}
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        {{ sonata_block_render({'type': 'sonata.product.block.variations_form'}, {'product': product, 'variations_properties': variations_properties}) }}
-                                    </div>
+                        {% block  product_variations_form_block %}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {{ sonata_block_render({'type': 'sonata.product.block.variations_form'}, {'product': product, 'variations_properties': variations_properties}) }}
                                 </div>
-                            {% endblock %}
+                            </div>
                         {% endblock %}
 
                         {% block product_delivery %}

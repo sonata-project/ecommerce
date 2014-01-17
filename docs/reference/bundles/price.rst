@@ -5,6 +5,11 @@
 Price
 =====
 
+Architecture
+============
+
+For more information about our position regarding the *price* architecture, you can read: :doc:`../architecture/currency`.
+
 Presentation
 ============
 
@@ -32,8 +37,3 @@ You can also change the services class (defined as parameters):
 * ``sonata.price.currency.manager.class`` for the currency manager (finding the CurrencyInterface item matching the currency label)
 
 As you may see in the sample configuration, we defined a new doctrine field type to store currencies in database.
-
-Architecture
-============
-
-For more information about our position regarding the *price* architecture, you can read: :doc:`../architecture/currency`.

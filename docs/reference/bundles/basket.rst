@@ -5,6 +5,11 @@
 Basket
 ======
 
+Architecture
+============
+
+For more information about our position regarding the *basket* architecture, you can read: :doc:`../architecture/basket`.
+
 Presentation
 ============
 
@@ -88,7 +93,3 @@ Here's the full default configuration for SonataBasketBundle:
 As you can see, you can override the builder, factory & loader services ; basket, basket_element & customer classes and the various forms.
 Moreover, you're able to override the rest of the bundle by extending it (through SonataEasyExtendsBundle for instance).
 
-Architecture
-============
-
-For more information about our position regarding the *basket* architecture, you can read: :doc:`../architecture/basket`.
