@@ -6,6 +6,11 @@
 Product
 =======
 
+Architecture
+============
+
+For more information about our position regarding *product* architecture, you can read: :doc:`../architecture/product`.
+
 Presentation
 ============
 
@@ -77,8 +82,3 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
                     mappings:
                         ApplicationSonataProductBundle: ~
                         SonataProductBundle: ~
-
-Architecture
-============
-
-For more information about our position regarding *product* architecture, you can read: :doc:`../architecture/product`.

@@ -5,6 +5,11 @@
 Invoice
 =======
 
+Architecture
+============
+
+For more information about our position regarding the *invoice* architecture, you can read: :doc:`../architecture/invoice`.
+
 Presentation
 ============
 
@@ -42,8 +47,3 @@ Default order to invoice transformer is provided in ``Sonata\Component\Transform
 
 Currently, a raw HTML representation for invoices is provided ; would you like to generate a PDF ? We encourage you to check out PDF generation bundles taking HTML as inputs.
 The invoice rendering template is ``SonataInvoiceBundle:Invoice:view.html.twig`` ; you can override it by using Symfony bundle override rules.
-
-Architecture
-============
-
-For more information about our position regarding the *invoice* architecture, you can read: :doc:`../architecture/invoice`.
