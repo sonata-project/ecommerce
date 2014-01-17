@@ -18,7 +18,7 @@ use Sonata\CustomerBundle\Entity\BaseAddress;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class CustomerController
@@ -180,13 +180,13 @@ class CustomerController extends Controller
      *
      * @param AddressInterface $address
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function checkAddress(AddressInterface $address = null)
     {
         if (null === $address
             || $address->getCustomer()->getId() !== $this->getCustomer()->getId()) {
-            throw new UnauthorizedHttpException();
+            throw new NotFoundHttpException;
         }
     }
 
