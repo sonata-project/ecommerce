@@ -156,16 +156,17 @@ class ProductMenuBuilder
                 continue;
             }
 
+            $fullOptions = array_merge(array(
+                'attributes'      => array('class' => ""),      // Ensuring it is set
+                'route'           => 'sonata_catalog_category',
+                'routeParameters' => array(
+                    'category_id'   => $category->getId(),
+                    'category_slug' => $category->getSlug()
+                ),
+            ), $options);
+
             if (null === $category->getParent()) {
-                $fullOptions = array_merge(array('attributes' => array('class' => 'nav-header')), $options);
-            } else {
-                $fullOptions = array_merge(array(
-                    'route'           => 'sonata_catalog_category',
-                    'routeParameters' => array(
-                        'category_id'   => $category->getId(),
-                        'category_slug' => $category->getSlug()
-                    )
-                ), $options);
+                $fullOptions['attributes']['class'] = 'lead '.$fullOptions['attributes']['class'];
             }
 
             $child = $menu->addChild(
