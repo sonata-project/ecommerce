@@ -19,9 +19,9 @@ with a small summary of your product.
 
 Start by adding the option in your product provider:
 
-::
+.. code-block:: php
 
-	<?php
+    <?php
     namespace Application\Sonata\ProductBundle\Provider;
 
     use JMS\Serializer\SerializerInterface;
@@ -44,12 +44,13 @@ Start by adding the option in your product provider:
             ));
         }
 
-        ...
+        // ...
 
 You also have to create a template file to display your products properties. Those will be rendered via
 a ``Resources/views/Training/properties.html.twig`` template. It can be something like:
 
-::
+.. code-block:: html+jinja
+
     <dl>
         {% if not product.isMaster %}
             <dt>{{ 'training.level_title'|trans([], 'SonataProductBundle') }}</dt>

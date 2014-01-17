@@ -49,35 +49,34 @@ Product Template
 
 Here are the blocks you can override in the product template.
 
-First of all, these main product blocks are encapsulated by the ``product`` block.
+The product sheet is based on the main ``product`` block, which is divided in 2 blocks:
 
-  - ``product_errors`` block shows the product page errors (unavailable stock, ...),
-  - ``product_title`` block displays product title,
+  - ``product_left`` block, which includes:
 
-  - ``product_details`` block defines product image, description text and product gallery in the following blocks:
-    - ``product_image`` block displays current product image,
-    - ``product_description`` block displays product description text,
-    - ``product_gallery`` block display product gallery if defined.
+    - ``product_carousel`` block displays the gallery associated with the product or just the main image of the product.
 
-On the right side, there is the following blocks encapsulated in the ``product_right`` block:
+  - ``product_right`` block, which includes:
 
-  - ``product_properties`` block displays various information on the product (price, variations, ...) in the blocks listed below:
-    - ``product_properties_before_price`` block can help you to display additional information before all of them,
-    - ``product_price_label`` block displays product price label,
-    - ``product_price_price`` block displays product price value,
-    - ``product_properties_after_price`` block can help you to display additional information after the blocks listed above.
+    - ``product_title`` block displays the product title,
 
-  - ``product_variations`` block displays product variations information and the following blocks are encapsulated in:
-    - ``variations_label`` block displays the product variation title,
-    - ``product_variations_list`` block displays variations products list,
+    - ``product_properties`` block displays various information about the product (price, ...) in the blocks listed below:
 
-  - ``product_delivery`` block displays product delivery information,
-  - ``product_basket`` block displays quantity information and "add to basket" button.
+      - ``product_generic_properties`` block displays generic informaiton about the product (non variation fields):
+
+        - ``product_unit_price`` block displays the unit price of the product,
+        - ``product_reference`` block displays the reference (aka SKU) of the product,
+      - ``product_description_short`` block shows the short description of the product,
+      - ``product_errors`` block shows the product page errors (unavailable stock, ...),
+    - ``product_variations_form_block`` blocks displays a form allowing to select the variation based variated properties (see :ref:`block.variations_form` for more informations).
+    - ``product_delivery`` block displays product delivery information (to override by default),
+    - ``product_basket`` block displays the "Add to basket" form (rendered by ``SonataBasketBundle:Basket:add_product_form.html.twig`` template).
+
 
 Additionally, you can override those template blocks:
 
   - ``product_cross`` block that can be overrided in you do not want to displays cross-selling block and the following is encapsulated in:
-    - ``product_cross_selling`` block that includes cross selling block.
+
+    - ``product_cross_selling`` block that includes cross-selling block (rendered by ``SonataProductBundle:Product:view_similar.html.twig`` template).
 
 Product Helpers
 ===============
@@ -91,3 +90,35 @@ Some Twig helpers are available for your templates.
   - ``sonata_product_cheapest_variation_price`` returns the price of the cheapest variation.
   - ``sonata_product_price`` calculates the price of a ``Product``.
   - ``sonata_product_stock`` gets the available stock of a ``Product``.
+
+Product Block Services
+======================
+
+Some SonataBlock services are available as well:
+
+.. _block.variations_form:
+
+sonata.product.block.variations_form
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Renders the variations_form. A ``product`` argument is needed.
+
+Options:
+  - ``variations_properties``: an array of properties you wish to display
+  - ``form_route`` and ``form_route_parameters`` which are used to generate the URL for the submit of the post (and the AJAX submit as well)
+  - ``form_field_options`` which allows you to give an array of options to the form field generated.
+
+sonata.product.block.recent_products
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Renders the latest added products. By default, the number of displayed products is set to 5, but you may override this setting.
+
+sonata.product.block.categories_menu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Displays a KnpMenu rendering the product categories.
+
+sonata.product.block.filters_menu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Displays a KnpMenu rendering the currently selected product type filters (WIP).
