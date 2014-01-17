@@ -13,6 +13,7 @@ namespace Sonata\ProductBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Symfony\Component\Routing\Route;
@@ -163,6 +164,9 @@ class ProductMenuBuilder
                     'category_id'   => $category->getId(),
                     'category_slug' => $category->getSlug()
                 ),
+                'extras'           => array(
+                    'safe_label' => true
+                )
             ), $options);
 
             if (null === $category->getParent()) {
@@ -170,7 +174,7 @@ class ProductMenuBuilder
             }
 
             $child = $menu->addChild(
-                $category->getName(),
+                $this->getCategoryTitle($category),
                 $fullOptions
             );
 
@@ -184,5 +188,12 @@ class ProductMenuBuilder
         }
 
         $menu->setCurrentUri($currentUri);
+    }
+
+    protected function getCategoryTitle(CategoryInterface $category, $limit = 2)
+    {
+        $count = $this->categoryManager->getProductCount($category, $limit);
+
+        return sprintf("%s <span class=\"badge pull-right\">%d%s</span>", $category->getName(), $count, $count >= $limit ? '+' : '');
     }
 }

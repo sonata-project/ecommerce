@@ -39,4 +39,13 @@ interface ProductCategoryManagerInterface extends ManagerInterface
      * @return CategoryInterface[]
      */
     public function getCategoryTree();
+
+    /**
+     * Returns the number of products in $category (maxed by $limit)
+     *
+     * @param CategoryInterface $category
+     *
+     * @return int
+     */
+    public function getProductCount(CategoryInterface $category, $limit = 1000);
 }
