@@ -140,6 +140,7 @@ class BasketTransformer extends BaseTransformer
         $order->setTotalExcl($basket->getTotal());
         $order->setTotalInc($basket->getTotal(true));
 
+        $order->setDeliveryVat($basket->getDeliveryVat());
         $order->setDeliveryCost($basket->getDeliveryPrice(true));
         $order->setDeliveryMethod($basket->getDeliveryMethod()->getCode());
         $order->setDeliveryStatus(ServiceDeliveryInterface::STATUS_OPEN);
