@@ -178,6 +178,10 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      */
     public function updateStock($product, $diff)
     {
+        if (0 == $diff) {
+            return;
+        }
+
         $productId = $product instanceof ProductInterface ? $product->getId() : $product;
 
         $tableName = $this->getTableName();
