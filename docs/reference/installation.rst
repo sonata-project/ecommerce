@@ -170,6 +170,14 @@ You can use these bundles to extend entities or template files.
 ::
 
         # sonata front controller
+        sonata_basket:
+            resource: @SonataBasketBundle/Resources/config/routing/basket.xml
+            prefix: /shop/basket
+
+        sonata_customer:
+            resource: @SonataCustomerBundle/Resources/config/routing/customer.xml
+            prefix: /shop/user
+
         sonata_user:
             resource: @SonataUserBundle/Resources/config/routing/user.xml
             prefix: /shop/user
