@@ -16,7 +16,10 @@ use Sonata\Component\Order\OrderInterface;
 
 class Transaction extends BaseTransaction
 {
-
+    public function getId()
+    {
+        return 1;
+    }
 }
 
 class BaseTransactionTest extends \PHPUnit_Framework_TestCase
