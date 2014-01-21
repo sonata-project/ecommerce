@@ -172,4 +172,22 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
 
         return $queryBuilder->getQuery()->execute();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function updateStock($product, $diff)
+    {
+        if (0 == $diff) {
+            return;
+        }
+
+        $productId = $product instanceof ProductInterface ? $product->getId() : $product;
+
+        $tableName = $this->getTableName();
+
+        $operator = $diff > 0 ? '+' : '-';
+
+        $this->getConnection()->query(sprintf('UPDATE %s SET stock = stock %s %d WHERE id = %d;', $tableName, $operator, abs($diff), $productId));
+    }
 }

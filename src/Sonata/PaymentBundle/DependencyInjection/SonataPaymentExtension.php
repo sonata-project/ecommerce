@@ -39,6 +39,7 @@ class SonataPaymentExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('consumer.xml');
         $loader->load('orm.xml');
         $loader->load('payment.xml');
         $loader->load('generator.xml');

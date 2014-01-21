@@ -15,6 +15,7 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Generator\ReferenceInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\NotificationBundle\Backend\BackendInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -50,19 +51,26 @@ class PaymentHandler implements PaymentHandlerInterface
     protected $paymentSelector;
 
     /**
+     * @var BackendInterface
+     */
+    protected $notificationBackend;
+
+    /**
      * Constructor
      *
      * @param OrderManagerInterface       $orderManager
      * @param PaymentSelectorInterface    $paymentSelector
      * @param ReferenceInterface          $referenceGenerator
      * @param TransactionManagerInterface $transactionManager
+     * @param BackendInterface            $notificationBackend
      */
-    public function __construct(OrderManagerInterface $orderManager, PaymentSelectorInterface $paymentSelector, ReferenceInterface $referenceGenerator, TransactionManagerInterface $transactionManager)
+    public function __construct(OrderManagerInterface $orderManager, PaymentSelectorInterface $paymentSelector, ReferenceInterface $referenceGenerator, TransactionManagerInterface $transactionManager, BackendInterface $notificationBackend)
     {
-        $this->orderManager       = $orderManager;
-        $this->paymentSelector    = $paymentSelector;
-        $this->referenceGenerator = $referenceGenerator;
-        $this->transactionManager = $transactionManager;
+        $this->orderManager        = $orderManager;
+        $this->paymentSelector     = $paymentSelector;
+        $this->referenceGenerator  = $referenceGenerator;
+        $this->transactionManager  = $transactionManager;
+        $this->notificationBackend = $notificationBackend;
     }
 
     /**
@@ -88,6 +96,11 @@ class PaymentHandler implements PaymentHandlerInterface
 
         // rebuilt from the order information
         $this->getPayment($transaction->getPaymentCode())->getTransformer('order')->transformIntoBasket($order, $basket);
+
+        $this->notificationBackend->createAndPublish('sonata_payment_order_process', array(
+            'order_id'       => $order->getId(),
+            'transaction_id' => $transaction->getId(),
+        ));
 
         return $order;
     }
@@ -135,6 +148,11 @@ class PaymentHandler implements PaymentHandlerInterface
 
         $this->transactionManager->save($transaction);
         $this->orderManager->save($order);
+
+        $this->notificationBackend->createAndPublish('sonata_payment_order_process', array(
+            'order_id'       => $order->getId(),
+            'transaction_id' => $transaction->getId(),
+        ));
 
         return $response;
     }
