@@ -71,6 +71,14 @@
                 <source>sidemenu.link_delivery_list</source>
                 <target>Deliveries</target>
             </trans-unit>
+            <trans-unit id="sonata.product.sku">
+                <source>sonata.product.sku</source>
+                <target>Reference</target>
+            </trans-unit>
+            <trans-unit id="product.sidemenu.view_variations">
+                <source>product.sidemenu.view_variations</source>
+                <target>Variations</target>
+            </trans-unit>
             <!-- End - Sidemenu translations -->
 
             <!-- Begin - List translations -->
