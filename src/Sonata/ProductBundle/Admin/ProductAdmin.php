@@ -264,4 +264,16 @@ class ProductAdmin extends Admin
             ->assertCallback(array('validateOneMainCategory'))
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postUpdate($product)
+    {
+        $provider = $this->getProductProvider($product);
+
+        if ($product->hasVariations()) {
+            $provider->synchronizeVariations($product);
+        }
+    }
 }
