@@ -30,7 +30,7 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block breadcrumb %}
-    <div class="row clearfix">
+    <div class="clearfix">
         {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'product': product, 'current_uri': app.request.requestUri }) }}
     </div>
 {% endblock %}
