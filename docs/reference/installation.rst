@@ -55,6 +55,16 @@ You already have a project and want to add e-commerce capabilities to it? Follow
         new Sonata\PaymentBundle\SonataPaymentBundle(),
         new Sonata\PriceBundle\SonataPriceBundle(),
 
+- In order to have a fully session persisted basket (even when customer logout and login again), you need to update your ``security.yml`` file with the ``invalidate_session`` parameter to false:
+
+.. code-block:: yaml
+
+    security:
+        firewalls:
+            main:
+                logout:
+                    path: /logout
+                    invalidate_session: false
 
 - Edit your ``config.yml`` and add the following lines:
 
