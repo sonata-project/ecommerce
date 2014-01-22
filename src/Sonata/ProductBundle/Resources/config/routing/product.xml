@@ -8,15 +8,15 @@
         <default key="_controller">SonataProductBundle:Product:getPriceStockForQuantity</default>
     </route>
 
-    <route id="sonata_product_view" pattern="/{productId}/{slug}">
+    <route id="sonata_product_view" pattern="/{slug}/{productId}">
         <default key="_controller">SonataProductBundle:Product:view</default>
     </route>
 
-    <route id="sonata_product_view_variations" pattern="/{productId}/{slug}/variations">
+    <route id="sonata_product_view_variations" pattern="/{slug}/{productId}/variations">
         <default key="_controller">SonataProductBundle:Product:viewVariations</default>
     </route>
 
-    <route id="sonata_product_variation_product" pattern="/{productId}/{slug}/variation">
+    <route id="sonata_product_variation_product" pattern="/{slug}/{productId}/variation">
         <default key="_controller">SonataProductBundle:Product:variationToProduct</default>
     </route>
 
