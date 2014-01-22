@@ -37,12 +37,18 @@ class SonataOrderExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
+        $bundles = $container->getParameter('kernel.bundles');
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('block.xml');
         $loader->load('orm.xml');
         $loader->load('admin.xml');
         $loader->load('form.xml');
         $loader->load('twig.xml');
+
+        if (isset($bundles['SonataSeoBundle'])) {
+            $loader->load('seo_block.xml');
+        }
 
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);

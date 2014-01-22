@@ -421,6 +421,10 @@
             </trans-unit>
             <!-- End - Addresses translations -->
 
+            <trans-unit id="sonata_customer_addresses_breadcrumb">
+                <source>sonata_customer_addresses_breadcrumb</source>
+                <target>Addresses</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
