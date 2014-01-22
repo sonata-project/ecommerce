@@ -29,13 +29,15 @@ class InvoiceTransformer extends BaseTransformer
     protected $invoiceElementManager;
 
     /**
-     * @var \Sonata\Component\Delivery\Pool
+     * @var DeliveryPool
      */
     protected $deliveryPool;
 
     /**
-     * @param InvoiceElementManagerInterface $invoiceElementManager
-     * @param DeliveryPool                   $deliveryPool
+     * Constructor
+     *
+     * @param InvoiceElementManagerInterface $invoiceElementManager Invoice element manager
+     * @param DeliveryPool                   $deliveryPool          Delivery pool component
      */
     public function __construct(InvoiceElementManagerInterface $invoiceElementManager, DeliveryPool $deliveryPool)
     {
@@ -100,8 +102,9 @@ class InvoiceTransformer extends BaseTransformer
 
         $invoiceElement->setQuantity(1);
         $invoiceElement->setPrice($order->getDeliveryCost());
+        $invoiceElement->setUnitPrice($order->getDeliveryCost());
         $invoiceElement->setTotal($order->getDeliveryCost());
-        $invoiceElement->setVat($order->getDeliveryVat());
+        $invoiceElement->setVatRate(0);
 
         $invoiceElement->setDesignation($this->deliveryPool->getMethod($order->getDeliveryMethod())->getName());
         $invoiceElement->setDescription($this->deliveryPool->getMethod($order->getDeliveryMethod())->getName());
