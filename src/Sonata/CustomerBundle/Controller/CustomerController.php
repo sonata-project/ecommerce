@@ -162,7 +162,7 @@ class CustomerController extends Controller
 
                 $this->getCustomerManager()->save($customer);
 
-                $this->get('session')->getFlashBag()->add('success', $id ? 'address_edit_success' : 'address_add_success');
+                $this->get('session')->getFlashBag()->add('sonata_customer_success', $id ? 'address_edit_success' : 'address_add_success');
 
                 $url = $this->get('session')->get('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
 
