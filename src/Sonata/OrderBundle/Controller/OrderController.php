@@ -37,7 +37,8 @@ class OrderController extends Controller
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', array(), "SonataOrderBundle"));
 
         return $this->render('SonataOrderBundle:Order:index.html.twig', array(
-            'orders' => $orders
+            'orders'             => $orders,
+            'breadcrumb_context' => 'user_order',
         ));
     }
 
@@ -61,7 +62,8 @@ class OrderController extends Controller
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_view_title', array(), "SonataOrderBundle"));
 
         return $this->render('SonataOrderBundle:Order:view.html.twig', array(
-            'order' => $order
+            'order'              => $order,
+            'breadcrumb_context' => 'user_order',
         ));
     }
 
