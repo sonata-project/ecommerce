@@ -549,6 +549,11 @@
                 <target>Votre commande</target>
             </trans-unit>
             <!-- End - Order page titles translations -->
+
+            <trans-unit id="sonata_order_user_breadcrumb">
+                <source>sonata_order_user_breadcrumb</source>
+                <target>Commandes</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -62,8 +62,9 @@ class CustomerController extends Controller
         }
 
         return $this->render('SonataCustomerBundle:Addresses:list.html.twig', array(
-                'addresses' => $addresses,
-                'customer'  => $customer
+                'addresses'          => $addresses,
+                'customer'           => $customer,
+                'breadcrumb_context' => 'customer_address',
             ));
     }
 
@@ -171,7 +172,8 @@ class CustomerController extends Controller
         }
 
         return $this->render($template, array(
-            'form' => $form->createView()
+            'form'               => $form->createView(),
+            'breadcrumb_context' => 'customer_address',
         ));
     }
 
