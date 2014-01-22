@@ -669,9 +669,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
             foreach ($productCategories as $productCategory) {
                 $category = $productCategory->getCategory();
 
-                if ($productCategory && !$variationCategories->contains($category)) {
-                    $main = $productCategory->getMain();
-                    $this->productCategoryManager->addCategoryToProduct($variation, $category, $main);
+                if ($category && !$variationCategories->contains($category)) {
+                    $this->productCategoryManager->addCategoryToProduct($variation, $category, $productCategory->getMain());
                 }
             }
         }
