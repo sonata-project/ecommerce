@@ -56,18 +56,18 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
         }
 
         if ($product = $blockContext->getBlock()->getSetting('product')) {
-            $category = $product->getMainCategory();
+            if ($category = $product->getMainCategory()) {
+                $sorted = array($category);
 
-            $sorted = array($category);
+                while ($c = $category->getParent()) {
+                    $sorted[] = $c;
+                    $category = $c;
+                }
 
-            while ($c = $category->getParent()) {
-                $sorted[] = $c;
-                $category = $c;
+                $category = null;
+
+                $categories = array_reverse($sorted, true);
             }
-
-            $category = null;
-
-            $categories = array_reverse($sorted, true);
         }
 
         if (count($categories) > 0) {
