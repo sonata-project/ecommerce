@@ -1,7 +1,16 @@
 <?php
+/*
+ * This file is part of the Sonata package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\Component\Transformer;
 
-use Sonata\Component\Delivery\Pool;
+use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Transformer\BaseTransformer;
 use Sonata\Component\Order\OrderInterface;
@@ -24,7 +33,11 @@ class InvoiceTransformer extends BaseTransformer
      */
     protected $deliveryPool;
 
-    public function __construct(InvoiceElementManagerInterface $invoiceElementManager, Pool $deliveryPool)
+    /**
+     * @param InvoiceElementManagerInterface $invoiceElementManager
+     * @param DeliveryPool                   $deliveryPool
+     */
+    public function __construct(InvoiceElementManagerInterface $invoiceElementManager, DeliveryPool $deliveryPool)
     {
         $this->invoiceElementManager = $invoiceElementManager;
         $this->deliveryPool          = $deliveryPool;
