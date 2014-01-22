@@ -213,6 +213,7 @@ interface BasketInterface
      * @return float
      */
     public function getVatAmount();
+
     /**
      * return the Delivery price
      *
@@ -221,6 +222,13 @@ interface BasketInterface
      * @return float
      */
     public function getDeliveryPrice($vat = false);
+
+    /**
+     * returns the Delivery VAT rate
+     *
+     * @return float
+     */
+    public function getDeliveryVat();
 
     /**
      * check if the basket contains $product

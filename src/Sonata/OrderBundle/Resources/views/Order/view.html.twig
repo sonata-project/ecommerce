@@ -44,13 +44,13 @@ file that was distributed with this source code.
                         <table class="table table-bordered">
                             <tr>
                                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
-                                <td>{{ order.createdAt|format_datetime(null, null, date_time_size, date_time_size) }}</td>
+                                <td>{{ order.createdAt|format_datetime(null, order.locale, date_time_size, date_time_size) }}</td>
                             </tr>
                             <tr>
                                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.validated_at{% endtrans %}</th>
                                 <td>
                                     {% if order.validatedAt %}
-                                        {{ order.validatedAt|format_datetime(null, null, date_time_size, date_time_size) }}
+                                        {{ order.validatedAt|format_datetime(null, order.locale, date_time_size, date_time_size) }}
                                     {% else %}
                                         /
                                     {% endif %}
@@ -58,7 +58,7 @@ file that was distributed with this source code.
                             </tr>
                             <tr>
                                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.updated_at{% endtrans %}</th>
-                                <td>{{ order.updatedAt|format_datetime(null, null, date_time_size, date_time_size) }}</td>
+                                <td>{{ order.updatedAt|format_datetime(null, order.locale, date_time_size, date_time_size) }}</td>
                             </tr>
                         </table>
                     </div>

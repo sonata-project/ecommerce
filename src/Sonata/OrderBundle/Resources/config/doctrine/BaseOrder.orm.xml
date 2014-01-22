@@ -14,7 +14,8 @@
         <field name="totalInc"             nullable="true"   type="decimal"  column="total_inc"          scale="4"/>
         <field name="totalExcl"            nullable="true"   type="decimal"  column="total_excl"         scale="4"/>
         <field name="deliveryCost"         nullable="true"   type="decimal"  column="delivery_cost"      scale="4"/>
-        <field name="locale"               nullable="true"   type="string"   column="locale"            length="6" />
+        <field name="deliveryVat"          nullable="true"   type="decimal"  column="delivery_vat"       scale="4"/>
+        <field name="locale"               nullable="true"   type="string"   column="locale"             length="6" />
 
         <field name="billingName"          nullable="true"  type="string"   column="billing_name"       length="255"/>
         <field name="billingPhone"         nullable="true"  type="string"   column="billing_phone"      length="255"/>

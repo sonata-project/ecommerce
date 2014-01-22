@@ -1,6 +1,8 @@
 <?php
 namespace Sonata\Component\Transformer;
 
+use Sonata\Component\Delivery\Pool;
+use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Transformer\BaseTransformer;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
@@ -17,9 +19,15 @@ class InvoiceTransformer extends BaseTransformer
      */
     protected $invoiceElementManager;
 
-    public function __construct(InvoiceElementManagerInterface $invoiceElementManager)
+    /**
+     * @var \Sonata\Component\Delivery\Pool
+     */
+    protected $deliveryPool;
+
+    public function __construct(InvoiceElementManagerInterface $invoiceElementManager, Pool $deliveryPool)
     {
         $this->invoiceElementManager = $invoiceElementManager;
+        $this->deliveryPool          = $deliveryPool;
     }
 
     /**
@@ -51,13 +59,42 @@ class InvoiceTransformer extends BaseTransformer
 
         $invoice->setPaymentMethod($order->getPaymentMethod());
 
+        $invoice->setLocale($order->getLocale());
+
         foreach ($order->getOrderElements() as $orderElement) {
             $invoiceElement = $this->createInvoiceElementFromOrderElement($orderElement);
             $invoiceElement->setInvoice($invoice);
             $invoice->addInvoiceElement($invoiceElement);
         }
 
+        if ($order->getDeliveryCost() > 0) {
+            $this->addDelivery($invoice, $order);
+        }
+
         $invoice->setStatus(InvoiceInterface::STATUS_OPEN);
+    }
+
+    /**
+     * Adds the delivery information from $order to $invoice
+     *
+     * @param InvoiceInterface $invoice
+     * @param OrderInterface   $order
+     */
+    protected function addDelivery(InvoiceInterface $invoice, OrderInterface $order)
+    {
+        /** @var InvoiceElementInterface $invoiceElement */
+        $invoiceElement = $this->invoiceElementManager->create();
+
+        $invoiceElement->setQuantity(1);
+        $invoiceElement->setPrice($order->getDeliveryCost());
+        $invoiceElement->setTotal($order->getDeliveryCost());
+        $invoiceElement->setVat($order->getDeliveryVat());
+
+        $invoiceElement->setDesignation($this->deliveryPool->getMethod($order->getDeliveryMethod())->getName());
+        $invoiceElement->setDescription($this->deliveryPool->getMethod($order->getDeliveryMethod())->getName());
+
+        $invoiceElement->setInvoice($invoice);
+        $invoice->addInvoiceElement($invoiceElement);
     }
 
     /**

@@ -19,6 +19,7 @@
         <field name="email"         type="string"   column="email"          length="255" nullable="true"/>
         <field name="mobile"        type="string"   column="mobile"         length="255" nullable="true"/>
         <field name="paymentMethod" type="string"   column="payment_method" length="255" nullable="true" />
+        <field name="locale"        type="string"   column="locale"         length="5"   nullable="true" />
         <field name="createdAt"     type="datetime" column="created_at"     nullable="true"/>
 
     </mapped-superclass>

@@ -194,7 +194,7 @@ interface OrderInterface
     public function getTotalExcl();
 
     /**
-     * Set delivery cost
+     * Set delivery cost (VAT included)
      *
      * @param float $deliveryCost
      */
@@ -206,6 +206,20 @@ interface OrderInterface
      * @return float $deliveryCost
      */
     public function getDeliveryCost();
+
+    /**
+     * Set delivery VAT
+     *
+     * @param float $deliveryVat
+     */
+    public function setDeliveryVat($deliveryVat);
+
+    /**
+     * Get delivery VAT
+     *
+     * @return float $deliveryVat
+     */
+    public function getDeliveryVat();
 
     /**
      * Set billing name
