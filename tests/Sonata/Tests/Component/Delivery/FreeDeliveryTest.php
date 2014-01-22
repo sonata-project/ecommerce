@@ -33,7 +33,7 @@ class FreeDeliveryTest extends \PHPUnit_Framework_TestCase
     public function testPriceIsNull()
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertEquals(0, $freeDelivery->getVat());
+        $this->assertEquals(0, $freeDelivery->getVatRate());
         $this->assertEquals(0, $freeDelivery->getPrice());
     }
 

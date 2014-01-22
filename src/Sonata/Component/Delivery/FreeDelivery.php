@@ -34,7 +34,7 @@ class FreeDelivery extends BaseServiceDelivery
     /**
      * {@inheritdoc}
      */
-    public function getVat()
+    public function getVatRate()
     {
         return 0;
     }

@@ -13,6 +13,7 @@ namespace Sonata\Tests\Component\Basket;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
 use Sonata\Component\Delivery\BaseServiceDelivery;
@@ -30,7 +31,7 @@ class Delivery extends BaseServiceDelivery
         return "delivery 1";
     }
 
-    public function getVat()
+    public function getVatRate()
     {
         return 19.60;
     }
@@ -50,7 +51,8 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getId')->will($this->returnValue(42));
         $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
-        $product->expects($this->any())->method('getVat')->will($this->returnValue(19.6));
+        $product->expects($this->any())->method('isPriceIncludingVat')->will($this->returnValue(false));
+        $product->expects($this->any())->method('getVatRate')->will($this->returnValue(19.6));
         $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
         $product->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
@@ -75,18 +77,18 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
     public function testTotal()
     {
+        $currency = $this->getMock('Sonata\Component\Currency\Currency');
+
         $basket = new Basket;
-
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
-
-        $provider->expects($this->any())
-            ->method('basketElementCalculateUnitPrice')
-            ->will($this->returnValue(15));
+        $basket->setCurrency($currency);
 
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
-        $definition = new ProductDefinition($provider, $manager);
+        $productProvider = new ProductProviderTest($this->getMock('JMS\Serializer\SerializerInterface'));
+        $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
+
+        $productDefinition = new ProductDefinition($productProvider, $manager);
 
         $product = $this->getMockProduct();
 
@@ -95,13 +97,14 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
 
         $pool = new Pool;
-        $pool->addProduct('product_code', $definition);
+        $pool->addProduct('product_code', $productDefinition);
 
         $basket->setProductPool($pool);
 
         $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
         $basketElement = new BasketElement();
+        $basketElement->setProductDefinition($productDefinition);
         $basketElement->setProduct('product_code', $product);
 
         $basket->addBasketElement($basketElement);
@@ -109,18 +112,19 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
 
         $this->assertEquals(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
-        $this->assertEquals(15, $basketElement->getUnitPrice(), '::getQuantity() - return 2');
-        $this->assertEquals(15, $basketElement->getTotal(), '::getQuantity() - return 2');
-        $this->assertEquals(15, $basket->getTotal(), '::getTotal() w/o vat return 15');
-        $this->assertEquals(17.94, $basket->getTotal(true), '::getTotal() w/ vat return 17.94');
+        $this->assertEquals(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertEquals(15, $basketElement->getTotal(false), '::getQuantity() - return 2');
+
+        $this->assertEquals(15, $basket->getTotal(false), '::getTotal() w/o vat return 15');
+        $this->assertEquals(17.940, $basket->getTotal(true), '::getTotal() w/ vat return 18');
 
         $basketElement->setQuantity(2);
 
         $this->assertEquals(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
-        $this->assertEquals(15, $basketElement->getUnitPrice(), '::getQuantity() - return 2');
-        $this->assertEquals(30, $basketElement->getTotal(), '::getQuantity() - return 2');
-        $this->assertEquals(30, $basket->getTotal(), '::getTotal() w/o vat return 30');
-        $this->assertEquals(35.88, $basket->getTotal(true), '::getTotal() w/ vat return true');
+        $this->assertEquals(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertEquals(30, $basketElement->getTotal(false), '::getQuantity() - return 2');
+        $this->assertEquals(30, $basket->getTotal(false), '::getTotal() w/o vat return 30');
+        $this->assertEquals(35.880, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
         // Recurrent payments
         $this->assertEquals(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
@@ -143,9 +147,9 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
-        $this->assertEquals(150, $basket->getTotal(), '::getTotal() - return 150');
-        $this->assertEquals(179.40, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
-        $this->assertEquals(29.4, $basket->getVatAmount(),  '::getVatAmount() w/o vat return 29.4');
+        $this->assertEquals(150, $basket->getTotal(false), '::getTotal() - return 150');
+        $this->assertEquals(179.400, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
+        $this->assertEquals(29.400, $basket->getVatAmount(),  '::getVatAmount() w/o vat return 29.4');
     }
 
     public function testBasket()

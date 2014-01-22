@@ -137,7 +137,7 @@ class ProductController extends Controller
 
         $currency = $this->get('sonata.basket')->getCurrency();
 
-        $price = $provider->calculatePrice($product, $currency, $quantity);
+        $price = $provider->calculatePrice($product, $currency, true, $quantity);
 
         return new JsonResponse(array(
             'stock'      => $stock,

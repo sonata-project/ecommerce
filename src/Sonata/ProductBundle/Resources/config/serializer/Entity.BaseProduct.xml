@@ -7,7 +7,7 @@
         <property name="name" type="string" expose="true" />
         <property name="description" type="string" expose="true" />
         <property name="price" type="double" expose="true" />
-        <property name="vat" type="double" expose="true" />
+        <property name="vatRate" type="double" expose="true" />
         <property name="stock" type="integer" expose="true" />
         <property name="enabled" type="boolean" expose="true" />
         <property name="updatedAt" type="datetime" expose="true" />

@@ -430,12 +430,12 @@ class Basket implements \Serializable, BasketInterface
                 continue;
             }
 
-            $total += $basketElement->getTotal($vat);
+            $total = bcadd($total, $basketElement->getTotal($vat));
         }
 
-        $total += $this->getDeliveryPrice($vat);
+        $total = bcadd($total, $this->getDeliveryPrice($vat));
 
-        return bcadd($total, 0, 2);
+        return $total;
     }
 
     /**
@@ -446,13 +446,13 @@ class Basket implements \Serializable, BasketInterface
         $vat = 0;
 
         foreach ($this->getBasketElements() as $basketElement) {
-            $vat += $basketElement->getVatAmount();
+            $vat = bcadd($vat, $basketElement->getVatAmount());
         }
 
         $deliveryMethod = $this->getDeliveryMethod();
 
         if ($deliveryMethod instanceof ServiceDeliveryInterface) {
-            $vat += $deliveryMethod->getVatAmount($this);
+            $vat = bcadd($vat, $deliveryMethod->getVatAmount($this));
         }
 
         return $vat;
@@ -483,7 +483,7 @@ class Basket implements \Serializable, BasketInterface
             return 0;
         }
 
-        return $method->getVat();
+        return $method->getVatRate();
     }
 
     /**
@@ -525,9 +525,7 @@ class Basket implements \Serializable, BasketInterface
             $provider = $this->getProductPool()->getProvider($product);
 
             // BasketElement prices might depends on other basket elements
-            $unitPrice = $provider->basketElementCalculateUnitPrice($this, $basketElement);
-
-            $basketElement->setPrice($unitPrice);
+            $provider->updateComputationPricesFields($this, $basketElement, $product);
         }
 
         $this->inBuild = false;

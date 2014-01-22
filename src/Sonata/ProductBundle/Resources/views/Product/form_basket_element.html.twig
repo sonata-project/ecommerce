@@ -28,7 +28,7 @@ file that was distributed with this source code.
         </td>
         <td class="number">
             {% block product_unit_price %}
-                {{ basketElement.getUnitPrice(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}
+                {{ basketElement.getUnitPrice(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}
             {% endblock %}
         </td>
         <td>
@@ -36,11 +36,6 @@ file that was distributed with this source code.
                 <div{% if formView.quantity.vars.errors|length > 0 %} class="has-error"{% endif %}>
                     {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}, 'horizontal_input_wrapper_class': 'col-lg-12'}) }}
                 </div>
-            {% endblock %}
-        </td>
-        <td class="number">
-            {% block product_total_excl %}
-                {{ basketElement.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}
             {% endblock %}
         </td>
         <td class="number">

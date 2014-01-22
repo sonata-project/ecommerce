@@ -14,6 +14,8 @@ namespace Sonata\Tests\Component\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
+use Sonata\Component\Currency\CurrencyPriceCalculator;
+use Sonata\Component\Product\ProductDefinition;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 use Sonata\ProductBundle\Entity\BasePackage;
 use Sonata\ProductBundle\Entity\BaseProductCategory;
@@ -25,6 +27,7 @@ use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
+use Sonata\Tests\Component\Basket\ProductProviderTest;
 
 class Product extends BaseProduct
 {
@@ -174,8 +177,15 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
+        $productProvider = new ProductProviderTest($this->getMock('JMS\Serializer\SerializerInterface'));
+        $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+
+        $productDefinition = new ProductDefinition($productProvider, $productManager);
+
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
+        $basketElement->setProductDefinition($productDefinition);
 
         $provider = $this->getBaseProvider();
 
@@ -237,13 +247,13 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $product->setName('Product new name');
         $product->setPrice(50);
-        $product->setVat(5.5);
+        $product->setVatRate(5.5);
 
         $provider->synchronizeVariationsProduct($product);
 
         $this->assertEquals($product->getName(), $variation->getName());
         $this->assertEquals(15, $variation->getPrice());
-        $this->assertEquals($product->getVat(), $variation->getVat());
+        $this->assertEquals($product->getVatRate(), $variation->getVatRate());
         $this->assertTrue($variation->isEnabled());
 
         $this->assertEquals(1, count($product->getVariations()));
@@ -423,7 +433,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
             'rawDescription'       => 'productRawDescription',
             'descriptionFormatter' => 'productDescriptionFormatter',
             'price'                => 123.45,
-            'vat'                  => 678.90,
+            'vatRate'              => 678.90,
             'stock'                => 12345,
             'enabled'              => 1,
             'options'              => array('key1' => 'value1', 'key2' => array('value2', 'value3')),
@@ -440,7 +450,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($product->getRawDescription(),       $arrayProduct['rawDescription']);
         $this->assertEquals($product->getDescriptionFormatter(), $arrayProduct['descriptionFormatter']);
         $this->assertEquals($product->getPrice(),                $arrayProduct['price']);
-        $this->assertEquals($product->getVat(),                  $arrayProduct['vat']);
+        $this->assertEquals($product->getVatRate(),              $arrayProduct['vatRate']);
         $this->assertEquals($product->getStock(),                $arrayProduct['stock']);
         $this->assertEquals($product->getEnabled(),              $arrayProduct['enabled']);
         $this->assertEquals($product->getOptions(),              $arrayProduct['options']);

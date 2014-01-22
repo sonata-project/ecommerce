@@ -6,8 +6,9 @@
         <field name="productType"       type="string"       column="product_type"          length="255"/>
 
         <field name="quantity"          type="integer"      column="quantity"/>
+        <field name="unitPrice"         type="decimal"      column="unit_price"     scale="4"/>
         <field name="price"             type="decimal"      column="price"          scale="4"/>
-        <field name="vat"               type="decimal"      column="vat"            scale="4"/>
+        <field name="vatRate"           type="decimal"      column="vat_rate"       scale="4"/>
         <field name="designation"       type="string"       column="designation"    length="255"/>
         <field name="description"       type="text"         column="description"    />
         <field name="options"           type="json"         column="options"          nullable="true"/>

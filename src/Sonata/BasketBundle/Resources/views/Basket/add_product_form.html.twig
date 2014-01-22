@@ -42,7 +42,7 @@ file that was distributed with this source code.
                             {% if provider.hasEnabledVariations(product) %}
                                 {{ cheapest_variation.price|number_format_currency(currency) }}
                             {% else %}
-                                {{ product.price|number_format_currency(currency) }}
+                                {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}
                             {% endif %}
                         {% endblock %}
                     </span>

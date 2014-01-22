@@ -105,7 +105,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * {@inheritdoc}
      */
-    public function setVat($vat)
+    public function setVatRate($vat)
     {
         $this->vat = $vat;
     }
@@ -113,7 +113,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * {@inheritdoc}
      */
-    public function getVat()
+    public function getVatRate()
     {
         return $this->vat;
     }
@@ -168,7 +168,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     public function getTotal(BasketInterface $basket, $vat = false)
     {
         if ($vat) {
-            return bcadd($this->getPrice() * (1 + $this->getVat() / 100), 0, 2);
+            return bcadd($this->getPrice() * (1 + $this->getVatRate() / 100), 0, 2);
         }
 
         return bcadd($this->getPrice(), 0, 2);

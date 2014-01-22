@@ -15,6 +15,23 @@ Presentation
 
 Price bundle handles everything related to prices, (right now, only currencies, but it will soon be extended to add taxes, ...)
 
+Installation
+=============
+
+This central e-commerce bundle requires you add a bcscale(...) method in your ``AppKernel.php`` file to ensure that prices are correctly computed.
+Please, update your ``AppKernel.php`` file like this:
+
+.. code-block:: php
+
+    class AppKernel extends Kernel
+    {
+        public function init()
+        {
+            bcscale(3); // or any other value greater than 0
+
+            ...
+
+
 Configuration
 =============
 

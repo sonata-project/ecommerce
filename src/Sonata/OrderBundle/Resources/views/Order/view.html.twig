@@ -138,7 +138,6 @@ file that was distributed with this source code.
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.unit_price{% endtrans %}</th>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</th>
-                    <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
                     {% endblock %}
                 </tr>
@@ -146,16 +145,15 @@ file that was distributed with this source code.
                     <tr>
                         {% block sonata_order_element %}
                             <td>{{ element.designation }}</td>
-                            <td class="number">{{ element.unitPrice(false)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                            <td class="number">{{ element.unitPrice(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                             <td class="number">{{ element.quantity }}</td>
-                            <td class="number">{{ element.total|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                             <td class="number">{{ element.total(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                         {% endblock %}
                     </tr>
                 {% endfor %}
                 {% block sonata_order_elements_sumup %}
                 <tr>
-                    <td colspan="3" rowspan="4">&nbsp;</td>
+                    <td colspan="2" rowspan="4">&nbsp;</td>
                     <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
                     <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                 </tr>

@@ -27,9 +27,16 @@ interface ServiceDeliveryInterface
     public function getPrice();
 
     /**
+     * Sets the VAT rate
+     *
+     * @param float $vat
+     */
+    public function setVatRate($vat);
+
+    /**
      * @return float the vat linked to the delivery
      */
-    public function getVat();
+    public function getVatRate();
 
     /**
      * @return string the name of the delivery method

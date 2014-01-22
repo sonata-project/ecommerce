@@ -15,8 +15,9 @@ use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\ExecutionContext;
+use Sonata\Component\Product\PriceComputableInterface;
 
-interface ProductInterface
+interface ProductInterface extends PriceComputableInterface
 {
     /**
      * Get id.
@@ -110,32 +111,18 @@ interface ProductInterface
     public function getDescriptionFormatter();
 
     /**
-     * Set price.
+     * Sets if price is including VAT.
      *
-     * @param float $price
+     * @param boolean $priceIncludingVat
      */
-    public function setPrice($price);
+    public function setIsPriceIncludingVat($priceIncludingVat);
 
     /**
-     * Get price.
+     * Gets if price is including vat boolean.
      *
-     * @return float
+     * @return boolean
      */
-    public function getPrice();
-
-    /**
-     * Set vat.
-     *
-     * @param float $vat
-     */
-    public function setVat($vat);
-
-    /**
-     * Get vat
-     *
-     * @return float
-     */
-    public function getVat();
+    public function isPriceIncludingVat();
 
     /**
      * Set stock.

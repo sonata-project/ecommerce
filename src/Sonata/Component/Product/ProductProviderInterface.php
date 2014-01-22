@@ -98,28 +98,25 @@ interface ProductProviderInterface
     public function isValidBasketElement(BasketElementInterface $basketElement);
 
     /**
-     * This method return the return price of basket element, this method
-     * allow to update the price of the basket element depend on the presence
-     * of another product
+     * Updates basket element different prices computation fields values
      *
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     *
-     * @return float the unit price of the basketElement
+     * @param BasketInterface        $basket        A basket instance
+     * @param BasketElementInterface $basketElement A basket element instance
+     * @param ProductInterface       $product       A product instance
      */
-    public function basketElementCalculateUnitPrice(BasketInterface $basket, BasketElementInterface $basketElement);
+    public function updateComputationPricesFields(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product);
 
     /**
      * Calculate the product price depending on the currency
      *
-     * @param ProductInterface          $product
-     * @param CurrencyInterface|null    $currency
-     * @param int                       $quantity  Defaults to one
-     * @param int                       $precision The precision of the arbitrary number for the multiplication (see http://www.php.net/manual/en/function.bcscale.php)
+     * @param ProductInterface       $product   A product instance
+     * @param CurrencyInterface|null $currency  A currency instance
+     * @param boolean                $vat       Returns price including VAT?
+     * @param int                    $quantity  Defaults to one
      *
      * @return float
      */
-    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $quantity = 1, $precision = 3);
+    public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $vat = false, $quantity = 1);
 
     /**
      * Return true if the product can be added to the provided basket
