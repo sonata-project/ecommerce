@@ -271,22 +271,27 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $productCategoryManager = new ProductCategoryManager('Sonata\Tests\Component\Product\ProductCategory', $em);
         $provider->setProductCategoryManager($productCategoryManager);
 
+        // create product
         $product = new Product();
 
+        // create category1 (main) and add to product
         $category1 = new Category();
         $category1->setId(1);
         $productCategory1 = new ProductCategory();
         $productCategory1->setId(1);
+        $productCategory1->setMain(true);
         $productCategory1->setCategory($category1);
         $product->addProductCategory($productCategory1);
 
+        // create product variation without sync categories
         $variation = $provider->createVariation($product, false);
-
         $this->assertEquals(0, count($variation->getProductCategories()));
 
+        // synchronise 1 category
         $provider->synchronizeVariationsCategories($product);
         $this->assertEquals(1, count($variation->getProductCategories()));
 
+        // create category2 and add to product
         $category2 = new Category();
         $category2->setId(2);
         $productCategory2 = new ProductCategory();
@@ -294,12 +299,17 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $productCategory2->setCategory($category2);
         $product->addProductCategory($productCategory2);
 
+        // variation still have 1 category (no sync yet)
         $this->assertEquals(1, count($variation->getProductCategories()));
 
+        // synchronize 2 categories
         $provider->synchronizeVariationsCategories($product);
         $this->assertEquals(2, count($variation->getProductCategories()));
 
+        // remove category1 from product
         $product->removeProductCategory($productCategory1);
+
+        // variation still have 2 categories
         $this->assertEquals(2, count($variation->getProductCategories()));
 
         $repository->expects($this->any())->method('findOneBy')->will($this->returnValue($productCategory1));
