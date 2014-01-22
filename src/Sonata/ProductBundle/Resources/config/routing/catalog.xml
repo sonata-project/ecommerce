@@ -8,7 +8,7 @@
         <default key="_controller">SonataProductBundle:Catalog:index</default>
     </route>
 
-    <route id="sonata_catalog_category" pattern="/{category_id}/{category_slug}">
+    <route id="sonata_catalog_category" pattern="/{category_slug}/{category_id}">
         <default key="_controller">SonataProductBundle:Catalog:index</default>
         <default key="category_id">0</default>
         <default key="category_slug">all</default>
