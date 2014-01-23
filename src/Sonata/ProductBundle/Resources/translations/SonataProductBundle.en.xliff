@@ -387,6 +387,10 @@
                 <source>sonata_product_catalog_breadcrumb</source>
                 <target>Catalog</target>
             </trans-unit>
+            <trans-unit id="sonata.product.cross_selling.no_match">
+                <source>sonata.product.cross_selling.no_match</source>
+                <target>No other products available in the same collection.</target>
+            </trans-unit>
         </body>
 
     </file>
