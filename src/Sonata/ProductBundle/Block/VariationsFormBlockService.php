@@ -65,6 +65,17 @@ class VariationsFormBlockService extends BaseBlockService
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $product = $blockContext->getSetting('product');
+
+        if (null === $product) {
+            return $this->renderResponse($blockContext->getTemplate(), array(
+                    'context'  => $blockContext,
+                    'settings' => $blockContext->getSettings(),
+                    'block'    => $blockContext->getBlock(),
+                    'choices'  => array(),
+                    'form'     => null
+                ), $response);
+        }
+
         $fields  = $blockContext->getSetting('variations_properties');
 
         $choices = $this->pool->getProvider($product)->getVariationsChoices($product, $fields);
@@ -131,20 +142,18 @@ class VariationsFormBlockService extends BaseBlockService
             'form_route_parameters' => function (Options $options) {
                     $product = $options->get('product');
 
-                    if (!$product instanceof ProductInterface) {
+                    if (null !== $product && !$product instanceof ProductInterface) {
                         throw new \RuntimeException("Wrong 'product' parameter");
                     }
 
                     return array(
-                        'productId' => $product->getId(),
-                        'slug'      => $product->getSlug()
+                        'productId' => $product ? $product->getId() : null,
+                        'slug'      => $product ? $product->getSlug() : null
                     );
                 },
             'form_field_options'    => array(),
             'title'                 => 'Product variations',
             'template'              => 'SonataProductBundle:Block:variations_choice.html.twig'
         ));
-
-        $resolver->setRequired(array('product'));
     }
 }
