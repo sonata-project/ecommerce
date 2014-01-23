@@ -616,6 +616,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null)
     {
+        if (in_array('deliveries', $this->getVariationFields())) {
+            return;
+        }
+
         if (!$variations) {
             $variations = $product->getVariations();
         }
@@ -648,6 +652,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null)
     {
+        if (in_array('productCategories', $this->getVariationFields())) {
+            return;
+        }
+
         if (!$variations) {
             $variations = $product->getVariations();
         }
@@ -681,6 +689,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null)
     {
+        if (in_array('productCollections', $this->getVariationFields())) {
+            return;
+        }
+
         if (!$variations) {
             $variations = $product->getVariations();
         }
@@ -712,6 +724,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null)
     {
+        if (in_array('packages', $this->getVariationFields())) {
+            return;
+        }
+
         if (!$variations) {
             $variations = $product->getVariations();
         }
