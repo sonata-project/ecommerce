@@ -220,19 +220,38 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $product = new Product();
         $product->id = 2;
 
-        $variation = $provider->createVariation($product, false);
+        $product->addDelivery(new Delivery());
+        $product->addPackage(new Package());
+        $product->addProductCategory(new ProductCategory());
 
-        $this->assertNull($variation->getId());
-        $this->assertEquals('fake name (duplicated)', $variation->getName());
-        $this->assertEquals($product->getId(), $variation->getParent()->getId());
-        $this->assertFalse($variation->isEnabled());
-        $this->assertTrue($variation->isVariation());
+        $variation1 = $provider->createVariation($product, false);
+        $variation2 = $provider->createVariation($product, true);
 
-        $this->assertEquals(1, count($product->getVariations()));
-        $this->assertEquals(0, count($variation->getVariations()));
-        $this->assertEquals(0, count($variation->getPackages()));
-        $this->assertEquals(0, count($variation->getDeliveries()));
-        $this->assertEquals(0, count($variation->getProductCategories()));
+        $this->assertNull($variation1->getId());
+        $this->assertEquals('fake name (duplicated)', $variation1->getName());
+        $this->assertEquals($product->getId(), $variation1->getParent()->getId());
+        $this->assertFalse($variation1->isEnabled());
+        $this->assertTrue($variation1->isVariation());
+
+        $this->assertEquals(2, count($product->getVariations()));
+
+        $this->assertEquals(0, count($variation1->getVariations()));
+        $this->assertEquals(0, count($variation1->getPackages()));
+        $this->assertEquals(0, count($variation1->getDeliveries()));
+        $this->assertEquals(0, count($variation1->getProductCategories()));
+
+        $this->assertEquals(0, count($variation2->getVariations()));
+        $this->assertEquals(1, count($variation2->getPackages()));
+        $this->assertEquals(1, count($variation2->getDeliveries()));
+
+        $provider->setVariationFields(array('packages', 'productCollections', 'productCategories', 'deliveries'));
+
+        $variation3 = $provider->createVariation($product, true);
+
+        $this->assertEquals(0, count($variation3->getVariations()));
+        $this->assertEquals(0, count($variation3->getPackages()));
+        $this->assertEquals(0, count($variation3->getDeliveries()));
+        $this->assertEquals(0, count($variation3->getProductCategories()));
     }
 
     public function testProductDataSynchronization()
@@ -311,8 +330,6 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         // variation still have 2 categories
         $this->assertEquals(2, count($variation->getProductCategories()));
-
-        $repository->expects($this->any())->method('findOneBy')->will($this->returnValue($productCategory1));
 
         $provider->synchronizeVariationsCategories($product);
 //        $this->assertEquals(1, count($variation->getProductCategories()));
