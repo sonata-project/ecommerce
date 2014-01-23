@@ -38,7 +38,7 @@ abstract class BaseProductController extends Controller
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class')));
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class'), 'csrf_protection' => false));
         $provider->defineAddBasketForm($product, $formBuilder);
 
         $form = $formBuilder->getForm()->createView();
