@@ -111,20 +111,6 @@ interface ProductInterface extends PriceComputableInterface
     public function getDescriptionFormatter();
 
     /**
-     * Sets if price is including VAT.
-     *
-     * @param boolean $priceIncludingVat
-     */
-    public function setIsPriceIncludingVat($priceIncludingVat);
-
-    /**
-     * Gets if price is including vat boolean.
-     *
-     * @return boolean
-     */
-    public function isPriceIncludingVat();
-
-    /**
      * Set stock.
      *
      * @param integer $stock
