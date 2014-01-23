@@ -59,7 +59,7 @@ interface PriceComputableInterface
      *
      * @param boolean $priceIncludingVat
      */
-    public function setIsPriceIncludingVat($priceIncludingVat);
+    public function setPriceIncludingVat($priceIncludingVat);
 
     /**
      * Returns if price is including VAT
