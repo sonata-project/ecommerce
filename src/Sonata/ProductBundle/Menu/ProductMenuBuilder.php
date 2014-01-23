@@ -190,10 +190,18 @@ class ProductMenuBuilder
         $menu->setCurrentUri($currentUri);
     }
 
-    protected function getCategoryTitle(CategoryInterface $category, $limit = 2)
+    /**
+     * Gets the HTML associated with the category menu title
+     *
+     * @param CategoryInterface $category
+     * @param int               $limit
+     *
+     * @return string
+     */
+    protected function getCategoryTitle(CategoryInterface $category, $limit = 1000)
     {
         $count = $this->categoryManager->getProductCount($category, $limit);
 
-        return sprintf("%s <span class=\"badge pull-right\">%d%s</span>", $category->getName(), $count, $count >= $limit ? '+' : '');
+        return sprintf("%s <span class=\"badge pull-right\">%d%s</span>", $category->getName(), $count, $count > $limit ? '+' : '');
     }
 }
