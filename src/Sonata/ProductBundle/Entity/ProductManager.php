@@ -70,9 +70,11 @@ class ProductManager extends DoctrineBaseManager implements ProductManagerInterf
      */
     public function getCategoryActiveProductsQueryBuilder(CategoryInterface $category = null, $filter = null, $option = null)
     {
-        $queryBuilder = $this->getCategoryProductsQueryBuilder($category)
-            ->andWhere('p.enabled = :enabled')
+        $queryBuilder = $this->getCategoryProductsQueryBuilder($category);
+        $queryBuilder->leftJoin('p.variations', 'pv')
             ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+            ->andWhere('p.enabled = :enabled')
+            ->andWhere($queryBuilder->expr()->orX('pv.enabled = :enabled', 'pv.enabled IS NULL'))
             ->setParameter('enabled', true);
 
         if (null !== $filter) {
