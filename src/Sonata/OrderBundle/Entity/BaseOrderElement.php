@@ -180,7 +180,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsPriceIncludingVat($priceIncludingVat)
+    public function setPriceIncludingVat($priceIncludingVat)
     {
         $this->priceIncludingVat = $priceIncludingVat;
     }
