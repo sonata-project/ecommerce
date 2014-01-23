@@ -10,29 +10,33 @@ file that was distributed with this source code.
 #}
 
 {% block product_variation_javascript_init %}
-    {% set variationIds = [] %}
-    {% for formItem in form.children %}
-        {% set variationIds = variationIds|merge(["$('#" ~ formItem.vars.id ~ "')"]) %}
-    {% endfor %}
+    {% if form is not same as(null) %}
+        {% set variationIds = [] %}
+        {% for formItem in form.children %}
+            {% set variationIds = variationIds|merge(["$('#" ~ formItem.vars.id ~ "')"]) %}
+        {% endfor %}
 
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            Sonata.Product.setOptions({
-                variations: {
-                    fields: [{{ variationIds|join(', ')|raw }}],
-                    form: $('#sonata_variation_form'),
-                    unavailableError: $('#sonata_variation_error')
-                }});
-            Sonata.Product.initVariation();
-        });
-    </script>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                Sonata.Product.setOptions({
+                    variations: {
+                        fields: [{{ variationIds|join(', ')|raw }}],
+                        form: $('#sonata_variation_form'),
+                        unavailableError: $('#sonata_variation_error')
+                    }});
+                Sonata.Product.initVariation();
+            });
+        </script>
+    {% endif %}
 {% endblock %}
 
 
 {% block product_variation_form %}
-    <div class="alert alert-danger" id="sonata_variation_error" style="display:none;"></div>
+    <div class="alert alert-danger" id="sonata_variation_error"{% if settings.product is not same as(null) %} style="display:none;"{% endif %}>{% if settings.product is  same as(null) %}{% trans from "SonataProductBundle" %}no_product_found{% endtrans %}{% endif %}</div>
 
-    <form action="{{ url(settings.form_route, settings.form_route_parameters) }}" id="sonata_variation_form" class="form-horizontal" role="form">
-        {{ form_widget(form) }}
-    </form>
+    {% if settings.product is not same as(null) %}
+        <form action="{{ url(settings.form_route, settings.form_route_parameters) }}" id="sonata_variation_form" class="form-horizontal" role="form">
+            {{ form_widget(form) }}
+        </form>
+    {% endif %}
 {% endblock %}
