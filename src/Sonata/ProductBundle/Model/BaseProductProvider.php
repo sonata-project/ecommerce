@@ -204,7 +204,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setUnitPrice($basketElement->getUnitPrice(true));
         $orderElement->setPrice($basketElement->getPrice(true));
-        $orderElement->setIsPriceIncludingVat($basketElement->isPriceIncludingVat());
+        $orderElement->setPriceIncludingVat($basketElement->isPriceIncludingVat());
         $orderElement->setVatRate($basketElement->getVatRate());
         $orderElement->setDesignation($basketElement->getName());
         $orderElement->setProductType($this->getCode());
@@ -938,7 +938,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $basketElement->setUnitPrice($unitPrice);
         $basketElement->setPrice($price);
-        $basketElement->setIsPriceIncludingVat($product->isPriceIncludingVat());
+        $basketElement->setPriceIncludingVat($product->isPriceIncludingVat());
         $basketElement->setVatRate($product->getVatRate());
     }
 

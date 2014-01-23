@@ -154,7 +154,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsPriceIncludingVat($priceIncludingVat)
+    public function setPriceIncludingVat($priceIncludingVat)
     {
         $this->priceIncludingVat = $priceIncludingVat;
     }

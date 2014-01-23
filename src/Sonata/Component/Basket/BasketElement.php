@@ -292,7 +292,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsPriceIncludingVat($priceIncludingVat)
+    public function setPriceIncludingVat($priceIncludingVat)
     {
         $this->priceIncludingVat = $priceIncludingVat;
     }
