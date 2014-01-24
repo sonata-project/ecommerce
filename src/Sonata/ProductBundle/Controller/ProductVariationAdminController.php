@@ -42,10 +42,10 @@ class ProductVariationAdminController extends Controller
             ->add('number', 'integer', array(
                 'required'    => true,
                 'label'       => $this->getTranslator()->trans('variations_number', array(), 'SonataProductBundle'),
-                'attr'        => array('min' => 1),
+                'attr'        => array('min' => 1, 'max' => 10),
                 'constraints' => array(
                     new NotBlank(),
-                    new Range(array('min' => 1)),
+                    new Range(array('min' => 1, 'max' => 10)),
                 ),
             ))
             ->getForm();
