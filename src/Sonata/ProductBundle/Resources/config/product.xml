@@ -13,7 +13,7 @@
         <parameter key="sonata.product.seo.twitter.class">Sonata\ProductBundle\Seo\Services\Twitter</parameter>
         <parameter key="sonata.product.seo.product.site">%sonata.product.seo.product.site%</parameter>
         <parameter key="sonata.product.seo.product.creator">%sonata.product.seo.product.creator%</parameter>
-        <parameter key="sonata.product.seo.product.domain">%sonata.product.seo.product.domain%</parameter>
+        <parameter key="sonata.product.seo.product.domain">%sonata_media.cdn.host%</parameter>
         <parameter key="sonata.product.seo.product.media_prefix">%sonata.product.seo.product.media_prefix%</parameter>
         <parameter key="sonata.product.seo.product.media_format">%sonata.product.seo.product.media_format%</parameter>
         <parameter key="sonata.product.seo.facebook.class">Sonata\ProductBundle\Seo\Services\Facebook</parameter>
@@ -48,7 +48,6 @@
             <argument>%sonata.product.seo.product.site%</argument>
             <argument>%sonata.product.seo.product.creator%</argument>
             <argument>%sonata.product.seo.product.domain%</argument>
-            <argument>%sonata.product.seo.product.media_prefix%</argument>
             <argument>%sonata.product.seo.product.media_format%</argument>
         </service>
         <service id="sonata.product.seo.facebook" class="%sonata.product.seo.facebook.class%">
@@ -56,7 +55,6 @@
             <argument type="service" id="sonata.intl.templating.helper.number" />
             <argument type="service" id="sonata.price.currency.detector" />
             <argument>%sonata.product.seo.product.domain%</argument>
-            <argument>%sonata.product.seo.product.media_prefix%</argument>
             <argument>%sonata.product.seo.product.media_format%</argument>
         </service>
     </services>

@@ -39,11 +39,6 @@ class Facebook implements ServiceInterface
     /**
      * @var string|null
      */
-    protected $mediaPrefix;
-
-    /**
-     * @var string|null
-     */
     protected $mediaFormat;
 
     /**
@@ -51,16 +46,14 @@ class Facebook implements ServiceInterface
      * @param NumberHelper              $numberHelper
      * @param CurrencyDetectorInterface $currencyDetector
      * @param string                    $domain
-     * @param                           $mediaPrefix
      * @param                           $mediaFormat
      */
-    public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $domain, $mediaPrefix, $mediaFormat)
+    public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $domain, $mediaFormat)
     {
         $this->mediaPool = $mediaPool;
         $this->numberHelper = $numberHelper;
         $this->currencyDetector = $currencyDetector;
         $this->domain = $domain;
-        $this->mediaPrefix = $mediaPrefix;
         $this->mediaFormat = $mediaFormat;
     }
 
@@ -93,7 +86,7 @@ class Facebook implements ServiceInterface
     {
         $provider = $this->mediaPool->getProvider($image->getProviderName());
 
-        $seoPage->addMeta('property', 'og:image', sprintf('%s%s', $this->mediaPrefix, $provider->generatePublicUrl($image, $this->mediaFormat)))
+        $seoPage->addMeta('property', 'og:image', $provider->generatePublicUrl($image, $this->mediaFormat))
             ->addMeta('property', 'og:image:width', $image->getWidth())
             ->addMeta('property', 'og:image:height', $image->getHeight())
             ->addMeta('property', 'og:image:type', $image->getContentType());

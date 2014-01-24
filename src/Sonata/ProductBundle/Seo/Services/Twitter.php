@@ -48,11 +48,6 @@ class Twitter implements ServiceInterface
     /**
      * @var string|null
      */
-    protected $mediaPrefix;
-
-    /**
-     * @var string|null
-     */
     protected $mediaFormat;
 
     /**
@@ -62,10 +57,9 @@ class Twitter implements ServiceInterface
      * @param string                    $site
      * @param string                    $creator
      * @param string                    $domain
-     * @param string                    $mediaPrefix
      * @param string                    $mediaFormat
      */
-    public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $site, $creator, $domain, $mediaPrefix, $mediaFormat)
+    public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $site, $creator, $domain, $mediaFormat)
     {
         $this->mediaPool = $mediaPool;
         $this->numberHelper = $numberHelper;
@@ -73,7 +67,6 @@ class Twitter implements ServiceInterface
         $this->site = $site;
         $this->creator = $creator;
         $this->domain = $domain;
-        $this->mediaPrefix = $mediaPrefix;
         $this->mediaFormat = $mediaFormat;
     }
 
@@ -100,7 +93,7 @@ class Twitter implements ServiceInterface
 
         if ($image = $product->getImage()) {
             $provider = $this->mediaPool->getProvider($image->getProviderName());
-            $seoPage->addMeta('property', 'twitter:image:src', sprintf('%s%s', $this->mediaPrefix, $provider->generatePublicUrl($image, $this->mediaFormat)));
+            $seoPage->addMeta('property', 'twitter:image:src', $provider->generatePublicUrl($image, $this->mediaFormat));
         }
     }
 }
