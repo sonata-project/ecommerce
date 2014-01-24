@@ -108,7 +108,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
     }
 
-    public function testValiditity()
+    public function testValidity()
     {
         $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
         $product->expects($this->once())->method('getEnabled')->will($this->returnValue(true));
