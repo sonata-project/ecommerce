@@ -42,21 +42,22 @@
                                 <tr>
                                     <td><a href="{{ url('sonata_customer_address_edit', {'id' : address.id}) }}">{{ sonata_address_render(address, true, false) }}</a></td>
                                     <td style="width: 30%;">
-                                        <form action="{{ url('sonata_customer_address_delete', {'id': address.id}) }}" method="post" onsubmit="return confirm('{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete_confirm{% endtrans %}');">
-                                            <div class="btn-group">
-                                                <button type="submit"
-                                                        class="btn btn-danger">
+                                        <div>
+                                            <form action="{{ url('sonata_customer_address_delete', {'id': address.id}) }}" method="post" onsubmit="return confirm('{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete_confirm{% endtrans %}');" style="display:inline;">
+                                                <button type="submit" class="btn btn-danger">
                                                     <i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete{% endtrans %}
                                                 </button>
-                                                {% if addressesByType|length > 1 %}
-                                                    {% if address.current %}
-                                                        <a class="btn btn-default disabled" href="#"><i class="glyphicon glyphicon-ok icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}address_list_default{% endtrans %}</a>
-                                                    {% else %}
-                                                        <a class="btn btn-primary" href="{{ url('sonata_customer_address_setcurrent', {'id': address.id}) }}">{% trans from 'SonataCustomerBundle' %}address_list_set_current{% endtrans %}</a>
-                                                    {% endif %}
+                                            </form>
+                                            {% if addressesByType|length > 1 %}
+                                                {% if address.current %}
+                                                    <a style="display:inline;" class="btn btn-default disabled" href="#"><i class="glyphicon glyphicon-ok icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}address_list_default{% endtrans %}</a>
+                                                {% else %}
+                                                    <form action="{{ url('sonata_customer_address_setcurrent', {'id': address.id}) }}" method="post" style="display:inline;">
+                                                        <input class="btn btn-primary" type="submit" value="{% trans from 'SonataCustomerBundle' %}address_list_set_current{% endtrans %}" />
+                                                    </form>
                                                 {% endif %}
-                                            </div>
-                                        </form>
+                                            {% endif %}
+                                        </div>
                                     </td>
                                 </tr>
                                 {% endblock %}
