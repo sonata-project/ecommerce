@@ -310,14 +310,14 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($productProvider->hasVariations($productMock));
     }
 
-    public function testHasEnabledVariationsWhithNoVariation()
+    public function testHasEnabledVariationsWithNoVariation()
     {
         $productMock = new ProductTest();
         $productProvider = $this->createNewProductProvider();
         $this->assertFalse($productProvider->hasEnabledVariations($productMock));
     }
 
-    public function testHasEnabledVariationsWhithNoEnabledVariation()
+    public function testHasEnabledVariationsWithNoEnabledVariation()
     {
         $productMock = new ProductTest();
         $productMock->setEnabled(true);
@@ -331,7 +331,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($productProvider->hasEnabledVariations($productMock));
     }
 
-    public function testHasEnabledVariationsWhithEnabledVariation()
+    public function testHasEnabledVariationsWithEnabledVariation()
     {
         $productMock = new ProductTest();
         $productMock->setEnabled(true);

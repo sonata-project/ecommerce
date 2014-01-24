@@ -53,7 +53,7 @@ To enable DB storage, you'll need to change the following configuration values:
                         ApplicationSonataBasketBundle: ~
                         SonataBasketBundle: ~
 
-Please note that if you don't do so, you won't be able to retrieve a user's basket if he loggs in from a different computer. Default factory is set to session factory.
+Please note that if you don't do so, you won't be able to retrieve a user's basket if he logs in from a different computer. Default factory is set to session factory.
 
 Configuration
 =============
