@@ -87,7 +87,7 @@ Full Configuration Options
 
                     request_command:    %scellius.request_command%
                     response_command:   %scellius.response_command%
-                    merchant_id:        %scellius.marchant_id%
+                    merchant_id:        %scellius.merchant_id%
                     merchant_country:   fr
                     pathfile:           %scellius.pathfile%
                     language:           fr

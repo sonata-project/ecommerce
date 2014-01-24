@@ -47,7 +47,7 @@ file that was distributed with this source code.
         {% block product_left %}
             <div class="col-lg-8">
                 {% block product_carousel %}
-                    <div class="row">
+                    <div>
                         {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
                             {% include "SonataProductBundle:Product:carousel.html.twig" %}
                         {% else %}
@@ -61,8 +61,7 @@ file that was distributed with this source code.
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 itemprop="name" class="panel-title"
-                        ">{% block product_title %}{{ product.name }}{% endblock %}</h3>
+                        <h3 itemprop="name" class="panel-title">{% block product_title %}{{ product.name }}{% endblock %}</h3>
                     </div>
 
                     {% block product_properties %}

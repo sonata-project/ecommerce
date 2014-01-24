@@ -61,7 +61,7 @@ The product sheet is based on the main ``product`` block, which is divided in 2 
 
     - ``product_properties`` block displays various information about the product (price, ...) in the blocks listed below:
 
-      - ``product_generic_properties`` block displays generic informaiton about the product (non variation fields):
+      - ``product_generic_properties`` block displays generic information about the product (non variation fields):
 
         - ``product_unit_price`` block displays the unit price of the product,
         - ``product_reference`` block displays the reference (aka SKU) of the product,

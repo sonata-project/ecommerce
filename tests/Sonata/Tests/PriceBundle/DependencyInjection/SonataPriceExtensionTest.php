@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class SonataPriceExtentionTest extends \PHPUnit_Framework_TestCase
+class SonataPriceExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests if the configuration is well parsed & parameters are well set

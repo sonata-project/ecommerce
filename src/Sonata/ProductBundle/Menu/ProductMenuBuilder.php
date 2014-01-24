@@ -193,12 +193,12 @@ class ProductMenuBuilder
     /**
      * Gets the HTML associated with the category menu title
      *
-     * @param CategoryInterface $category
-     * @param int               $limit
+     * @param CategoryInterface $category A category instance
+     * @param int               $limit    A limit for calculation (fixed to 500 by default)
      *
      * @return string
      */
-    protected function getCategoryTitle(CategoryInterface $category, $limit = 1000)
+    protected function getCategoryTitle(CategoryInterface $category, $limit = 500)
     {
         $count = $this->categoryManager->getProductCount($category, $limit);
 

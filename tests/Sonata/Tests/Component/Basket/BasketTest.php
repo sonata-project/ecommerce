@@ -265,7 +265,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_string($data));
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
-        // Ensurring all needed keys are present
+        // Ensuring all needed keys are present
         $expectedKeys = array(
             'basketElements',
             'positions',
@@ -295,7 +295,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_string($data));
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
-        // Ensurring all needed keys are present
+        // Ensuring all needed keys are present
         $expectedKeys = array(
             'basketElements',
             'positions',
