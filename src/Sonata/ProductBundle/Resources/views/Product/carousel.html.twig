@@ -22,19 +22,19 @@ file that was distributed with this source code.
         // handles the carousel thumbnails
         $('a[id^=carousel-selector-]').click( function(){
             var id_selector = $(this).attr("id");
-            var id = id_selector.substr(id_selector.length -1);
+            var id = id_selector.replace('carousel-selector-', '');
             id = parseInt(id);
             $('#productCarousel').carousel(id);
-            $('a[id^=carousel-selector-]').removeClass('img-thumbnail');
-            $(this).addClass('img-thumbnail');
+            $('a[id^=carousel-selector-]').css('border', '1px solid #dddddd');
+            $(this).css('border', '1px solid #000000');
         });
 
         // when the carousel slides, auto update
         $('#productCarousel').on('slid', function (e) {
             var id = $('.item.active').data('slide-number');
             id = parseInt(id);
-            $('a[id^=carousel-selector-]').removeClass('img-thumbnail');
-            $('#carousel-selector-'+id).addClass('img-thumbnail');
+            $('a[id^=carousel-selector-]').css('border', '1px solid #dddddd');
+            $('#carousel-selector-'+id).css('border', '1px solid #000000');
         });
     });
 </script>
@@ -85,7 +85,7 @@ file that was distributed with this source code.
         </li>
         {% for galMedia in product.gallery.galleryHasMedias %}
             <li>
-                <a id="carousel-selector-{{ loop.index }}">
+                <a id="carousel-selector-{{ loop.index }}" class="img-thumbnail">
                     {% thumbnail galMedia.media, 'preview' %}
                 </a>
             </li>
