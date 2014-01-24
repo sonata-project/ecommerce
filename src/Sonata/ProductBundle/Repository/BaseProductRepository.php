@@ -27,33 +27,19 @@ class BaseProductRepository extends EntityRepository
      */
     public function findLastActiveProducts($limit = 5)
     {
-        $rootEnabledProducts = $this->createQueryBuilder('pr')
-            ->select('pr.id')
-            ->where('pr.parent is null and pr.enabled = :enabled')
-            ->andWhere('pr.stock is not null and pr.stock != 0')
-            ->andWhere('pr.price is not null and pr.price != 0');
-
-        $enabledChildren = $this->createQueryBuilder('pc')
-            ->select('pc.id')
-            ->innerJoin('pc.parent', 'pa')
-            ->where('pa.enabled = :enabled')
-            ->andWhere('pc.enabled = :enabled')
-            ->andWhere('pc.stock is not null and pc.stock != 0')
-            ->andWhere('pc.price is not null and pc.price != 0');
-
-        $eb = $this->getEntityManager()->getExpressionBuilder();
-
         return $this->createQueryBuilder('p')
             ->select('p', 'i', 'g')
             ->distinct()
             ->leftJoin('p.image', 'i')
             ->leftJoin('p.gallery', 'g')
-            ->where(
-                $eb->orX(
-                    $eb->in('p.id', $rootEnabledProducts->getDQL()),
-                    $eb->in('p.id', $enabledChildren->getDQL())
-                )
-            )
+            ->leftJoin('p.variations', 'pv')
+            ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+            ->andWhere('p.enabled = :enabled')
+            ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+            ->andWhere('p.stock != 0')
+            ->andWhere('p.price != 0')
+            ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+            ->andWhere('pv.price != 0 or pv.price IS NULL')
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->setParameters(array(
