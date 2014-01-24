@@ -47,7 +47,7 @@ file that was distributed with this source code.
         {% block product_left %}
             <div class="col-lg-8">
                 {% block product_carousel %}
-                    <div class="row">
+                    <div>
                         {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
                             {% include "SonataProductBundle:Product:carousel.html.twig" %}
                         {% else %}
