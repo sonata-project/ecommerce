@@ -45,20 +45,20 @@ file that was distributed with this source code.
     </div>
     <div class="row" itemscope itemtype="http://schema.org/Product">
         {% block product_left %}
-            <div class="col-lg-8">
+            <div class="col-sm-8">
                 {% block product_carousel %}
                     <div>
                         {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
                             {% include "SonataProductBundle:Product:carousel.html.twig" %}
                         {% else %}
-                            {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'float:left; margin: 0 10px 10px 0;'} %}
+                            {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'margin: 0 10px 10px 0;'} %}
                         {% endif %}
                     </div>
                 {% endblock %}
             </div>
         {% endblock %}
         {% block product_right %}
-            <div class="col-lg-4">
+            <div class="col-sm-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 itemprop="name" class="panel-title">{% block product_title %}{{ product.name }}{% endblock %}</h3>
