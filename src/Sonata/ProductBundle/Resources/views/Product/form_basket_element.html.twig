@@ -15,16 +15,24 @@ file that was distributed with this source code.
     {% else %}
         <td>
             {{ form_widget(formView.productId) }}
-            {% block product_name %}
-                <strong><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></strong>
-            {% endblock %}
+            <div class="col-sm-4 hidden-xs">
+                {% block product_thumbnail %}
+                    {% thumbnail basketElement.product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}
+                {% endblock %}
+            </div>
+            <div class="col-sm-8">
+                {% block product_name %}
+                    <strong><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></strong>
+                {% endblock %}
+                {% block product_sku %}
+                    <p>{{ 'sonata.product.sku'|trans([], 'SonataProductBundle') }}: {{ basketElement.product.sku }}</p>
+                {% endblock %}
+                {% block product_variations %}{% endblock %}
+            </div>
             {% if formView.quantity.vars.errors|length > 0 %}
                 <span class="has-error">{{ form_errors(formView.quantity) }}</span>
             {% endif %}
-            {% block product_description %}
-                <br />
-                {{ basketElement.product.description|raw }}
-            {% endblock %}
+            {% block product_description %}{% endblock %}
         </td>
         <td class="number">
             {% block product_unit_price %}
@@ -34,7 +42,7 @@ file that was distributed with this source code.
         <td>
             {% block product_quantity %}
                 <div{% if formView.quantity.vars.errors|length > 0 %} class="has-error"{% endif %}>
-                    {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}, 'horizontal_input_wrapper_class': 'col-lg-12'}) }}
+                    {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}, 'horizontal_input_wrapper_class': ''}) }}
                 </div>
             {% endblock %}
         </td>
@@ -46,7 +54,7 @@ file that was distributed with this source code.
     {% endif %}
     <td>
         {% block product_delete %}
-            {{ form_widget(formView.delete, {'label_render': false}) }}
+            {{ form_widget(formView.delete, {'label_render': false, 'horizontal_input_wrapper_class': 'text-center'}) }}
         {% endblock %}
     </td>
 </tr>

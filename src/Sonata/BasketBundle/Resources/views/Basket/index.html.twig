@@ -23,13 +23,13 @@ file that was distributed with this source code.
 
     <form action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">
 
-        <table class="table table-bordered basket">
+        <table class="table basket">
 
             <thead>
                 <tr>
-                    <th>{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</th>
+                    <th class="col-sm-6">{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</th>
                     <th>{% trans from 'SonataBasketBundle'%}header_basket_unit_price{% endtrans %}</th>
-                    <th class="col-sm-2">{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</th>
+                    <th class="col-sm-1">{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</th>
                     <th>{% trans from 'SonataBasketBundle'%}header_basket_total_inc{% endtrans %}</th>
                     <th>{% trans from 'SonataBasketBundle'%}header_basket_delete{% endtrans %}</th>
                 </tr>
