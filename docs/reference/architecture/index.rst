@@ -46,6 +46,15 @@ Currently, the order process is implemented as follows:
 
 - When the payment is completed, we edit an invoice, which can be printed out as a PDF or HTML file.
 
+
+Product variations
+------------------
+
+Each product can be splitted into "sub-products" : we call them "variations". The main product is called "master product".
+
+The master product is used to be displayed in search results, recent products listing and catalog. The variations are displayed on a product view page (the default one is the cheapest one).
+
+
 Price computation
 -----------------
 
