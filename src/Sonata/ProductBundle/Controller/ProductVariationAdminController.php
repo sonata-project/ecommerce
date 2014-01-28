@@ -76,7 +76,7 @@ class ProductVariationAdminController extends Controller
 
                 $manager->flush();
 
-                $this->addFlash('sonata_flash_success', 'flash_create_variation_success');
+                $this->addFlash('sonata_flash_success', $this->getTranslator()->trans('flash_create_variation_success', array(), 'SonataProductBundle'));
 
                 return new RedirectResponse($this->admin->generateUrl('list'));
             }
