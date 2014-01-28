@@ -365,7 +365,7 @@
             </trans-unit>
             <trans-unit id="sonata.address.list.no_addresses">
                 <source>sonata.address.list.no_addresses</source>
-                <target>You don't have any addresses available.</target>
+                <target>You don't have any available addresses.</target>
             </trans-unit>
             <trans-unit id="address_add_success">
                 <source>address_add_success</source>
