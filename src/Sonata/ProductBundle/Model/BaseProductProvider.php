@@ -588,7 +588,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null)
     {
-        $variationFields = array_merge(array('id', 'parent'), $this->getVariationFields());
+        $variationFields = array_merge(array('id', 'parent', 'sku'), $this->getVariationFields());
 
         $values = $product->toArray();
 
