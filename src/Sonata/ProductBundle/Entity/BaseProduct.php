@@ -888,17 +888,20 @@ abstract class BaseProduct implements ProductInterface
     public function toArray()
     {
         $baseArrayRep = array(
-            'sku'                  => $this->sku,
-            'slug'                 => $this->slug,
-            'name'                 => $this->name,
-            'description'          => $this->description,
-            'rawDescription'       => $this->rawDescription,
-            'descriptionFormatter' => $this->descriptionFormatter,
-            'price'                => $this->price,
-            'vatRate'              => $this->vatRate,
-            'stock'                => $this->stock,
-            'enabled'              => $this->enabled,
-            'options'              => $this->options,
+            'sku'                       => $this->sku,
+            'slug'                      => $this->slug,
+            'name'                      => $this->name,
+            'description'               => $this->description,
+            'rawDescription'            => $this->rawDescription,
+            'descriptionFormatter'      => $this->descriptionFormatter,
+            'shortDescription'          => $this->shortDescription,
+            'rawShortDescription'       => $this->rawShortDescription,
+            'shortDescriptionFormatter' => $this->shortDescriptionFormatter,
+            'price'                     => $this->price,
+            'vatRate'                   => $this->vatRate,
+            'stock'                     => $this->stock,
+            'enabled'                   => $this->enabled,
+            'options'                   => $this->options,
         );
 
         return $baseArrayRep;
