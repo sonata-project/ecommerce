@@ -60,10 +60,10 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
         products:
             # Prototype
             id:
-                provider:             ~ # Required
-                manager:              ~ # Required
+                provider:             ~  # Required
+                manager:              ~  # Required
                 variations:
-                    fields:               [] # Required
+                    fields:           [] # Required
         class:
             product:              Application\Sonata\ProductBundle\Entity\Product
             package:              Application\Sonata\ProductBundle\Entity\Package

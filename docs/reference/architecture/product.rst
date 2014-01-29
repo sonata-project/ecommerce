@@ -32,6 +32,8 @@ A ``ProductSetManager`` is responsible of retrieving a set of different products
 
 A ``ProductFinder`` is responsible for finding matching products to a given one. It will noticeably be used for cross-selling & up-selling matches.
 
+Each product prototype has its own type (defined in ``ProductType`` property).
+You can use ``Sonata\Component\Product\Pool`` to retrieve related ``ProductProvider`` and ``ProductManager`` instances.
 
 Product Variations
 ==================
@@ -43,6 +45,11 @@ The ``ProductProvider`` is responsible of the variation creation.
 
 The variations are related to a parent ``Product``. When you edit some data in your parent
 ``Product``, you can synchronize them with the ``ProductProvider``.
+
+A product and its variations can be synchronized : each field of the master product (except ``id``, ``parent`` and the variation fields) is copied
+from the master product to its variations.
+The "variation fields" are used to differentiate the variations. You can set a ``color`` property as a variation field and that property won't be
+synchronized when you update the master product.
 
 Product Template
 ================
