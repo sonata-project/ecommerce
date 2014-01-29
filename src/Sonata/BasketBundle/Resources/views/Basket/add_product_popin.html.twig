@@ -11,11 +11,11 @@
         <div class="modal-body">
             {% block product_details %}
                 <div class="row" itemtype="http://schema.org/Product">
-                    <div class="col-md-4">
-                        {% block product_image %}{% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded', 'style': 'margin: 0 10px 10px 0;'} %}{% endblock%}
+                    <div class="col-sm-6">
+                        {% block product_image %}{% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}{% endblock%}
                     </div>
 
-                    <div class="col-md-7 col-md-offset-1">
+                    <div class="col-sm-6">
                         <h4 itemprop="name" style="margin-top: 0px;">{% block product_title %}{{ product.name }}{% endblock %}</h4>
 
                         {% block product_sku %}
