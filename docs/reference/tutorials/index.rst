@@ -13,7 +13,6 @@ So, let's get started!
 .. toctree::
    :maxdepth: 2
 
-    Install the Sonata demo <install>
     Create a category <create-category>
     Create a collection <create-collection>
     Create a product <create-product>
