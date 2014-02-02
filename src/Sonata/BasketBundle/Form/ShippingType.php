@@ -18,7 +18,6 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
-use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ShippingType extends AbstractType
@@ -34,20 +33,13 @@ class ShippingType extends AbstractType
     protected $deliverySelector;
 
     /**
-     * @var ModelManagerInterface
-     */
-    protected $modelManager;
-
-    /**
      * Constructor
      *
-     * @param ModelManagerInterface            $modelManager
      * @param DeliveryPool                     $deliveryPool
      * @param ServiceDeliverySelectorInterface $deliverySelector
      */
-    public function __construct(ModelManagerInterface $modelManager, DeliveryPool $deliveryPool, ServiceDeliverySelectorInterface $deliverySelector)
+    public function __construct(DeliveryPool $deliveryPool, ServiceDeliverySelectorInterface $deliverySelector)
     {
-        $this->modelManager     = $modelManager;
         $this->deliverySelector = $deliverySelector;
         $this->deliveryPool     = $deliveryPool;
     }
