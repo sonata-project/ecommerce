@@ -18,7 +18,6 @@
         <service id="sonata.basket.form.type.shipping" class="Sonata\BasketBundle\Form\ShippingType">
             <tag name="form.type" alias="sonata_basket_shipping" />
 
-            <argument type="service" id="sonata.admin.manager.orm" />
             <argument type="service" id="sonata.delivery.pool" />
             <argument type="service" id="sonata.delivery.selector" />
         </service>
@@ -27,7 +26,6 @@
             <tag name="form.type" alias="sonata_basket_payment" />
 
             <argument type="service" id="sonata.address.manager" />
-            <argument type="service" id="sonata.admin.manager.orm" />
             <argument type="service" id="sonata.payment.pool" />
             <argument type="service" id="sonata.payment.selector" />
         </service>

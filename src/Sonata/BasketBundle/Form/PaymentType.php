@@ -22,7 +22,6 @@ use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Payment\PaymentSelectorInterface;
-use Sonata\AdminBundle\Model\ModelManagerInterface;
 
 class PaymentType extends AbstractType
 {
@@ -42,22 +41,15 @@ class PaymentType extends AbstractType
     protected $paymentSelector;
 
     /**
-     * @var ModelManagerInterface
-     */
-    protected $modelManager;
-
-    /**
      * Constructor
      *
      * @param AddressManagerInterface  $addressManager
-     * @param ModelManagerInterface    $modelManager
      * @param PaymentPool              $paymentPool
      * @param PaymentSelectorInterface $paymentSelector
      */
-    public function __construct(AddressManagerInterface $addressManager, ModelManagerInterface $modelManager, PaymentPool $paymentPool, PaymentSelectorInterface $paymentSelector)
+    public function __construct(AddressManagerInterface $addressManager, PaymentPool $paymentPool, PaymentSelectorInterface $paymentSelector)
     {
         $this->addressManager   = $addressManager;
-        $this->modelManager     = $modelManager;
         $this->paymentSelector  = $paymentSelector;
         $this->paymentPool      = $paymentPool;
     }
