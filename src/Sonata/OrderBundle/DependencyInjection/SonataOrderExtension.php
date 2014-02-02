@@ -42,9 +42,12 @@ class SonataOrderExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('block.xml');
         $loader->load('orm.xml');
-        $loader->load('admin.xml');
         $loader->load('form.xml');
         $loader->load('twig.xml');
+
+        if (isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin.xml');
+        }
 
         if (isset($bundles['SonataSeoBundle'])) {
             $loader->load('seo_block.xml');

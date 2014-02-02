@@ -39,15 +39,19 @@ class SonataProductExtension extends Extension
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
+        $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('block.xml');
         $loader->load('product.xml');
         $loader->load('orm.xml');
-        $loader->load('admin.xml');
         $loader->load('form.xml');
         $loader->load('twig.xml');
         $loader->load('menu.xml');
+
+        if (isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin.xml');
+        }
 
         $pool = $container->getDefinition('sonata.product.pool');
         // this value is altered by the AddProductProviderPass class
