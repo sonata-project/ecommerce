@@ -38,12 +38,16 @@ class SonataInvoiceExtension extends Extension
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
+        $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
-        $loader->load('admin.xml');
         $loader->load('form.xml');
         $loader->load('renderer.xml');
+
+        if (isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin.xml');
+        }
 
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
