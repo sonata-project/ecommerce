@@ -292,7 +292,7 @@
             </trans-unit>
             <trans-unit id="undeliverable_country">
                 <source>undeliverable_country</source>
-                <target>%country% is not in our delivery zone for one or several products in your basket.</target>
+                <target>The %country% is not in our delivery zone for one or several products of your basket.</target>
             </trans-unit>
 
             <trans-unit id="basket_index_title">
