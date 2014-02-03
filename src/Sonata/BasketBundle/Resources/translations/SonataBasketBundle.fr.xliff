@@ -40,7 +40,7 @@
             </trans-unit>
             <trans-unit id="sonata.basket.label_terms_and_condition">
                 <source>sonata.basket.label_terms_and_condition</source>
-                <target>Conditions générales de vente</target>
+                <target>J'accepte les conditions générales de vente</target>
             </trans-unit>
             <trans-unit id="sonata.basket.link_previous_step">
                 <source>sonata.basket.link_previous_step</source>
@@ -52,7 +52,7 @@
             </trans-unit>
             <trans-unit id="sonata.basket.link_terms_and_condition">
                 <source>sonata.basket.link_terms_and_condition</source>
-                <target>Conditions générales de vente</target>
+                <target>Consulter les conditions générales de vente</target>
             </trans-unit>
             <trans-unit id="sonata.basket.message_basket_is_empty">
                 <source>sonata.basket.message_basket_is_empty</source>
@@ -140,11 +140,11 @@
             </trans-unit>
             <trans-unit id="sonata.basket.total_w_vat">
                 <source>sonata.basket.total_w_vat</source>
-                <target>Total avec TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <trans-unit id="sonata.basket.total_wo_vat">
                 <source>sonata.basket.total_wo_vat</source>
-                <target>Total sans TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="view_basket">
                 <source>view_basket</source>
@@ -268,11 +268,11 @@
             </trans-unit>
             <trans-unit id="header_basket_total_excl">
                 <source>header_basket_total_excl</source>
-                <target>Total excl. TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="header_basket_total_inc">
                 <source>header_basket_total_inc</source>
-                <target>Total inc. TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <trans-unit id="header_basket_total">
                 <source>header_basket_total</source>
@@ -280,7 +280,7 @@
             </trans-unit>
             <trans-unit id="footer_basket_total_excl">
                 <source>footer_basket_total_excl</source>
-                <target>Total excl. TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="footer_basket_total_vat">
                 <source>footer_basket_total_vat</source>
@@ -288,7 +288,7 @@
             </trans-unit>
             <trans-unit id="footer_basket_total_inc">
                 <source>footer_basket_total_inc</source>
-                <target>Total inc. TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <trans-unit id="undeliverable_country">
                 <source>undeliverable_country</source>
@@ -301,11 +301,11 @@
             </trans-unit>
             <trans-unit id="basket_delivery_title">
                 <source>basket_delivery_title</source>
-                <target>Livraison</target>
+                <target>Votre livraison</target>
             </trans-unit>
             <trans-unit id="basket_payment_title">
                 <source>basket_payment_title</source>
-                <target>Paiement</target>
+                <target>Votre paiement</target>
             </trans-unit>
             <trans-unit id="basket_review_title">
                 <source>basket_review_title</source>
