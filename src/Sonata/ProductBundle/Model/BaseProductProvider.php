@@ -664,10 +664,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         /** @var ProductInterface $variation */
         foreach ($variations as $variation) {
-            $variationCategories = $variation->getCategories();
-
             // browsing variation categories and remove excessing categories
-            foreach ($variationCategories as $variationCategory) {
+            foreach ($variation->getCategories() as $variationCategory) {
                 if ($variationCategory && !$productCategories->contains($variationCategory)) {
                     $this->productCategoryManager->removeCategoryFromProduct($variation, $variationCategory);
                 }
@@ -677,7 +675,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             foreach ($productCategories as $productCategory) {
                 $category = $productCategory->getCategory();
 
-                if ($category && !$variationCategories->contains($category)) {
+                if ($category && !$variation->getCategories()->contains($category)) {
                     $this->productCategoryManager->addCategoryToProduct($variation, $category, $productCategory->getMain());
                 }
             }
