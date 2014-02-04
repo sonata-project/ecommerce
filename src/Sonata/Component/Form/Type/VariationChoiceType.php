@@ -51,7 +51,10 @@ class VariationChoiceType extends AbstractType
             $builder->add($choiceTitle, 'choice', array_merge(
                     array('translation_domain' => 'SonataProductBundle'),
                     $options['field_options'],
-                    array('choices' => $choiceValues,)
+                    array(
+                        'label'   => sprintf('form_%s', $choiceTitle),
+                        'choices' => $choiceValues,
+                    )
                 )
             );
         }
