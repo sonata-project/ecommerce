@@ -51,6 +51,8 @@ class BasketController extends Controller
             }
         }
 
+        $this->get('session')->set('sonata_basket_delivery_redirect', 'sonata_basket_delivery_address');
+
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_index_title', array(), "SonataBasketBundle"));
 
         return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
@@ -81,7 +83,7 @@ class BasketController extends Controller
         }
 
         return $this->forward('SonataBasketBundle:Basket:index', array(
-           'form' => $form
+            'form' => $form
         ));
     }
 
@@ -175,7 +177,7 @@ class BasketController extends Controller
     public function headerPreviewAction()
     {
         return $this->render('SonataBasketBundle:Basket:header_preview.html.twig', array(
-             'basket' => $this->get('sonata.basket')
+            'basket' => $this->get('sonata.basket')
         ));
     }
 
