@@ -40,7 +40,7 @@ file that was distributed with this source code.
             </table>
             <div class="panel-body">
                 {% if context.getSetting('mode') == 'admin' %}
-                    <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-small pull-right"><i class="glyphicon glyphicon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+                    <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-small pull-right"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
                 {% else %}
                     <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-small pull-right"><i class="glyphicon glyphicon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
                 {% endif %}
