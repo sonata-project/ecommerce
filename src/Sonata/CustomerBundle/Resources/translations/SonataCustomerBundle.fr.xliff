@@ -241,7 +241,7 @@
             </trans-unit>
             <trans-unit id="view_all_customers">
                 <source>view_all_customers</source>
-                <target>Voir toutes les commandes</target>
+                <target>Voir tous les clients</target>
             </trans-unit>
             <trans-unit id="customer.group.general">
                 <source>customer.group.general</source>
