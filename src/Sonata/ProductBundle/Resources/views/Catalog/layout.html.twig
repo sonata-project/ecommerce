@@ -22,7 +22,14 @@ file that was distributed with this source code.
     <div class="col-sm-3">
 
         {% block product_category %}
-            {{ sonata_block_render({'type': 'sonata.product.block.categories_menu'}, {'current_uri': app.request.requestUri}) }}
+            {{ sonata_block_render({'type': 'sonata.product.block.categories_menu', 'settings': {
+                'current_uri': app.request.requestUri,
+                'extra_cache_keys': {
+                    'block_id':    'sonata.product.block.categories_menu',
+                    'updated_at':  'now',
+                },
+                'ttl': 60
+            }}) }}
         {% endblock %}
 
         {#{% block product_filter %}#}
