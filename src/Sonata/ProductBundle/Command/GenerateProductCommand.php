@@ -163,6 +163,9 @@ Add this line in <comment>/src/Application/Sonata/ProductBundle/Resources/config
 
     <discriminator-class value="{{ service }}">Application\Sonata\ProductBundle\Entity\{{ product }}</discriminator-class>
 
+You can customize the serialization of your Product by editing /src/Application/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml
+(see JMS serializer documentation for more information).
+
 <info>4. Tweak the Product to match its functional requirements</info>
 
                                 <comment>Good luck !</comment>
