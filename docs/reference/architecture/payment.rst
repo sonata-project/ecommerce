@@ -5,9 +5,9 @@
 Payment
 =======
 
-Payment can be quite a complicated subject. One of our main goals was to provide a system that could interconnect with any payment institution (or be overridden to do so easily). The other one was, of course, security. You don't want for instance a user to be able to access a URL on your application that will automatically change its order's status from waiting to paid.
+Payment can be quite a complicated subject. One of our main goals was to provide a system that could interconnect with any payment institution (or be overridden to do so easily). The other one was, of course, security.
 
-You'll find here the payment processes described, so you can understand them and be more comfortable with all of it when you'll digg in.
+You'll find here the payment processes described, so you can understand them and be more comfortable with all of them when you'll digg in.
 
 Interaction with payment institution
 ====================================
@@ -23,7 +23,7 @@ Redirects the user to the payment institution (through the payment method's call
 This is a secured, server-to-server call ; this is where we'll check the payment's return (depending on the payment institution's security policies), and update the order's status depending on the feedback given by the payment institution.
     
     - (Optionally) If everything is well, we send a request to the server to notify it that we did indeed handle its callback.
-    - If the payment method doesn't handle this case, we simply update our data and don't notify the server.
+    - If the payment method does not support this case, we simply update the application data and don't notify the server.
 
 3. User's return
 
@@ -43,11 +43,11 @@ Data transformation during payment
     - Validating the transaction (its status is then updated)
     
 - Notifying callback handling to payment institution
-    - Update the order's status & payment status: ``OrderInterface::STATUS_VALIDATED`` and ``TransactionInterface::STATUS_VALIDATED`` if it's ok, ``TransactionInterface::STATUS_ERROR_VALIDATION`` if not.
+    - Update the order's status & payment status: ``OrderInterface::STATUS_VALIDATED`` and ``TransactionInterface::STATUS_VALIDATED`` if it's ok, ``OrderInterface::STATUS_VALIDATED`` and ``TransactionInterface::STATUS_ERROR_VALIDATION`` if not.
     
 - User redirected to confirmation
-    - No data alteration, only checks
+    - No data alteration during this step, only controls are performed
     
 - User redirected to error
-    - If Order is cancelable, set its status to ``OrderInterface::STATUS_STOPPED``
+    - If ``Order`` is canceled, set its status to ``OrderInterface::STATUS_STOPPED``
     - Set transaction's status to ``TransactionInterface::STATUS_CANCELLED``
