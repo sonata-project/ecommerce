@@ -23,7 +23,9 @@ You can override the Delivery selector and pool classes through the following pa
 * ``sonata.delivery.selector.class``
 * ``sonata.delivery.pool.class``
 
-You can also add your own delivery methods to the delivery pool by tagging your services with the following tag name: ``sonata.delivery.method``.
+Note that in order to use a different selector, yours should override the default one (``Sonata\Component\Delivery\Selector``). If you just want to implement a brand new class based on ``Sonata\Component\Delivery\ServiceDeliverySelectorInterface``, you will also have register it as a new service and reference it into your application configuration (see ``selector`` node below).
+
+You can also add your own delivery methods to the delivery pool by tagging your services with the following tag name: ``sonata.delivery.method``. Remember to use unique codes for your delivery methods.
 
 Default configuration:
 
