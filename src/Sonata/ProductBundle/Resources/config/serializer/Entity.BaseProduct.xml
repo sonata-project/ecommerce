@@ -1,27 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <serializer>
-    <class name="Sonata\ProductBundle\Entity\BaseProduct" exclusion-policy="ALL">
-        <property name="id" type="integer" expose="true" />
-        <property name="sku" type="string" expose="true" />
-        <property name="slug" type="string" expose="true" />
-        <property name="name" type="string" expose="true" />
-        <property name="description" type="string" expose="true" />
-        <property name="price" type="double" expose="true" />
-        <property name="vatRate" type="double" expose="true" />
-        <property name="stock" type="integer" expose="true" />
-        <property name="enabled" type="boolean" expose="true" />
-        <property name="updatedAt" type="datetime" expose="true" />
-        <property name="createdAt" type="datetime" expose="true" />
+    <class name="Sonata\ProductBundle\Entity\BaseProduct" exclusion-policy="all" xml-root-name="product">
 
-        <property name="image" type="Sonata\MediaBundle\Model\MediaInterface" expose="false" />
-        <property name="gallery" type="Sonata\MediaBundle\Model\GalleryInterface" expose="false" />
-        <property name="package" type="Sonata\Component\Product\PackageInterface" expose="false" />
-        <property name="delivery" type="Sonata\Component\Product\DeliveryInterface" expose="false" />
-        <property name="productCategories" type="Sonata\ProductBundle\Entity\ProductCategoryInterface" expose="false" />
-        <property name="productCollections" type="Sonata\ProductBundle\Entity\ProductCollectionInterface" expose="false" />
+        <property name="sku"  type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="slug" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="name" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 
-        <property name="parent" expose="false" />
-        <property name="variations" expose="false" />
+        <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+
+        <property name="description"               type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+        <property name="shortDescription"          type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+        <property name="rawDescription"            type="string" expose="true" since-version="1.0" groups="sonata_api_write" />
+        <property name="descriptionFormatter"      type="string" expose="true" since-version="1.0" groups="sonata_api_write" />
+        <property name="rawShortDescription"       type="string" expose="true" since-version="1.0" groups="sonata_api_write" />
+        <property name="shortDescriptionFormatter" type="string" expose="true" since-version="1.0" groups="sonata_api_write" />
+        
+        <property name="priceIncludingVat" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="price"             type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="vatRate"           type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        
+        <property name="stock" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
 
     </class>
 </serializer>
