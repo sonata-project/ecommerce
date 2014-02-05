@@ -11,7 +11,7 @@ file that was distributed with this source code.
 
 {% sonata_template_box 'This is the basket billing step template. Feel free to override it.' %}
 
-<h1>{{ 'sonata.basket.title_payment_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
+{% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'billing'} %}
 
 <form action="{{ url('sonata_basket_payment') }}" method="POST" >
     <div class="row">

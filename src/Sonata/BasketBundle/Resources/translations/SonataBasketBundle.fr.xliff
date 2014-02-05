@@ -311,6 +311,26 @@
                 <source>basket_review_title</source>
                 <target>Votre commande</target>
             </trans-unit>
+            <trans-unit id="basket_stepper_basket_title">
+                <source>basket_stepper_basket_title</source>
+                <target>Votre panier</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_identification_title">
+                <source>basket_stepper_identification_title</source>
+                <target>Identification</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_delivery_title">
+                <source>basket_stepper_delivery_title</source>
+                <target>Livraison</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_billing_title">
+                <source>basket_stepper_billing_title</source>
+                <target>Paiement</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_checkout_title">
+                <source>basket_stepper_checkout_title</source>
+                <target>Finalisation</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

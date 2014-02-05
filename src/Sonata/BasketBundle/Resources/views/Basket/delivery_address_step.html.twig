@@ -15,7 +15,7 @@ file that was distributed with this source code.
     {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
 {% endblock %}
 
-<h1>{{ 'sonata.basket.title_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}</h1>
+{% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'delivery'} %}
 
 {% form_theme form 'SonataBasketBundle:Form:label.html.twig' %}
 

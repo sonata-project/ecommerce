@@ -311,6 +311,26 @@
                 <source>basket_review_title</source>
                 <target>Review your order</target>
             </trans-unit>
+            <trans-unit id="basket_stepper_basket_title">
+                <source>basket_stepper_basket_title</source>
+                <target>Your basket</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_identification_title">
+                <source>basket_stepper_identification_title</source>
+                <target>Identification</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_delivery_title">
+                <source>basket_stepper_delivery_title</source>
+                <target>Delivery</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_billing_title">
+                <source>basket_stepper_billing_title</source>
+                <target>Billing</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_checkout_title">
+                <source>basket_stepper_checkout_title</source>
+                <target>Checkout</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
