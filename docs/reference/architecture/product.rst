@@ -11,15 +11,14 @@ Product
 A ``Product`` defines the data related to one entry in the persistence layer. An application
 can have different types of product. A product is always linked to a ``ProductProvider``.
 
-The link between the ``Product`` and the ``ProductProvider`` is done through the discriminator
-column.
+The link between the ``Product`` and the ``ProductProvider`` is done through the configuration file (see ``app/config/sonata/sonata_product.yml`` under ``sonata_product`` namespace in the sandbox).
 
 A ``ProductProvider`` is responsible of the ``Product`` lifecycle across the application:
 
   - Compute prices
   - Forms manager: front and backend
   - Add a product into the basket
-  - Create an OrderElement upon the ``Product`` information
+  - Create an ``OrderElement`` upon the ``Product`` information
   - Create variations
 
 A ``ProductManager`` is responsible of the ``Product`` lifecycle with the database:
@@ -30,7 +29,7 @@ A ``ProductManager`` is responsible of the ``Product`` lifecycle with the databa
 
 A ``ProductSetManager`` is responsible of retrieving a set of different products, or specific products (it overrides the ``ProductManager``).
 
-A ``ProductFinder`` is responsible for finding matching products to a given one. It will noticeably be used for cross-selling & up-selling matches.
+A ``ProductFinder`` is responsible for finding matching products related to a given one. It will noticeably be used for cross-selling & up-selling matches.
 
 Each product prototype has its own type (defined in ``ProductType`` property).
 You can use ``Sonata\Component\Product\Pool`` to retrieve related ``ProductProvider`` and ``ProductManager`` instances.
@@ -48,8 +47,7 @@ The variations are related to a parent ``Product``. When you edit some data in y
 
 A product and its variations can be synchronized : each field of the master product (except ``id``, ``parent`` and the variation fields) is copied
 from the master product to its variations.
-The "variation fields" are used to differentiate the variations. You can set a ``color`` property as a variation field and that property won't be
-synchronized when you update the master product.
+The "variation fields" are used to differentiate the variations. Each of these fields can't be modified from the parent product since they are "children specific".
 
 Product Template
 ================
@@ -78,12 +76,15 @@ The product sheet is based on the main ``product`` block, which is divided in 2 
     - ``product_delivery`` block displays product delivery information (to override by default),
     - ``product_basket`` block displays the "Add to basket" form (rendered by ``SonataBasketBundle:Basket:add_product_form.html.twig`` template).
 
+Also, to allow the display of variations, a javascript block has been implemented :
+    - ``product_javascript_init`` block to register javascript functions related to products
 
 Additionally, you can override those template blocks:
 
-  - ``product_cross`` block that can be overrided in you do not want to displays cross-selling block and the following is encapsulated in:
+  - ``product_cross`` block is used as a container to encapsulate the following :
 
     - ``product_cross_selling`` block that includes cross-selling block (rendered by ``SonataProductBundle:Product:view_similar.html.twig`` template).
+
 
 Product Helpers
 ===============
@@ -108,24 +109,24 @@ Some SonataBlock services are available as well:
 sonata.product.block.variations_form
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Renders the variations_form. A ``product`` argument is needed.
+Renders the variations_form. A ``Product`` argument is needed.
 
 Options:
-  - ``variations_properties``: an array of properties you wish to display
-  - ``form_route`` and ``form_route_parameters`` which are used to generate the URL for the submit of the post (and the AJAX submit as well)
-  - ``form_field_options`` which allows you to give an array of options to the form field generated.
+  - ``variations_properties`` is an array of properties you wish to display.
+  - ``form_route`` and ``form_route_parameters`` are used to generate the URL to submit the variation form.
+  - ``form_field_options`` allows you to give an array of options to the form field generated. Note that this parameter will be applied to every form fields (their type is "choice". See `Symfony Choice Form Type <http://symfony.com/doc/current/reference/forms/types/choice.html>`_ for a list of available parameters.
 
 sonata.product.block.recent_products
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Renders the latest added products. By default, the number of displayed products is set to 5, but you may override this setting.
+Renders the latest added products. By default, the number of displayed products is set to 5, but you may override this setting using the setting key name ``number``.
 
 sonata.product.block.categories_menu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Displays a KnpMenu rendering the product categories.
+Displays a KnpMenu rendering the product categories. It is rendered using the template ``SonataBlockBundle:Block:block_side_menu_template.html.twig`` that you might want to override.
 
 sonata.product.block.filters_menu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Displays a KnpMenu rendering the currently selected product type filters (WIP).
+Displays a `KnpMenu <https://github.com/KnpLabs/KnpMenuBundle/blob/1.1.x/Resources/doc/index.md>`_ rendering the currently selected product type filters (work in progress).
