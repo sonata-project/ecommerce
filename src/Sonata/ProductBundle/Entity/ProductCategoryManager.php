@@ -114,9 +114,9 @@ class ProductCategoryManager extends DoctrineBaseManager implements ProductCateg
     public function getProductCount(CategoryInterface $category, $limit = 1000)
     {
         // Can't perform limit in subqueries with Doctrine... Hence raw SQL
-        $metadata = $this->em->getClassMetadata($this->class);
-        $productMetadata = $this->em->getClassMetadata($metadata->getAssociationTargetClass('product'));
-        $categoryMetadata = $this->em->getClassMetadata($metadata->getAssociationTargetClass('category'));
+        $metadata = $this->om->getClassMetadata($this->class);
+        $productMetadata = $this->om->getClassMetadata($metadata->getAssociationTargetClass('product'));
+        $categoryMetadata = $this->om->getClassMetadata($metadata->getAssociationTargetClass('category'));
 
         $sql = "SELECT count(cnt.product_id) AS cntId
             FROM (
@@ -135,7 +135,7 @@ class ProductCategoryManager extends DoctrineBaseManager implements ProductCateg
 
         $sql = sprintf($sql, $metadata->table['name'], $productMetadata->table['name'], $categoryMetadata->table['name'], $productMetadata->table['name'], $limit);
 
-        $statement = $this->em->getConnection()->prepare($sql);
+        $statement = $this->om->getConnection()->prepare($sql);
         $statement->bindValue('enabled', 1);
         $statement->bindValue('categoryId', $category->getId());
 

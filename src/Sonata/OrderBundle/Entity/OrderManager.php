@@ -21,7 +21,7 @@ class OrderManager extends DoctrineBaseManager implements OrderManagerInterface
      */
     public function save($order, $andFlush = true)
     {
-        $this->em->persist($order->getCustomer());
+        $this->om->persist($order->getCustomer());
 
         parent::save($order, $andFlush);
     }

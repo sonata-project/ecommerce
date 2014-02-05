@@ -14,7 +14,7 @@ class BasketManager extends DoctrineBaseManager implements BasketManagerInterfac
     public function loadBasketPerCustomer(CustomerInterface $customer)
     {
         try {
-            return $this->em->createQueryBuilder()
+            return $this->om->createQueryBuilder()
                 ->select('b, be')
                 ->from($this->class, 'b')
                 ->leftJoin('b.basketElements', 'be', null, null, 'be.position')
