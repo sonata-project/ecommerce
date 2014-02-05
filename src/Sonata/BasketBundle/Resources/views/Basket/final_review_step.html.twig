@@ -11,18 +11,36 @@ file that was distributed with this source code.
 
 {% sonata_template_box 'This is the basket final review template. Feel free to override it.' %}
 
-<h1>{{ 'sonata.basket.title_basket'|trans({}, 'SonataBasketBundle') }}</h1>
+{% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'checkout'} %}
 
-<table class="table table-bordered">
+<table class="table basket">
 
     <thead>
         <tr>
-            <th>{{ 'header_basket_information'|trans({}, 'SonataBasketBundle') }}</th>
-            <th>{{ 'header_basket_price'|trans({}, 'SonataBasketBundle') }}</th>
-            <th>{{ 'header_basket_quantity'|trans({}, 'SonataBasketBundle') }}</th>
-            <th>{{ 'header_basket_total'|trans({}, 'SonataBasketBundle') }}</th>
+            <th class="col-sm-6">{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</th>
+            <th class="col-sm-2">{% trans from 'SonataBasketBundle'%}header_basket_unit_price{% endtrans %}</th>
+            <th class="col-sm-2">{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</th>
+            <th>{% trans from 'SonataBasketBundle'%}header_basket_total_inc{% endtrans %}</th>
         </tr>
     </thead>
+
+    <tbody>
+        {# call each product controller to render its own view #}
+        {% for basketElement in basket.BasketElements %}
+            {% render controller('SonataProductBundle:Product:renderFinalReviewBasketElement', {
+            'basketElement' : basketElement,
+            'basket': basket
+            }) %}
+        {% endfor %}
+
+        <tr>
+            <td>{{ 'sonata.basket.label_delivery_charge'|trans({}, 'SonataBasketBundle') }}</td>
+            <td class="number">{{ basket.getDeliveryPrice(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</td>
+            <td></td>
+            <td class="number">{{ basket.getDeliveryPrice(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</td>
+        </tr>
+    </tbody>
+
     <tfoot>
         <tr>
             <td colspan="2" rowspan="3"></td>
@@ -39,31 +57,15 @@ file that was distributed with this source code.
         </tr>
     </tfoot>
 
-    <tbody>
-        {# call each product controller to render its own view #}
-        {% for basketElement in basket.BasketElements %}
-            {% render controller('SonataProductBundle:Product:renderFinalReviewBasketElement', {
-                'basketElement' : basketElement,
-                'basket': basket
-            }) %}
-        {% endfor %}
-
-        <tr>
-            <td>{{ 'sonata.basket.label_delivery_charge'|trans({}, 'SonataBasketBundle') }}</td>
-            <td class="number">{{ basket.getDeliveryPrice(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</td>
-            <td></td>
-            <td class="number">{{ basket.getDeliveryPrice(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</td>
-        </tr>
-    </tbody>
 </table>
 
 <div class="row">
-    <!-- Delivery information -->
-    <div class="col-lg-6">
-        <div class="panel panel-info">
+    <!-- Delivery address -->
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h3>{{ 'sonata.basket.title_delivery'|trans({}, 'SonataBasketBundle') }}</h3>
+                    {{ 'sonata.basket.title_address_delivery_step_basket'|trans({}, 'SonataBasketBundle') }}
                 </div>
             </div>
             <div class="panel-body">
@@ -76,18 +78,15 @@ file that was distributed with this source code.
                     <i>{{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}</i>
                 {% endif %}
             </div>
-            <div class="panel-footer">
-                {{ basket.deliverymethod.name }}
-            </div>
         </div>
     </div>
 
-    <!-- Payment information -->
-    <div class="col-lg-6">
-        <div class="panel panel-success">
+    <!-- Payment address -->
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h3>{{ 'sonata.basket.title_billing'|trans({}, 'SonataBasketBundle') }}</h3>
+                    {{ 'sonata.basket.title_address_billing_step_basket'|trans({}, 'SonataBasketBundle') }}
                 </div>
             </div>
             <div class="panel-body">
@@ -96,28 +95,53 @@ file that was distributed with this source code.
                     {{  basket.billingaddress.getFullAddress("<br />")|raw }}
                 </address>
             </div>
-            <div class="panel-footer">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Delivery information -->
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ 'sonata.basket.title_delivery_method'|trans({}, 'SonataBasketBundle') }}
+                </div>
+            </div>
+            <div class="panel-body">
+                {{ basket.deliverymethod.name }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment information -->
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    {{ 'sonata.basket.title_payment_method'|trans({}, 'SonataBasketBundle') }}
+                </div>
+            </div>
+            <div class="panel-body">
                 {{ basket.paymentmethod.name }}
             </div>
         </div>
     </div>
 </div>
 
-<div class="basket_tac well pagination-centered text-center">
-    <h3>{{ 'sonata.basket.order_terms_and_conditions_title'|trans({}, 'SonataBasketBundle') }}</h3>
-    <form action="{{ url('sonata_basket_final') }}" method="POST" onsubmit="ctrlForm(this)">
-
+<form action="{{ url('sonata_basket_final') }}" method="POST" onsubmit="ctrlForm(this)">
+    <div class="alert alert-info">
         <label for="basket_tac">
             <input type="checkbox" name="tac" id="basket_tac"/>
-            <strong>{{ 'sonata.basket.label_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</strong> <br />
-            <i><a href="{{ path('sonata_payment_terms') }}" target="_blank">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</a></i>
+            {{ 'sonata.basket.label_terms_and_condition'|trans({}, 'SonataBasketBundle') }}
+            (<i><a href="{{ path('sonata_payment_terms') }}" target="_blank">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</a></i>)
         </label>
+    </div>
 
-        <br />
-        <br />
-        <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" class="btn btn-lg btn-primary" />
-    </form>
-</div>
+    <div class="form-actions">
+        <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" class="btn btn-primary pull-right" />
+    </div>
+</form>
 
 <script>
     function ctrlForm(form) {
