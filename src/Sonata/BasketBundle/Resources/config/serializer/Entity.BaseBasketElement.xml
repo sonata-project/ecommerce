@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sonata\BasketBundle\Entity\BaseBasketElement" exclusion-policy="all" xml-root-name="basket">
+
+        <property         name="productId"   type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="position"    type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="vatRate"     type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="unitPrice"   type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="price"       type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="quantity"    type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <virtual-property name="options"     type="array"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" method="getOptions" />
+        <property         name="name"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="productCode" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+
+    </class>
+</serializer>

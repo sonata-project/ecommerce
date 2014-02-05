@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sonata\InvoiceBundle\Entity\BaseInvoice" exclusion-policy="all" xml-root-name="invoice">
+
+        <property name="reference"     type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="currency"      type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="status"        type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="totalInc"      type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="totalExcl"     type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="name"          type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="phone"         type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="address1"      type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="address2"      type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="address3"      type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="city"          type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="postcode"      type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="country"       type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="fax"           type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="email"         type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="mobile"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="paymentMethod" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="locale"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+
+    </class>
+</serializer>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sonata\PaymentBundle\Entity\BaseTransaction" exclusion-policy="all" xml-root-name="transaction">
+
+        <property         name="transactionId" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="state"         type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <virtual-property name="parameters"    type="array"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" method="getParameters" />
+        <property         name="statusCode"    type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="paymentCode"   type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="information"   type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read" />
+
+    </class>
+</serializer>
