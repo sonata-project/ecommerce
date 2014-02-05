@@ -11,10 +11,21 @@ file that was distributed with this source code.
 
 <tr>
     <td>
-        {% block product_description %}
-            <b>{{ basketElement.name }}</b> <br />
-            {{ basketElement.product.description|raw }}
-        {% endblock %}
+        <div class="col-sm-4 hidden-xs">
+            {% block product_thumbnail %}
+                {% thumbnail basketElement.product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}
+            {% endblock %}
+        </div>
+        <div class="col-sm-8">
+            {% block product_name %}
+                <strong><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></strong>
+            {% endblock %}
+            {% block product_sku %}
+                <p>{{ 'sonata.product.sku'|trans([], 'SonataProductBundle') }}: {{ basketElement.product.sku }}</p>
+            {% endblock %}
+            {% block product_description %}{% endblock %}
+            {% block product_variations %}{% endblock %}
+        </div>
     </td>
     <td class="number">
         {% block product_unit_price %}
