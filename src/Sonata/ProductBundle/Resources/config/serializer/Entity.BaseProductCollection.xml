@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
-    <class name="Sonata\ProductBundle\Model\BaseProductCollection" exclusion-policy="all" xml-root-name="product_collection">
+    <class name="Sonata\ProductBundle\Entity\BaseProductCollection" exclusion-policy="all" xml-root-name="product_collection">
 
         <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
 
