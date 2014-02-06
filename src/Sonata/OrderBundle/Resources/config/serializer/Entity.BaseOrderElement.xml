@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sonata\OrderBundle\Entity\BaseOrderElement" exclusion-policy="all" xml-root-name="order_element">
+
+        <property name="productId"   type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="productType" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="quantity"    type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="unitPrice"   type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="price"       type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="vatRate"     type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="designation" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="description" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+        <virtual-property name="options"    type="array" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" method="getOptions" />
+        <virtual-property name="rawProduct" type="array" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" method="getRawProduct" />
+        
+        <property name="status"         type="integer"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="deliveryStatus" type="integer"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+        <property name="createdAt"   type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+        <property name="updatedAt"   type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+        <property name="validatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+
+    </class>
+</serializer>

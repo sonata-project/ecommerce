@@ -76,7 +76,8 @@ class GenerateProductCommand extends ContainerAwareCommand
         $output->writeln(' > mustaching skeleton files');
 
         Mustache::renderDir($bundle_dir, array(
-            'product' => $input->getArgument('product'),
+            'product'   => $input->getArgument('product'),
+            'root_name' => strtolower(preg_replace('/[A-Z]/', '_\\0', $input->getArgument('product'))),
         ));
 
         $renames = array(
@@ -85,6 +86,7 @@ class GenerateProductCommand extends ContainerAwareCommand
             '%s/Repository/Repository.php'                 => '%s/Repository/%sRepository.php',
             '%s/Provider/EntityProductProvider.php'        => '%s/Provider/%sProductProvider.php',
             '%s/Resources/config/doctrine/Entity.orm.xml'  => '%s/Resources/config/doctrine/%s.orm.xml',
+            '%s/Resources/config/serializer/Entity.xml'    => '%s/Resources/config/serializer/Entity.%s.xml',
 
             // controller
             '%s/Controller/Controller.php'                 => '%s/Controller/%sController.php',
@@ -155,8 +157,16 @@ class GenerateProductCommand extends ContainerAwareCommand
             provider: {{ service }}.type
             manager: {{ service }}.manager
 
+<info>3. Define the Product serialization inheritance :</info>
 
-<info>3. Tweak the product to match its functional requirements</info>
+Add this line in <comment>/src/Application/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml</comment>
+
+    <discriminator-class value="{{ service }}">Application\Sonata\ProductBundle\Entity\{{ product }}</discriminator-class>
+
+You can customize the serialization of your Product by editing /src/Application/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml
+(see JMS serializer documentation for more information).
+
+<info>4. Tweak the Product to match its functional requirements</info>
 
                                 <comment>Good luck !</comment>
 
