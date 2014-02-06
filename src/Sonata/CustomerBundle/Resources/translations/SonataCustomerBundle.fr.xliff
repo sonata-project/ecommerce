@@ -369,11 +369,11 @@
             </trans-unit>
             <trans-unit id="address_add_success">
                 <source>address_add_success</source>
-                <target>Votre adresse a bien été ajoutée !</target>
+                <target>Votre adresse a été ajoutée avec succès !</target>
             </trans-unit>
             <trans-unit id="address_edit_success">
                 <source>address_edit_success</source>
-                <target>Votre adresse a bien été mise à jour !</target>
+                <target>Votre adresse a été mise à jour avec succès !</target>
             </trans-unit>
             <trans-unit id="address_name_label">
                 <source>address_name_label</source>
@@ -413,7 +413,7 @@
             </trans-unit>
             <trans-unit id="customer_address_delete">
                 <source>customer_address_delete</source>
-                <target>L'adresse a bien été supprimée !</target>
+                <target>Votre adresse a été supprimée avec succès !</target>
             </trans-unit>
             <trans-unit id="address_list_set_current">
                 <source>address_list_set_current</source>

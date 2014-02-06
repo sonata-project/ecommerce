@@ -191,23 +191,23 @@
             </trans-unit>
             <trans-unit id="sonata.invoice.elements.total_ex_vat">
                 <source>sonata.invoice.elements.total_ex_vat</source>
-                <target>Total excl. TVA</target>
+                <target>Total excl. VAT</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.elements.total_inc_vat">
                 <source>sonata.invoice.elements.total_inc_vat</source>
-                <target>Total incl. TVA</target>
+                <target>Total incl. VAT</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.total_exc_vat">
                 <source>sonata.invoice.total_exc_vat</source>
-                <target>Total excl. TVA</target>
+                <target>Total excl. VAT</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.vat">
                 <source>sonata.invoice.vat</source>
-                <target>VAT</target>
+                <target>Total VAT</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.total_inc_vat">
                 <source>sonata.invoice.total_inc_vat</source>
-                <target>Total incl. TVA</target>
+                <target>Total incl. VAT</target>
             </trans-unit>
             <!-- End - Invoice View -->
             <!-- Begin - Invoice page titles translations -->
