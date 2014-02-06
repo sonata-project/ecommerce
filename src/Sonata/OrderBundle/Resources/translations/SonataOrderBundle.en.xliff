@@ -409,7 +409,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.delivery">
                 <source>sonata.order.view.delivery</source>
-                <target>Delivery</target>
+                <target>Delivery charge</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.delivery_title">
                 <source>sonata.order.view.delivery_title</source>

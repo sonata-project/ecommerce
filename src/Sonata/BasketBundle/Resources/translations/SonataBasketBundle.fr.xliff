@@ -28,7 +28,7 @@
             </trans-unit>
             <trans-unit id="sonata.basket.label_delivery_charge">
                 <source>sonata.basket.label_delivery_charge</source>
-                <target>Coûts de la livraison</target>
+                <target>Coûts de livraison</target>
             </trans-unit>
             <trans-unit id="sonata.basket.label_process_to_payment">
                 <source>sonata.basket.label_process_to_payment</source>
