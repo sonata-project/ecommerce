@@ -56,7 +56,7 @@ class InvoiceController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for invoices list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of invoices by page")
-     * @QueryParam(name="invoiceBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query invoices invoice by clause (key is field, value is direction")
+     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query invoices invoice by clause (key is field, value is direction")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
@@ -73,7 +73,7 @@ class InvoiceController
 
         $page    = $paramFetcher->get('page') - 1;
         $count   = $paramFetcher->get('count');
-        $invoiceBy = $paramFetcher->get('invoiceBy');
+        $orderBy = $paramFetcher->get('orderBy');
         $filters = array_intersect_key($paramFetcher->all(), $supportedFilters);
 
         foreach ($filters as $key => $value) {
@@ -82,7 +82,7 @@ class InvoiceController
             }
         }
 
-        return $this->invoiceManager->findBy($filters, $invoiceBy, $count, $page);
+        return $this->invoiceManager->findBy($filters, $orderBy, $count, $page);
     }
 
     /**
