@@ -46,6 +46,11 @@ In order to activate the API's, you'll also need to add this to your routing:
         prefix:       /api/ecommerce
         resource:     "@SonataProductBundle/Resources/config/routing/api.xml"
 
+    sonata_api_ecommerce_order:
+        type:         rest
+        prefix:       /api/order
+        resource:     "@SonataOrderBundle/Resources/config/routing/api.xml"
+
 Serialization
 -------------
 
