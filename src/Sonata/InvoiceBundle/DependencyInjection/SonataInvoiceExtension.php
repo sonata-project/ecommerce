@@ -45,6 +45,10 @@ class SonataInvoiceExtension extends Extension
         $loader->load('form.xml');
         $loader->load('renderer.xml');
 
+        if (isset($bundles['FOSRestBundle'])) {
+            $loader->load('api_controllers.xml');
+        }
+
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.xml');
         }

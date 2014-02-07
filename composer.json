@@ -34,6 +34,9 @@
         "friendsofsymfony/user-bundle": "~1.3",
         "jms/serializer-bundle": "~0.11"
     },
+    "require-dev": {
+        "friendsofsymfony/rest-bundle": " 1.1.*"
+    },
     "autoload": {
         "psr-0": {
             "Sonata\\": "src/"
