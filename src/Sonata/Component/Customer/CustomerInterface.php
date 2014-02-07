@@ -120,4 +120,9 @@ interface CustomerInterface
      * @return array
      */
     public function getAddressesByType($type);
+
+    /**
+     * @return array
+     */
+    public function getAddresses();
 }
