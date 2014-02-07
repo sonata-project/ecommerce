@@ -56,7 +56,7 @@ class BasketController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for baskets list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of baskets by page")
-     * @QueryParam(name="basketBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query baskets basket by clause (key is field, value is direction")
+     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query baskets basket by clause (key is field, value is direction")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
      *
@@ -72,7 +72,7 @@ class BasketController
 
         $page    = $paramFetcher->get('page') - 1;
         $count   = $paramFetcher->get('count');
-        $basketBy = $paramFetcher->get('basketBy');
+        $orderBy = $paramFetcher->get('orderBy');
         $filters = array_intersect_key($paramFetcher->all(), $supportedFilters);
 
         foreach ($filters as $key => $value) {
@@ -81,7 +81,7 @@ class BasketController
             }
         }
 
-        return $this->basketManager->findBy($filters, $basketBy, $count, $page);
+        return $this->basketManager->findBy($filters, $orderBy, $count, $page);
     }
 
     /**

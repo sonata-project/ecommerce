@@ -66,8 +66,7 @@ class CustomerController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for customers list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of customers by page")
-     * @QueryParam(name="customerBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query customers customer by clause (key is field, value is direction")
-     * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on customer statuses")
+     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query customers order by clause (key is field, value is direction")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
      *
@@ -77,13 +76,13 @@ class CustomerController
      */
     public function getCustomersAction(ParamFetcherInterface $paramFetcher)
     {
+        // No supported filters as of now
         $supportedFilters = array(
-            'status' => "",
         );
 
         $page    = $paramFetcher->get('page') - 1;
         $count   = $paramFetcher->get('count');
-        $customerBy = $paramFetcher->get('customerBy');
+        $orderBy = $paramFetcher->get('orderBy');
         $filters = array_intersect_key($paramFetcher->all(), $supportedFilters);
 
         foreach ($filters as $key => $value) {
@@ -92,7 +91,7 @@ class CustomerController
             }
         }
 
-        return $this->customerManager->findBy($filters, $customerBy, $count, $page);
+        return $this->customerManager->findBy($filters, $orderBy, $count, $page);
     }
 
     /**
