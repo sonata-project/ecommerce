@@ -331,6 +331,10 @@
                 <source>basket_stepper_checkout_title</source>
                 <target>Checkout</target>
             </trans-unit>
+            <trans-unit id="form_label_quantity">
+                <source>form_label_quantity</source>
+                <target>Quantité</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
