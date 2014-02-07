@@ -3,7 +3,7 @@ Extend Sonata e-commerce
 ========================
 Override
 --------
-As a framework, e-commerces' bundles of Sonata claims to stick with best practises, so extending them won't be more difficult than explained on the `Symfony recommendations`_.
+As a framework, e-commerces' bundles of Sonata claims to stick with best practices, so extending them won't be more difficult than explained on the `Symfony recommendations`_.
 
 Contribute
 ----------
