@@ -11,9 +11,10 @@
         <property name="designation" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="description" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 
-        <virtual-property name="options"    type="array" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" method="getOptions" />
-        <virtual-property name="rawProduct" type="array" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" method="getRawProduct" />
-        
+        <virtual-property name="total"      type="double" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" method="getTotal" />
+        <virtual-property name="options"    type="array"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" method="getOptions" />
+        <virtual-property name="rawProduct" type="array"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" method="getRawProduct" />
+
         <property name="status"         type="integer"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="deliveryStatus" type="integer"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 

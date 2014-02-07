@@ -45,6 +45,10 @@ class SonataOrderExtension extends Extension
         $loader->load('form.xml');
         $loader->load('twig.xml');
 
+        if (isset($bundles['FOSRestBundle'])) {
+            $loader->load('api_controllers.xml');
+        }
+
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.xml');
         }
