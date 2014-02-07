@@ -40,6 +40,8 @@ class SonataBasketExtension extends Extension
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
 
+        $bundles = $container->getParameter('kernel.bundles');
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('basket_entity.xml');
@@ -48,6 +50,10 @@ class SonataBasketExtension extends Extension
         $loader->load('validator.xml');
         $loader->load('form.xml');
         $loader->load('twig.xml');
+
+        if (isset($bundles['FOSRestBundle'])) {
+            $loader->load('api_controllers.xml');
+        }
 
         $container->setAlias('sonata.basket.builder', $config['builder']);
         $container->setAlias('sonata.basket.factory', $config['factory']);
