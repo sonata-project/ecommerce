@@ -35,7 +35,7 @@
         "jms/serializer-bundle": "~0.11"
     },
     "require-dev": {
-        "friendsofsymfony/rest-bundle": " 1.1.*"
+        "friendsofsymfony/rest-bundle": "~1.1"
     },
     "autoload": {
         "psr-0": {
