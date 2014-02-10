@@ -333,7 +333,7 @@
             </trans-unit>
             <trans-unit id="form_label_quantity">
                 <source>form_label_quantity</source>
-                <target>Quantité</target>
+                <target>Quantity</target>
             </trans-unit>
         </body>
     </file>
