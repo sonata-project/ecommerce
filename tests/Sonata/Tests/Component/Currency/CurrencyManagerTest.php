@@ -22,9 +22,9 @@ class CurrencyManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testFindOneByLabel()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
 
-        $currencyManager = new CurrencyManager('Sonata\Component\Basket\Basket', $em);
+        $currencyManager = new CurrencyManager('Sonata\Component\Currency\Currency', $registry);
 
         $this->assertEquals("EUR", $currencyManager->findOneByLabel("EUR")->getLabel());
     }

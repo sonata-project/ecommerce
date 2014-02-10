@@ -41,8 +41,12 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $address->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em->expects($this->any())->method('persist');
 
-        $addressManager = new AddressManager('', $em);
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        $addressManager = new AddressManager('', $registry);
 
         $addressManager->setCurrent($address);
     }
@@ -65,8 +69,12 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $address->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em->expects($this->exactly(1))->method('persist');
 
-        $addressManager = new AddressManager('', $em);
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        $addressManager = new AddressManager('', $registry);
 
         $addressManager->delete($address);
     }

@@ -13,31 +13,29 @@
     </parameters>
 
     <services>
-        <service id="sonata.product.entity_manager" alias="doctrine.orm.default_entity_manager" />
-
         <service id="sonata.delivery.manager" class="%sonata.delivery.manager.class%">
             <argument>%sonata.product.delivery.class%</argument>
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.package.manager" class="%sonata.package.manager.class%">
             <argument>%sonata.product.package.class%</argument>
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.product.set.manager" class="%sonata.product.set.manager.class%">
             <argument>%sonata.product.product.class%</argument>
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.product_category.product" class="%sonata.product_category.manager.class%">
             <argument>%sonata.product.product_category.class%</argument>
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.product_collection.product" class="%sonata.product_collection.manager.class%">
             <argument>%sonata.product.product_collection.class%</argument>
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
     </services>

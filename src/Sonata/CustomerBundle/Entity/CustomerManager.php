@@ -11,8 +11,8 @@
 namespace Sonata\CustomerBundle\Entity;
 
 use Sonata\Component\Customer\CustomerManagerInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class CustomerManager extends DoctrineBaseManager implements CustomerManagerInterface
+class CustomerManager extends BaseEntityManager implements CustomerManagerInterface
 {
 }

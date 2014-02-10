@@ -4,9 +4,9 @@ namespace Sonata\Component\Basket;
 
 use Sonata\Component\Customer\CustomerInterface;
 use Doctrine\ORM\NoResultException;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class BasketManager extends DoctrineBaseManager implements BasketManagerInterface
+class BasketManager extends BaseEntityManager implements BasketManagerInterface
 {
     /**
      * {@inheritdoc}
@@ -14,7 +14,7 @@ class BasketManager extends DoctrineBaseManager implements BasketManagerInterfac
     public function loadBasketPerCustomer(CustomerInterface $customer)
     {
         try {
-            return $this->om->createQueryBuilder()
+            return $this->getRepository()->createQueryBuilder()
                 ->select('b, be')
                 ->from($this->class, 'b')
                 ->leftJoin('b.basketElements', 'be', null, null, 'be.position')

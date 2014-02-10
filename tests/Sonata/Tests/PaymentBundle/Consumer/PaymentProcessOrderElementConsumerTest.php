@@ -33,9 +33,9 @@ class PaymentProcessOrderElementConsumerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getConsumer()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
 
-        $orderElementManager = new OrderElementManager('Sonata\Test\OrderBundle\Entity\OrderElement', $em);
+        $orderElementManager = new OrderElementManager('Sonata\Test\OrderBundle\Entity\OrderElement', $registry);
 
         $pool = new Pool();
 

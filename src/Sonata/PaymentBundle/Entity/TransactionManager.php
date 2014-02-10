@@ -14,8 +14,8 @@ use Sonata\Component\Payment\TransactionManagerInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class TransactionManager extends DoctrineBaseManager implements TransactionManagerInterface
+class TransactionManager extends BaseEntityManager implements TransactionManagerInterface
 {
 }

@@ -11,8 +11,8 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\DeliveryManagerInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class DeliveryManager extends DoctrineBaseManager implements DeliveryManagerInterface
+class DeliveryManager extends BaseEntityManager implements DeliveryManagerInterface
 {
 }

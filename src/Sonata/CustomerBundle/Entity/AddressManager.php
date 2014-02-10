@@ -12,9 +12,9 @@ namespace Sonata\CustomerBundle\Entity;
 
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\AddressInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class AddressManager extends DoctrineBaseManager implements AddressManagerInterface
+class AddressManager extends BaseEntityManager implements AddressManagerInterface
 {
     /**
      * {@inheritdoc}

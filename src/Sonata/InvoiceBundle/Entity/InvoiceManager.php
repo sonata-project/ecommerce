@@ -11,8 +11,8 @@
 namespace Sonata\InvoiceBundle\Entity;
 
 use Sonata\Component\Invoice\InvoiceManagerInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class InvoiceManager extends DoctrineBaseManager implements InvoiceManagerInterface
+class InvoiceManager extends BaseEntityManager implements InvoiceManagerInterface
 {
 }

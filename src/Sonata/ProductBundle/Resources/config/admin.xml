@@ -27,8 +27,6 @@
     </parameters>
 
     <services>
-        <service id="sonata.product.entity_manager" alias="doctrine.orm.default_entity_manager" />
-
         <service id="sonata.product.admin.product" class="%sonata.product.admin.product.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
@@ -98,7 +96,7 @@
         </service>
 
         <service id="sonata.product.admin.product.manager" class="%sonata.product.admin.product.manager%">
-            <argument type="service" id="sonata.product.entity_manager" />
+            <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.product.pool" />
         </service>
     </services>
