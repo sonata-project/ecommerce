@@ -10,10 +10,18 @@
 
 namespace Sonata\Test\OrderBundle\Entity;
 
+use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\OrderBundle\Entity\OrderManager;
 
-class OrderElement
+class Order extends BaseOrder
 {
+    /**
+     * @return integer the order id
+     */
+    public function getId()
+    {
+        // TODO: Implement getId() method.
+    }
 
 }
 
@@ -29,22 +37,18 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
     public function testGetClass()
     {
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $orderManager = new OrderManager('Sonata\Test\OrderBundle\Entity\OrderElement', $registry);
+        $order = new OrderManager('Sonata\Test\OrderBundle\Entity\Order', $registry);
 
-        $this->assertEquals('Sonata\Test\OrderBundle\Entity\OrderElement', $orderManager->getClass());
-
-        unset($orderManager, $em);
+        $this->assertEquals('Sonata\Test\OrderBundle\Entity\Order', $order->getClass());
     }
 
     public function testCreate()
     {
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $orderManager = new OrderManager('Sonata\Test\OrderBundle\Entity\OrderElement', $registry);
+        $orderManager = new OrderManager('Sonata\Test\OrderBundle\Entity\Order', $registry);
 
-        $orderElement = $orderManager->create();
-        $this->assertInstanceOf('Sonata\Test\OrderBundle\Entity\OrderElement', $orderElement);
-
-        unset($orderManager, $em, $orderElement);
+        $order = $orderManager->create();
+        $this->assertInstanceOf('Sonata\Test\OrderBundle\Entity\Order', $order);
     }
 
     public function testSave()
@@ -56,11 +60,12 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $orderManager = new OrderManager('Sonata\Test\OrderBundle\Entity\OrderElement', $registry);
-        $orderElement = $this->getMock('Sonata\Component\Order\OrderInterface');
-        $orderManager->save($orderElement);
+        $orderManager = new OrderManager('Sonata\Test\OrderBundle\Entity\Order', $registry);
 
-        unset($em, $orderManager, $orderElement);
+        $order = $this->getMock('Sonata\Test\OrderBundle\Entity\Order');
+        $order->expects($this->once())->method('getCustomer');
+
+        $orderManager->save($order);
     }
 
     public function testDelete()
@@ -72,12 +77,9 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $orderManager = new OrderManager('Sonata\Test\OrderBundle\Entity\OrderElement', $registry);
+        $orderManager = new OrderManager('Sonata\Test\OrderBundle\Entity\Order', $registry);
 
-        $orderElement = $this->getMock('Sonata\Component\Order\OrderInterface');
-        $orderManager->delete($orderElement);
-
-        unset($em, $orderManager, $orderElement);
+        $order = new Order();
+        $orderManager->delete($order);
     }
-
 }
