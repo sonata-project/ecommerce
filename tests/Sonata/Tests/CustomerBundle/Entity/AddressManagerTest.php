@@ -32,9 +32,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $custAddresses = array($currentAddress);
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customer->expects($this->once())
-            ->method('getAddressesByType')
-            ->will($this->returnValue($custAddresses));
+        $customer->expects($this->once())->method('getAddressesByType')->will($this->returnValue($custAddresses));
 
         $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $address->expects($this->once())->method('setCurrent');
@@ -46,7 +44,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $addressManager = new AddressManager('', $registry);
+        $addressManager = new AddressManager('Sonata\Component\Customer\AddressInterface', $registry);
 
         $addressManager->setCurrent($address);
     }
@@ -74,7 +72,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $addressManager = new AddressManager('', $registry);
+        $addressManager = new AddressManager('Sonata\Component\Customer\AddressInterface', $registry);
 
         $addressManager->delete($address);
     }

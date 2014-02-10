@@ -10,6 +10,7 @@
 
 namespace Sonata\Tests\Component\Basket;
 
+use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketManager;
 
 /**
@@ -45,8 +46,8 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
 
         $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $registry);
 
-        $basketElement = $this->getMock('Sonata\Component\Basket\BasketInterface');
-        $basketMgr->save($basketElement);
+        $basket = new Basket();
+        $basketMgr->save($basket);
     }
 
     public function testFind()
@@ -77,7 +78,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
 
         $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $registry);
 
-        $basketElement = $this->getMock('Sonata\Component\Basket\BasketInterface');
-        $basketMgr->delete($basketElement);
+        $basket = new Basket();
+        $basketMgr->delete($basket);
     }
 }
