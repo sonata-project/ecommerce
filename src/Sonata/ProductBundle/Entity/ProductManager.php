@@ -18,9 +18,9 @@ use Knp\Component\Pager\Paginator;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class ProductManager extends DoctrineBaseManager implements ProductManagerInterface
+class ProductManager extends BaseEntityManager implements ProductManagerInterface
 {
     /**
      * {@inheritdoc}

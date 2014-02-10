@@ -284,10 +284,14 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $provider = $this->getBaseProvider();
 
         $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
-        $em         = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $productCategoryManager = new ProductCategoryManager('Sonata\Tests\Component\Product\ProductCategory', $em);
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        $productCategoryManager = new ProductCategoryManager('Sonata\Tests\Component\Product\ProductCategory', $registry);
         $provider->setProductCategoryManager($productCategoryManager);
 
         // create product
@@ -342,10 +346,14 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $provider = $this->getBaseProvider();
 
         $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
-        $em         = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $productCollectionManager = new ProductCollectionManager('Sonata\Tests\Component\Product\ProductCollection', $em);
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        $productCollectionManager = new ProductCollectionManager('Sonata\Tests\Component\Product\ProductCollection', $registry);
         $provider->setProductCollectionManager($productCollectionManager);
 
         $product = new Product();

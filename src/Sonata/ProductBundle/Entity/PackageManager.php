@@ -11,8 +11,8 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\PackageManagerInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class PackageManager extends DoctrineBaseManager implements PackageManagerInterface
+class PackageManager extends BaseEntityManager implements PackageManagerInterface
 {
 }

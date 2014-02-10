@@ -16,9 +16,9 @@ use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Doctrine\ORM\EntityManager;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class ProductCollectionManager extends DoctrineBaseManager implements ProductCollectionManagerInterface
+class ProductCollectionManager extends BaseEntityManager implements ProductCollectionManagerInterface
 {
     /**
      * {@inheritdoc}

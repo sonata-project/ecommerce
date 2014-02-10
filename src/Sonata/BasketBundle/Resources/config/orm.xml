@@ -7,12 +7,12 @@
     <services>
         <service id="sonata.basket.manager" class="Sonata\Component\Basket\BasketManager">
             <argument>%sonata.basket.basket.class%</argument>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="doctrine"/>
         </service>
 
         <service id="sonata.basket_element.manager" class="Sonata\Component\Basket\BasketElementManager">
             <argument>%sonata.basket.basket_element.class%</argument>
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="doctrine"/>
         </service>
 
     </services>

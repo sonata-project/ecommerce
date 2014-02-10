@@ -12,6 +12,7 @@ namespace Sonata\ProductBundle\Model;
 
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\Component\Product\Pool;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * this method overwrite the default AdminModelManager to call
@@ -25,12 +26,12 @@ class DoctrineModelManager extends ModelManager
     protected $pool;
 
     /**
-     * @param $entityManager
-     * @param \Sonata\Component\Product\Pool $pool
+     * @param RegistryInterface $registry
+     * @param Pool              $pool
      */
-    public function __construct($entityManager, Pool $pool)
+    public function __construct(RegistryInterface $registry, Pool $pool)
     {
-        parent::__construct($entityManager);
+        parent::__construct($registry);
 
         $this->pool = $pool;
     }

@@ -116,6 +116,6 @@ class ProductVariationAdminController extends Controller
      */
     protected function getProductManager()
     {
-        return $this->get('sonata.product.entity_manager');
+        return $this->get('doctrine')->getManagerForClass($this->admin->getClass());
     }
 }

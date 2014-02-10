@@ -10,16 +10,14 @@
     </parameters>
 
     <services>
-        <service id="sonata.invoice.entity_manager" alias="doctrine.orm.default_entity_manager" />
-
         <service id="sonata.invoice.manager" class="%sonata.invoice.manager.class%">
             <argument>%sonata.invoice.invoice.class%</argument>
-            <argument type="service" id="sonata.invoice.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.invoice_element.manager" class="%sonata.invoice_element.manager.class%">
             <argument>%sonata.invoice.invoice_element.class%</argument>
-            <argument type="service" id="sonata.invoice.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
     </services>
 

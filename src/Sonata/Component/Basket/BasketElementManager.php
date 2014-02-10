@@ -2,8 +2,8 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class BasketElementManager extends DoctrineBaseManager implements BasketElementManagerInterface
+class BasketElementManager extends BaseEntityManager implements BasketElementManagerInterface
 {
 }

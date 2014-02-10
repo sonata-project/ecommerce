@@ -11,8 +11,8 @@
 namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderElementManagerInterface;
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class OrderElementManager extends DoctrineBaseManager implements OrderElementManagerInterface
+class OrderElementManager extends BaseEntityManager implements OrderElementManagerInterface
 {
 }
