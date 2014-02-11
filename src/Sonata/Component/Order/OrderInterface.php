@@ -619,4 +619,9 @@ interface OrderInterface
      * @return CustomerInterface
      */
     public function getCustomer();
+
+    /**
+     * @return float
+     */
+    public function getVat();
 }

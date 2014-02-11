@@ -1039,4 +1039,12 @@ abstract class BaseOrder implements OrderInterface
     {
         return $this->locale;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVat()
+    {
+        return bcsub($this->totalInc, $this->totalExcl);
+    }
 }
