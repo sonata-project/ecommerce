@@ -34,14 +34,14 @@ file that was distributed with this source code.
             <div class="col-sm-6">
                 {% block sonata_order_dates %}
                     {% set date_time_size = constant('IntlDateFormatter::SHORT') %}
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_dates{% endtrans %}</h4>
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
+                        <table class="table">
                             <tr>
                                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
                                 <td>{{ order.createdAt|format_datetime(null, order.locale, date_time_size, date_time_size) }}</td>
@@ -66,14 +66,14 @@ file that was distributed with this source code.
             </div>
             <div class="col-sm-6">
                 {% block sonata_order_statuses %}
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.subtitle_statuses{% endtrans %}</h4>
                             </div>
                         </div>
 
-                        <table class="table table-bordered">
+                        <table class="table">
                             <tr>
                                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.order_status{% endtrans %}</th>
                                 <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans({}, 'SonataOrderBundle') }}</span></td>
@@ -96,7 +96,7 @@ file that was distributed with this source code.
         {% block sonata_order_top_right %}
             <div class="col-sm-6">
                 {% block sonata_order_delivery %}
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_title{% endtrans %}</h4>
@@ -110,7 +110,7 @@ file that was distributed with this source code.
             </div>
             <div class="col-sm-6">
                 {% block sonata_order_billing %}
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.billing_title{% endtrans %}</h4>
@@ -131,7 +131,7 @@ file that was distributed with this source code.
     <div class="clearfix">&nbsp;</div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4>{% trans from 'SonataOrderBundle' %}sonata.order.view.elements{% endtrans %}</h4>
                 </div>
@@ -166,7 +166,7 @@ file that was distributed with this source code.
                         </tr>
                         <tr>
                             <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_vat{% endtrans %}</th>
-                            <td class="number">{{ (order.totalInc - order.totalExcl)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                            <td class="number">ici{{ (order.totalInc - order.totalExcl)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                         </tr>
                         <tr>
                             <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
