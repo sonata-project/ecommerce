@@ -32,11 +32,12 @@ ul.stepper li div.img-circle {
 }
 
 ul.stepper li.active {
-    color: #3c763d;
+    color: #428bca;
 }
 
 ul.stepper li.active div.img-circle {
-    background: #dff0d8;
+    background: #428bca;
+    color: #fff;
 }
 
 ul.stepper li.active hr {
