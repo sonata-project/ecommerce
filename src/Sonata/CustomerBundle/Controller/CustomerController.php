@@ -109,7 +109,7 @@ class CustomerController extends Controller
 
         $this->getAddressManager()->delete($address);
 
-        $this->get('session')->getFlashBag()->add('success', 'customer_address_delete');
+        $this->get('session')->getFlashBag()->add('sonata_customer_success', 'customer_address_delete');
 
         return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
     }
