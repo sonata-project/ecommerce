@@ -142,3 +142,7 @@ file that was distributed with this source code.
     </div>
     <!-- End Cross selling -->
 {% endblock %}
+
+{% block product_comments %}
+    {{ sonata_block_render_event('sonata.comment', {'id': 'front-product-' ~ product.id}) }}
+{% endblock %}
