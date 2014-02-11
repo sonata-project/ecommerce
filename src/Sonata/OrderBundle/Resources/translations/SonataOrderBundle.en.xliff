@@ -457,7 +457,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.elements">
                 <source>sonata.order.view.elements</source>
-                <target>Order elements</target>
+                <target>Review order</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.subtitle_elements">
                 <source>sonata.order.view.subtitle_elements</source>
