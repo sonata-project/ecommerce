@@ -19,16 +19,15 @@
         </div>
     {% endblock %}
 
-    {% if addresses|length > 0 %}
+    {% block sonata_profile_address_list %}
 
-        {% block sonata_profile_address_list %}
+        {% for type,addressesByType in addresses %}
 
-            {% for type,addressesByType in addresses if addressesByType|length > 0 %}
+            {% block sonata_profile_address_typelist %}
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">{{ type|trans({}, 'SonataCustomerBundle') }}</h3></div>
 
-                {% block sonata_profile_address_typelist %}
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h3 class="panel-title">{{ type|trans({}, 'SonataCustomerBundle') }}</h3></div>
-
+                    {% if addressesByType|length > 0 %}
                         <table class="table">
                             {% block sonata_profile_address_table_headers %}
                                 <tr>
@@ -62,13 +61,17 @@
                                 </tr>
                                 {% endblock %}
                             {% endfor %}
-                        {% endblock %}
-                    </table>
+                        </table>
+                    {% else %}
+                        <div class="panel-body">
+                            {% trans from 'SonataCustomerBundle' %}sonata.address.list.no_addresses{% endtrans %}
+                        </div>
+                    {% endif %}
+
                 </div>
-            {% endfor %}
-        {% endblock %}
-    {% else %}
-        <p>{% trans from 'SonataCustomerBundle' %}sonata.address.list.no_addresses{% endtrans %}</p>
-    {% endif %}
+            {% endblock %}
+        {% endfor %}
+
+    {% endblock %}
 
 {% endblock %}
