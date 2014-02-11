@@ -166,7 +166,7 @@ file that was distributed with this source code.
                         </tr>
                         <tr>
                             <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_vat{% endtrans %}</th>
-                            <td class="number">ici{{ (order.totalInc - order.totalExcl)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                            <td class="number">{{ order.vat|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                         </tr>
                         <tr>
                             <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
