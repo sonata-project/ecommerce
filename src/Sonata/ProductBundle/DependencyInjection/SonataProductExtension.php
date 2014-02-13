@@ -49,7 +49,7 @@ class SonataProductExtension extends Extension
         $loader->load('twig.xml');
         $loader->load('menu.xml');
 
-        if (isset($bundles['FOSRestBundle'])) {
+        if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
         }
 
