@@ -40,7 +40,7 @@ Price bundle configuration is as follows:
 .. code-block:: yaml
 
     sonata_price:
-        currency: EUR # Or any value present in array_keys(Intl::getCurrencyBundle()->getCurrencyNames)
+        currency: EUR # Or any valid value according ISO 4217 standard
     doctrine:
         dbal:
             # ...

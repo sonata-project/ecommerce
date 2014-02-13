@@ -48,7 +48,7 @@ class Selector implements ServiceDeliverySelectorInterface
     }
 
     /**
-     * @return \Sonata\Component\Delivery\Pool
+     * @return DeliveryPool
      */
     public function getDeliveryPool()
     {
@@ -82,7 +82,7 @@ class Selector implements ServiceDeliverySelectorInterface
     }
 
     /**
-     * @return \Sonata\Component\Product\Pool
+     * @return ProductPool
      */
     public function getProductPool()
     {
