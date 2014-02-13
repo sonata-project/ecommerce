@@ -19,15 +19,17 @@
         "symfony/process": "~2.3",
         "symfony/twig-bridge": "~2.3",
 
-        "sonata-project/core-bundle": "~2.2@dev,>2.2.4",
-        "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
-        "sonata-project/media-bundle": "2.2.*@dev",
-        "sonata-project/user-bundle": "2.2.*@dev",
+        "sonata-project/core-bundle": "~2.2@dev",
+        "sonata-project/doctrine-orm-admin-bundle": "~2.2@dev",
+        "sonata-project/media-bundle": "~2.2@dev",
+        "sonata-project/user-bundle": "~2.2@dev",
         "sonata-project/intl-bundle": "~2.1",
         "sonata-project/seo-bundle": "~1",
         "sonata-project/classification-bundle": "~2.2",
         "sonata-project/notification-bundle": "~2.2",
         "sonata-project/comment-bundle": "~2.2@dev",
+
+        "friendsofsymfony/comment-bundle": "~2.0@dev",
 
         "kriswallsmith/buzz": "0.*",
         "knplabs/knp-menu-bundle": "~1.1",
