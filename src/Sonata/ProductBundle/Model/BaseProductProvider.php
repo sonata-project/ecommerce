@@ -776,7 +776,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         if ($product) {
             $basketElement->setProduct($this->code, $product);
 
-            if (!$basketElement->getQuantity()) {
+            if (!$basketElement->getQuantity() && 0 !== $basketElement->getQuantity()) {
                 $basketElement->setQuantity(1);
             }
         }
@@ -823,7 +823,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket)
     {
         // the item is flagged as deleted, no need to validate the item
-        if ($basketElement->getDelete()) {
+        if ($basketElement->getDelete() || 0 === $basketElement->getQuantity()) {
             return;
         }
 
