@@ -55,6 +55,28 @@ To enable DB storage, you'll need to change the following configuration values:
 
 Please note that if you don't do so, you won't be able to retrieve a user's basket if he logs in from a different computer. Default factory is set to session factory.
 
+Anonymous basket invalidation
+=============================
+
+If you wish to invalidate the anonymous basket stored in session when the user logs out (and if you didn't invalidate the session), you'll need to edit your ``security.yml`` file to add this to your logout configuration:
+
+.. code-block:: yaml
+
+security:
+    # ...
+    firewalls:
+        # ...
+        main:                   # Your firewall name
+            # ...
+            logout:
+                # ...
+                # We set invalidate_session to false because we want basket
+                # to be fully persisted even when user logout and login again
+                invalidate_session: false
+                # And we add the handler to invalidate the anonymous basket once the user logs out
+                handlers: ['sonata.basket.session.factory']
+
+
 Configuration
 =============
 
