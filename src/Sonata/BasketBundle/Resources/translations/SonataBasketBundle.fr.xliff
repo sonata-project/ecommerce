@@ -284,7 +284,7 @@
             </trans-unit>
             <trans-unit id="footer_basket_total_vat">
                 <source>footer_basket_total_vat</source>
-                <target>TVA</target>
+                <target>Total TVA</target>
             </trans-unit>
             <trans-unit id="footer_basket_total_inc">
                 <source>footer_basket_total_inc</source>

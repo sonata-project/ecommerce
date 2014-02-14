@@ -378,11 +378,11 @@
 
             <trans-unit id="form.label_price_including_vat">
                 <source>form.label_price_including_vat</source>
-                <target>Prix avec TVA</target>
+                <target>Prix TTC</target>
             </trans-unit>
             <trans-unit id="show.label_price_including_vat">
                 <source>show.label_price_including_vat</source>
-                <target>Prix avec TVA</target>
+                <target>Prix TTC</target>
             </trans-unit>
             <trans-unit id="sonata_product_catalog_breadcrumb">
                 <source>sonata_product_catalog_breadcrumb</source>
