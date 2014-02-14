@@ -18,7 +18,7 @@ file that was distributed with this source code.
         </div>
         <div class="col-sm-8">
             {% block product_name %}
-                <strong><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></strong>
+                <strong>{{ basketElement.name }}</strong>
             {% endblock %}
             {% block product_sku %}
                 <p>{{ 'sonata.product.sku'|trans([], 'SonataProductBundle') }}: {{ basketElement.product.sku }}</p>
