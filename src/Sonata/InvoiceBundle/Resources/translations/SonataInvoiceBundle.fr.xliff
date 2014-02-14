@@ -48,11 +48,11 @@
             </trans-unit>
             <trans-unit id="list.label_total_excl">
                 <source>list.label_total_excl</source>
-                <target>Total sans TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="list.label_total_inc">
                 <source>list.label_total_inc</source>
-                <target>Total avec TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <!-- End - List translations -->
 
@@ -84,11 +84,11 @@
             </trans-unit>
             <trans-unit id="form.label_total_inc">
                 <source>form.label_total_inc</source>
-                <target>Total hors TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="form.label_total_excl">
                 <source>form.label_total_excl</source>
-                <target>Total avec TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
 
             <trans-unit id="form.label_name">
@@ -191,23 +191,23 @@
             </trans-unit>
             <trans-unit id="sonata.invoice.elements.total_ex_vat">
                 <source>sonata.invoice.elements.total_ex_vat</source>
-                <target>Total sans TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.elements.total_inc_vat">
                 <source>sonata.invoice.elements.total_inc_vat</source>
-                <target>Total avec TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.total_exc_vat">
                 <source>sonata.invoice.total_exc_vat</source>
-                <target>Total sans TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.vat">
                 <source>sonata.invoice.vat</source>
-                <target>TVA</target>
+                <target>Total TVA</target>
             </trans-unit>
             <trans-unit id="sonata.invoice.total_inc_vat">
                 <source>sonata.invoice.total_inc_vat</source>
-                <target>Total avec TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <!-- End - View translations -->
         </body>
