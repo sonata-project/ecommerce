@@ -41,8 +41,25 @@
         "nelmio/api-doc-bundle": "~2.4"
     },
     "autoload": {
-        "psr-0": {
-            "Sonata\\": "src/"
+        "psr-4": {
+            "Sonata\\Component\\": "src/Component",
+            "Sonata\\BasketBundle\\": "src/BasketBundle",
+            "Sonata\\CustomerBundle\\": "src/CustomerBundle",
+            "Sonata\\DeliveryBundle\\": "src/DeliveryBundle",
+            "Sonata\\InvoiceBundle\\": "src/InvoiceBundle",
+            "Sonata\\OrderBundle\\": "src/OrderBundle",
+            "Sonata\\PaymentBundle\\": "src/PaymentBundle",
+            "Sonata\\PriceBundle\\": "src/PriceBundle",
+            "Sonata\\ProductBundle\\": "src/ProductBundle",
+            "Sonata\\Tests\\Component\\": "tests/Component",
+            "Sonata\\Tests\\BasketBundle\\": "tests/BasketBundle",
+            "Sonata\\Tests\\CustomerBundle\\": "tests/CustomerBundle",
+            "Sonata\\Tests\\DeliveryBundle\\": "tests/DeliveryBundle",
+            "Sonata\\Tests\\InvoiceBundle\\": "tests/InvoiceBundle",
+            "Sonata\\Tests\\OrderBundle\\": "tests/OrderBundle",
+            "Sonata\\Tests\\PaymentBundle\\": "tests/PaymentBundle",
+            "Sonata\\Tests\\PriceBundle\\": "tests/PriceBundle",
+            "Sonata\\Tests\\ProductBundle\\": "tests/ProductBundle"
         }
     },
     "extra": {
