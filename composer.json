@@ -40,9 +40,6 @@
         "friendsofsymfony/rest-bundle": "~1.1",
         "nelmio/api-doc-bundle": "~2.4"
     },
-    "require-dev": {
-        "friendsofsymfony/rest-bundle": "~1.1"
-    },
     "autoload": {
         "psr-0": {
             "Sonata\\": "src/"
