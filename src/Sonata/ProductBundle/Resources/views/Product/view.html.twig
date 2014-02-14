@@ -85,7 +85,7 @@ file that was distributed with this source code.
                             <li class="list-group-item">
                                 <span itemprop="description">
                                     {% block product_description_short %}
-                                        {{ product.rawShortDescription|raw }}<br/>
+                                        {{ product.shortDescription|raw }}<br/>
                                         <a href="#fullDescription">{% trans from "SonataProductBundle" %}product_full_description_link{% endtrans %}</a>
                                     {% endblock %}
                                 </span>
@@ -150,7 +150,7 @@ file that was distributed with this source code.
             <h3 class="panel-title"><a id="fullDescription"></a>{% trans from "SonataProductBundle" %}product_full_description{% endtrans %}</h3>
         </div>
         <div class="panel-body">
-            {{ product.rawDescription|raw }}
+            {{ product.description|raw }}
         </div>
     </div>
 {% endblock %}
