@@ -85,7 +85,8 @@ file that was distributed with this source code.
                             <li class="list-group-item">
                                 <span itemprop="description">
                                     {% block product_description_short %}
-                                        {{ product.rawShortDescription|raw }}
+                                        {{ product.shortDescription|raw }}<br/>
+                                        <a href="#fullDescription">{% trans from "SonataProductBundle" %}product_full_description_link{% endtrans %}</a>
                                     {% endblock %}
                                 </span>
                             </li>
@@ -143,6 +144,16 @@ file that was distributed with this source code.
     <!-- End Cross selling -->
 {% endblock %}
 
+{% block product_full_description %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a id="fullDescription"></a>{% trans from "SonataProductBundle" %}product_full_description{% endtrans %}</h3>
+        </div>
+        <div class="panel-body">
+            {{ product.description|raw }}
+        </div>
+    </div>
+{% endblock %}
 {% block product_comments %}
     {{ sonata_block_render_event('sonata.comment', {'id': 'front-product-' ~ product.id}) }}
 {% endblock %}
