@@ -326,6 +326,14 @@
                 <source>product_out_of_stock_quantity</source>
                 <target>There is not enough stock to satisfy the asked quantity.</target>
             </trans-unit>
+            <trans-unit id="product_full_description">
+                <source>product_full_description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="product_full_description_link">
+                <source>product_full_description_link</source>
+                <target>Show more...</target>
+            </trans-unit>
             <!-- End - Product view translations -->
 
             <!-- Begin - Product create variations -->
