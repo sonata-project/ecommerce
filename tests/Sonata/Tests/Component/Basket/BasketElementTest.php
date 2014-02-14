@@ -106,6 +106,12 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
         $this->assertEquals(150, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT');
         $this->assertEquals(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
+
+        $basketElement->setQuantity(-10);
+        $this->assertEquals(15, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when negative quantity set');
+
+        $basketElement->setQuantity(0);
+        $this->assertEquals(0, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when no quantity set');
     }
 
     public function testValidity()

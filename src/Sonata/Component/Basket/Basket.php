@@ -537,7 +537,7 @@ class Basket implements \Serializable, BasketInterface
     public function clean()
     {
         foreach ($this->getBasketElements() as $basketElement) {
-            if ($basketElement->getDelete()) {
+            if ($basketElement->getDelete() || 0 === $basketElement->getQuantity()) {
                 $this->removeElement($basketElement);
             }
         }
