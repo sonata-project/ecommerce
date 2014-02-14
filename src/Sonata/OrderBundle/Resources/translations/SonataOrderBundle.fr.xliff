@@ -149,7 +149,7 @@
             </trans-unit>
             <trans-unit id="list.label_total_excl">
                 <source>list.label_total_excl</source>
-                <target>Total sans TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="list.label__action">
                 <source>list.label__action</source>
@@ -165,15 +165,15 @@
             </trans-unit>
             <trans-unit id="list.label_get_total_with_vat">
                 <source>list.label_get_total_with_vat</source>
-                <target>Total avec TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <trans-unit id="list.label_get_total">
                 <source>list.label_get_total</source>
-                <target>Total sans TVA</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="list.label_total_inc">
                 <source>list.label_total_inc</source>
-                <target>Total avec TVA</target>
+                <target>Total TTC</target>
             </trans-unit>
             <trans-unit id="list.label_payment_method">
                 <source>list.label_payment_method</source>
@@ -469,7 +469,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.total_excl">
                 <source>sonata.order.view.total_excl</source>
-                <target>Total (excl.)</target>
+                <target>Total HT</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.total_vat">
                 <source>sonata.order.view.total_vat</source>
@@ -477,7 +477,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.total_inc">
                 <source>sonata.order.view.total_inc</source>
-                <target>Total (incl.)</target>
+                <target>Total TTC</target>
             </trans-unit>
             <trans-unit id="sonata.order.view_invoice">
                 <source>sonata.order.view_invoice</source>
