@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="sonata.order.serializer.handler.order" class="Sonata\OrderBundle\Serializer\OrderSerializerHandler">
+            <tag name="jms_serializer.subscribing_handler" />
+            <argument type="service" id="sonata.order.manager" />
+        </service>
+
+        <service id="sonata.order.serializer.handler.order_element" class="Sonata\OrderBundle\Serializer\OrderElementSerializerHandler">
+            <tag name="jms_serializer.subscribing_handler" />
+            <argument type="service" id="sonata.order.order_element.manager" />
+        </service>
+
+    </services>
+
+</container>

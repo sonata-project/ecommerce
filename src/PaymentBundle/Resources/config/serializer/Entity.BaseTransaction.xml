@@ -9,6 +9,8 @@
         <property         name="paymentCode"   type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
         <property         name="information"   type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
 
+        <property name="order" serialized-name="order_id" type="sonata_order_order_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
         <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read" />
 
     </class>

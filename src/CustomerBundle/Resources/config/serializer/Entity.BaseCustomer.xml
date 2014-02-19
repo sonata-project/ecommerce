@@ -14,6 +14,8 @@
         <property name="locale"       type="string"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="isFake"       type="boolean"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 
+        <property name="user" serialized-name="user_id" type="sonata_user_user_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
         <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
         <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
 

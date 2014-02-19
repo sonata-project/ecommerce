@@ -12,5 +12,7 @@
         <property         name="name"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
         <property         name="productCode" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
 
+        <property name="basket" serialized-name="basket_id" type="sonata_basket_basket_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
     </class>
 </serializer>
