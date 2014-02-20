@@ -8,6 +8,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\MediaBundle\Provider\Pool;
 use Sonata\IntlBundle\Templating\Helper\NumberHelper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * FacebookService.
@@ -42,14 +43,21 @@ class Facebook implements ServiceInterface
     protected $mediaFormat;
 
     /**
+     * @var RouterInterface
+     */
+    protected $router;
+
+    /**
+     * @param RouterInterface           $router
      * @param Pool                      $mediaPool
      * @param NumberHelper              $numberHelper
      * @param CurrencyDetectorInterface $currencyDetector
      * @param string                    $domain
      * @param                           $mediaFormat
      */
-    public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $domain, $mediaFormat)
+    public function __construct(RouterInterface $router, Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $domain, $mediaFormat)
     {
+        $this->router    = $router;
         $this->mediaPool = $mediaPool;
         $this->numberHelper = $numberHelper;
         $this->currencyDetector = $currencyDetector;
@@ -68,7 +76,10 @@ class Facebook implements ServiceInterface
         $seoPage->addMeta('property', 'og:type', 'og:product')
             ->addMeta('property', 'og:title', $product->getName())
             ->addMeta('property', 'og:description', $product->getDescription())
-            ->addMeta('property', 'og:url', $this->domain)
+            ->addMeta('property', 'og:url', $this->router->generate('sonata_product_view', array(
+                'slug'      => $product->getSlug(),
+                'productId' => $product->getId()
+            ), true))
             ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))
             ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency());
 
