@@ -14,12 +14,12 @@ use Sonata\Component\Basket\BasketInterface;
 
 interface ServiceDeliveryInterface
 {
-    const STATUS_OPEN       = 1;
-    const STATUS_PENDING    = 2;
-    const STATUS_SENT       = 3;
-    const STATUS_CANCELLED  = 4;
-    const STATUS_COMPLETED  = 5;
-    const STATUS_RETURNED   = 6;
+    const STATUS_OPEN       = 1;    // Not processed yet
+    const STATUS_PENDING    = 2;    // Packing
+    const STATUS_SENT       = 3;    // In transit
+    const STATUS_CANCELLED  = 4;    // Delivery cancelled
+    const STATUS_COMPLETED  = 5;    // Delivered
+    const STATUS_RETURNED   = 6;    // Returned to sender
 
     /**
      * @return float the delivery base price

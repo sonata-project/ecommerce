@@ -78,7 +78,7 @@ class SonataPaymentExtension extends Extension
         // create the payment method pool
         $pool = $container->getDefinition('sonata.payment.pool');
 
-        $implemented = array(
+        $internal = array(
             'debug'    => 'sonata.payment.method.debug',
             'pass'     => 'sonata.payment.method.pass',
             'check'    => 'sonata.payment.method.check',
@@ -89,36 +89,44 @@ class SonataPaymentExtension extends Extension
 
         // define the payment method
         foreach ($services as $id => $settings) {
-            $id = $implemented[$id];
+            if (array_key_exists($id, $internal)) {
+                $id = $internal[$id];
 
-            $enabled  = isset($settings['enabled']) ? $settings['enabled'] : true;
-            $name     = isset($settings['name']) ? $settings['name'] : 'n/a';
-            $options  = isset($settings['options']) ? $settings['options'] : array();
+                $enabled  = isset($settings['enabled']) ? $settings['enabled'] : true;
+                $name     = isset($settings['name']) ? $settings['name'] : 'n/a';
+                $options  = isset($settings['options']) ? $settings['options'] : array();
 
-            $code  = isset($settings['code']) ? $settings['code'] : false;
+                $code  = isset($settings['code']) ? $settings['code'] : false;
 
-            if (!$code) {
-                throw new \RuntimeException('Please provide a code for the payment handler');
+                if (!$code) {
+                    throw new \RuntimeException('Please provide a code for the payment handler');
+                }
+
+                if (!$enabled) {
+                    $container->removeDefinition($id);
+                    continue;
+                }
+
+                $definition = $container->getDefinition($id);
+
+                $definition->addMethodCall('setName', array($name));
+                $definition->addMethodCall('setCode', array($code));
+                $definition->addMethodCall('setEnabled', array($enabled));
+                $definition->addMethodCall('setOptions', array($options));
+
+                foreach ((array) $settings['transformers'] as $name => $serviceId) {
+                    $definition->addMethodCall('addTransformer', array($name, new Reference($serviceId)));
+                }
             }
-
-            if (!$enabled) {
-                $container->removeDefinition($id);
-                continue;
-            }
-
-            $definition = $container->getDefinition($id);
-
-            $definition->addMethodCall('setName', array($name));
-            $definition->addMethodCall('setCode', array($code));
-            $definition->addMethodCall('setEnabled', array($enabled));
-            $definition->addMethodCall('setOptions', array($options));
-
-            foreach ((array) $settings['transformers'] as $name => $serviceId) {
-                $definition->addMethodCall('addTransformer', array($name, new Reference($serviceId)));
-            }
-
             // add the delivery method in the method pool
             $pool->addMethodCall('addMethod', array(new Reference($id)));
+        }
+
+        // Remove unconfigured services
+        foreach ($internal as $code => $id) {
+            if (!array_key_exists($code, $services)) {
+                $container->removeDefinition($id);
+            }
         }
 
         if (isset($services['debug'])) {

@@ -26,5 +26,6 @@ Summary
     Installation <reference/installation>
     Bundles <reference/bundles/index>
     Architecture <reference/architecture/index>
+    API <reference/architecture/api>
     Tutorials <reference/tutorials/index>
 

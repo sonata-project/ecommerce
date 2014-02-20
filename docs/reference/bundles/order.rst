@@ -18,6 +18,23 @@ The SonataOrderBundle basically manages the Order-related entities & managers, o
 
 Moreover, the RecentOrders admin & front dashboard block is present in this bundle as well.
 
+Tools
+=====
+
+Status Renderer
+---------------
+
+The SonataOrderBundle provides a status renderer for the order and order elements objects which handles the object's status as well as payment and delivery statuses.
+
+The status renderer twig helper is documented in `SonataCoreBundle <http://sonata-project.org/bundles/core/master/doc/reference/status_helper.html>`_.
+
+Block Services
+--------------
+
+A Recent Orders block service is available, that can be contextualised to a user or the admin (you've got implementation samples in the demo). You can customize the number of orders displayed.
+
+You also have a breadcrumb block service, see `SonataSeoBundle documentation <http://sonata-project.org/bundles/seo/master/doc/reference/breadcrumb.html>`_.
+
 Configuration
 =============
 

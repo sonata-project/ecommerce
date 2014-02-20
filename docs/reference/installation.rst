@@ -13,7 +13,7 @@ Pre-requisites
 
 
 One-line installation
-=================
+=====================
 Create a new project is as simple as using composer.
 ::
 

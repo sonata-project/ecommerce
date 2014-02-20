@@ -19,6 +19,13 @@ Below, you'll find a simple Class Diagram, representing the relationships betwee
 Technical Choices
 =================
 
+Entity Mappings
+---------------
+
+You might be surprised not to find entity mappings in the doctrine configuration files. Those mappings are actually defined in each bundle's extensions, in order to enable the mapping files overrides. So if you're looking for them, feel free to check those files.
+
+If you'd like to add relations to your entities, you may add them in your overridden mapping files.
+
 Order process (customer workflow)
 ---------------------------------
 
@@ -27,7 +34,7 @@ Currently, the order process is implemented as follows:
 - He adds it to the basket (which can be stored either in session or in DataBase)
 - The customer proceeds to checkout
 - And he is invited to complete his profile, Sonata provides two options for this:
-    
+
     The customer creates an account/authenticate on the website (option set by default when you installed the sonata framework)
     Or he fills a list of information in a one-time order. In that case, we store his informations in the basket, and he needs to fill the form for each order he will make.
 
@@ -109,3 +116,4 @@ Going in depths
     order
     payment
     invoice
+    api
