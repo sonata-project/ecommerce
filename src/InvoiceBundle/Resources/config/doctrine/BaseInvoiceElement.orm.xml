@@ -5,7 +5,7 @@
         <field name="quantity"          type="integer"  column="quantity"/>
         <field name="unitPrice"         type="decimal"  column="unit_price"         scale="4"/>
         <field name="price"             type="decimal"  column="price"              scale="4"/>
-        <field name="priceIncludingVat" type="boolean"  column="price_inc_vat" />
+        <field name="priceIncludingVat" type="boolean"  column="price_inc_vat"      nullable="true" />
         <field name="vatRate"           type="decimal"  column="vat_rate"           scale="4"/>
         <field name="total"             type="decimal"  column="total"              scale="4"/>
         <field name="designation"       type="string"   column="designation"        length="255"/>
