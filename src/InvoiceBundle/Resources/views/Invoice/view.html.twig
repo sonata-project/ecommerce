@@ -101,7 +101,7 @@ file that was distributed with this source code.
 
                     {% block sonata_invoice_elements_sumup %}
                     <tr>
-                        <td colspan="2" rowspan="4">&nbsp;</td>
+                        <td colspan="2" rowspan="{{ 4 + invoice.getVatAmounts|length }}">&nbsp;</td>
                         <th style="text-align: right">{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
                         <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, invoice.locale) }}</td>
                     </tr>
@@ -115,6 +115,13 @@ file that was distributed with this source code.
                         <th style="text-align: right">{% trans from 'SonataInvoiceBundle' %}sonata.invoice.vat{% endtrans %}</th>
                         <td class="number">{{ (invoice.totalInc - invoice.totalExcl)|number_format_currency(invoice.currency, {}, {}, invoice.locale) }}</td>
                     </tr>
+
+                    {% for item in invoice.getVatAmounts %}
+                        <tr>
+                            <th style="text-align: right"><small>{% trans from 'SonataInvoiceBundle' %}sonata_invoice_view_vat{% endtrans %} {{ item.rate|number_format(2) }}%</small></th>
+                            <td class="number"><small><b>{{ item.amount|number_format_currency(invoice.currency.label, {}, {}, invoice.locale) }}</b></small></td>
+                        </tr>
+                    {% endfor %}
 
                     <tr>
                         <th style="text-align: right">{% trans from 'SonataInvoiceBundle' %}sonata.invoice.total_inc_vat{% endtrans %}</th>

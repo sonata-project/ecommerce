@@ -208,11 +208,18 @@ interface BasketInterface
     public function getTotal($vat = false, $recurrentOnly = null);
 
     /**
-     * return the VAT of the current basket
+     * Returns the VAT of the current basket
      *
      * @return float
      */
     public function getVatAmount();
+
+    /**
+     * Returns an array with all VAT amounts of the current basket
+     *
+     * @return array
+     */
+    public function getVatAmounts();
 
     /**
      * return the Delivery price

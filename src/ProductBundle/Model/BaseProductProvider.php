@@ -202,9 +202,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         $orderElement = new $this->orderElementClassName;
         $orderElement->setQuantity($basketElement->getQuantity());
-        $orderElement->setUnitPrice($basketElement->getUnitPrice(true));
-        $orderElement->setPrice($basketElement->getPrice(true));
-        $orderElement->setPriceIncludingVat($basketElement->isPriceIncludingVat());
+        $orderElement->setUnitPrice($basketElement->getUnitPrice(false));
+        $orderElement->setPrice($basketElement->getPrice(false));
+        $orderElement->setPriceIncludingVat(false);
         $orderElement->setVatRate($basketElement->getVatRate());
         $orderElement->setDesignation($basketElement->getName());
         $orderElement->setProductType($this->getCode());

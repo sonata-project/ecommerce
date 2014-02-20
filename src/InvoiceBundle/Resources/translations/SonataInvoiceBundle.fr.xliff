@@ -205,6 +205,10 @@
                 <source>sonata.invoice.vat</source>
                 <target>Total TVA</target>
             </trans-unit>
+            <trans-unit id="sonata_invoice_view_vat">
+                <source>sonata_invoice_view_vat</source>
+                <target>TVA</target>
+            </trans-unit>
             <trans-unit id="sonata.invoice.total_inc_vat">
                 <source>sonata.invoice.total_inc_vat</source>
                 <target>Total TTC</target>

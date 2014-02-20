@@ -475,6 +475,10 @@
                 <source>sonata.order.view.total_vat</source>
                 <target>Total TVA</target>
             </trans-unit>
+            <trans-unit id="sonata_order_view_vat">
+                <source>sonata_order_view_vat</source>
+                <target>TVA</target>
+            </trans-unit>
             <trans-unit id="sonata.order.view.total_inc">
                 <source>sonata.order.view.total_inc</source>
                 <target>Total TTC</target>

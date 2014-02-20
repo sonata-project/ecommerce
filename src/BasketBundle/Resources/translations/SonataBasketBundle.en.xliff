@@ -278,6 +278,10 @@
                 <source>header_basket_total</source>
                 <target>Total</target>
             </trans-unit>
+            <trans-unit id="footer_basket_vat">
+                <source>footer_basket_vat</source>
+                <target>VAT</target>
+            </trans-unit>
             <trans-unit id="footer_basket_total_excl">
                 <source>footer_basket_total_excl</source>
                 <target>Total excl. VAT</target>
