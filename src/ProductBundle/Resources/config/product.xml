@@ -51,6 +51,7 @@
             <argument>%sonata.product.seo.product.media_format%</argument>
         </service>
         <service id="sonata.product.seo.facebook" class="%sonata.product.seo.facebook.class%">
+            <argument type="service" id="router" />
             <argument type="service" id="sonata.media.pool" />
             <argument type="service" id="sonata.intl.templating.helper.number" />
             <argument type="service" id="sonata.price.currency.detector" />
