@@ -10,11 +10,8 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\PaymentInterface;
-
 /**
  * The pool stored a group of available payment method
- *
  */
 class Pool
 {
@@ -27,14 +24,19 @@ class Pool
      * add a payment method into the pool
      *
      * @param PaymentInterface $instance
+     *
+     * @throws \RuntimeException
      */
     public function addMethod(PaymentInterface $instance)
     {
+        if (null === $instance->getCode()) {
+            throw new \RuntimeException(sprintf('Payment handler of class %s must return a code on getCode method. Please refer to the documentation (http://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)', get_class($instance)));
+        }
+
         $this->methods[$instance->getCode()] = $instance;
     }
 
     /**
-     *
      * @return array of payment methods
      */
     public function getMethods()

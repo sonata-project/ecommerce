@@ -7,8 +7,6 @@ Payment
 
 At this time, several payment methods are handled in Sonata e-commerce. Whether you'd like to use credit card payment providers such as Scellius or Ogone ; simply Paypal ; or even want the ability to handle check payments, you should find what you need in what's already provided. Otherwise, you may of course add your own payment methods (and feel free to submit them to the community).
 
-#TODO Describe how to add a payment method
-
 You may get more details about the architecture here: :doc:`../../architecture/payment`.
 
 Methods
@@ -23,6 +21,54 @@ Methods
     Check <check>
     Pass <pass>
     Debug (dev environment only) <debug>
+
+Add a payment method
+====================
+
+A payment method is basically a service that implements the ``PaymentInterface`` and that is tagged ``sonata.payment.method``. Thoses are the pre-requisites.
+An abstract ``BasePayment`` class is available, we advise you to use it to implement your own payment method.
+
+Once you've declared your service (for the example, let's say I've named it ``acme.payment.mymethod``), add it under the sonata_payment configuration as follows:
+
+.. code-block:: yaml
+
+    sonata_payment:
+        services:
+            # ...
+            acme.payment.mymethod: ~
+
+Please keep in mind that we won't process your service configuration. You'll need to call the following methods on your service (if you wish to) manually:
+
+* ``setName``
+* ``setCode``
+* ``setEnabled``
+* ``setOptions``
+* ``addTransformer``
+
+Your service must return a unique, non-null key when the ``getCode`` method is called, or it might be overridden in the payment methods pool. To do that, either set the $this->code parameter in the constructor, or override the ``getCode`` method to return a constant string as follows:
+
+.. code-block:: php
+
+    namespace Application\Sonata\PaymentBundle\Method;
+
+    use Sonata\Component\Payment\BasePayment;
+
+    class MyMethod extends BasePayment
+    {
+        public function __construct(/* ... */)
+        {
+            $this->setCode('mymethod');
+
+            // ...
+        }
+
+        // or...
+
+        public function getCode()
+        {
+            return 'mymethod';
+        }
+    }
 
 
 Configuration
