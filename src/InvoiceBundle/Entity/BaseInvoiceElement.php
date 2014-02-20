@@ -238,6 +238,16 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
+     * Returns VAT element amount
+     *
+     * @return float
+     */
+    public function getVatAmount()
+    {
+        return bcsub($this->getTotal(true), $this->getTotal(false));
+    }
+
+    /**
      * Set designation
      *
      * @param string $designation

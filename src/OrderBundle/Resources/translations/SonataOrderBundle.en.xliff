@@ -479,6 +479,10 @@
                 <source>sonata.order.view.total_inc</source>
                 <target>Total inc. VAT</target>
             </trans-unit>
+            <trans-unit id="sonata_order_view_vat">
+                <source>sonata_order_view_vat</source>
+                <target>VAT</target>
+            </trans-unit>
             <trans-unit id="sonata.order.view_invoice">
                 <source>sonata.order.view_invoice</source>
                 <target>Your invoice</target>

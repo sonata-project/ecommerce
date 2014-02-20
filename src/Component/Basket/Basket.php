@@ -461,6 +461,29 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
+    public function getVatAmounts()
+    {
+        $amounts = array();
+
+        foreach ($this->getBasketElements() as $basketElement) {
+            $rate = $basketElement->getVatRate();
+
+            if (isset($amounts[$rate])) {
+                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $basketElement->getVatAmount());
+            } else {
+                $amounts[$rate] = array(
+                    'rate' => $rate,
+                    'amount' => $basketElement->getVatAmount()
+                );
+            }
+        }
+
+        return $amounts;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDeliveryPrice($vat = false)
     {
         $method = $this->getDeliveryMethod();

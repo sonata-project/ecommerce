@@ -321,6 +321,31 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
+     * Returns all VAT amounts contained in elements
+     *
+     * @return array
+     */
+    public function getVatAmounts()
+    {
+        $amounts = array();
+
+        foreach ($this->getInvoiceElements() as $invoiceElement) {
+            $rate = $invoiceElement->getVatRate();
+
+            if (isset($amounts[$rate])) {
+                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $invoiceElement->getVatAmount());
+            } else {
+                $amounts[$rate] = array(
+                    'rate' => $rate,
+                    'amount' => $invoiceElement->getVatAmount()
+                );
+            }
+        }
+
+        return $amounts;
+    }
+
+    /**
      * Set name
      *
      * @param string $name

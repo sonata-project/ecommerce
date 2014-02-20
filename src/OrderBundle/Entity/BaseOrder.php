@@ -1047,4 +1047,29 @@ abstract class BaseOrder implements OrderInterface
     {
         return bcsub($this->totalInc, $this->totalExcl);
     }
+
+    /**
+     * Returns all VAT amounts contained in elements
+     *
+     * @return array
+     */
+    public function getVatAmounts()
+    {
+        $amounts = array();
+
+        foreach ($this->getOrderElements() as $orderElement) {
+            $rate = $orderElement->getVatRate();
+
+            if (isset($amounts[$rate])) {
+                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $orderElement->getVatAmount());
+            } else {
+                $amounts[$rate] = array(
+                    'rate' => $rate,
+                    'amount' => $orderElement->getVatAmount()
+                );
+            }
+        }
+
+        return $amounts;
+    }
 }
