@@ -29,9 +29,10 @@ class FacebookTest extends \PHPUnit_Framework_TestCase
         $numberHelper = $this->getMockBuilder('Sonata\IntlBundle\Templating\Helper\NumberHelper')->disableOriginalConstructor()->getMock();
         $currencyDetector = $this->getMockBuilder('Sonata\Component\Currency\CurrencyDetectorInterface')->disableOriginalConstructor()->getMock();
         $product = new ProductFbMock();
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
         // Check if the header data are correctly registered
-        $fbService = new Facebook($mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'reference');
+        $fbService = new Facebook($router, $mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'reference');
         ob_start();
         $fbService->alterPage($seoPage, $product, null);
         $extension->renderHeadAttributes();
