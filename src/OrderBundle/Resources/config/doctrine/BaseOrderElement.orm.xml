@@ -6,17 +6,17 @@
         <field name="productType"       type="string"       column="product_type"          length="255"/>
 
         <field name="quantity"          type="integer"      column="quantity"/>
-        <field name="unitPrice"         type="decimal"      column="unit_price"     scale="4"/>
-        <field name="price"             type="decimal"      column="price"          scale="4"/>
-        <field name="priceIncludingVat" type="boolean"      column="price_inc_vat"  nullable="true" />
-        <field name="vatRate"           type="decimal"      column="vat_rate"       scale="4"/>
-        <field name="designation"       type="string"       column="designation"    length="255"/>
+        <field name="unitPriceExcl"     type="decimal"      column="unit_price_excl" scale="4"/>
+        <field name="unitPriceInc"      type="decimal"      column="unit_price_inc"  scale="4"/>
+        <field name="price"             type="decimal"      column="price"           scale="4"/>
+        <field name="vatRate"           type="decimal"      column="vat_rate"        scale="4"/>
+        <field name="designation"       type="string"       column="designation"     length="255"/>
         <field name="description"       type="text"         column="description"    />
-        <field name="options"           type="json"         column="options"          nullable="true"/>
-        <field name="rawProduct"        type="json"         column="raw_product"      nullable="true"/>
+        <field name="options"           type="json"         column="options"         nullable="true"/>
+        <field name="rawProduct"        type="json"         column="raw_product"     nullable="true"/>
         <field name="status"            type="integer"      column="status"/>
         <field name="deliveryStatus"    type="integer"      column="delivery_status"/>
-        <field name="validatedAt"       type="datetime"     column="validated_at" nullable="true"/>
+        <field name="validatedAt"       type="datetime"     column="validated_at"    nullable="true"/>
 
         <field name="updatedAt"  nullable="true"  column="updated_at"     type="datetime" />
         <field name="createdAt"  nullable="true"  column="created_at"     type="datetime" />

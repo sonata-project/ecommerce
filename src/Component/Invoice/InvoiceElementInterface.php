@@ -16,6 +16,34 @@ use Sonata\Component\Product\PriceComputableInterface;
 interface InvoiceElementInterface extends PriceComputableInterface
 {
     /**
+     * Sets unit price excluding VAT
+     *
+     * @param float $unitPriceExcl
+     */
+    public function setUnitPriceExcl($unitPriceExcl);
+
+    /**
+     * Returns unit price excluding VAT
+     *
+     * @return float
+     */
+    public function getUnitPriceExcl();
+
+    /**
+     * Sets unit price including VAT
+     *
+     * @param float $unitPriceInc
+     */
+    public function setUnitPriceInc($unitPriceInc);
+
+    /**
+     * Returns unit price including VAT
+     *
+     * @return float
+     */
+    public function getUnitPriceInc();
+
+    /**
      * Set invoiceId
      *
      * @param InvoiceInterface $invoice

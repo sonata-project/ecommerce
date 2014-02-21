@@ -125,6 +125,20 @@ interface ProductInterface extends PriceComputableInterface
     public function getStock();
 
     /**
+     * Sets if current price is including VAT
+     *
+     * @param float $priceIncludingVat
+     */
+    public function setPriceIncludingVat($priceIncludingVat);
+
+    /**
+     * Returns if price is including VAT
+     *
+     * @return boolean
+     */
+    public function isPriceIncludingVat();
+
+    /**
      * Set enabled.
      *
      * @param boolean $enabled
