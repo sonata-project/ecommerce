@@ -78,6 +78,27 @@ interface BasketElementInterface extends PriceComputableInterface
     public function getVatAmount();
 
     /**
+     * Sets product unit price
+     *
+     * @param float $unitPrice
+     */
+    public function setUnitPrice($unitPrice);
+
+    /**
+     * Sets if current price is including VAT
+     *
+     * @param float $priceIncludingVat
+     */
+    public function setPriceIncludingVat($priceIncludingVat);
+
+    /**
+     * Returns if price is including VAT
+     *
+     * @return boolean
+     */
+    public function isPriceIncludingVat();
+
+    /**
      * Return the total (price * quantity)
      *
      * if $vat = true, return the price with vat

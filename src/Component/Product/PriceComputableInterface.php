@@ -21,13 +21,6 @@ namespace Sonata\Component\Product;
 interface PriceComputableInterface
 {
     /**
-     * Sets unit price
-     *
-     * @param float $unitPrice
-     */
-    public function setUnitPrice($unitPrice);
-
-    /**
      * Returns the unit price
      *
      * if $vat = true, returns the unit price with vat
@@ -53,20 +46,6 @@ interface PriceComputableInterface
      * @return float
      */
     public function getPrice($vat = false);
-
-    /**
-     * Sets if price is including VAT
-     *
-     * @param boolean $priceIncludingVat
-     */
-    public function setPriceIncludingVat($priceIncludingVat);
-
-    /**
-     * Returns if price is including VAT
-     *
-     * @return boolean
-     */
-    public function isPriceIncludingVat();
 
     /**
      * Sets VAT rate

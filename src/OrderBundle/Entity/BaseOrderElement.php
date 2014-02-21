@@ -30,14 +30,14 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $price;
 
     /**
-     * @var float $unitPrice
+     * @var float $unitPriceExcl
      */
-    protected $unitPrice;
+    protected $unitPriceExcl;
 
     /**
-     * @var boolean
+     * @var float $unitPriceInc
      */
-    protected $priceIncludingVat;
+    protected $unitPriceInc;
 
     /**
      * @var float $vatRate
@@ -164,33 +164,13 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function getPrice($vat = false)
     {
-        $price = $this->price;
+        $unitPrice = $this->getUnitPriceExcl();
 
-        if (!$vat && true === $this->isPriceIncludingVat()) {
-            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
+        if ($vat) {
+            $unitPrice = $this->getUnitPriceInc();
         }
 
-        if ($vat && false === $this->isPriceIncludingVat()) {
-            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
-        }
-
-        return $price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPriceIncludingVat($priceIncludingVat)
-    {
-        $this->priceIncludingVat = $priceIncludingVat;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isPriceIncludingVat()
-    {
-        return $this->priceIncludingVat;
+        return bcmul($unitPrice, $this->getQuantity());
     }
 
     /**
@@ -595,11 +575,43 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Sets unit price excluding VAT
+     *
+     * @param float $unitPriceExcl
      */
-    public function setUnitPrice($unitPrice)
+    public function setUnitPriceExcl($unitPriceExcl)
     {
-        $this->unitPrice = $unitPrice;
+        $this->unitPriceExcl = $unitPriceExcl;
+    }
+
+    /**
+     * Returns unit price including VAT
+     *
+     * @return float
+     */
+    public function getUnitPriceExcl()
+    {
+        return $this->unitPriceExcl;
+    }
+
+    /**
+     * Sets unit price including VAT
+     *
+     * @param float $unitPriceInc
+     */
+    public function setUnitPriceInc($unitPriceInc)
+    {
+        $this->unitPriceInc = $unitPriceInc;
+    }
+
+    /**
+     * Returns unit price including VAT
+     *
+     * @return float
+     */
+    public function getUnitPriceInc()
+    {
+        return $this->unitPriceInc;
     }
 
     /**
@@ -607,17 +619,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function getUnitPrice($vat = false)
     {
-        $price = $this->unitPrice;
-
-        if (!$vat && true === $this->isPriceIncludingVat()) {
-            $price = bcmul($price, bcsub(1, bcdiv($this->getVatRate(), 100)));
-        }
-
-        if ($vat && false === $this->isPriceIncludingVat()) {
-            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
-        }
-
-        return $price;
+        return $vat ? $this->getUnitPriceInc() : $this->getUnitPriceExcl();
     }
 
     /**
