@@ -18,6 +18,8 @@
         <property name="status"         type="integer"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="deliveryStatus" type="integer"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 
+        <property name="order" serialized-name="order_id" type="sonata_order_order_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
         <property name="createdAt"   type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
         <property name="updatedAt"   type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
         <property name="validatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />

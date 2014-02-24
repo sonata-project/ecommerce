@@ -47,6 +47,7 @@ class SonataOrderExtension extends Extension
 
         if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
+            $loader->load('serializer.xml');
         }
 
         if (isset($bundles['SonataAdminBundle'])) {

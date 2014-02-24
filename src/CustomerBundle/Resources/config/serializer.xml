@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="sonata.customer.serializer.handler.customer" class="Sonata\CustomerBundle\Serializer\CustomerSerializerHandler">
+            <tag name="jms_serializer.subscribing_handler" />
+            <argument type="service" id="sonata.customer.manager" />
+        </service>
+
+    </services>
+
+</container>
