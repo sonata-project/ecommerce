@@ -14,18 +14,7 @@ namespace Sonata\Tests\Component\Delivery;
 use Sonata\Component\Delivery\Selector;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Product\Pool as ProductPool;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Customer\AddressInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Basket\BasketElementInterface;
-
-class ServiceDelivery extends \Sonata\Component\Delivery\BaseServiceDelivery
-{
-    public function isAddressRequired()
-    {
-        return false;
-    }
-}
+use Sonata\ProductBundle\Entity\BaseProduct;
 
 class SelectorTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,16 +25,6 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods());
-    }
-
-    public function testNoAddress()
-    {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
-
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
-        $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEmpty($selector->getAvailableMethods($basket));
     }
 
     public function testNonExistentProduct()
@@ -62,6 +41,199 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods($basket, $address));
+    }
+
+    /**
+     * Test the getAvailableMethods methods with no basket nor address provided
+     */
+    public function testGetAvailableMethodsWithoutBasket()
+    {
+        $deliveryPool = new DeliveryPool;
+        $productPool = new ProductPool;
+
+        $selector = new Selector($deliveryPool, $productPool);
+        $this->assertEmpty($selector->getAvailableMethods());
+    }
+
+    /**
+     * Test the getAvailableMethods methods with an empty basket provided
+     */
+    public function testGetAvailableMethodsWithEmptyBasket()
+    {
+        $deliveryPool = new DeliveryPool;
+        $productPool = new ProductPool;
+        $basket  = $this->getMock('Sonata\Component\Basket\Basket');
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array()));
+
+        $selector = new Selector($deliveryPool, $productPool);
+        $this->assertEmpty($selector->getAvailableMethods($basket));
+    }
+
+    /**
+     * Test the getAvailableMethods methods with a product provided but no address and no related delivery methods
+     */
+    public function testGetAvailableMethodsWithFilledBasket()
+    {
+        $deliveryPool = new DeliveryPool;
+        $productPool = new ProductPool;
+
+        $basket  = $this->getMock('Sonata\Component\Basket\Basket');
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
+        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array()));
+
+        $selector = new Selector($deliveryPool, $productPool);
+        $this->assertEmpty($selector->getAvailableMethods($basket));
+    }
+
+    /**
+     * Provide a delivery method that require an address but none is provided
+     */
+    public function testGetAvailableMethodsWithRequiredAddressDelivery()
+    {
+        $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
+        $productPool = new ProductPool;
+
+        $basket  = $this->getMock('Sonata\Component\Basket\Basket');
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
+        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+
+        $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+
+        $serviceDelivery = $this->getMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+        $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
+        $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(true));
+        $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue($serviceDelivery));
+
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+
+        $selector = new Selector($deliveryPool, $productPool);
+        $this->assertEquals(array(), $selector->getAvailableMethods($basket));
+    }
+
+    /**
+     * Provide a delivery method that require an address but none is provided
+     */
+    public function testGetAvailableMethodsWithDisabledDelivery()
+    {
+        $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
+        $productPool = new ProductPool;
+
+        $basket  = $this->getMock('Sonata\Component\Basket\Basket');
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
+        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+
+        $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+
+        $serviceDelivery = $this->getMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+        $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue($serviceDelivery));
+        $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(false));
+
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+
+        $selector = new Selector($deliveryPool, $productPool);
+        $this->assertEquals(array(), $selector->getAvailableMethods($basket));
+    }
+
+    /**
+     * Try to fetch a delivery based on an undefined code
+     */
+    public function testGetAvailableMethodsWithUndefinedCode()
+    {
+        $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
+        $productPool = new ProductPool;
+
+        $basket  = $this->getMock('Sonata\Component\Basket\Basket');
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
+        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+
+        $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+
+        $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue(null));
+
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+
+        $selector = new Selector($deliveryPool, $productPool);
+        $this->assertEquals(array(), $selector->getAvailableMethods($basket));
+    }
+
+    /**
+     * Try to fetch a delivery not having a handled country
+     */
+    public function testGetAvailableMethodsWithUncoveredCountry()
+    {
+        $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
+        $productPool = new ProductPool;
+
+        $basket  = $this->getMock('Sonata\Component\Basket\Basket');
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
+        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+
+        $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+        $delivery->expects($this->any())->method('getCountryCode')->will($this->returnValue('US'));
+
+        $serviceDelivery = $this->getMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+        $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
+        $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(true));
+        $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue($serviceDelivery));
+
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+
+        $address = $this->getMock('Sonata\CustomerBundle\Entity\BaseAddress');
+        $address->expects($this->exactly(2))->method('getCountryCode')->will($this->returnValue('FR'));
+
+        $selector = new Selector($deliveryPool, $productPool);
+        $this->assertEquals(array(), $selector->getAvailableMethods($basket, $address));
+    }
+
+    /**
+     * Provide twice the same delivery code
+     */
+    public function testGetAvailableMethodsWithAlreadySelectedCode()
+    {
+        $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
+
+        $basket  = $this->getMock('Sonata\Component\Basket\Basket');
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
+        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+
+        $delivery1 = $this->getMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery1->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+
+        $delivery2 = $this->getMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery2->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+
+        $serviceDelivery = $this->getMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
+        $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
+        $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(false));
+        $deliveryPool->expects($this->once())->method('getMethod')->will($this->returnValue($serviceDelivery));
+
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery1, $delivery2)));
+
+        $selector = new Selector($deliveryPool, new ProductPool());
+
+        $this->assertEquals(array($serviceDelivery), $selector->getAvailableMethods($basket));
     }
 
     public function testAvailableMethods()
@@ -117,4 +289,30 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($instances[1]->getCode(), 'ups_high');
         $this->assertEquals($instances[2]->getCode(), 'ups_low');
     }
+}
+
+
+
+class ServiceDelivery extends \Sonata\Component\Delivery\BaseServiceDelivery
+{
+    public function isAddressRequired()
+    {
+        return false;
+    }
+}
+
+class Product extends BaseProduct
+{
+    protected $id;
+
+    /**
+     * Get id.
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }
