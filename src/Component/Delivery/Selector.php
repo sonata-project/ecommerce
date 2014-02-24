@@ -100,15 +100,9 @@ class Selector implements ServiceDeliverySelectorInterface
             return $instances;
         }
 
-        // no address defined !
-        if (!$deliveryAddress) {
-            return $instances;
-        }
-
         // STEP 1 : We get product's delivery methods
         /** @var $basketElement \Sonata\Component\Basket\BasketElementInterface */
         foreach ($basket->getBasketElements() as $basketElement) {
-
             $product = $basketElement->getProduct();
 
             if (!$product) {
@@ -119,9 +113,8 @@ class Selector implements ServiceDeliverySelectorInterface
 
             /** @var $productDelivery \Sonata\Component\Product\DeliveryInterface */
             foreach ($product->getDeliveries() as $productDelivery) {
-
                 // delivery method already selected
-                if (array_key_exists($productDelivery->getCode(), $instances)) {
+                if (isset($instances[$productDelivery->getCode()])) {
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s already selected', $basketElement->getProductId(), $productDelivery->getCode()));
 
                     continue;
@@ -142,8 +135,15 @@ class Selector implements ServiceDeliverySelectorInterface
                     continue;
                 }
 
+                // Address is required but none have been provided
+                if ($deliveryMethod->isAddressRequired() && !$deliveryAddress) {
+                    $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s requires an address but none have been provided', $basketElement->getProductId(), $productDelivery->getCode()));
+
+                    continue;
+                }
+
                 // the product is not deliverable at the $shippingAddress
-                if ($deliveryAddress->getCountryCode() != $productDelivery->getCountryCode()) {
+                if ($deliveryMethod->isAddressRequired() && $deliveryAddress->getCountryCode() != $productDelivery->getCountryCode()) {
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basketElement->getProductId(), $productDelivery->getCode(), $deliveryAddress->getCountryCode(), $productDelivery->getCountryCode()));
 
                     continue;
