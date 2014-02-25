@@ -37,7 +37,15 @@ class CustomerController extends Controller
     public function addressesAction()
     {
         $customer = $this->getCustomer();
-        $addresses = array();
+
+        $typeCodes = BaseAddress::getTypesList();
+
+        // This allows to specify the display order
+        $addresses = array(
+            $typeCodes[AddressInterface::TYPE_DELIVERY] => array(),
+            $typeCodes[AddressInterface::TYPE_BILLING]  => array(),
+            $typeCodes[AddressInterface::TYPE_CONTACT]  => array(),
+        );
 
         if (null === $customer) {
             // Customer not yet created, the user didn't order yet
@@ -46,15 +54,6 @@ class CustomerController extends Controller
             $this->getCustomerManager()->save($customer);
         } else {
             $custAddresses = $this->getAddressManager()->findBy(array('customer' => $customer));
-
-            $typeCodes = BaseAddress::getTypesList();
-
-            // This allows to specify the display order
-            $addresses = array(
-                $typeCodes[AddressInterface::TYPE_DELIVERY] => array(),
-                $typeCodes[AddressInterface::TYPE_BILLING]  => array(),
-                $typeCodes[AddressInterface::TYPE_CONTACT]  => array(),
-            );
 
             foreach ($custAddresses as $address) {
                 $addresses[$address->getTypeCode()][] = $address;
