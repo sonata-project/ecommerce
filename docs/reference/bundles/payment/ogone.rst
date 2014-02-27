@@ -1,5 +1,5 @@
 .. index::
-    single: Payment; Ogone
+    pair: Payment; Ogone
 
 ===========
 Ogone setup

@@ -1,3 +1,7 @@
+.. index::
+    single: Product provider
+    pair: Product provider; Tutorial
+
 ===================================
 Basic options for product providers
 ===================================
@@ -22,6 +26,7 @@ Start by adding the option in your product provider:
 .. code-block:: php
 
     <?php
+
     namespace Application\Sonata\ProductBundle\Provider;
 
     use JMS\Serializer\SerializerInterface;

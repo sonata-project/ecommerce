@@ -1,5 +1,5 @@
 .. index::
-    single: Payment; Paypal
+    pair: Payment; Paypal
 
 ============
 Paypal setup

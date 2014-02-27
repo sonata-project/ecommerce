@@ -1,5 +1,6 @@
 .. index::
     single: Order
+    pair: Order; Architecture
 
 =====
 Order
@@ -11,16 +12,20 @@ Click on the image to view a bigger version.
     :width: 75 %
     :alt: Order Class Diagram
 
-We tried to avoid as much relations as possible in the order, so we would not be dependent of product changes. (For instance, if you make an order with a product at a given price, then the price changes, you want to keep your old price in your order). This is why the product is "serialized" in the order element (see the field ``rawProduct``).
+We tried to avoid as much relations as possible in the `Order`, so we would not be dependent of `Product` changes. (For instance, if you make an `Order` with a `Product` at a given `Price`, then the `Price` changes, you want to keep your old price in your `Order`). This is why the product is "serialized" in the order element (see the field ``rawProduct``).
 
-The order's locale is also set (to the basket locale, which is set to the customer locale, which is set to the current locale on the customer's registration, but you may customize that in the ``BasketTransformer``). This locale is used to display the order. More details in :doc:`index`.
+The `Order's` locale is also set (to the `Basket` locale, which is set to the customer locale, which is set to the current locale on the customer's registration, but you may customize that in the ``BasketTransformer``). This locale is used to display the `Order`. More details in :doc:`index`.
 
 Order Statuses
 ==============
 
-An order or order element may have the following statuses:
+An `Order` or an `OrderElement` may have the following statuses:
 
 .. code-block:: php
+
+    <?php
+
+    // ...
 
     interface OrderInterface
     {
@@ -34,9 +39,13 @@ An order or order element may have the following statuses:
         // ...
     }
 
-Regarding the payment statuses, here are the possible values:
+Regarding the `Payment` statuses, here are the possible values:
 
 .. code-block:: php
+
+    <?php
+
+    // ...
 
     interface TransactionInterface
     {
@@ -54,9 +63,13 @@ Regarding the payment statuses, here are the possible values:
         // ...
     }
 
-Finally, the values for delivery statuses:
+Finally, the values for the `Delivery` statuses:
 
 .. code-block:: php
+
+    <?php
+
+    // ...
 
     interface ServiceDeliveryInterface
     {
@@ -70,4 +83,4 @@ Finally, the values for delivery statuses:
         // ...
     }
 
-Feel free to add your own statuses in your implementations ; but remember to override the corresponding ``getStatusList`` static methods.
+Feel free to add your own statuses in your implementations; but remember to override the corresponding ``getStatusList`` static methods.

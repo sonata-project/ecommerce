@@ -13,14 +13,14 @@ For more information about our position regarding the *invoice* architecture, yo
 Presentation
 ============
 
-The InvoiceBundle manages everything related to the invoices: it basically implements the Invoice components by offering DB entities, and an Admin page to view the invoices in the Back end. It also offers the possibility to view a generated Invoice from the front office with a specific template.
+The ``SonataInvoiceBundle`` manages everything related to the invoices: it basically implements the `Invoice` components by offering DB entities, and an Admin page to view the invoices in the Back end. It also offers the possibility to view a generated Invoice from the front office with a specific template.
 
-The Invoice generation, however, is not processed by this specific bundle, but by the PaymentBundle, as are all other entity transformations.
+The `Invoice` generation, however, is not processed by this specific bundle, but by the ``PaymentBundle``, as are all other entity transformations.
 
 Configuration
 =============
 
-The bundle allows you to configure the entity classes ; you'll also need to register the doctrine mapping.
+The bundle allows you to configure the entity classes; you'll also need to register the Doctrine mapping.
 
 .. code-block:: yaml
 
@@ -43,7 +43,7 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
 Transformer
 ===========
 
-Default order to invoice transformer is provided in ``Sonata\Component\Transformer\InvoiceTransformer::transformFromOrder`` ; service id is ``sonata.payment.transformer.invoice`` and you can override it by setting its class name parameter (``sonata.invoice_transformer.class``).
+Default `Order` to `Invoice` transformer is provided in ``Sonata\Component\Transformer\InvoiceTransformer::transformFromOrder``; service id is ``sonata.payment.transformer.invoice`` and you can override it by setting its class name parameter (``sonata.invoice_transformer.class``).
 
-Currently, a raw HTML representation for invoices is provided ; would you like to generate a PDF ? We encourage you to check out PDF generation bundles taking HTML as inputs.
-The invoice rendering template is ``SonataInvoiceBundle:Invoice:view.html.twig`` ; you can override it by using Symfony bundle override rules.
+Currently, a raw HTML representation for invoices is provided; would you like to generate a PDF ? We encourage you to check out PDF generation bundles taking HTML as inputs.
+The invoice rendering template is ``SonataInvoiceBundle:Invoice:view.html.twig``; you can override it by using Symfony bundle override rules.

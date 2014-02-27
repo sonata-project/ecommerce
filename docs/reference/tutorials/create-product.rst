@@ -1,3 +1,7 @@
+.. index::
+    single: Product
+    pair: Product; Tutorial
+
 ================
 Create a product
 ================
@@ -14,7 +18,7 @@ In order to create these 2 prototypes, a command has been implemented to quickly
 Product without variation
 =========================
 
-We will start with the easiest way: the *bowl prototype*. This step will be split in two parts:
+We will start with the easiest kind of product: the *bowl prototype*. This step will be splitted in two parts:
 
 * configuration via *files'* edition, to provide every required element
 * configuration via the *backoffice*, to create the product itself
@@ -22,13 +26,17 @@ We will start with the easiest way: the *bowl prototype*. This step will be spli
 Configuration - files' edition
 ------------------------------
 Run the following command to create the files:
-::
+
+.. code-block:: bash
 
 	php app/console sonata:product:generate Bowl sonata.ecommerce_demo.product.bowl
 
 The required base files will be created in ``src/Application/Sonata/ProductBundle``. 
 To finalize the installation, we have to define the missing parameters like the type itself and the related manager. These data have to be provided in ``src/Application/Sonata/ProductBundle/Resources/config/product.yml``.
-::
+
+.. code-block:: yaml
+
+    # src/Application/Sonata/ProductBundle/Resources/config/product.yml
 
     services:
         sonata.ecommerce_demo.product.bowl.manager:
@@ -43,13 +51,19 @@ To finalize the installation, we have to define the missing parameters like the 
                 - @serializer
 
 Don't forget to load this file by adding the following lines in the ``app/config/config.yml``
-::
+
+.. code-block:: yaml
+
+    # app/config/config.yml
 
     imports:
         - { resource: @ApplicationSonataProductBundle/Resources/config/product.yml }
 
 And finally, add in the ``app/config/sonata/sonata_product.yml`` the following data:
-::
+
+.. code-block:: yaml
+
+    # app/config/sonata/sonata_product.yml
 
     sonata_product:
         products:
@@ -62,13 +76,13 @@ This being done, edit the ``src/Application/Sonata/ProductBundle/Entity/Bowl.php
 
 Configuration - Backoffice
 --------------------------
-Now that we have all the required files, we can process the creation of the product itself. 
-Go to the *admin dashboard* and select *Product* in the *e-commerce* menu. After clicking on ``Add new`` on the top right of the page, a list with 3 items type should be displayed:
-::
 
-    sonata.ecommerce_demo.product.goodie
-    sonata.ecommerce_demo.product.training
-    sonata.ecommerce_demo.product.bowl
+Now that we have all the required files, we can process the creation of the `Product` itself.
+Go to the *admin dashboard* and select *Product* in the *e-commerce* menu. After clicking on ``Add new`` on the top right of the page, a list with 3 items type should be displayed:
+
+* sonata.ecommerce_demo.product.goodie
+* sonata.ecommerce_demo.product.training
+* sonata.ecommerce_demo.product.bowl
 
 In the first tab, note that the VAT type of field must be a percent.
 The *goodie* and *training* are part of the original sandbox so we will select the *bowl* one.
@@ -86,10 +100,17 @@ Product with variation(s)
 
 Configuration - files' edition
 ------------------------------
-In order to create a product with a variation (a spoon in our example), we will have to repeat the same steps as explained in the previous section, in the *Configuration - files' edition* part. For the purpose of this example, we will use ``Spoon`` as entity name and ``sonata.ecommerce_demo.product.spoon`` as service name.
+In order to create a `Product` with a variation (a `spoon` in our example), we will have to repeat the same steps as explained in the previous section, in the *Configuration - files' edition* part. For the purpose of this example, we will use ``Spoon`` as entity name and ``sonata.ecommerce_demo.product.spoon`` as service name.
 
 Once you've completed the whole process, we will now learn how to add variable fields. In our case, it will be the size. To do so, add the "size" property in the entity (``src/Application/Sonata/ProductBundle/Entity/Spoon.php``):
-::
+
+.. code-block:: php
+
+    // src/Application/Sonata/ProductBundle/Entity/Spoon.php
+
+    <?php
+
+    // ...
 
     /**
      * @var string
@@ -113,7 +134,14 @@ Once you've completed the whole process, we will now learn how to add variable f
     }
 
 Still in the same file, we will provide a list of possible values for this field by adding the size list:
-::
+
+.. code-block:: php
+
+    // src/Application/Sonata/ProductBundle/Entity/Spoon.php
+
+    <?php
+
+    // ...
 
     const SIZE_TSP = 'Small (Tea spoon)';
     const SIZE_S = 'Medium (Spoon)';
@@ -132,29 +160,41 @@ Still in the same file, we will provide a list of possible values for this field
     }
 
 Now, we have to add this field in our entity. Considering you are using Doctrine ORM, you should add the following line in ``src/Application/Sonata/ProductBundle/Resources/config/doctrine/Jersey.orm.xml``:
-::
+
+
+.. code-block:: xml
+
+    // src/Application/Sonata/ProductBundle/Resources/config/doctrine/Jersey.orm.xml
 
     <field name="size" column="size" type="string" length="50" nullable="true" />
 
 Finally, tell our app that we will be using the "size" field as a variation. To define this, in the ``app/config/sonata/sonata_product.yml``, after the manager definition line of our prototype, add the following code:
-::
+
+.. code-block:: yaml
+
+    # app/config/sonata/sonata_product.yml
 
     variations:
         fields: [size]
 
 As the variation is stored as a real field in our model, we now have to update our database's schema. Run the following command to control everything is fine:
-::
+
+.. code-block:: bash
 
     php app/console doctrine:schema:update --dump-sql
 
 And if everything is ok, perform to the modification:
-::
+
+.. code-block:: bash
 
     php app/console doctrine:schema:update --force
 
 If you go back to the *product creation* page, you should be able to see our provider and display its page without any error. Though, the size field is not available yet. We have to enable it manually by overriding the ``SpoonProductProvider::buildEditForm()`` method. 
 You first should add the usage of ``Application\Sonata\ProductBundle\Entity\Spoon`` class:
-::
+
+.. code-block:: php
+
+    <?php
 
     public function buildEditForm(FormMapper $formMapper, $isVariation = false)
     {

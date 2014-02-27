@@ -1,3 +1,7 @@
+.. index::
+    single: Collection
+    pair: Collection; Tutorial
+
 ===================
 Create a collection
 ===================

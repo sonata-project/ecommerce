@@ -1,5 +1,5 @@
 .. index::
-    single: Payment; Scellius
+    pair: Payment; Scellius
 
 ==============
 Scellius setup

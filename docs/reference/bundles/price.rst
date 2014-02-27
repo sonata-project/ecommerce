@@ -16,12 +16,16 @@ Presentation
 Price bundle handles everything related to prices, (right now, only currencies, but it will soon be extended to add taxes, ...)
 
 Installation
-=============
+============
 
-This central e-commerce bundle requires you add a bcscale(...) method in your ``AppKernel.php`` file to ensure that prices are correctly computed.
+This central e-commerce bundle requires you add a `bcscale <http://php.net/manual/en/function.bcscale.php>`_ method in your ``AppKernel.php`` file to ensure that prices are correctly computed.
 Please, update your ``AppKernel.php`` file like this:
 
 .. code-block:: php
+
+    <?php
+
+    // ...
 
     class AppKernel extends Kernel
     {
@@ -51,6 +55,6 @@ Price bundle configuration is as follows:
 You can also change the services class (defined as parameters):
 
 * ``sonata.price.currency.detector.class`` for the currency detector
-* ``sonata.price.currency.manager.class`` for the currency manager (finding the CurrencyInterface item matching the currency label)
+* ``sonata.price.currency.manager.class`` for the currency manager (finding the ``CurrencyInterface`` item matching the currency label)
 
 As you may see in the sample configuration, we defined a new doctrine field type to store currencies in database.

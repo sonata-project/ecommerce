@@ -1,5 +1,5 @@
 .. index::
-    single: Payment; Check
+    pair: Payment; Check
 
 ===========
 Check setup
