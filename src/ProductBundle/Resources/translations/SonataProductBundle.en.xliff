@@ -332,7 +332,7 @@
             </trans-unit>
             <trans-unit id="product_full_description_link">
                 <source>product_full_description_link</source>
-                <target>Show more...</target>
+                <target>Show more</target>
             </trans-unit>
             <!-- End - Product view translations -->
 
