@@ -141,8 +141,8 @@
         <source>order_to_open</source>
         <target>Commande à ouvrir</target>
       </trans-unit>
-      <trans-unit id="payment.method">
-        <source>payment.method</source>
+      <trans-unit id="method">
+        <source>method</source>
         <target>Méthode</target>
       </trans-unit>
       <trans-unit id="message_view_order_payment">
