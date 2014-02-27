@@ -173,6 +173,10 @@
                 <source>sonata.invoice.references.invoice</source>
                 <target>Invoice</target>
             </trans-unit>
+            <trans-unit id="sonata.invoice.elements.list.title">
+                <source>sonata.invoice.elements.list.title</source>
+                <target>Elements</target>
+            </trans-unit>
             <trans-unit id="sonata.invoice.elements.id">
                 <source>sonata.invoice.elements.id</source>
                 <target>ID</target>
