@@ -1,5 +1,5 @@
 .. index::
-    single: Payment; Pass
+    pair: Payment; Pass
 
 ==========
 Pass setup

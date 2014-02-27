@@ -3,13 +3,13 @@
     single: Product; ProductVariations
     single: Product; ProductTemplate
     single: Product; ProductHelpers
+    pair: Product; Architecture
 
 =======
 Product
 =======
 
-A ``Product`` defines the data related to one entry in the persistence layer. An application
-can have different types of product. A product is always linked to a ``ProductProvider``.
+A ``Product`` defines the data related to one entry in the persistence layer. An application can have different types of product. A `Product` is always linked to a ``ProductProvider``.
 
 The link between the ``Product`` and the ``ProductProvider`` is done through the configuration file (see ``app/config/sonata/sonata_product.yml`` under ``sonata_product`` namespace in the sandbox).
 
@@ -17,21 +17,21 @@ A ``ProductProvider`` is responsible of the ``Product`` lifecycle across the app
 
   - Compute prices
   - Forms manager: front and backend
-  - Add a product into the basket
+  - Add a `Product` into the `Basket`
   - Create an ``OrderElement`` upon the ``Product`` information
   - Create variations
 
 A ``ProductManager`` is responsible of the ``Product`` lifecycle with the database:
 
-  - Retrieve a product type
-  - Save/Delete a product type
-  - Find a product type
+  - Retrieve a `Product` type
+  - Save/Delete a `Product` type
+  - Find a `Product` type
 
 A ``ProductSetManager`` is responsible of retrieving a set of different products, or specific products (it overrides the ``ProductManager``).
 
 A ``ProductFinder`` is responsible for finding matching products related to a given one. It will noticeably be used for cross-selling & up-selling matches.
 
-Each product prototype has its own type (defined in ``ProductType`` property).
+Each `Product` prototype has its own type (defined in ``ProductType`` property).
 You can use ``Sonata\Component\Product\Pool`` to retrieve related ``ProductProvider`` and ``ProductManager`` instances.
 
 Product Variations
@@ -72,7 +72,7 @@ The product sheet is based on the main ``product`` block, which is divided in 2 
         - ``product_reference`` block displays the reference (aka SKU) of the product,
       - ``product_description_short`` block shows the short description of the product,
       - ``product_errors`` block shows the product page errors (unavailable stock, ...),
-    - ``product_variations_form_block`` blocks displays a form allowing to select the variation based variated properties (see :ref:`block.variations_form` for more informations).
+    - ``product_variations_form_block`` blocks displays a form allowing to select the variation based variated properties (see :ref:`block.variations_form` for more information).
     - ``product_delivery`` block displays product delivery information (to override by default),
     - ``product_basket`` block displays the "Add to basket" form (rendered by ``SonataBasketBundle:Basket:add_product_form.html.twig`` template).
 
@@ -85,11 +85,13 @@ Additionally, you can override those template blocks:
 
     - ``product_cross_selling`` block that includes cross-selling block (rendered by ``SonataProductBundle:Product:view_similar.html.twig`` template).
 
+  - ``product_full_description`` block is used to render the full description of the product
+  - ``product_comment`` block is used to render comments related to the product
 
 Product Helpers
 ===============
 
-Some Twig helpers are available for your templates.
+Some Twig helpers are available for your templates:
 
   - ``sonata_product_provider`` gives you the related ``ProductProvider`` for a given ``Product``.
   - ``sonata_product_has_variations`` returns true or false if the ``Product`` has variations.
@@ -102,7 +104,7 @@ Some Twig helpers are available for your templates.
 Product Block Services
 ======================
 
-Some SonataBlock services are available as well:
+Some `SonataBlock` services are available as well:
 
 .. _block.variations_form:
 
@@ -124,7 +126,7 @@ Renders the latest added products. By default, the number of displayed products 
 sonata.product.block.categories_menu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Displays a KnpMenu rendering the product categories. It is rendered using the template ``SonataBlockBundle:Block:block_side_menu_template.html.twig`` that you might want to override.
+Displays a KnpMenu rendering the `Product` categories. It is rendered using the template ``SonataBlockBundle:Block:block_side_menu_template.html.twig`` that you might want to override.
 
 sonata.product.block.filters_menu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

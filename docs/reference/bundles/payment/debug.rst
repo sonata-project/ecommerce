@@ -1,5 +1,5 @@
 .. index::
-    single: Payment; Debug
+    pair: Payment; Debug
 
 ===================
 Debug payment setup

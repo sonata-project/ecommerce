@@ -14,9 +14,8 @@ For more information about our position regarding *product* architecture, you ca
 Presentation
 ============
 
-The SonataProductBundle basically manages the Product-related entities & managers, offers AdminBundle integration and provides a basic controller and basic views to display the products.
-
-It offers a console command to easily generate a new product type in your application:
+The ``SonataProductBundle`` basically manages the Product-related entities & managers, offers ``AdminBundle`` integration and provides a basic controller and basic views to display the products.
+It also offers a console command to easily generate a new product type in your application:
 
 .. code-block:: bash
 
@@ -43,16 +42,16 @@ It offers a console command to easily generate a new product type in your applic
 Product / SonataSeoBundle integration
 =====================================
 
-To enhance your project interactions with third parties web communities, the SonataProductBundle ships with SonataSeoBundle.
+To enhance your project interactions with third parties web communities, the ``SonataProductBundle`` ships with ``SonataSeoBundle``.
 
-You can easily write your own microformats implementation, and, to do so, we recommend to write your own service in which you can inject, at least, a ProductInterface entity and a SeoPageInterface entity.
+You can easily write your own microdata implementation and, to do so, we recommend to write your own service in which you can inject, at least, a `ProductInterface` entity and a `SeoPageInterface` entity.
 
 Concrete examples of implementation as `Facebook Open Graph <http://developers.facebook.com/docs/opengraph/>`_ or `Twitter Cards <https://dev.twitter.com/docs/cards>`_ have been developed as working examples in the Sonata Demo.
 
 Configuration
 =============
 
-The bundle allows you to configure the entity classes ; you'll also need to register the doctrine mapping.
+The bundle allows you to configure the entity classes; you'll also need to register the doctrine mapping.
 
 .. code-block:: yaml
 

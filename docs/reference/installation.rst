@@ -15,8 +15,9 @@ Pre-requisites
 One-line installation
 =====================
 Create a new project is as simple as using composer.
-::
+
+.. code-block:: bash
 
     php composer.phar create-project sonata-project/sandbox sonata-demo dev-2.3-develop
 
-And voila !
+And voila!

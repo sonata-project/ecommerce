@@ -1,6 +1,7 @@
 .. index::
    single: Basket
-   
+   pair: Basket; Architecture
+
 ======
 Basket
 ======
