@@ -137,7 +137,7 @@ class SonataOrderExtension extends Extension
             'status'
         ));
 
-        $collector->addIndex($config['class']['order'], 'status', array(
+        $collector->addIndex($config['class']['order'], 'order_status', array(
             'status'
         ));
 
