@@ -357,19 +357,19 @@ abstract class BaseCustomer implements CustomerInterface
     {
         $address->setCustomer($this);
 
-        if (count($this->addresses) === 0) {
+        if (count($this->getAddressesByType($address->getType())) === 0) {
             $address->setCurrent(true);
         }
 
-        $this->addresses->add($address);
+        $this->getAddresses()->add($address);
 
-        if (null === $this->firstname) {
+        if (null === $this->getFirstname()) {
             $this->setFirstname($address->getFirstname());
         }
-        if (null === $this->lastname) {
+        if (null === $this->getLastname()) {
             $this->setLastname($address->getLastname());
         }
-        if (null === $this->phoneNumber) {
+        if (null === $this->getPhoneNumber()) {
             $this->setPhoneNumber($address->getPhone());
         }
     }
