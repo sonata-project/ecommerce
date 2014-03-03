@@ -29,7 +29,7 @@ file that was distributed with this source code.
 
             {% if loop.first %}
                 <h3>{% trans from 'SonataOrderBundle' %}sonata.order.view.in_progress_title{% endtrans %}</h3>
-                <table class="table table-bordered" id="current-orders">
+                <table class="table table-bordered" id="sonata-ecommerce-current-orders">
                     {{ block('order_list_heading') }}
             {% endif %}
 
@@ -48,7 +48,7 @@ file that was distributed with this source code.
 
             {% if loop.first %}
                 <h3>{% trans from 'SonataOrderBundle' %}sonata.order.view.done_title{% endtrans %}</h3>
-                <table class="table table-bordered" id="past-orders">
+                <table class="table table-bordered" id="sonata-ecommerce-past-orders">
                     {{ block('order_list_heading') }}
             {% endif %}
 
