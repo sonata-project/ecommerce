@@ -54,16 +54,16 @@ file that was distributed with this source code.
                     <th style="text-align: right">{% trans from 'SonataBasketBundle'%}footer_basket_total_excl{% endtrans %}</th>
                     <td colspan="2" class="number"><b>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                 </tr>
+                {% for item in basket.getVatAmounts %}
+                    <tr>
+                        <td style="text-align: right">{{ 'footer_basket_vat'|trans({}, 'SonataBasketBundle') }} {{ item.rate }}%</td>
+                        <td colspan="2" class="number">{{ item.amount|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</td>
+                    </tr>
+                {% endfor %}
                 <tr>
                     <th style="text-align: right">{% trans from 'SonataBasketBundle'%}footer_basket_total_vat{% endtrans %}</th>
                     <td colspan="2" class="number"><b>{{ basket.getVatAmount()|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                 </tr>
-                {% for item in basket.getVatAmounts %}
-                    <tr>
-                        <th style="text-align: right"><small>{{ 'footer_basket_vat'|trans({}, 'SonataBasketBundle') }} {{ item.rate }}%</small></th>
-                        <td colspan="2" class="number"><small><b>{{ item.amount|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></small></td>
-                    </tr>
-                {% endfor %}
                 <tr>
                     <th style="text-align: right">{% trans from 'SonataBasketBundle'%}footer_basket_total_inc{% endtrans %}</th>
                     <td colspan="2" class="number"><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
