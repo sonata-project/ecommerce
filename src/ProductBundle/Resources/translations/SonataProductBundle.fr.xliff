@@ -79,6 +79,18 @@
                 <source>product.sidemenu.view_variations</source>
                 <target>Variations</target>
             </trans-unit>
+            <trans-unit id="product.sidemenu.view_categories">
+                <source>product.sidemenu.view_categories</source>
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="product.sidemenu.view_collections">
+                <source>product.sidemenu.view_collections</source>
+                <target>Collections</target>
+            </trans-unit>
+            <trans-unit id="product.sidemenu.view_deliveries">
+                <source>product.sidemenu.view_deliveries</source>
+                <target>Modes de livraison</target>
+            </trans-unit>
             <!-- End - Sidemenu translations -->
 
             <!-- Begin - List translations -->

@@ -416,8 +416,17 @@ abstract class BaseProductProvider implements ProductProviderInterface
     {
         $formMapper->with('Product');
 
+        $formMapper->add('enabled');
+
         $formMapper->add('name');
         $formMapper->add('sku');
+
+        $formMapper
+            ->add('price', 'number')
+            ->add('priceIncludingVat')
+            ->add('vatRate', 'number')
+            ->add('stock', 'integer')
+        ;
 
         if (!$isVariation || in_array('description', $this->variationFields)) {
             $formMapper->add('description', 'sonata_formatter_type', array(
@@ -439,73 +448,37 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ));
         }
 
-        $formMapper
-            ->add('price', 'number')
-            ->add('priceIncludingVat')
-            ->add('vatRate', 'number')
-            ->add('stock', 'integer')
-        ;
-
-        if (!$isVariation || in_array('image', $this->variationFields)) {
-            $formMapper->add('image', 'sonata_type_model_list', array(
-                'required' => false
-            ), array(
-                'link_parameters' => array(
-                    'context'  => 'sonata_product',
-                    'filter'   => array('context' => array('value' => 'sonata_product')),
-                    'provider' => ''
-                )
-            ));
-        }
-
-        if (!$isVariation || in_array('gallery', $this->variationFields)) {
-            $formMapper->add('gallery', 'sonata_type_model_list', array(
-                'required' => false
-            ), array(
-                'link_parameters' => array(
-                    'context'  => 'sonata_product',
-                    'filter'   => array('context' => array('value' => 'sonata_product')),
-                    'provider' => ''
-                )
-            ));
-        }
-
-        $formMapper->add('enabled');
-
         $formMapper->end();
 
-        $formMapper
-            ->with('Categories')
-                ->add('productCategories', 'sonata_type_collection', array(
-                    'required' => false,
-                    'by_reference' => false,
+        if (!$isVariation || in_array('image', $this->variationFields) || in_array('gallery', $this->variationFields)) {
+            $formMapper->with('Media');
+
+            if (!$isVariation || in_array('image', $this->variationFields)) {
+                $formMapper->add('image', 'sonata_type_model_list', array(
+                    'required' => false
                 ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'link_parameters' => array('provider' => $this->getCode())
-                ))
-            ->end()
-            ->with('Collections')
-                ->add('productCollections', 'sonata_type_collection', array(
-                    'required' => false,
-                    'by_reference' => false,
+                    'link_parameters' => array(
+                        'context'  => 'sonata_product',
+                        'filter'   => array('context' => array('value' => 'sonata_product')),
+                        'provider' => ''
+                    )
+                ));
+            }
+
+            if (!$isVariation || in_array('gallery', $this->variationFields)) {
+                $formMapper->add('gallery', 'sonata_type_model_list', array(
+                    'required' => false
                 ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'link_parameters' => array('provider' => $this->getCode())
-                ))
-            ->end()
-            ->with('Deliveries')
-                ->add('deliveries', 'sonata_type_collection', array(
-                    'required' => false,
-                    'by_reference' => false,
-                ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'link_parameters' => array('provider' => $this->getCode())
-                ))
-            ->end()
-        ;
+                    'link_parameters' => array(
+                        'context'  => 'sonata_product',
+                        'filter'   => array('context' => array('value' => 'sonata_product')),
+                        'provider' => ''
+                    )
+                ));
+            }
+
+            $formMapper->end();
+        }
     }
 
     /**

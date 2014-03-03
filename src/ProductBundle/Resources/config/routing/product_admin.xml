@@ -9,15 +9,16 @@
         <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
-    <route id="sonata_admin_product_delivery_index" pattern="/{productId}/delivery">
-        <default key="_controller">SonataProductBundle:ProductAdmin:deliveryIndex</default>
+    <route id="sonata_admin_product_categories" pattern="/{productId}/categories">
+        <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
-    <route id="sonata_admin_product_delivery_edit" pattern="/{productId}/delivery/{deliveryId}/edit">
-        <default key="_controller">SonataProductBundle:ProductAdmin:deliveryEdit</default>
+    <route id="sonata_admin_product_collections" pattern="/{productId}/collections">
+        <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
-    <route id="sonata_admin_product_delivery_update" pattern="/{productId}/delivery/update">
-        <default key="_controller">SonataProductBundle:ProductAdmin:deliveryUpdate</default>
+    <route id="sonata_admin_product_deliveries" pattern="/{productId}/deliveries">
+        <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
+
 </routes>
