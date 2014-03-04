@@ -13,11 +13,11 @@
 
         <!-- PRODUCTCATEGORY -->
         <parameter key="sonata.product.admin.product_category.class">Sonata\ProductBundle\Admin\ProductCategoryAdmin</parameter>
-        <parameter key="sonata.product.admin.product_category.controller">SonataProductBundle:ProductCategoryAdmin</parameter>
+        <parameter key="sonata.product.admin.product_category.controller">SonataAdminBundle:CRUD</parameter>
 
         <!-- PRODUCTCOLLECTION -->
         <parameter key="sonata.product.admin.product_collection.class">Sonata\ProductBundle\Admin\ProductCollectionAdmin</parameter>
-        <parameter key="sonata.product.admin.product_collection.controller">SonataProductBundle:ProductCollectionAdmin</parameter>
+        <parameter key="sonata.product.admin.product_collection.controller">SonataAdminBundle:CRUD</parameter>
 
         <!-- DELIVERY -->
         <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeliveryAdmin</parameter>
@@ -34,16 +34,16 @@
             <argument>%sonata.product.admin.product.controller%</argument>
 
             <call method="addChild">
-                <argument type="service" id="sonata.product.admin.product_category" />
+                <argument type="service" id="sonata.product.admin.product.category" />
             </call>
 
-            <!--<call method="addChild">-->
-                <!--<argument type="service" id="sonata.product.admin.product_collection" />-->
-            <!--</call>-->
+            <call method="addChild">
+                <argument type="service" id="sonata.product.admin.product.collection" />
+            </call>
 
-            <!--<call method="addChild">-->
-                <!--<argument type="service" id="sonata.product.admin.delivery" />-->
-            <!--</call>-->
+            <call method="addChild">
+                <argument type="service" id="sonata.product.admin.delivery" />
+            </call>
 
             <call method="addChild">
                 <argument type="service" id="sonata.product.admin.product.variation" />
@@ -74,14 +74,14 @@
             </call>
         </service>
 
-        <service id="sonata.product.admin.product_category" class="%sonata.product.admin.product_category.class%">
+        <service id="sonata.product.admin.product.category" class="%sonata.product.admin.product_category.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="product_category" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.product.admin.product_category.entity%</argument>
             <argument>%sonata.product.admin.product_category.controller%</argument>
         </service>
 
-        <service id="sonata.product.admin.product_collection" class="%sonata.product.admin.product_collection.class%">
+        <service id="sonata.product.admin.product.collection" class="%sonata.product.admin.product_collection.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="product_collection" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument />
             <argument>%sonata.product.admin.product_collection.entity%</argument>

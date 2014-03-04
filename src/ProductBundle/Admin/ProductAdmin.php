@@ -136,6 +136,21 @@ class ProductAdmin extends Admin
             array('uri' => $admin->generateUrl('edit', array('id' => $id)))
         );
 
+        $menu->addChild(
+            $this->trans('product.sidemenu.view_categories', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('sonata.product.admin.product.category.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('product.sidemenu.view_collections', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('sonata.product.admin.product.collection.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('product.sidemenu.view_deliveries', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
+        );
+
         if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
             $menu->addChild(
                 $this->trans('product.sidemenu.view_variations'),
