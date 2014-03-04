@@ -79,6 +79,20 @@ file that was distributed with this source code.
 
         {{ form_rest(form) }}
     </form>
+
+    {% set single_basket_element = basket.basketElements|last %}
+    {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'number': 4, 'base_product_id': single_basket_element.productId}}) }}
+
 {% else %}
-    <p>{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}. <a href="{{ path('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.</p>
+
+    <div class="well" style="text-align: center; padding: 40px; margin: 20px;">
+        <p>
+            {% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}.
+            <br />
+            <a href="{{ path('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.
+        </p>
+    </div>
+
+    {{ sonata_block_render({'type': 'sonata.product.block.recent_products', 'settings': {'number': 4}}) }}
+
 {% endif %}
