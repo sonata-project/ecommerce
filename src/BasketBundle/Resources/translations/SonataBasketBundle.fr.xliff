@@ -216,15 +216,15 @@
             </trans-unit>
             <trans-unit id="sonata_basket_address_address1">
                 <source>sonata_basket_address_address1</source>
-                <target>Adresse 1</target>
+                <target>Adresse</target>
             </trans-unit>
             <trans-unit id="sonata_basket_address_address2">
                 <source>sonata_basket_address_address2</source>
-                <target>Adresse 2</target>
+                <target></target>
             </trans-unit>
             <trans-unit id="sonata_basket_address_address3">
                 <source>sonata_basket_address_address3</source>
-                <target>Adresse 3</target>
+                <target></target>
             </trans-unit>
             <trans-unit id="sonata_basket_address_postcode">
                 <source>sonata_basket_address_postcode</source>
