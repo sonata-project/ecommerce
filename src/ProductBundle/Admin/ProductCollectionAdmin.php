@@ -56,7 +56,9 @@ class ProductCollectionAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         if (!$this->isChild()) {
-            $formMapper->add('product', 'sonata_type_model_list');
+            $formMapper->add('product', 'sonata_type_model_list', array(), array(
+                'admin_code' => 'sonata.product.admin.product'
+            ));
         }
 
         $formMapper
