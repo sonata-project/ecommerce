@@ -20,55 +20,7 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class DeliveryAdmin extends Admin
 {
-    /**
-     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (delivery) works properly
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
-     */
-    public function getBaseRoutePattern()
-    {
-        if (!$this->baseRoutePattern) {
-            if ($this->getCode() == 'sonata.product.admin.delivery' && !$this->isChild()) { // delivery
-                $this->baseRoutePattern = '/sonata/product/delivery';
-            } else if ($this->getCode() == 'sonata.product.admin.delivery' && $this->isChild()) { // delivery
-                $this->baseRoutePattern = sprintf('%s/{id}/%s',
-                    $this->getParent()->getBaseRoutePattern(),
-                    $this->urlize('delivery', '-')
-                );
-            } else {
-                throw new \RuntimeException('Invalid method call due to invalid state');
-            }
-        }
-
-        return $this->baseRoutePattern;
-    }
-
-    /**
-     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (delivery) works properly
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
-     */
-    public function getBaseRouteName()
-    {
-        if (!$this->baseRouteName) {
-            if ($this->getCode() == 'sonata.product.admin.delivery' && !$this->isChild()) { // delivery
-                $this->baseRouteName    = 'admin_sonata_product_delivery';
-            } else if ($this->getCode() == 'sonata.product.admin.delivery' && $this->isChild()) { // delivery
-                $this->baseRouteName = sprintf('%s_%s',
-                    $this->getParent()->getBaseRouteName(),
-                    $this->urlize('delivery')
-                );
-            } else {
-                throw new \RuntimeException('Invalid method call due to invalid state');
-            }
-        }
-
-        return $this->baseRouteName;
-    }
+    protected $parentAssociationMapping = 'product';
 
     /**
      * {@inheritdoc}
@@ -102,6 +54,10 @@ class DeliveryAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        if (!$this->isChild()) {
+            $formMapper->add('product', 'sonata_type_model_list');
+        }
+
         $formMapper
             ->add('enabled')
             ->add('code', 'sonata_delivery_choice')
@@ -116,6 +72,14 @@ class DeliveryAdmin extends Admin
      */
     public function configureListFields(ListMapper $list)
     {
+        if (!$this->isChild()) {
+            $list
+                ->addIdentifier('id')
+                ->addIdentifier('product', null, array(
+                    'admin_code' => 'sonata.product.admin.product'
+                ));
+        }
+
         $list
             ->addIdentifier('code')
             ->add('enabled')
@@ -135,6 +99,4 @@ class DeliveryAdmin extends Admin
             ->add('countryCode')
         ;
     }
-
-
 }

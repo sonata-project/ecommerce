@@ -24,56 +24,6 @@ class ProductCollectionAdmin extends Admin
     protected $parentAssociationMapping = 'product';
 
     /**
-     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (collection) works properly
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
-     */
-    public function getBaseRoutePattern()
-    {
-        if (!$this->baseRoutePattern) {
-            if ($this->getCode() == 'sonata.product.admin.product.collection' && !$this->isChild()) { // collection
-                $this->baseRoutePattern = '/sonata/product/collection';
-            } else if ($this->getCode() == 'sonata.product.admin.product.collection' && $this->isChild()) { // collection
-                $this->baseRoutePattern = sprintf('%s/{id}/%s',
-                    $this->getParent()->getBaseRoutePattern(),
-                    $this->urlize('collection', '-')
-                );
-            } else {
-                throw new \RuntimeException('Invalid method call due to invalid state');
-            }
-        }
-
-        return $this->baseRoutePattern;
-    }
-
-    /**
-     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (collection) works properly
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
-     */
-    public function getBaseRouteName()
-    {
-        if (!$this->baseRouteName) {
-            if ($this->getCode() == 'sonata.product.admin.product.collection' && !$this->isChild()) { // collection
-                $this->baseRouteName    = 'admin_sonata_product_collection';
-            } else if ($this->getCode() == 'sonata.product.admin.product.collection' && $this->isChild()) { // collection
-                $this->baseRouteName = sprintf('%s_%s',
-                    $this->getParent()->getBaseRouteName(),
-                    $this->urlize('collection')
-                );
-            } else {
-                throw new \RuntimeException('Invalid method call due to invalid state');
-            }
-        }
-
-        return $this->baseRouteName;
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
@@ -105,6 +55,10 @@ class ProductCollectionAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        if (!$this->isChild()) {
+            $formMapper->add('product', 'sonata_type_model_list');
+        }
+
         $formMapper
             ->add('collection')
             ->add('enabled')
@@ -136,8 +90,10 @@ class ProductCollectionAdmin extends Admin
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter
-            ->add('collection')
-        ;
+        if (!$this->isChild()) {
+            $filter
+                ->add('collection')
+            ;
+        }
     }
 }

@@ -146,6 +146,14 @@
                 <source>list.label_product_collections</source>
                 <target>Collections</target>
             </trans-unit>
+            <trans-unit id="list.label_category">
+                <source>list.label_category</source>
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="list.label_collection">
+                <source>list.label_collection</source>
+                <target>Collection</target>
+            </trans-unit>
             <!-- End - List translations -->
 
             <!-- Begin - Filter translations -->
@@ -168,6 +176,18 @@
             <trans-unit id="filter.label_product_collections_collection">
                 <source>filter.label_product_collections_collection</source>
                 <target>Collections</target>
+            </trans-unit>
+            <trans-unit id="filter.label_code">
+                <source>filter.label_code</source>
+                <target>Code</target>
+            </trans-unit>
+            <trans-unit id="filter.label_country_code">
+                <source>filter.label_country_code</source>
+                <target>Code pays</target>
+            </trans-unit>
+            <trans-unit id="filter.label_product">
+                <source>filter.label_product</source>
+                <target>Produit</target>
             </trans-unit>
             <!-- End - Filter translations -->
 
@@ -199,6 +219,14 @@
             <trans-unit id="breadcrumb.link_category_history">
                 <source>breadcrumb.link_category_history</source>
                 <target>Historique des catégories</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_product_collection_list">
+                <source>breadcrumb.link_product_collection_list</source>
+                <target>Collections</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_product_category_list">
+                <source>breadcrumb.link_product_category_list</source>
+                <target>Catégories</target>
             </trans-unit>
             <!-- End - Breadcrumb translations -->
 
