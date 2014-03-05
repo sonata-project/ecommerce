@@ -137,6 +137,7 @@ file that was distributed with this source code.
                 <table class="table">
                     <tr>
                         {% block sonata_order_elements_header %}
+                            <th>&nbsp;</th>
                             <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
                             <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.unit_price{% endtrans %}</th>
                             <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</th>
@@ -146,36 +147,44 @@ file that was distributed with this source code.
                     {% for element in order.orderElements %}
                         <tr>
                             {% block sonata_order_element %}
-                                <td>{{ element.designation }}</td>
+                                <td>
+                                    {% block product_thumbnail %}
+                                        {% thumbnail element.product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}
+                                    {% endblock %}
+                                </td>
+                                <td><a href="{{ url('sonata_product_view', {'productId': element.productId, 'slug': element.product.slug}) }}">{{ element.designation }}</a></td>
                                 <td class="number">{{ element.unitPrice(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                                 <td class="number">{{ element.quantity }}</td>
                                 <td class="number">{{ element.total(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                             {% endblock %}
                         </tr>
                     {% endfor %}
+                    <tr>
+                        <td><span class="glyphicon glyphicon-plane" style="font-size:50px;">&nbsp;</span></td>
+                        <td>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</td>
+                        <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                        <td class="number">1</td>
+                        <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                    </tr>
                     {% block sonata_order_elements_sumup %}
                         <tr>
-                            <td colspan="2" rowspan="{{ 4 + order.getVatAmounts|length }}">&nbsp;</td>
-                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</th>
-                            <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                            <td colspan="3" rowspan="{{ 4 + order.getVatAmounts|length }}">&nbsp;</td>
+                            <th class="text-right">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
+                            <td class="number"><strong>{{ order.totalExcl|number_format_currency(order.currency.label, {}, {}, order.locale) }}</strong></td>
                         </tr>
                         <tr>
-                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
-                            <td class="number">{{ order.totalExcl|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_vat{% endtrans %}</th>
-                            <td class="number">{{ order.vat|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                            <th class="text-right">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_vat{% endtrans %}</th>
+                            <td class="number"><strong>{{ order.vat|number_format_currency(order.currency.label, {}, {}, order.locale) }}</strong></td>
                         </tr>
                         {% for item in order.getVatAmounts %}
                             <tr>
-                                <th><small>{% trans from 'SonataOrderBundle' %}sonata_order_view_vat{% endtrans %} {{ item.rate|number_format(2) }}%</small></th>
-                                <td class="number"><small><b>{{ item.amount|number_format_currency(order.currency.label, {}, {}, order.locale) }}</b></small></td>
+                                <th class="text-right"><small>{% trans from 'SonataOrderBundle' %}sonata_order_view_vat{% endtrans %} {{ item.rate|number_format(2) }}%</small></th>
+                                <td class="number"><small><strong>{{ item.amount|number_format_currency(order.currency.label, {}, {}, order.locale) }}</strong></small></td>
                             </tr>
                         {% endfor %}
                         <tr>
-                            <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
-                            <td class="number">{{ order.totalInc|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                            <th class="text-right">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
+                            <td class="number"><strong>{{ order.totalInc|number_format_currency(order.currency.label, {}, {}, order.locale) }}</strong></td>
                         </tr>
                     {% endblock %}
                 </table>
