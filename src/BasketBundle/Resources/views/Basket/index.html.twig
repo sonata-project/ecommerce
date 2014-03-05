@@ -48,6 +48,7 @@ file that was distributed with this source code.
                 {# mark the widget as rendered ... TODO: create a custom widget type ...#}
                 {% set dummy = form.basketElements.setrendered %}
             </tbody>
+
             <tfoot>
                 <tr>
                     <td colspan="3" rowspan="{{ 3 + basket.getVatAmounts|length }}"></td>
@@ -72,6 +73,7 @@ file that was distributed with this source code.
                     <td colspan="2" class="number"><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                 </tr>
             </tfoot>
+
         </table>
 
         <div class="well">
