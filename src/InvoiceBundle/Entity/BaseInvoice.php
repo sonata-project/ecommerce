@@ -332,6 +332,10 @@ abstract class BaseInvoice implements InvoiceInterface
         foreach ($this->getInvoiceElements() as $invoiceElement) {
             $rate = $invoiceElement->getVatRate();
 
+            if (0 == $rate) {
+                continue;
+            }
+
             if (isset($amounts[$rate])) {
                 $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $invoiceElement->getVatAmount());
             } else {
