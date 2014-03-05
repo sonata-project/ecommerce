@@ -11,6 +11,8 @@
 
 namespace Sonata\OrderBundle\Controller;
 
+use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -51,6 +53,7 @@ class OrderController extends Controller
      */
     public function viewAction($reference)
     {
+        /** @var OrderInterface $order */
         $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
 
         if (null === $order) {
@@ -60,6 +63,12 @@ class OrderController extends Controller
         $this->checkAccess($order->getCustomer());
 
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_view_title', array(), "SonataOrderBundle"));
+
+        /** @var OrderElementInterface $element */
+        foreach ($order->getOrderElements() as $element) {
+            $provider = $this->get('sonata.product.pool')->getProvider($element->getProductType());
+            $element->setProduct($provider->getProductFromRaw($element, $this->get('sonata.product.pool')->getManager($element->getProductType())->getClass()));
+        }
 
         return $this->render('SonataOrderBundle:Order:view.html.twig', array(
             'order'              => $order,

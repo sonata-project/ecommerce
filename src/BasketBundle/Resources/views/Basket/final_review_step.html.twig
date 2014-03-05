@@ -17,7 +17,8 @@ file that was distributed with this source code.
 
     <thead>
         <tr>
-            <th class="col-sm-6">{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</th>
+            <th class="col-sm-2">&nbsp;</th>
+            <th class="col-sm-4">{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</th>
             <th class="col-sm-2">{% trans from 'SonataBasketBundle'%}header_basket_unit_price{% endtrans %}</th>
             <th class="col-sm-2">{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</th>
             <th>{% trans from 'SonataBasketBundle'%}header_basket_total_inc{% endtrans %}</th>
@@ -34,6 +35,7 @@ file that was distributed with this source code.
         {% endfor %}
 
         <tr>
+            <td><span class="glyphicon glyphicon-plane" style="font-size:50px;">&nbsp;</span></td>
             <td>{{ 'sonata.basket.label_delivery_charge'|trans({}, 'SonataBasketBundle') }}</td>
             <td class="number">{{ basket.getDeliveryPrice(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</td>
             <td></td>
@@ -43,23 +45,23 @@ file that was distributed with this source code.
 
     <tfoot>
         <tr>
-            <td colspan="2" rowspan="{{ 3 + basket.getVatAmounts|length }}"></td>
-            <th style="text-align: right">{{ 'sonata.basket.total_wo_vat'|trans({}, 'SonataBasketBundle') }}</th>
-            <td class="number"><b>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+            <td colspan="3" rowspan="{{ 3 + basket.getVatAmounts|length }}"></td>
+            <th class="text-right">{{ 'sonata.basket.total_wo_vat'|trans({}, 'SonataBasketBundle') }}</th>
+            <td class="number"><strong>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</strong></td>
         </tr>
         <tr>
-            <th style="text-align: right">{{ 'sonata.basket.total_vat'|trans({}, 'SonataBasketBundle') }}</th>
-            <td class="number"><b>{{ basket.getVatAmount()|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+            <th class="text-right">{{ 'sonata.basket.total_vat'|trans({}, 'SonataBasketBundle') }}</th>
+            <td class="number"><strong>{{ basket.getVatAmount()|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</strong></td>
         </tr>
         {% for item in basket.getVatAmounts %}
             <tr>
-                <th style="text-align: right"><small>{{ 'footer_basket_vat'|trans({}, 'SonataBasketBundle') }} {{ item.rate }}%</small></th>
-                <td class="number"><small><b>{{ item.amount|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></small></td>
+                <th class="text-right"><small>{{ 'footer_basket_vat'|trans({}, 'SonataBasketBundle') }} {{ item.rate }}%</small></th>
+                <td class="number"><small><strong>{{ item.amount|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</strong></small></td>
             </tr>
         {% endfor %}
         <tr>
-            <th style="text-align: right">{{ 'sonata.basket.total_w_vat'|trans({}, 'SonataBasketBundle') }}</th>
-            <td class="number"><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+            <th class="text-right">{{ 'sonata.basket.total_w_vat'|trans({}, 'SonataBasketBundle') }}</th>
+            <td class="number"><strong>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</strong></td>
         </tr>
     </tfoot>
 
