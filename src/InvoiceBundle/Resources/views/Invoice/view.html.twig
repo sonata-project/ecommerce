@@ -17,14 +17,6 @@ file that was distributed with this source code.
 {% block sonata_profile_content %}
     {% sonata_template_box 'This is the invoice view template.' %}
 
-    {% block sonata_invoice_title %}
-        <div class="row">
-            <div class="col-sm-12">
-                <h4>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.title_invoice{% endtrans %} - {{ invoice.reference }}</h4>
-            </div>
-        </div>
-    {% endblock %}
-
     {% block content %}
 
         <!-- Invoice -->
