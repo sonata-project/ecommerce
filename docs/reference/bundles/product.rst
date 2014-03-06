@@ -81,3 +81,11 @@ The bundle allows you to configure the entity classes; you'll also need to regis
                     mappings:
                         ApplicationSonataProductBundle: ~
                         SonataProductBundle: ~
+
+Blocks
+======
+
+``SonataProductBundle`` comes with some blocks services that you can use anywhere you want to show your products :
+
+* ``SimilarProductsBlockService``: from a given Product id (``base_product_id``), displays the Products in the same Collection (limited to ``number`` ones).
+* ``RecentProductsBlockService``: displays the last products added to the database (limited to ``number`` items).
