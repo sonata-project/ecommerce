@@ -215,7 +215,7 @@
             </trans-unit>
             <trans-unit id="sonata_invoice_view_vat">
                 <source>sonata_invoice_view_vat</source>
-                <target>VAT</target>
+                <target>Total VAT</target>
             </trans-unit>
             <!-- End - Invoice View -->
             <!-- Begin - Invoice page titles translations -->
