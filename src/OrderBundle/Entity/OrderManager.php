@@ -29,13 +29,24 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findForUser(UserInterface $user)
+    public function findForUser(UserInterface $user, array $orderBy = array(), $limit = null, $offset = null)
     {
         $qb = $this->getRepository()->createQueryBuilder('o')
             ->leftJoin('o.customer', 'c')
             ->where('c.user = :user')
-            ->orderBy('o.createdAt', 'DESC')
             ->setParameter('user', $user);
+
+        foreach ($orderBy as $field => $dir) {
+            $qb->orderBy('o.'.$field, $dir);
+        }
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if (null !== $offset) {
+            $qb->setFirstResult($offset);
+        }
 
         return $qb->getQuery()->execute();
     }
