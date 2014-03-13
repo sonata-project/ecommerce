@@ -353,6 +353,18 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
+    public function removeElements(array $elementsToRemove)
+    {
+        $this->inBuild = true;
+        foreach ($elementsToRemove as $element) {
+            $this->removeBasketElement($element);
+        }
+        $this->buildPrices();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeElement(BasketElementInterface $element)
     {
         return $this->removeBasketElement($element);
@@ -559,11 +571,13 @@ class Basket implements \Serializable, BasketInterface
      */
     public function clean()
     {
+        $elementsToRemove = array();
         foreach ($this->getBasketElements() as $basketElement) {
             if ($basketElement->getDelete() || 0 === $basketElement->getQuantity()) {
-                $this->removeElement($basketElement);
+                $elementsToRemove[] = $basketElement;
             }
         }
+        $this->removeElements($elementsToRemove);
     }
 
     /**

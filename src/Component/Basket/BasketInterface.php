@@ -159,6 +159,13 @@ interface BasketInterface
     public function getElement(ProductInterface $product);
 
     /**
+     * deletes several elements from the basket
+     *
+     * @param array $elementsToRemove
+     */
+    public function removeElements(array $elementsToRemove);
+
+    /**
      * delete an element from the basket depend on the $element. Element
      * can be a product or a basket element
      *
