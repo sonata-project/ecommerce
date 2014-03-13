@@ -34,7 +34,7 @@ class OrderController extends Controller
             throw new AccessDeniedException();
         }
 
-        $orders = $this->getOrderManager()->findForUser($user);
+        $orders = $this->getOrderManager()->findForUser($user, array('createdAt' => "DESC"));
 
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', array(), "SonataOrderBundle"));
 

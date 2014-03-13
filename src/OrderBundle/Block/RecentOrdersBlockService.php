@@ -74,14 +74,16 @@ class RecentOrdersBlockService extends BaseBlockService
         $criteria = array();
 
         if ('admin' !== $blockContext->getSetting('mode')) {
-            $criteria['customer'] = $this->customerManager->findOneBy(array('user' => $this->securityContext->getToken()->getUser()));
+            $orders = $this->orderManager->findForUser($this->securityContext->getToken()->getUser(), array('createdAt' => 'DESC'), $blockContext->getSetting('number'));
+        } else {
+            $orders = $this->orderManager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'));
         }
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), array(
             'context'   => $blockContext,
             'settings'  => $blockContext->getSettings(),
             'block'     => $blockContext->getBlock(),
-            'orders'    => $this->orderManager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'))
+            'orders'    => $orders
         ), $response);
     }
 

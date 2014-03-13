@@ -20,10 +20,13 @@ interface OrderManagerInterface extends ManagerInterface
      * Finds orders belonging to given user
      *
      * @param UserInterface $user
+     * @param array         $orderBy
+     * @param int|null      $limit
+     * @param int|null      $offset
      *
      * @return OrderInterface[]
      */
-    public function findForUser(UserInterface $user);
+    public function findForUser(UserInterface $user, array $orderBy = array(), $limit = null, $offset = null);
 
     /**
      * Return an Order from its id with its related OrderElements.
