@@ -157,8 +157,8 @@ abstract class BaseInvoice implements InvoiceInterface
     public function getBillingAsArray()
     {
         return array(
-            'firstname'    => $this->getCustomer()->getFirstname(),
-            'lastname'     => $this->getCustomer()->getLastname(),
+            'firstname'    => $this->getName(),
+            'lastname'     => "",
             'address1'     => $this->getAddress1(),
             'address2'     => $this->getAddress2(),
             'address3'     => $this->getAddress3(),
