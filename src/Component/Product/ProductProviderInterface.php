@@ -20,6 +20,7 @@ use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\Component\Currency\CurrencyInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 interface ProductProviderInterface
 {
@@ -141,6 +142,15 @@ interface ProductProviderInterface
      * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
      */
     public function configureShowFields(ShowMapper $showMapper);
+
+    /**
+     * Build form by adding provider fields
+     *
+     * @param FormBuilderInterface $builder     Symfony form builder
+     * @param array                $options     An options array
+     * @param boolean              $isVariation Is the product a variation of a master product?
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options, $isVariation = false);
 
     /**
      * @param FormMapper $formMapper

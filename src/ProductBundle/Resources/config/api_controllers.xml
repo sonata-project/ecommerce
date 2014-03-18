@@ -7,6 +7,8 @@
     <services>
         <service id="sonata.product.controller.api.product" class="Sonata\ProductBundle\Controller\Api\ProductController">
             <argument type="service" id="sonata.product.set.manager" />
+            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="form.factory" />
         </service>
     </services>
 </container>

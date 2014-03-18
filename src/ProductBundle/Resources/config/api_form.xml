@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sonata.product.api.form.type.product.parent" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+            <tag name="form.type" alias="sonata_product_api_form_product_parent" />
+
+            <argument type="service" id="jms_serializer.metadata_factory" />
+            <argument type="service" id="doctrine" />
+            <argument>sonata_product_api_form_product_parent</argument>
+            <argument>%sonata.product.admin.product.entity%</argument>
+            <argument>sonata_api_write</argument>
+        </service>
+
+        <service id="sonata.product.api.form.type.product" class="Sonata\ProductBundle\Form\Type\ApiProductType">
+            <tag name="form.type" alias="sonata_product_api_form_product" />
+
+            <argument type="service" id="sonata.product.pool" />
+        </service>
+    </services>
+</container>
