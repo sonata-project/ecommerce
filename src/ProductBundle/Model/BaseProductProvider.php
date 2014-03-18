@@ -32,6 +32,7 @@ use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 
 use JMS\Serializer\SerializerInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 abstract class BaseProductProvider implements ProductProviderInterface
@@ -407,6 +408,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function getVariationFields()
     {
         return $this->variationFields;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options, $isVariation = false)
+    {
+
     }
 
     /**

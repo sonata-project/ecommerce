@@ -13,6 +13,7 @@ namespace Sonata\Test\ProductBundle\Controller\Api;
 
 use Sonata\ProductBundle\Controller\Api\ProductController;
 
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProductControllerTest
@@ -114,13 +115,136 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array($variation), $this->createProductController($product)->getProductVariationsAction(1));
     }
 
+    public function testPostProductAction()
+    {
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('save')->will($this->returnValue($product));
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($product));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createProductController(null, $productManager, $productPool, $formFactory)->postProductAction('my.test.provider', new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPostProductInvalidAction()
+    {
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->never())->method('save');
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createProductController(null, $productManager, $productPool, $formFactory)->postProductAction('my.test.provider', new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
+    public function testPutProductAction()
+    {
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('save')->will($this->returnValue($product));
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($product));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createProductController($product, $productManager, $productPool, $formFactory)->putProductAction(1, 'my.test.provider', new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPutProductInvalidAction()
+    {
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->never())->method('save');
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createProductController($product, $productManager, $productPool, $formFactory)->putProductAction(1, 'my.test.provider', new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
+    public function testDeleteProductAction()
+    {
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('delete');
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
+
+        $this->assertEquals(array('deleted' => true), $view);
+    }
+
+    public function testDeleteProductInvalidAction()
+    {
+        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));
+        $productManager->expects($this->never())->method('delete');
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->never())->method('getManager')->will($this->returnValue($productManager));
+
+        $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
+
+        $this->assertEquals(array('deleted' => true), $view);
+    }
+
     /**
      * @param $product
      * @param $productManager
+     * @param $productPool
+     * @param $formFactory
      *
      * @return ProductController
      */
-    public function createProductController($product = null, $productManager = null)
+    public function createProductController($product = null, $productManager = null, $productPool = null, $formFactory = null)
     {
         if (null === $productManager) {
             $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
@@ -128,7 +252,13 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         if (null !== $product) {
             $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
         }
+        if (null === $productPool) {
+            $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        }
+        if (null === $formFactory) {
+            $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        }
 
-        return new ProductController($productManager);
+        return new ProductController($productManager, $productPool, $formFactory);
     }
 }
