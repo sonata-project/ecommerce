@@ -5,9 +5,16 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="sonata.customer.controller.api.address" class="Sonata\CustomerBundle\Controller\Api\AddressController">
+            <argument type="service" id="sonata.address.manager" />
+            <argument type="service" id="form.factory" />
+        </service>
+
         <service id="sonata.customer.controller.api.customer" class="Sonata\CustomerBundle\Controller\Api\CustomerController">
             <argument type="service" id="sonata.customer.manager" />
             <argument type="service" id="sonata.order.manager" />
+            <argument type="service" id="sonata.address.manager" />
+            <argument type="service" id="form.factory" />
         </service>
     </services>
 </container>
