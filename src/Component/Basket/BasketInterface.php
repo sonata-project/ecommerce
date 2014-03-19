@@ -285,6 +285,11 @@ interface BasketInterface
     public function getBillingAddressId();
 
     /**
+     * @param string $paymentMethodCode
+     */
+    public function setPaymentMethodCode($paymentMethodCode);
+
+    /**
      * @return string
      */
     public function getPaymentMethodCode();
@@ -333,4 +338,9 @@ interface BasketInterface
      * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency);
+
+    /**
+     * @return array
+     */
+    public function getPositions();
 }

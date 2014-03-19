@@ -681,6 +681,14 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
+    public function setPaymentMethodCode($paymentMethodCode)
+    {
+        $this->paymentMethodCode = $paymentMethodCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPaymentMethodCode()
     {
         return $this->paymentMethodCode;
@@ -793,5 +801,13 @@ class Basket implements \Serializable, BasketInterface
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPositions()
+    {
+        return $this->positions;
     }
 }

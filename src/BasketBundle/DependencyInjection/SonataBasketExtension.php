@@ -53,6 +53,7 @@ class SonataBasketExtension extends Extension
 
         if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
+            $loader->load('api_form.xml');
         }
 
         $container->setAlias('sonata.basket.builder', $config['builder']);

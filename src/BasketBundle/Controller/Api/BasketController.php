@@ -11,14 +11,21 @@
 
 namespace Sonata\BasketBundle\Controller\Api;
 
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+
+use JMS\Serializer\SerializationContext;
+
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketManagerInterface;
 
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -36,13 +43,20 @@ class BasketController
     protected $basketManager;
 
     /**
+     * @var FormFactoryInterface
+     */
+    protected $formFactory;
+
+    /**
      * Constructor
      *
-     * @param BasketManagerInterface $basketManager
+     * @param BasketManagerInterface $basketManager A Sonata ecommerce basket manager
+     * @param FormFactoryInterface   $formFactory   A Symfony form factory
      */
-    public function __construct(BasketManagerInterface $basketManager)
+    public function __construct(BasketManagerInterface $basketManager, FormFactoryInterface $formFactory)
     {
         $this->basketManager = $basketManager;
+        $this->formFactory   = $formFactory;
     }
 
     /**
@@ -131,6 +145,125 @@ class BasketController
     public function getBasketBasketelementsAction($id)
     {
         return $this->getBasket($id)->getBasketElements();
+    }
+
+    /**
+     * Adds a basket
+     *
+     * @ApiDoc(
+     *  input={"class"="sonata_basket_api_form_basket", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\Component\Basket\BasketElementInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while basket creation",
+     *      404="Returned when unable to find basket"
+     *  }
+     * )
+     *
+     * @param Request $request A Symfony request
+     *
+     * @return BasketInterface
+     *
+     * @throws NotFoundHttpException
+     */
+    public function postBasketAction(Request $request)
+    {
+        return $this->handleWriteBasket($request);
+    }
+
+    /**
+     * Updates a basket
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="basket identifier"}
+     *  },
+     *  input={"class"="sonata_basket_api_form_basket", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\Component\Basket\BasketElementInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while basket update",
+     *      404="Returned when unable to find basket"
+     *  }
+     * )
+     *
+     * @param integer $id      A Basket identifier
+     * @param Request $request A Symfony request
+     *
+     * @return BasketInterface
+     *
+     * @throws NotFoundHttpException
+     */
+    public function putBasketAction($id, Request $request)
+    {
+        return $this->handleWriteBasket($request, $id);
+    }
+
+    /**
+     * Deletes a basket
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="basket identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when basket is successfully deleted",
+     *      400="Returned when an error has occurred while basket deletion",
+     *      404="Returned when unable to find basket"
+     *  }
+     * )
+     *
+     * @param integer $id A Basket identifier
+     *
+     * @return \FOS\RestBundle\View\View
+     *
+     * @throws NotFoundHttpException
+     */
+    public function deleteBasketAction($id)
+    {
+        $basket = $this->getBasket($id);
+
+        try {
+            $this->basketManager->delete($basket);
+        } catch (\Exception $e) {
+            return \FOS\RestBundle\View\View::create(array('error' => $e->getMessage()), 400);
+        }
+
+        return array('deleted' => true);
+    }
+
+    /**
+     * Write a basket, this method is used by both POST and PUT action methods
+     *
+     * @param Request      $request Symfony request
+     * @param integer|null $id      A basket identifier
+     *
+     * @return \FOS\RestBundle\View\View|FormInterface
+     */
+    protected function handleWriteBasket($request, $id = null)
+    {
+        $basket = $id ? $this->getBasket($id) : null;
+
+        $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket', $basket, array(
+            'csrf_protection' => false
+        ));
+
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $basket = $form->getData();
+            $this->basketManager->save($basket);
+
+            $view = \FOS\RestBundle\View\View::create($basket);
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->enableMaxDepthChecks();
+            $view->setSerializationContext($serializationContext);
+
+            return $view;
+        }
+
+        return $form;
     }
 
     /**
