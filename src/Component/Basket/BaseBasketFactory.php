@@ -12,7 +12,11 @@ namespace Sonata\Component\Basket;
 
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 
 /**
  * Class BaseBasketFactory
@@ -21,7 +25,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-abstract class BaseBasketFactory implements BasketFactoryInterface
+abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandlerInterface
 {
     const SESSION_BASE_NAME = "sonata/basket/factory/customer/";
 
@@ -105,6 +109,16 @@ abstract class BaseBasketFactory implements BasketFactoryInterface
     {
         $this->session->set($this->getSessionVarName($basket->getCustomer()), $basket);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function logout(Request $request, Response $response, TokenInterface $token)
+    {
+        // Remove anonymous basket
+        $this->session->remove($this->getSessionVarName());
+    }
+
 
     /**
      * Get the name of the session variable

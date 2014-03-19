@@ -29,6 +29,28 @@ Several actions are provided by the controller:
 * ``headerPreview``: Renders the preview of the `Basket` (to put in a header)
 * ``authenticationStep``: Retrieves the `Customer` related to the logged in user and links it to the basket; this will redirect to the authentication form if the user is not logged in.
 
+Anonymous basket invalidation
+=============================
+
+If you wish to invalidate the anonymous basket stored in session when the user logs out (and if you didn't invalidate the session), you'll need to edit your ``security.yml`` file to add this to your logout configuration:
+
+.. code-block:: yaml
+
+security:
+    # ...
+    firewalls:
+        # ...
+        main:                   # Your firewall name
+            # ...
+            logout:
+                # ...
+                # We set invalidate_session to false because we want basket
+                # to be fully persisted even when user logout and login again
+                invalidate_session: false
+                # And we add the handler to invalidate the anonymous basket once the user logs out
+                handlers: ['sonata.basket.session.factory']
+
+
 Configuration
 =============
 
