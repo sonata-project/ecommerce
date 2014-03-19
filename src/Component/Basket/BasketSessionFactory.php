@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketSessionFactory extends BaseBasketFactory
 {
-    const SESSION_BASE_NAME = "sonata/basket/factory/customer/";
-
     /**
      * @var \Sonata\Component\Basket\BasketManagerInterface
      */
@@ -58,25 +56,9 @@ class BasketSessionFactory extends BaseBasketFactory
      */
     public function load(CustomerInterface $customer)
     {
-        $basket = $this->session->get($this->getSessionVarName($customer));
-
-        if (!$basket) {
-            $basket = $this->session->get($this->getSessionVarName());
-
-            if (!$basket) {
-                $basket = $this->basketManager->create();
-                $basket->setLocale($customer->getLocale());
-                $basket->setCurrency($this->currencyDetector->getCurrency());
-            }
-        }
-
-        $basket->setCustomer($customer);
-
-        $this->basketBuilder->build($basket);
-
         // always clone the basket so it can be only saved by calling
         // the save method
-        return clone $basket;
+        return clone parent::load($customer);
     }
 
     /**
@@ -84,21 +66,6 @@ class BasketSessionFactory extends BaseBasketFactory
      */
     public function save(BasketInterface $basket)
     {
-        $this->session->set($this->getSessionVarName($basket->getCustomer()), $basket);
-    }
-
-    /**
-     * Get the name of the session variable
-     *
-     * @param  \Sonata\Component\Customer\CustomerInterface $customer
-     * @return string
-     */
-    protected function getSessionVarName(CustomerInterface $customer = null)
-    {
-        if (null === $customer || null === $customer->getId()) {
-            return self::SESSION_BASE_NAME."new";
-        }
-
-        return self::SESSION_BASE_NAME.$customer->getId();
+        $this->storeInSession($basket);
     }
 }

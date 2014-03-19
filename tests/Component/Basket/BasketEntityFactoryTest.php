@@ -34,7 +34,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->exactly(3))->method('getId')->will($this->returnValue(1));
 
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
 
@@ -53,21 +53,21 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $this->isInstanceOf('Sonata\Component\Basket\BasketInterface', $basket);
     }
 
-    public function testLoadWithBasket()
+    public function testLoadWithNoBasketInDbButBasketInSession()
     {
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('setCustomer');
 
         $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
-        $basketManager->expects($this->once())->method('loadBasketPerCustomer')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('loadBasketPerCustomer')->will($this->returnValue(false));
 
         $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
-        $basketBuilder->expects($this->once())->method('build');
 
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customer->expects($this->once())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->exactly(3))->method('getId')->will($this->returnValue(1));
 
         $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+        $session->expects($this->exactly(1))->method('get')->will($this->returnValue($basket));
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
@@ -82,6 +82,39 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $basket = $factory->load($customer);
 
         $this->isInstanceOf('Sonata\Component\Basket\BasketInterface', $basket);
+    }
+
+    public function testLoadWithBasketInDbAndInSession()
+    {
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+
+        $sessionBasket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->once())->method('loadBasketPerCustomer')->will($this->returnValue($basket));
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+        $basketBuilder->expects($this->exactly(2))->method('build');
+
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $customer->expects($this->exactly(5))->method('getId')->will($this->returnValue(1));
+
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+        $session->expects($this->exactly(1))->method('get')->will($this->returnValue($sessionBasket));
+
+        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+        $currencyDetector->expects($this->any())
+            ->method('getCurrency')
+            ->will($this->returnValue($currency))
+        ;
+
+        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
+
+        $loadedBasket = $factory->load($customer);
+
+        $this->isInstanceOf('Sonata\Component\Basket\BasketInterface', $loadedBasket);
     }
 
     public function testSaveExistingCustomer()

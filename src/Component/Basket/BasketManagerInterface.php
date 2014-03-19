@@ -18,6 +18,8 @@ interface BasketManagerInterface extends ManagerInterface
 {
     /**
      * @param \Sonata\Component\Customer\CustomerInterface $customer
+     *
+     * @return BasketInterface|null
      */
     public function loadBasketPerCustomer(CustomerInterface $customer);
 }

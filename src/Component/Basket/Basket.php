@@ -557,6 +557,10 @@ class Basket implements \Serializable, BasketInterface
                 continue;
             }
 
+            if (!$this->getProductPool()) {
+                throw new \RuntimeException("No product pool for basket");
+            }
+
             $provider = $this->getProductPool()->getProvider($product);
 
             // BasketElement prices might depends on other basket elements

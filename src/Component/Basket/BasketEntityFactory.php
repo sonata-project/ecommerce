@@ -16,70 +16,42 @@ use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @todo Refacto (add an abstract class with the properties & constructor)
+ * Class BasketEntityFactory
+ *
+ * @package Sonata\Component\Basket
+ *
+ * @author  Hugo Briand <briand@ekino.com>
  */
-class BasketEntityFactory implements BasketFactoryInterface
+class BasketEntityFactory extends BaseBasketFactory
 {
-    /**
-     * @var \Sonata\Component\Basket\BasketManagerInterface
-     */
-    protected $basketManager;
-
-    /**
-     * @var \Sonata\Component\Basket\BasketBuilderInterface
-     */
-    protected $basketBuilder;
-
-    /**
-     * @var \Sonata\Component\Currency\CurrencyDetectorInterface
-     */
-    protected $currencyDetector;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
-     */
-    protected $session;
-
-    /**
-     * @param BasketManagerInterface    $basketManager
-     * @param BasketBuilderInterface    $basketBuilder
-     * @param CurrencyDetectorInterface $currencyDetector
-     * @param SessionInterface          $session
-     */
-    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, SessionInterface $session)
-    {
-        $this->basketManager    = $basketManager;
-        $this->basketBuilder    = $basketBuilder;
-        $this->currencyDetector = $currencyDetector;
-        $this->session          = $session;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function load(CustomerInterface $customer)
     {
-        $basket = null;
-
         if ($customer->getId()) {
             $basket = $this->basketManager->loadBasketPerCustomer($customer);
-        }
 
-        if (!$basket) {
-            $basket = $this->loadFromSession();
+            $sessionBasket = parent::load($customer);
 
             if (!$basket) {
-                $basket = $this->basketManager->create();
-                $basket->setLocale($customer->getLocale());
-                $basket->setCurrency($this->currencyDetector->getCurrency());
+                return $sessionBasket;
             }
+
+            $this->basketBuilder->build($basket);
+
+            if ($sessionBasket && !$sessionBasket->isEmpty()) {
+                // Retrieve elements put in session before user logged in and replace db elements with it
+                $basket->setBasketElements($sessionBasket->getBasketElements());
+            }
+
+            // Clear session to avoid retaking elements from session afterwards
+            $this->clearSession($customer);
+
+            return $basket;
         }
 
-        $basket->setCustomer($customer);
-
-        $this->basketBuilder->build($basket);
-
-        return $basket;
+        return parent::load($customer);
     }
 
     /**
@@ -90,17 +62,7 @@ class BasketEntityFactory implements BasketFactoryInterface
         if ($basket->getCustomerId()) {
             $this->basketManager->save($basket);
         } else {
-            $this->session->set(BasketSessionFactory::SESSION_BASE_NAME.'new', $basket);
+            $this->storeInSession($basket);
         }
-    }
-
-    /**
-     * Loads the basket in session (for authenticating users)
-     *
-     * @return BasketInterface
-     */
-    protected function loadFromSession()
-    {
-        return $this->session->get(BasketSessionFactory::SESSION_BASE_NAME.'new');
     }
 }
