@@ -16,6 +16,8 @@ use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketSessionFactory;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Currency\Currency;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
@@ -108,5 +110,20 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
+    }
+
+    public function testLogout()
+    {
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
+        $session->expects($this->once())->method('remove');
+
+        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+
+        $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
+        $factory->logout(new Request(), new Response(), $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface'));
     }
 }

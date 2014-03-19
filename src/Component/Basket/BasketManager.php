@@ -14,9 +14,7 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
     public function loadBasketPerCustomer(CustomerInterface $customer)
     {
         try {
-            return $this->getRepository()->createQueryBuilder()
-                ->select('b, be')
-                ->from($this->class, 'b')
+            return $this->getRepository()->createQueryBuilder('b')
                 ->leftJoin('b.basketElements', 'be', null, null, 'be.position')
                 ->where('b.customer = :customer')
                 ->setParameter('customer', $customer->getId())

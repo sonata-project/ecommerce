@@ -29,6 +29,28 @@ Several actions are provided by the controller:
 * ``headerPreview``: Renders the preview of the `Basket` (to put in a header)
 * ``authenticationStep``: Retrieves the `Customer` related to the logged in user and links it to the basket; this will redirect to the authentication form if the user is not logged in.
 
+Anonymous basket invalidation
+=============================
+
+If you wish to invalidate the anonymous basket stored in session when the user logs out (and if you didn't invalidate the session), you'll need to edit your ``security.yml`` file to add this to your logout configuration:
+
+.. code-block:: yaml
+
+security:
+    # ...
+    firewalls:
+        # ...
+        main:                   # Your firewall name
+            # ...
+            logout:
+                # ...
+                # We set invalidate_session to false because we want basket
+                # to be fully persisted even when user logout and login again
+                invalidate_session: false
+                # And we add the handler to invalidate the anonymous basket once the user logs out
+                handlers: ['sonata.basket.session.factory']
+
+
 Configuration
 =============
 
@@ -43,7 +65,7 @@ Here's the full default configuration for `SonataBasketBundle`:
 
         # Services
         builder:            sonata.basket.builder.standard
-        factory:            sonata.basket.session.factory
+        factory:            sonata.basket.session.factory       # Replace with sonata.basket.entity.factory to store in db
         loader:             sonata.basket.loader.standard
 
         # Model
@@ -96,7 +118,6 @@ To enable DB storage, you'll need to change the following configuration values:
                         ApplicationSonataBasketBundle: ~
                         SonataBasketBundle: ~
 
-.. warning::
+DB basket loading is slightly different as session one. It actually comes into play only once the customer is stored into database. Once that's done, we retrieve the baskets both from database and session, and replace basket elements in database with the ones from the session.
 
-    Default factory is set to session factory. Then, please note that if you don't use DB storage, you won't be able to retrieve a user's basket if he logs in from a different computer.
-
+If you wish to customize this behavior, you'll need to create your custom basket factory (by overloading ``BasketEntityFactory`` for instance) and replace the service in your configuration.
