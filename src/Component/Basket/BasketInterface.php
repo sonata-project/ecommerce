@@ -346,6 +346,7 @@ interface BasketInterface
 
     /**
      * Retrieves fields and associated values use for serialization
+     * Used by serialize method
      *
      * @return array
      */
@@ -353,6 +354,7 @@ interface BasketInterface
 
     /**
      * Retrieves fields for deserialization
+     * Used by unserialize method
      *
      * @return array
      */
