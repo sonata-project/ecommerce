@@ -54,7 +54,7 @@ class OrderTransformer extends BaseTransformer
     public function transformIntoBasket(OrderInterface $order, BasketInterface $basket)
     {
         $event = new OrderTransformEvent($order);
-        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_BASKET_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_TO_BASKET_TRANSFORM, $event);
 
         // we reset the current basket
         $basket->reset(true);
@@ -87,7 +87,7 @@ class OrderTransformer extends BaseTransformer
         $basket->buildPrices();
 
         $event = new BasketTransformEvent($basket);
-        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_BASKET_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_TO_BASKET_TRANSFORM, $event);
 
         return $basket;
     }

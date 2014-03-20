@@ -887,7 +887,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
     {
         $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_BASKET_ADD_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_ADD_PRODUCT, $event);
 
         if ($basket->hasProduct($product)) {
             return false;
@@ -906,7 +906,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $basket->addBasketElement($basketElement);
 
         $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::POST_BASKET_ADD_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch(BasketEvents::POST_ADD_PRODUCT, $event);
 
         return $event->getBasketElement();
     }
@@ -926,7 +926,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement)
     {
         $event = new AddBasketElementEvent($basket, $newBasketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_BASKET_MERGE_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_MERGE_PRODUCT, $event);
 
         if (!$basket->hasProduct($product)) {
             return false;
@@ -942,7 +942,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->updateComputationPricesFields($basket, $basketElement, $product);
 
         $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::POST_BASKET_MERGE_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch(BasketEvents::POST_MERGE_PRODUCT, $event);
 
         return $event->getBasketElement();
     }
@@ -983,7 +983,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $vat = false, $quantity = 1)
     {
         $event = new BeforeCalculatePriceEvent($product, $currency, $vat, $quantity);
-        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_BASKET_CALCULATE_PRICE, $event);
+        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_CALCULATE_PRICE, $event);
 
         $vat      = $event->getVat();
         $quantity = $event->getQuantity();
@@ -995,7 +995,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $price = floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency, $vat), $quantity));
 
         $afterEvent = new AfterCalculatePriceEvent($product, $currency, $vat, $quantity, $price);
-        $this->getEventDispatcher()->dispatch(BasketEvents::POST_BASKET_CALCULATE_PRICE, $afterEvent);
+        $this->getEventDispatcher()->dispatch(BasketEvents::POST_CALCULATE_PRICE, $afterEvent);
 
         return $afterEvent->getPrice();
     }

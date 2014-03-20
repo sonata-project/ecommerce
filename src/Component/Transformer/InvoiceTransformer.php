@@ -65,7 +65,7 @@ class InvoiceTransformer extends BaseTransformer
     public function transformFromOrder(OrderInterface $order, InvoiceInterface $invoice)
     {
         $event = new OrderTransformEvent($order);
-        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_INVOICE_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_TO_INVOICE_TRANSFORM, $event);
 
         $invoice->setName($order->getBillingName());
         $invoice->setAddress1($order->getBillingAddress1());
@@ -103,7 +103,7 @@ class InvoiceTransformer extends BaseTransformer
         $invoice->setStatus(InvoiceInterface::STATUS_OPEN);
 
         $event = new InvoiceTransformEvent($invoice);
-        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_INVOICE_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_TO_INVOICE_TRANSFORM, $event);
     }
 
     /**

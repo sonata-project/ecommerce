@@ -20,12 +20,12 @@ namespace Sonata\Component\Event;
  */
 final class BasketEvents
 {
-    const PRE_BASKET_ADD_PRODUCT  = 'sonata.ecommerce.product.pre_basket_add_product';
-    const POST_BASKET_ADD_PRODUCT = 'sonata.ecommerce.product.post_basket_add_product';
+    const PRE_ADD_PRODUCT  = 'sonata.ecommerce.basket.pre_add_product';
+    const POST_ADD_PRODUCT = 'sonata.ecommerce.basket.post_add_product';
 
-    const PRE_BASKET_MERGE_PRODUCT  = 'sonata.ecommerce.product.pre_basket_merge_product';
-    const POST_BASKET_MERGE_PRODUCT = 'sonata.ecommerce.product.post_basket_merge_product';
+    const PRE_MERGE_PRODUCT  = 'sonata.ecommerce.basket.pre_merge_product';
+    const POST_MERGE_PRODUCT = 'sonata.ecommerce.basket.post_merge_product';
 
-    const PRE_BASKET_CALCULATE_PRICE  = 'sonata.ecommerce.product.pre_basket_calculate_price';
-    const POST_BASKET_CALCULATE_PRICE = 'sonata.ecommerce.product.post_basket_calculate_price';
+    const PRE_CALCULATE_PRICE  = 'sonata.ecommerce.basket.pre_calculate_price';
+    const POST_CALCULATE_PRICE = 'sonata.ecommerce.basket.post_calculate_price';
 }
