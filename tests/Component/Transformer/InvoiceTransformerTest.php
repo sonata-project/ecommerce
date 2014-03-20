@@ -59,7 +59,9 @@ class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
 
         $deliveryPool = new DeliveryPool();
 
-        $invoiceTransformer = new InvoiceTransformer($invoiceElementManager, $deliveryPool);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $invoiceTransformer = new InvoiceTransformer($invoiceElementManager, $deliveryPool, $eventDispatcher);
         $invoiceTransformer->transformFromOrder($order, $invoice);
     }
 }

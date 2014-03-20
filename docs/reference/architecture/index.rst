@@ -126,3 +126,4 @@ Going in depths
     payment
     invoice
     api
+    events

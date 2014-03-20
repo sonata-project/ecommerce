@@ -343,4 +343,18 @@ interface BasketInterface
      * @return array
      */
     public function getPositions();
+
+    /**
+     * Retrieves fields and associated values use for serialization
+     *
+     * @return array
+     */
+    public function getSerializationFields();
+
+    /**
+     * Retrieves fields for deserialization
+     *
+     * @return array
+     */
+    public function getUnserializationFields();
 }

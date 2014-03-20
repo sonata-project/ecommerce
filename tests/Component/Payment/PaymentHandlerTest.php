@@ -59,7 +59,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -95,7 +97,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -143,7 +147,10 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
+        $backend = $this->getMock('Sonata\NotificationBundle\Backend\BackendInterface');
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $backend, $eventDispatcher);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -182,7 +189,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -223,7 +232,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
@@ -259,7 +270,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())
@@ -307,7 +320,9 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
-        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
 

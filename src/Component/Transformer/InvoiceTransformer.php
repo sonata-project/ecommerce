@@ -11,12 +11,16 @@
 namespace Sonata\Component\Transformer;
 
 use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Event\InvoiceTransformEvent;
+use Sonata\Component\Event\OrderTransformEvent;
+use Sonata\Component\Event\TransformerEvents;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Transformer\BaseTransformer;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceElementManagerInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -34,15 +38,22 @@ class InvoiceTransformer extends BaseTransformer
     protected $deliveryPool;
 
     /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * Constructor
      *
      * @param InvoiceElementManagerInterface $invoiceElementManager Invoice element manager
      * @param DeliveryPool                   $deliveryPool          Delivery pool component
+     * @param EventDispatcherInterface       $eventDispatcher
      */
-    public function __construct(InvoiceElementManagerInterface $invoiceElementManager, DeliveryPool $deliveryPool)
+    public function __construct(InvoiceElementManagerInterface $invoiceElementManager, DeliveryPool $deliveryPool, EventDispatcherInterface $eventDispatcher)
     {
         $this->invoiceElementManager = $invoiceElementManager;
         $this->deliveryPool          = $deliveryPool;
+        $this->eventDispatcher       = $eventDispatcher;
     }
 
     /**
@@ -53,6 +64,9 @@ class InvoiceTransformer extends BaseTransformer
      */
     public function transformFromOrder(OrderInterface $order, InvoiceInterface $invoice)
     {
+        $event = new OrderTransformEvent($order);
+        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_INVOICE_TRANSFORM, $event);
+
         $invoice->setName($order->getBillingName());
         $invoice->setAddress1($order->getBillingAddress1());
         $invoice->setAddress2($order->getBillingAddress2());
@@ -87,6 +101,9 @@ class InvoiceTransformer extends BaseTransformer
         }
 
         $invoice->setStatus(InvoiceInterface::STATUS_OPEN);
+
+        $event = new InvoiceTransformEvent($invoice);
+        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_INVOICE_TRANSFORM, $event);
     }
 
     /**

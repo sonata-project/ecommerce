@@ -587,7 +587,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function serialize()
+    public function getSerializationFields()
     {
         $arrayRep = array(
             'basketElements'        => $this->getBasketElements(),
@@ -618,17 +618,15 @@ class Basket implements \Serializable, BasketInterface
             $arrayRep['customer'] = $this->customer;
         }
 
-        return serialize($arrayRep);
+        return $arrayRep;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function unserialize($data)
+    public function getUnserializationFields()
     {
-        $data = unserialize($data);
-
-        $properties = array(
+        return array(
             'basketElements',
             'positions',
             'deliveryAddress',
@@ -644,6 +642,24 @@ class Basket implements \Serializable, BasketInterface
             'locale',
             'currency'
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize($this->getSerializationFields());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($data)
+    {
+        $data = unserialize($data);
+
+        $properties = $this->getUnserializationFields();
 
         foreach ($properties as $property) {
             $this->$property = isset($data[$property]) ? $data[$property] : $this->$property;

@@ -23,12 +23,16 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $transformer = new BasketTransformer(
             $this->getMock('Sonata\Component\Order\OrderManagerInterface'),
-            $this->getMock('Sonata\Component\Product\Pool')
+            $this->getMock('Sonata\Component\Product\Pool'),
+            $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface')
         );
 
         $pool->addTransformer('basket', $transformer);
 
-        $transformer = new OrderTransformer($this->getMock('Sonata\Component\Product\Pool'));
+        $transformer = new OrderTransformer(
+            $this->getMock('Sonata\Component\Product\Pool'),
+            $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface')
+        );
         $pool->addTransformer('order', $transformer);
 
         $this->assertEquals(2, count($pool->getTransformers()), 'Pool return 2 elements');

@@ -51,7 +51,8 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
         $currency->setLabel('EUR');
         $order->expects($this->once())->method('getCurrency')->will($this->returnValue($currency));
 
-        $transformer = new OrderTransformer($pool);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $transformer = new OrderTransformer($pool, $eventDispatcher);
         $transformer->transformIntoBasket($order, $basket);
 
         $this->assertEquals(2, $basketElement->getQuantity());

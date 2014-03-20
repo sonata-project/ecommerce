@@ -12,6 +12,7 @@
 namespace Sonata\PaymentBundle\Controller;
 
 use Doctrine\ORM\EntityNotFoundException;
+use Sonata\Component\Payment\InvalidTransactionException;
 use Sonata\Component\Payment\PaymentHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -113,6 +114,7 @@ class PaymentController extends Controller
      * this action handler the callback sent from the bank
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
@@ -122,7 +124,7 @@ class PaymentController extends Controller
             $response = $this->getPaymentHandler()->getPaymentCallbackResponse($this->getRequest());
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
-        } catch (\InvalidTransactionException $ex) {
+        } catch (InvalidTransactionException $ex) {
             throw new UnauthorizedHttpException($ex->getMessage());
         }
 
