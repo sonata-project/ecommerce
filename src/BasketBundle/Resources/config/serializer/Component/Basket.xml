@@ -10,6 +10,7 @@
         <virtual-property name="options"            type="array"   expose="true" since-version="1.0"  groups="sonata_api_read,sonata_api_write" method="getOptions" />
         <property         name="locale"             type="string"  expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
         <property         name="currency"           type="string"  expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+        <property         name="basketElements"     type="array"   expose="true"  since-version="1.0" groups="sonata_api_read" />
 
         <property name="customer" serialized-name="customer_id" type="sonata_customer_customer_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 

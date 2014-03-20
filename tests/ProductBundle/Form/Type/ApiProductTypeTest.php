@@ -18,7 +18,7 @@ use Sonata\ProductBundle\Form\Type\ApiProductType;
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class ApiProductTypeTest extends DoctrineORMSerializationTypeTest
+class ApiProductTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testBuildForm()
     {
@@ -27,7 +27,7 @@ class ApiProductTypeTest extends DoctrineORMSerializationTypeTest
         $productPool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
         $productPool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
 
-        $type = new ApiProductType($this->getMetadataFactoryMock(), $this->getRegistryMock(), "test", "testclass", "testgroup", $productPool);
+        $type = new ApiProductType($productPool);
 
         $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
 

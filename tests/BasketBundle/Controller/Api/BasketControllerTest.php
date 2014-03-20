@@ -33,13 +33,17 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($basket), $this->createBasketController(null, $basketManager)->getBasketsAction($paramFetcher));
+        $this->assertEquals(array($basket), $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
     public function testGetBasketAction()
     {
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
-        $this->assertEquals($basket, $this->createBasketController($basket)->getBasketAction(1));
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+
+        $this->assertEquals($basket, $this->createBasketController($basketManager)->getBasketAction(1));
     }
 
     /**
@@ -58,7 +62,10 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($elements));
 
-        $this->assertEquals($elements, $this->createBasketController($basket)->getBasketBasketelementsAction(1));
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+
+        $this->assertEquals($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
     }
 
     /**
@@ -85,7 +92,7 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createBasketController(null, $basketManager, $formFactory)->postBasketAction(new Request());
+        $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->postBasketAction(new Request());
 
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
@@ -105,7 +112,7 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createBasketController(null, $basketManager, $formFactory)->postBasketAction(new Request());
+        $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->postBasketAction(new Request());
 
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
@@ -116,6 +123,7 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
 
         $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
         $basketManager->expects($this->once())->method('save')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
@@ -125,7 +133,7 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createBasketController($basket, $basketManager, $formFactory)->putBasketAction(1, new Request());
+        $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->putBasketAction(1, new Request());
 
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
@@ -136,6 +144,7 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
 
         $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
         $basketManager->expects($this->never())->method('save')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
@@ -145,7 +154,7 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createBasketController($basket, $basketManager, $formFactory)->putBasketAction(1, new Request());
+        $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->putBasketAction(1, new Request());
 
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
@@ -156,8 +165,9 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
 
         $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
         $basketManager->expects($this->once())->method('delete');
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
-        $view = $this->createBasketController($basket, $basketManager)->deleteBasketAction(1);
+        $view = $this->createBasketController($basketManager)->deleteBasketAction(1);
 
         $this->assertEquals(array('deleted' => true), $view);
     }
@@ -170,28 +180,225 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));
         $basketManager->expects($this->never())->method('delete');
 
-        $this->createBasketController(null, $basketManager)->deleteBasketAction(1);
+        $this->createBasketController($basketManager)->deleteBasketAction(1);
+    }
+
+    public function testPostBasketBasketelementsAction()
+    {
+        $productDefinition = $this->getMockBuilder('Sonata\Component\Product\ProductDefinition')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getProduct')->will($this->returnValue($productDefinition));
+
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket->expects($this->once())->method('getProductPool')->will($this->returnValue($productPool));
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->once())->method('save')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+
+        $basketElementManager = $this->getMock('Sonata\Component\Basket\BasketElementManagerInterface');
+        $basketElementManager->expects($this->once())->method('create')->will($this->returnValue($basketElement));
+
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+        $basketBuilder->expects($this->once())->method('build');
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($basketElement));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->postBasketBasketelementsAction(1, new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPostBasketBasketelementsInvalidAction()
+    {
+        $productDefinition = $this->getMockBuilder('Sonata\Component\Product\ProductDefinition')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getProduct')->will($this->returnValue($productDefinition));
+
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket->expects($this->once())->method('getProductPool')->will($this->returnValue($productPool));
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->never())->method('save')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+
+        $basketElementManager = $this->getMock('Sonata\Component\Basket\BasketElementManagerInterface');
+        $basketElementManager->expects($this->once())->method('create')->will($this->returnValue($basketElement));
+
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+        $basketBuilder->expects($this->once())->method('build');
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->never())->method('getData');
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->postBasketBasketelementsAction(1, new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
+    public function testPutBasketBasketelementsAction()
+    {
+        $productDefinition = $this->getMockBuilder('Sonata\Component\Product\ProductDefinition')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getProduct')->will($this->returnValue($productDefinition));
+
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket->expects($this->once())->method('getProductPool')->will($this->returnValue($productPool));
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->never())->method('save')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+
+        $basketElementManager = $this->getMock('Sonata\Component\Basket\BasketElementManagerInterface');
+        $basketElementManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basketElement));
+        $basketElementManager->expects($this->once())->method('save')->will($this->returnValue($basketElement));
+        $basketElementManager->expects($this->never())->method('create')->will($this->returnValue($basketElement));
+
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+        $basketBuilder->expects($this->once())->method('build');
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($basketElement));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->putBasketBasketelementsAction(1, 1, new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPutBasketBasketelementsInvalidAction()
+    {
+        $productDefinition = $this->getMockBuilder('Sonata\Component\Product\ProductDefinition')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $productPool = $this->getMock('Sonata\Component\Product\Pool');
+        $productPool->expects($this->once())->method('getProduct')->will($this->returnValue($productDefinition));
+
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket->expects($this->once())->method('getProductPool')->will($this->returnValue($productPool));
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->never())->method('save')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+
+        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+
+        $basketElementManager = $this->getMock('Sonata\Component\Basket\BasketElementManagerInterface');
+        $basketElementManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basketElement));
+        $basketElementManager->expects($this->never())->method('create')->will($this->returnValue($basketElement));
+
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+
+        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+        $basketBuilder->expects($this->once())->method('build');
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->never())->method('getData');
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->putBasketBasketelementsAction(1, 1, new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
+    public function testDeleteBasketBasketelementsAction()
+    {
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array()));
+        $basket->expects($this->once())->method('setBasketElements');
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('save');
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+        $basketBuilder->expects($this->once())->method('build');
+
+        $view = $this->createBasketController($basketManager, null, null, $basketBuilder)->deleteBasketBasketelementsAction(1, 1);
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
     /**
-     * @param $basket
      * @param $basketManager
+     * @param $basketElementManager
+     * @param $productManager
+     * @param $basketBuilder
      * @param $formFactory
      *
      * @return BasketController
      */
-    public function createBasketController($basket = null, $basketManager = null, $formFactory = null)
+    public function createBasketController($basketManager = null, $basketElementManager = null, $productManager = null, $basketBuilder = null, $formFactory = null)
     {
         if (null === $basketManager) {
             $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
         }
-        if (null !== $basket) {
-            $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
+        if (null === $basketElementManager) {
+            $basketElementManager = $this->getMock('Sonata\Component\Basket\BasketElementManagerInterface');
+        }
+        if (null === $productManager) {
+            $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        }
+        if (null === $basketBuilder) {
+            $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
         }
         if (null === $formFactory) {
             $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         }
 
-        return new BasketController($basketManager, $formFactory);
+        return new BasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory);
     }
 }
