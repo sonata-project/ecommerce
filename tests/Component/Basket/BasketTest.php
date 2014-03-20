@@ -87,6 +87,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $productProvider = new ProductProviderTest($this->getMock('JMS\Serializer\SerializerInterface'));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
+        $productProvider->setEventDispatcher($this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
 
         $productDefinition = new ProductDefinition($productProvider, $manager);
 

@@ -563,6 +563,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new ProductProviderTest($serializer);
 
         $provider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
+        $provider->setEventDispatcher($this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
 
         return $provider;
     }

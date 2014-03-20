@@ -10,10 +10,14 @@
 
 namespace Sonata\Component\Transformer;
 
+use Sonata\Component\Event\BasketTransformEvent;
+use Sonata\Component\Event\OrderTransformEvent;
+use Sonata\Component\Event\TransformerEvents;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\Pool as ProductPool;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class OrderTransformer extends BaseTransformer
 {
@@ -28,11 +32,18 @@ class OrderTransformer extends BaseTransformer
     protected $options;
 
     /**
-     * @param ProductPool $productPool
+     * @var EventDispatcherInterface
      */
-    public function __construct(ProductPool $productPool)
+    protected $eventDispatcher;
+
+    /**
+     * @param ProductPool              $productPool
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(ProductPool $productPool, EventDispatcherInterface $eventDispatcher)
     {
-        $this->productPool = $productPool;
+        $this->productPool     = $productPool;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -42,6 +53,9 @@ class OrderTransformer extends BaseTransformer
      */
     public function transformIntoBasket(OrderInterface $order, BasketInterface $basket)
     {
+        $event = new OrderTransformEvent($order);
+        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_TO_BASKET_TRANSFORM, $event);
+
         // we reset the current basket
         $basket->reset(true);
 
@@ -71,6 +85,9 @@ class OrderTransformer extends BaseTransformer
         $basket->setCustomer($order->getCustomer());
 
         $basket->buildPrices();
+
+        $event = new BasketTransformEvent($basket);
+        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_TO_BASKET_TRANSFORM, $event);
 
         return $basket;
     }

@@ -16,7 +16,7 @@
             <tag name="sonata.payment.transformer" />
 
             <argument type="service" id="sonata.product.pool" />
-            <argument type="service" id="logger" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sonata.payment.transformer.invoice" class="%sonata.invoice_transformer.class%">
@@ -24,6 +24,7 @@
 
             <argument type="service" id="sonata.invoice_element.manager" />
             <argument type="service" id="sonata.delivery.pool" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sonata.payment.transformer.basket" class="%sonata.basket_transformer.class%">
@@ -31,6 +32,7 @@
 
             <argument type="service" id="sonata.order.manager" />
             <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="logger" />
         </service>
 

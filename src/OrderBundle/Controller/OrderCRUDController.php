@@ -31,7 +31,7 @@ class OrderCRUDController extends CRUDController
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
             $this->getInvoiceManager()->save($invoice);
 
-            $this->addFlash('sonata_flash_success', $this->get('translator')->trans('order_invoice_generate_success', array(), 'SonataOrderBundle'));
+            $this->addFlash('sonata_flash_success', $this->get('translator')->trans('oRDER_TO_INVOICE_generate_success', array(), 'SonataOrderBundle'));
         }
 
         return $this->redirect($this->generateUrl('admin_sonata_invoice_invoice_edit', array('id' => $invoice->getId())));

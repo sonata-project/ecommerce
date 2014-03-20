@@ -14,6 +14,9 @@ use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
+use Sonata\Component\Event\BasketTransformEvent;
+use Sonata\Component\Event\OrderTransformEvent;
+use Sonata\Component\Event\TransformerEvents;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
@@ -21,6 +24,7 @@ use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Payment\PaymentInterface;
 use Psr\Log\LoggerInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BasketTransformer extends BaseTransformer
 {
@@ -40,15 +44,22 @@ class BasketTransformer extends BaseTransformer
     protected $productPool;
 
     /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * @param OrderManagerInterface $orderManager
      * @param ProductPool           $productPool
+     * @param EventDispatcherInterface $eventDispatcher
      * @param LoggerInterface       $logger
      */
-    public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, LoggerInterface $logger = null)
+    public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
     {
-        $this->productPool = $productPool;
-        $this->orderManager = $orderManager;
-        $this->logger = $logger;
+        $this->productPool     = $productPool;
+        $this->orderManager    = $orderManager;
+        $this->logger          = $logger;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -60,6 +71,9 @@ class BasketTransformer extends BaseTransformer
      */
     public function transformIntoOrder(BasketInterface $basket)
     {
+        $event = new BasketTransformEvent($basket);
+        $this->eventDispatcher->dispatch(TransformerEvents::PRE_BASKET_TO_ORDER_TRANSFORM, $event);
+
         // Customer
         $customer = $basket->getCustomer();
 
@@ -163,6 +177,9 @@ class BasketTransformer extends BaseTransformer
 
             $order->addOrderElement($orderElement);
         }
+
+        $event = new OrderTransformEvent($order);
+        $this->eventDispatcher->dispatch(TransformerEvents::POST_BASKET_TO_ORDER_TRANSFORM, $event);
 
         return $order;
     }

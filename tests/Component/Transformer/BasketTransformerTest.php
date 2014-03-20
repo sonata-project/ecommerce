@@ -43,7 +43,8 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $productPool = $this->getMock('Sonata\Component\Product\Pool');
 
         $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
-        $basketTransform = new BasketTransformer($orderManager, $productPool, $logger);
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $basketTransform = new BasketTransformer($orderManager, $productPool, $eventDispatcher, $logger);
 
         return $basketTransform;
     }

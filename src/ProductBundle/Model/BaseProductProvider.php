@@ -15,6 +15,10 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
+use Sonata\Component\Event\AddBasketElementEvent;
+use Sonata\Component\Event\AfterCalculatePriceEvent;
+use Sonata\Component\Event\BasketEvents;
+use Sonata\Component\Event\BeforeCalculatePriceEvent;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
@@ -25,6 +29,7 @@ use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\CoreBundle\Exception\InvalidParameterException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Product\ProductCollectionManagerInterface;
@@ -83,11 +88,32 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $currencyPriceCalculator;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
      * @param \JMS\Serializer\SerializerInterface               $serializer
      */
     public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
+    }
+
+    /**
+     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     */
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     */
+    public function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
     }
 
     /**
@@ -201,6 +227,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement, $format = 'json')
     {
+        /** @var OrderElementInterface $orderElement */
         $orderElement = new $this->orderElementClassName;
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setUnitPriceExcl($basketElement->getUnitPrice(false));
@@ -850,7 +877,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * Returns true if the basket element is still valid
+     * Adds $basketElement related to $product to $basket
      *
      * @param  \Sonata\Component\Basket\BasketInterface             $basket
      * @param  \Sonata\Component\Product\ProductInterface           $product
@@ -859,6 +886,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
     {
+        $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
+        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_ADD_PRODUCT, $event);
+
         if ($basket->hasProduct($product)) {
             return false;
         }
@@ -875,7 +905,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $basket->addBasketElement($basketElement);
 
-        return $basketElement;
+        $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
+        $this->getEventDispatcher()->dispatch(BasketEvents::POST_ADD_PRODUCT, $event);
+
+        return $event->getBasketElement();
     }
 
     /**
@@ -892,6 +925,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement)
     {
+        $event = new AddBasketElementEvent($basket, $newBasketElement, $product, $this);
+        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_MERGE_PRODUCT, $event);
+
         if (!$basket->hasProduct($product)) {
             return false;
         }
@@ -905,7 +941,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $this->updateComputationPricesFields($basket, $basketElement, $product);
 
-        return $basketElement;
+        $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
+        $this->getEventDispatcher()->dispatch(BasketEvents::POST_MERGE_PRODUCT, $event);
+
+        return $event->getBasketElement();
     }
 
     /**
@@ -943,11 +982,22 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $vat = false, $quantity = 1)
     {
+        $event = new BeforeCalculatePriceEvent($product, $currency, $vat, $quantity);
+        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_CALCULATE_PRICE, $event);
+
+        $vat      = $event->getVat();
+        $quantity = $event->getQuantity();
+
         if (!is_int($quantity) || $quantity < 1) {
             throw new InvalidParameterException("Expected integer >= 1 for quantity, ".$quantity." given.");
         }
 
-        return floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency, $vat), $quantity));
+        $price = floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency, $vat), $quantity));
+
+        $afterEvent = new AfterCalculatePriceEvent($product, $currency, $vat, $quantity, $price);
+        $this->getEventDispatcher()->dispatch(BasketEvents::POST_CALCULATE_PRICE, $afterEvent);
+
+        return $afterEvent->getPrice();
     }
 
     /**
