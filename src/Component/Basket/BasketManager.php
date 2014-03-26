@@ -24,4 +24,16 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
             return null;
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save($entity, $andFlush = true)
+    {
+        foreach ($entity->getBasketElements() as $element) {
+            $element->setBasket($entity);
+        }
+
+        parent::save($entity, $andFlush);
+    }
 }

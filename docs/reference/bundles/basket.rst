@@ -36,19 +36,19 @@ If you wish to invalidate the anonymous basket stored in session when the user l
 
 .. code-block:: yaml
 
-security:
-    # ...
-    firewalls:
+    security:
         # ...
-        main:                   # Your firewall name
+        firewalls:
             # ...
-            logout:
+            main:                   # Your firewall name
                 # ...
-                # We set invalidate_session to false because we want basket
-                # to be fully persisted even when user logout and login again
-                invalidate_session: false
-                # And we add the handler to invalidate the anonymous basket once the user logs out
-                handlers: ['sonata.basket.session.factory']
+                logout:
+                    # ...
+                    # We set invalidate_session to false because we want basket
+                    # to be fully persisted even when user logout and login again
+                    invalidate_session: false
+                    # And we add the handler to invalidate the anonymous basket once the user logs out
+                    handlers: ['sonata.basket.session.factory']
 
 
 Configuration

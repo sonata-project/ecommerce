@@ -13,8 +13,6 @@ namespace Sonata\BasketBundle\Form;
 
 use Metadata\MetadataFactoryInterface;
 
-use Sonata\Component\Currency\CurrencyDataTransformer;
-use Sonata\Component\Currency\CurrencyManagerInterface;
 use Sonata\Component\Form\Transformer\SerializeDataTransformer;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -23,11 +21,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class ApiBasketType
+ * Class ApiBasketElementType
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class ApiBasketType extends AbstractType
+class ApiBasketElementType extends AbstractType
 {
     /**
      * @var string
@@ -35,20 +33,13 @@ class ApiBasketType extends AbstractType
     protected $class;
 
     /**
-     * @var CurrencyManagerInterface
-     */
-    protected $currencyManager;
-
-    /**
      * Constructor
      *
-     * @param string                   $class           An entity data class
-     * @param CurrencyManagerInterface $currencyManager A Sonata ecommerce currency manager
+     * @param string $class An entity data class
      */
-    public function __construct($class, CurrencyManagerInterface $currencyManager)
+    public function __construct($class)
     {
-        $this->class           = $class;
-        $this->currencyManager = $currencyManager;
+        $this->class = $class;
     }
 
     /**
@@ -56,11 +47,8 @@ class ApiBasketType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $currencyTransformer = new CurrencyDataTransformer($this->currencyManager);
-
         $builder->add(
-            $builder->create('currency', null)
-                ->addModelTransformer($currencyTransformer)
+            $builder->create('options')->addModelTransformer(new SerializeDataTransformer())
         );
     }
 
@@ -80,7 +68,7 @@ class ApiBasketType extends AbstractType
      */
     public function getName()
     {
-        return 'sonata_basket_api_form_basket';
+        return 'sonata_basket_api_form_basket_element';
     }
 
     /**
@@ -88,6 +76,6 @@ class ApiBasketType extends AbstractType
      */
     public function getParent()
     {
-        return 'sonata_basket_api_form_basket_parent';
+        return 'sonata_basket_api_form_basket_element_parent';
     }
 }

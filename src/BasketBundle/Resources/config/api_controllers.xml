@@ -7,6 +7,9 @@
     <services>
         <service id="sonata.basket.controller.api.basket" class="Sonata\BasketBundle\Controller\Api\BasketController">
             <argument type="service" id="sonata.basket.manager" />
+            <argument type="service" id="sonata.basket_element.manager" />
+            <argument type="service" id="sonata.product.set.manager" />
+            <argument type="service" id="sonata.basket.builder.standard" />
             <argument type="service" id="form.factory" />
         </service>
     </services>
