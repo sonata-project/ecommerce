@@ -11,30 +11,36 @@ file that was distributed with this source code.
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-    <div class="sonata-customer-block-recent-customer">
+    <div class="sonata-customer-block-recent-customer panel panel-default">
         {% if settings.title %}
-            <h3 class="sonata-customer-block-recent-customer">{{ settings.title }}</h3>
+            <div class="panel-heading">
+                <h3 class="sonata-customer-block-recent-customer panel-title"><i class="fa fa-user"></i> {{ settings.title }}</h3>
+            </div>
         {% endif %}
 
-        {% if customers|length > 0 %}
-            <table class="sonata-customer-block-customer-container table table-condensed">
-                {% for customer in customers %}
-                    <tr>
-                        {% if context.getSetting('mode') == 'admin' %}
-                            <td><a href="{{ url('admin_sonata_customer_customer_edit', { 'id': customer.id }) }}">{{ customer }}</a></td>
-                        {% else %}
-                            <td><a href="{{ url('sonata_customer_view', { 'id': customer.id }) }}">{{ customer }}</a></td>
-                        {% endif %}
-                        <td>{{ customer.createdAt|format_datetime() }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            <p>{{ 'no_customer_found'|trans({}, 'SonataCustomerBundle') }}</p>
-        {% endif %}
+        <div class="panel-body">
+            {% if customers|length > 0 %}
+                <div class="sonata-customer-block-customer-container list-group">
+                    {% for customer in customers %}
+                        <a class="list-group-item"
+                           href="
+                            {% if context.getSetting('mode') == 'admin' %}
+                                {{ url('admin_sonata_customer_customer_edit', { 'id': customer.id }) }}
+                            {% else %}
+                                {{ url('sonata_customer_view', { 'id': customer.id }) }}
+                            {% endif %}
+                            ">
+                            {{ customer }} - {{ customer.createdAt|format_datetime() }}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>{{ 'no_customer_found'|trans({}, 'SonataCustomerBundle') }}</p>
+            {% endif %}
 
-        {% if context.getSetting('mode') == 'admin' %}
-            <a href="{{ url('admin_sonata_customer_customer_list') }}" class="btn btn-primary btn-small"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_customers'|trans({}, 'SonataCustomerBundle') }}</a>
-        {% endif %}
+            {% if context.getSetting('mode') == 'admin' %}
+                <a href="{{ url('admin_sonata_customer_customer_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_customers'|trans({}, 'SonataCustomerBundle') }}</a>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
