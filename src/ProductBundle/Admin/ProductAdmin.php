@@ -200,6 +200,7 @@ class ProductAdmin extends Admin
     public function configureListFields(ListMapper $list)
     {
         $list
+            ->addIdentifier('sku')
             ->addIdentifier('name')
             ->add('isVariation', 'boolean')
             ->add('enabled', null, array('editable' => true))
@@ -220,8 +221,8 @@ class ProductAdmin extends Admin
             ->add('name')
             ->add('sku')
             ->add('enabled')
-            ->add('productCategories.category', null, array('field_options' => array('expanded' => true, 'multiple' => true)))
-            ->add('productCollections.collection', null, array('field_options' => array('expanded' => true, 'multiple' => true)))
+            ->add('productCategories.category', null, array('field_options' => array('expanded' => false, 'multiple' => true)))
+            ->add('productCollections.collection', null, array('field_options' => array('expanded' => false, 'multiple' => true)))
         ;
     }
 

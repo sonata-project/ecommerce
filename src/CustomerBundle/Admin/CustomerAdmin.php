@@ -68,11 +68,6 @@ class CustomerAdmin extends Admin
             ->addIdentifier('name', 'string', array('code' => '__toString'))
             ->add('user')
             ->add('email')
-            ->add('birthDate')
-            ->add('birthPlace')
-            ->add('phoneNumber')
-            ->add('mobileNumber')
-            ->add('faxNumber')
             ->add('createdAt')
             ->add('locale')
             ->add('isFake')
@@ -113,7 +108,10 @@ class CustomerAdmin extends Admin
         $filter
             ->add('firstname')
             ->add('lastname')
+            ->add('user')
+            ->add('email')
             ->add('locale', null, array(), 'locale')
+            ->add('isFake')
         ;
     }
 

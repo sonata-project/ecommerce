@@ -156,6 +156,21 @@
             </trans-unit>
             <!-- End - Status translations -->
 
+            <!-- Begin - Invoice admin filters -->
+            <trans-unit id="filter.label_reference">
+                <source>filter.label_reference</source>
+                <target>Référence</target>
+            </trans-unit>
+            <trans-unit id="filter.label_customer">
+                <source>filter.label_customer</source>
+                <target>Client</target>
+            </trans-unit>
+            <trans-unit id="filter.label_status">
+                <source>filter.label_status</source>
+                <target>Statut</target>
+            </trans-unit>
+            <!-- End - Invoice admin filters -->
+
             <!-- Begin - View translations -->
             <trans-unit id="sonata.invoice.subtitle_billing">
                 <source>sonata.invoice.subtitle_billing</source>

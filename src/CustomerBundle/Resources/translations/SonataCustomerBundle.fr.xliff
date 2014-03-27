@@ -325,9 +325,33 @@
                 <source>filter.label_lastname</source>
                 <target>Nom</target>
             </trans-unit>
+            <trans-unit id="filter.label_user">
+                <source>filter.label_user</source>
+                <target>Utilisateur</target>
+            </trans-unit>
+            <trans-unit id="filter.label_email">
+                <source>filter.label_email</source>
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="filter.label_is_fake">
+                <source>filter.label_is_fake</source>
+                <target>Factice?</target>
+            </trans-unit>
             <trans-unit id="filter.label_locale">
                 <source>filter.label_locale</source>
                 <target>Locale</target>
+            </trans-unit>
+            <trans-unit id="filter.label_current">
+                <source>filter.label_current</source>
+                <target>Par défaut?</target>
+            </trans-unit>
+            <trans-unit id="filter.label_type_code">
+                <source>filter.label_type_code</source>
+                <target>Type</target>
+            </trans-unit>
+            <trans-unit id="filter.label_customer">
+                <source>filter.label_customer</source>
+                <target>ID Client</target>
             </trans-unit>
             <!-- End - Filter translations -->
 
