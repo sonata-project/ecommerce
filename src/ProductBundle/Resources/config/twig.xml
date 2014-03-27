@@ -7,6 +7,8 @@
     <services>
         <service id="sonata.product.provider.twig" class="Sonata\ProductBundle\Twig\Extension\ProductExtension" public="false">
             <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="form.factory" />
+            <argument>%sonata.basket.basket_element.class%</argument>
             <tag name="twig.extension" />
         </service>
     </services>

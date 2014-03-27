@@ -16,6 +16,9 @@ use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormView;
+
 /**
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
@@ -27,13 +30,27 @@ class ProductExtension extends \Twig_Extension
     protected $productPool;
 
     /**
+     * @var FormFactoryInterface
+     */
+    protected $formFactory;
+
+    /**
+     * @var string
+     */
+    protected $basketElementClass;
+
+    /**
      * Constructor.
      *
-     * @param ProductPool $productPool
+     * @param ProductPool          $productPool        Sonata product pool
+     * @param FormFactoryInterface $formFactory        Symfony form factory
+     * @param string               $basketElementClass Sonata basket element class name
      */
-    public function __construct(ProductPool $productPool)
+    public function __construct(ProductPool $productPool, FormFactoryInterface $formFactory, $basketElementClass)
     {
         $this->productPool = $productPool;
+        $this->formFactory = $formFactory;
+        $this->basketElementClass = $basketElementClass;
     }
 
     /**
@@ -49,6 +66,7 @@ class ProductExtension extends \Twig_Extension
             new \Twig_SimpleFunction('sonata_product_cheapest_variation_price', array($this, 'getCheapestEnabledVariationPrice')),
             new \Twig_SimpleFunction('sonata_product_price',                    array($this, 'getProductPrice')),
             new \Twig_SimpleFunction('sonata_product_stock',                    array($this, 'getProductStock')),
+            new \Twig_SimpleFunction('sonata_product_form_add_basket',          array($this, 'getFormAddBasket')),
         );
     }
 
@@ -133,13 +151,34 @@ class ProductExtension extends \Twig_Extension
     /**
      * Return the available stock of the product.
      *
-     * @param ProductInterface $product  A product instance
+     * @param ProductInterface $product A product instance
      *
      * @return int
      */
     public function getProductStock(ProductInterface $product)
     {
         return $this->productPool->getProvider($product)->getStockAvailable($product);
+    }
+
+    /**
+     * Returns a "add to basket" form for a specified product
+     *
+     * @param ProductInterface $product A product instance
+     *
+     * @return FormView
+     */
+    public function getFormAddBasket(ProductInterface $product)
+    {
+        $formBuilder = $this->formFactory->createNamedBuilder('add_basket', 'form', null, array(
+            'data_class' => $this->basketElementClass,
+            'csrf_protection' => false
+        ));
+
+        $this->productPool->getProvider($product)->defineAddBasketForm($product, $formBuilder, false);
+
+        $form = $formBuilder->getForm()->createView();
+
+        return $form;
     }
 
     /**

@@ -16,6 +16,14 @@
                 <source>product_reference</source>
                 <target>Référence</target>
             </trans-unit>
+            <trans-unit id="sonata.product.btn_add">
+                <source>sonata.product.btn_add</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="sonata.product.btn_see">
+                <source>sonata.product.btn_see</source>
+                <target>Voir</target>
+            </trans-unit>
             <trans-unit id="sonata.product.btn_add_to_basket">
                 <source>sonata.product.btn_add_to_basket</source>
                 <target>Ajouter au panier</target>

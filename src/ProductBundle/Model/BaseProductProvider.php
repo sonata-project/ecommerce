@@ -796,20 +796,26 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * This function return the form used in the product view page
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  \Symfony\Component\Form\FormBuilder        $formBuilder
-     * @param  array                                      $options
+     * @param  \Sonata\Component\Product\ProductInterface $product      A Sonata product instance
+     * @param  \Symfony\Component\Form\FormBuilder        $formBuilder  Symfony form builder
+     * @param  boolean                                    $showQuantity Specifies if quantity field will be displayed (default true)
+     * @param  array                                      $options      An options array
      * @return void
      */
-    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array())
+    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = array())
     {
         $basketElement = $this->createBasketElement($product);
 
         // create the product form
         $formBuilder
             ->setData($basketElement)
-            ->add('quantity', 'integer')
             ->add('productId', 'hidden');
+
+        if ($showQuantity) {
+            $formBuilder->add('quantity', 'integer');
+        } else {
+            $formBuilder->add('quantity', 'hidden', array('data' => 1));
+        }
     }
 
     /**
