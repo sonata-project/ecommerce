@@ -207,7 +207,7 @@ class BasketController extends Controller
      */
     public function paymentStepAction()
     {
-        $basket = clone $this->get('sonata.basket');
+        $basket = $this->get('sonata.basket');
 
         if ($basket->countBasketElements() == 0) {
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
@@ -258,7 +258,7 @@ class BasketController extends Controller
      */
     public function deliveryStepAction()
     {
-        $basket = clone $this->get('sonata.basket');
+        $basket = $this->get('sonata.basket');
 
         if ($basket->countBasketElements() == 0) {
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));

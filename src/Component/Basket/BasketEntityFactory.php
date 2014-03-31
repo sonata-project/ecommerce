@@ -29,10 +29,10 @@ class BasketEntityFactory extends BaseBasketFactory
      */
     public function load(CustomerInterface $customer)
     {
+        $sessionBasket = parent::load($customer);
+
         if ($customer->getId()) {
             $basket = $this->basketManager->loadBasketPerCustomer($customer);
-
-            $sessionBasket = parent::load($customer);
 
             if (!$basket) {
                 return $sessionBasket;
@@ -48,10 +48,13 @@ class BasketEntityFactory extends BaseBasketFactory
             // Clear session to avoid retaking elements from session afterwards
             $this->clearSession($customer);
 
+            // We need to ensure that both customer & customer id are set
+            $basket->setCustomer($customer);
+
             return $basket;
         }
 
-        return parent::load($customer);
+        return $sessionBasket;
     }
 
     /**
