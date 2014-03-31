@@ -60,11 +60,12 @@ interface ProductProviderInterface
     public function getBaseControllerName();
 
     /**
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param \Symfony\Component\Form\FormBuilder        $formBuilder
-     * @param array                                      $options
+     * @param \Sonata\Component\Product\ProductInterface $product      A Sonata product instance
+     * @param \Symfony\Component\Form\FormBuilder        $formBuilder  Symfony form builder
+     * @param boolean                                    $showQuantity Specifies if quantity field will be displayed (default true)
+     * @param array                                      $options      An options array
      */
-    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array());
+    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = array());
 
     /**
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
