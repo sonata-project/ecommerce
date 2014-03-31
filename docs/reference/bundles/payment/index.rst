@@ -88,7 +88,6 @@ Here's the full default configuration for SonataPaymentBundle:
             # Which payment methods are enabled?
             paypal:
                 name:                 Paypal
-                enabled:              ~ # Required
                 code:                 paypal
                 transformers:
                     basket:               sonata.payment.transformer.basket
@@ -111,7 +110,6 @@ Here's the full default configuration for SonataPaymentBundle:
                     openssl:              /opt/local/bin/openssl
             pass:
                 name:                 Pass
-                enabled:              ~ # Required
                 code:                 pass
                 transformers:
                     basket:               sonata.payment.transformer.basket
@@ -124,7 +122,6 @@ Here's the full default configuration for SonataPaymentBundle:
                     url_return_ok:        sonata_payment_confirmation
             check:
                 name:                 Check
-                enabled:              ~ # Required
                 code:                 check
                 transformers:
                     basket:               sonata.payment.transformer.basket
@@ -137,7 +134,6 @@ Here's the full default configuration for SonataPaymentBundle:
                     url_return_ok:        sonata_payment_confirmation
             scellius:
                 name:                 Scellius
-                enabled:              ~ # Required
                 code:                 scellius
                 generator:            sonata.payment.provider.scellius.none_generator
                 transformers:
@@ -175,7 +171,6 @@ Here's the full default configuration for SonataPaymentBundle:
                     templatefile:
             ogone:
                 name:                 Ogone
-                enabled:              ~ # Required
                 code:                 ogone
                 transformers:
                     basket:               sonata.payment.transformer.basket
@@ -194,6 +189,13 @@ Here's the full default configuration for SonataPaymentBundle:
         class:
             order:                Application\Sonata\OrderBundle\Entity\Order
             transaction:          Application\Sonata\PaymentBundle\Entity\Transaction
+
+        # Here you will enable the payment methods you wish to provide
+        # and add your custom ones
+        methods:
+            pass: ~     # This is a provided method, we don't need to specify its service id
+            bitcoin: application.acme.payment.bitcoin    # Custom payment method, we specify the service id
+
 
 If you want to use the ``DebugPayment`` method, you need to add its configuration in the ``dev`` config file.
 
@@ -215,3 +217,59 @@ If you want to use the ``DebugPayment`` method, you need to add its configuratio
                     url_callback:  sonata_payment_callback
                     url_return_ko: sonata_payment_error
                     url_return_ok: sonata_payment_confirmation
+
+
+Add a custom payment method
+===========================
+
+In order to add a custom payment methods, here are the steps to follow:
+
+1. Create your own payment method class:
+
+.. code-block:: php
+
+    <?php
+
+    namespace Application\AcmeBundle\Payment;
+
+    use Sonata\Component\Payment\BasePayment;
+
+    // ...
+
+    /**
+     * Class TakeAwayDelivery
+     */
+    class Bitcoin extends BasePayment
+    {
+        // ...
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getCode()
+        {
+            return 'bitcoin';
+        }
+
+    }
+
+2. Declare the service associated (don't forget the tag):
+
+.. code-block:: xml
+
+        <service id="application.acme.payment.bitcoin" class="Application\AcmeBundle\Payment\BitcoinPayment">
+            <tag name="sonata.delivery.method" />
+        </service>
+
+3. Add it to your configuration:
+
+.. code-block:: yaml
+
+    sonata_payment:
+        # ...
+
+        methods:
+            # ...
+            bitcoin: application.acme.payment.bitcoin
+
+4. That's it!
