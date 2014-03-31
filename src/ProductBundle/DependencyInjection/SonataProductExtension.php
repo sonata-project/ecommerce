@@ -213,7 +213,7 @@ class SonataProductExtension extends Extension
                 'persist',
              ),
              'mappedBy'     => NULL,
-             'inversedBy'   => 'productCollection',
+             'inversedBy'   => NULL,
              'joinColumns'  => array(
                  array(
                      'name' => 'collection_id',
