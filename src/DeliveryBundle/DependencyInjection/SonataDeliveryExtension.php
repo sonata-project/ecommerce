@@ -46,38 +46,59 @@ class SonataDeliveryExtension extends Extension
 
         $container->setAlias('sonata.delivery.selector', $config['selector']);
 
-        $this->configureDelivery($container, $config['services']);
+        $this->configureDelivery($container, $config);
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $services
+     * @param  ContainerBuilder $container
+     * @param  array            $config
      * @return void
      */
-    public function configureDelivery(ContainerBuilder $container, array $services)
+    public function configureDelivery(ContainerBuilder $container, array $config)
     {
         $pool = $container->getDefinition('sonata.delivery.pool');
 
-        $implemented = array(
+        $internal = array(
             'free_address_required'     => 'sonata.delivery.method.free_address_required',
             'free_address_not_required' => 'sonata.delivery.method.free_address_not_required',
         );
 
-        foreach ($implemented as $key => $id) {
-            if (!isset($services[$key]) || $services[$key]['enabled'] == false) {
-                $container->removeDefinition($id);
-                continue;
+        $configured = array();
+
+        foreach ($config['services'] as $id => $settings) {
+            if (array_key_exists($id, $internal)) {
+                $id = $internal[$id];
+
+                $definition = $container->getDefinition($id);
+
+                $definition->addMethodCall('setName', array($settings['name']));
+                $definition->addMethodCall('setCode', array($settings['code']));
+                $definition->addMethodCall('setPriority', array($settings['priority']));
+
+                $configured[$settings['code']] = $id;
+            }
+        }
+
+        foreach ($config['methods'] as $code => $id) {
+            if (array_key_exists($code, $configured)) {
+                // Internal service
+                $id = $configured[$code];
             }
 
-            $definition = $container->getDefinition($id);
-
-            $definition->addMethodCall('setName', array($services[$key]['name']));
-            $definition->addMethodCall('setCode', array($services[$key]['code']));
-            $definition->addMethodCall('setEnabled', array($services[$key]['enabled']));
-            $definition->addMethodCall('setPriority', array($services[$key]['priority']));
+            if ($container->hasDefinition($id)) {
+                $definition = $container->getDefinition($id);
+                $definition->addMethodCall('setEnabled', array(true));
+            }
 
             // add the delivery method in the method pool
             $pool->addMethodCall('addMethod', array(new Reference($id)));
+        }
+
+        // Remove unconfigured services
+        foreach ($internal as $code => $id) {
+            if (false === array_search($id, $configured)) {
+                $container->removeDefinition($id);
+            }
         }
     }
 }

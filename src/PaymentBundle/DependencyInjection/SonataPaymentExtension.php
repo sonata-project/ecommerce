@@ -50,7 +50,7 @@ class SonataPaymentExtension extends Extension
 
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);
-        $this->configurePayment($container, $config['services']);
+        $this->configurePayment($container, $config);
         $this->configureSelector($container, $config['selector']);
         $this->configureTransformer($container, $config['transformers']);
 
@@ -69,11 +69,11 @@ class SonataPaymentExtension extends Extension
 
     /**
      * @throws \RuntimeException
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $services
+     * @param  ContainerBuilder $container
+     * @param  array            $config
      * @return void
      */
-    public function configurePayment(ContainerBuilder $container, array $services)
+    public function configurePayment(ContainerBuilder $container, array $config)
     {
         // create the payment method pool
         $pool = $container->getDefinition('sonata.payment.pool');
@@ -87,12 +87,13 @@ class SonataPaymentExtension extends Extension
             'paypal'   => 'sonata.payment.method.paypal',
         );
 
+        $configured = array();
+
         // define the payment method
-        foreach ($services as $id => $settings) {
+        foreach ($config['services'] as $id => $settings) {
             if (array_key_exists($id, $internal)) {
                 $id = $internal[$id];
 
-                $enabled  = isset($settings['enabled']) ? $settings['enabled'] : true;
                 $name     = isset($settings['name']) ? $settings['name'] : 'n/a';
                 $options  = isset($settings['options']) ? $settings['options'] : array();
 
@@ -102,53 +103,60 @@ class SonataPaymentExtension extends Extension
                     throw new \RuntimeException('Please provide a code for the payment handler');
                 }
 
-                if (!$enabled) {
-                    $container->removeDefinition($id);
-                    continue;
-                }
-
                 $definition = $container->getDefinition($id);
 
                 $definition->addMethodCall('setName', array($name));
-                $definition->addMethodCall('setCode', array($code));
-                $definition->addMethodCall('setEnabled', array($enabled));
                 $definition->addMethodCall('setOptions', array($options));
+                $definition->addMethodCall('setCode', array($code));
 
                 foreach ((array) $settings['transformers'] as $name => $serviceId) {
                     $definition->addMethodCall('addTransformer', array($name, new Reference($serviceId)));
                 }
+
+                $configured[$code] = $id;
             }
-            // add the delivery method in the method pool
+        }
+
+        foreach ($config['methods'] as $code => $id) {
+            if (array_key_exists($code, $configured)) {
+                // Internal service
+                $id = $configured[$code];
+            }
+
+            if ($container->hasDefinition($id)) {
+                $definition = $container->getDefinition($id);
+                $definition->addMethodCall('setEnabled', array(true));
+            }
+
             $pool->addMethodCall('addMethod', array(new Reference($id)));
+        }
+
+        if (isset($config['services']['debug'])) {
+            $container->getDefinition('sonata.payment.method.debug')
+                ->replaceArgument(1, new Reference($config['services']['debug']['browser']));
+        }
+
+        if (isset($config['services']['pass'])) {
+            $container->getDefinition('sonata.payment.method.pass')
+                ->replaceArgument(1, new Reference($config['services']['pass']['browser']));
+        }
+
+        if (isset($config['services']['check'])) {
+            $container->getDefinition('sonata.payment.method.check')
+                ->replaceArgument(2, new Reference($config['services']['check']['browser']));
+        }
+
+        if (isset($config['services']['scellius'])) {
+            $container->getDefinition('sonata.payment.method.scellius')
+                ->replaceArgument(3, new Reference($config['services']['scellius']['generator']));
         }
 
         // Remove unconfigured services
         foreach ($internal as $code => $id) {
-            if (!array_key_exists($code, $services)) {
+            if (false === array_search($id, $configured)) {
                 $container->removeDefinition($id);
             }
         }
-
-        if (isset($services['debug'])) {
-            $container->getDefinition('sonata.payment.method.debug')
-                ->replaceArgument(1, new Reference($services['debug']['browser']));
-        }
-
-        if (isset($services['pass'])) {
-            $container->getDefinition('sonata.payment.method.pass')
-                ->replaceArgument(1, new Reference($services['pass']['browser']));
-        }
-
-        if (isset($services['check'])) {
-            $container->getDefinition('sonata.payment.method.check')
-                ->replaceArgument(2, new Reference($services['check']['browser']));
-        }
-
-        if (isset($services['scellius'])) {
-            $container->getDefinition('sonata.payment.method.scellius')
-                ->replaceArgument(3, new Reference($services['scellius']['generator']));
-        }
-
     }
 
     /**
