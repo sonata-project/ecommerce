@@ -33,11 +33,17 @@ file that was distributed with this source code.
                     </div>
                     <ul class="list-group">
                     {% for address in form.addresses %}
+                        {% set deliverable = sonata_address_deliverable(addresses.get(address.vars.value), basket) %}
+
                         <li class="list-group-item">
                             <div class="radio">
-                                <label for="{{ address.vars.id }}">
-                                    {{ form_widget(address, {'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys))}) }}
-                                    {{ sonata_address_render(address.vars.label, true, true) }}
+                                <label for="{{ address.vars.id }}"{% if false == deliverable %} class="disabled"{% endif %}>
+                                    {{ form_widget(address, {
+                                        'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys)),
+                                        'disabled': false == deliverable
+                                    }) }}
+
+                                    {{ sonata_address_render(address.vars.label, true, true, 'delivery') }}
                                 </label>
                             </div>
                         </li>

@@ -26,13 +26,14 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
     public function testRenderAddress()
     {
         $environment = $this->getMockBuilder('Twig_Environment')->disableOriginalConstructor()->getMock();
+        $deliverySelector = $this->getMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $environment->expects($this->exactly(4))->method('render');
 
         $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $address->expects($this->exactly(3))->method('getFullAddressHtml');
 
-        $extension = new AddressExtension();
+        $extension = new AddressExtension($deliverySelector);
 
         $extension->renderAddress($environment, $address, false);
         $address->expects($this->exactly(2))->method('getName');
@@ -59,10 +60,11 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
     public function testRenderAddressInvalidParameter()
     {
         $environment = $this->getMockBuilder('Twig_Environment')->disableOriginalConstructor()->getMock();
+        $deliverySelector = $this->getMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $address = array();
 
-        $extension = new AddressExtension();
+        $extension = new AddressExtension($deliverySelector);
         $extension->renderAddress($environment, $address);
     }
 
@@ -73,6 +75,7 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
     public function testRenderAddressMissingId()
     {
         $environment = $this->getMockBuilder('Twig_Environment')->disableOriginalConstructor()->getMock();
+        $deliverySelector = $this->getMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $address = array(
             "firstname"    => "",
@@ -83,9 +86,31 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
             "country_code" => ""
         );
 
-        $extension = new AddressExtension();
+        $extension = new AddressExtension($deliverySelector);
         $extension->renderAddress($environment, $address, true, true);
     }
 
+    public function testIsAddressDeliverable()
+    {
+        $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
 
+        // Test false
+        $deliverySelector = $this->getMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
+        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue(array()));
+
+        $extension = new AddressExtension($deliverySelector);
+        $deliverable = $extension->isAddressDeliverable($address, $basket);
+
+        $this->assertFalse($deliverable);
+
+        // Test true
+        $deliverySelector = $this->getMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
+        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue(array('paypal')));
+
+        $extension = new AddressExtension($deliverySelector);
+        $deliverable = $extension->isAddressDeliverable($address, $basket);
+
+        $this->assertTrue($deliverable);
+    }
 }
