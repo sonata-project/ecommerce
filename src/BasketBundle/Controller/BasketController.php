@@ -328,7 +328,7 @@ class BasketController extends Controller
         $addresses = $customer->getAddressesByType(AddressInterface::TYPE_DELIVERY);
 
         // Show address creation / selection form
-        $form = $this->createForm('sonata_basket_address', null, array('addresses' => $addresses->toArray()));
+        $form = $this->createForm('sonata_basket_address', null, array('addresses' => $addresses));
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
@@ -364,7 +364,8 @@ class BasketController extends Controller
 
         return $this->render($template, array(
             'form'      => $form->createView(),
-            'addresses' => $addresses
+            'addresses' => $addresses,
+            'basket'    => $basket,
         ));
     }
 

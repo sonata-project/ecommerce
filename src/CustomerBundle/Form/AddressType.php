@@ -11,7 +11,11 @@
 
 namespace Sonata\CustomerBundle\Form;
 
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -39,15 +43,61 @@ class AddressType extends AbstractType
     /**
      * Constructor
      *
-     * @param string $class  A class to apply getter
-     * @param string $getter A getter method name
-     * @param string $name   A form type name
+     * @param string          $class  A class to apply getter
+     * @param string          $getter A getter method name
+     * @param string          $name   A form type name
+     * @param BasketInterface $basket Sonata e-commerce basket instance
      */
-    public function __construct($class, $getter, $name)
+    public function __construct($class, $getter, $name, BasketInterface $basket)
     {
         $this->class  = $class;
         $this->getter = $getter;
         $this->name   = $name;
+        $this->basket = $basket;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $address = $builder->getData();
+
+        $countries = array();
+
+        if ('delivery' == $options['context'] && $address) {
+            $countries = $this->getBasketDeliveryCountries();
+        }
+
+        if (count($countries) == 0) {
+            $countries = Intl::getRegionBundle()->getCountryNames();
+        }
+
+        $builder->add('countryCode', 'choice', array('choices' => $countries));
+    }
+
+    /**
+     * Returns basket elements delivery countries
+     *
+     * @return array
+     */
+    protected function getBasketDeliveryCountries()
+    {
+        $countries = array();
+
+        foreach ($this->basket->getBasketElements() as $basketElement) {
+            $product = $basketElement->getProduct();
+
+            foreach ($product->getDeliveries() as $delivery) {
+                $code = $delivery->getCountryCode();
+
+                if (!isset($countries[$code])) {
+                    $countries[$code] = Intl::getRegionBundle()->getCountryName($code);
+                }
+            }
+        }
+
+        return $countries;
     }
 
     /**
@@ -72,7 +122,8 @@ class AddressType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'types' => call_user_func(array($this->class, $this->getter))
+            'context' => 'default',
+            'types'   => call_user_func(array($this->class, $this->getter))
         ));
     }
 }

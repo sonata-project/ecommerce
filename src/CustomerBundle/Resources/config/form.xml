@@ -9,6 +9,7 @@
             <argument>%sonata.customer.address.class%</argument>
             <argument>getTypesList</argument>
             <argument>sonata_customer_address</argument>
+            <argument type="service" id="sonata.basket" />
 
             <tag name="form.type" alias="sonata_customer_address" />
         </service>

@@ -151,8 +151,11 @@ class CustomerController extends Controller
             $address = $this->getAddressManager()->findOneBy(array('id' => $id));
             $this->checkAddress($address);
 
-            $form = $this->createForm('sonata_customer_address', $address);
+            $form = $this->createForm('sonata_customer_address', $address, array(
+                'context' => $this->getRequest()->query->get('context')
+            ));
         }
+
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {

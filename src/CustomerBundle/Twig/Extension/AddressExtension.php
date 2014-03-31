@@ -11,7 +11,9 @@
 
 namespace Sonata\CustomerBundle\Twig\Extension;
 
+use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
 use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 
@@ -26,6 +28,21 @@ use Sonata\CustomerBundle\Entity\BaseAddress;
 class AddressExtension extends \Twig_Extension
 {
     /**
+     * @var ServiceDeliverySelectorInterface
+     */
+    protected $deliverySelector;
+
+    /**
+     * Constructor
+     *
+     * @param ServiceDeliverySelectorInterface $deliverySelector
+     */
+    public function __construct(ServiceDeliverySelectorInterface $deliverySelector)
+    {
+        $this->deliverySelector = $deliverySelector;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getFunctions()
@@ -38,7 +55,8 @@ class AddressExtension extends \Twig_Extension
                     'needs_environment' => true,
                     'is_safe'           => array('html')
                 )
-            )
+            ),
+            new \Twig_SimpleFunction('sonata_address_deliverable', array($this, 'isAddressDeliverable')),
         );
     }
 
@@ -53,12 +71,17 @@ class AddressExtension extends \Twig_Extension
     /**
      * Gets the HTML of an address
      *
-     * @param \Twig_Environment $environment
-     * @param mixed             $address Instance of AddressInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionally name, address2, address3)
-     * @param bool              $showName
-     * @param bool              $showEdit
+     * @param \Twig_Environment $environment A Twig environment
+     * @param mixed             $address     An instance of AddressInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionally name, address2, address3)
+     * @param bool              $showName    Display address name?
+     * @param bool              $showEdit    Display edit button?
+     * @param string            $context     A context for edit link
+     *
+     * @throws InvalidParameterException
+     *
+     * @return string
      */
-    public function renderAddress(\Twig_Environment $environment, $address, $showName = true, $showEdit = false)
+    public function renderAddress(\Twig_Environment $environment, $address, $showName = true, $showEdit = false, $context = null)
     {
         $requiredAddressKeys = array("firstname", "lastname", "address1", "postcode", "city", "country_code");
 
@@ -92,8 +115,24 @@ class AddressExtension extends \Twig_Extension
         return $environment->render('SonataCustomerBundle:Addresses:_address.html.twig', array(
                 'address'  => $addressArray,
                 'showName' => $showName,
-                'showEdit' => $showEdit
+                'showEdit' => $showEdit,
+                'context'  => $context
             )
         );
+    }
+
+    /**
+     * Returns if address can deliver the given basket
+     *
+     * @param AddressInterface $address A Sonata e-commerce address instance
+     * @param BasketInterface  $basket  A Sonata e-commerce basket instance
+     *
+     * @return boolean
+     */
+    public function isAddressDeliverable(AddressInterface $address, BasketInterface $basket)
+    {
+        $methods = $this->deliverySelector->getAvailableMethods($basket, $address);
+
+        return count($methods) > 0 ? true : false;
     }
 }

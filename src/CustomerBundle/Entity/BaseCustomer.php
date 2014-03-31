@@ -391,7 +391,7 @@ abstract class BaseCustomer implements CustomerInterface
 
         foreach ($this->getAddresses() as $address) {
             if ($type == $address->getType()) {
-                $addresses->add($address);
+                $addresses->set($address->getId(), $address);
             }
         }
 
