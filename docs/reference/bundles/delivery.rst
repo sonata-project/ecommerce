@@ -11,8 +11,9 @@ Presentation
 The ``SonataDeliveryBundle`` allows you to handle the various `Delivery` methods for your product. A basic free delivery method is offered to you, but you can add your own as you see fit.
 
 There, you're able to define several services, such as the `Delivery` pool (regrouping all services tagged ``sonata.delivery.method``) and the `Delivery` methods:
-- The delivery pool regroups the various delivery methods.
-- The delivery selector selects the appropriate delivery method(s) for a given product.
+
+* The delivery pool regroups the various delivery methods.
+* The delivery selector selects the appropriate delivery method(s) for a given product.
 
 Configuration
 =============
