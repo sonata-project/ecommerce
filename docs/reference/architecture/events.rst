@@ -67,16 +67,16 @@ Transformers
     final class TransformerEvents
     {
         // Basket to order transformation
-        const PRE_BASKET_TO_ORDER_TRANSFORM   = "sonata.ecommerce.pre_bASKET_TO_ORDER_transform"; // BasketTransformEvent
-        const POST_BASKET_TO_ORDER_TRANSFORM  = "sonata.ecommerce.pre_bASKET_TO_ORDER_transform"; // OrderTransformEvent
+        const PRE_BASKET_TO_ORDER_TRANSFORM   = "sonata.ecommerce.pre_basket_to_order_transform"; // BasketTransformEvent
+        const POST_BASKET_TO_ORDER_TRANSFORM  = "sonata.ecommerce.pre_basket_to_order_transform"; // OrderTransformEvent
 
         // Order to basket transformation
-        const PRE_ORDER_TO_BASKET_TRANSFORM   = "sonata.ecommerce.pre_oRDER_TO_BASKET_transform"; // OrderTransformEvent
-        const POST_ORDER_TO_BASKET_TRANSFORM  = "sonata.ecommerce.pre_oRDER_TO_BASKET_transform"; // BasketTransformEvent
+        const PRE_ORDER_TO_BASKET_TRANSFORM   = "sonata.ecommerce.pre_order_to_basket_transform"; // OrderTransformEvent
+        const POST_ORDER_TO_BASKET_TRANSFORM  = "sonata.ecommerce.pre_order_to_basket_transform"; // BasketTransformEvent
 
         // Order to invoice transformation
-        const PRE_ORDER_TO_INVOICE_TRANSFORM  = "sonata.ecommerce.pre_oRDER_TO_INVOICE_transform"; // OrderTransformEvent
-        const POST_ORDER_TO_INVOICE_TRANSFORM = "sonata.ecommerce.pre_oRDER_TO_INVOICE_transform"; // InvoiceTransformEvent
+        const PRE_ORDER_TO_INVOICE_TRANSFORM  = "sonata.ecommerce.pre_order_to_invoice_transform"; // OrderTransformEvent
+        const POST_ORDER_TO_INVOICE_TRANSFORM = "sonata.ecommerce.pre_order_to_invoice_transform"; // InvoiceTransformEvent
     }
 
 Order
