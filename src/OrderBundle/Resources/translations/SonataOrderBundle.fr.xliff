@@ -112,6 +112,18 @@
                 <source>filter.label_customer_lastname</source>
                 <target>Nom</target>
             </trans-unit>
+            <trans-unit id="filter.label_status">
+                <source>filter.label_status</source>
+                <target>Statut</target>
+            </trans-unit>
+            <trans-unit id="filter.label_delivery_status">
+                <source>filter.label_delivery_status</source>
+                <target>Status livraison</target>
+            </trans-unit>
+            <trans-unit id="filter.label_payment_status">
+                <source>filter.label_payment_status</source>
+                <target>Statut paiement</target>
+            </trans-unit>
             <!-- End - Filters translations -->
 
             <!-- Begin - List translations -->

@@ -110,6 +110,10 @@
                 <source>list.label_name</source>
                 <target>Nom</target>
             </trans-unit>
+            <trans-unit id="list.label_sku">
+                <source>list.label_sku</source>
+                <target>SKU</target>
+            </trans-unit>
             <trans-unit id="list.label_price">
                 <source>list.label_price</source>
                 <target>Prix</target>

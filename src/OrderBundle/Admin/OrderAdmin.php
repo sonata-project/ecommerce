@@ -130,22 +130,18 @@ class OrderAdmin extends Admin
         $currency = $this->currencyDetector->getCurrency()->getLabel();
 
         $list
-            ->addIdentifier('id')
             ->addIdentifier('reference');
 
         if (!$list->getAdmin()->isChild()) {
             $list->addIdentifier('customer');
         }
 
-        $list->add('paymentMethod')
-            ->add('deliveryMethod')
-            ->add('locale')
+        $list
             ->add('status', 'string', array('template' => 'SonataOrderBundle:OrderAdmin:list_status.html.twig'))
             ->add('deliveryStatus', 'string', array('template' => 'SonataOrderBundle:OrderAdmin:list_delivery_status.html.twig'))
             ->add('paymentStatus', 'string', array('template' => 'SonataOrderBundle:OrderAdmin:list_payment_status.html.twig'))
             ->add('validatedAt')
             ->add('totalInc', 'currency', array('currency' => $currency))
-            ->add('totalExcl', 'currency', array('currency' => $currency))
         ;
     }
 
@@ -163,7 +159,9 @@ class OrderAdmin extends Admin
         }
 
         $filter
-            ->add('locale', null, array(), 'country')
+            ->add('status', null, array(), 'sonata_order_status', array('translation_domain' => $this->translationDomain))
+            ->add('deliveryStatus', null, array(), 'sonata_product_delivery_status', array('translation_domain' => "SonataDeliveryBundle"))
+            ->add('paymentStatus', null, array(), 'sonata_payment_transaction_status', array('translation_domain' => "SonataPaymentBundle"))
         ;
     }
 

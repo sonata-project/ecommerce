@@ -6,7 +6,7 @@
 
     <services>
         <service id="sonata.payment.form.transaction_status" class="Sonata\CoreBundle\Form\Type\StatusType">
-             <argument>%sonata.product.delivery.class%</argument>
+             <argument>%sonata.payment.transaction.class%</argument>
              <argument>getStatusList</argument>
              <argument>sonata_payment_transaction_status</argument>
 

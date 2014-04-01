@@ -12,6 +12,7 @@
 namespace Sonata\CustomerBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Application\Sonata\CustomerBundle\Entity\Address;
@@ -80,4 +81,23 @@ class AddressAdmin extends Admin
             ->add('typeCode', 'trans', array('catalogue' => $this->translationDomain))
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureDatagridFilters(DatagridMapper $filter)
+    {
+        $filter
+            ->add('current')
+            ->add('typeCode')
+        ;
+
+        if (!$this->isChild()) {
+            $filter
+                ->add('customer')
+            ;
+        }
+    }
+
+
 }
