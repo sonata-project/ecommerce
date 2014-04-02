@@ -55,6 +55,24 @@ class Configuration implements ConfigurationInterface
     private function addPaymentSection(ArrayNodeDefinition $node)
     {
         $node
+            ->validate()
+            ->ifTrue(function ($v) {
+                    foreach ($v['methods'] as $methodCode => $service) {
+                        if (null === $service || "" === $service) {
+                            foreach ($v['services'] as $serviceConf) {
+                                if ($methodCode === $serviceConf['code']) {
+                                    break 2;
+                                }
+                            }
+
+                            return true;
+                        }
+                    }
+
+                    return false;
+                })
+            ->thenInvalid("Custom payment methods require a service id. Provided payment methods need to be configured with their method code as key.")
+            ->end()
             ->children()
                 ->arrayNode('services')
                     ->children()

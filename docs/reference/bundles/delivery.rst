@@ -48,7 +48,7 @@ Default configuration:
         # Here you will enable the delivery methods you wish to provide
         # and add your custom ones
         methods:
-            free: ~     # This is a provided method, we don't need to specify its service id
+            free_address_required: ~     # This is a provided method, we don't need to specify its service id
             take_away: application.sonata.delivery.take_away    # Custom delivery method, we specify the service id
 
 
