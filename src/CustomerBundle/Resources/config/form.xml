@@ -13,6 +13,15 @@
 
             <tag name="form.type" alias="sonata_customer_address" />
         </service>
+
+        <service id="sonata.customer.form.address_types_type" class="Sonata\CoreBundle\Form\Type\StatusType">
+            <argument>%sonata.customer.address.class%</argument>
+            <argument>getTypesList</argument>
+            <argument>sonata_customer_address_types</argument>
+
+            <tag name="form.type" alias="sonata_customer_address_types" />
+        </service>
+
     </services>
 
 </container>
