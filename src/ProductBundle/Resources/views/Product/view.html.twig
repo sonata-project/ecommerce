@@ -45,7 +45,7 @@ file that was distributed with this source code.
     </div>
     <div class="row" itemscope itemtype="http://schema.org/Product">
         {% block product_left %}
-            <div class="col-sm-8">
+            <div class="col-md-8">
                 {% block product_carousel %}
                     <div>
                         {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
@@ -58,7 +58,7 @@ file that was distributed with this source code.
             </div>
         {% endblock %}
         {% block product_right %}
-            <div class="col-sm-4">
+            <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 itemprop="name" class="panel-title">{% block product_title %}{{ product.name }}{% endblock %}</h3>
