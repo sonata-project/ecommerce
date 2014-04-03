@@ -11,8 +11,11 @@
 
 namespace Sonata\BasketBundle\Form;
 
+use Sonata\Component\Basket\BasketInterface;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -22,14 +25,26 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class AddressType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected $addressClass;
 
     /**
-     * @param string $addressClass
+     * @var BasketInterface
      */
-    public function __construct($addressClass)
+    protected $basket;
+
+    /**
+     * Constructor
+     *
+     * @param string          $addressClass An address entity class name
+     * @param BasketInterface $basket       Sonata current basket
+     */
+    public function __construct($addressClass, BasketInterface $basket)
     {
         $this->addressClass = $addressClass;
+        $this->basket       = $basket;
     }
 
     /**
@@ -86,9 +101,42 @@ class AddressType extends AbstractType
             ->add('address3')
             ->add('postcode', null, array('required' => !count($addresses)))
             ->add('city', null, array('required' => !count($addresses)))
-            ->add('countryCode', 'country', array('required' => !count($addresses)))
             ->add('phone')
         ;
+
+        $countries = $this->getBasketDeliveryCountries();
+
+        $countryOptions = array('required' => !count($addresses));
+
+        if (count($countries) > 0) {
+            $countryOptions['choices'] = $countries;
+        }
+
+        $builder->add('countryCode', 'country', $countryOptions);
+    }
+
+    /**
+     * Returns basket elements delivery countries
+     *
+     * @return array
+     */
+    protected function getBasketDeliveryCountries()
+    {
+        $countries = array();
+
+        foreach ($this->basket->getBasketElements() as $basketElement) {
+            $product = $basketElement->getProduct();
+
+            foreach ($product->getDeliveries() as $delivery) {
+                $code = $delivery->getCountryCode();
+
+                if (!isset($countries[$code])) {
+                    $countries[$code] = Intl::getRegionBundle()->getCountryName($code);
+                }
+            }
+        }
+
+        return $countries;
     }
 
     /**

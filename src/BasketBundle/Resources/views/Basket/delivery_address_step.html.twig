@@ -42,6 +42,12 @@ file that was distributed with this source code.
 
                         <li class="list-group-item">
                             <div class="radio">
+                                {% if false == deliverable %}
+                                    <span class="label label-danger">
+                                        {% trans from 'SonataBasketBundle' %}sonata.basket.message_country_not_delivery_zone{% endtrans %}
+                                    </span>
+                                {% endif %}
+
                                 <label for="{{ address.vars.id }}"{% if false == deliverable %} class="disabled"{% endif %}>
                                     {{ form_widget(address, {
                                         'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys)),
@@ -56,11 +62,10 @@ file that was distributed with this source code.
                     </ul>
 
                     <div class="panel-body">
-                        {% if has_deliverable %}
-                            {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn btn-primary'}}) }}
-                        {% else %}
-                            {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn btn-primary', 'disabled': true}}) }}
-                        {% endif %}
+                        {{ form_widget(form.useSelected, {
+                            'attr': {'class': 'pull-right btn btn-primary'},
+                            'disabled': false == has_deliverable
+                        }) }}
                     </div>
                 </div>
             </div>

@@ -63,17 +63,18 @@ class AddressType extends AbstractType
     {
         $address = $builder->getData();
 
+        $countryOptions = array();
         $countries = array();
 
         if ('delivery' == $options['context'] && $address) {
             $countries = $this->getBasketDeliveryCountries();
         }
 
-        if (count($countries) == 0) {
-            $countries = Intl::getRegionBundle()->getCountryNames();
+        if (count($countries) > 0) {
+            $countryOptions['choices'] = $countries;
         }
 
-        $builder->add('countryCode', 'choice', array('choices' => $countries));
+        $builder->add('countryCode', 'country', $countryOptions);
     }
 
     /**

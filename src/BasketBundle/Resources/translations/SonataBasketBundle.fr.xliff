@@ -70,6 +70,10 @@
                 <source>sonata.basket.message_no_billing_addresses_available</source>
                 <target>Aucune adresse de facturation n'est disponible</target>
             </trans-unit>
+            <trans-unit id="sonata.basket.message_country_not_delivery_zone">
+                <source>sonata.basket.message_country_not_delivery_zone</source>
+                <target>Le pays n'est pas dans une zone livrable</target>
+            </trans-unit>
             <trans-unit id="sonata.basket.order_terms_and_conditions_title">
                 <source>sonata.basket.order_terms_and_conditions_title</source>
                 <target>Conditions générales de vente</target>
