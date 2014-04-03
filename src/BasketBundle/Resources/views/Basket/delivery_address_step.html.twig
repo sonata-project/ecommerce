@@ -32,8 +32,13 @@ file that was distributed with this source code.
                         </div>
                     </div>
                     <ul class="list-group">
+                    {% set has_deliverable = false %}
+
                     {% for address in form.addresses %}
                         {% set deliverable = sonata_address_deliverable(addresses.get(address.vars.value), basket) %}
+                        {% if deliverable %}
+                            {% set has_deliverable = true %}
+                        {% endif %}
 
                         <li class="list-group-item">
                             <div class="radio">
@@ -51,7 +56,11 @@ file that was distributed with this source code.
                     </ul>
 
                     <div class="panel-body">
-                        {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn btn-primary'}}) }}
+                        {% if has_deliverable %}
+                            {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn btn-primary'}}) }}
+                        {% else %}
+                            {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn btn-primary', 'disabled': true}}) }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
