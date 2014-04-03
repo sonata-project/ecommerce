@@ -13,6 +13,7 @@
             <tag name="form.type" alias="sonata_basket_address" />
 
             <argument>%sonata.customer.address.class%</argument>
+            <argument type="service" id="sonata.basket" />
         </service>
 
         <service id="sonata.basket.form.type.shipping" class="Sonata\BasketBundle\Form\ShippingType">
