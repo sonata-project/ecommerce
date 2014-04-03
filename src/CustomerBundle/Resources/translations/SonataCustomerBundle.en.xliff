@@ -345,8 +345,8 @@
                 <source>filter.label_current</source>
                 <target>Current?</target>
             </trans-unit>
-            <trans-unit id="filter.label_type_code">
-                <source>filter.label_type_code</source>
+            <trans-unit id="filter.label_type">
+                <source>filter.label_type</source>
                 <target>Type</target>
             </trans-unit>
             <trans-unit id="filter.label_customer">

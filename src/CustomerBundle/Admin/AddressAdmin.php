@@ -15,7 +15,6 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Application\Sonata\CustomerBundle\Entity\Address;
 
 class AddressAdmin extends Admin
 {
@@ -37,7 +36,7 @@ class AddressAdmin extends Admin
     {
         $formMapper
             ->with($this->trans('address.form.group_advanced_label', array(), 'SonataCustomerBundle'))
-                ->add('type', 'choice', array('choices' => Address::getTypesList(), 'translation_domain' => 'SonataCustomerBundle'))
+                ->add('type', 'sonata_customer_address_types', array('translation_domain' => 'SonataCustomerBundle'))
                 ->add('current', null, array('required' => false))
                 ->add('name')
             ->end();
@@ -89,7 +88,7 @@ class AddressAdmin extends Admin
     {
         $filter
             ->add('current')
-            ->add('typeCode')
+            ->add('type', null, array(), 'sonata_customer_address_types', array('translation_domain' => 'SonataCustomerBundle'))
         ;
 
         if (!$this->isChild()) {
