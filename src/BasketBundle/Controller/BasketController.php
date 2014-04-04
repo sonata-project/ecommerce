@@ -37,7 +37,7 @@ class BasketController extends Controller
      */
     public function indexAction($form = null)
     {
-        $form = $form ?: $this->createForm('sonata_basket_basket', clone $this->get('sonata.basket'), array(
+        $form = $form ?: $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array(
             'validation_groups' => array('elements')
         ));
 
@@ -68,7 +68,7 @@ class BasketController extends Controller
      */
     public function updateAction()
     {
-        $form = $this->createForm('sonata_basket_basket', clone $this->get('sonata.basket'), array('validation_groups' => array('elements')));
+        $form = $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array('validation_groups' => array('elements')));
         $form->bind($this->get('request'));
 
         if ($form->isValid()) {
