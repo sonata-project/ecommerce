@@ -135,6 +135,8 @@ class BasketController extends Controller
                 $basketElement = $provider->basketAddProduct($basket, $product, $basketElement);
             }
 
+            $this->get('sonata.basket.factory')->save($basket);
+
             if ($request->isXmlHttpRequest() && $provider->getOption('product_add_modal')) {
                 return $this->render('SonataBasketBundle:Basket:add_product_popin.html.twig', array(
                     'basketElement' => $basketElement,
