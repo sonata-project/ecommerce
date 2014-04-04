@@ -23,7 +23,6 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $customer         = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $basket           = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $basketFactory    = $this->getMock('Sonata\Component\Basket\BasketFactoryInterface');
-        $basketFactory->expects($this->once())->method('save');
         $basketFactory->expects($this->once())->method('load')->will($this->returnValue($basket));
 
         $customerSelector = $this->getMock('Sonata\Component\Customer\CustomerSelectorInterface');
