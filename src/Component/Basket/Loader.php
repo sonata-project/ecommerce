@@ -55,8 +55,6 @@ class Loader
                 // something went wrong while loading the basket
                 throw $e;
             }
-
-            $this->basketFactory->save($this->basket);
         }
 
         return $this->basket;
