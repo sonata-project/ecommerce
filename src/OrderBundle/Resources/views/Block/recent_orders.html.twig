@@ -11,48 +11,46 @@ file that was distributed with this source code.
 {% extends sonata_block.templates.block_base %}
 
 {% block block %}
-    {% sonata_template_box 'This is the recent orders list block.' %}
 
     <div class="sonata-order-block-recent-order panel panel-default">
         {% if settings.title %}
             <div class="panel-heading">
-                <div class="panel-title">
-                    <h4 class="sonata-order-block-recent-order">{{ settings.title }}</h4>
-                </div>
+                <h3 class="panel-title sonata-order-block-recent-order"><i class="fa fa-barcode"></i> {{ settings.title }}</h3>
             </div>
         {% endif %}
 
 
-        {% if orders|length > 0 %}
-            <table class="sonata-order-block-order-container table table-condensed">
-                {% for order in orders %}
-                    <tr>
-                        {% if context.getSetting('mode') == 'admin' %}
-                            <td><a href="{{ url('admin_sonata_order_order_edit', { 'id': order.id }) }}">{{ order.reference }}</a></td>
-                        {% else %}
-                            <td><a href="{{ url('sonata_order_view', { 'reference': order.reference }) }}">{{ order.reference }}</a></td>
-                        {% endif %}
-                        <td class="number">{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
-                        <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
-                        <td>{{ order.createdAt|format_datetime(null, order.locale) }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            <div class="panel-body">
+        <div class="panel-body">
+
+            {% sonata_template_box 'This is the recent orders list block.' %}
+            {% if orders|length > 0 %}
+                <table class="sonata-order-block-order-container table table-condensed">
+                    {% for order in orders %}
+                        <tr>
+                            {% if context.getSetting('mode') == 'admin' %}
+                                <td><a href="{{ url('admin_sonata_order_order_edit', { 'id': order.id }) }}">{{ order.reference }}</a></td>
+                            {% else %}
+                                <td><a href="{{ url('sonata_order_view', { 'reference': order.reference }) }}">{{ order.reference }}</a></td>
+                            {% endif %}
+                            <td class="number">{{ order.totalInc|number_format_currency(order.currency.label) }}</td>
+                            <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
+                            <td>{{ order.createdAt|format_datetime(null, order.locale) }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
                 {% if context.getSetting('mode') == 'admin' %}
-                    <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-small pull-right"><i class="icon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+                    <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
                 {% else %}
-                    <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-small pull-right"><i class="glyphicon glyphicon-list icon-white"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+                    <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
                 {% endif %}
-            </div>
-        {% else %}
-            <div class="panel-body">
+            {% else %}
                 {% if context.getSetting('mode') == 'admin' %}
                     <p>{{ 'no_order_found'|trans({}, 'SonataOrderBundle') }}</p>
                 {% else %}
                     <p>{{ 'sonata.order.list.no_orders'|trans({}, 'SonataOrderBundle') }}</p>
                 {% endif %}
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
