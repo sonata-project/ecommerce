@@ -658,11 +658,15 @@ abstract class BaseProduct implements ProductInterface
      */
     public function getMainCategory()
     {
-        foreach ($this->getProductCategories() as $productCategory) {
-            if ($productCategory->getMain()) {
-                return $productCategory->getCategory();
+        if( $this->hasOneMainCategory() ){
+            foreach ($this->getProductCategories() as $productCategory) {
+                if ($productCategory->getMain()) {
+                    return $productCategory->getCategory();
+                }
             }
         }
+        
+        return null;
     }
 
     /**
