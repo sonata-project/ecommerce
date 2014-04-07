@@ -34,20 +34,25 @@ class AddressAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->with($this->trans('address.form.group_advanced_label', array(), 'SonataCustomerBundle'))
-                ->add('type', 'sonata_customer_address_types', array('translation_domain' => 'SonataCustomerBundle'))
-                ->add('current', null, array('required' => false))
-                ->add('name')
-            ->end();
 
         $formMapper
-            ->with($this->trans('address.form.group_contact_label', array(), 'SonataCustomerBundle'))
+            ->with($this->trans('address.form.group_contact_label', array(), 'SonataCustomerBundle'), array(
+                'class' => 'col-md-7'
+            ))
                 ->add('firstname')
                 ->add('lastname')
                 ->add('phone')
             ->end()
         ;
+
+        $formMapper
+            ->with($this->trans('address.form.group_advanced_label', array(), 'SonataCustomerBundle'), array(
+                'class' => 'col-md-5'
+            ))
+                ->add('type', 'sonata_customer_address_types', array('translation_domain' => 'SonataCustomerBundle'))
+                ->add('current', null, array('required' => false))
+                ->add('name')
+            ->end();
 
         if (!$this->isChild()) {
             $formMapper->with($this->trans('address.form.group_contact_label', array(), 'SonataCustomerBundle'))
@@ -57,7 +62,9 @@ class AddressAdmin extends Admin
         }
 
         $formMapper
-            ->with($this->trans('address.form.group_address_label', array(), 'SonataCustomerBundle'))
+            ->with($this->trans('address.form.group_address_label', array(), 'SonataCustomerBundle'), array(
+                'class' => 'col-md-12'
+            ))
                 ->add('address1')
                 ->add('address2')
                 ->add('address3')
@@ -66,6 +73,7 @@ class AddressAdmin extends Admin
                 ->add('countryCode', 'country')
             ->end()
         ;
+
     }
 
     /**

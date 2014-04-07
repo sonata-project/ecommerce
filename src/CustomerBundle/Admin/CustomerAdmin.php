@@ -38,7 +38,9 @@ class CustomerAdmin extends Admin
         $now = new \DateTime();
 
         $formMapper
-            ->with('customer.group.general')
+            ->with('customer.group.general', array(
+                    'class' => 'col-md-7'
+                ))
                 ->add('user', 'sonata_type_model_list')
                 ->add('firstname')
                 ->add('lastname')
@@ -48,7 +50,9 @@ class CustomerAdmin extends Admin
                 ))
                 ->add('birthPlace')
             ->end()
-            ->with('customer.group.contact')
+            ->with('customer.group.contact', array(
+                    'class' => 'col-md-5'
+                ))
                 ->add('email')
                 ->add('phoneNumber')
                 ->add('mobileNumber')

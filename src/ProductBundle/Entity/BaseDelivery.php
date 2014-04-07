@@ -263,6 +263,18 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf("%s-%s%s",
+            $this->getCode(),
+            $this->getCountryCode(),
+            $this->getZone() ? sprintf('%s', $this->getZone()): ''
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function fromArray($array)

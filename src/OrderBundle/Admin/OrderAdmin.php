@@ -78,6 +78,15 @@ class OrderAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+
+        // define group zoning
+        $formMapper
+             ->with($this->trans('order.form.group_main_label'), array('class' => 'col-md-12'))
+             ->with($this->trans('order.form.group_billing_label'), array('class' => 'col-md-6'))
+             ->with($this->trans('order.form.group_shipping_label'), array('class' => 'col-md-6'))
+        ;
+
+
         if (!$this->isChild()) {
             $formMapper
                 ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
