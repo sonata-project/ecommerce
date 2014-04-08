@@ -12,6 +12,7 @@ namespace Sonata\ProductBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\Component\Basket\InvalidProductException;
 use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
@@ -888,7 +889,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param  \Sonata\Component\Basket\BasketInterface             $basket
      * @param  \Sonata\Component\Product\ProductInterface           $product
      * @param  \Sonata\Component\Basket\BasketElementInterface      $basketElement
+     *
      * @return bool|\Sonata\Component\Basket\BasketElementInterface
+     *
+     * @throws \Sonata\Component\Basket\InvalidProductException
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
     {
@@ -897,6 +901,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         if ($basket->hasProduct($product)) {
             return false;
+        }
+
+        if ($product->isMaster() && $this->hasVariations($product)) {
+            throw new InvalidProductException(sprintf("You can't add '%s' to the basket as it is a master product with variations.", $product->getSku()));
         }
 
         $basketElementOptions = $product->getOptions();
