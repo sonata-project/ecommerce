@@ -196,6 +196,26 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Sonata\Component\Basket\BasketElementInterface', $result);
     }
 
+    /**
+     * @expectedException Sonata\Component\Basket\InvalidProductException
+     * @expectedExceptionMessage You can't add 'product_sku' to the basket as it is a master product with variations.
+     */
+    public function testBasketAddProductInvalid()
+    {
+        $productProvider = $this->createNewProductProvider();
+
+        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
+        $product->expects($this->once())->method('isMaster')->will($this->returnValue(true));
+        $product->expects($this->once())->method('getSku')->will($this->returnValue('product_sku'));
+        $product->expects($this->once())->method('getVariations')->will($this->returnValue(array(1)));
+
+        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+
+        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+
+        $productProvider->basketAddProduct($basket, $product, $basketElement);
+    }
+
     public function testBasketMergeProduct()
     {
         // Test a product not in the basket

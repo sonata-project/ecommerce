@@ -14,7 +14,7 @@ file that was distributed with this source code.
 {% extends 'SonataBasketBundle:Basket:add_product_form.html.twig' %}
 
 {% block add_product_form_content %}
-    {% if product.isVariation %}
+    {% if sonata_product_has_variations(product) %}
         <a class="btn btn-primary btn-sm pull-right" href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}">
             <i class="glyphicon glyphicon-search icon-white"></i> {% trans from 'SonataProductBundle' %}sonata.product.btn_see{% endtrans %}
         </a>
