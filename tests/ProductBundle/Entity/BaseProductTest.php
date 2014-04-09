@@ -66,4 +66,29 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Sonata\MediaBundle\Model\MediaInterface', $product->getImage());
         $this->assertEquals("correctMedia", $product->getImage()->getName());
     }
+
+    public function testHasOneMainCategory()
+    {
+        $product = new Product();
+
+        $pc = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
+        $pc->expects($this->any())->method('getMain')->will($this->returnValue(true));
+
+        $pc2 = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
+        $pc2->expects($this->any())->method('getMain')->will($this->returnValue(true));
+
+        $pc3 = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
+        $pc3->expects($this->any())->method('getMain')->will($this->returnValue(true));
+
+        $this->assertFalse($product->hasOneMainCategory());
+
+        $product->addProductCategory($pc);
+        $this->assertTrue($product->hasOneMainCategory());
+
+        $product->addProductCategory($pc2);
+        $this->assertFalse($product->hasOneMainCategory());
+
+        $product->addProductCategory($pc3);
+        $this->assertFalse($product->hasOneMainCategory());
+    }
 }
