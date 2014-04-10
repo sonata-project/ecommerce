@@ -73,6 +73,9 @@ The bundle allows you to configure the entity classes; you'll also need to regis
             delivery:             Application\Sonata\ProductBundle\Entity\Delivery
             gallery:              Application\Sonata\MediaBundle\Entity\Gallery
 
+        search:
+            provider: sonata.product.search.provider.doctrine # or: sonata.product.search.provider.elastica
+
     # Enable Doctrine to map the provided entities
     doctrine:
         orm:

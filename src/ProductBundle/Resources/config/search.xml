@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.product.search.builder.class">Sonata\ProductBundle\Search\SearchBuilder</parameter>
+
+        <parameter key="sonata.product.search.provider.doctrine.class">Sonata\ProductBundle\Search\Provider\DoctrineSearchProvider</parameter>
+        <parameter key="sonata.product.search.provider.elastica.class">Sonata\ProductBundle\Search\Provider\ElasticaSearchProvider</parameter>
+    </parameters>
+
+    <services>
+        <!-- Builder -->
+
+        <service id="sonata.product.search.builder" class="%sonata.product.search.builder.class%">
+            <argument />
+        </service>
+
+        <!-- Providers -->
+
+        <service id="sonata.product.search.provider.doctrine" class="%sonata.product.search.provider.doctrine.class%">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="doctrine" />
+            <argument>%sonata.product.product.class%</argument>
+            <argument>%sonata.product.product_category.class%</argument>
+        </service>
+
+        <service id="sonata.product.search.provider.elastica" class="%sonata.product.search.provider.elastica.class%">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="fos_elastica.manager.orm" />
+            <argument>%sonata.product.product.class%</argument>
+        </service>
+    </services>
+
+</container>

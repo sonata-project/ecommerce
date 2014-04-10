@@ -64,9 +64,13 @@ class CategoriesMenuBlockService extends MenuBlockService
         parent::setDefaultSettings($resolver);
 
         $resolver->setDefaults(array(
-                'menu_template' => "SonataBlockBundle:Block:block_side_menu_template.html.twig",
-                'safe_labels'   => true
-            ));
+            'route'            => null,
+            'route_parameters' => array(),
+            'use_current_uri'  => false,
+            'facets'           => array(),
+            'menu_template'    => "SonataBlockBundle:Block:block_side_menu_template.html.twig",
+            'safe_labels'      => true,
+        ));
     }
 
     /**
@@ -79,13 +83,17 @@ class CategoriesMenuBlockService extends MenuBlockService
         $menu = parent::getMenu($blockContext);
 
         if (null === $menu || "" === $menu) {
-            $menu = $this->menuBuilder->createCategoryMenu(
-                array(
-                    'childrenAttributes' => array('class' => $settings['menu_class']),
-                    'attributes'         => array('class' => $settings['children_class']),
-                ),
-                $settings['current_uri']
+            $options = array(
+                'childrenAttributes' => array('class' => $settings['menu_class']),
+                'attributes'         => array('class' => $settings['children_class'])
             );
+
+            if ($settings['route']) {
+                $options['route'] = $settings['route'];
+                $options['routeParameters'] = $settings['route_parameters'];
+            }
+
+            $menu = $this->menuBuilder->createCategoryMenu($options, $settings['current_uri'], $settings['facets']);
         }
 
         return $menu;

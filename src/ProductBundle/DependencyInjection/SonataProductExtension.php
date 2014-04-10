@@ -14,6 +14,7 @@ namespace Sonata\ProductBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
 
@@ -48,6 +49,7 @@ class SonataProductExtension extends Extension
         $loader->load('form.xml');
         $loader->load('twig.xml');
         $loader->load('menu.xml');
+        $loader->load('search.xml');
 
         if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
@@ -66,6 +68,7 @@ class SonataProductExtension extends Extension
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
         $this->registerSeoParameters($container, $config);
+        $this->registerSearchParameters($container, $config);
     }
 
     /**
@@ -346,5 +349,18 @@ class SonataProductExtension extends Extension
         foreach ($productSeo as $key => $value) {
             $container->setParameter(sprintf('sonata.product.seo.product.%s', $key), $value);
         }
+    }
+
+    /**
+     * Register search service parameters and updates search builder argument
+     *
+     * @param ContainerBuilder $container
+     * @param array            $config
+     */
+    protected function registerSearchParameters(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('sonata.product.search.provider', $config['search']['provider']);
+        $container->getDefinition('sonata.product.search.builder')
+            ->replaceArgument(0, new Reference($config['search']['provider']));
     }
 }

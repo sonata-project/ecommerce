@@ -66,6 +66,8 @@ class FiltersMenuBlockService extends MenuBlockService
         $resolver->setDefaults(array(
             'menu_class'       => "nav nav-list",
             'product_provider' => null,
+            'route'            => null,
+            'route_parameters' => null,
         ));
     }
 
@@ -86,10 +88,17 @@ class FiltersMenuBlockService extends MenuBlockService
     {
         $settings = $blockContext->getSettings();
 
+        $options = array('childrenAttributes' => array('class' => $settings['menu_class']));
+
+        if ($settings['route']) {
+            $options['route'] = $settings['route'];
+            $options['routeParameters'] = $settings['route_parameters'];
+        }
+
         $menu = parent::getMenu($blockContext);
 
         if (null === $menu || "" === $menu) {
-            $menu = $this->menuBuilder->createFiltersMenu($settings['product_provider'], array('childrenAttributes' => array('class' => $settings['menu_class'])), $settings['current_uri']);
+            $menu = $this->menuBuilder->createFiltersMenu($settings['product_provider'], $options, $settings['current_uri']);
         }
 
         return $menu;

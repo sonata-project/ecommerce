@@ -117,4 +117,9 @@ Sonata.Product = {
     }
 }
 
-
+// Search
+$(window).ready(function () {
+    $('form[data-name="sonata-select"] select').on('change', function (e) {
+        $(this).parents('form').submit();
+    });
+});

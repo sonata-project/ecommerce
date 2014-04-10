@@ -61,6 +61,14 @@
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="form.factory" />
         </service>
+
+        <service id="sonata.product.block.search_form" class="Sonata\ProductBundle\Block\SearchFormBlockService">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.search_form</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="sonata.product.pool" />
+        </service>
     </services>
 
 </container>
