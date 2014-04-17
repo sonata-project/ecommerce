@@ -82,7 +82,7 @@ class PaymentType extends AbstractType
         $address = $basket->getBillingAddress() ?: current($addresses);
         $basket->setBillingAddress($address ?: null);
 
-        $methods = $this->paymentSelector->getAvailableMethods($basket, $basket->getDeliveryAddress());
+        $methods = $this->paymentSelector->getAvailableMethods($basket, $basket->getBillingAddress());
 
         $choices = array();
         foreach ($methods as $method) {
