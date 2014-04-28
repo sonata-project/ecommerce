@@ -12,7 +12,6 @@
 namespace Sonata\CustomerBundle\Controller\Api;
 
 use Sonata\Component\Customer\AddressInterface;
-use Sonata\Component\Customer\CustomerElementInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 

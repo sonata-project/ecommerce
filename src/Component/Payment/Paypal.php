@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;

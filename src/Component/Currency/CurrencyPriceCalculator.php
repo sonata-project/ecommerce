@@ -1,7 +1,6 @@
 <?php
 namespace Sonata\Component\Currency;
 
-use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**

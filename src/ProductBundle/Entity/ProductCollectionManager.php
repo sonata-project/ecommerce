@@ -10,11 +10,8 @@
  */
 namespace Sonata\ProductBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\ProductCollectionManagerInterface;
-use Sonata\Component\Product\ProductCollectionInterface;
-use Doctrine\ORM\EntityManager;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 

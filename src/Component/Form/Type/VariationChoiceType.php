@@ -14,7 +14,6 @@ namespace Sonata\Component\Form\Type;
 use Sonata\Component\Product\Pool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 

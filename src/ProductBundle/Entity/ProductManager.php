@@ -12,9 +12,7 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\UnexpectedResultException;
 
-use Knp\Component\Pager\Paginator;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;

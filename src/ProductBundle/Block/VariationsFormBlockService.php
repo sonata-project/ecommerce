@@ -16,7 +16,6 @@ use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\Component\Form\Type\VariationChoiceType;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;

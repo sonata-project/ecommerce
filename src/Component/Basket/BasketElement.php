@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductDefinition;
 

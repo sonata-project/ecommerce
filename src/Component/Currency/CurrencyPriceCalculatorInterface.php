@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Currency;
 
-use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
