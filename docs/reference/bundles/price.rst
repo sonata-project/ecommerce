@@ -50,7 +50,7 @@ Price bundle configuration is as follows:
             # ...
 
             types:
-                currency: Sonata\Component\Currency\CurrencyType
+                currency: Sonata\Component\Currency\CurrencyDoctrineType
 
 You can also change the services class (defined as parameters):
 
