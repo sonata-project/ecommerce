@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Product;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Exporter\Source\DoctrineDBALConnectionSourceIterator;
 use Exporter\Source\SourceIteratorInterface;
 use Exporter\Source\SymfonySitemapSourceIterator;

@@ -11,7 +11,6 @@
 
 namespace Sonata\ProductBundle\Controller;
 
-use Sonata\Component\Form\Type\VariationChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

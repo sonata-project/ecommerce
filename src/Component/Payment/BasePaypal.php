@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 

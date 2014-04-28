@@ -12,9 +12,7 @@
 namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
 class CategoryController extends Controller
 {

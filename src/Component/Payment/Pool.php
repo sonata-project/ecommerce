@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\PaymentInterface;
 
 /**
  * The pool stored a group of available payment method

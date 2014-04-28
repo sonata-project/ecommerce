@@ -11,8 +11,6 @@
 
 namespace Sonata\Component\Currency;
 
-use Sonata\Component\Currency\CurrencyDetectorInterface;
-
 /**
  * @author Hugo Briand <briand@ekino.com>
  */

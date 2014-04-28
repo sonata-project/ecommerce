@@ -12,7 +12,6 @@ namespace Sonata\Component\Transformer;
 
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Invoice\InvoiceElementInterface;
-use Sonata\Component\Transformer\BaseTransformer;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceElementManagerInterface;

@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;

@@ -10,12 +10,9 @@
  */
 namespace Sonata\ProductBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NativeQuery;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
-use Sonata\Component\Product\ProductCategoryInterface;
 use Doctrine\ORM\EntityManager;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;

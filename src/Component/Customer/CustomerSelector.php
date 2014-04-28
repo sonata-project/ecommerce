@@ -2,7 +2,6 @@
 
 namespace Sonata\Component\Customer;
 
-use Sonata\Component\Customer\CustomerManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;

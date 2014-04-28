@@ -10,7 +10,6 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Basket\BasketFactoryInterface;
 use Sonata\Component\Customer\CustomerSelectorInterface;
 
 class Loader

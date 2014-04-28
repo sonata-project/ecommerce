@@ -18,7 +18,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
 use Sonata\Component\Basket\BasketElementInterface;
-use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 
 abstract class BaseProductController extends Controller

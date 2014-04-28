@@ -10,7 +10,6 @@
 namespace Sonata\Component\Invoice;
 
 use Sonata\Component\Order\OrderElementInterface;
-use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Product\PriceComputableInterface;
 
 interface InvoiceElementInterface extends PriceComputableInterface

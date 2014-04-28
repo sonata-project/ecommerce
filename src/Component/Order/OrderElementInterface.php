@@ -11,7 +11,6 @@
 namespace Sonata\Component\Order;
 
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\PriceComputableInterface;
 
 interface OrderElementInterface extends PriceComputableInterface
