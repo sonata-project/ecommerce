@@ -79,7 +79,7 @@ class ProductController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for products list pagination (1-indexed)")
@@ -91,26 +91,32 @@ class ProductController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return ProductInterface[]
+     * @return Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getProductsAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedFilters = array(
-            'enabled' => "",
+        $supportedCriteria = array(
+            'enabled' => '',
         );
 
-        $page    = $paramFetcher->get('page') - 1;
-        $count   = $paramFetcher->get('count');
-        $orderBy = $paramFetcher->get('orderBy');
-        $filters = array_intersect_key($paramFetcher->all(), $supportedFilters);
+        $page     = $paramFetcher->get('page') - 1;
+        $limit    = $paramFetcher->get('count');
+        $sort     = $paramFetcher->get('orderBy');
+        $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
-        foreach ($filters as $key => $value) {
+        foreach ($criteria as $key => $value) {
             if (null === $value) {
-                unset($filters[$key]);
+                unset($criteria[$key]);
             }
         }
 
-        return $this->productManager->findBy($filters, $orderBy, $count, $page);
+        if (!$sort) {
+            $sort = array();
+        } elseif (!is_array($sort)) {
+            $sort = array($sort => 'asc');
+        }
+
+        return $this->productManager->getPager($criteria, $page, $limit, $sort);
     }
 
     /**

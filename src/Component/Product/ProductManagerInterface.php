@@ -12,8 +12,9 @@
 namespace Sonata\Component\Product;
 
 use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\CoreBundle\Model\PageableManagerInterface;
 
-interface ProductManagerInterface extends ManagerInterface
+interface ProductManagerInterface extends ManagerInterface, PageableManagerInterface
 {
     /**
      * Returns the products in the same collections as those specified in $productCollections
