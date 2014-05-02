@@ -200,7 +200,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
      */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
     {
-        $queryBuilder = $this->getRepository()
+        $query = $this->getRepository()
             ->createQueryBuilder('p')
             ->select('p');
 
@@ -220,7 +220,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
         $parameters = array();
 
         if (isset($criteria['enabled'])) {
-            $query->andWhere('u.enabled = :enabled');
+            $query->andWhere('p.enabled = :enabled');
             $parameters['enabled'] = $criteria['enabled'];
         }
 
