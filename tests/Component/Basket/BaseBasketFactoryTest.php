@@ -61,6 +61,13 @@ class BasketFactory extends BaseBasketFactory
     public function save(BasketInterface $basket)
     {
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset(BasketInterface $basket, $full = true)
+    {
+    }
 }
 
 /**

@@ -68,4 +68,13 @@ class BasketSessionFactory extends BaseBasketFactory
     {
         $this->storeInSession($basket);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset(BasketInterface $basket, $full = true)
+    {
+        $basket->reset($full);
+        $this->save($basket);
+    }
 }

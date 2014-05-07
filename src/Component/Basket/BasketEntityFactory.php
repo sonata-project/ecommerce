@@ -68,4 +68,17 @@ class BasketEntityFactory extends BaseBasketFactory
             $this->storeInSession($basket);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reset(BasketInterface $basket, $full = true)
+    {
+        if ($full && $basket->getCustomerId()) {
+            $this->basketManager->delete($basket);
+        } else {
+            $basket->reset($full);
+            $this->save($basket);
+        }
+    }
 }

@@ -166,7 +166,7 @@ class BasketController extends Controller
      */
     public function resetAction()
     {
-        $this->get('sonata.basket')->reset();
+        $this->get('sonata.basket.factory')->reset($this->get('sonata.basket'));
 
         return new RedirectResponse($this->generateUrl('sonata_basket_index'));
     }

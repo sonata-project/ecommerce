@@ -168,4 +168,28 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
     }
+
+    public function testReset()
+    {
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket->expects($this->once())->method('getCustomerId')->will($this->returnValue(1));
+
+        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketManager->expects($this->once())->method('delete');
+
+        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
+
+        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+
+        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $currency = new Currency();
+        $currency->setLabel("EUR");
+        $currencyDetector->expects($this->any())
+            ->method('getCurrency')
+            ->will($this->returnValue($currency))
+        ;
+
+        $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
+        $factory->reset($basket);
+    }
 }
