@@ -39,6 +39,7 @@ use Sonata\Component\Basket\BasketElementManagerInterface;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Sonata\Component\Form\Transformer\QuantityTransformer;
 
 abstract class BaseProductProvider implements ProductProviderInterface
 {
@@ -814,7 +815,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
         if ($showQuantity) {
             $formBuilder->add('quantity', 'integer');
         } else {
-            $formBuilder->add('quantity', 'hidden', array('data' => 1));
+            $formBuilder->add(
+                    $formBuilder->create('quantity', 'hidden', array('data' => 1))
+                                ->addModelTransformer(new QuantityTransformer())
+            );
         }
     }
 
