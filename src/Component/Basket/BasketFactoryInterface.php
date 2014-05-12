@@ -21,4 +21,12 @@ interface BasketFactoryInterface
      * @return void
      */
     public function save(BasketInterface $basket);
+
+    /**
+     * Resets the basket
+     *
+     * @param BasketInterface $basket
+     * @param bool            $full
+     */
+    public function reset(BasketInterface $basket, $full = true);
 }

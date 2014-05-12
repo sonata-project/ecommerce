@@ -34,7 +34,7 @@ class PaymentController extends Controller
             $order = $this->getPaymentHandler()->handleError($this->getRequest(), $this->getBasket());
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
-        } catch (\InvalidTransactionException $ex) {
+        } catch (InvalidTransactionException $ex) {
             throw new UnauthorizedHttpException($ex->getMessage());
         }
 
@@ -54,7 +54,7 @@ class PaymentController extends Controller
             $order = $this->getPaymentHandler()->handleConfirmation($this->getRequest());
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
-        } catch (\InvalidTransactionException $ex) {
+        } catch (InvalidTransactionException $ex) {
             throw new UnauthorizedHttpException($ex->getMessage());
         }
 
@@ -76,7 +76,7 @@ class PaymentController extends Controller
      */
     public function sendbankAction()
     {
-        $basket     = $this->get('sonata.basket');
+        $basket = $this->getBasket();
 
         if ($this->get('request')->getMethod() !== 'POST') {
             return $this->redirect($this->generateUrl('sonata_basket_index'));
@@ -103,8 +103,9 @@ class PaymentController extends Controller
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
-        // transform the basket into order & reset basket
-        $order = $this->getPaymentHandler()->getSendbankOrder($this->getBasket());
+        // transform the basket into order
+        $order = $this->getPaymentHandler()->getSendbankOrder($basket);
+        $this->getBasketFactory()->reset($basket);
 
         // the payment must handle everything when calling the bank
         return $payment->sendbank($order);
@@ -134,6 +135,14 @@ class PaymentController extends Controller
     public function termsAction()
     {
         return $this->render('SonataPaymentBundle:Payment:terms.html.twig');
+    }
+
+    /**
+     * @return \Sonata\Component\Basket\BasketFactoryInterface
+     */
+    protected function getBasketFactory()
+    {
+        return $this->get('sonata.basket.factory');
     }
 
     /**

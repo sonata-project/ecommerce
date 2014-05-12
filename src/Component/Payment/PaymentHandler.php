@@ -149,8 +149,6 @@ class PaymentHandler implements PaymentHandlerInterface
         // assign correct reference number
         $this->referenceGenerator->order($order);
 
-        $basket->reset();
-
         $event = new PaymentEvent($order);
         $this->getEventDispatcher()->dispatch(PaymentEvents::POST_SENDBANK, $event);
 
