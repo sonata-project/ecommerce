@@ -45,9 +45,13 @@ Follow these instructions:
 
     "require" {
         ...
-        "sonata-project/ecommerce": "2.3-dev",
+        "sonata-project/ecommerce": "2.3@dev",
         ...
     }
+
+.. note::
+
+   If you have problems if this part of the installation or just want to use the develop branch of e-commerce, check the `composer.json <https://github.com/sonata-project/sandbox/blob/2.3-develop/composer.json>`_ available in the sandbox.
 
 * Run this command at the root directory of your project:
 
