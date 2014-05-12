@@ -32,9 +32,9 @@ Follow these instructions:
 
 * First, be sure that all dependencies are installed:
 
-    - Symfony2
-    - PHP >= 5.3.2
+    - Symfony2 (2.3.x)
     - Composer
+    - Javascript
 
 * Add the e-commerce bundles to your `composer.json`:
 
@@ -55,7 +55,7 @@ Follow these instructions:
 
     composer update
 
-* Follow every README available:
+* Follow the installation procedure available in every `README.md` for these bundles:
 
   * FOSUserBundle
   * SonataUserBundle
@@ -68,6 +68,8 @@ Follow these instructions:
 - Add the following bundles in your `kernel::registerBundles()` method:
 
 .. code-block:: php
+
+    <?php
 
         // app/AppKernel.php
 
@@ -180,11 +182,14 @@ Follow these instructions:
         php app/console sonata:easy-extends:generate SonataPaymentBundle
         php app/console sonata:easy-extends:generate SonataProductBundle
 
-* Then add the following bundles in your `kernel::registerBundles()` method:
+* Then add the following bundles in your `kernel::registerBundles()` method (after the previously added bundles):
 
 .. code-block:: php
 
+    <?php
+
         // app/AppKernel.php
+        ...
 
         new Application\Sonata\CustomerBundle\SonataCustomerBundle(),
         new Application\Sonata\DeliveryBundle\SonataDeliveryBundle(),
@@ -196,7 +201,6 @@ Follow these instructions:
         new Application\Sonata\ProductBundle\SonataProductBundle(),
 
 Now, you can use these bundles to extend entities or template files.
-
 
 * Add the current lines in your `routing.yml` files:
 
