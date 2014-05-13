@@ -815,10 +815,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
         if ($showQuantity) {
             $formBuilder->add('quantity', 'integer');
         } else {
-            $transformer = new QuantityTransformer();
             $formBuilder->add(
                     $formBuilder->create('quantity', 'hidden', array('data' => 1))
-                                ->addModelTransformer($transformer)
+                                ->addModelTransformer(new QuantityTransformer())
             );
         }
     }
