@@ -102,7 +102,7 @@ class OrderAdmin extends Admin
                 ->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))
                 ->add('paymentStatus', 'sonata_payment_transaction_status', array('translation_domain' => 'SonataPaymentBundle'))
                 ->add('deliveryStatus', 'sonata_product_delivery_status', array('translation_domain' => 'SonataDeliveryBundle'))
-                ->add('validatedAt')
+                ->add('validatedAt', 'sonata_type_datetime_picker', array('dp_side_by_side' => true))
             ->end()
             ->with($this->trans('order.form.group_billing_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
                 ->add('billingName')
