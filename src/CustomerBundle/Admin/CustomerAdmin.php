@@ -45,8 +45,10 @@ class CustomerAdmin extends Admin
                 ->add('firstname')
                 ->add('lastname')
                 ->add('locale', 'locale')
-                ->add('birthDate', null,  array(
+                ->add('birthDate', 'sonata_type_date_picker',  array(
                     'years' => range(1900, $now->format('Y')),
+                    'dp_min_date' => '1-1-1900',
+                    'dp_max_date' => $now->format('c')
                 ))
                 ->add('birthPlace')
             ->end()
