@@ -95,5 +95,7 @@ class BasketBuilder implements BasketBuilderInterface
         if ($paymentMethodCode) {
             $basket->setPaymentMethod($this->paymentPool->getMethod($paymentMethodCode));
         }
+
+        $basket->buildPrices();
     }
 }
