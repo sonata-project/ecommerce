@@ -116,6 +116,8 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
         $basket->expects($this->once())->method('setBillingAddress');
         $basket->expects($this->once())->method('setPaymentMethod');
 
+        $basket->expects($this->once())->method('buildPrices');
+
         $basketBuilder->build($basket);
     }
 }
