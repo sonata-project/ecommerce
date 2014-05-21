@@ -11,10 +11,8 @@
 
 namespace Sonata\ProductBundle\Search\Provider;
 
-use Sonata\DatagridBundle\Datagrid\DatagridInterface;
-
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Sonata\DatagridBundle\Datagrid\DatagridBuilderInterface;
+use Sonata\DatagridBundle\Datagrid\DatagridFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -27,24 +25,14 @@ use Symfony\Component\HttpFoundation\Request;
 abstract class BaseSearchProvider implements SearchProviderInterface
 {
     /**
-     * @var FormFactoryInterface
+     * @var DatagridFactoryInterface
      */
-    protected $formFactory;
+    protected $datagridFactory;
 
     /**
-     * @var mixed
+     * @var DatagridBuilderInterface
      */
-    protected $manager;
-
-    /**
-     * @var string
-     */
-    protected $class;
-
-    /**
-     * @var \Elastica\Query
-     */
-    protected $query;
+    protected $datagridBuilder;
 
     /**
      * @var array
@@ -52,82 +40,13 @@ abstract class BaseSearchProvider implements SearchProviderInterface
     protected $searchParameters;
 
     /**
-     * @var array
-     */
-    protected $filters;
-
-    /**
-     * @var array
-     */
-    protected $facets;
-
-    /**
-     * @var DatagridInterface
-     */
-    protected $datagrid;
-
-    /**
      * Constructor
      *
-     * @param FormFactoryInterface $formFactory Symfony Form factory
-     * @param mixed                $manager     An elastica entity repository manager
-     * @param string               $class       An entity class name
+     * @param DatagridFactoryInterface $datagridFactory
      */
-    public function __construct(FormFactoryInterface $formFactory, $manager, $class)
+    public function __construct(DatagridFactoryInterface $datagridFactory)
     {
-        $this->formFactory = $formFactory;
-        $this->manager     = $manager;
-        $this->class       = $class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getManager()
-    {
-        return $this->manager;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getClass()
-    {
-        return $this->class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRepository()
-    {
-        $class = $this->getClass();
-
-        return $this->manager->getRepository($class);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilters()
-    {
-        return $this->filters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFacets()
-    {
-        return $this->facets;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDatagrid()
-    {
-        return $this->datagrid;
+        $this->datagridFactory = $datagridFactory;
     }
 
     /**
@@ -161,28 +80,82 @@ abstract class BaseSearchProvider implements SearchProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function getDatagridBuilder()
+    {
+        if (!$this->datagridBuilder) {
+            $this->datagridBuilder = $this->datagridFactory->getDatagridBuilder($this->getDatagridType(), $this->getSearchParameters());
+        }
+
+        return $this->datagridBuilder;
+    }
+
+    /**
+     * @return \Sonata\DatagridBundle\Datagrid\DatagridInterface
+     */
+    public function getDatagrid()
+    {
+        return $this->getDatagridBuilder()->getDatagrid();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function build()
     {
         $this->buildFilters();
         $this->buildFacets();
-        $this->buildQuery();
-
-        $this->buildDatagrid();
+        $this->buildSort();
+        $this->buildForm();
     }
 
     /**
-     * Returns search form builder
+     * {@inheritdoc}
+     */
+    public function buildSort()
+    {
+        switch($this->getSearchParameter('sort')) {
+            case 'price_asc':
+                $this->getDatagrid()->setSort('price', 'asc');
+                break;
+            case 'price_desc':
+                $this->getDatagrid()->setSort('price', 'desc');
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    /**
+     * Handles a search from a Symfony Request instance
      *
-     * @return FormBuilderInterface
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function handleRequest(Request $request)
+    {
+        $this->setSearchParameters(array(
+            'q'          => $request->query->get('q'),
+            'term'       => sprintf('*%s*', $request->query->get('q')),
+            'page'       => $request->query->get('page', 1),
+            'category'   => $request->query->get('category'),
+            'price'      => $request->query->get('price'),
+            'sort'       => $request->query->get('sort'),
+        ));
+
+        $this->build();
+    }
+
+    protected abstract function getDatagridType();
+
+    /**
+     * Adds fields to search form
      */
     protected function buildForm()
     {
-        $formBuilder = $this->formFactory->createNamedBuilder('', 'form', array(), array(
-            'csrf_protection' => false
-        ));
-
         // Add sort options
-        $formBuilder->add('sort', 'choice', array(
+        $this->getDatagridBuilder()->addFormField('sort', 'choice', array(
             'multiple' => false,
             'choices' => array(
                 'score'      => 'Sort by pertinence',
@@ -194,34 +167,8 @@ abstract class BaseSearchProvider implements SearchProviderInterface
         // Add hidden fields corresponding to current URL parameters
         foreach ($this->getSearchParameters() as $parameter => $value) {
             if ($value && !in_array($parameter, array('term', 'sort', 'page'))) {
-                $formBuilder->add($parameter, 'hidden', array('data' => $value));
+                $this->getDatagridBuilder()->addFormField($parameter, 'hidden', array('data' => $value));
             }
         }
-
-        return $formBuilder;
-    }
-
-    /**
-     * Returns sort value
-     *
-     * @param $option
-     *
-     * @return string|null
-     */
-    protected function getSortValue($option)
-    {
-        $sort = array('by' => null, 'order' => null);
-
-        switch ($this->getSearchParameter('sort')) {
-            case 'price_asc':
-                $sort = array('by' => 'price', 'order' => 'asc');
-                break;
-
-            case 'price_desc':
-                $sort = array('by' => 'price', 'order' => 'desc');
-                break;
-        }
-
-        return isset($sort[$option]) ? $sort[$option] : null;
     }
 }

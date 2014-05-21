@@ -23,30 +23,26 @@ use Sonata\DatagridBundle\ProxyQuery\Elastica\ProxyQuery;
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class ElasticaSearchProvider extends BaseSearchProvider implements SearchProviderInterface
+class ElasticaSearchProvider extends BaseSearchProvider
 {
     /**
      * {@inheritdoc}
      */
     public function getQuery()
     {
-        if (!$this->query) {
+ /*       if (!$this->query) {
             $this->query = new \Elastica\Query();
         }
 
         return $this->query;
-    }
+ */   }
 
     /**
      * {@inheritdoc}
      */
     public function buildFilters()
     {
-        if ($this->filters) {
-            return;
-        }
-
-        // Master product only filter (no variations)
+/*        // Master product only filter (no variations)
         $this->filters[] = new \Elastica\Filter\Missing('parent');
 
         // Category filter
@@ -61,6 +57,17 @@ class ElasticaSearchProvider extends BaseSearchProvider implements SearchProvide
             $this->filters[] = new \Elastica\Filter\Range('price', array(
                 'to' => $this->getSearchParameter('price')
             ));
+        }*/
+
+        $this->getDatagridBuilder()
+            ->addFilter('parent', 'missing');
+
+        if ($this->getSearchParameter('category')) {
+            $this->getDatagridBuilder()->addFilter('category', 'term');
+        }
+
+        if ($this->getSearchParameter('price')) {
+            $this->getDatagridBuilder()->addFilter('price', 'range');
         }
     }
 
@@ -69,15 +76,12 @@ class ElasticaSearchProvider extends BaseSearchProvider implements SearchProvide
      */
     public function buildFacets()
     {
-        if ($this->facets) {
-            return;
-        }
-
         // Categories facet
-        $categories = new \Elastica\Facet\Terms('categories');
+/*        $categories = new \Elastica\Facet\Terms('categories');
         $categories->setField('product_categories.category_id');
 
-        $this->facets[] = $categories;
+        $this->facets[] = $categories;*/
+        $this->getDatagridBuilder()->addFacet('categories', 'terms');
     }
 
     /**
@@ -85,14 +89,13 @@ class ElasticaSearchProvider extends BaseSearchProvider implements SearchProvide
      */
     public function buildQuery()
     {
-        $query = $this->getQuery();
+/*        $query = $this->getQuery();
         $query->setQuery(new \Elastica\Query\QueryString($this->getSearchParameter('term')));
 
         $filters = new \Elastica\Filter\Bool();
 
         // Filters
-        foreach ($this->getFilters() as $filter)
-        {
+        foreach ($this->getFilters() as $filter) {
             $filters->addMust($filter);
         }
 
@@ -103,7 +106,7 @@ class ElasticaSearchProvider extends BaseSearchProvider implements SearchProvide
             $facet->setFilter($filters);
 
             $query->addFacet($facet);
-        }
+        }*/
     }
 
     /**
@@ -111,7 +114,7 @@ class ElasticaSearchProvider extends BaseSearchProvider implements SearchProvide
      */
     public function buildDatagrid()
     {
-        if ($this->datagrid) {
+/*        if ($this->datagrid) {
             return;
         }
 
@@ -126,6 +129,14 @@ class ElasticaSearchProvider extends BaseSearchProvider implements SearchProvide
             'q'           => $this->getSearchParameter('q'),
             'category'    => $this->getSearchParameter('category'),
             'price'       => $this->getSearchParameter('price'),
-        ));
+        ));*/
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDatagridType()
+    {
+        return 'elastica';
     }
 }

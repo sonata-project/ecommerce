@@ -11,7 +11,7 @@
 
 namespace Sonata\ProductBundle\Search\Provider;
 
-use Sonata\DatagridBundle\Datagrid\DatagridInterface;
+use Sonata\DatagridBundle\Datagrid\DatagridBuilderInterface;
 
 /**
  * Class SearchProviderInterface
@@ -28,34 +28,6 @@ interface SearchProviderInterface
     public function build();
 
     /**
-     * Returns search entity manager
-     *
-     * @return mixed
-     */
-    public function getManager();
-
-    /**
-     * Returns search entity class name
-     *
-     * @return string
-     */
-    public function getClass();
-
-    /**
-     * Returns search entity repository
-     *
-     * @return mixed
-     */
-    public function getRepository();
-
-    /**
-     * Returns search provider query
-     *
-     * @return mixed
-     */
-    public function getQuery();
-
-    /**
      * Sets search parameters like the query string, sort order, filters, ...
      *
      * @param array $searchParameters
@@ -70,25 +42,11 @@ interface SearchProviderInterface
     public function getSearchParameters();
 
     /**
-     * Returns search provider facets
-     *
-     * @return array
-     */
-    public function getFacets();
-
-    /**
-     * Returns search provider filters
-     *
-     * @return array
-     */
-    public function getFilters();
-
-    /**
      * Returns search provider datagrid
      *
-     * @return DatagridInterface
+     * @return DatagridBuilderInterface
      */
-    public function getDatagrid();
+    public function getDatagridBuilder();
 
     /**
      * Builds product search filters to apply to query
@@ -117,4 +75,9 @@ interface SearchProviderInterface
      * @return void
      */
     public function buildDatagrid();
+
+    /**
+     * Builds sort options
+     */
+    public function buildSort();
 }

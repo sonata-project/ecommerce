@@ -11,11 +11,12 @@
 
 namespace Sonata\ProductBundle\Search;
 
+use Sonata\DatagridBundle\Datagrid\Datagrid;
 use Sonata\DatagridBundle\Datagrid\DatagridInterface;
+use Sonata\DatagridBundle\ProxyQuery\Elastica\ProxyQuery;
+use Sonata\DatagridBundle\ProxyQuery\Elastica\QueryBuilder;
 use Sonata\ProductBundle\Search\Provider\SearchProviderInterface;
 
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -31,6 +32,16 @@ class SearchBuilder
      * @var SearchProviderInterface
      */
     protected $provider;
+
+    /**
+     * @var DatagridInterface
+     */
+    protected $datagrid;
+
+    /**
+     * @var QueryBuilder
+     */
+    protected $queryBuilder;
 
     /**
      * Constructor
@@ -73,13 +84,17 @@ class SearchBuilder
     }
 
     /**
-     * Returns datagrid
+     * Returns datagrid (builds it if not instantiated)
      *
      * @return DatagridInterface
      */
     public function getDatagrid()
     {
-        return $this->getProvider()->getDatagrid();
+        if (!$this->datagrid) {
+            $this->buildDatagrid();
+        }
+
+        return $this->datagrid;
     }
 
     /**
@@ -111,5 +126,10 @@ class SearchBuilder
     public function getSearchParameters()
     {
         return $this->getProvider()->getSearchParameters();
+    }
+
+    protected function buildDatagrid()
+    {
+        $this->datagrid = new Datagrid(new ProxyQuery($this->queryBuilder), $pager, $formBuilder, $values);
     }
 }

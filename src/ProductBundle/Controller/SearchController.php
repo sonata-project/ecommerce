@@ -11,13 +11,20 @@
 
 namespace Sonata\ProductBundle\Controller;
 
+use Elastica\Query;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Product\Pool;
+use Sonata\DatagridBundle\Datagrid\Datagrid;
+use Sonata\DatagridBundle\Pager\Elastica\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Elastica\ProxyQuery;
+use Sonata\DatagridBundle\ProxyQuery\Elastica\QueryBuilder;
 use Sonata\ProductBundle\Entity\ProductSetManager;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormConfigBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -45,7 +52,7 @@ class SearchController extends Controller
             throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
         }
 
-        $builder = $this->get('sonata.product.search.builder');
+        $builder = $this->get('sonata.product.search.provider.elastica');
         $builder->handleRequest($request);
 
         $datagrid = $builder->getDatagrid();
@@ -53,14 +60,16 @@ class SearchController extends Controller
         $results = $datagrid->getResults();
         $provider = $results ? $this->getProductPool()->getProvider(current($results)) : null;
 
-        return $this->render('SonataProductBundle:Search:index.html.twig', array_merge($builder->getSearchParameters(), array(
+        return $this->render('SonataProductBundle:Search:index.html.twig', /**array_merge($builder->getSearchParameters(), */array(
             'category'     => null,
+            'sort'         => null,
+            'q'            => "",
             'currency'     => $this->getCurrencyDetector()->getCurrency(),
             'datagrid'     => $datagrid,
             'display_mode' => $displayMode,
             'form'         => $datagrid->getForm()->createView(),
             'provider'     => $provider,
-        )));
+        ))/*)*/;
     }
 
     /**

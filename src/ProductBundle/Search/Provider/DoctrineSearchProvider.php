@@ -162,4 +162,12 @@ class DoctrineSearchProvider extends BaseSearchProvider implements SearchProvide
 
         return $query;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDatagridType()
+    {
+        return 'doctrine';
+    }
 }

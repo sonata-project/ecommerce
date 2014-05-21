@@ -5,6 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="sonata.product.datagrid.factory.class">Sonata\DatagridBundle\Datagrid\DatagridFactory</parameter>
         <parameter key="sonata.product.search.builder.class">Sonata\ProductBundle\Search\SearchBuilder</parameter>
 
         <parameter key="sonata.product.search.provider.doctrine.class">Sonata\ProductBundle\Search\Provider\DoctrineSearchProvider</parameter>
@@ -12,6 +13,16 @@
     </parameters>
 
     <services>
+        <!-- Factory -->
+        <service id="sonata.product.datagrid.factory" class="%sonata.product.datagrid.factory.class%">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="fos_elastica.finder.sonata_admin.product" />
+            <argument>%sonata.product.product.class%</argument>
+            <argument type="service" id="sonata.datagrid.filter.factory" />
+            <argument type="service" id="sonata.datagrid.facet.factory" />
+            <argument type="service" id="form.factory" />
+        </service>
+
         <!-- Builder -->
 
         <service id="sonata.product.search.builder" class="%sonata.product.search.builder.class%">

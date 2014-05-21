@@ -65,7 +65,7 @@ file that was distributed with this source code.
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-sm-3">
-                            <h4 class="panel-title">"{{ q }}"</h4>
+                            <h4 class="panel-title">"{{ category ? category.name : q}}"</h4>
                         </div>
                         <form name="search-sort" data-name="sonata-select" method="get" action="{{ path(app.request.attributes.get('_route')) }}">
                             {{ form_widget(form.sort, {horizontal_input_wrapper_class: 'col-sm-4'}) }}
