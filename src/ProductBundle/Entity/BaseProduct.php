@@ -144,11 +144,6 @@ abstract class BaseProduct implements ProductInterface
     /**
      * @var ArrayCollection
      */
-    protected $enabledVariations;
-
-    /**
-     * @var ArrayCollection
-     */
     protected $productCollections;
 
     /**
@@ -166,7 +161,6 @@ abstract class BaseProduct implements ProductInterface
         $this->productCategories  = new ArrayCollection();
         $this->productCollections = new ArrayCollection();
         $this->variations         = new ArrayCollection();
-        $this->enabledVariations  = new ArrayCollection();
     }
 
     /**
@@ -955,5 +949,20 @@ abstract class BaseProduct implements ProductInterface
         if (!$this->hasOneMainCategory()) {
             $context->addViolation('sonata.product.must_have_one_main_category');
         }
+    }
+    
+    /**
+     * @return ArrayCollection
+     */
+    public function getEnabledVariations()
+            {
+        $enabledVariations  = new ArrayCollection();
+        
+        foreach($this->getVariations() as $variation){
+            if($variation->getEnabled())
+                $enabledVariations->add($variation);
+        }
+        
+        return $enabledVariations;
     }
 }
