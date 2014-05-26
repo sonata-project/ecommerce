@@ -140,7 +140,7 @@ abstract class BaseProduct implements ProductInterface
      * @var ArrayCollection
      */
     protected $variations;
-    
+
     /**
      * @var ArrayCollection
      */
