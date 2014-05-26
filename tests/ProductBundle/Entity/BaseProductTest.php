@@ -91,4 +91,38 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $product->addProductCategory($pc3);
         $this->assertFalse($product->hasOneMainCategory());
     }
+    
+    public function testGetEnabledVariations()
+    {
+        $product = new Product();
+        $product2 = new Product();
+        $product3 = new Product();
+        $product4 = new Product();
+        
+        $product->setEnabled(true);
+        $product2->setEnabled(true);
+        $product3->setEnabled(true);
+        $product4->setEnabled(false);
+        
+        $product->addVariation($product2);
+        $product->addVariation($product3);
+        $product->addVariation($product4);
+        
+        $array = new \Doctrine\Common\Collections\ArrayCollection();
+        $array->add($product2);
+        $array->add($product3);
+        
+        $this->assertTrue($product->getEnabled());
+        $this->assertTrue($product2->getEnabled());
+        $this->assertTrue($product3->getEnabled());
+        $this->assertFalse($product4->getEnabled());
+        
+        $this->assertEquals($array, $product->getEnabledVariations(),'ArrayCollection is not the same.');
+        
+        $product4->setEnabled(true);
+        $array->add($product4);
+        $this->assertTrue($product4->getEnabled());
+        
+        $this->assertEquals($array, $product->getEnabledVariations(),'ArrayCollection is not the same.');
+    }
 }
