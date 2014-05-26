@@ -140,6 +140,11 @@ abstract class BaseProduct implements ProductInterface
      * @var ArrayCollection
      */
     protected $variations;
+    
+    /**
+     * @var ArrayCollection
+     */
+    protected $enabledVariations;
 
     /**
      * @var ArrayCollection
@@ -161,6 +166,7 @@ abstract class BaseProduct implements ProductInterface
         $this->productCategories  = new ArrayCollection();
         $this->productCollections = new ArrayCollection();
         $this->variations         = new ArrayCollection();
+        $this->enabledVariations  = new ArrayCollection();
     }
 
     /**
@@ -449,6 +455,9 @@ abstract class BaseProduct implements ProductInterface
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+        
+        if($this->getParent() !== null )
+            $this->getParent()->updateEnabledVariations();
     }
 
     /**
@@ -667,6 +676,8 @@ abstract class BaseProduct implements ProductInterface
         $variation->setParent($this);
 
         $this->variations->add($variation);
+        
+        $this->updateEnabledVariations();
     }
 
     /**
@@ -676,6 +687,7 @@ abstract class BaseProduct implements ProductInterface
     {
         if ($this->variations->contains($variation)) {
             $this->variations->removeElement($variation);
+            $this->updateEnabledVariations();
         }
     }
 
@@ -693,6 +705,8 @@ abstract class BaseProduct implements ProductInterface
     public function setVariations(ArrayCollection $variations)
     {
         $this->variations = $variations;
+        
+        $this->updateEnabledVariations();
     }
 
     /**
@@ -701,6 +715,16 @@ abstract class BaseProduct implements ProductInterface
     public function hasVariations()
     {
         return count($this->variations) > 0;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEnabledVariations()
+    {
+        $this->updateEnabledVariations();
+        
+        return count($this->enabledVariations) > 0;
     }
 
     /**
@@ -955,14 +979,21 @@ abstract class BaseProduct implements ProductInterface
      * @return ArrayCollection
      */
     public function getEnabledVariations()
-            {
-        $enabledVariations  = new ArrayCollection();
+    {
+        $this->updateEnabledVariations();
+        return $this->enabledVariations;
+    }
+    
+    /**
+     * Public method for set actual enabledVariations 
+     */
+    public function updateEnabledVariations()
+    {
+        $this->enabledVariations->clear();
         
         foreach($this->getVariations() as $variation){
             if($variation->getEnabled())
-                $enabledVariations->add($variation);
+                $this->enabledVariations->add($variation);
         }
-        
-        return $enabledVariations;
     }
 }
