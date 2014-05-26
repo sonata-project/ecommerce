@@ -980,6 +980,9 @@ abstract class BaseProduct implements ProductInterface
     
     public function updateEnabledVariations()
     {
+        if($this->enabledVariations===null)
+            $this->enabledVariations = new ArrayCollection();
+            
         $this->enabledVariations->clear();
         
         foreach($this->getVariations() as $variation){
