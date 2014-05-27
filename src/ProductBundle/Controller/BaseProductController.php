@@ -125,7 +125,7 @@ abstract class BaseProductController extends Controller
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
         
-        if($product->getParent()!==null){
+        if($product->getParent() !== null){
             $enabledVariations = $provider->getEnabledVariations($product->getParent());
         }
         else{
