@@ -141,6 +141,7 @@ abstract class BaseProductController extends Controller
                     'provider' => $provider,
                     'locale' => $basket->getLocale(),
                     'currency' => $basket->getCurrency(),
+                    'enabledVariations' => $enabledVariations,
                 ));
         }
 
