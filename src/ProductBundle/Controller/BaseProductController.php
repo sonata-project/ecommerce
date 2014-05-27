@@ -134,13 +134,9 @@ abstract class BaseProductController extends Controller
         
         if ($this->getRequest()->isXmlHttpRequest())
         {
-            $basket = $this->get('sonata.basket');
-            
             return $this->render(sprintf('%s:view_variations_popin.html.twig', $provider->getBaseControllerName()), array(
                     'product'           => $product,
                     'provider'          => $provider,
-                    'locale'            => $basket->getLocale(),
-                    'currency'          => $basket->getCurrency(),
                     'enabledVariations' => $enabledVariations,
                 ));
         }
