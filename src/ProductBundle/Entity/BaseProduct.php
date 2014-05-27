@@ -144,11 +144,6 @@ abstract class BaseProduct implements ProductInterface
     /**
      * @var ArrayCollection
      */
-    protected $enabledVariations;
-
-    /**
-     * @var ArrayCollection
-     */
     protected $productCollections;
 
     /**
@@ -166,7 +161,6 @@ abstract class BaseProduct implements ProductInterface
         $this->productCategories  = new ArrayCollection();
         $this->productCollections = new ArrayCollection();
         $this->variations         = new ArrayCollection();
-        $this->enabledVariations  = new ArrayCollection();
     }
 
     /**
