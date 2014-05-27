@@ -137,16 +137,16 @@ abstract class BaseProductController extends Controller
             $basket = $this->get('sonata.basket');
             
             return $this->render(sprintf('%s:view_variations_popin.html.twig', $provider->getBaseControllerName()), array(
-                    'product' => $product,
-                    'provider' => $provider,
-                    'locale' => $basket->getLocale(),
-                    'currency' => $basket->getCurrency(),
+                    'product'           => $product,
+                    'provider'          => $provider,
+                    'locale'            => $basket->getLocale(),
+                    'currency'          => $basket->getCurrency(),
                     'enabledVariations' => $enabledVariations,
                 ));
         }
 
         return $this->render(sprintf('%s:view_variations.html.twig', $provider->getBaseControllerName()), array(
-            'product' => $product,
+            'product'           => $product,
             'enabledVariations' => $enabledVariations,
         ));
     }
