@@ -1,3 +1,5 @@
+{% set currency = sonata_basket.basket.currency %}
+
 {% if enabledVariations.count == 0 %}
     {% trans from 'SonataProductBundle' %}no_variations_available{% endtrans %}
 {% else %}
