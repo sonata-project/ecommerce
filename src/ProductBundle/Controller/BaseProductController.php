@@ -124,9 +124,29 @@ abstract class BaseProductController extends Controller
         }
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
+        
+        if($product->getParent()!==null){
+            $enabledVariations = $provider->getEnabledVariations($product->getParent());
+        }
+        else{
+            $enabledVariations = $provider->getEnabledVariations($product);
+        }
+        
+        if ($this->getRequest()->isXmlHttpRequest())
+        {
+            $basket = $this->get('sonata.basket');
+            
+            return $this->render(sprintf('%s:view_variations_popin.html.twig', $provider->getBaseControllerName()), array(
+                    'product' => $product,
+                    'provider' => $provider,
+                    'locale' => $basket->getLocale(),
+                    'currency' => $basket->getCurrency(),
+                ));
+        }
 
         return $this->render(sprintf('%s:view_variations.html.twig', $provider->getBaseControllerName()), array(
             'product' => $product,
+            'enabledVariations' => $enabledVariations,
         ));
     }
 
