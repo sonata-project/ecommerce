@@ -144,11 +144,6 @@ abstract class BaseProduct implements ProductInterface
     /**
      * @var ArrayCollection
      */
-    protected $enabledVariations;
-
-    /**
-     * @var ArrayCollection
-     */
     protected $productCollections;
 
     /**
@@ -166,7 +161,6 @@ abstract class BaseProduct implements ProductInterface
         $this->productCategories  = new ArrayCollection();
         $this->productCollections = new ArrayCollection();
         $this->variations         = new ArrayCollection();
-        $this->enabledVariations  = new ArrayCollection();
     }
 
     /**
@@ -455,9 +449,6 @@ abstract class BaseProduct implements ProductInterface
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
-        
-        if($this->getParent() !== null )
-            $this->getParent()->updateEnabledVariations();
     }
 
     /**
@@ -676,9 +667,6 @@ abstract class BaseProduct implements ProductInterface
         $variation->setParent($this);
 
         $this->variations->add($variation);
-        
-        if($variation->getEnabled())
-            $this->updateEnabledVariations();
     }
 
     /**
@@ -688,8 +676,6 @@ abstract class BaseProduct implements ProductInterface
     {
         if ($this->variations->contains($variation)) {
             $this->variations->removeElement($variation);
-            if($variation->getEnabled())
-                $this->updateEnabledVariations();
         }
     }
 
@@ -707,8 +693,6 @@ abstract class BaseProduct implements ProductInterface
     public function setVariations(ArrayCollection $variations)
     {
         $this->variations = $variations;
-        
-        $this->updateEnabledVariations();
     }
 
     /**
@@ -717,11 +701,6 @@ abstract class BaseProduct implements ProductInterface
     public function hasVariations()
     {
         return count($this->variations) > 0;
-    }
-
-    public function hasEnabledVariations()
-    {
-        return count($this->enabledVariations) > 0;
     }
     
     /**
@@ -969,25 +948,6 @@ abstract class BaseProduct implements ProductInterface
 
         if (!$this->hasOneMainCategory()) {
             $context->addViolation('sonata.product.must_have_one_main_category');
-        }
-    }
-    
-    public function getEnabledVariations()
-    {
-        $this->updateEnabledVariations();
-        return $this->enabledVariations;
-    }
-    
-    public function updateEnabledVariations()
-    {
-        if($this->enabledVariations===null)
-            $this->enabledVariations = new ArrayCollection();
-            
-        $this->enabledVariations->clear();
-        
-        foreach($this->getVariations() as $variation){
-            if($variation->getEnabled())
-                $this->enabledVariations->add($variation);
         }
     }
 }
