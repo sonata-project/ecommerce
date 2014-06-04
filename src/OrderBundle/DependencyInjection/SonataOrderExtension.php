@@ -134,11 +134,11 @@ class SonataOrderExtension extends Extension
             'product_type'
         ));
 
-        $collector->addIndex($config['class']['order_element'], 'status', array(
+        $collector->addIndex($config['class']['order_element'], 'order_element_status', array(
             'status'
         ));
 
-        $collector->addIndex($config['class']['order'], 'status', array(
+        $collector->addIndex($config['class']['order'], 'order_status', array(
             'status'
         ));
 
