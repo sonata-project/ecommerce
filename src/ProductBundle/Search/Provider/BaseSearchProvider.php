@@ -105,7 +105,7 @@ abstract class BaseSearchProvider implements SearchProviderInterface
         $this->buildFilters();
         $this->buildFacets();
         $this->buildSort();
-        $this->buildForm();
+//        $this->buildForm();
     }
 
     /**
@@ -138,7 +138,8 @@ abstract class BaseSearchProvider implements SearchProviderInterface
         $this->setSearchParameters(array(
             'q'          => $request->query->get('q'),
             'term'       => sprintf('*%s*', $request->query->get('q')),
-            'page'       => $request->query->get('page', 1),
+            '_page'      => $request->query->get('page', 1),
+            '_per_page'  => $request->query->get('count', 9),
             'category'   => $request->query->get('category'),
             'price'      => $request->query->get('price'),
             'sort'       => $request->query->get('sort'),

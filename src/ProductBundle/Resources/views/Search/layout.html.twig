@@ -27,7 +27,7 @@ file that was distributed with this source code.
                     'block_id':    'sonata.product.block.categories_menu',
                     'updated_at':  'now',
                 },
-                'facets': datagrid.query.results.facets is defined ? datagrid.query.results.facets.categories.terms : null,
+                'facets': datagrid.query.results.facets is defined ? datagrid.query.results.facets.categories.terms : [],
                 'route': app.request.attributes.get('_route'),
                 'route_parameters': {sort: sort, q: q},
                 'ttl': 60
@@ -68,7 +68,7 @@ file that was distributed with this source code.
                             <h4 class="panel-title">"{{ category ? category.name : q}}"</h4>
                         </div>
                         <form name="search-sort" data-name="sonata-select" method="get" action="{{ path(app.request.attributes.get('_route')) }}">
-                            {{ form_widget(form.sort, {horizontal_input_wrapper_class: 'col-sm-4'}) }}
+                            {#{{ form_widget(form.sort, {horizontal_input_wrapper_class: 'col-sm-4'}) }}#}
                             {{ form_rest(form) }}
                         </form>
                         <div class="col-sm-5">

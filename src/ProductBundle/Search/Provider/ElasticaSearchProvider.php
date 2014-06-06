@@ -59,15 +59,14 @@ class ElasticaSearchProvider extends BaseSearchProvider
             ));
         }*/
 
-        $this->getDatagridBuilder()
-            ->addFilter('parent', 'missing');
+        $this->getDatagridBuilder()->addFilter('parent', 'missing');
 
         if ($this->getSearchParameter('category')) {
-            $this->getDatagridBuilder()->addFilter('category', 'term');
+            $this->getDatagridBuilder()->addFilter('category', 'term', array('field' => 'product_categories.category_id'));
         }
 
         if ($this->getSearchParameter('price')) {
-            $this->getDatagridBuilder()->addFilter('price', 'range');
+            $this->getDatagridBuilder()->addFilter('price', 'max');
         }
     }
 
@@ -81,7 +80,7 @@ class ElasticaSearchProvider extends BaseSearchProvider
         $categories->setField('product_categories.category_id');
 
         $this->facets[] = $categories;*/
-        $this->getDatagridBuilder()->addFacet('categories', 'terms');
+        $this->getDatagridBuilder()->addFacet('categories', 'terms', array('field' => 'product_categories.category_id'));
     }
 
     /**

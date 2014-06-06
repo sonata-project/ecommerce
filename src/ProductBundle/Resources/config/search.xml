@@ -39,7 +39,7 @@
         </service>
 
         <service id="sonata.product.search.provider.elastica" class="%sonata.product.search.provider.elastica.class%">
-            <argument type="service" id="form.factory" />
+            <argument type="service" id="sonata.product.datagrid.factory" />
             <argument type="service" id="fos_elastica.manager.orm" />
             <argument>%sonata.product.product.class%</argument>
         </service>

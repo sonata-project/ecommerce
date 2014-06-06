@@ -60,7 +60,7 @@ class SearchController extends Controller
         $results = $datagrid->getResults();
         $provider = $results ? $this->getProductPool()->getProvider(current($results)) : null;
 
-        return $this->render('SonataProductBundle:Search:index.html.twig', /**array_merge($builder->getSearchParameters(), */array(
+        return $this->render('SonataProductBundle:Search:index.html.twig', array_merge($builder->getSearchParameters(), array(
             'category'     => null,
             'sort'         => null,
             'q'            => "",
@@ -69,7 +69,7 @@ class SearchController extends Controller
             'display_mode' => $displayMode,
             'form'         => $datagrid->getForm()->createView(),
             'provider'     => $provider,
-        ))/*)*/;
+        )));
     }
 
     /**
