@@ -52,7 +52,7 @@ abstract class BaseOrder implements OrderInterface
     protected $deliveryStatus;
 
     /**
-     * @var datetime $validated_at
+     * @var \Datetime $validated_at
      */
     protected $validatedAt;
 
@@ -203,7 +203,7 @@ abstract class BaseOrder implements OrderInterface
 
     public function __construct()
     {
-        $this->orderElements     = new \Doctrine\Common\Collections\ArrayCollection;
+        $this->orderElements = new \Doctrine\Common\Collections\ArrayCollection;
     }
 
     public function prePersist()
@@ -261,7 +261,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function getFullBilling($sep = ", ")
     {
-        return BaseAddress::formatAddress($this->getBillingAsArray(),$sep);
+        return BaseAddress::formatAddress($this->getBillingAsArray(), $sep);
     }
 
     public function getBillingAsArray()
