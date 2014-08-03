@@ -79,6 +79,7 @@ Follow these instructions:
 
         new FOS\UserBundle\FOSUserBundle(),
         new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+        new Sonata\UserBundle\SonataUserBundle(),
 
         new Sonata\CustomerBundle\SonataCustomerBundle(),
         new Sonata\ProductBundle\SonataProductBundle(),
@@ -143,6 +144,9 @@ Follow these instructions:
                     order:  sonata.payment.transformer.order
                     basket: sonata.payment.transformer.basket
 
+            sonata_price:
+                currency: EUR
+
             # Doctrine Configuration
             doctrine:
                 # ...
@@ -195,14 +199,14 @@ Follow these instructions:
         // app/AppKernel.php
         ...
 
-        new Application\Sonata\CustomerBundle\SonataCustomerBundle(),
-        new Application\Sonata\DeliveryBundle\SonataDeliveryBundle(),
-        new Application\Sonata\BasketBundle\SonataBasketBundle(),
-        new Application\Sonata\InvoiceBundle\SonataInvoiceBundle(),
-        new Application\Sonata\MediaBundle\SonataMediaBundle(),
-        new Application\Sonata\OrderBundle\SonataOrderBundle(),
-        new Application\Sonata\PaymentBundle\SonataPaymentBundle(),
-        new Application\Sonata\ProductBundle\SonataProductBundle(),
+        new Application\Sonata\CustomerBundle\ApplicationSonataCustomerBundle(),
+        new Application\Sonata\DeliveryBundle\ApplicationSonataDeliveryBundle(),
+        new Application\Sonata\BasketBundle\ApplicationSonataBasketBundle(),
+        new Application\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle(),
+        new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+        new Application\Sonata\OrderBundle\ApplicationSonataOrderBundle(),
+        new Application\Sonata\PaymentBundle\ApplicationSonataPaymentBundle(),
+        new Application\Sonata\ProductBundle\ApplicationSonataProductBundle(),
 
 Now, you can use these bundles to extend entities or template files.
 
@@ -213,9 +217,13 @@ Now, you can use these bundles to extend entities or template files.
         # app/config/routing.yml
 
         # sonata front controller
-        sonata_user:
-            resource: @SonataUserBundle/Resources/config/routing/user.xml
+        sonata_customer:
+            resource: @SonataCustomerBundle/Resources/config/routing/customer.xml
             prefix: /shop/user
+
+        sonata_basket:
+            resource: @SonataBasketBundle/Resources/config/routing/basket.xml
+            prefix: /shop/basket
 
         sonata_order:
             resource: @SonataOrderBundle/Resources/config/routing/order.xml
