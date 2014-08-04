@@ -122,7 +122,7 @@ class SonataCustomerExtension extends Extension
             'joinColumns'  => array(
                 array(
                     'name' => 'user_id',
-                    'referencedColumnName' => 'id',
+                    'referencedColumnName' => $config['field']['customer']['user'],
                     'onDelete' => 'SET NULL',
                 ),
             ),
