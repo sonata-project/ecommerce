@@ -30,6 +30,9 @@ The bundle allows you to configure the entity classes; you'll also need to regis
             order:                Application\Sonata\OrderBundle\Entity\Order
             user:                 Application\Sonata\UserBundle\Entity\User
 
+            # You can also implement custom components classes
+            customer_selector:    Sonata\Component\Customer\CustomerSelector
+
     # Enable Doctrine to map the provided entities
     doctrine:
         orm:

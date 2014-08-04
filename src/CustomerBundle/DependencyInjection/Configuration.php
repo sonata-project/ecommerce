@@ -47,6 +47,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('customer')->defaultValue('Application\\Sonata\\CustomerBundle\\Entity\\Customer')->end()
+                        ->scalarNode('customer_selector')->defaultValue('Sonata\\Component\\Customer\\CustomerSelector')->end()
                         ->scalarNode('address')->defaultValue('Application\\Sonata\\CustomerBundle\\Entity\\Address')->end()
                         ->scalarNode('order')->defaultValue('Application\\Sonata\\OrderBundle\\Entity\\Order')->end()
                         ->scalarNode('user')->defaultValue('Application\\Sonata\\UserBundle\\Entity\\User')->end()

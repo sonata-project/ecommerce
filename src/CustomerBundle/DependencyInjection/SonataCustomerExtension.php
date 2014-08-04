@@ -73,6 +73,7 @@ class SonataCustomerExtension extends Extension
     {
         $container->setParameter('sonata.customer.customer.class', $config['class']['customer']);
         $container->setParameter('sonata.customer.address.class', $config['class']['address']);
+        $container->setParameter('sonata.customer.selector.class', $config['class']['customer_selector']);
 
         $container->setParameter('sonata.customer.admin.customer.entity', $config['class']['customer']);
         $container->setParameter('sonata.customer.admin.address.entity', $config['class']['address']);
