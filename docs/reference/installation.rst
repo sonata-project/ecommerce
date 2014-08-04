@@ -79,6 +79,8 @@ Follow these instructions:
 
         new FOS\UserBundle\FOSUserBundle(),
         new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+        new Sonata\IntlBundle\SonataIntlBundle(),
+        new Sonata\NotificationBundle\SonataNotificationBundle(),
         new Sonata\UserBundle\SonataUserBundle(),
 
         new Sonata\CustomerBundle\SonataCustomerBundle(),
@@ -115,6 +117,35 @@ Follow these instructions:
                         code: free
 
                 selector: sonata.delivery.selector.default
+
+            sonata_media:
+                # if you don't use default namespace configuration
+                #class:
+                #    media: MyVendor\MediaBundle\Entity\Media
+                #    gallery: MyVendor\MediaBundle\Entity\Gallery
+                #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+                default_context: default
+                db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+                contexts:
+                    default:  # the default context is mandatory
+                        providers:
+                            - sonata.media.provider.dailymotion
+                            - sonata.media.provider.youtube
+                            - sonata.media.provider.image
+                            - sonata.media.provider.file
+
+                        formats:
+                            small: { width: 100 , quality: 70}
+                            big:   { width: 500 , quality: 70}
+
+                cdn:
+                    server:
+                        path: /uploads/media # http://media.sonata-project.org/
+
+                filesystem:
+                    local:
+                        directory:  %kernel.root_dir%/../web/uploads/media
+                        create:     false
 
             sonata_payment:
                 services:
