@@ -84,7 +84,6 @@ class ProductMenuBuilder
                     $filterItemOptions
                 );
             }
-            $menuItem->setCurrentUri($currentUri);
         }
 
         return $menu;
@@ -186,8 +185,6 @@ class ProductMenuBuilder
                 }
             }
         }
-
-        $menu->setCurrentUri($currentUri);
     }
 
     /**
