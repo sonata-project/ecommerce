@@ -361,7 +361,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         // We retrieve the variations fresh from DB so we may find the values
         $variations = $this->getEnabledVariations($product->getParent() ?: $product);
-
+        // In case variation is a DateTime
+        if ($variationValue instanceof \DateTime) {
+            $variationValue = $variationValue->format('Y-m-d H:i');
+        }
+                
         $accessor = PropertyAccess::createPropertyAccessor();
 
         $choices = array();
