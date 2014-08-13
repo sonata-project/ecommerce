@@ -341,8 +341,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 $variationValue = $accessor->getValue($mVariation, $field);
                 
                 // In case variation is a DateTime
-                if ($variations instanceof \DateTime) {
-                    $variations = $variations->format('Y-m-d H:i');
+                if ($variationValue instanceof \DateTime) {
+                    $variationValue = $variationValue->format('Y-m-d H:i');
                 }
         
                 if (!array_key_exists($field, $choices) || !in_array($variationValue, $choices[$field])) {
