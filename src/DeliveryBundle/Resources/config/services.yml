@@ -1,0 +1,5 @@
+services:
+  application.sonata.delivery.fedex:
+    class: Application\Sonata\DeliveryBundle\Delivery\FedexDelivery
+    tags:
+      - { name: sonata.delivery.method }

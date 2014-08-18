@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
  * This is the class that validates and merges configuration from your app/config files
- *
+ * see https://github.com/sonata-project/ecommerce/pull/213/files
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
 class Configuration implements ConfigurationInterface
@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
 
         $node
             ->children()
-                ->scalarNode('selector')->defaultValue('sonata.delivery.selector.default')->cannotBeEmpty()->end()
+            ->scalarNode('selector')->defaultValue('sonata.delivery.selector.default')->cannotBeEmpty()->end()
             ->end()
         ;
 
@@ -49,27 +49,50 @@ class Configuration implements ConfigurationInterface
     private function addDeliverySection(ArrayNodeDefinition $node)
     {
         $node
-            ->children()
-                ->arrayNode('services')
-                ->children()
-                    ->arrayNode('free_address_required')
-                        ->children()
-                            ->scalarNode('name')->defaultValue('free_address_required')->cannotBeEmpty()->end()
-                            ->scalarNode('enabled')->defaultValue(false)->cannotBeEmpty()->end()
-                            ->scalarNode('code')->defaultValue('free_address_required')->cannotBeEmpty()->end()
-                            ->scalarNode('priority')->defaultValue(10)->cannotBeEmpty()->end()
-                        ->end()
-                    ->end()
-                    ->arrayNode('free_address_not_required')
-                        ->children()
-                            ->scalarNode('name')->defaultValue('free_address_not_required')->cannotBeEmpty()->end()
-                            ->scalarNode('enabled')->defaultValue(false)->cannotBeEmpty()->end()
-                            ->scalarNode('code')->defaultValue('free_address_not_required')->cannotBeEmpty()->end()
-                            ->scalarNode('priority')->defaultValue(10)->cannotBeEmpty()->end()
-                        ->end()
-                    ->end()
+            ->validate()
+            ->ifTrue(function ($v) {
+                    foreach ($v['methods'] as $methodCode => $service) {
+                        if (null === $service || "" === $service) {
+                            foreach ($v['services'] as $serviceConf) {
+                                if ($methodCode === $serviceConf['code']) {
+                                    break 2;
+                                }
+                            }
 
-                ->end()
+                            return true;
+                        }
+                    }
+
+                    return false;
+                })
+            ->thenInvalid("Custom delivery methods require a service id. Provided delivery methods need to be configured with their method code as key.")
+            ->end()
+            ->children()
+            ->arrayNode('services')
+            ->children()
+            ->arrayNode('free_address_required')
+            ->children()
+            ->scalarNode('name')->defaultValue('free_address_required')->cannotBeEmpty()->end()
+            ->scalarNode('code')->defaultValue('free_address_required')->cannotBeEmpty()->end()
+            ->scalarNode('priority')->defaultValue(10)->cannotBeEmpty()->end()
+            ->end()
+            ->end()
+            ->arrayNode('free_address_not_required')
+            ->children()
+            ->scalarNode('name')->defaultValue('free_address_not_required')->cannotBeEmpty()->end()
+            ->scalarNode('code')->defaultValue('free_address_not_required')->cannotBeEmpty()->end()
+            ->scalarNode('priority')->defaultValue(10)->cannotBeEmpty()->end()
+            ->end()
+            ->end()
+
+            ->end()
+            ->end()
+
+            ->arrayNode('methods')
+            ->useAttributeAsKey('code')
+            ->prototype('scalar')->end()
+            ->end()
+
             ->end()
         ;
     }
