@@ -268,13 +268,20 @@ class Paypal extends BasePaypal
         $params['cmd'] = '_notify-validate';
         //$this->getLogger()->
         // retrieve the client
-        $client = $this
-            ->getWebConnectorProvider()
-            ->getNamedClient($this->getOption('web_connector_name', 'default'));
+//        $client = $this
+//            ->getWebConnectorProvider()
+//            ->getNamedClient($this->getOption('web_connector_name', 'default'));
+//
+//        $client->request('POST', $this->getOption('url_action'), $params);
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL, $this->getOption('url_action'));
+        curl_setopt($ch,CURLOPT_POST, true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $params);
 
-        $client->request('POST', $this->getOption('url_action'), $params);
+        $result = curl_exec($ch);
 
-        if ($client->getResponse()->getContent() == 'VERIFIED') {
+//        if ($client->getResponse()->getContent() == 'VERIFIED') {
+        if ($result == 'VERIFIED') {
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
