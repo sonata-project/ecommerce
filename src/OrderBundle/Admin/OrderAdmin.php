@@ -81,11 +81,10 @@ class OrderAdmin extends Admin
 
         // define group zoning
         $formMapper
-             ->with($this->trans('order.form.group_main_label'), array('class' => 'col-md-12'))
-             ->with($this->trans('order.form.group_billing_label'), array('class' => 'col-md-6'))
-             ->with($this->trans('order.form.group_shipping_label'), array('class' => 'col-md-6'))
+             ->with($this->trans('order.form.group_main_label'), array('class' => 'col-md-12'))->end()
+             ->with($this->trans('order.form.group_billing_label'), array('class' => 'col-md-6'))->end()
+             ->with($this->trans('order.form.group_shipping_label'), array('class' => 'col-md-6'))->end()
         ;
-
 
         if (!$this->isChild()) {
             $formMapper
