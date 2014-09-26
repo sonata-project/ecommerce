@@ -15,6 +15,7 @@
         <field name="options" column="options" type="json"/>
         <field name="name" column="name" type="string" length="255"/>
         <field name="productCode" column="product_code" type="string" length="255"/>
+        <field name="priceIncludingVat" column="price_including_vat" type="boolean" nullable="true" />
 
     </mapped-superclass>
 
