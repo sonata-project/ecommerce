@@ -118,7 +118,7 @@ class SonataOrderExtension extends Extension
             'targetEntity'  => $config['class']['order'],
             'cascade'       => array(),
             'mappedBy'      => NULL,
-            'inversedBy'    => NULL,
+            'inversedBy'    => 'orderElements',
             'joinColumns'   => array(
                 array(
                     'name'  => 'order_id',
