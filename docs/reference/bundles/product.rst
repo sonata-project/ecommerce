@@ -40,6 +40,34 @@ It offers a console command to easily generate a new product type in your applic
      --env (-e)            The Environment name. (default: "dev")
      --no-debug            Switches off debug mode.
 
+
+Furthermore, you can create a dump file with products schema information. Even those created with the previous command:
+
+.. code-block:: bash
+
+    Usage:
+     sonata:doctrine:utils -f /tmp/dump.json dump-products-meta
+
+    Arguments:
+     action                The action to execute [dump-meta | dump-products-meta]
+
+    Options:
+     --filename (-f)       If filename is specified, result will be dump into this file under json format.
+     --help (-h)           Display this help message.
+     --quiet (-q)          Do not output any message.
+     --verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug.
+     --version (-V)        Display this application version.
+     --ansi                Force ANSI output.
+     --no-ansi             Disable ANSI output.
+     --no-interaction (-n) Do not ask any interactive question.
+     --shell (-s)          Launch the shell.
+     --process-isolation   Launch commands from shell as a separate process.
+     --env (-e)            The Environment name. (default: "dev")
+     --no-debug            Switches off debug mode.
+
+
+This can be used for import/export purposes for example.
+
 Product / SonataSeoBundle integration
 =====================================
 
