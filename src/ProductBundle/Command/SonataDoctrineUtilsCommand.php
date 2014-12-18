@@ -54,11 +54,14 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
             ->setName('sonata:doctrine:utils')
             ->setDefinition(
                 [
-                    new InputArgument('action', InputArgument::REQUIRED, sprintf(
-                        'The action to execute [%s]',
-                        implode(' | ', $this->allowedActions)
-                    )),
-                    new InputOption('filename', 'f', InputOption::VALUE_OPTIONAL,
+                    new InputArgument(
+                        'action', InputArgument::REQUIRED, sprintf(
+                            'The action to execute [%s]',
+                            implode(' | ', $this->allowedActions)
+                        )
+                    ),
+                    new InputOption(
+                        'filename', 'f', InputOption::VALUE_OPTIONAL,
                         'If filename is specified, result will be dump into this file under json format.', null
                     ),
                 ]
@@ -91,11 +94,13 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!in_array($input->getArgument('action'), $this->allowedActions)) {
-            throw new InvalidArgumentException(sprintf(
-                'Invalid argument %s. Allowed arguments are [%s].',
-                $input->getArgument('action'),
-                implode(' | ', $this->allowedActions)
-            ));
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Invalid argument %s. Allowed arguments are [%s].',
+                    $input->getArgument('action'),
+                    implode(' | ', $this->allowedActions)
+                )
+            );
         }
 
         $this->dumpMetadata($this->metadata, $input, $output);
@@ -145,7 +150,7 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param array            $metadata
+     * @param array           $metadata
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
@@ -174,7 +179,7 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $meta
+     * @param \Doctrine\ORM\Mapping\ClassMetadata $meta
      *
      * @return array
      */
@@ -183,7 +188,7 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
         $normalizedMeta = [];
         $fieldMappings = $meta->fieldMappings;
 
-        foreach($fieldMappings as $field) {
+        foreach ($fieldMappings as $field) {
             $normalizedMeta[$field['fieldName']] = isset($field['columnName']) ? $field['columnName'] : null;
         }
 
