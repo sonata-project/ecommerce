@@ -28,9 +28,15 @@ use Psr\Log\InvalidArgumentException;
  */
 class SonataDoctrineUtilsCommand extends ContainerAwareCommand
 {
+    /**
+     * @var string
+     */
+    protected $defaultDumpDirectory;
 
-    const DEFAULT_DUMP_DIRECTORY = "/tmp";
-    const BASE_PRODUCT_CLASS = 'Application\Sonata\ProductBundle\Entity\Product';
+    /**
+     * @var string
+     */
+    protected $baseProductClass;
 
     /**
      * @var array $allowedActions
@@ -76,6 +82,9 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        $this->defaultDumpDirectory = $this->getContainer()->getParameter('sonata.doctrine.utils.dump_directory');
+        $this->baseProductClass = $this->getContainer()->getParameter('sonata.doctrine.utils.base_product_class');
+
         $output->writeln(sprintf('Initialising Doctrine metadata.'));
         $manager = $this->getContainer()->get('doctrine')->getManager();
         $metadata = $manager->getMetadataFactory()->getAllMetadata();
@@ -133,11 +142,11 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
             $directory = dirname($input->getOption('filename'));
             $filename = basename($input->getOption('filename'));
 
-            if (empty($directory)) {
-                $directory = self::DEFAULT_DUMP_DIRECTORY;
+            if (empty($directory) || $directory == '.') {
+                $directory = $this->defaultDumpDirectory;
             }
 
-            $adapter = new LocalAdapter($directory);
+            $adapter = new LocalAdapter($directory, true);
             $fileSystem = new Filesystem($adapter);
             $success = $fileSystem->write($filename, json_encode($metadata), true);
 
@@ -169,7 +178,7 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
                     $metadata,
                     function ($meta) {
                         /** @var \Doctrine\ORM\Mapping\ClassMetadata $meta */
-                        return $meta->rootEntityName === SonataDoctrineUtilsCommand::BASE_PRODUCT_CLASS;
+                        return $meta->rootEntityName === $this->baseProductClass;
                     }
                 );
                 break;
