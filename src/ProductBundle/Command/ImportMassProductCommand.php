@@ -297,9 +297,9 @@ class ImportMassProductCommand extends ContainerAwareCommand
      */
     protected function insertProduct(array $data, $index, OutputInterface $output)
     {
-        $output->writeln(
+        $output->write(
             sprintf(
-                ' > Starting index %d. Product %s with sku %s',
+                ' > Starting index %d. Product %s with sku %s.',
                 $index,
                 $data[$this->familyColumnIndex],
                 $data[$this->skuColumnIndex]
@@ -309,8 +309,17 @@ class ImportMassProductCommand extends ContainerAwareCommand
             $family = $data[$this->familyColumnIndex];
             /** @var ProductManagerInterface $productManager */
             $productManager = $this->getProductManager($family, $index);
+
             /** @var ProductInterface $product */
-            $product = $productManager->create();
+            $product = $productManager->findOneBy(array($this->skuColumn => $data[$this->skuColumnIndex]));
+            $action = '<info>update</info>';
+
+            if (!$product) {
+                $product = $productManager->create();
+                $action = '<info>create</info>';
+            }
+
+            $output->writeLn(sprintf(' - %s', $action));
 
             foreach ($this->setters as $pos => $name) {
                 if ($pos !== $this->familyColumnIndex) {
