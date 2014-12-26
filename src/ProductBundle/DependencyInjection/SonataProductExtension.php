@@ -88,6 +88,8 @@ class SonataProductExtension extends Extension
         $container->setParameter('sonata.product.admin.category.entity', $config['class']['category']);
         $container->setParameter('sonata.product.admin.collection.entity', $config['class']['collection']);
         $container->setParameter('sonata.product.admin.delivery.entity', $config['class']['delivery']);
+
+        $container->setParameter('sonata.product.slugify_service', $config['slugify_service']);
     }
 
     /**

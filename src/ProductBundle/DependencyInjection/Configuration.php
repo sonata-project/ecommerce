@@ -32,6 +32,7 @@ class Configuration implements ConfigurationInterface
         $this->addProductSection($node);
         $this->addModelSection($node);
         $this->addSeoSection($node);
+        $this->addSlugifySection($node);
 
         return $treeBuilder;
     }
@@ -112,6 +113,20 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addSlugifySection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->scalarNode('slugify_service')
+                    ->defaultValue('sonata.core.slugify.native') # you should use: sonata.core.slugify.cocur
                 ->end()
             ->end();
     }

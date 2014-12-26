@@ -57,6 +57,7 @@ The bundle allows you to configure the entity classes ; you'll also need to regi
 .. code-block:: yaml
 
     sonata_product:
+        slugify_method: sonata.core.slugify.cocur # old BC value is sonata.core.slugify.native
         products:
             # Prototype
             id:
