@@ -1,7 +1,4 @@
 <?php
-
-namespace Sonata\Component\Product;
-
 /*
  * This file is part of the Sonata package.
  *
@@ -11,9 +8,12 @@ namespace Sonata\Component\Product;
  * file that was distributed with this source code.
  */
 
-use Sonata\ClassificationBundle\Model\CollectionInterface;
+namespace Sonata\Component\Product;
 
-interface ProductCollectionInterface
+use Sonata\ClassificationBundle\Model\CollectionInterface;
+use Sonata\Component\Model\TimestampableInterface;
+
+interface ProductCollectionInterface extends TimestampableInterface
 {
     /**
      * Set enabled
@@ -28,34 +28,6 @@ interface ProductCollectionInterface
      * @return boolean $enabled
      */
     public function getEnabled();
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime $updatedAt
-     */
-    public function getUpdatedAt();
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt = null);
-
-    /**
-     * Get createdAt
-     *
-     * @return \Datetime $createdAt
-     */
-    public function getCreatedAt();
 
     /**
      * Set Product

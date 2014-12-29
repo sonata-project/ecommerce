@@ -10,11 +10,12 @@
 
 namespace Sonata\Component\Order;
 
+use Sonata\Component\Model\TimestampableInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\PriceComputableInterface;
 
-interface OrderElementInterface extends PriceComputableInterface
+interface OrderElementInterface extends PriceComputableInterface, TimestampableInterface
 {
     /**
      * Set order
@@ -156,26 +157,6 @@ interface OrderElementInterface extends PriceComputableInterface
      * @return string $productType
      */
     public function getProductType();
-
-    /**
-     * @param \DateTime|null $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt = null);
-
-    /**
-     * @return \Datetime
-     */
-    public function getCreatedAt();
-
-    /**
-     * @param \Datetime
-     */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
-
-    /**
-     * @return \Datetime
-     */
-    public function getUpdatedAt();
 
     /**
      * Return the total (price * quantity)
