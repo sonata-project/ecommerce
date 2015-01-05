@@ -11,7 +11,6 @@
 
 namespace Sonata\ProductBundle\Command;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Util\Inflector;
 use Doctrine\ORM\EntityManager;
@@ -28,11 +27,6 @@ use Application\Sonata\MediaBundle\Entity\Media;
 
 class ImportMassProductCommand extends ContainerAwareCommand
 {
-    /**
-     * @var boolean
-     */
-    protected $verbose;
-
     /**
      * @var ArrayCollection
      */
@@ -165,7 +159,6 @@ class ImportMassProductCommand extends ContainerAwareCommand
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->verbose = $input->getOption('verbose');
         $this->productManagers = new ArrayCollection();
         $this->mediaManager = $this->getContainer()->get('sonata.media.manager.media');
         $this->logger = $this->getContainer()->get('sonata.product.import.logger');
@@ -235,7 +228,6 @@ class ImportMassProductCommand extends ContainerAwareCommand
             throw $e;
         }
 
-
         $this->commitTransaction($em);
 
         $output->writeln("Done!");
@@ -284,7 +276,7 @@ class ImportMassProductCommand extends ContainerAwareCommand
                 );
             }
 
-            $this->{$field . 'Index'} = array_search($this->$field, $data);
+            $this->{$field.'Index'} = array_search($this->$field, $data);
         }
     }
 
@@ -297,14 +289,13 @@ class ImportMassProductCommand extends ContainerAwareCommand
      */
     protected function insertProduct(array $data, $index, OutputInterface $output)
     {
-        $output->write(
-            sprintf(
-                ' > Starting index %d. Product %s with sku %s.',
-                $index,
-                $data[$this->familyColumnIndex],
-                $data[$this->skuColumnIndex]
-            )
+        $message = sprintf(
+            ' > Starting index %d. Product %s with sku %s',
+            $index,
+            $data[$this->familyColumnIndex],
+            $data[$this->skuColumnIndex]
         );
+        
         try {
             $family = $data[$this->familyColumnIndex];
             /** @var ProductManagerInterface $productManager */
@@ -319,17 +310,18 @@ class ImportMassProductCommand extends ContainerAwareCommand
                 $action = '<info>create</info>';
             }
 
-            $output->writeLn(sprintf(' - %s', $action));
+            if ($output->isVerbose()) {
+                $output->writeLn(sprintf('%s - %s', $message, $action));
+            }
 
             foreach ($this->setters as $pos => $name) {
                 if ($pos !== $this->familyColumnIndex) {
                     $value = $pos !== $this->imageColumnIndex ? $data[$pos] : $this->handleMedia($data[$pos]);
-                    call_user_func(array($product, 'set' . ucfirst($name)), $value);
+                    call_user_func(array($product, 'set'.ucfirst($name)), $value);
                 }
             }
 
             $productManager->save($product, false);
-
         } catch (\Exception $e) {
             $this->handleException($e, $index);
         }
@@ -349,13 +341,12 @@ class ImportMassProductCommand extends ContainerAwareCommand
         $this->addLog($e);
     }
 
-
     /**
      * @param \Exception $e
      */
     protected function addLog(\Exception $e)
     {
-        echo($e->getMessage() . "\n");
+        $this->logger->error($e->getMessage());
     }
 
     /**
@@ -421,6 +412,5 @@ class ImportMassProductCommand extends ContainerAwareCommand
         if ($reOpen) {
             $em->beginTransaction();
         }
-
     }
 }
