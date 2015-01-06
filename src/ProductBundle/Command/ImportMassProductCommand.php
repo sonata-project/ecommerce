@@ -11,10 +11,13 @@
 
 namespace Sonata\ProductBundle\Command;
 
+use Application\Sonata\ProductBundle\Entity\ProductCategory;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Util\Inflector;
 use Doctrine\ORM\EntityManager;
 use Psr\Log\LoggerInterface;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
+use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\MediaBundle\Entity\MediaManager;
@@ -24,6 +27,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Application\Sonata\MediaBundle\Entity\Media;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 
 class ImportMassProductCommand extends ContainerAwareCommand
 {
@@ -81,6 +85,16 @@ class ImportMassProductCommand extends ContainerAwareCommand
      * @var int
      */
     protected $imageColumnIndex;
+
+    /**
+     * @var string
+     */
+    protected $categoryColumn;
+
+    /**
+     * @var int
+     */
+    protected $categoryColumnIndex;
 
     /**
      * @var bool
@@ -145,6 +159,13 @@ class ImportMassProductCommand extends ContainerAwareCommand
                         'image'
                     ),
                     new InputOption(
+                        'category-column',
+                        null,
+                        InputOption::VALUE_OPTIONAL,
+                        'Set the product category column name',
+                        'category'
+                    ),
+                    new InputOption(
                         'strict',
                         null,
                         InputOption::VALUE_NONE,
@@ -171,6 +192,7 @@ class ImportMassProductCommand extends ContainerAwareCommand
         $this->familyColumn = $input->getOption('family-column');
         $this->skuColumn = $input->getOption('sku-column');
         $this->imageColumn = $input->getOption('image-column');
+        $this->categoryColumn = $input->getOption('category-column');
         $this->strict = $input->getOption('strict');
     }
 
@@ -186,7 +208,6 @@ class ImportMassProductCommand extends ContainerAwareCommand
         $em->beginTransaction();
 
         $startTime = microtime(true);
-
         try {
             while (!feof($fp)) {
                 $data = fgetcsv(
@@ -231,9 +252,10 @@ class ImportMassProductCommand extends ContainerAwareCommand
         }
 
         $this->commitTransaction($em);
-
         $endTime = microtime(true);
+
         $output->writeln(sprintf('Process time: %d secs', ($endTime - $startTime)));
+
         $output->writeln("Done!");
     }
 
@@ -264,9 +286,10 @@ class ImportMassProductCommand extends ContainerAwareCommand
     protected function checkColumnNameValidity(array $data)
     {
         $fields = array(
-            'familyColumn' => true,
-            'skuColumn'    => true,
-            'imageColumn'  => false,
+            'familyColumn'   => true,
+            'skuColumn'      => true,
+            'imageColumn'    => false,
+            'categoryColumn' => false,
         );
 
         foreach ($fields as $field => $required) {
@@ -320,8 +343,20 @@ class ImportMassProductCommand extends ContainerAwareCommand
 
             foreach ($this->setters as $pos => $name) {
                 if ($pos !== $this->familyColumnIndex) {
-                    $value = $pos !== $this->imageColumnIndex ? $data[$pos] : $this->handleMedia($data[$pos], $product);
-                    call_user_func(array($product, 'set'.ucfirst($name)), $value);
+                    switch (true) {
+                        case $pos === $this->imageColumnIndex:
+                            $value = $this->handleMedia($data[$pos], $product);
+                            $product->setImage($value);
+                            break;
+                        case $pos === $this->categoryColumnIndex:
+                            $value = $this->handleCategory($data[$pos], $product);
+                            $product->setProductCategories($value);
+                            break;
+                        default:
+                            $value = $data[$pos];
+                            call_user_func(array($product, 'set'.ucfirst($name)), $value);
+                            break;
+                    }
                 }
             }
 
@@ -404,9 +439,46 @@ class ImportMassProductCommand extends ContainerAwareCommand
         $media->setBinaryContent($imagePath);
         $media->setEnabled(true);
         $media->setProviderName($this->mediaProviderKey);
+        $media->setContext('sonata_product');
         $this->mediaManager->save($media);
 
         return $media;
+    }
+
+    /**
+     * @param string $categorySlugs
+     * @param ProductInterface $product
+     *
+     * @return ArrayCollection
+     */
+    protected function handleCategory($categorySlugs, ProductInterface $product)
+    {
+        $oldCategories = $product->getProductCategories();
+        /** @var ProductCategoryManagerInterface $productCategoryManager */
+        $productCategoryManager = $this->getContainer()->get('sonata.product_category.product');
+
+        foreach ($oldCategories as $oldCategory) {
+            $productCategoryManager->delete($oldCategory);
+        }
+
+        /** @var CategoryManagerInterface $categoryManager */
+        $categoryManager = $this->getContainer()->get('sonata.classification.manager.category');
+        $categoriesSlug = explode(',', $categorySlugs);
+        $categories = new ArrayCollection();
+
+        foreach ($categoriesSlug as $key => $slug) {
+            /** @var CategoryInterface $category */
+            if ($category = $categoryManager->findOneBy(array('slug' => trim($slug)))) {
+                $productCategory = new ProductCategory();
+                $productCategory->setCategory($category);
+                $productCategory->setProduct($product);
+                $productCategory->setEnabled(true);
+                $productCategory->setMain($key == 0);
+                $categories->add($productCategory);
+            }
+        }
+
+        return $categories;
     }
 
     /**
