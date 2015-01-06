@@ -185,6 +185,8 @@ class ImportMassProductCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->beginTransaction();
 
+        $startTime = microtime(true);
+
         try {
             while (!feof($fp)) {
                 $data = fgetcsv(
@@ -230,6 +232,8 @@ class ImportMassProductCommand extends ContainerAwareCommand
 
         $this->commitTransaction($em);
 
+        $endTime = microtime(true);
+        $output->writeln(sprintf('Process time: %d secs', ($endTime - $startTime)));
         $output->writeln("Done!");
     }
 
@@ -295,7 +299,7 @@ class ImportMassProductCommand extends ContainerAwareCommand
             $data[$this->familyColumnIndex],
             $data[$this->skuColumnIndex]
         );
-        
+
         try {
             $family = $data[$this->familyColumnIndex];
             /** @var ProductManagerInterface $productManager */
@@ -316,7 +320,7 @@ class ImportMassProductCommand extends ContainerAwareCommand
 
             foreach ($this->setters as $pos => $name) {
                 if ($pos !== $this->familyColumnIndex) {
-                    $value = $pos !== $this->imageColumnIndex ? $data[$pos] : $this->handleMedia($data[$pos]);
+                    $value = $pos !== $this->imageColumnIndex ? $data[$pos] : $this->handleMedia($data[$pos], $product);
                     call_user_func(array($product, 'set'.ucfirst($name)), $value);
                 }
             }
@@ -378,19 +382,27 @@ class ImportMassProductCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string $imagePath
+     * @param string           $imagePath
+     * @param ProductInterface $product
      *
      * @return MediaInterface
      */
-    protected function handleMedia($imagePath)
+    protected function handleMedia($imagePath, ProductInterface $product)
     {
-        $now = new \DateTime();
-        $media = new Media();
+        $mediaGetter = 'get'.ucfirst($this->imageColumn);
+        $media = null;
+
+        if (method_exists($product, $mediaGetter)) {
+            $media = $product->$mediaGetter();
+        }
+
+        if (!$media instanceof MediaInterface) {
+            $media = new Media();
+        }
+
         $media->setName(basename($imagePath));
         $media->setBinaryContent($imagePath);
         $media->setEnabled(true);
-        $media->setCreatedAt($now);
-        $media->setUpdatedAt($now);
         $media->setProviderName($this->mediaProviderKey);
         $this->mediaManager->save($media);
 
