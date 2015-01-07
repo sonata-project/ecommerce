@@ -44,6 +44,11 @@ class ImportMassProductCommand extends ContainerAwareCommand
     /**
      * @var string
      */
+    protected $mediaContext;
+
+    /**
+     * @var string
+     */
     protected $productManagerKeyPattern;
 
     /**
@@ -189,6 +194,7 @@ class ImportMassProductCommand extends ContainerAwareCommand
         $this->mediaProviderKey = $this->getContainer()->getParameter(
             'sonata.product.import.media_provider_key'
         );
+        $this->mediaContext = $this->getContainer()->getParameter('sonata.product.import.media_context');
         $this->familyColumn = $input->getOption('family-column');
         $this->skuColumn = $input->getOption('sku-column');
         $this->imageColumn = $input->getOption('image-column');
@@ -439,14 +445,14 @@ class ImportMassProductCommand extends ContainerAwareCommand
         $media->setBinaryContent($imagePath);
         $media->setEnabled(true);
         $media->setProviderName($this->mediaProviderKey);
-        $media->setContext('sonata_product');
+        $media->setContext($this->mediaContext);
         $this->mediaManager->save($media);
 
         return $media;
     }
 
     /**
-     * @param string $categorySlugs
+     * @param string           $categorySlugs
      * @param ProductInterface $product
      *
      * @return ArrayCollection
@@ -455,14 +461,14 @@ class ImportMassProductCommand extends ContainerAwareCommand
     {
         $oldCategories = $product->getProductCategories();
         /** @var ProductCategoryManagerInterface $productCategoryManager */
-        $productCategoryManager = $this->getContainer()->get('sonata.product_category.product');
+        $productCategoryManager = $this->getContainer()->get('sonata.product.import.product_category_manager');
 
         foreach ($oldCategories as $oldCategory) {
             $productCategoryManager->delete($oldCategory);
         }
 
         /** @var CategoryManagerInterface $categoryManager */
-        $categoryManager = $this->getContainer()->get('sonata.classification.manager.category');
+        $categoryManager = $this->getContainer()->get('sonata.product.import.category_manager');
         $categoriesSlug = explode(',', $categorySlugs);
         $categories = new ArrayCollection();
 

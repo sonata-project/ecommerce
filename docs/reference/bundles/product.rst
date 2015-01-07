@@ -128,6 +128,7 @@ The bundle also implements an command to import products from a csv file. It can
          --family-column       Set the product family column name (default: "family")
          --sku-column          Set the product sku column name (default: "sku")
          --image-column        Set the product image column name (default: "image")
+         --category-column     Set the product category column name (default: "category")
          --strict              If strict is true, process will stop on exception. Otherwise, it will try to process the next line
          --help (-h)           Display this help message.
          --quiet (-q)          Do not output any message.
@@ -144,13 +145,18 @@ The bundle also implements an command to import products from a csv file. It can
 
 The sample.csv file contains the following lines::
 
-    family,sku,name,description,price,image,price_including_vat
-    goodie,goodie_1,"Goodie 1","My awesome goodie",25,"/var/www/sonata-dev/web/uploads/media/import/thumb_11_sonata_product_large.jpeg",1
-    goodie,goodie_2,"Goodie 2","My awesome goodie",25,"/var/www/sonata-dev/web/uploads/media/import/thumb_12_sonata_product_large.jpeg",1
-    travel,travel_1,"Travel 1","My awesome travel",245,"/var/www/sonata-dev/web/uploads/media/import/thumb_13_sonata_product_large.jpeg",0
-    travel,travel_2,"Travel 2","My awesome travel",250,"/var/www/sonata-dev/web/uploads/media/import/thumb_14_sonata_product_large.jpeg",1
+    family,sku,name,description,price,image,price_including_vat,category,enabled
+    goodie,goodie_1,"Goodie 1","My awesome goodie",25,"/var/www/sonata-dev/web/uploads/media/import/thumb_11_sonata_product_large.jpeg",1,"shoes,clothes",1
+    goodie,goodie_2,"Goodie 2","My awesome goodie",25,"/var/www/sonata-dev/web/uploads/media/import/thumb_12_sonata_product_large.jpeg",1,"plush",1
+    travel,travel_1,"Travel 1","My awesome travel",245,"/var/www/sonata-dev/web/uploads/media/import/thumb_13_sonata_product_large.jpeg",0,"mugs",1
+    travel,travel_2,"Travel 2","My awesome travel",250,"/var/www/sonata-dev/web/uploads/media/import/thumb_14_sonata_product_large.jpeg",1,"goody,mugs",1
 
-You can configure the following parameters to match your needs.
+*Values in category column are category's slugs separated by ",".*
+
+**You can configure the following parameters to match your needs.**
  - sonata.product.import.product_manager_key: The config keys for your managers (ex: with the default value sonata.ecommerce_demo.product.%s.manager, a product with goodie as family will be handle by manager sonata.ecommerce_demo.product.goodie.manager)
  - sonata.product.import.media_provider_key: Key of the media manager that should handle product main media. Default is sonata.media.provider.image
- - sonata.product.import.logger: Key of the logger service that you want to use in this command. By default it is an alias to logger service.
+ - sonata.product.import.media_context: Set the media context value. Default is "sonata_product"
+ - sonata.product.import.product_category_manager: Key of the product_category manager. By default it is an alias to sonata.product_category.product service.
+ - sonata.product.import.category_manager: Key of the category manager. By default it is an alias to sonata.product_category.product service.
+ - sonata.product.import.logger: Key of the logger service that you want to use in this command. By default it is an alias to sonata.classification.manager.category service.

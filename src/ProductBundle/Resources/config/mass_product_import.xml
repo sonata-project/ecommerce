@@ -6,10 +6,13 @@
     <parameters>
         <parameter key="sonata.product.import.product_manager_key">sonata.ecommerce_demo.product.%s.manager</parameter>
         <parameter key="sonata.product.import.media_provider_key">sonata.media.provider.image</parameter>
+        <parameter key="sonata.product.import.media_context">sonata_product</parameter>
     </parameters>
 
     <services>
         <service id="sonata.product.import.logger" alias="logger" />
+        <service id="sonata.product.import.product_category_manager" alias="sonata.product_category.product"/>
+        <service id="sonata.product.import.category_manager" alias="sonata.classification.manager.category"/>
     </services>
 
 </container>
