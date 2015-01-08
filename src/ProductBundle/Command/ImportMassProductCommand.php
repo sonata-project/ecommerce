@@ -11,50 +11,20 @@
 
 namespace Sonata\ProductBundle\Command;
 
-use Application\Sonata\ProductBundle\Entity\ProductCategory;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Util\Inflector;
 use Doctrine\ORM\EntityManager;
 use Psr\Log\LoggerInterface;
-use Sonata\ClassificationBundle\Model\CategoryInterface;
-use Sonata\Component\Product\ProductCategoryManagerInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\MediaBundle\Entity\MediaManager;
-use Sonata\MediaBundle\Model\MediaInterface;
+use Sonata\ProductBundle\Import\ImportProductService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Application\Sonata\MediaBundle\Entity\Media;
-use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 
 class ImportMassProductCommand extends ContainerAwareCommand
 {
     /**
-     * @var ArrayCollection
+     * @var ImportProductService
      */
-    protected $productManagers;
-
-    /**
-     * @var MediaManager
-     */
-    protected $mediaManager;
-
-    /**
-     * @var string
-     */
-    protected $mediaContext;
-
-    /**
-     * @var string
-     */
-    protected $productManagerKeyPattern;
-
-    /**
-     * @var string
-     */
-    protected $mediaProviderKey;
+    protected $importProductService;
 
     /**
      * @var array
@@ -62,44 +32,9 @@ class ImportMassProductCommand extends ContainerAwareCommand
     protected $setters;
 
     /**
-     * @var string
+     * @var array
      */
-    protected $familyColumn;
-
-    /**
-     * @var int
-     */
-    protected $familyColumnIndex;
-
-    /**
-     * @var string
-     */
-    protected $skuColumn;
-
-    /**
-     * @var int
-     */
-    protected $skuColumnIndex;
-
-    /**
-     * @var string
-     */
-    protected $imageColumn;
-
-    /**
-     * @var int
-     */
-    protected $imageColumnIndex;
-
-    /**
-     * @var string
-     */
-    protected $categoryColumn;
-
-    /**
-     * @var int
-     */
-    protected $categoryColumnIndex;
+    protected $fieldMapping;
 
     /**
      * @var bool
@@ -143,11 +78,11 @@ class ImportMassProductCommand extends ContainerAwareCommand
                         '\\'
                     ),
                     new InputOption(
-                        'family-column',
+                        'type-column',
                         null,
                         InputOption::VALUE_OPTIONAL,
-                        'Set the product family column name',
-                        'family'
+                        'Set the product type column name',
+                        'type'
                     ),
                     new InputOption(
                         'sku-column',
@@ -164,11 +99,11 @@ class ImportMassProductCommand extends ContainerAwareCommand
                         'image'
                     ),
                     new InputOption(
-                        'category-column',
+                        'categories-column',
                         null,
                         InputOption::VALUE_OPTIONAL,
                         'Set the product category column name',
-                        'category'
+                        'categories'
                     ),
                     new InputOption(
                         'strict',
@@ -185,21 +120,13 @@ class ImportMassProductCommand extends ContainerAwareCommand
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->productManagers = new ArrayCollection();
-        $this->mediaManager = $this->getContainer()->get('sonata.media.manager.media');
+        $this->importProductService = $this->getContainer()->get('sonata.product.import.service');
         $this->logger = $this->getContainer()->get('sonata.product.import.logger');
-        $this->productManagerKeyPattern = $this->getContainer()->getParameter(
-            'sonata.product.import.product_manager_key'
-        );
-        $this->mediaProviderKey = $this->getContainer()->getParameter(
-            'sonata.product.import.media_provider_key'
-        );
-        $this->mediaContext = $this->getContainer()->getParameter('sonata.product.import.media_context');
-        $this->familyColumn = $input->getOption('family-column');
-        $this->skuColumn = $input->getOption('sku-column');
-        $this->imageColumn = $input->getOption('image-column');
-        $this->categoryColumn = $input->getOption('category-column');
         $this->strict = $input->getOption('strict');
+        $this->fieldMapping['type'] = $input->getOption('type-column');
+        $this->fieldMapping['sku'] = $input->getOption('sku-column');
+        $this->fieldMapping['image'] = $input->getOption('image-column');
+        $this->fieldMapping['categories'] = $input->getOption('categories-column');
     }
 
     /**
@@ -208,60 +135,55 @@ class ImportMassProductCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $fp = $this->getFilePointer($input, $output);
-        $index = 1;
+        $index = 0;
         /** @var EntityManager $em */
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getEntityManager();
+        // disable logger to prevent memory leak
+        $em->getConnection()->getConfiguration()->setSQLLogger(null);
         $em->beginTransaction();
-
         $startTime = microtime(true);
-        try {
-            while (!feof($fp)) {
-                $data = fgetcsv(
-                    $fp,
-                    null,
-                    $input->getOption('delimiter'),
-                    $input->getOption('enclosure'),
-                    $input->getOption('escape')
-                );
 
-                if ($index === 1) {
-                    $this->checkColumnNameValidity($data);
-                    $this->setters = array_map(
-                        function ($fieldName) {
-                            return Inflector::camelize($fieldName);
-                        },
-                        $data
-                    );
+        while (!feof($fp)) {
+            $index++;
+            $data = fgetcsv(
+                $fp,
+                null,
+                $input->getOption('delimiter'),
+                $input->getOption('enclosure'),
+                $input->getOption('escape')
+            );
 
-                    $index++;
-                    continue;
-                }
-
+            if ($index === 1) {
                 if (!is_array($data)) {
-                    $index++;
-
-                    continue;
+                    throw new \InvalidArgumentException('Unable to parse column names');
                 }
 
+                $this->importProductService->setMapping($this->fieldMapping);
+                $this->setters = $data;
+
+                continue;
+            }
+
+            if (!is_array($data)) {
+                continue;
+            }
+
+            try {
                 $this->insertProduct($data, $index, $output);
-                $index++;
 
                 if (!($index % 100)) {
-                    $this->commitTransaction($em, true);
+                    $this->commitTransaction(true);
                 }
+            } catch (\Exception $e) {
+                $em->rollback();
+                $output->writeln("<comment>Transaction rolled back cause exception was thrown</comment>");
+                $this->handleException($e);
             }
-        } catch (\Exception $e) {
-            $em->rollback();
-            $output->writeln("<comment>Transaction rolled back cause exception was thrown</comment>");
-
-            throw $e;
         }
 
-        $this->commitTransaction($em);
+        $this->commitTransaction();
         $endTime = microtime(true);
-
         $output->writeln(sprintf('Process time: %d secs', ($endTime - $startTime)));
-
         $output->writeln("Done!");
     }
 
@@ -285,35 +207,6 @@ class ImportMassProductCommand extends ContainerAwareCommand
     }
 
     /**
-     * Check column names validity
-     *
-     * @param array $data
-     */
-    protected function checkColumnNameValidity(array $data)
-    {
-        $fields = array(
-            'familyColumn'   => true,
-            'skuColumn'      => true,
-            'imageColumn'    => false,
-            'categoryColumn' => false,
-        );
-
-        foreach ($fields as $field => $required) {
-            if (!in_array($this->$field, $data) && $required) {
-                throw new \RuntimeException(
-                    sprintf(
-                        'Unable to find column with name "%s". It is required to set product %s.',
-                        $this->$field,
-                        str_replace('Column', '', $field)
-                    )
-                );
-            }
-
-            $this->{$field.'Index'} = array_search($this->$field, $data);
-        }
-    }
-
-    /**
      * Insert or update a product according to the given data
      *
      * @param array           $data
@@ -322,53 +215,18 @@ class ImportMassProductCommand extends ContainerAwareCommand
      */
     protected function insertProduct(array $data, $index, OutputInterface $output)
     {
-        $message = sprintf(
-            ' > Starting index %d. Product %s with sku %s',
-            $index,
-            $data[$this->familyColumnIndex],
-            $data[$this->skuColumnIndex]
-        );
+        $formattedData = array_combine($this->setters, $data);
+        $status = $this->importProductService->importProduct($formattedData, false);
 
-        try {
-            $family = $data[$this->familyColumnIndex];
-            /** @var ProductManagerInterface $productManager */
-            $productManager = $this->getProductManager($family, $index);
-
-            /** @var ProductInterface $product */
-            $product = $productManager->findOneBy(array($this->skuColumn => $data[$this->skuColumnIndex]));
-            $action = '<info>update</info>';
-
-            if (!$product) {
-                $product = $productManager->create();
-                $action = '<info>create</info>';
-            }
-
-            if ($output->isVerbose()) {
-                $output->writeLn(sprintf('%s - %s', $message, $action));
-            }
-
-            foreach ($this->setters as $pos => $name) {
-                if ($pos !== $this->familyColumnIndex) {
-                    switch (true) {
-                        case $pos === $this->imageColumnIndex:
-                            $value = $this->handleMedia($data[$pos], $product);
-                            $product->setImage($value);
-                            break;
-                        case $pos === $this->categoryColumnIndex:
-                            $value = $this->handleCategory($data[$pos], $product);
-                            $product->setProductCategories($value);
-                            break;
-                        default:
-                            $value = $data[$pos];
-                            call_user_func(array($product, 'set'.ucfirst($name)), $value);
-                            break;
-                    }
-                }
-            }
-
-            $productManager->save($product, false);
-        } catch (\Exception $e) {
-            $this->handleException($e, $index);
+        if ($output->isVerbose()) {
+            $message = sprintf(
+                ' > Starting index %d. Product %s with sku %s',
+                $index,
+                $formattedData[$this->fieldMapping['type']],
+                $formattedData[$this->fieldMapping['sku']]
+            );
+            $action = $status === ImportProductService::UPDATE_STATUS ? '<info>update</info>' : '<info>create</info>';
+            $output->writeLn(sprintf('%s - %s', $message, $action));
         }
     }
 
@@ -379,11 +237,11 @@ class ImportMassProductCommand extends ContainerAwareCommand
      */
     protected function handleException(\Exception $e)
     {
+        $this->addLog($e);
+
         if ($this->strict) {
             throw $e;
         }
-
-        $this->addLog($e);
     }
 
     /**
@@ -391,116 +249,40 @@ class ImportMassProductCommand extends ContainerAwareCommand
      */
     protected function addLog(\Exception $e)
     {
-        $this->logger->error($e->getMessage());
-    }
-
-    /**
-     * @param string $family
-     * @param int    $index
-     *
-     * @return mixed|null|object
-     *
-     * @throws \RuntimeException
-     */
-    protected function getProductManager($family, $index)
-    {
-        if ($this->productManagers->containsKey($family)) {
-            return $this->productManagers->get($family);
-        }
-
-        $managerKey = sprintf($this->productManagerKeyPattern, $family);
-        $productManager = $this->getContainer()->get($managerKey);
-
-        if (!$productManager) {
-            throw new \RuntimeException(
-                sprintf('Unable to find manager for %s with key %s. At file index %d', $family, $managerKey, $index)
-            );
-        }
-
-        $this->productManagers->set($family, $productManager);
-
-        return $productManager;
-    }
-
-    /**
-     * @param string           $imagePath
-     * @param ProductInterface $product
-     *
-     * @return MediaInterface
-     */
-    protected function handleMedia($imagePath, ProductInterface $product)
-    {
-        $mediaGetter = 'get'.ucfirst($this->imageColumn);
-        $media = null;
-
-        if (method_exists($product, $mediaGetter)) {
-            $media = $product->$mediaGetter();
-        }
-
-        if (!$media instanceof MediaInterface) {
-            $media = new Media();
-        }
-
-        $media->setName(basename($imagePath));
-        $media->setBinaryContent($imagePath);
-        $media->setEnabled(true);
-        $media->setProviderName($this->mediaProviderKey);
-        $media->setContext($this->mediaContext);
-        $this->mediaManager->save($media);
-
-        return $media;
-    }
-
-    /**
-     * @param string           $categorySlugs
-     * @param ProductInterface $product
-     *
-     * @return ArrayCollection
-     */
-    protected function handleCategory($categorySlugs, ProductInterface $product)
-    {
-        $oldCategories = $product->getProductCategories();
-        /** @var ProductCategoryManagerInterface $productCategoryManager */
-        $productCategoryManager = $this->getContainer()->get('sonata.product.import.product_category_manager');
-
-        foreach ($oldCategories as $oldCategory) {
-            $productCategoryManager->delete($oldCategory);
-        }
-
-        /** @var CategoryManagerInterface $categoryManager */
-        $categoryManager = $this->getContainer()->get('sonata.product.import.category_manager');
-        $categoriesSlug = explode(',', $categorySlugs);
-        $categories = new ArrayCollection();
-
-        foreach ($categoriesSlug as $key => $slug) {
-            /** @var CategoryInterface $category */
-            if ($category = $categoryManager->findOneBy(array('slug' => trim($slug)))) {
-                $productCategory = new ProductCategory();
-                $productCategory->setCategory($category);
-                $productCategory->setProduct($product);
-                $productCategory->setEnabled(true);
-                $productCategory->setMain($key == 0);
-                $categories->add($productCategory);
-            }
-        }
-
-        return $categories;
+        $this->logger->error($e->getMessage(), array('exception' => $e));
     }
 
     /**
      * Finalize import operation by flushing doctrine
      *
-     * @param EntityManager $em
-     * @param bool          $reOpen
+     * @param bool $reOpen
      */
-    protected function commitTransaction(EntityManager $em, $reOpen = false)
+    protected function commitTransaction($reOpen = false)
     {
+        $em = $this->getEntityManager();
         $em->commit();
         $em->flush();
         $em->getUnitOfWork()->clear();
+        $em->clear();
 
         if ($reOpen) {
             $em->beginTransaction();
         }
+    }
+
+    /**
+     * @return EntityManager
+     */
+    protected function getEntityManager()
+    {
+        /** @var EntityManager $em */
+        $em = $this->getContainer()->get('doctrine')->getManager();
+
+        if (!$em->isOpen()) {
+            $this->getContainer()->get('doctrine')->resetEntityManager();
+            $em = $this->getContainer()->get('doctrine')->getManager();
+        }
+
+        return $em;
     }
 }

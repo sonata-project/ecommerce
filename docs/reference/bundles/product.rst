@@ -118,17 +118,20 @@ The bundle also implements an command to import products from a csv file. It can
 
 .. code-block:: bash
     Usage:
-         sonata:product:add-multiple --file sample.csv
+        sonata:product:add-multiple --file sample.csv
+
+    Other usage:
+        cat sample.csv|php app/console sonata:product:add-multiple -v --strict
 
     Options:
          --file                The file to parse
          --delimiter           Set the field delimiter (one character only) (default: ",")
          --enclosure           Set the field enclosure character (one character only). (default: "\"")
          --escape              Set the escape character (one character only). Defaults as a backslash (default: "\\")
-         --family-column       Set the product family column name (default: "family")
+         --type-column       Set the product family column name (default: "type")
          --sku-column          Set the product sku column name (default: "sku")
          --image-column        Set the product image column name (default: "image")
-         --category-column     Set the product category column name (default: "category")
+         --categories-column     Set the product category column name (default: "categories")
          --strict              If strict is true, process will stop on exception. Otherwise, it will try to process the next line
          --help (-h)           Display this help message.
          --quiet (-q)          Do not output any message.
@@ -145,7 +148,7 @@ The bundle also implements an command to import products from a csv file. It can
 
 The sample.csv file contains the following lines::
 
-    family,sku,name,description,price,image,price_including_vat,category,enabled
+    type,sku,name,description,price,image,price_including_vat,categories,enabled
     goodie,goodie_1,"Goodie 1","My awesome goodie",25,"/var/www/sonata-dev/web/uploads/media/import/thumb_11_sonata_product_large.jpeg",1,"shoes,clothes",1
     goodie,goodie_2,"Goodie 2","My awesome goodie",25,"/var/www/sonata-dev/web/uploads/media/import/thumb_12_sonata_product_large.jpeg",1,"plush",1
     travel,travel_1,"Travel 1","My awesome travel",245,"/var/www/sonata-dev/web/uploads/media/import/thumb_13_sonata_product_large.jpeg",0,"mugs",1
@@ -154,7 +157,7 @@ The sample.csv file contains the following lines::
 *Values in category column are category's slugs separated by ",".*
 
 **You can configure the following parameters to match your needs.**
- - sonata.product.import.product_manager_key: The config keys for your managers (ex: with the default value sonata.ecommerce_demo.product.%s.manager, a product with goodie as family will be handle by manager sonata.ecommerce_demo.product.goodie.manager)
+ - sonata.product.import.product_code_prefix: Prefix to generate product code. Default is sonata.ecommerce_demo.product
  - sonata.product.import.media_provider_key: Key of the media manager that should handle product main media. Default is sonata.media.provider.image
  - sonata.product.import.media_context: Set the media context value. Default is "sonata_product"
  - sonata.product.import.product_category_manager: Key of the product_category manager. By default it is an alias to sonata.product_category.product service.
