@@ -129,7 +129,7 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
         foreach ($metadata as $name => $meta) {
             $output->writeln(sprintf('<info>%s</info>', $name));
 
-            foreach ($meta as $fieldName => $columnName) {
+            foreach ($meta['fields'] as $fieldName => $columnName) {
                 $output->writeln(sprintf('  <comment>></comment> %s <info>=></info> %s', $fieldName, $columnName));
             }
         }
@@ -197,8 +197,10 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
         $normalizedMeta = [];
         $fieldMappings = $meta->fieldMappings;
 
+        $normalizedMeta['table'] = $meta->table['name'];
+
         foreach ($fieldMappings as $field) {
-            $normalizedMeta[$field['fieldName']] = isset($field['columnName']) ? $field['columnName'] : null;
+            $normalizedMeta['fields'][$field['fieldName']] = isset($field['columnName']) ? $field['columnName'] : null;
         }
 
         return $normalizedMeta;
