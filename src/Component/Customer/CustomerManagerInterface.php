@@ -12,7 +12,8 @@
 namespace Sonata\Component\Customer;
 
 use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\CoreBundle\Model\PageableManagerInterface;
 
-interface CustomerManagerInterface extends ManagerInterface
+interface CustomerManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }

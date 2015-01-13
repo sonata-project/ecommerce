@@ -81,7 +81,7 @@ class CustomerController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\Component\Customer\CustomerInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for customers list pagination (1-indexed)")
@@ -92,26 +92,32 @@ class CustomerController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return CustomerInterface[]
+     * @return Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getCustomersAction(ParamFetcherInterface $paramFetcher)
     {
-        // No supported filters as of now
-        $supportedFilters = array(
+        $supportedCriteria = array(
+            'is_fake' => '',
         );
 
-        $page    = $paramFetcher->get('page') - 1;
-        $count   = $paramFetcher->get('count');
-        $orderBy = $paramFetcher->get('orderBy');
-        $filters = array_intersect_key($paramFetcher->all(), $supportedFilters);
+        $page     = $paramFetcher->get('page');
+        $limit    = $paramFetcher->get('count');
+        $sort     = $paramFetcher->get('orderBy');
+        $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
-        foreach ($filters as $key => $value) {
+        foreach ($criteria as $key => $value) {
             if (null === $value) {
-                unset($filters[$key]);
+                unset($criteria[$key]);
             }
         }
 
-        return $this->customerManager->findBy($filters, $orderBy, $count, $page);
+        if (!$sort) {
+            $sort = array();
+        } elseif (!is_array($sort)) {
+            $sort = array($sort => 'asc');
+        }
+
+        return $this->customerManager->getPager($criteria, $page, $limit, $sort);
     }
 
     /**
