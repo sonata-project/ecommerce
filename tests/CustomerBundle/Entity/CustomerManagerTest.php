@@ -101,7 +101,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
             ));
     }
 
-    public function testGetPagerWithFakeProducts()
+    public function testGetPagerWithFakeCustomers()
     {
         $self = $this;
         $this
@@ -112,7 +112,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
             ->getPager(array('is_fake' => true), 1);
     }
 
-    public function testGetPagerWithNoFakeProducts()
+    public function testGetPagerWithNoFakeCustomer()
     {
         $self = $this;
         $this
