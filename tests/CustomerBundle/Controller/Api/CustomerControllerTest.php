@@ -26,15 +26,14 @@ class CustomerControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetCustomersAction()
     {
-        $customer        = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
-        $customerManager->expects($this->once())->method('findBy')->will($this->returnValue(array($customer)));
+        $customerManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
         $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($customer), $this->createCustomerController(null, $customerManager)->getCustomersAction($paramFetcher));
+        $this->assertEquals(array(), $this->createCustomerController(null, $customerManager)->getCustomersAction($paramFetcher));
     }
 
     public function testGetCustomerAction()
