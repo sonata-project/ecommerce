@@ -24,16 +24,14 @@ class BasketControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetBasketsAction()
     {
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
-
         $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
-        $basketManager->expects($this->once())->method('findBy')->will($this->returnValue(array($basket)));
+        $basketManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
         $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($basket), $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
+        $this->assertEquals(array(), $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
     public function testGetBasketAction()
