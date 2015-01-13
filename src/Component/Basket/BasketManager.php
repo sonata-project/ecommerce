@@ -5,6 +5,8 @@ namespace Sonata\Component\Basket;
 use Sonata\Component\Customer\CustomerInterface;
 use Doctrine\ORM\NoResultException;
 use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class BasketManager extends BaseEntityManager implements BasketManagerInterface
 {
@@ -35,5 +37,36 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
         }
 
         parent::save($entity, $andFlush);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    {
+        $query = $this->getRepository()
+            ->createQueryBuilder('b')
+            ->select('b');
+
+        $fields = $this->getEntityManager()->getClassMetadata($this->class)->getFieldNames();
+        foreach ($sort as $field => $direction) {
+            if (!in_array($field, $fields)) {
+                unset($sort[$field]);
+            }
+        }
+        if (count($sort) == 0) {
+            $sort = array('id' => 'ASC');
+        }
+        foreach ($sort as $field => $direction) {
+            $query->orderBy(sprintf('b.%s', $field), strtoupper($direction));
+        }
+
+        $pager = new Pager();
+        $pager->setMaxPerPage($limit);
+        $pager->setQuery(new ProxyQuery($query));
+        $pager->setPage($page);
+        $pager->init();
+
+        return $pager;
     }
 }
