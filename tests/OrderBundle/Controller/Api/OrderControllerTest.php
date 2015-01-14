@@ -25,15 +25,14 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetOrdersAction()
     {
-        $order        = $this->getMock('Sonata\Component\Order\OrderInterface');
         $orderManager = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
-        $orderManager->expects($this->once())->method('findBy')->will($this->returnValue(array($order)));
+        $orderManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
         $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($order), $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
+        $this->assertEquals(array(), $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
     public function testGetOrderAction()
