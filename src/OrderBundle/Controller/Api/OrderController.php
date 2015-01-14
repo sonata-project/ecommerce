@@ -51,7 +51,7 @@ class OrderController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\Component\Order\OrderInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for orders list pagination (1-indexed)")
@@ -63,26 +63,32 @@ class OrderController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return OrderInterface[]
+     * @return Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getOrdersAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedFilters = array(
+        $supportedCriteria = array(
             'status' => "",
         );
 
-        $page    = $paramFetcher->get('page') - 1;
-        $count   = $paramFetcher->get('count');
-        $orderBy = $paramFetcher->get('orderBy');
-        $filters = array_intersect_key($paramFetcher->all(), $supportedFilters);
+        $page     = $paramFetcher->get('page');
+        $limit    = $paramFetcher->get('count');
+        $sort     = $paramFetcher->get('orderBy');
+        $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
-        foreach ($filters as $key => $value) {
+        foreach ($criteria as $key => $value) {
             if (null === $value) {
-                unset($filters[$key]);
+                unset($criteria[$key]);
             }
         }
 
-        return $this->orderManager->findBy($filters, $orderBy, $count, $page);
+        if (!$sort) {
+            $sort = array();
+        } elseif (!is_array($sort)) {
+            $sort = array($sort => 'asc');
+        }
+
+        return $this->orderManager->getPager($criteria, $page, $limit, $sort);
     }
 
     /**
