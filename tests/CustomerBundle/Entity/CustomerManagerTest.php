@@ -8,7 +8,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\ProductBundle\Entity;
+namespace Sonata\Tests\CustomerBundle\Entity;
+
 use Sonata\CustomerBundle\Entity\CustomerManager;
 
 /**
