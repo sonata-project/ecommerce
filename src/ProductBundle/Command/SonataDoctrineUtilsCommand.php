@@ -39,11 +39,29 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
     protected $baseProductClass;
 
     /**
+     * @var string
+     */
+    protected $baseMediaClass;
+
+    /**
+     * @var string
+     */
+    protected $baseProductCategoryClass;
+
+    /**
+     * @var string
+     */
+    protected $baseCategoryClass;
+
+    /**
      * @var array $allowedActions
      */
     protected $allowedActions = [
-        'dump-meta',
-        'dump-products-meta',
+        'dump-meta' => null,
+        'dump-products-meta' => 'baseProductClass',
+        'dump-media-meta' => 'baseMediaClass',
+        'dump-product-category-meta' => 'baseProductCategoryClass',
+        'dump-category-meta' => 'baseCategoryClass',
     ];
 
     /**
@@ -63,7 +81,7 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
                     new InputArgument(
                         'action', InputArgument::REQUIRED, sprintf(
                             'The action to execute [%s]',
-                            implode(' | ', $this->allowedActions)
+                            implode(' | ', array_keys($this->allowedActions))
                         )
                     ),
                     new InputOption(
@@ -84,6 +102,9 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
     {
         $this->defaultDumpDirectory = $this->getContainer()->getParameter('sonata.doctrine.utils.dump_directory');
         $this->baseProductClass = $this->getContainer()->getParameter('sonata.doctrine.utils.base_product_class');
+        $this->baseMediaClass = $this->getContainer()->getParameter('sonata.doctrine.utils.base_media_class');
+        $this->baseProductCategoryClass = $this->getContainer()->getParameter('sonata.doctrine.utils.base_product_category_class');
+        $this->baseCategoryClass = $this->getContainer()->getParameter('sonata.doctrine.utils.base_category_class');
 
         $output->writeln(sprintf('Initialising Doctrine metadata.'));
         $manager = $this->getContainer()->get('doctrine')->getManager();
@@ -102,14 +123,20 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!in_array($input->getArgument('action'), $this->allowedActions)) {
+        if (!array_key_exists($input->getArgument('action'), $this->allowedActions)) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Invalid argument %s. Allowed arguments are [%s].',
                     $input->getArgument('action'),
-                    implode(' | ', $this->allowedActions)
+                    implode(' | ', array_keys($this->allowedActions))
                 )
             );
+        }
+
+        if (!$this->metadata) {
+            $output->writeln(sprintf('<error>No meta was found</error>'));
+
+            return 1;
         }
 
         $this->dumpMetadata($this->metadata, $input, $output);
@@ -168,19 +195,23 @@ class SonataDoctrineUtilsCommand extends ContainerAwareCommand
     private function filterMetadata(array $metadata, InputInterface $input, OutputInterface $output)
     {
         $allowedMeta = [];
+        $action = $input->getArgument('action');
 
-        switch ($input->getArgument('action')) {
+        switch ($action) {
             case 'dump-meta':
                 $allowedMeta = $metadata;
                 break;
-            case 'dump-products-meta':
-                $allowedMeta = array_filter(
-                    $metadata,
-                    function ($meta) {
-                        /** @var \Doctrine\ORM\Mapping\ClassMetadata $meta */
-                        return $meta->rootEntityName === $this->baseProductClass;
-                    }
-                );
+            default :
+                if (array_key_exists($action, $this->allowedActions)) {
+                    $allowedMeta = array_filter(
+                        $metadata,
+                        function ($meta) use ($action) {
+                            /** @var \Doctrine\ORM\Mapping\ClassMetadata $meta */
+                            return $meta->rootEntityName === $this->{$this->allowedActions[$action]};
+                        }
+                    );
+                }
+
                 break;
         }
 

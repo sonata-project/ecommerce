@@ -6,6 +6,9 @@
 
     <parameters>
         <parameter key="sonata.doctrine.utils.dump_directory">%kernel.root_dir%/cache/sonata/ecommerce</parameter>
-        <parameter key="sonata.doctrine.utils.base_product_class">Application\Sonata\ProductBundle\Entity\Product</parameter>
+        <parameter key="sonata.doctrine.utils.base_product_class">%sonata.product.product.class%</parameter>
+        <parameter key="sonata.doctrine.utils.base_media_class">%sonata.media.admin.media.entity%</parameter>
+        <parameter key="sonata.doctrine.utils.base_product_category_class">%sonata.product.product_category.class%</parameter>
+        <parameter key="sonata.doctrine.utils.base_category_class">%sonata.product.category.class%</parameter>
     </parameters>
 </container>

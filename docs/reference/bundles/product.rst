@@ -49,7 +49,7 @@ Furthermore, you can create a dump file with products schema information. Even t
      sonata:doctrine:utils -f /tmp/dump.json dump-products-meta
 
     Arguments:
-     action                The action to execute [dump-meta | dump-products-meta]
+     action                The action to execute [dump-meta | dump-products-meta | dump-products-category-meta | dump-media-meta | dump-category-meta]
 
     Options:
      --filename (-f)       If filename is specified, result will be dump into this file under json format.
