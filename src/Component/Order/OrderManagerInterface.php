@@ -13,8 +13,9 @@ namespace Sonata\Component\Order;
 
 use Sonata\CoreBundle\Model\ManagerInterface;
 use Sonata\UserBundle\Model\UserInterface;
+use Sonata\CoreBundle\Model\PageableManagerInterface;
 
-interface OrderManagerInterface extends ManagerInterface
+interface OrderManagerInterface extends ManagerInterface, PageableManagerInterface
 {
     /**
      * Finds orders belonging to given user
