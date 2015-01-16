@@ -496,8 +496,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'required' => false
                 ), array(
                     'link_parameters' => array(
-                        'context'  => 'sonata_product',
-                        'filter'   => array('context' => array('value' => 'sonata_product')),
+                        'context'  => 'product_catalog',
+                        'filter'   => array('context' => array('value' => 'product_catalog')),
                         'provider' => ''
                     )
                 ));
@@ -508,8 +508,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'required' => false
                 ), array(
                     'link_parameters' => array(
-                        'context'  => 'sonata_product',
-                        'filter'   => array('context' => array('value' => 'sonata_product')),
+                        'context'  => 'product_catalog',
+                        'filter'   => array('context' => array('value' => 'product_catalog')),
                         'provider' => ''
                     )
                 ));
