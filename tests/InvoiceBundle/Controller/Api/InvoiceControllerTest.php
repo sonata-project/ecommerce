@@ -25,15 +25,14 @@ class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetInvoicesAction()
     {
-        $invoice        = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
         $invoiceManager = $this->getMock('Sonata\Component\Invoice\InvoiceManagerInterface');
-        $invoiceManager->expects($this->once())->method('findBy')->will($this->returnValue(array($invoice)));
+        $invoiceManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
         $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($invoice), $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
+        $this->assertEquals(array(), $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }
 
     public function testGetInvoiceAction()
