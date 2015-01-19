@@ -129,18 +129,15 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
             ->getPager(array(), 1);
     }
 
+    /**
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage Invalid sort field 'invalid' in 'Sonata\OrderBundle\Entity\BaseOrder' class
+     */
     public function testGetPagerWithInvalidSort()
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->never())->method('andWhere');
-                $qb->expects($self->once())->method('orderBy')->with(
-                    $self->equalTo('o.reference'),
-                    $self->equalTo('ASC')
-                );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
-            })
+            ->getOrderManager(function ($qb) use ($self) { })
             ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
     }
 
