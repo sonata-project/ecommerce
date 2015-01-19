@@ -51,10 +51,10 @@ class InvoiceController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\Component\Invoice\InvoiceInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for invoices list pagination (1-indexed)")
+     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for invoices list pagination")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of invoices by page")
      * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query invoices invoice by clause (key is field, value is direction")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
@@ -63,26 +63,32 @@ class InvoiceController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return InvoiceInterface[]
+     * @return Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getInvoicesAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedFilters = array(
+        $supportedCriteria = array(
             'status' => "",
         );
 
-        $page    = $paramFetcher->get('page') - 1;
-        $count   = $paramFetcher->get('count');
-        $orderBy = $paramFetcher->get('orderBy');
-        $filters = array_intersect_key($paramFetcher->all(), $supportedFilters);
+        $page     = $paramFetcher->get('page');
+        $limit    = $paramFetcher->get('count');
+        $sort     = $paramFetcher->get('orderBy');
+        $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
-        foreach ($filters as $key => $value) {
+        foreach ($criteria as $key => $value) {
             if (null === $value) {
-                unset($filters[$key]);
+                unset($criteria[$key]);
             }
         }
 
-        return $this->invoiceManager->findBy($filters, $orderBy, $count, $page);
+        if (!$sort) {
+            $sort = array();
+        } elseif (!is_array($sort)) {
+            $sort = array($sort => 'asc');
+        }
+
+        return $this->invoiceManager->getPager($criteria, $page, $limit, $sort);
     }
 
     /**

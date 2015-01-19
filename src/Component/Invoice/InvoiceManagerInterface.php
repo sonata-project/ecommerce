@@ -12,7 +12,8 @@
 namespace Sonata\Component\Invoice;
 
 use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\CoreBundle\Model\PageableManagerInterface;
 
-interface InvoiceManagerInterface extends ManagerInterface
+interface InvoiceManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }
