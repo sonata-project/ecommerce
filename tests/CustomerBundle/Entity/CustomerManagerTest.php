@@ -63,18 +63,15 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
             ->getPager(array(), 1);
     }
 
+    /**
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage Invalid sort field 'invalid' in 'Sonata\CustomerBundle\Entity\BaseCustomer' class
+     */
     public function testGetPagerWithInvalidSort()
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
-                $qb->expects($self->never())->method('andWhere');
-                $qb->expects($self->once())->method('orderBy')->with(
-                    $self->equalTo('c.lastname'),
-                    $self->equalTo('ASC')
-                );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
-            })
+            ->getCustomerManager(function ($qb) use ($self) {})
             ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
     }
 
