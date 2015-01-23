@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.product.import.media_provider_key">sonata.media.provider.image</parameter>
+        <parameter key="sonata.product.import.product_code_prefix">sonata.ecommerce_demo.product</parameter>
+        <parameter key="sonata.product.import.media_context">sonata_product</parameter>
+        <parameter key="sonata.product.import.field_mapping" type="collection">
+            <parameter key="type">type</parameter>
+            <parameter key="sku">sku</parameter>
+            <parameter key="image">image</parameter>
+            <parameter key="categories">categories</parameter>
+        </parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.product.import.service" class="Sonata\ProductBundle\Import\ImportProductService">
+            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="sonata.product.import.media_manager" />
+            <argument type="service" id="sonata.product.import.product_category_manager" />
+            <argument type="service" id="sonata.product.import.category_manager" />
+            <argument>%sonata.product.import.product_code_prefix%</argument>
+            <argument>%sonata.product.import.media_provider_key%</argument>
+            <argument>%sonata.product.import.media_context%</argument>
+            <argument>%sonata.product.import.field_mapping%</argument>
+        </service>
+        <service id="sonata.product.import.logger" alias="logger" />
+        <service id="sonata.product.import.media_manager" alias="sonata.media.manager.media" />
+        <service id="sonata.product.import.product_category_manager" alias="sonata.product_category.product"/>
+        <service id="sonata.product.import.category_manager" alias="sonata.classification.manager.category"/>
+    </services>
+
+</container>
