@@ -19,7 +19,7 @@ use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Validator\Context\ExecutionContext;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * Sonata\ProductBundle\Entity\BaseProduct
