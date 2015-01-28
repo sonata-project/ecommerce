@@ -18,8 +18,7 @@ use Sonata\ProductBundle\DependencyInjection\Compiler\AddProductProviderCompiler
 class SonataProductBundle extends Bundle
 {
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @return void
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {
@@ -27,9 +26,17 @@ class SonataProductBundle extends Bundle
     }
 
     /**
-     * Boots the Bundle.
+     * {@inheritdoc}
      */
     public function boot()
     {
+        $container = $this->container;
+        $class     = $this->container->getParameter('sonata.product.product.class');
+
+        call_user_func(array($class, 'setSlugifyMethod'), function ($text) use ($container) {
+            $service = $container->get($container->getParameter('sonata.product.slugify_service'));
+
+            return $service->slugify($text);
+        });
     }
 }

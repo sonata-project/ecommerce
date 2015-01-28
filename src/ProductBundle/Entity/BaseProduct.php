@@ -157,6 +157,30 @@ abstract class BaseProduct implements ProductInterface
     protected $options = array();
 
     /**
+     * @static
+     * @var \Closure
+     */
+    protected static $slugifyMethod;
+
+    /**
+     * @static
+     * @return \Closure
+     */
+    public static function getSlugifyMethod()
+    {
+        return self::$slugifyMethod;
+    }
+
+    /**
+     * @static
+     * @param \Closure $slugifyMethod
+     */
+    public static function setSlugifyMethod(\Closure $slugifyMethod)
+    {
+        self::$slugifyMethod = $slugifyMethod;
+    }
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -824,13 +848,13 @@ abstract class BaseProduct implements ProductInterface
 
     public function preUpdate()
     {
-        $this->updatedAt = new \DateTime;
+        $this->updatedAt = new \DateTime();
     }
 
     public function prePersist()
     {
-        $this->createdAt = new \DateTime;
-        $this->updatedAt = new \DateTime;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -858,28 +882,33 @@ abstract class BaseProduct implements ProductInterface
      */
     public static function slugify($text)
     {
-        // replace non letter or digits by -
-        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+        // this code is for BC
+        if (!self::$slugifyMethod) {
+            // replace non letter or digits by -
+            $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 
-        // trim
-        $text = trim($text, '-');
+            // trim
+            $text = trim($text, '-');
 
-        // transliterate
-        if (function_exists('iconv')) {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+            // transliterate
+            if (function_exists('iconv')) {
+                $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+            }
+
+            // lowercase
+            $text = strtolower($text);
+
+            // remove unwanted characters
+            $text = preg_replace('~[^-\w]+~', '', $text);
+
+            if (empty($text)) {
+                return 'n-a';
+            }
+
+            return $text;
         }
 
-        // lowercase
-        $text = strtolower($text);
-
-        // remove unwanted characters
-        $text = preg_replace('~[^-\w]+~', '', $text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
+        return call_user_func(self::$slugifyMethod, $text);
     }
 
     /**

@@ -25,6 +25,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->validateClass($config);
         $this->validateSeo($config);
 
+        $this->assertEquals('sonata.core.slugify.native', $config['slugify_service']);
+
         $this->assertArrayHasKey('products', $config);
         $this->assertEmpty($config['products']);
     }
