@@ -77,7 +77,7 @@ class Pool
     {
         foreach ($this->products as $code => $productDescription) {
             $className = $productDescription->getManager()->getClass();
-            if ($product instanceof $className) {
+            if (get_class($product) == $className) {
                 return $code;
             }
         }
