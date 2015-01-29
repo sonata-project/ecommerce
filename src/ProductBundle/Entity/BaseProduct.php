@@ -19,7 +19,7 @@ use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Validator\Context\LegacyExecutionContext;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Sonata\ProductBundle\Entity\BaseProduct
@@ -946,7 +946,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function validateOneMainCategory(LegacyExecutionContext $context)
+    public function validateOneMainCategory(ExecutionContextInterface $context)
     {
         if ($this->getCategories()->count() == 0) {
             return;
