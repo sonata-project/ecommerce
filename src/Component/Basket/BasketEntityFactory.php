@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 /**
  * @todo Refacto (add an abstract class with the properties & constructor)
  */
-class BasketEntityFactory implements BasketFactoryInterface
+class BasketEntityFactory extends BaseBasketFactory implements BasketFactoryInterface
 {
     /**
      * @var \Sonata\Component\Basket\BasketManagerInterface
