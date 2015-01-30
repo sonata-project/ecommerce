@@ -29,6 +29,7 @@
         "sonata-project/notification-bundle": "~2.2",
         "sonata-project/comment-bundle": "~2.2@dev",
         "sonata-project/datagrid-bundle": "~2.2@dev",
+        "sonata-project/formatter-bundle": "~2.3",
 
         "friendsofsymfony/comment-bundle": "~2.0@dev",
 
