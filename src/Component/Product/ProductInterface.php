@@ -111,6 +111,48 @@ interface ProductInterface extends PriceComputableInterface
     public function getDescriptionFormatter();
 
     /**
+     * Set shortDescription.
+     *
+     * @param string $shortDescription
+     */
+    public function setShortDescription($shortDescription);
+
+    /**
+     * Get shortDescription.
+     *
+     * @return string
+     */
+    public function getShortDescription();
+
+    /**
+     * Set RAW shortDescription.
+     *
+     * @param string $rawShortDescription
+     */
+    public function setRawShortDescription($rawShortDescription);
+
+    /**
+     * Get RAW shortDescription.
+     *
+     * @return string
+     */
+    public function getRawShortDescription();
+
+    /**
+     * Set shortDescription formatter.
+     *
+     * @param string $shortDescriptionFormatter
+     */
+    public function setShortDescriptionFormatter($shortDescriptionFormatter);
+
+    /**
+     * Get shortDescription formatter.
+     *
+     * @return string
+     */
+    public function getShortDescriptionFormatter();
+
+    /**
      * Set stock.
      *
      * @param integer $stock

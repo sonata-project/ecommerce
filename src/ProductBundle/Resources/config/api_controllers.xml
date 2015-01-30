@@ -9,6 +9,7 @@
             <argument type="service" id="sonata.product.set.manager" />
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="form.factory" />
+            <argument type="service" id="sonata.formatter.pool" />
         </service>
     </services>
 </container>
