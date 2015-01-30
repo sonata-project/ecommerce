@@ -14,7 +14,7 @@ namespace Sonata\Component\Product;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\ExecutionContext;
+use Symfony\Component\Validator\ExecutionContextInterface;
 use Sonata\Component\Product\PriceComputableInterface;
 
 interface ProductInterface extends PriceComputableInterface
@@ -491,9 +491,9 @@ interface ProductInterface extends PriceComputableInterface
     /**
      * Validates if product has one main category
      *
-     * @param ExecutionContext $context
+     * @param ExecutionContextInterface $context
      *
      * @return void
      */
-    public function validateOneMainCategory(ExecutionContext $context);
+    public function validateOneMainCategory(ExecutionContextInterface $context);
 }
