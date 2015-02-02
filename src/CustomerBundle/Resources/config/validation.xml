@@ -31,6 +31,10 @@
             <constraint name="NotNull" />
         </getter>
 
+        <getter property="type">
+            <constraint name="NotNull" />
+        </getter>
+
         <getter property="address1">
             <constraint name="NotNull" />
         </getter>
