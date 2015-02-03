@@ -11,8 +11,9 @@
 namespace Sonata\Component\Customer;
 
 use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\CoreBundle\Model\PageableManagerInterface;
 
-interface AddressManagerInterface extends ManagerInterface
+interface AddressManagerInterface extends ManagerInterface, PageableManagerInterface
 {
     /**
      * Sets $address the current customer address
