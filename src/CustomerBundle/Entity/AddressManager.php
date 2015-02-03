@@ -13,6 +13,8 @@ namespace Sonata\CustomerBundle\Entity;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class AddressManager extends BaseEntityManager implements AddressManagerInterface
 {
@@ -53,5 +55,45 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
         }
 
         parent::delete($address, $andFlush);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    {
+        $query = $this->getRepository()
+            ->createQueryBuilder('a')
+            ->select('a');
+
+        $fields = $this->getEntityManager()->getClassMetadata($this->class)->getFieldNames();
+        foreach ($sort as $field => $direction) {
+            if (!in_array($field, $fields)) {
+                throw new \RuntimeException(sprintf("Invalid sort field '%s' in '%s' class", $field, $this->class));
+            }
+        }
+        if (count($sort) == 0) {
+            $sort = array('name' => 'ASC');
+        }
+        foreach ($sort as $field => $direction) {
+            $query->orderBy(sprintf('a.%s', $field), strtoupper($direction));
+        }
+
+        $parameters = array();
+
+        if (isset($criteria['customer'])) {
+            $query->innerJoin('a.customer', 'c', 'WITH', 'c.id = :customer');
+            $parameters['customer'] = $criteria['customer'];
+        }
+
+        $query->setParameters($parameters);
+
+        $pager = new Pager();
+        $pager->setMaxPerPage($limit);
+        $pager->setQuery(new ProxyQuery($query));
+        $pager->setPage($page);
+        $pager->init();
+
+        return $pager;
     }
 }

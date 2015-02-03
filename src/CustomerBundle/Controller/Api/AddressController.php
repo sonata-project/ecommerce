@@ -57,6 +57,51 @@ class AddressController
     }
 
     /**
+     * Returns a paginated list of addresses.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
+     * )
+     *
+     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for addresses list pagination (1-indexed)")
+     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of addresses by page")
+     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query orders addresses by clause (key is field, value is direction")
+     * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
+     *
+     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     *
+     * @param ParamFetcherInterface $paramFetcher
+     *
+     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     */
+    public function getAddressesAction(ParamFetcherInterface $paramFetcher)
+    {
+        $supportedCriteria = array(
+            'customer' => "",
+        );
+
+        $page     = $paramFetcher->get('page');
+        $limit    = $paramFetcher->get('count');
+        $sort     = $paramFetcher->get('orderBy');
+        $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
+
+        foreach ($criteria as $key => $value) {
+            if (null === $value) {
+                unset($criteria[$key]);
+            }
+        }
+
+        if (!$sort) {
+            $sort = array();
+        } elseif (!is_array($sort)) {
+            $sort = array($sort => 'asc');
+        }
+
+        return $this->addressManager->getPager($criteria, $page, $limit, $sort);
+    }
+
+    /**
      * Retrieves a specific address
      *
      * @ApiDoc(

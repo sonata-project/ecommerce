@@ -21,6 +21,18 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AddressControllerTest extends \PHPUnit_Framework_TestCase
 {
+    public function testGetAddressesAction()
+    {
+        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
+
+        $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher->expects($this->exactly(3))->method('get');
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+
+        $this->assertEquals(array(), $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
+    }
+
     public function testGetAddressAction()
     {
         $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
