@@ -15,6 +15,7 @@ env:
   - SYMFONY_VERSION=2.7.*@dev
 
 before_script:
+  - composer self-update
   - composer require symfony/symfony:${SYMFONY_VERSION} --prefer-source
   - composer install --dev --prefer-source
   - sudo pip install -r docs/requirements.txt
