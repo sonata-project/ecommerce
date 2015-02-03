@@ -58,6 +58,7 @@ class OrderController
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of orders by page")
      * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query orders order by clause (key is field, value is direction")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on order statuses")
+     * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
      *
@@ -69,6 +70,7 @@ class OrderController
     {
         $supportedCriteria = array(
             'status' => "",
+            'customer' => "",
         );
 
         $page     = $paramFetcher->get('page');

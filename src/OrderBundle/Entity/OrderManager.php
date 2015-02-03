@@ -96,6 +96,11 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
             $parameters['status'] = $criteria['status'];
         }
 
+        if (isset($criteria['customer'])) {
+            $query->innerJoin('o.customer', 'c', 'WITH', 'c.id = :customer');
+            $parameters['customer'] = $criteria['customer'];
+        }
+
         $query->setParameters($parameters);
 
         $pager = new Pager();
