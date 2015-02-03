@@ -26,15 +26,14 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetProductsAction()
     {
-        $product        = $this->getMock('Sonata\Component\Product\ProductInterface');
         $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
-        $productManager->expects($this->once())->method('findBy')->will($this->returnValue(array($product)));
+        $productManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
         $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($product), $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
+        $this->assertEquals(array(), $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
     }
 
     public function testGetProductAction()
