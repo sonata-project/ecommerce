@@ -124,6 +124,9 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $productPool = $this->getMock('Sonata\Component\Product\Pool');
         $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
 
+        $formatterPool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->exactly(2))->method('transform');
+
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
@@ -132,18 +135,23 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createProductController(null, $productManager, $productPool, $formFactory)->postProductAction('my.test.provider', new Request());
+        $view = $this->createProductController(null, $productManager, $productPool, $formFactory, $formatterPool)->postProductAction('my.test.provider', new Request());
 
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
     public function testPostProductInvalidAction()
     {
+        $product = $this->getMock('Sonata\ProductBundle\Model\ProductInterface');
+
         $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
         $productManager->expects($this->never())->method('save');
 
         $productPool = $this->getMock('Sonata\Component\Product\Pool');
         $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $formatterPool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->never())->method('transform');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
@@ -152,7 +160,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createProductController(null, $productManager, $productPool, $formFactory)->postProductAction('my.test.provider', new Request());
+        $view = $this->createProductController(null, $productManager, $productPool, $formFactory, $formatterPool)->postProductAction('my.test.provider', new Request());
 
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
@@ -162,10 +170,14 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
 
         $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
         $productManager->expects($this->once())->method('save')->will($this->returnValue($product));
 
         $productPool = $this->getMock('Sonata\Component\Product\Pool');
         $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $formatterPool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->exactly(2))->method('transform');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
@@ -175,7 +187,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createProductController($product, $productManager, $productPool, $formFactory)->putProductAction(1, 'my.test.provider', new Request());
+        $view = $this->createProductController($product, $productManager, $productPool, $formFactory, $formatterPool)->putProductAction(1, 'my.test.provider', new Request());
 
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
@@ -185,10 +197,14 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
 
         $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
         $productManager->expects($this->never())->method('save');
 
         $productPool = $this->getMock('Sonata\Component\Product\Pool');
         $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+
+        $formatterPool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->never())->method('transform');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
@@ -197,7 +213,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createProductController($product, $productManager, $productPool, $formFactory)->putProductAction(1, 'my.test.provider', new Request());
+        $view = $this->createProductController($product, $productManager, $productPool, $formFactory, $formatterPool)->putProductAction(1, 'my.test.provider', new Request());
 
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
@@ -240,10 +256,11 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
      * @param $productManager
      * @param $productPool
      * @param $formFactory
+     * @param null $formatterPool
      *
      * @return ProductController
      */
-    public function createProductController($product = null, $productManager = null, $productPool = null, $formFactory = null)
+    public function createProductController($product = null, $productManager = null, $productPool = null, $formFactory = null, $formatterPool = null)
     {
         if (null === $productManager) {
             $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
@@ -257,7 +274,10 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         if (null === $formFactory) {
             $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         }
+        if (null === $formatterPool) {
+            $formatterPool = $this->getMock('Sonata\FormatterBundle\Formatter\Pool');
+        }
 
-        return new ProductController($productManager, $productPool, $formFactory);
+        return new ProductController($productManager, $productPool, $formFactory, $formatterPool);
     }
 }

@@ -21,6 +21,7 @@ use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\Post;
@@ -61,17 +62,24 @@ class ProductController
     protected $formFactory;
 
     /**
+     * @var FormatterPool
+     */
+    protected $formatterPool;
+
+    /**
      * Constructor
      *
      * @param ProductManagerInterface $productManager Sonata product manager
      * @param Pool                    $productPool    Sonata product pool
      * @param FormFactoryInterface    $formFactory    Symfony form factory
+     * @param FormatterPool           $formatterPool
      */
-    public function __construct(ProductManagerInterface $productManager, Pool $productPool, FormFactoryInterface $formFactory)
+    public function __construct(ProductManagerInterface $productManager, Pool $productPool, FormFactoryInterface $formFactory, FormatterPool $formatterPool)
     {
-        $this->productManager = $productManager;
-        $this->productPool    = $productPool;
-        $this->formFactory    = $formFactory;
+        $this->productManager   = $productManager;
+        $this->productPool      = $productPool;
+        $this->formFactory      = $formFactory;
+        $this->formatterPool    = $formatterPool;
     }
 
     /**
@@ -233,6 +241,8 @@ class ProductController
 
         if ($form->isValid()) {
             $product = $form->getData();
+            $product->setDescription($this->formatterPool->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
+            $product->setShortDescription($this->formatterPool->transform($product->getShortDescriptionFormatter(), $product->getRawShortDescription()));
             $manager->save($product);
 
             $view = \FOS\RestBundle\View\View::create($product);
