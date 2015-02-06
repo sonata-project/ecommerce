@@ -49,6 +49,45 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
         $this->createAddressController()->getAddressAction(42);
     }
 
+    public function testPostAddressAction()
+    {
+        $address = $this->getMock('Sonata\AddressBundle\Model\AddressInterface');
+
+        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($address));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPostCustomerInvalidAction()
+    {
+        $address = $this->getMock('Sonata\CustomerBundle\Model\AddressInterface');
+
+        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager->expects($this->never())->method('save')->will($this->returnValue($address));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+
+        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
     public function testPutAddressAction()
     {
         $address = $this->getMock('Sonata\CustomerBundle\Model\AddressInterface');

@@ -128,6 +128,27 @@ class AddressController
     }
 
     /**
+     * Adds an address
+     *
+     * @ApiDoc(
+     *  input={"class"="sonata_customer_api_form_address", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\CustomerBundle\Model\Address", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while address creation",
+     *  }
+     * )
+     *
+     * @param Request $request A Symfony request
+     *
+     * @return AddressInterface
+     */
+    public function postAddressAction(Request $request)
+    {
+        return $this->handleWriteAddress($request);
+    }
+
+    /**
      * Updates an address
      *
      * @ApiDoc(
@@ -151,29 +172,7 @@ class AddressController
      */
     public function putAddressAction($id, Request $request)
     {
-        $address = $this->getAddress($id);
-
-        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', $address, array(
-            'csrf_protection' => false
-        ));
-
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $address = $form->getData();
-
-            $this->addressManager->save($address);
-
-            $view = \FOS\RestBundle\View\View::create($address);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
-
-            return $view;
-        }
-
-        return $form;
+        return $this->handleWriteAddress($request, $id);
     }
 
     /**
@@ -227,5 +226,39 @@ class AddressController
         }
 
         return $address;
+    }
+
+    /**
+     * Write an address, this method is used by both POST and PUT action methods
+     *
+     * @param Request      $request Symfony request
+     * @param integer|null $id      An Address identifier
+     *
+     * @return \FOS\RestBundle\View\View|FormInterface
+     */
+    protected function handleWriteAddress($request, $id = null)
+    {
+        $address = $id ? $this->getAddress($id) : null;
+
+        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', $address, array(
+            'csrf_protection' => false
+        ));
+
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $address = $form->getData();
+            $this->addressManager->save($address);
+
+            $view = \FOS\RestBundle\View\View::create($address);
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->enableMaxDepthChecks();
+            $view->setSerializationContext($serializationContext);
+
+            return $view;
+        }
+
+        return $form;
     }
 }
