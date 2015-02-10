@@ -77,3 +77,11 @@ The taxonomy is as follows:
 * ``sonata_api_write`` is the group used for input entities (when used instead of forms)
 
 If you wish to customize the outputted data, feel free to setup your own serialization options by configuring JMSSerializer with those groups.
+
+
+Routing
+-------
+
+The routing logic can be found in ``/app/config/routing_api.yml`` and shows the url construction for each bundle. The output format must be given as an extention to the url.
+
+For example : ``/app_dev.php/api/ecommerce/products/528.json`` outputs a jsoned formatted response to the GET request fectching product with id 528
