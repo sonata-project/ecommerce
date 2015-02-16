@@ -28,28 +28,62 @@
 
     <class name="Sonata\CustomerBundle\Entity\BaseAddress">
         <getter property="name">
-            <constraint name="NotNull" />
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>front</value>
+                    <value>Default</value>
+                </option>
+            </constraint>
         </getter>
 
         <getter property="type">
-            <constraint name="NotNull" />
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>Default</value>
+                </option>
+            </constraint>
         </getter>
 
         <getter property="address1">
-            <constraint name="NotNull" />
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>front</value>
+                    <value>Default</value>
+                </option>
+            </constraint>
         </getter>
 
         <getter property="postcode">
-            <constraint name="NotNull" />
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>front</value>
+                    <value>Default</value>
+                </option>
+            </constraint>
         </getter>
 
         <getter property="city">
-            <constraint name="NotNull" />
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>front</value>
+                    <value>Default</value>
+                </option>
+            </constraint>
         </getter>
 
         <getter property="countryCode">
-            <constraint name="NotNull" />
-            <constraint name="Country" />
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>front</value>
+                    <value>Default</value>
+                </option>
+            </constraint>
+            <constraint name="Country">
+                <option name="groups">
+                    <value>front</value>
+                    <value>Default</value>
+                </option>
+            </constraint>
         </getter>
     </class>
 

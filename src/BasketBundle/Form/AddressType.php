@@ -146,7 +146,8 @@ class AddressType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class'  => $this->addressClass,
-            'addresses'   => array()
+            'addresses'   => array(),
+            'validation_groups' => array('front'),
         ));
     }
 
