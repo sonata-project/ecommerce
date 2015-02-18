@@ -43,6 +43,43 @@
                </option>
            </constraint>
         </getter>
+
+        <getter property="paymentMethodCode">
+            <constraint name="NotNull" >
+                <option name="groups" >
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
+
+        <getter property="deliveryMethodCode">
+            <constraint name="NotNull" >
+                <option name="groups" >
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
+
+        <getter property="locale">
+            <constraint name="Locale" >
+                <option name="groups" >
+                    <value>api</value>
+                </option>
+            </constraint>
+            <constraint name="NotNull" >
+                <option name="groups" >
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
+
+        <getter property="currency">
+            <constraint name="NotNull" >
+                <option name="groups" >
+                    <value>api</value>
+                </option>
+            </constraint>
+        </getter>
     </class>
 
     <class name="Sonata\CustomerBundle\Entity\BaseAddress">
