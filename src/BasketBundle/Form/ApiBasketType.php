@@ -13,8 +13,7 @@ namespace Sonata\BasketBundle\Form;
 
 use Metadata\MetadataFactoryInterface;
 
-use Sonata\Component\Currency\CurrencyDataTransformer;
-use Sonata\Component\Currency\CurrencyManagerInterface;
+use Sonata\Component\Currency\CurrencyFormType;
 use Sonata\Component\Form\Transformer\SerializeDataTransformer;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -35,20 +34,20 @@ class ApiBasketType extends AbstractType
     protected $class;
 
     /**
-     * @var CurrencyManagerInterface
+     * @var CurrencyFormType
      */
-    protected $currencyManager;
+    protected $currencyFormType;
 
     /**
      * Constructor
      *
-     * @param string                   $class           An entity data class
-     * @param CurrencyManagerInterface $currencyManager A Sonata ecommerce currency manager
+     * @param string                $class           An entity data class
+     * @param CurrencyFormType      $currencyFormType A Sonata ecommerce currency form type
      */
-    public function __construct($class, CurrencyManagerInterface $currencyManager)
+    public function __construct($class, CurrencyFormType $currencyFormType)
     {
-        $this->class           = $class;
-        $this->currencyManager = $currencyManager;
+        $this->class            = $class;
+        $this->currencyFormType = $currencyFormType;
     }
 
     /**
@@ -56,11 +55,8 @@ class ApiBasketType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $currencyTransformer = new CurrencyDataTransformer($this->currencyManager);
-
         $builder->add(
-            $builder->create('currency', null)
-                ->addModelTransformer($currencyTransformer)
+            $builder->create('currency', $this->currencyFormType)
         );
     }
 
@@ -72,6 +68,7 @@ class ApiBasketType extends AbstractType
         $resolver->setDefaults(array(
             'data_class'      => $this->class,
             'csrf_protection' => false,
+            'validation_groups' => array('api'),
         ));
     }
 

@@ -21,7 +21,7 @@
             <tag name="form.type" alias="sonata_basket_api_form_basket" />
 
             <argument>%sonata.basket.basket.class%</argument>
-            <argument type="service" id="sonata.price.currency.manager" />
+            <argument type="service" id="sonata.price.currency.form_type" />
         </service>
 
         <!-- Basket element type -->

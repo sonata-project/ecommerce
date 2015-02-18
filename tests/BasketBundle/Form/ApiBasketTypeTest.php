@@ -11,6 +11,8 @@
 namespace Sonata\BasketBundle\Tests\Form;
 
 use Sonata\BasketBundle\Form\ApiBasketType;
+use Sonata\Component\Currency\CurrencyDataTransformer;
+use Sonata\Component\Currency\CurrencyFormType;
 
 /**
  * Class ApiBasketTypeTest
@@ -23,11 +25,14 @@ class ApiBasketTypeTest extends \PHPUnit_Framework_TestCase
     {
         $currencyManager = $this->getMock('Sonata\Component\Currency\CurrencyManagerInterface');
 
-        $type = new ApiBasketType('my.test.class', $currencyManager);
+        $currencyDataTransformer = new CurrencyDataTransformer($currencyManager);
+
+        $currencyFormType = new CurrencyFormType($currencyDataTransformer);
+
+        $type = new ApiBasketType('my.test.class', $currencyFormType);
 
         $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
         $builder->expects($this->once())->method('create')->will($this->returnSelf());
-        $builder->expects($this->once())->method('addModelTransformer');
 
         $type->buildForm($builder, array());
     }

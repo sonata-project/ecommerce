@@ -717,6 +717,14 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
+    public function setDeliveryMethodCode($deliveryMethodCode)
+    {
+        $this->deliveryMethodCode = $deliveryMethodCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDeliveryMethodCode()
     {
         return $this->deliveryMethodCode;
