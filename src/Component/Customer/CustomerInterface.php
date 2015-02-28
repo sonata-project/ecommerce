@@ -11,23 +11,10 @@
 namespace Sonata\Component\Customer;
 
 use FOS\UserBundle\Model\UserInterface;
+use Sonata\Component\Model\TimestampableInterface;
 
-interface CustomerInterface
+interface CustomerInterface extends TimestampableInterface
 {
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime|null $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt = null);
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime createdAt
-     */
-    public function getCreatedAt();
-
     /**
      * Set firstname
      *
@@ -62,20 +49,6 @@ interface CustomerInterface
      * @return string $lastname
      */
     public function getLastname();
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime|null $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime $updatedAt
-     */
-    public function getUpdatedAt();
 
     /**
      * Set user

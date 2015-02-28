@@ -11,13 +11,14 @@
 
 namespace Sonata\Component\Product;
 
+use Sonata\Component\Model\TimestampableInterface;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\ExecutionContextInterface;
 use Sonata\Component\Product\PriceComputableInterface;
 
-interface ProductInterface extends PriceComputableInterface
+interface ProductInterface extends PriceComputableInterface, TimestampableInterface
 {
     /**
      * Get id.
@@ -193,34 +194,6 @@ interface ProductInterface extends PriceComputableInterface
      * @return boolean
      */
     public function getEnabled();
-
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
-
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt();
-
-    /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt = null);
-
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt();
 
     /**
      * Add a Package to collection.

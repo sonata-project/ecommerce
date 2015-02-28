@@ -13,8 +13,9 @@ namespace Sonata\Component\Order;
 
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Component\Model\TimestampableInterface;
 
-interface OrderInterface
+interface OrderInterface extends TimestampableInterface
 {
     const STATUS_OPEN       = 0; // created but not validated
     const STATUS_PENDING    = 1; // waiting from action from the user
@@ -575,26 +576,6 @@ interface OrderInterface
      * @return boolean
      */
     public function isError();
-
-    /**
-     * @param \DateTime|null $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt = null);
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt();
-
-    /**
-     * @param \DateTime|null $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt();
 
     /**
      * Add order elements

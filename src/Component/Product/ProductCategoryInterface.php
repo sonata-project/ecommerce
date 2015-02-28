@@ -11,8 +11,9 @@
 namespace Sonata\Component\Product;
 
 use Sonata\ClassificationBundle\Model\CategoryInterface;
+use Sonata\Component\Model\TimestampableInterface;
 
-interface ProductCategoryInterface
+interface ProductCategoryInterface extends TimestampableInterface
 {
     /**
      * Set enabled
@@ -41,34 +42,6 @@ interface ProductCategoryInterface
      * @return boolean $main
      */
     public function getMain();
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime $updatedAt
-     */
-    public function getUpdatedAt();
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt = null);
-
-    /**
-     * Get createdAt
-     *
-     * @return \Datetime $createdAt
-     */
-    public function getCreatedAt();
 
     /**
      * Set Product

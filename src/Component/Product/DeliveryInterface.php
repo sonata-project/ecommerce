@@ -10,7 +10,9 @@
 
 namespace Sonata\Component\Product;
 
-interface DeliveryInterface
+use Sonata\Component\Model\TimestampableInterface;
+
+interface DeliveryInterface extends TimestampableInterface
 {
     /**
      * Set product
@@ -95,34 +97,6 @@ interface DeliveryInterface
      * @return boolean $enabled
      */
     public function getEnabled();
-
-    /**
-     * Set updatedAt
-     *
-     * @param \Datetime $updatedAt
-     */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
-
-    /**
-     * Get updatedAt
-     *
-     * @return \Datetime $updatedAt
-     */
-    public function getUpdatedAt();
-
-    /**
-     * Set createdAt
-     *
-     * @param \Datetime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt = null);
-
-    /**
-     * Get createdAt
-     *
-     * @return \Datetime $createdAt
-     */
-    public function getCreatedAt();
 
     /**
      * Returns Delivery base data as an array.
