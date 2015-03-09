@@ -12,17 +12,18 @@ file that was distributed with this source code.
 
 {% block block %}
 
-    <div class="sonata-order-block-recent-order panel panel-default">
+    <div class="box box-primary">
         {% if settings.title %}
-            <div class="panel-heading">
-                <h3 class="panel-title sonata-order-block-recent-order"><i class="fa fa-barcode"></i> {{ settings.title }}</h3>
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <i class="fa fa-barcode"></i> {{ settings.title }}
+                </h3>
             </div>
         {% endif %}
 
-
-        <div class="panel-body">
-
+        <div class="box-body">
             {% sonata_template_box 'This is the recent orders list block.' %}
+
             {% if orders|length > 0 %}
                 <table class="sonata-order-block-order-container table table-condensed">
                     {% for order in orders %}
@@ -38,12 +39,6 @@ file that was distributed with this source code.
                         </tr>
                     {% endfor %}
                 </table>
-
-                {% if context.getSetting('mode') == 'admin' %}
-                    <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
-                {% else %}
-                    <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
-                {% endif %}
             {% else %}
                 {% if context.getSetting('mode') == 'admin' %}
                     <p>{{ 'no_order_found'|trans({}, 'SonataOrderBundle') }}</p>
@@ -52,5 +47,16 @@ file that was distributed with this source code.
                 {% endif %}
             {% endif %}
         </div>
+
+        {% if orders|length > 0 %}
+            <div class="box-footer">
+                {% if context.getSetting('mode') == 'admin' %}
+                    <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+                {% else %}
+                    <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
+
 {% endblock %}
