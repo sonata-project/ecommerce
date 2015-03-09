@@ -28,8 +28,8 @@ file that was distributed with this source code.
                 <table class="sonata-order-block-order-container table table-condensed">
                     {% for order in orders %}
                         <tr>
-                            {% if context.getSetting('mode') == 'admin' %}
-                                <td><a href="{{ url('admin_sonata_order_order_edit', { 'id': order.id }) }}">{{ order.reference }}</a></td>
+                            {% if context.getSetting('mode') == 'admin' and admin_pool is defined %}
+                                <td><a href="{{ admin_pool.getAdminByAdminCode('sonata.order.admin.order').generateUrl('edit', { 'id': order.id }) }}">{{ order.reference }}</a></td>
                             {% else %}
                                 <td><a href="{{ url('sonata_order_view', { 'reference': order.reference }) }}">{{ order.reference }}</a></td>
                             {% endif %}
@@ -50,8 +50,8 @@ file that was distributed with this source code.
 
         {% if orders|length > 0 %}
             <div class="box-footer">
-                {% if context.getSetting('mode') == 'admin' %}
-                    <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+                {% if context.getSetting('mode') == 'admin' and admin_pool is defined %}
+                    <a href="{{ admin_pool.getAdminByAdminCode('sonata.order.admin.order').generateUrl('list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
                 {% else %}
                     <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
                 {% endif %}

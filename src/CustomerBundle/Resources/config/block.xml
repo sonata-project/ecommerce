@@ -11,6 +11,8 @@
             <argument>sonata.customer.block.recent_customers</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="sonata.customer.manager" />
+            <argument type="service" id="sonata.admin.pool" on-invalid="ignore" />
+
         </service>
     </services>
 

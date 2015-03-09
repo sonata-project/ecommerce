@@ -23,6 +23,7 @@
             <argument type="service" id="templating" />
             <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.price.currency.detector" />
+            <argument>%sonata.product.admin.product.entity%</argument>
         </service>
 
         <service id="sonata.product.block.similar_products" class="Sonata\ProductBundle\Block\SimilarProductsBlockService">
@@ -33,6 +34,7 @@
             <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.price.currency.detector" />
             <argument type="service" id="sonata.product.finder" />
+            <argument>%sonata.product.admin.product.entity%</argument>
         </service>
 
         <service id="sonata.product.block.categories_menu" class="Sonata\ProductBundle\Block\CategoriesMenuBlockService">

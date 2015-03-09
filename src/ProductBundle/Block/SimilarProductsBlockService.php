@@ -51,10 +51,11 @@ class SimilarProductsBlockService extends BaseBlockService
      * @param RegistryInterface         $registry
      * @param CurrencyDetectorInterface $currencyDetector
      * @param ProductFinderInterface    $productFinder
+     * @param string                    $productClass
      */
-    public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector, ProductFinderInterface $productFinder)
+    public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector, ProductFinderInterface $productFinder, $productClass)
     {
-        $this->productRepository = $registry->getManager()->getRepository('Application\Sonata\ProductBundle\Entity\Product');
+        $this->productRepository = $registry->getManager()->getRepository($productClass);
         $this->currencyDetector  = $currencyDetector;
         $this->productFinder     = $productFinder;
 

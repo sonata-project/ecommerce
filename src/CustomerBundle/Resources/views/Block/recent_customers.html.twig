@@ -27,8 +27,8 @@ file that was distributed with this source code.
                     {% for customer in customers %}
                         <a class="list-group-item"
                            href="
-                            {% if context.getSetting('mode') == 'admin' %}
-                                {{ url('admin_sonata_customer_customer_edit', { 'id': customer.id }) }}
+                            {% if context.getSetting('mode') == 'admin' and admin_pool is defined %}
+                                {{ admin_pool.getAdminByAdminCode('sonata.customer.admin.customer').generateUrl('edit', { 'id': customer.id }) }}
                             {% else %}
                                 {{ url('sonata_customer_view', { 'id': customer.id }) }}
                             {% endif %}
@@ -43,8 +43,8 @@ file that was distributed with this source code.
         </div>
 
         <div class="box-footer">
-            {% if context.getSetting('mode') == 'admin' %}
-                <a href="{{ url('admin_sonata_customer_customer_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_customers'|trans({}, 'SonataCustomerBundle') }}</a>
+            {% if context.getSetting('mode') == 'admin' and admin_pool is defined  %}
+                <a href="{{ admin_pool.getAdminByAdminCode('sonata.customer.admin.customer').generateUrl('list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_customers'|trans({}, 'SonataCustomerBundle') }}</a>
             {% endif %}
         </div>
     </div>

@@ -216,7 +216,7 @@ class OrderAdmin extends Admin
         } else {
             $menu->addChild(
                 $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit', array(), 'SonataOrderBundle'),
-                array('uri' => $admin->getRouteGenerator()->generate('admin_sonata_invoice_invoice_edit', array('id' => $invoice->getId())))
+                array('uri' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.invoice.admin.invoice')->generateUrl('edit', array('id' => $invoice->getId())))
             );
         }
     }

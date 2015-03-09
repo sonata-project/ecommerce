@@ -21,13 +21,16 @@ class ORMInheritanceSubscriber implements EventSubscriber
      * @var array
      */
     protected $map = array();
+    protected $productClass;
 
     /**
-     * @param array $map
+     * @param array  $map
+     * @param string $productClass
      */
-    public function __construct($map)
+    public function __construct($map, $productClass)
     {
-        $this->map = $map;
+        $this->map          = $map;
+        $this->productClass = $productClass;
     }
 
     /**
@@ -47,7 +50,7 @@ class ORMInheritanceSubscriber implements EventSubscriber
     {
         $metadata = $eventArgs->getClassMetadata();
 
-        if ($metadata->name !== 'Application\Sonata\ProductBundle\Entity\Product') {
+        if ($metadata->name !== $this->productClass) {
             return;
         }
 

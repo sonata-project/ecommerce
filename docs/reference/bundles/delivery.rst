@@ -49,7 +49,7 @@ Default configuration:
         # and add your custom ones
         methods:
             free_address_required: ~     # This is a provided method, we don't need to specify its service id
-            take_away: application.sonata.delivery.take_away    # Custom delivery method, we specify the service id
+            take_away: app.delivery.take_away    # Custom delivery method, we specify the service id
 
 
 Add a custom delivery method

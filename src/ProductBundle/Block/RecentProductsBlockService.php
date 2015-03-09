@@ -44,10 +44,11 @@ class RecentProductsBlockService extends BaseBlockService
      * @param EngineInterface           $templating
      * @param RegistryInterface         $registry
      * @param CurrencyDetectorInterface $currencyDetector
+     * @param string                    $productClass
      */
-    public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector)
+    public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector, $productClass)
     {
-        $this->productRepository = $registry->getManager()->getRepository('Application\Sonata\ProductBundle\Entity\Product');
+        $this->productRepository = $registry->getManager()->getRepository($productClass);
         $this->currencyDetector  = $currencyDetector;
 
         parent::__construct($name, $templating);

@@ -11,6 +11,7 @@
 
 namespace Sonata\CustomerBundle\Block;
 
+use Sonata\AdminBundle\Admin\Pool;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -39,9 +40,10 @@ class RecentCustomersBlockService extends BaseBlockService
      * @param EngineInterface          $templating
      * @param CustomerManagerInterface $manager
      */
-    public function __construct($name, EngineInterface $templating, CustomerManagerInterface $manager)
+    public function __construct($name, EngineInterface $templating, CustomerManagerInterface $manager, Pool $adminPool = null)
     {
         $this->manager = $manager;
+        $this->adminPool = $adminPool;
 
         parent::__construct($name, $templating);
     }
@@ -56,10 +58,11 @@ class RecentCustomersBlockService extends BaseBlockService
         );
 
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'context'   => $blockContext,
-            'settings'  => $blockContext->getSettings(),
-            'block'     => $blockContext->getBlock(),
-            'customers' => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'))
+            'context'    => $blockContext,
+            'settings'   => $blockContext->getSettings(),
+            'block'      => $blockContext->getBlock(),
+            'customers'  => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number')),
+            'admin_pool' => $this->adminPool
         ), $response);
     }
 

@@ -11,6 +11,7 @@
 
 namespace Sonata\OrderBundle\Block;
 
+use Sonata\AdminBundle\Admin\Pool;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
@@ -18,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\CoreBundle\Validator\ErrorElement;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
@@ -56,12 +57,14 @@ class RecentOrdersBlockService extends BaseBlockService
      * @param OrderManagerInterface    $orderManager
      * @param CustomerManagerInterface $customerManager
      * @param SecurityContextInterface $securityContext
+     * @param Pool                     $adminPool
      */
-    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, SecurityContextInterface $securityContext)
+    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, SecurityContextInterface $securityContext, Pool $adminPool = null)
     {
         $this->orderManager    = $orderManager;
         $this->customerManager = $customerManager;
         $this->securityContext = $securityContext;
+        $this->adminPool       = $adminPool;
 
         parent::__construct($name, $templating);
     }
@@ -80,10 +83,11 @@ class RecentOrdersBlockService extends BaseBlockService
         }
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), array(
-            'context'   => $blockContext,
-            'settings'  => $blockContext->getSettings(),
-            'block'     => $blockContext->getBlock(),
-            'orders'    => $orders
+            'context'    => $blockContext,
+            'settings'   => $blockContext->getSettings(),
+            'block'      => $blockContext->getBlock(),
+            'orders'     => $orders,
+            'admin_pool' => $this->adminPool
         ), $response);
     }
 

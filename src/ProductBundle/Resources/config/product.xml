@@ -27,6 +27,7 @@
         <service id="sonata.product.subscriber.orm" class="%sonata.product.subscriber.orm.class%">
             <argument type="collection" />
             <tag name="doctrine.event_subscriber" />
+            <argument>%sonata.product.admin.product.entity%</argument>
         </service>
 
         <service id="sonata.product.seo_iterator" class="%sonata.product.seo_iterator.class%">
