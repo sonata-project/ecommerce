@@ -14,6 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -27,9 +28,8 @@ class ProductVariationAdminController extends Controller
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function createAction()
+    public function createAction(Request $request = null)
     {
-
         if (!$this->admin->getParent()) {
             throw new \RuntimeException('The admin cannot be call directly, it must be embedded');
         }
@@ -53,8 +53,8 @@ class ProductVariationAdminController extends Controller
         // product is the main product object, used to create a set of variation
         $product = $this->admin->getParent()->getSubject();
 
-        if ($this->getRequest()->isMethod('POST')) {
-            $form->submit($this->getRequest());
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
 
             if ($form->isValid()) {
                 $number = $form->get('number')->getData();

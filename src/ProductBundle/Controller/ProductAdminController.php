@@ -14,6 +14,7 @@ namespace Sonata\ProductBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -25,7 +26,7 @@ class ProductAdminController extends Controller
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction()
+    public function createAction(Request $request = null)
     {
         if (false === $this->admin->isGranted('CREATE')) {
             throw new AccessDeniedException();
@@ -42,16 +43,16 @@ class ProductAdminController extends Controller
             ));
         }
 
-        return parent::createAction();
+        return parent::createAction($request);
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function showVariationsAction()
+    public function showVariationsAction(Request $request = null)
     {
-        $id = $this->getRequest()->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
 
         if (!$product = $this->admin->getObject($id)) {
             throw new NotFoundHttpException('Product not found.');
