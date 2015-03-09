@@ -23,7 +23,7 @@ class ORMInheritanceSubscriberTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetSubscribedEvents()
     {
-        $subscriber = new ORMInheritanceSubscriber(array());
+        $subscriber = new ORMInheritanceSubscriber(array(), 'Application\Sonata\ProductBundle\Entity\Product');
         $this->assertCount(1, $subscriber->getSubscribedEvents());
     }
 
@@ -32,7 +32,7 @@ class ORMInheritanceSubscriberTest extends \PHPUnit_Framework_TestCase
         $fakedMetadata = new \stdClass();
         $fakedMetadata->name = 'IncorrectValue';
 
-        $subscriber = new ORMInheritanceSubscriber(array());
+        $subscriber = new ORMInheritanceSubscriber(array(), 'Application\Sonata\ProductBundle\Entity\Product');
         $metadata = $this->getMockBuilder('Doctrine\ORM\Event\LoadClassMetadataEventArgs')->disableOriginalConstructor()->getMock();
         $metadata->expects($this->any())
             ->method('getClassMetadata')
