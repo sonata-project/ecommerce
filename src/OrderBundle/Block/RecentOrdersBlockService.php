@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BaseBlockService;
