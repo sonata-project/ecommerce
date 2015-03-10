@@ -60,20 +60,20 @@ class ProductController extends Controller
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
-                    $this->get('sonata.product.pool')->getProductCode($product),
-                    $product->getId(),
-                    $action,
-                    $response->getContent()
-                ));
+                $this->get('sonata.product.pool')->getProductCode($product),
+                $product->getId(),
+                $action,
+                $response->getContent()
+            ));
         }
 
         return $response;
     }
 
     /**
-     * @param \Symfony\Component\Form\FormView                $formView
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param FormView               $formView
+     * @param BasketElementInterface $basketElement
+     * @param BasketInterface        $basket
      *
      * @return Response
      */
@@ -82,18 +82,18 @@ class ProductController extends Controller
         $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
-                'formView'       => $formView,
-                'basketElement'  => $basketElement,
-                'basket'         => $basket
-            ));
+            'formView'       => $formView,
+            'basketElement'  => $basketElement,
+            'basket'         => $basket
+        ));
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
-                    $basketElement->getProductCode(),
-                    $basketElement->getProductId(),
-                    $action,
-                    $response->getContent()
-                ));
+                $basketElement->getProductCode(),
+                $basketElement->getProductId(),
+                $action,
+                $response->getContent()
+            ));
         }
 
         return $response;
@@ -148,8 +148,8 @@ class ProductController extends Controller
     }
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param BasketElementInterface $basketElement
+     * @param BasketInterface        $basket
      *
      * @return Response
      */
@@ -158,17 +158,17 @@ class ProductController extends Controller
         $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
 
         $response = $this->forward($action, array(
-                'basketElement'  => $basketElement,
-                'basket'         => $basket
-            ));
+            'basketElement'  => $basketElement,
+            'basket'         => $basket
+        ));
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
-                    $basketElement->getProductCode(),
-                    $basketElement->getProductId(),
-                    $action,
-                    $response->getContent()
-                ));
+                $basketElement->getProductCode(),
+                $basketElement->getProductId(),
+                $action,
+                $response->getContent()
+            ));
         }
 
         return $response;
@@ -199,11 +199,11 @@ class ProductController extends Controller
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
-                    $this->get('sonata.product.pool')->getProductCode($product),
-                    $product->getId(),
-                    $action,
-                    $response->getContent()
-                ));
+                $this->get('sonata.product.pool')->getProductCode($product),
+                $product->getId(),
+                $action,
+                $response->getContent()
+            ));
         }
 
         return $response;

@@ -110,7 +110,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     public function testValidateFormBasketElement()
     {
         $productProvider = $this->createNewProductProvider();
-        $errorElement = $this->getMockBuilder('Sonata\AdminBundle\Validator\ErrorElement')->disableOriginalConstructor()->getMock();
+        $errorElement = $this->getMockBuilder('Sonata\CoreBundle\Validator\ErrorElement')->disableOriginalConstructor()->getMock();
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
 
         // With a deleted element

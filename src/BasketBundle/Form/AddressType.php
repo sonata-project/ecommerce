@@ -65,31 +65,30 @@ class AddressType extends AbstractType
             }
 
             $builder->add('addresses', 'entity', array(
-                    'choices'  => $addresses,
-                    'preferred_choices' => array($defaultAddress),
-                    'class'    => $this->addressClass,
-                    'property' => 'addressArrayForRender',
-                    'expanded' => true,
-                    'multiple' => false,
-                    'mapped'   => false,
-                ))
-                ->add('useSelected', 'submit', array(
-                        'attr' => array(
-                            'class' => 'btn btn-primary',
-                            'style' => 'margin-bottom:20px;'
-                        ),
-                        'translation_domain' => 'SonataBasketBundle',
-                        'validation_groups'  => false
-                    )
-                );
+                'choices'  => $addresses,
+                'preferred_choices' => array($defaultAddress),
+                'class'    => $this->addressClass,
+                'property' => 'addressArrayForRender',
+                'expanded' => true,
+                'multiple' => false,
+                'mapped'   => false,
+            ))
+            ->add('useSelected', 'submit', array(
+                'attr' => array(
+                    'class' => 'btn btn-primary',
+                    'style' => 'margin-bottom:20px;'
+                ),
+                'translation_domain' => 'SonataBasketBundle',
+                'validation_groups'  => false
+            ));
         }
 
         $builder->add('name', null, array('required' => !count($addresses)));
 
         if (isset($options['types'])) {
             $builder->add('type', 'choice', array(
-                    'choices' => $options['types'],
-                    'translation_domain' => 'SonataCustomerBundle')
+                'choices'            => $options['types'],
+                'translation_domain' => 'SonataCustomerBundle')
             );
         }
 

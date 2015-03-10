@@ -119,7 +119,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
         $this->session->remove($this->getSessionVarName());
     }
 
-
     /**
      * Get the name of the session variable
      *

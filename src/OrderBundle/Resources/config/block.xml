@@ -13,6 +13,8 @@
             <argument type="service" id="sonata.order.manager" />
             <argument type="service" id="sonata.customer.manager" />
             <argument type="service" id="security.context" />
+
+            <argument type="service" id="sonata.admin.pool" on-invalid="ignore" />
         </service>
     </services>
 

@@ -13,7 +13,7 @@ namespace Sonata\Component\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
@@ -178,7 +178,7 @@ interface ProductProviderInterface
      *
      * If the basket is valid it will then replace the one in session
      *
-     * @param  \Sonata\AdminBundle\Validator\ErrorElement      $errorElement
+     * @param  \Sonata\CoreBundle\Validator\ErrorElement      $errorElement
      * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @param  \Sonata\Component\Basket\BasketInterface        $basket
      * @return void
