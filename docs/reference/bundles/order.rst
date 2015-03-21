@@ -26,14 +26,14 @@ Status Renderer
 
 The ``SonataOrderBundle`` provides a status renderer for the order and orderelement objects, which handles the object's status as well as payment and delivery statuses.
 
-The `Status Renderer` twig helper is documented in `SonataCoreBundle <http://sonata-project.org/bundles/core/master/doc/reference/status_helper.html>`_.
+The `Status Renderer` twig helper is documented in `SonataCoreBundle <https://sonata-project.org/bundles/core/master/doc/reference/status_helper.html>`_.
 
 Block Services
 --------------
 
 A `Recent Orders` block service is available, that can be contextualised to a user or the admin (you've got implementation samples in the demo). You can customize the number of orders displayed.
 
-You also have a `Breadcrumb` block service, see `SonataSeoBundle documentation <http://sonata-project.org/bundles/seo/master/doc/reference/breadcrumb.html>`_.
+You also have a `Breadcrumb` block service, see `SonataSeoBundle documentation <https://sonata-project.org/bundles/seo/master/doc/reference/breadcrumb.html>`_.
 
 Configuration
 =============

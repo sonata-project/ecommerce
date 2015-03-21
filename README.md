@@ -3,7 +3,7 @@ Sonata Ecommerce
 
 [![Build Status](https://secure.travis-ci.org/sonata-project/ecommerce.png?branch=master)](http://travis-ci.org/sonata-project/ecommerce)
 
-The online documentation of the bundle is in http://sonata-project.org/bundles/ecommerce
+The online documentation of the bundle is in https://sonata-project.org/bundles/ecommerce
 
 The demo website can be found in http://demo.sonata-project.org/admin/dashboard (admin as user and password)
 

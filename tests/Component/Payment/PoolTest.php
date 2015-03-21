@@ -43,7 +43,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \RuntimeException
-     * @expectedExceptionMessage Payment handler of class Sonata\Component\Payment\PassPayment must return a code on getCode method. Please refer to the documentation (http://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)
+     * @expectedExceptionMessage Payment handler of class Sonata\Component\Payment\PassPayment must return a code on getCode method. Please refer to the documentation (https://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)
      */
     public function testAddMethodError()
     {
