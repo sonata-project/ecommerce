@@ -10,6 +10,7 @@
 
 namespace Sonata\Test\OrderBundle\Entity;
 
+use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\OrderBundle\Entity\OrderManager;
 
@@ -85,28 +86,11 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function getOrderManager($qbCallback)
     {
-        $query = $this->getMockForAbstractClass('Doctrine\ORM\AbstractQuery', array(), '', false, true, true, array('execute'));
-        $query->expects($this->any())->method('execute')->will($this->returnValue(true));
-
-        $qb = $this->getMockBuilder('Doctrine\ORM\QueryBuilder')->disableOriginalConstructor()->getMock();
-        $qb->expects($this->any())->method('select')->will($this->returnValue($qb));
-        $qb->expects($this->any())->method('getQuery')->will($this->returnValue($query));
-
-        $qbCallback($qb);
-
-        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
-        $repository->expects($this->any())->method('createQueryBuilder')->will($this->returnValue($qb));
-
-        $metadata = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
-        $metadata->expects($this->any())->method('getFieldNames')->will($this->returnValue(array(
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
             'reference',
             'status',
             'username',
-        )));
-
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
-        $em->expects($this->any())->method('getClassMetadata')->will($this->returnValue($metadata));
+        ));
 
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
