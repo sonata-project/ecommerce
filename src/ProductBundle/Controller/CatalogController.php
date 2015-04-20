@@ -43,7 +43,7 @@ class CatalogController extends Controller
 
         $category = $this->retrieveCategoryFromQueryString();
 
-        $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title'));
+        $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title', array(), "SonataProductBundle"));
 
         $pager = $this->get('knp_paginator');
         $pagination = $pager->paginate($this->getProductSetManager()->getCategoryActiveProductsQueryBuilder($category, $filter, $option), $page, $displayMax);
