@@ -199,7 +199,7 @@ class OgonePayment extends BasePayment
     protected function compareOrderToParams(OrderInterface $order, array $params)
     {
         return $order->getReference() === $params['orderID']
-            && $order->getCurrency() === $params['currency']
+            && $order->getCurrency() == $params['currency']
             && floatval($order->getTotalInc()) === floatval($params['amount']);
     }
 
