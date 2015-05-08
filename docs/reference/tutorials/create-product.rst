@@ -26,7 +26,7 @@ Run the following command to create the files:
 
 	php app/console sonata:product:generate Bowl sonata.ecommerce_demo.product.bowl
 
-The required base files will be created in ``src/Application/Sonata/ProductBundle``. 
+The required base files will be created in the ``ProductBundle`` directory (ex. ``src/Application/Sonata/ProductBundle``). 
 To finalize the installation, we have to define the missing parameters like the type itself and the related manager. These data have to be provided in ``src/Application/Sonata/ProductBundle/Resources/config/product.yml``.
 ::
 
