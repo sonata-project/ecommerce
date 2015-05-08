@@ -49,13 +49,19 @@ class GenerateProductCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // find a better way to detect the Application folder
-        $bundle_dir = sprintf("%s/../src/Application/Sonata/ProductBundle",
-            $this->getContainer()->get('kernel')->getRootDir()
-        );
+        $childBundle = array_filter($this->getContainer()->get('kernel')->getBundle('SonataProductBundle', false), function($class) {
+            return $class->getParent() == 'SonataProductBundle';
+        });
+        if (count($childBundle) == 0) {
+            throw new \Exception('Please initialize a ProductBundle first');
+        } elseif (count($childBundle) > 1) {
+            throw new \Exception('Multiple children of SonataProductBundle detected');
+        }
+
+        $bundle_dir = $childBundle[0]->getPath();
 
         if (!is_dir($bundle_dir)) {
-            throw new \Exception('Please initialize a ProductBundle first in the Application directory');
+            throw new \Exception('Please initialize a ProductBundle first in an Application directory');
         }
 
         $output->writeln(sprintf('Generating files for the <info>%s</info>', $input->getArgument('product')));
