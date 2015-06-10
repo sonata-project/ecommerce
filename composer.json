@@ -42,6 +42,9 @@
         "friendsofsymfony/rest-bundle": "~1.1",
         "nelmio/api-doc-bundle": "~2.4"
     },
+    "require-dev": {
+        "symfony/phpunit-bridge": "~2.7|~3.0"
+    },
     "autoload": {
         "psr-4": {
             "Sonata\\Component\\": "src/Component",

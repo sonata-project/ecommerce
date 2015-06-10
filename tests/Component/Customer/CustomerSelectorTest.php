@@ -32,6 +32,9 @@ class User
 
 class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group legacy
+     */
     public function testUserNotConnected()
     {
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');

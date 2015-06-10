@@ -22,12 +22,11 @@ use Symfony\Component\Form\FormEvents;
  */
 class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGetSubscribedEvents()
     {
         $expected = array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_BIND     => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preBind'
         );
 
         $this->assertEquals($expected, BasketResizeFormListener::getSubscribedEvents());

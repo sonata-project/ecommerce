@@ -22,6 +22,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class BasketValidatorTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group legacy
+     */
     public function testValidate()
     {
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
