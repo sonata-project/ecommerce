@@ -198,8 +198,9 @@ class OgonePayment extends BasePayment
      */
     protected function compareOrderToParams(OrderInterface $order, array $params)
     {
+        // bug correction : The type conversion does not take place when the comparison is ===
         return $order->getReference() === $params['orderID']
-            && $order->getCurrency() === $params['currency']
+            && $order->getCurrency() == $params['currency']
             && floatval($order->getTotalInc()) === floatval($params['amount']);
     }
 
