@@ -5,19 +5,19 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
 
-    <route id="sonata_admin_product_variations" pattern="/{productId}/variations">
+    <route id="sonata_admin_product_variations" path="/{productId}/variations">
         <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
-    <route id="sonata_admin_product_categories" pattern="/{productId}/categories">
+    <route id="sonata_admin_product_categories" path="/{productId}/categories">
         <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
-    <route id="sonata_admin_product_collections" pattern="/{productId}/collections">
+    <route id="sonata_admin_product_collections" path="/{productId}/collections">
         <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
-    <route id="sonata_admin_product_deliveries" pattern="/{productId}/deliveries">
+    <route id="sonata_admin_product_deliveries" path="/{productId}/deliveries">
         <default key="_controller">SonataProductBundle:ProductAdmin:edit</default>
     </route>
 
