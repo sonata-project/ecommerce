@@ -200,7 +200,7 @@ class OgonePayment extends BasePayment
     {
         // bug correction : The type conversion does not take place when the comparison is ===
         return $order->getReference() === $params['orderID']
-            && $order->getCurrency() == $params['currency']
+            && $order->getCurrency()->getLabel() === $params['currency']
             && floatval($order->getTotalInc()) === floatval($params['amount']);
     }
 
