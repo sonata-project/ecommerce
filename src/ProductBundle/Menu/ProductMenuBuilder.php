@@ -77,7 +77,14 @@ class ProductMenuBuilder
             $menuItem = $menu->addChild($filter, array_merge(array('attributes' => array('class' => 'nav-header')), $itemOptions));
 
             foreach ($options as $option) {
-                $filterItemOptions = array_merge(array('uri' => $this->getFilterUri($currentUri, $filter, $option)), $itemOptions);
+                $itemOptions['routeParameters'][$filter] = $option;
+
+                if (isset($itemOptions['route']) && $itemOptions['route']) {
+                    $itemOptions['routeParameters'][$filter] = $option;
+                    $filterItemOptions = $itemOptions;
+                } else {
+                    $filterItemOptions = array_merge(array('uri' => $this->getFilterUri($currentUri, $filter, $option)), $itemOptions);
+                }
 
                 $menuItem->addChild(
                     $this->getFilterName($filter, $option),
@@ -92,14 +99,15 @@ class ProductMenuBuilder
     /**
      * @param array  $itemOptions The options given to the created menuItem
      * @param string $currentUri  The current URI
+     * @param array  $facets      The facets results list
      *
      * @return \Knp\Menu\ItemInterface
      */
-    public function createCategoryMenu(array $itemOptions = array(), $currentUri = null)
+    public function createCategoryMenu(array $itemOptions = array(), $currentUri = null, $facets = array())
     {
         $menu = $this->factory->createItem('categories', $itemOptions);
 
-        $this->buildCategoryMenu($menu, $itemOptions, $currentUri);
+        $this->buildCategoryMenu($menu, $itemOptions, $currentUri, $facets);
 
         return $menu;
     }
@@ -108,12 +116,19 @@ class ProductMenuBuilder
      * @param \Knp\Menu\ItemInterface $menu        The item to fill with $routes
      * @param array                   $options     The item options
      * @param string                  $currentUri  The current URI
+     * @param array                   $facets      The facets results list
      */
-    public function buildCategoryMenu(ItemInterface $menu, array $options = array(), $currentUri = null)
+    public function buildCategoryMenu(ItemInterface $menu, array $options = array(), $currentUri = null, $facets = array())
     {
         $categories = $this->categoryManager->getCategoryTree();
 
-        $this->fillMenu($menu, $categories, $options, $currentUri);
+        $terms = array();
+
+        foreach ($facets as $facet) {
+            $terms[$facet['term']] = $facet['count'];
+        }
+
+        $this->fillMenu($menu, $categories, $options, $currentUri, $terms);
     }
 
     /**
@@ -144,15 +159,25 @@ class ProductMenuBuilder
     /**
      * Recursive method to fill $menu with $categories
      *
-     * @param ItemInterface $menu
-     * @param array         $categories
-     * @param array         $options
-     * @param string        $currentUri
+     * @param ItemInterface $menu       The menu item
+     * @param array         $categories The corresponding categories
+     * @param array         $options    The item options
+     * @param string        $currentUri The current URI
+     * @param array         $terms      The facets terms results list
      */
-    protected function fillMenu(ItemInterface $menu, $categories, array $options = array(), $currentUri = null)
+    protected function fillMenu(ItemInterface $menu, $categories, array $options = array(), $currentUri = null, $terms = array())
     {
         foreach ($categories as $category) {
             if (false === $category->getEnabled()) {
+                continue;
+            }
+
+            $identifier = $category->getId();
+
+            $count = isset($terms[$identifier]) ? $terms[$identifier] : null;
+
+            // Fix for Doctrine search child categories to be displayed
+            if (!empty($terms) && null === $count) {
                 continue;
             }
 
@@ -160,7 +185,7 @@ class ProductMenuBuilder
                 'attributes'      => array('class' => ""),      // Ensuring it is set
                 'route'           => 'sonata_catalog_category',
                 'routeParameters' => array(
-                    'category_id'   => $category->getId(),
+                    'category_id'   => $identifier,
                     'category_slug' => $category->getSlug()
                 ),
                 'extras'           => array(
@@ -168,20 +193,24 @@ class ProductMenuBuilder
                 )
             ), $options);
 
+            if ($terms) {
+                $fullOptions['routeParameters']['category'] = $identifier;
+            }
+
             if (null === $category->getParent()) {
                 $fullOptions['attributes']['class'] = 'lead '.$fullOptions['attributes']['class'];
             }
 
             $child = $menu->addChild(
-                $this->getCategoryTitle($category),
+                $this->getCategoryTitle($category, 500, $count),
                 $fullOptions
             );
 
             if (count($category->getChildren()) > 0) {
                 if (null === $category->getParent()) {
-                    $this->fillMenu($menu, $category->getChildren(), $options, $currentUri);
+                    $this->fillMenu($menu, $category->getChildren(), $options, $currentUri, $terms);
                 } else {
-                    $this->fillMenu($child, $category->getChildren(), $options, $currentUri);
+                    $this->fillMenu($child, $category->getChildren(), $options, $currentUri, $terms);
                 }
             }
         }
@@ -192,12 +221,15 @@ class ProductMenuBuilder
      *
      * @param CategoryInterface $category A category instance
      * @param int               $limit    A limit for calculation (fixed to 500 by default)
+     * @param int               $count    A specific count to display
      *
      * @return string
      */
-    protected function getCategoryTitle(CategoryInterface $category, $limit = 500)
+    protected function getCategoryTitle(CategoryInterface $category, $limit = 500, $count = null)
     {
-        $count = $this->categoryManager->getProductCount($category, $limit);
+        if (null === $count) {
+            $count = $this->categoryManager->getProductCount($category, $limit);
+        }
 
         return sprintf("%s <span class=\"badge pull-right\">%d%s</span>", $category->getName(), $count, $count > $limit ? '+' : '');
     }

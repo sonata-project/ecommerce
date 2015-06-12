@@ -32,6 +32,7 @@ class Configuration implements ConfigurationInterface
         $this->addProductSection($node);
         $this->addModelSection($node);
         $this->addSeoSection($node);
+        $this->addSearchSection($node);
 
         return $treeBuilder;
     }
@@ -111,6 +112,23 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('media_format')->defaultValue('reference')->end()
                             ->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addSearchSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('search')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('provider')->defaultValue('sonata.product.search.provider.doctrine')->end()
                     ->end()
                 ->end()
             ->end();
