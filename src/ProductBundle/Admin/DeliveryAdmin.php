@@ -11,12 +11,12 @@
 
 namespace Sonata\ProductBundle\Admin;
 
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Knp\Menu\ItemInterface as MenuItemInterface;
+use Sonata\AdminBundle\Form\FormMapper;
 
 class DeliveryAdmin extends Admin
 {
@@ -56,7 +56,7 @@ class DeliveryAdmin extends Admin
     {
         if (!$this->isChild()) {
             $formMapper->add('product', 'sonata_type_model_list', array(), array(
-                'admin_code' => 'sonata.product.admin.product'
+                'admin_code' => 'sonata.product.admin.product',
             ));
         }
 
@@ -78,7 +78,7 @@ class DeliveryAdmin extends Admin
             $list
                 ->addIdentifier('id')
                 ->addIdentifier('product', null, array(
-                    'admin_code' => 'sonata.product.admin.product'
+                    'admin_code' => 'sonata.product.admin.product',
                 ));
         }
 

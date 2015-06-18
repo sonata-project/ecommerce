@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -7,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\ProductBundle\Block;
 
@@ -18,11 +18,9 @@ use Sonata\ProductBundle\Menu\ProductMenuBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Templating\EngineInterface;
 
-
 /**
- * Class FiltersMenuBlockService
+ * Class FiltersMenuBlockService.
  *
- * @package Sonata\ProductBundle\Block
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -34,7 +32,7 @@ class FiltersMenuBlockService extends MenuBlockService
     private $menuBuilder;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string                $name
      * @param EngineInterface       $templating
@@ -64,7 +62,7 @@ class FiltersMenuBlockService extends MenuBlockService
         parent::setDefaultSettings($resolver);
 
         $resolver->setDefaults(array(
-            'menu_class'       => "nav nav-list",
+            'menu_class'       => 'nav nav-list',
             'product_provider' => null,
         ));
     }
@@ -88,11 +86,10 @@ class FiltersMenuBlockService extends MenuBlockService
 
         $menu = parent::getMenu($blockContext);
 
-        if (null === $menu || "" === $menu) {
+        if (null === $menu || '' === $menu) {
             $menu = $this->menuBuilder->createFiltersMenu($settings['product_provider'], array('childrenAttributes' => array('class' => $settings['menu_class'])), $settings['current_uri']);
         }
 
         return $menu;
     }
-
 }

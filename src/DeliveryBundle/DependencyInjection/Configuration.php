@@ -11,12 +11,12 @@
 
 namespace Sonata\DeliveryBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
+ * This is the class that validates and merges configuration from your app/config files.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
@@ -43,8 +43,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     * @return void
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      */
     private function addDeliverySection(ArrayNodeDefinition $node)
     {
@@ -52,7 +51,7 @@ class Configuration implements ConfigurationInterface
             ->validate()
                 ->ifTrue(function ($v) {
                     foreach ($v['methods'] as $methodCode => $service) {
-                        if (null === $service || "" === $service) {
+                        if (null === $service || '' === $service) {
                             foreach ($v['services'] as $serviceConf) {
                                 if ($methodCode === $serviceConf['code']) {
                                     break 2;
@@ -65,7 +64,7 @@ class Configuration implements ConfigurationInterface
 
                     return false;
                 })
-                ->thenInvalid("Custom delivery methods require a service id. Provided delivery methods need to be configured with their method code as key.")
+                ->thenInvalid('Custom delivery methods require a service id. Provided delivery methods need to be configured with their method code as key.')
             ->end()
             ->children()
                 ->arrayNode('services')
@@ -98,11 +97,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     * @return void
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      */
     private function addModelSection(ArrayNodeDefinition $node)
     {
-
     }
 }

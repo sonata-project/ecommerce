@@ -13,12 +13,12 @@ namespace Sonata\CustomerBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 
 class AddressAdmin extends Admin
 {
-    protected $translationDomain = "SonataCustomerBundle";
+    protected $translationDomain = 'SonataCustomerBundle';
 
     /**
      * {@inheritdoc}
@@ -34,10 +34,9 @@ class AddressAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-
         $formMapper
             ->with($this->trans('address.form.group_contact_label', array(), 'SonataCustomerBundle'), array(
-                'class' => 'col-md-7'
+                'class' => 'col-md-7',
             ))
                 ->add('firstname')
                 ->add('lastname')
@@ -47,7 +46,7 @@ class AddressAdmin extends Admin
 
         $formMapper
             ->with($this->trans('address.form.group_advanced_label', array(), 'SonataCustomerBundle'), array(
-                'class' => 'col-md-5'
+                'class' => 'col-md-5',
             ))
                 ->add('type', 'sonata_customer_address_types', array('translation_domain' => 'SonataCustomerBundle'))
                 ->add('current', null, array('required' => false))
@@ -63,7 +62,7 @@ class AddressAdmin extends Admin
 
         $formMapper
             ->with($this->trans('address.form.group_address_label', array(), 'SonataCustomerBundle'), array(
-                'class' => 'col-md-12'
+                'class' => 'col-md-12',
             ))
                 ->add('address1')
                 ->add('address2')
@@ -73,7 +72,6 @@ class AddressAdmin extends Admin
                 ->add('countryCode', 'country')
             ->end()
         ;
-
     }
 
     /**
@@ -83,7 +81,7 @@ class AddressAdmin extends Admin
     {
         $list
             ->addIdentifier('name')
-            ->add('fulladdress', 'string', array('code' => 'getFullAddressHtml', 'template' => "SonataCustomerBundle:Admin:list_address.html.twig"))
+            ->add('fulladdress', 'string', array('code' => 'getFullAddressHtml', 'template' => 'SonataCustomerBundle:Admin:list_address.html.twig'))
             ->add('current')
             ->add('typeCode', 'trans', array('catalogue' => $this->translationDomain))
         ;
@@ -105,6 +103,4 @@ class AddressAdmin extends Admin
             ;
         }
     }
-
-
 }

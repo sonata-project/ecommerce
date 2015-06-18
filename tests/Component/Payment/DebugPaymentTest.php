@@ -11,8 +11,8 @@
 
 namespace Sonata\Tests\Component\Payment;
 
-use Sonata\Component\Payment\Debug\DebugPayment;
 use Buzz\Browser;
+use Sonata\Component\Payment\Debug\DebugPayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;

@@ -2,13 +2,13 @@
 
 namespace Sonata\CustomerBundle\Entity;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Sonata\Component\Customer\AddressInterface;
 use FOS\UserBundle\Model\UserInterface;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\CustomerInterface;
 
 /**
- * Sonata\CustomerBundle\Entity\BaseCustomer
+ * Sonata\CustomerBundle\Entity\BaseCustomer.
  */
 abstract class BaseCustomer implements CustomerInterface
 {
@@ -17,79 +17,79 @@ abstract class BaseCustomer implements CustomerInterface
     const TITLE_MR = 3;
 
     /**
-     * @var string $title
+     * @var string
      */
     protected $title;
 
     /**
-     * @var string $firstname
+     * @var string
      */
     protected $firstname;
 
     /**
-     * @var string $lastname
+     * @var string
      */
     protected $lastname;
 
     /**
-     * @var string $email
+     * @var string
      */
     protected $email;
 
     /**
-     * @var \DateTime $birthDate
+     * @var \DateTime
      */
     protected $birthDate;
 
     /**
-     * @var string $birthPlace
+     * @var string
      */
     protected $birthPlace;
 
     /**
-     * @var string $phoneNumber
+     * @var string
      */
     protected $phoneNumber;
 
     /**
-     * @var string $mobileNumber
+     * @var string
      */
     protected $mobileNumber;
 
     /**
-     * @var string $faxNumber
+     * @var string
      */
     protected $faxNumber;
 
     /**
-     * @var \DateTime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * @var \FOS\UserBundle\Model\UserInterface $user
+     * @var \FOS\UserBundle\Model\UserInterface
      */
     protected $user;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection $addresses
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $addresses;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection $orders
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $orders;
 
     protected $locale;
 
     /**
-     * @var boolean $isFake
+     * @var bool
      */
     protected $isFake;
 
@@ -111,13 +111,13 @@ abstract class BaseCustomer implements CustomerInterface
 
     public function prePersist()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function getAdminTitle()
@@ -143,6 +143,7 @@ abstract class BaseCustomer implements CustomerInterface
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getTitlesList()
@@ -155,7 +156,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get title name
+     * Get title name.
      *
      * @return string
      */
@@ -203,7 +204,7 @@ abstract class BaseCustomer implements CustomerInterface
      */
     public function getFullname()
     {
-        return $this->getFirstname(). ' ' . $this->getLastname();
+        return $this->getFirstname().' '.$this->getLastname();
     }
 
     /**

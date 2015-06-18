@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,17 +9,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Event;
 
 use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-
 /**
- * Class OrderTransformEvent
+ * Class OrderTransformEvent.
  *
- * @package Sonata\Component\Event
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -30,7 +28,7 @@ class OrderTransformEvent extends Event
     protected $order;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param OrderInterface $order
      */

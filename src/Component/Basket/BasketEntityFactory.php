@@ -12,13 +12,10 @@
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Component\Currency\CurrencyDetectorInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * Class BasketEntityFactory
+ * Class BasketEntityFactory.
  *
- * @package Sonata\Component\Basket
  *
  * @author  Hugo Briand <briand@ekino.com>
  */

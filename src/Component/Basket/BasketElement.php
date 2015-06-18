@@ -11,9 +11,8 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Currency\CurrencyInterface;
-use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductDefinition;
+use Sonata\Component\Product\ProductInterface;
 
 class BasketElement implements \Serializable, BasketElementInterface
 {
@@ -38,7 +37,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     protected $price = null;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $priceIncludingVat;
 
@@ -369,7 +368,7 @@ class BasketElement implements \Serializable, BasketElementInterface
             'vatRate'           => $this->vatRate,
             'options'           => $this->options,
             'name'              => $this->name,
-            'productCode'       => $this->productCode
+            'productCode'       => $this->productCode,
         ));
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Basket\BasketElementManager;
 
 /**
- * Class BasketElementManagerTest
+ * Class BasketElementManagerTest.
  *
- * @package Sonata\Tests\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */

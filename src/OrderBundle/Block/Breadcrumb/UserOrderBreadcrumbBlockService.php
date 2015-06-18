@@ -38,7 +38,7 @@ class UserOrderBreadcrumbBlockService extends BaseUserProfileBreadcrumbBlockServ
 
         $menu->addChild('sonata_order_user_breadcrumb', array(
             'route'  => 'sonata_order_index',
-            'extras' => array('translation_domain' => 'SonataOrderBundle')
+            'extras' => array('translation_domain' => 'SonataOrderBundle'),
         ));
 
         return $menu;

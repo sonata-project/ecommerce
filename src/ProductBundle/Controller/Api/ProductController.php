@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,10 +9,16 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\ProductBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\Route;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -22,25 +29,13 @@ use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
-
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\Route;
-use FOS\RestBundle\Controller\Annotations\View;
-
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ProductController
+ * Class ProductController.
  *
- * @package Sonata\ProductBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -67,7 +62,7 @@ class ProductController
     protected $formatterPool;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ProductManagerInterface $productManager Sonata product manager
      * @param Pool                    $productPool    Sonata product pool
@@ -128,7 +123,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product
+     * Retrieves a specific product.
      *
      * @ApiDoc(
      *  requirements={
@@ -153,7 +148,7 @@ class ProductController
     }
 
     /**
-     * Adds a product depending on the product provider
+     * Adds a product depending on the product provider.
      *
      * @Post("/{provider}/products")
      *
@@ -183,7 +178,7 @@ class ProductController
     }
 
     /**
-     * Updates a product
+     * Updates a product.
      *
      * @Put("/{provider}/products/{id}")
 
@@ -203,7 +198,7 @@ class ProductController
      *
      * @Route(requirements={"provider"="[A-Za-z0-9.]*"})
      *
-     * @param integer $id       A Product identifier
+     * @param int     $id       A Product identifier
      * @param string  $provider A product provider name
      * @param Request $request  A Symfony request
      *
@@ -217,11 +212,11 @@ class ProductController
     }
 
     /**
-     * Write a product, this method is used by both POST and PUT action methods
+     * Write a product, this method is used by both POST and PUT action methods.
      *
-     * @param string       $provider A product provider name
-     * @param Request      $request  Symfony request
-     * @param integer|null $id       A product identifier
+     * @param string   $provider A product provider name
+     * @param Request  $request  Symfony request
+     * @param int|null $id       A product identifier
      *
      * @return \FOS\RestBundle\View\View|FormInterface
      */
@@ -258,7 +253,7 @@ class ProductController
     }
 
     /**
-     * Deletes a product
+     * Deletes a product.
      *
      * @ApiDoc(
      *  requirements={
@@ -271,7 +266,7 @@ class ProductController
      *  }
      * )
      *
-     * @param integer $id A Product identifier
+     * @param int $id A Product identifier
      *
      * @return \FOS\RestBundle\View\View
      *
@@ -292,7 +287,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCategories
+     * Retrieves a specific product's ProductCategories.
      *
      * @ApiDoc(
      *  requirements={
@@ -317,7 +312,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCategories' categories
+     * Retrieves a specific product's ProductCategories' categories.
      *
      * @ApiDoc(
      *  requirements={
@@ -342,7 +337,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCollections
+     * Retrieves a specific product's ProductCollections.
      *
      * @ApiDoc(
      *  requirements={
@@ -367,7 +362,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCollections' collections
+     * Retrieves a specific product's ProductCollections' collections.
      *
      * @ApiDoc(
      *  requirements={
@@ -392,7 +387,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's deliveries
+     * Retrieves a specific product's deliveries.
      *
      * @ApiDoc(
      *  requirements={
@@ -417,7 +412,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's packages
+     * Retrieves a specific product's packages.
      *
      * @ApiDoc(
      *  requirements={
@@ -442,7 +437,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's variations
+     * Retrieves a specific product's variations.
      *
      * @ApiDoc(
      *  requirements={
@@ -467,11 +462,12 @@ class ProductController
     }
 
     /**
-     * Retrieves product with id $id or throws an exception if it doesn't exist
+     * Retrieves product with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return ProductInterface
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getProduct($id)
@@ -484,5 +480,4 @@ class ProductController
 
         return $product;
     }
-
 }

@@ -17,14 +17,14 @@ namespace Sonata\Component\Currency;
 interface CurrencyInterface
 {
     /**
-     * Returns currency's label
+     * Returns currency's label.
      *
      * @return string
      */
     public function getLabel();
 
     /**
-     * Currency comparison
+     * Currency comparison.
      *
      * @param mixed $currency
      *
@@ -32,11 +32,10 @@ interface CurrencyInterface
      */
     public function equals($currency);
 
-    /**
+    /*
      * Returns currency's symbol
      *
      * @return string
      */
 //     public function getSymbol();
-
 }

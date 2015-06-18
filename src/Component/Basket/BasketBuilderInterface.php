@@ -5,7 +5,7 @@ namespace Sonata\Component\Basket;
 interface BasketBuilderInterface
 {
     /**
-     * Build a basket
+     * Build a basket.
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      */

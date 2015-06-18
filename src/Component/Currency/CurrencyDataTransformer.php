@@ -14,9 +14,8 @@ namespace Sonata\Component\Currency;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class CurrencyDataTransformer
+ * Class CurrencyDataTransformer.
  *
- * @package Sonata\Component\Currency
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -28,7 +27,7 @@ class CurrencyDataTransformer implements DataTransformerInterface
     private $currencyManager;
 
     /**
-     * Constructs the CurrencyDataTransformer
+     * Constructs the CurrencyDataTransformer.
      *
      * @param CurrencyManagerInterface $currencyManager
      */
@@ -55,10 +54,9 @@ class CurrencyDataTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (!$value) {
-            return null;
+            return;
         }
 
         return $this->currencyManager->findOneByLabel($value);
     }
-
 }

@@ -11,8 +11,8 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Customer\CustomerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketSessionFactory extends BaseBasketFactory

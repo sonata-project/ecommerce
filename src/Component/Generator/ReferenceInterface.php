@@ -17,18 +17,20 @@ use Sonata\Component\Order\OrderInterface;
 interface ReferenceInterface
 {
     /**
-     * Append a valid reference number to the invoice, the order must be persisted first
+     * Append a valid reference number to the invoice, the order must be persisted first.
      *
      * @throws \RuntimeException
-     * @param  \Sonata\Component\Invoice\InvoiceInterface $invoice
+     *
+     * @param \Sonata\Component\Invoice\InvoiceInterface $invoice
      */
     public function invoice(InvoiceInterface $invoice);
 
     /**
-     * Append a valid reference number to the order, the order must be persisted first
+     * Append a valid reference number to the order, the order must be persisted first.
      *
      * @throws \RuntimeException
-     * @param  \Sonata\Component\Order\OrderInterface $order
+     *
+     * @param \Sonata\Component\Order\OrderInterface $order
      */
     public function order(OrderInterface $order);
 }

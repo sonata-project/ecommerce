@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,19 +11,19 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\Component\Product\DeliveryInterface;
+use Sonata\Component\Product\PackageInterface;
+use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Product\PackageInterface;
-use Sonata\Component\Product\DeliveryInterface;
-use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
- * Sonata\ProductBundle\Entity\BaseProduct
+ * Sonata\ProductBundle\Entity\BaseProduct.
  */
 abstract class BaseProduct implements ProductInterface
 {
@@ -42,7 +43,7 @@ abstract class BaseProduct implements ProductInterface
     protected $name;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $priceIncludingVat;
 
@@ -87,12 +88,12 @@ abstract class BaseProduct implements ProductInterface
     protected $vatRate;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $stock;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled;
 
@@ -824,13 +825,13 @@ abstract class BaseProduct implements ProductInterface
 
     public function preUpdate()
     {
-        $this->updatedAt = new \DateTime;
+        $this->updatedAt = new \DateTime();
     }
 
     public function prePersist()
     {
-        $this->createdAt = new \DateTime;
-        $this->updatedAt = new \DateTime;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -850,10 +851,12 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/
+     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/.
      *
      * @static
+     *
      * @param  $text
+     *
      * @return mixed|string
      */
     public static function slugify($text)

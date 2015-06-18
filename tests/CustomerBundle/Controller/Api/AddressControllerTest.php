@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,11 +12,10 @@
 namespace Sonata\Test\CustomerBundle\Controller\Api;
 
 use Sonata\CustomerBundle\Controller\Api\AddressController;
-
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class AddressControllerTest
+ * Class AddressControllerTest.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -154,7 +154,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns address controller
+     * Returns address controller.
      *
      * @param \Sonata\Component\Customer\AddressInterface        $address
      * @param \Sonata\Component\Customer\AddressManagerInterface $addressManager

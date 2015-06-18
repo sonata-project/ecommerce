@@ -9,34 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\Component\Basket\BasketBuilder;
-use Sonata\Component\Product\Pool as ProductPool;
-use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Payment\Pool as PaymentPool;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Component\Product\ProductProviderInterface;
-use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\Component\Customer\AddressInterface;
 
 class BasketBuilderTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @expectedException        RuntimeException
      * @expectedExceptionMessage The product code is empty
      */
     public function testBuildWithInvalidProductCode()
     {
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
-        $deliveryPool = new DeliveryPool;
+        $deliveryPool = new DeliveryPool();
 
-        $paymentPool = new PaymentPool;
+        $paymentPool = new PaymentPool();
 
         $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
 
@@ -58,11 +51,11 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBuildWithNonExistentProductCode()
     {
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
-        $deliveryPool = new DeliveryPool;
+        $deliveryPool = new DeliveryPool();
 
-        $paymentPool = new PaymentPool;
+        $paymentPool = new PaymentPool();
 
         $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
 
@@ -86,11 +79,11 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
 
         $definition = new ProductDefinition($productProvider, $productManager);
 
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
         $productPool->addProduct('test', $definition);
-        $deliveryPool = new DeliveryPool;
+        $deliveryPool = new DeliveryPool();
 
-        $paymentPool = new PaymentPool;
+        $paymentPool = new PaymentPool();
 
         $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');

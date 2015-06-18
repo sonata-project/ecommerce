@@ -12,7 +12,7 @@
 namespace Sonata\Component\Product;
 
 /**
- * Interface PriceComputableInterface
+ * Interface PriceComputableInterface.
  *
  * This interface describes required fields for price computation
  *
@@ -21,57 +21,57 @@ namespace Sonata\Component\Product;
 interface PriceComputableInterface
 {
     /**
-     * Returns the unit price
+     * Returns the unit price.
      *
      * if $vat = true, returns the unit price with vat
      *
-     * @param boolean $vat
+     * @param bool $vat
      *
      * @return float
      */
     public function getUnitPrice($vat = false);
 
     /**
-     * Sets price
+     * Sets price.
      *
      * @param float $price
      */
     public function setPrice($price);
 
     /**
-     * Returns price of the element (including quantity)
+     * Returns price of the element (including quantity).
      *
-     * @param boolean $vat
+     * @param bool $vat
      *
      * @return float
      */
     public function getPrice($vat = false);
 
     /**
-     * Sets VAT rate
+     * Sets VAT rate.
      *
      * @param float $vatRate
      */
     public function setVatRate($vatRate);
 
     /**
-     * Gets VAT rate
+     * Gets VAT rate.
      *
      * @return float
      */
     public function getVatRate();
 
     /**
-     * Sets quantity
+     * Sets quantity.
      *
-     * @param integer $quantity
+     * @param int $quantity
      */
     public function setQuantity($quantity);
 
     /**
-     * Gets quantity
+     * Gets quantity.
      *
-     * @return integer $quantity
+     * @return int $quantity
      */
     public function getQuantity();
 }

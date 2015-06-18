@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
-namespace Sonata\Tests\CustomerBundle\Twig\Extension;
+namespace Sonata\tests\CustomerBundle\Twig\Extension;
 
 use Sonata\CustomerBundle\Twig\Extension\AddressExtension;
 
-
 /**
- * Class AddressExtensionTest
+ * Class AddressExtensionTest.
  *
- * @package Sonata\Tests\CustomerBundle\Twig\Extension
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -42,12 +40,12 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
         $extension->renderAddress($environment, $address, true, true);
 
         $address = array(
-            "firstname"    => "",
-            "lastname"     => "",
-            "address1"     => "",
-            "postcode"     => "",
-            "city"         => "",
-            "country_code" => ""
+            'firstname'    => '',
+            'lastname'     => '',
+            'address1'     => '',
+            'postcode'     => '',
+            'city'         => '',
+            'country_code' => '',
         );
 
         $extension->renderAddress($environment, $address);
@@ -78,12 +76,12 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
         $deliverySelector = $this->getMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $address = array(
-            "firstname"    => "",
-            "lastname"     => "",
-            "address1"     => "",
-            "postcode"     => "",
-            "city"         => "",
-            "country_code" => ""
+            'firstname'    => '',
+            'lastname'     => '',
+            'address1'     => '',
+            'postcode'     => '',
+            'city'         => '',
+            'country_code' => '',
         );
 
         $extension = new AddressExtension($deliverySelector);

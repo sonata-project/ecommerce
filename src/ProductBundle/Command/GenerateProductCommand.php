@@ -11,16 +11,15 @@
 
 namespace Sonata\ProductBundle\Command;
 
+use Sonata\Component\Generator\Mustache;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Filesystem\Filesystem;
-use Sonata\Component\Generator\Mustache;
 
 /**
- * Create a new Product
+ * Create a new Product.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -50,7 +49,7 @@ class GenerateProductCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // find a better way to detect the Application folder
-        $bundle_dir = sprintf("%s/../src/Application/Sonata/ProductBundle",
+        $bundle_dir = sprintf('%s/../src/Application/Sonata/ProductBundle',
             $this->getContainer()->get('kernel')->getRootDir()
         );
 
@@ -63,7 +62,7 @@ class GenerateProductCommand extends ContainerAwareCommand
         $output->writeln(' > mirroring skeleton files');
 
         $bundles = $this->getContainer()->get('kernel')->getBundle('SonataProductBundle', false);
-        $vendorPath = "";
+        $vendorPath = '';
         foreach ($bundles as $bundle) {
             if (false !== strpos($bundle->getPath(), 'vendor')) {
                 $vendorPath = $bundle->getPath();

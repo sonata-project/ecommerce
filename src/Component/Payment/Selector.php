@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,15 +11,14 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\Pool as PaymentPool;
-use Sonata\Component\Product\Pool as ProductPool;
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
-use Psr\Log\LoggerInterface;
+use Sonata\Component\Payment\Pool as PaymentPool;
+use Sonata\Component\Product\Pool as ProductPool;
 
 /**
- * The selector selects available payment methods depends on the provided basket
- *
+ * The selector selects available payment methods depends on the provided basket.
  */
 class Selector implements PaymentSelectorInterface
 {

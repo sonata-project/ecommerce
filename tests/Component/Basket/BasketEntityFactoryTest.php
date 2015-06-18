@@ -9,14 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
-use Sonata\Component\Basket\BasketManagerInterface;
-use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketEntityFactory;
-use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Component\Basket\BasketInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Currency\Currency;
 
 class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +35,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))
@@ -71,7 +66,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))
@@ -104,7 +99,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))
@@ -131,7 +126,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))
@@ -159,7 +154,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))
@@ -183,7 +178,7 @@ class BasketEntityFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))

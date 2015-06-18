@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -23,7 +24,7 @@ class InvoiceTest extends BaseInvoice
 }
 
 /**
- * Class BaseInvoiceTest
+ * Class BaseInvoiceTest.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */

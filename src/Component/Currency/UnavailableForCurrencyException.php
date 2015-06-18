@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,13 +11,11 @@
 
 namespace Sonata\Component\Currency;
 
-use Exception;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * Class UnavailableForCurrencyException
+ * Class UnavailableForCurrencyException.
  *
- * @package Sonata\Component\Currency
  *
  * @author Hugo Briand <briand@ekino.com>
  */

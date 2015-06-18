@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -17,19 +18,17 @@ use Sonata\OrderBundle\Entity\OrderManager;
 class Order extends BaseOrder
 {
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
         // TODO: Implement getId() method.
     }
-
 }
 
 /**
- * Class OrderManagerTest
+ * Class OrderManagerTest.
  *
- * @package Sonata\Test\OrderBundle\Entity
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */

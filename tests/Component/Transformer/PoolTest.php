@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Transformer;
+namespace Sonata\tests\Component\Transformer;
 
-use Sonata\Component\Transformer\Pool as TransformerPool;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;
+use Sonata\Component\Transformer\Pool as TransformerPool;
 
 class PoolTest extends \PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
-        $pool = new TransformerPool;
+        $pool = new TransformerPool();
 
         $transformer = new BasketTransformer(
             $this->getMock('Sonata\Component\Order\OrderManagerInterface'),

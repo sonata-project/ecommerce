@@ -11,18 +11,15 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * A free delivery method, used this only for testing
- *
+ * A free delivery method, used this only for testing.
  */
 class Paypal extends BasePaypal
 {
-
     // PayPal pending reason
     // From PP_OrderManagement_IntegrationGuide, March 2008 p58
     const PENDING_REASON_ADDRESS = 'address';
@@ -40,7 +37,6 @@ class Paypal extends BasePaypal
      */
     public function sendbank(OrderInterface $order)
     {
-
         $params = array(
             'order' => $order->getReference(),
             'bank'  => $this->getCode(),
@@ -61,7 +57,7 @@ class Paypal extends BasePaypal
             'invoice'       => $order->getReference(),
             'amount'        => $order->getTotalInc(),
             'currency_code' => $order->getCurrency(),
-            'item_name'     => 'Order ' . $order->getReference(),
+            'item_name'     => 'Order '.$order->getReference(),
             'bn'            => 'Sonata/1.0', // Assign Build Notation for PayPal Support
 
             // user information, for prepopulated form (paypal side)
@@ -83,30 +79,29 @@ class Paypal extends BasePaypal
         );
 
         if ($this->getOption('debug', false)) {
-
-            $html = '<html><body>' . "\n";
+            $html = '<html><body>'."\n";
         } else {
-            $html = '<html><body onload="document.getElementById(\'submit_button\').disabled = \'disabled\'; document.getElementById(\'formPaiement\').submit();">' . "\n";
+            $html = '<html><body onload="document.getElementById(\'submit_button\').disabled = \'disabled\'; document.getElementById(\'formPaiement\').submit();">'."\n";
         }
 
         $method = $this->getOption('method', 'encrypt');
 
-        $html .= sprintf('<form action="%s" method="%s" id="formPaiement" >' . "\n", $this->getOption('url_action'), 'POST');
-        $html .= '<input type="hidden" name="cmd" value="_s-xclick">' . "\n";
+        $html .= sprintf('<form action="%s" method="%s" id="formPaiement" >'."\n", $this->getOption('url_action'), 'POST');
+        $html .= '<input type="hidden" name="cmd" value="_s-xclick">'."\n";
         $html .= sprintf('<input type="hidden" name="encrypted" value="%s" />', call_user_func(array($this, $method), $fields));
 
-        $html .= '<p>' . $this->translator->trans('process_to_paiement_bank_page', array(), 'PaymentBundle') . '</p>';
-        $html .= '<input type="submit" id="submit_button" value="' . $this->translator->trans('process_to_paiement_btn', array(), 'PaymentBundle') . '" />';
+        $html .= '<p>'.$this->translator->trans('process_to_paiement_bank_page', array(), 'PaymentBundle').'</p>';
+        $html .= '<input type="submit" id="submit_button" value="'.$this->translator->trans('process_to_paiement_btn', array(), 'PaymentBundle').'" />';
         $html .= '</form>';
 
         $html .= '</body></html>';
 
         if ($this->getOption('debug', false)) {
-            echo "<!-- Encrypted Array : \n" . print_r($fields, 1) . "-->";
+            echo "<!-- Encrypted Array : \n".print_r($fields, 1).'-->';
         }
 
         $response = new \Symfony\Component\HttpFoundation\Response($html, 200, array(
-            'Content-Type' => 'text/html'
+            'Content-Type' => 'text/html',
         ));
         $response->setPrivate(true);
 
@@ -114,7 +109,7 @@ class Paypal extends BasePaypal
     }
 
     /**
-     * Default encryption method
+     * Default encryption method.
      *
      * @param $hash
      *
@@ -126,8 +121,7 @@ class Paypal extends BasePaypal
     }
 
     /**
-     *
-     * From paypal documentation:
+     * From paypal documentation:.
      *
      * 1. A customer payment or a refund triggers IPN. This payment can be via Website Payments
      * Standard FORMs or via the PayPal Web Services APIs for Express Checkout, MassPay, or
@@ -150,7 +144,6 @@ class Paypal extends BasePaypal
         $order  = $transaction->getOrder();
 
         if (!$this->isRequestValid($transaction)) {
-
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
 
@@ -158,7 +151,6 @@ class Paypal extends BasePaypal
         }
 
         if ($order->isValidated()) {
-
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
 
@@ -166,7 +158,6 @@ class Paypal extends BasePaypal
         }
 
         if ($transaction->get('payment_status') === 'Pending') {
-
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_PENDING);
 
@@ -174,7 +165,6 @@ class Paypal extends BasePaypal
         }
 
         if ($transaction->get('payment_status') === 'Completed') {
-
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
@@ -182,7 +172,6 @@ class Paypal extends BasePaypal
         }
 
         if ($transaction->get('payment_status') === 'Cancelled') {
-
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_CANCELLED);
 
@@ -279,7 +268,7 @@ class Paypal extends BasePaypal
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
-            $transaction->getOrder()->setValidatedAt(new \DateTime);
+            $transaction->getOrder()->setValidatedAt(new \DateTime());
             $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
             $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
         } else {

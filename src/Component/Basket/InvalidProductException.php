@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,18 +9,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Basket;
 
-
 /**
- * Class InvalidProductException
+ * Class InvalidProductException.
  *
- * @package Sonata\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */
 class InvalidProductException extends \RuntimeException
 {
-
 }

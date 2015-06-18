@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Event;
 
 use Sonata\Component\Order\OrderInterface;
@@ -16,11 +16,9 @@ use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
- * Class PaymentEvent
+ * Class PaymentEvent.
  *
- * @package Sonata\Component\Event
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -42,7 +40,7 @@ class PaymentEvent extends Event
     protected $response;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param OrderInterface       $order
      * @param TransactionInterface $transaction

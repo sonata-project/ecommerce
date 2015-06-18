@@ -20,9 +20,9 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class QuantityTransformer implements DataTransformerInterface
 {
-
     /**
-     * (non-PHPdoc)
+     * (non-PHPdoc).
+     *
      * @see \Symfony\Component\Form\DataTransformerInterface::transform()
      */
     public function transform($quantity)
@@ -31,7 +31,8 @@ class QuantityTransformer implements DataTransformerInterface
     }
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPdoc).
+     *
      * @see \Symfony\Component\Form\DataTransformerInterface::reverseTransform()
      */
     public function reverseTransform($quantity)

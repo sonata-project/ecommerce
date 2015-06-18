@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,7 +11,6 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Basket\BasketFactoryInterface;
 use Sonata\Component\Customer\CustomerSelectorInterface;
 
 class Loader
@@ -41,9 +41,10 @@ class Loader
     }
 
     /**
-     * Get the basket
+     * Get the basket.
      *
      * @throws \Exception|\RuntimeException
+     *
      * @return \Sonata\Component\Basket\BasketInterface
      */
     public function getBasket()

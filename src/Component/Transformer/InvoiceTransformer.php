@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,11 +16,10 @@ use Sonata\Component\Event\InvoiceTransformEvent;
 use Sonata\Component\Event\OrderTransformEvent;
 use Sonata\Component\Event\TransformerEvents;
 use Sonata\Component\Invoice\InvoiceElementInterface;
-use Sonata\Component\Transformer\BaseTransformer;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceElementManagerInterface;
+use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -43,7 +43,7 @@ class InvoiceTransformer extends BaseTransformer
     protected $eventDispatcher;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param InvoiceElementManagerInterface $invoiceElementManager Invoice element manager
      * @param DeliveryPool                   $deliveryPool          Delivery pool component
@@ -57,7 +57,7 @@ class InvoiceTransformer extends BaseTransformer
     }
 
     /**
-     * Transforms an order into an invoice
+     * Transforms an order into an invoice.
      *
      * @param OrderInterface   $order
      * @param InvoiceInterface $invoice
@@ -107,7 +107,7 @@ class InvoiceTransformer extends BaseTransformer
     }
 
     /**
-     * Adds the delivery information from $order to $invoice
+     * Adds the delivery information from $order to $invoice.
      *
      * @param InvoiceInterface $invoice
      * @param OrderInterface   $order
@@ -132,7 +132,7 @@ class InvoiceTransformer extends BaseTransformer
     }
 
     /**
-     * Creates an InvoiceElement based on an OrderElement
+     * Creates an InvoiceElement based on an OrderElement.
      *
      * @param OrderElementInterface $orderElement
      *

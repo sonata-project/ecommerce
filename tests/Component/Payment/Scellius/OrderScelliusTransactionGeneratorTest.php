@@ -9,20 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment\Scellius;
+namespace Sonata\tests\Component\Payment\Scellius;
 
-use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator;
 
 class OrderScelliusTransactionGeneratorTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testGenerator()
     {
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getReference')->will($this->returnValue('120112000012'));
 
-        $generator = new OrderScelliusTransactionGenerator;
+        $generator = new OrderScelliusTransactionGenerator();
         $this->assertEquals('000012', $generator->generate($order));
     }
 
@@ -34,7 +32,7 @@ class OrderScelliusTransactionGeneratorTest extends \PHPUnit_Framework_TestCase
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getReference')->will($this->returnValue('12'));
 
-        $generator = new OrderScelliusTransactionGenerator;
+        $generator = new OrderScelliusTransactionGenerator();
         $generator->generate($order);
     }
 }

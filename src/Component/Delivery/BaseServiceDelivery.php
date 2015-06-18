@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,8 +14,7 @@ namespace Sonata\Component\Delivery;
 use Sonata\Component\Basket\BasketInterface;
 
 /**
- * A free delivery method, used this only for testing
- *
+ * A free delivery method, used this only for testing.
  */
 abstract class BaseServiceDelivery implements ServiceDeliveryInterface
 {
@@ -54,7 +54,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     protected $priority;
 
     /**
-     * return status list
+     * return status list.
      *
      * @return array
      */
@@ -151,10 +151,11 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     }
 
     /**
-     * Returns the option $name
+     * Returns the option $name.
      *
-     * @param  string $name
-     * @param  mixed  $default
+     * @param string $name
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function getOption($name, $default = null)

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Invoice;
 
 use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
 
-
 /**
- * Class InvoiceStatusRenderer
+ * Class InvoiceStatusRenderer.
  *
- * @package Sonata\Component\Invoice
  *
  * @author Hugo Briand <briand@ekino.com>
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
@@ -35,7 +33,7 @@ class InvoiceStatusRenderer implements StatusClassRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function getStatusClass($object, $statusName = null, $default = "")
+    public function getStatusClass($object, $statusName = null, $default = '')
     {
         switch ($object->getStatus()) {
             case InvoiceInterface::STATUS_CONFLICT:

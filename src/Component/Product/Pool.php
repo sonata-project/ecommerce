@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -18,11 +19,10 @@ class Pool
     protected $products = array();
 
     /**
-     * add a delivery method into the pool
+     * add a delivery method into the pool.
      *
-     * @param  string                                      $code
-     * @param  \Sonata\Component\Product\ProductDefinition $productDescription
-     * @return void
+     * @param string                                      $code
+     * @param \Sonata\Component\Product\ProductDefinition $productDescription
      */
     public function addProduct($code, ProductDefinition $productDescription)
     {
@@ -70,7 +70,8 @@ class Pool
     }
 
     /**
-     * @param  ProductInterface $product
+     * @param ProductInterface $product
+     *
      * @return int|null|string
      */
     public function getProductCode(ProductInterface $product)
@@ -82,12 +83,13 @@ class Pool
             }
         }
 
-        return null;
+        return;
     }
 
     /**
-     * @param  string  $code
-     * @return boolean
+     * @param string $code
+     *
+     * @return bool
      */
     public function hasProvider($code)
     {
@@ -95,10 +97,11 @@ class Pool
     }
 
     /**
-     * Tells if a product with $code is in the pool
+     * Tells if a product with $code is in the pool.
      *
-     * @param  string  $code
-     * @return boolean
+     * @param string $code
+     *
+     * @return bool
      */
     public function hasProduct($code)
     {

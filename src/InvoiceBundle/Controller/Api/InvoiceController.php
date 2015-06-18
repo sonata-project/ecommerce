@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,24 +9,20 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\InvoiceBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
-
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
- * Class InvoiceController
+ * Class InvoiceController.
  *
- * @package Sonata\InvoiceBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -37,7 +34,7 @@ class InvoiceController
     protected $invoiceManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param InvoiceManagerInterface $invoiceManager
      */
@@ -68,7 +65,7 @@ class InvoiceController
     public function getInvoicesAction(ParamFetcherInterface $paramFetcher)
     {
         $supportedCriteria = array(
-            'status' => "",
+            'status' => '',
         );
 
         $page     = $paramFetcher->get('page');
@@ -92,7 +89,7 @@ class InvoiceController
     }
 
     /**
-     * Retrieves a specific invoice
+     * Retrieves a specific invoice.
      *
      * @ApiDoc(
      *  requirements={
@@ -117,7 +114,7 @@ class InvoiceController
     }
 
     /**
-     * Retrieves a specific invoice's elements
+     * Retrieves a specific invoice's elements.
      *
      * @ApiDoc(
      *  requirements={
@@ -142,11 +139,12 @@ class InvoiceController
     }
 
     /**
-     * Retrieves invoice with id $id or throws an exception if it doesn't exist
+     * Retrieves invoice with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return InvoiceInterface
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getInvoice($id)

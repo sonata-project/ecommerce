@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,9 +12,8 @@
 namespace Sonata\Component\Product;
 
 /**
- * Class ProductFinder
+ * Class ProductFinder.
  *
- * @package Sonata\Component\Product
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -25,7 +25,7 @@ class ProductFinder implements ProductFinderInterface
     private $pManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ProductManagerInterface $pManager
      */
@@ -57,5 +57,4 @@ class ProductFinder implements ProductFinderInterface
     {
         // TODO: Implement getUpSellingSimilarProducts() method.
     }
-
 }

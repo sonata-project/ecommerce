@@ -11,34 +11,33 @@
 
 namespace Sonata\BasketBundle\Controller;
 
+use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
-use Sonata\Component\Customer\AddressInterface;
-
 /**
- * This controller manages the Basket operation and most of the order process
+ * This controller manages the Basket operation and most of the order process.
  */
 class BasketController extends Controller
 {
     /**
-     * Shows the basket
+     * Shows the basket.
      *
-     * @param  Form                                       $form
+     * @param Form $form
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction($form = null)
     {
         $form = $form ?: $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array(
-            'validation_groups' => array('elements')
+            'validation_groups' => array('elements'),
         ));
 
         // always validate the basket
@@ -53,7 +52,7 @@ class BasketController extends Controller
 
         $this->get('session')->set('sonata_basket_delivery_redirect', 'sonata_basket_delivery_address');
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_index_title', array(), "SonataBasketBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_index_title', array(), 'SonataBasketBundle'));
 
         return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
             'basket' => $this->get('sonata.basket'),
@@ -62,7 +61,7 @@ class BasketController extends Controller
     }
 
     /**
-     * Update basket form rendering & saving
+     * Update basket form rendering & saving.
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -83,15 +82,16 @@ class BasketController extends Controller
         }
 
         return $this->forward('SonataBasketBundle:Basket:index', array(
-            'form' => $form
+            'form' => $form,
         ));
     }
 
     /**
-     * Adds a product to the basket
+     * Adds a product to the basket.
      *
      * @throws MethodNotAllowedException
      * @throws NotFoundHttpException
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addProductAction()
@@ -160,7 +160,7 @@ class BasketController extends Controller
     }
 
     /**
-     * Resets (empties) the basket
+     * Resets (empties) the basket.
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -172,20 +172,20 @@ class BasketController extends Controller
     }
 
     /**
-     * Displays a header preview of the basket
+     * Displays a header preview of the basket.
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function headerPreviewAction()
     {
         return $this->render('SonataBasketBundle:Basket:header_preview.html.twig', array(
-            'basket' => $this->get('sonata.basket')
+            'basket' => $this->get('sonata.basket'),
         ));
     }
 
     /**
      * Order process step 1: retrieve the customer associated with the logged in user if there's one
-     * or create an empty customer and put it in the basket
+     * or create an empty customer and put it in the basket.
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -202,9 +202,10 @@ class BasketController extends Controller
     }
 
     /**
-     * Order process step 5: choose payment mode
+     * Order process step 5: choose payment mode.
      *
      * @throws HttpException
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function paymentStepAction()
@@ -229,7 +230,7 @@ class BasketController extends Controller
         }
 
         $form = $this->createForm('sonata_basket_payment', $basket, array(
-            'validation_groups' => array('delivery')
+            'validation_groups' => array('delivery'),
         ));
 
         if ($this->get('request')->getMethod() == 'POST') {
@@ -243,19 +244,20 @@ class BasketController extends Controller
             }
         }
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), "SonataBasketBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), 'SonataBasketBundle'));
 
         return $this->render('SonataBasketBundle:Basket:payment_step.html.twig', array(
-            'basket' => $basket,
-            'form'   => $form->createView(),
+            'basket'     => $basket,
+            'form'       => $form->createView(),
             'customer'   => $customer,
         ));
     }
 
     /**
-     * Order process step 3: choose delivery mode
+     * Order process step 3: choose delivery mode.
      *
      * @throws NotFoundHttpException
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function deliveryStepAction()
@@ -274,7 +276,7 @@ class BasketController extends Controller
 
         try {
             $form = $this->createForm('sonata_basket_shipping', $basket, array(
-                'validation_groups' => array('delivery')
+                'validation_groups' => array('delivery'),
             ));
         } catch (UndeliverableCountryException $ex) {
             $countryName = Intl::getRegionBundle()->getCountryName($ex->getAddress()->getCountryCode());
@@ -297,7 +299,7 @@ class BasketController extends Controller
             }
         }
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), "SonataBasketBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), 'SonataBasketBundle'));
 
         return $this->render($template, array(
             'basket'   => $basket,
@@ -307,9 +309,10 @@ class BasketController extends Controller
     }
 
     /**
-     * Order process step 2: choose an address from existing ones or create a new one
+     * Order process step 2: choose an address from existing ones or create a new one.
      *
      * @throws NotFoundHttpException
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function deliveryAddressStepAction()
@@ -362,7 +365,7 @@ class BasketController extends Controller
         // Set URL to be redirected to once edited address
         $this->get('session')->set('sonata_address_redirect', $this->generateUrl('sonata_basket_delivery_address'));
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), "SonataBasketBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), 'SonataBasketBundle'));
 
         return $this->render($template, array(
             'form'      => $form->createView(),
@@ -372,9 +375,10 @@ class BasketController extends Controller
     }
 
     /**
-     * Order process step 4: choose a billing address from existing ones or create a new one
+     * Order process step 4: choose a billing address from existing ones or create a new one.
      *
      * @throws NotFoundHttpException
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function paymentAddressStepAction()
@@ -426,16 +430,16 @@ class BasketController extends Controller
         // Set URL to be redirected to once edited address
         $this->get('session')->set('sonata_address_redirect', $this->generateUrl('sonata_basket_payment_address'));
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), "SonataBasketBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), 'SonataBasketBundle'));
 
         return $this->render($template, array(
             'form'      => $form->createView(),
-            'addresses' => $addresses
+            'addresses' => $addresses,
         ));
     }
 
     /**
-     * Order process step 6: order's review & conditions acceptance checkbox
+     * Order process step 6: order's review & conditions acceptance checkbox.
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -458,18 +462,18 @@ class BasketController extends Controller
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
-        if ($this->get('request')->getMethod() == 'POST' ) {
+        if ($this->get('request')->getMethod() == 'POST') {
             if ($this->get('request')->get('tac')) {
                 // send the basket to the payment callback
                 return $this->forward('SonataPaymentBundle:Payment:sendbank');
             }
         }
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_review_title', array(), "SonataBasketBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_review_title', array(), 'SonataBasketBundle'));
 
         return $this->render('SonataBasketBundle:Basket:final_review_step.html.twig', array(
             'basket'    => $basket,
-            'tac_error' => $this->get('request')->getMethod() == 'POST'
+            'tac_error' => $this->get('request')->getMethod() == 'POST',
         ));
     }
 }

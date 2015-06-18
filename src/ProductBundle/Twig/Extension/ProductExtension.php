@@ -15,7 +15,6 @@ use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 
@@ -139,7 +138,7 @@ class ProductExtension extends \Twig_Extension
      *
      * @param ProductInterface  $product  A product instance
      * @param CurrencyInterface $currency A currency instance
-     * @param boolean           $vat      Returns price including VAT?
+     * @param bool              $vat      Returns price including VAT?
      *
      * @return float
      */
@@ -161,7 +160,7 @@ class ProductExtension extends \Twig_Extension
     }
 
     /**
-     * Returns a "add to basket" form for a specified product
+     * Returns a "add to basket" form for a specified product.
      *
      * @param ProductInterface $product A product instance
      *
@@ -170,8 +169,8 @@ class ProductExtension extends \Twig_Extension
     public function getFormAddBasket(ProductInterface $product)
     {
         $formBuilder = $this->formFactory->createNamedBuilder('add_basket', 'form', null, array(
-            'data_class' => $this->basketElementClass,
-            'csrf_protection' => false
+            'data_class'      => $this->basketElementClass,
+            'csrf_protection' => false,
         ));
 
         $this->productPool->getProvider($product)->defineAddBasketForm($product, $formBuilder, false);

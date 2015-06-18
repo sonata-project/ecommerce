@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\BasketBundle\Block;
+namespace Sonata\tests\BasketBundle\Block;
 
 use Sonata\BasketBundle\Block\BasketBlockService;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class BasketBlockServiceTest
+ * Class BasketBlockServiceTest.
  *
- * @package Sonata\Tests\BasketBundle
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */

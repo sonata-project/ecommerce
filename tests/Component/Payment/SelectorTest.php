@@ -23,9 +23,8 @@ class Address extends BaseAddress
 }
 
 /**
- * Class SelectorTest
+ * Class SelectorTest.
  *
- * @package Sonata\Test\Component\Payment
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */

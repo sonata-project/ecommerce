@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,42 +16,42 @@ use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * Sonata\ProductBundle\Entity\BaseDelivery
+ * Sonata\ProductBundle\Entity\BaseDelivery.
  */
 abstract class BaseDelivery implements DeliveryInterface
 {
     /**
-     * @var string $code
+     * @var string
      */
     protected $code;
 
     /**
-     * @var boolean $perItem
+     * @var bool
      */
     protected $perItem;
 
     /**
-     * @var string $country
+     * @var string
      */
     protected $countryCode;
 
     /**
-     * @var string $zone
+     * @var string
      */
     protected $zone;
 
     /**
-     * @var boolean $enabled
+     * @var bool
      */
     protected $enabled;
 
     /**
-     * @var \DateTime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
@@ -60,7 +61,7 @@ abstract class BaseDelivery implements DeliveryInterface
     protected $product;
 
     /**
-     * Set productId
+     * Set productId.
      *
      * @param ProductInterface $product
      */
@@ -70,9 +71,9 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get productId
+     * Get productId.
      *
-     * @return integer $productId
+     * @return int $productId
      */
     public function getProduct()
     {
@@ -80,7 +81,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set code
+     * Set code.
      *
      * @param $code
      */
@@ -90,7 +91,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get class_name
+     * Get class_name.
      *
      * @return string $className
      */
@@ -100,9 +101,9 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set per_item
+     * Set per_item.
      *
-     * @param boolean $perItem
+     * @param bool $perItem
      */
     public function setPerItem($perItem)
     {
@@ -110,9 +111,9 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get per_item
+     * Get per_item.
      *
-     * @return boolean $perItem
+     * @return bool $perItem
      */
     public function getPerItem()
     {
@@ -120,7 +121,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set country code
+     * Set country code.
      *
      * @param $countryCode
      */
@@ -130,7 +131,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return string $country
      */
@@ -140,7 +141,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set zone
+     * Set zone.
      *
      * @param string $zone
      */
@@ -150,7 +151,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get zone
+     * Get zone.
      *
      * @return string $zone
      */
@@ -160,9 +161,9 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {
@@ -170,9 +171,9 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled()
     {
@@ -180,7 +181,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      */
@@ -190,7 +191,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime $updatedAt
      */
@@ -200,7 +201,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      */
@@ -210,7 +211,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime $createdAt
      */
@@ -221,17 +222,17 @@ abstract class BaseDelivery implements DeliveryInterface
 
     public function prePersist()
     {
-        $this->createdAt = new \DateTime;
-        $this->updatedAt = new \DateTime;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function preUpdate()
     {
-        $this->updatedAt = new \DateTime;
+        $this->updatedAt = new \DateTime();
     }
 
     /**
-     * return delivery status list
+     * return delivery status list.
      *
      * @return array
      */
@@ -267,10 +268,10 @@ abstract class BaseDelivery implements DeliveryInterface
      */
     public function __toString()
     {
-        return sprintf("%s-%s%s",
+        return sprintf('%s-%s%s',
             $this->getCode(),
             $this->getCountryCode(),
-            $this->getZone() ? sprintf('%s', $this->getZone()): ''
+            $this->getZone() ? sprintf('%s', $this->getZone()) : ''
         );
     }
 

@@ -12,19 +12,17 @@
 namespace Sonata\ProductBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
 class ProductVariationAdminController extends Controller
 {
-
     /**
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
@@ -62,7 +60,7 @@ class ProductVariationAdminController extends Controller
                 $manager         = $this->getProductManager();
                 $productProvider = $this->getProductPool()->getProvider($product);
 
-                for ($i = 1; $i <= $number; $i++) {
+                for ($i = 1; $i <= $number; ++$i) {
                     try {
                         $variation = $productProvider->createVariation($product);
 

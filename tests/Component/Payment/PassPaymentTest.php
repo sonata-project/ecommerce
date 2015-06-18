@@ -11,28 +11,24 @@
 
 namespace Sonata\Tests\Component\Payment;
 
-use Sonata\Component\Payment\PassPayment;
-use Buzz\Message\Response;
 use Buzz\Browser;
+use Sonata\Component\Payment\PassPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
 class PassPaymentTest_Order extends BaseOrder
 {
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
         // TODO: Implement getId() method.
     }
-
 }
 class PassPaymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * useless test ....
-     *
-     * @return void
      */
     public function testPassPayment()
     {
@@ -56,7 +52,7 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new PassPaymentTest_Order;
+        $order = new PassPaymentTest_Order();
         $order->setCreatedAt($date);
 
         $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');

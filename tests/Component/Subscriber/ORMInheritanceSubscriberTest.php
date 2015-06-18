@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,9 +14,8 @@ namespace Sonata\Test\Component\Subscriber;
 use Sonata\Component\Subscriber\ORMInheritanceSubscriber;
 
 /**
- * Class ORMInheritanceSubscriberTest
+ * Class ORMInheritanceSubscriberTest.
  *
- * @package Sonata\Test\Component
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */

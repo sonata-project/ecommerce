@@ -9,15 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
-
-use Sonata\Component\Basket\Basket;
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\Component\Basket\Loader;
 
 class LoaderTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testLoadBasket()
     {
         $customer         = $this->getMock('Sonata\Component\Customer\CustomerInterface');

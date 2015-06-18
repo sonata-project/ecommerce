@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,16 +11,14 @@
 
 namespace Sonata\ProductBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
 use Sonata\ProductBundle\DependencyInjection\Compiler\AddProductProviderCompilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataProductBundle extends Bundle
 {
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @return void
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function build(ContainerBuilder $container)
     {

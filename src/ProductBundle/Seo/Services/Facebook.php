@@ -2,12 +2,12 @@
 
 namespace Sonata\ProductBundle\Seo\Services;
 
-use Sonata\MediaBundle\Model\MediaInterface;
-use Sonata\SeoBundle\Seo\SeoPageInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\MediaBundle\Provider\Pool;
-use Sonata\IntlBundle\Templating\Helper\NumberHelper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Product\ProductInterface;
+use Sonata\IntlBundle\Templating\Helper\NumberHelper;
+use Sonata\MediaBundle\Model\MediaInterface;
+use Sonata\MediaBundle\Provider\Pool;
+use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -78,7 +78,7 @@ class Facebook implements ServiceInterface
             ->addMeta('property', 'og:description', $product->getDescription())
             ->addMeta('property', 'og:url', $this->router->generate('sonata_product_view', array(
                 'slug'      => $product->getSlug(),
-                'productId' => $product->getId()
+                'productId' => $product->getId(),
             ), true))
             ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))
             ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency());
@@ -105,8 +105,6 @@ class Facebook implements ServiceInterface
 
     /**
      * @param SeoPageInterface $seoPage
-     *
-     * @return void
      */
     protected function registerHeaders(SeoPageInterface $seoPage)
     {

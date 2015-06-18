@@ -14,9 +14,9 @@ namespace Sonata\Tests\Component\Basket;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
+use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Tests\Component\Product\Product;
 
 class Delivery extends BaseServiceDelivery
@@ -28,7 +28,7 @@ class Delivery extends BaseServiceDelivery
 
     public function getName()
     {
-        return "delivery 1";
+        return 'delivery 1';
     }
 
     public function getVatRate()
@@ -40,7 +40,6 @@ class Delivery extends BaseServiceDelivery
     {
         return 120;
     }
-
 }
 
 class BasketTest extends \PHPUnit_Framework_TestCase
@@ -67,10 +66,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $address->expects($this->any())->method('getAddress1')->will($this->returnValue('Address1'));
         $address->expects($this->any())->method('getAddress2')->will($this->returnValue('Address2'));
         $address->expects($this->any())->method('getAddress3')->will($this->returnValue('Address3'));
-        $address->expects($this->any())->method('getPostcode')->will($this->returnValue("75001"));
-        $address->expects($this->any())->method('getCity')->will($this->returnValue("Paris"));
-        $address->expects($this->any())->method('getCountryCode')->will($this->returnValue("FR"));
-        $address->expects($this->any())->method('getPhone')->will($this->returnValue("0123456789"));
+        $address->expects($this->any())->method('getPostcode')->will($this->returnValue('75001'));
+        $address->expects($this->any())->method('getCity')->will($this->returnValue('Paris'));
+        $address->expects($this->any())->method('getCountryCode')->will($this->returnValue('FR'));
+        $address->expects($this->any())->method('getPhone')->will($this->returnValue('0123456789'));
 
         return $address;
     }
@@ -79,7 +78,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
     {
         $currency = $this->getMock('Sonata\Component\Currency\Currency');
 
-        $basket = new Basket;
+        $basket = new Basket();
         $basket->setCurrency($currency);
 
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
@@ -97,7 +96,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             ->method('isRecurrentPayment')
             ->will($this->returnValue(false));
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->addProduct('product_code', $productDefinition);
 
         $basket->setProductPool($pool);
@@ -248,10 +247,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $definition = new ProductDefinition($provider, $manager);
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->addProduct('product_code', $definition);
 
-        $basket = new Basket;
+        $basket = new Basket();
 
         $basket->setProductPool($pool);
 
@@ -278,7 +277,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             'currency',
             'deliveryAddress',
             'billingAddress',
-            'customer'
+            'customer',
         );
 
         $basketData = unserialize($data);
@@ -308,7 +307,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             'currency',
             'deliveryAddressId',
             'billingAddressId',
-            'customerId'
+            'customerId',
         );
 
         $basketData = unserialize($data);
@@ -480,7 +479,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $definition = new ProductDefinition($provider, $manager);
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->addProduct('product_code', $definition);
 
         $basket->setProductPool($pool);

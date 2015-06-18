@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,19 +11,18 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- *
- * Resources :
+ * Resources :.
  *
  * Paypal Encryption
  *  https://www.paypal.com/IntegrationCenter/ic_button-encryption.html#Createanencryptedbutton
  *   openssl genrsa -out my-prvkey.pem 1024
  *   openssl req -new -key my-prvkey.pem -x509 -days 365 -out my-pubcert.pem
  *  *
+ *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 abstract class BasePaypal extends BasePayment
@@ -48,8 +48,8 @@ abstract class BasePaypal extends BasePayment
     protected $translator;
 
     /**
+     * Object that manages http client.
      *
-     * Object that manages http client
      * @todo Check if it really is used
      */
     protected $webConnectorProvider = null;
@@ -65,9 +65,10 @@ abstract class BasePaypal extends BasePayment
     }
 
     /**
-     * return true if the request contains a valid `check` parameter
+     * return true if the request contains a valid `check` parameter.
      *
-     * @param  TransactionInterface $transaction
+     * @param TransactionInterface $transaction
+     *
      * @return bool
      */
     public function isRequestValid(TransactionInterface $transaction)
@@ -80,10 +81,9 @@ abstract class BasePaypal extends BasePayment
     }
 
     /**
-     * return the transaction_id sent by the bank
+     * return the transaction_id sent by the bank.
      *
-     * @param  TransactionInterface $transaction
-     * @return void
+     * @param TransactionInterface $transaction
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {
@@ -98,9 +98,10 @@ abstract class BasePaypal extends BasePayment
     }
 
     /**
-     * return the order reference from the transaction object
+     * return the order reference from the transaction object.
      *
-     * @param  TransactionInterface $transaction
+     * @param TransactionInterface $transaction
+     *
      * @return string
      */
     public function getOrderReference(TransactionInterface $transaction)
@@ -108,14 +109,14 @@ abstract class BasePaypal extends BasePayment
         $order = $transaction->get('order', null);
 
         if ($this->getLogger()) {
-            $this->getLogger()->notice(sprintf("[BasePaypalPayment::loadOrder] order=%s", $order));
+            $this->getLogger()->notice(sprintf('[BasePaypalPayment::loadOrder] order=%s', $order));
         }
 
         return $order;
     }
 
     /**
-     * Check openssl configuration, throw an RuntimeException if something is wrong
+     * Check openssl configuration, throw an RuntimeException if something is wrong.
      *
      * @throws RuntimeException
      */
@@ -196,7 +197,7 @@ abstract class BasePaypal extends BasePayment
     }
 
     /**
-     * Encrypt paypal information using openssl with a buffer
+     * Encrypt paypal information using openssl with a buffer.
      *
      *
      * @param $hash
@@ -214,31 +215,31 @@ abstract class BasePaypal extends BasePayment
         $paypal_cert_file   = $this->getOption('paypal_cert_file');
         $openssl            = $this->getOption('openssl');
 
-        $openssl_cmd = "$openssl smime -sign -signer $cert_file -inkey $key_file " .
-            "-outform der -nodetach -binary | $openssl smime -encrypt " .
+        $openssl_cmd = "$openssl smime -sign -signer $cert_file -inkey $key_file ".
+            "-outform der -nodetach -binary | $openssl smime -encrypt ".
             "-des3 -binary -outform pem $paypal_cert_file";
 
         if ($this->getLogger()) {
-            $this->getLogger()->debug(sprintf("[BasePaypalPayment::encrypt] command line=%s", $openssl_cmd));
+            $this->getLogger()->debug(sprintf('[BasePaypalPayment::encrypt] command line=%s', $openssl_cmd));
         }
 
         $descriptors = array(
-            0 => array("pipe", "r"),
-            1 => array("pipe", "w"),
+            0 => array('pipe', 'r'),
+            1 => array('pipe', 'w'),
         );
 
         $process = proc_open($openssl_cmd, $descriptors, $pipes);
 
         if (is_resource($process)) {
             foreach ($hash as $key => $value) {
-                if ($value != "") {
+                if ($value != '') {
                     fwrite($pipes[0], "$key=$value\n");
                 }
             }
             fflush($pipes[0]);
             fclose($pipes[0]);
 
-            $output = "";
+            $output = '';
             while (!feof($pipes[1])) {
                 $output .= fgets($pipes[1]);
             }
@@ -250,14 +251,14 @@ abstract class BasePaypal extends BasePayment
         }
 
         if ($this->getLogger()) {
-            $this->getLogger()->emergency("Encrypting paypal data failed, Command line encryption failed \n cmd=$openssl_cmd \n hash=" . print_r($hash, 1));
+            $this->getLogger()->emergency("Encrypting paypal data failed, Command line encryption failed \n cmd=$openssl_cmd \n hash=".print_r($hash, 1));
         }
 
         throw new \RuntimeException('Encrypting paypal data failed');
     }
 
     /**
-     * Encrypt paypal information using openssl with a temporary file
+     * Encrypt paypal information using openssl with a temporary file.
      *
      *
      * @param $hash
@@ -277,9 +278,9 @@ abstract class BasePaypal extends BasePayment
 
         // create tmp file
         $filename = tempnam(sys_get_temp_dir(), 'sonata_paypal_');
-        $contents = "";
+        $contents = '';
         foreach ($hash as $name => $value) {
-            $contents .= $name . '=' . $value . "\n";
+            $contents .= $name.'='.$value."\n";
         }
 
         if (!@file_put_contents($filename, $contents)) {
@@ -290,31 +291,31 @@ abstract class BasePaypal extends BasePayment
             throw new \RuntimeException(sprintf('unable to create buffer file : %s', $filename));
         }
 
-        $openssl_cmd = "$openssl smime -sign -signer $cert_file -inkey $key_file -outform der -nodetach -binary " .
-            " < $filename " .
-            " | $openssl smime -encrypt " .
+        $openssl_cmd = "$openssl smime -sign -signer $cert_file -inkey $key_file -outform der -nodetach -binary ".
+            " < $filename ".
+            " | $openssl smime -encrypt ".
             "-des3 -binary -outform pem $paypal_cert_file";
 
         if ($this->getLogger()) {
-          $this->getLogger()->debug(sprintf('[BasePaypalPayment::encryptViaFile] command line=%s', $openssl_cmd));
+            $this->getLogger()->debug(sprintf('[BasePaypalPayment::encryptViaFile] command line=%s', $openssl_cmd));
         }
 
         $output = shell_exec($openssl_cmd);
 
         if (!@unlink($filename)) {
             if ($this->getLogger()) {
-              $this->getLogger()->emergency(sprintf('[BasePaypalPayment::encryptViaFile] unable to delete temporary file, %s', $filename));
+                $this->getLogger()->emergency(sprintf('[BasePaypalPayment::encryptViaFile] unable to delete temporary file, %s', $filename));
             }
-
         }
 
         return $output;
     }
 
     /**
-     * return the status list available from paypal system
+     * return the status list available from paypal system.
      *
      * @static
+     *
      * @return array
      */
     public static function getPaymentStatusList()
@@ -328,12 +329,13 @@ abstract class BasePaypal extends BasePayment
             self::PAYMENT_STATUS_REFUNDED           => 'You refunded the payment.',
             self::PAYMENT_STATUS_REVERSED           => 'A payment was reversed due to a chargeback or other type of reversal. The funds have been removed from your account balance and returned to the buyer. The reason for the reversal is specified in the ReasonCode element.',
             self::PAYMENT_STATUS_PROCESSED          => 'A payment has been accepted.',
-            self::PAYMENT_STATUS_VOIDED             => 'This authorization has been voided.'
+            self::PAYMENT_STATUS_VOIDED             => 'This authorization has been voided.',
         );
     }
 
     /**
      * @todo check if used
+     *
      * @param unknown $webConnectorProvider
      */
     public function setWebConnectorProvider($webConnectorProvider)
@@ -343,6 +345,7 @@ abstract class BasePaypal extends BasePayment
 
     /**
      * @todo check if used
+     *
      * @return unknown $webConnectorProvider
      */
     public function getWebConnectorProvider()

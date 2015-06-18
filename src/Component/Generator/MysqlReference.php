@@ -11,9 +11,9 @@
 
 namespace Sonata\Component\Generator;
 
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class MysqlReference implements ReferenceInterface
 {
@@ -55,7 +55,7 @@ class MysqlReference implements ReferenceInterface
     }
 
     /**
-     * generate a correct reference number
+     * generate a correct reference number.
      *
      * @param mixed  $object
      * @param string $tableName
@@ -66,7 +66,7 @@ class MysqlReference implements ReferenceInterface
      */
     protected function generateReference($object, $tableName)
     {
-        $date = new \DateTime;
+        $date = new \DateTime();
 
         $sql = sprintf("SELECT count(id) as counter FROM %s WHERE created_at >= '%s' AND reference IS NOT NULL", $tableName, $date->format('Y-m-d'));
 
@@ -85,7 +85,6 @@ class MysqlReference implements ReferenceInterface
 
             $this->registry->getConnection()->update($tableName, array('reference' => $reference), array('id' => $object->getId()));
             $object->setReference($reference);
-
         } catch (\Exception $e) {
             $this->registry->getConnection()->exec(sprintf('UNLOCK TABLES'));
 

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,10 +14,11 @@ namespace Sonata\Component\Status;
 use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface as BaseStatusClassRendererInterface;
 
 /**
- * Class StatusClassRendererInterface
+ * Class StatusClassRendererInterface.
  *
  * @deprecated
  * @see \Sonata\CoreBundle\Component\Status\StatusClassRendererInterface
+ *
  * @author Hugo Briand <briand@ekino.com>
  */
 interface StatusClassRendererInterface extends BaseStatusClassRendererInterface

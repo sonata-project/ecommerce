@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,8 +12,7 @@
 namespace Sonata\Component\Delivery;
 
 /**
- * The pool stored a group of available delivery method
- *
+ * The pool stored a group of available delivery method.
  */
 class Pool
 {
@@ -22,7 +22,7 @@ class Pool
     protected $methods = array();
 
     /**
-     * add a delivery method into the pool
+     * add a delivery method into the pool.
      *
      * @param ServiceDeliveryInterface $instance
      */
@@ -40,7 +40,7 @@ class Pool
     }
 
     /**
-     * return a ServiceDeliveryInterface Object
+     * return a ServiceDeliveryInterface Object.
      *
      * @param string $code
      *

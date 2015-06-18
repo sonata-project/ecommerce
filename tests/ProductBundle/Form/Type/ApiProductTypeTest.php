@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,11 +11,10 @@
 
 namespace Sonata\ProductBundle\Tests\Form\Type;
 
-use Sonata\CoreBundle\Tests\Form\Type\DoctrineORMSerializationTypeTest;
 use Sonata\ProductBundle\Form\Type\ApiProductType;
 
 /**
- * Class ApiProductTypeTest
+ * Class ApiProductTypeTest.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -31,6 +31,6 @@ class ApiProductTypeTest extends \PHPUnit_Framework_TestCase
 
         $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
 
-        $type->buildForm($builder, array("provider_name" => "test.product.provider"));
+        $type->buildForm($builder, array('provider_name' => 'test.product.provider'));
     }
 }

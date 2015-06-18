@@ -11,18 +11,15 @@
 
 namespace Sonata\Tests\Component\Payment;
 
-use Sonata\Component\Payment\CheckPayment;
-
-use Buzz\Message\Response;
-use Buzz\Message\Request;
 use Buzz\Browser;
-use Buzz\Client\ClientInterface;
+use Buzz\Message\Response;
+use Sonata\Component\Payment\CheckPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
 class CheckPaymentTest_Order extends BaseOrder
 {
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
@@ -34,8 +31,6 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * useless test ....
-     *
-     * @return void
      */
     public function testPassPayment()
     {
@@ -53,7 +48,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new CheckPaymentTest_Order;
+        $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
@@ -80,7 +75,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new CheckPaymentTest_Order;
+        $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
 
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
@@ -106,7 +101,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 
     public function testSendConfirmationReceipt()
     {
-        $order = new CheckPaymentTest_Order;
+        $order = new CheckPaymentTest_Order();
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->onConsecutiveCalls(null, $order));

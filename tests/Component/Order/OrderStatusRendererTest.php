@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,20 +9,16 @@
  * file that was distributed with this source code.
  */
 
-
-namespace Sonata\Tests\Component\Order;
+namespace Sonata\tests\Component\Order;
 
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Order\OrderStatusRenderer;
-use Sonata\Component\Order\OrderInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
 
-
 /**
- * Class OrderStatusRendererTest
+ * Class OrderStatusRendererTest.
  *
- * @package Sonata\Tests\Component\Order
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -31,7 +28,7 @@ class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase
     {
         $osRenderer = new OrderStatusRenderer();
 
-        $order = new \DateTime;
+        $order = new \DateTime();
         $this->assertFalse($osRenderer->handlesObject($order));
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
@@ -56,9 +53,9 @@ class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase
         $order->expects($this->once())->method('getDeliveryStatus')->will($this->returnValue(array_rand(BaseServiceDelivery::getStatusList())));
         $order->expects($this->once())->method('getPaymentStatus')->will($this->returnValue(array_rand(BaseTransaction::getStatusList())));
 
-        $this->assertContains($osRenderer->getStatusClass($order, "", "error"), array('success', 'info', 'error'));
-        $this->assertContains($osRenderer->getStatusClass($order, "payment", "error"), array('success', 'info', 'error'));
-        $this->assertContains($osRenderer->getStatusClass($order, "delivery", "error"), array('success', 'info', 'error'));
+        $this->assertContains($osRenderer->getStatusClass($order, '', 'error'), array('success', 'info', 'error'));
+        $this->assertContains($osRenderer->getStatusClass($order, 'payment', 'error'), array('success', 'info', 'error'));
+        $this->assertContains($osRenderer->getStatusClass($order, 'delivery', 'error'), array('success', 'info', 'error'));
     }
 
     public function testGetInvalidClass()
@@ -68,6 +65,6 @@ class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getStatus')->will($this->returnValue(8));
 
-        $this->assertEquals("default_value", $osRenderer->getStatusClass($order, "toubidou", "default_value"));
+        $this->assertEquals('default_value', $osRenderer->getStatusClass($order, 'toubidou', 'default_value'));
     }
 }

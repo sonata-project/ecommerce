@@ -11,13 +11,13 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Knp\Menu\ItemInterface as MenuItemInterface;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class CustomerAdmin extends Admin
 {
@@ -30,8 +30,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
-     * @return void
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -39,21 +38,21 @@ class CustomerAdmin extends Admin
 
         $formMapper
             ->with('customer.group.general', array(
-                    'class' => 'col-md-7'
+                    'class' => 'col-md-7',
                 ))
                 ->add('user', 'sonata_type_model_list')
                 ->add('firstname')
                 ->add('lastname')
                 ->add('locale', 'locale')
                 ->add('birthDate', 'sonata_type_date_picker',  array(
-                    'years' => range(1900, $now->format('Y')),
+                    'years'       => range(1900, $now->format('Y')),
                     'dp_min_date' => '1-1-1900',
-                    'dp_max_date' => $now->format('c')
+                    'dp_max_date' => $now->format('c'),
                 ))
                 ->add('birthPlace')
             ->end()
             ->with('customer.group.contact', array(
-                    'class' => 'col-md-5'
+                    'class' => 'col-md-5',
                 ))
                 ->add('email')
                 ->add('phoneNumber')
@@ -65,8 +64,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Datagrid\ListMapper $list
-     * @return void
+     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
      */
     public function configureListFields(ListMapper $list)
     {
@@ -81,8 +79,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Show\ShowMapper $filter
-     * @return void
+     * @param \Sonata\AdminBundle\Show\ShowMapper $filter
      */
     public function configureShowFields(ShowMapper $filter)
     {
@@ -106,8 +103,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     * @return void
+     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {

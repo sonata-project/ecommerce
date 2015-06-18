@@ -2,11 +2,11 @@
 
 namespace Sonata\ProductBundle\Seo\Services;
 
-use Sonata\SeoBundle\Seo\SeoPageInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\MediaBundle\Provider\Pool;
-use Sonata\IntlBundle\Templating\Helper\NumberHelper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Product\ProductInterface;
+use Sonata\IntlBundle\Templating\Helper\NumberHelper;
+use Sonata\MediaBundle\Provider\Pool;
+use Sonata\SeoBundle\Seo\SeoPageInterface;
 
 /**
  * TwitterService.
@@ -71,12 +71,10 @@ class Twitter implements ServiceInterface
     }
 
     /**
-     * Add the meta information
+     * Add the meta information.
      *
      * @param SeoPageInterface $seoPage
      * @param ProductInterface $product
-     *
-     * @return void
      */
     public function alterPage(SeoPageInterface $seoPage, ProductInterface $product)
     {

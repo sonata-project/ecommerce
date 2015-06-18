@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,17 +9,15 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\ProductBundle\Block;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\Component\Form\Type\VariationChoiceType;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,11 +25,9 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-
 /**
- * Class VariationsFormBlockService
+ * Class VariationsFormBlockService.
  *
- * @package Sonata\ProductBundle\Block
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -72,7 +69,7 @@ class VariationsFormBlockService extends BaseBlockService
                     'settings' => $blockContext->getSettings(),
                     'block'    => $blockContext->getBlock(),
                     'choices'  => array(),
-                    'form'     => null
+                    'form'     => null,
                 ), $response);
         }
 
@@ -91,7 +88,7 @@ class VariationsFormBlockService extends BaseBlockService
         $form = $this->formFactory->createBuilder('sonata_product_variation_choices', $currentValues, array(
                 'field_options' => $blockContext->getSetting('form_field_options'),
                 'product'       => $product,
-                'fields'        => $fields
+                'fields'        => $fields,
             ))->getForm();
 
         $params = array(
@@ -121,7 +118,6 @@ class VariationsFormBlockService extends BaseBlockService
         // TODO: Implement buildEditForm() method.
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -148,12 +144,12 @@ class VariationsFormBlockService extends BaseBlockService
 
                     return array(
                         'productId' => $product ? $product->getId() : null,
-                        'slug'      => $product ? $product->getSlug() : null
+                        'slug'      => $product ? $product->getSlug() : null,
                     );
                 },
             'form_field_options'    => array(),
             'title'                 => 'Product variations',
-            'template'              => 'SonataProductBundle:Block:variations_choice.html.twig'
+            'template'              => 'SonataProductBundle:Block:variations_choice.html.twig',
         ));
     }
 }

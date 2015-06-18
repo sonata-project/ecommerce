@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\Component\Customer\AddressInterface;
 
@@ -17,47 +17,46 @@ class Address implements AddressInterface
 {
     public function getPhone()
     {
-        return "+33472123123";
+        return '+33472123123';
     }
 
     public function getCountryCode()
     {
-        return "FRA";
+        return 'FRA';
     }
 
     public function getCity()
     {
-        return "PARIS";
+        return 'PARIS';
     }
 
     public function getPostcode()
     {
-        return "75002";
+        return '75002';
     }
 
     public function getAddress3()
     {
-        return "Av des champs elysées";
+        return 'Av des champs elysées';
     }
 
     public function getAddress2()
     {
-        return "";
+        return '';
     }
 
     public function getAddress1()
     {
-        return "";
+        return '';
     }
 
     public function getName()
     {
-        return "home";
+        return 'home';
     }
 
     public function getId()
     {
         // TODO: Implement getId() method.
     }
-
 }

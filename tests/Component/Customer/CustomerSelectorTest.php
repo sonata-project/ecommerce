@@ -11,12 +11,11 @@
 
 namespace Sonata\Tests\Component\Customer;
 
+use FOS\UserBundle\Model\User as BaseUser;
+use Sonata\Component\Basket\Basket;
+use Sonata\Component\Customer\CustomerSelector;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Sonata\Component\Customer\CustomerSelector;
-use Sonata\Component\Basket\Basket;
-use FOS\UserBundle\Model\User as BaseUser;
 
 class ValidUser extends BaseUser
 {

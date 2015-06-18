@@ -11,15 +11,14 @@
 
 namespace Sonata\ProductBundle\Controller;
 
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Basket\BasketElementInterface;
-use Sonata\Component\Order\OrderElementInterface;
-use Sonata\Component\Basket\BasketInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class BaseProductController extends Controller
 {
@@ -51,17 +50,17 @@ abstract class BaseProductController extends Controller
         return $this->render(
             sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
             array(
-                'provider'      => $provider,
-                'product'       => $product,
+                'provider'           => $provider,
+                'product'            => $product,
                 'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
-                'currency'      => $currency,
-                'form'          => $form,
+                'currency'           => $currency,
+                'form'               => $form,
             )
         );
     }
 
     /**
-     * Renders product properties
+     * Renders product properties.
      *
      * @param ProductInterface $product
      *
@@ -72,7 +71,7 @@ abstract class BaseProductController extends Controller
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         return $this->render(sprintf('%s:properties.html.twig', $provider->getBaseControllerName()), array(
-            'product' => $product
+            'product' => $product,
         ));
     }
 
@@ -90,7 +89,7 @@ abstract class BaseProductController extends Controller
         return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), array(
             'formView'      => $formView,
             'basketElement' => $basketElement,
-            'basket'        => $basket
+            'basket'        => $basket,
         ));
     }
 
@@ -106,7 +105,7 @@ abstract class BaseProductController extends Controller
 
         return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), array(
             'basketElement' => $basketElement,
-            'basket'        => $basket
+            'basket'        => $basket,
         ));
     }
 
@@ -135,6 +134,7 @@ abstract class BaseProductController extends Controller
      * @param ProductInterface|null $variation
      *
      * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function variationToProductAction(ProductInterface $product, ProductInterface $variation = null)
@@ -147,7 +147,7 @@ abstract class BaseProductController extends Controller
 
         if (null === $variation || 0 === $provider->getStockAvailable($variation)) {
             if ($this->getRequest()->isXmlHttpRequest()) {
-                return new JsonResponse(array('error' => $this->get('translator')->trans('variation_not_found', array(), "SonataProductBundle")));
+                return new JsonResponse(array('error' => $this->get('translator')->trans('variation_not_found', array(), 'SonataProductBundle')));
             }
 
             $this->get('session')->getFlashBag()->add('sonata_product_error', 'variation_not_found');
@@ -158,7 +158,7 @@ abstract class BaseProductController extends Controller
 
         $url = $this->generateUrl('sonata_product_view', array(
             'productId' => $variation->getId(),
-            'slug' => $variation->getSlug()
+            'slug'      => $variation->getSlug(),
         ));
 
         if ($this->getRequest()->isXmlHttpRequest()) {

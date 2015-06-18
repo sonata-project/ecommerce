@@ -11,8 +11,6 @@
 
 namespace Sonata\Component\Currency;
 
-use Sonata\Component\Currency\CurrencyInterface;
-
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -62,7 +60,7 @@ class Currency implements CurrencyInterface
         return $this->getLabel() === $currency->getLabel();
     }
 
-    /**
+    /*
      * {@inheritdoc}
      */
 //     public function getSymbol()
@@ -70,7 +68,7 @@ class Currency implements CurrencyInterface
 //         return $this->symbol;
 //     }
 
-    /**
+    /*
      * @param string $symbol
      */
 //     public function setSymbol($symbol)

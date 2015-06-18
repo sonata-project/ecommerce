@@ -2,10 +2,10 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Product\Pool;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Payment\Pool as PaymentPool;
+use Sonata\Component\Product\Pool;
 
 class BasketBuilder implements BasketBuilderInterface
 {
@@ -44,7 +44,7 @@ class BasketBuilder implements BasketBuilderInterface
     }
 
     /**
-     * Build a basket
+     * Build a basket.
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      *

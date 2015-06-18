@@ -8,21 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\ProductBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NativeQuery;
+use Doctrine\ORM\EntityManager;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
-use Sonata\Component\Product\ProductCategoryInterface;
-use Doctrine\ORM\EntityManager;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 
 class ProductCategoryManager extends BaseEntityManager implements ProductCategoryManagerInterface
 {
-//    const CATEGORY_PRODUCT_TYPE = 'product';
+    //    const CATEGORY_PRODUCT_TYPE = 'product';
 
     /**
      * @var \Sonata\ClassificationBundle\Model\CategoryManagerInterface
@@ -30,17 +28,11 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
     protected $categoryManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string                   $class
      * @param EntityManager            $em
      * @param CategoryManagerInterface $categoryManager
-    public function __construct($class, EntityManager $em, CategoryManagerInterface $categoryManager)
-    {
-        parent::__construct($class, $em);
-
-        $this->categoryManager = $categoryManager;
-    }
      */
 
     /**
@@ -118,7 +110,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         $productMetadata = $this->getEntityManager()->getClassMetadata($metadata->getAssociationTargetClass('product'));
         $categoryMetadata = $this->getEntityManager()->getClassMetadata($metadata->getAssociationTargetClass('category'));
 
-        $sql = "SELECT count(cnt.product_id) AS cntId
+        $sql = 'SELECT count(cnt.product_id) AS cntId
             FROM (
                 SELECT DISTINCT pc.product_id
                 FROM %s pc
@@ -131,7 +123,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
                 AND p.parent_id IS NULL
                 AND pc.category_id = :categoryId
                 LIMIT %d
-                ) AS cnt";
+                ) AS cnt';
 
         $sql = sprintf($sql, $metadata->table['name'], $productMetadata->table['name'], $categoryMetadata->table['name'], $productMetadata->table['name'], $limit);
 
@@ -145,9 +137,8 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         return $res[0]['cntId'];
     }
 
-
     /**
-     * Finds $category place in $tree
+     * Finds $category place in $tree.
      *
      * @param CategoryInterface $category
      * @param array             $tree

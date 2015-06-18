@@ -14,7 +14,7 @@ namespace Sonata\Component\Form\Transformer;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class SerializeDataTransformer
+ * Class SerializeDataTransformer.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -39,5 +39,4 @@ class SerializeDataTransformer implements DataTransformerInterface
 
         return unserialize($value);
     }
-
 }

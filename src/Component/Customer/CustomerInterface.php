@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,86 +16,86 @@ use FOS\UserBundle\Model\UserInterface;
 interface CustomerInterface
 {
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime createdAt
      */
     public function getCreatedAt();
 
     /**
-     * Set firstname
+     * Set firstname.
      *
      * @param string $firstname
      */
     public function setFirstname($firstname);
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string $firstname
      */
     public function getFirstname();
 
     /**
-     * Get full name
+     * Get full name.
      *
      * @return string
      */
     public function getFullname();
 
     /**
-     * Set lastname
+     * Set lastname.
      *
      * @param string $lastname
      */
     public function setLastname($lastname);
 
     /**
-     * Get lastname
+     * Get lastname.
      *
      * @return string $lastname
      */
     public function getLastname();
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime $updatedAt
      */
     public function getUpdatedAt();
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \FOS\UserBundle\Model\UserInterface $user
      */
     public function setUser(UserInterface $user);
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \FOS\UserBundle\Model\UserInterface $user
      */
     public function getUser();
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId();
 
@@ -109,8 +110,7 @@ interface CustomerInterface
     public function getLocale();
 
     /**
-     * @param  string $locale
-     * @return void
+     * @param string $locale
      */
     public function setLocale($locale);
 

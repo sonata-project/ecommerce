@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,16 +12,15 @@
 namespace Sonata\Component\Product;
 
 /**
- * Class ProductFinderInterface
+ * Class ProductFinderInterface.
  *
- * @package Sonata\Component\Product
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
 interface ProductFinderInterface
 {
     /**
-     * Gets similar product as $product in a cross selling fashion
+     * Gets similar product as $product in a cross selling fashion.
      *
      * @param ProductInterface $product
      *
@@ -29,7 +29,7 @@ interface ProductFinderInterface
     public function getCrossSellingSimilarProducts(ProductInterface $product);
 
     /**
-     * Gets similar parent products as $product in a cross selling fashion
+     * Gets similar parent products as $product in a cross selling fashion.
      *
      * @param ProductInterface $product
      *
@@ -38,7 +38,7 @@ interface ProductFinderInterface
     public function getCrossSellingSimilarParentProducts(ProductInterface $product);
 
     /**
-     * Gets similar product as $product in an up selling fashion
+     * Gets similar product as $product in an up selling fashion.
      *
      * @param ProductInterface $product
      *

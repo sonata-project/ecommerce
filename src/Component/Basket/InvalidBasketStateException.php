@@ -13,5 +13,4 @@ namespace Sonata\Component\Basket;
 
 class InvalidBasketStateException extends \LogicException
 {
-
 }

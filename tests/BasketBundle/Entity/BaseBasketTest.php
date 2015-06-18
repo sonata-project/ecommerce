@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,13 +15,11 @@ use Sonata\BasketBundle\Entity\BaseBasket;
 
 class BasketTest extends BaseBasket
 {
-
 }
 
 /**
- * Class BaseBasketTest
+ * Class BaseBasketTest.
  *
- * @package Sonata\Tests\BasketBundle\Entity
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -39,8 +38,8 @@ class BaseBasketTest extends \PHPUnit_Framework_TestCase
         $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
 
         $elements = array(
-            "notBasketElementInterface",
-            $element
+            'notBasketElementInterface',
+            $element,
         );
 
         $basket->setBasketElements($elements);
@@ -61,8 +60,8 @@ class BaseBasketTest extends \PHPUnit_Framework_TestCase
         $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
 
         $elements = array(
-            "notBasketElementInterface",
-            $element
+            'notBasketElementInterface',
+            $element,
         );
 
         $basket->setBasketElements($elements);

@@ -19,7 +19,7 @@ namespace Sonata\Component\Generator;
 class Mustache
 {
     /**
-     * Renders a single line. Looks for {{ var }}
+     * Renders a single line. Looks for {{ var }}.
      *
      * @param string $string
      * @param array  $parameters
@@ -47,7 +47,7 @@ class Mustache
     }
 
     /**
-     * Renders a directory recursively
+     * Renders a directory recursively.
      *
      * @param string $dir        Path to the directory that will be recursively rendered
      * @param array  $parameters

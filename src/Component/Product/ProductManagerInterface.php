@@ -17,7 +17,7 @@ use Sonata\CoreBundle\Model\PageableManagerInterface;
 interface ProductManagerInterface extends ManagerInterface, PageableManagerInterface
 {
     /**
-     * Returns the products in the same collections as those specified in $productCollections
+     * Returns the products in the same collections as those specified in $productCollections.
      *
      * @param mixed $productCollections
      *
@@ -26,7 +26,7 @@ interface ProductManagerInterface extends ManagerInterface, PageableManagerInter
     public function findInSameCollections($productCollections);
 
     /**
-     * Returns the parent products in the same collections as those specified in $productCollections
+     * Returns the parent products in the same collections as those specified in $productCollections.
      *
      * @param mixed $productCollections
      *
@@ -35,7 +35,7 @@ interface ProductManagerInterface extends ManagerInterface, PageableManagerInter
     public function findParentsInSameCollections($productCollections);
 
     /**
-     * Retrieve an active product from its id and its slug
+     * Retrieve an active product from its id and its slug.
      *
      * @param int    $id
      * @param string $slug

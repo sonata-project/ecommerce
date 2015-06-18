@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -7,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\ProductBundle\Block;
 
@@ -18,11 +18,9 @@ use Sonata\ProductBundle\Menu\ProductMenuBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Templating\EngineInterface;
 
-
 /**
- * Class CategoriesMenuBlockService
+ * Class CategoriesMenuBlockService.
  *
- * @package Sonata\ProductBundle\Block
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -34,7 +32,7 @@ class CategoriesMenuBlockService extends MenuBlockService
     private $menuBuilder;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string                $name
      * @param EngineInterface       $templating
@@ -64,8 +62,8 @@ class CategoriesMenuBlockService extends MenuBlockService
         parent::setDefaultSettings($resolver);
 
         $resolver->setDefaults(array(
-                'menu_template' => "SonataBlockBundle:Block:block_side_menu_template.html.twig",
-                'safe_labels'   => true
+                'menu_template' => 'SonataBlockBundle:Block:block_side_menu_template.html.twig',
+                'safe_labels'   => true,
             ));
     }
 
@@ -78,7 +76,7 @@ class CategoriesMenuBlockService extends MenuBlockService
 
         $menu = parent::getMenu($blockContext);
 
-        if (null === $menu || "" === $menu) {
+        if (null === $menu || '' === $menu) {
             $menu = $this->menuBuilder->createCategoryMenu(
                 array(
                     'childrenAttributes' => array('class' => $settings['menu_class']),
@@ -90,5 +88,4 @@ class CategoriesMenuBlockService extends MenuBlockService
 
         return $menu;
     }
-
 }

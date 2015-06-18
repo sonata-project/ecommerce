@@ -11,9 +11,9 @@
 
 namespace Sonata\BasketBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class BasketType extends AbstractType
@@ -32,7 +32,7 @@ class BasketType extends AbstractType
 
         // should create a custom basket elements here
         $basketElementBuilder = $builder->create('basketElements', 'form', array(
-            'by_reference' => false
+            'by_reference' => false,
         ));
         $basketElementBuilder->addEventSubscriber(new BasketResizeFormListener($builder->getFormFactory(), $basket));
         $builder->add($basketElementBuilder);

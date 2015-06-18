@@ -9,8 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\PaymentBundle\Consumer;
-
+namespace Sonata\tests\PaymentBundle\Consumer;
 
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;

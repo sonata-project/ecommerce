@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,32 +9,27 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\ProductBundle\Form\Type;
 
-use Metadata\MetadataFactoryInterface;
-
 use Sonata\Component\Product\Pool;
-
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class ApiProductType
+ * Class ApiProductType.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class ApiProductType extends AbstractType
 {
     /**
-     * @var Pool $productPool
+     * @var Pool
      */
     protected $productPool;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Pool $productPool
      */

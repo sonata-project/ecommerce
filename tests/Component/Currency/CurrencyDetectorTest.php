@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Currency;
+namespace Sonata\tests\Component\Currency;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetector;
@@ -41,7 +41,7 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
         $this->currency = $this->getMock('Sonata\Component\Currency\CurrencyInterface');
         $this->currency->expects($this->any())
             ->method('getLabel')
-            ->will($this->returnValue("EUR"))
+            ->will($this->returnValue('EUR'))
         ;
 
         $currencyManager = $this->getMock('Sonata\Component\Currency\CurrencyManagerInterface');
@@ -50,7 +50,7 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->currency))
         ;
 
-        $this->object = new CurrencyDetector("EUR", $currencyManager);
+        $this->object = new CurrencyDetector('EUR', $currencyManager);
     }
 
     /**

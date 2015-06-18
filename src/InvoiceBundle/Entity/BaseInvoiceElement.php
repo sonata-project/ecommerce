@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,67 +11,67 @@
 
 namespace Sonata\InvoiceBundle\Entity;
 
-use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceElementInterface;
+use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderElementInterface;
 
 /**
- * Sonata\InvoiceBundle\Entity\BaseInvoiceElement
+ * Sonata\InvoiceBundle\Entity\BaseInvoiceElement.
  */
 abstract class BaseInvoiceElement implements InvoiceElementInterface
 {
     /**
-     * @var InvoiceInterface $invoiceId
+     * @var InvoiceInterface
      */
     protected $invoice;
 
     /**
-     * @var OrderElement $orderElement
+     * @var OrderElement
      */
     protected $orderElement;
 
     /**
-     * @var integer $quantity
+     * @var int
      */
     protected $quantity;
 
     /**
-     * @var float $price
+     * @var float
      */
     protected $price;
 
     /**
-     * @var float $unitPriceExcl
+     * @var float
      */
     protected $unitPriceExcl;
 
     /**
-     * @var float $unitPriceInc
+     * @var float
      */
     protected $unitPriceInc;
 
     /**
-     * @var float $vatRate
+     * @var float
      */
     protected $vatRate;
 
     /**
-     * @var float $total
+     * @var float
      */
     protected $total;
 
     /**
-     * @var string $designation
+     * @var string
      */
     protected $designation;
 
     /**
-     * @var string $description
+     * @var string
      */
     protected $description;
 
     /**
-     * Set invoiceId
+     * Set invoiceId.
      *
      * @param InvoiceInterface $invoice
      */
@@ -80,9 +81,9 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get invoiceId
+     * Get invoiceId.
      *
-     * @return integer $invoiceId
+     * @return int $invoiceId
      */
     public function getInvoice()
     {
@@ -90,7 +91,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set orderElement
+     * Set orderElement.
      *
      * @param OrderElementInterface $orderElement
      */
@@ -100,7 +101,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get orderElement
+     * Get orderElement.
      *
      * @return OrderElementInterface $orderElement
      */
@@ -164,7 +165,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set total
+     * Set total.
      *
      * @param float $total
      */
@@ -214,9 +215,9 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get total
+     * Get total.
      *
-     * @param boolean $vat
+     * @param bool $vat
      *
      * @return float $total
      */
@@ -226,7 +227,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Returns VAT element amount
+     * Returns VAT element amount.
      *
      * @return float
      */
@@ -236,7 +237,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set designation
+     * Set designation.
      *
      * @param string $designation
      */
@@ -246,7 +247,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get designation
+     * Get designation.
      *
      * @return string $designation
      */
@@ -256,7 +257,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * string $description
      */
@@ -266,7 +267,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string $description
      */

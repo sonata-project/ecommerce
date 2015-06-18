@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Product;
+namespace Sonata\tests\Component\Product;
 
 use Sonata\Component\Product\ProductFinder;
 
 /**
- * Class ProductFinderTest
+ * Class ProductFinderTest.
  *
- * @package Sonata\Tests\Component\Product
  *
  * @author Hugo Briand <briand@ekino.com>
  */

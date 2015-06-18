@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,19 +11,19 @@
 
 namespace Sonata\Component\Payment\Ogone;
 
-use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Payment\TransactionInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\BasePayment;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Product\ProductInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Implements payment through Ogone's service
+ * Implements payment through Ogone's service.
  *
  * @author hbriand <hugo.briand@fullsix.net>
  */
@@ -39,12 +40,12 @@ class OgonePayment extends BasePayment
     protected $templating;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param RouterInterface $router
      * @param LoggerInterface $logger
      * @param EngineInterface $templating
-     * @param boolean         $debug
+     * @param bool            $debug
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, $debug)
     {
@@ -77,20 +78,20 @@ class OgonePayment extends BasePayment
     public function isRequestValid(TransactionInterface $transaction)
     {
         $params = array(
-                'orderID' => $transaction->get('orderID'),
-                'currency' => $transaction->get('currency'),
-                'amount' => $transaction->get('amount'),
-                'PM' => $transaction->get('PM'),
+                'orderID'    => $transaction->get('orderID'),
+                'currency'   => $transaction->get('currency'),
+                'amount'     => $transaction->get('amount'),
+                'PM'         => $transaction->get('PM'),
                 'ACCEPTANCE' => $transaction->get('ACCEPTANCE'),
-                'STATUS' => $transaction->get('STATUS'),
-                'CARDNO' => $transaction->get('CARDNO'),
-                'ED' => $transaction->get('ED'),
-                'CN' => $transaction->get('CN'),
-                'TRXDATE' => $transaction->get('TRXDATE'),
-                'PAYID' => $transaction->get('PAYID'),
-                'NCERROR' => $transaction->get('NCERROR'),
-                'BRAND' => $transaction->get('BRAND'),
-                'IP' => $transaction->get('IP'),
+                'STATUS'     => $transaction->get('STATUS'),
+                'CARDNO'     => $transaction->get('CARDNO'),
+                'ED'         => $transaction->get('ED'),
+                'CN'         => $transaction->get('CN'),
+                'TRXDATE'    => $transaction->get('TRXDATE'),
+                'PAYID'      => $transaction->get('PAYID'),
+                'NCERROR'    => $transaction->get('NCERROR'),
+                'BRAND'      => $transaction->get('BRAND'),
+                'IP'         => $transaction->get('IP'),
         );
 
         $sha1 = $this->getShaSign($params, true);
@@ -124,7 +125,7 @@ class OgonePayment extends BasePayment
         $transaction->setState(TransactionInterface::STATE_OK);
         $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
-        $transaction->getOrder()->setValidatedAt(new \DateTime);
+        $transaction->getOrder()->setValidatedAt(new \DateTime());
         $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
         $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
 
@@ -181,8 +182,7 @@ class OgonePayment extends BasePayment
     }
 
     /**
-     * @param  TransactionInterface $transaction
-     * @return void
+     * @param TransactionInterface $transaction
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {
@@ -190,11 +190,12 @@ class OgonePayment extends BasePayment
     }
 
     /**
-     * Tells if $order matches $params
+     * Tells if $order matches $params.
      *
-     * @param  OrderInterface $order
-     * @param  array          $params
-     * @return boolean
+     * @param OrderInterface $order
+     * @param array          $params
+     *
+     * @return bool
      */
     protected function compareOrderToParams(OrderInterface $order, array $params)
     {
@@ -204,10 +205,11 @@ class OgonePayment extends BasePayment
     }
 
     /**
-     * Signs the payment transaction
+     * Signs the payment transaction.
      *
-     * @param  array  $params
-     * @param  bool   $out    Should we use the out sha key?
+     * @param array $params
+     * @param bool  $out    Should we use the out sha key?
+     *
      * @return string
      */
     protected function getShaSign(array $params, $out = false)
@@ -216,10 +218,10 @@ class OgonePayment extends BasePayment
 
         $shaKey = $this->getOption('sha'.($out ? '-out' : '').'_key');
 
-        $shasignStr = "";
+        $shasignStr = '';
         foreach ($params as $key => $param) {
-            if (null !== $param && "" !== $param) {
-                $shasignStr .= strtoupper($key)."=".$param.$shaKey;
+            if (null !== $param && '' !== $param) {
+                $shasignStr .= strtoupper($key).'='.$param.$shaKey;
             }
         }
 
@@ -227,9 +229,10 @@ class OgonePayment extends BasePayment
     }
 
     /**
-     * Returns form parameters for sendbank
+     * Returns form parameters for sendbank.
      *
-     * @param  OrderInterface $order
+     * @param OrderInterface $order
+     *
      * @return array
      */
     protected function getFormParameters(OrderInterface $order)
@@ -237,7 +240,7 @@ class OgonePayment extends BasePayment
         return array(
             'PSPID'         => $this->getOption('pspid'),
             'orderId'       => $order->getReference(),
-            'amount'        => $order->getTotalInc()*100,
+            'amount'        => $order->getTotalInc() * 100,
             'currency'      => $order->getCurrency()->getLabel(),
             'language'      => $order->getLocale(),
             'CN'            => $order->getBillingName(),
@@ -250,14 +253,14 @@ class OgonePayment extends BasePayment
             'homeurl'       => $this->getOption('home_url'),
             'catalogurl'    => $this->getOption('catalog_url'),
 
-            'COMPLUS'       => "",
-            'PARAMPLUS'     => "bank=".$this->getCode(),
-            'PARAMVAR'      => "",
+            'COMPLUS'       => '',
+            'PARAMPLUS'     => 'bank='.$this->getCode(),
+            'PARAMVAR'      => '',
 
-            'PM'            => "CreditCard",
-            'WIN3DS'        => "MAINW",
-            'PMLIST'        => "VISA;MasterCard;CB",
-            "PMListType"    => 2,
+            'PM'            => 'CreditCard',
+            'WIN3DS'        => 'MAINW',
+            'PMLIST'        => 'VISA;MasterCard;CB',
+            'PMListType'    => 2,
 
             'accepturl'     => $this->generateAbsoluteUrlFromOption('url_callback', $order),
             'declineurl'    => $this->generateAbsoluteUrlFromOption('url_callback', $order),
@@ -269,7 +272,7 @@ class OgonePayment extends BasePayment
     }
 
     /**
-     * Generates absolute URL for route specified in $optionKey and $order
+     * Generates absolute URL for route specified in $optionKey and $order.
      *
      * @param string         $optionKey
      * @param OrderInterface $order
@@ -281,42 +284,43 @@ class OgonePayment extends BasePayment
             array(
                 'bank'      => $this->getCode(),
                 'reference' => $order->getReference(),
-                'check'     => $this->generateUrlCheck($order)
+                'check'     => $this->generateUrlCheck($order),
             ),
             true
         );
     }
 
     /**
-     * Gets formatted address lines from $order
+     * Gets formatted address lines from $order.
      *
-     * @param  OrderInterface $order
+     * @param OrderInterface $order
+     *
      * @return string
      */
     protected function getAddress(OrderInterface $order)
     {
         $ret = $order->getBillingAddress1();
         if (null !== $order->getBillingAddress2()) {
-            $ret .= " ".$order->getBillingAddress2();
+            $ret .= ' '.$order->getBillingAddress2();
         }
         if (null !== $order->getBillingAddress3()) {
-            $ret .= " ".$order->getBillingAddress3();
+            $ret .= ' '.$order->getBillingAddress3();
         }
 
         return $ret;
     }
 
     /**
-     * Gets operation from options
+     * Gets operation from options.
      *
      * @return string
      */
     protected function getOperation()
     {
         if ($this->getOption('differed', false)) {
-            return "RES";
+            return 'RES';
         }
 
-        return "SAL";
+        return 'SAL';
     }
 }

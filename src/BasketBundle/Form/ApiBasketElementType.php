@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,20 +9,15 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\BasketBundle\Form;
 
-use Metadata\MetadataFactoryInterface;
-
 use Sonata\Component\Form\Transformer\SerializeDataTransformer;
-
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class ApiBasketElementType
+ * Class ApiBasketElementType.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -33,7 +29,7 @@ class ApiBasketElementType extends AbstractType
     protected $class;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $class An entity data class
      */

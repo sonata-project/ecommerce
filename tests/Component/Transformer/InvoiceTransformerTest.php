@@ -1,9 +1,8 @@
 <?php
 
-use Sonata\Component\Transformer\InvoiceTransformer;
 use Sonata\Component\Currency\Currency;
-
 use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Transformer\InvoiceTransformer;
 
 /*
  * This file is part of the Sonata package.

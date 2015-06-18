@@ -2,83 +2,83 @@
 
 namespace Sonata\OrderBundle\Entity;
 
-use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 
 /**
- * Sonata\OrderBundle\Entity\BaseOrderElement
+ * Sonata\OrderBundle\Entity\BaseOrderElement.
  */
 abstract class BaseOrderElement implements OrderElementInterface
 {
     /**
-     * @var integer $order
+     * @var int
      */
     protected $order;
 
     /**
-     * @var integer $quantity
+     * @var int
      */
     protected $quantity;
 
     /**
-     * @var float $price
+     * @var float
      */
     protected $price;
 
     /**
-     * @var float $unitPriceExcl
+     * @var float
      */
     protected $unitPriceExcl;
 
     /**
-     * @var float $unitPriceInc
+     * @var float
      */
     protected $unitPriceInc;
 
     /**
-     * @var float $vatRate
+     * @var float
      */
     protected $vatRate;
 
     /**
-     * @var string $designation
+     * @var string
      */
     protected $designation;
 
     /**
-     * @var string $description
+     * @var string
      */
     protected $description;
 
     /**
-     * @var array $options
+     * @var array
      */
     protected $options;
 
     /**
-     * @var array $options
+     * @var array
      */
     protected $rawProduct;
 
     /**
-     * @var integer $productId
+     * @var int
      */
     protected $productId;
 
     /**
-     * @var integer $status
+     * @var int
      */
     protected $status;
 
     /**
-     * @var integer $delivery_status
+     * @var int
      */
     protected $deliveryStatus;
 
     /**
-     * @var \DateTime $validated_at
+     * @var \DateTime
      */
     protected $validatedAt;
 
@@ -88,7 +88,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     protected $product;
 
     /**
-     * @var string $product_type
+     * @var string
      */
     protected $productType;
 
@@ -104,17 +104,17 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     public function prePersist()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**
-     * Set order
+     * Set order.
      *
      * @param OrderInterface $order
      */
@@ -124,7 +124,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get order
+     * Get order.
      *
      * @return Order $order
      */
@@ -188,7 +188,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Returns VAT element amount
+     * Returns VAT element amount.
      *
      * @return float
      */
@@ -198,7 +198,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set designation
+     * Set designation.
      *
      * @param string $designation
      */
@@ -208,7 +208,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get designation
+     * Get designation.
      *
      * @return string $designation
      */
@@ -218,7 +218,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      */
@@ -228,7 +228,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string $description
      */
@@ -238,9 +238,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set productId
+     * Set productId.
      *
-     * @param integer $productId
+     * @param int $productId
      */
     public function setProductId($productId)
     {
@@ -248,9 +248,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get productId
+     * Get productId.
      *
-     * @return integer $productId
+     * @return int $productId
      */
     public function getProductId()
     {
@@ -258,22 +258,22 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param integer $status
+     * @param int $status
      */
     public function setStatus($status)
     {
         $this->status = $status;
         if ($this->getStatus() == OrderInterface::STATUS_VALIDATED) {
-            $this->setValidatedAt(new \DateTime);
+            $this->setValidatedAt(new \DateTime());
         }
     }
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return integer $status
+     * @return int $status
      */
     public function getStatus()
     {
@@ -281,10 +281,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
+     * return true if the order is validated.
      *
-     * return true if the order is validated
-     *
-     * @return boolean
+     * @return bool
      */
     public function isValidated()
     {
@@ -292,7 +291,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @return boolean true if cancelled, else false
+     * @return bool true if cancelled, else false
      */
     public function isCancelled()
     {
@@ -300,7 +299,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @return boolean true if pending, else false
+     * @return bool true if pending, else false
      */
     public function isPending()
     {
@@ -308,9 +307,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Return true if the order is open
+     * Return true if the order is open.
      *
-     * @return boolean
+     * @return bool
      */
     public function isOpen()
     {
@@ -326,9 +325,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Return true if the order has an error
+     * Return true if the order has an error.
      *
-     * @return boolean
+     * @return bool
      */
     public function isError()
     {
@@ -336,9 +335,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set delivery_status
+     * Set delivery_status.
      *
-     * @param integer $deliveryStatus
+     * @param int $deliveryStatus
      */
     public function setDeliveryStatus($deliveryStatus)
     {
@@ -346,9 +345,9 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get delivery_status
+     * Get delivery_status.
      *
-     * @return integer $deliveryStatus
+     * @return int $deliveryStatus
      */
     public function getDeliveryStatus()
     {
@@ -356,7 +355,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set validated_at
+     * Set validated_at.
      *
      * @param \DateTime $validatedAt
      */
@@ -366,7 +365,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get validated_at
+     * Get validated_at.
      *
      * @return \DateTime $validatedAt
      */
@@ -376,7 +375,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Add product
+     * Add product.
      *
      * @param ProductInterface $product
      */
@@ -386,7 +385,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get product
+     * Get product.
      *
      * @return ProductInterface $product
      */
@@ -396,7 +395,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set product_type
+     * Set product_type.
      *
      * @param string $productType
      */
@@ -406,7 +405,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get product_type
+     * Get product_type.
      *
      * @return string $productType
      */
@@ -546,6 +545,7 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getStatusList()
@@ -565,6 +565,7 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getDeliveryStatusList()
@@ -573,7 +574,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Sets unit price excluding VAT
+     * Sets unit price excluding VAT.
      *
      * @param float $unitPriceExcl
      */
@@ -583,7 +584,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Returns unit price including VAT
+     * Returns unit price including VAT.
      *
      * @return float
      */
@@ -593,7 +594,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Sets unit price including VAT
+     * Sets unit price including VAT.
      *
      * @param float $unitPriceInc
      */
@@ -603,7 +604,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Returns unit price including VAT
+     * Returns unit price including VAT.
      *
      * @return float
      */
@@ -621,11 +622,11 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Return the total (price * quantity)
+     * Return the total (price * quantity).
      *
      * if $vat = true, return the price with vat
      *
-     * @param boolean $vat
+     * @param bool $vat
      *
      * @return float
      */
@@ -635,7 +636,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Returns the total with vat due to limitation of AdminBundle
+     * Returns the total with vat due to limitation of AdminBundle.
      *
      * @return float
      */

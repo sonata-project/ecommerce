@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,10 +12,8 @@
 namespace Sonata\Test\Component\Generator;
 
 use Doctrine\ORM\EntityManager as BaseEntityManager;
-
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sonata\Component\Generator\MysqlReference;
-
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
@@ -39,7 +38,7 @@ class InvoiceMock extends BaseInvoice
     }
 
     /**
-     * Returns id
+     * Returns id.
      *
      * @return int $id
      */
@@ -47,7 +46,6 @@ class InvoiceMock extends BaseInvoice
     {
         return $this->id;
     }
-
 }
 
 class OrderMock extends BaseOrder
@@ -60,19 +58,17 @@ class OrderMock extends BaseOrder
     }
 
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
         return $this->id;
     }
-
 }
 
 /**
- * Class MysqlReferenceTest
+ * Class MysqlReferenceTest.
  *
- * @package Sonata\Test\Component\Generator
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
@@ -142,7 +138,6 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
         $registry->expects($this->any())->method('getManager')->will($this->returnValue($em));
         $registry->expects($this->any())->method('getConnection')->will($this->returnValue($connection));
-
 
         return new MysqlReference($registry);
     }

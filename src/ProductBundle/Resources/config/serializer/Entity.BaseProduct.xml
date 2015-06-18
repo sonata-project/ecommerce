@@ -14,11 +14,11 @@
         <property name="descriptionFormatter"      type="string" expose="true" since-version="1.0" groups="sonata_api_write" />
         <property name="rawShortDescription"       type="string" expose="true" since-version="1.0" groups="sonata_api_write" />
         <property name="shortDescriptionFormatter" type="string" expose="true" since-version="1.0" groups="sonata_api_write" />
-        
+
         <property name="priceIncludingVat" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="price"             type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="vatRate"           type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        
+
         <property name="stock" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 
         <property name="parent"  serialized-name="parent_id"  type="sonata_product_product_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />

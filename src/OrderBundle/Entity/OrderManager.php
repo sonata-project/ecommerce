@@ -8,13 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
-use Sonata\UserBundle\Model\UserInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\UserBundle\Model\UserInterface;
 
 class OrderManager extends BaseEntityManager implements OrderManagerInterface
 {

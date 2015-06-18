@@ -11,8 +11,8 @@
 
 namespace Sonata\PaymentBundle\Entity;
 
-use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Payment\TransactionInterface;
 
 /**
  * The Transaction class represents a callback request from the bank.
@@ -23,7 +23,6 @@ use Sonata\Component\Order\OrderInterface;
  *   - the state            : the current state of the transaction, only OK or KO
  *   - the status           : the current status of the transaction
  *   - the error code       : the current error code of the transaction from the payment handler
- *
  */
 class BaseTransaction implements TransactionInterface
 {
@@ -69,15 +68,14 @@ class BaseTransaction implements TransactionInterface
 
     public function __construct()
     {
-        $this->createdAt     = new \DateTime;
+        $this->createdAt     = new \DateTime();
         $this->transactionId = 'n/a';
         $this->information   = 'Transaction created';
         $this->setStatusCode(self::STATUS_OPEN);
     }
 
     /**
-     * @param  \Sonata\Component\Order\OrderInterface $order
-     * @return void
+     * @param \Sonata\Component\Order\OrderInterface $order
      */
     public function setOrder(OrderInterface $order)
     {
@@ -95,8 +93,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param  int  $state
-     * @return void
+     * @param int $state
      */
     public function setState($state)
     {
@@ -104,7 +101,7 @@ class BaseTransaction implements TransactionInterface
 
         if ($state == self::STATE_OK) {
             $this->addInformation('The transaction state is `OK`');
-        } elseif ($state ==self::STATE_OK) {
+        } elseif ($state == self::STATE_OK) {
             $this->addInformation('The transaction state is `KO`');
         } else {
             $this->addInformation('The transaction state is `UNKNOWN`');
@@ -120,8 +117,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param  string $transactionId
-     * @return void
+     * @param string $transactionId
      */
     public function setTransactionId($transactionId)
     {
@@ -146,8 +142,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param  array $parameters
-     * @return void
+     * @param array $parameters
      */
     public function setParameters(array $parameters)
     {
@@ -164,8 +159,7 @@ class BaseTransaction implements TransactionInterface
 
     /**
      * @param $name
-     * @param  null $default
-     * @return null
+     * @param null $default
      */
     public function get($name, $default = null)
     {
@@ -174,7 +168,6 @@ class BaseTransaction implements TransactionInterface
 
     /**
      * @param $statusCode
-     * @return void
      */
     public function setStatusCode($statusCode)
     {
@@ -206,7 +199,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * return status list
+     * return status list.
      *
      * @return array
      */
@@ -235,8 +228,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param  \DateTime|null $createdAt
-     * @return void
+     * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
@@ -252,13 +244,11 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param  int  $paymentCode
-     * @return void
+     * @param int $paymentCode
      */
     public function setPaymentCode($paymentCode)
     {
         $this->paymentCode = $paymentCode;
-
     }
 
     /**
@@ -294,7 +284,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * Cleans up $toDecode keys & values
+     * Cleans up $toDecode keys & values.
      *
      * @param array $toDecode
      *
@@ -305,7 +295,7 @@ class BaseTransaction implements TransactionInterface
         $decodedParams = array();
         foreach ($toDecode as $key => $value) {
             $decodedValue = is_array($value) ? $this->cleanupEncoding($value) : (mb_check_encoding($value, 'UTF-8') ? $value : utf8_encode($value));
-            $decodedParams[mb_check_encoding($key, 'UTF-8') ? $key: utf8_encode($key)] = $decodedValue;
+            $decodedParams[mb_check_encoding($key, 'UTF-8') ? $key : utf8_encode($key)] = $decodedValue;
         }
 
         return $decodedParams;

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -16,7 +17,7 @@ use Sonata\CoreBundle\Model\PageableManagerInterface;
 interface AddressManagerInterface extends ManagerInterface, PageableManagerInterface
 {
     /**
-     * Sets $address the current customer address
+     * Sets $address the current customer address.
      *
      * @param AddressInterface $address
      */

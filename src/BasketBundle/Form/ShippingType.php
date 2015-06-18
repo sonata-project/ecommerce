@@ -11,12 +11,12 @@
 
 namespace Sonata\BasketBundle\Form;
 
-use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
-use Sonata\Component\Delivery\UndeliverableCountryException;
-use Symfony\Component\Form\AbstractType;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
+use Sonata\Component\Delivery\UndeliverableCountryException;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -33,7 +33,7 @@ class ShippingType extends AbstractType
     protected $deliverySelector;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param DeliveryPool                     $deliveryPool
      * @param ServiceDeliverySelectorInterface $deliverySelector
@@ -72,7 +72,7 @@ class ShippingType extends AbstractType
         $basket->setDeliveryMethod($method ?: null);
 
         $sub = $builder->create('deliveryMethod', 'choice', array(
-            'expanded'  => true,
+            'expanded'      => true,
             'choice_list'   => new SimpleChoiceList($choices),
         ));
 

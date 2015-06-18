@@ -102,6 +102,4 @@ class InvoiceAdmin extends Admin
             ->add('status', null, array(), 'sonata_invoice_status', array('translation_domain' => $this->translationDomain))
         ;
     }
-
-
 }

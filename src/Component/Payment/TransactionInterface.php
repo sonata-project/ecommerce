@@ -22,7 +22,6 @@ use Sonata\Component\Order\OrderInterface;
  *   - the state            : the current state of the transaction, only OK or KO
  *   - the status           : the current status of the transaction
  *   - the error code       : the current error code of the transaction from the payment handler
- *
  */
 interface TransactionInterface
 {
@@ -51,35 +50,31 @@ interface TransactionInterface
     public function getOrder();
 
     /**
-     * @param integer $state
+     * @param int $state
      */
     public function setState($state);
 
     /**
-     *
-     * @return integer
+     * @return int
      */
     public function getState();
 
     /**
-     * @param integer $transactionId
+     * @param int $transactionId
      */
     public function setTransactionId($transactionId);
 
     /**
-     *
-     * @return integer
+     * @return int
      */
     public function getTransactionId();
 
     /**
-     *
-     * @return boolean
+     * @return bool
      */
     public function isValid();
 
     /**
-     *
      * @param array $parameters
      */
     public function setParameters(array $parameters);
@@ -90,7 +85,6 @@ interface TransactionInterface
     public function getParameters();
 
     /**
-     *
      * @param string $name
      * @param mixed  $default
      *
@@ -99,18 +93,17 @@ interface TransactionInterface
     public function get($name, $default = null);
 
     /**
-     *
-     * @param integer $statusCode
+     * @param int $statusCode
      */
     public function setStatusCode($statusCode);
 
     /**
-     * return integer
+     * return integer.
      */
     public function getStatusCode();
 
     /**
-     * return status list
+     * return status list.
      *
      * @return array
      */
@@ -118,8 +111,6 @@ interface TransactionInterface
 
     /**
      * @param \DateTime|null $createdAt
-     *
-     * @return void
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 

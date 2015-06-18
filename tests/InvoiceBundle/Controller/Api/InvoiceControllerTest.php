@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\InvoiceBundle\Controller\Api;
 
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
 
-
 /**
- * Class InvoiceControllerTest
+ * Class InvoiceControllerTest.
  *
- * @package Sonata\Test\InvoiceBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */

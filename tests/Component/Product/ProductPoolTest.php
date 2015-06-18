@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Product;
+namespace Sonata\tests\Component\Product;
 
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
@@ -37,7 +37,7 @@ class ProductPoolTest extends \PHPUnit_Framework_TestCase
         $definition1 = new ProductDefinition($productProvider, $productManager1);
         $definition2 = new ProductDefinition($productProvider, $productManager2);
 
-        $productPool = new Pool;
+        $productPool = new Pool();
         $productPool->addProduct('product1', $definition1);
         $productPool->addProduct('product2', $definition2);
 

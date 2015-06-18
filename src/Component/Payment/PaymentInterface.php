@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,9 +11,8 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Transformer\BaseTransformer;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,9 +31,10 @@ interface PaymentInterface
 
     /**
      * Send information to the bank, this method should handle
-     * everything when called
+     * everything when called.
      *
-     * @param  \Sonata\Component\Order\OrderInterface     $order
+     * @param \Sonata\Component\Order\OrderInterface $order
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function sendbank(OrderInterface $order);
@@ -46,14 +47,14 @@ interface PaymentInterface
     public function callback(TransactionInterface $transaction);
 
     /**
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
-     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return boolean                                        true if callback ok else false
+     * @return bool true if callback ok else false
      */
     public function isCallbackValid(TransactionInterface $transaction);
 
     /**
-     * Method called when an error occurs
+     * Method called when an error occurs.
      *
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
@@ -62,35 +63,36 @@ interface PaymentInterface
     public function handleError(TransactionInterface $transaction);
 
     /**
-     * Send post back confirmation to the bank when the bank callback the site
+     * Send post back confirmation to the bank when the bank callback the site.
      *
-     * @param  \Sonata\Component\Payment\TransactionInterface $transaction
-     * @return \Symfony\Component\HttpFoundation\Response,    false otherwise
+     * @param \Sonata\Component\Payment\TransactionInterface $transaction
+     *
+     * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
     public function sendConfirmationReceipt(TransactionInterface $transaction);
 
     /**
-     * Test if the request variables are valid for the current request
+     * Test if the request variables are valid for the current request.
      *
      * WARNING : this methods does not check if the callback is valid
      *
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
-     * @return boolean true if all parameter are ok
+     * @return bool true if all parameter are ok
      */
     public function isRequestValid(TransactionInterface $transaction);
 
     /**
-     * return true is the basket is valid for the current bank gateway
+     * return true is the basket is valid for the current bank gateway.
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      *
-     * @return boolean
+     * @return bool
      */
     public function isBasketValid(BasketInterface $basket);
 
     /**
-     * return true if the product can be added to the basket
+     * return true if the product can be added to the basket.
      *
      * @param \Sonata\Component\Basket\BasketInterface   $basket
      * @param \Sonata\Component\Product\ProductInterface $product
@@ -98,22 +100,23 @@ interface PaymentInterface
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product);
 
     /**
-     * return the transaction id from the bank
+     * return the transaction id from the bank.
      *
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      */
     public function applyTransactionId(TransactionInterface $transaction);
 
     /**
-     * encode value for the bank
+     * encode value for the bank.
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return string the encoded value
      */
     public function encodeString($value);
 
     /**
-     * return the order reference from the transaction
+     * return the order reference from the transaction.
      *
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
@@ -122,7 +125,7 @@ interface PaymentInterface
     public function getOrderReference(TransactionInterface $transaction);
 
     /**
-     * Gets the transformer for $name
+     * Gets the transformer for $name.
      *
      * @param $name
      *
