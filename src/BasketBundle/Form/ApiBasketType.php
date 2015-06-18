@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,21 +9,15 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\BasketBundle\Form;
 
-use Metadata\MetadataFactoryInterface;
-
 use Sonata\Component\Currency\CurrencyFormType;
-use Sonata\Component\Form\Transformer\SerializeDataTransformer;
-
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class ApiBasketType
+ * Class ApiBasketType.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -39,10 +34,10 @@ class ApiBasketType extends AbstractType
     protected $currencyFormType;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string                $class           An entity data class
-     * @param CurrencyFormType      $currencyFormType A Sonata ecommerce currency form type
+     * @param string           $class            An entity data class
+     * @param CurrencyFormType $currencyFormType A Sonata ecommerce currency form type
      */
     public function __construct($class, CurrencyFormType $currencyFormType)
     {
@@ -66,8 +61,8 @@ class ApiBasketType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => $this->class,
-            'csrf_protection' => false,
+            'data_class'        => $this->class,
+            'csrf_protection'   => false,
             'validation_groups' => array('api'),
         ));
     }

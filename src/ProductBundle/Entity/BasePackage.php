@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,7 +15,7 @@ use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * Sonata\ProductBundle\Entity\BasePackage
+ * Sonata\ProductBundle\Entity\BasePackage.
  */
 abstract class BasePackage implements PackageInterface
 {
@@ -24,37 +25,37 @@ abstract class BasePackage implements PackageInterface
     protected $product;
 
     /**
-     * @var float $width
+     * @var float
      */
     protected $width;
 
     /**
-     * @var float $height
+     * @var float
      */
     protected $height;
 
     /**
-     * @var float $length
+     * @var float
      */
     protected $length;
 
     /**
-     * @var float $weight
+     * @var float
      */
     protected $weight;
 
     /**
-     * @var boolean $enabled
+     * @var bool
      */
     protected $enabled;
 
     /**
-     * @var \DateTime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
@@ -75,7 +76,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set width
+     * Set width.
      *
      * @param float $width
      */
@@ -85,7 +86,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get width
+     * Get width.
      *
      * @return float $width
      */
@@ -95,7 +96,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set height
+     * Set height.
      *
      * @param float $height
      */
@@ -105,7 +106,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get height
+     * Get height.
      *
      * @return float $height
      */
@@ -115,7 +116,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set length
+     * Set length.
      *
      * @param float $length
      */
@@ -125,7 +126,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get length
+     * Get length.
      *
      * @return float $length
      */
@@ -135,7 +136,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set weight
+     * Set weight.
      *
      * @param float $weight
      */
@@ -145,7 +146,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get weight
+     * Get weight.
      *
      * @return float $weight
      */
@@ -155,9 +156,9 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {
@@ -165,9 +166,9 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled()
     {
@@ -175,7 +176,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      */
@@ -185,7 +186,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime $updatedAt
      */
@@ -195,7 +196,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      */
@@ -205,7 +206,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime $createdAt
      */

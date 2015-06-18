@@ -11,8 +11,8 @@
 
 namespace Sonata\Component\Order;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Component\Customer\CustomerInterface;
 
 interface OrderInterface
 {
@@ -24,61 +24,61 @@ interface OrderInterface
     const STATUS_STOPPED    = 5; // use if the subscription has been cancelled/stopped
 
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId();
 
     /**
-     * Set reference
+     * Set reference.
      *
      * @param string $reference
      */
     public function setReference($reference);
 
     /**
-     * Get reference
+     * Get reference.
      *
      * @return string $reference
      */
     public function getReference();
 
     /**
-     * Set payment method
+     * Set payment method.
      *
      * @param string $paymentMethod
      */
     public function setPaymentMethod($paymentMethod);
 
     /**
-     * Get payment method
+     * Get payment method.
      *
      * @return string
      */
     public function getPaymentMethod();
 
     /**
-     * Set delivery method
+     * Set delivery method.
      *
      * @param string $deliveryMethod
      */
     public function setDeliveryMethod($deliveryMethod);
 
     /**
-     * Get delivery method
+     * Get delivery method.
      *
      * @return string $deliveryMethod
      */
     public function getDeliveryMethod();
 
     /**
-     * Set currency
+     * Set currency.
      *
      * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency);
 
     /**
-     * Get currency
+     * Get currency.
      *
      * @return CurrencyInterface $currency
      */
@@ -90,440 +90,439 @@ interface OrderInterface
     public function getLocale();
 
     /**
-     * @param  string $locale
-     * @return void
+     * @param string $locale
      */
     public function setLocale($locale);
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param integer $status
+     * @param int $status
      */
     public function setStatus($status);
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return integer $status
+     * @return int $status
      */
     public function getStatus();
 
     /**
-     * Set payment status
+     * Set payment status.
      *
-     * @param integer $paymentStatus
+     * @param int $paymentStatus
      */
     public function setPaymentStatus($paymentStatus);
 
     /**
-     * Get payment status
+     * Get payment status.
      *
-     * @return integer $paymentStatus
+     * @return int $paymentStatus
      */
     public function getPaymentStatus();
 
     /**
-     * Set delivery status
+     * Set delivery status.
      *
-     * @param integer $deliveryStatus
+     * @param int $deliveryStatus
      */
     public function setDeliveryStatus($deliveryStatus);
 
     /**
-     * Get delivery status
+     * Get delivery status.
      *
-     * @return integer $deliveryStatus
+     * @return int $deliveryStatus
      */
     public function getDeliveryStatus();
 
     /**
-     * Set validated at
+     * Set validated at.
      *
      * @param \Datetime $validatedAt
      */
     public function setValidatedAt(\DateTime $validatedAt = null);
 
     /**
-     * Get validated at
+     * Get validated at.
      *
      * @return \Datetime $validatedAt
      */
     public function getValidatedAt();
 
     /**
-     * Set username
+     * Set username.
      *
      * @param string $username
      */
     public function setUsername($username);
 
     /**
-     * Get username
+     * Get username.
      *
      * @return string $username
      */
     public function getUsername();
 
     /**
-     * Set totalInc
+     * Set totalInc.
      *
      * @param float $totalInc
      */
     public function setTotalInc($totalInc);
 
     /**
-     * Get totalInc
+     * Get totalInc.
      *
      * @return float $totalInc
      */
     public function getTotalInc();
 
     /**
-     * Set totalExcl
+     * Set totalExcl.
      *
      * @param float $totalExcl
      */
     public function setTotalExcl($totalExcl);
 
     /**
-     * Get totalExcl
+     * Get totalExcl.
      *
      * @return float $totalExcl
      */
     public function getTotalExcl();
 
     /**
-     * Set delivery cost (VAT included)
+     * Set delivery cost (VAT included).
      *
      * @param float $deliveryCost
      */
     public function setDeliveryCost($deliveryCost);
 
     /**
-     * Get delivery cost
+     * Get delivery cost.
      *
      * @return float $deliveryCost
      */
     public function getDeliveryCost();
 
     /**
-     * Set delivery VAT
+     * Set delivery VAT.
      *
      * @param float $deliveryVat
      */
     public function setDeliveryVat($deliveryVat);
 
     /**
-     * Get delivery VAT
+     * Get delivery VAT.
      *
      * @return float $deliveryVat
      */
     public function getDeliveryVat();
 
     /**
-     * Set billing name
+     * Set billing name.
      *
      * @param string $billingName
      */
     public function setBillingName($billingName);
 
     /**
-     * Get billing name
+     * Get billing name.
      *
      * @return string $billingName
      */
     public function getBillingName();
 
     /**
-     * Set billing phone
+     * Set billing phone.
      *
      * @param string $billingPhone
      */
     public function setBillingPhone($billingPhone);
 
     /**
-     * Get billing phone
+     * Get billing phone.
      *
      * @return string $billingPhone
      */
     public function getBillingPhone();
 
     /**
-     * Set billing address1
+     * Set billing address1.
      *
      * @param string $billingAddress1
      */
     public function setBillingAddress1($billingAddress1);
 
     /**
-     * Get billing address1
+     * Get billing address1.
      *
      * @return string $billingAddress1
      */
     public function getBillingAddress1();
 
     /**
-     * Set billing address2
+     * Set billing address2.
      *
      * @param string $billingAddress2
      */
     public function setBillingAddress2($billingAddress2);
 
     /**
-     * Get billing address2
+     * Get billing address2.
      *
      * @return string $billingAddress2
      */
     public function getBillingAddress2();
 
     /**
-     * Set billing address3
+     * Set billing address3.
      *
      * @param string $billingAddress3
      */
     public function setBillingAddress3($billingAddress3);
 
     /**
-     * Get billing address3
+     * Get billing address3.
      *
      * @return string $billingAddress3
      */
     public function getBillingAddress3();
 
     /**
-     * Set billing city
+     * Set billing city.
      *
      * @param string $billingCity
      */
     public function setBillingCity($billingCity);
 
     /**
-     * Get billing city
+     * Get billing city.
      *
      * @return string $billingCity
      */
     public function getBillingCity();
 
     /**
-     * Set billing postcode
+     * Set billing postcode.
      *
      * @param string $billingPostcode
      */
     public function setBillingPostcode($billingPostcode);
 
     /**
-     * Get billing postcode
+     * Get billing postcode.
      *
      * @return string $billingPostcode
      */
     public function getBillingPostcode();
 
     /**
-     * Set billing country code
+     * Set billing country code.
      *
      * @param string $billingCountryCode
      */
     public function setBillingCountryCode($billingCountryCode);
 
     /**
-     * Get billing country
+     * Get billing country.
      *
      * @return string $billingCountryCode
      */
     public function getBillingCountryCode();
 
     /**
-     * Set billing fax
+     * Set billing fax.
      *
      * @param string $billingFax
      */
     public function setBillingFax($billingFax);
 
     /**
-     * Get billing fax
+     * Get billing fax.
      *
      * @return string $billingFax
      */
     public function getBillingFax();
 
     /**
-     * Set billing email
+     * Set billing email.
      *
      * @param string $billingEmail
      */
     public function setBillingEmail($billingEmail);
 
     /**
-     * Get billing email
+     * Get billing email.
      *
      * @return string $billingEmail
      */
     public function getBillingEmail();
 
     /**
-     * Set billing mobile
+     * Set billing mobile.
      *
      * @param string $billingMobile
      */
     public function setBillingMobile($billingMobile);
 
     /**
-     * Get billing mobile
+     * Get billing mobile.
      *
      * @return string $billingMobile
      */
     public function getBillingMobile();
 
     /**
-     * Set shipping name
+     * Set shipping name.
      *
      * @param string $shippingName
      */
     public function setShippingName($shippingName);
 
     /**
-     * Get shipping name
+     * Get shipping name.
      *
      * @return string $shippingName
      */
     public function getShippingName();
 
     /**
-     * Set shipping phone
+     * Set shipping phone.
      *
      * @param string $shippingPhone
      */
     public function setShippingPhone($shippingPhone);
 
     /**
-     * Get shipping phone
+     * Get shipping phone.
      *
      * @return string $shippingPhone
      */
     public function getShippingPhone();
 
     /**
-     * Set shipping address1
+     * Set shipping address1.
      *
      * @param string $shippingAddress1
      */
     public function setShippingAddress1($shippingAddress1);
 
     /**
-     * Get shipping address1
+     * Get shipping address1.
      *
      * @return string $shippingAddress1
      */
     public function getShippingAddress1();
 
     /**
-     * Set shipping address2
+     * Set shipping address2.
      *
      * @param string $shippingAddress2
      */
     public function setShippingAddress2($shippingAddress2);
 
     /**
-     * Get shipping address2
+     * Get shipping address2.
      *
      * @return string $shippingAddress2
      */
     public function getShippingAddress2();
 
     /**
-     * Set shipping address3
+     * Set shipping address3.
      *
      * @param string $shippingAddress3
      */
     public function setShippingAddress3($shippingAddress3);
 
     /**
-     * Get shipping address3
+     * Get shipping address3.
      *
      * @return string $shippingAddress3
      */
     public function getShippingAddress3();
 
     /**
-     * Set shipping city
+     * Set shipping city.
      *
      * @param string $shippingCity
      */
     public function setShippingCity($shippingCity);
 
     /**
-     * Get shipping city
+     * Get shipping city.
      *
      * @return string $shippingCity
      */
     public function getShippingCity();
 
     /**
-     * Set shipping postcode
+     * Set shipping postcode.
      *
      * @param string $shippingPostcode
      */
     public function setShippingPostcode($shippingPostcode);
 
     /**
-     * Get shipping postcode
+     * Get shipping postcode.
      *
      * @return string $shippingPostcode
      */
     public function getShippingPostcode();
 
     /**
-     * Set shipping country
+     * Set shipping country.
      *
      * @param string $shippingCountryCode
      */
     public function setShippingCountryCode($shippingCountryCode);
 
     /**
-     * Get shipping country
+     * Get shipping country.
      *
      * @return string $shippingCountry
      */
     public function getShippingCountryCode();
 
     /**
-     * Set shipping fax
+     * Set shipping fax.
      *
      * @param string $shippingFax
      */
     public function setShippingFax($shippingFax);
 
     /**
-     * Get shipping fax
+     * Get shipping fax.
      *
      * @return string $shippingFax
      */
     public function getShippingFax();
 
     /**
-     * Set shipping email
+     * Set shipping email.
      *
      * @param string $shippingEmail
      */
     public function setShippingEmail($shippingEmail);
 
     /**
-     * Get shipping email
+     * Get shipping email.
      *
      * @return string $shippingEmail
      */
     public function getShippingEmail();
 
     /**
-     * Set shipping mobile
+     * Set shipping mobile.
      *
      * @param string $shippingMobile
      */
     public function setShippingMobile($shippingMobile);
 
     /**
-     * Get shipping mobile
+     * Get shipping mobile.
      *
      * @return string $shippingMobile
      */
@@ -540,39 +539,38 @@ interface OrderInterface
     public function addOrderElement(OrderElementInterface $orderElement);
 
     /**
+     * return true if the order is validated.
      *
-     * return true if the order is validated
-     *
-     * @return boolean
+     * @return bool
      */
     public function isValidated();
 
     /**
-     * @return boolean true if cancelled, else false
+     * @return bool true if cancelled, else false
      */
     public function isCancelled();
 
     /**
-     * @return boolean true if the order can be cancelled
+     * @return bool true if the order can be cancelled
      */
     public function isCancellable();
 
     /**
-     * @return boolean true if pending, else false
+     * @return bool true if pending, else false
      */
     public function isPending();
 
     /**
-     * Return true if the order is open
+     * Return true if the order is open.
      *
-     * @return boolean
+     * @return bool
      */
     public function isOpen();
 
     /**
-     * Return true if the order has an error
+     * Return true if the order has an error.
      *
-     * @return boolean
+     * @return bool
      */
     public function isError();
 
@@ -597,7 +595,7 @@ interface OrderInterface
     public function getUpdatedAt();
 
     /**
-     * Add order elements
+     * Add order elements.
      *
      * @param OrderElementInterface $orderElements
      */

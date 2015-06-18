@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,18 +9,15 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Event;
 
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-
 /**
- * Class PriceEvent
+ * Class PriceEvent.
  *
- * @package Sonata\Component\Event
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -92,7 +90,7 @@ class BeforeCalculatePriceEvent extends Event
     }
 
     /**
-     * @param boolean $vat
+     * @param bool $vat
      */
     public function setVat($vat)
     {
@@ -100,7 +98,7 @@ class BeforeCalculatePriceEvent extends Event
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getVat()
     {

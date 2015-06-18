@@ -5,7 +5,7 @@ namespace Sonata\Component\Customer;
 interface CustomerSelectorInterface
 {
     /**
-     * Get the customer
+     * Get the customer.
      *
      * @return \Sonata\Component\Customer\CustomerInterface
      */

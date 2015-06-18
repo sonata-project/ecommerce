@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -51,7 +52,7 @@ class DeliveryChoiceType extends AbstractType
         }
 
         $resolver->setDefaults(array(
-            'choices' => $choices
+            'choices' => $choices,
         ));
     }
 }

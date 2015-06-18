@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,8 +11,8 @@
 
 namespace Sonata\PriceBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @codeCoverageIgnore
@@ -41,7 +42,7 @@ CONTENT;
     }
 
     /**
-     * Returns bcscale() setted value
+     * Returns bcscale() setted value.
      *
      * @return int
      */

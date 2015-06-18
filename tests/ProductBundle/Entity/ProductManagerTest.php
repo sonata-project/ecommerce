@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\ProductBundle\Entity;
+namespace Sonata\tests\ProductBundle\Entity;
 
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\ProductBundle\Entity\ProductManager;
 
 /**
- * Class ProductManagerTest
- *
+ * Class ProductManagerTest.
  */
 class ProductManagerTest extends \PHPUnit_Framework_TestCase
 {

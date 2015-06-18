@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,20 +11,20 @@
 
 namespace Sonata\Component\Transformer;
 
-use Sonata\Component\Customer\CustomerInterface;
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Event\BasketTransformEvent;
 use Sonata\Component\Event\OrderTransformEvent;
 use Sonata\Component\Event\TransformerEvents;
-use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool as ProductPool;
-use Sonata\Component\Payment\PaymentInterface;
-use Psr\Log\LoggerInterface;
-use Sonata\Component\Order\OrderElementInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BasketTransformer extends BaseTransformer
@@ -49,10 +50,10 @@ class BasketTransformer extends BaseTransformer
     protected $eventDispatcher;
 
     /**
-     * @param OrderManagerInterface $orderManager
-     * @param ProductPool           $productPool
+     * @param OrderManagerInterface    $orderManager
+     * @param ProductPool              $productPool
      * @param EventDispatcherInterface $eventDispatcher
-     * @param LoggerInterface       $logger
+     * @param LoggerInterface          $logger
      */
     public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
     {
@@ -63,10 +64,12 @@ class BasketTransformer extends BaseTransformer
     }
 
     /**
-     * transform a basket into order
+     * transform a basket into order.
      *
      * @throws \RuntimeException
-     * @param  null|\Sonata\Component\Basket\BasketInterface $basket
+     *
+     * @param null|\Sonata\Component\Basket\BasketInterface $basket
+     *
      * @return null|\Sonata\Component\Order\OrderInterface
      */
     public function transformIntoOrder(BasketInterface $basket)
@@ -138,7 +141,7 @@ class BasketTransformer extends BaseTransformer
             $order->setShippingPostcode($deliveryAddress->getPostcode());
             $order->setShippingCity($deliveryAddress->getCity());
             $order->setShippingCountryCode($deliveryAddress->getCountryCode());
-            $order->setShippingName($deliveryAddress->getFirstname()." ".$deliveryAddress->getLastname());
+            $order->setShippingName($deliveryAddress->getFirstname().' '.$deliveryAddress->getLastname());
             $order->setShippingPhone($deliveryAddress->getPhone());
         }
 
@@ -148,7 +151,7 @@ class BasketTransformer extends BaseTransformer
         $order->setBillingPostcode($billingAddress->getPostcode());
         $order->setBillingCity($billingAddress->getCity());
         $order->setBillingCountryCode($billingAddress->getCountryCode());
-        $order->setBillingName($billingAddress->getFirstname()." ".$billingAddress->getLastname());
+        $order->setBillingName($billingAddress->getFirstname().' '.$billingAddress->getLastname());
         $order->setBillingPhone($billingAddress->getPhone());
 
         $order->setTotalExcl($basket->getTotal());
@@ -159,7 +162,7 @@ class BasketTransformer extends BaseTransformer
         $order->setDeliveryMethod($basket->getDeliveryMethod()->getCode());
         $order->setDeliveryStatus(ServiceDeliveryInterface::STATUS_OPEN);
 
-        $order->setCreatedAt(new \DateTime);
+        $order->setCreatedAt(new \DateTime());
 
         $order->setCurrency($basket->getCurrency());
 

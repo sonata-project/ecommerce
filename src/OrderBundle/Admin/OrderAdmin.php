@@ -11,14 +11,13 @@
 
 namespace Sonata\OrderBundle\Admin;
 
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-
-use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
@@ -168,8 +167,8 @@ class OrderAdmin extends Admin
 
         $filter
             ->add('status', null, array(), 'sonata_order_status', array('translation_domain' => $this->translationDomain))
-            ->add('deliveryStatus', null, array(), 'sonata_product_delivery_status', array('translation_domain' => "SonataDeliveryBundle"))
-            ->add('paymentStatus', null, array(), 'sonata_payment_transaction_status', array('translation_domain' => "SonataPaymentBundle"))
+            ->add('deliveryStatus', null, array(), 'sonata_product_delivery_status', array('translation_domain' => 'SonataDeliveryBundle'))
+            ->add('paymentStatus', null, array(), 'sonata_payment_transaction_status', array('translation_domain' => 'SonataPaymentBundle'))
         ;
     }
 

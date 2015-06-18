@@ -12,10 +12,11 @@ class ProductTwitterMock extends BaseProduct
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
-    public function getId() { }
-
+    public function getId()
+    {
+    }
 }
 
 class TwitterTest extends \PHPUnit_Framework_TestCase

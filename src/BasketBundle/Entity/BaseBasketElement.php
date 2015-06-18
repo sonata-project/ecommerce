@@ -17,12 +17,12 @@ use Sonata\Component\Basket\BasketInterface;
 abstract class BaseBasketElement extends BasketElement
 {
     /**
-     * @var \Sonata\Component\Basket\BasketInterface $basket
+     * @var \Sonata\Component\Basket\BasketInterface
      */
     protected $basket;
 
     /**
-     * Get basket
+     * Get basket.
      *
      * @return \Sonata\Component\Basket\BasketInterface $basket
      */
@@ -32,7 +32,7 @@ abstract class BaseBasketElement extends BasketElement
     }
 
     /**
-     * Set basket
+     * Set basket.
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      */

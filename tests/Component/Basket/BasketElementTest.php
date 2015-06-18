@@ -26,13 +26,12 @@ class ProductProviderTest extends BaseProductProvider
     {
         return 'DumbTestController';
     }
-
 }
 
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Sets up unit test
+     * Sets up unit test.
      */
     public function setUp()
     {
@@ -62,7 +61,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $basketElement->setProductDefinition($productDefinition);
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));

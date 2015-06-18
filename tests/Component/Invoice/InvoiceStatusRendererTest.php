@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Invoice;
+namespace Sonata\tests\Component\Invoice;
 
 use Sonata\Component\Invoice\InvoiceStatusRenderer;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 
 /**
- * Class InvoiceStatusRendererTest
+ * Class InvoiceStatusRendererTest.
  *
- * @package Sonata\Tests\Component\Invoice
  *
  * @author Hugo Briand <briand@ekino.com>
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
@@ -27,7 +27,7 @@ class InvoiceStatusRendererTest extends \PHPUnit_Framework_TestCase
     {
         $renderer = new InvoiceStatusRenderer();
 
-        $invoice = new \DateTime;
+        $invoice = new \DateTime();
         $this->assertFalse($renderer->handlesObject($invoice));
 
         $invoice = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');

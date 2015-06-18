@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -19,8 +20,7 @@ class GlobalVariableCompilerPass implements CompilerPassInterface
     /**
      * You can modify the container here before it is dumped to PHP code.
      *
-     * @param  ContainerBuilder $container
-     * @return void
+     * @param ContainerBuilder $container
      *
      * @api
      */

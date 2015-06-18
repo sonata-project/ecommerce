@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Form\Transformer;
+namespace Sonata\tests\Component\Form\Transformer;
 
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Payment\PassPayment;
 
 /**
- * Class PaymentMethodTransformerTest
+ * Class PaymentMethodTransformerTest.
  *
- * @package Sonata\Tests\Component\Form\Transformer
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -28,16 +28,16 @@ class PaymentMethodTransformerTest extends \PHPUnit_Framework_TestCase
         $transformer = new PaymentMethodTransformer($pool);
 
         $payment = new PassPayment($this->getMock('Symfony\Component\Routing\RouterInterface'));
-        $payment->setCode("paymentCode");
+        $payment->setCode('paymentCode');
 
-        $this->assertEquals("paymentCode", $transformer->transform($payment));
+        $this->assertEquals('paymentCode', $transformer->transform($payment));
         $this->assertNull($transformer->transform(null));
     }
 
     public function testReverseTransform()
     {
         $payment = new PassPayment($this->getMock('Symfony\Component\Routing\RouterInterface'));
-        $payment->setCode("paymentCode");
+        $payment->setCode('paymentCode');
 
         $pool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->disableOriginalConstructor()->getMock();
 
@@ -47,6 +47,6 @@ class PaymentMethodTransformerTest extends \PHPUnit_Framework_TestCase
 
         $transformer = new PaymentMethodTransformer($pool);
 
-        $this->assertEquals($payment, $transformer->reverseTransform("paymentCode"));
+        $this->assertEquals($payment, $transformer->reverseTransform('paymentCode'));
     }
 }

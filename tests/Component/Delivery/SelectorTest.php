@@ -11,8 +11,8 @@
 
 namespace Sonata\Tests\Component\Delivery;
 
-use Sonata\Component\Delivery\Selector;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Delivery\Selector;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\ProductBundle\Entity\BaseProduct;
 
@@ -20,8 +20,8 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 {
     public function testEmptyBasket()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods());
@@ -29,8 +29,8 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistentProduct()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
 
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
 
@@ -44,24 +44,24 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the getAvailableMethods methods with no basket nor address provided
+     * Test the getAvailableMethods methods with no basket nor address provided.
      */
     public function testGetAvailableMethodsWithoutBasket()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods());
     }
 
     /**
-     * Test the getAvailableMethods methods with an empty basket provided
+     * Test the getAvailableMethods methods with an empty basket provided.
      */
     public function testGetAvailableMethodsWithEmptyBasket()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
         $basket  = $this->getMock('Sonata\Component\Basket\Basket');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array()));
 
@@ -70,12 +70,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the getAvailableMethods methods with a product provided but no address and no related delivery methods
+     * Test the getAvailableMethods methods with a product provided but no address and no related delivery methods.
      */
     public function testGetAvailableMethodsWithFilledBasket()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
 
         $basket  = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
@@ -90,12 +90,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Provide a delivery method that require an address but none is provided
+     * Provide a delivery method that require an address but none is provided.
      */
     public function testGetAvailableMethodsWithRequiredAddressDelivery()
     {
         $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
         $basket  = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
@@ -119,12 +119,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Provide a delivery method that require an address but none is provided
+     * Provide a delivery method that require an address but none is provided.
      */
     public function testGetAvailableMethodsWithDisabledDelivery()
     {
         $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
         $basket  = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
@@ -147,12 +147,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Try to fetch a delivery based on an undefined code
+     * Try to fetch a delivery based on an undefined code.
      */
     public function testGetAvailableMethodsWithUndefinedCode()
     {
         $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
         $basket  = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
@@ -172,12 +172,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Try to fetch a delivery not having a handled country
+     * Try to fetch a delivery not having a handled country.
      */
     public function testGetAvailableMethodsWithUncoveredCountry()
     {
         $deliveryPool = $this->getMock('Sonata\Component\Delivery\Pool');
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
         $basket  = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
@@ -205,7 +205,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Provide twice the same delivery code
+     * Provide twice the same delivery code.
      */
     public function testGetAvailableMethodsWithAlreadySelectedCode()
     {
@@ -253,12 +253,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
         $deliveryMethod_high_bis->setEnabled(true);
         $deliveryMethod_high_bis->setPriority(2);
 
-        $deliveryPool = new DeliveryPool;
+        $deliveryPool = new DeliveryPool();
         $deliveryPool->addMethod($deliveryMethod_low);
         $deliveryPool->addMethod($deliveryMethod_high);
         $deliveryPool->addMethod($deliveryMethod_high_bis);
 
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
         $productDelivery_low = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $productDelivery_low->expects($this->any())->method('getCode')->will($this->returnValue('ups_low'));
@@ -291,8 +291,6 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-
-
 class ServiceDelivery extends \Sonata\Component\Delivery\BaseServiceDelivery
 {
     public function isAddressRequired()
@@ -308,11 +306,10 @@ class Product extends BaseProduct
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
         return $this->id;
     }
-
 }

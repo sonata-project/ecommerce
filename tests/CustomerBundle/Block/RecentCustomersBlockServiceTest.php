@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,9 +14,8 @@ namespace Sonata\Test\CustomerBundle\Block;
 use Sonata\CustomerBundle\Block\RecentCustomersBlockService;
 
 /**
- * Class RecentCustomersBlockServiceTest
+ * Class RecentCustomersBlockServiceTest.
  *
- * @package Sonata\Test\CustomerBundle
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */

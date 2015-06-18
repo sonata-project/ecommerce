@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -74,21 +75,21 @@ interface AddressInterface
     public function getCurrent();
 
     /**
-     * Sets if this address is the current
+     * Sets if this address is the current.
      *
-     * @param boolean $current
+     * @param bool $current
      */
     public function setCurrent($current);
 
     /**
-     * Gets address' customer
+     * Gets address' customer.
      *
      * @return CustomerInterface
      */
     public function getCustomer();
 
     /**
-     * Sets address' customer
+     * Sets address' customer.
      *
      * @param CustomerInterface $customer
      */
@@ -100,7 +101,7 @@ interface AddressInterface
     public function getType();
 
     /**
-     * Returns the HTML string representation of the address
+     * Returns the HTML string representation of the address.
      *
      * @return string
      */

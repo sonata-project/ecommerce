@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -71,9 +72,8 @@ class BasketFactory extends BaseBasketFactory
 }
 
 /**
- * Class BaseBasketFactoryTest
+ * Class BaseBasketFactoryTest.
  *
- * @package Sonata\Tests\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */

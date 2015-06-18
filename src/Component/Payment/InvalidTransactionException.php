@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -11,14 +12,14 @@
 namespace Sonata\Component\Payment;
 
 /**
- * Class InvalidTransactionException
+ * Class InvalidTransactionException.
  *
  * @author Hugo Briand <briand@ekino.com>
  */
 class InvalidTransactionException extends \InvalidArgumentException
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string    $orderReference
      * @param int       $code
@@ -26,8 +27,7 @@ class InvalidTransactionException extends \InvalidArgumentException
      */
     public function __construct($orderReference = null, $code = 0, \Exception $previous = null)
     {
-        $message = $orderReference ? sprintf("Invalid check - order ref: %s", $orderReference) : "Unable to find reference";
+        $message = $orderReference ? sprintf('Invalid check - order ref: %s', $orderReference) : 'Unable to find reference';
         parent::__construct($message, $code, $previous);
     }
-
 }

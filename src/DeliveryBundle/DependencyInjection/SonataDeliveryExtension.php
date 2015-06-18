@@ -2,13 +2,12 @@
 
 namespace Sonata\DeliveryBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /*
  * This file is part of the Sonata package.
@@ -27,7 +26,6 @@ use Symfony\Component\Config\Definition\Processor;
  */
 class SonataDeliveryExtension extends Extension
 {
-
     /**
      * Loads the delivery configuration.
      *
@@ -50,9 +48,8 @@ class SonataDeliveryExtension extends Extension
     }
 
     /**
-     * @param  ContainerBuilder $container
-     * @param  array            $config
-     * @return void
+     * @param ContainerBuilder $container
+     * @param array            $config
      */
     public function configureDelivery(ContainerBuilder $container, array $config)
     {

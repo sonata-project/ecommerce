@@ -11,14 +11,12 @@
 
 namespace Sonata\ProductBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- *
- *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class AddProductProviderCompilerPass implements CompilerPassInterface

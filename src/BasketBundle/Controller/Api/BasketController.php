@@ -11,32 +11,26 @@
 
 namespace Sonata\BasketBundle\Controller\Api;
 
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
-
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
-
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
 use Sonata\Component\Basket\BasketBuilderInterface;
-use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketElementInterface;
-use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
-
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class BasketController
- *
- * @package Sonata\BasketBundle\Controller\Api
+ * Class BasketController.
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -68,7 +62,7 @@ class BasketController
     protected $formFactory;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param BasketManagerInterface        $basketManager        A Sonata ecommerce basket manager
      * @param BasketElementManagerInterface $basketElementManager A Sonata ecommerce basket element manager
@@ -130,7 +124,7 @@ class BasketController
     }
 
     /**
-     * Retrieves a specific basket
+     * Retrieves a specific basket.
      *
      * @ApiDoc(
      *  requirements={
@@ -155,7 +149,7 @@ class BasketController
     }
 
     /**
-     * Retrieves a specific basket's elements
+     * Retrieves a specific basket's elements.
      *
      * @ApiDoc(
      *  requirements={
@@ -180,7 +174,7 @@ class BasketController
     }
 
     /**
-     * Adds a basket
+     * Adds a basket.
      *
      * @ApiDoc(
      *  input={"class"="sonata_basket_api_form_basket", "name"="", "groups"={"sonata_api_write"}},
@@ -204,7 +198,7 @@ class BasketController
     }
 
     /**
-     * Updates a basket
+     * Updates a basket.
      *
      * @ApiDoc(
      *  requirements={
@@ -219,7 +213,7 @@ class BasketController
      *  }
      * )
      *
-     * @param integer $id      A Basket identifier
+     * @param int     $id      A Basket identifier
      * @param Request $request A Symfony request
      *
      * @return BasketInterface
@@ -232,7 +226,7 @@ class BasketController
     }
 
     /**
-     * Deletes a basket
+     * Deletes a basket.
      *
      * @ApiDoc(
      *  requirements={
@@ -245,7 +239,7 @@ class BasketController
      *  }
      * )
      *
-     * @param integer $id A Basket identifier
+     * @param int $id A Basket identifier
      *
      * @return \FOS\RestBundle\View\View
      *
@@ -265,10 +259,10 @@ class BasketController
     }
 
     /**
-     * Write a basket, this method is used by both POST and PUT action methods
+     * Write a basket, this method is used by both POST and PUT action methods.
      *
-     * @param Request      $request Symfony request
-     * @param integer|null $id      A basket identifier
+     * @param Request  $request Symfony request
+     * @param int|null $id      A basket identifier
      *
      * @return \FOS\RestBundle\View\View|FormInterface
      */
@@ -277,18 +271,17 @@ class BasketController
         $basket = $id ? $this->getBasket($id) : null;
 
         $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket', $basket, array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
 
         $form->bind($request);
 
         if ($form->isValid()) {
-
             $basket = $form->getData();
             if ($basket->getCustomerId()) {
                 $this->checkExistingCustomerBasket($basket->getCustomerId());
             }
-            $this->basketManager->save($basket);;
+            $this->basketManager->save($basket);
 
             $view = \FOS\RestBundle\View\View::create($basket);
             $serializationContext = SerializationContext::create();
@@ -303,7 +296,7 @@ class BasketController
     }
 
     /**
-     * Adds a basket element to a basket
+     * Adds a basket element to a basket.
      *
      * @ApiDoc(
      *  requirements={
@@ -318,9 +311,9 @@ class BasketController
      *  }
      * )
      *
-     * @param integer $id A basket identifier
+     * @param int     $id      A basket identifier
      * @param Request $request A Symfony request
-
+     *
      * @return BasketInterface
      *
      * @throws NotFoundHttpException
@@ -331,7 +324,7 @@ class BasketController
     }
 
     /**
-     * Updates a basket element of a basket
+     * Updates a basket element of a basket.
      *
      * @ApiDoc(
      *  requirements={
@@ -347,10 +340,10 @@ class BasketController
      *  }
      * )
      *
-     * @param integer $basketId  A basket identifier
-     * @param integer $elementId A basket element identifier
+     * @param int     $basketId  A basket identifier
+     * @param int     $elementId A basket element identifier
      * @param Request $request   A Symfony request
-
+     *
      * @return BasketInterface
      *
      * @throws NotFoundHttpException
@@ -361,7 +354,7 @@ class BasketController
     }
 
     /**
-     * Deletes a basket element from a basket
+     * Deletes a basket element from a basket.
      *
      * @ApiDoc(
      *  requirements={
@@ -375,8 +368,8 @@ class BasketController
      *  }
      * )
      *
-     * @param integer $basketId  A basket identifier
-     * @param integer $elementId A basket element identifier
+     * @param int $basketId  A basket identifier
+     * @param int $elementId A basket element identifier
      *
      * @return \FOS\RestBundle\View\View
      *
@@ -412,11 +405,11 @@ class BasketController
     }
 
     /**
-     * Write a basket element, this method is used by both POST and PUT action methods
+     * Write a basket element, this method is used by both POST and PUT action methods.
      *
-     * @param integer $basketId  A Sonata ecommerce basket identifier
+     * @param int     $basketId  A Sonata ecommerce basket identifier
      * @param Request $request   A Symfony Request service
-     * @param integer $elementId A Sonata ecommerce basket element identifier
+     * @param int     $elementId A Sonata ecommerce basket element identifier
      *
      * @return \FOS\RestBundle\View\View|FormInterface
      */
@@ -437,7 +430,7 @@ class BasketController
         $basketElement->setProductDefinition($productDefinition);
 
         $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket_element', $basketElement, array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
 
         $form->bind($request);
@@ -465,7 +458,7 @@ class BasketController
     }
 
     /**
-     * Retrieves basket with id $id or throws an exception if it doesn't exist
+     * Retrieves basket with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
@@ -485,7 +478,7 @@ class BasketController
     }
 
     /**
-     * Retrieves basket element with id $id or throws an exception if it doesn't exist
+     * Retrieves basket element with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
@@ -504,13 +497,13 @@ class BasketController
         return $basketElement;
     }
 
-   /**
-     * Retrieves product with id $id or throws an exception if it doesn't exist
+    /**
+     * Retrieves product with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return ProductInterface
-    *
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getProduct($id)
@@ -525,7 +518,7 @@ class BasketController
     }
 
     /**
-     * Throws an exception if it already exists a basket with a specific customer id
+     * Throws an exception if it already exists a basket with a specific customer id.
      *
      * @param $customerId
      *

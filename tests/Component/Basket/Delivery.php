@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\Component\Delivery\BaseDelivery;
 
@@ -22,7 +22,7 @@ class Delivery extends BaseDelivery
 
     public function getName()
     {
-        return "delivery 1";
+        return 'delivery 1';
     }
 
     public function getVatRate()
@@ -34,5 +34,4 @@ class Delivery extends BaseDelivery
     {
         return 120;
     }
-
 }

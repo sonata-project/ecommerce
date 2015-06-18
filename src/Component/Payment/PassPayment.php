@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,13 +11,12 @@
 
 namespace Sonata\Component\Payment;
 
-use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Payment\TransactionInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Buzz\Browser;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Product\ProductInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 class PassPayment extends BasePayment
 {
@@ -142,7 +142,7 @@ class PassPayment extends BasePayment
         $params = array(
             'bank'       => $this->getCode(),
             'reference'  => $order->getReference(),
-            'check'      => $this->generateUrlCheck($order)
+            'check'      => $this->generateUrlCheck($order),
         );
 
         // call the callback handler ...
@@ -154,7 +154,7 @@ class PassPayment extends BasePayment
 
         // redirect the user to the correct page
         $response = new Response('', 302, array(
-            'Location' => $this->router->generate($this->getOption($routeName), $params, true),
+            'Location'     => $this->router->generate($this->getOption($routeName), $params, true),
             'Content-Type' => 'text/plain',
         ));
 

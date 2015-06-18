@@ -14,19 +14,19 @@ namespace Sonata\Tests\Component\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
+use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductDefinition;
+use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 use Sonata\ProductBundle\Entity\BasePackage;
+use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Entity\BaseProductCategory;
 use Sonata\ProductBundle\Entity\BaseProductCollection;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Entity\ProductCollectionManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\OrderBundle\Entity\BaseOrderElement;
-use Sonata\Component\Basket\BasketElement;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\Tests\Component\Basket\ProductProviderTest;
 
 class Product extends BaseProduct
@@ -98,12 +98,15 @@ class Collection extends BaseCollection
     }
 }
 
-class Package extends BasePackage { }
-class Delivery extends BaseDelivery { }
+class Package extends BasePackage
+{
+}
+class Delivery extends BaseDelivery
+{
+}
 
 class OrderElement extends BaseOrderElement
 {
-
 }
 
 class BaseProductServiceTest_ProductProvider extends BaseProductProvider
@@ -119,7 +122,6 @@ class BaseProductServiceTest_ProductProvider extends BaseProductProvider
 
 class BaseOrderElementTest_ProductProvider extends BaseOrderElement
 {
-
 }
 
 class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
@@ -458,7 +460,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayProduct()
     {
-        $product = new Product;
+        $product = new Product();
 
         $arrayProduct = array(
             'sku'                       => 'productSku',

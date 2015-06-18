@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,16 +11,16 @@
 
 namespace Sonata\Component\Payment\Scellius;
 
-use Symfony\Component\HttpFoundation\Response;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Payment\TransactionInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Process\Process;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\BasePayment;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Product\ProductInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Routing\RouterInterface;
 
 class ScelliusPayment extends BasePayment
 {
@@ -48,7 +49,7 @@ class ScelliusPayment extends BasePayment
      * @param LoggerInterface                       $logger
      * @param EngineInterface                       $templating
      * @param ScelliusTransactionGeneratorInterface $transactionGenerator
-     * @param boolean                               $debug
+     * @param bool                                  $debug
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, ScelliusTransactionGeneratorInterface $transactionGenerator, $debug)
     {
@@ -62,6 +63,7 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getCurrencyList()
@@ -106,6 +108,7 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getCVVResponseCode()
@@ -125,6 +128,7 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getBankCodeResponses()
@@ -132,7 +136,7 @@ class ScelliusPayment extends BasePayment
         $responses = array();
 
         $responses[] = array(
-            'banks' => array('CB', 'VISA', 'MASTERCARD', 'AMEX'),
+            'banks'    => array('CB', 'VISA', 'MASTERCARD', 'AMEX'),
             'messages' => array(
                 array('00' => 'Transaction approuvée ou traitée avec succès'),
                 array('02' => 'Contacter l\'émetteur de carte'),
@@ -167,22 +171,22 @@ class ScelliusPayment extends BasePayment
                 array('97' => 'Échéance de la temporisation de surveillance globale'),
                 array('98' => 'Serveur indisponible routage réseau demandé à nouveau'),
                 array('99' => 'Incident domaine initiateur'),
-            )
+            ),
         );
 
         $responses[] = array(
-            'banks' => array('AMEX'),
+            'banks'    => array('AMEX'),
             'messages' => array(
                 '00' => 'Transaction approuvée ou traitée avec succès',
                 '02' => 'Dépassement de plafond',
                 '04' => 'Conserver la carte',
                 '05' => 'Ne pas honorer',
                 '97' => 'Échéance de la temporisation de surveillance globale',
-            )
+            ),
         );
 
         $responses[] = array(
-            'banks' => array('FINAREF'),
+            'banks'    => array('FINAREF'),
             'messages' => array(
                 '00' => 'Transaction approuvée',
                 '03' => 'Commerçant inconnu - Identifiant de commerçant incorrect',
@@ -194,7 +198,7 @@ class ScelliusPayment extends BasePayment
                 '81' => 'Transaction approuvée avec augmentation capital',
                 '82' => 'Transaction approuvée NPAI',
                 '83' => 'Compte / porteur invalide',
-            )
+            ),
         );
 
         return $responses;
@@ -202,6 +206,7 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getLanguageCodes()
@@ -217,6 +222,7 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getPaymentMeans()
@@ -266,6 +272,7 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getResponseCode()
@@ -364,7 +371,7 @@ class ScelliusPayment extends BasePayment
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_ERROR_VALIDATION);
 
-            $transaction->getOrder()->setValidatedAt(new \DateTime);
+            $transaction->getOrder()->setValidatedAt(new \DateTime());
             $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
             $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_ERROR_VALIDATION);
 
@@ -374,11 +381,11 @@ class ScelliusPayment extends BasePayment
         $transaction->setState(TransactionInterface::STATE_OK);
         $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
-        $transaction->getOrder()->setValidatedAt(new \DateTime);
+        $transaction->getOrder()->setValidatedAt(new \DateTime());
         $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
         $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
 
-        return new Response;
+        return new Response();
     }
 
     /**
@@ -410,7 +417,7 @@ class ScelliusPayment extends BasePayment
         //  - code = 0  : la fonction retourne les données de la transaction dans les variables v1, v2, ...
         //              : Ces variables sont décrites dans le GUIDE DU PROGRAMMEUR
         //  - code = -1 : La fonction retourne un message d'erreur dans la variable error
-        $data = explode ("!", $process->getOutput());
+        $data = explode('!', $process->getOutput());
 
         if (count($data) != 33) {
             throw new \RuntimeException('Invalid data count');
@@ -474,7 +481,9 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @throws \RuntimeException
+     *
      * @param $currency
+     *
      * @return
      */
     private function getCurrencyCode($currency)
@@ -490,8 +499,10 @@ class ScelliusPayment extends BasePayment
 
     /**
      * @throws \RuntimeException
+     *
      * @param $amount
      * @param $currency
+     *
      * @return string
      */
     private function getAmount($amount, $currency)
@@ -506,7 +517,8 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param  \Sonata\Component\Order\OrderInterface $order
+     * @param \Sonata\Component\Order\OrderInterface $order
+     *
      * @return string
      */
     public function getLanguage(OrderInterface $order)
@@ -530,7 +542,7 @@ class ScelliusPayment extends BasePayment
         $params = array(
             'bank'       => $this->getCode(),
             'reference'  => $order->getReference(),
-            'check'      => $this->generateUrlCheck($order)
+            'check'      => $this->generateUrlCheck($order),
         );
 
         $cmdLineParameters = array(
@@ -570,7 +582,7 @@ class ScelliusPayment extends BasePayment
             'data'                      => $this->getOption('data'),
             'return_context'            => '',
             'target'                    => '',
-            'order_id'                  => $order->getReference()
+            'order_id'                  => $order->getReference(),
         );
 
         // clean parameters
@@ -579,7 +591,7 @@ class ScelliusPayment extends BasePayment
             $cmdLineOptions[] = sprintf('%s=%s', $option, $this->encodeString($value));
         }
 
-        $cmd = sprintf('cd %s && %s %s', $this->getOption('base_folder'), $this->getOption('request_command'), join(' ', $cmdLineOptions));
+        $cmd = sprintf('cd %s && %s %s', $this->getOption('base_folder'), $this->getOption('request_command'), implode(' ', $cmdLineOptions));
 
         $this->logger->debug(sprintf('Running command : %s', $cmd));
 
@@ -593,7 +605,7 @@ class ScelliusPayment extends BasePayment
         //sortie de la fonction : $result=!code!error!buffer!
         //    - code=0  : la fonction génère une page html contenue dans la variable buffer
         //    - code=-1 : La fonction retourne un message d'erreur dans la variable error
-        $data = explode ("!", $process->getOutput());
+        $data = explode('!', $process->getOutput());
 
         if (count($data) != 5) {
             throw new \RuntimeException('Invalid data count');
@@ -602,12 +614,12 @@ class ScelliusPayment extends BasePayment
         if ($data[1] == 0) {
             $scellius = array(
                 'valid'   => true,
-                'content' => $data[3]
+                'content' => $data[3],
             );
         } else {
             $scellius = array(
                 'valid'   => false,
-                'content' => $data[2]
+                'content' => $data[2],
             );
         }
 
@@ -636,8 +648,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param  TransactionInterface $transaction
-     * @return void
+     * @param TransactionInterface $transaction
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {

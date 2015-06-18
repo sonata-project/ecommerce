@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,20 +9,16 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Form\Type;
 
 use Sonata\Component\Product\Pool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-
 /**
- * Class VariationChoiceType
+ * Class VariationChoiceType.
  *
- * @package Sonata\Component\Form\Type
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -70,7 +67,7 @@ class VariationChoiceType extends AbstractType
             'product'         => null,
             'fields'          => null,
             'csrf_protection' => false,
-            'method'          => 'GET'
+            'method'          => 'GET',
         ));
 
         $resolver->setRequired(array('product', 'fields'));

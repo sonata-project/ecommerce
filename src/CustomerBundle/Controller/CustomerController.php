@@ -21,16 +21,15 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CustomerController
+ * Class CustomerController.
  *
- * @package Sonata\CustomerBundle\Controller
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
 class CustomerController extends Controller
 {
     /**
-     * Lists customer's addresses
+     * Lists customer's addresses.
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -71,7 +70,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Adds an address to current customer
+     * Adds an address to current customer.
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -81,7 +80,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Controller action to edit address $id
+     * Controller action to edit address $id.
      *
      * @param $id
      *
@@ -93,7 +92,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Deletes address $id
+     * Deletes address $id.
      *
      * @param $id The address to delete
      *
@@ -117,7 +116,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Sets address $id to current
+     * Sets address $id to current.
      *
      * @param $id
      *
@@ -134,7 +133,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Updates or create an address
+     * Updates or create an address.
      *
      * @param int $id Address id
      *
@@ -152,7 +151,7 @@ class CustomerController extends Controller
             $this->checkAddress($address);
 
             $form = $this->createForm('sonata_customer_address', $address, array(
-                'context' => $this->getRequest()->query->get('context')
+                'context' => $this->getRequest()->query->get('context'),
             ));
         }
 
@@ -183,7 +182,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Checks if $address is valid
+     * Checks if $address is valid.
      *
      * @param AddressInterface $address
      *
@@ -193,7 +192,7 @@ class CustomerController extends Controller
     {
         if (null === $address
             || $address->getCustomer()->getId() !== $this->getCustomer()->getId()) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException();
         }
     }
 

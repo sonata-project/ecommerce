@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Delivery;
+namespace Sonata\tests\Component\Delivery;
 
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Delivery\FreeDelivery;
@@ -21,7 +21,7 @@ class ServiceDeliveryTest extends \PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
-        $pool = new Pool;
+        $pool = new Pool();
 
         $delivery = new FreeDelivery(true);
         $delivery->setCode('free_1');
@@ -45,12 +45,12 @@ class ServiceDeliveryTest extends \PHPUnit_Framework_TestCase
     public function testGetStatusList()
     {
         $statusList = array(
-            ServiceDeliveryInterface::STATUS_OPEN      => 'status_open',
-            ServiceDeliveryInterface::STATUS_PENDING      => 'status_pending',
-            ServiceDeliveryInterface::STATUS_SENT   => 'status_sent',
-            ServiceDeliveryInterface::STATUS_CANCELLED => 'status_cancelled',
+            ServiceDeliveryInterface::STATUS_OPEN          => 'status_open',
+            ServiceDeliveryInterface::STATUS_PENDING       => 'status_pending',
+            ServiceDeliveryInterface::STATUS_SENT          => 'status_sent',
+            ServiceDeliveryInterface::STATUS_CANCELLED     => 'status_cancelled',
             ServiceDeliveryInterface::STATUS_COMPLETED     => 'status_completed',
-            ServiceDeliveryInterface::STATUS_RETURNED   => 'status_returned',
+            ServiceDeliveryInterface::STATUS_RETURNED      => 'status_returned',
         );
         $this->assertEquals($statusList, BaseDelivery::getStatusList());
         $this->assertEquals($statusList, BaseServiceDelivery::getStatusList());
@@ -66,5 +66,4 @@ class ServiceDeliveryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('default', $delivery->getOption('unexisting', 'default'));
         $this->assertNull($delivery->getOption('unexisting'));
     }
-
 }

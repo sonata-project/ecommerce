@@ -13,12 +13,12 @@ namespace Sonata\ProductBundle\Block;
 
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Product\ProductFinderInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\ProductBundle\Repository\BaseProductRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -102,7 +102,7 @@ class SimilarProductsBlockService extends BaseBlockService
                 array('number',          'integer', array('required' => true)),
                 array('title',           'text',    array('required' => false)),
                 array('base_product_id', 'integer', array('required' => false)),
-            )
+            ),
         ));
     }
 
@@ -123,7 +123,7 @@ class SimilarProductsBlockService extends BaseBlockService
             'number'          => 5,
             'title'           => 'Similar products',
             'base_product_id' => null,
-            'template'        => 'SonataProductBundle:Block:similar_products.html.twig'
+            'template'        => 'SonataProductBundle:Block:similar_products.html.twig',
         ));
     }
 

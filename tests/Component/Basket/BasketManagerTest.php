@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,16 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 /**
- * Class BasketManagerTest
+ * Class BasketManagerTest.
  *
- * @package Sonata\Tests\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -140,7 +140,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
                 );
             })
             ->getPager(array(), 1, 10, array(
-                'id' => 'ASC',
+                'id'      => 'ASC',
                 'locale'  => 'DESC',
             ));
     }

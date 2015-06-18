@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -7,10 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\Component\Invoice;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Component\Customer\CustomerInterface;
 
 interface InvoiceInterface
 {
@@ -19,7 +21,7 @@ interface InvoiceInterface
     const STATUS_CONFLICT = 2; // there is a conflict about this invoice
 
     /**
-     * Returns id
+     * Returns id.
      *
      * @return int $id
      */
@@ -36,287 +38,287 @@ interface InvoiceInterface
     public function setCreatedAt(\DateTime $createdAt);
 
     /**
-     * Set payment method
+     * Set payment method.
      *
      * @param string $paymentMethod
      */
     public function setPaymentMethod($paymentMethod);
 
     /**
-     * Get payment method
+     * Get payment method.
      *
      * @return string
      */
     public function getPaymentMethod();
 
     /**
-     * Set reference
+     * Set reference.
      *
      * @param string $reference
      */
     public function setReference($reference);
 
     /**
-     * Get reference
+     * Get reference.
      *
      * @return string $reference
      */
     public function getReference();
 
     /**
-     * Set currency
+     * Set currency.
      *
      * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency);
 
-    /**
-     * Get currency
-     *
-     * @return CurrencyInterface $currency
-     */
+     /**
+      * Get currency.
+      *
+      * @return CurrencyInterface $currency
+      */
      public function getCurrency();
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param integer $status
+     * @param int $status
      */
     public function setStatus($status);
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return integer $status
+     * @return int $status
      */
     public function getStatus();
 
     /**
-     * Set totalInc
+     * Set totalInc.
      *
      * @param float $totalInc
      */
     public function setTotalInc($totalInc);
 
     /**
-     * Get totalInc
+     * Get totalInc.
      *
      * @return float $totalInc
      */
     public function getTotalInc();
 
     /**
-     * Set totalExcl
+     * Set totalExcl.
      *
      * @param float $totalExcl
      */
     public function setTotalExcl($totalExcl);
 
     /**
-     * Get totalExcl
+     * Get totalExcl.
      *
      * @return float $totalExcl
      */
     public function getTotalExcl();
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string $name
      */
     public function getName();
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      */
     public function setPhone($phone);
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string $phone
      */
     public function getPhone();
 
     /**
-     * Set address1
+     * Set address1.
      *
      * @param string $address1
      */
     public function setAddress1($address1);
 
     /**
-     * Get address1
+     * Get address1.
      *
      * @return string $address1
      */
     public function getAddress1();
 
     /**
-     * Set address2
+     * Set address2.
      *
      * @param string $address2
      */
     public function setAddress2($address2);
 
     /**
-     * Get address2
+     * Get address2.
      *
      * @return string $address2
      */
     public function getAddress2();
 
     /**
-     * Set address3
+     * Set address3.
      *
      * @param string $address3
      */
     public function setAddress3($address3);
 
     /**
-     * Get address3
+     * Get address3.
      *
      * @return string $address3
      */
     public function getAddress3();
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      */
     public function setCity($city);
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string $city
      */
     public function getCity();
 
     /**
-     * Set postcode
+     * Set postcode.
      *
      * @param string $postcode
      */
     public function setPostcode($postcode);
 
     /**
-     * Get postcode
+     * Get postcode.
      *
      * @return string $postcode
      */
     public function getPostcode();
 
     /**
-     * Set country
+     * Set country.
      *
      * @param string $country
      */
     public function setCountry($country);
 
     /**
-     * Get country
+     * Get country.
      *
      * @return string $country
      */
     public function getCountry();
 
     /**
-     * Set fax
+     * Set fax.
      *
      * @param string $fax
      */
     public function setFax($fax);
 
     /**
-     * Get fax
+     * Get fax.
      *
      * @return string $fax
      */
     public function getFax();
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      */
     public function setEmail($email);
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string $email
      */
     public function getEmail();
 
     /**
-     * Set mobile
+     * Set mobile.
      *
      * @param string $mobile
      */
     public function setMobile($mobile);
 
     /**
-     * Get mobile
+     * Get mobile.
      *
      * @return string $mobile
      */
     public function getMobile();
 
     /**
-     * Set user
+     * Set user.
      *
      * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer);
 
     /**
-     * Get user
+     * Get user.
      *
      * @return CustomerInterface
      */
     public function getCustomer();
 
     /**
-     * Gets the locale
+     * Gets the locale.
      *
      * @return string
      */
     public function getLocale();
 
     /**
-     * Sets the locale
+     * Sets the locale.
      *
      * @param string $locale
      */
     public function setLocale($locale);
 
     /**
-     * Returns all the invoice elements
+     * Returns all the invoice elements.
      *
      * @return array
      */
     public function getInvoiceElements();
 
     /**
-     * Adds an invoice element to the invoice
+     * Adds an invoice element to the invoice.
      *
      * @param InvoiceElementInterface $element
      */
     public function addInvoiceElement(InvoiceElementInterface $element);
 
     /**
-     * Sets the invoice elements collection
+     * Sets the invoice elements collection.
      *
      * @param array $elements
      */

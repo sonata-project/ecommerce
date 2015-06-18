@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,27 +16,27 @@ use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * Sonata\ProductBundle\Entity\BaseProductCategory
+ * Sonata\ProductBundle\Entity\BaseProductCategory.
  */
 abstract class BaseProductCategory implements ProductCategoryInterface
 {
     /**
-     * @var boolean $enabled
+     * @var bool
      */
     protected $enabled;
 
     /**
-     * @var boolean $main
+     * @var bool
      */
     protected $main;
 
     /**
-     * @var \DateTime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
@@ -51,7 +52,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
 
     public function __toString()
     {
-        return ($this->getProduct() ? $this->getProduct()->getName() : "null")." - ".($this->getCategory() ? $this->getCategory()->getName() : "null");
+        return ($this->getProduct() ? $this->getProduct()->getName() : 'null').' - '.($this->getCategory() ? $this->getCategory()->getName() : 'null');
     }
 
     /**

@@ -11,8 +11,6 @@
 
 namespace Sonata\Component\Currency;
 
-use Sonata\Component\Currency\CurrencyDetectorInterface;
-
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -24,7 +22,7 @@ class CurrencyDetector implements CurrencyDetectorInterface
     protected $currency;
 
     /**
-     * Constructs the currency detector service by finding the default currency
+     * Constructs the currency detector service by finding the default currency.
      *
      * @param string                   $currencyLabel
      * @param CurrencyManagerInterface $currencyManager

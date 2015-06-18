@@ -15,5 +15,4 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 
 class CollectionAdminController extends Controller
 {
-
 }

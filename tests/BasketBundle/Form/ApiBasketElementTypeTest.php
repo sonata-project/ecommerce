@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,7 +14,7 @@ namespace Sonata\BasketBundle\Tests\Form;
 use Sonata\BasketBundle\Form\ApiBasketElementType;
 
 /**
- * Class ApiBasketElementTypeTest
+ * Class ApiBasketElementTypeTest.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */

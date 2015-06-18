@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,16 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\tests\Component\Payment;
 
 use Sonata\Component\Payment\Paypal;
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Component\Order\OrderInterface;
 
 /**
- * Class PaypalTest
+ * Class PaypalTest.
  *
- * @package Sonata\Tests\Component\Payment
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -30,10 +29,10 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
 
         $paypal  = new Paypal($router, $translator);
         $options = array(
-            'cert_file'        => __DIR__ . '/PaypalTestFiles/cert_file',
-            'key_file'         => __DIR__ . '/PaypalTestFiles/key_file',
-            'paypal_cert_file' => __DIR__ . '/PaypalTestFiles/paypal_cert_file',
-            'openssl'          => __DIR__ . '/PaypalTestFiles/openssl',
+            'cert_file'        => __DIR__.'/PaypalTestFiles/cert_file',
+            'key_file'         => __DIR__.'/PaypalTestFiles/key_file',
+            'paypal_cert_file' => __DIR__.'/PaypalTestFiles/paypal_cert_file',
+            'openssl'          => __DIR__.'/PaypalTestFiles/openssl',
         );
         $paypal->setOptions($options);
 
@@ -60,16 +59,16 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $this->assertFalse($paypal->isCallbackValid($transaction), "Paypal::isCallbackValid false because request invalid");
+        $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because request invalid');
 
         $check = sha1(
             $order->getReference().
-            $order->getCreatedAt()->format("m/d/Y:G:i:s").
+            $order->getCreatedAt()->format('m/d/Y:G:i:s').
             $order->getId()
         );
         $transaction->expects($this->any())->method('get')->will($this->returnValue($check));
 
-        $this->assertFalse($paypal->isCallbackValid($transaction), "Paypal::isCallbackValid false because order not validated");
+        $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because order not validated');
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
@@ -77,7 +76,7 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
 
         $check = sha1(
             $order->getReference().
-            $order->getCreatedAt()->format("m/d/Y:G:i:s").
+            $order->getCreatedAt()->format('m/d/Y:G:i:s').
             $order->getId()
         );
 
@@ -85,7 +84,7 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('get')->will($this->returnValue($check));
 
-        $this->assertFalse($paypal->isCallbackValid($transaction), "Paypal::isCallbackValid false because payment_status invalid.");
+        $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because payment_status invalid.');
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
@@ -96,11 +95,11 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
                         case 'check':
                             return $check;
                         case 'payment_status':
-                            return "Pending";
+                            return 'Pending';
                     }
                 }));
 
-        $this->assertTrue($paypal->isCallbackValid($transaction), "Paypal::isCallbackValid true because payment_status pending.");
+        $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status pending.');
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
@@ -111,11 +110,11 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
                         case 'check':
                             return $check;
                         case 'payment_status':
-                            return "Completed";
+                            return 'Completed';
                     }
                 }));
 
-        $this->assertTrue($paypal->isCallbackValid($transaction), "Paypal::isCallbackValid true because payment_status completed.");
+        $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status completed.');
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
@@ -126,11 +125,11 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
                         case 'check':
                             return $check;
                         case 'payment_status':
-                            return "Cancelled";
+                            return 'Cancelled';
                     }
                 }));
 
-        $this->assertTrue($paypal->isCallbackValid($transaction), "Paypal::isCallbackValid true because payment_status cancelled.");
+        $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status cancelled.');
     }
 
     public function testHandleError()

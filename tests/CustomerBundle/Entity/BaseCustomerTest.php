@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -7,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\Tests\CustomerBundle\Entity;
 
@@ -18,15 +18,14 @@ use Sonata\CustomerBundle\Entity\BaseCustomer;
 class CustomerTest extends BaseCustomer
 {
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer $id
+     * @return int $id
      */
     public function getId()
     {
         // TODO: Implement getId() method.
     }
-
 }
 
 class AddressTest extends BaseAddress
@@ -35,13 +34,11 @@ class AddressTest extends BaseAddress
     {
         // TODO: Implement getId() method.
     }
-
 }
 
 /**
- * Class BaseCustomerTest
+ * Class BaseCustomerTest.
  *
- * @package Sonata\Tests\CustomerBundle\Entity
  *
  * @author Hugo Briand <briand@ekino.com>
  */

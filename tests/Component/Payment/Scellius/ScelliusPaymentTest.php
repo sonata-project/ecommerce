@@ -11,24 +11,18 @@
 
 namespace Sonata\Tests\Component\Payment\Scellius;
 
-use Sonata\Component\Payment\Scellius\ScelliusPayment;
-use Buzz\Message\Response;
-use Sonata\OrderBundle\Entity\BaseOrder;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Payment\Scellius\ScelliusPayment;
+use Sonata\OrderBundle\Entity\BaseOrder;
 
 class ScelliusPaymentTest_Order extends BaseOrder
 {
-
     public function setId($id)
     {
         $this->id = $id;
     }
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
@@ -43,14 +37,11 @@ class ScelliusPaymentTest_Order extends BaseOrder
 
         return $this->currency;
     }
-
 }
 class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * useless test ....
-     *
-     * @return void
      */
     public function testValidPayment()
     {
@@ -62,8 +53,8 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'response_command' => 'cat response_ok.txt && echo '
+            'base_folder'      => __DIR__,
+            'response_command' => 'cat response_ok.txt && echo ',
         ));
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
@@ -73,7 +64,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new ScelliusPaymentTest_Order;
+        $order = new ScelliusPaymentTest_Order();
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
@@ -115,8 +106,8 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'response_command' => 'cat response_ko.txt && echo '
+            'base_folder'      => __DIR__,
+            'response_command' => 'cat response_ko.txt && echo ',
         ));
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
@@ -127,22 +118,22 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'response_command' => 'cat response_nok.txt && echo '
+            'base_folder'      => __DIR__,
+            'response_command' => 'cat response_nok.txt && echo ',
         ));
 
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'response_command' => 'cat response_code_nok.txt && echo '
+            'base_folder'      => __DIR__,
+            'response_command' => 'cat response_code_nok.txt && echo ',
         ));
 
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'response_command' => 'cat response_ok.txt && echo '
+            'base_folder'      => __DIR__,
+            'response_command' => 'cat response_ok.txt && echo ',
         ));
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
@@ -162,7 +153,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
 
         $check = sha1(
             $order->getReference().
-            $order->getCreatedAt()->format("m/d/Y:G:i:s").
+            $order->getCreatedAt()->format('m/d/Y:G:i:s').
             $order->getId()
         );
 
@@ -197,9 +188,9 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
-        $transaction->expects($this->once())->method('get')->will($this->returnValue("reference"));
+        $transaction->expects($this->once())->method('get')->will($this->returnValue('reference'));
 
-        $this->assertEquals("reference", $payment->getOrderReference($transaction));
+        $this->assertEquals('reference', $payment->getOrderReference($transaction));
     }
 
     public function testApplyTransactionId()
@@ -232,7 +223,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new ScelliusPaymentTest_Order;
+        $order = new ScelliusPaymentTest_Order();
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
@@ -241,8 +232,8 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
-            'request_command' => 'cat request_ok.txt && echo '
+            'base_folder'     => __DIR__,
+            'request_command' => 'cat request_ok.txt && echo ',
         ));
 
         $payment->sendbank($order);
@@ -265,7 +256,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $customer->expects($this->once())->method('getId')->will($this->returnValue(42));
         $customer->expects($this->once())->method('getEmail')->will($this->returnValue('contact@sonata-project.org'));
 
-        $order = new ScelliusPaymentTest_Order;
+        $order = new ScelliusPaymentTest_Order();
         $order->setCreatedAt($date);
         $order->setId(2);
         $order->setReference('FR');
@@ -279,7 +270,7 @@ class ScelliusPaymentTest extends \PHPUnit_Framework_TestCase
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
         $payment->setOptions(array(
-            'base_folder'    => __DIR__,
+            'base_folder'     => __DIR__,
             'request_command' => 'cat request_ok.txt && echo ',
         ));
 

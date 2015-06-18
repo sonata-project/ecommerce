@@ -12,22 +12,19 @@
 namespace Sonata\CustomerBundle\Block;
 
 use Sonata\AdminBundle\Admin\Pool;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
-
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BaseBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class RecentCustomersBlockService
+ * Class RecentCustomersBlockService.
  *
- * @package Sonata\CustomerBundle\Block
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -62,7 +59,7 @@ class RecentCustomersBlockService extends BaseBlockService
             'settings'   => $blockContext->getSettings(),
             'block'      => $blockContext->getBlock(),
             'customers'  => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number')),
-            'admin_pool' => $this->adminPool
+            'admin_pool' => $this->adminPool,
         ), $response);
     }
 
@@ -86,10 +83,10 @@ class RecentCustomersBlockService extends BaseBlockService
                 array('mode', 'choice', array(
                     'choices' => array(
                         'public' => 'public',
-                        'admin'  => 'admin'
-                    )
-                ))
-            )
+                        'admin'  => 'admin',
+                    ),
+                )),
+            ),
         ));
     }
 
@@ -111,7 +108,7 @@ class RecentCustomersBlockService extends BaseBlockService
             'mode'       => 'public',
             'title'      => 'Recent Customers',
 //            'tags'      => 'Recent Customers',
-            'template'   => 'SonataCustomerBundle:Block:recent_customers.html.twig'
+            'template'   => 'SonataCustomerBundle:Block:recent_customers.html.twig',
         ));
     }
 }

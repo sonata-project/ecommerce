@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Customer;
+namespace Sonata\tests\Component\Customer;
 
 use FOS\UserBundle\Model\User as AbstractUser;
 
@@ -20,5 +20,4 @@ class ValidUser extends AbstractUser
     {
         return 1;
     }
-
 }

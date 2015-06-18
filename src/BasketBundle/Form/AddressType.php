@@ -12,7 +12,6 @@
 namespace Sonata\BasketBundle\Form;
 
 use Sonata\Component\Basket\BasketInterface;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Intl\Intl;
@@ -36,7 +35,7 @@ class AddressType extends AbstractType
     protected $basket;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string          $addressClass An address entity class name
      * @param BasketInterface $basket       Sonata current basket
@@ -65,21 +64,21 @@ class AddressType extends AbstractType
             }
 
             $builder->add('addresses', 'entity', array(
-                'choices'  => $addresses,
+                'choices'           => $addresses,
                 'preferred_choices' => array($defaultAddress),
-                'class'    => $this->addressClass,
-                'property' => 'addressArrayForRender',
-                'expanded' => true,
-                'multiple' => false,
-                'mapped'   => false,
+                'class'             => $this->addressClass,
+                'property'          => 'addressArrayForRender',
+                'expanded'          => true,
+                'multiple'          => false,
+                'mapped'            => false,
             ))
             ->add('useSelected', 'submit', array(
                 'attr' => array(
                     'class' => 'btn btn-primary',
-                    'style' => 'margin-bottom:20px;'
+                    'style' => 'margin-bottom:20px;',
                 ),
                 'translation_domain' => 'SonataBasketBundle',
-                'validation_groups'  => false
+                'validation_groups'  => false,
             ));
         }
 
@@ -88,7 +87,7 @@ class AddressType extends AbstractType
         if (isset($options['types'])) {
             $builder->add('type', 'choice', array(
                 'choices'            => $options['types'],
-                'translation_domain' => 'SonataCustomerBundle')
+                'translation_domain' => 'SonataCustomerBundle', )
             );
         }
 
@@ -115,7 +114,7 @@ class AddressType extends AbstractType
     }
 
     /**
-     * Returns basket elements delivery countries
+     * Returns basket elements delivery countries.
      *
      * @return array
      */
@@ -144,8 +143,8 @@ class AddressType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'  => $this->addressClass,
-            'addresses'   => array(),
+            'data_class'        => $this->addressClass,
+            'addresses'         => array(),
             'validation_groups' => array('front'),
         ));
     }

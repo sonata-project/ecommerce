@@ -2,8 +2,8 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Doctrine\ORM\NoResultException;
+use Sonata\Component\Customer\CustomerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
@@ -23,7 +23,7 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
                 ->getQuery()
                 ->getSingleResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
     }
 

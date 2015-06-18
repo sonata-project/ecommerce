@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,5 +15,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataInvoiceBundle extends Bundle
 {
-
 }

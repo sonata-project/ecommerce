@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,18 +9,15 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Order;
 
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
 
-
 /**
- * Class OrderStatusRenderer
+ * Class OrderStatusRenderer.
  *
- * @package Sonata\Component\Order
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -37,7 +35,7 @@ class OrderStatusRenderer implements StatusClassRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function getStatusClass($object, $statusName = null, $default = "")
+    public function getStatusClass($object, $statusName = null, $default = '')
     {
         switch ($statusName) {
             case 'delivery':

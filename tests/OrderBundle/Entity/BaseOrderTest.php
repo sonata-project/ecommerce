@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -23,7 +24,7 @@ class OrderTest extends BaseOrder
 }
 
 /**
- * Class BaseOrderTest
+ * Class BaseOrderTest.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */

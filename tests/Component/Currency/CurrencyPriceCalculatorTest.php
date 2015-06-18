@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,9 +15,8 @@ use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 
 /**
- * Class CurrencyPriceCalculatorTest
+ * Class CurrencyPriceCalculatorTest.
  *
- * @package Sonata\Test\Component\Currency\Types
  *
  * @author Hugo Briand <briand@ekino.com>
  */

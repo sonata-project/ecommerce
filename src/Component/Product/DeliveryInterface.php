@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,112 +14,112 @@ namespace Sonata\Component\Product;
 interface DeliveryInterface
 {
     /**
-     * Set product
+     * Set product.
      *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
     /**
-     * Get product
+     * Get product.
      *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set class_name
+     * Set class_name.
      *
      * @param string $code
      */
     public function setCode($code);
 
     /**
-     * Get class_name
+     * Get class_name.
      *
      * @return string $className
      */
     public function getCode();
 
     /**
-     * Set per_item
+     * Set per_item.
      *
-     * @param boolean $perItem
+     * @param bool $perItem
      */
     public function setPerItem($perItem);
 
     /**
-     * Get per_item
+     * Get per_item.
      *
-     * @return boolean $perItem
+     * @return bool $perItem
      */
     public function getPerItem();
 
     /**
-     * Set country code
+     * Set country code.
      *
      * @param string $countryCode
      */
     public function setCountryCode($countryCode);
 
     /**
-     * Get country
+     * Get country.
      *
      * @return string $country
      */
     public function getCountryCode();
 
     /**
-     * Set zone
+     * Set zone.
      *
      * @param string $zone
      */
     public function setZone($zone);
 
     /**
-     * Get zone
+     * Get zone.
      *
      * @return string $zone
      */
     public function getZone();
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \Datetime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \Datetime $updatedAt
      */
     public function getUpdatedAt();
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \Datetime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \Datetime $createdAt
      */

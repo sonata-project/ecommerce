@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,12 +11,12 @@
 
 namespace Sonata\ProductBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
+ * This is the class that validates and merges configuration from your app/config files.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
@@ -37,8 +38,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     * @return void
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      */
     private function addProductSection(ArrayNodeDefinition $node)
     {
@@ -65,8 +65,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     * @return void
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      */
     private function addModelSection(ArrayNodeDefinition $node)
     {
@@ -91,8 +90,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     * @return void
+     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      */
     private function addSeoSection(ArrayNodeDefinition $node)
     {

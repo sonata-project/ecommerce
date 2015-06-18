@@ -43,7 +43,7 @@ class BaseProductRepository extends EntityRepository
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->setParameters(array(
-                'enabled' => true
+                'enabled' => true,
             ))
             ->getQuery()
             ->execute();

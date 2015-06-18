@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -10,13 +11,12 @@
 
 namespace Sonata\Component\Form;
 
-use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\Constraint;
-
-use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Basket\BasketInterface;
-use Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory;
+use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
 class BasketValidator extends ConstraintValidator
 {
@@ -31,7 +31,7 @@ class BasketValidator extends ConstraintValidator
     protected $constraintValidatorFactory;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ProductPool                $productPool
      * @param ConstraintValidatorFactory $constraintValidatorFactory
@@ -43,7 +43,7 @@ class BasketValidator extends ConstraintValidator
     }
 
     /**
-     * The validator asks each product repository to validate the related basket element
+     * The validator asks each product repository to validate the related basket element.
      *
      * @param BasketInterface $basket
      * @param Constraint      $constraint

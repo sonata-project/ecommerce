@@ -12,24 +12,21 @@
 namespace Sonata\OrderBundle\Block;
 
 use Sonata\AdminBundle\Admin\Pool;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
-
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BaseBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * Class RecentOrdersBlockService
+ * Class RecentOrdersBlockService.
  *
- * @package Sonata\OrderBundle\Block
  *
  * @author  Thomas Rabaix
  * @author  Hugo Briand <briand@ekino.com>
@@ -87,7 +84,7 @@ class RecentOrdersBlockService extends BaseBlockService
             'settings'   => $blockContext->getSettings(),
             'block'      => $blockContext->getBlock(),
             'orders'     => $orders,
-            'admin_pool' => $this->adminPool
+            'admin_pool' => $this->adminPool,
         ), $response);
     }
 
@@ -110,10 +107,10 @@ class RecentOrdersBlockService extends BaseBlockService
                 array('mode', 'choice', array(
                     'choices' => array(
                         'public' => 'public',
-                        'admin'  => 'admin'
-                    )
-                ))
-            )
+                        'admin'  => 'admin',
+                    ),
+                )),
+            ),
         ));
     }
 
@@ -134,7 +131,7 @@ class RecentOrdersBlockService extends BaseBlockService
             'number'     => 5,
             'mode'       => 'public',
             'title'      => 'Recent Orders',
-            'template'   => 'SonataOrderBundle:Block:recent_orders.html.twig'
+            'template'   => 'SonataOrderBundle:Block:recent_orders.html.twig',
         ));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,22 +16,22 @@ use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * Sonata\ProductBundle\Entity\BaseProductCollection
+ * Sonata\ProductBundle\Entity\BaseProductCollection.
  */
 abstract class BaseProductCollection implements ProductCollectionInterface
 {
     /**
-     * @var boolean $enabled
+     * @var bool
      */
     protected $enabled;
 
     /**
-     * @var \DateTime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var \DateTime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
@@ -46,7 +47,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
 
     public function __toString()
     {
-        return ($this->getProduct() ? $this->getProduct()->getName() : "null")." - ".($this->getCollection() ? $this->getCollection()->getName() : "null");
+        return ($this->getProduct() ? $this->getProduct()->getName() : 'null').' - '.($this->getCollection() ? $this->getCollection()->getName() : 'null');
     }
 
     /**

@@ -8,7 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Sonata\Tests\Component\Basket;
+
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\ProductBundle\Entity\BaseProduct;
 

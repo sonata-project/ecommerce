@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,33 +9,26 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\CustomerBundle\Controller\Api;
 
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
-
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
-
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
-use Sonata\Component\Customer\CustomerElementInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
-
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CustomerController
+ * Class CustomerController.
  *
- * @package Sonata\CustomerBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -61,7 +55,7 @@ class CustomerController
     protected $formFactory;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param CustomerManagerInterface $customerManager
      * @param OrderManagerInterface    $orderManager
@@ -121,7 +115,7 @@ class CustomerController
     }
 
     /**
-     * Retrieves a specific customer
+     * Retrieves a specific customer.
      *
      * @ApiDoc(
      *  requirements={
@@ -146,7 +140,7 @@ class CustomerController
     }
 
     /**
-     * Adds a customer
+     * Adds a customer.
      *
      * @ApiDoc(
      *  input={"class"="sonata_customer_api_form_customer", "name"="", "groups"={"sonata_api_write"}},
@@ -169,7 +163,7 @@ class CustomerController
     }
 
     /**
-     * Updates a customer
+     * Updates a customer.
      *
      * @ApiDoc(
      *  requirements={
@@ -184,7 +178,7 @@ class CustomerController
      *  }
      * )
      *
-     * @param integer $id      A Customer identifier
+     * @param int     $id      A Customer identifier
      * @param Request $request A Symfony request
      *
      * @return Customer
@@ -197,10 +191,10 @@ class CustomerController
     }
 
     /**
-     * Write a customer, this method is used by both POST and PUT action methods
+     * Write a customer, this method is used by both POST and PUT action methods.
      *
-     * @param Request      $request Symfony request
-     * @param integer|null $id      A customer identifier
+     * @param Request  $request Symfony request
+     * @param int|null $id      A customer identifier
      *
      * @return \FOS\RestBundle\View\View|FormInterface
      */
@@ -209,7 +203,7 @@ class CustomerController
         $customer = $id ? $this->getCustomer($id) : null;
 
         $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_customer', $customer, array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
 
         $form->bind($request);
@@ -231,7 +225,7 @@ class CustomerController
     }
 
     /**
-     * Deletes a customer
+     * Deletes a customer.
      *
      * @ApiDoc(
      *  requirements={
@@ -244,7 +238,7 @@ class CustomerController
      *  }
      * )
      *
-     * @param integer $id A Customer identifier
+     * @param int $id A Customer identifier
      *
      * @return \FOS\RestBundle\View\View
      *
@@ -264,7 +258,7 @@ class CustomerController
     }
 
     /**
-     * Retrieves a specific customer's orders
+     * Retrieves a specific customer's orders.
      *
      * @ApiDoc(
      *  requirements={
@@ -286,11 +280,12 @@ class CustomerController
     public function getCustomerOrdersAction($id)
     {
         $customer = $this->getCustomer($id);
+
         return $this->orderManager->findBy(array('customer' => $customer));
     }
 
     /**
-     * Retrieves a specific customer's addresses
+     * Retrieves a specific customer's addresses.
      *
      * @ApiDoc(
      *  requirements={
@@ -315,7 +310,7 @@ class CustomerController
     }
 
     /**
-     * Adds a customer address
+     * Adds a customer address.
      *
      * @ApiDoc(
      *  requirements={
@@ -329,7 +324,7 @@ class CustomerController
      *  }
      * )
      *
-     * @param integer $id      A Customer identifier
+     * @param int     $id      A Customer identifier
      * @param Request $request A Symfony request
      *
      * @return Address
@@ -341,7 +336,7 @@ class CustomerController
         $customer = $id ? $this->getCustomer($id) : null;
 
         $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', null, array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
 
         $form->bind($request);
@@ -365,11 +360,12 @@ class CustomerController
     }
 
     /**
-     * Retrieves customer with id $id or throws an exception if it doesn't exist
+     * Retrieves customer with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return CustomerInterface
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getCustomer($id)

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,27 +9,21 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\CustomerBundle\Controller\Api;
 
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
-
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
-
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
-use Sonata\Component\Customer\CustomerElementInterface;
-
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class AddressController
+ * Class AddressController.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -45,10 +40,10 @@ class AddressController
     protected $formFactory;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param AddressManagerInterface  $addressManager
-     * @param FormFactoryInterface     $formFactory
+     * @param AddressManagerInterface $addressManager
+     * @param FormFactoryInterface    $formFactory
      */
     public function __construct(AddressManagerInterface $addressManager, FormFactoryInterface $formFactory)
     {
@@ -78,7 +73,7 @@ class AddressController
     public function getAddressesAction(ParamFetcherInterface $paramFetcher)
     {
         $supportedCriteria = array(
-            'customer' => "",
+            'customer' => '',
         );
 
         $page     = $paramFetcher->get('page');
@@ -102,7 +97,7 @@ class AddressController
     }
 
     /**
-     * Retrieves a specific address
+     * Retrieves a specific address.
      *
      * @ApiDoc(
      *  resource=true,
@@ -128,7 +123,7 @@ class AddressController
     }
 
     /**
-     * Adds an address
+     * Adds an address.
      *
      * @ApiDoc(
      *  input={"class"="sonata_customer_api_form_address", "name"="", "groups"={"sonata_api_write"}},
@@ -149,7 +144,7 @@ class AddressController
     }
 
     /**
-     * Updates an address
+     * Updates an address.
      *
      * @ApiDoc(
      *  requirements={
@@ -163,7 +158,7 @@ class AddressController
      *  }
      * )
      *
-     * @param integer $id      An Address identifier
+     * @param int     $id      An Address identifier
      * @param Request $request A Symfony request
      *
      * @return Address
@@ -176,7 +171,7 @@ class AddressController
     }
 
     /**
-     * Deletes an address
+     * Deletes an address.
      *
      * @ApiDoc(
      *  requirements={
@@ -189,7 +184,7 @@ class AddressController
      *  }
      * )
      *
-     * @param integer $id An Address identifier
+     * @param int $id An Address identifier
      *
      * @return \FOS\RestBundle\View\View
      *
@@ -209,9 +204,9 @@ class AddressController
     }
 
     /**
-     * Retrieves address with id $id or throws an exception if it doesn't exist
+     * Retrieves address with id $id or throws an exception if it doesn't exist.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return AddressInterface
      *
@@ -229,10 +224,10 @@ class AddressController
     }
 
     /**
-     * Write an address, this method is used by both POST and PUT action methods
+     * Write an address, this method is used by both POST and PUT action methods.
      *
-     * @param Request      $request Symfony request
-     * @param integer|null $id      An Address identifier
+     * @param Request  $request Symfony request
+     * @param int|null $id      An Address identifier
      *
      * @return \FOS\RestBundle\View\View|FormInterface
      */
@@ -241,7 +236,7 @@ class AddressController
         $address = $id ? $this->getAddress($id) : null;
 
         $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', $address, array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
 
         $form->bind($request);

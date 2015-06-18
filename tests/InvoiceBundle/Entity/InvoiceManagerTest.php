@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,17 +15,14 @@ use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\InvoiceBundle\Entity\InvoiceManager;
 
-
 /**
- * Class InvoiceManagerTest
+ * Class InvoiceManagerTest.
  *
- * @package Sonata\Test\InvoiceBundle\Entity
  *
  * @author Benoit de Jacobet <benoit.de-jacobet@ekino.com>
  */
 class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
 {
-
     protected function getInvoiceManager($qbCallback)
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, array(
@@ -86,7 +84,7 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
             })
             ->getPager(array(), 1, 10, array(
                 'reference' => 'ASC',
-                'name'  => 'DESC',
+                'name'      => 'DESC',
             ));
     }
 

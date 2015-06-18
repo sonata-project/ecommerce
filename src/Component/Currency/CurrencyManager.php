@@ -11,7 +11,6 @@
 
 namespace Sonata\Component\Currency;
 
-use Sonata\Component\Currency\CurrencyManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 
 /**

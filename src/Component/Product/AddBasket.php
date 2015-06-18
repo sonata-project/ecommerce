@@ -15,9 +15,9 @@ use Symfony\Component\Validator\Constraints as Validation;
 
 class AddBasket
 {
-
     /**
      * @Validation\NotBlank()
+     *
      * @var int
      */
     private $productId;
@@ -25,6 +25,7 @@ class AddBasket
     /**
      * @Validation\NotBlank()
      * @Validation\Type(type="object")
+     *
      * @var ProductInterface
      */
     private $product;
@@ -32,12 +33,13 @@ class AddBasket
     /**
      * @Validation\NotBlank()
      * @Validation\Range(min=1, max=64)
+     *
      * @var int
      */
     private $quantity;
 
     /**
-     * @return integer the product id
+     * @return int the product id
      */
     public function getProductId()
     {
@@ -45,22 +47,22 @@ class AddBasket
     }
 
     /**
-     * The product id is only set if there is not product attached to this object
+     * The product id is only set if there is not product attached to this object.
      *
-     * @param integer $productId the product id
+     * @param int $productId the product id
      */
     public function setProductId($productId)
     {
         // never erase this value
         if ($this->productId !== null) {
-           return;
+            return;
         }
 
         $this->productId = $productId;
     }
 
     /**
-     * Set the related product
+     * Set the related product.
      *
      * @param ProductInterface $product
      */
@@ -71,9 +73,9 @@ class AddBasket
     }
 
     /**
-     * Set the quantity
+     * Set the quantity.
      *
-     * @param integer $quantity
+     * @param int $quantity
      */
     public function setQuantity($quantity)
     {

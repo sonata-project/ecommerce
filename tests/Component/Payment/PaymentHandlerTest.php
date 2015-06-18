@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,18 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\tests\Component\Payment;
 
-use Sonata\Component\Payment\InvalidTransactionException;
 use Sonata\Component\Payment\PaymentHandler;
 use Sonata\Tests\PaymentBundle\Entity\Transaction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PaymentHandlerTest
+ * Class PaymentHandlerTest.
  *
- * @package Sonata\Tests\Component\Payment
  *
  * @author Hugo Briand <briand@ekino.com>
  */

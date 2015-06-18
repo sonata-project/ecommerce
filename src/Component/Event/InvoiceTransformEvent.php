@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,17 +9,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Event;
 
 use Sonata\Component\Invoice\InvoiceInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-
 /**
- * Class InvoiceTransformEvent
+ * Class InvoiceTransformEvent.
  *
- * @package Sonata\Component\Event
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -30,7 +28,7 @@ class InvoiceTransformEvent extends Event
     protected $invoice;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param InvoiceInterface $invoice
      */

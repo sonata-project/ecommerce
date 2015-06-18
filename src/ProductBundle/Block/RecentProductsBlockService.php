@@ -13,11 +13,11 @@ namespace Sonata\ProductBundle\Block;
 
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\ProductBundle\Repository\BaseProductRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -90,7 +90,7 @@ class RecentProductsBlockService extends BaseBlockService
             'keys' => array(
                 array('number', 'integer', array('required' => true)),
                 array('title',  'text',    array('required' => false)),
-            )
+            ),
         ));
     }
 
@@ -110,7 +110,7 @@ class RecentProductsBlockService extends BaseBlockService
         $resolver->setDefaults(array(
             'number'     => 5,
             'title'      => 'Recent products',
-            'template'   => 'SonataProductBundle:Block:recent_products.html.twig'
+            'template'   => 'SonataProductBundle:Block:recent_products.html.twig',
         ));
     }
 

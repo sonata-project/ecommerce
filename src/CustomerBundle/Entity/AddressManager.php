@@ -8,10 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\CustomerBundle\Entity;
 
-use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;

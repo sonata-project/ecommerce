@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -20,7 +21,7 @@ class BaseDeliveryTest extends \PHPUnit_Framework_TestCase
 {
     public function testArrayDelivery()
     {
-        $delivery = new Delivery;
+        $delivery = new Delivery();
 
         $arrayDelivery = array(
             'code'        => 'code',

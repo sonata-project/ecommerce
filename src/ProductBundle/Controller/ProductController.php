@@ -11,15 +11,14 @@
 
 namespace Sonata\ProductBundle\Controller;
 
-use Sonata\Component\Form\Type\VariationChoiceType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\Response;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ProductController extends Controller
@@ -55,7 +54,7 @@ class ProductController extends Controller
         $action = sprintf('%s:view', $provider->getBaseControllerName());
         $response = $this->forward($action, array(
             'provider' => $provider,
-            'product' => $product
+            'product'  => $product,
         ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -79,12 +78,12 @@ class ProductController extends Controller
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
     {
-        $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName()) ;
+        $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName());
 
         $response = $this->forward($action, array(
             'formView'       => $formView,
             'basketElement'  => $basketElement,
-            'basket'         => $basket
+            'basket'         => $basket,
         ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -110,7 +109,7 @@ class ProductController extends Controller
     public function getPriceStockForQuantityAction($productId)
     {
         if (!$this->getRequest()->isXmlHttpRequest() || !($quantity = (int) $this->getRequest()->query->get('quantity'))) {
-            throw new BadRequestHttpException("Request needs to be XHR and have a quantity parameter");
+            throw new BadRequestHttpException('Request needs to be XHR and have a quantity parameter');
         }
 
         $product = $this->get('sonata.product.set.manager')->findOneBy(array('id' => $productId, 'enabled' => true));
@@ -126,13 +125,13 @@ class ProductController extends Controller
         $provider = $productPool->getProvider($product);
 
         if ($provider->hasVariations($product)) {
-            $errors['variations'] = "This is a master product, it has no price";
+            $errors['variations'] = 'This is a master product, it has no price';
         }
 
         $stock = $provider->getStockAvailable($product) ?: 0;
 
         if ($quantity > $stock) {
-            $errors['stock'] = $this->get('translator')->trans('product_out_of_stock_quantity', array(), "SonataProductBundle");
+            $errors['stock'] = $this->get('translator')->trans('product_out_of_stock_quantity', array(), 'SonataProductBundle');
         }
 
         $currency = $this->get('sonata.basket')->getCurrency();
@@ -143,7 +142,7 @@ class ProductController extends Controller
             'stock'      => $stock,
             'price'      => $price,
             'price_text' => $this->get('sonata.intl.templating.helper.number')->formatCurrency($price, $currency),
-            'errors'     => $errors
+            'errors'     => $errors,
         ));
     }
 
@@ -155,11 +154,11 @@ class ProductController extends Controller
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
     {
-        $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName()) ;
+        $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName());
 
         $response = $this->forward($action, array(
             'basketElement'  => $basketElement,
-            'basket'         => $basket
+            'basket'         => $basket,
         ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -194,7 +193,7 @@ class ProductController extends Controller
 
         $action = sprintf('%s:viewVariations', $provider->getBaseControllerName());
         $response = $this->forward($action, array(
-                'product' => $product
+                'product' => $product,
             ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -245,7 +244,7 @@ class ProductController extends Controller
 
         $form = $this->createForm('sonata_product_variation_choices', $currentValues, array(
             'product' => $product,
-            'fields'  => array_keys($data)
+            'fields'  => array_keys($data),
         ));
 
         $form->handleRequest($this->getRequest());
@@ -262,7 +261,7 @@ class ProductController extends Controller
         $action = sprintf('%s:variationToProduct', $provider->getBaseControllerName());
         $response = $this->forward($action, array(
             'product'   => $product,
-            'variation' => $variation
+            'variation' => $variation,
         ));
 
         if ($this->get('kernel')->isDebug() && !($response instanceof JsonResponse)) {

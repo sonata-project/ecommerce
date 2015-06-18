@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Form\EventListener;
+namespace Sonata\tests\Component\Form\EventListener;
 
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * Class BasketResizeFormListenerTest
+ * Class BasketResizeFormListenerTest.
  *
- * @package Sonata\Tests\Component\Form
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -26,7 +26,7 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
     {
         $expected = array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind'
+            FormEvents::PRE_SUBMIT   => 'preBind',
         );
 
         $this->assertEquals($expected, BasketResizeFormListener::getSubscribedEvents());

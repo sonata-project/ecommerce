@@ -11,12 +11,12 @@
 
 namespace Sonata\Component\Currency;
 
-use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Intl\Intl;
 
 /**
- * Handles Currency as doctrine type
+ * Handles Currency as doctrine type.
  *
  * @author Hugo Briand <briand@ekino.com>
  */

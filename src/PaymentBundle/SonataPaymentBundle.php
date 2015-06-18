@@ -15,5 +15,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataPaymentBundle extends Bundle
 {
-
 }

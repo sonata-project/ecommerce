@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,21 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\BasketBundle\Entity;
+namespace Sonata\tests\BasketBundle\Entity;
 
 use Sonata\Component\Basket\BasketElement;
 
 /**
- * Class BasketElementTest
+ * Class BasketElementTest.
  *
- * @package Sonata\Tests\BasketBundle\Entity
  *
  * @author Vincent Composieux <composieux@ekino.com>
  */
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Test quantity setter, if quantity is negative, must returns a quantity of 1
+     * Test quantity setter, if quantity is negative, must returns a quantity of 1.
      */
     public function testNegativeQuantity()
     {

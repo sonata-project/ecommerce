@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -13,9 +14,8 @@ namespace Sonata\Test\Component\Currency\Types;
 use Sonata\Component\Currency\CurrencyFormType;
 
 /**
- * Class CurrencyFormTypeTest
+ * Class CurrencyFormTypeTest.
  *
- * @package Sonata\Test\Component\Currency\Types
  *
  * @author Hugo Briand <briand@ekino.com>
  */

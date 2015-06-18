@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Currency;
+namespace Sonata\tests\Component\Currency;
 
 use Sonata\Component\Currency\CurrencyManager;
 
@@ -26,6 +26,6 @@ class CurrencyManagerTest extends \PHPUnit_Framework_TestCase
 
         $currencyManager = new CurrencyManager('Sonata\Component\Currency\Currency', $registry);
 
-        $this->assertEquals("EUR", $currencyManager->findOneByLabel("EUR")->getLabel());
+        $this->assertEquals('EUR', $currencyManager->findOneByLabel('EUR')->getLabel());
     }
 }

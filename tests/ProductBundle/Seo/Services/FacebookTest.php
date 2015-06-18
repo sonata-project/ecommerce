@@ -12,11 +12,16 @@ class ProductFbMock extends BaseProduct
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
-    public function getId() { }
+    public function getId()
+    {
+    }
 
-    public function getDescription() { return 'O-some product'; }
+    public function getDescription()
+    {
+        return 'O-some product';
+    }
 }
 
 class FacebookTest extends \PHPUnit_Framework_TestCase

@@ -12,7 +12,6 @@
 namespace Sonata\Tests\PaymentBundle\Entity;
 
 use Sonata\PaymentBundle\Entity\BaseTransaction;
-use Sonata\Component\Order\OrderInterface;
 
 class Transaction extends BaseTransaction
 {
@@ -37,7 +36,7 @@ class BaseTransactionTest extends \PHPUnit_Framework_TestCase
         $transaction->setState(Transaction::STATE_KO);
         $transaction->setStatusCode(Transaction::STATUS_VALIDATED);
 
-        $expected =<<<INFO
+        $expected = <<<INFO
 Transaction created
 Update status code to `0` (open)
 The transaction is linked to the Order : id = `123` / Reference = `B00120`
@@ -54,13 +53,13 @@ INFO;
         $transaction = new Transaction();
 
         $inParams = array('params' => array(
-            "aerẑerüioRazeioj" => iconv('UTF-8', 'ISO-8859-1', "ôûêîÖüïë"),
-            "abcdef" => "ghijkl"
+            'aerẑerüioRazeioj' => iconv('UTF-8', 'ISO-8859-1', 'ôûêîÖüïë'),
+            'abcdef'              => 'ghijkl',
         ));
 
         $expectedParams = array('params' => array(
-            "aerẑerüioRazeioj" => "ôûêîÖüïë",
-            "abcdef" => "ghijkl"
+            'aerẑerüioRazeioj' => 'ôûêîÖüïë',
+            'abcdef'              => 'ghijkl',
         ));
 
         $transaction->setParameters($inParams);

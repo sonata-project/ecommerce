@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,17 +9,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Component\Event;
 
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 
-
 /**
- * Class AfterCalculatePriceEvent
+ * Class AfterCalculatePriceEvent.
  *
- * @package Sonata\Component\Event
  *
  * @author Hugo Briand <briand@ekino.com>
  */

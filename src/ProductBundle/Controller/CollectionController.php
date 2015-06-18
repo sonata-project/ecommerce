@@ -11,15 +11,14 @@
 
 namespace Sonata\ProductBundle\Controller;
 
+use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
 class CollectionController extends Controller
 {
     /**
-     * List the main collections
+     * List the main collections.
      *
      * @return Response
      */
@@ -34,7 +33,7 @@ class CollectionController extends Controller
     }
 
     /**
-     * Display one collection
+     * Display one collection.
      *
      * @throws NotFoundHttpException
      *
@@ -52,12 +51,12 @@ class CollectionController extends Controller
         }
 
         return $this->render('SonataProductBundle:Collection:view.html.twig', array(
-           'collection' => $collection
+           'collection' => $collection,
         ));
     }
 
     /**
-     * List collections from one collections
+     * List collections from one collections.
      *
      * @param $collectionId
      *
@@ -69,14 +68,15 @@ class CollectionController extends Controller
             ->getSubCollectionsPager($collectionId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Collection:list_sub_collections.html.twig', array(
-            'pager' => $pager
+            'pager' => $pager,
         ));
     }
 
     /**
-     * List the product related to one collection
+     * List the product related to one collection.
      *
      * @param $collectionId
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function listProductsAction($collectionId)
@@ -85,7 +85,7 @@ class CollectionController extends Controller
             ->getProductsByCollectionIdPager($collectionId, $this->get('request')->get('page'));
 
         return $this->render('SonataProductBundle:Collection:list_products.html.twig', array(
-            'pager' => $pager
+            'pager' => $pager,
         ));
     }
 
@@ -102,8 +102,8 @@ class CollectionController extends Controller
 
         return $this->render('SonataProductBundle:Collection:side_menu_collection.html.twig', array(
           'root_collection' => $collection,
-          'depth'         => $depth,
-          'deep'          => $deep + 1
+          'depth'           => $depth,
+          'deep'            => $deep + 1,
         ));
     }
 }

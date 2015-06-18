@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -27,7 +28,7 @@ interface ServiceDeliveryInterface
     public function getPrice();
 
     /**
-     * Sets the VAT rate
+     * Sets the VAT rate.
      *
      * @param float $vat
      */
@@ -44,12 +45,12 @@ interface ServiceDeliveryInterface
     public function getName();
 
     /**
-     * @return boolean return true an address is required to use this delivery method
+     * @return bool return true an address is required to use this delivery method
      */
     public function isAddressRequired();
 
     /**
-     * Return the delivery price
+     * Return the delivery price.
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      * @param bool                                     $vat
@@ -59,7 +60,7 @@ interface ServiceDeliveryInterface
     public function getTotal(BasketInterface $basket, $vat = false);
 
     /**
-     * Return the vat amount
+     * Return the vat amount.
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      *
@@ -73,12 +74,12 @@ interface ServiceDeliveryInterface
     public function getCode();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getEnabled();
 
     /**
-     * @return integer
+     * @return int
      */
     public function getPriority();
 }

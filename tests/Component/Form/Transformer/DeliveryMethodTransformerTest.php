@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Form\Transformer;
+namespace Sonata\tests\Component\Form\Transformer;
 
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 
 /**
- * Class DeliveryMethodTransformerTest
+ * Class DeliveryMethodTransformerTest.
  *
- * @package Sonata\Tests\Component\Form\Transformer
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -28,16 +28,16 @@ class DeliveryMethodTransformerTest extends \PHPUnit_Framework_TestCase
         $transformer = new DeliveryMethodTransformer($pool);
 
         $delivery = new FreeDelivery(false);
-        $delivery->setCode("deliveryCode");
+        $delivery->setCode('deliveryCode');
 
-        $this->assertEquals("deliveryCode", $transformer->transform($delivery));
+        $this->assertEquals('deliveryCode', $transformer->transform($delivery));
         $this->assertNull($transformer->transform(null));
     }
 
     public function testReverseTransform()
     {
         $delivery = new FreeDelivery(false);
-        $delivery->setCode("deliveryCode");
+        $delivery->setCode('deliveryCode');
 
         $pool = $this->getMockBuilder('Sonata\Component\Delivery\Pool')->disableOriginalConstructor()->getMock();
 
@@ -47,6 +47,6 @@ class DeliveryMethodTransformerTest extends \PHPUnit_Framework_TestCase
 
         $transformer = new DeliveryMethodTransformer($pool);
 
-        $this->assertEquals($delivery, $transformer->reverseTransform("deliveryCode"));
+        $this->assertEquals($delivery, $transformer->reverseTransform('deliveryCode'));
     }
 }

@@ -12,7 +12,6 @@
 namespace Sonata\CustomerBundle\Form;
 
 use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Intl\Intl;
@@ -41,7 +40,7 @@ class AddressType extends AbstractType
     protected $name;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string          $class  A class to apply getter
      * @param string          $getter A getter method name
@@ -78,7 +77,7 @@ class AddressType extends AbstractType
     }
 
     /**
-     * Returns basket elements delivery countries
+     * Returns basket elements delivery countries.
      *
      * @return array
      */
@@ -124,7 +123,7 @@ class AddressType extends AbstractType
     {
         $resolver->setDefaults(array(
             'context' => 'default',
-            'types'   => call_user_func(array($this->class, $this->getter))
+            'types'   => call_user_func(array($this->class, $this->getter)),
         ));
     }
 }

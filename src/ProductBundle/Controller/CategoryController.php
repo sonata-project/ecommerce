@@ -12,9 +12,6 @@
 namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 
 class CategoryController extends Controller
 {
@@ -32,7 +29,7 @@ class CategoryController extends Controller
         return $this->render('SonataProductBundle:Category:side_menu_category.html.twig', array(
           'root_category' => $category,
           'depth'         => $depth,
-          'deep'          => $deep + 1
+          'deep'          => $deep + 1,
         ));
     }
 }

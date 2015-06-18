@@ -11,13 +11,12 @@
 
 namespace Sonata\OrderBundle\Controller;
 
+use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-use Sonata\Component\Order\OrderManagerInterface;
-use Sonata\Component\Customer\CustomerInterface;
 
 class OrderController extends Controller
 {
@@ -34,9 +33,9 @@ class OrderController extends Controller
             throw new AccessDeniedException();
         }
 
-        $orders = $this->getOrderManager()->findForUser($user, array('createdAt' => "DESC"));
+        $orders = $this->getOrderManager()->findForUser($user, array('createdAt' => 'DESC'));
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', array(), "SonataOrderBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', array(), 'SonataOrderBundle'));
 
         return $this->render('SonataOrderBundle:Order:index.html.twig', array(
             'orders'             => $orders,
@@ -62,7 +61,7 @@ class OrderController extends Controller
 
         $this->checkAccess($order->getCustomer());
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_view_title', array(), "SonataOrderBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_view_title', array(), 'SonataOrderBundle'));
 
         /** @var OrderElementInterface $element */
         foreach ($order->getOrderElements() as $element) {
@@ -77,7 +76,8 @@ class OrderController extends Controller
     }
 
     /**
-     * @param  unknown           $reference
+     * @param unknown $reference
+     *
      * @throws \RuntimeException
      */
     public function downloadAction($reference)
@@ -86,7 +86,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Checks that the current logged in user has access to given invoice
+     * Checks that the current logged in user has access to given invoice.
      *
      * @param CustomerInterface $customer The linked customer
      *

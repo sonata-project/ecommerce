@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -7,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\Component\Event;
 
@@ -18,9 +18,8 @@ use Sonata\Component\Product\ProductProviderInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class AddBasketElementEvent
+ * Class AddBasketElementEvent.
  *
- * @package Sonata\ProductBundle\Event
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -47,7 +46,7 @@ class AddBasketElementEvent extends Event
     protected $productProvider;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param BasketInterface          $basket
      * @param BasketElementInterface   $basketElement

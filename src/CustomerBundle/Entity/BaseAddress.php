@@ -6,77 +6,77 @@ use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 
 /**
- * Sonata\BasketBundle\Entity\BaseAddress
+ * Sonata\BasketBundle\Entity\BaseAddress.
  */
 abstract class BaseAddress implements AddressInterface
 {
     /**
-     * @var boolean $current
+     * @var bool
      */
     protected $current;
 
     /**
-     * @var string $name
+     * @var string
      */
     protected $name;
 
     /**
-     * @var integer $type
+     * @var int
      */
     protected $type;
 
     /**
-     * @var string $firstname
+     * @var string
      */
     protected $firstname;
 
     /**
-     * @var string $lastname
+     * @var string
      */
     protected $lastname;
 
     /**
-     * @var string $address1
+     * @var string
      */
     protected $address1;
 
     /**
-     * @var string $address2
+     * @var string
      */
     protected $address2;
 
     /**
-     * @var string $address3
+     * @var string
      */
     protected $address3;
 
     /**
-     * @var string $postcode
+     * @var string
      */
     protected $postcode;
 
     /**
-     * @var string $city
+     * @var string
      */
     protected $city;
 
     /**
-     * @var string $country
+     * @var string
      */
     protected $countryCode;
 
     /**
-     * @var string $phone
+     * @var string
      */
     protected $phone;
 
     /**
-     * @var datetime $updatedAt
+     * @var datetime
      */
     protected $updatedAt;
 
     /**
-     * @var datetime $createdAt
+     * @var datetime
      */
     protected $createdAt;
 
@@ -86,36 +86,36 @@ abstract class BaseAddress implements AddressInterface
     protected $customer;
 
     /**
-     * Formats an address in an array form
+     * Formats an address in an array form.
      *
      * @param array  $address The address array (required keys: firstname, lastname, address1, postcode, city, country_code)
      * @param string $sep     The address separator
      *
      * @return string
      */
-    public static function formatAddress(array $address, $sep = ", ")
+    public static function formatAddress(array $address, $sep = ', ')
     {
         $address = array_merge(
             array(
-                'firstname'    => "",
-                'lastname'     => "",
-                'address1'     => "",
-                'address2'     => "",
-                'address3'     => "",
-                'postcode'     => "",
-                'city'         => "",
-                'country_code' => "",
+                'firstname'    => '',
+                'lastname'     => '',
+                'address1'     => '',
+                'address2'     => '',
+                'address3'     => '',
+                'postcode'     => '',
+                'city'         => '',
+                'country_code' => '',
             ),
             $address
         );
 
         $values = array_map('trim', array(
-                sprintf("%s %s", $address['firstname'], $address['lastname']),
+                sprintf('%s %s', $address['firstname'], $address['lastname']),
                 $address['address1'],
                 $address['address2'],
                 $address['address3'],
                 $address['postcode'],
-                $address['city']
+                $address['city'],
             ));
 
         foreach ($values as $key => $val) {
@@ -128,10 +128,10 @@ abstract class BaseAddress implements AddressInterface
 
         if ($countryCode = trim($address['country_code'])) {
             if ($fullAddress) {
-                $fullAddress .= " ";
+                $fullAddress .= ' ';
             }
 
-            $fullAddress .= sprintf("(%s)", $countryCode);
+            $fullAddress .= sprintf('(%s)', $countryCode);
         }
 
         return $fullAddress;
@@ -144,13 +144,13 @@ abstract class BaseAddress implements AddressInterface
 
     public function prePersist()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public static function getTypesList()
@@ -163,9 +163,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set current
+     * Set current.
      *
-     * @param boolean $current
+     * @param bool $current
      */
     public function setCurrent($current)
     {
@@ -173,9 +173,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get current
+     * Get current.
      *
-     * @return boolean
+     * @return bool
      */
     public function getCurrent()
     {
@@ -183,9 +183,9 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param integer $type
+     * @param int $type
      */
     public function setType($type)
     {
@@ -199,9 +199,9 @@ abstract class BaseAddress implements AddressInterface
         return isset($types[$this->getType()]) ? $types[$this->getType()] : null;
     }
     /**
-     * Get type
+     * Get type.
      *
-     * @return integer $type
+     * @return int $type
      */
     public function getType()
     {
@@ -209,7 +209,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set firstname
+     * Set firstname.
      *
      * @param string $firstname
      */
@@ -219,7 +219,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string
      */
@@ -229,7 +229,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set lastname
+     * Set lastname.
      *
      * @param string $lastname
      */
@@ -239,7 +239,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get lastname
+     * Get lastname.
      *
      * @return string
      */
@@ -249,7 +249,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set address1
+     * Set address1.
      *
      * @param string $address1
      */
@@ -259,7 +259,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get address1
+     * Get address1.
      *
      * @return string
      */
@@ -269,7 +269,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set address2
+     * Set address2.
      *
      * @param string $address2
      */
@@ -279,7 +279,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get address2
+     * Get address2.
      *
      * @return string
      */
@@ -289,7 +289,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set address3
+     * Set address3.
      *
      * @param string $address3
      */
@@ -299,7 +299,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get address3
+     * Get address3.
      *
      * @return string
      */
@@ -309,7 +309,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set postcode
+     * Set postcode.
      *
      * @param string $postcode
      */
@@ -319,7 +319,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get postcode
+     * Get postcode.
      *
      * @return string
      */
@@ -329,7 +329,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      */
@@ -339,7 +339,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -349,7 +349,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set countryCode
+     * Set countryCode.
      *
      * @param string $countryCode
      */
@@ -359,7 +359,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get countryCode
+     * Get countryCode.
      *
      * @return string
      */
@@ -369,7 +369,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      */
@@ -379,7 +379,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string
      */
@@ -389,7 +389,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \Datetime $updatedAt
      */
@@ -399,7 +399,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \Datetime
      */
@@ -409,7 +409,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \Datetime $createdAt
      */
@@ -419,7 +419,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \Datetime
      */
@@ -443,7 +443,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @return string
      */
-    public function getFullAddress($sep = ", ")
+    public function getFullAddress($sep = ', ')
     {
         return self::formatAddress($this->getAddressArrayForRender(), $sep);
     }
@@ -463,7 +463,7 @@ abstract class BaseAddress implements AddressInterface
             'address3'     => $this->getAddress3(),
             'postcode'     => $this->getPostcode(),
             'city'         => $this->getCity(),
-            'country_code' => $this->getCountryCode()
+            'country_code' => $this->getCountryCode(),
         );
     }
 
@@ -472,7 +472,7 @@ abstract class BaseAddress implements AddressInterface
      */
     public function getFullAddressHtml()
     {
-        return $this->getFullAddress("<br/>");
+        return $this->getFullAddress('<br/>');
     }
 
     public function setCustomer(CustomerInterface $customer)

@@ -21,7 +21,7 @@ interface ProductCategoryManagerInterface extends ManagerInterface
      *
      * @param ProductInterface  $product  A Product entity
      * @param CategoryInterface $category A Category entity
-     * @param boolean           $main     Add as the main category?
+     * @param bool              $main     Add as the main category?
      */
     public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false);
 
@@ -34,14 +34,14 @@ interface ProductCategoryManagerInterface extends ManagerInterface
     public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category);
 
     /**
-     * Gets the category tree
+     * Gets the category tree.
      *
      * @return CategoryInterface[]
      */
     public function getCategoryTree();
 
     /**
-     * Returns the number of products in $category (maxed by $limit)
+     * Returns the number of products in $category (maxed by $limit).
      *
      * @param CategoryInterface $category
      *

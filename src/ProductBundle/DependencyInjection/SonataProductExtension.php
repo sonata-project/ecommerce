@@ -11,14 +11,12 @@
 
 namespace Sonata\ProductBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
-
-use Symfony\Component\Config\Definition\Processor;
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * ProductExtension.
@@ -69,9 +67,8 @@ class SonataProductExtension extends Extension
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $config
-     * @return void
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array                                                   $config
      */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
@@ -93,8 +90,7 @@ class SonataProductExtension extends Extension
     }
 
     /**
-     * @param  array $config
-     * @return void
+     * @param array $config
      */
     public function registerDoctrineMapping(array $config)
     {
@@ -104,49 +100,49 @@ class SonataProductExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        /**
+        /*
          * DELIVERY
          */
         $collector->addAssociation($config['class']['delivery'], 'mapManyToOne', array(
             'fieldName'    => 'product',
             'targetEntity' => $config['class']['product'],
             'cascade'      => array(
-                'persist'
+                'persist',
             ),
-            'mappedBy'     => NULL,
+            'mappedBy'     => null,
             'inversedBy'   => 'deliveries',
             'joinColumns'  => array(
                 array(
-                    'name' => 'product_id',
+                    'name'                 => 'product_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete'             => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,
         ));
 
-        /**
+        /*
          * PACKAGE
          */
         $collector->addAssociation($config['class']['package'], 'mapManyToOne', array(
             'fieldName'    => 'product',
             'targetEntity' => $config['class']['product'],
             'cascade'      => array(
-                'persist'
+                'persist',
             ),
-            'mappedBy'     => NULL,
+            'mappedBy'     => null,
             'inversedBy'   => 'packages',
             'joinColumns'  => array(
                 array(
-                    'name' => 'product_id',
+                    'name'                 => 'product_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete'             => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,
         ));
 
-        /**
+        /*
          * PRODUCT CATEGORY
          */
         $collector->addAssociation($config['class']['product_category'], 'mapManyToOne', array(
@@ -155,14 +151,14 @@ class SonataProductExtension extends Extension
              'cascade'      => array(
                 'persist',
              ),
-             'mappedBy'     => NULL,
+             'mappedBy'     => null,
              'inversedBy'   => 'productCategories',
              'joinColumns'  => array(
                  array(
-                     'name' => 'product_id',
+                     'name'                 => 'product_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
-                     'onUpdate' => 'CASCADE',
+                     'onDelete'             => 'CASCADE',
+                     'onUpdate'             => 'CASCADE',
                  ),
              ),
              'orphanRemoval' => false,
@@ -174,19 +170,19 @@ class SonataProductExtension extends Extension
              'cascade'      => array(
                 'persist',
              ),
-             'mappedBy'     => NULL,
+             'mappedBy'     => null,
              'joinColumns'  => array(
                  array(
-                     'name' => 'category_id',
+                     'name'                 => 'category_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
-                     'onUpdate' => 'CASCADE',
+                     'onDelete'             => 'CASCADE',
+                     'onUpdate'             => 'CASCADE',
                  ),
              ),
              'orphanRemoval' => false,
         ));
 
-        /**
+        /*
          * PRODUCT COLLECTION
          */
         $collector->addAssociation($config['class']['product_collection'], 'mapManyToOne', array(
@@ -195,14 +191,14 @@ class SonataProductExtension extends Extension
              'cascade'      => array(
                 'persist',
              ),
-             'mappedBy'     => NULL,
+             'mappedBy'     => null,
              'inversedBy'   => 'productCollections',
              'joinColumns'  => array(
                  array(
-                     'name' => 'product_id',
+                     'name'                 => 'product_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
-                     'onUpdate' => 'CASCADE',
+                     'onDelete'             => 'CASCADE',
+                     'onUpdate'             => 'CASCADE',
                  ),
              ),
              'orphanRemoval' => false,
@@ -214,27 +210,27 @@ class SonataProductExtension extends Extension
              'cascade'      => array(
                 'persist',
              ),
-             'mappedBy'     => NULL,
+             'mappedBy'     => null,
              'inversedBy'   => 'productCollection',
              'joinColumns'  => array(
                  array(
-                     'name' => 'collection_id',
+                     'name'                 => 'collection_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
-                     'onUpdate' => 'CASCADE',
+                     'onDelete'             => 'CASCADE',
+                     'onUpdate'             => 'CASCADE',
                  ),
              ),
              'orphanRemoval' => false,
         ));
 
-        /**
+        /*
          * PRODUCT
          */
         $collector->addAssociation($config['class']['product'], 'mapOneToMany', array(
             'fieldName'     => 'packages',
             'targetEntity'  => $config['class']['package'],
             'cascade'       => array(
-               'persist'
+               'persist',
             ),
             'mappedBy'      => 'product',
             'orphanRemoval' => false,
@@ -244,7 +240,7 @@ class SonataProductExtension extends Extension
              'fieldName'     => 'deliveries',
              'targetEntity'  => $config['class']['delivery'],
              'cascade'       => array(
-                 'persist'
+                 'persist',
              ),
              'mappedBy'      => 'product',
              'orphanRemoval' => false,
@@ -254,7 +250,7 @@ class SonataProductExtension extends Extension
              'fieldName'     => 'productCategories',
              'targetEntity'  => $config['class']['product_category'],
              'cascade'       => array(
-                'persist'
+                'persist',
              ),
              'mappedBy'      => 'product',
              'orphanRemoval' => false,
@@ -264,7 +260,7 @@ class SonataProductExtension extends Extension
              'fieldName'     => 'productCollections',
              'targetEntity'  => $config['class']['product_collection'],
              'cascade'       => array(
-                'persist'
+                'persist',
              ),
              'mappedBy'      => 'product',
              'orphanRemoval' => false,
@@ -274,13 +270,13 @@ class SonataProductExtension extends Extension
             'fieldName'     => 'image',
             'targetEntity'  => $config['class']['media'],
             'cascade'       => array(),
-            'mappedBy'      => NULL,
-            'inversedBy'    => NULL,
+            'mappedBy'      => null,
+            'inversedBy'    => null,
             'joinColumns'   => array(
                 array(
-                    'name' => 'image_id',
+                    'name'                 => 'image_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'SET NULL',
+                    'onDelete'             => 'SET NULL',
                 ),
             ),
             'orphanRemoval' => false,
@@ -290,13 +286,13 @@ class SonataProductExtension extends Extension
              'fieldName'     => 'gallery',
              'targetEntity'  => $config['class']['gallery'],
              'cascade'       => array(),
-             'mappedBy'      => NULL,
-             'inversedBy'    => NULL,
+             'mappedBy'      => null,
+             'inversedBy'    => null,
              'joinColumns'   => array(
                  array(
-                     'name' => 'gallery_id',
+                     'name'                 => 'gallery_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'SET NULL',
+                     'onDelete'             => 'SET NULL',
                  ),
              ),
              'orphanRemoval' => false,
@@ -306,15 +302,15 @@ class SonataProductExtension extends Extension
             'fieldName'    => 'parent',
             'targetEntity' => $config['class']['product'],
             'cascade'      => array(
-                'persist'
+                'persist',
             ),
-            'mappedBy'     => NULL,
+            'mappedBy'     => null,
             'inversedBy'   => 'variations',
             'joinColumns'  => array(
                 array(
-                    'name' => 'parent_id',
+                    'name'                 => 'parent_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete'             => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,
@@ -324,14 +320,14 @@ class SonataProductExtension extends Extension
             'fieldName'     => 'variations',
             'targetEntity'  => $config['class']['product'],
             'cascade'       => array(
-                'persist'
+                'persist',
             ),
             'mappedBy'      => 'parent',
             'orphanRemoval' => false,
         ));
 
         $collector->addIndex($config['class']['product'], 'enabled', array(
-            'enabled'
+            'enabled',
         ));
     }
 

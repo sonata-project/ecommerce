@@ -11,13 +11,12 @@
 
 namespace Sonata\InvoiceBundle\Controller;
 
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Invoice\InvoiceManagerInterface;
+use Sonata\Component\Transformer\InvoiceTransformer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-use Sonata\Component\Invoice\InvoiceManagerInterface;
-use Sonata\Component\Transformer\InvoiceTransformer;
-use Sonata\Component\Customer\CustomerInterface;
 
 class InvoiceController extends Controller
 {
@@ -55,7 +54,7 @@ class InvoiceController extends Controller
             $this->getInvoiceManager()->save($invoice);
         }
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('invoice_view_title', array(), "SonataInvoiceBundle"));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('invoice_view_title', array(), 'SonataInvoiceBundle'));
 
         return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(
             'invoice' => $invoice,
@@ -64,7 +63,8 @@ class InvoiceController extends Controller
     }
 
     /**
-     * @param  string            $reference
+     * @param string $reference
+     *
      * @throws \RuntimeException
      */
     public function downloadAction($reference)
@@ -73,7 +73,7 @@ class InvoiceController extends Controller
     }
 
     /**
-     * Checks that the current logged in user has access to given invoice
+     * Checks that the current logged in user has access to given invoice.
      *
      * @param CustomerInterface $customer The linked customer
      *

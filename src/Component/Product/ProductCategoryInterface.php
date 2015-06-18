@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,83 +16,83 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 interface ProductCategoryInterface
 {
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set if product category is the main category
+     * Set if product category is the main category.
      *
-     * @param boolean $main
+     * @param bool $main
      */
     public function setMain($main);
 
     /**
-     * Get if product category is the main category
+     * Get if product category is the main category.
      *
-     * @return boolean $main
+     * @return bool $main
      */
     public function getMain();
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime $updatedAt
      */
     public function getUpdatedAt();
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \Datetime $createdAt
      */
     public function getCreatedAt();
 
     /**
-     * Set Product
+     * Set Product.
      *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
     /**
-     * Get Product
+     * Get Product.
      *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set Category
+     * Set Category.
      *
      * @param CategoryInterface $category
      */
     public function setCategory(CategoryInterface $category);
 
     /**
-     * Get Category
+     * Get Category.
      *
      * @return CategoryInterface $category
      */

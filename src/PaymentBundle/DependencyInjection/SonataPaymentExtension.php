@@ -11,17 +11,15 @@
 
 namespace Sonata\PaymentBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataPaymentExtension extends Extension
@@ -60,7 +58,6 @@ class SonataPaymentExtension extends Extension
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $config
-     * @return void
      */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
@@ -69,9 +66,9 @@ class SonataPaymentExtension extends Extension
 
     /**
      * @throws \RuntimeException
-     * @param  ContainerBuilder $container
-     * @param  array            $config
-     * @return void
+     *
+     * @param ContainerBuilder $container
+     * @param array            $config
      */
     public function configurePayment(ContainerBuilder $container, array $config)
     {
@@ -162,7 +159,6 @@ class SonataPaymentExtension extends Extension
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $selector
-     * @return void
      */
     public function configureSelector(ContainerBuilder $container, $selector)
     {
@@ -170,9 +166,8 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $transformers
-     * @return void
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array                                                   $transformers
      */
     public function configureTransformer(ContainerBuilder $container, array $transformers)
     {
@@ -184,8 +179,7 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param  array $config
-     * @return void
+     * @param array $config
      */
     public function registerDoctrineMapping(array $config)
     {
@@ -199,25 +193,24 @@ class SonataPaymentExtension extends Extension
             'fieldName'    => 'order',
             'targetEntity' => $config['class']['order'],
             'cascade'      => array(),
-            'mappedBy'     => NULL,
-            'inversedBy'   => NULL,
+            'mappedBy'     => null,
+            'inversedBy'   => null,
             'joinColumns'  => array(
                 array(
-                    'name' => 'order_id',
+                    'name'                 => 'order_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'SET NULL',
+                    'onDelete'             => 'SET NULL',
                 ),
             ),
             'orphanRemoval' => false,
         ));
 
         $collector->addIndex($config['class']['transaction'], 'status_code', array(
-            'status_code'
+            'status_code',
         ));
 
         $collector->addIndex($config['class']['transaction'], 'state', array(
-            'state'
+            'state',
         ));
     }
-
 }

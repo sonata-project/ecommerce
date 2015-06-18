@@ -12,18 +12,15 @@
 namespace Sonata\ProductBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Range;
 
 class ProductAdminController extends Controller
 {
     /**
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request = null)
@@ -39,7 +36,7 @@ class ProductAdminController extends Controller
                 'providers'     => $this->get('sonata.product.pool')->getProducts(),
                 'base_template' => $this->getBaseTemplate(),
                 'admin'         => $this->admin,
-                'action'        => 'create'
+                'action'        => 'create',
             ));
         }
 
@@ -48,6 +45,7 @@ class ProductAdminController extends Controller
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function showVariationsAction(Request $request = null)

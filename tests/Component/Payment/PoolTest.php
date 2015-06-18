@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\tests\Component\Payment;
 
 use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Payment\Pool;
@@ -18,7 +18,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
-        $pool = new Pool;
+        $pool = new Pool();
 
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
@@ -47,7 +47,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddMethodError()
     {
-        $pool = new Pool;
+        $pool = new Pool();
 
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 

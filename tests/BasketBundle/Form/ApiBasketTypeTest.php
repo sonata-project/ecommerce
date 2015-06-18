@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -15,7 +16,7 @@ use Sonata\Component\Currency\CurrencyDataTransformer;
 use Sonata\Component\Currency\CurrencyFormType;
 
 /**
- * Class ApiBasketTypeTest
+ * Class ApiBasketTypeTest.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */

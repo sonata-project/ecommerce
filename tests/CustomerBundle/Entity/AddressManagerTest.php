@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\CustomerBundle\Entity;
+namespace Sonata\tests\CustomerBundle\Entity;
 
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\AddressManager;
 
 /**
- * Class AddressManagerTest
+ * Class AddressManagerTest.
  *
- * @package Sonata\Tests\CustomerBundle\Entity
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -78,7 +78,6 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $addressManager->delete($address);
     }
 
-
     protected function getAddressManager($qbCallback)
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, array(
@@ -138,7 +137,7 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
             })
             ->getPager(array(), 1, 10, array(
-                'name' => 'ASC',
+                'name'       => 'ASC',
                 'firstname'  => 'DESC',
             ));
     }

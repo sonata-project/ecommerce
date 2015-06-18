@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -19,15 +20,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 
 /**
- * Class BaseBasketFactory
+ * Class BaseBasketFactory.
  *
- * @package Sonata\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */
 abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandlerInterface
 {
-    const SESSION_BASE_NAME = "sonata/basket/factory/customer/";
+    const SESSION_BASE_NAME = 'sonata/basket/factory/customer/';
 
     /**
      * @var \Sonata\Component\Basket\BasketManagerInterface
@@ -83,7 +83,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     }
 
     /**
-     * Retrieved basket associated with $customer from session
+     * Retrieved basket associated with $customer from session.
      *
      * @param CustomerInterface $customer
      *
@@ -101,7 +101,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     }
 
     /**
-     * Stores $basket in session
+     * Stores $basket in session.
      *
      * @param BasketInterface $basket
      */
@@ -120,22 +120,23 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     }
 
     /**
-     * Get the name of the session variable
+     * Get the name of the session variable.
      *
-     * @param  \Sonata\Component\Customer\CustomerInterface $customer
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     *
      * @return string
      */
     protected function getSessionVarName(CustomerInterface $customer = null)
     {
         if (null === $customer || null === $customer->getId()) {
-            return self::SESSION_BASE_NAME."new";
+            return self::SESSION_BASE_NAME.'new';
         }
 
         return self::SESSION_BASE_NAME.$customer->getId();
     }
 
     /**
-     * Clears the baskets in session
+     * Clears the baskets in session.
      *
      * @param CustomerInterface $customer
      */

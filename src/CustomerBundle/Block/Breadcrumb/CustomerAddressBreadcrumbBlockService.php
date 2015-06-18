@@ -38,7 +38,7 @@ class CustomerAddressBreadcrumbBlockService extends BaseUserProfileBreadcrumbBlo
 
         $menu->addChild('sonata_customer_addresses_breadcrumb', array(
             'route'  => 'sonata_customer_addresses',
-            'extras' => array('translation_domain' => 'SonataCustomerBundle')
+            'extras' => array('translation_domain' => 'SonataCustomerBundle'),
         ));
 
         return $menu;

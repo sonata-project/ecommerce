@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -7,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\ProductBundle\Menu;
 
@@ -19,11 +19,9 @@ use Sonata\Component\Product\ProductProviderInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
-
 /**
- * Class ProductMenuBuilder
+ * Class ProductMenuBuilder.
  *
- * @package Sonata\ProductBundle\Menu
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -45,7 +43,7 @@ class ProductMenuBuilder
     protected $router;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param MenuFactory                     $factory
      * @param ProductCategoryManagerInterface $categoryManager
@@ -59,7 +57,7 @@ class ProductMenuBuilder
     }
 
     /**
-     * Generates the filters menu based on $productProvider
+     * Generates the filters menu based on $productProvider.
      *
      * @param ProductProviderInterface $productProvider
      * @param array                    $itemOptions
@@ -105,9 +103,9 @@ class ProductMenuBuilder
     }
 
     /**
-     * @param \Knp\Menu\ItemInterface $menu        The item to fill with $routes
-     * @param array                   $options     The item options
-     * @param string                  $currentUri  The current URI
+     * @param \Knp\Menu\ItemInterface $menu       The item to fill with $routes
+     * @param array                   $options    The item options
+     * @param string                  $currentUri The current URI
      */
     public function buildCategoryMenu(ItemInterface $menu, array $options = array(), $currentUri = null)
     {
@@ -117,32 +115,34 @@ class ProductMenuBuilder
     }
 
     /**
-     * Generates the name of the filter based on $filter and $option
+     * Generates the name of the filter based on $filter and $option.
      *
      * @param $filter
      * @param $option
+     *
      * @return string
      */
     protected function getFilterName($filter, $option)
     {
-        return sprintf("%s_%s", $filter, $option);
+        return sprintf('%s_%s', $filter, $option);
     }
 
     /**
-     * Generates the filter uri
+     * Generates the filter uri.
      *
      * @param $currentUri
      * @param $filter
      * @param $option
+     *
      * @return string
      */
     protected function getFilterUri($currentUri, $filter, $option)
     {
-        return sprintf("%s?filter=%s&option=%s", false !== ($pos = strpos($currentUri, '?')) ? substr($currentUri, 0, $pos) : $currentUri, $filter, $option);
+        return sprintf('%s?filter=%s&option=%s', false !== ($pos = strpos($currentUri, '?')) ? substr($currentUri, 0, $pos) : $currentUri, $filter, $option);
     }
 
     /**
-     * Recursive method to fill $menu with $categories
+     * Recursive method to fill $menu with $categories.
      *
      * @param ItemInterface $menu
      * @param array         $categories
@@ -157,15 +157,15 @@ class ProductMenuBuilder
             }
 
             $fullOptions = array_merge(array(
-                'attributes'      => array('class' => ""),      // Ensuring it is set
+                'attributes'      => array('class' => ''),      // Ensuring it is set
                 'route'           => 'sonata_catalog_category',
                 'routeParameters' => array(
                     'category_id'   => $category->getId(),
-                    'category_slug' => $category->getSlug()
+                    'category_slug' => $category->getSlug(),
                 ),
                 'extras'           => array(
-                    'safe_label' => true
-                )
+                    'safe_label' => true,
+                ),
             ), $options);
 
             if (null === $category->getParent()) {
@@ -188,7 +188,7 @@ class ProductMenuBuilder
     }
 
     /**
-     * Gets the HTML associated with the category menu title
+     * Gets the HTML associated with the category menu title.
      *
      * @param CategoryInterface $category A category instance
      * @param int               $limit    A limit for calculation (fixed to 500 by default)
@@ -199,6 +199,6 @@ class ProductMenuBuilder
     {
         $count = $this->categoryManager->getProductCount($category, $limit);
 
-        return sprintf("%s <span class=\"badge pull-right\">%d%s</span>", $category->getName(), $count, $count > $limit ? '+' : '');
+        return sprintf('%s <span class="badge pull-right">%d%s</span>', $category->getName(), $count, $count > $limit ? '+' : '');
     }
 }

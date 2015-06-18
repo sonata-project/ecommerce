@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\PriceBundle\DependencyInjection;
+namespace Sonata\tests\PriceBundle\DependencyInjection;
 
 use Sonata\PriceBundle\DependencyInjection\SonataPriceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class SonataPriceExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Tests if the configuration is well parsed & parameters are well set
+     * Tests if the configuration is well parsed & parameters are well set.
      */
     public function testConfiguration()
     {
@@ -36,7 +36,7 @@ class SonataPriceExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Asserts that an InvalidConfigurationException is thrown when not providing currency parameter
+     * Asserts that an InvalidConfigurationException is thrown when not providing currency parameter.
      *
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
@@ -51,14 +51,14 @@ class SonataPriceExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Gets the configuration as an array
+     * Gets the configuration as an array.
      *
      * @return array
      */
     protected function getDefaultConfig()
     {
         return array(array(
-            'currency' => "EUR"
+            'currency' => 'EUR',
         ));
     }
 }

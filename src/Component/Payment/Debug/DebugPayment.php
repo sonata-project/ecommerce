@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -81,7 +82,7 @@ class DebugPayment extends PassPayment
                 $transaction->setState(TransactionInterface::STATE_OK);
                 $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
-                $transaction->getOrder()->setValidatedAt(new \DateTime);
+                $transaction->getOrder()->setValidatedAt(new \DateTime());
                 $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
                 $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
 
