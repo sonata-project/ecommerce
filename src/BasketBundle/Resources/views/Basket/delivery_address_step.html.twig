@@ -54,7 +54,7 @@ file that was distributed with this source code.
                                         'disabled': false == deliverable
                                     }) }}
 
-                                    {{ sonata_address_render(address.vars.label, true, true, 'delivery') }}
+                                    {{ sonata_address_render(form.vars.addresses[address.vars.value], true, true, 'delivery') }}
                                 </label>
                             </div>
                         </li>

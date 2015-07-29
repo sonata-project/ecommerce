@@ -37,7 +37,7 @@ file that was distributed with this source code.
                             <div class="radio">
                                 <label for="{{ address.vars.id }}">
                                     {{ form_widget(address, {'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys))}) }}
-                                    {{ sonata_address_render(address.vars.label, true, true) }}
+                                    {{ sonata_address_render(form.vars.addresses[address.vars.value], true, true) }}
                                 </label>
                             </div>
                         </li>

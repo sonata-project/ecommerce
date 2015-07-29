@@ -118,7 +118,7 @@ class Pool
     public function getProduct($code)
     {
         if (!$this->hasProduct($code)) {
-            throw new \RuntimeException(sprintf('The product `%s` does not exist!', $code));
+            throw new \RuntimeException(sprintf('The product definition `%s` does not exist!', $code));
         }
 
         return $this->products[$code];

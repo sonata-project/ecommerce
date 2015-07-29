@@ -14,6 +14,8 @@ namespace Sonata\BasketBundle\Form;
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -67,7 +69,6 @@ class AddressType extends AbstractType
                 'choices'           => $addresses,
                 'preferred_choices' => array($defaultAddress),
                 'class'             => $this->addressClass,
-                'property'          => 'addressArrayForRender',
                 'expanded'          => true,
                 'multiple'          => false,
                 'mapped'            => false,
@@ -111,6 +112,14 @@ class AddressType extends AbstractType
         }
 
         $builder->add('countryCode', 'country', $countryOptions);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['addresses'] = $options['addresses'];
     }
 
     /**

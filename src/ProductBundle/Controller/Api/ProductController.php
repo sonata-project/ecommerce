@@ -224,7 +224,11 @@ class ProductController
     {
         $product = $id ? $this->getProduct($id) : null;
 
-        $manager = $this->productPool->getManager($provider);
+        try {
+            $manager = $this->productPool->getManager($provider);
+        } catch (\RuntimeException $e) {
+            throw new NotFoundHttpException($e->getMessage(), $e);
+        }
 
         $form = $this->formFactory->createNamed(null, 'sonata_product_api_form_product', $product, array(
             'csrf_protection' => false,

@@ -51,7 +51,7 @@ file that was distributed with this source code.
                         <table class="table">
                             <tr>
                                 <th>{% trans from 'SonataInvoiceBundle' %}sonata.invoice.references.date{% endtrans %}</th>
-                                <td>{{ invoice.createdAt|format_datetime(null, invoice.locale, date_time_size, date_time_size) }}</td>
+                                <td>{{ invoice.createdAt|format_datetime(null, invoice.locale, null, date_time_size, date_time_size) }}</td>
                             </tr>
                             <tr>
                                 <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
