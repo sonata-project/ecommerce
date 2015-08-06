@@ -114,8 +114,8 @@ class BasketController extends Controller
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array(
-            'data_class' => $this->container->getParameter('sonata.basket.basket_element.class'),
-            'csrf_protection' => false
+            'data_class'      => $this->container->getParameter('sonata.basket.basket_element.class'),
+            'csrf_protection' => false,
         ));
 
         $provider->defineAddBasketForm($product, $formBuilder);

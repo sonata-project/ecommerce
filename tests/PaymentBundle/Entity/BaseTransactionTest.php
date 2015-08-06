@@ -53,12 +53,12 @@ INFO;
         $transaction = new Transaction();
 
         $inParams = array('params' => array(
-            'aerẑerüioRazeioj' => iconv('UTF-8', 'ISO-8859-1', 'ôûêîÖüïë'),
+            'aerẑerüioRazeioj'    => iconv('UTF-8', 'ISO-8859-1', 'ôûêîÖüïë'),
             'abcdef'              => 'ghijkl',
         ));
 
         $expectedParams = array('params' => array(
-            'aerẑerüioRazeioj' => 'ôûêîÖüïë',
+            'aerẑerüioRazeioj'    => 'ôûêîÖüïë',
             'abcdef'              => 'ghijkl',
         ));
 

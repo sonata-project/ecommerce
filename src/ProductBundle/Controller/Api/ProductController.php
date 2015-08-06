@@ -181,7 +181,7 @@ class ProductController
      * Updates a product.
      *
      * @Put("/{provider}/products/{id}")
-
+     
      * @ApiDoc(
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product identifier"},
