@@ -526,7 +526,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('sku')
             ->add('description')
             ->add('price')
-            ->add('number')
+            ->add('isPriceIncludingVat', 'boolean')
             ->add('vatRate')
             ->add('stock')
             ->add('enabled')
