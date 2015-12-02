@@ -11,8 +11,35 @@
 
 namespace Sonata\DeliveryBundle;
 
+use Sonata\CoreBundle\Form\FormHelper;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataDeliveryBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $this->registerFormMapping();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function boot()
+    {
+        $this->registerFormMapping();
+    }
+
+    /**
+     * Register form mapping information
+     */
+    public function registerFormMapping()
+    {
+        FormHelper::registerFormTypeMapping(array(
+            'sonata_delivery_choice' => 'Sonata\Component\Form\Type\DeliveryChoiceType',
+        ));
+    }
 }

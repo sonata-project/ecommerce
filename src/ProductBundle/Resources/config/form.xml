@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.product.form.delivery_type" class="Sonata\CoreBundle\Form\Type\StatusType">
+        <service id="sonata.product.form.delivery_type" class="Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType">
              <argument>%sonata.product.delivery.class%</argument>
              <argument>getStatusList</argument>
              <argument>sonata_product_delivery_status</argument>

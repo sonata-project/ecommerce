@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.order.form.status_type" class="Sonata\CoreBundle\Form\Type\StatusType">
+        <service id="sonata.order.form.status_type" class="Sonata\OrderBundle\Form\Type\OrderStatusType">
             <argument>%sonata.order.order.class%</argument>
             <argument>getStatusList</argument>
             <argument>sonata_order_status</argument>

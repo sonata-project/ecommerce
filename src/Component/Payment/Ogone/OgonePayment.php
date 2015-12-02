@@ -20,6 +20,7 @@ use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -286,7 +287,7 @@ class OgonePayment extends BasePayment
                 'reference' => $order->getReference(),
                 'check'     => $this->generateUrlCheck($order),
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
 

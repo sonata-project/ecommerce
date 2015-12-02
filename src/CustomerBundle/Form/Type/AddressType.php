@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\CustomerBundle\Form;
+namespace Sonata\CustomerBundle\Form\Type;
 
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\Form\AbstractType;
@@ -111,9 +111,17 @@ class AddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 
     /**

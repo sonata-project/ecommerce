@@ -20,6 +20,7 @@ use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ScelliusPayment extends BasePayment
@@ -572,9 +573,9 @@ class ScelliusPayment extends BasePayment
             'amount'                    => $this->getAmount($order->getTotalInc(), $order->getCurrency()->getLabel()),
             'currency_code'             => $this->getCurrencyCode($order->getCurrency()->getLabel()),
             'transaction_id'            => $this->transactionGenerator->generate($order),
-            'normal_return_url'         => $this->router->generate($this->getOption('url_return_ok'), $params, true),
-            'cancel_return_url'         => $this->router->generate($this->getOption('url_return_ko'), $params, true),
-            'automatic_response_url'    => $this->router->generate($this->getOption('url_callback'), $params, true),
+            'normal_return_url'         => $this->router->generate($this->getOption('url_return_ok'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_return_url'         => $this->router->generate($this->getOption('url_return_ko'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'automatic_response_url'    => $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
             'caddie'                    => 'mon_caddie',
             'customer_id'               => $order->getCustomer()->getId(),
             'customer_email'            => $order->getCustomer()->getEmail(),

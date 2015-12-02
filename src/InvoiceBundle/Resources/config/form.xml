@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.invoice.form.status_type" class="Sonata\CoreBundle\Form\Type\StatusType">
+        <service id="sonata.invoice.form.status_type" class="Sonata\InvoiceBundle\Form\Type\InvoiceStatusType">
             <argument>%sonata.invoice.invoice.class%</argument>
             <argument>getStatusList</argument>
             <argument>sonata_invoice_status</argument>

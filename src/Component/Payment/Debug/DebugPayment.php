@@ -16,6 +16,7 @@ use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Implement debug payment.
@@ -52,7 +53,7 @@ class DebugPayment extends PassPayment
             'action'    => $action,
         );
 
-        $url = $this->router->generate($this->getOption('url_callback'), $params, true);
+        $url = $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL);
 
         $response = $this->browser->get($url);
 

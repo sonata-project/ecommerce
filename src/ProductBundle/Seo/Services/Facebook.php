@@ -8,6 +8,7 @@ use Sonata\IntlBundle\Templating\Helper\NumberHelper;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Provider\Pool;
 use Sonata\SeoBundle\Seo\SeoPageInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -79,7 +80,7 @@ class Facebook implements ServiceInterface
             ->addMeta('property', 'og:url', $this->router->generate('sonata_product_view', array(
                 'slug'      => $product->getSlug(),
                 'productId' => $product->getId(),
-            ), true))
+            ), UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))
             ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency());
 

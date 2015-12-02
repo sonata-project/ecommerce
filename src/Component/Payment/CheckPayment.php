@@ -17,6 +17,7 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class CheckPayment extends BasePayment
@@ -147,7 +148,7 @@ class CheckPayment extends BasePayment
         );
 
         // call the callback handler ...
-        $url = $this->router->generate($this->getOption('url_callback'), $params, true);
+        $url = $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL);
 
         $response = $this->browser->get($url);
 
@@ -161,7 +162,7 @@ class CheckPayment extends BasePayment
 
         // redirect the user to the correct page
         $response = new Response('', 302, array(
-            'Location' => $this->router->generate($this->getOption($routeName), $params, true),
+            'Location' => $this->router->generate($this->getOption($routeName), $params, UrlGeneratorInterface::ABSOLUTE_URL),
         ));
         $response->setPrivate();
 

@@ -14,6 +14,7 @@ namespace Sonata\Component\Payment;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * A free delivery method, used this only for testing.
@@ -71,11 +72,11 @@ class Paypal extends BasePaypal
 
             // Callback information
             'custom'        => $this->generateUrlCheck($order),
-            'notify_url'    => $this->router->generate($this->getOption('url_callback'), $params, true),
+            'notify_url'    => $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
 
             // user link
-            'cancel_return' => $this->router->generate($this->getOption('url_return_ko'), $params, true),
-            'return'        => $this->router->generate($this->getOption('url_return_ok'), $params, true),
+            'cancel_return' => $this->router->generate($this->getOption('url_return_ko'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'return'        => $this->router->generate($this->getOption('url_return_ok'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
         );
 
         if ($this->getOption('debug', false)) {

@@ -58,8 +58,17 @@ class CurrencyFormType extends CurrencyType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+
+    public function getBlockPrefix()
     {
         return 'sonata_currency';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }

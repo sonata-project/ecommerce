@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.payment.form.transaction_status" class="Sonata\CoreBundle\Form\Type\StatusType">
+        <service id="sonata.payment.form.transaction_status" class="Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType">
              <argument>%sonata.payment.transaction.class%</argument>
              <argument>getStatusList</argument>
              <argument>sonata_payment_transaction_status</argument>
