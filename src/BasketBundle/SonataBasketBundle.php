@@ -37,7 +37,7 @@ class SonataBasketBundle extends Bundle
     }
 
     /**
-     * Register form mapping information
+     * Register form mapping information.
      */
     public function registerFormMapping()
     {
@@ -46,10 +46,10 @@ class SonataBasketBundle extends Bundle
             'sonata_basker_address'                        => 'Sonata\BasketBundle\Form\Type\AddressType',
             'sonata_basket_shipping'                       => 'Sonata\BasketBundle\Form\ShippingType',
             'sonata_basket_payment'                        => 'Sonata\BasketBundle\Form\PaymentType',
-            'sonata_basket_api_form_basket_parent'         => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
             'sonata_basket_api_form_basket'                => 'Sonata\BasketBundle\Form\ApiBasketType',
-            'sonata_basket_api_form_basket_element_parent' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
             'sonata_basket_api_form_basket_element'        => 'Sonata\BasketBundle\Form\ApiBasketElementType',
+            'sonata_basket_api_form_basket_parent'         => 'Sonata\BasketBundle\Form\ApiBasketParentType',
+            'sonata_basket_api_form_basket_element_parent' => 'Sonata\BasketBundle\Form\ApiBasketElementParentType',
         ));
     }
 }

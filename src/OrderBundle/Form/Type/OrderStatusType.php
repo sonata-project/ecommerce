@@ -16,5 +16,4 @@ use Sonata\CoreBundle\Form\Type\BaseStatusType;
 
 class OrderStatusType extends BaseStatusType
 {
-
 }

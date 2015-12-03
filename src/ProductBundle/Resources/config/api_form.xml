@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.product.api.form.type.product.parent" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.product.api.form.type.product.parent" class="Sonata\ProductBundle\Form\Type\ApiProductParentType">
             <tag name="form.type" alias="sonata_product_api_form_product_parent" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />

@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.customer.api.form.type.customer" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.customer.api.form.type.customer" class="Sonata\CustomerBundle\Form\Type\ApiCustomerType">
             <tag name="form.type" alias="sonata_customer_api_form_customer" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />
@@ -15,7 +15,7 @@
             <argument>sonata_api_write</argument>
         </service>
 
-        <service id="sonata.customer.api.form.type.address" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.customer.api.form.type.address" class="Sonata\CustomerBundle\Form\Type\ApiAddressType">
             <tag name="form.type" alias="sonata_customer_api_form_address" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />

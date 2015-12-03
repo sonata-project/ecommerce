@@ -34,7 +34,7 @@ class SonataCustomerBundle extends Bundle
     }
 
     /**
-     * Register form mapping information
+     * Register form mapping information.
      */
     public function registerFormMapping()
     {

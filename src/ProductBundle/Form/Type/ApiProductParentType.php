@@ -7,13 +7,12 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
-namespace Sonata\InvoiceBundle\Form\Type;
+namespace Sonata\ProductBundle\Form\Type;
 
-use Sonata\CoreBundle\Form\Type\BaseStatusType;
+use Sonata\CoreBundle\Form\Type\BaseDoctrineORMSerializationType;
 
-class InvoiceStatusType extends BaseStatusType
+class ApiProductParentType extends BaseDoctrineORMSerializationType
 {
 }

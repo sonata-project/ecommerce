@@ -37,7 +37,7 @@ class SonataProductBundle extends Bundle
     }
 
     /**
-     * Register form mapping information
+     * Register form mapping information.
      */
     public function registerFormMapping()
     {
@@ -49,5 +49,4 @@ class SonataProductBundle extends Bundle
             'sonata_currency'                        => 'Sonata\Component\Currency\CurrencyFormType',
         ));
     }
-
 }

@@ -7,7 +7,7 @@
     <services>
         <!-- Basket type -->
 
-        <service id="sonata.basket.api.form.type.basket.parent" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.basket.api.form.type.basket.parent" class="Sonata\BasketBundle\Form\ApiBasketParentType">
             <tag name="form.type" alias="sonata_basket_api_form_basket_parent" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />
@@ -26,7 +26,7 @@
 
         <!-- Basket element type -->
 
-        <service id="sonata.basket.api.form.type.basket.element.parent" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.basket.api.form.type.basket.element.parent" class="Sonata\BasketBundle\Form\ApiBasketElementParentType">
             <tag name="form.type" alias="sonata_basket_api_form_basket_element_parent" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />
