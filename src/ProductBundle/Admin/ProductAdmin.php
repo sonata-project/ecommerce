@@ -21,7 +21,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 class ProductAdmin extends Admin
 {
