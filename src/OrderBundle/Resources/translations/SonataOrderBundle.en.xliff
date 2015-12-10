@@ -23,12 +23,12 @@
                 <source>sonata.order.sidemenu.link_order_elements_list</source>
                 <target>Elements</target>
             </trans-unit>
-            <trans-unit id="sonata.order.sidemenu.link_oRDER_TO_INVOICE_list">
-                <source>sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit</source>
+            <trans-unit id="sonata.order.sidemenu.link_order_to_invoice_list">
+                <source>sonata.order.sidemenu.link_order_to_invoice_edit</source>
                 <target>Invoice</target>
             </trans-unit>
-            <trans-unit id="sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate">
-                <source>sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate</source>
+            <trans-unit id="sonata.order.sidemenu.link_order_to_invoice_generate">
+                <source>sonata.order.sidemenu.link_order_to_invoice_generate</source>
                 <target>Generate invoice</target>
             </trans-unit>
             <!-- End - Sidemenu translations -->
@@ -65,8 +65,8 @@
             <!-- End - Breadcrumb translations -->
 
             <!-- Begin - Global translations -->
-            <trans-unit id="oRDER_TO_INVOICE_generate_success">
-                <source>oRDER_TO_INVOICE_generate_success</source>
+            <trans-unit id="order_to_invoice_generate_success">
+                <source>order_to_invoice_generate_success</source>
                 <target>Invoice generated with success</target>
             </trans-unit>
             <!-- End - Global translations -->
