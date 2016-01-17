@@ -192,13 +192,13 @@ Follow these instructions:
     #                class: Sonata\ProductBundle\Entity\ProductManager
     #                arguments:
     #                    - Application\Sonata\ProductBundle\Entity\Amazon
-    #                    - @sonata.product.entity_manager
+    #                    - "@sonata.product.entity_manager"
     #
     #           sonata.product.manager.bottle:
     #                class: Sonata\ProductBundle\Entity\ProductManager
     #                arguments:
     #                    - Application\Sonata\ProductBundle\Entity\Bottle
-    #                    - @sonata.product.entity_manager
+    #                    - "@sonata.product.entity_manager"
     #
     #           # Register dedicated Product Providers
     #            sonata.product.type.amazon:
@@ -249,31 +249,31 @@ Now, you can use these bundles to extend entities or template files.
 
         # sonata front controller
         sonata_customer:
-            resource: @SonataCustomerBundle/Resources/config/routing/customer.xml
+            resource: "@SonataCustomerBundle/Resources/config/routing/customer.xml"
             prefix: /shop/user
 
         sonata_basket:
-            resource: @SonataBasketBundle/Resources/config/routing/basket.xml
+            resource: "@SonataBasketBundle/Resources/config/routing/basket.xml"
             prefix: /shop/basket
 
         sonata_order:
-            resource: @SonataOrderBundle/Resources/config/routing/order.xml
+            resource: "@SonataOrderBundle/Resources/config/routing/order.xml"
             prefix: /shop/user/invoice
 
         sonata_product_catalog:
-            resource: @SonataProductBundle/Resources/config/routing/catalog.xml
+            resource: "@SonataProductBundle/Resources/config/routing/catalog.xml"
             prefix: /shop/catalog
 
         sonata_product:
-            resource: @SonataProductBundle/Resources/config/routing/product.xml
+            resource: "@SonataProductBundle/Resources/config/routing/product.xml"
             prefix: /shop/product
 
         sonata_payment:
-            resource: @SonataPaymentBundle/Resources/config/routing/payment.xml
+            resource: "@SonataPaymentBundle/Resources/config/routing/payment.xml"
             prefix: /shop/payment
 
         sonata_invoice:
-            resource: @SonataInvoiceBundle/Resources/config/routing/invoice.xml
+            resource: "@SonataInvoiceBundle/Resources/config/routing/invoice.xml"
             prefix: /shop/user/invoice
 
 And voilà! Your application boosted with Sonata e-commerce is now ready to rumble! ;-)
