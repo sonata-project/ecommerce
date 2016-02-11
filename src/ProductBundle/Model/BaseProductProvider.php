@@ -1003,7 +1003,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->getEventDispatcher()->dispatch(BasketEvents::PRE_CALCULATE_PRICE, $event);
 
         $vat      = $event->getVat();
-        $quantity = $event->getQuantity();
+        $quantity = intval($event->getQuantity());
 
         if (!is_int($quantity) || $quantity < 1) {
             throw new InvalidParameterException('Expected integer >= 1 for quantity, '.$quantity.' given.');
