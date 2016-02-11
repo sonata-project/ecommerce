@@ -269,7 +269,7 @@
             </trans-unit>
             <trans-unit id="form.label_gallery">
                 <source>form.label_gallery</source>
-                <target>Gallerie</target>
+                <target>Galerie</target>
             </trans-unit>
             <trans-unit id="form.label_category">
                 <source>form.label_category</source>
@@ -291,7 +291,42 @@
                 <source>form.label_collection</source>
                 <target>Collection</target>
             </trans-unit>
-            <!-- Begin - Form translations -->
+            <!-- End - Form translations -->
+
+            <!-- Begin - Show translations -->
+            <trans-unit id="show.label_description">
+                <source>show.label_description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="show.label_name">
+                <source>show.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="show.label_enabled">
+                <source>show.label_enabled</source>
+                <target>Activé</target>
+            </trans-unit>
+            <trans-unit id="show.label_sku">
+                <source>show.label_sku</source>
+                <target>SKU</target>
+            </trans-unit>
+            <trans-unit id="show.label_price">
+                <source>show.label_price</source>
+                <target>Prix</target>
+            </trans-unit>
+            <trans-unit id="show.label_is_price_including_vat">
+                <source>show.label_is_price_including_vat</source>
+                <target>Prix TTC</target>
+            </trans-unit>            
+            <trans-unit id="show.label_vat_rate">
+                <source>show.label_vat_rate</source>
+                <target>TVA</target>
+            </trans-unit>
+            <trans-unit id="show.label_stock">
+                <source>show.label_stock</source>
+                <target>Stock</target>
+            </trans-unit>
+            <!-- End - show translations -->
 
             <!-- Begin - Product view translations -->
             <trans-unit id="variation_not_found">
