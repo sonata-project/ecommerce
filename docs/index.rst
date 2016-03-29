@@ -14,7 +14,7 @@ With this vendor, you'll be able to manage a whole e-commerce process:
 * **Complete order process**
     Customers, Basket, Orders and Invoices
 * **Payment**
-    Several payment means are at your disposal and extendable!
+    Several extendable payment methods are at your disposal!
 
 
 Summary
