@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,11 +11,11 @@
 
 namespace Sonata\Component\Form\Transformer;
 
-use Symfony\Component\Form\DataTransformerInterface;
 use Sonata\Component\Payment\Pool as PaymentPool;
+use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Transform a method code into a method instance
+ * Transform a method code into a method instance.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,9 +14,8 @@ namespace Sonata\Test\Component\Generator;
 use Sonata\Component\Generator\Mustache;
 
 /**
- * Class MustacheTest
+ * Class MustacheTest.
  *
- * @package Sonata\Test\Component\Generator
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -23,10 +23,10 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
 {
     public function testRenderString()
     {
-        $testInput = "{{ replace }}.42 toubidou {{ second }}";
+        $testInput = '{{ replace }}.42 toubidou {{ second }}';
 
-        $expectedOutput = "abc.42 toubidou def";
+        $expectedOutput = 'abc.42 toubidou def';
 
-        $this->assertEquals($expectedOutput, Mustache::renderString($testInput, array('replace' => "abc", 'second' => "def")));
+        $this->assertSame($expectedOutput, Mustache::renderString($testInput, array('replace' => 'abc', 'second' => 'def')));
     }
 }

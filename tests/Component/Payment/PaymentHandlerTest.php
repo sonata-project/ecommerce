@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,18 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\tests\Component\Payment;
 
-use Sonata\Component\Payment\InvalidTransactionException;
 use Sonata\Component\Payment\PaymentHandler;
 use Sonata\Tests\PaymentBundle\Entity\Transaction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PaymentHandlerTest
+ * Class PaymentHandlerTest.
  *
- * @package Sonata\Tests\Component\Payment
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -66,7 +65,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, $order);
+        $this->assertSame($errorOrder, $order);
     }
 
     /**
@@ -102,7 +101,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, $order);
+        $this->assertSame($errorOrder, $order);
     }
 
     /**
@@ -150,7 +149,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, $order);
+        $this->assertSame($errorOrder, $order);
     }
 
     /**
@@ -189,7 +188,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, null);
+        $this->assertSame($errorOrder, null);
     }
 
     public function testHandleConfirmation()
@@ -230,7 +229,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $confirmOrder = $handler->handleConfirmation($request);
 
-        $this->assertEquals($confirmOrder, $order);
+        $this->assertSame($confirmOrder, $order);
     }
 
     public function testGetSendbankOrder()
@@ -268,7 +267,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $sendbankOrder = $handler->getSendbankOrder($basket);
 
-        $this->assertEquals($order, $sendbankOrder);
+        $this->assertSame($order, $sendbankOrder);
     }
 
     public function testGetPaymentCallbackResponse()
@@ -313,6 +312,6 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $cbResponse = $handler->getPaymentCallbackResponse($request);
 
-        $this->assertEquals($response, $cbResponse);
+        $this->assertSame($response, $cbResponse);
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,27 +12,25 @@
 namespace Sonata\ProductBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\SerializerInterface;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
+use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketElementManagerInterface;
+use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Component\Currency\CurrencyPriceCalculatorInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
-use Sonata\Component\Product\ProductCategoryManagerInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Product\ProductCategoryManagerInterface;
+use Sonata\Component\Product\ProductCollectionManagerInterface;
+use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Sonata\Component\Basket\BasketElementInterface;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Symfony\Component\Form\FormBuilder;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\Component\Product\ProductCollectionManagerInterface;
-
-use Sonata\Component\Basket\BasketElementManagerInterface;
-
-use JMS\Serializer\SerializerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 abstract class BaseProductProvider implements ProductProviderInterface
@@ -82,7 +81,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     protected $currencyPriceCalculator;
 
     /**
-     * @param \JMS\Serializer\SerializerInterface               $serializer
+     * @param \JMS\Serializer\SerializerInterface $serializer
      */
     public function __construct(SerializerInterface $serializer)
     {
@@ -106,8 +105,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
-     * @return void
+     * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
      */
     public function setBasketElementManager(BasketElementManagerInterface $basketElementManager)
     {
@@ -163,8 +161,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  array $options
-     * @return void
+     * @param array $options
      */
     public function setOptions(array $options = array())
     {
@@ -180,8 +177,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  string     $name
-     * @param  mixed      $default
+     * @param string $name
+     * @param mixed  $default
+     *
      * @return array|null
      */
     public function getOption($name, $default = null)
@@ -200,7 +198,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function createOrderElement(BasketElementInterface $basketElement, $format = 'json')
     {
-        $orderElement = new $this->orderElementClassName;
+        $orderElement = new $this->orderElementClassName();
         $orderElement->setQuantity($basketElement->getQuantity());
         $orderElement->setUnitPrice($basketElement->getUnitPrice(true));
         $orderElement->setPrice($basketElement->getPrice(true));
@@ -210,7 +208,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $orderElement->setProductType($this->getCode());
         $orderElement->setStatus(OrderInterface::STATUS_PENDING);
         $orderElement->setDeliveryStatus(ServiceDeliveryInterface::STATUS_OPEN);
-        $orderElement->setCreatedAt(new \DateTime);
+        $orderElement->setCreatedAt(new \DateTime());
         $orderElement->setOptions($basketElement->getOptions());
 
         $product = $basketElement->getProduct();
@@ -222,8 +220,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  string                                     $format
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param string                                     $format
+     *
      * @return array
      */
     public function getRawProduct(ProductInterface $product, $format = 'json')
@@ -369,14 +368,16 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     continue 2;
                 }
             }
+
             return $variation;
         }
 
-        return null;
+        return;
     }
 
     /**
      * @param  $name
+     *
      * @return bool return true if the field $name is a variation
      */
     public function isVariateBy($name)
@@ -393,8 +394,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  array $fields
-     * @return void
+     * @param array $fields
      */
     public function setVariationFields(array $fields = array())
     {
@@ -425,7 +425,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
                 'format_field'         => 'descriptionFormatter',
                 'target_field'         => 'description',
-                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
+                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
             ));
         }
 
@@ -435,7 +435,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
                 'format_field'         => 'shortDescriptionFormatter',
                 'target_field'         => 'shortDescription',
-                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
+                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
             ));
         }
 
@@ -448,25 +448,25 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         if (!$isVariation || in_array('image', $this->variationFields)) {
             $formMapper->add('image', 'sonata_type_model_list', array(
-                'required' => false
+                'required' => false,
             ), array(
                 'link_parameters' => array(
                     'context'  => 'sonata_product',
                     'filter'   => array('context' => array('value' => 'sonata_product')),
-                    'provider' => ''
-                )
+                    'provider' => '',
+                ),
             ));
         }
 
         if (!$isVariation || in_array('gallery', $this->variationFields)) {
             $formMapper->add('gallery', 'sonata_type_model_list', array(
-                'required' => false
+                'required' => false,
             ), array(
                 'link_parameters' => array(
                     'context'  => 'sonata_product',
                     'filter'   => array('context' => array('value' => 'sonata_product')),
-                    'provider' => ''
-                )
+                    'provider' => '',
+                ),
             ));
         }
 
@@ -477,32 +477,32 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $formMapper
             ->with('Categories')
                 ->add('productCategories', 'sonata_type_collection', array(
-                    'required' => false,
+                    'required'     => false,
                     'by_reference' => false,
                 ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'link_parameters' => array('provider' => $this->getCode())
+                    'edit'            => 'inline',
+                    'inline'          => 'table',
+                    'link_parameters' => array('provider' => $this->getCode()),
                 ))
             ->end()
             ->with('Collections')
                 ->add('productCollections', 'sonata_type_collection', array(
-                    'required' => false,
+                    'required'     => false,
                     'by_reference' => false,
                 ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'link_parameters' => array('provider' => $this->getCode())
+                    'edit'            => 'inline',
+                    'inline'          => 'table',
+                    'link_parameters' => array('provider' => $this->getCode()),
                 ))
             ->end()
             ->with('Deliveries')
                 ->add('deliveries', 'sonata_type_collection', array(
-                    'required' => false,
+                    'required'     => false,
                     'by_reference' => false,
                 ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'link_parameters' => array('provider' => $this->getCode())
+                    'edit'            => 'inline',
+                    'inline'          => 'table',
+                    'link_parameters' => array('provider' => $this->getCode()),
                 ))
             ->end()
         ;
@@ -757,7 +757,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     // BASKET RELATED FUNCTIONS
 
     /**
-     * (non-PHPdoc)
+     * (non-PHPdoc).
+     *
      * @see \Sonata\Component\Product\ProductProviderInterface::createBasketElement()
      */
     public function createBasketElement(ProductInterface $product = null, array $options = array())
@@ -785,12 +786,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * This function return the form used in the product view page
+     * This function return the form used in the product view page.
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
-     * @param  \Symfony\Component\Form\FormBuilder        $formBuilder
-     * @param  array                                      $options
-     * @return void
+     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param \Symfony\Component\Form\FormBuilder        $formBuilder
+     * @param array                                      $options
      */
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, array $options = array())
     {
@@ -804,10 +804,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param  \Symfony\Component\Form\FormBuilder             $formBuilder
-     * @param  array                                           $options
-     * @return void
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param \Symfony\Component\Form\FormBuilder             $formBuilder
+     * @param array                                           $options
      */
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array())
     {
@@ -858,21 +857,22 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->with('quantity')
                 ->assertRange(
                     array(
-                        'min' => 1,
-                        'max' => $this->getStockAvailable($basketElement->getProduct()),
+                        'min'        => 1,
+                        'max'        => $this->getStockAvailable($basketElement->getProduct()),
                         'minMessage' => 'basket_quantity_limit_min',
-                        'maxMessage' => 'basket_quantity_limit_max'
+                        'maxMessage' => 'basket_quantity_limit_max',
                     )
                 )
             ->end();
     }
 
     /**
-     * Returns true if the basket element is still valid
+     * Returns true if the basket element is still valid.
      *
-     * @param  \Sonata\Component\Basket\BasketInterface             $basket
-     * @param  \Sonata\Component\Product\ProductInterface           $product
-     * @param  \Sonata\Component\Basket\BasketElementInterface      $basketElement
+     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param \Sonata\Component\Product\ProductInterface      $product
+     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     *
      * @return bool|\Sonata\Component\Basket\BasketElementInterface
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
@@ -897,7 +897,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * Merge a product with another when the product is already present into the basket
+     * Merge a product with another when the product is already present into the basket.
      *
      *
      * @param \Sonata\Component\Basket\BasketInterface        $basket
@@ -929,7 +929,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      *
-     * @return boolean true if the basket element is still valid
+     * @return bool true if the basket element is still valid
      */
     public function isValidBasketElement(BasketElementInterface $basketElement)
     {
@@ -962,20 +962,20 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $vat = false, $quantity = 1)
     {
         if (!is_int($quantity) || $quantity < 1) {
-            throw new InvalidParameterException("Expected integer >= 1 for quantity, ".$quantity." given.");
+            throw new InvalidParameterException('Expected integer >= 1 for quantity, '.$quantity.' given.');
         }
 
         return floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency, $vat), $quantity));
     }
 
     /**
-     * Return true if the product can be added to the provided basket
+     * Return true if the product can be added to the provided basket.
      *
      * @param \Sonata\Component\Basket\BasketInterface   $basket
      * @param \Sonata\Component\Product\ProductInterface $product
      * @param array                                      $options
      *
-     * @return boolean
+     * @return bool
      */
     public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array())
     {
@@ -983,9 +983,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * return a fresh product instance (so information are reloaded: enabled and stock ...)
+     * return a fresh product instance (so information are reloaded: enabled and stock ...).
      *
-     * @param  \Sonata\Component\Product\ProductInterface $product
+     * @param \Sonata\Component\Product\ProductInterface $product
+     *
      * @return \Sonata\Component\Product\ProductInterface
      */
     public function reloadProduct(ProductInterface $product)
@@ -994,7 +995,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  integer $id
+     * @param int $id
+     *
      * @return bool
      */
     public function findOneById($id)
@@ -1023,7 +1025,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * @param string $code
-     * @return void
      */
     public function setCode($code)
     {
@@ -1044,7 +1045,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function getCheapestEnabledVariation(ProductInterface $product)
     {
         if (!$this->hasEnabledVariations($product)) {
-            return null;
+            return;
         }
 
         $variations = $this->getEnabledVariations($product);
@@ -1074,17 +1075,18 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 100,
                 200,
                 500,
-                1000
-            )
+                1000,
+            ),
         );
     }
 
     /**
-     * Checks $fields if specified, returns variation fields otherwise
+     * Checks $fields if specified, returns variation fields otherwise.
      *
      * @param array $fields
      *
      * @return array
+     *
      * @throws \RuntimeException
      */
     protected function getMergedFields(array $fields)

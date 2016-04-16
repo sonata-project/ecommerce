@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,9 +12,8 @@
 namespace Sonata\Component\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Doctrine\Common\EventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 class ORMInheritanceSubscriber implements EventSubscriber
 {
@@ -36,7 +36,7 @@ class ORMInheritanceSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return array(
-            'loadClassMetadata'
+            'loadClassMetadata',
         );
     }
 

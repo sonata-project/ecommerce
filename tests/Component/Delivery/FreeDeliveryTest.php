@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Delivery;
+namespace Sonata\tests\Component\Delivery;
 
 use Sonata\Component\Delivery\FreeDelivery;
 
 /**
- * Class FreeDeliveryTest
+ * Class FreeDeliveryTest.
  *
- * @package Sonata\Tests\Component\Delivery
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -33,13 +33,13 @@ class FreeDeliveryTest extends \PHPUnit_Framework_TestCase
     public function testPriceIsNull()
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertEquals(0, $freeDelivery->getVatRate());
-        $this->assertEquals(0, $freeDelivery->getPrice());
+        $this->assertSame(0, $freeDelivery->getVatRate());
+        $this->assertSame(0, $freeDelivery->getPrice());
     }
 
     public function testGetName()
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertEquals("Free delivery", $freeDelivery->getName());
+        $this->assertSame('Free delivery', $freeDelivery->getName());
     }
 }

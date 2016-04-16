@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,9 +14,8 @@ namespace Sonata\Tests\ProductBundle\Entity;
 use Sonata\ProductBundle\Entity\BaseProduct;
 
 /**
- * Class Product
+ * Class Product.
  *
- * @package Sonata\Tests\ProductBundle\Entity
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -24,19 +24,17 @@ class Product extends BaseProduct
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
         // TODO: Implement getId() method.
     }
-
 }
 
 /**
- * Class BaseProductTest
+ * Class BaseProductTest.
  *
- * @package Sonata\Tests\ProductBundle\Entity
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -59,11 +57,11 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $image = $this->getMock('Sonata\MediaBundle\Model\MediaInterface');
         $image->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue("correctMedia"));
+            ->will($this->returnValue('correctMedia'));
 
         $product->setImage($image);
 
         $this->assertInstanceOf('Sonata\MediaBundle\Model\MediaInterface', $product->getImage());
-        $this->assertEquals("correctMedia", $product->getImage()->getName());
+        $this->assertSame('correctMedia', $product->getImage()->getName());
     }
 }

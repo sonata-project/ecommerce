@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\PriceBundle\Resources;
+namespace Sonata\tests\PriceBundle\Resources;
 
 use Sonata\CoreBundle\Test\XliffValidatorTestCase;
 

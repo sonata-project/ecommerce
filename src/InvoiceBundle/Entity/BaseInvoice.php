@@ -1,113 +1,115 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\InvoiceBundle\Entity;
 
-use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Invoice\InvoiceElementInterface;
+use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\UserBundle\Model\UserInterface;
 
 /**
- * Sonata\InvoiceBundle\Entity\BaseInvoice
+ * Sonata\InvoiceBundle\Entity\BaseInvoice.
  */
 abstract class BaseInvoice implements InvoiceInterface
 {
     /**
-     * @var string $reference
+     * @var string
      */
     protected $reference;
 
     /**
-     * @var integer $userId
+     * @var int
      */
     protected $customer;
 
     /**
-     * @var CurrencyInterface $currency
+     * @var CurrencyInterface
      */
     protected $currency;
 
     /**
-     * @var integer $status
+     * @var int
      */
     protected $status;
 
     /**
-     * @var float $totalInc
+     * @var float
      */
     protected $totalInc;
 
     /**
-     * @var float $totalExcl
+     * @var float
      */
     protected $totalExcl;
 
     /**
-     * @var string $name
+     * @var string
      */
     protected $name;
 
     /**
-     * @var string $phone
+     * @var string
      */
     protected $phone;
 
     /**
-     * @var string $address1
+     * @var string
      */
     protected $address1;
 
     /**
-     * @var string $address2
+     * @var string
      */
     protected $address2;
 
     /**
-     * @var string $address3
+     * @var string
      */
     protected $address3;
 
     /**
-     * @var string $city
+     * @var string
      */
     protected $city;
 
     /**
-     * @var string $postcode
+     * @var string
      */
     protected $postcode;
 
     /**
-     * @var string $country
+     * @var string
      */
     protected $country;
 
     /**
-     * @var string $fax
+     * @var string
      */
     protected $fax;
 
     /**
-     * @var string $email
+     * @var string
      */
     protected $email;
 
     /**
-     * @var string $mobile
+     * @var string
      */
     protected $mobile;
 
     /**
-     * @var string $paymentMethod
+     * @var string
      */
     protected $paymentMethod;
 
@@ -132,7 +134,7 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $invoiceElements = array();
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -140,13 +142,13 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Returns formatted billing address
+     * Returns formatted billing address.
      *
      * @param string $sep
      *
      * @return string
      */
-    public function getFullBilling($sep = ", ")
+    public function getFullBilling($sep = ', ')
     {
         return BaseAddress::formatAddress($this->getBillingAsArray(), $sep);
     }
@@ -164,7 +166,7 @@ abstract class BaseInvoice implements InvoiceInterface
             'address3'     => $this->getAddress3(),
             'postcode'     => $this->getPostcode(),
             'city'         => $this->getCity(),
-            'country_code' => $this->getCountry()
+            'country_code' => $this->getCountry(),
         );
     }
 
@@ -201,7 +203,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set reference
+     * Set reference.
      *
      * @param string $reference
      */
@@ -211,7 +213,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get reference
+     * Get reference.
      *
      * @return string $reference
      */
@@ -222,7 +224,8 @@ abstract class BaseInvoice implements InvoiceInterface
 
     /**
      * Set userId
-     *R
+     *R.
+     *
      * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer = null)
@@ -231,9 +234,9 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get userId
+     * Get userId.
      *
-     * @return integer $customer
+     * @return int $customer
      */
     public function getCustomer()
     {
@@ -241,7 +244,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set currency
+     * Set currency.
      *
      * @param CurrencyInterface $currency
      */
@@ -251,7 +254,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get currency
+     * Get currency.
      *
      * @return CurrencyInterface $currency
      */
@@ -261,9 +264,9 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param integer $status
+     * @param int $status
      */
     public function setStatus($status)
     {
@@ -271,9 +274,9 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return integer $status
+     * @return int $status
      */
     public function getStatus()
     {
@@ -281,7 +284,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set totalInc
+     * Set totalInc.
      *
      * @param float $totalInc
      */
@@ -291,7 +294,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get totalInc
+     * Get totalInc.
      *
      * @return float $totalInc
      */
@@ -301,7 +304,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set totalExcl
+     * Set totalExcl.
      *
      * @param float $totalExcl
      */
@@ -311,7 +314,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get totalExcl
+     * Get totalExcl.
      *
      * @return float $totalExcl
      */
@@ -321,7 +324,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      */
@@ -331,7 +334,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string $name
      */
@@ -341,7 +344,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
      * @param string $phone
      */
@@ -351,7 +354,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string $phone
      */
@@ -361,7 +364,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set address1
+     * Set address1.
      *
      * @param string $address1
      */
@@ -371,7 +374,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get address1
+     * Get address1.
      *
      * @return string $address1
      */
@@ -381,7 +384,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set address2
+     * Set address2.
      *
      * @param string $address2
      */
@@ -391,7 +394,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get address2
+     * Get address2.
      *
      * @return string $address2
      */
@@ -401,7 +404,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set address3
+     * Set address3.
      *
      * @param string $address3
      */
@@ -411,7 +414,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get address3
+     * Get address3.
      *
      * @return string $address3
      */
@@ -421,7 +424,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param string $city
      */
@@ -431,7 +434,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string $city
      */
@@ -441,7 +444,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set postcode
+     * Set postcode.
      *
      * @param string $postcode
      */
@@ -451,7 +454,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get postcode
+     * Get postcode.
      *
      * @return string $postcode
      */
@@ -461,7 +464,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set country
+     * Set country.
      *
      * @param string $country
      */
@@ -471,7 +474,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get country
+     * Get country.
      *
      * @return string $country
      */
@@ -481,7 +484,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set fax
+     * Set fax.
      *
      * @param string $fax
      */
@@ -491,7 +494,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get fax
+     * Get fax.
      *
      * @return string $fax
      */
@@ -501,7 +504,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      */
@@ -511,7 +514,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string $email
      */
@@ -521,7 +524,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set mobile
+     * Set mobile.
      *
      * @param string $mobile
      */
@@ -531,7 +534,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get mobile
+     * Get mobile.
      *
      * @return string $mobile
      */
@@ -541,7 +544,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param UserInterface $user
      */
@@ -551,7 +554,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return UserInterface $user
      */
@@ -603,7 +606,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Gets the locale
+     * Gets the locale.
      *
      * @return string
      */
@@ -613,7 +616,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Sets the locale
+     * Sets the locale.
      *
      * @param string $locale
      */
@@ -621,7 +624,6 @@ abstract class BaseInvoice implements InvoiceInterface
     {
         $this->locale = $locale;
     }
-
 
     /**
      * @return array

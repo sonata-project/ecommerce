@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,8 +12,7 @@
 namespace Sonata\Component\Transformer;
 
 /**
- * The pool stored a group of available payment method
- *
+ * The pool stored a group of available payment method.
  */
 class Pool
 {
@@ -22,7 +22,7 @@ class Pool
     protected $transformer = array();
 
     /**
-     * Add a transformer into into the pool
+     * Add a transformer into into the pool.
      *
      * @param string          $type
      * @param BaseTransformer $instance
@@ -33,7 +33,6 @@ class Pool
     }
 
     /**
-     *
      * @return array of transformer methods
      */
     public function getTransformers()
@@ -42,7 +41,7 @@ class Pool
     }
 
     /**
-     * return a Transformer Object
+     * return a Transformer Object.
      *
      * @param string $type
      *

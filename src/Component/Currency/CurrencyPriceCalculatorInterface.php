@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,11 +19,11 @@ use Sonata\Component\Product\ProductInterface;
 interface CurrencyPriceCalculatorInterface
 {
     /**
-     * Returns the price of $product for given $currency
+     * Returns the price of $product for given $currency.
      *
      * @param ProductInterface  $product  A product instance
      * @param CurrencyInterface $currency A currency instance
-     * @param boolean           $vat      Return price including VAT?
+     * @param bool              $vat      Return price including VAT?
      *
      * @return float
      */

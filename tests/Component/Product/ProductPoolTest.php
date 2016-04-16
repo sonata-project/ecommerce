@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Product;
+namespace Sonata\tests\Component\Product;
 
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
@@ -37,7 +37,7 @@ class ProductPoolTest extends \PHPUnit_Framework_TestCase
         $definition1 = new ProductDefinition($productProvider, $productManager1);
         $definition2 = new ProductDefinition($productProvider, $productManager2);
 
-        $productPool = new Pool;
+        $productPool = new Pool();
         $productPool->addProduct('product1', $definition1);
         $productPool->addProduct('product2', $definition2);
 
@@ -45,10 +45,10 @@ class ProductPoolTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($productPool->hasProvider('product1'));
         $this->assertTrue($productPool->hasProvider('product2'));
 
-        $this->assertEquals($productPool->getProduct('product1'), $definition1);
-        $this->assertEquals($productPool->getProduct('product2'), $definition2);
+        $this->assertSame($productPool->getProduct('product1'), $definition1);
+        $this->assertSame($productPool->getProduct('product2'), $definition2);
 
-        $this->assertEquals($productPool->getProductCode($product1), 'product1');
-        $this->assertEquals($productPool->getProductCode($product2), 'product2');
+        $this->assertSame($productPool->getProductCode($product1), 'product1');
+        $this->assertSame($productPool->getProductCode($product2), 'product2');
     }
 }

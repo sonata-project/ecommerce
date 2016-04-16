@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,9 +14,9 @@ namespace Sonata\Tests\Component\Basket;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
+use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Tests\Component\Product\Product;
 
 class Delivery extends BaseServiceDelivery
@@ -28,7 +28,7 @@ class Delivery extends BaseServiceDelivery
 
     public function getName()
     {
-        return "delivery 1";
+        return 'delivery 1';
     }
 
     public function getVatRate()
@@ -40,7 +40,6 @@ class Delivery extends BaseServiceDelivery
     {
         return 120;
     }
-
 }
 
 class BasketTest extends \PHPUnit_Framework_TestCase
@@ -67,10 +66,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $address->expects($this->any())->method('getAddress1')->will($this->returnValue('Address1'));
         $address->expects($this->any())->method('getAddress2')->will($this->returnValue('Address2'));
         $address->expects($this->any())->method('getAddress3')->will($this->returnValue('Address3'));
-        $address->expects($this->any())->method('getPostcode')->will($this->returnValue("75001"));
-        $address->expects($this->any())->method('getCity')->will($this->returnValue("Paris"));
-        $address->expects($this->any())->method('getCountryCode')->will($this->returnValue("FR"));
-        $address->expects($this->any())->method('getPhone')->will($this->returnValue("0123456789"));
+        $address->expects($this->any())->method('getPostcode')->will($this->returnValue('75001'));
+        $address->expects($this->any())->method('getCity')->will($this->returnValue('Paris'));
+        $address->expects($this->any())->method('getCountryCode')->will($this->returnValue('FR'));
+        $address->expects($this->any())->method('getPhone')->will($this->returnValue('0123456789'));
 
         return $address;
     }
@@ -79,7 +78,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
     {
         $currency = $this->getMock('Sonata\Component\Currency\Currency');
 
-        $basket = new Basket;
+        $basket = new Basket();
         $basket->setCurrency($currency);
 
         $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
@@ -96,7 +95,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             ->method('isRecurrentPayment')
             ->will($this->returnValue(false));
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->addProduct('product_code', $productDefinition);
 
         $basket->setProductPool($pool);
@@ -111,23 +110,23 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
 
-        $this->assertEquals(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
-        $this->assertEquals(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertEquals(15, $basketElement->getTotal(false), '::getQuantity() - return 2');
+        $this->assertSame(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
+        $this->assertSame(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertSame(15, $basketElement->getTotal(false), '::getQuantity() - return 2');
 
-        $this->assertEquals(15, $basket->getTotal(false), '::getTotal() w/o vat return 15');
-        $this->assertEquals(17.940, $basket->getTotal(true), '::getTotal() w/ vat return 18');
+        $this->assertSame(15, $basket->getTotal(false), '::getTotal() w/o vat return 15');
+        $this->assertSame(17.940, $basket->getTotal(true), '::getTotal() w/ vat return 18');
 
         $basketElement->setQuantity(2);
 
-        $this->assertEquals(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
-        $this->assertEquals(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertEquals(30, $basketElement->getTotal(false), '::getQuantity() - return 2');
-        $this->assertEquals(30, $basket->getTotal(false), '::getTotal() w/o vat return 30');
-        $this->assertEquals(35.880, $basket->getTotal(true), '::getTotal() w/ vat return true');
+        $this->assertSame(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
+        $this->assertSame(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertSame(30, $basketElement->getTotal(false), '::getQuantity() - return 2');
+        $this->assertSame(30, $basket->getTotal(false), '::getTotal() w/o vat return 30');
+        $this->assertSame(35.880, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
         // Recurrent payments
-        $this->assertEquals(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
+        $this->assertSame(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
 
         $newProduct = $this->getMockProduct();
         $newProduct->expects($this->any())
@@ -139,7 +138,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertEquals(30, $basket->getTotal(false, false), '::getTotal() for non-recurrent payments only');
+        $this->assertSame(30, $basket->getTotal(false, false), '::getTotal() for non-recurrent payments only');
 
         $basket->removeElement($basketElement);
 
@@ -147,9 +146,9 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
-        $this->assertEquals(150, $basket->getTotal(false), '::getTotal() - return 150');
-        $this->assertEquals(179.400, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
-        $this->assertEquals(29.400, $basket->getVatAmount(),  '::getVatAmount() w/o vat return 29.4');
+        $this->assertSame(150, $basket->getTotal(false), '::getTotal() - return 150');
+        $this->assertSame(179.400, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
+        $this->assertSame(29.400, $basket->getVatAmount(),  '::getVatAmount() w/o vat return 29.4');
     }
 
     public function testBasket()
@@ -219,7 +218,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() return true');
 
         $this->assertTrue($basket->hasBasketElements(), '::hasElement() return true ');
-        $this->assertEquals(1, $basket->countBasketElements(), '::countElements() return 1');
+        $this->assertSame(1, $basket->countBasketElements(), '::countElements() return 1');
         $this->assertNotEmpty($basket->getBasketElements(), '::getElements() is not empty');
 
         $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $element = $basket->getElement($product), '::getElement() - return a BasketElement');
@@ -227,7 +226,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Sonata\\Component\\Basket\\BasketElement', $basket->removeElement($element), '::removeElement() - return the removed BasketElement');
 
         $this->assertFalse($basket->hasBasketElements(), '::hasElement() return false');
-        $this->assertEquals(0, $basket->countBasketElements(), '::countElements() return 0');
+        $this->assertSame(0, $basket->countBasketElements(), '::countElements() return 0');
         $this->assertEmpty($basket->getBasketElements(), '::getElements() is empty');
 
         $basket->reset();
@@ -247,10 +246,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $definition = new ProductDefinition($provider, $manager);
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->addProduct('product_code', $definition);
 
-        $basket = new Basket;
+        $basket = new Basket();
 
         $basket->setProductPool($pool);
 
@@ -277,7 +276,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             'currency',
             'deliveryAddress',
             'billingAddress',
-            'customer'
+            'customer',
         );
 
         $basketData = unserialize($data);
@@ -307,7 +306,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             'currency',
             'deliveryAddressId',
             'billingAddressId',
-            'customerId'
+            'customerId',
         );
 
         $basketData = unserialize($data);
@@ -385,7 +384,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket->buildPrices();
 
-        $this->assertEquals(0, count($basket->getBasketElements()));
+        $this->assertSame(0, count($basket->getBasketElements()));
     }
 
     public function testClean()
@@ -406,7 +405,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket->clean();
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertSame(1, count($basket->getBasketElements()));
     }
 
     public function testGettersSetters()
@@ -419,43 +418,43 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basketElement->setProduct('product_code', $product);
 
         $basket->setBasketElements(array($basketElement));
-        $this->assertEquals(array($basketElement), $basket->getBasketElements());
+        $this->assertSame(array($basketElement), $basket->getBasketElements());
 
         $basket->setDeliveryAddressId(1);
-        $this->assertEquals(1, $basket->getDeliveryAddressId());
+        $this->assertSame(1, $basket->getDeliveryAddressId());
 
         $basket->setBillingAddressId(1);
-        $this->assertEquals(1, $basket->getBillingAddressId());
+        $this->assertSame(1, $basket->getBillingAddressId());
 
         $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->any())
             ->method('getCode')
             ->will($this->returnValue(1));
         $basket->setDeliveryMethod($deliveryMethod);
-        $this->assertEquals(1, $basket->getDeliveryMethodCode());
+        $this->assertSame(1, $basket->getDeliveryMethodCode());
 
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
         $paymentMethod->expects($this->any())
             ->method('getCode')
             ->will($this->returnValue(1));
         $basket->setPaymentMethod($paymentMethod);
-        $this->assertEquals(1, $basket->getPaymentMethodCode());
+        $this->assertSame(1, $basket->getPaymentMethodCode());
 
         $basket->setCustomerId(1);
-        $this->assertEquals(1, $basket->getCustomerId());
+        $this->assertSame(1, $basket->getCustomerId());
 
         $options = array('option1' => 'value1', 'option2' => 'value2');
         $basket->setOptions($options);
         $this->assertNull($basket->getOption('unexisting_option'));
-        $this->assertEquals(42, $basket->getOption('unexisting_option', 42));
-        $this->assertEquals('value1', $basket->getOption('option1'));
-        $this->assertEquals($options, $basket->getOptions());
+        $this->assertSame(42, $basket->getOption('unexisting_option', 42));
+        $this->assertSame('value1', $basket->getOption('option1'));
+        $this->assertSame($options, $basket->getOptions());
 
         $basket->setOption('option3', 'value3');
-        $this->assertEquals('value3', $basket->getOption('option3'));
+        $this->assertSame('value3', $basket->getOption('option3'));
 
         $basket->setLocale('en');
-        $this->assertEquals('en', $basket->getLocale());
+        $this->assertSame('en', $basket->getLocale());
     }
 
     protected function getPreparedBasket()
@@ -479,7 +478,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $definition = new ProductDefinition($provider, $manager);
 
-        $pool = new Pool;
+        $pool = new Pool();
         $pool->addProduct('product_code', $definition);
 
         $basket->setProductPool($pool);

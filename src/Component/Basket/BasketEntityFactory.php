@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,8 +11,8 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Customer\CustomerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -95,7 +95,7 @@ class BasketEntityFactory implements BasketFactoryInterface
     }
 
     /**
-     * Loads the basket in session (for authenticating users)
+     * Loads the basket in session (for authenticating users).
      *
      * @return BasketInterface
      */

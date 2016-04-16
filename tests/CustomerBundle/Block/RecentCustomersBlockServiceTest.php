@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,9 +14,8 @@ namespace Sonata\Test\CustomerBundle\Block;
 use Sonata\CustomerBundle\Block\RecentCustomersBlockService;
 
 /**
- * Class RecentCustomersBlockServiceTest
+ * Class RecentCustomersBlockServiceTest.
  *
- * @package Sonata\Test\CustomerBundle
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
@@ -27,6 +27,6 @@ class RecentCustomersBlockServiceTest extends \PHPUnit_Framework_TestCase
         $customerManagerInterfaceMock = $this->getMockBuilder('Sonata\Component\Customer\CustomerManagerInterface')->disableOriginalConstructor()->getMock();
         $block = new RecentCustomersBlockService('test', $engineInterfaceMock, $customerManagerInterfaceMock);
 
-        $this->assertEquals('Recent Customers', $block->getName());
+        $this->assertSame('Recent Customers', $block->getName());
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -16,16 +17,17 @@ use Sonata\Component\Customer\AddressInterface;
 interface PaymentSelectorInterface
 {
     /**
-     * Returns the available Payment methods for given $basket and $deliveryAddress
+     * Returns the available Payment methods for given $basket and $deliveryAddress.
      *
-     * @param  BasketInterface  $basket
-     * @param  AddressInterface $deliveryAddress
+     * @param BasketInterface  $basket
+     * @param AddressInterface $deliveryAddress
+     *
      * @return array
      */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
 
     /**
-     * Returns the Payment method for given $bank
+     * Returns the Payment method for given $bank.
      *
      * @param $bank The payment method code
      *

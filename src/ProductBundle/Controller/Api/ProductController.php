@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\ProductBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -19,18 +23,11 @@ use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
-
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
- * Class ProductController
+ * Class ProductController.
  *
- * @package Sonata\ProductBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -42,7 +39,7 @@ class ProductController
     protected $productManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param ProductManagerInterface $productManager
      */
@@ -73,7 +70,7 @@ class ProductController
     public function getProductsAction(ParamFetcherInterface $paramFetcher)
     {
         $supportedFilters = array(
-            'enabled' => "",
+            'enabled' => '',
         );
 
         $page    = $paramFetcher->get('page') - 1;
@@ -91,7 +88,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product
+     * Retrieves a specific product.
      *
      * @ApiDoc(
      *  requirements={
@@ -116,7 +113,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCategories
+     * Retrieves a specific product's ProductCategories.
      *
      * @ApiDoc(
      *  requirements={
@@ -141,7 +138,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCategories' categories
+     * Retrieves a specific product's ProductCategories' categories.
      *
      * @ApiDoc(
      *  requirements={
@@ -166,7 +163,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCollections
+     * Retrieves a specific product's ProductCollections.
      *
      * @ApiDoc(
      *  requirements={
@@ -191,7 +188,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's ProductCollections' collections
+     * Retrieves a specific product's ProductCollections' collections.
      *
      * @ApiDoc(
      *  requirements={
@@ -216,7 +213,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's deliveries
+     * Retrieves a specific product's deliveries.
      *
      * @ApiDoc(
      *  requirements={
@@ -241,7 +238,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's packages
+     * Retrieves a specific product's packages.
      *
      * @ApiDoc(
      *  requirements={
@@ -266,7 +263,7 @@ class ProductController
     }
 
     /**
-     * Retrieves a specific product's variations
+     * Retrieves a specific product's variations.
      *
      * @ApiDoc(
      *  requirements={
@@ -291,11 +288,12 @@ class ProductController
     }
 
     /**
-     * Retrieves product with id $id or throws an exception if it doesn't exist
+     * Retrieves product with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return ProductInterface
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getProduct($id)
@@ -308,5 +306,4 @@ class ProductController
 
         return $product;
     }
-
 }

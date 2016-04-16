@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,13 +11,13 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Knp\Menu\ItemInterface as MenuItemInterface;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class CustomerAdmin extends Admin
 {
@@ -30,8 +30,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Form\FormMapper $formMapper
-     * @return void
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -59,8 +58,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Datagrid\ListMapper $list
-     * @return void
+     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
      */
     public function configureListFields(ListMapper $list)
     {
@@ -80,8 +78,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Show\ShowMapper $filter
-     * @return void
+     * @param \Sonata\AdminBundle\Show\ShowMapper $filter
      */
     public function configureShowFields(ShowMapper $filter)
     {
@@ -105,8 +102,7 @@ class CustomerAdmin extends Admin
     }
 
     /**
-     * @param  \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     * @return void
+     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {

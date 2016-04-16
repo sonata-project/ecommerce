@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -12,10 +13,10 @@ namespace Sonata\Component\Transformer;
 
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Invoice\InvoiceElementInterface;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceElementManagerInterface;
+use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -33,7 +34,7 @@ class InvoiceTransformer extends BaseTransformer
     protected $deliveryPool;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param InvoiceElementManagerInterface $invoiceElementManager Invoice element manager
      * @param DeliveryPool                   $deliveryPool          Delivery pool component
@@ -45,7 +46,7 @@ class InvoiceTransformer extends BaseTransformer
     }
 
     /**
-     * Transforms an order into an invoice
+     * Transforms an order into an invoice.
      *
      * @param OrderInterface   $order
      * @param InvoiceInterface $invoice
@@ -89,7 +90,7 @@ class InvoiceTransformer extends BaseTransformer
     }
 
     /**
-     * Adds the delivery information from $order to $invoice
+     * Adds the delivery information from $order to $invoice.
      *
      * @param InvoiceInterface $invoice
      * @param OrderInterface   $order
@@ -113,7 +114,7 @@ class InvoiceTransformer extends BaseTransformer
     }
 
     /**
-     * Creates an InvoiceElement based on an OrderElement
+     * Creates an InvoiceElement based on an OrderElement.
      *
      * @param OrderElementInterface $orderElement
      *

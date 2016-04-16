@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -17,7 +17,7 @@ use Sonata\UserBundle\Model\UserInterface;
 interface OrderManagerInterface extends ManagerInterface
 {
     /**
-     * Finds orders belonging to given user
+     * Finds orders belonging to given user.
      *
      * @param UserInterface $user
      *

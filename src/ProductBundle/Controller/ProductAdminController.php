@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,6 +19,7 @@ class ProductAdminController extends Controller
 {
     /**
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction()
@@ -34,7 +35,7 @@ class ProductAdminController extends Controller
                 'providers'     => $this->get('sonata.product.pool')->getProducts(),
                 'base_template' => $this->getBaseTemplate(),
                 'admin'         => $this->admin,
-                'action'        => 'create'
+                'action'        => 'create',
             ));
         }
 
@@ -43,6 +44,7 @@ class ProductAdminController extends Controller
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function showVariationsAction()

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -12,9 +12,7 @@
 namespace Sonata\Test\Component\Currency\Types;
 
 use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Sonata\Component\Currency\Currency;
-use Sonata\Component\Currency\CurrencyDoctrineType;
 
 class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,7 +27,7 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $this->assertEquals("currency", Type::getType('currency')->getName());
+        $this->assertSame('currency', Type::getType('currency')->getName());
     }
 
     public function testConvertToDatabaseValue()
@@ -37,9 +35,9 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
         $platform = new MockPlatform();
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
-        $this->assertEquals(
+        $this->assertSame(
             'EUR',
             Type::getType('currency')->convertToDatabaseValue($currency, $platform)
         );
@@ -52,7 +50,7 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
     public function testConvertToDatabaseValueException()
     {
         $platform = new MockPlatform();
-        Type::getType('currency')->convertToDatabaseValue("EUR", $platform);
+        Type::getType('currency')->convertToDatabaseValue('EUR', $platform);
     }
 
     public function testConvertToPHPValue()
@@ -60,9 +58,9 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
         $platform = new MockPlatform();
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
-        $this->assertEquals(
+        $this->assertSame(
             $currency,
             Type::getType('currency')->convertToPHPValue('EUR', $platform)
         );
@@ -82,7 +80,7 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
     {
         $platform = new MockPlatform();
 
-        $this->assertEquals(
+        $this->assertSame(
             3,
             Type::getType('currency')->getDefaultLength($platform)
         );
@@ -92,7 +90,7 @@ class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
     {
         $platform = new MockPlatform();
 
-        $this->assertEquals("DUMMYVARCHAR()", Type::getType('currency')->getSQLDeclaration(array(), $platform));
+        $this->assertSame('DUMMYVARCHAR()', Type::getType('currency')->getSQLDeclaration(array(), $platform));
     }
 }
 
@@ -106,15 +104,25 @@ class MockPlatform extends \Doctrine\DBAL\Platforms\AbstractPlatform
         throw DBALException::notSupported(__METHOD__);
     }
 
-    public function getBooleanTypeDeclarationSQL(array $columnDef) {}
-    public function getIntegerTypeDeclarationSQL(array $columnDef) {}
-    public function getBigIntTypeDeclarationSQL(array $columnDef) {}
-    public function getSmallIntTypeDeclarationSQL(array $columnDef) {}
-    public function _getCommonIntegerTypeDeclarationSQL(array $columnDef) {}
+    public function getBooleanTypeDeclarationSQL(array $columnDef)
+    {
+    }
+    public function getIntegerTypeDeclarationSQL(array $columnDef)
+    {
+    }
+    public function getBigIntTypeDeclarationSQL(array $columnDef)
+    {
+    }
+    public function getSmallIntTypeDeclarationSQL(array $columnDef)
+    {
+    }
+    public function _getCommonIntegerTypeDeclarationSQL(array $columnDef)
+    {
+    }
 
     public function getVarcharTypeDeclarationSQL(array $field)
     {
-        return "DUMMYVARCHAR()";
+        return 'DUMMYVARCHAR()';
     }
 
     /** @override */

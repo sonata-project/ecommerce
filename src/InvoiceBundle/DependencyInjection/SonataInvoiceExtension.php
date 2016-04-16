@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,22 +11,18 @@
 
 namespace Sonata\InvoiceBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
-
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataInvoiceExtension extends Extension
 {
-
     /**
      * Loads the order configuration.
      *
@@ -58,9 +54,8 @@ class SonataInvoiceExtension extends Extension
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $config
-     * @return void
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array                                                   $config
      */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
@@ -72,8 +67,7 @@ class SonataInvoiceExtension extends Extension
     }
 
     /**
-     * @param  array $config
-     * @return void
+     * @param array $config
      */
     public function registerDoctrineMapping(array $config)
     {
@@ -83,7 +77,7 @@ class SonataInvoiceExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        /**
+        /*
          * INVOICE
          */
         $collector->addAssociation($config['class']['invoice'], 'mapManyToOne', array(
@@ -95,12 +89,12 @@ class SonataInvoiceExtension extends Extension
                  'merge',
                  'detach',
              ),
-             'mappedBy'     => NULL,
+             'mappedBy'     => null,
              'joinColumns'  => array(
                  array(
-                     'name' => 'customer_id',
+                     'name'                 => 'customer_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'SET NULL',
+                     'onDelete'             => 'SET NULL',
                  ),
              ),
              'orphanRemoval' => false,
@@ -115,13 +109,13 @@ class SonataInvoiceExtension extends Extension
                  'merge',
                  'detach',
              ),
-             'mappedBy'     => NULL,
+             'mappedBy'     => null,
              'inversedBy'   => 'invoiceElements',
              'joinColumns'  => array(
                  array(
-                     'name' => 'invoice_id',
+                     'name'                 => 'invoice_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
+                     'onDelete'             => 'CASCADE',
                  ),
              ),
              'orphanRemoval' => false,
@@ -138,14 +132,14 @@ class SonataInvoiceExtension extends Extension
         ));
 
         $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', array(
-            'fieldName' => 'orderElement',
+            'fieldName'    => 'orderElement',
             'targetEntity' => $config['class']['order_element'],
-            'cascade' => array(),
+            'cascade'      => array(),
             'joinColumns'  => array(
                  array(
-                     'name' => 'order_element_id',
+                     'name'                 => 'order_element_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
+                     'onDelete'             => 'CASCADE',
                  ),
              ),
         ));

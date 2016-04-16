@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -26,13 +26,12 @@ class ProductProviderTest extends BaseProductProvider
     {
         return 'DumbTestController';
     }
-
 }
 
 class BasketElementTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Sets up unit test
+     * Sets up unit test.
      */
     public function setUp()
     {
@@ -61,7 +60,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $basketElement->setProductDefinition($productDefinition);
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
@@ -75,27 +74,27 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
     {
         $basketElement = $this->getBasketElement();
 
-        $this->assertEquals(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
-        $this->assertEquals(1, $basketElement->getQuantity(), 'BasketElement returns the correct default quantity');
+        $this->assertSame(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
+        $this->assertSame(1, $basketElement->getQuantity(), 'BasketElement returns the correct default quantity');
 
-        $this->assertEquals(15, $basketElement->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
-        $this->assertEquals(17.940, $basketElement->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
+        $this->assertSame(15, $basketElement->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
+        $this->assertSame(17.940, $basketElement->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
 
-        $this->assertEquals(15, $basketElement->getTotal(), 'BasketElement return the correct price w/o VAT');
-        $this->assertEquals(17.940, $basketElement->getTotal(true), 'BasketElement return the correct price w VAT');
+        $this->assertSame(15, $basketElement->getTotal(), 'BasketElement return the correct price w/o VAT');
+        $this->assertSame(17.940, $basketElement->getTotal(true), 'BasketElement return the correct price w VAT');
 
-        $this->assertEquals(2.940, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
+        $this->assertSame(2.940, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
     }
 
     public function testOptions()
     {
         $basketElement = $this->getBasketElement();
 
-        $this->assertEquals(true, $basketElement->hasOption('option1'), 'BasketElement has one option : option1');
-        $this->assertEquals(false, $basketElement->hasOption('fake'), 'BasketElement has not option : fake');
+        $this->assertSame(true, $basketElement->hasOption('option1'), 'BasketElement has one option : option1');
+        $this->assertSame(false, $basketElement->hasOption('fake'), 'BasketElement has not option : fake');
 
-        $this->assertEquals('toto', $basketElement->getOption('option1'), 'option1 option = toto');
-        $this->assertEquals(null, $basketElement->getOption('fake'), 'fake option = null');
+        $this->assertSame('toto', $basketElement->getOption('option1'), 'option1 option = toto');
+        $this->assertSame(null, $basketElement->getOption('fake'), 'fake option = null');
     }
 
     public function testQuantity()
@@ -103,15 +102,15 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $basketElement = $this->getBasketElement();
         $basketElement->setQuantity(10);
 
-        $this->assertEquals(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
-        $this->assertEquals(150, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT');
-        $this->assertEquals(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
+        $this->assertSame(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
+        $this->assertSame(150, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT');
+        $this->assertSame(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
 
         $basketElement->setQuantity(-10);
-        $this->assertEquals(15, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when negative quantity set');
+        $this->assertSame(15, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when negative quantity set');
 
         $basketElement->setQuantity(0);
-        $this->assertEquals(0, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when no quantity set');
+        $this->assertSame(0, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when no quantity set');
     }
 
     public function testValidity()
@@ -122,13 +121,13 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
-        $this->assertEquals(true, $basketElement->isValid(), 'BasketElement is valid');
+        $this->assertSame(true, $basketElement->isValid(), 'BasketElement is valid');
 
         $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
         $product->expects($this->once())->method('getEnabled')->will($this->returnValue(false));
         $basketElement->setProduct('product_code', $product);
 
-        $this->assertEquals(false, $basketElement->isValid(), 'BasketElement returns the correct default quantity');
+        $this->assertSame(false, $basketElement->isValid(), 'BasketElement returns the correct default quantity');
     }
 
     public function testGettersSetters()
@@ -142,8 +141,8 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $basketElement = new BasketElement();
         $basketElement->setProductDefinition($productDefinition);
 
-        $this->assertEquals(0, $basketElement->getVatRate());
-        $this->assertEquals(0, $basketElement->getUnitPrice($currency));
+        $this->assertSame(0, $basketElement->getVatRate());
+        $this->assertSame(0, $basketElement->getUnitPrice($currency));
         $this->assertFalse($basketElement->isValid());
 
         $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
@@ -164,11 +163,11 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(42));
 
         $basketElement->setProduct('product_code', $product);
-        $this->assertEquals($product, $basketElement->getProduct());
+        $this->assertSame($product, $basketElement->getProduct());
 
         // Tests setProductId
         $basketElement->setProductId(42);
-        $this->assertEquals(42, $basketElement->getProductId());
+        $this->assertSame(42, $basketElement->getProductId());
 
         $basketElement->setProductId(24);
         $this->assertNull($basketElement->getProductId());
@@ -181,23 +180,23 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
         $basketElement->setProductId(42);
         $basketElement->setProduct('product_code', $product); // Done by the provider hereby mocked, hence we do it manually
-        $this->assertEquals($product->getId(), $basketElement->getProductId());
+        $this->assertSame($product->getId(), $basketElement->getProductId());
 
         // Options
         $options = array('option1' => 'value1', 'option2' => 'value2');
         $basketElement->setOptions($options);
         $this->assertNull($basketElement->getOption('unexisting_option'));
-        $this->assertEquals(42, $basketElement->getOption('unexisting_option', 42));
-        $this->assertEquals('value1', $basketElement->getOption('option1'));
-        $this->assertEquals($options, $basketElement->getOptions());
+        $this->assertSame(42, $basketElement->getOption('unexisting_option', 42));
+        $this->assertSame('value1', $basketElement->getOption('option1'));
+        $this->assertSame($options, $basketElement->getOptions());
 
         $basketElement->setOption('option3', 'value3');
-        $this->assertEquals('value3', $basketElement->getOption('option3'));
+        $this->assertSame('value3', $basketElement->getOption('option3'));
 
         // Other getters & setters
-        $this->assertEquals($provider, $basketElement->getProductProvider());
-        $this->assertEquals($manager, $basketElement->getProductManager());
-        $this->assertEquals('product_code', $basketElement->getProductCode());
+        $this->assertSame($provider, $basketElement->getProductProvider());
+        $this->assertSame($manager, $basketElement->getProductManager());
+        $this->assertSame('product_code', $basketElement->getProductCode());
 
         $basketElement->setDelete(false);
         $this->assertFalse($basketElement->getDelete());

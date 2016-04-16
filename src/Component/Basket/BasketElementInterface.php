@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,36 +11,35 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\Component\Product\ProductDefinition;
 use Sonata\Component\Product\PriceComputableInterface;
+use Sonata\Component\Product\ProductDefinition;
+use Sonata\Component\Product\ProductInterface;
 
 interface BasketElementInterface extends PriceComputableInterface
 {
     /**
-     * the position in the basket stack
+     * the position in the basket stack.
      *
-     * @param integer $position
+     * @param int $position
      */
     public function setPosition($position);
 
     /**
-     * return the pos of the current basket element
+     * return the pos of the current basket element.
      *
      * @return int
      */
     public function getPosition();
 
     /**
-     * return the name of the basket element
+     * return the name of the basket element.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Define the related product
+     * Define the related product.
      *
      * @param string           $productCode
      * @param ProductInterface $product
@@ -48,63 +47,64 @@ interface BasketElementInterface extends PriceComputableInterface
     public function setProduct($productCode, ProductInterface $product);
 
     /**
-     * Return the related product
+     * Return the related product.
      *
      * @return \Sonata\Component\Product\ProductInterface
      */
     public function getProduct();
 
     /**
-     * return the product id
+     * return the product id.
      *
-     * @return integer
+     * @return int
      */
     public function getProductId();
 
     /**
      * Never call this method, use the setProduct instead. This method is only used
-     * by the form framework
+     * by the form framework.
      *
      * @param int $productId
      */
     public function setProductId($productId);
 
     /**
-     * Returns the VAT amount
+     * Returns the VAT amount.
      *
      * @return $float
      */
     public function getVatAmount();
 
     /**
-     * Return the total (price * quantity)
+     * Return the total (price * quantity).
      *
      * if $vat = true, return the price with vat
      *
-     * @param boolean $vat Returns price including VAT?
+     * @param bool $vat Returns price including VAT?
      *
      * @return float
      */
     public function getTotal($vat = false);
 
     /**
-     * return the basket element options array
+     * return the basket element options array.
      *
      * @return array
      */
     public function getOptions();
 
     /**
-     * return a option value depends on the $name
+     * return a option value depends on the $name.
      *
-     * @param  string $name
-     * @param  mixed  $default Default value if option not found
+     * @param string $name
+     * @param mixed  $default Default value if option not found
+     *
      * @return mixed
      */
     public function getOption($name, $default = null);
 
     /**
-     * Define the option value
+     * Define the option value.
      *
      * @param string $name
      * @param mixed  $value
@@ -112,19 +112,19 @@ interface BasketElementInterface extends PriceComputableInterface
     public function setOption($name, $value);
 
     /**
-     * Check if the basket element is still valid
+     * Check if the basket element is still valid.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid();
 
     /**
-     * @param boolean $delete
+     * @param bool $delete
      */
     public function setDelete($delete);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getDelete();
 

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,9 +15,8 @@ use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDataTransformer;
 
 /**
- * Class CurrencyDataTransformerTest
+ * Class CurrencyDataTransformerTest.
  *
- * @package Sonata\Test\Component\Currency\Types
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -35,22 +35,22 @@ class CurrencyDataTransformerTest extends \PHPUnit_Framework_TestCase
     public function testTransform()
     {
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
-        $this->assertEquals("EUR", $this->currencyDataTransformer->transform($currency));
-        $this->assertEquals("EUR", $this->currencyDataTransformer->transform("EUR"));
+        $this->assertSame('EUR', $this->currencyDataTransformer->transform($currency));
+        $this->assertSame('EUR', $this->currencyDataTransformer->transform('EUR'));
     }
 
     public function testReverseTransform()
     {
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $this->currencyManager->expects($this->once())
             ->method('findOneByLabel')
             ->will($this->returnValue($currency));
 
-        $this->assertEquals(null, $this->currencyDataTransformer->reverseTransform(null));
-        $this->assertEquals("EUR", $this->currencyDataTransformer->reverseTransform("EUR")->getLabel());
+        $this->assertSame(null, $this->currencyDataTransformer->reverseTransform(null));
+        $this->assertSame('EUR', $this->currencyDataTransformer->reverseTransform('EUR')->getLabel());
     }
 }

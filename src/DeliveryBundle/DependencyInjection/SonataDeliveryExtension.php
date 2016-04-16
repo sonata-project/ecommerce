@@ -1,14 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\DeliveryBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /*
  * This file is part of the Sonata package.
@@ -27,7 +35,6 @@ use Symfony\Component\Config\Definition\Processor;
  */
 class SonataDeliveryExtension extends Extension
 {
-
     /**
      * Loads the delivery configuration.
      *
@@ -50,9 +57,8 @@ class SonataDeliveryExtension extends Extension
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $services
-     * @return void
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array                                                   $services
      */
     public function configureDelivery(ContainerBuilder $container, array $services)
     {

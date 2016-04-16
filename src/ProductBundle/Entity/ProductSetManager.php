@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -15,7 +16,7 @@ use Sonata\Component\Product\ProductInterface;
 class ProductSetManager extends ProductManager
 {
     /**
-     * Deletes a product
+     * Deletes a product.
      *
      * @param ProductInterface $productSet
      * @param bool             $andFlush
@@ -28,7 +29,7 @@ class ProductSetManager extends ProductManager
     }
 
     /**
-     * Creates an empty ProductSet instance
+     * Creates an empty ProductSet instance.
      *
      * @throws \RuntimeException
      */
@@ -38,7 +39,7 @@ class ProductSetManager extends ProductManager
     }
 
     /**
-     * Creates an empty ProductSet instance
+     * Creates an empty ProductSet instance.
      *
      * @param ProductInterface $productSet
      * @param bool             $andFlush

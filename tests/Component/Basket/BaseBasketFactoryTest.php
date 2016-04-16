@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -64,9 +65,8 @@ class BasketFactory extends BaseBasketFactory
 }
 
 /**
- * Class BaseBasketFactoryTest
+ * Class BaseBasketFactoryTest.
  *
- * @package Sonata\Tests\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -81,9 +81,9 @@ class BaseBasketFactoryTest extends \PHPUnit_Framework_TestCase
 
         $basketFactory = new BasketFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
-        $this->assertEquals($basketManager, $basketFactory->getBasketManager());
-        $this->assertEquals($basketBuilder, $basketFactory->getBasketBuilder());
-        $this->assertEquals($currencyDetector, $basketFactory->getCurrencyDetector());
-        $this->assertEquals($session, $basketFactory->getSession());
+        $this->assertSame($basketManager, $basketFactory->getBasketManager());
+        $this->assertSame($basketBuilder, $basketFactory->getBasketBuilder());
+        $this->assertSame($currencyDetector, $basketFactory->getCurrencyDetector());
+        $this->assertSame($session, $basketFactory->getSession());
     }
 }

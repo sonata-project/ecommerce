@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Transformer;
+namespace Sonata\tests\Component\Transformer;
 
-use Sonata\Component\Transformer\Pool as TransformerPool;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;
+use Sonata\Component\Transformer\Pool as TransformerPool;
 
 class PoolTest extends \PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
-        $pool = new TransformerPool;
+        $pool = new TransformerPool();
 
         $transformer = new BasketTransformer(
             $this->getMock('Sonata\Component\Order\OrderManagerInterface'),
@@ -31,7 +31,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
         $transformer = new OrderTransformer($this->getMock('Sonata\Component\Product\Pool'));
         $pool->addTransformer('order', $transformer);
 
-        $this->assertEquals(2, count($pool->getTransformers()), 'Pool return 2 elements');
+        $this->assertSame(2, count($pool->getTransformers()), 'Pool return 2 elements');
         $this->assertInstanceOf('Sonata\\Component\\Transformer\\BasketTransformer', $pool->getTransformer('basket'), 'Pool return an FreeDelivery Instance');
     }
 }

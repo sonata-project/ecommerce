@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,12 +11,12 @@
 
 namespace Sonata\Test\ProductBundle\Model;
 
+use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\Component\Basket\BasketElement;
 
 class ProductProviderTest extends BaseProductProvider
 {
@@ -26,19 +27,19 @@ class ProductProviderTest extends BaseProductProvider
     {
         return 'DumbTestController';
     }
-
 }
 
 class ProductTest extends BaseProduct implements ProductInterface
 {
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -52,9 +53,8 @@ class ProductTest extends BaseProduct implements ProductInterface
 }
 
 /**
- * Class BaseProductProviderTest
+ * Class BaseProductProviderTest.
  *
- * @package Sonata\Test\ProductBundle
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
@@ -88,7 +88,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $product->setSku('TESTING_SKU');
         $variation = $productProvider->createVariation($product);
 
-        $this->assertEquals('TESTING_SKU_DUPLICATE', $variation->getSku());
+        $this->assertSame('TESTING_SKU_DUPLICATE', $variation->getSku());
     }
 
     public function testBuildBasketElement()
@@ -167,7 +167,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
@@ -180,7 +180,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
@@ -202,7 +202,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
@@ -217,7 +217,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
@@ -240,7 +240,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
@@ -353,7 +353,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $variations = $provider->getEnabledVariations($productMock);
         $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
-        $this->assertEquals(0, count($variations));
+        $this->assertSame(0, count($variations));
     }
 
     public function testGetEnabledVariationWithVariation()
@@ -368,7 +368,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $variations = $provider->getEnabledVariations($productMock);
         $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
-        $this->assertEquals(1, count($variations));
+        $this->assertSame(1, count($variations));
         $this->assertInstanceOf('\Sonata\Component\Product\ProductInterface', $variations[0]);
     }
 
@@ -409,7 +409,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $provider = $this->createNewProductProvider();
         $provider->setVariationFields(array('test'));
 
-        $this->assertEquals($variationB, $provider->getCheapestEnabledVariation($product));
+        $this->assertSame($variationB, $provider->getCheapestEnabledVariation($product));
     }
 
     public function testCalculatePrice()
@@ -418,12 +418,12 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $product->setPrice(42);
 
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(42*4, $provider->calculatePrice($product, $currency, false, 4));
-        $this->assertEquals(42, $provider->calculatePrice($product, $currency, false));
+        $this->assertSame(42 * 4, $provider->calculatePrice($product, $currency, false, 4));
+        $this->assertSame(42, $provider->calculatePrice($product, $currency, false));
     }
 
     /**
@@ -463,16 +463,16 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $variation = new ProductTest();
         $variation->setEnabled(true);
-        $variation->setName("variation");
+        $variation->setName('variation');
         $variation->setPrice(84);
 
         $variation2 = clone $variation;
-        $variation2->setName("avariation");
+        $variation2->setName('avariation');
         $variation2->setPrice(42);
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(array(), $provider->getVariationsChoices($product));
+        $this->assertSame(array(), $provider->getVariationsChoices($product));
 
         $product->addVariation($variation);
         $product->addVariation($variation2);
@@ -482,15 +482,15 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             'price' => array(
                 1 => 42,
-                0 => 84
+                0 => 84,
             ),
             'name' => array(
-                1 => "avariation",
-                0 => "variation"
-            )
+                1 => 'avariation',
+                0 => 'variation',
+            ),
         );
 
-        $this->assertEquals($expected, $provider->getVariationsChoices($product));
+        $this->assertSame($expected, $provider->getVariationsChoices($product));
     }
 
     public function testGetVariatedProperties()
@@ -500,16 +500,16 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $variation = new ProductTest();
         $variation->setEnabled(true);
-        $variation->setName("variation");
+        $variation->setName('variation');
         $variation->setPrice(84);
 
         $variation2 = clone $variation;
-        $variation2->setName("avariation");
+        $variation2->setName('avariation');
         $variation2->setPrice(42);
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(array(), $provider->getVariatedProperties($product));
+        $this->assertSame(array(), $provider->getVariatedProperties($product));
 
         $product->addVariation($variation);
         $product->addVariation($variation2);
@@ -518,10 +518,10 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             'price' => 84,
-            'name'  => "variation"
+            'name'  => 'variation',
         );
 
-        $this->assertEquals($expected, $provider->getVariatedProperties($variation));
+        $this->assertSame($expected, $provider->getVariatedProperties($variation));
     }
 
     public function testGetVariation()
@@ -531,11 +531,11 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $variation = new ProductTest();
         $variation->setEnabled(true);
-        $variation->setName("variation");
+        $variation->setName('variation');
         $variation->setPrice(84);
 
         $variation2 = clone $variation;
-        $variation2->setName("avariation");
+        $variation2->setName('avariation');
         $variation2->setPrice(42);
 
         $provider = $this->createNewProductProvider();
@@ -547,10 +547,10 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             'price' => 84,
-            'name'  => "variation"
+            'name'  => 'variation',
         );
 
-        $this->assertEquals($variation2, $provider->getVariation($product, array('price' => 42, 'name' => "avariation")));
+        $this->assertSame($variation2, $provider->getVariation($product, array('price' => 42, 'name' => 'avariation')));
     }
 
     /**

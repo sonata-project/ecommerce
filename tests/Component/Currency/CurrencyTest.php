@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,9 +14,8 @@ namespace Sonata\Test\Component\Currency\Types;
 use Sonata\Component\Currency\Currency;
 
 /**
- * Class CurrencyTest
+ * Class CurrencyTest.
  *
- * @package Sonata\Test\Component\Currency\Types
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -26,8 +26,8 @@ class CurrencyTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertEquals('EUR', $currency->getLabel());
-        $this->assertEquals('EUR', $currency->__toString());
+        $this->assertSame('EUR', $currency->getLabel());
+        $this->assertSame('EUR', $currency->__toString());
     }
 
     public function testEquals()

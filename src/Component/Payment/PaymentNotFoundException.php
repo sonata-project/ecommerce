@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,16 +14,15 @@ namespace Sonata\Component\Payment;
 use Exception;
 
 /**
- * Class PaymentNotFoundException
+ * Class PaymentNotFoundException.
  *
- * @package Sonata\Component\Payment
  *
  * @author Hugo Briand <briand@ekino.com>
  */
 class PaymentNotFoundException extends \InvalidArgumentException
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string    $bankCode
      * @param int       $code
@@ -33,5 +33,4 @@ class PaymentNotFoundException extends \InvalidArgumentException
         $message = sprintf("Payment method with code '%s' was not found", $bankCode);
         parent::__construct($message, $code, $previous);
     }
-
 }

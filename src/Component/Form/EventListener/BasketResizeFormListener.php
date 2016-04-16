@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,13 +11,12 @@
 
 namespace Sonata\Component\Form\EventListener;
 
+use Sonata\Component\Basket\BasketInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
-use Sonata\Component\Basket\BasketInterface;
 
 class BasketResizeFormListener implements EventSubscriberInterface
 {

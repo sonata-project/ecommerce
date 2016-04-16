@@ -1,13 +1,13 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\Component\Form\Type;
 
@@ -16,11 +16,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-
 /**
- * Class VariationChoiceType
+ * Class VariationChoiceType.
  *
- * @package Sonata\Component\Form\Type
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -69,7 +67,7 @@ class VariationChoiceType extends AbstractType
             'product'         => null,
             'fields'          => null,
             'csrf_protection' => false,
-            'method'          => 'GET'
+            'method'          => 'GET',
         ));
 
         $resolver->setRequired(array('product', 'fields'));

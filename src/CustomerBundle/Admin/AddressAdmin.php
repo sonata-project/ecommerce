@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,14 +11,14 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Application\Sonata\CustomerBundle\Entity\Address;
+use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 
 class AddressAdmin extends Admin
 {
-    protected $translationDomain = "SonataCustomerBundle";
+    protected $translationDomain = 'SonataCustomerBundle';
 
     /**
      * {@inheritdoc}
@@ -75,7 +75,7 @@ class AddressAdmin extends Admin
     {
         $list
             ->addIdentifier('name')
-            ->add('fulladdress', 'string', array('code' => 'getFullAddressHtml', 'template' => "SonataCustomerBundle:Admin:list_address.html.twig"))
+            ->add('fulladdress', 'string', array('code' => 'getFullAddressHtml', 'template' => 'SonataCustomerBundle:Admin:list_address.html.twig'))
             ->add('current')
             ->add('typeCode', 'trans', array('catalogue' => $this->translationDomain))
         ;

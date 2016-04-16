@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Transformer;
+namespace Sonata\tests\Component\Transformer;
 
-use Sonata\Component\Transformer\OrderTransformer;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Transformer\OrderTransformer;
 
 class OrderTransformerTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,6 +54,6 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
         $transformer = new OrderTransformer($pool);
         $transformer->transformIntoBasket($order, $basket);
 
-        $this->assertEquals(2, $basketElement->getQuantity());
+        $this->assertSame(2, $basketElement->getQuantity());
     }
 }

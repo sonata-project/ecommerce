@@ -1,193 +1,201 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\OrderBundle\Entity;
 
-use Sonata\Component\Delivery\BaseServiceDelivery;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Order\OrderElementInterface;
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyInterface;
-
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Delivery\BaseServiceDelivery;
+use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
 
 /**
- * Sonata\OrderBundle\Entity\BaseOrder
+ * Sonata\OrderBundle\Entity\BaseOrder.
  */
 abstract class BaseOrder implements OrderInterface
 {
     /**
-     * @var string $reference
+     * @var string
      */
     protected $reference;
 
     /**
-     * @var string $payment_method
+     * @var string
      */
     protected $paymentMethod;
 
     /**
-     * @var string $deliveryMethod
+     * @var string
      */
     protected $deliveryMethod;
 
     /**
-     * @var CurrencyInterface $currency
+     * @var CurrencyInterface
      */
     protected $currency;
 
     /**
-     * @var integer $status
+     * @var int
      */
     protected $status;
 
     /**
-     * @var integer $payment_status
+     * @var int
      */
     protected $paymentStatus;
 
     /**
-     * @var integer $delivery_status
+     * @var int
      */
     protected $deliveryStatus;
 
     /**
-     * @var \Datetime $validated_at
+     * @var \Datetime
      */
     protected $validatedAt;
 
     /**
-     * @var string $username
+     * @var string
      */
     protected $username;
 
     /**
-     * @var float $totalInc
+     * @var float
      */
     protected $totalInc;
 
     /**
-     * @var float $totalExcl
+     * @var float
      */
     protected $totalExcl;
 
     /**
-     * @var float $delivery_cost
+     * @var float
      */
     protected $deliveryCost;
 
     /**
-     * @var float $deliverVat
+     * @var float
      */
     protected $deliveryVat;
 
     /**
-     * @var string $billing_name
+     * @var string
      */
     protected $billingName;
 
     /**
-     * @var string $billing_phone
+     * @var string
      */
     protected $billingPhone;
 
     /**
-     * @var string $billingAddress1
+     * @var string
      */
     protected $billingAddress1;
 
     /**
-     * @var string $billingAddress2
+     * @var string
      */
     protected $billingAddress2;
 
     /**
-     * @var string $billingAddress3
+     * @var string
      */
     protected $billingAddress3;
 
     /**
-     * @var string $billing_city
+     * @var string
      */
     protected $billingCity;
 
     /**
-     * @var string $billing_postcode
+     * @var string
      */
     protected $billingPostcode;
 
     /**
-     * @var string $billing_country
+     * @var string
      */
     protected $billingCountryCode;
 
     /**
-     * @var string $billing_fax
+     * @var string
      */
     protected $billingFax;
 
     /**
-     * @var string $billing_email
+     * @var string
      */
     protected $billingEmail;
 
     /**
-     * @var string $billing_mobile
+     * @var string
      */
     protected $billingMobile;
 
     /**
-     * @var string $shipping_name
+     * @var string
      */
     protected $shippingName;
 
     /**
-     * @var string $shipping_phone
+     * @var string
      */
     protected $shippingPhone;
 
     /**
-     * @var string $shipping_address1
+     * @var string
      */
     protected $shippingAddress1;
 
     /**
-     * @var string $shipping_address2
+     * @var string
      */
     protected $shippingAddress2;
 
     /**
-     * @var string $shipping_address3
+     * @var string
      */
     protected $shippingAddress3;
 
     /**
-     * @var string $shipping_city
+     * @var string
      */
     protected $shippingCity;
 
     /**
-     * @var string $shipping_postcode
+     * @var string
      */
     protected $shippingPostcode;
 
     /**
-     * @var string $shipping_country
+     * @var string
      */
     protected $shippingCountryCode;
 
     /**
-     * @var string $shipping_fax
+     * @var string
      */
     protected $shippingFax;
 
     /**
-     * @var string $shipping_email
+     * @var string
      */
     protected $shippingEmail;
 
     /**
-     * @var string $shipping_mobile
+     * @var string
      */
     protected $shippingMobile;
 
@@ -203,18 +211,18 @@ abstract class BaseOrder implements OrderInterface
 
     public function __construct()
     {
-        $this->orderElements = new \Doctrine\Common\Collections\ArrayCollection;
+        $this->orderElements = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function prePersist()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**
@@ -226,13 +234,13 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Returns formatted delivery address
+     * Returns formatted delivery address.
      *
      * @param string $sep
      *
      * @return string
      */
-    public function getFullDelivery($sep = ", ")
+    public function getFullDelivery($sep = ', ')
     {
         return BaseAddress::formatAddress($this->getDeliveryAsArray(), $sep);
     }
@@ -244,22 +252,22 @@ abstract class BaseOrder implements OrderInterface
     {
         return array(
             'firstname'    => $this->getShippingName(),
-            'lastname'     => "",
+            'lastname'     => '',
             'address1'     => $this->getShippingAddress1(),
             'postcode'     => $this->getShippingPostcode(),
             'city'         => $this->getShippingCity(),
-            'country_code' => $this->getShippingCountryCode()
+            'country_code' => $this->getShippingCountryCode(),
         );
     }
 
     /**
-     * Returns formatted billing address
+     * Returns formatted billing address.
      *
      * @param string $sep
      *
      * @return string
      */
-    public function getFullBilling($sep = ", ")
+    public function getFullBilling($sep = ', ')
     {
         return BaseAddress::formatAddress($this->getBillingAsArray(), $sep);
     }
@@ -268,11 +276,11 @@ abstract class BaseOrder implements OrderInterface
     {
         return array(
             'firstname'    => $this->getBillingName(),
-            'lastname'     => "",
+            'lastname'     => '',
             'address1'     => $this->getBillingAddress1(),
             'postcode'     => $this->getBillingPostcode(),
             'city'         => $this->getBillingCity(),
-            'country_code' => $this->getBillingCountryCode()
+            'country_code' => $this->getBillingCountryCode(),
         );
     }
 
@@ -489,7 +497,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set delivery VAT
+     * Set delivery VAT.
      *
      * @param float $deliveryVat
      */
@@ -499,7 +507,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get delivery VAT
+     * Get delivery VAT.
      *
      * @return float $deliveryVat
      */
@@ -507,7 +515,6 @@ abstract class BaseOrder implements OrderInterface
     {
         return $this->deliveryVat;
     }
-
 
     /**
      * {@inheritdoc}
@@ -1002,6 +1009,7 @@ abstract class BaseOrder implements OrderInterface
 
     /**
      * @static
+     *
      * @return array
      */
     public static function getStatusList()

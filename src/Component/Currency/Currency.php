@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,7 +10,6 @@
  */
 
 namespace Sonata\Component\Currency;
-
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -61,7 +60,7 @@ class Currency implements CurrencyInterface
         return $this->getLabel() === $currency->getLabel();
     }
 
-    /**
+    /*
      * {@inheritdoc}
      */
 //     public function getSymbol()
@@ -69,7 +68,7 @@ class Currency implements CurrencyInterface
 //         return $this->symbol;
 //     }
 
-    /**
+    /*
      * @param string $symbol
      */
 //     public function setSymbol($symbol)

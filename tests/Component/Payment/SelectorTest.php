@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -23,9 +23,8 @@ class Address extends BaseAddress
 }
 
 /**
- * Class SelectorTest
+ * Class SelectorTest.
  *
- * @package Sonata\Test\Component\Payment
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
@@ -44,7 +43,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $selector = new Selector($paymentPool, $productPool);
         $this->assertFalse($selector->getAvailableMethods());
-        $this->assertEquals($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
+        $this->assertSame($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
     }
 
     /**

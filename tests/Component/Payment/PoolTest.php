@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\tests\Component\Payment;
 
 use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Payment\Pool;
@@ -18,7 +18,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
-        $pool = new Pool;
+        $pool = new Pool();
 
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
@@ -37,7 +37,7 @@ class PoolTest extends \PHPUnit_Framework_TestCase
 
         $pool->addMethod($delivery);
 
-        $this->assertEquals(2, count($pool->getMethods()), 'Pool return 2 elements');
+        $this->assertSame(2, count($pool->getMethods()), 'Pool return 2 elements');
         $this->assertInstanceOf('Sonata\\Component\\Payment\\PassPayment', $pool->getMethod('pass_2'), 'Pool return an FreeDelivery Instance');
     }
 }

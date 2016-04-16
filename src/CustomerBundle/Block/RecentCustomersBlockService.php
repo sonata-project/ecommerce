@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,22 +11,19 @@
 
 namespace Sonata\CustomerBundle\Block;
 
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
-
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
-
-use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Block\BaseBlockService;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class RecentCustomersBlockService
+ * Class RecentCustomersBlockService.
  *
- * @package Sonata\CustomerBundle\Block
  *
  * @author  Hugo Briand <briand@ekino.com>
  */
@@ -59,7 +56,7 @@ class RecentCustomersBlockService extends BaseBlockService
             'context'   => $blockContext,
             'settings'  => $blockContext->getSettings(),
             'block'     => $blockContext->getBlock(),
-            'customers' => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'))
+            'customers' => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number')),
         ), $response);
     }
 
@@ -83,10 +80,10 @@ class RecentCustomersBlockService extends BaseBlockService
                 array('mode', 'choice', array(
                     'choices' => array(
                         'public' => 'public',
-                        'admin'  => 'admin'
-                    )
-                ))
-            )
+                        'admin'  => 'admin',
+                    ),
+                )),
+            ),
         ));
     }
 
@@ -108,7 +105,7 @@ class RecentCustomersBlockService extends BaseBlockService
             'mode'       => 'public',
             'title'      => 'Recent Customers',
 //            'tags'      => 'Recent Customers',
-            'template'   => 'SonataCustomerBundle:Block:recent_customers.html.twig'
+            'template'   => 'SonataCustomerBundle:Block:recent_customers.html.twig',
         ));
     }
 }

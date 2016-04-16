@@ -1,9 +1,17 @@
 <?php
 
-use Sonata\Component\Transformer\InvoiceTransformer;
-use Sonata\Component\Currency\Currency;
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+use Sonata\Component\Currency\Currency;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Transformer\InvoiceTransformer;
 
 /*
  * This file is part of the Sonata package.

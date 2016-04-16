@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,24 +9,20 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\OrderBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
-
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
- * Class OrderController
+ * Class OrderController.
  *
- * @package Sonata\OrderBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -37,7 +34,7 @@ class OrderController
     protected $orderManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param OrderManagerInterface $orderManager
      */
@@ -68,7 +65,7 @@ class OrderController
     public function getOrdersAction(ParamFetcherInterface $paramFetcher)
     {
         $supportedFilters = array(
-            'status' => "",
+            'status' => '',
         );
 
         $page    = $paramFetcher->get('page') - 1;
@@ -86,7 +83,7 @@ class OrderController
     }
 
     /**
-     * Retrieves a specific order
+     * Retrieves a specific order.
      *
      * @ApiDoc(
      *  requirements={
@@ -111,7 +108,7 @@ class OrderController
     }
 
     /**
-     * Retrieves a specific order's elements
+     * Retrieves a specific order's elements.
      *
      * @ApiDoc(
      *  requirements={
@@ -136,11 +133,12 @@ class OrderController
     }
 
     /**
-     * Retrieves order with id $id or throws an exception if it doesn't exist
+     * Retrieves order with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return OrderInterface
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getOrder($id)

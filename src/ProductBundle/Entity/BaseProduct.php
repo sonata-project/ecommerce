@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,19 +11,19 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\Component\Product\DeliveryInterface;
+use Sonata\Component\Product\PackageInterface;
+use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Product\PackageInterface;
-use Sonata\Component\Product\DeliveryInterface;
-use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ExecutionContext;
 
 /**
- * Sonata\ProductBundle\Entity\BaseProduct
+ * Sonata\ProductBundle\Entity\BaseProduct.
  */
 abstract class BaseProduct implements ProductInterface
 {
@@ -42,7 +43,7 @@ abstract class BaseProduct implements ProductInterface
     protected $name;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $priceIncludingVat;
 
@@ -87,12 +88,12 @@ abstract class BaseProduct implements ProductInterface
     protected $vatRate;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $stock;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $enabled;
 
@@ -158,12 +159,14 @@ abstract class BaseProduct implements ProductInterface
 
     /**
      * @static
+     *
      * @var \Closure
      */
     protected static $slugifyMethod;
 
     /**
      * @static
+     *
      * @return \Closure
      */
     public static function getSlugifyMethod()
@@ -173,6 +176,7 @@ abstract class BaseProduct implements ProductInterface
 
     /**
      * @static
+     *
      * @param \Closure $slugifyMethod
      */
     public static function setSlugifyMethod(\Closure $slugifyMethod)
@@ -874,10 +878,12 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/
+     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/.
      *
      * @static
+     *
      * @param  $text
+     *
      * @return mixed|string
      */
     public static function slugify($text)

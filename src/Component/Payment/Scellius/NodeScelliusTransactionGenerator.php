@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,12 +14,13 @@ namespace Sonata\Component\Payment\Scellius;
 use Sonata\Component\Order\OrderInterface;
 
 /**
- * This method returns none, so the request binary will generates one for use
+ * This method returns none, so the request binary will generates one for use.
  */
 class NodeScelliusTransactionGenerator implements ScelliusTransactionGeneratorInterface
 {
     /**
-     * @param  \Sonata\Component\Order\OrderInterface $order
+     * @param \Sonata\Component\Order\OrderInterface $order
+     *
      * @return string
      */
     public function generate(OrderInterface $order)

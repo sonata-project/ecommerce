@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,16 +11,15 @@
 
 namespace Sonata\Tests\Component\Transformer;
 
-use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Basket\Basket;
-use Sonata\OrderBundle\Entity\BaseOrder;
-use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Transformer\BasketTransformer;
+use Sonata\OrderBundle\Entity\BaseOrder;
 
 class BasketTransformerTest_Order extends BaseOrder
 {
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
@@ -30,13 +29,12 @@ class BasketTransformerTest_Order extends BaseOrder
 
 class BasketTransformerTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @return \Sonata\Component\Transformer\BasketTransformer
      */
     public function getBasketTransform()
     {
-        $order = new BasketTransformerTest_Order;
+        $order = new BasketTransformerTest_Order();
         $orderManager = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
         $orderManager->expects($this->any())->method('create')->will($this->returnValue($order));
 
@@ -52,7 +50,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid customer');
 
-        $basket = new Basket;
+        $basket = new Basket();
 
         $currency = new Currency();
         $currency->setLabel('EUR');
@@ -65,7 +63,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid billing address');
 
-        $basket   = new Basket;
+        $basket   = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
 
         $basket->setCustomer($customer);
@@ -81,7 +79,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid payment method');
 
-        $basket   = new Basket;
+        $basket   = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
 
@@ -99,7 +97,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid delivery method');
 
-        $basket   = new Basket;
+        $basket   = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
@@ -119,7 +117,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid delivery address');
 
-        $basket   = new Basket;
+        $basket   = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
@@ -139,12 +137,10 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return void
      */
     public function testOrder()
     {
-
-        $basket   = new Basket;
+        $basket   = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');

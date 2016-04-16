@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,13 +11,13 @@
 
 namespace Sonata\Component\Basket;
 
+use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Payment\PaymentInterface;
-use Sonata\Component\Customer\AddressInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Product\Pool;
-use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Component\Product\ProductInterface;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -40,7 +40,7 @@ class Basket implements \Serializable, BasketInterface
     protected $cptElement = 0;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $inBuild = false;
 
@@ -367,7 +367,7 @@ class Basket implements \Serializable, BasketInterface
         $this->basketElements[$this->cptElement] = $basketElement;
         $this->positions[$basketElement->getProduct()->getId()] = $this->cptElement;
 
-        $this->cptElement++;
+        ++$this->cptElement;
 
         $this->buildPrices();
     }
@@ -379,7 +379,7 @@ class Basket implements \Serializable, BasketInterface
     {
         $pos = $element->getPosition();
 
-        $this->cptElement--;
+        --$this->cptElement;
 
         unset(
             $this->positions[$element->getProduct()->getId()],
@@ -600,7 +600,7 @@ class Basket implements \Serializable, BasketInterface
             'customerId',
             'options',
             'locale',
-            'currency'
+            'currency',
         );
 
         foreach ($properties as $property) {
