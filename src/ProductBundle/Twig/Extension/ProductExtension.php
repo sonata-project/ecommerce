@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -121,7 +121,7 @@ class ProductExtension extends \Twig_Extension
      *
      * @param ProductInterface  $product  A product instance
      * @param CurrencyInterface $currency A currency instance
-     * @param boolean           $vat      Returns price including VAT?
+     * @param bool              $vat      Returns price including VAT?
      *
      * @return float
      */
@@ -133,7 +133,7 @@ class ProductExtension extends \Twig_Extension
     /**
      * Return the available stock of the product.
      *
-     * @param ProductInterface $product  A product instance
+     * @param ProductInterface $product A product instance
      *
      * @return int
      */

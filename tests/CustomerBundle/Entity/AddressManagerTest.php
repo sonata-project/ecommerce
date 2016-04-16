@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\CustomerBundle\Entity;
+namespace Sonata\tests\CustomerBundle\Entity;
 
 use Sonata\CustomerBundle\Entity\AddressManager;
 
 /**
- * Class AddressManagerTest
+ * Class AddressManagerTest.
  *
- * @package Sonata\Tests\CustomerBundle\Entity
  *
  * @author Hugo Briand <briand@ekino.com>
  */

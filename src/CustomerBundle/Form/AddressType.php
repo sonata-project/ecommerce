@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -37,7 +37,7 @@ class AddressType extends AbstractType
     protected $name;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $class  A class to apply getter
      * @param string $getter A getter method name
@@ -51,7 +51,7 @@ class AddressType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -59,7 +59,7 @@ class AddressType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -67,12 +67,12 @@ class AddressType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'types' => call_user_func(array($this->class, $this->getter))
+            'types' => call_user_func(array($this->class, $this->getter)),
         ));
     }
 }

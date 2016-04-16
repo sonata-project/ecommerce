@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,17 +11,14 @@
 
 namespace Sonata\CustomerBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
-
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- *
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataCustomerExtension extends Extension
@@ -63,9 +60,8 @@ class SonataCustomerExtension extends Extension
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $config
-     * @return void
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array                                                   $config
      */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
@@ -77,8 +73,7 @@ class SonataCustomerExtension extends Extension
     }
 
     /**
-     * @param  array $config
-     * @return void
+     * @param array $config
      */
     public function registerDoctrineMapping(array $config)
     {
@@ -104,7 +99,7 @@ class SonataCustomerExtension extends Extension
             'cascade'       => array(
                 'persist',
             ),
-            'mappedBy' => 'customer',
+            'mappedBy'      => 'customer',
             'orphanRemoval' => false,
         ));
 
@@ -114,13 +109,13 @@ class SonataCustomerExtension extends Extension
             'cascade'      => array(
                 'persist',
             ),
-            'mappedBy'     => NULL,
+            'mappedBy'     => null,
             'inversedBy'   => 'customers',
             'joinColumns'  => array(
                 array(
-                    'name' => 'user_id',
+                    'name'                 => 'user_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'SET NULL',
+                    'onDelete'             => 'SET NULL',
                 ),
             ),
             'orphanRemoval' => false,
@@ -132,13 +127,13 @@ class SonataCustomerExtension extends Extension
             'cascade'      => array(
                 'persist',
             ),
-            'mappedBy'     => NULL,
+            'mappedBy'     => null,
             'inversedBy'   => 'addresses',
             'joinColumns'  => array(
                 array(
-                    'name' => 'customer_id',
+                    'name'                 => 'customer_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete'             => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,

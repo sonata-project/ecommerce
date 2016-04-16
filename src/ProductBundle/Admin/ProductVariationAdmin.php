@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,19 +11,18 @@
 
 namespace Sonata\ProductBundle\Admin;
 
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class ProductVariationAdmin extends ProductAdmin
 {
-
     protected $parentAssociationMapping = 'parent';
 
     /**
-     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (variation) works properly
+     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (variation) works properly.
      *
      * @return string
      */
@@ -32,7 +31,7 @@ class ProductVariationAdmin extends ProductAdmin
         if (!$this->baseRoutePattern) {
             if ($this->getCode() == 'sonata.product.admin.product.variation' && !$this->isChild()) { // variation
                 $this->baseRoutePattern = '/sonata/product/variation';
-            } else if ($this->getCode() == 'sonata.product.admin.product.variation' && $this->isChild()) { // variation
+            } elseif ($this->getCode() == 'sonata.product.admin.product.variation' && $this->isChild()) { // variation
                 $this->baseRoutePattern = sprintf('%s/{id}/%s',
                     $this->getParent()->getBaseRoutePattern(),
                     $this->urlize('variation', '-')
@@ -46,7 +45,7 @@ class ProductVariationAdmin extends ProductAdmin
     }
 
     /**
-     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (variation) works properly
+     * Overwrite the default behavior to make ProductAdmin (product) > ProductAdmin (variation) works properly.
      *
      * @return string
      */
@@ -55,7 +54,7 @@ class ProductVariationAdmin extends ProductAdmin
         if (!$this->baseRouteName) {
             if ($this->getCode() == 'sonata.product.admin.product.variation' && !$this->isChild()) { // variation
                 $this->baseRouteName    = 'admin_sonata_product_variation';
-            } else if ($this->getCode() == 'sonata.product.admin.product.variation' && $this->isChild()) { // variation
+            } elseif ($this->getCode() == 'sonata.product.admin.product.variation' && $this->isChild()) { // variation
                 $this->baseRouteName = sprintf('%s_%s',
                     $this->getParent()->getBaseRouteName(),
                     $this->urlize('variation')

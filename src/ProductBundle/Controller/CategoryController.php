@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -12,7 +12,6 @@
 namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 
 class CategoryController extends Controller
 {
@@ -30,7 +29,7 @@ class CategoryController extends Controller
         return $this->render('SonataProductBundle:Category:side_menu_category.html.twig', array(
           'root_category' => $category,
           'depth'         => $depth,
-          'deep'          => $deep + 1
+          'deep'          => $deep + 1,
         ));
     }
 }

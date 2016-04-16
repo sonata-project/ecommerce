@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -17,7 +18,7 @@ class Basket extends Constraint
     /**
      * @var string
      */
-    public $message = "Basket not valid";
+    public $message = 'Basket not valid';
 
     /**
      * {@inheritdoc}

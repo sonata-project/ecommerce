@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,28 +11,24 @@
 
 namespace Sonata\Tests\Component\Payment;
 
-use Sonata\Component\Payment\PassPayment;
-use Buzz\Message\Response;
 use Buzz\Browser;
+use Sonata\Component\Payment\PassPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
 class PassPaymentTest_Order extends BaseOrder
 {
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
         // TODO: Implement getId() method.
     }
-
 }
 class PassPaymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * useless test ....
-     *
-     * @return void
      */
     public function testPassPayment()
     {
@@ -56,10 +52,10 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new PassPaymentTest_Order;
+        $order = new PassPaymentTest_Order();
         $order->setCreatedAt($date);
 
-        $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
@@ -77,10 +73,10 @@ class PassPaymentTest extends \PHPUnit_Framework_TestCase
         $response = $payment->sendbank($order);
 
         $this->assertTrue($response->headers->has('Location'));
-        $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));
+        $this->assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
         $this->assertFalse($response->isCacheable());
 
-        $this->assertEquals($payment->getOrderReference($transaction), '0001231');
+        $this->assertSame($payment->getOrderReference($transaction), '0001231');
 
         $payment->applyTransactionId($transaction);
     }

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,9 +11,8 @@
 
 namespace Sonata\Component\Payment;
 
-use Sonata\Component\Order\OrderInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
+use Sonata\Component\Order\OrderInterface;
 
 abstract class BasePayment implements PaymentInterface
 {
@@ -66,7 +66,7 @@ abstract class BasePayment implements PaymentInterface
 
         return sha1(
             $order->getReference().
-            $order->getCreatedAt()->format("m/d/Y:G:i:s").
+            $order->getCreatedAt()->format('m/d/Y:G:i:s').
             $order->getId().
             $this->getOption('shop_secret_key')
         );
@@ -124,6 +124,7 @@ abstract class BasePayment implements PaymentInterface
 
     /**
      * @param $name
+     *
      * @return bool
      */
     public function hasOption($name)
@@ -223,8 +224,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @param  boolean $enabled
-     * @return void
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {
@@ -232,7 +232,7 @@ abstract class BasePayment implements PaymentInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getEnabled()
     {

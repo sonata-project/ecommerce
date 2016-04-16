@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\OrderBundle\Controller\Api;
 
 use Sonata\OrderBundle\Controller\Api\OrderController;
 
-
 /**
- * Class OrderControllerTest
+ * Class OrderControllerTest.
  *
- * @package Sonata\Test\OrderBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -33,13 +31,13 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($order), $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
+        $this->assertSame(array($order), $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
     public function testGetOrderAction()
     {
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
-        $this->assertEquals($order, $this->createOrderController($order)->getOrderAction(1));
+        $this->assertSame($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
     /**
@@ -57,7 +55,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
         $orderElements = $this->getMock('Sonata\Component\Order\OrderElementsInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElements)));
 
-        $this->assertEquals(array($orderElements), $this->createOrderController($order)->getOrderOrderelementsAction(1));
+        $this->assertSame(array($orderElements), $this->createOrderController($order)->getOrderOrderelementsAction(1));
     }
 
     /**

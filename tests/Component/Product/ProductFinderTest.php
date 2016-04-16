@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Product;
+namespace Sonata\tests\Component\Product;
 
 use Sonata\Component\Product\ProductFinder;
 
 /**
- * Class ProductFinderTest
+ * Class ProductFinderTest.
  *
- * @package Sonata\Tests\Component\Product
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -31,6 +31,6 @@ class ProductFinderTest extends \PHPUnit_Framework_TestCase
         $finder = new ProductFinder($productManager);
 
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-        $this->assertEquals(array(), $finder->getCrossSellingSimilarProducts($product));
+        $this->assertSame(array(), $finder->getCrossSellingSimilarProducts($product));
     }
 }

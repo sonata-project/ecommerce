@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,19 +14,19 @@ namespace Sonata\Tests\Component\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
+use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductDefinition;
+use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 use Sonata\ProductBundle\Entity\BasePackage;
+use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Entity\BaseProductCategory;
 use Sonata\ProductBundle\Entity\BaseProductCollection;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Entity\ProductCollectionManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\OrderBundle\Entity\BaseOrderElement;
-use Sonata\Component\Basket\BasketElement;
-use Sonata\Component\Order\OrderInterface;
-use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\Tests\Component\Basket\ProductProviderTest;
 
 class Product extends BaseProduct
@@ -98,12 +98,15 @@ class Collection extends BaseCollection
     }
 }
 
-class Package extends BasePackage { }
-class Delivery extends BaseDelivery { }
+class Package extends BasePackage
+{
+}
+class Delivery extends BaseDelivery
+{
+}
 
 class OrderElement extends BaseOrderElement
 {
-
 }
 
 class BaseProductServiceTest_ProductProvider extends BaseProductProvider
@@ -119,7 +122,6 @@ class BaseProductServiceTest_ProductProvider extends BaseProductProvider
 
 class BaseOrderElementTest_ProductProvider extends BaseOrderElement
 {
-
 }
 
 class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
@@ -165,7 +167,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($provider->getOption('foo'));
         $provider->setOptions(array('foo' => 'bar'));
 
-        $this->assertEquals('bar', $provider->getOption('foo'));
+        $this->assertSame('bar', $provider->getOption('foo'));
     }
 
     public function testOrderElement()
@@ -192,9 +194,9 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $orderElement = $provider->createOrderElement($basketElement);
 
         $this->assertInstanceOf('Sonata\Component\Order\OrderElementInterface', $orderElement);
-        $this->assertEquals(OrderInterface::STATUS_PENDING, $orderElement->getStatus());
-        $this->assertEquals('Product name', $orderElement->getDesignation());
-        $this->assertEquals(1, $orderElement->getQuantity());
+        $this->assertSame(OrderInterface::STATUS_PENDING, $orderElement->getStatus());
+        $this->assertSame('Product name', $orderElement->getDesignation());
+        $this->assertSame(1, $orderElement->getQuantity());
     }
 
     public function testVariationFields()
@@ -209,7 +211,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($provider->isVariateBy('name'));
         $this->assertFalse($provider->isVariateBy('fake'));
         $this->assertNotEmpty($provider->getVariationFields());
-        $this->assertEquals(array('name', 'price'), $provider->getVariationFields());
+        $this->assertSame(array('name', 'price'), $provider->getVariationFields());
     }
 
     public function testVariationCreation()
@@ -228,30 +230,30 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $variation2 = $provider->createVariation($product, true);
 
         $this->assertNull($variation1->getId());
-        $this->assertEquals('fake name (duplicated)', $variation1->getName());
-        $this->assertEquals($product->getId(), $variation1->getParent()->getId());
+        $this->assertSame('fake name (duplicated)', $variation1->getName());
+        $this->assertSame($product->getId(), $variation1->getParent()->getId());
         $this->assertFalse($variation1->isEnabled());
         $this->assertTrue($variation1->isVariation());
 
-        $this->assertEquals(2, count($product->getVariations()));
+        $this->assertSame(2, count($product->getVariations()));
 
-        $this->assertEquals(0, count($variation1->getVariations()));
-        $this->assertEquals(0, count($variation1->getPackages()));
-        $this->assertEquals(0, count($variation1->getDeliveries()));
-        $this->assertEquals(0, count($variation1->getProductCategories()));
+        $this->assertSame(0, count($variation1->getVariations()));
+        $this->assertSame(0, count($variation1->getPackages()));
+        $this->assertSame(0, count($variation1->getDeliveries()));
+        $this->assertSame(0, count($variation1->getProductCategories()));
 
-        $this->assertEquals(0, count($variation2->getVariations()));
-        $this->assertEquals(1, count($variation2->getPackages()));
-        $this->assertEquals(1, count($variation2->getDeliveries()));
+        $this->assertSame(0, count($variation2->getVariations()));
+        $this->assertSame(1, count($variation2->getPackages()));
+        $this->assertSame(1, count($variation2->getDeliveries()));
 
         $provider->setVariationFields(array('packages', 'productCollections', 'productCategories', 'deliveries'));
 
         $variation3 = $provider->createVariation($product, true);
 
-        $this->assertEquals(0, count($variation3->getVariations()));
-        $this->assertEquals(0, count($variation3->getPackages()));
-        $this->assertEquals(0, count($variation3->getDeliveries()));
-        $this->assertEquals(0, count($variation3->getProductCategories()));
+        $this->assertSame(0, count($variation3->getVariations()));
+        $this->assertSame(0, count($variation3->getPackages()));
+        $this->assertSame(0, count($variation3->getDeliveries()));
+        $this->assertSame(0, count($variation3->getProductCategories()));
     }
 
     public function testProductDataSynchronization()
@@ -270,13 +272,13 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $provider->synchronizeVariationsProduct($product);
 
-        $this->assertEquals($product->getName(), $variation->getName());
-        $this->assertEquals(15, $variation->getPrice());
-        $this->assertEquals($product->getVatRate(), $variation->getVatRate());
+        $this->assertSame($product->getName(), $variation->getName());
+        $this->assertSame(15, $variation->getPrice());
+        $this->assertSame($product->getVatRate(), $variation->getVatRate());
         $this->assertTrue($variation->isEnabled());
 
-        $this->assertEquals(1, count($product->getVariations()));
-        $this->assertEquals(0, count($variation->getVariations()));
+        $this->assertSame(1, count($product->getVariations()));
+        $this->assertSame(0, count($variation->getVariations()));
     }
 
     public function testProductCategoriesSynchronization()
@@ -308,11 +310,11 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         // create product variation without sync categories
         $variation = $provider->createVariation($product, false);
-        $this->assertEquals(0, count($variation->getProductCategories()));
+        $this->assertSame(0, count($variation->getProductCategories()));
 
         // synchronise 1 category
         $provider->synchronizeVariationsCategories($product);
-        $this->assertEquals(1, count($variation->getProductCategories()));
+        $this->assertSame(1, count($variation->getProductCategories()));
 
         // create category2 and add to product
         $category2 = new Category();
@@ -323,17 +325,17 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $product->addProductCategory($productCategory2);
 
         // variation still have 1 category (no sync yet)
-        $this->assertEquals(1, count($variation->getProductCategories()));
+        $this->assertSame(1, count($variation->getProductCategories()));
 
         // synchronize 2 categories
         $provider->synchronizeVariationsCategories($product);
-        $this->assertEquals(2, count($variation->getProductCategories()));
+        $this->assertSame(2, count($variation->getProductCategories()));
 
         // remove category1 from product
         $product->removeProductCategory($productCategory1);
 
         // variation still have 2 categories
-        $this->assertEquals(2, count($variation->getProductCategories()));
+        $this->assertSame(2, count($variation->getProductCategories()));
 
         $provider->synchronizeVariationsCategories($product);
 //        $this->assertEquals(1, count($variation->getProductCategories()));
@@ -366,10 +368,10 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $product->addProductCollection($productCollection1);
 
         $variation = $provider->createVariation($product, false);
-        $this->assertEquals(0, count($variation->getProductCollections()));
+        $this->assertSame(0, count($variation->getProductCollections()));
 
         $provider->synchronizeVariationsCollections($product);
-        $this->assertEquals(1, count($variation->getProductCollections()));
+        $this->assertSame(1, count($variation->getProductCollections()));
 
         $collection2 = new Collection();
         $collection2->setId(2);
@@ -378,13 +380,13 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $productCollection2->setCollection($collection2);
         $product->addProductCollection($productCollection2);
 
-        $this->assertEquals(1, count($variation->getProductCollections()));
+        $this->assertSame(1, count($variation->getProductCollections()));
 
         $provider->synchronizeVariationsCollections($product);
-        $this->assertEquals(2, count($variation->getProductCollections()));
+        $this->assertSame(2, count($variation->getProductCollections()));
 
         $product->removeProductCollection($productCollection1);
-        $this->assertEquals(2, count($variation->getProductCollections()));
+        $this->assertSame(2, count($variation->getProductCollections()));
 
         $repository->expects($this->any())->method('findOneBy')->will($this->returnValue($productCollection1));
 
@@ -405,24 +407,24 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $variation = $provider->createVariation($product, false);
 
-        $this->assertEquals(0, count($variation->getPackages()));
+        $this->assertSame(0, count($variation->getPackages()));
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertEquals(1, count($variation->getPackages()));
+        $this->assertSame(1, count($variation->getPackages()));
 
         $package2 = new Package();
         $product->addPackage($package2);
 
-        $this->assertEquals(1, count($variation->getPackages()));
+        $this->assertSame(1, count($variation->getPackages()));
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertEquals(2, count($variation->getPackages()));
+        $this->assertSame(2, count($variation->getPackages()));
 
         $product->removePackage($package1);
-        $this->assertEquals(2, count($variation->getPackages()));
+        $this->assertSame(2, count($variation->getPackages()));
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertEquals(1, count($variation->getPackages()));
+        $this->assertSame(1, count($variation->getPackages()));
     }
 
     public function testProductDeliveriesSynchronization()
@@ -436,29 +438,29 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $variation = $provider->createVariation($product, false);
 
-        $this->assertEquals(0, count($variation->getDeliveries()));
+        $this->assertSame(0, count($variation->getDeliveries()));
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertEquals(1, count($variation->getDeliveries()));
+        $this->assertSame(1, count($variation->getDeliveries()));
 
         $delivery2 = new Delivery();
         $product->addDelivery($delivery2);
 
-        $this->assertEquals(1, count($variation->getDeliveries()));
+        $this->assertSame(1, count($variation->getDeliveries()));
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertEquals(2, count($variation->getDeliveries()));
+        $this->assertSame(2, count($variation->getDeliveries()));
 
         $product->removeDelivery($delivery1);
-        $this->assertEquals(2, count($variation->getDeliveries()));
+        $this->assertSame(2, count($variation->getDeliveries()));
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertEquals(1, count($variation->getDeliveries()));
+        $this->assertSame(1, count($variation->getDeliveries()));
     }
 
     public function testArrayProduct()
     {
-        $product = new Product;
+        $product = new Product();
 
         $arrayProduct = array(
             'sku'                       => 'productSku',
@@ -479,21 +481,21 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
         $product->fromArray($arrayProduct);
 
-        $this->assertEquals($arrayProduct, $product->toArray());
+        $this->assertSame($arrayProduct, $product->toArray());
 
-        $this->assertEquals($product->getSku(),                       $arrayProduct['sku']);
-        $this->assertEquals($product->getSlug(),                      $arrayProduct['slug']);
-        $this->assertEquals($product->getName(),                      $arrayProduct['name']);
-        $this->assertEquals($product->getDescription(),               $arrayProduct['description']);
-        $this->assertEquals($product->getRawDescription(),            $arrayProduct['rawDescription']);
-        $this->assertEquals($product->getDescriptionFormatter(),      $arrayProduct['descriptionFormatter']);
-        $this->assertEquals($product->getShortDescription(),          $arrayProduct['shortDescription']);
-        $this->assertEquals($product->getRawShortDescription(),       $arrayProduct['rawShortDescription']);
-        $this->assertEquals($product->getShortDescriptionFormatter(), $arrayProduct['shortDescriptionFormatter']);
-        $this->assertEquals($product->getPrice(),                     $arrayProduct['price']);
-        $this->assertEquals($product->getVatRate(),                   $arrayProduct['vatRate']);
-        $this->assertEquals($product->getStock(),                     $arrayProduct['stock']);
-        $this->assertEquals($product->getEnabled(),                   $arrayProduct['enabled']);
-        $this->assertEquals($product->getOptions(),                   $arrayProduct['options']);
+        $this->assertSame($product->getSku(),                       $arrayProduct['sku']);
+        $this->assertSame($product->getSlug(),                      $arrayProduct['slug']);
+        $this->assertSame($product->getName(),                      $arrayProduct['name']);
+        $this->assertSame($product->getDescription(),               $arrayProduct['description']);
+        $this->assertSame($product->getRawDescription(),            $arrayProduct['rawDescription']);
+        $this->assertSame($product->getDescriptionFormatter(),      $arrayProduct['descriptionFormatter']);
+        $this->assertSame($product->getShortDescription(),          $arrayProduct['shortDescription']);
+        $this->assertSame($product->getRawShortDescription(),       $arrayProduct['rawShortDescription']);
+        $this->assertSame($product->getShortDescriptionFormatter(), $arrayProduct['shortDescriptionFormatter']);
+        $this->assertSame($product->getPrice(),                     $arrayProduct['price']);
+        $this->assertSame($product->getVatRate(),                   $arrayProduct['vatRate']);
+        $this->assertSame($product->getStock(),                     $arrayProduct['stock']);
+        $this->assertSame($product->getEnabled(),                   $arrayProduct['enabled']);
+        $this->assertSame($product->getOptions(),                   $arrayProduct['options']);
     }
 }

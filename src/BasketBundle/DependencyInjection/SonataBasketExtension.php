@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,14 +11,12 @@
 
 namespace Sonata\BasketBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
-
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * BasketExtension.
@@ -42,7 +40,7 @@ class SonataBasketExtension extends Extension
 
         $bundles = $container->getParameter('kernel.bundles');
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('basket_entity.xml');
         $loader->load('basket_session.xml');
@@ -66,7 +64,6 @@ class SonataBasketExtension extends Extension
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $config
-     * @return void
      */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
@@ -75,8 +72,7 @@ class SonataBasketExtension extends Extension
     }
 
     /**
-     * @param  array $config
-     * @return void
+     * @param array $config
      */
     public function registerDoctrineMapping(array $config)
     {
@@ -90,14 +86,14 @@ class SonataBasketExtension extends Extension
              'fieldName'    => 'customer',
              'targetEntity' => $config['class']['customer'],
              'cascade'      => array(),
-             'mappedBy'     => NULL,
-             'inversedBy'   => NULL,
+             'mappedBy'     => null,
+             'inversedBy'   => null,
              'joinColumns'  => array(
                  array(
-                     'name' => 'customer_id',
+                     'name'                 => 'customer_id',
                      'referencedColumnName' => 'id',
-                     'onDelete' => 'CASCADE',
-                     'unique' => true,
+                     'onDelete'             => 'CASCADE',
+                     'unique'               => true,
                  ),
              ),
              'orphanRemoval' => false,
@@ -117,13 +113,13 @@ class SonataBasketExtension extends Extension
             'fieldName'      => 'basket',
             'targetEntity'   => $config['class']['basket'],
             'cascade'        => array(),
-            'mappedBy'       => NULL,
+            'mappedBy'       => null,
             'inversedBy'     => 'basketElements',
             'joinColumns'    => array(
                 array(
-                    'name' => 'basket_id',
+                    'name'                 => 'basket_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete'             => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,

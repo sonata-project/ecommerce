@@ -1,12 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\Component\Customer;
 
+use FOS\UserBundle\Model\UserInterface;
+use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use FOS\UserBundle\Model\UserInterface;
-use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
 {
@@ -45,7 +54,7 @@ class CustomerSelector implements CustomerSelectorInterface
     }
 
     /**
-     * Get the customer
+     * Get the customer.
      *
      * @throws \RuntimeException
      *
@@ -65,7 +74,7 @@ class CustomerSelector implements CustomerSelectorInterface
             }
 
             $customer = $this->customerManager->findOneBy(array(
-                'user' => $user->getId()
+                'user' => $user->getId(),
             ));
         }
 

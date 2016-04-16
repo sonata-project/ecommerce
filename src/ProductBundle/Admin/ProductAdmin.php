@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,17 +11,17 @@
 
 namespace Sonata\ProductBundle\Admin;
 
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Currency\CurrencyDetectorInterface;
-use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class ProductAdmin extends Admin
 {
@@ -93,7 +93,7 @@ class ProductAdmin extends Admin
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -140,7 +140,6 @@ class ProductAdmin extends Admin
                 $this->trans('product.sidemenu.view_variations'),
                 array('uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', array('id' => $id)))
             );
-
         }
     }
 
@@ -196,8 +195,6 @@ class ProductAdmin extends Admin
 
     /**
      * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     *
-     * @return void
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {

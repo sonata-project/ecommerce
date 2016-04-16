@@ -1,13 +1,13 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 
 namespace Sonata\ProductBundle\Block;
 
@@ -25,11 +25,9 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-
 /**
- * Class VariationsFormBlockService
+ * Class VariationsFormBlockService.
  *
- * @package Sonata\ProductBundle\Block
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -71,7 +69,7 @@ class VariationsFormBlockService extends BaseBlockService
                     'settings' => $blockContext->getSettings(),
                     'block'    => $blockContext->getBlock(),
                     'choices'  => array(),
-                    'form'     => null
+                    'form'     => null,
                 ), $response);
         }
 
@@ -90,7 +88,7 @@ class VariationsFormBlockService extends BaseBlockService
         $form = $this->formFactory->createBuilder('sonata_product_variation_choices', $currentValues, array(
                 'field_options' => $blockContext->getSetting('form_field_options'),
                 'product'       => $product,
-                'fields'        => $fields
+                'fields'        => $fields,
             ))->getForm();
 
         $params = array(
@@ -120,7 +118,6 @@ class VariationsFormBlockService extends BaseBlockService
         // TODO: Implement buildEditForm() method.
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -147,12 +144,12 @@ class VariationsFormBlockService extends BaseBlockService
 
                     return array(
                         'productId' => $product ? $product->getId() : null,
-                        'slug'      => $product ? $product->getSlug() : null
+                        'slug'      => $product ? $product->getSlug() : null,
                     );
                 },
             'form_field_options'    => array(),
             'title'                 => 'Product variations',
-            'template'              => 'SonataProductBundle:Block:variations_choice.html.twig'
+            'template'              => 'SonataProductBundle:Block:variations_choice.html.twig',
         ));
     }
 }

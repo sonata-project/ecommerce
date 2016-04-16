@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,6 +10,7 @@
  */
 
 namespace Sonata\Component\Currency;
+
 use Sonata\CoreBundle\Model\ManagerInterface;
 
 /**
@@ -18,7 +19,7 @@ use Sonata\CoreBundle\Model\ManagerInterface;
 interface CurrencyManagerInterface extends ManagerInterface
 {
     /**
-     * Finds the currency matching $currencyLabel
+     * Finds the currency matching $currencyLabel.
      *
      * @param string $currencyLabel
      *

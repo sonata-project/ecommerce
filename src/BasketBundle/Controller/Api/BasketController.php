@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,20 +11,18 @@
 
 namespace Sonata\BasketBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketManagerInterface;
-
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class BasketController
+ * Class BasketController.
  *
- * @package Sonata\BasketBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -36,7 +34,7 @@ class BasketController
     protected $basketManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param BasketManagerInterface $basketManager
      */
@@ -84,7 +82,7 @@ class BasketController
     }
 
     /**
-     * Retrieves a specific basket
+     * Retrieves a specific basket.
      *
      * @ApiDoc(
      *  requirements={
@@ -109,7 +107,7 @@ class BasketController
     }
 
     /**
-     * Retrieves a specific basket's elements
+     * Retrieves a specific basket's elements.
      *
      * @ApiDoc(
      *  requirements={
@@ -134,11 +132,12 @@ class BasketController
     }
 
     /**
-     * Retrieves basket with id $id or throws an exception if it doesn't exist
+     * Retrieves basket with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return BasketInterface
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getBasket($id)

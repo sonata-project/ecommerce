@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,8 +11,8 @@
 
 namespace Sonata\BasketBundle\Entity;
 
-use Sonata\Component\Basket\Basket;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\Component\Basket\Basket;
 
 abstract class BaseBasket extends Basket
 {
@@ -44,7 +44,7 @@ abstract class BaseBasket extends Basket
         parent::reset($full);
 
         if ($full) {
-            $this->basketElements = new ArrayCollection;
+            $this->basketElements = new ArrayCollection();
         }
     }
 }

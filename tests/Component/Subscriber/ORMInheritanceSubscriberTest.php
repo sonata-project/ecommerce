@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,9 +14,8 @@ namespace Sonata\Test\Component\Subscriber;
 use Sonata\Component\Subscriber\ORMInheritanceSubscriber;
 
 /**
- * Class ORMInheritanceSubscriberTest
+ * Class ORMInheritanceSubscriberTest.
  *
- * @package Sonata\Test\Component
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */

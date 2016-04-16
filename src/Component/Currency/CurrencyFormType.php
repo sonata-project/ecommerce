@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,9 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class CurrencyFormType
+ * Class CurrencyFormType.
  *
- * @package Sonata\Component\Currency
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -28,7 +28,7 @@ class CurrencyFormType extends CurrencyType
     private $currencyTransformer;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param CurrencyDataTransformer $currencyTransformer
      */

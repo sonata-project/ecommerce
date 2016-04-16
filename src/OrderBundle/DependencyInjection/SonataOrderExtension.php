@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,20 +11,18 @@
 
 namespace Sonata\OrderBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataOrderExtension extends Extension
 {
-
     /**
      * Loads the order configuration.
      *
@@ -62,9 +60,8 @@ class SonataOrderExtension extends Extension
     }
 
     /**
-     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param  array                                                   $config
-     * @return void
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array                                                   $config
      */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
@@ -76,8 +73,7 @@ class SonataOrderExtension extends Extension
     }
 
     /**
-     * @param  array $config
-     * @return void
+     * @param array $config
      */
     public function registerDoctrineMapping(array $config)
     {
@@ -101,13 +97,13 @@ class SonataOrderExtension extends Extension
            'fieldName'      => 'customer',
            'targetEntity'   => $config['class']['customer'],
            'cascade'        => array(),
-           'mappedBy'       => NULL,
+           'mappedBy'       => null,
            'inversedBy'     => 'orders',
            'joinColumns'    => array(
                 array(
-                    'name' => 'customer_id',
+                    'name'                 => 'customer_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'SET NULL',
+                    'onDelete'             => 'SET NULL',
                 ),
            ),
            'orphanRemoval' => false,
@@ -117,32 +113,32 @@ class SonataOrderExtension extends Extension
             'fieldName'     => 'order',
             'targetEntity'  => $config['class']['order'],
             'cascade'       => array(),
-            'mappedBy'      => NULL,
-            'inversedBy'    => NULL,
+            'mappedBy'      => null,
+            'inversedBy'    => null,
             'joinColumns'   => array(
                 array(
-                    'name'  => 'order_id',
+                    'name'                 => 'order_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete'             => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,
         ));
 
         $collector->addIndex($config['class']['order_element'], 'product_type', array(
-            'product_type'
+            'product_type',
         ));
 
         $collector->addIndex($config['class']['order_element'], 'status', array(
-            'status'
+            'status',
         ));
 
         $collector->addIndex($config['class']['order'], 'order_status', array(
-            'status'
+            'status',
         ));
 
         $collector->addIndex($config['class']['order'], 'payment_status', array(
-            'payment_status'
+            'payment_status',
         ));
     }
 }

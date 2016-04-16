@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -15,5 +15,4 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 
 class CategoryAdminController extends Controller
 {
-
 }

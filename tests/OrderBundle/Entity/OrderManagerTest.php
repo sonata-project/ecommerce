@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -16,19 +17,17 @@ use Sonata\OrderBundle\Entity\OrderManager;
 class Order extends BaseOrder
 {
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
         // TODO: Implement getId() method.
     }
-
 }
 
 /**
- * Class OrderManagerTest
+ * Class OrderManagerTest.
  *
- * @package Sonata\Test\OrderBundle\Entity
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
@@ -39,7 +38,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $order = new OrderManager('Sonata\Test\OrderBundle\Entity\Order', $registry);
 
-        $this->assertEquals('Sonata\Test\OrderBundle\Entity\Order', $order->getClass());
+        $this->assertSame('Sonata\Test\OrderBundle\Entity\Order', $order->getClass());
     }
 
     public function testCreate()

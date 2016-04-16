@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -89,7 +89,7 @@ class RecentProductsBlockService extends BaseBlockService
             'keys' => array(
                 array('number', 'integer', array('required' => true)),
                 array('title',  'text',    array('required' => false)),
-            )
+            ),
         ));
     }
 
@@ -109,7 +109,7 @@ class RecentProductsBlockService extends BaseBlockService
         $resolver->setDefaults(array(
             'number'     => 5,
             'title'      => 'Recent products',
-            'template'   => 'SonataProductBundle:Block:recent_products.html.twig'
+            'template'   => 'SonataProductBundle:Block:recent_products.html.twig',
         ));
     }
 

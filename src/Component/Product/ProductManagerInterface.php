@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata product.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -16,7 +16,7 @@ use Sonata\CoreBundle\Model\ManagerInterface;
 interface ProductManagerInterface extends ManagerInterface
 {
     /**
-     * Returns the products in the same collections as those specified in $productCollections
+     * Returns the products in the same collections as those specified in $productCollections.
      *
      * @param mixed $productCollections
      *
@@ -25,7 +25,7 @@ interface ProductManagerInterface extends ManagerInterface
     public function findInSameCollections($productCollections);
 
     /**
-     * Returns the parent products in the same collections as those specified in $productCollections
+     * Returns the parent products in the same collections as those specified in $productCollections.
      *
      * @param mixed $productCollections
      *
@@ -34,7 +34,7 @@ interface ProductManagerInterface extends ManagerInterface
     public function findParentsInSameCollections($productCollections);
 
     /**
-     * Retrieve an active product from its id and its slug
+     * Retrieve an active product from its id and its slug.
      *
      * @param int    $id
      * @param string $slug

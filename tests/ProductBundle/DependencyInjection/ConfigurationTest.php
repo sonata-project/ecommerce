@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -25,7 +25,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->validateClass($config);
         $this->validateSeo($config);
 
-        $this->assertEquals('sonata.core.slugify.native', $config['slugify_service']);
+        $this->assertSame('sonata.core.slugify.native', $config['slugify_service']);
 
         $this->assertArrayHasKey('products', $config);
         $this->assertEmpty($config['products']);
@@ -33,7 +33,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function validateClass($config)
     {
-        $this->assertEquals(array(
+        $this->assertSame(array(
             'product'            => 'Application\\Sonata\\ProductBundle\\Entity\\Product',
             'package'            => 'Application\\Sonata\\ProductBundle\\Entity\\Package',
             'product_category'   => 'Application\\Sonata\\ProductBundle\\Entity\\ProductCategory',
@@ -48,7 +48,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function validateSeo($config)
     {
-        $this->assertEquals(array(
+        $this->assertSame(array(
             'product' => array(
                 'site'         => '@sonataproject',
                 'creator'      => '@th0masr',

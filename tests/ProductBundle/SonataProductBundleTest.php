@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -17,7 +17,7 @@ use Sonata\ProductBundle\SonataProductBundle;
 class Product extends \Sonata\ProductBundle\Entity\BaseProduct
 {
     /**
-     * Returns the id
+     * Returns the id.
      *
      * @return mixed
      */
@@ -52,14 +52,14 @@ class SonataProductBundleTest extends \PHPUnit_Framework_TestCase
 
         $product = new Product();
         $product->setSlug($text);
-        $this->assertEquals($product->getSlug(), $expected);
+        $this->assertSame($product->getSlug(), $expected);
     }
 
     public function getSlug()
     {
         return array(
             array('La Coopérative des Tilleuls !', 'la-cooperative-des-tilleuls'),
-            array('кооператив липа', 'kooperativ-lipa')
+            array('кооператив липа', 'kooperativ-lipa'),
         );
     }
 }

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Form;
+namespace Sonata\tests\Component\Form;
 
 use Sonata\Component\Form\BasketValidator;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class BasketValidatorTest
+ * Class BasketValidatorTest.
  *
- * @package Sonata\Tests\Component\Form
  *
  * @author Hugo Briand <briand@ekino.com>
  */

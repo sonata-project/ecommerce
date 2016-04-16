@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -9,8 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\PaymentBundle\Consumer;
-
+namespace Sonata\tests\PaymentBundle\Consumer;
 
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
@@ -24,8 +23,8 @@ class PaymentProcessOrderElementConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $consumer = $this->getConsumer();
 
-        $this->assertEquals(-1,  $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 1));
-        $this->assertEquals(-10, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 10));
+        $this->assertSame(-1,  $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 1));
+        $this->assertSame(-10, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 10));
     }
 
     /**

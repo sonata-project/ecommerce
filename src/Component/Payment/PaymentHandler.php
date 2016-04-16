@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -17,14 +18,12 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\NotificationBundle\Backend\BackendInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PaymentHandler
+ * Class PaymentHandler.
  *
  * Responsible for interactions between PaymentController & Model
  *
- * @package Sonata\Component\Payment
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -56,7 +55,7 @@ class PaymentHandler implements PaymentHandlerInterface
     protected $notificationBackend;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param OrderManagerInterface       $orderManager
      * @param PaymentSelectorInterface    $paymentSelector
@@ -158,11 +157,12 @@ class PaymentHandler implements PaymentHandlerInterface
     }
 
     /**
-     * Retrieves the order matching $transaction and adds it to $transaction
+     * Retrieves the order matching $transaction and adds it to $transaction.
      *
      * @param TransactionInterface $transaction The request's transaction (will be linked to the order in the process)
      *
      * @return \Sonata\Component\Order\OrderInterface
+     *
      * @throws \Doctrine\ORM\EntityNotFoundException
      * @throws \InvalidTransactionException
      */
@@ -178,7 +178,7 @@ class PaymentHandler implements PaymentHandlerInterface
         }
 
         $order = $this->orderManager->findOneby(array(
-            'reference' => $reference
+            'reference' => $reference,
         ));
 
         if (!$order) {
@@ -222,5 +222,4 @@ class PaymentHandler implements PaymentHandlerInterface
     {
         return $this->paymentSelector->getPayment($code);
     }
-
 }

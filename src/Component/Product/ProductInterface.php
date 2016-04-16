@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,9 +11,9 @@
 
 namespace Sonata\Component\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\ExecutionContext;
 
 interface ProductInterface extends PriceComputableInterface
@@ -21,7 +21,7 @@ interface ProductInterface extends PriceComputableInterface
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
@@ -112,28 +112,28 @@ interface ProductInterface extends PriceComputableInterface
     /**
      * Set stock.
      *
-     * @param integer $stock
+     * @param int $stock
      */
     public function setStock($stock);
 
     /**
      * Get stock.
      *
-     * @return integer
+     * @return int
      */
     public function getStock();
 
     /**
      * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
      * Get enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnabled();
 
@@ -208,14 +208,14 @@ interface ProductInterface extends PriceComputableInterface
     public function removeDelivery(DeliveryInterface $delivery);
 
     /**
-     * Add a Delivery to collection. Alias for addDelivery needed by the AdminBundle
+     * Add a Delivery to collection. Alias for addDelivery needed by the AdminBundle.
      *
      * @param DeliveryInterface $delivery
      */
     public function addDeliverie(DeliveryInterface $delivery);
 
     /**
-     * Remove a Delivery from collection. Alias for removeDelivery needed by the AdminBundle
+     * Remove a Delivery from collection. Alias for removeDelivery needed by the AdminBundle.
      *
      * @param DeliveryInterface $delivery
      */
@@ -320,7 +320,7 @@ interface ProductInterface extends PriceComputableInterface
     public function getCategories();
 
     /**
-     * Returns product main category
+     * Returns product main category.
      *
      * @return CategoryInterface
      */
@@ -376,7 +376,7 @@ interface ProductInterface extends PriceComputableInterface
     public function setImage(MediaInterface $image = null);
 
     /**
-     * Gets the product main image
+     * Gets the product main image.
      *
      * @return MediaInterface
      */
@@ -420,35 +420,35 @@ interface ProductInterface extends PriceComputableInterface
     /**
      * Return true if the Product is a master (parent of variation(s) or single product).
      *
-     * @return boolean
+     * @return bool
      */
     public function isMaster();
 
     /**
      * Return true if the Product is a variation, linked to a main Product.
      *
-     * @return boolean
+     * @return bool
      */
     public function isVariation();
 
     /**
      * Return true if Product is enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEnabled();
 
     /**
      * Return true if Product can be sold.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSalable();
 
     /**
      * Return true if the Product is recurrent.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRecurrentPayment();
 
@@ -467,18 +467,16 @@ interface ProductInterface extends PriceComputableInterface
     public function fromArray($array);
 
     /**
-     * Returns if product has one main category
+     * Returns if product has one main category.
      *
      * @return bool
      */
     public function hasOneMainCategory();
 
     /**
-     * Validates if product has one main category
+     * Validates if product has one main category.
      *
      * @param ExecutionContext $context
-     *
-     * @return void
      */
     public function validateOneMainCategory(ExecutionContext $context);
 }

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\ProductBundle\Controller\Api;
 
 use Sonata\ProductBundle\Controller\Api\ProductController;
 
-
 /**
- * Class ProductControllerTest
+ * Class ProductControllerTest.
  *
- * @package Sonata\Test\ProductBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -33,13 +31,13 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($product), $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
+        $this->assertSame(array($product), $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
     }
 
     public function testGetProductAction()
     {
         $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-        $this->assertEquals($product, $this->createProductController($product)->getProductAction(1));
+        $this->assertSame($product, $this->createProductController($product)->getProductAction(1));
     }
 
     /**
@@ -57,7 +55,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $productCategory = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
         $product->expects($this->once())->method('getProductCategories')->will($this->returnValue(array($productCategory)));
 
-        $this->assertEquals(array($productCategory), $this->createProductController($product)->getProductProductcategoriesAction(1));
+        $this->assertSame(array($productCategory), $this->createProductController($product)->getProductProductcategoriesAction(1));
     }
 
     public function testGetProductCategoriesAction()
@@ -66,7 +64,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $category = $this->getMock('Sonata\ClassificationBundle\Model\CategoryInterface');
         $product->expects($this->once())->method('getCategories')->will($this->returnValue(array($category)));
 
-        $this->assertEquals(array($category), $this->createProductController($product)->getProductCategoriesAction(1));
+        $this->assertSame(array($category), $this->createProductController($product)->getProductCategoriesAction(1));
     }
 
     public function testGetProductProductcollectionsAction()
@@ -75,7 +73,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $productCollection = $this->getMock('Sonata\Component\Product\ProductCollectionInterface');
         $product->expects($this->once())->method('getProductCollections')->will($this->returnValue(array($productCollection)));
 
-        $this->assertEquals(array($productCollection), $this->createProductController($product)->getProductProductcollectionsAction(1));
+        $this->assertSame(array($productCollection), $this->createProductController($product)->getProductProductcollectionsAction(1));
     }
 
     public function testGetProductCollectionsAction()
@@ -84,7 +82,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $collection = $this->getMock('Sonata\ClassificationBundle\Model\CollectionInterface');
         $product->expects($this->once())->method('getCollections')->will($this->returnValue(array($collection)));
 
-        $this->assertEquals(array($collection), $this->createProductController($product)->getProductCollectionsAction(1));
+        $this->assertSame(array($collection), $this->createProductController($product)->getProductCollectionsAction(1));
     }
 
     public function testGetProductPackagesAction()
@@ -93,7 +91,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $package = $this->getMock('Sonata\Component\Product\PackageInterface');
         $product->expects($this->once())->method('getPackages')->will($this->returnValue(array($package)));
 
-        $this->assertEquals(array($package), $this->createProductController($product)->getProductPackagesAction(1));
+        $this->assertSame(array($package), $this->createProductController($product)->getProductPackagesAction(1));
     }
 
     public function testGetProductDeliveriesAction()
@@ -102,7 +100,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
 
-        $this->assertEquals(array($delivery), $this->createProductController($product)->getProductDeliveriesAction(1));
+        $this->assertSame(array($delivery), $this->createProductController($product)->getProductDeliveriesAction(1));
     }
 
     public function testGetProductVariationsAction()
@@ -111,7 +109,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
         $variation = $this->getMock('Sonata\Component\Product\ProductInterface');
         $product->expects($this->once())->method('getVariations')->will($this->returnValue(array($variation)));
 
-        $this->assertEquals(array($variation), $this->createProductController($product)->getProductVariationsAction(1));
+        $this->assertSame(array($variation), $this->createProductController($product)->getProductVariationsAction(1));
     }
 
     /**

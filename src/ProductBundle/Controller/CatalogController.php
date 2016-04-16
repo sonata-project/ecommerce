@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -43,7 +43,7 @@ class CatalogController extends Controller
 
         $category = $this->retrieveCategoryFromQueryString();
 
-        $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title', array(), "SonataProductBundle"));
+        $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title', array(), 'SonataProductBundle'));
 
         $pager = $this->get('knp_paginator');
         $pagination = $pager->paginate($this->getProductSetManager()->getCategoryActiveProductsQueryBuilder($category, $filter, $option), $page, $displayMax);
@@ -68,7 +68,7 @@ class CatalogController extends Controller
         $categorySlug = $this->getRequest()->get('category_slug');
 
         if (!$categoryId || !$categorySlug) {
-            return null;
+            return;
         }
 
         return $this->getCategoryManager()->findOneBy(array(
@@ -78,7 +78,7 @@ class CatalogController extends Controller
     }
 
     /**
-     * Gets the product provider associated with $category if any
+     * Gets the product provider associated with $category if any.
      *
      * @param CategoryInterface $category
      *
@@ -87,7 +87,7 @@ class CatalogController extends Controller
     protected function getProviderFromCategory(CategoryInterface $category = null)
     {
         if (null === $category) {
-            return null;
+            return;
         }
 
         $product = $this->getProductSetManager()->findProductForCategory($category);

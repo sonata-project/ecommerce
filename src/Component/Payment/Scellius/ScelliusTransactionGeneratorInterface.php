@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -15,7 +16,8 @@ use Sonata\Component\Order\OrderInterface;
 interface ScelliusTransactionGeneratorInterface
 {
     /**
-     * @param  \Sonata\Component\Order\OrderInterface $order
+     * @param \Sonata\Component\Order\OrderInterface $order
+     *
      * @return string
      */
     public function generate(OrderInterface $order);

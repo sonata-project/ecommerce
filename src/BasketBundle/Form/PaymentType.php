@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,16 +11,15 @@
 
 namespace Sonata\BasketBundle\Form;
 
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\AddressManagerInterface;
+use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
+use Sonata\Component\Payment\PaymentSelectorInterface;
+use Sonata\Component\Payment\Pool as PaymentPool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
-
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Customer\AddressManagerInterface;
-use Sonata\Component\Customer\AddressInterface;
-use Sonata\Component\Payment\Pool as PaymentPool;
-use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
-use Sonata\Component\Payment\PaymentSelectorInterface;
 
 class PaymentType extends AbstractType
 {
@@ -40,7 +39,7 @@ class PaymentType extends AbstractType
     protected $paymentSelector;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param AddressManagerInterface  $addressManager
      * @param PaymentPool              $paymentPool
@@ -66,7 +65,7 @@ class PaymentType extends AbstractType
 
         $addresses = $this->addressManager->findBy(array(
             'customer' => $basket->getCustomer()->getId(),
-            'type'     => AddressInterface::TYPE_BILLING
+            'type'     => AddressInterface::TYPE_BILLING,
         ));
 
         /*

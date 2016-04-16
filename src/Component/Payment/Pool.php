@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,10 +11,8 @@
 
 namespace Sonata\Component\Payment;
 
-
 /**
- * The pool stored a group of available payment method
- *
+ * The pool stored a group of available payment method.
  */
 class Pool
 {
@@ -23,7 +22,7 @@ class Pool
     protected $methods = array();
 
     /**
-     * add a payment method into the pool
+     * add a payment method into the pool.
      *
      * @param PaymentInterface $instance
      */
@@ -33,7 +32,6 @@ class Pool
     }
 
     /**
-     *
      * @return array of payment methods
      */
     public function getMethods()
@@ -42,7 +40,7 @@ class Pool
     }
 
     /**
-     * return a PaymentInterface Object
+     * return a PaymentInterface Object.
      *
      * @param string $code
      *

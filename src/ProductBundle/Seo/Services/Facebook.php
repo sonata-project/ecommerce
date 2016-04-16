@@ -1,13 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\ProductBundle\Seo\Services;
 
-use Sonata\MediaBundle\Model\MediaInterface;
-use Sonata\SeoBundle\Seo\SeoPageInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\MediaBundle\Provider\Pool;
-use Sonata\IntlBundle\Templating\Helper\NumberHelper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Product\ProductInterface;
+use Sonata\IntlBundle\Templating\Helper\NumberHelper;
+use Sonata\MediaBundle\Model\MediaInterface;
+use Sonata\MediaBundle\Provider\Pool;
+use Sonata\SeoBundle\Seo\SeoPageInterface;
 
 /**
  * FacebookService.
@@ -94,8 +103,6 @@ class Facebook implements ServiceInterface
 
     /**
      * @param SeoPageInterface $seoPage
-     *
-     * @return void
      */
     protected function registerHeaders(SeoPageInterface $seoPage)
     {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,13 +11,9 @@
 
 namespace Sonata\Tests\Component\Delivery;
 
-use Sonata\Component\Delivery\Selector;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
+use Sonata\Component\Delivery\Selector;
 use Sonata\Component\Product\Pool as ProductPool;
-use Sonata\Component\Basket\BasketInterface;
-use Sonata\Component\Customer\AddressInterface;
-use Sonata\Component\Product\ProductInterface;
-use Sonata\Component\Basket\BasketElementInterface;
 
 class ServiceDelivery extends \Sonata\Component\Delivery\BaseServiceDelivery
 {
@@ -31,8 +27,8 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 {
     public function testEmptyBasket()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods());
@@ -40,8 +36,8 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testNoAddress()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
 
         $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
         $selector = new Selector($deliveryPool, $productPool);
@@ -50,8 +46,8 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistentProduct()
     {
-        $deliveryPool = new DeliveryPool;
-        $productPool = new ProductPool;
+        $deliveryPool = new DeliveryPool();
+        $productPool = new ProductPool();
 
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
 
@@ -81,12 +77,12 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
         $deliveryMethod_high_bis->setEnabled(true);
         $deliveryMethod_high_bis->setPriority(2);
 
-        $deliveryPool = new DeliveryPool;
+        $deliveryPool = new DeliveryPool();
         $deliveryPool->addMethod($deliveryMethod_low);
         $deliveryPool->addMethod($deliveryMethod_high);
         $deliveryPool->addMethod($deliveryMethod_high_bis);
 
-        $productPool = new ProductPool;
+        $productPool = new ProductPool();
 
         $productDelivery_low = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $productDelivery_low->expects($this->any())->method('getCode')->will($this->returnValue('ups_low'));
@@ -113,8 +109,8 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $instances = $selector->getAvailableMethods($basket, $address);
         $this->assertCount(3, $instances);
-        $this->assertEquals($instances[0]->getCode(), 'ups_high_bis');
-        $this->assertEquals($instances[1]->getCode(), 'ups_high');
-        $this->assertEquals($instances[2]->getCode(), 'ups_low');
+        $this->assertSame($instances[0]->getCode(), 'ups_high_bis');
+        $this->assertSame($instances[1]->getCode(), 'ups_high');
+        $this->assertSame($instances[2]->getCode(), 'ups_low');
     }
 }

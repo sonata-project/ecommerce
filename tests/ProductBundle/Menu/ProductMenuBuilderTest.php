@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
-namespace Sonata\Tests\ProductBundle\Menu;
+namespace Sonata\tests\ProductBundle\Menu;
 
 use Sonata\ProductBundle\Menu\ProductMenuBuilder;
 
-
 /**
- * Class ProductMenuBuilderTest
+ * Class ProductMenuBuilderTest.
  *
- * @package Sonata\Tests\ProductBundle\Menu
  *
  * @author Hugo Briand <briand@ekino.com>
  */

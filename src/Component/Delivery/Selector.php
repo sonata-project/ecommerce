@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,15 +11,14 @@
 
 namespace Sonata\Component\Delivery;
 
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Product\Pool as ProductPool;
-use Psr\Log\LoggerInterface;
 
 /**
- * The selector selects available delivery methods depends on the provided basket
- *
+ * The selector selects available delivery methods depends on the provided basket.
  */
 class Selector implements ServiceDeliverySelectorInterface
 {
@@ -108,7 +108,6 @@ class Selector implements ServiceDeliverySelectorInterface
         // STEP 1 : We get product's delivery methods
         /** @var $basketElement \Sonata\Component\Basket\BasketElementInterface */
         foreach ($basket->getBasketElements() as $basketElement) {
-
             $product = $basketElement->getProduct();
 
             if (!$product) {

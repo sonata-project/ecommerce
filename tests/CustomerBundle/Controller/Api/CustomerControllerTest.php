@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\CustomerBundle\Controller\Api;
 
 use Sonata\CustomerBundle\Controller\Api\CustomerController;
 
-
 /**
- * Class CustomerControllerTest
+ * Class CustomerControllerTest.
  *
- * @package Sonata\Test\CustomerBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -33,13 +31,13 @@ class CustomerControllerTest extends \PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($customer), $this->createCustomerController(null, $customerManager)->getCustomersAction($paramFetcher));
+        $this->assertSame(array($customer), $this->createCustomerController(null, $customerManager)->getCustomersAction($paramFetcher));
     }
 
     public function testGetCustomerAction()
     {
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $this->assertEquals($customer, $this->createCustomerController($customer)->getCustomerAction(1));
+        $this->assertSame($customer, $this->createCustomerController($customer)->getCustomerAction(1));
     }
 
     /**
@@ -56,7 +54,7 @@ class CustomerControllerTest extends \PHPUnit_Framework_TestCase
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $order    = $this->getMock('Sonata\Component\Order\OrderInterface');
 
-        $this->assertEquals(array($order), $this->createCustomerController($customer, null, $order)->getCustomerOrdersAction(1));
+        $this->assertSame(array($order), $this->createCustomerController($customer, null, $order)->getCustomerOrdersAction(1));
     }
 
     public function testGetCustomerAddressesAction()
@@ -65,7 +63,7 @@ class CustomerControllerTest extends \PHPUnit_Framework_TestCase
         $address  = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $customer->expects($this->once())->method('getAddresses')->will($this->returnValue(array($address)));
 
-        $this->assertEquals(array($address), $this->createCustomerController($customer)->getCustomerAddressesAction(1));
+        $this->assertSame(array($address), $this->createCustomerController($customer)->getCustomerAddressesAction(1));
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,8 +12,7 @@
 namespace Sonata\Component\Delivery;
 
 /**
- * A free delivery method, used this only for testing
- *
+ * A free delivery method, used this only for testing.
  */
 class FreeDelivery extends BaseServiceDelivery
 {
@@ -22,9 +22,9 @@ class FreeDelivery extends BaseServiceDelivery
     protected $isAddressRequired;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param boolean $isAddressRequired
+     * @param bool $isAddressRequired
      */
     public function __construct($isAddressRequired)
     {

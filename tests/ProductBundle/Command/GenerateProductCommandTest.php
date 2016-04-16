@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,14 +11,13 @@
 
 namespace Sonata\Test\ProductBundle\Command;
 
+use Sonata\ProductBundle\Command\GenerateProductCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Sonata\ProductBundle\Command\GenerateProductCommand;
 
 /**
- * Class GenerateProductCommandTest
+ * Class GenerateProductCommandTest.
  *
- * @package Sonata\Test\ProductBundle
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
@@ -44,7 +44,7 @@ class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase
         try {
             $cmdTester->execute(array(
                 'command' => $cmd->getName(),
-                'product' => 'Test'
+                'product' => 'Test',
             ));
             $this->fail('The command without "service_id" argument should throw a \RuntimeException');
         } catch (\Exception $e) {

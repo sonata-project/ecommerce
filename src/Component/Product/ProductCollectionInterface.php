@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\Component\Product;
 
 /*
@@ -16,69 +25,69 @@ use Sonata\ClassificationBundle\Model\CollectionInterface;
 interface ProductCollectionInterface
 {
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime $updatedAt
      */
     public function getUpdatedAt();
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \Datetime $createdAt
      */
     public function getCreatedAt();
 
     /**
-     * Set Product
+     * Set Product.
      *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
     /**
-     * Get Product
+     * Get Product.
      *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set Collection
+     * Set Collection.
      *
      * @param CollectionInterface $collection
      */
     public function setCollection(CollectionInterface $collection);
 
     /**
-     * Get Collection
+     * Get Collection.
      *
      * @return CollectionInterface $collection
      */

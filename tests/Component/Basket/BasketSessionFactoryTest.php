@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -9,15 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
-use Sonata\Component\Basket\BasketManagerInterface;
-use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketSessionFactory;
-use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Component\Basket\BasketInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Sonata\Component\Currency\Currency;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
@@ -40,7 +36,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))
@@ -71,7 +67,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))
@@ -100,7 +96,7 @@ class BasketSessionFactoryTest extends \PHPUnit_Framework_TestCase
 
         $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $currency = new Currency();
-        $currency->setLabel("EUR");
+        $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
             ->will($this->returnValue($currency))

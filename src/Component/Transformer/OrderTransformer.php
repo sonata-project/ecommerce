@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,9 +11,9 @@
 
 namespace Sonata\Component\Transformer;
 
+use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
-use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 
 class OrderTransformer extends BaseTransformer
@@ -36,8 +37,9 @@ class OrderTransformer extends BaseTransformer
     }
 
     /**
-     * @param  OrderInterface  $order
-     * @param  BasketInterface $basket
+     * @param OrderInterface  $order
+     * @param BasketInterface $basket
+     *
      * @return BasketInterface
      */
     public function transformIntoBasket(OrderInterface $order, BasketInterface $basket)
@@ -50,7 +52,7 @@ class OrderTransformer extends BaseTransformer
 
         // We are free to convert !
         foreach ($order->getOrderElements() as $orderElement) {
-            /**
+            /*
              * @var $orderElement OrderElementInterface
              */
             $provider   = $this->productPool->getProvider($orderElement->getProductType());

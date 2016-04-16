@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,16 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\Test\InvoiceBundle\Controller\Api;
 
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
 
-
 /**
- * Class InvoiceControllerTest
+ * Class InvoiceControllerTest.
  *
- * @package Sonata\Test\InvoiceBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -33,13 +31,13 @@ class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array($invoice), $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
+        $this->assertSame(array($invoice), $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }
 
     public function testGetInvoiceAction()
     {
         $invoice = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
-        $this->assertEquals($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
+        $this->assertSame($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
     /**
@@ -57,7 +55,7 @@ class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
         $invoiceElements = $this->getMock('Sonata\Component\Invoice\InvoiceElementsInterface');
         $invoice->expects($this->once())->method('getInvoiceElements')->will($this->returnValue(array($invoiceElements)));
 
-        $this->assertEquals(array($invoiceElements), $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
+        $this->assertSame(array($invoiceElements), $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
     }
 
     /**

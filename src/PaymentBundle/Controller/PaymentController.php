@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -21,9 +21,10 @@ class PaymentController extends Controller
 {
     /**
      * This action is called by the user after the sendbank
-     * In most case the order is already cancelled by a previous callback
+     * In most case the order is already cancelled by a previous callback.
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
@@ -45,6 +46,7 @@ class PaymentController extends Controller
     /**
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
+     *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
     public function confirmationAction()
@@ -69,7 +71,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * this action redirect the user to the bank
+     * this action redirect the user to the bank.
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
      */
@@ -110,7 +112,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * this action handler the callback sent from the bank
+     * this action handler the callback sent from the bank.
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *

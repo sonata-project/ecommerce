@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,26 +9,22 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\CustomerBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
-
-use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
- * Class CustomerController
+ * Class CustomerController.
  *
- * @package Sonata\CustomerBundle\Controller\Api
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -44,7 +41,7 @@ class CustomerController
     protected $orderManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param CustomerManagerInterface $customerManager
      * @param OrderManagerInterface    $orderManager
@@ -94,7 +91,7 @@ class CustomerController
     }
 
     /**
-     * Retrieves a specific customer
+     * Retrieves a specific customer.
      *
      * @ApiDoc(
      *  requirements={
@@ -119,7 +116,7 @@ class CustomerController
     }
 
     /**
-     * Retrieves a specific customer's orders
+     * Retrieves a specific customer's orders.
      *
      * @ApiDoc(
      *  requirements={
@@ -141,11 +138,12 @@ class CustomerController
     public function getCustomerOrdersAction($id)
     {
         $customer = $this->getCustomer($id);
+
         return $this->orderManager->findBy(array('customer' => $customer));
     }
 
     /**
-     * Retrieves a specific customer's addresses
+     * Retrieves a specific customer's addresses.
      *
      * @ApiDoc(
      *  requirements={
@@ -170,11 +168,12 @@ class CustomerController
     }
 
     /**
-     * Retrieves customer with id $id or throws an exception if it doesn't exist
+     * Retrieves customer with id $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
      * @return CustomerInterface
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getCustomer($id)

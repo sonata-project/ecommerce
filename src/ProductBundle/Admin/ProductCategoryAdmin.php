@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -12,9 +12,9 @@
 namespace Sonata\ProductBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 
 class ProductCategoryAdmin extends Admin
 {
@@ -30,7 +30,6 @@ class ProductCategoryAdmin extends Admin
         $this->baseRouteName    = 'admin_sonata_product_productcategory';
         $this->baseRoutePattern = '/sonata/product/productcategory';
     }
-
 
     /**
      * {@inheritdoc}
@@ -53,7 +52,7 @@ class ProductCategoryAdmin extends Admin
             $list
                 ->addIdentifier('id')
                 ->addIdentifier('product', null, array(
-                    'admin_code' => 'sonata.product.admin.product'
+                    'admin_code' => 'sonata.product.admin.product',
                 ));
         }
 
@@ -64,8 +63,6 @@ class ProductCategoryAdmin extends Admin
 
     /**
      * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     *
-     * @return void
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {

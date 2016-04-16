@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,8 +11,8 @@
 
 namespace Sonata\Tests\Component\Payment;
 
-use Sonata\Component\Payment\Debug\DebugPayment;
 use Buzz\Browser;
+use Sonata\Component\Payment\Debug\DebugPayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
@@ -49,8 +49,8 @@ class DebugPaymentTest extends \PHPUnit_Framework_TestCase
         $transaction->setParameters(array('action' => 'refuse'));
         $payment->sendConfirmationReceipt($transaction);
 
-        $this->assertEquals(TransactionInterface::STATE_KO, $transaction->getState());
-        $this->assertEquals(TransactionInterface::STATUS_ERROR_VALIDATION, $transaction->getStatusCode());
+        $this->assertSame(TransactionInterface::STATE_KO, $transaction->getState());
+        $this->assertSame(TransactionInterface::STATUS_ERROR_VALIDATION, $transaction->getStatusCode());
 
         /*
          * Payment accepted
@@ -58,8 +58,8 @@ class DebugPaymentTest extends \PHPUnit_Framework_TestCase
         $transaction->setParameters(array('action' => 'accept'));
         $payment->sendConfirmationReceipt($transaction);
 
-        $this->assertEquals(TransactionInterface::STATE_OK, $transaction->getState());
-        $this->assertEquals(TransactionInterface::STATUS_VALIDATED, $transaction->getStatusCode());
+        $this->assertSame(TransactionInterface::STATE_OK, $transaction->getState());
+        $this->assertSame(TransactionInterface::STATUS_VALIDATED, $transaction->getStatusCode());
     }
 
     /**

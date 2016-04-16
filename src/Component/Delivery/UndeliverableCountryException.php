@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,9 +15,8 @@ use Exception;
 use Sonata\Component\Customer\AddressInterface;
 
 /**
- * Class UndeliverableCountryException
+ * Class UndeliverableCountryException.
  *
- * @package Sonata\Component\Delivery
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -28,7 +28,7 @@ class UndeliverableCountryException extends \RuntimeException
     private $address;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param AddressInterface $address
      * @param int              $code
@@ -49,5 +49,4 @@ class UndeliverableCountryException extends \RuntimeException
     {
         return $this->address;
     }
-
 }

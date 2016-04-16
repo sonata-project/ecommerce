@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,9 +15,8 @@ use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 
 /**
- * Class CurrencyPriceCalculatorTest
+ * Class CurrencyPriceCalculatorTest.
  *
- * @package Sonata\Test\Component\Currency\Types
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -33,6 +33,6 @@ class CurrencyPriceCalculatorTest extends \PHPUnit_Framework_TestCase
 
         $product->expects($this->once())->method('getPrice')->will($this->returnValue(42.0));
 
-        $this->assertEquals(42.0, $currencyPriceCalculator->getPrice($product, $currency));
+        $this->assertSame(42.0, $currencyPriceCalculator->getPrice($product, $currency));
     }
 }

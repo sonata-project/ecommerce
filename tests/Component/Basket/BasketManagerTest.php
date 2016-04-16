@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\tests\Component\Basket;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketManager;
 
 /**
- * Class BasketManagerTest
+ * Class BasketManagerTest.
  *
- * @package Sonata\Tests\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -32,7 +32,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
         $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $registry);
 
         $this->assertInstanceOf('Sonata\Component\Basket\Basket', $basketMgr->create());
-        $this->assertEquals('Sonata\Component\Basket\Basket', $basketMgr->getClass());
+        $this->assertSame('Sonata\Component\Basket\Basket', $basketMgr->getClass());
     }
 
     public function testSave()

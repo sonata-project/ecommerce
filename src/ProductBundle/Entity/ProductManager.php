@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -12,7 +12,6 @@
 namespace Sonata\ProductBundle\Entity;
 
 use Doctrine\ORM\QueryBuilder;
-
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
@@ -44,9 +43,10 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     }
 
     /**
-     * Returns partial product example (only to get its class) from $category
+     * Returns partial product example (only to get its class) from $category.
      *
      * @param CategoryInterface $category
+     *
      * @return ProductInterface|null
      */
     public function findProductForCategory(CategoryInterface $category)
@@ -77,15 +77,15 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
 
         if (null !== $filter) {
             // TODO manage various filter types
-            $queryBuilder->andWhere(sprintf("p.%s %s :%s", $filter, '>', $filter))
-                ->setParameter(sprintf(":%s", $filter), $option);
+            $queryBuilder->andWhere(sprintf('p.%s %s :%s', $filter, '>', $filter))
+                ->setParameter(sprintf(':%s', $filter), $option);
         }
 
         return $queryBuilder;
     }
 
     /**
-     * Retrieve an active product from its id and its slug
+     * Retrieve an active product from its id and its slug.
      *
      * @param int    $id
      * @param string $slug
@@ -96,9 +96,9 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     {
         return $this->getRepository()
             ->findOneBy(array(
-                'id' => $id,
-                'slug' => $slug,
-                'enabled' => true
+                'id'      => $id,
+                'slug'    => $slug,
+                'enabled' => true,
             ));
     }
 
@@ -126,7 +126,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     }
 
     /**
-     * @param array $productCollections
+     * @param array    $productCollections
      * @param null|int $limit
      *
      * @return \Doctrine\ORM\QueryBuilder

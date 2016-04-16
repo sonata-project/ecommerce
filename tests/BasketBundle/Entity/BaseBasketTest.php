@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,13 +15,11 @@ use Sonata\BasketBundle\Entity\BaseBasket;
 
 class BasketTest extends BaseBasket
 {
-
 }
 
 /**
- * Class BaseBasketTest
+ * Class BaseBasketTest.
  *
- * @package Sonata\Tests\BasketBundle\Entity
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -39,13 +38,13 @@ class BaseBasketTest extends \PHPUnit_Framework_TestCase
         $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
 
         $elements = array(
-            "notBasketElementInterface",
-            $element
+            'notBasketElementInterface',
+            $element,
         );
 
         $basket->setBasketElements($elements);
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertSame(1, count($basket->getBasketElements()));
     }
 
     public function testReset()
@@ -61,19 +60,19 @@ class BaseBasketTest extends \PHPUnit_Framework_TestCase
         $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
 
         $elements = array(
-            "notBasketElementInterface",
-            $element
+            'notBasketElementInterface',
+            $element,
         );
 
         $basket->setBasketElements($elements);
 
         $basket->reset(false);
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertSame(1, count($basket->getBasketElements()));
 
         $basket->reset();
 
-        $this->assertEquals(0, count($basket->getBasketElements()));
+        $this->assertSame(0, count($basket->getBasketElements()));
         $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $basket->getBasketElements());
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,13 +11,13 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Customer\CustomerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketSessionFactory extends BaseBasketFactory
 {
-    const SESSION_BASE_NAME = "sonata/basket/factory/customer/";
+    const SESSION_BASE_NAME = 'sonata/basket/factory/customer/';
 
     /**
      * @var \Sonata\Component\Basket\BasketManagerInterface
@@ -88,15 +88,16 @@ class BasketSessionFactory extends BaseBasketFactory
     }
 
     /**
-     * Get the name of the session variable
+     * Get the name of the session variable.
      *
-     * @param  \Sonata\Component\Customer\CustomerInterface $customer
+     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     *
      * @return string
      */
     protected function getSessionVarName(CustomerInterface $customer = null)
     {
         if (null === $customer || null === $customer->getId()) {
-            return self::SESSION_BASE_NAME."new";
+            return self::SESSION_BASE_NAME.'new';
         }
 
         return self::SESSION_BASE_NAME.$customer->getId();

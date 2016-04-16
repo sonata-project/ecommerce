@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -14,9 +15,8 @@ use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * Class BaseBasketFactory
+ * Class BaseBasketFactory.
  *
- * @package Sonata\Component\Basket
  *
  * @author Hugo Briand <briand@ekino.com>
  */

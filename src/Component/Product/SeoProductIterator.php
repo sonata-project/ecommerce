@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -17,9 +18,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class SeoProductIterator
+ * Class SeoProductIterator.
  *
- * @package Sonata\Component\Product
  *
  * @author Hugo Briand <briand@ekino.com>
  */
@@ -31,20 +31,20 @@ class SeoProductIterator implements SourceIteratorInterface
     protected $iterator;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param RegistryInterface      $registry
-     * @param string                 $class
-     * @param RouterInterface        $router
-     * @param string                 $routeName
+     * @param RegistryInterface $registry
+     * @param string            $class
+     * @param RouterInterface   $router
+     * @param string            $routeName
      */
     public function __construct(RegistryInterface $registry, $class, RouterInterface $router, $routeName)
     {
         $tableName = $registry->getManager()->getClassMetadata($class)->table['name'];
 
         $dql = "SELECT p.id as productId, p.slug as slug,  p.updated_at as lastmod, 'weekly' as changefreq, '0.5' as priority "
-            ."FROM ".$tableName." p "
-            ."WHERE p.enabled = 1";
+            .'FROM '.$tableName.' p '
+            .'WHERE p.enabled = 1';
 
         $source = new DoctrineDBALConnectionSourceIterator($registry->getConnection(), $dql);
 

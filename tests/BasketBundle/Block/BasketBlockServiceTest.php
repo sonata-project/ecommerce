@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -8,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\BasketBundle\Block;
+namespace Sonata\tests\BasketBundle\Block;
 
 use Sonata\BasketBundle\Block\BasketBlockService;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class BasketBlockServiceTest
+ * Class BasketBlockServiceTest.
  *
- * @package Sonata\Tests\BasketBundle
  *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
@@ -27,7 +27,7 @@ class BasketBlockServiceTest extends \PHPUnit_Framework_TestCase
         $engineInterfaceMock = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')->disableOriginalConstructor()->getMock();
         $block = new BasketBlockService('test', $engineInterfaceMock);
 
-        $this->assertEquals('Basket items', $block->getName());
+        $this->assertSame('Basket items', $block->getName());
     }
 
     public function testExecute()

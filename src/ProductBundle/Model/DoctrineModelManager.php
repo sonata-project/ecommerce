@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -10,13 +11,13 @@
 
 namespace Sonata\ProductBundle\Model;
 
-use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\Component\Product\Pool;
+use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * this method overwrite the default AdminModelManager to call
- * the custom methods from the dedicated media manager
+ * the custom methods from the dedicated media manager.
  */
 class DoctrineModelManager extends ModelManager
 {

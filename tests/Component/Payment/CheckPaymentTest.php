@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -11,18 +11,15 @@
 
 namespace Sonata\Tests\Component\Payment;
 
-use Sonata\Component\Payment\CheckPayment;
-
-use Buzz\Message\Response;
-use Buzz\Message\Request;
 use Buzz\Browser;
-use Buzz\Client\ClientInterface;
+use Buzz\Message\Response;
+use Sonata\Component\Payment\CheckPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
 class CheckPaymentTest_Order extends BaseOrder
 {
     /**
-     * @return integer the order id
+     * @return int the order id
      */
     public function getId()
     {
@@ -34,8 +31,6 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * useless test ....
-     *
-     * @return void
      */
     public function testPassPayment()
     {
@@ -53,7 +48,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new CheckPaymentTest_Order;
+        $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
@@ -61,7 +56,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
@@ -69,7 +64,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
 
-        $this->assertEquals($payment->getOrderReference($transaction), '0001231');
+        $this->assertSame($payment->getOrderReference($transaction), '0001231');
 
         $payment->applyTransactionId($transaction);
     }
@@ -80,7 +75,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $order = new CheckPaymentTest_Order;
+        $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
 
         $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
@@ -99,14 +94,14 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $response = $payment->sendbank($order);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
-        $this->assertEquals(302, $response->getStatusCode());
-        $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
         $this->assertFalse($response->isCacheable());
     }
 
     public function testSendConfirmationReceipt()
     {
-        $order = new CheckPaymentTest_Order;
+        $order = new CheckPaymentTest_Order();
 
         $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->onConsecutiveCalls(null, $order));
@@ -125,7 +120,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         // second call : the order is set
         $response = $payment->sendConfirmationReceipt($transaction);
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response, '::sendConfirmationReceipt return a Response object');
-        $this->assertEquals('ok', $response->getContent(), '::getContent returns ok');
+        $this->assertSame('ok', $response->getContent(), '::getContent returns ok');
     }
 
     public static function callback($name)
