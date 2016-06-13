@@ -341,6 +341,10 @@
                 <source>product_price</source>
                 <target>Prix</target>
             </trans-unit>
+            <trans-unit id="product_not_available">
+                <source>product_not_available</source>
+                <target>Ce produit n'est plus disponible.</target>
+            </trans-unit>
             <trans-unit id="product_variations">
                 <source>product_variations</source>
                 <target>Variations</target>
