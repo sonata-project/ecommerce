@@ -306,6 +306,10 @@
                 <source>product_price</source>
                 <target>Price</target>
             </trans-unit>
+            <trans-unit id="product_not_available">
+                <source>product_not_available</source>
+                <target>This product is not available anymore.</target>
+            </trans-unit>
             <trans-unit id="product_variations">
                 <source>product_variations</source>
                 <target>Variations</target>
