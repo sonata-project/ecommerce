@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function viewAction($productId, $slug)
     {
-        $product = $this->get('sonata.product.set.manager')->findEnabledFromIdAndSlug($productId, $slug);
+        $product = $this->get('sonata.product.set.manager')->findOneBy(array('id' => $productId, 'slug' => $slug));
 
         if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
