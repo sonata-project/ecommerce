@@ -10,9 +10,10 @@
 
 namespace Sonata\Test\ProductBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Sonata\ProductBundle\Command\GenerateProductCommand;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Class GenerateProductCommandTest
@@ -68,9 +69,10 @@ class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase
      */
     private function getCommandInstance()
     {
-        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\Kernel')->disableOriginalConstructor()->getMock();
+        $kernel = $this->getMockBuilder(Kernel::class)->disableOriginalConstructor()->getMock();
         $app = new Application($kernel);
         $app->add(new GenerateProductCommand());
+        
 
         return $app->find('sonata:product:generate');
     }
