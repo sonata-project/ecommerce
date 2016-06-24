@@ -12,7 +12,7 @@
 namespace Sonata\Test\ProductBundle\Command;
 
 use Sonata\ProductBundle\Command\GenerateProductCommand;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
