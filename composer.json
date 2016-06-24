@@ -46,6 +46,9 @@
         "sllh/php-cs-fixer-styleci-bridge": "^2.1",
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
     },
+    "conflict": {
+        "symfony/intl": "<2.3.20"
+    },
     "autoload": {
         "psr-4": {
             "Sonata\\Component\\": "src/Component",
