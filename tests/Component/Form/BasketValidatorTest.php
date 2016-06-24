@@ -41,7 +41,7 @@ class BasketValidatorTest extends \PHPUnit_Framework_TestCase
         } else {
             $context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContext')->disableOriginalConstructor()->getMock();
         }
-        
+
         $context->expects($this->once())->method('getViolations')->will($this->returnValue(array('violation1')));
         $context->expects($this->once())->method('addViolationAt');
 
