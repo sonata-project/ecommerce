@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
             <!-- Begin - Titles -->
@@ -12,7 +12,6 @@
                 <target>Address</target>
             </trans-unit>
             <!-- End - Titles -->
-
             <!-- Begin - Form translations -->
             <trans-unit id="address.form.group_address_label">
                 <source>address.form.group_address_label</source>
@@ -22,7 +21,6 @@
                 <source>address.form.group_contact_label</source>
                 <target>Contact</target>
             </trans-unit>
-
             <trans-unit id="form_address.group_advanced_label">
                 <source>form_address.group_advanced_label</source>
                 <target>Advanced</target>
@@ -39,7 +37,6 @@
                 <source>address.form.group_advanced_label</source>
                 <target>Advanced</target>
             </trans-unit>
-
             <!-- Begin - Customer // Address form-->
             <trans-unit id="form.label_firstname">
                 <source>form.label_firstname</source>
@@ -163,11 +160,11 @@
             </trans-unit>
             <trans-unit id="sonata_customer_address_address2">
                 <source>sonata_customer_address_address2</source>
-                <target></target>
+                <target/>
             </trans-unit>
             <trans-unit id="sonata_customer_address_address3">
                 <source>sonata_customer_address_address3</source>
-                <target></target>
+                <target/>
             </trans-unit>
             <trans-unit id="sonata_customer_address_postcode">
                 <source>sonata_customer_address_postcode</source>
@@ -187,7 +184,6 @@
             </trans-unit>
             <!-- End - Customer // Address form-->
             <!-- End - Form translations -->
-
             <!-- Begin - Show customer translations -->
             <trans-unit id="show.label_firstname">
                 <source>show.label_firstname</source>
@@ -202,7 +198,6 @@
                 <target>Locale</target>
             </trans-unit>
             <!-- End - Show customer translations -->
-
             <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_customer_list">
                 <source>breadcrumb.link_customer_list</source>
@@ -225,7 +220,6 @@
                 <target>Create address</target>
             </trans-unit>
             <!-- End - Breadcrumb translations -->
-
             <!-- Begin - Sidemenu translations -->
             <trans-unit id="customer.sidemenu.link_customer_edit">
                 <source>customer.sidemenu.link_customer_edit</source>
@@ -256,7 +250,6 @@
                 <target>Addresses</target>
             </trans-unit>
             <!-- End - Sidemenu translations -->
-
             <!-- Begin - List translations -->
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
@@ -315,7 +308,6 @@
                 <target>Fax</target>
             </trans-unit>
             <!-- End - List translations -->
-
             <!-- Begin - Filter translations -->
             <trans-unit id="filter.label_firstname">
                 <source>filter.label_firstname</source>
@@ -354,7 +346,6 @@
                 <target>Customer id</target>
             </trans-unit>
             <!-- End - Filter translations -->
-
             <!-- Begin - Type translations -->
             <trans-unit id="type_delivery">
                 <source>type_delivery</source>
@@ -369,7 +360,6 @@
                 <target>Contact</target>
             </trans-unit>
             <!-- End - Type translations -->
-
             <!-- Begin - Addresses translations -->
             <trans-unit id="address_new">
                 <source>address_new</source>
@@ -444,7 +434,6 @@
                 <target>Set default</target>
             </trans-unit>
             <!-- End - Addresses translations -->
-
             <trans-unit id="sonata_customer_addresses_breadcrumb">
                 <source>sonata_customer_addresses_breadcrumb</source>
                 <target>Addresses</target>

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -85,42 +85,42 @@ class SonataOrderExtension extends Extension
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['order'], 'mapOneToMany', array(
-            'fieldName'     => 'orderElements',
-            'targetEntity'  => $config['class']['order_element'],
-            'cascade'       => array(
+            'fieldName' => 'orderElements',
+            'targetEntity' => $config['class']['order_element'],
+            'cascade' => array(
                  'persist',
             ),
-            'mappedBy'      => 'order',
+            'mappedBy' => 'order',
             'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['order'], 'mapManyToOne', array(
-           'fieldName'      => 'customer',
-           'targetEntity'   => $config['class']['customer'],
-           'cascade'        => array(),
-           'mappedBy'       => null,
-           'inversedBy'     => 'orders',
-           'joinColumns'    => array(
+           'fieldName' => 'customer',
+           'targetEntity' => $config['class']['customer'],
+           'cascade' => array(),
+           'mappedBy' => null,
+           'inversedBy' => 'orders',
+           'joinColumns' => array(
                 array(
-                    'name'                 => 'customer_id',
+                    'name' => 'customer_id',
                     'referencedColumnName' => 'id',
-                    'onDelete'             => 'SET NULL',
+                    'onDelete' => 'SET NULL',
                 ),
            ),
            'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['order_element'], 'mapManyToOne', array(
-            'fieldName'     => 'order',
-            'targetEntity'  => $config['class']['order'],
-            'cascade'       => array(),
-            'mappedBy'      => null,
-            'inversedBy'    => null,
-            'joinColumns'   => array(
+            'fieldName' => 'order',
+            'targetEntity' => $config['class']['order'],
+            'cascade' => array(),
+            'mappedBy' => null,
+            'inversedBy' => null,
+            'joinColumns' => array(
                 array(
-                    'name'                 => 'order_id',
+                    'name' => 'order_id',
                     'referencedColumnName' => 'id',
-                    'onDelete'             => 'CASCADE',
+                    'onDelete' => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,

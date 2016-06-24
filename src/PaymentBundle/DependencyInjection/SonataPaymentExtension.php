@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -76,12 +76,12 @@ class SonataPaymentExtension extends Extension
         $pool = $container->getDefinition('sonata.payment.pool');
 
         $internal = array(
-            'debug'    => 'sonata.payment.method.debug',
-            'pass'     => 'sonata.payment.method.pass',
-            'check'    => 'sonata.payment.method.check',
+            'debug' => 'sonata.payment.method.debug',
+            'pass' => 'sonata.payment.method.pass',
+            'check' => 'sonata.payment.method.check',
             'scellius' => 'sonata.payment.method.scellius',
-            'ogone'    => 'sonata.payment.method.ogone',
-            'paypal'   => 'sonata.payment.method.paypal',
+            'ogone' => 'sonata.payment.method.ogone',
+            'paypal' => 'sonata.payment.method.paypal',
         );
 
         $configured = array();
@@ -91,10 +91,10 @@ class SonataPaymentExtension extends Extension
             if (array_key_exists($id, $internal)) {
                 $id = $internal[$id];
 
-                $name     = isset($settings['name']) ? $settings['name'] : 'n/a';
-                $options  = isset($settings['options']) ? $settings['options'] : array();
+                $name = isset($settings['name']) ? $settings['name'] : 'n/a';
+                $options = isset($settings['options']) ? $settings['options'] : array();
 
-                $code  = isset($settings['code']) ? $settings['code'] : false;
+                $code = isset($settings['code']) ? $settings['code'] : false;
 
                 if (!$code) {
                     throw new \RuntimeException('Please provide a code for the payment handler');
@@ -190,16 +190,16 @@ class SonataPaymentExtension extends Extension
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['transaction'], 'mapManyToOne', array(
-            'fieldName'    => 'order',
+            'fieldName' => 'order',
             'targetEntity' => $config['class']['order'],
-            'cascade'      => array(),
-            'mappedBy'     => null,
-            'inversedBy'   => null,
-            'joinColumns'  => array(
+            'cascade' => array(),
+            'mappedBy' => null,
+            'inversedBy' => null,
+            'joinColumns' => array(
                 array(
-                    'name'                 => 'order_id',
+                    'name' => 'order_id',
                     'referencedColumnName' => 'id',
-                    'onDelete'             => 'SET NULL',
+                    'onDelete' => 'SET NULL',
                 ),
             ),
             'orphanRemoval' => false,

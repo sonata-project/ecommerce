@@ -1,19 +1,13 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sonata.basket.manager" class="Sonata\Component\Basket\BasketManager">
             <argument>%sonata.basket.basket.class%</argument>
             <argument type="service" id="doctrine"/>
         </service>
-
         <service id="sonata.basket_element.manager" class="Sonata\Component\Basket\BasketElementManager">
             <argument>%sonata.basket.basket_element.class%</argument>
             <argument type="service" id="doctrine"/>
         </service>
-
     </services>
 </container>

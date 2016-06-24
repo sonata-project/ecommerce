@@ -1,27 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sonata.customer.form.address_type" class="Sonata\CustomerBundle\Form\Type\AddressType">
             <argument>%sonata.customer.address.class%</argument>
             <argument>getTypesList</argument>
             <argument>sonata_customer_address</argument>
-            <argument type="service" id="sonata.basket" />
-
-            <tag name="form.type" alias="sonata_customer_address" />
+            <argument type="service" id="sonata.basket"/>
+            <tag name="form.type" alias="sonata_customer_address"/>
         </service>
-
         <service id="sonata.customer.form.address_types_type" class="Sonata\CustomerBundle\Form\Type\AddressTypeType">
             <argument>%sonata.customer.address.class%</argument>
             <argument>getTypesList</argument>
             <argument>sonata_customer_address_types</argument>
-
-            <tag name="form.type" alias="sonata_customer_address_types" />
+            <tag name="form.type" alias="sonata_customer_address_types"/>
         </service>
-
     </services>
-
 </container>

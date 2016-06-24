@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -69,16 +69,6 @@ class Selector implements ServiceDeliverySelectorInterface
     public function getLogger()
     {
         return $this->logger;
-    }
-
-    /**
-     * @param string $message
-     */
-    protected function log($message)
-    {
-        if ($this->logger) {
-            $this->logger->info($message);
-        }
     }
 
     /**
@@ -175,5 +165,15 @@ class Selector implements ServiceDeliverySelectorInterface
         }
 
         return $a->getPriority() > $b->getPriority() ? -1 : 1;
+    }
+
+    /**
+     * @param string $message
+     */
+    protected function log($message)
+    {
+        if ($this->logger) {
+            $this->logger->info($message);
+        }
     }
 }

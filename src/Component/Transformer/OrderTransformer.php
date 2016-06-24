@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -43,7 +43,7 @@ class OrderTransformer extends BaseTransformer
      */
     public function __construct(ProductPool $productPool, EventDispatcherInterface $eventDispatcher)
     {
-        $this->productPool     = $productPool;
+        $this->productPool = $productPool;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -69,10 +69,10 @@ class OrderTransformer extends BaseTransformer
             /*
              * @var $orderElement OrderElementInterface
              */
-            $provider   = $this->productPool->getProvider($orderElement->getProductType());
-            $manager    = $this->productPool->getManager($orderElement->getProductType());
+            $provider = $this->productPool->getProvider($orderElement->getProductType());
+            $manager = $this->productPool->getManager($orderElement->getProductType());
 
-            $product    = $manager->findOneBy(array('id' => $orderElement->getProductId()));
+            $product = $manager->findOneBy(array('id' => $orderElement->getProductId()));
 
             if (!$product) {
                 continue;

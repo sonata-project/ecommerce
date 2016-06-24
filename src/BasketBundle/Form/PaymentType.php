@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -47,9 +47,9 @@ class PaymentType extends AbstractType
      */
     public function __construct(AddressManagerInterface $addressManager, PaymentPool $paymentPool, PaymentSelectorInterface $paymentSelector)
     {
-        $this->addressManager   = $addressManager;
-        $this->paymentSelector  = $paymentSelector;
-        $this->paymentPool      = $paymentPool;
+        $this->addressManager = $addressManager;
+        $this->paymentSelector = $paymentSelector;
+        $this->paymentPool = $paymentPool;
     }
 
     /**
@@ -65,7 +65,7 @@ class PaymentType extends AbstractType
 
         $addresses = $this->addressManager->findBy(array(
             'customer' => $basket->getCustomer()->getId(),
-            'type'     => AddressInterface::TYPE_BILLING,
+            'type' => AddressInterface::TYPE_BILLING,
         ));
 
         /*
@@ -93,8 +93,8 @@ class PaymentType extends AbstractType
         $basket->setPaymentMethod($method ?: null);
 
         $sub = $builder->create('paymentMethod', 'choice', array(
-            'expanded'     => true,
-            'choice_list'  => new SimpleChoiceList($choices),
+            'expanded' => true,
+            'choice_list' => new SimpleChoiceList($choices),
         ));
 
         $sub->addViewTransformer(new PaymentMethodTransformer($this->paymentPool), true);

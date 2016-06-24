@@ -1,9 +1,5 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.price.currency.detector.class">Sonata\Component\Currency\CurrencyDetector</parameter>
         <parameter key="sonata.price.currency.manager.class">Sonata\Component\Currency\CurrencyManager</parameter>
@@ -11,28 +7,22 @@
         <parameter key="sonata.price.currency.data_transformer.class">Sonata\Component\Currency\CurrencyDataTransformer</parameter>
         <parameter key="sonata.price.currency.form_type.class">Sonata\Component\Currency\CurrencyFormType</parameter>
     </parameters>
-
     <services>
         <service id="sonata.price.currency.manager" class="%sonata.price.currency.manager.class%">
             <argument>%sonata.price.currency.manager.class%</argument>
             <argument type="service" id="doctrine"/>
         </service>
-
-        <service id="sonata.price.currency.calculator" class="%sonata.price.currency.calculator.class%" />
-
+        <service id="sonata.price.currency.calculator" class="%sonata.price.currency.calculator.class%"/>
         <service id="sonata.price.currency.detector" class="%sonata.price.currency.detector.class%">
             <argument>%sonata.price.currency%</argument>
-            <argument type="service" id="sonata.price.currency.manager" />
+            <argument type="service" id="sonata.price.currency.manager"/>
         </service>
-
         <service id="sonata.price.currency.data_transformer" class="%sonata.price.currency.data_transformer.class%">
-            <argument type="service" id="sonata.price.currency.manager" />
+            <argument type="service" id="sonata.price.currency.manager"/>
         </service>
-
         <service id="sonata.price.currency.form_type" class="%sonata.price.currency.form_type.class%">
             <argument type="service" id="sonata.price.currency.data_transformer"/>
-            <tag name="form.type" alias="sonata_currency" />
+            <tag name="form.type" alias="sonata_currency"/>
         </service>
     </services>
-
 </container>

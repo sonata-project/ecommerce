@@ -1,15 +1,10 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.product.pool.class">Sonata\Component\Product\Pool</parameter>
         <parameter key="sonata.product.subscriber.orm.class">Sonata\Component\Subscriber\ORMInheritanceSubscriber</parameter>
         <parameter key="sonata.product.seo_iterator.class">Sonata\Component\Product\SeoProductIterator</parameter>
         <parameter key="sonata.product.finder.class">Sonata\Component\Product\ProductFinder</parameter>
-
         <parameter key="sonata.product.seo.twitter.class">Sonata\ProductBundle\Seo\Services\Twitter</parameter>
         <parameter key="sonata.product.seo.product.site">%sonata.product.seo.product.site%</parameter>
         <parameter key="sonata.product.seo.product.creator">%sonata.product.seo.product.creator%</parameter>
@@ -18,47 +13,41 @@
         <parameter key="sonata.product.seo.product.media_format">%sonata.product.seo.product.media_format%</parameter>
         <parameter key="sonata.product.seo.facebook.class">Sonata\ProductBundle\Seo\Services\Facebook</parameter>
     </parameters>
-
     <services>
         <service id="sonata.product.pool" class="%sonata.product.pool.class%">
 
         </service>
-
         <service id="sonata.product.subscriber.orm" class="%sonata.product.subscriber.orm.class%">
-            <argument type="collection" />
-            <tag name="doctrine.event_subscriber" />
+            <argument type="collection"/>
+            <tag name="doctrine.event_subscriber"/>
             <argument>%sonata.product.admin.product.entity%</argument>
         </service>
-
         <service id="sonata.product.seo_iterator" class="%sonata.product.seo_iterator.class%">
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine"/>
             <argument>%sonata.product.product.class%</argument>
-            <argument type="service" id="router" />
+            <argument type="service" id="router"/>
             <argument>sonata_product_view</argument>
         </service>
-
         <service id="sonata.product.finder" class="%sonata.product.finder.class%">
-            <argument type="service" id="sonata.product.set.manager" />
+            <argument type="service" id="sonata.product.set.manager"/>
         </service>
-
         <!-- SEO -->
         <service id="sonata.product.seo.twitter" class="%sonata.product.seo.twitter.class%">
-            <argument type="service" id="sonata.media.pool" />
-            <argument type="service" id="sonata.intl.templating.helper.number" />
-            <argument type="service" id="sonata.price.currency.detector" />
+            <argument type="service" id="sonata.media.pool"/>
+            <argument type="service" id="sonata.intl.templating.helper.number"/>
+            <argument type="service" id="sonata.price.currency.detector"/>
             <argument>%sonata.product.seo.product.site%</argument>
             <argument>%sonata.product.seo.product.creator%</argument>
             <argument>%sonata.product.seo.product.domain%</argument>
             <argument>%sonata.product.seo.product.media_format%</argument>
         </service>
         <service id="sonata.product.seo.facebook" class="%sonata.product.seo.facebook.class%">
-            <argument type="service" id="router" />
-            <argument type="service" id="sonata.media.pool" />
-            <argument type="service" id="sonata.intl.templating.helper.number" />
-            <argument type="service" id="sonata.price.currency.detector" />
+            <argument type="service" id="router"/>
+            <argument type="service" id="sonata.media.pool"/>
+            <argument type="service" id="sonata.intl.templating.helper.number"/>
+            <argument type="service" id="sonata.price.currency.detector"/>
             <argument>%sonata.product.seo.product.domain%</argument>
             <argument>%sonata.product.seo.product.media_format%</argument>
         </service>
     </services>
-
 </container>

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -32,7 +32,7 @@ class SonataPriceBundle extends Bundle
     public function boot()
     {
         if (0 == $this->getBcScale()) {
-            $message = <<<CONTENT
+            $message = <<<'CONTENT'
 [%s]: You need to add a bcscale() method greater than 0 in your AppKernel.php to ensure that prices are correctly computed.
 Please refer to documentation: https://sonata-project.org/bundles/ecommerce/develop/doc/reference/bundles/price.html
 CONTENT;

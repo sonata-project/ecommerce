@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
     <class name="Sonata\ProductBundle\Entity\BaseDelivery" exclusion-policy="all" xml-root-name="delivery">
-
-        <property name="code"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="countryCode" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="zone"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="perItem"     type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
-        <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-
-        <property name="product" serialized-name="product_id" type="sonata_product_product_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
-        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
-        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
-
+        <property name="code" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="countryCode" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="zone" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="perItem" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="product" serialized-name="product_id" type="sonata_product_product_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search"/>
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search"/>
     </class>
 </serializer>

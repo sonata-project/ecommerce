@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
@@ -224,11 +224,11 @@
             </trans-unit>
             <trans-unit id="sonata_basket_address_address2">
                 <source>sonata_basket_address_address2</source>
-                <target></target>
+                <target/>
             </trans-unit>
             <trans-unit id="sonata_basket_address_address3">
                 <source>sonata_basket_address_address3</source>
-                <target></target>
+                <target/>
             </trans-unit>
             <trans-unit id="sonata_basket_address_postcode">
                 <source>sonata_basket_address_postcode</source>
@@ -302,7 +302,6 @@
                 <source>undeliverable_country</source>
                 <target>The %country% is not in our delivery zone for one or several products of your basket.</target>
             </trans-unit>
-
             <trans-unit id="basket_index_title">
                 <source>basket_index_title</source>
                 <target>Your basket</target>

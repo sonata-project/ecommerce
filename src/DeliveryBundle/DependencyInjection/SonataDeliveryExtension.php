@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\DeliveryBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
@@ -56,7 +65,7 @@ class SonataDeliveryExtension extends Extension
         $pool = $container->getDefinition('sonata.delivery.pool');
 
         $internal = array(
-            'free_address_required'     => 'sonata.delivery.method.free_address_required',
+            'free_address_required' => 'sonata.delivery.method.free_address_required',
             'free_address_not_required' => 'sonata.delivery.method.free_address_not_required',
         );
 

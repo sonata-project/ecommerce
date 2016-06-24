@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -65,15 +65,15 @@ class VariationsFormBlockService extends BaseBlockService
 
         if (null === $product) {
             return $this->renderResponse($blockContext->getTemplate(), array(
-                    'context'  => $blockContext,
+                    'context' => $blockContext,
                     'settings' => $blockContext->getSettings(),
-                    'block'    => $blockContext->getBlock(),
-                    'choices'  => array(),
-                    'form'     => null,
+                    'block' => $blockContext->getBlock(),
+                    'choices' => array(),
+                    'form' => null,
                 ), $response);
         }
 
-        $fields  = $blockContext->getSetting('variations_properties');
+        $fields = $blockContext->getSetting('variations_properties');
 
         $choices = $this->pool->getProvider($product)->getVariationsChoices($product, $fields);
 
@@ -87,16 +87,16 @@ class VariationsFormBlockService extends BaseBlockService
 
         $form = $this->formFactory->createBuilder('sonata_product_variation_choices', $currentValues, array(
                 'field_options' => $blockContext->getSetting('form_field_options'),
-                'product'       => $product,
-                'fields'        => $fields,
+                'product' => $product,
+                'fields' => $fields,
             ))->getForm();
 
         $params = array(
-            'context'   => $blockContext,
-            'settings'  => $blockContext->getSettings(),
-            'block'     => $blockContext->getBlock(),
-            'choices'   => $choices,
-            'form'      => $form->createView(),
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'choices' => $choices,
+            'form' => $form->createView(),
         );
 
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
@@ -132,24 +132,24 @@ class VariationsFormBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'product'               => null,
+            'product' => null,
             'variations_properties' => array(),
-            'form_route'            => 'sonata_product_variation_product',
+            'form_route' => 'sonata_product_variation_product',
             'form_route_parameters' => function (Options $options) {
-                    $product = $options->get('product');
+                $product = $options->get('product');
 
-                    if (null !== $product && !$product instanceof ProductInterface) {
-                        throw new \RuntimeException("Wrong 'product' parameter");
-                    }
+                if (null !== $product && !$product instanceof ProductInterface) {
+                    throw new \RuntimeException("Wrong 'product' parameter");
+                }
 
-                    return array(
+                return array(
                         'productId' => $product ? $product->getId() : null,
-                        'slug'      => $product ? $product->getSlug() : null,
+                        'slug' => $product ? $product->getSlug() : null,
                     );
-                },
-            'form_field_options'    => array(),
-            'title'                 => 'Product variations',
-            'template'              => 'SonataProductBundle:Block:variations_choice.html.twig',
+            },
+            'form_field_options' => array(),
+            'title' => 'Product variations',
+            'template' => 'SonataProductBundle:Block:variations_choice.html.twig',
         ));
     }
 }

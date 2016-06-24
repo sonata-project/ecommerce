@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -33,10 +33,10 @@ class ProductAdminController extends Controller
 
         if (!$parameters['provider']) {
             return $this->render('SonataProductBundle:ProductAdmin:select_provider.html.twig', array(
-                'providers'     => $this->get('sonata.product.pool')->getProducts(),
+                'providers' => $this->get('sonata.product.pool')->getProducts(),
                 'base_template' => $this->getBaseTemplate(),
-                'admin'         => $this->admin,
-                'action'        => 'create',
+                'admin' => $this->admin,
+                'action' => 'create',
             ));
         }
 

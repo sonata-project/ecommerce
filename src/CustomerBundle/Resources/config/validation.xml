@@ -1,31 +1,22 @@
-<?xml version="1.0" ?>
-<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
-        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sonata\CustomerBundle\Entity\BaseCustomer">
         <getter property="firstname">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="email">
-            <constraint name="Email" />
+            <constraint name="Email"/>
         </getter>
-
         <getter property="locale">
-            <constraint name="Locale" />
+            <constraint name="Locale"/>
         </getter>
-
         <getter property="updatedAt">
-            <constraint name="DateTime" />
+            <constraint name="DateTime"/>
         </getter>
-
         <getter property="createdAt">
-            <constraint name="DateTime" />
+            <constraint name="DateTime"/>
         </getter>
     </class>
-
     <class name="Sonata\CustomerBundle\Entity\BaseAddress">
         <getter property="name">
             <constraint name="NotNull">
@@ -35,7 +26,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="type">
             <constraint name="NotNull">
                 <option name="groups">
@@ -43,7 +33,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="address1">
             <constraint name="NotNull">
                 <option name="groups">
@@ -52,7 +41,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="postcode">
             <constraint name="NotNull">
                 <option name="groups">
@@ -61,7 +49,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="city">
             <constraint name="NotNull">
                 <option name="groups">
@@ -70,7 +57,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="countryCode">
             <constraint name="NotNull">
                 <option name="groups">
@@ -86,5 +72,4 @@
             </constraint>
         </getter>
     </class>
-
 </constraint-mapping>

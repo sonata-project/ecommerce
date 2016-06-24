@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
-
             <!-- Begin - Titles -->
             <trans-unit id="order">
                 <source>order</source>
@@ -13,7 +12,6 @@
                 <target>Your order</target>
             </trans-unit>
             <!-- End - Titles -->
-
             <!-- Begin - Sidemenu translations -->
             <trans-unit id="sonata.order.sidemenu.link_order_edit">
                 <source>sonata.order.sidemenu.link_order_edit</source>
@@ -32,7 +30,6 @@
                 <target>Generate invoice</target>
             </trans-unit>
             <!-- End - Sidemenu translations -->
-
             <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_order_list">
                 <source>breadcrumb.link_order_list</source>
@@ -63,20 +60,17 @@
                 <target>Create element</target>
             </trans-unit>
             <!-- End - Breadcrumb translations -->
-
             <!-- Begin - Global translations -->
             <trans-unit id="oRDER_TO_INVOICE_generate_success">
                 <source>oRDER_TO_INVOICE_generate_success</source>
                 <target>Invoice generated with success</target>
             </trans-unit>
             <!-- End - Global translations -->
-
             <!-- Begin - Form translations -->
             <trans-unit id="order_element.form.group_main_label">
                 <source>order_element.form.group_main_label</source>
                 <target>General</target>
             </trans-unit>
-
             <trans-unit id="order.form.group_main_label">
                 <source>order.form.group_main_label</source>
                 <target>General</target>
@@ -94,7 +88,6 @@
                 <target>Misc</target>
             </trans-unit>
             <!-- End - Form translations -->
-
             <!-- Begin - Filters translations -->
             <trans-unit id="filter.label_reference">
                 <source>filter.label_reference</source>
@@ -125,7 +118,6 @@
                 <target>Payment Status</target>
             </trans-unit>
             <!-- End - Filters translations -->
-
             <!-- Begin - List translations -->
             <trans-unit id="list.label_id">
                 <source>list.label_id</source>
@@ -204,7 +196,6 @@
                 <target>Delivery status</target>
             </trans-unit>
             <!-- End - List translations -->
-
             <!-- Begin - Status translations -->
             <trans-unit id="status_open">
                 <source>status_open</source>
@@ -255,7 +246,6 @@
                 <target>Stopped</target>
             </trans-unit>
             <!-- End - Status translations -->
-
             <trans-unit id="form.label_locale">
                 <source>form.label_locale</source>
                 <target>Locale</target>
@@ -397,7 +387,6 @@
                 <target>Description</target>
             </trans-unit>
             <!-- End - Filters translations -->
-
             <!-- Begin - View order translations -->
             <trans-unit id="sonata.order.view.in_progress_title">
                 <source>sonata.order.view.in_progress_title</source>
@@ -520,7 +509,6 @@
                 <target>Delivery status</target>
             </trans-unit>
             <!-- End - Order view translations -->
-
             <!-- Begin - Order admin confirm invoice generation translations -->
             <trans-unit id="sonata.order.invoice_generate_confirm_title">
                 <source>sonata.order.invoice_generate_confirm_title</source>
@@ -539,7 +527,6 @@
                 <target>Generate invoice</target>
             </trans-unit>
             <!-- End - Order admin confirm invoice generation translations -->
-
             <!-- Begin - Order front translations -->
             <trans-unit id="order_list">
                 <source>order_list</source>
@@ -554,7 +541,6 @@
                 <target>View all orders</target>
             </trans-unit>
             <!-- End - Order front translations -->
-
             <!-- Begin - Order page titles translations -->
             <trans-unit id="order_index_title">
                 <source>order_index_title</source>
@@ -565,7 +551,6 @@
                 <target>Your order</target>
             </trans-unit>
             <!-- End - Order page titles translations -->
-
             <trans-unit id="sonata_order_user_breadcrumb">
                 <source>sonata_order_user_breadcrumb</source>
                 <target>Orders</target>

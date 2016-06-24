@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -45,7 +45,7 @@ class AddressType extends AbstractType
     public function __construct($addressClass, BasketInterface $basket)
     {
         $this->addressClass = $addressClass;
-        $this->basket       = $basket;
+        $this->basket = $basket;
     }
 
     /**
@@ -66,12 +66,12 @@ class AddressType extends AbstractType
             }
 
             $builder->add('addresses', 'entity', array(
-                'choices'           => $addresses,
+                'choices' => $addresses,
                 'preferred_choices' => array($defaultAddress),
-                'class'             => $this->addressClass,
-                'expanded'          => true,
-                'multiple'          => false,
-                'mapped'            => false,
+                'class' => $this->addressClass,
+                'expanded' => true,
+                'multiple' => false,
+                'mapped' => false,
             ))
             ->add('useSelected', 'submit', array(
                 'attr' => array(
@@ -79,7 +79,7 @@ class AddressType extends AbstractType
                     'style' => 'margin-bottom:20px;',
                 ),
                 'translation_domain' => 'SonataBasketBundle',
-                'validation_groups'  => false,
+                'validation_groups' => false,
             ));
         }
 
@@ -87,7 +87,7 @@ class AddressType extends AbstractType
 
         if (isset($options['types'])) {
             $builder->add('type', 'choice', array(
-                'choices'            => $options['types'],
+                'choices' => $options['types'],
                 'translation_domain' => 'SonataCustomerBundle', )
             );
         }
@@ -123,6 +123,34 @@ class AddressType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->addressClass,
+            'addresses' => array(),
+            'validation_groups' => array('front'),
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sonata_basket_address';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
      * Returns basket elements delivery countries.
      *
      * @return array
@@ -144,33 +172,5 @@ class AddressType extends AbstractType
         }
 
         return $countries;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class'        => $this->addressClass,
-            'addresses'         => array(),
-            'validation_groups' => array('front'),
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'sonata_basket_address';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

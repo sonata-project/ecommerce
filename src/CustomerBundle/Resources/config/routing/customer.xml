@@ -1,31 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<routes xmlns="http://symfony.com/schema/routing"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="sonata_customer_addresses" path="/address">
         <default key="_controller">SonataCustomerBundle:Customer:addresses</default>
     </route>
-
     <route id="sonata_customer_address_add" path="/address/add">
         <default key="_controller">SonataCustomerBundle:Customer:addAddress</default>
     </route>
-
     <route id="sonata_customer_address_delete" path="/address/delete/{id}">
         <default key="_controller">SonataCustomerBundle:Customer:deleteAddress</default>
     </route>
-
     <route id="sonata_customer_address_setcurrent" path="/address/current/{id}">
         <default key="_controller">SonataCustomerBundle:Customer:setCurrentAddress</default>
     </route>
-
     <route id="sonata_customer_address_edit" path="/address/edit/{id}">
         <default key="_controller">SonataCustomerBundle:Customer:editAddress</default>
     </route>
-
     <route id="sonata_customer_address_update" path="/address/update">
         <default key="_controller">SonataCustomerBundle:Customer:updateAddress</default>
     </route>
-
 </routes>

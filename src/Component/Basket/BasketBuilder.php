@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Customer\AddressManagerInterface;
@@ -37,10 +46,10 @@ class BasketBuilder implements BasketBuilderInterface
      */
     public function __construct(Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool, PaymentPool $paymentPool)
     {
-        $this->productPool      = $productPool;
-        $this->addressManager   = $addressManager;
-        $this->deliveryPool     = $deliveryPool;
-        $this->paymentPool      = $paymentPool;
+        $this->productPool = $productPool;
+        $this->addressManager = $addressManager;
+        $this->deliveryPool = $deliveryPool;
+        $this->paymentPool = $paymentPool;
     }
 
     /**

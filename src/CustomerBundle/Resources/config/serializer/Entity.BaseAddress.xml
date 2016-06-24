@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
     <class name="Sonata\CustomerBundle\Entity\BaseAddress" exclusion-policy="all" xml-root-name="address">
-
-        <property name="current"     type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="type"        type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="name"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="firstname"   type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="lastname"    type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="address1"    type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="address2"    type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="address3"    type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="postcode"    type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="city"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="countryCode" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="phone"       type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
-        <property name="customer" serialized-name="customer_id" type="sonata_customer_customer_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
-        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
-        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
-
+        <property name="current" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="type" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="name" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="firstname" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="lastname" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="address1" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="address2" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="address3" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="postcode" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="city" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="countryCode" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="phone" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="customer" serialized-name="customer_id" type="sonata_customer_customer_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search"/>
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search"/>
     </class>
 </serializer>

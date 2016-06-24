@@ -1,25 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<routes xmlns="http://symfony.com/schema/routing"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
     <route id="sonata_payment_confirmation" path="/confirmation">
         <default key="_controller">SonataPaymentBundle:Payment:confirmation</default>
     </route>
-
     <route id="sonata_payment_error" path="/error">
         <default key="_controller">SonataPaymentBundle:Payment:error</default>
     </route>
-
     <route id="sonata_payment_sendbank" path="/sendbank">
         <default key="_controller">SonataPaymentBundle:Payment:sendbank</default>
     </route>
-
     <route id="sonata_payment_callback" path="/callback">
         <default key="_controller">SonataPaymentBundle:Payment:callback</default>
     </route>
-
     <route id="sonata_payment_terms" path="/terms-and-conditions">
         <default key="_controller">SonataPaymentBundle:Payment:terms</default>
     </route>

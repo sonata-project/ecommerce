@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
     <class name="Sonata\InvoiceBundle\Entity\BaseInvoiceElement" exclusion-policy="all" xml-root-name="invoice_element">
-
-        <property name="quantity"    type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="unitPrice"   type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="price"       type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="vatRate"     type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="total"       type="double"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="designation" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="description" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
-        <property name="orderElement" serialized-name="order_element_id" type="sonata_order_orderelement_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="invoice"      serialized-name="invoice_id"       type="sonata_invoice_invoice_id"    expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
+        <property name="quantity" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="unitPrice" type="double" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="price" type="double" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="vatRate" type="double" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="total" type="double" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="designation" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="description" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="orderElement" serialized-name="order_element_id" type="sonata_order_orderelement_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="invoice" serialized-name="invoice_id" type="sonata_invoice_invoice_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
     </class>
 </serializer>

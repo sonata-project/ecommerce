@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -102,8 +102,8 @@ class CollectionController extends Controller
 
         return $this->render('SonataProductBundle:Collection:side_menu_collection.html.twig', array(
           'root_collection' => $collection,
-          'depth'           => $depth,
-          'deep'            => $deep + 1,
+          'depth' => $depth,
+          'deep' => $deep + 1,
         ));
     }
 }

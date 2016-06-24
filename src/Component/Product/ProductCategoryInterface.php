@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -77,6 +77,7 @@ interface ProductCategoryInterface
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
+
     /**
      * Get Product.
      *

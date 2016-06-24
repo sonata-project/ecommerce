@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
     <file source-language="en" target-language="fr" datatype="plaintext" original="SonataInvoiceBundle.en.xliff">
         <body>
-
             <!-- Begin - Titles -->
             <trans-unit id="invoice">
                 <source>invoice</source>
@@ -17,7 +16,6 @@
                 <target>Paiement</target>
             </trans-unit>
             <!-- End - Titles -->
-
             <!-- Begin - Breadcrumb translations -->
             <trans-unit id="breadcrumb.link_invoice_list">
                 <source>breadcrumb.link_invoice_list</source>
@@ -28,7 +26,6 @@
                 <target>Edition</target>
             </trans-unit>
             <!-- End - Breadcrumb translations -->
-
             <!-- Begin - List translations -->
             <trans-unit id="list.label_id">
                 <source>list.label_id</source>
@@ -55,7 +52,6 @@
                 <target>Total TTC</target>
             </trans-unit>
             <!-- End - List translations -->
-
             <!-- Begin - Form translations -->
             <trans-unit id="invoice.form.group_main_label">
                 <source>invoice.form.group_main_label</source>
@@ -69,7 +65,6 @@
                 <source>invoice.form.group_misc_label</source>
                 <target>Divers</target>
             </trans-unit>
-
             <trans-unit id="form.label_reference">
                 <source>form.label_reference</source>
                 <target>Référence</target>
@@ -90,7 +85,6 @@
                 <source>form.label_total_excl</source>
                 <target>Total TTC</target>
             </trans-unit>
-
             <trans-unit id="form.label_name">
                 <source>form.label_name</source>
                 <target>Nom</target>
@@ -140,7 +134,6 @@
                 <target>Client</target>
             </trans-unit>
             <!-- End - Form translations -->
-
             <!-- Begin - Status translations -->
             <trans-unit id="status_open">
                 <source>status_open</source>
@@ -155,7 +148,6 @@
                 <target>En conflict</target>
             </trans-unit>
             <!-- End - Status translations -->
-
             <!-- Begin - Invoice admin filters -->
             <trans-unit id="filter.label_reference">
                 <source>filter.label_reference</source>
@@ -170,7 +162,6 @@
                 <target>Statut</target>
             </trans-unit>
             <!-- End - Invoice admin filters -->
-
             <!-- Begin - View translations -->
             <trans-unit id="sonata.invoice.subtitle_billing">
                 <source>sonata.invoice.subtitle_billing</source>

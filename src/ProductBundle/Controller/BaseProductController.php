@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -50,11 +50,11 @@ abstract class BaseProductController extends Controller
         return $this->render(
             sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
             array(
-                'provider'           => $provider,
-                'product'            => $product,
+                'provider' => $provider,
+                'product' => $product,
                 'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
-                'currency'           => $currency,
-                'form'               => $form,
+                'currency' => $currency,
+                'form' => $form,
             )
         );
     }
@@ -87,9 +87,9 @@ abstract class BaseProductController extends Controller
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
         return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), array(
-            'formView'      => $formView,
+            'formView' => $formView,
             'basketElement' => $basketElement,
-            'basket'        => $basket,
+            'basket' => $basket,
         ));
     }
 
@@ -105,7 +105,7 @@ abstract class BaseProductController extends Controller
 
         return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), array(
             'basketElement' => $basketElement,
-            'basket'        => $basket,
+            'basket' => $basket,
         ));
     }
 
@@ -158,7 +158,7 @@ abstract class BaseProductController extends Controller
 
         $url = $this->generateUrl('sonata_product_view', array(
             'productId' => $variation->getId(),
-            'slug'      => $variation->getSlug(),
+            'slug' => $variation->getSlug(),
         ));
 
         if ($this->getRequest()->isXmlHttpRequest()) {

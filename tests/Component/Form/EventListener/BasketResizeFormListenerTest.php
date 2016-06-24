@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -26,7 +26,7 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
     {
         $expected = array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind',
+            FormEvents::PRE_SUBMIT => 'preBind',
         );
 
         $this->assertEquals($expected, BasketResizeFormListener::getSubscribedEvents());

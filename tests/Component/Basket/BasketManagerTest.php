@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -83,23 +83,6 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
         $basketMgr->delete($basket);
     }
 
-    protected function getBasketManager($qbCallback)
-    {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
-            'id',
-            'locale',
-        ));
-
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
-
-        return new BasketManager('Sonata\BasketBundle\Entity\BaseBasket', $registry);
-    }
-
     public function testGetPager()
     {
         $self = $this;
@@ -122,7 +105,8 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
     {
         $self = $this;
         $this
-            ->getBasketManager(function ($qb) use ($self) {})
+            ->getBasketManager(function ($qb) use ($self) {
+            })
             ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
     }
 
@@ -144,8 +128,25 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
                 );
             })
             ->getPager(array(), 1, 10, array(
-                'id'      => 'ASC',
-                'locale'  => 'DESC',
+                'id' => 'ASC',
+                'locale' => 'DESC',
             ));
+    }
+
+    protected function getBasketManager($qbCallback)
+    {
+        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
+            $this->markTestSkipped('Not compatible with PHPUnit 5.');
+        }
+
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+            'id',
+            'locale',
+        ));
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        return new BasketManager('Sonata\BasketBundle\Entity\BaseBasket', $registry);
     }
 }

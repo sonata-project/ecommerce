@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -42,13 +42,13 @@ class SonataBasketBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping(array(
-            'sonata_basket_basket'                         => 'Sonata\BasketBundle\Form\BasketType',
-            'sonata_basker_address'                        => 'Sonata\BasketBundle\Form\Type\AddressType',
-            'sonata_basket_shipping'                       => 'Sonata\BasketBundle\Form\ShippingType',
-            'sonata_basket_payment'                        => 'Sonata\BasketBundle\Form\PaymentType',
-            'sonata_basket_api_form_basket'                => 'Sonata\BasketBundle\Form\ApiBasketType',
-            'sonata_basket_api_form_basket_element'        => 'Sonata\BasketBundle\Form\ApiBasketElementType',
-            'sonata_basket_api_form_basket_parent'         => 'Sonata\BasketBundle\Form\ApiBasketParentType',
+            'sonata_basket_basket' => 'Sonata\BasketBundle\Form\BasketType',
+            'sonata_basker_address' => 'Sonata\BasketBundle\Form\Type\AddressType',
+            'sonata_basket_shipping' => 'Sonata\BasketBundle\Form\ShippingType',
+            'sonata_basket_payment' => 'Sonata\BasketBundle\Form\PaymentType',
+            'sonata_basket_api_form_basket' => 'Sonata\BasketBundle\Form\ApiBasketType',
+            'sonata_basket_api_form_basket_element' => 'Sonata\BasketBundle\Form\ApiBasketElementType',
+            'sonata_basket_api_form_basket_parent' => 'Sonata\BasketBundle\Form\ApiBasketParentType',
             'sonata_basket_api_form_basket_element_parent' => 'Sonata\BasketBundle\Form\ApiBasketElementParentType',
         ));
     }

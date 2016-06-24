@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -83,24 +83,6 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $orderManager->delete($order);
     }
 
-    protected function getOrderManager($qbCallback)
-    {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
-            'reference',
-            'status',
-            'username',
-        ));
-
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
-
-        return new OrderManager('Sonata\OrderBundle\Entity\BaseOrder', $registry);
-    }
-
     public function testGetPager()
     {
         $self = $this;
@@ -124,7 +106,8 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self) { })
+            ->getOrderManager(function ($qb) use ($self) {
+            })
             ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
     }
 
@@ -148,7 +131,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
             })
             ->getPager(array(), 1, 10, array(
                 'reference' => 'ASC',
-                'username'  => 'DESC',
+                'username' => 'DESC',
             ));
     }
 
@@ -216,5 +199,23 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_VALIDATED)));
             })
             ->getPager(array('status' => BaseOrder::STATUS_VALIDATED), 1);
+    }
+
+    protected function getOrderManager($qbCallback)
+    {
+        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
+            $this->markTestSkipped('Not compatible with PHPUnit 5.');
+        }
+
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+            'reference',
+            'status',
+            'username',
+        ));
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        return new OrderManager('Sonata\OrderBundle\Entity\BaseOrder', $registry);
     }
 }

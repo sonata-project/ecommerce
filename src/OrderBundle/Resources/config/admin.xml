@@ -1,48 +1,41 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.order.admin.order.class">Sonata\OrderBundle\Admin\OrderAdmin</parameter>
         <parameter key="sonata.order.admin.order.controller">SonataOrderBundle:OrderCRUD</parameter>
-
         <parameter key="sonata.order.admin.order_element.class">Sonata\OrderBundle\Admin\OrderElementAdmin</parameter>
         <parameter key="sonata.order.admin.order_element.controller">SonataAdminBundle:CRUD</parameter>
     </parameters>
-
     <services>
         <service id="sonata.order.admin.order" class="%sonata.order.admin.order.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
-            <argument />
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
             <argument>%sonata.order.admin.order.entity%</argument>
             <argument>%sonata.order.admin.order.controller%</argument>
             <call method="addChild">
-                <argument type="service" id="sonata.order.admin.order_element" />
+                <argument type="service" id="sonata.order.admin.order_element"/>
             </call>
             <call method="setCurrencyDetector">
-                <argument type="service" id="sonata.price.currency.detector" />
+                <argument type="service" id="sonata.price.currency.detector"/>
             </call>
             <call method="setInvoiceManager">
-                <argument type="service" id="sonata.invoice.manager" />
+                <argument type="service" id="sonata.invoice.manager"/>
             </call>
             <call method="setOrderManager">
-                <argument type="service" id="sonata.order.manager" />
+                <argument type="service" id="sonata.order.manager"/>
             </call>
         </service>
-
         <service id="sonata.order.admin.order_element" class="%sonata.order.admin.order_element.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="orderElement" show_in_dashboard="false"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
-            <argument />
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="orderElement" show_in_dashboard="false" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
             <argument>%sonata.order.admin.order_element.entity%</argument>
             <argument>%sonata.order.admin.order_element.controller%</argument>
             <call method="setCurrencyDetector">
-                <argument type="service" id="sonata.price.currency.detector" />
+                <argument type="service" id="sonata.price.currency.detector"/>
             </call>
             <call method="setProductPool">
-                <argument type="service" id="sonata.product.pool" />
+                <argument type="service" id="sonata.product.pool"/>
             </call>
         </service>
     </services>
-
 </container>

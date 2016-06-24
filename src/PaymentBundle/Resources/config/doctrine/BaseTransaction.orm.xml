@@ -1,18 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping
-    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-    xsi="http://www.w3.org/2001/XMLSchema-instance"
-    schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
-    <mapped-superclass name="Sonata\PaymentBundle\Entity\BaseTransaction" >
-
-        <field name="transactionId"  type="string"    column="transaction_id"   length="255"/>
-        <field name="state"          type="integer"   column="state"    />
-        <field name="parameters"     type="json"      column="parameters" />
-        <field name="statusCode"     type="integer"   column="status_code"/>
-        <field name="paymentCode"    type="string"    column="payment_code" length="32" />
-        <field name="createdAt"      type="datetime"  column="created_at"/>
-        <field name="information"    type="text"      column="information"/>
-
-     </mapped-superclass>
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <mapped-superclass name="Sonata\PaymentBundle\Entity\BaseTransaction">
+        <field name="transactionId" type="string" column="transaction_id" length="255"/>
+        <field name="state" type="integer" column="state"/>
+        <field name="parameters" type="json" column="parameters"/>
+        <field name="statusCode" type="integer" column="status_code"/>
+        <field name="paymentCode" type="string" column="payment_code" length="32"/>
+        <field name="createdAt" type="datetime" column="created_at"/>
+        <field name="information" type="text" column="information"/>
+    </mapped-superclass>
 </doctrine-mapping>

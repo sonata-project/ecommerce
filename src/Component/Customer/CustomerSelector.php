@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\Component\Customer;
 
 use FOS\UserBundle\Model\UserInterface;
@@ -38,10 +47,10 @@ class CustomerSelector implements CustomerSelectorInterface
      */
     public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
     {
-        $this->customerManager  = $customerManager;
-        $this->session          = $session;
-        $this->securityContext  = $securityContext;
-        $this->locale           = $localeDetector->getLocale();
+        $this->customerManager = $customerManager;
+        $this->session = $session;
+        $this->securityContext = $securityContext;
+        $this->locale = $localeDetector->getLocale();
     }
 
     /**
@@ -54,7 +63,7 @@ class CustomerSelector implements CustomerSelectorInterface
     public function get()
     {
         $customer = null;
-        $user     = null;
+        $user = null;
 
         if (true === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             // user is authenticated
