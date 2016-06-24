@@ -21,6 +21,10 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
 {
     protected function getCustomerManager($qbCallback)
     {
+        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
+            $this->markTestSkipped('Not compatible with PHPUnit 5.');
+        }
+
         $em = EntityManagerMockFactory::create($this, $qbCallback, array(
             'firstname',
             'lastname',
