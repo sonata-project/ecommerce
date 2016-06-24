@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -46,12 +46,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @var array
      */
-    protected $options           = array();
+    protected $options = array();
 
     /**
      * @var array
      */
-    protected $variationFields   = array();
+    protected $variationFields = array();
 
     /**
      * @var string
@@ -467,21 +467,21 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         if (!$isVariation || in_array('description', $this->variationFields)) {
             $formMapper->add('description', 'sonata_formatter_type', array(
-                'source_field'         => 'rawDescription',
+                'source_field' => 'rawDescription',
                 'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
-                'format_field'         => 'descriptionFormatter',
-                'target_field'         => 'description',
-                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
+                'format_field' => 'descriptionFormatter',
+                'target_field' => 'description',
+                'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
             ));
         }
 
         if (!$isVariation || in_array('short_description', $this->variationFields)) {
             $formMapper->add('shortDescription', 'sonata_formatter_type', array(
-                'source_field'         => 'rawShortDescription',
+                'source_field' => 'rawShortDescription',
                 'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
-                'format_field'         => 'shortDescriptionFormatter',
-                'target_field'         => 'shortDescription',
-                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
+                'format_field' => 'shortDescriptionFormatter',
+                'target_field' => 'shortDescription',
+                'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
             ));
         }
 
@@ -495,8 +495,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'required' => false,
                 ), array(
                     'link_parameters' => array(
-                        'context'  => 'product_catalog',
-                        'filter'   => array('context' => array('value' => 'product_catalog')),
+                        'context' => 'product_catalog',
+                        'filter' => array('context' => array('value' => 'product_catalog')),
                         'provider' => '',
                     ),
                 ));
@@ -507,8 +507,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                     'required' => false,
                 ), array(
                     'link_parameters' => array(
-                        'context'  => 'product_catalog',
-                        'filter'   => array('context' => array('value' => 'product_catalog')),
+                        'context' => 'product_catalog',
+                        'filter' => array('context' => array('value' => 'product_catalog')),
                         'provider' => '',
                     ),
                 ));
@@ -877,8 +877,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->with('quantity')
                 ->assertRange(
                     array(
-                        'min'        => 1,
-                        'max'        => $this->getStockAvailable($basketElement->getProduct()),
+                        'min' => 1,
+                        'max' => $this->getStockAvailable($basketElement->getProduct()),
                         'minMessage' => 'basket_quantity_limit_min',
                         'maxMessage' => 'basket_quantity_limit_max',
                     )
@@ -1002,7 +1002,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $event = new BeforeCalculatePriceEvent($product, $currency, $vat, $quantity);
         $this->getEventDispatcher()->dispatch(BasketEvents::PRE_CALCULATE_PRICE, $event);
 
-        $vat      = $event->getVat();
+        $vat = $event->getVat();
         $quantity = $event->getQuantity();
 
         if (!is_int($quantity) || $quantity < 1) {
@@ -1130,6 +1130,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function updateStock($product, ProductManagerInterface $productManager, $diff)
+    {
+        $productManager->updateStock($product, $diff);
+    }
+
+    /**
      * Checks $fields if specified, returns variation fields otherwise.
      *
      * @param array $fields
@@ -1152,13 +1160,5 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
 
         return $fields;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function updateStock($product, ProductManagerInterface $productManager, $diff)
-    {
-        $productManager->updateStock($product, $diff);
     }
 }

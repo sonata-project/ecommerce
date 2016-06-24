@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -21,6 +21,7 @@ class OgonePaymentTest_Order extends BaseOrder
     {
         $this->id = $id;
     }
+
     /**
      * @return int the order id
      */
@@ -31,29 +32,26 @@ class OgonePaymentTest_Order extends BaseOrder
 }
 class OgonePaymentTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     *
-     */
     public function testValidPayment()
     {
-        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $router->expects($this->once())->method('generate')->will($this->returnValue('http://www.google.com'));
 
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
         $payment->setOptions(array(
-            'url_return_ok'    => 'sonata_payment_confirmation',
-            'url_return_ko'    => '',
-            'url_callback'     => '',
-            'template'         => '',
-            'form_url'         => '',
-            'sha_key'          => '',
-            'sha-out_key'      => '',
-            'pspid'            => '',
-            'home_url'         => '',
-            'catalog_url'      => '',
+            'url_return_ok' => 'sonata_payment_confirmation',
+            'url_return_ko' => '',
+            'url_callback' => '',
+            'template' => '',
+            'form_url' => '',
+            'sha_key' => '',
+            'sha-out_key' => '',
+            'pspid' => '',
+            'home_url' => '',
+            'catalog_url' => '',
         ));
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
@@ -88,17 +86,17 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
 
     public function testValidSendbankPayment()
     {
-        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidsendbank')));
 
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $customer   = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
 
         $order = new OgonePaymentTest_Order();
         $order->setCreatedAt($date);
@@ -114,16 +112,16 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
         $payment->setOptions(array(
-            'url_return_ok'    => '',
-            'url_return_ko'    => '',
-            'url_callback'     => '',
-            'template'         => '',
-            'form_url'         => '',
-            'sha_key'          => '',
-            'sha-out_key'      => '',
-            'pspid'            => '',
-            'home_url'         => '',
-            'catalog_url'      => '',
+            'url_return_ok' => '',
+            'url_return_ko' => '',
+            'url_callback' => '',
+            'template' => '',
+            'form_url' => '',
+            'sha_key' => '',
+            'sha-out_key' => '',
+            'pspid' => '',
+            'home_url' => '',
+            'catalog_url' => '',
         ));
 
         $response = $payment->sendbank($order);
@@ -136,23 +134,23 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeString($data, $expected)
     {
-        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
         $payment->setOptions(array(
-                'url_return_ok'    => '',
-                'url_return_ko'    => '',
-                'url_callback'     => '',
-                'template'         => '',
-                'form_url'         => '',
-                'sha_key'          => '',
-                'sha-out_key'      => '',
-                'pspid'            => '',
-                'home_url'         => '',
-                'catalog_url'      => '',
+                'url_return_ok' => '',
+                'url_return_ko' => '',
+                'url_callback' => '',
+                'template' => '',
+                'form_url' => '',
+                'sha_key' => '',
+                'sha-out_key' => '',
+                'pspid' => '',
+                'home_url' => '',
+                'catalog_url' => '',
         ));
 
         $this->assertEquals($expected, $payment->encodeString($data));
@@ -183,20 +181,20 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
     public static function callback($name)
     {
         $params = array(
-                'orderID'    => 'FR',
-                'currency'   => null,
-                'amount'     => 'amount',
-                'PM'         => 'PM',
+                'orderID' => 'FR',
+                'currency' => null,
+                'amount' => 'amount',
+                'PM' => 'PM',
                 'ACCEPTANCE' => 'ACCEPTANCE',
-                'STATUS'     => 'STATUS',
-                'CARDNO'     => 'CARDNO',
-                'ED'         => 'ED',
-                'CN'         => 'CN',
-                'TRXDATE'    => 'TRXDATE',
-                'PAYID'      => 'PAYID',
-                'NCERROR'    => 'NCERROR',
-                'BRAND'      => 'BRAND',
-                'IP'         => 'IP',
+                'STATUS' => 'STATUS',
+                'CARDNO' => 'CARDNO',
+                'ED' => 'ED',
+                'CN' => 'CN',
+                'TRXDATE' => 'TRXDATE',
+                'PAYID' => 'PAYID',
+                'NCERROR' => 'NCERROR',
+                'BRAND' => 'BRAND',
+                'IP' => 'IP',
         );
 
         if (strcasecmp('shasign', $name) === 0) {
@@ -221,9 +219,9 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
 
     public function testIsCallbackValid()
     {
-        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
         $payment = new OgonePayment($router, $logger, $templating, true);
 
@@ -259,9 +257,9 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderReference()
     {
-        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
         $payment = new OgonePayment($router, $logger, $templating, true);
 
@@ -273,9 +271,9 @@ class OgonePaymentTest extends \PHPUnit_Framework_TestCase
 
     public function testApplyTransactionId()
     {
-        $logger     = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->getMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
 
         $payment = new OgonePayment($router, $logger, $templating, true);
 

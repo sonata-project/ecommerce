@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -51,7 +51,7 @@ class AddressExtension extends \Twig_Extension
                 array($this, 'renderAddress'),
                 array(
                     'needs_environment' => true,
-                    'is_safe'           => array('html'),
+                    'is_safe' => array('html'),
                 )
             ),
             new \Twig_SimpleFunction('sonata_address_deliverable', array($this, 'isAddressDeliverable')),
@@ -89,9 +89,9 @@ class AddressExtension extends \Twig_Extension
 
         if ($address instanceof AddressInterface) {
             $addressArray = array(
-                'id'        => $showEdit ? $address->getId() : '',
-                'name'      => $showName ? $address->getName() : '',
-                'address'   => $address->getFullAddressHtml(),
+                'id' => $showEdit ? $address->getId() : '',
+                'name' => $showName ? $address->getName() : '',
+                'address' => $address->getFullAddressHtml(),
             );
         } else {
             if ($showEdit && !array_key_exists('id', $address)) {
@@ -104,17 +104,17 @@ class AddressExtension extends \Twig_Extension
             }
 
             $addressArray = array(
-                'id'      => $showEdit ? $address['id'] : '',
-                'name'    => $address['name'],
+                'id' => $showEdit ? $address['id'] : '',
+                'name' => $address['name'],
                 'address' => BaseAddress::formatAddress($address, '<br/>'),
             );
         }
 
         return $environment->render('SonataCustomerBundle:Addresses:_address.html.twig', array(
-                'address'  => $addressArray,
+                'address' => $addressArray,
                 'showName' => $showName,
                 'showEdit' => $showEdit,
-                'context'  => $context,
+                'context' => $context,
             )
         );
     }

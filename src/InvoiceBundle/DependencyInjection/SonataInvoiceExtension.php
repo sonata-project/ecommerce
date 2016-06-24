@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -82,65 +82,65 @@ class SonataInvoiceExtension extends Extension
          * INVOICE
          */
         $collector->addAssociation($config['class']['invoice'], 'mapManyToOne', array(
-             'fieldName'     => 'customer',
-             'targetEntity'  => $config['class']['customer'],
-             'cascade'       => array(
+             'fieldName' => 'customer',
+             'targetEntity' => $config['class']['customer'],
+             'cascade' => array(
                  'persist',
                  'refresh',
                  'merge',
                  'detach',
              ),
-             'mappedBy'     => null,
-             'joinColumns'  => array(
+             'mappedBy' => null,
+             'joinColumns' => array(
                  array(
-                     'name'                 => 'customer_id',
+                     'name' => 'customer_id',
                      'referencedColumnName' => 'id',
-                     'onDelete'             => 'SET NULL',
+                     'onDelete' => 'SET NULL',
                  ),
              ),
              'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', array(
-             'fieldName'     => 'invoice',
-             'targetEntity'  => $config['class']['invoice'],
-             'cascade'       => array(
+             'fieldName' => 'invoice',
+             'targetEntity' => $config['class']['invoice'],
+             'cascade' => array(
                  'persist',
                  'refresh',
                  'merge',
                  'detach',
              ),
-             'mappedBy'     => null,
-             'inversedBy'   => 'invoiceElements',
-             'joinColumns'  => array(
+             'mappedBy' => null,
+             'inversedBy' => 'invoiceElements',
+             'joinColumns' => array(
                  array(
-                     'name'                 => 'invoice_id',
+                     'name' => 'invoice_id',
                      'referencedColumnName' => 'id',
-                     'onDelete'             => 'CASCADE',
+                     'onDelete' => 'CASCADE',
                  ),
              ),
              'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['invoice'], 'mapOneToMany', array(
-             'fieldName'     => 'invoiceElements',
-             'targetEntity'  => $config['class']['invoice_element'],
-             'cascade'       => array(
+             'fieldName' => 'invoiceElements',
+             'targetEntity' => $config['class']['invoice_element'],
+             'cascade' => array(
                  'persist',
              ),
-             'mappedBy'      => 'invoice',
+             'mappedBy' => 'invoice',
              'orphanRemoval' => true,
         ));
 
         $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', array(
-            'fieldName'    => 'orderElement',
+            'fieldName' => 'orderElement',
             'targetEntity' => $config['class']['order_element'],
-            'cascade'      => array(),
-            'joinColumns'  => array(
+            'cascade' => array(),
+            'joinColumns' => array(
                  array(
-                     'name'                 => 'order_element_id',
+                     'name' => 'order_element_id',
                      'referencedColumnName' => 'id',
-                     'onDelete'             => 'CASCADE',
+                     'onDelete' => 'CASCADE',
                  ),
              ),
         ));

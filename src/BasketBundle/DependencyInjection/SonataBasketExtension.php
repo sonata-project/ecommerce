@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -84,43 +84,43 @@ class SonataBasketExtension extends Extension
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['basket'], 'mapManyToOne', array(
-             'fieldName'    => 'customer',
+             'fieldName' => 'customer',
              'targetEntity' => $config['class']['customer'],
-             'cascade'      => array(),
-             'mappedBy'     => null,
-             'inversedBy'   => null,
-             'joinColumns'  => array(
+             'cascade' => array(),
+             'mappedBy' => null,
+             'inversedBy' => null,
+             'joinColumns' => array(
                  array(
-                     'name'                 => 'customer_id',
+                     'name' => 'customer_id',
                      'referencedColumnName' => 'id',
-                     'onDelete'             => 'CASCADE',
-                     'unique'               => true,
+                     'onDelete' => 'CASCADE',
+                     'unique' => true,
                  ),
              ),
              'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['basket'], 'mapOneToMany', array(
-             'fieldName'     => 'basketElements',
-             'targetEntity'  => $config['class']['basket_element'],
-             'cascade'       => array(
+             'fieldName' => 'basketElements',
+             'targetEntity' => $config['class']['basket_element'],
+             'cascade' => array(
                  'persist',
              ),
-             'mappedBy'      => 'basket',
+             'mappedBy' => 'basket',
              'orphanRemoval' => true,
         ));
 
         $collector->addAssociation($config['class']['basket_element'], 'mapManyToOne', array(
-            'fieldName'      => 'basket',
-            'targetEntity'   => $config['class']['basket'],
-            'cascade'        => array(),
-            'mappedBy'       => null,
-            'inversedBy'     => 'basketElements',
-            'joinColumns'    => array(
+            'fieldName' => 'basket',
+            'targetEntity' => $config['class']['basket'],
+            'cascade' => array(),
+            'mappedBy' => null,
+            'inversedBy' => 'basketElements',
+            'joinColumns' => array(
                 array(
-                    'name'                 => 'basket_id',
+                    'name' => 'basket_id',
                     'referencedColumnName' => 'id',
-                    'onDelete'             => 'CASCADE',
+                    'onDelete' => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,

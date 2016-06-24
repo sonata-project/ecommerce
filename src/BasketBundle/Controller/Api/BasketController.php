@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -72,11 +72,11 @@ class BasketController
      */
     public function __construct(BasketManagerInterface $basketManager, BasketElementManagerInterface $basketElementManager, ProductManagerInterface $productManager, BasketBuilderInterface $basketBuilder, FormFactoryInterface $formFactory)
     {
-        $this->basketManager        = $basketManager;
+        $this->basketManager = $basketManager;
         $this->basketElementManager = $basketElementManager;
-        $this->productManager       = $productManager;
-        $this->basketBuilder        = $basketBuilder;
-        $this->formFactory          = $formFactory;
+        $this->productManager = $productManager;
+        $this->basketBuilder = $basketBuilder;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -103,9 +103,9 @@ class BasketController
         $supportedCriteria = array(
         );
 
-        $page     = $paramFetcher->get('page');
-        $limit    = $paramFetcher->get('count');
-        $sort     = $paramFetcher->get('orderBy');
+        $page = $paramFetcher->get('page');
+        $limit = $paramFetcher->get('count');
+        $sort = $paramFetcher->get('orderBy');
         $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
         foreach ($criteria as $key => $value) {
@@ -259,43 +259,6 @@ class BasketController
     }
 
     /**
-     * Write a basket, this method is used by both POST and PUT action methods.
-     *
-     * @param Request  $request Symfony request
-     * @param int|null $id      A basket identifier
-     *
-     * @return \FOS\RestBundle\View\View|FormInterface
-     */
-    protected function handleWriteBasket($request, $id = null)
-    {
-        $basket = $id ? $this->getBasket($id) : null;
-
-        $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket', $basket, array(
-            'csrf_protection' => false,
-        ));
-
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $basket = $form->getData();
-            if ($basket->getCustomerId()) {
-                $this->checkExistingCustomerBasket($basket->getCustomerId());
-            }
-            $this->basketManager->save($basket);
-
-            $view = \FOS\RestBundle\View\View::create($basket);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
-
-            return $view;
-        }
-
-        return $form;
-    }
-
-    /**
      * Adds a basket element to a basket.
      *
      * @ApiDoc(
@@ -402,6 +365,43 @@ class BasketController
         $view->setSerializationContext($serializationContext);
 
         return $view;
+    }
+
+    /**
+     * Write a basket, this method is used by both POST and PUT action methods.
+     *
+     * @param Request  $request Symfony request
+     * @param int|null $id      A basket identifier
+     *
+     * @return \FOS\RestBundle\View\View|FormInterface
+     */
+    protected function handleWriteBasket($request, $id = null)
+    {
+        $basket = $id ? $this->getBasket($id) : null;
+
+        $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket', $basket, array(
+            'csrf_protection' => false,
+        ));
+
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $basket = $form->getData();
+            if ($basket->getCustomerId()) {
+                $this->checkExistingCustomerBasket($basket->getCustomerId());
+            }
+            $this->basketManager->save($basket);
+
+            $view = \FOS\RestBundle\View\View::create($basket);
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->enableMaxDepthChecks();
+            $view->setSerializationContext($serializationContext);
+
+            return $view;
+        }
+
+        return $form;
     }
 
     /**

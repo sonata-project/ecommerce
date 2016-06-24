@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -39,19 +39,19 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
 
-        $om  = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps  = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
         $ps->expects($this->exactly(3))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
         $ref = $this->getMock('Sonata\Component\Generator\ReferenceInterface');
 
-        $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
@@ -80,16 +80,16 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
 
-        $om  = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
 
-        $ps  = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
         $ref = $this->getMock('Sonata\Component\Generator\ReferenceInterface');
 
-        $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
@@ -127,19 +127,19 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('getReference')
             ->will($this->returnValue('42'));
 
-        $om  = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps  = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
         $ref = $this->getMock('Sonata\Component\Generator\ReferenceInterface');
 
-        $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
@@ -169,19 +169,19 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('getOrderReference')
             ->will($this->returnValue('42'));
 
-        $om  = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue(null));
 
-        $ps  = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
         $ref = $this->getMock('Sonata\Component\Generator\ReferenceInterface');
 
-        $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
@@ -212,19 +212,19 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
 
-        $om  = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps  = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
         $ref = $this->getMock('Sonata\Component\Generator\ReferenceInterface');
 
-        $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
@@ -257,15 +257,15 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
             ->method('getTransformer')
             ->will($this->returnValue($basketTransformer));
 
-        $om  = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
         $om->expects($this->once())->method('save');
 
-        $ps  = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
 
         $ref = $this->getMock('Sonata\Component\Generator\ReferenceInterface');
         $ref->expects($this->once())->method('order');
 
-        $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
 
         $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
 
@@ -300,19 +300,19 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
 
-        $om  = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps  = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->getMock('Sonata\Component\Payment\PaymentSelectorInterface');
         $ps->expects($this->exactly(3))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
         $ref = $this->getMock('Sonata\Component\Generator\ReferenceInterface');
 
-        $tm  = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->getMock('Sonata\Component\Payment\TransactionManagerInterface');
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));

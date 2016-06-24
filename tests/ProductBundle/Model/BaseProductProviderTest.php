@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -538,7 +538,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             'price' => 84,
-            'name'  => 'variation',
+            'name' => 'variation',
         );
 
         $this->assertEquals($expected, $provider->getVariatedProperties($variation));
@@ -567,7 +567,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
 
         $expected = array(
             'price' => 84,
-            'name'  => 'variation',
+            'name' => 'variation',
         );
 
         $this->assertEquals($variation2, $provider->getVariation($product, array('price' => 42, 'name' => 'avariation')));

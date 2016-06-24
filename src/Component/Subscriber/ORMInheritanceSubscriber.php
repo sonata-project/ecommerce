@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -29,7 +29,7 @@ class ORMInheritanceSubscriber implements EventSubscriber
      */
     public function __construct($map, $productClass)
     {
-        $this->map          = $map;
+        $this->map = $map;
         $this->productClass = $productClass;
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -40,11 +40,11 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
         $extension->renderAddress($environment, $address, true, true);
 
         $address = array(
-            'firstname'    => '',
-            'lastname'     => '',
-            'address1'     => '',
-            'postcode'     => '',
-            'city'         => '',
+            'firstname' => '',
+            'lastname' => '',
+            'address1' => '',
+            'postcode' => '',
+            'city' => '',
             'country_code' => '',
         );
 
@@ -76,11 +76,11 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
         $deliverySelector = $this->getMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $address = array(
-            'firstname'    => '',
-            'lastname'     => '',
-            'address1'     => '',
-            'postcode'     => '',
-            'city'         => '',
+            'firstname' => '',
+            'lastname' => '',
+            'address1' => '',
+            'postcode' => '',
+            'city' => '',
             'country_code' => '',
         );
 

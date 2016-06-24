@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -87,56 +87,56 @@ class SonataCustomerExtension extends Extension
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['customer'], 'mapOneToMany', array(
-            'fieldName'    => 'addresses',
+            'fieldName' => 'addresses',
             'targetEntity' => $config['class']['address'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'      => 'customer',
+            'mappedBy' => 'customer',
             'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['customer'], 'mapOneToMany', array(
-            'fieldName'     => 'orders',
-            'targetEntity'  => $config['class']['order'],
-            'cascade'       => array(
+            'fieldName' => 'orders',
+            'targetEntity' => $config['class']['order'],
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'      => 'customer',
+            'mappedBy' => 'customer',
             'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['customer'], 'mapManyToOne', array(
-            'fieldName'    => 'user',
+            'fieldName' => 'user',
             'targetEntity' => $config['class']['user'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'     => null,
-            'inversedBy'   => 'customers',
-            'joinColumns'  => array(
+            'mappedBy' => null,
+            'inversedBy' => 'customers',
+            'joinColumns' => array(
                 array(
-                    'name'                 => 'user_id',
+                    'name' => 'user_id',
                     'referencedColumnName' => $config['field']['customer']['user'],
-                    'onDelete'             => 'SET NULL',
+                    'onDelete' => 'SET NULL',
                 ),
             ),
             'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['address'], 'mapManyToOne', array(
-            'fieldName'    => 'customer',
+            'fieldName' => 'customer',
             'targetEntity' => $config['class']['customer'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'     => null,
-            'inversedBy'   => 'addresses',
-            'joinColumns'  => array(
+            'mappedBy' => null,
+            'inversedBy' => 'addresses',
+            'joinColumns' => array(
                 array(
-                    'name'                 => 'customer_id',
+                    'name' => 'customer_id',
                     'referencedColumnName' => 'id',
-                    'onDelete'             => 'CASCADE',
+                    'onDelete' => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,

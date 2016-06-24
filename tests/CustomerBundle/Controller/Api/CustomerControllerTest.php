@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -52,7 +52,7 @@ class CustomerControllerTest extends \PHPUnit_Framework_TestCase
     public function testGetCustomerOrdersAction()
     {
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $order    = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
 
         $this->assertEquals(array($order), $this->createCustomerController($customer, null, null, null, $order)->getCustomerOrdersAction(1));
     }
@@ -60,7 +60,7 @@ class CustomerControllerTest extends \PHPUnit_Framework_TestCase
     public function testGetCustomerAddressesAction()
     {
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $address  = $this->getMock('Sonata\Component\Customer\AddressInterface');
+        $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $customer->expects($this->once())->method('getAddresses')->will($this->returnValue(array($address)));
 
         $this->assertEquals(array($address), $this->createCustomerController($customer)->getCustomerAddressesAction(1));

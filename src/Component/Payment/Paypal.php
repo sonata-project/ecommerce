@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -40,43 +40,43 @@ class Paypal extends BasePaypal
     {
         $params = array(
             'order' => $order->getReference(),
-            'bank'  => $this->getCode(),
+            'bank' => $this->getCode(),
             'check' => $this->generateUrlCheck($order),
         );
 
         $fields = array(
             // paypal specific
-            'cmd'           => '_xclick',
-            'charset'       => 'utf-8',
-            'business'      => $this->getOption('account'),
-            'cert_id'       => $this->getOption('cert_id'),
-            'no_shipping'   => '1', // client cannot add shipping address
-            'lc'            => 'EN', // user interface language
-            'no_note'       => '1', // no comment on paypal
+            'cmd' => '_xclick',
+            'charset' => 'utf-8',
+            'business' => $this->getOption('account'),
+            'cert_id' => $this->getOption('cert_id'),
+            'no_shipping' => '1', // client cannot add shipping address
+            'lc' => 'EN', // user interface language
+            'no_note' => '1', // no comment on paypal
 
             // invoice information
-            'invoice'       => $order->getReference(),
-            'amount'        => $order->getTotalInc(),
+            'invoice' => $order->getReference(),
+            'amount' => $order->getTotalInc(),
             'currency_code' => $order->getCurrency(),
-            'item_name'     => 'Order '.$order->getReference(),
-            'bn'            => 'Sonata/1.0', // Assign Build Notation for PayPal Support
+            'item_name' => 'Order '.$order->getReference(),
+            'bn' => 'Sonata/1.0', // Assign Build Notation for PayPal Support
 
             // user information, for prepopulated form (paypal side)
-            'first_name'    => $order->getBillingName(),
-            'last_name'     => '',
-            'address1'      => $order->getBillingAddress1(),
-            'address2'      => $order->getBillingAddress2(),
-            'city'          => $order->getBillingCity(),
-            'zip'           => $order->getBillingPostcode(),
-            'country'       => $order->getBillingCountryCode(),
+            'first_name' => $order->getBillingName(),
+            'last_name' => '',
+            'address1' => $order->getBillingAddress1(),
+            'address2' => $order->getBillingAddress2(),
+            'city' => $order->getBillingCity(),
+            'zip' => $order->getBillingPostcode(),
+            'country' => $order->getBillingCountryCode(),
 
             // Callback information
-            'custom'        => $this->generateUrlCheck($order),
-            'notify_url'    => $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'custom' => $this->generateUrlCheck($order),
+            'notify_url' => $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
 
             // user link
             'cancel_return' => $this->router->generate($this->getOption('url_return_ko'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
-            'return'        => $this->router->generate($this->getOption('url_return_ok'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'return' => $this->router->generate($this->getOption('url_return_ok'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
         );
 
         if ($this->getOption('debug', false)) {
@@ -142,7 +142,7 @@ class Paypal extends BasePaypal
      */
     public function isCallbackValid(TransactionInterface $transaction)
     {
-        $order  = $transaction->getOrder();
+        $order = $transaction->getOrder();
 
         if (!$this->isRequestValid($transaction)) {
             $transaction->setState(TransactionInterface::STATE_KO);
@@ -324,15 +324,15 @@ class Paypal extends BasePaypal
     public static function getPendingReasonsList()
     {
         return array(
-            self::PENDING_REASON_ADDRESS        => 'The payment is pending because your customer did not include a confirmed shipping address and your Payment Receiving Preferences is set yo allow you to manually accept or deny each of these payments. To change your preference, go to the Preferences section of your Profile.',
-            self::PENDING_REASON_AUTHORIZATION  => 'You set <PaymentAction> Authorization</PaymentAction> on SetExpressCheckoutRequest and have not yet captured funds.',
-            self::PENDING_REASON_ECHECK         => 'The payment is pending because it was made by an eCheck that has not yet cleared. ',
-            self::PENDING_REASON_INTL           => 'The payment is pending because you hold a non-U.S. account and do not have a withdrawal mechanism. You must manually accept or deny this payment from your Account Overview.',
-            self::PENDING_REASON_MULTICURRENCY  => 'You do not have a balance in the currency sent, and you do not have your Payment Receiving Preferences set to automatically convert and accept this payment. You must manually accept or deny this payment.',
-            self::PENDING_REASON_UNILATERAL     => 'The payment is pending because it was made to an email address that is not yet registered or confirmed. upgrade: The payment is pending because it was made via credit card and you must upgrade your account to Business or Premier status in order to receive the funds. upgrade can also mean that you have reached the monthly limit for transactions on your account. ',
-            self::PENDING_REASON_UPGRADE        => 'The payment is pending because it was made via credit card and you must upgrade your account to Business or Premier status in order to receive the funds. upgrade can also mean that you have reached the monthly limit for transactions on your account.',
-            self::PENDING_REASON_VERIFY         => 'The payment is pending because you are not yet verified. You must verify your account before you can accept this payment. ',
-            self::PENDING_REASON_OTHER          => 'The payment is pending for a reason other than those listed above. For more information, contact PayPal Customer Service.',
+            self::PENDING_REASON_ADDRESS => 'The payment is pending because your customer did not include a confirmed shipping address and your Payment Receiving Preferences is set yo allow you to manually accept or deny each of these payments. To change your preference, go to the Preferences section of your Profile.',
+            self::PENDING_REASON_AUTHORIZATION => 'You set <PaymentAction> Authorization</PaymentAction> on SetExpressCheckoutRequest and have not yet captured funds.',
+            self::PENDING_REASON_ECHECK => 'The payment is pending because it was made by an eCheck that has not yet cleared. ',
+            self::PENDING_REASON_INTL => 'The payment is pending because you hold a non-U.S. account and do not have a withdrawal mechanism. You must manually accept or deny this payment from your Account Overview.',
+            self::PENDING_REASON_MULTICURRENCY => 'You do not have a balance in the currency sent, and you do not have your Payment Receiving Preferences set to automatically convert and accept this payment. You must manually accept or deny this payment.',
+            self::PENDING_REASON_UNILATERAL => 'The payment is pending because it was made to an email address that is not yet registered or confirmed. upgrade: The payment is pending because it was made via credit card and you must upgrade your account to Business or Premier status in order to receive the funds. upgrade can also mean that you have reached the monthly limit for transactions on your account. ',
+            self::PENDING_REASON_UPGRADE => 'The payment is pending because it was made via credit card and you must upgrade your account to Business or Premier status in order to receive the funds. upgrade can also mean that you have reached the monthly limit for transactions on your account.',
+            self::PENDING_REASON_VERIFY => 'The payment is pending because you are not yet verified. You must verify your account before you can accept this payment. ',
+            self::PENDING_REASON_OTHER => 'The payment is pending for a reason other than those listed above. For more information, contact PayPal Customer Service.',
         );
     }
 }

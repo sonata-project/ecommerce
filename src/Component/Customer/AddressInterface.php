@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -13,9 +13,9 @@ namespace Sonata\Component\Customer;
 
 interface AddressInterface
 {
-    const TYPE_BILLING  = 1;
+    const TYPE_BILLING = 1;
     const TYPE_DELIVERY = 2;
-    const TYPE_CONTACT  = 3;
+    const TYPE_CONTACT = 3;
 
     public function getId();
 

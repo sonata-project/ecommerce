@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -49,7 +49,7 @@ class VariationChoiceType extends AbstractType
                     array('translation_domain' => 'SonataProductBundle'),
                     $options['field_options'],
                     array(
-                        'label'   => sprintf('form_%s', $choiceTitle),
+                        'label' => sprintf('form_%s', $choiceTitle),
                         'choices' => $choiceValues,
                     )
                 )
@@ -63,11 +63,11 @@ class VariationChoiceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'field_options'   => array(),
-            'product'         => null,
-            'fields'          => null,
+            'field_options' => array(),
+            'product' => null,
+            'fields' => null,
             'csrf_protection' => false,
-            'method'          => 'GET',
+            'method' => 'GET',
         ));
 
         $resolver->setRequired(array('product', 'fields'));

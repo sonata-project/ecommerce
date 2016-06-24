@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -37,7 +37,7 @@ class UserOrderBreadcrumbBlockService extends BaseUserProfileBreadcrumbBlockServ
         $menu = $this->getRootMenu($blockContext);
 
         $menu->addChild('sonata_order_user_breadcrumb', array(
-            'route'  => 'sonata_order_index',
+            'route' => 'sonata_order_index',
             'extras' => array('translation_domain' => 'SonataOrderBundle'),
         ));
 

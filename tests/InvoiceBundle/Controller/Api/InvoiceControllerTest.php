@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -50,7 +50,7 @@ class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetInvoiceInvoiceelementsAction()
     {
-        $invoice         = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoice = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
         $invoiceElements = $this->getMock('Sonata\Component\Invoice\InvoiceElementsInterface');
         $invoice->expects($this->once())->method('getInvoiceElements')->will($this->returnValue(array($invoiceElements)));
 

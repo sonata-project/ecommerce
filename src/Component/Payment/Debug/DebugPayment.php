@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -31,7 +31,7 @@ class DebugPayment extends PassPayment
     public function sendbank(OrderInterface $order)
     {
         return new RedirectResponse($this->router->generate('sonata_payment_debug', array(
-            'check'     => $this->generateUrlCheck($order),
+            'check' => $this->generateUrlCheck($order),
             'reference' => $order->getReference(),
         )));
     }
@@ -47,10 +47,10 @@ class DebugPayment extends PassPayment
     public function processCallback(OrderInterface $order, $action)
     {
         $params = array(
-            'bank'      => $this->getCode(),
+            'bank' => $this->getCode(),
             'reference' => $order->getReference(),
-            'check'     => $this->generateUrlCheck($order),
-            'action'    => $action,
+            'check' => $this->generateUrlCheck($order),
+            'action' => $action,
         );
 
         $url = $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL);

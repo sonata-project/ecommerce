@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -42,8 +42,8 @@ class CustomerController extends Controller
         // This allows to specify the display order
         $addresses = array(
             $typeCodes[AddressInterface::TYPE_DELIVERY] => array(),
-            $typeCodes[AddressInterface::TYPE_BILLING]  => array(),
-            $typeCodes[AddressInterface::TYPE_CONTACT]  => array(),
+            $typeCodes[AddressInterface::TYPE_BILLING] => array(),
+            $typeCodes[AddressInterface::TYPE_CONTACT] => array(),
         );
 
         if (null === $customer) {
@@ -63,8 +63,8 @@ class CustomerController extends Controller
         $this->get('session')->set('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
 
         return $this->render('SonataCustomerBundle:Addresses:list.html.twig', array(
-                'addresses'          => $addresses,
-                'customer'           => $customer,
+                'addresses' => $addresses,
+                'customer' => $customer,
                 'breadcrumb_context' => 'customer_address',
             ));
     }
@@ -176,7 +176,7 @@ class CustomerController extends Controller
         }
 
         return $this->render($template, array(
-            'form'               => $form->createView(),
+            'form' => $form->createView(),
             'breadcrumb_context' => 'customer_address',
         ));
     }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -57,20 +57,20 @@ class Configuration implements ConfigurationInterface
         $node
             ->validate()
             ->ifTrue(function ($v) {
-                    foreach ($v['methods'] as $methodCode => $service) {
-                        if (null === $service || '' === $service) {
-                            foreach ($v['services'] as $serviceConf) {
-                                if ($methodCode === $serviceConf['code']) {
-                                    break 2;
-                                }
+                foreach ($v['methods'] as $methodCode => $service) {
+                    if (null === $service || '' === $service) {
+                        foreach ($v['services'] as $serviceConf) {
+                            if ($methodCode === $serviceConf['code']) {
+                                break 2;
                             }
-
-                            return true;
                         }
-                    }
 
-                    return false;
-                })
+                        return true;
+                    }
+                }
+
+                return false;
+            })
             ->thenInvalid('Custom payment methods require a service id. Provided payment methods need to be configured with their method code as key.')
             ->end()
             ->children()
@@ -102,7 +102,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('url_return_ko')->defaultValue('sonata_payment_error')->cannotBeEmpty()->end()
                                         ->scalarNode('url_return_ok')->defaultValue('sonata_payment_confirmation')->cannotBeEmpty()->end()
 
-                                        ->scalarNode('method')->defaultValue('encryptViaBuffer')->cannotBeEmpty()->end() # encryptViaFile || encryptViaBuffer
+                                        ->scalarNode('method')->defaultValue('encryptViaBuffer')->cannotBeEmpty()->end() // encryptViaFile || encryptViaBuffer
 
                                         ->scalarNode('key_file')->defaultValue('%kernel.root_dir%/my-prvkey.pem')->cannotBeEmpty()->end()
                                         ->scalarNode('cert_file')->defaultValue('%kernel.root_dir%/my-pubcert.pem')->cannotBeEmpty()->end()
