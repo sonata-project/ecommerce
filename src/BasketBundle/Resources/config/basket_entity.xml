@@ -1,15 +1,11 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sonata.basket.entity.factory" class="Sonata\Component\Basket\BasketEntityFactory">
             <argument type="service" id="sonata.basket.manager"/>
             <argument type="service" id="sonata.basket.builder"/>
             <argument type="service" id="sonata.price.currency.detector"/>
-            <argument type="service" id="session" />
+            <argument type="service" id="session"/>
         </service>
     </services>
 </container>

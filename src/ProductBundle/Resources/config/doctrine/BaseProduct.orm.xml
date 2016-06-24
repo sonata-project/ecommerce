@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                          http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
-    <mapped-superclass name="Sonata\ProductBundle\Entity\BaseProduct"
-                       repository-class="Sonata\ProductBundle\Repository\BaseProductRepository">
-
-        <field name="sku"               column="sku"            type="string"     nullable="true" length="255"/>
-        <field name="slug"              column="slug"           type="string"     nullable="true" length="255"/>
-        <field name="name"              column="name"           type="string"   nullable="false" length="255"/>
-        <field name="priceIncludingVat" column="price_inc_vat"  type="boolean" />
-
-        <field name="description"          column="description"           type="text"   nullable="true" />
-        <field name="rawDescription"       column="raw_description"       type="text"   nullable="true" />
-        <field name="descriptionFormatter" column="description_formatter" type="string" nullable="true" />
-
-        <field name="shortDescription"          column="short_description"           type="text"   nullable="true" />
-        <field name="rawShortDescription"       column="raw_short_description"       type="text"   nullable="true" />
-        <field name="shortDescriptionFormatter" column="short_description_formatter" type="string" nullable="true" />
-
-        <field name="price"         column="price"          type="decimal"  precision="10" scale="2" nullable="true" />
-        <field name="vatRate"       column="vat_rate"       type="decimal"  precision="10" scale="2" nullable="true" />
-        <field name="stock"         column="stock"          type="integer"  nullable="true" />
-        <field name="enabled"       column="enabled"        type="boolean"  nullable="true" />
-
-        <field name="updatedAt"    column="updated_at"     type="datetime" />
-        <field name="createdAt"    column="created_at"     type="datetime" />
-
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping                           http://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <mapped-superclass name="Sonata\ProductBundle\Entity\BaseProduct" repository-class="Sonata\ProductBundle\Repository\BaseProductRepository">
+        <field name="sku" column="sku" type="string" nullable="true" length="255"/>
+        <field name="slug" column="slug" type="string" nullable="true" length="255"/>
+        <field name="name" column="name" type="string" nullable="false" length="255"/>
+        <field name="priceIncludingVat" column="price_inc_vat" type="boolean"/>
+        <field name="description" column="description" type="text" nullable="true"/>
+        <field name="rawDescription" column="raw_description" type="text" nullable="true"/>
+        <field name="descriptionFormatter" column="description_formatter" type="string" nullable="true"/>
+        <field name="shortDescription" column="short_description" type="text" nullable="true"/>
+        <field name="rawShortDescription" column="raw_short_description" type="text" nullable="true"/>
+        <field name="shortDescriptionFormatter" column="short_description_formatter" type="string" nullable="true"/>
+        <field name="price" column="price" type="decimal" precision="10" scale="2" nullable="true"/>
+        <field name="vatRate" column="vat_rate" type="decimal" precision="10" scale="2" nullable="true"/>
+        <field name="stock" column="stock" type="integer" nullable="true"/>
+        <field name="enabled" column="enabled" type="boolean" nullable="true"/>
+        <field name="updatedAt" column="updated_at" type="datetime"/>
+        <field name="createdAt" column="created_at" type="datetime"/>
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersist"/>
             <lifecycle-callback type="preUpdate" method="preUpdate"/>

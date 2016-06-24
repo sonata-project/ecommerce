@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
     <class name="Sonata\Component\Basket\Basket" exclusion-policy="all" xml-root-name="basket">
-
-        <property         name="deliveryAddressId"  type="integer" expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-        <property         name="billingAddressId"   type="integer" expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-        <property         name="paymentMethodCode"  type="string"  expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-        <property         name="cptElement"         type="integer" expose="true"  since-version="1.0" groups="sonata_api_read" />
-        <property         name="deliveryMethodCode" type="string"  expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-        <virtual-property name="options"            type="array"   expose="true" since-version="1.0"  groups="sonata_api_read,sonata_api_write" method="getOptions" />
-        <property         name="locale"             type="string"  expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-        <property         name="currency"           type="string"  expose="true"  since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-        <property         name="basketElements"     type="array"   expose="true"  since-version="1.0" groups="sonata_api_read" />
-
-        <property name="customer" serialized-name="customer_id" type="sonata_customer_customer_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
+        <property name="deliveryAddressId" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="billingAddressId" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="paymentMethodCode" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="cptElement" type="integer" expose="true" since-version="1.0" groups="sonata_api_read"/>
+        <property name="deliveryMethodCode" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <virtual-property name="options" type="array" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" method="getOptions"/>
+        <property name="locale" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="currency" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="basketElements" type="array" expose="true" since-version="1.0" groups="sonata_api_read"/>
+        <property name="customer" serialized-name="customer_id" type="sonata_customer_customer_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
     </class>
 </serializer>

@@ -1,104 +1,80 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <!-- PRODUCT -->
         <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
         <parameter key="sonata.product.admin.product.controller">SonataProductBundle:ProductAdmin</parameter>
-
         <parameter key="sonata.product.admin.product.variation.class">Sonata\ProductBundle\Admin\ProductVariationAdmin</parameter>
         <parameter key="sonata.product.admin.product.variation.controller">SonataProductBundle:ProductVariationAdmin</parameter>
-
         <!-- PRODUCTCATEGORY -->
         <parameter key="sonata.product.admin.product_category.class">Sonata\ProductBundle\Admin\ProductCategoryAdmin</parameter>
         <parameter key="sonata.product.admin.product_category.controller">SonataAdminBundle:CRUD</parameter>
-
         <!-- PRODUCTCOLLECTION -->
         <parameter key="sonata.product.admin.product_collection.class">Sonata\ProductBundle\Admin\ProductCollectionAdmin</parameter>
         <parameter key="sonata.product.admin.product_collection.controller">SonataAdminBundle:CRUD</parameter>
-
         <!-- DELIVERY -->
         <parameter key="sonata.product.admin.delivery.class">Sonata\ProductBundle\Admin\DeliveryAdmin</parameter>
         <parameter key="sonata.product.admin.delivery.controller">SonataAdminBundle:CRUD</parameter>
-
         <parameter key="sonata.product.admin.product.manager">Sonata\ProductBundle\Model\DoctrineModelManager</parameter>
     </parameters>
-
     <services>
         <service id="sonata.product.admin.product" class="%sonata.product.admin.product.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
-            <argument />
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="product" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
             <argument>%sonata.product.admin.product.entity%</argument>
             <argument>%sonata.product.admin.product.controller%</argument>
-
             <call method="addChild">
-                <argument type="service" id="sonata.product.admin.product.category" />
+                <argument type="service" id="sonata.product.admin.product.category"/>
             </call>
-
             <call method="addChild">
-                <argument type="service" id="sonata.product.admin.product.collection" />
+                <argument type="service" id="sonata.product.admin.product.collection"/>
             </call>
-
             <call method="addChild">
-                <argument type="service" id="sonata.product.admin.delivery" />
+                <argument type="service" id="sonata.product.admin.delivery"/>
             </call>
-
             <call method="addChild">
-                <argument type="service" id="sonata.product.admin.product.variation" />
+                <argument type="service" id="sonata.product.admin.product.variation"/>
             </call>
-
             <call method="setProductPool">
-                <argument type="service" id="sonata.product.pool" />
+                <argument type="service" id="sonata.product.pool"/>
             </call>
-
             <call method="setCurrencyDetector">
-                <argument type="service" id="sonata.price.currency.detector" />
+                <argument type="service" id="sonata.price.currency.detector"/>
             </call>
         </service>
-
         <service id="sonata.product.admin.product.variation" class="%sonata.product.admin.product.variation.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_menu="false"  show_in_dashboard="false" label="product_variation"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
-
-            <argument />
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_menu="false" show_in_dashboard="false" label="product_variation" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
             <argument>%sonata.product.admin.product.entity%</argument>
             <argument>%sonata.product.admin.product.variation.controller%</argument>
-
             <call method="setProductPool">
-                <argument type="service" id="sonata.product.pool" />
+                <argument type="service" id="sonata.product.pool"/>
             </call>
-
             <call method="setCurrencyDetector">
-                <argument type="service" id="sonata.price.currency.detector" />
+                <argument type="service" id="sonata.price.currency.detector"/>
             </call>
         </service>
-
         <service id="sonata.product.admin.product.category" class="%sonata.product.admin.product_category.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="product_category" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
-            <argument />
+            <argument/>
             <argument>%sonata.product.admin.product_category.entity%</argument>
             <argument>%sonata.product.admin.product_category.controller%</argument>
         </service>
-
         <service id="sonata.product.admin.product.collection" class="%sonata.product.admin.product_collection.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="product_collection" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
-            <argument />
+            <argument/>
             <argument>%sonata.product.admin.product_collection.entity%</argument>
             <argument>%sonata.product.admin.product_collection.controller%</argument>
         </service>
-
         <service id="sonata.product.admin.delivery" class="%sonata.product.admin.delivery.class%">
             <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="delivery" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
-            <argument />
+            <argument/>
             <argument>%sonata.product.admin.delivery.entity%</argument>
             <argument>%sonata.product.admin.delivery.controller%</argument>
         </service>
-
         <service id="sonata.product.admin.product.manager" class="%sonata.product.admin.product.manager%">
-            <argument type="service" id="doctrine" />
-            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="sonata.product.pool"/>
         </service>
     </services>
-
 </container>

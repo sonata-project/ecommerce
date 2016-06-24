@@ -1,118 +1,87 @@
-<?xml version="1.0" ?>
-<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
-        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sonata\OrderBundle\Entity\BaseOrder">
         <getter property="totalInc">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="totalExcl">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="reference">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="currency">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="status">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="paymentStatus">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="deliveryStatus">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="billingName">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="billingAddress1">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="billingCity">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="billingPostcode">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="billingCountryCode">
-            <constraint name="NotNull" />
-            <constraint name="Country" />
+            <constraint name="NotNull"/>
+            <constraint name="Country"/>
         </getter>
-
         <getter property="billingEmail">
-            <constraint name="Email" />
+            <constraint name="Email"/>
         </getter>
-
         <getter property="shippingName">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="shippingAddress1">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="shippingCity">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="shippingPostcode">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="shippingCountryCode">
-            <constraint name="NotNull" />
-            <constraint name="Country" />
+            <constraint name="NotNull"/>
+            <constraint name="Country"/>
         </getter>
-
         <getter property="shippingEmail">
-            <constraint name="Email" />
+            <constraint name="Email"/>
         </getter>
     </class>
-
     <class name="Sonata\OrderBundle\Entity\BaseOrderElement">
         <getter property="productType">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="quantity">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="price">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="vatRate">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="designation">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="status">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="deliveryStatus">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
     </class>
-
 </constraint-mapping>

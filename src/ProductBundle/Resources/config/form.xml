@@ -1,23 +1,15 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sonata.product.form.delivery_type" class="Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType">
-             <argument>%sonata.product.delivery.class%</argument>
-             <argument>getStatusList</argument>
-             <argument>sonata_product_delivery_status</argument>
-
-             <tag name="form.type" alias="sonata_product_delivery_status" />
-         </service>
-
+            <argument>%sonata.product.delivery.class%</argument>
+            <argument>getStatusList</argument>
+            <argument>sonata_product_delivery_status</argument>
+            <tag name="form.type" alias="sonata_product_delivery_status"/>
+        </service>
         <service id="sonata.product.form.variation_choices_type" class="Sonata\Component\Form\Type\VariationChoiceType">
-             <argument type="service" id="sonata.product.pool" />
-
-             <tag name="form.type" alias="sonata_product_variation_choices" />
-         </service>
+            <argument type="service" id="sonata.product.pool"/>
+            <tag name="form.type" alias="sonata_product_variation_choices"/>
+        </service>
     </services>
-
 </container>

@@ -1,9 +1,5 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.delivery.manager.class">Sonata\ProductBundle\Entity\DeliveryManager</parameter>
         <parameter key="sonata.package.manager.class">Sonata\ProductBundle\Entity\PackageManager</parameter>
@@ -11,33 +7,26 @@
         <parameter key="sonata.product_category.manager.class">Sonata\ProductBundle\Entity\ProductCategoryManager</parameter>
         <parameter key="sonata.product_collection.manager.class">Sonata\ProductBundle\Entity\ProductCollectionManager</parameter>
     </parameters>
-
     <services>
         <service id="sonata.delivery.manager" class="%sonata.delivery.manager.class%">
             <argument>%sonata.product.delivery.class%</argument>
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine"/>
         </service>
-
         <service id="sonata.package.manager" class="%sonata.package.manager.class%">
             <argument>%sonata.product.package.class%</argument>
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine"/>
         </service>
-
         <service id="sonata.product.set.manager" class="%sonata.product.set.manager.class%">
             <argument>%sonata.product.product.class%</argument>
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine"/>
         </service>
-
         <service id="sonata.product_category.product" class="%sonata.product_category.manager.class%">
             <argument>%sonata.product.product_category.class%</argument>
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine"/>
         </service>
-
         <service id="sonata.product_collection.product" class="%sonata.product_collection.manager.class%">
             <argument>%sonata.product.product_collection.class%</argument>
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine"/>
         </service>
-
     </services>
-
 </container>

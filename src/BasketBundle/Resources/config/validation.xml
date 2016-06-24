@@ -1,87 +1,73 @@
-<?xml version="1.0" ?>
-<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
-        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sonata\Component\Basket\Basket">
         <constraint name="Sonata\Component\Form\Basket">
-            <option name="groups" >
+            <option name="groups">
                 <value>elements</value>
             </option>
         </constraint>
-
         <getter property="deliveryMethod">
-           <constraint name="NotNull" >
-               <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>delivery</value>
-               </option>
-
-           </constraint>
+                </option>
+            </constraint>
         </getter>
-
         <getter property="deliveryAddress">
-           <constraint name="NotNull" >
-               <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>delivery</value>
-               </option>
-           </constraint>
+                </option>
+            </constraint>
         </getter>
-
         <getter property="paymentMethod">
-           <constraint name="NotNull" >
-               <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>payment</value>
-               </option>
-           </constraint>
+                </option>
+            </constraint>
         </getter>
-
         <getter property="billingAddress">
-           <constraint name="NotNull" >
-               <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>payment</value>
-               </option>
-           </constraint>
+                </option>
+            </constraint>
         </getter>
-
         <getter property="paymentMethodCode">
-            <constraint name="NotNull" >
-                <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>api</value>
                 </option>
             </constraint>
         </getter>
-
         <getter property="deliveryMethodCode">
-            <constraint name="NotNull" >
-                <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>api</value>
                 </option>
             </constraint>
         </getter>
-
         <getter property="locale">
-            <constraint name="Locale" >
-                <option name="groups" >
+            <constraint name="Locale">
+                <option name="groups">
                     <value>api</value>
                 </option>
             </constraint>
-            <constraint name="NotNull" >
-                <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>api</value>
                 </option>
             </constraint>
         </getter>
-
         <getter property="currency">
-            <constraint name="NotNull" >
-                <option name="groups" >
+            <constraint name="NotNull">
+                <option name="groups">
                     <value>api</value>
                 </option>
             </constraint>
         </getter>
     </class>
-
     <class name="Sonata\CustomerBundle\Entity\BaseAddress">
         <getter property="firstname">
             <constraint name="NotNull">
@@ -91,7 +77,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="lastname">
             <constraint name="NotNull">
                 <option name="groups">
@@ -99,7 +84,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="address1">
             <constraint name="NotNull">
                 <option name="groups">
@@ -108,7 +92,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="postcode">
             <constraint name="NotNull">
                 <option name="groups">
@@ -117,7 +100,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="city">
             <constraint name="NotNull">
                 <option name="groups">
@@ -126,7 +108,6 @@
                 </option>
             </constraint>
         </getter>
-
         <getter property="countrycode">
             <constraint name="NotNull">
                 <option name="groups">
@@ -134,10 +115,7 @@
                     <value>billing</value>
                 </option>
             </constraint>
-            <constraint name="Country" />
+            <constraint name="Country"/>
         </getter>
-
     </class>
-
-
 </constraint-mapping>

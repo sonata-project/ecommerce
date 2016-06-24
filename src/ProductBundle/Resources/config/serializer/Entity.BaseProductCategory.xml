@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
     <class name="Sonata\ProductBundle\Entity\BaseProductCategory" exclusion-policy="all" xml-root-name="product_category">
-
-        <property name="main" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
-        <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
-
-        <property name="product"  serialized-name="product_id"  type="sonata_product_product_id"         expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="category" serialized-name="category_id" type="sonata_classification_category_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
-        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
-        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
-
+        <property name="main" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="product" serialized-name="product_id" type="sonata_product_product_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="category" serialized-name="category_id" type="sonata_classification_category_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search"/>
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search"/>
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search"/>
     </class>
 </serializer>

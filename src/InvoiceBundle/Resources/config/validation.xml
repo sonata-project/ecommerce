@@ -1,75 +1,56 @@
-<?xml version="1.0" ?>
-<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
-        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sonata\InvoiceBundle\Entity\BaseInvoice">
         <getter property="totalInc">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="totalExcl">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="reference">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="currency">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="status">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="name">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="address1">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="city">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="postcode">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="country">
-            <constraint name="NotNull" />
-            <constraint name="Country" />
+            <constraint name="NotNull"/>
+            <constraint name="Country"/>
         </getter>
-
         <getter property="email">
-            <constraint name="Email" />
+            <constraint name="Email"/>
         </getter>
     </class>
-
     <class name="Sonata\InvoiceBundle\Entity\BaseInvoiceElement">
         <getter property="quantity">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
             <constraint name="GreaterThanOrEqual">
                 <option name="value">0</option>
             </constraint>
         </getter>
-
         <getter property="price">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="total">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
-
         <getter property="vatRate">
-            <constraint name="NotNull" />
+            <constraint name="NotNull"/>
         </getter>
     </class>
-
 </constraint-mapping>

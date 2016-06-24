@@ -1,40 +1,28 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.basket_transformer.class">Sonata\Component\Transformer\BasketTransformer</parameter>
         <parameter key="sonata.invoice_transformer.class">Sonata\Component\Transformer\InvoiceTransformer</parameter>
     </parameters>
-
     <services>
-        <service id="sonata.payment.transformer.pool" class="Sonata\Component\Transformer\Pool" />
-
+        <service id="sonata.payment.transformer.pool" class="Sonata\Component\Transformer\Pool"/>
         <service id="sonata.payment.transformer.order" class="Sonata\Component\Transformer\OrderTransformer">
-            <tag name="sonata.payment.transformer" />
-
-            <argument type="service" id="sonata.product.pool" />
-            <argument type="service" id="event_dispatcher" />
+            <tag name="sonata.payment.transformer"/>
+            <argument type="service" id="sonata.product.pool"/>
+            <argument type="service" id="event_dispatcher"/>
         </service>
-
         <service id="sonata.payment.transformer.invoice" class="%sonata.invoice_transformer.class%">
-            <tag name="sonata.payment.transformer" />
-
-            <argument type="service" id="sonata.invoice_element.manager" />
-            <argument type="service" id="sonata.delivery.pool" />
-            <argument type="service" id="event_dispatcher" />
+            <tag name="sonata.payment.transformer"/>
+            <argument type="service" id="sonata.invoice_element.manager"/>
+            <argument type="service" id="sonata.delivery.pool"/>
+            <argument type="service" id="event_dispatcher"/>
         </service>
-
         <service id="sonata.payment.transformer.basket" class="%sonata.basket_transformer.class%">
-            <tag name="sonata.payment.transformer" />
-
-            <argument type="service" id="sonata.order.manager" />
-            <argument type="service" id="sonata.product.pool" />
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="logger" />
+            <tag name="sonata.payment.transformer"/>
+            <argument type="service" id="sonata.order.manager"/>
+            <argument type="service" id="sonata.product.pool"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="logger"/>
         </service>
-
     </services>
 </container>

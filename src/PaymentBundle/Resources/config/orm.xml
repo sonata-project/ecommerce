@@ -1,18 +1,12 @@
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sonata.transaction.manager.class">Sonata\PaymentBundle\Entity\TransactionManager</parameter>
     </parameters>
-
     <services>
         <service id="sonata.transaction.manager" class="%sonata.transaction.manager.class%">
             <argument>%sonata.payment.transaction.class%</argument>
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine"/>
         </service>
     </services>
-
 </container>
