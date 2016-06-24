@@ -1,24 +1,41 @@
-Sonata Ecommerce
-================
+# Sonata Ecommerce
 
-[![Build Status](https://secure.travis-ci.org/sonata-project/ecommerce.png?branch=master)](http://travis-ci.org/sonata-project/ecommerce)
+E-Commerce solution provided by Sonata
 
-The online documentation of the bundle is in https://sonata-project.org/bundles/ecommerce
+[![Latest Stable Version](https://poser.pugx.org/sonata-project/ecommerce/v/stable)](https://packagist.org/packages/sonata-project/ecommerce)
+[![Latest Unstable Version](https://poser.pugx.org/sonata-project/ecommerce/v/unstable)](https://packagist.org/packages/sonata-project/ecommerce)
+[![License](https://poser.pugx.org/sonata-project/ecommerce/license)](https://packagist.org/packages/sonata-project/ecommerce)
 
-The demo website can be found in http://demo.sonata-project.org/admin/dashboard (admin as user and password)
+[![Total Downloads](https://poser.pugx.org/sonata-project/ecommerce/downloads)](https://packagist.org/packages/sonata-project/ecommerce)
+[![Monthly Downloads](https://poser.pugx.org/sonata-project/ecommerce/d/monthly)](https://packagist.org/packages/sonata-project/ecommerce)
+[![Daily Downloads](https://poser.pugx.org/sonata-project/ecommerce/d/daily)](https://packagist.org/packages/sonata-project/ecommerce)
 
-The documentation is available here : https://github.com/sonata-project/ecommerce/tree/master/docs. Feel free to contribute!
+Branch | Travis | Coveralls |
+------ | ------ | --------- |
+master   | [![Build Status][travis_stable_badge]][travis_stable_link]     | [![Coverage Status][coveralls_stable_badge]][coveralls_stable_link]     |
+master | [![Build Status][travis_unstable_badge]][travis_unstable_link] | [![Coverage Status][coveralls_unstable_badge]][coveralls_unstable_link] |
 
-**Warning**: Documentation files are not rendering correctly in Github (reStructuredText format)
-and some content might be broken or hidden, make sure to read raw files.
+## Documentation
 
-**Google Groups**: For questions and proposals you can post on this google groups:
+Check out the documentation on the [official website](https://sonata-project.org/bundles/ecommerce).
 
-* [Sonata Users](https://groups.google.com/group/sonata-users): Only for user questions
-* [Sonata Devs](https://groups.google.com/group/sonata-devs): Only for devs
+## Support
 
+For general support and questions, please use [StackOverflow](http://stackoverflow.com/questions/tagged/sonata).
 
-License
--------
+If you think you find a bug or you have a feature idea to propose, feel free to open a issue
+**after looking** at the [contributing guide](CONTRIBUTING.md).
 
-This bundle is available under the [MIT license](Resources/meta/LICENSE).
+## License
+
+This package is available under the [MIT license](LICENSE).
+
+[travis_stable_badge]: https://travis-ci.org/sonata-project/ecommerce.svg?branch=master
+[travis_stable_link]: https://travis-ci.org/sonata-project/ecommerce
+[travis_unstable_badge]: https://travis-ci.org/sonata-project/ecommerce.svg?branch=master
+[travis_unstable_link]: https://travis-ci.org/sonata-project/ecommerce
+
+[coveralls_stable_badge]: https://coveralls.io/repos/github/sonata-project/ecommerce/badge.svg?branch=master
+[coveralls_stable_link]: https://coveralls.io/github/sonata-project/ecommerce?branch=master
+[coveralls_unstable_badge]: https://coveralls.io/repos/github/sonata-project/ecommerce/badge.svg?branch=master
+[coveralls_unstable_link]: https://coveralls.io/github/sonata-project/ecommerce?branch=master
