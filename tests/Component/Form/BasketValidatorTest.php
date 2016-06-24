@@ -32,19 +32,15 @@ class BasketValidatorTest extends \PHPUnit_Framework_TestCase
 
         $consValFact = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory')->disableOriginalConstructor()->getMock();
 
-        /**
-         * Symfony 2.4+ moves ExecutionContext into sub-namespace of .\context
+        /*
+         * Symfony 2.4+ moves Symfony\Component\Validator\ExecutionContext to Symfony\Component\Validator\Context\ExecutionContext
          * So if the class exists then we should use this one else it's probably 2.3 
-         * 
          */
         if (class_exists('Symfony\Component\Validator\Context\ExecutionContext')) {
-        	$context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContext')->disableOriginalConstructor()->getMock();
-
+            $context = $this->getMockBuilder('Symfony\Component\Validator\Context\ExecutionContext')->disableOriginalConstructor()->getMock();
         } else {
-        	$context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContext')->disableOriginalConstructor()->getMock();
+            $context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContext')->disableOriginalConstructor()->getMock();
         }
-        
-        
         
         $context->expects($this->once())->method('getViolations')->will($this->returnValue(array('violation1')));
         $context->expects($this->once())->method('addViolationAt');

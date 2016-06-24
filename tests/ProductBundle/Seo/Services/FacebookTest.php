@@ -32,11 +32,8 @@ class FacebookTest extends \PHPUnit_Framework_TestCase
 
         // Check if the header data are correctly registered
         $fbService = new Facebook($mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'reference');
-        ob_start();
         $fbService->alterPage($seoPage, $product, null);
-        $extension->renderHeadAttributes();
-        $content = ob_get_contents();
-        ob_end_clean();
+        $content = $extension->getHeadAttributes();
 
         $this->assertContains('fb: http://ogp.me/ns/fb#', $content);
 
