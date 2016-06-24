@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderElementInterface;
@@ -100,6 +109,14 @@ abstract class BaseOrderElement implements OrderElementInterface
     {
         $this->rawProduct = array();
         $this->options = array();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getDesignation() ?: 'n/a';
     }
 
     public function prePersist()
@@ -523,14 +540,6 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function getRawProduct()
     {
         return $this->rawProduct;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getDesignation() ?: 'n/a';
     }
 
     /**

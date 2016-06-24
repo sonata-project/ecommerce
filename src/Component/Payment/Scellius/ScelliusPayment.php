@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -54,9 +54,9 @@ class ScelliusPayment extends BasePayment
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, ScelliusTransactionGeneratorInterface $transactionGenerator, $debug)
     {
-        $this->templating   = $templating;
-        $this->router       = $router;
-        $this->debug        = $debug;
+        $this->templating = $templating;
+        $this->router = $router;
+        $this->debug = $debug;
         $this->transactionGenerator = $transactionGenerator;
 
         $this->setLogger($logger);
@@ -121,7 +121,7 @@ class ScelliusPayment extends BasePayment
             '53' => 'Le numéro de contrôle est absent de la demande d’autorisation',
             '55' => 'La banque de l’internaute n’est pas certifiée, le contrôle n’a pu être effectué.',
             'NO' => 'Pas de cryptogramme sur la carte.',
-            ''   => 'Pour les cartes AMEX, American Express ne retourne pas de code réponse spécifique à la vérification du numéro de contrôle.'.
+            '' => 'Pour les cartes AMEX, American Express ne retourne pas de code réponse spécifique à la vérification du numéro de contrôle.'.
                     'Si le code sécurité de la carte est faux, American Express retourne un code 05 dans le champ RESPONSE_CODE.'.
                     'Pour les cartes FINAREF, Finaref ne retourne pas de code réponse spécifique à la vérification du numéro de contrôle. ',
         );
@@ -137,7 +137,7 @@ class ScelliusPayment extends BasePayment
         $responses = array();
 
         $responses[] = array(
-            'banks'    => array('CB', 'VISA', 'MASTERCARD', 'AMEX'),
+            'banks' => array('CB', 'VISA', 'MASTERCARD', 'AMEX'),
             'messages' => array(
                 array('00' => 'Transaction approuvée ou traitée avec succès'),
                 array('02' => 'Contacter l\'émetteur de carte'),
@@ -176,7 +176,7 @@ class ScelliusPayment extends BasePayment
         );
 
         $responses[] = array(
-            'banks'    => array('AMEX'),
+            'banks' => array('AMEX'),
             'messages' => array(
                 '00' => 'Transaction approuvée ou traitée avec succès',
                 '02' => 'Dépassement de plafond',
@@ -187,7 +187,7 @@ class ScelliusPayment extends BasePayment
         );
 
         $responses[] = array(
-            'banks'    => array('FINAREF'),
+            'banks' => array('FINAREF'),
             'messages' => array(
                 '00' => 'Transaction approuvée',
                 '03' => 'Commerçant inconnu - Identifiant de commerçant incorrect',
@@ -229,45 +229,45 @@ class ScelliusPayment extends BasePayment
     public static function getPaymentMeans()
     {
         return array(
-            'CB'                     => array('name' => 'Carte Bleue',           'network' => 'CB Nationale'),
-            'VISA'                   => array('name' => 'VISA',                  'network' => 'CB Internationale'),
-            'MASTERCARD'             => array('name' => 'MASTERCARD',            'network' => 'CB Internationale'),
-            'AMEX'                   => array('name' => 'AMEX',                  'network' => 'American Express'),
-            'DINERS'                 => array('name' => 'DINER\'S CLUB',         'network' => 'DINERS'),
-            'FINAREF'                => array('name' => 'FINAREF',               'network' => 'FINAREF'),
-            'FNAC'                   => array('name' => 'FNAC',                  'network' => 'FINAREF'),
-            'CYRILLUS'               => array('name' => 'CYRILLUS',              'network' => 'FINAREF'),
-            'PRINTEMPS'              => array('name' => 'PRINTEMPS',             'network' => 'FINAREF'),
-            'KANGOUROU'              => array('name' => 'KANGOUROU',             'network' => 'FINAREF'),
-            'SURCOUF'                => array('name' => 'SURCOUF',               'network' => 'FINAREF'),
-            'POCKETCARD'             => array('name' => 'POCKETCARD (Belgique)', 'network' => 'FINAREF'),
-            'CONFORAMA'              => array('name' => 'CONFORAMA',             'network' => 'FINAREF'),
-            'NUITEA'                 => array('name' => 'NUITEA',                'network' => 'CETELEM'),
-            'AURORE'                 => array('name' => 'AURORE',                'network' => 'CETELEM'),
-            'PASS'                   => array('name' => 'PASS',                  'network' => 'CETELEM'),
-            'PLURIEL'                => array('name' => 'PLURIEL',               'network' => 'FRANFINANCE'),
-            'TOYSRUS'                => array('name' => 'TOYSRUS',               'network' => 'FRANFINANCE'),
-            'CONNEXION'              => array('name' => 'CONNEXION',             'network' => 'FRANFINANCE'),
-            'HYPERMEDIA'             => array('name' => 'HYPERMEDIA',            'network' => 'FRANFINANCE'),
-            'DELATOUR'               => array('name' => 'DELATOUR',              'network' => 'FRANFINANCE'),
-            'NORAUTO'                => array('name' => 'NORAUTO',               'network' => 'FRANFINANCE'),
-            'NOUVFRONT'              => array('name' => 'NOUVELLES FRONTIERES',  'network' => 'FRANFINANCE'),
-            'SERAP'                  => array('name' => 'SERAP',                 'network' => 'FRANFINANCE'),
-            'BOURBON'                => array('name' => 'BOURBON',               'network' => 'FRANFINANCE'),
-            'COFINOGA'               => array('name' => 'COFINOGA',              'network' => 'COFINOGA'),
-            'COFINOGA _BHV'          => array('name' => 'BHV',                   'network' => 'COFINOGA'),
-            'COFINOGA _CASINOGEANT'  => array('name' => 'CASINOGEANT',           'network' => 'COFINOGA'),
-            'COFINOGA _DIAC'         => array('name' => 'DIAC',                  'network' => 'COFINOGA'),
-            'COFINOGA _GL'           => array('name' => 'GL',                    'network' => 'COFINOGA'),
-            'COFINOGA _GOSPORT'      => array('name' => 'GOSPORT',               'network' => 'COFINOGA'),
-            'COFINOGA _MONOPRIX'     => array('name' => 'MONOPRIX',              'network' => 'COFINOGA'),
-            'COFINOGA _MRBRICOLAGE'  => array('name' => 'MRBRICOLAGE',           'network' => 'COFINOGA'),
-            'COFINOGA _SOFICARTE'    => array('name' => 'SOFICARTE',             'network' => 'COFINOGA'),
-            'COFINOGA _SYGMA'        => array('name' => 'SYGMA',                 'network' => 'COFINOGA'),
-            'JCB'                    => array('name' => 'JCB',                   'network' => 'JCB - Japanese Credit Bureau'),
-            'DELTA'                  => array('name' => 'DELTA',                 'network' => 'NATWEST - GB'),
-            'SWITCH'                 => array('name' => 'SWITCH',                'network' => 'NATWEST - GB'),
-            'SOLO'                   => array('name' => 'SOLO',                  'network' => 'NATWEST - GB'),
+            'CB' => array('name' => 'Carte Bleue',           'network' => 'CB Nationale'),
+            'VISA' => array('name' => 'VISA',                  'network' => 'CB Internationale'),
+            'MASTERCARD' => array('name' => 'MASTERCARD',            'network' => 'CB Internationale'),
+            'AMEX' => array('name' => 'AMEX',                  'network' => 'American Express'),
+            'DINERS' => array('name' => 'DINER\'S CLUB',         'network' => 'DINERS'),
+            'FINAREF' => array('name' => 'FINAREF',               'network' => 'FINAREF'),
+            'FNAC' => array('name' => 'FNAC',                  'network' => 'FINAREF'),
+            'CYRILLUS' => array('name' => 'CYRILLUS',              'network' => 'FINAREF'),
+            'PRINTEMPS' => array('name' => 'PRINTEMPS',             'network' => 'FINAREF'),
+            'KANGOUROU' => array('name' => 'KANGOUROU',             'network' => 'FINAREF'),
+            'SURCOUF' => array('name' => 'SURCOUF',               'network' => 'FINAREF'),
+            'POCKETCARD' => array('name' => 'POCKETCARD (Belgique)', 'network' => 'FINAREF'),
+            'CONFORAMA' => array('name' => 'CONFORAMA',             'network' => 'FINAREF'),
+            'NUITEA' => array('name' => 'NUITEA',                'network' => 'CETELEM'),
+            'AURORE' => array('name' => 'AURORE',                'network' => 'CETELEM'),
+            'PASS' => array('name' => 'PASS',                  'network' => 'CETELEM'),
+            'PLURIEL' => array('name' => 'PLURIEL',               'network' => 'FRANFINANCE'),
+            'TOYSRUS' => array('name' => 'TOYSRUS',               'network' => 'FRANFINANCE'),
+            'CONNEXION' => array('name' => 'CONNEXION',             'network' => 'FRANFINANCE'),
+            'HYPERMEDIA' => array('name' => 'HYPERMEDIA',            'network' => 'FRANFINANCE'),
+            'DELATOUR' => array('name' => 'DELATOUR',              'network' => 'FRANFINANCE'),
+            'NORAUTO' => array('name' => 'NORAUTO',               'network' => 'FRANFINANCE'),
+            'NOUVFRONT' => array('name' => 'NOUVELLES FRONTIERES',  'network' => 'FRANFINANCE'),
+            'SERAP' => array('name' => 'SERAP',                 'network' => 'FRANFINANCE'),
+            'BOURBON' => array('name' => 'BOURBON',               'network' => 'FRANFINANCE'),
+            'COFINOGA' => array('name' => 'COFINOGA',              'network' => 'COFINOGA'),
+            'COFINOGA _BHV' => array('name' => 'BHV',                   'network' => 'COFINOGA'),
+            'COFINOGA _CASINOGEANT' => array('name' => 'CASINOGEANT',           'network' => 'COFINOGA'),
+            'COFINOGA _DIAC' => array('name' => 'DIAC',                  'network' => 'COFINOGA'),
+            'COFINOGA _GL' => array('name' => 'GL',                    'network' => 'COFINOGA'),
+            'COFINOGA _GOSPORT' => array('name' => 'GOSPORT',               'network' => 'COFINOGA'),
+            'COFINOGA _MONOPRIX' => array('name' => 'MONOPRIX',              'network' => 'COFINOGA'),
+            'COFINOGA _MRBRICOLAGE' => array('name' => 'MRBRICOLAGE',           'network' => 'COFINOGA'),
+            'COFINOGA _SOFICARTE' => array('name' => 'SOFICARTE',             'network' => 'COFINOGA'),
+            'COFINOGA _SYGMA' => array('name' => 'SYGMA',                 'network' => 'COFINOGA'),
+            'JCB' => array('name' => 'JCB',                   'network' => 'JCB - Japanese Credit Bureau'),
+            'DELTA' => array('name' => 'DELTA',                 'network' => 'NATWEST - GB'),
+            'SWITCH' => array('name' => 'SWITCH',                'network' => 'NATWEST - GB'),
+            'SOLO' => array('name' => 'SOLO',                  'network' => 'NATWEST - GB'),
         );
     }
 
@@ -390,6 +390,165 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function isCallbackValid(TransactionInterface $transaction)
+    {
+        if (!$transaction->getOrder()) {
+            return false;
+        }
+
+        if ($transaction->get('check') == $this->generateUrlCheck($transaction->getOrder())) {
+            return true;
+        }
+
+        $transaction->setState(TransactionInterface::STATE_KO);
+        $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
+        $transaction->addInformation('The callback is not valid');
+
+        return false;
+    }
+
+    /**
+     * @param \Sonata\Component\Order\OrderInterface $order
+     *
+     * @return string
+     */
+    public function getLanguage(OrderInterface $order)
+    {
+        $language = substr($order->getLocale(), 0, 2);
+
+        $languages = self::getLanguageCodes();
+
+        if (!isset($languages[$language])) {
+            return $this->getOption('language', 'en');
+        }
+
+        return $language;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendbank(OrderInterface $order)
+    {
+        $params = array(
+            'bank' => $this->getCode(),
+            'reference' => $order->getReference(),
+            'check' => $this->generateUrlCheck($order),
+        );
+
+        $cmdLineParameters = array(
+            // base configuration
+            'merchant_id' => $this->getOption('merchant_id'),
+            'merchant_country' => $this->getOption('merchant_country'),
+            'pathfile' => $this->getOption('pathfile'),
+            'language' => $this->getLanguage($order),
+            'payment_means' => $this->getOption('payment_means'),
+            'header_flag' => $this->getOption('header_flag'),
+            'capture_day' => $this->getOption('capture_day'),
+            'capture_mode' => $this->getOption('capture_mode'),
+            'bgcolor' => $this->getOption('bgcolor'),
+            'block_align' => $this->getOption('block_align'),
+            'block_order' => $this->getOption('block_order'),
+            'textcolor' => $this->getOption('textcolor'),
+            'normal_return_logo' => $this->getOption('normal_return_logo'),
+            'cancel_return_logo' => $this->getOption('cancel_return_logo'),
+            'submit_logo' => $this->getOption('submit_logo'),
+            'logo_id' => $this->getOption('logo_id'),
+            'logo_id2' => $this->getOption('logo_id2'),
+            'advert' => $this->getOption('advert'),
+            'background_id' => $this->getOption('background_id'),
+            'templatefile' => $this->getOption('templatefile'),
+
+            // runtime parameters
+            'amount' => $this->getAmount($order->getTotalInc(), $order->getCurrency()->getLabel()),
+            'currency_code' => $this->getCurrencyCode($order->getCurrency()->getLabel()),
+            'transaction_id' => $this->transactionGenerator->generate($order),
+            'normal_return_url' => $this->router->generate($this->getOption('url_return_ok'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_return_url' => $this->router->generate($this->getOption('url_return_ko'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'automatic_response_url' => $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'caddie' => 'mon_caddie',
+            'customer_id' => $order->getCustomer()->getId(),
+            'customer_email' => $order->getCustomer()->getEmail(),
+            'customer_ip_address' => '',
+            'data' => $this->getOption('data'),
+            'return_context' => '',
+            'target' => '',
+            'order_id' => $order->getReference(),
+        );
+
+        // clean parameters
+        $cmdLineOptions = array();
+        foreach ($cmdLineParameters as $option => $value) {
+            $cmdLineOptions[] = sprintf('%s=%s', $option, $this->encodeString($value));
+        }
+
+        $cmd = sprintf('cd %s && %s %s', $this->getOption('base_folder'), $this->getOption('request_command'), implode(' ', $cmdLineOptions));
+
+        $this->logger->debug(sprintf('Running command : %s', $cmd));
+
+        $process = new Process($cmd);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException(sprintf('Error %d when executing Scellius command: "%s".', $process->getExitCode(), trim($process->getErrorOutput())));
+        }
+
+        //sortie de la fonction : $result=!code!error!buffer!
+        //    - code=0  : la fonction génère une page html contenue dans la variable buffer
+        //    - code=-1 : La fonction retourne un message d'erreur dans la variable error
+        $data = explode('!', $process->getOutput());
+
+        if (count($data) != 5) {
+            throw new \RuntimeException('Invalid data count');
+        }
+
+        if ($data[1] == 0) {
+            $scellius = array(
+                'valid' => true,
+                'content' => $data[3],
+            );
+        } else {
+            $scellius = array(
+                'valid' => false,
+                'content' => $data[2],
+            );
+        }
+
+        return $this->templating->renderResponse($this->getOption('template'), array(
+            'order' => $order,
+            'scellius' => $scellius,
+            'debug' => $this->debug,
+            'parameters' => $cmdLineParameters,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function encodeString($string)
+    {
+        return escapeshellcmd($string);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderReference(TransactionInterface $transaction)
+    {
+        return $transaction->get('reference');
+    }
+
+    /**
+     * @param TransactionInterface $transaction
+     */
+    public function applyTransactionId(TransactionInterface $transaction)
+    {
+        $transaction->setTransactionId('n/a');
+    }
+
+    /**
      * @param TransactionInterface $transaction
      *
      * @throws \RuntimeException
@@ -425,59 +584,39 @@ class ScelliusPayment extends BasePayment
         }
 
         return array(
-            'code'                  => $data[1],
-            'error'                 => $data[2],
-            'merchant_id'           => $data[3],
-            'merchant_country'      => $data[4],
-            'amount'                => $data[5],
-            'transaction_id'        => $data[6],
-            'payment_means'         => $data[7],
-            'transmission_date'     => $data[8],
-            'payment_time'          => $data[9],
-            'payment_date'          => $data[10],
-            'response_code'         => $data[11],
-            'payment_certificate'   => $data[12],
-            'authorisation_id'      => $data[13],
-            'currency_code'         => $data[14],
-            'card_number'           => $data[15],
-            'cvv_flag'              => $data[16],
-            'cvv_response_code'     => $data[17],
-            'bank_response_code'    => $data[18],
-            'complementary_code'    => $data[19],
-            'complementary_info'    => $data[20],
-            'return_context'        => $data[21],
-            'caddie'                => $data[22],
-            'receipt_complement'    => $data[23],
-            'merchant_language'     => $data[24],
-            'language'              => $data[25],
-            'customer_id'           => $data[26],
-            'order_id'              => $data[27],
-            'customer_email'        => $data[28],
-            'customer_ip_address'   => $data[29],
-            'capture_day'           => $data[30],
-            'capture_mode'          => $data[31],
-            'data'                  => $data[32],
+            'code' => $data[1],
+            'error' => $data[2],
+            'merchant_id' => $data[3],
+            'merchant_country' => $data[4],
+            'amount' => $data[5],
+            'transaction_id' => $data[6],
+            'payment_means' => $data[7],
+            'transmission_date' => $data[8],
+            'payment_time' => $data[9],
+            'payment_date' => $data[10],
+            'response_code' => $data[11],
+            'payment_certificate' => $data[12],
+            'authorisation_id' => $data[13],
+            'currency_code' => $data[14],
+            'card_number' => $data[15],
+            'cvv_flag' => $data[16],
+            'cvv_response_code' => $data[17],
+            'bank_response_code' => $data[18],
+            'complementary_code' => $data[19],
+            'complementary_info' => $data[20],
+            'return_context' => $data[21],
+            'caddie' => $data[22],
+            'receipt_complement' => $data[23],
+            'merchant_language' => $data[24],
+            'language' => $data[25],
+            'customer_id' => $data[26],
+            'order_id' => $data[27],
+            'customer_email' => $data[28],
+            'customer_ip_address' => $data[29],
+            'capture_day' => $data[30],
+            'capture_mode' => $data[31],
+            'data' => $data[32],
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isCallbackValid(TransactionInterface $transaction)
-    {
-        if (!$transaction->getOrder()) {
-            return false;
-        }
-
-        if ($transaction->get('check') == $this->generateUrlCheck($transaction->getOrder())) {
-            return true;
-        }
-
-        $transaction->setState(TransactionInterface::STATE_KO);
-        $transaction->setStatusCode(TransactionInterface::STATUS_WRONG_CALLBACK);
-        $transaction->addInformation('The callback is not valid');
-
-        return false;
     }
 
     /**
@@ -515,144 +654,5 @@ class ScelliusPayment extends BasePayment
         }
 
         return (int) (100 * bcmul(1, $amount, $list[$currency]['fraction']));
-    }
-
-    /**
-     * @param \Sonata\Component\Order\OrderInterface $order
-     *
-     * @return string
-     */
-    public function getLanguage(OrderInterface $order)
-    {
-        $language = substr($order->getLocale(), 0, 2);
-
-        $languages = self::getLanguageCodes();
-
-        if (!isset($languages[$language])) {
-            return $this->getOption('language', 'en');
-        }
-
-        return $language;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function sendbank(OrderInterface $order)
-    {
-        $params = array(
-            'bank'       => $this->getCode(),
-            'reference'  => $order->getReference(),
-            'check'      => $this->generateUrlCheck($order),
-        );
-
-        $cmdLineParameters = array(
-            // base configuration
-            'merchant_id'               => $this->getOption('merchant_id'),
-            'merchant_country'          => $this->getOption('merchant_country'),
-            'pathfile'                  => $this->getOption('pathfile'),
-            'language'                  => $this->getLanguage($order),
-            'payment_means'             => $this->getOption('payment_means'),
-            'header_flag'               => $this->getOption('header_flag'),
-            'capture_day'               => $this->getOption('capture_day'),
-            'capture_mode'              => $this->getOption('capture_mode'),
-            'bgcolor'                   => $this->getOption('bgcolor'),
-            'block_align'               => $this->getOption('block_align'),
-            'block_order'               => $this->getOption('block_order'),
-            'textcolor'                 => $this->getOption('textcolor'),
-            'normal_return_logo'        => $this->getOption('normal_return_logo'),
-            'cancel_return_logo'        => $this->getOption('cancel_return_logo'),
-            'submit_logo'               => $this->getOption('submit_logo'),
-            'logo_id'                   => $this->getOption('logo_id'),
-            'logo_id2'                  => $this->getOption('logo_id2'),
-            'advert'                    => $this->getOption('advert'),
-            'background_id'             => $this->getOption('background_id'),
-            'templatefile'              => $this->getOption('templatefile'),
-
-            // runtime parameters
-            'amount'                    => $this->getAmount($order->getTotalInc(), $order->getCurrency()->getLabel()),
-            'currency_code'             => $this->getCurrencyCode($order->getCurrency()->getLabel()),
-            'transaction_id'            => $this->transactionGenerator->generate($order),
-            'normal_return_url'         => $this->router->generate($this->getOption('url_return_ok'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
-            'cancel_return_url'         => $this->router->generate($this->getOption('url_return_ko'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
-            'automatic_response_url'    => $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
-            'caddie'                    => 'mon_caddie',
-            'customer_id'               => $order->getCustomer()->getId(),
-            'customer_email'            => $order->getCustomer()->getEmail(),
-            'customer_ip_address'       => '',
-            'data'                      => $this->getOption('data'),
-            'return_context'            => '',
-            'target'                    => '',
-            'order_id'                  => $order->getReference(),
-        );
-
-        // clean parameters
-        $cmdLineOptions = array();
-        foreach ($cmdLineParameters as $option => $value) {
-            $cmdLineOptions[] = sprintf('%s=%s', $option, $this->encodeString($value));
-        }
-
-        $cmd = sprintf('cd %s && %s %s', $this->getOption('base_folder'), $this->getOption('request_command'), implode(' ', $cmdLineOptions));
-
-        $this->logger->debug(sprintf('Running command : %s', $cmd));
-
-        $process = new Process($cmd);
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            throw new \RuntimeException(sprintf('Error %d when executing Scellius command: "%s".', $process->getExitCode(), trim($process->getErrorOutput())));
-        }
-
-        //sortie de la fonction : $result=!code!error!buffer!
-        //    - code=0  : la fonction génère une page html contenue dans la variable buffer
-        //    - code=-1 : La fonction retourne un message d'erreur dans la variable error
-        $data = explode('!', $process->getOutput());
-
-        if (count($data) != 5) {
-            throw new \RuntimeException('Invalid data count');
-        }
-
-        if ($data[1] == 0) {
-            $scellius = array(
-                'valid'   => true,
-                'content' => $data[3],
-            );
-        } else {
-            $scellius = array(
-                'valid'   => false,
-                'content' => $data[2],
-            );
-        }
-
-        return $this->templating->renderResponse($this->getOption('template'), array(
-            'order'      => $order,
-            'scellius'   => $scellius,
-            'debug'      => $this->debug,
-            'parameters' => $cmdLineParameters,
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function encodeString($string)
-    {
-        return escapeshellcmd($string);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrderReference(TransactionInterface $transaction)
-    {
-        return $transaction->get('reference');
-    }
-
-    /**
-     * @param TransactionInterface $transaction
-     */
-    public function applyTransactionId(TransactionInterface $transaction)
-    {
-        $transaction->setTransactionId('n/a');
     }
 }

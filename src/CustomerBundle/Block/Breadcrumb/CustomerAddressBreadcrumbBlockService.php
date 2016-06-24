@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -37,7 +37,7 @@ class CustomerAddressBreadcrumbBlockService extends BaseUserProfileBreadcrumbBlo
         $menu = $this->getRootMenu($blockContext);
 
         $menu->addChild('sonata_customer_addresses_breadcrumb', array(
-            'route'  => 'sonata_customer_addresses',
+            'route' => 'sonata_customer_addresses',
             'extras' => array('translation_domain' => 'SonataCustomerBundle'),
         ));
 

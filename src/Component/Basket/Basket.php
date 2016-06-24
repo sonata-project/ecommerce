@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -483,7 +483,7 @@ class Basket implements \Serializable, BasketInterface
                 $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $basketElement->getVatAmount());
             } else {
                 $amounts[$rate] = array(
-                    'rate'   => $rate,
+                    'rate' => $rate,
                     'amount' => $basketElement->getVatAmount(),
                 );
             }
@@ -589,14 +589,14 @@ class Basket implements \Serializable, BasketInterface
     public function getSerializationFields()
     {
         $arrayRep = array(
-            'basketElements'        => $this->getBasketElements(),
-            'positions'             => $this->positions,
-            'paymentMethodCode'     => $this->paymentMethodCode,
-            'cptElement'            => $this->cptElement,
-            'deliveryMethodCode'    => $this->deliveryMethodCode,
-            'options'               => $this->options,
-            'locale'                => $this->locale,
-            'currency'              => $this->currency,
+            'basketElements' => $this->getBasketElements(),
+            'positions' => $this->positions,
+            'paymentMethodCode' => $this->paymentMethodCode,
+            'cptElement' => $this->cptElement,
+            'deliveryMethodCode' => $this->deliveryMethodCode,
+            'options' => $this->options,
+            'locale' => $this->locale,
+            'currency' => $this->currency,
         );
 
         if (null !== $this->deliveryAddressId) {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -49,7 +49,7 @@ class RecentProductsBlockService extends BaseBlockService
     public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector, $productClass)
     {
         $this->productRepository = $registry->getManager()->getRepository($productClass);
-        $this->currencyDetector  = $currencyDetector;
+        $this->currencyDetector = $currencyDetector;
 
         parent::__construct($name, $templating);
     }
@@ -63,11 +63,11 @@ class RecentProductsBlockService extends BaseBlockService
             ->findLastActiveProducts($blockContext->getSetting('number'));
 
         $params = array(
-            'context'   => $blockContext,
-            'settings'  => $blockContext->getSettings(),
-            'block'     => $blockContext->getBlock(),
-            'products'  => $products,
-            'currency'  => $this->currencyDetector->getCurrency(),
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'products' => $products,
+            'currency' => $this->currencyDetector->getCurrency(),
         );
 
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
@@ -108,9 +108,9 @@ class RecentProductsBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'number'     => 5,
-            'title'      => 'Recent products',
-            'template'   => 'SonataProductBundle:Block:recent_products.html.twig',
+            'number' => 5,
+            'title' => 'Recent products',
+            'template' => 'SonataProductBundle:Block:recent_products.html.twig',
         ));
     }
 

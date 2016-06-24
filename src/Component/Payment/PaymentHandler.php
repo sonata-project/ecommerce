@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -74,12 +74,12 @@ class PaymentHandler implements PaymentHandlerInterface
      */
     public function __construct(OrderManagerInterface $orderManager, PaymentSelectorInterface $paymentSelector, ReferenceInterface $referenceGenerator, TransactionManagerInterface $transactionManager, BackendInterface $notificationBackend, EventDispatcherInterface $eventDispatcher)
     {
-        $this->orderManager        = $orderManager;
-        $this->paymentSelector     = $paymentSelector;
-        $this->referenceGenerator  = $referenceGenerator;
-        $this->transactionManager  = $transactionManager;
+        $this->orderManager = $orderManager;
+        $this->paymentSelector = $paymentSelector;
+        $this->referenceGenerator = $referenceGenerator;
+        $this->transactionManager = $transactionManager;
         $this->notificationBackend = $notificationBackend;
-        $this->eventDispatcher     = $eventDispatcher;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -89,7 +89,7 @@ class PaymentHandler implements PaymentHandlerInterface
     {
         // retrieve the transaction
         $transaction = $this->createTransaction($request);
-        $order       = $this->getValidOrder($transaction);
+        $order = $this->getValidOrder($transaction);
 
         $event = new PaymentEvent($order, $transaction);
         $this->getEventDispatcher()->dispatch(PaymentEvents::PRE_ERROR, $event);
@@ -112,7 +112,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $this->getEventDispatcher()->dispatch(PaymentEvents::POST_ERROR, $event);
 
         $this->notificationBackend->createAndPublish('sonata_payment_order_process', array(
-            'order_id'       => $order->getId(),
+            'order_id' => $order->getId(),
             'transaction_id' => $transaction->getId(),
         ));
 
@@ -125,7 +125,7 @@ class PaymentHandler implements PaymentHandlerInterface
     public function handleConfirmation(Request $request)
     {
         $transaction = $this->createTransaction($request);
-        $order       = $this->getValidOrder($transaction);
+        $order = $this->getValidOrder($transaction);
 
         $event = new PaymentEvent($order, $transaction);
         $this->getEventDispatcher()->dispatch(PaymentEvents::CONFIRMATION, $event);
@@ -162,7 +162,7 @@ class PaymentHandler implements PaymentHandlerInterface
     {
         // retrieve the transaction
         $transaction = $this->createTransaction($request);
-        $order       = $this->getValidOrder($transaction);
+        $order = $this->getValidOrder($transaction);
 
         $event = new PaymentEvent($order, $transaction);
         $this->getEventDispatcher()->dispatch(PaymentEvents::PRE_CALLBACK, $event);
@@ -177,7 +177,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $this->getEventDispatcher()->dispatch(PaymentEvents::POST_CALLBACK, $event);
 
         $this->notificationBackend->createAndPublish('sonata_payment_order_process', array(
-            'order_id'       => $order->getId(),
+            'order_id' => $order->getId(),
             'transaction_id' => $transaction->getId(),
         ));
 
@@ -207,7 +207,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $payment = $this->getPayment($transaction->getPaymentCode());
 
         // retrieve the related order
-        $reference  = $payment->getOrderReference($transaction);
+        $reference = $payment->getOrderReference($transaction);
 
         if (!$reference) {
             throw new InvalidTransactionException();

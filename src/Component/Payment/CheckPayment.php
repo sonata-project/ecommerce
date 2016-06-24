@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -39,8 +39,8 @@ class CheckPayment extends BasePayment
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, Browser $browser)
     {
-        $this->router  = $router;
-        $this->logger  = $logger;
+        $this->router = $router;
+        $this->logger = $logger;
         $this->browser = $browser;
     }
 
@@ -142,9 +142,9 @@ class CheckPayment extends BasePayment
     public function sendbank(OrderInterface $order)
     {
         $params = array(
-            'bank'       => $this->getCode(),
-            'reference'  => $order->getReference(),
-            'check'      => $this->generateUrlCheck($order),
+            'bank' => $this->getCode(),
+            'reference' => $order->getReference(),
+            'check' => $this->generateUrlCheck($order),
         );
 
         // call the callback handler ...

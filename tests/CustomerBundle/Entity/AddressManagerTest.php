@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -78,23 +78,6 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
         $addressManager->delete($address);
     }
 
-    protected function getAddressManager($qbCallback)
-    {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
-            'name',
-            'firstname',
-        ));
-
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
-
-        return new AddressManager('Sonata\CustomerBundle\Entity\BaseAddress', $registry);
-    }
-
     public function testGetPager()
     {
         $self = $this;
@@ -118,7 +101,8 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
     {
         $self = $this;
         $this
-            ->getAddressManager(function ($qb) use ($self) { })
+            ->getAddressManager(function ($qb) use ($self) {
+            })
             ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
     }
 
@@ -141,8 +125,25 @@ class AddressManagerTest extends \PHPUnit_Framework_TestCase
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
             })
             ->getPager(array(), 1, 10, array(
-                'name'       => 'ASC',
-                'firstname'  => 'DESC',
+                'name' => 'ASC',
+                'firstname' => 'DESC',
             ));
+    }
+
+    protected function getAddressManager($qbCallback)
+    {
+        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
+            $this->markTestSkipped('Not compatible with PHPUnit 5.');
+        }
+
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+            'name',
+            'firstname',
+        ));
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        return new AddressManager('Sonata\CustomerBundle\Entity\BaseAddress', $registry);
     }
 }

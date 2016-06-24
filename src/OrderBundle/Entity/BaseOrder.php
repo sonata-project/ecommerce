@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Currency\CurrencyInterface;
@@ -202,7 +211,15 @@ abstract class BaseOrder implements OrderInterface
 
     public function __construct()
     {
-        $this->orderElements     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orderElements = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getReference() ?: 'n/a';
     }
 
     public function prePersist()
@@ -214,14 +231,6 @@ abstract class BaseOrder implements OrderInterface
     public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getReference() ?: 'n/a';
     }
 
     /**
@@ -242,11 +251,11 @@ abstract class BaseOrder implements OrderInterface
     public function getDeliveryAsArray()
     {
         return array(
-            'firstname'    => $this->getShippingName(),
-            'lastname'     => '',
-            'address1'     => $this->getShippingAddress1(),
-            'postcode'     => $this->getShippingPostcode(),
-            'city'         => $this->getShippingCity(),
+            'firstname' => $this->getShippingName(),
+            'lastname' => '',
+            'address1' => $this->getShippingAddress1(),
+            'postcode' => $this->getShippingPostcode(),
+            'city' => $this->getShippingCity(),
             'country_code' => $this->getShippingCountryCode(),
         );
     }
@@ -266,11 +275,11 @@ abstract class BaseOrder implements OrderInterface
     public function getBillingAsArray()
     {
         return array(
-            'firstname'    => $this->getBillingName(),
-            'lastname'     => '',
-            'address1'     => $this->getBillingAddress1(),
-            'postcode'     => $this->getBillingPostcode(),
-            'city'         => $this->getBillingCity(),
+            'firstname' => $this->getBillingName(),
+            'lastname' => '',
+            'address1' => $this->getBillingAddress1(),
+            'postcode' => $this->getBillingPostcode(),
+            'city' => $this->getBillingCity(),
             'country_code' => $this->getBillingCountryCode(),
         );
     }
@@ -1006,12 +1015,12 @@ abstract class BaseOrder implements OrderInterface
     public static function getStatusList()
     {
         return array(
-            self::STATUS_OPEN      => 'status_open',
-            self::STATUS_PENDING   => 'status_pending',
+            self::STATUS_OPEN => 'status_open',
+            self::STATUS_PENDING => 'status_pending',
             self::STATUS_VALIDATED => 'status_validated',
             self::STATUS_CANCELLED => 'status_cancelled',
-            self::STATUS_ERROR     => 'status_error',
-            self::STATUS_STOPPED   => 'status_stopped',
+            self::STATUS_ERROR => 'status_error',
+            self::STATUS_STOPPED => 'status_stopped',
         );
     }
 
@@ -1063,7 +1072,7 @@ abstract class BaseOrder implements OrderInterface
                 $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $orderElement->getVatAmount());
             } else {
                 $amounts[$rate] = array(
-                    'rate'   => $rate,
+                    'rate' => $rate,
                     'amount' => $orderElement->getVatAmount(),
                 );
             }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -56,7 +56,7 @@ class BasketController extends Controller
 
         return $this->render('SonataBasketBundle:Basket:index.html.twig', array(
             'basket' => $this->get('sonata.basket'),
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -97,7 +97,7 @@ class BasketController extends Controller
     public function addProductAction()
     {
         $request = $this->get('request');
-        $params  = $request->get('add_basket');
+        $params = $request->get('add_basket');
 
         if ($request->getMethod() != 'POST') {
             throw new MethodNotAllowedException(array('POST'));
@@ -114,7 +114,7 @@ class BasketController extends Controller
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array(
-            'data_class'      => $this->container->getParameter('sonata.basket.basket_element.class'),
+            'data_class' => $this->container->getParameter('sonata.basket.basket_element.class'),
             'csrf_protection' => false,
         ));
 
@@ -144,22 +144,22 @@ class BasketController extends Controller
             if ($request->isXmlHttpRequest() && $provider->getOption('product_add_modal')) {
                 return $this->render('SonataBasketBundle:Basket:add_product_popin.html.twig', array(
                     'basketElement' => $basketElement,
-                    'locale'        => $basket->getLocale(),
-                    'product'       => $product,
-                    'price'         => $price,
-                    'currency'      => $currency,
-                    'quantity'      => $quantity,
-                    'provider'      => $provider,
+                    'locale' => $basket->getLocale(),
+                    'product' => $product,
+                    'price' => $price,
+                    'currency' => $currency,
+                    'quantity' => $quantity,
+                    'provider' => $provider,
                 ));
-            } else {
-                return new RedirectResponse($this->generateUrl('sonata_basket_index'));
             }
+
+            return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
         // an error occur, forward the request to the view
         return $this->forward('SonataProductBundle:Product:view', array(
             'productId' => $product,
-            'slug'      => $product->getSlug(),
+            'slug' => $product->getSlug(),
         ));
     }
 
@@ -251,9 +251,9 @@ class BasketController extends Controller
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), 'SonataBasketBundle'));
 
         return $this->render('SonataBasketBundle:Basket:payment_step.html.twig', array(
-            'basket'     => $basket,
-            'form'       => $form->createView(),
-            'customer'   => $customer,
+            'basket' => $basket,
+            'form' => $form->createView(),
+            'customer' => $customer,
         ));
     }
 
@@ -306,8 +306,8 @@ class BasketController extends Controller
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), 'SonataBasketBundle'));
 
         return $this->render($template, array(
-            'basket'   => $basket,
-            'form'     => $form->createView(),
+            'basket' => $basket,
+            'form' => $form->createView(),
             'customer' => $customer,
         ));
     }
@@ -372,9 +372,9 @@ class BasketController extends Controller
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', array(), 'SonataBasketBundle'));
 
         return $this->render($template, array(
-            'form'      => $form->createView(),
+            'form' => $form->createView(),
             'addresses' => $addresses,
-            'basket'    => $basket,
+            'basket' => $basket,
         ));
     }
 
@@ -437,7 +437,7 @@ class BasketController extends Controller
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), 'SonataBasketBundle'));
 
         return $this->render($template, array(
-            'form'      => $form->createView(),
+            'form' => $form->createView(),
             'addresses' => $addresses,
         ));
     }
@@ -476,7 +476,7 @@ class BasketController extends Controller
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_review_title', array(), 'SonataBasketBundle'));
 
         return $this->render('SonataBasketBundle:Basket:final_review_step.html.twig', array(
-            'basket'    => $basket,
+            'basket' => $basket,
             'tac_error' => $this->get('request')->getMethod() == 'POST',
         ));
     }

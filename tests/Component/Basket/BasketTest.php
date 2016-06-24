@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -149,7 +149,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(150, $basket->getTotal(false), '::getTotal() - return 150');
         $this->assertEquals(179.400, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
-        $this->assertEquals(29.400, $basket->getVatAmount(),  '::getVatAmount() w/o vat return 29.4');
+        $this->assertEquals(29.400, $basket->getVatAmount(), '::getVatAmount() w/o vat return 29.4');
     }
 
     public function testBasket()

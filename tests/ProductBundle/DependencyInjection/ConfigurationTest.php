@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -32,15 +32,15 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function validateClass($config)
     {
         $this->assertEquals(array(
-            'product'            => 'Application\\Sonata\\ProductBundle\\Entity\\Product',
-            'package'            => 'Application\\Sonata\\ProductBundle\\Entity\\Package',
-            'product_category'   => 'Application\\Sonata\\ProductBundle\\Entity\\ProductCategory',
+            'product' => 'Application\\Sonata\\ProductBundle\\Entity\\Product',
+            'package' => 'Application\\Sonata\\ProductBundle\\Entity\\Package',
+            'product_category' => 'Application\\Sonata\\ProductBundle\\Entity\\ProductCategory',
             'product_collection' => 'Application\\Sonata\\ProductBundle\\Entity\\ProductCollection',
-            'category'           => 'Application\\Sonata\\ClassificationBundle\\Entity\\Category',
-            'collection'         => 'Application\\Sonata\\ClassificationBundle\\Entity\\Collection',
-            'delivery'           => 'Application\\Sonata\\ProductBundle\\Entity\\Delivery',
-            'media'              => 'Application\\Sonata\\MediaBundle\\Entity\\Media',
-            'gallery'            => 'Application\\Sonata\\MediaBundle\\Entity\\Gallery',
+            'category' => 'Application\\Sonata\\ClassificationBundle\\Entity\\Category',
+            'collection' => 'Application\\Sonata\\ClassificationBundle\\Entity\\Collection',
+            'delivery' => 'Application\\Sonata\\ProductBundle\\Entity\\Delivery',
+            'media' => 'Application\\Sonata\\MediaBundle\\Entity\\Media',
+            'gallery' => 'Application\\Sonata\\MediaBundle\\Entity\\Gallery',
         ), $config['class']);
     }
 
@@ -48,9 +48,9 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(array(
             'product' => array(
-                'site'         => '@sonataproject',
-                'creator'      => '@th0masr',
-                'domain'       => 'http://demo.sonata-project.org',
+                'site' => '@sonataproject',
+                'creator' => '@th0masr',
+                'domain' => 'http://demo.sonata-project.org',
                 'media_prefix' => 'http://demo.sonata-project.org',
                 'media_format' => 'reference',
             ),

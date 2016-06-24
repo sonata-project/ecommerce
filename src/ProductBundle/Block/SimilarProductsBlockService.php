@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -56,8 +56,8 @@ class SimilarProductsBlockService extends BaseBlockService
     public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector, ProductFinderInterface $productFinder, $productClass)
     {
         $this->productRepository = $registry->getManager()->getRepository($productClass);
-        $this->currencyDetector  = $currencyDetector;
-        $this->productFinder     = $productFinder;
+        $this->currencyDetector = $currencyDetector;
+        $this->productFinder = $productFinder;
 
         parent::__construct($name, $templating);
     }
@@ -74,11 +74,11 @@ class SimilarProductsBlockService extends BaseBlockService
         $products = $this->getProductFinder()->getCrossSellingSimilarParentProducts($product, $blockContext->getSetting('number'));
 
         $params = array(
-            'context'   => $blockContext,
-            'settings'  => $blockContext->getSettings(),
-            'block'     => $blockContext->getBlock(),
-            'products'  => $products,
-            'currency'  => $this->currencyDetector->getCurrency(),
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'products' => $products,
+            'currency' => $this->currencyDetector->getCurrency(),
         );
 
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
@@ -120,10 +120,10 @@ class SimilarProductsBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'number'          => 5,
-            'title'           => 'Similar products',
+            'number' => 5,
+            'title' => 'Similar products',
             'base_product_id' => null,
-            'template'        => 'SonataProductBundle:Block:similar_products.html.twig',
+            'template' => 'SonataProductBundle:Block:similar_products.html.twig',
         ));
     }
 

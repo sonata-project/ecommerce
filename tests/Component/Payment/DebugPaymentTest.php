@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -63,6 +63,21 @@ class DebugPaymentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return \Sonata\Component\Order\OrderInterface
+     */
+    public function getOrder()
+    {
+        $date = new \DateTime();
+        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+
+        $order = new DebugPaymentTest_Order();
+        $order->setCreatedAt($date);
+
+        return $order;
+    }
+
+    /**
      * @return \Sonata\Component\Payment\TransactionManagerInterface
      */
     protected function getTransactionManager()
@@ -90,20 +105,5 @@ class DebugPaymentTest extends \PHPUnit_Framework_TestCase
         $payment = new DebugPayment($router, $browser);
 
         return $payment;
-    }
-
-    /**
-     * @return \Sonata\Component\Order\OrderInterface
-     */
-    public function getOrder()
-    {
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
-
-        $order = new DebugPaymentTest_Order();
-        $order->setCreatedAt($date);
-
-        return $order;
     }
 }

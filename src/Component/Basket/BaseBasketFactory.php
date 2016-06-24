@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -57,10 +57,10 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
      */
     public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, SessionInterface $session)
     {
-        $this->basketManager    = $basketManager;
-        $this->basketBuilder    = $basketBuilder;
+        $this->basketManager = $basketManager;
+        $this->basketBuilder = $basketBuilder;
         $this->currencyDetector = $currencyDetector;
-        $this->session          = $session;
+        $this->session = $session;
     }
 
     /**
@@ -80,6 +80,15 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
         $this->basketBuilder->build($basket);
 
         return $basket;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function logout(Request $request, Response $response, TokenInterface $token)
+    {
+        // Remove anonymous basket
+        $this->session->remove($this->getSessionVarName());
     }
 
     /**
@@ -108,15 +117,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     protected function storeInSession(BasketInterface $basket)
     {
         $this->session->set($this->getSessionVarName($basket->getCustomer()), $basket);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function logout(Request $request, Response $response, TokenInterface $token)
-    {
-        // Remove anonymous basket
-        $this->session->remove($this->getSessionVarName());
     }
 
     /**

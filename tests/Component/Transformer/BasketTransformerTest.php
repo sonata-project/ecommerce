@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -64,7 +64,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid billing address');
 
-        $basket   = new Basket();
+        $basket = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
 
         $basket->setCustomer($customer);
@@ -80,7 +80,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid payment method');
 
-        $basket   = new Basket();
+        $basket = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
 
@@ -98,7 +98,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid delivery method');
 
-        $basket   = new Basket();
+        $basket = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
@@ -118,7 +118,7 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException', 'Invalid delivery address');
 
-        $basket   = new Basket();
+        $basket = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
@@ -137,11 +137,9 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
-    /**
-     */
     public function testOrder()
     {
-        $basket   = new Basket();
+        $basket = new Basket();
         $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
         $billingAddress = $this->getMock('Sonata\Component\Customer\AddressInterface');
         $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');

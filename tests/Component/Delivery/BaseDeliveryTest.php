@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -24,21 +24,21 @@ class BaseDeliveryTest extends \PHPUnit_Framework_TestCase
         $delivery = new Delivery();
 
         $arrayDelivery = array(
-            'code'        => 'code',
-            'perItem'     => 1,
+            'code' => 'code',
+            'perItem' => 1,
             'countryCode' => 'FR',
-            'zone'        => 'zone',
-            'enabled'     => 1,
+            'zone' => 'zone',
+            'enabled' => 1,
         );
 
         $delivery->fromArray($arrayDelivery);
 
         $this->assertEquals($arrayDelivery, $delivery->toArray());
 
-        $this->assertEquals($delivery->getCode(),        $arrayDelivery['code']);
-        $this->assertEquals($delivery->getPerItem(),     $arrayDelivery['perItem']);
+        $this->assertEquals($delivery->getCode(), $arrayDelivery['code']);
+        $this->assertEquals($delivery->getPerItem(), $arrayDelivery['perItem']);
         $this->assertEquals($delivery->getCountryCode(), $arrayDelivery['countryCode']);
-        $this->assertEquals($delivery->getZone(),        $arrayDelivery['zone']);
-        $this->assertEquals($delivery->getEnabled(),     $arrayDelivery['enabled']);
+        $this->assertEquals($delivery->getZone(), $arrayDelivery['zone']);
+        $this->assertEquals($delivery->getEnabled(), $arrayDelivery['enabled']);
     }
 }

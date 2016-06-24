@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -31,11 +31,11 @@ class CatalogController extends Controller
      */
     public function indexAction()
     {
-        $page        = $this->getRequest()->get('page', 1);
-        $displayMax  = $this->getRequest()->get('max', 9);
+        $page = $this->getRequest()->get('page', 1);
+        $displayMax = $this->getRequest()->get('max', 9);
         $displayMode = $this->getRequest()->get('mode', 'grid');
-        $filter      = $this->getRequest()->get('filter');
-        $option      = $this->getRequest()->get('option');
+        $filter = $this->getRequest()->get('filter');
+        $option = $this->getRequest()->get('option');
 
         if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
             throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
@@ -50,10 +50,10 @@ class CatalogController extends Controller
 
         return $this->render('SonataProductBundle:Catalog:index.html.twig', array(
             'display_mode' => $displayMode,
-            'pager'        => $pagination,
-            'currency'     => $this->getCurrencyDetector()->getCurrency(),
-            'category'     => $category,
-            'provider'     => $this->getProviderFromCategory($category),
+            'pager' => $pagination,
+            'currency' => $this->getCurrencyDetector()->getCurrency(),
+            'category' => $category,
+            'provider' => $this->getProviderFromCategory($category),
         ));
     }
 
@@ -64,7 +64,7 @@ class CatalogController extends Controller
      */
     protected function retrieveCategoryFromQueryString()
     {
-        $categoryId   = $this->getRequest()->get('category_id');
+        $categoryId = $this->getRequest()->get('category_id');
         $categorySlug = $this->getRequest()->get('category_slug');
 
         if (!$categoryId || !$categorySlug) {
@@ -72,7 +72,7 @@ class CatalogController extends Controller
         }
 
         return $this->getCategoryManager()->findOneBy(array(
-            'id'      => $categoryId,
+            'id' => $categoryId,
             'enabled' => true,
         ));
     }

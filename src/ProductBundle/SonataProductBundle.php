@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -42,11 +42,11 @@ class SonataProductBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping(array(
-            'sonata_product_delivery_status'         => 'Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType',
-            'sonata_product_variation_choices'       => 'Sonata\Component\Form\Type\VariationChoiceType',
+            'sonata_product_delivery_status' => 'Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType',
+            'sonata_product_variation_choices' => 'Sonata\Component\Form\Type\VariationChoiceType',
             'sonata_product_api_form_product_parent' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
-            'sonata_product_api_form_product'        => 'Sonata\ProductBundle\Form\Type\ApiProductType',
-            'sonata_currency'                        => 'Sonata\Component\Currency\CurrencyFormType',
+            'sonata_product_api_form_product' => 'Sonata\ProductBundle\Form\Type\ApiProductType',
+            'sonata_currency' => 'Sonata\Component\Currency\CurrencyFormType',
         ));
     }
 }

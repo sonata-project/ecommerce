@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -55,10 +55,10 @@ class RecentCustomersBlockService extends BaseBlockService
         );
 
         return $this->renderResponse($blockContext->getTemplate(), array(
-            'context'    => $blockContext,
-            'settings'   => $blockContext->getSettings(),
-            'block'      => $blockContext->getBlock(),
-            'customers'  => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number')),
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'customers' => $this->manager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number')),
             'admin_pool' => $this->adminPool,
         ), $response);
     }
@@ -83,7 +83,7 @@ class RecentCustomersBlockService extends BaseBlockService
                 array('mode', 'choice', array(
                     'choices' => array(
                         'public' => 'public',
-                        'admin'  => 'admin',
+                        'admin' => 'admin',
                     ),
                 )),
             ),
@@ -104,11 +104,11 @@ class RecentCustomersBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'number'     => 5,
-            'mode'       => 'public',
-            'title'      => 'Recent Customers',
+            'number' => 5,
+            'mode' => 'public',
+            'title' => 'Recent Customers',
 //            'tags'      => 'Recent Customers',
-            'template'   => 'SonataCustomerBundle:Block:recent_customers.html.twig',
+            'template' => 'SonataCustomerBundle:Block:recent_customers.html.twig',
         ));
     }
 }

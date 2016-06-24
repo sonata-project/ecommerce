@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -63,7 +63,7 @@ class CategoriesMenuBlockService extends MenuBlockService
 
         $resolver->setDefaults(array(
                 'menu_template' => 'SonataBlockBundle:Block:block_side_menu_template.html.twig',
-                'safe_labels'   => true,
+                'safe_labels' => true,
             ));
     }
 
@@ -80,7 +80,7 @@ class CategoriesMenuBlockService extends MenuBlockService
             $menu = $this->menuBuilder->createCategoryMenu(
                 array(
                     'childrenAttributes' => array('class' => $settings['menu_class']),
-                    'attributes'         => array('class' => $settings['children_class']),
+                    'attributes' => array('class' => $settings['children_class']),
                 ),
                 $settings['current_uri']
             );
