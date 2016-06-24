@@ -137,7 +137,6 @@ class BasketTransformerTest extends \PHPUnit_Framework_TestCase
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
-
     public function testOrder()
     {
         $basket = new Basket();
