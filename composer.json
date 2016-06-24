@@ -20,18 +20,18 @@
         "knplabs/knp-paginator-bundle": "^2.4",
         "kriswallsmith/buzz": "^0.15",
         "nelmio/api-doc-bundle": "^2.4",
-        "sonata-project/block-bundle": "^2.3",
-        "sonata-project/classification-bundle": "^2.2",
-        "sonata-project/comment-bundle": "^2.2",
-        "sonata-project/core-bundle": "^2.3.2",
+        "sonata-project/block-bundle": "^3.0",
+        "sonata-project/classification-bundle": "^3.0",
+        "sonata-project/comment-bundle": "^3.0",
+        "sonata-project/core-bundle": "^3.0",
         "sonata-project/datagrid-bundle": "^2.2",
-        "sonata-project/doctrine-orm-admin-bundle": "^2.2",
-        "sonata-project/formatter-bundle": "^2.3",
-        "sonata-project/intl-bundle": "^2.1",
-        "sonata-project/media-bundle": "^2.2",
-        "sonata-project/notification-bundle": "^2.2",
-        "sonata-project/seo-bundle": "2.0.*",
-        "sonata-project/user-bundle": "^2.2",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.0",
+        "sonata-project/formatter-bundle": "^3.0",
+        "sonata-project/intl-bundle": "^2.2",
+        "sonata-project/media-bundle": "^3.0",
+        "sonata-project/notification-bundle": "^3.0",
+        "sonata-project/seo-bundle": "^2.0",
+        "sonata-project/user-bundle": "^3.0",
         "symfony/config": "^2.3",
         "symfony/console": "^2.3",
         "symfony/form": "^2.3",
@@ -45,6 +45,9 @@
     "require-dev": {
         "sllh/php-cs-fixer-styleci-bridge": "^2.1",
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
+    },
+    "conflict": {
+        "symfony/intl": "<2.3.20"
     },
     "autoload": {
         "psr-4": {
