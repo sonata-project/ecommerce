@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -23,7 +23,7 @@ class PaymentProcessOrderElementConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $consumer = $this->getConsumer();
 
-        $this->assertEquals(-1,  $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 1));
+        $this->assertEquals(-1, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 1));
         $this->assertEquals(-10, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 10));
     }
 

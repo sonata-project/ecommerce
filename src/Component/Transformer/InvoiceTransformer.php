@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -52,8 +52,8 @@ class InvoiceTransformer extends BaseTransformer
     public function __construct(InvoiceElementManagerInterface $invoiceElementManager, DeliveryPool $deliveryPool, EventDispatcherInterface $eventDispatcher)
     {
         $this->invoiceElementManager = $invoiceElementManager;
-        $this->deliveryPool          = $deliveryPool;
-        $this->eventDispatcher       = $eventDispatcher;
+        $this->deliveryPool = $deliveryPool;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

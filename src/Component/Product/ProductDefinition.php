@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -30,7 +30,7 @@ class ProductDefinition
     public function __construct(ProductProviderInterface $provider, ProductManagerInterface $manager)
     {
         $this->provider = $provider;
-        $this->manager  = $manager;
+        $this->manager = $manager;
     }
 
     /**

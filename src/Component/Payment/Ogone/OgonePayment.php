@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -50,9 +50,9 @@ class OgonePayment extends BasePayment
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, $debug)
     {
-        $this->templating   = $templating;
-        $this->router       = $router;
-        $this->debug        = $debug;
+        $this->templating = $templating;
+        $this->router = $router;
+        $this->debug = $debug;
 
         $this->setLogger($logger);
     }
@@ -79,20 +79,20 @@ class OgonePayment extends BasePayment
     public function isRequestValid(TransactionInterface $transaction)
     {
         $params = array(
-                'orderID'    => $transaction->get('orderID'),
-                'currency'   => $transaction->get('currency'),
-                'amount'     => $transaction->get('amount'),
-                'PM'         => $transaction->get('PM'),
+                'orderID' => $transaction->get('orderID'),
+                'currency' => $transaction->get('currency'),
+                'amount' => $transaction->get('amount'),
+                'PM' => $transaction->get('PM'),
                 'ACCEPTANCE' => $transaction->get('ACCEPTANCE'),
-                'STATUS'     => $transaction->get('STATUS'),
-                'CARDNO'     => $transaction->get('CARDNO'),
-                'ED'         => $transaction->get('ED'),
-                'CN'         => $transaction->get('CN'),
-                'TRXDATE'    => $transaction->get('TRXDATE'),
-                'PAYID'      => $transaction->get('PAYID'),
-                'NCERROR'    => $transaction->get('NCERROR'),
-                'BRAND'      => $transaction->get('BRAND'),
-                'IP'         => $transaction->get('IP'),
+                'STATUS' => $transaction->get('STATUS'),
+                'CARDNO' => $transaction->get('CARDNO'),
+                'ED' => $transaction->get('ED'),
+                'CN' => $transaction->get('CN'),
+                'TRXDATE' => $transaction->get('TRXDATE'),
+                'PAYID' => $transaction->get('PAYID'),
+                'NCERROR' => $transaction->get('NCERROR'),
+                'BRAND' => $transaction->get('BRAND'),
+                'IP' => $transaction->get('IP'),
         );
 
         $sha1 = $this->getShaSign($params, true);
@@ -159,10 +159,10 @@ class OgonePayment extends BasePayment
     public function sendbank(OrderInterface $order)
     {
         return $this->templating->renderResponse($this->getOption('template'), array(
-            'form_url'  => $this->getOption('form_url'),
-            'shasign'   => $this->getShaSign($this->getFormParameters($order)),
-            'fields'    => $this->getFormParameters($order),
-            'debug'     => $this->debug,
+            'form_url' => $this->getOption('form_url'),
+            'shasign' => $this->getShaSign($this->getFormParameters($order)),
+            'fields' => $this->getFormParameters($order),
+            'debug' => $this->debug,
         ));
     }
 
@@ -239,36 +239,36 @@ class OgonePayment extends BasePayment
     protected function getFormParameters(OrderInterface $order)
     {
         return array(
-            'PSPID'         => $this->getOption('pspid'),
-            'orderId'       => $order->getReference(),
-            'amount'        => $order->getTotalInc() * 100,
-            'currency'      => $order->getCurrency()->getLabel(),
-            'language'      => $order->getLocale(),
-            'CN'            => $order->getBillingName(),
-            'EMAIL'         => $order->getBillingEmail(),
-            'ownerZIP'      => $order->getBillingPostcode(),
-            'owneraddress'  => $this->getAddress($order),
-            'ownercty'      => $order->getBillingCity(),
-            'ownertelno'    => $order->getBillingPhone() ?: $order->getBillingMobile(),
+            'PSPID' => $this->getOption('pspid'),
+            'orderId' => $order->getReference(),
+            'amount' => $order->getTotalInc() * 100,
+            'currency' => $order->getCurrency()->getLabel(),
+            'language' => $order->getLocale(),
+            'CN' => $order->getBillingName(),
+            'EMAIL' => $order->getBillingEmail(),
+            'ownerZIP' => $order->getBillingPostcode(),
+            'owneraddress' => $this->getAddress($order),
+            'ownercty' => $order->getBillingCity(),
+            'ownertelno' => $order->getBillingPhone() ?: $order->getBillingMobile(),
 
-            'homeurl'       => $this->getOption('home_url'),
-            'catalogurl'    => $this->getOption('catalog_url'),
+            'homeurl' => $this->getOption('home_url'),
+            'catalogurl' => $this->getOption('catalog_url'),
 
-            'COMPLUS'       => '',
-            'PARAMPLUS'     => 'bank='.$this->getCode(),
-            'PARAMVAR'      => '',
+            'COMPLUS' => '',
+            'PARAMPLUS' => 'bank='.$this->getCode(),
+            'PARAMVAR' => '',
 
-            'PM'            => 'CreditCard',
-            'WIN3DS'        => 'MAINW',
-            'PMLIST'        => 'VISA;MasterCard;CB',
-            'PMListType'    => 2,
+            'PM' => 'CreditCard',
+            'WIN3DS' => 'MAINW',
+            'PMLIST' => 'VISA;MasterCard;CB',
+            'PMListType' => 2,
 
-            'accepturl'     => $this->generateAbsoluteUrlFromOption('url_callback', $order),
-            'declineurl'    => $this->generateAbsoluteUrlFromOption('url_callback', $order),
-            'exceptionurl'  => $this->generateAbsoluteUrlFromOption('url_return_ko', $order),
-            'cancelurl'     => $this->generateAbsoluteUrlFromOption('url_return_ko', $order),
+            'accepturl' => $this->generateAbsoluteUrlFromOption('url_callback', $order),
+            'declineurl' => $this->generateAbsoluteUrlFromOption('url_callback', $order),
+            'exceptionurl' => $this->generateAbsoluteUrlFromOption('url_return_ko', $order),
+            'cancelurl' => $this->generateAbsoluteUrlFromOption('url_return_ko', $order),
 
-            'operation'     => $this->getOperation(),
+            'operation' => $this->getOperation(),
         );
     }
 
@@ -283,9 +283,9 @@ class OgonePayment extends BasePayment
         return $this->router->generate(
             $this->getOption($optionKey),
             array(
-                'bank'      => $this->getCode(),
+                'bank' => $this->getCode(),
                 'reference' => $order->getReference(),
-                'check'     => $this->generateUrlCheck($order),
+                'check' => $this->generateUrlCheck($order),
             ),
             UrlGeneratorInterface::ABSOLUTE_URL
         );

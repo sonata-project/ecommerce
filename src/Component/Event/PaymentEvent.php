@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -48,9 +48,9 @@ class PaymentEvent extends Event
      */
     public function __construct(OrderInterface $order, TransactionInterface $transaction = null, Response $response = null)
     {
-        $this->order       = $order;
+        $this->order = $order;
         $this->transaction = $transaction;
-        $this->response    = $response;
+        $this->response = $response;
     }
 
     /**

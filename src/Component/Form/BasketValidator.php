@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -38,7 +38,7 @@ class BasketValidator extends ConstraintValidator
      */
     public function __construct(ProductPool $productPool, ConstraintValidatorFactory $constraintValidatorFactory)
     {
-        $this->productPool  = $productPool;
+        $this->productPool = $productPool;
         $this->constraintValidatorFactory = $constraintValidatorFactory;
     }
 

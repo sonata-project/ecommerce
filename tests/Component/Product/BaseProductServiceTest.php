@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -463,39 +463,39 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $product = new Product();
 
         $arrayProduct = array(
-            'sku'                       => 'productSku',
-            'slug'                      => 'productslug',
-            'name'                      => 'productName',
-            'description'               => 'productDescription',
-            'rawDescription'            => 'productRawDescription',
-            'descriptionFormatter'      => 'productDescriptionFormatter',
-            'shortDescription'          => 'productShortDescription',
-            'rawShortDescription'       => 'productRawShortDescription',
+            'sku' => 'productSku',
+            'slug' => 'productslug',
+            'name' => 'productName',
+            'description' => 'productDescription',
+            'rawDescription' => 'productRawDescription',
+            'descriptionFormatter' => 'productDescriptionFormatter',
+            'shortDescription' => 'productShortDescription',
+            'rawShortDescription' => 'productRawShortDescription',
             'shortDescriptionFormatter' => 'productShortDescriptionFormatter',
-            'price'                     => 123.45,
-            'vatRate'                   => 678.90,
-            'stock'                     => 12345,
-            'enabled'                   => 1,
-            'options'                   => array('key1' => 'value1', 'key2' => array('value2', 'value3')),
+            'price' => 123.45,
+            'vatRate' => 678.90,
+            'stock' => 12345,
+            'enabled' => 1,
+            'options' => array('key1' => 'value1', 'key2' => array('value2', 'value3')),
         );
 
         $product->fromArray($arrayProduct);
 
         $this->assertEquals($arrayProduct, $product->toArray());
 
-        $this->assertEquals($product->getSku(),                       $arrayProduct['sku']);
-        $this->assertEquals($product->getSlug(),                      $arrayProduct['slug']);
-        $this->assertEquals($product->getName(),                      $arrayProduct['name']);
-        $this->assertEquals($product->getDescription(),               $arrayProduct['description']);
-        $this->assertEquals($product->getRawDescription(),            $arrayProduct['rawDescription']);
-        $this->assertEquals($product->getDescriptionFormatter(),      $arrayProduct['descriptionFormatter']);
-        $this->assertEquals($product->getShortDescription(),          $arrayProduct['shortDescription']);
-        $this->assertEquals($product->getRawShortDescription(),       $arrayProduct['rawShortDescription']);
+        $this->assertEquals($product->getSku(), $arrayProduct['sku']);
+        $this->assertEquals($product->getSlug(), $arrayProduct['slug']);
+        $this->assertEquals($product->getName(), $arrayProduct['name']);
+        $this->assertEquals($product->getDescription(), $arrayProduct['description']);
+        $this->assertEquals($product->getRawDescription(), $arrayProduct['rawDescription']);
+        $this->assertEquals($product->getDescriptionFormatter(), $arrayProduct['descriptionFormatter']);
+        $this->assertEquals($product->getShortDescription(), $arrayProduct['shortDescription']);
+        $this->assertEquals($product->getRawShortDescription(), $arrayProduct['rawShortDescription']);
         $this->assertEquals($product->getShortDescriptionFormatter(), $arrayProduct['shortDescriptionFormatter']);
-        $this->assertEquals($product->getPrice(),                     $arrayProduct['price']);
-        $this->assertEquals($product->getVatRate(),                   $arrayProduct['vatRate']);
-        $this->assertEquals($product->getStock(),                     $arrayProduct['stock']);
-        $this->assertEquals($product->getEnabled(),                   $arrayProduct['enabled']);
-        $this->assertEquals($product->getOptions(),                   $arrayProduct['options']);
+        $this->assertEquals($product->getPrice(), $arrayProduct['price']);
+        $this->assertEquals($product->getVatRate(), $arrayProduct['vatRate']);
+        $this->assertEquals($product->getStock(), $arrayProduct['stock']);
+        $this->assertEquals($product->getEnabled(), $arrayProduct['enabled']);
+        $this->assertEquals($product->getOptions(), $arrayProduct['options']);
     }
 }

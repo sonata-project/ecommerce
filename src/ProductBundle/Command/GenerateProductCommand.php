@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -75,31 +75,31 @@ class GenerateProductCommand extends ContainerAwareCommand
         $output->writeln(' > mustaching skeleton files');
 
         Mustache::renderDir($bundle_dir, array(
-            'product'   => $input->getArgument('product'),
+            'product' => $input->getArgument('product'),
             'root_name' => strtolower(preg_replace('/[A-Z]/', '_\\0', $input->getArgument('product'))),
         ));
 
         $renames = array(
             // entity
-            '%s/Entity/Entity.php'                         => '%s/Entity/%s.php',
-            '%s/Repository/Repository.php'                 => '%s/Repository/%sRepository.php',
-            '%s/Provider/EntityProductProvider.php'        => '%s/Provider/%sProductProvider.php',
-            '%s/Resources/config/doctrine/Entity.orm.xml'  => '%s/Resources/config/doctrine/%s.orm.xml',
-            '%s/Resources/config/serializer/Entity.xml'    => '%s/Resources/config/serializer/Entity.%s.xml',
+            '%s/Entity/Entity.php' => '%s/Entity/%s.php',
+            '%s/Repository/Repository.php' => '%s/Repository/%sRepository.php',
+            '%s/Provider/EntityProductProvider.php' => '%s/Provider/%sProductProvider.php',
+            '%s/Resources/config/doctrine/Entity.orm.xml' => '%s/Resources/config/doctrine/%s.orm.xml',
+            '%s/Resources/config/serializer/Entity.xml' => '%s/Resources/config/serializer/Entity.%s.xml',
 
             // controller
-            '%s/Controller/Controller.php'                 => '%s/Controller/%sController.php',
+            '%s/Controller/Controller.php' => '%s/Controller/%sController.php',
 
             // templates
-            '%s/Resources/views/Entity/view.html.twig'                          => '%s/Resources/views/%s/view.html.twig',
-            '%s/Resources/views/Entity/form_basket_element.html.twig'           => '%s/Resources/views/%s/form_basket_element.html.twig',
-            '%s/Resources/views/Entity/final_review_basket_element.html.twig'   => '%s/Resources/views/%s/final_review_basket_element.html.twig',
+            '%s/Resources/views/Entity/view.html.twig' => '%s/Resources/views/%s/view.html.twig',
+            '%s/Resources/views/Entity/form_basket_element.html.twig' => '%s/Resources/views/%s/form_basket_element.html.twig',
+            '%s/Resources/views/Entity/final_review_basket_element.html.twig' => '%s/Resources/views/%s/final_review_basket_element.html.twig',
         );
 
         $dirs = array(
             sprintf('%s/Resources/views/%s', $bundle_dir, $input->getArgument('product')),
-            sprintf('%s/Product/%s',         $bundle_dir, $input->getArgument('product')),
-            sprintf('%s/Provider',           $bundle_dir),
+            sprintf('%s/Product/%s', $bundle_dir, $input->getArgument('product')),
+            sprintf('%s/Provider', $bundle_dir),
         );
 
         foreach ($dirs as $dir) {

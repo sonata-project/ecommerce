@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -37,7 +37,7 @@ class InvoiceStatusRendererTest extends \PHPUnit_Framework_TestCase
     public function testGetClass()
     {
         $renderer = new InvoiceStatusRenderer();
-        $invoice  = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoice = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
 
         $invoice->expects($this->once())->method('getStatus')->will($this->returnValue(array_rand(BaseInvoice::getStatusList())));
         $this->assertContains($renderer->getStatusClass($invoice, '', 'error'), array('danger', 'warning', 'success'));

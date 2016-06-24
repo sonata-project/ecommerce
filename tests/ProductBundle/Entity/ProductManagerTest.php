@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,24 +19,6 @@ use Sonata\ProductBundle\Entity\ProductManager;
  */
 class ProductManagerTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getProductManager($qbCallback)
-    {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
-            'sku',
-            'slug',
-            'name',
-        ));
-
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
-
-        return new ProductManager('Sonata\PageBundle\Entity\BaseProduct', $registry);
-    }
-
     public function testGetPager()
     {
         $self = $this;
@@ -87,7 +69,7 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
             })
             ->getPager(array(), 1, 10, array(
                 'name' => 'ASC',
-                'sku'  => 'DESC',
+                'sku' => 'DESC',
             ));
     }
 
@@ -111,5 +93,23 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('enabled' => false)));
             })
             ->getPager(array('enabled' => false), 1);
+    }
+
+    protected function getProductManager($qbCallback)
+    {
+        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
+            $this->markTestSkipped('Not compatible with PHPUnit 5.');
+        }
+
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+            'sku',
+            'slug',
+            'name',
+        ));
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        return new ProductManager('Sonata\PageBundle\Entity\BaseProduct', $registry);
     }
 }

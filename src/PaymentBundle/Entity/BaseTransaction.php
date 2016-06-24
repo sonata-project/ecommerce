@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -68,9 +68,9 @@ class BaseTransaction implements TransactionInterface
 
     public function __construct()
     {
-        $this->createdAt     = new \DateTime();
+        $this->createdAt = new \DateTime();
         $this->transactionId = 'n/a';
-        $this->information   = 'Transaction created';
+        $this->information = 'Transaction created';
         $this->setStatusCode(self::STATUS_OPEN);
     }
 
@@ -206,16 +206,16 @@ class BaseTransaction implements TransactionInterface
     public static function getStatusList()
     {
         return array(
-            TransactionInterface::STATUS_ORDER_UNKNOWN     => 'order_unknown',
-            TransactionInterface::STATUS_OPEN              => 'open',
-            TransactionInterface::STATUS_PENDING           => 'pending',
-            TransactionInterface::STATUS_VALIDATED         => 'validated',
-            TransactionInterface::STATUS_CANCELLED         => 'cancelled',
-            TransactionInterface::STATUS_UNKNOWN           => 'status_unknown',
-            TransactionInterface::STATUS_ERROR_VALIDATION  => 'error_validation',
-            TransactionInterface::STATUS_WRONG_CALLBACK    => 'wrong_callback',
-            TransactionInterface::STATUS_WRONG_REQUEST     => 'wrong_request',
-            TransactionInterface::STATUS_ORDER_NOT_OPEN    => 'order_to_open',
+            TransactionInterface::STATUS_ORDER_UNKNOWN => 'order_unknown',
+            TransactionInterface::STATUS_OPEN => 'open',
+            TransactionInterface::STATUS_PENDING => 'pending',
+            TransactionInterface::STATUS_VALIDATED => 'validated',
+            TransactionInterface::STATUS_CANCELLED => 'cancelled',
+            TransactionInterface::STATUS_UNKNOWN => 'status_unknown',
+            TransactionInterface::STATUS_ERROR_VALIDATION => 'error_validation',
+            TransactionInterface::STATUS_WRONG_CALLBACK => 'wrong_callback',
+            TransactionInterface::STATUS_WRONG_REQUEST => 'wrong_request',
+            TransactionInterface::STATUS_ORDER_NOT_OPEN => 'order_to_open',
         );
     }
 

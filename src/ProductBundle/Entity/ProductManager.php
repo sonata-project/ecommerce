@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -98,66 +98,10 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     {
         return $this->getRepository()
             ->findOneBy(array(
-                'id'      => $id,
-                'slug'    => $slug,
+                'id' => $id,
+                'slug' => $slug,
                 'enabled' => true,
             ));
-    }
-
-    /**
-     * Returns QueryBuilder for products.
-     *
-     * @param CategoryInterface $category
-     *
-     * @return QueryBuilder
-     */
-    protected function getCategoryProductsQueryBuilder(CategoryInterface $category = null)
-    {
-        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
-            ->leftJoin('p.image', 'i')
-            ->leftJoin('p.gallery', 'g');
-
-        if ($category) {
-            $queryBuilder
-                ->leftJoin('p.productCategories', 'pc')
-                ->andWhere('pc.category = :categoryId')
-                ->setParameter('categoryId', $category->getId());
-        }
-
-        return $queryBuilder;
-    }
-
-    /**
-     * @param array    $productCollections
-     * @param null|int $limit
-     *
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    protected function queryInSameCollections($productCollections, $limit = null)
-    {
-        $collections = array();
-        $productIds  = array();
-
-        foreach ($productCollections as $pCollection) {
-            $collections[] = $pCollection->getCollection();
-            if (false === array_search($pCollection->getProduct()->getId(), $productIds)) {
-                $productIds[] = $pCollection->getProduct()->getId();
-            }
-        }
-
-        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
-            ->distinct()
-            ->leftJoin('p.productCollections', 'pc')
-            ->where('pc.collection IN (:collections)')
-            ->andWhere('p.id NOT IN (:productIds)')
-            ->setParameter('collections', array_values($collections))
-            ->setParameter('productIds', array_values($productIds));
-
-        if (null !== $limit) {
-            $queryBuilder->setMaxResults($limit);
-        }
-
-        return $queryBuilder;
     }
 
     /**
@@ -231,5 +175,61 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
         $pager->init();
 
         return $pager;
+    }
+
+    /**
+     * Returns QueryBuilder for products.
+     *
+     * @param CategoryInterface $category
+     *
+     * @return QueryBuilder
+     */
+    protected function getCategoryProductsQueryBuilder(CategoryInterface $category = null)
+    {
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->leftJoin('p.image', 'i')
+            ->leftJoin('p.gallery', 'g');
+
+        if ($category) {
+            $queryBuilder
+                ->leftJoin('p.productCategories', 'pc')
+                ->andWhere('pc.category = :categoryId')
+                ->setParameter('categoryId', $category->getId());
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * @param array    $productCollections
+     * @param null|int $limit
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function queryInSameCollections($productCollections, $limit = null)
+    {
+        $collections = array();
+        $productIds = array();
+
+        foreach ($productCollections as $pCollection) {
+            $collections[] = $pCollection->getCollection();
+            if (false === array_search($pCollection->getProduct()->getId(), $productIds)) {
+                $productIds[] = $pCollection->getProduct()->getId();
+            }
+        }
+
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->distinct()
+            ->leftJoin('p.productCollections', 'pc')
+            ->where('pc.collection IN (:collections)')
+            ->andWhere('p.id NOT IN (:productIds)')
+            ->setParameter('collections', array_values($collections))
+            ->setParameter('productIds', array_values($productIds));
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder;
     }
 }

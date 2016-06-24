@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -57,9 +57,9 @@ class BasketTransformer extends BaseTransformer
      */
     public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
     {
-        $this->productPool     = $productPool;
-        $this->orderManager    = $orderManager;
-        $this->logger          = $logger;
+        $this->productPool = $productPool;
+        $this->orderManager = $orderManager;
+        $this->logger = $logger;
         $this->eventDispatcher = $eventDispatcher;
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -38,9 +38,9 @@ class ProductVariationAdminController extends Controller
 
         $form = $this->createFormBuilder(null, array())
             ->add('number', 'integer', array(
-                'required'    => true,
-                'label'       => $this->getTranslator()->trans('variations_number', array(), 'SonataProductBundle'),
-                'attr'        => array('min' => 1, 'max' => 10),
+                'required' => true,
+                'label' => $this->getTranslator()->trans('variations_number', array(), 'SonataProductBundle'),
+                'attr' => array('min' => 1, 'max' => 10),
                 'constraints' => array(
                     new NotBlank(),
                     new Range(array('min' => 1, 'max' => 10)),
@@ -57,7 +57,7 @@ class ProductVariationAdminController extends Controller
             if ($form->isValid()) {
                 $number = $form->get('number')->getData();
 
-                $manager         = $this->getProductManager();
+                $manager = $this->getProductManager();
                 $productProvider = $this->getProductPool()->getProvider($product);
 
                 for ($i = 1; $i <= $number; ++$i) {
@@ -82,7 +82,7 @@ class ProductVariationAdminController extends Controller
 
         return $this->render('SonataProductBundle:ProductAdmin:create_variation.html.twig', array(
             'object' => $product,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
             'action' => 'edit',
         ));
     }

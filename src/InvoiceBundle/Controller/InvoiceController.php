@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -58,7 +58,7 @@ class InvoiceController extends Controller
 
         return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(
             'invoice' => $invoice,
-            'order'   => $order,
+            'order' => $order,
         ));
     }
 

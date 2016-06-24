@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -58,10 +58,10 @@ class RecentOrdersBlockService extends BaseBlockService
      */
     public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, SecurityContextInterface $securityContext, Pool $adminPool = null)
     {
-        $this->orderManager    = $orderManager;
+        $this->orderManager = $orderManager;
         $this->customerManager = $customerManager;
         $this->securityContext = $securityContext;
-        $this->adminPool       = $adminPool;
+        $this->adminPool = $adminPool;
 
         parent::__construct($name, $templating);
     }
@@ -80,10 +80,10 @@ class RecentOrdersBlockService extends BaseBlockService
         }
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), array(
-            'context'    => $blockContext,
-            'settings'   => $blockContext->getSettings(),
-            'block'      => $blockContext->getBlock(),
-            'orders'     => $orders,
+            'context' => $blockContext,
+            'settings' => $blockContext->getSettings(),
+            'block' => $blockContext->getBlock(),
+            'orders' => $orders,
             'admin_pool' => $this->adminPool,
         ), $response);
     }
@@ -107,7 +107,7 @@ class RecentOrdersBlockService extends BaseBlockService
                 array('mode', 'choice', array(
                     'choices' => array(
                         'public' => 'public',
-                        'admin'  => 'admin',
+                        'admin' => 'admin',
                     ),
                 )),
             ),
@@ -128,10 +128,10 @@ class RecentOrdersBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'number'     => 5,
-            'mode'       => 'public',
-            'title'      => 'Recent Orders',
-            'template'   => 'SonataOrderBundle:Block:recent_orders.html.twig',
+            'number' => 5,
+            'mode' => 'public',
+            'title' => 'Recent Orders',
+            'template' => 'SonataOrderBundle:Block:recent_orders.html.twig',
         ));
     }
 }

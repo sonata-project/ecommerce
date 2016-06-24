@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -37,8 +37,8 @@ class BasketResizeFormListener implements EventSubscriberInterface
 
     public function __construct(FormFactoryInterface $factory, BasketInterface $basket)
     {
-        $this->factory  = $factory;
-        $this->basket   = $basket;
+        $this->factory = $factory;
+        $this->basket = $basket;
     }
 
     /**
@@ -48,7 +48,7 @@ class BasketResizeFormListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preBind',
+            FormEvents::PRE_SUBMIT => 'preBind',
         );
     }
 
@@ -61,6 +61,17 @@ class BasketResizeFormListener implements EventSubscriberInterface
         $basketElements = $event->getData();
 
         $this->buildBasketElements($form, $basketElements);
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function preBind(FormEvent $event)
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+
+        $this->buildBasketElements($form, $this->basket->getBasketElements());
     }
 
     /**
@@ -81,8 +92,8 @@ class BasketResizeFormListener implements EventSubscriberInterface
 
         foreach ($basketElements as $basketElement) {
             $basketElementBuilder = $this->factory->createNamedBuilder($basketElement->getPosition(), 'form', $basketElement, array(
-                'property_path'     => '['.$basketElement->getPosition().']',
-                'auto_initialize'   => false,
+                'property_path' => '['.$basketElement->getPosition().']',
+                'auto_initialize' => false,
             ));
             $basketElementBuilder->setErrorBubbling(false);
 
@@ -91,16 +102,5 @@ class BasketResizeFormListener implements EventSubscriberInterface
 
             $form->add($basketElementBuilder->getForm());
         }
-    }
-
-    /**
-     * @param FormEvent $event
-     */
-    public function preBind(FormEvent $event)
-    {
-        $form = $event->getForm();
-        $data = $event->getData();
-
-        $this->buildBasketElements($form, $this->basket->getBasketElements());
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -43,7 +43,7 @@ class PaymentProcessOrderElementConsumer implements ConsumerInterface
     public function __construct(ManagerInterface $orderElementManager, ProductPool $productPool)
     {
         $this->orderElementManager = $orderElementManager;
-        $this->productPool         = $productPool;
+        $this->productPool = $productPool;
     }
 
     /**
@@ -51,13 +51,13 @@ class PaymentProcessOrderElementConsumer implements ConsumerInterface
      */
     public function process(ConsumerEvent $event)
     {
-        $orderStatus       = $event->getMessage()->getValue('order_status');
+        $orderStatus = $event->getMessage()->getValue('order_status');
         $transactionStatus = $event->getMessage()->getValue('transaction_status');
-        $productId         = $event->getMessage()->getValue('product_id');
-        $productType       = $event->getMessage()->getValue('product_type');
-        $quantity          = $event->getMessage()->getValue('quantity');
+        $productId = $event->getMessage()->getValue('product_id');
+        $productType = $event->getMessage()->getValue('product_type');
+        $quantity = $event->getMessage()->getValue('quantity');
 
-        $productManager  = $this->getProductManager($productType);
+        $productManager = $this->getProductManager($productType);
         $productProvider = $this->getProductProvider($productType);
 
         $diff = $this->generateDiffValue($transactionStatus, $orderStatus, $quantity);

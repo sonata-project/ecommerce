@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -37,12 +37,12 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
         $menu = $this->getRootMenu($blockContext);
 
         $menu->addChild('sonata_product_catalog_breadcrumb', array(
-            'route'  => 'sonata_catalog_index',
+            'route' => 'sonata_catalog_index',
             'extras' => array('translation_domain' => 'SonataProductBundle'),
         ));
 
         $categories = array();
-        $product    = null;
+        $product = null;
 
         if ($category = $blockContext->getBlock()->getSetting('category')) {
             $sorted = array($category);
@@ -73,9 +73,9 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
         if (count($categories) > 0) {
             foreach ($categories as $category) {
                 $menu->addChild($category->getName(), array(
-                    'route'           => 'sonata_catalog_category',
+                    'route' => 'sonata_catalog_category',
                     'routeParameters' => array(
-                        'category_id'   => $category->getId(),
+                        'category_id' => $category->getId(),
                         'category_slug' => $category->getSlug(),
                     ),
                 ));
@@ -84,10 +84,10 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
 
         if ($product) {
             $menu->addChild($product->getName(), array(
-                'route'           => 'sonata_product_view',
+                'route' => 'sonata_product_view',
                 'routeParameters' => array(
                     'productId' => $product->getId(),
-                    'slug'      => $product->getSlug(),
+                    'slug' => $product->getSlug(),
                 ),
             ));
         }

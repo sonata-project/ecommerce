@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -162,12 +162,20 @@ abstract class BaseProduct implements ProductInterface
      */
     public function __construct()
     {
-        $this->packages           = new ArrayCollection();
-        $this->deliveries         = new ArrayCollection();
-        $this->productCategories  = new ArrayCollection();
+        $this->packages = new ArrayCollection();
+        $this->deliveries = new ArrayCollection();
+        $this->productCategories = new ArrayCollection();
         $this->productCollections = new ArrayCollection();
-        $this->variations         = new ArrayCollection();
-        $this->enabledVariations  = new ArrayCollection();
+        $this->variations = new ArrayCollection();
+        $this->enabledVariations = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return (string) $this->getName();
     }
 
     /**
@@ -777,14 +785,6 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function __toString()
-    {
-        return (string) $this->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isMaster()
     {
         return null === $this->parent;
@@ -891,20 +891,20 @@ abstract class BaseProduct implements ProductInterface
     public function toArray()
     {
         $baseArrayRep = array(
-            'sku'                       => $this->sku,
-            'slug'                      => $this->slug,
-            'name'                      => $this->name,
-            'description'               => $this->description,
-            'rawDescription'            => $this->rawDescription,
-            'descriptionFormatter'      => $this->descriptionFormatter,
-            'shortDescription'          => $this->shortDescription,
-            'rawShortDescription'       => $this->rawShortDescription,
+            'sku' => $this->sku,
+            'slug' => $this->slug,
+            'name' => $this->name,
+            'description' => $this->description,
+            'rawDescription' => $this->rawDescription,
+            'descriptionFormatter' => $this->descriptionFormatter,
+            'shortDescription' => $this->shortDescription,
+            'rawShortDescription' => $this->rawShortDescription,
             'shortDescriptionFormatter' => $this->shortDescriptionFormatter,
-            'price'                     => $this->price,
-            'vatRate'                   => $this->vatRate,
-            'stock'                     => $this->stock,
-            'enabled'                   => $this->enabled,
-            'options'                   => $this->options,
+            'price' => $this->price,
+            'vatRate' => $this->vatRate,
+            'stock' => $this->stock,
+            'enabled' => $this->enabled,
+            'options' => $this->options,
         );
 
         return $baseArrayRep;

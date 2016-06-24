@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -27,15 +27,15 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 abstract class BasePaypal extends BasePayment
 {
-    const PAYMENT_STATUS_CANCELED_REVERSAL  = 'Canceled_Reversal';
-    const PAYMENT_STATUS_COMPLETED          = 'Completed';
-    const PAYMENT_STATUS_DENIED             = 'Denied';
-    const PAYMENT_STATUS_FAILED             = 'Failed';
-    const PAYMENT_STATUS_PENDING            = 'Pending';
-    const PAYMENT_STATUS_REFUNDED           = 'Refunded';
-    const PAYMENT_STATUS_REVERSED           = 'Reversed';
-    const PAYMENT_STATUS_PROCESSED          = 'Processed';
-    const PAYMENT_STATUS_VOIDED             = 'Voided';
+    const PAYMENT_STATUS_CANCELED_REVERSAL = 'Canceled_Reversal';
+    const PAYMENT_STATUS_COMPLETED = 'Completed';
+    const PAYMENT_STATUS_DENIED = 'Denied';
+    const PAYMENT_STATUS_FAILED = 'Failed';
+    const PAYMENT_STATUS_PENDING = 'Pending';
+    const PAYMENT_STATUS_REFUNDED = 'Refunded';
+    const PAYMENT_STATUS_REVERSED = 'Reversed';
+    const PAYMENT_STATUS_PROCESSED = 'Processed';
+    const PAYMENT_STATUS_VOIDED = 'Voided';
 
     /**
      * @var RouterInterface
@@ -122,10 +122,10 @@ abstract class BasePaypal extends BasePayment
      */
     public function checkPaypalFiles()
     {
-        $key_file           = $this->getOption('key_file');
-        $cert_file          = $this->getOption('cert_file');
-        $paypal_cert_file   = $this->getOption('paypal_cert_file');
-        $openssl            = $this->getOption('openssl');
+        $key_file = $this->getOption('key_file');
+        $cert_file = $this->getOption('cert_file');
+        $paypal_cert_file = $this->getOption('paypal_cert_file');
+        $openssl = $this->getOption('openssl');
 
         // key file
         if (!file_exists($key_file)) {
@@ -210,10 +210,10 @@ abstract class BasePaypal extends BasePayment
     {
         $this->checkPaypalFiles();
 
-        $key_file           = $this->getOption('key_file');
-        $cert_file          = $this->getOption('cert_file');
-        $paypal_cert_file   = $this->getOption('paypal_cert_file');
-        $openssl            = $this->getOption('openssl');
+        $key_file = $this->getOption('key_file');
+        $cert_file = $this->getOption('cert_file');
+        $paypal_cert_file = $this->getOption('paypal_cert_file');
+        $openssl = $this->getOption('openssl');
 
         $openssl_cmd = "$openssl smime -sign -signer $cert_file -inkey $key_file ".
             "-outform der -nodetach -binary | $openssl smime -encrypt ".
@@ -271,9 +271,9 @@ abstract class BasePaypal extends BasePayment
     {
         $this->checkPaypalFiles();
 
-        $key_file         = $this->getOption('key_file');
-        $cert_file        = $this->getOption('cert_file');
-        $openssl          = $this->getOption('openssl');
+        $key_file = $this->getOption('key_file');
+        $cert_file = $this->getOption('cert_file');
+        $openssl = $this->getOption('openssl');
         $paypal_cert_file = $this->getOption('paypal_cert_file');
 
         // create tmp file
@@ -321,15 +321,15 @@ abstract class BasePaypal extends BasePayment
     public static function getPaymentStatusList()
     {
         return array(
-            self::PAYMENT_STATUS_CANCELED_REVERSAL  => 'A reversal has been cancelled. For example, you won a dispute with the customer, and the funds for the transaction that was reversed have been returned to you',
-            self::PAYMENT_STATUS_COMPLETED          => 'The payment has been completed, and the funds have been added successfully to your account balance',
-            self::PAYMENT_STATUS_DENIED             => 'You denied the payment. This happens only if the payment was previously pending because of possible reasons',
-            self::PAYMENT_STATUS_FAILED             => 'The payment has failed. This happens only if the payment was made from your customer’s bank account.',
-            self::PAYMENT_STATUS_PENDING            => 'The payment is pending. See pending_reason for more information.',
-            self::PAYMENT_STATUS_REFUNDED           => 'You refunded the payment.',
-            self::PAYMENT_STATUS_REVERSED           => 'A payment was reversed due to a chargeback or other type of reversal. The funds have been removed from your account balance and returned to the buyer. The reason for the reversal is specified in the ReasonCode element.',
-            self::PAYMENT_STATUS_PROCESSED          => 'A payment has been accepted.',
-            self::PAYMENT_STATUS_VOIDED             => 'This authorization has been voided.',
+            self::PAYMENT_STATUS_CANCELED_REVERSAL => 'A reversal has been cancelled. For example, you won a dispute with the customer, and the funds for the transaction that was reversed have been returned to you',
+            self::PAYMENT_STATUS_COMPLETED => 'The payment has been completed, and the funds have been added successfully to your account balance',
+            self::PAYMENT_STATUS_DENIED => 'You denied the payment. This happens only if the payment was previously pending because of possible reasons',
+            self::PAYMENT_STATUS_FAILED => 'The payment has failed. This happens only if the payment was made from your customer’s bank account.',
+            self::PAYMENT_STATUS_PENDING => 'The payment is pending. See pending_reason for more information.',
+            self::PAYMENT_STATUS_REFUNDED => 'You refunded the payment.',
+            self::PAYMENT_STATUS_REVERSED => 'A payment was reversed due to a chargeback or other type of reversal. The funds have been removed from your account balance and returned to the buyer. The reason for the reversal is specified in the ReasonCode element.',
+            self::PAYMENT_STATUS_PROCESSED => 'A payment has been accepted.',
+            self::PAYMENT_STATUS_VOIDED => 'This authorization has been voided.',
         );
     }
 

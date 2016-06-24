@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -55,9 +55,9 @@ class AddBasketElementEvent extends Event
      */
     public function __construct(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product, ProductProviderInterface $productProvider)
     {
-        $this->basket          = $basket;
-        $this->basketElement   = $basketElement;
-        $this->product         = $product;
+        $this->basket = $basket;
+        $this->basketElement = $basketElement;
+        $this->product = $product;
         $this->productProvider = $productProvider;
     }
 

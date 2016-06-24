@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -112,12 +112,12 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function setProduct($productCode, ProductInterface $product)
     {
-        $this->product      = $product;
-        $this->productId    = $product->getId();
-        $this->productCode  = $productCode;
-        $this->name         = $product->getName();
-        $this->price        = $product->getPrice();
-        $this->options      = $product->getOptions();
+        $this->product = $product;
+        $this->productId = $product->getId();
+        $this->productCode = $productCode;
+        $this->name = $product->getName();
+        $this->price = $product->getPrice();
+        $this->options = $product->getOptions();
     }
 
     /**
@@ -359,16 +359,16 @@ class BasketElement implements \Serializable, BasketElementInterface
     public function serialize()
     {
         return serialize(array(
-            'productId'         => $this->productId,
-            'position'          => $this->position,
-            'unitPrice'         => $this->unitPrice,
-            'price'             => $this->price,
+            'productId' => $this->productId,
+            'position' => $this->position,
+            'unitPrice' => $this->unitPrice,
+            'price' => $this->price,
             'priceIncludingVat' => $this->priceIncludingVat,
-            'quantity'          => $this->quantity,
-            'vatRate'           => $this->vatRate,
-            'options'           => $this->options,
-            'name'              => $this->name,
-            'productCode'       => $this->productCode,
+            'quantity' => $this->quantity,
+            'vatRate' => $this->vatRate,
+            'options' => $this->options,
+            'name' => $this->name,
+            'productCode' => $this->productCode,
         ));
     }
 
@@ -379,16 +379,16 @@ class BasketElement implements \Serializable, BasketElementInterface
     {
         $data = unserialize($data);
 
-        $this->productId         = $data['productId'];
-        $this->position          = $data['position'];
-        $this->unitPrice         = $data['unitPrice'];
-        $this->price             = $data['price'];
+        $this->productId = $data['productId'];
+        $this->position = $data['position'];
+        $this->unitPrice = $data['unitPrice'];
+        $this->price = $data['price'];
         $this->priceIncludingVat = $data['priceIncludingVat'];
-        $this->vatRate           = $data['vatRate'];
-        $this->quantity          = $data['quantity'];
-        $this->options           = $data['options'];
-        $this->name              = $data['name'];
-        $this->productCode       = $data['productCode'];
+        $this->vatRate = $data['vatRate'];
+        $this->quantity = $data['quantity'];
+        $this->options = $data['options'];
+        $this->name = $data['name'];
+        $this->productCode = $data['productCode'];
     }
 
     /**

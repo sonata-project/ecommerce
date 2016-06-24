@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -65,9 +65,9 @@ class CustomerController
     public function __construct(CustomerManagerInterface $customerManager, OrderManagerInterface $orderManager, AddressManagerInterface $addressManager, FormFactoryInterface $formFactory)
     {
         $this->customerManager = $customerManager;
-        $this->orderManager    = $orderManager;
-        $this->addressManager  = $addressManager;
-        $this->formFactory     = $formFactory;
+        $this->orderManager = $orderManager;
+        $this->addressManager = $addressManager;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -94,9 +94,9 @@ class CustomerController
             'is_fake' => '',
         );
 
-        $page     = $paramFetcher->get('page');
-        $limit    = $paramFetcher->get('count');
-        $sort     = $paramFetcher->get('orderBy');
+        $page = $paramFetcher->get('page');
+        $limit = $paramFetcher->get('count');
+        $sort = $paramFetcher->get('orderBy');
         $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
         foreach ($criteria as $key => $value) {
@@ -188,40 +188,6 @@ class CustomerController
     public function putCustomerAction($id, Request $request)
     {
         return $this->handleWriteCustomer($request, $id);
-    }
-
-    /**
-     * Write a customer, this method is used by both POST and PUT action methods.
-     *
-     * @param Request  $request Symfony request
-     * @param int|null $id      A customer identifier
-     *
-     * @return \FOS\RestBundle\View\View|FormInterface
-     */
-    protected function handleWriteCustomer($request, $id = null)
-    {
-        $customer = $id ? $this->getCustomer($id) : null;
-
-        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_customer', $customer, array(
-            'csrf_protection' => false,
-        ));
-
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $customer = $form->getData();
-            $this->customerManager->save($customer);
-
-            $view = \FOS\RestBundle\View\View::create($customer);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
-
-            return $view;
-        }
-
-        return $form;
     }
 
     /**
@@ -348,6 +314,40 @@ class CustomerController
             $this->addressManager->save($address);
 
             $view = \FOS\RestBundle\View\View::create($address);
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->enableMaxDepthChecks();
+            $view->setSerializationContext($serializationContext);
+
+            return $view;
+        }
+
+        return $form;
+    }
+
+    /**
+     * Write a customer, this method is used by both POST and PUT action methods.
+     *
+     * @param Request  $request Symfony request
+     * @param int|null $id      A customer identifier
+     *
+     * @return \FOS\RestBundle\View\View|FormInterface
+     */
+    protected function handleWriteCustomer($request, $id = null)
+    {
+        $customer = $id ? $this->getCustomer($id) : null;
+
+        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_customer', $customer, array(
+            'csrf_protection' => false,
+        ));
+
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $customer = $form->getData();
+            $this->customerManager->save($customer);
+
+            $view = \FOS\RestBundle\View\View::create($customer);
             $serializationContext = SerializationContext::create();
             $serializationContext->setGroups(array('sonata_api_read'));
             $serializationContext->enableMaxDepthChecks();

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -54,7 +54,7 @@ class ProductController extends Controller
         $action = sprintf('%s:view', $provider->getBaseControllerName());
         $response = $this->forward($action, array(
             'provider' => $provider,
-            'product'  => $product,
+            'product' => $product,
         ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -81,9 +81,9 @@ class ProductController extends Controller
         $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName());
 
         $response = $this->forward($action, array(
-            'formView'       => $formView,
-            'basketElement'  => $basketElement,
-            'basket'         => $basket,
+            'formView' => $formView,
+            'basketElement' => $basketElement,
+            'basket' => $basket,
         ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -139,10 +139,10 @@ class ProductController extends Controller
         $price = $provider->calculatePrice($product, $currency, true, $quantity);
 
         return new JsonResponse(array(
-            'stock'      => $stock,
-            'price'      => $price,
+            'stock' => $stock,
+            'price' => $price,
             'price_text' => $this->get('sonata.intl.templating.helper.number')->formatCurrency($price, $currency),
-            'errors'     => $errors,
+            'errors' => $errors,
         ));
     }
 
@@ -154,11 +154,11 @@ class ProductController extends Controller
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
     {
-        $action = sprintf('%s:renderFinalReviewBasketElement',  $basketElement->getProductProvider()->getBaseControllerName());
+        $action = sprintf('%s:renderFinalReviewBasketElement', $basketElement->getProductProvider()->getBaseControllerName());
 
         $response = $this->forward($action, array(
-            'basketElement'  => $basketElement,
-            'basket'         => $basket,
+            'basketElement' => $basketElement,
+            'basket' => $basket,
         ));
 
         if ($this->get('kernel')->isDebug()) {
@@ -244,7 +244,7 @@ class ProductController extends Controller
 
         $form = $this->createForm('sonata_product_variation_choices', $currentValues, array(
             'product' => $product,
-            'fields'  => array_keys($data),
+            'fields' => array_keys($data),
         ));
 
         $form->handleRequest($this->getRequest());
@@ -260,7 +260,7 @@ class ProductController extends Controller
 
         $action = sprintf('%s:variationToProduct', $provider->getBaseControllerName());
         $response = $this->forward($action, array(
-            'product'   => $product,
+            'product' => $product,
             'variation' => $variation,
         ));
 

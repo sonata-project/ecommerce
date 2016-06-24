@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -62,7 +62,7 @@ class FiltersMenuBlockService extends MenuBlockService
         parent::setDefaultSettings($resolver);
 
         $resolver->setDefaults(array(
-            'menu_class'       => 'nav nav-list',
+            'menu_class' => 'nav nav-list',
             'product_provider' => null,
         ));
     }

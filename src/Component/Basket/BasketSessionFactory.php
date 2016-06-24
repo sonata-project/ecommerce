@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -45,10 +45,10 @@ class BasketSessionFactory extends BaseBasketFactory
      */
     public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, SessionInterface $session)
     {
-        $this->basketManager    = $basketManager;
-        $this->basketBuilder    = $basketBuilder;
+        $this->basketManager = $basketManager;
+        $this->basketBuilder = $basketBuilder;
         $this->currencyDetector = $currencyDetector;
-        $this->session          = $session;
+        $this->session = $session;
     }
 
     /**

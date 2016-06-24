@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -51,9 +51,9 @@ class ProductMenuBuilder
      */
     public function __construct(FactoryInterface $factory, ProductCategoryManagerInterface $categoryManager, RouterInterface $router)
     {
-        $this->factory         = $factory;
+        $this->factory = $factory;
         $this->categoryManager = $categoryManager;
-        $this->router          = $router;
+        $this->router = $router;
     }
 
     /**
@@ -157,13 +157,13 @@ class ProductMenuBuilder
             }
 
             $fullOptions = array_merge(array(
-                'attributes'      => array('class' => ''),      // Ensuring it is set
-                'route'           => 'sonata_catalog_category',
+                'attributes' => array('class' => ''),      // Ensuring it is set
+                'route' => 'sonata_catalog_category',
                 'routeParameters' => array(
-                    'category_id'   => $category->getId(),
+                    'category_id' => $category->getId(),
                     'category_slug' => $category->getSlug(),
                 ),
-                'extras'           => array(
+                'extras' => array(
                     'safe_label' => true,
                 ),
             ), $options);

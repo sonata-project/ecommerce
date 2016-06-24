@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -45,12 +45,12 @@ class ServiceDeliveryTest extends \PHPUnit_Framework_TestCase
     public function testGetStatusList()
     {
         $statusList = array(
-            ServiceDeliveryInterface::STATUS_OPEN          => 'status_open',
-            ServiceDeliveryInterface::STATUS_PENDING       => 'status_pending',
-            ServiceDeliveryInterface::STATUS_SENT          => 'status_sent',
-            ServiceDeliveryInterface::STATUS_CANCELLED     => 'status_cancelled',
-            ServiceDeliveryInterface::STATUS_COMPLETED     => 'status_completed',
-            ServiceDeliveryInterface::STATUS_RETURNED      => 'status_returned',
+            ServiceDeliveryInterface::STATUS_OPEN => 'status_open',
+            ServiceDeliveryInterface::STATUS_PENDING => 'status_pending',
+            ServiceDeliveryInterface::STATUS_SENT => 'status_sent',
+            ServiceDeliveryInterface::STATUS_CANCELLED => 'status_cancelled',
+            ServiceDeliveryInterface::STATUS_COMPLETED => 'status_completed',
+            ServiceDeliveryInterface::STATUS_RETURNED => 'status_returned',
         );
         $this->assertEquals($statusList, BaseDelivery::getStatusList());
         $this->assertEquals($statusList, BaseServiceDelivery::getStatusList());

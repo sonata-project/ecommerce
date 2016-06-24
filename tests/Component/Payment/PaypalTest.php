@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -24,15 +24,15 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
 {
     public function testSendbank()
     {
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
 
-        $paypal  = new Paypal($router, $translator);
+        $paypal = new Paypal($router, $translator);
         $options = array(
-            'cert_file'        => __DIR__.'/PaypalTestFiles/cert_file',
-            'key_file'         => __DIR__.'/PaypalTestFiles/key_file',
+            'cert_file' => __DIR__.'/PaypalTestFiles/cert_file',
+            'key_file' => __DIR__.'/PaypalTestFiles/key_file',
             'paypal_cert_file' => __DIR__.'/PaypalTestFiles/paypal_cert_file',
-            'openssl'          => __DIR__.'/PaypalTestFiles/openssl',
+            'openssl' => __DIR__.'/PaypalTestFiles/openssl',
         );
         $paypal->setOptions($options);
 
@@ -47,10 +47,10 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
 
     public function testIsCallbackValid()
     {
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
 
-        $paypal  = new Paypal($router, $translator);
+        $paypal = new Paypal($router, $translator);
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
@@ -90,14 +90,14 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
-                    $asked = func_get_arg(0);
-                    switch ($asked) {
+            $asked = func_get_arg(0);
+            switch ($asked) {
                         case 'check':
                             return $check;
                         case 'payment_status':
                             return 'Pending';
                     }
-                }));
+        }));
 
         $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status pending.');
 
@@ -105,14 +105,14 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
-                    $asked = func_get_arg(0);
-                    switch ($asked) {
+            $asked = func_get_arg(0);
+            switch ($asked) {
                         case 'check':
                             return $check;
                         case 'payment_status':
                             return 'Completed';
                     }
-                }));
+        }));
 
         $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status completed.');
 
@@ -120,24 +120,24 @@ class PaypalTest extends \PHPUnit_Framework_TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
-                    $asked = func_get_arg(0);
-                    switch ($asked) {
+            $asked = func_get_arg(0);
+            switch ($asked) {
                         case 'check':
                             return $check;
                         case 'payment_status':
                             return 'Cancelled';
                     }
-                }));
+        }));
 
         $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status cancelled.');
     }
 
     public function testHandleError()
     {
-        $router     = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
         $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
 
-        $paypal  = new Paypal($router, $translator);
+        $paypal = new Paypal($router, $translator);
         $paypal->setLogger($this->getMock('Psr\Log\LoggerInterface'));
 
         $order = $this->getMock('Sonata\Component\Order\OrderInterface');

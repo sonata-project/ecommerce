@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -17,9 +17,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 {
     public function testLoadBasket()
     {
-        $customer         = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $basket           = $this->getMock('Sonata\Component\Basket\BasketInterface');
-        $basketFactory    = $this->getMock('Sonata\Component\Basket\BasketFactoryInterface');
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basketFactory = $this->getMock('Sonata\Component\Basket\BasketFactoryInterface');
         $basketFactory->expects($this->once())->method('load')->will($this->returnValue($basket));
 
         $customerSelector = $this->getMock('Sonata\Component\Customer\CustomerSelectorInterface');
@@ -37,8 +37,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException');
 
-        $customer         = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $basketFactory    = $this->getMock('Sonata\Component\Basket\BasketFactoryInterface');
+        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $basketFactory = $this->getMock('Sonata\Component\Basket\BasketFactoryInterface');
         $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(function () {
             throw new \RuntimeException();
         }));

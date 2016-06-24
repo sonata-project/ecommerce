@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -106,55 +106,13 @@ class ProductAdmin extends Admin
             return;
         }
 
-        $product  = $this->getProduct();
+        $product = $this->getProduct();
         $provider = $this->getProductProvider($product);
 
         if ($product->getId() > 0) {
             $provider->buildEditForm($formMapper, $product->isVariation());
         } else {
             $provider->buildCreateForm($formMapper);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
-    {
-        if (!$childAdmin && !in_array($action, array('edit'))) {
-            return;
-        }
-
-        $admin = $this->isChild() ? $this->getParent() : $this;
-
-        $id      = $admin->getRequest()->get('id');
-        $product = $this->getObject($id);
-
-        $menu->addChild(
-            $this->trans('product.sidemenu.link_product_edit', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
-        );
-
-        $menu->addChild(
-            $this->trans('product.sidemenu.view_categories', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.product.category.list', array('id' => $id)))
-        );
-
-        $menu->addChild(
-            $this->trans('product.sidemenu.view_collections', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.product.collection.list', array('id' => $id)))
-        );
-
-        $menu->addChild(
-            $this->trans('product.sidemenu.view_deliveries', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
-        );
-
-        if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
-            $menu->addChild(
-                $this->trans('product.sidemenu.view_variations'),
-                array('uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', array('id' => $id)))
-            );
         }
     }
 
@@ -170,26 +128,6 @@ class ProductAdmin extends Admin
         return array(
             'provider' => $this->getProductType(),
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        // this admin class works only from a request scope
-        if (!$this->hasRequest()) {
-            return;
-        }
-
-        if ($this->isChild()) { // variation
-            return;
-        }
-
-        $product  = $this->getProduct();
-        $provider = $this->getProductProvider($product);
-
-        $provider->configureShowFields($showMapper);
     }
 
     /**
@@ -286,5 +224,67 @@ class ProductAdmin extends Admin
         if ($product->hasVariations()) {
             $provider->synchronizeVariations($product);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+        $product = $this->getObject($id);
+
+        $menu->addChild(
+            $this->trans('product.sidemenu.link_product_edit', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('product.sidemenu.view_categories', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('sonata.product.admin.product.category.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('product.sidemenu.view_collections', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('sonata.product.admin.product.collection.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            $this->trans('product.sidemenu.view_deliveries', array(), 'SonataProductBundle'),
+            array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
+        );
+
+        if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
+            $menu->addChild(
+                $this->trans('product.sidemenu.view_variations'),
+                array('uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', array('id' => $id)))
+            );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        // this admin class works only from a request scope
+        if (!$this->hasRequest()) {
+            return;
+        }
+
+        if ($this->isChild()) { // variation
+            return;
+        }
+
+        $product = $this->getProduct();
+        $provider = $this->getProductProvider($product);
+
+        $provider->configureShowFields($showMapper);
     }
 }
