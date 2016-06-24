@@ -1,5 +1,6 @@
 {
     "name": "sonata-project/ecommerce",
+    "type": "symfony-bundle",
     "description": "E-Commerce solution provided by Sonata",
     "license": "MIT",
     "authors": [
@@ -9,44 +10,41 @@
         }
     ],
     "require" : {
-        "symfony/http-foundation": "~2.3|~3.0",
-        "symfony/form": "~2.3|~3.0",
-        "symfony/validator": "~2.3|~3.0",
-        "symfony/security-bundle": "~2.3|~3.0",
-        "symfony/routing": "~2.3|~3.0",
-        "symfony/config": "~2.3|~3.0",
-        "symfony/console": "~2.3|~3.0",
-        "symfony/process": "~2.3|~3.0",
-        "symfony/twig-bridge": "~2.3|~3.0",
-
+        "php": "^5.3 || ^7.0",
+        "friendsofsymfony/comment-bundle": "^2.0",
+        "friendsofsymfony/rest-bundle": "^1.1",
+        "friendsofsymfony/user-bundle": "^1.3",
+        "jms/serializer": "0.13 - 0.16",
+        "jms/serializer-bundle": "0.11 - 0.13",
+        "knplabs/knp-menu-bundle": "^1.1.0 || ^2.0",
+        "knplabs/knp-paginator-bundle": "^2.4",
+        "kriswallsmith/buzz": "^0.15",
+        "nelmio/api-doc-bundle": "^2.4",
+        "sonata-project/block-bundle": "^2.3",
+        "sonata-project/classification-bundle": "^2.2",
+        "sonata-project/comment-bundle": "^2.2",
         "sonata-project/core-bundle": "^2.3.2",
-        "sonata-project/doctrine-orm-admin-bundle": "~2.2",
-        "sonata-project/media-bundle": "~2.2",
-        "sonata-project/user-bundle": "~2.2",
-        "sonata-project/intl-bundle": "~2.1",
+        "sonata-project/datagrid-bundle": "^2.2",
+        "sonata-project/doctrine-orm-admin-bundle": "^2.2",
+        "sonata-project/formatter-bundle": "^2.3",
+        "sonata-project/intl-bundle": "^2.1",
+        "sonata-project/media-bundle": "^2.2",
+        "sonata-project/notification-bundle": "^2.2",
         "sonata-project/seo-bundle": "2.0.*",
-        "sonata-project/classification-bundle": "~2.2",
-        "sonata-project/notification-bundle": "~2.2",
-        "sonata-project/comment-bundle": "~2.2",
-        "sonata-project/datagrid-bundle": "~2.2",
-        "sonata-project/formatter-bundle": "~2.3",
-        "sonata-project/block-bundle": "~2.3",
-
-        "friendsofsymfony/comment-bundle": "~2.0",
-
-        "kriswallsmith/buzz": "0.*",
-        "knplabs/knp-menu-bundle": ">=1.1.0,<3.0.0",
-        "knplabs/knp-paginator-bundle": "~2.4",
-        "friendsofsymfony/user-bundle": "~1.3",
-        "jms/serializer-bundle": "~0.11",
-        "jms/serializer": "~0.13",
-
-        "friendsofsymfony/rest-bundle": "~1.1",
-        "nelmio/api-doc-bundle": "~2.4"
+        "sonata-project/user-bundle": "^2.2",
+        "symfony/config": "^2.3 || ^3.0",
+        "symfony/console": "^2.3 || ^3.0",
+        "symfony/form": "^2.3 || ^3.0",
+        "symfony/http-foundation": "^2.3 || ^3.0",
+        "symfony/process": "^2.3 || ^3.0",
+        "symfony/routing": "^2.3 || ^3.0",
+        "symfony/security-bundle": "^2.3 || ^3.0",
+        "symfony/twig-bridge": "^2.3 || ^3.0",
+        "symfony/validator": "^2.3 || ^3.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "~2.7|~3.0",
-        "sllh/php-cs-fixer-styleci-bridge": "^2.1"
+        "sllh/php-cs-fixer-styleci-bridge": "^2.1",
+        "symfony/phpunit-bridge": "^2.7 || ^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -69,6 +67,9 @@
             "Sonata\\Tests\\PriceBundle\\": "tests/PriceBundle",
             "Sonata\\Tests\\ProductBundle\\": "tests/ProductBundle"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
