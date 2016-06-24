@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\ProductBundle\Seo\Services;
 
 use Sonata\Component\Currency\CurrencyDetectorInterface;
@@ -58,7 +67,7 @@ class Facebook implements ServiceInterface
      */
     public function __construct(RouterInterface $router, Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $domain, $mediaFormat)
     {
-        $this->router    = $router;
+        $this->router = $router;
         $this->mediaPool = $mediaPool;
         $this->numberHelper = $numberHelper;
         $this->currencyDetector = $currencyDetector;
@@ -78,7 +87,7 @@ class Facebook implements ServiceInterface
             ->addMeta('property', 'og:title', $product->getName())
             ->addMeta('property', 'og:description', $product->getDescription())
             ->addMeta('property', 'og:url', $this->router->generate('sonata_product_view', array(
-                'slug'      => $product->getSlug(),
+                'slug' => $product->getSlug(),
                 'productId' => $product->getId(),
             ), UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))

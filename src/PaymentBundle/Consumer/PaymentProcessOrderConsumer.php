@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -48,9 +48,9 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
      */
     public function __construct(OrderManagerInterface $orderManager, ManagerInterface $transactionManager, BackendInterface $backend)
     {
-        $this->orderManager       = $orderManager;
+        $this->orderManager = $orderManager;
         $this->transactionManager = $transactionManager;
-        $this->backend            = $backend;
+        $this->backend = $backend;
     }
 
     /**
@@ -58,18 +58,18 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
      */
     public function process(ConsumerEvent $event)
     {
-        $order       = $this->getOrder($event);
+        $order = $this->getOrder($event);
         $transaction = $this->getTransaction($event);
 
         $orderElements = $order->getOrderElements();
 
         foreach ($orderElements as $orderElement) {
             $this->backend->createAndPublish('sonata_payment_order_element_process', array(
-                'product_id'         => $orderElement->getProductId(),
+                'product_id' => $orderElement->getProductId(),
                 'transaction_status' => $transaction->getStatusCode(),
-                'order_status'       => $order->getStatus(),
-                'quantity'           => $orderElement->getQuantity(),
-                'product_type'       => $orderElement->getProductType(),
+                'order_status' => $order->getStatus(),
+                'quantity' => $orderElement->getQuantity(),
+                'product_type' => $orderElement->getProductType(),
             ));
         }
     }

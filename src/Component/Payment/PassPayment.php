@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -141,9 +141,9 @@ class PassPayment extends BasePayment
     public function sendbank(OrderInterface $order)
     {
         $params = array(
-            'bank'       => $this->getCode(),
-            'reference'  => $order->getReference(),
-            'check'      => $this->generateUrlCheck($order),
+            'bank' => $this->getCode(),
+            'reference' => $order->getReference(),
+            'check' => $this->generateUrlCheck($order),
         );
 
         // call the callback handler ...
@@ -155,7 +155,7 @@ class PassPayment extends BasePayment
 
         // redirect the user to the correct page
         $response = new Response('', 302, array(
-            'Location'     => $this->router->generate($this->getOption($routeName), $params, UrlGeneratorInterface::ABSOLUTE_URL),
+            'Location' => $this->router->generate($this->getOption($routeName), $params, UrlGeneratorInterface::ABSOLUTE_URL),
             'Content-Type' => 'text/plain',
         ));
 

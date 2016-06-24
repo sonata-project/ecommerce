@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -55,9 +55,9 @@ class ApiProductType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => null,
+            'data_class' => null,
             'csrf_protection' => false,
-            'provider_name'   => null,
+            'provider_name' => null,
         ));
     }
 

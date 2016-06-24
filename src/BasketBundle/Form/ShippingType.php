@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -41,7 +41,7 @@ class ShippingType extends AbstractType
     public function __construct(DeliveryPool $deliveryPool, ServiceDeliverySelectorInterface $deliverySelector)
     {
         $this->deliverySelector = $deliverySelector;
-        $this->deliveryPool     = $deliveryPool;
+        $this->deliveryPool = $deliveryPool;
     }
 
     /**
@@ -72,8 +72,8 @@ class ShippingType extends AbstractType
         $basket->setDeliveryMethod($method ?: null);
 
         $sub = $builder->create('deliveryMethod', 'choice', array(
-            'expanded'      => true,
-            'choice_list'   => new SimpleChoiceList($choices),
+            'expanded' => true,
+            'choice_list' => new SimpleChoiceList($choices),
         ));
 
         $sub->addViewTransformer(new DeliveryMethodTransformer($this->deliveryPool), true);

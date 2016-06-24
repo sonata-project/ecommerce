@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -61,12 +61,12 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     public static function getStatusList()
     {
         return array(
-            self::STATUS_OPEN       => 'status_open',
-            self::STATUS_PENDING    => 'status_pending',
-            self::STATUS_SENT       => 'status_sent',
-            self::STATUS_CANCELLED  => 'status_cancelled',
-            self::STATUS_COMPLETED  => 'status_completed',
-            self::STATUS_RETURNED   => 'status_returned',
+            self::STATUS_OPEN => 'status_open',
+            self::STATUS_PENDING => 'status_pending',
+            self::STATUS_SENT => 'status_sent',
+            self::STATUS_CANCELLED => 'status_cancelled',
+            self::STATUS_COMPLETED => 'status_completed',
+            self::STATUS_RETURNED => 'status_returned',
         );
     }
 

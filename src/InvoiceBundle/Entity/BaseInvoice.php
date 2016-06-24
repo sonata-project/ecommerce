@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -142,6 +142,14 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getReference() ?: 'n/a';
+    }
+
+    /**
      * Returns formatted billing address.
      *
      * @param string $sep
@@ -159,13 +167,13 @@ abstract class BaseInvoice implements InvoiceInterface
     public function getBillingAsArray()
     {
         return array(
-            'firstname'    => $this->getName(),
-            'lastname'     => '',
-            'address1'     => $this->getAddress1(),
-            'address2'     => $this->getAddress2(),
-            'address3'     => $this->getAddress3(),
-            'postcode'     => $this->getPostcode(),
-            'city'         => $this->getCity(),
+            'firstname' => $this->getName(),
+            'lastname' => '',
+            'address1' => $this->getAddress1(),
+            'address2' => $this->getAddress2(),
+            'address3' => $this->getAddress3(),
+            'postcode' => $this->getPostcode(),
+            'city' => $this->getCity(),
             'country_code' => $this->getCountry(),
         );
     }
@@ -343,7 +351,7 @@ abstract class BaseInvoice implements InvoiceInterface
                 $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $invoiceElement->getVatAmount());
             } else {
                 $amounts[$rate] = array(
-                    'rate'   => $rate,
+                    'rate' => $rate,
                     'amount' => $invoiceElement->getVatAmount(),
                 );
             }
@@ -619,14 +627,6 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * @return string
      */
-    public function __toString()
-    {
-        return $this->getReference() ?: 'n/a';
-    }
-
-    /**
-     * @return string
-     */
     public function getStatusName()
     {
         $statusList = self::getStatusList();
@@ -660,8 +660,8 @@ abstract class BaseInvoice implements InvoiceInterface
     public static function getStatusList()
     {
         return array(
-            self::STATUS_OPEN     => 'status_open',
-            self::STATUS_PAID     => 'status_paid',
+            self::STATUS_OPEN => 'status_open',
+            self::STATUS_PAID => 'status_paid',
             self::STATUS_CONFLICT => 'status_conflict',
         );
     }

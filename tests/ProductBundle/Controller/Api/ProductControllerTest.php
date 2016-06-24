@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -51,7 +51,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProductProductcategoriesAction()
     {
-        $product         = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $productCategory = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
         $product->expects($this->once())->method('getProductCategories')->will($this->returnValue(array($productCategory)));
 
@@ -60,7 +60,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProductCategoriesAction()
     {
-        $product  = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $category = $this->getMock('Sonata\ClassificationBundle\Model\CategoryInterface');
         $product->expects($this->once())->method('getCategories')->will($this->returnValue(array($category)));
 
@@ -69,7 +69,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProductProductcollectionsAction()
     {
-        $product           = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $productCollection = $this->getMock('Sonata\Component\Product\ProductCollectionInterface');
         $product->expects($this->once())->method('getProductCollections')->will($this->returnValue(array($productCollection)));
 
@@ -78,7 +78,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProductCollectionsAction()
     {
-        $product    = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $collection = $this->getMock('Sonata\ClassificationBundle\Model\CollectionInterface');
         $product->expects($this->once())->method('getCollections')->will($this->returnValue(array($collection)));
 
@@ -96,7 +96,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProductDeliveriesAction()
     {
-        $product  = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
 
@@ -105,7 +105,7 @@ class ProductControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetProductVariationsAction()
     {
-        $product   = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
         $variation = $this->getMock('Sonata\Component\Product\ProductInterface');
         $product->expects($this->once())->method('getVariations')->will($this->returnValue(array($variation)));
 

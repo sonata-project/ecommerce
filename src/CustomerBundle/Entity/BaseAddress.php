@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\CustomerBundle\Entity;
 
 use Sonata\Component\Customer\AddressInterface;
@@ -85,6 +94,16 @@ abstract class BaseAddress implements AddressInterface
      */
     protected $customer;
 
+    public function __construct()
+    {
+        $this->setCurrent(false);
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Formats an address in an array form.
      *
@@ -97,13 +116,13 @@ abstract class BaseAddress implements AddressInterface
     {
         $address = array_merge(
             array(
-                'firstname'    => '',
-                'lastname'     => '',
-                'address1'     => '',
-                'address2'     => '',
-                'address3'     => '',
-                'postcode'     => '',
-                'city'         => '',
+                'firstname' => '',
+                'lastname' => '',
+                'address1' => '',
+                'address2' => '',
+                'address3' => '',
+                'postcode' => '',
+                'city' => '',
                 'country_code' => '',
             ),
             $address
@@ -137,11 +156,6 @@ abstract class BaseAddress implements AddressInterface
         return $fullAddress;
     }
 
-    public function __construct()
-    {
-        $this->setCurrent(false);
-    }
-
     public function prePersist()
     {
         $this->setCreatedAt(new \DateTime());
@@ -156,9 +170,9 @@ abstract class BaseAddress implements AddressInterface
     public static function getTypesList()
     {
         return array(
-            self::TYPE_BILLING  => 'type_billing',
+            self::TYPE_BILLING => 'type_billing',
             self::TYPE_DELIVERY => 'type_delivery',
-            self::TYPE_CONTACT  => 'type_contact',
+            self::TYPE_CONTACT => 'type_contact',
         );
     }
 
@@ -198,6 +212,7 @@ abstract class BaseAddress implements AddressInterface
 
         return isset($types[$this->getType()]) ? $types[$this->getType()] : null;
     }
+
     /**
      * Get type.
      *
@@ -454,15 +469,15 @@ abstract class BaseAddress implements AddressInterface
     public function getAddressArrayForRender()
     {
         return array(
-            'id'           => $this->getId(),
-            'name'         => $this->getName(),
-            'firstname'    => $this->getFirstName(),
-            'lastname'     => $this->getLastname(),
-            'address1'     => $this->getAddress1(),
-            'address2'     => $this->getAddress2(),
-            'address3'     => $this->getAddress3(),
-            'postcode'     => $this->getPostcode(),
-            'city'         => $this->getCity(),
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'firstname' => $this->getFirstName(),
+            'lastname' => $this->getLastname(),
+            'address1' => $this->getAddress1(),
+            'address2' => $this->getAddress2(),
+            'address3' => $this->getAddress3(),
+            'postcode' => $this->getPostcode(),
+            'city' => $this->getCity(),
             'country_code' => $this->getCountryCode(),
         );
     }
@@ -483,10 +498,5 @@ abstract class BaseAddress implements AddressInterface
     public function getCustomer()
     {
         return $this->customer;
-    }
-
-    public function __toString()
-    {
-        return $this->getName();
     }
 }

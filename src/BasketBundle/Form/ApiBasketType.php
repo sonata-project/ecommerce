@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -41,7 +41,7 @@ class ApiBasketType extends AbstractType
      */
     public function __construct($class, CurrencyFormType $currencyFormType)
     {
-        $this->class            = $class;
+        $this->class = $class;
         $this->currencyFormType = $currencyFormType;
     }
 
@@ -61,8 +61,8 @@ class ApiBasketType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => $this->class,
-            'csrf_protection'   => false,
+            'data_class' => $this->class,
+            'csrf_protection' => false,
             'validation_groups' => array('api'),
         ));
     }

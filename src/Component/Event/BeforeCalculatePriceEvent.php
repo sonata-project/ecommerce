@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -51,9 +51,9 @@ class BeforeCalculatePriceEvent extends Event
      */
     public function __construct(ProductInterface $product, CurrencyInterface $currency, $vat, $quantity)
     {
-        $this->product  = $product;
+        $this->product = $product;
         $this->currency = $currency;
-        $this->vat      = $vat;
+        $this->vat = $vat;
         $this->quantity = $quantity;
     }
 

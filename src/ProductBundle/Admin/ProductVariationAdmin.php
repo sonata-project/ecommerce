@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -53,7 +53,7 @@ class ProductVariationAdmin extends ProductAdmin
     {
         if (!$this->baseRouteName) {
             if ($this->getCode() == 'sonata.product.admin.product.variation' && !$this->isChild()) { // variation
-                $this->baseRouteName    = 'admin_sonata_product_variation';
+                $this->baseRouteName = 'admin_sonata_product_variation';
             } elseif ($this->getCode() == 'sonata.product.admin.product.variation' && $this->isChild()) { // variation
                 $this->baseRouteName = sprintf('%s_%s',
                     $this->getParent()->getBaseRouteName(),
@@ -77,7 +77,7 @@ class ProductVariationAdmin extends ProductAdmin
             return;
         }
 
-        $product  = $this->getProduct();
+        $product = $this->getProduct();
         $provider = $this->getProductProvider($product);
 
         if ($product->getId() > 0) {
@@ -98,7 +98,7 @@ class ProductVariationAdmin extends ProductAdmin
 
         $admin = $this->isChild() ? $this->getParent() : $this;
 
-        $id      = $admin->getRequest()->get('id');
+        $id = $admin->getRequest()->get('id');
         $product = $this->getObject($id);
 
         $menu->addChild(
@@ -133,7 +133,7 @@ class ProductVariationAdmin extends ProductAdmin
             return;
         }
 
-        $product  = $this->getProduct();
+        $product = $this->getProduct();
         $provider = $this->getProductProvider($product);
 
         $provider->configureShowFields($showMapper);

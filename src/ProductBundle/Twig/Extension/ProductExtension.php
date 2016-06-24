@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -58,14 +58,14 @@ class ProductExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('sonata_product_provider',                 array($this, 'getProductProvider')),
-            new \Twig_SimpleFunction('sonata_product_has_variations',           array($this, 'hasVariations')),
-            new \Twig_SimpleFunction('sonata_product_has_enabled_variations',   array($this, 'hasEnabledVariations')),
-            new \Twig_SimpleFunction('sonata_product_cheapest_variation',       array($this, 'getCheapestEnabledVariation')),
+            new \Twig_SimpleFunction('sonata_product_provider', array($this, 'getProductProvider')),
+            new \Twig_SimpleFunction('sonata_product_has_variations', array($this, 'hasVariations')),
+            new \Twig_SimpleFunction('sonata_product_has_enabled_variations', array($this, 'hasEnabledVariations')),
+            new \Twig_SimpleFunction('sonata_product_cheapest_variation', array($this, 'getCheapestEnabledVariation')),
             new \Twig_SimpleFunction('sonata_product_cheapest_variation_price', array($this, 'getCheapestEnabledVariationPrice')),
-            new \Twig_SimpleFunction('sonata_product_price',                    array($this, 'getProductPrice')),
-            new \Twig_SimpleFunction('sonata_product_stock',                    array($this, 'getProductStock')),
-            new \Twig_SimpleFunction('sonata_product_form_add_basket',          array($this, 'getFormAddBasket')),
+            new \Twig_SimpleFunction('sonata_product_price', array($this, 'getProductPrice')),
+            new \Twig_SimpleFunction('sonata_product_stock', array($this, 'getProductStock')),
+            new \Twig_SimpleFunction('sonata_product_form_add_basket', array($this, 'getFormAddBasket')),
         );
     }
 
@@ -169,7 +169,7 @@ class ProductExtension extends \Twig_Extension
     public function getFormAddBasket(ProductInterface $product)
     {
         $formBuilder = $this->formFactory->createNamedBuilder('add_basket', 'form', null, array(
-            'data_class'      => $this->basketElementClass,
+            'data_class' => $this->basketElementClass,
             'csrf_protection' => false,
         ));
 

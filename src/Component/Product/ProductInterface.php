@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -18,6 +18,13 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 
 interface ProductInterface extends PriceComputableInterface
 {
+    /**
+     * Get Product name.
+     *
+     * @return string
+     */
+    public function __toString();
+
     /**
      * Get id.
      *
@@ -465,13 +472,6 @@ interface ProductInterface extends PriceComputableInterface
      * @param array $options
      */
     public function setOptions(array $options);
-
-    /**
-     * Get Product name.
-     *
-     * @return string
-     */
-    public function __toString();
 
     /**
      * Return true if the Product is a master (parent of variation(s) or single product).

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -50,7 +50,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderOrderelementsAction()
     {
-        $order         = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
         $orderElements = $this->getMock('Sonata\Component\Order\OrderElementsInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElements)));
 

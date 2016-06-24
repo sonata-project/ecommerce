@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -44,8 +44,8 @@ class CustomerAdmin extends Admin
                 ->add('firstname')
                 ->add('lastname')
                 ->add('locale', 'locale')
-                ->add('birthDate', 'sonata_type_date_picker',  array(
-                    'years'       => range(1900, $now->format('Y')),
+                ->add('birthDate', 'sonata_type_date_picker', array(
+                    'years' => range(1900, $now->format('Y')),
                     'dp_min_date' => '1-1-1900',
                     'dp_max_date' => $now->format('c'),
                 ))

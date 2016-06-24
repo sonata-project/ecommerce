@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -28,8 +28,8 @@ class CategoryController extends Controller
 
         return $this->render('SonataProductBundle:Category:side_menu_category.html.twig', array(
           'root_category' => $category,
-          'depth'         => $depth,
-          'deep'          => $deep + 1,
+          'depth' => $depth,
+          'deep' => $deep + 1,
         ));
     }
 }

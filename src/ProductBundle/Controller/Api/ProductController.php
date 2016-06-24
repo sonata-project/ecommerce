@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -71,10 +71,10 @@ class ProductController
      */
     public function __construct(ProductManagerInterface $productManager, Pool $productPool, FormFactoryInterface $formFactory, FormatterPool $formatterPool)
     {
-        $this->productManager   = $productManager;
-        $this->productPool      = $productPool;
-        $this->formFactory      = $formFactory;
-        $this->formatterPool    = $formatterPool;
+        $this->productManager = $productManager;
+        $this->productPool = $productPool;
+        $this->formFactory = $formFactory;
+        $this->formatterPool = $formatterPool;
     }
 
     /**
@@ -102,9 +102,9 @@ class ProductController
             'enabled' => '',
         );
 
-        $page     = $paramFetcher->get('page');
-        $limit    = $paramFetcher->get('count');
-        $sort     = $paramFetcher->get('orderBy');
+        $page = $paramFetcher->get('page');
+        $limit = $paramFetcher->get('count');
+        $sort = $paramFetcher->get('orderBy');
         $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
         foreach ($criteria as $key => $value) {
@@ -181,7 +181,7 @@ class ProductController
      * Updates a product.
      *
      * @Put("/{provider}/products/{id}")
-     
+
      * @ApiDoc(
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product identifier"},
@@ -209,51 +209,6 @@ class ProductController
     public function putProductAction($id, $provider, Request $request)
     {
         return $this->handleWriteProduct($provider, $request, $id);
-    }
-
-    /**
-     * Write a product, this method is used by both POST and PUT action methods.
-     *
-     * @param string   $provider A product provider name
-     * @param Request  $request  Symfony request
-     * @param int|null $id       A product identifier
-     *
-     * @return \FOS\RestBundle\View\View|FormInterface
-     */
-    protected function handleWriteProduct($provider, $request, $id = null)
-    {
-        $product = $id ? $this->getProduct($id) : null;
-
-        try {
-            $manager = $this->productPool->getManager($provider);
-        } catch (\RuntimeException $e) {
-            throw new NotFoundHttpException($e->getMessage(), $e);
-        }
-
-        $form = $this->formFactory->createNamed(null, 'sonata_product_api_form_product', $product, array(
-            'csrf_protection' => false,
-            'data_class'      => $manager->getClass(),
-            'provider_name'   => $provider,
-        ));
-
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $product = $form->getData();
-            $product->setDescription($this->formatterPool->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
-            $product->setShortDescription($this->formatterPool->transform($product->getShortDescriptionFormatter(), $product->getRawShortDescription()));
-            $manager->save($product);
-
-            $view = \FOS\RestBundle\View\View::create($product);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
-
-            return $view;
-        }
-
-        return $form;
     }
 
     /**
@@ -463,6 +418,51 @@ class ProductController
     public function getProductVariationsAction($id)
     {
         return $this->getProduct($id)->getVariations();
+    }
+
+    /**
+     * Write a product, this method is used by both POST and PUT action methods.
+     *
+     * @param string   $provider A product provider name
+     * @param Request  $request  Symfony request
+     * @param int|null $id       A product identifier
+     *
+     * @return \FOS\RestBundle\View\View|FormInterface
+     */
+    protected function handleWriteProduct($provider, $request, $id = null)
+    {
+        $product = $id ? $this->getProduct($id) : null;
+
+        try {
+            $manager = $this->productPool->getManager($provider);
+        } catch (\RuntimeException $e) {
+            throw new NotFoundHttpException($e->getMessage(), $e);
+        }
+
+        $form = $this->formFactory->createNamed(null, 'sonata_product_api_form_product', $product, array(
+            'csrf_protection' => false,
+            'data_class' => $manager->getClass(),
+            'provider_name' => $provider,
+        ));
+
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $product = $form->getData();
+            $product->setDescription($this->formatterPool->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
+            $product->setShortDescription($this->formatterPool->transform($product->getShortDescriptionFormatter(), $product->getRawShortDescription()));
+            $manager->save($product);
+
+            $view = \FOS\RestBundle\View\View::create($product);
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->enableMaxDepthChecks();
+            $view->setSerializationContext($serializationContext);
+
+            return $view;
+        }
+
+        return $form;
     }
 
     /**

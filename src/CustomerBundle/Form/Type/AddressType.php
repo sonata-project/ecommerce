@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -49,9 +49,9 @@ class AddressType extends AbstractType
      */
     public function __construct($class, $getter, $name, BasketInterface $basket)
     {
-        $this->class  = $class;
+        $this->class = $class;
         $this->getter = $getter;
-        $this->name   = $name;
+        $this->name = $name;
         $this->basket = $basket;
     }
 
@@ -74,30 +74,6 @@ class AddressType extends AbstractType
         }
 
         $builder->add('countryCode', 'country', $countryOptions);
-    }
-
-    /**
-     * Returns basket elements delivery countries.
-     *
-     * @return array
-     */
-    protected function getBasketDeliveryCountries()
-    {
-        $countries = array();
-
-        foreach ($this->basket->getBasketElements() as $basketElement) {
-            $product = $basketElement->getProduct();
-
-            foreach ($product->getDeliveries() as $delivery) {
-                $code = $delivery->getCountryCode();
-
-                if (!isset($countries[$code])) {
-                    $countries[$code] = Intl::getRegionBundle()->getCountryName($code);
-                }
-            }
-        }
-
-        return $countries;
     }
 
     /**
@@ -131,7 +107,31 @@ class AddressType extends AbstractType
     {
         $resolver->setDefaults(array(
             'context' => 'default',
-            'types'   => call_user_func(array($this->class, $this->getter)),
+            'types' => call_user_func(array($this->class, $this->getter)),
         ));
+    }
+
+    /**
+     * Returns basket elements delivery countries.
+     *
+     * @return array
+     */
+    protected function getBasketDeliveryCountries()
+    {
+        $countries = array();
+
+        foreach ($this->basket->getBasketElements() as $basketElement) {
+            $product = $basketElement->getProduct();
+
+            foreach ($product->getDeliveries() as $delivery) {
+                $code = $delivery->getCountryCode();
+
+                if (!isset($countries[$code])) {
+                    $countries[$code] = Intl::getRegionBundle()->getCountryName($code);
+                }
+            }
+        }
+
+        return $countries;
     }
 }

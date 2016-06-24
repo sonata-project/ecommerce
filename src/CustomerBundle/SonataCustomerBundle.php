@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -39,10 +39,10 @@ class SonataCustomerBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping(array(
-            'sonata_customer_address'           => 'Sonata\CustomerBundle\Form\Type\AddressType',
-            'sonata_customer_address_types'     => 'Sonata\CustomerBundle\Form\Type\AddressTypeType',
+            'sonata_customer_address' => 'Sonata\CustomerBundle\Form\Type\AddressType',
+            'sonata_customer_address_types' => 'Sonata\CustomerBundle\Form\Type\AddressTypeType',
             'sonata_customer_api_form_customer' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
-            'sonata_customer_api_form_address'  => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
+            'sonata_customer_api_form_address' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
         ));
     }
 }

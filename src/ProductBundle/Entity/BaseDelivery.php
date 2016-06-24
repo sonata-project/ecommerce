@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -59,6 +59,18 @@ abstract class BaseDelivery implements DeliveryInterface
      * @var ProductInterface
      */
     protected $product;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('%s-%s%s',
+            $this->getCode(),
+            $this->getCountryCode(),
+            $this->getZone() ? sprintf('%s', $this->getZone()) : ''
+        );
+    }
 
     /**
      * Set productId.
@@ -255,23 +267,11 @@ abstract class BaseDelivery implements DeliveryInterface
     public function toArray()
     {
         return array(
-            'code'        => $this->code,
-            'perItem'     => $this->perItem,
+            'code' => $this->code,
+            'perItem' => $this->perItem,
             'countryCode' => $this->countryCode,
-            'zone'        => $this->zone,
-            'enabled'     => $this->enabled,
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return sprintf('%s-%s%s',
-            $this->getCode(),
-            $this->getCountryCode(),
-            $this->getZone() ? sprintf('%s', $this->getZone()) : ''
+            'zone' => $this->zone,
+            'enabled' => $this->enabled,
         );
     }
 

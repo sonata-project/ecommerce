@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,24 +19,6 @@ use Sonata\CustomerBundle\Entity\CustomerManager;
  */
 class CustomerManagerTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getCustomerManager($qbCallback)
-    {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
-            'firstname',
-            'lastname',
-            'email',
-        ));
-
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
-
-        return new CustomerManager('Sonata\CustomerBundle\Entity\BaseCustomer', $registry);
-    }
-
     public function testGetPager()
     {
         $self = $this;
@@ -60,7 +42,8 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {})
+            ->getCustomerManager(function ($qb) use ($self) {
+            })
             ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
     }
 
@@ -84,7 +67,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
             })
             ->getPager(array(), 1, 10, array(
                 'firstname' => 'ASC',
-                'lastname'  => 'DESC',
+                'lastname' => 'DESC',
             ));
     }
 
@@ -108,5 +91,23 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('isFake' => false)));
             })
             ->getPager(array('is_fake' => false), 1);
+    }
+
+    protected function getCustomerManager($qbCallback)
+    {
+        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
+            $this->markTestSkipped('Not compatible with PHPUnit 5.');
+        }
+
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+            'firstname',
+            'lastname',
+            'email',
+        ));
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        return new CustomerManager('Sonata\CustomerBundle\Entity\BaseCustomer', $registry);
     }
 }
