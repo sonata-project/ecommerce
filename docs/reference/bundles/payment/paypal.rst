@@ -61,9 +61,9 @@ Then:
 
                     method:             encryptViaBuffer # encryptViaFile || encryptViaBuffer
 
-                    key_file:           %kernel.root_dir%/my-prvkey.pem
-                    cert_file:          %kernel.root_dir%/my-pubcert.pem
-                    paypal_cert_file:   %kernel.root_dir%/paypal_cert_pem.txt
+                    key_file:           '%kernel.root_dir%/my-prvkey.pem'
+                    cert_file:          '%kernel.root_dir%/my-pubcert.pem'
+                    paypal_cert_file:   '%kernel.root_dir%/paypal_cert_pem.txt'
                     openssl:            /opt/local/bin/openssl
 
                 transformers:
