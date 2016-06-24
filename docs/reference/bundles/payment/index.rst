@@ -98,15 +98,15 @@ Here's the full default configuration for SonataPaymentBundle:
                     account:              your_paypal_account@fake.com
                     cert_id:              fake
                     debug:                false
-                    paypal_cert_file:     %kernel.root_dir%/paypal_cert_pem_sandbox.txt
+                    paypal_cert_file:     '%kernel.root_dir%/paypal_cert_pem_sandbox.txt'
                     url_action:           https://www.sandbox.paypal.com/cgi-bin/webscr
                     class_order:          Application\Sonata\OrderBundle\Entity\Order
                     url_callback:         sonata_payment_callback
                     url_return_ko:        sonata_payment_error
                     url_return_ok:        sonata_payment_confirmation
                     method:               encryptViaBuffer
-                    key_file:             %kernel.root_dir%/my-prvkey.pem
-                    cert_file:            %kernel.root_dir%/my-pubcert.pem
+                    key_file:             '%kernel.root_dir%/my-prvkey.pem'
+                    cert_file:            '%kernel.root_dir%/my-pubcert.pem'
                     openssl:              /opt/local/bin/openssl
             pass:
                 name:                 Pass
