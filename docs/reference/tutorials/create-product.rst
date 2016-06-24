@@ -10,7 +10,7 @@ Before we start adding any products, we will have to create a *prototype*. A *pr
 
 In our case, we will need two kind of items:
 
-* a bowl prototype that will have no specific options, 
+* a bowl prototype that will have no specific options,
 * a spoon, which can provide various sizes.
 
 In order to create these 2 prototypes, a command has been implemented to quickly generate the required files.
@@ -31,7 +31,7 @@ Run the following command to create the files:
 
 	php app/console sonata:product:generate Bowl sonata.ecommerce_demo.product.bowl
 
-The required base files will be created in ``src/Application/Sonata/ProductBundle``. 
+The required base files will be created in ``src/Application/Sonata/ProductBundle``.
 To finalize the installation, we have to define the missing parameters like the type itself and the related manager. These data have to be provided in ``src/Application/Sonata/ProductBundle/Resources/config/product.yml``.
 
 .. code-block:: yaml
@@ -43,12 +43,12 @@ To finalize the installation, we have to define the missing parameters like the 
             class: Sonata\ProductBundle\Entity\ProductManager
             arguments:
                 - Application\Sonata\ProductBundle\Entity\Bowl
-                - @sonata.product.entity_manager
+                - '@sonata.product.entity_manager'
 
         sonata.ecommerce_demo.product.bowl.type:
             class: Application\Sonata\ProductBundle\Provider\BowlProductProvider
             arguments:
-                - @serializer
+                - '@serializer'
 
 Don't forget to load this file by adding the following lines in the ``app/config/config.yml``
 
@@ -57,7 +57,7 @@ Don't forget to load this file by adding the following lines in the ``app/config
     # app/config/config.yml
 
     imports:
-        - { resource: @ApplicationSonataProductBundle/Resources/config/product.yml }
+        - { resource: '@ApplicationSonataProductBundle/Resources/config/product.yml' }
 
 And finally, add in the ``app/config/sonata/sonata_product.yml`` the following data:
 
@@ -86,10 +86,10 @@ Go to the *admin dashboard* and select *Product* in the *e-commerce* menu. After
 
 In the first tab, note that the VAT type of field must be a percent.
 The *goodie* and *training* are part of the original sandbox so we will select the *bowl* one.
-                                                                                                             
+
 Now switch to the *Categories* tab, and attach our product to the correct category, "Dishes" in our case. Don't forget to enable the relation by checking the checkbox.
 
-We will repeat the same process in the "Collection" tab using the "Bowls" collection that we have previously created.                                        
+We will repeat the same process in the "Collection" tab using the "Bowls" collection that we have previously created.
 
 Since the delivery part is covered in a whole chapter, we won't provide any information about it for now.
 
@@ -189,7 +189,7 @@ And if everything is ok, perform to the modification:
 
     php app/console doctrine:schema:update --force
 
-If you go back to the *product creation* page, you should be able to see our provider and display its page without any error. Though, the size field is not available yet. We have to enable it manually by overriding the ``SpoonProductProvider::buildEditForm()`` method. 
+If you go back to the *product creation* page, you should be able to see our provider and display its page without any error. Though, the size field is not available yet. We have to enable it manually by overriding the ``SpoonProductProvider::buildEditForm()`` method.
 You first should add the usage of ``Application\Sonata\ProductBundle\Entity\Spoon`` class:
 
 .. code-block:: php
@@ -210,14 +210,14 @@ You first should add the usage of ``Application\Sonata\ProductBundle\Entity\Spoo
         }
     }
 
-Once we have done this, we should still have no error but the *size* field shouldn't be available yet. It's simply because we first have to create a *base product* and each of its variations will be *real products*. 
+Once we have done this, we should still have no error but the *size* field shouldn't be available yet. It's simply because we first have to create a *base product* and each of its variations will be *real products*.
 
 You can picture this as an abstract class (the *base product*) extended by many concrete classes (one per variation). Let's do this !
 
 
 Configuration - Backoffice
 --------------------------
-Repeat the same steps as indicated for products with no variations. Once you have completed this step, you should be able to browse the created product, without any variation yet. 
+Repeat the same steps as indicated for products with no variations. Once you have completed this step, you should be able to browse the created product, without any variation yet.
 
 This is the default behavior : as long as you enable a product supposed to have any variations, it will be displayed if **none** are provided. If you have one disabled, the product will be considered as disabled. But let's get back to our product.
 
