@@ -59,7 +59,11 @@
             "Sonata\\OrderBundle\\": "src/OrderBundle",
             "Sonata\\PaymentBundle\\": "src/PaymentBundle",
             "Sonata\\PriceBundle\\": "src/PriceBundle",
-            "Sonata\\ProductBundle\\": "src/ProductBundle",
+            "Sonata\\ProductBundle\\": "src/ProductBundle"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Sonata\\Tests\\Component\\": "tests/Component",
             "Sonata\\Tests\\BasketBundle\\": "tests/BasketBundle",
             "Sonata\\Tests\\CustomerBundle\\": "tests/CustomerBundle",
