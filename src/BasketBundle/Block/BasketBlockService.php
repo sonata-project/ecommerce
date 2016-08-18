@@ -17,7 +17,7 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author     Xavier Coureau <xcoureau@ekino.com>
@@ -59,7 +59,7 @@ class BasketBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'template' => 'SonataBasketBundle:Block:block_basket_items.html.twig',

@@ -21,7 +21,7 @@ use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -125,7 +125,7 @@ class RecentOrdersBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'number' => 5,
