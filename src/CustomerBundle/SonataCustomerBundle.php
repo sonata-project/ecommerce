@@ -41,8 +41,8 @@ class SonataCustomerBundle extends Bundle
         FormHelper::registerFormTypeMapping(array(
             'sonata_customer_address' => 'Sonata\CustomerBundle\Form\Type\AddressType',
             'sonata_customer_address_types' => 'Sonata\CustomerBundle\Form\Type\AddressTypeType',
-            'sonata_customer_api_form_customer' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
-            'sonata_customer_api_form_address' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
+            'sonata_customer_api_form_customer' => 'Sonata\CustomerBundle\Form\Type\ApiCustomerType',
+            'sonata_customer_api_form_address' => 'Sonata\CustomerBundle\Form\Type\ApiAddressType',
         ));
     }
 }
