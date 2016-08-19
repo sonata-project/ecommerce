@@ -15,7 +15,7 @@ use Knp\Menu\Provider\MenuProviderInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Block\Service\MenuBlockService;
 use Sonata\ProductBundle\Menu\ProductMenuBuilder;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -57,9 +57,9 @@ class FiltersMenuBlockService extends MenuBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
-        parent::setDefaultSettings($resolver);
+        parent::configureSettings($resolver);
 
         $resolver->setDefaults(array(
             'menu_class' => 'nav nav-list',

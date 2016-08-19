@@ -44,7 +44,7 @@ class SonataProductBundle extends Bundle
         FormHelper::registerFormTypeMapping(array(
             'sonata_product_delivery_status' => 'Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType',
             'sonata_product_variation_choices' => 'Sonata\Component\Form\Type\VariationChoiceType',
-            'sonata_product_api_form_product_parent' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
+            'sonata_product_api_form_product_parent' => 'Sonata\ProductBundle\Form\Type\ApiProductParentType',
             'sonata_product_api_form_product' => 'Sonata\ProductBundle\Form\Type\ApiProductType',
             'sonata_currency' => 'Sonata\Component\Currency\CurrencyFormType',
         ));
