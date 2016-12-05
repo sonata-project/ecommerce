@@ -197,7 +197,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sonata\Component\Basket\InvalidProductException
+     * @expectedException \Sonata\Component\Basket\InvalidProductException
      * @expectedExceptionMessage You can't add 'product_sku' to the basket as it is a master product with variations.
      */
     public function testBasketAddProductInvalid()
@@ -447,7 +447,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sonata\CoreBundle\Exception\InvalidParameterException
+     * @expectedException \Sonata\CoreBundle\Exception\InvalidParameterException
      * @expectedExceptionMessage Expected integer >= 1 for quantity, 4.32 given.
      */
     public function testCalculatePriceException()
@@ -462,7 +462,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sonata\CoreBundle\Exception\InvalidParameterException
+     * @expectedException \Sonata\CoreBundle\Exception\InvalidParameterException
      * @expectedExceptionMessage Expected integer >= 1 for quantity, 0.32 given.
      */
     public function testCalculatePriceExceptionLessThanOne()

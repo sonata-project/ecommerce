@@ -54,7 +54,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'media_prefix' => 'http://demo.sonata-project.org',
                 'media_format' => 'reference',
             ),
-
         ), $config['seo']);
     }
 }

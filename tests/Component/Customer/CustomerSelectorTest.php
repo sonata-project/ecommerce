@@ -56,7 +56,7 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        RuntimeException
+     * @expectedException        \RuntimeException
      * @expectedExceptionMessage User must be an instance of FOS\UserBundle\Model\UserInterface
      */
     public function testInvalidUserType()

@@ -77,7 +77,6 @@ class OrderAdmin extends Admin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-
         // define group zoning
         $formMapper
              ->with($this->trans('order.form.group_main_label'), array('class' => 'col-md-12'))->end()
