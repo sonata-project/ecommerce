@@ -52,7 +52,7 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sonata\CoreBundle\Exception\InvalidParameterException
+     * @expectedException \Sonata\CoreBundle\Exception\InvalidParameterException
      * @expectedExceptionMessage sonata_address_render needs an AddressInterface instance or an array with keys (firstname, lastname, address1, postcode, city, country_code)
      */
     public function testRenderAddressInvalidParameter()
@@ -67,7 +67,7 @@ class AddressExtensionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sonata\CoreBundle\Exception\InvalidParameterException
+     * @expectedException \Sonata\CoreBundle\Exception\InvalidParameterException
      * @expectedExceptionMessage sonata_address_render needs 'id' key to be set to render the edit button
      */
     public function testRenderAddressMissingId()

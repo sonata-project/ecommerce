@@ -62,7 +62,7 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\Component\Currency\CurrencyDetector::__construct
+     * @covers \Sonata\Component\Currency\CurrencyDetector::__construct
      */
     public function testConstruct()
     {
@@ -80,7 +80,7 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Sonata\Component\Currency\CurrencyDetector::getCurrency
+     * @covers \Sonata\Component\Currency\CurrencyDetector::getCurrency
      */
     public function testGetCurrency()
     {

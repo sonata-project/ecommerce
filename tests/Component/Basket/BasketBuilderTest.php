@@ -20,7 +20,7 @@ use Sonata\Component\Product\ProductDefinition;
 class BasketBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException        RuntimeException
+     * @expectedException        \RuntimeException
      * @expectedExceptionMessage The product code is empty
      */
     public function testBuildWithInvalidProductCode()
@@ -46,7 +46,7 @@ class BasketBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException         RuntimeException
+     * @expectedException         \RuntimeException
      * @expectedExceptionMessage  The product definition `non_existent_product_code` does not exist!
      */
     public function testBuildWithNonExistentProductCode()
