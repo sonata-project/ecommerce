@@ -71,7 +71,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sonata\Component\Payment\InvalidTransactionException
+     * @expectedException \Sonata\Component\Payment\InvalidTransactionException
      * @expectedExceptionMessage Unable to find reference
      */
     public function testHandleErrorInvalidTransactionException()
@@ -109,7 +109,7 @@ class PaymentHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Sonata\Component\Payment\InvalidTransactionException
+     * @expectedException \Sonata\Component\Payment\InvalidTransactionException
      * @expectedExceptionMessage Invalid check - order ref: 42
      */
     public function testHandleErrorInvalidTransactionException2()
