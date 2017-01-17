@@ -27,9 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CustomerController.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CustomerController

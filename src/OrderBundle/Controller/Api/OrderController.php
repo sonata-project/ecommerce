@@ -21,9 +21,6 @@ use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class OrderController.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class OrderController

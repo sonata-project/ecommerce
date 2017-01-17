@@ -17,9 +17,6 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PaymentEvent.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class PaymentEvent extends Event

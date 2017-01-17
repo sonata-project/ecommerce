@@ -14,9 +14,6 @@ namespace Sonata\Component\Currency;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class CurrencyDataTransformer.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CurrencyDataTransformer implements DataTransformerInterface

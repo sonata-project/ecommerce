@@ -16,9 +16,6 @@ use Sonata\Component\Payment\TransactionInterface;
 use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
 
 /**
- * Class OrderStatusRenderer.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class OrderStatusRenderer implements StatusClassRendererInterface

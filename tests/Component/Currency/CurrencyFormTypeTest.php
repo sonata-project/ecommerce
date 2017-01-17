@@ -14,9 +14,6 @@ namespace Sonata\Test\Component\Currency\Types;
 use Sonata\Component\Currency\CurrencyFormType;
 
 /**
- * Class CurrencyFormTypeTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CurrencyFormTypeTest extends \PHPUnit_Framework_TestCase

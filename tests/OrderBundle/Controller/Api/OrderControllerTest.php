@@ -14,9 +14,6 @@ namespace Sonata\Test\OrderBundle\Controller\Api;
 use Sonata\OrderBundle\Controller\Api\OrderController;
 
 /**
- * Class OrderControllerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class OrderControllerTest extends \PHPUnit_Framework_TestCase

@@ -23,8 +23,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class AddressController.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class AddressController

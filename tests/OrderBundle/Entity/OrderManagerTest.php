@@ -27,9 +27,6 @@ class Order extends BaseOrder
 }
 
 /**
- * Class OrderManagerTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class OrderManagerTest extends \PHPUnit_Framework_TestCase

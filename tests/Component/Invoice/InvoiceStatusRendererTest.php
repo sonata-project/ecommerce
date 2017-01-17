@@ -15,9 +15,6 @@ use Sonata\Component\Invoice\InvoiceStatusRenderer;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 
 /**
- * Class InvoiceStatusRendererTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */

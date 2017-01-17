@@ -15,8 +15,6 @@ use Sonata\CustomerBundle\Controller\Api\AddressController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class AddressControllerTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class AddressControllerTest extends \PHPUnit_Framework_TestCase

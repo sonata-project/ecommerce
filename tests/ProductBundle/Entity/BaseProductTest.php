@@ -14,10 +14,7 @@ namespace Sonata\Tests\ProductBundle\Entity;
 use Sonata\ProductBundle\Entity\BaseProduct;
 
 /**
- * Class Product.
- *
- *
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 class Product extends BaseProduct
 {
@@ -33,10 +30,7 @@ class Product extends BaseProduct
 }
 
 /**
- * Class BaseProductTest.
- *
- *
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 class BaseProductTest extends \PHPUnit_Framework_TestCase
 {

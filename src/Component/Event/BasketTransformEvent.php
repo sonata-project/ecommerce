@@ -15,9 +15,6 @@ use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class BasketTransformEvent.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BasketTransformEvent extends Event

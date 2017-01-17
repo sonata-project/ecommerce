@@ -17,9 +17,6 @@ use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
 
 /**
- * Class OrderStatusRendererTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase

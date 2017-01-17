@@ -15,9 +15,6 @@ use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Payment\PassPayment;
 
 /**
- * Class PaymentMethodTransformerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class PaymentMethodTransformerTest extends \PHPUnit_Framework_TestCase

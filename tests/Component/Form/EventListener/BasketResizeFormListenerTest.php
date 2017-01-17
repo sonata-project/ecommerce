@@ -15,9 +15,6 @@ use Sonata\Component\Form\EventListener\BasketResizeFormListener;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * Class BasketResizeFormListenerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase

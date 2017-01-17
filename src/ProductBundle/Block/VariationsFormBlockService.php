@@ -26,9 +26,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Class VariationsFormBlockService.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class VariationsFormBlockService extends BaseBlockService

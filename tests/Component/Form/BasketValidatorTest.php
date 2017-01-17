@@ -15,9 +15,6 @@ use Sonata\Component\Form\BasketValidator;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class BasketValidatorTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BasketValidatorTest extends \PHPUnit_Framework_TestCase

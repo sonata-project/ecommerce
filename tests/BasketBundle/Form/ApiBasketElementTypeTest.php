@@ -14,8 +14,6 @@ namespace Sonata\BasketBundle\Tests\Form;
 use Sonata\BasketBundle\Form\ApiBasketElementType;
 
 /**
- * Class ApiBasketElementTypeTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class ApiBasketElementTypeTest extends \PHPUnit_Framework_TestCase

@@ -16,9 +16,6 @@ use Sonata\Component\Basket\BasketManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 /**
- * Class BasketManagerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BasketManagerTest extends \PHPUnit_Framework_TestCase

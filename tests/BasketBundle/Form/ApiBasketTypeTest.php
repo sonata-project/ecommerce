@@ -16,8 +16,6 @@ use Sonata\Component\Currency\CurrencyDataTransformer;
 use Sonata\Component\Currency\CurrencyFormType;
 
 /**
- * Class ApiBasketTypeTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class ApiBasketTypeTest extends \PHPUnit_Framework_TestCase

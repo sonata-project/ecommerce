@@ -20,7 +20,7 @@ use Sonata\SeoBundle\Seo\SeoPageInterface;
 /**
  * TwitterService.
  *
- * @author     Xavier Coureau <xcoureau@ekino.com>
+ * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class Twitter implements ServiceInterface
 {

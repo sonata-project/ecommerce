@@ -17,9 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class VariationChoiceType.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class VariationChoiceType extends AbstractType

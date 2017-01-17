@@ -15,9 +15,6 @@ use Sonata\BasketBundle\Block\BasketBlockService;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class BasketBlockServiceTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class BasketBlockServiceTest extends \PHPUnit_Framework_TestCase

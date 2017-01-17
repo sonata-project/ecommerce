@@ -17,7 +17,7 @@ use Sonata\SeoBundle\Seo\SeoPageInterface;
 /**
  * ServiceInterface.
  *
- * @author     Xavier Coureau <xcoureau@ekino.com>
+ * @author Xavier Coureau <xcoureau@ekino.com>
  */
 interface ServiceInterface
 {

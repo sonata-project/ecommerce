@@ -14,9 +14,6 @@ namespace Sonata\Component\Invoice;
 use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
 
 /**
- * Class InvoiceStatusRenderer.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */

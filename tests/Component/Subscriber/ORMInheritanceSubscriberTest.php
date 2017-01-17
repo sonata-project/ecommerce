@@ -14,9 +14,6 @@ namespace Sonata\Test\Component\Subscriber;
 use Sonata\Component\Subscriber\ORMInheritanceSubscriber;
 
 /**
- * Class ORMInheritanceSubscriberTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class ORMInheritanceSubscriberTest extends \PHPUnit_Framework_TestCase

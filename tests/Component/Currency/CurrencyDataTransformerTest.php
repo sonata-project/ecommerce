@@ -15,9 +15,6 @@ use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDataTransformer;
 
 /**
- * Class CurrencyDataTransformerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CurrencyDataTransformerTest extends \PHPUnit_Framework_TestCase

@@ -19,9 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
- * Class FiltersMenuBlockService.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class FiltersMenuBlockService extends MenuBlockService

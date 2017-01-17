@@ -17,9 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PaymentHandlerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class PaymentHandlerTest extends \PHPUnit_Framework_TestCase

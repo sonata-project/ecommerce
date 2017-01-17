@@ -30,8 +30,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class BasketController.
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BasketController

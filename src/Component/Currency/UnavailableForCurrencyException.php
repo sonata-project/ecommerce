@@ -14,9 +14,6 @@ namespace Sonata\Component\Currency;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * Class UnavailableForCurrencyException.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class UnavailableForCurrencyException extends \Exception

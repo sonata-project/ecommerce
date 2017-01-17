@@ -67,9 +67,6 @@ class OrderMock extends BaseOrder
 }
 
 /**
- * Class MysqlReferenceTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class MysqlReferenceTest extends \PHPUnit_Framework_TestCase

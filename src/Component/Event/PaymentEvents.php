@@ -12,9 +12,6 @@
 namespace Sonata\Component\Event;
 
 /**
- * Class PaymentEvents.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 final class PaymentEvents
