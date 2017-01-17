@@ -19,8 +19,8 @@ class InvalidTransactionException extends \InvalidArgumentException
     /**
      * Constructor.
      *
-     * @param string    $orderReference
-     * @param int       $code
+     * @param string     $orderReference
+     * @param int        $code
      * @param \Exception $previous
      */
     public function __construct($orderReference = null, $code = 0, \Exception $previous = null)
