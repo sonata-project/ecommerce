@@ -18,9 +18,6 @@ class BasketTest extends BaseBasket
 }
 
 /**
- * Class BaseBasketTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BaseBasketTest extends \PHPUnit_Framework_TestCase

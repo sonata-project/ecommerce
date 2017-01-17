@@ -14,9 +14,6 @@ namespace Sonata\Component\Basket;
 use Sonata\Component\Customer\CustomerInterface;
 
 /**
- * Class BasketEntityFactory.
- *
- *
  * @author  Hugo Briand <briand@ekino.com>
  */
 class BasketEntityFactory extends BaseBasketFactory

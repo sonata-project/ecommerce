@@ -14,9 +14,6 @@ namespace Sonata\Test\Component\Generator;
 use Sonata\Component\Generator\Mustache;
 
 /**
- * Class MustacheTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class MustacheTest extends \PHPUnit_Framework_TestCase

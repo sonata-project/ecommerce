@@ -21,9 +21,6 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CustomerController.
- *
- *
  * @author  Hugo Briand <briand@ekino.com>
  */
 class CustomerController extends Controller

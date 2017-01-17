@@ -12,9 +12,6 @@
 namespace Sonata\Component\Basket;
 
 /**
- * Class InvalidProductException.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class InvalidProductException extends \RuntimeException

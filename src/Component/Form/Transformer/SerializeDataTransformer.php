@@ -14,8 +14,6 @@ namespace Sonata\Component\Form\Transformer;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class SerializeDataTransformer.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class SerializeDataTransformer implements DataTransformerInterface

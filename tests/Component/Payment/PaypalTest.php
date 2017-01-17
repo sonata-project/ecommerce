@@ -15,9 +15,6 @@ use Sonata\Component\Payment\Paypal;
 use Sonata\Component\Payment\TransactionInterface;
 
 /**
- * Class PaypalTest.
- *
- *
  * @author  Hugo Briand <briand@ekino.com>
  */
 class PaypalTest extends \PHPUnit_Framework_TestCase

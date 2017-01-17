@@ -24,8 +24,6 @@ class InvoiceTest extends BaseInvoice
 }
 
 /**
- * Class BaseInvoiceTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class BaseInvoiceTest extends \PHPUnit_Framework_TestCase

@@ -15,9 +15,6 @@ use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class OrderTransformEvent.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class OrderTransformEvent extends Event

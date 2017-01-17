@@ -15,9 +15,6 @@ use Sonata\ProductBundle\Controller\Api\ProductController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ProductControllerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class ProductControllerTest extends \PHPUnit_Framework_TestCase

@@ -18,9 +18,6 @@ use Sonata\Component\Product\ProductProviderInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class AddBasketElementEvent.
- *
- *
  * @author  Hugo Briand <briand@ekino.com>
  */
 class AddBasketElementEvent extends Event

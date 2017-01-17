@@ -15,9 +15,6 @@ use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 
 /**
- * Class DeliveryMethodTransformerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class DeliveryMethodTransformerTest extends \PHPUnit_Framework_TestCase

@@ -14,8 +14,6 @@ namespace Sonata\ProductBundle\Tests\Form\Type;
 use Sonata\ProductBundle\Form\Type\ApiProductType;
 
 /**
- * Class ApiProductTypeTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class ApiProductTypeTest extends \PHPUnit_Framework_TestCase

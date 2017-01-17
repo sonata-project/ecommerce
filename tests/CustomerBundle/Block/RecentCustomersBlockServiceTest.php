@@ -14,9 +14,6 @@ namespace Sonata\Test\CustomerBundle\Block;
 use Sonata\CustomerBundle\Block\RecentCustomersBlockService;
 
 /**
- * Class RecentCustomersBlockServiceTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class RecentCustomersBlockServiceTest extends \PHPUnit_Framework_TestCase

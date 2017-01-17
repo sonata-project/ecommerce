@@ -16,9 +16,6 @@ use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\InvoiceBundle\Entity\InvoiceManager;
 
 /**
- * Class InvoiceManagerTest.
- *
- *
  * @author Benoit de Jacobet <benoit.de-jacobet@ekino.com>
  */
 class InvoiceManagerTest extends \PHPUnit_Framework_TestCase

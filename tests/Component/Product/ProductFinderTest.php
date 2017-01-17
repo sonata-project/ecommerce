@@ -14,9 +14,6 @@ namespace Sonata\tests\Component\Product;
 use Sonata\Component\Product\ProductFinder;
 
 /**
- * Class ProductFinderTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class ProductFinderTest extends \PHPUnit_Framework_TestCase

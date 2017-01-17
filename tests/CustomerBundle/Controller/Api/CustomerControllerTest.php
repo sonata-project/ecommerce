@@ -15,9 +15,6 @@ use Sonata\CustomerBundle\Controller\Api\CustomerController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class CustomerControllerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CustomerControllerTest extends \PHPUnit_Framework_TestCase

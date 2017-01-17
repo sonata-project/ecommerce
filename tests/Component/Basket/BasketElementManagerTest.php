@@ -15,9 +15,6 @@ use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Basket\BasketElementManager;
 
 /**
- * Class BasketElementManagerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BasketElementManagerTest extends \PHPUnit_Framework_TestCase

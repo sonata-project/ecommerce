@@ -14,9 +14,6 @@ namespace Sonata\tests\ProductBundle\Menu;
 use Sonata\ProductBundle\Menu\ProductMenuBuilder;
 
 /**
- * Class ProductMenuBuilderTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class ProductMenuBuilderTest extends \PHPUnit_Framework_TestCase

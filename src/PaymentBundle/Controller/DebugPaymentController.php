@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class DebugPaymentController.
- *
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class DebugPaymentController extends Controller

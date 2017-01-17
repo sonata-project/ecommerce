@@ -14,8 +14,6 @@ namespace Sonata\Component\Status;
 use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface as BaseStatusClassRendererInterface;
 
 /**
- * Class StatusClassRendererInterface.
- *
  * @deprecated
  * @see \Sonata\CoreBundle\Component\Status\StatusClassRendererInterface
  *

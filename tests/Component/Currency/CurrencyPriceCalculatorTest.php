@@ -15,9 +15,6 @@ use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 
 /**
- * Class CurrencyPriceCalculatorTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CurrencyPriceCalculatorTest extends \PHPUnit_Framework_TestCase

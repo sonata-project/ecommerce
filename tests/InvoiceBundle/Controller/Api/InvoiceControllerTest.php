@@ -14,9 +14,6 @@ namespace Sonata\Test\InvoiceBundle\Controller\Api;
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
 
 /**
- * Class InvoiceControllerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class InvoiceControllerTest extends \PHPUnit_Framework_TestCase

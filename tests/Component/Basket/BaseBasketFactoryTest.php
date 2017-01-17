@@ -72,9 +72,6 @@ class BasketFactory extends BaseBasketFactory
 }
 
 /**
- * Class BaseBasketFactoryTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BaseBasketFactoryTest extends \PHPUnit_Framework_TestCase
