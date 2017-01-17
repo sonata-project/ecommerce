@@ -12,7 +12,7 @@
 namespace Sonata\Component\Event;
 
 /**
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 final class BasketEvents
 {

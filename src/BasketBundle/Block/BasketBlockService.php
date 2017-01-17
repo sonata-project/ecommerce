@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author     Xavier Coureau <xcoureau@ekino.com>
+ * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class BasketBlockService extends BaseBlockService
 {

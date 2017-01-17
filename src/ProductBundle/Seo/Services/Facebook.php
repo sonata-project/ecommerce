@@ -23,7 +23,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * FacebookService.
  *
- * @author     Xavier Coureau <xcoureau@ekino.com>
+ * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class Facebook implements ServiceInterface
 {

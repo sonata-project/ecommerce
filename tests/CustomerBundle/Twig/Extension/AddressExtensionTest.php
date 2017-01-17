@@ -14,7 +14,7 @@ namespace Sonata\tests\CustomerBundle\Twig\Extension;
 use Sonata\CustomerBundle\Twig\Extension\AddressExtension;
 
 /**
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 class AddressExtensionTest extends \PHPUnit_Framework_TestCase
 {

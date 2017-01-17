@@ -25,8 +25,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * @author  Thomas Rabaix <thomas.rabaix@sonata-project.org>
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ * @author Hugo Briand <briand@ekino.com>
  */
 class RecentOrdersBlockService extends BaseBlockService
 {

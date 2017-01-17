@@ -12,7 +12,7 @@
 namespace Sonata\Component\Product;
 
 /**
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 interface ProductFinderInterface
 {
