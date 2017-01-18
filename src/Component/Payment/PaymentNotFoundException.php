@@ -14,9 +14,6 @@ namespace Sonata\Component\Payment;
 use Exception;
 
 /**
- * Class PaymentNotFoundException.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class PaymentNotFoundException extends \InvalidArgumentException

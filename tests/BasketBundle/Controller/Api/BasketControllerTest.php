@@ -15,8 +15,6 @@ use Sonata\BasketBundle\Controller\Api\BasketController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class BasketControllerTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class BasketControllerTest extends \PHPUnit_Framework_TestCase

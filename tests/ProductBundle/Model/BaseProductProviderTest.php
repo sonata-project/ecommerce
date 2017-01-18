@@ -53,9 +53,6 @@ class ProductTest extends BaseProduct implements ProductInterface
 }
 
 /**
- * Class BaseProductProviderTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class BaseProductProviderTest extends \PHPUnit_Framework_TestCase

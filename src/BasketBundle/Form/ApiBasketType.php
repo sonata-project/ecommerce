@@ -17,8 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class ApiBasketType.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class ApiBasketType extends AbstractType

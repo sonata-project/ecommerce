@@ -23,7 +23,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  *   openssl req -new -key my-prvkey.pem -x509 -days 365 -out my-pubcert.pem
  *  *
  *
- * @author     Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 abstract class BasePaypal extends BasePayment
 {

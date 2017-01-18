@@ -18,9 +18,6 @@ use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 
 /**
- * Class AddressExtension.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class AddressExtension extends \Twig_Extension

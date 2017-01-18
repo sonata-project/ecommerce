@@ -20,9 +20,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 
 /**
- * Class BaseBasketFactory.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandlerInterface

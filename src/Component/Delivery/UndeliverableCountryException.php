@@ -15,9 +15,6 @@ use Exception;
 use Sonata\Component\Customer\AddressInterface;
 
 /**
- * Class UndeliverableCountryException.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class UndeliverableCountryException extends \RuntimeException

@@ -16,9 +16,6 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
- * Class GenerateProductCommandTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase

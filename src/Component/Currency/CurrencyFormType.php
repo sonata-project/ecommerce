@@ -15,9 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Class CurrencyFormType.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CurrencyFormType extends CurrencyType

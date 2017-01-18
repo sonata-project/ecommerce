@@ -15,9 +15,6 @@ use Sonata\Component\Invoice\InvoiceInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class InvoiceTransformEvent.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class InvoiceTransformEvent extends Event

@@ -23,9 +23,6 @@ class Address extends BaseAddress
 }
 
 /**
- * Class SelectorTest.
- *
- *
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
 class SelectorTest extends \PHPUnit_Framework_TestCase

@@ -14,9 +14,6 @@ namespace Sonata\tests\CustomerBundle\Entity;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\CustomerManager;
 
-/**
- * Class CustomerManagerTest.
- */
 class CustomerManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetPager()

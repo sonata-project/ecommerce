@@ -21,9 +21,6 @@ use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class InvoiceController.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class InvoiceController

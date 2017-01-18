@@ -15,9 +15,6 @@ use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\ProductInterface;
 
 /**
- * Class AfterCalculatePriceEvent.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class AfterCalculatePriceEvent extends BeforeCalculatePriceEvent

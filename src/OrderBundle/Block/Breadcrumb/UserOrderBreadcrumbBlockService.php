@@ -15,8 +15,6 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\UserBundle\Block\Breadcrumb\BaseUserProfileBreadcrumbBlockService;
 
 /**
- * Class for user breadcrumbs.
- *
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
 class UserOrderBreadcrumbBlockService extends BaseUserProfileBreadcrumbBlockService

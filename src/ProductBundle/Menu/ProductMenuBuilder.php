@@ -20,9 +20,6 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class ProductMenuBuilder.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class ProductMenuBuilder

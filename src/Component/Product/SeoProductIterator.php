@@ -18,9 +18,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class SeoProductIterator.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class SeoProductIterator implements SourceIteratorInterface

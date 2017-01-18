@@ -15,9 +15,6 @@ use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\AddressManager;
 
 /**
- * Class AddressManagerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class AddressManagerTest extends \PHPUnit_Framework_TestCase

@@ -23,10 +23,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class PaymentHandler.
- *
- * Responsible for interactions between PaymentController & Model
- *
+ * Responsible for interactions between PaymentController & Model.
  *
  * @author Hugo Briand <briand@ekino.com>
  */

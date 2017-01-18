@@ -23,10 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class RecentCustomersBlockService.
- *
- *
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 class RecentCustomersBlockService extends BaseBlockService
 {

@@ -37,9 +37,6 @@ class AddressTest extends BaseAddress
 }
 
 /**
- * Class BaseCustomerTest.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BaseCustomerTest extends \PHPUnit_Framework_TestCase

@@ -16,9 +16,6 @@ use Sonata\Component\Product\ProductInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class PriceEvent.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class BeforeCalculatePriceEvent extends Event

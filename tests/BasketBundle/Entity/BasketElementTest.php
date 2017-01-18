@@ -14,9 +14,6 @@ namespace Sonata\tests\BasketBundle\Entity;
 use Sonata\Component\Basket\BasketElement;
 
 /**
- * Class BasketElementTest.
- *
- *
  * @author Vincent Composieux <composieux@ekino.com>
  */
 class BasketElementTest extends \PHPUnit_Framework_TestCase

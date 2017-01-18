@@ -14,10 +14,7 @@ namespace Sonata\tests\Component\Delivery;
 use Sonata\Component\Delivery\FreeDelivery;
 
 /**
- * Class FreeDeliveryTest.
- *
- *
- * @author  Hugo Briand <briand@ekino.com>
+ * @author Hugo Briand <briand@ekino.com>
  */
 class FreeDeliveryTest extends \PHPUnit_Framework_TestCase
 {

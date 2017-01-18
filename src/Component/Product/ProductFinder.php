@@ -12,9 +12,6 @@
 namespace Sonata\Component\Product;
 
 /**
- * Class ProductFinder.
- *
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class ProductFinder implements ProductFinderInterface

@@ -24,8 +24,6 @@ class OrderTest extends BaseOrder
 }
 
 /**
- * Class BaseOrderTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class BaseOrderTest extends \PHPUnit_Framework_TestCase
