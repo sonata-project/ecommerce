@@ -12,7 +12,7 @@
 namespace Sonata\Component\Currency;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\StringType;
+use Doctrine\DBAL\Types\Type;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -20,7 +20,7 @@ use Symfony\Component\Intl\Intl;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyDoctrineType extends StringType
+class CurrencyDoctrineType extends Type
 {
     const CURRENCY = 'currency'; // modify to match your type name
 
@@ -69,6 +69,14 @@ class CurrencyDoctrineType extends StringType
 
         // As currency representation is a norm (always 3 chars), we fix it
         return $platform->getVarcharTypeDeclarationSQL($field);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    {
+        return true;
     }
 
     /**
