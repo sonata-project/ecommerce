@@ -128,7 +128,9 @@ class OgonePayment extends BasePayment
         $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
         $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
 
-        return new RedirectResponse($this->router->generate($this->getOption('url_return_ok'), $transaction->getParameters()));
+        return new RedirectResponse(
+            $this->router->generate($this->getOption('url_return_ok'), $transaction->getParameters())
+        );
     }
 
     /**
