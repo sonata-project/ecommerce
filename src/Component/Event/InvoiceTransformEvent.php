@@ -33,7 +33,7 @@ class InvoiceTransformEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Invoice\InvoiceInterface
+     * @return InvoiceInterface
      */
     public function getInvoice()
     {
