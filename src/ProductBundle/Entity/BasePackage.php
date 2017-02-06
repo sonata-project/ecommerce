@@ -14,9 +14,6 @@ namespace Sonata\ProductBundle\Entity;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\ProductInterface;
 
-/**
- * Sonata\ProductBundle\Entity\BasePackage.
- */
 abstract class BasePackage implements PackageInterface
 {
     /**

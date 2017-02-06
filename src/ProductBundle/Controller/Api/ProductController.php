@@ -59,8 +59,6 @@ class ProductController
     protected $formatterPool;
 
     /**
-     * Constructor.
-     *
      * @param ProductManagerInterface $productManager Sonata product manager
      * @param Pool                    $productPool    Sonata product pool
      * @param FormFactoryInterface    $formFactory    Symfony form factory

@@ -25,8 +25,6 @@ class InvoiceTransformEvent extends Event
     protected $invoice;
 
     /**
-     * Constructor.
-     *
      * @param InvoiceInterface $invoice
      */
     public function __construct(InvoiceInterface $invoice)
@@ -35,7 +33,7 @@ class InvoiceTransformEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Invoice\InvoiceInterface
+     * @return InvoiceInterface
      */
     public function getInvoice()
     {

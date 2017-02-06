@@ -15,9 +15,6 @@ use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderElementInterface;
 
-/**
- * Sonata\InvoiceBundle\Entity\BaseInvoiceElement.
- */
 abstract class BaseInvoiceElement implements InvoiceElementInterface
 {
     /**

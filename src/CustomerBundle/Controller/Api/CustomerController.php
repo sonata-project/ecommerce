@@ -52,8 +52,6 @@ class CustomerController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param CustomerManagerInterface $customerManager
      * @param OrderManagerInterface    $orderManager
      * @param AddressManagerInterface  $addressManager

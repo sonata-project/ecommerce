@@ -22,8 +22,6 @@ class ProductFinder implements ProductFinderInterface
     private $pManager;
 
     /**
-     * Constructor.
-     *
      * @param ProductManagerInterface $pManager
      */
     public function __construct(ProductManagerInterface $pManager)

@@ -15,9 +15,6 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 
-/**
- * Sonata\ProductBundle\Entity\BaseProductCategory.
- */
 abstract class BaseProductCategory implements ProductCategoryInterface
 {
     /**

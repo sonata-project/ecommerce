@@ -60,8 +60,6 @@ class PaymentHandler implements PaymentHandlerInterface
     protected $eventDispatcher;
 
     /**
-     * Constructor.
-     *
      * @param OrderManagerInterface       $orderManager
      * @param PaymentSelectorInterface    $paymentSelector
      * @param ReferenceInterface          $referenceGenerator

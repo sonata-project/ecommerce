@@ -31,8 +31,6 @@ class OrderController
     protected $orderManager;
 
     /**
-     * Constructor.
-     *
      * @param OrderManagerInterface $orderManager
      */
     public function __construct(OrderManagerInterface $orderManager)

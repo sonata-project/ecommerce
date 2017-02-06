@@ -32,8 +32,6 @@ class ApiBasketType extends AbstractType
     protected $currencyFormType;
 
     /**
-     * Constructor.
-     *
      * @param string           $class            An entity data class
      * @param CurrencyFormType $currencyFormType A Sonata ecommerce currency form type
      */

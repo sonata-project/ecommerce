@@ -28,8 +28,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
     protected $categoryManager;
 
     /**
-     * Constructor.
-     *
      * @param string                   $class
      * @param EntityManager            $em
      * @param CategoryManagerInterface $categoryManager

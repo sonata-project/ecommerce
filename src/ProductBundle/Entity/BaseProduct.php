@@ -22,9 +22,6 @@ use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
-/**
- * Sonata\ProductBundle\Entity\BaseProduct.
- */
 abstract class BaseProduct implements ProductInterface
 {
     /**
@@ -157,9 +154,6 @@ abstract class BaseProduct implements ProductInterface
      */
     protected $options = array();
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->packages = new ArrayCollection();

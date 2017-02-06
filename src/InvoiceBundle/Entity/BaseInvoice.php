@@ -18,9 +18,6 @@ use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\UserBundle\Model\UserInterface;
 
-/**
- * Sonata\InvoiceBundle\Entity\BaseInvoice.
- */
 abstract class BaseInvoice implements InvoiceInterface
 {
     /**
@@ -133,9 +130,6 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     protected $invoiceElements = array();
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();

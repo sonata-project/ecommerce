@@ -28,8 +28,6 @@ class AddressExtension extends \Twig_Extension
     protected $deliverySelector;
 
     /**
-     * Constructor.
-     *
      * @param ServiceDeliverySelectorInterface $deliverySelector
      */
     public function __construct(ServiceDeliverySelectorInterface $deliverySelector)
@@ -81,7 +79,10 @@ class AddressExtension extends \Twig_Extension
         $requiredAddressKeys = array('firstname', 'lastname', 'address1', 'postcode', 'city', 'country_code');
 
         if (!($address instanceof AddressInterface) && (!is_array($address) || count(array_diff($requiredAddressKeys, array_keys($address))) !== 0)) {
-            throw new InvalidParameterException(sprintf('sonata_address_render needs an AddressInterface instance or an array with keys (%s)', implode(', ', $requiredAddressKeys)));
+            throw new InvalidParameterException(sprintf(
+                'sonata_address_render needs an AddressInterface instance or an array with keys (%s)',
+                implode(', ', $requiredAddressKeys)
+            ));
         }
 
         if ($address instanceof AddressInterface) {
@@ -92,7 +93,9 @@ class AddressExtension extends \Twig_Extension
             );
         } else {
             if ($showEdit && !array_key_exists('id', $address)) {
-                throw new InvalidParameterException("sonata_address_render needs 'id' key to be set to render the edit button");
+                throw new InvalidParameterException(
+                    "sonata_address_render needs 'id' key to be set to render the edit button"
+                );
             }
 
             if ($showName && !array_key_exists('name', $address)) {

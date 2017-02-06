@@ -43,8 +43,6 @@ class InvoiceTransformer extends BaseTransformer
     protected $eventDispatcher;
 
     /**
-     * Constructor.
-     *
      * @param InvoiceElementManagerInterface $invoiceElementManager Invoice element manager
      * @param DeliveryPool                   $deliveryPool          Delivery pool component
      * @param EventDispatcherInterface       $eventDispatcher
