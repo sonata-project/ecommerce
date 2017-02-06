@@ -12,13 +12,13 @@
 namespace Sonata\ProductBundle\Admin;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ProductCategoryAdmin extends Admin
+class ProductCategoryAdmin extends AbstractAdmin
 {
     protected $parentAssociationMapping = 'product';
 
