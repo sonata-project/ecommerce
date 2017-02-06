@@ -39,8 +39,6 @@ class ProductExtension extends \Twig_Extension
     protected $basketElementClass;
 
     /**
-     * Constructor.
-     *
      * @param ProductPool          $productPool        Sonata product pool
      * @param FormFactoryInterface $formFactory        Symfony form factory
      * @param string               $basketElementClass Sonata basket element class name

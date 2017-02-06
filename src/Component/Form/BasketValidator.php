@@ -31,8 +31,6 @@ class BasketValidator extends ConstraintValidator
     protected $constraintValidatorFactory;
 
     /**
-     * Constructor.
-     *
      * @param ProductPool                $productPool
      * @param ConstraintValidatorFactory $constraintValidatorFactory
      */

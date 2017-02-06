@@ -40,8 +40,6 @@ class ProductMenuBuilder
     protected $router;
 
     /**
-     * Constructor.
-     *
      * @param MenuFactory                     $factory
      * @param ProductCategoryManagerInterface $categoryManager
      * @param RouterInterface                 $router

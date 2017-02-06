@@ -41,8 +41,6 @@ class OgonePayment extends BasePayment
     protected $templating;
 
     /**
-     * Constructor.
-     *
      * @param RouterInterface $router
      * @param LoggerInterface $logger
      * @param EngineInterface $templating

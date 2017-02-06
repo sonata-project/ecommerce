@@ -29,8 +29,6 @@ class FiltersMenuBlockService extends MenuBlockService
     private $menuBuilder;
 
     /**
-     * Constructor.
-     *
      * @param string                $name
      * @param EngineInterface       $templating
      * @param MenuProviderInterface $menuProvider

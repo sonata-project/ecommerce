@@ -157,9 +157,6 @@ abstract class BaseProduct implements ProductInterface
      */
     protected $options = array();
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->packages = new ArrayCollection();

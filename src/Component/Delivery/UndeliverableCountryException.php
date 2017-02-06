@@ -25,8 +25,6 @@ class UndeliverableCountryException extends \RuntimeException
     private $address;
 
     /**
-     * Constructor.
-     *
      * @param AddressInterface $address
      * @param int              $code
      * @param Exception        $previous

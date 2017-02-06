@@ -39,8 +39,6 @@ class PaymentType extends AbstractType
     protected $paymentSelector;
 
     /**
-     * Constructor.
-     *
      * @param AddressManagerInterface  $addressManager
      * @param PaymentPool              $paymentPool
      * @param PaymentSelectorInterface $paymentSelector

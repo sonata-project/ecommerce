@@ -37,8 +37,6 @@ class AddressType extends AbstractType
     protected $basket;
 
     /**
-     * Constructor.
-     *
      * @param string          $addressClass An address entity class name
      * @param BasketInterface $basket       Sonata current basket
      */

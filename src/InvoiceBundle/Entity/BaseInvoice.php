@@ -133,9 +133,6 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     protected $invoiceElements = array();
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();

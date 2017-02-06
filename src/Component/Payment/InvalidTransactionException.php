@@ -17,8 +17,6 @@ namespace Sonata\Component\Payment;
 class InvalidTransactionException extends \InvalidArgumentException
 {
     /**
-     * Constructor.
-     *
      * @param string     $orderReference
      * @param int        $code
      * @param \Exception $previous

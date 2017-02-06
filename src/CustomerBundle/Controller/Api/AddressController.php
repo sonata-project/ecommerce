@@ -38,8 +38,6 @@ class AddressController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param AddressManagerInterface $addressManager
      * @param FormFactoryInterface    $formFactory
      */

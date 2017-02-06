@@ -31,8 +31,6 @@ class InvoiceController
     protected $invoiceManager;
 
     /**
-     * Constructor.
-     *
      * @param InvoiceManagerInterface $invoiceManager
      */
     public function __construct(InvoiceManagerInterface $invoiceManager)
