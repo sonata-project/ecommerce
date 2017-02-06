@@ -16,9 +16,6 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 
-/**
- * Sonata\OrderBundle\Entity\BaseOrderElement.
- */
 abstract class BaseOrderElement implements OrderElementInterface
 {
     /**

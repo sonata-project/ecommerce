@@ -16,9 +16,6 @@ use FOS\UserBundle\Model\UserInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 
-/**
- * Sonata\CustomerBundle\Entity\BaseCustomer.
- */
 abstract class BaseCustomer implements CustomerInterface
 {
     const TITLE_MLLE = 1;

@@ -22,9 +22,6 @@ use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
-/**
- * Sonata\ProductBundle\Entity\BaseProduct.
- */
 abstract class BaseProduct implements ProductInterface
 {
     /**

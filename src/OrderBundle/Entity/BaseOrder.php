@@ -19,9 +19,6 @@ use Sonata\Component\Order\OrderInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
 
-/**
- * Sonata\OrderBundle\Entity\BaseOrder.
- */
 abstract class BaseOrder implements OrderInterface
 {
     /**
