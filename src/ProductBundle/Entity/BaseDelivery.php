@@ -15,9 +15,6 @@ use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\ProductInterface;
 
-/**
- * Sonata\ProductBundle\Entity\BaseDelivery.
- */
 abstract class BaseDelivery implements DeliveryInterface
 {
     /**

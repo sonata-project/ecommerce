@@ -25,8 +25,6 @@ class CurrencyFormType extends CurrencyType
     private $currencyTransformer;
 
     /**
-     * Constructor.
-     *
      * @param CurrencyDataTransformer $currencyTransformer
      */
     public function __construct(CurrencyDataTransformer $currencyTransformer)

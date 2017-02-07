@@ -19,9 +19,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * ProductExtension.
- *
- *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataProductExtension extends Extension

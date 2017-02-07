@@ -19,8 +19,6 @@ use Exception;
 class PaymentNotFoundException extends \InvalidArgumentException
 {
     /**
-     * Constructor.
-     *
      * @param string    $bankCode
      * @param int       $code
      * @param Exception $previous

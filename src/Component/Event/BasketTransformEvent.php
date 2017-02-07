@@ -25,8 +25,6 @@ class BasketTransformEvent extends Event
     protected $basket;
 
     /**
-     * Constructor.
-     *
      * @param BasketInterface $basket
      */
     public function __construct(BasketInterface $basket)

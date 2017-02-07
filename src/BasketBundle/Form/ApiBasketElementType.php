@@ -27,8 +27,6 @@ class ApiBasketElementType extends AbstractType
     protected $class;
 
     /**
-     * Constructor.
-     *
      * @param string $class An entity data class
      */
     public function __construct($class)

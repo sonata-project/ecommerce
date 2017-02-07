@@ -33,8 +33,6 @@ class ShippingType extends AbstractType
     protected $deliverySelector;
 
     /**
-     * Constructor.
-     *
      * @param DeliveryPool                     $deliveryPool
      * @param ServiceDeliverySelectorInterface $deliverySelector
      */

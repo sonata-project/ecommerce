@@ -41,8 +41,6 @@ class OgonePayment extends BasePayment
     protected $templating;
 
     /**
-     * Constructor.
-     *
      * @param RouterInterface $router
      * @param LoggerInterface $logger
      * @param EngineInterface $templating
@@ -130,7 +128,9 @@ class OgonePayment extends BasePayment
         $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
         $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
 
-        return new RedirectResponse($this->router->generate($this->getOption('url_return_ok'), $transaction->getParameters()));
+        return new RedirectResponse(
+            $this->router->generate($this->getOption('url_return_ok'), $transaction->getParameters())
+        );
     }
 
     /**

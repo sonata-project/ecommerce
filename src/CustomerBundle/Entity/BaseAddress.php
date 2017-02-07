@@ -14,9 +14,6 @@ namespace Sonata\CustomerBundle\Entity;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 
-/**
- * Sonata\BasketBundle\Entity\BaseAddress.
- */
 abstract class BaseAddress implements AddressInterface
 {
     /**

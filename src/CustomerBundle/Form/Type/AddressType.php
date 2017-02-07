@@ -40,8 +40,6 @@ class AddressType extends AbstractType
     protected $name;
 
     /**
-     * Constructor.
-     *
      * @param string          $class  A class to apply getter
      * @param string          $getter A getter method name
      * @param string          $name   A form type name

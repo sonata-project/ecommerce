@@ -15,9 +15,6 @@ use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 
-/**
- * Sonata\ProductBundle\Entity\BaseProductCollection.
- */
 abstract class BaseProductCollection implements ProductCollectionInterface
 {
     /**

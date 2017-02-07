@@ -28,8 +28,6 @@ class SeoProductIterator implements SourceIteratorInterface
     protected $iterator;
 
     /**
-     * Constructor.
-     *
      * @param RegistryInterface $registry
      * @param string            $class
      * @param RouterInterface   $router

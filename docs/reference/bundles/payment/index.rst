@@ -237,7 +237,7 @@ In order to add a custom payment methods, here are the steps to follow:
     // ...
 
     /**
-     * Class TakeAwayDelivery
+     * Class Bitcoin
      */
     class Bitcoin extends BasePayment
     {

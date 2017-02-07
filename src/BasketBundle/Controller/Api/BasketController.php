@@ -60,8 +60,6 @@ class BasketController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param BasketManagerInterface        $basketManager        A Sonata ecommerce basket manager
      * @param BasketElementManagerInterface $basketElementManager A Sonata ecommerce basket element manager
      * @param ProductManagerInterface       $productManager       A Sonata ecommerce product manager

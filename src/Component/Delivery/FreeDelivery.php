@@ -22,8 +22,6 @@ class FreeDelivery extends BaseServiceDelivery
     protected $isAddressRequired;
 
     /**
-     * Constructor.
-     *
      * @param bool $isAddressRequired
      */
     public function __construct($isAddressRequired)

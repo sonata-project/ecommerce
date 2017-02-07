@@ -43,8 +43,6 @@ class AddBasketElementEvent extends Event
     protected $productProvider;
 
     /**
-     * Constructor.
-     *
      * @param BasketInterface          $basket
      * @param BasketElementInterface   $basketElement
      * @param ProductInterface         $product
