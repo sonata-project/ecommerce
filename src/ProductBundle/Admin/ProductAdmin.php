@@ -12,7 +12,7 @@
 namespace Sonata\ProductBundle\Admin;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -23,7 +23,7 @@ use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 
-class ProductAdmin extends Admin
+class ProductAdmin extends AbstractAdmin
 {
     /**
      * @var \Sonata\Component\Product\Pool

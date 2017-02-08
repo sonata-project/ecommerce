@@ -19,6 +19,7 @@
         "knplabs/knp-paginator-bundle": "^2.4",
         "kriswallsmith/buzz": "^0.15",
         "nelmio/api-doc-bundle": "^2.4",
+        "sonata-project/admin-bundle": "^3.1",
         "sonata-project/block-bundle": "^3.0",
         "sonata-project/classification-bundle": "^3.0",
         "sonata-project/comment-bundle": "^3.0",
