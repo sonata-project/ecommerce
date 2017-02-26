@@ -21,6 +21,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('c.lastname'),
@@ -49,6 +50,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -73,6 +75,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('isFake' => true)));
             })
@@ -84,6 +87,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('isFake' => false)));
             })
