@@ -85,6 +85,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('o.reference'),
@@ -113,6 +114,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -137,6 +139,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_OPEN)));
             })
@@ -148,6 +151,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_CANCELLED)));
             })
@@ -159,6 +163,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_ERROR)));
             })
@@ -170,6 +175,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_PENDING)));
             })
@@ -181,6 +187,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_STOPPED)));
             })
@@ -192,6 +199,7 @@ class OrderManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_VALIDATED)));
             })

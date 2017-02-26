@@ -85,6 +85,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getBasketManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('b')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('b.id'),
@@ -112,6 +113,7 @@ class BasketManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getBasketManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('b')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
