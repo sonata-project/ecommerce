@@ -25,6 +25,7 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('i.reference'),
@@ -53,6 +54,7 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -77,6 +79,7 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseInvoice::STATUS_OPEN)));
             })
@@ -88,6 +91,7 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseInvoice::STATUS_PAID)));
             })
@@ -99,6 +103,7 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseInvoice::STATUS_CONFLICT)));
             })
