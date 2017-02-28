@@ -1,7 +1,7 @@
 var request = false;
 
 jQuery(document).ready(function() {
-    jQuery('form#form_add_basket').on('submit', function (e) {
+    jQuery('form[id^="form_add_basket"]').on('submit', function (e) {
         e.preventDefault();
 
         if (false === request) {
