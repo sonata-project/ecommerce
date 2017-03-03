@@ -4,9 +4,9 @@
         <field name="productId" type="integer" column="product_id"/>
         <field name="productType" type="string" column="product_type" length="255"/>
         <field name="quantity" type="integer" column="quantity"/>
-        <field name="unitPriceExcl" type="decimal" column="unit_price_excl" scale="4"/>
-        <field name="unitPriceInc" type="decimal" column="unit_price_inc" scale="4"/>
-        <field name="price" type="decimal" column="price" scale="4"/>
+        <field name="unitPriceExcl" type="decimal" column="unit_price_excl" precision="20" scale="4"/>
+        <field name="unitPriceInc" type="decimal" column="unit_price_inc" precision="20" scale="4"/>
+        <field name="price" type="decimal" column="price" precision="20" scale="4"/>
         <field name="vatRate" type="decimal" column="vat_rate" scale="4"/>
         <field name="designation" type="string" column="designation" length="255"/>
         <field name="description" type="text" column="description"/>
