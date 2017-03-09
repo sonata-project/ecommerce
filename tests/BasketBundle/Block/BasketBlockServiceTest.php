@@ -12,12 +12,13 @@
 namespace Sonata\BasketBundle\Tests\Block;
 
 use Sonata\BasketBundle\Block\BasketBlockService;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class BasketBlockServiceTest extends \PHPUnit_Framework_TestCase
+class BasketBlockServiceTest extends PHPUnit_Framework_TestCase
 {
     public function testGetName()
     {
@@ -31,7 +32,7 @@ class BasketBlockServiceTest extends \PHPUnit_Framework_TestCase
     {
         $engineInterfaceMock = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')->disableOriginalConstructor()->getMock();
         $engineInterfaceMock->expects($this->once())->method('renderResponse')->will($this->returnValue(new Response()));
-        $context = $this->getMock('Sonata\BlockBundle\Block\BlockContextInterface');
+        $context = $this->createMock('Sonata\BlockBundle\Block\BlockContextInterface');
         $block = new BasketBlockService('test', $engineInterfaceMock);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $block->execute($context));

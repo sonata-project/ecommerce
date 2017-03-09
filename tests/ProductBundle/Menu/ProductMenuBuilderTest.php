@@ -12,23 +12,24 @@
 namespace Sonata\ProductBundle\Tests\Menu;
 
 use Sonata\ProductBundle\Menu\ProductMenuBuilder;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class ProductMenuBuilderTest extends \PHPUnit_Framework_TestCase
+class ProductMenuBuilderTest extends PHPUnit_Framework_TestCase
 {
     public function testCreateCategoryMenu()
     {
-        $menu = $this->getMock('Knp\Menu\ItemInterface');
-        $factory = $this->getMock('Knp\Menu\FactoryInterface');
+        $menu = $this->createMock('Knp\Menu\ItemInterface');
+        $factory = $this->createMock('Knp\Menu\FactoryInterface');
 
         $factory->expects($this->once())
             ->method('createItem')
             ->will($this->returnValue($menu));
 
-        $categoryManager = $this->getMock('Sonata\Component\Product\ProductCategoryManagerInterface');
-        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $categoryManager = $this->createMock('Sonata\Component\Product\ProductCategoryManagerInterface');
+        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
 
         $categoryManager->expects($this->once())
             ->method('getCategoryTree')
@@ -43,19 +44,19 @@ class ProductMenuBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateFiltersMenu()
     {
-        $menu = $this->getMock('Knp\Menu\ItemInterface');
-        $factory = $this->getMock('Knp\Menu\FactoryInterface');
+        $menu = $this->createMock('Knp\Menu\ItemInterface');
+        $factory = $this->createMock('Knp\Menu\FactoryInterface');
 
         $factory->expects($this->once())
             ->method('createItem')
             ->will($this->returnValue($menu));
 
-        $categoryManager = $this->getMock('Sonata\Component\Product\ProductCategoryManagerInterface');
-        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $categoryManager = $this->createMock('Sonata\Component\Product\ProductCategoryManagerInterface');
+        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
 
         $builder = new ProductMenuBuilder($factory, $categoryManager, $router);
 
-        $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $productProvider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
 
         $productProvider->expects($this->once())
             ->method('getFilters')

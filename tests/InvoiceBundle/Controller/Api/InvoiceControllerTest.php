@@ -12,18 +12,19 @@
 namespace Sonata\InvoiceBundle\Tests\Controller\Api;
 
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
+class InvoiceControllerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetInvoicesAction()
     {
-        $invoiceManager = $this->getMock('Sonata\Component\Invoice\InvoiceManagerInterface');
+        $invoiceManager = $this->createMock('Sonata\Component\Invoice\InvoiceManagerInterface');
         $invoiceManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
-        $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
@@ -32,7 +33,7 @@ class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetInvoiceAction()
     {
-        $invoice = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoice = $this->createMock('Sonata\Component\Invoice\InvoiceInterface');
         $this->assertEquals($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
@@ -47,8 +48,8 @@ class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetInvoiceInvoiceelementsAction()
     {
-        $invoice = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
-        $invoiceElements = $this->getMock('Sonata\Component\Invoice\InvoiceElementsInterface');
+        $invoice = $this->createMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoiceElements = $this->createMock('Sonata\Component\Invoice\InvoiceElementInterface');
         $invoice->expects($this->once())->method('getInvoiceElements')->will($this->returnValue(array($invoiceElements)));
 
         $this->assertEquals(array($invoiceElements), $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
@@ -63,7 +64,7 @@ class InvoiceControllerTest extends \PHPUnit_Framework_TestCase
     public function createInvoiceController($invoice = null, $invoiceManager = null)
     {
         if (null === $invoiceManager) {
-            $invoiceManager = $this->getMock('Sonata\Component\Invoice\InvoiceManagerInterface');
+            $invoiceManager = $this->createMock('Sonata\Component\Invoice\InvoiceManagerInterface');
         }
         if (null !== $invoice) {
             $invoiceManager->expects($this->once())->method('findOneBy')->will($this->returnValue($invoice));

@@ -12,19 +12,20 @@
 namespace Sonata\CustomerBundle\Tests\Controller\Api;
 
 use Sonata\CustomerBundle\Controller\Api\AddressController;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class AddressControllerTest extends \PHPUnit_Framework_TestCase
+class AddressControllerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetAddressesAction()
     {
-        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
-        $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
@@ -33,7 +34,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetAddressAction()
     {
-        $address = $this->getMock('Sonata\Component\Customer\AddressInterface');
+        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
         $this->assertEquals($address, $this->createAddressController($address)->getAddressAction(1));
     }
@@ -49,9 +50,9 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPostAddressAction()
     {
-        $address = $this->getMock('Sonata\AddressBundle\Model\AddressInterface');
+        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
-        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
@@ -59,7 +60,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($address));
 
-        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
@@ -69,16 +70,16 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPostCustomerInvalidAction()
     {
-        $address = $this->getMock('Sonata\CustomerBundle\Model\AddressInterface');
+        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
-        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->never())->method('save')->will($this->returnValue($address));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
-        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
@@ -88,9 +89,9 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPutAddressAction()
     {
-        $address = $this->getMock('Sonata\CustomerBundle\Model\AddressInterface');
+        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
-        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
         $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
 
@@ -99,7 +100,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($address));
 
-        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createAddressController($address, $addressManager, $formFactory)->putAddressAction(1, new Request());
@@ -109,9 +110,9 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPutAddressInvalidAction()
     {
-        $address = $this->getMock('Sonata\CustomerBundle\Model\AddressInterface');
+        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
-        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
         $addressManager->expects($this->never())->method('save')->will($this->returnValue($address));
 
@@ -119,7 +120,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('bind');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
-        $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createAddressController($address, $addressManager, $formFactory)->putAddressAction(1, new Request());
@@ -129,9 +130,9 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteAddressAction()
     {
-        $address = $this->getMock('Sonata\CustomerBundle\Model\AddressInterface');
+        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
-        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
         $addressManager->expects($this->once())->method('delete');
 
@@ -144,7 +145,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
-        $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));
         $addressManager->expects($this->never())->method('delete');
 
@@ -163,7 +164,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
     public function createAddressController($address = null, $addressManager = null, $formFactory = null)
     {
         if (null === $addressManager) {
-            $addressManager = $this->getMock('Sonata\Component\Customer\AddressManagerInterface');
+            $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
 
             if ($address) {
                 $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
@@ -171,7 +172,7 @@ class AddressControllerTest extends \PHPUnit_Framework_TestCase
         }
 
         if (null === $formFactory) {
-            $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+            $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         }
 
         return new AddressController($addressManager, $formFactory);

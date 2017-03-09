@@ -12,15 +12,16 @@
 namespace Sonata\ProductBundle\Tests\Form\Type;
 
 use Sonata\ProductBundle\Form\Type\ApiProductType;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class ApiProductTypeTest extends \PHPUnit_Framework_TestCase
+class ApiProductTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testBuildForm()
     {
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
 
         $productPool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
         $productPool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));

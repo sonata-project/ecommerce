@@ -14,21 +14,22 @@ namespace Sonata\Component\Tests\Transformer;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Transformer\InvoiceTransformer;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
+class InvoiceTransformerTest extends PHPUnit_Framework_TestCase
 {
     public function testTransformFromOrder()
     {
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
-        $orderElement = $this->getMock('Sonata\Component\Order\OrderElementInterface');
+        $orderElement = $this->createMock('Sonata\Component\Order\OrderElementInterface');
         $orderElement->expects($this->once())->method('getDescription');
         $orderElement->expects($this->once())->method('getDesignation');
         $orderElement->expects($this->once())->method('getPrice')->will($this->returnValue(42));
         $orderElement->expects($this->once())->method('getQuantity')->will($this->returnValue(3));
         $orderElement->expects($this->once())->method('getVatRate');
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElement)));
         $order->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
@@ -51,16 +52,16 @@ class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
         $order->expects($this->once())->method('getTotalExcl');
         $order->expects($this->once())->method('getTotalInc');
 
-        $invoice = $this->getMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoice = $this->createMock('Sonata\Component\Invoice\InvoiceInterface');
 
-        $invoiceElement = $this->getMock('Sonata\Component\Invoice\InvoiceElementInterface');
+        $invoiceElement = $this->createMock('Sonata\Component\Invoice\InvoiceElementInterface');
 
-        $invoiceElementManager = $this->getMock('Sonata\Component\Invoice\InvoiceElementManagerInterface');
+        $invoiceElementManager = $this->createMock('Sonata\Component\Invoice\InvoiceElementManagerInterface');
         $invoiceElementManager->expects($this->once())->method('create')->will($this->returnValue($invoiceElement));
 
         $deliveryPool = new DeliveryPool();
 
-        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
         $invoiceTransformer = new InvoiceTransformer($invoiceElementManager, $deliveryPool, $eventDispatcher);
         $invoiceTransformer->transformFromOrder($order, $invoice);

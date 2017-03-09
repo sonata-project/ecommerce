@@ -17,6 +17,7 @@ use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductProviderTest extends BaseProductProvider
 {
@@ -55,7 +56,7 @@ class ProductTest extends BaseProduct implements ProductInterface
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
+class BaseProductProviderTest extends PHPUnit_Framework_TestCase
 {
     public function testGetProductFromRaw()
     {
@@ -580,7 +581,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new ProductProviderTest($serializer);
 
         $provider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
-        $provider->setEventDispatcher($this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
+        $provider->setEventDispatcher($this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
 
         return $provider;
     }

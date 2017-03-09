@@ -12,18 +12,19 @@
 namespace Sonata\OrderBundle\Tests\Controller\Api;
 
 use Sonata\OrderBundle\Controller\Api\OrderController;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class OrderControllerTest extends \PHPUnit_Framework_TestCase
+class OrderControllerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetOrdersAction()
     {
-        $orderManager = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+        $orderManager = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
         $orderManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
 
-        $paramFetcher = $this->getMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
@@ -32,7 +33,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderAction()
     {
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $this->assertEquals($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
@@ -47,8 +48,8 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOrderOrderelementsAction()
     {
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
-        $orderElements = $this->getMock('Sonata\Component\Order\OrderElementsInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $orderElements = $this->createMock('Sonata\Component\Order\OrderElementInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElements)));
 
         $this->assertEquals(array($orderElements), $this->createOrderController($order)->getOrderOrderelementsAction(1));
@@ -63,7 +64,7 @@ class OrderControllerTest extends \PHPUnit_Framework_TestCase
     public function createOrderController($order = null, $orderManager = null)
     {
         if (null === $orderManager) {
-            $orderManager = $this->getMock('Sonata\Component\Order\OrderManagerInterface');
+            $orderManager = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
         }
         if (null !== $order) {
             $orderManager->expects($this->once())->method('findOneBy')->will($this->returnValue($order));

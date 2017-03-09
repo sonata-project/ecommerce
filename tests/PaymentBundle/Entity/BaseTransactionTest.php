@@ -12,6 +12,7 @@
 namespace Sonata\PaymentBundle\Tests\Entity;
 
 use Sonata\PaymentBundle\Entity\BaseTransaction;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Transaction extends BaseTransaction
 {
@@ -21,13 +22,13 @@ class Transaction extends BaseTransaction
     }
 }
 
-class BaseTransactionTest extends \PHPUnit_Framework_TestCase
+class BaseTransactionTest extends PHPUnit_Framework_TestCase
 {
     public function testInformation()
     {
         $transaction = new Transaction();
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getId')->will($this->returnValue(123));
         $order->expects($this->once())->method('getReference')->will($this->returnValue('B00120'));
 

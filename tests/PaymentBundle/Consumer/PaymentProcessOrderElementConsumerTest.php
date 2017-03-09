@@ -16,8 +16,9 @@ use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool;
 use Sonata\OrderBundle\Entity\OrderElementManager;
 use Sonata\PaymentBundle\Consumer\PaymentProcessOrderElementConsumer;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class PaymentProcessOrderElementConsumerTest extends \PHPUnit_Framework_TestCase
+class PaymentProcessOrderElementConsumerTest extends PHPUnit_Framework_TestCase
 {
     public function testGenerateDiffValue()
     {
@@ -32,7 +33,7 @@ class PaymentProcessOrderElementConsumerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getConsumer()
     {
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
 
         $orderElementManager = new OrderElementManager('Sonata\OrderBundle\Tests\Entity\OrderElement', $registry);
 

@@ -14,36 +14,37 @@ namespace Sonata\Component\Tests\Transformer;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Transformer\OrderTransformer;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class OrderTransformerTest extends \PHPUnit_Framework_TestCase
+class OrderTransformerTest extends PHPUnit_Framework_TestCase
 {
     public function testBasket()
     {
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
         $provider->expects($this->once())->method('basketAddProduct')->will($this->returnValue(true));
         $provider->expects($this->once())->method('createBasketElement')->will($this->returnValue($basketElement = new BasketElement()));
 
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
-        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $manager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
 
-        $pool = $this->getMock('Sonata\Component\Product\Pool');
+        $pool = $this->createMock('Sonata\Component\Product\Pool');
         $pool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
         $pool->expects($this->once())->method('getManager')->will($this->returnValue($manager));
 
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('reset');
         $basket->expects($this->once())->method('buildPrices');
 
-        $orderElement = $this->getMock('Sonata\Component\Order\OrderElementInterface');
+        $orderElement = $this->createMock('Sonata\Component\Order\OrderElementInterface');
         $orderElement->expects($this->exactly(2))->method('getProductType');
         $orderElement->expects($this->exactly(1))->method('getProductId')->will($this->returnValue(2));
         $orderElement->expects($this->exactly(1))->method('getOptions')->will($this->returnValue(array()));
         $orderElement->expects($this->exactly(1))->method('getQuantity')->will($this->returnValue(2));
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElement)));
         $order->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
@@ -51,7 +52,7 @@ class OrderTransformerTest extends \PHPUnit_Framework_TestCase
         $currency->setLabel('EUR');
         $order->expects($this->once())->method('getCurrency')->will($this->returnValue($currency));
 
-        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $transformer = new OrderTransformer($pool, $eventDispatcher);
         $transformer->transformIntoBasket($order, $basket);
 

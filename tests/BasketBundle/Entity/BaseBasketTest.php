@@ -12,6 +12,7 @@
 namespace Sonata\BasketBundle\Tests\Entity;
 
 use Sonata\BasketBundle\Entity\BaseBasket;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class BasketTest extends BaseBasket
 {
@@ -20,14 +21,14 @@ class BasketTest extends BaseBasket
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseBasketTest extends \PHPUnit_Framework_TestCase
+class BaseBasketTest extends PHPUnit_Framework_TestCase
 {
     public function testSetBasketElements()
     {
         $basket = new BasketTest();
 
         $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
-        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->getMock('Sonata\Component\Product\ProductProviderInterface')));
+        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
 
         $basket->setProductPool($pool);
 
@@ -49,7 +50,7 @@ class BaseBasketTest extends \PHPUnit_Framework_TestCase
         $basket = new BasketTest();
 
         $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
-        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->getMock('Sonata\Component\Product\ProductProviderInterface')));
+        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
 
         $basket->setProductPool($pool);
 
@@ -78,7 +79,7 @@ class BaseBasketTest extends \PHPUnit_Framework_TestCase
         $basket = new BasketTest();
 
         $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
-        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->getMock('Sonata\Component\Product\ProductProviderInterface')));
+        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
 
         $basket->setProductPool($pool);
 

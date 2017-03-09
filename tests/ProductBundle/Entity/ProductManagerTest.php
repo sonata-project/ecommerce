@@ -13,8 +13,9 @@ namespace Sonata\ProductBundle\Tests\Entity;
 
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\ProductBundle\Entity\ProductManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class ProductManagerTest extends \PHPUnit_Framework_TestCase
+class ProductManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPager()
     {
@@ -109,7 +110,7 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
             'name',
         ));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new ProductManager('Sonata\PageBundle\Entity\BaseProduct', $registry);

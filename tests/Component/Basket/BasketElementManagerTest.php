@@ -13,17 +13,18 @@ namespace Sonata\Component\Tests\Basket;
 
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Basket\BasketElementManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BasketElementManagerTest extends \PHPUnit_Framework_TestCase
+class BasketElementManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testCreateAndGetClass()
     {
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         $basketEm = new BasketElementManager('Sonata\Component\Basket\BasketElement', $registry);
@@ -38,7 +39,7 @@ class BasketElementManagerTest extends \PHPUnit_Framework_TestCase
         $em->expects($this->once())->method('persist');
         $em->expects($this->once())->method('flush');
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         $basketEm = new BasketElementManager('Sonata\Component\Basket\BasketElement', $registry);
@@ -56,7 +57,7 @@ class BasketElementManagerTest extends \PHPUnit_Framework_TestCase
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         $basketEm = new BasketElementManager('Sonata\Component\Basket\BasketElement', $registry);
@@ -71,7 +72,7 @@ class BasketElementManagerTest extends \PHPUnit_Framework_TestCase
         $em->expects($this->once())->method('remove');
         $em->expects($this->once())->method('flush');
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         $basketEm = new BasketElementManager('Sonata\Component\Basket\BasketElement', $registry);

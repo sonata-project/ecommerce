@@ -15,6 +15,7 @@ use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Seo\Services\Facebook;
 use Sonata\SeoBundle\Seo\SeoPage;
 use Sonata\SeoBundle\Twig\Extension\SeoExtension;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductFbMock extends BaseProduct
 {
@@ -33,7 +34,7 @@ class ProductFbMock extends BaseProduct
     }
 }
 
-class FacebookTest extends \PHPUnit_Framework_TestCase
+class FacebookTest extends PHPUnit_Framework_TestCase
 {
     public function testAlterPage()
     {
@@ -43,7 +44,7 @@ class FacebookTest extends \PHPUnit_Framework_TestCase
         $numberHelper = $this->getMockBuilder('Sonata\IntlBundle\Templating\Helper\NumberHelper')->disableOriginalConstructor()->getMock();
         $currencyDetector = $this->getMockBuilder('Sonata\Component\Currency\CurrencyDetectorInterface')->disableOriginalConstructor()->getMock();
         $product = new ProductFbMock();
-        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
 
         // Check if the header data are correctly registered
         $fbService = new Facebook($router, $mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'reference');

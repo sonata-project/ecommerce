@@ -12,19 +12,20 @@
 namespace Sonata\Component\Tests\Form;
 
 use Sonata\Component\Form\BasketValidator;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BasketValidatorTest extends \PHPUnit_Framework_TestCase
+class BasketValidatorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @group legacy
      */
     public function testValidate()
     {
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
         $provider->expects($this->once())->method('validateFormBasketElement');
 
         $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
@@ -39,9 +40,9 @@ class BasketValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new BasketValidator($pool, $consValFact);
         $validator->initialize($context);
 
-        $elements = array($this->getMock('Sonata\Component\Basket\BasketElementInterface'));
+        $elements = array($this->createMock('Sonata\Component\Basket\BasketElementInterface'));
 
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($elements));
 
         $constraint = new NotBlank();

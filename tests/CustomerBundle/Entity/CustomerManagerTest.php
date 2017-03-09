@@ -13,8 +13,9 @@ namespace Sonata\CustomerBundle\Tests\Entity;
 
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\CustomerManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class CustomerManagerTest extends \PHPUnit_Framework_TestCase
+class CustomerManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPager()
     {
@@ -106,7 +107,7 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
             'email',
         ));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new CustomerManager('Sonata\CustomerBundle\Entity\BaseCustomer', $registry);

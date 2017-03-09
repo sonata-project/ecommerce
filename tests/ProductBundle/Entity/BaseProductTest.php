@@ -12,6 +12,7 @@
 namespace Sonata\ProductBundle\Tests\Entity;
 
 use Sonata\ProductBundle\Entity\BaseProduct;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -32,7 +33,7 @@ class Product extends BaseProduct
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseProductTest extends \PHPUnit_Framework_TestCase
+class BaseProductTest extends PHPUnit_Framework_TestCase
 {
     public function testGetImageAndGetGallery()
     {
@@ -41,14 +42,14 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($product->getImage());
 
         // Test gallery
-        $gallery = $this->getMock('Sonata\MediaBundle\Model\GalleryInterface');
+        $gallery = $this->createMock('Sonata\MediaBundle\Model\GalleryInterface');
         $product->setGallery($gallery);
 
         $this->assertNull($product->getImage());
         $this->assertInstanceOf('Sonata\MediaBundle\Model\GalleryInterface', $product->getGallery());
 
         // Test getImage
-        $image = $this->getMock('Sonata\MediaBundle\Model\MediaInterface');
+        $image = $this->createMock('Sonata\MediaBundle\Model\MediaInterface');
         $image->expects($this->any())
             ->method('getName')
             ->will($this->returnValue('correctMedia'));
@@ -63,13 +64,13 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
     {
         $product = new Product();
 
-        $pc = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
+        $pc = $this->createMock('Sonata\Component\Product\ProductCategoryInterface');
         $pc->expects($this->any())->method('getMain')->will($this->returnValue(true));
 
-        $pc2 = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
+        $pc2 = $this->createMock('Sonata\Component\Product\ProductCategoryInterface');
         $pc2->expects($this->any())->method('getMain')->will($this->returnValue(true));
 
-        $pc3 = $this->getMock('Sonata\Component\Product\ProductCategoryInterface');
+        $pc3 = $this->createMock('Sonata\Component\Product\ProductCategoryInterface');
         $pc3->expects($this->any())->method('getMain')->will($this->returnValue(true));
 
         $this->assertFalse($product->hasOneMainCategory());

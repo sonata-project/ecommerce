@@ -12,17 +12,18 @@
 namespace Sonata\Component\Tests\Basket;
 
 use Sonata\Component\Basket\Loader;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class LoaderTest extends \PHPUnit_Framework_TestCase
+class LoaderTest extends PHPUnit_Framework_TestCase
 {
     public function testLoadBasket()
     {
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
-        $basketFactory = $this->getMock('Sonata\Component\Basket\BasketFactoryInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basketFactory = $this->createMock('Sonata\Component\Basket\BasketFactoryInterface');
         $basketFactory->expects($this->once())->method('load')->will($this->returnValue($basket));
 
-        $customerSelector = $this->getMock('Sonata\Component\Customer\CustomerSelectorInterface');
+        $customerSelector = $this->createMock('Sonata\Component\Customer\CustomerSelectorInterface');
         $customerSelector->expects($this->once())->method('get')->will($this->returnValue($customer));
 
         $loader = new Loader($basketFactory, $customerSelector);
@@ -37,13 +38,13 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('RuntimeException');
 
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $basketFactory = $this->getMock('Sonata\Component\Basket\BasketFactoryInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $basketFactory = $this->createMock('Sonata\Component\Basket\BasketFactoryInterface');
         $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(function () {
             throw new \RuntimeException();
         }));
 
-        $customerSelector = $this->getMock('Sonata\Component\Customer\CustomerSelectorInterface');
+        $customerSelector = $this->createMock('Sonata\Component\Customer\CustomerSelectorInterface');
         $customerSelector->expects($this->once())->method('get')->will($this->returnValue($customer));
 
         $loader = new Loader($basketFactory, $customerSelector);

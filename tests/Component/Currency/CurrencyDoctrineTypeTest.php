@@ -13,8 +13,9 @@ namespace Sonata\Component\Tests\Currency;
 
 use Doctrine\DBAL\Types\Type;
 use Sonata\Component\Currency\Currency;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class CurrencyDoctrineTypeTest extends \PHPUnit_Framework_TestCase
+class CurrencyDoctrineTypeTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {

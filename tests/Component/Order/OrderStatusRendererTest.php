@@ -15,11 +15,12 @@ use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Order\OrderStatusRenderer;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase
+class OrderStatusRendererTest extends PHPUnit_Framework_TestCase
 {
     public function testHandles()
     {
@@ -28,10 +29,10 @@ class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase
         $order = new \DateTime();
         $this->assertFalse($osRenderer->handlesObject($order));
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $this->assertTrue($osRenderer->handlesObject($order));
 
-        $order = $this->getMock('Sonata\Component\Order\OrderElementInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderElementInterface');
         $this->assertTrue($osRenderer->handlesObject($order));
 
         foreach (array('delivery', 'payment') as $correctStatusType) {
@@ -45,7 +46,7 @@ class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase
     {
         $osRenderer = new OrderStatusRenderer();
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getStatus')->will($this->returnValue(array_rand(BaseOrder::getStatusList())));
         $order->expects($this->once())->method('getDeliveryStatus')->will($this->returnValue(array_rand(BaseServiceDelivery::getStatusList())));
         $order->expects($this->once())->method('getPaymentStatus')->will($this->returnValue(array_rand(BaseTransaction::getStatusList())));
@@ -59,7 +60,7 @@ class OrderStatusRendererTest extends \PHPUnit_Framework_TestCase
     {
         $osRenderer = new OrderStatusRenderer();
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getStatus')->will($this->returnValue(8));
 
         $this->assertEquals('default_value', $osRenderer->getStatusClass($order, 'toubidou', 'default_value'));

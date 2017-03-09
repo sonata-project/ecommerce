@@ -12,11 +12,12 @@
 namespace Sonata\Component\Tests\Delivery;
 
 use Sonata\Component\Delivery\FreeDelivery;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class FreeDeliveryTest extends \PHPUnit_Framework_TestCase
+class FreeDeliveryTest extends PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {

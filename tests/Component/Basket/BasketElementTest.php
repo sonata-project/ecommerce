@@ -16,6 +16,7 @@ use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductDefinition;
 use Sonata\ProductBundle\Model\BaseProductProvider;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductProviderTest extends BaseProductProvider
 {
@@ -28,7 +29,7 @@ class ProductProviderTest extends BaseProductProvider
     }
 }
 
-class BasketElementTest extends \PHPUnit_Framework_TestCase
+class BasketElementTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Sets up unit test.
@@ -40,7 +41,9 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
     public function getBasketElement($product = null)
     {
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
+            ->setMockClassName('BasketTest_Product')
+            ->getMock();
         $product->expects($this->any())->method('getId')->will($this->returnValue(42));
         $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
@@ -49,10 +52,10 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('option1' => 'toto')));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
-        $productProvider = new ProductProviderTest($this->getMock('JMS\Serializer\SerializerInterface'));
+        $productProvider = new ProductProviderTest($this->createMock('JMS\Serializer\SerializerInterface'));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
-        $productProvider->setEventDispatcher($this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
-        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productProvider->setEventDispatcher($this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
+        $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
 
         $productDefinition = new ProductDefinition($productProvider, $productManager);
 
@@ -116,7 +119,9 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
     public function testValidity()
     {
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
+            ->setMockClassName('BasketTest_Product')
+            ->getMock();
         $product->expects($this->once())->method('getEnabled')->will($this->returnValue(true));
 
         $basketElement = new BasketElement();
@@ -124,7 +129,9 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $basketElement->isValid(), 'BasketElement is valid');
 
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
+            ->setMockClassName('BasketTest_Product')
+            ->getMock();
         $product->expects($this->once())->method('getEnabled')->will($this->returnValue(false));
         $basketElement->setProduct('product_code', $product);
 
@@ -133,9 +140,9 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
     public function testGettersSetters()
     {
-        $currency = $this->getMock('Sonata\Component\Currency\Currency');
-        $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
-        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $currency = $this->createMock('Sonata\Component\Currency\Currency');
+        $productProvider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
+        $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
 
         $productDefinition = new ProductDefinition($productProvider, $productManager);
 
@@ -146,8 +153,8 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $basketElement->getUnitPrice($currency));
         $this->assertFalse($basketElement->isValid());
 
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
-        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
+        $manager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
 
         $productDefinition = new ProductDefinition($provider, $manager);
 
@@ -158,7 +165,7 @@ class BasketElementTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($basketElement->getProduct());
 
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $product->expects($this->any())
             ->method('getId')
             ->will($this->returnValue(42));

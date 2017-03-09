@@ -14,11 +14,12 @@ namespace Sonata\InvoiceBundle\Tests\Entity;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\InvoiceBundle\Entity\InvoiceManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Benoit de Jacobet <benoit.de-jacobet@ekino.com>
  */
-class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
+class InvoiceManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPager()
     {
@@ -122,7 +123,7 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
             'name',
         ));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new InvoiceManager('Sonata\InvoiceBundle\Entity\BaseInvoice', $registry);

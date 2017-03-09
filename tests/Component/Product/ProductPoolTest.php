@@ -13,17 +13,18 @@ namespace Sonata\Component\Tests\Product;
 
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class ProductPoolTest extends \PHPUnit_Framework_TestCase
+class ProductPoolTest extends PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
-        $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
-        $productManager1 = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
-        $productManager2 = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productProvider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
+        $productManager1 = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager2 = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
 
         // we need products from different objects to test ProductPool
-        $product1 = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product1 = $this->createMock('Sonata\Component\Product\ProductInterface');
         $product2 = new Product();
 
         $productManager1->expects($this->any())
