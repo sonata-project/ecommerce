@@ -72,7 +72,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
 
@@ -92,7 +92,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
@@ -115,7 +115,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($address));
 
@@ -135,7 +135,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
@@ -155,7 +155,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
 
@@ -176,7 +176,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');

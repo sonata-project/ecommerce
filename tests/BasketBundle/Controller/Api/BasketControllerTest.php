@@ -81,7 +81,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketManager->expects($this->once())->method('save')->will($this->returnValue($basket));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($basket));
 
@@ -101,7 +101,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketManager->expects($this->never())->method('save')->will($this->returnValue($basket));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->never())->method('getData')->will($this->returnValue($basket));
 
@@ -122,7 +122,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($basket));
 
@@ -143,7 +143,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->never())->method('getData')->will($this->returnValue($basket));
 
@@ -209,7 +209,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($basketElement));
 
@@ -251,7 +251,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->never())->method('getData');
 
@@ -295,7 +295,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($basketElement));
 
@@ -338,7 +338,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->never())->method('getData');
 

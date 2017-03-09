@@ -124,7 +124,7 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
         $formatterPool->expects($this->exactly(2))->method('transform');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($product));
 
@@ -150,7 +150,7 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
         $formatterPool->expects($this->never())->method('transform');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
@@ -176,7 +176,7 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
         $formatterPool->expects($this->exactly(2))->method('transform');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($product));
 
@@ -203,7 +203,7 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
         $formatterPool->expects($this->never())->method('transform');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');

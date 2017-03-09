@@ -40,11 +40,8 @@ class TwitterTest extends \PHPUnit_Framework_TestCase
         $product = new ProductTwitterMock();
 
         $twitterService = new Twitter($mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'test', 'test', 'reference');
-        ob_start();
         $twitterService->alterPage($seoPage, $product, null);
-        $extension->renderMetadatas();
-        $content = ob_get_contents();
-        ob_end_clean();
+        $content = $extension->getMetadatas();
 
         $this->assertContains('twitter:label1', $content);
         $this->assertNotContains('twitter:image:src', $content);
