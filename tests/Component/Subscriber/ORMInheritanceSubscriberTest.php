@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\Component\Subscriber;
+namespace Sonata\Component\Tests\Subscriber;
 
 use Sonata\Component\Subscriber\ORMInheritanceSubscriber;
 

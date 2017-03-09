@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Delivery;
+namespace Sonata\Component\Tests\Delivery;
 
 use Sonata\ProductBundle\Entity\BaseDelivery;
 

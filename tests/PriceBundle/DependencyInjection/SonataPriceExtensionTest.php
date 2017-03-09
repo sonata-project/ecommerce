@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\PriceBundle\DependencyInjection;
+namespace Sonata\PriceBundle\Tests\DependencyInjection;
 
 use Sonata\PriceBundle\DependencyInjection\SonataPriceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

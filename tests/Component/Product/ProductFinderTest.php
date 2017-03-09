@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Product;
+namespace Sonata\Component\Tests\Product;
 
 use Sonata\Component\Product\ProductFinder;
 

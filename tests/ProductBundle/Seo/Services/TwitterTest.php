@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\ProductBundle\Seo\Services;
+namespace Sonata\ProductBundle\Tests\Seo\Services;
 
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Seo\Services\Twitter;

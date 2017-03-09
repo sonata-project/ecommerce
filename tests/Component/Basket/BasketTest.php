@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\Component\Tests\Basket;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
@@ -17,7 +17,7 @@ use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Tests\Component\Product\Product;
+use Sonata\Component\Tests\Product\Product;
 
 class Delivery extends BaseServiceDelivery
 {

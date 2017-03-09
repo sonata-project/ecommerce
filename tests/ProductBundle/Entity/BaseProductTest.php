@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\ProductBundle\Entity;
+namespace Sonata\ProductBundle\Tests\Entity;
 
 use Sonata\ProductBundle\Entity\BaseProduct;
 

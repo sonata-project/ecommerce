@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Currency;
+namespace Sonata\Component\Tests\Currency;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetector;

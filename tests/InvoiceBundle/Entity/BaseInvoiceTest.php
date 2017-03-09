@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\InvoiceBundle\Entity;
+namespace Sonata\InvoiceBundle\Tests\Entity;
 
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\BasketBundle\Controller\Api;
+namespace Sonata\BasketBundle\Tests\Controller\Api;
 
 use Sonata\BasketBundle\Controller\Api\BasketController;
 use Symfony\Component\HttpFoundation\Request;

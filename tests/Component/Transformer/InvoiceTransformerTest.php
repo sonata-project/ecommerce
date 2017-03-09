@@ -9,18 +9,11 @@
  * file that was distributed with this source code.
  */
 
+namespace Sonata\Component\Tests\Transformer;
+
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Transformer\InvoiceTransformer;
-
-/*
- * This file is part of the Sonata package.
-*
-* (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
-*
-* For the full copyright and license information, please view the LICENSE
-* file that was distributed with this source code.
-*/
 
 class InvoiceTransformerTest extends \PHPUnit_Framework_TestCase
 {

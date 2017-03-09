@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Payment;
+namespace Sonata\Component\Tests\Payment;
 
 use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Payment\Pool;

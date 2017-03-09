@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Product;
+namespace Sonata\Component\Tests\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
@@ -27,7 +27,7 @@ use Sonata\ProductBundle\Entity\BaseProductCollection;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Entity\ProductCollectionManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\Tests\Component\Basket\ProductProviderTest;
+use Sonata\Component\Tests\Basket\ProductProviderTest;
 
 class Product extends BaseProduct
 {
@@ -137,7 +137,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $provider = new BaseProductServiceTest_ProductProvider($serializer);
 
         $basketElementManager = $this->getMock('\Sonata\Component\Basket\BasketElementManagerInterface');
-        $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Tests\Component\Product\BaseOrderElementTest_ProductProvider'));
+        $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Component\Tests\Product\BaseOrderElementTest_ProductProvider'));
         $provider->setBasketElementManager($basketElementManager);
 
         $provider->setOrderElementClassName(get_class(new OrderElement()));
@@ -293,7 +293,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $productCategoryManager = new ProductCategoryManager('Sonata\Tests\Component\Product\ProductCategory', $registry);
+        $productCategoryManager = new ProductCategoryManager('Sonata\Component\Tests\Product\ProductCategory', $registry);
         $provider->setProductCategoryManager($productCategoryManager);
 
         // create product
@@ -355,7 +355,7 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $productCollectionManager = new ProductCollectionManager('Sonata\Tests\Component\Product\ProductCollection', $registry);
+        $productCollectionManager = new ProductCollectionManager('Sonata\Component\Tests\Product\ProductCollection', $registry);
         $provider->setProductCollectionManager($productCollectionManager);
 
         $product = new Product();

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\OrderBundle\Entity;
+namespace Sonata\OrderBundle\Tests\Entity;
 
 use Sonata\OrderBundle\Entity\BaseOrder;
 

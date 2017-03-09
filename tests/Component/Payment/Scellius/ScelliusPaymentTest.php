@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment\Scellius;
+namespace Sonata\Component\Tests\Payment\Scellius;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Payment\Scellius\ScelliusPayment;

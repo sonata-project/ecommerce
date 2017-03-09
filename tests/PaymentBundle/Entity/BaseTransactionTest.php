@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\PaymentBundle\Entity;
+namespace Sonata\PaymentBundle\Tests\Entity;
 
 use Sonata\PaymentBundle\Entity\BaseTransaction;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Transformer;
+namespace Sonata\Component\Tests\Transformer;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Currency\Currency;

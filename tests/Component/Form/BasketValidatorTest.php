@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Form;
+namespace Sonata\Component\Tests\Form;
 
 use Sonata\Component\Form\BasketValidator;
 use Symfony\Component\Validator\Constraints\NotBlank;

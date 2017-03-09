@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Transformer;
+namespace Sonata\Component\Tests\Transformer;
 
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;

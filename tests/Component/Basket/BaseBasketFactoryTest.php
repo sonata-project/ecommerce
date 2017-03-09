@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\Component\Tests\Basket;
 
 use Sonata\Component\Basket\BaseBasketFactory;
 use Sonata\Component\Basket\BasketInterface;

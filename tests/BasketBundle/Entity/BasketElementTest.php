@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\BasketBundle\Entity;
+namespace Sonata\BasketBundle\Tests\Entity;
 
 use Sonata\Component\Basket\BasketElement;
 

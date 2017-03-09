@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment\Ogone;
+namespace Sonata\Component\Tests\Payment\Ogone;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Payment\Ogone\OgonePayment;

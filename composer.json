@@ -65,15 +65,15 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sonata\\Tests\\Component\\": "tests/Component",
-            "Sonata\\Tests\\BasketBundle\\": "tests/BasketBundle",
-            "Sonata\\Tests\\CustomerBundle\\": "tests/CustomerBundle",
-            "Sonata\\Tests\\DeliveryBundle\\": "tests/DeliveryBundle",
-            "Sonata\\Tests\\InvoiceBundle\\": "tests/InvoiceBundle",
-            "Sonata\\Tests\\OrderBundle\\": "tests/OrderBundle",
-            "Sonata\\Tests\\PaymentBundle\\": "tests/PaymentBundle",
-            "Sonata\\Tests\\PriceBundle\\": "tests/PriceBundle",
-            "Sonata\\Tests\\ProductBundle\\": "tests/ProductBundle"
+            "Sonata\\Component\\Tests\\": "tests/Component",
+            "Sonata\\BasketBundle\\Tests\\": "tests/BasketBundle",
+            "Sonata\\CustomerBundle\\Tests\\": "tests/CustomerBundle",
+            "Sonata\\DeliveryBundle\\Tests\\": "tests/DeliveryBundle",
+            "Sonata\\InvoiceBundle\\Tests\\": "tests/InvoiceBundle",
+            "Sonata\\OrderBundle\\Tests\\": "tests/OrderBundle",
+            "Sonata\\PaymentBundle\\Tests\\": "tests/PaymentBundle",
+            "Sonata\\PriceBundle\\Tests\\": "tests/PriceBundle",
+            "Sonata\\ProductBundle\\Tests\\": "tests/ProductBundle"
         }
     },
     "config": {

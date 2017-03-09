@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Payment\Scellius;
+namespace Sonata\Component\Tests\Payment\Scellius;
 
 use Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator;
 

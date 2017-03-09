@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\Component\Currency\Types;
+namespace Sonata\Component\Tests\Currency;
 
 use Doctrine\DBAL\Types\Type;
 use Sonata\Component\Currency\Currency;

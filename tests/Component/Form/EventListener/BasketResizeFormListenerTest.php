@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Form\EventListener;
+namespace Sonata\Component\Tests\Form\EventListener;
 
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
 use Symfony\Component\Form\FormEvents;

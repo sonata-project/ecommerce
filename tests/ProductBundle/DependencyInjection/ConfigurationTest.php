@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\ProductBundle\DependencyInjection;
+namespace Sonata\ProductBundle\Tests\DependencyInjection;
 
 use Sonata\ProductBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;

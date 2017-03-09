@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\ProductBundle\Command;
+namespace Sonata\ProductBundle\Tests\Command;
 
 use Sonata\ProductBundle\Command\GenerateProductCommand;
 use Symfony\Component\Console\Application;

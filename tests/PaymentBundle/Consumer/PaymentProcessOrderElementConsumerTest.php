@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\PaymentBundle\Consumer;
+namespace Sonata\PaymentBundle\Tests\Consumer;
 
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
@@ -34,7 +34,7 @@ class PaymentProcessOrderElementConsumerTest extends \PHPUnit_Framework_TestCase
     {
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
 
-        $orderElementManager = new OrderElementManager('Sonata\Test\OrderBundle\Entity\OrderElement', $registry);
+        $orderElementManager = new OrderElementManager('Sonata\OrderBundle\Tests\Entity\OrderElement', $registry);
 
         $pool = new Pool();
 

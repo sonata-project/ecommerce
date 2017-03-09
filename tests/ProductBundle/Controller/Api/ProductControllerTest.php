@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\ProductBundle\Controller\Api;
+namespace Sonata\ProductBundle\Tests\Controller\Api;
 
 use Sonata\ProductBundle\Controller\Api\ProductController;
 use Symfony\Component\HttpFoundation\Request;

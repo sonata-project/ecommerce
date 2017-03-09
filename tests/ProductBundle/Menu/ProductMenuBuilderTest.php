@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\ProductBundle\Menu;
+namespace Sonata\ProductBundle\Tests\Menu;
 
 use Sonata\ProductBundle\Menu\ProductMenuBuilder;
 

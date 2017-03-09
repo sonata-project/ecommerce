@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Form\Transformer;
+namespace Sonata\Component\Tests\Form\Transformer;
 
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;

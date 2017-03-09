@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\CustomerBundle\Controller\Api;
+namespace Sonata\CustomerBundle\Tests\Controller\Api;
 
 use Sonata\CustomerBundle\Controller\Api\AddressController;
 use Symfony\Component\HttpFoundation\Request;

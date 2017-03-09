@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\ProductBundle\Model;
+namespace Sonata\ProductBundle\Tests\Model;
 
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;

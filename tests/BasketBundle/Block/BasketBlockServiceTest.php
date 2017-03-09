@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\BasketBundle\Block;
+namespace Sonata\BasketBundle\Tests\Block;
 
 use Sonata\BasketBundle\Block\BasketBlockService;
 use Symfony\Component\HttpFoundation\Response;

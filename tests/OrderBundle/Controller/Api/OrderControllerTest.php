@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\OrderBundle\Controller\Api;
+namespace Sonata\OrderBundle\Tests\Controller\Api;
 
 use Sonata\OrderBundle\Controller\Api\OrderController;
 

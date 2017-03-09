@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Delivery;
+namespace Sonata\Component\Tests\Delivery;
 
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Delivery\Selector;
@@ -79,7 +79,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+        $product = $this->getMock('Sonata\Component\Tests\Delivery\Product');
 
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
@@ -99,7 +99,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+        $product = $this->getMock('Sonata\Component\Tests\Delivery\Product');
 
         $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
@@ -128,7 +128,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+        $product = $this->getMock('Sonata\Component\Tests\Delivery\Product');
 
         $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
@@ -156,7 +156,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+        $product = $this->getMock('Sonata\Component\Tests\Delivery\Product');
 
         $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
@@ -181,7 +181,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+        $product = $this->getMock('Sonata\Component\Tests\Delivery\Product');
 
         $delivery = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
@@ -213,7 +213,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 
         $basket = $this->getMock('Sonata\Component\Basket\Basket');
         $basketElement = $this->getMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->getMock('Sonata\Tests\Component\Delivery\Product');
+        $product = $this->getMock('Sonata\Component\Tests\Delivery\Product');
 
         $delivery1 = $this->getMock('Sonata\Component\Product\DeliveryInterface');
         $delivery1->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));

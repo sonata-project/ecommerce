@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\CustomerBundle\Block;
+namespace Sonata\CustomerBundle\Tests\Block;
 
 use Sonata\CustomerBundle\Block\RecentCustomersBlockService;
 

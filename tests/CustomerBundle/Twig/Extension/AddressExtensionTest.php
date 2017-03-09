@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\CustomerBundle\Twig\Extension;
+namespace Sonata\CustomerBundle\Tests\Twig\Extension;
 
 use Sonata\CustomerBundle\Twig\Extension\AddressExtension;
 

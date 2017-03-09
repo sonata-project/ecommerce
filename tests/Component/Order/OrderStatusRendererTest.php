@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Order;
+namespace Sonata\Component\Tests\Order;
 
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Order\OrderStatusRenderer;

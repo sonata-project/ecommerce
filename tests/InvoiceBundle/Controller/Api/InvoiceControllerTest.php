@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\InvoiceBundle\Controller\Api;
+namespace Sonata\InvoiceBundle\Tests\Controller\Api;
 
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
 
