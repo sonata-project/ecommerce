@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Customer;
+namespace Sonata\Component\Tests\Customer;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Customer\CustomerSelector;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
@@ -29,23 +30,23 @@ class User
     }
 }
 
-class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
+class CustomerSelectorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @group legacy
      */
     public function testUserNotConnected()
     {
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
-        $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('create')->will($this->returnValue($customer));
 
-        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
+        $session = $this->createMock('Symfony\Component\HttpFoundation\Session\SessionInterface');
 
-        $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
+        $securityContext = $this->createMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(false));
 
-        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector = $this->createMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
@@ -61,18 +62,18 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidUserType()
     {
-        $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
 
-        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+        $session = $this->createMock('Symfony\Component\HttpFoundation\Session\Session');
 
-        $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        $token = $this->createMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue(new User()));
 
-        $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
+        $securityContext = $this->createMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector = $this->createMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
@@ -82,23 +83,23 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testExistingCustomer()
     {
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
-        $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
 
-        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+        $session = $this->createMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $user = new ValidUser();
 
-        $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        $token = $this->createMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
 
-        $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
+        $securityContext = $this->createMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector = $this->createMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
@@ -110,24 +111,24 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistingCustomerNonInSession()
     {
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
-        $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(false));
         $customerManager->expects($this->once())->method('create')->will($this->returnValue($customer));
 
-        $session = $this->getMock('Symfony\Component\HttpFoundation\Session\Session');
+        $session = $this->createMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $user = new ValidUser();
 
-        $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        $token = $this->createMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
 
-        $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
+        $securityContext = $this->createMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector = $this->createMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
@@ -139,12 +140,12 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistingCustomerInSession()
     {
-        $customer = $this->getMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
-        $customerManager = $this->getMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(false));
 
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->exactly(2))->method('getCustomer')->will($this->returnValue($customer));
 
         $session = new Session(new MockArraySessionStorage());
@@ -152,14 +153,14 @@ class CustomerSelectorTest extends \PHPUnit_Framework_TestCase
 
         $user = new ValidUser();
 
-        $token = $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        $token = $this->createMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
 
-        $securityContext = $this->getMock('Symfony\Component\Security\Core\SecurityContextInterface');
+        $securityContext = $this->createMock('Symfony\Component\Security\Core\SecurityContextInterface');
         $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
         $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
-        $localeDetector = $this->getMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
+        $localeDetector = $this->createMock('Sonata\IntlBundle\Locale\LocaleDetectorInterface');
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);

@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\Component\Tests\Payment;
 
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\BasePayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class BasePaymentTest extends \PHPUnit_Framework_TestCase
+class BasePaymentTest extends PHPUnit_Framework_TestCase
 {
     public function testBasePayment()
     {
@@ -41,7 +42,7 @@ class BasePaymentTest extends \PHPUnit_Framework_TestCase
         $date = new \DateTime();
         $date->setTimestamp(strtotime('11/30/1981'));
 
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->once())->method('getReference')->will($this->returnValue('000123'));
         $order->expects($this->exactly(2))->method('getCreatedAt')->will($this->returnValue($date));
         $order->expects($this->once())->method('getId')->will($this->returnValue(2));

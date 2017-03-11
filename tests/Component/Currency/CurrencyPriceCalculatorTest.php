@@ -9,21 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\Component\Currency\Types;
+namespace Sonata\Component\Tests\Currency;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyPriceCalculatorTest extends \PHPUnit_Framework_TestCase
+class CurrencyPriceCalculatorTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPrice()
     {
         $currencyPriceCalculator = new CurrencyPriceCalculator();
 
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
         $currency = new Currency();
         $currency->setLabel('EUR');

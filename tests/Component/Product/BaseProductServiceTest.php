@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Product;
+namespace Sonata\Component\Tests\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
@@ -18,6 +18,7 @@ use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductDefinition;
+use Sonata\Component\Tests\Basket\ProductProviderTest;
 use Sonata\OrderBundle\Entity\BaseOrderElement;
 use Sonata\ProductBundle\Entity\BaseDelivery;
 use Sonata\ProductBundle\Entity\BasePackage;
@@ -27,7 +28,7 @@ use Sonata\ProductBundle\Entity\BaseProductCollection;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Entity\ProductCollectionManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\Tests\Component\Basket\ProductProviderTest;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Product extends BaseProduct
 {
@@ -124,20 +125,22 @@ class BaseOrderElementTest_ProductProvider extends BaseOrderElement
 {
 }
 
-class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
+class BaseProductServiceTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @return BaseProductServiceTest_ProductProvider
      */
     public function getBaseProvider()
     {
-        $serializer = $this->getMock('JMS\Serializer\SerializerInterface');
+        $serializer = $this->createMock('JMS\Serializer\SerializerInterface');
         $serializer->expects($this->any())->method('serialize')->will($this->returnValue('{}'));
 
         $provider = new BaseProductServiceTest_ProductProvider($serializer);
 
-        $basketElementManager = $this->getMock('\Sonata\Component\Basket\BasketElementManagerInterface');
-        $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Tests\Component\Product\BaseOrderElementTest_ProductProvider'));
+        $basketElementManager = $this->createMock('\Sonata\Component\Basket\BasketElementManagerInterface');
+        $basketElementManager->expects($this->any())->method('getClass')->will(
+            $this->returnValue('\Sonata\Component\Tests\Product\BaseOrderElementTest_ProductProvider')
+        );
         $provider->setBasketElementManager($basketElementManager);
 
         $provider->setOrderElementClassName(get_class(new OrderElement()));
@@ -172,16 +175,16 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testOrderElement()
     {
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $product->expects($this->any())->method('getId')->will($this->returnValue(42));
         $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(9.99));
         $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
-        $productProvider = new ProductProviderTest($this->getMock('JMS\Serializer\SerializerInterface'));
+        $productProvider = new ProductProviderTest($this->createMock('JMS\Serializer\SerializerInterface'));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
-        $productManager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
 
         $productDefinition = new ProductDefinition($productProvider, $productManager);
 
@@ -285,15 +288,15 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
     {
         $provider = $this->getBaseProvider();
 
-        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
+        $repository = $this->createMock('Doctrine\ORM\EntityRepository');
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $productCategoryManager = new ProductCategoryManager('Sonata\Tests\Component\Product\ProductCategory', $registry);
+        $productCategoryManager = new ProductCategoryManager('Sonata\Component\Tests\Product\ProductCategory', $registry);
         $provider->setProductCategoryManager($productCategoryManager);
 
         // create product
@@ -347,15 +350,15 @@ class BaseProductServiceTest extends \PHPUnit_Framework_TestCase
     {
         $provider = $this->getBaseProvider();
 
-        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
+        $repository = $this->createMock('Doctrine\ORM\EntityRepository');
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $productCollectionManager = new ProductCollectionManager('Sonata\Tests\Component\Product\ProductCollection', $registry);
+        $productCollectionManager = new ProductCollectionManager('Sonata\Component\Tests\Product\ProductCollection', $registry);
         $provider->setProductCollectionManager($productCollectionManager);
 
         $product = new Product();

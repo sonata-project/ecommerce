@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\ProductBundle\Seo\Services;
+namespace Sonata\ProductBundle\Tests\Seo\Services;
 
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Seo\Services\Twitter;
 use Sonata\SeoBundle\Seo\SeoPage;
 use Sonata\SeoBundle\Twig\Extension\SeoExtension;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductTwitterMock extends BaseProduct
 {
@@ -28,23 +29,20 @@ class ProductTwitterMock extends BaseProduct
     }
 }
 
-class TwitterTest extends \PHPUnit_Framework_TestCase
+class TwitterTest extends PHPUnit_Framework_TestCase
 {
     public function testAlterPage()
     {
-        $mediaPool = $this->getMockBuilder('Sonata\MediaBundle\Provider\Pool')->disableOriginalConstructor()->getMock();
+        $mediaPool = $this->createMock('Sonata\MediaBundle\Provider\Pool');
         $seoPage = new SeoPage('test');
         $extension = new SeoExtension($seoPage, 'UTF-8');
-        $numberHelper = $this->getMockBuilder('Sonata\IntlBundle\Templating\Helper\NumberHelper')->disableOriginalConstructor()->getMock();
-        $currencyDetector = $this->getMockBuilder('Sonata\Component\Currency\CurrencyDetectorInterface')->disableOriginalConstructor()->getMock();
+        $numberHelper = $this->createMock('Sonata\IntlBundle\Templating\Helper\NumberHelper');
+        $currencyDetector = $this->createMock('Sonata\Component\Currency\CurrencyDetectorInterface');
         $product = new ProductTwitterMock();
 
         $twitterService = new Twitter($mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'test', 'test', 'reference');
-        ob_start();
         $twitterService->alterPage($seoPage, $product, null);
-        $extension->renderMetadatas();
-        $content = ob_get_contents();
-        ob_end_clean();
+        $content = $extension->getMetadatas();
 
         $this->assertContains('twitter:label1', $content);
         $this->assertNotContains('twitter:image:src', $content);

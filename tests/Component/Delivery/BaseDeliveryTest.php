@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Delivery;
+namespace Sonata\Component\Tests\Delivery;
 
 use Sonata\ProductBundle\Entity\BaseDelivery;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Delivery extends BaseDelivery
 {
 }
 
-class BaseDeliveryTest extends \PHPUnit_Framework_TestCase
+class BaseDeliveryTest extends PHPUnit_Framework_TestCase
 {
     public function testArrayDelivery()
     {

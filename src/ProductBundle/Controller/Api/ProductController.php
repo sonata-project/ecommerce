@@ -11,6 +11,7 @@
 
 namespace Sonata\ProductBundle\Controller\Api;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -440,7 +441,7 @@ class ProductController
             'provider_name' => $provider,
         ));
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $product = $form->getData();
@@ -449,10 +450,19 @@ class ProductController
             $manager->save($product);
 
             $view = \FOS\RestBundle\View\View::create($product);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
+
+            // BC for FOSRestBundle < 2.0
+            if (method_exists($view, 'setSerializationContext')) {
+                $serializationContext = SerializationContext::create();
+                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->enableMaxDepthChecks();
+                $view->setSerializationContext($serializationContext);
+            } else {
+                $context = new Context();
+                $context->setGroups(array('sonata_api_read'));
+                $context->setMaxDepth(0);
+                $view->setContext($context);
+            }
 
             return $view;
         }

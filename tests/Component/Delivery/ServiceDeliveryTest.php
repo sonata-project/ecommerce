@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Delivery;
+namespace Sonata\Component\Tests\Delivery;
 
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Delivery\Pool;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\ProductBundle\Entity\BaseDelivery;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class ServiceDeliveryTest extends \PHPUnit_Framework_TestCase
+class ServiceDeliveryTest extends PHPUnit_Framework_TestCase
 {
     public function testPool()
     {

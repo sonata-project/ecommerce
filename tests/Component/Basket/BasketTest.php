@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\Component\Tests\Basket;
 
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
@@ -17,7 +17,8 @@ use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Tests\Component\Product\Product;
+use Sonata\Component\Tests\Product\Product;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Delivery extends BaseServiceDelivery
 {
@@ -42,11 +43,13 @@ class Delivery extends BaseServiceDelivery
     }
 }
 
-class BasketTest extends \PHPUnit_Framework_TestCase
+class BasketTest extends PHPUnit_Framework_TestCase
 {
     public function getMockProduct()
     {
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface', array(), array(), 'BasketTest_Product');
+        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
+            ->setMockClassName('BasketTest_Product')
+            ->getMock();
         $product->expects($this->any())->method('getId')->will($this->returnValue(42));
         $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
@@ -61,7 +64,9 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
     public function getMockAddress()
     {
-        $address = $this->getMock('Sonata\Component\Customer\AddressInterface', array(), array(), 'BasketTest_Address');
+        $address = $this->getMockBuilder('Sonata\Component\Customer\AddressInterface')
+            ->setMockClassName('BasketTest_Address')
+            ->getMock();
         $address->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
         $address->expects($this->any())->method('getAddress1')->will($this->returnValue('Address1'));
         $address->expects($this->any())->method('getAddress2')->will($this->returnValue('Address2'));
@@ -76,17 +81,17 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
     public function testTotal()
     {
-        $currency = $this->getMock('Sonata\Component\Currency\Currency');
+        $currency = $this->createMock('Sonata\Component\Currency\Currency');
 
         $basket = new Basket();
         $basket->setCurrency($currency);
 
-        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $manager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
-        $productProvider = new ProductProviderTest($this->getMock('JMS\Serializer\SerializerInterface'));
+        $productProvider = new ProductProviderTest($this->createMock('JMS\Serializer\SerializerInterface'));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
-        $productProvider->setEventDispatcher($this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
+        $productProvider->setEventDispatcher($this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
 
         $productDefinition = new ProductDefinition($productProvider, $manager);
 
@@ -172,7 +177,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
 
-        $invalidBasketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $invalidBasketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
         $invalidBasketElement->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(false));
@@ -193,17 +198,17 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->setBillingAddress($this->getMockAddress());
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment method is invalid');
 
-        $basket->setPaymentMethod($this->getMock('Sonata\Component\Payment\PaymentInterface'));
+        $basket->setPaymentMethod($this->createMock('Sonata\Component\Payment\PaymentInterface'));
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery method is invalid');
 
-        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
+        $deliveryMethod = $this->createMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->any())
             ->method('isAddressRequired')
             ->will($this->returnValue(false));
         $basket->setDeliveryMethod($deliveryMethod);
         $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check because delivery method doesn\'t require an address');
 
-        $requiredDelivery = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
+        $requiredDelivery = $this->createMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $requiredDelivery->expects($this->any())
             ->method('isAddressRequired')
             ->will($this->returnValue(true));
@@ -241,8 +246,8 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
-        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
+        $manager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
         $definition = new ProductDefinition($provider, $manager);
@@ -258,7 +263,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $basket->setDeliveryAddress($this->getMockAddress());
         $basket->setBillingAddress($this->getMockAddress());
-        $basket->setCustomer($this->getMock('Sonata\Component\Customer\CustomerInterface'));
+        $basket->setCustomer($this->createMock('Sonata\Component\Customer\CustomerInterface'));
 
         $data = $basket->serialize();
 
@@ -357,7 +362,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($basket->hasProduct($product), '::hasProduct false because basket is empty');
 
-        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($product));
         $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(1042));
 
@@ -377,7 +382,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
     {
         $basket = $this->getPreparedBasket();
 
-        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockAddress()));
         $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
 
@@ -394,7 +399,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
 
         $product = $this->getMockProduct();
 
-        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($product));
         $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
 
@@ -427,14 +432,14 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket->setBillingAddressId(1);
         $this->assertEquals(1, $basket->getBillingAddressId());
 
-        $deliveryMethod = $this->getMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
+        $deliveryMethod = $this->createMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
         $deliveryMethod->expects($this->any())
             ->method('getCode')
             ->will($this->returnValue(1));
         $basket->setDeliveryMethod($deliveryMethod);
         $this->assertEquals(1, $basket->getDeliveryMethodCode());
 
-        $paymentMethod = $this->getMock('Sonata\Component\Payment\PaymentInterface');
+        $paymentMethod = $this->createMock('Sonata\Component\Payment\PaymentInterface');
         $paymentMethod->expects($this->any())
             ->method('getCode')
             ->will($this->returnValue(1));
@@ -463,10 +468,10 @@ class BasketTest extends \PHPUnit_Framework_TestCase
         $basket = new Basket();
 
         // create the provider mock
-        $provider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
 
         $provider->expects($this->any())
-            ->method('basketCalculatePrice')
+            ->method('calculatePrice')
             ->will($this->returnValue(15));
 
         $provider->expects($this->any())
@@ -474,7 +479,7 @@ class BasketTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         // create the product manager mock
-        $manager = $this->getMock('Sonata\Component\Product\ProductManagerInterface');
+        $manager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
         $manager->expects($this->any())->method('getClass')->will($this->returnValue('BasketTest_Product'));
 
         $definition = new ProductDefinition($provider, $manager);

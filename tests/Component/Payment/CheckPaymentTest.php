@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\Component\Tests\Payment;
 
 use Buzz\Browser;
 use Buzz\Message\Response;
 use Sonata\Component\Payment\CheckPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class CheckPaymentTest_Order extends BaseOrder
 {
@@ -27,22 +28,22 @@ class CheckPaymentTest_Order extends BaseOrder
     }
 }
 
-class CheckPaymentTest extends \PHPUnit_Framework_TestCase
+class CheckPaymentTest extends PHPUnit_Framework_TestCase
 {
     /**
      * useless test ....
      */
     public function testPassPayment()
     {
-        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
-        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
 
         $browser = new Browser();
         $payment = new CheckPayment($router, $logger, $browser);
         $payment->setCode('free_1');
 
-        $basket = $this->getMock('Sonata\Component\Basket\Basket');
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\Basket');
+        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('30/11/1981'));
@@ -51,7 +52,7 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
 
-        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(array($this, 'callback')));
         $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
@@ -78,12 +79,12 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
         $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
 
-        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
-        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
 
-        $client = $this->getMock('Buzz\Client\ClientInterface');
+        $client = $this->createMock('Buzz\Client\ClientInterface');
         $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response) {
             $response->setContent('ok');
         }));
@@ -103,11 +104,11 @@ class CheckPaymentTest extends \PHPUnit_Framework_TestCase
     {
         $order = new CheckPaymentTest_Order();
 
-        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->onConsecutiveCalls(null, $order));
 
-        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
-        $logger = $this->getMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $browser = new Browser();
 
         $payment = new CheckPayment($router, $logger, $browser);

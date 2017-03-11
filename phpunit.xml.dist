@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="tests/tests/bootstrap.php"
 >
     <testsuites>
         <testsuite name="Sonata Test Suite">
@@ -24,6 +24,7 @@
                 <directory suffix="Interface.php">./src</directory>
                 <directory suffix="Controller.php">./src</directory>
                 <directory>./tests</directory>
+                <directory>./vendor/</directory>
                 <directory>./src/Sonata/*/DataFixtures/</directory>
                 <directory>./src/Sonata/*/Resources/</directory>
             </exclude>

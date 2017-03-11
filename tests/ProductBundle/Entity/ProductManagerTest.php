@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\ProductBundle\Entity;
+namespace Sonata\ProductBundle\Tests\Entity;
 
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\ProductBundle\Entity\ProductManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class ProductManagerTest extends \PHPUnit_Framework_TestCase
+class ProductManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPager()
     {
@@ -99,17 +100,13 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function getProductManager($qbCallback)
     {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
         $em = EntityManagerMockFactory::create($this, $qbCallback, array(
             'sku',
             'slug',
             'name',
         ));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new ProductManager('Sonata\PageBundle\Entity\BaseProduct', $registry);

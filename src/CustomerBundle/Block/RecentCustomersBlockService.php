@@ -13,8 +13,8 @@ namespace Sonata\CustomerBundle\Block;
 
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class RecentCustomersBlockService extends BaseBlockService
+class RecentCustomersBlockService extends AbstractAdminBlockService
 {
     protected $manager;
 

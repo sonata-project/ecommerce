@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Payment\Scellius;
+namespace Sonata\Component\Tests\Payment\Scellius;
 
 use Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class OrderScelliusTransactionGeneratorTest extends \PHPUnit_Framework_TestCase
+class OrderScelliusTransactionGeneratorTest extends PHPUnit_Framework_TestCase
 {
     public function testGenerator()
     {
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getReference')->will($this->returnValue('120112000012'));
 
         $generator = new OrderScelliusTransactionGenerator();
@@ -29,7 +30,7 @@ class OrderScelliusTransactionGeneratorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidReferenceLength()
     {
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getReference')->will($this->returnValue('12'));
 
         $generator = new OrderScelliusTransactionGenerator();

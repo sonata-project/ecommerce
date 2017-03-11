@@ -11,6 +11,7 @@
 
 namespace Sonata\BasketBundle\Controller\Api;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -355,10 +356,19 @@ class BasketController
         }
 
         $view = \FOS\RestBundle\View\View::create($basket);
-        $serializationContext = SerializationContext::create();
-        $serializationContext->setGroups(array('sonata_api_read'));
-        $serializationContext->enableMaxDepthChecks();
-        $view->setSerializationContext($serializationContext);
+
+        // BC for FOSRestBundle < 2.0
+        if (method_exists($view, 'setSerializationContext')) {
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->enableMaxDepthChecks();
+            $view->setSerializationContext($serializationContext);
+        } else {
+            $context = new Context();
+            $context->setGroups(array('sonata_api_read'));
+            $context->setMaxDepth(0);
+            $view->setContext($context);
+        }
 
         return $view;
     }
@@ -379,7 +389,7 @@ class BasketController
             'csrf_protection' => false,
         ));
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $basket = $form->getData();
@@ -389,10 +399,19 @@ class BasketController
             $this->basketManager->save($basket);
 
             $view = \FOS\RestBundle\View\View::create($basket);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
+
+            // BC for FOSRestBundle < 2.0
+            if (method_exists($view, 'setSerializationContext')) {
+                $serializationContext = SerializationContext::create();
+                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->enableMaxDepthChecks();
+                $view->setSerializationContext($serializationContext);
+            } else {
+                $context = new Context();
+                $context->setGroups(array('sonata_api_read'));
+                $context->setMaxDepth(0);
+                $view->setContext($context);
+            }
 
             return $view;
         }
@@ -429,7 +448,7 @@ class BasketController
             'csrf_protection' => false,
         ));
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $basketElement = $form->getData();
@@ -442,10 +461,19 @@ class BasketController
             }
 
             $view = \FOS\RestBundle\View\View::create($basket);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
+
+            // BC for FOSRestBundle < 2.0
+            if (method_exists($view, 'setSerializationContext')) {
+                $serializationContext = SerializationContext::create();
+                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->enableMaxDepthChecks();
+                $view->setSerializationContext($serializationContext);
+            } else {
+                $context = new Context();
+                $context->setGroups(array('sonata_api_read'));
+                $context->setMaxDepth(0);
+                $view->setContext($context);
+            }
 
             return $view;
         }

@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\Component\Tests\Payment;
 
 use Buzz\Browser;
 use Sonata\Component\Payment\PassPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class PassPaymentTest_Order extends BaseOrder
 {
@@ -25,26 +26,26 @@ class PassPaymentTest_Order extends BaseOrder
         // TODO: Implement getId() method.
     }
 }
-class PassPaymentTest extends \PHPUnit_Framework_TestCase
+class PassPaymentTest extends PHPUnit_Framework_TestCase
 {
     /**
      * useless test ....
      */
     public function testPassPayment()
     {
-        $router = $this->getMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
-        $client = $this->getMock('Buzz\Client\ClientInterface');
+        $client = $this->createMock('Buzz\Client\ClientInterface');
 
         $browser = new Browser($client);
         $payment = new PassPayment($router, $browser);
         $payment->setCode('free_1');
 
-        $basket = $this->getMock('Sonata\Component\Basket\Basket');
-        $product = $this->getMock('Sonata\Component\Product\ProductInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\Basket');
+        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
-        $transaction = $this->getMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(array($this, 'callback')));
         $transaction->expects($this->once())->method('setTransactionId');
 

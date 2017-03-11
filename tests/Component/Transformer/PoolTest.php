@@ -9,29 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Transformer;
+namespace Sonata\Component\Tests\Transformer;
 
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;
 use Sonata\Component\Transformer\Pool as TransformerPool;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class PoolTest extends \PHPUnit_Framework_TestCase
+class PoolTest extends PHPUnit_Framework_TestCase
 {
     public function testPool()
     {
         $pool = new TransformerPool();
 
         $transformer = new BasketTransformer(
-            $this->getMock('Sonata\Component\Order\OrderManagerInterface'),
-            $this->getMock('Sonata\Component\Product\Pool'),
-            $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface')
+            $this->createMock('Sonata\Component\Order\OrderManagerInterface'),
+            $this->createMock('Sonata\Component\Product\Pool'),
+            $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface')
         );
 
         $pool->addTransformer('basket', $transformer);
 
         $transformer = new OrderTransformer(
-            $this->getMock('Sonata\Component\Product\Pool'),
-            $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface')
+            $this->createMock('Sonata\Component\Product\Pool'),
+            $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface')
         );
         $pool->addTransformer('order', $transformer);
 

@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Currency;
+namespace Sonata\Component\Tests\Currency;
 
 use Sonata\Component\Currency\CurrencyManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
- * Test class for CurrencyManager.
- *
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyManagerTest extends \PHPUnit_Framework_TestCase
+class CurrencyManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testFindOneByLabel()
     {
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
 
         $currencyManager = new CurrencyManager('Sonata\Component\Currency\Currency', $registry);
 

@@ -68,7 +68,7 @@ class BasketController extends Controller
     public function updateAction()
     {
         $form = $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array('validation_groups' => array('elements')));
-        $form->bind($this->get('request'));
+        $form->handleRequest($this->get('request'));
 
         if ($form->isValid()) {
             $basket = $form->getData();
@@ -122,7 +122,7 @@ class BasketController extends Controller
 
         // load and bind the form
         $form = $formBuilder->getForm();
-        $form->bind($request);
+        $form->handleRequest($request);
 
         // if the form is valid add the product to the basket
         if ($form->isValid()) {
@@ -238,7 +238,7 @@ class BasketController extends Controller
         ));
 
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bind($this->get('request'));
+            $form->handleRequest($this->get('request'));
 
             if ($form->isValid()) {
                 // save the basket
@@ -293,7 +293,7 @@ class BasketController extends Controller
         $template = 'SonataBasketBundle:Basket:delivery_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bind($this->get('request'));
+            $form->handleRequest($this->get('request'));
 
             if ($form->isValid()) {
                 // save the basket
@@ -341,7 +341,7 @@ class BasketController extends Controller
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bind($this->get('request'));
+            $form->handleRequest($this->get('request'));
 
             if ($form->isValid()) {
                 if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
@@ -406,7 +406,7 @@ class BasketController extends Controller
         $template = 'SonataBasketBundle:Basket:payment_address_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
-            $form->bind($this->get('request'));
+            $form->handleRequest($this->get('request'));
 
             if ($form->isValid()) {
                 if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
