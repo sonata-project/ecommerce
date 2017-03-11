@@ -32,7 +32,7 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
 
     public function testPreSetData()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
         $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
@@ -48,7 +48,7 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
 
     public function testPreBind()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
         $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
@@ -66,7 +66,7 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
 
     public function testPreBindEmpty()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
         $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
@@ -87,7 +87,7 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
      */
     public function testPreBindException()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
         $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
@@ -108,7 +108,7 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
      */
     protected function getFormEvent($preSetData = false, $addIsCalled = true)
     {
-        $formEvent = $this->getMockBuilder('Symfony\Component\Form\FormEvent')->disableOriginalConstructor()->getMock();
+        $formEvent = $this->createMock('Symfony\Component\Form\FormEvent');
         $formEvent->expects($this->once())
             ->method('getForm')
             ->will($this->returnValue($this->getMockedForm($addIsCalled)));
@@ -127,7 +127,7 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
      */
     protected function getMockedForm($addIsCalled = true)
     {
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         if ($addIsCalled) {
             $form->expects($this->once())->method('add');
         }

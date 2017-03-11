@@ -29,7 +29,8 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $this->assertEquals(array(), $this->createCustomerController(null, $customerManager)->getCustomersAction($paramFetcher));
+        $this->assertEquals(array(), $this->createCustomerController(null, $customerManager)
+            ->getCustomersAction($paramFetcher));
     }
 
     public function testGetCustomerAction()
@@ -52,7 +53,10 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
 
-        $this->assertEquals(array($order), $this->createCustomerController($customer, null, null, null, $order)->getCustomerOrdersAction(1));
+        $this->assertEquals(
+            array($order),
+            $this->createCustomerController($customer, null, null, null, $order)->getCustomerOrdersAction(1)
+        );
     }
 
     public function testGetCustomerAddressesAction()
@@ -61,7 +65,8 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
         $customer->expects($this->once())->method('getAddresses')->will($this->returnValue(array($address)));
 
-        $this->assertEquals(array($address), $this->createCustomerController($customer)->getCustomerAddressesAction(1));
+        $this->assertEquals(array($address), $this->createCustomerController($customer)
+            ->getCustomerAddressesAction(1));
     }
 
     public function testPostCustomerAction()
@@ -71,7 +76,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
@@ -79,7 +84,8 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createCustomerController(null, $customerManager, null, $formFactory)->postCustomerAction(new Request());
+        $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
+            ->postCustomerAction(new Request());
 
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
@@ -91,14 +97,15 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createCustomerController(null, $customerManager, null, $formFactory)->postCustomerAction(new Request());
+        $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
+            ->postCustomerAction(new Request());
 
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
@@ -114,7 +121,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($address));
@@ -122,7 +129,8 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createCustomerController($customer, $customerManager, $addressManager, $formFactory)->postCustomerAddressAction(1, new Request());
+        $view = $this->createCustomerController($customer, $customerManager, $addressManager, $formFactory)
+            ->postCustomerAddressAction(1, new Request());
 
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
@@ -134,14 +142,15 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createCustomerController(null, $customerManager, null, $formFactory)->postCustomerAction(new Request());
+        $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
+            ->postCustomerAction(new Request());
 
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
@@ -154,7 +163,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
         $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
@@ -162,7 +171,8 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)->putCustomerAction(1, new Request());
+        $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
+            ->putCustomerAction(1, new Request());
 
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
@@ -175,14 +185,15 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)->putCustomerAction(1, new Request());
+        $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
+            ->putCustomerAction(1, new Request());
 
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }

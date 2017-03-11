@@ -12,13 +12,14 @@
 namespace Sonata\ProductBundle\Tests\Command;
 
 use Sonata\ProductBundle\Command\GenerateProductCommand;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase
+class GenerateProductCommandTest extends PHPUnit_Framework_TestCase
 {
     public function testConfigure()
     {
@@ -65,7 +66,7 @@ class GenerateProductCommandTest extends \PHPUnit_Framework_TestCase
      */
     private function getCommandInstance()
     {
-        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\Kernel')->disableOriginalConstructor()->getMock();
+        $kernel = $this->createMock('Symfony\Component\HttpKernel\Kernel');
         $app = new Application($kernel);
         $app->add(new GenerateProductCommand());
 

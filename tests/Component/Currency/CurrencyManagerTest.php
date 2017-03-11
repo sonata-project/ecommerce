@@ -15,8 +15,6 @@ use Sonata\Component\Currency\CurrencyManager;
 use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
- * Test class for CurrencyManager.
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CurrencyManagerTest extends PHPUnit_Framework_TestCase

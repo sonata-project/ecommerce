@@ -17,8 +17,6 @@ use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
- * Test class for CurrencyDetector.
- *
  * @author Hugo Briand <briand@ekino.com>
  */
 class CurrencyDetectorTest extends PHPUnit_Framework_TestCase

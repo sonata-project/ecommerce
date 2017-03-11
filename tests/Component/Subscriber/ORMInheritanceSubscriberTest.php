@@ -31,7 +31,7 @@ class ORMInheritanceSubscriberTest extends PHPUnit_Framework_TestCase
         $fakedMetadata->name = 'IncorrectValue';
 
         $subscriber = new ORMInheritanceSubscriber(array(), 'Application\Sonata\ProductBundle\Entity\Product');
-        $metadata = $this->getMockBuilder('Doctrine\ORM\Event\LoadClassMetadataEventArgs')->disableOriginalConstructor()->getMock();
+        $metadata = $this->createMock('Doctrine\ORM\Event\LoadClassMetadataEventArgs');
         $metadata->expects($this->any())
             ->method('getClassMetadata')
             ->will($this->returnValue($fakedMetadata));
@@ -39,9 +39,9 @@ class ORMInheritanceSubscriberTest extends PHPUnit_Framework_TestCase
         $this->assertNull($subscriber->loadClassMetadata($metadata));
         unset($fakedMetadata);
 
-        $classMetadata = $this->getMockBuilder('Doctrine\ORM\Mapping\ClassMetadata')->disableOriginalConstructor()->getMock();
+        $classMetadata = $this->createMock('Doctrine\ORM\Mapping\ClassMetadata');
         $classMetadata->name = 'Application\Sonata\ProductBundle\Entity\Product';
-        $metadata = $this->getMockBuilder('Doctrine\ORM\Event\LoadClassMetadataEventArgs')->disableOriginalConstructor()->getMock();
+        $metadata = $this->createMock('Doctrine\ORM\Event\LoadClassMetadataEventArgs');
         $metadata->expects($this->any())
             ->method('getClassMetadata')
             ->will($this->returnValue($classMetadata));

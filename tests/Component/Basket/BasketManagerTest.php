@@ -51,7 +51,7 @@ class BasketManagerTest extends PHPUnit_Framework_TestCase
 
     public function testFind()
     {
-        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
+        $repository = $this->createMock('Doctrine\ORM\EntityRepository');
         $repository->expects($this->once())->method('findOneBy');
         $repository->expects($this->once())->method('findBy');
 

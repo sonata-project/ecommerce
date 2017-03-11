@@ -122,7 +122,7 @@ class MysqlReferenceTest extends PHPUnit_Framework_TestCase
         $metadata = new ClassMetadata('entityName');
         $metadata->table = array('name' => 'tableName');
 
-        $connection = $this->getMockBuilder('Doctrine\DBAL\Connection')->disableOriginalConstructor()->getMock();
+        $connection = $this->createMock('Doctrine\DBAL\Connection');
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())

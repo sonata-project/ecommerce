@@ -28,12 +28,12 @@ class BasketValidatorTest extends PHPUnit_Framework_TestCase
         $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
         $provider->expects($this->once())->method('validateFormBasketElement');
 
-        $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Product\Pool');
         $pool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
 
-        $consValFact = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory')->disableOriginalConstructor()->getMock();
+        $consValFact = $this->createMock('Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory');
 
-        $context = $this->getMockBuilder('Symfony\Component\Validator\ExecutionContext')->disableOriginalConstructor()->getMock();
+        $context = $this->createMock('Symfony\Component\Validator\ExecutionContext');
         $context->expects($this->once())->method('getViolations')->will($this->returnValue(array('violation1')));
         $context->expects($this->once())->method('addViolationAt');
 

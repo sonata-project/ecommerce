@@ -21,7 +21,7 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
 {
     public function testRenderAddress()
     {
-        $environment = $this->getMockBuilder('Twig_Environment')->disableOriginalConstructor()->getMock();
+        $environment = $this->createMock('Twig_Environment');
         $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $environment->expects($this->exactly(4))->method('render');
@@ -55,7 +55,7 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderAddressInvalidParameter()
     {
-        $environment = $this->getMockBuilder('Twig_Environment')->disableOriginalConstructor()->getMock();
+        $environment = $this->createMock('Twig_Environment');
         $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $address = array();
@@ -70,7 +70,7 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderAddressMissingId()
     {
-        $environment = $this->getMockBuilder('Twig_Environment')->disableOriginalConstructor()->getMock();
+        $environment = $this->createMock('Twig_Environment');
         $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
         $address = array(

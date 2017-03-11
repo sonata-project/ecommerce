@@ -23,12 +23,12 @@ class ApiProductTypeTest extends PHPUnit_Framework_TestCase
     {
         $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
 
-        $productPool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
+        $productPool = $this->createMock('Sonata\Component\Product\Pool');
         $productPool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
 
         $type = new ApiProductType($productPool);
 
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
         $type->buildForm($builder, array('provider_name' => 'test.product.provider'));
     }

@@ -82,7 +82,7 @@ class BaseBasketFactoryTest extends PHPUnit_Framework_TestCase
         $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');
         $basketBuilder = $this->createMock('Sonata\Component\Basket\BasketBuilderInterface');
         $currencyDetector = $this->createMock('Sonata\Component\Currency\CurrencyDetectorInterface');
-        $session = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')->disableOriginalConstructor()->getMock();
+        $session = $this->createMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $basketFactory = new BasketFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 

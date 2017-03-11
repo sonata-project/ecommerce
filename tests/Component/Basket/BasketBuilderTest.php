@@ -36,9 +36,9 @@ class BasketBuilderTest extends PHPUnit_Framework_TestCase
 
         $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
-        $basketElement_1 = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
 
-        $basketElements = array($basketElement_1);
+        $basketElements = array($basketElement);
 
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));
@@ -62,10 +62,10 @@ class BasketBuilderTest extends PHPUnit_Framework_TestCase
 
         $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
-        $basketElement_1 = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
-        $basketElement_1->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('non_existent_product_code'));
+        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('non_existent_product_code'));
 
-        $basketElements = array($basketElement_1);
+        $basketElements = array($basketElement);
 
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));
@@ -91,11 +91,11 @@ class BasketBuilderTest extends PHPUnit_Framework_TestCase
         $addressManager->expects($this->exactly(2))->method('findOneBy')->will($this->returnValue($address));
         $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
-        $basketElement_1 = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
-        $basketElement_1->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('test'));
-        $basketElement_1->expects($this->once())->method('setProductDefinition');
+        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('test'));
+        $basketElement->expects($this->once())->method('setProductDefinition');
 
-        $basketElements = array($basketElement_1);
+        $basketElements = array($basketElement);
 
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));

@@ -138,7 +138,9 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
         $provider = new BaseProductServiceTest_ProductProvider($serializer);
 
         $basketElementManager = $this->createMock('\Sonata\Component\Basket\BasketElementManagerInterface');
-        $basketElementManager->expects($this->any())->method('getClass')->will($this->returnValue('\Sonata\Component\Tests\Product\BaseOrderElementTest_ProductProvider'));
+        $basketElementManager->expects($this->any())->method('getClass')->will(
+            $this->returnValue('\Sonata\Component\Tests\Product\BaseOrderElementTest_ProductProvider')
+        );
         $provider->setBasketElementManager($basketElementManager);
 
         $provider->setOrderElementClassName(get_class(new OrderElement()));
@@ -286,7 +288,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
     {
         $provider = $this->getBaseProvider();
 
-        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
+        $repository = $this->createMock('Doctrine\ORM\EntityRepository');
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
@@ -348,7 +350,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
     {
         $provider = $this->getBaseProvider();
 
-        $repository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();
+        $repository = $this->createMock('Doctrine\ORM\EntityRepository');
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));

@@ -31,7 +31,7 @@ class ApiBasketTypeTest extends PHPUnit_Framework_TestCase
 
         $type = new ApiBasketType('my.test.class', $currencyFormType);
 
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
         $builder->expects($this->once())->method('create')->will($this->returnSelf());
 
         $type->buildForm($builder, array());

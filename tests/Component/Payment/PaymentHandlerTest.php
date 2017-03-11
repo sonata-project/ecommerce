@@ -33,7 +33,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
         $payment->expects($this->once())
             ->method('getTransformer')
-            ->will($this->returnValue($this->getMockBuilder('Sonata\Component\Transformer\OrderTransformer')->disableOriginalConstructor()->getMock()));
+            ->will($this->returnValue($this->createMock('Sonata\Component\Transformer\OrderTransformer')));
 
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
 
@@ -54,7 +54,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
 
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
@@ -92,7 +92,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
 
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
@@ -142,7 +142,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
 
         $backend = $this->createMock('Sonata\NotificationBundle\Backend\BackendInterface');
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
@@ -184,7 +184,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
 
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
@@ -227,7 +227,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
 
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
@@ -245,7 +245,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
     {
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
 
-        $basketTransformer = $this->getMockBuilder('Sonata\Component\Transformer\BasketTransformer')->disableOriginalConstructor()->getMock();
+        $basketTransformer = $this->createMock('Sonata\Component\Transformer\BasketTransformer');
         $basketTransformer->expects($this->once())
             ->method('transformIntoOrder')
             ->will($this->returnValue($order));
@@ -265,7 +265,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
 
         $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
 
-        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
 
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
@@ -315,7 +315,7 @@ class PaymentHandlerTest extends PHPUnit_Framework_TestCase
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->getMockBuilder('Sonata\NotificationBundle\Backend\RuntimeBackend')->disableOriginalConstructor()->getMock();
+        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
 
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 

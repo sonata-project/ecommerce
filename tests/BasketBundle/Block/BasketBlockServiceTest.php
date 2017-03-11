@@ -22,7 +22,7 @@ class BasketBlockServiceTest extends PHPUnit_Framework_TestCase
 {
     public function testGetName()
     {
-        $engineInterfaceMock = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')->disableOriginalConstructor()->getMock();
+        $engineInterfaceMock = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $block = new BasketBlockService('test', $engineInterfaceMock);
 
         $this->assertEquals('Basket items', $block->getName());
@@ -30,7 +30,7 @@ class BasketBlockServiceTest extends PHPUnit_Framework_TestCase
 
     public function testExecute()
     {
-        $engineInterfaceMock = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')->disableOriginalConstructor()->getMock();
+        $engineInterfaceMock = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $engineInterfaceMock->expects($this->once())->method('renderResponse')->will($this->returnValue(new Response()));
         $context = $this->createMock('Sonata\BlockBundle\Block\BlockContextInterface');
         $block = new BasketBlockService('test', $engineInterfaceMock);

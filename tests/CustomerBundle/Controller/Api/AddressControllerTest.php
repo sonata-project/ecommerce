@@ -55,7 +55,7 @@ class AddressControllerTest extends PHPUnit_Framework_TestCase
         $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($address));
@@ -75,7 +75,7 @@ class AddressControllerTest extends PHPUnit_Framework_TestCase
         $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->never())->method('save')->will($this->returnValue($address));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
@@ -95,7 +95,7 @@ class AddressControllerTest extends PHPUnit_Framework_TestCase
         $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
         $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($address));
@@ -116,7 +116,7 @@ class AddressControllerTest extends PHPUnit_Framework_TestCase
         $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
         $addressManager->expects($this->never())->method('save')->will($this->returnValue($address));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 

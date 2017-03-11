@@ -22,7 +22,7 @@ class DeliveryMethodTransformerTest extends PHPUnit_Framework_TestCase
 {
     public function testTransform()
     {
-        $pool = $this->getMockBuilder('Sonata\Component\Delivery\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Delivery\Pool');
         $transformer = new DeliveryMethodTransformer($pool);
 
         $delivery = new FreeDelivery(false);
@@ -37,7 +37,7 @@ class DeliveryMethodTransformerTest extends PHPUnit_Framework_TestCase
         $delivery = new FreeDelivery(false);
         $delivery->setCode('deliveryCode');
 
-        $pool = $this->getMockBuilder('Sonata\Component\Delivery\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Delivery\Pool');
 
         $pool->expects($this->once())
             ->method('getMethod')

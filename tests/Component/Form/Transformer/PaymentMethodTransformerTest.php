@@ -22,7 +22,7 @@ class PaymentMethodTransformerTest extends PHPUnit_Framework_TestCase
 {
     public function testTransform()
     {
-        $pool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Payment\Pool');
         $transformer = new PaymentMethodTransformer($pool);
 
         $payment = new PassPayment($this->createMock('Symfony\Component\Routing\RouterInterface'));
@@ -37,7 +37,7 @@ class PaymentMethodTransformerTest extends PHPUnit_Framework_TestCase
         $payment = new PassPayment($this->createMock('Symfony\Component\Routing\RouterInterface'));
         $payment->setCode('paymentCode');
 
-        $pool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Payment\Pool');
 
         $pool->expects($this->once())
             ->method('getMethod')

@@ -27,7 +27,7 @@ class BaseBasketTest extends PHPUnit_Framework_TestCase
     {
         $basket = new BasketTest();
 
-        $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Product\Pool');
         $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
 
         $basket->setProductPool($pool);
@@ -49,7 +49,7 @@ class BaseBasketTest extends PHPUnit_Framework_TestCase
     {
         $basket = new BasketTest();
 
-        $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Product\Pool');
         $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
 
         $basket->setProductPool($pool);
@@ -78,7 +78,7 @@ class BaseBasketTest extends PHPUnit_Framework_TestCase
     {
         $basket = new BasketTest();
 
-        $pool = $this->getMockBuilder('Sonata\Component\Product\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Product\Pool');
         $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
 
         $basket->setProductPool($pool);

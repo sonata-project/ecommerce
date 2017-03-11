@@ -115,7 +115,9 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
         $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('get')->will($this->returnValue('" >> /dev/null'));
         $transaction->expects($this->any())->method('getParameters')->will($this->returnValue(array()));
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($this->createMock('Sonata\Component\Order\OrderInterface')));
+        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue(
+            $this->createMock('Sonata\Component\Order\OrderInterface')
+        ));
 
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
