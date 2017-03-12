@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Basket;
+namespace Sonata\Component\Tests\Basket;
 
 use Sonata\Component\Basket\BaseBasketFactory;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class BasketFactory extends BaseBasketFactory
 {
@@ -74,14 +75,14 @@ class BasketFactory extends BaseBasketFactory
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseBasketFactoryTest extends \PHPUnit_Framework_TestCase
+class BaseBasketFactoryTest extends PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $basketManager = $this->getMock('Sonata\Component\Basket\BasketManagerInterface');
-        $basketBuilder = $this->getMock('Sonata\Component\Basket\BasketBuilderInterface');
-        $currencyDetector = $this->getMock('Sonata\Component\Currency\CurrencyDetectorInterface');
-        $session = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')->disableOriginalConstructor()->getMock();
+        $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');
+        $basketBuilder = $this->createMock('Sonata\Component\Basket\BasketBuilderInterface');
+        $currencyDetector = $this->createMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $session = $this->createMock('Symfony\Component\HttpFoundation\Session\Session');
 
         $basketFactory = new BasketFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 

@@ -9,19 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\CustomerBundle\Block;
+namespace Sonata\CustomerBundle\Tests\Block;
 
 use Sonata\CustomerBundle\Block\RecentCustomersBlockService;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class RecentCustomersBlockServiceTest extends \PHPUnit_Framework_TestCase
+class RecentCustomersBlockServiceTest extends PHPUnit_Framework_TestCase
 {
     public function testGetName()
     {
-        $engineInterfaceMock = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface')->disableOriginalConstructor()->getMock();
-        $customerManagerInterfaceMock = $this->getMockBuilder('Sonata\Component\Customer\CustomerManagerInterface')->disableOriginalConstructor()->getMock();
+        $engineInterfaceMock = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $customerManagerInterfaceMock = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $block = new RecentCustomersBlockService('test', $engineInterfaceMock, $customerManagerInterfaceMock);
 
         $this->assertEquals('Recent Customers', $block->getName());

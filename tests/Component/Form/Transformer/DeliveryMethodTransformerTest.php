@@ -9,19 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Form\Transformer;
+namespace Sonata\Component\Tests\Form\Transformer;
 
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class DeliveryMethodTransformerTest extends \PHPUnit_Framework_TestCase
+class DeliveryMethodTransformerTest extends PHPUnit_Framework_TestCase
 {
     public function testTransform()
     {
-        $pool = $this->getMockBuilder('Sonata\Component\Delivery\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Delivery\Pool');
         $transformer = new DeliveryMethodTransformer($pool);
 
         $delivery = new FreeDelivery(false);
@@ -36,7 +37,7 @@ class DeliveryMethodTransformerTest extends \PHPUnit_Framework_TestCase
         $delivery = new FreeDelivery(false);
         $delivery->setCode('deliveryCode');
 
-        $pool = $this->getMockBuilder('Sonata\Component\Delivery\Pool')->disableOriginalConstructor()->getMock();
+        $pool = $this->createMock('Sonata\Component\Delivery\Pool');
 
         $pool->expects($this->once())
             ->method('getMethod')

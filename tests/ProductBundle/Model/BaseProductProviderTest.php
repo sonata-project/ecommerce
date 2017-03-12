@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\ProductBundle\Model;
+namespace Sonata\ProductBundle\Tests\Model;
 
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;
@@ -17,6 +17,7 @@ use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductProviderTest extends BaseProductProvider
 {
@@ -55,7 +56,7 @@ class ProductTest extends BaseProduct implements ProductInterface
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
+class BaseProductProviderTest extends PHPUnit_Framework_TestCase
 {
     public function testGetProductFromRaw()
     {
@@ -98,7 +99,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($basketElement->getOption('test', null));
 
         // Second test with product
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->disableOriginalConstructor()->getMock();
+        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $productProvider->buildBasketElement($basketElement, $product, array('test2' => true));
         $this->assertTrue($basketElement->getOption('test2', null));
         $this->assertNull($basketElement->getOption('test', null));
@@ -107,7 +108,7 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
     public function testValidateFormBasketElement()
     {
         $productProvider = $this->createNewProductProvider();
-        $errorElement = $this->getMockBuilder('Sonata\CoreBundle\Validator\ErrorElement')->disableOriginalConstructor()->getMock();
+        $errorElement = $this->createMock('Sonata\CoreBundle\Validator\ErrorElement');
         $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
 
         // With a deleted element
@@ -575,12 +576,12 @@ class BaseProductProviderTest extends \PHPUnit_Framework_TestCase
      */
     private function createNewProductProvider()
     {
-        $serializer = $this->getMockBuilder('JMS\Serializer\Serializer')->disableOriginalConstructor()->getMock();
+        $serializer = $this->createMock('JMS\Serializer\Serializer');
 
         $provider = new ProductProviderTest($serializer);
 
         $provider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
-        $provider->setEventDispatcher($this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
+        $provider->setEventDispatcher($this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
 
         return $provider;
     }

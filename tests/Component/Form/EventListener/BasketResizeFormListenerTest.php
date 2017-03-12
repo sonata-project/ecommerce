@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Form\EventListener;
+namespace Sonata\Component\Tests\Form\EventListener;
 
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
+class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetSubscribedEvents()
     {
@@ -31,14 +32,14 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testPreSetData()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
-        $factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
             ->method('createNamedBuilder')
             ->will($this->returnValue($builder));
 
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
 
         $formListener = new BasketResizeFormListener($factory, $basket);
 
@@ -47,14 +48,14 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testPreBind()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
-        $factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
             ->method('createNamedBuilder')
             ->will($this->returnValue($builder));
 
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->any())
             ->method('getBasketElements')
             ->will($this->returnValue($this->getBasketElements()));
@@ -65,14 +66,14 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testPreBindEmpty()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
-        $factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
             ->method('createNamedBuilder')
             ->will($this->returnValue($builder));
 
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->any())
             ->method('getBasketElements')
             ->will($this->returnValue($this->getBasketElements(null)));
@@ -86,14 +87,14 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function testPreBindException()
     {
-        $builder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
-        $factory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
+        $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $factory->expects($this->any())
             ->method('createNamedBuilder')
             ->will($this->returnValue($builder));
 
-        $basket = $this->getMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->any())
             ->method('getBasketElements')
             ->will($this->returnValue($this->getBasketElements('test')));
@@ -107,7 +108,7 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getFormEvent($preSetData = false, $addIsCalled = true)
     {
-        $formEvent = $this->getMockBuilder('Symfony\Component\Form\FormEvent')->disableOriginalConstructor()->getMock();
+        $formEvent = $this->createMock('Symfony\Component\Form\FormEvent');
         $formEvent->expects($this->once())
             ->method('getForm')
             ->will($this->returnValue($this->getMockedForm($addIsCalled)));
@@ -126,7 +127,7 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected function getMockedForm($addIsCalled = true)
     {
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock('Symfony\Component\Form\Form');
         if ($addIsCalled) {
             $form->expects($this->once())->method('add');
         }
@@ -140,10 +141,10 @@ class BasketResizeFormListenerTest extends \PHPUnit_Framework_TestCase
             return $elements;
         }
 
-        $productProvider = $this->getMock('Sonata\Component\Product\ProductProviderInterface');
+        $productProvider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
         $productProvider->expects($this->once())->method('defineBasketElementForm');
 
-        $basketElement = $this->getMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement->expects($this->exactly(2))->method('getPosition');
         $basketElement->expects($this->once())
             ->method('getProductProvider')

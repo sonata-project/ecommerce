@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Currency;
+namespace Sonata\Component\Tests\Currency;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
- * Test class for CurrencyDetector.
- *
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
+class CurrencyDetectorTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var CurrencyDetector
@@ -38,13 +37,13 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->currency = $this->getMock('Sonata\Component\Currency\CurrencyInterface');
+        $this->currency = $this->createMock('Sonata\Component\Currency\CurrencyInterface');
         $this->currency->expects($this->any())
             ->method('getLabel')
             ->will($this->returnValue('EUR'))
         ;
 
-        $currencyManager = $this->getMock('Sonata\Component\Currency\CurrencyManagerInterface');
+        $currencyManager = $this->createMock('Sonata\Component\Currency\CurrencyManagerInterface');
         $currencyManager->expects($this->any())
             ->method('findOneByLabel')
             ->will($this->returnValue($this->currency))
@@ -69,7 +68,7 @@ class CurrencyDetectorTest extends \PHPUnit_Framework_TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $currencyManager = $this->getMock('Sonata\Component\Currency\CurrencyManagerInterface');
+        $currencyManager = $this->createMock('Sonata\Component\Currency\CurrencyManagerInterface');
         $currencyManager->expects($this->any())
             ->method('findOneByLabel')
             ->will($this->returnValue($currency))

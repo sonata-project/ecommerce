@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\OrderBundle\Entity;
+namespace Sonata\OrderBundle\Tests\Entity;
 
 use Sonata\OrderBundle\Entity\BaseOrder;
 
@@ -41,7 +41,9 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
         $element2->expects($this->any())->method('getVatAmount')->will($this->returnValue(2));
 
         $element3 = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
-        $element3->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
+        $element3->expects($this->any())->method('getProduct')->will($this->returnValue(
+            $this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()
+        ));
         $element3->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element3->expects($this->any())->method('getVatAmount')->will($this->returnValue(5));
 

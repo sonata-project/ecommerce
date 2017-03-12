@@ -12,7 +12,7 @@
     "require" : {
         "php": "^5.3 || ^7.0",
         "friendsofsymfony/comment-bundle": "^2.0",
-        "friendsofsymfony/rest-bundle": "^1.1",
+        "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
         "friendsofsymfony/user-bundle": "^1.3",
         "jms/serializer-bundle": "^0.13 || ^1.0",
         "knplabs/knp-menu-bundle": "^1.1.0 || ^2.0",
@@ -20,7 +20,7 @@
         "kriswallsmith/buzz": "^0.15",
         "nelmio/api-doc-bundle": "^2.4",
         "sonata-project/admin-bundle": "^3.1",
-        "sonata-project/block-bundle": "^3.0",
+        "sonata-project/block-bundle": "^3.2",
         "sonata-project/classification-bundle": "^3.0",
         "sonata-project/comment-bundle": "^3.0",
         "sonata-project/core-bundle": "^3.0",
@@ -65,15 +65,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sonata\\Tests\\Component\\": "tests/Component",
-            "Sonata\\Tests\\BasketBundle\\": "tests/BasketBundle",
-            "Sonata\\Tests\\CustomerBundle\\": "tests/CustomerBundle",
-            "Sonata\\Tests\\DeliveryBundle\\": "tests/DeliveryBundle",
-            "Sonata\\Tests\\InvoiceBundle\\": "tests/InvoiceBundle",
-            "Sonata\\Tests\\OrderBundle\\": "tests/OrderBundle",
-            "Sonata\\Tests\\PaymentBundle\\": "tests/PaymentBundle",
-            "Sonata\\Tests\\PriceBundle\\": "tests/PriceBundle",
-            "Sonata\\Tests\\ProductBundle\\": "tests/ProductBundle"
+            "Sonata\\Component\\Tests\\": "tests/Component",
+            "Sonata\\BasketBundle\\Tests\\": "tests/BasketBundle",
+            "Sonata\\CustomerBundle\\Tests\\": "tests/CustomerBundle",
+            "Sonata\\DeliveryBundle\\Tests\\": "tests/DeliveryBundle",
+            "Sonata\\InvoiceBundle\\Tests\\": "tests/InvoiceBundle",
+            "Sonata\\OrderBundle\\Tests\\": "tests/OrderBundle",
+            "Sonata\\PaymentBundle\\Tests\\": "tests/PaymentBundle",
+            "Sonata\\PriceBundle\\Tests\\": "tests/PriceBundle",
+            "Sonata\\ProductBundle\\Tests\\": "tests/ProductBundle",
+            "Sonata\\Tests\\Helpers\\": "tests/Helpers"
         }
     },
     "config": {

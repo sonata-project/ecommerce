@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Customer;
+namespace Sonata\Component\Tests\Customer;
 
 use FOS\UserBundle\Model\User as AbstractUser;
 

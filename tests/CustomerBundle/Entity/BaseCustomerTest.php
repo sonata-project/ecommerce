@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\CustomerBundle\Entity;
+namespace Sonata\CustomerBundle\Tests\Entity;
 
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;

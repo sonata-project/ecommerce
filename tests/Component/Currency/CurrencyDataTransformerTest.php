@@ -9,22 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\Component\Currency\Types;
+namespace Sonata\Component\Tests\Currency;
 
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDataTransformer;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyDataTransformerTest extends \PHPUnit_Framework_TestCase
+class CurrencyDataTransformerTest extends PHPUnit_Framework_TestCase
 {
     private $currencyDataTransformer;
     private $currencyManager;
 
     protected function setUp()
     {
-        $this->currencyManager = $this->getMock('Sonata\Component\Currency\CurrencyManagerInterface');
+        $this->currencyManager = $this->createMock('Sonata\Component\Currency\CurrencyManagerInterface');
 
         $this->currencyDataTransformer = new CurrencyDataTransformer($this->currencyManager);
     }

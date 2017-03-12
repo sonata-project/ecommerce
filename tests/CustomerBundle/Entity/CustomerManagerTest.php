@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\CustomerBundle\Entity;
+namespace Sonata\CustomerBundle\Tests\Entity;
 
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\CustomerManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class CustomerManagerTest extends \PHPUnit_Framework_TestCase
+class CustomerManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPager()
     {
@@ -96,17 +97,13 @@ class CustomerManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function getCustomerManager($qbCallback)
     {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
         $em = EntityManagerMockFactory::create($this, $qbCallback, array(
             'firstname',
             'lastname',
             'email',
         ));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new CustomerManager('Sonata\CustomerBundle\Entity\BaseCustomer', $registry);

@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\tests\Component\Payment\Scellius;
+namespace Sonata\Component\Tests\Payment\Scellius;
 
 use Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class NodeScelliusTransactionGeneratorTest extends \PHPUnit_Framework_TestCase
+class NodeScelliusTransactionGeneratorTest extends PHPUnit_Framework_TestCase
 {
     public function testGenerator()
     {
-        $order = $this->getMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->never())->method('getReference');
 
         $generator = new NodeScelliusTransactionGenerator();

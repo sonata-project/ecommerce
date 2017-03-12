@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\InvoiceBundle\Entity;
+namespace Sonata\InvoiceBundle\Tests\Entity;
 
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\InvoiceBundle\Entity\InvoiceManager;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Benoit de Jacobet <benoit.de-jacobet@ekino.com>
  */
-class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
+class InvoiceManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPager()
     {
@@ -112,17 +113,13 @@ class InvoiceManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function getInvoiceManager($qbCallback)
     {
-        if (version_compare(\PHPUnit_Runner_Version::id(), '5.0.0', '>=')) {
-            $this->markTestSkipped('Not compatible with PHPUnit 5.');
-        }
-
         $em = EntityManagerMockFactory::create($this, $qbCallback, array(
             'reference',
             'status',
             'name',
         ));
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new InvoiceManager('Sonata\InvoiceBundle\Entity\BaseInvoice', $registry);

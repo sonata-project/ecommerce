@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\Component\Generator;
+namespace Sonata\Component\Tests\Generator;
 
 use Sonata\Component\Generator\Mustache;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Tests\Component\Payment;
+namespace Sonata\Component\Tests\Payment;
 
 use Sonata\Component\Payment\Selector;
 use Sonata\CustomerBundle\Entity\BaseAddress;

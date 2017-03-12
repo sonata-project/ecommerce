@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\Component\Generator;
+namespace Sonata\Component\Tests\Generator;
 
 use Doctrine\ORM\EntityManager as BaseEntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sonata\Component\Generator\MysqlReference;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class EntityManager extends BaseEntityManager
 {
@@ -69,7 +70,7 @@ class OrderMock extends BaseOrder
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
+class MysqlReferenceTest extends PHPUnit_Framework_TestCase
 {
     public function testInvoice()
     {
@@ -121,7 +122,7 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
         $metadata = new ClassMetadata('entityName');
         $metadata->table = array('name' => 'tableName');
 
-        $connection = $this->getMockBuilder('Doctrine\DBAL\Connection')->disableOriginalConstructor()->getMock();
+        $connection = $this->createMock('Doctrine\DBAL\Connection');
 
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->any())
@@ -132,7 +133,7 @@ class MysqlReferenceTest extends \PHPUnit_Framework_TestCase
             ->method('query')
             ->will($this->returnValue(new \PDOStatement()));
 
-        $registry = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
+        $registry = $this->createMock('Symfony\Bridge\Doctrine\RegistryInterface');
         $registry->expects($this->any())->method('getManager')->will($this->returnValue($em));
         $registry->expects($this->any())->method('getConnection')->will($this->returnValue($connection));
 

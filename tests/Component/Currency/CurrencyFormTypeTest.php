@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\Test\Component\Currency\Types;
+namespace Sonata\Component\Tests\Currency;
 
 use Sonata\Component\Currency\CurrencyFormType;
+use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyFormTypeTest extends \PHPUnit_Framework_TestCase
+class CurrencyFormTypeTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var CurrencyFormType
@@ -25,13 +26,13 @@ class CurrencyFormTypeTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $currencyDataTransformer = $this->getMockBuilder('Sonata\Component\Currency\CurrencyDataTransformer')->disableOriginalConstructor()->getMock();
+        $currencyDataTransformer = $this->createMock('Sonata\Component\Currency\CurrencyDataTransformer');
         $this->currencyFormType = new CurrencyFormType($currencyDataTransformer);
     }
 
     public function testBuildForm()
     {
-        $formBuilder = $this->getMockBuilder('Symfony\Component\Form\FormBuilder')->disableOriginalConstructor()->getMock();
+        $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilder');
         $formBuilder->expects($this->once())
             ->method('addModelTransformer');
 

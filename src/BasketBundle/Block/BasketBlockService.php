@@ -12,8 +12,8 @@
 namespace Sonata\BasketBundle\Block;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class BasketBlockService extends BaseBlockService
+class BasketBlockService extends AbstractAdminBlockService
 {
     /**
      * {@inheritdoc}

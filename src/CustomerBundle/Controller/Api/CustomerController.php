@@ -11,6 +11,7 @@
 
 namespace Sonata\CustomerBundle\Controller\Api;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -300,7 +301,7 @@ class CustomerController
             'csrf_protection' => false,
         ));
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $address = $form->getData();
@@ -309,10 +310,19 @@ class CustomerController
             $this->addressManager->save($address);
 
             $view = \FOS\RestBundle\View\View::create($address);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
+
+            // BC for FOSRestBundle < 2.0
+            if (method_exists($view, 'setSerializationContext')) {
+                $serializationContext = SerializationContext::create();
+                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->enableMaxDepthChecks();
+                $view->setSerializationContext($serializationContext);
+            } else {
+                $context = new Context();
+                $context->setGroups(array('sonata_api_read'));
+                $context->setMaxDepth(0);
+                $view->setContext($context);
+            }
 
             return $view;
         }
@@ -336,17 +346,26 @@ class CustomerController
             'csrf_protection' => false,
         ));
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $customer = $form->getData();
             $this->customerManager->save($customer);
 
             $view = \FOS\RestBundle\View\View::create($customer);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
+
+            // BC for FOSRestBundle < 2.0
+            if (method_exists($view, 'setSerializationContext')) {
+                $serializationContext = SerializationContext::create();
+                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->enableMaxDepthChecks();
+                $view->setSerializationContext($serializationContext);
+            } else {
+                $context = new Context();
+                $context->setGroups(array('sonata_api_read'));
+                $context->setMaxDepth(0);
+                $view->setContext($context);
+            }
 
             return $view;
         }
