@@ -16,11 +16,9 @@ With this vendor, you'll be able to manage a whole e-commerce process:
 * **Payment**
     Several payment means are at your disposal and extendable!
 
-
-Summary
-=======
-
 .. toctree::
+   :caption: Summary
+   :name: summary
    :maxdepth: 2
 
     Installation <reference/installation>
