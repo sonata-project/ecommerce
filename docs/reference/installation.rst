@@ -169,7 +169,7 @@ Follow these instructions:
                 selector: sonata.payment.selector.simple
 
                 # service which generate the correct order and invoice number
-                generator: sonata.payment.generator.mysql
+                generator: sonata.payment.generator.mysql # or sonata.payment.generator.postgres
 
                 transformers:
                     order:  sonata.payment.transformer.order
