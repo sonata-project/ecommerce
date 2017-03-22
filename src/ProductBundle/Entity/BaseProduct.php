@@ -11,6 +11,7 @@
 
 namespace Sonata\ProductBundle\Entity;
 
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\PackageInterface;
@@ -245,7 +246,9 @@ abstract class BaseProduct implements ProductInterface
      */
     public function setSlug($slug)
     {
-        $this->slug = self::slugify(trim($slug));
+        $slug = Slugify::create()->slugify(trim($slug));
+
+        $this->slug = !empty($slug) ? $slug : 'n-a';
     }
 
     /**
@@ -845,38 +848,21 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/.
+     * NEXT_MAJOR: remove this method.
      *
      * @static
      *
      * @param  $text
      *
      * @return mixed|string
+     *
+     * @deprecated since 2.1, to be removed with 3.0
      */
     public static function slugify($text)
     {
-        // replace non letter or digits by -
-        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+        $text = Slugify::create()->slugify(trim($text));
 
-        // trim
-        $text = trim($text, '-');
-
-        // transliterate
-        if (function_exists('iconv')) {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        }
-
-        // lowercase
-        $text = strtolower($text);
-
-        // remove unwanted characters
-        $text = preg_replace('~[^-\w]+~', '', $text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
+        return !empty($text) ? $text : 'n-a';
     }
 
     /**
