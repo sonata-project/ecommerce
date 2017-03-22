@@ -35,6 +35,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('selector')->defaultValue('sonata.payment.selector.simple')->cannotBeEmpty()->end()
                 ->scalarNode('generator')->defaultValue('sonata.payment.generator.mysql')->cannotBeEmpty()->end()
                 ->arrayNode('transformers')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('order')->defaultValue('sonata.payment.transformer.order')->cannotBeEmpty()->end()
                         ->scalarNode('basket')->defaultValue('sonata.payment.transformer.basket')->cannotBeEmpty()->end()
