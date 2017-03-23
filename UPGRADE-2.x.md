@@ -1,6 +1,9 @@
 UPGRADE 2.x
 ===========
 
+UPGRADE FROM 2.0 to 2.1
+=======================
+
 ### Tests
 
 All files under the ``Tests`` directory are now correctly handled as internal test classes. 
