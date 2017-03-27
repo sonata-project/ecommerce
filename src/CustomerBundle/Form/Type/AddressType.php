@@ -68,6 +68,16 @@ class AddressType extends AbstractType
         }
 
         if (count($countries) > 0) {
+            // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
+            if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+                $countries = array_flip($countries);
+
+                // choice_as_value options is not needed in SF 3.0+
+                if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+                    $countryOptions['choices_as_values'] = true;
+                }
+            }
+
             $countryOptions['choices'] = $countries;
         }
 
