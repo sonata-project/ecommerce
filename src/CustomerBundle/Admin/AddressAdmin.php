@@ -11,12 +11,12 @@
 
 namespace Sonata\CustomerBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class AddressAdmin extends Admin
+class AddressAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataCustomerBundle';
 

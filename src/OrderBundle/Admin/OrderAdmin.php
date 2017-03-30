@@ -12,7 +12,7 @@
 namespace Sonata\OrderBundle\Admin;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -22,7 +22,7 @@ use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 
-class OrderAdmin extends Admin
+class OrderAdmin extends AbstractAdmin
 {
     /**
      * @var CurrencyDetectorInterface
