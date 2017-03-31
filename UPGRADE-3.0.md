@@ -23,3 +23,6 @@ See also the [diff code](https://github.com/sonata-project/ecommerce/compare/2.x
 - `unitPriceExcl` field - `precision` changed from `10` to `20`
 - `unitPriceInc` field - `precision` changed from `10` to `20`
 - `price` field - `precision` changed from `10` to `20`
+
+#### BaseBasketElement
+- Added missing `price_inc_vat` column for `priceIncludingVat` field
