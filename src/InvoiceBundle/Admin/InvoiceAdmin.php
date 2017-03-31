@@ -11,13 +11,13 @@
 
 namespace Sonata\InvoiceBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 
-class InvoiceAdmin extends Admin
+class InvoiceAdmin extends AbstractAdmin
 {
     /**
      * @var CurrencyDetectorInterface

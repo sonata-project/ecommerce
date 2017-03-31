@@ -175,7 +175,7 @@ interface ProductInterface extends PriceComputableInterface
     /**
      * Sets if current price is including VAT.
      *
-     * @param float $priceIncludingVat
+     * @param bool $priceIncludingVat
      */
     public function setPriceIncludingVat($priceIncludingVat);
 
