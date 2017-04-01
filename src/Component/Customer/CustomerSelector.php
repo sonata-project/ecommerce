@@ -13,7 +13,6 @@ namespace Sonata\Component\Customer;
 
 use FOS\UserBundle\Model\UserInterface;
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
