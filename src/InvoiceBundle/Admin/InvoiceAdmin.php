@@ -45,10 +45,23 @@ class InvoiceAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
+            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
+            $invoiceStatusType = 'Sonata\InvoiceBundle\Form\Type\InvoiceStatusType';
+            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
+        } else {
+            $modelListType = 'sonata_type_model_list';
+            $currencyType = 'sonata_currency';
+            $invoiceStatusType = 'sonata_invoice_status';
+            $countryType = 'country';
+        }
+
         if (!$this->isChild()) {
             $formMapper
                 ->with($this->trans('invoice.form.group_main_label', array(), $this->translationDomain))
-                    ->add('customer', 'sonata_type_model_list')
+                    ->add('customer', $modelListType)
                 ->end()
             ;
         }
@@ -56,8 +69,8 @@ class InvoiceAdmin extends AbstractAdmin
         $formMapper
             ->with($this->trans('invoice.form.group_main_label', array(), $this->translationDomain))
                 ->add('reference')
-                ->add('currency', 'sonata_currency')
-                ->add('status', 'sonata_invoice_status', array('translation_domain' => $this->translationDomain))
+                ->add('currency', $currencyType)
+                ->add('status', $invoiceStatusType, array('translation_domain' => $this->translationDomain))
                 ->add('totalExcl')
                 ->add('totalInc')
             ->end()
@@ -69,7 +82,7 @@ class InvoiceAdmin extends AbstractAdmin
                 ->add('address3')
                 ->add('city')
                 ->add('postcode')
-                ->add('country', 'country')
+                ->add('country', $countryType)
                 ->add('fax')
                 ->add('email')
                 ->add('mobile')
@@ -82,12 +95,21 @@ class InvoiceAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $textType = 'Symfony\Component\Form\Extension\Core\Type\TextType';
+            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
+        } else {
+            $textType = 'text';
+            $currencyType = 'sonata_currency';
+        }
+
         $list
             ->addIdentifier('reference')
             ->add('customer')
-            ->add('status', 'string', array('template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig'))
-            ->add('totalExcl', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
-            ->add('totalInc', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('status', $textType, array('template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig'))
+            ->add('totalExcl', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('totalInc', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
         ;
     }
 
@@ -96,10 +118,17 @@ class InvoiceAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $invoiceStatusType = 'Sonata\InvoiceBundle\Form\Type\InvoiceStatusType';
+        } else {
+            $invoiceStatusType = 'sonata_invoice_status';
+        }
+
         $filter
             ->add('reference')
             ->add('customer')
-            ->add('status', null, array(), 'sonata_invoice_status', array('translation_domain' => $this->translationDomain))
+            ->add('status', null, array(), $invoiceStatusType, array('translation_domain' => $this->translationDomain))
         ;
     }
 }

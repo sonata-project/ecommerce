@@ -34,17 +34,28 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
+            $localeType = 'Symfony\Component\Form\Extension\Core\Type\LocaleType';
+            $datePickerType = 'Sonata\CoreBundle\Form\Type\DatePickerType';
+        } else {
+            $modelListType = 'sonata_type_model_list';
+            $localeType = 'locale';
+            $datePickerType = 'sonata_type_date_picker';
+        }
+
         $now = new \DateTime();
 
         $formMapper
             ->with('customer.group.general', array(
                     'class' => 'col-md-7',
                 ))
-                ->add('user', 'sonata_type_model_list')
+                ->add('user', $modelListType)
                 ->add('firstname')
                 ->add('lastname')
-                ->add('locale', 'locale')
-                ->add('birthDate', 'sonata_type_date_picker', array(
+                ->add('locale', $localeType)
+                ->add('birthDate', $datePickerType, array(
                     'years' => range(1900, $now->format('Y')),
                     'dp_min_date' => '1-1-1900',
                     'dp_max_date' => $now->format('c'),
@@ -68,8 +79,15 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $textType = 'Symfony\Component\Form\Extension\Core\Type\TextType';
+        } else {
+            $textType = 'text';
+        }
+
         $list
-            ->addIdentifier('name', 'string', array('code' => '__toString'))
+            ->addIdentifier('name', $textType, array('code' => '__toString'))
             ->add('user')
             ->add('email')
             ->add('createdAt')
@@ -83,17 +101,28 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureShowFields(ShowMapper $filter)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
+            $localeType = 'Symfony\Component\Form\Extension\Core\Type\LocaleType';
+            $emailType = 'Symfony\Component\Form\Extension\Core\Type\EmailType';
+        } else {
+            $modelListType = 'sonata_type_model_list';
+            $localeType = 'locale';
+            $emailType = 'email';
+        }
+
         $filter
             ->with('customer.group.general')
-                ->add('user', 'sonata_type_model_list')
+                ->add('user', $modelListType)
                 ->add('firstname')
                 ->add('lastname')
-                ->add('locale', 'locale')
+                ->add('locale', $localeType)
                 ->add('birthDate')
                 ->add('birthPlace')
             ->end()
             ->with('customer.group.contact')
-                ->add('email', 'email')
+                ->add('email', $emailType)
                 ->add('phoneNumber')
                 ->add('mobileNumber')
                 ->add('faxNumber')
@@ -107,12 +136,19 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $localeType = 'Symfony\Component\Form\Extension\Core\Type\LocaleType';
+        } else {
+            $localeType = 'locale';
+        }
+
         $filter
             ->add('firstname')
             ->add('lastname')
             ->add('user')
             ->add('email')
-            ->add('locale', null, array(), 'locale')
+            ->add('locale', null, array(), $localeType)
             ->add('isFake')
         ;
     }

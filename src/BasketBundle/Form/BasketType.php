@@ -23,6 +23,13 @@ class BasketType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $formType = 'Symfony\Component\Form\Extension\Core\Type\FormType';
+        } else {
+            $formType = 'form';
+        }
+
         // always clone the basket, so the one in session is never altered
         $basket = $builder->getData();
 
@@ -31,7 +38,7 @@ class BasketType extends AbstractType
         }
 
         // should create a custom basket elements here
-        $basketElementBuilder = $builder->create('basketElements', 'form', array(
+        $basketElementBuilder = $builder->create('basketElements', $formType, array(
             'by_reference' => false,
         ));
         $basketElementBuilder->addEventSubscriber(new BasketResizeFormListener($builder->getFormFactory(), $basket));
