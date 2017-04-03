@@ -51,6 +51,19 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $entityType = 'Symfony\Bridge\Doctrine\Form\Type\EntityType';
+            $submitType = 'Symfony\Component\Form\Extension\Core\Type\SubmitType';
+            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
+            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
+        } else {
+            $entityType = 'entity';
+            $submitType = 'submit';
+            $choiceType = 'choice';
+            $countryType = 'country';
+        }
+
         $addresses = $options['addresses'];
 
         if (count($addresses) > 0) {
@@ -63,7 +76,7 @@ class AddressType extends AbstractType
                 }
             }
 
-            $builder->add('addresses', 'entity', array(
+            $builder->add('addresses', $entityType, array(
                 'choices' => $addresses,
                 'preferred_choices' => array($defaultAddress),
                 'class' => $this->addressClass,
@@ -71,7 +84,7 @@ class AddressType extends AbstractType
                 'multiple' => false,
                 'mapped' => false,
             ))
-            ->add('useSelected', 'submit', array(
+            ->add('useSelected', $submitType, array(
                 'attr' => array(
                     'class' => 'btn btn-primary',
                     'style' => 'margin-bottom:20px;',
@@ -84,7 +97,7 @@ class AddressType extends AbstractType
         $builder->add('name', null, array('required' => !count($addresses)));
 
         if (isset($options['types'])) {
-            $builder->add('type', 'choice', array(
+            $builder->add('type', $choiceType, array(
                 'choices' => $options['types'],
                 'translation_domain' => 'SonataCustomerBundle', )
             );
@@ -119,7 +132,7 @@ class AddressType extends AbstractType
             $countryOptions['choices'] = $countries;
         }
 
-        $builder->add('countryCode', 'country', $countryOptions);
+        $builder->add('countryCode', $countryType, $countryOptions);
     }
 
     /**

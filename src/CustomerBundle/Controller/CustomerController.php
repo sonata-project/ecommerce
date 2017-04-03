@@ -140,14 +140,20 @@ class CustomerController extends Controller
     {
         $customer = $this->getCustomer();
 
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $addressFormType = 'Sonata\CustomerBundle\Form\Type\AddressType';
+        } else {
+            $addressFormType = 'sonata_customer_address';
+        }
         // Show address creation/edition form
         if (null === $id) {
-            $form = $this->createForm('sonata_customer_address');
+            $form = $this->createForm($addressFormType);
         } else {
             $address = $this->getAddressManager()->findOneBy(array('id' => $id));
             $this->checkAddress($address);
 
-            $form = $this->createForm('sonata_customer_address', $address, array(
+            $form = $this->createForm($addressFormType, $address, array(
                 'context' => $this->getRequest()->query->get('context'),
             ));
         }

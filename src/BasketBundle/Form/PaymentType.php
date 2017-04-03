@@ -55,6 +55,13 @@ class PaymentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
+        } else {
+            $choiceType = 'choice';
+        }
+
         $basket = $builder->getData();
 
         if (!$basket instanceof BasketInterface) {
@@ -90,7 +97,7 @@ class PaymentType extends AbstractType
         $method = $basket->getPaymentMethod() ?: current($methods);
         $basket->setPaymentMethod($method ?: null);
 
-        $sub = $builder->create('paymentMethod', 'choice', array(
+        $sub = $builder->create('paymentMethod', $choiceType, array(
             'expanded' => true,
             'choice_list' => new SimpleChoiceList($choices),
         ));

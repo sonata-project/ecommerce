@@ -35,17 +35,28 @@ class DeliveryAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
+            $deliveryChoiceType = 'Sonata\Component\Form\Type\DeliveryChoiceType';
+            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
+        } else {
+            $modelListType = 'sonata_type_model_list';
+            $deliveryChoiceType = 'sonata_delivery_choice';
+            $countryType = 'country';
+        }
+
         if (!$this->isChild()) {
-            $formMapper->add('product', 'sonata_type_model_list', array(), array(
+            $formMapper->add('product', $modelListType, array(), array(
                 'admin_code' => 'sonata.product.admin.product',
             ));
         }
 
         $formMapper
             ->add('enabled')
-            ->add('code', 'sonata_delivery_choice')
+            ->add('code', $deliveryChoiceType)
             ->add('perItem')
-            ->add('countryCode', 'country')
+            ->add('countryCode', $countryType)
             ->add('zone')
         ;
     }

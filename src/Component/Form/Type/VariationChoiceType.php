@@ -39,10 +39,17 @@ class VariationChoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
+        } else {
+            $choiceType = 'choice';
+        }
+
         $choices = $this->pool->getProvider($options['product'])->getVariationsChoices($options['product'], $options['fields']);
 
         foreach ($choices as $choiceTitle => $choiceValues) {
-            $builder->add($choiceTitle, 'choice', array_merge(
+            $builder->add($choiceTitle, $choiceType, array_merge(
                     array('translation_domain' => 'SonataProductBundle'),
                     $options['field_options'],
                     array(

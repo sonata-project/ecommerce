@@ -47,6 +47,13 @@ class ShippingType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
+        } else {
+            $choiceType = 'choice';
+        }
+
         $basket = $builder->getData();
 
         if (!$basket instanceof BasketInterface) {
@@ -69,7 +76,7 @@ class ShippingType extends AbstractType
         $method = $basket->getDeliveryMethod() ?: current($methods);
         $basket->setDeliveryMethod($method ?: null);
 
-        $sub = $builder->create('deliveryMethod', 'choice', array(
+        $sub = $builder->create('deliveryMethod', $choiceType, array(
             'expanded' => true,
             'choice_list' => new SimpleChoiceList($choices),
         ));

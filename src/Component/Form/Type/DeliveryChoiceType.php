@@ -32,7 +32,10 @@ class DeliveryChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+            ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+            : 'choice';
     }
 
     /**
