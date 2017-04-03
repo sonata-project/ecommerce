@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sonata.basket.form.type.basket.class">Sonata\BasketBundle\Form\BasketType</parameter>
+        <parameter key="sonata.basket.form.type.address.class">Sonata\BasketBundle\Form\AddressType</parameter>
+        <parameter key="sonata.basket.form.type.shipping.class">Sonata\BasketBundle\Form\ShippingType</parameter>
+        <parameter key="sonata.basket.form.type.payment.class">Sonata\BasketBundle\Form\PaymentType</parameter>
+    </parameters>
     <services>
-        <service id="sonata.basket.form.type.basket" class="Sonata\BasketBundle\Form\BasketType">
+        <service id="sonata.basket.form.type.basket" class="%sonata.basket.form.type.basket.class%">
             <tag name="form.type" alias="sonata_basket_basket"/>
         </service>
-        <service id="sonata.basket.form.type.address" class="Sonata\BasketBundle\Form\AddressType">
+        <service id="sonata.basket.form.type.address" class="%sonata.basket.form.type.address.class%">
             <tag name="form.type" alias="sonata_basket_address"/>
             <argument>%sonata.customer.address.class%</argument>
             <argument type="service" id="sonata.basket"/>
         </service>
-        <service id="sonata.basket.form.type.shipping" class="Sonata\BasketBundle\Form\ShippingType">
+        <service id="sonata.basket.form.type.shipping" class="%sonata.basket.form.type.shipping.class%">
             <tag name="form.type" alias="sonata_basket_shipping"/>
             <argument type="service" id="sonata.delivery.pool"/>
             <argument type="service" id="sonata.delivery.selector"/>
         </service>
-        <service id="sonata.basket.form.type.payment" class="Sonata\BasketBundle\Form\PaymentType">
+        <service id="sonata.basket.form.type.payment" class="%sonata.basket.form.type.payment.class%">
             <tag name="form.type" alias="sonata_basket_payment"/>
             <argument type="service" id="sonata.address.manager"/>
             <argument type="service" id="sonata.payment.pool"/>
