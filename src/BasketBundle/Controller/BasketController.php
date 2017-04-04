@@ -36,7 +36,13 @@ class BasketController extends Controller
      */
     public function indexAction($form = null)
     {
-        $form = $form ?: $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array(
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $basketFormType = 'Sonata\BasketBundle\Form\BasketType';
+        } else {
+            $basketFormType = 'sonata_basket_basket';
+        }
+        $form = $form ?: $this->createForm($basketFormType, $this->get('sonata.basket'), array(
             'validation_groups' => array('elements'),
         ));
 
@@ -67,7 +73,13 @@ class BasketController extends Controller
      */
     public function updateAction()
     {
-        $form = $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array('validation_groups' => array('elements')));
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $basketFormType = 'Sonata\BasketBundle\Form\BasketType';
+        } else {
+            $basketFormType = 'sonata_basket_basket';
+        }
+        $form = $this->createForm($basketFormType, $this->get('sonata.basket'), array('validation_groups' => array('elements')));
         $form->handleRequest($this->get('request'));
 
         if ($form->isValid()) {
@@ -233,7 +245,13 @@ class BasketController extends Controller
             $basket->setBillingAddress($billingAddress);
         }
 
-        $form = $this->createForm('sonata_basket_payment', $basket, array(
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $paymentFormType = 'Sonata\BasketBundle\Form\PaymentType';
+        } else {
+            $paymentFormType = 'sonata_basket_payment';
+        }
+        $form = $this->createForm($paymentFormType, $basket, array(
             'validation_groups' => array('delivery'),
         ));
 
@@ -279,7 +297,13 @@ class BasketController extends Controller
         }
 
         try {
-            $form = $this->createForm('sonata_basket_shipping', $basket, array(
+            // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+            if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+                $shippingFormType = 'Sonata\BasketBundle\Form\ShippingType';
+            } else {
+                $shippingFormType = 'sonata_basket_shipping';
+            }
+            $form = $this->createForm($shippingFormType, $basket, array(
                 'validation_groups' => array('delivery'),
             ));
         } catch (UndeliverableCountryException $ex) {
@@ -336,8 +360,14 @@ class BasketController extends Controller
 
         $addresses = $customer->getAddressesByType(AddressInterface::TYPE_DELIVERY);
 
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $addressFormType = 'Sonata\BasketBundle\Form\AddressType';
+        } else {
+            $addressFormType = 'sonata_basket_address';
+        }
         // Show address creation / selection form
-        $form = $this->createForm('sonata_basket_address', null, array('addresses' => $addresses));
+        $form = $this->createForm($addressFormType, null, array('addresses' => $addresses));
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {
@@ -401,8 +431,14 @@ class BasketController extends Controller
 
         $addresses = $customer->getAddressesByType(AddressInterface::TYPE_BILLING);
 
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $addressFormType = 'Sonata\BasketBundle\Form\AddressType';
+        } else {
+            $addressFormType = 'sonata_basket_address';
+        }
         // Show address creation / selection form
-        $form = $this->createForm('sonata_basket_address', null, array('addresses' => $addresses->toArray()));
+        $form = $this->createForm($addressFormType, null, array('addresses' => $addresses->toArray()));
         $template = 'SonataBasketBundle:Basket:payment_address_step.html.twig';
 
         if ($this->get('request')->getMethod() == 'POST') {

@@ -58,6 +58,13 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
+        } else {
+            $countryType = 'country';
+        }
+
         $address = $builder->getData();
 
         $countryOptions = array();
@@ -81,7 +88,7 @@ class AddressType extends AbstractType
             $countryOptions['choices'] = $countries;
         }
 
-        $builder->add('countryCode', 'country', $countryOptions);
+        $builder->add('countryCode', $countryType, $countryOptions);
     }
 
     /**

@@ -135,12 +135,21 @@ class ProductAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $booleanType = 'Sonata\CoreBundle\Form\Type\BooleanType';
+            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
+        } else {
+            $booleanType = 'sonata_type_boolean';
+            $currencyType = 'sonata_currency';
+        }
+
         $list
             ->addIdentifier('sku')
             ->addIdentifier('name')
-            ->add('isVariation', 'boolean')
+            ->add('isVariation', $booleanType)
             ->add('enabled', null, array('editable' => true))
-            ->add('price', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('price', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
             ->add('productCategories', null, array('associated_tostring' => 'getCategory'))
             ->add('productCollections', null, array('associated_tostring' => 'getCollection'))
         ;

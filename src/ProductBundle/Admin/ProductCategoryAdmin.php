@@ -35,8 +35,15 @@ class ProductCategoryAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
+        } else {
+            $modelListType = 'sonata_type_model_list';
+        }
+
         if (!$this->isChild()) {
-            $formMapper->add('product', 'sonata_type_model_list', array(), array(
+            $formMapper->add('product', $modelListType, array(), array(
                 'admin_code' => 'sonata.product.admin.product',
             ));
         }

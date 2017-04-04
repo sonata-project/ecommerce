@@ -76,6 +76,9 @@ class ApiBasketElementType extends AbstractType
      */
     public function getParent()
     {
-        return 'sonata_basket_api_form_basket_element_parent';
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+            ? 'Sonata\BasketBundle\Form\ApiBasketElementParentType'
+            : 'sonata_basket_api_form_basket_element_parent';
     }
 }

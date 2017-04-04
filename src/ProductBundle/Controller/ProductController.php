@@ -242,7 +242,13 @@ class ProductController extends Controller
             $currentValues[$field] = array_search($accessor->getValue($product, $field), $values);
         }
 
-        $form = $this->createForm('sonata_product_variation_choices', $currentValues, array(
+        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
+        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
+            $variationChoiceFormType = 'Sonata\Component\Form\Type\VariationChoiceType';
+        } else {
+            $variationChoiceFormType = 'sonata_product_variation_choices';
+        }
+        $form = $this->createForm($variationChoiceFormType, $currentValues, array(
             'product' => $product,
             'fields' => array_keys($data),
         ));
