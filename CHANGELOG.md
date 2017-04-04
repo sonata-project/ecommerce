@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.1](https://github.com/sonata-project/ecommerce/compare/2.1.0...2.1.1) - 2017-04-04
+### Changed
+- Replaced types for the FQCN's
+
+### Fixed
+- Fixed `AddressType` forms `choices` option for SF>=2.7
+- Fixed `BasketElement`, `CurrencyPriceCalculator` price calculation with `priceIncludingVat=true`
+- Fixed `setPriceIncludingVat` param type in `BasketElementInterface` and `ProductInterface`
+- use `AbstractAdmin` instead of deprecated `Admin` class
+- Fixed typo in `TransformerEvents` consts values
+
 ## [2.1.0](https://github.com/sonata-project/ecommerce/compare/2.0.0...2.1.0) - 2017-03-23
 ### Added
 - Added `sonata.payment.generator.postgres` service
