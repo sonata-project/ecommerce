@@ -1,6 +1,13 @@
 UPGRADE 2.x
 ===========
 
+UPGRADE FROM 2.1.1 to 2.x
+=========================
+
+### Sonata\CustomerBundle\Form\Type\AddressType
+
+If you redefined this class, note that missing `basket` property was added, which means it is no longer public.
+
 UPGRADE FROM 2.0 to 2.1
 =======================
 

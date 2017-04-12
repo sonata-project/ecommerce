@@ -40,6 +40,11 @@ class AddressType extends AbstractType
     protected $name;
 
     /**
+     * @var BasketInterface
+     */
+    protected $basket;
+
+    /**
      * @param string          $class  A class to apply getter
      * @param string          $getter A getter method name
      * @param string          $name   A form type name
