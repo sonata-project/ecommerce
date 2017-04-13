@@ -70,9 +70,21 @@ class OrderElementAdmin extends AbstractAdmin
             $productDeliveryStatusType = 'sonata_product_delivery_status';
         }
 
+        $productTypeOptions = array();
+        $productTypes = array_keys($this->productPool->getProducts());
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
+        if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+            $productTypes = array_flip($productTypes);
+            // choice_as_value option is not needed in SF 3.0+
+            if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+                $productTypeOptions['choices_as_values'] = true;
+            }
+        }
+        $productTypeOptions['choices'] = $productTypes;
+
         $formMapper
             ->with($this->trans('order_element.form.group_main_label', array(), 'SonataOrderBundle'))
-                ->add('productType', $choiceType, array('choices' => array_keys($this->productPool->getProducts())))
+                ->add('productType', $choiceType, $productTypeOptions)
                 ->add('quantity')
                 ->add('price')
                 ->add('vatRate')

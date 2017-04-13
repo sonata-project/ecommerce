@@ -49,13 +49,23 @@ class VariationChoiceType extends AbstractType
         $choices = $this->pool->getProvider($options['product'])->getVariationsChoices($options['product'], $options['fields']);
 
         foreach ($choices as $choiceTitle => $choiceValues) {
+            $choiceOptions = array(
+                'label' => sprintf('form_%s', $choiceTitle),
+                'translation_domain' => 'SonataProductBundle',
+            );
+            // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
+            if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+                $choiceValues = array_flip($choiceValues);
+                // choice_as_value option is not needed in SF 3.0+
+                if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+                    $choiceOptions['choices_as_values'] = true;
+                }
+            }
+            $choiceOptions['choices'] = $choiceValues;
+
             $builder->add($choiceTitle, $choiceType, array_merge(
-                    array('translation_domain' => 'SonataProductBundle'),
-                    $options['field_options'],
-                    array(
-                        'label' => sprintf('form_%s', $choiceTitle),
-                        'choices' => $choiceValues,
-                    )
+                    $choiceOptions,
+                    $options['field_options']
                 )
             );
         }
