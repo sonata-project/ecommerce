@@ -97,10 +97,21 @@ class AddressType extends AbstractType
         $builder->add('name', null, array('required' => !count($addresses)));
 
         if (isset($options['types'])) {
-            $builder->add('type', $choiceType, array(
-                'choices' => $options['types'],
-                'translation_domain' => 'SonataCustomerBundle', )
+            $types = $options['types'];
+            $typeOptions = array(
+                'translation_domain' => 'SonataCustomerBundle',
             );
+            // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
+            if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+                $types = array_flip($types);
+                // choice_as_value option is not needed in SF 3.0+
+                if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+                    $typeOptions['choices_as_values'] = true;
+                }
+            }
+            $typeOptions['choices'] = $types;
+
+            $builder->add('type', $choiceType, $typeOptions);
         }
 
         $builder
