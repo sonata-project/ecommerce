@@ -14,7 +14,7 @@ namespace Sonata\Component\Customer;
 use FOS\UserBundle\Model\UserInterface;
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
 {
@@ -29,9 +29,9 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $session;
 
     /**
-     * @var \Symfony\Component\Security\Core\SecurityContextInterface
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
      */
-    protected $securityContext;
+    protected $tokenStorage;
 
     /**
      * @var string
@@ -44,11 +44,11 @@ class CustomerSelector implements CustomerSelectorInterface
      * @param SecurityContextInterface $securityContext
      * @param LocaleDetectorInterface  $localeDetector
      */
-    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
+    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, TokenStorageInterface $tokenStorage, LocaleDetectorInterface $localeDetector)
     {
         $this->customerManager = $customerManager;
         $this->session = $session;
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
         $this->locale = $localeDetector->getLocale();
     }
 
@@ -64,9 +64,9 @@ class CustomerSelector implements CustomerSelectorInterface
         $customer = null;
         $user = null;
 
-        if (true === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (true === $this->tokenStorage->getToken()->getUser()->isGranted('IS_AUTHENTICATED_FULLY')) {
             // user is authenticated
-            $user = $this->securityContext->getToken()->getUser();
+            $user = $this->tokenStorage->getToken()->getUser();
 
             if (!$user instanceof UserInterface) {
                 throw new \RuntimeException('User must be an instance of FOS\UserBundle\Model\UserInterface');
