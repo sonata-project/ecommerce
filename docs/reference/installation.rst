@@ -129,10 +129,10 @@ Follow these instructions:
                 contexts:
                     default:  # the default context is mandatory
                         providers:
-                            - sonata.media.provider.dailymotion
-                            - sonata.media.provider.youtube
-                            - sonata.media.provider.image
-                            - sonata.media.provider.file
+                            - "sonata.media.provider.dailymotion"
+                            - "sonata.media.provider.youtube"
+                            - "sonata.media.provider.image"
+                            - "sonata.media.provider.file"
 
                         formats:
                             small: { width: 100 , quality: 70}
