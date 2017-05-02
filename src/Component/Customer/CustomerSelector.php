@@ -15,6 +15,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
 {
@@ -32,6 +33,11 @@ class CustomerSelector implements CustomerSelectorInterface
      * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
      */
     protected $tokenStorage;
+    
+    /**
+     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+     */
+    protected $authorizationChecker;
 
     /**
      * @var string
@@ -39,16 +45,18 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $locale;
 
     /**
-     * @param CustomerManagerInterface $customerManager
-     * @param SessionInterface         $session
-     * @param TokenStorageInterface    $securityContext
-     * @param LocaleDetectorInterface  $localeDetector
+     * @param CustomerManagerInterface      $customerManager
+     * @param SessionInterface              $session
+     * @param TokenStorageInterface         $tokenStorage
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param LocaleDetectorInterface       $localeDetector
      */
-    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, TokenStorageInterface $tokenStorage, LocaleDetectorInterface $localeDetector)
+    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker, LocaleDetectorInterface $localeDetector)
     {
         $this->customerManager = $customerManager;
         $this->session = $session;
         $this->tokenStorage = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
         $this->locale = $localeDetector->getLocale();
     }
 
@@ -64,7 +72,7 @@ class CustomerSelector implements CustomerSelectorInterface
         $customer = null;
         $user = null;
 
-        if (true === $this->tokenStorage->getToken()->getUser()->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (true === $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             // user is authenticated
             $user = $this->tokenStorage->getToken()->getUser();
 
