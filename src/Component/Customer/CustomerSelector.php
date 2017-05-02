@@ -41,7 +41,7 @@ class CustomerSelector implements CustomerSelectorInterface
     /**
      * @param CustomerManagerInterface $customerManager
      * @param SessionInterface         $session
-     * @param SecurityContextInterface $securityContext
+     * @param TokenStorageInterface    $securityContext
      * @param LocaleDetectorInterface  $localeDetector
      */
     public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, TokenStorageInterface $tokenStorage, LocaleDetectorInterface $localeDetector)
