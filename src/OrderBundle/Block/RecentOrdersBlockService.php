@@ -14,7 +14,7 @@ namespace Sonata\OrderBundle\Block;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
-use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
@@ -22,13 +22,13 @@ use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  * @author Hugo Briand <briand@ekino.com>
  */
-class RecentOrdersBlockService extends BaseBlockService
+class RecentOrdersBlockService extends AbstractBlockService
 {
     /**
      * @var OrderManagerInterface
@@ -41,23 +41,23 @@ class RecentOrdersBlockService extends BaseBlockService
     protected $customerManager;
 
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
-    protected $securityContext;
+    protected $tokenStorage;
 
     /**
      * @param string                   $name
      * @param EngineInterface          $templating
      * @param OrderManagerInterface    $orderManager
      * @param CustomerManagerInterface $customerManager
-     * @param SecurityContextInterface $securityContext
+     * @param TokenStorageInterface    $tokenStorage
      * @param Pool                     $adminPool
      */
-    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, SecurityContextInterface $securityContext, Pool $adminPool = null)
+    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, TokenStoraheInterface $tokenStorage, Pool $adminPool = null)
     {
         $this->orderManager = $orderManager;
         $this->customerManager = $customerManager;
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
         $this->adminPool = $adminPool;
 
         parent::__construct($name, $templating);
@@ -71,7 +71,7 @@ class RecentOrdersBlockService extends BaseBlockService
         $criteria = array();
 
         if ('admin' !== $blockContext->getSetting('mode')) {
-            $orders = $this->orderManager->findForUser($this->securityContext->getToken()->getUser(), array('createdAt' => 'DESC'), $blockContext->getSetting('number'));
+            $orders = $this->orderManager->findForUser($this->tokenStorage->getToken()->getUser(), array('createdAt' => 'DESC'), $blockContext->getSetting('number'));
         } else {
             $orders = $this->orderManager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'));
         }
