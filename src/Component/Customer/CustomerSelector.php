@@ -34,7 +34,7 @@ class CustomerSelector implements CustomerSelectorInterface
      * @var TokenStorageInterface|SecurityContextInterface
      */
     protected $tokenStorage;
-    
+
     /**
      * @var AuthorizationCheckerInterface|SecurityContextInterface
      */
