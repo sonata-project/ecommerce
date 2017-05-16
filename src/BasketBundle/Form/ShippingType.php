@@ -17,6 +17,7 @@ use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -78,7 +79,11 @@ class ShippingType extends AbstractType
 
         $sub = $builder->create('deliveryMethod', $choiceType, array(
             'expanded' => true,
-            'choice_list' => new SimpleChoiceList($choices),
+            'choice_list' => function (Options $opts, $previousValue) use ($choices) {
+                return class_exists('Symfony\Component\Form\ChoiceList\ArrayChoiceList') ?
+                    new ArrayChoiceList($choices) :
+                    new SimpleChoiceList($choices); // NEXT_MAJOR: remove condition
+            },
         ));
 
         $sub->addViewTransformer(new DeliveryMethodTransformer($this->deliveryPool), true);

@@ -16,6 +16,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -55,6 +56,21 @@ class SonataOrderExtension extends Extension
         if (isset($bundles['SonataSeoBundle'])) {
             $loader->load('seo_block.xml');
         }
+
+        // Set the SecurityContext for Symfony <2.6
+        // NEXT_MAJOR: Go back to simple xml configuration when bumping requirements to SF 2.6+
+        if (interface_exists('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')) {
+            $tokenStorageReference = new Reference('security.token_storage');
+            $authorizationCheckerReference = new Reference('security.authorization_checker');
+        } else {
+            $tokenStorageReference = new Reference('security.context');
+            $authorizationCheckerReference = new Reference('security.context');
+        }
+
+        $container
+            ->getDefinition('sonata.user.block.account')
+            ->replaceArgument(4, $tokenStorageReference)
+        ;
 
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);

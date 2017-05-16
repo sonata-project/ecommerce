@@ -23,6 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -41,22 +42,29 @@ class RecentOrdersBlockService extends AbstractBlockService
     protected $customerManager;
 
     /**
-     * @var TokenStorageInterface
+     * @var TokenStorageInterface|SecurityContextInterface
      */
     protected $tokenStorage;
 
     /**
-     * @param string                   $name
-     * @param EngineInterface          $templating
-     * @param OrderManagerInterface    $orderManager
-     * @param CustomerManagerInterface $customerManager
-     * @param TokenStorageInterface    $tokenStorage
-     * @param Pool                     $adminPool
+     * @param string                                            $name
+     * @param EngineInterface                                   $templating
+     * @param OrderManagerInterface                             $orderManager
+     * @param CustomerManagerInterface                          $customerManager
+     * @param TokenStorageInterface|SecurityContextInterface    $tokenStorage
+     * @param Pool                                              $adminPool
      */
-    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, TokenStoraheInterface $tokenStorage, Pool $adminPool = null)
+    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, $tokenStorage, Pool $adminPool = null)
     {
         $this->orderManager = $orderManager;
         $this->customerManager = $customerManager;
+
+        if (!$tokenStorage instanceof TokenStorageInterface && !$tokenStorage instanceof SecurityContextInterface) {
+            throw new \InvalidArgumentException(
+                'Argument 5 should be an instance of Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface or Symfony\Component\Security\Core\SecurityContextInterface'
+            );
+        }
+
         $this->tokenStorage = $tokenStorage;
         $this->adminPool = $adminPool;
 

@@ -16,6 +16,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -57,6 +58,30 @@ class SonataBasketExtension extends Extension
         $container->setAlias('sonata.basket.builder', $config['builder']);
         $container->setAlias('sonata.basket.factory', $config['factory']);
         $container->setAlias('sonata.basket.loader', $config['loader']);
+
+        // NEXT_MAJOR: Remove following lines.
+        $basketDefinition = $container->getDefinition('sonata.basket');
+        if (method_exists($basketDefinition, 'setFactory')) {
+            $basketDefinition->setFactory(array(new Reference('sonata.basket.loader'), 'getBasket'));
+        } else {
+            $basketDefinition->setFactoryClass(new Reference('sonata.basket.loader'));
+            $basketDefinition->setFactoryMethod('getBasket');
+        }
+
+        // Set the SecurityContext for Symfony <2.6
+        // NEXT_MAJOR: Go back to simple xml configuration when bumping requirements to SF 2.6+
+        if (interface_exists('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')) {
+            $tokenStorageReference = new Reference('security.token_storage');
+            $authorizationCheckerReference = new Reference('security.authorization_checker');
+        } else {
+            $tokenStorageReference = new Reference('security.context');
+            $authorizationCheckerReference = new Reference('security.context');
+        }
+
+        $container
+            ->getDefinition('sonata.customer.selector')
+            ->replaceArgument(3, $tokenStorageReference)
+        ;
 
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);

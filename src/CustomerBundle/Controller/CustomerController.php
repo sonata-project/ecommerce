@@ -17,6 +17,7 @@ use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -223,5 +224,16 @@ class CustomerController extends Controller
     protected function getCustomerManager()
     {
         return $this->get('sonata.customer.manager');
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+        return $this->container->get('request');
     }
 }

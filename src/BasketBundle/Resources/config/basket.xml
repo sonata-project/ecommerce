@@ -13,8 +13,8 @@
         <service id="sonata.customer.selector" class="%sonata.customer.selector.class%">
             <argument type="service" id="sonata.customer.manager"/>
             <argument type="service" id="session"/>
-            <argument type="service" id="security.token_storage"/>
-            <argument type="service" id="security.authorization_checker"/>
+            <argument/>
+            <argument/>
             <argument type="service" id="sonata.intl.locale_detector"/>
         </service>
         <service id="sonata.basket.loader.standard" class="Sonata\Component\Basket\Loader">
@@ -22,7 +22,9 @@
             <argument type="service" id="sonata.customer.selector"/>
         </service>
         <service id="sonata.basket" class="Sonata\Component\Basket\Basket">
+            <!-- NEXT_MAJOR: Uncomment Following line
             <factory service="sonata.basket.loader" method="getBasket"/>
+            -->
         </service>
         <service id="sonata.basket.block.nb_items" class="Sonata\BasketBundle\Block\BasketBlockService">
             <tag name="sonata.block"/>

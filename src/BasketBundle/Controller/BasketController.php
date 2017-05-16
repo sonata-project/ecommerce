@@ -47,7 +47,7 @@ class BasketController extends Controller
         ));
 
         // always validate the basket
-        if (!$form->isBound()) {
+        if (!$form->isSubmitted()) {
             if ($violations = $this->get('validator')->validate($form)) {
                 $violationMapper = new ViolationMapper();
                 foreach ($violations as $violation) {

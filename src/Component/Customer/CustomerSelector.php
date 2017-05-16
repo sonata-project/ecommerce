@@ -16,6 +16,7 @@ use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
 {
@@ -30,12 +31,12 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $session;
 
     /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+     * @var TokenStorageInterface|SecurityContextInterface
      */
     protected $tokenStorage;
     
     /**
-     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+     * @var AuthorizationCheckerInterface|SecurityContextInterface
      */
     protected $authorizationChecker;
 
@@ -45,16 +46,31 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $locale;
 
     /**
-     * @param CustomerManagerInterface      $customerManager
-     * @param SessionInterface              $session
-     * @param TokenStorageInterface         $tokenStorage
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param LocaleDetectorInterface       $localeDetector
+     * NEXT_MAJOR: Go back to type hinting check when bumping requirements to SF 2.6+.
+     *
+     * @param CustomerManagerInterface                          $customerManager
+     * @param SessionInterface                                  $session
+     * @param TokenStorageInterface|SecurityContextInterface    $tokenStorage
+     * @param LocaleDetectorInterface                           $localeDetector
      */
-    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker, LocaleDetectorInterface $localeDetector)
+    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, $tokenStorage, $authorizationChecker, LocaleDetectorInterface $localeDetector)
     {
         $this->customerManager = $customerManager;
         $this->session = $session;
+
+        if (!$tokenStorage instanceof TokenStorageInterface && !$tokenStorage instanceof SecurityContextInterface) {
+            throw new \InvalidArgumentException(
+                'Argument 3 should be an instance of Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface or Symfony\Component\Security\Core\SecurityContextInterface'
+            );
+        }
+
+        if (!$authorizationChecker instanceof AuthorizationCheckerInterface && !$authorizationChecker instanceof SecurityContextInterface) {
+            throw new \InvalidArgumentException(
+                'Argument 4 should be an instance of Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface or Symfony\Component\Security\Core\SecurityContextInterface'
+            );
+        }
+
+
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
         $this->locale = $localeDetector->getLocale();
