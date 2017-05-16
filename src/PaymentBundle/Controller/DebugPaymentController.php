@@ -51,6 +51,18 @@ class DebugPaymentController extends Controller
     }
 
     /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
+    }
+
+    /**
      * Check the Request and return the current Order.
      *
      * @return OrderInterface
@@ -110,16 +122,5 @@ class DebugPaymentController extends Controller
     protected function getRouter()
     {
         return $this->get('router');
-    }
-
-    /**
-     * @return Request
-     */
-    public function getRequest()
-    {
-        if ($this->container->has('request_stack')) {
-            return $this->container->get('request_stack')->getCurrentRequest();
-        }
-        return $this->container->get('request');
     }
 }

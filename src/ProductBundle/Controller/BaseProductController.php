@@ -170,6 +170,18 @@ abstract class BaseProductController extends Controller
     }
 
     /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
+    }
+
+    /**
      * @param ProductInterface $product
      * @param string|null      $currency
      */
@@ -180,16 +192,5 @@ abstract class BaseProductController extends Controller
         $seoPage->setTitle($product->getName());
         $this->get('sonata.product.seo.facebook')->alterPage($seoPage, $product, $currency);
         $this->get('sonata.product.seo.twitter')->alterPage($seoPage, $product, $currency);
-    }
-
-    /**
-     * @return Request
-     */
-    public function getRequest()
-    {
-        if ($this->container->has('request_stack')) {
-            return $this->container->get('request_stack')->getCurrentRequest();
-        }
-        return $this->container->get('request');
     }
 }

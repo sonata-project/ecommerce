@@ -141,6 +141,18 @@ class PaymentController extends Controller
     }
 
     /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
+    }
+
+    /**
      * @return \Sonata\Component\Basket\BasketFactoryInterface
      */
     protected function getBasketFactory()
@@ -162,16 +174,5 @@ class PaymentController extends Controller
     protected function getPaymentHandler()
     {
         return $this->get('sonata.payment.handler');
-    }
-
-    /**
-     * @return Request
-     */
-    public function getRequest()
-    {
-        if ($this->container->has('request_stack')) {
-            return $this->container->get('request_stack')->getCurrentRequest();
-        }
-        return $this->container->get('request');
     }
 }

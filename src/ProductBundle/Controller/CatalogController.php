@@ -59,6 +59,18 @@ class CatalogController extends Controller
     }
 
     /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
+    }
+
+    /**
      * Retrieve Category from its id and slug, if any.
      *
      * @return CategoryInterface|null
@@ -126,16 +138,5 @@ class CatalogController extends Controller
     protected function getCategoryManager()
     {
         return $this->get('sonata.classification.manager.category');
-    }
-
-    /**
-     * @return Request
-     */
-    public function getRequest()
-    {
-        if ($this->container->has('request_stack')) {
-            return $this->container->get('request_stack')->getCurrentRequest();
-        }
-        return $this->container->get('request');
     }
 }

@@ -131,6 +131,18 @@ class CustomerController extends Controller
     }
 
     /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
+    }
+
+    /**
      * Updates or create an address.
      *
      * @param int $id Address id
@@ -224,16 +236,5 @@ class CustomerController extends Controller
     protected function getCustomerManager()
     {
         return $this->get('sonata.customer.manager');
-    }
-
-    /**
-     * @return Request
-     */
-    public function getRequest()
-    {
-        if ($this->container->has('request_stack')) {
-            return $this->container->get('request_stack')->getCurrentRequest();
-        }
-        return $this->container->get('request');
     }
 }

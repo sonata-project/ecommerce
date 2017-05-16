@@ -47,12 +47,12 @@ class RecentOrdersBlockService extends AbstractBlockService
     protected $tokenStorage;
 
     /**
-     * @param string                                            $name
-     * @param EngineInterface                                   $templating
-     * @param OrderManagerInterface                             $orderManager
-     * @param CustomerManagerInterface                          $customerManager
-     * @param TokenStorageInterface|SecurityContextInterface    $tokenStorage
-     * @param Pool                                              $adminPool
+     * @param string                                         $name
+     * @param EngineInterface                                $templating
+     * @param OrderManagerInterface                          $orderManager
+     * @param CustomerManagerInterface                       $customerManager
+     * @param TokenStorageInterface|SecurityContextInterface $tokenStorage
+     * @param Pool                                           $adminPool
      */
     public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, $tokenStorage, Pool $adminPool = null)
     {

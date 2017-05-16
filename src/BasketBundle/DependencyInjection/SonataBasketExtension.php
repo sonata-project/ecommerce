@@ -83,6 +83,11 @@ class SonataBasketExtension extends Extension
             ->replaceArgument(3, $tokenStorageReference)
         ;
 
+        $container
+            ->getDefinition('sonata.customer.selector')
+            ->replaceArgument(4, $authorizationCheckerReference)
+        ;
+
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
     }

@@ -291,6 +291,7 @@ class ProductController extends Controller
         if ($this->container->has('request_stack')) {
             return $this->container->get('request_stack')->getCurrentRequest();
         }
+
         return $this->container->get('request');
     }
 }

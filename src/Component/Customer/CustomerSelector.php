@@ -48,10 +48,10 @@ class CustomerSelector implements CustomerSelectorInterface
     /**
      * NEXT_MAJOR: Go back to type hinting check when bumping requirements to SF 2.6+.
      *
-     * @param CustomerManagerInterface                          $customerManager
-     * @param SessionInterface                                  $session
-     * @param TokenStorageInterface|SecurityContextInterface    $tokenStorage
-     * @param LocaleDetectorInterface                           $localeDetector
+     * @param CustomerManagerInterface                       $customerManager
+     * @param SessionInterface                               $session
+     * @param TokenStorageInterface|SecurityContextInterface $tokenStorage
+     * @param LocaleDetectorInterface                        $localeDetector
      */
     public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, $tokenStorage, $authorizationChecker, LocaleDetectorInterface $localeDetector)
     {
@@ -69,7 +69,6 @@ class CustomerSelector implements CustomerSelectorInterface
                 'Argument 4 should be an instance of Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface or Symfony\Component\Security\Core\SecurityContextInterface'
             );
         }
-
 
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
