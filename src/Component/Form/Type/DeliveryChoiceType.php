@@ -66,13 +66,24 @@ class DeliveryChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $choices = array();
+        $choiceOptions = array();
 
-        foreach ($this->pool->getMethods() as $name => $instance) {
-            $choices[$name] = $instance->getName();
+        foreach ($this->pool->getMethods() as $code => $instance) {
+            $choices[$instance->getName()] = $code ;
         }
 
-        $resolver->setDefaults(array(
-            'choices' => $choices,
-        ));
+        // NEXT_MAJOR: Remove (when requirement of Symfony is >= 2.7)
+        if (!method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
+            $choices = array_flip($choices);
+        } else {
+            // NEXT_MAJOR: Remove (when requirement of Symfony is >= 3.0)
+            if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+                $choiceOptions['choices_as_values'] = true;
+            }
+        }
+
+        $choiceOptions['choices'] = $choices;
+
+        $resolver->setDefaults($choiceOptions);
     }
 }
