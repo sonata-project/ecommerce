@@ -20,7 +20,7 @@ use Sonata\ProductBundle\Entity\BaseProduct;
  *
  * @author <yourname> <youremail>
  */
-class {{ product }} extends BaseProduct
+abstract class {{ product }} extends BaseProduct
 {
     /**
      * @var integer $id
