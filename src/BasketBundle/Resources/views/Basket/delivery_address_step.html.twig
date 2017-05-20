@@ -17,8 +17,6 @@ file that was distributed with this source code.
 
 {% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'delivery'} %}
 
-{% form_theme form 'SonataBasketBundle:Form:label.html.twig' %}
-
 {{ form_start(form, {'attr': {'role': 'form', 'class': 'form-horizontal'}}) }}
     {{ form_errors(form) }}
 
