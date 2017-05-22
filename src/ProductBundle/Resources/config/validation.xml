@@ -20,7 +20,6 @@
             <constraint name="Country"/>
         </getter>
         <getter property="zone">
-            <constraint name="NotNull"/>
             <constraint name="Length">
                 <option name="min">5</option>
                 <option name="max">5</option>
