@@ -68,8 +68,20 @@ class SonataOrderExtension extends Extension
         }
 
         $container
-            ->getDefinition('sonata.user.block.account')
+            ->getDefinition('sonata.order.block.recent_orders')
             ->replaceArgument(4, $tokenStorageReference)
+        ;
+
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
+        if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+            $flipChoices = false;
+        }else{
+            $flipChoices = true;
+        }
+
+        $container
+            ->getDefinition('sonata.order.form.status_type')
+            ->replaceArgument(3, $flipChoices)
         ;
 
         $this->registerDoctrineMapping($config);

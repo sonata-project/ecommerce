@@ -5,6 +5,7 @@
             <argument>%sonata.order.order.class%</argument>
             <argument>getStatusList</argument>
             <argument>sonata_order_status</argument>
+            <argument/>
             <tag name="form.type" alias="sonata_order_status"/>
         </service>
     </services>

@@ -5,6 +5,7 @@
             <argument>%sonata.payment.transaction.class%</argument>
             <argument>getStatusList</argument>
             <argument>sonata_payment_transaction_status</argument>
+            <argument/>
             <tag name="form.type" alias="sonata_payment_transaction_status"/>
         </service>
     </services>
