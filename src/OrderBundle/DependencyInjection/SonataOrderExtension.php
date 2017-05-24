@@ -75,7 +75,7 @@ class SonataOrderExtension extends Extension
         // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
         if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
             $flipChoices = false;
-        }else{
+        } else {
             $flipChoices = true;
         }
 

@@ -13,8 +13,8 @@ namespace Sonata\OrderBundle\Block;
 
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
-use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  * @author Hugo Briand <briand@ekino.com>
  */
-class RecentOrdersBlockService extends AbstractBlockService
+class RecentOrdersBlockService extends BaseBlockService
 {
     /**
      * @var OrderManagerInterface

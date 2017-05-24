@@ -69,7 +69,7 @@ class DeliveryChoiceType extends AbstractType
         $choiceOptions = array();
 
         foreach ($this->pool->getMethods() as $code => $instance) {
-            $choices[$instance->getName()] = $code ;
+            $choices[$instance->getName()] = $code;
         }
 
         // NEXT_MAJOR: Remove (when requirement of Symfony is >= 2.7)
