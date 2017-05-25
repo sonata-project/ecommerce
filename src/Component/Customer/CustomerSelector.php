@@ -50,10 +50,10 @@ class CustomerSelector implements CustomerSelectorInterface
      *
      * @param CustomerManagerInterface                       $customerManager
      * @param SessionInterface                               $session
-     * @param TokenStorageInterface|SecurityContextInterface $tokenStorage
      * @param LocaleDetectorInterface                        $localeDetector
+     * @param TokenStorageInterface|SecurityContextInterface $tokenStorage
      */
-    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, $tokenStorage, $authorizationChecker, LocaleDetectorInterface $localeDetector)
+    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, $tokenStorage, LocaleDetectorInterface $localeDetector, $authorizationChecker = null)
     {
         $this->customerManager = $customerManager;
         $this->session = $session;
@@ -62,6 +62,11 @@ class CustomerSelector implements CustomerSelectorInterface
             throw new \InvalidArgumentException(
                 'Argument 3 should be an instance of Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface or Symfony\Component\Security\Core\SecurityContextInterface'
             );
+        }
+
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
+        if ($authorizationChecker === null){
+            $authorizationChecker = $tokenStorage;
         }
 
         if (!$authorizationChecker instanceof AuthorizationCheckerInterface && !$authorizationChecker instanceof SecurityContextInterface) {
