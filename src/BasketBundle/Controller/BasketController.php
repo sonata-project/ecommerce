@@ -360,6 +360,15 @@ class BasketController extends Controller
 
         $addresses = $customer->getAddressesByType(AddressInterface::TYPE_DELIVERY);
 
+        $em = $this->container->get('sonata.address.manager')->getEntityManager();
+        foreach ($addresses as $key => $address) {
+            // Prevents usage of not persisted addresses in AddressType to avoid choice field error
+            // This case occurs when customer is taken from a session
+            if (!$em->contains($address)) {
+                unset($addresses[$key]);
+            }
+        }
+
         // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
         if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
             $addressFormType = 'Sonata\BasketBundle\Form\AddressType';
