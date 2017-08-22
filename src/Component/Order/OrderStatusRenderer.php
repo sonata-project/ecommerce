@@ -47,6 +47,7 @@ class OrderStatusRenderer implements StatusClassRendererInterface
                     default:
                         return $default;
                 }
+
                 break;
             case 'payment':
                 switch ($object->getPaymentStatus()) {
@@ -59,6 +60,7 @@ class OrderStatusRenderer implements StatusClassRendererInterface
                     default:
                         return $default;
                 }
+
                 break;
             default:
                 switch ($object->getStatus()) {
@@ -70,6 +72,7 @@ class OrderStatusRenderer implements StatusClassRendererInterface
                     default:
                         return $default;
                 }
+
                 break;
         }
     }

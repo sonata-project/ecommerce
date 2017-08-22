@@ -341,7 +341,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($variation->getProductCategories()));
 
         $provider->synchronizeVariationsCategories($product);
-//        $this->assertEquals(1, count($variation->getProductCategories()));
+        //        $this->assertEquals(1, count($variation->getProductCategories()));
 //        $this->assertFalse($variation->getProductCategories()->contains($productCategory1));
 //        $this->assertTrue($variation->getProductCategories()->contains($productCategory2));
     }
@@ -394,7 +394,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
         $repository->expects($this->any())->method('findOneBy')->will($this->returnValue($productCollection1));
 
         $provider->synchronizeVariationsCollections($product);
-//        $this->assertEquals(1, count($variation->getProductCollections()));
+        //        $this->assertEquals(1, count($variation->getProductCollections()));
 //        $this->assertFalse($variation->getProductCollections()->contains($productCollection1));
 //        $this->assertTrue($variation->getProductCollections()->contains($productCollection2));
     }
