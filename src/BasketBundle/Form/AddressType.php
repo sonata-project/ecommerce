@@ -72,6 +72,7 @@ class AddressType extends AbstractType
             foreach ($addresses as $address) {
                 if ($address->getCurrent()) {
                     $defaultAddress = $address;
+
                     break;
                 }
             }

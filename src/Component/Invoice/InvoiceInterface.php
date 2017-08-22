@@ -72,12 +72,12 @@ interface InvoiceInterface
      */
     public function setCurrency(CurrencyInterface $currency);
 
-     /**
-      * Get currency.
-      *
-      * @return CurrencyInterface $currency
-      */
-     public function getCurrency();
+    /**
+     * Get currency.
+     *
+     * @return CurrencyInterface $currency
+     */
+    public function getCurrency();
 
     /**
      * Set status.
