@@ -348,6 +348,7 @@ class BasketController
                 $this->basketBuilder->build($basket);
             }
         }
+
         try {
             $basket->setBasketElements($elements);
             $this->basketManager->save($basket);
