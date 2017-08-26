@@ -74,7 +74,7 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
 
         $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(array($this, 'callback')));
-//        $transaction->expects($this->once())->method('setTransactionId');
+        //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
 
@@ -88,7 +88,7 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
 
-//        $response = $payment->sendbank($order);
+        //        $response = $payment->sendbank($order);
 //
 //        $this->assertTrue($response->headers->has('Location'));
 //        $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));

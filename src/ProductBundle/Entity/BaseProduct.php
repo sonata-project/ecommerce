@@ -916,6 +916,7 @@ abstract class BaseProduct implements ProductInterface
             if ($productCategory->getMain()) {
                 if ($has) {
                     $has = false;
+
                     break;
                 }
 
