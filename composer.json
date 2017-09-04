@@ -7,6 +7,10 @@
         {
             "name": "Thomas Rabaix",
             "email": "thomas.rabaix@sonata-project.org"
+        },
+        {
+            "name": "Sonata Community",
+            "homepage": "https://github.com/sonata-project/ecommerce/contributors"
         }
     ],
     "require" : {
