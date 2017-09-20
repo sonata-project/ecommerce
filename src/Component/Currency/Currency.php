@@ -24,7 +24,7 @@ class Currency implements CurrencyInterface
     /**
      * @var string
      */
-//     protected $symbol;
+    //     protected $symbol;
 
     public function __toString()
     {
