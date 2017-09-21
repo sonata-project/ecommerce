@@ -41,12 +41,12 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         if ($this->findOneBy(array('category' => $category, 'product' => $product))) {
             return;
         }
-//
-//        if (null !== $category->getType() && self::CATEGORY_PRODUCT_TYPE !== $category->getType()) {
-//            // Should we throw an exception instead?
-//            $category->setType(self::CATEGORY_PRODUCT_TYPE);
-//            $this->categoryManager->save($category);
-//        }
+        //
+        //        if (null !== $category->getType() && self::CATEGORY_PRODUCT_TYPE !== $category->getType()) {
+        //            // Should we throw an exception instead?
+        //            $category->setType(self::CATEGORY_PRODUCT_TYPE);
+        //            $this->categoryManager->save($category);
+        //        }
 
         $productCategory = $this->create();
 

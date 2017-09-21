@@ -28,6 +28,7 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
             if ($custAddress->getCurrent()) {
                 $custAddress->setCurrent(false);
                 $this->save($custAddress);
+
                 break;
             }
         }
@@ -49,6 +50,7 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
                     if ($currentAddress->getId() !== $address->getId()) {
                         $currentAddress->setCurrent(true);
                         $this->save($currentAddress);
+
                         break;
                     }
                 }
