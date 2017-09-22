@@ -47,7 +47,7 @@ class BasketController extends Controller
         ));
 
         // always validate the basket
-        if (!$form->isBound()) {
+        if (!$form->isSubmitted()) {
             if ($violations = $this->get('validator')->validate($form)) {
                 $violationMapper = new ViolationMapper();
                 foreach ($violations as $violation) {
@@ -80,7 +80,7 @@ class BasketController extends Controller
             $basketFormType = 'sonata_basket_basket';
         }
         $form = $this->createForm($basketFormType, $this->get('sonata.basket'), array('validation_groups' => array('elements')));
-        $form->handleRequest($this->get('request'));
+        $form->handleRequest($this->getRequest());
 
         if ($form->isValid()) {
             $basket = $form->getData();
@@ -108,7 +108,7 @@ class BasketController extends Controller
      */
     public function addProductAction()
     {
-        $request = $this->get('request');
+        $request = $this->getRequest();
         $params = $request->get('add_basket');
 
         if ($request->getMethod() != 'POST') {
@@ -255,8 +255,8 @@ class BasketController extends Controller
             'validation_groups' => array('delivery'),
         ));
 
-        if ($this->get('request')->getMethod() == 'POST') {
-            $form->handleRequest($this->get('request'));
+        if ($this->getRequest()->getMethod() == 'POST') {
+            $form->handleRequest($this->getRequest());
 
             if ($form->isValid()) {
                 // save the basket
@@ -316,8 +316,8 @@ class BasketController extends Controller
 
         $template = 'SonataBasketBundle:Basket:delivery_step.html.twig';
 
-        if ($this->get('request')->getMethod() == 'POST') {
-            $form->handleRequest($this->get('request'));
+        if ($this->getRequest()->getMethod() == 'POST') {
+            $form->handleRequest($this->getRequest());
 
             if ($form->isValid()) {
                 // save the basket
@@ -379,8 +379,8 @@ class BasketController extends Controller
         $form = $this->createForm($addressFormType, null, array('addresses' => $addresses));
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
-        if ($this->get('request')->getMethod() == 'POST') {
-            $form->handleRequest($this->get('request'));
+        if ($this->getRequest()->getMethod() == 'POST') {
+            $form->handleRequest($this->getRequest());
 
             if ($form->isValid()) {
                 if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
@@ -450,8 +450,8 @@ class BasketController extends Controller
         $form = $this->createForm($addressFormType, null, array('addresses' => $addresses->toArray()));
         $template = 'SonataBasketBundle:Basket:payment_address_step.html.twig';
 
-        if ($this->get('request')->getMethod() == 'POST') {
-            $form->handleRequest($this->get('request'));
+        if ($this->getRequest()->getMethod() == 'POST') {
+            $form->handleRequest($this->getRequest());
 
             if ($form->isValid()) {
                 if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
@@ -511,8 +511,8 @@ class BasketController extends Controller
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
-        if ($this->get('request')->getMethod() == 'POST') {
-            if ($this->get('request')->get('tac')) {
+        if ($this->getRequest()->getMethod() == 'POST') {
+            if ($this->getRequest()->get('tac')) {
                 // send the basket to the payment callback
                 return $this->forward('SonataPaymentBundle:Payment:sendbank');
             }
@@ -522,7 +522,19 @@ class BasketController extends Controller
 
         return $this->render('SonataBasketBundle:Basket:final_review_step.html.twig', array(
             'basket' => $basket,
-            'tac_error' => $this->get('request')->getMethod() == 'POST',
+            'tac_error' => $this->getRequest()->getMethod() == 'POST',
         ));
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
     }
 }

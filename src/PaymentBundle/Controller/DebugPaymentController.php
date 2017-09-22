@@ -14,6 +14,7 @@ namespace Sonata\PaymentBundle\Controller;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\InvalidTransactionException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -47,6 +48,18 @@ class DebugPaymentController extends Controller
         $order = $this->checkRequest();
 
         return $this->getDebugPayment()->processCallback($order, $this->getRequest()->get('action'));
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
     }
 
     /**

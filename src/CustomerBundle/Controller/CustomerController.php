@@ -17,6 +17,7 @@ use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -127,6 +128,18 @@ class CustomerController extends Controller
         $this->getAddressManager()->setCurrent($address);
 
         return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
     }
 
     /**

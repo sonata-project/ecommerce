@@ -16,6 +16,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -55,6 +56,33 @@ class SonataOrderExtension extends Extension
         if (isset($bundles['SonataSeoBundle'])) {
             $loader->load('seo_block.xml');
         }
+
+        // Set the SecurityContext for Symfony <2.6
+        // NEXT_MAJOR: Go back to simple xml configuration when bumping requirements to SF 2.6+
+        if (interface_exists('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')) {
+            $tokenStorageReference = new Reference('security.token_storage');
+            $authorizationCheckerReference = new Reference('security.authorization_checker');
+        } else {
+            $tokenStorageReference = new Reference('security.context');
+            $authorizationCheckerReference = new Reference('security.context');
+        }
+
+        $container
+            ->getDefinition('sonata.order.block.recent_orders')
+            ->replaceArgument(4, $tokenStorageReference)
+        ;
+
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
+        if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+            $flipChoices = false;
+        } else {
+            $flipChoices = true;
+        }
+
+        $container
+            ->getDefinition('sonata.order.form.status_type')
+            ->replaceArgument(3, $flipChoices)
+        ;
 
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);

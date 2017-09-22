@@ -58,6 +58,18 @@ class SonataProductExtension extends Extension
         // this value is altered by the AddProductProviderPass class
         $pool->addMethodCall('__hack', $config['products']);
 
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
+        if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+            $flipChoices = false;
+        } else {
+            $flipChoices = true;
+        }
+
+        $container
+            ->getDefinition('sonata.product.form.delivery_type')
+            ->replaceArgument(3, $flipChoices)
+        ;
+
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
         $this->registerSeoParameters($container, $config);

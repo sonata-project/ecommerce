@@ -17,6 +17,7 @@ use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Product\Pool;
 use Sonata\ProductBundle\Entity\ProductSetManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -55,6 +56,18 @@ class CatalogController extends Controller
             'category' => $category,
             'provider' => $this->getProviderFromCategory($category),
         ));
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
     }
 
     /**

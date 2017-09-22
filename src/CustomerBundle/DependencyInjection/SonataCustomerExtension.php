@@ -57,6 +57,18 @@ class SonataCustomerExtension extends Extension
             $loader->load('seo_block.xml');
         }
 
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
+        if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+            $flipChoices = false;
+        }else{
+            $flipChoices = true;
+        }
+
+        $container
+            ->getDefinition('sonata.customer.form.address_types_type')
+            ->replaceArgument(3, $flipChoices)
+        ;
+
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);
     }

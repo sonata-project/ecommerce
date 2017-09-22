@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityNotFoundException;
 use Sonata\Component\Payment\InvalidTransactionException;
 use Sonata\Component\Payment\PaymentHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -80,7 +81,7 @@ class PaymentController extends Controller
     {
         $basket = $this->getBasket();
 
-        if ($this->get('request')->getMethod() !== 'POST') {
+        if ($this->getRequest()->getMethod() !== 'POST') {
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
@@ -137,6 +138,18 @@ class PaymentController extends Controller
     public function termsAction()
     {
         return $this->render('SonataPaymentBundle:Payment:terms.html.twig');
+    }
+
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        if ($this->container->has('request_stack')) {
+            return $this->container->get('request_stack')->getCurrentRequest();
+        }
+
+        return $this->container->get('request');
     }
 
     /**

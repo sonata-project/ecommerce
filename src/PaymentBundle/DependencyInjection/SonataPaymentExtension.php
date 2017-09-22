@@ -52,6 +52,18 @@ class SonataPaymentExtension extends Extension
         $this->configureSelector($container, $config['selector']);
         $this->configureTransformer($container, $config['transformers']);
 
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
+        if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+            $flipChoices = false;
+        } else {
+            $flipChoices = true;
+        }
+
+        $container
+            ->getDefinition('sonata.payment.form.transaction_status')
+            ->replaceArgument(3, $flipChoices)
+        ;
+
         $container->setAlias('sonata.generator', $config['generator']);
     }
 

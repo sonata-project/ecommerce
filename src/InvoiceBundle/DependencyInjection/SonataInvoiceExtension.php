@@ -50,6 +50,18 @@ class SonataInvoiceExtension extends Extension
             $loader->load('admin.xml');
         }
 
+        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 3.0)
+        if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
+            $flipChoices = false;
+        }else{
+            $flipChoices = true;
+        }
+
+        $container
+            ->getDefinition('sonata.invoice.form.status_type')
+            ->replaceArgument(3, $flipChoices)
+        ;
+
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
     }

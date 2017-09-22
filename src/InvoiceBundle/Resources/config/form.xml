@@ -5,6 +5,7 @@
             <argument>%sonata.invoice.invoice.class%</argument>
             <argument>getStatusList</argument>
             <argument>sonata_invoice_status</argument>
+            <argument/>
             <tag name="form.type" alias="sonata_invoice_status"/>
         </service>
     </services>
