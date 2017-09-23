@@ -6,10 +6,9 @@ if [ "${TRAVIS_PHP_VERSION}" != "hhvm" ]; then
     TRAVIS_INI_FILE="$PHP_INI_DIR/travis.ini"
     echo "memory_limit=3072M" >> "$TRAVIS_INI_FILE"
 
+    
     fi
 
-# To be removed when following PR will be merged: https://github.com/travis-ci/travis-build/pull/718
-composer self-update --stable
 sed --in-place "s/\"dev-master\":/\"dev-${TRAVIS_COMMIT}\":/" composer.json
 
 if [ "$SYMFONY" != "" ]; then composer require "symfony/symfony:$SYMFONY" --no-update; fi;

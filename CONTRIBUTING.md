@@ -83,7 +83,7 @@ To get sphinx, simply run the following command.
 pip install --requirement docs/requirements.txt --user
 ```
 
-Some python binaries should be downloaded in `~/.local/bin`,
+Some python binaries should be downloaded to `~/.local/bin` for Linux or `~/Library/Python/2.7/bin` for Mac OS,
 [modify your `$PATH` environment variable](http://www.linfo.org/path_env_var.html)
 so that it contains this path and then, from the root of the project, run `make docs`
 
@@ -416,8 +416,8 @@ and atomic.
 
 Do not merge something you wrote yourself. Do not merge a PR you reviewed alone,
 instead, merge PRs that have already be reviewed and approved by another reviewer.
-If there is only one commit in the PR, prefer the squash feature, otherwise, always
-use a regular merge.
+If the commit history is unclear or irrelevant, prefer the "Squash and merge" feature, otherwise, always
+use the "Rebase and merge" feature.
 And finally, use your common sense : if you see a PR about a typo,
 or if there is a situation (faulty commit, revert needed) maybe you can merge it directly.
 
