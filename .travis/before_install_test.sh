@@ -12,8 +12,7 @@ if [ "${TRAVIS_PHP_VERSION}" != "hhvm" ]; then
             mv "$XDEBUG_INI_FILE" /tmp
         fi
     fi
-    
-    fi
+fi
 
 sed --in-place "s/\"dev-master\":/\"dev-${TRAVIS_COMMIT}\":/" composer.json
 
