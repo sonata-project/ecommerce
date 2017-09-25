@@ -43,11 +43,11 @@ class SonataProductExtension extends Extension
         $loader->load('form.xml');
         $loader->load('twig.xml');
         $loader->load('menu.xml');
+        $loader->load('serializer.xml');
 
         if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
             $loader->load('api_form.xml');
-            $loader->load('serializer.xml');
         }
 
         if (isset($bundles['SonataAdminBundle'])) {
