@@ -69,29 +69,29 @@ class ScelliusPayment extends BasePayment
      */
     public static function getCurrencyList()
     {
-        return array(
-            'EUR' => array('name' => 'Euro',                  'code' => 978, 'fraction' => 2),
-            'USD' => array('name' => 'Dollar Américain',      'code' => 840, 'fraction' => 2),
-            'CHF' => array('name' => 'Franc Suisse',          'code' => 756, 'fraction' => 2),
-            'GBP' => array('name' => 'Livre Sterling',        'code' => 826, 'fraction' => 2),
-            'CAD' => array('name' => 'Dollar Canadien',       'code' => 124, 'fraction' => 2),
-            'JPY' => array('name' => 'Yen',                   'code' => 392, 'fraction' => 0),
-            'MXN' => array('name' => 'Peso Mexicain',         'code' => 484, 'fraction' => 2),
-            'TRY' => array('name' => 'Nouvelle Livre Turque', 'code' => 949, 'fraction' => 2),
-            'AUD' => array('name' => 'Dollar Australien',     'code' => 036, 'fraction' => 2),
-            'NZD' => array('name' => 'Dollar Néo-Zélandais',  'code' => 554, 'fraction' => 2),
-            'NOK' => array('name' => 'Couronne Norvégienne',  'code' => 578, 'fraction' => 2),
-            'BRL' => array('name' => 'Real Brésilien',        'code' => 986, 'fraction' => 2),
-            'ARS' => array('name' => 'Peso Argentin',         'code' => 032, 'fraction' => 2),
-            'KHR' => array('name' => 'Riel',                  'code' => 116, 'fraction' => 2),
-            'TWD' => array('name' => 'Dollar de Taiwan',      'code' => 901, 'fraction' => 2),
-            'SEK' => array('name' => 'Couronne Suédoise',     'code' => 752, 'fraction' => 2),
-            'DKK' => array('name' => 'Couronne Danoise',      'code' => 208, 'fraction' => 2),
-            'KRW' => array('name' => 'Won',                   'code' => 410, 'fraction' => 0),
-            'SGD' => array('name' => 'Dollar de Singapour',   'code' => 702, 'fraction' => 2),
-            'XPF' => array('name' => 'Franc Polynésien',      'code' => 953, 'fraction' => 0),
-            'XOF' => array('name' => 'Franc CFA',             'code' => 952, 'fraction' => 0),
-        );
+        return [
+            'EUR' => ['name' => 'Euro',                  'code' => 978, 'fraction' => 2],
+            'USD' => ['name' => 'Dollar Américain',      'code' => 840, 'fraction' => 2],
+            'CHF' => ['name' => 'Franc Suisse',          'code' => 756, 'fraction' => 2],
+            'GBP' => ['name' => 'Livre Sterling',        'code' => 826, 'fraction' => 2],
+            'CAD' => ['name' => 'Dollar Canadien',       'code' => 124, 'fraction' => 2],
+            'JPY' => ['name' => 'Yen',                   'code' => 392, 'fraction' => 0],
+            'MXN' => ['name' => 'Peso Mexicain',         'code' => 484, 'fraction' => 2],
+            'TRY' => ['name' => 'Nouvelle Livre Turque', 'code' => 949, 'fraction' => 2],
+            'AUD' => ['name' => 'Dollar Australien',     'code' => 036, 'fraction' => 2],
+            'NZD' => ['name' => 'Dollar Néo-Zélandais',  'code' => 554, 'fraction' => 2],
+            'NOK' => ['name' => 'Couronne Norvégienne',  'code' => 578, 'fraction' => 2],
+            'BRL' => ['name' => 'Real Brésilien',        'code' => 986, 'fraction' => 2],
+            'ARS' => ['name' => 'Peso Argentin',         'code' => 032, 'fraction' => 2],
+            'KHR' => ['name' => 'Riel',                  'code' => 116, 'fraction' => 2],
+            'TWD' => ['name' => 'Dollar de Taiwan',      'code' => 901, 'fraction' => 2],
+            'SEK' => ['name' => 'Couronne Suédoise',     'code' => 752, 'fraction' => 2],
+            'DKK' => ['name' => 'Couronne Danoise',      'code' => 208, 'fraction' => 2],
+            'KRW' => ['name' => 'Won',                   'code' => 410, 'fraction' => 0],
+            'SGD' => ['name' => 'Dollar de Singapour',   'code' => 702, 'fraction' => 2],
+            'XPF' => ['name' => 'Franc Polynésien',      'code' => 953, 'fraction' => 0],
+            'XOF' => ['name' => 'Franc CFA',             'code' => 952, 'fraction' => 0],
+        ];
     }
 
     /**
@@ -99,12 +99,12 @@ class ScelliusPayment extends BasePayment
      */
     public static function getCVVFlags()
     {
-        return array(
+        return [
             '0' => 'Le numéro de contrôle n’est pas remonté par le commerçant',
             '1' => 'Le numéro de contrôle est présent',
             '2' => 'Le numéro de contrôle est présent sur la carte  du porteur mais illisible (uniquement pour les cartes CB, VISA et MASTERCARD)',
             '9' => 'Le porteur a informé le commerçant que le numéro de contrôle n’était pas imprimé sur sa carte (uniquement pour les cartes CB, VISA, MASTERCARD et FINAREF)',
-        );
+        ];
     }
 
     /**
@@ -114,7 +114,7 @@ class ScelliusPayment extends BasePayment
      */
     public static function getCVVResponseCode()
     {
-        return array(
+        return [
             '4E' => 'Numéro de contrôle incorrect',
             '4D' => 'Numéro de contrôle correct',
             '50' => 'Numéro de contrôle non traité',
@@ -124,7 +124,7 @@ class ScelliusPayment extends BasePayment
             '' => 'Pour les cartes AMEX, American Express ne retourne pas de code réponse spécifique à la vérification du numéro de contrôle.'.
                     'Si le code sécurité de la carte est faux, American Express retourne un code 05 dans le champ RESPONSE_CODE.'.
                     'Pour les cartes FINAREF, Finaref ne retourne pas de code réponse spécifique à la vérification du numéro de contrôle. ',
-        );
+        ];
     }
 
     /**
@@ -134,61 +134,61 @@ class ScelliusPayment extends BasePayment
      */
     public static function getBankCodeResponses()
     {
-        $responses = array();
+        $responses = [];
 
-        $responses[] = array(
-            'banks' => array('CB', 'VISA', 'MASTERCARD', 'AMEX'),
-            'messages' => array(
-                array('00' => 'Transaction approuvée ou traitée avec succès'),
-                array('02' => 'Contacter l\'émetteur de carte'),
-                array('03' => 'Accepteur invalide'),
-                array('04' => 'Conserver la carte'),
-                array('05' => 'Ne pas honorer'),
-                array('07' => 'Conserver la carte, conditions spéciales'),
-                array('08' => 'Approuver après identification'),
-                array('12' => 'Transaction invalide'),
-                array('13' => 'Montant invalide'),
-                array('14' => 'Numéro de porteur invalide'),
-                array('15' => 'Emetteur de carte inconnu'),
-                array('30' => 'Erreur de format'),
-                array('31' => 'Identifiant de l\'organisme acquéreur inconnu'),
-                array('33' => 'Date de validité de la carte dépassée'),
-                array('34' => 'Suspicion de fraude'),
-                array('41' => 'Carte perdue'),
-                array('43' => 'Carte volée'),
-                array('51' => 'Provision insuffisante ou crédit dépassé'),
-                array('54' => 'Date de validité de la carte dépassée'),
-                array('56' => 'Carte absente du fichier'),
-                array('57' => 'Transaction non permise à ce porteur'),
-                array('58' => 'Transaction interdite au terminal'),
-                array('59' => 'Suspicion de fraude'),
-                array('60' => 'L\'accepteur de carte doit contacter l\'acquéreur'),
-                array('61' => 'Dépasse la limite du montant de retrait'),
-                array('63' => 'Règles de sécurité non respectées'),
-                array('68' => 'Réponse non parvenue ou reçue trop tard'),
-                array('90' => 'Arrêt momentané du système'),
-                array('91' => 'Emetteur de cartes inaccessible'),
-                array('96' => 'Mauvais fonctionnement du système'),
-                array('97' => 'Échéance de la temporisation de surveillance globale'),
-                array('98' => 'Serveur indisponible routage réseau demandé à nouveau'),
-                array('99' => 'Incident domaine initiateur'),
-            ),
-        );
+        $responses[] = [
+            'banks' => ['CB', 'VISA', 'MASTERCARD', 'AMEX'],
+            'messages' => [
+                ['00' => 'Transaction approuvée ou traitée avec succès'],
+                ['02' => 'Contacter l\'émetteur de carte'],
+                ['03' => 'Accepteur invalide'],
+                ['04' => 'Conserver la carte'],
+                ['05' => 'Ne pas honorer'],
+                ['07' => 'Conserver la carte, conditions spéciales'],
+                ['08' => 'Approuver après identification'],
+                ['12' => 'Transaction invalide'],
+                ['13' => 'Montant invalide'],
+                ['14' => 'Numéro de porteur invalide'],
+                ['15' => 'Emetteur de carte inconnu'],
+                ['30' => 'Erreur de format'],
+                ['31' => 'Identifiant de l\'organisme acquéreur inconnu'],
+                ['33' => 'Date de validité de la carte dépassée'],
+                ['34' => 'Suspicion de fraude'],
+                ['41' => 'Carte perdue'],
+                ['43' => 'Carte volée'],
+                ['51' => 'Provision insuffisante ou crédit dépassé'],
+                ['54' => 'Date de validité de la carte dépassée'],
+                ['56' => 'Carte absente du fichier'],
+                ['57' => 'Transaction non permise à ce porteur'],
+                ['58' => 'Transaction interdite au terminal'],
+                ['59' => 'Suspicion de fraude'],
+                ['60' => 'L\'accepteur de carte doit contacter l\'acquéreur'],
+                ['61' => 'Dépasse la limite du montant de retrait'],
+                ['63' => 'Règles de sécurité non respectées'],
+                ['68' => 'Réponse non parvenue ou reçue trop tard'],
+                ['90' => 'Arrêt momentané du système'],
+                ['91' => 'Emetteur de cartes inaccessible'],
+                ['96' => 'Mauvais fonctionnement du système'],
+                ['97' => 'Échéance de la temporisation de surveillance globale'],
+                ['98' => 'Serveur indisponible routage réseau demandé à nouveau'],
+                ['99' => 'Incident domaine initiateur'],
+            ],
+        ];
 
-        $responses[] = array(
-            'banks' => array('AMEX'),
-            'messages' => array(
+        $responses[] = [
+            'banks' => ['AMEX'],
+            'messages' => [
                 '00' => 'Transaction approuvée ou traitée avec succès',
                 '02' => 'Dépassement de plafond',
                 '04' => 'Conserver la carte',
                 '05' => 'Ne pas honorer',
                 '97' => 'Échéance de la temporisation de surveillance globale',
-            ),
-        );
+            ],
+        ];
 
-        $responses[] = array(
-            'banks' => array('FINAREF'),
-            'messages' => array(
+        $responses[] = [
+            'banks' => ['FINAREF'],
+            'messages' => [
                 '00' => 'Transaction approuvée',
                 '03' => 'Commerçant inconnu - Identifiant de commerçant incorrect',
                 '05' => 'Compte / Porteur avec statut bloqué ou invalide',
@@ -199,8 +199,8 @@ class ScelliusPayment extends BasePayment
                 '81' => 'Transaction approuvée avec augmentation capital',
                 '82' => 'Transaction approuvée NPAI',
                 '83' => 'Compte / porteur invalide',
-            ),
-        );
+            ],
+        ];
 
         return $responses;
     }
@@ -212,13 +212,13 @@ class ScelliusPayment extends BasePayment
      */
     public static function getLanguageCodes()
     {
-        return array(
+        return [
             'fr' => 'Français',
             'ge' => 'Allemand',
             'en' => 'Anglais',
             'es' => 'Espagnol',
             'it' => 'Italien',
-        );
+        ];
     }
 
     /**
@@ -228,47 +228,47 @@ class ScelliusPayment extends BasePayment
      */
     public static function getPaymentMeans()
     {
-        return array(
-            'CB' => array('name' => 'Carte Bleue',           'network' => 'CB Nationale'),
-            'VISA' => array('name' => 'VISA',                  'network' => 'CB Internationale'),
-            'MASTERCARD' => array('name' => 'MASTERCARD',            'network' => 'CB Internationale'),
-            'AMEX' => array('name' => 'AMEX',                  'network' => 'American Express'),
-            'DINERS' => array('name' => 'DINER\'S CLUB',         'network' => 'DINERS'),
-            'FINAREF' => array('name' => 'FINAREF',               'network' => 'FINAREF'),
-            'FNAC' => array('name' => 'FNAC',                  'network' => 'FINAREF'),
-            'CYRILLUS' => array('name' => 'CYRILLUS',              'network' => 'FINAREF'),
-            'PRINTEMPS' => array('name' => 'PRINTEMPS',             'network' => 'FINAREF'),
-            'KANGOUROU' => array('name' => 'KANGOUROU',             'network' => 'FINAREF'),
-            'SURCOUF' => array('name' => 'SURCOUF',               'network' => 'FINAREF'),
-            'POCKETCARD' => array('name' => 'POCKETCARD (Belgique)', 'network' => 'FINAREF'),
-            'CONFORAMA' => array('name' => 'CONFORAMA',             'network' => 'FINAREF'),
-            'NUITEA' => array('name' => 'NUITEA',                'network' => 'CETELEM'),
-            'AURORE' => array('name' => 'AURORE',                'network' => 'CETELEM'),
-            'PASS' => array('name' => 'PASS',                  'network' => 'CETELEM'),
-            'PLURIEL' => array('name' => 'PLURIEL',               'network' => 'FRANFINANCE'),
-            'TOYSRUS' => array('name' => 'TOYSRUS',               'network' => 'FRANFINANCE'),
-            'CONNEXION' => array('name' => 'CONNEXION',             'network' => 'FRANFINANCE'),
-            'HYPERMEDIA' => array('name' => 'HYPERMEDIA',            'network' => 'FRANFINANCE'),
-            'DELATOUR' => array('name' => 'DELATOUR',              'network' => 'FRANFINANCE'),
-            'NORAUTO' => array('name' => 'NORAUTO',               'network' => 'FRANFINANCE'),
-            'NOUVFRONT' => array('name' => 'NOUVELLES FRONTIERES',  'network' => 'FRANFINANCE'),
-            'SERAP' => array('name' => 'SERAP',                 'network' => 'FRANFINANCE'),
-            'BOURBON' => array('name' => 'BOURBON',               'network' => 'FRANFINANCE'),
-            'COFINOGA' => array('name' => 'COFINOGA',              'network' => 'COFINOGA'),
-            'COFINOGA _BHV' => array('name' => 'BHV',                   'network' => 'COFINOGA'),
-            'COFINOGA _CASINOGEANT' => array('name' => 'CASINOGEANT',           'network' => 'COFINOGA'),
-            'COFINOGA _DIAC' => array('name' => 'DIAC',                  'network' => 'COFINOGA'),
-            'COFINOGA _GL' => array('name' => 'GL',                    'network' => 'COFINOGA'),
-            'COFINOGA _GOSPORT' => array('name' => 'GOSPORT',               'network' => 'COFINOGA'),
-            'COFINOGA _MONOPRIX' => array('name' => 'MONOPRIX',              'network' => 'COFINOGA'),
-            'COFINOGA _MRBRICOLAGE' => array('name' => 'MRBRICOLAGE',           'network' => 'COFINOGA'),
-            'COFINOGA _SOFICARTE' => array('name' => 'SOFICARTE',             'network' => 'COFINOGA'),
-            'COFINOGA _SYGMA' => array('name' => 'SYGMA',                 'network' => 'COFINOGA'),
-            'JCB' => array('name' => 'JCB',                   'network' => 'JCB - Japanese Credit Bureau'),
-            'DELTA' => array('name' => 'DELTA',                 'network' => 'NATWEST - GB'),
-            'SWITCH' => array('name' => 'SWITCH',                'network' => 'NATWEST - GB'),
-            'SOLO' => array('name' => 'SOLO',                  'network' => 'NATWEST - GB'),
-        );
+        return [
+            'CB' => ['name' => 'Carte Bleue',           'network' => 'CB Nationale'],
+            'VISA' => ['name' => 'VISA',                  'network' => 'CB Internationale'],
+            'MASTERCARD' => ['name' => 'MASTERCARD',            'network' => 'CB Internationale'],
+            'AMEX' => ['name' => 'AMEX',                  'network' => 'American Express'],
+            'DINERS' => ['name' => 'DINER\'S CLUB',         'network' => 'DINERS'],
+            'FINAREF' => ['name' => 'FINAREF',               'network' => 'FINAREF'],
+            'FNAC' => ['name' => 'FNAC',                  'network' => 'FINAREF'],
+            'CYRILLUS' => ['name' => 'CYRILLUS',              'network' => 'FINAREF'],
+            'PRINTEMPS' => ['name' => 'PRINTEMPS',             'network' => 'FINAREF'],
+            'KANGOUROU' => ['name' => 'KANGOUROU',             'network' => 'FINAREF'],
+            'SURCOUF' => ['name' => 'SURCOUF',               'network' => 'FINAREF'],
+            'POCKETCARD' => ['name' => 'POCKETCARD (Belgique)', 'network' => 'FINAREF'],
+            'CONFORAMA' => ['name' => 'CONFORAMA',             'network' => 'FINAREF'],
+            'NUITEA' => ['name' => 'NUITEA',                'network' => 'CETELEM'],
+            'AURORE' => ['name' => 'AURORE',                'network' => 'CETELEM'],
+            'PASS' => ['name' => 'PASS',                  'network' => 'CETELEM'],
+            'PLURIEL' => ['name' => 'PLURIEL',               'network' => 'FRANFINANCE'],
+            'TOYSRUS' => ['name' => 'TOYSRUS',               'network' => 'FRANFINANCE'],
+            'CONNEXION' => ['name' => 'CONNEXION',             'network' => 'FRANFINANCE'],
+            'HYPERMEDIA' => ['name' => 'HYPERMEDIA',            'network' => 'FRANFINANCE'],
+            'DELATOUR' => ['name' => 'DELATOUR',              'network' => 'FRANFINANCE'],
+            'NORAUTO' => ['name' => 'NORAUTO',               'network' => 'FRANFINANCE'],
+            'NOUVFRONT' => ['name' => 'NOUVELLES FRONTIERES',  'network' => 'FRANFINANCE'],
+            'SERAP' => ['name' => 'SERAP',                 'network' => 'FRANFINANCE'],
+            'BOURBON' => ['name' => 'BOURBON',               'network' => 'FRANFINANCE'],
+            'COFINOGA' => ['name' => 'COFINOGA',              'network' => 'COFINOGA'],
+            'COFINOGA _BHV' => ['name' => 'BHV',                   'network' => 'COFINOGA'],
+            'COFINOGA _CASINOGEANT' => ['name' => 'CASINOGEANT',           'network' => 'COFINOGA'],
+            'COFINOGA _DIAC' => ['name' => 'DIAC',                  'network' => 'COFINOGA'],
+            'COFINOGA _GL' => ['name' => 'GL',                    'network' => 'COFINOGA'],
+            'COFINOGA _GOSPORT' => ['name' => 'GOSPORT',               'network' => 'COFINOGA'],
+            'COFINOGA _MONOPRIX' => ['name' => 'MONOPRIX',              'network' => 'COFINOGA'],
+            'COFINOGA _MRBRICOLAGE' => ['name' => 'MRBRICOLAGE',           'network' => 'COFINOGA'],
+            'COFINOGA _SOFICARTE' => ['name' => 'SOFICARTE',             'network' => 'COFINOGA'],
+            'COFINOGA _SYGMA' => ['name' => 'SYGMA',                 'network' => 'COFINOGA'],
+            'JCB' => ['name' => 'JCB',                   'network' => 'JCB - Japanese Credit Bureau'],
+            'DELTA' => ['name' => 'DELTA',                 'network' => 'NATWEST - GB'],
+            'SWITCH' => ['name' => 'SWITCH',                'network' => 'NATWEST - GB'],
+            'SOLO' => ['name' => 'SOLO',                  'network' => 'NATWEST - GB'],
+        ];
     }
 
     /**
@@ -278,7 +278,7 @@ class ScelliusPayment extends BasePayment
      */
     public static function getResponseCode()
     {
-        return array(
+        return [
             '00' => 'Autorisation acceptée',
             '02' => 'demande d’autorisation par téléphone à la banque à cause d’un dépassement de plafond d’autorisation sur la carte (cf. annexe I)',
             '03' => 'Champ merchant_id invalide, vérifier la valeur renseignée dans la requête / Contrat de vente à distance inexistant, contacter votre banque.',
@@ -289,7 +289,7 @@ class ScelliusPayment extends BasePayment
             '34' => 'Suspicion de fraude',
             '75' => 'Nombre de tentatives de saisie du numéro de carte dépassé.',
             '90' => 'Service temporairement indisponible',
-        );
+        ];
     }
 
     /**
@@ -335,9 +335,9 @@ class ScelliusPayment extends BasePayment
 
         $this->report($transaction);
 
-        return new Response('ko', 200, array(
+        return new Response('ko', 200, [
             'Content-Type' => 'text/plain',
-        ));
+        ]);
     }
 
     /**
@@ -432,13 +432,13 @@ class ScelliusPayment extends BasePayment
      */
     public function sendbank(OrderInterface $order)
     {
-        $params = array(
+        $params = [
             'bank' => $this->getCode(),
             'reference' => $order->getReference(),
             'check' => $this->generateUrlCheck($order),
-        );
+        ];
 
-        $cmdLineParameters = array(
+        $cmdLineParameters = [
             // base configuration
             'merchant_id' => $this->getOption('merchant_id'),
             'merchant_country' => $this->getOption('merchant_country'),
@@ -476,10 +476,10 @@ class ScelliusPayment extends BasePayment
             'return_context' => '',
             'target' => '',
             'order_id' => $order->getReference(),
-        );
+        ];
 
         // clean parameters
-        $cmdLineOptions = array();
+        $cmdLineOptions = [];
         foreach ($cmdLineParameters as $option => $value) {
             $cmdLineOptions[] = sprintf('%s=%s', $option, $this->encodeString($value));
         }
@@ -505,23 +505,23 @@ class ScelliusPayment extends BasePayment
         }
 
         if ($data[1] == 0) {
-            $scellius = array(
+            $scellius = [
                 'valid' => true,
                 'content' => $data[3],
-            );
+            ];
         } else {
-            $scellius = array(
+            $scellius = [
                 'valid' => false,
                 'content' => $data[2],
-            );
+            ];
         }
 
-        return $this->templating->renderResponse($this->getOption('template'), array(
+        return $this->templating->renderResponse($this->getOption('template'), [
             'order' => $order,
             'scellius' => $scellius,
             'debug' => $this->debug,
             'parameters' => $cmdLineParameters,
-        ));
+        ]);
     }
 
     /**
@@ -583,7 +583,7 @@ class ScelliusPayment extends BasePayment
             throw new \RuntimeException('Invalid data count');
         }
 
-        return array(
+        return [
             'code' => $data[1],
             'error' => $data[2],
             'merchant_id' => $data[3],
@@ -616,7 +616,7 @@ class ScelliusPayment extends BasePayment
             'capture_day' => $data[30],
             'capture_mode' => $data[31],
             'data' => $data[32],
-        );
+        ];
     }
 
     /**

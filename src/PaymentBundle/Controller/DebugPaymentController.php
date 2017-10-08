@@ -31,10 +31,10 @@ class DebugPaymentController extends Controller
     {
         $order = $this->checkRequest();
 
-        return $this->render('SonataPaymentBundle:Payment:debug.html.twig', array(
+        return $this->render('SonataPaymentBundle:Payment:debug.html.twig', [
             'order' => $order,
             'check' => $this->getRequest()->get('check'),
-        ));
+        ]);
     }
 
     /**
@@ -66,7 +66,7 @@ class DebugPaymentController extends Controller
 
         $reference = $this->getRequest()->get('reference');
 
-        $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+        $order = $this->getOrderManager()->findOneBy(['reference' => $reference]);
 
         if (!$order) {
             throw new NotFoundHttpException(sprintf('Order with reference "%s" not found.', $reference));

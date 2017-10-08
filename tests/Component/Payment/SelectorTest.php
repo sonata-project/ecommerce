@@ -29,7 +29,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetPaymentPool()
     {
-        $paymentPoolMethods = array('first method', 'second method');
+        $paymentPoolMethods = ['first method', 'second method'];
 
         $paymentPool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->getMock();
         $paymentPool->expects($this->any())
@@ -49,7 +49,7 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPaymentException()
     {
-        $paymentPoolMethods = array('first method', 'second method');
+        $paymentPoolMethods = ['first method', 'second method'];
 
         $paymentPool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->getMock();
         $paymentPool->expects($this->any())

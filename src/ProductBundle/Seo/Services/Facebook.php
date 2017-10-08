@@ -86,10 +86,10 @@ class Facebook implements ServiceInterface
         $seoPage->addMeta('property', 'og:type', 'og:product')
             ->addMeta('property', 'og:title', $product->getName())
             ->addMeta('property', 'og:description', $product->getDescription())
-            ->addMeta('property', 'og:url', $this->router->generate('sonata_product_view', array(
+            ->addMeta('property', 'og:url', $this->router->generate('sonata_product_view', [
                 'slug' => $product->getSlug(),
                 'productId' => $product->getId(),
-            ), UrlGeneratorInterface::ABSOLUTE_URL))
+            ], UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))
             ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency());
 

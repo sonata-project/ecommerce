@@ -23,13 +23,13 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
     public function testGetBasketsAction()
     {
         $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');
-        $basketManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
+        $basketManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals(array(), $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
+        $this->assertEquals([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
     public function testGetBasketAction()
@@ -53,7 +53,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
 
     public function testGetBasketelementsAction()
     {
-        $elements = array(1, 2);
+        $elements = [1, 2];
 
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($elements));
@@ -165,7 +165,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
 
         $view = $this->createBasketController($basketManager)->deleteBasketAction(1);
 
-        $this->assertEquals(array('deleted' => true), $view);
+        $this->assertEquals(['deleted' => true], $view);
     }
 
     public function testDeleteBasketInvalidAction()
@@ -353,7 +353,7 @@ class BasketControllerTest extends PHPUnit_Framework_TestCase
     public function testDeleteBasketBasketelementsAction()
     {
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array()));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([]));
         $basket->expects($this->once())->method('setBasketElements');
 
         $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');

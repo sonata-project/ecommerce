@@ -26,7 +26,7 @@ class StatusRendererCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         foreach ($container->findTaggedServiceIds('sonata.status.renderer') as $id => $attributes) {
-            $container->getDefinition('sonata.order.twig.status_extension')->addMethodCall('addStatusService', array(new Reference($id)));
+            $container->getDefinition('sonata.order.twig.status_extension')->addMethodCall('addStatusService', [new Reference($id)]);
         }
     }
 }

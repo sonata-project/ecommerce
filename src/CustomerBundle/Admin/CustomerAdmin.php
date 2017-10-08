@@ -48,23 +48,23 @@ class CustomerAdmin extends AbstractAdmin
         $now = new \DateTime();
 
         $formMapper
-            ->with('customer.group.general', array(
+            ->with('customer.group.general', [
                     'class' => 'col-md-7',
-                ))
+                ])
                 ->add('user', $modelListType)
                 ->add('firstname')
                 ->add('lastname')
                 ->add('locale', $localeType)
-                ->add('birthDate', $datePickerType, array(
+                ->add('birthDate', $datePickerType, [
                     'years' => range(1900, $now->format('Y')),
                     'dp_min_date' => '1-1-1900',
                     'dp_max_date' => $now->format('c'),
-                ))
+                ])
                 ->add('birthPlace')
             ->end()
-            ->with('customer.group.contact', array(
+            ->with('customer.group.contact', [
                     'class' => 'col-md-5',
-                ))
+                ])
                 ->add('email')
                 ->add('phoneNumber')
                 ->add('mobileNumber')
@@ -87,7 +87,7 @@ class CustomerAdmin extends AbstractAdmin
         }
 
         $list
-            ->addIdentifier('name', $textType, array('code' => '__toString'))
+            ->addIdentifier('name', $textType, ['code' => '__toString'])
             ->add('user')
             ->add('email')
             ->add('createdAt')
@@ -148,7 +148,7 @@ class CustomerAdmin extends AbstractAdmin
             ->add('lastname')
             ->add('user')
             ->add('email')
-            ->add('locale', null, array(), $localeType)
+            ->add('locale', null, [], $localeType)
             ->add('isFake')
         ;
     }
@@ -158,7 +158,7 @@ class CustomerAdmin extends AbstractAdmin
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
-        if (!$childAdmin && !in_array($action, array('edit'))) {
+        if (!$childAdmin && !in_array($action, ['edit'])) {
             return;
         }
 
@@ -167,18 +167,18 @@ class CustomerAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_customer_edit', array(), 'SonataCustomerBundle'),
-            $admin->generateMenuUrl('edit', array('id' => $id))
+            $this->trans('customer.sidemenu.link_customer_edit', [], 'SonataCustomerBundle'),
+            $admin->generateMenuUrl('edit', ['id' => $id])
         );
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_address_list', array(), 'SonataCustomerBundle'),
-            $admin->generateMenuUrl('sonata.customer.admin.address.list', array('id' => $id))
+            $this->trans('customer.sidemenu.link_address_list', [], 'SonataCustomerBundle'),
+            $admin->generateMenuUrl('sonata.customer.admin.address.list', ['id' => $id])
         );
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_order_list', array(), 'SonataCustomerBundle'),
-            $admin->generateMenuUrl('sonata.order.admin.order.list', array('id' => $id))
+            $this->trans('customer.sidemenu.link_order_list', [], 'SonataCustomerBundle'),
+            $admin->generateMenuUrl('sonata.order.admin.order.list', ['id' => $id])
         );
     }
 }

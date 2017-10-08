@@ -28,7 +28,7 @@ class AddressManagerTest extends PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
         $currentAddress->expects($this->once())->method('setCurrent');
 
-        $custAddresses = array($currentAddress);
+        $custAddresses = [$currentAddress];
 
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())->method('getAddressesByType')->will($this->returnValue($custAddresses));
@@ -54,7 +54,7 @@ class AddressManagerTest extends PHPUnit_Framework_TestCase
         $existingAddress->expects($this->once())->method('setCurrent');
         $existingAddress->expects($this->once())->method('getId')->will($this->returnValue(42));
 
-        $custAddresses = array($existingAddress, $this->createMock('Sonata\Component\Customer\AddressInterface'));
+        $custAddresses = [$existingAddress, $this->createMock('Sonata\Component\Customer\AddressInterface')];
 
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $customer->expects($this->once())
@@ -81,15 +81,15 @@ class AddressManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getAddressManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('a')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['a']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('a.name'),
                     $self->equalTo('ASC')
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1);
+            ->getPager([], 1);
     }
 
     /**
@@ -102,7 +102,7 @@ class AddressManagerTest extends PHPUnit_Framework_TestCase
         $this
             ->getAddressManager(function ($qb) use ($self) {
             })
-            ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
+            ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
     public function testGetPagerWithMultipleSort()
@@ -110,7 +110,7 @@ class AddressManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getAddressManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('a')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['a']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -122,20 +122,20 @@ class AddressManagerTest extends PHPUnit_Framework_TestCase
                         $self->equalTo('DESC')
                     )
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1, 10, array(
+            ->getPager([], 1, 10, [
                 'name' => 'ASC',
                 'firstname' => 'DESC',
-            ));
+            ]);
     }
 
     protected function getAddressManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+        $em = EntityManagerMockFactory::create($this, $qbCallback, [
             'name',
             'firstname',
-        ));
+        ]);
 
         $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));

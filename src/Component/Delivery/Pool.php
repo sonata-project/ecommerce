@@ -19,7 +19,7 @@ class Pool
     /**
      * @var array
      */
-    protected $methods = array();
+    protected $methods = [];
 
     /**
      * add a delivery method into the pool.

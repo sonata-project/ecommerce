@@ -20,7 +20,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $processor = new Processor();
 
-        $config = $processor->processConfiguration(new Configuration(), array());
+        $config = $processor->processConfiguration(new Configuration(), []);
 
         $this->validateClass($config);
         $this->validateSeo($config);
@@ -31,7 +31,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function validateClass($config)
     {
-        $this->assertEquals(array(
+        $this->assertEquals([
             'product' => 'Application\\Sonata\\ProductBundle\\Entity\\Product',
             'package' => 'Application\\Sonata\\ProductBundle\\Entity\\Package',
             'product_category' => 'Application\\Sonata\\ProductBundle\\Entity\\ProductCategory',
@@ -41,19 +41,19 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             'delivery' => 'Application\\Sonata\\ProductBundle\\Entity\\Delivery',
             'media' => 'Application\\Sonata\\MediaBundle\\Entity\\Media',
             'gallery' => 'Application\\Sonata\\MediaBundle\\Entity\\Gallery',
-        ), $config['class']);
+        ], $config['class']);
     }
 
     public function validateSeo($config)
     {
-        $this->assertEquals(array(
-            'product' => array(
+        $this->assertEquals([
+            'product' => [
                 'site' => '@sonataproject',
                 'creator' => '@th0masr',
                 'domain' => 'http://demo.sonata-project.org',
                 'media_prefix' => 'http://demo.sonata-project.org',
                 'media_format' => 'reference',
-            ),
-        ), $config['seo']);
+            ],
+        ], $config['seo']);
     }
 }

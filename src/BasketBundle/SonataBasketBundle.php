@@ -41,7 +41,7 @@ class SonataBasketBundle extends Bundle
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping(array(
+        FormHelper::registerFormTypeMapping([
             'sonata_basket_basket' => 'Sonata\BasketBundle\Form\BasketType',
             'sonata_basker_address' => 'Sonata\BasketBundle\Form\Type\AddressType',
             'sonata_basket_shipping' => 'Sonata\BasketBundle\Form\ShippingType',
@@ -50,6 +50,6 @@ class SonataBasketBundle extends Bundle
             'sonata_basket_api_form_basket_element' => 'Sonata\BasketBundle\Form\ApiBasketElementType',
             'sonata_basket_api_form_basket_parent' => 'Sonata\BasketBundle\Form\ApiBasketParentType',
             'sonata_basket_api_form_basket_element_parent' => 'Sonata\BasketBundle\Form\ApiBasketElementParentType',
-        ));
+        ]);
     }
 }

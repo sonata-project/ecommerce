@@ -64,12 +64,12 @@ class SonataDeliveryExtension extends Extension
     {
         $pool = $container->getDefinition('sonata.delivery.pool');
 
-        $internal = array(
+        $internal = [
             'free_address_required' => 'sonata.delivery.method.free_address_required',
             'free_address_not_required' => 'sonata.delivery.method.free_address_not_required',
-        );
+        ];
 
-        $configured = array();
+        $configured = [];
 
         foreach ($config['services'] as $id => $settings) {
             if (array_key_exists($id, $internal)) {
@@ -77,9 +77,9 @@ class SonataDeliveryExtension extends Extension
 
                 $definition = $container->getDefinition($id);
 
-                $definition->addMethodCall('setName', array($settings['name']));
-                $definition->addMethodCall('setCode', array($settings['code']));
-                $definition->addMethodCall('setPriority', array($settings['priority']));
+                $definition->addMethodCall('setName', [$settings['name']]);
+                $definition->addMethodCall('setCode', [$settings['code']]);
+                $definition->addMethodCall('setPriority', [$settings['priority']]);
 
                 $configured[$settings['code']] = $id;
             }
@@ -93,11 +93,11 @@ class SonataDeliveryExtension extends Extension
 
             if ($container->hasDefinition($id)) {
                 $definition = $container->getDefinition($id);
-                $definition->addMethodCall('setEnabled', array(true));
+                $definition->addMethodCall('setEnabled', [true]);
             }
 
             // add the delivery method in the method pool
-            $pool->addMethodCall('addMethod', array(new Reference($id)));
+            $pool->addMethodCall('addMethod', [new Reference($id)]);
         }
 
         // Remove unconfigured services

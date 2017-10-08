@@ -36,7 +36,7 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
 
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
 
         $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
@@ -64,7 +64,7 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
         $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array()));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([]));
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods($basket));
@@ -82,9 +82,9 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $basketElement = $this->createMock('Sonata\Component\Basket\BasketElement');
         $product = $this->createMock('Sonata\Component\Tests\Delivery\Product');
 
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array()));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([]));
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods($basket));
@@ -111,12 +111,12 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(true));
         $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue($serviceDelivery));
 
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals(array(), $selector->getAvailableMethods($basket));
+        $this->assertEquals([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -139,12 +139,12 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue($serviceDelivery));
         $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(false));
 
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals(array(), $selector->getAvailableMethods($basket));
+        $this->assertEquals([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -164,12 +164,12 @@ class SelectorTest extends PHPUnit_Framework_TestCase
 
         $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue(null));
 
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals(array(), $selector->getAvailableMethods($basket));
+        $this->assertEquals([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -194,15 +194,15 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(true));
         $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue($serviceDelivery));
 
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
         $address = $this->createMock('Sonata\CustomerBundle\Entity\BaseAddress');
         $address->expects($this->exactly(2))->method('getCountryCode')->will($this->returnValue('FR'));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals(array(), $selector->getAvailableMethods($basket, $address));
+        $this->assertEquals([], $selector->getAvailableMethods($basket, $address));
     }
 
     /**
@@ -228,13 +228,13 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(false));
         $deliveryPool->expects($this->once())->method('getMethod')->will($this->returnValue($serviceDelivery));
 
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery1, $delivery2)));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery1, $delivery2]));
 
         $selector = new Selector($deliveryPool, new ProductPool());
 
-        $this->assertEquals(array($serviceDelivery), $selector->getAvailableMethods($basket));
+        $this->assertEquals([$serviceDelivery], $selector->getAvailableMethods($basket));
     }
 
     public function testAvailableMethods()
@@ -271,13 +271,13 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $productDelivery_high_bis->expects($this->any())->method('getCode')->will($this->returnValue('ups_high_bis'));
 
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($productDelivery_low, $productDelivery_high, $productDelivery_high_bis)));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$productDelivery_low, $productDelivery_high, $productDelivery_high_bis]));
 
         $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
 
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue(array($basketElement)));
+        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
 
         $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 

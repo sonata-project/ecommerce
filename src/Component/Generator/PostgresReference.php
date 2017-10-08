@@ -88,8 +88,8 @@ final class PostgresReference implements ReferenceInterface
 
             $this->registry->getConnection()->update(
                 $tableName,
-                array('reference' => $reference),
-                array('id' => $object->getId())
+                ['reference' => $reference],
+                ['id' => $object->getId()]
             );
             $object->setReference($reference);
         } catch (\Exception $e) {

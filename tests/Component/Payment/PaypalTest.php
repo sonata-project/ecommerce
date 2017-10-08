@@ -26,12 +26,12 @@ class PaypalTest extends PHPUnit_Framework_TestCase
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
 
         $paypal = new Paypal($router, $translator);
-        $options = array(
+        $options = [
             'cert_file' => __DIR__.'/PaypalTestFiles/cert_file',
             'key_file' => __DIR__.'/PaypalTestFiles/key_file',
             'paypal_cert_file' => __DIR__.'/PaypalTestFiles/paypal_cert_file',
             'openssl' => __DIR__.'/PaypalTestFiles/openssl',
-        );
+        ];
         $paypal->setOptions($options);
 
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');

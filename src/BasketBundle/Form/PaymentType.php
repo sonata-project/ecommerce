@@ -68,10 +68,10 @@ class PaymentType extends AbstractType
             throw new \RunTimeException('Please provide a BasketInterface instance');
         }
 
-        $addresses = $this->addressManager->findBy(array(
+        $addresses = $this->addressManager->findBy([
             'customer' => $basket->getCustomer()->getId(),
             'type' => AddressInterface::TYPE_BILLING,
-        ));
+        ]);
 
         /*
          * TODO: implement billing address choice
@@ -87,7 +87,7 @@ class PaymentType extends AbstractType
 
         $methods = $this->paymentSelector->getAvailableMethods($basket, $basket->getDeliveryAddress());
 
-        $choices = array();
+        $choices = [];
         foreach ($methods as $method) {
             $choices[$method->getCode()] = $method->getName();
         }
@@ -97,10 +97,10 @@ class PaymentType extends AbstractType
         $method = $basket->getPaymentMethod() ?: current($methods);
         $basket->setPaymentMethod($method ?: null);
 
-        $sub = $builder->create('paymentMethod', $choiceType, array(
+        $sub = $builder->create('paymentMethod', $choiceType, [
             'expanded' => true,
             'choice_list' => new SimpleChoiceList($choices),
-        ));
+        ]);
 
         $sub->addViewTransformer(new PaymentMethodTransformer($this->paymentPool), true);
 

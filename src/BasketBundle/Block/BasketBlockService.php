@@ -29,9 +29,9 @@ class BasketBlockService extends AbstractAdminBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse($blockContext->getTemplate(), [
                 'block' => $blockContext->getBlock(),
-            ), $response);
+            ], $response);
     }
 
     /**
@@ -61,8 +61,8 @@ class BasketBlockService extends AbstractAdminBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'template' => 'SonataBasketBundle:Block:block_basket_items.html.twig',
-        ));
+        ]);
     }
 }

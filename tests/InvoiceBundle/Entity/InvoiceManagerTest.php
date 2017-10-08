@@ -26,15 +26,15 @@ class InvoiceManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('i.reference'),
                     $self->equalTo('ASC')
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1);
+            ->getPager([], 1);
     }
 
     /**
@@ -47,7 +47,7 @@ class InvoiceManagerTest extends PHPUnit_Framework_TestCase
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
             })
-            ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
+            ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
     public function testGetPagerWithMultipleSort()
@@ -55,7 +55,7 @@ class InvoiceManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -67,12 +67,12 @@ class InvoiceManagerTest extends PHPUnit_Framework_TestCase
                         $self->equalTo('DESC')
                     )
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1, 10, array(
+            ->getPager([], 1, 10, [
                 'reference' => 'ASC',
                 'name' => 'DESC',
-            ));
+            ]);
     }
 
     public function testGetPagerWithOpenInvoices()
@@ -80,11 +80,11 @@ class InvoiceManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseInvoice::STATUS_OPEN)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_OPEN]));
             })
-            ->getPager(array('status' => BaseInvoice::STATUS_OPEN), 1);
+            ->getPager(['status' => BaseInvoice::STATUS_OPEN], 1);
     }
 
     public function testGetPagerWithPaidInvoices()
@@ -92,11 +92,11 @@ class InvoiceManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseInvoice::STATUS_PAID)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_PAID]));
             })
-            ->getPager(array('status' => BaseInvoice::STATUS_PAID), 1);
+            ->getPager(['status' => BaseInvoice::STATUS_PAID], 1);
     }
 
     public function testGetPagerWithConflictInvoices()
@@ -104,20 +104,20 @@ class InvoiceManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getInvoiceManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('i')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseInvoice::STATUS_CONFLICT)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_CONFLICT]));
             })
-            ->getPager(array('status' => BaseInvoice::STATUS_CONFLICT), 1);
+            ->getPager(['status' => BaseInvoice::STATUS_CONFLICT], 1);
     }
 
     protected function getInvoiceManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+        $em = EntityManagerMockFactory::create($this, $qbCallback, [
             'reference',
             'status',
             'name',
-        ));
+        ]);
 
         $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));

@@ -72,9 +72,9 @@ class CustomerSelector implements CustomerSelectorInterface
                 throw new \RuntimeException('User must be an instance of FOS\UserBundle\Model\UserInterface');
             }
 
-            $customer = $this->customerManager->findOneBy(array(
+            $customer = $this->customerManager->findOneBy([
                 'user' => $user->getId(),
-            ));
+            ]);
         }
 
         if (!$customer) {

@@ -62,8 +62,8 @@ class BasketElementManagerTest extends PHPUnit_Framework_TestCase
 
         $basketEm = new BasketElementManager('Sonata\Component\Basket\BasketElement', $registry);
 
-        $basketEm->findBy(array());
-        $basketEm->findOneBy(array());
+        $basketEm->findBy([]);
+        $basketEm->findOneBy([]);
     }
 
     public function testDelete()

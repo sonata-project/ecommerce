@@ -43,7 +43,7 @@ class SeoProductIterator implements SourceIteratorInterface
 
         $source = new DoctrineDBALConnectionSourceIterator($registry->getConnection(), $dql);
 
-        $this->iterator = new SymfonySitemapSourceIterator($source, $router, $routeName, array('productId' => null, 'slug' => null));
+        $this->iterator = new SymfonySitemapSourceIterator($source, $router, $routeName, ['productId' => null, 'slug' => null]);
     }
 
     /**

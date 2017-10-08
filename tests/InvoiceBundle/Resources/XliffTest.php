@@ -20,6 +20,6 @@ class XliffTest extends XliffValidatorTestCase
      */
     public function getXliffPaths()
     {
-        return array(array(__DIR__.'/../../../../../src/Sonata/InvoiceBundle/Resources/translations/'));
+        return [[__DIR__.'/../../../../../src/Sonata/InvoiceBundle/Resources/translations/']];
     }
 }

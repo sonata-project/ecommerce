@@ -37,7 +37,7 @@ class InvoiceController extends Controller
      */
     public function viewAction($reference)
     {
-        $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+        $order = $this->getOrderManager()->findOneBy(['reference' => $reference]);
 
         if (null === $order) {
             throw new AccessDeniedException();
@@ -45,7 +45,7 @@ class InvoiceController extends Controller
 
         $this->checkAccess($order->getCustomer());
 
-        $invoice = $this->getInvoiceManager()->findOneBy(array('reference' => $reference));
+        $invoice = $this->getInvoiceManager()->findOneBy(['reference' => $reference]);
 
         if (null === $invoice) {
             $invoice = $this->getInvoiceManager()->create();
@@ -54,12 +54,12 @@ class InvoiceController extends Controller
             $this->getInvoiceManager()->save($invoice);
         }
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('invoice_view_title', array(), 'SonataInvoiceBundle'));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('invoice_view_title', [], 'SonataInvoiceBundle'));
 
-        return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', array(
+        return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', [
             'invoice' => $invoice,
             'order' => $order,
-        ));
+        ]);
     }
 
     /**

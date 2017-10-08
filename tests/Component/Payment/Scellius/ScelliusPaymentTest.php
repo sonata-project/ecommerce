@@ -54,10 +54,10 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
-        $payment->setOptions(array(
+        $payment->setOptions([
             'base_folder' => __DIR__,
             'response_command' => 'cat response_ok.txt && echo ',
-        ));
+        ]);
 
         $basket = $this->createMock('Sonata\Component\Basket\Basket');
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
@@ -73,7 +73,7 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
         $order->setLocale('es');
 
         $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(array($this, 'callback')));
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
@@ -107,38 +107,38 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
-        $payment->setOptions(array(
+        $payment->setOptions([
             'base_folder' => __DIR__,
             'response_command' => 'cat response_ko.txt && echo ',
-        ));
+        ]);
 
         $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
         $transaction->expects($this->any())->method('get')->will($this->returnValue('" >> /dev/null'));
-        $transaction->expects($this->any())->method('getParameters')->will($this->returnValue(array()));
+        $transaction->expects($this->any())->method('getParameters')->will($this->returnValue([]));
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue(
             $this->createMock('Sonata\Component\Order\OrderInterface')
         ));
 
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
-        $payment->setOptions(array(
+        $payment->setOptions([
             'base_folder' => __DIR__,
             'response_command' => 'cat response_nok.txt && echo ',
-        ));
+        ]);
 
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
-        $payment->setOptions(array(
+        $payment->setOptions([
             'base_folder' => __DIR__,
             'response_command' => 'cat response_code_nok.txt && echo ',
-        ));
+        ]);
 
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
 
-        $payment->setOptions(array(
+        $payment->setOptions([
             'base_folder' => __DIR__,
             'response_command' => 'cat response_ok.txt && echo ',
-        ));
+        ]);
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
     }
@@ -235,10 +235,10 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
-        $payment->setOptions(array(
+        $payment->setOptions([
             'base_folder' => __DIR__,
             'request_command' => 'cat request_ok.txt && echo ',
-        ));
+        ]);
 
         $payment->sendbank($order);
     }
@@ -247,7 +247,7 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
     {
         $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidsendbank')));
+        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback([$this, 'callbackValidsendbank']));
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
 
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
@@ -273,10 +273,10 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
-        $payment->setOptions(array(
+        $payment->setOptions([
             'base_folder' => __DIR__,
             'request_command' => 'cat request_ok.txt && echo ',
-        ));
+        ]);
 
         $response = $payment->sendbank($order);
 
@@ -300,11 +300,11 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
 
     public static function getEncodeStringValues()
     {
-        return array(
-            array('valid', 'valid'),
-            array('!@#$', '!@\#\$'),
-            array('foo=bar', 'foo=bar'),
-        );
+        return [
+            ['valid', 'valid'],
+            ['!@#$', '!@\#\$'],
+            ['foo=bar', 'foo=bar'],
+        ];
     }
 
     public function callbackValidSendbank($template, $params)

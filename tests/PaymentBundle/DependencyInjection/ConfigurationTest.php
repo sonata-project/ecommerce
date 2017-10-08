@@ -23,7 +23,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $processor = new Processor();
 
-        $config = $processor->processConfiguration(new Configuration(), array());
+        $config = $processor->processConfiguration(new Configuration(), []);
 
         $this->validateClass($config);
         $this->validateTransformers($config);
@@ -37,10 +37,10 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function validateClass($config)
     {
-        $this->assertSame(array(
+        $this->assertSame([
             'order' => 'Application\\Sonata\\OrderBundle\\Entity\\Order',
             'transaction' => 'Application\\Sonata\\PaymentBundle\\Entity\\Transaction',
-        ), $config['class']);
+        ], $config['class']);
     }
 
     public function validateTransformers($config)

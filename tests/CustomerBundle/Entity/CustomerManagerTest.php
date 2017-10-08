@@ -22,15 +22,15 @@ class CustomerManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('c.lastname'),
                     $self->equalTo('ASC')
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1);
+            ->getPager([], 1);
     }
 
     /**
@@ -43,7 +43,7 @@ class CustomerManagerTest extends PHPUnit_Framework_TestCase
         $this
             ->getCustomerManager(function ($qb) use ($self) {
             })
-            ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
+            ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
     public function testGetPagerWithMultipleSort()
@@ -51,7 +51,7 @@ class CustomerManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -63,12 +63,12 @@ class CustomerManagerTest extends PHPUnit_Framework_TestCase
                         $self->equalTo('DESC')
                     )
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1, 10, array(
+            ->getPager([], 1, 10, [
                 'firstname' => 'ASC',
                 'lastname' => 'DESC',
-            ));
+            ]);
     }
 
     public function testGetPagerWithFakeCustomers()
@@ -76,11 +76,11 @@ class CustomerManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('isFake' => true)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['isFake' => true]));
             })
-            ->getPager(array('is_fake' => true), 1);
+            ->getPager(['is_fake' => true], 1);
     }
 
     public function testGetPagerWithNoFakeCustomer()
@@ -88,20 +88,20 @@ class CustomerManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCustomerManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('c')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('isFake' => false)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['isFake' => false]));
             })
-            ->getPager(array('is_fake' => false), 1);
+            ->getPager(['is_fake' => false], 1);
     }
 
     protected function getCustomerManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+        $em = EntityManagerMockFactory::create($this, $qbCallback, [
             'firstname',
             'lastname',
             'email',
-        ));
+        ]);
 
         $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));

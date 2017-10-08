@@ -40,17 +40,17 @@ class AddressExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction(
                 'sonata_address_render',
-                array($this, 'renderAddress'),
-                array(
+                [$this, 'renderAddress'],
+                [
                     'needs_environment' => true,
-                    'is_safe' => array('html'),
-                )
+                    'is_safe' => ['html'],
+                ]
             ),
-            new \Twig_SimpleFunction('sonata_address_deliverable', array($this, 'isAddressDeliverable')),
-        );
+            new \Twig_SimpleFunction('sonata_address_deliverable', [$this, 'isAddressDeliverable']),
+        ];
     }
 
     /**
@@ -76,7 +76,7 @@ class AddressExtension extends \Twig_Extension
      */
     public function renderAddress(\Twig_Environment $environment, $address, $showName = true, $showEdit = false, $context = null)
     {
-        $requiredAddressKeys = array('firstname', 'lastname', 'address1', 'postcode', 'city', 'country_code');
+        $requiredAddressKeys = ['firstname', 'lastname', 'address1', 'postcode', 'city', 'country_code'];
 
         if (!($address instanceof AddressInterface) && (!is_array($address) || count(array_diff($requiredAddressKeys, array_keys($address))) !== 0)) {
             throw new InvalidParameterException(sprintf(
@@ -86,11 +86,11 @@ class AddressExtension extends \Twig_Extension
         }
 
         if ($address instanceof AddressInterface) {
-            $addressArray = array(
+            $addressArray = [
                 'id' => $showEdit ? $address->getId() : '',
                 'name' => $showName ? $address->getName() : '',
                 'address' => $address->getFullAddressHtml(),
-            );
+            ];
         } else {
             if ($showEdit && !array_key_exists('id', $address)) {
                 throw new InvalidParameterException(
@@ -103,19 +103,19 @@ class AddressExtension extends \Twig_Extension
                 $showName = false;
             }
 
-            $addressArray = array(
+            $addressArray = [
                 'id' => $showEdit ? $address['id'] : '',
                 'name' => $address['name'],
                 'address' => BaseAddress::formatAddress($address, '<br/>'),
-            );
+            ];
         }
 
-        return $environment->render('SonataCustomerBundle:Addresses:_address.html.twig', array(
+        return $environment->render('SonataCustomerBundle:Addresses:_address.html.twig', [
                 'address' => $addressArray,
                 'showName' => $showName,
                 'showEdit' => $showEdit,
                 'context' => $context,
-            )
+            ]
         );
     }
 

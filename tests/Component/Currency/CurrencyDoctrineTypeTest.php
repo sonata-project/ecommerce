@@ -91,7 +91,7 @@ class CurrencyDoctrineTypeTest extends PHPUnit_Framework_TestCase
     {
         $platform = new MockPlatform();
 
-        $this->assertEquals('DUMMYVARCHAR()', Type::getType('currency')->getSQLDeclaration(array(), $platform));
+        $this->assertEquals('DUMMYVARCHAR()', Type::getType('currency')->getSQLDeclaration([], $platform));
     }
 }
 

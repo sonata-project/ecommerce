@@ -81,68 +81,68 @@ class SonataInvoiceExtension extends Extension
         /*
          * INVOICE
          */
-        $collector->addAssociation($config['class']['invoice'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['invoice'], 'mapManyToOne', [
              'fieldName' => 'customer',
              'targetEntity' => $config['class']['customer'],
-             'cascade' => array(
+             'cascade' => [
                  'persist',
                  'refresh',
                  'merge',
                  'detach',
-             ),
+             ],
              'mappedBy' => null,
-             'joinColumns' => array(
-                 array(
+             'joinColumns' => [
+                 [
                      'name' => 'customer_id',
                      'referencedColumnName' => 'id',
                      'onDelete' => 'SET NULL',
-                 ),
-             ),
+                 ],
+             ],
              'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', [
              'fieldName' => 'invoice',
              'targetEntity' => $config['class']['invoice'],
-             'cascade' => array(
+             'cascade' => [
                  'persist',
                  'refresh',
                  'merge',
                  'detach',
-             ),
+             ],
              'mappedBy' => null,
              'inversedBy' => 'invoiceElements',
-             'joinColumns' => array(
-                 array(
+             'joinColumns' => [
+                 [
                      'name' => 'invoice_id',
                      'referencedColumnName' => 'id',
                      'onDelete' => 'CASCADE',
-                 ),
-             ),
+                 ],
+             ],
              'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['invoice'], 'mapOneToMany', array(
+        $collector->addAssociation($config['class']['invoice'], 'mapOneToMany', [
              'fieldName' => 'invoiceElements',
              'targetEntity' => $config['class']['invoice_element'],
-             'cascade' => array(
+             'cascade' => [
                  'persist',
-             ),
+             ],
              'mappedBy' => 'invoice',
              'orphanRemoval' => true,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['invoice_element'], 'mapManyToOne', [
             'fieldName' => 'orderElement',
             'targetEntity' => $config['class']['order_element'],
-            'cascade' => array(),
-            'joinColumns' => array(
-                 array(
+            'cascade' => [],
+            'joinColumns' => [
+                 [
                      'name' => 'order_element_id',
                      'referencedColumnName' => 'id',
                      'onDelete' => 'CASCADE',
-                 ),
-             ),
-        ));
+                 ],
+             ],
+        ]);
     }
 }

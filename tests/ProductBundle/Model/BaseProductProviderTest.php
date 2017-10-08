@@ -95,12 +95,12 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $productProvider = $this->createNewProductProvider();
 
         // First test without product
-        $productProvider->buildBasketElement($basketElement, null, array('test' => true));
+        $productProvider->buildBasketElement($basketElement, null, ['test' => true]);
         $this->assertTrue($basketElement->getOption('test', null));
 
         // Second test with product
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
-        $productProvider->buildBasketElement($basketElement, $product, array('test2' => true));
+        $productProvider->buildBasketElement($basketElement, $product, ['test2' => true]);
         $this->assertTrue($basketElement->getOption('test2', null));
         $this->assertNull($basketElement->getOption('test', null));
     }
@@ -185,7 +185,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $basketElement = new BasketElement();
         $product->expects($this->any())
             ->method('getOptions')
-            ->will($this->returnValue(array('even' => true, 'more' => true, 'tests' => true)));
+            ->will($this->returnValue(['even' => true, 'more' => true, 'tests' => true]));
         $result = $productProvider->basketAddProduct($basket, $product, $basketElement);
 
         $this->assertTrue($basketElement->hasOption('even'));
@@ -205,7 +205,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
         $product->expects($this->once())->method('isMaster')->will($this->returnValue(true));
         $product->expects($this->once())->method('getSku')->will($this->returnValue('product_sku'));
-        $product->expects($this->once())->method('getVariations')->will($this->returnValue(array(1)));
+        $product->expects($this->once())->method('getVariations')->will($this->returnValue([1]));
 
         $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
 
@@ -313,7 +313,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $productMock->addVariation($variationMock);
 
         $productProvider = $this->createNewProductProvider();
-        $productProvider->setVariationFields(array('test'));
+        $productProvider->setVariationFields(['test']);
 
         $this->assertTrue($productProvider->hasVariations($productMock));
     }
@@ -323,7 +323,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $productMock = new ProductTest();
 
         $productProvider = $this->createNewProductProvider();
-        $productProvider->setVariationFields(array('test'));
+        $productProvider->setVariationFields(['test']);
 
         $this->assertFalse($productProvider->hasVariations($productMock));
     }
@@ -344,7 +344,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $productMock->addVariation($variationMock);
 
         $productProvider = $this->createNewProductProvider();
-        $productProvider->setVariationFields(array('test'));
+        $productProvider->setVariationFields(['test']);
 
         $this->assertFalse($productProvider->hasEnabledVariations($productMock));
     }
@@ -358,7 +358,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $productMock->addVariation($variationMock);
 
         $productProvider = $this->createNewProductProvider();
-        $productProvider->setVariationFields(array('test'));
+        $productProvider->setVariationFields(['test']);
 
         $this->assertTrue($productProvider->hasEnabledVariations($productMock));
     }
@@ -367,7 +367,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
     {
         $productMock = new ProductTest();
         $provider = $this->createNewProductProvider();
-        $provider->setVariationFields(array('test'));
+        $provider->setVariationFields(['test']);
 
         $variations = $provider->getEnabledVariations($productMock);
         $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
@@ -382,7 +382,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $productMock->addVariation($variationMock);
 
         $provider = $this->createNewProductProvider();
-        $provider->setVariationFields(array('test'));
+        $provider->setVariationFields(['test']);
 
         $variations = $provider->getEnabledVariations($productMock);
         $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
@@ -394,7 +394,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
     {
         $product = new ProductTest();
         $provider = $this->createNewProductProvider();
-        $provider->setVariationFields(array('test'));
+        $provider->setVariationFields(['test']);
 
         $this->assertNull($provider->getCheapestEnabledVariation($product));
     }
@@ -407,7 +407,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $product->addVariation($variationMock);
 
         $provider = $this->createNewProductProvider();
-        $provider->setVariationFields(array('test'));
+        $provider->setVariationFields(['test']);
 
         $this->assertNull($provider->getCheapestEnabledVariation($product));
     }
@@ -425,7 +425,7 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $product->addVariation($variationB);
 
         $provider = $this->createNewProductProvider();
-        $provider->setVariationFields(array('test'));
+        $provider->setVariationFields(['test']);
 
         $this->assertEquals($variationB, $provider->getCheapestEnabledVariation($product));
     }
@@ -490,23 +490,23 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(array(), $provider->getVariationsChoices($product));
+        $this->assertEquals([], $provider->getVariationsChoices($product));
 
         $product->addVariation($variation);
         $product->addVariation($variation2);
 
-        $provider->setVariationFields(array('price', 'name'));
+        $provider->setVariationFields(['price', 'name']);
 
-        $expected = array(
-            'price' => array(
+        $expected = [
+            'price' => [
                 1 => 42,
                 0 => 84,
-            ),
-            'name' => array(
+            ],
+            'name' => [
                 1 => 'avariation',
                 0 => 'variation',
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expected, $provider->getVariationsChoices($product));
     }
@@ -527,17 +527,17 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(array(), $provider->getVariatedProperties($product));
+        $this->assertEquals([], $provider->getVariatedProperties($product));
 
         $product->addVariation($variation);
         $product->addVariation($variation2);
 
-        $provider->setVariationFields(array('price', 'name'));
+        $provider->setVariationFields(['price', 'name']);
 
-        $expected = array(
+        $expected = [
             'price' => 84,
             'name' => 'variation',
-        );
+        ];
 
         $this->assertEquals($expected, $provider->getVariatedProperties($variation));
     }
@@ -561,14 +561,14 @@ class BaseProductProviderTest extends PHPUnit_Framework_TestCase
         $product->addVariation($variation);
         $product->addVariation($variation2);
 
-        $provider->setVariationFields(array('price', 'name'));
+        $provider->setVariationFields(['price', 'name']);
 
-        $expected = array(
+        $expected = [
             'price' => 84,
             'name' => 'variation',
-        );
+        ];
 
-        $this->assertEquals($variation2, $provider->getVariation($product, array('price' => 42, 'name' => 'avariation')));
+        $this->assertEquals($variation2, $provider->getVariation($product, ['price' => 42, 'name' => 'avariation']));
     }
 
     /**

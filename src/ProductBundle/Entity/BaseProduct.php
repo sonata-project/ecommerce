@@ -153,7 +153,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     public function __construct()
     {
@@ -870,7 +870,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function toArray()
     {
-        $baseArrayRep = array(
+        $baseArrayRep = [
             'sku' => $this->sku,
             'slug' => $this->slug,
             'name' => $this->name,
@@ -885,7 +885,7 @@ abstract class BaseProduct implements ProductInterface
             'stock' => $this->stock,
             'enabled' => $this->enabled,
             'options' => $this->options,
-        );
+        ];
 
         return $baseArrayRep;
     }

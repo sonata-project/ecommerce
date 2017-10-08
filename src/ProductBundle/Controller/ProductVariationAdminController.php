@@ -36,16 +36,16 @@ class ProductVariationAdminController extends Controller
             throw new AccessDeniedException();
         }
 
-        $form = $this->createFormBuilder(null, array())
-            ->add('number', 'integer', array(
+        $form = $this->createFormBuilder(null, [])
+            ->add('number', 'integer', [
                 'required' => true,
-                'label' => $this->getTranslator()->trans('variations_number', array(), 'SonataProductBundle'),
-                'attr' => array('min' => 1, 'max' => 10),
-                'constraints' => array(
+                'label' => $this->getTranslator()->trans('variations_number', [], 'SonataProductBundle'),
+                'attr' => ['min' => 1, 'max' => 10],
+                'constraints' => [
                     new NotBlank(),
-                    new Range(array('min' => 1, 'max' => 10)),
-                ),
-            ))
+                    new Range(['min' => 1, 'max' => 10]),
+                ],
+            ])
             ->getForm();
 
         // product is the main product object, used to create a set of variation
@@ -74,17 +74,17 @@ class ProductVariationAdminController extends Controller
 
                 $manager->flush();
 
-                $this->addFlash('sonata_flash_success', $this->getTranslator()->trans('flash_create_variation_success', array(), 'SonataProductBundle'));
+                $this->addFlash('sonata_flash_success', $this->getTranslator()->trans('flash_create_variation_success', [], 'SonataProductBundle'));
 
                 return new RedirectResponse($this->admin->generateUrl('list'));
             }
         }
 
-        return $this->render('SonataProductBundle:ProductAdmin:create_variation.html.twig', array(
+        return $this->render('SonataProductBundle:ProductAdmin:create_variation.html.twig', [
             'object' => $product,
             'form' => $form->createView(),
             'action' => 'edit',
-        ));
+        ]);
     }
 
     /**

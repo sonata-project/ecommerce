@@ -43,9 +43,9 @@ class ProductCollectionAdmin extends AbstractAdmin
         }
 
         if (!$this->isChild()) {
-            $formMapper->add('product', $modelListType, array(), array(
+            $formMapper->add('product', $modelListType, [], [
                 'admin_code' => 'sonata.product.admin.product',
-            ));
+            ]);
         }
 
         $formMapper
@@ -62,9 +62,9 @@ class ProductCollectionAdmin extends AbstractAdmin
         if (!$this->isChild()) {
             $list
                 ->addIdentifier('id')
-                ->addIdentifier('product', null, array(
+                ->addIdentifier('product', null, [
                     'admin_code' => 'sonata.product.admin.product',
-                ));
+                ]);
         }
 
         $list
@@ -89,7 +89,7 @@ class ProductCollectionAdmin extends AbstractAdmin
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
-        if (!$childAdmin && !in_array($action, array('edit'))) {
+        if (!$childAdmin && !in_array($action, ['edit'])) {
             return;
         }
 
@@ -98,8 +98,8 @@ class ProductCollectionAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('product.sidemenu.link_product_edit', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+            $this->trans('product.sidemenu.link_product_edit', [], 'SonataProductBundle'),
+            ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
     }
 }

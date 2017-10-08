@@ -32,7 +32,7 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findForUser(UserInterface $user, array $orderBy = array(), $limit = null, $offset = null)
+    public function findForUser(UserInterface $user, array $orderBy = [], $limit = null, $offset = null)
     {
         $qb = $this->getRepository()->createQueryBuilder('o')
             ->leftJoin('o.customer', 'c')
@@ -71,7 +71,7 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()
             ->createQueryBuilder('o')
@@ -84,13 +84,13 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
             }
         }
         if (count($sort) == 0) {
-            $sort = array('reference' => 'ASC');
+            $sort = ['reference' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
             $query->orderBy(sprintf('o.%s', $field), strtoupper($direction));
         }
 
-        $parameters = array();
+        $parameters = [];
 
         if (isset($criteria['status'])) {
             $query->andWhere('o.status = :status');

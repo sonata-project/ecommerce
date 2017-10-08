@@ -25,9 +25,9 @@ class BasePaymentTest extends PHPUnit_Framework_TestCase
         $payment = new BasePaymentTest_Payment();
 
         $payment->setCode('test');
-        $payment->setOptions(array(
+        $payment->setOptions([
             'foobar' => 'barfoo',
-        ));
+        ]);
         $this->assertEquals('test', $payment->getCode());
         $this->assertFalse($payment->hasOption('bar'));
         $this->assertEquals('13 134 &*', $payment->encodeString('13 134 &*'));
@@ -36,9 +36,9 @@ class BasePaymentTest extends PHPUnit_Framework_TestCase
     public function testGenerateUrlCheck()
     {
         $payment = new BasePaymentTest_Payment();
-        $payment->setOptions(array(
+        $payment->setOptions([
             'shop_secret_key' => 's3cr3t k2y',
-        ));
+        ]);
         $date = new \DateTime();
         $date->setTimestamp(strtotime('11/30/1981'));
 

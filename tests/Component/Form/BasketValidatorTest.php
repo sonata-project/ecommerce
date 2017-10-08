@@ -34,13 +34,13 @@ class BasketValidatorTest extends PHPUnit_Framework_TestCase
         $consValFact = $this->createMock('Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory');
 
         $context = $this->createMock('Symfony\Component\Validator\ExecutionContext');
-        $context->expects($this->once())->method('getViolations')->will($this->returnValue(array('violation1')));
+        $context->expects($this->once())->method('getViolations')->will($this->returnValue(['violation1']));
         $context->expects($this->once())->method('addViolationAt');
 
         $validator = new BasketValidator($pool, $consValFact);
         $validator->initialize($context);
 
-        $elements = array($this->createMock('Sonata\Component\Basket\BasketElementInterface'));
+        $elements = [$this->createMock('Sonata\Component\Basket\BasketElementInterface')];
 
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($elements));

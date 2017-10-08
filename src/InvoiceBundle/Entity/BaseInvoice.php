@@ -128,7 +128,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * @var array
      */
-    protected $invoiceElements = array();
+    protected $invoiceElements = [];
 
     public function __construct()
     {
@@ -160,7 +160,7 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     public function getBillingAsArray()
     {
-        return array(
+        return [
             'firstname' => $this->getName(),
             'lastname' => '',
             'address1' => $this->getAddress1(),
@@ -169,7 +169,7 @@ abstract class BaseInvoice implements InvoiceInterface
             'postcode' => $this->getPostcode(),
             'city' => $this->getCity(),
             'country_code' => $this->getCountry(),
-        );
+        ];
     }
 
     /**
@@ -332,7 +332,7 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     public function getVatAmounts()
     {
-        $amounts = array();
+        $amounts = [];
 
         foreach ($this->getInvoiceElements() as $invoiceElement) {
             $rate = $invoiceElement->getVatRate();
@@ -344,10 +344,10 @@ abstract class BaseInvoice implements InvoiceInterface
             if (isset($amounts[$rate])) {
                 $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $invoiceElement->getVatAmount());
             } else {
-                $amounts[$rate] = array(
+                $amounts[$rate] = [
                     'rate' => $rate,
                     'amount' => $invoiceElement->getVatAmount(),
-                );
+                ];
             }
         }
 
@@ -653,11 +653,11 @@ abstract class BaseInvoice implements InvoiceInterface
      */
     public static function getStatusList()
     {
-        return array(
+        return [
             self::STATUS_OPEN => 'status_open',
             self::STATUS_PAID => 'status_paid',
             self::STATUS_CONFLICT => 'status_conflict',
-        );
+        ];
     }
 
     /**
