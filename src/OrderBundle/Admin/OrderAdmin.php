@@ -100,29 +100,29 @@ class OrderAdmin extends AbstractAdmin
 
         // define group zoning
         $formMapper
-             ->with($this->trans('order.form.group_main_label'), array('class' => 'col-md-12'))->end()
-             ->with($this->trans('order.form.group_billing_label'), array('class' => 'col-md-6'))->end()
-             ->with($this->trans('order.form.group_shipping_label'), array('class' => 'col-md-6'))->end()
+             ->with($this->trans('order.form.group_main_label'), ['class' => 'col-md-12'])->end()
+             ->with($this->trans('order.form.group_billing_label'), ['class' => 'col-md-6'])->end()
+             ->with($this->trans('order.form.group_shipping_label'), ['class' => 'col-md-6'])->end()
         ;
 
         if (!$this->isChild()) {
             $formMapper
-                ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
+                ->with($this->trans('order.form.group_main_label', [], 'SonataOrderBundle'))
                     ->add('customer', $modelListType)
                 ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
+            ->with($this->trans('order.form.group_main_label', [], 'SonataOrderBundle'))
                 ->add('currency', $currencyType)
                 ->add('locale', $localeType)
-                ->add('status', $orderStatusType, array('translation_domain' => 'SonataOrderBundle'))
-                ->add('paymentStatus', $paymentTransactionStatusType, array('translation_domain' => 'SonataPaymentBundle'))
-                ->add('deliveryStatus', $productDeliveryStatusType, array('translation_domain' => 'SonataDeliveryBundle'))
-                ->add('validatedAt', $datePickerType, array('dp_side_by_side' => true))
+                ->add('status', $orderStatusType, ['translation_domain' => 'SonataOrderBundle'])
+                ->add('paymentStatus', $paymentTransactionStatusType, ['translation_domain' => 'SonataPaymentBundle'])
+                ->add('deliveryStatus', $productDeliveryStatusType, ['translation_domain' => 'SonataDeliveryBundle'])
+                ->add('validatedAt', $datePickerType, ['dp_side_by_side' => true])
             ->end()
-            ->with($this->trans('order.form.group_billing_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
+            ->with($this->trans('order.form.group_billing_label', [], 'SonataOrderBundle'), ['collapsed' => true])
                 ->add('billingName')
                 ->add('billingAddress1')
                 ->add('billingAddress2')
@@ -134,7 +134,7 @@ class OrderAdmin extends AbstractAdmin
                 ->add('billingEmail')
                 ->add('billingMobile')
             ->end()
-            ->with($this->trans('order.form.group_shipping_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
+            ->with($this->trans('order.form.group_shipping_label', [], 'SonataOrderBundle'), ['collapsed' => true])
                 ->add('shippingName')
                 ->add('shippingAddress1')
                 ->add('shippingAddress2')
@@ -173,11 +173,11 @@ class OrderAdmin extends AbstractAdmin
         }
 
         $list
-            ->add('status', $textType, array('template' => 'SonataOrderBundle:OrderAdmin:list_status.html.twig'))
-            ->add('deliveryStatus', $textType, array('template' => 'SonataOrderBundle:OrderAdmin:list_delivery_status.html.twig'))
-            ->add('paymentStatus', $textType, array('template' => 'SonataOrderBundle:OrderAdmin:list_payment_status.html.twig'))
+            ->add('status', $textType, ['template' => 'SonataOrderBundle:OrderAdmin:list_status.html.twig'])
+            ->add('deliveryStatus', $textType, ['template' => 'SonataOrderBundle:OrderAdmin:list_delivery_status.html.twig'])
+            ->add('paymentStatus', $textType, ['template' => 'SonataOrderBundle:OrderAdmin:list_payment_status.html.twig'])
             ->add('validatedAt')
-            ->add('totalInc', $currencyType, array('currency' => $currency))
+            ->add('totalInc', $currencyType, ['currency' => $currency])
         ;
     }
 
@@ -206,9 +206,9 @@ class OrderAdmin extends AbstractAdmin
         }
 
         $filter
-            ->add('status', null, array(), $orderStatusType, array('translation_domain' => $this->translationDomain))
-            ->add('deliveryStatus', null, array(), $productDeliveryStatusType, array('translation_domain' => 'SonataDeliveryBundle'))
-            ->add('paymentStatus', null, array(), $paymentTransactionStatusType, array('translation_domain' => 'SonataPaymentBundle'))
+            ->add('status', null, [], $orderStatusType, ['translation_domain' => $this->translationDomain])
+            ->add('deliveryStatus', null, [], $productDeliveryStatusType, ['translation_domain' => 'SonataDeliveryBundle'])
+            ->add('paymentStatus', null, [], $paymentTransactionStatusType, ['translation_domain' => 'SonataPaymentBundle'])
         ;
     }
 
@@ -226,7 +226,7 @@ class OrderAdmin extends AbstractAdmin
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
-        if (!$childAdmin && !in_array($action, array('edit'))) {
+        if (!$childAdmin && !in_array($action, ['edit'])) {
             return;
         }
 
@@ -235,27 +235,27 @@ class OrderAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('sonata.order.sidemenu.link_order_edit', array(), 'SonataOrderBundle'),
-            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+            $this->trans('sonata.order.sidemenu.link_order_edit', [], 'SonataOrderBundle'),
+            ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('sonata.order.sidemenu.link_order_elements_list', array(), 'SonataOrderBundle'),
-            array('uri' => $admin->generateUrl('sonata.order.admin.order_element.list', array('id' => $id)))
+            $this->trans('sonata.order.sidemenu.link_order_elements_list', [], 'SonataOrderBundle'),
+            ['uri' => $admin->generateUrl('sonata.order.admin.order_element.list', ['id' => $id])]
         );
 
-        $order = $this->orderManager->findOneBy(array('id' => $id));
-        $invoice = $this->invoiceManager->findOneBy(array('reference' => $order->getReference()));
+        $order = $this->orderManager->findOneBy(['id' => $id]);
+        $invoice = $this->invoiceManager->findOneBy(['reference' => $order->getReference()]);
 
         if (null === $invoice) {
             $menu->addChild(
-                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate', array(), 'SonataOrderBundle'),
-                array('uri' => $admin->generateUrl('generateInvoice', array('id' => $id)))
+                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate', [], 'SonataOrderBundle'),
+                ['uri' => $admin->generateUrl('generateInvoice', ['id' => $id])]
             );
         } else {
             $menu->addChild(
-                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit', array(), 'SonataOrderBundle'),
-                array('uri' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.invoice.admin.invoice')->generateUrl('edit', array('id' => $invoice->getId())))
+                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit', [], 'SonataOrderBundle'),
+                ['uri' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.invoice.admin.invoice')->generateUrl('edit', ['id' => $invoice->getId()])]
             );
         }
     }

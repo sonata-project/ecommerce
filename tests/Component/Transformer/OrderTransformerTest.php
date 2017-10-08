@@ -41,11 +41,11 @@ class OrderTransformerTest extends PHPUnit_Framework_TestCase
         $orderElement = $this->createMock('Sonata\Component\Order\OrderElementInterface');
         $orderElement->expects($this->exactly(2))->method('getProductType');
         $orderElement->expects($this->exactly(1))->method('getProductId')->will($this->returnValue(2));
-        $orderElement->expects($this->exactly(1))->method('getOptions')->will($this->returnValue(array()));
+        $orderElement->expects($this->exactly(1))->method('getOptions')->will($this->returnValue([]));
         $orderElement->expects($this->exactly(1))->method('getQuantity')->will($this->returnValue(2));
 
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
-        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElement)));
+        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElement]));
         $order->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
         $currency = new Currency();

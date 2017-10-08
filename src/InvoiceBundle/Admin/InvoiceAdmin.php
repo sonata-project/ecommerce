@@ -60,21 +60,21 @@ class InvoiceAdmin extends AbstractAdmin
 
         if (!$this->isChild()) {
             $formMapper
-                ->with($this->trans('invoice.form.group_main_label', array(), $this->translationDomain))
+                ->with($this->trans('invoice.form.group_main_label', [], $this->translationDomain))
                     ->add('customer', $modelListType)
                 ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('invoice.form.group_main_label', array(), $this->translationDomain))
+            ->with($this->trans('invoice.form.group_main_label', [], $this->translationDomain))
                 ->add('reference')
                 ->add('currency', $currencyType)
-                ->add('status', $invoiceStatusType, array('translation_domain' => $this->translationDomain))
+                ->add('status', $invoiceStatusType, ['translation_domain' => $this->translationDomain])
                 ->add('totalExcl')
                 ->add('totalInc')
             ->end()
-            ->with($this->trans('invoice.form.group_billing_label', array(), $this->translationDomain), array('collapsed' => true))
+            ->with($this->trans('invoice.form.group_billing_label', [], $this->translationDomain), ['collapsed' => true])
                 ->add('name')
                 ->add('phone')
                 ->add('address1')
@@ -107,9 +107,9 @@ class InvoiceAdmin extends AbstractAdmin
         $list
             ->addIdentifier('reference')
             ->add('customer')
-            ->add('status', $textType, array('template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig'))
-            ->add('totalExcl', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
-            ->add('totalInc', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('status', $textType, ['template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig'])
+            ->add('totalExcl', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
+            ->add('totalInc', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
         ;
     }
 
@@ -128,7 +128,7 @@ class InvoiceAdmin extends AbstractAdmin
         $filter
             ->add('reference')
             ->add('customer')
-            ->add('status', null, array(), $invoiceStatusType, array('translation_domain' => $this->translationDomain))
+            ->add('status', null, [], $invoiceStatusType, ['translation_domain' => $this->translationDomain])
         ;
     }
 }

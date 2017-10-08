@@ -46,9 +46,9 @@ class AddressAdmin extends AbstractAdmin
         }
 
         $formMapper
-            ->with($this->trans('address.form.group_contact_label', array(), 'SonataCustomerBundle'), array(
+            ->with($this->trans('address.form.group_contact_label', [], 'SonataCustomerBundle'), [
                 'class' => 'col-md-7',
-            ))
+            ])
                 ->add('firstname')
                 ->add('lastname')
                 ->add('phone')
@@ -56,25 +56,25 @@ class AddressAdmin extends AbstractAdmin
         ;
 
         $formMapper
-            ->with($this->trans('address.form.group_advanced_label', array(), 'SonataCustomerBundle'), array(
+            ->with($this->trans('address.form.group_advanced_label', [], 'SonataCustomerBundle'), [
                 'class' => 'col-md-5',
-            ))
-                ->add('type', $addressTypeType, array('translation_domain' => 'SonataCustomerBundle'))
-                ->add('current', null, array('required' => false))
+            ])
+                ->add('type', $addressTypeType, ['translation_domain' => 'SonataCustomerBundle'])
+                ->add('current', null, ['required' => false])
                 ->add('name')
             ->end();
 
         if (!$this->isChild()) {
-            $formMapper->with($this->trans('address.form.group_contact_label', array(), 'SonataCustomerBundle'))
+            $formMapper->with($this->trans('address.form.group_contact_label', [], 'SonataCustomerBundle'))
                 ->add('customer', $modelListType)
             ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('address.form.group_address_label', array(), 'SonataCustomerBundle'), array(
+            ->with($this->trans('address.form.group_address_label', [], 'SonataCustomerBundle'), [
                 'class' => 'col-md-12',
-            ))
+            ])
                 ->add('address1')
                 ->add('address2')
                 ->add('address3')
@@ -99,9 +99,9 @@ class AddressAdmin extends AbstractAdmin
 
         $list
             ->addIdentifier('name')
-            ->add('fulladdress', $textType, array('code' => 'getFullAddressHtml', 'template' => 'SonataCustomerBundle:Admin:list_address.html.twig'))
+            ->add('fulladdress', $textType, ['code' => 'getFullAddressHtml', 'template' => 'SonataCustomerBundle:Admin:list_address.html.twig'])
             ->add('current')
-            ->add('typeCode', 'trans', array('catalogue' => $this->translationDomain))
+            ->add('typeCode', 'trans', ['catalogue' => $this->translationDomain])
         ;
     }
 
@@ -119,7 +119,7 @@ class AddressAdmin extends AbstractAdmin
 
         $filter
             ->add('current')
-            ->add('type', null, array(), $addressTypeType, array('translation_domain' => 'SonataCustomerBundle'))
+            ->add('type', null, [], $addressTypeType, ['translation_domain' => 'SonataCustomerBundle'])
         ;
 
         if (!$this->isChild()) {

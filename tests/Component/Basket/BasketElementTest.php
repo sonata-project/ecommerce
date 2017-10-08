@@ -49,7 +49,7 @@ class BasketElementTest extends PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
         $product->expects($this->any())->method('isPriceIncludingVat')->will($this->returnValue(false));
         $product->expects($this->any())->method('getVatRate')->will($this->returnValue(19.6));
-        $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('option1' => 'toto')));
+        $product->expects($this->any())->method('getOptions')->will($this->returnValue(['option1' => 'toto']));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
         $productProvider = new ProductProviderTest($this->createMock('JMS\Serializer\SerializerInterface'));
@@ -225,7 +225,7 @@ class BasketElementTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($product->getId(), $basketElement->getProductId());
 
         // Options
-        $options = array('option1' => 'value1', 'option2' => 'value2');
+        $options = ['option1' => 'value1', 'option2' => 'value2'];
         $basketElement->setOptions($options);
         $this->assertNull($basketElement->getOption('unexisting_option'));
         $this->assertEquals(42, $basketElement->getOption('unexisting_option', 42));

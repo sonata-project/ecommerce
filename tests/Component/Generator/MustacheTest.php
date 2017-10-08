@@ -24,6 +24,6 @@ class MustacheTest extends \PHPUnit_Framework_TestCase
 
         $expectedOutput = 'abc.42 toubidou def';
 
-        $this->assertEquals($expectedOutput, Mustache::renderString($testInput, array('replace' => 'abc', 'second' => 'def')));
+        $this->assertEquals($expectedOutput, Mustache::renderString($testInput, ['replace' => 'abc', 'second' => 'def']));
     }
 }

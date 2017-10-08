@@ -36,7 +36,7 @@ class CategoriesMenuBlockService extends MenuBlockService
      */
     public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, ProductMenuBuilder $menuBuilder)
     {
-        parent::__construct($name, $templating, $menuProvider, array());
+        parent::__construct($name, $templating, $menuProvider, []);
 
         $this->menuBuilder = $menuBuilder;
     }
@@ -56,10 +56,10 @@ class CategoriesMenuBlockService extends MenuBlockService
     {
         parent::configureSettings($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
                 'menu_template' => 'SonataBlockBundle:Block:block_side_menu_template.html.twig',
                 'safe_labels' => true,
-            ));
+            ]);
     }
 
     /**
@@ -73,10 +73,10 @@ class CategoriesMenuBlockService extends MenuBlockService
 
         if (null === $menu || '' === $menu) {
             $menu = $this->menuBuilder->createCategoryMenu(
-                array(
-                    'childrenAttributes' => array('class' => $settings['menu_class']),
-                    'attributes' => array('class' => $settings['children_class']),
-                ),
+                [
+                    'childrenAttributes' => ['class' => $settings['menu_class']],
+                    'attributes' => ['class' => $settings['children_class']],
+                ],
                 $settings['current_uri']
             );
         }

@@ -86,9 +86,9 @@ class CustomerController
      */
     public function getCustomersAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedCriteria = array(
+        $supportedCriteria = [
             'is_fake' => '',
-        );
+        ];
 
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -102,9 +102,9 @@ class CustomerController
         }
 
         if (!$sort) {
-            $sort = array();
+            $sort = [];
         } elseif (!is_array($sort)) {
-            $sort = array($sort => 'asc');
+            $sort = [$sort => 'asc'];
         }
 
         return $this->customerManager->getPager($criteria, $page, $limit, $sort);
@@ -213,10 +213,10 @@ class CustomerController
         try {
             $this->customerManager->delete($customer);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(array('error' => $e->getMessage()), 400);
+            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
         }
 
-        return array('deleted' => true);
+        return ['deleted' => true];
     }
 
     /**
@@ -243,7 +243,7 @@ class CustomerController
     {
         $customer = $this->getCustomer($id);
 
-        return $this->orderManager->findBy(array('customer' => $customer));
+        return $this->orderManager->findBy(['customer' => $customer]);
     }
 
     /**
@@ -297,9 +297,9 @@ class CustomerController
     {
         $customer = $id ? $this->getCustomer($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', null, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', null, [
             'csrf_protection' => false,
-        ));
+        ]);
 
         $form->handleRequest($request);
 
@@ -314,12 +314,12 @@ class CustomerController
             // BC for FOSRestBundle < 2.0
             if (method_exists($view, 'setSerializationContext')) {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             } else {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $context->setMaxDepth(0);
                 $view->setContext($context);
             }
@@ -342,9 +342,9 @@ class CustomerController
     {
         $customer = $id ? $this->getCustomer($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_customer', $customer, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_customer', $customer, [
             'csrf_protection' => false,
-        ));
+        ]);
 
         $form->handleRequest($request);
 
@@ -357,12 +357,12 @@ class CustomerController
             // BC for FOSRestBundle < 2.0
             if (method_exists($view, 'setSerializationContext')) {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             } else {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $context->setMaxDepth(0);
                 $view->setContext($context);
             }
@@ -384,7 +384,7 @@ class CustomerController
      */
     protected function getCustomer($id)
     {
-        $customer = $this->customerManager->findOneBy(array('id' => $id));
+        $customer = $this->customerManager->findOneBy(['id' => $id]);
 
         if (null === $customer) {
             throw new NotFoundHttpException(sprintf('Customer (%d) not found', $id));

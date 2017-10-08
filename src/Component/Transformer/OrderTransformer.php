@@ -72,7 +72,7 @@ class OrderTransformer extends BaseTransformer
             $provider = $this->productPool->getProvider($orderElement->getProductType());
             $manager = $this->productPool->getManager($orderElement->getProductType());
 
-            $product = $manager->findOneBy(array('id' => $orderElement->getProductId()));
+            $product = $manager->findOneBy(['id' => $orderElement->getProductId()]);
 
             if (!$product) {
                 continue;

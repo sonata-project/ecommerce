@@ -37,7 +37,7 @@ abstract class BaseProductController extends Controller
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class'), 'csrf_protection' => false));
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, ['data_class' => $this->container->getParameter('sonata.basket.basket_element.class'), 'csrf_protection' => false]);
         $provider->defineAddBasketForm($product, $formBuilder);
 
         $form = $formBuilder->getForm()->createView();
@@ -49,13 +49,13 @@ abstract class BaseProductController extends Controller
 
         return $this->render(
             sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
-            array(
+            [
                 'provider' => $provider,
                 'product' => $product,
                 'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
                 'currency' => $currency,
                 'form' => $form,
-            )
+            ]
         );
     }
 
@@ -70,9 +70,9 @@ abstract class BaseProductController extends Controller
     {
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        return $this->render(sprintf('%s:properties.html.twig', $provider->getBaseControllerName()), array(
+        return $this->render(sprintf('%s:properties.html.twig', $provider->getBaseControllerName()), [
             'product' => $product,
-        ));
+        ]);
     }
 
     /**
@@ -86,11 +86,11 @@ abstract class BaseProductController extends Controller
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
-        return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), array(
+        return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), [
             'formView' => $formView,
             'basketElement' => $basketElement,
             'basket' => $basket,
-        ));
+        ]);
     }
 
     /**
@@ -103,10 +103,10 @@ abstract class BaseProductController extends Controller
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
-        return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), array(
+        return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), [
             'basketElement' => $basketElement,
             'basket' => $basket,
-        ));
+        ]);
     }
 
     /**
@@ -124,9 +124,9 @@ abstract class BaseProductController extends Controller
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        return $this->render(sprintf('%s:view_variations.html.twig', $provider->getBaseControllerName()), array(
+        return $this->render(sprintf('%s:view_variations.html.twig', $provider->getBaseControllerName()), [
             'product' => $product,
-        ));
+        ]);
     }
 
     /**
@@ -147,7 +147,7 @@ abstract class BaseProductController extends Controller
 
         if (null === $variation || 0 === $provider->getStockAvailable($variation)) {
             if ($this->getRequest()->isXmlHttpRequest()) {
-                return new JsonResponse(array('error' => $this->get('translator')->trans('variation_not_found', array(), 'SonataProductBundle')));
+                return new JsonResponse(['error' => $this->get('translator')->trans('variation_not_found', [], 'SonataProductBundle')]);
             }
 
             $this->get('session')->getFlashBag()->add('sonata_product_error', 'variation_not_found');
@@ -156,13 +156,13 @@ abstract class BaseProductController extends Controller
             $variation = $product;
         }
 
-        $url = $this->generateUrl('sonata_product_view', array(
+        $url = $this->generateUrl('sonata_product_view', [
             'productId' => $variation->getId(),
             'slug' => $variation->getSlug(),
-        ));
+        ]);
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            return new JsonResponse(array('variation_url' => $url));
+            return new JsonResponse(['variation_url' => $url]);
         }
 
         return $this->redirect($url);

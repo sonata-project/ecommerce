@@ -55,7 +55,7 @@ class BasketTest extends PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
         $product->expects($this->any())->method('isPriceIncludingVat')->will($this->returnValue(false));
         $product->expects($this->any())->method('getVatRate')->will($this->returnValue(19.6));
-        $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
+        $product->expects($this->any())->method('getOptions')->will($this->returnValue(['foo' => 'bar']));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
         $product->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
 
@@ -191,7 +191,7 @@ class BasketTest extends PHPUnit_Framework_TestCase
         $basket->addBasketElement($invalidBasketElement);
         $this->assertFalse($basket->isValid(true), '::isValid() return false if an element is invalid');
 
-        $basket->setBasketElements(array());
+        $basket->setBasketElements([]);
         $basket->addBasketElement($basketElement);
         $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
 
@@ -271,7 +271,7 @@ class BasketTest extends PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present
-        $expectedKeys = array(
+        $expectedKeys = [
             'basketElements',
             'positions',
             'deliveryMethodCode',
@@ -283,7 +283,7 @@ class BasketTest extends PHPUnit_Framework_TestCase
             'deliveryAddress',
             'billingAddress',
             'customer',
-        );
+        ];
 
         $basketData = unserialize($data);
 
@@ -301,7 +301,7 @@ class BasketTest extends PHPUnit_Framework_TestCase
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present
-        $expectedKeys = array(
+        $expectedKeys = [
             'basketElements',
             'positions',
             'deliveryMethodCode',
@@ -313,7 +313,7 @@ class BasketTest extends PHPUnit_Framework_TestCase
             'deliveryAddressId',
             'billingAddressId',
             'customerId',
-        );
+        ];
 
         $basketData = unserialize($data);
 
@@ -423,8 +423,8 @@ class BasketTest extends PHPUnit_Framework_TestCase
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
-        $basket->setBasketElements(array($basketElement));
-        $this->assertEquals(array($basketElement), $basket->getBasketElements());
+        $basket->setBasketElements([$basketElement]);
+        $this->assertEquals([$basketElement], $basket->getBasketElements());
 
         $basket->setDeliveryAddressId(1);
         $this->assertEquals(1, $basket->getDeliveryAddressId());
@@ -449,7 +449,7 @@ class BasketTest extends PHPUnit_Framework_TestCase
         $basket->setCustomerId(1);
         $this->assertEquals(1, $basket->getCustomerId());
 
-        $options = array('option1' => 'value1', 'option2' => 'value2');
+        $options = ['option1' => 'value1', 'option2' => 'value2'];
         $basket->setOptions($options);
         $this->assertNull($basket->getOption('unexisting_option'));
         $this->assertEquals(42, $basket->getOption('unexisting_option', 42));

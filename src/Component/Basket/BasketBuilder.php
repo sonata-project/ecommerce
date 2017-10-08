@@ -79,7 +79,7 @@ class BasketBuilder implements BasketBuilderInterface
         $deliveryAddressId = $basket->getDeliveryAddressId();
 
         if ($deliveryAddressId) {
-            $address = $this->addressManager->findOneBy(array('id' => $deliveryAddressId));
+            $address = $this->addressManager->findOneBy(['id' => $deliveryAddressId]);
 
             $basket->setDeliveryAddress($address);
         }
@@ -94,7 +94,7 @@ class BasketBuilder implements BasketBuilderInterface
         $billingAddressId = $basket->getBillingAddressId();
 
         if ($billingAddressId) {
-            $address = $this->addressManager->findOneBy(array('id' => $billingAddressId));
+            $address = $this->addressManager->findOneBy(['id' => $billingAddressId]);
             $basket->setBillingAddress($address);
         }
 

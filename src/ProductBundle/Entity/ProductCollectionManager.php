@@ -23,7 +23,7 @@ class ProductCollectionManager extends BaseEntityManager implements ProductColle
      */
     public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection)
     {
-        if ($this->findOneBy(array('collection' => $collection, 'product' => $product))) {
+        if ($this->findOneBy(['collection' => $collection, 'product' => $product])) {
             return;
         }
 
@@ -43,7 +43,7 @@ class ProductCollectionManager extends BaseEntityManager implements ProductColle
      */
     public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection)
     {
-        if (!$productCollection = $this->findOneBy(array('collection' => $collection, 'product' => $product))) {
+        if (!$productCollection = $this->findOneBy(['collection' => $collection, 'product' => $product])) {
             return;
         }
 

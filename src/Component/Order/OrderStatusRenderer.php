@@ -26,7 +26,7 @@ class OrderStatusRenderer implements StatusClassRendererInterface
     public function handlesObject($object, $statusName = null)
     {
         return ($object instanceof OrderInterface || $object instanceof OrderElementInterface)
-            && in_array($statusName, array('delivery', 'payment', null));
+            && in_array($statusName, ['delivery', 'payment', null]);
     }
 
     /**

@@ -64,13 +64,13 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
         $orderElements = $order->getOrderElements();
 
         foreach ($orderElements as $orderElement) {
-            $this->backend->createAndPublish('sonata_payment_order_element_process', array(
+            $this->backend->createAndPublish('sonata_payment_order_element_process', [
                 'product_id' => $orderElement->getProductId(),
                 'transaction_status' => $transaction->getStatusCode(),
                 'order_status' => $order->getStatus(),
                 'quantity' => $orderElement->getQuantity(),
                 'product_type' => $orderElement->getProductType(),
-            ));
+            ]);
         }
     }
 
@@ -109,9 +109,9 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
     {
         $transactionId = $event->getMessage()->getValue('transaction_id');
 
-        $transaction = $this->transactionManager->findOneBy(array(
+        $transaction = $this->transactionManager->findOneBy([
             'id' => $transactionId,
-        ));
+        ]);
 
         if (!$transaction) {
             throw new \RuntimeException(sprintf('Unable to retrieve Transaction %d', $transactionId));

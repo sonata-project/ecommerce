@@ -62,8 +62,8 @@ class BasketManagerTest extends PHPUnit_Framework_TestCase
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         $basketMgr = new BasketManager('Sonata\Component\Basket\Basket', $registry);
-        $basketMgr->findBy(array());
-        $basketMgr->findOneBy(array());
+        $basketMgr->findBy([]);
+        $basketMgr->findOneBy([]);
     }
 
     public function testDelete()
@@ -86,14 +86,14 @@ class BasketManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getBasketManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('b')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['b']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('b.id'),
                     $self->equalTo('ASC')
                 );
             })
-            ->getPager(array(), 1);
+            ->getPager([], 1);
     }
 
     /**
@@ -106,7 +106,7 @@ class BasketManagerTest extends PHPUnit_Framework_TestCase
         $this
             ->getBasketManager(function ($qb) use ($self) {
             })
-            ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
+            ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
     public function testGetPagerWithMultipleSort()
@@ -114,7 +114,7 @@ class BasketManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getBasketManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('b')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['b']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -127,18 +127,18 @@ class BasketManagerTest extends PHPUnit_Framework_TestCase
                     )
                 );
             })
-            ->getPager(array(), 1, 10, array(
+            ->getPager([], 1, 10, [
                 'id' => 'ASC',
                 'locale' => 'DESC',
-            ));
+            ]);
     }
 
     protected function getBasketManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+        $em = EntityManagerMockFactory::create($this, $qbCallback, [
             'id',
             'locale',
-        ));
+        ]);
 
         $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));

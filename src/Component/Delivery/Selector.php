@@ -84,7 +84,7 @@ class Selector implements ServiceDeliverySelectorInterface
      */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null)
     {
-        $instances = array();
+        $instances = [];
 
         if (!$basket) {
             return $instances;
@@ -147,7 +147,7 @@ class Selector implements ServiceDeliverySelectorInterface
 
         // STEP 2 : We select the delivery methods with the highest priority
         $instances = array_values($instances);
-        usort($instances, array('Sonata\Component\Delivery\Selector', 'sort'));
+        usort($instances, ['Sonata\Component\Delivery\Selector', 'sort']);
 
         return $instances;
     }

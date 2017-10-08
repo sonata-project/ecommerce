@@ -247,14 +247,14 @@ abstract class BaseOrder implements OrderInterface
      */
     public function getDeliveryAsArray()
     {
-        return array(
+        return [
             'firstname' => $this->getShippingName(),
             'lastname' => '',
             'address1' => $this->getShippingAddress1(),
             'postcode' => $this->getShippingPostcode(),
             'city' => $this->getShippingCity(),
             'country_code' => $this->getShippingCountryCode(),
-        );
+        ];
     }
 
     /**
@@ -271,14 +271,14 @@ abstract class BaseOrder implements OrderInterface
 
     public function getBillingAsArray()
     {
-        return array(
+        return [
             'firstname' => $this->getBillingName(),
             'lastname' => '',
             'address1' => $this->getBillingAddress1(),
             'postcode' => $this->getBillingPostcode(),
             'city' => $this->getBillingCity(),
             'country_code' => $this->getBillingCountryCode(),
-        );
+        ];
     }
 
     /**
@@ -903,7 +903,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isPending()
     {
-        return in_array($this->getStatus(), array(OrderInterface::STATUS_PENDING));
+        return in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
     }
 
     /**
@@ -911,7 +911,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isOpen()
     {
-        return in_array($this->getStatus(), array(OrderInterface::STATUS_OPEN));
+        return in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
     }
 
     /**
@@ -927,7 +927,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isError()
     {
-        return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
+        return in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
     }
 
     /**
@@ -1011,14 +1011,14 @@ abstract class BaseOrder implements OrderInterface
      */
     public static function getStatusList()
     {
-        return array(
+        return [
             self::STATUS_OPEN => 'status_open',
             self::STATUS_PENDING => 'status_pending',
             self::STATUS_VALIDATED => 'status_validated',
             self::STATUS_CANCELLED => 'status_cancelled',
             self::STATUS_ERROR => 'status_error',
             self::STATUS_STOPPED => 'status_stopped',
-        );
+        ];
     }
 
     /**
@@ -1060,7 +1060,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function getVatAmounts()
     {
-        $amounts = array();
+        $amounts = [];
 
         foreach ($this->getOrderElements() as $orderElement) {
             $rate = $orderElement->getVatRate();
@@ -1068,10 +1068,10 @@ abstract class BaseOrder implements OrderInterface
             if (isset($amounts[$rate])) {
                 $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $orderElement->getVatAmount());
             } else {
-                $amounts[$rate] = array(
+                $amounts[$rate] = [
                     'rate' => $rate,
                     'amount' => $orderElement->getVatAmount(),
-                );
+                ];
             }
         }
 

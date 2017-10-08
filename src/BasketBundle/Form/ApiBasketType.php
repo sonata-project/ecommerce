@@ -56,11 +56,11 @@ class ApiBasketType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => $this->class,
             'csrf_protection' => false,
-            'validation_groups' => array('api'),
-        ));
+            'validation_groups' => ['api'],
+        ]);
     }
 
     /**

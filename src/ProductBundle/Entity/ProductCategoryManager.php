@@ -38,7 +38,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
      */
     public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false)
     {
-        if ($this->findOneBy(array('category' => $category, 'product' => $product))) {
+        if ($this->findOneBy(['category' => $category, 'product' => $product])) {
             return;
         }
         //
@@ -65,7 +65,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
      */
     public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category)
     {
-        if (!$productCategory = $this->findOneBy(array('category' => $category, 'product' => $product))) {
+        if (!$productCategory = $this->findOneBy(['category' => $category, 'product' => $product])) {
             return;
         }
 
@@ -89,7 +89,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
 
         $pCategories = $qb->getQuery()->execute();
 
-        $categoryTree = array();
+        $categoryTree = [];
 
         foreach ($pCategories as $category) {
             $this->putInTree($category->getCategory(), $categoryTree);

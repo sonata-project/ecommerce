@@ -27,9 +27,9 @@ class CollectionController extends Controller
         $pager = $this->get('sonata.classification.manager.collection')
             ->getRootCollectionsPager($this->get('request')->get('page'));
 
-        return $this->render('SonataProductBundle:Collection:index.html.twig', array(
+        return $this->render('SonataProductBundle:Collection:index.html.twig', [
             'pager' => $pager,
-        ));
+        ]);
     }
 
     /**
@@ -44,15 +44,15 @@ class CollectionController extends Controller
      */
     public function viewAction($collectionId, $slug)
     {
-        $collection = $this->get('sonata.classification.manager.collection')->findOneBy(array('id' => $collectionId));
+        $collection = $this->get('sonata.classification.manager.collection')->findOneBy(['id' => $collectionId]);
 
         if (!$collection) {
             throw new NotFoundHttpException(sprintf('Unable to find the collection with id=%d', $collectionId));
         }
 
-        return $this->render('SonataProductBundle:Collection:view.html.twig', array(
+        return $this->render('SonataProductBundle:Collection:view.html.twig', [
            'collection' => $collection,
-        ));
+        ]);
     }
 
     /**
@@ -67,9 +67,9 @@ class CollectionController extends Controller
         $pager = $this->get('sonata.classification.manager.collection')
             ->getSubCollectionsPager($collectionId, $this->get('request')->get('page'));
 
-        return $this->render('SonataProductBundle:Collection:list_sub_collections.html.twig', array(
+        return $this->render('SonataProductBundle:Collection:list_sub_collections.html.twig', [
             'pager' => $pager,
-        ));
+        ]);
     }
 
     /**
@@ -84,9 +84,9 @@ class CollectionController extends Controller
         $pager = $this->get('sonata.product.set.manager')
             ->getProductsByCollectionIdPager($collectionId, $this->get('request')->get('page'));
 
-        return $this->render('SonataProductBundle:Collection:list_products.html.twig', array(
+        return $this->render('SonataProductBundle:Collection:list_products.html.twig', [
             'pager' => $pager,
-        ));
+        ]);
     }
 
     /**
@@ -100,10 +100,10 @@ class CollectionController extends Controller
     {
         $collection = $collection ?: $this->get('sonata.classification.manager.collection')->getRootCollection();
 
-        return $this->render('SonataProductBundle:Collection:side_menu_collection.html.twig', array(
+        return $this->render('SonataProductBundle:Collection:side_menu_collection.html.twig', [
           'root_collection' => $collection,
           'depth' => $depth,
           'deep' => $deep + 1,
-        ));
+        ]);
     }
 }

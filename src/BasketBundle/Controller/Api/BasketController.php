@@ -97,8 +97,8 @@ class BasketController
     public function getBasketsAction(ParamFetcherInterface $paramFetcher)
     {
         // No filters implemented as of right now
-        $supportedCriteria = array(
-        );
+        $supportedCriteria = [
+        ];
 
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -112,9 +112,9 @@ class BasketController
         }
 
         if (!$sort) {
-            $sort = array();
+            $sort = [];
         } elseif (!is_array($sort)) {
-            $sort = array($sort => 'asc');
+            $sort = [$sort => 'asc'];
         }
 
         return $this->basketManager->getPager($criteria, $page, $limit, $sort);
@@ -249,10 +249,10 @@ class BasketController
         try {
             $this->basketManager->delete($basket);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(array('error' => $e->getMessage()), 400);
+            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
         }
 
-        return array('deleted' => true);
+        return ['deleted' => true];
     }
 
     /**
@@ -353,7 +353,7 @@ class BasketController
             $basket->setBasketElements($elements);
             $this->basketManager->save($basket);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(array('error' => $e->getMessage()), 400);
+            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
         }
 
         $view = \FOS\RestBundle\View\View::create($basket);
@@ -361,12 +361,12 @@ class BasketController
         // BC for FOSRestBundle < 2.0
         if (method_exists($view, 'setSerializationContext')) {
             $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->setGroups(['sonata_api_read']);
             $serializationContext->enableMaxDepthChecks();
             $view->setSerializationContext($serializationContext);
         } else {
             $context = new Context();
-            $context->setGroups(array('sonata_api_read'));
+            $context->setGroups(['sonata_api_read']);
             $context->setMaxDepth(0);
             $view->setContext($context);
         }
@@ -386,9 +386,9 @@ class BasketController
     {
         $basket = $id ? $this->getBasket($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket', $basket, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket', $basket, [
             'csrf_protection' => false,
-        ));
+        ]);
 
         $form->handleRequest($request);
 
@@ -404,12 +404,12 @@ class BasketController
             // BC for FOSRestBundle < 2.0
             if (method_exists($view, 'setSerializationContext')) {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             } else {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $context->setMaxDepth(0);
                 $view->setContext($context);
             }
@@ -445,9 +445,9 @@ class BasketController
         $basketElement = $elementId ? $this->getBasketElement($elementId) : $this->basketElementManager->create();
         $basketElement->setProductDefinition($productDefinition);
 
-        $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket_element', $basketElement, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_basket_api_form_basket_element', $basketElement, [
             'csrf_protection' => false,
-        ));
+        ]);
 
         $form->handleRequest($request);
 
@@ -466,12 +466,12 @@ class BasketController
             // BC for FOSRestBundle < 2.0
             if (method_exists($view, 'setSerializationContext')) {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             } else {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $context->setMaxDepth(0);
                 $view->setContext($context);
             }
@@ -493,7 +493,7 @@ class BasketController
      */
     protected function getBasket($id)
     {
-        $basket = $this->basketManager->findOneBy(array('id' => $id));
+        $basket = $this->basketManager->findOneBy(['id' => $id]);
 
         if (null === $basket) {
             throw new NotFoundHttpException(sprintf('Basket (%d) not found', $id));
@@ -513,7 +513,7 @@ class BasketController
      */
     protected function getBasketElement($id)
     {
-        $basketElement = $this->basketElementManager->findOneBy(array('id' => $id));
+        $basketElement = $this->basketElementManager->findOneBy(['id' => $id]);
 
         if (null === $basketElement) {
             throw new NotFoundHttpException(sprintf('Basket element (%d) not found', $id));
@@ -533,7 +533,7 @@ class BasketController
      */
     protected function getProduct($id)
     {
-        $product = $this->productManager->findOneBy(array('id' => $id));
+        $product = $this->productManager->findOneBy(['id' => $id]);
 
         if (null === $product) {
             throw new NotFoundHttpException(sprintf('Product (%d) not found', $id));
@@ -551,7 +551,7 @@ class BasketController
      */
     protected function checkExistingCustomerBasket($customerId)
     {
-        $basket = $this->basketManager->findOneBy(array('customer' => $customerId));
+        $basket = $this->basketManager->findOneBy(['customer' => $customerId]);
         if ($basket instanceof BasketInterface) {
             throw new HttpException('400', sprintf('Customer (%d) already has a basket', $customerId));
         }

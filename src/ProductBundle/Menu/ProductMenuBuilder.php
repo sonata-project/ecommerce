@@ -60,17 +60,17 @@ class ProductMenuBuilder
      *
      * @return mixed
      */
-    public function createFiltersMenu(ProductProviderInterface $productProvider, array $itemOptions = array(), $currentUri = null)
+    public function createFiltersMenu(ProductProviderInterface $productProvider, array $itemOptions = [], $currentUri = null)
     {
         $menu = $this->factory->createItem('filters', $itemOptions);
 
         $filters = $productProvider->getFilters();
 
         foreach ($filters as $filter => $options) {
-            $menuItem = $menu->addChild($filter, array_merge(array('attributes' => array('class' => 'nav-header')), $itemOptions));
+            $menuItem = $menu->addChild($filter, array_merge(['attributes' => ['class' => 'nav-header']], $itemOptions));
 
             foreach ($options as $option) {
-                $filterItemOptions = array_merge(array('uri' => $this->getFilterUri($currentUri, $filter, $option)), $itemOptions);
+                $filterItemOptions = array_merge(['uri' => $this->getFilterUri($currentUri, $filter, $option)], $itemOptions);
 
                 $menuItem->addChild(
                     $this->getFilterName($filter, $option),
@@ -88,7 +88,7 @@ class ProductMenuBuilder
      *
      * @return \Knp\Menu\ItemInterface
      */
-    public function createCategoryMenu(array $itemOptions = array(), $currentUri = null)
+    public function createCategoryMenu(array $itemOptions = [], $currentUri = null)
     {
         $menu = $this->factory->createItem('categories', $itemOptions);
 
@@ -102,7 +102,7 @@ class ProductMenuBuilder
      * @param array                   $options    The item options
      * @param string                  $currentUri The current URI
      */
-    public function buildCategoryMenu(ItemInterface $menu, array $options = array(), $currentUri = null)
+    public function buildCategoryMenu(ItemInterface $menu, array $options = [], $currentUri = null)
     {
         $categories = $this->categoryManager->getCategoryTree();
 
@@ -144,24 +144,24 @@ class ProductMenuBuilder
      * @param array         $options
      * @param string        $currentUri
      */
-    protected function fillMenu(ItemInterface $menu, $categories, array $options = array(), $currentUri = null)
+    protected function fillMenu(ItemInterface $menu, $categories, array $options = [], $currentUri = null)
     {
         foreach ($categories as $category) {
             if (false === $category->getEnabled()) {
                 continue;
             }
 
-            $fullOptions = array_merge(array(
-                'attributes' => array('class' => ''),      // Ensuring it is set
+            $fullOptions = array_merge([
+                'attributes' => ['class' => ''],      // Ensuring it is set
                 'route' => 'sonata_catalog_category',
-                'routeParameters' => array(
+                'routeParameters' => [
                     'category_id' => $category->getId(),
                     'category_slug' => $category->getSlug(),
-                ),
-                'extras' => array(
+                ],
+                'extras' => [
                     'safe_label' => true,
-                ),
-            ), $options);
+                ],
+            ], $options);
 
             if (null === $category->getParent()) {
                 $fullOptions['attributes']['class'] = 'lead '.$fullOptions['attributes']['class'];

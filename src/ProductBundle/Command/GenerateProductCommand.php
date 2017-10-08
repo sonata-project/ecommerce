@@ -31,10 +31,10 @@ class GenerateProductCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('product', InputArgument::REQUIRED, 'The product to create'),
                 new InputArgument('service_id', InputArgument::REQUIRED, 'The service id to define'),
-            ))
+            ])
             ->setName('sonata:product:generate')
             ->setDescription('Generates required files for a new Product')
         ;
@@ -74,12 +74,12 @@ class GenerateProductCommand extends ContainerAwareCommand
 
         $output->writeln(' > mustaching skeleton files');
 
-        Mustache::renderDir($bundle_dir, array(
+        Mustache::renderDir($bundle_dir, [
             'product' => $input->getArgument('product'),
             'root_name' => strtolower(preg_replace('/[A-Z]/', '_\\0', $input->getArgument('product'))),
-        ));
+        ]);
 
-        $renames = array(
+        $renames = [
             // entity
             '%s/Entity/Entity.php' => '%s/Entity/%s.php',
             '%s/Repository/Repository.php' => '%s/Repository/%sRepository.php',
@@ -94,13 +94,13 @@ class GenerateProductCommand extends ContainerAwareCommand
             '%s/Resources/views/Entity/view.html.twig' => '%s/Resources/views/%s/view.html.twig',
             '%s/Resources/views/Entity/form_basket_element.html.twig' => '%s/Resources/views/%s/form_basket_element.html.twig',
             '%s/Resources/views/Entity/final_review_basket_element.html.twig' => '%s/Resources/views/%s/final_review_basket_element.html.twig',
-        );
+        ];
 
-        $dirs = array(
+        $dirs = [
             sprintf('%s/Resources/views/%s', $bundle_dir, $input->getArgument('product')),
             sprintf('%s/Product/%s', $bundle_dir, $input->getArgument('product')),
             sprintf('%s/Provider', $bundle_dir),
-        );
+        ];
 
         foreach ($dirs as $dir) {
             $filesystem->mkdir($dir);
@@ -124,10 +124,10 @@ class GenerateProductCommand extends ContainerAwareCommand
             $filesystem->rename($from, $to);
         }
 
-        $filesystem->remove(array(
+        $filesystem->remove([
             sprintf('%s/Product/Entity', $bundle_dir),
             sprintf('%s/Resources/views/Entity', $bundle_dir),
-        ));
+        ]);
 
         $product = $input->getArgument('product');
         $service = $input->getArgument('service_id');
@@ -171,7 +171,7 @@ You can customize the serialization of your Product by editing /src/Application/
 
 
 CONFIG
-, array('service' => $service, 'product' => $product)
+, ['service' => $service, 'product' => $product]
 ));
     }
 }

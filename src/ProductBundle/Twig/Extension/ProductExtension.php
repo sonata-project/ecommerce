@@ -55,16 +55,16 @@ class ProductExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('sonata_product_provider', array($this, 'getProductProvider')),
-            new \Twig_SimpleFunction('sonata_product_has_variations', array($this, 'hasVariations')),
-            new \Twig_SimpleFunction('sonata_product_has_enabled_variations', array($this, 'hasEnabledVariations')),
-            new \Twig_SimpleFunction('sonata_product_cheapest_variation', array($this, 'getCheapestEnabledVariation')),
-            new \Twig_SimpleFunction('sonata_product_cheapest_variation_price', array($this, 'getCheapestEnabledVariationPrice')),
-            new \Twig_SimpleFunction('sonata_product_price', array($this, 'getProductPrice')),
-            new \Twig_SimpleFunction('sonata_product_stock', array($this, 'getProductStock')),
-            new \Twig_SimpleFunction('sonata_product_form_add_basket', array($this, 'getFormAddBasket')),
-        );
+        return [
+            new \Twig_SimpleFunction('sonata_product_provider', [$this, 'getProductProvider']),
+            new \Twig_SimpleFunction('sonata_product_has_variations', [$this, 'hasVariations']),
+            new \Twig_SimpleFunction('sonata_product_has_enabled_variations', [$this, 'hasEnabledVariations']),
+            new \Twig_SimpleFunction('sonata_product_cheapest_variation', [$this, 'getCheapestEnabledVariation']),
+            new \Twig_SimpleFunction('sonata_product_cheapest_variation_price', [$this, 'getCheapestEnabledVariationPrice']),
+            new \Twig_SimpleFunction('sonata_product_price', [$this, 'getProductPrice']),
+            new \Twig_SimpleFunction('sonata_product_stock', [$this, 'getProductStock']),
+            new \Twig_SimpleFunction('sonata_product_form_add_basket', [$this, 'getFormAddBasket']),
+        ];
     }
 
     /**
@@ -166,10 +166,10 @@ class ProductExtension extends \Twig_Extension
      */
     public function getFormAddBasket(ProductInterface $product)
     {
-        $formBuilder = $this->formFactory->createNamedBuilder('add_basket', 'form', null, array(
+        $formBuilder = $this->formFactory->createNamedBuilder('add_basket', 'form', null, [
             'data_class' => $this->basketElementClass,
             'csrf_protection' => false,
-        ));
+        ]);
 
         $this->productPool->getProvider($product)->defineAddBasketForm($product, $formBuilder, false);
 

@@ -38,8 +38,8 @@ class SonataOrderBundle extends Bundle
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping(array(
+        FormHelper::registerFormTypeMapping([
             'sonata_order_status' => 'Sonata\OrderBundle\Form\Type\OrderStatusType',
-        ));
+        ]);
     }
 }

@@ -22,13 +22,13 @@ class OrderControllerTest extends PHPUnit_Framework_TestCase
     public function testGetOrdersAction()
     {
         $orderManager = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
-        $orderManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
+        $orderManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals(array(), $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
+        $this->assertEquals([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
     public function testGetOrderAction()
@@ -50,9 +50,9 @@ class OrderControllerTest extends PHPUnit_Framework_TestCase
     {
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $orderElements = $this->createMock('Sonata\Component\Order\OrderElementInterface');
-        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElements)));
+        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElements]));
 
-        $this->assertEquals(array($orderElements), $this->createOrderController($order)->getOrderOrderelementsAction(1));
+        $this->assertEquals([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
     }
 
     /**

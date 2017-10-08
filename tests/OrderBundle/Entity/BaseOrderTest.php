@@ -47,7 +47,7 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
         $element3->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element3->expects($this->any())->method('getVatAmount')->will($this->returnValue(5));
 
-        $order->setOrderElements(array($element1, $element2, $element3));
+        $order->setOrderElements([$element1, $element2, $element3]);
 
         $items = $order->getVatAmounts();
 
@@ -57,8 +57,8 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
             $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');
             $this->assertArrayHasKey('amount', $item, 'Array items should contains a "amount" key');
 
-            $this->assertTrue(in_array($item['rate'], array(10, 20)));
-            $this->assertTrue(in_array($item['amount'], array(7, 3)));
+            $this->assertTrue(in_array($item['rate'], [10, 20]));
+            $this->assertTrue(in_array($item['amount'], [7, 3]));
         }
     }
 }

@@ -68,21 +68,21 @@ class RecentOrdersBlockService extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $criteria = array();
+        $criteria = [];
 
         if ('admin' !== $blockContext->getSetting('mode')) {
-            $orders = $this->orderManager->findForUser($this->securityContext->getToken()->getUser(), array('createdAt' => 'DESC'), $blockContext->getSetting('number'));
+            $orders = $this->orderManager->findForUser($this->securityContext->getToken()->getUser(), ['createdAt' => 'DESC'], $blockContext->getSetting('number'));
         } else {
-            $orders = $this->orderManager->findBy($criteria, array('createdAt' => 'DESC'), $blockContext->getSetting('number'));
+            $orders = $this->orderManager->findBy($criteria, ['createdAt' => 'DESC'], $blockContext->getSetting('number'));
         }
 
-        return $this->renderPrivateResponse($blockContext->getTemplate(), array(
+        return $this->renderPrivateResponse($blockContext->getTemplate(), [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
             'orders' => $orders,
             'admin_pool' => $this->adminPool,
-        ), $response);
+        ], $response);
     }
 
     /**
@@ -97,18 +97,18 @@ class RecentOrdersBlockService extends BaseBlockService
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('number', 'integer', array('required' => true)),
-                array('title', 'text', array('required' => false)),
-                array('mode', 'choice', array(
-                    'choices' => array(
+        $formMapper->add('settings', 'sonata_type_immutable_array', [
+            'keys' => [
+                ['number', 'integer', ['required' => true]],
+                ['title', 'text', ['required' => false]],
+                ['mode', 'choice', [
+                    'choices' => [
                         'public' => 'public',
                         'admin' => 'admin',
-                    ),
-                )),
-            ),
-        ));
+                    ],
+                ]],
+            ],
+        ]);
     }
 
     /**
@@ -124,11 +124,11 @@ class RecentOrdersBlockService extends BaseBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'number' => 5,
             'mode' => 'public',
             'title' => 'Recent Orders',
             'template' => 'SonataOrderBundle:Block:recent_orders.html.twig',
-        ));
+        ]);
     }
 }

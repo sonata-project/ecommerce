@@ -223,10 +223,10 @@ abstract class BasePaypal extends BasePayment
             $this->getLogger()->debug(sprintf('[BasePaypalPayment::encrypt] command line=%s', $openssl_cmd));
         }
 
-        $descriptors = array(
-            0 => array('pipe', 'r'),
-            1 => array('pipe', 'w'),
-        );
+        $descriptors = [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+        ];
 
         $process = proc_open($openssl_cmd, $descriptors, $pipes);
 
@@ -320,7 +320,7 @@ abstract class BasePaypal extends BasePayment
      */
     public static function getPaymentStatusList()
     {
-        return array(
+        return [
             self::PAYMENT_STATUS_CANCELED_REVERSAL => 'A reversal has been cancelled. For example, you won a dispute with the customer, and the funds for the transaction that was reversed have been returned to you',
             self::PAYMENT_STATUS_COMPLETED => 'The payment has been completed, and the funds have been added successfully to your account balance',
             self::PAYMENT_STATUS_DENIED => 'You denied the payment. This happens only if the payment was previously pending because of possible reasons',
@@ -330,7 +330,7 @@ abstract class BasePaypal extends BasePayment
             self::PAYMENT_STATUS_REVERSED => 'A payment was reversed due to a chargeback or other type of reversal. The funds have been removed from your account balance and returned to the buyer. The reason for the reversal is specified in the ReasonCode element.',
             self::PAYMENT_STATUS_PROCESSED => 'A payment has been accepted.',
             self::PAYMENT_STATUS_VOIDED => 'This authorization has been voided.',
-        );
+        ];
     }
 
     /**

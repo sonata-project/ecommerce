@@ -53,7 +53,7 @@ class CheckPaymentTest extends PHPUnit_Framework_TestCase
         $order->setCreatedAt($date);
 
         $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(array($this, 'callback')));
+        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
         $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 

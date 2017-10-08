@@ -19,7 +19,7 @@ class Pool
     /**
      * @var array
      */
-    protected $transformer = array();
+    protected $transformer = [];
 
     /**
      * Add a transformer into into the pool.

@@ -83,7 +83,7 @@ class MysqlReference implements ReferenceInterface
                 $row['counter'] + 1
             );
 
-            $this->registry->getConnection()->update($tableName, array('reference' => $reference), array('id' => $object->getId()));
+            $this->registry->getConnection()->update($tableName, ['reference' => $reference], ['id' => $object->getId()]);
             $object->setReference($reference);
         } catch (\Exception $e) {
             $this->registry->getConnection()->exec(sprintf('UNLOCK TABLES'));
