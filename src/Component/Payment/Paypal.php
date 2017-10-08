@@ -38,13 +38,13 @@ class Paypal extends BasePaypal
      */
     public function sendbank(OrderInterface $order)
     {
-        $params = array(
+        $params = [
             'order' => $order->getReference(),
             'bank' => $this->getCode(),
             'check' => $this->generateUrlCheck($order),
-        );
+        ];
 
-        $fields = array(
+        $fields = [
             // paypal specific
             'cmd' => '_xclick',
             'charset' => 'utf-8',
@@ -77,7 +77,7 @@ class Paypal extends BasePaypal
             // user link
             'cancel_return' => $this->router->generate($this->getOption('url_return_ko'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
             'return' => $this->router->generate($this->getOption('url_return_ok'), $params, UrlGeneratorInterface::ABSOLUTE_URL),
-        );
+        ];
 
         if ($this->getOption('debug', false)) {
             $html = '<html><body>'."\n";
@@ -89,10 +89,10 @@ class Paypal extends BasePaypal
 
         $html .= sprintf('<form action="%s" method="%s" id="formPaiement" >'."\n", $this->getOption('url_action'), 'POST');
         $html .= '<input type="hidden" name="cmd" value="_s-xclick">'."\n";
-        $html .= sprintf('<input type="hidden" name="encrypted" value="%s" />', call_user_func(array($this, $method), $fields));
+        $html .= sprintf('<input type="hidden" name="encrypted" value="%s" />', call_user_func([$this, $method], $fields));
 
-        $html .= '<p>'.$this->translator->trans('process_to_paiement_bank_page', array(), 'PaymentBundle').'</p>';
-        $html .= '<input type="submit" id="submit_button" value="'.$this->translator->trans('process_to_paiement_btn', array(), 'PaymentBundle').'" />';
+        $html .= '<p>'.$this->translator->trans('process_to_paiement_bank_page', [], 'PaymentBundle').'</p>';
+        $html .= '<input type="submit" id="submit_button" value="'.$this->translator->trans('process_to_paiement_btn', [], 'PaymentBundle').'" />';
         $html .= '</form>';
 
         $html .= '</body></html>';
@@ -101,9 +101,9 @@ class Paypal extends BasePaypal
             echo "<!-- Encrypted Array : \n".print_r($fields, 1).'-->';
         }
 
-        $response = new \Symfony\Component\HttpFoundation\Response($html, 200, array(
+        $response = new \Symfony\Component\HttpFoundation\Response($html, 200, [
             'Content-Type' => 'text/html',
-        ));
+        ]);
         $response->setPrivate(true);
 
         return $response;
@@ -323,7 +323,7 @@ class Paypal extends BasePaypal
      */
     public static function getPendingReasonsList()
     {
-        return array(
+        return [
             self::PENDING_REASON_ADDRESS => 'The payment is pending because your customer did not include a confirmed shipping address and your Payment Receiving Preferences is set yo allow you to manually accept or deny each of these payments. To change your preference, go to the Preferences section of your Profile.',
             self::PENDING_REASON_AUTHORIZATION => 'You set <PaymentAction> Authorization</PaymentAction> on SetExpressCheckoutRequest and have not yet captured funds.',
             self::PENDING_REASON_ECHECK => 'The payment is pending because it was made by an eCheck that has not yet cleared. ',
@@ -333,6 +333,6 @@ class Paypal extends BasePaypal
             self::PENDING_REASON_UPGRADE => 'The payment is pending because it was made via credit card and you must upgrade your account to Business or Premier status in order to receive the funds. upgrade can also mean that you have reached the monthly limit for transactions on your account.',
             self::PENDING_REASON_VERIFY => 'The payment is pending because you are not yet verified. You must verify your account before you can accept this payment. ',
             self::PENDING_REASON_OTHER => 'The payment is pending for a reason other than those listed above. For more information, contact PayPal Customer Service.',
-        );
+        ];
     }
 }

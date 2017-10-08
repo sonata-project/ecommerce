@@ -59,9 +59,9 @@ class InvoiceController
      */
     public function getInvoicesAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedCriteria = array(
+        $supportedCriteria = [
             'status' => '',
-        );
+        ];
 
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -75,9 +75,9 @@ class InvoiceController
         }
 
         if (!$sort) {
-            $sort = array();
+            $sort = [];
         } elseif (!is_array($sort)) {
-            $sort = array($sort => 'asc');
+            $sort = [$sort => 'asc'];
         }
 
         return $this->invoiceManager->getPager($criteria, $page, $limit, $sort);
@@ -144,7 +144,7 @@ class InvoiceController
      */
     protected function getInvoice($id)
     {
-        $invoice = $this->invoiceManager->findOneBy(array('id' => $id));
+        $invoice = $this->invoiceManager->findOneBy(['id' => $id]);
 
         if (null === $invoice) {
             throw new NotFoundHttpException(sprintf('Invoice (%d) not found', $id));

@@ -21,7 +21,7 @@ class InvoiceManager extends BaseEntityManager implements InvoiceManagerInterfac
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()
             ->createQueryBuilder('i')
@@ -34,13 +34,13 @@ class InvoiceManager extends BaseEntityManager implements InvoiceManagerInterfac
             }
         }
         if (count($sort) == 0) {
-            $sort = array('reference' => 'ASC');
+            $sort = ['reference' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
             $query->orderBy(sprintf('i.%s', $field), strtoupper($direction));
         }
 
-        $parameters = array();
+        $parameters = [];
 
         if (isset($criteria['status'])) {
             $query->andWhere('i.status = :status');

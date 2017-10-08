@@ -38,9 +38,9 @@ class BasketType extends AbstractType
         }
 
         // should create a custom basket elements here
-        $basketElementBuilder = $builder->create('basketElements', $formType, array(
+        $basketElementBuilder = $builder->create('basketElements', $formType, [
             'by_reference' => false,
-        ));
+        ]);
         $basketElementBuilder->addEventSubscriber(new BasketResizeFormListener($builder->getFormFactory(), $basket));
         $builder->add($basketElementBuilder);
     }

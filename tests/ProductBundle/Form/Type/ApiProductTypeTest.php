@@ -30,6 +30,6 @@ class ApiProductTypeTest extends PHPUnit_Framework_TestCase
 
         $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
-        $type->buildForm($builder, array('provider_name' => 'test.product.provider'));
+        $type->buildForm($builder, ['provider_name' => 'test.product.provider']);
     }
 }

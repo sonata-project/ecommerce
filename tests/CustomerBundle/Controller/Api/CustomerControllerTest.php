@@ -23,13 +23,13 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
     public function testGetCustomersAction()
     {
         $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
-        $customerManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
+        $customerManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals(array(), $this->createCustomerController(null, $customerManager)
+        $this->assertEquals([], $this->createCustomerController(null, $customerManager)
             ->getCustomersAction($paramFetcher));
     }
 
@@ -54,7 +54,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
 
         $this->assertEquals(
-            array($order),
+            [$order],
             $this->createCustomerController($customer, null, null, null, $order)->getCustomerOrdersAction(1)
         );
     }
@@ -63,9 +63,9 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
-        $customer->expects($this->once())->method('getAddresses')->will($this->returnValue(array($address)));
+        $customer->expects($this->once())->method('getAddresses')->will($this->returnValue([$address]));
 
-        $this->assertEquals(array($address), $this->createCustomerController($customer)
+        $this->assertEquals([$address], $this->createCustomerController($customer)
             ->getCustomerAddressesAction(1));
     }
 
@@ -208,7 +208,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
 
         $view = $this->createCustomerController($customer, $customerManager)->deleteCustomerAction(1);
 
-        $this->assertEquals(array('deleted' => true), $view);
+        $this->assertEquals(['deleted' => true], $view);
     }
 
     public function testDeleteCustomerInvalidAction()
@@ -247,7 +247,7 @@ class CustomerControllerTest extends PHPUnit_Framework_TestCase
             $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         }
         if (null !== $order) {
-            $orderManager->expects($this->once())->method('findBy')->will($this->returnValue(array($order)));
+            $orderManager->expects($this->once())->method('findBy')->will($this->returnValue([$order]));
         }
         if (null === $formFactory) {
             $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');

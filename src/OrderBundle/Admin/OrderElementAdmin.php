@@ -70,7 +70,7 @@ class OrderElementAdmin extends AbstractAdmin
             $productDeliveryStatusType = 'sonata_product_delivery_status';
         }
 
-        $productTypeOptions = array();
+        $productTypeOptions = [];
         $productTypes = array_keys($this->productPool->getProducts());
         // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
         if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
@@ -83,15 +83,15 @@ class OrderElementAdmin extends AbstractAdmin
         $productTypeOptions['choices'] = $productTypes;
 
         $formMapper
-            ->with($this->trans('order_element.form.group_main_label', array(), 'SonataOrderBundle'))
+            ->with($this->trans('order_element.form.group_main_label', [], 'SonataOrderBundle'))
                 ->add('productType', $choiceType, $productTypeOptions)
                 ->add('quantity')
                 ->add('price')
                 ->add('vatRate')
                 ->add('designation')
-                ->add('description', null, array('required' => false))
-                ->add('status', $orderStatusType, array('translation_domain' => 'SonataOrderBundle'))
-                ->add('deliveryStatus', $productDeliveryStatusType, array('translation_domain' => 'SonataDeliveryBundle'))
+                ->add('description', null, ['required' => false])
+                ->add('status', $orderStatusType, ['translation_domain' => 'SonataOrderBundle'])
+                ->add('deliveryStatus', $productDeliveryStatusType, ['translation_domain' => 'SonataDeliveryBundle'])
             ->end()
         ;
     }
@@ -115,10 +115,10 @@ class OrderElementAdmin extends AbstractAdmin
         }
 
         $list->add('productType')
-            ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'status'))
-            ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'deliveryStatus'))
-            ->add('getTotalWithVat', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
-            ->add('getTotal', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
+            ->add('getStatusName', 'trans', ['name' => 'status', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'status'])
+            ->add('getDeliveryStatusName', 'trans', ['name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'deliveryStatus'])
+            ->add('getTotalWithVat', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
+            ->add('getTotal', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
         ;
     }
 }

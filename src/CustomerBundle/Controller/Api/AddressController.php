@@ -69,9 +69,9 @@ class AddressController
      */
     public function getAddressesAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedCriteria = array(
+        $supportedCriteria = [
             'customer' => '',
-        );
+        ];
 
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -85,9 +85,9 @@ class AddressController
         }
 
         if (!$sort) {
-            $sort = array();
+            $sort = [];
         } elseif (!is_array($sort)) {
-            $sort = array($sort => 'asc');
+            $sort = [$sort => 'asc'];
         }
 
         return $this->addressManager->getPager($criteria, $page, $limit, $sort);
@@ -194,10 +194,10 @@ class AddressController
         try {
             $this->addressManager->delete($address);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(array('error' => $e->getMessage()), 400);
+            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
         }
 
-        return array('deleted' => true);
+        return ['deleted' => true];
     }
 
     /**
@@ -211,7 +211,7 @@ class AddressController
      */
     protected function getAddress($id)
     {
-        $address = $this->addressManager->findOneBy(array('id' => $id));
+        $address = $this->addressManager->findOneBy(['id' => $id]);
 
         if (null === $address) {
             throw new NotFoundHttpException(sprintf('Address (%d) not found', $id));
@@ -232,9 +232,9 @@ class AddressController
     {
         $address = $id ? $this->getAddress($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', $address, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_customer_api_form_address', $address, [
             'csrf_protection' => false,
-        ));
+        ]);
 
         $form->handleRequest($request);
 
@@ -247,12 +247,12 @@ class AddressController
             // BC for FOSRestBundle < 2.0
             if (method_exists($view, 'setSerializationContext')) {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             } else {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $context->setMaxDepth(0);
                 $view->setContext($context);
             }

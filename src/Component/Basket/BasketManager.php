@@ -51,7 +51,7 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()
             ->createQueryBuilder('b')
@@ -64,7 +64,7 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
             }
         }
         if (count($sort) == 0) {
-            $sort = array('id' => 'ASC');
+            $sort = ['id' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
             $query->orderBy(sprintf('b.%s', $field), strtoupper($direction));

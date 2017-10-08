@@ -97,11 +97,11 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     public function findEnabledFromIdAndSlug($id, $slug)
     {
         return $this->getRepository()
-            ->findOneBy(array(
+            ->findOneBy([
                 'id' => $id,
                 'slug' => $slug,
                 'enabled' => true,
-            ));
+            ]);
     }
 
     /**
@@ -140,7 +140,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()
             ->createQueryBuilder('p')
@@ -153,13 +153,13 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
             }
         }
         if (count($sort) == 0) {
-            $sort = array('name' => 'ASC');
+            $sort = ['name' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
             $query->orderBy(sprintf('p.%s', $field), strtoupper($direction));
         }
 
-        $parameters = array();
+        $parameters = [];
 
         if (isset($criteria['enabled'])) {
             $query->andWhere('p.enabled = :enabled');
@@ -208,8 +208,8 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
      */
     protected function queryInSameCollections($productCollections, $limit = null)
     {
-        $collections = array();
-        $productIds = array();
+        $collections = [];
+        $productIds = [];
 
         foreach ($productCollections as $pCollection) {
             $collections[] = $pCollection->getCollection();

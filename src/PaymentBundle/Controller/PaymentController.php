@@ -39,9 +39,9 @@ class PaymentController extends Controller
             throw new UnauthorizedHttpException($ex->getMessage());
         }
 
-        return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
+        return $this->render('SonataPaymentBundle:Payment:error.html.twig', [
             'order' => $order,
-        ));
+        ]);
     }
 
     /**
@@ -61,14 +61,14 @@ class PaymentController extends Controller
         }
 
         if (!($order->isValidated() || $order->isPending())) {
-            return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
+            return $this->render('SonataPaymentBundle:Payment:error.html.twig', [
                 'order' => $order,
-            ));
+            ]);
         }
 
-        return $this->render('SonataPaymentBundle:Payment:confirmation.html.twig', array(
+        return $this->render('SonataPaymentBundle:Payment:confirmation.html.twig', [
             'order' => $order,
-        ));
+        ]);
     }
 
     /**
@@ -87,7 +87,7 @@ class PaymentController extends Controller
         if (!$basket->isValid()) {
             $this->get('session')->getFlashBag()->set(
                 'error',
-                $this->container->get('translator')->trans('basket_not_valid', array(), 'SonataPaymentBundle')
+                $this->container->get('translator')->trans('basket_not_valid', [], 'SonataPaymentBundle')
             );
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));
@@ -99,7 +99,7 @@ class PaymentController extends Controller
         if (!$payment->isBasketValid($basket)) {
             $this->get('session')->getFlashBag()->set(
                 'error',
-                $this->container->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'SonataPaymentBundle')
+                $this->container->get('translator')->trans('basket_not_valid_with_current_payment_method', [], 'SonataPaymentBundle')
             );
 
             return $this->redirect($this->generateUrl('sonata_basket_index'));

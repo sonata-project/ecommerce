@@ -122,12 +122,12 @@ class ProductAdmin extends AbstractAdmin
     public function getPersistentParameters()
     {
         if (!$this->hasRequest()) {
-            return array();
+            return [];
         }
 
-        return array(
+        return [
             'provider' => $this->getProductType(),
-        );
+        ];
     }
 
     /**
@@ -148,10 +148,10 @@ class ProductAdmin extends AbstractAdmin
             ->addIdentifier('sku')
             ->addIdentifier('name')
             ->add('isVariation', $booleanType)
-            ->add('enabled', null, array('editable' => true))
-            ->add('price', $currencyType, array('currency' => $this->currencyDetector->getCurrency()->getLabel()))
-            ->add('productCategories', null, array('associated_tostring' => 'getCategory'))
-            ->add('productCollections', null, array('associated_tostring' => 'getCollection'))
+            ->add('enabled', null, ['editable' => true])
+            ->add('price', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
+            ->add('productCategories', null, ['associated_tostring' => 'getCategory'])
+            ->add('productCollections', null, ['associated_tostring' => 'getCollection'])
         ;
     }
 
@@ -164,8 +164,8 @@ class ProductAdmin extends AbstractAdmin
             ->add('name')
             ->add('sku')
             ->add('enabled')
-            ->add('productCategories.category', null, array('field_options' => array('expanded' => false, 'multiple' => true)))
-            ->add('productCollections.collection', null, array('field_options' => array('expanded' => false, 'multiple' => true)))
+            ->add('productCategories.category', null, ['field_options' => ['expanded' => false, 'multiple' => true]])
+            ->add('productCollections.collection', null, ['field_options' => ['expanded' => false, 'multiple' => true]])
         ;
     }
 
@@ -219,7 +219,7 @@ class ProductAdmin extends AbstractAdmin
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement
-            ->assertCallback(array('validateOneMainCategory'))
+            ->assertCallback(['validateOneMainCategory'])
         ;
     }
 
@@ -240,7 +240,7 @@ class ProductAdmin extends AbstractAdmin
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
-        if (!$childAdmin && !in_array($action, array('edit'))) {
+        if (!$childAdmin && !in_array($action, ['edit'])) {
             return;
         }
 
@@ -250,29 +250,29 @@ class ProductAdmin extends AbstractAdmin
         $product = $this->getObject($id);
 
         $menu->addChild(
-            $this->trans('product.sidemenu.link_product_edit', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+            $this->trans('product.sidemenu.link_product_edit', [], 'SonataProductBundle'),
+            ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('product.sidemenu.view_categories', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.product.category.list', array('id' => $id)))
+            $this->trans('product.sidemenu.view_categories', [], 'SonataProductBundle'),
+            ['uri' => $admin->generateUrl('sonata.product.admin.product.category.list', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('product.sidemenu.view_collections', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.product.collection.list', array('id' => $id)))
+            $this->trans('product.sidemenu.view_collections', [], 'SonataProductBundle'),
+            ['uri' => $admin->generateUrl('sonata.product.admin.product.collection.list', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('product.sidemenu.view_deliveries', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('sonata.product.admin.delivery.list', array('id' => $id)))
+            $this->trans('product.sidemenu.view_deliveries', [], 'SonataProductBundle'),
+            ['uri' => $admin->generateUrl('sonata.product.admin.delivery.list', ['id' => $id])]
         );
 
         if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
             $menu->addChild(
                 $this->trans('product.sidemenu.view_variations'),
-                array('uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', array('id' => $id)))
+                ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', ['id' => $id])]
             );
         }
     }

@@ -28,12 +28,12 @@ class OrderCRUDController extends CRUDController
         }
 
         if (null === $this->getRequest()->get('confirm')) {
-            return $this->render('SonataOrderBundle:OrderAdmin:invoice_generate_confirm.html.twig', array('id' => $id));
+            return $this->render('SonataOrderBundle:OrderAdmin:invoice_generate_confirm.html.twig', ['id' => $id]);
         }
 
         $order = $this->admin->getObject($id);
 
-        $invoice = $this->getInvoiceManager()->findOneBy(array('reference' => $order->getReference()));
+        $invoice = $this->getInvoiceManager()->findOneBy(['reference' => $order->getReference()]);
 
         if (null === $invoice) {
             $invoice = $this->getInvoiceManager()->create();
@@ -41,10 +41,10 @@ class OrderCRUDController extends CRUDController
             $this->getInvoiceTransformer()->transformFromOrder($order, $invoice);
             $this->getInvoiceManager()->save($invoice);
 
-            $this->addFlash('sonata_flash_success', $this->get('translator')->trans('oRDER_TO_INVOICE_generate_success', array(), 'SonataOrderBundle'));
+            $this->addFlash('sonata_flash_success', $this->get('translator')->trans('oRDER_TO_INVOICE_generate_success', [], 'SonataOrderBundle'));
         }
 
-        return $this->redirect($this->generateUrl('admin_sonata_invoice_invoice_edit', array('id' => $invoice->getId())));
+        return $this->redirect($this->generateUrl('admin_sonata_invoice_invoice_edit', ['id' => $invoice->getId()]));
     }
 
     /**

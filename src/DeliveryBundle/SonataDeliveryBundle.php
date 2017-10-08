@@ -38,8 +38,8 @@ class SonataDeliveryBundle extends Bundle
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping(array(
+        FormHelper::registerFormTypeMapping([
             'sonata_delivery_choice' => 'Sonata\Component\Form\Type\DeliveryChoiceType',
-        ));
+        ]);
     }
 }

@@ -45,14 +45,14 @@ class ServiceDeliveryTest extends PHPUnit_Framework_TestCase
 
     public function testGetStatusList()
     {
-        $statusList = array(
+        $statusList = [
             ServiceDeliveryInterface::STATUS_OPEN => 'status_open',
             ServiceDeliveryInterface::STATUS_PENDING => 'status_pending',
             ServiceDeliveryInterface::STATUS_SENT => 'status_sent',
             ServiceDeliveryInterface::STATUS_CANCELLED => 'status_cancelled',
             ServiceDeliveryInterface::STATUS_COMPLETED => 'status_completed',
             ServiceDeliveryInterface::STATUS_RETURNED => 'status_returned',
-        );
+        ];
         $this->assertEquals($statusList, BaseDelivery::getStatusList());
         $this->assertEquals($statusList, BaseServiceDelivery::getStatusList());
     }
@@ -61,7 +61,7 @@ class ServiceDeliveryTest extends PHPUnit_Framework_TestCase
     {
         $delivery = new FreeDelivery(true);
 
-        $delivery->setOptions(array('option1' => 'value1'));
+        $delivery->setOptions(['option1' => 'value1']);
 
         $this->assertEquals('value1', $delivery->getOption('option1'));
         $this->assertEquals('default', $delivery->getOption('unexisting', 'default'));

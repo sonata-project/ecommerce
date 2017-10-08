@@ -112,7 +112,7 @@ abstract class BaseAddress implements AddressInterface
     public static function formatAddress(array $address, $sep = ', ')
     {
         $address = array_merge(
-            array(
+            [
                 'firstname' => '',
                 'lastname' => '',
                 'address1' => '',
@@ -121,18 +121,18 @@ abstract class BaseAddress implements AddressInterface
                 'postcode' => '',
                 'city' => '',
                 'country_code' => '',
-            ),
+            ],
             $address
         );
 
-        $values = array_map('trim', array(
+        $values = array_map('trim', [
                 sprintf('%s %s', $address['firstname'], $address['lastname']),
                 $address['address1'],
                 $address['address2'],
                 $address['address3'],
                 $address['postcode'],
                 $address['city'],
-            ));
+            ]);
 
         foreach ($values as $key => $val) {
             if (!$val) {
@@ -166,11 +166,11 @@ abstract class BaseAddress implements AddressInterface
 
     public static function getTypesList()
     {
-        return array(
+        return [
             self::TYPE_BILLING => 'type_billing',
             self::TYPE_DELIVERY => 'type_delivery',
             self::TYPE_CONTACT => 'type_contact',
-        );
+        ];
     }
 
     /**
@@ -465,7 +465,7 @@ abstract class BaseAddress implements AddressInterface
      */
     public function getAddressArrayForRender()
     {
-        return array(
+        return [
             'id' => $this->getId(),
             'name' => $this->getName(),
             'firstname' => $this->getFirstName(),
@@ -476,7 +476,7 @@ abstract class BaseAddress implements AddressInterface
             'postcode' => $this->getPostcode(),
             'city' => $this->getCity(),
             'country_code' => $this->getCountryCode(),
-        );
+        ];
     }
 
     /**

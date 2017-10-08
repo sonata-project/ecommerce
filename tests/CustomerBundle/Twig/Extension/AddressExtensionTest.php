@@ -37,14 +37,14 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
         $address->expects($this->once())->method('getId');
         $extension->renderAddress($environment, $address, true, true);
 
-        $address = array(
+        $address = [
             'firstname' => '',
             'lastname' => '',
             'address1' => '',
             'postcode' => '',
             'city' => '',
             'country_code' => '',
-        );
+        ];
 
         $extension->renderAddress($environment, $address);
     }
@@ -58,7 +58,7 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
         $environment = $this->createMock('Twig_Environment');
         $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
-        $address = array();
+        $address = [];
 
         $extension = new AddressExtension($deliverySelector);
         $extension->renderAddress($environment, $address);
@@ -73,14 +73,14 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
         $environment = $this->createMock('Twig_Environment');
         $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
 
-        $address = array(
+        $address = [
             'firstname' => '',
             'lastname' => '',
             'address1' => '',
             'postcode' => '',
             'city' => '',
             'country_code' => '',
-        );
+        ];
 
         $extension = new AddressExtension($deliverySelector);
         $extension->renderAddress($environment, $address, true, true);
@@ -93,7 +93,7 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
 
         // Test false
         $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
-        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue(array()));
+        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue([]));
 
         $extension = new AddressExtension($deliverySelector);
         $deliverable = $extension->isAddressDeliverable($address, $basket);
@@ -102,7 +102,7 @@ class AddressExtensionTest extends PHPUnit_Framework_TestCase
 
         // Test true
         $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
-        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue(array('paypal')));
+        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue(['paypal']));
 
         $extension = new AddressExtension($deliverySelector);
         $deliverable = $extension->isAddressDeliverable($address, $basket);

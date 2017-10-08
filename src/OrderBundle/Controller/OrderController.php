@@ -33,14 +33,14 @@ class OrderController extends Controller
             throw new AccessDeniedException();
         }
 
-        $orders = $this->getOrderManager()->findForUser($user, array('createdAt' => 'DESC'));
+        $orders = $this->getOrderManager()->findForUser($user, ['createdAt' => 'DESC']);
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', array(), 'SonataOrderBundle'));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', [], 'SonataOrderBundle'));
 
-        return $this->render('SonataOrderBundle:Order:index.html.twig', array(
+        return $this->render('SonataOrderBundle:Order:index.html.twig', [
             'orders' => $orders,
             'breadcrumb_context' => 'user_order',
-        ));
+        ]);
     }
 
     /**
@@ -53,7 +53,7 @@ class OrderController extends Controller
     public function viewAction($reference)
     {
         /** @var OrderInterface $order */
-        $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+        $order = $this->getOrderManager()->findOneBy(['reference' => $reference]);
 
         if (null === $order) {
             throw new AccessDeniedException();
@@ -61,7 +61,7 @@ class OrderController extends Controller
 
         $this->checkAccess($order->getCustomer());
 
-        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_view_title', array(), 'SonataOrderBundle'));
+        $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_view_title', [], 'SonataOrderBundle'));
 
         /** @var OrderElementInterface $element */
         foreach ($order->getOrderElements() as $element) {
@@ -69,10 +69,10 @@ class OrderController extends Controller
             $element->setProduct($provider->getProductFromRaw($element, $this->get('sonata.product.pool')->getManager($element->getProductType())->getClass()));
         }
 
-        return $this->render('SonataOrderBundle:Order:view.html.twig', array(
+        return $this->render('SonataOrderBundle:Order:view.html.twig', [
             'order' => $order,
             'breadcrumb_context' => 'user_order',
-        ));
+        ]);
     }
 
     /**

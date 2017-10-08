@@ -27,7 +27,7 @@ interface OrderManagerInterface extends ManagerInterface, PageableManagerInterfa
      *
      * @return OrderInterface[]
      */
-    public function findForUser(UserInterface $user, array $orderBy = array(), $limit = null, $offset = null);
+    public function findForUser(UserInterface $user, array $orderBy = [], $limit = null, $offset = null);
 
     /**
      * Return an Order from its id with its related OrderElements.

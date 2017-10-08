@@ -154,11 +154,11 @@ abstract class BaseCustomer implements CustomerInterface
      */
     public static function getTitlesList()
     {
-        return array(
+        return [
             self::TITLE_MLLE => 'customer_title_mlle',
             self::TITLE_MME => 'customer_title_mme',
             self::TITLE_MR => 'customer_title_mr',
-        );
+        ];
     }
 
     /**

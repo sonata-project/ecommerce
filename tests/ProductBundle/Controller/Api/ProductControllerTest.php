@@ -23,13 +23,13 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
     public function testGetProductsAction()
     {
         $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
-        $productManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
+        $productManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals(array(), $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
+        $this->assertEquals([], $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
     }
 
     public function testGetProductAction()
@@ -51,10 +51,10 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $productCategory = $this->createMock('Sonata\Component\Product\ProductCategoryInterface');
-        $product->expects($this->once())->method('getProductCategories')->will($this->returnValue(array($productCategory)));
+        $product->expects($this->once())->method('getProductCategories')->will($this->returnValue([$productCategory]));
 
         $this->assertEquals(
-            array($productCategory),
+            [$productCategory],
             $this->createProductController($product)->getProductProductcategoriesAction(1)
         );
     }
@@ -63,19 +63,19 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
-        $product->expects($this->once())->method('getCategories')->will($this->returnValue(array($category)));
+        $product->expects($this->once())->method('getCategories')->will($this->returnValue([$category]));
 
-        $this->assertEquals(array($category), $this->createProductController($product)->getProductCategoriesAction(1));
+        $this->assertEquals([$category], $this->createProductController($product)->getProductCategoriesAction(1));
     }
 
     public function testGetProductProductcollectionsAction()
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $productCollection = $this->createMock('Sonata\Component\Product\ProductCollectionInterface');
-        $product->expects($this->once())->method('getProductCollections')->will($this->returnValue(array($productCollection)));
+        $product->expects($this->once())->method('getProductCollections')->will($this->returnValue([$productCollection]));
 
         $this->assertEquals(
-            array($productCollection),
+            [$productCollection],
             $this->createProductController($product)->getProductProductcollectionsAction(1)
         );
     }
@@ -84,36 +84,36 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
-        $product->expects($this->once())->method('getCollections')->will($this->returnValue(array($collection)));
+        $product->expects($this->once())->method('getCollections')->will($this->returnValue([$collection]));
 
-        $this->assertEquals(array($collection), $this->createProductController($product)->getProductCollectionsAction(1));
+        $this->assertEquals([$collection], $this->createProductController($product)->getProductCollectionsAction(1));
     }
 
     public function testGetProductPackagesAction()
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $package = $this->createMock('Sonata\Component\Product\PackageInterface');
-        $product->expects($this->once())->method('getPackages')->will($this->returnValue(array($package)));
+        $product->expects($this->once())->method('getPackages')->will($this->returnValue([$package]));
 
-        $this->assertEquals(array($package), $this->createProductController($product)->getProductPackagesAction(1));
+        $this->assertEquals([$package], $this->createProductController($product)->getProductPackagesAction(1));
     }
 
     public function testGetProductDeliveriesAction()
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $delivery = $this->createMock('Sonata\Component\Product\DeliveryInterface');
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue(array($delivery)));
+        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
-        $this->assertEquals(array($delivery), $this->createProductController($product)->getProductDeliveriesAction(1));
+        $this->assertEquals([$delivery], $this->createProductController($product)->getProductDeliveriesAction(1));
     }
 
     public function testGetProductVariationsAction()
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $variation = $this->createMock('Sonata\Component\Product\ProductInterface');
-        $product->expects($this->once())->method('getVariations')->will($this->returnValue(array($variation)));
+        $product->expects($this->once())->method('getVariations')->will($this->returnValue([$variation]));
 
-        $this->assertEquals(array($variation), $this->createProductController($product)->getProductVariationsAction(1));
+        $this->assertEquals([$variation], $this->createProductController($product)->getProductVariationsAction(1));
     }
 
     public function testPostProductAction()
@@ -236,7 +236,7 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
 
         $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
 
-        $this->assertEquals(array('deleted' => true), $view);
+        $this->assertEquals(['deleted' => true], $view);
     }
 
     public function testDeleteProductInvalidAction()
@@ -254,7 +254,7 @@ class ProductControllerTest extends PHPUnit_Framework_TestCase
 
         $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
 
-        $this->assertEquals(array('deleted' => true), $view);
+        $this->assertEquals(['deleted' => true], $view);
     }
 
     /**

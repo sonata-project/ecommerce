@@ -52,10 +52,10 @@ class ProductController extends Controller
         }
 
         $action = sprintf('%s:view', $provider->getBaseControllerName());
-        $response = $this->forward($action, array(
+        $response = $this->forward($action, [
             'provider' => $provider,
             'product' => $product,
-        ));
+        ]);
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
@@ -80,11 +80,11 @@ class ProductController extends Controller
     {
         $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName());
 
-        $response = $this->forward($action, array(
+        $response = $this->forward($action, [
             'formView' => $formView,
             'basketElement' => $basketElement,
             'basket' => $basket,
-        ));
+        ]);
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
@@ -112,13 +112,13 @@ class ProductController extends Controller
             throw new BadRequestHttpException('Request needs to be XHR and have a quantity parameter');
         }
 
-        $product = $this->get('sonata.product.set.manager')->findOneBy(array('id' => $productId, 'enabled' => true));
+        $product = $this->get('sonata.product.set.manager')->findOneBy(['id' => $productId, 'enabled' => true]);
 
         if (!$product) {
             throw new NotFoundHttpException(sprintf('Unable to find the product with id=%d', $productId));
         }
 
-        $errors = array();
+        $errors = [];
 
         /** @var \Sonata\Component\Product\Pool $productPool */
         $productPool = $this->get('sonata.product.pool');
@@ -131,19 +131,19 @@ class ProductController extends Controller
         $stock = $provider->getStockAvailable($product) ?: 0;
 
         if ($quantity > $stock) {
-            $errors['stock'] = $this->get('translator')->trans('product_out_of_stock_quantity', array(), 'SonataProductBundle');
+            $errors['stock'] = $this->get('translator')->trans('product_out_of_stock_quantity', [], 'SonataProductBundle');
         }
 
         $currency = $this->get('sonata.basket')->getCurrency();
 
         $price = $provider->calculatePrice($product, $currency, true, $quantity);
 
-        return new JsonResponse(array(
+        return new JsonResponse([
             'stock' => $stock,
             'price' => $price,
             'price_text' => $this->get('sonata.intl.templating.helper.number')->formatCurrency($price, $currency),
             'errors' => $errors,
-        ));
+        ]);
     }
 
     /**
@@ -156,10 +156,10 @@ class ProductController extends Controller
     {
         $action = sprintf('%s:renderFinalReviewBasketElement', $basketElement->getProductProvider()->getBaseControllerName());
 
-        $response = $this->forward($action, array(
+        $response = $this->forward($action, [
             'basketElement' => $basketElement,
             'basket' => $basket,
-        ));
+        ]);
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
@@ -192,9 +192,9 @@ class ProductController extends Controller
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         $action = sprintf('%s:viewVariations', $provider->getBaseControllerName());
-        $response = $this->forward($action, array(
+        $response = $this->forward($action, [
                 'product' => $product,
-            ));
+            ]);
 
         if ($this->get('kernel')->isDebug()) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
@@ -236,7 +236,7 @@ class ProductController extends Controller
         $choices = $provider->getVariationsChoices($product, array_keys($data));
 
         $accessor = PropertyAccess::createPropertyAccessor();
-        $currentValues = array();
+        $currentValues = [];
 
         foreach ($choices as $field => $values) {
             $currentValues[$field] = array_search($accessor->getValue($product, $field), $values);
@@ -248,10 +248,10 @@ class ProductController extends Controller
         } else {
             $variationChoiceFormType = 'sonata_product_variation_choices';
         }
-        $form = $this->createForm($variationChoiceFormType, $currentValues, array(
+        $form = $this->createForm($variationChoiceFormType, $currentValues, [
             'product' => $product,
             'fields' => array_keys($data),
-        ));
+        ]);
 
         $form->handleRequest($this->getRequest());
 
@@ -265,10 +265,10 @@ class ProductController extends Controller
         $variation = $provider->getVariation($product, $selectedVariation);
 
         $action = sprintf('%s:variationToProduct', $provider->getBaseControllerName());
-        $response = $this->forward($action, array(
+        $response = $this->forward($action, [
             'product' => $product,
             'variation' => $variation,
-        ));
+        ]);
 
         if ($this->get('kernel')->isDebug() && !($response instanceof JsonResponse)) {
             $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",

@@ -47,7 +47,7 @@ class DebugPaymentTest extends PHPUnit_Framework_TestCase
         /*
          * Payment refused
          */
-        $transaction->setParameters(array('action' => 'refuse'));
+        $transaction->setParameters(['action' => 'refuse']);
         $payment->sendConfirmationReceipt($transaction);
 
         $this->assertEquals(TransactionInterface::STATE_KO, $transaction->getState());
@@ -56,7 +56,7 @@ class DebugPaymentTest extends PHPUnit_Framework_TestCase
         /*
          * Payment accepted
          */
-        $transaction->setParameters(array('action' => 'accept'));
+        $transaction->setParameters(['action' => 'accept']);
         $payment->sendConfirmationReceipt($transaction);
 
         $this->assertEquals(TransactionInterface::STATE_OK, $transaction->getState());

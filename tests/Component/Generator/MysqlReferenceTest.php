@@ -120,7 +120,7 @@ class MysqlReferenceTest extends PHPUnit_Framework_TestCase
     private function generateNewObject()
     {
         $metadata = new ClassMetadata('entityName');
-        $metadata->table = array('name' => 'tableName');
+        $metadata->table = ['name' => 'tableName'];
 
         $connection = $this->createMock('Doctrine\DBAL\Connection');
 

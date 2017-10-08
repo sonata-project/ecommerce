@@ -91,7 +91,7 @@ class ProductVariationAdmin extends ProductAdmin
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
-        if (!$childAdmin && !in_array($action, array('edit'))) {
+        if (!$childAdmin && !in_array($action, ['edit'])) {
             return;
         }
 
@@ -101,19 +101,19 @@ class ProductVariationAdmin extends ProductAdmin
         $product = $this->getObject($id);
 
         $menu->addChild(
-            $this->trans('product.sidemenu.link_product_edit', array(), 'SonataProductBundle'),
-            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+            $this->trans('product.sidemenu.link_product_edit', [], 'SonataProductBundle'),
+            ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
             $menu->addChild(
-                $this->trans('product.sidemenu.link_add_variation', array(), 'SonataProductBundle'),
-                array('uri' => $admin->generateUrl('sonata.product.admin.product.variation.create', array('id' => $id)))
+                $this->trans('product.sidemenu.link_add_variation', [], 'SonataProductBundle'),
+                ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.create', ['id' => $id])]
             );
 
             $menu->addChild(
                 $this->trans('product.sidemenu.view_variations'),
-                array('uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', array('id' => $id)))
+                ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', ['id' => $id])]
             );
         }
     }

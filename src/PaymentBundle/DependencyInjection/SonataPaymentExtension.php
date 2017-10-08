@@ -75,16 +75,16 @@ class SonataPaymentExtension extends Extension
         // create the payment method pool
         $pool = $container->getDefinition('sonata.payment.pool');
 
-        $internal = array(
+        $internal = [
             'debug' => 'sonata.payment.method.debug',
             'pass' => 'sonata.payment.method.pass',
             'check' => 'sonata.payment.method.check',
             'scellius' => 'sonata.payment.method.scellius',
             'ogone' => 'sonata.payment.method.ogone',
             'paypal' => 'sonata.payment.method.paypal',
-        );
+        ];
 
-        $configured = array();
+        $configured = [];
 
         // define the payment method
         foreach ($config['services'] as $id => $settings) {
@@ -92,7 +92,7 @@ class SonataPaymentExtension extends Extension
                 $id = $internal[$id];
 
                 $name = isset($settings['name']) ? $settings['name'] : 'n/a';
-                $options = isset($settings['options']) ? $settings['options'] : array();
+                $options = isset($settings['options']) ? $settings['options'] : [];
 
                 $code = isset($settings['code']) ? $settings['code'] : false;
 
@@ -102,12 +102,12 @@ class SonataPaymentExtension extends Extension
 
                 $definition = $container->getDefinition($id);
 
-                $definition->addMethodCall('setName', array($name));
-                $definition->addMethodCall('setOptions', array($options));
-                $definition->addMethodCall('setCode', array($code));
+                $definition->addMethodCall('setName', [$name]);
+                $definition->addMethodCall('setOptions', [$options]);
+                $definition->addMethodCall('setCode', [$code]);
 
                 foreach ((array) $settings['transformers'] as $name => $serviceId) {
-                    $definition->addMethodCall('addTransformer', array($name, new Reference($serviceId)));
+                    $definition->addMethodCall('addTransformer', [$name, new Reference($serviceId)]);
                 }
 
                 $configured[$code] = $id;
@@ -122,10 +122,10 @@ class SonataPaymentExtension extends Extension
 
             if ($container->hasDefinition($id)) {
                 $definition = $container->getDefinition($id);
-                $definition->addMethodCall('setEnabled', array(true));
+                $definition->addMethodCall('setEnabled', [true]);
             }
 
-            $pool->addMethodCall('addMethod', array(new Reference($id)));
+            $pool->addMethodCall('addMethod', [new Reference($id)]);
         }
 
         if (isset($config['services']['debug'])) {
@@ -174,7 +174,7 @@ class SonataPaymentExtension extends Extension
         $pool = $container->getDefinition('sonata.payment.transformer.pool');
 
         foreach ($transformers as $type => $id) {
-            $pool->addMethodCall('addTransformer', array($type, new Reference($id)));
+            $pool->addMethodCall('addTransformer', [$type, new Reference($id)]);
         }
     }
 
@@ -189,28 +189,28 @@ class SonataPaymentExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        $collector->addAssociation($config['class']['transaction'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['transaction'], 'mapManyToOne', [
             'fieldName' => 'order',
             'targetEntity' => $config['class']['order'],
-            'cascade' => array(),
+            'cascade' => [],
             'mappedBy' => null,
             'inversedBy' => null,
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                     'name' => 'order_id',
                     'referencedColumnName' => 'id',
                     'onDelete' => 'SET NULL',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addIndex($config['class']['transaction'], 'status_code', array(
+        $collector->addIndex($config['class']['transaction'], 'status_code', [
             'status_code',
-        ));
+        ]);
 
-        $collector->addIndex($config['class']['transaction'], 'state', array(
+        $collector->addIndex($config['class']['transaction'], 'state', [
             'state',
-        ));
+        ]);
     }
 }

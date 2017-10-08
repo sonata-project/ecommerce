@@ -104,8 +104,8 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     public function __construct()
     {
-        $this->rawProduct = array();
-        $this->options = array();
+        $this->rawProduct = [];
+        $this->options = [];
     }
 
     /**
@@ -317,7 +317,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isPending()
     {
-        return in_array($this->getStatus(), array(OrderInterface::STATUS_PENDING));
+        return in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
     }
 
     /**
@@ -327,7 +327,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isOpen()
     {
-        return in_array($this->getStatus(), array(OrderInterface::STATUS_OPEN));
+        return in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
     }
 
     /**
@@ -345,7 +345,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isError()
     {
-        return in_array($this->getStatus(), array(OrderInterface::STATUS_ERROR));
+        return in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
     }
 
     /**

@@ -61,13 +61,13 @@ class VariationsFormBlockService extends BaseBlockService
         $product = $blockContext->getSetting('product');
 
         if (null === $product) {
-            return $this->renderResponse($blockContext->getTemplate(), array(
+            return $this->renderResponse($blockContext->getTemplate(), [
                     'context' => $blockContext,
                     'settings' => $blockContext->getSettings(),
                     'block' => $blockContext->getBlock(),
-                    'choices' => array(),
+                    'choices' => [],
                     'form' => null,
-                ), $response);
+                ], $response);
         }
 
         $fields = $blockContext->getSetting('variations_properties');
@@ -76,25 +76,25 @@ class VariationsFormBlockService extends BaseBlockService
 
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $currentValues = array();
+        $currentValues = [];
 
         foreach ($choices as $field => $values) {
             $currentValues[$field] = array_search($accessor->getValue($product, $field), $values);
         }
 
-        $form = $this->formFactory->createBuilder('sonata_product_variation_choices', $currentValues, array(
+        $form = $this->formFactory->createBuilder('sonata_product_variation_choices', $currentValues, [
                 'field_options' => $blockContext->getSetting('form_field_options'),
                 'product' => $product,
                 'fields' => $fields,
-            ))->getForm();
+            ])->getForm();
 
-        $params = array(
+        $params = [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
             'choices' => $choices,
             'form' => $form->createView(),
-        );
+        ];
 
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
     }
@@ -128,9 +128,9 @@ class VariationsFormBlockService extends BaseBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'product' => null,
-            'variations_properties' => array(),
+            'variations_properties' => [],
             'form_route' => 'sonata_product_variation_product',
             'form_route_parameters' => function (Options $options) {
                 $product = $options->get('product');
@@ -139,14 +139,14 @@ class VariationsFormBlockService extends BaseBlockService
                     throw new \RuntimeException("Wrong 'product' parameter");
                 }
 
-                return array(
+                return [
                         'productId' => $product ? $product->getId() : null,
                         'slug' => $product ? $product->getSlug() : null,
-                    );
+                    ];
             },
-            'form_field_options' => array(),
+            'form_field_options' => [],
             'title' => 'Product variations',
             'template' => 'SonataProductBundle:Block:variations_choice.html.twig',
-        ));
+        ]);
     }
 }

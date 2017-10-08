@@ -72,8 +72,8 @@ class AddressType extends AbstractType
 
         $address = $builder->getData();
 
-        $countryOptions = array();
-        $countries = array();
+        $countryOptions = [];
+        $countries = [];
 
         if ('delivery' == $options['context'] && $address) {
             $countries = $this->getBasketDeliveryCountries();
@@ -125,10 +125,10 @@ class AddressType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'context' => 'default',
-            'types' => call_user_func(array($this->class, $this->getter)),
-        ));
+            'types' => call_user_func([$this->class, $this->getter]),
+        ]);
     }
 
     /**
@@ -138,7 +138,7 @@ class AddressType extends AbstractType
      */
     protected function getBasketDeliveryCountries()
     {
-        $countries = array();
+        $countries = [];
 
         foreach ($this->basket->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();

@@ -54,7 +54,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * @var string
@@ -126,7 +126,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     public function getProduct()
     {
         if ($this->product == null && $this->hasProductDefinition()) {
-            $this->product = $this->getProductDefinition()->getManager()->findOneBy(array('id' => $this->productId));
+            $this->product = $this->getProductDefinition()->getManager()->findOneBy(['id' => $this->productId]);
         }
 
         return $this->product;
@@ -149,7 +149,7 @@ class BasketElement implements \Serializable, BasketElementInterface
             return;
         }
 
-        $product = $this->getProductDefinition()->getManager()->findOneBy(array('id' => $productId));
+        $product = $this->getProductDefinition()->getManager()->findOneBy(['id' => $productId]);
 
         if (!$product) {
             $this->productId = null;
@@ -229,7 +229,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setOptions(array $options = array())
+    public function setOptions(array $options = [])
     {
         $this->options = $options;
     }
@@ -358,7 +358,7 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             'productId' => $this->productId,
             'position' => $this->position,
             'unitPrice' => $this->unitPrice,
@@ -369,7 +369,7 @@ class BasketElement implements \Serializable, BasketElementInterface
             'options' => $this->options,
             'name' => $this->name,
             'productCode' => $this->productCode,
-        ));
+        ]);
     }
 
     /**

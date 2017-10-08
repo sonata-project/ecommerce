@@ -24,13 +24,13 @@ class BaseDeliveryTest extends PHPUnit_Framework_TestCase
     {
         $delivery = new Delivery();
 
-        $arrayDelivery = array(
+        $arrayDelivery = [
             'code' => 'code',
             'perItem' => 1,
             'countryCode' => 'FR',
             'zone' => 'zone',
             'enabled' => 1,
-        );
+        ];
 
         $delivery->fromArray($arrayDelivery);
 

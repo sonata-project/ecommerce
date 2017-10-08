@@ -35,7 +35,7 @@ class OrderStatusRendererTest extends PHPUnit_Framework_TestCase
         $order = $this->createMock('Sonata\Component\Order\OrderElementInterface');
         $this->assertTrue($osRenderer->handlesObject($order));
 
-        foreach (array('delivery', 'payment') as $correctStatusType) {
+        foreach (['delivery', 'payment'] as $correctStatusType) {
             $this->assertTrue($osRenderer->handlesObject($order, $correctStatusType));
         }
 
@@ -51,9 +51,9 @@ class OrderStatusRendererTest extends PHPUnit_Framework_TestCase
         $order->expects($this->once())->method('getDeliveryStatus')->will($this->returnValue(array_rand(BaseServiceDelivery::getStatusList())));
         $order->expects($this->once())->method('getPaymentStatus')->will($this->returnValue(array_rand(BaseTransaction::getStatusList())));
 
-        $this->assertContains($osRenderer->getStatusClass($order, '', 'error'), array('success', 'info', 'error'));
-        $this->assertContains($osRenderer->getStatusClass($order, 'payment', 'error'), array('success', 'info', 'error'));
-        $this->assertContains($osRenderer->getStatusClass($order, 'delivery', 'error'), array('success', 'info', 'error'));
+        $this->assertContains($osRenderer->getStatusClass($order, '', 'error'), ['success', 'info', 'error']);
+        $this->assertContains($osRenderer->getStatusClass($order, 'payment', 'error'), ['success', 'info', 'error']);
+        $this->assertContains($osRenderer->getStatusClass($order, 'delivery', 'error'), ['success', 'info', 'error']);
     }
 
     public function testGetInvalidClass()

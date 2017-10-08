@@ -46,12 +46,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * @var array
      */
-    protected $variationFields = array();
+    protected $variationFields = [];
 
     /**
      * @var string
@@ -192,7 +192,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param array $options
      */
-    public function setOptions(array $options = array())
+    public function setOptions(array $options = [])
     {
         $this->options = $options;
     }
@@ -326,18 +326,18 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getVariatedProperties(ProductInterface $product, array $fields = array())
+    public function getVariatedProperties(ProductInterface $product, array $fields = [])
     {
         if (null === $product->getParent()) {
             // This is not a variation, hence no properties variated
-            return array();
+            return [];
         }
 
         $fields = $this->getMergedFields($fields);
 
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $properties = array();
+        $properties = [];
 
         foreach ($fields as $field) {
             $properties[$field] = $accessor->getValue($product, $field);
@@ -349,11 +349,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getVariationsChoices(ProductInterface $product, array $fields = array())
+    public function getVariationsChoices(ProductInterface $product, array $fields = [])
     {
         if (!($this->hasEnabledVariations($product) || $product->getParent())) {
             // Product is neither master nor a variation, not concerned
-            return array();
+            return [];
         }
 
         $fields = $this->getMergedFields($fields);
@@ -363,12 +363,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $choices = array();
+        $choices = [];
         foreach ($variations as $mVariation) {
             foreach ($fields as $field) {
                 $variationValue = $accessor->getValue($mVariation, $field);
                 if (!array_key_exists($field, $choices) || !in_array($variationValue, $choices[$field])) {
-                    $choices = array_merge_recursive($choices, array($field => array($variationValue)));
+                    $choices = array_merge_recursive($choices, [$field => [$variationValue]]);
                 }
             }
         }
@@ -384,7 +384,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getVariation(ProductInterface $product, array $choices = array())
+    public function getVariation(ProductInterface $product, array $choices = [])
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 
@@ -426,7 +426,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param array $fields
      */
-    public function setVariationFields(array $fields = array())
+    public function setVariationFields(array $fields = [])
     {
         $this->variationFields = $fields;
     }
@@ -466,23 +466,23 @@ abstract class BaseProductProvider implements ProductProviderInterface
         ;
 
         if (!$isVariation || in_array('description', $this->variationFields)) {
-            $formMapper->add('description', 'sonata_formatter_type', array(
+            $formMapper->add('description', 'sonata_formatter_type', [
                 'source_field' => 'rawDescription',
-                'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+                'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
                 'format_field' => 'descriptionFormatter',
                 'target_field' => 'description',
                 'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
-            ));
+            ]);
         }
 
         if (!$isVariation || in_array('short_description', $this->variationFields)) {
-            $formMapper->add('shortDescription', 'sonata_formatter_type', array(
+            $formMapper->add('shortDescription', 'sonata_formatter_type', [
                 'source_field' => 'rawShortDescription',
-                'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+                'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
                 'format_field' => 'shortDescriptionFormatter',
                 'target_field' => 'shortDescription',
                 'event_dispatcher' => $formMapper->getFormBuilder()->getEventDispatcher(),
-            ));
+            ]);
         }
 
         $formMapper->end();
@@ -491,27 +491,27 @@ abstract class BaseProductProvider implements ProductProviderInterface
             $formMapper->with('Media');
 
             if (!$isVariation || in_array('image', $this->variationFields)) {
-                $formMapper->add('image', 'sonata_type_model_list', array(
+                $formMapper->add('image', 'sonata_type_model_list', [
                     'required' => false,
-                ), array(
-                    'link_parameters' => array(
+                ], [
+                    'link_parameters' => [
                         'context' => 'product_catalog',
-                        'filter' => array('context' => array('value' => 'product_catalog')),
+                        'filter' => ['context' => ['value' => 'product_catalog']],
                         'provider' => '',
-                    ),
-                ));
+                    ],
+                ]);
             }
 
             if (!$isVariation || in_array('gallery', $this->variationFields)) {
-                $formMapper->add('gallery', 'sonata_type_model_list', array(
+                $formMapper->add('gallery', 'sonata_type_model_list', [
                     'required' => false,
-                ), array(
-                    'link_parameters' => array(
+                ], [
+                    'link_parameters' => [
                         'context' => 'product_catalog',
-                        'filter' => array('context' => array('value' => 'product_catalog')),
+                        'filter' => ['context' => ['value' => 'product_catalog']],
                         'provider' => '',
-                    ),
-                ));
+                    ],
+                ]);
             }
 
             $formMapper->end();
@@ -563,7 +563,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $product->addVariation($variation);
 
-        $variationCollection = new ArrayCollection(array($variation));
+        $variationCollection = new ArrayCollection([$variation]);
 
         $this->synchronizeVariationsProduct($product, $variationCollection);
 
@@ -598,7 +598,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null)
     {
-        $variationFields = array_merge(array('id', 'parent'), $this->getVariationFields());
+        $variationFields = array_merge(['id', 'parent'], $this->getVariationFields());
 
         $values = $product->toArray();
 
@@ -771,7 +771,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @see \Sonata\Component\Product\ProductProviderInterface::createBasketElement()
      */
-    public function createBasketElement(ProductInterface $product = null, array $options = array())
+    public function createBasketElement(ProductInterface $product = null, array $options = [])
     {
         $basketElement = $this->getBasketElementManager()->create();
         $this->buildBasketElement($basketElement, $product, $options);
@@ -782,7 +782,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = array())
+    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = [])
     {
         if ($product) {
             $basketElement->setProduct($this->code, $product);
@@ -803,7 +803,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param bool                                       $showQuantity Specifies if quantity field will be displayed (default true)
      * @param array                                      $options      An options array
      */
-    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = array())
+    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = [])
     {
         $basketElement = $this->createBasketElement($product);
 
@@ -817,7 +817,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         } else {
             $transformer = new QuantityTransformer();
             $formBuilder->add(
-                    $formBuilder->create('quantity', 'hidden', array('data' => 1))
+                    $formBuilder->create('quantity', 'hidden', ['data' => 1])
                                 ->addModelTransformer($transformer)
             );
         }
@@ -828,7 +828,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param \Symfony\Component\Form\FormBuilder             $formBuilder
      * @param array                                           $options
      */
-    public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array())
+    public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = [])
     {
         $formBuilder
             ->add('delete', 'checkbox')
@@ -876,12 +876,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $errorElement
             ->with('quantity')
                 ->assertRange(
-                    array(
+                    [
                         'min' => 1,
                         'max' => $this->getStockAvailable($basketElement->getProduct()),
                         'minMessage' => 'basket_quantity_limit_min',
                         'maxMessage' => 'basket_quantity_limit_max',
-                    )
+                    ]
                 )
             ->end();
     }
@@ -1026,7 +1026,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @return bool
      */
-    public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array())
+    public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = [])
     {
         return true;
     }
@@ -1057,7 +1057,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->leftJoin('p.gallery', 'g')
             ->andWhere('p.id = :id')
             ->getQuery()
-            ->setParameters(array('id' => $id))
+            ->setParameters(['id' => $id])
             ->setMaxResults(1)
             ->execute();
 
@@ -1115,8 +1115,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function getFilters()
     {
-        return array(
-            'price' => array(
+        return [
+            'price' => [
                 0,
                 10,
                 20,
@@ -1125,8 +1125,8 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 200,
                 500,
                 1000,
-            ),
-        );
+            ],
+        ];
     }
 
     /**

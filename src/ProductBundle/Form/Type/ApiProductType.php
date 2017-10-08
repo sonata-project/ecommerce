@@ -50,11 +50,11 @@ class ApiProductType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => null,
             'csrf_protection' => false,
             'provider_name' => null,
-        ));
+        ]);
     }
 
     /**

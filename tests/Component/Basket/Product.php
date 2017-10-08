@@ -23,9 +23,9 @@ class Product extends BaseProduct
 
     public function getOptions()
     {
-        return array(
+        return [
             'option1' => 'toto',
-        );
+        ];
     }
 
     public function isRecurrentPayment()
@@ -35,7 +35,7 @@ class Product extends BaseProduct
 
     public function getElementOptions()
     {
-        return array();
+        return [];
     }
 
     public function getId()

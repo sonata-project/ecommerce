@@ -36,16 +36,16 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
     {
         $menu = $this->getRootMenu($blockContext);
 
-        $menu->addChild('sonata_product_catalog_breadcrumb', array(
+        $menu->addChild('sonata_product_catalog_breadcrumb', [
             'route' => 'sonata_catalog_index',
-            'extras' => array('translation_domain' => 'SonataProductBundle'),
-        ));
+            'extras' => ['translation_domain' => 'SonataProductBundle'],
+        ]);
 
-        $categories = array();
+        $categories = [];
         $product = null;
 
         if ($category = $blockContext->getBlock()->getSetting('category')) {
-            $sorted = array($category);
+            $sorted = [$category];
 
             while ($c = $category->getParent()) {
                 $sorted[] = $c;
@@ -57,7 +57,7 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
 
         if ($product = $blockContext->getBlock()->getSetting('product')) {
             if ($category = $product->getMainCategory()) {
-                $sorted = array($category);
+                $sorted = [$category];
 
                 while ($c = $category->getParent()) {
                     $sorted[] = $c;
@@ -72,24 +72,24 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
 
         if (count($categories) > 0) {
             foreach ($categories as $category) {
-                $menu->addChild($category->getName(), array(
+                $menu->addChild($category->getName(), [
                     'route' => 'sonata_catalog_category',
-                    'routeParameters' => array(
+                    'routeParameters' => [
                         'category_id' => $category->getId(),
                         'category_slug' => $category->getSlug(),
-                    ),
-                ));
+                    ],
+                ]);
             }
         }
 
         if ($product) {
-            $menu->addChild($product->getName(), array(
+            $menu->addChild($product->getName(), [
                 'route' => 'sonata_product_view',
-                'routeParameters' => array(
+                'routeParameters' => [
                     'productId' => $product->getId(),
                     'slug' => $product->getSlug(),
-                ),
-            ));
+                ],
+            ]);
         }
 
         return $menu;

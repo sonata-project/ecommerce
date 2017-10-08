@@ -46,7 +46,7 @@ class PassPaymentTest extends PHPUnit_Framework_TestCase
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
         $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback(array($this, 'callback')));
+        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
         $transaction->expects($this->once())->method('setTransactionId');
 
         $date = new \DateTime();

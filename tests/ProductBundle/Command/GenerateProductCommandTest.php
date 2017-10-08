@@ -33,17 +33,17 @@ class GenerateProductCommandTest extends PHPUnit_Framework_TestCase
         $cmdTester = new CommandTester($cmd);
 
         try {
-            $cmdTester->execute(array('command' => $cmd->getName()));
+            $cmdTester->execute(['command' => $cmd->getName()]);
             $this->fail('The command without arguments should throw a \RuntimeException');
         } catch (\Exception $e) {
             $this->assertInstanceOf('\RuntimeException', $e);
         }
 
         try {
-            $cmdTester->execute(array(
+            $cmdTester->execute([
                 'command' => $cmd->getName(),
                 'product' => 'Test',
-            ));
+            ]);
             $this->fail('The command without "service_id" argument should throw a \RuntimeException');
         } catch (\Exception $e) {
             $this->assertInstanceOf('\RuntimeException', $e);

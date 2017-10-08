@@ -33,7 +33,7 @@ class ProductMenuBuilderTest extends PHPUnit_Framework_TestCase
 
         $categoryManager->expects($this->once())
             ->method('getCategoryTree')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $builder = new ProductMenuBuilder($factory, $categoryManager, $router);
 
@@ -60,7 +60,7 @@ class ProductMenuBuilderTest extends PHPUnit_Framework_TestCase
 
         $productProvider->expects($this->once())
             ->method('getFilters')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $genMenu = $builder->createFiltersMenu($productProvider);
 

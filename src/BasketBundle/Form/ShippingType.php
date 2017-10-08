@@ -66,7 +66,7 @@ class ShippingType extends AbstractType
             throw new UndeliverableCountryException($basket->getDeliveryAddress());
         }
 
-        $choices = array();
+        $choices = [];
         foreach ($methods as $method) {
             $choices[$method->getCode()] = $method->getName();
         }
@@ -76,10 +76,10 @@ class ShippingType extends AbstractType
         $method = $basket->getDeliveryMethod() ?: current($methods);
         $basket->setDeliveryMethod($method ?: null);
 
-        $sub = $builder->create('deliveryMethod', $choiceType, array(
+        $sub = $builder->create('deliveryMethod', $choiceType, [
             'expanded' => true,
             'choice_list' => new SimpleChoiceList($choices),
-        ));
+        ]);
 
         $sub->addViewTransformer(new DeliveryMethodTransformer($this->deliveryPool), true);
 

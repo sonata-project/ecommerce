@@ -49,10 +49,10 @@ class VariationChoiceType extends AbstractType
         $choices = $this->pool->getProvider($options['product'])->getVariationsChoices($options['product'], $options['fields']);
 
         foreach ($choices as $choiceTitle => $choiceValues) {
-            $choiceOptions = array(
+            $choiceOptions = [
                 'label' => sprintf('form_%s', $choiceTitle),
                 'translation_domain' => 'SonataProductBundle',
-            );
+            ];
             // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
             if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
                 $choiceValues = array_flip($choiceValues);
@@ -76,15 +76,15 @@ class VariationChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'field_options' => array(),
+        $resolver->setDefaults([
+            'field_options' => [],
             'product' => null,
             'fields' => null,
             'csrf_protection' => false,
             'method' => 'GET',
-        ));
+        ]);
 
-        $resolver->setRequired(array('product', 'fields'));
+        $resolver->setRequired(['product', 'fields']);
     }
 
     /**

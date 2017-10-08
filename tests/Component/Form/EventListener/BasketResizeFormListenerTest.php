@@ -22,10 +22,10 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetSubscribedEvents()
     {
-        $expected = array(
+        $expected = [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT => 'preBind',
-        );
+        ];
 
         $this->assertEquals($expected, BasketResizeFormListener::getSubscribedEvents());
     }
@@ -135,7 +135,7 @@ class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
         return $form;
     }
 
-    protected function getBasketElements($elements = array())
+    protected function getBasketElements($elements = [])
     {
         if (!is_array($elements)) {
             return $elements;

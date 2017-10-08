@@ -38,8 +38,8 @@ class SonataInvoiceBundle extends Bundle
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping(array(
+        FormHelper::registerFormTypeMapping([
             'sonata_invoice_status' => 'Sonata\InvoiceBundle\Form\Type\InvoiceStatusType',
-        ));
+        ]);
     }
 }

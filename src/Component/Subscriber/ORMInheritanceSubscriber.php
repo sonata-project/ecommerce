@@ -20,7 +20,7 @@ class ORMInheritanceSubscriber implements EventSubscriber
     /**
      * @var array
      */
-    protected $map = array();
+    protected $map = [];
     protected $productClass;
 
     /**
@@ -38,9 +38,9 @@ class ORMInheritanceSubscriber implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             'loadClassMetadata',
-        );
+        ];
     }
 
     /**
@@ -54,7 +54,7 @@ class ORMInheritanceSubscriber implements EventSubscriber
             return;
         }
 
-        $metadata->setDiscriminatorColumn(array('name' => 'product_type', 'type' => 'string', 'length' => 64));
+        $metadata->setDiscriminatorColumn(['name' => 'product_type', 'type' => 'string', 'length' => 64]);
         $metadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_SINGLE_TABLE);
         $metadata->setDiscriminatorMap($this->map);
     }

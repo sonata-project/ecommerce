@@ -94,9 +94,9 @@ class ProductController
      */
     public function getProductsAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedCriteria = array(
+        $supportedCriteria = [
             'enabled' => '',
-        );
+        ];
 
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -110,9 +110,9 @@ class ProductController
         }
 
         if (!$sort) {
-            $sort = array();
+            $sort = [];
         } elseif (!is_array($sort)) {
-            $sort = array($sort => 'asc');
+            $sort = [$sort => 'asc'];
         }
 
         return $this->productManager->getPager($criteria, $page, $limit, $sort);
@@ -235,10 +235,10 @@ class ProductController
         try {
             $manager->delete($product);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(array('error' => $e->getMessage()), 400);
+            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
         }
 
-        return array('deleted' => true);
+        return ['deleted' => true];
     }
 
     /**
@@ -435,11 +435,11 @@ class ProductController
             throw new NotFoundHttpException($e->getMessage(), $e);
         }
 
-        $form = $this->formFactory->createNamed(null, 'sonata_product_api_form_product', $product, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_product_api_form_product', $product, [
             'csrf_protection' => false,
             'data_class' => $manager->getClass(),
             'provider_name' => $provider,
-        ));
+        ]);
 
         $form->handleRequest($request);
 
@@ -454,12 +454,12 @@ class ProductController
             // BC for FOSRestBundle < 2.0
             if (method_exists($view, 'setSerializationContext')) {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             } else {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $context->setMaxDepth(0);
                 $view->setContext($context);
             }
@@ -481,7 +481,7 @@ class ProductController
      */
     protected function getProduct($id)
     {
-        $product = $this->productManager->findOneBy(array('id' => $id));
+        $product = $this->productManager->findOneBy(['id' => $id]);
 
         if (null === $product) {
             throw new NotFoundHttpException(sprintf('Product (%d) not found', $id));

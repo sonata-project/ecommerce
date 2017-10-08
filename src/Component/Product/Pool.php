@@ -16,7 +16,7 @@ class Pool
     /**
      * @var array
      */
-    protected $products = array();
+    protected $products = [];
 
     /**
      * add a delivery method into the pool.

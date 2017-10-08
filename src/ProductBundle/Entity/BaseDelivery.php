@@ -263,13 +263,13 @@ abstract class BaseDelivery implements DeliveryInterface
      */
     public function toArray()
     {
-        return array(
+        return [
             'code' => $this->code,
             'perItem' => $this->perItem,
             'countryCode' => $this->countryCode,
             'zone' => $this->zone,
             'enabled' => $this->enabled,
-        );
+        ];
     }
 
     /**

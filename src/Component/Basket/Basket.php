@@ -32,7 +32,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * @var array
      */
-    protected $positions = array();
+    protected $positions = [];
 
     /**
      * @var int
@@ -102,7 +102,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * @var array
      */
-    protected $options = array();
+    protected $options = [];
 
     /**
      * @var string
@@ -116,7 +116,7 @@ class Basket implements \Serializable, BasketInterface
 
     public function __construct()
     {
-        $this->basketElements = array();
+        $this->basketElements = [];
     }
 
     /**
@@ -260,8 +260,8 @@ class Basket implements \Serializable, BasketInterface
         * We ask the product repository if it can be added to the basket
         */
         $isAddableBehavior = call_user_func_array(
-            array($this->getProductPool()->getProvider($product), 'isAddableToBasket'),
-            array_merge(array($this), func_get_args())
+            [$this->getProductPool()->getProvider($product), 'isAddableToBasket'],
+            array_merge([$this], func_get_args())
         );
 
         return $isAddableBehavior;
@@ -283,12 +283,12 @@ class Basket implements \Serializable, BasketInterface
         $this->paymentMethodCode = null;
 
         if ($full) {
-            $this->basketElements = array();
-            $this->positions = array();
+            $this->basketElements = [];
+            $this->positions = [];
             $this->cptElement = 0;
             $this->customerId = null;
             $this->customer = null;
-            $this->options = array();
+            $this->options = [];
         }
     }
 
@@ -305,7 +305,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function setBasketElements($basketElements)
     {
-        $this->basketElements = array();
+        $this->basketElements = [];
         foreach ($basketElements as $basketElement) {
             $this->addBasketElement($basketElement);
         }
@@ -474,7 +474,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getVatAmounts()
     {
-        $amounts = array();
+        $amounts = [];
 
         foreach ($this->getBasketElements() as $basketElement) {
             $rate = $basketElement->getVatRate();
@@ -482,10 +482,10 @@ class Basket implements \Serializable, BasketInterface
             if (isset($amounts[$rate])) {
                 $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $basketElement->getVatAmount());
             } else {
-                $amounts[$rate] = array(
+                $amounts[$rate] = [
                     'rate' => $rate,
                     'amount' => $basketElement->getVatAmount(),
-                );
+                ];
             }
         }
 
@@ -574,7 +574,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function clean()
     {
-        $elementsToRemove = array();
+        $elementsToRemove = [];
         foreach ($this->getBasketElements() as $basketElement) {
             if ($basketElement->getDelete() || 0 === $basketElement->getQuantity()) {
                 $elementsToRemove[] = $basketElement;
@@ -588,7 +588,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getSerializationFields()
     {
-        $arrayRep = array(
+        $arrayRep = [
             'basketElements' => $this->getBasketElements(),
             'positions' => $this->positions,
             'paymentMethodCode' => $this->paymentMethodCode,
@@ -597,7 +597,7 @@ class Basket implements \Serializable, BasketInterface
             'options' => $this->options,
             'locale' => $this->locale,
             'currency' => $this->currency,
-        );
+        ];
 
         if (null !== $this->deliveryAddressId) {
             $arrayRep['deliveryAddressId'] = $this->deliveryAddressId;
@@ -625,7 +625,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getUnserializationFields()
     {
-        return array(
+        return [
             'basketElements',
             'positions',
             'deliveryAddress',
@@ -640,7 +640,7 @@ class Basket implements \Serializable, BasketInterface
             'options',
             'locale',
             'currency',
-        );
+        ];
     }
 
     /**

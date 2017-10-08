@@ -24,11 +24,11 @@ class ProductFinderTest extends PHPUnit_Framework_TestCase
         $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
         $productManager->expects($this->once())
             ->method('findInSameCollections')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
 
         $finder = new ProductFinder($productManager);
 
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
-        $this->assertEquals(array(), $finder->getCrossSellingSimilarProducts($product));
+        $this->assertEquals([], $finder->getCrossSellingSimilarProducts($product));
     }
 }

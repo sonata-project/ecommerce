@@ -62,13 +62,13 @@ class RecentProductsBlockService extends BaseBlockService
         $products = $this->getProductRepository()
             ->findLastActiveProducts($blockContext->getSetting('number'));
 
-        $params = array(
+        $params = [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
             'products' => $products,
             'currency' => $this->currencyDetector->getCurrency(),
-        );
+        ];
 
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
     }
@@ -86,12 +86,12 @@ class RecentProductsBlockService extends BaseBlockService
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('number', 'integer', array('required' => true)),
-                array('title',  'text',    array('required' => false)),
-            ),
-        ));
+        $formMapper->add('settings', 'sonata_type_immutable_array', [
+            'keys' => [
+                ['number', 'integer', ['required' => true]],
+                ['title',  'text',    ['required' => false]],
+            ],
+        ]);
     }
 
     /**
@@ -107,11 +107,11 @@ class RecentProductsBlockService extends BaseBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'number' => 5,
             'title' => 'Recent products',
             'template' => 'SonataProductBundle:Block:recent_products.html.twig',
-        ));
+        ]);
     }
 
     /**

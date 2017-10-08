@@ -33,7 +33,7 @@ class BasketResizeFormListener implements EventSubscriberInterface
     /**
      * @var array
      */
-    private $removed = array();
+    private $removed = [];
 
     public function __construct(FormFactoryInterface $factory, BasketInterface $basket)
     {
@@ -46,10 +46,10 @@ class BasketResizeFormListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::PRE_SUBMIT => 'preBind',
-        );
+        ];
     }
 
     /**
@@ -91,10 +91,10 @@ class BasketResizeFormListener implements EventSubscriberInterface
         }
 
         foreach ($basketElements as $basketElement) {
-            $basketElementBuilder = $this->factory->createNamedBuilder($basketElement->getPosition(), 'form', $basketElement, array(
+            $basketElementBuilder = $this->factory->createNamedBuilder($basketElement->getPosition(), 'form', $basketElement, [
                 'property_path' => '['.$basketElement->getPosition().']',
                 'auto_initialize' => false,
-            ));
+            ]);
             $basketElementBuilder->setErrorBubbling(false);
 
             $provider = $basketElement->getProductProvider();
