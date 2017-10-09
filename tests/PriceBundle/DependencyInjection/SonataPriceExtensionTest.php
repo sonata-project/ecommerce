@@ -57,8 +57,8 @@ class SonataPriceExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDefaultConfig()
     {
-        return array(array(
+        return [[
             'currency' => 'EUR',
-        ));
+        ]];
     }
 }

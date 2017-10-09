@@ -85,9 +85,9 @@ class CheckPayment extends BasePayment
 
         $this->report($transaction);
 
-        return new Response('ko', 200, array(
+        return new Response('ko', 200, [
             'Content-Type' => 'text/plain',
-        ));
+        ]);
     }
 
     /**
@@ -111,9 +111,9 @@ class CheckPayment extends BasePayment
         $order->setPaymentStatus(TransactionInterface::STATUS_PENDING);
         $order->setValidatedAt($transaction->getCreatedAt());
 
-        return new Response('ok', 200, array(
+        return new Response('ok', 200, [
             'Content-Type' => 'text/plain',
-        ));
+        ]);
     }
 
     /**
@@ -141,11 +141,11 @@ class CheckPayment extends BasePayment
      */
     public function sendbank(OrderInterface $order)
     {
-        $params = array(
+        $params = [
             'bank' => $this->getCode(),
             'reference' => $order->getReference(),
             'check' => $this->generateUrlCheck($order),
-        );
+        ];
 
         // call the callback handler ...
         $url = $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL);
@@ -161,9 +161,9 @@ class CheckPayment extends BasePayment
         }
 
         // redirect the user to the correct page
-        $response = new Response('', 302, array(
+        $response = new Response('', 302, [
             'Location' => $this->router->generate($this->getOption($routeName), $params, UrlGeneratorInterface::ABSOLUTE_URL),
-        ));
+        ]);
         $response->setPrivate();
 
         return $response;

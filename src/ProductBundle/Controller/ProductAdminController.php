@@ -32,12 +32,12 @@ class ProductAdminController extends Controller
         $parameters = $this->admin->getPersistentParameters();
 
         if (!$parameters['provider']) {
-            return $this->render('SonataProductBundle:ProductAdmin:select_provider.html.twig', array(
+            return $this->render('SonataProductBundle:ProductAdmin:select_provider.html.twig', [
                 'providers' => $this->get('sonata.product.pool')->getProducts(),
                 'base_template' => $this->getBaseTemplate(),
                 'admin' => $this->admin,
                 'action' => 'create',
-            ));
+            ]);
         }
 
         return parent::createAction($request);
@@ -56,9 +56,9 @@ class ProductAdminController extends Controller
             throw new NotFoundHttpException('Product not found.');
         }
 
-        return $this->render('SonataProductBundle:ProductAdmin:variations.html.twig', array(
+        return $this->render('SonataProductBundle:ProductAdmin:variations.html.twig', [
             'product' => $product,
-        ));
+        ]);
     }
 
     /**

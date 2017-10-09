@@ -44,7 +44,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @var array
      */
-    protected $parameters = array();
+    protected $parameters = [];
 
     /**
      * @var string
@@ -205,7 +205,7 @@ class BaseTransaction implements TransactionInterface
      */
     public static function getStatusList()
     {
-        return array(
+        return [
             TransactionInterface::STATUS_ORDER_UNKNOWN => 'order_unknown',
             TransactionInterface::STATUS_OPEN => 'open',
             TransactionInterface::STATUS_PENDING => 'pending',
@@ -216,7 +216,7 @@ class BaseTransaction implements TransactionInterface
             TransactionInterface::STATUS_WRONG_CALLBACK => 'wrong_callback',
             TransactionInterface::STATUS_WRONG_REQUEST => 'wrong_request',
             TransactionInterface::STATUS_ORDER_NOT_OPEN => 'order_to_open',
-        );
+        ];
     }
 
     /**
@@ -292,7 +292,7 @@ class BaseTransaction implements TransactionInterface
      */
     protected function cleanupEncoding(array $toDecode)
     {
-        $decodedParams = array();
+        $decodedParams = [];
         foreach ($toDecode as $key => $value) {
             $decodedValue = is_array($value) ? $this->cleanupEncoding($value) : (mb_check_encoding($value, 'UTF-8') ? $value : utf8_encode($value));
             $decodedParams[mb_check_encoding($key, 'UTF-8') ? $key : utf8_encode($key)] = $decodedValue;

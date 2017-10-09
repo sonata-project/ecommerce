@@ -106,10 +106,10 @@ class PaymentHandler implements PaymentHandlerInterface
         $event = new PaymentEvent($order, $transaction);
         $this->getEventDispatcher()->dispatch(PaymentEvents::POST_ERROR, $event);
 
-        $this->notificationBackend->createAndPublish('sonata_payment_order_process', array(
+        $this->notificationBackend->createAndPublish('sonata_payment_order_process', [
             'order_id' => $order->getId(),
             'transaction_id' => $transaction->getId(),
-        ));
+        ]);
 
         return $order;
     }
@@ -171,10 +171,10 @@ class PaymentHandler implements PaymentHandlerInterface
         $event = new PaymentEvent($order, $transaction, $response);
         $this->getEventDispatcher()->dispatch(PaymentEvents::POST_CALLBACK, $event);
 
-        $this->notificationBackend->createAndPublish('sonata_payment_order_process', array(
+        $this->notificationBackend->createAndPublish('sonata_payment_order_process', [
             'order_id' => $order->getId(),
             'transaction_id' => $transaction->getId(),
-        ));
+        ]);
 
         return $response;
     }
@@ -208,9 +208,9 @@ class PaymentHandler implements PaymentHandlerInterface
             throw new InvalidTransactionException();
         }
 
-        $order = $this->orderManager->findOneby(array(
+        $order = $this->orderManager->findOneby([
             'reference' => $reference,
-        ));
+        ]);
 
         if (!$order) {
             throw new EntityNotFoundException(sprintf('Order %s', $reference));

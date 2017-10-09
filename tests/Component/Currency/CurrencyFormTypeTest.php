@@ -36,7 +36,7 @@ class CurrencyFormTypeTest extends PHPUnit_Framework_TestCase
         $formBuilder->expects($this->once())
             ->method('addModelTransformer');
 
-        $this->currencyFormType->buildForm($formBuilder, array());
+        $this->currencyFormType->buildForm($formBuilder, []);
     }
 
     public function testGetParent()

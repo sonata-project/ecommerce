@@ -32,7 +32,7 @@ class SerializeDataTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (!$value) {
-            return array();
+            return [];
         }
 
         return unserialize($value);

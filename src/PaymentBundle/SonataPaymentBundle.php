@@ -38,8 +38,8 @@ class SonataPaymentBundle extends Bundle
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping(array(
+        FormHelper::registerFormTypeMapping([
             'sonata_payment_transaction_status' => 'Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType',
-        ));
+        ]);
     }
 }

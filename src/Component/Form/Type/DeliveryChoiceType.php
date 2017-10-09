@@ -59,14 +59,14 @@ class DeliveryChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $choices = array();
+        $choices = [];
 
         foreach ($this->pool->getMethods() as $name => $instance) {
             $choices[$name] = $instance->getName();
         }
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'choices' => $choices,
-        ));
+        ]);
     }
 }

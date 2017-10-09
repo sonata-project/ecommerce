@@ -67,19 +67,19 @@ class SimilarProductsBlockService extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        if (!$product = $this->getProductRepository()->findOneBy(array('id' => $blockContext->getSetting('base_product_id')))) {
+        if (!$product = $this->getProductRepository()->findOneBy(['id' => $blockContext->getSetting('base_product_id')])) {
             return;
         }
 
         $products = $this->getProductFinder()->getCrossSellingSimilarParentProducts($product, $blockContext->getSetting('number'));
 
-        $params = array(
+        $params = [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
             'products' => $products,
             'currency' => $this->currencyDetector->getCurrency(),
-        );
+        ];
 
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
     }
@@ -97,13 +97,13 @@ class SimilarProductsBlockService extends BaseBlockService
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
-            'keys' => array(
-                array('number',          'integer', array('required' => true)),
-                array('title',           'text',    array('required' => false)),
-                array('base_product_id', 'integer', array('required' => false)),
-            ),
-        ));
+        $formMapper->add('settings', 'sonata_type_immutable_array', [
+            'keys' => [
+                ['number',          'integer', ['required' => true]],
+                ['title',           'text',    ['required' => false]],
+                ['base_product_id', 'integer', ['required' => false]],
+            ],
+        ]);
     }
 
     /**
@@ -119,12 +119,12 @@ class SimilarProductsBlockService extends BaseBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'number' => 5,
             'title' => 'Similar products',
             'base_product_id' => null,
             'template' => 'SonataProductBundle:Block:similar_products.html.twig',
-        ));
+        ]);
     }
 
     /**

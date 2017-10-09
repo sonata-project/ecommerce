@@ -38,11 +38,11 @@ class SonataCustomerBundle extends Bundle
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping(array(
+        FormHelper::registerFormTypeMapping([
             'sonata_customer_address' => 'Sonata\CustomerBundle\Form\Type\AddressType',
             'sonata_customer_address_types' => 'Sonata\CustomerBundle\Form\Type\AddressTypeType',
             'sonata_customer_api_form_customer' => 'Sonata\CustomerBundle\Form\Type\ApiCustomerType',
             'sonata_customer_api_form_address' => 'Sonata\CustomerBundle\Form\Type\ApiAddressType',
-        ));
+        ]);
     }
 }

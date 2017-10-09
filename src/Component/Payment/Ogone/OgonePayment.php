@@ -76,7 +76,7 @@ class OgonePayment extends BasePayment
      */
     public function isRequestValid(TransactionInterface $transaction)
     {
-        $params = array(
+        $params = [
                 'orderID' => $transaction->get('orderID'),
                 'currency' => $transaction->get('currency'),
                 'amount' => $transaction->get('amount'),
@@ -91,7 +91,7 @@ class OgonePayment extends BasePayment
                 'NCERROR' => $transaction->get('NCERROR'),
                 'BRAND' => $transaction->get('BRAND'),
                 'IP' => $transaction->get('IP'),
-        );
+        ];
 
         $sha1 = $this->getShaSign($params, true);
 
@@ -111,9 +111,9 @@ class OgonePayment extends BasePayment
 
         $this->report($transaction);
 
-        return new Response('ko', 200, array(
+        return new Response('ko', 200, [
             'Content-Type' => 'text/plain',
-        ));
+        ]);
     }
 
     /**
@@ -158,12 +158,12 @@ class OgonePayment extends BasePayment
      */
     public function sendbank(OrderInterface $order)
     {
-        return $this->templating->renderResponse($this->getOption('template'), array(
+        return $this->templating->renderResponse($this->getOption('template'), [
             'form_url' => $this->getOption('form_url'),
             'shasign' => $this->getShaSign($this->getFormParameters($order)),
             'fields' => $this->getFormParameters($order),
             'debug' => $this->debug,
-        ));
+        ]);
     }
 
     /**
@@ -238,7 +238,7 @@ class OgonePayment extends BasePayment
      */
     protected function getFormParameters(OrderInterface $order)
     {
-        return array(
+        return [
             'PSPID' => $this->getOption('pspid'),
             'orderId' => $order->getReference(),
             'amount' => $order->getTotalInc() * 100,
@@ -269,7 +269,7 @@ class OgonePayment extends BasePayment
             'cancelurl' => $this->generateAbsoluteUrlFromOption('url_return_ko', $order),
 
             'operation' => $this->getOperation(),
-        );
+        ];
     }
 
     /**
@@ -282,11 +282,11 @@ class OgonePayment extends BasePayment
     {
         return $this->router->generate(
             $this->getOption($optionKey),
-            array(
+            [
                 'bank' => $this->getCode(),
                 'reference' => $order->getReference(),
                 'check' => $this->generateUrlCheck($order),
-            ),
+            ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

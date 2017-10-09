@@ -37,11 +37,11 @@ class CustomerController extends Controller
         $typeCodes = BaseAddress::getTypesList();
 
         // This allows to specify the display order
-        $addresses = array(
-            $typeCodes[AddressInterface::TYPE_DELIVERY] => array(),
-            $typeCodes[AddressInterface::TYPE_BILLING] => array(),
-            $typeCodes[AddressInterface::TYPE_CONTACT] => array(),
-        );
+        $addresses = [
+            $typeCodes[AddressInterface::TYPE_DELIVERY] => [],
+            $typeCodes[AddressInterface::TYPE_BILLING] => [],
+            $typeCodes[AddressInterface::TYPE_CONTACT] => [],
+        ];
 
         if (null === $customer) {
             // Customer not yet created, the user didn't order yet
@@ -49,7 +49,7 @@ class CustomerController extends Controller
             $customer->setUser($this->getUser());
             $this->getCustomerManager()->save($customer);
         } else {
-            $custAddresses = $this->getAddressManager()->findBy(array('customer' => $customer));
+            $custAddresses = $this->getAddressManager()->findBy(['customer' => $customer]);
 
             foreach ($custAddresses as $address) {
                 $addresses[$address->getTypeCode()][] = $address;
@@ -59,11 +59,11 @@ class CustomerController extends Controller
         // Set redirection URL to be to the list of addresses
         $this->get('session')->set('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
 
-        return $this->render('SonataCustomerBundle:Addresses:list.html.twig', array(
+        return $this->render('SonataCustomerBundle:Addresses:list.html.twig', [
                 'addresses' => $addresses,
                 'customer' => $customer,
                 'breadcrumb_context' => 'customer_address',
-            ));
+            ]);
     }
 
     /**
@@ -98,10 +98,10 @@ class CustomerController extends Controller
     public function deleteAddressAction($id)
     {
         if ($this->getRequest()->getMethod() !== 'POST') {
-            throw new MethodNotAllowedHttpException(array('POST'));
+            throw new MethodNotAllowedHttpException(['POST']);
         }
 
-        $address = $this->getAddressManager()->findOneBy(array('id' => $id));
+        $address = $this->getAddressManager()->findOneBy(['id' => $id]);
 
         $this->checkAddress($address);
 
@@ -121,7 +121,7 @@ class CustomerController extends Controller
      */
     public function setCurrentAddressAction($id)
     {
-        $address = $this->getAddressManager()->findOneBy(array('id' => $id));
+        $address = $this->getAddressManager()->findOneBy(['id' => $id]);
         $this->checkAddress($address);
 
         $this->getAddressManager()->setCurrent($address);
@@ -150,12 +150,12 @@ class CustomerController extends Controller
         if (null === $id) {
             $form = $this->createForm($addressFormType);
         } else {
-            $address = $this->getAddressManager()->findOneBy(array('id' => $id));
+            $address = $this->getAddressManager()->findOneBy(['id' => $id]);
             $this->checkAddress($address);
 
-            $form = $this->createForm($addressFormType, $address, array(
+            $form = $this->createForm($addressFormType, $address, [
                 'context' => $this->getRequest()->query->get('context'),
-            ));
+            ]);
         }
 
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
@@ -178,10 +178,10 @@ class CustomerController extends Controller
             }
         }
 
-        return $this->render($template, array(
+        return $this->render($template, [
             'form' => $form->createView(),
             'breadcrumb_context' => 'customer_address',
-        ));
+        ]);
     }
 
     /**
@@ -206,7 +206,7 @@ class CustomerController extends Controller
     {
         $user = $this->getUser();
 
-        return $this->getCustomerManager()->findOneBy(array('user' => $user));
+        return $this->getCustomerManager()->findOneBy(['user' => $user]);
     }
 
     /**

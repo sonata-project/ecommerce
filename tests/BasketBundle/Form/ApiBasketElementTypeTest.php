@@ -27,6 +27,6 @@ class ApiBasketElementTypeTest extends PHPUnit_Framework_TestCase
         $builder->expects($this->once())->method('create')->will($this->returnSelf());
         $builder->expects($this->once())->method('addModelTransformer');
 
-        $type->buildForm($builder, array());
+        $type->buildForm($builder, []);
     }
 }

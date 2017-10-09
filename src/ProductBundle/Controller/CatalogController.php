@@ -37,7 +37,7 @@ class CatalogController extends Controller
         $filter = $this->getRequest()->get('filter');
         $option = $this->getRequest()->get('option');
 
-        if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
+        if (!in_array($displayMode, ['grid'])) { // "list" mode will be added later
             throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
         }
 
@@ -48,13 +48,13 @@ class CatalogController extends Controller
         $pager = $this->get('knp_paginator');
         $pagination = $pager->paginate($this->getProductSetManager()->getCategoryActiveProductsQueryBuilder($category, $filter, $option), $page, $displayMax);
 
-        return $this->render('SonataProductBundle:Catalog:index.html.twig', array(
+        return $this->render('SonataProductBundle:Catalog:index.html.twig', [
             'display_mode' => $displayMode,
             'pager' => $pagination,
             'currency' => $this->getCurrencyDetector()->getCurrency(),
             'category' => $category,
             'provider' => $this->getProviderFromCategory($category),
-        ));
+        ]);
     }
 
     /**
@@ -71,10 +71,10 @@ class CatalogController extends Controller
             return;
         }
 
-        return $this->getCategoryManager()->findOneBy(array(
+        return $this->getCategoryManager()->findOneBy([
             'id' => $categoryId,
             'enabled' => true,
-        ));
+        ]);
     }
 
     /**

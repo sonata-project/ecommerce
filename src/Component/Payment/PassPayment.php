@@ -86,9 +86,9 @@ class PassPayment extends BasePayment
      */
     public function handleError(TransactionInterface $transaction)
     {
-        return new Response('ko', 200, array(
+        return new Response('ko', 200, [
             'Content-Type' => 'text/plain',
-        ));
+        ]);
     }
 
     /**
@@ -111,9 +111,9 @@ class PassPayment extends BasePayment
         $order->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
         $order->setValidatedAt($transaction->getCreatedAt());
 
-        return new Response('ok', 200, array(
+        return new Response('ok', 200, [
             'Content-Type' => 'text/plain',
-        ));
+        ]);
     }
 
     /**
@@ -140,11 +140,11 @@ class PassPayment extends BasePayment
      */
     public function sendbank(OrderInterface $order)
     {
-        $params = array(
+        $params = [
             'bank' => $this->getCode(),
             'reference' => $order->getReference(),
             'check' => $this->generateUrlCheck($order),
-        );
+        ];
 
         // call the callback handler ...
         $url = $this->router->generate($this->getOption('url_callback'), $params, UrlGeneratorInterface::ABSOLUTE_URL);
@@ -154,10 +154,10 @@ class PassPayment extends BasePayment
         $routeName = $response->getContent() == 'ok' ? 'url_return_ok' : 'url_return_ko';
 
         // redirect the user to the correct page
-        $response = new Response('', 302, array(
+        $response = new Response('', 302, [
             'Location' => $this->router->generate($this->getOption($routeName), $params, UrlGeneratorInterface::ABSOLUTE_URL),
             'Content-Type' => 'text/plain',
-        ));
+        ]);
 
         $response->setPrivate();
 

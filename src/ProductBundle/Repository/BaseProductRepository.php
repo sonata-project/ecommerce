@@ -42,9 +42,9 @@ class BaseProductRepository extends EntityRepository
             ->andWhere('pv.price != 0 or pv.price IS NULL')
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults($limit)
-            ->setParameters(array(
+            ->setParameters([
                 'enabled' => true,
-            ))
+            ])
             ->getQuery()
             ->execute();
     }

@@ -45,7 +45,7 @@ class Product extends BaseProduct
 
     public function getElementOptions()
     {
-        return array();
+        return [];
     }
 
     public function getId()
@@ -158,7 +158,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
         $product->setEnabled(true);
         $this->assertTrue($product->isSalable());
 
-        $product->setVariations(new ArrayCollection(array(new Product())));
+        $product->setVariations(new ArrayCollection([new Product()]));
         $this->assertFalse($product->isSalable());
     }
 
@@ -168,7 +168,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $provider->getOptions());
         $this->assertNull($provider->getOption('foo'));
-        $provider->setOptions(array('foo' => 'bar'));
+        $provider->setOptions(['foo' => 'bar']);
 
         $this->assertEquals('bar', $provider->getOption('foo'));
     }
@@ -179,7 +179,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
         $product->expects($this->any())->method('getId')->will($this->returnValue(42));
         $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
         $product->expects($this->any())->method('getPrice')->will($this->returnValue(9.99));
-        $product->expects($this->any())->method('getOptions')->will($this->returnValue(array('foo' => 'bar')));
+        $product->expects($this->any())->method('getOptions')->will($this->returnValue(['foo' => 'bar']));
         $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
 
         $productProvider = new ProductProviderTest($this->createMock('JMS\Serializer\SerializerInterface'));
@@ -208,19 +208,19 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEmpty($provider->getVariationFields());
 
-        $provider->setVariationFields(array('name', 'price'));
+        $provider->setVariationFields(['name', 'price']);
 
         $this->assertTrue($provider->hasVariationFields());
         $this->assertTrue($provider->isVariateBy('name'));
         $this->assertFalse($provider->isVariateBy('fake'));
         $this->assertNotEmpty($provider->getVariationFields());
-        $this->assertEquals(array('name', 'price'), $provider->getVariationFields());
+        $this->assertEquals(['name', 'price'], $provider->getVariationFields());
     }
 
     public function testVariationCreation()
     {
         $provider = $this->getBaseProvider();
-        $provider->setVariationFields(array('name', 'price'));
+        $provider->setVariationFields(['name', 'price']);
 
         $product = new Product();
         $product->id = 2;
@@ -249,7 +249,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($variation2->getPackages()));
         $this->assertEquals(1, count($variation2->getDeliveries()));
 
-        $provider->setVariationFields(array('packages', 'productCollections', 'productCategories', 'deliveries'));
+        $provider->setVariationFields(['packages', 'productCollections', 'productCategories', 'deliveries']);
 
         $variation3 = $provider->createVariation($product, true);
 
@@ -262,7 +262,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
     public function testProductDataSynchronization()
     {
         $provider = $this->getBaseProvider();
-        $provider->setVariationFields(array('price'));
+        $provider->setVariationFields(['price']);
 
         $product = new Product();
         $product->id = 2;
@@ -465,7 +465,7 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
     {
         $product = new Product();
 
-        $arrayProduct = array(
+        $arrayProduct = [
             'sku' => 'productSku',
             'slug' => 'productslug',
             'name' => 'productName',
@@ -479,8 +479,8 @@ class BaseProductServiceTest extends PHPUnit_Framework_TestCase
             'vatRate' => 678.90,
             'stock' => 12345,
             'enabled' => 1,
-            'options' => array('key1' => 'value1', 'key2' => array('value2', 'value3')),
-        );
+            'options' => ['key1' => 'value1', 'key2' => ['value2', 'value3']],
+        ];
 
         $product->fromArray($arrayProduct);
 

@@ -60,10 +60,10 @@ class OrderController
      */
     public function getOrdersAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedCriteria = array(
+        $supportedCriteria = [
             'status' => '',
             'customer' => '',
-        );
+        ];
 
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -77,9 +77,9 @@ class OrderController
         }
 
         if (!$sort) {
-            $sort = array();
+            $sort = [];
         } elseif (!is_array($sort)) {
-            $sort = array($sort => 'asc');
+            $sort = [$sort => 'asc'];
         }
 
         return $this->orderManager->getPager($criteria, $page, $limit, $sort);
@@ -146,7 +146,7 @@ class OrderController
      */
     protected function getOrder($id)
     {
-        $order = $this->orderManager->findOneBy(array('id' => $id));
+        $order = $this->orderManager->findOneBy(['id' => $id]);
 
         if (null === $order) {
             throw new NotFoundHttpException(sprintf('Order (%d) not found', $id));

@@ -63,7 +63,7 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()
             ->createQueryBuilder('a')
@@ -76,13 +76,13 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
             }
         }
         if (count($sort) == 0) {
-            $sort = array('name' => 'ASC');
+            $sort = ['name' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
             $query->orderBy(sprintf('a.%s', $field), strtoupper($direction));
         }
 
-        $parameters = array();
+        $parameters = [];
 
         if (isset($criteria['customer'])) {
             $query->innerJoin('a.customer', 'c', 'WITH', 'c.id = :customer');

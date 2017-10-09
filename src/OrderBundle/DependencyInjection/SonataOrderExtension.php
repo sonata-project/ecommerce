@@ -84,62 +84,62 @@ class SonataOrderExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        $collector->addAssociation($config['class']['order'], 'mapOneToMany', array(
+        $collector->addAssociation($config['class']['order'], 'mapOneToMany', [
             'fieldName' => 'orderElements',
             'targetEntity' => $config['class']['order_element'],
-            'cascade' => array(
+            'cascade' => [
                  'persist',
-            ),
+            ],
             'mappedBy' => 'order',
             'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['order'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['order'], 'mapManyToOne', [
            'fieldName' => 'customer',
            'targetEntity' => $config['class']['customer'],
-           'cascade' => array(),
+           'cascade' => [],
            'mappedBy' => null,
            'inversedBy' => 'orders',
-           'joinColumns' => array(
-                array(
+           'joinColumns' => [
+                [
                     'name' => 'customer_id',
                     'referencedColumnName' => 'id',
                     'onDelete' => 'SET NULL',
-                ),
-           ),
+                ],
+           ],
            'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['order_element'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['order_element'], 'mapManyToOne', [
             'fieldName' => 'order',
             'targetEntity' => $config['class']['order'],
-            'cascade' => array(),
+            'cascade' => [],
             'mappedBy' => null,
             'inversedBy' => null,
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                     'name' => 'order_id',
                     'referencedColumnName' => 'id',
                     'onDelete' => 'CASCADE',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addIndex($config['class']['order_element'], 'product_type', array(
+        $collector->addIndex($config['class']['order_element'], 'product_type', [
             'product_type',
-        ));
+        ]);
 
-        $collector->addIndex($config['class']['order_element'], 'order_element_status', array(
+        $collector->addIndex($config['class']['order_element'], 'order_element_status', [
             'status',
-        ));
+        ]);
 
-        $collector->addIndex($config['class']['order'], 'order_status', array(
+        $collector->addIndex($config['class']['order'], 'order_status', [
             'status',
-        ));
+        ]);
 
-        $collector->addIndex($config['class']['order'], 'payment_status', array(
+        $collector->addIndex($config['class']['order'], 'payment_status', [
             'payment_status',
-        ));
+        ]);
     }
 }

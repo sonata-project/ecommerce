@@ -29,9 +29,9 @@ class AddProductProviderCompilerPass implements CompilerPassInterface
         $pool = $container->getDefinition('sonata.product.pool');
 
         $calls = $pool->getMethodCalls();
-        $pool->setMethodCalls(array());
+        $pool->setMethodCalls([]);
 
-        $map = array();
+        $map = [];
         foreach ($calls as $method => $arguments) {
             if ($arguments[0] !== '__hack') {
                 $pool->addMethodCall($arguments[0], $arguments[1]);
@@ -41,25 +41,25 @@ class AddProductProviderCompilerPass implements CompilerPassInterface
 
             foreach ($arguments[1] as $code => $options) {
                 // define a new ProductDefinition
-                $definition = new Definition('Sonata\Component\Product\ProductDefinition', array(new Reference($options['provider']), new Reference($options['manager'])));
+                $definition = new Definition('Sonata\Component\Product\ProductDefinition', [new Reference($options['provider']), new Reference($options['manager'])]);
                 $definition->setPublic(false);
                 $container->setDefinition($code, $definition);
 
-                $container->getDefinition($options['provider'])->addMethodCall('setCode', array($code));
+                $container->getDefinition($options['provider'])->addMethodCall('setCode', [$code]);
 
-                $pool->addMethodCall('addProduct', array($code, new Reference($code)));
+                $pool->addMethodCall('addProduct', [$code, new Reference($code)]);
 
                 $map[$code] = $container->getDefinition($options['manager'])->getArgument(0);
 
-                $container->getDefinition($options['provider'])->addMethodCall('setBasketElementManager', array(new Reference('sonata.basket_element.manager')));
-                $container->getDefinition($options['provider'])->addMethodCall('setCurrencyPriceCalculator', array(new Reference('sonata.price.currency.calculator')));
-                $container->getDefinition($options['provider'])->addMethodCall('setProductCategoryManager', array(new Reference('sonata.product_category.product')));
-                $container->getDefinition($options['provider'])->addMethodCall('setProductCollectionManager', array(new Reference('sonata.product_collection.product')));
-                $container->getDefinition($options['provider'])->addMethodCall('setOrderElementClassName', array($container->getParameter('sonata.order.order_element.class')));
-                $container->getDefinition($options['provider'])->addMethodCall('setEventDispatcher', array(new Reference('event_dispatcher')));
+                $container->getDefinition($options['provider'])->addMethodCall('setBasketElementManager', [new Reference('sonata.basket_element.manager')]);
+                $container->getDefinition($options['provider'])->addMethodCall('setCurrencyPriceCalculator', [new Reference('sonata.price.currency.calculator')]);
+                $container->getDefinition($options['provider'])->addMethodCall('setProductCategoryManager', [new Reference('sonata.product_category.product')]);
+                $container->getDefinition($options['provider'])->addMethodCall('setProductCollectionManager', [new Reference('sonata.product_collection.product')]);
+                $container->getDefinition($options['provider'])->addMethodCall('setOrderElementClassName', [$container->getParameter('sonata.order.order_element.class')]);
+                $container->getDefinition($options['provider'])->addMethodCall('setEventDispatcher', [new Reference('event_dispatcher')]);
 
                 if (array_key_exists('variations', $options)) {
-                    $container->getDefinition($options['provider'])->addMethodCall('setVariationFields', array($options['variations']['fields']));
+                    $container->getDefinition($options['provider'])->addMethodCall('setVariationFields', [$options['variations']['fields']]);
                 }
             }
         }

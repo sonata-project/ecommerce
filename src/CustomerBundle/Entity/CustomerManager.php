@@ -21,7 +21,7 @@ class CustomerManager extends BaseEntityManager implements CustomerManagerInterf
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()
             ->createQueryBuilder('c')
@@ -34,13 +34,13 @@ class CustomerManager extends BaseEntityManager implements CustomerManagerInterf
             }
         }
         if (count($sort) == 0) {
-            $sort = array('lastname' => 'ASC');
+            $sort = ['lastname' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
             $query->orderBy(sprintf('c.%s', $field), strtoupper($direction));
         }
 
-        $parameters = array();
+        $parameters = [];
 
         if (isset($criteria['is_fake'])) {
             $query->andWhere('c.isFake = :isFake');

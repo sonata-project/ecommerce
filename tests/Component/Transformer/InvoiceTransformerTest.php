@@ -30,7 +30,7 @@ class InvoiceTransformerTest extends PHPUnit_Framework_TestCase
         $orderElement->expects($this->once())->method('getVatRate');
 
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
-        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue(array($orderElement)));
+        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElement]));
         $order->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
         $order->expects($this->once())->method('getBillingAddress1');

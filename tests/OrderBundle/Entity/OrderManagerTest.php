@@ -86,15 +86,15 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
                     $self->equalTo('o.reference'),
                     $self->equalTo('ASC')
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1);
+            ->getPager([], 1);
     }
 
     /**
@@ -107,7 +107,7 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $this
             ->getOrderManager(function ($qb) use ($self) {
             })
-            ->getPager(array(), 1, 10, array('invalid' => 'ASC'));
+            ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
     public function testGetPagerWithMultipleSort()
@@ -115,7 +115,7 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
                     $self->logicalOr(
@@ -127,12 +127,12 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
                         $self->equalTo('DESC')
                     )
                 );
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array()));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo([]));
             })
-            ->getPager(array(), 1, 10, array(
+            ->getPager([], 1, 10, [
                 'reference' => 'ASC',
                 'username' => 'DESC',
-            ));
+            ]);
     }
 
     public function testGetPagerWithOpenOrders()
@@ -140,11 +140,11 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_OPEN)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_OPEN]));
             })
-            ->getPager(array('status' => BaseOrder::STATUS_OPEN), 1);
+            ->getPager(['status' => BaseOrder::STATUS_OPEN], 1);
     }
 
     public function testGetPagerWithCanceledOrders()
@@ -152,11 +152,11 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_CANCELLED)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_CANCELLED]));
             })
-            ->getPager(array('status' => BaseOrder::STATUS_CANCELLED), 1);
+            ->getPager(['status' => BaseOrder::STATUS_CANCELLED], 1);
     }
 
     public function testGetPagerWithErrorOrders()
@@ -164,11 +164,11 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_ERROR)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_ERROR]));
             })
-            ->getPager(array('status' => BaseOrder::STATUS_ERROR), 1);
+            ->getPager(['status' => BaseOrder::STATUS_ERROR], 1);
     }
 
     public function testGetPagerWithPendingOrders()
@@ -176,11 +176,11 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_PENDING)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_PENDING]));
             })
-            ->getPager(array('status' => BaseOrder::STATUS_PENDING), 1);
+            ->getPager(['status' => BaseOrder::STATUS_PENDING], 1);
     }
 
     public function testGetPagerWithStoppedOrders()
@@ -188,11 +188,11 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_STOPPED)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_STOPPED]));
             })
-            ->getPager(array('status' => BaseOrder::STATUS_STOPPED), 1);
+            ->getPager(['status' => BaseOrder::STATUS_STOPPED], 1);
     }
 
     public function testGetPagerWithValidatedOrders()
@@ -200,20 +200,20 @@ class OrderManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array('o')));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
-                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(array('status' => BaseOrder::STATUS_VALIDATED)));
+                $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_VALIDATED]));
             })
-            ->getPager(array('status' => BaseOrder::STATUS_VALIDATED), 1);
+            ->getPager(['status' => BaseOrder::STATUS_VALIDATED], 1);
     }
 
     protected function getOrderManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array(
+        $em = EntityManagerMockFactory::create($this, $qbCallback, [
             'reference',
             'status',
             'username',
-        ));
+        ]);
 
         $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));

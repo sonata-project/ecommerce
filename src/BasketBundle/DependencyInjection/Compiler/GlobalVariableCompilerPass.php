@@ -27,6 +27,6 @@ class GlobalVariableCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $container->getDefinition('twig')
-            ->addMethodCall('addGlobal', array('sonata_basket', new Reference('sonata.basket.twig.global')));
+            ->addMethodCall('addGlobal', ['sonata_basket', new Reference('sonata.basket.twig.global')]);
     }
 }

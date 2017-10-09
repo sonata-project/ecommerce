@@ -83,47 +83,47 @@ class SonataBasketExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        $collector->addAssociation($config['class']['basket'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['basket'], 'mapManyToOne', [
              'fieldName' => 'customer',
              'targetEntity' => $config['class']['customer'],
-             'cascade' => array(),
+             'cascade' => [],
              'mappedBy' => null,
              'inversedBy' => null,
-             'joinColumns' => array(
-                 array(
+             'joinColumns' => [
+                 [
                      'name' => 'customer_id',
                      'referencedColumnName' => 'id',
                      'onDelete' => 'CASCADE',
                      'unique' => true,
-                 ),
-             ),
+                 ],
+             ],
              'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['basket'], 'mapOneToMany', array(
+        $collector->addAssociation($config['class']['basket'], 'mapOneToMany', [
              'fieldName' => 'basketElements',
              'targetEntity' => $config['class']['basket_element'],
-             'cascade' => array(
+             'cascade' => [
                  'persist',
-             ),
+             ],
              'mappedBy' => 'basket',
              'orphanRemoval' => true,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['basket_element'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['basket_element'], 'mapManyToOne', [
             'fieldName' => 'basket',
             'targetEntity' => $config['class']['basket'],
-            'cascade' => array(),
+            'cascade' => [],
             'mappedBy' => null,
             'inversedBy' => 'basketElements',
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                     'name' => 'basket_id',
                     'referencedColumnName' => 'id',
                     'onDelete' => 'CASCADE',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
     }
 }

@@ -23,13 +23,13 @@ class AddressControllerTest extends PHPUnit_Framework_TestCase
     public function testGetAddressesAction()
     {
         $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
-        $addressManager->expects($this->once())->method('getPager')->will($this->returnValue(array()));
+        $addressManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals(array(), $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
+        $this->assertEquals([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
 
     public function testGetAddressAction()
@@ -138,7 +138,7 @@ class AddressControllerTest extends PHPUnit_Framework_TestCase
 
         $view = $this->createAddressController($address, $addressManager)->deleteAddressAction(1);
 
-        $this->assertEquals(array('deleted' => true), $view);
+        $this->assertEquals(['deleted' => true], $view);
     }
 
     public function testDeleteAddressInvalidAction()

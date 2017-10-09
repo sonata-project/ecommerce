@@ -65,14 +65,14 @@ interface ProductProviderInterface
      * @param bool                                       $showQuantity Specifies if quantity field will be displayed (default true)
      * @param array                                      $options      An options array
      */
-    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = array());
+    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = []);
 
     /**
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @param \Symfony\Component\Form\FormBuilder             $formBuilder
      * @param array                                           $options
      */
-    public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = array());
+    public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = []);
 
     /**
      * return true if the basket element is still valid.
@@ -129,7 +129,7 @@ interface ProductProviderInterface
      *
      * @return bool
      */
-    public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = array());
+    public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = []);
 
     /**
      * @param null|ProductInterface $product
@@ -137,7 +137,7 @@ interface ProductProviderInterface
      *
      * @return BasketElementInterface
      */
-    public function createBasketElement(ProductInterface $product = null, array $options = array());
+    public function createBasketElement(ProductInterface $product = null, array $options = []);
 
     /**
      * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
@@ -169,7 +169,7 @@ interface ProductProviderInterface
      * @param null|\Sonata\Component\Product\ProductInterface $product
      * @param array                                           $options
      */
-    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = array());
+    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []);
 
     /**
      * return an array of errors if any, you can also manipulate the basketElement if require
@@ -303,7 +303,7 @@ interface ProductProviderInterface
      *
      * @return array
      */
-    public function getVariationsChoices(ProductInterface $product, array $fields = array());
+    public function getVariationsChoices(ProductInterface $product, array $fields = []);
 
     /**
      * Gets the properties values of $product amongst variation fields or $fields if set.
@@ -313,7 +313,7 @@ interface ProductProviderInterface
      *
      * @return array
      */
-    public function getVariatedProperties(ProductInterface $product, array $fields = array());
+    public function getVariatedProperties(ProductInterface $product, array $fields = []);
 
     /**
      * Gets the variation matching $choices from master product $product.
@@ -321,7 +321,7 @@ interface ProductProviderInterface
      * @param ProductInterface $product
      * @param array            $choices
      */
-    public function getVariation(ProductInterface $product, array $choices = array());
+    public function getVariation(ProductInterface $product, array $choices = []);
 
     /**
      * Update the stock value of a given Product id.

@@ -77,31 +77,31 @@ class AddressType extends AbstractType
                 }
             }
 
-            $builder->add('addresses', $entityType, array(
+            $builder->add('addresses', $entityType, [
                 'choices' => $addresses,
-                'preferred_choices' => array($defaultAddress),
+                'preferred_choices' => [$defaultAddress],
                 'class' => $this->addressClass,
                 'expanded' => true,
                 'multiple' => false,
                 'mapped' => false,
-            ))
-            ->add('useSelected', $submitType, array(
-                'attr' => array(
+            ])
+            ->add('useSelected', $submitType, [
+                'attr' => [
                     'class' => 'btn btn-primary',
                     'style' => 'margin-bottom:20px;',
-                ),
+                ],
                 'translation_domain' => 'SonataBasketBundle',
                 'validation_groups' => false,
-            ));
+            ]);
         }
 
-        $builder->add('name', null, array('required' => !count($addresses)));
+        $builder->add('name', null, ['required' => !count($addresses)]);
 
         if (isset($options['types'])) {
             $types = $options['types'];
-            $typeOptions = array(
+            $typeOptions = [
                 'translation_domain' => 'SonataCustomerBundle',
-            );
+            ];
             // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
             if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
                 $types = array_flip($types);
@@ -116,19 +116,19 @@ class AddressType extends AbstractType
         }
 
         $builder
-            ->add('firstname', null, array('required' => !count($addresses)))
-            ->add('lastname', null, array('required' => !count($addresses)))
-            ->add('address1', null, array('required' => !count($addresses)))
+            ->add('firstname', null, ['required' => !count($addresses)])
+            ->add('lastname', null, ['required' => !count($addresses)])
+            ->add('address1', null, ['required' => !count($addresses)])
             ->add('address2')
             ->add('address3')
-            ->add('postcode', null, array('required' => !count($addresses)))
-            ->add('city', null, array('required' => !count($addresses)))
+            ->add('postcode', null, ['required' => !count($addresses)])
+            ->add('city', null, ['required' => !count($addresses)])
             ->add('phone')
         ;
 
         $countries = $this->getBasketDeliveryCountries();
 
-        $countryOptions = array('required' => !count($addresses));
+        $countryOptions = ['required' => !count($addresses)];
 
         if (count($countries) > 0) {
             // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
@@ -160,11 +160,11 @@ class AddressType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => $this->addressClass,
-            'addresses' => array(),
-            'validation_groups' => array('front'),
-        ));
+            'addresses' => [],
+            'validation_groups' => ['front'],
+        ]);
     }
 
     /**
@@ -190,7 +190,7 @@ class AddressType extends AbstractType
      */
     protected function getBasketDeliveryCountries()
     {
-        $countries = array();
+        $countries = [];
 
         foreach ($this->basket->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();

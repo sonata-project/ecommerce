@@ -36,7 +36,7 @@ class FiltersMenuBlockService extends MenuBlockService
      */
     public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, ProductMenuBuilder $menuBuilder)
     {
-        parent::__construct($name, $templating, $menuProvider, array());
+        parent::__construct($name, $templating, $menuProvider, []);
 
         $this->menuBuilder = $menuBuilder;
     }
@@ -56,10 +56,10 @@ class FiltersMenuBlockService extends MenuBlockService
     {
         parent::configureSettings($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'menu_class' => 'nav nav-list',
             'product_provider' => null,
-        ));
+        ]);
     }
 
     /**
@@ -67,9 +67,9 @@ class FiltersMenuBlockService extends MenuBlockService
      */
     protected function getFormSettingsKeys()
     {
-        return array_merge(parent::getFormSettingsKeys(), array(
-            array('menu_class', 'text', array('required' => false)),
-        ));
+        return array_merge(parent::getFormSettingsKeys(), [
+            ['menu_class', 'text', ['required' => false]],
+        ]);
     }
 
     /**
@@ -82,7 +82,7 @@ class FiltersMenuBlockService extends MenuBlockService
         $menu = parent::getMenu($blockContext);
 
         if (null === $menu || '' === $menu) {
-            $menu = $this->menuBuilder->createFiltersMenu($settings['product_provider'], array('childrenAttributes' => array('class' => $settings['menu_class'])), $settings['current_uri']);
+            $menu = $this->menuBuilder->createFiltersMenu($settings['product_provider'], ['childrenAttributes' => ['class' => $settings['menu_class']]], $settings['current_uri']);
         }
 
         return $menu;

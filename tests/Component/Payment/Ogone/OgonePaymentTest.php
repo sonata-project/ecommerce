@@ -42,7 +42,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
 
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
-        $payment->setOptions(array(
+        $payment->setOptions([
             'url_return_ok' => 'sonata_payment_confirmation',
             'url_return_ko' => '',
             'url_callback' => '',
@@ -53,7 +53,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
             'pspid' => '',
             'home_url' => '',
             'catalog_url' => '',
-        ));
+        ]);
 
         $basket = $this->createMock('Sonata\Component\Basket\Basket');
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
@@ -69,7 +69,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
         $order->setLocale('es');
 
         $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(array($this, 'callback')));
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
@@ -89,7 +89,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
     {
         $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback(array($this, 'callbackValidsendbank')));
+        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback([$this, 'callbackValidsendbank']));
 
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
 
@@ -112,7 +112,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
 
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
-        $payment->setOptions(array(
+        $payment->setOptions([
             'url_return_ok' => '',
             'url_return_ko' => '',
             'url_callback' => '',
@@ -123,7 +123,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
             'pspid' => '',
             'home_url' => '',
             'catalog_url' => '',
-        ));
+        ]);
 
         $response = $payment->sendbank($order);
 
@@ -141,7 +141,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
 
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
-        $payment->setOptions(array(
+        $payment->setOptions([
                 'url_return_ok' => '',
                 'url_return_ko' => '',
                 'url_callback' => '',
@@ -152,18 +152,18 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
                 'pspid' => '',
                 'home_url' => '',
                 'catalog_url' => '',
-        ));
+        ]);
 
         $this->assertEquals($expected, $payment->encodeString($data));
     }
 
     public static function getEncodeStringValues()
     {
-        return array(
-            array('valid', 'valid'),
-            array('!@#$', '!@#$'),
-            array('foo=bar', 'foo=bar'),
-        );
+        return [
+            ['valid', 'valid'],
+            ['!@#$', '!@#$'],
+            ['foo=bar', 'foo=bar'],
+        ];
     }
 
     public function callbackValidsendbank($template, $params)
@@ -181,7 +181,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
 
     public static function callback($name)
     {
-        $params = array(
+        $params = [
                 'orderID' => 'FR',
                 'currency' => null,
                 'amount' => 'amount',
@@ -196,7 +196,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
                 'NCERROR' => 'NCERROR',
                 'BRAND' => 'BRAND',
                 'IP' => 'IP',
-        );
+        ];
 
         if (strcasecmp('shasign', $name) === 0) {
             uksort($params, 'strcasecmp');
