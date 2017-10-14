@@ -10,7 +10,7 @@
         }
     ],
     "require" : {
-        "php": "^5.3 || ^7.0",
+        "php": "^7.1",
         "cocur/slugify": "^1.4 || ^2.0",
         "friendsofsymfony/comment-bundle": "^2.0",
         "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
@@ -33,23 +33,23 @@
         "sonata-project/notification-bundle": "^3.0",
         "sonata-project/seo-bundle": "^2.0",
         "sonata-project/user-bundle": "^3.0",
-        "symfony/config": "^2.3",
-        "symfony/console": "^2.3",
-        "symfony/form": "^2.3",
-        "symfony/http-foundation": "^2.3",
-        "symfony/process": "^2.3",
-        "symfony/routing": "^2.3",
-        "symfony/security-bundle": "^2.3",
-        "symfony/twig-bridge": "^2.3",
-        "symfony/validator": "^2.3"
+        "symfony/config": "^2.8",
+        "symfony/console": "^2.8",
+        "symfony/form": "^2.8",
+        "symfony/http-foundation": "^2.8",
+        "symfony/process": "^2.8",
+        "symfony/routing": "^2.8",
+        "symfony/security-bundle": "^2.8",
+        "symfony/twig-bridge": "^2.8",
+        "symfony/validator": "^2.8"
     },
     "require-dev": {
         "sllh/php-cs-fixer-styleci-bridge": "^2.1",
-        "symfony/phpunit-bridge": "^2.7 || ^3.0"
+        "symfony/phpunit-bridge": "^3.3"
     },
     "conflict": {
         "jms/serializer": "<0.13",
-        "symfony/intl": "<2.3.20"
+        "symfony/intl": "<2.8"
     },
     "autoload": {
         "psr-4": {
