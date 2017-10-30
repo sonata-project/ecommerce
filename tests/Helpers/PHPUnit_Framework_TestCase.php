@@ -28,11 +28,11 @@ class PHPUnit_Framework_TestCase extends \PHPUnit_Framework_TestCase
         if (is_callable('parent::expectException')) {
             parent::expectException($exception);
 
-            if ($message !== '') {
+            if ('' !== $message) {
                 parent::expectExceptionMessage($message);
             }
 
-            if ($code !== null) {
+            if (null !== $code) {
                 parent::expectExceptionCode($code);
             }
         }

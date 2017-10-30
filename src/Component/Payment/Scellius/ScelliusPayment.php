@@ -360,7 +360,7 @@ class ScelliusPayment extends BasePayment
             $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_ERROR_VALIDATION);
 
             return false;
-        } elseif ($data['code'] != 0) {
+        } elseif (0 != $data['code']) {
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_UNKNOWN);
 
@@ -368,7 +368,7 @@ class ScelliusPayment extends BasePayment
         }
 
         // error
-        if ($data['response_code'] != '00') {
+        if ('00' != $data['response_code']) {
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_ERROR_VALIDATION);
 
@@ -500,11 +500,11 @@ class ScelliusPayment extends BasePayment
         //    - code=-1 : La fonction retourne un message d'erreur dans la variable error
         $data = explode('!', $process->getOutput());
 
-        if (count($data) != 5) {
+        if (5 != count($data)) {
             throw new \RuntimeException('Invalid data count');
         }
 
-        if ($data[1] == 0) {
+        if (0 == $data[1]) {
             $scellius = [
                 'valid' => true,
                 'content' => $data[3],
@@ -579,7 +579,7 @@ class ScelliusPayment extends BasePayment
         //  - code = -1 : La fonction retourne un message d'erreur dans la variable error
         $data = explode('!', $process->getOutput());
 
-        if (count($data) != 33) {
+        if (33 != count($data)) {
             throw new \RuntimeException('Invalid data count');
         }
 

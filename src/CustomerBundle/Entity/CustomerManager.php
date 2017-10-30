@@ -33,7 +33,7 @@ class CustomerManager extends BaseEntityManager implements CustomerManagerInterf
                 throw new \RuntimeException(sprintf("Invalid sort field '%s' in '%s' class", $field, $this->class));
             }
         }
-        if (count($sort) == 0) {
+        if (0 == count($sort)) {
             $sort = ['lastname' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
