@@ -322,15 +322,15 @@ class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
 
     public static function callback($name)
     {
-        if ($name == 'reference') {
+        if ('reference' == $name) {
             return '0001231';
         }
 
-        if ($name == 'transaction_id') {
+        if ('transaction_id' == $name) {
             return 1;
         }
 
-        if ($name == 'check') {
+        if ('check' == $name) {
             return '56384d4138b4219e554aa3cc781151686064e699';
         }
     }

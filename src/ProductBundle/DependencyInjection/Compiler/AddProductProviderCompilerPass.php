@@ -33,7 +33,7 @@ class AddProductProviderCompilerPass implements CompilerPassInterface
 
         $map = [];
         foreach ($calls as $method => $arguments) {
-            if ($arguments[0] !== '__hack') {
+            if ('__hack' !== $arguments[0]) {
                 $pool->addMethodCall($arguments[0], $arguments[1]);
 
                 continue;

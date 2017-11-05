@@ -322,9 +322,9 @@ class BasketTest extends PHPUnit_Framework_TestCase
         }
 
         $basket->reset();
-        $this->assertTrue(count($basket->getBasketElements()) == 0, '::reset() remove all elements');
+        $this->assertTrue(0 == count($basket->getBasketElements()), '::reset() remove all elements');
         $basket->unserialize($data);
-        $this->assertTrue(count($basket->getBasketElements()) == 1, '::unserialize() restore elements');
+        $this->assertTrue(1 == count($basket->getBasketElements()), '::unserialize() restore elements');
     }
 
     /**

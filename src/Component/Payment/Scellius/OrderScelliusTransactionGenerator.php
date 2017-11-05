@@ -28,7 +28,7 @@ class OrderScelliusTransactionGenerator implements ScelliusTransactionGeneratorI
      */
     public function generate(OrderInterface $order)
     {
-        if (strlen($order->getReference()) != 12) {
+        if (12 != strlen($order->getReference())) {
             throw new \RuntimeException('Invalid reference length');
         }
 

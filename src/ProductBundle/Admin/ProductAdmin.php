@@ -269,7 +269,7 @@ class ProductAdmin extends AbstractAdmin
             ['uri' => $admin->generateUrl('sonata.product.admin.delivery.list', ['id' => $id])]
         );
 
-        if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
+        if (!$product->isVariation() && 'sonata.product.admin.product' == $this->getCode()) {
             $menu->addChild(
                 $this->trans('product.sidemenu.view_variations'),
                 ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', ['id' => $id])]

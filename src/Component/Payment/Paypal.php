@@ -158,21 +158,21 @@ class Paypal extends BasePaypal
             return false;
         }
 
-        if ($transaction->get('payment_status') === 'Pending') {
+        if ('Pending' === $transaction->get('payment_status')) {
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_PENDING);
 
             return true;
         }
 
-        if ($transaction->get('payment_status') === 'Completed') {
+        if ('Completed' === $transaction->get('payment_status')) {
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
             return true;
         }
 
-        if ($transaction->get('payment_status') === 'Cancelled') {
+        if ('Cancelled' === $transaction->get('payment_status')) {
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_CANCELLED);
 
@@ -237,11 +237,11 @@ class Paypal extends BasePaypal
 
         $transaction->setState(TransactionInterface::STATE_KO);
 
-        if ($order->getStatus() === null) {
+        if (null === $order->getStatus()) {
             $order->setStatus(OrderInterface::STATUS_CANCELLED);
         }
 
-        if ($transaction->getStatusCode() == null) {
+        if (null == $transaction->getStatusCode()) {
             $transaction->setStatusCode(TransactionInterface::STATUS_UNKNOWN);
         }
     }
@@ -265,7 +265,7 @@ class Paypal extends BasePaypal
 
         $client->request('POST', $this->getOption('url_action'), $params);
 
-        if ($client->getResponse()->getContent() == 'VERIFIED') {
+        if ('VERIFIED' == $client->getResponse()->getContent()) {
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
@@ -292,13 +292,13 @@ class Paypal extends BasePaypal
      */
     public function isBasketValid(BasketInterface $basket)
     {
-        if ($basket->countBasketElements() == 0) {
+        if (0 == $basket->countBasketElements()) {
             return false;
         }
 
         foreach ($basket->getBasketElements() as $element) {
             $product = $element->getProduct();
-            if ($product->isRecurrentPayment() === true) {
+            if (true === $product->isRecurrentPayment()) {
                 return false;
             }
         }
