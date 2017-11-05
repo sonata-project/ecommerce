@@ -198,7 +198,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
                 'IP' => 'IP',
         ];
 
-        if (strcasecmp('shasign', $name) === 0) {
+        if (0 === strcasecmp('shasign', $name)) {
             uksort($params, 'strcasecmp');
 
             $shaKey = '';

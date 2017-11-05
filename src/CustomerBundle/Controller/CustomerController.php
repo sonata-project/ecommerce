@@ -97,7 +97,7 @@ class CustomerController extends Controller
      */
     public function deleteAddressAction($id)
     {
-        if ($this->getRequest()->getMethod() !== 'POST') {
+        if ('POST' !== $this->getRequest()->getMethod()) {
             throw new MethodNotAllowedHttpException(['POST']);
         }
 
@@ -160,7 +160,7 @@ class CustomerController extends Controller
 
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
 
-        if ($this->get('request')->getMethod() == 'POST') {
+        if ('POST' == $this->get('request')->getMethod()) {
             $form->handleRequest($this->get('request'));
 
             if ($form->isValid()) {

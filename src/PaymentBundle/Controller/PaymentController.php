@@ -80,7 +80,7 @@ class PaymentController extends Controller
     {
         $basket = $this->getBasket();
 
-        if ($this->get('request')->getMethod() !== 'POST') {
+        if ('POST' !== $this->get('request')->getMethod()) {
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 

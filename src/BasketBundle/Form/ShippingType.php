@@ -62,7 +62,7 @@ class ShippingType extends AbstractType
 
         $methods = $this->deliverySelector->getAvailableMethods($basket, $basket->getDeliveryAddress());
 
-        if (count($methods) === 0) {
+        if (0 === count($methods)) {
             throw new UndeliverableCountryException($basket->getDeliveryAddress());
         }
 

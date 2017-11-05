@@ -125,7 +125,7 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getProduct()
     {
-        if ($this->product == null && $this->hasProductDefinition()) {
+        if (null == $this->product && $this->hasProductDefinition()) {
             $this->product = $this->getProductDefinition()->getManager()->findOneBy(['id' => $this->productId]);
         }
 
@@ -330,7 +330,7 @@ class BasketElement implements \Serializable, BasketElementInterface
             return false;
         }
 
-        if ($product->getEnabled() == false) {
+        if (false == $product->getEnabled()) {
             return false;
         }
 
