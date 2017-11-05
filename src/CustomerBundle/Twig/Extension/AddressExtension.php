@@ -78,7 +78,7 @@ class AddressExtension extends \Twig_Extension
     {
         $requiredAddressKeys = ['firstname', 'lastname', 'address1', 'postcode', 'city', 'country_code'];
 
-        if (!($address instanceof AddressInterface) && (!is_array($address) || count(array_diff($requiredAddressKeys, array_keys($address))) !== 0)) {
+        if (!($address instanceof AddressInterface) && (!is_array($address) || 0 !== count(array_diff($requiredAddressKeys, array_keys($address))))) {
             throw new InvalidParameterException(sprintf(
                 'sonata_address_render needs an AddressInterface instance or an array with keys (%s)',
                 implode(', ', $requiredAddressKeys)

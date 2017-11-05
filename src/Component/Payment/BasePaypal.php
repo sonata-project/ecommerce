@@ -232,7 +232,7 @@ abstract class BasePaypal extends BasePayment
 
         if (is_resource($process)) {
             foreach ($hash as $key => $value) {
-                if ($value != '') {
+                if ('' != $value) {
                     fwrite($pipes[0], "$key=$value\n");
                 }
             }
