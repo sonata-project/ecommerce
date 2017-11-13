@@ -11,11 +11,11 @@
 
 namespace Sonata\ProductBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\ProductBundle\Entity\ProductManager;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class ProductManagerTest extends PHPUnit_Framework_TestCase
+class ProductManagerTest extends TestCase
 {
     public function testGetPager()
     {

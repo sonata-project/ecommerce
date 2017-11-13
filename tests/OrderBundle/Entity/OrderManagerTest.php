@@ -11,10 +11,10 @@
 
 namespace Sonata\OrderBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\OrderBundle\Entity\OrderManager;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Order extends BaseOrder
 {
@@ -30,7 +30,7 @@ class Order extends BaseOrder
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class OrderManagerTest extends PHPUnit_Framework_TestCase
+class OrderManagerTest extends TestCase
 {
     public function testGetClass()
     {

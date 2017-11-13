@@ -11,13 +11,13 @@
 
 namespace Sonata\BasketBundle\Tests\Form;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Form\ApiBasketElementType;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class ApiBasketElementTypeTest extends PHPUnit_Framework_TestCase
+class ApiBasketElementTypeTest extends TestCase
 {
     public function testBuildForm()
     {

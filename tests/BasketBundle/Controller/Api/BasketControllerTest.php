@@ -11,14 +11,14 @@
 
 namespace Sonata\BasketBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Controller\Api\BasketController;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class BasketControllerTest extends PHPUnit_Framework_TestCase
+class BasketControllerTest extends TestCase
 {
     public function testGetBasketsAction()
     {

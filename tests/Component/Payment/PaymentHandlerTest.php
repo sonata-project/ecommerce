@@ -11,16 +11,16 @@
 
 namespace Sonata\Component\Tests\Payment;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\PaymentHandler;
 use Sonata\PaymentBundle\Tests\Entity\Transaction;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class PaymentHandlerTest extends PHPUnit_Framework_TestCase
+class PaymentHandlerTest extends TestCase
 {
     public function testHandleError()
     {

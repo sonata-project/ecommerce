@@ -13,10 +13,10 @@ namespace Sonata\Component\Tests\Generator;
 
 use Doctrine\ORM\EntityManager as BaseEntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\MysqlReference;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\OrderBundle\Entity\BaseOrder;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class EntityManager extends BaseEntityManager
 {
@@ -70,7 +70,7 @@ class OrderMock extends BaseOrder
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class MysqlReferenceTest extends PHPUnit_Framework_TestCase
+class MysqlReferenceTest extends TestCase
 {
     public function testInvoice()
     {

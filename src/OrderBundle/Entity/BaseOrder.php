@@ -887,7 +887,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isValidated()
     {
-        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_VALIDATED;
+        return null != $this->getValidatedAt() && OrderInterface::STATUS_VALIDATED == $this->getStatus();
     }
 
     /**
@@ -895,7 +895,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isCancelled()
     {
-        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_CANCELLED;
+        return null != $this->getValidatedAt() && OrderInterface::STATUS_CANCELLED == $this->getStatus();
     }
 
     /**

@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Form;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Form\BasketValidator;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BasketValidatorTest extends PHPUnit_Framework_TestCase
+class BasketValidatorTest extends TestCase
 {
     /**
      * @group legacy

@@ -11,15 +11,15 @@
 
 namespace Sonata\InvoiceBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\InvoiceBundle\Entity\InvoiceManager;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Benoit de Jacobet <benoit.de-jacobet@ekino.com>
  */
-class InvoiceManagerTest extends PHPUnit_Framework_TestCase
+class InvoiceManagerTest extends TestCase
 {
     public function testGetPager()
     {

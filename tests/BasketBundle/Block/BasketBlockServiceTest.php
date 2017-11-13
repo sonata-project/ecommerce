@@ -11,14 +11,14 @@
 
 namespace Sonata\BasketBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Block\BasketBlockService;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class BasketBlockServiceTest extends PHPUnit_Framework_TestCase
+class BasketBlockServiceTest extends TestCase
 {
     public function testGetName()
     {
