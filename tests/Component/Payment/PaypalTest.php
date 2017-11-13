@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Payment;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\Paypal;
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class PaypalTest extends PHPUnit_Framework_TestCase
+class PaypalTest extends TestCase
 {
     public function testSendbank()
     {

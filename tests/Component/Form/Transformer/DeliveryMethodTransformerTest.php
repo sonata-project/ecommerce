@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Form\Transformer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Delivery\FreeDelivery;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class DeliveryMethodTransformerTest extends PHPUnit_Framework_TestCase
+class DeliveryMethodTransformerTest extends TestCase
 {
     public function testTransform()
     {

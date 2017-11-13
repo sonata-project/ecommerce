@@ -12,13 +12,13 @@
 namespace Sonata\Component\Tests\Generator;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\PostgresReference;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class PostgresReferenceTest extends PHPUnit_Framework_TestCase
+class PostgresReferenceTest extends TestCase
 {
     public function testInvoice()
     {

@@ -11,11 +11,11 @@
 
 namespace Sonata\ProductBundle\Tests\Seo\Services;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Seo\Services\Twitter;
 use Sonata\SeoBundle\Seo\SeoPage;
 use Sonata\SeoBundle\Twig\Extension\SeoExtension;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductTwitterMock extends BaseProduct
 {
@@ -29,7 +29,7 @@ class ProductTwitterMock extends BaseProduct
     }
 }
 
-class TwitterTest extends PHPUnit_Framework_TestCase
+class TwitterTest extends TestCase
 {
     public function testAlterPage()
     {

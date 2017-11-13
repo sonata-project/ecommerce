@@ -11,15 +11,15 @@
 
 namespace Sonata\ProductBundle\Tests\Command;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Command\GenerateProductCommand;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class GenerateProductCommandTest extends PHPUnit_Framework_TestCase
+class GenerateProductCommandTest extends TestCase
 {
     public function testConfigure()
     {

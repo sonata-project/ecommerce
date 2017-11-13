@@ -11,13 +11,13 @@
 
 namespace Sonata\Component\Tests\Delivery;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Delivery\Selector;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\ProductBundle\Entity\BaseProduct;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class SelectorTest extends PHPUnit_Framework_TestCase
+class SelectorTest extends TestCase
 {
     public function testEmptyBasket()
     {

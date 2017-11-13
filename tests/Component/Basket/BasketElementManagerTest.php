@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Basket\BasketElementManager;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BasketElementManagerTest extends PHPUnit_Framework_TestCase
+class BasketElementManagerTest extends TestCase
 {
     public function testCreateAndGetClass()
     {

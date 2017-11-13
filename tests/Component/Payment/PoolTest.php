@@ -11,11 +11,11 @@
 
 namespace Sonata\Component\Tests\Payment;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Payment\Pool;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class PoolTest extends PHPUnit_Framework_TestCase
+class PoolTest extends TestCase
 {
     public function testPool()
     {

@@ -11,8 +11,8 @@
 
 namespace Sonata\ProductBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Entity\BaseProduct;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -33,7 +33,7 @@ class Product extends BaseProduct
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseProductTest extends PHPUnit_Framework_TestCase
+class BaseProductTest extends TestCase
 {
     public function testGetImageAndGetGallery()
     {

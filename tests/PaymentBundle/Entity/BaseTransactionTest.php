@@ -11,8 +11,8 @@
 
 namespace Sonata\PaymentBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Transaction extends BaseTransaction
 {
@@ -22,7 +22,7 @@ class Transaction extends BaseTransaction
     }
 }
 
-class BaseTransactionTest extends PHPUnit_Framework_TestCase
+class BaseTransactionTest extends TestCase
 {
     public function testInformation()
     {

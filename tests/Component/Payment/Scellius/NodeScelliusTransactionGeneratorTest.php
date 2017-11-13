@@ -11,10 +11,10 @@
 
 namespace Sonata\Component\Tests\Payment\Scellius;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class NodeScelliusTransactionGeneratorTest extends PHPUnit_Framework_TestCase
+class NodeScelliusTransactionGeneratorTest extends TestCase
 {
     public function testGenerator()
     {

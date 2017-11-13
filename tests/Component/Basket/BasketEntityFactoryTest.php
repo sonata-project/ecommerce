@@ -11,11 +11,11 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketEntityFactory;
 use Sonata\Component\Currency\Currency;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class BasketEntityFactoryTest extends PHPUnit_Framework_TestCase
+class BasketEntityFactoryTest extends TestCase
 {
     public function testLoadWithNoBasket()
     {

@@ -11,14 +11,14 @@
 
 namespace Sonata\ProductBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Controller\Api\ProductController;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class ProductControllerTest extends PHPUnit_Framework_TestCase
+class ProductControllerTest extends TestCase
 {
     public function testGetProductsAction()
     {

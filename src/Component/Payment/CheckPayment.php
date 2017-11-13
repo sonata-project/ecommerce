@@ -152,7 +152,7 @@ class CheckPayment extends BasePayment
 
         $response = $this->browser->get($url);
 
-        if ($response->getContent() == 'ok') {
+        if ('ok' == $response->getContent()) {
             $routeName = 'url_return_ok';
         } else {
             $routeName = 'url_return_ko';
