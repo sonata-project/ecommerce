@@ -13,9 +13,9 @@ namespace Sonata\Component\Tests\Payment;
 
 use Buzz\Browser;
 use Buzz\Message\Response;
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\CheckPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class CheckPaymentTest_Order extends BaseOrder
 {
@@ -28,7 +28,7 @@ class CheckPaymentTest_Order extends BaseOrder
     }
 }
 
-class CheckPaymentTest extends PHPUnit_Framework_TestCase
+class CheckPaymentTest extends TestCase
 {
     /**
      * useless test ....

@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketBuilder;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class BasketBuilderTest extends PHPUnit_Framework_TestCase
+class BasketBuilderTest extends TestCase
 {
     /**
      * @expectedException        \RuntimeException

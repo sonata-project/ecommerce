@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Delivery;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Entity\BaseDelivery;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Delivery extends BaseDelivery
 {
 }
 
-class BaseDeliveryTest extends PHPUnit_Framework_TestCase
+class BaseDeliveryTest extends TestCase
 {
     public function testArrayDelivery()
     {

@@ -11,13 +11,13 @@
 
 namespace Sonata\Component\Tests\Subscriber;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Subscriber\ORMInheritanceSubscriber;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class ORMInheritanceSubscriberTest extends PHPUnit_Framework_TestCase
+class ORMInheritanceSubscriberTest extends TestCase
 {
     public function testGetSubscribedEvents()
     {

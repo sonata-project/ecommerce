@@ -11,13 +11,13 @@
 
 namespace Sonata\ProductBundle\Tests\Form\Type;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Form\Type\ApiProductType;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class ApiProductTypeTest extends PHPUnit_Framework_TestCase
+class ApiProductTypeTest extends TestCase
 {
     public function testBuildForm()
     {

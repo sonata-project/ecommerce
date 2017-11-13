@@ -11,12 +11,12 @@
 
 namespace Sonata\Component\Tests\Transformer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Transformer\InvoiceTransformer;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class InvoiceTransformerTest extends PHPUnit_Framework_TestCase
+class InvoiceTransformerTest extends TestCase
 {
     public function testTransformFromOrder()
     {

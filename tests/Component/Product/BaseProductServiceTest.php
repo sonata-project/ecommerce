@@ -12,6 +12,7 @@
 namespace Sonata\Component\Tests\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\Component\Basket\BasketElement;
@@ -28,7 +29,6 @@ use Sonata\ProductBundle\Entity\BaseProductCollection;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Entity\ProductCollectionManager;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Product extends BaseProduct
 {
@@ -125,7 +125,7 @@ class BaseOrderElementTest_ProductProvider extends BaseOrderElement
 {
 }
 
-class BaseProductServiceTest extends PHPUnit_Framework_TestCase
+class BaseProductServiceTest extends TestCase
 {
     /**
      * @return BaseProductServiceTest_ProductProvider

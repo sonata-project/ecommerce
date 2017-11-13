@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Currency;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyPriceCalculatorTest extends PHPUnit_Framework_TestCase
+class CurrencyPriceCalculatorTest extends TestCase
 {
     public function testGetPrice()
     {

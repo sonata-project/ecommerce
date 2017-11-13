@@ -11,8 +11,8 @@
 
 namespace Sonata\BasketBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Entity\BaseBasket;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class BasketTest extends BaseBasket
 {
@@ -21,7 +21,7 @@ class BasketTest extends BaseBasket
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseBasketTest extends PHPUnit_Framework_TestCase
+class BaseBasketTest extends TestCase
 {
     public function testSetBasketElements()
     {
