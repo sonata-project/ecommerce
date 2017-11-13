@@ -11,6 +11,7 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
@@ -18,7 +19,6 @@ use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
 use Sonata\Component\Tests\Product\Product;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class Delivery extends BaseServiceDelivery
 {
@@ -43,7 +43,7 @@ class Delivery extends BaseServiceDelivery
     }
 }
 
-class BasketTest extends PHPUnit_Framework_TestCase
+class BasketTest extends TestCase
 {
     public function getMockProduct()
     {

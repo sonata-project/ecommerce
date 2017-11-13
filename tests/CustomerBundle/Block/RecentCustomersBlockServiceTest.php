@@ -11,13 +11,13 @@
 
 namespace Sonata\CustomerBundle\Tests\Block;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CustomerBundle\Block\RecentCustomersBlockService;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class RecentCustomersBlockServiceTest extends PHPUnit_Framework_TestCase
+class RecentCustomersBlockServiceTest extends TestCase
 {
     public function testGetName()
     {

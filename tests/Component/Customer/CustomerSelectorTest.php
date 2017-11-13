@@ -12,9 +12,9 @@
 namespace Sonata\Component\Tests\Customer;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Customer\CustomerSelector;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
@@ -30,7 +30,7 @@ class User
     }
 }
 
-class CustomerSelectorTest extends PHPUnit_Framework_TestCase
+class CustomerSelectorTest extends TestCase
 {
     /**
      * @group legacy

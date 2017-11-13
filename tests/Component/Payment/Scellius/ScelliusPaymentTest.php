@@ -11,10 +11,10 @@
 
 namespace Sonata\Component\Tests\Payment\Scellius;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Payment\Scellius\ScelliusPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ScelliusPaymentTest_Order extends BaseOrder
 {
@@ -40,7 +40,7 @@ class ScelliusPaymentTest_Order extends BaseOrder
         return $this->currency;
     }
 }
-class ScelliusPaymentTest extends PHPUnit_Framework_TestCase
+class ScelliusPaymentTest extends TestCase
 {
     /**
      * useless test ....

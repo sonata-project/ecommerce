@@ -11,13 +11,13 @@
 
 namespace Sonata\OrderBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\OrderBundle\Controller\Api\OrderController;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class OrderControllerTest extends PHPUnit_Framework_TestCase
+class OrderControllerTest extends TestCase
 {
     public function testGetOrdersAction()
     {

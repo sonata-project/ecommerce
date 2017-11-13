@@ -11,14 +11,14 @@
 
 namespace Sonata\CustomerBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CustomerBundle\Controller\Api\CustomerController;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CustomerControllerTest extends PHPUnit_Framework_TestCase
+class CustomerControllerTest extends TestCase
 {
     public function testGetCustomersAction()
     {

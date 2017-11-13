@@ -11,13 +11,13 @@
 
 namespace Sonata\Component\Tests\Currency;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\CurrencyFormType;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyFormTypeTest extends PHPUnit_Framework_TestCase
+class CurrencyFormTypeTest extends TestCase
 {
     /**
      * @var CurrencyFormType

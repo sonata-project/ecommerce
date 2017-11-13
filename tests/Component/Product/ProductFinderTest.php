@@ -11,13 +11,13 @@
 
 namespace Sonata\Component\Tests\Product;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Product\ProductFinder;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class ProductFinderTest extends PHPUnit_Framework_TestCase
+class ProductFinderTest extends TestCase
 {
     public function testGetCrossSellingSimilarProducts()
     {

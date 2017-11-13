@@ -12,9 +12,9 @@
 namespace Sonata\Component\Tests\Payment;
 
 use Buzz\Browser;
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\PassPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class PassPaymentTest_Order extends BaseOrder
 {
@@ -26,7 +26,7 @@ class PassPaymentTest_Order extends BaseOrder
         // TODO: Implement getId() method.
     }
 }
-class PassPaymentTest extends PHPUnit_Framework_TestCase
+class PassPaymentTest extends TestCase
 {
     /**
      * useless test ....

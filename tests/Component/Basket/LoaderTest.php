@@ -11,10 +11,10 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\Loader;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class LoaderTest extends PHPUnit_Framework_TestCase
+class LoaderTest extends TestCase
 {
     public function testLoadBasket()
     {
