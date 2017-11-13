@@ -11,15 +11,15 @@
 
 namespace Sonata\BasketBundle\Tests\Form;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Form\ApiBasketType;
 use Sonata\Component\Currency\CurrencyDataTransformer;
 use Sonata\Component\Currency\CurrencyFormType;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class ApiBasketTypeTest extends PHPUnit_Framework_TestCase
+class ApiBasketTypeTest extends TestCase
 {
     public function testBuildForm()
     {

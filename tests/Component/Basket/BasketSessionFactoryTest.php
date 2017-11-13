@@ -11,15 +11,15 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketSessionFactory;
 use Sonata\Component\Currency\Currency;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
-class BasketSessionFactoryTest extends PHPUnit_Framework_TestCase
+class BasketSessionFactoryTest extends TestCase
 {
     public function testLoadWithNoBasket()
     {

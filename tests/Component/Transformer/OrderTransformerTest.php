@@ -11,12 +11,12 @@
 
 namespace Sonata\Component\Tests\Transformer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Transformer\OrderTransformer;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class OrderTransformerTest extends PHPUnit_Framework_TestCase
+class OrderTransformerTest extends TestCase
 {
     public function testBasket()
     {

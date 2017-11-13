@@ -11,12 +11,12 @@
 
 namespace Sonata\Component\Tests\Transformer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;
 use Sonata\Component\Transformer\Pool as TransformerPool;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class PoolTest extends PHPUnit_Framework_TestCase
+class PoolTest extends TestCase
 {
     public function testPool()
     {

@@ -11,13 +11,13 @@
 
 namespace Sonata\ProductBundle\Tests\Model;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductProviderTest extends BaseProductProvider
 {
@@ -56,7 +56,7 @@ class ProductTest extends BaseProduct implements ProductInterface
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class BaseProductProviderTest extends PHPUnit_Framework_TestCase
+class BaseProductProviderTest extends TestCase
 {
     public function testGetProductFromRaw()
     {

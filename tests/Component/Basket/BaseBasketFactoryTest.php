@@ -11,10 +11,10 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BaseBasketFactory;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class BasketFactory extends BaseBasketFactory
 {
@@ -75,7 +75,7 @@ class BasketFactory extends BaseBasketFactory
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseBasketFactoryTest extends PHPUnit_Framework_TestCase
+class BaseBasketFactoryTest extends TestCase
 {
     public function testConstruct()
     {

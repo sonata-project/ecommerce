@@ -11,14 +11,14 @@
 
 namespace Sonata\PaymentBundle\Tests\Consumer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool;
 use Sonata\OrderBundle\Entity\OrderElementManager;
 use Sonata\PaymentBundle\Consumer\PaymentProcessOrderElementConsumer;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class PaymentProcessOrderElementConsumerTest extends PHPUnit_Framework_TestCase
+class PaymentProcessOrderElementConsumerTest extends TestCase
 {
     public function testGenerateDiffValue()
     {

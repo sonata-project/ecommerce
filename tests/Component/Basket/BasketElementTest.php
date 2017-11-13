@@ -11,12 +11,12 @@
 
 namespace Sonata\Component\Tests\Basket;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductDefinition;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductProviderTest extends BaseProductProvider
 {
@@ -29,7 +29,7 @@ class ProductProviderTest extends BaseProductProvider
     }
 }
 
-class BasketElementTest extends PHPUnit_Framework_TestCase
+class BasketElementTest extends TestCase
 {
     /**
      * Sets up unit test.

@@ -11,15 +11,15 @@
 
 namespace Sonata\Component\Tests\Currency;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Currency\CurrencyInterface;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyDetectorTest extends PHPUnit_Framework_TestCase
+class CurrencyDetectorTest extends TestCase
 {
     /**
      * @var CurrencyDetector
