@@ -58,7 +58,7 @@ before_install:
   - if [ -x .travis/before_install_${TARGET}.sh ]; then .travis/before_install_${TARGET}.sh; fi;
 
 install:
-  - if [ -x .travis/install_${TARGET}.sh ]; then .travis/install_${TARGET}.sh; fi;
+  - if [ -x .travis/install_${TARGET}.sh ]; then travis_wait 30 .travis/install_${TARGET}.sh; fi;
 
 before_script:
   - if [ -x .travis/before_script_${TARGET}.sh ]; then .travis/before_script_${TARGET}.sh; fi;
