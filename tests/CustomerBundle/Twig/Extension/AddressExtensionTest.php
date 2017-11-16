@@ -11,13 +11,13 @@
 
 namespace Sonata\CustomerBundle\Tests\Twig\Extension;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CustomerBundle\Twig\Extension\AddressExtension;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class AddressExtensionTest extends PHPUnit_Framework_TestCase
+class AddressExtensionTest extends TestCase
 {
     public function testRenderAddress()
     {

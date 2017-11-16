@@ -11,13 +11,13 @@
 
 namespace Sonata\InvoiceBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class InvoiceControllerTest extends PHPUnit_Framework_TestCase
+class InvoiceControllerTest extends TestCase
 {
     public function testGetInvoicesAction()
     {

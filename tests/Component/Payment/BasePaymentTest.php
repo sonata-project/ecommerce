@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Payment;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\BasePayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class BasePaymentTest extends PHPUnit_Framework_TestCase
+class BasePaymentTest extends TestCase
 {
     public function testBasePayment()
     {

@@ -394,14 +394,14 @@ interface ProductInterface extends PriceComputableInterface
      *
      * @param ProductInterface $variation
      */
-    public function addVariation(ProductInterface $variation);
+    public function addVariation(self $variation);
 
     /**
      * Remove a variation from collection.
      *
      * @param ProductInterface $variation
      */
-    public function removeVariation(ProductInterface $variation);
+    public function removeVariation(self $variation);
 
     /**
      * Get variation collection.
@@ -457,7 +457,7 @@ interface ProductInterface extends PriceComputableInterface
      *
      * @param ProductInterface $parent
      */
-    public function setParent(ProductInterface $parent);
+    public function setParent(self $parent);
 
     /**
      * Get Product options.

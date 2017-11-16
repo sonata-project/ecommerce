@@ -11,14 +11,14 @@
 
 namespace Sonata\CustomerBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\AddressManager;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class AddressManagerTest extends PHPUnit_Framework_TestCase
+class AddressManagerTest extends TestCase
 {
     public function testSetCurrent()
     {

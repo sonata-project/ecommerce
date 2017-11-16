@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Form\EventListener;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BasketResizeFormListenerTest extends PHPUnit_Framework_TestCase
+class BasketResizeFormListenerTest extends TestCase
 {
     public function testGetSubscribedEvents()
     {

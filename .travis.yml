@@ -10,11 +10,13 @@ branches:
 language: php
 
 php:
+  - '5.6'
+  - '7.0'
   - '7.1'
   - nightly
 
 sudo: false
-dist: precise
+dist: trusty
 
 cache:
   pip: true
@@ -36,21 +38,18 @@ matrix:
       env: TARGET=docs
     - php: '7.1'
       env: TARGET=lint
-    - php: '7.1'
+    - php: '5.6'
       env: COMPOSER_FLAGS="--prefer-lowest"
     - php: '7.1'
       env: SYMFONY=2.8.*
     - php: '7.1'
-      env: SYMFONY=dev-master@dev
+      env: SYMFONY='dev-master as 2.8'
     - php: '7.1'
       env: SYMFONY_DEPRECATIONS_HELPER=0
-    - php: hhvm
-      dist: trusty
   allow_failures:
     - php: nightly
-    - php: hhvm
     - env: SYMFONY_DEPRECATIONS_HELPER=0
-    - env: SYMFONY=dev-master@dev
+    - env: SYMFONY='dev-master as 2.8'
 
 before_install:
   - git remote add upstream ${UPSTREAM_URL} && git fetch --all

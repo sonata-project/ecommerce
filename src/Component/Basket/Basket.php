@@ -140,7 +140,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function isEmpty()
     {
-        return count($this->getBasketElements()) == 0;
+        return 0 == count($this->getBasketElements());
     }
 
     /**
@@ -153,7 +153,7 @@ class Basket implements \Serializable, BasketInterface
         }
 
         foreach ($this->getBasketElements() as $element) {
-            if ($element->isValid() === false) {
+            if (false === $element->isValid()) {
                 return false;
             }
         }
@@ -414,7 +414,7 @@ class Basket implements \Serializable, BasketInterface
             $product = $basketElement->getProduct();
 
             if ($product instanceof ProductInterface) {
-                if ($product->isRecurrentPayment() === true) {
+                if (true === $product->isRecurrentPayment()) {
                     return true;
                 }
             }
@@ -433,11 +433,11 @@ class Basket implements \Serializable, BasketInterface
         foreach ($this->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();
 
-            if ($recurrentOnly === true && $product->isRecurrentPayment() === false) {
+            if (true === $recurrentOnly && false === $product->isRecurrentPayment()) {
                 continue;
             }
 
-            if ($recurrentOnly === false && $product->isRecurrentPayment() === true) {
+            if (false === $recurrentOnly && true === $product->isRecurrentPayment()) {
                 continue;
             }
 

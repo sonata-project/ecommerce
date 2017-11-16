@@ -11,14 +11,14 @@
 
 namespace Sonata\CustomerBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\CustomerBundle\Controller\Api\AddressController;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class AddressControllerTest extends PHPUnit_Framework_TestCase
+class AddressControllerTest extends TestCase
 {
     public function testGetAddressesAction()
     {

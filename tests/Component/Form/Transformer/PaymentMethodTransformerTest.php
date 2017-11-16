@@ -11,14 +11,14 @@
 
 namespace Sonata\Component\Tests\Form\Transformer;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Payment\PassPayment;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class PaymentMethodTransformerTest extends PHPUnit_Framework_TestCase
+class PaymentMethodTransformerTest extends TestCase
 {
     public function testTransform()
     {

@@ -12,11 +12,11 @@
 namespace Sonata\Component\Tests\Payment;
 
 use Buzz\Browser;
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\Debug\DebugPayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class DebugPaymentTest_Order extends BaseOrder
 {
@@ -32,7 +32,7 @@ class DebugPaymentTest_Transaction extends BaseTransaction
     }
 }
 
-class DebugPaymentTest extends PHPUnit_Framework_TestCase
+class DebugPaymentTest extends TestCase
 {
     public function testDebugPayment()
     {
