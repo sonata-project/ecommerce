@@ -11,11 +11,11 @@
 
 namespace Sonata\ProductBundle\Tests\Seo\Services;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Seo\Services\Facebook;
 use Sonata\SeoBundle\Seo\SeoPage;
 use Sonata\SeoBundle\Twig\Extension\SeoExtension;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class ProductFbMock extends BaseProduct
 {
@@ -34,7 +34,7 @@ class ProductFbMock extends BaseProduct
     }
 }
 
-class FacebookTest extends PHPUnit_Framework_TestCase
+class FacebookTest extends TestCase
 {
     public function testAlterPage()
     {

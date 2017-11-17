@@ -11,11 +11,11 @@
 
 namespace Sonata\Component\Tests\Product;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class ProductPoolTest extends PHPUnit_Framework_TestCase
+class ProductPoolTest extends TestCase
 {
     public function testPool()
     {

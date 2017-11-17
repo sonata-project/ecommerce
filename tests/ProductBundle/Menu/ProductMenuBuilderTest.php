@@ -11,13 +11,13 @@
 
 namespace Sonata\ProductBundle\Tests\Menu;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Menu\ProductMenuBuilder;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class ProductMenuBuilderTest extends PHPUnit_Framework_TestCase
+class ProductMenuBuilderTest extends TestCase
 {
     public function testCreateCategoryMenu()
     {

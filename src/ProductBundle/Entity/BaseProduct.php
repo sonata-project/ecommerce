@@ -906,7 +906,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function hasOneMainCategory()
     {
-        if ($this->getCategories()->count() == 0) {
+        if (0 == $this->getCategories()->count()) {
             return false;
         }
 
@@ -932,7 +932,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function validateOneMainCategory(ExecutionContextInterface $context)
     {
-        if ($this->getCategories()->count() == 0) {
+        if (0 == $this->getCategories()->count()) {
             return;
         }
 

@@ -11,10 +11,10 @@
 
 namespace Sonata\Component\Tests\Payment\Ogone;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Payment\Ogone\OgonePayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 class OgonePaymentTest_Order extends BaseOrder
 {
@@ -31,7 +31,7 @@ class OgonePaymentTest_Order extends BaseOrder
         return $this->id;
     }
 }
-class OgonePaymentTest extends PHPUnit_Framework_TestCase
+class OgonePaymentTest extends TestCase
 {
     public function testValidPayment()
     {
@@ -198,7 +198,7 @@ class OgonePaymentTest extends PHPUnit_Framework_TestCase
                 'IP' => 'IP',
         ];
 
-        if (strcasecmp('shasign', $name) === 0) {
+        if (0 === strcasecmp('shasign', $name)) {
             uksort($params, 'strcasecmp');
 
             $shaKey = '';

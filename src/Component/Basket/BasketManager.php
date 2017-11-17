@@ -63,7 +63,7 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
                 throw new \RuntimeException(sprintf("Invalid sort field '%s' in '%s' class", $field, $this->class));
             }
         }
-        if (count($sort) == 0) {
+        if (0 == count($sort)) {
             $sort = ['id' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {

@@ -11,15 +11,15 @@
 
 namespace Sonata\Component\Tests\Invoice;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Invoice\InvoiceStatusRenderer;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
-class InvoiceStatusRendererTest extends PHPUnit_Framework_TestCase
+class InvoiceStatusRendererTest extends TestCase
 {
     public function testHandles()
     {

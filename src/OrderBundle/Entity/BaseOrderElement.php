@@ -279,7 +279,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function setStatus($status)
     {
         $this->status = $status;
-        if ($this->getStatus() == OrderInterface::STATUS_VALIDATED) {
+        if (OrderInterface::STATUS_VALIDATED == $this->getStatus()) {
             $this->setValidatedAt(new \DateTime());
         }
     }
@@ -301,7 +301,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isValidated()
     {
-        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_VALIDATED;
+        return null != $this->getValidatedAt() && OrderInterface::STATUS_VALIDATED == $this->getStatus();
     }
 
     /**
@@ -309,7 +309,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isCancelled()
     {
-        return $this->getValidatedAt() != null && $this->getStatus() == OrderInterface::STATUS_CANCELLED;
+        return null != $this->getValidatedAt() && OrderInterface::STATUS_CANCELLED == $this->getStatus();
     }
 
     /**

@@ -152,7 +152,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
                 unset($sort[$field]);
             }
         }
-        if (count($sort) == 0) {
+        if (0 == count($sort)) {
             $sort = ['name' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {

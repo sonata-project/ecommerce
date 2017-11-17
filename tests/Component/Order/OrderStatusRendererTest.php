@@ -11,16 +11,16 @@
 
 namespace Sonata\Component\Tests\Order;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Order\OrderStatusRenderer;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
-use Sonata\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class OrderStatusRendererTest extends PHPUnit_Framework_TestCase
+class OrderStatusRendererTest extends TestCase
 {
     public function testHandles()
     {

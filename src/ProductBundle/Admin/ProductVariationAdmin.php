@@ -28,9 +28,9 @@ class ProductVariationAdmin extends ProductAdmin
     public function getBaseRoutePattern()
     {
         if (!$this->baseRoutePattern) {
-            if ($this->getCode() == 'sonata.product.admin.product.variation' && !$this->isChild()) { // variation
+            if ('sonata.product.admin.product.variation' == $this->getCode() && !$this->isChild()) { // variation
                 $this->baseRoutePattern = '/sonata/product/variation';
-            } elseif ($this->getCode() == 'sonata.product.admin.product.variation' && $this->isChild()) { // variation
+            } elseif ('sonata.product.admin.product.variation' == $this->getCode() && $this->isChild()) { // variation
                 $this->baseRoutePattern = sprintf('%s/{id}/%s',
                     $this->getParent()->getBaseRoutePattern(),
                     $this->urlize('variation', '-')
@@ -51,9 +51,9 @@ class ProductVariationAdmin extends ProductAdmin
     public function getBaseRouteName()
     {
         if (!$this->baseRouteName) {
-            if ($this->getCode() == 'sonata.product.admin.product.variation' && !$this->isChild()) { // variation
+            if ('sonata.product.admin.product.variation' == $this->getCode() && !$this->isChild()) { // variation
                 $this->baseRouteName = 'admin_sonata_product_variation';
-            } elseif ($this->getCode() == 'sonata.product.admin.product.variation' && $this->isChild()) { // variation
+            } elseif ('sonata.product.admin.product.variation' == $this->getCode() && $this->isChild()) { // variation
                 $this->baseRouteName = sprintf('%s_%s',
                     $this->getParent()->getBaseRouteName(),
                     $this->urlize('variation')
@@ -105,7 +105,7 @@ class ProductVariationAdmin extends ProductAdmin
             ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
-        if (!$product->isVariation() && $this->getCode() == 'sonata.product.admin.product') {
+        if (!$product->isVariation() && 'sonata.product.admin.product' == $this->getCode()) {
             $menu->addChild(
                 $this->trans('product.sidemenu.link_add_variation', [], 'SonataProductBundle'),
                 ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.create', ['id' => $id])]
