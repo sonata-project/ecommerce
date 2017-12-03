@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class ProductCategoryAdmin extends AbstractAdmin
 {
@@ -35,15 +36,8 @@ class ProductCategoryAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
-        } else {
-            $modelListType = 'sonata_type_model_list';
-        }
-
         if (!$this->isChild()) {
-            $formMapper->add('product', $modelListType, [], [
+            $formMapper->add('product', ModelListType::class, [], [
                 'admin_code' => 'sonata.product.admin.product',
             ]);
         }

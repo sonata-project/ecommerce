@@ -14,6 +14,7 @@ namespace Sonata\BasketBundle\Form;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Form\EventListener\BasketResizeFormListener;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class BasketType extends AbstractType
@@ -23,13 +24,6 @@ class BasketType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $formType = 'Symfony\Component\Form\Extension\Core\Type\FormType';
-        } else {
-            $formType = 'form';
-        }
-
         // always clone the basket, so the one in session is never altered
         $basket = $builder->getData();
 
@@ -38,7 +32,7 @@ class BasketType extends AbstractType
         }
 
         // should create a custom basket elements here
-        $basketElementBuilder = $builder->create('basketElements', $formType, [
+        $basketElementBuilder = $builder->create('basketElements', FormType::class, [
             'by_reference' => false,
         ]);
         $basketElementBuilder->addEventSubscriber(new BasketResizeFormListener($builder->getFormFactory(), $basket));

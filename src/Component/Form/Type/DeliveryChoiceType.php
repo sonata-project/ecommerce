@@ -13,6 +13,7 @@ namespace Sonata\Component\Form\Type;
 
 use Sonata\Component\Delivery\Pool;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DeliveryChoiceType extends AbstractType
@@ -32,10 +33,7 @@ class DeliveryChoiceType extends AbstractType
      */
     public function getParent()
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-            ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
-            : 'choice';
+        return ChoiceType::class;
     }
 
     /**
