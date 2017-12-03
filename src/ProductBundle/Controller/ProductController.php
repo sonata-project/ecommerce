@@ -13,6 +13,7 @@ namespace Sonata\ProductBundle\Controller;
 
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Form\Type\VariationChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -242,13 +243,7 @@ class ProductController extends Controller
             $currentValues[$field] = array_search($accessor->getValue($product, $field), $values);
         }
 
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $variationChoiceFormType = 'Sonata\Component\Form\Type\VariationChoiceType';
-        } else {
-            $variationChoiceFormType = 'sonata_product_variation_choices';
-        }
-        $form = $this->createForm($variationChoiceFormType, $currentValues, [
+        $form = $this->createForm(VariationChoiceType::class, $currentValues, [
             'product' => $product,
             'fields' => array_keys($data),
         ]);

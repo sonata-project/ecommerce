@@ -17,6 +17,9 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\Component\Form\Type\DeliveryChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class DeliveryAdmin extends AbstractAdmin
 {
@@ -35,28 +38,17 @@ class DeliveryAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
-            $deliveryChoiceType = 'Sonata\Component\Form\Type\DeliveryChoiceType';
-            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
-        } else {
-            $modelListType = 'sonata_type_model_list';
-            $deliveryChoiceType = 'sonata_delivery_choice';
-            $countryType = 'country';
-        }
-
         if (!$this->isChild()) {
-            $formMapper->add('product', $modelListType, [], [
+            $formMapper->add('product', ModelListType::class, [], [
                 'admin_code' => 'sonata.product.admin.product',
             ]);
         }
 
         $formMapper
             ->add('enabled')
-            ->add('code', $deliveryChoiceType)
+            ->add('code', DeliveryChoiceType::class)
             ->add('perItem')
-            ->add('countryCode', $countryType)
+            ->add('countryCode', CountryType::class)
             ->add('zone')
         ;
     }

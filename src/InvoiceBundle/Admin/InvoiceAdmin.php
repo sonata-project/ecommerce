@@ -15,7 +15,12 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Currency\CurrencyFormType;
+use Sonata\InvoiceBundle\Form\Type\InvoiceStatusType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class InvoiceAdmin extends AbstractAdmin
 {
@@ -45,23 +50,10 @@ class InvoiceAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
-            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
-            $invoiceStatusType = 'Sonata\InvoiceBundle\Form\Type\InvoiceStatusType';
-            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
-        } else {
-            $modelListType = 'sonata_type_model_list';
-            $currencyType = 'sonata_currency';
-            $invoiceStatusType = 'sonata_invoice_status';
-            $countryType = 'country';
-        }
-
         if (!$this->isChild()) {
             $formMapper
                 ->with($this->trans('invoice.form.group_main_label', [], $this->translationDomain))
-                    ->add('customer', $modelListType)
+                    ->add('customer', ModelListType::class)
                 ->end()
             ;
         }
@@ -69,8 +61,8 @@ class InvoiceAdmin extends AbstractAdmin
         $formMapper
             ->with($this->trans('invoice.form.group_main_label', [], $this->translationDomain))
                 ->add('reference')
-                ->add('currency', $currencyType)
-                ->add('status', $invoiceStatusType, ['translation_domain' => $this->translationDomain])
+                ->add('currency', CurrencyFormType::class)
+                ->add('status', InvoiceStatusType::class, ['translation_domain' => $this->translationDomain])
                 ->add('totalExcl')
                 ->add('totalInc')
             ->end()
@@ -82,7 +74,7 @@ class InvoiceAdmin extends AbstractAdmin
                 ->add('address3')
                 ->add('city')
                 ->add('postcode')
-                ->add('country', $countryType)
+                ->add('country', CountryType::class)
                 ->add('fax')
                 ->add('email')
                 ->add('mobile')
@@ -95,21 +87,18 @@ class InvoiceAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $textType = 'Symfony\Component\Form\Extension\Core\Type\TextType';
-            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
-        } else {
-            $textType = 'text';
-            $currencyType = 'sonata_currency';
-        }
-
         $list
             ->addIdentifier('reference')
             ->add('customer')
-            ->add('status', $textType, ['template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig'])
-            ->add('totalExcl', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
-            ->add('totalInc', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
+            ->add('status', TextType::class, [
+                'template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig',
+            ])
+            ->add('totalExcl', CurrencyFormType::class, [
+                'currency' => $this->currencyDetector->getCurrency()->getLabel(),
+            ])
+            ->add('totalInc', CurrencyFormType::class, [
+                'currency' => $this->currencyDetector->getCurrency()->getLabel(),
+            ])
         ;
     }
 
@@ -118,17 +107,10 @@ class InvoiceAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $invoiceStatusType = 'Sonata\InvoiceBundle\Form\Type\InvoiceStatusType';
-        } else {
-            $invoiceStatusType = 'sonata_invoice_status';
-        }
-
         $filter
             ->add('reference')
             ->add('customer')
-            ->add('status', null, [], $invoiceStatusType, ['translation_domain' => $this->translationDomain])
+            ->add('status', null, [], InvoiceStatusType::class, ['translation_domain' => $this->translationDomain])
         ;
     }
 }
