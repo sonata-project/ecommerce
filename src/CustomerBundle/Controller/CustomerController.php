@@ -15,6 +15,7 @@ use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
+use Sonata\CustomerBundle\Form\Type\AddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -140,20 +141,14 @@ class CustomerController extends Controller
     {
         $customer = $this->getCustomer();
 
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $addressFormType = 'Sonata\CustomerBundle\Form\Type\AddressType';
-        } else {
-            $addressFormType = 'sonata_customer_address';
-        }
         // Show address creation/edition form
         if (null === $id) {
-            $form = $this->createForm($addressFormType);
+            $form = $this->createForm(AddressType::class);
         } else {
             $address = $this->getAddressManager()->findOneBy(['id' => $id]);
             $this->checkAddress($address);
 
-            $form = $this->createForm($addressFormType, $address, [
+            $form = $this->createForm(AddressType::class, $address, [
                 'context' => $this->getRequest()->query->get('context'),
             ]);
         }

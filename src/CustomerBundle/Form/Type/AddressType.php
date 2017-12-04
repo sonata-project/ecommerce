@@ -13,7 +13,9 @@ namespace Sonata\CustomerBundle\Form\Type;
 
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -63,13 +65,6 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
-        } else {
-            $countryType = 'country';
-        }
-
         $address = $builder->getData();
 
         $countryOptions = [];
@@ -80,20 +75,14 @@ class AddressType extends AbstractType
         }
 
         if (count($countries) > 0) {
-            // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
-            if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
-                $countries = array_flip($countries);
-
-                // choice_as_value options is not needed in SF 3.0+
-                if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
-                    $countryOptions['choices_as_values'] = true;
-                }
+            // choice_as_value options is not needed in SF 3.0+
+            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+                $countryOptions['choices_as_values'] = true;
             }
-
-            $countryOptions['choices'] = $countries;
+            $countryOptions['choices'] = array_flip($countries);
         }
 
-        $builder->add('countryCode', $countryType, $countryOptions);
+        $builder->add('countryCode', CountryType::class, $countryOptions);
     }
 
     /**

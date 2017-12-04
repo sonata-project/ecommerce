@@ -18,6 +18,7 @@ use Sonata\Component\Delivery\UndeliverableCountryException;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ShippingType extends AbstractType
@@ -47,13 +48,6 @@ class ShippingType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
-        } else {
-            $choiceType = 'choice';
-        }
-
         $basket = $builder->getData();
 
         if (!$basket instanceof BasketInterface) {
@@ -76,7 +70,7 @@ class ShippingType extends AbstractType
         $method = $basket->getDeliveryMethod() ?: current($methods);
         $basket->setDeliveryMethod($method ?: null);
 
-        $sub = $builder->create('deliveryMethod', $choiceType, [
+        $sub = $builder->create('deliveryMethod', ChoiceType::class, [
             'expanded' => true,
             'choice_list' => new SimpleChoiceList($choices),
         ]);

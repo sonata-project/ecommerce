@@ -15,7 +15,12 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Currency\CurrencyFormType;
 use Sonata\Component\Product\Pool;
+use Sonata\OrderBundle\Form\Type\OrderStatusType;
+use Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormTypeInterface;
 
 class OrderElementAdmin extends AbstractAdmin
 {
@@ -59,39 +64,25 @@ class OrderElementAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
-            $orderStatusType = 'Sonata\OrderBundle\Form\Type\OrderStatusType';
-            $productDeliveryStatusType = 'Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType';
-        } else {
-            $choiceType = 'choice';
-            $orderStatusType = 'sonata_order_status';
-            $productDeliveryStatusType = 'sonata_product_delivery_status';
-        }
+        $productTypeOptions = [
+            'choices' => array_flip(array_keys($this->productPool->getProducts())),
+        ];
 
-        $productTypeOptions = [];
-        $productTypes = array_keys($this->productPool->getProducts());
-        // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
-        if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
-            $productTypes = array_flip($productTypes);
-            // choice_as_value option is not needed in SF 3.0+
-            if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
-                $productTypeOptions['choices_as_values'] = true;
-            }
+        // choice_as_value option is not needed in SF 3.0+
+        if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+            $productTypeOptions['choices_as_values'] = true;
         }
-        $productTypeOptions['choices'] = $productTypes;
 
         $formMapper
             ->with($this->trans('order_element.form.group_main_label', [], 'SonataOrderBundle'))
-                ->add('productType', $choiceType, $productTypeOptions)
+                ->add('productType', ChoiceType::class, $productTypeOptions)
                 ->add('quantity')
                 ->add('price')
                 ->add('vatRate')
                 ->add('designation')
                 ->add('description', null, ['required' => false])
-                ->add('status', $orderStatusType, ['translation_domain' => 'SonataOrderBundle'])
-                ->add('deliveryStatus', $productDeliveryStatusType, ['translation_domain' => 'SonataDeliveryBundle'])
+                ->add('status', OrderStatusType::class, ['translation_domain' => 'SonataOrderBundle'])
+                ->add('deliveryStatus', ProductDeliveryStatusType::class, ['translation_domain' => 'SonataDeliveryBundle'])
             ->end()
         ;
     }
@@ -101,13 +92,6 @@ class OrderElementAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
-        } else {
-            $currencyType = 'sonata_currency';
-        }
-
         $list->addIdentifier('id');
 
         if (!$list->getAdmin()->isChild()) {
@@ -117,8 +101,12 @@ class OrderElementAdmin extends AbstractAdmin
         $list->add('productType')
             ->add('getStatusName', 'trans', ['name' => 'status', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'status'])
             ->add('getDeliveryStatusName', 'trans', ['name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'deliveryStatus'])
-            ->add('getTotalWithVat', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
-            ->add('getTotal', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
+            ->add('getTotalWithVat', CurrencyFormType::class, [
+                'currency' => $this->currencyDetector->getCurrency()->getLabel(),
+            ])
+            ->add('getTotal', CurrencyFormType::class, [
+                'currency' => $this->currencyDetector->getCurrency()->getLabel(),
+            ])
         ;
     }
 }

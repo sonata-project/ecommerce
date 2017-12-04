@@ -19,8 +19,10 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Currency\CurrencyFormType;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\CoreBundle\Form\Type\BooleanType;
 use Sonata\CoreBundle\Validator\ErrorElement;
 
 class ProductAdmin extends AbstractAdmin
@@ -135,21 +137,14 @@ class ProductAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $booleanType = 'Sonata\CoreBundle\Form\Type\BooleanType';
-            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
-        } else {
-            $booleanType = 'sonata_type_boolean';
-            $currencyType = 'sonata_currency';
-        }
-
         $list
             ->addIdentifier('sku')
             ->addIdentifier('name')
-            ->add('isVariation', $booleanType)
+            ->add('isVariation', BooleanType::class)
             ->add('enabled', null, ['editable' => true])
-            ->add('price', $currencyType, ['currency' => $this->currencyDetector->getCurrency()->getLabel()])
+            ->add('price', CurrencyFormType::class, [
+                'currency' => $this->currencyDetector->getCurrency()->getLabel(),
+            ])
             ->add('productCategories', null, ['associated_tostring' => 'getCategory'])
             ->add('productCollections', null, ['associated_tostring' => 'getCollection'])
         ;

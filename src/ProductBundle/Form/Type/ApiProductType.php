@@ -78,9 +78,6 @@ class ApiProductType extends AbstractType
      */
     public function getParent()
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-            ? 'Sonata\ProductBundle\Form\Type\ApiProductParentType'
-            : 'sonata_product_api_form_product_parent';
+        return ApiProductParentType::class;
     }
 }

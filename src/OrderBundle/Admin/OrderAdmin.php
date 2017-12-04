@@ -17,10 +17,19 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Currency\CurrencyFormType;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\CoreBundle\Form\Type\DatePickerType;
+use Sonata\OrderBundle\Form\Type\OrderStatusType;
+use Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType;
+use Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OrderAdmin extends AbstractAdmin
 {
@@ -77,27 +86,6 @@ class OrderAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
-            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
-            $localeType = 'Symfony\Component\Form\Extension\Core\Type\LocaleType';
-            $orderStatusType = 'Sonata\OrderBundle\Form\Type\OrderStatusType';
-            $paymentTransactionStatusType = 'Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType';
-            $productDeliveryStatusType = 'Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType';
-            $datePickerType = 'Sonata\CoreBundle\Form\Type\DatePickerType';
-            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
-        } else {
-            $modelListType = 'sonata_type_model_list';
-            $currencyType = 'sonata_currency';
-            $localeType = 'locale';
-            $orderStatusType = 'sonata_order_status';
-            $paymentTransactionStatusType = 'sonata_payment_transaction_status';
-            $productDeliveryStatusType = 'sonata_product_delivery_status';
-            $datePickerType = 'sonata_type_datetime_picker';
-            $countryType = 'country';
-        }
-
         // define group zoning
         $formMapper
              ->with($this->trans('order.form.group_main_label'), ['class' => 'col-md-12'])->end()
@@ -108,19 +96,19 @@ class OrderAdmin extends AbstractAdmin
         if (!$this->isChild()) {
             $formMapper
                 ->with($this->trans('order.form.group_main_label', [], 'SonataOrderBundle'))
-                    ->add('customer', $modelListType)
+                    ->add('customer', ModelListType::class)
                 ->end()
             ;
         }
 
         $formMapper
             ->with($this->trans('order.form.group_main_label', [], 'SonataOrderBundle'))
-                ->add('currency', $currencyType)
-                ->add('locale', $localeType)
-                ->add('status', $orderStatusType, ['translation_domain' => 'SonataOrderBundle'])
-                ->add('paymentStatus', $paymentTransactionStatusType, ['translation_domain' => 'SonataPaymentBundle'])
-                ->add('deliveryStatus', $productDeliveryStatusType, ['translation_domain' => 'SonataDeliveryBundle'])
-                ->add('validatedAt', $datePickerType, ['dp_side_by_side' => true])
+                ->add('currency', CurrencyFormType::class)
+                ->add('locale', LocaleType::class)
+                ->add('status', OrderStatusType::class, ['translation_domain' => 'SonataOrderBundle'])
+                ->add('paymentStatus', PaymentTransactionStatusType::class, ['translation_domain' => 'SonataPaymentBundle'])
+                ->add('deliveryStatus', ProductDeliveryStatusType::class, ['translation_domain' => 'SonataDeliveryBundle'])
+                ->add('validatedAt', DatePickerType::class, ['dp_side_by_side' => true])
             ->end()
             ->with($this->trans('order.form.group_billing_label', [], 'SonataOrderBundle'), ['collapsed' => true])
                 ->add('billingName')
@@ -129,7 +117,7 @@ class OrderAdmin extends AbstractAdmin
                 ->add('billingAddress3')
                 ->add('billingCity')
                 ->add('billingPostcode')
-                ->add('billingCountryCode', $countryType)
+                ->add('billingCountryCode', CountryType::class)
                 ->add('billingFax')
                 ->add('billingEmail')
                 ->add('billingMobile')
@@ -141,7 +129,7 @@ class OrderAdmin extends AbstractAdmin
                 ->add('shippingAddress3')
                 ->add('shippingCity')
                 ->add('shippingPostcode')
-                ->add('shippingCountryCode', $countryType)
+                ->add('shippingCountryCode', CountryType::class)
                 ->add('shippingFax')
                 ->add('shippingEmail')
                 ->add('shippingMobile')
@@ -154,15 +142,6 @@ class OrderAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $textType = 'Symfony\Component\Form\Extension\Core\Type\TextType';
-            $currencyType = 'Sonata\Component\Currency\CurrencyFormType';
-        } else {
-            $textType = 'text';
-            $currencyType = 'sonata_currency';
-        }
-
         $currency = $this->currencyDetector->getCurrency()->getLabel();
 
         $list
@@ -173,11 +152,17 @@ class OrderAdmin extends AbstractAdmin
         }
 
         $list
-            ->add('status', $textType, ['template' => 'SonataOrderBundle:OrderAdmin:list_status.html.twig'])
-            ->add('deliveryStatus', $textType, ['template' => 'SonataOrderBundle:OrderAdmin:list_delivery_status.html.twig'])
-            ->add('paymentStatus', $textType, ['template' => 'SonataOrderBundle:OrderAdmin:list_payment_status.html.twig'])
+            ->add('status', TextType::class, [
+                'template' => 'SonataOrderBundle:OrderAdmin:list_status.html.twig',
+            ])
+            ->add('deliveryStatus', TextType::class, [
+                'template' => 'SonataOrderBundle:OrderAdmin:list_delivery_status.html.twig',
+            ])
+            ->add('paymentStatus', TextType::class, [
+                'template' => 'SonataOrderBundle:OrderAdmin:list_payment_status.html.twig',
+            ])
             ->add('validatedAt')
-            ->add('totalInc', $currencyType, ['currency' => $currency])
+            ->add('totalInc', CurrencyFormType::class, ['currency' => $currency])
         ;
     }
 
@@ -186,17 +171,6 @@ class OrderAdmin extends AbstractAdmin
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $orderStatusType = 'Sonata\OrderBundle\Form\Type\OrderStatusType';
-            $productDeliveryStatusType = 'Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType';
-            $paymentTransactionStatusType = 'Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType';
-        } else {
-            $orderStatusType = 'sonata_order_status';
-            $productDeliveryStatusType = 'sonata_product_delivery_status';
-            $paymentTransactionStatusType = 'sonata_payment_transaction_status';
-        }
-
         $filter
             ->add('reference')
         ;
@@ -206,9 +180,9 @@ class OrderAdmin extends AbstractAdmin
         }
 
         $filter
-            ->add('status', null, [], $orderStatusType, ['translation_domain' => $this->translationDomain])
-            ->add('deliveryStatus', null, [], $productDeliveryStatusType, ['translation_domain' => 'SonataDeliveryBundle'])
-            ->add('paymentStatus', null, [], $paymentTransactionStatusType, ['translation_domain' => 'SonataPaymentBundle'])
+            ->add('status', null, [], OrderStatusType::class, ['translation_domain' => $this->translationDomain])
+            ->add('deliveryStatus', null, [], ProductDeliveryStatusType::class, ['translation_domain' => 'SonataDeliveryBundle'])
+            ->add('paymentStatus', null, [], PaymentTransactionStatusType::class, ['translation_domain' => 'SonataPaymentBundle'])
         ;
     }
 

@@ -12,9 +12,14 @@
 namespace Sonata\BasketBundle\Form;
 
 use Sonata\Component\Basket\BasketInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -51,19 +56,6 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $entityType = 'Symfony\Bridge\Doctrine\Form\Type\EntityType';
-            $submitType = 'Symfony\Component\Form\Extension\Core\Type\SubmitType';
-            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
-            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
-        } else {
-            $entityType = 'entity';
-            $submitType = 'submit';
-            $choiceType = 'choice';
-            $countryType = 'country';
-        }
-
         $addresses = $options['addresses'];
 
         if (count($addresses) > 0) {
@@ -77,7 +69,7 @@ class AddressType extends AbstractType
                 }
             }
 
-            $builder->add('addresses', $entityType, [
+            $builder->add('addresses', EntityType::class, [
                 'choices' => $addresses,
                 'preferred_choices' => [$defaultAddress],
                 'class' => $this->addressClass,
@@ -85,7 +77,7 @@ class AddressType extends AbstractType
                 'multiple' => false,
                 'mapped' => false,
             ])
-            ->add('useSelected', $submitType, [
+            ->add('useSelected', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary',
                     'style' => 'margin-bottom:20px;',
@@ -98,21 +90,17 @@ class AddressType extends AbstractType
         $builder->add('name', null, ['required' => !count($addresses)]);
 
         if (isset($options['types'])) {
-            $types = $options['types'];
             $typeOptions = [
+                'choices' => array_flip($options['types']),
                 'translation_domain' => 'SonataCustomerBundle',
             ];
-            // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
-            if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
-                $types = array_flip($types);
-                // choice_as_value option is not needed in SF 3.0+
-                if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
-                    $typeOptions['choices_as_values'] = true;
-                }
-            }
-            $typeOptions['choices'] = $types;
 
-            $builder->add('type', $choiceType, $typeOptions);
+            // choice_as_value option is not needed in SF 3.0+
+            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+                $typeOptions['choices_as_values'] = true;
+            }
+
+            $builder->add('type', ChoiceType::class, $typeOptions);
         }
 
         $builder
@@ -131,20 +119,15 @@ class AddressType extends AbstractType
         $countryOptions = ['required' => !count($addresses)];
 
         if (count($countries) > 0) {
-            // NEXT_MAJOR: Remove this "if" (when requirement of Symfony is >= 2.7)
-            if (method_exists('Symfony\Component\Form\AbstractType', 'configureOptions')) {
-                $countries = array_flip($countries);
-
-                // choice_as_value options is not needed in SF 3.0+
-                if (method_exists('Symfony\Component\Form\FormTypeInterface', 'setDefaultOptions')) {
-                    $countryOptions['choices_as_values'] = true;
-                }
+            // choice_as_value options is not needed in SF 3.0+
+            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
+                $countryOptions['choices_as_values'] = true;
             }
 
-            $countryOptions['choices'] = $countries;
+            $countryOptions['choices'] = array_flip($countries);
         }
 
-        $builder->add('countryCode', $countryType, $countryOptions);
+        $builder->add('countryCode', CountryType::class, $countryOptions);
     }
 
     /**

@@ -17,7 +17,12 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\CoreBundle\Form\Type\DatePickerType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CustomerAdmin extends AbstractAdmin
 {
@@ -34,28 +39,17 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
-            $localeType = 'Symfony\Component\Form\Extension\Core\Type\LocaleType';
-            $datePickerType = 'Sonata\CoreBundle\Form\Type\DatePickerType';
-        } else {
-            $modelListType = 'sonata_type_model_list';
-            $localeType = 'locale';
-            $datePickerType = 'sonata_type_date_picker';
-        }
-
         $now = new \DateTime();
 
         $formMapper
             ->with('customer.group.general', [
                     'class' => 'col-md-7',
                 ])
-                ->add('user', $modelListType)
+                ->add('user', ModelListType::class)
                 ->add('firstname')
                 ->add('lastname')
-                ->add('locale', $localeType)
-                ->add('birthDate', $datePickerType, [
+                ->add('locale', LocaleType::class)
+                ->add('birthDate', DatePickerType::class, [
                     'years' => range(1900, $now->format('Y')),
                     'dp_min_date' => '1-1-1900',
                     'dp_max_date' => $now->format('c'),
@@ -79,15 +73,8 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $textType = 'Symfony\Component\Form\Extension\Core\Type\TextType';
-        } else {
-            $textType = 'text';
-        }
-
         $list
-            ->addIdentifier('name', $textType, ['code' => '__toString'])
+            ->addIdentifier('name', TextType::class, ['code' => '__toString'])
             ->add('user')
             ->add('email')
             ->add('createdAt')
@@ -101,28 +88,17 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureShowFields(ShowMapper $filter)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
-            $localeType = 'Symfony\Component\Form\Extension\Core\Type\LocaleType';
-            $emailType = 'Symfony\Component\Form\Extension\Core\Type\EmailType';
-        } else {
-            $modelListType = 'sonata_type_model_list';
-            $localeType = 'locale';
-            $emailType = 'email';
-        }
-
         $filter
             ->with('customer.group.general')
-                ->add('user', $modelListType)
+                ->add('user', ModelListType::class)
                 ->add('firstname')
                 ->add('lastname')
-                ->add('locale', $localeType)
+                ->add('locale', LocaleType::class)
                 ->add('birthDate')
                 ->add('birthPlace')
             ->end()
             ->with('customer.group.contact')
-                ->add('email', $emailType)
+                ->add('email', EmailType::class)
                 ->add('phoneNumber')
                 ->add('mobileNumber')
                 ->add('faxNumber')
@@ -136,19 +112,12 @@ class CustomerAdmin extends AbstractAdmin
      */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $localeType = 'Symfony\Component\Form\Extension\Core\Type\LocaleType';
-        } else {
-            $localeType = 'locale';
-        }
-
         $filter
             ->add('firstname')
             ->add('lastname')
             ->add('user')
             ->add('email')
-            ->add('locale', null, [], $localeType)
+            ->add('locale', null, [], LocaleType::class)
             ->add('isFake')
         ;
     }

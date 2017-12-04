@@ -19,6 +19,7 @@ use Sonata\Component\Payment\PaymentSelectorInterface;
 use Sonata\Component\Payment\Pool as PaymentPool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class PaymentType extends AbstractType
@@ -55,13 +56,6 @@ class PaymentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $choiceType = 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
-        } else {
-            $choiceType = 'choice';
-        }
-
         $basket = $builder->getData();
 
         if (!$basket instanceof BasketInterface) {
@@ -97,7 +91,7 @@ class PaymentType extends AbstractType
         $method = $basket->getPaymentMethod() ?: current($methods);
         $basket->setPaymentMethod($method ?: null);
 
-        $sub = $builder->create('paymentMethod', $choiceType, [
+        $sub = $builder->create('paymentMethod', ChoiceType::class, [
             'expanded' => true,
             'choice_list' => new SimpleChoiceList($choices),
         ]);

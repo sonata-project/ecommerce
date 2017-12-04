@@ -15,6 +15,10 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\CustomerBundle\Form\Type\AddressTypeType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AddressAdmin extends AbstractAdmin
 {
@@ -34,17 +38,6 @@ class AddressAdmin extends AbstractAdmin
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $addressTypeType = 'Sonata\CustomerBundle\Form\Type\AddressTypeType';
-            $modelListType = 'Sonata\AdminBundle\Form\Type\ModelListType';
-            $countryType = 'Symfony\Component\Form\Extension\Core\Type\CountryType';
-        } else {
-            $addressTypeType = 'sonata_customer_address_types';
-            $modelListType = 'sonata_type_model_list';
-            $countryType = 'country';
-        }
-
         $formMapper
             ->with($this->trans('address.form.group_contact_label', [], 'SonataCustomerBundle'), [
                 'class' => 'col-md-7',
@@ -59,14 +52,14 @@ class AddressAdmin extends AbstractAdmin
             ->with($this->trans('address.form.group_advanced_label', [], 'SonataCustomerBundle'), [
                 'class' => 'col-md-5',
             ])
-                ->add('type', $addressTypeType, ['translation_domain' => 'SonataCustomerBundle'])
+                ->add('type', AddressTypeType::class, ['translation_domain' => 'SonataCustomerBundle'])
                 ->add('current', null, ['required' => false])
                 ->add('name')
             ->end();
 
         if (!$this->isChild()) {
             $formMapper->with($this->trans('address.form.group_contact_label', [], 'SonataCustomerBundle'))
-                ->add('customer', $modelListType)
+                ->add('customer', ModelListType::class)
             ->end()
             ;
         }
@@ -80,7 +73,7 @@ class AddressAdmin extends AbstractAdmin
                 ->add('address3')
                 ->add('postcode')
                 ->add('city')
-                ->add('countryCode', $countryType)
+                ->add('countryCode', CountryType::class)
             ->end()
         ;
     }
@@ -90,16 +83,12 @@ class AddressAdmin extends AbstractAdmin
      */
     public function configureListFields(ListMapper $list)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $textType = 'Symfony\Component\Form\Extension\Core\Type\TextType';
-        } else {
-            $textType = 'text';
-        }
-
         $list
             ->addIdentifier('name')
-            ->add('fulladdress', $textType, ['code' => 'getFullAddressHtml', 'template' => 'SonataCustomerBundle:Admin:list_address.html.twig'])
+            ->add('fulladdress', TextType::class, [
+                'code' => 'getFullAddressHtml',
+                'template' => 'SonataCustomerBundle:Admin:list_address.html.twig',
+            ])
             ->add('current')
             ->add('typeCode', 'trans', ['catalogue' => $this->translationDomain])
         ;
@@ -110,16 +99,9 @@ class AddressAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        // NEXT_MAJOR: Keep FQCN when bumping Symfony requirement to 2.8+.
-        if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
-            $addressTypeType = 'Sonata\CustomerBundle\Form\Type\AddressTypeType';
-        } else {
-            $addressTypeType = 'sonata_customer_address_types';
-        }
-
         $filter
             ->add('current')
-            ->add('type', null, [], $addressTypeType, ['translation_domain' => 'SonataCustomerBundle'])
+            ->add('type', null, [], AddressTypeType::class, ['translation_domain' => 'SonataCustomerBundle'])
         ;
 
         if (!$this->isChild()) {
