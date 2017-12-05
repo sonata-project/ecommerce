@@ -11,10 +11,10 @@
 
 namespace Sonata\Component\Customer;
 
-use FOS\UserBundle\Model\UserInterface;
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
 {
@@ -29,7 +29,7 @@ class CustomerSelector implements CustomerSelectorInterface
     protected $session;
 
     /**
-     * @var \Symfony\Component\Security\Core\SecurityContextInterface
+     * @var SecurityContextInterface
      */
     protected $securityContext;
 
@@ -69,7 +69,7 @@ class CustomerSelector implements CustomerSelectorInterface
             $user = $this->securityContext->getToken()->getUser();
 
             if (!$user instanceof UserInterface) {
-                throw new \RuntimeException('User must be an instance of FOS\UserBundle\Model\UserInterface');
+                throw new \RuntimeException('User must be an instance of Symfony\Component\Security\Core\User\UserInterface');
             }
 
             $customer = $this->customerManager->findOneBy([

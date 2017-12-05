@@ -12,9 +12,9 @@
 namespace Sonata\CustomerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\UserInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseCustomer implements CustomerInterface
 {
@@ -78,7 +78,7 @@ abstract class BaseCustomer implements CustomerInterface
     protected $createdAt;
 
     /**
-     * @var \FOS\UserBundle\Model\UserInterface
+     * @var UserInterface
      */
     protected $user;
 
