@@ -11,13 +11,47 @@
 
 namespace Sonata\Component\Tests\Customer;
 
-use FOS\UserBundle\Model\User as AbstractUser;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-// clean this by adding a dedicated interface into the SonataUserBundle
-class ValidUser extends AbstractUser
+class ValidUser implements UserInterface
 {
     public function getId()
     {
         return 1;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getRoles()
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPassword()
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSalt()
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUsername()
+    {
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function eraseCredentials()
+    {
     }
 }

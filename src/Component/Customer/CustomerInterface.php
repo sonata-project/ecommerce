@@ -11,7 +11,7 @@
 
 namespace Sonata\Component\Customer;
 
-use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 interface CustomerInterface
 {
@@ -81,14 +81,14 @@ interface CustomerInterface
     /**
      * Set user.
      *
-     * @param \FOS\UserBundle\Model\UserInterface $user
+     * @param UserInterface $user
      */
     public function setUser(UserInterface $user);
 
     /**
      * Get user.
      *
-     * @return \FOS\UserBundle\Model\UserInterface $user
+     * @return UserInterface $user
      */
     public function getUser();
 
