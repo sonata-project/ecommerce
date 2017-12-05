@@ -12,6 +12,7 @@
 namespace Sonata\Component\Tests\Payment\Scellius;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Payment\Scellius\ScelliusPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
@@ -47,7 +48,7 @@ class ScelliusPaymentTest extends TestCase
      */
     public function testValidPayment()
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
@@ -101,7 +102,7 @@ class ScelliusPaymentTest extends TestCase
 
     public function testSendConfirmationReceipt()
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
@@ -145,7 +146,7 @@ class ScelliusPaymentTest extends TestCase
 
     public function testIsCallbackValid()
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
@@ -184,7 +185,7 @@ class ScelliusPaymentTest extends TestCase
 
     public function testGetOrderReference()
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
@@ -199,7 +200,7 @@ class ScelliusPaymentTest extends TestCase
 
     public function testApplyTransactionId()
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
@@ -217,7 +218,7 @@ class ScelliusPaymentTest extends TestCase
      */
     public function testInvalidCurrencySendbankPayment()
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
 
@@ -245,7 +246,7 @@ class ScelliusPaymentTest extends TestCase
 
     public function testValidSendbankPayment()
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback([$this, 'callbackValidsendbank']));
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
@@ -288,7 +289,7 @@ class ScelliusPaymentTest extends TestCase
      */
     public function testEncodeString($data, $expected)
     {
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');

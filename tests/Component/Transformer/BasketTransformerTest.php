@@ -12,6 +12,7 @@
 namespace Sonata\Component\Tests\Transformer;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Transformer\BasketTransformer;
@@ -41,7 +42,7 @@ class BasketTransformerTest extends TestCase
 
         $productPool = $this->createMock('Sonata\Component\Product\Pool');
 
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $basketTransform = new BasketTransformer($orderManager, $productPool, $eventDispatcher, $logger);
 

@@ -14,6 +14,7 @@ namespace Sonata\Component\Tests\Payment;
 use Buzz\Browser;
 use Buzz\Message\Response;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Payment\CheckPayment;
 use Sonata\OrderBundle\Entity\BaseOrder;
 
@@ -36,7 +37,7 @@ class CheckPaymentTest extends TestCase
     public function testPassPayment()
     {
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
 
         $browser = new Browser();
         $payment = new CheckPayment($router, $logger, $browser);
@@ -82,7 +83,7 @@ class CheckPaymentTest extends TestCase
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
 
         $client = $this->createMock('Buzz\Client\ClientInterface');
         $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response) {
@@ -108,7 +109,7 @@ class CheckPaymentTest extends TestCase
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->onConsecutiveCalls(null, $order));
 
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $logger = $this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $browser = new Browser();
 
         $payment = new CheckPayment($router, $logger, $browser);
