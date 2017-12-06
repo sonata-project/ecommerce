@@ -11,16 +11,12 @@
 
 namespace Sonata\Component\Tests\Customer;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Customer\CustomerSelector;
+use Sonata\Component\Tests\Customer\ValidUser;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-
-class ValidUser extends BaseUser
-{
-}
 
 class User
 {
@@ -58,7 +54,7 @@ class CustomerSelectorTest extends TestCase
 
     /**
      * @expectedException        \RuntimeException
-     * @expectedExceptionMessage User must be an instance of FOS\UserBundle\Model\UserInterface
+     * @expectedExceptionMessage User must be an instance of Symfony\Component\Security\Core\User\UserInterface
      */
     public function testInvalidUserType()
     {

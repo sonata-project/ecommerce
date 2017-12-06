@@ -12,6 +12,7 @@
 namespace Sonata\Component\Tests\Delivery;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Delivery\Selector;
 use Sonata\Component\Product\Pool as ProductPool;
@@ -282,7 +283,7 @@ class SelectorTest extends TestCase
         $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
 
         $selector = new Selector($deliveryPool, $productPool);
-        $selector->setLogger($this->createMock('Symfony\Component\HttpKernel\Log\LoggerInterface'));
+        $selector->setLogger($this->createMock(LoggerInterface::class));
 
         $instances = $selector->getAvailableMethods($basket, $address);
         $this->assertCount(3, $instances);
