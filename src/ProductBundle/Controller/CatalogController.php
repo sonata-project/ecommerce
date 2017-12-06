@@ -25,9 +25,9 @@ class CatalogController extends Controller
     /**
      * Index action for catalog.
      *
-     * @return Response
-     *
      * @throws NotFoundHttpException
+     *
+     * @return Response
      */
     public function indexAction()
     {

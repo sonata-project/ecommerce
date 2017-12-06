@@ -44,12 +44,11 @@ class CurrencyDoctrineTypeTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage 'currency' type only handles values of type Sonata\Component\Currency\CurrencyInterface ; value of type string given
-     */
     public function testConvertToDatabaseValueException()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('\'currency\' type only handles values of type Sonata\\Component\\Currency\\CurrencyInterface ; value of type string given');
+
         $platform = new MockPlatform();
         Type::getType('currency')->convertToDatabaseValue('EUR', $platform);
     }
@@ -67,12 +66,11 @@ class CurrencyDoctrineTypeTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage '42' is not a supported currency.
-     */
     public function testConvertToPHPValueException()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('\'42\' is not a supported currency.');
+
         $platform = new MockPlatform();
         Type::getType('currency')->convertToPHPValue('42', $platform);
     }

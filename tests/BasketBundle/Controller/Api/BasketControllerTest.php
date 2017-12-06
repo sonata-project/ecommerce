@@ -42,12 +42,11 @@ class BasketControllerTest extends TestCase
         $this->assertEquals($basket, $this->createBasketController($basketManager)->getBasketAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Basket (42) not found
-     */
     public function testGetBasketActionNotFoundException()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Basket (42) not found');
+
         $this->createBasketController()->getBasketAction(42);
     }
 
@@ -64,12 +63,11 @@ class BasketControllerTest extends TestCase
         $this->assertEquals($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Basket (42) not found
-     */
     public function testGetBasketelementsActionNotFoundException()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Basket (42) not found');
+
         $this->createBasketController()->getBasketBasketelementsAction(42);
     }
 
@@ -170,7 +168,7 @@ class BasketControllerTest extends TestCase
 
     public function testDeleteBasketInvalidAction()
     {
-        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
         $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));

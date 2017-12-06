@@ -97,12 +97,11 @@ class OrderManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    /**
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage Invalid sort field 'invalid' in 'Sonata\OrderBundle\Entity\BaseOrder' class
-     */
     public function testGetPagerWithInvalidSort()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Invalid sort field \'invalid\' in \'Sonata\\OrderBundle\\Entity\\BaseOrder\' class');
+
         $self = $this;
         $this
             ->getOrderManager(function ($qb) use ($self) {

@@ -31,12 +31,11 @@ class LoaderTest extends TestCase
         $this->assertInstanceOf('Sonata\Component\Basket\BasketInterface', $loader->getBasket());
     }
 
-    /**
-     * @expectedException        \RuntimeException
-     */
     public function testExceptionLoadBasket()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
+
+        $this->expectException('RuntimeException');
 
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $basketFactory = $this->createMock('Sonata\Component\Basket\BasketFactoryInterface');

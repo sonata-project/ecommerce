@@ -26,7 +26,7 @@ class OrderTest extends BaseOrder
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class BaseOrderTest extends \PHPUnit_Framework_TestCase
+class BaseOrderTest extends \PHPUnit\Framework\TestCase
 {
     public function testOrderElementsVatAmounts()
     {
@@ -51,7 +51,7 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
 
         $items = $order->getVatAmounts();
 
-        $this->assertTrue(is_array($items), 'Should return an array');
+        $this->assertInternalType('array', $items, 'Should return an array');
 
         foreach ($items as $item) {
             $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');

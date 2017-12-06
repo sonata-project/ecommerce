@@ -158,9 +158,9 @@ class AddressController
      * @param int     $id      An Address identifier
      * @param Request $request A Symfony request
      *
-     * @return Address
-     *
      * @throws NotFoundHttpException
+     *
+     * @return Address
      */
     public function putAddressAction($id, Request $request)
     {
@@ -183,9 +183,9 @@ class AddressController
      *
      * @param int $id An Address identifier
      *
-     * @return \FOS\RestBundle\View\View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return \FOS\RestBundle\View\View
      */
     public function deleteAddressAction($id)
     {
@@ -205,9 +205,9 @@ class AddressController
      *
      * @param int $id
      *
-     * @return AddressInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return AddressInterface
      */
     protected function getAddress($id)
     {

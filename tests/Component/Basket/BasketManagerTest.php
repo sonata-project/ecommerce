@@ -96,12 +96,11 @@ class BasketManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    /**
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage Invalid sort field 'invalid' in 'Sonata\BasketBundle\Entity\BaseBasket' class
-     */
     public function testGetPagerWithInvalidSort()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Invalid sort field \'invalid\' in \'Sonata\\BasketBundle\\Entity\\BaseBasket\' class');
+
         $self = $this;
         $this
             ->getBasketManager(function ($qb) use ($self) {

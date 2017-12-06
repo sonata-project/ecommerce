@@ -111,11 +111,11 @@ class BasketElementTest extends TestCase
     {
         $basketElement = $this->getBasketElement();
 
-        $this->assertEquals(true, $basketElement->hasOption('option1'), 'BasketElement has one option : option1');
-        $this->assertEquals(false, $basketElement->hasOption('fake'), 'BasketElement has not option : fake');
+        $this->assertTrue($basketElement->hasOption('option1'), 'BasketElement has one option : option1');
+        $this->assertFalse($basketElement->hasOption('fake'), 'BasketElement has not option : fake');
 
         $this->assertEquals('toto', $basketElement->getOption('option1'), 'option1 option = toto');
-        $this->assertEquals(null, $basketElement->getOption('fake'), 'fake option = null');
+        $this->assertNull($basketElement->getOption('fake'), 'fake option = null');
     }
 
     public function testQuantity()
@@ -161,7 +161,7 @@ class BasketElementTest extends TestCase
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
-        $this->assertEquals(true, $basketElement->isValid(), 'BasketElement is valid');
+        $this->assertTrue($basketElement->isValid(), 'BasketElement is valid');
 
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
             ->setMockClassName('BasketTest_Product')
@@ -169,7 +169,7 @@ class BasketElementTest extends TestCase
         $product->expects($this->once())->method('getEnabled')->will($this->returnValue(false));
         $basketElement->setProduct('product_code', $product);
 
-        $this->assertEquals(false, $basketElement->isValid(), 'BasketElement returns the correct default quantity');
+        $this->assertFalse($basketElement->isValid(), 'BasketElement returns the correct default quantity');
     }
 
     public function testGettersSetters()

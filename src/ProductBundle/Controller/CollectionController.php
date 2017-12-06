@@ -35,10 +35,11 @@ class CollectionController extends Controller
     /**
      * Display one collection.
      *
-     * @throws NotFoundHttpException
      *
      * @param $collectionId
      * @param $slug
+     *
+     * @throws NotFoundHttpException
      *
      * @return Response
      */

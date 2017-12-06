@@ -37,12 +37,11 @@ class InvoiceControllerTest extends TestCase
         $this->assertEquals($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Invoice (42) not found
-     */
     public function testGetInvoiceActionNotFoundException()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Invoice (42) not found');
+
         $this->createInvoiceController()->getInvoiceAction(42);
     }
 

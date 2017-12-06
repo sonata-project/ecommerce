@@ -94,8 +94,6 @@ class ProductAdmin extends AbstractAdmin
                 return $this->getProductPool()->getManager($code)->getClass();
             }
         }
-
-        return;
     }
 
     /**

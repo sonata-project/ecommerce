@@ -16,7 +16,7 @@ use Sonata\Component\Generator\Mustache;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class MustacheTest extends \PHPUnit_Framework_TestCase
+class MustacheTest extends \PHPUnit\Framework\TestCase
 {
     public function testRenderString()
     {

@@ -133,9 +133,9 @@ abstract class BaseProductController extends Controller
      * @param ProductInterface      $product
      * @param ProductInterface|null $variation
      *
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function variationToProductAction(ProductInterface $product, ProductInterface $variation = null)
     {

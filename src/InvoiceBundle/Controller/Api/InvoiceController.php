@@ -138,9 +138,9 @@ class InvoiceController
      *
      * @param $id
      *
-     * @return InvoiceInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return InvoiceInterface
      */
     protected function getInvoice($id)
     {

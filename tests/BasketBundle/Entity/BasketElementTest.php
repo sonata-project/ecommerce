@@ -16,7 +16,7 @@ use Sonata\Component\Basket\BasketElement;
 /**
  * @author Vincent Composieux <composieux@ekino.com>
  */
-class BasketElementTest extends \PHPUnit_Framework_TestCase
+class BasketElementTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test quantity setter, if quantity is negative, must returns a quantity of 1.

@@ -82,11 +82,10 @@ class BasketResizeFormListenerTest extends TestCase
         $formListener->preBind($this->getFormEvent(false, false));
     }
 
-    /**
-     * @expectedException \Symfony\Component\Form\Exception\UnexpectedTypeException
-     */
     public function testPreBindException()
     {
+        $this->expectException(\Symfony\Component\Form\Exception\UnexpectedTypeException::class);
+
         $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
         $factory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');

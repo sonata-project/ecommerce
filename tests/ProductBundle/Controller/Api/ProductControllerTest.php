@@ -38,12 +38,11 @@ class ProductControllerTest extends TestCase
         $this->assertEquals($product, $this->createProductController($product)->getProductAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Product (42) not found
-     */
     public function testGetProductActionNotFoundException()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Product (42) not found');
+
         $this->createProductController()->getProductAction(42);
     }
 
@@ -241,7 +240,7 @@ class ProductControllerTest extends TestCase
 
     public function testDeleteProductInvalidAction()
     {
-        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 

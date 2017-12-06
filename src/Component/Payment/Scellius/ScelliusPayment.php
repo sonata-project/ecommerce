@@ -620,9 +620,9 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @throws \RuntimeException
-     *
      * @param $currency
+     *
+     * @throws \RuntimeException
      *
      * @return
      */
@@ -638,10 +638,10 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @throws \RuntimeException
-     *
      * @param $amount
      * @param $currency
+     *
+     * @throws \RuntimeException
      *
      * @return string
      */

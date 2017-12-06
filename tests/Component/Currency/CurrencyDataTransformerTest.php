@@ -48,7 +48,7 @@ class CurrencyDataTransformerTest extends TestCase
             ->method('findOneByLabel')
             ->will($this->returnValue($currency));
 
-        $this->assertEquals(null, $this->currencyDataTransformer->reverseTransform(null));
+        $this->assertNull($this->currencyDataTransformer->reverseTransform(null));
         $this->assertEquals('EUR', $this->currencyDataTransformer->reverseTransform('EUR')->getLabel());
     }
 }

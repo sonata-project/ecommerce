@@ -43,7 +43,7 @@ class SonataOrderExtension extends Extension
         $loader->load('form.xml');
         $loader->load('twig.xml');
 
-        if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
+        if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
             $loader->load('serializer.xml');
         }

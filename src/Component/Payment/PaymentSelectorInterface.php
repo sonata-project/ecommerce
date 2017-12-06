@@ -31,9 +31,9 @@ interface PaymentSelectorInterface
      *
      * @param $bank The payment method code
      *
-     * @return PaymentInterface
-     *
      * @throws PaymentNotFoundException
+     *
+     * @return PaymentInterface
      */
     public function getPayment($bank);
 }

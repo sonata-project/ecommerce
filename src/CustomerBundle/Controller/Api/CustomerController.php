@@ -149,9 +149,9 @@ class CustomerController
      *
      * @param Request $request A Symfony request
      *
-     * @return Customer
-     *
      * @throws NotFoundHttpException
+     *
+     * @return Customer
      */
     public function postCustomerAction(Request $request)
     {
@@ -177,9 +177,9 @@ class CustomerController
      * @param int     $id      A Customer identifier
      * @param Request $request A Symfony request
      *
-     * @return Customer
-     *
      * @throws NotFoundHttpException
+     *
+     * @return Customer
      */
     public function putCustomerAction($id, Request $request)
     {
@@ -202,9 +202,9 @@ class CustomerController
      *
      * @param int $id A Customer identifier
      *
-     * @return \FOS\RestBundle\View\View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return \FOS\RestBundle\View\View
      */
     public function deleteCustomerAction($id)
     {
@@ -289,9 +289,9 @@ class CustomerController
      * @param int     $id      A Customer identifier
      * @param Request $request A Symfony request
      *
-     * @return Address
-     *
      * @throws NotFoundHttpException
+     *
+     * @return Address
      */
     public function postCustomerAddressAction($id, Request $request)
     {
@@ -378,9 +378,9 @@ class CustomerController
      *
      * @param $id
      *
-     * @return CustomerInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return CustomerInterface
      */
     protected function getCustomer($id)
     {
