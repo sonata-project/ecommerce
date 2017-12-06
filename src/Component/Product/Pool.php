@@ -82,8 +82,6 @@ class Pool
                 return $code;
             }
         }
-
-        return;
     }
 
     /**

@@ -39,12 +39,11 @@ class AddressControllerTest extends TestCase
         $this->assertEquals($address, $this->createAddressController($address)->getAddressAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Address (42) not found
-     */
     public function testGetAddressActionNotFoundException()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Address (42) not found');
+
         $this->createAddressController()->getAddressAction(42);
     }
 
@@ -143,7 +142,7 @@ class AddressControllerTest extends TestCase
 
     public function testDeleteAddressInvalidAction()
     {
-        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
         $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
         $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));

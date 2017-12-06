@@ -21,9 +21,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class OrderController extends Controller
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws AccessDeniedException
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -46,9 +46,9 @@ class OrderController extends Controller
     /**
      * @param string $reference
      *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws AccessDeniedException
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction($reference)
     {

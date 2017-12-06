@@ -45,7 +45,7 @@ class SonataProductExtension extends Extension
         $loader->load('menu.xml');
         $loader->load('serializer.xml');
 
-        if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
+        if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
             $loader->load('api_form.xml');
         }

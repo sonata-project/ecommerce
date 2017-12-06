@@ -52,11 +52,11 @@ class DebugPaymentController extends Controller
     /**
      * Check the Request and return the current Order.
      *
-     * @return OrderInterface
-     *
      * @throws InvalidTransactionException
      * @throws NotFoundHttpException
      * @throws \RuntimeException
+     *
+     * @return OrderInterface
      */
     protected function checkRequest()
     {

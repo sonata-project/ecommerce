@@ -14,7 +14,6 @@ namespace Sonata\Component\Tests\Customer;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Customer\CustomerSelector;
-use Sonata\Component\Tests\Customer\ValidUser;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
@@ -52,12 +51,11 @@ class CustomerSelectorTest extends TestCase
         $this->assertInstanceOf('Sonata\Component\Customer\CustomerInterface', $customer);
     }
 
-    /**
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage User must be an instance of Symfony\Component\Security\Core\User\UserInterface
-     */
     public function testInvalidUserType()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('User must be an instance of Symfony\\Component\\Security\\Core\\User\\UserInterface');
+
         $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
 
         $session = $this->createMock('Symfony\Component\HttpFoundation\Session\Session');

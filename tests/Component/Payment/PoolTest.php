@@ -42,12 +42,11 @@ class PoolTest extends TestCase
         $this->assertInstanceOf('Sonata\\Component\\Payment\\PassPayment', $pool->getMethod('pass_2'), 'Pool return an FreeDelivery Instance');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Payment handler of class Sonata\Component\Payment\PassPayment must return a code on getCode method. Please refer to the documentation (https://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)
-     */
     public function testAddMethodError()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Payment handler of class Sonata\\Component\\Payment\\PassPayment must return a code on getCode method. Please refer to the documentation (https://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)');
+
         $pool = new Pool();
 
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');

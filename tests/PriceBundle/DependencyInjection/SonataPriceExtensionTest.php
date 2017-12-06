@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class SonataPriceExtensionTest extends \PHPUnit_Framework_TestCase
+class SonataPriceExtensionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Tests if the configuration is well parsed & parameters are well set.
@@ -37,11 +37,11 @@ class SonataPriceExtensionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Asserts that an InvalidConfigurationException is thrown when not providing currency parameter.
-     *
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
     public function testCurrencyRequired()
     {
+        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+
         $configuration = new ContainerBuilder();
         $loader = new SonataPriceExtension();
         $config = $this->getDefaultConfig();

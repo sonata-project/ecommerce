@@ -164,9 +164,9 @@ class ProductController
      * @param string  $provider A product provider name
      * @param Request $request  A Symfony request
      *
-     * @return Product
-     *
      * @throws NotFoundHttpException
+     *
+     * @return Product
      */
     public function postProductAction($provider, Request $request)
     {
@@ -198,9 +198,9 @@ class ProductController
      * @param string  $provider A product provider name
      * @param Request $request  A Symfony request
      *
-     * @return Product
-     *
      * @throws NotFoundHttpException
+     *
+     * @return Product
      */
     public function putProductAction($id, $provider, Request $request)
     {
@@ -223,9 +223,9 @@ class ProductController
      *
      * @param int $id A Product identifier
      *
-     * @return \FOS\RestBundle\View\View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return \FOS\RestBundle\View\View
      */
     public function deleteProductAction($id)
     {
@@ -475,9 +475,9 @@ class ProductController
      *
      * @param $id
      *
-     * @return ProductInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return ProductInterface
      */
     protected function getProduct($id)
     {

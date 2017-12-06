@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\Processor;
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTest extends \PHPUnit\Framework\TestCase
 {
     public function testDefaults()
     {

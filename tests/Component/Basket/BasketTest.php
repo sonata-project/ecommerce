@@ -267,7 +267,7 @@ class BasketTest extends TestCase
 
         $data = $basket->serialize();
 
-        $this->assertTrue(is_string($data));
+        $this->assertInternalType('string', $data);
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present
@@ -297,7 +297,7 @@ class BasketTest extends TestCase
 
         $data = $basket->serialize();
 
-        $this->assertTrue(is_string($data));
+        $this->assertInternalType('string', $data);
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present
@@ -327,12 +327,11 @@ class BasketTest extends TestCase
         $this->assertTrue(1 == count($basket->getBasketElements()), '::unserialize() restore elements');
     }
 
-    /**
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage The product does not exist
-     */
     public function testGetElementRaisesException()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('The product does not exist');
+
         $basket = new Basket();
         $basket->getElement(new Product());
     }

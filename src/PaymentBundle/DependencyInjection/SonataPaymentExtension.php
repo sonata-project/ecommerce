@@ -65,10 +65,10 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @throws \RuntimeException
-     *
      * @param ContainerBuilder $container
      * @param array            $config
+     *
+     * @throws \RuntimeException
      */
     public function configurePayment(ContainerBuilder $container, array $config)
     {

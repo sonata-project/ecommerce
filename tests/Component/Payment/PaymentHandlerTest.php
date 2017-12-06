@@ -68,12 +68,11 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($errorOrder, $order);
     }
 
-    /**
-     * @expectedException \Sonata\Component\Payment\InvalidTransactionException
-     * @expectedExceptionMessage Unable to find reference
-     */
     public function testHandleErrorInvalidTransactionException()
     {
+        $this->expectException(\Sonata\Component\Payment\InvalidTransactionException::class);
+        $this->expectExceptionMessage('Unable to find reference');
+
         $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
 
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
@@ -106,12 +105,11 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($errorOrder, $order);
     }
 
-    /**
-     * @expectedException \Sonata\Component\Payment\InvalidTransactionException
-     * @expectedExceptionMessage Invalid check - order ref: 42
-     */
     public function testHandleErrorInvalidTransactionException2()
     {
+        $this->expectException(\Sonata\Component\Payment\InvalidTransactionException::class);
+        $this->expectExceptionMessage('Invalid check - order ref: 42');
+
         $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
         $payment->expects($this->once())
             ->method('getOrderReference')
@@ -157,11 +155,10 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($errorOrder, $order);
     }
 
-    /**
-     * @expectedException \Doctrine\ORM\EntityNotFoundException
-     */
     public function testHandleErrorEntityNotFoundException()
     {
+        $this->expectException(\Doctrine\ORM\EntityNotFoundException::class);
+
         $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
         $payment->expects($this->once())
             ->method('getOrderReference')

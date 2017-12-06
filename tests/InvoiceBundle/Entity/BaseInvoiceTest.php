@@ -26,7 +26,7 @@ class InvoiceTest extends BaseInvoice
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class BaseInvoiceTest extends \PHPUnit_Framework_TestCase
+class BaseInvoiceTest extends \PHPUnit\Framework\TestCase
 {
     public function testInvoiceElementsVatAmounts()
     {
@@ -51,7 +51,7 @@ class BaseInvoiceTest extends \PHPUnit_Framework_TestCase
 
         $items = $invoice->getVatAmounts();
 
-        $this->assertTrue(is_array($items), 'Should return an array');
+        $this->assertInternalType('array', $items, 'Should return an array');
 
         foreach ($items as $item) {
             $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');

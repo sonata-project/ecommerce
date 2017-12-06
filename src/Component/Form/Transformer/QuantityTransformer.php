@@ -37,6 +37,6 @@ class QuantityTransformer implements DataTransformerInterface
      */
     public function reverseTransform($quantity)
     {
-        return intval($quantity);
+        return (int) $quantity;
     }
 }

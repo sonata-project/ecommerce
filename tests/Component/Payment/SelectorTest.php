@@ -25,7 +25,7 @@ class Address extends BaseAddress
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class SelectorTest extends \PHPUnit_Framework_TestCase
+class SelectorTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetPaymentPool()
     {
@@ -43,12 +43,11 @@ class SelectorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
     }
 
-    /**
-     * @expectedException \Sonata\Component\Payment\PaymentNotFoundException
-     * @expectedExceptionMessage Payment method with code 'not_existing' was not found
-     */
     public function testGetPaymentException()
     {
+        $this->expectException(\Sonata\Component\Payment\PaymentNotFoundException::class);
+        $this->expectExceptionMessage('Payment method with code \'not_existing\' was not found');
+
         $paymentPoolMethods = ['first method', 'second method'];
 
         $paymentPool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->getMock();

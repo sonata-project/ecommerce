@@ -185,9 +185,9 @@ class BasketController
      *
      * @param Request $request A Symfony request
      *
-     * @return BasketInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return BasketInterface
      */
     public function postBasketAction(Request $request)
     {
@@ -213,9 +213,9 @@ class BasketController
      * @param int     $id      A Basket identifier
      * @param Request $request A Symfony request
      *
-     * @return BasketInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return BasketInterface
      */
     public function putBasketAction($id, Request $request)
     {
@@ -238,9 +238,9 @@ class BasketController
      *
      * @param int $id A Basket identifier
      *
-     * @return \FOS\RestBundle\View\View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return \FOS\RestBundle\View\View
      */
     public function deleteBasketAction($id)
     {
@@ -274,9 +274,9 @@ class BasketController
      * @param int     $id      A basket identifier
      * @param Request $request A Symfony request
      *
-     * @return BasketInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return BasketInterface
      */
     public function postBasketBasketelementsAction($id, Request $request)
     {
@@ -304,9 +304,9 @@ class BasketController
      * @param int     $elementId A basket element identifier
      * @param Request $request   A Symfony request
      *
-     * @return BasketInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return BasketInterface
      */
     public function putBasketBasketelementsAction($basketId, $elementId, Request $request)
     {
@@ -331,9 +331,9 @@ class BasketController
      * @param int $basketId  A basket identifier
      * @param int $elementId A basket element identifier
      *
-     * @return \FOS\RestBundle\View\View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return \FOS\RestBundle\View\View
      */
     public function deleteBasketBasketelementsAction($basketId, $elementId)
     {
@@ -487,9 +487,9 @@ class BasketController
      *
      * @param $id
      *
-     * @return BasketInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return BasketInterface
      */
     protected function getBasket($id)
     {
@@ -507,9 +507,9 @@ class BasketController
      *
      * @param $id
      *
-     * @return BasketElementInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return BasketElementInterface
      */
     protected function getBasketElement($id)
     {
@@ -527,9 +527,9 @@ class BasketController
      *
      * @param $id
      *
-     * @return ProductInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return ProductInterface
      */
     protected function getProduct($id)
     {

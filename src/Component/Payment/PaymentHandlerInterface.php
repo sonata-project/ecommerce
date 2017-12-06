@@ -22,10 +22,10 @@ interface PaymentHandlerInterface
      * @param Request         $request
      * @param BasketInterface $basket
      *
-     * @return \Sonata\Component\Order\OrderInterface
-     *
      * @throws \Doctrine\ORM\EntityNotFoundException
      * @throws InvalidTransactionException
+     *
+     * @return \Sonata\Component\Order\OrderInterface
      */
     public function handleError(Request $request, BasketInterface $basket);
 
