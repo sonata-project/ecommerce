@@ -171,7 +171,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters)
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
      *
      * @return Request
      */
