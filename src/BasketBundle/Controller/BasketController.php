@@ -21,6 +21,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Intl\Intl;
@@ -36,7 +38,7 @@ class BasketController extends Controller
      *
      * @param Form $form
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction($form = null)
     {
@@ -45,7 +47,7 @@ class BasketController extends Controller
         ]);
 
         // always validate the basket
-        if (!$form->isBound()) {
+        if (!$form->isSubmitted()) {
             if ($violations = $this->get('validator')->validate($form)) {
                 $violationMapper = new ViolationMapper();
                 foreach ($violations as $violation) {
@@ -67,12 +69,12 @@ class BasketController extends Controller
     /**
      * Update basket form rendering & saving.
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse|Response
      */
     public function updateAction()
     {
         $form = $this->createForm(BasketType::class, $this->get('sonata.basket'), ['validation_groups' => ['elements']]);
-        $form->handleRequest($this->get('request'));
+        $form->handleRequest($this->getCurrentRequest());
 
         if ($form->isValid()) {
             $basket = $form->getData();
@@ -96,11 +98,11 @@ class BasketController extends Controller
      * @throws MethodNotAllowedException
      * @throws NotFoundHttpException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function addProductAction()
     {
-        $request = $this->get('request');
+        $request = $this->getCurrentRequest();
         $params = $request->get('add_basket');
 
         if ('POST' != $request->getMethod()) {
@@ -170,7 +172,7 @@ class BasketController extends Controller
     /**
      * Resets (empties) the basket.
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function resetAction()
     {
@@ -182,7 +184,7 @@ class BasketController extends Controller
     /**
      * Displays a header preview of the basket.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function headerPreviewAction()
     {
@@ -195,7 +197,7 @@ class BasketController extends Controller
      * Order process step 1: retrieve the customer associated with the logged in user if there's one
      * or create an empty customer and put it in the basket.
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function authenticationStepAction()
     {
@@ -214,10 +216,11 @@ class BasketController extends Controller
      *
      * @throws HttpException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function paymentStepAction()
     {
+        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         if (0 == $basket->countBasketElements()) {
@@ -241,8 +244,8 @@ class BasketController extends Controller
             'validation_groups' => ['delivery'],
         ]);
 
-        if ('POST' == $this->get('request')->getMethod()) {
-            $form->handleRequest($this->get('request'));
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
                 // save the basket
@@ -266,10 +269,11 @@ class BasketController extends Controller
      *
      * @throws NotFoundHttpException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function deliveryStepAction()
     {
+        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         if (0 == $basket->countBasketElements()) {
@@ -296,8 +300,8 @@ class BasketController extends Controller
 
         $template = 'SonataBasketBundle:Basket:delivery_step.html.twig';
 
-        if ('POST' == $this->get('request')->getMethod()) {
-            $form->handleRequest($this->get('request'));
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
                 // save the basket
@@ -321,10 +325,11 @@ class BasketController extends Controller
      *
      * @throws NotFoundHttpException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function deliveryAddressStepAction()
     {
+        $request = $this->getCurrentRequest();
         $customer = $this->get('sonata.customer.selector')->get();
 
         if (!$customer) {
@@ -353,8 +358,8 @@ class BasketController extends Controller
         $form = $this->createForm(AddressType::class, null, ['addresses' => $addresses]);
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
-        if ('POST' == $this->get('request')->getMethod()) {
-            $form->handleRequest($this->get('request'));
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
                 if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
@@ -396,10 +401,11 @@ class BasketController extends Controller
      *
      * @throws NotFoundHttpException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function paymentAddressStepAction()
     {
+        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         if (0 == $basket->countBasketElements()) {
@@ -418,8 +424,8 @@ class BasketController extends Controller
         $form = $this->createForm(AddressType::class, null, ['addresses' => $addresses->toArray()]);
         $template = 'SonataBasketBundle:Basket:payment_address_step.html.twig';
 
-        if ('POST' == $this->get('request')->getMethod()) {
-            $form->handleRequest($this->get('request'));
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
                 if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
@@ -458,10 +464,11 @@ class BasketController extends Controller
     /**
      * Order process step 6: order's review & conditions acceptance checkbox.
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function finalReviewStepAction()
     {
+        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         $violations = $this
@@ -479,8 +486,8 @@ class BasketController extends Controller
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
-        if ('POST' == $this->get('request')->getMethod()) {
-            if ($this->get('request')->get('tac')) {
+        if ('POST' == $request->getMethod()) {
+            if ($request->get('tac')) {
                 // send the basket to the payment callback
                 return $this->forward('SonataPaymentBundle:Payment:sendbank');
             }
@@ -490,7 +497,17 @@ class BasketController extends Controller
 
         return $this->render('SonataBasketBundle:Basket:final_review_step.html.twig', [
             'basket' => $basket,
-            'tac_error' => 'POST' == $this->get('request')->getMethod(),
+            'tac_error' => 'POST' == $request->getMethod(),
         ]);
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters)
+     *
+     * @return Request
+     */
+    private function getCurrentRequest()
+    {
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }
