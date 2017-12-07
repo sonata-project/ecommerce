@@ -16,6 +16,7 @@ use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class OrderController extends Controller
@@ -23,7 +24,7 @@ class OrderController extends Controller
     /**
      * @throws AccessDeniedException
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction()
     {
@@ -48,7 +49,7 @@ class OrderController extends Controller
      *
      * @throws AccessDeniedException
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function viewAction($reference)
     {

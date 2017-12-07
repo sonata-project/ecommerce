@@ -12,9 +12,13 @@
 namespace Sonata\PaymentBundle\Controller;
 
 use Doctrine\ORM\EntityNotFoundException;
+use Sonata\Component\Basket\Basket;
+use Sonata\Component\Basket\BasketFactoryInterface;
 use Sonata\Component\Payment\InvalidTransactionException;
 use Sonata\Component\Payment\PaymentHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -24,15 +28,15 @@ class PaymentController extends Controller
      * This action is called by the user after the sendbank
      * In most case the order is already cancelled by a previous callback.
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws UnauthorizedHttpException
+     * @throws NotFoundHttpException
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function errorAction()
     {
         try {
-            $order = $this->getPaymentHandler()->handleError($this->getRequest(), $this->getBasket());
+            $order = $this->getPaymentHandler()->handleError($this->getCurrentRequest(), $this->getBasket());
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
         } catch (InvalidTransactionException $ex) {
@@ -45,15 +49,15 @@ class PaymentController extends Controller
     }
 
     /**
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
+     * @throws NotFoundHttpException
+     * @throws UnauthorizedHttpException
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
      */
     public function confirmationAction()
     {
         try {
-            $order = $this->getPaymentHandler()->handleConfirmation($this->getRequest());
+            $order = $this->getPaymentHandler()->handleConfirmation($this->getCurrentRequest());
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
         } catch (InvalidTransactionException $ex) {
@@ -74,13 +78,13 @@ class PaymentController extends Controller
     /**
      * this action redirect the user to the bank.
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
      */
     public function sendbankAction()
     {
         $basket = $this->getBasket();
 
-        if ('POST' !== $this->get('request')->getMethod()) {
+        if ('POST' !== $this->getCurrentRequest()->getMethod()) {
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
@@ -116,15 +120,15 @@ class PaymentController extends Controller
     /**
      * this action handler the callback sent from the bank.
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
+     * @throws NotFoundHttpException
+     * @throws UnauthorizedHttpException
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
      */
     public function callbackAction()
     {
         try {
-            $response = $this->getPaymentHandler()->getPaymentCallbackResponse($this->getRequest());
+            $response = $this->getPaymentHandler()->getPaymentCallbackResponse($this->getCurrentRequest());
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
         } catch (InvalidTransactionException $ex) {
@@ -134,13 +138,16 @@ class PaymentController extends Controller
         return $response;
     }
 
+    /**
+     * @return Response
+     */
     public function termsAction()
     {
         return $this->render('SonataPaymentBundle:Payment:terms.html.twig');
     }
 
     /**
-     * @return \Sonata\Component\Basket\BasketFactoryInterface
+     * @return BasketFactoryInterface
      */
     protected function getBasketFactory()
     {
@@ -148,7 +155,7 @@ class PaymentController extends Controller
     }
 
     /**
-     * @return \Sonata\Component\Basket\Basket
+     * @return Basket
      */
     protected function getBasket()
     {
@@ -161,5 +168,15 @@ class PaymentController extends Controller
     protected function getPaymentHandler()
     {
         return $this->get('sonata.payment.handler');
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters)
+     *
+     * @return Request
+     */
+    private function getCurrentRequest()
+    {
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

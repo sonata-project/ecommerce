@@ -13,6 +13,7 @@ namespace Sonata\InvoiceBundle\Controller;
 
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
+use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Transformer\InvoiceTransformer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
