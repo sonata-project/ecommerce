@@ -31,9 +31,9 @@ class InvoiceController extends Controller
     /**
      * @param string $reference
      *
-     * @return Response
-     *
      * @throws AccessDeniedException
+     *
+     * @return Response
      */
     public function viewAction($reference)
     {

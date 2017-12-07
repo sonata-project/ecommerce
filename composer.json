@@ -43,7 +43,6 @@
         "symfony/validator": "^2.8"
     },
     "require-dev": {
-        "sllh/php-cs-fixer-styleci-bridge": "^2.1",
         "symfony/phpunit-bridge": "^3.3"
     },
     "conflict": {

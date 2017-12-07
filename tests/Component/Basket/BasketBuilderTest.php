@@ -20,12 +20,11 @@ use Sonata\Component\Product\ProductDefinition;
 
 class BasketBuilderTest extends TestCase
 {
-    /**
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage The product code is empty
-     */
     public function testBuildWithInvalidProductCode()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('The product code is empty');
+
         $productPool = new ProductPool();
 
         $deliveryPool = new DeliveryPool();
@@ -46,12 +45,11 @@ class BasketBuilderTest extends TestCase
         $basketBuilder->build($basket);
     }
 
-    /**
-     * @expectedException         \RuntimeException
-     * @expectedExceptionMessage  The product definition `non_existent_product_code` does not exist!
-     */
     public function testBuildWithNonExistentProductCode()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('The product definition `non_existent_product_code` does not exist!');
+
         $productPool = new ProductPool();
 
         $deliveryPool = new DeliveryPool();

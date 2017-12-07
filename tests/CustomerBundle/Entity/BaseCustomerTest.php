@@ -39,7 +39,7 @@ class AddressTest extends BaseAddress
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseCustomerTest extends \PHPUnit_Framework_TestCase
+class BaseCustomerTest extends \PHPUnit\Framework\TestCase
 {
     public function testAddAddress()
     {

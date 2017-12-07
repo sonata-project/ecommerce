@@ -192,10 +192,10 @@ class PaymentHandler implements PaymentHandlerInterface
      *
      * @param TransactionInterface $transaction The request's transaction (will be linked to the order in the process)
      *
-     * @return \Sonata\Component\Order\OrderInterface
-     *
      * @throws \Doctrine\ORM\EntityNotFoundException
      * @throws InvalidTransactionException
+     *
+     * @return \Sonata\Component\Order\OrderInterface
      */
     protected function getValidOrder(TransactionInterface $transaction)
     {
@@ -229,9 +229,9 @@ class PaymentHandler implements PaymentHandlerInterface
     /**
      * @param Request $request
      *
-     * @return \Sonata\Component\Payment\TransactionInterface
-     *
      * @throws PaymentNotFoundException
+     *
+     * @return \Sonata\Component\Payment\TransactionInterface
      */
     protected function createTransaction(Request $request)
     {

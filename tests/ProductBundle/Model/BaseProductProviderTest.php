@@ -194,12 +194,11 @@ class BaseProductProviderTest extends TestCase
         $this->assertInstanceOf('Sonata\Component\Basket\BasketElementInterface', $result);
     }
 
-    /**
-     * @expectedException \Sonata\Component\Basket\InvalidProductException
-     * @expectedExceptionMessage You can't add 'product_sku' to the basket as it is a master product with variations.
-     */
     public function testBasketAddProductInvalid()
     {
+        $this->expectException(\Sonata\Component\Basket\InvalidProductException::class);
+        $this->expectExceptionMessage('You can\'t add \'product_sku\' to the basket as it is a master product with variations.');
+
         $productProvider = $this->createNewProductProvider();
 
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
@@ -444,12 +443,11 @@ class BaseProductProviderTest extends TestCase
         $this->assertEquals(42, $provider->calculatePrice($product, $currency, false));
     }
 
-    /**
-     * @expectedException \Sonata\CoreBundle\Exception\InvalidParameterException
-     * @expectedExceptionMessage Expected integer >= 1 for quantity, 4.32 given.
-     */
     public function testCalculatePriceException()
     {
+        $this->expectException(\Sonata\CoreBundle\Exception\InvalidParameterException::class);
+        $this->expectExceptionMessage('Expected integer >= 1 for quantity, 4.32 given.');
+
         $product = new ProductTest();
 
         $currency = new Currency();
@@ -459,12 +457,11 @@ class BaseProductProviderTest extends TestCase
         $provider->calculatePrice($product, $currency, false, 4.32);
     }
 
-    /**
-     * @expectedException \Sonata\CoreBundle\Exception\InvalidParameterException
-     * @expectedExceptionMessage Expected integer >= 1 for quantity, 0.32 given.
-     */
     public function testCalculatePriceExceptionLessThanOne()
     {
+        $this->expectException(\Sonata\CoreBundle\Exception\InvalidParameterException::class);
+        $this->expectExceptionMessage('Expected integer >= 1 for quantity, 0.32 given.');
+
         $product = new ProductTest();
 
         $currency = new Currency();

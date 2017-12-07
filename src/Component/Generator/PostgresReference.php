@@ -61,7 +61,7 @@ final class PostgresReference implements ReferenceInterface
      *
      * @return string
      */
-    protected function generateReference($object, $tableName)
+    private function generateReference($object, $tableName)
     {
         $date = new \DateTime();
 

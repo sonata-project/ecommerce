@@ -11,10 +11,16 @@ language: php
 
 php:
   - '7.1'
+  - '7.2'
   - nightly
 
 sudo: false
 dist: trusty
+
+addons:
+  apt:
+    packages:
+      - libxml2-utils
 
 cache:
   pip: true
@@ -32,17 +38,17 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: '7.1'
+    - php: '7.2'
       env: TARGET=docs
-    - php: '7.1'
+    - php: '5.6'
       env: TARGET=lint
     - php: '7.1'
       env: COMPOSER_FLAGS="--prefer-lowest"
-    - php: '7.1'
+    - php: '7.2'
       env: SYMFONY=2.8.*
-    - php: '7.1'
+    - php: '7.2'
       env: SYMFONY='dev-master as 2.8.x-dev'
-    - php: '7.1'
+    - php: '7.2'
       env: SYMFONY_DEPRECATIONS_HELPER=0
   allow_failures:
     - php: nightly

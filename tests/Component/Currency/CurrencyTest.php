@@ -16,7 +16,7 @@ use Sonata\Component\Currency\Currency;
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyTest extends \PHPUnit_Framework_TestCase
+class CurrencyTest extends \PHPUnit\Framework\TestCase
 {
     public function testGettersSetters()
     {

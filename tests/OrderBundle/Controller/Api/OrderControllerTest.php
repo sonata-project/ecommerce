@@ -37,12 +37,11 @@ class OrderControllerTest extends TestCase
         $this->assertEquals($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Order (42) not found
-     */
     public function testGetOrderActionNotFoundException()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Order (42) not found');
+
         $this->createOrderController()->getOrderAction(42);
     }
 

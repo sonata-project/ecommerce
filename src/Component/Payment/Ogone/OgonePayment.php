@@ -202,7 +202,7 @@ class OgonePayment extends BasePayment
     {
         return $order->getReference() === $params['orderID']
             && $order->getCurrency() === $params['currency']
-            && floatval($order->getTotalInc()) === floatval($params['amount']);
+            && (float) ($order->getTotalInc()) === (float) ($params['amount']);
     }
 
     /**

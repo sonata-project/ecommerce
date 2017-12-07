@@ -39,12 +39,11 @@ class CustomerControllerTest extends TestCase
         $this->assertEquals($customer, $this->createCustomerController($customer)->getCustomerAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Customer (42) not found
-     */
     public function testGetCustomerActionNotFoundException()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Customer (42) not found');
+
         $this->createCustomerController()->getCustomerAction(42);
     }
 
@@ -213,7 +212,7 @@ class CustomerControllerTest extends TestCase
 
     public function testDeleteCustomerInvalidAction()
     {
-        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
         $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));

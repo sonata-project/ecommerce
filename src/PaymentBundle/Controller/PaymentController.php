@@ -24,10 +24,10 @@ class PaymentController extends Controller
      * This action is called by the user after the sendbank
      * In most case the order is already cancelled by a previous callback.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function errorAction()
     {

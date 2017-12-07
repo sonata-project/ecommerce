@@ -44,9 +44,9 @@ class ProductAdminController extends Controller
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showVariationsAction(Request $request = null)
     {

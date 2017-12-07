@@ -213,11 +213,10 @@ class ScelliusPaymentTest extends TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testInvalidCurrencySendbankPayment()
     {
+        $this->expectException(\RuntimeException::class);
+
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');

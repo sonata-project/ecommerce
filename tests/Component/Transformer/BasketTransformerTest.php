@@ -51,7 +51,8 @@ class BasketTransformerTest extends TestCase
 
     public function testInvalidCustomer()
     {
-        $this->setExpectedException('RuntimeException', 'Invalid customer');
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Invalid customer');
 
         $basket = new Basket();
 
@@ -64,7 +65,8 @@ class BasketTransformerTest extends TestCase
 
     public function testInvalidBillingAddress()
     {
-        $this->setExpectedException('RuntimeException', 'Invalid billing address');
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Invalid billing address');
 
         $basket = new Basket();
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
@@ -80,7 +82,8 @@ class BasketTransformerTest extends TestCase
 
     public function testInvalidPaymentMethod()
     {
-        $this->setExpectedException('RuntimeException', 'Invalid payment method');
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Invalid payment method');
 
         $basket = new Basket();
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
@@ -98,7 +101,8 @@ class BasketTransformerTest extends TestCase
 
     public function testInvalidDeliveryMethod()
     {
-        $this->setExpectedException('RuntimeException', 'Invalid delivery method');
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Invalid delivery method');
 
         $basket = new Basket();
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
@@ -118,7 +122,8 @@ class BasketTransformerTest extends TestCase
 
     public function testInvalidDeliveryAddress()
     {
-        $this->setExpectedException('RuntimeException', 'Invalid delivery address');
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Invalid delivery address');
 
         $basket = new Basket();
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');

@@ -102,7 +102,7 @@ class BaseBasketTest extends TestCase
 
         $items = $basket->getVatAmounts();
 
-        $this->assertTrue(is_array($items), 'Should return an array');
+        $this->assertInternalType('array', $items, 'Should return an array');
 
         foreach ($items as $item) {
             $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');

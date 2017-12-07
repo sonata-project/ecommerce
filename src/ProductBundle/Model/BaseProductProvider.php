@@ -401,8 +401,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
             return $variation;
         }
-
-        return;
     }
 
     /**
@@ -893,9 +891,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param \Sonata\Component\Product\ProductInterface      $product
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      *
-     * @return bool|\Sonata\Component\Basket\BasketElementInterface
-     *
      * @throws \Sonata\Component\Basket\InvalidProductException
+     *
+     * @return bool|\Sonata\Component\Basket\BasketElementInterface
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
     {
@@ -1009,7 +1007,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             throw new InvalidParameterException('Expected integer >= 1 for quantity, '.$quantity.' given.');
         }
 
-        $price = floatval(bcmul($this->currencyPriceCalculator->getPrice($product, $currency, $vat), $quantity));
+        $price = (float) (bcmul($this->currencyPriceCalculator->getPrice($product, $currency, $vat), $quantity));
 
         $afterEvent = new AfterCalculatePriceEvent($product, $currency, $vat, $quantity, $price);
         $this->getEventDispatcher()->dispatch(BasketEvents::POST_CALCULATE_PRICE, $afterEvent);
@@ -1142,9 +1140,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @param array $fields
      *
-     * @return array
-     *
      * @throws \RuntimeException
+     *
+     * @return array
      */
     protected function getMergedFields(array $fields)
     {

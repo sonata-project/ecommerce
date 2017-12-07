@@ -140,9 +140,9 @@ class OrderController
      *
      * @param $id
      *
-     * @return OrderInterface
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return OrderInterface
      */
     protected function getOrder($id)
     {

@@ -25,11 +25,10 @@ class OrderScelliusTransactionGeneratorTest extends TestCase
         $this->assertEquals('000012', $generator->generate($order));
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testInvalidReferenceLength()
     {
+        $this->expectException(\RuntimeException::class);
+
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
         $order->expects($this->any())->method('getReference')->will($this->returnValue('12'));
 

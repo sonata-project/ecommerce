@@ -14,7 +14,7 @@ namespace Sonata\ProductBundle\Tests\DependencyInjection;
 use Sonata\ProductBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTest extends \PHPUnit\Framework\TestCase
 {
     public function testDefaults()
     {
