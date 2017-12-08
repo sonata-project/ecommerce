@@ -17,6 +17,8 @@ use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -133,12 +135,13 @@ abstract class BaseProductController extends Controller
      * @param ProductInterface      $product
      * @param ProductInterface|null $variation
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      *
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
     public function variationToProductAction(ProductInterface $product, ProductInterface $variation = null)
     {
+        $request = $this->getCurrentRequest();
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         if (!$provider->hasEnabledVariations($product)) {
@@ -146,7 +149,7 @@ abstract class BaseProductController extends Controller
         }
 
         if (null === $variation || 0 === $provider->getStockAvailable($variation)) {
-            if ($this->getRequest()->isXmlHttpRequest()) {
+            if ($request->isXmlHttpRequest()) {
                 return new JsonResponse(['error' => $this->get('translator')->trans('variation_not_found', [], 'SonataProductBundle')]);
             }
 
@@ -161,7 +164,7 @@ abstract class BaseProductController extends Controller
             'slug' => $variation->getSlug(),
         ]);
 
-        if ($this->getRequest()->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             return new JsonResponse(['variation_url' => $url]);
         }
 
@@ -179,5 +182,15 @@ abstract class BaseProductController extends Controller
         $seoPage->setTitle($product->getName());
         $this->get('sonata.product.seo.facebook')->alterPage($seoPage, $product, $currency);
         $this->get('sonata.product.seo.twitter')->alterPage($seoPage, $product, $currency);
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
+     *
+     * @return Request
+     */
+    private function getCurrentRequest()
+    {
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

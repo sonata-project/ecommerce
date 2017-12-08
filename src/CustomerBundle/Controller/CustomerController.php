@@ -13,11 +13,14 @@ namespace Sonata\CustomerBundle\Controller;
 
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
+use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\CustomerBundle\Form\Type\AddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -29,7 +32,7 @@ class CustomerController extends Controller
     /**
      * Lists customer's addresses.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addressesAction()
     {
@@ -70,7 +73,7 @@ class CustomerController extends Controller
     /**
      * Adds an address to current customer.
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addAddressAction()
     {
@@ -82,7 +85,7 @@ class CustomerController extends Controller
      *
      * @param $id
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function editAddressAction($id)
     {
@@ -98,7 +101,7 @@ class CustomerController extends Controller
      */
     public function deleteAddressAction($id)
     {
-        if ('POST' !== $this->getRequest()->getMethod()) {
+        if ('POST' !== $this->getCurrentRequest()->getMethod()) {
             throw new MethodNotAllowedHttpException(['POST']);
         }
 
@@ -135,10 +138,11 @@ class CustomerController extends Controller
      *
      * @param int $id Address id
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     protected function updateAddress($id = null)
     {
+        $request = $this->getCurrentRequest();
         $customer = $this->getCustomer();
 
         // Show address creation/edition form
@@ -149,14 +153,14 @@ class CustomerController extends Controller
             $this->checkAddress($address);
 
             $form = $this->createForm(AddressType::class, $address, [
-                'context' => $this->getRequest()->query->get('context'),
+                'context' => $request->query->get('context'),
             ]);
         }
 
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
 
-        if ('POST' == $this->get('request')->getMethod()) {
-            $form->handleRequest($this->get('request'));
+        if ('POST' == $request->getMethod()) {
+            $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $address = $form->getData();
@@ -184,7 +188,7 @@ class CustomerController extends Controller
      *
      * @param AddressInterface $address
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     protected function checkAddress(AddressInterface $address = null)
     {
@@ -195,7 +199,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @return \Sonata\Component\Customer\CustomerInterface
+     * @return CustomerInterface
      */
     protected function getCustomer()
     {
@@ -218,5 +222,15 @@ class CustomerController extends Controller
     protected function getCustomerManager()
     {
         return $this->get('sonata.customer.manager');
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
+     *
+     * @return Request
+     */
+    private function getCurrentRequest()
+    {
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

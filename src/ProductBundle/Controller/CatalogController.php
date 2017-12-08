@@ -15,8 +15,10 @@ use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Product\Pool;
+use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\ProductBundle\Entity\ProductSetManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -31,11 +33,12 @@ class CatalogController extends Controller
      */
     public function indexAction()
     {
-        $page = $this->getRequest()->get('page', 1);
-        $displayMax = $this->getRequest()->get('max', 9);
-        $displayMode = $this->getRequest()->get('mode', 'grid');
-        $filter = $this->getRequest()->get('filter');
-        $option = $this->getRequest()->get('option');
+        $request = $this->getCurrentRequest();
+        $page = $request->get('page', 1);
+        $displayMax = $request->get('max', 9);
+        $displayMode = $request->get('mode', 'grid');
+        $filter = $request->get('filter');
+        $option = $request->get('option');
 
         if (!in_array($displayMode, ['grid'])) { // "list" mode will be added later
             throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
@@ -64,11 +67,12 @@ class CatalogController extends Controller
      */
     protected function retrieveCategoryFromQueryString()
     {
-        $categoryId = $this->getRequest()->get('category_id');
-        $categorySlug = $this->getRequest()->get('category_slug');
+        $request = $this->getCurrentRequest();
+        $categoryId = $request->get('category_id');
+        $categorySlug = $request->get('category_slug');
 
         if (!$categoryId || !$categorySlug) {
-            return;
+            return null;
         }
 
         return $this->getCategoryManager()->findOneBy([
@@ -82,12 +86,12 @@ class CatalogController extends Controller
      *
      * @param CategoryInterface $category
      *
-     * @return null|\Sonata\Component\Product\ProductProviderInterface
+     * @return ProductProviderInterface|null
      */
     protected function getProviderFromCategory(CategoryInterface $category = null)
     {
         if (null === $category) {
-            return;
+            return null;
         }
 
         $product = $this->getProductSetManager()->findProductForCategory($category);
@@ -125,5 +129,15 @@ class CatalogController extends Controller
     protected function getCategoryManager()
     {
         return $this->get('sonata.classification.manager.category');
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
+     *
+     * @return Request
+     */
+    private function getCurrentRequest()
+    {
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

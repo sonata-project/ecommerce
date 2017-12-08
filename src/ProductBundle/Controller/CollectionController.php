@@ -13,6 +13,8 @@ namespace Sonata\ProductBundle\Controller;
 
 use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CollectionController extends Controller
@@ -25,7 +27,7 @@ class CollectionController extends Controller
     public function indexAction()
     {
         $pager = $this->get('sonata.classification.manager.collection')
-            ->getRootCollectionsPager($this->get('request')->get('page'));
+            ->getRootCollectionsPager($this->getCurrentRequest()->get('page'));
 
         return $this->render('SonataProductBundle:Collection:index.html.twig', [
             'pager' => $pager,
@@ -61,12 +63,12 @@ class CollectionController extends Controller
      *
      * @param $collectionId
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
      */
     public function listSubCollectionsAction($collectionId)
     {
         $pager = $this->get('sonata.classification.manager.collection')
-            ->getSubCollectionsPager($collectionId, $this->get('request')->get('page'));
+            ->getSubCollectionsPager($collectionId, $this->getCurrentRequest()->get('page'));
 
         return $this->render('SonataProductBundle:Collection:list_sub_collections.html.twig', [
             'pager' => $pager,
@@ -78,12 +80,12 @@ class CollectionController extends Controller
      *
      * @param $collectionId
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
      */
     public function listProductsAction($collectionId)
     {
         $pager = $this->get('sonata.product.set.manager')
-            ->getProductsByCollectionIdPager($collectionId, $this->get('request')->get('page'));
+            ->getProductsByCollectionIdPager($collectionId, $this->getCurrentRequest()->get('page'));
 
         return $this->render('SonataProductBundle:Collection:list_products.html.twig', [
             'pager' => $pager,
@@ -95,7 +97,7 @@ class CollectionController extends Controller
      * @param int  $depth
      * @param int  $deep
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
      */
     public function listSideMenuCollectionsAction($collection = null, $depth = 1, $deep = 0)
     {
@@ -106,5 +108,15 @@ class CollectionController extends Controller
           'depth' => $depth,
           'deep' => $deep + 1,
         ]);
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
+     *
+     * @return Request
+     */
+    private function getCurrentRequest()
+    {
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

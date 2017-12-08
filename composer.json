@@ -6,32 +6,36 @@
     "authors": [
         {
             "name": "Thomas Rabaix",
-            "email": "thomas.rabaix@sonata-project.org"
+            "email": "thomas.rabaix@sonata-project.org",
+            "homepage": "https://sonata-project.org"
+        },
+        {
+            "name": "Sonata Community",
+            "homepage": "https://github.com/sonata-project/SonataUserBundle/contributors"
         }
     ],
     "require" : {
         "php": "^5.6 || ^7.0",
         "cocur/slugify": "^1.4 || ^2.5",
-        "friendsofsymfony/comment-bundle": "^2.0.13",
         "friendsofsymfony/rest-bundle": "^1.8 || ^2.2",
         "jms/serializer-bundle": "^0.13 || ^1.5",
         "knplabs/knp-menu-bundle": "^1.1 || ^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
         "kriswallsmith/buzz": "^0.15",
         "nelmio/api-doc-bundle": "^2.13",
-        "sonata-project/admin-bundle": "^3.23",
-        "sonata-project/block-bundle": "^3.4",
+        "sonata-project/admin-bundle": "^3.28",
+        "sonata-project/block-bundle": "^3.8",
         "sonata-project/classification-bundle": "^3.3",
-        "sonata-project/comment-bundle": "^3.0",
-        "sonata-project/core-bundle": "^3.5",
-        "sonata-project/datagrid-bundle": "^2.2.1",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.1.7",
-        "sonata-project/formatter-bundle": "^3.2",
-        "sonata-project/intl-bundle": "^2.3",
-        "sonata-project/media-bundle": "^3.7",
-        "sonata-project/notification-bundle": "^3.2",
-        "sonata-project/seo-bundle": "^2.2",
-        "sonata-project/user-bundle": "^3.5",
+        "sonata-project/comment-bundle": "^3.1",
+        "sonata-project/core-bundle": "^3.7",
+        "sonata-project/datagrid-bundle": "^2.3",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.2",
+        "sonata-project/formatter-bundle": "^3.4",
+        "sonata-project/intl-bundle": "^2.4",
+        "sonata-project/media-bundle": "^3.10",
+        "sonata-project/notification-bundle": "^3.3",
+        "sonata-project/seo-bundle": "^2.4",
+        "sonata-project/user-bundle": "^3.6 || ^4.0",
         "symfony/config": "^2.8",
         "symfony/console": "^2.8",
         "symfony/form": "^2.8",
@@ -43,7 +47,7 @@
         "symfony/validator": "^2.8"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^3.3"
+        "symfony/phpunit-bridge": "^3.3 || ^4.0"
     },
     "conflict": {
         "jms/serializer": "<0.13",

@@ -12,6 +12,7 @@
 namespace Sonata\ProductBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -20,7 +21,7 @@ class CategoryController extends Controller
      * @param int  $depth
      * @param int  $deep
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     * @return Response
      */
     public function listSideMenuCategoriesAction($category = null, $depth = 1, $deep = 0)
     {

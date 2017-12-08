@@ -12,10 +12,15 @@
 namespace Sonata\PaymentBundle\Controller;
 
 use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Payment\Debug\DebugPayment;
 use Sonata\Component\Payment\InvalidTransactionException;
+use Sonata\OrderBundle\Entity\OrderManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
@@ -33,20 +38,20 @@ class DebugPaymentController extends Controller
 
         return $this->render('SonataPaymentBundle:Payment:debug.html.twig', [
             'order' => $order,
-            'check' => $this->getRequest()->get('check'),
+            'check' => $this->getCurrentRequest()->get('check'),
         ]);
     }
 
     /**
      * Process the User choice.
      *
-     * @return Reponse
+     * @return Response
      */
     public function processPaymentAction()
     {
         $order = $this->checkRequest();
 
-        return $this->getDebugPayment()->processCallback($order, $this->getRequest()->get('action'));
+        return $this->getDebugPayment()->processCallback($order, $this->getCurrentRequest()->get('action'));
     }
 
     /**
@@ -64,7 +69,8 @@ class DebugPaymentController extends Controller
             throw new \RuntimeException('Debug Payment is not authorized in production environment.');
         }
 
-        $reference = $this->getRequest()->get('reference');
+        $request = $this->getCurrentRequest();
+        $reference = $request->get('reference');
 
         $order = $this->getOrderManager()->findOneBy(['reference' => $reference]);
 
@@ -72,7 +78,7 @@ class DebugPaymentController extends Controller
             throw new NotFoundHttpException(sprintf('Order with reference "%s" not found.', $reference));
         }
 
-        if ($this->getRequest()->get('check') !== $this->getDebugPayment()->generateUrlCheck($order)) {
+        if ($request->get('check') !== $this->getDebugPayment()->generateUrlCheck($order)) {
             throw new InvalidTransactionException($reference);
         }
 
@@ -80,7 +86,7 @@ class DebugPaymentController extends Controller
     }
 
     /**
-     * @return \Sonata\Component\Payment\Debug\DebugPayment
+     * @return DebugPayment
      */
     protected function getDebugPayment()
     {
@@ -88,7 +94,7 @@ class DebugPaymentController extends Controller
     }
 
     /**
-     * @return \Sonata\OrderBundle\Entity\OrderManager
+     * @return OrderManager
      */
     protected function getOrderManager()
     {
@@ -96,7 +102,7 @@ class DebugPaymentController extends Controller
     }
 
     /**
-     * @return \Symfony\Component\HttpKernel\Kernel
+     * @return KernelInterface
      */
     protected function getKernel()
     {
@@ -104,10 +110,20 @@ class DebugPaymentController extends Controller
     }
 
     /**
-     * @return \Symfony\Component\Routing\RouterInterface
+     * @return RouterInterface
      */
     protected function getRouter()
     {
         return $this->get('router');
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
+     *
+     * @return Request
+     */
+    private function getCurrentRequest()
+    {
+        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }
