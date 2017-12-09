@@ -84,7 +84,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
             ->leftJoin('pc.category', 'c')
             ->where('pc.enabled = true')
             ->andWhere('c.enabled = true')
-            ->groupBy('c.id')
         ;
 
         $pCategories = $qb->getQuery()->execute();
@@ -108,7 +107,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         $productMetadata = $this->getEntityManager()->getClassMetadata($metadata->getAssociationTargetClass('product'));
         $categoryMetadata = $this->getEntityManager()->getClassMetadata($metadata->getAssociationTargetClass('category'));
 
-        $sql = 'SELECT count(cnt.product_id) AS cntId
+        $sql = 'SELECT count(cnt.product_id) AS "cntId"
             FROM (
                 SELECT DISTINCT pc.product_id
                 FROM %s pc
