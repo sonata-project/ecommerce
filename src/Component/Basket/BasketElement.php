@@ -199,14 +199,14 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getUnitPrice($vat = false)
     {
-        $price = $this->unitPrice;
+        $price = (string) $this->unitPrice;
 
-        if (!$vat && true === $this->isPriceIncludingVat()) {
-            $price = bcdiv($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        if (!$vat && $this->isPriceIncludingVat()) {
+            $price = bcdiv($price, bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
         }
 
-        if ($vat && false === $this->isPriceIncludingVat()) {
-            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        if ($vat && !$this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
         }
 
         return $price;
@@ -217,7 +217,7 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getTotal($vat = false)
     {
-        return bcmul($this->getUnitPrice($vat), $this->getQuantity(), 100);
+        return bcmul((string) $this->getUnitPrice($vat), (string) $this->getQuantity(), 100);
     }
 
     /**

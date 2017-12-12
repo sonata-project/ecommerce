@@ -91,7 +91,7 @@ class Twitter implements ServiceInterface
     {
         $seoPage->addMeta('name', 'twitter:card', 'product')
             ->addMeta('name', 'twitter:title', $product->getName())
-            ->addMeta('name', 'twitter:description', substr($product->getDescription(), 0, 200))
+            ->addMeta('name', 'twitter:description', substr((string) $product->getDescription(), 0, 200))
             ->addMeta('name', 'twitter:label1', 'Price')
             ->addMeta('name', 'twitter:data1', $this->numberHelper->formatCurrency($product->getPrice(), $this->currencyDetector->getCurrency()))
             ->addMeta('name', 'twitter:label2', 'SKU')
