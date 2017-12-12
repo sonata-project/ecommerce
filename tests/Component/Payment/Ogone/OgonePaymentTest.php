@@ -62,7 +62,7 @@ class OgonePaymentTest extends TestCase
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new OgonePaymentTest_Order();
@@ -76,6 +76,7 @@ class OgonePaymentTest extends TestCase
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
+        $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
 
         $this->assertEquals('ogone_1', $payment->getCode(), 'Ogone Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
@@ -97,7 +98,7 @@ class OgonePaymentTest extends TestCase
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
@@ -216,7 +217,7 @@ class OgonePaymentTest extends TestCase
             return strtoupper(sha1($shasignStr));
         }
 
-        $params['check'] = '56384d4138b4219e554aa3cc781151686064e699';
+        $params['check'] = 'c7361062d415c378524cd82a61540bd99d54dd48';
 
         return $params[$name];
     }

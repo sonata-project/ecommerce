@@ -52,7 +52,7 @@ class PassPaymentTest extends TestCase
         $transaction->expects($this->once())->method('setTransactionId');
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new PassPaymentTest_Order();
@@ -95,7 +95,7 @@ class PassPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return '1d4b8187e3b9dbad8336b253176ba3284760757b';
+            return '0df8a3065a433ffbd907b2e6450199fb25e7902f';
         }
     }
 }

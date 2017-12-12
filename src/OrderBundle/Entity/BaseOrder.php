@@ -1066,13 +1066,14 @@ abstract class BaseOrder implements OrderInterface
 
         foreach ($this->getOrderElements() as $orderElement) {
             $rate = $orderElement->getVatRate();
+            $amount = (string) $orderElement->getVatAmount();
 
             if (isset($amounts[$rate])) {
-                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $orderElement->getVatAmount());
+                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $amount);
             } else {
                 $amounts[$rate] = [
                     'rate' => $rate,
-                    'amount' => $orderElement->getVatAmount(),
+                    'amount' => $amount,
                 ];
             }
         }
