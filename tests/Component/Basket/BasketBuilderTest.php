@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\Component\Product\ProductDefinition;
 
 class BasketBuilderTest extends TestCase
 {
-    public function testBuildWithInvalidProductCode()
+    public function testBuildWithInvalidProductCode(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('The product code is empty');
@@ -45,7 +47,7 @@ class BasketBuilderTest extends TestCase
         $basketBuilder->build($basket);
     }
 
-    public function testBuildWithNonExistentProductCode()
+    public function testBuildWithNonExistentProductCode(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('The product definition `non_existent_product_code` does not exist!');
@@ -71,7 +73,7 @@ class BasketBuilderTest extends TestCase
         $basketBuilder->build($basket);
     }
 
-    public function testBuild()
+    public function testBuild(): void
     {
         $productProvider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
         $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');

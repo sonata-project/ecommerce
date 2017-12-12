@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\Component\Generator\PostgresReference;
  */
 class PostgresReferenceTest extends TestCase
 {
-    public function testInvoice()
+    public function testInvoice(): void
     {
         $invoice = new InvoiceMock();
         $postgresReference = $this->generateNewObject();
@@ -37,7 +39,7 @@ class PostgresReferenceTest extends TestCase
         }
     }
 
-    public function testOrder()
+    public function testOrder(): void
     {
         $order = new OrderMock();
         $postgresReference = $this->generateNewObject();

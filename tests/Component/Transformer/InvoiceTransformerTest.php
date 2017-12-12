@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Sonata\Component\Transformer\InvoiceTransformer;
 
 class InvoiceTransformerTest extends TestCase
 {
-    public function testTransformFromOrder()
+    public function testTransformFromOrder(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 

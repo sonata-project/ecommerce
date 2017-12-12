@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,13 +23,13 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class GenerateProductCommandTest extends TestCase
 {
-    public function testConfigure()
+    public function testConfigure(): void
     {
         $cmd = $this->getCommandInstance();
         $this->assertInstanceOf('Sonata\ProductBundle\Command\GenerateProductCommand', $cmd);
     }
 
-    public function testExecute()
+    public function testExecute(): void
     {
         $cmd = $this->getCommandInstance();
         $cmdTester = new CommandTester($cmd);

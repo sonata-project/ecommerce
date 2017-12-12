@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -55,7 +57,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -71,7 +73,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setMain($main)
+    public function setMain($main): void
     {
         $this->main = $main;
     }
@@ -87,7 +89,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -103,7 +105,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -119,7 +121,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductInterface $product): void
     {
         $this->product = $product;
     }
@@ -135,7 +137,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setCategory(CategoryInterface $category)
+    public function setCategory(CategoryInterface $category): void
     {
         $this->category = $category;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,13 +26,13 @@ class CurrencyFormTypeTest extends TestCase
      */
     protected $currencyFormType;
 
-    public function setUp()
+    public function setUp(): void
     {
         $currencyDataTransformer = $this->createMock('Sonata\Component\Currency\CurrencyDataTransformer');
         $this->currencyFormType = new CurrencyFormType($currencyDataTransformer);
     }
 
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $formBuilder = $this->createMock('Symfony\Component\Form\FormBuilder');
         $formBuilder->expects($this->once())
@@ -39,12 +41,12 @@ class CurrencyFormTypeTest extends TestCase
         $this->currencyFormType->buildForm($formBuilder, []);
     }
 
-    public function testGetParent()
+    public function testGetParent(): void
     {
         $this->assertEquals('currency', $this->currencyFormType->getParent());
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('sonata_currency', $this->currencyFormType->getName());
     }

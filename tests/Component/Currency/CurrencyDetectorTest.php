@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -35,7 +37,7 @@ class CurrencyDetectorTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->currency = $this->createMock('Sonata\Component\Currency\CurrencyInterface');
         $this->currency->expects($this->any())
@@ -56,14 +58,14 @@ class CurrencyDetectorTest extends TestCase
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 
     /**
      * @covers \Sonata\Component\Currency\CurrencyDetector::__construct
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $currency = new Currency();
         $currency->setLabel('EUR');
@@ -81,7 +83,7 @@ class CurrencyDetectorTest extends TestCase
     /**
      * @covers \Sonata\Component\Currency\CurrencyDetector::getCurrency
      */
-    public function testGetCurrency()
+    public function testGetCurrency(): void
     {
         $this->assertEquals($this->currency->getLabel(), $this->object->getCurrency()->getLabel());
     }

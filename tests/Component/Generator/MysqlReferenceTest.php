@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -33,7 +35,7 @@ class InvoiceMock extends BaseInvoice
 {
     protected $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -53,7 +55,7 @@ class OrderMock extends BaseOrder
 {
     protected $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -72,7 +74,7 @@ class OrderMock extends BaseOrder
  */
 class MysqlReferenceTest extends TestCase
 {
-    public function testInvoice()
+    public function testInvoice(): void
     {
         $invoice = new InvoiceMock();
         $mysqlReference = $this->generateNewObject();
@@ -93,7 +95,7 @@ class MysqlReferenceTest extends TestCase
         }
     }
 
-    public function testOrder()
+    public function testOrder(): void
     {
         $order = new OrderMock();
         $mysqlReference = $this->generateNewObject();

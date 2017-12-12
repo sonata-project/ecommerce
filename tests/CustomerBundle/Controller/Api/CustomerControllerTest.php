@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CustomerControllerTest extends TestCase
 {
-    public function testGetCustomersAction()
+    public function testGetCustomersAction(): void
     {
         $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
         $customerManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
@@ -33,13 +35,13 @@ class CustomerControllerTest extends TestCase
             ->getCustomersAction($paramFetcher));
     }
 
-    public function testGetCustomerAction()
+    public function testGetCustomerAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $this->assertEquals($customer, $this->createCustomerController($customer)->getCustomerAction(1));
     }
 
-    public function testGetCustomerActionNotFoundException()
+    public function testGetCustomerActionNotFoundException(): void
     {
         $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         $this->expectExceptionMessage('Customer (42) not found');
@@ -47,7 +49,7 @@ class CustomerControllerTest extends TestCase
         $this->createCustomerController()->getCustomerAction(42);
     }
 
-    public function testGetCustomerOrdersAction()
+    public function testGetCustomerOrdersAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
@@ -58,7 +60,7 @@ class CustomerControllerTest extends TestCase
         );
     }
 
-    public function testGetCustomerAddressesAction()
+    public function testGetCustomerAddressesAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
@@ -68,7 +70,7 @@ class CustomerControllerTest extends TestCase
             ->getCustomerAddressesAction(1));
     }
 
-    public function testPostCustomerAction()
+    public function testPostCustomerAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
@@ -89,7 +91,7 @@ class CustomerControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPostCustomerInvalidAction()
+    public function testPostCustomerInvalidAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
@@ -109,7 +111,7 @@ class CustomerControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testPostCustomerAddressAction()
+    public function testPostCustomerAddressAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
@@ -134,7 +136,7 @@ class CustomerControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPostCustomerAddressInvalidAction()
+    public function testPostCustomerAddressInvalidAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
@@ -154,7 +156,7 @@ class CustomerControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testPutCustomerAction()
+    public function testPutCustomerAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
@@ -176,7 +178,7 @@ class CustomerControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPutCustomerInvalidAction()
+    public function testPutCustomerInvalidAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
@@ -197,7 +199,7 @@ class CustomerControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testDeleteCustomerAction()
+    public function testDeleteCustomerAction(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
 
@@ -210,7 +212,7 @@ class CustomerControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteCustomerInvalidAction()
+    public function testDeleteCustomerInvalidAction(): void
     {
         $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -26,7 +28,7 @@ class Pool
      *
      * @param ServiceDeliveryInterface $instance
      */
-    public function addMethod(ServiceDeliveryInterface $instance)
+    public function addMethod(ServiceDeliveryInterface $instance): void
     {
         $this->methods[$instance->getCode()] = $instance;
     }

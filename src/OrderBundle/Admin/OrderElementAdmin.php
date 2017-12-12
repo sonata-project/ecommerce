@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -37,7 +39,7 @@ class OrderElementAdmin extends AbstractAdmin
     /**
      * @param CurrencyDetectorInterface $currencyDetector
      */
-    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector): void
     {
         $this->currencyDetector = $currencyDetector;
     }
@@ -45,7 +47,7 @@ class OrderElementAdmin extends AbstractAdmin
     /**
      * @param Pool $productPool
      */
-    public function setProductPool(Pool $productPool)
+    public function setProductPool(Pool $productPool): void
     {
         $this->productPool = $productPool;
     }
@@ -53,7 +55,7 @@ class OrderElementAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->parentAssociationMapping = 'order';
         $this->setTranslationDomain('SonataOrderBundle');
@@ -62,7 +64,7 @@ class OrderElementAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         $productTypeOptions = [
             'choices' => array_flip(array_keys($this->productPool->getProducts())),
@@ -90,7 +92,7 @@ class OrderElementAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         $list->addIdentifier('id');
 

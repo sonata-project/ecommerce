@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,11 +23,11 @@ use Sonata\InvoiceBundle\Entity\InvoiceManager;
  */
 class InvoiceManagerTest extends TestCase
 {
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -37,23 +39,23 @@ class InvoiceManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithInvalidSort()
+    public function testGetPagerWithInvalidSort(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Invalid sort field \'invalid\' in \'Sonata\\InvoiceBundle\\Entity\\BaseInvoice\' class');
 
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(function ($qb) use ($self): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
-    public function testGetPagerWithMultipleSort()
+    public function testGetPagerWithMultipleSort(): void
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
@@ -74,11 +76,11 @@ class InvoiceManagerTest extends TestCase
             ]);
     }
 
-    public function testGetPagerWithOpenInvoices()
+    public function testGetPagerWithOpenInvoices(): void
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_OPEN]));
@@ -86,11 +88,11 @@ class InvoiceManagerTest extends TestCase
             ->getPager(['status' => BaseInvoice::STATUS_OPEN], 1);
     }
 
-    public function testGetPagerWithPaidInvoices()
+    public function testGetPagerWithPaidInvoices(): void
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_PAID]));
@@ -98,11 +100,11 @@ class InvoiceManagerTest extends TestCase
             ->getPager(['status' => BaseInvoice::STATUS_PAID], 1);
     }
 
-    public function testGetPagerWithConflictInvoices()
+    public function testGetPagerWithConflictInvoices(): void
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_CONFLICT]));

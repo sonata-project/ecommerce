@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -72,7 +74,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
      *
      * @param InvoiceInterface $invoice
      */
-    public function setInvoice(InvoiceInterface $invoice)
+    public function setInvoice(InvoiceInterface $invoice): void
     {
         $this->invoice = $invoice;
     }
@@ -92,7 +94,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
      *
      * @param OrderElementInterface $orderElement
      */
-    public function setOrderElement(OrderElementInterface $orderElement)
+    public function setOrderElement(OrderElementInterface $orderElement): void
     {
         $this->orderElement = $orderElement;
     }
@@ -110,7 +112,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity): void
     {
         $this->quantity = $quantity;
     }
@@ -126,7 +128,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setPrice($price)
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -148,7 +150,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setVatRate($vatRate)
+    public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
@@ -166,7 +168,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
      *
      * @param float $total
      */
-    public function setTotal($total)
+    public function setTotal($total): void
     {
         $this->total = $total;
     }
@@ -174,7 +176,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setUnitPriceExcl($unitPriceExcl)
+    public function setUnitPriceExcl($unitPriceExcl): void
     {
         $this->unitPriceExcl = $unitPriceExcl;
     }
@@ -190,7 +192,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setUnitPriceInc($unitPriceInc)
+    public function setUnitPriceInc($unitPriceInc): void
     {
         $this->unitPriceInc = $unitPriceInc;
     }
@@ -238,7 +240,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
      *
      * @param string $designation
      */
-    public function setDesignation($designation)
+    public function setDesignation($designation): void
     {
         $this->designation = $designation;
     }
@@ -258,7 +260,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
      *
      * string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }

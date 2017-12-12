@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -25,19 +27,19 @@ use Sonata\Component\Order\OrderInterface;
  */
 interface TransactionInterface
 {
-    const STATE_OK = 1;
-    const STATE_KO = 2;
+    public const STATE_OK = 1;
+    public const STATE_KO = 2;
 
-    const STATUS_ORDER_UNKNOWN = -1; // the order is unknown
-    const STATUS_OPEN = 0;  // created but not validated
-    const STATUS_PENDING = 1;  // the bank send a 'pending-like' status, so the payment is not validated, but the user payed
-    const STATUS_VALIDATED = 2;  // the bank confirm the payment
-    const STATUS_CANCELLED = 3;  // the user cancelled the payment
-    const STATUS_UNKNOWN = 4;  // the bank sent a unknown code ...
-    const STATUS_ERROR_VALIDATION = 9;  // something wrong happen when the bank validate the postback
-    const STATUS_WRONG_CALLBACK = 10; // something wrong is sent from the bank. hack or the bank change something ...
-    const STATUS_WRONG_REQUEST = 11; // the callback request is not valid
-    const STATUS_ORDER_NOT_OPEN = 12; // the order is not open (so a previous transaction already alter the order)
+    public const STATUS_ORDER_UNKNOWN = -1; // the order is unknown
+    public const STATUS_OPEN = 0;  // created but not validated
+    public const STATUS_PENDING = 1;  // the bank send a 'pending-like' status, so the payment is not validated, but the user payed
+    public const STATUS_VALIDATED = 2;  // the bank confirm the payment
+    public const STATUS_CANCELLED = 3;  // the user cancelled the payment
+    public const STATUS_UNKNOWN = 4;  // the bank sent a unknown code ...
+    public const STATUS_ERROR_VALIDATION = 9;  // something wrong happen when the bank validate the postback
+    public const STATUS_WRONG_CALLBACK = 10; // something wrong is sent from the bank. hack or the bank change something ...
+    public const STATUS_WRONG_REQUEST = 11; // the callback request is not valid
+    public const STATUS_ORDER_NOT_OPEN = 12; // the order is not open (so a previous transaction already alter the order)
 
     /**
      * @param \Sonata\Component\Order\OrderInterface $order

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,7 +25,7 @@ class BasketValidatorTest extends TestCase
     /**
      * @group legacy
      */
-    public function testValidate()
+    public function testValidate(): void
     {
         $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
         $provider->expects($this->once())->method('validateFormBasketElement');

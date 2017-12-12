@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class Pool
      * @param string                                      $code
      * @param \Sonata\Component\Product\ProductDefinition $productDescription
      */
-    public function addProduct($code, ProductDefinition $productDescription)
+    public function addProduct($code, ProductDefinition $productDescription): void
     {
         $this->products[$code] = $productDescription;
     }

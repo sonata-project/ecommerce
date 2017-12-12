@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -54,7 +56,7 @@ class BasketEntityFactory extends BaseBasketFactory
     /**
      * {@inheritdoc}
      */
-    public function save(BasketInterface $basket)
+    public function save(BasketInterface $basket): void
     {
         if ($basket->getCustomerId()) {
             $this->basketManager->save($basket);
@@ -66,7 +68,7 @@ class BasketEntityFactory extends BaseBasketFactory
     /**
      * {@inheritdoc}
      */
-    public function reset(BasketInterface $basket, $full = true)
+    public function reset(BasketInterface $basket, $full = true): void
     {
         if ($full && $basket->getCustomerId()) {
             $this->basketManager->delete($basket);

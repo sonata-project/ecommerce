@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ use Sonata\CoreBundle\Test\EntityManagerMockFactory;
  */
 class BasketManagerTest extends TestCase
 {
-    public function testCreateAndGetClass()
+    public function testCreateAndGetClass(): void
     {
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
 
@@ -34,7 +36,7 @@ class BasketManagerTest extends TestCase
         $this->assertEquals('Sonata\Component\Basket\Basket', $basketMgr->getClass());
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->once())->method('persist');
@@ -49,7 +51,7 @@ class BasketManagerTest extends TestCase
         $basketMgr->save($basket);
     }
 
-    public function testFind()
+    public function testFind(): void
     {
         $repository = $this->createMock('Doctrine\ORM\EntityRepository');
         $repository->expects($this->once())->method('findOneBy');
@@ -66,7 +68,7 @@ class BasketManagerTest extends TestCase
         $basketMgr->findOneBy([]);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $em->expects($this->once())->method('remove');
@@ -81,11 +83,11 @@ class BasketManagerTest extends TestCase
         $basketMgr->delete($basket);
     }
 
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getBasketManager(function ($qb) use ($self) {
+            ->getBasketManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['b']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -96,23 +98,23 @@ class BasketManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithInvalidSort()
+    public function testGetPagerWithInvalidSort(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Invalid sort field \'invalid\' in \'Sonata\\BasketBundle\\Entity\\BaseBasket\' class');
 
         $self = $this;
         $this
-            ->getBasketManager(function ($qb) use ($self) {
+            ->getBasketManager(function ($qb) use ($self): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
-    public function testGetPagerWithMultipleSort()
+    public function testGetPagerWithMultipleSort(): void
     {
         $self = $this;
         $this
-            ->getBasketManager(function ($qb) use ($self) {
+            ->getBasketManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['b']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(

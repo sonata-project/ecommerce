@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,7 +21,7 @@ use Sonata\Component\Delivery\FreeDelivery;
  */
 class FreeDeliveryTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $freeDelivery = new FreeDelivery(false);
         $this->assertFalse($freeDelivery->isAddressRequired());
@@ -28,14 +30,14 @@ class FreeDeliveryTest extends TestCase
         $this->assertTrue($freeDelivery->isAddressRequired());
     }
 
-    public function testPriceIsNull()
+    public function testPriceIsNull(): void
     {
         $freeDelivery = new FreeDelivery(false);
         $this->assertEquals(0, $freeDelivery->getVatRate());
         $this->assertEquals(0, $freeDelivery->getPrice());
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $freeDelivery = new FreeDelivery(false);
         $this->assertEquals('Free delivery', $freeDelivery->getName());

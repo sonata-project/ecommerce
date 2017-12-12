@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,7 +21,7 @@ use Sonata\BasketBundle\Form\ApiBasketElementType;
  */
 class ApiBasketElementTypeTest extends TestCase
 {
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $type = new ApiBasketElementType('my.test.class');
 

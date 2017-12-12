@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ class SonataPaymentBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $this->registerFormMapping();
     }
@@ -28,7 +30,7 @@ class SonataPaymentBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerFormMapping();
     }
@@ -36,7 +38,7 @@ class SonataPaymentBundle extends Bundle
     /**
      * Register form mapping information.
      */
-    public function registerFormMapping()
+    public function registerFormMapping(): void
     {
         FormHelper::registerFormTypeMapping([
             'sonata_payment_transaction_status' => 'Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType',

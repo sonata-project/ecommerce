@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -34,7 +36,7 @@ class CheckPaymentTest extends TestCase
     /**
      * useless test ....
      */
-    public function testPassPayment()
+    public function testPassPayment(): void
     {
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $logger = $this->createMock(LoggerInterface::class);
@@ -71,7 +73,7 @@ class CheckPaymentTest extends TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    public function testSendbank()
+    public function testSendbank(): void
     {
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('30/11/1981'));
@@ -86,7 +88,7 @@ class CheckPaymentTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
 
         $client = $this->createMock('Buzz\Client\ClientInterface');
-        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response) {
+        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response): void {
             $response->setContent('ok');
         }));
 
@@ -101,7 +103,7 @@ class CheckPaymentTest extends TestCase
         $this->assertFalse($response->isCacheable());
     }
 
-    public function testSendConfirmationReceipt()
+    public function testSendConfirmationReceipt(): void
     {
         $order = new CheckPaymentTest_Order();
 

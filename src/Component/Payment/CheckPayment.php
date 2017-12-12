@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -180,7 +182,7 @@ class CheckPayment extends BasePayment
     /**
      * {@inheritdoc}
      */
-    public function applyTransactionId(TransactionInterface $transaction)
+    public function applyTransactionId(TransactionInterface $transaction): void
     {
         $transaction->setTransactionId('n/a');
     }

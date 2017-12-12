@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -51,7 +53,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * @param CurrencyDetectorInterface $currencyDetector
      */
-    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector): void
     {
         $this->currencyDetector = $currencyDetector;
     }
@@ -59,7 +61,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * @param InvoiceManagerInterface $invoiceManager
      */
-    public function setInvoiceManager(InvoiceManagerInterface $invoiceManager)
+    public function setInvoiceManager(InvoiceManagerInterface $invoiceManager): void
     {
         $this->invoiceManager = $invoiceManager;
     }
@@ -67,7 +69,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * @param OrderManagerInterface $orderManager
      */
-    public function setOrderManager(OrderManagerInterface $orderManager)
+    public function setOrderManager(OrderManagerInterface $orderManager): void
     {
         $this->orderManager = $orderManager;
     }
@@ -75,7 +77,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->parentAssociationMapping = 'customer';
         $this->setTranslationDomain('SonataOrderBundle');
@@ -84,7 +86,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         // define group zoning
         $formMapper
@@ -140,7 +142,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         $currency = $this->currencyDetector->getCurrency()->getLabel();
 
@@ -169,7 +171,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureDatagridFilters(DatagridMapper $filter)
+    public function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('reference')
@@ -189,7 +191,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureRoutes(RouteCollection $collection)
+    public function configureRoutes(RouteCollection $collection): void
     {
         $collection->remove('create');
         $collection->add('generateInvoice');
@@ -198,7 +200,7 @@ class OrderAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {
             return;

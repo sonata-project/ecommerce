@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Sonata\Component\Currency\Currency;
  */
 class CurrencyTest extends \PHPUnit\Framework\TestCase
 {
-    public function testGettersSetters()
+    public function testGettersSetters(): void
     {
         $currency = new Currency();
         $currency->setLabel('EUR');
@@ -27,7 +29,7 @@ class CurrencyTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('EUR', $currency->__toString());
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $currency = new Currency();
         $currency->setLabel('EUR');

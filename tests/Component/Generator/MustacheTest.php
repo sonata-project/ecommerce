@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Sonata\Component\Generator\Mustache;
  */
 class MustacheTest extends \PHPUnit\Framework\TestCase
 {
-    public function testRenderString()
+    public function testRenderString(): void
     {
         $testInput = '{{ replace }}.42 toubidou {{ second }}';
 

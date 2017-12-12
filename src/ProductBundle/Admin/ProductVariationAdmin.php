@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -69,7 +71,7 @@ class ProductVariationAdmin extends ProductAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         // this admin class works only from a request scope
         if (!$this->hasRequest()) {
@@ -89,7 +91,7 @@ class ProductVariationAdmin extends ProductAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {
             return;
@@ -121,7 +123,7 @@ class ProductVariationAdmin extends ProductAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper): void
     {
         // this admin class works only from a request scope
         if (!$this->hasRequest()) {

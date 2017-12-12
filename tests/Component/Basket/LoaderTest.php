@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Sonata\Component\Basket\Loader;
 
 class LoaderTest extends TestCase
 {
-    public function testLoadBasket()
+    public function testLoadBasket(): void
     {
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
@@ -31,7 +33,7 @@ class LoaderTest extends TestCase
         $this->assertInstanceOf('Sonata\Component\Basket\BasketInterface', $loader->getBasket());
     }
 
-    public function testExceptionLoadBasket()
+    public function testExceptionLoadBasket(): void
     {
         $this->expectException(\RuntimeException::class);
 
@@ -39,7 +41,7 @@ class LoaderTest extends TestCase
 
         $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
         $basketFactory = $this->createMock('Sonata\Component\Basket\BasketFactoryInterface');
-        $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(function () {
+        $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(function (): void {
             throw new \RuntimeException();
         }));
 

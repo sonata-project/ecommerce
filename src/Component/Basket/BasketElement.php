@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -86,7 +88,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition($position)
+    public function setPosition($position): void
     {
         $this->position = $position;
     }
@@ -110,7 +112,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct($productCode, ProductInterface $product)
+    public function setProduct($productCode, ProductInterface $product): void
     {
         $this->product = $product;
         $this->productId = $product->getId();
@@ -143,7 +145,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductId($productId)
+    public function setProductId($productId): void
     {
         if ($productId == $this->productId) {
             return;
@@ -171,7 +173,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setVatRate($vatRate)
+    public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
@@ -187,7 +189,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setUnitPrice($unitPrice)
+    public function setUnitPrice($unitPrice): void
     {
         $this->unitPrice = $unitPrice;
     }
@@ -229,7 +231,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setOptions(array $options = [])
+    public function setOptions(array $options = []): void
     {
         $this->options = $options;
     }
@@ -257,7 +259,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setOption($name, $value)
+    public function setOption($name, $value): void
     {
         $this->options[$name] = $value;
     }
@@ -265,7 +267,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setPrice($price)
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -291,7 +293,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setPriceIncludingVat($priceIncludingVat)
+    public function setPriceIncludingVat($priceIncludingVat): void
     {
         $this->priceIncludingVat = $priceIncludingVat;
     }
@@ -307,7 +309,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity): void
     {
         $this->quantity = $quantity >= 0 ? $quantity : 1;
     }
@@ -340,7 +342,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setDelete($delete)
+    public function setDelete($delete): void
     {
         $this->delete = $delete;
     }
@@ -375,7 +377,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function unserialize($data)
+    public function unserialize($data): void
     {
         $data = unserialize($data);
 
@@ -410,7 +412,7 @@ class BasketElement implements \Serializable, BasketElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductDefinition(ProductDefinition $productDefinition)
+    public function setProductDefinition(ProductDefinition $productDefinition): void
     {
         $this->productDefinition = $productDefinition;
     }

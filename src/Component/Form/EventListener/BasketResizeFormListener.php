@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -55,7 +57,7 @@ class BasketResizeFormListener implements EventSubscriberInterface
     /**
      * {@inheritdoc}
      */
-    public function preSetData(FormEvent $event)
+    public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();
         $basketElements = $event->getData();
@@ -66,7 +68,7 @@ class BasketResizeFormListener implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preBind(FormEvent $event)
+    public function preBind(FormEvent $event): void
     {
         $form = $event->getForm();
         $data = $event->getData();
@@ -80,7 +82,7 @@ class BasketResizeFormListener implements EventSubscriberInterface
      *
      * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      */
-    private function buildBasketElements($form, $basketElements)
+    private function buildBasketElements($form, $basketElements): void
     {
         if (null === $basketElements) {
             return;

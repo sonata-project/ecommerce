@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ class ProductCollectionManager extends BaseEntityManager implements ProductColle
     /**
      * {@inheritdoc}
      */
-    public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection)
+    public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection): void
     {
         if ($this->findOneBy(['collection' => $collection, 'product' => $product])) {
             return;
@@ -41,7 +43,7 @@ class ProductCollectionManager extends BaseEntityManager implements ProductColle
     /**
      * {@inheritdoc}
      */
-    public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection)
+    public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection): void
     {
         if (!$productCollection = $this->findOneBy(['collection' => $collection, 'product' => $product])) {
             return;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -64,7 +66,7 @@ class BasketSessionFactory extends BaseBasketFactory
     /**
      * {@inheritdoc}
      */
-    public function save(BasketInterface $basket)
+    public function save(BasketInterface $basket): void
     {
         $this->storeInSession($basket);
     }
@@ -72,7 +74,7 @@ class BasketSessionFactory extends BaseBasketFactory
     /**
      * {@inheritdoc}
      */
-    public function reset(BasketInterface $basket, $full = true)
+    public function reset(BasketInterface $basket, $full = true): void
     {
         $basket->reset($full);
         $this->save($basket);

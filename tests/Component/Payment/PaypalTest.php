@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\Component\Payment\TransactionInterface;
  */
 class PaypalTest extends TestCase
 {
-    public function testSendbank()
+    public function testSendbank(): void
     {
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -43,7 +45,7 @@ class PaypalTest extends TestCase
         $this->assertContains('<input type="hidden" name="cmd" value="_s-xclick">', $sendbank->getContent());
     }
 
-    public function testIsCallbackValid()
+    public function testIsCallbackValid(): void
     {
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
@@ -130,7 +132,7 @@ class PaypalTest extends TestCase
         $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status cancelled.');
     }
 
-    public function testHandleError()
+    public function testHandleError(): void
     {
         $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
         $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');

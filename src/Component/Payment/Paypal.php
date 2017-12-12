@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,15 +25,15 @@ class Paypal extends BasePaypal
 {
     // PayPal pending reason
     // From PP_OrderManagement_IntegrationGuide, March 2008 p58
-    const PENDING_REASON_ADDRESS = 'address';
-    const PENDING_REASON_AUTHORIZATION = 'authorization';
-    const PENDING_REASON_ECHECK = 'echeck';
-    const PENDING_REASON_INTL = 'intl';
-    const PENDING_REASON_MULTICURRENCY = 'multi-currency';
-    const PENDING_REASON_UNILATERAL = 'unilateral';
-    const PENDING_REASON_UPGRADE = 'upgrade';
-    const PENDING_REASON_VERIFY = 'verify';
-    const PENDING_REASON_OTHER = 'other';
+    public const PENDING_REASON_ADDRESS = 'address';
+    public const PENDING_REASON_AUTHORIZATION = 'authorization';
+    public const PENDING_REASON_ECHECK = 'echeck';
+    public const PENDING_REASON_INTL = 'intl';
+    public const PENDING_REASON_MULTICURRENCY = 'multi-currency';
+    public const PENDING_REASON_UNILATERAL = 'unilateral';
+    public const PENDING_REASON_UPGRADE = 'upgrade';
+    public const PENDING_REASON_VERIFY = 'verify';
+    public const PENDING_REASON_OTHER = 'other';
 
     /**
      * {@inheritdoc}
@@ -188,7 +190,7 @@ class Paypal extends BasePaypal
     /**
      * {@inheritdoc}
      */
-    public function handleError(TransactionInterface $transaction)
+    public function handleError(TransactionInterface $transaction): void
     {
         $order = $transaction->getOrder();
 

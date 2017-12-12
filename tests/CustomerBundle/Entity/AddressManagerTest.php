@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\CustomerBundle\Entity\AddressManager;
  */
 class AddressManagerTest extends TestCase
 {
-    public function testSetCurrent()
+    public function testSetCurrent(): void
     {
         $currentAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
         $currentAddress->expects($this->once())
@@ -48,7 +50,7 @@ class AddressManagerTest extends TestCase
         $addressManager->setCurrent($address);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $existingAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
         $existingAddress->expects($this->once())->method('setCurrent');
@@ -76,11 +78,11 @@ class AddressManagerTest extends TestCase
         $addressManager->delete($address);
     }
 
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getAddressManager(function ($qb) use ($self) {
+            ->getAddressManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['a']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -92,23 +94,23 @@ class AddressManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithInvalidSort()
+    public function testGetPagerWithInvalidSort(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Invalid sort field \'invalid\' in \'Sonata\\CustomerBundle\\Entity\\BaseAddress\' class');
 
         $self = $this;
         $this
-            ->getAddressManager(function ($qb) use ($self) {
+            ->getAddressManager(function ($qb) use ($self): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
-    public function testGetPagerWithMultipleSort()
+    public function testGetPagerWithMultipleSort(): void
     {
         $self = $this;
         $this
-            ->getAddressManager(function ($qb) use ($self) {
+            ->getAddressManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['a']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(

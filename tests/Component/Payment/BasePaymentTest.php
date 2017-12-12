@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\Component\Product\ProductInterface;
 
 class BasePaymentTest extends TestCase
 {
-    public function testBasePayment()
+    public function testBasePayment(): void
     {
         $payment = new BasePaymentTest_Payment();
 
@@ -33,7 +35,7 @@ class BasePaymentTest extends TestCase
         $this->assertEquals('13 134 &*', $payment->encodeString('13 134 &*'));
     }
 
-    public function testGenerateUrlCheck()
+    public function testGenerateUrlCheck(): void
     {
         $payment = new BasePaymentTest_Payment();
         $payment->setOptions([
@@ -132,7 +134,7 @@ class BasePaymentTest_Payment extends BasePayment
      * @param \Sonata\Component\Basket\BasketInterface   $basket
      * @param \Sonata\Component\Product\ProductInterface $product
      */
-    public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
+    public function isAddableProduct(BasketInterface $basket, ProductInterface $product): void
     {
         // TODO: Implement isAddableProduct() method.
     }
@@ -142,7 +144,7 @@ class BasePaymentTest_Payment extends BasePayment
      *
      * @param \Sonata\Component\Payment\TransactionInterface $transaction
      */
-    public function applyTransactionId(TransactionInterface $transaction)
+    public function applyTransactionId(TransactionInterface $transaction): void
     {
         // TODO: Implement applyTransactionId() method.
     }

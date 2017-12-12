@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -122,7 +124,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductPool(Pool $pool)
+    public function setProductPool(Pool $pool): void
     {
         $this->productPool = $pool;
     }
@@ -186,7 +188,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryMethod(ServiceDeliveryInterface $method = null)
+    public function setDeliveryMethod(ServiceDeliveryInterface $method = null): void
     {
         $this->deliveryMethod = $method;
         $this->deliveryMethodCode = $method ? $method->getCode() : null;
@@ -203,7 +205,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryAddress(AddressInterface $address = null)
+    public function setDeliveryAddress(AddressInterface $address = null): void
     {
         $this->deliveryAddress = $address;
         $this->deliveryAddressId = $address ? $address->getId() : null;
@@ -220,7 +222,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaymentMethod(PaymentInterface $method = null)
+    public function setPaymentMethod(PaymentInterface $method = null): void
     {
         $this->paymentMethod = $method;
         $this->paymentMethodCode = $method ? $method->getCode() : null;
@@ -237,7 +239,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddress(AddressInterface $address = null)
+    public function setBillingAddress(AddressInterface $address = null): void
     {
         $this->billingAddress = $address;
         $this->billingAddressId = $address ? $address->getId() : null;
@@ -270,7 +272,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function reset($full = true)
+    public function reset($full = true): void
     {
         $this->deliveryAddressId = null;
         $this->deliveryAddress = null;
@@ -303,7 +305,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setBasketElements($basketElements)
+    public function setBasketElements($basketElements): void
     {
         $this->basketElements = [];
         foreach ($basketElements as $basketElement) {
@@ -352,7 +354,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function removeElements(array $elementsToRemove)
+    public function removeElements(array $elementsToRemove): void
     {
         $this->inBuild = true;
         foreach ($elementsToRemove as $element) {
@@ -372,7 +374,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function addBasketElement(BasketElementInterface $basketElement)
+    public function addBasketElement(BasketElementInterface $basketElement): void
     {
         $basketElement->setPosition($this->cptElement);
 
@@ -543,7 +545,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function buildPrices()
+    public function buildPrices(): void
     {
         $this->inBuild = true;
 
@@ -572,7 +574,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function clean()
+    public function clean(): void
     {
         $elementsToRemove = [];
         foreach ($this->getBasketElements() as $basketElement) {
@@ -654,21 +656,21 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function unserialize($data)
+    public function unserialize($data): void
     {
         $data = unserialize($data);
 
         $properties = $this->getUnserializationFields();
 
         foreach ($properties as $property) {
-            $this->$property = isset($data[$property]) ? $data[$property] : $this->$property;
+            $this->$property = $data[$property] ?? $this->$property;
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryAddressId($deliveryAddressId)
+    public function setDeliveryAddressId($deliveryAddressId): void
     {
         $this->deliveryAddressId = $deliveryAddressId;
     }
@@ -684,7 +686,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddressId($billingAddressId)
+    public function setBillingAddressId($billingAddressId): void
     {
         $this->billingAddressId = $billingAddressId;
     }
@@ -700,7 +702,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaymentMethodCode($paymentMethodCode)
+    public function setPaymentMethodCode($paymentMethodCode): void
     {
         $this->paymentMethodCode = $paymentMethodCode;
     }
@@ -716,7 +718,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryMethodCode($deliveryMethodCode)
+    public function setDeliveryMethodCode($deliveryMethodCode): void
     {
         $this->deliveryMethodCode = $deliveryMethodCode;
     }
@@ -732,7 +734,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer = null)
+    public function setCustomer(CustomerInterface $customer = null): void
     {
         $this->customer = $customer;
         $this->customerId = $customer ? $customer->getId() : null;
@@ -749,7 +751,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomerId($customerId)
+    public function setCustomerId($customerId): void
     {
         $this->customerId = $customerId;
     }
@@ -773,7 +775,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setOptions($options)
+    public function setOptions($options): void
     {
         $this->options = $options;
     }
@@ -793,7 +795,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setOption($name, $value)
+    public function setOption($name, $value): void
     {
         $this->options[$name] = $value;
     }
@@ -801,7 +803,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocale($locale)
+    public function setLocale($locale): void
     {
         $this->locale = $locale;
     }
@@ -817,7 +819,7 @@ class Basket implements \Serializable, BasketInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency(CurrencyInterface $currency)
+    public function setCurrency(CurrencyInterface $currency): void
     {
         $this->currency = $currency;
     }

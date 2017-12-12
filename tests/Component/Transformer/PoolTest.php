@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Sonata\Component\Transformer\Pool as TransformerPool;
 
 class PoolTest extends TestCase
 {
-    public function testPool()
+    public function testPool(): void
     {
         $pool = new TransformerPool();
 

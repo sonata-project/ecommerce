@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,11 +19,11 @@ use Sonata\ProductBundle\Entity\ProductManager;
 
 class ProductManagerTest extends TestCase
 {
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -33,11 +35,11 @@ class ProductManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithInvalidSort()
+    public function testGetPagerWithInvalidSort(): void
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -49,11 +51,11 @@ class ProductManagerTest extends TestCase
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
-    public function testGetPagerWithMultipleSort()
+    public function testGetPagerWithMultipleSort(): void
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
@@ -74,11 +76,11 @@ class ProductManagerTest extends TestCase
             ]);
     }
 
-    public function testGetPagerWithEnabledProducts()
+    public function testGetPagerWithEnabledProducts(): void
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('p.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['enabled' => true]));
@@ -86,11 +88,11 @@ class ProductManagerTest extends TestCase
             ->getPager(['enabled' => true], 1);
     }
 
-    public function testGetPagerWithDisabledProducts()
+    public function testGetPagerWithDisabledProducts(): void
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('p.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['enabled' => false]));

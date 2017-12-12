@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
     /**
      * {@inheritdoc}
      */
-    public function setCurrent(AddressInterface $address)
+    public function setCurrent(AddressInterface $address): void
     {
         foreach ($address->getCustomer()->getAddressesByType($address->getType()) as $custAddress) {
             if ($custAddress->getCurrent()) {
@@ -40,7 +42,7 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
     /**
      * {@inheritdoc}
      */
-    public function delete($address, $andFlush = true)
+    public function delete($address, $andFlush = true): void
     {
         if ($address->getCurrent()) {
             $custAddresses = $address->getCustomer()->getAddressesByType(AddressInterface::TYPE_DELIVERY);

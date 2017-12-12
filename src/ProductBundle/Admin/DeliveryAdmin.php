@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -28,7 +30,7 @@ class DeliveryAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setTranslationDomain('SonataProductBundle');
     }
@@ -36,7 +38,7 @@ class DeliveryAdmin extends AbstractAdmin
     /**
      * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         if (!$this->isChild()) {
             $formMapper->add('product', ModelListType::class, [], [
@@ -56,7 +58,7 @@ class DeliveryAdmin extends AbstractAdmin
     /**
      * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         if (!$this->isChild()) {
             $list
@@ -78,7 +80,7 @@ class DeliveryAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {
             return;
@@ -97,7 +99,7 @@ class DeliveryAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filter)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('code')
