@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ class SonataCustomerExtension extends Extension
      * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -65,7 +67,7 @@ class SonataCustomerExtension extends Extension
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param array                                                   $config
      */
-    public function registerParameters(ContainerBuilder $container, array $config)
+    public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.customer.customer.class', $config['class']['customer']);
         $container->setParameter('sonata.customer.address.class', $config['class']['address']);
@@ -78,7 +80,7 @@ class SonataCustomerExtension extends Extension
     /**
      * @param array $config
      */
-    public function registerDoctrineMapping(array $config)
+    public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['customer'])) {
             return;

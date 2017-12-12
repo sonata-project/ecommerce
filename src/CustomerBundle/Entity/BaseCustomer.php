@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,9 +20,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseCustomer implements CustomerInterface
 {
-    const TITLE_MLLE = 1;
-    const TITLE_MME = 2;
-    const TITLE_MR = 3;
+    public const TITLE_MLLE = 1;
+    public const TITLE_MME = 2;
+    public const TITLE_MR = 3;
 
     /**
      * @var string
@@ -115,13 +117,13 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->getFullname();
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -142,7 +144,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -184,7 +186,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setFirstname($firstname)
+    public function setFirstname($firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -200,7 +202,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastname($lastname)
+    public function setLastname($lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -224,7 +226,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -240,7 +242,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setBirthDate(\DateTime $birthDate = null)
+    public function setBirthDate(\DateTime $birthDate = null): void
     {
         $this->birthDate = $birthDate;
     }
@@ -256,7 +258,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setBirthPlace($birthPlace)
+    public function setBirthPlace($birthPlace): void
     {
         $this->birthPlace = $birthPlace;
     }
@@ -272,7 +274,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber($phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -288,7 +290,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setMobileNumber($mobileNumber)
+    public function setMobileNumber($mobileNumber): void
     {
         $this->mobileNumber = $mobileNumber;
     }
@@ -304,7 +306,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setFaxNumber($faxNumber)
+    public function setFaxNumber($faxNumber): void
     {
         $this->faxNumber = $faxNumber;
     }
@@ -320,7 +322,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -336,7 +338,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -344,7 +346,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user): void
     {
         $this->user = $user;
     }
@@ -360,7 +362,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function addAddress(AddressInterface $address)
+    public function addAddress(AddressInterface $address): void
     {
         $address->setCustomer($this);
 
@@ -408,7 +410,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrders($orders)
+    public function setOrders($orders): void
     {
         $this->orders = $orders;
     }
@@ -424,7 +426,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsFake($isFake)
+    public function setIsFake($isFake): void
     {
         $this->isFake = $isFake;
     }
@@ -440,7 +442,7 @@ abstract class BaseCustomer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocale($locale)
+    public function setLocale($locale): void
     {
         $this->locale = $locale;
     }

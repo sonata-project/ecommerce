@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\ProductBundle\Entity\BaseDelivery;
 
 class ServiceDeliveryTest extends TestCase
 {
-    public function testPool()
+    public function testPool(): void
     {
         $pool = new Pool();
 
@@ -43,7 +45,7 @@ class ServiceDeliveryTest extends TestCase
         $this->assertInstanceOf('Sonata\\Component\\Delivery\\FreeDelivery', $pool->getMethod('free_2'), 'Pool return an FreeDelivery Instance');
     }
 
-    public function testGetStatusList()
+    public function testGetStatusList(): void
     {
         $statusList = [
             ServiceDeliveryInterface::STATUS_OPEN => 'status_open',
@@ -57,7 +59,7 @@ class ServiceDeliveryTest extends TestCase
         $this->assertEquals($statusList, BaseServiceDelivery::getStatusList());
     }
 
-    public function testGetOption()
+    public function testGetOption(): void
     {
         $delivery = new FreeDelivery(true);
 

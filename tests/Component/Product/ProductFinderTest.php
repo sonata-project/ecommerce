@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,7 +21,7 @@ use Sonata\Component\Product\ProductFinder;
  */
 class ProductFinderTest extends TestCase
 {
-    public function testGetCrossSellingSimilarProducts()
+    public function testGetCrossSellingSimilarProducts(): void
     {
         $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
         $productManager->expects($this->once())

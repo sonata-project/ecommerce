@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,7 +19,7 @@ use Sonata\Component\Currency\Currency;
 
 class CurrencyDoctrineTypeTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         if (Type::hasType('currency')) {
             Type::overrideType('currency', 'Sonata\Component\Currency\CurrencyDoctrineType');
@@ -26,12 +28,12 @@ class CurrencyDoctrineTypeTest extends TestCase
         }
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('currency', Type::getType('currency')->getName());
     }
 
-    public function testConvertToDatabaseValue()
+    public function testConvertToDatabaseValue(): void
     {
         $platform = new MockPlatform();
 
@@ -44,7 +46,7 @@ class CurrencyDoctrineTypeTest extends TestCase
         );
     }
 
-    public function testConvertToDatabaseValueException()
+    public function testConvertToDatabaseValueException(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('\'currency\' type only handles values of type Sonata\\Component\\Currency\\CurrencyInterface ; value of type string given');
@@ -53,7 +55,7 @@ class CurrencyDoctrineTypeTest extends TestCase
         Type::getType('currency')->convertToDatabaseValue('EUR', $platform);
     }
 
-    public function testConvertToPHPValue()
+    public function testConvertToPHPValue(): void
     {
         $platform = new MockPlatform();
 
@@ -66,7 +68,7 @@ class CurrencyDoctrineTypeTest extends TestCase
         );
     }
 
-    public function testConvertToPHPValueException()
+    public function testConvertToPHPValueException(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('\'42\' is not a supported currency.');
@@ -75,7 +77,7 @@ class CurrencyDoctrineTypeTest extends TestCase
         Type::getType('currency')->convertToPHPValue('42', $platform);
     }
 
-    public function testGetDefaultLength()
+    public function testGetDefaultLength(): void
     {
         $platform = new MockPlatform();
 
@@ -85,7 +87,7 @@ class CurrencyDoctrineTypeTest extends TestCase
         );
     }
 
-    public function testGetSQLDeclaration()
+    public function testGetSQLDeclaration(): void
     {
         $platform = new MockPlatform();
 
@@ -98,28 +100,28 @@ class MockPlatform extends \Doctrine\DBAL\Platforms\AbstractPlatform
     /**
      * Gets the SQL Snippet used to declare a BLOB column type.
      */
-    public function getBlobTypeDeclarationSQL(array $field)
+    public function getBlobTypeDeclarationSQL(array $field): void
     {
         throw DBALException::notSupported(__METHOD__);
     }
 
-    public function getBooleanTypeDeclarationSQL(array $columnDef)
+    public function getBooleanTypeDeclarationSQL(array $columnDef): void
     {
     }
 
-    public function getIntegerTypeDeclarationSQL(array $columnDef)
+    public function getIntegerTypeDeclarationSQL(array $columnDef): void
     {
     }
 
-    public function getBigIntTypeDeclarationSQL(array $columnDef)
+    public function getBigIntTypeDeclarationSQL(array $columnDef): void
     {
     }
 
-    public function getSmallIntTypeDeclarationSQL(array $columnDef)
+    public function getSmallIntTypeDeclarationSQL(array $columnDef): void
     {
     }
 
-    public function _getCommonIntegerTypeDeclarationSQL(array $columnDef)
+    public function _getCommonIntegerTypeDeclarationSQL(array $columnDef): void
     {
     }
 
@@ -144,11 +146,11 @@ class MockPlatform extends \Doctrine\DBAL\Platforms\AbstractPlatform
         return 'mock';
     }
 
-    protected function initializeDoctrineTypeMappings()
+    protected function initializeDoctrineTypeMappings(): void
     {
     }
 
-    protected function getVarcharTypeDeclarationSQLSnippet($length, $fixed)
+    protected function getVarcharTypeDeclarationSQLSnippet($length, $fixed): void
     {
     }
 }

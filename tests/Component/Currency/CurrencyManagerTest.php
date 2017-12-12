@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,7 +21,7 @@ use Sonata\Component\Currency\CurrencyManager;
  */
 class CurrencyManagerTest extends TestCase
 {
-    public function testFindOneByLabel()
+    public function testFindOneByLabel(): void
     {
         $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
 

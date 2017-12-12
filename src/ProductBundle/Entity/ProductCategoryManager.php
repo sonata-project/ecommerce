@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -36,7 +38,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
     /**
      * {@inheritdoc}
      */
-    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false)
+    public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false): void
     {
         if ($this->findOneBy(['category' => $category, 'product' => $product])) {
             return;
@@ -63,7 +65,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
     /**
      * {@inheritdoc}
      */
-    public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category)
+    public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category): void
     {
         if (!$productCategory = $this->findOneBy(['category' => $category, 'product' => $product])) {
             return;
@@ -140,7 +142,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
      * @param CategoryInterface $category
      * @param array             $tree
      */
-    protected function putInTree(CategoryInterface $category, array &$tree)
+    protected function putInTree(CategoryInterface $category, array &$tree): void
     {
         if (null === $category->getParent()) {
             $tree[$category->getId()] = $category;

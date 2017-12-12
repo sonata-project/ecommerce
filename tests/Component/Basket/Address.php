@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -55,7 +57,7 @@ class Address implements AddressInterface
         return 'home';
     }
 
-    public function getId()
+    public function getId(): void
     {
         // TODO: Implement getId() method.
     }

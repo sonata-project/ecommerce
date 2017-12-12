@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
  */
 abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandlerInterface
 {
-    const SESSION_BASE_NAME = 'sonata/basket/factory/customer/';
+    public const SESSION_BASE_NAME = 'sonata/basket/factory/customer/';
 
     /**
      * @var \Sonata\Component\Basket\BasketManagerInterface
@@ -82,7 +84,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     /**
      * {@inheritdoc}
      */
-    public function logout(Request $request, Response $response, TokenInterface $token)
+    public function logout(Request $request, Response $response, TokenInterface $token): void
     {
         // Remove anonymous basket
         $this->session->remove($this->getSessionVarName());
@@ -111,7 +113,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
      *
      * @param BasketInterface $basket
      */
-    protected function storeInSession(BasketInterface $basket)
+    protected function storeInSession(BasketInterface $basket): void
     {
         $this->session->set($this->getSessionVarName($basket->getCustomer()), $basket);
     }
@@ -137,7 +139,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
      *
      * @param CustomerInterface $customer
      */
-    protected function clearSession(CustomerInterface $customer)
+    protected function clearSession(CustomerInterface $customer): void
     {
         $this->session->remove($this->getSessionVarName($customer));
         $this->session->remove($this->getSessionVarName());

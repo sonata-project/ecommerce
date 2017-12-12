@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -51,7 +53,7 @@ class AddBasket
      *
      * @param int $productId the product id
      */
-    public function setProductId($productId)
+    public function setProductId($productId): void
     {
         // never erase this value
         if (null !== $this->productId) {
@@ -66,7 +68,7 @@ class AddBasket
      *
      * @param ProductInterface $product
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductInterface $product): void
     {
         $this->productId = $product->getId();
         $this->product = $product;
@@ -77,7 +79,7 @@ class AddBasket
      *
      * @param int $quantity
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity): void
     {
         $this->quantity = $quantity;
     }

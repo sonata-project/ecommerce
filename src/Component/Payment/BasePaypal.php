@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,15 +29,15 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 abstract class BasePaypal extends BasePayment
 {
-    const PAYMENT_STATUS_CANCELED_REVERSAL = 'Canceled_Reversal';
-    const PAYMENT_STATUS_COMPLETED = 'Completed';
-    const PAYMENT_STATUS_DENIED = 'Denied';
-    const PAYMENT_STATUS_FAILED = 'Failed';
-    const PAYMENT_STATUS_PENDING = 'Pending';
-    const PAYMENT_STATUS_REFUNDED = 'Refunded';
-    const PAYMENT_STATUS_REVERSED = 'Reversed';
-    const PAYMENT_STATUS_PROCESSED = 'Processed';
-    const PAYMENT_STATUS_VOIDED = 'Voided';
+    public const PAYMENT_STATUS_CANCELED_REVERSAL = 'Canceled_Reversal';
+    public const PAYMENT_STATUS_COMPLETED = 'Completed';
+    public const PAYMENT_STATUS_DENIED = 'Denied';
+    public const PAYMENT_STATUS_FAILED = 'Failed';
+    public const PAYMENT_STATUS_PENDING = 'Pending';
+    public const PAYMENT_STATUS_REFUNDED = 'Refunded';
+    public const PAYMENT_STATUS_REVERSED = 'Reversed';
+    public const PAYMENT_STATUS_PROCESSED = 'Processed';
+    public const PAYMENT_STATUS_VOIDED = 'Voided';
 
     /**
      * @var RouterInterface
@@ -85,7 +87,7 @@ abstract class BasePaypal extends BasePayment
      *
      * @param TransactionInterface $transaction
      */
-    public function applyTransactionId(TransactionInterface $transaction)
+    public function applyTransactionId(TransactionInterface $transaction): void
     {
         $transactionId = $transaction->get('txn_id', null);
 
@@ -120,7 +122,7 @@ abstract class BasePaypal extends BasePayment
      *
      * @throws RuntimeException
      */
-    public function checkPaypalFiles()
+    public function checkPaypalFiles(): void
     {
         $key_file = $this->getOption('key_file');
         $cert_file = $this->getOption('cert_file');
@@ -338,7 +340,7 @@ abstract class BasePaypal extends BasePayment
      *
      * @param unknown $webConnectorProvider
      */
-    public function setWebConnectorProvider($webConnectorProvider)
+    public function setWebConnectorProvider($webConnectorProvider): void
     {
         $this->webConnectorProvider = $webConnectorProvider;
     }

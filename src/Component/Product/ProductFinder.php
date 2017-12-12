@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -48,7 +50,7 @@ class ProductFinder implements ProductFinderInterface
     /**
      * {@inheritdoc}
      */
-    public function getUpSellingSimilarProducts(ProductInterface $product)
+    public function getUpSellingSimilarProducts(ProductInterface $product): void
     {
         // TODO: Implement getUpSellingSimilarProducts() method.
     }

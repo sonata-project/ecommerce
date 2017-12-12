@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -34,7 +36,7 @@ class BasketElementTest extends TestCase
     /**
      * Sets up unit test.
      */
-    public function setUp()
+    public function setUp(): void
     {
         bcscale(3);
     }
@@ -74,7 +76,7 @@ class BasketElementTest extends TestCase
         return $basketElement;
     }
 
-    public function testPrice()
+    public function testPrice(): void
     {
         $basketElement = $this->getBasketElement();
 
@@ -90,7 +92,7 @@ class BasketElementTest extends TestCase
         $this->assertEquals(2.940, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
     }
 
-    public function testPriceIncludingVat()
+    public function testPriceIncludingVat(): void
     {
         $basketElement = $this->getBasketElement();
         $basketElement->setPriceIncludingVat(true);
@@ -107,7 +109,7 @@ class BasketElementTest extends TestCase
         $this->assertEquals(2.459, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
         $basketElement = $this->getBasketElement();
 
@@ -118,7 +120,7 @@ class BasketElementTest extends TestCase
         $this->assertNull($basketElement->getOption('fake'), 'fake option = null');
     }
 
-    public function testQuantity()
+    public function testQuantity(): void
     {
         $basketElement = $this->getBasketElement();
         $basketElement->setQuantity(10);
@@ -134,7 +136,7 @@ class BasketElementTest extends TestCase
         $this->assertEquals(0, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when no quantity set');
     }
 
-    public function testQuantityWithPriceIncludingVat()
+    public function testQuantityWithPriceIncludingVat(): void
     {
         $basketElement = $this->getBasketElement();
         $basketElement->setQuantity(10);
@@ -151,7 +153,7 @@ class BasketElementTest extends TestCase
         $this->assertEquals(0, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when no quantity set');
     }
 
-    public function testValidity()
+    public function testValidity(): void
     {
         $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
             ->setMockClassName('BasketTest_Product')
@@ -172,7 +174,7 @@ class BasketElementTest extends TestCase
         $this->assertFalse($basketElement->isValid(), 'BasketElement returns the correct default quantity');
     }
 
-    public function testGettersSetters()
+    public function testGettersSetters(): void
     {
         $currency = $this->createMock('Sonata\Component\Currency\Currency');
         $productProvider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');

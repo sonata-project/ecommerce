@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class PaymentHandlerTest extends TestCase
 {
-    public function testHandleError()
+    public function testHandleError(): void
     {
         $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
         $payment->expects($this->once())
@@ -68,7 +70,7 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($errorOrder, $order);
     }
 
-    public function testHandleErrorInvalidTransactionException()
+    public function testHandleErrorInvalidTransactionException(): void
     {
         $this->expectException(\Sonata\Component\Payment\InvalidTransactionException::class);
         $this->expectExceptionMessage('Unable to find reference');
@@ -105,7 +107,7 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($errorOrder, $order);
     }
 
-    public function testHandleErrorInvalidTransactionException2()
+    public function testHandleErrorInvalidTransactionException2(): void
     {
         $this->expectException(\Sonata\Component\Payment\InvalidTransactionException::class);
         $this->expectExceptionMessage('Invalid check - order ref: 42');
@@ -155,7 +157,7 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($errorOrder, $order);
     }
 
-    public function testHandleErrorEntityNotFoundException()
+    public function testHandleErrorEntityNotFoundException(): void
     {
         $this->expectException(\Doctrine\ORM\EntityNotFoundException::class);
 
@@ -195,7 +197,7 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($errorOrder, null);
     }
 
-    public function testHandleConfirmation()
+    public function testHandleConfirmation(): void
     {
         $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
         $payment->expects($this->once())
@@ -238,7 +240,7 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($confirmOrder, $order);
     }
 
-    public function testGetSendbankOrder()
+    public function testGetSendbankOrder(): void
     {
         $order = $this->createMock('Sonata\Component\Order\OrderInterface');
 
@@ -278,7 +280,7 @@ class PaymentHandlerTest extends TestCase
         $this->assertEquals($order, $sendbankOrder);
     }
 
-    public function testGetPaymentCallbackResponse()
+    public function testGetPaymentCallbackResponse(): void
     {
         $response = new Response();
 

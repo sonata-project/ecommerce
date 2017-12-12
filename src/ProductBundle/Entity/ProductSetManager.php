@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,7 +25,7 @@ class ProductSetManager extends ProductManager
      *
      * @throws \RuntimeException
      */
-    public function delete($productSet, $andFlush = true)
+    public function delete($productSet, $andFlush = true): void
     {
         throw new \RuntimeException('A ProductSetManager cannot delete a product');
     }
@@ -33,7 +35,7 @@ class ProductSetManager extends ProductManager
      *
      * @throws \RuntimeException
      */
-    public function create()
+    public function create(): void
     {
         throw new \RuntimeException('A ProductSetManager cannot create a product');
     }
@@ -46,7 +48,7 @@ class ProductSetManager extends ProductManager
      *
      * @throws \RuntimeException
      */
-    public function save($productSet, $andFlush = true)
+    public function save($productSet, $andFlush = true): void
     {
         throw new \RuntimeException('A ProductSetManager cannot save a product');
     }

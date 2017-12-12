@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -39,7 +41,7 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function save($entity, $andFlush = true)
+    public function save($entity, $andFlush = true): void
     {
         foreach ($entity->getBasketElements() as $element) {
             $element->setBasket($entity);

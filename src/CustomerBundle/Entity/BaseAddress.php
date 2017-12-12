@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -153,13 +155,13 @@ abstract class BaseAddress implements AddressInterface
         return $fullAddress;
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -178,7 +180,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param bool $current
      */
-    public function setCurrent($current)
+    public function setCurrent($current): void
     {
         $this->current = $current;
     }
@@ -198,7 +200,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param int $type
      */
-    public function setType($type)
+    public function setType($type): void
     {
         $this->type = $type;
     }
@@ -225,7 +227,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $firstname
      */
-    public function setFirstname($firstname)
+    public function setFirstname($firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -245,7 +247,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $lastname
      */
-    public function setLastname($lastname)
+    public function setLastname($lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -265,7 +267,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $address1
      */
-    public function setAddress1($address1)
+    public function setAddress1($address1): void
     {
         $this->address1 = $address1;
     }
@@ -285,7 +287,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $address2
      */
-    public function setAddress2($address2)
+    public function setAddress2($address2): void
     {
         $this->address2 = $address2;
     }
@@ -305,7 +307,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $address3
      */
-    public function setAddress3($address3)
+    public function setAddress3($address3): void
     {
         $this->address3 = $address3;
     }
@@ -325,7 +327,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $postcode
      */
-    public function setPostcode($postcode)
+    public function setPostcode($postcode): void
     {
         $this->postcode = $postcode;
     }
@@ -345,7 +347,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $city
      */
-    public function setCity($city)
+    public function setCity($city): void
     {
         $this->city = $city;
     }
@@ -365,7 +367,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $countryCode
      */
-    public function setCountryCode($countryCode)
+    public function setCountryCode($countryCode): void
     {
         $this->countryCode = $countryCode;
     }
@@ -385,7 +387,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param string $phone
      */
-    public function setPhone($phone)
+    public function setPhone($phone): void
     {
         $this->phone = $phone;
     }
@@ -405,7 +407,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param \Datetime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -425,7 +427,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param \Datetime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -440,7 +442,7 @@ abstract class BaseAddress implements AddressInterface
         return $this->createdAt;
     }
 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -487,7 +489,7 @@ abstract class BaseAddress implements AddressInterface
         return $this->getFullAddress('<br/>');
     }
 
-    public function setCustomer(CustomerInterface $customer)
+    public function setCustomer(CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }

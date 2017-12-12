@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -176,7 +178,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addProductCollection(ProductCollectionInterface $productCollection)
+    public function addProductCollection(ProductCollectionInterface $productCollection): void
     {
         $productCollection->setProduct($this);
 
@@ -186,7 +188,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProductCollection(ProductCollectionInterface $productCollection)
+    public function removeProductCollection(ProductCollectionInterface $productCollection): void
     {
         if ($this->productCollections->contains($productCollection)) {
             $this->productCollections->removeElement($productCollection);
@@ -204,7 +206,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductCollections(ArrayCollection $productCollections)
+    public function setProductCollections(ArrayCollection $productCollections): void
     {
         $this->productCollections = $productCollections;
     }
@@ -228,7 +230,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setSku($sku)
+    public function setSku($sku): void
     {
         $this->sku = $sku;
     }
@@ -244,7 +246,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug): void
     {
         $slug = Slugify::create()->slugify(trim($slug));
 
@@ -262,7 +264,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
 
@@ -282,7 +284,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -298,7 +300,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setRawDescription($rawDescription)
+    public function setRawDescription($rawDescription): void
     {
         $this->rawDescription = $rawDescription;
     }
@@ -314,7 +316,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescriptionFormatter($descriptionFormatter)
+    public function setDescriptionFormatter($descriptionFormatter): void
     {
         $this->descriptionFormatter = $descriptionFormatter;
     }
@@ -330,7 +332,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setShortDescription($shortDescription)
+    public function setShortDescription($shortDescription): void
     {
         $this->shortDescription = $shortDescription;
     }
@@ -346,7 +348,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setRawShortDescription($rawShortDescription)
+    public function setRawShortDescription($rawShortDescription): void
     {
         $this->rawShortDescription = $rawShortDescription;
     }
@@ -362,7 +364,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setShortDescriptionFormatter($shortDescriptionFormatter)
+    public function setShortDescriptionFormatter($shortDescriptionFormatter): void
     {
         $this->shortDescriptionFormatter = $shortDescriptionFormatter;
     }
@@ -378,7 +380,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setPrice($price)
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -394,7 +396,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setUnitPrice($unitPrice)
+    public function setUnitPrice($unitPrice): void
     {
         $this->setPrice($unitPrice);
     }
@@ -410,7 +412,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity): void
     {
         throw new \InvalidMethodCallException('This method is not used');
     }
@@ -418,7 +420,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function getQuantity()
+    public function getQuantity(): void
     {
         throw new \InvalidMethodCallException('This method is not used');
     }
@@ -426,7 +428,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setVatRate($vatRate)
+    public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
@@ -442,7 +444,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setStock($stock)
+    public function setStock($stock): void
     {
         $this->stock = $stock;
     }
@@ -458,7 +460,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -474,7 +476,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -490,7 +492,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -506,7 +508,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addPackage(PackageInterface $package)
+    public function addPackage(PackageInterface $package): void
     {
         $package->setProduct($this);
 
@@ -516,7 +518,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removePackage(PackageInterface $package)
+    public function removePackage(PackageInterface $package): void
     {
         if ($this->packages->contains($package)) {
             $this->packages->removeElement($package);
@@ -534,7 +536,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setPackages(ArrayCollection $packages)
+    public function setPackages(ArrayCollection $packages): void
     {
         $this->packages = $packages;
     }
@@ -542,7 +544,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addDelivery(DeliveryInterface $delivery)
+    public function addDelivery(DeliveryInterface $delivery): void
     {
         $delivery->setProduct($this);
 
@@ -552,7 +554,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeDelivery(DeliveryInterface $delivery)
+    public function removeDelivery(DeliveryInterface $delivery): void
     {
         if ($this->deliveries->contains($delivery)) {
             $this->deliveries->removeElement($delivery);
@@ -570,7 +572,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveries(ArrayCollection $deliveries)
+    public function setDeliveries(ArrayCollection $deliveries): void
     {
         $this->deliveries = $deliveries;
     }
@@ -578,7 +580,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addDeliverie(DeliveryInterface $delivery)
+    public function addDeliverie(DeliveryInterface $delivery): void
     {
         $this->addDelivery($delivery);
     }
@@ -586,7 +588,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeDeliverie(DeliveryInterface $delivery)
+    public function removeDeliverie(DeliveryInterface $delivery): void
     {
         $this->removeDelivery($delivery);
     }
@@ -594,7 +596,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addProductCategorie(ProductCategoryInterface $productCategory)
+    public function addProductCategorie(ProductCategoryInterface $productCategory): void
     {
         $this->addProductCategory($productCategory);
     }
@@ -602,7 +604,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProductCategorie(ProductCategoryInterface $productCategory)
+    public function removeProductCategorie(ProductCategoryInterface $productCategory): void
     {
         $this->removeProductCategory($productCategory);
     }
@@ -610,7 +612,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addProductCategory(ProductCategoryInterface $productCategory)
+    public function addProductCategory(ProductCategoryInterface $productCategory): void
     {
         $productCategory->setProduct($this);
 
@@ -620,7 +622,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeProductCategory(ProductCategoryInterface $productCategory)
+    public function removeProductCategory(ProductCategoryInterface $productCategory): void
     {
         if ($this->productCategories->contains($productCategory)) {
             $this->productCategories->removeElement($productCategory);
@@ -638,7 +640,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductCategories(ArrayCollection $productCategories)
+    public function setProductCategories(ArrayCollection $productCategories): void
     {
         $this->productCategories = $productCategories;
     }
@@ -674,7 +676,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addVariation(ProductInterface $variation)
+    public function addVariation(ProductInterface $variation): void
     {
         $variation->setParent($this);
 
@@ -684,7 +686,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeVariation(ProductInterface $variation)
+    public function removeVariation(ProductInterface $variation): void
     {
         if ($this->variations->contains($variation)) {
             $this->variations->removeElement($variation);
@@ -702,7 +704,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setVariations(ArrayCollection $variations)
+    public function setVariations(ArrayCollection $variations): void
     {
         $this->variations = $variations;
     }
@@ -718,7 +720,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setImage(MediaInterface $image = null)
+    public function setImage(MediaInterface $image = null): void
     {
         $this->image = $image;
     }
@@ -734,7 +736,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setGallery(GalleryInterface $gallery = null)
+    public function setGallery(GalleryInterface $gallery = null): void
     {
         $this->gallery = $gallery;
     }
@@ -758,7 +760,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setParent(ProductInterface $parent)
+    public function setParent(ProductInterface $parent): void
     {
         $this->parent = $parent;
     }
@@ -774,7 +776,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
@@ -820,12 +822,12 @@ abstract class BaseProduct implements ProductInterface
         return false;
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->updatedAt = new \DateTime();
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
@@ -834,7 +836,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setPriceIncludingVat($priceIncludingVat)
+    public function setPriceIncludingVat($priceIncludingVat): void
     {
         $this->priceIncludingVat = $priceIncludingVat;
     }
@@ -893,7 +895,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function fromArray($array)
+    public function fromArray($array): void
     {
         $accessor = PropertyAccess::createPropertyAccessor();
         foreach ($array as $key => $value) {
@@ -930,7 +932,7 @@ abstract class BaseProduct implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function validateOneMainCategory(ExecutionContextInterface $context)
+    public function validateOneMainCategory(ExecutionContextInterface $context): void
     {
         if (0 == $this->getCategories()->count()) {
             return;

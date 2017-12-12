@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,11 +19,11 @@ use Sonata\CustomerBundle\Entity\CustomerManager;
 
 class CustomerManagerTest extends TestCase
 {
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -33,23 +35,23 @@ class CustomerManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithInvalidSort()
+    public function testGetPagerWithInvalidSort(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Invalid sort field \'invalid\' in \'Sonata\\CustomerBundle\\Entity\\BaseCustomer\' class');
 
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(function ($qb) use ($self): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
 
-    public function testGetPagerWithMultipleSort()
+    public function testGetPagerWithMultipleSort(): void
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
@@ -70,11 +72,11 @@ class CustomerManagerTest extends TestCase
             ]);
     }
 
-    public function testGetPagerWithFakeCustomers()
+    public function testGetPagerWithFakeCustomers(): void
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['isFake' => true]));
@@ -82,11 +84,11 @@ class CustomerManagerTest extends TestCase
             ->getPager(['is_fake' => true], 1);
     }
 
-    public function testGetPagerWithNoFakeCustomer()
+    public function testGetPagerWithNoFakeCustomer(): void
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['isFake' => false]));

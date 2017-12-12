@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
  */
 class DeliveryMethodTransformerTest extends TestCase
 {
-    public function testTransform()
+    public function testTransform(): void
     {
         $pool = $this->createMock('Sonata\Component\Delivery\Pool');
         $transformer = new DeliveryMethodTransformer($pool);
@@ -32,7 +34,7 @@ class DeliveryMethodTransformerTest extends TestCase
         $this->assertNull($transformer->transform(null));
     }
 
-    public function testReverseTransform()
+    public function testReverseTransform(): void
     {
         $delivery = new FreeDelivery(false);
         $delivery->setCode('deliveryCode');

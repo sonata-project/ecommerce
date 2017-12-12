@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ class SonataProductExtension extends Extension
      * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -67,7 +69,7 @@ class SonataProductExtension extends Extension
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param array                                                   $config
      */
-    public function registerParameters(ContainerBuilder $container, array $config)
+    public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.product.product.class', $config['class']['product']);
         $container->setParameter('sonata.product.package.class', $config['class']['package']);
@@ -89,7 +91,7 @@ class SonataProductExtension extends Extension
     /**
      * @param array $config
      */
-    public function registerDoctrineMapping(array $config)
+    public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['product'])) {
             return;
@@ -332,7 +334,7 @@ class SonataProductExtension extends Extension
      * @param ContainerBuilder $container
      * @param array            $config
      */
-    protected function registerSeoParameters(ContainerBuilder $container, array $config)
+    protected function registerSeoParameters(ContainerBuilder $container, array $config): void
     {
         $productSeo = $config['seo']['product'];
 

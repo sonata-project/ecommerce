@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ProductControllerTest extends TestCase
 {
-    public function testGetProductsAction()
+    public function testGetProductsAction(): void
     {
         $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
         $productManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
@@ -32,13 +34,13 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([], $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
     }
 
-    public function testGetProductAction()
+    public function testGetProductAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $this->assertEquals($product, $this->createProductController($product)->getProductAction(1));
     }
 
-    public function testGetProductActionNotFoundException()
+    public function testGetProductActionNotFoundException(): void
     {
         $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         $this->expectExceptionMessage('Product (42) not found');
@@ -46,7 +48,7 @@ class ProductControllerTest extends TestCase
         $this->createProductController()->getProductAction(42);
     }
 
-    public function testGetProductProductcategoriesAction()
+    public function testGetProductProductcategoriesAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $productCategory = $this->createMock('Sonata\Component\Product\ProductCategoryInterface');
@@ -58,7 +60,7 @@ class ProductControllerTest extends TestCase
         );
     }
 
-    public function testGetProductCategoriesAction()
+    public function testGetProductCategoriesAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
@@ -67,7 +69,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$category], $this->createProductController($product)->getProductCategoriesAction(1));
     }
 
-    public function testGetProductProductcollectionsAction()
+    public function testGetProductProductcollectionsAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $productCollection = $this->createMock('Sonata\Component\Product\ProductCollectionInterface');
@@ -79,7 +81,7 @@ class ProductControllerTest extends TestCase
         );
     }
 
-    public function testGetProductCollectionsAction()
+    public function testGetProductCollectionsAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
@@ -88,7 +90,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$collection], $this->createProductController($product)->getProductCollectionsAction(1));
     }
 
-    public function testGetProductPackagesAction()
+    public function testGetProductPackagesAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $package = $this->createMock('Sonata\Component\Product\PackageInterface');
@@ -97,7 +99,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$package], $this->createProductController($product)->getProductPackagesAction(1));
     }
 
-    public function testGetProductDeliveriesAction()
+    public function testGetProductDeliveriesAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $delivery = $this->createMock('Sonata\Component\Product\DeliveryInterface');
@@ -106,7 +108,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$delivery], $this->createProductController($product)->getProductDeliveriesAction(1));
     }
 
-    public function testGetProductVariationsAction()
+    public function testGetProductVariationsAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
         $variation = $this->createMock('Sonata\Component\Product\ProductInterface');
@@ -115,7 +117,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$variation], $this->createProductController($product)->getProductVariationsAction(1));
     }
 
-    public function testPostProductAction()
+    public function testPostProductAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
@@ -142,7 +144,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPostProductInvalidAction()
+    public function testPostProductInvalidAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
@@ -168,7 +170,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testPutProductAction()
+    public function testPutProductAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
@@ -196,7 +198,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPutProductInvalidAction()
+    public function testPutProductInvalidAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
@@ -223,7 +225,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testDeleteProductAction()
+    public function testDeleteProductAction(): void
     {
         $product = $this->createMock('Sonata\Component\Product\ProductInterface');
 
@@ -238,7 +240,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteProductInvalidAction()
+    public function testDeleteProductInvalidAction(): void
     {
         $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 

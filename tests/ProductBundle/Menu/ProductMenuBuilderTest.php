@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,7 +21,7 @@ use Sonata\ProductBundle\Menu\ProductMenuBuilder;
  */
 class ProductMenuBuilderTest extends TestCase
 {
-    public function testCreateCategoryMenu()
+    public function testCreateCategoryMenu(): void
     {
         $menu = $this->createMock('Knp\Menu\ItemInterface');
         $factory = $this->createMock('Knp\Menu\FactoryInterface');
@@ -42,7 +44,7 @@ class ProductMenuBuilderTest extends TestCase
         $this->assertInstanceOf('Knp\Menu\ItemInterface', $genMenu);
     }
 
-    public function testCreateFiltersMenu()
+    public function testCreateFiltersMenu(): void
     {
         $menu = $this->createMock('Knp\Menu\ItemInterface');
         $factory = $this->createMock('Knp\Menu\FactoryInterface');

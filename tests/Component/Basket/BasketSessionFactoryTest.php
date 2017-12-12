@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class BasketSessionFactoryTest extends TestCase
 {
-    public function testLoadWithNoBasket()
+    public function testLoadWithNoBasket(): void
     {
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('setCustomer');
@@ -52,7 +54,7 @@ class BasketSessionFactoryTest extends TestCase
         $this->isInstanceOf('Sonata\Component\Basket\BasketInterface', $basket);
     }
 
-    public function testLoadWithBasket()
+    public function testLoadWithBasket(): void
     {
         $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
         $basket->expects($this->once())->method('setCustomer');
@@ -83,7 +85,7 @@ class BasketSessionFactoryTest extends TestCase
         $this->isInstanceOf('Sonata\Component\Basket\BasketInterface', $basket);
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');
 
@@ -109,7 +111,7 @@ class BasketSessionFactoryTest extends TestCase
         $factory->save($basket);
     }
 
-    public function testLogout()
+    public function testLogout(): void
     {
         $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');
 

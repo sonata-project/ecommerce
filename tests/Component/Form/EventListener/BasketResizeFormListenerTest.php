@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Symfony\Component\Form\FormEvents;
  */
 class BasketResizeFormListenerTest extends TestCase
 {
-    public function testGetSubscribedEvents()
+    public function testGetSubscribedEvents(): void
     {
         $expected = [
             FormEvents::PRE_SET_DATA => 'preSetData',
@@ -30,7 +32,7 @@ class BasketResizeFormListenerTest extends TestCase
         $this->assertEquals($expected, BasketResizeFormListener::getSubscribedEvents());
     }
 
-    public function testPreSetData()
+    public function testPreSetData(): void
     {
         $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
@@ -46,7 +48,7 @@ class BasketResizeFormListenerTest extends TestCase
         $formListener->preSetData($this->getFormEvent(true));
     }
 
-    public function testPreBind()
+    public function testPreBind(): void
     {
         $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
@@ -64,7 +66,7 @@ class BasketResizeFormListenerTest extends TestCase
         $formListener->preBind($this->getFormEvent());
     }
 
-    public function testPreBindEmpty()
+    public function testPreBindEmpty(): void
     {
         $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
 
@@ -82,7 +84,7 @@ class BasketResizeFormListenerTest extends TestCase
         $formListener->preBind($this->getFormEvent(false, false));
     }
 
-    public function testPreBindException()
+    public function testPreBindException(): void
     {
         $this->expectException(\Symfony\Component\Form\Exception\UnexpectedTypeException::class);
 

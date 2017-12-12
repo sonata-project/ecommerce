@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -549,7 +551,7 @@ class BasketController
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      */
-    protected function checkExistingCustomerBasket($customerId)
+    protected function checkExistingCustomerBasket($customerId): void
     {
         $basket = $this->basketManager->findOneBy(['customer' => $customerId]);
         if ($basket instanceof BasketInterface) {

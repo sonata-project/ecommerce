@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -79,7 +81,7 @@ class Facebook implements ServiceInterface
      * @param SeoPageInterface $seoPage
      * @param ProductInterface $product
      */
-    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product)
+    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product): void
     {
         $this->registerHeaders($seoPage);
 
@@ -103,7 +105,7 @@ class Facebook implements ServiceInterface
      * @param MediaInterface   $image
      * @param SeoPageInterface $seoPage
      */
-    protected function addImageInfo(MediaInterface $image, SeoPageInterface $seoPage)
+    protected function addImageInfo(MediaInterface $image, SeoPageInterface $seoPage): void
     {
         $provider = $this->mediaPool->getProvider($image->getProviderName());
 
@@ -116,7 +118,7 @@ class Facebook implements ServiceInterface
     /**
      * @param SeoPageInterface $seoPage
      */
-    protected function registerHeaders(SeoPageInterface $seoPage)
+    protected function registerHeaders(SeoPageInterface $seoPage): void
     {
         $attributeName = 'prefix';
         $headAttributes = $seoPage->getHeadAttributes();

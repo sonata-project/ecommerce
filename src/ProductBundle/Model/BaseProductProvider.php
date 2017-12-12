@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -104,7 +106,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher)
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -120,7 +122,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param \Sonata\Component\Currency\CurrencyPriceCalculatorInterface $currencyPriceCalculator
      */
-    public function setCurrencyPriceCalculator(CurrencyPriceCalculatorInterface $currencyPriceCalculator)
+    public function setCurrencyPriceCalculator(CurrencyPriceCalculatorInterface $currencyPriceCalculator): void
     {
         $this->currencyPriceCalculator = $currencyPriceCalculator;
     }
@@ -136,7 +138,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
      */
-    public function setBasketElementManager(BasketElementManagerInterface $basketElementManager)
+    public function setBasketElementManager(BasketElementManagerInterface $basketElementManager): void
     {
         $this->basketElementManager = $basketElementManager;
     }
@@ -144,7 +146,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param string $orderElementClassName
      */
-    public function setOrderElementClassName($orderElementClassName)
+    public function setOrderElementClassName($orderElementClassName): void
     {
         $this->orderElementClassName = $orderElementClassName;
     }
@@ -160,7 +162,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductCategoryManager(ProductCategoryManagerInterface $productCategoryManager)
+    public function setProductCategoryManager(ProductCategoryManagerInterface $productCategoryManager): void
     {
         $this->productCategoryManager = $productCategoryManager;
     }
@@ -176,7 +178,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductCollectionManager(ProductCollectionManagerInterface $productCollectionManager)
+    public function setProductCollectionManager(ProductCollectionManagerInterface $productCollectionManager): void
     {
         $this->productCollectionManager = $productCollectionManager;
     }
@@ -192,7 +194,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param array $options
      */
-    public function setOptions(array $options = [])
+    public function setOptions(array $options = []): void
     {
         $this->options = $options;
     }
@@ -424,7 +426,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param array $fields
      */
-    public function setVariationFields(array $fields = [])
+    public function setVariationFields(array $fields = []): void
     {
         $this->variationFields = $fields;
     }
@@ -440,14 +442,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options, $isVariation = false)
+    public function buildForm(FormBuilderInterface $builder, array $options, $isVariation = false): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $formMapper, $isVariation = false)
+    public function buildEditForm(FormMapper $formMapper, $isVariation = false): void
     {
         $formMapper->with('Product');
 
@@ -519,7 +521,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function buildCreateForm(FormMapper $formMapper)
+    public function buildCreateForm(FormMapper $formMapper): void
     {
         $this->buildEditForm($formMapper);
     }
@@ -527,7 +529,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function configureShowFields(ShowMapper $showMapper)
+    public function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
             ->add('name')
@@ -582,7 +584,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function synchronizeVariations(ProductInterface $product, ArrayCollection $variations = null)
+    public function synchronizeVariations(ProductInterface $product, ArrayCollection $variations = null): void
     {
         $this->synchronizeVariationsProduct($product, $variations);
         $this->synchronizeVariationsDeliveries($product, $variations);
@@ -594,7 +596,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null)
+    public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null): void
     {
         $variationFields = array_merge(['id', 'parent'], $this->getVariationFields());
 
@@ -622,7 +624,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null)
+    public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('deliveries', $this->getVariationFields())) {
             return;
@@ -658,7 +660,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null)
+    public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('productCategories', $this->getVariationFields())) {
             return;
@@ -693,7 +695,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null)
+    public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('productCollections', $this->getVariationFields())) {
             return;
@@ -728,7 +730,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null)
+    public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('packages', $this->getVariationFields())) {
             return;
@@ -780,7 +782,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = [])
+    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []): void
     {
         if ($product) {
             $basketElement->setProduct($this->code, $product);
@@ -801,7 +803,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param bool                                       $showQuantity Specifies if quantity field will be displayed (default true)
      * @param array                                      $options      An options array
      */
-    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = [])
+    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = []): void
     {
         $basketElement = $this->createBasketElement($product);
 
@@ -826,7 +828,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      * @param \Symfony\Component\Form\FormBuilder             $formBuilder
      * @param array                                           $options
      */
-    public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = [])
+    public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = []): void
     {
         $formBuilder
             ->add('delete', 'checkbox')
@@ -837,7 +839,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket)
+    public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket): void
     {
         // the item is flagged as deleted, no need to validate the item
         if ($basketElement->getDelete() || 0 === $basketElement->getQuantity()) {
@@ -981,7 +983,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function updateComputationPricesFields(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product)
+    public function updateComputationPricesFields(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product): void
     {
         $unitPrice = $this->calculatePrice($product, $basket->getCurrency(), $product->isPriceIncludingVat(), 1);
         $price = $this->calculatePrice($product, $basket->getCurrency(), $product->isPriceIncludingVat(), $basketElement->getQuantity());
@@ -1073,7 +1075,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * @param string $code
      */
-    public function setCode($code)
+    public function setCode($code): void
     {
         $this->code = $code;
     }
@@ -1130,7 +1132,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function updateStock($product, ProductManagerInterface $productManager, $diff)
+    public function updateStock($product, ProductManagerInterface $productManager, $diff): void
     {
         $productManager->updateStock($product, $diff);
     }

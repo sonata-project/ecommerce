@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -26,7 +28,7 @@ class ProductCollectionAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setTranslationDomain('SonataProductBundle');
     }
@@ -34,7 +36,7 @@ class ProductCollectionAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         if (!$this->isChild()) {
             $formMapper->add('product', ModelListType::class, [], [
@@ -51,7 +53,7 @@ class ProductCollectionAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         if (!$this->isChild()) {
             $list
@@ -69,7 +71,7 @@ class ProductCollectionAdmin extends AbstractAdmin
     /**
      * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
      */
-    public function configureDatagridFilters(DatagridMapper $filter)
+    public function configureDatagridFilters(DatagridMapper $filter): void
     {
         if (!$this->isChild()) {
             $filter
@@ -81,7 +83,7 @@ class ProductCollectionAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {
             return;

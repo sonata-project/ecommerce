@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\PaymentBundle\Consumer\PaymentProcessOrderElementConsumer;
 
 class PaymentProcessOrderElementConsumerTest extends TestCase
 {
-    public function testGenerateDiffValue()
+    public function testGenerateDiffValue(): void
     {
         $consumer = $this->getConsumer();
 

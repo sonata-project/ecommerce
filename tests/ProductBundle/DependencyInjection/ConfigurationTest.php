@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,7 +18,7 @@ use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends \PHPUnit\Framework\TestCase
 {
-    public function testDefaults()
+    public function testDefaults(): void
     {
         $processor = new Processor();
 
@@ -29,7 +31,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
         $this->assertEmpty($config['products']);
     }
 
-    public function validateClass($config)
+    public function validateClass($config): void
     {
         $this->assertEquals([
             'product' => 'Application\\Sonata\\ProductBundle\\Entity\\Product',
@@ -44,7 +46,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
         ], $config['class']);
     }
 
-    public function validateSeo($config)
+    public function validateSeo($config): void
     {
         $this->assertEquals([
             'product' => [

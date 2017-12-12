@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,7 +29,7 @@ class Address extends BaseAddress
  */
 class SelectorTest extends \PHPUnit\Framework\TestCase
 {
-    public function testGetPaymentPool()
+    public function testGetPaymentPool(): void
     {
         $paymentPoolMethods = ['first method', 'second method'];
 
@@ -43,7 +45,7 @@ class SelectorTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
     }
 
-    public function testGetPaymentException()
+    public function testGetPaymentException(): void
     {
         $this->expectException(\Sonata\Component\Payment\PaymentNotFoundException::class);
         $this->expectExceptionMessage('Payment method with code \'not_existing\' was not found');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -28,7 +30,7 @@ class InvoiceTest extends BaseInvoice
  */
 class BaseInvoiceTest extends \PHPUnit\Framework\TestCase
 {
-    public function testInvoiceElementsVatAmounts()
+    public function testInvoiceElementsVatAmounts(): void
     {
         $invoice = new InvoiceTest();
 

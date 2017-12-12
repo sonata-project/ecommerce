@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Sonata\Component\Transformer\OrderTransformer;
 
 class OrderTransformerTest extends TestCase
 {
-    public function testBasket()
+    public function testBasket(): void
     {
         $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
         $provider->expects($this->once())->method('basketAddProduct')->will($this->returnValue(true));
