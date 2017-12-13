@@ -14,6 +14,7 @@ namespace Sonata\Component\Tests\Basket;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Product\Pool;
@@ -411,6 +412,24 @@ class BasketTest extends TestCase
         $basket->clean();
 
         $this->assertEquals(1, count($basket->getBasketElements()));
+    }
+
+    public function testRemoveElementWithNotExistingProduct()
+    {
+        $basket = $this->getPreparedBasket();
+        $product = $this->getMockProduct();
+
+        $basketElement = $this->createMock(BasketElementInterface::class);
+        $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($product));
+        $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
+
+        $basket->addBasketElement($basketElement);
+
+        $basketElement = $this->createMock(BasketElementInterface::class);
+        $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue(null));
+        $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
+
+        $this->assertEquals($basket->removeBasketElement($basketElement), $basketElement);
     }
 
     public function testGettersSetters()
