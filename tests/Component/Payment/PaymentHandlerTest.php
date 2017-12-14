@@ -11,9 +11,23 @@
 
 namespace Sonata\Component\Tests\Payment;
 
+use Doctrine\ORM\EntityNotFoundException;
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Generator\ReferenceInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\Component\Payment\InvalidTransactionException;
 use Sonata\Component\Payment\PaymentHandler;
+use Sonata\Component\Payment\PaymentInterface;
+use Sonata\Component\Payment\PaymentSelectorInterface;
+use Sonata\Component\Payment\TransactionManagerInterface;
+use Sonata\Component\Transformer\BasketTransformer;
+use Sonata\Component\Transformer\OrderTransformer;
+use Sonata\NotificationBundle\Backend\BackendInterface;
+use Sonata\NotificationBundle\Backend\RuntimeBackend;
 use Sonata\PaymentBundle\Tests\Entity\Transaction;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,7 +38,7 @@ class PaymentHandlerTest extends TestCase
 {
     public function testHandleError()
     {
-        $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
             ->will($this->returnValue('42'));
@@ -33,35 +47,35 @@ class PaymentHandlerTest extends TestCase
             ->will($this->returnValue(true));
         $payment->expects($this->once())
             ->method('getTransformer')
-            ->will($this->returnValue($this->createMock('Sonata\Component\Transformer\OrderTransformer')));
+            ->will($this->returnValue($this->createMock(OrderTransformer::class)));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
 
-        $om = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps = $this->createMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(3))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
-        $ref = $this->createMock('Sonata\Component\Generator\ReferenceInterface');
+        $ref = $this->createMock(ReferenceInterface::class);
 
-        $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
+        $nb = $this->createMock(RuntimeBackend::class);
 
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
 
         $errorOrder = $handler->handleError($request, $basket);
 
@@ -70,35 +84,35 @@ class PaymentHandlerTest extends TestCase
 
     public function testHandleErrorInvalidTransactionException()
     {
-        $this->expectException(\Sonata\Component\Payment\InvalidTransactionException::class);
+        $this->expectException(InvalidTransactionException::class);
         $this->expectExceptionMessage('Unable to find reference');
 
-        $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $payment = $this->createMock(PaymentInterface::class);
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
 
-        $om = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->createMock(OrderManagerInterface::class);
 
-        $ps = $this->createMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
-        $ref = $this->createMock('Sonata\Component\Generator\ReferenceInterface');
+        $ref = $this->createMock(ReferenceInterface::class);
 
-        $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
+        $nb = $this->createMock(RuntimeBackend::class);
 
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
 
         $errorOrder = $handler->handleError($request, $basket);
 
@@ -107,10 +121,10 @@ class PaymentHandlerTest extends TestCase
 
     public function testHandleErrorInvalidTransactionException2()
     {
-        $this->expectException(\Sonata\Component\Payment\InvalidTransactionException::class);
+        $this->expectException(InvalidTransactionException::class);
         $this->expectExceptionMessage('Invalid check - order ref: 42');
 
-        $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
             ->will($this->returnValue('42'));
@@ -118,37 +132,37 @@ class PaymentHandlerTest extends TestCase
             ->method('isRequestValid')
             ->will($this->returnValue(false));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())
             ->method('getReference')
             ->will($this->returnValue('42'));
 
-        $om = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps = $this->createMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
-        $ref = $this->createMock('Sonata\Component\Generator\ReferenceInterface');
+        $ref = $this->createMock(ReferenceInterface::class);
 
-        $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
+        $nb = $this->createMock(RuntimeBackend::class);
 
-        $backend = $this->createMock('Sonata\NotificationBundle\Backend\BackendInterface');
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $backend = $this->createMock(BackendInterface::class);
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $backend, $eventDispatcher);
 
         $request = new Request();
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
 
         $errorOrder = $handler->handleError($request, $basket);
 
@@ -157,38 +171,38 @@ class PaymentHandlerTest extends TestCase
 
     public function testHandleErrorEntityNotFoundException()
     {
-        $this->expectException(\Doctrine\ORM\EntityNotFoundException::class);
+        $this->expectException(EntityNotFoundException::class);
 
-        $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
             ->will($this->returnValue('42'));
 
-        $om = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue(null));
 
-        $ps = $this->createMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
-        $ref = $this->createMock('Sonata\Component\Generator\ReferenceInterface');
+        $ref = $this->createMock(ReferenceInterface::class);
 
-        $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
+        $nb = $this->createMock(RuntimeBackend::class);
 
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
 
         $errorOrder = $handler->handleError($request, $basket);
 
@@ -197,7 +211,7 @@ class PaymentHandlerTest extends TestCase
 
     public function testHandleConfirmation()
     {
-        $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
             ->will($this->returnValue('42'));
@@ -205,33 +219,33 @@ class PaymentHandlerTest extends TestCase
             ->method('isRequestValid')
             ->will($this->returnValue(true));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
 
-        $om = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps = $this->createMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
-        $ref = $this->createMock('Sonata\Component\Generator\ReferenceInterface');
+        $ref = $this->createMock(ReferenceInterface::class);
 
-        $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
+        $nb = $this->createMock(RuntimeBackend::class);
 
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $request = new Request();
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
 
         $confirmOrder = $handler->handleConfirmation($request);
 
@@ -240,35 +254,35 @@ class PaymentHandlerTest extends TestCase
 
     public function testGetSendbankOrder()
     {
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
 
-        $basketTransformer = $this->createMock('Sonata\Component\Transformer\BasketTransformer');
+        $basketTransformer = $this->createMock(BasketTransformer::class);
         $basketTransformer->expects($this->once())
             ->method('transformIntoOrder')
             ->will($this->returnValue($order));
 
-        $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getTransformer')
             ->will($this->returnValue($basketTransformer));
 
-        $om = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())->method('save');
 
-        $ps = $this->createMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->createMock(PaymentSelectorInterface::class);
 
-        $ref = $this->createMock('Sonata\Component\Generator\ReferenceInterface');
+        $ref = $this->createMock(ReferenceInterface::class);
         $ref->expects($this->once())->method('order');
 
-        $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->createMock(TransactionManagerInterface::class);
 
-        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
+        $nb = $this->createMock(RuntimeBackend::class);
 
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())
             ->method('getPaymentMethod')
             ->will($this->returnValue($payment));
@@ -282,7 +296,7 @@ class PaymentHandlerTest extends TestCase
     {
         $response = new Response();
 
-        $payment = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
             ->will($this->returnValue('42'));
@@ -293,28 +307,28 @@ class PaymentHandlerTest extends TestCase
             ->method('callback')
             ->will($this->returnValue($response));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
 
-        $om = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
             ->will($this->returnValue($order));
 
-        $ps = $this->createMock('Sonata\Component\Payment\PaymentSelectorInterface');
+        $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(3))
             ->method('getPayment')
             ->will($this->returnValue($payment));
 
-        $ref = $this->createMock('Sonata\Component\Generator\ReferenceInterface');
+        $ref = $this->createMock(ReferenceInterface::class);
 
-        $tm = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
             ->will($this->returnValue(new Transaction()));
 
-        $nb = $this->createMock('Sonata\NotificationBundle\Backend\RuntimeBackend');
+        $nb = $this->createMock(RuntimeBackend::class);
 
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 

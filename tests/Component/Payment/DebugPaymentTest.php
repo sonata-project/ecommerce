@@ -12,11 +12,14 @@
 namespace Sonata\Component\Tests\Payment;
 
 use Buzz\Browser;
+use Buzz\Client\ClientInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\Debug\DebugPayment;
 use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Payment\TransactionManagerInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
+use Symfony\Component\Routing\RouterInterface;
 
 class DebugPaymentTest_Order extends BaseOrder
 {
@@ -83,7 +86,7 @@ class DebugPaymentTest extends TestCase
      */
     protected function getTransactionManager()
     {
-        $transactionManager = $this->createMock('Sonata\Component\Payment\TransactionManagerInterface');
+        $transactionManager = $this->createMock(TransactionManagerInterface::class);
 
         $transactionManager->expects($this->once())
             ->method('create')
@@ -97,9 +100,9 @@ class DebugPaymentTest extends TestCase
      */
     protected function getDebugPayment()
     {
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock(RouterInterface::class);
 
-        $client = $this->createMock('Buzz\Client\ClientInterface');
+        $client = $this->createMock(ClientInterface::class);
 
         $browser = new Browser($client);
 

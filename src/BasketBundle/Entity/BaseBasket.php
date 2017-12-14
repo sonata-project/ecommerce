@@ -13,6 +13,7 @@ namespace Sonata\BasketBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\Component\Basket\Basket;
+use Sonata\Component\Basket\BasketElementInterface;
 
 abstract class BaseBasket extends Basket
 {
@@ -27,7 +28,7 @@ abstract class BaseBasket extends Basket
     public function setBasketElements($basketElements)
     {
         foreach ($basketElements as $basketElement) {
-            if (!$basketElement instanceof \Sonata\Component\Basket\BasketElementInterface) {
+            if (!$basketElement instanceof BasketElementInterface) {
                 continue;
             }
 

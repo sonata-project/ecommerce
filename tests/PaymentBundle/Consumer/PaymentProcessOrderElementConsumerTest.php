@@ -11,10 +11,12 @@
 
 namespace Sonata\PaymentBundle\Tests\Consumer;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool;
+use Sonata\Component\Tests\Product\OrderElement;
 use Sonata\OrderBundle\Entity\OrderElementManager;
 use Sonata\PaymentBundle\Consumer\PaymentProcessOrderElementConsumer;
 
@@ -33,9 +35,9 @@ class PaymentProcessOrderElementConsumerTest extends TestCase
      */
     protected function getConsumer()
     {
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
 
-        $orderElementManager = new OrderElementManager('Sonata\OrderBundle\Tests\Entity\OrderElement', $registry);
+        $orderElementManager = new OrderElementManager(OrderElement::class, $registry);
 
         $pool = new Pool();
 

@@ -13,6 +13,8 @@ namespace Sonata\Component\Tests\Order;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Delivery\BaseServiceDelivery;
+use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderStatusRenderer;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\PaymentBundle\Entity\BaseTransaction;
@@ -29,10 +31,10 @@ class OrderStatusRendererTest extends TestCase
         $order = new \DateTime();
         $this->assertFalse($osRenderer->handlesObject($order));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $this->assertTrue($osRenderer->handlesObject($order));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderElementInterface');
+        $order = $this->createMock(OrderElementInterface::class);
         $this->assertTrue($osRenderer->handlesObject($order));
 
         foreach (['delivery', 'payment'] as $correctStatusType) {
@@ -46,7 +48,7 @@ class OrderStatusRendererTest extends TestCase
     {
         $osRenderer = new OrderStatusRenderer();
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->once())->method('getStatus')->will($this->returnValue(array_rand(BaseOrder::getStatusList())));
         $order->expects($this->once())->method('getDeliveryStatus')->will($this->returnValue(array_rand(BaseServiceDelivery::getStatusList())));
         $order->expects($this->once())->method('getPaymentStatus')->will($this->returnValue(array_rand(BaseTransaction::getStatusList())));
@@ -60,7 +62,7 @@ class OrderStatusRendererTest extends TestCase
     {
         $osRenderer = new OrderStatusRenderer();
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->once())->method('getStatus')->will($this->returnValue(8));
 
         $this->assertEquals('default_value', $osRenderer->getStatusClass($order, 'toubidou', 'default_value'));

@@ -12,6 +12,10 @@
 namespace Sonata\CustomerBundle\Tests\Twig\Extension;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
+use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Sonata\CustomerBundle\Twig\Extension\AddressExtension;
 
 /**
@@ -21,12 +25,12 @@ class AddressExtensionTest extends TestCase
 {
     public function testRenderAddress()
     {
-        $environment = $this->createMock('Twig_Environment');
-        $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
+        $environment = $this->createMock(\Twig_Environment::class);
+        $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
 
         $environment->expects($this->exactly(4))->method('render');
 
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $address = $this->createMock(AddressInterface::class);
         $address->expects($this->exactly(3))->method('getFullAddressHtml');
 
         $extension = new AddressExtension($deliverySelector);
@@ -51,11 +55,11 @@ class AddressExtensionTest extends TestCase
 
     public function testRenderAddressInvalidParameter()
     {
-        $this->expectException(\Sonata\CoreBundle\Exception\InvalidParameterException::class);
+        $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('sonata_address_render needs an AddressInterface instance or an array with keys (firstname, lastname, address1, postcode, city, country_code)');
 
         $environment = $this->createMock('Twig_Environment');
-        $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
+        $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
 
         $address = [];
 
@@ -65,11 +69,11 @@ class AddressExtensionTest extends TestCase
 
     public function testRenderAddressMissingId()
     {
-        $this->expectException(\Sonata\CoreBundle\Exception\InvalidParameterException::class);
+        $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('sonata_address_render needs \'id\' key to be set to render the edit button');
 
         $environment = $this->createMock('Twig_Environment');
-        $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
+        $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
 
         $address = [
             'firstname' => '',
@@ -86,11 +90,11 @@ class AddressExtensionTest extends TestCase
 
     public function testIsAddressDeliverable()
     {
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $address = $this->createMock(AddressInterface::class);
+        $basket = $this->createMock(BasketInterface::class);
 
         // Test false
-        $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
+        $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
         $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue([]));
 
         $extension = new AddressExtension($deliverySelector);
@@ -99,7 +103,7 @@ class AddressExtensionTest extends TestCase
         $this->assertFalse($deliverable);
 
         // Test true
-        $deliverySelector = $this->createMock('Sonata\Component\Delivery\ServiceDeliverySelectorInterface');
+        $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
         $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue(['paypal']));
 
         $extension = new AddressExtension($deliverySelector);

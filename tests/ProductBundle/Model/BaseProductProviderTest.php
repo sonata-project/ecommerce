@@ -11,13 +11,21 @@
 
 namespace Sonata\ProductBundle\Tests\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use JMS\Serializer\Serializer;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Basket\InvalidProductException;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\CoreBundle\Exception\InvalidParameterException;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ProductProviderTest extends BaseProductProvider
 {
@@ -65,7 +73,7 @@ class BaseProductProviderTest extends TestCase
     public function testCreateVariation()
     {
         $productProvider = $this->createNewProductProvider();
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')
+        $product = $this->getMockBuilder(ProductInterface::class)
                 ->disableOriginalConstructor()
                 ->getMock();
         $product->expects($this->any())
@@ -99,7 +107,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertTrue($basketElement->getOption('test', null));
 
         // Second test with product
-        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->createMock(ProductInterface::class);
         $productProvider->buildBasketElement($basketElement, $product, ['test2' => true]);
         $this->assertTrue($basketElement->getOption('test2', null));
         $this->assertNull($basketElement->getOption('test', null));
@@ -108,11 +116,11 @@ class BaseProductProviderTest extends TestCase
     public function testValidateFormBasketElement()
     {
         $productProvider = $this->createNewProductProvider();
-        $errorElement = $this->createMock('Sonata\CoreBundle\Validator\ErrorElement');
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $errorElement = $this->createMock(ErrorElement::class);
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
 
         // With a deleted element
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getDelete')
             ->will($this->returnValue(true));
@@ -120,7 +128,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
 
         // Without a product
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue(false));
@@ -128,8 +136,8 @@ class BaseProductProviderTest extends TestCase
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
 
         // With a disabled product
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $product->expects($this->any())
             ->method('getEnabled')
             ->will($this->returnValue(false));
@@ -140,8 +148,8 @@ class BaseProductProviderTest extends TestCase
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
 
         // With a non numeric quantity
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue($product));
@@ -155,11 +163,11 @@ class BaseProductProviderTest extends TestCase
     public function testBasketAddProduct()
     {
         $productProvider = $this->createNewProductProvider();
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
 
         // Simulate a product already in the basket
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
         $basket->expects($this->any())
             ->method('hasProduct')
             ->will($this->returnValue(true));
@@ -172,7 +180,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertFalse($productProvider->basketAddProduct($basket, $product, $basketElement));
 
         // Test with product having options
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
         $basket->expects($this->any())
             ->method('hasProduct')
             ->will($this->returnValue(false));
@@ -191,24 +199,24 @@ class BaseProductProviderTest extends TestCase
         $this->assertTrue($basketElement->hasOption('even'));
         $this->assertTrue($basketElement->hasOption('more'));
         $this->assertTrue($basketElement->hasOption('tests'));
-        $this->assertInstanceOf('Sonata\Component\Basket\BasketElementInterface', $result);
+        $this->assertInstanceOf(BasketElementInterface::class, $result);
     }
 
     public function testBasketAddProductInvalid()
     {
-        $this->expectException(\Sonata\Component\Basket\InvalidProductException::class);
+        $this->expectException(InvalidProductException::class);
         $this->expectExceptionMessage('You can\'t add \'product_sku\' to the basket as it is a master product with variations.');
 
         $productProvider = $this->createNewProductProvider();
 
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $product->expects($this->once())->method('isMaster')->will($this->returnValue(true));
         $product->expects($this->once())->method('getSku')->will($this->returnValue('product_sku'));
         $product->expects($this->once())->method('getVariations')->will($this->returnValue([1]));
 
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
 
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
 
         $productProvider->basketAddProduct($basket, $product, $basketElement);
     }
@@ -216,30 +224,30 @@ class BaseProductProviderTest extends TestCase
     public function testBasketMergeProduct()
     {
         // Test a product not in the basket
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
 
         $currency = new Currency();
         $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
         $productProvider = $this->createNewProductProvider();
 
         $this->assertFalse($productProvider->basketMergeProduct($basket, $product, $basketElement));
 
         // Test an invalid product ID in the basket
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
 
         $currency = new Currency();
         $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
         $productProvider = $this->createNewProductProvider();
         $basket->expects($this->any())
@@ -250,21 +258,21 @@ class BaseProductProviderTest extends TestCase
             $productProvider->basketMergeProduct($basket, $product, $basketElement);
             $this->fail('->basketMergeProduct() should throw a \RuntimeException for an invalid product ID');
         } catch (\Exception $e) {
-            $this->assertInstanceOf('\RuntimeException', $e);
+            $this->assertInstanceOf(\RuntimeException::class, $e);
         }
 
         // Test a valid workflow
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
 
         $currency = new Currency();
         $currency->setLabel('EUR');
 
         $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
 
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
-        $newBasketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $newBasketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $productProvider = $this->createNewProductProvider();
         $basket->expects($this->any())
             ->method('hasProduct')
@@ -273,7 +281,7 @@ class BaseProductProviderTest extends TestCase
             ->method('getElement')
             ->will($this->returnValue($basketElement));
 
-        $this->assertInstanceOf('Sonata\Component\Basket\BasketElementInterface', $productProvider->basketMergeProduct($basket, $product, $newBasketElement));
+        $this->assertInstanceOf(BasketElementInterface::class, $productProvider->basketMergeProduct($basket, $product, $newBasketElement));
     }
 
     public function testIsValidBasketElement()
@@ -281,15 +289,15 @@ class BaseProductProviderTest extends TestCase
         $productProvider = $this->createNewProductProvider();
 
         // Test invalid product
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue(false));
         $this->assertFalse($productProvider->isValidBasketElement($basketElement));
 
         // Test valid product
-        $basketElement = $this->getMockBuilder('Sonata\Component\Basket\BasketElementInterface')->getMock();
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
+        $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
             ->will($this->returnValue($product));
@@ -298,8 +306,8 @@ class BaseProductProviderTest extends TestCase
 
     public function testIsAddableToBasket()
     {
-        $basket = $this->getMockBuilder('Sonata\Component\Basket\BasketInterface')->getMock();
-        $product = $this->getMockBuilder('Sonata\Component\Product\ProductInterface')->getMock();
+        $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
+        $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $productProvider = $this->createNewProductProvider();
 
         $this->assertTrue($productProvider->isAddableToBasket($basket, $product));
@@ -369,7 +377,7 @@ class BaseProductProviderTest extends TestCase
         $provider->setVariationFields(['test']);
 
         $variations = $provider->getEnabledVariations($productMock);
-        $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
+        $this->assertInstanceOf(ArrayCollection::class, $variations);
         $this->assertEquals(0, count($variations));
     }
 
@@ -384,9 +392,9 @@ class BaseProductProviderTest extends TestCase
         $provider->setVariationFields(['test']);
 
         $variations = $provider->getEnabledVariations($productMock);
-        $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $variations);
+        $this->assertInstanceOf(ArrayCollection::class, $variations);
         $this->assertEquals(1, count($variations));
-        $this->assertInstanceOf('\Sonata\Component\Product\ProductInterface', $variations[0]);
+        $this->assertInstanceOf(ProductInterface::class, $variations[0]);
     }
 
     public function testGetCheapestEnabledVariationWithNoVariation()
@@ -445,7 +453,7 @@ class BaseProductProviderTest extends TestCase
 
     public function testCalculatePriceException()
     {
-        $this->expectException(\Sonata\CoreBundle\Exception\InvalidParameterException::class);
+        $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('Expected integer >= 1 for quantity, 4.32 given.');
 
         $product = new ProductTest();
@@ -459,7 +467,7 @@ class BaseProductProviderTest extends TestCase
 
     public function testCalculatePriceExceptionLessThanOne()
     {
-        $this->expectException(\Sonata\CoreBundle\Exception\InvalidParameterException::class);
+        $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('Expected integer >= 1 for quantity, 0.32 given.');
 
         $product = new ProductTest();
@@ -573,12 +581,12 @@ class BaseProductProviderTest extends TestCase
      */
     private function createNewProductProvider()
     {
-        $serializer = $this->createMock('JMS\Serializer\Serializer');
+        $serializer = $this->createMock(Serializer::class);
 
         $provider = new ProductProviderTest($serializer);
 
         $provider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
-        $provider->setEventDispatcher($this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface'));
+        $provider->setEventDispatcher($this->createMock(EventDispatcherInterface::class));
 
         return $provider;
     }

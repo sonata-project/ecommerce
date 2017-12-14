@@ -11,7 +11,11 @@
 
 namespace Sonata\OrderBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
+use Sonata\BasketBundle\Entity\BaseBasketElement;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Sonata\OrderBundle\Entity\BaseOrderElement;
+use Sonata\ProductBundle\Entity\BaseProduct;
 
 class OrderTest extends BaseOrder
 {
@@ -26,23 +30,23 @@ class OrderTest extends BaseOrder
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class BaseOrderTest extends \PHPUnit\Framework\TestCase
+class BaseOrderTest extends TestCase
 {
     public function testOrderElementsVatAmounts()
     {
         $order = new OrderTest();
 
-        $element1 = $this->getMockBuilder('Sonata\OrderBundle\Entity\BaseOrderElement')->getMock();
+        $element1 = $this->getMockBuilder(BaseOrderElement::class)->getMock();
         $element1->expects($this->any())->method('getVatRate')->will($this->returnValue(20));
         $element1->expects($this->any())->method('getVatAmount')->will($this->returnValue(3));
 
-        $element2 = $this->getMockBuilder('Sonata\OrderBundle\Entity\BaseOrderElement')->getMock();
+        $element2 = $this->getMockBuilder(BaseOrderElement::class)->getMock();
         $element2->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element2->expects($this->any())->method('getVatAmount')->will($this->returnValue(2));
 
-        $element3 = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
+        $element3 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
         $element3->expects($this->any())->method('getProduct')->will($this->returnValue(
-            $this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()
+            $this->getMockBuilder(BaseProduct::class)->getMock()
         ));
         $element3->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element3->expects($this->any())->method('getVatAmount')->will($this->returnValue(5));

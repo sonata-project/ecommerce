@@ -11,7 +11,11 @@
 
 namespace Sonata\InvoiceBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
+use Sonata\BasketBundle\Entity\BaseBasketElement;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
+use Sonata\InvoiceBundle\Entity\BaseInvoiceElement;
+use Sonata\ProductBundle\Entity\BaseProduct;
 
 class InvoiceTest extends BaseInvoice
 {
@@ -26,23 +30,23 @@ class InvoiceTest extends BaseInvoice
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class BaseInvoiceTest extends \PHPUnit\Framework\TestCase
+class BaseInvoiceTest extends TestCase
 {
     public function testInvoiceElementsVatAmounts()
     {
         $invoice = new InvoiceTest();
 
-        $element1 = $this->getMockBuilder('Sonata\InvoiceBundle\Entity\BaseInvoiceElement')->getMock();
+        $element1 = $this->getMockBuilder(BaseInvoiceElement::class)->getMock();
         $element1->expects($this->any())->method('getVatRate')->will($this->returnValue(20));
         $element1->expects($this->any())->method('getVatAmount')->will($this->returnValue(3));
 
-        $element2 = $this->getMockBuilder('Sonata\InvoiceBundle\Entity\BaseInvoiceElement')->getMock();
+        $element2 = $this->getMockBuilder(BaseInvoiceElement::class)->getMock();
         $element2->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element2->expects($this->any())->method('getVatAmount')->will($this->returnValue(2));
 
-        $element3 = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
+        $element3 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
         $element3->expects($this->any())->method('getProduct')->will($this->returnValue(
-            $this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()
+            $this->getMockBuilder(BaseProduct::class)->getMock()
         ));
         $element3->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element3->expects($this->any())->method('getVatAmount')->will($this->returnValue(5));

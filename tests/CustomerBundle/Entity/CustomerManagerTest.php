@@ -11,8 +11,10 @@
 
 namespace Sonata\CustomerBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\CustomerBundle\Entity\BaseCustomer;
 use Sonata\CustomerBundle\Entity\CustomerManager;
 
 class CustomerManagerTest extends TestCase
@@ -102,9 +104,9 @@ class CustomerManagerTest extends TestCase
             'email',
         ]);
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new CustomerManager('Sonata\CustomerBundle\Entity\BaseCustomer', $registry);
+        return new CustomerManager(BaseCustomer::class, $registry);
     }
 }

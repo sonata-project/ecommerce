@@ -11,18 +11,21 @@
 
 namespace Sonata\Component\Tests\Currency;
 
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Currency\CurrencyDoctrineType;
 
 class CurrencyDoctrineTypeTest extends TestCase
 {
     public function setUp()
     {
         if (Type::hasType('currency')) {
-            Type::overrideType('currency', 'Sonata\Component\Currency\CurrencyDoctrineType');
+            Type::overrideType('currency', CurrencyDoctrineType::class);
         } else {
-            Type::addType('currency', 'Sonata\Component\Currency\CurrencyDoctrineType');
+            Type::addType('currency', CurrencyDoctrineType::class);
         }
     }
 
@@ -93,7 +96,7 @@ class CurrencyDoctrineTypeTest extends TestCase
     }
 }
 
-class MockPlatform extends \Doctrine\DBAL\Platforms\AbstractPlatform
+class MockPlatform extends AbstractPlatform
 {
     /**
      * Gets the SQL Snippet used to declare a BLOB column type.

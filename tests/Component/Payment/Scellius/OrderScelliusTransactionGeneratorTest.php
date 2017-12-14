@@ -12,13 +12,14 @@
 namespace Sonata\Component\Tests\Payment\Scellius;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator;
 
 class OrderScelliusTransactionGeneratorTest extends TestCase
 {
     public function testGenerator()
     {
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getReference')->will($this->returnValue('120112000012'));
 
         $generator = new OrderScelliusTransactionGenerator();
@@ -29,7 +30,7 @@ class OrderScelliusTransactionGeneratorTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getReference')->will($this->returnValue('12'));
 
         $generator = new OrderScelliusTransactionGenerator();

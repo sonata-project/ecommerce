@@ -11,6 +11,8 @@
 
 namespace Sonata\OrderBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\OrderBundle\Entity\BaseOrder;
@@ -34,33 +36,33 @@ class OrderManagerTest extends TestCase
 {
     public function testGetClass()
     {
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $order = new OrderManager('Sonata\OrderBundle\Tests\Entity\Order', $registry);
+        $registry = $this->createMock(ManagerRegistry::class);
+        $order = new OrderManager(Order::class, $registry);
 
-        $this->assertEquals('Sonata\OrderBundle\Tests\Entity\Order', $order->getClass());
+        $this->assertEquals(Order::class, $order->getClass());
     }
 
     public function testCreate()
     {
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $orderManager = new OrderManager('Sonata\OrderBundle\Tests\Entity\Order', $registry);
+        $registry = $this->createMock(ManagerRegistry::class);
+        $orderManager = new OrderManager(Order::class, $registry);
 
         $order = $orderManager->create();
-        $this->assertInstanceOf('Sonata\OrderBundle\Tests\Entity\Order', $order);
+        $this->assertInstanceOf(Order::class, $order);
     }
 
     public function testSave()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->exactly(2))->method('persist');
         $em->expects($this->once())->method('flush');
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $orderManager = new OrderManager('Sonata\OrderBundle\Tests\Entity\Order', $registry);
+        $orderManager = new OrderManager(Order::class, $registry);
 
-        $order = $this->createMock('Sonata\OrderBundle\Tests\Entity\Order');
+        $order = $this->createMock(Order::class);
         $order->expects($this->once())->method('getCustomer');
 
         $orderManager->save($order);
@@ -68,14 +70,14 @@ class OrderManagerTest extends TestCase
 
     public function testDelete()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->once())->method('remove');
         $em->expects($this->once())->method('flush');
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $orderManager = new OrderManager('Sonata\OrderBundle\Tests\Entity\Order', $registry);
+        $orderManager = new OrderManager(Order::class, $registry);
 
         $order = new Order();
         $orderManager->delete($order);
@@ -214,9 +216,9 @@ class OrderManagerTest extends TestCase
             'username',
         ]);
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new OrderManager('Sonata\OrderBundle\Entity\BaseOrder', $registry);
+        return new OrderManager(BaseOrder::class, $registry);
     }
 }

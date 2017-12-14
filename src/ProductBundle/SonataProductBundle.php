@@ -11,8 +11,13 @@
 
 namespace Sonata\ProductBundle;
 
+use Sonata\Component\Currency\CurrencyFormType;
+use Sonata\Component\Form\Type\VariationChoiceType;
 use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\ProductBundle\DependencyInjection\Compiler\AddProductProviderCompilerPass;
+use Sonata\ProductBundle\Form\Type\ApiProductParentType;
+use Sonata\ProductBundle\Form\Type\ApiProductType;
+use Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -42,11 +47,11 @@ class SonataProductBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping([
-            'sonata_product_delivery_status' => 'Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType',
-            'sonata_product_variation_choices' => 'Sonata\Component\Form\Type\VariationChoiceType',
-            'sonata_product_api_form_product_parent' => 'Sonata\ProductBundle\Form\Type\ApiProductParentType',
-            'sonata_product_api_form_product' => 'Sonata\ProductBundle\Form\Type\ApiProductType',
-            'sonata_currency' => 'Sonata\Component\Currency\CurrencyFormType',
+            'sonata_product_delivery_status' => ProductDeliveryStatusType::class,
+            'sonata_product_variation_choices' => VariationChoiceType::class,
+            'sonata_product_api_form_product_parent' => ApiProductParentType::class,
+            'sonata_product_api_form_product' => ApiProductType::class,
+            'sonata_currency' => CurrencyFormType::class,
         ]);
     }
 }

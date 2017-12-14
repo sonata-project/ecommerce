@@ -11,8 +11,13 @@
 
 namespace Sonata\BasketBundle\Tests\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Entity\BaseBasket;
+use Sonata\BasketBundle\Entity\BaseBasketElement;
+use Sonata\Component\Product\Pool;
+use Sonata\Component\Product\ProductProviderInterface;
+use Sonata\ProductBundle\Entity\BaseProduct;
 
 class BasketTest extends BaseBasket
 {
@@ -27,13 +32,13 @@ class BaseBasketTest extends TestCase
     {
         $basket = new BasketTest();
 
-        $pool = $this->createMock('Sonata\Component\Product\Pool');
-        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
+        $pool = $this->createMock(Pool::class);
+        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock(ProductProviderInterface::class)));
 
         $basket->setProductPool($pool);
 
-        $element = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
-        $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
+        $element = $this->getMockBuilder(BaseBasketElement::class)->getMock();
+        $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder(BaseProduct::class)->getMock()));
 
         $elements = [
             'notBasketElementInterface',
@@ -49,13 +54,13 @@ class BaseBasketTest extends TestCase
     {
         $basket = new BasketTest();
 
-        $pool = $this->createMock('Sonata\Component\Product\Pool');
-        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
+        $pool = $this->createMock(Pool::class);
+        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock(ProductProviderInterface::class)));
 
         $basket->setProductPool($pool);
 
-        $element = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
-        $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
+        $element = $this->getMockBuilder(BaseBasketElement::class)->getMock();
+        $element->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder(BaseProduct::class)->getMock()));
 
         $elements = [
             'notBasketElementInterface',
@@ -71,30 +76,30 @@ class BaseBasketTest extends TestCase
         $basket->reset();
 
         $this->assertEquals(0, count($basket->getBasketElements()));
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $basket->getBasketElements());
+        $this->assertInstanceOf(ArrayCollection::class, $basket->getBasketElements());
     }
 
     public function testBasketElementsVatAmounts()
     {
         $basket = new BasketTest();
 
-        $pool = $this->createMock('Sonata\Component\Product\Pool');
-        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock('Sonata\Component\Product\ProductProviderInterface')));
+        $pool = $this->createMock(Pool::class);
+        $pool->expects($this->any())->method('getProvider')->will($this->returnValue($this->createMock(ProductProviderInterface::class)));
 
         $basket->setProductPool($pool);
 
-        $element1 = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
-        $element1->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
+        $element1 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
+        $element1->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder(BaseProduct::class)->getMock()));
         $element1->expects($this->any())->method('getVatRate')->will($this->returnValue(20));
         $element1->expects($this->any())->method('getVatAmount')->will($this->returnValue(3));
 
-        $element2 = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
-        $element2->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
+        $element2 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
+        $element2->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder(BaseProduct::class)->getMock()));
         $element2->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element2->expects($this->any())->method('getVatAmount')->will($this->returnValue(2));
 
-        $element3 = $this->getMockBuilder('Sonata\BasketBundle\Entity\BaseBasketElement')->getMock();
-        $element3->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder('Sonata\ProductBundle\Entity\BaseProduct')->getMock()));
+        $element3 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
+        $element3->expects($this->any())->method('getProduct')->will($this->returnValue($this->getMockBuilder(BaseProduct::class)->getMock()));
         $element3->expects($this->any())->method('getVatRate')->will($this->returnValue(10));
         $element3->expects($this->any())->method('getVatAmount')->will($this->returnValue(5));
 

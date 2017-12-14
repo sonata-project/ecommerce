@@ -14,6 +14,7 @@ namespace Sonata\Component\Payment;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\ProductInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -101,7 +102,7 @@ class Paypal extends BasePaypal
             echo "<!-- Encrypted Array : \n".print_r($fields, 1).'-->';
         }
 
-        $response = new \Symfony\Component\HttpFoundation\Response($html, 200, [
+        $response = new Response($html, 200, [
             'Content-Type' => 'text/html',
         ]);
         $response->setPrivate(true);
@@ -252,7 +253,7 @@ class Paypal extends BasePaypal
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         if (!$transaction->isValid()) {
-            return new \Symfony\Component\HttpFoundation\Response('');
+            return new Response('');
         }
 
         $params = $transaction->getParameters();
@@ -284,7 +285,7 @@ class Paypal extends BasePaypal
             }
         }
 
-        return new \Symfony\Component\HttpFoundation\Response('');
+        return new Response('');
     }
 
     /**

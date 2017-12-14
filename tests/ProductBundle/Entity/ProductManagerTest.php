@@ -11,8 +11,10 @@
 
 namespace Sonata\ProductBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Entity\ProductManager;
 
 class ProductManagerTest extends TestCase
@@ -106,9 +108,9 @@ class ProductManagerTest extends TestCase
             'name',
         ]);
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new ProductManager('Sonata\PageBundle\Entity\BaseProduct', $registry);
+        return new ProductManager(BaseProduct::class, $registry);
     }
 }

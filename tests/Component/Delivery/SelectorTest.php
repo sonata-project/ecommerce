@@ -13,9 +13,18 @@ namespace Sonata\Component\Tests\Delivery;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use Sonata\Component\Basket\Basket;
+use Sonata\Component\Basket\BasketElement;
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Delivery\Pool as DeliveryPool;
 use Sonata\Component\Delivery\Selector;
+use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\Pool as ProductPool;
+use Sonata\Component\Product\ProductInterface;
+use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\ProductBundle\Entity\BaseProduct;
 
 class SelectorTest extends TestCase
@@ -34,12 +43,12 @@ class SelectorTest extends TestCase
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
 
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement = $this->createMock(BasketElementInterface::class);
 
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
 
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $address = $this->createMock(AddressInterface::class);
 
         $selector = new Selector($deliveryPool, $productPool);
         $this->assertEmpty($selector->getAvailableMethods($basket, $address));
@@ -64,7 +73,7 @@ class SelectorTest extends TestCase
     {
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
+        $basket = $this->createMock(Basket::class);
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([]));
 
         $selector = new Selector($deliveryPool, $productPool);
@@ -79,9 +88,9 @@ class SelectorTest extends TestCase
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->createMock('Sonata\Component\Tests\Delivery\Product');
+        $basket = $this->createMock(Basket::class);
+        $basketElement = $this->createMock(BasketElement::class);
+        $product = $this->createMock(Product::class);
 
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
@@ -96,17 +105,17 @@ class SelectorTest extends TestCase
      */
     public function testGetAvailableMethodsWithRequiredAddressDelivery()
     {
-        $deliveryPool = $this->createMock('Sonata\Component\Delivery\Pool');
+        $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->createMock('Sonata\Component\Tests\Delivery\Product');
+        $basket = $this->createMock(Basket::class);
+        $basketElement = $this->createMock(BasketElement::class);
+        $product = $this->createMock(Product::class);
 
-        $delivery = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery = $this->createMock(DeliveryInterface::class);
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
 
-        $serviceDelivery = $this->createMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
         $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
         $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
         $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(true));
@@ -125,17 +134,17 @@ class SelectorTest extends TestCase
      */
     public function testGetAvailableMethodsWithDisabledDelivery()
     {
-        $deliveryPool = $this->createMock('Sonata\Component\Delivery\Pool');
+        $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->createMock('Sonata\Component\Tests\Delivery\Product');
+        $basket = $this->createMock(Basket::class);
+        $basketElement = $this->createMock(BasketElement::class);
+        $product = $this->createMock(Product::class);
 
-        $delivery = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery = $this->createMock(DeliveryInterface::class);
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
 
-        $serviceDelivery = $this->createMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
         $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
         $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue($serviceDelivery));
         $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(false));
@@ -153,14 +162,14 @@ class SelectorTest extends TestCase
      */
     public function testGetAvailableMethodsWithUndefinedCode()
     {
-        $deliveryPool = $this->createMock('Sonata\Component\Delivery\Pool');
+        $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->createMock('Sonata\Component\Tests\Delivery\Product');
+        $basket = $this->createMock(Basket::class);
+        $basketElement = $this->createMock(BasketElement::class);
+        $product = $this->createMock(Product::class);
 
-        $delivery = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery = $this->createMock(DeliveryInterface::class);
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
 
         $deliveryPool->expects($this->any())->method('getMethod')->will($this->returnValue(null));
@@ -178,18 +187,18 @@ class SelectorTest extends TestCase
      */
     public function testGetAvailableMethodsWithUncoveredCountry()
     {
-        $deliveryPool = $this->createMock('Sonata\Component\Delivery\Pool');
+        $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->createMock('Sonata\Component\Tests\Delivery\Product');
+        $basket = $this->createMock(Basket::class);
+        $basketElement = $this->createMock(BasketElement::class);
+        $product = $this->createMock(Product::class);
 
-        $delivery = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery = $this->createMock(DeliveryInterface::class);
         $delivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
         $delivery->expects($this->any())->method('getCountryCode')->will($this->returnValue('US'));
 
-        $serviceDelivery = $this->createMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
         $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
         $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
         $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(true));
@@ -199,7 +208,7 @@ class SelectorTest extends TestCase
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
-        $address = $this->createMock('Sonata\CustomerBundle\Entity\BaseAddress');
+        $address = $this->createMock(BaseAddress::class);
         $address->expects($this->exactly(2))->method('getCountryCode')->will($this->returnValue('FR'));
 
         $selector = new Selector($deliveryPool, $productPool);
@@ -211,19 +220,19 @@ class SelectorTest extends TestCase
      */
     public function testGetAvailableMethodsWithAlreadySelectedCode()
     {
-        $deliveryPool = $this->createMock('Sonata\Component\Delivery\Pool');
+        $deliveryPool = $this->createMock(DeliveryPool::class);
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElement');
-        $product = $this->createMock('Sonata\Component\Tests\Delivery\Product');
+        $basket = $this->createMock(Basket::class);
+        $basketElement = $this->createMock(BasketElement::class);
+        $product = $this->createMock(Product::class);
 
-        $delivery1 = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery1 = $this->createMock(DeliveryInterface::class);
         $delivery1->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
 
-        $delivery2 = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $delivery2 = $this->createMock(DeliveryInterface::class);
         $delivery2->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
 
-        $serviceDelivery = $this->createMock('Sonata\Component\Delivery\BaseServiceDelivery');
+        $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
         $serviceDelivery->expects($this->any())->method('getCode')->will($this->returnValue('deliveryTest'));
         $serviceDelivery->expects($this->any())->method('getEnabled')->will($this->returnValue(true));
         $serviceDelivery->expects($this->any())->method('isAddressRequired')->will($this->returnValue(false));
@@ -262,25 +271,25 @@ class SelectorTest extends TestCase
 
         $productPool = new ProductPool();
 
-        $productDelivery_low = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $productDelivery_low = $this->createMock(DeliveryInterface::class);
         $productDelivery_low->expects($this->any())->method('getCode')->will($this->returnValue('ups_low'));
 
-        $productDelivery_high = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $productDelivery_high = $this->createMock(DeliveryInterface::class);
         $productDelivery_high->expects($this->any())->method('getCode')->will($this->returnValue('ups_high'));
 
-        $productDelivery_high_bis = $this->createMock('Sonata\Component\Product\DeliveryInterface');
+        $productDelivery_high_bis = $this->createMock(DeliveryInterface::class);
         $productDelivery_high_bis->expects($this->any())->method('getCode')->will($this->returnValue('ups_high_bis'));
 
-        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->createMock(ProductInterface::class);
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$productDelivery_low, $productDelivery_high, $productDelivery_high_bis]));
 
-        $basketElement = $this->createMock('Sonata\Component\Basket\BasketElementInterface');
+        $basketElement = $this->createMock(BasketElementInterface::class);
         $basketElement->expects($this->once())->method('getProduct')->will($this->returnValue($product));
 
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([$basketElement]));
 
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $address = $this->createMock(AddressInterface::class);
 
         $selector = new Selector($deliveryPool, $productPool);
         $selector->setLogger($this->createMock(LoggerInterface::class));
@@ -293,7 +302,7 @@ class SelectorTest extends TestCase
     }
 }
 
-class ServiceDelivery extends \Sonata\Component\Delivery\BaseServiceDelivery
+class ServiceDelivery extends BaseServiceDelivery
 {
     public function isAddressRequired()
     {

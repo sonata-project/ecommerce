@@ -11,12 +11,13 @@
 
 namespace Sonata\Component\Tests\Generator;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\Mustache;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class MustacheTest extends \PHPUnit\Framework\TestCase
+class MustacheTest extends TestCase
 {
     public function testRenderString()
     {
