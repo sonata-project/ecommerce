@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Generator;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\PostgresReference;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
@@ -27,7 +29,7 @@ class PostgresReferenceTest extends TestCase
         $invoice = new InvoiceMock();
         $postgresReference = $this->generateNewObject();
 
-        $this->expectException('\RuntimeException', 'The invoice is not persisted into the database');
+        $this->expectException(\RuntimeException::class, 'The invoice is not persisted into the database');
         $postgresReference->invoice($invoice);
 
         $invoice->setId(13);
@@ -44,7 +46,7 @@ class PostgresReferenceTest extends TestCase
         $order = new OrderMock();
         $postgresReference = $this->generateNewObject();
 
-        $this->expectException('\RuntimeException', 'The order is not persisted into the database');
+        $this->expectException(\RuntimeException::class, 'The order is not persisted into the database');
         $postgresReference->order($order);
 
         $order->setId(13);
@@ -64,9 +66,9 @@ class PostgresReferenceTest extends TestCase
         $metadata = new ClassMetadata('entityName');
         $metadata->table = ['name' => 'tableName'];
 
-        $connection = $this->createMock('Doctrine\DBAL\Connection');
+        $connection = $this->createMock(Connection::class);
 
-        $em = $this->createMock('Doctrine\ORM\EntityManager');
+        $em = $this->createMock(EntityManager::class);
         $em->expects($this->any())
             ->method('getClassMetadata')
             ->will($this->returnValue($metadata));
@@ -75,7 +77,7 @@ class PostgresReferenceTest extends TestCase
             ->method('query')
             ->will($this->returnValue(new \PDOStatement()));
 
-        $registry = $this->createMock('Symfony\Bridge\Doctrine\RegistryInterface');
+        $registry = $this->createMock(RegistryInterface::class);
         $registry->expects($this->any())->method('getManager')->will($this->returnValue($em));
         $registry->expects($this->any())->method('getConnection')->will($this->returnValue($connection));
 

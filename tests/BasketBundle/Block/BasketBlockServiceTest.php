@@ -15,6 +15,8 @@ namespace Sonata\BasketBundle\Tests\Block;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Block\BasketBlockService;
+use Sonata\BlockBundle\Block\BlockContextInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -24,7 +26,7 @@ class BasketBlockServiceTest extends TestCase
 {
     public function testGetName(): void
     {
-        $engineInterfaceMock = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $block = new BasketBlockService('test', $engineInterfaceMock);
 
         $this->assertEquals('Basket items', $block->getName());
@@ -32,11 +34,11 @@ class BasketBlockServiceTest extends TestCase
 
     public function testExecute(): void
     {
-        $engineInterfaceMock = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $engineInterfaceMock->expects($this->once())->method('renderResponse')->will($this->returnValue(new Response()));
-        $context = $this->createMock('Sonata\BlockBundle\Block\BlockContextInterface');
+        $context = $this->createMock(BlockContextInterface::class);
         $block = new BasketBlockService('test', $engineInterfaceMock);
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $block->execute($context));
+        $this->assertInstanceOf(Response::class, $block->execute($context));
     }
 }

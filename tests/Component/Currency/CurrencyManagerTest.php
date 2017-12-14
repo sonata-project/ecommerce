@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Currency;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyManager;
 
 /**
@@ -23,9 +25,9 @@ class CurrencyManagerTest extends TestCase
 {
     public function testFindOneByLabel(): void
     {
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
 
-        $currencyManager = new CurrencyManager('Sonata\Component\Currency\Currency', $registry);
+        $currencyManager = new CurrencyManager(Currency::class, $registry);
 
         $this->assertEquals('EUR', $currencyManager->findOneByLabel('EUR')->getLabel());
     }

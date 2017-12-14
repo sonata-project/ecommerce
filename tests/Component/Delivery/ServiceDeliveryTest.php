@@ -42,7 +42,7 @@ class ServiceDeliveryTest extends TestCase
         $pool->addMethod($delivery);
 
         $this->assertEquals(2, count($pool->getMethods()), 'Pool return 2 elements');
-        $this->assertInstanceOf('Sonata\\Component\\Delivery\\FreeDelivery', $pool->getMethod('free_2'), 'Pool return an FreeDelivery Instance');
+        $this->assertInstanceOf(FreeDelivery::class, $pool->getMethod('free_2'), 'Pool return an FreeDelivery Instance');
     }
 
     public function testGetStatusList(): void

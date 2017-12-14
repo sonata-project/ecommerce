@@ -16,6 +16,7 @@ namespace Sonata\Component\Tests\Payment;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\PassPayment;
 use Sonata\Component\Payment\Pool;
+use Symfony\Component\Routing\RouterInterface;
 
 class PoolTest extends TestCase
 {
@@ -23,7 +24,7 @@ class PoolTest extends TestCase
     {
         $pool = new Pool();
 
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock(RouterInterface::class);
 
         $payment = new PassPayment($router);
         $payment->setCode('pass_1');
@@ -41,7 +42,7 @@ class PoolTest extends TestCase
         $pool->addMethod($payment);
 
         $this->assertEquals(2, count($pool->getMethods()), 'Pool return 2 elements');
-        $this->assertInstanceOf('Sonata\\Component\\Payment\\PassPayment', $pool->getMethod('pass_2'), 'Pool return an FreeDelivery Instance');
+        $this->assertInstanceOf(PassPayment::class, $pool->getMethod('pass_2'), 'Pool return an FreeDelivery Instance');
     }
 
     public function testAddMethodError(): void
@@ -51,7 +52,7 @@ class PoolTest extends TestCase
 
         $pool = new Pool();
 
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock(RouterInterface::class);
 
         $payment = new PassPayment($router);
 

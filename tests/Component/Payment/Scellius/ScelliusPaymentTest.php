@@ -15,9 +15,18 @@ namespace Sonata\Component\Tests\Payment\Scellius;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use Sonata\Component\Basket\Basket;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\Scellius\ScelliusPayment;
+use Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Product\ProductInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 class ScelliusPaymentTest_Order extends BaseOrder
 {
@@ -51,9 +60,9 @@ class ScelliusPaymentTest extends TestCase
     public function testValidPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setCode('free_1');
@@ -62,8 +71,8 @@ class ScelliusPaymentTest extends TestCase
             'response_command' => 'cat response_ok.txt && echo ',
         ]);
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $basket = $this->createMock(Basket::class);
+        $product = $this->createMock(ProductInterface::class);
 
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('11/30/1981'));
@@ -75,7 +84,7 @@ class ScelliusPaymentTest extends TestCase
         $order->setReference('FR');
         $order->setLocale('es');
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
@@ -89,8 +98,8 @@ class ScelliusPaymentTest extends TestCase
 
         $this->assertTrue($payment->isCallbackValid($transaction));
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
+        $this->assertInstanceOf(Response::class, $payment->handleError($transaction));
+        $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
 
         //        $response = $payment->sendbank($order);
 //
@@ -106,9 +115,9 @@ class ScelliusPaymentTest extends TestCase
     public function testSendConfirmationReceipt(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
         $payment->setOptions([
@@ -116,11 +125,11 @@ class ScelliusPaymentTest extends TestCase
             'response_command' => 'cat response_ko.txt && echo ',
         ]);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('get')->will($this->returnValue('" >> /dev/null'));
         $transaction->expects($this->any())->method('getParameters')->will($this->returnValue([]));
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue(
-            $this->createMock('Sonata\Component\Order\OrderInterface')
+            $this->createMock(OrderInterface::class)
         ));
 
         $this->assertFalse($payment->sendConfirmationReceipt($transaction));
@@ -144,19 +153,19 @@ class ScelliusPaymentTest extends TestCase
             'response_command' => 'cat response_ok.txt && echo ',
         ]);
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
+        $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
     }
 
     public function testIsCallbackValid(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
 
         $check = sha1(
@@ -165,18 +174,18 @@ class ScelliusPaymentTest extends TestCase
             $order->getId()
         );
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('getOrder')->will($this->returnValue(null));
 
         $this->assertFalse($payment->isCallbackValid($transaction));
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->once())->method('get')->will($this->returnValue($check));
 
         $this->assertTrue($payment->isCallbackValid($transaction));
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->once())->method('get')->will($this->returnValue('untest'));
         $transaction->expects($this->once())->method('setState');
@@ -189,13 +198,13 @@ class ScelliusPaymentTest extends TestCase
     public function testGetOrderReference(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('get')->will($this->returnValue('reference'));
 
         $this->assertEquals('reference', $payment->getOrderReference($transaction));
@@ -204,13 +213,13 @@ class ScelliusPaymentTest extends TestCase
     public function testApplyTransactionId(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('setTransactionId');
 
         $payment->applyTransactionId($transaction);
@@ -221,10 +230,10 @@ class ScelliusPaymentTest extends TestCase
         $this->expectException(\RuntimeException::class);
 
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
 
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('11/30/1981'));
@@ -249,17 +258,17 @@ class ScelliusPaymentTest extends TestCase
     public function testValidSendbankPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $templating = $this->createMock(EngineInterface::class);
         $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback([$this, 'callbackValidsendbank']));
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock(RouterInterface::class);
 
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
         $customer->expects($this->once())->method('getId')->will($this->returnValue(42));
         $customer->expects($this->once())->method('getEmail')->will($this->returnValue('contact@sonata-project.org'));
 
@@ -283,7 +292,7 @@ class ScelliusPaymentTest extends TestCase
 
         $response = $payment->sendbank($order);
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     /**
@@ -292,9 +301,9 @@ class ScelliusPaymentTest extends TestCase
     public function testEncodeString($data, $expected): void
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $generator = $this->createMock('Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
+        $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
 
@@ -320,7 +329,7 @@ class ScelliusPaymentTest extends TestCase
             throw new \RuntimeException('Invalid scellius html message');
         }
 
-        return new \Symfony\Component\HttpFoundation\Response();
+        return new Response();
     }
 
     public static function callback($name)

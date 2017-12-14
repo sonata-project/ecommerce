@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sonata\PriceBundle\Tests\DependencyInjection;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\PriceBundle\DependencyInjection\SonataPriceExtension;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class SonataPriceExtensionTest extends \PHPUnit\Framework\TestCase
+class SonataPriceExtensionTest extends TestCase
 {
     /**
      * Tests if the configuration is well parsed & parameters are well set.
@@ -42,7 +44,7 @@ class SonataPriceExtensionTest extends \PHPUnit\Framework\TestCase
      */
     public function testCurrencyRequired(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         $configuration = new ContainerBuilder();
         $loader = new SonataPriceExtension();

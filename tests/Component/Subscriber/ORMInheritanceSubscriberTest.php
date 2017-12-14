@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Subscriber;
 
+use Application\Sonata\ProductBundle\Entity\Product;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Subscriber\ORMInheritanceSubscriber;
 
@@ -23,7 +26,7 @@ class ORMInheritanceSubscriberTest extends TestCase
 {
     public function testGetSubscribedEvents(): void
     {
-        $subscriber = new ORMInheritanceSubscriber([], 'Application\Sonata\ProductBundle\Entity\Product');
+        $subscriber = new ORMInheritanceSubscriber([], Product::class);
         $this->assertCount(1, $subscriber->getSubscribedEvents());
     }
 
@@ -32,8 +35,8 @@ class ORMInheritanceSubscriberTest extends TestCase
         $fakedMetadata = new \stdClass();
         $fakedMetadata->name = 'IncorrectValue';
 
-        $subscriber = new ORMInheritanceSubscriber([], 'Application\Sonata\ProductBundle\Entity\Product');
-        $metadata = $this->createMock('Doctrine\ORM\Event\LoadClassMetadataEventArgs');
+        $subscriber = new ORMInheritanceSubscriber([], Product::class);
+        $metadata = $this->createMock(LoadClassMetadataEventArgs::class);
         $metadata->expects($this->any())
             ->method('getClassMetadata')
             ->will($this->returnValue($fakedMetadata));
@@ -41,9 +44,9 @@ class ORMInheritanceSubscriberTest extends TestCase
         $this->assertNull($subscriber->loadClassMetadata($metadata));
         unset($fakedMetadata);
 
-        $classMetadata = $this->createMock('Doctrine\ORM\Mapping\ClassMetadata');
-        $classMetadata->name = 'Application\Sonata\ProductBundle\Entity\Product';
-        $metadata = $this->createMock('Doctrine\ORM\Event\LoadClassMetadataEventArgs');
+        $classMetadata = $this->createMock(ClassMetadata::class);
+        $classMetadata->name = Product::class;
+        $metadata = $this->createMock(LoadClassMetadataEventArgs::class);
         $metadata->expects($this->any())
             ->method('getClassMetadata')
             ->will($this->returnValue($classMetadata));

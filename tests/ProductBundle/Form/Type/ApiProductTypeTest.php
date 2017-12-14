@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Product\Pool;
+use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\ProductBundle\Form\Type\ApiProductType;
+use Symfony\Component\Form\FormBuilder;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
@@ -23,14 +26,14 @@ class ApiProductTypeTest extends TestCase
 {
     public function testBuildForm(): void
     {
-        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
+        $provider = $this->createMock(ProductProviderInterface::class);
 
-        $productPool = $this->createMock('Sonata\Component\Product\Pool');
+        $productPool = $this->createMock(Pool::class);
         $productPool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
 
         $type = new ApiProductType($productPool);
 
-        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
+        $builder = $this->createMock(FormBuilder::class);
 
         $type->buildForm($builder, ['provider_name' => 'test.product.provider']);
     }

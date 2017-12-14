@@ -15,6 +15,7 @@ namespace Sonata\Component\Tests\Form\Transformer;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Delivery\FreeDelivery;
+use Sonata\Component\Delivery\Pool;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 
 /**
@@ -24,7 +25,7 @@ class DeliveryMethodTransformerTest extends TestCase
 {
     public function testTransform(): void
     {
-        $pool = $this->createMock('Sonata\Component\Delivery\Pool');
+        $pool = $this->createMock(Pool::class);
         $transformer = new DeliveryMethodTransformer($pool);
 
         $delivery = new FreeDelivery(false);
@@ -39,7 +40,7 @@ class DeliveryMethodTransformerTest extends TestCase
         $delivery = new FreeDelivery(false);
         $delivery->setCode('deliveryCode');
 
-        $pool = $this->createMock('Sonata\Component\Delivery\Pool');
+        $pool = $this->createMock(Pool::class);
 
         $pool->expects($this->once())
             ->method('getMethod')

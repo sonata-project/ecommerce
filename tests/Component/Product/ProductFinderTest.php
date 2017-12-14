@@ -15,6 +15,8 @@ namespace Sonata\Component\Tests\Product;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Product\ProductFinder;
+use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Product\ProductManagerInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -23,14 +25,14 @@ class ProductFinderTest extends TestCase
 {
     public function testGetCrossSellingSimilarProducts(): void
     {
-        $productManager = $this->createMock('Sonata\Component\Product\ProductManagerInterface');
+        $productManager = $this->createMock(ProductManagerInterface::class);
         $productManager->expects($this->once())
             ->method('findInSameCollections')
             ->will($this->returnValue([]));
 
         $finder = new ProductFinder($productManager);
 
-        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->createMock(ProductInterface::class);
         $this->assertEquals([], $finder->getCrossSellingSimilarProducts($product));
     }
 }

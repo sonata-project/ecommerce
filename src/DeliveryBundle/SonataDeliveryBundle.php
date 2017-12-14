@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\DeliveryBundle;
 
+use Sonata\Component\Form\Type\DeliveryChoiceType;
 use Sonata\CoreBundle\Form\FormHelper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -41,7 +42,7 @@ class SonataDeliveryBundle extends Bundle
     public function registerFormMapping(): void
     {
         FormHelper::registerFormTypeMapping([
-            'sonata_delivery_choice' => 'Sonata\Component\Form\Type\DeliveryChoiceType',
+            'sonata_delivery_choice' => DeliveryChoiceType::class,
         ]);
     }
 }

@@ -15,8 +15,12 @@ namespace Sonata\Component\Tests\Basket;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BaseBasketFactory;
+use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Basket\BasketManagerInterface;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BasketFactory extends BaseBasketFactory
 {
@@ -81,10 +85,10 @@ class BaseBasketFactoryTest extends TestCase
 {
     public function testConstruct(): void
     {
-        $basketManager = $this->createMock('Sonata\Component\Basket\BasketManagerInterface');
-        $basketBuilder = $this->createMock('Sonata\Component\Basket\BasketBuilderInterface');
-        $currencyDetector = $this->createMock('Sonata\Component\Currency\CurrencyDetectorInterface');
-        $session = $this->createMock('Symfony\Component\HttpFoundation\Session\Session');
+        $basketManager = $this->createMock(BasketManagerInterface::class);
+        $basketBuilder = $this->createMock(BasketBuilderInterface::class);
+        $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
+        $session = $this->createMock(Session::class);
 
         $basketFactory = new BasketFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 

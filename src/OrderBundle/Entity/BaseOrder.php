@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\OrderBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Delivery\BaseServiceDelivery;
@@ -210,7 +211,7 @@ abstract class BaseOrder implements OrderInterface
 
     public function __construct()
     {
-        $this->orderElements = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orderElements = new ArrayCollection();
     }
 
     /**

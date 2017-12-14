@@ -149,7 +149,7 @@ class Selector implements ServiceDeliverySelectorInterface
 
         // STEP 2 : We select the delivery methods with the highest priority
         $instances = array_values($instances);
-        usort($instances, ['Sonata\Component\Delivery\Selector', 'sort']);
+        usort($instances, [self::class, 'sort']);
 
         return $instances;
     }

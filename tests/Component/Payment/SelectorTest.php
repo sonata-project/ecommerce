@@ -13,7 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Payment;
 
+use PHPUnit\Framework\TestCase;
+use Sonata\Component\Payment\PaymentNotFoundException;
+use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Payment\Selector;
+use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 
 class Address extends BaseAddress
@@ -27,18 +31,18 @@ class Address extends BaseAddress
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
  */
-class SelectorTest extends \PHPUnit\Framework\TestCase
+class SelectorTest extends TestCase
 {
     public function testGetPaymentPool(): void
     {
         $paymentPoolMethods = ['first method', 'second method'];
 
-        $paymentPool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->getMock();
+        $paymentPool = $this->getMockBuilder(PaymentPool::class)->getMock();
         $paymentPool->expects($this->any())
             ->method('getMethods')
             ->will($this->returnValue($paymentPoolMethods));
 
-        $productPool = $this->getMockBuilder('Sonata\Component\Product\Pool')->getMock();
+        $productPool = $this->getMockBuilder(ProductPool::class)->getMock();
 
         $selector = new Selector($paymentPool, $productPool);
         $this->assertFalse($selector->getAvailableMethods());
@@ -47,17 +51,17 @@ class SelectorTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPaymentException(): void
     {
-        $this->expectException(\Sonata\Component\Payment\PaymentNotFoundException::class);
+        $this->expectException(PaymentNotFoundException::class);
         $this->expectExceptionMessage('Payment method with code \'not_existing\' was not found');
 
         $paymentPoolMethods = ['first method', 'second method'];
 
-        $paymentPool = $this->getMockBuilder('Sonata\Component\Payment\Pool')->getMock();
+        $paymentPool = $this->getMockBuilder(PaymentPool::class)->getMock();
         $paymentPool->expects($this->any())
             ->method('getMethods')
             ->will($this->returnValue($paymentPoolMethods));
 
-        $productPool = $this->getMockBuilder('Sonata\Component\Product\Pool')->getMock();
+        $productPool = $this->getMockBuilder(ProductPool::class)->getMock();
 
         $selector = new Selector($paymentPool, $productPool);
 

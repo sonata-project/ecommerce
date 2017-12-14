@@ -13,9 +13,14 @@ declare(strict_types=1);
 
 namespace Sonata\CustomerBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\CustomerInterface;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\AddressManager;
+use Sonata\CustomerBundle\Entity\BaseAddress;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -24,7 +29,7 @@ class AddressManagerTest extends TestCase
 {
     public function testSetCurrent(): void
     {
-        $currentAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $currentAddress = $this->createMock(AddressInterface::class);
         $currentAddress->expects($this->once())
             ->method('getCurrent')
             ->will($this->returnValue(true));
@@ -32,48 +37,48 @@ class AddressManagerTest extends TestCase
 
         $custAddresses = [$currentAddress];
 
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
         $customer->expects($this->once())->method('getAddressesByType')->will($this->returnValue($custAddresses));
 
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $address = $this->createMock(AddressInterface::class);
         $address->expects($this->once())->method('setCurrent');
         $address->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('persist');
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $addressManager = new AddressManager('Sonata\Component\Customer\AddressInterface', $registry);
+        $addressManager = new AddressManager(AddressInterface::class, $registry);
 
         $addressManager->setCurrent($address);
     }
 
     public function testDelete(): void
     {
-        $existingAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $existingAddress = $this->createMock(AddressInterface::class);
         $existingAddress->expects($this->once())->method('setCurrent');
         $existingAddress->expects($this->once())->method('getId')->will($this->returnValue(42));
 
-        $custAddresses = [$existingAddress, $this->createMock('Sonata\Component\Customer\AddressInterface')];
+        $custAddresses = [$existingAddress, $this->createMock(AddressInterface::class)];
 
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
         $customer->expects($this->once())
             ->method('getAddressesByType')
             ->will($this->returnValue($custAddresses));
 
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $address = $this->createMock(AddressInterface::class);
         $address->expects($this->once())->method('getCurrent')->will($this->returnValue(true));
         $address->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
 
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->exactly(1))->method('persist');
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $addressManager = new AddressManager('Sonata\Component\Customer\AddressInterface', $registry);
+        $addressManager = new AddressManager(AddressInterface::class, $registry);
 
         $addressManager->delete($address);
     }
@@ -138,9 +143,9 @@ class AddressManagerTest extends TestCase
             'firstname',
         ]);
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new AddressManager('Sonata\CustomerBundle\Entity\BaseAddress', $registry);
+        return new AddressManager(BaseAddress::class, $registry);
     }
 }

@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sonata\BasketBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;
 
 /**
  * @author Vincent Composieux <composieux@ekino.com>
  */
-class BasketElementTest extends \PHPUnit\Framework\TestCase
+class BasketElementTest extends TestCase
 {
     /**
      * Test quantity setter, if quantity is negative, must returns a quantity of 1.

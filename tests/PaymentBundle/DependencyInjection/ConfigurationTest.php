@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Sonata\PaymentBundle\Tests\DependencyInjection;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\PaymentBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class ConfigurationTest extends \PHPUnit\Framework\TestCase
+class ConfigurationTest extends TestCase
 {
     public function testDefaults(): void
     {

@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Command\GenerateProductCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
@@ -26,7 +27,7 @@ class GenerateProductCommandTest extends TestCase
     public function testConfigure(): void
     {
         $cmd = $this->getCommandInstance();
-        $this->assertInstanceOf('Sonata\ProductBundle\Command\GenerateProductCommand', $cmd);
+        $this->assertInstanceOf(GenerateProductCommand::class, $cmd);
     }
 
     public function testExecute(): void
@@ -38,7 +39,7 @@ class GenerateProductCommandTest extends TestCase
             $cmdTester->execute(['command' => $cmd->getName()]);
             $this->fail('The command without arguments should throw a \RuntimeException');
         } catch (\Exception $e) {
-            $this->assertInstanceOf('\RuntimeException', $e);
+            $this->assertInstanceOf(\RuntimeException::class, $e);
         }
 
         try {
@@ -48,7 +49,7 @@ class GenerateProductCommandTest extends TestCase
             ]);
             $this->fail('The command without "service_id" argument should throw a \RuntimeException');
         } catch (\Exception $e) {
-            $this->assertInstanceOf('\RuntimeException', $e);
+            $this->assertInstanceOf(\RuntimeException::class, $e);
         }
 
         /*
@@ -68,7 +69,7 @@ class GenerateProductCommandTest extends TestCase
      */
     private function getCommandInstance()
     {
-        $kernel = $this->createMock('Symfony\Component\HttpKernel\Kernel');
+        $kernel = $this->createMock(Kernel::class);
         $app = new Application($kernel);
         $app->add(new GenerateProductCommand());
 

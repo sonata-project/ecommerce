@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\PaymentBundle;
 
 use Sonata\CoreBundle\Form\FormHelper;
+use Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -41,7 +42,7 @@ class SonataPaymentBundle extends Bundle
     public function registerFormMapping(): void
     {
         FormHelper::registerFormTypeMapping([
-            'sonata_payment_transaction_status' => 'Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType',
+            'sonata_payment_transaction_status' => PaymentTransactionStatusType::class,
         ]);
     }
 }

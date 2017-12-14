@@ -13,9 +13,21 @@ declare(strict_types=1);
 
 namespace Sonata\CustomerBundle\Tests\Controller\Api;
 
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\AddressManagerInterface;
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Customer\CustomerManagerInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\CustomerBundle\Controller\Api\CustomerController;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -24,10 +36,10 @@ class CustomerControllerTest extends TestCase
 {
     public function testGetCustomersAction(): void
     {
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
-        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
@@ -37,13 +49,13 @@ class CustomerControllerTest extends TestCase
 
     public function testGetCustomerAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
         $this->assertEquals($customer, $this->createCustomerController($customer)->getCustomerAction(1));
     }
 
     public function testGetCustomerActionNotFoundException(): void
     {
-        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Customer (42) not found');
 
         $this->createCustomerController()->getCustomerAction(42);
@@ -51,8 +63,8 @@ class CustomerControllerTest extends TestCase
 
     public function testGetCustomerOrdersAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $customer = $this->createMock(CustomerInterface::class);
+        $order = $this->createMock(OrderInterface::class);
 
         $this->assertEquals(
             [$order],
@@ -62,8 +74,8 @@ class CustomerControllerTest extends TestCase
 
     public function testGetCustomerAddressesAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $customer = $this->createMock(CustomerInterface::class);
+        $address = $this->createMock(AddressInterface::class);
         $customer->expects($this->once())->method('getAddresses')->will($this->returnValue([$address]));
 
         $this->assertEquals([$address], $this->createCustomerController($customer)
@@ -72,138 +84,138 @@ class CustomerControllerTest extends TestCase
 
     public function testPostCustomerAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->createMock('Symfony\Component\Form\Form');
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
 
-        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+        $this->assertInstanceOf(View::class, $view);
     }
 
     public function testPostCustomerInvalidAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->createMock('Symfony\Component\Form\Form');
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
 
-        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+        $this->assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPostCustomerAddressAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
-        $address = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $customer = $this->createMock(CustomerInterface::class);
+        $address = $this->createMock(AddressInterface::class);
         $address->expects($this->once())->method('setCustomer');
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
 
-        $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
+        $addressManager = $this->createMock(AddressManagerInterface::class);
         $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
 
-        $form = $this->createMock('Symfony\Component\Form\Form');
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($address));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCustomerController($customer, $customerManager, $addressManager, $formFactory)
             ->postCustomerAddressAction(1, new Request());
 
-        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+        $this->assertInstanceOf(View::class, $view);
     }
 
     public function testPostCustomerAddressInvalidAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->createMock('Symfony\Component\Form\Form');
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
 
-        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+        $this->assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutCustomerAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
         $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->createMock('Symfony\Component\Form\Form');
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
             ->putCustomerAction(1, new Request());
 
-        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+        $this->assertInstanceOf(View::class, $view);
     }
 
     public function testPutCustomerInvalidAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
         $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
 
-        $form = $this->createMock('Symfony\Component\Form\Form');
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
             ->putCustomerAction(1, new Request());
 
-        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+        $this->assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteCustomerAction(): void
     {
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
         $customerManager->expects($this->once())->method('delete');
 
@@ -214,9 +226,9 @@ class CustomerControllerTest extends TestCase
 
     public function testDeleteCustomerInvalidAction(): void
     {
-        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException(NotFoundHttpException::class);
 
-        $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+        $customerManager = $this->createMock(CustomerManagerInterface::class);
         $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));
         $customerManager->expects($this->never())->method('delete');
 
@@ -236,22 +248,22 @@ class CustomerControllerTest extends TestCase
     public function createCustomerController($customer = null, $customerManager = null, $addressManager = null, $formFactory = null, $order = null, $orderManager = null)
     {
         if (null === $customerManager) {
-            $customerManager = $this->createMock('Sonata\Component\Customer\CustomerManagerInterface');
+            $customerManager = $this->createMock(CustomerManagerInterface::class);
         }
         if (null !== $customer) {
             $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
         }
         if (null === $orderManager) {
-            $orderManager = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+            $orderManager = $this->createMock(OrderManagerInterface::class);
         }
         if (null === $addressManager) {
-            $addressManager = $this->createMock('Sonata\Component\Customer\AddressManagerInterface');
+            $addressManager = $this->createMock(AddressManagerInterface::class);
         }
         if (null !== $order) {
             $orderManager->expects($this->once())->method('findBy')->will($this->returnValue([$order]));
         }
         if (null === $formFactory) {
-            $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+            $formFactory = $this->createMock(FormFactoryInterface::class);
         }
 
         return new CustomerController($customerManager, $orderManager, $addressManager, $formFactory);

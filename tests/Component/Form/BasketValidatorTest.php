@@ -14,8 +14,14 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Form;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Form\BasketValidator;
+use Sonata\Component\Product\Pool;
+use Sonata\Component\Product\ProductProviderInterface;
+use Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\ExecutionContext;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -27,24 +33,24 @@ class BasketValidatorTest extends TestCase
      */
     public function testValidate(): void
     {
-        $provider = $this->createMock('Sonata\Component\Product\ProductProviderInterface');
+        $provider = $this->createMock(ProductProviderInterface::class);
         $provider->expects($this->once())->method('validateFormBasketElement');
 
-        $pool = $this->createMock('Sonata\Component\Product\Pool');
+        $pool = $this->createMock(Pool::class);
         $pool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
 
-        $consValFact = $this->createMock('Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory');
+        $consValFact = $this->createMock(ConstraintValidatorFactory::class);
 
-        $context = $this->createMock('Symfony\Component\Validator\ExecutionContext');
+        $context = $this->createMock(ExecutionContext::class);
         $context->expects($this->once())->method('getViolations')->will($this->returnValue(['violation1']));
         $context->expects($this->once())->method('addViolationAt');
 
         $validator = new BasketValidator($pool, $consValFact);
         $validator->initialize($context);
 
-        $elements = [$this->createMock('Sonata\Component\Basket\BasketElementInterface')];
+        $elements = [$this->createMock(BasketElementInterface::class)];
 
-        $basket = $this->createMock('Sonata\Component\Basket\BasketInterface');
+        $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($elements));
 
         $constraint = new NotBlank();

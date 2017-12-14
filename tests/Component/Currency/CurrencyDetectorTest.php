@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetector;
 use Sonata\Component\Currency\CurrencyInterface;
+use Sonata\Component\Currency\CurrencyManagerInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -39,13 +40,13 @@ class CurrencyDetectorTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->currency = $this->createMock('Sonata\Component\Currency\CurrencyInterface');
+        $this->currency = $this->createMock(CurrencyInterface::class);
         $this->currency->expects($this->any())
             ->method('getLabel')
             ->will($this->returnValue('EUR'))
         ;
 
-        $currencyManager = $this->createMock('Sonata\Component\Currency\CurrencyManagerInterface');
+        $currencyManager = $this->createMock(CurrencyManagerInterface::class);
         $currencyManager->expects($this->any())
             ->method('findOneByLabel')
             ->will($this->returnValue($this->currency))
@@ -70,7 +71,7 @@ class CurrencyDetectorTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $currencyManager = $this->createMock('Sonata\Component\Currency\CurrencyManagerInterface');
+        $currencyManager = $this->createMock(CurrencyManagerInterface::class);
         $currencyManager->expects($this->any())
             ->method('findOneByLabel')
             ->will($this->returnValue($currency))

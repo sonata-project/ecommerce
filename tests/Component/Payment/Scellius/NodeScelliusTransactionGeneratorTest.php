@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Payment\Scellius;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\Scellius\NodeScelliusTransactionGenerator;
 
 class NodeScelliusTransactionGeneratorTest extends TestCase
 {
     public function testGenerator(): void
     {
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->never())->method('getReference');
 
         $generator = new NodeScelliusTransactionGenerator();

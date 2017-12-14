@@ -13,8 +13,13 @@ declare(strict_types=1);
 
 namespace Sonata\InvoiceBundle\Tests\Controller\Api;
 
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Invoice\InvoiceElementInterface;
+use Sonata\Component\Invoice\InvoiceInterface;
+use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -23,10 +28,10 @@ class InvoiceControllerTest extends TestCase
 {
     public function testGetInvoicesAction(): void
     {
-        $invoiceManager = $this->createMock('Sonata\Component\Invoice\InvoiceManagerInterface');
+        $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
         $invoiceManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
-        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
@@ -35,13 +40,13 @@ class InvoiceControllerTest extends TestCase
 
     public function testGetInvoiceAction(): void
     {
-        $invoice = $this->createMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoice = $this->createMock(InvoiceInterface::class);
         $this->assertEquals($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
     public function testGetInvoiceActionNotFoundException(): void
     {
-        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Invoice (42) not found');
 
         $this->createInvoiceController()->getInvoiceAction(42);
@@ -49,8 +54,8 @@ class InvoiceControllerTest extends TestCase
 
     public function testGetInvoiceInvoiceelementsAction(): void
     {
-        $invoice = $this->createMock('Sonata\Component\Invoice\InvoiceInterface');
-        $invoiceElements = $this->createMock('Sonata\Component\Invoice\InvoiceElementInterface');
+        $invoice = $this->createMock(InvoiceInterface::class);
+        $invoiceElements = $this->createMock(InvoiceElementInterface::class);
         $invoice->expects($this->once())->method('getInvoiceElements')->will($this->returnValue([$invoiceElements]));
 
         $this->assertEquals([$invoiceElements], $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
@@ -65,7 +70,7 @@ class InvoiceControllerTest extends TestCase
     public function createInvoiceController($invoice = null, $invoiceManager = null)
     {
         if (null === $invoiceManager) {
-            $invoiceManager = $this->createMock('Sonata\Component\Invoice\InvoiceManagerInterface');
+            $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
         }
         if (null !== $invoice) {
             $invoiceManager->expects($this->once())->method('findOneBy')->will($this->returnValue($invoice));

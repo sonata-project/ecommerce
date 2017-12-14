@@ -395,10 +395,11 @@ class Basket implements \Serializable, BasketInterface
 
         --$this->cptElement;
 
-        unset(
-            $this->positions[$element->getProduct()->getId()],
-            $this->basketElements[$pos]
-        );
+        if ($element->getProduct()) {
+            unset($this->positions[$element->getProduct()->getId()]);
+        }
+
+        unset($this->basketElements[$pos]);
 
         if (!$this->inBuild) {
             $this->buildPrices();

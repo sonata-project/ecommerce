@@ -14,8 +14,13 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Payment;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\Paypal;
 use Sonata\Component\Payment\TransactionInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -24,8 +29,8 @@ class PaypalTest extends TestCase
 {
     public function testSendbank(): void
     {
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
+        $router = $this->createMock(RouterInterface::class);
+        $translator = $this->createMock(TranslatorInterface::class);
 
         $paypal = new Paypal($router, $translator);
         $options = [
@@ -36,27 +41,27 @@ class PaypalTest extends TestCase
         ];
         $paypal->setOptions($options);
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
 
         $sendbank = $paypal->sendbank($order);
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $sendbank);
+        $this->assertInstanceOf(Response::class, $sendbank);
 
         $this->assertContains('<input type="hidden" name="cmd" value="_s-xclick">', $sendbank->getContent());
     }
 
     public function testIsCallbackValid(): void
     {
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
+        $router = $this->createMock(RouterInterface::class);
+        $translator = $this->createMock(TranslatorInterface::class);
 
         $paypal = new Paypal($router, $translator);
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
         $order->expects($this->any())->method('isValidated')->will($this->returnValue(true));
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because request invalid');
@@ -70,7 +75,7 @@ class PaypalTest extends TestCase
 
         $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because order not validated');
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
         $order->expects($this->any())->method('isValidated')->will($this->returnValue(false));
 
@@ -80,13 +85,13 @@ class PaypalTest extends TestCase
             $order->getId()
         );
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('get')->will($this->returnValue($check));
 
         $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because payment_status invalid.');
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
@@ -101,7 +106,7 @@ class PaypalTest extends TestCase
 
         $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status pending.');
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
@@ -116,7 +121,7 @@ class PaypalTest extends TestCase
 
         $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status completed.');
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
@@ -134,40 +139,40 @@ class PaypalTest extends TestCase
 
     public function testHandleError(): void
     {
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
-        $translator = $this->createMock('Symfony\Component\Translation\TranslatorInterface');
+        $router = $this->createMock(RouterInterface::class);
+        $translator = $this->createMock(TranslatorInterface::class);
 
         $paypal = new Paypal($router, $translator);
-        $paypal->setLogger($this->createMock('Psr\Log\LoggerInterface'));
+        $paypal->setLogger($this->createMock(LoggerInterface::class));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
         $order->expects($this->any())->method('isValidated')->will($this->returnValue(true));
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $paypal->handleError($transaction);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_ORDER_UNKNOWN));
 
         $paypal->handleError($transaction);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_ERROR_VALIDATION));
 
         $paypal->handleError($transaction);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_CANCELLED));
 
         $paypal->handleError($transaction);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_PENDING));
         $transaction->expects($this->any())->method('get')->will($this->returnValue(Paypal::PENDING_REASON_ADDRESS));

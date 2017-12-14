@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Invoice;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceStatusRenderer;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 
@@ -30,14 +31,14 @@ class InvoiceStatusRendererTest extends TestCase
         $invoice = new \DateTime();
         $this->assertFalse($renderer->handlesObject($invoice));
 
-        $invoice = $this->createMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoice = $this->createMock(InvoiceInterface::class);
         $this->assertTrue($renderer->handlesObject($invoice));
     }
 
     public function testGetClass(): void
     {
         $renderer = new InvoiceStatusRenderer();
-        $invoice = $this->createMock('Sonata\Component\Invoice\InvoiceInterface');
+        $invoice = $this->createMock(InvoiceInterface::class);
 
         $invoice->expects($this->once())->method('getStatus')->will($this->returnValue(array_rand(BaseInvoice::getStatusList())));
         $this->assertContains($renderer->getStatusClass($invoice, '', 'error'), ['danger', 'warning', 'success']);

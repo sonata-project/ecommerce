@@ -14,9 +14,15 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Payment;
 
 use Buzz\Browser;
+use Buzz\Client\ClientInterface;
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Basket\Basket;
 use Sonata\Component\Payment\PassPayment;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Product\ProductInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 class PassPaymentTest_Order extends BaseOrder
 {
@@ -35,19 +41,19 @@ class PassPaymentTest extends TestCase
      */
     public function testPassPayment(): void
     {
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock(RouterInterface::class);
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
-        $client = $this->createMock('Buzz\Client\ClientInterface');
+        $client = $this->createMock(ClientInterface::class);
 
         $browser = new Browser($client);
         $payment = new PassPayment($router, $browser);
         $payment->setCode('free_1');
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $basket = $this->createMock(Basket::class);
+        $product = $this->createMock(ProductInterface::class);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
         $transaction->expects($this->once())->method('setTransactionId');
 
@@ -69,9 +75,9 @@ class PassPaymentTest extends TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
         $this->assertTrue($payment->isCallbackValid($transaction));
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
+        $this->assertInstanceOf(Response::class, $payment->handleError($transaction));
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
+        $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
 
         $response = $payment->sendbank($order);
 
