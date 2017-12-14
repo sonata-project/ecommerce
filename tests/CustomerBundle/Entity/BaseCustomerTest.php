@@ -11,6 +11,7 @@
 
 namespace Sonata\CustomerBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 use Sonata\CustomerBundle\Entity\BaseCustomer;
@@ -39,7 +40,7 @@ class AddressTest extends BaseAddress
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class BaseCustomerTest extends \PHPUnit\Framework\TestCase
+class BaseCustomerTest extends TestCase
 {
     public function testAddAddress()
     {

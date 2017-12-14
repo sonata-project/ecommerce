@@ -14,6 +14,7 @@ namespace Sonata\Component\Tests\Currency;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
+use Sonata\Component\Product\ProductInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -24,7 +25,7 @@ class CurrencyPriceCalculatorTest extends TestCase
     {
         $currencyPriceCalculator = new CurrencyPriceCalculator();
 
-        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $product = $this->createMock(ProductInterface::class);
 
         $currency = new Currency();
         $currency->setLabel('EUR');

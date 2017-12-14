@@ -15,8 +15,16 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Customer\AddressInterface;
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Delivery\ServiceDeliveryInterface;
+use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\Component\Payment\PaymentInterface;
+use Sonata\Component\Product\Pool;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BasketTransformerTest_Order extends BaseOrder
 {
@@ -37,13 +45,13 @@ class BasketTransformerTest extends TestCase
     public function getBasketTransform()
     {
         $order = new BasketTransformerTest_Order();
-        $orderManager = $this->createMock('Sonata\Component\Order\OrderManagerInterface');
+        $orderManager = $this->createMock(OrderManagerInterface::class);
         $orderManager->expects($this->any())->method('create')->will($this->returnValue($order));
 
-        $productPool = $this->createMock('Sonata\Component\Product\Pool');
+        $productPool = $this->createMock(Pool::class);
 
         $logger = $this->createMock(LoggerInterface::class);
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $basketTransform = new BasketTransformer($orderManager, $productPool, $eventDispatcher, $logger);
 
         return $basketTransform;
@@ -69,7 +77,7 @@ class BasketTransformerTest extends TestCase
         $this->expectExceptionMessage('Invalid billing address');
 
         $basket = new Basket();
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
         $basket->setCustomer($customer);
 
@@ -86,8 +94,8 @@ class BasketTransformerTest extends TestCase
         $this->expectExceptionMessage('Invalid payment method');
 
         $basket = new Basket();
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
-        $billingAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
+        $customer = $this->createMock(CustomerInterface::class);
+        $billingAddress = $this->createMock(AddressInterface::class);
 
         $currency = new Currency();
         $currency->setLabel('EUR');
@@ -105,9 +113,9 @@ class BasketTransformerTest extends TestCase
         $this->expectExceptionMessage('Invalid delivery method');
 
         $basket = new Basket();
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
-        $billingAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
-        $paymentMethod = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $customer = $this->createMock(CustomerInterface::class);
+        $billingAddress = $this->createMock(AddressInterface::class);
+        $paymentMethod = $this->createMock(PaymentInterface::class);
 
         $basket->setCustomer($customer);
         $basket->setBillingAddress($billingAddress);
@@ -126,10 +134,10 @@ class BasketTransformerTest extends TestCase
         $this->expectExceptionMessage('Invalid delivery address');
 
         $basket = new Basket();
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
-        $billingAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
-        $paymentMethod = $this->createMock('Sonata\Component\Payment\PaymentInterface');
-        $deliveryMethod = $this->createMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
+        $customer = $this->createMock(CustomerInterface::class);
+        $billingAddress = $this->createMock(AddressInterface::class);
+        $paymentMethod = $this->createMock(PaymentInterface::class);
+        $deliveryMethod = $this->createMock(ServiceDeliveryInterface::class);
         $deliveryMethod->expects($this->once())->method('isAddressRequired')->will($this->returnValue(true));
 
         $basket->setCustomer($customer);
@@ -147,12 +155,12 @@ class BasketTransformerTest extends TestCase
     public function testOrder()
     {
         $basket = new Basket();
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
-        $billingAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
-        $deliveryMethod = $this->createMock('Sonata\Component\Delivery\ServiceDeliveryInterface');
+        $customer = $this->createMock(CustomerInterface::class);
+        $billingAddress = $this->createMock(AddressInterface::class);
+        $deliveryMethod = $this->createMock(ServiceDeliveryInterface::class);
         $deliveryMethod->expects($this->exactly(2))->method('isAddressRequired')->will($this->returnValue(true));
-        $deliveryAddress = $this->createMock('Sonata\Component\Customer\AddressInterface');
-        $paymentMethod = $this->createMock('Sonata\Component\Payment\PaymentInterface');
+        $deliveryAddress = $this->createMock(AddressInterface::class);
+        $paymentMethod = $this->createMock(PaymentInterface::class);
 
         $basket->setCustomer($customer);
         $basket->setBillingAddress($billingAddress);
@@ -166,6 +174,6 @@ class BasketTransformerTest extends TestCase
 
         $order = $this->getBasketTransform()->transformIntoOrder($basket);
 
-        $this->assertInstanceOf('Sonata\Component\Order\OrderInterface', $order, '::transformIntoOrder() returns an OrderInstance object');
+        $this->assertInstanceOf(OrderInterface::class, $order, '::transformIntoOrder() returns an OrderInstance object');
     }
 }

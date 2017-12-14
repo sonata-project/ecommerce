@@ -11,12 +11,13 @@
 
 namespace Sonata\Component\Tests\Currency;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
-class CurrencyTest extends \PHPUnit\Framework\TestCase
+class CurrencyTest extends TestCase
 {
     public function testGettersSetters()
     {

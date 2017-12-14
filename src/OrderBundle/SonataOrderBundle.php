@@ -12,6 +12,7 @@
 namespace Sonata\OrderBundle;
 
 use Sonata\CoreBundle\Form\FormHelper;
+use Sonata\OrderBundle\Form\Type\OrderStatusType;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -39,7 +40,7 @@ class SonataOrderBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping([
-            'sonata_order_status' => 'Sonata\OrderBundle\Form\Type\OrderStatusType',
+            'sonata_order_status' => OrderStatusType::class,
         ]);
     }
 }

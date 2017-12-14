@@ -11,6 +11,7 @@
 
 namespace Sonata\InvoiceBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
@@ -118,9 +119,9 @@ class InvoiceManagerTest extends TestCase
             'name',
         ]);
 
-        $registry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new InvoiceManager('Sonata\InvoiceBundle\Entity\BaseInvoice', $registry);
+        return new InvoiceManager(BaseInvoice::class, $registry);
     }
 }

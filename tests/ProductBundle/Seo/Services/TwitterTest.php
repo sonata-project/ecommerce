@@ -12,6 +12,9 @@
 namespace Sonata\ProductBundle\Tests\Seo\Services;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\IntlBundle\Templating\Helper\NumberHelper;
+use Sonata\MediaBundle\Provider\Pool;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Seo\Services\Twitter;
 use Sonata\SeoBundle\Seo\SeoPage;
@@ -33,11 +36,11 @@ class TwitterTest extends TestCase
 {
     public function testAlterPage()
     {
-        $mediaPool = $this->createMock('Sonata\MediaBundle\Provider\Pool');
+        $mediaPool = $this->createMock(Pool::class);
         $seoPage = new SeoPage('test');
         $extension = new SeoExtension($seoPage, 'UTF-8');
-        $numberHelper = $this->createMock('Sonata\IntlBundle\Templating\Helper\NumberHelper');
-        $currencyDetector = $this->createMock('Sonata\Component\Currency\CurrencyDetectorInterface');
+        $numberHelper = $this->createMock(NumberHelper::class);
+        $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $product = new ProductTwitterMock();
 
         $twitterService = new Twitter($mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'test', 'test', 'reference');

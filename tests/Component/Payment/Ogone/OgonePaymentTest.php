@@ -13,9 +13,17 @@ namespace Sonata\Component\Tests\Payment\Ogone;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use Sonata\Component\Basket\Basket;
 use Sonata\Component\Currency\Currency;
+use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\Ogone\OgonePayment;
+use Sonata\Component\Payment\TransactionInterface;
+use Sonata\Component\Product\ProductInterface;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 class OgonePaymentTest_Order extends BaseOrder
 {
@@ -37,8 +45,8 @@ class OgonePaymentTest extends TestCase
     public function testValidPayment()
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
         $router->expects($this->once())->method('generate')->will($this->returnValue('http://www.google.com'));
 
         $payment = new OgonePayment($router, $logger, $templating, true);
@@ -56,8 +64,8 @@ class OgonePaymentTest extends TestCase
             'catalog_url' => '',
         ]);
 
-        $basket = $this->createMock('Sonata\Component\Basket\Basket');
-        $product = $this->createMock('Sonata\Component\Product\ProductInterface');
+        $basket = $this->createMock(Basket::class);
+        $product = $this->createMock(ProductInterface::class);
 
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('30/11/1981'));
@@ -69,7 +77,7 @@ class OgonePaymentTest extends TestCase
         $order->setReference('FR');
         $order->setLocale('es');
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
@@ -82,23 +90,23 @@ class OgonePaymentTest extends TestCase
 
         $this->assertTrue($payment->isCallbackValid($transaction));
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->handleError($transaction));
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $payment->sendConfirmationReceipt($transaction));
+        $this->assertInstanceOf(Response::class, $payment->handleError($transaction));
+        $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
     }
 
     public function testValidSendbankPayment()
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
+        $templating = $this->createMock(EngineInterface::class);
         $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback([$this, 'callbackValidsendbank']));
 
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $router = $this->createMock(RouterInterface::class);
 
         $date = new \DateTime();
         $date->setTimeStamp(strtotime('30/11/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
-        $customer = $this->createMock('Sonata\Component\Customer\CustomerInterface');
+        $customer = $this->createMock(CustomerInterface::class);
 
         $order = new OgonePaymentTest_Order();
         $order->setCreatedAt($date);
@@ -128,7 +136,7 @@ class OgonePaymentTest extends TestCase
 
         $response = $payment->sendbank($order);
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     /**
@@ -137,8 +145,8 @@ class OgonePaymentTest extends TestCase
     public function testEncodeString($data, $expected)
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
 
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
@@ -177,7 +185,7 @@ class OgonePaymentTest extends TestCase
             throw new \RuntimeException('Invalid ogone orderId');
         }
 
-        return new \Symfony\Component\HttpFoundation\Response();
+        return new Response();
     }
 
     public static function callback($name)
@@ -222,12 +230,12 @@ class OgonePaymentTest extends TestCase
     public function testIsCallbackValid()
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
 
         $payment = new OgonePayment($router, $logger, $templating, true);
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
 
         $check = sha1(
@@ -236,18 +244,18 @@ class OgonePaymentTest extends TestCase
             $order->getId()
         );
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('getOrder')->will($this->returnValue(null));
 
         $this->assertFalse($payment->isCallbackValid($transaction));
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->once())->method('get')->will($this->returnValue($check));
 
         $this->assertTrue($payment->isCallbackValid($transaction));
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->once())->method('get')->will($this->returnValue('untest'));
         $transaction->expects($this->once())->method('setState');
@@ -260,12 +268,12 @@ class OgonePaymentTest extends TestCase
     public function testGetOrderReference()
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
 
         $payment = new OgonePayment($router, $logger, $templating, true);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('get')->will($this->returnValue('reference'));
 
         $this->assertEquals('reference', $payment->getOrderReference($transaction));
@@ -274,12 +282,12 @@ class OgonePaymentTest extends TestCase
     public function testApplyTransactionId()
     {
         $logger = $this->createMock(LoggerInterface::class);
-        $templating = $this->createMock('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface');
-        $router = $this->createMock('Symfony\Component\Routing\RouterInterface');
+        $templating = $this->createMock(EngineInterface::class);
+        $router = $this->createMock(RouterInterface::class);
 
         $payment = new OgonePayment($router, $logger, $templating, true);
 
-        $transaction = $this->createMock('Sonata\Component\Payment\TransactionInterface');
+        $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('setTransactionId');
 
         $payment->applyTransactionId($transaction);

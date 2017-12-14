@@ -13,6 +13,7 @@ namespace Sonata\BasketBundle\Tests\Form;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Form\ApiBasketElementType;
+use Symfony\Component\Form\FormBuilder;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
@@ -23,7 +24,7 @@ class ApiBasketElementTypeTest extends TestCase
     {
         $type = new ApiBasketElementType('my.test.class');
 
-        $builder = $this->createMock('Symfony\Component\Form\FormBuilder');
+        $builder = $this->createMock(FormBuilder::class);
         $builder->expects($this->once())->method('create')->will($this->returnSelf());
         $builder->expects($this->once())->method('addModelTransformer');
 

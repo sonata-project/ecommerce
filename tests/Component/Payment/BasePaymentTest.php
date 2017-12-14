@@ -42,7 +42,7 @@ class BasePaymentTest extends TestCase
         $date = new \DateTime();
         $date->setTimestamp(strtotime('11/30/1981'));
 
-        $order = $this->createMock('Sonata\Component\Order\OrderInterface');
+        $order = $this->createMock(OrderInterface::class);
         $order->expects($this->once())->method('getReference')->will($this->returnValue('000123'));
         $order->expects($this->exactly(2))->method('getCreatedAt')->will($this->returnValue($date));
         $order->expects($this->once())->method('getId')->will($this->returnValue(2));

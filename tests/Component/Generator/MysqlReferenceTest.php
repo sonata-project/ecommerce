@@ -11,12 +11,14 @@
 
 namespace Sonata\Component\Tests\Generator;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManager as BaseEntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\MysqlReference;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\OrderBundle\Entity\BaseOrder;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class EntityManager extends BaseEntityManager
 {
@@ -81,7 +83,7 @@ class MysqlReferenceTest extends TestCase
             $mysqlReference->invoice($invoice);
             $this->fail('->invoice() call should raise a \RuntimeException for a new entity');
         } catch (\Exception $e) {
-            $this->assertInstanceOf('\RuntimeException', $e);
+            $this->assertInstanceOf(\RuntimeException::class, $e);
         }
 
         $invoice->setId(12);
@@ -102,7 +104,7 @@ class MysqlReferenceTest extends TestCase
             $mysqlReference->order($order);
             $this->fail('->order() call should raise a \RuntimeException for a new entity');
         } catch (\Exception $e) {
-            $this->assertInstanceOf('\RuntimeException', $e);
+            $this->assertInstanceOf(\RuntimeException::class, $e);
         }
 
         $order->setId(12);
@@ -122,9 +124,9 @@ class MysqlReferenceTest extends TestCase
         $metadata = new ClassMetadata('entityName');
         $metadata->table = ['name' => 'tableName'];
 
-        $connection = $this->createMock('Doctrine\DBAL\Connection');
+        $connection = $this->createMock(Connection::class);
 
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
+        $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->any())
             ->method('getClassMetadata')
             ->will($this->returnValue($metadata));
@@ -133,7 +135,7 @@ class MysqlReferenceTest extends TestCase
             ->method('query')
             ->will($this->returnValue(new \PDOStatement()));
 
-        $registry = $this->createMock('Symfony\Bridge\Doctrine\RegistryInterface');
+        $registry = $this->createMock(RegistryInterface::class);
         $registry->expects($this->any())->method('getManager')->will($this->returnValue($em));
         $registry->expects($this->any())->method('getConnection')->will($this->returnValue($connection));
 

@@ -11,6 +11,7 @@
 
 namespace Sonata\ProductBundle\DependencyInjection\Compiler;
 
+use Sonata\Component\Product\ProductDefinition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -41,7 +42,7 @@ class AddProductProviderCompilerPass implements CompilerPassInterface
 
             foreach ($arguments[1] as $code => $options) {
                 // define a new ProductDefinition
-                $definition = new Definition('Sonata\Component\Product\ProductDefinition', [new Reference($options['provider']), new Reference($options['manager'])]);
+                $definition = new Definition(ProductDefinition::class, [new Reference($options['provider']), new Reference($options['manager'])]);
                 $definition->setPublic(false);
                 $container->setDefinition($code, $definition);
 

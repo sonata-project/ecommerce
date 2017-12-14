@@ -14,6 +14,7 @@ namespace Sonata\Component\Tests\Currency;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDataTransformer;
+use Sonata\Component\Currency\CurrencyManagerInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -25,7 +26,7 @@ class CurrencyDataTransformerTest extends TestCase
 
     protected function setUp()
     {
-        $this->currencyManager = $this->createMock('Sonata\Component\Currency\CurrencyManagerInterface');
+        $this->currencyManager = $this->createMock(CurrencyManagerInterface::class);
 
         $this->currencyDataTransformer = new CurrencyDataTransformer($this->currencyManager);
     }

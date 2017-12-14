@@ -12,6 +12,7 @@
 namespace Sonata\InvoiceBundle;
 
 use Sonata\CoreBundle\Form\FormHelper;
+use Sonata\InvoiceBundle\Form\Type\InvoiceStatusType;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -39,7 +40,7 @@ class SonataInvoiceBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping([
-            'sonata_invoice_status' => 'Sonata\InvoiceBundle\Form\Type\InvoiceStatusType',
+            'sonata_invoice_status' => InvoiceStatusType::class,
         ]);
     }
 }

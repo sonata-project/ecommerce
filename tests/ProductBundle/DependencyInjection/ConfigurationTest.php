@@ -11,10 +11,11 @@
 
 namespace Sonata\ProductBundle\Tests\DependencyInjection;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
-class ConfigurationTest extends \PHPUnit\Framework\TestCase
+class ConfigurationTest extends TestCase
 {
     public function testDefaults()
     {
