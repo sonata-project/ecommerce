@@ -26,3 +26,9 @@ See also the [diff code](https://github.com/sonata-project/ecommerce/compare/2.x
 
 #### BaseBasketElement
 - Added missing `price_inc_vat` column for `priceIncludingVat` field
+
+## CustomerSelector
+If you have implemented custom `CustomerSelector` you must adapt constructor arguments to the new ones. Note that all protected properties are now private.
+
+## ProductInterface
+`ProductInterface::validateOneMainCategory` now uses `Symfony\Component\Validator\Context\ExecutionContextInterface` instead of `Symfony\Component\Validator\ExecutionContextInterface`

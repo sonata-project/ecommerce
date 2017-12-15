@@ -16,7 +16,7 @@ namespace Sonata\Component\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 interface ProductInterface extends PriceComputableInterface
 {

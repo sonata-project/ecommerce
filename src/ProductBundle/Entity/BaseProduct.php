@@ -23,7 +23,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 abstract class BaseProduct implements ProductInterface
 {

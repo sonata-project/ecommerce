@@ -15,7 +15,8 @@ namespace Sonata\Component\Customer;
 
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class CustomerSelector implements CustomerSelectorInterface
@@ -23,34 +24,46 @@ class CustomerSelector implements CustomerSelectorInterface
     /**
      * @var \Sonata\Component\Customer\CustomerManagerInterface
      */
-    protected $customerManager;
+    private $customerManager;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\Session
      */
-    protected $session;
+    private $session;
 
     /**
-     * @var SecurityContextInterface
+     * @var AuthorizationCheckerInterface
      */
-    protected $securityContext;
+    private $authorizationChecker;
+
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
 
     /**
      * @var string
      */
-    protected $locale;
+    private $locale;
 
     /**
-     * @param CustomerManagerInterface $customerManager
-     * @param SessionInterface         $session
-     * @param SecurityContextInterface $securityContext
-     * @param LocaleDetectorInterface  $localeDetector
+     * @param CustomerManagerInterface      $customerManager
+     * @param SessionInterface              $session
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param TokenStorageInterface         $tokenStorage
+     * @param LocaleDetectorInterface       $localeDetector
      */
-    public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
-    {
+    public function __construct(
+        CustomerManagerInterface $customerManager,
+        SessionInterface $session,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TokenStorageInterface $tokenStorage,
+        LocaleDetectorInterface $localeDetector
+    ) {
         $this->customerManager = $customerManager;
         $this->session = $session;
-        $this->securityContext = $securityContext;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->tokenStorage = $tokenStorage;
         $this->locale = $localeDetector->getLocale();
     }
 
@@ -66,9 +79,9 @@ class CustomerSelector implements CustomerSelectorInterface
         $customer = null;
         $user = null;
 
-        if (true === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             // user is authenticated
-            $user = $this->securityContext->getToken()->getUser();
+            $user = $this->tokenStorage->getToken()->getUser();
 
             if (!$user instanceof UserInterface) {
                 throw new \RuntimeException('User must be an instance of Symfony\Component\Security\Core\User\UserInterface');

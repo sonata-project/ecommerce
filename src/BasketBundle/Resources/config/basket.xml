@@ -13,7 +13,8 @@
         <service id="sonata.customer.selector" class="%sonata.customer.selector.class%">
             <argument type="service" id="sonata.customer.manager"/>
             <argument type="service" id="session"/>
-            <argument type="service" id="security.context"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="security.token_storage"/>
             <argument type="service" id="sonata.intl.locale_detector"/>
         </service>
         <service id="sonata.basket.loader.standard" class="Sonata\Component\Basket\Loader">
