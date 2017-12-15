@@ -16,9 +16,9 @@ namespace Sonata\Component\Form;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\ContainerConstraintValidatorFactory;
 
 class BasketValidator extends ConstraintValidator
 {
@@ -28,15 +28,15 @@ class BasketValidator extends ConstraintValidator
     protected $productPool;
 
     /**
-     * @var ConstraintValidatorFactory
+     * @var ContainerConstraintValidatorFactory
      */
     protected $constraintValidatorFactory;
 
     /**
-     * @param ProductPool                $productPool
-     * @param ConstraintValidatorFactory $constraintValidatorFactory
+     * @param ProductPool                         $productPool
+     * @param ContainerConstraintValidatorFactory $constraintValidatorFactory
      */
-    public function __construct(ProductPool $productPool, ConstraintValidatorFactory $constraintValidatorFactory)
+    public function __construct(ProductPool $productPool, ContainerConstraintValidatorFactory $constraintValidatorFactory)
     {
         $this->productPool = $productPool;
         $this->constraintValidatorFactory = $constraintValidatorFactory;
@@ -68,7 +68,10 @@ class BasketValidator extends ConstraintValidator
         }
 
         if (count($this->context->getViolations()) > 0) {
-            $this->context->addViolationAt('basketElements', $constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->atPath('\'basketElements\'')
+                ->addViolation();
         }
     }
 }

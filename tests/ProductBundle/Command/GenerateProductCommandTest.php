@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Sonata\ProductBundle\Command\GenerateProductCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
@@ -69,8 +68,7 @@ class GenerateProductCommandTest extends TestCase
      */
     private function getCommandInstance()
     {
-        $kernel = $this->createMock(Kernel::class);
-        $app = new Application($kernel);
+        $app = new Application();
         $app->add(new GenerateProductCommand());
 
         return $app->find('sonata:product:generate');
