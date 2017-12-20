@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="ru" datatype="plaintext" original="SonataDeliveryBundle.en.xliff">
+        <body>
+            <!-- Begin - Titles -->
+            <trans-unit id="delivery">
+                <source>delivery</source>
+                <target>Доставка</target>
+            </trans-unit>
+            <!-- End - Titles -->
+            <!-- Begin - Breadcrumb translations -->
+            <trans-unit id="breadcrumb.link_delivery_list">
+                <source>breadcrumb.link_delivery_list</source>
+                <target>Доставка</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_delivery_edit">
+                <source>breadcrumb.link_delivery_edit</source>
+                <target>Редактировать</target>
+            </trans-unit>
+            <!-- End - Breadcrumb translations -->
+            <!-- Begin - Status translations -->
+            <trans-unit id="status_open">
+                <source>status_open</source>
+                <target>Открыто</target>
+            </trans-unit>
+            <trans-unit id="status_pending">
+                <source>status_pending</source>
+                <target>Ожидает проверки</target>
+            </trans-unit>
+            <trans-unit id="status_order_unknown">
+                <source>status_order_unknown</source>
+                <target>Неизвестный заказ</target>
+            </trans-unit>
+            <trans-unit id="status_validated">
+                <source>status_validated</source>
+                <target>Проверен</target>
+            </trans-unit>
+            <trans-unit id="status_cancelled">
+                <source>status_cancelled</source>
+                <target>Отменен</target>
+            </trans-unit>
+            <trans-unit id="status_unknown">
+                <source>status_unknown</source>
+                <target>Неизвестно</target>
+            </trans-unit>
+            <trans-unit id="status_error_validation">
+                <source>status_error_validation</source>
+                <target>Ошибка проверки</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_callback">
+                <source>status_wrong_callback</source>
+                <target>Неверный callback</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_request">
+                <source>status_wrong_request</source>
+                <target>Ошибочный запрос</target>
+            </trans-unit>
+            <trans-unit id="status_order_not_open">
+                <source>status_order_not_open</source>
+                <target>Заказ не открыт</target>
+            </trans-unit>
+            <trans-unit id="status_error">
+                <source>status_error</source>
+                <target>Ошибка</target>
+            </trans-unit>
+            <trans-unit id="status_stopped">
+                <source>status_stopped</source>
+                <target>Остановлен</target>
+            </trans-unit>
+            <trans-unit id="status_returned">
+                <source>status_returned</source>
+                <target>Возвращен</target>
+            </trans-unit>
+            <trans-unit id="status_completed">
+                <source>status_completed</source>
+                <target>Выполнен</target>
+            </trans-unit>
+            <trans-unit id="status_sent">
+                <source>status_sent</source>
+                <target>Отправлен</target>
+            </trans-unit>
+            <!-- End - Status translations -->
+        </body>
+    </file>
+</xliff>

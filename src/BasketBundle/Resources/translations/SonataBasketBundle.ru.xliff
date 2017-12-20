@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="ru" datatype="plaintext" original="SonataBasketBundle.en.xliff">
+        <body>
+            <trans-unit id="message_basket_elements_preview">
+                <source>message_basket_elements_preview</source>
+                <target>Предпросмотр корзины</target>
+            </trans-unit>
+            <trans-unit id="message_no_basket_elements">
+                <source>message_no_basket_elements</source>
+                <target>В корзине пусто</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.product.added">
+                <source>sonata.basket.product.added</source>
+                <target>Ваш товар был добавлен!</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.btn_update_basket">
+                <source>sonata.basket.btn_update_basket</source>
+                <target>Обновить корзину</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.btn_update_delivery_step">
+                <source>sonata.basket.btn_update_delivery_step</source>
+                <target>Обновить шаг доставки</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.btn_update_payment_step">
+                <source>sonata.basket.btn_update_payment_step</source>
+                <target>Обновить шаг оплаты</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.label_delivery_charge">
+                <source>sonata.basket.label_delivery_charge</source>
+                <target>Изменить доставку</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.label_process_to_payment">
+                <source>sonata.basket.label_process_to_payment</source>
+                <target>Перейти к оплате</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.label_confirm_tac">
+                <source>sonata.basket.label_confirm_tac</source>
+                <target>Вы должны подтвердить согласие с условиями и положениями, чтобы продолжить</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.label_terms_and_condition">
+                <source>sonata.basket.label_terms_and_condition</source>
+                <target>Я принимаю условия и положения</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.link_previous_step">
+                <source>sonata.basket.link_previous_step</source>
+                <target>Назад</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.link_next_step">
+                <source>sonata.basket.link_next_step</source>
+                <target>Далее</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.link_terms_and_condition">
+                <source>sonata.basket.link_terms_and_condition</source>
+                <target>Прочтите условия и положения</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_basket_is_empty">
+                <source>sonata.basket.message_basket_is_empty</source>
+                <target>Корзина пуста</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_basket_go_back_shopping">
+                <source>sonata.basket.message_basket_go_back_shopping</source>
+                <target>Перейти обратно в магазин</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_no_delivery_addresses_available">
+                <source>sonata.basket.message_no_delivery_addresses_available</source>
+                <target>Нет доступных адресов доставки</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_no_billing_addresses_available">
+                <source>sonata.basket.message_no_billing_addresses_available</source>
+                <target>Нет доступных адресов для выставления счета</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.message_country_not_delivery_zone">
+                <source>sonata.basket.message_country_not_delivery_zone</source>
+                <target>Доставка в эту страну недоступна</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.order_terms_and_conditions_title">
+                <source>sonata.basket.order_terms_and_conditions_title</source>
+                <target>Условия и положения</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_basket">
+                <source>sonata.basket.title_basket</source>
+                <target>Корзина</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery">
+                <source>sonata.basket.title_delivery</source>
+                <target>Доставка</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_address_not_required">
+                <source>sonata.basket.title_delivery_address_not_required</source>
+                <target>Адрес доставки не обязателен</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_addresses">
+                <source>sonata.basket.title_delivery_addresses</source>
+                <target>Адреса доставки</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.delivery_use_existing_title">
+                <source>sonata.basket.delivery_use_existing_title</source>
+                <target>Использовать существующий адрес</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.delivery_create_new_title">
+                <source>sonata.basket.delivery_create_new_title</source>
+                <target>Добавить новый адрес доставки</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.billing_create_new_title">
+                <source>sonata.basket.billing_create_new_title</source>
+                <target>Добавить новый адрес для выставления счета</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_method">
+                <source>sonata.basket.title_delivery_method</source>
+                <target>Способ доставки</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_methods">
+                <source>sonata.basket.title_delivery_methods</source>
+                <target>Способы доставки</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_delivery_step_basket">
+                <source>sonata.basket.title_delivery_step_basket</source>
+                <target>Доставка</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_address_delivery_step_basket">
+                <source>sonata.basket.title_address_delivery_step_basket</source>
+                <target>Выберите адрес доставки</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_address_billing_step_basket">
+                <source>sonata.basket.title_address_billing_step_basket</source>
+                <target>Выберите адрес для выставления счета</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_billing">
+                <source>sonata.basket.title_billing</source>
+                <target>Оплата</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_payment_method">
+                <source>sonata.basket.title_payment_method</source>
+                <target>Способ оплаты</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.title_payment_step_basket">
+                <source>sonata.basket.title_payment_step_basket</source>
+                <target>Оплата</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.total_vat">
+                <source>sonata.basket.total_vat</source>
+                <target>НДС</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.total_w_vat">
+                <source>sonata.basket.total_w_vat</source>
+                <target>Итого включая НДС</target>
+            </trans-unit>
+            <trans-unit id="sonata.basket.total_wo_vat">
+                <source>sonata.basket.total_wo_vat</source>
+                <target>Итого без НДС</target>
+            </trans-unit>
+            <trans-unit id="view_basket">
+                <source>view_basket</source>
+                <target>Корзина</target>
+            </trans-unit>
+            <trans-unit id="address_address1_label">
+                <source>address_address1_label</source>
+                <target>Адрес 1</target>
+            </trans-unit>
+            <trans-unit id="address_address2_label">
+                <source>address_address2_label</source>
+                <target>Адрес 2</target>
+            </trans-unit>
+            <trans-unit id="address_address3_label">
+                <source>address_address3_label</source>
+                <target>Адрес 3</target>
+            </trans-unit>
+            <trans-unit id="address_city_label">
+                <source>address_city_label</source>
+                <target>Город</target>
+            </trans-unit>
+            <trans-unit id="address_countrycode_label">
+                <source>address_countrycode_label</source>
+                <target>Страна</target>
+            </trans-unit>
+            <trans-unit id="address_firstname_label">
+                <source>address_firstname_label</source>
+                <target>Имя</target>
+            </trans-unit>
+            <trans-unit id="address_lastname_label">
+                <source>address_lastname_label</source>
+                <target>Фамилия</target>
+            </trans-unit>
+            <trans-unit id="address_name_label">
+                <source>address_name_label</source>
+                <target>Название адреса</target>
+            </trans-unit>
+            <trans-unit id="address_phone_label">
+                <source>address_phone_label</source>
+                <target>Телефон</target>
+            </trans-unit>
+            <trans-unit id="address_postcode_label">
+                <source>address_postcode_label</source>
+                <target>Индекс</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_addresses">
+                <source>sonata_basket_address_addresses</source>
+                <target>Использовать существующий</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_useselected">
+                <source>sonata_basket_address_useselected</source>
+                <target>Использовать выбранный</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_firstname">
+                <source>sonata_basket_address_firstname</source>
+                <target>Имя</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_name">
+                <source>sonata_basket_address_name</source>
+                <target>Название адреса</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_type">
+                <source>sonata_basket_address_type</source>
+                <target>Тип адреса</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_lastname">
+                <source>sonata_basket_address_lastname</source>
+                <target>Фамилия</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_address1">
+                <source>sonata_basket_address_address1</source>
+                <target>Адрес</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_address2">
+                <source>sonata_basket_address_address2</source>
+                <target/>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_address3">
+                <source>sonata_basket_address_address3</source>
+                <target/>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_postcode">
+                <source>sonata_basket_address_postcode</source>
+                <target>Индекс</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_city">
+                <source>sonata_basket_address_city</source>
+                <target>Город</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_countryCode">
+                <source>sonata_basket_address_countryCode</source>
+                <target>Код страны</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_address_phone">
+                <source>sonata_basket_address_phone</source>
+                <target>Телефон</target>
+            </trans-unit>
+            <trans-unit id="sonata_basket_total_price">
+                <source>sonata_basket_total_price</source>
+                <target>Итого</target>
+            </trans-unit>
+            <trans-unit id="header_basket_information">
+                <source>header_basket_information</source>
+                <target>Позиции</target>
+            </trans-unit>
+            <trans-unit id="header_basket_price">
+                <source>header_basket_price</source>
+                <target>Цена</target>
+            </trans-unit>
+            <trans-unit id="header_basket_unit_price">
+                <source>header_basket_unit_price</source>
+                <target>Цена за шт.</target>
+            </trans-unit>
+            <trans-unit id="header_basket_quantity">
+                <source>header_basket_quantity</source>
+                <target>Кол-во</target>
+            </trans-unit>
+            <trans-unit id="header_basket_delete">
+                <source>header_basket_delete</source>
+                <target><![CDATA[<i class="glyphicon glyphicon-trash"></i>]]></target>
+            </trans-unit>
+            <trans-unit id="header_basket_total_excl">
+                <source>header_basket_total_excl</source>
+                <target>Итого без НДС</target>
+            </trans-unit>
+            <trans-unit id="header_basket_total_inc">
+                <source>header_basket_total_inc</source>
+                <target>Итого включая НДС</target>
+            </trans-unit>
+            <trans-unit id="header_basket_total">
+                <source>header_basket_total</source>
+                <target>Итого</target>
+            </trans-unit>
+            <trans-unit id="footer_basket_vat">
+                <source>footer_basket_vat</source>
+                <target>НДС</target>
+            </trans-unit>
+            <trans-unit id="footer_basket_total_excl">
+                <source>footer_basket_total_excl</source>
+                <target>Итого без НДС</target>
+            </trans-unit>
+            <trans-unit id="footer_basket_total_vat">
+                <source>footer_basket_total_vat</source>
+                <target>НДС</target>
+            </trans-unit>
+            <trans-unit id="footer_basket_total_inc">
+                <source>footer_basket_total_inc</source>
+                <target>Итого включая НДС</target>
+            </trans-unit>
+            <trans-unit id="undeliverable_country">
+                <source>undeliverable_country</source>
+                <target>Доставка в страну %country% недоступна для одного или нескольких товаров в вашей корзине</target>
+            </trans-unit>
+            <trans-unit id="basket_index_title">
+                <source>basket_index_title</source>
+                <target>Корзина</target>
+            </trans-unit>
+            <trans-unit id="basket_delivery_title">
+                <source>basket_delivery_title</source>
+                <target>Доставка</target>
+            </trans-unit>
+            <trans-unit id="basket_payment_title">
+                <source>basket_payment_title</source>
+                <target>Оплата</target>
+            </trans-unit>
+            <trans-unit id="basket_review_title">
+                <source>basket_review_title</source>
+                <target>Проверьте ваш заказ</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_basket_title">
+                <source>basket_stepper_basket_title</source>
+                <target>Корзина</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_identification_title">
+                <source>basket_stepper_identification_title</source>
+                <target>Идентификация</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_delivery_title">
+                <source>basket_stepper_delivery_title</source>
+                <target>Доставка</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_billing_title">
+                <source>basket_stepper_billing_title</source>
+                <target>Оплата</target>
+            </trans-unit>
+            <trans-unit id="basket_stepper_checkout_title">
+                <source>basket_stepper_checkout_title</source>
+                <target>Оформить заказ</target>
+            </trans-unit>
+            <trans-unit id="form_label_quantity">
+                <source>form_label_quantity</source>
+                <target>Кол-во</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

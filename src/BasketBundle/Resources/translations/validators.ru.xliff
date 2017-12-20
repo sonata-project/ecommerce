@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="ru" datatype="plaintext" original="validators.en.xliff">
+        <body>
+            <trans-unit id="product_not_available">
+                <source>product_not_available</source>
+                <target>Товар недоступен.</target>
+            </trans-unit>
+            <trans-unit id="product_not_enabled">
+                <source>product_not_enabled</source>
+                <target>Товар неактивен.</target>
+            </trans-unit>
+            <trans-unit id="product_quantity_not_numeric">
+                <source>product_quantity_not_numeric</source>
+                <target>Кол-во товара не является числом.</target>
+            </trans-unit>
+            <trans-unit id="basket_quantity_limit_min">
+                <source>basket_quantity_limit_min</source>
+                <target>У вас должно быть как минимум {{ limit }} позиций в корзине</target>
+            </trans-unit>
+            <trans-unit id="basket_quantity_limit_max">
+                <source>basket_quantity_limit_max</source>
+                <target>Осталось только {{ limit }} товаров в наличии, вы пытаетесь заказать {{ value }}.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

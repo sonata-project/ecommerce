@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="ru" datatype="plaintext" original="validators.en.xliff">
+        <body>
+            <trans-unit id="1">
+                <source>sonata.product.must_have_one_main_category</source>
+                <target>У товара должна быть одна главная категория</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
