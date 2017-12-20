@@ -11,7 +11,7 @@
         },
         {
             "name": "Sonata Community",
-            "homepage": "https://github.com/sonata-project/SonataUserBundle/contributors"
+            "homepage": "https://github.com/sonata-project/ecommerce/contributors"
         }
     ],
     "require" : {
@@ -76,8 +76,7 @@
             "Sonata\\OrderBundle\\Tests\\": "tests/OrderBundle",
             "Sonata\\PaymentBundle\\Tests\\": "tests/PaymentBundle",
             "Sonata\\PriceBundle\\Tests\\": "tests/PriceBundle",
-            "Sonata\\ProductBundle\\Tests\\": "tests/ProductBundle",
-            "Sonata\\Tests\\Helpers\\": "tests/Helpers"
+            "Sonata\\ProductBundle\\Tests\\": "tests/ProductBundle"
         }
     },
     "config": {
