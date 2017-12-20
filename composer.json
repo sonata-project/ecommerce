@@ -23,7 +23,7 @@
         "knplabs/knp-paginator-bundle": "^2.6",
         "kriswallsmith/buzz": "^0.15",
         "nelmio/api-doc-bundle": "^2.13",
-        "sonata-project/admin-bundle": "^3.28",
+        "sonata-project/admin-bundle": "^3.29",
         "sonata-project/block-bundle": "^3.8",
         "sonata-project/classification-bundle": "^3.3",
         "sonata-project/comment-bundle": "^3.1",
@@ -47,7 +47,7 @@
         "symfony/validator": "^2.8"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^3.3 || ^4.0"
+        "symfony/phpunit-bridge": "^3.4 || ^4.0"
     },
     "conflict": {
         "jms/serializer": "<0.13",

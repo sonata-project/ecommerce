@@ -61,32 +61,27 @@ class ProductAdmin extends AbstractAdmin
     /**
      * @return string
      */
-    public function getClass()
-    {
-        if ($this->hasSubject()) {
-            return get_class($this->getSubject());
-        } elseif ($class = $this->getProductClass()) {
-            return $class;
-        }
-
-        return parent::getClass();
-    }
-
-    /**
-     * @return string
-     */
     public function getProductType()
     {
         return $this->getRequest()->get('provider');
     }
 
     /**
+     * NEXT_MAJOR: remove this method.
+     *
      * Returns the product class from the provided request.
      *
      * @return string
+     *
+     * @deprecated since 2.2, will be removed in 3.0
      */
     public function getProductClass()
     {
+        @trigger_error(
+            'The '.__METHOD__.' method is deprecated since version 2.2 and will be removed in 3.0.',
+            E_USER_DEPRECATED
+        );
+
         if ($this->hasRequest()) {
             $code = $this->getProductType();
 
