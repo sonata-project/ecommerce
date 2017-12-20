@@ -11,46 +11,10 @@
 
 namespace Sonata\Component\Basket;
 
-use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Customer\CustomerInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketSessionFactory extends BaseBasketFactory
 {
-    /**
-     * @var \Sonata\Component\Basket\BasketManagerInterface
-     */
-    protected $basketManager;
-
-    /**
-     * @var \Sonata\Component\Basket\BasketBuilderInterface
-     */
-    protected $basketBuilder;
-
-    /**
-     * @var \Sonata\Component\Currency\CurrencyDetectorInterface
-     */
-    protected $currencyDetector;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
-     */
-    protected $session;
-
-    /**
-     * @param BasketManagerInterface    $basketManager
-     * @param BasketBuilderInterface    $basketBuilder
-     * @param CurrencyDetectorInterface $currencyDetector
-     * @param SessionInterface          $session
-     */
-    public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, SessionInterface $session)
-    {
-        $this->basketManager = $basketManager;
-        $this->basketBuilder = $basketBuilder;
-        $this->currencyDetector = $currencyDetector;
-        $this->session = $session;
-    }
-
     /**
      * {@inheritdoc}
      */
