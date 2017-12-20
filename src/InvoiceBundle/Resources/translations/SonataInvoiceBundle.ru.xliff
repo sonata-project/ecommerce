@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="en" target-language="ru" datatype="plaintext" original="SonataInvoiceBundle.en.xliff">
+        <body>
+            <!-- Begin - Titles -->
+            <trans-unit id="invoice">
+                <source>invoice</source>
+                <target>Счет</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.title_invoice">
+                <source>sonata.invoice.title_invoice</source>
+                <target>Счет</target>
+            </trans-unit>
+            <trans-unit id="subtitle_payment">
+                <source>subtitle_payment</source>
+                <target>Оплата</target>
+            </trans-unit>
+            <!-- End - Titles -->
+            <!-- Begin - Breadcrumb translations -->
+            <trans-unit id="breadcrumb.link_invoice_list">
+                <source>breadcrumb.link_invoice_list</source>
+                <target>Счет</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_invoice_edit">
+                <source>breadcrumb.link_invoice_edit</source>
+                <target>Редактировать</target>
+            </trans-unit>
+            <!-- End - Breadcrumb translations -->
+            <!-- Begin - List translations -->
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>ID</target>
+            </trans-unit>
+            <trans-unit id="list.label_reference">
+                <source>list.label_reference</source>
+                <target>Номер</target>
+            </trans-unit>
+            <trans-unit id="list.label_customer">
+                <source>list.label_customer</source>
+                <target>Покупатель</target>
+            </trans-unit>
+            <trans-unit id="list.label_status">
+                <source>list.label_status</source>
+                <target>Статус</target>
+            </trans-unit>
+            <trans-unit id="list.label_total_excl">
+                <source>list.label_total_excl</source>
+                <target>Итого без НДС</target>
+            </trans-unit>
+            <trans-unit id="list.label_total_inc">
+                <source>list.label_total_inc</source>
+                <target>Итого включая НДС</target>
+            </trans-unit>
+            <!-- End - List translations -->
+            <!-- Begin - Form translations -->
+            <trans-unit id="invoice.form.group_main_label">
+                <source>invoice.form.group_main_label</source>
+                <target>Общее</target>
+            </trans-unit>
+            <trans-unit id="invoice.form.group_billing_label">
+                <source>invoice.form.group_billing_label</source>
+                <target>Оплата</target>
+            </trans-unit>
+            <trans-unit id="invoice.form.group_misc_label">
+                <source>invoice.form.group_misc_label</source>
+                <target>Прочее</target>
+            </trans-unit>
+            <trans-unit id="form.label_reference">
+                <source>form.label_reference</source>
+                <target>Номер</target>
+            </trans-unit>
+            <trans-unit id="form.label_currency">
+                <source>form.label_currency</source>
+                <target>Валюта</target>
+            </trans-unit>
+            <trans-unit id="form.label_status">
+                <source>form.label_status</source>
+                <target>Статус</target>
+            </trans-unit>
+            <trans-unit id="form.label_total_inc">
+                <source>form.label_total_inc</source>
+                <target>Итого включая НДС</target>
+            </trans-unit>
+            <trans-unit id="form.label_total_excl">
+                <source>form.label_total_excl</source>
+                <target>Итого без НДС</target>
+            </trans-unit>
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Название</target>
+            </trans-unit>
+            <trans-unit id="form.label_phone">
+                <source>form.label_phone</source>
+                <target>Телефон</target>
+            </trans-unit>
+            <trans-unit id="form.label_address1">
+                <source>form.label_address1</source>
+                <target>Адрес 1</target>
+            </trans-unit>
+            <trans-unit id="form.label_address2">
+                <source>form.label_address2</source>
+                <target>Адрес 2</target>
+            </trans-unit>
+            <trans-unit id="form.label_address3">
+                <source>form.label_address3</source>
+                <target>Адрес 3</target>
+            </trans-unit>
+            <trans-unit id="form.label_city">
+                <source>form.label_city</source>
+                <target>Город</target>
+            </trans-unit>
+            <trans-unit id="form.label_postcode">
+                <source>form.label_postcode</source>
+                <target>Индекс</target>
+            </trans-unit>
+            <trans-unit id="form.label_country">
+                <source>form.label_country</source>
+                <target>Страна</target>
+            </trans-unit>
+            <trans-unit id="form.label_fax">
+                <source>form.label_fax</source>
+                <target>Факс</target>
+            </trans-unit>
+            <trans-unit id="form.label_email">
+                <source>form.label_email</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="form.label_mobile">
+                <source>form.label_mobile</source>
+                <target>Мобильный</target>
+            </trans-unit>
+            <trans-unit id="form.label_customer">
+                <source>form.label_customer</source>
+                <target>Покупатель</target>
+            </trans-unit>
+            <!-- End - Form translations -->
+            <!-- Begin - Status translations -->
+            <trans-unit id="status_open">
+                <source>status_open</source>
+                <target>Открыт</target>
+            </trans-unit>
+            <trans-unit id="status_paid">
+                <source>status_paid</source>
+                <target>Оплачен</target>
+            </trans-unit>
+            <trans-unit id="status_conflict">
+                <source>status_conflict</source>
+                <target>Конфликт</target>
+            </trans-unit>
+            <!-- End - Status translations -->
+            <!-- Begin - Invoice admin filters -->
+            <trans-unit id="filter.label_reference">
+                <source>filter.label_reference</source>
+                <target>Номер</target>
+            </trans-unit>
+            <trans-unit id="filter.label_customer">
+                <source>filter.label_customer</source>
+                <target>Покупатель</target>
+            </trans-unit>
+            <trans-unit id="filter.label_status">
+                <source>filter.label_status</source>
+                <target>Статус</target>
+            </trans-unit>
+            <!-- End - Invoice admin filters -->
+            <!-- Begin - Invoice view -->
+            <trans-unit id="sonata.invoice.subtitle_billing">
+                <source>sonata.invoice.subtitle_billing</source>
+                <target>Адрес выставления счета</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.subtitle_references">
+                <source>sonata.invoice.subtitle_references</source>
+                <target>Номера</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.references.date">
+                <source>sonata.invoice.references.date</source>
+                <target>Дата</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.references.invoice">
+                <source>sonata.invoice.references.invoice</source>
+                <target>Счет</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.list.title">
+                <source>sonata.invoice.elements.list.title</source>
+                <target>Позиции</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.id">
+                <source>sonata.invoice.elements.id</source>
+                <target>ID</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.label">
+                <source>sonata.invoice.elements.label</source>
+                <target>Навание</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.quantity">
+                <source>sonata.invoice.elements.quantity</source>
+                <target>Кол-во</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.unit_price">
+                <source>sonata.invoice.elements.unit_price</source>
+                <target>Цена за шт.</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.total_ex_vat">
+                <source>sonata.invoice.elements.total_ex_vat</source>
+                <target>Итого без НДС</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.elements.total_inc_vat">
+                <source>sonata.invoice.elements.total_inc_vat</source>
+                <target>Итого включая НДС</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.total_exc_vat">
+                <source>sonata.invoice.total_exc_vat</source>
+                <target>Итого без НДС</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.vat">
+                <source>sonata.invoice.vat</source>
+                <target>НДС</target>
+            </trans-unit>
+            <trans-unit id="sonata.invoice.total_inc_vat">
+                <source>sonata.invoice.total_inc_vat</source>
+                <target>Итого включая НДС</target>
+            </trans-unit>
+            <trans-unit id="sonata_invoice_view_vat">
+                <source>sonata_invoice_view_vat</source>
+                <target>НДС</target>
+            </trans-unit>
+            <!-- End - Invoice View -->
+            <!-- Begin - Invoice page titles translations -->
+            <trans-unit id="invoice_view_title">
+                <source>invoice_view_title</source>
+                <target>Счет</target>
+            </trans-unit>
+            <!-- End - Invoice page titles translations -->
+        </body>
+    </file>
+</xliff>
