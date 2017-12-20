@@ -18,7 +18,7 @@ use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Customer\CustomerInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketFactory extends BaseBasketFactory
 {
@@ -47,7 +47,7 @@ class BasketFactory extends BaseBasketFactory
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Session\Session
+     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     public function getSession()
     {
@@ -86,7 +86,7 @@ class BaseBasketFactoryTest extends TestCase
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
-        $session = $this->createMock(Session::class);
+        $session = $this->createMock(SessionInterface::class);
 
         $basketFactory = new BasketFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 

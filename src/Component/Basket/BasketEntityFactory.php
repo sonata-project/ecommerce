@@ -68,8 +68,12 @@ class BasketEntityFactory extends BaseBasketFactory
      */
     public function reset(BasketInterface $basket, $full = true)
     {
-        if ($full && $basket->getCustomerId()) {
-            $this->basketManager->delete($basket);
+        if ($full) {
+            if ($basket->getCustomerId()) {
+                $this->basketManager->delete($basket);
+            } else {
+                $this->clearSession($basket->getCustomer());
+            }
         } else {
             $basket->reset($full);
             $this->save($basket);
