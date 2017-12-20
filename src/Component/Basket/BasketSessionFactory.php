@@ -74,7 +74,11 @@ class BasketSessionFactory extends BaseBasketFactory
      */
     public function reset(BasketInterface $basket, $full = true)
     {
-        $basket->reset($full);
-        $this->save($basket);
+        if ($full) {
+            $this->clearSession($basket->getCustomer());
+        } else {
+            $basket->reset($full);
+            $this->save($basket);
+        }
     }
 }
