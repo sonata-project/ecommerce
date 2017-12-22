@@ -132,4 +132,39 @@ class BasketSessionFactoryTest extends TestCase
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->logout(new Request(), new Response(), $this->createMock(TokenInterface::class));
     }
+
+    public function testResetFullBasket()
+    {
+        $basket = $this->createMock(BasketInterface::class);
+        $basket->expects($this->once())->method('setCustomer');
+
+        $basketManager = $this->createMock(BasketManagerInterface::class);
+
+        $basketBuilder = $this->createMock(BasketBuilderInterface::class);
+        $basketBuilder->expects($this->once())->method('build');
+
+        $customer = $this->createMock(CustomerInterface::class);
+        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
+        $basket->expects($this->any())->method('getCustomer')->will($this->returnValue($customer));
+
+        $session = new Session(new MockArraySessionStorage());
+        $session->set('sonata/basket/factory/customer/1', $basket);
+
+        $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $currencyDetector->expects($this->any())
+            ->method('getCurrency')
+            ->will($this->returnValue($currency))
+        ;
+
+        $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
+
+        $basket = $factory->load($customer);
+
+        $factory->reset($basket, true);
+
+        $this->assertNull($session->get('sonata/basket/factory/customer/1'));
+        $this->assertNull($session->get('sonata/basket/factory/customer/new'));
+    }
 }
