@@ -2,6 +2,36 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.0](https://github.com/sonata-project/ecommerce/compare/2.1.1...2.2.0) - 2017-12-25
+### Added
+- Added missing `basket` property in `AddressType`
+- Added `discriminator-field-name` to fix JMS Serializer compatibility
+- Added russian translations
+
+### Changed
+- changed skeleton to create abstract class for Product Entity
+
+### Fixed
+- Made `choice` fields compatible with >=SF 2.7
+- usage of `MopaBootstrapBundle`
+- Removed `NotNull` constraint from `BaseDelivery` validation
+- Fixed usage of not persisted addresses when the customer is taken from a session.
+- Fix SonataProductExtension loading
+- Fixed usage of deprecated methods in controllers (Improve compatibility with SF 3)
+- Fixed `ProductCategoryManager` compatibility with PostgreSQL
+- Fixed clearing basket with deleted from db products
+- Removed not existing directory from autoload-dev
+- Fixed contributors homepage link
+- Fixed compatibility with SonataAdminBundle ^3.29
+- Fixed resetting full basket stored in session
+- Removed duplicated code from `BasketSessionFactory`
+
+### Deprecated
+- Deprecated `ProductAdmin::getProductClass` method
+
+### Removed
+- Support for old versions of PHP and Symfony.
+
 ## [2.1.1](https://github.com/sonata-project/ecommerce/compare/2.1.0...2.1.1) - 2017-04-04
 ### Changed
 - Replaced types for the FQCN's
