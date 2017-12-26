@@ -1,8 +1,8 @@
 UPGRADE 2.x
 ===========
 
-UPGRADE FROM 2.1.1 to 2.x
-=========================
+UPGRADE FROM 2.1 to 2.2
+=======================
 
 ### Sonata\CustomerBundle\Form\Type\AddressType
 
