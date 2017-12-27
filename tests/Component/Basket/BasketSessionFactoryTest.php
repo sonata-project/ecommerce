@@ -133,7 +133,7 @@ class BasketSessionFactoryTest extends TestCase
         $factory->logout(new Request(), new Response(), $this->createMock(TokenInterface::class));
     }
 
-    public function testResetFullBasket()
+    public function testResetFullBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('setCustomer');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,7 +25,7 @@ class ProductAdminTest extends TestCase
     /** @var ProductAdmin */
     private $productAdmin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->productAdmin = new ProductAdmin(
             null,
@@ -36,7 +38,7 @@ class ProductAdminTest extends TestCase
      * @group legacy
      * @expectedDeprecation The Sonata\ProductBundle\Admin\ProductAdmin::getProductClass method is deprecated since version 2.2 and will be removed in 3.0.
      */
-    public function testGetProductClassIsDeprecated()
+    public function testGetProductClassIsDeprecated(): void
     {
         $this->productAdmin->getProductClass();
     }
