@@ -20,7 +20,7 @@ use Sonata\CoreBundle\Model\PageableManagerInterface;
 interface BasketManagerInterface extends ManagerInterface, PageableManagerInterface
 {
     /**
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @param CustomerInterface $customer
      *
      * @return BasketInterface|null
      */

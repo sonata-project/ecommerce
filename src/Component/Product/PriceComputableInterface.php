@@ -34,8 +34,6 @@ interface PriceComputableInterface
     public function getUnitPrice($vat = false);
 
     /**
-     * Sets price.
-     *
      * @param float $price
      */
     public function setPrice($price);
@@ -50,30 +48,22 @@ interface PriceComputableInterface
     public function getPrice($vat = false);
 
     /**
-     * Sets VAT rate.
-     *
      * @param float $vatRate
      */
     public function setVatRate($vatRate);
 
     /**
-     * Gets VAT rate.
-     *
      * @return float
      */
     public function getVatRate();
 
     /**
-     * Sets quantity.
-     *
      * @param int $quantity
      */
     public function setQuantity($quantity);
 
     /**
-     * Gets quantity.
-     *
-     * @return int $quantity
+     * @return int
      */
     public function getQuantity();
 }

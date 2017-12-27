@@ -72,9 +72,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set productId.
-     *
-     * @param ProductInterface $product
+     * {@inheritdoc}
      */
     public function setProduct(ProductInterface $product): void
     {
@@ -82,9 +80,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get productId.
-     *
-     * @return int $productId
+     * {@inheritdoc}
      */
     public function getProduct()
     {
@@ -92,9 +88,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set code.
-     *
-     * @param $code
+     * {@inheritdoc}
      */
     public function setCode($code): void
     {
@@ -102,9 +96,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get class_name.
-     *
-     * @return string $className
+     * {@inheritdoc}
      */
     public function getCode()
     {
@@ -112,9 +104,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set per_item.
-     *
-     * @param bool $perItem
+     * {@inheritdoc}
      */
     public function setPerItem($perItem): void
     {
@@ -122,9 +112,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get per_item.
-     *
-     * @return bool $perItem
+     * {@inheritdoc}
      */
     public function getPerItem()
     {
@@ -132,9 +120,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set country code.
-     *
-     * @param $countryCode
+     * {@inheritdoc}
      */
     public function setCountryCode($countryCode): void
     {
@@ -142,9 +128,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get country.
-     *
-     * @return string $country
+     * {@inheritdoc}
      */
     public function getCountryCode()
     {
@@ -152,9 +136,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set zone.
-     *
-     * @param string $zone
+     * {@inheritdoc}
      */
     public function setZone($zone): void
     {
@@ -162,9 +144,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get zone.
-     *
-     * @return string $zone
+     * {@inheritdoc}
      */
     public function getZone()
     {
@@ -172,9 +152,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set enabled.
-     *
-     * @param bool $enabled
+     * {@inheritdoc}
      */
     public function setEnabled($enabled): void
     {
@@ -182,9 +160,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * {@inheritdoc}
      */
     public function getEnabled()
     {
@@ -192,9 +168,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
@@ -202,9 +176,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get updatedAt.
-     *
-     * @return \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -212,9 +184,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
@@ -222,9 +192,7 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * Get createdAt.
-     *
-     * @return \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -243,8 +211,6 @@ abstract class BaseDelivery implements DeliveryInterface
     }
 
     /**
-     * return delivery status list.
-     *
      * @return array
      */
     public static function getStatusList()

@@ -18,86 +18,62 @@ use Symfony\Component\Security\Core\User\UserInterface;
 interface CustomerInterface
 {
     /**
-     * Set createdAt.
-     *
      * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt.
-     *
      * @return \DateTime createdAt
      */
     public function getCreatedAt();
 
     /**
-     * Set firstname.
-     *
      * @param string $firstname
      */
     public function setFirstname($firstname);
 
     /**
-     * Get firstname.
-     *
-     * @return string $firstname
+     * @return string
      */
     public function getFirstname();
 
     /**
-     * Get full name.
-     *
      * @return string
      */
     public function getFullname();
 
     /**
-     * Set lastname.
-     *
      * @param string $lastname
      */
     public function setLastname($lastname);
 
     /**
-     * Get lastname.
-     *
-     * @return string $lastname
+     * @return string
      */
     public function getLastname();
 
     /**
-     * Set updatedAt.
-     *
      * @param \DateTime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt.
-     *
-     * @return \DateTime $updatedAt
+     * @return \DateTime
      */
     public function getUpdatedAt();
 
     /**
-     * Set user.
-     *
      * @param UserInterface $user
      */
     public function setUser(UserInterface $user);
 
     /**
-     * Get user.
-     *
-     * @return UserInterface $user
+     * @return UserInterface
      */
     public function getUser();
 
     /**
-     * Get id.
-     *
-     * @return int $id
+     * @return int
      */
     public function getId();
 
@@ -117,14 +93,14 @@ interface CustomerInterface
     public function setLocale($locale);
 
     /**
-     * @param $type
+     * @param int $type
      *
-     * @return array
+     * @return AddressInterface[]
      */
     public function getAddressesByType($type);
 
     /**
-     * @return array
+     * @return AddressInterface[]
      */
     public function getAddresses();
 }

@@ -69,8 +69,14 @@ class PaymentHandler implements PaymentHandlerInterface
      * @param BackendInterface            $notificationBackend
      * @param EventDispatcherInterface    $eventDispatcher
      */
-    public function __construct(OrderManagerInterface $orderManager, PaymentSelectorInterface $paymentSelector, ReferenceInterface $referenceGenerator, TransactionManagerInterface $transactionManager, BackendInterface $notificationBackend, EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        OrderManagerInterface $orderManager,
+        PaymentSelectorInterface $paymentSelector,
+        ReferenceInterface $referenceGenerator,
+        TransactionManagerInterface $transactionManager,
+        BackendInterface $notificationBackend,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->orderManager = $orderManager;
         $this->paymentSelector = $paymentSelector;
         $this->referenceGenerator = $referenceGenerator;
@@ -194,10 +200,10 @@ class PaymentHandler implements PaymentHandlerInterface
      *
      * @param TransactionInterface $transaction The request's transaction (will be linked to the order in the process)
      *
-     * @throws \Doctrine\ORM\EntityNotFoundException
+     * @throws EntityNotFoundException
      * @throws InvalidTransactionException
      *
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     protected function getValidOrder(TransactionInterface $transaction)
     {
@@ -233,7 +239,7 @@ class PaymentHandler implements PaymentHandlerInterface
      *
      * @throws PaymentNotFoundException
      *
-     * @return \Sonata\Component\Payment\TransactionInterface
+     * @return TransactionInterface
      */
     protected function createTransaction(Request $request)
     {

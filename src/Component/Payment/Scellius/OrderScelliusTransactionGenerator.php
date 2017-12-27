@@ -22,7 +22,7 @@ use Sonata\Component\Order\OrderInterface;
 class OrderScelliusTransactionGenerator implements ScelliusTransactionGeneratorInterface
 {
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param OrderInterface $order
      *
      * @throws \RuntimeException
      *

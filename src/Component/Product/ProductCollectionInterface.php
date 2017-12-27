@@ -27,72 +27,52 @@ use Sonata\ClassificationBundle\Model\CollectionInterface;
 interface ProductCollectionInterface
 {
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * @return bool
      */
     public function getEnabled();
 
     /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
+     * @param \DateTime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt.
-     *
-     * @return \DateTime $updatedAt
+     * @return \DateTime
      */
     public function getUpdatedAt();
 
     /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
+     * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt.
-     *
-     * @return \Datetime $createdAt
+     * @return \Datetime
      */
     public function getCreatedAt();
 
     /**
-     * Set Product.
-     *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
     /**
-     * Get Product.
-     *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set Collection.
-     *
      * @param CollectionInterface $collection
      */
     public function setCollection(CollectionInterface $collection);
 
     /**
-     * Get Collection.
-     *
-     * @return CollectionInterface $collection
+     * @return CollectionInterface
      */
     public function getCollection();
 }

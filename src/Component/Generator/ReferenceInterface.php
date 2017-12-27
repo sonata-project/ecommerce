@@ -21,8 +21,7 @@ interface ReferenceInterface
     /**
      * Append a valid reference number to the invoice, the order must be persisted first.
      *
-     *
-     * @param \Sonata\Component\Invoice\InvoiceInterface $invoice
+     * @param InvoiceInterface $invoice
      *
      * @throws \RuntimeException
      */
@@ -31,8 +30,7 @@ interface ReferenceInterface
     /**
      * Append a valid reference number to the order, the order must be persisted first.
      *
-     *
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param OrderInterface $order
      *
      * @throws \RuntimeException
      */

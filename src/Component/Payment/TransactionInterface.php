@@ -42,12 +42,12 @@ interface TransactionInterface
     public const STATUS_ORDER_NOT_OPEN = 12; // the order is not open (so a previous transaction already alter the order)
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order);
 
     /**
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     public function getOrder();
 
@@ -105,8 +105,6 @@ interface TransactionInterface
     public function getStatusCode();
 
     /**
-     * return status list.
-     *
      * @return array
      */
     public static function getStatusList();

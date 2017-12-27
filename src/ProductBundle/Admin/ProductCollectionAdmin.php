@@ -69,7 +69,7 @@ class ProductCollectionAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     * {@inheritdoc}
      */
     public function configureDatagridFilters(DatagridMapper $filter): void
     {

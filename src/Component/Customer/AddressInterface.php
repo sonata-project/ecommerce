@@ -22,83 +22,77 @@ interface AddressInterface
     public function getId();
 
     /**
-     * @return string return the address name
+     * @return string
      */
     public function getName();
 
     /**
-     * @return string return the address firstname
+     * @return string
      */
     public function getFirstname();
 
     /**
-     * @return string return the address lastname
+     * @return string
      */
     public function getLastname();
 
     /**
-     * @return string return the address (line 1)
+     * @return string
      */
     public function getAddress1();
 
     /**
-     * @return string return the address (line 2)
+     * @return string
      */
     public function getAddress2();
 
     /**
-     * @return string return the address (line 3)
+     * @return string
      */
     public function getAddress3();
 
     /**
-     * @return string return the postcode
+     * @return string
      */
     public function getPostcode();
 
     /**
-     * @return string return the city
+     * @return string
      */
     public function getCity();
 
     /**
-     * @return string return the ISO country code
+     * @return string
      */
     public function getCountryCode();
 
     /**
-     * @return string return the phone number linked to the address
+     * @return string
      */
     public function getPhone();
 
     /**
-     * @return bool Is it the current address?
+     * @return bool
      */
     public function getCurrent();
 
     /**
-     * Sets if this address is the current.
-     *
      * @param bool $current
      */
     public function setCurrent($current);
 
     /**
-     * Gets address' customer.
-     *
      * @return CustomerInterface
      */
     public function getCustomer();
 
     /**
-     * Sets address' customer.
-     *
      * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer);
 
     /**
-     * @return int Address' type
+     * @return int
      */
     public function getType();
 

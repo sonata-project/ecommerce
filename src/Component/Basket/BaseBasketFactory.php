@@ -29,22 +29,22 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     public const SESSION_BASE_NAME = 'sonata/basket/factory/customer/';
 
     /**
-     * @var \Sonata\Component\Basket\BasketManagerInterface
+     * @var BasketManagerInterface
      */
     protected $basketManager;
 
     /**
-     * @var \Sonata\Component\Basket\BasketBuilderInterface
+     * @var BasketBuilderInterface
      */
     protected $basketBuilder;
 
     /**
-     * @var \Sonata\Component\Currency\CurrencyDetectorInterface
+     * @var CurrencyDetectorInterface
      */
     protected $currencyDetector;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     * @var SessionInterface
      */
     protected $session;
 
@@ -121,7 +121,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     /**
      * Get the name of the session variable.
      *
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @param CustomerInterface $customer
      *
      * @return string
      */

@@ -27,12 +27,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 interface ProductProviderInterface
 {
     /**
-     * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
+     * @param BasketElementManagerInterface $basketElementManager
      */
     public function setBasketElementManager(BasketElementManagerInterface $basketElementManager);
 
     /**
-     * @return \Sonata\Component\Basket\BasketElementManagerInterface
+     * @return BasketElementManagerInterface
      */
     public function getBasketElementManager();
 
@@ -62,40 +62,40 @@ interface ProductProviderInterface
     public function getBaseControllerName();
 
     /**
-     * @param \Sonata\Component\Product\ProductInterface $product      A Sonata product instance
-     * @param \Symfony\Component\Form\FormBuilder        $formBuilder  Symfony form builder
-     * @param bool                                       $showQuantity Specifies if quantity field will be displayed (default true)
-     * @param array                                      $options      An options array
+     * @param ProductInterface $product      A Sonata product instance
+     * @param FormBuilder      $formBuilder  Symfony form builder
+     * @param bool             $showQuantity Specifies if quantity field will be displayed (default true)
+     * @param array            $options      An options array
      */
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = []);
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Symfony\Component\Form\FormBuilder             $formBuilder
-     * @param array                                           $options
+     * @param BasketElementInterface $basketElement
+     * @param FormBuilder            $formBuilder
+     * @param array                  $options
      */
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = []);
 
     /**
      * return true if the basket element is still valid.
      *
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
-     * @param ProductInterface                                $product
-     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     * @param BasketInterface        $basket
+     * @param ProductInterface       $product
+     * @param BasketElementInterface $newBasketElement
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * Merge a product with another when the product is already present into the basket.
      *
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
-     * @param ProductInterface                                $product
-     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
+     * @param BasketInterface        $basket
+     * @param ProductInterface       $product
+     * @param BasketElementInterface $newBasketElement
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
+     * @param BasketElementInterface $basketElement
      *
      * @return bool true if the basket element is still valid
      */
@@ -125,9 +125,9 @@ interface ProductProviderInterface
     /**
      * Return true if the product can be added to the provided basket.
      *
-     * @param \Sonata\Component\Basket\BasketInterface   $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
-     * @param array                                      $options
+     * @param BasketInterface  $basket
+     * @param ProductInterface $product
+     * @param array            $options
      *
      * @return bool
      */
@@ -142,7 +142,7 @@ interface ProductProviderInterface
     public function createBasketElement(ProductInterface $product = null, array $options = []);
 
     /**
-     * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
+     * @param ShowMapper $showMapper
      */
     public function configureShowFields(ShowMapper $showMapper);
 
@@ -167,9 +167,9 @@ interface ProductProviderInterface
     public function buildCreateForm(FormMapper $formMapper);
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param null|\Sonata\Component\Product\ProductInterface $product
-     * @param array                                           $options
+     * @param BasketElementInterface $basketElement
+     * @param null|ProductInterface  $product
+     * @param array                  $options
      */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []);
 
@@ -179,9 +179,9 @@ interface ProductProviderInterface
      *
      * If the basket is valid it will then replace the one in session
      *
-     * @param \Sonata\CoreBundle\Validator\ErrorElement       $errorElement
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param ErrorElement           $errorElement
+     * @param BasketElementInterface $basketElement
+     * @param BasketInterface        $basket
      */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket);
 
@@ -193,7 +193,7 @@ interface ProductProviderInterface
      *
      * @throws \RuntimeException
      *
-     * @return \Sonata\Component\Product\ProductInterface
+     * @return ProductInterface
      */
     public function createVariation(ProductInterface $product, $copyDependencies = true);
 
@@ -284,7 +284,7 @@ interface ProductProviderInterface
     /**
      * return the stock available for the current product.
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param ProductInterface $product
      *
      * @return int the stock available
      */

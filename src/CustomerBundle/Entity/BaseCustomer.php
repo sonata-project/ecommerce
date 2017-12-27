@@ -16,6 +16,7 @@ namespace Sonata\CustomerBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseCustomer implements CustomerInterface
@@ -85,15 +86,18 @@ abstract class BaseCustomer implements CustomerInterface
     protected $user;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var ArrayCollection|AddressInterface[]
      */
     protected $addresses;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var ArrayCollection|OrderInterface[]
      */
     protected $orders;
 
+    /**
+     * @var string
+     */
     protected $locale;
 
     /**
@@ -110,7 +114,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
@@ -128,13 +132,16 @@ abstract class BaseCustomer implements CustomerInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
+    /**
+     * @return string
+     */
     public function getAdminTitle()
     {
         return $this->getFullname();
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getTitle()
     {
@@ -142,7 +149,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $title
      */
     public function setTitle($title): void
     {
@@ -164,8 +171,6 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * Get title name.
-     *
      * @return string
      */
     public function getTitleName()
@@ -224,7 +229,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $email
      */
     public function setEmail($email): void
     {
@@ -232,7 +237,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return \DateTime
      */
     public function getBirthDate()
     {
@@ -240,7 +245,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param \DateTime|null $birthDate
      */
     public function setBirthDate(\DateTime $birthDate = null): void
     {
@@ -248,7 +253,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getBirthPlace()
     {
@@ -256,7 +261,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $birthPlace
      */
     public function setBirthPlace($birthPlace): void
     {
@@ -264,7 +269,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getPhoneNumber()
     {
@@ -272,7 +277,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $phoneNumber
      */
     public function setPhoneNumber($phoneNumber): void
     {
@@ -288,7 +293,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $mobileNumber
      */
     public function setMobileNumber($mobileNumber): void
     {
@@ -296,7 +301,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string string
      */
     public function getFaxNumber()
     {
@@ -304,7 +309,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $faxNumber
      */
     public function setFaxNumber($faxNumber): void
     {
@@ -360,7 +365,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param AddressInterface $address
      */
     public function addAddress(AddressInterface $address): void
     {
@@ -408,7 +413,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param ArrayCollection|OrderInterface[] $orders
      */
     public function setOrders($orders): void
     {
@@ -416,7 +421,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return ArrayCollection|OrderInterface[]
      */
     public function getOrders()
     {
@@ -424,7 +429,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param bool $isFake
      */
     public function setIsFake($isFake): void
     {
@@ -432,7 +437,7 @@ abstract class BaseCustomer implements CustomerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return bool
      */
     public function getIsFake()
     {

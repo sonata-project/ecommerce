@@ -18,16 +18,12 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 interface ProductCategoryInterface
 {
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * @return bool
      */
     public function getEnabled();
 
@@ -41,21 +37,17 @@ interface ProductCategoryInterface
     /**
      * Get if product category is the main category.
      *
-     * @return bool $main
+     * @return bool
      */
     public function getMain();
 
     /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
+     * @param \DateTime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt.
-     *
-     * @return \DateTime $updatedAt
+     * @return \DateTime
      */
     public function getUpdatedAt();
 
@@ -67,37 +59,27 @@ interface ProductCategoryInterface
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt.
-     *
-     * @return \Datetime $createdAt
+     * @return \Datetime
      */
     public function getCreatedAt();
 
     /**
-     * Set Product.
-     *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
     /**
-     * Get Product.
-     *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set Category.
-     *
      * @param CategoryInterface $category
      */
     public function setCategory(CategoryInterface $category);
 
     /**
-     * Get Category.
-     *
-     * @return CategoryInterface $category
+     * @return CategoryInterface
      */
     public function getCategory();
 }

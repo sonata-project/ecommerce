@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 abstract class BaseTransformer
 {
     /**
-     * @var the transformer option
+     * @var array
      */
     protected $options;
 

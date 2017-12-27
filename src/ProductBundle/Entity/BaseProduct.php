@@ -15,11 +15,13 @@ namespace Sonata\ProductBundle\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
+use Exporter\Exception\InvalidMethodCallException;
 use Sonata\Component\Product\DeliveryInterface;
 use Sonata\Component\Product\PackageInterface;
 use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Tests\Product\Collection;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -108,17 +110,17 @@ abstract class BaseProduct implements ProductInterface
     protected $createdAt;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|PackageInterface[]
      */
     protected $packages;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|DeliveryInterface[]
      */
     protected $deliveries;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|ProductCollectionInterface[]
      */
     protected $productCategories;
 
@@ -148,7 +150,7 @@ abstract class BaseProduct implements ProductInterface
     protected $enabledVariations;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|Collection[]
      */
     protected $productCollections;
 
@@ -414,7 +416,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function setQuantity($quantity): void
     {
-        throw new \InvalidMethodCallException('This method is not used');
+        throw new InvalidMethodCallException('This method is not used');
     }
 
     /**
@@ -422,7 +424,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function getQuantity(): void
     {
-        throw new \InvalidMethodCallException('This method is not used');
+        throw new InvalidMethodCallException('This method is not used');
     }
 
     /**
@@ -710,7 +712,7 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return bool
      */
     public function hasVariations()
     {

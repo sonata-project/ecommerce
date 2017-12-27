@@ -18,23 +18,23 @@ use Sonata\Component\Customer\CustomerSelectorInterface;
 class Loader
 {
     /**
-     * @var \Sonata\Component\Basket\BasketFactoryInterface
+     * @var BasketFactoryInterface
      */
     protected $basketFactory;
 
     /**
-     * @var \Sonata\Component\Customer\CustomerSelectorInterface
+     * @var CustomerSelectorInterface
      */
     protected $customerSelector;
 
     /**
-     * @var \Sonata\Component\Basket\BasketInterface
+     * @var BasketInterface
      */
     protected $basket;
 
     /**
-     * @param \Sonata\Component\Basket\BasketFactoryInterface      $basketFactory
-     * @param \Sonata\Component\Customer\CustomerSelectorInterface $customerSelector
+     * @param BasketFactoryInterface    $basketFactory
+     * @param CustomerSelectorInterface $customerSelector
      */
     public function __construct(BasketFactoryInterface $basketFactory, CustomerSelectorInterface $customerSelector)
     {
@@ -47,7 +47,7 @@ class Loader
      *
      * @throws \Exception|\RuntimeException
      *
-     * @return \Sonata\Component\Basket\BasketInterface
+     * @return BasketInterface
      */
     public function getBasket()
     {

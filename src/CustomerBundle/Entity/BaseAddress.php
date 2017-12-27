@@ -79,17 +79,17 @@ abstract class BaseAddress implements AddressInterface
     protected $phone;
 
     /**
-     * @var datetime
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var datetime
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * @var
+     * @var CustomerInterface
      */
     protected $customer;
 
@@ -98,6 +98,9 @@ abstract class BaseAddress implements AddressInterface
         $this->setCurrent(false);
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();
@@ -166,6 +169,9 @@ abstract class BaseAddress implements AddressInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
+    /**
+     * @return array
+     */
     public static function getTypesList()
     {
         return [
@@ -176,9 +182,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set current.
-     *
-     * @param bool $current
+     * {@inheritdoc}
      */
     public function setCurrent($current): void
     {
@@ -186,9 +190,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get current.
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function getCurrent()
     {
@@ -196,8 +198,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set type.
-     *
      * @param int $type
      */
     public function setType($type): void
@@ -205,6 +205,9 @@ abstract class BaseAddress implements AddressInterface
         $this->type = $type;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTypeCode()
     {
         $types = self::getTypesList();
@@ -213,9 +216,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get type.
-     *
-     * @return int $type
+     * {@inheritdoc}
      */
     public function getType()
     {
@@ -223,8 +224,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set firstname.
-     *
      * @param string $firstname
      */
     public function setFirstname($firstname): void
@@ -233,9 +232,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get firstname.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getFirstname()
     {
@@ -243,8 +240,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set lastname.
-     *
      * @param string $lastname
      */
     public function setLastname($lastname): void
@@ -253,9 +248,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get lastname.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getLastname()
     {
@@ -263,8 +256,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set address1.
-     *
      * @param string $address1
      */
     public function setAddress1($address1): void
@@ -273,9 +264,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get address1.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getAddress1()
     {
@@ -283,8 +272,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set address2.
-     *
      * @param string $address2
      */
     public function setAddress2($address2): void
@@ -293,9 +280,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get address2.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getAddress2()
     {
@@ -303,8 +288,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set address3.
-     *
      * @param string $address3
      */
     public function setAddress3($address3): void
@@ -313,9 +296,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get address3.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getAddress3()
     {
@@ -323,8 +304,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set postcode.
-     *
      * @param string $postcode
      */
     public function setPostcode($postcode): void
@@ -333,9 +312,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get postcode.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getPostcode()
     {
@@ -343,8 +320,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set city.
-     *
      * @param string $city
      */
     public function setCity($city): void
@@ -353,9 +328,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get city.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCity()
     {
@@ -363,8 +336,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set countryCode.
-     *
      * @param string $countryCode
      */
     public function setCountryCode($countryCode): void
@@ -373,9 +344,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get countryCode.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getCountryCode()
     {
@@ -383,8 +352,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set phone.
-     *
      * @param string $phone
      */
     public function setPhone($phone): void
@@ -393,9 +360,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get phone.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getPhone()
     {
@@ -403,9 +368,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set updatedAt.
-     *
-     * @param \Datetime $updatedAt
+     * @param \Datetime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
@@ -413,8 +376,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get updatedAt.
-     *
      * @return \Datetime
      */
     public function getUpdatedAt()
@@ -423,9 +384,7 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Set createdAt.
-     *
-     * @param \Datetime $createdAt
+     * @param \Datetime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
@@ -433,8 +392,6 @@ abstract class BaseAddress implements AddressInterface
     }
 
     /**
-     * Get createdAt.
-     *
      * @return \Datetime
      */
     public function getCreatedAt()
@@ -442,11 +399,17 @@ abstract class BaseAddress implements AddressInterface
         return $this->createdAt;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName($name): void
     {
         $this->name = $name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return $this->name;
@@ -489,11 +452,17 @@ abstract class BaseAddress implements AddressInterface
         return $this->getFullAddress('<br/>');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCustomer(CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCustomer()
     {
         return $this->customer;

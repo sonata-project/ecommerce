@@ -412,7 +412,7 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param OrderInterface $order
      *
      * @return string
      */

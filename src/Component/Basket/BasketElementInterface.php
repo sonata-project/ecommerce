@@ -16,6 +16,8 @@ namespace Sonata\Component\Basket;
 use Sonata\Component\Product\PriceComputableInterface;
 use Sonata\Component\Product\ProductDefinition;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\Component\Product\ProductProviderInterface;
 
 interface BasketElementInterface extends PriceComputableInterface
 {
@@ -152,17 +154,17 @@ interface BasketElementInterface extends PriceComputableInterface
     public function getDelete();
 
     /**
-     * @param \Sonata\Component\Product\ProductDefinition $productDefinition
+     * @param ProductDefinition $productDefinition
      */
     public function setProductDefinition(ProductDefinition $productDefinition);
 
     /**
-     * @return \Sonata\Component\Product\ProductManagerInterface
+     * @return ProductManagerInterface
      */
     public function getProductManager();
 
     /**
-     * @return \Sonata\Component\Product\ProductProviderInterface
+     * @return ProductProviderInterface
      */
     public function getProductProvider();
 

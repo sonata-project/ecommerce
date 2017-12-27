@@ -37,7 +37,7 @@ class CustomerAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper): void
     {
@@ -71,7 +71,7 @@ class CustomerAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
+     * {@inheritdoc}
      */
     public function configureListFields(ListMapper $list): void
     {
@@ -86,7 +86,7 @@ class CustomerAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Show\ShowMapper $filter
+     * {@inheritdoc}
      */
     public function configureShowFields(ShowMapper $filter): void
     {
@@ -110,7 +110,7 @@ class CustomerAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     * {@inheritdoc}
      */
     public function configureDatagridFilters(DatagridMapper $filter): void
     {

@@ -58,8 +58,8 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param $config
+     * @param ContainerBuilder $container
+     * @param array            $config
      */
     public function registerParameters(ContainerBuilder $container, array $config): void
     {
@@ -159,7 +159,7 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param ContainerBuilder $container
      * @param $selector
      */
     public function configureSelector(ContainerBuilder $container, $selector): void
@@ -168,8 +168,8 @@ class SonataPaymentExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array                                                   $transformers
+     * @param ContainerBuilder $container
+     * @param array            $transformers
      */
     public function configureTransformer(ContainerBuilder $container, array $transformers): void
     {

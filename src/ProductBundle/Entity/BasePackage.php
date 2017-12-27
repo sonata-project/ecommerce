@@ -75,9 +75,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set width.
-     *
-     * @param float $width
+     * {@inheritdoc}
      */
     public function setWidth($width): void
     {
@@ -85,9 +83,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get width.
-     *
-     * @return float $width
+     * {@inheritdoc}
      */
     public function getWidth()
     {
@@ -95,9 +91,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set height.
-     *
-     * @param float $height
+     * {@inheritdoc}
      */
     public function setHeight($height): void
     {
@@ -105,9 +99,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get height.
-     *
-     * @return float $height
+     * {@inheritdoc}
      */
     public function getHeight()
     {
@@ -115,9 +107,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set length.
-     *
-     * @param float $length
+     * {@inheritdoc}
      */
     public function setLength($length): void
     {
@@ -125,9 +115,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get length.
-     *
-     * @return float $length
+     * {@inheritdoc}
      */
     public function getLength()
     {
@@ -135,9 +123,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set weight.
-     *
-     * @param float $weight
+     * {@inheritdoc}
      */
     public function setWeight($weight): void
     {
@@ -145,9 +131,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get weight.
-     *
-     * @return float $weight
+     * {@inheritdoc}
      */
     public function getWeight()
     {
@@ -155,9 +139,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set enabled.
-     *
-     * @param bool $enabled
+     * {@inheritdoc}
      */
     public function setEnabled($enabled): void
     {
@@ -165,9 +147,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * {@inheritdoc}
      */
     public function getEnabled()
     {
@@ -175,9 +155,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
@@ -185,9 +163,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get updatedAt.
-     *
-     * @return \DateTime $updatedAt
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -195,9 +171,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
@@ -205,9 +179,7 @@ abstract class BasePackage implements PackageInterface
     }
 
     /**
-     * Get createdAt.
-     *
-     * @return \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {

@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\PaymentBundle\Consumer;
 
+use Sonata\Component\Order\OrderElementManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool as ProductPool;
+use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Sonata\CoreBundle\Model\ManagerInterface;
 use Sonata\NotificationBundle\Consumer\ConsumerEvent;
 use Sonata\NotificationBundle\Consumer\ConsumerInterface;
 
@@ -29,7 +30,7 @@ use Sonata\NotificationBundle\Consumer\ConsumerInterface;
 class PaymentProcessOrderElementConsumer implements ConsumerInterface
 {
     /**
-     * @var ManagerInterface
+     * @var OrderElementManagerInterface
      */
     protected $orderElementManager;
 
@@ -39,10 +40,10 @@ class PaymentProcessOrderElementConsumer implements ConsumerInterface
     protected $productPool;
 
     /**
-     * @param ManagerInterface $orderElementManager
-     * @param ProductPool      $productPool
+     * @param OrderElementManagerInterface $orderElementManager
+     * @param ProductPool                  $productPool
      */
-    public function __construct(ManagerInterface $orderElementManager, ProductPool $productPool)
+    public function __construct(OrderElementManagerInterface $orderElementManager, ProductPool $productPool)
     {
         $this->orderElementManager = $orderElementManager;
         $this->productPool = $productPool;
@@ -102,7 +103,7 @@ class PaymentProcessOrderElementConsumer implements ConsumerInterface
      *
      * @param string $productType
      *
-     * @return ManagerInterface
+     * @return ProductManagerInterface
      */
     protected function getProductManager($productType)
     {

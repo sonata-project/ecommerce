@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Customer;
 
+use Sonata\Component\Basket\BasketInterface;
 use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -22,12 +23,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CustomerSelector implements CustomerSelectorInterface
 {
     /**
-     * @var \Sonata\Component\Customer\CustomerManagerInterface
+     * @var CustomerManagerInterface
      */
     private $customerManager;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var SessionInterface
      */
     private $session;
 
@@ -72,7 +73,7 @@ class CustomerSelector implements CustomerSelectorInterface
      *
      * @throws \RuntimeException
      *
-     * @return \Sonata\Component\Customer\CustomerInterface
+     * @return CustomerInterface
      */
     public function get()
     {
@@ -116,7 +117,7 @@ class CustomerSelector implements CustomerSelectorInterface
     }
 
     /**
-     * @return \Sonata\Component\Basket\BasketInterface
+     * @return BasketInterface
      */
     private function getBasket()
     {

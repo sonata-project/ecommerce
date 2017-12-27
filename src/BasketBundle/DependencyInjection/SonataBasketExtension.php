@@ -65,8 +65,8 @@ class SonataBasketExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param $config
+     * @param ContainerBuilder $container
+     * @param array            $config
      */
     public function registerParameters(ContainerBuilder $container, array $config): void
     {

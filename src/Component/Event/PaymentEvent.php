@@ -51,7 +51,7 @@ class PaymentEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     public function getOrder()
     {
@@ -59,7 +59,7 @@ class PaymentEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Payment\TransactionInterface
+     * @return TransactionInterface
      */
     public function getTransaction()
     {
@@ -67,7 +67,7 @@ class PaymentEvent extends Event
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function getResponse()
     {

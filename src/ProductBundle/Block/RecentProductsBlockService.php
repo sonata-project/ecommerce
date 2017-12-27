@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Block;
 
-use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -32,7 +31,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class RecentProductsBlockService extends BaseBlockService
 {
     /**
-     * @var EntityRepository
+     * @var BaseProductRepository
      */
     protected $productRepository;
 

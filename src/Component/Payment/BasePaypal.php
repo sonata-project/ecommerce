@@ -57,8 +57,8 @@ abstract class BasePaypal extends BasePayment
     protected $webConnectorProvider = null;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface              $router
-     * @param null|\Symfony\Component\Translation\TranslatorInterface $translator
+     * @param RouterInterface          $router
+     * @param null|TranslatorInterface $translator
      */
     public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
     {
@@ -120,7 +120,7 @@ abstract class BasePaypal extends BasePayment
     /**
      * Check openssl configuration, throw an RuntimeException if something is wrong.
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function checkPaypalFiles(): void
     {
@@ -201,7 +201,6 @@ abstract class BasePaypal extends BasePayment
     /**
      * Encrypt paypal information using openssl with a buffer.
      *
-     *
      * @param $hash
      *
      * @throws \RuntimeException
@@ -261,7 +260,6 @@ abstract class BasePaypal extends BasePayment
 
     /**
      * Encrypt paypal information using openssl with a temporary file.
-     *
      *
      * @param $hash
      *

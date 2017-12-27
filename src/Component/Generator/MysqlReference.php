@@ -64,7 +64,7 @@ class MysqlReference implements ReferenceInterface
      *
      * @throws \Exception
      *
-     * @return Exception|string
+     * @return \Exception|string
      */
     protected function generateReference($object, $tableName)
     {

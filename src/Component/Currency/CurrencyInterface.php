@@ -33,11 +33,4 @@ interface CurrencyInterface
      * @return bool
      */
     public function equals($currency);
-
-    /*
-     * Returns currency's symbol
-     *
-     * @return string
-     */
-//     public function getSymbol();
 }

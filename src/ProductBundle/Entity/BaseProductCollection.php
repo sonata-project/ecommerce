@@ -44,6 +44,9 @@ abstract class BaseProductCollection implements ProductCollectionInterface
      */
     protected $collection;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return ($this->getProduct() ? $this->getProduct()->getName() : 'null').' - '.($this->getCollection() ? $this->getCollection()->getName() : 'null');

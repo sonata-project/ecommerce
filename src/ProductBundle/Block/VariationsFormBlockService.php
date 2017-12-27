@@ -33,19 +33,20 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 class VariationsFormBlockService extends BaseBlockService
 {
     /**
-     * @var \Sonata\Component\Product\Pool
+     * @var Pool
      */
     protected $pool;
 
     /**
-     * @var \Symfony\Component\Form\FormFactoryInterface
+     * @var FormFactoryInterface
      */
     protected $formFactory;
 
     /**
-     * @param string          $name
-     * @param EngineInterface $templating
-     * @param Pool            $productPool
+     * @param string               $name
+     * @param EngineInterface      $templating
+     * @param Pool                 $productPool
+     * @param FormFactoryInterface $formFactory
      */
     public function __construct($name, EngineInterface $templating, Pool $productPool, FormFactoryInterface $formFactory)
     {

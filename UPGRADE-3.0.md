@@ -32,3 +32,6 @@ If you have implemented custom `CustomerSelector` you must adapt constructor arg
 
 ## ProductInterface
 `ProductInterface::validateOneMainCategory` now uses `Symfony\Component\Validator\Context\ExecutionContextInterface` instead of `Symfony\Component\Validator\ExecutionContextInterface`
+
+## ProductManagerInterface
+`ProductManagerInterface::findInSameCollections`, `ProductManagerInterface::findParentsInSameCollections` signatures were updated.

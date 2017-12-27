@@ -39,7 +39,7 @@ abstract class BasePayment implements PaymentInterface
     protected $transformers;
 
     /**
-     * @var \Psr\Log\LoggerInterface;
+     * @var LoggerInterface;
      */
     protected $logger;
 
@@ -54,7 +54,7 @@ abstract class BasePayment implements PaymentInterface
     protected $enabled;
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param OrderInterface $order
      *
      * @throws \RuntimeException
      *

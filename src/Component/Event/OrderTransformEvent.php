@@ -35,7 +35,7 @@ class OrderTransformEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     public function getOrder()
     {

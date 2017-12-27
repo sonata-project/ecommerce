@@ -21,33 +21,37 @@ use Sonata\Component\Product\Pool;
 class BasketBuilder implements BasketBuilderInterface
 {
     /**
-     * @var \Sonata\Component\Product\Pool
+     * @var Pool
      */
     protected $productPool;
 
     /**
-     * @var \Sonata\Component\Customer\AddressManagerInterface
+     * @var AddressManagerInterface
      */
     protected $addressManager;
 
     /**
-     * @var \Sonata\Component\Delivery\Pool
+     * @var DeliveryPool
      */
     protected $deliveryPool;
 
     /**
-     * @var \Sonata\Component\Payment\Pool
+     * @var PaymentPool
      */
     protected $paymentPool;
 
     /**
-     * @param \Sonata\Component\Product\Pool                     $productPool
-     * @param \Sonata\Component\Customer\AddressManagerInterface $addressManager
-     * @param \Sonata\Component\Delivery\Pool                    $deliveryPool
-     * @param \Sonata\Component\Payment\Pool                     $paymentPool
+     * @param Pool                    $productPool
+     * @param AddressManagerInterface $addressManager
+     * @param DeliveryPool            $deliveryPool
+     * @param PaymentPool             $paymentPool
      */
-    public function __construct(Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool, PaymentPool $paymentPool)
-    {
+    public function __construct(
+        Pool $productPool,
+        AddressManagerInterface $addressManager,
+        DeliveryPool $deliveryPool,
+        PaymentPool $paymentPool
+    ) {
         $this->productPool = $productPool;
         $this->addressManager = $addressManager;
         $this->deliveryPool = $deliveryPool;
@@ -57,7 +61,7 @@ class BasketBuilder implements BasketBuilderInterface
     /**
      * Build a basket.
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param BasketInterface $basket
      *
      * @throws \RuntimeException
      */
