@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Payment;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Order\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 interface PaymentHandlerInterface
 {
@@ -24,10 +27,10 @@ interface PaymentHandlerInterface
      * @param Request         $request
      * @param BasketInterface $basket
      *
-     * @throws \Doctrine\ORM\EntityNotFoundException
+     * @throws EntityNotFoundException
      * @throws InvalidTransactionException
      *
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     public function handleError(Request $request, BasketInterface $basket);
 
@@ -36,10 +39,10 @@ interface PaymentHandlerInterface
      *
      * @param Request $request
      *
-     * @throws \Doctrine\ORM\EntityNotFoundException
+     * @throws EntityNotFoundException
      * @throws InvalidTransactionException
      *
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     public function handleConfirmation(Request $request);
 
@@ -48,7 +51,7 @@ interface PaymentHandlerInterface
      *
      * @param BasketInterface $basket
      *
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     public function getSendbankOrder(BasketInterface $basket);
 
@@ -57,7 +60,7 @@ interface PaymentHandlerInterface
      *
      * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function getPaymentCallbackResponse(Request $request);
 }

@@ -22,20 +22,22 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Currency\CurrencyFormType;
-use Sonata\Component\Product\Pool;
+use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Product\ProductInterface;
+use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\CoreBundle\Form\Type\BooleanType;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 
 class ProductAdmin extends AbstractAdmin
 {
     /**
-     * @var \Sonata\Component\Product\Pool
+     * @var ProductPool
      */
     protected $productPool;
 
     /**
-     * @var \Sonata\FormatterBundle\Formatter\Pool
+     * @var FormatterPool
      */
     protected $poolFormatter;
 
@@ -146,7 +148,7 @@ class ProductAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
+     * {@inheritdoc}
      */
     public function configureDatagridFilters(DatagridMapper $filter): void
     {
@@ -160,15 +162,15 @@ class ProductAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\Component\Product\Pool $productPool
+     * @param ProductPool $productPool
      */
-    public function setProductPool(Pool $productPool): void
+    public function setProductPool(ProductPool $productPool): void
     {
         $this->productPool = $productPool;
     }
 
     /**
-     * @return \Sonata\Component\Product\Pool
+     * @return ProductPool
      */
     public function getProductPool()
     {
@@ -180,7 +182,7 @@ class ProductAdmin extends AbstractAdmin
      *
      * @param ProductInterface $product
      *
-     * @return \Sonata\Component\Product\ProductProviderInterface
+     * @return ProductProviderInterface
      */
     public function getProductProvider(ProductInterface $product)
     {

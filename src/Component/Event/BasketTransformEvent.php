@@ -35,7 +35,7 @@ class BasketTransformEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Basket\BasketInterface
+     * @return BasketInterface
      */
     public function getBasket()
     {

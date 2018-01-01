@@ -21,7 +21,7 @@ use Sonata\ProductBundle\Entity\BaseDelivery;
 abstract class BaseOrderElement implements OrderElementInterface
 {
     /**
-     * @var int
+     * @var OrderInterface
      */
     protected $order;
 
@@ -100,8 +100,14 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     protected $productType;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
     public function __construct()
@@ -130,8 +136,6 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set order.
-     *
      * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order): void
@@ -140,9 +144,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get order.
-     *
-     * @return Order $order
+     * @return OrderInterface
      */
     public function getOrder()
     {
@@ -214,9 +216,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set designation.
-     *
-     * @param string $designation
+     * {@inheritdoc}
      */
     public function setDesignation($designation): void
     {
@@ -224,9 +224,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get designation.
-     *
-     * @return string $designation
+     * {@inheritdoc}
      */
     public function getDesignation()
     {
@@ -234,9 +232,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set description.
-     *
-     * @param string $description
+     * {@inheritdoc}
      */
     public function setDescription($description): void
     {
@@ -244,9 +240,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get description.
-     *
-     * @return string $description
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -254,8 +248,6 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set productId.
-     *
      * @param int $productId
      */
     public function setProductId($productId): void
@@ -264,9 +256,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get productId.
-     *
-     * @return int $productId
+     * {@inheritdoc}
      */
     public function getProductId()
     {
@@ -274,9 +264,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set status.
-     *
-     * @param int $status
+     * {@inheritdoc}
      */
     public function setStatus($status): void
     {
@@ -287,9 +275,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get status.
-     *
-     * @return int $status
+     * {@inheritdoc}
      */
     public function getStatus()
     {
@@ -351,9 +337,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set delivery_status.
-     *
-     * @param int $deliveryStatus
+     * {@inheritdoc}
      */
     public function setDeliveryStatus($deliveryStatus): void
     {
@@ -361,9 +345,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get delivery_status.
-     *
-     * @return int $deliveryStatus
+     * {@inheritdoc}
      */
     public function getDeliveryStatus()
     {
@@ -371,9 +353,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set validated_at.
-     *
-     * @param \DateTime $validatedAt
+     * {@inheritdoc}
      */
     public function setValidatedAt(\DateTime $validatedAt = null): void
     {
@@ -381,9 +361,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get validated_at.
-     *
-     * @return \DateTime $validatedAt
+     * {@inheritdoc}
      */
     public function getValidatedAt()
     {
@@ -391,9 +369,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Add product.
-     *
-     * @param ProductInterface $product
+     * {@inheritdoc}
      */
     public function setProduct(ProductInterface $product): void
     {
@@ -401,9 +377,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get product.
-     *
-     * @return ProductInterface $product
+     * {@inheritdoc}
      */
     public function getProduct()
     {
@@ -411,9 +385,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Set product_type.
-     *
-     * @param string $productType
+     * {@inheritdoc}
      */
     public function setProductType($productType): void
     {
@@ -421,9 +393,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Get product_type.
-     *
-     * @return string $productType
+     * {@inheritdoc}
      */
     public function getProductType()
     {
@@ -431,7 +401,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param \DateTime|null $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
@@ -439,7 +409,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -447,7 +417,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param \DateTime|null $updatedAt
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
@@ -455,7 +425,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -463,7 +433,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param array $options
+     * {@inheritdoc}
      */
     public function setOptions($options): void
     {
@@ -471,7 +441,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getOptions()
     {
@@ -509,7 +479,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @param array $rawProduct
+     * {@inheritdoc}
      */
     public function setRawProduct($rawProduct): void
     {
@@ -534,7 +504,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getRawProduct()
     {
@@ -630,13 +600,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     }
 
     /**
-     * Return the total (price * quantity).
-     *
-     * if $vat = true, return the price with vat
-     *
-     * @param bool $vat
-     *
-     * @return float
+     * {@inheritdoc}
      */
     public function getTotal($vat = false)
     {

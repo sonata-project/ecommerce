@@ -66,8 +66,8 @@ class SonataProductExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array                                                   $config
+     * @param ContainerBuilder $container
+     * @param array            $config
      */
     public function registerParameters(ContainerBuilder $container, array $config): void
     {

@@ -60,7 +60,7 @@ abstract class BaseOrder implements OrderInterface
     protected $deliveryStatus;
 
     /**
-     * @var datetime
+     * @var \DateTime
      */
     protected $validatedAt;
 
@@ -199,14 +199,29 @@ abstract class BaseOrder implements OrderInterface
      */
     protected $shippingMobile;
 
+    /**
+     * @var ArrayCollection|OrderElementInterface[]
+     */
     protected $orderElements;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * @var CustomerInterface
+     */
     protected $customer;
 
+    /**
+     * @var string
+     */
     protected $locale;
 
     public function __construct()
@@ -215,7 +230,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
@@ -272,6 +287,9 @@ abstract class BaseOrder implements OrderInterface
         return BaseAddress::formatAddress($this->getBillingAsArray(), $sep);
     }
 
+    /**
+     * @return array
+     */
     public function getBillingAsArray()
     {
         return [
@@ -497,9 +515,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Set delivery VAT.
-     *
-     * @param float $deliveryVat
+     * {@inheritdoc}
      */
     public function setDeliveryVat($deliveryVat): void
     {
@@ -507,9 +523,7 @@ abstract class BaseOrder implements OrderInterface
     }
 
     /**
-     * Get delivery VAT.
-     *
-     * @return float $deliveryVat
+     * {@inheritdoc}
      */
     public function getDeliveryVat()
     {

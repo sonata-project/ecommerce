@@ -16,6 +16,7 @@ namespace Sonata\InvoiceBundle\Entity;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Tests\Product\OrderElement;
 
 abstract class BaseInvoiceElement implements InvoiceElementInterface
 {
@@ -70,9 +71,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     protected $description;
 
     /**
-     * Set invoiceId.
-     *
-     * @param InvoiceInterface $invoice
+     * {@inheritdoc}
      */
     public function setInvoice(InvoiceInterface $invoice): void
     {
@@ -80,9 +79,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get invoiceId.
-     *
-     * @return int $invoiceId
+     * {@inheritdoc}
      */
     public function getInvoice()
     {
@@ -90,9 +87,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set orderElement.
-     *
-     * @param OrderElementInterface $orderElement
+     * {@inheritdoc}
      */
     public function setOrderElement(OrderElementInterface $orderElement): void
     {
@@ -100,9 +95,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get orderElement.
-     *
-     * @return OrderElementInterface $orderElement
+     * {@inheritdoc}
      */
     public function getOrderElement()
     {
@@ -164,8 +157,6 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set total.
-     *
      * @param float $total
      */
     public function setTotal($total): void
@@ -214,11 +205,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get total.
-     *
-     * @param bool $vat
-     *
-     * @return float $total
+     * {@inheritdoc}
      */
     public function getTotal($vat = true)
     {
@@ -236,9 +223,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set designation.
-     *
-     * @param string $designation
+     * {@inheritdoc}
      */
     public function setDesignation($designation): void
     {
@@ -246,9 +231,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get designation.
-     *
-     * @return string $designation
+     * {@inheritdoc}
      */
     public function getDesignation()
     {
@@ -256,9 +239,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Set description.
-     *
-     * string $description
+     * {@inheritdoc}
      */
     public function setDescription($description): void
     {
@@ -266,9 +247,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     }
 
     /**
-     * Get description.
-     *
-     * @return string $description
+     * {@inheritdoc}
      */
     public function getDescription()
     {

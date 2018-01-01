@@ -19,123 +19,91 @@ use Sonata\Component\Product\ProductInterface;
 interface OrderElementInterface extends PriceComputableInterface
 {
     /**
-     * Set order.
-     *
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order);
 
     /**
-     * Get order.
-     *
-     * @return \Sonata\Component\Order\OrderInterface
+     * @return OrderInterface
      */
     public function getOrder();
 
     /**
-     * Set designation.
-     *
      * @param string $designation
      */
     public function setDesignation($designation);
 
     /**
-     * Get designation.
-     *
-     * @return string $designation
+     * @return string
      */
     public function getDesignation();
 
     /**
-     * Set description.
-     *
      * @param string $description
      */
     public function setDescription($description);
 
     /**
-     * Get description.
-     *
-     * @return string $description
+     * @return string
      */
     public function getDescription();
 
     /**
-     * Set serialize.
-     *
-     * @param string $options
+     * @param array $options
      */
     public function setOptions($options);
 
     /**
-     * Get serialize.
-     *
-     * @return string $options
+     * @return array
      */
     public function getOptions();
 
     /**
-     * @param string $rawProduct
+     * @param array $rawProduct
      */
     public function setRawProduct($rawProduct);
 
     /**
-     * @return string
+     * @return array
      */
     public function getRawProduct();
 
     /**
-     * Set status.
-     *
      * @param int $status
      */
     public function setStatus($status);
 
     /**
-     * Get status.
-     *
-     * @return int $status
+     * @return int
      */
     public function getStatus();
 
     /**
-     * Set delivery_status.
-     *
      * @param int $deliveryStatus
      */
     public function setDeliveryStatus($deliveryStatus);
 
     /**
-     * Get delivery_status.
-     *
-     * @return int $deliveryStatus
+     * @return int
      */
     public function getDeliveryStatus();
 
     /**
-     * Set validated_at.
-     *
-     * @param \Datetime $validatedAt
+     * @param \Datetime|null $validatedAt
      */
     public function setValidatedAt(\DateTime $validatedAt = null);
 
     /**
-     * Get validated_at.
-     *
-     * @return \Datetime $validatedAt
+     * @return \Datetime
      */
     public function getValidatedAt();
 
     /**
-     * Add product.
-     *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
     /**
-     * Get product.
-     *
      * @return ProductInterface $product
      */
     public function getProduct();
@@ -146,16 +114,12 @@ interface OrderElementInterface extends PriceComputableInterface
     public function getProductId();
 
     /**
-     * Set product_type.
-     *
      * @param string $productType
      */
     public function setProductType($productType);
 
     /**
-     * Get product_type.
-     *
-     * @return string $productType
+     * @return string
      */
     public function getProductType();
 
@@ -170,7 +134,7 @@ interface OrderElementInterface extends PriceComputableInterface
     public function getCreatedAt();
 
     /**
-     * @param \Datetime
+     * @param \Datetime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 

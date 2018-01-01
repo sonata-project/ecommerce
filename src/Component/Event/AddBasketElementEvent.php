@@ -50,8 +50,12 @@ class AddBasketElementEvent extends Event
      * @param ProductInterface         $product
      * @param ProductProviderInterface $productProvider
      */
-    public function __construct(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product, ProductProviderInterface $productProvider)
-    {
+    public function __construct(
+        BasketInterface $basket,
+        BasketElementInterface $basketElement,
+        ProductInterface $product,
+        ProductProviderInterface $productProvider
+    ) {
         $this->basket = $basket;
         $this->basketElement = $basketElement;
         $this->product = $product;
@@ -59,7 +63,7 @@ class AddBasketElementEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Basket\BasketInterface
+     * @return BasketInterface
      */
     public function getBasket()
     {
@@ -67,7 +71,7 @@ class AddBasketElementEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Basket\BasketElementInterface
+     * @return BasketElementInterface
      */
     public function getBasketElement()
     {
@@ -75,7 +79,7 @@ class AddBasketElementEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Product\ProductInterface
+     * @return ProductInterface
      */
     public function getProduct()
     {
@@ -83,7 +87,7 @@ class AddBasketElementEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Product\ProductProviderInterface
+     * @return ProductProviderInterface
      */
     public function getProductProvider()
     {

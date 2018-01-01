@@ -40,8 +40,8 @@ class Selector implements ServiceDeliverySelectorInterface
     protected $logger;
 
     /**
-     * @param \Sonata\Component\Delivery\Pool $deliveryPool
-     * @param \Sonata\Component\Product\Pool  $productPool
+     * @param DeliveryPool $deliveryPool
+     * @param ProductPool  $productPool
      */
     public function __construct(DeliveryPool $deliveryPool, ProductPool $productPool)
     {

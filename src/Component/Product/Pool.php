@@ -23,8 +23,8 @@ class Pool
     /**
      * add a delivery method into the pool.
      *
-     * @param string                                      $code
-     * @param \Sonata\Component\Product\ProductDefinition $productDescription
+     * @param string            $code
+     * @param ProductDefinition $productDescription
      */
     public function addProduct($code, ProductDefinition $productDescription): void
     {
@@ -36,7 +36,7 @@ class Pool
      *
      * @throws \RuntimeException
      *
-     * @return \Sonata\Component\Product\ProductProviderInterface
+     * @return ProductProviderInterface
      */
     public function getProvider($code)
     {
@@ -56,7 +56,7 @@ class Pool
      *
      * @throws \RuntimeException
      *
-     * @return \Sonata\Component\Product\ProductManagerInterface
+     * @return ProductManagerInterface
      */
     public function getManager($code)
     {
@@ -113,7 +113,7 @@ class Pool
      *
      * @throws \RuntimeException
      *
-     * @return \Sonata\Component\Product\ProductDefinition
+     * @return ProductDefinition
      */
     public function getProduct($code)
     {

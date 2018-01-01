@@ -31,15 +31,15 @@ class Pool
      */
     public function addTransformer($type, BaseTransformer $instance): void
     {
-        $this->methods[$type] = $instance;
+        $this->transformer[$type] = $instance;
     }
 
     /**
-     * @return array of transformer methods
+     * @return array
      */
     public function getTransformers()
     {
-        return $this->methods;
+        return $this->transformer;
     }
 
     /**
@@ -51,6 +51,6 @@ class Pool
      */
     public function getTransformer($type)
     {
-        return isset($this->methods[$type]) ? $this->methods[$type] : null;
+        return isset($this->transformer[$type]) ? $this->transformer[$type] : null;
     }
 }

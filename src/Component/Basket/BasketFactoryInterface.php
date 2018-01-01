@@ -20,16 +20,16 @@ interface BasketFactoryInterface
     /**
      * Load the basket.
      *
-     * @param \Sonata\Component\Customer\CustomerInterface
+     * @param CustomerInterface $customer
      *
-     * @return \Sonata\Component\Basket\BasketInterface
+     * @return BasketInterface
      */
     public function load(CustomerInterface $customer);
 
     /**
      * Save the basket.
      *
-     * @param \Sonata\Component\Basket\BasketInterface
+     * @param BasketInterface $basket
      */
     public function save(BasketInterface $basket);
 

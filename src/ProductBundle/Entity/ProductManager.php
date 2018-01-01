@@ -206,7 +206,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
      * @param array    $productCollections
      * @param null|int $limit
      *
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     protected function queryInSameCollections($productCollections, $limit = null)
     {

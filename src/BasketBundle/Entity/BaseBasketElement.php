@@ -19,14 +19,12 @@ use Sonata\Component\Basket\BasketInterface;
 abstract class BaseBasketElement extends BasketElement
 {
     /**
-     * @var \Sonata\Component\Basket\BasketInterface
+     * @var BasketInterface
      */
     protected $basket;
 
     /**
-     * Get basket.
-     *
-     * @return \Sonata\Component\Basket\BasketInterface $basket
+     * @return BasketInterface $basket
      */
     public function getBasket()
     {
@@ -34,9 +32,7 @@ abstract class BaseBasketElement extends BasketElement
     }
 
     /**
-     * Set basket.
-     *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param BasketInterface $basket
      */
     public function setBasket(BasketInterface $basket): void
     {

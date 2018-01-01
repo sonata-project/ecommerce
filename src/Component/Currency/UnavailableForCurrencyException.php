@@ -20,6 +20,10 @@ use Sonata\Component\Product\ProductInterface;
  */
 class UnavailableForCurrencyException extends \Exception
 {
+    /**
+     * @param ProductInterface  $product
+     * @param CurrencyInterface $currency
+     */
     public function __construct(ProductInterface $product, CurrencyInterface $currency)
     {
         parent::__construct(sprintf("Product '%s' is not available for currency '%s'", $product->getName(), $currency->getLabel()));

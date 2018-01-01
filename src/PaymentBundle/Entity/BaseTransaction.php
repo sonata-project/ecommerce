@@ -77,7 +77,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
+     * {@inheritdoc}
      */
     public function setOrder(OrderInterface $order): void
     {
@@ -87,7 +87,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return \Sonata\Component\Order\OrderInterface
+     * {@inheritdoc}
      */
     public function getOrder()
     {
@@ -95,7 +95,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param int $state
+     * {@inheritdoc}
      */
     public function setState($state): void
     {
@@ -111,7 +111,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getState()
     {
@@ -119,7 +119,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param string $transactionId
+     * {@inheritdoc}
      */
     public function setTransactionId($transactionId): void
     {
@@ -128,7 +128,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getTransactionId()
     {
@@ -136,7 +136,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function isValid()
     {
@@ -144,7 +144,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param array $parameters
+     * {@inheritdoc}
      */
     public function setParameters(array $parameters): void
     {
@@ -152,7 +152,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getParameters()
     {
@@ -160,8 +160,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param $name
-     * @param null $default
+     * {@inheritdoc}
      */
     public function get($name, $default = null)
     {
@@ -169,7 +168,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param $statusCode
+     * {@inheritdoc}
      */
     public function setStatusCode($statusCode): void
     {
@@ -179,7 +178,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStatusCode()
     {
@@ -187,7 +186,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStatusName()
     {
@@ -201,9 +200,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * return status list.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public static function getStatusList()
     {
@@ -230,7 +227,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param \DateTime|null $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
@@ -238,7 +235,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -246,7 +243,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param int $paymentCode
+     * {@inheritdoc}
      */
     public function setPaymentCode($paymentCode): void
     {
@@ -254,7 +251,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPaymentCode()
     {
@@ -262,7 +259,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param $information
+     * {@inheritdoc}
      */
     public function addInformation($information): void
     {
@@ -270,7 +267,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param $information
+     * {@inheritdoc}
      */
     public function setInformation($information): void
     {
@@ -278,7 +275,7 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getInformation()
     {

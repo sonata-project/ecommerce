@@ -18,7 +18,7 @@ interface BasketBuilderInterface
     /**
      * Build a basket.
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
+     * @param BasketInterface $basket
      */
     public function build(BasketInterface $basket);
 }

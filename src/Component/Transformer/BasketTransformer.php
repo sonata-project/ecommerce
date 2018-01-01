@@ -47,7 +47,7 @@ class BasketTransformer extends BaseTransformer
     protected $productPool;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
@@ -57,8 +57,12 @@ class BasketTransformer extends BaseTransformer
      * @param EventDispatcherInterface $eventDispatcher
      * @param LoggerInterface          $logger
      */
-    public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
-    {
+    public function __construct(
+        OrderManagerInterface $orderManager,
+        ProductPool $productPool,
+        EventDispatcherInterface $eventDispatcher,
+        LoggerInterface $logger = null
+    ) {
         $this->productPool = $productPool;
         $this->orderManager = $orderManager;
         $this->logger = $logger;
@@ -68,12 +72,11 @@ class BasketTransformer extends BaseTransformer
     /**
      * transform a basket into order.
      *
-     *
-     * @param null|\Sonata\Component\Basket\BasketInterface $basket
+     * @param null|BasketInterface $basket
      *
      * @throws \RuntimeException
      *
-     * @return null|\Sonata\Component\Order\OrderInterface
+     * @return null|OrderInterface
      */
     public function transformIntoOrder(BasketInterface $basket)
     {

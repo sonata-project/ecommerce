@@ -24,12 +24,12 @@ use Sonata\Component\Product\ProductInterface;
 interface BasketInterface
 {
     /**
-     * @param \Sonata\Component\Product\Pool $pool
+     * @param Pool $pool
      */
     public function setProductPool(Pool $pool);
 
     /**
-     * @return \Sonata\Component\Product\Pool
+     * @return Pool
      */
     public function getProductPool();
 
@@ -52,8 +52,6 @@ interface BasketInterface
     public function isValid($elementsOnly = false);
 
     /**
-     * set the Delivery method.
-     *
      * @param ServiceDeliveryInterface $method
      */
     public function setDeliveryMethod(ServiceDeliveryInterface $method = null);
@@ -64,61 +62,53 @@ interface BasketInterface
     public function getDeliveryMethod();
 
     /**
-     * set the Delivery address.
-     *
-     * @param \Sonata\Component\Customer\AddressInterface $address
+     * @param AddressInterface $address
      */
     public function setDeliveryAddress(AddressInterface $address = null);
 
     /**
-     * @return \Sonata\Component\Customer\AddressInterface
+     * @return AddressInterface
      */
     public function getDeliveryAddress();
 
     /**
-     * set Payment method.
-     *
-     * @param \Sonata\Component\Payment\PaymentInterface $method
+     * @param PaymentInterface $method
      */
     public function setPaymentMethod(PaymentInterface $method = null);
 
     /**
-     * @return \Sonata\Component\Payment\PaymentInterface
+     * @return PaymentInterface
      */
     public function getPaymentMethod();
 
     /**
-     * set the Payment address.
-     *
-     * @param \Sonata\Component\Customer\AddressInterface $address
+     * @param AddressInterface $address
      */
     public function setBillingAddress(AddressInterface $address = null);
 
     /**
-     * @return \Sonata\Component\Customer\AddressInterface
+     * @return AddressInterface
      */
     public function getBillingAddress();
 
     /**
      * Check if the product can be added to the basket.
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
+     * @param ProductInterface $product
      *
      * @return bool
      */
     public function isAddable(ProductInterface $product);
 
     /**
-     * reset basket.
+     * Reset basket.
      *
      * @param bool $full
      */
     public function reset($full = true);
 
     /**
-     * return BasketElements.
-     *
-     * @return \Sonata\Component\Basket\BasketElementInterface[]
+     * @return BasketElementInterface[]
      */
     public function getBasketElements();
 
@@ -293,12 +283,12 @@ interface BasketInterface
     public function getDeliveryMethodCode();
 
     /**
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
+     * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer = null);
 
     /**
-     * @param \Sonata\Component\Customer\CustomerInterface
+     * @param CustomerInterface
      */
     public function getCustomer();
 

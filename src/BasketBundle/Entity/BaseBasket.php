@@ -21,6 +21,7 @@ abstract class BaseBasket extends Basket
 {
     public function __construct()
     {
+        parent::__construct();
         $this->reset(true);
     }
 

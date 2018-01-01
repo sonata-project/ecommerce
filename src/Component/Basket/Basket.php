@@ -27,7 +27,7 @@ use Sonata\Component\Product\ProductInterface;
 class Basket implements \Serializable, BasketInterface
 {
     /**
-     * @var array
+     * @var BasketElementInterface[]
      */
     protected $basketElements;
 

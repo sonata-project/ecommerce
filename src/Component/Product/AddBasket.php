@@ -41,7 +41,7 @@ class AddBasket
     private $quantity;
 
     /**
-     * @return int the product id
+     * @return int
      */
     public function getProductId()
     {
@@ -51,7 +51,7 @@ class AddBasket
     /**
      * The product id is only set if there is not product attached to this object.
      *
-     * @param int $productId the product id
+     * @param int $productId
      */
     public function setProductId($productId): void
     {
@@ -64,8 +64,6 @@ class AddBasket
     }
 
     /**
-     * Set the related product.
-     *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product): void
@@ -75,8 +73,6 @@ class AddBasket
     }
 
     /**
-     * Set the quantity.
-     *
      * @param int $quantity
      */
     public function setQuantity($quantity): void
@@ -85,7 +81,7 @@ class AddBasket
     }
 
     /**
-     * @return the quantity
+     * @return int
      */
     public function getQuantity()
     {

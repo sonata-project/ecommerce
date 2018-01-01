@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Entity;
 
-use Doctrine\ORM\EntityManager;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
@@ -22,18 +21,10 @@ use Sonata\CoreBundle\Model\BaseEntityManager;
 
 class ProductCategoryManager extends BaseEntityManager implements ProductCategoryManagerInterface
 {
-    //    const CATEGORY_PRODUCT_TYPE = 'product';
-
     /**
-     * @var \Sonata\ClassificationBundle\Model\CategoryManagerInterface
+     * @var CategoryManagerInterface
      */
     protected $categoryManager;
-
-    /**
-     * @param string                   $class
-     * @param EntityManager            $em
-     * @param CategoryManagerInterface $categoryManager
-     */
 
     /**
      * {@inheritdoc}
@@ -43,12 +34,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         if ($this->findOneBy(['category' => $category, 'product' => $product])) {
             return;
         }
-        //
-        //        if (null !== $category->getType() && self::CATEGORY_PRODUCT_TYPE !== $category->getType()) {
-        //            // Should we throw an exception instead?
-        //            $category->setType(self::CATEGORY_PRODUCT_TYPE);
-        //            $this->categoryManager->save($category);
-        //        }
 
         $productCategory = $this->create();
 

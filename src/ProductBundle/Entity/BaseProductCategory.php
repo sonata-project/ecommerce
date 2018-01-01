@@ -49,6 +49,9 @@ abstract class BaseProductCategory implements ProductCategoryInterface
      */
     protected $category;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return ($this->getProduct() ? $this->getProduct()->getName() : 'null').' - '.($this->getCategory() ? $this->getCategory()->getName() : 'null');

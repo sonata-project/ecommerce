@@ -16,114 +16,82 @@ namespace Sonata\Component\Product;
 interface PackageInterface
 {
     /**
-     * Set productId.
-     *
      * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
     /**
-     * Get productId.
-     *
      * @return ProductInterface
      */
     public function getProduct();
 
     /**
-     * Set width.
-     *
      * @param float $width
      */
     public function setWidth($width);
 
     /**
-     * Get width.
-     *
-     * @return float $width
+     * @return float
      */
     public function getWidth();
 
     /**
-     * Set height.
-     *
      * @param float $height
      */
     public function setHeight($height);
 
     /**
-     * Get height.
-     *
-     * @return float $height
+     * @return float
      */
     public function getHeight();
 
     /**
-     * Set length.
-     *
      * @param float $length
      */
     public function setLength($length);
 
     /**
-     * Get length.
-     *
-     * @return float $length
+     * @return float
      */
     public function getLength();
 
     /**
-     * Set weight.
-     *
      * @param float $weight
      */
     public function setWeight($weight);
 
     /**
-     * Get weight.
-     *
-     * @return float $weight
+     * @return float
      */
     public function getWeight();
 
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * @return bool
      */
     public function getEnabled();
 
     /**
-     * Set updatedAt.
-     *
-     * @param \Datetime $updatedAt
+     * @param \Datetime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updatedAt.
-     *
-     * @return \Datetime $updatedAt
+     * @return \Datetime
      */
     public function getUpdatedAt();
 
     /**
-     * Set createdAt.
-     *
-     * @param \Datetime $createdAt
+     * @param \Datetime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get createdAt.
-     *
-     * @return \Datetime $createdAt
+     * @return \Datetime
      */
     public function getCreatedAt();
 }

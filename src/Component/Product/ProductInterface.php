@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\Component\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\MediaBundle\Model\GalleryInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;

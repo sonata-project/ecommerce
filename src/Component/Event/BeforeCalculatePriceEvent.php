@@ -57,7 +57,7 @@ class BeforeCalculatePriceEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Currency\CurrencyInterface
+     * @return CurrencyInterface
      */
     public function getCurrency()
     {
@@ -65,7 +65,7 @@ class BeforeCalculatePriceEvent extends Event
     }
 
     /**
-     * @return \Sonata\Component\Product\ProductInterface
+     * @return ProductInterface
      */
     public function getProduct()
     {

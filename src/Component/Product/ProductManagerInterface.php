@@ -21,20 +21,22 @@ interface ProductManagerInterface extends ManagerInterface, PageableManagerInter
     /**
      * Returns the products in the same collections as those specified in $productCollections.
      *
-     * @param mixed $productCollections
+     * @param mixed    $productCollections
+     * @param int|null $limit
      *
      * @return array
      */
-    public function findInSameCollections($productCollections);
+    public function findInSameCollections($productCollections, $limit = null);
 
     /**
      * Returns the parent products in the same collections as those specified in $productCollections.
      *
-     * @param mixed $productCollections
+     * @param mixed    $productCollections
+     * @param int|null $limit
      *
      * @return array
      */
-    public function findParentsInSameCollections($productCollections);
+    public function findParentsInSameCollections($productCollections, $limit = null);
 
     /**
      * Retrieve an active product from its id and its slug.

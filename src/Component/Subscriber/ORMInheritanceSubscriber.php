@@ -16,6 +16,7 @@ namespace Sonata\Component\Subscriber;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\ORM\Mapping\MappingException;
 
 class ORMInheritanceSubscriber implements EventSubscriber
 {
@@ -47,6 +48,8 @@ class ORMInheritanceSubscriber implements EventSubscriber
 
     /**
      * @param LoadClassMetadataEventArgs $eventArgs
+     *
+     * @throws MappingException
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {

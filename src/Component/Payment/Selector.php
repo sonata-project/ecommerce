@@ -68,7 +68,7 @@ class Selector implements PaymentSelectorInterface
     }
 
     /**
-     * @return \Sonata\Component\Product\Pool
+     * @return ProductPool
      */
     public function getProductPool()
     {

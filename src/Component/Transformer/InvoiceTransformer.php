@@ -40,7 +40,7 @@ class InvoiceTransformer extends BaseTransformer
     protected $deliveryPool;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
@@ -136,7 +136,7 @@ class InvoiceTransformer extends BaseTransformer
      *
      * @param OrderElementInterface $orderElement
      *
-     * @return \Sonata\Component\Invoice\InvoiceElementInterface
+     * @return InvoiceElementInterface
      */
     protected function createInvoiceElementFromOrderElement(OrderElementInterface $orderElement)
     {

@@ -18,7 +18,6 @@ use Knp\Menu\ItemInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -42,7 +41,7 @@ class ProductMenuBuilder
     protected $router;
 
     /**
-     * @param MenuFactory                     $factory
+     * @param FactoryInterface                $factory
      * @param ProductCategoryManagerInterface $categoryManager
      * @param RouterInterface                 $router
      */
@@ -88,7 +87,7 @@ class ProductMenuBuilder
      * @param array  $itemOptions The options given to the created menuItem
      * @param string $currentUri  The current URI
      *
-     * @return \Knp\Menu\ItemInterface
+     * @return ItemInterface
      */
     public function createCategoryMenu(array $itemOptions = [], $currentUri = null)
     {
@@ -100,9 +99,9 @@ class ProductMenuBuilder
     }
 
     /**
-     * @param \Knp\Menu\ItemInterface $menu       The item to fill with $routes
-     * @param array                   $options    The item options
-     * @param string                  $currentUri The current URI
+     * @param ItemInterface $menu       The item to fill with $routes
+     * @param array         $options    The item options
+     * @param string        $currentUri The current URI
      */
     public function buildCategoryMenu(ItemInterface $menu, array $options = [], $currentUri = null): void
     {

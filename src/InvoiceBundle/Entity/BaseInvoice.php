@@ -128,7 +128,7 @@ abstract class BaseInvoice implements InvoiceInterface
     protected $locale;
 
     /**
-     * @var array
+     * @var InvoiceElementInterface[]
      */
     protected $invoiceElements = [];
 
@@ -175,7 +175,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * @param \DateTime $createdAt
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt): void
     {
@@ -183,7 +183,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -207,9 +207,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set reference.
-     *
-     * @param string $reference
+     * {@inheritdoc}
      */
     public function setReference($reference): void
     {
@@ -217,9 +215,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get reference.
-     *
-     * @return string $reference
+     * {@inheritdoc}
      */
     public function getReference()
     {
@@ -227,10 +223,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set userId
-     *R.
-     *
-     * @param CustomerInterface $customer
+     * {@inheritdoc}
      */
     public function setCustomer(CustomerInterface $customer = null): void
     {
@@ -238,9 +231,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get userId.
-     *
-     * @return int $customer
+     * {@inheritdoc}
      */
     public function getCustomer()
     {
@@ -248,9 +239,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set currency.
-     *
-     * @param CurrencyInterface $currency
+     * {@inheritdoc}
      */
     public function setCurrency(CurrencyInterface $currency): void
     {
@@ -258,9 +247,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get currency.
-     *
-     * @return CurrencyInterface $currency
+     * {@inheritdoc}
      */
     public function getCurrency()
     {
@@ -268,9 +255,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set status.
-     *
-     * @param int $status
+     * {@inheritdoc}
      */
     public function setStatus($status): void
     {
@@ -278,9 +263,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get status.
-     *
-     * @return int $status
+     * {@inheritdoc}
      */
     public function getStatus()
     {
@@ -288,9 +271,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set totalInc.
-     *
-     * @param float $totalInc
+     * {@inheritdoc}
      */
     public function setTotalInc($totalInc): void
     {
@@ -298,9 +279,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get totalInc.
-     *
-     * @return float $totalInc
+     * {@inheritdoc}
      */
     public function getTotalInc()
     {
@@ -308,9 +287,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set totalExcl.
-     *
-     * @param float $totalExcl
+     * {@inheritdoc}
      */
     public function setTotalExcl($totalExcl): void
     {
@@ -318,9 +295,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get totalExcl.
-     *
-     * @return float $totalExcl
+     * {@inheritdoc}
      */
     public function getTotalExcl()
     {
@@ -358,9 +333,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set name.
-     *
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name): void
     {
@@ -368,9 +341,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get name.
-     *
-     * @return string $name
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -378,9 +349,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set phone.
-     *
-     * @param string $phone
+     * {@inheritdoc}
      */
     public function setPhone($phone): void
     {
@@ -388,9 +357,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get phone.
-     *
-     * @return string $phone
+     * {@inheritdoc}
      */
     public function getPhone()
     {
@@ -398,9 +365,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set address1.
-     *
-     * @param string $address1
+     * {@inheritdoc}
      */
     public function setAddress1($address1): void
     {
@@ -408,9 +373,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get address1.
-     *
-     * @return string $address1
+     * {@inheritdoc}
      */
     public function getAddress1()
     {
@@ -418,9 +381,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set address2.
-     *
-     * @param string $address2
+     * {@inheritdoc}
      */
     public function setAddress2($address2): void
     {
@@ -428,9 +389,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get address2.
-     *
-     * @return string $address2
+     * {@inheritdoc}
      */
     public function getAddress2()
     {
@@ -438,9 +397,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set address3.
-     *
-     * @param string $address3
+     * {@inheritdoc}
      */
     public function setAddress3($address3): void
     {
@@ -448,9 +405,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get address3.
-     *
-     * @return string $address3
+     * {@inheritdoc}
      */
     public function getAddress3()
     {
@@ -458,9 +413,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set city.
-     *
-     * @param string $city
+     * {@inheritdoc}
      */
     public function setCity($city): void
     {
@@ -468,9 +421,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get city.
-     *
-     * @return string $city
+     * {@inheritdoc}
      */
     public function getCity()
     {
@@ -478,9 +429,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set postcode.
-     *
-     * @param string $postcode
+     * {@inheritdoc}
      */
     public function setPostcode($postcode): void
     {
@@ -488,9 +437,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get postcode.
-     *
-     * @return string $postcode
+     * {@inheritdoc}
      */
     public function getPostcode()
     {
@@ -498,9 +445,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set country.
-     *
-     * @param string $country
+     * {@inheritdoc}
      */
     public function setCountry($country): void
     {
@@ -508,9 +453,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get country.
-     *
-     * @return string $country
+     * {@inheritdoc}
      */
     public function getCountry()
     {
@@ -518,9 +461,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set fax.
-     *
-     * @param string $fax
+     * {@inheritdoc}
      */
     public function setFax($fax): void
     {
@@ -528,9 +469,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get fax.
-     *
-     * @return string $fax
+     * {@inheritdoc}
      */
     public function getFax()
     {
@@ -538,9 +477,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set email.
-     *
-     * @param string $email
+     * {@inheritdoc}
      */
     public function setEmail($email): void
     {
@@ -548,9 +485,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get email.
-     *
-     * @return string $email
+     * {@inheritdoc}
      */
     public function getEmail()
     {
@@ -558,9 +493,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set mobile.
-     *
-     * @param string $mobile
+     * {@inheritdoc}
      */
     public function setMobile($mobile): void
     {
@@ -568,9 +501,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get mobile.
-     *
-     * @return string $mobile
+     * {@inheritdoc}
      */
     public function getMobile()
     {
@@ -578,8 +509,6 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Set user.
-     *
      * @param UserInterface $user
      */
     public function setUser(UserInterface $user): void
@@ -588,8 +517,6 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Get user.
-     *
      * @return UserInterface $user
      */
     public function getUser()
@@ -632,9 +559,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Gets the locale.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getLocale()
     {
@@ -642,9 +567,7 @@ abstract class BaseInvoice implements InvoiceInterface
     }
 
     /**
-     * Sets the locale.
-     *
-     * @param string $locale
+     * {@inheritdoc}
      */
     public function setLocale($locale): void
     {

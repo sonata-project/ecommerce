@@ -36,7 +36,7 @@ class DeliveryAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper): void
     {
@@ -56,7 +56,7 @@ class DeliveryAdmin extends AbstractAdmin
     }
 
     /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
+     * {@inheritdoc}
      */
     public function configureListFields(ListMapper $list): void
     {

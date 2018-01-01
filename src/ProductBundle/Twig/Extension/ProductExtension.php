@@ -126,7 +126,7 @@ class ProductExtension extends \Twig_Extension
      *
      * @param ProductInterface $product
      *
-     * @return ProductInterface
+     * @return float
      */
     public function getCheapestEnabledVariationPrice(ProductInterface $product)
     {
