@@ -26,6 +26,7 @@ use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\CoreBundle\Form\Type\BooleanType;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use AppBundle\Ecommerce\Entity\ProductTypes\Purchase;
 
 class ProductAdmin extends AbstractAdmin
 {
@@ -94,23 +95,36 @@ class ProductAdmin extends AbstractAdmin
     }
 
     /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return Purchase::class;
+        if ($this->hasSubject()) {
+            return get_class($this->getSubject());
+        } else {
+            return Purchase::class;
+        }
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper): void
     {
+
         // this admin class works only from a request scope
         if (!$this->hasRequest()) {
             return;
         }
-
         $product = $this->getProduct();
         $provider = $this->getProductProvider($product);
-
         if ($product->getId() > 0) {
             $provider->buildEditForm($formMapper, $product->isVariation());
         } else {
             $provider->buildCreateForm($formMapper);
         }
+
     }
 
     /**
@@ -208,9 +222,9 @@ class ProductAdmin extends AbstractAdmin
      */
     public function validate(ErrorElement $errorElement, $object): void
     {
-        $errorElement
-            ->assertCallback(['validateOneMainCategory'])
-        ;
+       /* $errorElement
+        ->assertCallback(array( $object, 'validateOneMainCategory'));
+        */
     }
 
     /**
