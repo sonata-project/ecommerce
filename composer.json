@@ -14,7 +14,7 @@
             "homepage": "https://github.com/sonata-project/ecommerce/contributors"
         }
     ],
-    "require" : {
+    "require": {
         "php": "^5.6 || ^7.0",
         "cocur/slugify": "^1.4 || ^2.5",
         "friendsofsymfony/rest-bundle": "^1.8 || ^2.2",
@@ -46,12 +46,20 @@
         "symfony/twig-bridge": "^2.8",
         "symfony/validator": "^2.8"
     },
-    "require-dev": {
-        "symfony/phpunit-bridge": "^3.4 || ^4.0"
-    },
     "conflict": {
         "jms/serializer": "<0.13",
         "symfony/intl": "<2.8"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^3.4 || ^4.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -77,14 +85,6 @@
             "Sonata\\PaymentBundle\\Tests\\": "tests/PaymentBundle",
             "Sonata\\PriceBundle\\Tests\\": "tests/PriceBundle",
             "Sonata\\ProductBundle\\Tests\\": "tests/ProductBundle"
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.x-dev"
         }
     }
 }
