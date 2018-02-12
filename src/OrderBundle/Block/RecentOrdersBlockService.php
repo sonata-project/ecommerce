@@ -58,7 +58,7 @@ class RecentOrdersBlockService extends BaseBlockService
         OrderManagerInterface $orderManager,
         CustomerManagerInterface $customerManager,
         TokenStorageInterface $tokenStorage,
-        Pool $adminPool = null
+        ?Pool $adminPool = null
     ) {
         $this->orderManager = $orderManager;
         $this->customerManager = $customerManager;
@@ -71,14 +71,20 @@ class RecentOrdersBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null): Response
     {
-        $criteria = [];
-
         if ('admin' !== $blockContext->getSetting('mode')) {
-            $orders = $this->orderManager->findForUser($this->tokenStorage->getToken()->getUser(), ['createdAt' => 'DESC'], $blockContext->getSetting('number'));
+            $orders = $this->orderManager->findForUser(
+                $this->tokenStorage->getToken()->getUser(),
+                ['createdAt' => 'DESC'],
+                $blockContext->getSetting('number')
+            );
         } else {
-            $orders = $this->orderManager->findBy($criteria, ['createdAt' => 'DESC'], $blockContext->getSetting('number'));
+            $orders = $this->orderManager->findBy(
+                [],
+                ['createdAt' => 'DESC'],
+                $blockContext->getSetting('number')
+            );
         }
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), [
