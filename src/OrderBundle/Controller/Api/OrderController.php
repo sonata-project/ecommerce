@@ -50,7 +50,7 @@ class OrderController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for orders list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of orders by page")
-     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query orders order by clause (key is field, value is direction")
+     * @QueryParam(name="orderBy", requirements="ASC|DESC", nullable=true, strict=true, description="Query orders order by clause (key is field, value is direction")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on order statuses")
      * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *

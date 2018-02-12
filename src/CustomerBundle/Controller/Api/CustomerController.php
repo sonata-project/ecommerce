@@ -78,7 +78,7 @@ class CustomerController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for customers list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of customers by page")
-     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query customers order by clause (key is field, value is direction")
+     * @QueryParam(name="orderBy", requirements="ASC|DESC", nullable=true, strict=true, description="Query customers order by clause (key is field, value is direction")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
      *

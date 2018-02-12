@@ -85,7 +85,7 @@ class ProductController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for products list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of products by page")
-     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query products order by clause (key is field, value is direction")
+     * @QueryParam(name="orderBy", requirements="ASC|DESC", nullable=true, strict=true, description="Query products order by clause (key is field, value is direction")
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/disabled products only?")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
