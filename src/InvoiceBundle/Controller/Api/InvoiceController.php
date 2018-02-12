@@ -50,7 +50,7 @@ class InvoiceController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for invoices list pagination")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of invoices by page")
-     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query invoices invoice by clause (key is field, value is direction")
+     * @QueryParam(name="orderBy", requirements="ASC|DESC", nullable=true, strict=true, description="Query invoices invoice by clause (key is field, value is direction")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
