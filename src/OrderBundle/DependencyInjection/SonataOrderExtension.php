@@ -54,10 +54,6 @@ class SonataOrderExtension extends Extension
             $loader->load('admin.xml');
         }
 
-        if (isset($bundles['SonataSeoBundle'])) {
-            $loader->load('seo_block.xml');
-        }
-
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);
     }
