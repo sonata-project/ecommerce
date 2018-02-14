@@ -32,3 +32,9 @@ If you have implemented custom `CustomerSelector` you must adapt constructor arg
 
 ## ProductInterface
 `ProductInterface::validateOneMainCategory` now uses `Symfony\Component\Validator\Context\ExecutionContextInterface` instead of `Symfony\Component\Validator\ExecutionContextInterface`
+
+## RecentOrdersBlockService
+`RecentOrdersBlockService::__construct()` last 2 arguments are changed:
+
+- `Symfony\Component\Security\Core\SecurityContextInterface $securityContext` is replaced by `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface  $tokenStorage`
+- `Sonata\AdminBundle\Admin\Pool $pool` is no longer `null` by default, pass `null` explicitly instead
