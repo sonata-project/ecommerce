@@ -7,8 +7,8 @@
             <argument type="service" id="templating"/>
             <argument type="service" id="sonata.order.manager"/>
             <argument type="service" id="sonata.customer.manager"/>
-            <argument type="service" id="security.context"/>
-            <argument type="service" id="sonata.admin.pool" on-invalid="ignore"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="sonata.admin.pool" on-invalid="null"/>
         </service>
     </services>
 </container>

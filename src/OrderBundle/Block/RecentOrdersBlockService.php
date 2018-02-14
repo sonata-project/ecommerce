@@ -24,7 +24,7 @@ use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -43,23 +43,26 @@ class RecentOrdersBlockService extends BaseBlockService
     protected $customerManager;
 
     /**
-     * @var SecurityContextInterface
+     * @var TokenStorageInterface
      */
-    protected $securityContext;
+    protected $tokenStorage;
 
     /**
-     * @param string                   $name
-     * @param EngineInterface          $templating
-     * @param OrderManagerInterface    $orderManager
-     * @param CustomerManagerInterface $customerManager
-     * @param SecurityContextInterface $securityContext
-     * @param Pool                     $adminPool
+     * @var Pool|null
      */
-    public function __construct($name, EngineInterface $templating, OrderManagerInterface $orderManager, CustomerManagerInterface $customerManager, SecurityContextInterface $securityContext, Pool $adminPool = null)
-    {
+    protected $adminPool;
+
+    public function __construct(
+        string $name,
+        EngineInterface $templating,
+        OrderManagerInterface $orderManager,
+        CustomerManagerInterface $customerManager,
+        TokenStorageInterface $tokenStorage,
+        ?Pool $adminPool
+    ) {
         $this->orderManager = $orderManager;
         $this->customerManager = $customerManager;
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
         $this->adminPool = $adminPool;
 
         parent::__construct($name, $templating);
@@ -68,14 +71,20 @@ class RecentOrdersBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, Response $response = null): Response
     {
-        $criteria = [];
-
         if ('admin' !== $blockContext->getSetting('mode')) {
-            $orders = $this->orderManager->findForUser($this->securityContext->getToken()->getUser(), ['createdAt' => 'DESC'], $blockContext->getSetting('number'));
+            $orders = $this->orderManager->findForUser(
+                $this->tokenStorage->getToken()->getUser(),
+                ['createdAt' => 'DESC'],
+                $blockContext->getSetting('number')
+            );
         } else {
-            $orders = $this->orderManager->findBy($criteria, ['createdAt' => 'DESC'], $blockContext->getSetting('number'));
+            $orders = $this->orderManager->findBy(
+                [],
+                ['createdAt' => 'DESC'],
+                $blockContext->getSetting('number')
+            );
         }
 
         return $this->renderPrivateResponse($blockContext->getTemplate(), [
