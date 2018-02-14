@@ -78,14 +78,14 @@ class ProductController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for products list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of products by page")
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/disabled products only?")
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -139,14 +139,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -262,14 +262,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\Component\Product\ProductCategoryInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Product\ProductCategoryInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -287,14 +287,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\ClassificationBundle\Model\CategoryInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\ClassificationBundle\Model\CategoryInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -312,14 +312,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\Component\Product\ProductCollectionInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Product\ProductCollectionInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -337,14 +337,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\ClassificationBundle\Model\CollectionInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\ClassificationBundle\Model\CollectionInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -362,14 +362,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\Component\Product\DeliveryInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Product\DeliveryInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -387,14 +387,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\Component\Product\PackageInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Product\PackageInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -412,14 +412,14 @@ class ProductController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
      *  },
-     *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when product is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
