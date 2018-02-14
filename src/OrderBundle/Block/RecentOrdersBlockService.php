@@ -48,7 +48,7 @@ class RecentOrdersBlockService extends BaseBlockService
     protected $tokenStorage;
 
     /**
-     * @var Pool
+     * @var Pool|null
      */
     protected $adminPool;
 
@@ -58,7 +58,7 @@ class RecentOrdersBlockService extends BaseBlockService
         OrderManagerInterface $orderManager,
         CustomerManagerInterface $customerManager,
         TokenStorageInterface $tokenStorage,
-        ?Pool $adminPool = null
+        ?Pool $adminPool
     ) {
         $this->orderManager = $orderManager;
         $this->customerManager = $customerManager;
