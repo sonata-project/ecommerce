@@ -73,7 +73,7 @@ class AddressController
         $orderByQueryParam->requirements = 'ASC|DESC';
         $orderByQueryParam->nullable = true;
         $orderByQueryParam->strict = true;
-        $orderByQueryParam->description = 'Query orders addresses by clause (key is field, value is direction)';
+        $orderByQueryParam->description = 'Sort specification for the resultset (key is field, value is direction)';
 
         if (property_exists($orderByQueryParam, 'map')) {
             $orderByQueryParam->map = true;
