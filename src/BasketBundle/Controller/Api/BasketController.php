@@ -87,7 +87,7 @@ class BasketController
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for baskets list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of baskets by page")
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -148,7 +148,7 @@ class BasketController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -173,7 +173,7 @@ class BasketController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *

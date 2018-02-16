@@ -51,7 +51,7 @@ class OrderController
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on order statuses")
      * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -113,7 +113,7 @@ class OrderController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -138,7 +138,7 @@ class OrderController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *

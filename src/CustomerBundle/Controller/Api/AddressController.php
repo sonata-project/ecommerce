@@ -60,7 +60,7 @@ class AddressController
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of addresses by page")
      * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -122,7 +122,7 @@ class AddressController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *

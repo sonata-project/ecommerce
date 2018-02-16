@@ -50,7 +50,7 @@ class InvoiceController
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of invoices by page")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -111,7 +111,7 @@ class InvoiceController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -136,7 +136,7 @@ class InvoiceController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *

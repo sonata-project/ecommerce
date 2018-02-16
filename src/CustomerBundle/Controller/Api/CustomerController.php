@@ -77,7 +77,7 @@ class CustomerController
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for customers list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of customers by page")
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -138,7 +138,7 @@ class CustomerController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -247,7 +247,7 @@ class CustomerController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -274,7 +274,7 @@ class CustomerController
      *  }
      * )
      *
-     * @View(serializerGroups="{sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
