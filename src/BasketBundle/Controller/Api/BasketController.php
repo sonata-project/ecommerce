@@ -81,14 +81,13 @@ class BasketController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for baskets list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of baskets by page")
-     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query baskets basket by clause (key is field, value is direction")
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -96,6 +95,21 @@ class BasketController
      */
     public function getBasketsAction(ParamFetcherInterface $paramFetcher)
     {
+        $orderByQueryParam = new QueryParam();
+        $orderByQueryParam->name = 'orderBy';
+        $orderByQueryParam->requirements = 'ASC|DESC';
+        $orderByQueryParam->nullable = true;
+        $orderByQueryParam->strict = true;
+        $orderByQueryParam->description = 'Sort specification for the resultset (key is field, value is direction)';
+
+        if (property_exists($orderByQueryParam, 'map')) {
+            $orderByQueryParam->map = true;
+        } else {
+            $orderByQueryParam->array = true;
+        }
+
+        $paramFetcher->addParam($orderByQueryParam);
+
         // No filters implemented as of right now
         $supportedCriteria = [
         ];
@@ -127,14 +141,14 @@ class BasketController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="basket id"}
      *  },
-     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when basket is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -152,14 +166,14 @@ class BasketController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="basket id"}
      *  },
-     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when basket is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
