@@ -17,12 +17,9 @@
     "require": {
         "php": "^5.6 || ^7.0",
         "cocur/slugify": "^2.5 || ^3.0",
-        "friendsofsymfony/rest-bundle": "^1.8 || ^2.2",
-        "jms/serializer-bundle": "^1.5 || ^2.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
         "kriswallsmith/buzz": "^0.15 || ^0.16",
-        "nelmio/api-doc-bundle": "^2.13",
         "sonata-project/admin-bundle": "^3.29",
         "sonata-project/block-bundle": "^3.8",
         "sonata-project/classification-bundle": "^3.3",
@@ -47,11 +44,20 @@
         "symfony/validator": "^2.8"
     },
     "conflict": {
+        "friendsofsymfony/rest-bundle": "<1.8 || >=3.0",
         "jms/serializer": "<0.13",
         "symfony/intl": "<2.8"
     },
     "require-dev": {
+        "friendsofsymfony/rest-bundle": "^1.8 || ^2.2",
+        "jms/serializer-bundle": "^1.5 || ^2.0",
+        "nelmio/api-doc-bundle": "^2.13",
         "symfony/phpunit-bridge": "^4.0"
+    },
+    "suggest": {
+        "friendsofsymfony/rest-bundle": "For using the public API methods.",
+        "jms/serializer": "For using the public API methods.",
+        "nelmio/api-doc-bundle": "For using the public API methods."
     },
     "config": {
         "sort-packages": true
