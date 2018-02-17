@@ -16,12 +16,12 @@
     ],
     "require": {
         "php": "^5.6 || ^7.0",
-        "cocur/slugify": "^1.4 || ^2.5",
+        "cocur/slugify": "^2.5 || ^3.0",
         "friendsofsymfony/rest-bundle": "^1.8 || ^2.2",
-        "jms/serializer-bundle": "^0.13 || ^1.5",
-        "knplabs/knp-menu-bundle": "^1.1 || ^2.1",
+        "jms/serializer-bundle": "^1.5 || ^2.0",
+        "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
-        "kriswallsmith/buzz": "^0.15",
+        "kriswallsmith/buzz": "^0.15 || ^0.16",
         "nelmio/api-doc-bundle": "^2.13",
         "sonata-project/admin-bundle": "^3.29",
         "sonata-project/block-bundle": "^3.8",
@@ -51,7 +51,7 @@
         "symfony/intl": "<2.8"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^3.4 || ^4.0"
+        "symfony/phpunit-bridge": "^4.0"
     },
     "config": {
         "sort-packages": true
