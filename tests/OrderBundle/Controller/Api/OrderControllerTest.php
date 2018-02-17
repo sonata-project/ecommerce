@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\OrderBundle\Tests\Controller\Api;
 
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
@@ -32,12 +31,9 @@ class OrderControllerTest extends TestCase
         $orderManager = $this->createMock(OrderManagerInterface::class);
         $orderManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
-        $paramFetcher = $this->createMock(ParamFetcher::class);
+        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
-        $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(function ($param) {
-            return $param instanceof QueryParam && $param->name = 'orderBy';
-        }));
 
         $this->assertEquals([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }

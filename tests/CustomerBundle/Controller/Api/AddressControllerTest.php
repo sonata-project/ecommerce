@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\CustomerBundle\Tests\Controller\Api;
 
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Customer\AddressInterface;
@@ -36,12 +35,9 @@ class AddressControllerTest extends TestCase
         $addressManager = $this->createMock(AddressManagerInterface::class);
         $addressManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
-        $paramFetcher = $this->createMock(ParamFetcher::class);
+        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
-        $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(function ($param) {
-            return $param instanceof QueryParam && $param->name = 'orderBy';
-        }));
 
         $this->assertEquals([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
