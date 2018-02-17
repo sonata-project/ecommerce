@@ -18,7 +18,6 @@ use Sonata\BasketBundle\Form\ShippingType;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DomCrawler\Form;
 use Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
