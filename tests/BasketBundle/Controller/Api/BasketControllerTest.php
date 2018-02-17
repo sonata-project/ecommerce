@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\BasketBundle\Tests\Controller\Api;
 
-use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Controller\Api\BasketController;
@@ -42,9 +43,12 @@ class BasketControllerTest extends TestCase
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
-        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
+        $paramFetcher = $this->createMock(ParamFetcher::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(function ($param) {
+            return $param instanceof QueryParam && $param->name = 'orderBy';
+        }));
 
         $this->assertEquals([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }

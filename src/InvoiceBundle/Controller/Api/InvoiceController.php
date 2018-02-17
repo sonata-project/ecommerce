@@ -45,15 +45,14 @@ class InvoiceController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for invoices list pagination")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of invoices by page")
-     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query invoices invoice by clause (key is field, value is direction")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -61,6 +60,21 @@ class InvoiceController
      */
     public function getInvoicesAction(ParamFetcherInterface $paramFetcher)
     {
+        $orderByQueryParam = new QueryParam();
+        $orderByQueryParam->name = 'orderBy';
+        $orderByQueryParam->requirements = 'ASC|DESC';
+        $orderByQueryParam->nullable = true;
+        $orderByQueryParam->strict = true;
+        $orderByQueryParam->description = 'Sort specification for the resultset (key is field, value is direction)';
+
+        if (property_exists($orderByQueryParam, 'map')) {
+            $orderByQueryParam->map = true;
+        } else {
+            $orderByQueryParam->array = true;
+        }
+
+        $paramFetcher->addParam($orderByQueryParam);
+
         $supportedCriteria = [
             'status' => '',
         ];
@@ -92,14 +106,14 @@ class InvoiceController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="invoice id"}
      *  },
-     *  output={"class"="Sonata\Component\Invoice\InvoiceInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Invoice\InvoiceInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when invoice is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -117,14 +131,14 @@ class InvoiceController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="invoice id"}
      *  },
-     *  output={"class"="Sonata\Component\Invoice\InvoiceElementInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Invoice\InvoiceElementInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when invoice is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *

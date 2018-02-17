@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\InvoiceBundle\Tests\Controller\Api;
 
-use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+use FOS\RestBundle\Request\ParamFetcher;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
@@ -31,9 +32,12 @@ class InvoiceControllerTest extends TestCase
         $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
         $invoiceManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
 
-        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
+        $paramFetcher = $this->createMock(ParamFetcher::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(function ($param) {
+            return $param instanceof QueryParam && $param->name = 'orderBy';
+        }));
 
         $this->assertEquals([], $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }

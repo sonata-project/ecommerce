@@ -73,14 +73,13 @@ class CustomerController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"="sonata_api_read"}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for customers list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of customers by page")
-     * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query customers order by clause (key is field, value is direction")
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -88,6 +87,21 @@ class CustomerController
      */
     public function getCustomersAction(ParamFetcherInterface $paramFetcher)
     {
+        $orderByQueryParam = new QueryParam();
+        $orderByQueryParam->name = 'orderBy';
+        $orderByQueryParam->requirements = 'ASC|DESC';
+        $orderByQueryParam->nullable = true;
+        $orderByQueryParam->strict = true;
+        $orderByQueryParam->description = 'Sort specification for the resultset (key is field, value is direction)';
+
+        if (property_exists($orderByQueryParam, 'map')) {
+            $orderByQueryParam->map = true;
+        } else {
+            $orderByQueryParam->array = true;
+        }
+
+        $paramFetcher->addParam($orderByQueryParam);
+
         $supportedCriteria = [
             'is_fake' => '',
         ];
@@ -119,14 +133,14 @@ class CustomerController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="customer id"}
      *  },
-     *  output={"class"="Sonata\Component\Customer\CustomerInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Customer\CustomerInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when customer is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -228,14 +242,14 @@ class CustomerController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="customer id"}
      *  },
-     *  output={"class"="Sonata\Component\Order\OrderInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Order\OrderInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when customer is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -255,14 +269,14 @@ class CustomerController
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="customer id"}
      *  },
-     *  output={"class"="Sonata\Component\Customer\AddressInterface", "groups"="sonata_api_read"},
+     *  output={"class"="Sonata\Component\Customer\AddressInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
      *      404="Returned when customer is not found"
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
