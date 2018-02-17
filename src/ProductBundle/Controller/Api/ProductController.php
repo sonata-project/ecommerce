@@ -85,6 +85,7 @@ class ProductController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for products list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of products by page")
+     * @QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/disabled products only?")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -95,21 +96,6 @@ class ProductController
      */
     public function getProductsAction(ParamFetcherInterface $paramFetcher)
     {
-        $orderByQueryParam = new QueryParam();
-        $orderByQueryParam->name = 'orderBy';
-        $orderByQueryParam->requirements = 'ASC|DESC';
-        $orderByQueryParam->nullable = true;
-        $orderByQueryParam->strict = true;
-        $orderByQueryParam->description = 'Sort specification for the resultset (key is field, value is direction)';
-
-        if (property_exists($orderByQueryParam, 'map')) {
-            $orderByQueryParam->map = true;
-        } else {
-            $orderByQueryParam->array = true;
-        }
-
-        $paramFetcher->addParam($orderByQueryParam);
-
         $supportedCriteria = [
             'enabled' => '',
         ];
