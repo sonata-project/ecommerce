@@ -16,13 +16,10 @@
     ],
     "require": {
         "php": "^7.1",
-        "cocur/slugify": "^1.4 || ^2.5",
-        "friendsofsymfony/rest-bundle": "^2.2",
-        "jms/serializer-bundle": "^0.13 || ^1.5",
-        "knplabs/knp-menu-bundle": "^1.1 || ^2.1",
+        "cocur/slugify": "^2.5 || ^3.0",
+        "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
-        "kriswallsmith/buzz": "^0.15",
-        "nelmio/api-doc-bundle": "^2.13",
+        "kriswallsmith/buzz": "^0.15 || ^0.16",
         "sonata-project/admin-bundle": "^3.29",
         "sonata-project/block-bundle": "^3.8",
         "sonata-project/classification-bundle": "^3.3",
@@ -39,21 +36,40 @@
         "symfony/config": "^2.8 || ^3.2 || ^4.0",
         "symfony/console": "^2.8 || ^3.2 || ^4.0",
         "symfony/dependency-injection": "^2.8 || ^3.2 || ^4.0",
+        "symfony/doctrine-bridge": "^2.8 || ^3.2 || ^4.0",
+        "symfony/event-dispatcher": "^2.8 || ^3.2 || ^4.0",
+        "symfony/filesystem": "^2.8 || ^3.2 || ^4.0",
         "symfony/form": "^2.8 || ^3.2 || ^4.0",
+        "symfony/framework-bundle": "^2.8 || ^3.2 || ^4.0",
         "symfony/http-foundation": "^2.8 || ^3.2 || ^4.0",
         "symfony/http-kernel": "^2.8 || ^3.2 || ^4.0",
+        "symfony/intl": "^2.8 || ^3.2 || ^4.0",
+        "symfony/options-resolver": "^2.8 || ^3.2 || ^4.0",
         "symfony/process": "^2.8 || ^3.2 || ^4.0",
+        "symfony/property-access": "^2.8 || ^3.2 || ^4.0",
         "symfony/routing": "^2.8 || ^3.2 || ^4.0",
-        "symfony/security": "^2.8 || ^3.2 || ^4.0",
+        "symfony/security-core": "^2.8 || ^3.2 || ^4.0",
+        "symfony/security-http": "^2.8 || ^3.2 || ^4.0",
+        "symfony/templating": "^2.8 || ^3.2 || ^4.0",
+        "symfony/translation": "^2.8 || ^3.2 || ^4.0",
         "symfony/twig-bridge": "^2.8 || ^3.2 || ^4.0",
         "symfony/validator": "^2.8 || ^3.2 || ^4.0"
     },
     "conflict": {
+        "friendsofsymfony/rest-bundle": "<2.2 || >=3.0",
         "jms/serializer": "<0.13",
         "symfony/intl": "<2.8"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^3.4 || ^4.0"
+        "friendsofsymfony/rest-bundle": "^2.2",
+        "jms/serializer-bundle": "^1.0 || ^2.0",
+        "nelmio/api-doc-bundle": "^2.13",
+        "symfony/phpunit-bridge": "^4.0"
+    },
+    "suggest": {
+        "friendsofsymfony/rest-bundle": "For using the public API methods.",
+        "jms/serializer": "For using the public API methods.",
+        "nelmio/api-doc-bundle": "For using the public API methods."
     },
     "config": {
         "sort-packages": true
