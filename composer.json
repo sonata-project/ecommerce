@@ -57,8 +57,7 @@
     },
     "conflict": {
         "friendsofsymfony/rest-bundle": "<1.8 || >=3.0",
-        "jms/serializer": "<0.13",
-        "symfony/intl": "<2.8"
+        "jms/serializer": "<0.13"
     },
     "require-dev": {
         "friendsofsymfony/rest-bundle": "^1.8 || ^2.2",
