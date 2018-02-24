@@ -15,7 +15,7 @@ use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\View\View as FOSRestView;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
@@ -208,7 +208,7 @@ class AddressController
         try {
             $this->addressManager->delete($address);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
+            return FOSRestView::create(['error' => $e->getMessage()], 400);
         }
 
         return ['deleted' => true];
@@ -256,20 +256,18 @@ class AddressController
             $address = $form->getData();
             $this->addressManager->save($address);
 
-            $view = \FOS\RestBundle\View\View::create($address);
+            $context = new Context();
+            $context->setGroups(['sonata_api_read']);
 
-            // BC for FOSRestBundle < 2.0
-            if (method_exists($view, 'setSerializationContext')) {
-                $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(['sonata_api_read']);
-                $serializationContext->enableMaxDepthChecks();
-                $view->setSerializationContext($serializationContext);
+            // simplify when dropping FOSRest < 2.1
+            if (method_exists($context, 'enableMaxDepth')) {
+                $context->enableMaxDepth();
             } else {
-                $context = new Context();
-                $context->setGroups(['sonata_api_read']);
-                $context->setMaxDepth(0);
-                $view->setContext($context);
+                $context->setMaxDepth(10);
             }
+
+            $view = FOSRestView::create($address);
+            $view->setContext($context);
 
             return $view;
         }

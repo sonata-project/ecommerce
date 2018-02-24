@@ -144,10 +144,16 @@ class CustomerControllerTest extends TestCase
         $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
-        $view = $this->createCustomerController($customer, $customerManager, $addressManager, $formFactory)
-            ->postCustomerAddressAction(1, new Request());
+        $customerController = $this->createCustomerController(
+            $customer,
+            $customerManager,
+            $addressManager,
+            $formFactory
+        );
 
-        $this->assertInstanceOf(View::class, $view);
+        $customer = $customerController->postCustomerAddressAction(1, new Request());
+
+        $this->assertInstanceOf(AddressInterface::class, $customer);
     }
 
     public function testPostCustomerAddressInvalidAction()
