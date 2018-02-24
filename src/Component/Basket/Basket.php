@@ -429,7 +429,7 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getTotal($vat = false, $recurrentOnly = null)
     {
-        $total = 0;
+        $total = '0';
 
         foreach ($this->getBasketElements() as $basketElement) {
             $product = $basketElement->getProduct();
@@ -442,10 +442,10 @@ class Basket implements \Serializable, BasketInterface
                 continue;
             }
 
-            $total = bcadd($total, $basketElement->getTotal($vat));
+            $total = bcadd($total, (string) $basketElement->getTotal($vat));
         }
 
-        $total = bcadd($total, $this->getDeliveryPrice($vat));
+        $total = bcadd($total, (string) $this->getDeliveryPrice($vat));
 
         return $total;
     }
@@ -455,16 +455,16 @@ class Basket implements \Serializable, BasketInterface
      */
     public function getVatAmount()
     {
-        $vat = 0;
+        $vat = '0';
 
         foreach ($this->getBasketElements() as $basketElement) {
-            $vat = bcadd($vat, $basketElement->getVatAmount());
+            $vat = bcadd($vat, (string) $basketElement->getVatAmount());
         }
 
         $deliveryMethod = $this->getDeliveryMethod();
 
         if ($deliveryMethod instanceof ServiceDeliveryInterface) {
-            $vat = bcadd($vat, $deliveryMethod->getVatAmount($this));
+            $vat = bcadd($vat, (string) $deliveryMethod->getVatAmount($this));
         }
 
         return $vat;
@@ -479,13 +479,14 @@ class Basket implements \Serializable, BasketInterface
 
         foreach ($this->getBasketElements() as $basketElement) {
             $rate = $basketElement->getVatRate();
+            $amount = (string) $basketElement->getVatAmount();
 
             if (isset($amounts[$rate])) {
-                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $basketElement->getVatAmount());
+                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $amount);
             } else {
                 $amounts[$rate] = [
                     'rate' => $rate,
-                    'amount' => $basketElement->getVatAmount(),
+                    'amount' => $amount,
                 ];
             }
         }

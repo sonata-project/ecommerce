@@ -197,14 +197,14 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getUnitPrice($vat = false)
     {
-        $price = $this->unitPrice;
+        $price = (string) $this->unitPrice;
 
-        if (!$vat && true === $this->isPriceIncludingVat()) {
-            $price = bcdiv($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        if (!$vat && $this->isPriceIncludingVat()) {
+            $price = bcdiv($price, bcadd('1', (string) bcdiv($this->getVatRate(), '100')));
         }
 
-        if ($vat && false === $this->isPriceIncludingVat()) {
-            $price = bcmul((string) $price, (string) bcadd(1, bcdiv($this->getVatRate(), 100)));
+        if ($vat && !$this->isPriceIncludingVat()) {
+            $price = bcmul((string) $price, (string) bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
         }
 
         return $price;

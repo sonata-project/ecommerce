@@ -246,7 +246,7 @@ abstract class BaseProduct implements ProductInterface
      */
     public function setSlug($slug)
     {
-        $slug = Slugify::create()->slugify(trim($slug));
+        $slug = Slugify::create()->slugify(trim((string) $slug));
 
         $this->slug = !empty($slug) ? $slug : 'n-a';
     }

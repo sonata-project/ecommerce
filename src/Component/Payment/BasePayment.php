@@ -254,7 +254,7 @@ abstract class BasePayment implements PaymentInterface
             $method = 'info';
         }
 
-        foreach (explode("\n", $transaction->getInformation()) as $message) {
+        foreach (explode("\n", (string) $transaction->getInformation()) as $message) {
             call_user_func([$this->logger, $method], $message);
         }
     }
