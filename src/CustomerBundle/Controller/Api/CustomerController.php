@@ -15,7 +15,7 @@ use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\View\View as FOSRestView;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
@@ -227,7 +227,7 @@ class CustomerController
         try {
             $this->customerManager->delete($customer);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
+            return FOSRestView::create(['error' => $e->getMessage()], 400);
         }
 
         return ['deleted' => true];
@@ -300,6 +300,8 @@ class CustomerController
      *  }
      * )
      *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
      * @param int     $id      A Customer identifier
      * @param Request $request A Symfony request
      *
@@ -323,22 +325,7 @@ class CustomerController
 
             $this->addressManager->save($address);
 
-            $view = \FOS\RestBundle\View\View::create($address);
-
-            // BC for FOSRestBundle < 2.0
-            if (method_exists($view, 'setSerializationContext')) {
-                $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(['sonata_api_read']);
-                $serializationContext->enableMaxDepthChecks();
-                $view->setSerializationContext($serializationContext);
-            } else {
-                $context = new Context();
-                $context->setGroups(['sonata_api_read']);
-                $context->setMaxDepth(0);
-                $view->setContext($context);
-            }
-
-            return $view;
+            return $address;
         }
 
         return $form;
@@ -366,20 +353,18 @@ class CustomerController
             $customer = $form->getData();
             $this->customerManager->save($customer);
 
-            $view = \FOS\RestBundle\View\View::create($customer);
+            $context = new Context();
+            $context->setGroups(['sonata_api_read']);
 
-            // BC for FOSRestBundle < 2.0
-            if (method_exists($view, 'setSerializationContext')) {
-                $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(['sonata_api_read']);
-                $serializationContext->enableMaxDepthChecks();
-                $view->setSerializationContext($serializationContext);
+            // simplify when dropping FOSRest < 2.1
+            if (method_exists($context, 'enableMaxDepth')) {
+                $context->enableMaxDepth();
             } else {
-                $context = new Context();
-                $context->setGroups(['sonata_api_read']);
-                $context->setMaxDepth(0);
-                $view->setContext($context);
+                $context->setMaxDepth(10);
             }
+
+            $view = FOSRestView::create($customer);
+            $view->setContext($context);
 
             return $view;
         }
