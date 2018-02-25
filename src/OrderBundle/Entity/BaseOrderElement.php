@@ -184,7 +184,7 @@ abstract class BaseOrderElement implements OrderElementInterface
             $unitPrice = $this->getUnitPriceInc();
         }
 
-        return bcmul($unitPrice, $this->getQuantity());
+        return bcmul((string) $unitPrice, (string) $this->getQuantity());
     }
 
     /**
@@ -640,7 +640,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function getTotal($vat = false)
     {
-        return bcmul($this->getUnitPrice($vat), $this->getQuantity());
+        return bcmul((string) $this->getUnitPrice($vat), (string) $this->getQuantity());
     }
 
     /**

@@ -20,7 +20,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\View\View as FOSRestView;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
@@ -237,7 +237,7 @@ class ProductController
         try {
             $manager->delete($product);
         } catch (\Exception $e) {
-            return \FOS\RestBundle\View\View::create(['error' => $e->getMessage()], 400);
+            return FOSRestView::create(['error' => $e->getMessage()], 400);
         }
 
         return ['deleted' => true];
@@ -451,20 +451,18 @@ class ProductController
             $product->setShortDescription($this->formatterPool->transform($product->getShortDescriptionFormatter(), $product->getRawShortDescription()));
             $manager->save($product);
 
-            $view = \FOS\RestBundle\View\View::create($product);
+            $context = new Context();
+            $context->setGroups(['sonata_api_read']);
 
-            // BC for FOSRestBundle < 2.0
-            if (method_exists($view, 'setSerializationContext')) {
-                $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(['sonata_api_read']);
-                $serializationContext->enableMaxDepthChecks();
-                $view->setSerializationContext($serializationContext);
+            // simplify when dropping FOSRest < 2.1
+            if (method_exists($context, 'enableMaxDepth')) {
+                $context->enableMaxDepth();
             } else {
-                $context = new Context();
-                $context->setGroups(['sonata_api_read']);
-                $context->setMaxDepth(0);
-                $view->setContext($context);
+                $context->setMaxDepth(10);
             }
+
+            $view = FOSRestView::create($product);
+            $view->setContext($context);
 
             return $view;
         }
