@@ -13,17 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\BasketBundle\Form;
 
-use Sonata\Component\Basket\BasketInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Intl\Intl;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormInterface;
+use Sonata\Component\Basket\BasketInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormTypeInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -142,6 +143,19 @@ class AddressType extends AbstractType
 
     /**
      * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->addressClass,
+            'addresses' => [],
+            'validation_groups' => ['front'],
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     *  @deprecated Remove this function next major
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {

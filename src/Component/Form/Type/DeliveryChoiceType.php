@@ -61,10 +61,10 @@ class DeliveryChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $choices = [];       
-        foreach ($this->pool->getMethods() as $name => $instance) {
-            $choices[$name] = $instance->getName();
+        foreach ($this->pool->getMethods() as $name => $instance) {  
+            $choices[$instance->getName()] = $instance->getCode();
         }
-
+        
         $resolver->setDefaults([
             'choices' => $choices,
         ]);
@@ -78,7 +78,7 @@ class DeliveryChoiceType extends AbstractType
     {
         $choices = [];
 
-        foreach ($this->pool->getMethods() as $name => $instance) {
+        foreach ($this->pool->getMethods() as $name => $instance) {          
             $choices[$name] = $instance->getName();
         }
 

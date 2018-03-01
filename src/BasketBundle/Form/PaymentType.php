@@ -82,7 +82,7 @@ class PaymentType extends AbstractType
         $basket->setBillingAddress($address ?: null);
 
         $methods = $this->paymentSelector->getAvailableMethods($basket, $basket->getDeliveryAddress());
-
+     
         $choices = [];
         foreach ($methods as $method) {
             $choices[$method->getCode()] = $method->getName();
@@ -95,7 +95,7 @@ class PaymentType extends AbstractType
 
         $sub = $builder->create('paymentMethod', ChoiceType::class, [
             'expanded' => true,
-            'choice_list' => new SimpleChoiceList($choices),
+            'choices' => $choices,
         ]);
 
         $sub->addViewTransformer(new PaymentMethodTransformer($this->paymentPool), true);
