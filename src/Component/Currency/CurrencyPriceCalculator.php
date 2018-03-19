@@ -28,11 +28,11 @@ class CurrencyPriceCalculator implements CurrencyPriceCalculatorInterface
         $price = $product->getPrice();
 
         if (!$vat && true === $product->isPriceIncludingVat()) {
-            $price = bcdiv($price, bcadd(1, bcdiv($product->getVatRate(), 100)));
+            $price = bcdiv($price, bcadd('1', bcdiv($product->getVatRate(), '100')));
         }
 
         if ($vat && false === $product->isPriceIncludingVat()) {
-            $price = bcmul($price, bcadd(1, bcdiv($product->getVatRate(), 100)));
+            $price = bcmul($price, bcadd('1', bcdiv($product->getVatRate(), '100')));
         }
 
         return $price;
