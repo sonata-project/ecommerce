@@ -15,8 +15,9 @@ namespace Sonata\Component\Form\Type;
 
 use Sonata\Component\Delivery\Pool;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DeliveryChoiceType extends AbstractType
 {
@@ -57,11 +58,27 @@ class DeliveryChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $choices = [];       
+        foreach ($this->pool->getMethods() as $name => $instance) {  
+            $choices[$instance->getName()] = $instance->getCode();
+        }
+        
+        $resolver->setDefaults([
+            'choices' => $choices,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @deprecated Remove this function next major
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
         $choices = [];
 
-        foreach ($this->pool->getMethods() as $name => $instance) {
+        foreach ($this->pool->getMethods() as $name => $instance) {          
             $choices[$name] = $instance->getName();
         }
 

@@ -303,8 +303,9 @@ class BasketController extends Controller
         $template = 'SonataBasketBundle:Basket:delivery_step.html.twig';
 
         if ('POST' == $request->getMethod()) {
+           
             $form->handleRequest($request);
-
+            
             if ($form->isValid()) {
                 // save the basket
                 $this->get('sonata.basket.factory')->save($form->getData());
@@ -346,7 +347,7 @@ class BasketController extends Controller
         }
 
         $addresses = $customer->getAddressesByType(AddressInterface::TYPE_DELIVERY);
-
+       
         $em = $this->container->get('sonata.address.manager')->getEntityManager();
         foreach ($addresses as $key => $address) {
             // Prevents usage of not persisted addresses in AddressType to avoid choice field error
@@ -357,6 +358,7 @@ class BasketController extends Controller
         }
 
         // Show address creation / selection form
+       
         $form = $this->createForm(AddressType::class, null, ['addresses' => $addresses]);
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
@@ -472,11 +474,11 @@ class BasketController extends Controller
     {
         $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
-
+        
         $violations = $this
             ->get('validator')
-            ->validate($basket, ['elements', 'delivery', 'payment']);
-
+            ->validate($basket, null, ['elements', 'delivery', 'payment']);
+        
         if ($violations->count() > 0) {
             // basket not valid
 
