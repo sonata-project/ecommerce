@@ -202,11 +202,11 @@ class BasketElement implements \Serializable, BasketElementInterface
         $price = (string) $this->unitPrice;
 
         if (!$vat && $this->isPriceIncludingVat()) {
-            $price = bcdiv($price, bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
+            $price = bcdiv($price, bcadd('1', (string) bcdiv((string) $this->getVatRate(), '100')));
         }
 
         if ($vat && !$this->isPriceIncludingVat()) {
-            $price = bcmul($price, bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
+            $price = bcmul($price, bcadd('1', (string) bcdiv((string) $this->getVatRate(), '100')));
         }
 
         return $price;
@@ -280,11 +280,12 @@ class BasketElement implements \Serializable, BasketElementInterface
         $price = $this->price;
 
         if (!$vat && true === $this->isPriceIncludingVat()) {
-            $price = bcdiv($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+            $price = bcdiv((string) $price, (string) bcadd('1', (string) bcdiv($this->getVatRate(), '100')));
         }
 
         if ($vat && false === $this->isPriceIncludingVat()) {
-            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+
+            $price = bcmul((string) $price, (string) bcadd('1', (string) bcdiv($this->getVatRate(), '100')));
         }
 
         return $price;
