@@ -15,7 +15,7 @@ file that was distributed with this source code.
 
     <h5>{{ 'product.title.create_variations'|trans([], 'SonataProductBundle') }}</h5>
 
-    <form class="form-horizontal" action="{{ admin.generateUrl('create') }}" method="post" {{ form_enctype(form) }}>
+    <form class="form-horizontal" action="{{ admin.generateUrl('create') }}" method="post">
 
         {% if form.vars.errors|length > 0 %}
             <div class="sonata-ba-form-error">
