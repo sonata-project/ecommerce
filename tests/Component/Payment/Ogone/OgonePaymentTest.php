@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,7 +29,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OgonePaymentTest_Order extends BaseOrder
 {
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -42,7 +44,7 @@ class OgonePaymentTest_Order extends BaseOrder
 }
 class OgonePaymentTest extends TestCase
 {
-    public function testValidPayment()
+    public function testValidPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -68,7 +70,7 @@ class OgonePaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new OgonePaymentTest_Order();
@@ -82,6 +84,7 @@ class OgonePaymentTest extends TestCase
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
+        $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
 
         $this->assertEquals('ogone_1', $payment->getCode(), 'Ogone Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
@@ -94,7 +97,7 @@ class OgonePaymentTest extends TestCase
         $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
     }
 
-    public function testValidSendbankPayment()
+    public function testValidSendbankPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -103,7 +106,7 @@ class OgonePaymentTest extends TestCase
         $router = $this->createMock(RouterInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $customer = $this->createMock(CustomerInterface::class);
@@ -142,7 +145,7 @@ class OgonePaymentTest extends TestCase
     /**
      * @dataProvider getEncodeStringValues
      */
-    public function testEncodeString($data, $expected)
+    public function testEncodeString($data, $expected): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -222,12 +225,12 @@ class OgonePaymentTest extends TestCase
             return strtoupper(sha1($shasignStr));
         }
 
-        $params['check'] = '56384d4138b4219e554aa3cc781151686064e699';
+        $params['check'] = 'c7361062d415c378524cd82a61540bd99d54dd48';
 
         return $params[$name];
     }
 
-    public function testIsCallbackValid()
+    public function testIsCallbackValid(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -265,7 +268,7 @@ class OgonePaymentTest extends TestCase
         $this->assertFalse($payment->isCallbackValid($transaction));
     }
 
-    public function testGetOrderReference()
+    public function testGetOrderReference(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -279,7 +282,7 @@ class OgonePaymentTest extends TestCase
         $this->assertEquals('reference', $payment->getOrderReference($transaction));
     }
 
-    public function testApplyTransactionId()
+    public function testApplyTransactionId(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);

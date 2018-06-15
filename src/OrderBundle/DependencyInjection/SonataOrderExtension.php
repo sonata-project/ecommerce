@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ class SonataOrderExtension extends Extension
      * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -64,7 +66,7 @@ class SonataOrderExtension extends Extension
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param array                                                   $config
      */
-    public function registerParameters(ContainerBuilder $container, array $config)
+    public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.order.order.class', $config['class']['order']);
         $container->setParameter('sonata.order.order_element.class', $config['class']['order_element']);
@@ -76,7 +78,7 @@ class SonataOrderExtension extends Extension
     /**
      * @param array $config
      */
-    public function registerDoctrineMapping(array $config)
+    public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['order'])) {
             return;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -40,7 +42,7 @@ class DoctrineModelManager extends ModelManager
     /**
      * {@inheritdoc}
      */
-    public function create($object)
+    public function create($object): void
     {
         $this->pool->getManager($object)->save($object);
     }
@@ -48,7 +50,7 @@ class DoctrineModelManager extends ModelManager
     /**
      * {@inheritdoc}
      */
-    public function update($object)
+    public function update($object): void
     {
         $this->pool->getManager($object)->save($object);
     }
@@ -56,7 +58,7 @@ class DoctrineModelManager extends ModelManager
     /**
      * {@inheritdoc}
      */
-    public function delete($object)
+    public function delete($object): void
     {
         $this->pool->getManager($object)->delete($object);
     }

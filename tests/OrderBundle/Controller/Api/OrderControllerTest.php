@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class OrderControllerTest extends TestCase
 {
-    public function testGetOrdersAction()
+    public function testGetOrdersAction(): void
     {
         $orderManager = $this->createMock(OrderManagerInterface::class);
         $orderManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
@@ -36,13 +38,13 @@ class OrderControllerTest extends TestCase
         $this->assertEquals([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
-    public function testGetOrderAction()
+    public function testGetOrderAction(): void
     {
         $order = $this->createMock(OrderInterface::class);
         $this->assertEquals($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
-    public function testGetOrderActionNotFoundException()
+    public function testGetOrderActionNotFoundException(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Order (42) not found');
@@ -50,7 +52,7 @@ class OrderControllerTest extends TestCase
         $this->createOrderController()->getOrderAction(42);
     }
 
-    public function testGetOrderOrderelementsAction()
+    public function testGetOrderOrderelementsAction(): void
     {
         $order = $this->createMock(OrderInterface::class);
         $orderElements = $this->createMock(OrderElementInterface::class);

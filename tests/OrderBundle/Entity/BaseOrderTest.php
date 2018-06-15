@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -32,7 +34,7 @@ class OrderTest extends BaseOrder
  */
 class BaseOrderTest extends TestCase
 {
-    public function testOrderElementsVatAmounts()
+    public function testOrderElementsVatAmounts(): void
     {
         $order = new OrderTest();
 

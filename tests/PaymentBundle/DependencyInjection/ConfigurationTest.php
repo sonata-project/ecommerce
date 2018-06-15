@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Symfony\Component\Config\Definition\Processor;
  */
 class ConfigurationTest extends TestCase
 {
-    public function testDefaults()
+    public function testDefaults(): void
     {
         $processor = new Processor();
 
@@ -36,7 +38,7 @@ class ConfigurationTest extends TestCase
         $this->assertEmpty($config['methods']);
     }
 
-    public function validateClass($config)
+    public function validateClass($config): void
     {
         $this->assertSame([
             'order' => 'Application\\Sonata\\OrderBundle\\Entity\\Order',
@@ -44,7 +46,7 @@ class ConfigurationTest extends TestCase
         ], $config['class']);
     }
 
-    public function validateTransformers($config)
+    public function validateTransformers($config): void
     {
         $this->assertArrayHasKey('transformers', $config);
         $this->assertSame('sonata.payment.transformer.order', $config['transformers']['order']);

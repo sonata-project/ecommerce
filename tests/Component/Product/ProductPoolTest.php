@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\Component\Product\ProductProviderInterface;
 
 class ProductPoolTest extends TestCase
 {
-    public function testPool()
+    public function testPool(): void
     {
         $productProvider = $this->createMock(ProductProviderInterface::class);
         $productManager1 = $this->createMock(ProductManagerInterface::class);

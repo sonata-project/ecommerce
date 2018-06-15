@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -60,7 +62,7 @@ class InvoiceTransformer extends BaseTransformer
      * @param OrderInterface   $order
      * @param InvoiceInterface $invoice
      */
-    public function transformFromOrder(OrderInterface $order, InvoiceInterface $invoice)
+    public function transformFromOrder(OrderInterface $order, InvoiceInterface $invoice): void
     {
         $event = new OrderTransformEvent($order);
         $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_TO_INVOICE_TRANSFORM, $event);
@@ -110,7 +112,7 @@ class InvoiceTransformer extends BaseTransformer
      * @param InvoiceInterface $invoice
      * @param OrderInterface   $order
      */
-    protected function addDelivery(InvoiceInterface $invoice, OrderInterface $order)
+    protected function addDelivery(InvoiceInterface $invoice, OrderInterface $order): void
     {
         /** @var InvoiceElementInterface $invoiceElement */
         $invoiceElement = $this->invoiceElementManager->create();

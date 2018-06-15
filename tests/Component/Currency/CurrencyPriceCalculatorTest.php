@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ use Sonata\Component\Product\ProductInterface;
  */
 class CurrencyPriceCalculatorTest extends TestCase
 {
-    public function testGetPrice()
+    public function testGetPrice(): void
     {
         $currencyPriceCalculator = new CurrencyPriceCalculator();
 

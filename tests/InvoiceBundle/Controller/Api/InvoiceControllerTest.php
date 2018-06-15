@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class InvoiceControllerTest extends TestCase
 {
-    public function testGetInvoicesAction()
+    public function testGetInvoicesAction(): void
     {
         $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
         $invoiceManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
@@ -36,13 +38,13 @@ class InvoiceControllerTest extends TestCase
         $this->assertEquals([], $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }
 
-    public function testGetInvoiceAction()
+    public function testGetInvoiceAction(): void
     {
         $invoice = $this->createMock(InvoiceInterface::class);
         $this->assertEquals($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
-    public function testGetInvoiceActionNotFoundException()
+    public function testGetInvoiceActionNotFoundException(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Invoice (42) not found');
@@ -50,7 +52,7 @@ class InvoiceControllerTest extends TestCase
         $this->createInvoiceController()->getInvoiceAction(42);
     }
 
-    public function testGetInvoiceInvoiceelementsAction()
+    public function testGetInvoiceInvoiceelementsAction(): void
     {
         $invoice = $this->createMock(InvoiceInterface::class);
         $invoiceElements = $this->createMock(InvoiceElementInterface::class);

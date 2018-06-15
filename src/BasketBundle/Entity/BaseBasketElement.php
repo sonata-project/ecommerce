@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -36,7 +38,7 @@ abstract class BaseBasketElement extends BasketElement
      *
      * @param \Sonata\Component\Basket\BasketInterface $basket
      */
-    public function setBasket(BasketInterface $basket)
+    public function setBasket(BasketInterface $basket): void
     {
         $this->basket = $basket;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -40,7 +42,7 @@ class ProductProviderTest extends BaseProductProvider
 
 class ProductTest extends BaseProduct implements ProductInterface
 {
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -66,11 +68,11 @@ class ProductTest extends BaseProduct implements ProductInterface
  */
 class BaseProductProviderTest extends TestCase
 {
-    public function testGetProductFromRaw()
+    public function testGetProductFromRaw(): void
     {
     }
 
-    public function testCreateVariation()
+    public function testCreateVariation(): void
     {
         $productProvider = $this->createNewProductProvider();
         $product = $this->getMockBuilder(ProductInterface::class)
@@ -87,7 +89,7 @@ class BaseProductProviderTest extends TestCase
         }
     }
 
-    public function testVariationSkuDuplication()
+    public function testVariationSkuDuplication(): void
     {
         $productProvider = $this->createNewProductProvider();
         $product = new ProductTest();
@@ -97,7 +99,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertEquals('TESTING_SKU_DUPLICATE', $variation->getSku());
     }
 
-    public function testBuildBasketElement()
+    public function testBuildBasketElement(): void
     {
         $basketElement = new BasketElement();
         $productProvider = $this->createNewProductProvider();
@@ -113,7 +115,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertNull($basketElement->getOption('test', null));
     }
 
-    public function testValidateFormBasketElement()
+    public function testValidateFormBasketElement(): void
     {
         $productProvider = $this->createNewProductProvider();
         $errorElement = $this->createMock(ErrorElement::class);
@@ -160,7 +162,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
     }
 
-    public function testBasketAddProduct()
+    public function testBasketAddProduct(): void
     {
         $productProvider = $this->createNewProductProvider();
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
@@ -202,7 +204,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertInstanceOf(BasketElementInterface::class, $result);
     }
 
-    public function testBasketAddProductInvalid()
+    public function testBasketAddProductInvalid(): void
     {
         $this->expectException(InvalidProductException::class);
         $this->expectExceptionMessage('You can\'t add \'product_sku\' to the basket as it is a master product with variations.');
@@ -221,7 +223,7 @@ class BaseProductProviderTest extends TestCase
         $productProvider->basketAddProduct($basket, $product, $basketElement);
     }
 
-    public function testBasketMergeProduct()
+    public function testBasketMergeProduct(): void
     {
         // Test a product not in the basket
         $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
@@ -284,7 +286,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertInstanceOf(BasketElementInterface::class, $productProvider->basketMergeProduct($basket, $product, $newBasketElement));
     }
 
-    public function testIsValidBasketElement()
+    public function testIsValidBasketElement(): void
     {
         $productProvider = $this->createNewProductProvider();
 
@@ -304,7 +306,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertTrue($productProvider->isValidBasketElement($basketElement));
     }
 
-    public function testIsAddableToBasket()
+    public function testIsAddableToBasket(): void
     {
         $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
@@ -313,7 +315,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertTrue($productProvider->isAddableToBasket($basket, $product));
     }
 
-    public function testHasVariationsValidCase()
+    public function testHasVariationsValidCase(): void
     {
         $productMock = new ProductTest();
         $variationMock = new ProductTest();
@@ -325,7 +327,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertTrue($productProvider->hasVariations($productMock));
     }
 
-    public function testHasVariationsWithNoVariation()
+    public function testHasVariationsWithNoVariation(): void
     {
         $productMock = new ProductTest();
 
@@ -335,14 +337,14 @@ class BaseProductProviderTest extends TestCase
         $this->assertFalse($productProvider->hasVariations($productMock));
     }
 
-    public function testHasEnabledVariationsWithNoVariation()
+    public function testHasEnabledVariationsWithNoVariation(): void
     {
         $productMock = new ProductTest();
         $productProvider = $this->createNewProductProvider();
         $this->assertFalse($productProvider->hasEnabledVariations($productMock));
     }
 
-    public function testHasEnabledVariationsWithNoEnabledVariation()
+    public function testHasEnabledVariationsWithNoEnabledVariation(): void
     {
         $productMock = new ProductTest();
         $productMock->setEnabled(true);
@@ -356,7 +358,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertFalse($productProvider->hasEnabledVariations($productMock));
     }
 
-    public function testHasEnabledVariationsWithEnabledVariation()
+    public function testHasEnabledVariationsWithEnabledVariation(): void
     {
         $productMock = new ProductTest();
         $productMock->setEnabled(true);
@@ -370,7 +372,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertTrue($productProvider->hasEnabledVariations($productMock));
     }
 
-    public function testGetEnabledVariationWithNoVariation()
+    public function testGetEnabledVariationWithNoVariation(): void
     {
         $productMock = new ProductTest();
         $provider = $this->createNewProductProvider();
@@ -381,7 +383,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertEquals(0, count($variations));
     }
 
-    public function testGetEnabledVariationWithVariation()
+    public function testGetEnabledVariationWithVariation(): void
     {
         $productMock = new ProductTest();
         $variationMock = new ProductTest();
@@ -397,7 +399,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertInstanceOf(ProductInterface::class, $variations[0]);
     }
 
-    public function testGetCheapestEnabledVariationWithNoVariation()
+    public function testGetCheapestEnabledVariationWithNoVariation(): void
     {
         $product = new ProductTest();
         $provider = $this->createNewProductProvider();
@@ -406,7 +408,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertNull($provider->getCheapestEnabledVariation($product));
     }
 
-    public function testGetCheapestEnabledVariationWithNoEnabledVariation()
+    public function testGetCheapestEnabledVariationWithNoEnabledVariation(): void
     {
         $product = new ProductTest();
         $variationMock = new ProductTest();
@@ -419,7 +421,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertNull($provider->getCheapestEnabledVariation($product));
     }
 
-    public function testGetCheapestEnabledVariationWithVariations()
+    public function testGetCheapestEnabledVariationWithVariations(): void
     {
         $product = new ProductTest();
         $variationA = new ProductTest();
@@ -437,7 +439,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertEquals($variationB, $provider->getCheapestEnabledVariation($product));
     }
 
-    public function testCalculatePrice()
+    public function testCalculatePrice(): void
     {
         $product = new ProductTest();
         $product->setPrice(42);
@@ -451,7 +453,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertEquals(42, $provider->calculatePrice($product, $currency, false));
     }
 
-    public function testCalculatePriceException()
+    public function testCalculatePriceException(): void
     {
         $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('Expected integer >= 1 for quantity, 4.32 given.');
@@ -465,7 +467,7 @@ class BaseProductProviderTest extends TestCase
         $provider->calculatePrice($product, $currency, false, 4.32);
     }
 
-    public function testCalculatePriceExceptionLessThanOne()
+    public function testCalculatePriceExceptionLessThanOne(): void
     {
         $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('Expected integer >= 1 for quantity, 0.32 given.');
@@ -479,7 +481,7 @@ class BaseProductProviderTest extends TestCase
         $provider->calculatePrice($product, $currency, false, 0.32);
     }
 
-    public function testGetVariationsChoices()
+    public function testGetVariationsChoices(): void
     {
         $product = new ProductTest();
         $product->setEnabled(true);
@@ -516,7 +518,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertEquals($expected, $provider->getVariationsChoices($product));
     }
 
-    public function testGetVariatedProperties()
+    public function testGetVariatedProperties(): void
     {
         $product = new ProductTest();
         $product->setEnabled(true);
@@ -547,7 +549,7 @@ class BaseProductProviderTest extends TestCase
         $this->assertEquals($expected, $provider->getVariatedProperties($variation));
     }
 
-    public function testGetVariation()
+    public function testGetVariation(): void
     {
         $product = new ProductTest();
         $product->setEnabled(true);

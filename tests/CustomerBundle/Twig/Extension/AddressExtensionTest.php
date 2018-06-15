@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,7 +25,7 @@ use Sonata\CustomerBundle\Twig\Extension\AddressExtension;
  */
 class AddressExtensionTest extends TestCase
 {
-    public function testRenderAddress()
+    public function testRenderAddress(): void
     {
         $environment = $this->createMock(\Twig_Environment::class);
         $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
@@ -53,7 +55,7 @@ class AddressExtensionTest extends TestCase
         $extension->renderAddress($environment, $address);
     }
 
-    public function testRenderAddressInvalidParameter()
+    public function testRenderAddressInvalidParameter(): void
     {
         $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('sonata_address_render needs an AddressInterface instance or an array with keys (firstname, lastname, address1, postcode, city, country_code)');
@@ -67,7 +69,7 @@ class AddressExtensionTest extends TestCase
         $extension->renderAddress($environment, $address);
     }
 
-    public function testRenderAddressMissingId()
+    public function testRenderAddressMissingId(): void
     {
         $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage('sonata_address_render needs \'id\' key to be set to render the edit button');
@@ -88,7 +90,7 @@ class AddressExtensionTest extends TestCase
         $extension->renderAddress($environment, $address, true, true);
     }
 
-    public function testIsAddressDeliverable()
+    public function testIsAddressDeliverable(): void
     {
         $address = $this->createMock(AddressInterface::class);
         $basket = $this->createMock(BasketInterface::class);

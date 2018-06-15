@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -11,12 +13,13 @@
 
 namespace Sonata\CustomerBundle\Form\Type;
 
-use Sonata\Component\Basket\BasketInterface;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Form\AbstractType;
+use Sonata\Component\Basket\BasketInterface;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -63,7 +66,7 @@ class AddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $address = $builder->getData();
 
@@ -112,7 +115,19 @@ class AddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'context' => 'default',
+            'types' => call_user_func([$this->class, $this->getter]),
+        ]);
+    }
+    
+    /**
+     * {@inheritdoc}
+     * @deprecated Remove this function next major
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
         $resolver->setDefaults([
             'context' => 'default',

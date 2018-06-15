@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,7 +29,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class OrderTransformerTest extends TestCase
 {
-    public function testBasket()
+    public function testBasket(): void
     {
         $provider = $this->createMock(ProductProviderInterface::class);
         $provider->expects($this->once())->method('basketAddProduct')->will($this->returnValue(true));

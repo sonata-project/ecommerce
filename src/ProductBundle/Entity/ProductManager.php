@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -122,7 +124,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     /**
      * {@inheritdoc}
      */
-    public function updateStock($product, $diff)
+    public function updateStock($product, $diff): void
     {
         if (0 == $diff) {
             return;

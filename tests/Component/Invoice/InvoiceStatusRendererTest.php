@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Sonata\InvoiceBundle\Entity\BaseInvoice;
  */
 class InvoiceStatusRendererTest extends TestCase
 {
-    public function testHandles()
+    public function testHandles(): void
     {
         $renderer = new InvoiceStatusRenderer();
 
@@ -33,7 +35,7 @@ class InvoiceStatusRendererTest extends TestCase
         $this->assertTrue($renderer->handlesObject($invoice));
     }
 
-    public function testGetClass()
+    public function testGetClass(): void
     {
         $renderer = new InvoiceStatusRenderer();
         $invoice = $this->createMock(InvoiceInterface::class);

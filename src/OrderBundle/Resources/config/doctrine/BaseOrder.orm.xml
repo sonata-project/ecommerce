@@ -10,9 +10,9 @@
         <field name="deliveryStatus" nullable="true" type="integer" column="delivery_status"/>
         <field name="validatedAt" nullable="true" type="datetime" column="validated_at"/>
         <field name="username" nullable="true" type="string" column="username" length="255"/>
-        <field name="totalInc" nullable="true" type="decimal" column="total_inc" scale="4"/>
-        <field name="totalExcl" nullable="true" type="decimal" column="total_excl" scale="4"/>
-        <field name="deliveryCost" nullable="true" type="decimal" column="delivery_cost" scale="4"/>
+        <field name="totalInc" nullable="true" type="decimal" column="total_inc" precision="20" scale="4"/>
+        <field name="totalExcl" nullable="true" type="decimal" column="total_excl" precision="20" scale="4"/>
+        <field name="deliveryCost" nullable="true" type="decimal" column="delivery_cost" precision="20" scale="4"/>
         <field name="deliveryVat" nullable="true" type="decimal" column="delivery_vat" scale="4"/>
         <field name="locale" nullable="true" type="string" column="locale" length="6"/>
         <field name="billingName" nullable="true" type="string" column="billing_name" length="255"/>

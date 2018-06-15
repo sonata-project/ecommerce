@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class InvoiceController extends Controller
     /**
      * @throws \RuntimeException
      */
-    public function indexAction()
+    public function indexAction(): void
     {
         throw new \RuntimeException('not implemented');
     }
@@ -68,7 +70,7 @@ class InvoiceController extends Controller
      *
      * @throws \RuntimeException
      */
-    public function downloadAction($reference)
+    public function downloadAction($reference): void
     {
         throw new \RuntimeException('not implemented');
     }
@@ -80,7 +82,7 @@ class InvoiceController extends Controller
      *
      * @throws AccessDeniedException
      */
-    protected function checkAccess(CustomerInterface $customer)
+    protected function checkAccess(CustomerInterface $customer): void
     {
         if (!($user = $this->getUser())
             || !$customer->getUser()

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -220,13 +222,13 @@ abstract class BaseOrder implements OrderInterface
         return $this->getReference() ?: 'n/a';
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -285,7 +287,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setReference($reference)
+    public function setReference($reference): void
     {
         $this->reference = $reference;
     }
@@ -301,7 +303,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setPaymentMethod($paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
     }
@@ -317,7 +319,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryMethod($deliveryMethod)
+    public function setDeliveryMethod($deliveryMethod): void
     {
         $this->deliveryMethod = $deliveryMethod;
     }
@@ -333,7 +335,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrency(CurrencyInterface $currency)
+    public function setCurrency(CurrencyInterface $currency): void
     {
         $this->currency = $currency;
     }
@@ -349,7 +351,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setStatus($status)
+    public function setStatus($status): void
     {
         $this->status = $status;
     }
@@ -365,7 +367,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaymentStatus($paymentStatus)
+    public function setPaymentStatus($paymentStatus): void
     {
         $this->paymentStatus = $paymentStatus;
     }
@@ -391,7 +393,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryStatus($deliveryStatus)
+    public function setDeliveryStatus($deliveryStatus): void
     {
         $this->deliveryStatus = $deliveryStatus;
     }
@@ -417,7 +419,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setValidatedAt(\DateTime $validatedAt = null)
+    public function setValidatedAt(\DateTime $validatedAt = null): void
     {
         $this->validatedAt = $validatedAt;
     }
@@ -433,7 +435,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setUsername($username)
+    public function setUsername($username): void
     {
         $this->username = $username;
     }
@@ -449,7 +451,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setTotalInc($totalInc)
+    public function setTotalInc($totalInc): void
     {
         $this->totalInc = $totalInc;
     }
@@ -465,7 +467,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setTotalExcl($totalExcl)
+    public function setTotalExcl($totalExcl): void
     {
         $this->totalExcl = $totalExcl;
     }
@@ -481,7 +483,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeliveryCost($deliveryCost)
+    public function setDeliveryCost($deliveryCost): void
     {
         $this->deliveryCost = $deliveryCost;
     }
@@ -499,7 +501,7 @@ abstract class BaseOrder implements OrderInterface
      *
      * @param float $deliveryVat
      */
-    public function setDeliveryVat($deliveryVat)
+    public function setDeliveryVat($deliveryVat): void
     {
         $this->deliveryVat = $deliveryVat;
     }
@@ -517,7 +519,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingName($billingName)
+    public function setBillingName($billingName): void
     {
         $this->billingName = $billingName;
     }
@@ -533,7 +535,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingPhone($billingPhone)
+    public function setBillingPhone($billingPhone): void
     {
         $this->billingPhone = $billingPhone;
     }
@@ -549,7 +551,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddress1($billingAddress1)
+    public function setBillingAddress1($billingAddress1): void
     {
         $this->billingAddress1 = $billingAddress1;
     }
@@ -565,7 +567,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddress2($billingAddress2)
+    public function setBillingAddress2($billingAddress2): void
     {
         $this->billingAddress2 = $billingAddress2;
     }
@@ -581,7 +583,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddress3($billingAddress3)
+    public function setBillingAddress3($billingAddress3): void
     {
         $this->billingAddress3 = $billingAddress3;
     }
@@ -597,7 +599,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingCity($billingCity)
+    public function setBillingCity($billingCity): void
     {
         $this->billingCity = $billingCity;
     }
@@ -613,7 +615,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingPostcode($billingPostcode)
+    public function setBillingPostcode($billingPostcode): void
     {
         $this->billingPostcode = $billingPostcode;
     }
@@ -629,7 +631,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingCountryCode($billingCountryCode)
+    public function setBillingCountryCode($billingCountryCode): void
     {
         $this->billingCountryCode = $billingCountryCode;
     }
@@ -645,7 +647,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingFax($billingFax)
+    public function setBillingFax($billingFax): void
     {
         $this->billingFax = $billingFax;
     }
@@ -661,7 +663,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingEmail($billingEmail)
+    public function setBillingEmail($billingEmail): void
     {
         $this->billingEmail = $billingEmail;
     }
@@ -677,7 +679,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setBillingMobile($billingMobile)
+    public function setBillingMobile($billingMobile): void
     {
         $this->billingMobile = $billingMobile;
     }
@@ -693,7 +695,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingName($shippingName)
+    public function setShippingName($shippingName): void
     {
         $this->shippingName = $shippingName;
     }
@@ -709,7 +711,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingPhone($shippingPhone)
+    public function setShippingPhone($shippingPhone): void
     {
         $this->shippingPhone = $shippingPhone;
     }
@@ -725,7 +727,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingAddress1($shippingAddress1)
+    public function setShippingAddress1($shippingAddress1): void
     {
         $this->shippingAddress1 = $shippingAddress1;
     }
@@ -741,7 +743,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingAddress2($shippingAddress2)
+    public function setShippingAddress2($shippingAddress2): void
     {
         $this->shippingAddress2 = $shippingAddress2;
     }
@@ -757,7 +759,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingAddress3($shippingAddress3)
+    public function setShippingAddress3($shippingAddress3): void
     {
         $this->shippingAddress3 = $shippingAddress3;
     }
@@ -773,7 +775,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingCity($shippingCity)
+    public function setShippingCity($shippingCity): void
     {
         $this->shippingCity = $shippingCity;
     }
@@ -789,7 +791,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingPostcode($shippingPostcode)
+    public function setShippingPostcode($shippingPostcode): void
     {
         $this->shippingPostcode = $shippingPostcode;
     }
@@ -805,7 +807,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingCountryCode($shippingCountryCode)
+    public function setShippingCountryCode($shippingCountryCode): void
     {
         $this->shippingCountryCode = $shippingCountryCode;
     }
@@ -821,7 +823,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingFax($shippingFax)
+    public function setShippingFax($shippingFax): void
     {
         $this->shippingFax = $shippingFax;
     }
@@ -837,7 +839,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingEmail($shippingEmail)
+    public function setShippingEmail($shippingEmail): void
     {
         $this->shippingEmail = $shippingEmail;
     }
@@ -853,7 +855,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setShippingMobile($shippingMobile)
+    public function setShippingMobile($shippingMobile): void
     {
         $this->shippingMobile = $shippingMobile;
     }
@@ -877,7 +879,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addOrderElement(OrderElementInterface $orderElement)
+    public function addOrderElement(OrderElementInterface $orderElement): void
     {
         $this->orderElements[] = $orderElement;
         $orderElement->setOrder($this);
@@ -934,7 +936,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -950,7 +952,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -966,7 +968,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function addOrderElements(OrderElementInterface $orderElements)
+    public function addOrderElements(OrderElementInterface $orderElements): void
     {
         $this->orderElements[] = $orderElements;
     }
@@ -974,7 +976,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setOrderElements($orderElements)
+    public function setOrderElements($orderElements): void
     {
         $this->orderElements = $orderElements;
     }
@@ -982,7 +984,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer)
+    public function setCustomer(CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
@@ -1033,7 +1035,7 @@ abstract class BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocale($locale)
+    public function setLocale($locale): void
     {
         $this->locale = $locale;
     }
@@ -1065,13 +1067,14 @@ abstract class BaseOrder implements OrderInterface
 
         foreach ($this->getOrderElements() as $orderElement) {
             $rate = $orderElement->getVatRate();
+            $amount = (string) $orderElement->getVatAmount();
 
             if (isset($amounts[$rate])) {
-                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $orderElement->getVatAmount());
+                $amounts[$rate]['amount'] = bcadd($amounts[$rate]['amount'], $amount);
             } else {
                 $amounts[$rate] = [
                     'rate' => $rate,
-                    'amount' => $orderElement->getVatAmount(),
+                    'amount' => $amount,
                 ];
             }
         }

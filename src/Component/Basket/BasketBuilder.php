@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -59,7 +61,7 @@ class BasketBuilder implements BasketBuilderInterface
      *
      * @throws \RuntimeException
      */
-    public function build(BasketInterface $basket)
+    public function build(BasketInterface $basket): void
     {
         $basket->setProductPool($this->productPool);
 

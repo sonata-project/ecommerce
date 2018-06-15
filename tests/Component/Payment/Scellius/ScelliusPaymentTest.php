@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -28,7 +30,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ScelliusPaymentTest_Order extends BaseOrder
 {
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -55,7 +57,7 @@ class ScelliusPaymentTest extends TestCase
     /**
      * useless test ....
      */
-    public function testValidPayment()
+    public function testValidPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -73,7 +75,7 @@ class ScelliusPaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new ScelliusPaymentTest_Order();
@@ -87,6 +89,7 @@ class ScelliusPaymentTest extends TestCase
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
+        $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
 
         $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
@@ -109,7 +112,7 @@ class ScelliusPaymentTest extends TestCase
 //        $payment->applyTransactionId($transaction);
     }
 
-    public function testSendConfirmationReceipt()
+    public function testSendConfirmationReceipt(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -153,7 +156,7 @@ class ScelliusPaymentTest extends TestCase
         $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
     }
 
-    public function testIsCallbackValid()
+    public function testIsCallbackValid(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -192,7 +195,7 @@ class ScelliusPaymentTest extends TestCase
         $this->assertFalse($payment->isCallbackValid($transaction));
     }
 
-    public function testGetOrderReference()
+    public function testGetOrderReference(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -207,7 +210,7 @@ class ScelliusPaymentTest extends TestCase
         $this->assertEquals('reference', $payment->getOrderReference($transaction));
     }
 
-    public function testApplyTransactionId()
+    public function testApplyTransactionId(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -222,7 +225,7 @@ class ScelliusPaymentTest extends TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    public function testInvalidCurrencySendbankPayment()
+    public function testInvalidCurrencySendbankPayment(): void
     {
         $this->expectException(\RuntimeException::class);
 
@@ -233,7 +236,7 @@ class ScelliusPaymentTest extends TestCase
         $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new ScelliusPaymentTest_Order();
@@ -252,7 +255,7 @@ class ScelliusPaymentTest extends TestCase
         $payment->sendbank($order);
     }
 
-    public function testValidSendbankPayment()
+    public function testValidSendbankPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -262,7 +265,7 @@ class ScelliusPaymentTest extends TestCase
         $router = $this->createMock(RouterInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $customer = $this->createMock(CustomerInterface::class);
@@ -295,7 +298,7 @@ class ScelliusPaymentTest extends TestCase
     /**
      * @dataProvider getEncodeStringValues
      */
-    public function testEncodeString($data, $expected)
+    public function testEncodeString($data, $expected): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -340,7 +343,7 @@ class ScelliusPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return '56384d4138b4219e554aa3cc781151686064e699';
+            return 'c7361062d415c378524cd82a61540bd99d54dd48';
         }
     }
 }

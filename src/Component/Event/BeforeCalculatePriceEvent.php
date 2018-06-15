@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -73,7 +75,7 @@ class BeforeCalculatePriceEvent extends Event
     /**
      * @param int $quantity
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity): void
     {
         $this->quantity = $quantity;
     }
@@ -89,7 +91,7 @@ class BeforeCalculatePriceEvent extends Event
     /**
      * @param bool $vat
      */
-    public function setVat($vat)
+    public function setVat($vat): void
     {
         $this->vat = $vat;
     }

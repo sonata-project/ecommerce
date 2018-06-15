@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class PaymentMethodTransformerTest extends TestCase
 {
-    public function testTransform()
+    public function testTransform(): void
     {
         $pool = $this->createMock(Pool::class);
         $transformer = new PaymentMethodTransformer($pool);
@@ -34,7 +36,7 @@ class PaymentMethodTransformerTest extends TestCase
         $this->assertNull($transformer->transform(null));
     }
 
-    public function testReverseTransform()
+    public function testReverseTransform(): void
     {
         $payment = new PassPayment($this->createMock(RouterInterface::class));
         $payment->setCode('paymentCode');

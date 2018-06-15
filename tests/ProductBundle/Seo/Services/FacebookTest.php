@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -40,7 +42,7 @@ class ProductFbMock extends BaseProduct
 
 class FacebookTest extends TestCase
 {
-    public function testAlterPage()
+    public function testAlterPage(): void
     {
         $mediaPool = $this->createMock(Pool::class);
         $seoPage = new SeoPage('test');

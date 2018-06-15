@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -25,7 +27,7 @@ abstract class BaseBasket extends Basket
     /**
      * {@inheritdoc}
      */
-    public function setBasketElements($basketElements)
+    public function setBasketElements($basketElements): void
     {
         foreach ($basketElements as $basketElement) {
             if (!$basketElement instanceof BasketElementInterface) {
@@ -40,7 +42,7 @@ abstract class BaseBasket extends Basket
     /**
      * {@inheritdoc}
      */
-    public function reset($full = true)
+    public function reset($full = true): void
     {
         parent::reset($full);
 

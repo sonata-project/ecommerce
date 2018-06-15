@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
  */
 class RecentCustomersBlockServiceTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $customerManagerInterfaceMock = $this->createMock(CustomerManagerInterface::class);

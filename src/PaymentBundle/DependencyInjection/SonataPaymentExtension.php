@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -30,7 +32,7 @@ class SonataPaymentExtension extends Extension
      * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -59,7 +61,7 @@ class SonataPaymentExtension extends Extension
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $config
      */
-    public function registerParameters(ContainerBuilder $container, array $config)
+    public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.payment.transaction.class', $config['class']['transaction']);
     }
@@ -70,7 +72,7 @@ class SonataPaymentExtension extends Extension
      *
      * @throws \RuntimeException
      */
-    public function configurePayment(ContainerBuilder $container, array $config)
+    public function configurePayment(ContainerBuilder $container, array $config): void
     {
         // create the payment method pool
         $pool = $container->getDefinition('sonata.payment.pool');
@@ -91,10 +93,10 @@ class SonataPaymentExtension extends Extension
             if (array_key_exists($id, $internal)) {
                 $id = $internal[$id];
 
-                $name = isset($settings['name']) ? $settings['name'] : 'n/a';
-                $options = isset($settings['options']) ? $settings['options'] : [];
+                $name = $settings['name'] ?? 'n/a';
+                $options = $settings['options'] ?? [];
 
-                $code = isset($settings['code']) ? $settings['code'] : false;
+                $code = $settings['code'] ?? false;
 
                 if (!$code) {
                     throw new \RuntimeException('Please provide a code for the payment handler');
@@ -160,7 +162,7 @@ class SonataPaymentExtension extends Extension
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $selector
      */
-    public function configureSelector(ContainerBuilder $container, $selector)
+    public function configureSelector(ContainerBuilder $container, $selector): void
     {
         $container->setAlias('sonata.payment.selector', $selector);
     }
@@ -169,7 +171,7 @@ class SonataPaymentExtension extends Extension
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param array                                                   $transformers
      */
-    public function configureTransformer(ContainerBuilder $container, array $transformers)
+    public function configureTransformer(ContainerBuilder $container, array $transformers): void
     {
         $pool = $container->getDefinition('sonata.payment.transformer.pool');
 
@@ -181,7 +183,7 @@ class SonataPaymentExtension extends Extension
     /**
      * @param array $config
      */
-    public function registerDoctrineMapping(array $config)
+    public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['transaction'])) {
             return;

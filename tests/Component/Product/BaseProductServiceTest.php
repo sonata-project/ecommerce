@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -71,7 +73,7 @@ class ProductCategory extends BaseProductCategory
 {
     protected $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -81,7 +83,7 @@ class Category extends BaseCategory
 {
     protected $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -91,7 +93,7 @@ class ProductCollection extends BaseProductCollection
 {
     protected $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -101,7 +103,7 @@ class Collection extends BaseCollection
 {
     protected $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -156,7 +158,7 @@ class BaseProductServiceTest extends TestCase
         return $provider;
     }
 
-    public function testProductSalableStatus()
+    public function testProductSalableStatus(): void
     {
         $product = new Product();
 
@@ -170,7 +172,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertFalse($product->isSalable());
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
         $provider = $this->getBaseProvider();
 
@@ -181,7 +183,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals('bar', $provider->getOption('foo'));
     }
 
-    public function testOrderElement()
+    public function testOrderElement(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $product->expects($this->any())->method('getId')->will($this->returnValue(42));
@@ -210,7 +212,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals(1, $orderElement->getQuantity());
     }
 
-    public function testVariationFields()
+    public function testVariationFields(): void
     {
         $provider = $this->getBaseProvider();
 
@@ -225,7 +227,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals(['name', 'price'], $provider->getVariationFields());
     }
 
-    public function testVariationCreation()
+    public function testVariationCreation(): void
     {
         $provider = $this->getBaseProvider();
         $provider->setVariationFields(['name', 'price']);
@@ -267,7 +269,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals(0, count($variation3->getProductCategories()));
     }
 
-    public function testProductDataSynchronization()
+    public function testProductDataSynchronization(): void
     {
         $provider = $this->getBaseProvider();
         $provider->setVariationFields(['price']);
@@ -292,7 +294,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals(0, count($variation->getVariations()));
     }
 
-    public function testProductCategoriesSynchronization()
+    public function testProductCategoriesSynchronization(): void
     {
         $provider = $this->getBaseProvider();
 
@@ -354,7 +356,7 @@ class BaseProductServiceTest extends TestCase
 //        $this->assertTrue($variation->getProductCategories()->contains($productCategory2));
     }
 
-    public function testProductCollectionsSynchronization()
+    public function testProductCollectionsSynchronization(): void
     {
         $provider = $this->getBaseProvider();
 
@@ -407,7 +409,7 @@ class BaseProductServiceTest extends TestCase
 //        $this->assertTrue($variation->getProductCollections()->contains($productCollection2));
     }
 
-    public function testProductPackagesSynchronization()
+    public function testProductPackagesSynchronization(): void
     {
         $provider = $this->getBaseProvider();
 
@@ -438,7 +440,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals(1, count($variation->getPackages()));
     }
 
-    public function testProductDeliveriesSynchronization()
+    public function testProductDeliveriesSynchronization(): void
     {
         $provider = $this->getBaseProvider();
 
@@ -469,7 +471,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals(1, count($variation->getDeliveries()));
     }
 
-    public function testArrayProduct()
+    public function testArrayProduct(): void
     {
         $product = new Product();
 

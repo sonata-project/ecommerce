@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -25,7 +27,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class InvoiceTransformerTest extends TestCase
 {
-    public function testTransformFromOrder()
+    public function testTransformFromOrder(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
 

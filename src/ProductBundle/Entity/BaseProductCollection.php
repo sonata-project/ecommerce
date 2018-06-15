@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -50,7 +52,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -66,7 +68,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -82,7 +84,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -98,7 +100,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductInterface $product): void
     {
         $this->product = $product;
     }
@@ -114,7 +116,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setCollection(CollectionInterface $collection)
+    public function setCollection(CollectionInterface $collection): void
     {
         $this->collection = $collection;
     }

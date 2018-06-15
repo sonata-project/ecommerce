@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -37,7 +39,7 @@ class PassPaymentTest extends TestCase
     /**
      * useless test ....
      */
-    public function testPassPayment()
+    public function testPassPayment(): void
     {
         $router = $this->createMock(RouterInterface::class);
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
@@ -56,7 +58,7 @@ class PassPaymentTest extends TestCase
         $transaction->expects($this->once())->method('setTransactionId');
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new PassPaymentTest_Order();
@@ -99,7 +101,7 @@ class PassPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return '1d4b8187e3b9dbad8336b253176ba3284760757b';
+            return '0df8a3065a433ffbd907b2e6450199fb25e7902f';
         }
     }
 }

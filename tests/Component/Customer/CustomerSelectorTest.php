@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,8 +23,9 @@ use Sonata\IntlBundle\Locale\LocaleDetectorInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class User
 {
@@ -37,7 +40,7 @@ class CustomerSelectorTest extends TestCase
     /**
      * @group legacy
      */
-    public function testUserNotConnected()
+    public function testUserNotConnected(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
         $customerManager = $this->createMock(CustomerManagerInterface::class);
@@ -45,20 +48,22 @@ class CustomerSelectorTest extends TestCase
 
         $session = $this->createMock(SessionInterface::class);
 
-        $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(false));
+        $authorizationChecker = $this->createMock(AuthorizationCheckerInterface::class);
+        $authorizationChecker->expects($this->once())->method('isGranted')->will($this->returnValue(false));
+
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
+        $customerSelector = new CustomerSelector($customerManager, $session, $authorizationChecker, $tokenStorage, $localeDetector);
 
         $customer = $customerSelector->get();
 
         $this->assertInstanceOf(CustomerInterface::class, $customer);
     }
 
-    public function testInvalidUserType()
+    public function testInvalidUserType(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('User must be an instance of Symfony\\Component\\Security\\Core\\User\\UserInterface');
@@ -70,19 +75,21 @@ class CustomerSelectorTest extends TestCase
         $token = $this->createMock(TokenInterface::class);
         $token->expects($this->once())->method('getUser')->will($this->returnValue(new User()));
 
-        $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $authorizationChecker = $this->createMock(AuthorizationCheckerInterface::class);
+        $authorizationChecker->expects($this->once())->method('isGranted')->will($this->returnValue(true));
+
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $tokenStorage->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
+        $customerSelector = new CustomerSelector($customerManager, $session, $authorizationChecker, $tokenStorage, $localeDetector);
 
         $customerSelector->get();
     }
 
-    public function testExistingCustomer()
+    public function testExistingCustomer(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
 
@@ -96,21 +103,23 @@ class CustomerSelectorTest extends TestCase
         $token = $this->createMock(TokenInterface::class);
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
 
-        $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $authorizationChecker = $this->createMock(AuthorizationCheckerInterface::class);
+        $authorizationChecker->expects($this->once())->method('isGranted')->will($this->returnValue(true));
+
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $tokenStorage->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
+        $customerSelector = new CustomerSelector($customerManager, $session, $authorizationChecker, $tokenStorage, $localeDetector);
 
         $customer = $customerSelector->get();
 
         $this->assertInstanceOf(CustomerInterface::class, $customer);
     }
 
-    public function testNonExistingCustomerNonInSession()
+    public function testNonExistingCustomerNonInSession(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
 
@@ -125,21 +134,23 @@ class CustomerSelectorTest extends TestCase
         $token = $this->createMock(TokenInterface::class);
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
 
-        $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $authorizationChecker = $this->createMock(AuthorizationCheckerInterface::class);
+        $authorizationChecker->expects($this->once())->method('isGranted')->will($this->returnValue(true));
+
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $tokenStorage->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
+        $customerSelector = new CustomerSelector($customerManager, $session, $authorizationChecker, $tokenStorage, $localeDetector);
 
         $customer = $customerSelector->get();
 
         $this->assertInstanceOf(CustomerInterface::class, $customer);
     }
 
-    public function testNonExistingCustomerInSession()
+    public function testNonExistingCustomerInSession(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
 
@@ -157,14 +168,16 @@ class CustomerSelectorTest extends TestCase
         $token = $this->createMock(TokenInterface::class);
         $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
 
-        $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $authorizationChecker = $this->createMock(AuthorizationCheckerInterface::class);
+        $authorizationChecker->expects($this->once())->method('isGranted')->will($this->returnValue(true));
+
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $tokenStorage->expects($this->once())->method('getToken')->will($this->returnValue($token));
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
         $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
 
-        $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
+        $customerSelector = new CustomerSelector($customerManager, $session, $authorizationChecker, $tokenStorage, $localeDetector);
 
         $customer = $customerSelector->get();
 

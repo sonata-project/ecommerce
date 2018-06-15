@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -90,7 +92,7 @@ class BasketTest extends TestCase
         return $address;
     }
 
-    public function testTotal()
+    public function testTotal(): void
     {
         $currency = $this->createMock(Currency::class);
 
@@ -168,7 +170,7 @@ class BasketTest extends TestCase
         $this->assertEquals(29.400, $basket->getVatAmount(), '::getVatAmount() w/o vat return 29.4');
     }
 
-    public function testBasket()
+    public function testBasket(): void
     {
         $basket = $this->getPreparedBasket();
 
@@ -250,7 +252,7 @@ class BasketTest extends TestCase
         $this->assertFalse($basket->isValid(), '::isValid() return false after reset');
     }
 
-    public function testSerialize()
+    public function testSerialize(): void
     {
         $product = $this->getMockProduct();
 
@@ -338,7 +340,7 @@ class BasketTest extends TestCase
         $this->assertTrue(1 == count($basket->getBasketElements()), '::unserialize() restore elements');
     }
 
-    public function testGetElementRaisesException()
+    public function testGetElementRaisesException(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('The product does not exist');
@@ -347,7 +349,7 @@ class BasketTest extends TestCase
         $basket->getElement(new Product());
     }
 
-    public function testHasRecurrentPayment()
+    public function testHasRecurrentPayment(): void
     {
         $basket = $this->getPreparedBasket();
 
@@ -364,7 +366,7 @@ class BasketTest extends TestCase
         $this->assertTrue($basket->hasRecurrentPayment());
     }
 
-    public function testHasProduct()
+    public function testHasProduct(): void
     {
         $basket = $this->getPreparedBasket();
 
@@ -388,7 +390,7 @@ class BasketTest extends TestCase
         $this->assertTrue($basket->hasProduct($product), '::hasProduct true');
     }
 
-    public function testBuildPrices()
+    public function testBuildPrices(): void
     {
         $basket = $this->getPreparedBasket();
 
@@ -403,7 +405,7 @@ class BasketTest extends TestCase
         $this->assertEquals(0, count($basket->getBasketElements()));
     }
 
-    public function testClean()
+    public function testClean(): void
     {
         $basket = $this->getPreparedBasket();
 
@@ -424,25 +426,7 @@ class BasketTest extends TestCase
         $this->assertEquals(1, count($basket->getBasketElements()));
     }
 
-    public function testRemoveElementWithNotExistingProduct()
-    {
-        $basket = $this->getPreparedBasket();
-        $product = $this->getMockProduct();
-
-        $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue($product));
-        $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
-
-        $basket->addBasketElement($basketElement);
-
-        $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue(null));
-        $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
-
-        $this->assertEquals($basket->removeBasketElement($basketElement), $basketElement);
-    }
-
-    public function testGettersSetters()
+    public function testGettersSetters(): void
     {
         $basket = $this->getPreparedBasket();
 

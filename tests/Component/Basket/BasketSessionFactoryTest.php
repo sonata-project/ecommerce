@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -28,7 +30,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class BasketSessionFactoryTest extends TestCase
 {
-    public function testLoadWithNoBasket()
+    public function testLoadWithNoBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('setCustomer');
@@ -59,7 +61,7 @@ class BasketSessionFactoryTest extends TestCase
         $this->isInstanceOf(BasketInterface::class, $basket);
     }
 
-    public function testLoadWithBasket()
+    public function testLoadWithBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('setCustomer');
@@ -90,7 +92,7 @@ class BasketSessionFactoryTest extends TestCase
         $this->isInstanceOf(BasketInterface::class, $basket);
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $basketManager = $this->createMock(BasketManagerInterface::class);
 
@@ -116,7 +118,7 @@ class BasketSessionFactoryTest extends TestCase
         $factory->save($basket);
     }
 
-    public function testLogout()
+    public function testLogout(): void
     {
         $basketManager = $this->createMock(BasketManagerInterface::class);
 
@@ -131,7 +133,7 @@ class BasketSessionFactoryTest extends TestCase
         $factory->logout(new Request(), new Response(), $this->createMock(TokenInterface::class));
     }
 
-    public function testResetFullBasket()
+    public function testResetFullBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('setCustomer');

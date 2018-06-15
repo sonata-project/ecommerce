@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\Component\Customer\CustomerSelectorInterface;
 
 class LoaderTest extends TestCase
 {
-    public function testLoadBasket()
+    public function testLoadBasket(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
         $basket = $this->createMock(BasketInterface::class);
@@ -35,13 +37,13 @@ class LoaderTest extends TestCase
         $this->assertInstanceOf(BasketInterface::class, $loader->getBasket());
     }
 
-    public function testExceptionLoadBasket()
+    public function testExceptionLoadBasket(): void
     {
         $this->expectException(\RuntimeException::class);
 
         $customer = $this->createMock(CustomerInterface::class);
         $basketFactory = $this->createMock(BasketFactoryInterface::class);
-        $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(function () {
+        $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(function (): void {
             throw new \RuntimeException();
         }));
 

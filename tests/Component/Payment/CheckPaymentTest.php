@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -39,7 +41,7 @@ class CheckPaymentTest extends TestCase
     /**
      * useless test ....
      */
-    public function testPassPayment()
+    public function testPassPayment(): void
     {
         $router = $this->createMock(RouterInterface::class);
         $logger = $this->createMock(LoggerInterface::class);
@@ -52,7 +54,7 @@ class CheckPaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new CheckPaymentTest_Order();
@@ -62,6 +64,7 @@ class CheckPaymentTest extends TestCase
         $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
         $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
 
         $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
@@ -76,10 +79,10 @@ class CheckPaymentTest extends TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    public function testSendbank()
+    public function testSendbank(): void
     {
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('11/30/1981'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new CheckPaymentTest_Order();
@@ -91,7 +94,7 @@ class CheckPaymentTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
 
         $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response) {
+        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response): void {
             $response->setContent('ok');
         }));
 
@@ -106,7 +109,7 @@ class CheckPaymentTest extends TestCase
         $this->assertFalse($response->isCacheable());
     }
 
-    public function testSendConfirmationReceipt()
+    public function testSendConfirmationReceipt(): void
     {
         $order = new CheckPaymentTest_Order();
 
@@ -141,7 +144,7 @@ class CheckPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return '1d4b8187e3b9dbad8336b253176ba3284760757b';
+            return '0df8a3065a433ffbd907b2e6450199fb25e7902f';
         }
     }
 }

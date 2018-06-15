@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -28,7 +30,7 @@ class Pool
      *
      * @throws \RuntimeException
      */
-    public function addMethod(PaymentInterface $instance)
+    public function addMethod(PaymentInterface $instance): void
     {
         if (null === $instance->getCode()) {
             throw new \RuntimeException(sprintf('Payment handler of class %s must return a code on getCode method. Please refer to the documentation (https://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)', get_class($instance)));

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -81,7 +83,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * @param string $code
      */
-    public function setCode($code)
+    public function setCode($code): void
     {
         $this->code = $code;
     }
@@ -97,7 +99,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -105,7 +107,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * {@inheritdoc}
      */
-    public function setVatRate($vat)
+    public function setVatRate($vat): void
     {
         $this->vat = $vat;
     }
@@ -129,7 +131,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * @param float $price
      */
-    public function setPrice($price)
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -137,7 +139,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * @param array $options
      */
-    public function setOptions($options)
+    public function setOptions($options): void
     {
         $this->options = $options;
     }
@@ -169,10 +171,10 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     public function getTotal(BasketInterface $basket, $vat = false)
     {
         if ($vat) {
-            return bcadd($this->getPrice() * (1 + $this->getVatRate() / 100), 0, 2);
+            return bcadd((string) ($this->getPrice() * (1 + $this->getVatRate() / 100)), '0', 2);
         }
 
-        return bcadd($this->getPrice(), 0, 2);
+        return bcadd((string) $this->getPrice(), '0', 2);
     }
 
     /**
@@ -180,15 +182,15 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
      */
     public function getVatAmount(BasketInterface $basket)
     {
-        $vat = $this->getTotal($basket, true) - $this->getTotal($basket);
+        $vat = (string) ($this->getTotal($basket, true) - $this->getTotal($basket));
 
-        return bcadd($vat, 0, 2);
+        return bcadd($vat, '0', 2);
     }
 
     /**
      * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -204,7 +206,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     /**
      * @param int $priority
      */
-    public function setPriority($priority)
+    public function setPriority($priority): void
     {
         $this->priority = $priority;
     }

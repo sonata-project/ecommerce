@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -28,7 +30,7 @@ class BasketTest extends BaseBasket
  */
 class BaseBasketTest extends TestCase
 {
-    public function testSetBasketElements()
+    public function testSetBasketElements(): void
     {
         $basket = new BasketTest();
 
@@ -50,7 +52,7 @@ class BaseBasketTest extends TestCase
         $this->assertEquals(1, count($basket->getBasketElements()));
     }
 
-    public function testReset()
+    public function testReset(): void
     {
         $basket = new BasketTest();
 
@@ -79,7 +81,7 @@ class BaseBasketTest extends TestCase
         $this->assertInstanceOf(ArrayCollection::class, $basket->getBasketElements());
     }
 
-    public function testBasketElementsVatAmounts()
+    public function testBasketElementsVatAmounts(): void
     {
         $basket = new BasketTest();
 

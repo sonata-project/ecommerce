@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -57,7 +59,7 @@ class BasketTransformerTest extends TestCase
         return $basketTransform;
     }
 
-    public function testInvalidCustomer()
+    public function testInvalidCustomer(): void
     {
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('Invalid customer');
@@ -71,7 +73,7 @@ class BasketTransformerTest extends TestCase
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
-    public function testInvalidBillingAddress()
+    public function testInvalidBillingAddress(): void
     {
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('Invalid billing address');
@@ -88,7 +90,7 @@ class BasketTransformerTest extends TestCase
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
-    public function testInvalidPaymentMethod()
+    public function testInvalidPaymentMethod(): void
     {
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('Invalid payment method');
@@ -107,7 +109,7 @@ class BasketTransformerTest extends TestCase
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
-    public function testInvalidDeliveryMethod()
+    public function testInvalidDeliveryMethod(): void
     {
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('Invalid delivery method');
@@ -128,7 +130,7 @@ class BasketTransformerTest extends TestCase
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
-    public function testInvalidDeliveryAddress()
+    public function testInvalidDeliveryAddress(): void
     {
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('Invalid delivery address');
@@ -152,7 +154,7 @@ class BasketTransformerTest extends TestCase
         $this->getBasketTransform()->transformIntoOrder($basket);
     }
 
-    public function testOrder()
+    public function testOrder(): void
     {
         $basket = new Basket();
         $customer = $this->createMock(CustomerInterface::class);

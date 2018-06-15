@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -35,7 +37,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class BasketControllerTest extends TestCase
 {
-    public function testGetBasketsAction()
+    public function testGetBasketsAction(): void
     {
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
@@ -47,7 +49,7 @@ class BasketControllerTest extends TestCase
         $this->assertEquals([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
-    public function testGetBasketAction()
+    public function testGetBasketAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
 
@@ -57,7 +59,7 @@ class BasketControllerTest extends TestCase
         $this->assertEquals($basket, $this->createBasketController($basketManager)->getBasketAction(1));
     }
 
-    public function testGetBasketActionNotFoundException()
+    public function testGetBasketActionNotFoundException(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Basket (42) not found');
@@ -65,7 +67,7 @@ class BasketControllerTest extends TestCase
         $this->createBasketController()->getBasketAction(42);
     }
 
-    public function testGetBasketelementsAction()
+    public function testGetBasketelementsAction(): void
     {
         $elements = [1, 2];
 
@@ -78,7 +80,7 @@ class BasketControllerTest extends TestCase
         $this->assertEquals($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
     }
 
-    public function testGetBasketelementsActionNotFoundException()
+    public function testGetBasketelementsActionNotFoundException(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Basket (42) not found');
@@ -86,7 +88,7 @@ class BasketControllerTest extends TestCase
         $this->createBasketController()->getBasketBasketelementsAction(42);
     }
 
-    public function testPostBasketAction()
+    public function testPostBasketAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
 
@@ -106,7 +108,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPostBasketInvalidAction()
+    public function testPostBasketInvalidAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
 
@@ -126,7 +128,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testPutBasketAction()
+    public function testPutBasketAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
 
@@ -147,7 +149,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPutBasketInvalidAction()
+    public function testPutBasketInvalidAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
 
@@ -168,7 +170,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testDeleteBasketAction()
+    public function testDeleteBasketAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
 
@@ -181,7 +183,7 @@ class BasketControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteBasketInvalidAction()
+    public function testDeleteBasketInvalidAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
@@ -192,7 +194,7 @@ class BasketControllerTest extends TestCase
         $this->createBasketController($basketManager)->deleteBasketAction(1);
     }
 
-    public function testPostBasketBasketelementsAction()
+    public function testPostBasketBasketelementsAction(): void
     {
         $productDefinition = $this->getMockBuilder(ProductDefinition::class)
             ->disableOriginalConstructor()
@@ -234,7 +236,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPostBasketBasketelementsInvalidAction()
+    public function testPostBasketBasketelementsInvalidAction(): void
     {
         $productDefinition = $this->getMockBuilder(ProductDefinition::class)
             ->disableOriginalConstructor()
@@ -276,7 +278,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testPutBasketBasketelementsAction()
+    public function testPutBasketBasketelementsAction(): void
     {
         $productDefinition = $this->getMockBuilder(ProductDefinition::class)
             ->disableOriginalConstructor()
@@ -320,7 +322,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPutBasketBasketelementsInvalidAction()
+    public function testPutBasketBasketelementsInvalidAction(): void
     {
         $productDefinition = $this->getMockBuilder(ProductDefinition::class)
             ->disableOriginalConstructor()
@@ -363,7 +365,7 @@ class BasketControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testDeleteBasketBasketelementsAction()
+    public function testDeleteBasketBasketelementsAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue([]));

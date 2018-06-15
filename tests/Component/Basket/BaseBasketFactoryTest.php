@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -57,21 +59,21 @@ class BasketFactory extends BaseBasketFactory
     /**
      * {@inheritdoc}
      */
-    public function load(CustomerInterface $customer)
+    public function load(CustomerInterface $customer): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function save(BasketInterface $basket)
+    public function save(BasketInterface $basket): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reset(BasketInterface $basket, $full = true)
+    public function reset(BasketInterface $basket, $full = true): void
     {
     }
 }
@@ -81,7 +83,7 @@ class BasketFactory extends BaseBasketFactory
  */
 class BaseBasketFactoryTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);

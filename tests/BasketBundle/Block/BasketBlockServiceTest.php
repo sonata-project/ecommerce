@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BasketBlockServiceTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $block = new BasketBlockService('test', $engineInterfaceMock);
@@ -30,7 +32,7 @@ class BasketBlockServiceTest extends TestCase
         $this->assertEquals('Basket items', $block->getName());
     }
 
-    public function testExecute()
+    public function testExecute(): void
     {
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $engineInterfaceMock->expects($this->once())->method('renderResponse')->will($this->returnValue(new Response()));

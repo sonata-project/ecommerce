@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -529,7 +531,7 @@ class ScelliusPayment extends BasePayment
      */
     public function encodeString($string)
     {
-        return escapeshellcmd($string);
+        return escapeshellcmd((string) $string);
     }
 
     /**
@@ -543,7 +545,7 @@ class ScelliusPayment extends BasePayment
     /**
      * @param TransactionInterface $transaction
      */
-    public function applyTransactionId(TransactionInterface $transaction)
+    public function applyTransactionId(TransactionInterface $transaction): void
     {
         $transaction->setTransactionId('n/a');
     }
@@ -653,6 +655,6 @@ class ScelliusPayment extends BasePayment
             throw new \RuntimeException('Invalid currency provided');
         }
 
-        return (int) (100 * bcmul(1, $amount, $list[$currency]['fraction']));
+        return (int) (100 * bcmul('1', (string) $amount, $list[$currency]['fraction']));
     }
 }
