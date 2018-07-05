@@ -302,33 +302,21 @@ class ScelliusPayment extends BasePayment
         return 1;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBasketValid(BasketInterface $basket)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRequestValid(TransactionInterface $transaction)
     {
         return $transaction->get('check') === $this->generateUrlCheck($transaction->getOrder());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleError(TransactionInterface $transaction)
     {
         if ($transaction->getOrder()->isOpen()) {
@@ -342,9 +330,6 @@ class ScelliusPayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         $data = $this->getResponseData($transaction);
@@ -391,9 +376,6 @@ class ScelliusPayment extends BasePayment
         return new Response();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isCallbackValid(TransactionInterface $transaction)
     {
         if (!$transaction->getOrder()) {
@@ -429,9 +411,6 @@ class ScelliusPayment extends BasePayment
         return $language;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendbank(OrderInterface $order)
     {
         $params = [
@@ -526,17 +505,11 @@ class ScelliusPayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function encodeString($string)
     {
         return escapeshellcmd((string) $string);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderReference(TransactionInterface $transaction)
     {
         return $transaction->get('reference');
@@ -624,9 +597,7 @@ class ScelliusPayment extends BasePayment
     /**
      * @param $currency
      *
-     * @throws \RuntimeException
-     *
-     * @return
+     * @return mixed
      */
     private function getCurrencyCode($currency)
     {

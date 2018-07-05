@@ -23,9 +23,6 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class ProductManager extends BaseEntityManager implements ProductManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findInSameCollections($productCollections, $limit = null)
     {
         return $this->queryInSameCollections($productCollections, $limit)
@@ -33,9 +30,6 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
             ->execute();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findParentsInSameCollections($productCollections, $limit = null)
     {
         return $this->queryInSameCollections($productCollections, $limit)
@@ -106,9 +100,6 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
             ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findVariations(ProductInterface $product)
     {
         $queryBuilder = $this->getRepository()->createQueryBuilder('p')
@@ -121,9 +112,6 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
         return $queryBuilder->getQuery()->execute();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function updateStock($product, $diff): void
     {
         if (0 == $diff) {
@@ -139,9 +127,6 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
         $this->getConnection()->query(sprintf('UPDATE %s SET stock = stock %s %d WHERE id = %d;', $tableName, $operator, abs($diff), $productId));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()

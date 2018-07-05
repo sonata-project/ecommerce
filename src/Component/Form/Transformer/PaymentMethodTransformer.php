@@ -33,17 +33,11 @@ class PaymentMethodTransformer implements DataTransformerInterface
         $this->paymentPool = $paymentPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($value)
     {
         return $this->paymentPool->getMethod($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($value)
     {
         return $value ? $value->getCode() : null;

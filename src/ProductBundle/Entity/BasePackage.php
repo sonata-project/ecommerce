@@ -58,17 +58,11 @@ abstract class BasePackage implements PackageInterface
      */
     protected $createdAt;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProduct(ProductInterface $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProduct()
     {
         return $this->product;

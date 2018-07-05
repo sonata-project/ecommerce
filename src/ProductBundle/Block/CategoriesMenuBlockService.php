@@ -43,17 +43,11 @@ class CategoriesMenuBlockService extends MenuBlockService
         $this->menuBuilder = $menuBuilder;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Categories Menu';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         parent::configureSettings($resolver);
@@ -64,9 +58,6 @@ class CategoriesMenuBlockService extends MenuBlockService
             ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getMenu(BlockContextInterface $blockContext)
     {
         $settings = $blockContext->getSettings();

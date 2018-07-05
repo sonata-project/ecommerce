@@ -72,9 +72,6 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode()
     {
         return $this->code;
@@ -88,9 +85,6 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
@@ -104,25 +98,16 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVatRate($vat): void
     {
         $this->vat = $vat;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatRate()
     {
         return $this->vat;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice()
     {
         return $this->price;
@@ -165,9 +150,6 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotal(BasketInterface $basket, $vat = false)
     {
         if ($vat) {
@@ -177,9 +159,6 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
         return bcadd((string) $this->getPrice(), '0', 2);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatAmount(BasketInterface $basket)
     {
         $vat = (string) ($this->getTotal($basket, true) - $this->getTotal($basket));
@@ -195,9 +174,6 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
         $this->enabled = $enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabled()
     {
         return $this->enabled;
@@ -211,9 +187,6 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
         $this->priority = $priority;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPriority()
     {
         return $this->priority;

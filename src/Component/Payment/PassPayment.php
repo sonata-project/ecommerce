@@ -43,9 +43,6 @@ class PassPayment extends BasePayment
         $this->browser = $browser;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function encodeString($value)
     {
         return $value;
@@ -59,33 +56,21 @@ class PassPayment extends BasePayment
         return 1;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBasketValid(BasketInterface $basket)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRequestValid(TransactionInterface $transaction)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleError(TransactionInterface $transaction)
     {
         return new Response('ko', 200, [
@@ -93,9 +78,6 @@ class PassPayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         $order = $transaction->getOrder();
@@ -118,9 +100,6 @@ class PassPayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isCallbackValid(TransactionInterface $transaction)
     {
         if (!$transaction->getOrder()) {
@@ -137,9 +116,6 @@ class PassPayment extends BasePayment
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendbank(OrderInterface $order)
     {
         $params = [
@@ -166,17 +142,11 @@ class PassPayment extends BasePayment
         return $response;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderReference(TransactionInterface $transaction)
     {
         return $transaction->get('reference');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function applyTransactionId(TransactionInterface $transaction): void
     {
         $transaction->setTransactionId('n/a');

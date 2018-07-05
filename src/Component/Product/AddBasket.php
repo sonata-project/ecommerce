@@ -85,7 +85,7 @@ class AddBasket
     }
 
     /**
-     * @return the quantity
+     * @return int quantity
      */
     public function getQuantity()
     {

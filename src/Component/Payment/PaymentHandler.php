@@ -79,9 +79,6 @@ class PaymentHandler implements PaymentHandlerInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleError(Request $request, BasketInterface $basket)
     {
         // retrieve the transaction
@@ -116,9 +113,6 @@ class PaymentHandler implements PaymentHandlerInterface
         return $order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleConfirmation(Request $request)
     {
         $transaction = $this->createTransaction($request);
@@ -130,9 +124,6 @@ class PaymentHandler implements PaymentHandlerInterface
         return $order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSendbankOrder(BasketInterface $basket)
     {
         $order = $basket->getPaymentMethod()->getTransformer('basket')->transformIntoOrder($basket);
@@ -152,9 +143,6 @@ class PaymentHandler implements PaymentHandlerInterface
         return $order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPaymentCallbackResponse(Request $request)
     {
         // retrieve the transaction

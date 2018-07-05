@@ -45,9 +45,6 @@ class ShippingType extends AbstractType
         $this->deliveryPool = $deliveryPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $basket = $builder->getData();
@@ -82,17 +79,11 @@ class ShippingType extends AbstractType
         $builder->add($sub);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_basket_shipping';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();

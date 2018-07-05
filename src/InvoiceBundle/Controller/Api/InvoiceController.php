@@ -57,7 +57,7 @@ class InvoiceController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getInvoicesAction(ParamFetcherInterface $paramFetcher)
     {
@@ -128,7 +128,7 @@ class InvoiceController
      *
      * @param $id
      *
-     * @return InvoiceElementInterface
+     * @return array
      */
     public function getInvoiceInvoiceelementsAction($id)
     {

@@ -20,9 +20,6 @@ use Sonata\CoreBundle\Serializer\BaseSerializerHandler;
  */
 class ProductSerializerHandler extends BaseSerializerHandler
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getType()
     {
         return 'sonata_product_product_id';

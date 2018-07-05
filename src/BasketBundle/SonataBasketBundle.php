@@ -28,9 +28,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataBasketBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new GlobalVariableCompilerPass());
@@ -38,9 +35,6 @@ class SonataBasketBundle extends Bundle
         $this->registerFormMapping();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function boot(): void
     {
         $this->registerFormMapping();

@@ -75,9 +75,6 @@ class Selector implements PaymentSelectorInterface
         return $this->productPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $billingAddress = null)
     {
         if (!$billingAddress) {
@@ -87,9 +84,6 @@ class Selector implements PaymentSelectorInterface
         return $this->getPaymentPool()->getMethods();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPayment($bank)
     {
         if (!array_key_exists($bank, $this->getPaymentPool()->getMethods())) {

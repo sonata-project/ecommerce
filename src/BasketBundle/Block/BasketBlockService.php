@@ -26,9 +26,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class BasketBlockService extends AbstractAdminBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         return $this->renderResponse($blockContext->getTemplate(), [
@@ -36,31 +33,19 @@ class BasketBlockService extends AbstractAdminBlockService
             ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Basket items';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

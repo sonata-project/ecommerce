@@ -24,9 +24,6 @@ abstract class BaseBasket extends Basket
         $this->reset(true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setBasketElements($basketElements): void
     {
         foreach ($basketElements as $basketElement) {
@@ -39,9 +36,6 @@ abstract class BaseBasket extends Basket
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset($full = true): void
     {
         parent::reset($full);

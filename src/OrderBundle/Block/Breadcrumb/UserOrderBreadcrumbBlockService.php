@@ -21,17 +21,11 @@ use Sonata\UserBundle\Block\Breadcrumb\BaseUserProfileBreadcrumbBlockService;
  */
 class UserOrderBreadcrumbBlockService extends BaseUserProfileBreadcrumbBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata.order.block.breadcrumb_order';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getMenu(BlockContextInterface $blockContext)
     {
         $menu = $this->getRootMenu($blockContext);

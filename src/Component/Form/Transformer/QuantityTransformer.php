@@ -26,6 +26,10 @@ class QuantityTransformer implements DataTransformerInterface
      * (non-PHPdoc).
      *
      * @see \Symfony\Component\Form\DataTransformerInterface::transform()
+     *
+     * @param $quantity
+     *
+     * @return mixed
      */
     public function transform($quantity)
     {
@@ -36,7 +40,11 @@ class QuantityTransformer implements DataTransformerInterface
      * (non-PHPdoc).
      *
      * @see \Symfony\Component\Form\DataTransformerInterface::reverseTransform()
-     */
+     *
+     * @param $quantity
+     *
+     * @return int
+    */
     public function reverseTransform($quantity)
     {
         return (int) $quantity;

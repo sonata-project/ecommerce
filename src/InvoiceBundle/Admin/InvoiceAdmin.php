@@ -39,17 +39,11 @@ class InvoiceAdmin extends AbstractAdmin
         $this->currencyDetector = $currencyDetector;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->setTranslationDomain('SonataInvoiceBundle');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFormFields(FormMapper $formMapper): void
     {
         if (!$this->isChild()) {
@@ -84,9 +78,6 @@ class InvoiceAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureListFields(ListMapper $list): void
     {
         $list
@@ -104,9 +95,6 @@ class InvoiceAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter

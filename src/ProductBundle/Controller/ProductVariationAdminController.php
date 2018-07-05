@@ -23,10 +23,11 @@ use Symfony\Component\Validator\Constraints\Range;
 class ProductVariationAdminController extends Controller
 {
     /**
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @param Request|null $request
      *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function createAction(Request $request = null)
     {

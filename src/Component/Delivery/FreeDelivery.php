@@ -31,33 +31,21 @@ class FreeDelivery extends BaseServiceDelivery
         $this->isAddressRequired = $isAddressRequired;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatRate()
     {
         return 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice()
     {
         return 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAddressRequired()
     {
         return $this->isAddressRequired;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Free delivery';

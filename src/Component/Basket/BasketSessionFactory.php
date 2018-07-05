@@ -17,9 +17,6 @@ use Sonata\Component\Customer\CustomerInterface;
 
 class BasketSessionFactory extends BaseBasketFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(CustomerInterface $customer)
     {
         // always clone the basket so it can be only saved by calling
@@ -27,17 +24,11 @@ class BasketSessionFactory extends BaseBasketFactory
         return clone parent::load($customer);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function save(BasketInterface $basket): void
     {
         $this->storeInSession($basket);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset(BasketInterface $basket, $full = true): void
     {
         if ($full) {

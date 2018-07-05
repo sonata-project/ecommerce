@@ -20,9 +20,6 @@ use Sonata\CoreBundle\Serializer\BaseSerializerHandler;
  */
 class OrderSerializerHandler extends BaseSerializerHandler
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getType()
     {
         return 'sonata_order_order_id';

@@ -24,18 +24,13 @@ class Currency implements CurrencyInterface
     protected $label;
 
     /**
-     * @var string
+     * @return string
      */
-    //     protected $symbol;
-
     public function __toString()
     {
         return $this->getLabel();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLabel()
     {
         return $this->label;
@@ -43,6 +38,8 @@ class Currency implements CurrencyInterface
 
     /**
      * @param string $label
+     *
+     * @return Currency
      */
     public function setLabel($label)
     {
@@ -51,9 +48,6 @@ class Currency implements CurrencyInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function equals($currency)
     {
         if (!$currency instanceof CurrencyInterface) {

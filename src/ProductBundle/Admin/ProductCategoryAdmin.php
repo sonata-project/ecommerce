@@ -25,17 +25,11 @@ class ProductCategoryAdmin extends AbstractAdmin
 {
     protected $parentAssociationMapping = 'product';
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->setTranslationDomain('SonataProductBundle');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFormFields(FormMapper $formMapper): void
     {
         if (!$this->isChild()) {
@@ -51,9 +45,6 @@ class ProductCategoryAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureListFields(ListMapper $list): void
     {
         if (!$this->isChild()) {
@@ -81,9 +72,6 @@ class ProductCategoryAdmin extends AbstractAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {

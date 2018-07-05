@@ -46,6 +46,7 @@ interface ProductCategoryManagerInterface extends ManagerInterface
      * Returns the number of products in $category (maxed by $limit).
      *
      * @param CategoryInterface $category
+     * @param int               $limit
      *
      * @return int
      */

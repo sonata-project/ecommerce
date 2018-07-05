@@ -85,33 +85,21 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     protected $delete = false;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition($position): void
     {
         $this->position = $position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition()
     {
         return $this->position;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProduct($productCode, ProductInterface $product): void
     {
         $this->product = $product;
@@ -122,9 +110,6 @@ class BasketElement implements \Serializable, BasketElementInterface
         $this->options = $product->getOptions();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProduct()
     {
         if (null == $this->product && $this->hasProductDefinition()) {
@@ -134,17 +119,11 @@ class BasketElement implements \Serializable, BasketElementInterface
         return $this->product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductId()
     {
         return $this->productId;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductId($productId): void
     {
         if ($productId == $this->productId) {
@@ -162,41 +141,26 @@ class BasketElement implements \Serializable, BasketElementInterface
         $this->getProductDefinition()->getProvider()->buildBasketElement($this, $product);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatAmount()
     {
         return bcsub($this->getTotal(true), $this->getTotal(false));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatRate()
     {
         return $this->vatRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUnitPrice($unitPrice): void
     {
         $this->unitPrice = $unitPrice;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnitPrice($vat = false)
     {
         $price = (string) $this->unitPrice;
@@ -212,33 +176,21 @@ class BasketElement implements \Serializable, BasketElementInterface
         return $price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotal($vat = false)
     {
         return bcmul((string) $this->getUnitPrice($vat), (string) $this->getQuantity(), 100);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOptions()
     {
         return $this->options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOptions(array $options = []): void
     {
         $this->options = $options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOption($name, $default = null)
     {
         if (!array_key_exists($name, $this->options)) {
@@ -248,33 +200,21 @@ class BasketElement implements \Serializable, BasketElementInterface
         return $this->options[$name];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOption($name)
     {
         return array_key_exists($name, $this->options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOption($name, $value): void
     {
         $this->options[$name] = $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPrice($price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice($vat = false)
     {
         $price = (string) $this->price;
@@ -290,41 +230,26 @@ class BasketElement implements \Serializable, BasketElementInterface
         return $price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPriceIncludingVat($priceIncludingVat): void
     {
         $this->priceIncludingVat = $priceIncludingVat;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isPriceIncludingVat()
     {
         return $this->priceIncludingVat;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setQuantity($quantity): void
     {
         $this->quantity = $quantity >= 0 ? $quantity : 1;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getQuantity()
     {
         return $this->quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isValid()
     {
         $product = $this->getProduct();
@@ -339,25 +264,16 @@ class BasketElement implements \Serializable, BasketElementInterface
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDelete($delete): void
     {
         $this->delete = $delete;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDelete()
     {
         return $this->delete;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function serialize()
     {
         return serialize([
@@ -374,9 +290,6 @@ class BasketElement implements \Serializable, BasketElementInterface
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function unserialize($data): void
     {
         $data = unserialize($data);
@@ -393,49 +306,31 @@ class BasketElement implements \Serializable, BasketElementInterface
         $this->productCode = $data['productCode'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductManager()
     {
         return $this->productDefinition->getManager();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductProvider()
     {
         return $this->productDefinition->getProvider();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductDefinition(ProductDefinition $productDefinition): void
     {
         $this->productDefinition = $productDefinition;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductDefinition()
     {
         return $this->productDefinition;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductCode()
     {
         return $this->productCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasProductDefinition()
     {
         return $this->productDefinition instanceof ProductDefinition;

@@ -43,9 +43,6 @@ class BasketResizeFormListener implements EventSubscriberInterface
         $this->basket = $basket;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [
@@ -54,9 +51,6 @@ class BasketResizeFormListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preSetData(FormEvent $event): void
     {
         $form = $event->getForm();

@@ -41,7 +41,7 @@ class ProductMenuBuilder
     protected $router;
 
     /**
-     * @param MenuFactory                     $factory
+     * @param FactoryInterface                $factory
      * @param ProductCategoryManagerInterface $categoryManager
      * @param RouterInterface                 $router
      */

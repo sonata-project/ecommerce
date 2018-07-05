@@ -36,9 +36,6 @@ class Paypal extends BasePaypal
     public const PENDING_REASON_VERIFY = 'verify';
     public const PENDING_REASON_OTHER = 'other';
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendbank(OrderInterface $order)
     {
         $params = [
@@ -188,9 +185,6 @@ class Paypal extends BasePaypal
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleError(TransactionInterface $transaction): void
     {
         $order = $transaction->getOrder();
@@ -249,9 +243,6 @@ class Paypal extends BasePaypal
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         if (!$transaction->isValid()) {
@@ -290,9 +281,6 @@ class Paypal extends BasePaypal
         return new Response('');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBasketValid(BasketInterface $basket)
     {
         if (0 == $basket->countBasketElements()) {
@@ -309,9 +297,6 @@ class Paypal extends BasePaypal
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
         if (!$product->isRecurrentPayment()) {

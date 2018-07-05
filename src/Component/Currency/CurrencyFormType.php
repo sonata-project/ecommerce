@@ -34,9 +34,6 @@ class CurrencyFormType extends CurrencyType
         $this->currencyTransformer = $currencyTransformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
@@ -44,25 +41,16 @@ class CurrencyFormType extends CurrencyType
         $builder->addModelTransformer($this->currencyTransformer);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return 'currency';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_currency';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();
