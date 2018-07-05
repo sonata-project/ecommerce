@@ -45,6 +45,9 @@ class PassPaymentTest extends TestCase
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
         $client = $this->createMock(ClientInterface::class);
+        $client->expects($this->once())->method('sendRequest')->will($this->returnCallback(function ($request, $response): void {
+            $response->setContent('ok');
+        }));
 
         $browser = new Browser($client);
         $payment = new PassPayment($router, $browser);
