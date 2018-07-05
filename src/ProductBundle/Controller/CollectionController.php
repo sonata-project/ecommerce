@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Controller;
 
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

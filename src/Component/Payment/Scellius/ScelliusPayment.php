@@ -354,7 +354,7 @@ class ScelliusPayment extends BasePayment
 
         $transaction->setParameters($parameters);
 
-        if ($data['code'] == -1) {
+        if (-1 == $data['code']) {
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_ERROR_VALIDATION);
 

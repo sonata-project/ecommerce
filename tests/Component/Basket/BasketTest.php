@@ -402,7 +402,7 @@ class BasketTest extends TestCase
 
         $basket->buildPrices();
 
-        $this->assertEquals(0, count($basket->getBasketElements()));
+        $this->assertCount(0, $basket->getBasketElements());
     }
 
     public function testClean(): void
@@ -423,7 +423,7 @@ class BasketTest extends TestCase
 
         $basket->clean();
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertCount(1, $basket->getBasketElements());
     }
 
     public function testGettersSetters(): void
