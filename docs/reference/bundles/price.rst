@@ -29,7 +29,7 @@ Please, update your ``AppKernel.php`` file like this:
 
     class AppKernel extends Kernel
     {
-        public function init()
+        public function boot()
         {
             bcscale(3); // or any other value greater than 0
 

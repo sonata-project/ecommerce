@@ -65,5 +65,5 @@ Here's how to configure Ogone for Sonata e-commerce:
             # ...
 
             # If you've overridden the OgonePayment class
-            sonata.payment.method.ogone.class:      "Application\\Sonata\\Component\\Payment\\Ogone\\OgonePayment"
+            sonata.payment.method.ogone.class:      "App\Application\\Sonata\\Component\\Payment\\Ogone\\OgonePayment"
             #...

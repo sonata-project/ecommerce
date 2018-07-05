@@ -27,7 +27,7 @@ Start by adding the option in your product provider:
 
     <?php
 
-    namespace Application\Sonata\ProductBundle\Provider;
+    namespace App\Application\Sonata\ProductBundle\Provider;
 
     use JMS\Serializer\SerializerInterface;
 

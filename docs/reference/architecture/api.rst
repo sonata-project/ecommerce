@@ -7,11 +7,10 @@
     single: Basket
     pair: API; Architecture
 
-===
 API
 ===
 
-Sonata e-commerce embeds `Controllers` to provide an `API` through `FOSRestBundle`, with its documentation is provided by ``NelmioApiDocBundle``.
+Sonata e-commerce embeds `Controllers` to provide an `API` through `FOSRestBundle`, with its documentation provided by ``NelmioApiDocBundle``.
 
 Setup
 -----
