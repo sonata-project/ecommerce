@@ -53,7 +53,7 @@ Then:
                     cert_id:            CERTIFICATE ID # related to the cert_file file
                     account:            PAYPAL ACCOUNT NUMBER
                     debug:              false
-                    class_order:        Application\Sonata\OrderBundle\Entity\Order
+                    class_order:        App\Application\Sonata\OrderBundle\Entity\Order
                     url_callback:       sonata_payment_callback
                     url_return_ko:      sonata_payment_error
                     url_return_ok:      sonata_payment_confirmation

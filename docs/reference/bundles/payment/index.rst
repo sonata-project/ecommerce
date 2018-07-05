@@ -49,7 +49,7 @@ Your service must return a unique, non-null key when the ``getCode`` method is c
 
 .. code-block:: php
 
-    namespace Application\Sonata\PaymentBundle\Method;
+    namespace App\Application\Sonata\PaymentBundle\Method;
 
     use Sonata\Component\Payment\BasePayment;
 
@@ -100,7 +100,7 @@ Here's the full default configuration for SonataPaymentBundle:
                     debug:                false
                     paypal_cert_file:     '%kernel.root_dir%/paypal_cert_pem_sandbox.txt'
                     url_action:           https://www.sandbox.paypal.com/cgi-bin/webscr
-                    class_order:          Application\Sonata\OrderBundle\Entity\Order
+                    class_order:          App\Application\Sonata\OrderBundle\Entity\Order
                     url_callback:         sonata_payment_callback
                     url_return_ko:        sonata_payment_error
                     url_return_ok:        sonata_payment_confirmation
@@ -187,8 +187,8 @@ Here's the full default configuration for SonataPaymentBundle:
                     sha-out_key:          ~ # Required
                     template:             SonataPaymentBundle:Payment:ogone.html.twig
         class:
-            order:                Application\Sonata\OrderBundle\Entity\Order
-            transaction:          Application\Sonata\PaymentBundle\Entity\Transaction
+            order:                App\Application\Sonata\OrderBundle\Entity\Order
+            transaction:          App\Application\Sonata\PaymentBundle\Entity\Transaction
 
         # Here you will enable the payment methods you wish to provide
         # and add your custom ones
@@ -230,7 +230,7 @@ In order to add a custom payment methods, here are the steps to follow:
 
     <?php
 
-    namespace Application\AcmeBundle\Payment;
+    namespace App\Application\AcmeBundle\Payment;
 
     use Sonata\Component\Payment\BasePayment;
 
@@ -257,7 +257,7 @@ In order to add a custom payment methods, here are the steps to follow:
 
 .. code-block:: xml
 
-        <service id="application.acme.payment.bitcoin" class="Application\AcmeBundle\Payment\BitcoinPayment">
+        <service id="application.acme.payment.bitcoin" class="App\Application\AcmeBundle\Payment\BitcoinPayment">
             <tag name="sonata.delivery.method" />
         </service>
 

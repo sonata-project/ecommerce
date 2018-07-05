@@ -23,4 +23,3 @@ So, let's get started!
     Create a delivery method <create-delivery-method>
     Create a payment method <create-payment-method>
     Extend the e-commerce part of Sonata <extend>
-    Interact with other bundles <interact>

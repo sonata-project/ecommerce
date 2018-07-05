@@ -29,7 +29,7 @@ Run the following command to create the files:
 
 .. code-block:: bash
 
-	php app/console sonata:product:generate Bowl sonata.ecommerce_demo.product.bowl
+	php bin/console sonata:product:generate Bowl sonata.ecommerce_demo.product.bowl
 
 The required base files will be created in ``src/Application/Sonata/ProductBundle``.
 To finalize the installation, we have to define the missing parameters like the type itself and the related manager. These data have to be provided in ``src/Application/Sonata/ProductBundle/Resources/config/product.yml``.
@@ -42,11 +42,11 @@ To finalize the installation, we have to define the missing parameters like the 
         sonata.ecommerce_demo.product.bowl.manager:
             class: Sonata\ProductBundle\Entity\ProductManager
             arguments:
-                - Application\Sonata\ProductBundle\Entity\Bowl
+                - App\Application\Sonata\ProductBundle\Entity\Bowl
                 - '@sonata.product.entity_manager'
 
         sonata.ecommerce_demo.product.bowl.type:
-            class: Application\Sonata\ProductBundle\Provider\BowlProductProvider
+            class: App\Application\Sonata\ProductBundle\Provider\BowlProductProvider
             arguments:
                 - '@serializer'
 
@@ -181,16 +181,16 @@ As the variation is stored as a real field in our model, we now have to update o
 
 .. code-block:: bash
 
-    php app/console doctrine:schema:update --dump-sql
+    php bin/console doctrine:schema:update --dump-sql
 
 And if everything is ok, perform to the modification:
 
 .. code-block:: bash
 
-    php app/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
 
 If you go back to the *product creation* page, you should be able to see our provider and display its page without any error. Though, the size field is not available yet. We have to enable it manually by overriding the ``SpoonProductProvider::buildEditForm()`` method.
-You first should add the usage of ``Application\Sonata\ProductBundle\Entity\Spoon`` class:
+You first should add the usage of ``App\Application\Sonata\ProductBundle\Entity\Spoon`` class:
 
 .. code-block:: php
 
