@@ -21,6 +21,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProductAdminController extends Controller
 {
     /**
+     * @param Request|null $request
+     *
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response|\Symfony\Component\HttpFoundation\Response
@@ -46,6 +48,8 @@ class ProductAdminController extends Controller
     }
 
     /**
+     * @param Request|null $request
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return \Symfony\Component\HttpFoundation\Response

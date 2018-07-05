@@ -52,9 +52,6 @@ class ProductAdmin extends AbstractAdmin
         $this->currencyDetector = $currencyDetector;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->setTranslationDomain('SonataProductBundle');
@@ -68,9 +65,6 @@ class ProductAdmin extends AbstractAdmin
         return $this->getRequest()->get('provider');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFormFields(FormMapper $formMapper): void
     {
         // this admin class works only from a request scope
@@ -88,9 +82,6 @@ class ProductAdmin extends AbstractAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPersistentParameters()
     {
         if (!$this->hasRequest()) {
@@ -102,9 +93,6 @@ class ProductAdmin extends AbstractAdmin
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureListFields(ListMapper $list): void
     {
         $list
@@ -178,9 +166,6 @@ class ProductAdmin extends AbstractAdmin
         return $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate(ErrorElement $errorElement, $object): void
     {
         $errorElement
@@ -188,9 +173,6 @@ class ProductAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function postUpdate($product): void
     {
         $provider = $this->getProductProvider($product);
@@ -200,9 +182,6 @@ class ProductAdmin extends AbstractAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {
@@ -242,9 +221,6 @@ class ProductAdmin extends AbstractAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         // this admin class works only from a request scope

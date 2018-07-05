@@ -54,33 +54,21 @@ class CheckPayment extends BasePayment
         return 1;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBasketValid(BasketInterface $basket)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRequestValid(TransactionInterface $transaction)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleError(TransactionInterface $transaction)
     {
         $transaction->getOrder()->setPaymentStatus($transaction->getStatusCode());
@@ -92,9 +80,6 @@ class CheckPayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         $order = $transaction->getOrder();
@@ -118,9 +103,6 @@ class CheckPayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isCallbackValid(TransactionInterface $transaction)
     {
         if (!$transaction->getOrder()) {
@@ -138,9 +120,6 @@ class CheckPayment extends BasePayment
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendbank(OrderInterface $order)
     {
         $params = [
@@ -171,17 +150,11 @@ class CheckPayment extends BasePayment
         return $response;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderReference(TransactionInterface $transaction)
     {
         return $transaction->get('reference');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function applyTransactionId(TransactionInterface $transaction): void
     {
         $transaction->setTransactionId('n/a');

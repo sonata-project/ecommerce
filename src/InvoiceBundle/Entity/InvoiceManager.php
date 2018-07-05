@@ -20,9 +20,6 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class InvoiceManager extends BaseEntityManager implements InvoiceManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()

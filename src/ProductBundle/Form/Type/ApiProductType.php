@@ -36,9 +36,6 @@ class ApiProductType extends AbstractType
         $this->productPool = $productPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['provider_name']) {
@@ -47,9 +44,6 @@ class ApiProductType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
         $resolver->setDefaults([
@@ -59,25 +53,16 @@ class ApiProductType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_product_api_form_product';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return ApiProductParentType::class;

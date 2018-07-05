@@ -167,17 +167,11 @@ abstract class BaseProduct implements ProductInterface
         $this->enabledVariations = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addProductCollection(ProductCollectionInterface $productCollection): void
     {
         $productCollection->setProduct($this);
@@ -185,9 +179,6 @@ abstract class BaseProduct implements ProductInterface
         $this->productCollections->add($productCollection);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeProductCollection(ProductCollectionInterface $productCollection): void
     {
         if ($this->productCollections->contains($productCollection)) {
@@ -195,25 +186,16 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductCollections()
     {
         return $this->productCollections;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductCollections(ArrayCollection $productCollections): void
     {
         $this->productCollections = $productCollections;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCollections()
     {
         $collections = new ArrayCollection();
@@ -227,25 +209,16 @@ abstract class BaseProduct implements ProductInterface
         return $collections;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSku($sku): void
     {
         $this->sku = $sku;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSku()
     {
         return $this->sku;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSlug($slug): void
     {
         $slug = Slugify::create()->slugify(trim((string) $slug));
@@ -253,17 +226,11 @@ abstract class BaseProduct implements ProductInterface
         $this->slug = !empty($slug) ? $slug : 'n-a';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName($name): void
     {
         $this->name = $name;
@@ -273,241 +240,151 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription($description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return $this->description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRawDescription($rawDescription): void
     {
         $this->rawDescription = $rawDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRawDescription()
     {
         return $this->rawDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescriptionFormatter($descriptionFormatter): void
     {
         $this->descriptionFormatter = $descriptionFormatter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescriptionFormatter()
     {
         return $this->descriptionFormatter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setShortDescription($shortDescription): void
     {
         $this->shortDescription = $shortDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShortDescription()
     {
         return $this->shortDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRawShortDescription($rawShortDescription): void
     {
         $this->rawShortDescription = $rawShortDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRawShortDescription()
     {
         return $this->rawShortDescription;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setShortDescriptionFormatter($shortDescriptionFormatter): void
     {
         $this->shortDescriptionFormatter = $shortDescriptionFormatter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getShortDescriptionFormatter()
     {
         return $this->shortDescriptionFormatter;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPrice($price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice($vat = false)
     {
         return $this->price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUnitPrice($unitPrice): void
     {
         $this->setPrice($unitPrice);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnitPrice($vat = false)
     {
         return $this->getPrice($vat);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setQuantity($quantity): void
     {
         throw new \InvalidMethodCallException('This method is not used');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getQuantity(): void
     {
         throw new \InvalidMethodCallException('This method is not used');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatRate()
     {
         return $this->vatRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setStock($stock): void
     {
         $this->stock = $stock;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStock()
     {
         return $this->stock;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addPackage(PackageInterface $package): void
     {
         $package->setProduct($this);
@@ -515,9 +392,6 @@ abstract class BaseProduct implements ProductInterface
         $this->packages->add($package);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removePackage(PackageInterface $package): void
     {
         if ($this->packages->contains($package)) {
@@ -525,25 +399,16 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPackages()
     {
         return $this->packages;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPackages(ArrayCollection $packages): void
     {
         $this->packages = $packages;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addDelivery(DeliveryInterface $delivery): void
     {
         $delivery->setProduct($this);
@@ -551,9 +416,6 @@ abstract class BaseProduct implements ProductInterface
         $this->deliveries->add($delivery);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeDelivery(DeliveryInterface $delivery): void
     {
         if ($this->deliveries->contains($delivery)) {
@@ -561,57 +423,36 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDeliveries()
     {
         return $this->deliveries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDeliveries(ArrayCollection $deliveries): void
     {
         $this->deliveries = $deliveries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addDeliverie(DeliveryInterface $delivery): void
     {
         $this->addDelivery($delivery);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeDeliverie(DeliveryInterface $delivery): void
     {
         $this->removeDelivery($delivery);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addProductCategorie(ProductCategoryInterface $productCategory): void
     {
         $this->addProductCategory($productCategory);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeProductCategorie(ProductCategoryInterface $productCategory): void
     {
         $this->removeProductCategory($productCategory);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addProductCategory(ProductCategoryInterface $productCategory): void
     {
         $productCategory->setProduct($this);
@@ -619,9 +460,6 @@ abstract class BaseProduct implements ProductInterface
         $this->productCategories->add($productCategory);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeProductCategory(ProductCategoryInterface $productCategory): void
     {
         if ($this->productCategories->contains($productCategory)) {
@@ -629,25 +467,16 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductCategories()
     {
         return $this->productCategories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductCategories(ArrayCollection $productCategories): void
     {
         $this->productCategories = $productCategories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCategories()
     {
         $categories = new ArrayCollection();
@@ -661,9 +490,6 @@ abstract class BaseProduct implements ProductInterface
         return $categories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMainCategory()
     {
         foreach ($this->getProductCategories() as $productCategory) {
@@ -673,9 +499,6 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addVariation(ProductInterface $variation): void
     {
         $variation->setParent($this);
@@ -683,9 +506,6 @@ abstract class BaseProduct implements ProductInterface
         $this->variations->add($variation);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeVariation(ProductInterface $variation): void
     {
         if ($this->variations->contains($variation)) {
@@ -693,130 +513,82 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariations()
     {
         return $this->variations;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVariations(ArrayCollection $variations): void
     {
         $this->variations = $variations;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasVariations()
     {
         return count($this->variations) > 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setImage(MediaInterface $image = null): void
     {
         $this->image = $image;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getImage()
     {
         return $this->image;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setGallery(GalleryInterface $gallery = null): void
     {
         $this->gallery = $gallery;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGallery()
     {
         return $this->gallery;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setParent(ProductInterface $parent): void
     {
         $this->parent = $parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOptions()
     {
         return $this->options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOptions(array $options): void
     {
         $this->options = $options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isMaster()
     {
         return null === $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isVariation()
     {
         return null !== $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEnabled()
     {
         return $this->getEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isSalable()
     {
         // Product is enabled and is a variation or a single product.
         return $this->isEnabled() && ($this->isVariation() || !$this->hasVariations());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRecurrentPayment()
     {
         return false;
@@ -833,25 +605,16 @@ abstract class BaseProduct implements ProductInterface
         $this->updatedAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPriceIncludingVat($priceIncludingVat): void
     {
         $this->priceIncludingVat = $priceIncludingVat;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isPriceIncludingVat()
     {
         return $this->priceIncludingVat;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray()
     {
         $baseArrayRep = [
@@ -874,9 +637,6 @@ abstract class BaseProduct implements ProductInterface
         return $baseArrayRep;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fromArray($array): void
     {
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -885,9 +645,6 @@ abstract class BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOneMainCategory()
     {
         if (0 == $this->getCategories()->count()) {
@@ -911,9 +668,6 @@ abstract class BaseProduct implements ProductInterface
         return $has;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateOneMainCategory(ExecutionContextInterface $context): void
     {
         if (0 == $this->getCategories()->count()) {

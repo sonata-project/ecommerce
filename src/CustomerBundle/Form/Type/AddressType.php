@@ -62,9 +62,6 @@ class AddressType extends AbstractType
         $this->basket = $basket;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $address = $builder->getData();
@@ -87,33 +84,21 @@ class AddressType extends AbstractType
         $builder->add('countryCode', CountryType::class, $countryOptions);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return 'sonata_basket_address';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
         $resolver->setDefaults([

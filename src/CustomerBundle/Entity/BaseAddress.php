@@ -79,12 +79,12 @@ abstract class BaseAddress implements AddressInterface
     protected $phone;
 
     /**
-     * @var datetime
+     * @var \DateTime
      */
     protected $updatedAt;
 
     /**
-     * @var datetime
+     * @var \DateTime
      */
     protected $createdAt;
 

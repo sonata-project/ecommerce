@@ -73,7 +73,7 @@ interface BasketElementInterface extends PriceComputableInterface
     /**
      * Returns the VAT amount.
      *
-     * @return $float
+     * @return float
      */
     public function getVatAmount();
 

@@ -27,9 +27,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class DebugPayment extends PassPayment
 {
-    /**
-     * {@inheritdoc}
-     */
     public function sendbank(OrderInterface $order)
     {
         return new RedirectResponse($this->router->generate('sonata_payment_debug', [
@@ -69,9 +66,6 @@ class DebugPayment extends PassPayment
         return $response;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         $parameters = $transaction->getParameters();
@@ -107,9 +101,6 @@ class DebugPayment extends PassPayment
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRequestValid(TransactionInterface $transaction)
     {
         return $transaction->get('check') === $this->generateUrlCheck($transaction->getOrder());

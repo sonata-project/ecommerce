@@ -23,17 +23,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataCustomerBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         $this->registerFormMapping();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function boot(): void
     {
         $this->registerFormMapping();

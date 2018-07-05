@@ -20,9 +20,6 @@ use Sonata\CoreBundle\Model\BaseEntityManager;
 
 class ProductCollectionManager extends BaseEntityManager implements ProductCollectionManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection): void
     {
         if ($this->findOneBy(['collection' => $collection, 'product' => $product])) {
@@ -40,9 +37,6 @@ class ProductCollectionManager extends BaseEntityManager implements ProductColle
         $this->save($productCollection);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection): void
     {
         if (!$productCollection = $this->findOneBy(['collection' => $collection, 'product' => $product])) {

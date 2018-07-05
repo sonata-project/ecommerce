@@ -20,9 +20,6 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class CustomerManager extends BaseEntityManager implements CustomerManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()

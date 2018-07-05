@@ -35,9 +35,6 @@ class ORMInheritanceSubscriber implements EventSubscriber
         $this->productClass = $productClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubscribedEvents()
     {
         return [

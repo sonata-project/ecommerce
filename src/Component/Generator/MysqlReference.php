@@ -32,9 +32,6 @@ class MysqlReference implements ReferenceInterface
         $this->registry = $registry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function invoice(InvoiceInterface $invoice): void
     {
         if (!$invoice->getId()) {
@@ -44,9 +41,6 @@ class MysqlReference implements ReferenceInterface
         $this->generateReference($invoice, $this->registry->getManager()->getClassMetadata(get_class($invoice))->table['name']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function order(OrderInterface $order): void
     {
         if (!$order->getId()) {

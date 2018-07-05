@@ -22,18 +22,12 @@ use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
  */
 class OrderStatusRenderer implements StatusClassRendererInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function handlesObject($object, $statusName = null)
     {
         return ($object instanceof OrderInterface || $object instanceof OrderElementInterface)
             && in_array($statusName, ['delivery', 'payment', null]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStatusClass($object, $statusName = null, $default = '')
     {
         switch ($statusName) {

@@ -20,9 +20,6 @@ use Sonata\Component\Product\ProductInterface;
  */
 class CurrencyPriceCalculator implements CurrencyPriceCalculatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice(ProductInterface $product, CurrencyInterface $currency, $vat = false)
     {
         $price = $product->getPrice();

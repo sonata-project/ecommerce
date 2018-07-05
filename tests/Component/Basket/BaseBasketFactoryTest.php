@@ -56,23 +56,14 @@ class BasketFactory extends BaseBasketFactory
         return $this->session;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(CustomerInterface $customer): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function save(BasketInterface $basket): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset(BasketInterface $basket, $full = true): void
     {
     }

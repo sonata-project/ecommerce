@@ -45,8 +45,10 @@ class GenerateProductCommand extends ContainerAwareCommand
     /**
      * @see Command
      *
-     * @throws \InvalidArgumentException When namespace doesn't end with Bundle
-     * @throws \RuntimeException         When bundle can't be executed
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {

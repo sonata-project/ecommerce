@@ -82,7 +82,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Get invoiceId.
      *
-     * @return int $invoiceId
+     * @return InvoiceInterface $invoiceId
      */
     public function getInvoice()
     {
@@ -102,40 +102,28 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Get orderElement.
      *
-     * @return OrderElementInterface $orderElement
+     * @return OrderElement $orderElement
      */
     public function getOrderElement()
     {
         return $this->orderElement;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setQuantity($quantity): void
     {
         $this->quantity = $quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getQuantity()
     {
         return $this->quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPrice($price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice($vat = false)
     {
         $unitPrice = $this->getUnitPriceExcl();
@@ -147,17 +135,11 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
         return bcmul($unitPrice, $this->getQuantity());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatRate()
     {
         return $this->vatRate;
@@ -173,41 +155,26 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
         $this->total = $total;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUnitPriceExcl($unitPriceExcl): void
     {
         $this->unitPriceExcl = $unitPriceExcl;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnitPriceExcl()
     {
         return $this->unitPriceExcl;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUnitPriceInc($unitPriceInc): void
     {
         $this->unitPriceInc = $unitPriceInc;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnitPriceInc()
     {
         return $this->unitPriceInc;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnitPrice($vat = false)
     {
         return $vat ? $this->getUnitPriceInc() : $this->getUnitPriceExcl();
@@ -258,7 +225,7 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
     /**
      * Set description.
      *
-     * string $description
+     * @param string $description
      */
     public function setDescription($description): void
     {

@@ -35,9 +35,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
      * @param CategoryManagerInterface $categoryManager
      */
 
-    /**
-     * {@inheritdoc}
-     */
     public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false): void
     {
         if ($this->findOneBy(['category' => $category, 'product' => $product])) {
@@ -62,9 +59,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         $this->save($productCategory);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category): void
     {
         if (!$productCategory = $this->findOneBy(['category' => $category, 'product' => $product])) {
@@ -76,9 +70,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         $this->delete($productCategory);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCategoryTree()
     {
         $qb = $this->getRepository()->createQueryBuilder('pc')
@@ -99,9 +90,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         return $categoryTree;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductCount(CategoryInterface $category, $limit = 1000)
     {
         // Can't perform limit in subqueries with Doctrine... Hence raw SQL

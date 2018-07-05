@@ -58,7 +58,7 @@ class OrderController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getOrdersAction(ParamFetcherInterface $paramFetcher)
     {
@@ -130,7 +130,7 @@ class OrderController
      *
      * @param $id
      *
-     * @return OrderElementInterface
+     * @return array
      */
     public function getOrderOrderelementsAction($id)
     {

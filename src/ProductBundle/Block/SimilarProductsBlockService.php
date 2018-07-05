@@ -64,9 +64,6 @@ class SimilarProductsBlockService extends BaseBlockService
         parent::__construct($name, $templating);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         if (!$product = $this->getProductRepository()->findOneBy(['id' => $blockContext->getSetting('base_product_id')])) {
@@ -86,17 +83,11 @@ class SimilarProductsBlockService extends BaseBlockService
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         // TODO: Implement validateBlock() method.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
@@ -108,17 +99,11 @@ class SimilarProductsBlockService extends BaseBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Similar products';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

@@ -109,9 +109,6 @@ abstract class BaseCustomer implements CustomerInterface
         $this->isFake = false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return $this->getFullname();
@@ -133,17 +130,11 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->getFullname();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTitle()
     {
         return $this->title;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTitle($title): void
     {
         $this->title = $title;
@@ -175,193 +166,121 @@ abstract class BaseCustomer implements CustomerInterface
         return isset($list[$this->title]) ? $list[$this->title] : '';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFirstname()
     {
         return $this->firstname;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setFirstname($firstname): void
     {
         $this->firstname = $firstname;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLastname()
     {
         return $this->lastname;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLastname($lastname): void
     {
         $this->lastname = $lastname;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFullname()
     {
         return $this->getFirstname().' '.$this->getLastname();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmail()
     {
         return $this->email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEmail($email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBirthDate()
     {
         return $this->birthDate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setBirthDate(\DateTime $birthDate = null): void
     {
         $this->birthDate = $birthDate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBirthPlace()
     {
         return $this->birthPlace;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setBirthPlace($birthPlace): void
     {
         $this->birthPlace = $birthPlace;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPhoneNumber($phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMobileNumber()
     {
         return $this->mobileNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMobileNumber($mobileNumber): void
     {
         $this->mobileNumber = $mobileNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFaxNumber()
     {
         return $this->faxNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setFaxNumber($faxNumber): void
     {
         $this->faxNumber = $faxNumber;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUser(UserInterface $user): void
     {
         $this->user = $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUser()
     {
         return $this->user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addAddress(AddressInterface $address): void
     {
         $address->setCustomer($this);
@@ -383,17 +302,11 @@ abstract class BaseCustomer implements CustomerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAddresses()
     {
         return $this->addresses;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAddressesByType($type)
     {
         $addresses = new ArrayCollection();
@@ -407,49 +320,31 @@ abstract class BaseCustomer implements CustomerInterface
         return $addresses;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOrders($orders): void
     {
         $this->orders = $orders;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrders()
     {
         return $this->orders;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setIsFake($isFake): void
     {
         $this->isFake = $isFake;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIsFake()
     {
         return $this->isFake;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLocale($locale): void
     {
         $this->locale = $locale;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocale()
     {
         return $this->locale;

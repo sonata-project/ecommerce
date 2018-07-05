@@ -21,9 +21,6 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class BasketManager extends BaseEntityManager implements BasketManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function loadBasketPerCustomer(CustomerInterface $customer)
     {
         try {
@@ -38,9 +35,6 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function save($entity, $andFlush = true): void
     {
         foreach ($entity->getBasketElements() as $element) {
@@ -50,9 +44,6 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
         parent::save($entity, $andFlush);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()

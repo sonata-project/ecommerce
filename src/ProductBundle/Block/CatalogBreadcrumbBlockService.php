@@ -23,17 +23,11 @@ use Sonata\SeoBundle\Block\Breadcrumb\BaseBreadcrumbMenuBlockService;
  */
 class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata.product.block.breadcrumb';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getMenu(BlockContextInterface $blockContext)
     {
         $menu = $this->getRootMenu($blockContext);

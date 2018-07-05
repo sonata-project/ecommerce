@@ -21,17 +21,11 @@ use Sonata\UserBundle\Block\Breadcrumb\BaseUserProfileBreadcrumbBlockService;
  */
 class CustomerAddressBreadcrumbBlockService extends BaseUserProfileBreadcrumbBlockService
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata.customer.block.breadcrumb_address';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getMenu(BlockContextInterface $blockContext)
     {
         $menu = $this->getRootMenu($blockContext);

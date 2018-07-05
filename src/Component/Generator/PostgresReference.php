@@ -29,9 +29,6 @@ final class PostgresReference implements ReferenceInterface
         $this->registry = $registry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function invoice(InvoiceInterface $invoice): void
     {
         if (!$invoice->getId()) {
@@ -42,9 +39,6 @@ final class PostgresReference implements ReferenceInterface
             $this->registry->getManager()->getClassMetadata(get_class($invoice))->table['name']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function order(OrderInterface $order): void
     {
         if (!$order->getId()) {

@@ -25,9 +25,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataProductBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new AddProductProviderCompilerPass());
@@ -35,9 +32,6 @@ class SonataProductBundle extends Bundle
         $this->registerFormMapping();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function boot(): void
     {
         $this->registerFormMapping();
