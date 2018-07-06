@@ -16,6 +16,7 @@ namespace Sonata\ProductBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\SerializerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
@@ -38,7 +39,12 @@ use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -423,14 +429,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $formMapper->add('sku');
 
         $formMapper
-            ->add('price', 'number')
+            ->add('price', NumberType::class)
             ->add('priceIncludingVat')
-            ->add('vatRate', 'number')
-            ->add('stock', 'integer')
+            ->add('vatRate', NumberType::class)
+            ->add('stock', IntegerType::class)
         ;
 
         if (!$isVariation || in_array('description', $this->variationFields)) {
-            $formMapper->add('description', 'sonata_formatter_type', [
+            $formMapper->add('description', FormatterType::class, [
                 'source_field' => 'rawDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
                 'format_field' => 'descriptionFormatter',
@@ -440,7 +446,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
 
         if (!$isVariation || in_array('short_description', $this->variationFields)) {
-            $formMapper->add('shortDescription', 'sonata_formatter_type', [
+            $formMapper->add('shortDescription', FormatterType::class, [
                 'source_field' => 'rawShortDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
                 'format_field' => 'shortDescriptionFormatter',
@@ -455,7 +461,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             $formMapper->with('Media');
 
             if (!$isVariation || in_array('image', $this->variationFields)) {
-                $formMapper->add('image', 'sonata_type_model_list', [
+                $formMapper->add('image', ModelListType::class, [
                     'required' => false,
                 ], [
                     'link_parameters' => [
@@ -467,7 +473,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             }
 
             if (!$isVariation || in_array('gallery', $this->variationFields)) {
-                $formMapper->add('gallery', 'sonata_type_model_list', [
+                $formMapper->add('gallery', ModelListType::class, [
                     'required' => false,
                 ], [
                     'link_parameters' => [
@@ -744,14 +750,14 @@ abstract class BaseProductProvider implements ProductProviderInterface
         // create the product form
         $formBuilder
             ->setData($basketElement)
-            ->add('productId', 'hidden');
+            ->add('productId', HiddenType::class);
 
         if ($showQuantity) {
-            $formBuilder->add('quantity', 'integer');
+            $formBuilder->add('quantity', IntegerType::class);
         } else {
             $transformer = new QuantityTransformer();
             $formBuilder->add(
-                    $formBuilder->create('quantity', 'hidden', ['data' => 1])
+                    $formBuilder->create('quantity', HiddenType::class, ['data' => 1])
                                 ->addModelTransformer($transformer)
             );
         }
@@ -765,9 +771,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = []): void
     {
         $formBuilder
-            ->add('delete', 'checkbox')
-            ->add('quantity', 'integer')
-            ->add('productId', 'hidden');
+            ->add('delete', CheckboxType::class)
+            ->add('quantity', IntegerType::class)
+            ->add('productId', HiddenType::class);
     }
 
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket): void

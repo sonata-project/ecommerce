@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\CustomerBundle\Form\Type;
 
+use Sonata\BasketBundle\Form\AddressType as BasketAddressType;
 use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -86,7 +87,7 @@ class AddressType extends AbstractType
 
     public function getParent()
     {
-        return 'sonata_basket_address';
+        return BasketAddressType::class;
     }
 
     public function getBlockPrefix()
