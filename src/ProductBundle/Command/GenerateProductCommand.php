@@ -149,7 +149,7 @@ class GenerateProductCommand extends ContainerAwareCommand
     {{ service }}.type:
         class: Application\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
         arguments:
-            - "@serializer"
+            - "@jms_serializer"
 
 <info>2. Add this service configuration</info>
 
