@@ -704,8 +704,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
     // BASKET RELATED FUNCTIONS
 
     /**
-     * (non-PHPdoc).
-     *
      * @see \Sonata\Component\Product\ProductProviderInterface::createBasketElement()
      *
      * @param ProductInterface|null $product
