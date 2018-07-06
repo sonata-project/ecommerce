@@ -43,7 +43,7 @@ class CurrencyFormType extends CurrencyType
 
     public function getParent()
     {
-        return 'currency';
+        return CurrencyType::class;
     }
 
     public function getBlockPrefix()

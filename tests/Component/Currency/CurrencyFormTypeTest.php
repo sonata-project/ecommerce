@@ -16,6 +16,7 @@ namespace Sonata\Component\Tests\Currency;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\CurrencyDataTransformer;
 use Sonata\Component\Currency\CurrencyFormType;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\FormBuilder;
 
 /**
@@ -45,7 +46,7 @@ class CurrencyFormTypeTest extends TestCase
 
     public function testGetParent(): void
     {
-        $this->assertEquals('currency', $this->currencyFormType->getParent());
+        $this->assertEquals(CurrencyType::class, $this->currencyFormType->getParent());
     }
 
     public function testGetName(): void

@@ -19,6 +19,7 @@ use Doctrine\ORM\ORMException;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\Component\Product\Pool;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +46,7 @@ class ProductVariationAdminController extends Controller
         }
 
         $form = $this->createFormBuilder(null, [])
-            ->add('number', 'integer', [
+            ->add('number', IntegerType::class, [
                 'required' => true,
                 'label' => $this->getTranslator()->trans('variations_number', [], 'SonataProductBundle'),
                 'attr' => ['min' => 1, 'max' => 10],

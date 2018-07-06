@@ -19,10 +19,13 @@ use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\ProductBundle\Repository\BaseProductRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -79,10 +82,14 @@ class RecentProductsBlockService extends BaseBlockService
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', [
+        $formMapper->add('settings', ImmutableArrayType::class, [
             'keys' => [
-                ['number', 'integer', ['required' => true]],
-                ['title',  'text',    ['required' => false]],
+                ['number', IntegerType::class, [
+                    'required' => true,
+                ]],
+                ['title',  TextType::class, [
+                    'required' => false,
+                ]],
             ],
         ]);
     }
