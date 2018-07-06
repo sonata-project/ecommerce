@@ -143,12 +143,12 @@ class GenerateProductCommand extends ContainerAwareCommand
         class: Sonata\ProductBundle\Entity\ProductManager
         arguments:
             - Application\Sonata\ProductBundle\Entity\{{ product }}
-            - @doctrine
+            - "@doctrine"
 
     {{ service }}.type:
         class: Application\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
         arguments:
-            - @serializer
+            - "@serializer"
 
 <info>2. Add this service configuration</info>
 
