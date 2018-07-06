@@ -39,25 +39,16 @@ class DoctrineModelManager extends ModelManager
         $this->pool = $pool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create($object): void
     {
         $this->pool->getManager($object)->save($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function update($object): void
     {
         $this->pool->getManager($object)->save($object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function delete($object): void
     {
         $this->pool->getManager($object)->delete($object);

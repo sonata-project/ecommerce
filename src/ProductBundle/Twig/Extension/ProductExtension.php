@@ -126,7 +126,7 @@ class ProductExtension extends \Twig_Extension
      *
      * @param ProductInterface $product
      *
-     * @return ProductInterface
+     * @return float
      */
     public function getCheapestEnabledVariationPrice(ProductInterface $product)
     {
@@ -180,9 +180,6 @@ class ProductExtension extends \Twig_Extension
         return $form;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_product';

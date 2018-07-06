@@ -62,9 +62,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
         $this->session = $session;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(CustomerInterface $customer)
     {
         $basket = $this->getFromSession($customer);
@@ -81,9 +78,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
         return $basket;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function logout(Request $request, Response $response, TokenInterface $token): void
     {
         // Remove anonymous basket

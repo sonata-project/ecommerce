@@ -21,9 +21,6 @@ use Sonata\UserBundle\Model\UserInterface;
 
 class OrderManager extends BaseEntityManager implements OrderManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function save($order, $andFlush = true): void
     {
         $this->getEntityManager()->persist($order->getCustomer());
@@ -31,9 +28,6 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
         parent::save($order, $andFlush);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findForUser(UserInterface $user, array $orderBy = [], $limit = null, $offset = null)
     {
         $qb = $this->getRepository()->createQueryBuilder('o')
@@ -56,9 +50,6 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
         return $qb->getQuery()->execute();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrder($orderId)
     {
         $qb = $this->getRepository()->createQueryBuilder('o')
@@ -70,9 +61,6 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()

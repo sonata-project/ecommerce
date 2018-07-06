@@ -52,18 +52,12 @@ class OrderElementAdmin extends AbstractAdmin
         $this->productPool = $productPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->parentAssociationMapping = 'order';
         $this->setTranslationDomain('SonataOrderBundle');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFormFields(FormMapper $formMapper): void
     {
         $productTypeOptions = [
@@ -89,9 +83,6 @@ class OrderElementAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureListFields(ListMapper $list): void
     {
         $list->addIdentifier('id');

@@ -27,9 +27,6 @@ class DeliveryAdmin extends AbstractAdmin
 {
     protected $parentAssociationMapping = 'product';
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->setTranslationDomain('SonataProductBundle');
@@ -77,9 +74,6 @@ class DeliveryAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {
@@ -96,9 +90,6 @@ class DeliveryAdmin extends AbstractAdmin
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter

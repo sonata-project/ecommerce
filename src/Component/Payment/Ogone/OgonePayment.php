@@ -57,25 +57,16 @@ class OgonePayment extends BasePayment
         $this->setLogger($logger);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBasketValid(BasketInterface $basket)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRequestValid(TransactionInterface $transaction)
     {
         $params = [
@@ -102,9 +93,6 @@ class OgonePayment extends BasePayment
             && $transaction->get('check') === $this->generateUrlCheck($transaction->getOrder());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleError(TransactionInterface $transaction)
     {
         if ($transaction->getOrder()->isOpen()) {
@@ -118,9 +106,6 @@ class OgonePayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendConfirmationReceipt(TransactionInterface $transaction)
     {
         $transaction->setState(TransactionInterface::STATE_OK);
@@ -135,9 +120,6 @@ class OgonePayment extends BasePayment
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isCallbackValid(TransactionInterface $transaction)
     {
         if (!$transaction->getOrder()) {
@@ -155,9 +137,6 @@ class OgonePayment extends BasePayment
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function sendbank(OrderInterface $order)
     {
         return $this->templating->renderResponse($this->getOption('template'), [
@@ -168,17 +147,11 @@ class OgonePayment extends BasePayment
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function encodeString($string)
     {
         return $string;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrderReference(TransactionInterface $transaction)
     {
         return $transaction->get('reference');
@@ -279,6 +252,8 @@ class OgonePayment extends BasePayment
      *
      * @param string         $optionKey
      * @param OrderInterface $order
+     *
+     * @return string
      */
     protected function generateAbsoluteUrlFromOption($optionKey, OrderInterface $order)
     {

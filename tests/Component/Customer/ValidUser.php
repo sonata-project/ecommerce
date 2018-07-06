@@ -22,37 +22,22 @@ class ValidUser implements UserInterface
         return 1;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoles(): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPassword(): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSalt(): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUsername(): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function eraseCredentials(): void
     {
     }

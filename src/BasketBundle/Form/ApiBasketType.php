@@ -43,9 +43,6 @@ class ApiBasketType extends AbstractType
         $this->currencyFormType = $currencyFormType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
@@ -53,9 +50,6 @@ class ApiBasketType extends AbstractType
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
         $resolver->setDefaults([
@@ -65,25 +59,16 @@ class ApiBasketType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_basket_api_form_basket';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return ApiBasketParentType::class;

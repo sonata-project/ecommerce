@@ -33,17 +33,11 @@ class DeliveryMethodTransformer implements DataTransformerInterface
         $this->deliveryPool = $deliveryPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($value)
     {
         return $this->deliveryPool->getMethod($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($value)
     {
         return $value ? $value->getCode() : null;

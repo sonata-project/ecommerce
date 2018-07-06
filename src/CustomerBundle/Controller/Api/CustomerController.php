@@ -84,7 +84,7 @@ class CustomerController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getCustomersAction(ParamFetcherInterface $paramFetcher)
     {
@@ -151,9 +151,7 @@ class CustomerController
      *
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Customer
+     * @return FOSRestView|FormInterface
      */
     public function postCustomerAction(Request $request)
     {
@@ -176,12 +174,10 @@ class CustomerController
      *  }
      * )
      *
-     * @param int     $id      A Customer identifier
+     * @param int     $id A Customer identifier
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Customer
+     * @return FOSRestView|FormInterface
      */
     public function putCustomerAction($id, Request $request)
     {
@@ -239,7 +235,7 @@ class CustomerController
      *
      * @param $id
      *
-     * @return OrderInterface
+     * @return array
      */
     public function getCustomerOrdersAction($id)
     {
@@ -266,7 +262,7 @@ class CustomerController
      *
      * @param $id
      *
-     * @return AddressInterface
+     * @return array
      */
     public function getCustomerAddressesAction($id)
     {

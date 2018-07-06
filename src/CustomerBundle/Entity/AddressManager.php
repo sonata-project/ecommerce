@@ -21,9 +21,6 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class AddressManager extends BaseEntityManager implements AddressManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrent(AddressInterface $address): void
     {
         foreach ($address->getCustomer()->getAddressesByType($address->getType()) as $custAddress) {
@@ -39,9 +36,6 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
         $this->save($address);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function delete($address, $andFlush = true): void
     {
         if ($address->getCurrent()) {
@@ -62,9 +56,6 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
         parent::delete($address, $andFlush);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getRepository()

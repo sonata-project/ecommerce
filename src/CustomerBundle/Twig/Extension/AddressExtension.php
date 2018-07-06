@@ -37,9 +37,6 @@ class AddressExtension extends \Twig_Extension
         $this->deliverySelector = $deliverySelector;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions()
     {
         return [
@@ -55,9 +52,6 @@ class AddressExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_address';
@@ -67,14 +61,15 @@ class AddressExtension extends \Twig_Extension
      * Gets the HTML of an address.
      *
      * @param \Twig_Environment $environment A Twig environment
-     * @param mixed             $address     An instance of AddressInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionally name, address2, address3)
-     * @param bool              $showName    Display address name?
-     * @param bool              $showEdit    Display edit button?
-     * @param string            $context     A context for edit link
-     *
-     * @throws InvalidParameterException
+     * @param mixed             $address An instance of AddressInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionally name, address2, address3)
+     * @param bool              $showName Display address name?
+     * @param bool              $showEdit Display edit button?
+     * @param string            $context A context for edit link
      *
      * @return string
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function renderAddress(\Twig_Environment $environment, $address, $showName = true, $showEdit = false, $context = null)
     {

@@ -190,17 +190,11 @@ abstract class BaseInvoice implements InvoiceInterface
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPaymentMethod($paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPaymentMethod()
     {
         return $this->paymentMethod;
@@ -597,25 +591,16 @@ abstract class BaseInvoice implements InvoiceInterface
         return $this->user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getInvoiceElements()
     {
         return $this->invoiceElements;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addInvoiceElement(InvoiceElementInterface $element): void
     {
         $this->invoiceElements[] = $element;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setInvoiceElements(array $elements): void
     {
         $this->invoiceElements = $elements;

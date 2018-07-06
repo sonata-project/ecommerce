@@ -22,17 +22,11 @@ class Basket extends Constraint
      */
     public $message = 'Basket not valid';
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy()
     {
         return 'sonata_basket_validator';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets()
     {
         return self::CLASS_CONSTRAINT;

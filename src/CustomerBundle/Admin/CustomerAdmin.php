@@ -28,9 +28,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CustomerAdmin extends AbstractAdmin
 {
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->setTranslationDomain('SonataCustomerBundle');
@@ -124,9 +121,6 @@ class CustomerAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {

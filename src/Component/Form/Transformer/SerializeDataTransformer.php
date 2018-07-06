@@ -20,17 +20,11 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class SerializeDataTransformer implements DataTransformerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function transform($value)
     {
         return serialize($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($value)
     {
         if (!$value) {

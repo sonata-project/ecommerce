@@ -48,9 +48,6 @@ class PaymentProcessOrderElementConsumer implements ConsumerInterface
         $this->productPool = $productPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(ConsumerEvent $event): void
     {
         $orderStatus = $event->getMessage()->getValue('order_status');

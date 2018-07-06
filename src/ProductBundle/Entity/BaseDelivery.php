@@ -84,7 +84,7 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * Get productId.
      *
-     * @return int $productId
+     * @return ProductInterface $productId
      */
     public function getProduct()
     {
@@ -260,9 +260,6 @@ abstract class BaseDelivery implements DeliveryInterface
         return array_keys(self::getStatusList());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toArray()
     {
         return [
@@ -274,9 +271,6 @@ abstract class BaseDelivery implements DeliveryInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fromArray($array): void
     {
         if (array_key_exists('code', $array)) {

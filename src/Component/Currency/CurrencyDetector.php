@@ -34,9 +34,6 @@ class CurrencyDetector implements CurrencyDetectorInterface
         $this->currency = $currencyManager->findOneByLabel($currencyLabel);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrency()
     {
         return $this->currency;

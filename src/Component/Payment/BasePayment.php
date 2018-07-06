@@ -74,9 +74,6 @@ abstract class BasePayment implements PaymentInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCode()
     {
         return $this->code;
@@ -87,9 +84,6 @@ abstract class BasePayment implements PaymentInterface
         $this->code = $code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
@@ -100,25 +94,16 @@ abstract class BasePayment implements PaymentInterface
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOptions(array $options): void
     {
         $this->options = $options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOptions()
     {
         return $this->options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
@@ -134,9 +119,6 @@ abstract class BasePayment implements PaymentInterface
         return array_key_exists($name, $this->options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function encodeString($value)
     {
         return $value;
@@ -163,17 +145,11 @@ abstract class BasePayment implements PaymentInterface
         $this->transformers[$id] = $transformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTransformer($name)
     {
         return isset($this->transformers[$name]) ? $this->transformers[$name] : false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function callback(TransactionInterface $transaction)
     {
         // check if the order exists

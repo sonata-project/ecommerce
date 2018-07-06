@@ -55,9 +55,6 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
         $this->backend = $backend;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(ConsumerEvent $event): void
     {
         $order = $this->getOrder($event);

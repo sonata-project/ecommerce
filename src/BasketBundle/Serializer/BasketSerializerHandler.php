@@ -20,9 +20,6 @@ use Sonata\CoreBundle\Serializer\BaseSerializerHandler;
  */
 class BasketSerializerHandler extends BaseSerializerHandler
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getType()
     {
         return 'sonata_basket_basket_id';

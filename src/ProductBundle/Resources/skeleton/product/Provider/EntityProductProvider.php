@@ -24,9 +24,6 @@ use Sonata\ProductBundle\Model\BaseProductProvider;
  */
 class {{ product }}ProductProvider extends BaseProductProvider
 {
-    /**
-     * {@inheritDoc}
-     */
     public function getBaseControllerName()
     {
         return 'SonataProductBundle:{{ product }}';

@@ -43,17 +43,11 @@ class FiltersMenuBlockService extends MenuBlockService
         $this->menuBuilder = $menuBuilder;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Filters Menu';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         parent::configureSettings($resolver);
@@ -64,9 +58,6 @@ class FiltersMenuBlockService extends MenuBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getFormSettingsKeys()
     {
         return array_merge(parent::getFormSettingsKeys(), [
@@ -74,9 +65,6 @@ class FiltersMenuBlockService extends MenuBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getMenu(BlockContextInterface $blockContext)
     {
         $settings = $blockContext->getSettings();

@@ -43,9 +43,10 @@ class VariationsFormBlockService extends BaseBlockService
     protected $formFactory;
 
     /**
-     * @param string          $name
-     * @param EngineInterface $templating
-     * @param Pool            $productPool
+     * @param string               $name
+     * @param EngineInterface      $templating
+     * @param Pool                 $productPool
+     * @param FormFactoryInterface $formFactory
      */
     public function __construct($name, EngineInterface $templating, Pool $productPool, FormFactoryInterface $formFactory)
     {
@@ -55,9 +56,6 @@ class VariationsFormBlockService extends BaseBlockService
         $this->formFactory = $formFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $product = $blockContext->getSetting('product');
@@ -101,33 +99,21 @@ class VariationsFormBlockService extends BaseBlockService
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         // TODO: Implement validateBlock() method.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $form, BlockInterface $block): void
     {
         // TODO: Implement buildEditForm() method.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Products Variations choice';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
