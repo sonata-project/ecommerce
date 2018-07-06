@@ -41,13 +41,13 @@ class GenerateProductCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        // find a better way to detect the Application folder
-        $bundle_dir = sprintf('%s/../src/Application/Sonata/ProductBundle',
+        // find a better way to detect the source folder
+        $bundle_dir = sprintf('%s/../src/Sonata/ProductBundle',
             $this->getContainer()->get('kernel')->getRootDir()
         );
 
         if (!is_dir($bundle_dir)) {
-            throw new \Exception('Please initialize a ProductBundle first in the Application directory');
+            throw new \Exception('Please initialize a ProductBundle first in the source directory');
         }
 
         $output->writeln(sprintf('Generating files for the <info>%s</info>', $input->getArgument('product')));
@@ -134,11 +134,11 @@ class GenerateProductCommand extends ContainerAwareCommand
     {{ service }}.manager:
         class: Sonata\ProductBundle\Entity\ProductManager
         arguments:
-            - Application\Sonata\ProductBundle\Entity\{{ product }}
+            - App\Sonata\ProductBundle\Entity\{{ product }}
             - "@doctrine"
 
     {{ service }}.type:
-        class: Application\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
+        class: App\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
         arguments:
             - "@jms_serializer"
 
@@ -152,11 +152,11 @@ class GenerateProductCommand extends ContainerAwareCommand
 
 <info>3. Define the Product serialization inheritance :</info>
 
-Add this line in <comment>/src/Application/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml</comment>
+Add this line in <comment>/src/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml</comment>
 
-    <discriminator-class value="{{ service }}">Application\Sonata\ProductBundle\Entity\{{ product }}</discriminator-class>
+    <discriminator-class value="{{ service }}">App\Sonata\ProductBundle\Entity\{{ product }}</discriminator-class>
 
-You can customize the serialization of your Product by editing /src/Application/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml
+You can customize the serialization of your Product by editing /src/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml
 (see JMS serializer documentation for more information).
 
 <info>4. Tweak the Product to match its functional requirements</info>

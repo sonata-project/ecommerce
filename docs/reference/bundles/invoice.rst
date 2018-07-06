@@ -26,10 +26,10 @@ The bundle allows you to configure the entity classes; you'll also need to regis
 
     sonata_invoice:
         class:
-            invoice:              App\Application\Sonata\InvoiceBundle\Entity\Invoice
-            invoice_element:      App\Application\Sonata\InvoiceBundle\Entity\InvoiceElement
-            order_element:        App\Application\Sonata\OrderBundle\Entity\OrderElement
-            customer:             App\Application\Sonata\CustomerBundle\Entity\Customer
+            invoice:              App\Sonata\InvoiceBundle\Entity\Invoice
+            invoice_element:      App\Sonata\InvoiceBundle\Entity\InvoiceElement
+            order_element:        App\Sonata\OrderBundle\Entity\OrderElement
+            customer:             App\Sonata\CustomerBundle\Entity\Customer
 
     # Enable Doctrine to map the provided entities
     doctrine:

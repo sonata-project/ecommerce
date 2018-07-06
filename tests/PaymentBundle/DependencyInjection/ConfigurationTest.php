@@ -41,8 +41,8 @@ class ConfigurationTest extends TestCase
     public function validateClass($config): void
     {
         $this->assertSame([
-            'order' => 'Application\\Sonata\\OrderBundle\\Entity\\Order',
-            'transaction' => 'Application\\Sonata\\PaymentBundle\\Entity\\Transaction',
+            'order' => 'App\\Sonata\\OrderBundle\\Entity\\Order',
+            'transaction' => 'App\\Sonata\\PaymentBundle\\Entity\\Transaction',
         ], $config['class']);
     }
 

@@ -63,7 +63,7 @@ In order to add a custom delivery methods, here are the steps to follow:
 
     <?php
 
-    namespace App\Application\AcmeBundle\Delivery;
+    namespace App\Delivery;
 
     use Sonata\Component\Delivery\BaseServiceDelivery;
 
@@ -94,7 +94,7 @@ In order to add a custom delivery methods, here are the steps to follow:
 
 .. code-block:: xml
 
-        <service id="application.acme.delivery.take_away" class="App\Application\AcmeBundle\Delivery\TakeAwayDelivery">
+        <service id="app.delivery.take_away" class="App\Delivery\TakeAwayDelivery">
             <tag name="sonata.delivery.method" />
         </service>
 
@@ -107,6 +107,6 @@ In order to add a custom delivery methods, here are the steps to follow:
 
         methods:
             # ...
-            take_away: application.acme.delivery.take_away
+            take_away: app.delivery.take_away
 
 4. That's it! The new method is configured (you'll have to add it to your products though).

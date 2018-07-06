@@ -28,14 +28,14 @@ Add a payment method
 A payment method is basically a service that implements the ``PaymentInterface`` and that is tagged ``sonata.payment.method``. Thoses are the pre-requisites.
 An abstract ``BasePayment`` class is available, we advise you to use it to implement your own payment method.
 
-Once you've declared your service (for the example, let's say I've named it ``acme.payment.mymethod``), add it under the sonata_payment configuration as follows:
+Once you've declared your service (for the example, let's say I've named it ``app.payment.mymethod``), add it under the sonata_payment configuration as follows:
 
 .. code-block:: yaml
 
     sonata_payment:
         services:
             # ...
-            acme.payment.mymethod: ~
+            app.payment.mymethod: ~
 
 Please keep in mind that we won't process your service configuration. You'll need to call the following methods on your service (if you wish to) manually:
 
@@ -49,7 +49,7 @@ Your service must return a unique, non-null key when the ``getCode`` method is c
 
 .. code-block:: php
 
-    namespace App\Application\Sonata\PaymentBundle\Method;
+    namespace App\Sonata\PaymentBundle\Method;
 
     use Sonata\Component\Payment\BasePayment;
 
@@ -100,7 +100,7 @@ Here's the full default configuration for SonataPaymentBundle:
                     debug:                false
                     paypal_cert_file:     '%kernel.root_dir%/paypal_cert_pem_sandbox.txt'
                     url_action:           https://www.sandbox.paypal.com/cgi-bin/webscr
-                    class_order:          App\Application\Sonata\OrderBundle\Entity\Order
+                    class_order:          App\Sonata\OrderBundle\Entity\Order
                     url_callback:         sonata_payment_callback
                     url_return_ko:        sonata_payment_error
                     url_return_ok:        sonata_payment_confirmation
@@ -187,14 +187,14 @@ Here's the full default configuration for SonataPaymentBundle:
                     sha-out_key:          ~ # Required
                     template:             SonataPaymentBundle:Payment:ogone.html.twig
         class:
-            order:                App\Application\Sonata\OrderBundle\Entity\Order
-            transaction:          App\Application\Sonata\PaymentBundle\Entity\Transaction
+            order:                App\Sonata\OrderBundle\Entity\Order
+            transaction:          App\Sonata\PaymentBundle\Entity\Transaction
 
         # Here you will enable the payment methods you wish to provide
         # and add your custom ones
         methods:
             pass: ~     # This is a provided method, we don't need to specify its service id
-            bitcoin: application.acme.payment.bitcoin    # Custom payment method, we specify the service id
+            bitcoin: app.payment.bitcoin    # Custom payment method, we specify the service id
 
 
 If you want to use the ``DebugPayment`` method, you need to add its configuration in the ``dev`` config file.
@@ -230,7 +230,7 @@ In order to add a custom payment methods, here are the steps to follow:
 
     <?php
 
-    namespace App\Application\AcmeBundle\Payment;
+    namespace App\Payment;
 
     use Sonata\Component\Payment\BasePayment;
 
@@ -257,7 +257,7 @@ In order to add a custom payment methods, here are the steps to follow:
 
 .. code-block:: xml
 
-        <service id="application.acme.payment.bitcoin" class="App\Application\AcmeBundle\Payment\BitcoinPayment">
+        <service id="app.payment.bitcoin" class="App\Payment\BitcoinPayment">
             <tag name="sonata.delivery.method" />
         </service>
 
@@ -270,6 +270,6 @@ In order to add a custom payment methods, here are the steps to follow:
 
         methods:
             # ...
-            bitcoin: application.acme.payment.bitcoin
+            bitcoin: app.payment.bitcoin
 
 4. That's it!

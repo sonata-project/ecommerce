@@ -64,14 +64,14 @@ The bundle allows you to configure the entity classes; you'll also need to regis
                 variations:
                     fields:           [] # Required
         class:
-            product:              App\Application\Sonata\ProductBundle\Entity\Product
-            package:              App\Application\Sonata\ProductBundle\Entity\Package
-            product_category:     App\Application\Sonata\ProductBundle\Entity\ProductCategory
-            product_collection:   App\Application\Sonata\ProductBundle\Entity\ProductCollection
-            category:             App\Application\Sonata\ClassificationBundle\Entity\Category
-            collection:           App\Application\Sonata\ClassificationBundle\Entity\Collection
-            delivery:             App\Application\Sonata\ProductBundle\Entity\Delivery
-            gallery:              App\Application\Sonata\MediaBundle\Entity\Gallery
+            product:              App\Sonata\ProductBundle\Entity\Product
+            package:              App\Sonata\ProductBundle\Entity\Package
+            product_category:     App\Sonata\ProductBundle\Entity\ProductCategory
+            product_collection:   App\Sonata\ProductBundle\Entity\ProductCollection
+            category:             App\Sonata\ClassificationBundle\Entity\Category
+            collection:           App\Sonata\ClassificationBundle\Entity\Collection
+            delivery:             App\Sonata\ProductBundle\Entity\Delivery
+            gallery:              App\Sonata\MediaBundle\Entity\Gallery
 
     # Enable Doctrine to map the provided entities
     doctrine:

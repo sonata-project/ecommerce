@@ -25,10 +25,10 @@ The bundle allows you to configure the entity classes; you'll also need to regis
 
     sonata_customer:
         class:
-            customer:             App\Application\Sonata\CustomerBundle\Entity\Customer
-            address:              App\Application\Sonata\CustomerBundle\Entity\Address
-            order:                App\Application\Sonata\OrderBundle\Entity\Order
-            user:                 App\Application\Sonata\UserBundle\Entity\User
+            customer:             App\Sonata\CustomerBundle\Entity\Customer
+            address:              App\Sonata\CustomerBundle\Entity\Address
+            order:                App\Sonata\OrderBundle\Entity\Order
+            user:                 App\Sonata\UserBundle\Entity\User
 
             # You can also implement custom components classes
             customer_selector:    Sonata\Component\Customer\CustomerSelector
