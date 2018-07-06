@@ -9,7 +9,7 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\Sonata\ProductBundle\Entity\Delivery"
+        name="{{ namespace }}\Sonata\ProductBundle\Entity\Delivery"
         table="product__delivery"
         >
 

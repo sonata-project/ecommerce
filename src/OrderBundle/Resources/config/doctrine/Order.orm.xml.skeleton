@@ -9,7 +9,7 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\Sonata\OrderBundle\Entity\Order"
+        name="{{ namespace }}\Sonata\OrderBundle\Entity\Order"
         table="order__order"
         >
 
