@@ -325,7 +325,7 @@ class ScelliusPaymentTest extends TestCase
             throw new \RuntimeException('Scellius validation should be ok');
         }
 
-        if ($params['scellius']['content'] != '<div>message</div>') {
+        if ('<div>message</div>' != $params['scellius']['content']) {
             throw new \RuntimeException('Invalid scellius html message');
         }
 

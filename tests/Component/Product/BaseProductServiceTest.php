@@ -248,25 +248,25 @@ class BaseProductServiceTest extends TestCase
         $this->assertFalse($variation1->isEnabled());
         $this->assertTrue($variation1->isVariation());
 
-        $this->assertEquals(2, count($product->getVariations()));
+        $this->assertCount(2, $product->getVariations());
 
-        $this->assertEquals(0, count($variation1->getVariations()));
-        $this->assertEquals(0, count($variation1->getPackages()));
-        $this->assertEquals(0, count($variation1->getDeliveries()));
-        $this->assertEquals(0, count($variation1->getProductCategories()));
+        $this->assertCount(0, $variation1->getVariations());
+        $this->assertCount(0, $variation1->getPackages());
+        $this->assertCount(0, $variation1->getDeliveries());
+        $this->assertCount(0, $variation1->getProductCategories());
 
-        $this->assertEquals(0, count($variation2->getVariations()));
-        $this->assertEquals(1, count($variation2->getPackages()));
-        $this->assertEquals(1, count($variation2->getDeliveries()));
+        $this->assertCount(0, $variation2->getVariations());
+        $this->assertCount(1, $variation2->getPackages());
+        $this->assertCount(1, $variation2->getDeliveries());
 
         $provider->setVariationFields(['packages', 'productCollections', 'productCategories', 'deliveries']);
 
         $variation3 = $provider->createVariation($product, true);
 
-        $this->assertEquals(0, count($variation3->getVariations()));
-        $this->assertEquals(0, count($variation3->getPackages()));
-        $this->assertEquals(0, count($variation3->getDeliveries()));
-        $this->assertEquals(0, count($variation3->getProductCategories()));
+        $this->assertCount(0, $variation3->getVariations());
+        $this->assertCount(0, $variation3->getPackages());
+        $this->assertCount(0, $variation3->getDeliveries());
+        $this->assertCount(0, $variation3->getProductCategories());
     }
 
     public function testProductDataSynchronization(): void
@@ -290,8 +290,8 @@ class BaseProductServiceTest extends TestCase
         $this->assertEquals($product->getVatRate(), $variation->getVatRate());
         $this->assertTrue($variation->isEnabled());
 
-        $this->assertEquals(1, count($product->getVariations()));
-        $this->assertEquals(0, count($variation->getVariations()));
+        $this->assertCount(1, $product->getVariations());
+        $this->assertCount(0, $variation->getVariations());
     }
 
     public function testProductCategoriesSynchronization(): void
@@ -323,11 +323,11 @@ class BaseProductServiceTest extends TestCase
 
         // create product variation without sync categories
         $variation = $provider->createVariation($product, false);
-        $this->assertEquals(0, count($variation->getProductCategories()));
+        $this->assertCount(0, $variation->getProductCategories());
 
         // synchronise 1 category
         $provider->synchronizeVariationsCategories($product);
-        $this->assertEquals(1, count($variation->getProductCategories()));
+        $this->assertCount(1, $variation->getProductCategories());
 
         // create category2 and add to product
         $category2 = new Category();
@@ -338,17 +338,17 @@ class BaseProductServiceTest extends TestCase
         $product->addProductCategory($productCategory2);
 
         // variation still have 1 category (no sync yet)
-        $this->assertEquals(1, count($variation->getProductCategories()));
+        $this->assertCount(1, $variation->getProductCategories());
 
         // synchronize 2 categories
         $provider->synchronizeVariationsCategories($product);
-        $this->assertEquals(2, count($variation->getProductCategories()));
+        $this->assertCount(2, $variation->getProductCategories());
 
         // remove category1 from product
         $product->removeProductCategory($productCategory1);
 
         // variation still have 2 categories
-        $this->assertEquals(2, count($variation->getProductCategories()));
+        $this->assertCount(2, $variation->getProductCategories());
 
         $provider->synchronizeVariationsCategories($product);
         //        $this->assertEquals(1, count($variation->getProductCategories()));
@@ -381,10 +381,10 @@ class BaseProductServiceTest extends TestCase
         $product->addProductCollection($productCollection1);
 
         $variation = $provider->createVariation($product, false);
-        $this->assertEquals(0, count($variation->getProductCollections()));
+        $this->assertCount(0, $variation->getProductCollections());
 
         $provider->synchronizeVariationsCollections($product);
-        $this->assertEquals(1, count($variation->getProductCollections()));
+        $this->assertCount(1, $variation->getProductCollections());
 
         $collection2 = new Collection();
         $collection2->setId(2);
@@ -393,13 +393,13 @@ class BaseProductServiceTest extends TestCase
         $productCollection2->setCollection($collection2);
         $product->addProductCollection($productCollection2);
 
-        $this->assertEquals(1, count($variation->getProductCollections()));
+        $this->assertCount(1, $variation->getProductCollections());
 
         $provider->synchronizeVariationsCollections($product);
-        $this->assertEquals(2, count($variation->getProductCollections()));
+        $this->assertCount(2, $variation->getProductCollections());
 
         $product->removeProductCollection($productCollection1);
-        $this->assertEquals(2, count($variation->getProductCollections()));
+        $this->assertCount(2, $variation->getProductCollections());
 
         $repository->expects($this->any())->method('findOneBy')->will($this->returnValue($productCollection1));
 
@@ -420,24 +420,24 @@ class BaseProductServiceTest extends TestCase
 
         $variation = $provider->createVariation($product, false);
 
-        $this->assertEquals(0, count($variation->getPackages()));
+        $this->assertCount(0, $variation->getPackages());
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertEquals(1, count($variation->getPackages()));
+        $this->assertCount(1, $variation->getPackages());
 
         $package2 = new Package();
         $product->addPackage($package2);
 
-        $this->assertEquals(1, count($variation->getPackages()));
+        $this->assertCount(1, $variation->getPackages());
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertEquals(2, count($variation->getPackages()));
+        $this->assertCount(2, $variation->getPackages());
 
         $product->removePackage($package1);
-        $this->assertEquals(2, count($variation->getPackages()));
+        $this->assertCount(2, $variation->getPackages());
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertEquals(1, count($variation->getPackages()));
+        $this->assertCount(1, $variation->getPackages());
     }
 
     public function testProductDeliveriesSynchronization(): void
@@ -451,24 +451,24 @@ class BaseProductServiceTest extends TestCase
 
         $variation = $provider->createVariation($product, false);
 
-        $this->assertEquals(0, count($variation->getDeliveries()));
+        $this->assertCount(0, $variation->getDeliveries());
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertEquals(1, count($variation->getDeliveries()));
+        $this->assertCount(1, $variation->getDeliveries());
 
         $delivery2 = new Delivery();
         $product->addDelivery($delivery2);
 
-        $this->assertEquals(1, count($variation->getDeliveries()));
+        $this->assertCount(1, $variation->getDeliveries());
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertEquals(2, count($variation->getDeliveries()));
+        $this->assertCount(2, $variation->getDeliveries());
 
         $product->removeDelivery($delivery1);
-        $this->assertEquals(2, count($variation->getDeliveries()));
+        $this->assertCount(2, $variation->getDeliveries());
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertEquals(1, count($variation->getDeliveries()));
+        $this->assertCount(1, $variation->getDeliveries());
     }
 
     public function testArrayProduct(): void

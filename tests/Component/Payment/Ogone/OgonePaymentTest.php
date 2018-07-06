@@ -184,7 +184,7 @@ class OgonePaymentTest extends TestCase
             throw new \RuntimeException('Ogone validation should be ok');
         }
 
-        if ($params['fields']['orderId'] != 'FR') {
+        if ('FR' != $params['fields']['orderId']) {
             throw new \RuntimeException('Invalid ogone orderId');
         }
 

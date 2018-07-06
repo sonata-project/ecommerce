@@ -49,7 +49,7 @@ class BaseBasketTest extends TestCase
 
         $basket->setBasketElements($elements);
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertCount(1, $basket->getBasketElements());
     }
 
     public function testReset(): void
@@ -73,11 +73,11 @@ class BaseBasketTest extends TestCase
 
         $basket->reset(false);
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertCount(1, $basket->getBasketElements());
 
         $basket->reset();
 
-        $this->assertEquals(0, count($basket->getBasketElements()));
+        $this->assertCount(0, $basket->getBasketElements());
         $this->assertInstanceOf(ArrayCollection::class, $basket->getBasketElements());
     }
 

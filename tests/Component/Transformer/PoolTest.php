@@ -41,7 +41,7 @@ class PoolTest extends TestCase
         );
         $pool->addTransformer('order', $transformer);
 
-        $this->assertEquals(2, count($pool->getTransformers()), 'Pool return 2 elements');
+        $this->assertCount(2, $pool->getTransformers(), 'Pool return 2 elements');
         $this->assertInstanceOf(BasketTransformer::class, $pool->getTransformer('basket'), 'Pool return an FreeDelivery Instance');
     }
 }
