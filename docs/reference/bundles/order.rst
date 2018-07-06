@@ -44,9 +44,9 @@ The bundle allows you to configure the entity classes; you'll also need to regis
 
     sonata_order:
         class:
-            order:                App\Application\Sonata\OrderBundle\Entity\Order
-            order_element:        App\Application\Sonata\OrderBundle\Entity\OrderElement
-            customer:             App\Application\Sonata\CustomerBundle\Entity\Customer
+            order:                App\Sonata\OrderBundle\Entity\Order
+            order_element:        App\Sonata\OrderBundle\Entity\OrderElement
+            customer:             App\Sonata\CustomerBundle\Entity\Customer
 
     # Enable Doctrine to map the provided entities
     doctrine:

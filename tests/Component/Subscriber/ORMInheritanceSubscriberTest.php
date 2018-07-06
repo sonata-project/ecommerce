@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Subscriber;
 
-use Application\Sonata\ProductBundle\Entity\Product;
+use App\Sonata\ProductBundle\Entity\Product;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;

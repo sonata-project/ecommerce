@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Application\Sonata\ProductBundle\Controller;
+namespace App\Sonata\ProductBundle\Controller;
 
 use Sonata\ProductBundle\Controller\BaseProductController;
 

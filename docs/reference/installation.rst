@@ -179,20 +179,20 @@ to generate the correct entities for all bundles:
 .. note::
     If you are not using Symfony Flex, use command without ``--namespace_prefix=App``.
 
-With provided parameters, the files are generated in ``src/Application/Sonata``.
+With provided parameters, the files are generated in ``src/Sonata``.
 
 .. note::
 
-    The command will generate domain objects in an ``App\Application`` namespace.
+    The command will generate domain objects in an ``App`` namespace.
     So you can point entities' associations to a global and common namespace.
     This will make Entities sharing easier as your models will allow to
     point to a global namespace. For instance the basket will be
-    ``App\Application\Sonata\BasketBundle\Entity\Basket``.
+    ``App\Sonata\BasketBundle\Entity\Basket``.
 
 .. note::
-    If you are not using Symfony Flex, the namespace will be ``Application\Sonata``.
+    If you are not using Symfony Flex, the namespace will be ``App\Sonata``.
 
-Now, add the new ``Application`` Bundle into the ``bundles.php``:
+Now, add the new ``App`` Bundle into the ``bundles.php``:
 
 .. code-block:: php
 
@@ -203,16 +203,16 @@ Now, add the new ``Application`` Bundle into the ``bundles.php``:
     return [
         //...
 
-        App\Application\Sonata\CustomerBundle\ApplicationSonataCustomerBundle::class => ['all' => true],
-        App\Application\Sonata\BasketBundle\ApplicationSonataBasketBundle::class => ['all' => true],
-        App\Application\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle::class => ['all' => true],
-        App\Application\Sonata\OrderBundle\ApplicationSonataOrderBundle::class => ['all' => true],
-        App\Application\Sonata\PaymentBundle\ApplicationSonataPaymentBundle::class => ['all' => true],
-        App\Application\Sonata\ProductBundle\ApplicationSonataProductBundle::class => ['all' => true],
+        App\Sonata\CustomerBundle\ApplicationSonataCustomerBundle::class => ['all' => true],
+        App\Sonata\BasketBundle\ApplicationSonataBasketBundle::class => ['all' => true],
+        App\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle::class => ['all' => true],
+        App\Sonata\OrderBundle\ApplicationSonataOrderBundle::class => ['all' => true],
+        App\Sonata\PaymentBundle\ApplicationSonataPaymentBundle::class => ['all' => true],
+        App\Sonata\ProductBundle\ApplicationSonataProductBundle::class => ['all' => true],
     ];
 
 .. note::
-    If you are not using Symfony Flex, add the new ``Application`` Bundle into your
+    If you are not using Symfony Flex, add the new ``App`` Bundle into your
     ``AppKernel.php``.
 
 .. code-block:: php
@@ -225,12 +225,12 @@ Now, add the new ``Application`` Bundle into the ``bundles.php``:
     {
         return [
             // ...
-            new Application\Sonata\CustomerBundle\ApplicationSonataCustomerBundle(),
-            new Application\Sonata\BasketBundle\ApplicationSonataBasketBundle(),
-            new Application\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle(),
-            new Application\Sonata\OrderBundle\ApplicationSonataOrderBundle(),
-            new Application\Sonata\PaymentBundle\ApplicationSonataPaymentBundle(),
-            new Application\Sonata\ProductBundle\ApplicationSonataProductBundle(),
+            new App\Sonata\CustomerBundle\ApplicationSonataCustomerBundle(),
+            new App\Sonata\BasketBundle\ApplicationSonataBasketBundle(),
+            new App\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle(),
+            new App\Sonata\OrderBundle\ApplicationSonataOrderBundle(),
+            new App\Sonata\PaymentBundle\ApplicationSonataPaymentBundle(),
+            new App\Sonata\ProductBundle\ApplicationSonataProductBundle(),
             // ...
         ];
     }

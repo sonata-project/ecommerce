@@ -35,15 +35,15 @@ class ConfigurationTest extends TestCase
     public function validateClass($config): void
     {
         $this->assertEquals([
-            'product' => 'Application\\Sonata\\ProductBundle\\Entity\\Product',
-            'package' => 'Application\\Sonata\\ProductBundle\\Entity\\Package',
-            'product_category' => 'Application\\Sonata\\ProductBundle\\Entity\\ProductCategory',
-            'product_collection' => 'Application\\Sonata\\ProductBundle\\Entity\\ProductCollection',
-            'category' => 'Application\\Sonata\\ClassificationBundle\\Entity\\Category',
-            'collection' => 'Application\\Sonata\\ClassificationBundle\\Entity\\Collection',
-            'delivery' => 'Application\\Sonata\\ProductBundle\\Entity\\Delivery',
-            'media' => 'Application\\Sonata\\MediaBundle\\Entity\\Media',
-            'gallery' => 'Application\\Sonata\\MediaBundle\\Entity\\Gallery',
+            'product' => 'App\\Sonata\\ProductBundle\\Entity\\Product',
+            'package' => 'App\\Sonata\\ProductBundle\\Entity\\Package',
+            'product_category' => 'App\\Sonata\\ProductBundle\\Entity\\ProductCategory',
+            'product_collection' => 'App\\Sonata\\ProductBundle\\Entity\\ProductCollection',
+            'category' => 'App\\Sonata\\ClassificationBundle\\Entity\\Category',
+            'collection' => 'App\\Sonata\\ClassificationBundle\\Entity\\Collection',
+            'delivery' => 'App\\Sonata\\ProductBundle\\Entity\\Delivery',
+            'media' => 'App\\Sonata\\MediaBundle\\Entity\\Media',
+            'gallery' => 'App\\Sonata\\MediaBundle\\Entity\\Gallery',
         ], $config['class']);
     }
 

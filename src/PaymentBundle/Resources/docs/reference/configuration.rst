@@ -29,7 +29,7 @@ Full Configuration Options
                     url_action:         https://www.sandbox.paypal.com/cgi-bin/webscr
 
                     debug: true
-                    class_order:        Application\Sonata\OrderBundle\Entity\Order
+                    class_order:        App\Sonata\OrderBundle\Entity\Order
                     method:             encryptViaBuffer # encryptViaFile || encryptViaBuffer
 
                     key_file:           %kernel.root_dir%/my-prvkey.pem
@@ -124,8 +124,8 @@ Full Configuration Options
             basket: sonata.payment.transformer.basket
 
         class:
-            order:          Application\Sonata\OrderBundle\Entity\Order
-            transaction:    Application\Sonata\PaymentBundle\Entity\Transaction
+            order:          App\Sonata\OrderBundle\Entity\Order
+            transaction:    App\Sonata\PaymentBundle\Entity\Transaction
 
     # Enable Doctrine to map the provided entities
     doctrine:
