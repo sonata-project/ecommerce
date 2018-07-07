@@ -33,13 +33,4 @@ class ProductAdminTest extends TestCase
             'SonataProductBundle:ProductAdmin'
         );
     }
-
-    /**
-     * @group legacy
-     * @expectedDeprecation The Sonata\ProductBundle\Admin\ProductAdmin::getProductClass method is deprecated since version 2.2 and will be removed in 3.0.
-     */
-    public function testGetProductClassIsDeprecated(): void
-    {
-        $this->productAdmin->getProductClass();
-    }
 }

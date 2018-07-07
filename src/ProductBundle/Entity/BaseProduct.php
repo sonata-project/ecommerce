@@ -850,24 +850,6 @@ abstract class BaseProduct implements ProductInterface
     }
 
     /**
-     * NEXT_MAJOR: remove this method.
-     *
-     * @static
-     *
-     * @param  $text
-     *
-     * @return mixed|string
-     *
-     * @deprecated since 2.1, to be removed with 3.0
-     */
-    public static function slugify($text)
-    {
-        $text = Slugify::create()->slugify(trim($text));
-
-        return !empty($text) ? $text : 'n-a';
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function toArray()
