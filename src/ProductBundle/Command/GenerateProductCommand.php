@@ -76,9 +76,11 @@ class GenerateProductCommand extends ContainerAwareCommand
 
         $output->writeln(' > mustaching skeleton files');
 
+        $product = ucfirst($input->getArgument('product'));
+
         Mustache::renderDir($bundle_dir, [
-            'product' => $input->getArgument('product'),
-            'root_name' => strtolower(preg_replace('/[A-Z]/', '_\\0', $input->getArgument('product'))),
+            'product' => $product,
+            'root_name' => strtolower(preg_replace('/[A-Z]/', '_\\0', $product)),
         ]);
 
         $renames = [
@@ -99,8 +101,8 @@ class GenerateProductCommand extends ContainerAwareCommand
         ];
 
         $dirs = [
-            sprintf('%s/Resources/views/%s', $bundle_dir, $input->getArgument('product')),
-            sprintf('%s/Product/%s', $bundle_dir, $input->getArgument('product')),
+            sprintf('%s/Resources/views/%s', $bundle_dir, $product),
+            sprintf('%s/Product/%s', $bundle_dir, $product),
             sprintf('%s/Provider', $bundle_dir),
         ];
 
@@ -112,7 +114,7 @@ class GenerateProductCommand extends ContainerAwareCommand
 
         foreach ($renames as $from => $to) {
             $from = sprintf($from, $bundle_dir);
-            $to = sprintf($to, $bundle_dir, $input->getArgument('product'));
+            $to = sprintf($to, $bundle_dir, $product);
 
             if (is_file($to) || is_dir($to)) {
                 $output->writeln(sprintf(' <info>-</info> deleting unused file : <comment>%s</comment>', basename($from)));
@@ -131,7 +133,6 @@ class GenerateProductCommand extends ContainerAwareCommand
             sprintf('%s/Resources/views/Entity', $bundle_dir),
         ]);
 
-        $product = $input->getArgument('product');
         $service = $input->getArgument('service_id');
 
         $output->write(Mustache::renderString(<<<CONFIG
@@ -143,12 +144,12 @@ class GenerateProductCommand extends ContainerAwareCommand
         class: Sonata\ProductBundle\Entity\ProductManager
         arguments:
             - Application\Sonata\ProductBundle\Entity\{{ product }}
-            - @doctrine
+            - "@doctrine"
 
     {{ service }}.type:
         class: Application\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
         arguments:
-            - @serializer
+            - "@jms_serializer"
 
 <info>2. Add this service configuration</info>
 
