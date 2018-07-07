@@ -69,31 +69,6 @@ class ProductAdmin extends AbstractAdmin
     }
 
     /**
-     * NEXT_MAJOR: remove this method.
-     *
-     * Returns the product class from the provided request.
-     *
-     * @return string
-     *
-     * @deprecated since 2.2, will be removed in 3.0
-     */
-    public function getProductClass()
-    {
-        @trigger_error(
-            'The '.__METHOD__.' method is deprecated since version 2.2 and will be removed in 3.0.',
-            E_USER_DEPRECATED
-        );
-
-        if ($this->hasRequest()) {
-            $code = $this->getProductType();
-
-            if ($code) {
-                return $this->getProductPool()->getManager($code)->getClass();
-            }
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper): void
