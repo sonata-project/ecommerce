@@ -141,9 +141,8 @@ abstract class BaseProductController extends Controller
      *
      * @return JsonResponse|RedirectResponse
      */
-    public function variationToProductAction(ProductInterface $product, ProductInterface $variation = null)
+    public function variationToProductAction(Request $request, ProductInterface $product, ProductInterface $variation = null)
     {
-        $request = $this->getCurrentRequest();
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
         if (!$provider->hasEnabledVariations($product)) {
@@ -184,15 +183,5 @@ abstract class BaseProductController extends Controller
         $seoPage->setTitle($product->getName());
         $this->get('sonata.product.seo.facebook')->alterPage($seoPage, $product, $currency);
         $this->get('sonata.product.seo.twitter')->alterPage($seoPage, $product, $currency);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

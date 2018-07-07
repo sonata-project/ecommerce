@@ -35,10 +35,10 @@ class PaymentController extends Controller
      *
      * @return Response
      */
-    public function errorAction()
+    public function errorAction(Request $request)
     {
         try {
-            $order = $this->getPaymentHandler()->handleError($this->getCurrentRequest(), $this->getBasket());
+            $order = $this->getPaymentHandler()->handleError($request, $this->getBasket());
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
         } catch (InvalidTransactionException $ex) {
@@ -56,10 +56,10 @@ class PaymentController extends Controller
      *
      * @return Response
      */
-    public function confirmationAction()
+    public function confirmationAction(Request $request)
     {
         try {
-            $order = $this->getPaymentHandler()->handleConfirmation($this->getCurrentRequest());
+            $order = $this->getPaymentHandler()->handleConfirmation($request);
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
         } catch (InvalidTransactionException $ex) {
@@ -82,11 +82,11 @@ class PaymentController extends Controller
      *
      * @return Response
      */
-    public function sendbankAction()
+    public function sendbankAction(Request $request)
     {
         $basket = $this->getBasket();
 
-        if ('POST' !== $this->getCurrentRequest()->getMethod()) {
+        if ('POST' !== $request->getMethod()) {
             return $this->redirect($this->generateUrl('sonata_basket_index'));
         }
 
@@ -127,10 +127,10 @@ class PaymentController extends Controller
      *
      * @return Response
      */
-    public function callbackAction()
+    public function callbackAction(Request $request)
     {
         try {
-            $response = $this->getPaymentHandler()->getPaymentCallbackResponse($this->getCurrentRequest());
+            $response = $this->getPaymentHandler()->getPaymentCallbackResponse($request);
         } catch (EntityNotFoundException $ex) {
             throw new NotFoundHttpException($ex->getMessage());
         } catch (InvalidTransactionException $ex) {
@@ -170,15 +170,5 @@ class PaymentController extends Controller
     protected function getPaymentHandler()
     {
         return $this->get('sonata.payment.handler');
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

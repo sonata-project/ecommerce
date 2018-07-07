@@ -110,9 +110,8 @@ class ProductController extends Controller
      *
      * @return JsonResponse
      */
-    public function getPriceStockForQuantityAction($productId)
+    public function getPriceStockForQuantityAction(Request $request, $productId)
     {
-        $request = $this->getCurrentRequest();
         if (!$request->isXmlHttpRequest() || !($quantity = (int) $request->query->get('quantity'))) {
             throw new BadRequestHttpException('Request needs to be XHR and have a quantity parameter');
         }
@@ -221,9 +220,8 @@ class ProductController extends Controller
      *
      * @return Response
      */
-    public function variationToProductAction($productId, $slug)
+    public function variationToProductAction(Request $request, $productId, $slug)
     {
-        $request = $this->getCurrentRequest();
         $product = is_object($productId) ? $productId : $this->get('sonata.product.set.manager')->findEnabledFromIdAndSlug($productId, $slug);
 
         if (!$product) {
@@ -280,15 +278,5 @@ class ProductController extends Controller
         }
 
         return $response;
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }
