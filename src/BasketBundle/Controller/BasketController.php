@@ -72,10 +72,10 @@ class BasketController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function updateAction()
+    public function updateAction(Request $request)
     {
         $form = $this->createForm(BasketType::class, $this->get('sonata.basket'), ['validation_groups' => ['elements']]);
-        $form->handleRequest($this->getCurrentRequest());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $basket = $form->getData();
@@ -101,9 +101,8 @@ class BasketController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function addProductAction()
+    public function addProductAction(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $params = $request->get('add_basket');
 
         if ('POST' != $request->getMethod()) {
@@ -219,9 +218,8 @@ class BasketController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function paymentStepAction()
+    public function paymentStepAction(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         if (0 == $basket->countBasketElements()) {
@@ -272,9 +270,8 @@ class BasketController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function deliveryStepAction()
+    public function deliveryStepAction(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         if (0 == $basket->countBasketElements()) {
@@ -328,9 +325,8 @@ class BasketController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function deliveryAddressStepAction()
+    public function deliveryAddressStepAction(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $customer = $this->get('sonata.customer.selector')->get();
 
         if (!$customer) {
@@ -404,9 +400,8 @@ class BasketController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function paymentAddressStepAction()
+    public function paymentAddressStepAction(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         if (0 == $basket->countBasketElements()) {
@@ -467,9 +462,8 @@ class BasketController extends Controller
      *
      * @return RedirectResponse|Response
      */
-    public function finalReviewStepAction()
+    public function finalReviewStepAction(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $basket = $this->get('sonata.basket');
 
         $violations = $this
@@ -500,15 +494,5 @@ class BasketController extends Controller
             'basket' => $basket,
             'tac_error' => 'POST' == $request->getMethod(),
         ]);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

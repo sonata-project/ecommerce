@@ -9,6 +9,37 @@ Please read [2.x](https://github.com/sonata-project/ecommerce/tree/2.x) upgrade 
 
 See also the [diff code](https://github.com/sonata-project/ecommerce/compare/2.x...3.0.0).
 
+## Controller changes
+
+Some action signatures were changed, so that the `Request` is now injected into the action:
+
+- `CustomerBundle\Controller\CustomerController::deleteAddressAction`
+
+- `BasketBundle\Controller\BasketController::addProductAction`
+- `BasketBundle\Controller\BasketController::paymentStepAction`
+- `BasketBundle\Controller\BasketController::deliveryStepAction`
+- `BasketBundle\Controller\BasketController::deliveryAddressStepAction`
+- `BasketBundle\Controller\BasketController::paymentAddressStepAction`
+- `BasketBundle\Controller\BasketController::finalReviewStepAction`
+- `BasketBundle\Controller\BasketController::updateAction`
+
+- `PaymentBundle\Controller\DebugPaymentController::paymentAction`
+- `PaymentBundle\Controller\DebugPaymentController::processPaymentAction`
+- `PaymentBundle\Controller\DebugPaymentController::checkRequest`
+- `PaymentBundle\Controller\PaymentController::errorAction`
+- `PaymentBundle\Controller\PaymentController::confirmationAction`
+- `PaymentBundle\Controller\PaymentController::sendbankAction`
+- `PaymentBundle\Controller\PaymentController::callbackAction`
+
+- `PaymentBundle\ProductBundle\BaseProductController::variationToProductAction`
+- `PaymentBundle\ProductBundle\CatalogController::indexAction`
+- `PaymentBundle\ProductBundle\CatalogController::retrieveCategoryFromQueryString`
+- `PaymentBundle\ProductBundle\CollectionController::indexAction`
+- `PaymentBundle\ProductBundle\CollectionController::listSubCollectionsAction`
+- `PaymentBundle\ProductBundle\CollectionController::listProductsAction`
+- `PaymentBundle\ProductBundle\ProductController::getPriceStockForQuantityAction`
+- `PaymentBundle\ProductBundle\ProductController::listProductsAction`
+
 ## Schema migrations
 
 #### BaseProduct

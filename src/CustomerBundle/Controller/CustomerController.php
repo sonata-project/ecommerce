@@ -101,9 +101,9 @@ class CustomerController extends Controller
      *
      * @return RedirectResponse
      */
-    public function deleteAddressAction($id)
+    public function deleteAddressAction(Request $request, $id)
     {
-        if ('POST' !== $this->getCurrentRequest()->getMethod()) {
+        if ('POST' !== $request->getMethod()) {
             throw new MethodNotAllowedHttpException(['POST']);
         }
 
@@ -224,15 +224,5 @@ class CustomerController extends Controller
     protected function getCustomerManager()
     {
         return $this->get('sonata.customer.manager');
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

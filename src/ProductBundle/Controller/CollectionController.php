@@ -25,10 +25,10 @@ class CollectionController extends Controller
      *
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $pager = $this->get('sonata.classification.manager.collection')
-            ->getRootCollectionsPager($this->getCurrentRequest()->get('page'));
+            ->getRootCollectionsPager($request->get('page'));
 
         return $this->render('SonataProductBundle:Collection:index.html.twig', [
             'pager' => $pager,
@@ -66,10 +66,10 @@ class CollectionController extends Controller
      *
      * @return Response
      */
-    public function listSubCollectionsAction($collectionId)
+    public function listSubCollectionsAction(Request $request, $collectionId)
     {
         $pager = $this->get('sonata.classification.manager.collection')
-            ->getSubCollectionsPager($collectionId, $this->getCurrentRequest()->get('page'));
+            ->getSubCollectionsPager($collectionId, $request->get('page'));
 
         return $this->render('SonataProductBundle:Collection:list_sub_collections.html.twig', [
             'pager' => $pager,
@@ -83,10 +83,10 @@ class CollectionController extends Controller
      *
      * @return Response
      */
-    public function listProductsAction($collectionId)
+    public function listProductsAction(Request $request, $collectionId)
     {
         $pager = $this->get('sonata.product.set.manager')
-            ->getProductsByCollectionIdPager($collectionId, $this->getCurrentRequest()->get('page'));
+            ->getProductsByCollectionIdPager($collectionId, $request->get('page'));
 
         return $this->render('SonataProductBundle:Collection:list_products.html.twig', [
             'pager' => $pager,
@@ -109,15 +109,5 @@ class CollectionController extends Controller
           'depth' => $depth,
           'deep' => $deep + 1,
         ]);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

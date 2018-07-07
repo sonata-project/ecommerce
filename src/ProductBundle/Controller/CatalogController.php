@@ -33,9 +33,8 @@ class CatalogController extends Controller
      *
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $page = $request->get('page', 1);
         $displayMax = $request->get('max', 9);
         $displayMode = $request->get('mode', 'grid');
@@ -46,7 +45,7 @@ class CatalogController extends Controller
             throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
         }
 
-        $category = $this->retrieveCategoryFromQueryString();
+        $category = $this->retrieveCategoryFromQueryString($request);
 
         $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title'));
 
@@ -67,9 +66,8 @@ class CatalogController extends Controller
      *
      * @return CategoryInterface|null
      */
-    protected function retrieveCategoryFromQueryString()
+    protected function retrieveCategoryFromQueryString(Request $request)
     {
-        $request = $this->getCurrentRequest();
         $categoryId = $request->get('category_id');
         $categorySlug = $request->get('category_slug');
 
@@ -131,15 +129,5 @@ class CatalogController extends Controller
     protected function getCategoryManager()
     {
         return $this->get('sonata.classification.manager.category');
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }

@@ -34,13 +34,13 @@ class DebugPaymentController extends Controller
      *
      * @return Response
      */
-    public function paymentAction()
+    public function paymentAction(Request $request)
     {
         $order = $this->checkRequest();
 
         return $this->render('SonataPaymentBundle:Payment:debug.html.twig', [
             'order' => $order,
-            'check' => $this->getCurrentRequest()->get('check'),
+            'check' => $request->get('check'),
         ]);
     }
 
@@ -49,11 +49,11 @@ class DebugPaymentController extends Controller
      *
      * @return Response
      */
-    public function processPaymentAction()
+    public function processPaymentAction(Request $request)
     {
         $order = $this->checkRequest();
 
-        return $this->getDebugPayment()->processCallback($order, $this->getCurrentRequest()->get('action'));
+        return $this->getDebugPayment()->processCallback($order, $request->get('action'));
     }
 
     /**
@@ -65,13 +65,12 @@ class DebugPaymentController extends Controller
      *
      * @return OrderInterface
      */
-    protected function checkRequest()
+    protected function checkRequest(Request $request)
     {
         if ('prod' === $this->getKernel()->getEnvironment()) {
             throw new \RuntimeException('Debug Payment is not authorized in production environment.');
         }
 
-        $request = $this->getCurrentRequest();
         $reference = $request->get('reference');
 
         $order = $this->getOrderManager()->findOneBy(['reference' => $reference]);
@@ -117,15 +116,5 @@ class DebugPaymentController extends Controller
     protected function getRouter()
     {
         return $this->get('router');
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method (inject Request $request into actions parameters).
-     *
-     * @return Request
-     */
-    private function getCurrentRequest()
-    {
-        return $this->container->get('request_stack')->getCurrentRequest();
     }
 }
