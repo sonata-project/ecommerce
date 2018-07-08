@@ -160,8 +160,10 @@ class BaseTransaction implements TransactionInterface
     }
 
     /**
-     * @param $name
+     * @param      $name
      * @param null $default
+     *
+     * @return mixed|null
      */
     public function get($name, $default = null)
     {

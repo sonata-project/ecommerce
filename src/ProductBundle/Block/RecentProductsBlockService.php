@@ -56,9 +56,6 @@ class RecentProductsBlockService extends BaseBlockService
         parent::__construct($name, $templating);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $products = $this->getProductRepository()
@@ -75,17 +72,11 @@ class RecentProductsBlockService extends BaseBlockService
         return $this->renderResponse($blockContext->getTemplate(), $params, $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         // TODO: Implement validateBlock() method.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
@@ -96,17 +87,11 @@ class RecentProductsBlockService extends BaseBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Recent products';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

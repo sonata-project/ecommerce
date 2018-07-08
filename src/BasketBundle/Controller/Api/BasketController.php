@@ -94,7 +94,7 @@ class BasketController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface[]
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getBasketsAction(ParamFetcherInterface $paramFetcher)
     {
@@ -187,9 +187,7 @@ class BasketController
      *
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return BasketInterface
+     * @return FOSRestView|FormInterface
      */
     public function postBasketAction(Request $request)
     {
@@ -215,9 +213,7 @@ class BasketController
      * @param int     $id      A Basket identifier
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return BasketInterface
+     * @return FOSRestView|FormInterface
      */
     public function putBasketAction($id, Request $request)
     {
@@ -276,9 +272,7 @@ class BasketController
      * @param int     $id      A basket identifier
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return BasketInterface
+     * @return FOSRestView|FormInterface
      */
     public function postBasketBasketelementsAction($id, Request $request)
     {
@@ -306,9 +300,7 @@ class BasketController
      * @param int     $elementId A basket element identifier
      * @param Request $request   A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return BasketInterface
+     * @return FOSRestView|FormInterface
      */
     public function putBasketBasketelementsAction($basketId, $elementId, Request $request)
     {

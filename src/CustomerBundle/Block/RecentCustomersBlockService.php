@@ -35,6 +35,7 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
      * @param string                   $name
      * @param EngineInterface          $templating
      * @param CustomerManagerInterface $manager
+     * @param Pool|null                $adminPool
      */
     public function __construct($name, EngineInterface $templating, CustomerManagerInterface $manager, Pool $adminPool = null)
     {
@@ -44,9 +45,6 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
         parent::__construct($name, $templating);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $criteria = [
@@ -62,17 +60,11 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
         // TODO: Implement validateBlock() method.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
@@ -89,17 +81,11 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Recent Customers';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

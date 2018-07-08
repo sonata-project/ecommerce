@@ -17,7 +17,6 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -57,7 +56,7 @@ class InvoiceController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getInvoicesAction(ParamFetcherInterface $paramFetcher)
     {
@@ -128,7 +127,7 @@ class InvoiceController
      *
      * @param $id
      *
-     * @return InvoiceElementInterface
+     * @return array
      */
     public function getInvoiceInvoiceelementsAction($id)
     {

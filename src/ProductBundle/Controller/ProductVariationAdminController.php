@@ -13,9 +13,15 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\Component\Product\Pool;
+use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
@@ -23,10 +29,10 @@ use Symfony\Component\Validator\Constraints\Range;
 class ProductVariationAdminController extends Controller
 {
     /**
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws ORMException
+     * @throws OptimisticLockException
      *
-     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function createAction(Request $request = null)
     {
@@ -92,7 +98,7 @@ class ProductVariationAdminController extends Controller
     /**
      * Return the Product Pool.
      *
-     * @return \Sonata\Component\Product\Pool
+     * @return Pool
      */
     protected function getProductPool()
     {
@@ -102,7 +108,7 @@ class ProductVariationAdminController extends Controller
     /**
      * Return the Product Pool.
      *
-     * @return \Symfony\Bundle\FrameworkBundle\Translation\Translator
+     * @return Translator
      */
     protected function getTranslator()
     {
@@ -112,7 +118,7 @@ class ProductVariationAdminController extends Controller
     /**
      * Return the Product manager.
      *
-     * @return \Doctrine\ORM\EntityManager
+     * @return EntityManager
      */
     protected function getProductManager()
     {

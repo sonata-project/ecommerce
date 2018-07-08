@@ -19,11 +19,9 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View as FOSRestView;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
-use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,7 +82,7 @@ class CustomerController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getCustomersAction(ParamFetcherInterface $paramFetcher)
     {
@@ -151,9 +149,7 @@ class CustomerController
      *
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Customer
+     * @return FOSRestView|FormInterface
      */
     public function postCustomerAction(Request $request)
     {
@@ -179,9 +175,7 @@ class CustomerController
      * @param int     $id      A Customer identifier
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Customer
+     * @return FOSRestView|FormInterface
      */
     public function putCustomerAction($id, Request $request)
     {
@@ -239,7 +233,7 @@ class CustomerController
      *
      * @param $id
      *
-     * @return OrderInterface
+     * @return array
      */
     public function getCustomerOrdersAction($id)
     {
@@ -266,7 +260,7 @@ class CustomerController
      *
      * @param $id
      *
-     * @return AddressInterface
+     * @return array
      */
     public function getCustomerAddressesAction($id)
     {

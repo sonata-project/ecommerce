@@ -21,9 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class BasketType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         // always clone the basket, so the one in session is never altered
@@ -41,17 +38,11 @@ class BasketType extends AbstractType
         $builder->add($basketElementBuilder);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_basket_basket';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();

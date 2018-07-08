@@ -24,9 +24,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class AddProductProviderCompilerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         $pool = $container->getDefinition('sonata.product.pool');

@@ -21,16 +21,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class SonataPriceBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function boot(): void
     {
         if (0 == $this->getBcScale()) {

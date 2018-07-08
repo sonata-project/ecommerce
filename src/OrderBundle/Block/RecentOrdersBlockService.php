@@ -68,9 +68,6 @@ class RecentOrdersBlockService extends BaseBlockService
         parent::__construct($name, $templating);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null): Response
     {
         if ('admin' !== $blockContext->getSetting('mode')) {
@@ -96,16 +93,10 @@ class RecentOrdersBlockService extends BaseBlockService
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
@@ -122,17 +113,11 @@ class RecentOrdersBlockService extends BaseBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Recent Orders';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

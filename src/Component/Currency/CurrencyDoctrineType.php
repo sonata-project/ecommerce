@@ -26,9 +26,6 @@ class CurrencyDoctrineType extends Type
 {
     public const CURRENCY = 'currency'; // modify to match your type name
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if (!array_key_exists($value, Intl::getCurrencyBundle()->getCurrencyNames())) {
@@ -41,9 +38,6 @@ class CurrencyDoctrineType extends Type
         return $currency;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (!$value instanceof CurrencyInterface) {
@@ -53,17 +47,11 @@ class CurrencyDoctrineType extends Type
         return $value->getLabel();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultLength(AbstractPlatform $platform)
     {
         return 3;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         $field['length'] = $this->getDefaultLength($platform);
@@ -73,17 +61,11 @@ class CurrencyDoctrineType extends Type
         return $platform->getVarcharTypeDeclarationSQL($field);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function requiresSQLCommentHint(AbstractPlatform $platform)
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return self::CURRENCY;

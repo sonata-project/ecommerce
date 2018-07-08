@@ -92,7 +92,7 @@ class ProductController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getProductsAction(ParamFetcherInterface $paramFetcher)
     {
@@ -166,9 +166,7 @@ class ProductController
      * @param string  $provider A product provider name
      * @param Request $request  A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Product
+     * @return FOSRestView|FormInterface
      */
     public function postProductAction($provider, Request $request)
     {
@@ -179,7 +177,6 @@ class ProductController
      * Updates a product.
      *
      * @Put("/{provider}/products/{id}")
-
      * @ApiDoc(
      *  requirements={
      *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product identifier"},
@@ -200,9 +197,7 @@ class ProductController
      * @param string  $provider A product provider name
      * @param Request $request  A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Product
+     * @return FOSRestView|FormInterface
      */
     public function putProductAction($id, $provider, Request $request)
     {

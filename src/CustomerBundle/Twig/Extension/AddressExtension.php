@@ -37,9 +37,6 @@ class AddressExtension extends \Twig_Extension
         $this->deliverySelector = $deliverySelector;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions()
     {
         return [
@@ -55,9 +52,6 @@ class AddressExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sonata_address';
@@ -72,7 +66,9 @@ class AddressExtension extends \Twig_Extension
      * @param bool              $showEdit    Display edit button?
      * @param string            $context     A context for edit link
      *
-     * @throws InvalidParameterException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      *
      * @return string
      */

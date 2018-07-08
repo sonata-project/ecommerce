@@ -21,7 +21,7 @@ use Sonata\ProductBundle\Entity\BaseDelivery;
 abstract class BaseOrderElement implements OrderElementInterface
 {
     /**
-     * @var int
+     * @var OrderInterface
      */
     protected $order;
 
@@ -142,40 +142,28 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * Get order.
      *
-     * @return Order $order
+     * @return OrderInterface $order
      */
     public function getOrder()
     {
         return $this->order;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setQuantity($quantity): void
     {
         $this->quantity = $quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getQuantity()
     {
         return $this->quantity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPrice($price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPrice($vat = false)
     {
         $unitPrice = $this->getUnitPriceExcl();
@@ -187,17 +175,11 @@ abstract class BaseOrderElement implements OrderElementInterface
         return bcmul((string) $unitPrice, (string) $this->getQuantity());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVatRate()
     {
         return $this->vatRate;
@@ -621,9 +603,6 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->unitPriceInc;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnitPrice($vat = false)
     {
         return $vat ? $this->getUnitPriceInc() : $this->getUnitPriceExcl();

@@ -53,9 +53,6 @@ class PaymentType extends AbstractType
         $this->paymentPool = $paymentPool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $basket = $builder->getData();
@@ -103,17 +100,11 @@ class PaymentType extends AbstractType
         $builder->add($sub);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_basket_payment';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();

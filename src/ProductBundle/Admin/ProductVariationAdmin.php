@@ -68,9 +68,6 @@ class ProductVariationAdmin extends ProductAdmin
         return $this->baseRouteName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFormFields(FormMapper $formMapper): void
     {
         // this admin class works only from a request scope
@@ -88,9 +85,6 @@ class ProductVariationAdmin extends ProductAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {
@@ -120,9 +114,6 @@ class ProductVariationAdmin extends ProductAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         // this admin class works only from a request scope

@@ -25,12 +25,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SonataProductExtension extends Extension
 {
-    /**
-     * Loads the product configuration.
-     *
-     * @param array            $configs   An array of configuration settings
-     * @param ContainerBuilder $container A ContainerBuilder instance
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
@@ -65,10 +59,6 @@ class SonataProductExtension extends Extension
         $this->registerSeoParameters($container, $config);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array                                                   $config
-     */
     public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.product.product.class', $config['class']['product']);
@@ -88,9 +78,6 @@ class SonataProductExtension extends Extension
         $container->setParameter('sonata.product.admin.delivery.entity', $config['class']['delivery']);
     }
 
-    /**
-     * @param array $config
-     */
     public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['product'])) {
@@ -330,10 +317,6 @@ class SonataProductExtension extends Extension
         ]);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     protected function registerSeoParameters(ContainerBuilder $container, array $config): void
     {
         $productSeo = $config['seo']['product'];

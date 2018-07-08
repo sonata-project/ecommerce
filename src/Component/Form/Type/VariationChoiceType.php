@@ -38,9 +38,6 @@ class VariationChoiceType extends AbstractType
         $this->pool = $pool;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $choices = $this->pool->getProvider($options['product'])->getVariationsChoices($options['product'], $options['fields']);
@@ -64,9 +61,6 @@ class VariationChoiceType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
         $resolver->setDefaults([
@@ -80,17 +74,11 @@ class VariationChoiceType extends AbstractType
         $resolver->setRequired(['product', 'fields']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_product_variation_choices';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();

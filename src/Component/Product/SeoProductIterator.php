@@ -48,41 +48,26 @@ class SeoProductIterator implements SourceIteratorInterface
         $this->iterator = new SymfonySitemapSourceIterator($source, $router, $routeName, ['productId' => null, 'slug' => null]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function current()
     {
         return $this->iterator->current();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function next()
     {
         return $this->iterator->next();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function key()
     {
         return $this->iterator->key();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function valid()
     {
         return $this->iterator->valid();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rewind()
     {
         return $this->iterator->rewind();

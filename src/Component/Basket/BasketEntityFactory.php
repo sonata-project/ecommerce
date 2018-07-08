@@ -20,9 +20,6 @@ use Sonata\Component\Customer\CustomerInterface;
  */
 class BasketEntityFactory extends BaseBasketFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(CustomerInterface $customer)
     {
         $sessionBasket = parent::load($customer);
@@ -53,9 +50,6 @@ class BasketEntityFactory extends BaseBasketFactory
         return $sessionBasket;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function save(BasketInterface $basket): void
     {
         if ($basket->getCustomerId()) {
@@ -65,9 +59,6 @@ class BasketEntityFactory extends BaseBasketFactory
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reset(BasketInterface $basket, $full = true): void
     {
         if ($full) {

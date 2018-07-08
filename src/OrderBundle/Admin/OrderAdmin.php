@@ -74,18 +74,12 @@ class OrderAdmin extends AbstractAdmin
         $this->orderManager = $orderManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->parentAssociationMapping = 'customer';
         $this->setTranslationDomain('SonataOrderBundle');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFormFields(FormMapper $formMapper): void
     {
         // define group zoning
@@ -139,9 +133,6 @@ class OrderAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureListFields(ListMapper $list): void
     {
         $currency = $this->currencyDetector->getCurrency()->getLabel();
@@ -168,9 +159,6 @@ class OrderAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
@@ -188,18 +176,12 @@ class OrderAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureRoutes(RouteCollection $collection): void
     {
         $collection->remove('create');
         $collection->add('generateInvoice');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !in_array($action, ['edit'])) {

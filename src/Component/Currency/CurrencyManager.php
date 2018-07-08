@@ -20,9 +20,6 @@ use Sonata\CoreBundle\Model\BaseEntityManager;
  */
 class CurrencyManager extends BaseEntityManager implements CurrencyManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findOneByLabel($currencyLabel)
     {
         $currency = new Currency();

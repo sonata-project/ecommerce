@@ -31,25 +31,16 @@ class ProductFinder implements ProductFinderInterface
         $this->pManager = $pManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCrossSellingSimilarProducts(ProductInterface $product)
     {
         return $this->pManager->findInSameCollections($product->getProductCollections());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCrossSellingSimilarParentProducts(ProductInterface $product, $limit = null)
     {
         return $this->pManager->findParentsInSameCollections($product->getProductCollections(), $limit);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUpSellingSimilarProducts(ProductInterface $product): void
     {
         // TODO: Implement getUpSellingSimilarProducts() method.

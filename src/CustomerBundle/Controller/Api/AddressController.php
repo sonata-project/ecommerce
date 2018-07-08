@@ -67,7 +67,7 @@ class AddressController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Sonata\DatagridBundle\Pager\PagerInterface
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getAddressesAction(ParamFetcherInterface $paramFetcher)
     {
@@ -135,7 +135,7 @@ class AddressController
      *
      * @param Request $request A Symfony request
      *
-     * @return AddressInterface
+     * @return FOSRestView|FormInterface
      */
     public function postAddressAction(Request $request)
     {
@@ -160,9 +160,7 @@ class AddressController
      * @param int     $id      An Address identifier
      * @param Request $request A Symfony request
      *
-     * @throws NotFoundHttpException
-     *
-     * @return Address
+     * @return FOSRestView|FormInterface
      */
     public function putAddressAction($id, Request $request)
     {

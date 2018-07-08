@@ -26,9 +26,6 @@ class AddressAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataCustomerBundle';
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->parentAssociationMapping = 'customer';
@@ -96,9 +93,6 @@ class AddressAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter

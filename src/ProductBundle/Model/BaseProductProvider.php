@@ -159,33 +159,21 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $this->basketElementManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductCategoryManager(ProductCategoryManagerInterface $productCategoryManager): void
     {
         $this->productCategoryManager = $productCategoryManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductCategoryManager()
     {
         return $this->productCategoryManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProductCollectionManager(ProductCollectionManagerInterface $productCollectionManager): void
     {
         $this->productCollectionManager = $productCollectionManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getProductCollectionManager()
     {
         return $this->productCollectionManager;
@@ -277,17 +265,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
     ////////////////////////////////////////////////
     //   VARIATION RELATED FUNCTIONS
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasVariations(ProductInterface $product)
     {
         return 0 < count($product->getVariations());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasEnabledVariations(ProductInterface $product)
     {
         if (!$this->hasVariations($product)) {
@@ -304,9 +286,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabledVariations(ProductInterface $product)
     {
         $result = new ArrayCollection();
@@ -325,9 +304,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $result;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariatedProperties(ProductInterface $product, array $fields = [])
     {
         if (null === $product->getParent()) {
@@ -348,9 +324,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $properties;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariationsChoices(ProductInterface $product, array $fields = [])
     {
         if (!($this->hasEnabledVariations($product) || $product->getParent())) {
@@ -383,9 +356,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $choices;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVariation(ProductInterface $product, array $choices = [])
     {
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -439,16 +409,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $this->variationFields;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options, $isVariation = false): void
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, $isVariation = false): void
     {
         $formMapper->with('Product');
@@ -518,17 +482,11 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildCreateForm(FormMapper $formMapper): void
     {
         $this->buildEditForm($formMapper);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
@@ -543,9 +501,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createVariation(ProductInterface $product, $copyDependencies = true)
     {
         if ($product->isVariation()) {
@@ -581,9 +536,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $variation;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function synchronizeVariations(ProductInterface $product, ArrayCollection $variations = null): void
     {
         $this->synchronizeVariationsProduct($product, $variations);
@@ -593,9 +545,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->synchronizeVariationsCollections($product, $variations);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null): void
     {
         $variationFields = array_merge(['id', 'parent'], $this->getVariationFields());
@@ -621,9 +570,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('deliveries', $this->getVariationFields())) {
@@ -657,9 +603,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('productCategories', $this->getVariationFields())) {
@@ -692,9 +635,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('productCollections', $this->getVariationFields())) {
@@ -727,9 +667,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null): void
     {
         if (in_array('packages', $this->getVariationFields())) {
@@ -767,9 +704,9 @@ abstract class BaseProductProvider implements ProductProviderInterface
     // BASKET RELATED FUNCTIONS
 
     /**
-     * (non-PHPdoc).
-     *
      * @see \Sonata\Component\Product\ProductProviderInterface::createBasketElement()
+     *
+     * @return object
      */
     public function createBasketElement(ProductInterface $product = null, array $options = [])
     {
@@ -779,9 +716,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $basketElement;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []): void
     {
         if ($product) {
@@ -836,9 +770,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('productId', 'hidden');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket): void
     {
         // the item is flagged as deleted, no need to validate the item
@@ -980,9 +911,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function updateComputationPricesFields(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product): void
     {
         $unitPrice = $this->calculatePrice($product, $basket->getCurrency(), $product->isPriceIncludingVat(), 1);
@@ -994,9 +922,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $basketElement->setVatRate($product->getVatRate());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $vat = false, $quantity = 1)
     {
         $event = new BeforeCalculatePriceEvent($product, $currency, $vat, $quantity);
@@ -1064,9 +989,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return count($results) > 0 ? $results[0] : false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStockAvailable(ProductInterface $product)
     {
         return $product->getStock();
@@ -1088,9 +1010,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $this->code;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCheapestEnabledVariation(ProductInterface $product)
     {
         if (!$this->hasEnabledVariations($product)) {
@@ -1110,9 +1029,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $result;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters()
     {
         return [
@@ -1129,9 +1045,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function updateStock($product, ProductManagerInterface $productManager, $diff): void
     {
         $productManager->updateStock($product, $diff);

@@ -27,9 +27,6 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class GenerateProductCommand extends ContainerAwareCommand
 {
-    /**
-     * @see Command
-     */
     protected function configure(): void
     {
         $this
@@ -42,12 +39,6 @@ class GenerateProductCommand extends ContainerAwareCommand
         ;
     }
 
-    /**
-     * @see Command
-     *
-     * @throws \InvalidArgumentException When namespace doesn't end with Bundle
-     * @throws \RuntimeException         When bundle can't be executed
-     */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         // find a better way to detect the Application folder

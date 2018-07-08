@@ -35,9 +35,6 @@ class CurrencyDataTransformer implements DataTransformerInterface
         $this->currencyManager = $currencyManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($value)
     {
         if ($value instanceof CurrencyInterface) {
@@ -47,9 +44,6 @@ class CurrencyDataTransformer implements DataTransformerInterface
         return $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($value)
     {
         if (!$value) {

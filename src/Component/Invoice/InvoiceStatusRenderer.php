@@ -21,17 +21,11 @@ use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
  */
 class InvoiceStatusRenderer implements StatusClassRendererInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function handlesObject($object, $statusName = null)
     {
         return $object instanceof InvoiceInterface;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStatusClass($object, $statusName = null, $default = '')
     {
         switch ($object->getStatus()) {
