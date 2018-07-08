@@ -61,15 +61,16 @@ class AddressExtension extends \Twig_Extension
      * Gets the HTML of an address.
      *
      * @param \Twig_Environment $environment A Twig environment
-     * @param mixed             $address An instance of AddressInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionally name, address2, address3)
-     * @param bool              $showName Display address name?
-     * @param bool              $showEdit Display edit button?
-     * @param string            $context A context for edit link
+     * @param mixed             $address     An instance of AddressInterface or array with keys: (id, firstname, lastname, address1, postcode, city, country_code and optionally name, address2, address3)
+     * @param bool              $showName    Display address name?
+     * @param bool              $showEdit    Display edit button?
+     * @param string            $context     A context for edit link
      *
-     * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
+     *
+     * @return string
      */
     public function renderAddress(\Twig_Environment $environment, $address, $showName = true, $showEdit = false, $context = null)
     {

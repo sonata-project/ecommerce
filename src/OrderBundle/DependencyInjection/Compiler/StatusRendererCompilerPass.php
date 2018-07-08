@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class StatusRendererCompilerPass implements CompilerPassInterface
 {
     /**
-     * {@innheritdoc}
+     * {@innheritdoc}.
      */
     public function process(ContainerBuilder $container): void
     {

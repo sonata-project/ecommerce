@@ -28,7 +28,7 @@ class SonataInvoiceExtension extends Extension
     /**
      * Loads the order configuration.
      *
-     * @param array            $configs An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \Exception

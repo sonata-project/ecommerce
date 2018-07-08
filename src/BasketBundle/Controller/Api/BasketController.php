@@ -210,7 +210,7 @@ class BasketController
      *  }
      * )
      *
-     * @param int     $id A Basket identifier
+     * @param int     $id      A Basket identifier
      * @param Request $request A Symfony request
      *
      * @return FOSRestView|FormInterface
@@ -269,7 +269,7 @@ class BasketController
      *  }
      * )
      *
-     * @param int     $id A basket identifier
+     * @param int     $id      A basket identifier
      * @param Request $request A Symfony request
      *
      * @return FOSRestView|FormInterface
@@ -296,9 +296,9 @@ class BasketController
      *  }
      * )
      *
-     * @param int     $basketId A basket identifier
+     * @param int     $basketId  A basket identifier
      * @param int     $elementId A basket element identifier
-     * @param Request $request A Symfony request
+     * @param Request $request   A Symfony request
      *
      * @return FOSRestView|FormInterface
      */

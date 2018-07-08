@@ -29,9 +29,10 @@ use Symfony\Component\Validator\Constraints\Range;
 class ProductVariationAdminController extends Controller
 {
     /**
-     * @return Response
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @return Response
      */
     public function createAction(Request $request = null)
     {

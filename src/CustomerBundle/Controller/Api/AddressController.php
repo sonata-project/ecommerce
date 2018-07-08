@@ -157,7 +157,7 @@ class AddressController
      *  }
      * )
      *
-     * @param int     $id An Address identifier
+     * @param int     $id      An Address identifier
      * @param Request $request A Symfony request
      *
      * @return FOSRestView|FormInterface

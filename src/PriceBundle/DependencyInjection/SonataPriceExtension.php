@@ -27,7 +27,7 @@ class SonataPriceExtension extends Extension
     /**
      * Loads the price configuration.
      *
-     * @param array            $configs An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \Exception

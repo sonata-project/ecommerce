@@ -164,7 +164,7 @@ class ProductController
      * @Route(requirements={"provider"="[A-Za-z0-9._]"})
      *
      * @param string  $provider A product provider name
-     * @param Request $request A Symfony request
+     * @param Request $request  A Symfony request
      *
      * @return FOSRestView|FormInterface
      */
@@ -193,9 +193,9 @@ class ProductController
      *
      * @Route(requirements={"provider"="[A-Za-z0-9.]*"})
      *
-     * @param int     $id A Product identifier
+     * @param int     $id       A Product identifier
      * @param string  $provider A product provider name
-     * @param Request $request A Symfony request
+     * @param Request $request  A Symfony request
      *
      * @return FOSRestView|FormInterface
      */

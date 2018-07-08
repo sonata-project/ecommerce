@@ -28,7 +28,7 @@ class SonataCustomerExtension extends Extension
     /**
      * Loads the customer configuration.
      *
-     * @param array            $configs An array of configuration settings
+     * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \Exception

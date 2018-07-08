@@ -34,7 +34,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
      * @param EntityManager            $em
      * @param CategoryManagerInterface $categoryManager
      */
-
     public function addCategoryToProduct(ProductInterface $product, CategoryInterface $category, $main = false): void
     {
         if ($this->findOneBy(['category' => $category, 'product' => $product])) {
