@@ -90,7 +90,7 @@ class Paypal extends BasePaypal
 
         $html .= sprintf('<form action="%s" method="%s" id="formPaiement" >'."\n", $this->getOption('url_action'), 'POST');
         $html .= '<input type="hidden" name="cmd" value="_s-xclick">'."\n";
-        $html .= sprintf('<input type="hidden" name="encrypted" value="%s" />', call_user_func([$this, $method], $fields));
+        $html .= sprintf('<input type="hidden" name="encrypted" value="%s" />', \call_user_func([$this, $method], $fields));
 
         $html .= '<p>'.$this->translator->trans('process_to_paiement_bank_page', [], 'PaymentBundle').'</p>';
         $html .= '<input type="submit" id="submit_button" value="'.$this->translator->trans('process_to_paiement_btn', [], 'PaymentBundle').'" />';

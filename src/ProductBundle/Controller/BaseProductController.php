@@ -33,7 +33,7 @@ abstract class BaseProductController extends Controller
      */
     public function viewAction($product)
     {
-        if (!is_object($product)) {
+        if (!\is_object($product)) {
             throw new NotFoundHttpException('invalid product instance');
         }
 
@@ -120,7 +120,7 @@ abstract class BaseProductController extends Controller
      */
     public function viewVariationsAction($product)
     {
-        if (!is_object($product)) {
+        if (!\is_object($product)) {
             throw new NotFoundHttpException('invalid product instance');
         }
 

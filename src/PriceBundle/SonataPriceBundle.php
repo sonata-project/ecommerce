@@ -50,6 +50,6 @@ CONTENT;
     {
         $sqrt = bcsqrt('2');
 
-        return strlen(substr($sqrt, strpos($sqrt, '.') + 1));
+        return \strlen(substr($sqrt, strpos($sqrt, '.') + 1));
     }
 }

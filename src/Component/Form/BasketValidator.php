@@ -65,7 +65,7 @@ class BasketValidator extends ConstraintValidator
                 ->validateFormBasketElement($errorElement, $basketElement, $basket);
         }
 
-        if (count($this->context->getViolations()) > 0) {
+        if (\count($this->context->getViolations()) > 0) {
             $this->context->addViolationAt('basketElements', $constraint->message);
         }
     }

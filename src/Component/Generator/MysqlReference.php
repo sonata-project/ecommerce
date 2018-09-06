@@ -39,7 +39,7 @@ class MysqlReference implements ReferenceInterface
             throw new \RuntimeException('The invoice is not persisted into the database');
         }
 
-        $this->generateReference($invoice, $this->registry->getManager()->getClassMetadata(get_class($invoice))->table['name']);
+        $this->generateReference($invoice, $this->registry->getManager()->getClassMetadata(\get_class($invoice))->table['name']);
     }
 
     /**
@@ -51,7 +51,7 @@ class MysqlReference implements ReferenceInterface
             throw new \RuntimeException('The order is not persisted into the database');
         }
 
-        $this->generateReference($order, $this->registry->getManager()->getClassMetadata(get_class($order))->table['name']);
+        $this->generateReference($order, $this->registry->getManager()->getClassMetadata(\get_class($order))->table['name']);
     }
 
     /**

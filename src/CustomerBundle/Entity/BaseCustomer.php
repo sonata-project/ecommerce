@@ -364,7 +364,7 @@ abstract class BaseCustomer implements CustomerInterface
     {
         $address->setCustomer($this);
 
-        if (0 === count($this->getAddressesByType($address->getType()))) {
+        if (0 === \count($this->getAddressesByType($address->getType()))) {
             $address->setCurrent(true);
         }
 
