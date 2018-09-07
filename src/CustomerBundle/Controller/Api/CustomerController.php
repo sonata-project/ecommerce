@@ -117,7 +117,7 @@ class CustomerController
 
         if (!$sort) {
             $sort = [];
-        } elseif (!is_array($sort)) {
+        } elseif (!\is_array($sort)) {
             $sort = [$sort => 'asc'];
         }
 

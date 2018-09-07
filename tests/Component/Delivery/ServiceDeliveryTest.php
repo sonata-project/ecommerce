@@ -39,7 +39,7 @@ class ServiceDeliveryTest extends TestCase
 
         $pool->addMethod($delivery);
 
-        $this->assertEquals(2, count($pool->getMethods()), 'Pool return 2 elements');
+        $this->assertCount(2, $pool->getMethods(), 'Pool return 2 elements');
         $this->assertInstanceOf(FreeDelivery::class, $pool->getMethod('free_2'), 'Pool return an FreeDelivery Instance');
     }
 

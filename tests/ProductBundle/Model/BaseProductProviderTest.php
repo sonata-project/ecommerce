@@ -378,7 +378,7 @@ class BaseProductProviderTest extends TestCase
 
         $variations = $provider->getEnabledVariations($productMock);
         $this->assertInstanceOf(ArrayCollection::class, $variations);
-        $this->assertEquals(0, count($variations));
+        $this->assertCount(0, $variations);
     }
 
     public function testGetEnabledVariationWithVariation()
@@ -393,7 +393,7 @@ class BaseProductProviderTest extends TestCase
 
         $variations = $provider->getEnabledVariations($productMock);
         $this->assertInstanceOf(ArrayCollection::class, $variations);
-        $this->assertEquals(1, count($variations));
+        $this->assertCount(1, $variations);
         $this->assertInstanceOf(ProductInterface::class, $variations[0]);
     }
 

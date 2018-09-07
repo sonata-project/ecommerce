@@ -12,7 +12,6 @@
 namespace Sonata\Component\Tests\Customer;
 
 use PHPUnit\Framework\TestCase;
-use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;

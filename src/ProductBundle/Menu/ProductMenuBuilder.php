@@ -16,7 +16,6 @@ use Knp\Menu\ItemInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -172,7 +171,7 @@ class ProductMenuBuilder
                 $fullOptions
             );
 
-            if (count($category->getChildren()) > 0) {
+            if (\count($category->getChildren()) > 0) {
                 if (null === $category->getParent()) {
                     $this->fillMenu($menu, $category->getChildren(), $options, $currentUri);
                 } else {

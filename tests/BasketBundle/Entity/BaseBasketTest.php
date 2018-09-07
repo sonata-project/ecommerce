@@ -47,7 +47,7 @@ class BaseBasketTest extends TestCase
 
         $basket->setBasketElements($elements);
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertCount(1, $basket->getBasketElements());
     }
 
     public function testReset()
@@ -71,11 +71,11 @@ class BaseBasketTest extends TestCase
 
         $basket->reset(false);
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertCount(1, $basket->getBasketElements());
 
         $basket->reset();
 
-        $this->assertEquals(0, count($basket->getBasketElements()));
+        $this->assertCount(0, $basket->getBasketElements());
         $this->assertInstanceOf(ArrayCollection::class, $basket->getBasketElements());
     }
 
@@ -113,8 +113,8 @@ class BaseBasketTest extends TestCase
             $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');
             $this->assertArrayHasKey('amount', $item, 'Array items should contains a "amount" key');
 
-            $this->assertTrue(in_array($item['rate'], [10, 20]));
-            $this->assertTrue(in_array($item['amount'], [7, 3]));
+            $this->assertTrue(\in_array($item['rate'], [10, 20]));
+            $this->assertTrue(\in_array($item['amount'], [7, 3]));
         }
     }
 }

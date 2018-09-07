@@ -45,7 +45,7 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
         if ($address->getCurrent()) {
             $custAddresses = $address->getCustomer()->getAddressesByType(AddressInterface::TYPE_DELIVERY);
 
-            if (count($custAddresses) > 1) {
+            if (\count($custAddresses) > 1) {
                 foreach ($custAddresses as $currentAddress) {
                     if ($currentAddress->getId() !== $address->getId()) {
                         $currentAddress->setCurrent(true);
@@ -71,11 +71,11 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
 
         $fields = $this->getEntityManager()->getClassMetadata($this->class)->getFieldNames();
         foreach ($sort as $field => $direction) {
-            if (!in_array($field, $fields)) {
+            if (!\in_array($field, $fields)) {
                 throw new \RuntimeException(sprintf("Invalid sort field '%s' in '%s' class", $field, $this->class));
             }
         }
-        if (0 == count($sort)) {
+        if (0 == \count($sort)) {
             $sort = ['name' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
