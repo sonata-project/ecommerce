@@ -37,7 +37,7 @@ final class PostgresReference implements ReferenceInterface
         }
 
         $this->generateReference($invoice,
-            $this->registry->getManager()->getClassMetadata(get_class($invoice))->table['name']);
+            $this->registry->getManager()->getClassMetadata(\get_class($invoice))->table['name']);
     }
 
     /**
@@ -50,7 +50,7 @@ final class PostgresReference implements ReferenceInterface
         }
 
         $this->generateReference($order,
-            $this->registry->getManager()->getClassMetadata(get_class($order))->table['name']);
+            $this->registry->getManager()->getClassMetadata(\get_class($order))->table['name']);
     }
 
     /**

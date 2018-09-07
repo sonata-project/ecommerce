@@ -230,7 +230,7 @@ abstract class BasePaypal extends BasePayment
 
         $process = proc_open($openssl_cmd, $descriptors, $pipes);
 
-        if (is_resource($process)) {
+        if (\is_resource($process)) {
             foreach ($hash as $key => $value) {
                 if ('' != $value) {
                     fwrite($pipes[0], "$key=$value\n");

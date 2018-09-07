@@ -70,7 +70,7 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
             }
         }
 
-        if (count($categories) > 0) {
+        if (\count($categories) > 0) {
             foreach ($categories as $category) {
                 $menu->addChild($category->getName(), [
                     'route' => 'sonata_catalog_category',

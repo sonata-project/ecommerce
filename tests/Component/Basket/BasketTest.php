@@ -333,9 +333,9 @@ class BasketTest extends TestCase
         }
 
         $basket->reset();
-        $this->assertTrue(0 == count($basket->getBasketElements()), '::reset() remove all elements');
+        $this->assertTrue(0 == \count($basket->getBasketElements()), '::reset() remove all elements');
         $basket->unserialize($data);
-        $this->assertTrue(1 == count($basket->getBasketElements()), '::unserialize() restore elements');
+        $this->assertTrue(1 == \count($basket->getBasketElements()), '::unserialize() restore elements');
     }
 
     public function testGetElementRaisesException()
@@ -400,7 +400,7 @@ class BasketTest extends TestCase
 
         $basket->buildPrices();
 
-        $this->assertEquals(0, count($basket->getBasketElements()));
+        $this->assertCount(0, $basket->getBasketElements());
     }
 
     public function testClean()
@@ -421,7 +421,7 @@ class BasketTest extends TestCase
 
         $basket->clean();
 
-        $this->assertEquals(1, count($basket->getBasketElements()));
+        $this->assertCount(1, $basket->getBasketElements());
     }
 
     public function testRemoveElementWithNotExistingProduct()

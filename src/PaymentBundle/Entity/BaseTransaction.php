@@ -294,7 +294,7 @@ class BaseTransaction implements TransactionInterface
     {
         $decodedParams = [];
         foreach ($toDecode as $key => $value) {
-            $decodedValue = is_array($value) ? $this->cleanupEncoding($value) : (mb_check_encoding($value, 'UTF-8') ? $value : utf8_encode($value));
+            $decodedValue = \is_array($value) ? $this->cleanupEncoding($value) : (mb_check_encoding($value, 'UTF-8') ? $value : utf8_encode($value));
             $decodedParams[mb_check_encoding($key, 'UTF-8') ? $key : utf8_encode($key)] = $decodedValue;
         }
 

@@ -904,7 +904,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isPending()
     {
-        return in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
     }
 
     /**
@@ -912,7 +912,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isOpen()
     {
-        return in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
     }
 
     /**
@@ -928,7 +928,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isError()
     {
-        return in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
     }
 
     /**
