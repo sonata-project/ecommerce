@@ -27,7 +27,7 @@
         "sonata-project/core-bundle": "^3.12.0",
         "sonata-project/datagrid-bundle": "^2.3",
         "sonata-project/doctrine-orm-admin-bundle": "^3.2",
-        "sonata-project/formatter-bundle": "^3.4",
+        "sonata-project/formatter-bundle": "^3.4 || 4.0",
         "sonata-project/intl-bundle": "^2.4",
         "sonata-project/media-bundle": "^3.10",
         "sonata-project/notification-bundle": "^3.3",
