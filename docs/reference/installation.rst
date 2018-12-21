@@ -51,26 +51,23 @@ Then register these bundles in your AppKernel:
 .. code-block:: php
 
     <?php
-    // app/AppKernel.php
+    // config/bundles.php
 
-    public function registerBundles()
-    {
-        return array(
-            // ...
-            new Sonata\CustomerBundle\SonataCustomerBundle(),
-            new Sonata\ProductBundle\SonataProductBundle(),
-            new Sonata\BasketBundle\SonataBasketBundle(),
-            new Sonata\OrderBundle\SonataOrderBundle(),
-            new Sonata\InvoiceBundle\SonataInvoiceBundle(),
-            new Sonata\MediaBundle\SonataMediaBundle(),
-            new Sonata\DeliveryBundle\SonataDeliveryBundle(),
-            new Sonata\PaymentBundle\SonataPaymentBundle(),
-            new Sonata\PriceBundle\SonataPriceBundle(),
-            // ...
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-        );
-    }
+    return [
+        // ...
+        Sonata\CustomerBundle\SonataCustomerBundle::class => ['all' => true],
+        Sonata\ProductBundle\SonataProductBundle::class => ['all' => true],
+        Sonata\BasketBundle\SonataBasketBundle::class => ['all' => true],
+        Sonata\OrderBundle\SonataOrderBundle::class => ['all' => true],
+        Sonata\InvoiceBundle\SonataInvoiceBundle::class => ['all' => true],
+        Sonata\MediaBundle\SonataMediaBundle::class => ['all' => true],
+        Sonata\DeliveryBundle\SonataDeliveryBundle::class => ['all' => true],
+        Sonata\PaymentBundle\SonataPaymentBundle::class => ['all' => true],
+        Sonata\PriceBundle\SonataPriceBundle::class => ['all' => true],
+        // ...
+        Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
+        FOS\RestBundle\FOSRestBundle::class => ['all' => true],
+    ];
 
 Next config each of the bundles:
 
@@ -112,7 +109,6 @@ Next config each of the bundles:
                 services:
                     free_address_required:
                         name: Free
-                        enabled: true
                         priority: 1
                         code: free
 
@@ -122,7 +118,6 @@ Next config each of the bundles:
                 services:
                     pass:
                         name:    Pass
-                        enabled: true
                         code:    pass
                         browser: sonata.payment.browser.curl
 
@@ -183,38 +178,36 @@ In order to generate the `Application entities` required by the Sonata's bundles
 
 .. code-block:: bash
 
-    php app/console sonata:easy-extends:generate SonataBasketBundle
-    php app/console sonata:easy-extends:generate SonataCustomerBundle
-    php app/console sonata:easy-extends:generate SonataDeliveryBundle
-    php app/console sonata:easy-extends:generate SonataInvoiceBundle
-    php app/console sonata:easy-extends:generate SonataMediaBundle
-    php app/console sonata:easy-extends:generate SonataOrderBundle
-    php app/console sonata:easy-extends:generate SonataPaymentBundle
-    php app/console sonata:easy-extends:generate SonataProductBundle
+    php bin/console sonata:easy-extends:generate SonataBasketBundle --dest=src --namespace_prefix=App
+    php bin/console sonata:easy-extends:generate SonataCustomerBundle --dest=src --namespace_prefix=App
+    php bin/console sonata:easy-extends:generate SonataDeliveryBundle --dest=src --namespace_prefix=App
+    php bin/console sonata:easy-extends:generate SonataInvoiceBundle --dest=src --namespace_prefix=App
+    php bin/console sonata:easy-extends:generate SonataMediaBundle --dest=src --namespace_prefix=App
+    php bin/console sonata:easy-extends:generate SonataOrderBundle --dest=src --namespace_prefix=App
+    php bin/console sonata:easy-extends:generate SonataPaymentBundle --dest=src --namespace_prefix=App
+    php bin/console sonata:easy-extends:generate SonataProductBundle --dest=src --namespace_prefix=App
 
 Then add the following bundles in your `kernel::registerBundles()` method (after the previously added bundles):
 
 .. code-block:: php
 
-    <?php
-    // app/AppKernel.php
+    // config/bundles.php
 
-    public function registerBundles()
-    {
-        return array(
-            // ...
-            new Application\Sonata\CustomerBundle\ApplicationSonataCustomerBundle(),
-            new Application\Sonata\DeliveryBundle\ApplicationSonataDeliveryBundle(),
-            new Application\Sonata\BasketBundle\ApplicationSonataBasketBundle(),
-            new Application\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle(),
-            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
-            new Application\Sonata\OrderBundle\ApplicationSonataOrderBundle(),
-            new Application\Sonata\PaymentBundle\ApplicationSonataPaymentBundle(),
-            new Application\Sonata\ProductBundle\ApplicationSonataProductBundle(),
-        );
-    }
+    return [
+        // ...
+        App\Application\Sonata\CustomerBundle\ApplicationSonataCustomerBundle::class => ['all' => true],
+        App\Application\Sonata\DeliveryBundle\ApplicationSonataDeliveryBundle::class => ['all' => true],
+        App\Application\Sonata\BasketBundle\ApplicationSonataBasketBundle::class => ['all' => true],
+        App\Application\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle::class => ['all' => true],
+        App\Application\Sonata\MediaBundle\ApplicationSonataMediaBundle::class => ['all' => true],
+        App\Application\Sonata\OrderBundle\ApplicationSonataOrderBundle::class => ['all' => true],
+        App\Application\Sonata\PaymentBundle\ApplicationSonataPaymentBundle::class => ['all' => true],
+        App\Application\Sonata\ProductBundle\ApplicationSonataProductBundle::class => ['all' => true],
+    ]
 
 .. configuration-block::
+
+And these in the config mapping definition (or enable auto_mapping):
 
     .. code-block:: yaml
 
@@ -237,18 +230,32 @@ Then add the following bundles in your `kernel::registerBundles()` method (after
                             SonataInvoiceBundle: ~
                             ApplicationSonataInvoiceBundle: ~
 
+Configure the bundles to use the newly generated classes
+
+    .. code-block:: yaml
+
+        # app/config/config.yml
+
+        sonata_customer:
+            class:
+                customer: App\Application\Sonata\CustomerBundle\Entity\Customer
+                address: App\Application\Sonata\CustomerBundle\Entity\Address
+                order: App\Application\Sonata\OrderBundle\Entity\Order
+                user: App\Application\Sonata\UserBundle\Entity\User
+
+
 Now, you can build up your database:
 
 .. code-block:: bash
 
-    $ app/console doctrine:schema:[create|update]
+    $ php bin/console doctrine:schema:update --force
 
 Create missing contexts:
 
 .. code-block:: bash
 
-    $ app/console sonata:classification:fix-context
-    $ app/console sonata:media:fix-media-context
+    $ php bin/console sonata:classification:fix-context
+    $ php app/console sonata:media:fix-media-context
 
 Add the current lines in your `routing.yml` files:
 
