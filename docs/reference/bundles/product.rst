@@ -20,11 +20,12 @@ It also offers a console command to easily generate a new product type in your a
 .. code-block:: bash
 
     Usage:
-     sonata:product:generate product service_id
+     sonata:product:generate product service_id App
 
     Arguments:
      product               The product to create
      service_id            The service id to define
+     namespace_prefix      The namespace prefix to use
 
     Options:
      --help (-h)           Display this help message.
