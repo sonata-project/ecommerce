@@ -143,11 +143,11 @@ class GenerateProductCommand extends Command
     {{ service }}.manager:
         class: Sonata\ProductBundle\Entity\ProductManager
         arguments:
-            - Application\Sonata\ProductBundle\Entity\{{ product }}
+            - {{ namespace_prefix }}Application\Sonata\ProductBundle\Entity\{{ product }}
             - "@doctrine"
 
     {{ service }}.type:
-        class: Application\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
+        class: {{ namespace_prefix }}Application\Sonata\ProductBundle\Provider\{{ product }}ProductProvider
         arguments:
             - "@jms_serializer"
 
@@ -163,7 +163,7 @@ class GenerateProductCommand extends Command
 
 Add this line in <comment>/src/Application/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml</comment>
 
-    <discriminator-class value="{{ service }}">Application\Sonata\ProductBundle\Entity\{{ product }}</discriminator-class>
+    <discriminator-class value="{{ service }}">{{ namespace_prefix }}Application\Sonata\ProductBundle\Entity\{{ product }}</discriminator-class>
 
 You can customize the serialization of your Product by editing /src/Application/Sonata/ProductBundle/Resources/config/serializer/Entity.Product.xml
 (see JMS serializer documentation for more information).
