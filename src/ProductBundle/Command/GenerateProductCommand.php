@@ -75,7 +75,7 @@ class GenerateProductCommand extends Command
         $output->writeln(' > mustaching skeleton files');
 
         $product = ucfirst($input->getArgument('product'));
-        $namespacePrefix = ucfirst($input->getArgument('namespace_prefix'))??'';
+        $namespacePrefix = ucfirst($input->getArgument('namespace_prefix')??'');
 
         Mustache::renderDir($bundle_dir, [
             'product' => $product,
