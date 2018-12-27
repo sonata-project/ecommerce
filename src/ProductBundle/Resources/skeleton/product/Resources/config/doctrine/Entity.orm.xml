@@ -8,7 +8,7 @@
             xml mapping          : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/xml-mapping/en
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
-    <entity name="App\Sonata\ProductBundle\Entity\{{ product }}" table="product__product" repository-class="App\Sonata\ProductBundle\Repository\{{ product }}Repository">
+    <entity name="{{ namespace_prefix }}Sonata\ProductBundle\Entity\{{ product }}" table="product__product" repository-class="{{ namespace_prefix }}Sonata\ProductBundle\Repository\{{ product }}Repository">
         <!--
             Define your product here
 
