@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Application\Sonata\ProductBundle\Provider;
+namespace {{ namespace_prefix }}Application\Sonata\ProductBundle\Provider;
 
 use Sonata\ProductBundle\Model\BaseProductProvider;
 

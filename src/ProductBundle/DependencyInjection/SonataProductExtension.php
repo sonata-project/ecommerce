@@ -40,6 +40,7 @@ class SonataProductExtension extends Extension
         $loader->load('twig.xml');
         $loader->load('menu.xml');
         $loader->load('serializer.xml');
+        $loader->load('command.xml');
 
         if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
@@ -51,7 +52,7 @@ class SonataProductExtension extends Extension
         }
 
         $pool = $container->getDefinition('sonata.product.pool');
-        // this value is altered by the AddProductProviderPass class
+        // this value is altered by the AddProductProviderCompilerPass class
         $pool->addMethodCall('__hack', $config['products']);
 
         $this->registerParameters($container, $config);
