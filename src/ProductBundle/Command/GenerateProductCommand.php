@@ -174,7 +174,7 @@ You can customize the serialization of your Product by editing /src/Application/
 
 
 CONFIG
-            , ['service' => $service, 'product' => $product]
+            , ['service' => $service, 'product' => $product, 'namespace_prefix' => $namespacePrefix,]
         ));
     }
 }
