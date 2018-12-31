@@ -72,6 +72,8 @@ And finally, add in the ``app/config/sonata/sonata_product.yml`` the following d
                 manager: sonata.ecommerce_demo.product.bowl.manager
 
 
+**IMPORTANT**
+
 This being done, edit the ``src/Application/Sonata/ProductBundle/Entity/Bowl.php`` to make it inherits the ``Product`` class.
 
 Configuration - Backoffice
