@@ -15,7 +15,6 @@
     </parameters>
     <services>
         <service id="sonata.product.pool" class="%sonata.product.pool.class%" public="true">
-
         </service>
         <service id="sonata.product.subscriber.orm" class="%sonata.product.subscriber.orm.class%">
             <argument type="collection"/>
