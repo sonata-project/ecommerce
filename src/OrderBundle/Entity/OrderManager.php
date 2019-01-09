@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function save($order, $andFlush = true)
+    public function save($order, $andFlush = true): void
     {
         $this->getEntityManager()->persist($order->getCustomer());
 

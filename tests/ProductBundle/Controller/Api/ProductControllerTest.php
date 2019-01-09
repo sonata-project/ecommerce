@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -37,7 +39,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ProductControllerTest extends TestCase
 {
-    public function testGetProductsAction()
+    public function testGetProductsAction(): void
     {
         $productManager = $this->createMock(ProductManagerInterface::class);
         $productManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
@@ -52,13 +54,13 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([], $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
     }
 
-    public function testGetProductAction()
+    public function testGetProductAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $this->assertEquals($product, $this->createProductController($product)->getProductAction(1));
     }
 
-    public function testGetProductActionNotFoundException()
+    public function testGetProductActionNotFoundException(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Product (42) not found');
@@ -66,7 +68,7 @@ class ProductControllerTest extends TestCase
         $this->createProductController()->getProductAction(42);
     }
 
-    public function testGetProductProductcategoriesAction()
+    public function testGetProductProductcategoriesAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $productCategory = $this->createMock(ProductCategoryInterface::class);
@@ -78,7 +80,7 @@ class ProductControllerTest extends TestCase
         );
     }
 
-    public function testGetProductCategoriesAction()
+    public function testGetProductCategoriesAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $category = $this->createMock(CategoryInterface::class);
@@ -87,7 +89,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$category], $this->createProductController($product)->getProductCategoriesAction(1));
     }
 
-    public function testGetProductProductcollectionsAction()
+    public function testGetProductProductcollectionsAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $productCollection = $this->createMock(ProductCollectionInterface::class);
@@ -99,7 +101,7 @@ class ProductControllerTest extends TestCase
         );
     }
 
-    public function testGetProductCollectionsAction()
+    public function testGetProductCollectionsAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $collection = $this->createMock(CollectionInterface::class);
@@ -108,7 +110,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$collection], $this->createProductController($product)->getProductCollectionsAction(1));
     }
 
-    public function testGetProductPackagesAction()
+    public function testGetProductPackagesAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $package = $this->createMock(PackageInterface::class);
@@ -117,7 +119,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$package], $this->createProductController($product)->getProductPackagesAction(1));
     }
 
-    public function testGetProductDeliveriesAction()
+    public function testGetProductDeliveriesAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $delivery = $this->createMock(DeliveryInterface::class);
@@ -126,7 +128,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$delivery], $this->createProductController($product)->getProductDeliveriesAction(1));
     }
 
-    public function testGetProductVariationsAction()
+    public function testGetProductVariationsAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
         $variation = $this->createMock(ProductInterface::class);
@@ -135,7 +137,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals([$variation], $this->createProductController($product)->getProductVariationsAction(1));
     }
 
-    public function testPostProductAction()
+    public function testPostProductAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
 
@@ -162,7 +164,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPostProductInvalidAction()
+    public function testPostProductInvalidAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
 
@@ -188,7 +190,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testPutProductAction()
+    public function testPutProductAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
 
@@ -216,7 +218,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPutProductInvalidAction()
+    public function testPutProductInvalidAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
 
@@ -243,7 +245,7 @@ class ProductControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testDeleteProductAction()
+    public function testDeleteProductAction(): void
     {
         $product = $this->createMock(ProductInterface::class);
 
@@ -258,7 +260,7 @@ class ProductControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteProductInvalidAction()
+    public function testDeleteProductInvalidAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

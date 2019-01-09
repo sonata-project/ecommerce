@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ class Mustache
     public static function renderString($string, array $parameters)
     {
         $replacer = function ($match) use ($parameters) {
-            return isset($parameters[$match[1]]) ? $parameters[$match[1]] : $match[0];
+            return $parameters[$match[1]] ?? $match[0];
         };
 
         return preg_replace_callback('/{{\s*(.+?)\s*}}/', $replacer, $string);
@@ -41,7 +43,7 @@ class Mustache
      * @param string $file       filename for the file to be rendered
      * @param array  $parameters
      */
-    public static function renderFile($file, array $parameters)
+    public static function renderFile($file, array $parameters): void
     {
         file_put_contents($file, static::renderString(file_get_contents($file), $parameters));
     }
@@ -52,7 +54,7 @@ class Mustache
      * @param string $dir        Path to the directory that will be recursively rendered
      * @param array  $parameters
      */
-    public static function renderDir($dir, array $parameters)
+    public static function renderDir($dir, array $parameters): void
     {
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir), \RecursiveIteratorIterator::LEAVES_ONLY) as $file) {
             if ($file->isFile()) {

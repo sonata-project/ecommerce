@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ class SonataPriceExtensionTest extends TestCase
     /**
      * Tests if the configuration is well parsed & parameters are well set.
      */
-    public function testConfiguration()
+    public function testConfiguration(): void
     {
         $configuration = new ContainerBuilder();
         $loader = new SonataPriceExtension();
@@ -40,7 +42,7 @@ class SonataPriceExtensionTest extends TestCase
     /**
      * Asserts that an InvalidConfigurationException is thrown when not providing currency parameter.
      */
-    public function testCurrencyRequired()
+    public function testCurrencyRequired(): void
     {
         $this->expectException(InvalidConfigurationException::class);
 

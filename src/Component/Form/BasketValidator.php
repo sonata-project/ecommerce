@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -46,7 +48,7 @@ class BasketValidator extends ConstraintValidator
      * @param BasketInterface $basket
      * @param Constraint      $constraint
      */
-    public function validate($basket, Constraint $constraint)
+    public function validate($basket, Constraint $constraint): void
     {
         foreach ($basket->getBasketElements() as $pos => $basketElement) {
             // create a new ErrorElement object

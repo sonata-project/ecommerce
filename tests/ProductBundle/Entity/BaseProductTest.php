@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -38,7 +40,7 @@ class Product extends BaseProduct
  */
 class BaseProductTest extends TestCase
 {
-    public function testGetImageAndGetGallery()
+    public function testGetImageAndGetGallery(): void
     {
         $product = new Product();
 
@@ -63,7 +65,7 @@ class BaseProductTest extends TestCase
         $this->assertEquals('correctMedia', $product->getImage()->getName());
     }
 
-    public function testHasOneMainCategory()
+    public function testHasOneMainCategory(): void
     {
         $product = new Product();
 

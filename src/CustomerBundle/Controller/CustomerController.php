@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -190,7 +192,7 @@ class CustomerController extends Controller
      *
      * @throws NotFoundHttpException
      */
-    protected function checkAddress(AddressInterface $address = null)
+    protected function checkAddress(AddressInterface $address = null): void
     {
         if (null === $address
             || $address->getCustomer()->getId() !== $this->getCustomer()->getId()) {

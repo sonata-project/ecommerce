@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -59,7 +61,7 @@ abstract class BasePackage implements PackageInterface
     /**
      * {@inheritdoc}
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductInterface $product): void
     {
         $this->product = $product;
     }
@@ -77,7 +79,7 @@ abstract class BasePackage implements PackageInterface
      *
      * @param float $width
      */
-    public function setWidth($width)
+    public function setWidth($width): void
     {
         $this->width = $width;
     }
@@ -97,7 +99,7 @@ abstract class BasePackage implements PackageInterface
      *
      * @param float $height
      */
-    public function setHeight($height)
+    public function setHeight($height): void
     {
         $this->height = $height;
     }
@@ -117,7 +119,7 @@ abstract class BasePackage implements PackageInterface
      *
      * @param float $length
      */
-    public function setLength($length)
+    public function setLength($length): void
     {
         $this->length = $length;
     }
@@ -137,7 +139,7 @@ abstract class BasePackage implements PackageInterface
      *
      * @param float $weight
      */
-    public function setWeight($weight)
+    public function setWeight($weight): void
     {
         $this->weight = $weight;
     }
@@ -157,7 +159,7 @@ abstract class BasePackage implements PackageInterface
      *
      * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -177,7 +179,7 @@ abstract class BasePackage implements PackageInterface
      *
      * @param \DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -197,7 +199,7 @@ abstract class BasePackage implements PackageInterface
      *
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }

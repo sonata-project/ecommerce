@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,7 +29,7 @@ class AddressAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->parentAssociationMapping = 'customer';
         $this->setTranslationDomain('SonataCustomerBundle');
@@ -36,7 +38,7 @@ class AddressAdmin extends AbstractAdmin
     /**
      * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
             ->with($this->trans('address.form.group_contact_label', [], 'SonataCustomerBundle'), [
@@ -81,7 +83,7 @@ class AddressAdmin extends AbstractAdmin
     /**
      * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         $list
             ->addIdentifier('name')
@@ -97,7 +99,7 @@ class AddressAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filter)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('current')

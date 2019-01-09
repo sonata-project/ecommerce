@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -175,7 +177,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -191,7 +193,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * {@inheritdoc}
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setPaymentMethod($paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
     }
@@ -209,7 +211,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $reference
      */
-    public function setReference($reference)
+    public function setReference($reference): void
     {
         $this->reference = $reference;
     }
@@ -230,7 +232,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param CustomerInterface $customer
      */
-    public function setCustomer(CustomerInterface $customer = null)
+    public function setCustomer(CustomerInterface $customer = null): void
     {
         $this->customer = $customer;
     }
@@ -250,7 +252,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param CurrencyInterface $currency
      */
-    public function setCurrency(CurrencyInterface $currency)
+    public function setCurrency(CurrencyInterface $currency): void
     {
         $this->currency = $currency;
     }
@@ -270,7 +272,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param int $status
      */
-    public function setStatus($status)
+    public function setStatus($status): void
     {
         $this->status = $status;
     }
@@ -290,7 +292,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param float $totalInc
      */
-    public function setTotalInc($totalInc)
+    public function setTotalInc($totalInc): void
     {
         $this->totalInc = $totalInc;
     }
@@ -310,7 +312,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param float $totalExcl
      */
-    public function setTotalExcl($totalExcl)
+    public function setTotalExcl($totalExcl): void
     {
         $this->totalExcl = $totalExcl;
     }
@@ -360,7 +362,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -380,7 +382,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $phone
      */
-    public function setPhone($phone)
+    public function setPhone($phone): void
     {
         $this->phone = $phone;
     }
@@ -400,7 +402,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $address1
      */
-    public function setAddress1($address1)
+    public function setAddress1($address1): void
     {
         $this->address1 = $address1;
     }
@@ -420,7 +422,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $address2
      */
-    public function setAddress2($address2)
+    public function setAddress2($address2): void
     {
         $this->address2 = $address2;
     }
@@ -440,7 +442,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $address3
      */
-    public function setAddress3($address3)
+    public function setAddress3($address3): void
     {
         $this->address3 = $address3;
     }
@@ -460,7 +462,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $city
      */
-    public function setCity($city)
+    public function setCity($city): void
     {
         $this->city = $city;
     }
@@ -480,7 +482,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $postcode
      */
-    public function setPostcode($postcode)
+    public function setPostcode($postcode): void
     {
         $this->postcode = $postcode;
     }
@@ -500,7 +502,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $country
      */
-    public function setCountry($country)
+    public function setCountry($country): void
     {
         $this->country = $country;
     }
@@ -520,7 +522,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $fax
      */
-    public function setFax($fax)
+    public function setFax($fax): void
     {
         $this->fax = $fax;
     }
@@ -540,7 +542,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -560,7 +562,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $mobile
      */
-    public function setMobile($mobile)
+    public function setMobile($mobile): void
     {
         $this->mobile = $mobile;
     }
@@ -580,7 +582,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param UserInterface $user
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user): void
     {
         $this->user = $user;
     }
@@ -606,7 +608,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * {@inheritdoc}
      */
-    public function addInvoiceElement(InvoiceElementInterface $element)
+    public function addInvoiceElement(InvoiceElementInterface $element): void
     {
         $this->invoiceElements[] = $element;
     }
@@ -614,7 +616,7 @@ abstract class BaseInvoice implements InvoiceInterface
     /**
      * {@inheritdoc}
      */
-    public function setInvoiceElements(array $elements)
+    public function setInvoiceElements(array $elements): void
     {
         $this->invoiceElements = $elements;
     }
@@ -644,7 +646,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param string $locale
      */
-    public function setLocale($locale)
+    public function setLocale($locale): void
     {
         $this->locale = $locale;
     }

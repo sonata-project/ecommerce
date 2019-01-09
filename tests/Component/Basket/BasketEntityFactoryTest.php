@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BasketEntityFactoryTest extends TestCase
 {
-    public function testLoadWithNoBasket()
+    public function testLoadWithNoBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('setCustomer');
@@ -56,7 +58,7 @@ class BasketEntityFactoryTest extends TestCase
         $this->isInstanceOf(BasketInterface::class, $basket);
     }
 
-    public function testLoadWithNoBasketInDbButBasketInSession()
+    public function testLoadWithNoBasketInDbButBasketInSession(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('setCustomer');
@@ -87,7 +89,7 @@ class BasketEntityFactoryTest extends TestCase
         $this->isInstanceOf(BasketInterface::class, $basket);
     }
 
-    public function testLoadWithBasketInDbAndInSession()
+    public function testLoadWithBasketInDbAndInSession(): void
     {
         $basket = $this->createMock(BasketInterface::class);
 
@@ -120,7 +122,7 @@ class BasketEntityFactoryTest extends TestCase
         $this->isInstanceOf(BasketInterface::class, $loadedBasket);
     }
 
-    public function testSaveExistingCustomer()
+    public function testSaveExistingCustomer(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('getCustomerId')->will($this->returnValue(1));
@@ -144,7 +146,7 @@ class BasketEntityFactoryTest extends TestCase
         $factory->save($basket);
     }
 
-    public function testSaveNoExistingCustomer()
+    public function testSaveNoExistingCustomer(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('getCustomerId')->will($this->returnValue(false));
@@ -155,7 +157,7 @@ class BasketEntityFactoryTest extends TestCase
 
         $session = $this->createMock(SessionInterface::class);
         $tester = $this;
-        $session->expects($this->once())->method('set')->will($this->returnCallback(function ($key, $value) use ($tester, $basket) {
+        $session->expects($this->once())->method('set')->will($this->returnCallback(function ($key, $value) use ($tester, $basket): void {
             $tester->assertEquals($basket, $value);
             $tester->assertEquals('sonata/basket/factory/customer/new', $key);
         }));
@@ -172,7 +174,7 @@ class BasketEntityFactoryTest extends TestCase
         $factory->save($basket);
     }
 
-    public function testReset()
+    public function testReset(): void
     {
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('getCustomerId')->will($this->returnValue(1));

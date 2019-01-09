@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -36,7 +38,7 @@ class CustomerSelectorTest extends TestCase
     /**
      * @group legacy
      */
-    public function testUserNotConnected()
+    public function testUserNotConnected(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
         $customerManager = $this->createMock(CustomerManagerInterface::class);
@@ -57,7 +59,7 @@ class CustomerSelectorTest extends TestCase
         $this->assertInstanceOf(CustomerInterface::class, $customer);
     }
 
-    public function testInvalidUserType()
+    public function testInvalidUserType(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('User must be an instance of Symfony\\Component\\Security\\Core\\User\\UserInterface');
@@ -81,7 +83,7 @@ class CustomerSelectorTest extends TestCase
         $customerSelector->get();
     }
 
-    public function testExistingCustomer()
+    public function testExistingCustomer(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
 
@@ -109,7 +111,7 @@ class CustomerSelectorTest extends TestCase
         $this->assertInstanceOf(CustomerInterface::class, $customer);
     }
 
-    public function testNonExistingCustomerNonInSession()
+    public function testNonExistingCustomerNonInSession(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
 
@@ -138,7 +140,7 @@ class CustomerSelectorTest extends TestCase
         $this->assertInstanceOf(CustomerInterface::class, $customer);
     }
 
-    public function testNonExistingCustomerInSession()
+    public function testNonExistingCustomerInSession(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
 

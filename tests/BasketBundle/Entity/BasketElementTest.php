@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ class BasketElementTest extends TestCase
     /**
      * Test quantity setter, if quantity is negative, must returns a quantity of 1.
      */
-    public function testNegativeQuantity()
+    public function testNegativeQuantity(): void
     {
         $basketElement = new BasketElement();
 

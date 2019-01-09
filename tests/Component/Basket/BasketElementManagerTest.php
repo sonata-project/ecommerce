@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,7 +25,7 @@ use Sonata\Component\Basket\BasketElementManager;
  */
 class BasketElementManagerTest extends TestCase
 {
-    public function testCreateAndGetClass()
+    public function testCreateAndGetClass(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
 
@@ -36,7 +38,7 @@ class BasketElementManagerTest extends TestCase
         $this->assertEquals(BasketElement::class, $basketEm->getClass());
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->once())->method('persist');
@@ -51,7 +53,7 @@ class BasketElementManagerTest extends TestCase
         $basketEm->save($basketElement);
     }
 
-    public function testFind()
+    public function testFind(): void
     {
         $repository = $this->getMockBuilder(EntityRepository::class)->disableOriginalConstructor()->getMock();
         $repository->expects($this->once())->method('findOneBy');
@@ -69,7 +71,7 @@ class BasketElementManagerTest extends TestCase
         $basketEm->findOneBy([]);
     }
 
-    public function testDelete()
+    public function testDelete(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->once())->method('remove');

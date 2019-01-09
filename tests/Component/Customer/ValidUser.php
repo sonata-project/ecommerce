@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,35 +25,35 @@ class ValidUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getRoles()
+    public function getRoles(): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPassword()
+    public function getPassword(): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSalt()
+    public function getSalt(): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUsername()
+    public function getUsername(): void
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
     }
 }

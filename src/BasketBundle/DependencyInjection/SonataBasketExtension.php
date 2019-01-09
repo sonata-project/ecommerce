@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -32,7 +34,7 @@ class SonataBasketExtension extends Extension
      * @param array            $configs   An array of configuration settings
      * @param ContainerBuilder $container A ContainerBuilder instance
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -66,7 +68,7 @@ class SonataBasketExtension extends Extension
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $config
      */
-    public function registerParameters(ContainerBuilder $container, array $config)
+    public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.basket.basket.class', $config['class']['basket']);
         $container->setParameter('sonata.basket.basket_element.class', $config['class']['basket_element']);
@@ -75,7 +77,7 @@ class SonataBasketExtension extends Extension
     /**
      * @param array $config
      */
-    public function registerDoctrineMapping(array $config)
+    public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['basket'])) {
             return;

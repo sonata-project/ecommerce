@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -116,13 +118,13 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->getDesignation() ?: 'n/a';
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -132,7 +134,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param OrderInterface $order
      */
-    public function setOrder(OrderInterface $order)
+    public function setOrder(OrderInterface $order): void
     {
         $this->order = $order;
     }
@@ -150,7 +152,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuantity($quantity)
+    public function setQuantity($quantity): void
     {
         $this->quantity = $quantity;
     }
@@ -166,7 +168,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setPrice($price)
+    public function setPrice($price): void
     {
         $this->price = $price;
     }
@@ -188,7 +190,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * {@inheritdoc}
      */
-    public function setVatRate($vatRate)
+    public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
     }
@@ -216,7 +218,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param string $designation
      */
-    public function setDesignation($designation)
+    public function setDesignation($designation): void
     {
         $this->designation = $designation;
     }
@@ -236,7 +238,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -256,7 +258,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param int $productId
      */
-    public function setProductId($productId)
+    public function setProductId($productId): void
     {
         $this->productId = $productId;
     }
@@ -276,7 +278,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param int $status
      */
-    public function setStatus($status)
+    public function setStatus($status): void
     {
         $this->status = $status;
         if (OrderInterface::STATUS_VALIDATED == $this->getStatus()) {
@@ -353,7 +355,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param int $deliveryStatus
      */
-    public function setDeliveryStatus($deliveryStatus)
+    public function setDeliveryStatus($deliveryStatus): void
     {
         $this->deliveryStatus = $deliveryStatus;
     }
@@ -373,7 +375,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param \DateTime $validatedAt
      */
-    public function setValidatedAt(\DateTime $validatedAt = null)
+    public function setValidatedAt(\DateTime $validatedAt = null): void
     {
         $this->validatedAt = $validatedAt;
     }
@@ -393,7 +395,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param ProductInterface $product
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductInterface $product): void
     {
         $this->product = $product;
     }
@@ -413,7 +415,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param string $productType
      */
-    public function setProductType($productType)
+    public function setProductType($productType): void
     {
         $this->productType = $productType;
     }
@@ -431,7 +433,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * @param \DateTime|null $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -447,7 +449,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * @param \DateTime|null $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -463,7 +465,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * @param array $options
      */
-    public function setOptions($options)
+    public function setOptions($options): void
     {
         $this->options = $options;
     }
@@ -501,7 +503,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      * @param string $name
      * @param mixed  $value
      */
-    public function setOption($name, $value)
+    public function setOption($name, $value): void
     {
         $this->options[$name] = $value;
     }
@@ -509,7 +511,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     /**
      * @param array $rawProduct
      */
-    public function setRawProduct($rawProduct)
+    public function setRawProduct($rawProduct): void
     {
         $this->rawProduct = $rawProduct;
     }
@@ -584,7 +586,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param float $unitPriceExcl
      */
-    public function setUnitPriceExcl($unitPriceExcl)
+    public function setUnitPriceExcl($unitPriceExcl): void
     {
         $this->unitPriceExcl = $unitPriceExcl;
     }
@@ -604,7 +606,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param float $unitPriceInc
      */
-    public function setUnitPriceInc($unitPriceInc)
+    public function setUnitPriceInc($unitPriceInc): void
     {
         $this->unitPriceInc = $unitPriceInc;
     }

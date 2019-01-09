@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,13 +24,13 @@ use Sonata\Component\Subscriber\ORMInheritanceSubscriber;
  */
 class ORMInheritanceSubscriberTest extends TestCase
 {
-    public function testGetSubscribedEvents()
+    public function testGetSubscribedEvents(): void
     {
         $subscriber = new ORMInheritanceSubscriber([], Product::class);
         $this->assertCount(1, $subscriber->getSubscribedEvents());
     }
 
-    public function testLoadClassMetadata()
+    public function testLoadClassMetadata(): void
     {
         $fakedMetadata = new \stdClass();
         $fakedMetadata->name = 'IncorrectValue';

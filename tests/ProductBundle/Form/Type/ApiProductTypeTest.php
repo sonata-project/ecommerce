@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\Form\FormBuilder;
  */
 class ApiProductTypeTest extends TestCase
 {
-    public function testBuildForm()
+    public function testBuildForm(): void
     {
         $provider = $this->createMock(ProductProviderInterface::class);
 

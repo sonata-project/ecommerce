@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -77,7 +79,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param \Sonata\Component\Order\OrderInterface $order
      */
-    public function setOrder(OrderInterface $order)
+    public function setOrder(OrderInterface $order): void
     {
         $this->order = $order;
 
@@ -95,7 +97,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param int $state
      */
-    public function setState($state)
+    public function setState($state): void
     {
         $this->state = $state;
 
@@ -119,7 +121,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param string $transactionId
      */
-    public function setTransactionId($transactionId)
+    public function setTransactionId($transactionId): void
     {
         $this->transactionId = $transactionId;
         $this->addInformation(sprintf('The transactionId is `%s`', $transactionId));
@@ -144,7 +146,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param array $parameters
      */
-    public function setParameters(array $parameters)
+    public function setParameters(array $parameters): void
     {
         $this->parameters = $this->cleanupEncoding($parameters);
     }
@@ -169,7 +171,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param $statusCode
      */
-    public function setStatusCode($statusCode)
+    public function setStatusCode($statusCode): void
     {
         $this->statusCode = $statusCode;
 
@@ -230,7 +232,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param \DateTime|null $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -246,7 +248,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param int $paymentCode
      */
-    public function setPaymentCode($paymentCode)
+    public function setPaymentCode($paymentCode): void
     {
         $this->paymentCode = $paymentCode;
     }
@@ -262,7 +264,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param $information
      */
-    public function addInformation($information)
+    public function addInformation($information): void
     {
         $this->information .= "\n".$information;
     }
@@ -270,7 +272,7 @@ class BaseTransaction implements TransactionInterface
     /**
      * @param $information
      */
-    public function setInformation($information)
+    public function setInformation($information): void
     {
         $this->information = $information;
     }

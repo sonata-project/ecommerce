@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,12 +18,12 @@ use Sonata\Component\Customer\CustomerInterface;
 
 interface OrderInterface
 {
-    const STATUS_OPEN = 0; // created but not validated
-    const STATUS_PENDING = 1; // waiting from action from the user
-    const STATUS_VALIDATED = 2; // the order is validated does not mean the payment is ok
-    const STATUS_CANCELLED = 3; // the order is cancelled
-    const STATUS_ERROR = 4; // the order has an error
-    const STATUS_STOPPED = 5; // use if the subscription has been cancelled/stopped
+    public const STATUS_OPEN = 0; // created but not validated
+    public const STATUS_PENDING = 1; // waiting from action from the user
+    public const STATUS_VALIDATED = 2; // the order is validated does not mean the payment is ok
+    public const STATUS_CANCELLED = 3; // the order is cancelled
+    public const STATUS_ERROR = 4; // the order has an error
+    public const STATUS_STOPPED = 5; // use if the subscription has been cancelled/stopped
 
     /**
      * @return int the order id

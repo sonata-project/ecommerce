@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ProductMenuBuilderTest extends TestCase
 {
-    public function testCreateCategoryMenu()
+    public function testCreateCategoryMenu(): void
     {
         $menu = $this->createMock(ItemInterface::class);
         $factory = $this->createMock(FactoryInterface::class);
@@ -47,7 +49,7 @@ class ProductMenuBuilderTest extends TestCase
         $this->assertInstanceOf(ItemInterface::class, $genMenu);
     }
 
-    public function testCreateFiltersMenu()
+    public function testCreateFiltersMenu(): void
     {
         $menu = $this->createMock(ItemInterface::class);
         $factory = $this->createMock(FactoryInterface::class);

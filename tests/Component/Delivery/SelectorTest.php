@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ use Sonata\ProductBundle\Entity\BaseProduct;
 
 class SelectorTest extends TestCase
 {
-    public function testEmptyBasket()
+    public function testEmptyBasket(): void
     {
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
@@ -38,7 +40,7 @@ class SelectorTest extends TestCase
         $this->assertEmpty($selector->getAvailableMethods());
     }
 
-    public function testNonExistentProduct()
+    public function testNonExistentProduct(): void
     {
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
@@ -57,7 +59,7 @@ class SelectorTest extends TestCase
     /**
      * Test the getAvailableMethods methods with no basket nor address provided.
      */
-    public function testGetAvailableMethodsWithoutBasket()
+    public function testGetAvailableMethodsWithoutBasket(): void
     {
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
@@ -69,7 +71,7 @@ class SelectorTest extends TestCase
     /**
      * Test the getAvailableMethods methods with an empty basket provided.
      */
-    public function testGetAvailableMethodsWithEmptyBasket()
+    public function testGetAvailableMethodsWithEmptyBasket(): void
     {
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
@@ -83,7 +85,7 @@ class SelectorTest extends TestCase
     /**
      * Test the getAvailableMethods methods with a product provided but no address and no related delivery methods.
      */
-    public function testGetAvailableMethodsWithFilledBasket()
+    public function testGetAvailableMethodsWithFilledBasket(): void
     {
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
@@ -103,7 +105,7 @@ class SelectorTest extends TestCase
     /**
      * Provide a delivery method that require an address but none is provided.
      */
-    public function testGetAvailableMethodsWithRequiredAddressDelivery()
+    public function testGetAvailableMethodsWithRequiredAddressDelivery(): void
     {
         $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
@@ -132,7 +134,7 @@ class SelectorTest extends TestCase
     /**
      * Provide a delivery method that require an address but none is provided.
      */
-    public function testGetAvailableMethodsWithDisabledDelivery()
+    public function testGetAvailableMethodsWithDisabledDelivery(): void
     {
         $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
@@ -160,7 +162,7 @@ class SelectorTest extends TestCase
     /**
      * Try to fetch a delivery based on an undefined code.
      */
-    public function testGetAvailableMethodsWithUndefinedCode()
+    public function testGetAvailableMethodsWithUndefinedCode(): void
     {
         $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
@@ -185,7 +187,7 @@ class SelectorTest extends TestCase
     /**
      * Try to fetch a delivery not having a handled country.
      */
-    public function testGetAvailableMethodsWithUncoveredCountry()
+    public function testGetAvailableMethodsWithUncoveredCountry(): void
     {
         $deliveryPool = $this->createMock(DeliveryPool::class);
         $productPool = new ProductPool();
@@ -218,7 +220,7 @@ class SelectorTest extends TestCase
     /**
      * Provide twice the same delivery code.
      */
-    public function testGetAvailableMethodsWithAlreadySelectedCode()
+    public function testGetAvailableMethodsWithAlreadySelectedCode(): void
     {
         $deliveryPool = $this->createMock(DeliveryPool::class);
 
@@ -247,7 +249,7 @@ class SelectorTest extends TestCase
         $this->assertEquals([$serviceDelivery], $selector->getAvailableMethods($basket));
     }
 
-    public function testAvailableMethods()
+    public function testAvailableMethods(): void
     {
         $deliveryMethod_low = new ServiceDelivery();
         $deliveryMethod_low->setCode('ups_low');

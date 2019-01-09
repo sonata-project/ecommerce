@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -80,7 +82,7 @@ abstract class BasePayment implements PaymentInterface
         return $this->code;
     }
 
-    public function setCode($code)
+    public function setCode($code): void
     {
         $this->code = $code;
     }
@@ -93,7 +95,7 @@ abstract class BasePayment implements PaymentInterface
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -101,7 +103,7 @@ abstract class BasePayment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): void
     {
         $this->options = $options;
     }
@@ -143,7 +145,7 @@ abstract class BasePayment implements PaymentInterface
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
@@ -156,7 +158,7 @@ abstract class BasePayment implements PaymentInterface
         return $this->logger;
     }
 
-    public function addTransformer($id, $transformer)
+    public function addTransformer($id, $transformer): void
     {
         $this->transformers[$id] = $transformer;
     }
@@ -226,7 +228,7 @@ abstract class BasePayment implements PaymentInterface
     /**
      * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -242,7 +244,7 @@ abstract class BasePayment implements PaymentInterface
     /**
      * @param TransactionInterface $transaction
      */
-    public function report(TransactionInterface $transaction)
+    public function report(TransactionInterface $transaction): void
     {
         if (!$this->logger) {
             return;

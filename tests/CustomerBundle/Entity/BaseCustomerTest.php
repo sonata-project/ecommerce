@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -31,7 +33,7 @@ class CustomerTest extends BaseCustomer
 
 class AddressTest extends BaseAddress
 {
-    public function getId()
+    public function getId(): void
     {
         // TODO: Implement getId() method.
     }
@@ -42,7 +44,7 @@ class AddressTest extends BaseAddress
  */
 class BaseCustomerTest extends TestCase
 {
-    public function testAddAddress()
+    public function testAddAddress(): void
     {
         $customer = new CustomerTest();
         $address = new AddressTest();

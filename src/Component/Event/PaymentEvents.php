@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,18 +18,18 @@ namespace Sonata\Component\Event;
  */
 final class PaymentEvents
 {
-    const PRE_ERROR = 'sonata.ecommerce.payment.pre_error';
+    public const PRE_ERROR = 'sonata.ecommerce.payment.pre_error';
 
     // Sent just before adding the order to the message queue
-    const POST_ERROR = 'sonata.ecommerce.payment.post_error';
+    public const POST_ERROR = 'sonata.ecommerce.payment.post_error';
 
-    const CONFIRMATION = 'sonata.ecommerce.payment.confirmation';
+    public const CONFIRMATION = 'sonata.ecommerce.payment.confirmation';
 
-    const PRE_CALLBACK = 'sonata.ecommerce.payment.pre_callback';
+    public const PRE_CALLBACK = 'sonata.ecommerce.payment.pre_callback';
 
     // Sent just before adding the order to the message queue
-    const POST_CALLBACK = 'sonata.ecommerce.payment.post_callback';
+    public const POST_CALLBACK = 'sonata.ecommerce.payment.post_callback';
 
-    const PRE_SENDBANK = 'sonata.ecommerce.payment.pre_sendbank';
-    const POST_SENDBANK = 'sonata.ecommerce.payment.post_sendbank';
+    public const PRE_SENDBANK = 'sonata.ecommerce.payment.pre_sendbank';
+    public const POST_SENDBANK = 'sonata.ecommerce.payment.post_sendbank';
 }

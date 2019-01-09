@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -23,21 +25,21 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DebugPaymentTest_Order extends BaseOrder
 {
-    public function getId()
+    public function getId(): void
     {
     }
 }
 
 class DebugPaymentTest_Transaction extends BaseTransaction
 {
-    public function getId()
+    public function getId(): void
     {
     }
 }
 
 class DebugPaymentTest extends TestCase
 {
-    public function testDebugPayment()
+    public function testDebugPayment(): void
     {
         $payment = $this->getDebugPayment();
 

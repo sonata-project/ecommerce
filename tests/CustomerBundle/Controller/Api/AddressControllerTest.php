@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddressControllerTest extends TestCase
 {
-    public function testGetAddressesAction()
+    public function testGetAddressesAction(): void
     {
         $addressManager = $this->createMock(AddressManagerInterface::class);
         $addressManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
@@ -44,14 +46,14 @@ class AddressControllerTest extends TestCase
         $this->assertEquals([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
 
-    public function testGetAddressAction()
+    public function testGetAddressAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
         $this->assertEquals($address, $this->createAddressController($address)->getAddressAction(1));
     }
 
-    public function testGetAddressActionNotFoundException()
+    public function testGetAddressActionNotFoundException(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Address (42) not found');
@@ -59,7 +61,7 @@ class AddressControllerTest extends TestCase
         $this->createAddressController()->getAddressAction(42);
     }
 
-    public function testPostAddressAction()
+    public function testPostAddressAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
@@ -79,7 +81,7 @@ class AddressControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPostCustomerInvalidAction()
+    public function testPostCustomerInvalidAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
@@ -98,7 +100,7 @@ class AddressControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testPutAddressAction()
+    public function testPutAddressAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
@@ -119,7 +121,7 @@ class AddressControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPutAddressInvalidAction()
+    public function testPutAddressInvalidAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
@@ -139,7 +141,7 @@ class AddressControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testDeleteAddressAction()
+    public function testDeleteAddressAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
@@ -152,7 +154,7 @@ class AddressControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteAddressInvalidAction()
+    public function testDeleteAddressInvalidAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

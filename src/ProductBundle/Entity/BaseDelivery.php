@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -74,7 +76,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param ProductInterface $product
      */
-    public function setProduct(ProductInterface $product)
+    public function setProduct(ProductInterface $product): void
     {
         $this->product = $product;
     }
@@ -94,7 +96,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param $code
      */
-    public function setCode($code)
+    public function setCode($code): void
     {
         $this->code = $code;
     }
@@ -114,7 +116,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param bool $perItem
      */
-    public function setPerItem($perItem)
+    public function setPerItem($perItem): void
     {
         $this->perItem = $perItem;
     }
@@ -134,7 +136,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param $countryCode
      */
-    public function setCountryCode($countryCode)
+    public function setCountryCode($countryCode): void
     {
         $this->countryCode = $countryCode;
     }
@@ -154,7 +156,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param string $zone
      */
-    public function setZone($zone)
+    public function setZone($zone): void
     {
         $this->zone = $zone;
     }
@@ -174,7 +176,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param bool $enabled
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -194,7 +196,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param \DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -214,7 +216,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -229,13 +231,13 @@ abstract class BaseDelivery implements DeliveryInterface
         return $this->createdAt;
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->updatedAt = new \DateTime();
     }
@@ -275,7 +277,7 @@ abstract class BaseDelivery implements DeliveryInterface
     /**
      * {@inheritdoc}
      */
-    public function fromArray($array)
+    public function fromArray($array): void
     {
         if (array_key_exists('code', $array)) {
             $this->code = $array['code'];

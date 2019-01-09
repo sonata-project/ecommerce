@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ use Sonata\PaymentBundle\Entity\BaseTransaction;
  */
 class OrderStatusRendererTest extends TestCase
 {
-    public function testHandles()
+    public function testHandles(): void
     {
         $osRenderer = new OrderStatusRenderer();
 
@@ -44,7 +46,7 @@ class OrderStatusRendererTest extends TestCase
         $this->assertFalse($osRenderer->handlesObject($order, 'toubidou'));
     }
 
-    public function testGetClass()
+    public function testGetClass(): void
     {
         $osRenderer = new OrderStatusRenderer();
 
@@ -58,7 +60,7 @@ class OrderStatusRendererTest extends TestCase
         $this->assertContains($osRenderer->getStatusClass($order, 'delivery', 'error'), ['success', 'info', 'error']);
     }
 
-    public function testGetInvalidClass()
+    public function testGetInvalidClass(): void
     {
         $osRenderer = new OrderStatusRenderer();
 

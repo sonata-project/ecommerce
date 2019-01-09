@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -53,7 +55,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      */
-    private function addPaymentSection(ArrayNodeDefinition $node)
+    private function addPaymentSection(ArrayNodeDefinition $node): void
     {
         $node
             ->validate()
@@ -279,7 +281,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      */
-    private function addModelSection(ArrayNodeDefinition $node)
+    private function addModelSection(ArrayNodeDefinition $node): void
     {
         $node
             ->children()

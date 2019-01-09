@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -101,7 +103,7 @@ class ProductMenuBuilder
      * @param array                   $options    The item options
      * @param string                  $currentUri The current URI
      */
-    public function buildCategoryMenu(ItemInterface $menu, array $options = [], $currentUri = null)
+    public function buildCategoryMenu(ItemInterface $menu, array $options = [], $currentUri = null): void
     {
         $categories = $this->categoryManager->getCategoryTree();
 
@@ -143,7 +145,7 @@ class ProductMenuBuilder
      * @param array         $options
      * @param string        $currentUri
      */
-    protected function fillMenu(ItemInterface $menu, $categories, array $options = [], $currentUri = null)
+    protected function fillMenu(ItemInterface $menu, $categories, array $options = [], $currentUri = null): void
     {
         foreach ($categories as $category) {
             if (false === $category->getEnabled()) {

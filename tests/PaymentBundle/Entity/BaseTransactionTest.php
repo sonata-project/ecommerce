@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -25,7 +27,7 @@ class Transaction extends BaseTransaction
 
 class BaseTransactionTest extends TestCase
 {
-    public function testInformation()
+    public function testInformation(): void
     {
         $transaction = new Transaction();
 
@@ -50,7 +52,7 @@ INFO;
         $this->assertEquals($expected, $transaction->getInformation());
     }
 
-    public function testParametersEncoding()
+    public function testParametersEncoding(): void
     {
         $transaction = new Transaction();
 

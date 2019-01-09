@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -32,7 +34,7 @@ class InvoiceAdmin extends AbstractAdmin
     /**
      * @param CurrencyDetectorInterface $currencyDetector
      */
-    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector): void
     {
         $this->currencyDetector = $currencyDetector;
     }
@@ -40,7 +42,7 @@ class InvoiceAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setTranslationDomain('SonataInvoiceBundle');
     }
@@ -48,7 +50,7 @@ class InvoiceAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         if (!$this->isChild()) {
             $formMapper
@@ -85,7 +87,7 @@ class InvoiceAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         $list
             ->addIdentifier('reference')
@@ -105,7 +107,7 @@ class InvoiceAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filter)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('reference')

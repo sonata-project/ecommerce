@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,7 +19,7 @@ use Sonata\Component\Payment\Scellius\OrderScelliusTransactionGenerator;
 
 class OrderScelliusTransactionGeneratorTest extends TestCase
 {
-    public function testGenerator()
+    public function testGenerator(): void
     {
         $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())->method('getReference')->will($this->returnValue('120112000012'));
@@ -26,7 +28,7 @@ class OrderScelliusTransactionGeneratorTest extends TestCase
         $this->assertEquals('000012', $generator->generate($order));
     }
 
-    public function testInvalidReferenceLength()
+    public function testInvalidReferenceLength(): void
     {
         $this->expectException(\RuntimeException::class);
 

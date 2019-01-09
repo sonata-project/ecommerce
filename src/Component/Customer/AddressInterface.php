@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -13,9 +15,9 @@ namespace Sonata\Component\Customer;
 
 interface AddressInterface
 {
-    const TYPE_BILLING = 1;
-    const TYPE_DELIVERY = 2;
-    const TYPE_CONTACT = 3;
+    public const TYPE_BILLING = 1;
+    public const TYPE_DELIVERY = 2;
+    public const TYPE_CONTACT = 3;
 
     public function getId();
 

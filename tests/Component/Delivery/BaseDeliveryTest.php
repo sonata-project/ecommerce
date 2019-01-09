@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ class Delivery extends BaseDelivery
 
 class BaseDeliveryTest extends TestCase
 {
-    public function testArrayDelivery()
+    public function testArrayDelivery(): void
     {
         $delivery = new Delivery();
 

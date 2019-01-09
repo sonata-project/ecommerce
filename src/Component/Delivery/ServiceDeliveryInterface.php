@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -15,12 +17,12 @@ use Sonata\Component\Basket\BasketInterface;
 
 interface ServiceDeliveryInterface
 {
-    const STATUS_OPEN = 1;    // Not processed yet
-    const STATUS_PENDING = 2;    // Packing
-    const STATUS_SENT = 3;    // In transit
-    const STATUS_CANCELLED = 4;    // Delivery cancelled
-    const STATUS_COMPLETED = 5;    // Delivered
-    const STATUS_RETURNED = 6;    // Returned to sender
+    public const STATUS_OPEN = 1;    // Not processed yet
+    public const STATUS_PENDING = 2;    // Packing
+    public const STATUS_SENT = 3;    // In transit
+    public const STATUS_CANCELLED = 4;    // Delivery cancelled
+    public const STATUS_COMPLETED = 5;    // Delivered
+    public const STATUS_RETURNED = 6;    // Returned to sender
 
     /**
      * @return float the delivery base price

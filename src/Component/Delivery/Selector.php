@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -58,7 +60,7 @@ class Selector implements ServiceDeliverySelectorInterface
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
@@ -170,7 +172,7 @@ class Selector implements ServiceDeliverySelectorInterface
     /**
      * @param string $message
      */
-    protected function log($message)
+    protected function log($message): void
     {
         if ($this->logger) {
             $this->logger->info($message);

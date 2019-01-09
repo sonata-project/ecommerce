@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -85,7 +87,7 @@ class Twitter implements ServiceInterface
      * @param SeoPageInterface $seoPage
      * @param ProductInterface $product
      */
-    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product)
+    public function alterPage(SeoPageInterface $seoPage, ProductInterface $product): void
     {
         $seoPage->addMeta('name', 'twitter:card', 'product')
             ->addMeta('name', 'twitter:title', $product->getName())

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,14 +26,14 @@ class CurrencyDataTransformerTest extends TestCase
     private $currencyDataTransformer;
     private $currencyManager;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->currencyManager = $this->createMock(CurrencyManagerInterface::class);
 
         $this->currencyDataTransformer = new CurrencyDataTransformer($this->currencyManager);
     }
 
-    public function testTransform()
+    public function testTransform(): void
     {
         $currency = new Currency();
         $currency->setLabel('EUR');
@@ -40,7 +42,7 @@ class CurrencyDataTransformerTest extends TestCase
         $this->assertEquals('EUR', $this->currencyDataTransformer->transform('EUR'));
     }
 
-    public function testReverseTransform()
+    public function testReverseTransform(): void
     {
         $currency = new Currency();
         $currency->setLabel('EUR');

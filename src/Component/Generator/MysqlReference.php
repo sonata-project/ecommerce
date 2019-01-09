@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -33,7 +35,7 @@ class MysqlReference implements ReferenceInterface
     /**
      * {@inheritdoc}
      */
-    public function invoice(InvoiceInterface $invoice)
+    public function invoice(InvoiceInterface $invoice): void
     {
         if (!$invoice->getId()) {
             throw new \RuntimeException('The invoice is not persisted into the database');
@@ -45,7 +47,7 @@ class MysqlReference implements ReferenceInterface
     /**
      * {@inheritdoc}
      */
-    public function order(OrderInterface $order)
+    public function order(OrderInterface $order): void
     {
         if (!$order->getId()) {
             throw new \RuntimeException('The order is not persisted into the database');

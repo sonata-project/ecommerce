@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,7 +29,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OgonePaymentTest_Order extends BaseOrder
 {
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -42,7 +44,7 @@ class OgonePaymentTest_Order extends BaseOrder
 }
 class OgonePaymentTest extends TestCase
 {
-    public function testValidPayment()
+    public function testValidPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -94,7 +96,7 @@ class OgonePaymentTest extends TestCase
         $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
     }
 
-    public function testValidSendbankPayment()
+    public function testValidSendbankPayment(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -142,7 +144,7 @@ class OgonePaymentTest extends TestCase
     /**
      * @dataProvider getEncodeStringValues
      */
-    public function testEncodeString($data, $expected)
+    public function testEncodeString($data, $expected): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -227,7 +229,7 @@ class OgonePaymentTest extends TestCase
         return $params[$name];
     }
 
-    public function testIsCallbackValid()
+    public function testIsCallbackValid(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -265,7 +267,7 @@ class OgonePaymentTest extends TestCase
         $this->assertFalse($payment->isCallbackValid($transaction));
     }
 
-    public function testGetOrderReference()
+    public function testGetOrderReference(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
@@ -279,7 +281,7 @@ class OgonePaymentTest extends TestCase
         $this->assertEquals('reference', $payment->getOrderReference($transaction));
     }
 
-    public function testApplyTransactionId()
+    public function testApplyTransactionId(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);

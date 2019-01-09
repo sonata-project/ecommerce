@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -37,7 +39,7 @@ class PassPaymentTest extends TestCase
     /**
      * useless test ....
      */
-    public function testPassPayment()
+    public function testPassPayment(): void
     {
         $router = $this->createMock(RouterInterface::class);
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));

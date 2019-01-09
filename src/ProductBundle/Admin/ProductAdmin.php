@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -45,7 +47,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * @param CurrencyDetectorInterface $currencyDetector
      */
-    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
+    public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector): void
     {
         $this->currencyDetector = $currencyDetector;
     }
@@ -53,7 +55,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setTranslationDomain('SonataProductBundle');
     }
@@ -94,7 +96,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureFormFields(FormMapper $formMapper)
+    public function configureFormFields(FormMapper $formMapper): void
     {
         // this admin class works only from a request scope
         if (!$this->hasRequest()) {
@@ -128,7 +130,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureListFields(ListMapper $list)
+    public function configureListFields(ListMapper $list): void
     {
         $list
             ->addIdentifier('sku')
@@ -146,7 +148,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
      */
-    public function configureDatagridFilters(DatagridMapper $filter)
+    public function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('name')
@@ -160,7 +162,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * @param \Sonata\Component\Product\Pool $productPool
      */
-    public function setProductPool(Pool $productPool)
+    public function setProductPool(Pool $productPool): void
     {
         $this->productPool = $productPool;
     }
@@ -204,7 +206,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function validate(ErrorElement $errorElement, $object)
+    public function validate(ErrorElement $errorElement, $object): void
     {
         $errorElement
             ->assertCallback(['validateOneMainCategory'])
@@ -214,7 +216,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    public function postUpdate($product)
+    public function postUpdate($product): void
     {
         $provider = $this->getProductProvider($product);
 
@@ -226,7 +228,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
         if (!$childAdmin && !\in_array($action, ['edit'])) {
             return;
@@ -268,7 +270,7 @@ class ProductAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper): void
     {
         // this admin class works only from a request scope
         if (!$this->hasRequest()) {

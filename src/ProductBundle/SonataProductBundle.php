@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -26,7 +28,7 @@ class SonataProductBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new AddProductProviderCompilerPass());
 
@@ -36,7 +38,7 @@ class SonataProductBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerFormMapping();
     }
@@ -44,7 +46,7 @@ class SonataProductBundle extends Bundle
     /**
      * Register form mapping information.
      */
-    public function registerFormMapping()
+    public function registerFormMapping(): void
     {
         FormHelper::registerFormTypeMapping([
             'sonata_product_delivery_status' => ProductDeliveryStatusType::class,

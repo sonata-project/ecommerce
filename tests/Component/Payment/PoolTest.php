@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,7 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class PoolTest extends TestCase
 {
-    public function testPool()
+    public function testPool(): void
     {
         $pool = new Pool();
 
@@ -43,7 +45,7 @@ class PoolTest extends TestCase
         $this->assertInstanceOf(PassPayment::class, $pool->getMethod('pass_2'), 'Pool return an FreeDelivery Instance');
     }
 
-    public function testAddMethodError()
+    public function testAddMethodError(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Payment handler of class Sonata\\Component\\Payment\\PassPayment must return a code on getCode method. Please refer to the documentation (https://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)');
