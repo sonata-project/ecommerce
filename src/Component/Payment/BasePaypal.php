@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -27,15 +29,15 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 abstract class BasePaypal extends BasePayment
 {
-    const PAYMENT_STATUS_CANCELED_REVERSAL = 'Canceled_Reversal';
-    const PAYMENT_STATUS_COMPLETED = 'Completed';
-    const PAYMENT_STATUS_DENIED = 'Denied';
-    const PAYMENT_STATUS_FAILED = 'Failed';
-    const PAYMENT_STATUS_PENDING = 'Pending';
-    const PAYMENT_STATUS_REFUNDED = 'Refunded';
-    const PAYMENT_STATUS_REVERSED = 'Reversed';
-    const PAYMENT_STATUS_PROCESSED = 'Processed';
-    const PAYMENT_STATUS_VOIDED = 'Voided';
+    public const PAYMENT_STATUS_CANCELED_REVERSAL = 'Canceled_Reversal';
+    public const PAYMENT_STATUS_COMPLETED = 'Completed';
+    public const PAYMENT_STATUS_DENIED = 'Denied';
+    public const PAYMENT_STATUS_FAILED = 'Failed';
+    public const PAYMENT_STATUS_PENDING = 'Pending';
+    public const PAYMENT_STATUS_REFUNDED = 'Refunded';
+    public const PAYMENT_STATUS_REVERSED = 'Reversed';
+    public const PAYMENT_STATUS_PROCESSED = 'Processed';
+    public const PAYMENT_STATUS_VOIDED = 'Voided';
 
     /**
      * @var RouterInterface
@@ -56,7 +58,7 @@ abstract class BasePaypal extends BasePayment
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface              $router
-     * @param null|\Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Symfony\Component\Translation\TranslatorInterface|null $translator
      */
     public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
     {

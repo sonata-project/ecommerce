@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -91,10 +93,10 @@ class SonataPaymentExtension extends Extension
             if (array_key_exists($id, $internal)) {
                 $id = $internal[$id];
 
-                $name = isset($settings['name']) ? $settings['name'] : 'n/a';
-                $options = isset($settings['options']) ? $settings['options'] : [];
+                $name = $settings['name'] ?? 'n/a';
+                $options = $settings['options'] ?? [];
 
-                $code = isset($settings['code']) ? $settings['code'] : false;
+                $code = $settings['code'] ?? false;
 
                 if (!$code) {
                     throw new \RuntimeException('Please provide a code for the payment handler');

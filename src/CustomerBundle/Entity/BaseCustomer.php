@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -18,9 +20,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class BaseCustomer implements CustomerInterface
 {
-    const TITLE_MLLE = 1;
-    const TITLE_MME = 2;
-    const TITLE_MR = 3;
+    public const TITLE_MLLE = 1;
+    public const TITLE_MME = 2;
+    public const TITLE_MR = 3;
 
     /**
      * @var string

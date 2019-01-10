@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -202,7 +204,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
 
     /**
      * @param array    $productCollections
-     * @param null|int $limit
+     * @param int|null $limit
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
