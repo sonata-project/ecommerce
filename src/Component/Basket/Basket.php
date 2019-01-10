@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -663,7 +665,7 @@ class Basket implements \Serializable, BasketInterface
         $properties = $this->getUnserializationFields();
 
         foreach ($properties as $property) {
-            $this->$property = isset($data[$property]) ? $data[$property] : $this->$property;
+            $this->$property = $data[$property] ?? $this->$property;
         }
     }
 

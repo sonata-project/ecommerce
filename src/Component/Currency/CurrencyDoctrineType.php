@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\Intl\Intl;
  */
 class CurrencyDoctrineType extends Type
 {
-    const CURRENCY = 'currency'; // modify to match your type name
+    public const CURRENCY = 'currency'; // modify to match your type name
 
     /**
      * {@inheritdoc}
