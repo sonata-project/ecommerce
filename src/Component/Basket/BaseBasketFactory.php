@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -24,7 +26,7 @@ use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
  */
 abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandlerInterface
 {
-    const SESSION_BASE_NAME = 'sonata/basket/factory/customer/';
+    public const SESSION_BASE_NAME = 'sonata/basket/factory/customer/';
 
     /**
      * @var \Sonata\Component\Basket\BasketManagerInterface

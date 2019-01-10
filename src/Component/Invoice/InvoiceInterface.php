@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -16,9 +18,9 @@ use Sonata\Component\Customer\CustomerInterface;
 
 interface InvoiceInterface
 {
-    const STATUS_OPEN = 0; // created but not paid
-    const STATUS_PAID = 1; // the invoice has been paid
-    const STATUS_CONFLICT = 2; // there is a conflict about this invoice
+    public const STATUS_OPEN = 0; // created but not paid
+    public const STATUS_PAID = 1; // the invoice has been paid
+    public const STATUS_CONFLICT = 2; // there is a conflict about this invoice
 
     /**
      * Returns id.
