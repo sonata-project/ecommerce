@@ -246,4 +246,16 @@ class ProductAdmin extends AbstractAdmin
 
         $provider->configureShowFields($showMapper);
     }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        if ($this->request && $code = $this->getProductType()) {
+            return $this->getProductPool()->getManager($code)->getClass();
+        }
+
+        return parent::getClass();
+    }
 }
