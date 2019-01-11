@@ -18,23 +18,19 @@ Price bundle handles everything related to prices, (right now, only currencies, 
 Installation
 ============
 
-This central e-commerce bundle requires you add a `bcscale <http://php.net/manual/en/function.bcscale.php>`_ method in your ``AppKernel.php`` file to ensure that prices are correctly computed.
-Please, update your ``AppKernel.php`` file like this:
+This central e-commerce bundle requires you add a `bcscale <http://php.net/manual/en/function.bcscale.php>`_ method in your ``Kernel.php`` file to ensure that prices are correctly computed.
+Please, update your ``Kernel.php`` file like this:
 
 .. code-block:: php
 
     <?php
 
-    // ...
+    ...
 
-    class AppKernel extends Kernel
+    public function registerBundles()
     {
-        public function init()
-        {
-            bcscale(3); // or any other value greater than 0
-
-            ...
-
+        bcscale(3);
+        $contents = require $this->getProjectDir().'/config/bundles.php';
 
 Configuration
 =============
