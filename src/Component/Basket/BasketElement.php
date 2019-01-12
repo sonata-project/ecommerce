@@ -202,11 +202,11 @@ class BasketElement implements \Serializable, BasketElementInterface
         $price = (string) $this->unitPrice;
 
         if (!$vat && $this->isPriceIncludingVat()) {
-            $price = bcdiv($price, bcadd('1', (string) bcdiv($this->getVatRate(), '100')));
+            $price = bcdiv($price, bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
         }
 
         if ($vat && !$this->isPriceIncludingVat()) {
-            $price = bcmul((string) $price, (string) bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
+            $price = bcmul($price, bcadd('1', bcdiv((string) $this->getVatRate(), '100')));
         }
 
         return $price;
