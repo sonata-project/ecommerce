@@ -75,7 +75,7 @@ class ScelliusPaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('1981-11-30'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new ScelliusPaymentTest_Order();
@@ -235,7 +235,7 @@ class ScelliusPaymentTest extends TestCase
         $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('1981-11-30'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new ScelliusPaymentTest_Order();
@@ -264,7 +264,7 @@ class ScelliusPaymentTest extends TestCase
         $router = $this->createMock(RouterInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('1981-11-30'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $customer = $this->createMock(CustomerInterface::class);
@@ -342,7 +342,7 @@ class ScelliusPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return '56384d4138b4219e554aa3cc781151686064e699';
+            return '0d2ccfb54a1ffec609919fa4fbf8603614019997';
         }
     }
 }
