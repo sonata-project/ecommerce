@@ -42,7 +42,7 @@ class BasePaymentTest extends TestCase
             'shop_secret_key' => 's3cr3t k2y',
         ]);
         $date = new \DateTime();
-        $date->setTimestamp(strtotime('11/30/1981'));
+        $date->setTimestamp(strtotime('1981-11-30'));
 
         $order = $this->createMock(OrderInterface::class);
         $order->expects($this->once())->method('getReference')->will($this->returnValue('000123'));

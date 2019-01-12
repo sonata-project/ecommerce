@@ -70,7 +70,7 @@ class OgonePaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('1981-11-30'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $order = new OgonePaymentTest_Order();
@@ -105,7 +105,7 @@ class OgonePaymentTest extends TestCase
         $router = $this->createMock(RouterInterface::class);
 
         $date = new \DateTime();
-        $date->setTimeStamp(strtotime('30/11/1981'));
+        $date->setTimeStamp(strtotime('1981-11-30'));
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
 
         $customer = $this->createMock(CustomerInterface::class);
@@ -224,7 +224,7 @@ class OgonePaymentTest extends TestCase
             return strtoupper(sha1($shasignStr));
         }
 
-        $params['check'] = '56384d4138b4219e554aa3cc781151686064e699';
+        $params['check'] = '0d2ccfb54a1ffec609919fa4fbf8603614019997';
 
         return $params[$name];
     }
