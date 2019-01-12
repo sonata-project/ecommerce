@@ -80,7 +80,7 @@ class OgonePaymentTest extends TestCase
         $order->setLocale('es');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'getCallback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
@@ -190,7 +190,7 @@ class OgonePaymentTest extends TestCase
         return new Response();
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         $params = [
                 'orderID' => 'FR',
