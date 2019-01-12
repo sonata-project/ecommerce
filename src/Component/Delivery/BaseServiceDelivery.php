@@ -171,7 +171,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
     public function getTotal(BasketInterface $basket, $vat = false)
     {
         if ($vat) {
-            return bcadd((string) $this->getPrice() * (1 + $this->getVatRate() / 100), '0', 2);
+            return bcadd((string) ($this->getPrice() * (1 + $this->getVatRate() / 100)), '0', 2);
         }
 
         return bcadd((string) $this->getPrice(), '0', 2);
