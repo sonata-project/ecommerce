@@ -54,7 +54,7 @@ class PassPaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'getCallback']));
         $transaction->expects($this->once())->method('setTransactionId');
 
         $date = new \DateTime();
@@ -90,7 +90,7 @@ class PassPaymentTest extends TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         if ('reference' == $name) {
             return '0001231';

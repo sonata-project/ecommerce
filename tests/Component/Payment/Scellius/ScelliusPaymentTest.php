@@ -85,7 +85,7 @@ class ScelliusPaymentTest extends TestCase
         $order->setLocale('es');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'getCallback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
@@ -331,7 +331,7 @@ class ScelliusPaymentTest extends TestCase
         return new Response();
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         if ('reference' == $name) {
             return '0001231';

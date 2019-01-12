@@ -61,7 +61,7 @@ class CheckPaymentTest extends TestCase
         $order->setCreatedAt($date);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'getCallback']));
         $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
@@ -132,7 +132,7 @@ class CheckPaymentTest extends TestCase
         $this->assertEquals('ok', $response->getContent(), '::getContent returns ok');
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         if ('reference' == $name) {
             return '0001231';
