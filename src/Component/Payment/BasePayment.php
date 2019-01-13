@@ -66,6 +66,7 @@ abstract class BasePayment implements PaymentInterface
             throw new \RuntimeException(sprintf('The order must have a creation date - id:%s, reference:%s ', $order->getId(), $order->getReference()));
         }
 
+        var_dump($order->getCreatedAt()->format('m/d/Y:G:i:s (e)'));
         return sha1(
             $order->getReference().
             $order->getCreatedAt()->format('m/d/Y:G:i:s').
