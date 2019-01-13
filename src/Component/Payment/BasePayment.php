@@ -72,6 +72,7 @@ abstract class BasePayment implements PaymentInterface
             $order->getId(),
             $this->getOption('shop_secret_key')
         );
+
         return sha1(
             $order->getReference().
             $order->getCreatedAt()->format('m/d/Y:G:i:s').
