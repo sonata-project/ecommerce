@@ -67,6 +67,7 @@ abstract class BasePayment implements PaymentInterface
         }
 
         var_dump($order->getCreatedAt()->format('m/d/Y:G:i:s (e)'));
+
         return sha1(
             $order->getReference().
             $order->getCreatedAt()->format('m/d/Y:G:i:s').
