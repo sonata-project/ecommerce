@@ -57,9 +57,7 @@ class PassPaymentTest extends TestCase
         $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'getCallback']));
         $transaction->expects($this->once())->method('setTransactionId');
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('1981-11-30'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new PassPaymentTest_Order();
         $order->setCreatedAt($date);

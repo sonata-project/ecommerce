@@ -53,9 +53,7 @@ class CheckPaymentTest extends TestCase
         $basket = $this->createMock(Basket::class);
         $product = $this->createMock(ProductInterface::class);
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('1981-11-30'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
@@ -80,9 +78,7 @@ class CheckPaymentTest extends TestCase
 
     public function testSendbank()
     {
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('1981-11-30'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
