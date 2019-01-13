@@ -19,7 +19,7 @@
         "cocur/slugify": "^2.5 || ^3.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
-        "kriswallsmith/buzz": "^0.15 || ^0.16",
+        "kriswallsmith/buzz": "^0.15 || 0.16.0",
         "sonata-project/admin-bundle": "^3.29",
         "sonata-project/block-bundle": "^3.8",
         "sonata-project/classification-bundle": "^3.3",
