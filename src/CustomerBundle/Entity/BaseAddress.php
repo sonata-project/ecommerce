@@ -100,7 +100,7 @@ abstract class BaseAddress implements AddressInterface
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName() ?? '';
     }
 
     /**
