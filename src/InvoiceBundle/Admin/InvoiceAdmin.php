@@ -48,21 +48,21 @@ class InvoiceAdmin extends AbstractAdmin
     {
         if (!$this->isChild()) {
             $formMapper
-                ->with($this->trans('invoice.form.group_main_label', [], $this->translationDomain))
+                ->with('invoice.form.group_main_label')
                     ->add('customer', ModelListType::class)
                 ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('invoice.form.group_main_label', [], $this->translationDomain))
+            ->with('invoice.form.group_main_label')
                 ->add('reference')
                 ->add('currency', CurrencyFormType::class)
                 ->add('status', InvoiceStatusType::class, ['translation_domain' => $this->translationDomain])
                 ->add('totalExcl')
                 ->add('totalInc')
             ->end()
-            ->with($this->trans('invoice.form.group_billing_label', [], $this->translationDomain), ['collapsed' => true])
+            ->with('invoice.form.group_billing_label', ['collapsed' => true])
                 ->add('name')
                 ->add('phone')
                 ->add('address1')

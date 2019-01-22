@@ -38,7 +38,7 @@ class AddressAdmin extends AbstractAdmin
     public function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
-            ->with($this->trans('address.form.group_contact_label', [], 'SonataCustomerBundle'), [
+            ->with('address.form.group_contact_label', [
                 'class' => 'col-md-7',
             ])
                 ->add('firstname')
@@ -48,7 +48,7 @@ class AddressAdmin extends AbstractAdmin
         ;
 
         $formMapper
-            ->with($this->trans('address.form.group_advanced_label', [], 'SonataCustomerBundle'), [
+            ->with('address.form.group_advanced_label', [
                 'class' => 'col-md-5',
             ])
                 ->add('type', AddressTypeType::class, ['translation_domain' => 'SonataCustomerBundle'])
@@ -57,14 +57,14 @@ class AddressAdmin extends AbstractAdmin
             ->end();
 
         if (!$this->isChild()) {
-            $formMapper->with($this->trans('address.form.group_contact_label', [], 'SonataCustomerBundle'))
+            $formMapper->with('address.form.group_contact_label')
                 ->add('customer', ModelListType::class)
             ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('address.form.group_address_label', [], 'SonataCustomerBundle'), [
+            ->with('address.form.group_address_label', [
                 'class' => 'col-md-12',
             ])
                 ->add('address1')

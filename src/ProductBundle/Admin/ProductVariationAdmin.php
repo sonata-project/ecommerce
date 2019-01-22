@@ -97,18 +97,18 @@ class ProductVariationAdmin extends ProductAdmin
         $product = $this->getObject($id);
 
         $menu->addChild(
-            $this->trans('product.sidemenu.link_product_edit', [], 'SonataProductBundle'),
+            'product.sidemenu.link_product_edit',
             ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         if (!$product->isVariation() && 'sonata.product.admin.product' == $this->getCode()) {
             $menu->addChild(
-                $this->trans('product.sidemenu.link_add_variation', [], 'SonataProductBundle'),
+                'product.sidemenu.link_add_variation',
                 ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.create', ['id' => $id])]
             );
 
             $menu->addChild(
-                $this->trans('product.sidemenu.view_variations'),
+                'product.sidemenu.view_variations',
                 ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', ['id' => $id])]
             );
         }

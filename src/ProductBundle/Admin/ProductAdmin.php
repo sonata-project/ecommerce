@@ -203,28 +203,28 @@ class ProductAdmin extends AbstractAdmin
         $product = $this->getObject($id);
 
         $menu->addChild(
-            $this->trans('product.sidemenu.link_product_edit', [], 'SonataProductBundle'),
+            'product.sidemenu.link_product_edit',
             ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('product.sidemenu.view_categories', [], 'SonataProductBundle'),
+            'product.sidemenu.view_categories',
             ['uri' => $admin->generateUrl('sonata.product.admin.product.category.list', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('product.sidemenu.view_collections', [], 'SonataProductBundle'),
+            'product.sidemenu.view_collections',
             ['uri' => $admin->generateUrl('sonata.product.admin.product.collection.list', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('product.sidemenu.view_deliveries', [], 'SonataProductBundle'),
+            'product.sidemenu.view_deliveries',
             ['uri' => $admin->generateUrl('sonata.product.admin.delivery.list', ['id' => $id])]
         );
 
         if (!$product->isVariation() && 'sonata.product.admin.product' == $this->getCode()) {
             $menu->addChild(
-                $this->trans('product.sidemenu.view_variations'),
+                'product.sidemenu.view_variations',
                 ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', ['id' => $id])]
             );
         }

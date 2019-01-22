@@ -85,7 +85,7 @@ class DeliveryAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('product.sidemenu.link_product_edit', [], 'SonataProductBundle'),
+            'product.sidemenu.link_product_edit',
             ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
     }

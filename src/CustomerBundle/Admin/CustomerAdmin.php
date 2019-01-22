@@ -132,17 +132,17 @@ class CustomerAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_customer_edit', [], 'SonataCustomerBundle'),
+            'customer.sidemenu.link_customer_edit',
             $admin->generateMenuUrl('edit', ['id' => $id])
         );
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_address_list', [], 'SonataCustomerBundle'),
+            'customer.sidemenu.link_address_list',
             $admin->generateMenuUrl('sonata.customer.admin.address.list', ['id' => $id])
         );
 
         $menu->addChild(
-            $this->trans('customer.sidemenu.link_order_list', [], 'SonataCustomerBundle'),
+            'customer.sidemenu.link_order_list',
             $admin->generateMenuUrl('sonata.order.admin.order.list', ['id' => $id])
         );
     }
