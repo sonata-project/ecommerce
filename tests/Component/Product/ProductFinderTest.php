@@ -33,6 +33,6 @@ class ProductFinderTest extends TestCase
         $finder = new ProductFinder($productManager);
 
         $product = $this->createMock(ProductInterface::class);
-        $this->assertEquals([], $finder->getCrossSellingSimilarProducts($product));
+        $this->assertSame([], $finder->getCrossSellingSimilarProducts($product));
     }
 }

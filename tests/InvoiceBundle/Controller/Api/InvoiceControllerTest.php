@@ -39,13 +39,13 @@ class InvoiceControllerTest extends TestCase
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
 
-        $this->assertEquals([], $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
+        $this->assertSame([], $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }
 
     public function testGetInvoiceAction()
     {
         $invoice = $this->createMock(InvoiceInterface::class);
-        $this->assertEquals($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
+        $this->assertSame($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
     public function testGetInvoiceActionNotFoundException()
@@ -62,7 +62,7 @@ class InvoiceControllerTest extends TestCase
         $invoiceElements = $this->createMock(InvoiceElementInterface::class);
         $invoice->expects($this->once())->method('getInvoiceElements')->will($this->returnValue([$invoiceElements]));
 
-        $this->assertEquals([$invoiceElements], $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
+        $this->assertSame([$invoiceElements], $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
     }
 
     /**

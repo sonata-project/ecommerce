@@ -82,7 +82,7 @@ class DeliveryAdmin extends AbstractAdmin
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
-        if (!$childAdmin && !\in_array($action, ['edit'])) {
+        if (!$childAdmin && !\in_array($action, ['edit'], true)) {
             return;
         }
 

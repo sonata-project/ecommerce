@@ -55,8 +55,8 @@ class DebugPaymentTest extends TestCase
         $transaction->setParameters(['action' => 'refuse']);
         $payment->sendConfirmationReceipt($transaction);
 
-        $this->assertEquals(TransactionInterface::STATE_KO, $transaction->getState());
-        $this->assertEquals(TransactionInterface::STATUS_ERROR_VALIDATION, $transaction->getStatusCode());
+        $this->assertSame(TransactionInterface::STATE_KO, $transaction->getState());
+        $this->assertSame(TransactionInterface::STATUS_ERROR_VALIDATION, $transaction->getStatusCode());
 
         /*
          * Payment accepted
@@ -64,8 +64,8 @@ class DebugPaymentTest extends TestCase
         $transaction->setParameters(['action' => 'accept']);
         $payment->sendConfirmationReceipt($transaction);
 
-        $this->assertEquals(TransactionInterface::STATE_OK, $transaction->getState());
-        $this->assertEquals(TransactionInterface::STATUS_VALIDATED, $transaction->getStatusCode());
+        $this->assertSame(TransactionInterface::STATE_OK, $transaction->getState());
+        $this->assertSame(TransactionInterface::STATUS_VALIDATED, $transaction->getStatusCode());
     }
 
     /**

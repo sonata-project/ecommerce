@@ -45,11 +45,11 @@ class CurrencyFormTypeTest extends TestCase
 
     public function testGetParent()
     {
-        $this->assertEquals('currency', $this->currencyFormType->getParent());
+        $this->assertSame('currency', $this->currencyFormType->getParent());
     }
 
     public function testGetName()
     {
-        $this->assertEquals('sonata_currency', $this->currencyFormType->getName());
+        $this->assertSame('sonata_currency', $this->currencyFormType->getName());
     }
 }

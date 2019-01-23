@@ -43,14 +43,14 @@ class AddressControllerTest extends TestCase
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
 
-        $this->assertEquals([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
+        $this->assertSame([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
 
     public function testGetAddressAction()
     {
         $address = $this->createMock(AddressInterface::class);
 
-        $this->assertEquals($address, $this->createAddressController($address)->getAddressAction(1));
+        $this->assertSame($address, $this->createAddressController($address)->getAddressAction(1));
     }
 
     public function testGetAddressActionNotFoundException()
@@ -151,7 +151,7 @@ class AddressControllerTest extends TestCase
 
         $view = $this->createAddressController($address, $addressManager)->deleteAddressAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteAddressInvalidAction()

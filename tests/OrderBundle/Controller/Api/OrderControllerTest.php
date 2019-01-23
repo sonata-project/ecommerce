@@ -39,13 +39,13 @@ class OrderControllerTest extends TestCase
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
 
-        $this->assertEquals([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
+        $this->assertSame([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
     public function testGetOrderAction()
     {
         $order = $this->createMock(OrderInterface::class);
-        $this->assertEquals($order, $this->createOrderController($order)->getOrderAction(1));
+        $this->assertSame($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
     public function testGetOrderActionNotFoundException()
@@ -62,7 +62,7 @@ class OrderControllerTest extends TestCase
         $orderElements = $this->createMock(OrderElementInterface::class);
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElements]));
 
-        $this->assertEquals([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
+        $this->assertSame([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
     }
 
     /**

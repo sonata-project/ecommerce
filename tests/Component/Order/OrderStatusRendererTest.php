@@ -67,6 +67,6 @@ class OrderStatusRendererTest extends TestCase
         $order = $this->createMock(OrderInterface::class);
         $order->expects($this->once())->method('getStatus')->will($this->returnValue(8));
 
-        $this->assertEquals('default_value', $osRenderer->getStatusClass($order, 'toubidou', 'default_value'));
+        $this->assertSame('default_value', $osRenderer->getStatusClass($order, 'toubidou', 'default_value'));
     }
 }

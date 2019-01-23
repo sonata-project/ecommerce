@@ -51,13 +51,13 @@ class ProductControllerTest extends TestCase
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
 
-        $this->assertEquals([], $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
+        $this->assertSame([], $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
     }
 
     public function testGetProductAction()
     {
         $product = $this->createMock(ProductInterface::class);
-        $this->assertEquals($product, $this->createProductController($product)->getProductAction(1));
+        $this->assertSame($product, $this->createProductController($product)->getProductAction(1));
     }
 
     public function testGetProductActionNotFoundException()
@@ -74,7 +74,7 @@ class ProductControllerTest extends TestCase
         $productCategory = $this->createMock(ProductCategoryInterface::class);
         $product->expects($this->once())->method('getProductCategories')->will($this->returnValue([$productCategory]));
 
-        $this->assertEquals(
+        $this->assertSame(
             [$productCategory],
             $this->createProductController($product)->getProductProductcategoriesAction(1)
         );
@@ -86,7 +86,7 @@ class ProductControllerTest extends TestCase
         $category = $this->createMock(CategoryInterface::class);
         $product->expects($this->once())->method('getCategories')->will($this->returnValue([$category]));
 
-        $this->assertEquals([$category], $this->createProductController($product)->getProductCategoriesAction(1));
+        $this->assertSame([$category], $this->createProductController($product)->getProductCategoriesAction(1));
     }
 
     public function testGetProductProductcollectionsAction()
@@ -95,7 +95,7 @@ class ProductControllerTest extends TestCase
         $productCollection = $this->createMock(ProductCollectionInterface::class);
         $product->expects($this->once())->method('getProductCollections')->will($this->returnValue([$productCollection]));
 
-        $this->assertEquals(
+        $this->assertSame(
             [$productCollection],
             $this->createProductController($product)->getProductProductcollectionsAction(1)
         );
@@ -107,7 +107,7 @@ class ProductControllerTest extends TestCase
         $collection = $this->createMock(CollectionInterface::class);
         $product->expects($this->once())->method('getCollections')->will($this->returnValue([$collection]));
 
-        $this->assertEquals([$collection], $this->createProductController($product)->getProductCollectionsAction(1));
+        $this->assertSame([$collection], $this->createProductController($product)->getProductCollectionsAction(1));
     }
 
     public function testGetProductPackagesAction()
@@ -116,7 +116,7 @@ class ProductControllerTest extends TestCase
         $package = $this->createMock(PackageInterface::class);
         $product->expects($this->once())->method('getPackages')->will($this->returnValue([$package]));
 
-        $this->assertEquals([$package], $this->createProductController($product)->getProductPackagesAction(1));
+        $this->assertSame([$package], $this->createProductController($product)->getProductPackagesAction(1));
     }
 
     public function testGetProductDeliveriesAction()
@@ -125,7 +125,7 @@ class ProductControllerTest extends TestCase
         $delivery = $this->createMock(DeliveryInterface::class);
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
-        $this->assertEquals([$delivery], $this->createProductController($product)->getProductDeliveriesAction(1));
+        $this->assertSame([$delivery], $this->createProductController($product)->getProductDeliveriesAction(1));
     }
 
     public function testGetProductVariationsAction()
@@ -134,7 +134,7 @@ class ProductControllerTest extends TestCase
         $variation = $this->createMock(ProductInterface::class);
         $product->expects($this->once())->method('getVariations')->will($this->returnValue([$variation]));
 
-        $this->assertEquals([$variation], $this->createProductController($product)->getProductVariationsAction(1));
+        $this->assertSame([$variation], $this->createProductController($product)->getProductVariationsAction(1));
     }
 
     public function testPostProductAction()
@@ -257,7 +257,7 @@ class ProductControllerTest extends TestCase
 
         $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteProductInvalidAction()
@@ -275,7 +275,7 @@ class ProductControllerTest extends TestCase
 
         $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     /**

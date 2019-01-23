@@ -129,23 +129,23 @@ class BasketTest extends TestCase
 
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
 
-        $this->assertEquals(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
-        $this->assertEquals(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertEquals(15, $basketElement->getTotal(false), '::getQuantity() - return 2');
+        $this->assertSame(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
+        $this->assertSame(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertSame(15, $basketElement->getTotal(false), '::getQuantity() - return 2');
 
-        $this->assertEquals(15, $basket->getTotal(false), '::getTotal() w/o vat return 15');
-        $this->assertEquals(17.940, $basket->getTotal(true), '::getTotal() w/ vat return 18');
+        $this->assertSame(15, $basket->getTotal(false), '::getTotal() w/o vat return 15');
+        $this->assertSame(17.940, $basket->getTotal(true), '::getTotal() w/ vat return 18');
 
         $basketElement->setQuantity(2);
 
-        $this->assertEquals(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
-        $this->assertEquals(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertEquals(30, $basketElement->getTotal(false), '::getQuantity() - return 2');
-        $this->assertEquals(30, $basket->getTotal(false), '::getTotal() w/o vat return 30');
-        $this->assertEquals(35.880, $basket->getTotal(true), '::getTotal() w/ vat return true');
+        $this->assertSame(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
+        $this->assertSame(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertSame(30, $basketElement->getTotal(false), '::getQuantity() - return 2');
+        $this->assertSame(30, $basket->getTotal(false), '::getTotal() w/o vat return 30');
+        $this->assertSame(35.880, $basket->getTotal(true), '::getTotal() w/ vat return true');
 
         // Recurrent payments
-        $this->assertEquals(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
+        $this->assertSame(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
 
         $newProduct = $this->getMockProduct();
         $newProduct->expects($this->any())
@@ -157,7 +157,7 @@ class BasketTest extends TestCase
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertEquals(30, $basket->getTotal(false, false), '::getTotal() for non-recurrent payments only');
+        $this->assertSame(30, $basket->getTotal(false, false), '::getTotal() for non-recurrent payments only');
 
         $basket->removeElement($basketElement);
 
@@ -165,9 +165,9 @@ class BasketTest extends TestCase
         $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
-        $this->assertEquals(150, $basket->getTotal(false), '::getTotal() - return 150');
-        $this->assertEquals(179.400, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
-        $this->assertEquals(29.400, $basket->getVatAmount(), '::getVatAmount() w/o vat return 29.4');
+        $this->assertSame(150, $basket->getTotal(false), '::getTotal() - return 150');
+        $this->assertSame(179.400, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
+        $this->assertSame(29.400, $basket->getVatAmount(), '::getVatAmount() w/o vat return 29.4');
     }
 
     public function testBasket()
@@ -237,7 +237,7 @@ class BasketTest extends TestCase
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() return true');
 
         $this->assertTrue($basket->hasBasketElements(), '::hasElement() return true ');
-        $this->assertEquals(1, $basket->countBasketElements(), '::countElements() return 1');
+        $this->assertSame(1, $basket->countBasketElements(), '::countElements() return 1');
         $this->assertNotEmpty($basket->getBasketElements(), '::getElements() is not empty');
 
         $this->assertInstanceOf(BasketElement::class, $element = $basket->getElement($product), '::getElement() - return a BasketElement');
@@ -245,7 +245,7 @@ class BasketTest extends TestCase
         $this->assertInstanceOf(BasketElement::class, $basket->removeElement($element), '::removeElement() - return the removed BasketElement');
 
         $this->assertFalse($basket->hasBasketElements(), '::hasElement() return false');
-        $this->assertEquals(0, $basket->countBasketElements(), '::countElements() return 0');
+        $this->assertSame(0, $basket->countBasketElements(), '::countElements() return 0');
         $this->assertEmpty($basket->getBasketElements(), '::getElements() is empty');
 
         $basket->reset();
@@ -335,9 +335,9 @@ class BasketTest extends TestCase
         }
 
         $basket->reset();
-        $this->assertTrue(0 == \count($basket->getBasketElements()), '::reset() remove all elements');
+        $this->assertTrue(0 === \count($basket->getBasketElements()), '::reset() remove all elements');
         $basket->unserialize($data);
-        $this->assertTrue(1 == \count($basket->getBasketElements()), '::unserialize() restore elements');
+        $this->assertTrue(1 === \count($basket->getBasketElements()), '::unserialize() restore elements');
     }
 
     public function testGetElementRaisesException()
@@ -441,7 +441,7 @@ class BasketTest extends TestCase
         $basketElement->expects($this->any())->method('getProduct')->will($this->returnValue(null));
         $basketElement->expects($this->any())->method('getPosition')->will($this->returnValue(0));
 
-        $this->assertEquals($basket->removeBasketElement($basketElement), $basketElement);
+        $this->assertSame($basket->removeBasketElement($basketElement), $basketElement);
     }
 
     public function testGettersSetters()
@@ -454,43 +454,43 @@ class BasketTest extends TestCase
         $basketElement->setProduct('product_code', $product);
 
         $basket->setBasketElements([$basketElement]);
-        $this->assertEquals([$basketElement], $basket->getBasketElements());
+        $this->assertSame([$basketElement], $basket->getBasketElements());
 
         $basket->setDeliveryAddressId(1);
-        $this->assertEquals(1, $basket->getDeliveryAddressId());
+        $this->assertSame(1, $basket->getDeliveryAddressId());
 
         $basket->setBillingAddressId(1);
-        $this->assertEquals(1, $basket->getBillingAddressId());
+        $this->assertSame(1, $basket->getBillingAddressId());
 
         $deliveryMethod = $this->createMock(ServiceDeliveryInterface::class);
         $deliveryMethod->expects($this->any())
             ->method('getCode')
             ->will($this->returnValue(1));
         $basket->setDeliveryMethod($deliveryMethod);
-        $this->assertEquals(1, $basket->getDeliveryMethodCode());
+        $this->assertSame(1, $basket->getDeliveryMethodCode());
 
         $paymentMethod = $this->createMock(PaymentInterface::class);
         $paymentMethod->expects($this->any())
             ->method('getCode')
             ->will($this->returnValue(1));
         $basket->setPaymentMethod($paymentMethod);
-        $this->assertEquals(1, $basket->getPaymentMethodCode());
+        $this->assertSame(1, $basket->getPaymentMethodCode());
 
         $basket->setCustomerId(1);
-        $this->assertEquals(1, $basket->getCustomerId());
+        $this->assertSame(1, $basket->getCustomerId());
 
         $options = ['option1' => 'value1', 'option2' => 'value2'];
         $basket->setOptions($options);
         $this->assertNull($basket->getOption('unexisting_option'));
-        $this->assertEquals(42, $basket->getOption('unexisting_option', 42));
-        $this->assertEquals('value1', $basket->getOption('option1'));
-        $this->assertEquals($options, $basket->getOptions());
+        $this->assertSame(42, $basket->getOption('unexisting_option', 42));
+        $this->assertSame('value1', $basket->getOption('option1'));
+        $this->assertSame($options, $basket->getOptions());
 
         $basket->setOption('option3', 'value3');
-        $this->assertEquals('value3', $basket->getOption('option3'));
+        $this->assertSame('value3', $basket->getOption('option3'));
 
         $basket->setLocale('en');
-        $this->assertEquals('en', $basket->getLocale());
+        $this->assertSame('en', $basket->getLocale());
     }
 
     protected function getPreparedBasket()
