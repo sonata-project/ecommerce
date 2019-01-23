@@ -47,14 +47,14 @@ class CustomerControllerTest extends TestCase
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
 
-        $this->assertEquals([], $this->createCustomerController(null, $customerManager)
+        $this->assertSame([], $this->createCustomerController(null, $customerManager)
             ->getCustomersAction($paramFetcher));
     }
 
     public function testGetCustomerAction()
     {
         $customer = $this->createMock(CustomerInterface::class);
-        $this->assertEquals($customer, $this->createCustomerController($customer)->getCustomerAction(1));
+        $this->assertSame($customer, $this->createCustomerController($customer)->getCustomerAction(1));
     }
 
     public function testGetCustomerActionNotFoundException()
@@ -70,7 +70,7 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
         $order = $this->createMock(OrderInterface::class);
 
-        $this->assertEquals(
+        $this->assertSame(
             [$order],
             $this->createCustomerController($customer, null, null, null, $order)->getCustomerOrdersAction(1)
         );
@@ -82,7 +82,7 @@ class CustomerControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
         $customer->expects($this->once())->method('getAddresses')->will($this->returnValue([$address]));
 
-        $this->assertEquals([$address], $this->createCustomerController($customer)
+        $this->assertSame([$address], $this->createCustomerController($customer)
             ->getCustomerAddressesAction(1));
     }
 
@@ -231,7 +231,7 @@ class CustomerControllerTest extends TestCase
 
         $view = $this->createCustomerController($customer, $customerManager)->deleteCustomerAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteCustomerInvalidAction()

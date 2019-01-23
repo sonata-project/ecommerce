@@ -79,7 +79,7 @@ abstract class BasePaypal extends BasePayment
 
         $checkPrivate = $this->generateUrlCheck($transaction->getOrder());
 
-        return $checkUrl == $checkPrivate;
+        return $checkUrl === $checkPrivate;
     }
 
     /**
@@ -234,7 +234,7 @@ abstract class BasePaypal extends BasePayment
 
         if (\is_resource($process)) {
             foreach ($hash as $key => $value) {
-                if ('' != $value) {
+                if ('' !== $value) {
                     fwrite($pipes[0], "$key=$value\n");
                 }
             }

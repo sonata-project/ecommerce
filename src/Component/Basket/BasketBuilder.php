@@ -68,7 +68,7 @@ class BasketBuilder implements BasketBuilderInterface
         foreach ($basket->getBasketElements() as $basketElement) {
             if (null === $basketElement->getProduct()) {
                 // restore information
-                if (null == $basketElement->getProductCode()) {
+                if (null === $basketElement->getProductCode()) {
                     throw new \RuntimeException('The product code is empty');
                 }
 

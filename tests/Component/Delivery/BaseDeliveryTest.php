@@ -36,12 +36,12 @@ class BaseDeliveryTest extends TestCase
 
         $delivery->fromArray($arrayDelivery);
 
-        $this->assertEquals($arrayDelivery, $delivery->toArray());
+        $this->assertSame($arrayDelivery, $delivery->toArray());
 
-        $this->assertEquals($delivery->getCode(), $arrayDelivery['code']);
-        $this->assertEquals($delivery->getPerItem(), $arrayDelivery['perItem']);
-        $this->assertEquals($delivery->getCountryCode(), $arrayDelivery['countryCode']);
-        $this->assertEquals($delivery->getZone(), $arrayDelivery['zone']);
-        $this->assertEquals($delivery->getEnabled(), $arrayDelivery['enabled']);
+        $this->assertSame($delivery->getCode(), $arrayDelivery['code']);
+        $this->assertSame($delivery->getPerItem(), $arrayDelivery['perItem']);
+        $this->assertSame($delivery->getCountryCode(), $arrayDelivery['countryCode']);
+        $this->assertSame($delivery->getZone(), $arrayDelivery['zone']);
+        $this->assertSame($delivery->getEnabled(), $arrayDelivery['enabled']);
     }
 }

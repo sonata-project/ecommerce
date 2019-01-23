@@ -31,7 +31,7 @@ class DeliveryMethodTransformerTest extends TestCase
         $delivery = new FreeDelivery(false);
         $delivery->setCode('deliveryCode');
 
-        $this->assertEquals('deliveryCode', $transformer->transform($delivery));
+        $this->assertSame('deliveryCode', $transformer->transform($delivery));
         $this->assertNull($transformer->transform(null));
     }
 
@@ -48,6 +48,6 @@ class DeliveryMethodTransformerTest extends TestCase
 
         $transformer = new DeliveryMethodTransformer($pool);
 
-        $this->assertEquals($delivery, $transformer->reverseTransform('deliveryCode'));
+        $this->assertSame($delivery, $transformer->reverseTransform('deliveryCode'));
     }
 }

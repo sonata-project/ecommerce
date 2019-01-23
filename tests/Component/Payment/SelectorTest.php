@@ -46,7 +46,7 @@ class SelectorTest extends TestCase
 
         $selector = new Selector($paymentPool, $productPool);
         $this->assertFalse($selector->getAvailableMethods());
-        $this->assertEquals($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
+        $this->assertSame($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
     }
 
     public function testGetPaymentException()

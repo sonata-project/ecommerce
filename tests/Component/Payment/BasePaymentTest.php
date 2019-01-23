@@ -30,9 +30,9 @@ class BasePaymentTest extends TestCase
         $payment->setOptions([
             'foobar' => 'barfoo',
         ]);
-        $this->assertEquals('test', $payment->getCode());
+        $this->assertSame('test', $payment->getCode());
         $this->assertFalse($payment->hasOption('bar'));
-        $this->assertEquals('13 134 &*', $payment->encodeString('13 134 &*'));
+        $this->assertSame('13 134 &*', $payment->encodeString('13 134 &*'));
     }
 
     public function testGenerateUrlCheck()
@@ -49,7 +49,7 @@ class BasePaymentTest extends TestCase
         $order->expects($this->exactly(2))->method('getCreatedAt')->will($this->returnValue($date));
         $order->expects($this->once())->method('getId')->will($this->returnValue(2));
 
-        $this->assertEquals('2a084bbe95bb3842813499d4b5b1bfdf82e5a980', $payment->generateUrlCheck($order));
+        $this->assertSame('2a084bbe95bb3842813499d4b5b1bfdf82e5a980', $payment->generateUrlCheck($order));
     }
 }
 

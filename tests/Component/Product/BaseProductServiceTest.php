@@ -180,7 +180,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertNull($provider->getOption('foo'));
         $provider->setOptions(['foo' => 'bar']);
 
-        $this->assertEquals('bar', $provider->getOption('foo'));
+        $this->assertSame('bar', $provider->getOption('foo'));
     }
 
     public function testOrderElement()
@@ -207,9 +207,9 @@ class BaseProductServiceTest extends TestCase
         $orderElement = $provider->createOrderElement($basketElement);
 
         $this->assertInstanceOf(OrderElementInterface::class, $orderElement);
-        $this->assertEquals(OrderInterface::STATUS_PENDING, $orderElement->getStatus());
-        $this->assertEquals('Product name', $orderElement->getDesignation());
-        $this->assertEquals(1, $orderElement->getQuantity());
+        $this->assertSame(OrderInterface::STATUS_PENDING, $orderElement->getStatus());
+        $this->assertSame('Product name', $orderElement->getDesignation());
+        $this->assertSame(1, $orderElement->getQuantity());
     }
 
     public function testVariationFields()
@@ -224,7 +224,7 @@ class BaseProductServiceTest extends TestCase
         $this->assertTrue($provider->isVariateBy('name'));
         $this->assertFalse($provider->isVariateBy('fake'));
         $this->assertNotEmpty($provider->getVariationFields());
-        $this->assertEquals(['name', 'price'], $provider->getVariationFields());
+        $this->assertSame(['name', 'price'], $provider->getVariationFields());
     }
 
     public function testVariationCreation()
@@ -243,8 +243,8 @@ class BaseProductServiceTest extends TestCase
         $variation2 = $provider->createVariation($product, true);
 
         $this->assertNull($variation1->getId());
-        $this->assertEquals('fake name (duplicated)', $variation1->getName());
-        $this->assertEquals($product->getId(), $variation1->getParent()->getId());
+        $this->assertSame('fake name (duplicated)', $variation1->getName());
+        $this->assertSame($product->getId(), $variation1->getParent()->getId());
         $this->assertFalse($variation1->isEnabled());
         $this->assertTrue($variation1->isVariation());
 
@@ -285,9 +285,9 @@ class BaseProductServiceTest extends TestCase
 
         $provider->synchronizeVariationsProduct($product);
 
-        $this->assertEquals($product->getName(), $variation->getName());
-        $this->assertEquals(15, $variation->getPrice());
-        $this->assertEquals($product->getVatRate(), $variation->getVatRate());
+        $this->assertSame($product->getName(), $variation->getName());
+        $this->assertSame(15, $variation->getPrice());
+        $this->assertSame($product->getVatRate(), $variation->getVatRate());
         $this->assertTrue($variation->isEnabled());
 
         $this->assertCount(1, $product->getVariations());
@@ -494,21 +494,21 @@ class BaseProductServiceTest extends TestCase
 
         $product->fromArray($arrayProduct);
 
-        $this->assertEquals($arrayProduct, $product->toArray());
+        $this->assertSame($arrayProduct, $product->toArray());
 
-        $this->assertEquals($product->getSku(), $arrayProduct['sku']);
-        $this->assertEquals($product->getSlug(), $arrayProduct['slug']);
-        $this->assertEquals($product->getName(), $arrayProduct['name']);
-        $this->assertEquals($product->getDescription(), $arrayProduct['description']);
-        $this->assertEquals($product->getRawDescription(), $arrayProduct['rawDescription']);
-        $this->assertEquals($product->getDescriptionFormatter(), $arrayProduct['descriptionFormatter']);
-        $this->assertEquals($product->getShortDescription(), $arrayProduct['shortDescription']);
-        $this->assertEquals($product->getRawShortDescription(), $arrayProduct['rawShortDescription']);
-        $this->assertEquals($product->getShortDescriptionFormatter(), $arrayProduct['shortDescriptionFormatter']);
-        $this->assertEquals($product->getPrice(), $arrayProduct['price']);
-        $this->assertEquals($product->getVatRate(), $arrayProduct['vatRate']);
-        $this->assertEquals($product->getStock(), $arrayProduct['stock']);
-        $this->assertEquals($product->getEnabled(), $arrayProduct['enabled']);
-        $this->assertEquals($product->getOptions(), $arrayProduct['options']);
+        $this->assertSame($product->getSku(), $arrayProduct['sku']);
+        $this->assertSame($product->getSlug(), $arrayProduct['slug']);
+        $this->assertSame($product->getName(), $arrayProduct['name']);
+        $this->assertSame($product->getDescription(), $arrayProduct['description']);
+        $this->assertSame($product->getRawDescription(), $arrayProduct['rawDescription']);
+        $this->assertSame($product->getDescriptionFormatter(), $arrayProduct['descriptionFormatter']);
+        $this->assertSame($product->getShortDescription(), $arrayProduct['shortDescription']);
+        $this->assertSame($product->getRawShortDescription(), $arrayProduct['rawShortDescription']);
+        $this->assertSame($product->getShortDescriptionFormatter(), $arrayProduct['shortDescriptionFormatter']);
+        $this->assertSame($product->getPrice(), $arrayProduct['price']);
+        $this->assertSame($product->getVatRate(), $arrayProduct['vatRate']);
+        $this->assertSame($product->getStock(), $arrayProduct['stock']);
+        $this->assertSame($product->getEnabled(), $arrayProduct['enabled']);
+        $this->assertSame($product->getOptions(), $arrayProduct['options']);
     }
 }

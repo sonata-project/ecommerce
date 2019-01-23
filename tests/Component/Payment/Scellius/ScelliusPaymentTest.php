@@ -88,7 +88,7 @@ class ScelliusPaymentTest extends TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
 
-        $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
@@ -204,7 +204,7 @@ class ScelliusPaymentTest extends TestCase
         $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('get')->will($this->returnValue('reference'));
 
-        $this->assertEquals('reference', $payment->getOrderReference($transaction));
+        $this->assertSame('reference', $payment->getOrderReference($transaction));
     }
 
     public function testApplyTransactionId()
@@ -300,7 +300,7 @@ class ScelliusPaymentTest extends TestCase
 
         $payment = new ScelliusPayment($router, $logger, $templating, $generator, true);
 
-        $this->assertEquals($expected, $payment->encodeString($data));
+        $this->assertSame($expected, $payment->encodeString($data));
     }
 
     public static function getEncodeStringValues()
@@ -318,7 +318,7 @@ class ScelliusPaymentTest extends TestCase
             throw new \RuntimeException('Scellius validation should be ok');
         }
 
-        if ('<div>message</div>' != $params['scellius']['content']) {
+        if ('<div>message</div>' !== $params['scellius']['content']) {
             throw new \RuntimeException('Invalid scellius html message');
         }
 
@@ -327,15 +327,15 @@ class ScelliusPaymentTest extends TestCase
 
     public static function getCallback($name)
     {
-        if ('reference' == $name) {
+        if ('reference' === $name) {
             return '0001231';
         }
 
-        if ('transaction_id' == $name) {
+        if ('transaction_id' === $name) {
             return 1;
         }
 
-        if ('check' == $name) {
+        if ('check' === $name) {
             return '0d2ccfb54a1ffec609919fa4fbf8603614019997';
         }
     }

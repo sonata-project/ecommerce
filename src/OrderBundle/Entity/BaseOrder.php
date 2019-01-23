@@ -890,7 +890,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isValidated()
     {
-        return null != $this->getValidatedAt() && OrderInterface::STATUS_VALIDATED == $this->getStatus();
+        return null !== $this->getValidatedAt() && OrderInterface::STATUS_VALIDATED === $this->getStatus();
     }
 
     /**
@@ -898,7 +898,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isCancelled()
     {
-        return null != $this->getValidatedAt() && OrderInterface::STATUS_CANCELLED == $this->getStatus();
+        return null !== $this->getValidatedAt() && OrderInterface::STATUS_CANCELLED === $this->getStatus();
     }
 
     /**
@@ -906,7 +906,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isPending()
     {
-        return \in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_PENDING], true);
     }
 
     /**
@@ -914,7 +914,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isOpen()
     {
-        return \in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_OPEN], true);
     }
 
     /**
@@ -930,7 +930,7 @@ abstract class BaseOrder implements OrderInterface
      */
     public function isError()
     {
-        return \in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_ERROR], true);
     }
 
     /**

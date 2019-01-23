@@ -62,7 +62,7 @@ class PassPaymentTest extends TestCase
         $order = new PassPaymentTest_Order();
         $order->setCreatedAt($date);
 
-        $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
@@ -80,25 +80,25 @@ class PassPaymentTest extends TestCase
         $response = $payment->sendbank($order);
 
         $this->assertTrue($response->headers->has('Location'));
-        $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));
+        $this->assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
         $this->assertFalse($response->isCacheable());
 
-        $this->assertEquals($payment->getOrderReference($transaction), '0001231');
+        $this->assertSame($payment->getOrderReference($transaction), '0001231');
 
         $payment->applyTransactionId($transaction);
     }
 
     public static function getCallback($name)
     {
-        if ('reference' == $name) {
+        if ('reference' === $name) {
             return '0001231';
         }
 
-        if ('transaction_id' == $name) {
+        if ('transaction_id' === $name) {
             return 1;
         }
 
-        if ('check' == $name) {
+        if ('check' === $name) {
             return 'a51e9421db1c028e2ccf47f8999dc902ea6df3ac';
         }
     }

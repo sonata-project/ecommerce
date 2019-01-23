@@ -161,7 +161,7 @@ class CustomerController extends Controller
 
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
 
-        if ('POST' == $request->getMethod()) {
+        if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
