@@ -96,7 +96,7 @@ class BaseProductProviderTest extends TestCase
         $product->setSku('TESTING_SKU');
         $variation = $productProvider->createVariation($product);
 
-        $this->assertEquals('TESTING_SKU_DUPLICATE', $variation->getSku());
+        $this->assertSame('TESTING_SKU_DUPLICATE', $variation->getSku());
     }
 
     public function testBuildBasketElement()
@@ -436,7 +436,7 @@ class BaseProductProviderTest extends TestCase
         $provider = $this->createNewProductProvider();
         $provider->setVariationFields(['test']);
 
-        $this->assertEquals($variationB, $provider->getCheapestEnabledVariation($product));
+        $this->assertSame($variationB, $provider->getCheapestEnabledVariation($product));
     }
 
     public function testCalculatePrice()
@@ -449,8 +449,8 @@ class BaseProductProviderTest extends TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals(42 * 4, $provider->calculatePrice($product, $currency, false, 4));
-        $this->assertEquals(42, $provider->calculatePrice($product, $currency, false));
+        $this->assertSame(42 * 4, $provider->calculatePrice($product, $currency, false, 4));
+        $this->assertSame(42, $provider->calculatePrice($product, $currency, false));
     }
 
     public function testCalculatePriceException()
@@ -497,7 +497,7 @@ class BaseProductProviderTest extends TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals([], $provider->getVariationsChoices($product));
+        $this->assertSame([], $provider->getVariationsChoices($product));
 
         $product->addVariation($variation);
         $product->addVariation($variation2);
@@ -515,7 +515,7 @@ class BaseProductProviderTest extends TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $provider->getVariationsChoices($product));
+        $this->assertSame($expected, $provider->getVariationsChoices($product));
     }
 
     public function testGetVariatedProperties()
@@ -534,7 +534,7 @@ class BaseProductProviderTest extends TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertEquals([], $provider->getVariatedProperties($product));
+        $this->assertSame([], $provider->getVariatedProperties($product));
 
         $product->addVariation($variation);
         $product->addVariation($variation2);
@@ -546,7 +546,7 @@ class BaseProductProviderTest extends TestCase
             'name' => 'variation',
         ];
 
-        $this->assertEquals($expected, $provider->getVariatedProperties($variation));
+        $this->assertSame($expected, $provider->getVariatedProperties($variation));
     }
 
     public function testGetVariation()
@@ -575,7 +575,7 @@ class BaseProductProviderTest extends TestCase
             'name' => 'variation',
         ];
 
-        $this->assertEquals($variation2, $provider->getVariation($product, ['price' => 42, 'name' => 'avariation']));
+        $this->assertSame($variation2, $provider->getVariation($product, ['price' => 42, 'name' => 'avariation']));
     }
 
     /**

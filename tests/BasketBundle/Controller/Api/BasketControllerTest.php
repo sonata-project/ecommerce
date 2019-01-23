@@ -50,7 +50,7 @@ class BasketControllerTest extends TestCase
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
 
-        $this->assertEquals([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
+        $this->assertSame([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
     public function testGetBasketAction()
@@ -60,7 +60,7 @@ class BasketControllerTest extends TestCase
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
-        $this->assertEquals($basket, $this->createBasketController($basketManager)->getBasketAction(1));
+        $this->assertSame($basket, $this->createBasketController($basketManager)->getBasketAction(1));
     }
 
     public function testGetBasketActionNotFoundException()
@@ -81,7 +81,7 @@ class BasketControllerTest extends TestCase
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
-        $this->assertEquals($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
+        $this->assertSame($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
     }
 
     public function testGetBasketelementsActionNotFoundException()
@@ -184,7 +184,7 @@ class BasketControllerTest extends TestCase
 
         $view = $this->createBasketController($basketManager)->deleteBasketAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteBasketInvalidAction()

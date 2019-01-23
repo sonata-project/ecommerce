@@ -30,9 +30,9 @@ class ProductVariationAdmin extends ProductAdmin
     public function getBaseRoutePattern()
     {
         if (!$this->baseRoutePattern) {
-            if ('sonata.product.admin.product.variation' == $this->getCode() && !$this->isChild()) { // variation
+            if ('sonata.product.admin.product.variation' === $this->getCode() && !$this->isChild()) { // variation
                 $this->baseRoutePattern = '/sonata/product/variation';
-            } elseif ('sonata.product.admin.product.variation' == $this->getCode() && $this->isChild()) { // variation
+            } elseif ('sonata.product.admin.product.variation' === $this->getCode() && $this->isChild()) { // variation
                 $this->baseRoutePattern = sprintf('%s/{id}/%s',
                     $this->getParent()->getBaseRoutePattern(),
                     $this->urlize('variation', '-')
@@ -53,9 +53,9 @@ class ProductVariationAdmin extends ProductAdmin
     public function getBaseRouteName()
     {
         if (!$this->baseRouteName) {
-            if ('sonata.product.admin.product.variation' == $this->getCode() && !$this->isChild()) { // variation
+            if ('sonata.product.admin.product.variation' === $this->getCode() && !$this->isChild()) { // variation
                 $this->baseRouteName = 'admin_sonata_product_variation';
-            } elseif ('sonata.product.admin.product.variation' == $this->getCode() && $this->isChild()) { // variation
+            } elseif ('sonata.product.admin.product.variation' === $this->getCode() && $this->isChild()) { // variation
                 $this->baseRouteName = sprintf('%s_%s',
                     $this->getParent()->getBaseRouteName(),
                     $this->urlize('variation')
@@ -93,7 +93,7 @@ class ProductVariationAdmin extends ProductAdmin
      */
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
     {
-        if (!$childAdmin && !\in_array($action, ['edit'])) {
+        if (!$childAdmin && !\in_array($action, ['edit'], true)) {
             return;
         }
 
@@ -107,7 +107,7 @@ class ProductVariationAdmin extends ProductAdmin
             ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
-        if (!$product->isVariation() && 'sonata.product.admin.product' == $this->getCode()) {
+        if (!$product->isVariation() && 'sonata.product.admin.product' === $this->getCode()) {
             $menu->addChild(
                 $this->trans('product.sidemenu.link_add_variation', [], 'SonataProductBundle'),
                 ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.create', ['id' => $id])]

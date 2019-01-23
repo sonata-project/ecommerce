@@ -369,7 +369,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $mVariation) {
             foreach ($fields as $field) {
                 $variationValue = $accessor->getValue($mVariation, $field);
-                if (!array_key_exists($field, $choices) || !\in_array($variationValue, $choices[$field])) {
+                if (!array_key_exists($field, $choices) || !\in_array($variationValue, $choices[$field], true)) {
                     $choices = array_merge_recursive($choices, [$field => [$variationValue]]);
                 }
             }
@@ -392,7 +392,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         foreach ($this->getEnabledVariations($product) as $variation) {
             foreach ($choices as $choice => $value) {
-                if (!\in_array($choice, $this->getVariationFields())) {
+                if (!\in_array($choice, $this->getVariationFields(), true)) {
                     throw new \RuntimeException("The field '".$choice."' is not among the variation fields");
                 }
 
@@ -412,7 +412,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function isVariateBy($name)
     {
-        return \in_array($name, $this->variationFields);
+        return \in_array($name, $this->variationFields, true);
     }
 
     /**
@@ -465,7 +465,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('stock', 'integer')
         ;
 
-        if (!$isVariation || \in_array('description', $this->variationFields)) {
+        if (!$isVariation || \in_array('description', $this->variationFields, true)) {
             $formMapper->add('description', 'sonata_formatter_type', [
                 'source_field' => 'rawDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
@@ -475,7 +475,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ]);
         }
 
-        if (!$isVariation || \in_array('short_description', $this->variationFields)) {
+        if (!$isVariation || \in_array('short_description', $this->variationFields, true)) {
             $formMapper->add('shortDescription', 'sonata_formatter_type', [
                 'source_field' => 'rawShortDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
@@ -487,10 +487,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $formMapper->end();
 
-        if (!$isVariation || \in_array('image', $this->variationFields) || \in_array('gallery', $this->variationFields)) {
+        if (!$isVariation || \in_array('image', $this->variationFields, true) || \in_array('gallery', $this->variationFields, true)) {
             $formMapper->with('Media');
 
-            if (!$isVariation || \in_array('image', $this->variationFields)) {
+            if (!$isVariation || \in_array('image', $this->variationFields, true)) {
                 $formMapper->add('image', 'sonata_type_model_list', [
                     'required' => false,
                 ], [
@@ -502,7 +502,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 ]);
             }
 
-            if (!$isVariation || \in_array('gallery', $this->variationFields)) {
+            if (!$isVariation || \in_array('gallery', $this->variationFields, true)) {
                 $formMapper->add('gallery', 'sonata_type_model_list', [
                     'required' => false,
                 ], [
@@ -626,7 +626,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null)
     {
-        if (\in_array('deliveries', $this->getVariationFields())) {
+        if (\in_array('deliveries', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -662,7 +662,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null)
     {
-        if (\in_array('productCategories', $this->getVariationFields())) {
+        if (\in_array('productCategories', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -697,7 +697,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null)
     {
-        if (\in_array('productCollections', $this->getVariationFields())) {
+        if (\in_array('productCollections', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -732,7 +732,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null)
     {
-        if (\in_array('packages', $this->getVariationFields())) {
+        if (\in_array('packages', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -1153,7 +1153,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             $fields = $this->getVariationFields();
         } else {
             foreach ($fields as $field) {
-                if (!\in_array($field, $this->getVariationFields())) {
+                if (!\in_array($field, $this->getVariationFields(), true)) {
                     throw new \RuntimeException("The field '".$field."' is not among the variation fields");
                 }
             }

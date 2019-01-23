@@ -41,7 +41,7 @@ class OrderManagerTest extends TestCase
         $registry = $this->createMock(ManagerRegistry::class);
         $order = new OrderManager(Order::class, $registry);
 
-        $this->assertEquals(Order::class, $order->getClass());
+        $this->assertSame(Order::class, $order->getClass());
     }
 
     public function testCreate()

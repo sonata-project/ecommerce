@@ -359,7 +359,7 @@ class BasketController
         $elements = $basket->getBasketElements();
 
         foreach ($elements as $key => $basketElement) {
-            if ($basketElement->getId() == $elementId) {
+            if ($basketElement->getId() === $elementId) {
                 unset($elements[$key]);
                 $this->basketBuilder->build($basket);
             }

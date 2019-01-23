@@ -244,7 +244,7 @@ class Paypal extends BasePaypal
             $order->setStatus(OrderInterface::STATUS_CANCELLED);
         }
 
-        if (null == $transaction->getStatusCode()) {
+        if (null === $transaction->getStatusCode()) {
             $transaction->setStatusCode(TransactionInterface::STATUS_UNKNOWN);
         }
     }
@@ -268,7 +268,7 @@ class Paypal extends BasePaypal
 
         $client->request('POST', $this->getOption('url_action'), $params);
 
-        if ('VERIFIED' == $client->getResponse()->getContent()) {
+        if ('VERIFIED' === $client->getResponse()->getContent()) {
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
@@ -295,7 +295,7 @@ class Paypal extends BasePaypal
      */
     public function isBasketValid(BasketInterface $basket)
     {
-        if (0 == $basket->countBasketElements()) {
+        if (0 === $basket->countBasketElements()) {
             return false;
         }
 

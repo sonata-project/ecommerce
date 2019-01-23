@@ -34,6 +34,6 @@ class CurrencyPriceCalculatorTest extends TestCase
 
         $product->expects($this->once())->method('getPrice')->will($this->returnValue(42.0));
 
-        $this->assertEquals(42.0, $currencyPriceCalculator->getPrice($product, $currency));
+        $this->assertSame(42.0, $currencyPriceCalculator->getPrice($product, $currency));
     }
 }
