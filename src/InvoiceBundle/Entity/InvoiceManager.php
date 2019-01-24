@@ -28,11 +28,11 @@ class InvoiceManager extends BaseEntityManager implements InvoiceManagerInterfac
 
         $fields = $this->getEntityManager()->getClassMetadata($this->class)->getFieldNames();
         foreach ($sort as $field => $direction) {
-            if (!in_array($field, $fields)) {
+            if (!\in_array($field, $fields)) {
                 throw new \RuntimeException(sprintf("Invalid sort field '%s' in '%s' class", $field, $this->class));
             }
         }
-        if (0 == count($sort)) {
+        if (0 == \count($sort)) {
             $sort = ['reference' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {

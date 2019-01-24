@@ -82,7 +82,7 @@ class BasketResizeFormListener implements EventSubscriberInterface
             return;
         }
 
-        if (!$basketElements instanceof \ArrayAccess && !is_array($basketElements)) {
+        if (!$basketElements instanceof \ArrayAccess && !\is_array($basketElements)) {
             throw new UnexpectedTypeException($basketElements, 'array or \ArrayAccess');
         }
 

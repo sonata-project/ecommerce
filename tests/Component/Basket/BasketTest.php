@@ -335,9 +335,9 @@ class BasketTest extends TestCase
         }
 
         $basket->reset();
-        $this->assertTrue(0 == count($basket->getBasketElements()), '::reset() remove all elements');
+        $this->assertTrue(0 == \count($basket->getBasketElements()), '::reset() remove all elements');
         $basket->unserialize($data);
-        $this->assertTrue(1 == count($basket->getBasketElements()), '::unserialize() restore elements');
+        $this->assertTrue(1 == \count($basket->getBasketElements()), '::unserialize() restore elements');
     }
 
     public function testGetElementRaisesException(): void

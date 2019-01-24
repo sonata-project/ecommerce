@@ -146,7 +146,7 @@ class BasketResizeFormListenerTest extends TestCase
 
     protected function getBasketElements($elements = [])
     {
-        if (!is_array($elements)) {
+        if (!\is_array($elements)) {
             return $elements;
         }
 

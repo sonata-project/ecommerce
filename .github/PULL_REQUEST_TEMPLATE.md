@@ -1,4 +1,7 @@
 <!-- THE PR TEMPLATE IS NOT AN OPTION. DO NOT DELETE IT, MAKE SURE YOU READ AND EDIT IT! -->
+## Subject
+
+<!-- Describe your Pull Request content here -->
 
 <!--
     Show us you choose the right branch.
@@ -21,6 +24,14 @@ Closes #{put_issue_number_here}
 <!-- MANDATORY
     Fill the changelog part inside the code block.
     Follow this schema: http://keepachangelog.com/
+    This will end up on https://github.com/sonata-project/ecommerce/releases,
+    please keep it short and clear and to the point
+-->
+
+<!-- 
+    If you are updating something that doesn't require
+    a release, you can delete the whole Changelog section.
+    (eg. update to docs, tests)
 -->
 
 <!-- REMOVE EMPTY SECTIONS -->
@@ -39,18 +50,14 @@ Closes #{put_issue_number_here}
 ### Security
 ```
 
-## To do
-
 <!--
-    If this is a work in progress, COMPLETE and ADD needed tasks.
+    If this is a work in progress, uncomment this section.
     You can add as many tasks as you want.
-    If some are not relevant, just REMOVE them.
+    If some are not relevant, just remove them.
+    
+    ## To do
+    
+    - [ ] Update the tests
+    - [ ] Update the documentation
+    - [ ] Add an upgrade note
 -->
-
-- [ ] Update the tests
-- [ ] Update the documentation
-- [ ] Add an upgrade note
-
-## Subject
-
-<!-- Describe your Pull Request content here -->

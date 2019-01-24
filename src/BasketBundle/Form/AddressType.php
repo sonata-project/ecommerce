@@ -57,7 +57,7 @@ class AddressType extends AbstractType
     {
         $addresses = $options['addresses'];
 
-        if (count($addresses) > 0) {
+        if (\count($addresses) > 0) {
             $defaultAddress = current($addresses);
 
             foreach ($addresses as $address) {
@@ -86,7 +86,7 @@ class AddressType extends AbstractType
             ]);
         }
 
-        $builder->add('name', null, ['required' => !count($addresses)]);
+        $builder->add('name', null, ['required' => !\count($addresses)]);
 
         if (isset($options['types'])) {
             $typeOptions = [
@@ -103,21 +103,21 @@ class AddressType extends AbstractType
         }
 
         $builder
-            ->add('firstname', null, ['required' => !count($addresses)])
-            ->add('lastname', null, ['required' => !count($addresses)])
-            ->add('address1', null, ['required' => !count($addresses)])
+            ->add('firstname', null, ['required' => !\count($addresses)])
+            ->add('lastname', null, ['required' => !\count($addresses)])
+            ->add('address1', null, ['required' => !\count($addresses)])
             ->add('address2')
             ->add('address3')
-            ->add('postcode', null, ['required' => !count($addresses)])
-            ->add('city', null, ['required' => !count($addresses)])
+            ->add('postcode', null, ['required' => !\count($addresses)])
+            ->add('city', null, ['required' => !\count($addresses)])
             ->add('phone')
         ;
 
         $countries = $this->getBasketDeliveryCountries();
 
-        $countryOptions = ['required' => !count($addresses)];
+        $countryOptions = ['required' => !\count($addresses)];
 
-        if (count($countries) > 0) {
+        if (\count($countries) > 0) {
             // choice_as_value options is not needed in SF 3.0+
             if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
                 $countryOptions['choices_as_values'] = true;

@@ -69,11 +69,11 @@ class BasketTransformer extends BaseTransformer
      * transform a basket into order.
      *
      *
-     * @param null|\Sonata\Component\Basket\BasketInterface $basket
+     * @param \Sonata\Component\Basket\BasketInterface|null $basket
      *
      * @throws \RuntimeException
      *
-     * @return null|\Sonata\Component\Order\OrderInterface
+     * @return \Sonata\Component\Order\OrderInterface|null
      */
     public function transformIntoOrder(BasketInterface $basket)
     {

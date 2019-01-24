@@ -134,7 +134,7 @@ interface ProductProviderInterface
     public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = []);
 
     /**
-     * @param null|ProductInterface $product
+     * @param ProductInterface|null $product
      * @param array                 $options
      *
      * @return BasketElementInterface
@@ -168,7 +168,7 @@ interface ProductProviderInterface
 
     /**
      * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param null|\Sonata\Component\Product\ProductInterface $product
+     * @param \Sonata\Component\Product\ProductInterface|null $product
      * @param array                                           $options
      */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []);
@@ -277,7 +277,7 @@ interface ProductProviderInterface
      *
      * @param ProductInterface $product
      *
-     * @return null|ProductInterface
+     * @return ProductInterface|null
      */
     public function getCheapestEnabledVariation(ProductInterface $product);
 

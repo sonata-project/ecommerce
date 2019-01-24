@@ -53,15 +53,13 @@ class CheckPaymentTest extends TestCase
         $basket = $this->createMock(Basket::class);
         $product = $this->createMock(ProductInterface::class);
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'getCallback']));
         $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
@@ -81,9 +79,7 @@ class CheckPaymentTest extends TestCase
 
     public function testSendbank(): void
     {
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new CheckPaymentTest_Order();
         $order->setCreatedAt($date);
@@ -94,7 +90,7 @@ class CheckPaymentTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
 
         $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->once())->method('sendRequest')->will($this->returnCallback(function ($request, $response): void {
+        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response): void {
             $response->setContent('ok');
         }));
 
@@ -133,7 +129,7 @@ class CheckPaymentTest extends TestCase
         $this->assertEquals('ok', $response->getContent(), '::getContent returns ok');
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         if ('reference' == $name) {
             return '0001231';
@@ -144,7 +140,7 @@ class CheckPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return '0df8a3065a433ffbd907b2e6450199fb25e7902f';
+            return 'a51e9421db1c028e2ccf47f8999dc902ea6df3ac';
         }
     }
 }

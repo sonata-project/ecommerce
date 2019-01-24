@@ -173,7 +173,7 @@ class ProductMenuBuilder
                 $fullOptions
             );
 
-            if (count($category->getChildren()) > 0) {
+            if (\count($category->getChildren()) > 0) {
                 if (null === $category->getParent()) {
                     $this->fillMenu($menu, $category->getChildren(), $options, $currentUri);
                 } else {

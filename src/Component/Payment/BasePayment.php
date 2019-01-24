@@ -233,7 +233,7 @@ abstract class BasePayment implements PaymentInterface
         }
 
         foreach (explode("\n", (string) $transaction->getInformation()) as $message) {
-            call_user_func([$this->logger, $method], $message);
+            \call_user_func([$this->logger, $method], $message);
         }
     }
 }

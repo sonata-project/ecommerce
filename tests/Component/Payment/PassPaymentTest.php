@@ -45,7 +45,7 @@ class PassPaymentTest extends TestCase
         $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
 
         $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->once())->method('sendRequest')->will($this->returnCallback(function ($request, $response): void {
+        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response): void {
             $response->setContent('ok');
         }));
 
@@ -57,12 +57,10 @@ class PassPaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'getCallback']));
         $transaction->expects($this->once())->method('setTransactionId');
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new PassPaymentTest_Order();
         $order->setCreatedAt($date);
@@ -93,7 +91,7 @@ class PassPaymentTest extends TestCase
         $payment->applyTransactionId($transaction);
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         if ('reference' == $name) {
             return '0001231';
@@ -104,7 +102,7 @@ class PassPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return '0df8a3065a433ffbd907b2e6450199fb25e7902f';
+            return 'a51e9421db1c028e2ccf47f8999dc902ea6df3ac';
         }
     }
 }

@@ -12,6 +12,7 @@ language: php
 php:
   - '7.1'
   - '7.2'
+  - '7.3'
   - nightly
 
 sudo: false
@@ -30,24 +31,25 @@ cache:
 env:
   global:
     - PATH="$HOME/.local/bin:$PATH"
-    - SYMFONY_DEPRECATIONS_HELPER=weak
+    - SYMFONY_DEPRECATIONS_HELPER=weak_vendors
     - TARGET=test
     - UPSTREAM_URL=https://github.com/sonata-project/ecommerce.git
+    - PHPUNIT_VERSION=7
 
 matrix:
   fast_finish: true
   include:
-    - php: '7.2'
+    - php: '7.3'
       env: TARGET=docs
-    - php: '7.2'
+    - php: '7.3'
       env: TARGET=lint
     - php: '7.1'
       env: COMPOSER_FLAGS="--prefer-lowest"
-    - php: '7.2'
+    - php: '7.3'
       env: SYMFONY=3.4.*
-    - php: '7.2'
+    - php: '7.3'
       env: SYMFONY='dev-master as 3.4.x-dev'
-    - php: '7.2'
+    - php: '7.3'
       env: SYMFONY_DEPRECATIONS_HELPER=0
   allow_failures:
     - php: nightly

@@ -33,7 +33,7 @@ class Pool
     public function addMethod(PaymentInterface $instance): void
     {
         if (null === $instance->getCode()) {
-            throw new \RuntimeException(sprintf('Payment handler of class %s must return a code on getCode method. Please refer to the documentation (https://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)', get_class($instance)));
+            throw new \RuntimeException(sprintf('Payment handler of class %s must return a code on getCode method. Please refer to the documentation (https://sonata-project.org/bundles/ecommerce/master/doc/reference/bundles/payment/index.html)', \get_class($instance)));
         }
 
         $this->methods[$instance->getCode()] = $instance;

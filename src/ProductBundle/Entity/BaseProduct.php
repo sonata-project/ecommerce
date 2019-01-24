@@ -525,7 +525,7 @@ abstract class BaseProduct implements ProductInterface
 
     public function hasVariations()
     {
-        return count($this->variations) > 0;
+        return \count($this->variations) > 0;
     }
 
     public function setImage(MediaInterface $image = null): void

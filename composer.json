@@ -19,12 +19,12 @@
         "cocur/slugify": "^2.5 || ^3.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
-        "kriswallsmith/buzz": "^0.15 || ^0.16",
+        "kriswallsmith/buzz": "^0.15 || 0.16.0",
         "sonata-project/admin-bundle": "^3.29",
         "sonata-project/block-bundle": "^3.8",
         "sonata-project/classification-bundle": "^3.3",
         "sonata-project/comment-bundle": "^3.1",
-        "sonata-project/core-bundle": "^3.7",
+        "sonata-project/core-bundle": "^3.12.0",
         "sonata-project/datagrid-bundle": "^2.3",
         "sonata-project/doctrine-orm-admin-bundle": "^3.2",
         "sonata-project/formatter-bundle": "^3.4",
@@ -63,7 +63,7 @@
         "friendsofsymfony/rest-bundle": "^2.2",
         "jms/serializer-bundle": "^1.0 || ^2.0",
         "nelmio/api-doc-bundle": "^2.13",
-        "symfony/phpunit-bridge": "^4.0"
+        "symfony/phpunit-bridge": "^4.2"
     },
     "suggest": {
         "friendsofsymfony/rest-bundle": "For using the public API methods.",

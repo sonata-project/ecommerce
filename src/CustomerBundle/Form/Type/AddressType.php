@@ -74,7 +74,7 @@ class AddressType extends AbstractType
             $countries = $this->getBasketDeliveryCountries();
         }
 
-        if (count($countries) > 0) {
+        if (\count($countries) > 0) {
             // choice_as_value options is not needed in SF 3.0+
             if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
                 $countryOptions['choices_as_values'] = true;
@@ -104,7 +104,7 @@ class AddressType extends AbstractType
     {
         $resolver->setDefaults([
             'context' => 'default',
-            'types' => call_user_func([$this->class, $this->getter]),
+            'types' => \call_user_func([$this->class, $this->getter]),
         ]);
     }
 

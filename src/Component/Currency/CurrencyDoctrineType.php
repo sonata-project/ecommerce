@@ -41,7 +41,7 @@ class CurrencyDoctrineType extends Type
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (!$value instanceof CurrencyInterface) {
-            throw new \RuntimeException(sprintf("'currency' type only handles values of type Sonata\Component\Currency\CurrencyInterface ; value of type %s given", is_object($value) ? get_class($value) : gettype($value)));
+            throw new \RuntimeException(sprintf("'currency' type only handles values of type Sonata\Component\Currency\CurrencyInterface ; value of type %s given", \is_object($value) ? \get_class($value) : \gettype($value)));
         }
 
         return $value->getLabel();

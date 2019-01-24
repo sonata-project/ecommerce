@@ -19,8 +19,8 @@ use Sonata\Component\Customer\AddressInterface;
 interface ServiceDeliverySelectorInterface
 {
     /**
-     * @param null|\Sonata\Component\Basket\BasketInterface    $basket
-     * @param null|\Sonata\Component\Customer\AddressInterface $deliveryAddress
+     * @param \Sonata\Component\Basket\BasketInterface|null    $basket
+     * @param \Sonata\Component\Customer\AddressInterface|null $deliveryAddress
      */
     public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
 }

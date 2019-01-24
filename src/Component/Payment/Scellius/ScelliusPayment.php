@@ -481,7 +481,7 @@ class ScelliusPayment extends BasePayment
         //    - code=-1 : La fonction retourne un message d'erreur dans la variable error
         $data = explode('!', $process->getOutput());
 
-        if (5 != count($data)) {
+        if (5 != \count($data)) {
             throw new \RuntimeException('Invalid data count');
         }
 
@@ -554,7 +554,7 @@ class ScelliusPayment extends BasePayment
         //  - code = -1 : La fonction retourne un message d'erreur dans la variable error
         $data = explode('!', $process->getOutput());
 
-        if (33 != count($data)) {
+        if (33 != \count($data)) {
             throw new \RuntimeException('Invalid data count');
         }
 

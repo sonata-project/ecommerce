@@ -273,7 +273,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function hasVariations(ProductInterface $product)
     {
-        return 0 < count($product->getVariations());
+        return 0 < \count($product->getVariations());
     }
 
     public function hasEnabledVariations(ProductInterface $product)
@@ -348,7 +348,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $mVariation) {
             foreach ($fields as $field) {
                 $variationValue = $accessor->getValue($mVariation, $field);
-                if (!array_key_exists($field, $choices) || !in_array($variationValue, $choices[$field])) {
+                if (!array_key_exists($field, $choices) || !\in_array($variationValue, $choices[$field])) {
                     $choices = array_merge_recursive($choices, [$field => [$variationValue]]);
                 }
             }
@@ -368,7 +368,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         foreach ($this->getEnabledVariations($product) as $variation) {
             foreach ($choices as $choice => $value) {
-                if (!in_array($choice, $this->getVariationFields())) {
+                if (!\in_array($choice, $this->getVariationFields())) {
                     throw new \RuntimeException("The field '".$choice."' is not among the variation fields");
                 }
 
@@ -388,7 +388,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function isVariateBy($name)
     {
-        return in_array($name, $this->variationFields);
+        return \in_array($name, $this->variationFields);
     }
 
     /**
@@ -396,7 +396,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function hasVariationFields()
     {
-        return count($this->getVariationFields()) > 0;
+        return \count($this->getVariationFields()) > 0;
     }
 
     /**
@@ -435,7 +435,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('stock', IntegerType::class)
         ;
 
-        if (!$isVariation || in_array('description', $this->variationFields)) {
+        if (!$isVariation || \in_array('description', $this->variationFields)) {
             $formMapper->add('description', FormatterType::class, [
                 'source_field' => 'rawDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
@@ -445,7 +445,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ]);
         }
 
-        if (!$isVariation || in_array('short_description', $this->variationFields)) {
+        if (!$isVariation || \in_array('short_description', $this->variationFields)) {
             $formMapper->add('shortDescription', FormatterType::class, [
                 'source_field' => 'rawShortDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
@@ -457,10 +457,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $formMapper->end();
 
-        if (!$isVariation || in_array('image', $this->variationFields) || in_array('gallery', $this->variationFields)) {
+        if (!$isVariation || \in_array('image', $this->variationFields) || \in_array('gallery', $this->variationFields)) {
             $formMapper->with('Media');
 
-            if (!$isVariation || in_array('image', $this->variationFields)) {
+            if (!$isVariation || \in_array('image', $this->variationFields)) {
                 $formMapper->add('image', ModelListType::class, [
                     'required' => false,
                 ], [
@@ -472,7 +472,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 ]);
             }
 
-            if (!$isVariation || in_array('gallery', $this->variationFields)) {
+            if (!$isVariation || \in_array('gallery', $this->variationFields)) {
                 $formMapper->add('gallery', ModelListType::class, [
                     'required' => false,
                 ], [
@@ -578,7 +578,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (in_array('deliveries', $this->getVariationFields())) {
+        if (\in_array('deliveries', $this->getVariationFields())) {
             return;
         }
 
@@ -611,7 +611,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (in_array('productCategories', $this->getVariationFields())) {
+        if (\in_array('productCategories', $this->getVariationFields())) {
             return;
         }
 
@@ -643,7 +643,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (in_array('productCollections', $this->getVariationFields())) {
+        if (\in_array('productCollections', $this->getVariationFields())) {
             return;
         }
 
@@ -675,7 +675,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (in_array('packages', $this->getVariationFields())) {
+        if (\in_array('packages', $this->getVariationFields())) {
             return;
         }
 
@@ -849,7 +849,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $basketElementOptions = $product->getOptions();
         // add the default product options to the basket element
-        if (is_array($basketElementOptions) && !empty($basketElementOptions)) {
+        if (\is_array($basketElementOptions) && !empty($basketElementOptions)) {
             foreach ($basketElementOptions as $option => $value) {
                 $basketElement->setOption($option, $value);
             }
@@ -936,7 +936,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $vat = $event->getVat();
         $quantity = $event->getQuantity();
 
-        if (!is_int($quantity) || $quantity < 1) {
+        if (!\is_int($quantity) || $quantity < 1) {
             throw new InvalidParameterException('Expected integer >= 1 for quantity, '.$quantity.' given.');
         }
 
@@ -992,7 +992,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->setMaxResults(1)
             ->execute();
 
-        return count($results) > 0 ? $results[0] : false;
+        return \count($results) > 0 ? $results[0] : false;
     }
 
     public function getStockAvailable(ProductInterface $product)
@@ -1067,12 +1067,12 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     protected function getMergedFields(array $fields)
     {
-        if (0 === count($fields)) {
+        if (0 === \count($fields)) {
             // If we didn't specify the fields (filtered), we get all variation fields possible values
             $fields = $this->getVariationFields();
         } else {
             foreach ($fields as $field) {
-                if (!in_array($field, $this->getVariationFields())) {
+                if (!\in_array($field, $this->getVariationFields())) {
                     throw new \RuntimeException("The field '".$field."' is not among the variation fields");
                 }
             }

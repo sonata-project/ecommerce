@@ -153,7 +153,7 @@ class BaseProductServiceTest extends TestCase
         );
         $provider->setBasketElementManager($basketElementManager);
 
-        $provider->setOrderElementClassName(get_class(new OrderElement()));
+        $provider->setOrderElementClassName(\get_class(new OrderElement()));
 
         return $provider;
     }

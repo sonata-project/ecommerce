@@ -684,12 +684,12 @@ abstract class BaseOrder implements OrderInterface
 
     public function isPending()
     {
-        return in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
     }
 
     public function isOpen()
     {
-        return in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
     }
 
     public function isCancellable()
@@ -699,7 +699,7 @@ abstract class BaseOrder implements OrderInterface
 
     public function isError()
     {
-        return in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
     }
 
     public function setCreatedAt(\DateTime $createdAt = null): void

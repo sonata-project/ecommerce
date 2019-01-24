@@ -73,9 +73,7 @@ class DebugPaymentTest extends TestCase
      */
     public function getOrder()
     {
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new DebugPaymentTest_Order();
         $order->setCreatedAt($date);

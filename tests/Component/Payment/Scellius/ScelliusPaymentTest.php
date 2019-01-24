@@ -74,9 +74,7 @@ class ScelliusPaymentTest extends TestCase
         $basket = $this->createMock(Basket::class);
         $product = $this->createMock(ProductInterface::class);
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new ScelliusPaymentTest_Order();
         $order->setCreatedAt($date);
@@ -85,7 +83,7 @@ class ScelliusPaymentTest extends TestCase
         $order->setLocale('es');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'getCallback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
@@ -235,9 +233,7 @@ class ScelliusPaymentTest extends TestCase
 
         $generator = $this->createMock(ScelliusTransactionGeneratorInterface::class);
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new ScelliusPaymentTest_Order();
         $order->setCreatedAt($date);
@@ -264,9 +260,7 @@ class ScelliusPaymentTest extends TestCase
 
         $router = $this->createMock(RouterInterface::class);
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $customer = $this->createMock(CustomerInterface::class);
         $customer->expects($this->once())->method('getId')->will($this->returnValue(42));
@@ -332,7 +326,7 @@ class ScelliusPaymentTest extends TestCase
         return new Response();
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         if ('reference' == $name) {
             return '0001231';
@@ -343,7 +337,7 @@ class ScelliusPaymentTest extends TestCase
         }
 
         if ('check' == $name) {
-            return 'c7361062d415c378524cd82a61540bd99d54dd48';
+            return '0d2ccfb54a1ffec609919fa4fbf8603614019997';
         }
     }
 }

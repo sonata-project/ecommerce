@@ -69,9 +69,7 @@ class OgonePaymentTest extends TestCase
         $basket = $this->createMock(Basket::class);
         $product = $this->createMock(ProductInterface::class);
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new OgonePaymentTest_Order();
         $order->setCreatedAt($date);
@@ -80,7 +78,7 @@ class OgonePaymentTest extends TestCase
         $order->setLocale('es');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'callback']));
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'getCallback']));
         //        $transaction->expects($this->once())->method('setTransactionId');
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
@@ -105,9 +103,7 @@ class OgonePaymentTest extends TestCase
 
         $router = $this->createMock(RouterInterface::class);
 
-        $date = new \DateTime();
-        $date->setTimeStamp(strtotime('11/30/1981'));
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $customer = $this->createMock(CustomerInterface::class);
 
@@ -191,7 +187,7 @@ class OgonePaymentTest extends TestCase
         return new Response();
     }
 
-    public static function callback($name)
+    public static function getCallback($name)
     {
         $params = [
                 'orderID' => 'FR',
@@ -225,7 +221,7 @@ class OgonePaymentTest extends TestCase
             return strtoupper(sha1($shasignStr));
         }
 
-        $params['check'] = 'c7361062d415c378524cd82a61540bd99d54dd48';
+        $params['check'] = '0d2ccfb54a1ffec609919fa4fbf8603614019997';
 
         return $params[$name];
     }

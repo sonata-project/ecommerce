@@ -133,7 +133,7 @@ class Basket implements \Serializable, BasketInterface
 
     public function isEmpty()
     {
-        return 0 == count($this->getBasketElements());
+        return 0 == \count($this->getBasketElements());
     }
 
     public function isValid($elementsOnly = false)
@@ -222,9 +222,9 @@ class Basket implements \Serializable, BasketInterface
         /*
         * We ask the product repository if it can be added to the basket
         */
-        $isAddableBehavior = call_user_func_array(
+        $isAddableBehavior = \call_user_func_array(
             [$this->getProductPool()->getProvider($product), 'isAddableToBasket'],
-            array_merge([$this], func_get_args())
+            array_merge([$this], \func_get_args())
         );
 
         return $isAddableBehavior;
@@ -267,7 +267,7 @@ class Basket implements \Serializable, BasketInterface
 
     public function countBasketElements()
     {
-        return count($this->basketElements);
+        return \count($this->basketElements);
     }
 
     public function hasBasketElements()
