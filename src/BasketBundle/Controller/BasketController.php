@@ -461,7 +461,7 @@ class BasketController extends Controller
 
         $violations = $this
             ->get('validator')
-            ->validate($basket, ['elements', 'delivery', 'payment']);
+            ->validate($basket, null, ['elements', 'delivery', 'payment']);
 
         if ($violations->count() > 0) {
             // basket not valid

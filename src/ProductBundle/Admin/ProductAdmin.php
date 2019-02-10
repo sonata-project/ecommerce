@@ -169,7 +169,7 @@ class ProductAdmin extends AbstractAdmin
     public function validate(ErrorElement $errorElement, $object): void
     {
         $errorElement
-            ->assertCallback(['validateOneMainCategory'])
+            ->assertCallback(['callback' => 'validateOneMainCategory'])
         ;
     }
 
