@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -134,7 +134,7 @@ class AddressType extends AbstractType
         $view->vars['addresses'] = $options['addresses'];
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver): void
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => $this->addressClass,
@@ -146,11 +146,6 @@ class AddressType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sonata_basket_address';
-    }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

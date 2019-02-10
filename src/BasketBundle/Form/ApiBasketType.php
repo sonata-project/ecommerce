@@ -16,7 +16,7 @@ namespace Sonata\BasketBundle\Form;
 use Sonata\Component\Currency\CurrencyFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
@@ -50,7 +50,7 @@ class ApiBasketType extends AbstractType
         );
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver): void
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => $this->class,
@@ -62,11 +62,6 @@ class ApiBasketType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sonata_basket_api_form_basket';
-    }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     public function getParent()

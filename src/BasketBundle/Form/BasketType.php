@@ -42,9 +42,4 @@ class BasketType extends AbstractType
     {
         return 'sonata_basket_basket';
     }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

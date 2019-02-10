@@ -20,6 +20,7 @@ use Sonata\BasketBundle\Form\ShippingType;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,7 +78,7 @@ class BasketController extends Controller
         $form = $this->createForm(BasketType::class, $this->get('sonata.basket'), ['validation_groups' => ['elements']]);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $basket = $form->getData();
             $basket->reset(false); // remove delivery and payment information
             $basket->clean(); // clean the basket
@@ -119,7 +120,7 @@ class BasketController extends Controller
         // retrieve the custom provider for the product type
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, [
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', FormType::class, null, [
             'data_class' => $this->container->getParameter('sonata.basket.basket_element.class'),
             'csrf_protection' => false,
         ]);
@@ -131,7 +132,7 @@ class BasketController extends Controller
         $form->handleRequest($request);
 
         // if the form is valid add the product to the basket
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $basket = $this->get('sonata.basket');
             $basketElement = $form->getData();
 
@@ -243,15 +244,13 @@ class BasketController extends Controller
             'validation_groups' => ['delivery'],
         ]);
 
-        if ('POST' == $request->getMethod()) {
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                // save the basket
-                $this->get('sonata.basket.factory')->save($basket);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // save the basket
+            $this->get('sonata.basket.factory')->save($basket);
 
-                return new RedirectResponse($this->generateUrl('sonata_basket_final'));
-            }
+            return new RedirectResponse($this->generateUrl('sonata_basket_final'));
         }
 
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', [], 'SonataBasketBundle'));
@@ -298,15 +297,13 @@ class BasketController extends Controller
 
         $template = 'SonataBasketBundle:Basket:delivery_step.html.twig';
 
-        if ('POST' == $request->getMethod()) {
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                // save the basket
-                $this->get('sonata.basket.factory')->save($form->getData());
+        if ($form->isSubmitted() && $form->isValid()) {
+            // save the basket
+            $this->get('sonata.basket.factory')->save($form->getData());
 
-                return new RedirectResponse($this->generateUrl('sonata_basket_payment_address'));
-            }
+            return new RedirectResponse($this->generateUrl('sonata_basket_payment_address'));
         }
 
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_delivery_title', [], 'SonataBasketBundle'));
@@ -355,30 +352,28 @@ class BasketController extends Controller
         $form = $this->createForm(AddressType::class, null, ['addresses' => $addresses]);
         $template = 'SonataBasketBundle:Basket:delivery_address_step.html.twig';
 
-        if ('POST' == $request->getMethod()) {
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
-                    $address = $form->get('addresses')->getData();
-                } else {
-                    $address = $form->getData();
-                    $address->setType(AddressInterface::TYPE_DELIVERY);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
+                $address = $form->get('addresses')->getData();
+            } else {
+                $address = $form->getData();
+                $address->setType(AddressInterface::TYPE_DELIVERY);
 
-                    $customer->addAddress($address);
+                $customer->addAddress($address);
 
-                    $this->get('sonata.customer.manager')->save($customer);
+                $this->get('sonata.customer.manager')->save($customer);
 
-                    $this->get('session')->getFlashBag()->add('sonata_customer_success', 'address_add_success');
-                }
-
-                $basket->setCustomer($customer);
-                $basket->setDeliveryAddress($address);
-                // save the basket
-                $this->get('sonata.basket.factory')->save($basket);
-
-                return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
+                $this->get('session')->getFlashBag()->add('sonata_customer_success', 'address_add_success');
             }
+
+            $basket->setCustomer($customer);
+            $basket->setDeliveryAddress($address);
+            // save the basket
+            $this->get('sonata.basket.factory')->save($basket);
+
+            return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
         }
 
         // Set URL to be redirected to once edited address
@@ -420,30 +415,28 @@ class BasketController extends Controller
         $form = $this->createForm(AddressType::class, null, ['addresses' => $addresses->toArray()]);
         $template = 'SonataBasketBundle:Basket:payment_address_step.html.twig';
 
-        if ('POST' == $request->getMethod()) {
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
-                    $address = $form->get('addresses')->getData();
-                } else {
-                    $address = $form->getData();
-                    $address->setType(AddressInterface::TYPE_BILLING);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->has('useSelected') && $form->get('useSelected')->isClicked()) {
+                $address = $form->get('addresses')->getData();
+            } else {
+                $address = $form->getData();
+                $address->setType(AddressInterface::TYPE_BILLING);
 
-                    $customer->addAddress($address);
+                $customer->addAddress($address);
 
-                    $this->get('sonata.customer.manager')->save($customer);
+                $this->get('sonata.customer.manager')->save($customer);
 
-                    $this->get('session')->getFlashBag()->add('sonata_customer_success', 'address_add_success');
-                }
-
-                $basket->setCustomer($customer);
-                $basket->setBillingAddress($address);
-                // save the basket
-                $this->get('sonata.basket.factory')->save($basket);
-
-                return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
+                $this->get('session')->getFlashBag()->add('sonata_customer_success', 'address_add_success');
             }
+
+            $basket->setCustomer($customer);
+            $basket->setBillingAddress($address);
+            // save the basket
+            $this->get('sonata.basket.factory')->save($basket);
+
+            return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
         }
 
         // Set URL to be redirected to once edited address

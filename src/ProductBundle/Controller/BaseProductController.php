@@ -17,6 +17,7 @@ use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,7 +42,7 @@ abstract class BaseProductController extends Controller
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, ['data_class' => $this->container->getParameter('sonata.basket.basket_element.class'), 'csrf_protection' => false]);
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', FormType::class, null, ['data_class' => $this->container->getParameter('sonata.basket.basket_element.class'), 'csrf_protection' => false]);
         $provider->defineAddBasketForm($product, $formBuilder);
 
         $form = $formBuilder->getForm()->createView();

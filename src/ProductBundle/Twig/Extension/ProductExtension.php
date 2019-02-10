@@ -17,6 +17,7 @@ use Sonata\Component\Currency\CurrencyInterface;
 use Sonata\Component\Product\Pool as ProductPool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductProviderInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 
@@ -168,7 +169,7 @@ class ProductExtension extends \Twig_Extension
      */
     public function getFormAddBasket(ProductInterface $product)
     {
-        $formBuilder = $this->formFactory->createNamedBuilder('add_basket', 'form', null, [
+        $formBuilder = $this->formFactory->createNamedBuilder('add_basket', FormType::class, null, [
             'data_class' => $this->basketElementClass,
             'csrf_protection' => false,
         ]);

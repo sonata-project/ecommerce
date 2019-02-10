@@ -19,7 +19,6 @@ use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Sonata\Component\Form\Transformer\DeliveryMethodTransformer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -61,7 +60,7 @@ class ShippingType extends AbstractType
 
         $choices = [];
         foreach ($methods as $method) {
-            $choices[$method->getCode()] = $method->getName();
+            $choices[$method->getName()] = $method->getCode();
         }
 
         reset($methods);
@@ -71,7 +70,7 @@ class ShippingType extends AbstractType
 
         $sub = $builder->create('deliveryMethod', ChoiceType::class, [
             'expanded' => true,
-            'choice_list' => new SimpleChoiceList($choices),
+            'choices' => $choices,
         ]);
 
         $sub->addViewTransformer(new DeliveryMethodTransformer($this->deliveryPool), true);
@@ -82,10 +81,5 @@ class ShippingType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sonata_basket_shipping';
-    }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

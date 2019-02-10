@@ -384,7 +384,7 @@ class BasketController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $basket = $form->getData();
             if ($basket->getCustomerId()) {
                 $this->checkExistingCustomerBasket($basket->getCustomerId());
@@ -441,7 +441,7 @@ class BasketController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $basketElement = $form->getData();
 
             if ($elementId) {

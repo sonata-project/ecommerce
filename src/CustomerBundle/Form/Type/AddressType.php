@@ -18,9 +18,8 @@ use Sonata\Component\Basket\BasketInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Vincent Composieux <composieux@ekino.com>
@@ -75,10 +74,6 @@ class AddressType extends AbstractType
         }
 
         if (\count($countries) > 0) {
-            // choice_as_value options is not needed in SF 3.0+
-            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
-                $countryOptions['choices_as_values'] = true;
-            }
             $countryOptions['choices'] = array_flip($countries);
         }
 
@@ -95,12 +90,7 @@ class AddressType extends AbstractType
         return $this->name;
     }
 
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver): void
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'context' => 'default',

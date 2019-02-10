@@ -238,7 +238,7 @@ class AddressController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $address = $form->getData();
             $this->addressManager->save($address);
 

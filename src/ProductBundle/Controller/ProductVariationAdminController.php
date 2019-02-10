@@ -60,33 +60,31 @@ class ProductVariationAdminController extends Controller
         // product is the main product object, used to create a set of variation
         $product = $this->admin->getParent()->getSubject();
 
-        if ($request->isMethod('POST')) {
-            $form->submit($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                $number = $form->get('number')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $number = $form->get('number')->getData();
 
-                $manager = $this->getProductManager();
-                $productProvider = $this->getProductPool()->getProvider($product);
+            $manager = $this->getProductManager();
+            $productProvider = $this->getProductPool()->getProvider($product);
 
-                for ($i = 1; $i <= $number; ++$i) {
-                    try {
-                        $variation = $productProvider->createVariation($product);
+            for ($i = 1; $i <= $number; ++$i) {
+                try {
+                    $variation = $productProvider->createVariation($product);
 
-                        $manager->persist($variation);
-                    } catch (\Exception $e) {
-                        $this->addFlash('sonata_flash_error', 'flash_create_variation_error');
+                    $manager->persist($variation);
+                } catch (\Exception $e) {
+                    $this->addFlash('sonata_flash_error', 'flash_create_variation_error');
 
-                        return new RedirectResponse($this->admin->generateUrl('create'));
-                    }
+                    return new RedirectResponse($this->admin->generateUrl('create'));
                 }
-
-                $manager->flush();
-
-                $this->addFlash('sonata_flash_success', $this->getTranslator()->trans('flash_create_variation_success', [], 'SonataProductBundle'));
-
-                return new RedirectResponse($this->admin->generateUrl('list'));
             }
+
+            $manager->flush();
+
+            $this->addFlash('sonata_flash_success', $this->getTranslator()->trans('flash_create_variation_success', [], 'SonataProductBundle'));
+
+            return new RedirectResponse($this->admin->generateUrl('list'));
         }
 
         return $this->render('SonataProductBundle:ProductAdmin:create_variation.html.twig', [
