@@ -161,22 +161,20 @@ class CustomerController extends Controller
 
         $template = 'SonataCustomerBundle:Addresses:new.html.twig';
 
-        if ('POST' == $request->getMethod()) {
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isValid()) {
-                $address = $form->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $address = $form->getData();
 
-                $customer->addAddress($address);
+            $customer->addAddress($address);
 
-                $this->getCustomerManager()->save($customer);
+            $this->getCustomerManager()->save($customer);
 
-                $this->get('session')->getFlashBag()->add('sonata_customer_success', $id ? 'address_edit_success' : 'address_add_success');
+            $this->get('session')->getFlashBag()->add('sonata_customer_success', $id ? 'address_edit_success' : 'address_add_success');
 
-                $url = $this->get('session')->get('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
+            $url = $this->get('session')->get('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
 
-                return new RedirectResponse($url);
-            }
+            return new RedirectResponse($url);
         }
 
         return $this->render($template, [

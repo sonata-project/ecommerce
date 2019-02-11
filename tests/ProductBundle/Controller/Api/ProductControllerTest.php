@@ -148,6 +148,7 @@ class ProductControllerTest extends TestCase
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
+        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($product));
 
@@ -175,6 +176,7 @@ class ProductControllerTest extends TestCase
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
+        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
@@ -202,6 +204,7 @@ class ProductControllerTest extends TestCase
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
+        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($product));
 
@@ -230,6 +233,7 @@ class ProductControllerTest extends TestCase
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
+        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
 
         $formFactory = $this->createMock(FormFactoryInterface::class);

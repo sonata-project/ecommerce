@@ -20,7 +20,6 @@ use Sonata\Component\Form\Transformer\PaymentMethodTransformer;
 use Sonata\Component\Payment\PaymentSelectorInterface;
 use Sonata\Component\Payment\Pool as PaymentPool;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -82,7 +81,7 @@ class PaymentType extends AbstractType
 
         $choices = [];
         foreach ($methods as $method) {
-            $choices[$method->getCode()] = $method->getName();
+            $choices[$method->getName()] = $method->getCode();
         }
 
         reset($methods);
@@ -92,7 +91,7 @@ class PaymentType extends AbstractType
 
         $sub = $builder->create('paymentMethod', ChoiceType::class, [
             'expanded' => true,
-            'choice_list' => new SimpleChoiceList($choices),
+            'choices' => $choices,
         ]);
 
         $sub->addViewTransformer(new PaymentMethodTransformer($this->paymentPool), true);
@@ -103,10 +102,5 @@ class PaymentType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sonata_basket_payment';
-    }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }

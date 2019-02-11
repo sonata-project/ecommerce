@@ -301,7 +301,7 @@ class CustomerController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $address = $form->getData();
             $address->setCustomer($customer);
 
@@ -331,7 +331,7 @@ class CustomerController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $customer = $form->getData();
             $this->customerManager->save($customer);
 

@@ -16,7 +16,7 @@ namespace Sonata\ProductBundle\Form\Type;
 use Sonata\Component\Product\Pool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
@@ -44,7 +44,7 @@ class ApiProductType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver): void
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => null,
@@ -56,11 +56,6 @@ class ApiProductType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sonata_product_api_form_product';
-    }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     public function getParent()
