@@ -436,7 +436,7 @@ class Basket implements \Serializable, BasketInterface
 
     public function hasProduct(ProductInterface $product)
     {
-        if (!array_key_exists($product->getId(), $this->positions)) {
+        if (!\array_key_exists($product->getId(), $this->positions)) {
             return false;
         }
 
@@ -631,7 +631,7 @@ class Basket implements \Serializable, BasketInterface
 
     public function getOption($name, $default = null)
     {
-        if (!array_key_exists($name, $this->options)) {
+        if (!\array_key_exists($name, $this->options)) {
             return $default;
         }
 

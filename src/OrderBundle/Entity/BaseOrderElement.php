@@ -508,7 +508,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     {
         $values = $this->getRawProduct();
 
-        if (array_key_exists($name, $values)) {
+        if (\array_key_exists($name, $values)) {
             return $values[$name];
         }
 

@@ -273,23 +273,23 @@ abstract class BaseDelivery implements DeliveryInterface
 
     public function fromArray($array): void
     {
-        if (array_key_exists('code', $array)) {
+        if (\array_key_exists('code', $array)) {
             $this->code = $array['code'];
         }
 
-        if (array_key_exists('perItem', $array)) {
+        if (\array_key_exists('perItem', $array)) {
             $this->perItem = $array['perItem'];
         }
 
-        if (array_key_exists('countryCode', $array)) {
+        if (\array_key_exists('countryCode', $array)) {
             $this->countryCode = $array['countryCode'];
         }
 
-        if (array_key_exists('zone', $array)) {
+        if (\array_key_exists('zone', $array)) {
             $this->zone = $array['zone'];
         }
 
-        if (array_key_exists('enabled', $array)) {
+        if (\array_key_exists('enabled', $array)) {
             $this->enabled = $array['enabled'];
         }
     }

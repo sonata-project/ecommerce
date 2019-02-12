@@ -70,7 +70,7 @@ class DebugPayment extends PassPayment
     {
         $parameters = $transaction->getParameters();
 
-        if (!array_key_exists('action', $parameters)) {
+        if (!\array_key_exists('action', $parameters)) {
             throw new \RuntimeException('"action" parameter is missing from Transaction.');
         }
 
