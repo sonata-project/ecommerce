@@ -116,7 +116,7 @@ abstract class BasePayment implements PaymentInterface
      */
     public function hasOption($name)
     {
-        return array_key_exists($name, $this->options);
+        return \array_key_exists($name, $this->options);
     }
 
     public function encodeString($value)

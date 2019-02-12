@@ -76,7 +76,7 @@ class SonataDeliveryExtension extends Extension
         $configured = [];
 
         foreach ($config['services'] as $id => $settings) {
-            if (array_key_exists($id, $internal)) {
+            if (\array_key_exists($id, $internal)) {
                 $id = $internal[$id];
 
                 $definition = $container->getDefinition($id);
@@ -90,7 +90,7 @@ class SonataDeliveryExtension extends Extension
         }
 
         foreach ($config['methods'] as $code => $id) {
-            if (array_key_exists($code, $configured)) {
+            if (\array_key_exists($code, $configured)) {
                 // Internal service
                 $id = $configured[$code];
             }

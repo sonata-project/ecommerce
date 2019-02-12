@@ -92,7 +92,7 @@ class SonataPaymentExtension extends Extension
 
         // define the payment method
         foreach ($config['services'] as $id => $settings) {
-            if (array_key_exists($id, $internal)) {
+            if (\array_key_exists($id, $internal)) {
                 $id = $internal[$id];
 
                 $name = $settings['name'] ?? 'n/a';
@@ -119,7 +119,7 @@ class SonataPaymentExtension extends Extension
         }
 
         foreach ($config['methods'] as $code => $id) {
-            if (array_key_exists($code, $configured)) {
+            if (\array_key_exists($code, $configured)) {
                 // Internal service
                 $id = $configured[$code];
             }
