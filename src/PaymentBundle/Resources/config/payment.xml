@@ -40,7 +40,7 @@
         </service>
         <service id="sonata.payment.provider.scellius.none_generator" class="%sonata.payment.provider.scellius.none_generator.class%"/>
         <service id="sonata.payment.provider.scellius.order_generator" class="%sonata.payment.provider.scellius.order_generator.class%"/>
-        <service id="sonata.payment.method.debug" class="%sonata.payment.method.debug.class%">
+        <service id="sonata.payment.method.debug" class="%sonata.payment.method.debug.class%" public="true">
             <tag name="sonata.payment.method"/>
             <argument type="service" id="router"/>
             <argument/>
@@ -52,7 +52,7 @@
             <argument type="service" id="templating"/>
             <argument>%kernel.debug%</argument>
         </service>
-        <service id="sonata.payment.handler" class="%sonata.payment.handler.class%">
+        <service id="sonata.payment.handler" class="%sonata.payment.handler.class%" public="true">
             <argument type="service" id="sonata.order.manager"/>
             <argument type="service" id="sonata.payment.selector"/>
             <argument type="service" id="sonata.generator"/>
