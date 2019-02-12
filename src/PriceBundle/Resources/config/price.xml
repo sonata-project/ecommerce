@@ -13,7 +13,7 @@
             <argument type="service" id="doctrine"/>
         </service>
         <service id="sonata.price.currency.calculator" class="%sonata.price.currency.calculator.class%"/>
-        <service id="sonata.price.currency.detector" class="%sonata.price.currency.detector.class%">
+        <service id="sonata.price.currency.detector" class="%sonata.price.currency.detector.class%" public="true">
             <argument>%sonata.price.currency%</argument>
             <argument type="service" id="sonata.price.currency.manager"/>
         </service>

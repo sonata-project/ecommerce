@@ -16,7 +16,7 @@
             <argument>%sonata.product.package.class%</argument>
             <argument type="service" id="doctrine"/>
         </service>
-        <service id="sonata.product.set.manager" class="%sonata.product.set.manager.class%">
+        <service id="sonata.product.set.manager" class="%sonata.product.set.manager.class%" public="true">
             <argument>%sonata.product.product.class%</argument>
             <argument type="service" id="doctrine"/>
         </service>

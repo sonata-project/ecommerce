@@ -14,7 +14,7 @@
         <parameter key="sonata.product.seo.facebook.class">Sonata\ProductBundle\Seo\Services\Facebook</parameter>
     </parameters>
     <services>
-        <service id="sonata.product.pool" class="%sonata.product.pool.class%">
+        <service id="sonata.product.pool" class="%sonata.product.pool.class%" public="true">
 
         </service>
         <service id="sonata.product.subscriber.orm" class="%sonata.product.subscriber.orm.class%">
@@ -32,7 +32,7 @@
             <argument type="service" id="sonata.product.set.manager"/>
         </service>
         <!-- SEO -->
-        <service id="sonata.product.seo.twitter" class="%sonata.product.seo.twitter.class%">
+        <service id="sonata.product.seo.twitter" class="%sonata.product.seo.twitter.class%" public="true">
             <argument type="service" id="sonata.media.pool"/>
             <argument type="service" id="sonata.intl.templating.helper.number"/>
             <argument type="service" id="sonata.price.currency.detector"/>
@@ -41,7 +41,7 @@
             <argument>%sonata.product.seo.product.domain%</argument>
             <argument>%sonata.product.seo.product.media_format%</argument>
         </service>
-        <service id="sonata.product.seo.facebook" class="%sonata.product.seo.facebook.class%">
+        <service id="sonata.product.seo.facebook" class="%sonata.product.seo.facebook.class%" public="true">
             <argument type="service" id="router"/>
             <argument type="service" id="sonata.media.pool"/>
             <argument type="service" id="sonata.intl.templating.helper.number"/>
