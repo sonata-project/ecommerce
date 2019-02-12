@@ -166,6 +166,15 @@ class ProductAdmin extends AbstractAdmin
         return $product;
     }
 
+    public function getClass()
+    {
+        if ($this->hasRequest() && $code = $this->getProductType()) {
+            return $this->getProductPool()->getManager($code)->getClass();
+        }
+
+        return parent::getClass();
+    }
+
     public function validate(ErrorElement $errorElement, $object): void
     {
         $errorElement
