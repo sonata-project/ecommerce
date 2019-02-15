@@ -32,7 +32,7 @@
         "sonata-project/media-bundle": "^3.10",
         "sonata-project/notification-bundle": "^3.3",
         "sonata-project/seo-bundle": "^2.4",
-        "sonata-project/user-bundle": "^3.6 || ^4.0",
+        "sonata-project/user-bundle": "^4.0",
         "symfony/config": "^3.4 || ^4.0",
         "symfony/console": "^3.4 || ^4.0",
         "symfony/dependency-injection": "^3.4 || ^4.0",
