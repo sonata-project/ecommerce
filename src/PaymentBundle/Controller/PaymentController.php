@@ -45,7 +45,7 @@ class PaymentController extends Controller
             throw new UnauthorizedHttpException($ex->getMessage());
         }
 
-        return $this->render('SonataPaymentBundle:Payment:error.html.twig', [
+        return $this->render('@SonataPayment/Payment/error.html.twig', [
             'order' => $order,
         ]);
     }
@@ -67,12 +67,12 @@ class PaymentController extends Controller
         }
 
         if (!($order->isValidated() || $order->isPending())) {
-            return $this->render('SonataPaymentBundle:Payment:error.html.twig', [
+            return $this->render('@SonataPayment/Payment/error.html.twig', [
                 'order' => $order,
             ]);
         }
 
-        return $this->render('SonataPaymentBundle:Payment:confirmation.html.twig', [
+        return $this->render('@SonataPayment/Payment/confirmation.html.twig', [
             'order' => $order,
         ]);
     }
@@ -145,7 +145,7 @@ class PaymentController extends Controller
      */
     public function termsAction()
     {
-        return $this->render('SonataPaymentBundle:Payment:terms.html.twig');
+        return $this->render('@SonataPayment/Payment/terms.html.twig');
     }
 
     /**

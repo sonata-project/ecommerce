@@ -40,7 +40,7 @@ class OrderController extends Controller
 
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('order_index_title', [], 'SonataOrderBundle'));
 
-        return $this->render('SonataOrderBundle:Order:index.html.twig', [
+        return $this->render('@SonataOrder/Order/index.html.twig', [
             'orders' => $orders,
             'breadcrumb_context' => 'user_order',
         ]);
@@ -72,7 +72,7 @@ class OrderController extends Controller
             $element->setProduct($provider->getProductFromRaw($element, $this->get('sonata.product.pool')->getManager($element->getProductType())->getClass()));
         }
 
-        return $this->render('SonataOrderBundle:Order:view.html.twig', [
+        return $this->render('@SonataOrder/Order/view.html.twig', [
             'order' => $order,
             'breadcrumb_context' => 'user_order',
         ]);

@@ -134,7 +134,7 @@ class VariationsFormBlockService extends BaseBlockService
             },
             'form_field_options' => [],
             'title' => 'Product variations',
-            'template' => 'SonataProductBundle:Block:variations_choice.html.twig',
+            'template' => '@SonataProduct/Block/variations_choice.html.twig',
         ]);
     }
 }

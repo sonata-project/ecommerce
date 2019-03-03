@@ -97,7 +97,7 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
             'mode' => 'public',
             'title' => 'Recent Customers',
 //            'tags'      => 'Recent Customers',
-            'template' => 'SonataCustomerBundle:Block:recent_customers.html.twig',
+            'template' => '@SonataCustomer/Block/recent_customers.html.twig',
         ]);
     }
 }

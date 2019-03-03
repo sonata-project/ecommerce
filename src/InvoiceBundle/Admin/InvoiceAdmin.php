@@ -84,7 +84,7 @@ class InvoiceAdmin extends AbstractAdmin
             ->addIdentifier('reference')
             ->add('customer')
             ->add('status', TextType::class, [
-                'template' => 'SonataInvoiceBundle:InvoiceAdmin:list_status.html.twig',
+                'template' => '@SonataInvoice/InvoiceAdmin/list_status.html.twig',
             ])
             ->add('totalExcl', CurrencyFormType::class, [
                 'currency' => $this->currencyDetector->getCurrency()->getLabel(),

@@ -197,7 +197,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('url_return_ko')->defaultValue('sonata_payment_error')->cannotBeEmpty()->end()
                                         ->scalarNode('url_return_ok')->defaultValue('sonata_payment_confirmation')->cannotBeEmpty()->end()
 
-                                        ->scalarNode('template')->defaultValue('SonataPaymentBundle:Payment:scellius.html.twig')->cannotBeEmpty()->end()
+                                        ->scalarNode('template')->defaultValue('@SonataPayment/Payment/scellius.html.twig')->cannotBeEmpty()->end()
                                         ->scalarNode('shop_secret_key')->cannotBeEmpty()->end()
                                         ->scalarNode('request_command')->cannotBeEmpty()->end()
                                         ->scalarNode('response_command')->cannotBeEmpty()->end()
@@ -259,7 +259,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('sha_key')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('sha-out_key')->isRequired()->cannotBeEmpty()->end()
 
-                                        ->scalarNode('template')->defaultValue('SonataPaymentBundle:Payment:ogone.html.twig')->cannotBeEmpty()->end()
+                                        ->scalarNode('template')->defaultValue('@SonataPayment/Payment/ogone.html.twig')->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

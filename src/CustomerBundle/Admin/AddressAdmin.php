@@ -86,7 +86,7 @@ class AddressAdmin extends AbstractAdmin
             ->addIdentifier('name')
             ->add('fulladdress', TextType::class, [
                 'code' => 'getFullAddressHtml',
-                'template' => 'SonataCustomerBundle:Admin:list_address.html.twig',
+                'template' => '@SonataCustomer/Admin/list_address.html.twig',
             ])
             ->add('current')
             ->add('typeCode', 'trans', ['catalogue' => $this->translationDomain])

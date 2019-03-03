@@ -15,7 +15,7 @@ file that was distributed with this source code.
       => rewrite your own template
 #}
 
-{% extends 'SonataProductBundle:Product:final_review_basket_element.html.twig' %}
+{% extends '@SonataProduct/Product/final_review_basket_element.html.twig' %}
 
 {% block product_description %}
     <b>{{ basketElement.name }}</b> <br />

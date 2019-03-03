@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 
-{% extends "SonataUserBundle:Profile:action.html.twig" %}
+{% extends "@SonataUser/Profile/action.html.twig" %}
 
 
 {% block sonata_profile_title %}{% trans from 'SonataOrderBundle' %}sonata.order.title_order{% endtrans %} - {{ order.reference }}{% endblock %}

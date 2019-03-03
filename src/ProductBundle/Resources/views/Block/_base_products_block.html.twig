@@ -31,7 +31,7 @@ file that was distributed with this source code.
 
                         {% if sonata_product_has_enabled_variations(product) or not sonata_product_has_variations(product) %}
                             <li class="col-sm-3" itemscope itemtype="http://schema.org/Product">
-                                {% include 'SonataProductBundle:Catalog:_product_grid.html.twig' %}
+                                {% include '@SonataProduct/Catalog/_product_grid.html.twig' %}
                             </li>
                         {% endif %}
 

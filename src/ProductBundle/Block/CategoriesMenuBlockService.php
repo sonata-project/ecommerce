@@ -53,7 +53,7 @@ class CategoriesMenuBlockService extends MenuBlockService
         parent::configureSettings($resolver);
 
         $resolver->setDefaults([
-                'menu_template' => 'SonataBlockBundle:Block:block_side_menu_template.html.twig',
+                'menu_template' => '@SonataBlock/Block/block_side_menu_template.html.twig',
                 'safe_labels' => true,
             ]);
     }
