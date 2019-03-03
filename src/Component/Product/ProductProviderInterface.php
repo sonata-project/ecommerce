@@ -61,6 +61,8 @@ interface ProductProviderInterface
      */
     public function getBaseControllerName();
 
+    public function getTemplatesPath(): string;
+
     /**
      * @param \Sonata\Component\Product\ProductInterface $product      A Sonata product instance
      * @param \Symfony\Component\Form\FormBuilder        $formBuilder  Symfony form builder

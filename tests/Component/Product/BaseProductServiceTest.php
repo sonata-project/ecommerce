@@ -127,7 +127,15 @@ class BaseProductServiceTest_ProductProvider extends BaseProductProvider
      */
     public function getBaseControllerName()
     {
-        // TODO: Implement getBaseControllerName() method.
+        return 'DumbTestController';
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplatesPath(): string
+    {
+        return '';
     }
 }
 
