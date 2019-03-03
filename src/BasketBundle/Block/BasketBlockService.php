@@ -49,7 +49,7 @@ class BasketBlockService extends AbstractAdminBlockService
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'template' => 'SonataBasketBundle:Block:block_basket_items.html.twig',
+            'template' => '@SonataBasket/Block/block_basket_items.html.twig',
         ]);
     }
 }

@@ -12,10 +12,10 @@ file that was distributed with this source code.
 {% sonata_template_box 'This is the basket billing address step template. Feel free to override it.' %}
 
 {% block sonata_flash_messages %}
-    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' with {domain: 'SonataCustomerBundle'} %}
+    {% include '@SonataCore/FlashMessage/render.html.twig' with {domain: 'SonataCustomerBundle'} %}
 {% endblock %}
 
-{% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'billing'} %}
+{% include '@SonataBasket/Basket/stepper.html.twig' with {step: 'billing'} %}
 
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 {{ form_errors(form) }}

@@ -146,13 +146,13 @@ class OrderAdmin extends AbstractAdmin
 
         $list
             ->add('status', TextType::class, [
-                'template' => 'SonataOrderBundle:OrderAdmin:list_status.html.twig',
+                'template' => '@SonataOrder/OrderAdmin/list_status.html.twig',
             ])
             ->add('deliveryStatus', TextType::class, [
-                'template' => 'SonataOrderBundle:OrderAdmin:list_delivery_status.html.twig',
+                'template' => '@SonataOrder/OrderAdmin/list_delivery_status.html.twig',
             ])
             ->add('paymentStatus', TextType::class, [
-                'template' => 'SonataOrderBundle:OrderAdmin:list_payment_status.html.twig',
+                'template' => '@SonataOrder/OrderAdmin/list_payment_status.html.twig',
             ])
             ->add('validatedAt')
             ->add('totalInc', CurrencyFormType::class, ['currency' => $currency])

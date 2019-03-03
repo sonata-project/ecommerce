@@ -52,7 +52,7 @@ class CatalogController extends Controller
         $pager = $this->get('knp_paginator');
         $pagination = $pager->paginate($this->getProductSetManager()->getCategoryActiveProductsQueryBuilder($category, $filter, $option), $page, $displayMax);
 
-        return $this->render('SonataProductBundle:Catalog:index.html.twig', [
+        return $this->render('@SonataProduct/Catalog/index.html.twig', [
             'display_mode' => $displayMode,
             'pager' => $pagination,
             'currency' => $this->getCurrencyDetector()->getCurrency(),

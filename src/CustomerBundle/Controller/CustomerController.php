@@ -65,7 +65,7 @@ class CustomerController extends Controller
         // Set redirection URL to be to the list of addresses
         $this->get('session')->set('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
 
-        return $this->render('SonataCustomerBundle:Addresses:list.html.twig', [
+        return $this->render('@SonataCustomer/Addresses/list.html.twig', [
                 'addresses' => $addresses,
                 'customer' => $customer,
                 'breadcrumb_context' => 'customer_address',
@@ -159,7 +159,7 @@ class CustomerController extends Controller
             ]);
         }
 
-        $template = 'SonataCustomerBundle:Addresses:new.html.twig';
+        $template = '@SonataCustomer/Addresses/new.html.twig';
 
         $form->handleRequest($request);
 

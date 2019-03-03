@@ -38,7 +38,7 @@ class DebugPaymentController extends Controller
     {
         $order = $this->checkRequest();
 
-        return $this->render('SonataPaymentBundle:Payment:debug.html.twig', [
+        return $this->render('@SonataPayment/Payment/debug.html.twig', [
             'order' => $order,
             'check' => $request->get('check'),
         ]);

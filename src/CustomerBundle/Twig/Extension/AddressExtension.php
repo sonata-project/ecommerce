@@ -108,7 +108,7 @@ class AddressExtension extends \Twig_Extension
             ];
         }
 
-        return $environment->render('SonataCustomerBundle:Addresses:_address.html.twig', [
+        return $environment->render('@SonataCustomer/Addresses/_address.html.twig', [
                 'address' => $addressArray,
                 'showName' => $showName,
                 'showEdit' => $showEdit,

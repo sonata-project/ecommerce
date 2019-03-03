@@ -59,7 +59,7 @@ class InvoiceController extends Controller
 
         $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('invoice_view_title', [], 'SonataInvoiceBundle'));
 
-        return $this->render('SonataInvoiceBundle:Invoice:view.html.twig', [
+        return $this->render('@SonataInvoice/Invoice/view.html.twig', [
             'invoice' => $invoice,
             'order' => $order,
         ]);

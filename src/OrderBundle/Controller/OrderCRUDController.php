@@ -30,7 +30,7 @@ class OrderCRUDController extends CRUDController
         }
 
         if (null === $this->getRequest()->get('confirm')) {
-            return $this->render('SonataOrderBundle:OrderAdmin:invoice_generate_confirm.html.twig', ['id' => $id]);
+            return $this->render('@SonataOrder/OrderAdmin/invoice_generate_confirm.html.twig', ['id' => $id]);
         }
 
         $order = $this->admin->getObject($id);

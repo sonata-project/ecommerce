@@ -128,7 +128,7 @@ class RecentOrdersBlockService extends BaseBlockService
             'number' => 5,
             'mode' => 'public',
             'title' => 'Recent Orders',
-            'template' => 'SonataOrderBundle:Block:recent_orders.html.twig',
+            'template' => '@SonataOrder/Block/recent_orders.html.twig',
         ]);
     }
 }

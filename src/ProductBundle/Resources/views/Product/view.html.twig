@@ -36,7 +36,7 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block product %}
-    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+    {% include '@SonataCore/FlashMessage/render.html.twig' %}
     <!-- Begin product display -->
     <div class="row">
         <div class="col-lg-12">
@@ -49,7 +49,7 @@ file that was distributed with this source code.
                 {% block product_carousel %}
                     <div>
                         {% if product.gallery and product.gallery.galleryHasMedias|length > 0 %}
-                            {% include "SonataProductBundle:Product:carousel.html.twig" %}
+                            {% include "@SonataProduct/Product/carousel.html.twig" %}
                         {% else %}
                             {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'margin: 0 10px 10px 0;'} %}
                         {% endif %}
@@ -122,7 +122,7 @@ file that was distributed with this source code.
                             <div itemprop="offers" class="row" itemscope itemtype="http://schema.org/Offer">
                                 <div class="col-lg-12">
                                     {% block product_basket %}
-                                        {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
+                                        {% include "@SonataBasket/Basket/add_product_form.html.twig" %}
                                     {% endblock %}
                                 </div>
                             </div>
@@ -138,7 +138,7 @@ file that was distributed with this source code.
     <!-- Cross selling -->
     <div>
         {% block product_cross_selling %}
-            {% include "SonataProductBundle:Product:view_similar.html.twig" %}
+            {% include "@SonataProduct/Product/view_similar.html.twig" %}
         {% endblock %}
     </div>
     <!-- End Cross selling -->

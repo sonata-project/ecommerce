@@ -18,7 +18,7 @@ file that was distributed with this source code.
         {% if not sonata_product_has_variations(product) or (sonata_product_has_variations(product) and sonata_product_has_enabled_variations(product)) %}
 
             <div class="col-sm-4" itemscope itemtype="http://schema.org/Product">
-                {% include 'SonataProductBundle:Catalog:_product_grid.html.twig' %}
+                {% include '@SonataProduct/Catalog/_product_grid.html.twig' %}
             </div>
 
         {% endif %}

@@ -29,7 +29,7 @@ class CategoryController extends Controller
     {
         $category = $category ?: $this->get('sonata.classification.manager.category')->getRootCategory();
 
-        return $this->render('SonataProductBundle:Category:side_menu_category.html.twig', [
+        return $this->render('@SonataProduct/Category/side_menu_category.html.twig', [
           'root_category' => $category,
           'depth' => $depth,
           'deep' => $deep + 1,

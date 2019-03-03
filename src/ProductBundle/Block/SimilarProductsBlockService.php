@@ -119,7 +119,7 @@ class SimilarProductsBlockService extends BaseBlockService
             'number' => 5,
             'title' => 'Similar products',
             'base_product_id' => null,
-            'template' => 'SonataProductBundle:Block:similar_products.html.twig',
+            'template' => '@SonataProduct/Block/similar_products.html.twig',
         ]);
     }
 

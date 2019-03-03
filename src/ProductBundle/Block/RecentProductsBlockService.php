@@ -104,7 +104,7 @@ class RecentProductsBlockService extends BaseBlockService
         $resolver->setDefaults([
             'number' => 5,
             'title' => 'Recent products',
-            'template' => 'SonataProductBundle:Block:recent_products.html.twig',
+            'template' => '@SonataProduct/Block/recent_products.html.twig',
         ]);
     }
 

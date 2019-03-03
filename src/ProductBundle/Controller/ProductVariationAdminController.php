@@ -87,7 +87,7 @@ class ProductVariationAdminController extends Controller
             return new RedirectResponse($this->admin->generateUrl('list'));
         }
 
-        return $this->render('SonataProductBundle:ProductAdmin:create_variation.html.twig', [
+        return $this->render('@SonataProduct/ProductAdmin/create_variation.html.twig', [
             'object' => $product,
             'form' => $form->createView(),
             'action' => 'edit',
