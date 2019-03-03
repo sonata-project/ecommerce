@@ -15,6 +15,7 @@ namespace Sonata\ProductBundle\Controller;
 
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
+use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -53,7 +54,7 @@ abstract class BaseProductController extends Controller
         $this->updateSeoMeta($product, $currency);
 
         return $this->render(
-            sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
+            sprintf('%s/view.html.twig', $provider->getTemplatesPath()),
             [
                 'provider' => $provider,
                 'product' => $product,
@@ -75,7 +76,7 @@ abstract class BaseProductController extends Controller
     {
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        return $this->render(sprintf('%s:properties.html.twig', $provider->getBaseControllerName()), [
+        return $this->render(sprintf('%s/properties.html.twig', $provider->getTemplatesPath()), [
             'product' => $product,
         ]);
     }
@@ -89,9 +90,11 @@ abstract class BaseProductController extends Controller
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
     {
-        $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
+        /** @var Pool $pool */
+        $pool = $this->get('sonata.product.pool');
+        $provider = $pool->getProvider($basketElement->getProduct());
 
-        return $this->render(sprintf('%s:form_basket_element.html.twig', $provider->getBaseControllerName()), [
+        return $this->render(sprintf('%s/form_basket_element.html.twig', $provider->getTemplatesPath()), [
             'formView' => $formView,
             'basketElement' => $basketElement,
             'basket' => $basket,
@@ -108,7 +111,7 @@ abstract class BaseProductController extends Controller
     {
         $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
 
-        return $this->render(sprintf('%s:final_review_basket_element.html.twig', $provider->getBaseControllerName()), [
+        return $this->render(sprintf('%s/final_review_basket_element.html.twig', $provider->getTemplatesPath()), [
             'basketElement' => $basketElement,
             'basket' => $basket,
         ]);
@@ -129,7 +132,7 @@ abstract class BaseProductController extends Controller
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        return $this->render(sprintf('%s:view_variations.html.twig', $provider->getBaseControllerName()), [
+        return $this->render(sprintf('%s/view_variations.html.twig', $provider->getTemplatesPath()), [
             'product' => $product,
         ]);
     }

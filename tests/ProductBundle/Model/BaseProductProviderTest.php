@@ -38,6 +38,14 @@ class ProductProviderTest extends BaseProductProvider
     {
         return 'DumbTestController';
     }
+
+    /**
+     * @return string
+     */
+    public function getTemplatesPath(): string
+    {
+        return '';
+    }
 }
 
 class ProductTest extends BaseProduct implements ProductInterface

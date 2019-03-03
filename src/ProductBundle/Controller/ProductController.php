@@ -55,7 +55,7 @@ class ProductController extends Controller
             $product = $provider->getCheapestEnabledVariation($product);
         }
 
-        $action = sprintf('%s:view', $provider->getBaseControllerName());
+        $action = sprintf('%s:viewAction', $provider->getBaseControllerName());
         $response = $this->forward($action, [
             'provider' => $provider,
             'product' => $product,
@@ -82,7 +82,7 @@ class ProductController extends Controller
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
     {
-        $action = sprintf('%s:renderFormBasketElement', $basketElement->getProductProvider()->getBaseControllerName());
+        $action = sprintf('%s:renderFormBasketElementAction', $basketElement->getProductProvider()->getBaseControllerName());
 
         $response = $this->forward($action, [
             'formView' => $formView,
@@ -158,7 +158,7 @@ class ProductController extends Controller
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
     {
-        $action = sprintf('%s:renderFinalReviewBasketElement', $basketElement->getProductProvider()->getBaseControllerName());
+        $action = sprintf('%s:renderFinalReviewBasketElementAction', $basketElement->getProductProvider()->getBaseControllerName());
 
         $response = $this->forward($action, [
             'basketElement' => $basketElement,
@@ -195,7 +195,7 @@ class ProductController extends Controller
 
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 
-        $action = sprintf('%s:viewVariations', $provider->getBaseControllerName());
+        $action = sprintf('%s:viewVariationsAction', $provider->getBaseControllerName());
         $response = $this->forward($action, [
                 'product' => $product,
             ]);
@@ -262,7 +262,7 @@ class ProductController extends Controller
 
         $variation = $provider->getVariation($product, $selectedVariation);
 
-        $action = sprintf('%s:variationToProduct', $provider->getBaseControllerName());
+        $action = sprintf('%s:variationToProductAction', $provider->getBaseControllerName());
         $response = $this->forward($action, [
             'product' => $product,
             'variation' => $variation,
