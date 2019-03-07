@@ -27,10 +27,11 @@ Please, update your ``Kernel.php`` file like this:
 
     ...
 
-    public function registerBundles()
+    public function boot()
     {
-        bcscale(3);
-        $contents = require $this->getProjectDir().'/config/bundles.php';
+        bcscale(3); // or any other value greater than 0
+        parent::boot();
+    }
 
 Configuration
 =============
