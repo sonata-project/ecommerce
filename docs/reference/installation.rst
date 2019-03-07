@@ -255,7 +255,7 @@ Create missing contexts:
 .. code-block:: bash
 
     $ php bin/console sonata:classification:fix-context
-    $ php app/console sonata:media:fix-media-context
+    $ php bin/console sonata:media:fix-media-context
 
 Add the current lines in your `routing.yml` files:
 
