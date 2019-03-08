@@ -22,7 +22,6 @@ use Sonata\Component\Product\Pool;
 use Sonata\OrderBundle\Form\Type\OrderStatusType;
 use Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\FormTypeInterface;
 
 class OrderElementAdmin extends AbstractAdmin
 {
@@ -63,11 +62,6 @@ class OrderElementAdmin extends AbstractAdmin
         $productTypeOptions = [
             'choices' => array_flip(array_keys($this->productPool->getProducts())),
         ];
-
-        // choice_as_value option is not needed in SF 3.0+
-        if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
-            $productTypeOptions['choices_as_values'] = true;
-        }
 
         $formMapper
             ->with($this->trans('order_element.form.group_main_label', [], 'SonataOrderBundle'))

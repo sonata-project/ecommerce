@@ -16,7 +16,7 @@ namespace Sonata\Component\Form\Type;
 use Sonata\Component\Delivery\Pool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeliveryChoiceType extends AbstractType
 {
@@ -40,12 +40,7 @@ class DeliveryChoiceType extends AbstractType
         return 'sonata_delivery_choice';
     }
 
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver): void
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $choices = [];
 

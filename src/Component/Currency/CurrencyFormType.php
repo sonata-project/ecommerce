@@ -50,9 +50,4 @@ class CurrencyFormType extends CurrencyType
     {
         return 'sonata_currency';
     }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }
