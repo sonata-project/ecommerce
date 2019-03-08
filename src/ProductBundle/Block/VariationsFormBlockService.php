@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Sonata\Component\Form\Type\VariationChoiceType;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\CoreBundle\Validator\ErrorElement;
@@ -82,7 +83,7 @@ class VariationsFormBlockService extends BaseBlockService
             $currentValues[$field] = array_search($accessor->getValue($product, $field), $values);
         }
 
-        $form = $this->formFactory->createBuilder('sonata_product_variation_choices', $currentValues, [
+        $form = $this->formFactory->createBuilder(VariationChoiceType::class, $currentValues, [
                 'field_options' => $blockContext->getSetting('form_field_options'),
                 'product' => $product,
                 'fields' => $fields,
@@ -121,7 +122,7 @@ class VariationsFormBlockService extends BaseBlockService
             'variations_properties' => [],
             'form_route' => 'sonata_product_variation_product',
             'form_route_parameters' => function (Options $options) {
-                $product = $options->get('product');
+                $product = $options['product'];
 
                 if (null !== $product && !$product instanceof ProductInterface) {
                     throw new \RuntimeException("Wrong 'product' parameter");

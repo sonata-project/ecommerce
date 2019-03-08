@@ -21,7 +21,6 @@ use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -94,11 +93,6 @@ class AddressType extends AbstractType
                 'translation_domain' => 'SonataCustomerBundle',
             ];
 
-            // choice_as_value option is not needed in SF 3.0+
-            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
-                $typeOptions['choices_as_values'] = true;
-            }
-
             $builder->add('type', ChoiceType::class, $typeOptions);
         }
 
@@ -118,11 +112,6 @@ class AddressType extends AbstractType
         $countryOptions = ['required' => !\count($addresses)];
 
         if (\count($countries) > 0) {
-            // choice_as_value options is not needed in SF 3.0+
-            if (method_exists(FormTypeInterface::class, 'setDefaultOptions')) {
-                $countryOptions['choices_as_values'] = true;
-            }
-
             $countryOptions['choices'] = array_flip($countries);
         }
 
