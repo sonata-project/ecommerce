@@ -38,11 +38,11 @@ file that was distributed with this source code.
             <tbody>
                 {# call each product controller to render its own view #}
                 {% for basketElement in basket.getBasketElements %}
-                    {% render controller('SonataProductBundle:Product:renderFormBasketElement', {
+                    {{ render(controller('SonataProductBundle:Product:renderFormBasketElement', {
                         'formView':       form.basketElements.children[basketElement.position],
                         'basketElement':  basketElement,
                         'basket':         basket
-                    }) %}
+                    })) }}
                 {% endfor %}
 
                 {# mark the widget as rendered ... TODO: create a custom widget type ...#}
