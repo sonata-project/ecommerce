@@ -67,10 +67,6 @@ class ProductTest extends BaseProduct implements ProductInterface
  */
 class BaseProductProviderTest extends TestCase
 {
-    public function testGetProductFromRaw()
-    {
-    }
-
     public function testCreateVariation()
     {
         $productProvider = $this->createNewProductProvider();
