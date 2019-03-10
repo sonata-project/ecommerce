@@ -368,7 +368,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $mVariation) {
             foreach ($fields as $field) {
                 $variationValue = $accessor->getValue($mVariation, $field);
-                if (!array_key_exists($field, $choices) || !\in_array($variationValue, $choices[$field])) {
+                if (!\array_key_exists($field, $choices) || !\in_array($variationValue, $choices[$field])) {
                     $choices = array_merge_recursive($choices, [$field => [$variationValue]]);
                 }
             }
@@ -602,7 +602,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $values = $product->toArray();
 
         foreach ($variationFields as $field) {
-            if (array_key_exists($field, $values)) {
+            if (\array_key_exists($field, $values)) {
                 unset($values[$field]);
             }
         }
