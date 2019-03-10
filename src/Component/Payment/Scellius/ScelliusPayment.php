@@ -506,7 +506,7 @@ class ScelliusPayment extends BasePayment
             throw new \RuntimeException('Invalid data count');
         }
 
-        if (0 === $data[1]) {
+        if ('0' === $data[1]) {
             $scellius = [
                 'valid' => true,
                 'content' => $data[3],
@@ -586,7 +586,7 @@ class ScelliusPayment extends BasePayment
         }
 
         return [
-            'code' => $data[1],
+            'code' => (int) $data[1],
             'error' => $data[2],
             'merchant_id' => $data[3],
             'merchant_country' => $data[4],

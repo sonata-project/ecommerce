@@ -89,13 +89,33 @@ class BasketElementTest extends TestCase
         $this->assertSame(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
         $this->assertSame(1, $basketElement->getQuantity(), 'BasketElement returns the correct default quantity');
 
-        $this->assertSame(15, $basketElement->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
-        $this->assertSame(17.940, $basketElement->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
+        $this->assertSame(
+            '15',
+            $basketElement->getUnitPrice(),
+            'BasketElement return the correct price w/o VAT'
+        );
+        $this->assertSame(
+            '17.940',
+            $basketElement->getUnitPrice(true),
+            'BasketElement return the correct price w/ VAT'
+        );
 
-        $this->assertSame(15, $basketElement->getTotal(), 'BasketElement return the correct price w/o VAT');
-        $this->assertSame(17.940, $basketElement->getTotal(true), 'BasketElement return the correct price w VAT');
+        $this->assertSame(
+            0,
+            bccomp('15', $basketElement->getTotal(), 3),
+            'BasketElement return the correct price w/o VAT'
+        );
+        $this->assertSame(
+            0,
+            bccomp('17.940', $basketElement->getTotal(true)),
+            'BasketElement return the correct price w VAT'
+        );
 
-        $this->assertSame(2.940, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
+        $this->assertSame(
+            0,
+            bccomp('2.940', $basketElement->getVatAmount()),
+            'BasketElement returns the correct VAT amount'
+        );
     }
 
     public function testPriceIncludingVat()
@@ -106,13 +126,33 @@ class BasketElementTest extends TestCase
         $this->assertSame(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
         $this->assertSame(1, $basketElement->getQuantity(), 'BasketElement returns the correct default quantity');
 
-        $this->assertSame(12.541, $basketElement->getUnitPrice(), 'BasketElement return the correct price w/o VAT');
-        $this->assertSame(15, $basketElement->getUnitPrice(true), 'BasketElement return the correct price w/ VAT');
+        $this->assertSame(
+            '12.541',
+            $basketElement->getUnitPrice(),
+            'BasketElement return the correct price w/o VAT'
+        );
+        $this->assertSame(
+            '15',
+            $basketElement->getUnitPrice(true),
+            'BasketElement return the correct price w/ VAT'
+        );
 
-        $this->assertSame(12.541, $basketElement->getTotal(), 'BasketElement return the correct price w/o VAT');
-        $this->assertSame(15, $basketElement->getTotal(true), 'BasketElement return the correct price w VAT');
+        $this->assertSame(
+            0,
+            bccomp('12.541', $basketElement->getTotal()),
+            'BasketElement return the correct price w/o VAT'
+        );
+        $this->assertSame(
+            0,
+            bccomp('15', $basketElement->getTotal(true)),
+            'BasketElement return the correct price w VAT'
+        );
 
-        $this->assertSame(2.459, $basketElement->getVatAmount(), 'BasketElement returns the correct VAT amount');
+        $this->assertSame(
+            0,
+            bccomp('2.459', $basketElement->getVatAmount()),
+            'BasketElement returns the correct VAT amount'
+        );
     }
 
     public function testOptions()
@@ -132,14 +172,30 @@ class BasketElementTest extends TestCase
         $basketElement->setQuantity(10);
 
         $this->assertSame(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
-        $this->assertSame(150, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT');
-        $this->assertSame(179.4, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
+        $this->assertSame(
+            0,
+            bccomp('150', $basketElement->getTotal(false)),
+            'BasketElement returns the correct price w/ VAT'
+        );
+        $this->assertSame(
+            0,
+            bccomp('179.400', $basketElement->getTotal(true)),
+            'BasketElement returns the correct price w/ VAT'
+        );
 
         $basketElement->setQuantity(-10);
-        $this->assertSame(15, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when negative quantity set');
+        $this->assertSame(
+            0,
+            bccomp('15', $basketElement->getTotal(false)),
+            'BasketElement returns the correct price w/ VAT when negative quantity set'
+        );
 
         $basketElement->setQuantity(0);
-        $this->assertSame(0, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when no quantity set');
+        $this->assertSame(
+            0,
+            bccomp('0', $basketElement->getTotal(false)),
+            'BasketElement returns the correct price w/ VAT when no quantity set'
+        );
     }
 
     public function testQuantityWithPriceIncludingVat()
@@ -149,14 +205,30 @@ class BasketElementTest extends TestCase
         $basketElement->setPriceIncludingVat(true);
 
         $this->assertSame(19.6, $basketElement->getVatRate(), 'BasketElement returns the correct VAT');
-        $this->assertSame(125.410, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT');
-        $this->assertSame(150, $basketElement->getTotal(true), 'BasketElement returns the correct price w/ VAT');
+        $this->assertSame(
+            0,
+            bccomp('125.410', $basketElement->getTotal(false)),
+            'BasketElement returns the correct price w/ VAT'
+        );
+        $this->assertSame(
+            0,
+            bccomp('150', $basketElement->getTotal(true)),
+            'BasketElement returns the correct price w/ VAT'
+        );
 
         $basketElement->setQuantity(-10);
-        $this->assertSame(12.541, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when negative quantity set');
+        $this->assertSame(
+            0,
+            bccomp('12.541', $basketElement->getTotal(false)),
+            'BasketElement returns the correct price w/ VAT when negative quantity set'
+        );
 
         $basketElement->setQuantity(0);
-        $this->assertSame(0, $basketElement->getTotal(false), 'BasketElement returns the correct price w/ VAT when no quantity set');
+        $this->assertSame(
+            0,
+            bccomp('0.000', $basketElement->getTotal(false)),
+            'BasketElement returns the correct price w/ VAT when no quantity set'
+        );
     }
 
     public function testValidity()
@@ -191,8 +263,8 @@ class BasketElementTest extends TestCase
         $basketElement = new BasketElement();
         $basketElement->setProductDefinition($productDefinition);
 
-        $this->assertSame(0, $basketElement->getVatRate());
-        $this->assertSame(0, $basketElement->getUnitPrice($currency));
+        $this->assertNull($basketElement->getVatRate());
+        $this->assertSame('0.000', $basketElement->getUnitPrice($currency));
         $this->assertFalse($basketElement->isValid());
 
         $provider = $this->createMock(ProductProviderInterface::class);

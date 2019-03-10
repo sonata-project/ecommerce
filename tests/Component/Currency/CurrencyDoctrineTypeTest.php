@@ -65,10 +65,9 @@ class CurrencyDoctrineTypeTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertSame(
-            $currency,
+        $this->assertTrue($currency->equals(
             Type::getType('currency')->convertToPHPValue('EUR', $platform)
-        );
+        ));
     }
 
     public function testConvertToPHPValueException()

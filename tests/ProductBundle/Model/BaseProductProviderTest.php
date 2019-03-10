@@ -444,8 +444,8 @@ class BaseProductProviderTest extends TestCase
 
         $provider = $this->createNewProductProvider();
 
-        $this->assertSame(42 * 4, $provider->calculatePrice($product, $currency, false, 4));
-        $this->assertSame(42, $provider->calculatePrice($product, $currency, false));
+        $this->assertSame((float) 42 * 4, $provider->calculatePrice($product, $currency, false, 4));
+        $this->assertSame((float) 42, $provider->calculatePrice($product, $currency, false));
     }
 
     public function testCalculatePriceException()
