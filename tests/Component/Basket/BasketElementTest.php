@@ -263,7 +263,7 @@ class BasketElementTest extends TestCase
         $basketElement = new BasketElement();
         $basketElement->setProductDefinition($productDefinition);
 
-        $this->assertSame(null, $basketElement->getVatRate());
+        $this->assertNull($basketElement->getVatRate());
         $this->assertSame('0.000', $basketElement->getUnitPrice($currency));
         $this->assertFalse($basketElement->isValid());
 
