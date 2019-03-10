@@ -5,8 +5,7 @@ e-commerce Bundles installation
 Prerequisites
 -------------
 
-PHP 7 and Symfony 2.8, >=3.3 or 4 are needed to make this bundle work, there are
-also some Sonata dependencies that need to be installed and configured beforehand:
+There are some Sonata dependencies that need to be installed and configured beforehand:
 
     - `SonataAdminBundle <https://sonata-project.org/bundles/admin>`_
     - `SonataEasyExtendsBundle <https://sonata-project.org/bundles/easy-extends>`_
