@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\PaymentBundle\Entity;
 
 use Sonata\Component\Payment\TransactionManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class TransactionManager extends BaseEntityManager implements TransactionManagerInterface
 {

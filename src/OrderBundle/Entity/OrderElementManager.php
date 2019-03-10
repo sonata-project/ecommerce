@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderElementManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class OrderElementManager extends BaseEntityManager implements OrderElementManagerInterface
 {

@@ -17,9 +17,9 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class ProductManager extends BaseEntityManager implements ProductManagerInterface
 {

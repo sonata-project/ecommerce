@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Order;
 
-use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
 
 interface OrderElementManagerInterface extends ManagerInterface
 {

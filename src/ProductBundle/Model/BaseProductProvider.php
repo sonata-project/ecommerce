@@ -36,8 +36,7 @@ use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Sonata\CoreBundle\Exception\InvalidParameterException;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -1006,7 +1005,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $quantity = $event->getQuantity();
 
         if (!\is_int($quantity) || $quantity < 1) {
-            throw new InvalidParameterException('Expected integer >= 1 for quantity, '.$quantity.' given.');
+            throw new \RuntimeException('Expected integer >= 1 for quantity, '.$quantity.' given.');
         }
 
         $price = (float) (bcmul((string) $this->currencyPriceCalculator->getPrice($product, $currency, $vat), (string) $quantity));

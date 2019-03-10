@@ -15,9 +15,9 @@ namespace Sonata\Component\Basket;
 
 use Doctrine\ORM\NoResultException;
 use Sonata\Component\Customer\CustomerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class BasketManager extends BaseEntityManager implements BasketManagerInterface
 {

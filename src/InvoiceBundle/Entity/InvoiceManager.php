@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sonata\InvoiceBundle\Entity;
 
 use Sonata\Component\Invoice\InvoiceManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class InvoiceManager extends BaseEntityManager implements InvoiceManagerInterface
 {

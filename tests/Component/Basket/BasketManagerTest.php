@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Entity\BaseBasket;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketManager;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

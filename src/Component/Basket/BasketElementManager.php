@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Basket;
 
-use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class BasketElementManager extends BaseEntityManager implements BasketElementManagerInterface
 {

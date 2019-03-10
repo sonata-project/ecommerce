@@ -15,7 +15,7 @@ namespace Sonata\Component\Order;
 
 use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
+use Sonata\Twig\Status\StatusClassRendererInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

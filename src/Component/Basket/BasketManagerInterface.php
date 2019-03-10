@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Customer\CustomerInterface;
-use Sonata\CoreBundle\Model\ManagerInterface;
-use Sonata\CoreBundle\Model\PageableManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
+use Sonata\Doctrine\Model\PageableManagerInterface;
 
 interface BasketManagerInterface extends ManagerInterface, PageableManagerInterface
 {

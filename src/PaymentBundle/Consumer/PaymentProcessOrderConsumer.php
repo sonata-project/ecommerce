@@ -16,7 +16,7 @@ namespace Sonata\PaymentBundle\Consumer;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Payment\TransactionInterface;
-use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\NotificationBundle\Backend\BackendInterface;
 use Sonata\NotificationBundle\Consumer\ConsumerEvent;
 use Sonata\NotificationBundle\Consumer\ConsumerInterface;
