@@ -23,8 +23,7 @@ use Sonata\Component\Basket\InvalidProductException;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\CoreBundle\Exception\InvalidParameterException;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -455,7 +454,7 @@ class BaseProductProviderTest extends TestCase
 
     public function testCalculatePriceException()
     {
-        $this->expectException(InvalidParameterException::class);
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Expected integer >= 1 for quantity, 4.32 given.');
 
         $product = new ProductTest();
@@ -469,7 +468,7 @@ class BaseProductProviderTest extends TestCase
 
     public function testCalculatePriceExceptionLessThanOne()
     {
-        $this->expectException(InvalidParameterException::class);
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Expected integer >= 1 for quantity, 0.32 given.');
 
         $product = new ProductTest();

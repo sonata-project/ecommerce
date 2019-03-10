@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Invoice;
 
-use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface;
+use Sonata\Twig\Status\StatusClassRendererInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

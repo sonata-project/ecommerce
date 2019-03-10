@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Order;
 
-use Sonata\CoreBundle\Model\ManagerInterface;
-use Sonata\CoreBundle\Model\PageableManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
+use Sonata\Doctrine\Model\PageableManagerInterface;
 use Sonata\UserBundle\Model\UserInterface;
 
 interface OrderManagerInterface extends ManagerInterface, PageableManagerInterface

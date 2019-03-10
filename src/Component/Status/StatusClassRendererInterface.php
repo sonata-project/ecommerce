@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Status;
 
-use Sonata\CoreBundle\Component\Status\StatusClassRendererInterface as BaseStatusClassRendererInterface;
+use Sonata\Twig\Status\StatusClassRendererInterface as BaseStatusClassRendererInterface;
 
 /**
  * @deprecated

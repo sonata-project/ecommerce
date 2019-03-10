@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\InvoiceBundle\Entity;
 
 use Sonata\Component\Invoice\InvoiceElementManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class InvoiceElementManager extends BaseEntityManager implements InvoiceElementManagerInterface
 {
