@@ -130,22 +130,34 @@ class BasketTest extends TestCase
         $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
 
         $this->assertSame(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
-        $this->assertSame(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertSame(15, $basketElement->getTotal(false), '::getQuantity() - return 2');
+        $this->assertSame('15', $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertSame(
+            0,
+            bccomp('15', $basketElement->getTotal(false)),
+            '::getQuantity() - return 2'
+        );
 
-        $this->assertSame(15, $basket->getTotal(false), '::getTotal() w/o vat return 15');
-        $this->assertSame(17.940, $basket->getTotal(true), '::getTotal() w/ vat return 18');
+        $this->assertSame('15.000', $basket->getTotal(false), '::getTotal() w/o vat return 15');
+        $this->assertSame('17.940', $basket->getTotal(true), '::getTotal() w/ vat return 18');
 
         $basketElement->setQuantity(2);
 
         $this->assertSame(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
-        $this->assertSame(15, $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertSame(30, $basketElement->getTotal(false), '::getQuantity() - return 2');
-        $this->assertSame(30, $basket->getTotal(false), '::getTotal() w/o vat return 30');
-        $this->assertSame(35.880, $basket->getTotal(true), '::getTotal() w/ vat return true');
+        $this->assertSame('15', $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        $this->assertSame(
+            0,
+            bccomp('30', $basketElement->getTotal(false)),
+            '::getQuantity() - return 2'
+        );
+        $this->assertSame('30.000', $basket->getTotal(false), '::getTotal() w/o vat return 30');
+        $this->assertSame('35.880', $basket->getTotal(true), '::getTotal() w/ vat return true');
 
         // Recurrent payments
-        $this->assertSame(0, $basket->getTotal(false, true), '::getTotal() for recurrent payments only');
+        $this->assertSame(
+            '0.000',
+            $basket->getTotal(false, true),
+            '::getTotal() for recurrent payments only'
+        );
 
         $newProduct = $this->getMockProduct();
         $newProduct->expects($this->any())
@@ -157,7 +169,11 @@ class BasketTest extends TestCase
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertSame(30, $basket->getTotal(false, false), '::getTotal() for non-recurrent payments only');
+        $this->assertSame(
+            '30.000',
+            $basket->getTotal(false, false),
+            '::getTotal() for non-recurrent payments only'
+        );
 
         $basket->removeElement($basketElement);
 
@@ -165,9 +181,21 @@ class BasketTest extends TestCase
         $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
-        $this->assertSame(150, $basket->getTotal(false), '::getTotal() - return 150');
-        $this->assertSame(179.400, $basket->getTotal(true), '::getTotal() w/o vat return 179.40');
-        $this->assertSame(29.400, $basket->getVatAmount(), '::getVatAmount() w/o vat return 29.4');
+        $this->assertSame(
+            '150.000',
+            $basket->getTotal(false),
+            '::getTotal() - return 150'
+        );
+        $this->assertSame(
+            '179.400',
+            $basket->getTotal(true),
+            '::getTotal() w/o vat return 179.40'
+        );
+        $this->assertSame(
+            '29.400',
+            $basket->getVatAmount(),
+            '::getVatAmount() w/o vat return 29.4'
+        );
     }
 
     public function testBasket()
