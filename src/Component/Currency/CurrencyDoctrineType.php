@@ -31,7 +31,7 @@ class CurrencyDoctrineType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if (!array_key_exists($value, Intl::getCurrencyBundle()->getCurrencyNames())) {
+        if (!\array_key_exists($value, Intl::getCurrencyBundle()->getCurrencyNames())) {
             throw new \RuntimeException(sprintf("'%d' is not a supported currency.", $value));
         }
 

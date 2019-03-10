@@ -92,7 +92,7 @@ class Selector implements PaymentSelectorInterface
      */
     public function getPayment($bank)
     {
-        if (!array_key_exists($bank, $this->getPaymentPool()->getMethods())) {
+        if (!\array_key_exists($bank, $this->getPaymentPool()->getMethods())) {
             throw new PaymentNotFoundException($bank);
         }
 

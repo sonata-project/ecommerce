@@ -241,7 +241,7 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function getOption($name, $default = null)
     {
-        if (!array_key_exists($name, $this->options)) {
+        if (!\array_key_exists($name, $this->options)) {
             return $default;
         }
 
@@ -253,7 +253,7 @@ class BasketElement implements \Serializable, BasketElementInterface
      */
     public function hasOption($name)
     {
-        return array_key_exists($name, $this->options);
+        return \array_key_exists($name, $this->options);
     }
 
     /**

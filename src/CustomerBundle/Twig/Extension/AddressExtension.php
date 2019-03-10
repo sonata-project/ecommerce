@@ -93,13 +93,13 @@ class AddressExtension extends \Twig_Extension
                 'address' => $address->getFullAddressHtml(),
             ];
         } else {
-            if ($showEdit && !array_key_exists('id', $address)) {
+            if ($showEdit && !\array_key_exists('id', $address)) {
                 throw new \RuntimeException(
                     "sonata_address_render needs 'id' key to be set to render the edit button"
                 );
             }
 
-            if ($showName && !array_key_exists('name', $address)) {
+            if ($showName && !\array_key_exists('name', $address)) {
                 $address['name'] = '';
                 $showName = false;
             }
