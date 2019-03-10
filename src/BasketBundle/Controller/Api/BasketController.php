@@ -563,7 +563,7 @@ class BasketController
     {
         $basket = $this->basketManager->findOneBy(['customer' => $customerId]);
         if ($basket instanceof BasketInterface) {
-            throw new HttpException('400', sprintf('Customer (%d) already has a basket', $customerId));
+            throw new HttpException(400, sprintf('Customer (%d) already has a basket', $customerId));
         }
     }
 }
