@@ -23,35 +23,10 @@ use Sonata\Component\Payment\Scellius\ScelliusPayment;
 use Sonata\Component\Payment\Scellius\ScelliusTransactionGeneratorInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\OrderBundle\Entity\BaseOrder;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
-class ScelliusPaymentTest_Order extends BaseOrder
-{
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return int the order id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getCurrency()
-    {
-        if (null === $this->currency) {
-            return new Currency();
-        }
-
-        return $this->currency;
-    }
-}
 class ScelliusPaymentTest extends TestCase
 {
     /**

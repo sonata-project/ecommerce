@@ -15,15 +15,10 @@ namespace Sonata\BasketBundle\Tests\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
-use Sonata\BasketBundle\Entity\BaseBasket;
 use Sonata\BasketBundle\Entity\BaseBasketElement;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\ProductBundle\Entity\BaseProduct;
-
-class BasketTest extends BaseBasket
-{
-}
 
 /**
  * @author Hugo Briand <briand@ekino.com>
