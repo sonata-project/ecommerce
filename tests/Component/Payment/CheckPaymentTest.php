@@ -21,20 +21,8 @@ use Sonata\Component\Basket\Basket;
 use Sonata\Component\Payment\CheckPayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\OrderBundle\Entity\BaseOrder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-
-class CheckPaymentTest_Order extends BaseOrder
-{
-    /**
-     * @return int the order id
-     */
-    public function getId()
-    {
-        // TODO: Implement getId() method.
-    }
-}
 
 class CheckPaymentTest extends TestCase
 {

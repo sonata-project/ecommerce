@@ -25,14 +25,6 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-class User
-{
-    public function getId()
-    {
-        return 1;
-    }
-}
-
 class CustomerSelectorTest extends TestCase
 {
     /**

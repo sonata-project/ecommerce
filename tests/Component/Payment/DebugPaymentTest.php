@@ -19,23 +19,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\Component\Payment\Debug\DebugPayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Payment\TransactionManagerInterface;
-use Sonata\OrderBundle\Entity\BaseOrder;
-use Sonata\PaymentBundle\Entity\BaseTransaction;
 use Symfony\Component\Routing\RouterInterface;
-
-class DebugPaymentTest_Order extends BaseOrder
-{
-    public function getId()
-    {
-    }
-}
-
-class DebugPaymentTest_Transaction extends BaseTransaction
-{
-    public function getId()
-    {
-    }
-}
 
 class DebugPaymentTest extends TestCase
 {

@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Currency;
 
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
@@ -94,65 +92,5 @@ class CurrencyDoctrineTypeTest extends TestCase
         $platform = new MockPlatform();
 
         $this->assertSame('DUMMYVARCHAR()', Type::getType('currency')->getSQLDeclaration([], $platform));
-    }
-}
-
-class MockPlatform extends AbstractPlatform
-{
-    /**
-     * Gets the SQL Snippet used to declare a BLOB column type.
-     */
-    public function getBlobTypeDeclarationSQL(array $field)
-    {
-        throw DBALException::notSupported(__METHOD__);
-    }
-
-    public function getBooleanTypeDeclarationSQL(array $columnDef)
-    {
-    }
-
-    public function getIntegerTypeDeclarationSQL(array $columnDef)
-    {
-    }
-
-    public function getBigIntTypeDeclarationSQL(array $columnDef)
-    {
-    }
-
-    public function getSmallIntTypeDeclarationSQL(array $columnDef)
-    {
-    }
-
-    public function _getCommonIntegerTypeDeclarationSQL(array $columnDef)
-    {
-    }
-
-    public function getVarcharTypeDeclarationSQL(array $field)
-    {
-        return 'DUMMYVARCHAR()';
-    }
-
-    /** @override */
-    public function getClobTypeDeclarationSQL(array $field)
-    {
-        return 'DUMMYCLOB';
-    }
-
-    public function getVarcharDefaultLength()
-    {
-        return 255;
-    }
-
-    public function getName()
-    {
-        return 'mock';
-    }
-
-    protected function initializeDoctrineTypeMappings()
-    {
-    }
-
-    protected function getVarcharTypeDeclarationSQLSnippet($length, $fixed)
-    {
     }
 }
