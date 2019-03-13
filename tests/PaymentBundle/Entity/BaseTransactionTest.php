@@ -49,7 +49,7 @@ The transaction state is `UNKNOWN`
 Update status code to `2` (validated)
 INFO;
 
-        $this->assertEquals($expected, $transaction->getInformation());
+        $this->assertSame($expected, $transaction->getInformation());
     }
 
     public function testParametersEncoding(): void
@@ -67,6 +67,6 @@ INFO;
         ]];
 
         $transaction->setParameters($inParams);
-        $this->assertEquals($expectedParams, $transaction->getParameters());
+        $this->assertSame($expectedParams, $transaction->getParameters());
     }
 }

@@ -84,7 +84,7 @@ class OgonePaymentTest extends TestCase
         $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
         $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
 
-        $this->assertEquals('ogone_1', $payment->getCode(), 'Ogone Payment return the correct code');
+        $this->assertSame('ogone_1', $payment->getCode(), 'Ogone Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
@@ -162,7 +162,7 @@ class OgonePaymentTest extends TestCase
                 'catalog_url' => '',
         ]);
 
-        $this->assertEquals($expected, $payment->encodeString($data));
+        $this->assertSame($expected, $payment->encodeString($data));
     }
 
     public static function getEncodeStringValues()
@@ -180,7 +180,7 @@ class OgonePaymentTest extends TestCase
             throw new \RuntimeException('Ogone validation should be ok');
         }
 
-        if ('FR' != $params['fields']['orderId']) {
+        if ('FR' !== $params['fields']['orderId']) {
             throw new \RuntimeException('Invalid ogone orderId');
         }
 
@@ -275,7 +275,7 @@ class OgonePaymentTest extends TestCase
         $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->once())->method('get')->will($this->returnValue('reference'));
 
-        $this->assertEquals('reference', $payment->getOrderReference($transaction));
+        $this->assertSame('reference', $payment->getOrderReference($transaction));
     }
 
     public function testApplyTransactionId(): void

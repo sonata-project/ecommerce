@@ -154,7 +154,7 @@ class SonataPaymentExtension extends Extension
 
         // Remove unconfigured services
         foreach ($internal as $code => $id) {
-            if (false === array_search($id, $configured)) {
+            if (false === array_search($id, $configured, true)) {
                 $container->removeDefinition($id);
             }
         }

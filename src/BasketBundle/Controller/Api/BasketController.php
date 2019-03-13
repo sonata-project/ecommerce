@@ -337,7 +337,7 @@ class BasketController
         $elements = $basket->getBasketElements();
 
         foreach ($elements as $key => $basketElement) {
-            if ($basketElement->getId() == $elementId) {
+            if ($basketElement->getId() === $elementId) {
                 unset($elements[$key]);
                 $this->basketBuilder->build($basket);
             }
@@ -541,7 +541,7 @@ class BasketController
     {
         $basket = $this->basketManager->findOneBy(['customer' => $customerId]);
         if ($basket instanceof BasketInterface) {
-            throw new HttpException('400', sprintf('Customer (%d) already has a basket', $customerId));
+            throw new HttpException(400, sprintf('Customer (%d) already has a basket', $customerId));
         }
     }
 }

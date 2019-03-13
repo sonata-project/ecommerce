@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Payment;
 
-use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
 
 interface TransactionManagerInterface extends ManagerInterface
 {

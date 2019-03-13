@@ -63,8 +63,8 @@ class BaseOrderTest extends TestCase
             $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');
             $this->assertArrayHasKey('amount', $item, 'Array items should contains a "amount" key');
 
-            $this->assertTrue(\in_array($item['rate'], [10, 20]));
-            $this->assertTrue(\in_array($item['amount'], [7, 3]));
+            $this->assertContains($item['rate'], [10, 20]);
+            $this->assertContains($item['amount'], [7, 3]);
         }
     }
 }

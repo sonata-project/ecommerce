@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Entity\BaseBasket;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketManager;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -37,7 +37,7 @@ class BasketManagerTest extends TestCase
         $basketMgr = new BasketManager(Basket::class, $registry);
 
         $this->assertInstanceOf(Basket::class, $basketMgr->create());
-        $this->assertEquals(Basket::class, $basketMgr->getClass());
+        $this->assertSame(Basket::class, $basketMgr->getClass());
     }
 
     public function testSave(): void

@@ -81,7 +81,7 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, $order);
+        $this->assertSame($errorOrder, $order);
     }
 
     public function testHandleErrorInvalidTransactionException(): void
@@ -118,7 +118,7 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, $order);
+        $this->assertSame($errorOrder, $order);
     }
 
     public function testHandleErrorInvalidTransactionException2(): void
@@ -168,7 +168,7 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, $order);
+        $this->assertSame($errorOrder, $order);
     }
 
     public function testHandleErrorEntityNotFoundException(): void
@@ -208,7 +208,7 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertEquals($errorOrder, null);
+        $this->assertSame($errorOrder, null);
     }
 
     public function testHandleConfirmation(): void
@@ -251,7 +251,7 @@ class PaymentHandlerTest extends TestCase
 
         $confirmOrder = $handler->handleConfirmation($request);
 
-        $this->assertEquals($confirmOrder, $order);
+        $this->assertSame($confirmOrder, $order);
     }
 
     public function testGetSendbankOrder(): void
@@ -291,7 +291,7 @@ class PaymentHandlerTest extends TestCase
 
         $sendbankOrder = $handler->getSendbankOrder($basket);
 
-        $this->assertEquals($order, $sendbankOrder);
+        $this->assertSame($order, $sendbankOrder);
     }
 
     public function testGetPaymentCallbackResponse(): void
@@ -338,6 +338,6 @@ class PaymentHandlerTest extends TestCase
 
         $cbResponse = $handler->getPaymentCallbackResponse($request);
 
-        $this->assertEquals($response, $cbResponse);
+        $this->assertSame($response, $cbResponse);
     }
 }

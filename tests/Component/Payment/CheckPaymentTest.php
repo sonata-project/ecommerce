@@ -64,7 +64,7 @@ class CheckPaymentTest extends TestCase
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
         $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
 
-        $this->assertEquals('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
         $this->assertTrue($payment->isBasketValid($basket));
         $this->assertTrue($payment->isRequestValid($transaction));
@@ -72,7 +72,7 @@ class CheckPaymentTest extends TestCase
 
         $this->assertInstanceOf(Response::class, $payment->handleError($transaction));
 
-        $this->assertEquals($payment->getOrderReference($transaction), '0001231');
+        $this->assertSame($payment->getOrderReference($transaction), '0001231');
 
         $payment->applyTransactionId($transaction);
     }
@@ -100,8 +100,8 @@ class CheckPaymentTest extends TestCase
         $response = $payment->sendbank($order);
 
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(302, $response->getStatusCode());
-        $this->assertEquals('http://foo.bar/ok-url', $response->headers->get('Location'));
+        $this->assertSame(302, $response->getStatusCode());
+        $this->assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
         $this->assertFalse($response->isCacheable());
     }
 
@@ -126,20 +126,20 @@ class CheckPaymentTest extends TestCase
         // second call : the order is set
         $response = $payment->sendConfirmationReceipt($transaction);
         $this->assertInstanceOf(Response::class, $response, '::sendConfirmationReceipt return a Response object');
-        $this->assertEquals('ok', $response->getContent(), '::getContent returns ok');
+        $this->assertSame('ok', $response->getContent(), '::getContent returns ok');
     }
 
     public static function getCallback($name)
     {
-        if ('reference' == $name) {
+        if ('reference' === $name) {
             return '0001231';
         }
 
-        if ('transaction_id' == $name) {
+        if ('transaction_id' === $name) {
             return 1;
         }
 
-        if ('check' == $name) {
+        if ('check' === $name) {
             return 'a51e9421db1c028e2ccf47f8999dc902ea6df3ac';
         }
     }

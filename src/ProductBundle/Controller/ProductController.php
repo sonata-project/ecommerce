@@ -243,7 +243,7 @@ class ProductController extends Controller
         $currentValues = [];
 
         foreach ($choices as $field => $values) {
-            $currentValues[$field] = array_search($accessor->getValue($product, $field), $values);
+            $currentValues[$field] = array_search($accessor->getValue($product, $field), $values, true);
         }
 
         $form = $this->createForm(VariationChoiceType::class, $currentValues, [

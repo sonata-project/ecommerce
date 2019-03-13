@@ -133,7 +133,7 @@ class Basket implements \Serializable, BasketInterface
 
     public function isEmpty()
     {
-        return 0 == \count($this->getBasketElements());
+        return 0 === \count($this->getBasketElements());
     }
 
     public function isValid($elementsOnly = false)
@@ -443,7 +443,7 @@ class Basket implements \Serializable, BasketInterface
         $pos = $this->positions[$product->getId()];
 
         foreach ($this->getBasketElements() as $basketElement) {
-            if ($pos == $basketElement->getPosition()) {
+            if ($pos === $basketElement->getPosition()) {
                 return true;
             }
         }

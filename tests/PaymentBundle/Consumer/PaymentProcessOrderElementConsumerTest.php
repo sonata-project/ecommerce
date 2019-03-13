@@ -28,8 +28,8 @@ class PaymentProcessOrderElementConsumerTest extends TestCase
     {
         $consumer = $this->getConsumer();
 
-        $this->assertEquals(-1, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 1));
-        $this->assertEquals(-10, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 10));
+        $this->assertSame(-1, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 1));
+        $this->assertSame(-10, $consumer->generateDiffValue(TransactionInterface::STATUS_VALIDATED, OrderInterface::STATUS_VALIDATED, 10));
     }
 
     /**

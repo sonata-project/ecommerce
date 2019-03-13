@@ -51,10 +51,10 @@ class ProductPoolTest extends TestCase
         $this->assertTrue($productPool->hasProvider('product1'));
         $this->assertTrue($productPool->hasProvider('product2'));
 
-        $this->assertEquals($productPool->getProduct('product1'), $definition1);
-        $this->assertEquals($productPool->getProduct('product2'), $definition2);
+        $this->assertSame($productPool->getProduct('product1'), $definition1);
+        $this->assertSame($productPool->getProduct('product2'), $definition2);
 
-        $this->assertEquals($productPool->getProductCode($product1), 'product1');
-        $this->assertEquals($productPool->getProductCode($product2), 'product2');
+        $this->assertSame($productPool->getProductCode($product1), 'product1');
+        $this->assertSame($productPool->getProductCode($product2), 'product2');
     }
 }

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Entity;
 
 use Sonata\Component\Product\DeliveryManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class DeliveryManager extends BaseEntityManager implements DeliveryManagerInterface
 {

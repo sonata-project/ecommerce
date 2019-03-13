@@ -35,7 +35,7 @@ class BasketElementManagerTest extends TestCase
         $basketEm = new BasketElementManager(BasketElement::class, $registry);
 
         $this->assertInstanceOf(BasketElement::class, $basketEm->create());
-        $this->assertEquals(BasketElement::class, $basketEm->getClass());
+        $this->assertSame(BasketElement::class, $basketEm->getClass());
     }
 
     public function testSave(): void

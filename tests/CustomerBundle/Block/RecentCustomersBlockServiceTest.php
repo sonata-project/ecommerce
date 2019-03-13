@@ -29,6 +29,6 @@ class RecentCustomersBlockServiceTest extends TestCase
         $customerManagerInterfaceMock = $this->createMock(CustomerManagerInterface::class);
         $block = new RecentCustomersBlockService('test', $engineInterfaceMock, $customerManagerInterfaceMock);
 
-        $this->assertEquals('Recent Customers', $block->getName());
+        $this->assertSame('Recent Customers', $block->getName());
     }
 }

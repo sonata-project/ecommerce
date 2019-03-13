@@ -128,7 +128,7 @@ class SelectorTest extends TestCase
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals([], $selector->getAvailableMethods($basket));
+        $this->assertSame([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -156,7 +156,7 @@ class SelectorTest extends TestCase
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals([], $selector->getAvailableMethods($basket));
+        $this->assertSame([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -181,7 +181,7 @@ class SelectorTest extends TestCase
         $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals([], $selector->getAvailableMethods($basket));
+        $this->assertSame([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -214,7 +214,7 @@ class SelectorTest extends TestCase
         $address->expects($this->exactly(2))->method('getCountryCode')->will($this->returnValue('FR'));
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEquals([], $selector->getAvailableMethods($basket, $address));
+        $this->assertSame([], $selector->getAvailableMethods($basket, $address));
     }
 
     /**
@@ -246,7 +246,7 @@ class SelectorTest extends TestCase
 
         $selector = new Selector($deliveryPool, new ProductPool());
 
-        $this->assertEquals([$serviceDelivery], $selector->getAvailableMethods($basket));
+        $this->assertSame([$serviceDelivery], $selector->getAvailableMethods($basket));
     }
 
     public function testAvailableMethods(): void
@@ -298,9 +298,9 @@ class SelectorTest extends TestCase
 
         $instances = $selector->getAvailableMethods($basket, $address);
         $this->assertCount(3, $instances);
-        $this->assertEquals($instances[0]->getCode(), 'ups_high_bis');
-        $this->assertEquals($instances[1]->getCode(), 'ups_high');
-        $this->assertEquals($instances[2]->getCode(), 'ups_low');
+        $this->assertSame($instances[0]->getCode(), 'ups_high_bis');
+        $this->assertSame($instances[1]->getCode(), 'ups_high');
+        $this->assertSame($instances[2]->getCode(), 'ups_low');
     }
 }
 

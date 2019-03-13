@@ -37,7 +37,7 @@ class BasketResizeFormListenerTest extends TestCase
             FormEvents::PRE_SUBMIT => 'preBind',
         ];
 
-        $this->assertEquals($expected, BasketResizeFormListener::getSubscribedEvents());
+        $this->assertSame($expected, BasketResizeFormListener::getSubscribedEvents());
     }
 
     public function testPreSetData(): void

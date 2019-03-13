@@ -109,7 +109,7 @@ class CheckPayment extends BasePayment
             return false;
         }
 
-        if ($transaction->get('check') == $this->generateUrlCheck($transaction->getOrder())) {
+        if ($transaction->get('check') === $this->generateUrlCheck($transaction->getOrder())) {
             return true;
         }
 
@@ -133,7 +133,7 @@ class CheckPayment extends BasePayment
 
         $response = $this->browser->get($url);
 
-        if ('ok' == $response->getContent()) {
+        if ('ok' === $response->getContent()) {
             $routeName = 'url_return_ok';
         } else {
             $routeName = 'url_return_ko';

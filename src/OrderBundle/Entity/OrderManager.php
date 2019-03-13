@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sonata\OrderBundle\Entity;
 
 use Sonata\Component\Order\OrderManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 use Sonata\UserBundle\Model\UserInterface;
 
 class OrderManager extends BaseEntityManager implements OrderManagerInterface
@@ -69,11 +69,11 @@ class OrderManager extends BaseEntityManager implements OrderManagerInterface
 
         $fields = $this->getEntityManager()->getClassMetadata($this->class)->getFieldNames();
         foreach ($sort as $field => $direction) {
-            if (!\in_array($field, $fields)) {
+            if (!\in_array($field, $fields, true)) {
                 throw new \RuntimeException(sprintf("Invalid sort field '%s' in '%s' class", $field, $this->class));
             }
         }
-        if (0 == \count($sort)) {
+        if (0 === \count($sort)) {
             $sort = ['reference' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {

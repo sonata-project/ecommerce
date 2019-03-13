@@ -20,7 +20,7 @@ use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Currency\CurrencyInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Currency;
 
-use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

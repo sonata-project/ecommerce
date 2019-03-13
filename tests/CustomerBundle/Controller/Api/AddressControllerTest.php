@@ -39,14 +39,14 @@ class AddressControllerTest extends TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
+        $this->assertSame([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
 
     public function testGetAddressAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
-        $this->assertEquals($address, $this->createAddressController($address)->getAddressAction(1));
+        $this->assertSame($address, $this->createAddressController($address)->getAddressAction(1));
     }
 
     public function testGetAddressActionNotFoundException(): void
@@ -151,7 +151,7 @@ class AddressControllerTest extends TestCase
 
         $view = $this->createAddressController($address, $addressManager)->deleteAddressAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteAddressInvalidAction(): void

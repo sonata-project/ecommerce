@@ -37,8 +37,7 @@ use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Sonata\CoreBundle\Exception\InvalidParameterException;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -348,7 +347,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         foreach ($variations as $mVariation) {
             foreach ($fields as $field) {
                 $variationValue = $accessor->getValue($mVariation, $field);
-                if (!\array_key_exists($field, $choices) || !\in_array($variationValue, $choices[$field])) {
+                if (!\array_key_exists($field, $choices) || !\in_array($variationValue, $choices[$field], true)) {
                     $choices = array_merge_recursive($choices, [$field => [$variationValue]]);
                 }
             }
@@ -368,7 +367,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         foreach ($this->getEnabledVariations($product) as $variation) {
             foreach ($choices as $choice => $value) {
-                if (!\in_array($choice, $this->getVariationFields())) {
+                if (!\in_array($choice, $this->getVariationFields(), true)) {
                     throw new \RuntimeException("The field '".$choice."' is not among the variation fields");
                 }
 
@@ -388,7 +387,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      */
     public function isVariateBy($name)
     {
-        return \in_array($name, $this->variationFields);
+        return \in_array($name, $this->variationFields, true);
     }
 
     /**
@@ -435,7 +434,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('stock', IntegerType::class)
         ;
 
-        if (!$isVariation || \in_array('description', $this->variationFields)) {
+        if (!$isVariation || \in_array('description', $this->variationFields, true)) {
             $formMapper->add('description', FormatterType::class, [
                 'source_field' => 'rawDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
@@ -445,7 +444,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ]);
         }
 
-        if (!$isVariation || \in_array('short_description', $this->variationFields)) {
+        if (!$isVariation || \in_array('short_description', $this->variationFields, true)) {
             $formMapper->add('shortDescription', FormatterType::class, [
                 'source_field' => 'rawShortDescription',
                 'source_field_options' => ['attr' => ['class' => 'span10', 'rows' => 20]],
@@ -457,10 +456,10 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
         $formMapper->end();
 
-        if (!$isVariation || \in_array('image', $this->variationFields) || \in_array('gallery', $this->variationFields)) {
+        if (!$isVariation || \in_array('image', $this->variationFields, true) || \in_array('gallery', $this->variationFields, true)) {
             $formMapper->with('Media');
 
-            if (!$isVariation || \in_array('image', $this->variationFields)) {
+            if (!$isVariation || \in_array('image', $this->variationFields, true)) {
                 $formMapper->add('image', ModelListType::class, [
                     'required' => false,
                 ], [
@@ -472,7 +471,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
                 ]);
             }
 
-            if (!$isVariation || \in_array('gallery', $this->variationFields)) {
+            if (!$isVariation || \in_array('gallery', $this->variationFields, true)) {
                 $formMapper->add('gallery', ModelListType::class, [
                     'required' => false,
                 ], [
@@ -578,7 +577,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (\in_array('deliveries', $this->getVariationFields())) {
+        if (\in_array('deliveries', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -611,7 +610,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (\in_array('productCategories', $this->getVariationFields())) {
+        if (\in_array('productCategories', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -643,7 +642,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (\in_array('productCollections', $this->getVariationFields())) {
+        if (\in_array('productCollections', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -675,7 +674,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null): void
     {
-        if (\in_array('packages', $this->getVariationFields())) {
+        if (\in_array('packages', $this->getVariationFields(), true)) {
             return;
         }
 
@@ -937,7 +936,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $quantity = $event->getQuantity();
 
         if (!\is_int($quantity) || $quantity < 1) {
-            throw new InvalidParameterException('Expected integer >= 1 for quantity, '.$quantity.' given.');
+            throw new \RuntimeException('Expected integer >= 1 for quantity, '.$quantity.' given.');
         }
 
         $price = (float) (bcmul((string) $this->currencyPriceCalculator->getPrice($product, $currency, $vat), (string) $quantity));
@@ -1072,7 +1071,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             $fields = $this->getVariationFields();
         } else {
             foreach ($fields as $field) {
-                if (!\in_array($field, $this->getVariationFields())) {
+                if (!\in_array($field, $this->getVariationFields(), true)) {
                     throw new \RuntimeException("The field '".$field."' is not among the variation fields");
                 }
             }

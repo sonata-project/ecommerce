@@ -29,7 +29,7 @@ class BasketBlockServiceTest extends TestCase
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $block = new BasketBlockService('test', $engineInterfaceMock);
 
-        $this->assertEquals('Basket items', $block->getName());
+        $this->assertSame('Basket items', $block->getName());
     }
 
     public function testExecute(): void

@@ -34,7 +34,7 @@ class ConfigurationTest extends TestCase
 
     public function validateClass($config): void
     {
-        $this->assertEquals([
+        $this->assertSame([
             'product' => 'App\\Sonata\\ProductBundle\\Entity\\Product',
             'package' => 'App\\Sonata\\ProductBundle\\Entity\\Package',
             'product_category' => 'App\\Sonata\\ProductBundle\\Entity\\ProductCategory',
@@ -49,7 +49,7 @@ class ConfigurationTest extends TestCase
 
     public function validateSeo($config): void
     {
-        $this->assertEquals([
+        $this->assertSame([
             'product' => [
                 'site' => '@sonataproject',
                 'creator' => '@th0masr',

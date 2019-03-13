@@ -33,13 +33,13 @@ class FreeDeliveryTest extends TestCase
     public function testPriceIsNull(): void
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertEquals(0, $freeDelivery->getVatRate());
-        $this->assertEquals(0, $freeDelivery->getPrice());
+        $this->assertSame(0, $freeDelivery->getVatRate());
+        $this->assertSame(0, $freeDelivery->getPrice());
     }
 
     public function testGetName(): void
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertEquals('Free delivery', $freeDelivery->getName());
+        $this->assertSame('Free delivery', $freeDelivery->getName());
     }
 }

@@ -226,7 +226,7 @@ abstract class BasePayment implements PaymentInterface
             return;
         }
 
-        if (TransactionInterface::STATE_KO == $transaction->getState()) {
+        if (TransactionInterface::STATE_KO === $transaction->getState()) {
             $method = 'crit';
         } else {
             $method = 'info';

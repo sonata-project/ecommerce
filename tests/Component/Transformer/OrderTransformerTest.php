@@ -67,6 +67,6 @@ class OrderTransformerTest extends TestCase
         $transformer = new OrderTransformer($pool, $eventDispatcher);
         $transformer->transformIntoBasket($order, $basket);
 
-        $this->assertEquals(2, $basketElement->getQuantity());
+        $this->assertSame(2, $basketElement->getQuantity());
     }
 }

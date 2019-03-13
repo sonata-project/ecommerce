@@ -132,7 +132,7 @@ class Selector implements ServiceDeliverySelectorInterface
                 }
 
                 // the product is not deliverable at the $shippingAddress
-                if ($deliveryMethod->isAddressRequired() && $deliveryAddress->getCountryCode() != $productDelivery->getCountryCode()) {
+                if ($deliveryMethod->isAddressRequired() && $deliveryAddress->getCountryCode() !== $productDelivery->getCountryCode()) {
                     $this->log(sprintf('[sonata::getAvailableDeliveryMethods] product.id: %d - code : %s the country code does not match (%s != %s)', $basketElement->getProductId(), $productDelivery->getCode(), $deliveryAddress->getCountryCode(), $productDelivery->getCountryCode()));
 
                     continue;

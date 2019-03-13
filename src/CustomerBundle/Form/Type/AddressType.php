@@ -69,7 +69,7 @@ class AddressType extends AbstractType
         $countryOptions = [];
         $countries = [];
 
-        if ('delivery' == $options['context'] && $address) {
+        if ('delivery' === $options['context'] && $address) {
             $countries = $this->getBasketDeliveryCountries();
         }
 

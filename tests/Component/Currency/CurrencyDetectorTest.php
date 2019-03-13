@@ -78,7 +78,7 @@ class CurrencyDetectorTest extends TestCase
         ;
 
         $currencyDetector = new CurrencyDetector('EUR', $currencyManager);
-        $this->assertEquals('EUR', $currencyDetector->getCurrency()->getLabel());
+        $this->assertSame('EUR', $currencyDetector->getCurrency()->getLabel());
     }
 
     /**
@@ -86,6 +86,6 @@ class CurrencyDetectorTest extends TestCase
      */
     public function testGetCurrency(): void
     {
-        $this->assertEquals($this->currency->getLabel(), $this->object->getCurrency()->getLabel());
+        $this->assertSame($this->currency->getLabel(), $this->object->getCurrency()->getLabel());
     }
 }

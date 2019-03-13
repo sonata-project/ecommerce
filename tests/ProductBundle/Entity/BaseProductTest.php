@@ -62,7 +62,7 @@ class BaseProductTest extends TestCase
         $product->setImage($image);
 
         $this->assertInstanceOf(MediaInterface::class, $product->getImage());
-        $this->assertEquals('correctMedia', $product->getImage()->getName());
+        $this->assertSame('correctMedia', $product->getImage()->getName());
     }
 
     public function testHasOneMainCategory(): void

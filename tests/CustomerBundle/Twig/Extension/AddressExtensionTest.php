@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
-use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Sonata\CustomerBundle\Twig\Extension\AddressExtension;
 
 /**
@@ -57,7 +56,7 @@ class AddressExtensionTest extends TestCase
 
     public function testRenderAddressInvalidParameter(): void
     {
-        $this->expectException(InvalidParameterException::class);
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('sonata_address_render needs an AddressInterface instance or an array with keys (firstname, lastname, address1, postcode, city, country_code)');
 
         $environment = $this->createMock('Twig_Environment');
@@ -71,7 +70,7 @@ class AddressExtensionTest extends TestCase
 
     public function testRenderAddressMissingId(): void
     {
-        $this->expectException(InvalidParameterException::class);
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('sonata_address_render needs \'id\' key to be set to render the edit button');
 
         $environment = $this->createMock('Twig_Environment');

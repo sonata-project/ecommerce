@@ -46,11 +46,11 @@ class CurrencyFormTypeTest extends TestCase
 
     public function testGetParent(): void
     {
-        $this->assertEquals(CurrencyType::class, $this->currencyFormType->getParent());
+        $this->assertSame(CurrencyType::class, $this->currencyFormType->getParent());
     }
 
     public function testGetBlockPrefix(): void
     {
-        $this->assertEquals('sonata_currency', $this->currencyFormType->getBlockPrefix());
+        $this->assertSame('sonata_currency', $this->currencyFormType->getBlockPrefix());
     }
 }

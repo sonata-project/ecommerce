@@ -25,7 +25,7 @@ class OrderScelliusTransactionGeneratorTest extends TestCase
         $order->expects($this->any())->method('getReference')->will($this->returnValue('120112000012'));
 
         $generator = new OrderScelliusTransactionGenerator();
-        $this->assertEquals('000012', $generator->generate($order));
+        $this->assertSame('000012', $generator->generate($order));
     }
 
     public function testInvalidReferenceLength(): void

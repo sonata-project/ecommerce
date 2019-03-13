@@ -41,7 +41,7 @@ class CatalogController extends Controller
         $filter = $request->get('filter');
         $option = $request->get('option');
 
-        if (!\in_array($displayMode, ['grid'])) { // "list" mode will be added later
+        if (!\in_array($displayMode, ['grid'], true)) { // "list" mode will be added later
             throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
         }
 

@@ -334,7 +334,7 @@ abstract class BaseInvoice implements InvoiceInterface
             $rate = $invoiceElement->getVatRate();
             $amount = (string) $invoiceElement->getVatAmount();
 
-            if (0 == $rate) {
+            if (0 === $rate) {
                 continue;
             }
 

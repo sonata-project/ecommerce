@@ -33,7 +33,7 @@ class CurrencyDoctrineTypeTest extends TestCase
 
     public function testGetName(): void
     {
-        $this->assertEquals('currency', Type::getType('currency')->getName());
+        $this->assertSame('currency', Type::getType('currency')->getName());
     }
 
     public function testConvertToDatabaseValue(): void
@@ -43,7 +43,7 @@ class CurrencyDoctrineTypeTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertEquals(
+        $this->assertSame(
             'EUR',
             Type::getType('currency')->convertToDatabaseValue($currency, $platform)
         );
@@ -65,10 +65,9 @@ class CurrencyDoctrineTypeTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertEquals(
-            $currency,
+        $this->assertTrue($currency->equals(
             Type::getType('currency')->convertToPHPValue('EUR', $platform)
-        );
+        ));
     }
 
     public function testConvertToPHPValueException(): void
@@ -84,7 +83,7 @@ class CurrencyDoctrineTypeTest extends TestCase
     {
         $platform = new MockPlatform();
 
-        $this->assertEquals(
+        $this->assertSame(
             3,
             Type::getType('currency')->getDefaultLength($platform)
         );
@@ -94,7 +93,7 @@ class CurrencyDoctrineTypeTest extends TestCase
     {
         $platform = new MockPlatform();
 
-        $this->assertEquals('DUMMYVARCHAR()', Type::getType('currency')->getSQLDeclaration([], $platform));
+        $this->assertSame('DUMMYVARCHAR()', Type::getType('currency')->getSQLDeclaration([], $platform));
     }
 }
 

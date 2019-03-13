@@ -101,9 +101,9 @@ class BaseTransaction implements TransactionInterface
     {
         $this->state = $state;
 
-        if (self::STATE_OK == $state) {
+        if (self::STATE_OK === $state) {
             $this->addInformation('The transaction state is `OK`');
-        } elseif (self::STATE_OK == $state) {
+        } elseif (self::STATE_OK === $state) {
             $this->addInformation('The transaction state is `KO`');
         } else {
             $this->addInformation('The transaction state is `UNKNOWN`');
@@ -140,7 +140,7 @@ class BaseTransaction implements TransactionInterface
      */
     public function isValid()
     {
-        return TransactionInterface::STATE_OK == $this->state;
+        return TransactionInterface::STATE_OK === $this->state;
     }
 
     /**

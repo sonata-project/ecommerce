@@ -26,8 +26,8 @@ class CurrencyTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertEquals('EUR', $currency->getLabel());
-        $this->assertEquals('EUR', $currency->__toString());
+        $this->assertSame('EUR', $currency->getLabel());
+        $this->assertSame('EUR', $currency->__toString());
     }
 
     public function testEquals(): void

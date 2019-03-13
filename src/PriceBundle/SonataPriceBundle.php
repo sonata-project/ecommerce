@@ -27,7 +27,7 @@ class SonataPriceBundle extends Bundle
 
     public function boot(): void
     {
-        if (0 == $this->getBcScale()) {
+        if (0 === $this->getBcScale()) {
             $message = <<<'CONTENT'
 [%s]: You need to add a bcscale() method greater than 0 in your AppKernel.php to ensure that prices are correctly computed.
 Please refer to documentation: https://sonata-project.org/bundles/ecommerce/develop/doc/reference/bundles/price.html

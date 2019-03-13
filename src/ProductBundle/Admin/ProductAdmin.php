@@ -193,7 +193,7 @@ class ProductAdmin extends AbstractAdmin
 
     protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null): void
     {
-        if (!$childAdmin && !\in_array($action, ['edit'])) {
+        if (!$childAdmin && !\in_array($action, ['edit'], true)) {
             return;
         }
 
@@ -222,7 +222,7 @@ class ProductAdmin extends AbstractAdmin
             ['uri' => $admin->generateUrl('sonata.product.admin.delivery.list', ['id' => $id])]
         );
 
-        if (!$product->isVariation() && 'sonata.product.admin.product' == $this->getCode()) {
+        if (!$product->isVariation() && 'sonata.product.admin.product' === $this->getCode()) {
             $menu->addChild(
                 $this->trans('product.sidemenu.view_variations'),
                 ['uri' => $admin->generateUrl('sonata.product.admin.product.variation.list', ['id' => $id])]

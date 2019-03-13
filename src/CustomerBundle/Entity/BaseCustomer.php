@@ -312,7 +312,7 @@ abstract class BaseCustomer implements CustomerInterface
         $addresses = new ArrayCollection();
 
         foreach ($this->getAddresses() as $address) {
-            if ($type == $address->getType()) {
+            if ($type === $address->getType()) {
                 $addresses->set($address->getId(), $address);
             }
         }

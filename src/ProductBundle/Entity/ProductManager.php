@@ -17,9 +17,9 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class ProductManager extends BaseEntityManager implements ProductManagerInterface
 {
@@ -114,7 +114,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
 
     public function updateStock($product, $diff): void
     {
-        if (0 == $diff) {
+        if (0 === $diff) {
             return;
         }
 
@@ -135,11 +135,11 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
 
         $fields = $this->getEntityManager()->getClassMetadata($this->class)->getFieldNames();
         foreach ($sort as $field => $direction) {
-            if (!\in_array($field, $fields)) {
+            if (!\in_array($field, $fields, true)) {
                 unset($sort[$field]);
             }
         }
-        if (0 == \count($sort)) {
+        if (0 === \count($sort)) {
             $sort = ['name' => 'ASC'];
         }
         foreach ($sort as $field => $direction) {
@@ -200,7 +200,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
 
         foreach ($productCollections as $pCollection) {
             $collections[] = $pCollection->getCollection();
-            if (false === array_search($pCollection->getProduct()->getId(), $productIds)) {
+            if (false === array_search($pCollection->getProduct()->getId(), $productIds, true)) {
                 $productIds[] = $pCollection->getProduct()->getId();
             }
         }

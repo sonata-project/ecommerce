@@ -15,7 +15,7 @@ namespace Sonata\ProductBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Entity\ProductManager;
 

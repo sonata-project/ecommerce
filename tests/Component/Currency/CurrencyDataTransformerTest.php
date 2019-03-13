@@ -38,8 +38,8 @@ class CurrencyDataTransformerTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertEquals('EUR', $this->currencyDataTransformer->transform($currency));
-        $this->assertEquals('EUR', $this->currencyDataTransformer->transform('EUR'));
+        $this->assertSame('EUR', $this->currencyDataTransformer->transform($currency));
+        $this->assertSame('EUR', $this->currencyDataTransformer->transform('EUR'));
     }
 
     public function testReverseTransform(): void
@@ -52,6 +52,6 @@ class CurrencyDataTransformerTest extends TestCase
             ->will($this->returnValue($currency));
 
         $this->assertNull($this->currencyDataTransformer->reverseTransform(null));
-        $this->assertEquals('EUR', $this->currencyDataTransformer->reverseTransform('EUR')->getLabel());
+        $this->assertSame('EUR', $this->currencyDataTransformer->reverseTransform('EUR')->getLabel());
     }
 }

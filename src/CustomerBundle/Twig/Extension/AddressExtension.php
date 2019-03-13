@@ -16,7 +16,6 @@ namespace Sonata\CustomerBundle\Twig\Extension;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\ServiceDeliverySelectorInterface;
-use Sonata\CoreBundle\Exception\InvalidParameterException;
 use Sonata\CustomerBundle\Entity\BaseAddress;
 
 /**
@@ -77,7 +76,7 @@ class AddressExtension extends \Twig_Extension
         $requiredAddressKeys = ['firstname', 'lastname', 'address1', 'postcode', 'city', 'country_code'];
 
         if (!($address instanceof AddressInterface) && (!\is_array($address) || 0 !== \count(array_diff($requiredAddressKeys, array_keys($address))))) {
-            throw new InvalidParameterException(sprintf(
+            throw new \RuntimeException(sprintf(
                 'sonata_address_render needs an AddressInterface instance or an array with keys (%s)',
                 implode(', ', $requiredAddressKeys)
             ));
@@ -91,7 +90,7 @@ class AddressExtension extends \Twig_Extension
             ];
         } else {
             if ($showEdit && !\array_key_exists('id', $address)) {
-                throw new InvalidParameterException(
+                throw new \RuntimeException(
                     "sonata_address_render needs 'id' key to be set to render the edit button"
                 );
             }

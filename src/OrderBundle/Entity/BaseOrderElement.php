@@ -263,7 +263,7 @@ abstract class BaseOrderElement implements OrderElementInterface
     public function setStatus($status): void
     {
         $this->status = $status;
-        if (OrderInterface::STATUS_VALIDATED == $this->getStatus()) {
+        if (OrderInterface::STATUS_VALIDATED === $this->getStatus()) {
             $this->setValidatedAt(new \DateTime());
         }
     }
@@ -285,7 +285,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isValidated()
     {
-        return null != $this->getValidatedAt() && OrderInterface::STATUS_VALIDATED == $this->getStatus();
+        return null !== $this->getValidatedAt() && OrderInterface::STATUS_VALIDATED === $this->getStatus();
     }
 
     /**
@@ -293,7 +293,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isCancelled()
     {
-        return null != $this->getValidatedAt() && OrderInterface::STATUS_CANCELLED == $this->getStatus();
+        return null !== $this->getValidatedAt() && OrderInterface::STATUS_CANCELLED === $this->getStatus();
     }
 
     /**
@@ -301,7 +301,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isPending()
     {
-        return \in_array($this->getStatus(), [OrderInterface::STATUS_PENDING]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_PENDING], true);
     }
 
     /**
@@ -311,7 +311,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isOpen()
     {
-        return \in_array($this->getStatus(), [OrderInterface::STATUS_OPEN]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_OPEN], true);
     }
 
     /**
@@ -329,7 +329,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      */
     public function isError()
     {
-        return \in_array($this->getStatus(), [OrderInterface::STATUS_ERROR]);
+        return \in_array($this->getStatus(), [OrderInterface::STATUS_ERROR], true);
     }
 
     /**

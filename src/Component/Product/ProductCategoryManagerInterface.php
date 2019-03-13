@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\Component\Product;
 
 use Sonata\ClassificationBundle\Model\CategoryInterface;
-use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
 
 interface ProductCategoryManagerInterface extends ManagerInterface
 {

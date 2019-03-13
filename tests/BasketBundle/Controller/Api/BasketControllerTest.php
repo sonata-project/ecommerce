@@ -46,7 +46,7 @@ class BasketControllerTest extends TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
+        $this->assertSame([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
     public function testGetBasketAction(): void
@@ -56,7 +56,7 @@ class BasketControllerTest extends TestCase
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
-        $this->assertEquals($basket, $this->createBasketController($basketManager)->getBasketAction(1));
+        $this->assertSame($basket, $this->createBasketController($basketManager)->getBasketAction(1));
     }
 
     public function testGetBasketActionNotFoundException(): void
@@ -77,7 +77,7 @@ class BasketControllerTest extends TestCase
         $basketManager = $this->createMock(BasketManagerInterface::class);
         $basketManager->expects($this->once())->method('findOneBy')->will($this->returnValue($basket));
 
-        $this->assertEquals($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
+        $this->assertSame($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
     }
 
     public function testGetBasketelementsActionNotFoundException(): void
@@ -184,7 +184,7 @@ class BasketControllerTest extends TestCase
 
         $view = $this->createBasketController($basketManager)->deleteBasketAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteBasketInvalidAction(): void

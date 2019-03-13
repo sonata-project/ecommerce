@@ -16,7 +16,7 @@ namespace Sonata\OrderBundle\Tests\Entity;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\OrderBundle\Entity\OrderManager;
 
@@ -41,7 +41,7 @@ class OrderManagerTest extends TestCase
         $registry = $this->createMock(ManagerRegistry::class);
         $order = new OrderManager(Order::class, $registry);
 
-        $this->assertEquals(Order::class, $order->getClass());
+        $this->assertSame(Order::class, $order->getClass());
     }
 
     public function testCreate(): void

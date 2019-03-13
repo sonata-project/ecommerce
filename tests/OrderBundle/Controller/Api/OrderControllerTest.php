@@ -35,13 +35,13 @@ class OrderControllerTest extends TestCase
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $this->assertEquals([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
+        $this->assertSame([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
     public function testGetOrderAction(): void
     {
         $order = $this->createMock(OrderInterface::class);
-        $this->assertEquals($order, $this->createOrderController($order)->getOrderAction(1));
+        $this->assertSame($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
     public function testGetOrderActionNotFoundException(): void
@@ -58,7 +58,7 @@ class OrderControllerTest extends TestCase
         $orderElements = $this->createMock(OrderElementInterface::class);
         $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElements]));
 
-        $this->assertEquals([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
+        $this->assertSame([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
     }
 
     /**

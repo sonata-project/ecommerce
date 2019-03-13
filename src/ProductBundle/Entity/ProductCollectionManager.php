@@ -16,7 +16,7 @@ namespace Sonata\ProductBundle\Entity;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\ProductCollectionManagerInterface;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class ProductCollectionManager extends BaseEntityManager implements ProductCollectionManagerInterface
 {

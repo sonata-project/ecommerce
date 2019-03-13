@@ -55,8 +55,8 @@ class ServiceDeliveryTest extends TestCase
             ServiceDeliveryInterface::STATUS_COMPLETED => 'status_completed',
             ServiceDeliveryInterface::STATUS_RETURNED => 'status_returned',
         ];
-        $this->assertEquals($statusList, BaseDelivery::getStatusList());
-        $this->assertEquals($statusList, BaseServiceDelivery::getStatusList());
+        $this->assertSame($statusList, BaseDelivery::getStatusList());
+        $this->assertSame($statusList, BaseServiceDelivery::getStatusList());
     }
 
     public function testGetOption(): void
@@ -65,8 +65,8 @@ class ServiceDeliveryTest extends TestCase
 
         $delivery->setOptions(['option1' => 'value1']);
 
-        $this->assertEquals('value1', $delivery->getOption('option1'));
-        $this->assertEquals('default', $delivery->getOption('unexisting', 'default'));
+        $this->assertSame('value1', $delivery->getOption('option1'));
+        $this->assertSame('default', $delivery->getOption('unexisting', 'default'));
         $this->assertNull($delivery->getOption('unexisting'));
     }
 }

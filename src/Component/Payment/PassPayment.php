@@ -106,7 +106,7 @@ class PassPayment extends BasePayment
             return false;
         }
 
-        if ($transaction->get('check') == $this->generateUrlCheck($transaction->getOrder())) {
+        if ($transaction->get('check') === $this->generateUrlCheck($transaction->getOrder())) {
             return true;
         }
 
@@ -129,7 +129,7 @@ class PassPayment extends BasePayment
 
         $response = $this->browser->get($url);
 
-        $routeName = 'ok' == $response->getContent() ? 'url_return_ok' : 'url_return_ko';
+        $routeName = 'ok' === $response->getContent() ? 'url_return_ok' : 'url_return_ko';
 
         // redirect the user to the correct page
         $response = new Response('', 302, [

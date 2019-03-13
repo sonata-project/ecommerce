@@ -106,7 +106,7 @@ class BasketController extends Controller
     {
         $params = $request->get('add_basket');
 
-        if ('POST' != $request->getMethod()) {
+        if ('POST' !== $request->getMethod()) {
             throw new MethodNotAllowedException(['POST']);
         }
 
@@ -223,7 +223,7 @@ class BasketController extends Controller
     {
         $basket = $this->get('sonata.basket');
 
-        if (0 == $basket->countBasketElements()) {
+        if (0 === $basket->countBasketElements()) {
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
@@ -273,7 +273,7 @@ class BasketController extends Controller
     {
         $basket = $this->get('sonata.basket');
 
-        if (0 == $basket->countBasketElements()) {
+        if (0 === $basket->countBasketElements()) {
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
@@ -333,7 +333,7 @@ class BasketController extends Controller
         $basket = $this->get('sonata.basket');
         $basket->setCustomer($customer);
 
-        if (0 == $basket->countBasketElements()) {
+        if (0 === $basket->countBasketElements()) {
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
@@ -399,7 +399,7 @@ class BasketController extends Controller
     {
         $basket = $this->get('sonata.basket');
 
-        if (0 == $basket->countBasketElements()) {
+        if (0 === $basket->countBasketElements()) {
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
@@ -474,7 +474,7 @@ class BasketController extends Controller
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
 
-        if ('POST' == $request->getMethod()) {
+        if ('POST' === $request->getMethod()) {
             if ($request->get('tac')) {
                 // send the basket to the payment callback
                 return $this->forward('SonataPaymentBundle:Payment:sendbank');
@@ -485,7 +485,7 @@ class BasketController extends Controller
 
         return $this->render('@SonataBasket/Basket/final_review_step.html.twig', [
             'basket' => $basket,
-            'tac_error' => 'POST' == $request->getMethod(),
+            'tac_error' => 'POST' === $request->getMethod(),
         ]);
     }
 }

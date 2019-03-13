@@ -15,9 +15,9 @@ namespace Sonata\CustomerBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\BaseCustomer;
 use Sonata\CustomerBundle\Entity\CustomerManager;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 class CustomerManagerTest extends TestCase
 {

@@ -25,6 +25,6 @@ class NodeScelliusTransactionGeneratorTest extends TestCase
         $order->expects($this->never())->method('getReference');
 
         $generator = new NodeScelliusTransactionGenerator();
-        $this->assertEquals('', $generator->generate($order));
+        $this->assertSame('', $generator->generate($order));
     }
 }

@@ -18,7 +18,7 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class ProductCategoryManager extends BaseEntityManager implements ProductCategoryManagerInterface
 {

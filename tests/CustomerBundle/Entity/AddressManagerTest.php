@@ -18,9 +18,9 @@ use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 use Sonata\CustomerBundle\Entity\AddressManager;
 use Sonata\CustomerBundle\Entity\BaseAddress;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

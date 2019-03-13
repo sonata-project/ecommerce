@@ -126,7 +126,7 @@ class OgonePayment extends BasePayment
             return false;
         }
 
-        if ($transaction->get('check') == $this->generateUrlCheck($transaction->getOrder())) {
+        if ($transaction->get('check') === $this->generateUrlCheck($transaction->getOrder())) {
             return true;
         }
 
