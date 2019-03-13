@@ -25,7 +25,7 @@ use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Currency\CurrencyFormType;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
-use Sonata\CoreBundle\Form\Type\DatePickerType;
+use Sonata\Form\Type\DatePickerType;
 use Sonata\OrderBundle\Form\Type\OrderStatusType;
 use Sonata\PaymentBundle\Form\Type\PaymentTransactionStatusType;
 use Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType;
