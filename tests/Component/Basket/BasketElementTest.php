@@ -23,27 +23,7 @@ use Sonata\Component\Product\ProductDefinition;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Sonata\ProductBundle\Model\BaseProductProvider;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-
-class ProductProviderTest extends BaseProductProvider
-{
-    /**
-     * @return string
-     */
-    public function getBaseControllerName()
-    {
-        return 'DumbTestController';
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatesPath(): string
-    {
-        return '';
-    }
-}
 
 class BasketElementTest extends TestCase
 {

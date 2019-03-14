@@ -14,62 +14,10 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Generator;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManager as BaseEntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\MysqlReference;
-use Sonata\InvoiceBundle\Entity\BaseInvoice;
-use Sonata\OrderBundle\Entity\BaseOrder;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-
-class EntityManager extends BaseEntityManager
-{
-    public function getClassMetadata($className)
-    {
-        $obj = new \stdClass();
-        $obj->table['name'] = 'test';
-
-        return $obj;
-    }
-}
-
-class InvoiceMock extends BaseInvoice
-{
-    protected $id;
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * Returns id.
-     *
-     * @return int $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-}
-
-class OrderMock extends BaseOrder
-{
-    protected $id;
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return int the order id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-}
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>

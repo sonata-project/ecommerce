@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Basket;
 
-use Sonata\Component\Delivery\BaseDelivery;
+use Sonata\Component\Delivery\BaseServiceDelivery;
 
-class Delivery extends BaseDelivery
+class Delivery extends BaseServiceDelivery
 {
     public function isAddressRequired()
     {

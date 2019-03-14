@@ -14,11 +14,6 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Delivery;
 
 use PHPUnit\Framework\TestCase;
-use Sonata\ProductBundle\Entity\BaseDelivery;
-
-class Delivery extends BaseDelivery
-{
-}
 
 class BaseDeliveryTest extends TestCase
 {

@@ -22,7 +22,6 @@ use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
-use Sonata\Component\Delivery\BaseServiceDelivery;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Product\Pool;
@@ -32,29 +31,6 @@ use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Tests\Product\Product;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-
-class Delivery extends BaseServiceDelivery
-{
-    public function isAddressRequired()
-    {
-        return true;
-    }
-
-    public function getName()
-    {
-        return 'delivery 1';
-    }
-
-    public function getVatRate()
-    {
-        return 19.60;
-    }
-
-    public function getPrice()
-    {
-        return 120;
-    }
-}
 
 class BasketTest extends TestCase
 {

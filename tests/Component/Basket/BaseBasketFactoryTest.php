@@ -14,60 +14,10 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Basket;
 
 use PHPUnit\Framework\TestCase;
-use Sonata\Component\Basket\BaseBasketFactory;
 use Sonata\Component\Basket\BasketBuilderInterface;
-use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
-use Sonata\Component\Customer\CustomerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
-class BasketFactory extends BaseBasketFactory
-{
-    /**
-     * @return \Sonata\Component\Basket\BasketBuilderInterface
-     */
-    public function getBasketBuilder()
-    {
-        return $this->basketBuilder;
-    }
-
-    /**
-     * @return \Sonata\Component\Basket\BasketManagerInterface
-     */
-    public function getBasketManager()
-    {
-        return $this->basketManager;
-    }
-
-    /**
-     * @return \Sonata\Component\Currency\CurrencyDetectorInterface
-     */
-    public function getCurrencyDetector()
-    {
-        return $this->currencyDetector;
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface
-     */
-    public function getSession()
-    {
-        return $this->session;
-    }
-
-    public function load(CustomerInterface $customer): void
-    {
-    }
-
-    public function save(BasketInterface $basket): void
-    {
-    }
-
-    public function reset(BasketInterface $basket, $full = true): void
-    {
-    }
-}
 
 /**
  * @author Hugo Briand <briand@ekino.com>

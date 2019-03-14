@@ -26,14 +26,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class User
-{
-    public function getId()
-    {
-        return 1;
-    }
-}
-
 class CustomerSelectorTest extends TestCase
 {
     /**

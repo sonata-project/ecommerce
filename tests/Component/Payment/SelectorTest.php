@@ -18,15 +18,6 @@ use Sonata\Component\Payment\PaymentNotFoundException;
 use Sonata\Component\Payment\Pool as PaymentPool;
 use Sonata\Component\Payment\Selector;
 use Sonata\Component\Product\Pool as ProductPool;
-use Sonata\CustomerBundle\Entity\BaseAddress;
-
-class Address extends BaseAddress
-{
-    public function getId()
-    {
-        return $this->id;
-    }
-}
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>

@@ -19,8 +19,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use JMS\Serializer\SerializerInterface;
 use PHPUnit\Framework\TestCase;
-use Sonata\ClassificationBundle\Entity\BaseCategory;
-use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Basket\BasketElementManagerInterface;
 use Sonata\Component\Currency\CurrencyPriceCalculator;
@@ -30,134 +28,24 @@ use Sonata\Component\Product\ProductDefinition;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Tests\Basket\ProductProviderTest;
-use Sonata\OrderBundle\Entity\BaseOrderElement;
-use Sonata\ProductBundle\Entity\BaseDelivery;
-use Sonata\ProductBundle\Entity\BasePackage;
-use Sonata\ProductBundle\Entity\BaseProduct;
-use Sonata\ProductBundle\Entity\BaseProductCategory;
-use Sonata\ProductBundle\Entity\BaseProductCollection;
 use Sonata\ProductBundle\Entity\ProductCategoryManager;
 use Sonata\ProductBundle\Entity\ProductCollectionManager;
-use Sonata\ProductBundle\Model\BaseProductProvider;
-
-class Product extends BaseProduct
-{
-    public $enabled = true;
-    public $id = 1;
-    public $name = 'fake name';
-    public $price = 15;
-    public $vat = 19.6;
-
-    public function isRecurrentPayment()
-    {
-        return false;
-    }
-
-    public function getElementOptions()
-    {
-        return [];
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        return $this->id = $id;
-    }
-}
-
-class ProductCategory extends BaseProductCategory
-{
-    protected $id;
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-}
-
-class Category extends BaseCategory
-{
-    protected $id;
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-}
-
-class ProductCollection extends BaseProductCollection
-{
-    protected $id;
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-}
-
-class Collection extends BaseCollection
-{
-    protected $id;
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-}
-
-class Package extends BasePackage
-{
-}
-class Delivery extends BaseDelivery
-{
-}
-
-class OrderElement extends BaseOrderElement
-{
-}
-
-class BaseProductServiceTest_ProductProvider extends BaseProductProvider
-{
-    /**
-     * @return string
-     */
-    public function getBaseControllerName()
-    {
-        return 'DumbTestController';
-    }
-
-    /**
-     * @return string
-     */
-    public function getTemplatesPath(): string
-    {
-        return '';
-    }
-}
-
-class BaseOrderElementTest_ProductProvider extends BaseOrderElement
-{
-}
 
 class BaseProductServiceTest extends TestCase
 {
     /**
-     * @return BaseProductServiceTest_ProductProvider
+     * @return ProductProvider
      */
     public function getBaseProvider()
     {
         $serializer = $this->createMock(SerializerInterface::class);
         $serializer->expects($this->any())->method('serialize')->will($this->returnValue('{}'));
 
-        $provider = new BaseProductServiceTest_ProductProvider($serializer);
+        $provider = new ProductProvider($serializer);
 
         $basketElementManager = $this->createMock(BasketElementManagerInterface::class);
         $basketElementManager->expects($this->any())->method('getClass')->will(
-            $this->returnValue(BaseOrderElementTest_ProductProvider::class)
+            $this->returnValue(ProductProvider::class)
         );
         $provider->setBasketElementManager($basketElementManager);
 
