@@ -66,7 +66,7 @@ class CustomerSelector implements CustomerSelectorInterface
         $customer = null;
         $user = null;
 
-        if (true === $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (true === $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             // user is authenticated
             $user = $this->securityContext->getToken()->getUser();
 
