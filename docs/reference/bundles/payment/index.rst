@@ -258,7 +258,7 @@ In order to add a custom payment methods, here are the steps to follow:
 .. code-block:: xml
 
         <service id="app.payment.bitcoin" class="App\Payment\BitcoinPayment">
-            <tag name="sonata.delivery.method" />
+            <tag name="sonata.payment.method" />
         </service>
 
 3. Add it to your configuration:
