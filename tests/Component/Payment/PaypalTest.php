@@ -146,36 +146,44 @@ class PaypalTest extends TestCase
         $paypal->setLogger($this->createMock(LoggerInterface::class));
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
-        $order->expects($this->any())->method('isValidated')->will($this->returnValue(true));
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->once())->method('getOrder')->will($this->returnValue($order));
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_ORDER_UNKNOWN));
+        $transaction->expects($this->once())->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->atLeastOnce())
+                    ->method('getStatusCode')
+                    ->will($this->returnValue(TransactionInterface::STATUS_ORDER_UNKNOWN));
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_ERROR_VALIDATION));
+        $transaction->expects($this->atLeastOnce())->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->atLeastOnce())
+                    ->method('getStatusCode')
+                    ->will($this->returnValue(TransactionInterface::STATUS_ERROR_VALIDATION));
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_CANCELLED));
+        $transaction->expects($this->atLeastOnce())->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->atLeastOnce())
+                    ->method('getStatusCode')
+                    ->will($this->returnValue(TransactionInterface::STATUS_CANCELLED));
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->any())->method('getStatusCode')->will($this->returnValue(TransactionInterface::STATUS_PENDING));
-        $transaction->expects($this->any())->method('get')->will($this->returnValue(Paypal::PENDING_REASON_ADDRESS));
+        $transaction->expects($this->atLeastOnce())->method('getOrder')->will($this->returnValue($order));
+        $transaction->expects($this->atLeastOnce())
+                    ->method('getStatusCode')
+                    ->will($this->returnValue(TransactionInterface::STATUS_PENDING));
+        $transaction->expects($this->atLeastOnce())
+                    ->method('get')
+                    ->will($this->returnValue(Paypal::PENDING_REASON_ADDRESS));
 
         $paypal->handleError($transaction);
     }
