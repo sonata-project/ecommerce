@@ -77,7 +77,7 @@ class CheckPaymentTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
 
         $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->once())->method('send')->will($this->returnCallback(function ($request, $response) {
+        $client->expects($this->once())->method('send')->will($this->returnCallback(static function ($request, $response) {
             $response->setContent('ok');
         }));
 

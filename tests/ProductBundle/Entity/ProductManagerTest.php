@@ -25,7 +25,7 @@ class ProductManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -41,7 +41,7 @@ class ProductManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -57,7 +57,7 @@ class ProductManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
@@ -82,7 +82,7 @@ class ProductManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('p.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['enabled' => true]));
@@ -94,7 +94,7 @@ class ProductManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getProductManager(function ($qb) use ($self) {
+            ->getProductManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['p']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('p.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['enabled' => false]));
