@@ -25,7 +25,7 @@ class CustomerManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -44,7 +44,7 @@ class CustomerManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(static function ($qb) use ($self) {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
@@ -53,7 +53,7 @@ class CustomerManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
@@ -78,7 +78,7 @@ class CustomerManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['isFake' => true]));
@@ -90,7 +90,7 @@ class CustomerManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCustomerManager(function ($qb) use ($self) {
+            ->getCustomerManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['c']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.isFake = :isFake'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['isFake' => false]));

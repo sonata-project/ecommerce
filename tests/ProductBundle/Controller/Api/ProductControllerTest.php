@@ -47,7 +47,7 @@ class ProductControllerTest extends TestCase
         $paramFetcher = $this->createMock(ParamFetcher::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
-        $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(function ($param) {
+        $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(static function ($param) {
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
 

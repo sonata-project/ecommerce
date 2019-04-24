@@ -87,7 +87,7 @@ class AddressManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getAddressManager(function ($qb) use ($self) {
+            ->getAddressManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['a']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -106,7 +106,7 @@ class AddressManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getAddressManager(function ($qb) use ($self) {
+            ->getAddressManager(static function ($qb) use ($self) {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
@@ -115,7 +115,7 @@ class AddressManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getAddressManager(function ($qb) use ($self) {
+            ->getAddressManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['a']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
