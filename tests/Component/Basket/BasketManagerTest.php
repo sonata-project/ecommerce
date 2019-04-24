@@ -91,7 +91,7 @@ class BasketManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getBasketManager(function ($qb) use ($self) {
+            ->getBasketManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['b']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -109,7 +109,7 @@ class BasketManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getBasketManager(function ($qb) use ($self) {
+            ->getBasketManager(static function ($qb) use ($self) {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
@@ -118,7 +118,7 @@ class BasketManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getBasketManager(function ($qb) use ($self) {
+            ->getBasketManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['b']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(

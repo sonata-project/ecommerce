@@ -59,7 +59,7 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->validate()
-            ->ifTrue(function ($v) {
+            ->ifTrue(static function ($v) {
                 foreach ($v['methods'] as $methodCode => $service) {
                     if (null === $service || '' === $service) {
                         foreach ($v['services'] as $serviceConf) {

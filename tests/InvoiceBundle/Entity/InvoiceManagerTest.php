@@ -28,7 +28,7 @@ class InvoiceManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -47,7 +47,7 @@ class InvoiceManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(static function ($qb) use ($self) {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
@@ -56,7 +56,7 @@ class InvoiceManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
@@ -81,7 +81,7 @@ class InvoiceManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_OPEN]));
@@ -93,7 +93,7 @@ class InvoiceManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_PAID]));
@@ -105,7 +105,7 @@ class InvoiceManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getInvoiceManager(function ($qb) use ($self) {
+            ->getInvoiceManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['i']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('i.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseInvoice::STATUS_CONFLICT]));
