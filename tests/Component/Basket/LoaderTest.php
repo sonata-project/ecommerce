@@ -43,7 +43,7 @@ class LoaderTest extends TestCase
 
         $customer = $this->createMock(CustomerInterface::class);
         $basketFactory = $this->createMock(BasketFactoryInterface::class);
-        $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(function (): void {
+        $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(static function (): void {
             throw new \RuntimeException();
         }));
 

@@ -89,7 +89,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('orderBy')->with(
@@ -108,7 +108,7 @@ class OrderManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
@@ -117,7 +117,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->exactly(2))->method('orderBy')->with(
@@ -142,7 +142,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_OPEN]));
@@ -154,7 +154,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_CANCELLED]));
@@ -166,7 +166,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_ERROR]));
@@ -178,7 +178,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_PENDING]));
@@ -190,7 +190,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_STOPPED]));
@@ -202,7 +202,7 @@ class OrderManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getOrderManager(function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(['o']));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('o.status = :status'));
                 $qb->expects($self->once())->method('setParameters')->with($self->equalTo(['status' => BaseOrder::STATUS_VALIDATED]));

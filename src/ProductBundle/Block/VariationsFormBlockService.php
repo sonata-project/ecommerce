@@ -121,8 +121,8 @@ class VariationsFormBlockService extends BaseBlockService
             'product' => null,
             'variations_properties' => [],
             'form_route' => 'sonata_product_variation_product',
-            'form_route_parameters' => function (Options $options) {
-                $product = $options['product'];
+            'form_route_parameters' => static function (Options $options) {
+                $product = $options->get('product');
 
                 if (null !== $product && !$product instanceof ProductInterface) {
                     throw new \RuntimeException("Wrong 'product' parameter");

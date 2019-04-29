@@ -94,7 +94,7 @@ class PaypalTest extends TestCase
         $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback(static function () use ($check) {
             $asked = func_get_arg(0);
             switch ($asked) {
                         case 'check':
@@ -109,7 +109,7 @@ class PaypalTest extends TestCase
         $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback(static function () use ($check) {
             $asked = func_get_arg(0);
             switch ($asked) {
                         case 'check':
@@ -124,7 +124,7 @@ class PaypalTest extends TestCase
         $transaction = $this->createMock(TransactionInterface::class);
         $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
 
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback(function () use ($check) {
+        $transaction->expects($this->any())->method('get')->will($this->returnCallback(static function () use ($check) {
             $asked = func_get_arg(0);
             switch ($asked) {
                         case 'check':

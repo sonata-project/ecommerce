@@ -157,7 +157,7 @@ class BasketEntityFactoryTest extends TestCase
 
         $session = $this->createMock(SessionInterface::class);
         $tester = $this;
-        $session->expects($this->once())->method('set')->will($this->returnCallback(function ($key, $value) use ($tester, $basket): void {
+        $session->expects($this->once())->method('set')->will($this->returnCallback(static function ($key, $value) use ($tester, $basket): void {
             $tester->assertEquals($basket, $value);
             $tester->assertEquals('sonata/basket/factory/customer/new', $key);
         }));
