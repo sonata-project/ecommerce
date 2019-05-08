@@ -57,7 +57,7 @@ class BaseProductTest extends TestCase
         $image = $this->createMock(MediaInterface::class);
         $image->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue('correctMedia'));
+            ->willReturn('correctMedia');
 
         $product->setImage($image);
 
@@ -70,13 +70,13 @@ class BaseProductTest extends TestCase
         $product = new Product();
 
         $pc = $this->createMock(ProductCategoryInterface::class);
-        $pc->expects($this->any())->method('getMain')->will($this->returnValue(true));
+        $pc->expects($this->any())->method('getMain')->willReturn(true);
 
         $pc2 = $this->createMock(ProductCategoryInterface::class);
-        $pc2->expects($this->any())->method('getMain')->will($this->returnValue(true));
+        $pc2->expects($this->any())->method('getMain')->willReturn(true);
 
         $pc3 = $this->createMock(ProductCategoryInterface::class);
-        $pc3->expects($this->any())->method('getMain')->will($this->returnValue(true));
+        $pc3->expects($this->any())->method('getMain')->willReturn(true);
 
         $this->assertFalse($product->hasOneMainCategory());
 

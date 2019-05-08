@@ -34,13 +34,13 @@ class InvoiceTransformerTest extends TestCase
         $orderElement = $this->createMock(OrderElementInterface::class);
         $orderElement->expects($this->once())->method('getDescription');
         $orderElement->expects($this->once())->method('getDesignation');
-        $orderElement->expects($this->once())->method('getPrice')->will($this->returnValue(42));
-        $orderElement->expects($this->once())->method('getQuantity')->will($this->returnValue(3));
+        $orderElement->expects($this->once())->method('getPrice')->willReturn(42);
+        $orderElement->expects($this->once())->method('getQuantity')->willReturn(3);
         $orderElement->expects($this->once())->method('getVatRate');
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElement]));
-        $order->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
+        $order->expects($this->once())->method('getOrderElements')->willReturn([$orderElement]);
+        $order->expects($this->once())->method('getCustomer')->willReturn($customer);
 
         $order->expects($this->once())->method('getBillingAddress1');
         $order->expects($this->once())->method('getBillingAddress2');
@@ -57,7 +57,7 @@ class InvoiceTransformerTest extends TestCase
 
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $order->expects($this->once())->method('getCurrency')->will($this->returnValue($currency));
+        $order->expects($this->once())->method('getCurrency')->willReturn($currency);
         $order->expects($this->once())->method('getTotalExcl');
         $order->expects($this->once())->method('getTotalInc');
 
@@ -66,7 +66,7 @@ class InvoiceTransformerTest extends TestCase
         $invoiceElement = $this->createMock(InvoiceElementInterface::class);
 
         $invoiceElementManager = $this->createMock(InvoiceElementManagerInterface::class);
-        $invoiceElementManager->expects($this->once())->method('create')->will($this->returnValue($invoiceElement));
+        $invoiceElementManager->expects($this->once())->method('create')->willReturn($invoiceElement);
 
         $deliveryPool = new DeliveryPool();
 

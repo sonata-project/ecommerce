@@ -32,7 +32,7 @@ class BasketManagerTest extends TestCase
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
 
@@ -47,7 +47,7 @@ class BasketManagerTest extends TestCase
         $em->expects($this->once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
 
@@ -62,10 +62,10 @@ class BasketManagerTest extends TestCase
         $repository->expects($this->once())->method('findBy');
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
+        $em->expects($this->any())->method('getRepository')->willReturn($repository);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
         $basketMgr->findBy([]);
@@ -79,7 +79,7 @@ class BasketManagerTest extends TestCase
         $em->expects($this->once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
 
@@ -146,7 +146,7 @@ class BasketManagerTest extends TestCase
         ]);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         return new BasketManager(BaseBasket::class, $registry);
     }

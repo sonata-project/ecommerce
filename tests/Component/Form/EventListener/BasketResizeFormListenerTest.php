@@ -47,7 +47,7 @@ class BasketResizeFormListenerTest extends TestCase
         $factory = $this->createMock(FormFactoryInterface::class);
         $factory->expects($this->any())
             ->method('createNamedBuilder')
-            ->will($this->returnValue($builder));
+            ->willReturn($builder);
 
         $basket = $this->createMock(BasketInterface::class);
 
@@ -63,12 +63,12 @@ class BasketResizeFormListenerTest extends TestCase
         $factory = $this->createMock(FormFactoryInterface::class);
         $factory->expects($this->any())
             ->method('createNamedBuilder')
-            ->will($this->returnValue($builder));
+            ->willReturn($builder);
 
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->any())
             ->method('getBasketElements')
-            ->will($this->returnValue($this->getBasketElements()));
+            ->willReturn($this->getBasketElements());
 
         $formListener = new BasketResizeFormListener($factory, $basket);
         $formListener->preBind($this->getFormEvent());
@@ -81,12 +81,12 @@ class BasketResizeFormListenerTest extends TestCase
         $factory = $this->createMock(FormFactoryInterface::class);
         $factory->expects($this->any())
             ->method('createNamedBuilder')
-            ->will($this->returnValue($builder));
+            ->willReturn($builder);
 
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->any())
             ->method('getBasketElements')
-            ->will($this->returnValue($this->getBasketElements(null)));
+            ->willReturn($this->getBasketElements(null));
 
         $formListener = new BasketResizeFormListener($factory, $basket);
         $formListener->preBind($this->getFormEvent(false, false));
@@ -101,12 +101,12 @@ class BasketResizeFormListenerTest extends TestCase
         $factory = $this->createMock(FormFactoryInterface::class);
         $factory->expects($this->any())
             ->method('createNamedBuilder')
-            ->will($this->returnValue($builder));
+            ->willReturn($builder);
 
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->any())
             ->method('getBasketElements')
-            ->will($this->returnValue($this->getBasketElements('test')));
+            ->willReturn($this->getBasketElements('test'));
 
         $formListener = new BasketResizeFormListener($factory, $basket);
         $formListener->preBind($this->getFormEvent(false, false));
@@ -120,12 +120,12 @@ class BasketResizeFormListenerTest extends TestCase
         $formEvent = $this->createMock(FormEvent::class);
         $formEvent->expects($this->once())
             ->method('getForm')
-            ->will($this->returnValue($this->getMockedForm($addIsCalled)));
+            ->willReturn($this->getMockedForm($addIsCalled));
 
         if ($preSetData) {
             $formEvent->expects($this->once())
                 ->method('getData')
-                ->will($this->returnValue($this->getBasketElements()));
+                ->willReturn($this->getBasketElements());
         }
 
         return $formEvent;
@@ -157,7 +157,7 @@ class BasketResizeFormListenerTest extends TestCase
         $basketElement->expects($this->exactly(2))->method('getPosition');
         $basketElement->expects($this->once())
             ->method('getProductProvider')
-            ->will($this->returnValue($productProvider));
+            ->willReturn($productProvider);
 
         $elements[] = $basketElement;
 

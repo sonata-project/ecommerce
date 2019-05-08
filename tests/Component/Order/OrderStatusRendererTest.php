@@ -51,9 +51,9 @@ class OrderStatusRendererTest extends TestCase
         $osRenderer = new OrderStatusRenderer();
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getStatus')->will($this->returnValue(array_rand(BaseOrder::getStatusList())));
-        $order->expects($this->once())->method('getDeliveryStatus')->will($this->returnValue(array_rand(BaseServiceDelivery::getStatusList())));
-        $order->expects($this->once())->method('getPaymentStatus')->will($this->returnValue(array_rand(BaseTransaction::getStatusList())));
+        $order->expects($this->once())->method('getStatus')->willReturn(array_rand(BaseOrder::getStatusList()));
+        $order->expects($this->once())->method('getDeliveryStatus')->willReturn(array_rand(BaseServiceDelivery::getStatusList()));
+        $order->expects($this->once())->method('getPaymentStatus')->willReturn(array_rand(BaseTransaction::getStatusList()));
 
         $this->assertContains($osRenderer->getStatusClass($order, '', 'error'), ['success', 'info', 'error']);
         $this->assertContains($osRenderer->getStatusClass($order, 'payment', 'error'), ['success', 'info', 'error']);
@@ -65,7 +65,7 @@ class OrderStatusRendererTest extends TestCase
         $osRenderer = new OrderStatusRenderer();
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getStatus')->will($this->returnValue(8));
+        $order->expects($this->once())->method('getStatus')->willReturn(8);
 
         $this->assertSame('default_value', $osRenderer->getStatusClass($order, 'toubidou', 'default_value'));
     }

@@ -47,10 +47,10 @@ class CheckPaymentTest extends TestCase
         $order->setCreatedAt($date);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('get')->will($this->returnCallback([$this, 'getCallback']));
+        $transaction->expects($this->exactly(2))->method('get')->willReturnCallback([$this, 'getCallback']);
         $transaction->expects($this->once())->method('setTransactionId');
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
+        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
+        $transaction->expects($this->any())->method('getInformation')->willReturn('');
 
         $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
@@ -73,14 +73,14 @@ class CheckPaymentTest extends TestCase
         $order->setCreatedAt($date);
 
         $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->exactly(2))->method('generate')->will($this->returnValue('http://foo.bar/ok-url'));
+        $router->expects($this->exactly(2))->method('generate')->willReturn('http://foo.bar/ok-url');
 
         $logger = $this->createMock(LoggerInterface::class);
 
         $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->once())->method('send')->will($this->returnCallback(static function ($request, $response): void {
+        $client->expects($this->once())->method('send')->willReturnCallback(static function ($request, $response): void {
             $response->setContent('ok');
-        }));
+        });
 
         $browser = new Browser($client);
         $payment = new CheckPayment($router, $logger, $browser);

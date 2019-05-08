@@ -33,11 +33,11 @@ class AddressControllerTest extends TestCase
     public function testGetAddressesAction(): void
     {
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
+        $addressManager->expects($this->once())->method('getPager')->willReturn([]);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
         $this->assertSame([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
@@ -62,16 +62,16 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
+        $addressManager->expects($this->once())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($address));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($address);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
 
@@ -83,15 +83,15 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->never())->method('save')->will($this->returnValue($address));
+        $addressManager->expects($this->never())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
 
@@ -103,17 +103,17 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
-        $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
+        $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
+        $addressManager->expects($this->once())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($address));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($address);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController($address, $addressManager, $formFactory)->putAddressAction(1, new Request());
 
@@ -125,16 +125,16 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
-        $addressManager->expects($this->never())->method('save')->will($this->returnValue($address));
+        $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
+        $addressManager->expects($this->never())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController($address, $addressManager, $formFactory)->putAddressAction(1, new Request());
 
@@ -146,7 +146,7 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
+        $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
         $addressManager->expects($this->once())->method('delete');
 
         $view = $this->createAddressController($address, $addressManager)->deleteAddressAction(1);
@@ -159,7 +159,7 @@ class AddressControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));
+        $addressManager->expects($this->once())->method('findOneBy')->willReturn(null);
         $addressManager->expects($this->never())->method('delete');
 
         $this->createAddressController(null, $addressManager)->deleteAddressAction(1);
@@ -180,7 +180,7 @@ class AddressControllerTest extends TestCase
             $addressManager = $this->createMock(AddressManagerInterface::class);
 
             if ($address) {
-                $addressManager->expects($this->once())->method('findOneBy')->will($this->returnValue($address));
+                $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
             }
         }
 

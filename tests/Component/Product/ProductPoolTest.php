@@ -34,11 +34,11 @@ class ProductPoolTest extends TestCase
 
         $productManager1->expects($this->any())
             ->method('getClass')
-            ->will($this->returnValue($product1));
+            ->willReturn($product1);
 
         $productManager2->expects($this->any())
             ->method('getClass')
-            ->will($this->returnValue($product2));
+            ->willReturn($product2);
 
         $definition1 = new ProductDefinition($productProvider, $productManager1);
         $definition2 = new ProductDefinition($productProvider, $productManager2);

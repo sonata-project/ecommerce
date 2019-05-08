@@ -36,7 +36,7 @@ class ApiBasketTypeTest extends TestCase
         $type = new ApiBasketType('my.test.class', $currencyFormType);
 
         $builder = $this->createMock(FormBuilder::class);
-        $builder->expects($this->once())->method('create')->will($this->returnSelf());
+        $builder->expects($this->once())->method('create')->willReturnSelf();
 
         $type->buildForm($builder, []);
     }

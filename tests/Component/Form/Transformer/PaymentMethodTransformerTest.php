@@ -45,7 +45,7 @@ class PaymentMethodTransformerTest extends TestCase
 
         $pool->expects($this->once())
             ->method('getMethod')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $transformer = new PaymentMethodTransformer($pool);
 
