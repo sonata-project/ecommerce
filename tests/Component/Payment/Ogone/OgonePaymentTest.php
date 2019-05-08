@@ -33,7 +33,7 @@ class OgonePaymentTest extends TestCase
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
         $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->once())->method('generate')->will($this->returnValue('http://www.google.com'));
+        $router->expects($this->once())->method('generate')->willReturn('http://www.google.com');
 
         $payment = new OgonePayment($router, $logger, $templating, true);
         $payment->setCode('ogone_1');
@@ -62,11 +62,11 @@ class OgonePaymentTest extends TestCase
         $order->setLocale('es');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('get')->will($this->returnCallback([$this, 'getCallback']));
+        $transaction->expects($this->any())->method('get')->willReturnCallback([$this, 'getCallback']);
         //        $transaction->expects($this->once())->method('setTransactionId');
-        $transaction->expects($this->any())->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->any())->method('getCreatedAt')->will($this->returnValue($date));
-        $transaction->expects($this->any())->method('getInformation')->will($this->returnValue(''));
+        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
+        $transaction->expects($this->any())->method('getCreatedAt')->willReturn($date);
+        $transaction->expects($this->any())->method('getInformation')->willReturn('');
 
         $this->assertSame('ogone_1', $payment->getCode(), 'Ogone Payment return the correct code');
         $this->assertTrue($payment->isAddableProduct($basket, $product));
@@ -83,7 +83,7 @@ class OgonePaymentTest extends TestCase
     {
         $logger = $this->createMock(LoggerInterface::class);
         $templating = $this->createMock(EngineInterface::class);
-        $templating->expects($this->once())->method('renderResponse')->will($this->returnCallback([$this, 'callbackValidsendbank']));
+        $templating->expects($this->once())->method('renderResponse')->willReturnCallback([$this, 'callbackValidsendbank']);
 
         $router = $this->createMock(RouterInterface::class);
 
@@ -219,7 +219,7 @@ class OgonePaymentTest extends TestCase
         $payment = new OgonePayment($router, $logger, $templating, true);
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())->method('getCreatedAt')->will($this->returnValue(new \DateTime()));
+        $order->expects($this->any())->method('getCreatedAt')->willReturn(new \DateTime());
 
         $check = sha1(
             $order->getReference().
@@ -228,19 +228,19 @@ class OgonePaymentTest extends TestCase
         );
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->once())->method('getOrder')->will($this->returnValue(null));
+        $transaction->expects($this->once())->method('getOrder')->willReturn(null);
 
         $this->assertFalse($payment->isCallbackValid($transaction));
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->once())->method('get')->will($this->returnValue($check));
+        $transaction->expects($this->exactly(2))->method('getOrder')->willReturn($order);
+        $transaction->expects($this->once())->method('get')->willReturn($check);
 
         $this->assertTrue($payment->isCallbackValid($transaction));
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('getOrder')->will($this->returnValue($order));
-        $transaction->expects($this->once())->method('get')->will($this->returnValue('untest'));
+        $transaction->expects($this->exactly(2))->method('getOrder')->willReturn($order);
+        $transaction->expects($this->once())->method('get')->willReturn('untest');
         $transaction->expects($this->once())->method('setState');
         $transaction->expects($this->once())->method('setStatusCode');
         $transaction->expects($this->once())->method('addInformation');
@@ -257,7 +257,7 @@ class OgonePaymentTest extends TestCase
         $payment = new OgonePayment($router, $logger, $templating, true);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->once())->method('get')->will($this->returnValue('reference'));
+        $transaction->expects($this->once())->method('get')->willReturn('reference');
 
         $this->assertSame('reference', $payment->getOrderReference($transaction));
     }

@@ -32,18 +32,18 @@ class OrderTransformerTest extends TestCase
     public function testBasket(): void
     {
         $provider = $this->createMock(ProductProviderInterface::class);
-        $provider->expects($this->once())->method('basketAddProduct')->will($this->returnValue(true));
-        $provider->expects($this->once())->method('createBasketElement')->will($this->returnValue($basketElement = new BasketElement()));
+        $provider->expects($this->once())->method('basketAddProduct')->willReturn(true);
+        $provider->expects($this->once())->method('createBasketElement')->willReturn($basketElement = new BasketElement());
 
         $product = $this->createMock(ProductInterface::class);
         $customer = $this->createMock(CustomerInterface::class);
 
         $manager = $this->createMock(ProductManagerInterface::class);
-        $manager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
+        $manager->expects($this->once())->method('findOneBy')->willReturn($product);
 
         $pool = $this->createMock(Pool::class);
-        $pool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
-        $pool->expects($this->once())->method('getManager')->will($this->returnValue($manager));
+        $pool->expects($this->once())->method('getProvider')->willReturn($provider);
+        $pool->expects($this->once())->method('getManager')->willReturn($manager);
 
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())->method('reset');
@@ -51,17 +51,17 @@ class OrderTransformerTest extends TestCase
 
         $orderElement = $this->createMock(OrderElementInterface::class);
         $orderElement->expects($this->exactly(2))->method('getProductType');
-        $orderElement->expects($this->exactly(1))->method('getProductId')->will($this->returnValue(2));
-        $orderElement->expects($this->exactly(1))->method('getOptions')->will($this->returnValue([]));
-        $orderElement->expects($this->exactly(1))->method('getQuantity')->will($this->returnValue(2));
+        $orderElement->expects($this->exactly(1))->method('getProductId')->willReturn(2);
+        $orderElement->expects($this->exactly(1))->method('getOptions')->willReturn([]);
+        $orderElement->expects($this->exactly(1))->method('getQuantity')->willReturn(2);
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElement]));
-        $order->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
+        $order->expects($this->once())->method('getOrderElements')->willReturn([$orderElement]);
+        $order->expects($this->once())->method('getCustomer')->willReturn($customer);
 
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $order->expects($this->once())->method('getCurrency')->will($this->returnValue($currency));
+        $order->expects($this->once())->method('getCurrency')->willReturn($currency);
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $transformer = new OrderTransformer($pool, $eventDispatcher);

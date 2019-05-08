@@ -39,13 +39,13 @@ class BaseProductServiceTest extends TestCase
     public function getBaseProvider()
     {
         $serializer = $this->createMock(SerializerInterface::class);
-        $serializer->expects($this->any())->method('serialize')->will($this->returnValue('{}'));
+        $serializer->expects($this->any())->method('serialize')->willReturn('{}');
 
         $provider = new ProductProvider($serializer);
 
         $basketElementManager = $this->createMock(BasketElementManagerInterface::class);
-        $basketElementManager->expects($this->any())->method('getClass')->will(
-            $this->returnValue(ProductProvider::class)
+        $basketElementManager->expects($this->any())->method('getClass')->willReturn(
+            ProductProvider::class
         );
         $provider->setBasketElementManager($basketElementManager);
 
@@ -82,11 +82,11 @@ class BaseProductServiceTest extends TestCase
     public function testOrderElement(): void
     {
         $product = $this->createMock(ProductInterface::class);
-        $product->expects($this->any())->method('getId')->will($this->returnValue(42));
-        $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
-        $product->expects($this->any())->method('getPrice')->will($this->returnValue(9.99));
-        $product->expects($this->any())->method('getOptions')->will($this->returnValue(['foo' => 'bar']));
-        $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
+        $product->expects($this->any())->method('getId')->willReturn(42);
+        $product->expects($this->any())->method('getName')->willReturn('Product name');
+        $product->expects($this->any())->method('getPrice')->willReturn(9.99);
+        $product->expects($this->any())->method('getOptions')->willReturn(['foo' => 'bar']);
+        $product->expects($this->any())->method('getDescription')->willReturn('product description');
 
         $productProvider = new ProductProviderTest($this->createMock(SerializerInterface::class));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
@@ -197,10 +197,10 @@ class BaseProductServiceTest extends TestCase
         $repository = $this->createMock(EntityRepository::class);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
+        $em->expects($this->any())->method('getRepository')->willReturn($repository);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $productCategoryManager = new ProductCategoryManager(ProductCategory::class, $registry);
         $provider->setProductCategoryManager($productCategoryManager);
@@ -259,10 +259,10 @@ class BaseProductServiceTest extends TestCase
         $repository = $this->createMock(EntityRepository::class);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->will($this->returnValue($repository));
+        $em->expects($this->any())->method('getRepository')->willReturn($repository);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $productCollectionManager = new ProductCollectionManager(ProductCollection::class, $registry);
         $provider->setProductCollectionManager($productCollectionManager);
@@ -297,7 +297,7 @@ class BaseProductServiceTest extends TestCase
         $product->removeProductCollection($productCollection1);
         $this->assertCount(2, $variation->getProductCollections());
 
-        $repository->expects($this->any())->method('findOneBy')->will($this->returnValue($productCollection1));
+        $repository->expects($this->any())->method('findOneBy')->willReturn($productCollection1);
 
         $provider->synchronizeVariationsCollections($product);
         //        $this->assertEquals(1, count($variation->getProductCollections()));

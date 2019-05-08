@@ -29,11 +29,11 @@ class InvoiceControllerTest extends TestCase
     public function testGetInvoicesAction(): void
     {
         $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
-        $invoiceManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
+        $invoiceManager->expects($this->once())->method('getPager')->willReturn([]);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
         $this->assertSame([], $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }
@@ -56,7 +56,7 @@ class InvoiceControllerTest extends TestCase
     {
         $invoice = $this->createMock(InvoiceInterface::class);
         $invoiceElements = $this->createMock(InvoiceElementInterface::class);
-        $invoice->expects($this->once())->method('getInvoiceElements')->will($this->returnValue([$invoiceElements]));
+        $invoice->expects($this->once())->method('getInvoiceElements')->willReturn([$invoiceElements]);
 
         $this->assertSame([$invoiceElements], $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
     }
@@ -73,7 +73,7 @@ class InvoiceControllerTest extends TestCase
             $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
         }
         if (null !== $invoice) {
-            $invoiceManager->expects($this->once())->method('findOneBy')->will($this->returnValue($invoice));
+            $invoiceManager->expects($this->once())->method('findOneBy')->willReturn($invoice);
         }
 
         return new InvoiceController($invoiceManager);

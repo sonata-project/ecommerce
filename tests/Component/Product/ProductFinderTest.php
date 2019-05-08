@@ -28,7 +28,7 @@ class ProductFinderTest extends TestCase
         $productManager = $this->createMock(ProductManagerInterface::class);
         $productManager->expects($this->once())
             ->method('findInSameCollections')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $finder = new ProductFinder($productManager);
 

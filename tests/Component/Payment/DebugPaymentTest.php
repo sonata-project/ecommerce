@@ -74,7 +74,7 @@ class DebugPaymentTest extends TestCase
 
         $transactionManager->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new DebugPaymentTest_Transaction()));
+            ->willReturn(new DebugPaymentTest_Transaction());
 
         return $transactionManager;
     }

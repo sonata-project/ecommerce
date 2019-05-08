@@ -31,7 +31,7 @@ class SelectorTest extends TestCase
         $paymentPool = $this->getMockBuilder(PaymentPool::class)->getMock();
         $paymentPool->expects($this->any())
             ->method('getMethods')
-            ->will($this->returnValue($paymentPoolMethods));
+            ->willReturn($paymentPoolMethods);
 
         $productPool = $this->getMockBuilder(ProductPool::class)->getMock();
 
@@ -50,7 +50,7 @@ class SelectorTest extends TestCase
         $paymentPool = $this->getMockBuilder(PaymentPool::class)->getMock();
         $paymentPool->expects($this->any())
             ->method('getMethods')
-            ->will($this->returnValue($paymentPoolMethods));
+            ->willReturn($paymentPoolMethods);
 
         $productPool = $this->getMockBuilder(ProductPool::class)->getMock();
 

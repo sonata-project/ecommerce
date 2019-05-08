@@ -37,11 +37,11 @@ class CustomerControllerTest extends TestCase
     public function testGetCustomersAction(): void
     {
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
+        $customerManager->expects($this->once())->method('getPager')->willReturn([]);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
         $this->assertSame([], $this->createCustomerController(null, $customerManager)
             ->getCustomersAction($paramFetcher));
@@ -76,7 +76,7 @@ class CustomerControllerTest extends TestCase
     {
         $customer = $this->createMock(CustomerInterface::class);
         $address = $this->createMock(AddressInterface::class);
-        $customer->expects($this->once())->method('getAddresses')->will($this->returnValue([$address]));
+        $customer->expects($this->once())->method('getAddresses')->willReturn([$address]);
 
         $this->assertSame([$address], $this->createCustomerController($customer)
             ->getCustomerAddressesAction(1));
@@ -87,16 +87,16 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
+        $customerManager->expects($this->once())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($customer);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
@@ -109,15 +109,15 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
+        $customerManager->expects($this->never())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
@@ -134,16 +134,16 @@ class CustomerControllerTest extends TestCase
         $customerManager = $this->createMock(CustomerManagerInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('save')->will($this->returnValue($address));
+        $addressManager->expects($this->once())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($address));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($address);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $customerController = $this->createCustomerController(
             $customer,
@@ -162,15 +162,15 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
+        $customerManager->expects($this->never())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
@@ -183,17 +183,17 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
-        $customerManager->expects($this->once())->method('save')->will($this->returnValue($customer));
+        $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
+        $customerManager->expects($this->once())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($customer));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($customer);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
             ->putCustomerAction(1, new Request());
@@ -206,16 +206,16 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
-        $customerManager->expects($this->never())->method('save')->will($this->returnValue($customer));
+        $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
+        $customerManager->expects($this->never())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->will($this->returnValue(true));
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
+        $form->expects($this->once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
             ->putCustomerAction(1, new Request());
@@ -228,7 +228,7 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
+        $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
         $customerManager->expects($this->once())->method('delete');
 
         $view = $this->createCustomerController($customer, $customerManager)->deleteCustomerAction(1);
@@ -241,7 +241,7 @@ class CustomerControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));
+        $customerManager->expects($this->once())->method('findOneBy')->willReturn(null);
         $customerManager->expects($this->never())->method('delete');
 
         $this->createCustomerController(null, $customerManager)->deleteCustomerAction(1);
@@ -263,7 +263,7 @@ class CustomerControllerTest extends TestCase
             $customerManager = $this->createMock(CustomerManagerInterface::class);
         }
         if (null !== $customer) {
-            $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
+            $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
         }
         if (null === $orderManager) {
             $orderManager = $this->createMock(OrderManagerInterface::class);
@@ -272,7 +272,7 @@ class CustomerControllerTest extends TestCase
             $addressManager = $this->createMock(AddressManagerInterface::class);
         }
         if (null !== $order) {
-            $orderManager->expects($this->once())->method('findBy')->will($this->returnValue([$order]));
+            $orderManager->expects($this->once())->method('findBy')->willReturn([$order]);
         }
         if (null === $formFactory) {
             $formFactory = $this->createMock(FormFactoryInterface::class);

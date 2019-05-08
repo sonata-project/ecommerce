@@ -32,23 +32,23 @@ class AddressManagerTest extends TestCase
         $currentAddress = $this->createMock(AddressInterface::class);
         $currentAddress->expects($this->once())
             ->method('getCurrent')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $currentAddress->expects($this->once())->method('setCurrent');
 
         $custAddresses = [$currentAddress];
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->once())->method('getAddressesByType')->will($this->returnValue($custAddresses));
+        $customer->expects($this->once())->method('getAddressesByType')->willReturn($custAddresses);
 
         $address = $this->createMock(AddressInterface::class);
         $address->expects($this->once())->method('setCurrent');
-        $address->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
+        $address->expects($this->once())->method('getCustomer')->willReturn($customer);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->any())->method('persist');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $addressManager = new AddressManager(AddressInterface::class, $registry);
 
@@ -59,24 +59,24 @@ class AddressManagerTest extends TestCase
     {
         $existingAddress = $this->createMock(AddressInterface::class);
         $existingAddress->expects($this->once())->method('setCurrent');
-        $existingAddress->expects($this->once())->method('getId')->will($this->returnValue(42));
+        $existingAddress->expects($this->once())->method('getId')->willReturn(42);
 
         $custAddresses = [$existingAddress, $this->createMock(AddressInterface::class)];
 
         $customer = $this->createMock(CustomerInterface::class);
         $customer->expects($this->once())
             ->method('getAddressesByType')
-            ->will($this->returnValue($custAddresses));
+            ->willReturn($custAddresses);
 
         $address = $this->createMock(AddressInterface::class);
-        $address->expects($this->once())->method('getCurrent')->will($this->returnValue(true));
-        $address->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
+        $address->expects($this->once())->method('getCurrent')->willReturn(true);
+        $address->expects($this->once())->method('getCustomer')->willReturn($customer);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->exactly(1))->method('persist');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $addressManager = new AddressManager(AddressInterface::class, $registry);
 
@@ -144,7 +144,7 @@ class AddressManagerTest extends TestCase
         ]);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         return new AddressManager(BaseAddress::class, $registry);
     }

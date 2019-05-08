@@ -35,7 +35,7 @@ class BasketBlockServiceTest extends TestCase
     public function testExecute(): void
     {
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
-        $engineInterfaceMock->expects($this->once())->method('renderResponse')->will($this->returnValue(new Response()));
+        $engineInterfaceMock->expects($this->once())->method('renderResponse')->willReturn(new Response());
         $context = $this->createMock(BlockContextInterface::class);
         $block = new BasketBlockService('test', $engineInterfaceMock);
 

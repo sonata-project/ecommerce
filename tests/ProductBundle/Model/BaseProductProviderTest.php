@@ -83,7 +83,7 @@ class BaseProductProviderTest extends TestCase
                 ->getMock();
         $product->expects($this->any())
             ->method('isVariation')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         try {
             $productProvider->createVariation($product); // Product simulates a variation
@@ -128,7 +128,7 @@ class BaseProductProviderTest extends TestCase
         $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getDelete')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
 
@@ -136,7 +136,7 @@ class BaseProductProviderTest extends TestCase
         $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
 
@@ -145,11 +145,11 @@ class BaseProductProviderTest extends TestCase
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $product->expects($this->any())
             ->method('getEnabled')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $basketElement->expects($this->any())
             ->method('getProduct')
-            ->will($this->returnValue($product));
+            ->willReturn($product);
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
 
         // With a non numeric quantity
@@ -157,10 +157,10 @@ class BaseProductProviderTest extends TestCase
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
-            ->will($this->returnValue($product));
+            ->willReturn($product);
         $basketElement->expects($this->any())
             ->method('getQuantity')
-            ->will($this->returnValue('invalid value'));
+            ->willReturn('invalid value');
 
         $this->assertNull($productProvider->validateFormBasketElement($errorElement, $basketElement, $basket));
     }
@@ -175,12 +175,12 @@ class BaseProductProviderTest extends TestCase
         $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
         $basket->expects($this->any())
             ->method('hasProduct')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+        $basket->expects($this->any())->method('getCurrency')->willReturn($currency);
 
         $this->assertFalse($productProvider->basketAddProduct($basket, $product, $basketElement));
 
@@ -188,17 +188,17 @@ class BaseProductProviderTest extends TestCase
         $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
         $basket->expects($this->any())
             ->method('hasProduct')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+        $basket->expects($this->any())->method('getCurrency')->willReturn($currency);
 
         $basketElement = new BasketElement();
         $product->expects($this->any())
             ->method('getOptions')
-            ->will($this->returnValue(['even' => true, 'more' => true, 'tests' => true]));
+            ->willReturn(['even' => true, 'more' => true, 'tests' => true]);
         $result = $productProvider->basketAddProduct($basket, $product, $basketElement);
 
         $this->assertTrue($basketElement->hasOption('even'));
@@ -215,9 +215,9 @@ class BaseProductProviderTest extends TestCase
         $productProvider = $this->createNewProductProvider();
 
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
-        $product->expects($this->once())->method('isMaster')->will($this->returnValue(true));
-        $product->expects($this->once())->method('getSku')->will($this->returnValue('product_sku'));
-        $product->expects($this->once())->method('getVariations')->will($this->returnValue([1]));
+        $product->expects($this->once())->method('isMaster')->willReturn(true);
+        $product->expects($this->once())->method('getSku')->willReturn('product_sku');
+        $product->expects($this->once())->method('getVariations')->willReturn([1]);
 
         $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
 
@@ -234,11 +234,11 @@ class BaseProductProviderTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+        $basket->expects($this->any())->method('getCurrency')->willReturn($currency);
 
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
-        $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
+        $basketElement->expects($this->any())->method('getQuantity')->willReturn(1);
         $productProvider = $this->createNewProductProvider();
 
         $this->assertFalse($productProvider->basketMergeProduct($basket, $product, $basketElement));
@@ -249,15 +249,15 @@ class BaseProductProviderTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+        $basket->expects($this->any())->method('getCurrency')->willReturn($currency);
 
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
-        $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
+        $basketElement->expects($this->any())->method('getQuantity')->willReturn(1);
         $productProvider = $this->createNewProductProvider();
         $basket->expects($this->any())
             ->method('getElement')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         try {
             $productProvider->basketMergeProduct($basket, $product, $basketElement);
@@ -272,19 +272,19 @@ class BaseProductProviderTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+        $basket->expects($this->any())->method('getCurrency')->willReturn($currency);
 
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
-        $basketElement->expects($this->any())->method('getQuantity')->will($this->returnValue(1));
+        $basketElement->expects($this->any())->method('getQuantity')->willReturn(1);
         $newBasketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $productProvider = $this->createNewProductProvider();
         $basket->expects($this->any())
             ->method('hasProduct')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $basket->expects($this->any())
             ->method('getElement')
-            ->will($this->returnValue($basketElement));
+            ->willReturn($basketElement);
 
         $this->assertInstanceOf(BasketElementInterface::class, $productProvider->basketMergeProduct($basket, $product, $newBasketElement));
     }
@@ -297,7 +297,7 @@ class BaseProductProviderTest extends TestCase
         $basketElement = $this->getMockBuilder(BasketElementInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
         $this->assertFalse($productProvider->isValidBasketElement($basketElement));
 
         // Test valid product
@@ -305,7 +305,7 @@ class BaseProductProviderTest extends TestCase
         $product = $this->getMockBuilder(ProductInterface::class)->getMock();
         $basketElement->expects($this->any())
             ->method('getProduct')
-            ->will($this->returnValue($product));
+            ->willReturn($product);
         $this->assertTrue($productProvider->isValidBasketElement($basketElement));
     }
 

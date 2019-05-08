@@ -79,15 +79,15 @@ class MysqlReferenceTest extends TestCase
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->any())
             ->method('getClassMetadata')
-            ->will($this->returnValue($metadata));
+            ->willReturn($metadata);
 
         $connection->expects($this->any())
             ->method('query')
-            ->will($this->returnValue(new \PDOStatement()));
+            ->willReturn(new \PDOStatement());
 
         $registry = $this->createMock(RegistryInterface::class);
-        $registry->expects($this->any())->method('getManager')->will($this->returnValue($em));
-        $registry->expects($this->any())->method('getConnection')->will($this->returnValue($connection));
+        $registry->expects($this->any())->method('getManager')->willReturn($em);
+        $registry->expects($this->any())->method('getConnection')->willReturn($connection);
 
         return new MysqlReference($registry);
     }

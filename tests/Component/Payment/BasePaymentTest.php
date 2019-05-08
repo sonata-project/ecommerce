@@ -41,9 +41,9 @@ class BasePaymentTest extends TestCase
         $date->setTimestamp(strtotime('1981-11-30'));
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getReference')->will($this->returnValue('000123'));
-        $order->expects($this->exactly(2))->method('getCreatedAt')->will($this->returnValue($date));
-        $order->expects($this->once())->method('getId')->will($this->returnValue(2));
+        $order->expects($this->once())->method('getReference')->willReturn('000123');
+        $order->expects($this->exactly(2))->method('getCreatedAt')->willReturn($date);
+        $order->expects($this->once())->method('getId')->willReturn(2);
 
         $this->assertSame('2a084bbe95bb3842813499d4b5b1bfdf82e5a980', $payment->generateUrlCheck($order));
     }
