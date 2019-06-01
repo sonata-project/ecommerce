@@ -44,7 +44,7 @@ class DeliveryMethodTransformerTest extends TestCase
 
         $pool->expects($this->once())
             ->method('getMethod')
-            ->will($this->returnValue($delivery));
+            ->willReturn($delivery);
 
         $transformer = new DeliveryMethodTransformer($pool);
 

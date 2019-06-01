@@ -34,15 +34,15 @@ class CustomerSelectorTest extends TestCase
     {
         $customer = $this->createMock(CustomerInterface::class);
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('create')->will($this->returnValue($customer));
+        $customerManager->expects($this->once())->method('create')->willReturn($customer);
 
         $session = $this->createMock(SessionInterface::class);
 
         $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(false));
+        $securityContext->expects($this->once())->method('isGranted')->willReturn(false);
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
-        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+        $localeDetector->expects($this->once())->method('getLocale')->willReturn('en');
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
@@ -61,14 +61,14 @@ class CustomerSelectorTest extends TestCase
         $session = $this->createMock(Session::class);
 
         $token = $this->createMock(TokenInterface::class);
-        $token->expects($this->once())->method('getUser')->will($this->returnValue(new User()));
+        $token->expects($this->once())->method('getUser')->willReturn(new User());
 
         $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $securityContext->expects($this->once())->method('isGranted')->willReturn(true);
+        $securityContext->expects($this->once())->method('getToken')->willReturn($token);
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
-        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+        $localeDetector->expects($this->once())->method('getLocale')->willReturn('en');
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
@@ -80,21 +80,21 @@ class CustomerSelectorTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue($customer));
+        $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
 
         $session = $this->createMock(Session::class);
 
         $user = new ValidUser();
 
         $token = $this->createMock(TokenInterface::class);
-        $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
+        $token->expects($this->once())->method('getUser')->willReturn($user);
 
         $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $securityContext->expects($this->once())->method('isGranted')->willReturn(true);
+        $securityContext->expects($this->once())->method('getToken')->willReturn($token);
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
-        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+        $localeDetector->expects($this->once())->method('getLocale')->willReturn('en');
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
@@ -108,22 +108,22 @@ class CustomerSelectorTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(false));
-        $customerManager->expects($this->once())->method('create')->will($this->returnValue($customer));
+        $customerManager->expects($this->once())->method('findOneBy')->willReturn(false);
+        $customerManager->expects($this->once())->method('create')->willReturn($customer);
 
         $session = $this->createMock(Session::class);
 
         $user = new ValidUser();
 
         $token = $this->createMock(TokenInterface::class);
-        $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
+        $token->expects($this->once())->method('getUser')->willReturn($user);
 
         $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $securityContext->expects($this->once())->method('isGranted')->willReturn(true);
+        $securityContext->expects($this->once())->method('getToken')->willReturn($token);
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
-        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+        $localeDetector->expects($this->once())->method('getLocale')->willReturn('en');
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 
@@ -137,10 +137,10 @@ class CustomerSelectorTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->will($this->returnValue(false));
+        $customerManager->expects($this->once())->method('findOneBy')->willReturn(false);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->exactly(2))->method('getCustomer')->will($this->returnValue($customer));
+        $basket->expects($this->exactly(2))->method('getCustomer')->willReturn($customer);
 
         $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/new', $basket);
@@ -148,14 +148,14 @@ class CustomerSelectorTest extends TestCase
         $user = new ValidUser();
 
         $token = $this->createMock(TokenInterface::class);
-        $token->expects($this->once())->method('getUser')->will($this->returnValue($user));
+        $token->expects($this->once())->method('getUser')->willReturn($user);
 
         $securityContext = $this->createMock(SecurityContextInterface::class);
-        $securityContext->expects($this->once())->method('isGranted')->will($this->returnValue(true));
-        $securityContext->expects($this->once())->method('getToken')->will($this->returnValue($token));
+        $securityContext->expects($this->once())->method('isGranted')->willReturn(true);
+        $securityContext->expects($this->once())->method('getToken')->willReturn($token);
 
         $localeDetector = $this->createMock(LocaleDetectorInterface::class);
-        $localeDetector->expects($this->once())->method('getLocale')->will($this->returnValue('en'));
+        $localeDetector->expects($this->once())->method('getLocale')->willReturn('en');
 
         $customerSelector = new CustomerSelector($customerManager, $session, $securityContext, $localeDetector);
 

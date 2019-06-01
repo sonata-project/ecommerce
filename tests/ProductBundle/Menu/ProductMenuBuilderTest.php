@@ -33,14 +33,14 @@ class ProductMenuBuilderTest extends TestCase
 
         $factory->expects($this->once())
             ->method('createItem')
-            ->will($this->returnValue($menu));
+            ->willReturn($menu);
 
         $categoryManager = $this->createMock(ProductCategoryManagerInterface::class);
         $router = $this->createMock(RouterInterface::class);
 
         $categoryManager->expects($this->once())
             ->method('getCategoryTree')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $builder = new ProductMenuBuilder($factory, $categoryManager, $router);
 
@@ -56,7 +56,7 @@ class ProductMenuBuilderTest extends TestCase
 
         $factory->expects($this->once())
             ->method('createItem')
-            ->will($this->returnValue($menu));
+            ->willReturn($menu);
 
         $categoryManager = $this->createMock(ProductCategoryManagerInterface::class);
         $router = $this->createMock(RouterInterface::class);
@@ -67,7 +67,7 @@ class ProductMenuBuilderTest extends TestCase
 
         $productProvider->expects($this->once())
             ->method('getFilters')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $genMenu = $builder->createFiltersMenu($productProvider);
 

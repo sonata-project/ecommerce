@@ -96,7 +96,7 @@ class AddressExtensionTest extends TestCase
 
         // Test false
         $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
-        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue([]));
+        $deliverySelector->expects($this->once())->method('getAvailableMethods')->willReturn([]);
 
         $extension = new AddressExtension($deliverySelector);
         $deliverable = $extension->isAddressDeliverable($address, $basket);
@@ -105,7 +105,7 @@ class AddressExtensionTest extends TestCase
 
         // Test true
         $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
-        $deliverySelector->expects($this->once())->method('getAvailableMethods')->will($this->returnValue(['paypal']));
+        $deliverySelector->expects($this->once())->method('getAvailableMethods')->willReturn(['paypal']);
 
         $extension = new AddressExtension($deliverySelector);
         $deliverable = $extension->isAddressDeliverable($address, $basket);

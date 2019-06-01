@@ -37,12 +37,12 @@ class BasketValidatorTest extends TestCase
         $provider->expects($this->once())->method('validateFormBasketElement');
 
         $pool = $this->createMock(Pool::class);
-        $pool->expects($this->once())->method('getProvider')->will($this->returnValue($provider));
+        $pool->expects($this->once())->method('getProvider')->willReturn($provider);
 
         $consValFact = $this->createMock(ConstraintValidatorFactory::class);
 
         $context = $this->createMock(ExecutionContext::class);
-        $context->expects($this->once())->method('getViolations')->will($this->returnValue(['violation1']));
+        $context->expects($this->once())->method('getViolations')->willReturn(['violation1']);
         $context->expects($this->once())->method('addViolationAt');
 
         $validator = new BasketValidator($pool, $consValFact);
@@ -51,7 +51,7 @@ class BasketValidatorTest extends TestCase
         $elements = [$this->createMock(BasketElementInterface::class)];
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($elements));
+        $basket->expects($this->once())->method('getBasketElements')->willReturn($elements);
 
         $constraint = new NotBlank();
 

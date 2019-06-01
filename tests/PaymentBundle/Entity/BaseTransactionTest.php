@@ -32,8 +32,8 @@ class BaseTransactionTest extends TestCase
         $transaction = new Transaction();
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getId')->will($this->returnValue(123));
-        $order->expects($this->once())->method('getReference')->will($this->returnValue('B00120'));
+        $order->expects($this->once())->method('getId')->willReturn(123);
+        $order->expects($this->once())->method('getReference')->willReturn('B00120');
 
         $transaction->setOrder($order);
         $transaction->setTransactionId('XCADC');

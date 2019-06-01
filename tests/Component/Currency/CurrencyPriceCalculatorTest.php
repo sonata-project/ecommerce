@@ -32,7 +32,7 @@ class CurrencyPriceCalculatorTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $product->expects($this->once())->method('getPrice')->will($this->returnValue(42.0));
+        $product->expects($this->once())->method('getPrice')->willReturn(42.0);
 
         $this->assertSame(42.0, $currencyPriceCalculator->getPrice($product, $currency));
     }
