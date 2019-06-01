@@ -42,11 +42,11 @@ class ProductControllerTest extends TestCase
     public function testGetProductsAction()
     {
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
+        $productManager->expects($this->once())->method('getPager')->willReturn([]);
 
         $paramFetcher = $this->createMock(ParamFetcher::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
         $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(static function ($param) {
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
@@ -72,7 +72,7 @@ class ProductControllerTest extends TestCase
     {
         $product = $this->createMock(ProductInterface::class);
         $productCategory = $this->createMock(ProductCategoryInterface::class);
-        $product->expects($this->once())->method('getProductCategories')->will($this->returnValue([$productCategory]));
+        $product->expects($this->once())->method('getProductCategories')->willReturn([$productCategory]);
 
         $this->assertSame(
             [$productCategory],
@@ -84,7 +84,7 @@ class ProductControllerTest extends TestCase
     {
         $product = $this->createMock(ProductInterface::class);
         $category = $this->createMock(CategoryInterface::class);
-        $product->expects($this->once())->method('getCategories')->will($this->returnValue([$category]));
+        $product->expects($this->once())->method('getCategories')->willReturn([$category]);
 
         $this->assertSame([$category], $this->createProductController($product)->getProductCategoriesAction(1));
     }
@@ -93,7 +93,7 @@ class ProductControllerTest extends TestCase
     {
         $product = $this->createMock(ProductInterface::class);
         $productCollection = $this->createMock(ProductCollectionInterface::class);
-        $product->expects($this->once())->method('getProductCollections')->will($this->returnValue([$productCollection]));
+        $product->expects($this->once())->method('getProductCollections')->willReturn([$productCollection]);
 
         $this->assertSame(
             [$productCollection],
@@ -105,7 +105,7 @@ class ProductControllerTest extends TestCase
     {
         $product = $this->createMock(ProductInterface::class);
         $collection = $this->createMock(CollectionInterface::class);
-        $product->expects($this->once())->method('getCollections')->will($this->returnValue([$collection]));
+        $product->expects($this->once())->method('getCollections')->willReturn([$collection]);
 
         $this->assertSame([$collection], $this->createProductController($product)->getProductCollectionsAction(1));
     }
@@ -114,7 +114,7 @@ class ProductControllerTest extends TestCase
     {
         $product = $this->createMock(ProductInterface::class);
         $package = $this->createMock(PackageInterface::class);
-        $product->expects($this->once())->method('getPackages')->will($this->returnValue([$package]));
+        $product->expects($this->once())->method('getPackages')->willReturn([$package]);
 
         $this->assertSame([$package], $this->createProductController($product)->getProductPackagesAction(1));
     }
@@ -123,7 +123,7 @@ class ProductControllerTest extends TestCase
     {
         $product = $this->createMock(ProductInterface::class);
         $delivery = $this->createMock(DeliveryInterface::class);
-        $product->expects($this->once())->method('getDeliveries')->will($this->returnValue([$delivery]));
+        $product->expects($this->once())->method('getDeliveries')->willReturn([$delivery]);
 
         $this->assertSame([$delivery], $this->createProductController($product)->getProductDeliveriesAction(1));
     }
@@ -132,7 +132,7 @@ class ProductControllerTest extends TestCase
     {
         $product = $this->createMock(ProductInterface::class);
         $variation = $this->createMock(ProductInterface::class);
-        $product->expects($this->once())->method('getVariations')->will($this->returnValue([$variation]));
+        $product->expects($this->once())->method('getVariations')->willReturn([$variation]);
 
         $this->assertSame([$variation], $this->createProductController($product)->getProductVariationsAction(1));
     }
@@ -142,21 +142,21 @@ class ProductControllerTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('save')->will($this->returnValue($product));
+        $productManager->expects($this->once())->method('save')->willReturn($product);
 
         $productPool = $this->createMock(ProductPool::class);
-        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+        $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
         $formatterPool = $this->createMock(FormatterPool::class);
         $formatterPool->expects($this->exactly(2))->method('transform');
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($product));
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($product);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createProductController(null, $productManager, $productPool, $formFactory, $formatterPool)
             ->postProductAction('my.test.provider', new Request());
@@ -172,17 +172,17 @@ class ProductControllerTest extends TestCase
         $productManager->expects($this->never())->method('save');
 
         $productPool = $this->createMock(ProductPool::class);
-        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+        $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
         $formatterPool = $this->createMock(FormatterPool::class);
         $formatterPool->expects($this->never())->method('transform');
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createProductController(null, $productManager, $productPool, $formFactory, $formatterPool)
             ->postProductAction('my.test.provider', new Request());
@@ -195,22 +195,22 @@ class ProductControllerTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
-        $productManager->expects($this->once())->method('save')->will($this->returnValue($product));
+        $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
+        $productManager->expects($this->once())->method('save')->willReturn($product);
 
         $productPool = $this->createMock(ProductPool::class);
-        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+        $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
         $formatterPool = $this->createMock(FormatterPool::class);
         $formatterPool->expects($this->exactly(2))->method('transform');
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($product));
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($product);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createProductController($product, $productManager, $productPool, $formFactory, $formatterPool)
             ->putProductAction(1, 'my.test.provider', new Request());
@@ -223,21 +223,21 @@ class ProductControllerTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
+        $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
         $productManager->expects($this->never())->method('save');
 
         $productPool = $this->createMock(ProductPool::class);
-        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+        $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
         $formatterPool = $this->createMock(FormatterPool::class);
         $formatterPool->expects($this->never())->method('transform');
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createProductController($product, $productManager, $productPool, $formFactory, $formatterPool)
             ->putProductAction(1, 'my.test.provider', new Request());
@@ -253,7 +253,7 @@ class ProductControllerTest extends TestCase
         $productManager->expects($this->once())->method('delete');
 
         $productPool = $this->createMock(ProductPool::class);
-        $productPool->expects($this->once())->method('getManager')->will($this->returnValue($productManager));
+        $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
         $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
 
@@ -267,11 +267,11 @@ class ProductControllerTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue(null));
+        $productManager->expects($this->once())->method('findOneBy')->willReturn(null);
         $productManager->expects($this->never())->method('delete');
 
         $productPool = $this->createMock(ProductPool::class);
-        $productPool->expects($this->never())->method('getManager')->will($this->returnValue($productManager));
+        $productPool->expects($this->never())->method('getManager')->willReturn($productManager);
 
         $view = $this->createProductController($product, $productManager, $productPool)->deleteProductAction(1);
 
@@ -293,7 +293,7 @@ class ProductControllerTest extends TestCase
             $productManager = $this->createMock(ProductManagerInterface::class);
         }
         if (null !== $product) {
-            $productManager->expects($this->once())->method('findOneBy')->will($this->returnValue($product));
+            $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
         }
         if (null === $productPool) {
             $productPool = $this->createMock(ProductPool::class);

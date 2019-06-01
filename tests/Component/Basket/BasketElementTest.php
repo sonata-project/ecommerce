@@ -40,13 +40,13 @@ class BasketElementTest extends TestCase
         $product = $this->getMockBuilder(ProductInterface::class)
             ->setMockClassName('BasketTest_Product')
             ->getMock();
-        $product->expects($this->any())->method('getId')->will($this->returnValue(42));
-        $product->expects($this->any())->method('getName')->will($this->returnValue('Product name'));
-        $product->expects($this->any())->method('getPrice')->will($this->returnValue(15));
-        $product->expects($this->any())->method('isPriceIncludingVat')->will($this->returnValue(false));
-        $product->expects($this->any())->method('getVatRate')->will($this->returnValue(19.6));
-        $product->expects($this->any())->method('getOptions')->will($this->returnValue(['option1' => 'toto']));
-        $product->expects($this->any())->method('getDescription')->will($this->returnValue('product description'));
+        $product->expects($this->any())->method('getId')->willReturn(42);
+        $product->expects($this->any())->method('getName')->willReturn('Product name');
+        $product->expects($this->any())->method('getPrice')->willReturn(15);
+        $product->expects($this->any())->method('isPriceIncludingVat')->willReturn(false);
+        $product->expects($this->any())->method('getVatRate')->willReturn(19.6);
+        $product->expects($this->any())->method('getOptions')->willReturn(['option1' => 'toto']);
+        $product->expects($this->any())->method('getDescription')->willReturn('product description');
 
         $productProvider = new ProductProviderTest($this->createMock(SerializerInterface::class));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
@@ -63,7 +63,7 @@ class BasketElementTest extends TestCase
         $currency->setLabel('EUR');
 
         $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
-        $basket->expects($this->any())->method('getCurrency')->will($this->returnValue($currency));
+        $basket->expects($this->any())->method('getCurrency')->willReturn($currency);
 
         $productProvider->updateComputationPricesFields($basket, $basketElement, $product);
 
@@ -224,7 +224,7 @@ class BasketElementTest extends TestCase
         $product = $this->getMockBuilder(ProductInterface::class)
             ->setMockClassName('BasketTest_Product')
             ->getMock();
-        $product->expects($this->once())->method('getEnabled')->will($this->returnValue(true));
+        $product->expects($this->once())->method('getEnabled')->willReturn(true);
 
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
@@ -234,7 +234,7 @@ class BasketElementTest extends TestCase
         $product = $this->getMockBuilder(ProductInterface::class)
             ->setMockClassName('BasketTest_Product')
             ->getMock();
-        $product->expects($this->once())->method('getEnabled')->will($this->returnValue(false));
+        $product->expects($this->once())->method('getEnabled')->willReturn(false);
         $basketElement->setProduct('product_code', $product);
 
         $this->assertFalse($basketElement->isValid(), 'BasketElement returns the correct default quantity');
@@ -270,7 +270,7 @@ class BasketElementTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
         $product->expects($this->any())
             ->method('getId')
-            ->will($this->returnValue(42));
+            ->willReturn(42);
 
         $basketElement->setProduct('product_code', $product);
         $this->assertSame($product, $basketElement->getProduct());
@@ -284,7 +284,7 @@ class BasketElementTest extends TestCase
 
         $manager->expects($this->any())
             ->method('findOneBy')
-            ->will($this->returnValue($product));
+            ->willReturn($product);
 
         $basketElement->setProductDefinition(new ProductDefinition($provider, $manager));
 

@@ -27,10 +27,10 @@ class LoaderTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
         $basket = $this->createMock(BasketInterface::class);
         $basketFactory = $this->createMock(BasketFactoryInterface::class);
-        $basketFactory->expects($this->once())->method('load')->will($this->returnValue($basket));
+        $basketFactory->expects($this->once())->method('load')->willReturn($basket);
 
         $customerSelector = $this->createMock(CustomerSelectorInterface::class);
-        $customerSelector->expects($this->once())->method('get')->will($this->returnValue($customer));
+        $customerSelector->expects($this->once())->method('get')->willReturn($customer);
 
         $loader = new Loader($basketFactory, $customerSelector);
 
@@ -43,12 +43,12 @@ class LoaderTest extends TestCase
 
         $customer = $this->createMock(CustomerInterface::class);
         $basketFactory = $this->createMock(BasketFactoryInterface::class);
-        $basketFactory->expects($this->once())->method('load')->will($this->returnCallback(static function () {
+        $basketFactory->expects($this->once())->method('load')->willReturnCallback(static function () {
             throw new \RuntimeException();
-        }));
+        });
 
         $customerSelector = $this->createMock(CustomerSelectorInterface::class);
-        $customerSelector->expects($this->once())->method('get')->will($this->returnValue($customer));
+        $customerSelector->expects($this->once())->method('get')->willReturn($customer);
 
         $loader = new Loader($basketFactory, $customerSelector);
         $loader->getBasket();

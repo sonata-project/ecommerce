@@ -43,32 +43,32 @@ class PaymentHandlerTest extends TestCase
         $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
-            ->will($this->returnValue('42'));
+            ->willReturn('42');
         $payment->expects($this->once())
             ->method('isRequestValid')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $payment->expects($this->once())
             ->method('getTransformer')
-            ->will($this->returnValue($this->createMock(OrderTransformer::class)));
+            ->willReturn($this->createMock(OrderTransformer::class));
 
         $order = $this->createMock(OrderInterface::class);
 
         $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
-            ->will($this->returnValue($order));
+            ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(3))
             ->method('getPayment')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new Transaction()));
+            ->willReturn(new Transaction());
 
         $nb = $this->createMock(RuntimeBackend::class);
 
@@ -98,14 +98,14 @@ class PaymentHandlerTest extends TestCase
         $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new Transaction()));
+            ->willReturn(new Transaction());
 
         $nb = $this->createMock(RuntimeBackend::class);
 
@@ -129,32 +129,32 @@ class PaymentHandlerTest extends TestCase
         $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
-            ->will($this->returnValue('42'));
+            ->willReturn('42');
         $payment->expects($this->once())
             ->method('isRequestValid')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $order = $this->createMock(OrderInterface::class);
         $order->expects($this->any())
             ->method('getReference')
-            ->will($this->returnValue('42'));
+            ->willReturn('42');
 
         $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
-            ->will($this->returnValue($order));
+            ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new Transaction()));
+            ->willReturn(new Transaction());
 
         $nb = $this->createMock(RuntimeBackend::class);
 
@@ -178,24 +178,24 @@ class PaymentHandlerTest extends TestCase
         $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
-            ->will($this->returnValue('42'));
+            ->willReturn('42');
 
         $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new Transaction()));
+            ->willReturn(new Transaction());
 
         $nb = $this->createMock(RuntimeBackend::class);
 
@@ -216,29 +216,29 @@ class PaymentHandlerTest extends TestCase
         $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
-            ->will($this->returnValue('42'));
+            ->willReturn('42');
         $payment->expects($this->once())
             ->method('isRequestValid')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $order = $this->createMock(OrderInterface::class);
 
         $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
-            ->will($this->returnValue($order));
+            ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(2))
             ->method('getPayment')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new Transaction()));
+            ->willReturn(new Transaction());
 
         $nb = $this->createMock(RuntimeBackend::class);
 
@@ -261,12 +261,12 @@ class PaymentHandlerTest extends TestCase
         $basketTransformer = $this->createMock(BasketTransformer::class);
         $basketTransformer->expects($this->once())
             ->method('transformIntoOrder')
-            ->will($this->returnValue($order));
+            ->willReturn($order);
 
         $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getTransformer')
-            ->will($this->returnValue($basketTransformer));
+            ->willReturn($basketTransformer);
 
         $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())->method('save');
@@ -287,7 +287,7 @@ class PaymentHandlerTest extends TestCase
         $basket = $this->createMock(BasketInterface::class);
         $basket->expects($this->once())
             ->method('getPaymentMethod')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $sendbankOrder = $handler->getSendbankOrder($basket);
 
@@ -301,32 +301,32 @@ class PaymentHandlerTest extends TestCase
         $payment = $this->createMock(PaymentInterface::class);
         $payment->expects($this->once())
             ->method('getOrderReference')
-            ->will($this->returnValue('42'));
+            ->willReturn('42');
         $payment->expects($this->once())
             ->method('isRequestValid')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
         $payment->expects($this->once())
             ->method('callback')
-            ->will($this->returnValue($response));
+            ->willReturn($response);
 
         $order = $this->createMock(OrderInterface::class);
 
         $om = $this->createMock(OrderManagerInterface::class);
         $om->expects($this->once())
             ->method('findOneBy')
-            ->will($this->returnValue($order));
+            ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
         $ps->expects($this->exactly(3))
             ->method('getPayment')
-            ->will($this->returnValue($payment));
+            ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
         $tm->expects($this->once())
             ->method('create')
-            ->will($this->returnValue(new Transaction()));
+            ->willReturn(new Transaction());
 
         $nb = $this->createMock(RuntimeBackend::class);
 
