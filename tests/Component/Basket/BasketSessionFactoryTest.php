@@ -36,13 +36,13 @@ class BasketSessionFactoryTest extends TestCase
         $basket->expects($this->once())->method('setCustomer');
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('create')->will($this->returnValue($basket));
+        $basketManager->expects($this->once())->method('create')->willReturn($basket);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
         $basketBuilder->expects($this->once())->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->any())->method('getId')->willReturn(1);
 
         $session = $this->createMock(Session::class);
 
@@ -51,7 +51,7 @@ class BasketSessionFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->will($this->returnValue($currency))
+            ->willReturn($currency)
         ;
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
@@ -72,7 +72,7 @@ class BasketSessionFactoryTest extends TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->any())->method('getId')->willReturn(1);
 
         $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/1', $basket);
@@ -82,7 +82,7 @@ class BasketSessionFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->will($this->returnValue($currency))
+            ->willReturn($currency)
         ;
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
@@ -101,17 +101,17 @@ class BasketSessionFactoryTest extends TestCase
         $session = $this->createMock(SessionInterface::class);
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
+        $customer->expects($this->any())->method('getId')->willReturn(1);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getCustomer')->will($this->returnValue($customer));
+        $basket->expects($this->once())->method('getCustomer')->willReturn($customer);
 
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->will($this->returnValue($currency))
+            ->willReturn($currency)
         ;
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
@@ -144,8 +144,8 @@ class BasketSessionFactoryTest extends TestCase
         $basketBuilder->expects($this->once())->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->will($this->returnValue(1));
-        $basket->expects($this->any())->method('getCustomer')->will($this->returnValue($customer));
+        $customer->expects($this->any())->method('getId')->willReturn(1);
+        $basket->expects($this->any())->method('getCustomer')->willReturn($customer);
 
         $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/1', $basket);
@@ -155,7 +155,7 @@ class BasketSessionFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->will($this->returnValue($currency))
+            ->willReturn($currency)
         ;
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);

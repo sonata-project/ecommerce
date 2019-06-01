@@ -39,7 +39,7 @@ class ORMInheritanceSubscriberTest extends TestCase
         $metadata = $this->createMock(LoadClassMetadataEventArgs::class);
         $metadata->expects($this->any())
             ->method('getClassMetadata')
-            ->will($this->returnValue($fakedMetadata));
+            ->willReturn($fakedMetadata);
 
         $this->assertNull($subscriber->loadClassMetadata($metadata));
         unset($fakedMetadata);
@@ -49,7 +49,7 @@ class ORMInheritanceSubscriberTest extends TestCase
         $metadata = $this->createMock(LoadClassMetadataEventArgs::class);
         $metadata->expects($this->any())
             ->method('getClassMetadata')
-            ->will($this->returnValue($classMetadata));
+            ->willReturn($classMetadata);
 
         try {
             $subscriber->loadClassMetadata($metadata);

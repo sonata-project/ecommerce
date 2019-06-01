@@ -60,7 +60,7 @@ class OrderManagerTest extends TestCase
         $em->expects($this->once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $orderManager = new OrderManager(Order::class, $registry);
 
@@ -77,7 +77,7 @@ class OrderManagerTest extends TestCase
         $em->expects($this->once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $orderManager = new OrderManager(Order::class, $registry);
 
@@ -219,7 +219,7 @@ class OrderManagerTest extends TestCase
         ]);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         return new OrderManager(BaseOrder::class, $registry);
     }

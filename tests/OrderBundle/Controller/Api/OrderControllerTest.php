@@ -30,11 +30,11 @@ class OrderControllerTest extends TestCase
     public function testGetOrdersAction()
     {
         $orderManager = $this->createMock(OrderManagerInterface::class);
-        $orderManager->expects($this->once())->method('getPager')->will($this->returnValue([]));
+        $orderManager->expects($this->once())->method('getPager')->willReturn([]);
 
         $paramFetcher = $this->createMock(ParamFetcher::class);
         $paramFetcher->expects($this->exactly(3))->method('get');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
         $paramFetcher->expects($this->once())->method('addParam')->with($this->callback(static function ($param) {
             return $param instanceof QueryParam && $param->name = 'orderBy';
         }));
@@ -60,7 +60,7 @@ class OrderControllerTest extends TestCase
     {
         $order = $this->createMock(OrderInterface::class);
         $orderElements = $this->createMock(OrderElementInterface::class);
-        $order->expects($this->once())->method('getOrderElements')->will($this->returnValue([$orderElements]));
+        $order->expects($this->once())->method('getOrderElements')->willReturn([$orderElements]);
 
         $this->assertSame([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
     }
@@ -77,7 +77,7 @@ class OrderControllerTest extends TestCase
             $orderManager = $this->createMock(OrderManagerInterface::class);
         }
         if (null !== $order) {
-            $orderManager->expects($this->once())->method('findOneBy')->will($this->returnValue($order));
+            $orderManager->expects($this->once())->method('findOneBy')->willReturn($order);
         }
 
         return new OrderController($orderManager);

@@ -48,7 +48,7 @@ class BasketBuilderTest extends TestCase
         $basketElements = [$basketElement];
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));
+        $basket->expects($this->once())->method('getBasketElements')->willReturn($basketElements);
 
         $basketBuilder->build($basket);
     }
@@ -69,12 +69,12 @@ class BasketBuilderTest extends TestCase
         $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
         $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('non_existent_product_code'));
+        $basketElement->expects($this->exactly(2))->method('getProductCode')->willReturn('non_existent_product_code');
 
         $basketElements = [$basketElement];
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));
+        $basket->expects($this->once())->method('getBasketElements')->willReturn($basketElements);
 
         $basketBuilder->build($basket);
     }
@@ -94,22 +94,22 @@ class BasketBuilderTest extends TestCase
 
         $address = $this->createMock(AddressInterface::class);
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->exactly(2))->method('findOneBy')->will($this->returnValue($address));
+        $addressManager->expects($this->exactly(2))->method('findOneBy')->willReturn($address);
         $basketBuilder = new BasketBuilder($productPool, $addressManager, $deliveryPool, $paymentPool);
 
         $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->exactly(2))->method('getProductCode')->will($this->returnValue('test'));
+        $basketElement->expects($this->exactly(2))->method('getProductCode')->willReturn('test');
         $basketElement->expects($this->once())->method('setProductDefinition');
 
         $basketElements = [$basketElement];
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->will($this->returnValue($basketElements));
+        $basket->expects($this->once())->method('getBasketElements')->willReturn($basketElements);
 
-        $basket->expects($this->once())->method('getDeliveryAddressId')->will($this->returnValue(1));
-        $basket->expects($this->once())->method('getDeliveryMethodCode')->will($this->returnValue('ups'));
-        $basket->expects($this->once())->method('getBillingAddressId')->will($this->returnValue(2));
-        $basket->expects($this->once())->method('getPaymentMethodCode')->will($this->returnValue('credit_cart'));
+        $basket->expects($this->once())->method('getDeliveryAddressId')->willReturn(1);
+        $basket->expects($this->once())->method('getDeliveryMethodCode')->willReturn('ups');
+        $basket->expects($this->once())->method('getBillingAddressId')->willReturn(2);
+        $basket->expects($this->once())->method('getPaymentMethodCode')->willReturn('credit_cart');
 
         $basket->expects($this->once())->method('setDeliveryAddress');
         $basket->expects($this->once())->method('setDeliveryMethod');
