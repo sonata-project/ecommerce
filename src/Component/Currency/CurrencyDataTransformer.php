@@ -27,8 +27,6 @@ class CurrencyDataTransformer implements DataTransformerInterface
 
     /**
      * Constructs the CurrencyDataTransformer.
-     *
-     * @param CurrencyManagerInterface $currencyManager
      */
     public function __construct(CurrencyManagerInterface $currencyManager)
     {

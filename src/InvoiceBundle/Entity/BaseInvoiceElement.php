@@ -71,8 +71,6 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
 
     /**
      * Set invoiceId.
-     *
-     * @param InvoiceInterface $invoice
      */
     public function setInvoice(InvoiceInterface $invoice)
     {
@@ -91,8 +89,6 @@ abstract class BaseInvoiceElement implements InvoiceElementInterface
 
     /**
      * Set orderElement.
-     *
-     * @param OrderElementInterface $orderElement
      */
     public function setOrderElement(OrderElementInterface $orderElement)
     {

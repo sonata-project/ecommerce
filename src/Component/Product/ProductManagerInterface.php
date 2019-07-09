@@ -47,8 +47,6 @@ interface ProductManagerInterface extends ManagerInterface, PageableManagerInter
     public function findEnabledFromIdAndSlug($id, $slug);
 
     /**
-     * @param ProductInterface $product
-     *
      * @return array
      */
     public function findVariations(ProductInterface $product);

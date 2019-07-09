@@ -63,10 +63,6 @@ class SonataCustomerExtension extends Extension
         $this->registerParameters($container, $config);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array                                                   $config
-     */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
         $container->setParameter('sonata.customer.customer.class', $config['class']['customer']);
@@ -77,9 +73,6 @@ class SonataCustomerExtension extends Extension
         $container->setParameter('sonata.customer.admin.address.entity', $config['class']['address']);
     }
 
-    /**
-     * @param array $config
-     */
     public function registerDoctrineMapping(array $config)
     {
         if (!class_exists($config['class']['customer'])) {

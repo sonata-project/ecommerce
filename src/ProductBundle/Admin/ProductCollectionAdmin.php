@@ -68,9 +68,6 @@ class ProductCollectionAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
         if (!$this->isChild()) {

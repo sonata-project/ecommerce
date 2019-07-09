@@ -26,8 +26,7 @@ class Pool
     /**
      * Add a transformer into into the pool.
      *
-     * @param string          $type
-     * @param BaseTransformer $instance
+     * @param string $type
      */
     public function addTransformer($type, BaseTransformer $instance)
     {

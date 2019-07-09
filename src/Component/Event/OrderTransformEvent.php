@@ -26,9 +26,6 @@ class OrderTransformEvent extends Event
      */
     protected $order;
 
-    /**
-     * @param OrderInterface $order
-     */
     public function __construct(OrderInterface $order)
     {
         $this->order = $order;

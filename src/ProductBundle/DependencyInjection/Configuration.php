@@ -34,9 +34,6 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
     private function addProductSection(ArrayNodeDefinition $node)
     {
         $node
@@ -61,9 +58,6 @@ class Configuration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
     private function addModelSection(ArrayNodeDefinition $node)
     {
         $node
@@ -86,9 +80,6 @@ class Configuration implements ConfigurationInterface
         ;
     }
 
-    /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
     private function addSeoSection(ArrayNodeDefinition $node)
     {
         $node

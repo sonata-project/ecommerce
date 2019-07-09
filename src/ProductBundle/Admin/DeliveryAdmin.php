@@ -35,9 +35,6 @@ class DeliveryAdmin extends AbstractAdmin
         $this->setTranslationDomain('SonataProductBundle');
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
-     */
     public function configureFormFields(FormMapper $formMapper)
     {
         if (!$this->isChild()) {
@@ -55,9 +52,6 @@ class DeliveryAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
-     */
     public function configureListFields(ListMapper $list)
     {
         if (!$this->isChild()) {

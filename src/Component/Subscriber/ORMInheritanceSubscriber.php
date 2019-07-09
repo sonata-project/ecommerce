@@ -45,9 +45,6 @@ class ORMInheritanceSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();

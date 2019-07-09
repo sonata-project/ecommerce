@@ -25,9 +25,6 @@ interface ServiceInterface
 {
     /**
      * Add the meta information.
-     *
-     * @param SeoPageInterface $seoPage
-     * @param ProductInterface $product
      */
     public function alterPage(SeoPageInterface $seoPage, ProductInterface $product);
 }

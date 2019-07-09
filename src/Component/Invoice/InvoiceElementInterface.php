@@ -48,8 +48,6 @@ interface InvoiceElementInterface extends PriceComputableInterface
 
     /**
      * Set invoiceId.
-     *
-     * @param InvoiceInterface $invoice
      */
     public function setInvoice(InvoiceInterface $invoice);
 
@@ -62,8 +60,6 @@ interface InvoiceElementInterface extends PriceComputableInterface
 
     /**
      * Set orderElement.
-     *
-     * @param OrderElementInterface $orderElement
      */
     public function setOrderElement(OrderElementInterface $orderElement);
 

@@ -36,17 +36,11 @@ class OrderElementAdmin extends AbstractAdmin
      */
     protected $productPool;
 
-    /**
-     * @param CurrencyDetectorInterface $currencyDetector
-     */
     public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector)
     {
         $this->currencyDetector = $currencyDetector;
     }
 
-    /**
-     * @param Pool $productPool
-     */
     public function setProductPool(Pool $productPool)
     {
         $this->productPool = $productPool;

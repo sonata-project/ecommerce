@@ -40,12 +40,6 @@ class BasketBuilder implements BasketBuilderInterface
      */
     protected $paymentPool;
 
-    /**
-     * @param \Sonata\Component\Product\Pool                     $productPool
-     * @param \Sonata\Component\Customer\AddressManagerInterface $addressManager
-     * @param \Sonata\Component\Delivery\Pool                    $deliveryPool
-     * @param \Sonata\Component\Payment\Pool                     $paymentPool
-     */
     public function __construct(Pool $productPool, AddressManagerInterface $addressManager, DeliveryPool $deliveryPool, PaymentPool $paymentPool)
     {
         $this->productPool = $productPool;

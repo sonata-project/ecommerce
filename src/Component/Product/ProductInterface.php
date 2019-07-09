@@ -232,15 +232,11 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Add a Package to collection.
-     *
-     * @param PackageInterface $package
      */
     public function addPackage(PackageInterface $package);
 
     /**
      * Remove a Package from collection.
-     *
-     * @param PackageInterface $package
      */
     public function removePackage(PackageInterface $package);
 
@@ -253,36 +249,26 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Set Package collection.
-     *
-     * @param ArrayCollection $packages
      */
     public function setPackages(ArrayCollection $packages);
 
     /**
      * Add a Delivery to collection.
-     *
-     * @param DeliveryInterface $delivery
      */
     public function addDelivery(DeliveryInterface $delivery);
 
     /**
      * Remove a Delivery from collection.
-     *
-     * @param DeliveryInterface $delivery
      */
     public function removeDelivery(DeliveryInterface $delivery);
 
     /**
      * Add a Delivery to collection. Alias for addDelivery needed by the AdminBundle.
-     *
-     * @param DeliveryInterface $delivery
      */
     public function addDeliverie(DeliveryInterface $delivery);
 
     /**
      * Remove a Delivery from collection. Alias for removeDelivery needed by the AdminBundle.
-     *
-     * @param DeliveryInterface $delivery
      */
     public function removeDeliverie(DeliveryInterface $delivery);
 
@@ -295,36 +281,26 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Set Delivery collection.
-     *
-     * @param ArrayCollection $deliveries
      */
     public function setDeliveries(ArrayCollection $deliveries);
 
     /**
      * Add a ProductCategory to collection.
-     *
-     * @param ProductCategoryInterface $productCategory
      */
     public function addProductCategory(ProductCategoryInterface $productCategory);
 
     /**
      * Remove a ProductCategory from collection.
-     *
-     * @param ProductCategoryInterface $productCategory
      */
     public function removeProductCategory(ProductCategoryInterface $productCategory);
 
     /**
      * Add a ProductCategory to collection. Alias for addProductCategory needed for AdminBundle.
-     *
-     * @param ProductCategoryInterface $productCategory
      */
     public function addProductCategorie(ProductCategoryInterface $productCategory);
 
     /**
      * Remove a ProductCategory from collection. Alias for removeProductCategory needed for AdminBundle.
-     *
-     * @param ProductCategoryInterface $productCategory
      */
     public function removeProductCategorie(ProductCategoryInterface $productCategory);
 
@@ -337,22 +313,16 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Set ProductCategory collection.
-     *
-     * @param ArrayCollection $productCategories
      */
     public function setProductCategories(ArrayCollection $productCategories);
 
     /**
      * Add a ProductCollection to collection.
-     *
-     * @param ProductCollectionInterface $productCollection
      */
     public function addProductCollection(ProductCollectionInterface $productCollection);
 
     /**
      * Remove a ProductCollection from collection.
-     *
-     * @param ProductCollectionInterface $productCollection
      */
     public function removeProductCollection(ProductCollectionInterface $productCollection);
 
@@ -365,8 +335,6 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Set ProductCollection collection.
-     *
-     * @param ArrayCollection $productCollections
      */
     public function setProductCollections(ArrayCollection $productCollections);
 
@@ -414,8 +382,6 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Set variation collection.
-     *
-     * @param ArrayCollection $variations
      */
     public function setVariations(ArrayCollection $variations);
 
@@ -470,8 +436,6 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Set Product options.
-     *
-     * @param array $options
      */
     public function setOptions(array $options);
 
@@ -533,8 +497,6 @@ interface ProductInterface extends PriceComputableInterface
 
     /**
      * Validates if product has one main category.
-     *
-     * @param ExecutionContextInterface $context
      */
     public function validateOneMainCategory(ExecutionContextInterface $context);
 }

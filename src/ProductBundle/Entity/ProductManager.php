@@ -49,7 +49,6 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
     /**
      * Returns partial product example (only to get its class) from $category.
      *
-     * @param CategoryInterface $category
      *
      * @return ProductInterface|null
      */

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Entity;
 
-use Doctrine\ORM\EntityManager;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
-use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Component\Product\ProductCategoryManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
@@ -28,12 +26,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
      * @var \Sonata\ClassificationBundle\Model\CategoryManagerInterface
      */
     protected $categoryManager;
-
-    /**
-     * @param string                   $class
-     * @param EntityManager            $em
-     * @param CategoryManagerInterface $categoryManager
-     */
 
     /**
      * {@inheritdoc}
@@ -138,9 +130,6 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
 
     /**
      * Finds $category place in $tree.
-     *
-     * @param CategoryInterface $category
-     * @param array             $tree
      */
     protected function putInTree(CategoryInterface $category, array &$tree)
     {

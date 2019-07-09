@@ -56,10 +56,6 @@ abstract class BasePaypal extends BasePayment
      */
     protected $webConnectorProvider = null;
 
-    /**
-     * @param \Symfony\Component\Routing\RouterInterface              $router
-     * @param \Symfony\Component\Translation\TranslatorInterface|null $translator
-     */
     public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
     {
         $this->router = $router;
@@ -69,7 +65,6 @@ abstract class BasePaypal extends BasePayment
     /**
      * return true if the request contains a valid `check` parameter.
      *
-     * @param TransactionInterface $transaction
      *
      * @return bool
      */
@@ -84,8 +79,6 @@ abstract class BasePaypal extends BasePayment
 
     /**
      * return the transaction_id sent by the bank.
-     *
-     * @param TransactionInterface $transaction
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {
@@ -102,7 +95,6 @@ abstract class BasePaypal extends BasePayment
     /**
      * return the order reference from the transaction object.
      *
-     * @param TransactionInterface $transaction
      *
      * @return string
      */

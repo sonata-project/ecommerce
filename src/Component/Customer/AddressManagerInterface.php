@@ -20,8 +20,6 @@ interface AddressManagerInterface extends ManagerInterface, PageableManagerInter
 {
     /**
      * Sets $address the current customer address.
-     *
-     * @param AddressInterface $address
      */
     public function setCurrent(AddressInterface $address);
 }

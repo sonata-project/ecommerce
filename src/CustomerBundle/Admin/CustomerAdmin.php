@@ -36,9 +36,6 @@ class CustomerAdmin extends AbstractAdmin
         $this->setTranslationDomain('SonataCustomerBundle');
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
-     */
     public function configureFormFields(FormMapper $formMapper)
     {
         $now = new \DateTime();
@@ -70,9 +67,6 @@ class CustomerAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
-     */
     public function configureListFields(ListMapper $list)
     {
         $list
@@ -85,9 +79,6 @@ class CustomerAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Show\ShowMapper $filter
-     */
     public function configureShowFields(ShowMapper $filter)
     {
         $filter
@@ -109,9 +100,6 @@ class CustomerAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     */
     public function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter
