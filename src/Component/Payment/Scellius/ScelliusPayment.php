@@ -48,11 +48,7 @@ class ScelliusPayment extends BasePayment
     protected $transactionGenerator;
 
     /**
-     * @param RouterInterface                       $router
-     * @param LoggerInterface                       $logger
-     * @param EngineInterface                       $templating
-     * @param ScelliusTransactionGeneratorInterface $transactionGenerator
-     * @param bool                                  $debug
+     * @param bool $debug
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, ScelliusTransactionGeneratorInterface $transactionGenerator, $debug)
     {
@@ -412,8 +408,6 @@ class ScelliusPayment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
-     *
      * @return string
      */
     public function getLanguage(OrderInterface $order)
@@ -542,17 +536,12 @@ class ScelliusPayment extends BasePayment
         return $transaction->get('reference');
     }
 
-    /**
-     * @param TransactionInterface $transaction
-     */
     public function applyTransactionId(TransactionInterface $transaction)
     {
         $transaction->setTransactionId('n/a');
     }
 
     /**
-     * @param TransactionInterface $transaction
-     *
      * @throws \RuntimeException
      *
      * @return array

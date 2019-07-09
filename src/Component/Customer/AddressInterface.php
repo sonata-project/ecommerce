@@ -92,8 +92,6 @@ interface AddressInterface
 
     /**
      * Sets address' customer.
-     *
-     * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer);
 

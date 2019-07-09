@@ -17,8 +17,6 @@ interface PackageInterface
 {
     /**
      * Set productId.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 

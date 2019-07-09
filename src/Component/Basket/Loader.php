@@ -33,8 +33,7 @@ class Loader
     protected $basket;
 
     /**
-     * @param \Sonata\Component\Basket\BasketFactoryInterface      $basketFactory
-     * @param \Sonata\Component\Customer\CustomerSelectorInterface $customerSelector
+     * @param \Sonata\Component\Basket\BasketFactoryInterface $basketFactory
      */
     public function __construct(BasketFactoryInterface $basketFactory, CustomerSelectorInterface $customerSelector)
     {

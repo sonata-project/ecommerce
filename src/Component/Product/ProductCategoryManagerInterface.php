@@ -29,9 +29,6 @@ interface ProductCategoryManagerInterface extends ManagerInterface
 
     /**
      * Removes a Category from a Product.
-     *
-     * @param ProductInterface  $product
-     * @param CategoryInterface $category
      */
     public function removeCategoryFromProduct(ProductInterface $product, CategoryInterface $category);
 
@@ -45,7 +42,6 @@ interface ProductCategoryManagerInterface extends ManagerInterface
     /**
      * Returns the number of products in $category (maxed by $limit).
      *
-     * @param CategoryInterface $category
      *
      * @return int
      */

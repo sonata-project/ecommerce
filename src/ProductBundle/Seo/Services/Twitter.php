@@ -62,13 +62,10 @@ class Twitter implements ServiceInterface
     protected $mediaFormat;
 
     /**
-     * @param Pool                      $mediaPool
-     * @param NumberHelper              $numberHelper
-     * @param CurrencyDetectorInterface $currencyDetector
-     * @param string                    $site
-     * @param string                    $creator
-     * @param string                    $domain
-     * @param string                    $mediaFormat
+     * @param string $site
+     * @param string $creator
+     * @param string $domain
+     * @param string $mediaFormat
      */
     public function __construct(Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $site, $creator, $domain, $mediaFormat)
     {
@@ -83,9 +80,6 @@ class Twitter implements ServiceInterface
 
     /**
      * Add the meta information.
-     *
-     * @param SeoPageInterface $seoPage
-     * @param ProductInterface $product
      */
     public function alterPage(SeoPageInterface $seoPage, ProductInterface $product)
     {

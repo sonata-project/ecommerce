@@ -174,9 +174,6 @@ abstract class BaseInvoice implements InvoiceInterface
         ];
     }
 
-    /**
-     * @param \DateTime $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -249,8 +246,6 @@ abstract class BaseInvoice implements InvoiceInterface
 
     /**
      * Set currency.
-     *
-     * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency)
     {
@@ -579,8 +574,6 @@ abstract class BaseInvoice implements InvoiceInterface
 
     /**
      * Set user.
-     *
-     * @param UserInterface $user
      */
     public function setUser(UserInterface $user)
     {

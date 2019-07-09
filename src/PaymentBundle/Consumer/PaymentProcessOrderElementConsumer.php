@@ -38,10 +38,6 @@ class PaymentProcessOrderElementConsumer implements ConsumerInterface
      */
     protected $productPool;
 
-    /**
-     * @param ManagerInterface $orderElementManager
-     * @param ProductPool      $productPool
-     */
     public function __construct(ManagerInterface $orderElementManager, ProductPool $productPool)
     {
         $this->orderElementManager = $orderElementManager;

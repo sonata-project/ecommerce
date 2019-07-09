@@ -39,10 +39,6 @@ class OrderTransformer extends BaseTransformer
      */
     protected $eventDispatcher;
 
-    /**
-     * @param ProductPool              $productPool
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(ProductPool $productPool, EventDispatcherInterface $eventDispatcher)
     {
         $this->productPool = $productPool;
@@ -50,9 +46,6 @@ class OrderTransformer extends BaseTransformer
     }
 
     /**
-     * @param OrderInterface  $order
-     * @param BasketInterface $basket
-     *
      * @return BasketInterface
      */
     public function transformIntoBasket(OrderInterface $order, BasketInterface $basket)

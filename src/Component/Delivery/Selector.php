@@ -39,10 +39,6 @@ class Selector implements ServiceDeliverySelectorInterface
      */
     protected $logger;
 
-    /**
-     * @param \Sonata\Component\Delivery\Pool $deliveryPool
-     * @param \Sonata\Component\Product\Pool  $productPool
-     */
     public function __construct(DeliveryPool $deliveryPool, ProductPool $productPool)
     {
         $this->productPool = $productPool;
@@ -57,9 +53,6 @@ class Selector implements ServiceDeliverySelectorInterface
         return $this->deliveryPool;
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -155,9 +148,6 @@ class Selector implements ServiceDeliverySelectorInterface
     }
 
     /**
-     * @param ServiceDeliveryInterface $a
-     * @param ServiceDeliveryInterface $b
-     *
      * @return int
      */
     public static function sort(ServiceDeliveryInterface $a, ServiceDeliveryInterface $b)

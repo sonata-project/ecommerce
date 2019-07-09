@@ -62,10 +62,6 @@ class SonataOrderExtension extends Extension
         $this->registerParameters($container, $config);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array                                                   $config
-     */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
         $container->setParameter('sonata.order.order.class', $config['class']['order']);
@@ -75,9 +71,6 @@ class SonataOrderExtension extends Extension
         $container->setParameter('sonata.order.admin.order_element.entity', $config['class']['order_element']);
     }
 
-    /**
-     * @param array $config
-     */
     public function registerDoctrineMapping(array $config)
     {
         if (!class_exists($config['class']['order'])) {

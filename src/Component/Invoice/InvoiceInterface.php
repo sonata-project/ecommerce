@@ -34,9 +34,6 @@ interface InvoiceInterface
      */
     public function getCreatedAt();
 
-    /**
-     * @param \DateTime $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt);
 
     /**
@@ -69,8 +66,6 @@ interface InvoiceInterface
 
     /**
      * Set currency.
-     *
-     * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency);
 
@@ -279,8 +274,6 @@ interface InvoiceInterface
 
     /**
      * Set user.
-     *
-     * @param CustomerInterface $customer
      */
     public function setCustomer(CustomerInterface $customer);
 
@@ -314,15 +307,11 @@ interface InvoiceInterface
 
     /**
      * Adds an invoice element to the invoice.
-     *
-     * @param InvoiceElementInterface $element
      */
     public function addInvoiceElement(InvoiceElementInterface $element);
 
     /**
      * Sets the invoice elements collection.
-     *
-     * @param array $elements
      */
     public function setInvoiceElements(array $elements);
 }

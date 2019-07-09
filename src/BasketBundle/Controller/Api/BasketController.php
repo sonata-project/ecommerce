@@ -91,8 +91,6 @@ class BasketController
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param ParamFetcherInterface $paramFetcher
-     *
      * @return Sonata\DatagridBundle\Pager\PagerInterface[]
      */
     public function getBasketsAction(ParamFetcherInterface $paramFetcher)

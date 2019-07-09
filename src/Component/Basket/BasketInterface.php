@@ -23,9 +23,6 @@ use Sonata\Component\Product\ProductInterface;
 
 interface BasketInterface
 {
-    /**
-     * @param \Sonata\Component\Product\Pool $pool
-     */
     public function setProductPool(Pool $pool);
 
     /**
@@ -102,7 +99,6 @@ interface BasketInterface
     /**
      * Check if the product can be added to the basket.
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
      *
      * @return bool
      */
@@ -146,7 +142,6 @@ interface BasketInterface
     /**
      * return the BasketElement depends on the $product or the position from the element stacks.
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
      *
      * @return BasketElementInterface
      */
@@ -154,8 +149,6 @@ interface BasketInterface
 
     /**
      * deletes several elements from the basket.
-     *
-     * @param array $elementsToRemove
      */
     public function removeElements(array $elementsToRemove);
 
@@ -183,8 +176,6 @@ interface BasketInterface
 
     /**
      * Add a basket element into the current basket.
-     *
-     * @param BasketElementInterface $basketElement
      */
     public function addBasketElement(BasketElementInterface $basketElement);
 
@@ -241,7 +232,6 @@ interface BasketInterface
     /**
      * check if the basket contains $product.
      *
-     * @param \Sonata\Component\Product\ProductInterface $product
      *
      * @return bool
      */
@@ -327,9 +317,6 @@ interface BasketInterface
      */
     public function getCurrency();
 
-    /**
-     * @param CurrencyInterface $currency
-     */
     public function setCurrency(CurrencyInterface $currency);
 
     /**

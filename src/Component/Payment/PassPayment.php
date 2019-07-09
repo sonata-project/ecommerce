@@ -34,8 +34,7 @@ class PassPayment extends BasePayment
     protected $browser;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     * @param \Buzz\Browser                              $browser
+     * @param \Buzz\Browser $browser
      */
     public function __construct(RouterInterface $router, Browser $browser = null)
     {

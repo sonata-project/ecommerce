@@ -20,17 +20,11 @@ interface ProductCollectionManagerInterface extends ManagerInterface
 {
     /**
      * Adds a Category to a Product.
-     *
-     * @param ProductInterface    $product
-     * @param CollectionInterface $collection
      */
     public function addCollectionToProduct(ProductInterface $product, CollectionInterface $collection);
 
     /**
      * Removes a Category from a Product.
-     *
-     * @param ProductInterface    $product
-     * @param CollectionInterface $collection
      */
     public function removeCollectionFromProduct(ProductInterface $product, CollectionInterface $collection);
 }

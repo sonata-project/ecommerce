@@ -65,8 +65,6 @@ class AddBasket
 
     /**
      * Set the related product.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product)
     {

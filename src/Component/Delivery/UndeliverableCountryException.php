@@ -27,9 +27,8 @@ class UndeliverableCountryException extends \RuntimeException
     private $address;
 
     /**
-     * @param AddressInterface $address
-     * @param int              $code
-     * @param Exception        $previous
+     * @param int       $code
+     * @param Exception $previous
      */
     public function __construct(AddressInterface $address, $code = 0, Exception $previous = null)
     {

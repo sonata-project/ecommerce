@@ -40,10 +40,6 @@ class AddressController
      */
     protected $formFactory;
 
-    /**
-     * @param AddressManagerInterface $addressManager
-     * @param FormFactoryInterface    $formFactory
-     */
     public function __construct(AddressManagerInterface $addressManager, FormFactoryInterface $formFactory)
     {
         $this->addressManager = $addressManager;
@@ -63,8 +59,6 @@ class AddressController
      * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return Sonata\DatagridBundle\Pager\PagerInterface
      */

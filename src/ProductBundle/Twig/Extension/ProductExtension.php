@@ -84,7 +84,6 @@ class ProductExtension extends \Twig_Extension
     /**
      * Check if the product has variations.
      *
-     * @param ProductInterface $product
      *
      * @return bool
      */
@@ -96,7 +95,6 @@ class ProductExtension extends \Twig_Extension
     /**
      * Check if the product has enabled variations.
      *
-     * @param ProductInterface $product
      *
      * @return bool
      */
@@ -108,7 +106,6 @@ class ProductExtension extends \Twig_Extension
     /**
      * Return the cheapest variation of the product (or itself if none).
      *
-     * @param ProductInterface $product
      *
      * @return ProductInterface
      */
@@ -124,7 +121,6 @@ class ProductExtension extends \Twig_Extension
     /**
      * Return the cheapest variation price of the product (or itself if none).
      *
-     * @param ProductInterface $product
      *
      * @return ProductInterface
      */

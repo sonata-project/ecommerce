@@ -43,10 +43,8 @@ class BeforeCalculatePriceEvent extends Event
     protected $quantity;
 
     /**
-     * @param ProductInterface  $product
-     * @param CurrencyInterface $currency
-     * @param bool              $vat
-     * @param int               $quantity
+     * @param bool $vat
+     * @param int  $quantity
      */
     public function __construct(ProductInterface $product, CurrencyInterface $currency, $vat, $quantity)
     {

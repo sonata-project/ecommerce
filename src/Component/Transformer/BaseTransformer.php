@@ -27,9 +27,6 @@ abstract class BaseTransformer
      */
     protected $logger;
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -43,9 +40,6 @@ abstract class BaseTransformer
         return $this->logger;
     }
 
-    /**
-     * @param array $options
-     */
     public function setOptions(array $options)
     {
         $this->options = $options;
