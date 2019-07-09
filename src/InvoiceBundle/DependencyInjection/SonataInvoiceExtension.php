@@ -56,10 +56,6 @@ class SonataInvoiceExtension extends Extension
         $this->registerDoctrineMapping($config);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array                                                   $config
-     */
     public function registerParameters(ContainerBuilder $container, array $config)
     {
         $container->setParameter('sonata.invoice.invoice.class', $config['class']['invoice']);
@@ -69,9 +65,6 @@ class SonataInvoiceExtension extends Extension
         $container->setParameter('sonata.invoice.admin.invoice_element.entity', $config['class']['invoice_element']);
     }
 
-    /**
-     * @param array $config
-     */
     public function registerDoctrineMapping(array $config)
     {
         if (!class_exists($config['class']['invoice'])) {

@@ -54,8 +54,6 @@ abstract class BasePayment implements PaymentInterface
     protected $enabled;
 
     /**
-     * @param \Sonata\Component\Order\OrderInterface $order
-     *
      * @throws \RuntimeException
      *
      * @return string
@@ -142,9 +140,6 @@ abstract class BasePayment implements PaymentInterface
         return $value;
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -241,9 +236,6 @@ abstract class BasePayment implements PaymentInterface
         return $this->enabled;
     }
 
-    /**
-     * @param TransactionInterface $transaction
-     */
     public function report(TransactionInterface $transaction)
     {
         if (!$this->logger) {

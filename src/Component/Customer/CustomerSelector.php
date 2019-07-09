@@ -40,12 +40,6 @@ class CustomerSelector implements CustomerSelectorInterface
      */
     protected $locale;
 
-    /**
-     * @param CustomerManagerInterface $customerManager
-     * @param SessionInterface         $session
-     * @param SecurityContextInterface $securityContext
-     * @param LocaleDetectorInterface  $localeDetector
-     */
     public function __construct(CustomerManagerInterface $customerManager, SessionInterface $session, SecurityContextInterface $securityContext, LocaleDetectorInterface $localeDetector)
     {
         $this->customerManager = $customerManager;

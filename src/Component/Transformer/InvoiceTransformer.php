@@ -47,7 +47,6 @@ class InvoiceTransformer extends BaseTransformer
     /**
      * @param InvoiceElementManagerInterface $invoiceElementManager Invoice element manager
      * @param DeliveryPool                   $deliveryPool          Delivery pool component
-     * @param EventDispatcherInterface       $eventDispatcher
      */
     public function __construct(InvoiceElementManagerInterface $invoiceElementManager, DeliveryPool $deliveryPool, EventDispatcherInterface $eventDispatcher)
     {
@@ -58,9 +57,6 @@ class InvoiceTransformer extends BaseTransformer
 
     /**
      * Transforms an order into an invoice.
-     *
-     * @param OrderInterface   $order
-     * @param InvoiceInterface $invoice
      */
     public function transformFromOrder(OrderInterface $order, InvoiceInterface $invoice)
     {
@@ -108,9 +104,6 @@ class InvoiceTransformer extends BaseTransformer
 
     /**
      * Adds the delivery information from $order to $invoice.
-     *
-     * @param InvoiceInterface $invoice
-     * @param OrderInterface   $order
      */
     protected function addDelivery(InvoiceInterface $invoice, OrderInterface $order)
     {
@@ -134,7 +127,6 @@ class InvoiceTransformer extends BaseTransformer
     /**
      * Creates an InvoiceElement based on an OrderElement.
      *
-     * @param OrderElementInterface $orderElement
      *
      * @return \Sonata\Component\Invoice\InvoiceElementInterface
      */

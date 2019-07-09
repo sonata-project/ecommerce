@@ -19,8 +19,6 @@ interface CustomerInterface
 {
     /**
      * Set createdAt.
-     *
-     * @param \DateTime|null $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
@@ -68,8 +66,6 @@ interface CustomerInterface
 
     /**
      * Set updatedAt.
-     *
-     * @param \DateTime|null $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
@@ -82,8 +78,6 @@ interface CustomerInterface
 
     /**
      * Set user.
-     *
-     * @param UserInterface $user
      */
     public function setUser(UserInterface $user);
 

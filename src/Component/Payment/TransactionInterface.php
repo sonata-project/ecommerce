@@ -41,9 +41,6 @@ interface TransactionInterface
     public const STATUS_WRONG_REQUEST = 11; // the callback request is not valid
     public const STATUS_ORDER_NOT_OPEN = 12; // the order is not open (so a previous transaction already alter the order)
 
-    /**
-     * @param \Sonata\Component\Order\OrderInterface $order
-     */
     public function setOrder(OrderInterface $order);
 
     /**
@@ -76,9 +73,6 @@ interface TransactionInterface
      */
     public function isValid();
 
-    /**
-     * @param array $parameters
-     */
     public function setParameters(array $parameters);
 
     /**
@@ -111,9 +105,6 @@ interface TransactionInterface
      */
     public static function getStatusList();
 
-    /**
-     * @param \DateTime|null $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**

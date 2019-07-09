@@ -43,10 +43,7 @@ class OgonePayment extends BasePayment
     protected $templating;
 
     /**
-     * @param RouterInterface $router
-     * @param LoggerInterface $logger
-     * @param EngineInterface $templating
-     * @param bool            $debug
+     * @param bool $debug
      */
     public function __construct(RouterInterface $router, LoggerInterface $logger, EngineInterface $templating, $debug)
     {
@@ -184,9 +181,6 @@ class OgonePayment extends BasePayment
         return $transaction->get('reference');
     }
 
-    /**
-     * @param TransactionInterface $transaction
-     */
     public function applyTransactionId(TransactionInterface $transaction)
     {
         $transaction->setTransactionId('n/a');
@@ -195,8 +189,6 @@ class OgonePayment extends BasePayment
     /**
      * Tells if $order matches $params.
      *
-     * @param OrderInterface $order
-     * @param array          $params
      *
      * @return bool
      */
@@ -210,8 +202,7 @@ class OgonePayment extends BasePayment
     /**
      * Signs the payment transaction.
      *
-     * @param array $params
-     * @param bool  $out    Should we use the out sha key?
+     * @param bool $out Should we use the out sha key?
      *
      * @return string
      */
@@ -234,7 +225,6 @@ class OgonePayment extends BasePayment
     /**
      * Returns form parameters for sendbank.
      *
-     * @param OrderInterface $order
      *
      * @return array
      */
@@ -277,8 +267,7 @@ class OgonePayment extends BasePayment
     /**
      * Generates absolute URL for route specified in $optionKey and $order.
      *
-     * @param string         $optionKey
-     * @param OrderInterface $order
+     * @param string $optionKey
      */
     protected function generateAbsoluteUrlFromOption($optionKey, OrderInterface $order)
     {
@@ -296,7 +285,6 @@ class OgonePayment extends BasePayment
     /**
      * Gets formatted address lines from $order.
      *
-     * @param OrderInterface $order
      *
      * @return string
      */

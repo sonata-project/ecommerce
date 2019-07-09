@@ -42,11 +42,8 @@ class RecentProductsBlockService extends BaseBlockService
     protected $currencyDetector;
 
     /**
-     * @param string                    $name
-     * @param EngineInterface           $templating
-     * @param RegistryInterface         $registry
-     * @param CurrencyDetectorInterface $currencyDetector
-     * @param string                    $productClass
+     * @param string $name
+     * @param string $productClass
      */
     public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector, $productClass)
     {

@@ -24,9 +24,6 @@ class MysqlReference implements ReferenceInterface
      */
     protected $registry;
 
-    /**
-     * @param RegistryInterface $registry
-     */
     public function __construct(RegistryInterface $registry)
     {
         $this->registry = $registry;

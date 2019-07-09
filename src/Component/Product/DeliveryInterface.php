@@ -17,8 +17,6 @@ interface DeliveryInterface
 {
     /**
      * Set product.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 

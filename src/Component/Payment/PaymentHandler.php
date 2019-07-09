@@ -61,14 +61,6 @@ class PaymentHandler implements PaymentHandlerInterface
      */
     protected $eventDispatcher;
 
-    /**
-     * @param OrderManagerInterface       $orderManager
-     * @param PaymentSelectorInterface    $paymentSelector
-     * @param ReferenceInterface          $referenceGenerator
-     * @param TransactionManagerInterface $transactionManager
-     * @param BackendInterface            $notificationBackend
-     * @param EventDispatcherInterface    $eventDispatcher
-     */
     public function __construct(OrderManagerInterface $orderManager, PaymentSelectorInterface $paymentSelector, ReferenceInterface $referenceGenerator, TransactionManagerInterface $transactionManager, BackendInterface $notificationBackend, EventDispatcherInterface $eventDispatcher)
     {
         $this->orderManager = $orderManager;
@@ -229,8 +221,6 @@ class PaymentHandler implements PaymentHandlerInterface
     }
 
     /**
-     * @param Request $request
-     *
      * @throws PaymentNotFoundException
      *
      * @return \Sonata\Component\Payment\TransactionInterface

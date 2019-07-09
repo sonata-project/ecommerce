@@ -65,7 +65,6 @@ class ProductController
      * @param ProductManagerInterface $productManager Sonata product manager
      * @param Pool                    $productPool    Sonata product pool
      * @param FormFactoryInterface    $formFactory    Symfony form factory
-     * @param FormatterPool           $formatterPool
      */
     public function __construct(ProductManagerInterface $productManager, Pool $productPool, FormFactoryInterface $formFactory, FormatterPool $formatterPool)
     {
@@ -88,8 +87,6 @@ class ProductController
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/disabled products only?")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return Sonata\DatagridBundle\Pager\PagerInterface
      */

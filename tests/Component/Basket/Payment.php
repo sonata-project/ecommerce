@@ -57,7 +57,6 @@ class Payment extends BasePayment
      * Send information to the bank, this method should handle
      * everything when called.
      *
-     * @param \Sonata\Component\Order\OrderInterface $order
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -67,8 +66,6 @@ class Payment extends BasePayment
     }
 
     /**
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
-     *
      * @return bool true if callback ok else false
      */
     public function isCallbackValid(TransactionInterface $transaction)
@@ -79,7 +76,6 @@ class Payment extends BasePayment
     /**
      * Method called when an error occurs.
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -91,7 +87,6 @@ class Payment extends BasePayment
     /**
      * Send post back confirmation to the bank when the bank callback the site.
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
      * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
@@ -105,7 +100,6 @@ class Payment extends BasePayment
      *
      * WARNING : this methods does not check if the callback is valid
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
      * @return bool true if all parameter are ok
      */
@@ -117,7 +111,6 @@ class Payment extends BasePayment
     /**
      * return true is the basket is valid for the current bank gateway.
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
      *
      * @return bool
      */
@@ -128,9 +121,6 @@ class Payment extends BasePayment
 
     /**
      * return true if the product can be added to the basket.
-     *
-     * @param \Sonata\Component\Basket\BasketInterface   $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
      */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product)
     {
@@ -139,8 +129,6 @@ class Payment extends BasePayment
 
     /**
      * return the transaction id from the bank.
-     *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      */
     public function applyTransactionId(TransactionInterface $transaction)
     {
@@ -150,7 +138,6 @@ class Payment extends BasePayment
     /**
      * return the order reference from the transaction.
      *
-     * @param \Sonata\Component\Payment\TransactionInterface $transaction
      *
      * @return string
      */

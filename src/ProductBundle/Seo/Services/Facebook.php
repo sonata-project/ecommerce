@@ -60,12 +60,8 @@ class Facebook implements ServiceInterface
     protected $router;
 
     /**
-     * @param RouterInterface           $router
-     * @param Pool                      $mediaPool
-     * @param NumberHelper              $numberHelper
-     * @param CurrencyDetectorInterface $currencyDetector
-     * @param string                    $domain
-     * @param                           $mediaFormat
+     * @param string $domain
+     * @param        $mediaFormat
      */
     public function __construct(RouterInterface $router, Pool $mediaPool, NumberHelper $numberHelper, CurrencyDetectorInterface $currencyDetector, $domain, $mediaFormat)
     {
@@ -77,10 +73,6 @@ class Facebook implements ServiceInterface
         $this->mediaFormat = $mediaFormat;
     }
 
-    /**
-     * @param SeoPageInterface $seoPage
-     * @param ProductInterface $product
-     */
     public function alterPage(SeoPageInterface $seoPage, ProductInterface $product)
     {
         $this->registerHeaders($seoPage);
@@ -101,10 +93,6 @@ class Facebook implements ServiceInterface
         }
     }
 
-    /**
-     * @param MediaInterface   $image
-     * @param SeoPageInterface $seoPage
-     */
     protected function addImageInfo(MediaInterface $image, SeoPageInterface $seoPage)
     {
         $provider = $this->mediaPool->getProvider($image->getProviderName());
@@ -115,9 +103,6 @@ class Facebook implements ServiceInterface
             ->addMeta('property', 'og:image:type', $image->getContentType());
     }
 
-    /**
-     * @param SeoPageInterface $seoPage
-     */
     protected function registerHeaders(SeoPageInterface $seoPage)
     {
         $attributeName = 'prefix';

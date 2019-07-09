@@ -20,8 +20,6 @@ use Sonata\Doctrine\Model\PageableManagerInterface;
 interface BasketManagerInterface extends ManagerInterface, PageableManagerInterface
 {
     /**
-     * @param \Sonata\Component\Customer\CustomerInterface $customer
-     *
      * @return BasketInterface|null
      */
     public function loadBasketPerCustomer(CustomerInterface $customer);

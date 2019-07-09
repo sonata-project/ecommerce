@@ -34,11 +34,6 @@ class CheckPayment extends BasePayment
      */
     protected $browser;
 
-    /**
-     * @param RouterInterface $router
-     * @param LoggerInterface $logger
-     * @param Browser         $browser
-     */
     public function __construct(RouterInterface $router, LoggerInterface $logger, Browser $browser)
     {
         $this->router = $router;

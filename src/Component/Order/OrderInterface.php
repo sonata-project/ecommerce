@@ -74,8 +74,6 @@ interface OrderInterface
 
     /**
      * Set currency.
-     *
-     * @param CurrencyInterface $currency
      */
     public function setCurrency(CurrencyInterface $currency);
 
@@ -535,9 +533,6 @@ interface OrderInterface
      */
     public function getOrderElements();
 
-    /**
-     * @param OrderElementInterface $orderElement
-     */
     public function addOrderElement(OrderElementInterface $orderElement);
 
     /**
@@ -576,9 +571,6 @@ interface OrderInterface
      */
     public function isError();
 
-    /**
-     * @param \DateTime|null $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
@@ -586,9 +578,6 @@ interface OrderInterface
      */
     public function getCreatedAt();
 
-    /**
-     * @param \DateTime|null $updatedAt
-     */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
@@ -598,8 +587,6 @@ interface OrderInterface
 
     /**
      * Add order elements.
-     *
-     * @param OrderElementInterface $orderElements
      */
     public function addOrderElements(OrderElementInterface $orderElements);
 
@@ -610,9 +597,6 @@ interface OrderInterface
      */
     public function setOrderElements($orderElements);
 
-    /**
-     * @param CustomerInterface $customer
-     */
     public function setCustomer(CustomerInterface $customer);
 
     /**

@@ -65,9 +65,6 @@ class BasketResizeFormListener implements EventSubscriberInterface
         $this->buildBasketElements($form, $basketElements);
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function preBind(FormEvent $event)
     {
         $form = $event->getForm();

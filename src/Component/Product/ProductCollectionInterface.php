@@ -70,8 +70,6 @@ interface ProductCollectionInterface
 
     /**
      * Set Product.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
@@ -84,8 +82,6 @@ interface ProductCollectionInterface
 
     /**
      * Set Collection.
-     *
-     * @param CollectionInterface $collection
      */
     public function setCollection(CollectionInterface $collection);
 

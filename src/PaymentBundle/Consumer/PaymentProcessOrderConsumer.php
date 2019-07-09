@@ -43,11 +43,6 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
      */
     protected $backend;
 
-    /**
-     * @param OrderManagerInterface $orderManager
-     * @param ManagerInterface      $transactionManager
-     * @param BackendInterface      $backend
-     */
     public function __construct(OrderManagerInterface $orderManager, ManagerInterface $transactionManager, BackendInterface $backend)
     {
         $this->orderManager = $orderManager;
@@ -79,7 +74,6 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
     /**
      * Get the related Order.
      *
-     * @param ConsumerEvent $event
      *
      * @throws \RuntimeException
      *
@@ -101,7 +95,6 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
     /**
      * Get the related Transaction.
      *
-     * @param ConsumerEvent $event
      *
      * @throws \RuntimeException
      *
