@@ -48,12 +48,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
      */
     protected $session;
 
-    /**
-     * @param BasketManagerInterface    $basketManager
-     * @param BasketBuilderInterface    $basketBuilder
-     * @param CurrencyDetectorInterface $currencyDetector
-     * @param SessionInterface          $session
-     */
     public function __construct(BasketManagerInterface $basketManager, BasketBuilderInterface $basketBuilder, CurrencyDetectorInterface $currencyDetector, SessionInterface $session)
     {
         $this->basketManager = $basketManager;
@@ -87,7 +81,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     /**
      * Retrieved basket associated with $customer from session.
      *
-     * @param CustomerInterface $customer
      *
      * @return BasketInterface|null
      */
@@ -104,8 +97,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
 
     /**
      * Stores $basket in session.
-     *
-     * @param BasketInterface $basket
      */
     protected function storeInSession(BasketInterface $basket): void
     {
@@ -130,8 +121,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
 
     /**
      * Clears the baskets in session.
-     *
-     * @param CustomerInterface $customer
      */
     protected function clearSession(CustomerInterface $customer): void
     {

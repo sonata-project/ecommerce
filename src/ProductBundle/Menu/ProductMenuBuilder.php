@@ -40,11 +40,6 @@ class ProductMenuBuilder
      */
     protected $router;
 
-    /**
-     * @param FactoryInterface                $factory
-     * @param ProductCategoryManagerInterface $categoryManager
-     * @param RouterInterface                 $router
-     */
     public function __construct(FactoryInterface $factory, ProductCategoryManagerInterface $categoryManager, RouterInterface $router)
     {
         $this->factory = $factory;
@@ -55,9 +50,7 @@ class ProductMenuBuilder
     /**
      * Generates the filters menu based on $productProvider.
      *
-     * @param ProductProviderInterface $productProvider
-     * @param array                    $itemOptions
-     * @param string                   $currentUri
+     * @param string $currentUri
      *
      * @return mixed
      */
@@ -140,10 +133,8 @@ class ProductMenuBuilder
     /**
      * Recursive method to fill $menu with $categories.
      *
-     * @param ItemInterface $menu
-     * @param array         $categories
-     * @param array         $options
-     * @param string        $currentUri
+     * @param array  $categories
+     * @param string $currentUri
      */
     protected function fillMenu(ItemInterface $menu, $categories, array $options = [], $currentUri = null): void
     {

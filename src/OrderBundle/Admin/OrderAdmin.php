@@ -50,25 +50,16 @@ class OrderAdmin extends AbstractAdmin
      */
     protected $orderManager;
 
-    /**
-     * @param CurrencyDetectorInterface $currencyDetector
-     */
     public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector): void
     {
         $this->currencyDetector = $currencyDetector;
     }
 
-    /**
-     * @param InvoiceManagerInterface $invoiceManager
-     */
     public function setInvoiceManager(InvoiceManagerInterface $invoiceManager): void
     {
         $this->invoiceManager = $invoiceManager;
     }
 
-    /**
-     * @param OrderManagerInterface $orderManager
-     */
     public function setOrderManager(OrderManagerInterface $orderManager): void
     {
         $this->orderManager = $orderManager;

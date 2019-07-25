@@ -73,8 +73,6 @@ abstract class BaseDelivery implements DeliveryInterface
 
     /**
      * Set productId.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product): void
     {

@@ -74,10 +74,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @param FormView               $formView
-     * @param BasketElementInterface $basketElement
-     * @param BasketInterface        $basket
-     *
      * @return Response
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
@@ -151,9 +147,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @param BasketElementInterface $basketElement
-     * @param BasketInterface        $basket
-     *
      * @return Response
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)

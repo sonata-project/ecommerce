@@ -31,9 +31,6 @@ class InvoiceController
      */
     protected $invoiceManager;
 
-    /**
-     * @param InvoiceManagerInterface $invoiceManager
-     */
     public function __construct(InvoiceManagerInterface $invoiceManager)
     {
         $this->invoiceManager = $invoiceManager;
@@ -53,8 +50,6 @@ class InvoiceController
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */

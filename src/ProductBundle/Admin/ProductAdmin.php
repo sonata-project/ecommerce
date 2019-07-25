@@ -44,9 +44,6 @@ class ProductAdmin extends AbstractAdmin
      */
     protected $currencyDetector;
 
-    /**
-     * @param CurrencyDetectorInterface $currencyDetector
-     */
     public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector): void
     {
         $this->currencyDetector = $currencyDetector;
@@ -108,9 +105,6 @@ class ProductAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Datagrid\DatagridMapper $filter
-     */
     public function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
@@ -122,9 +116,6 @@ class ProductAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\Component\Product\Pool $productPool
-     */
     public function setProductPool(Pool $productPool): void
     {
         $this->productPool = $productPool;
@@ -141,7 +132,6 @@ class ProductAdmin extends AbstractAdmin
     /**
      * Return the Product Provider.
      *
-     * @param ProductInterface $product
      *
      * @return \Sonata\Component\Product\ProductProviderInterface
      */

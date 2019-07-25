@@ -26,7 +26,6 @@ class Pool
     /**
      * add a payment method into the pool.
      *
-     * @param PaymentInterface $instance
      *
      * @throws \RuntimeException
      */

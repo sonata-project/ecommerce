@@ -44,10 +44,7 @@ class VariationsFormBlockService extends BaseBlockService
     protected $formFactory;
 
     /**
-     * @param string               $name
-     * @param EngineInterface      $templating
-     * @param Pool                 $productPool
-     * @param FormFactoryInterface $formFactory
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, Pool $productPool, FormFactoryInterface $formFactory)
     {

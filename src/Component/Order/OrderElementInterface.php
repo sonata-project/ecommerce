@@ -128,8 +128,6 @@ interface OrderElementInterface extends PriceComputableInterface
 
     /**
      * Add product.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
@@ -159,9 +157,6 @@ interface OrderElementInterface extends PriceComputableInterface
      */
     public function getProductType();
 
-    /**
-     * @param \DateTime|null $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**

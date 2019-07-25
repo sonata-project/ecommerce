@@ -68,7 +68,6 @@ abstract class BaseProductController extends Controller
     /**
      * Renders product properties.
      *
-     * @param ProductInterface $product
      *
      * @return Response
      */
@@ -82,10 +81,6 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param FormView               $formView
-     * @param BasketElementInterface $basketElement
-     * @param BasketInterface        $basket
-     *
      * @return Response
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket)
@@ -102,9 +97,6 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param BasketElementInterface $basketElement
-     * @param BasketInterface        $basket
-     *
      * @return Response
      */
     public function renderFinalReviewBasketElementAction(BasketElementInterface $basketElement, BasketInterface $basket)
@@ -138,9 +130,6 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param ProductInterface      $product
-     * @param ProductInterface|null $variation
-     *
      * @throws NotFoundHttpException
      *
      * @return JsonResponse|RedirectResponse
@@ -177,8 +166,7 @@ abstract class BaseProductController extends Controller
     }
 
     /**
-     * @param ProductInterface $product
-     * @param string|null      $currency
+     * @param string|null $currency
      */
     protected function updateSeoMeta(ProductInterface $product, $currency = null): void
     {

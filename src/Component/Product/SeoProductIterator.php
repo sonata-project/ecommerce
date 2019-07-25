@@ -30,10 +30,8 @@ class SeoProductIterator implements SourceIteratorInterface
     protected $iterator;
 
     /**
-     * @param RegistryInterface $registry
-     * @param string            $class
-     * @param RouterInterface   $router
-     * @param string            $routeName
+     * @param string $class
+     * @param string $routeName
      */
     public function __construct(RegistryInterface $registry, $class, RouterInterface $router, $routeName)
     {

@@ -44,12 +44,6 @@ class AddBasketElementEvent extends Event
      */
     protected $productProvider;
 
-    /**
-     * @param BasketInterface          $basket
-     * @param BasketElementInterface   $basketElement
-     * @param ProductInterface         $product
-     * @param ProductProviderInterface $productProvider
-     */
     public function __construct(BasketInterface $basket, BasketElementInterface $basketElement, ProductInterface $product, ProductProviderInterface $productProvider)
     {
         $this->basket = $basket;

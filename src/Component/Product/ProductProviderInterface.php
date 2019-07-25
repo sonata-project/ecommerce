@@ -26,9 +26,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 interface ProductProviderInterface
 {
-    /**
-     * @param \Sonata\Component\Basket\BasketElementManagerInterface $basketElementManager
-     */
     public function setBasketElementManager(BasketElementManagerInterface $basketElementManager);
 
     /**
@@ -36,9 +33,6 @@ interface ProductProviderInterface
      */
     public function getBasketElementManager();
 
-    /**
-     * @param ProductCategoryManagerInterface $productCategoryManager
-     */
     public function setProductCategoryManager(ProductCategoryManagerInterface $productCategoryManager);
 
     /**
@@ -46,9 +40,6 @@ interface ProductProviderInterface
      */
     public function getProductCategoryManager();
 
-    /**
-     * @param ProductCollectionManagerInterface $productCollectionManager
-     */
     public function setProductCollectionManager(ProductCollectionManagerInterface $productCollectionManager);
 
     /**
@@ -71,34 +62,19 @@ interface ProductProviderInterface
      */
     public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = true, array $options = []);
 
-    /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Symfony\Component\Form\FormBuilder             $formBuilder
-     * @param array                                           $options
-     */
     public function defineBasketElementForm(BasketElementInterface $basketElement, FormBuilder $formBuilder, array $options = []);
 
     /**
      * return true if the basket element is still valid.
-     *
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
-     * @param ProductInterface                                $product
-     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
      */
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
      * Merge a product with another when the product is already present into the basket.
-     *
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
-     * @param ProductInterface                                $product
-     * @param \Sonata\Component\Basket\BasketElementInterface $newBasketElement
      */
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement);
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     *
      * @return bool true if the basket element is still valid
      */
     public function isValidBasketElement(BasketElementInterface $basketElement);
@@ -127,25 +103,17 @@ interface ProductProviderInterface
     /**
      * Return true if the product can be added to the provided basket.
      *
-     * @param \Sonata\Component\Basket\BasketInterface   $basket
      * @param \Sonata\Component\Product\ProductInterface $product
-     * @param array                                      $options
      *
      * @return bool
      */
     public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = []);
 
     /**
-     * @param ProductInterface|null $product
-     * @param array                 $options
-     *
      * @return BasketElementInterface
      */
     public function createBasketElement(ProductInterface $product = null, array $options = []);
 
-    /**
-     * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
-     */
     public function configureShowFields(ShowMapper $showMapper);
 
     /**
@@ -158,20 +126,14 @@ interface ProductProviderInterface
     public function buildForm(FormBuilderInterface $builder, array $options, $isVariation = false);
 
     /**
-     * @param FormMapper $formMapper
-     * @param bool       $isVariation
+     * @param bool $isVariation
      */
     public function buildEditForm(FormMapper $formMapper, $isVariation = false);
 
-    /**
-     * @param FormMapper $formMapper
-     */
     public function buildCreateForm(FormMapper $formMapper);
 
     /**
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
      * @param \Sonata\Component\Product\ProductInterface|null $product
-     * @param array                                           $options
      */
     public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []);
 
@@ -181,9 +143,7 @@ interface ProductProviderInterface
      *
      * If the basket is valid it will then replace the one in session
      *
-     * @param \Sonata\CoreBundle\Validator\ErrorElement       $errorElement
-     * @param \Sonata\Component\Basket\BasketElementInterface $basketElement
-     * @param \Sonata\Component\Basket\BasketInterface        $basket
+     * @param \Sonata\CoreBundle\Validator\ErrorElement $errorElement
      */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket);
 
@@ -250,7 +210,6 @@ interface ProductProviderInterface
     /**
      * Check if the product has variations.
      *
-     * @param ProductInterface $product
      *
      * @return bool
      */
@@ -259,7 +218,6 @@ interface ProductProviderInterface
     /**
      * Return true if Product has enabled variation(s).
      *
-     * @param ProductInterface $product
      *
      * @return bool
      */
@@ -268,7 +226,6 @@ interface ProductProviderInterface
     /**
      * Return the list of enabled product variations.
      *
-     * @param ProductInterface $product
      *
      * @return ArrayCollection
      */
@@ -277,7 +234,6 @@ interface ProductProviderInterface
     /**
      * Fetch the cheapest variation if provided/existing.
      *
-     * @param ProductInterface $product
      *
      * @return ProductInterface|null
      */
@@ -302,8 +258,6 @@ interface ProductProviderInterface
     /**
      * Gets the possible values for $fields (or variation fields if not set).
      *
-     * @param ProductInterface $product
-     * @param array            $fields
      *
      * @return array
      */
@@ -312,8 +266,6 @@ interface ProductProviderInterface
     /**
      * Gets the properties values of $product amongst variation fields or $fields if set.
      *
-     * @param ProductInterface $product
-     * @param array            $fields
      *
      * @return array
      */
@@ -321,18 +273,14 @@ interface ProductProviderInterface
 
     /**
      * Gets the variation matching $choices from master product $product.
-     *
-     * @param ProductInterface $product
-     * @param array            $choices
      */
     public function getVariation(ProductInterface $product, array $choices = []);
 
     /**
      * Update the stock value of a given Product id.
      *
-     * @param ProductInterface|int    $product
-     * @param ProductManagerInterface $productManager
-     * @param int                     $diff
+     * @param ProductInterface|int $product
+     * @param int                  $diff
      */
     public function updateStock($product, ProductManagerInterface $productManager, $diff);
 }

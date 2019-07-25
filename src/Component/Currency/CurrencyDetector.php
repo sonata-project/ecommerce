@@ -26,8 +26,7 @@ class CurrencyDetector implements CurrencyDetectorInterface
     /**
      * Constructs the currency detector service by finding the default currency.
      *
-     * @param string                   $currencyLabel
-     * @param CurrencyManagerInterface $currencyManager
+     * @param string $currencyLabel
      */
     public function __construct($currencyLabel, CurrencyManagerInterface $currencyManager)
     {

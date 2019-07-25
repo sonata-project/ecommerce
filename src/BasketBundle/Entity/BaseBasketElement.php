@@ -35,8 +35,6 @@ abstract class BaseBasketElement extends BasketElement
 
     /**
      * Set basket.
-     *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
      */
     public function setBasket(BasketInterface $basket): void
     {

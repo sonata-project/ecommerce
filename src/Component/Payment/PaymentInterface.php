@@ -35,15 +35,12 @@ interface PaymentInterface
      * Send information to the bank, this method should handle
      * everything when called.
      *
-     * @param \Sonata\Component\Order\OrderInterface $order
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function sendbank(OrderInterface $order);
 
     /**
-     * @param TransactionInterface $transaction
-     *
      * @return Response
      */
     public function callback(TransactionInterface $transaction);
@@ -87,7 +84,6 @@ interface PaymentInterface
     /**
      * return true is the basket is valid for the current bank gateway.
      *
-     * @param \Sonata\Component\Basket\BasketInterface $basket
      *
      * @return bool
      */
@@ -95,9 +91,6 @@ interface PaymentInterface
 
     /**
      * return true if the product can be added to the basket.
-     *
-     * @param \Sonata\Component\Basket\BasketInterface   $basket
-     * @param \Sonata\Component\Product\ProductInterface $product
      */
     public function isAddableProduct(BasketInterface $basket, ProductInterface $product);
 

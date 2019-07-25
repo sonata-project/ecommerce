@@ -76,9 +76,6 @@ class BaseTransaction implements TransactionInterface
         $this->setStatusCode(self::STATUS_OPEN);
     }
 
-    /**
-     * @param \Sonata\Component\Order\OrderInterface $order
-     */
     public function setOrder(OrderInterface $order): void
     {
         $this->order = $order;
@@ -143,9 +140,6 @@ class BaseTransaction implements TransactionInterface
         return TransactionInterface::STATE_OK === $this->state;
     }
 
-    /**
-     * @param array $parameters
-     */
     public function setParameters(array $parameters): void
     {
         $this->parameters = $this->cleanupEncoding($parameters);
@@ -231,9 +225,6 @@ class BaseTransaction implements TransactionInterface
         return array_keys(self::getStatusList());
     }
 
-    /**
-     * @param \DateTime|null $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
@@ -290,7 +281,6 @@ class BaseTransaction implements TransactionInterface
     /**
      * Cleans up $toDecode keys & values.
      *
-     * @param array $toDecode
      *
      * @return array
      */

@@ -39,7 +39,6 @@ class PaymentEvent extends Event
     protected $response;
 
     /**
-     * @param OrderInterface       $order
      * @param TransactionInterface $transaction
      * @param Response             $response
      */

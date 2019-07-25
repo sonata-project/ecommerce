@@ -26,9 +26,6 @@ class InvoiceTransformEvent extends Event
      */
     protected $invoice;
 
-    /**
-     * @param InvoiceInterface $invoice
-     */
     public function __construct(InvoiceInterface $invoice)
     {
         $this->invoice = $invoice;

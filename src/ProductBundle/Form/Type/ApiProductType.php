@@ -28,9 +28,6 @@ class ApiProductType extends AbstractType
      */
     protected $productPool;
 
-    /**
-     * @param Pool $productPool
-     */
     public function __construct(Pool $productPool)
     {
         $this->productPool = $productPool;

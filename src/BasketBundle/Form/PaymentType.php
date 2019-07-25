@@ -40,11 +40,6 @@ class PaymentType extends AbstractType
      */
     protected $paymentSelector;
 
-    /**
-     * @param AddressManagerInterface  $addressManager
-     * @param PaymentPool              $paymentPool
-     * @param PaymentSelectorInterface $paymentSelector
-     */
     public function __construct(AddressManagerInterface $addressManager, PaymentPool $paymentPool, PaymentSelectorInterface $paymentSelector)
     {
         $this->addressManager = $addressManager;

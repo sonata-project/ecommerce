@@ -43,8 +43,7 @@ interface BasketElementInterface extends PriceComputableInterface
     /**
      * Define the related product.
      *
-     * @param string           $productCode
-     * @param ProductInterface $product
+     * @param string $productCode
      */
     public function setProduct($productCode, ProductInterface $product);
 
@@ -151,9 +150,6 @@ interface BasketElementInterface extends PriceComputableInterface
      */
     public function getDelete();
 
-    /**
-     * @param \Sonata\Component\Product\ProductDefinition $productDefinition
-     */
     public function setProductDefinition(ProductDefinition $productDefinition);
 
     /**

@@ -29,9 +29,6 @@ class VariationChoiceType extends AbstractType
      */
     protected $pool;
 
-    /**
-     * @param Pool $pool
-     */
     public function __construct(Pool $pool)
     {
         $this->pool = $pool;

@@ -24,7 +24,6 @@ class Mustache
      * Renders a single line. Looks for {{ var }}.
      *
      * @param string $string
-     * @param array  $parameters
      *
      * @return string
      */
@@ -40,8 +39,7 @@ class Mustache
     /**
      * Renders a file by replacing the contents of $file with rendered output.
      *
-     * @param string $file       filename for the file to be rendered
-     * @param array  $parameters
+     * @param string $file filename for the file to be rendered
      */
     public static function renderFile($file, array $parameters): void
     {
@@ -51,8 +49,7 @@ class Mustache
     /**
      * Renders a directory recursively.
      *
-     * @param string $dir        Path to the directory that will be recursively rendered
-     * @param array  $parameters
+     * @param string $dir Path to the directory that will be recursively rendered
      */
     public static function renderDir($dir, array $parameters): void
     {

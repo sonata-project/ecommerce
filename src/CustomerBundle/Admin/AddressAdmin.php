@@ -32,9 +32,6 @@ class AddressAdmin extends AbstractAdmin
         $this->setTranslationDomain('SonataCustomerBundle');
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
-     */
     public function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
@@ -77,9 +74,6 @@ class AddressAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param \Sonata\AdminBundle\Datagrid\ListMapper $list
-     */
     public function configureListFields(ListMapper $list): void
     {
         $list

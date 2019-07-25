@@ -22,10 +22,8 @@ interface OrderManagerInterface extends ManagerInterface, PageableManagerInterfa
     /**
      * Finds orders belonging to given user.
      *
-     * @param UserInterface $user
-     * @param array         $orderBy
-     * @param int|null      $limit
-     * @param int|null      $offset
+     * @param int|null $limit
+     * @param int|null $offset
      *
      * @return OrderInterface[]
      */

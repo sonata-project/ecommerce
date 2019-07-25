@@ -25,10 +25,6 @@ class ProductDefinition
      */
     protected $provider;
 
-    /**
-     * @param ProductProviderInterface $provider
-     * @param ProductManagerInterface  $manager
-     */
     public function __construct(ProductProviderInterface $provider, ProductManagerInterface $manager)
     {
         $this->provider = $provider;

@@ -31,10 +31,7 @@ class CategoriesMenuBlockService extends MenuBlockService
     private $menuBuilder;
 
     /**
-     * @param string                $name
-     * @param EngineInterface       $templating
-     * @param MenuProviderInterface $menuProvider
-     * @param ProductMenuBuilder    $menuBuilder
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, MenuProviderInterface $menuProvider, ProductMenuBuilder $menuBuilder)
     {

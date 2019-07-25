@@ -44,10 +44,6 @@ class SonataPriceExtension extends Extension
         $this->registerParameters($container, $config);
     }
 
-    /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param array                                                   $config
-     */
     public function registerParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('sonata.price.currency', $config['currency']);

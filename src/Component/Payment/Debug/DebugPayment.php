@@ -38,8 +38,7 @@ class DebugPayment extends PassPayment
     /**
      * Handle the callback.
      *
-     * @param OrderInterface $order
-     * @param string         $action
+     * @param string $action
      *
      * @return Response
      */

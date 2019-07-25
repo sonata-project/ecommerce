@@ -28,9 +28,6 @@ class AddressExtension extends \Twig_Extension
      */
     protected $deliverySelector;
 
-    /**
-     * @param ServiceDeliverySelectorInterface $deliverySelector
-     */
     public function __construct(ServiceDeliverySelectorInterface $deliverySelector)
     {
         $this->deliverySelector = $deliverySelector;

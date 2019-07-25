@@ -31,9 +31,6 @@ class InvoiceAdmin extends AbstractAdmin
      */
     protected $currencyDetector;
 
-    /**
-     * @param CurrencyDetectorInterface $currencyDetector
-     */
     public function setCurrencyDetector(CurrencyDetectorInterface $currencyDetector): void
     {
         $this->currencyDetector = $currencyDetector;

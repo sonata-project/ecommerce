@@ -52,12 +52,6 @@ class CustomerController
      */
     protected $formFactory;
 
-    /**
-     * @param CustomerManagerInterface $customerManager
-     * @param OrderManagerInterface    $orderManager
-     * @param AddressManagerInterface  $addressManager
-     * @param FormFactoryInterface     $formFactory
-     */
     public function __construct(CustomerManagerInterface $customerManager, OrderManagerInterface $orderManager, AddressManagerInterface $addressManager, FormFactoryInterface $formFactory)
     {
         $this->customerManager = $customerManager;
@@ -79,8 +73,6 @@ class CustomerController
      * @QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */

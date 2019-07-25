@@ -28,10 +28,6 @@ class DoctrineModelManager extends ModelManager
      */
     protected $pool;
 
-    /**
-     * @param RegistryInterface $registry
-     * @param Pool              $pool
-     */
     public function __construct(RegistryInterface $registry, Pool $pool)
     {
         parent::__construct($registry);

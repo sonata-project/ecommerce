@@ -72,8 +72,6 @@ class Pool
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return int|string|null
      */
     public function getProductCode(ProductInterface $product)

@@ -40,8 +40,6 @@ class Selector implements PaymentSelectorInterface
     protected $logger;
 
     /**
-     * @param PaymentPool     $paymentPool
-     * @param ProductPool     $productPool
      * @param LoggerInterface $logger
      */
     public function __construct(PaymentPool $paymentPool, ProductPool $productPool, LoggerInterface $logger = null)
@@ -51,9 +49,6 @@ class Selector implements PaymentSelectorInterface
         $this->logger = $logger;
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;

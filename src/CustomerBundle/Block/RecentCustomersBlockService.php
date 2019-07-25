@@ -36,10 +36,7 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
     protected $manager;
 
     /**
-     * @param string                   $name
-     * @param EngineInterface          $templating
-     * @param CustomerManagerInterface $manager
-     * @param Pool|null                $adminPool
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, CustomerManagerInterface $manager, Pool $adminPool = null)
     {

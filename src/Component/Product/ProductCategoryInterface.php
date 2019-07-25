@@ -75,8 +75,6 @@ interface ProductCategoryInterface
 
     /**
      * Set Product.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product);
 
@@ -89,8 +87,6 @@ interface ProductCategoryInterface
 
     /**
      * Set Category.
-     *
-     * @param CategoryInterface $category
      */
     public function setCategory(CategoryInterface $category);
 

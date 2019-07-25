@@ -39,17 +39,12 @@ class Configuration implements ConfigurationInterface
     /**
      * Sets the price precision section
      * Precision parameter will be given to bcscale() used in bundle boot() method.
-     *
-     * @param ArrayNodeDefinition $node
      */
     private function addPrecisionSection(ArrayNodeDefinition $node): void
     {
         $node->children()->scalarNode('precision')->defaultValue(3)->end();
     }
 
-    /**
-     * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
-     */
     private function addPriceSection(ArrayNodeDefinition $node): void
     {
         $node

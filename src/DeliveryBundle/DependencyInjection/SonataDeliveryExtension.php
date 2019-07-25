@@ -60,10 +60,6 @@ class SonataDeliveryExtension extends Extension
         $this->configureDelivery($container, $config);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     public function configureDelivery(ContainerBuilder $container, array $config): void
     {
         $pool = $container->getDefinition('sonata.delivery.pool');

@@ -31,9 +31,6 @@ class OrderController
      */
     protected $orderManager;
 
-    /**
-     * @param OrderManagerInterface $orderManager
-     */
     public function __construct(OrderManagerInterface $orderManager)
     {
         $this->orderManager = $orderManager;
@@ -54,8 +51,6 @@ class OrderController
      * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */

@@ -21,7 +21,6 @@ interface ProductFinderInterface
     /**
      * Gets similar product as $product in a cross selling fashion.
      *
-     * @param ProductInterface $product
      *
      * @return ProductInterface[]
      */
@@ -30,7 +29,6 @@ interface ProductFinderInterface
     /**
      * Gets similar parent products as $product in a cross selling fashion.
      *
-     * @param ProductInterface $product
      *
      * @return ProductInterface[]
      */
@@ -39,7 +37,6 @@ interface ProductFinderInterface
     /**
      * Gets similar product as $product in an up selling fashion.
      *
-     * @param ProductInterface $product
      *
      * @return ProductInterface[]
      */

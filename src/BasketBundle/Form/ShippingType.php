@@ -34,10 +34,6 @@ class ShippingType extends AbstractType
      */
     protected $deliverySelector;
 
-    /**
-     * @param DeliveryPool                     $deliveryPool
-     * @param ServiceDeliverySelectorInterface $deliverySelector
-     */
     public function __construct(DeliveryPool $deliveryPool, ServiceDeliverySelectorInterface $deliverySelector)
     {
         $this->deliverySelector = $deliverySelector;

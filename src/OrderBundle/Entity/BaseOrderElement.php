@@ -131,8 +131,6 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * Set order.
-     *
-     * @param OrderInterface $order
      */
     public function setOrder(OrderInterface $order): void
     {
@@ -374,8 +372,6 @@ abstract class BaseOrderElement implements OrderElementInterface
 
     /**
      * Add product.
-     *
-     * @param ProductInterface $product
      */
     public function setProduct(ProductInterface $product): void
     {
@@ -412,9 +408,6 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->productType;
     }
 
-    /**
-     * @param \DateTime|null $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
@@ -428,9 +421,6 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTime|null $updatedAt
-     */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;

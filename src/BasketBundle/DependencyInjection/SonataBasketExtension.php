@@ -67,7 +67,6 @@ class SonataBasketExtension extends Extension
     }
 
     /**
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      * @param $config
      */
     public function registerParameters(ContainerBuilder $container, array $config): void
@@ -76,9 +75,6 @@ class SonataBasketExtension extends Extension
         $container->setParameter('sonata.basket.basket_element.class', $config['class']['basket_element']);
     }
 
-    /**
-     * @param array $config
-     */
     public function registerDoctrineMapping(array $config): void
     {
         if (!class_exists($config['class']['basket'])) {
