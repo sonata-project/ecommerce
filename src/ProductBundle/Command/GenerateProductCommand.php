@@ -14,25 +14,38 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Command;
 
 use Sonata\Component\Generator\Mustache;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Create a new Product.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class GenerateProductCommand extends ContainerAwareCommand
+class GenerateProductCommand extends Command
 {
+    /**
+     * @var KernelInterface
+     */
+    private $kernel;
+
+    public function __construct(KernelInterface $kernel, string $name = null)
+    {
+        $this->kernel = $kernel;
+        parent::__construct($name);
+    }
+
     protected function configure(): void
     {
         $this
             ->setDefinition([
                 new InputArgument('product', InputArgument::REQUIRED, 'The product to create'),
                 new InputArgument('service_id', InputArgument::REQUIRED, 'The service id to define'),
+                new InputArgument('namespace_prefix', InputArgument::OPTIONAL, 'The namespace prefix for the classes'),
             ])
             ->setName('sonata:product:generate')
             ->setDescription('Generates required files for a new Product')
@@ -41,9 +54,9 @@ class GenerateProductCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        // find a better way to detect the source folder
-        $bundle_dir = sprintf('%s/../src/Sonata/ProductBundle',
-            $this->getContainer()->get('kernel')->getRootDir()
+        // find a better way to detect the Application folder
+        $bundle_dir = sprintf('%s/src/Sonata/ProductBundle',
+                              $this->kernel->getProjectDir()
         );
 
         if (!is_dir($bundle_dir)) {
@@ -54,13 +67,9 @@ class GenerateProductCommand extends ContainerAwareCommand
 
         $output->writeln(' > mirroring skeleton files');
 
-        $bundles = $this->getContainer()->get('kernel')->getBundle('SonataProductBundle', false);
-        $vendorPath = '';
-        foreach ($bundles as $bundle) {
-            if (false !== strpos($bundle->getPath(), 'vendor')) {
-                $vendorPath = $bundle->getPath();
-            }
-        }
+        $bundle = $this->kernel->getBundle('SonataProductBundle', false);
+
+        $vendorPath = $bundle->getPath();
 
         $filesystem = new Filesystem();
         $filesystem->mirror($vendorPath.'/Resources/skeleton/product', $bundle_dir);
@@ -68,9 +77,11 @@ class GenerateProductCommand extends ContainerAwareCommand
         $output->writeln(' > mustaching skeleton files');
 
         $product = ucfirst($input->getArgument('product'));
+        $namespacePrefix = ucfirst($input->getArgument('namespace_prefix')) ?? '';
 
         Mustache::renderDir($bundle_dir, [
             'product' => $product,
+            'namespace_prefix' => $namespacePrefix,
             'root_name' => strtolower(preg_replace('/[A-Z]/', '_\\0', $product)),
         ]);
 
@@ -165,7 +176,7 @@ You can customize the serialization of your Product by editing /src/Sonata/Produ
 
 
 CONFIG
-, ['service' => $service, 'product' => $product]
-));
+            , ['service' => $service, 'product' => $product]
+        ));
     }
 }
