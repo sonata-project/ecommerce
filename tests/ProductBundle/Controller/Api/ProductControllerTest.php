@@ -16,6 +16,7 @@ namespace Sonata\ProductBundle\Tests\Controller\Api;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -26,12 +27,15 @@ use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
+use Sonata\FormatterBundle\Formatter\RawFormatter;
 use Sonata\ProductBundle\Controller\Api\ProductController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Environment;
+use Twig\Template;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -135,7 +139,7 @@ class ProductControllerTest extends TestCase
 
     public function testPostProductAction(): void
     {
-        $product = $this->createMock(ProductInterface::class);
+        $product = $this->getValidProduct();
 
         $productManager = $this->createMock(ProductManagerInterface::class);
         $productManager->expects($this->once())->method('save')->willReturn($product);
@@ -143,8 +147,7 @@ class ProductControllerTest extends TestCase
         $productPool = $this->createMock(ProductPool::class);
         $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
-        $formatterPool = $this->createMock(FormatterPool::class);
-        $formatterPool->expects($this->exactly(2))->method('transform');
+        $formatterPool = $this->getValidFormatter();
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
@@ -171,8 +174,7 @@ class ProductControllerTest extends TestCase
         $productPool = $this->createMock(ProductPool::class);
         $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
-        $formatterPool = $this->createMock(FormatterPool::class);
-        $formatterPool->expects($this->never())->method('transform');
+        $formatterPool = new FormatterPool('whatever');
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
@@ -190,7 +192,7 @@ class ProductControllerTest extends TestCase
 
     public function testPutProductAction(): void
     {
-        $product = $this->createMock(ProductInterface::class);
+        $product = $this->getValidProduct();
 
         $productManager = $this->createMock(ProductManagerInterface::class);
         $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
@@ -199,8 +201,7 @@ class ProductControllerTest extends TestCase
         $productPool = $this->createMock(ProductPool::class);
         $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
-        $formatterPool = $this->createMock(FormatterPool::class);
-        $formatterPool->expects($this->exactly(2))->method('transform');
+        $formatterPool = $this->getValidFormatter();
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
@@ -228,8 +229,7 @@ class ProductControllerTest extends TestCase
         $productPool = $this->createMock(ProductPool::class);
         $productPool->expects($this->once())->method('getManager')->willReturn($productManager);
 
-        $formatterPool = $this->createMock(FormatterPool::class);
-        $formatterPool->expects($this->never())->method('transform');
+        $formatterPool = new FormatterPool('whatever');
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
@@ -302,9 +302,54 @@ class ProductControllerTest extends TestCase
             $formFactory = $this->createMock(FormFactoryInterface::class);
         }
         if (null === $formatterPool) {
-            $formatterPool = $this->createMock(FormatterPool::class);
+            $formatterPool = new FormatterPool('whatever');
         }
 
         return new ProductController($productManager, $productPool, $formFactory, $formatterPool);
+    }
+
+    private function getValidProduct(): ProductInterface
+    {
+        $product = $this->createMock(ProductInterface::class);
+        $product->expects($this->once())
+            ->method('getDescriptionFormatter')
+            ->willReturn('foo')
+        ;
+        $product->expects($this->once())
+            ->method('getRawDescription')
+            ->willReturn('description')
+        ;
+        $product->expects($this->once())
+            ->method('getShortDescriptionFormatter')
+            ->willReturn('foo')
+        ;
+        $product->expects($this->once())
+            ->method('getRawShortDescription')
+            ->willReturn('shortDescription')
+        ;
+
+        return $product;
+    }
+
+    private function getValidFormatter(): FormatterPool
+    {
+        $formatter = new RawFormatter();
+        $env = $this->createMock(Environment::class);
+        $template = $this->createMock(Template::class);
+
+        $template->expects($this->exactly(2))
+            ->method('render')
+            ->willReturn('Salut')
+        ;
+        $env->expects($this->exactly(2))
+            ->method('createTemplate')
+            ->willReturn($template)
+        ;
+
+        $formatterPool = new FormatterPool('whatever');
+        $formatterPool->setLogger($this->createMock(LoggerInterface::class));
+        $formatterPool->add('foo', $formatter, $env);
+
+        return $formatterPool;
     }
 }
