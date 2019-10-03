@@ -173,7 +173,7 @@ abstract class BaseProductController extends Controller
         $seoPage = $this->get('sonata.seo.page');
 
         $seoPage->setTitle($product->getName());
-        $this->get('sonata.product.seo.facebook')->alterPage($seoPage, $product, $currency);
-        $this->get('sonata.product.seo.twitter')->alterPage($seoPage, $product, $currency);
+        $this->get('sonata.product.seo.facebook')->alterPage($seoPage, $product);
+        $this->get('sonata.product.seo.twitter')->alterPage($seoPage, $product);
     }
 }

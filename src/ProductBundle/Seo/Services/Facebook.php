@@ -85,7 +85,7 @@ class Facebook implements ServiceInterface
                 'productId' => $product->getId(),
             ], UrlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))
-            ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency());
+            ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency()->getLabel());
 
         // If a media is available, we add the opengraph image data
         if ($image = $product->getImage()) {

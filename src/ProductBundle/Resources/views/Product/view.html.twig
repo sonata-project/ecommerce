@@ -71,7 +71,7 @@ file that was distributed with this source code.
                                     {% block product_unit_price %}
                                         <small class="list-group-item-text">
                                             {{ 'product_price'|trans({}, "SonataProductBundle") }}:&nbsp;
-                                            <span itemprop="price">{{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}</span>
+                                            <span itemprop="price">{{ sonata_product_price(product, currency, true)|number_format_currency(currency.label) }}</span>
                                         </small><br/>
                                     {% endblock %}
                                     {% block product_reference %}
