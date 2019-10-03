@@ -42,9 +42,9 @@ file that was distributed with this source code.
                         <span id="sonata_product_price" class="lead">
                             {% block product_price_price %}
                                 {% if provider.hasEnabledVariations(product) %}
-                                    {{ cheapest_variation.price|number_format_currency(currency) }}
+                                    {{ cheapest_variation.price|number_format_currency(currency.label) }}
                                 {% else %}
-                                    {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}
+                                    {{ sonata_product_price(product, currency, true)|number_format_currency(currency.label) }}
                                 {% endif %}
                             {% endblock %}
                         </span>

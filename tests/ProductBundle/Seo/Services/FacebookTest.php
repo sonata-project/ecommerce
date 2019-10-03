@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Tests\Seo\Services;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\IntlBundle\Templating\Helper\NumberHelper;
 use Sonata\MediaBundle\Provider\Pool;
@@ -42,7 +43,7 @@ class ProductFbMock extends BaseProduct
 
 class FacebookTest extends TestCase
 {
-    public function testAlterPage(): void
+    public function testAlterPage()
     {
         $mediaPool = $this->createMock(Pool::class);
         $seoPage = new SeoPage('test');
@@ -52,9 +53,16 @@ class FacebookTest extends TestCase
         $product = new ProductFbMock();
         $router = $this->createMock(RouterInterface::class);
 
+        //Prepare currency
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $currencyDetector->expects($this->any())
+                ->method('getCurrency')
+                ->willReturn($currency);
+
         // Check if the header data are correctly registered
         $fbService = new Facebook($router, $mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'reference');
-        $fbService->alterPage($seoPage, $product, null);
+        $fbService->alterPage($seoPage, $product);
         $content = $extension->getHeadAttributes();
 
         $this->assertContains('fb: http://ogp.me/ns/fb#', $content);

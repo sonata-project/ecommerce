@@ -141,7 +141,7 @@ class ProductController extends Controller
         return new JsonResponse([
             'stock' => $stock,
             'price' => $price,
-            'price_text' => $this->get('sonata.intl.templating.helper.number')->formatCurrency($price, $currency),
+            'price_text' => $this->get('sonata.intl.templating.helper.number')->formatCurrency($price, $currency->getLabel()),
             'errors' => $errors,
         ]);
     }

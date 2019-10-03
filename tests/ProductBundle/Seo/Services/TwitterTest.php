@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Tests\Seo\Services;
 
 use PHPUnit\Framework\TestCase;
+use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\IntlBundle\Templating\Helper\NumberHelper;
 use Sonata\MediaBundle\Provider\Pool;
@@ -45,8 +46,15 @@ class TwitterTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $product = new ProductTwitterMock();
 
+        //Prepare currency
+        $currency = new Currency();
+        $currency->setLabel('EUR');
+        $currencyDetector->expects($this->any())
+                ->method('getCurrency')
+                ->willReturn($currency);
+
         $twitterService = new Twitter($mediaPool, $numberHelper, $currencyDetector, 'test', 'test', 'test', 'test', 'reference');
-        $twitterService->alterPage($seoPage, $product, null);
+        $twitterService->alterPage($seoPage, $product);
         $content = $extension->getMetadatas();
 
         $this->assertContains('twitter:label1', $content);
