@@ -24,10 +24,14 @@
         <service id="sonata.basket" class="Sonata\Component\Basket\Basket" public="true">
             <factory service="sonata.basket.loader" method="getBasket"/>
         </service>
-        <service id="sonata.basket.block.nb_items" class="Sonata\BasketBundle\Block\BasketBlockService">
+        <service id="sonata.basket.block.nb_items" class="Sonata\BasketBundle\Block\BasketBlockService" public="true">
             <tag name="sonata.block"/>
             <argument>sonata.basket.block.nb_items</argument>
             <argument type="service" id="templating"/>
-        </service>
+        </service>        
+        <service id="Sonata\BasketBundle\Controller\BasketController" >
+            <tag name="controller.service_arguments" />
+            <argument type="service" id="sonata.basket.factory"/>
+        </service>        
     </services>
 </container>

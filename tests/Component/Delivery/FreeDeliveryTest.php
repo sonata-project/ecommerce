@@ -40,6 +40,6 @@ class FreeDeliveryTest extends TestCase
     public function testGetName(): void
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertSame('Free delivery', $freeDelivery->getName());
+        $this->assertSame('free_address_required', $freeDelivery->getName());
     }
 }
