@@ -53,7 +53,7 @@ class AddBasket
      *
      * @param int $productId the product id
      */
-    public function setProductId($productId): void
+    public function setProductId(int $productId): void
     {
         // never erase this value
         if (null !== $this->productId) {

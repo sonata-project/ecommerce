@@ -124,7 +124,7 @@ class BasketElement implements \Serializable, BasketElementInterface
         return $this->productId;
     }
 
-    public function setProductId($productId): void
+    public function setProductId(int $productId): void
     {
         if ($productId === $this->productId) {
             return;
