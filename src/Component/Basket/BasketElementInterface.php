@@ -64,10 +64,8 @@ interface BasketElementInterface extends PriceComputableInterface
     /**
      * Never call this method, use the setProduct instead. This method is only used
      * by the form framework.
-     *
-     * @param int $productId
      */
-    public function setProductId($productId);
+    public function setProductId(int $productId): void;
 
     /**
      * Returns the VAT amount.

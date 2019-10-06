@@ -48,6 +48,6 @@ class FreeDelivery extends BaseServiceDelivery
 
     public function getName()
     {
-        return 'Free delivery';
+        return 'free_address_required';
     }
 }

@@ -29,5 +29,9 @@
             <argument>sonata.basket.block.nb_items</argument>
             <argument type="service" id="templating"/>
         </service>
+        <service id="Sonata\BasketBundle\Controller\BasketController">
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="sonata.basket.factory"/>
+        </service>
     </services>
 </container>

@@ -17,6 +17,7 @@ use Sonata\BasketBundle\Form\AddressType;
 use Sonata\BasketBundle\Form\BasketType;
 use Sonata\BasketBundle\Form\PaymentType;
 use Sonata\BasketBundle\Form\ShippingType;
+use Sonata\Component\Basket\BasketFactoryInterface;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -35,6 +36,16 @@ use Symfony\Component\Routing\Exception\MethodNotAllowedException;
  */
 class BasketController extends Controller
 {
+    /**
+     * @var BasketFactoryInterface
+     */
+    private $basketFactory;
+
+    public function __construct(BasketFactoryInterface $basketFactory)
+    {
+        $this->basketFactory = $basketFactory;
+    }
+
     /**
      * Shows the basket.
      *
@@ -84,7 +95,7 @@ class BasketController extends Controller
             $basket->clean(); // clean the basket
 
             // update the basket
-            $this->get('sonata.basket.factory')->save($basket);
+            $this->basketFactory->save($basket);
 
             return new RedirectResponse($this->generateUrl('sonata_basket_index'));
         }
@@ -146,7 +157,7 @@ class BasketController extends Controller
                 $basketElement = $provider->basketAddProduct($basket, $product, $basketElement);
             }
 
-            $this->get('sonata.basket.factory')->save($basket);
+            $this->basketFactory->save($basket);
 
             if ($request->isXmlHttpRequest() && $provider->getOption('product_add_modal')) {
                 return $this->render('@SonataBasket/Basket/add_product_popin.html.twig', [
@@ -177,7 +188,7 @@ class BasketController extends Controller
      */
     public function resetAction()
     {
-        $this->get('sonata.basket.factory')->reset($this->get('sonata.basket'));
+        $this->basketFactory->reset($this->get('sonata.basket'));
 
         return new RedirectResponse($this->generateUrl('sonata_basket_index'));
     }
@@ -207,7 +218,7 @@ class BasketController extends Controller
         $basket = $this->get('sonata.basket');
         $basket->setCustomer($customer);
 
-        $this->get('sonata.basket.factory')->save($basket);
+        $this->basketFactory->save($basket);
 
         return new RedirectResponse($this->generateUrl('sonata_basket_delivery_address'));
     }
@@ -248,7 +259,7 @@ class BasketController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             // save the basket
-            $this->get('sonata.basket.factory')->save($basket);
+            $this->basketFactory->save($basket);
 
             return new RedirectResponse($this->generateUrl('sonata_basket_final'));
         }
@@ -301,7 +312,7 @@ class BasketController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             // save the basket
-            $this->get('sonata.basket.factory')->save($form->getData());
+            $this->basketFactory->save($form->getData());
 
             return new RedirectResponse($this->generateUrl('sonata_basket_payment_address'));
         }
@@ -371,7 +382,7 @@ class BasketController extends Controller
             $basket->setCustomer($customer);
             $basket->setDeliveryAddress($address);
             // save the basket
-            $this->get('sonata.basket.factory')->save($basket);
+            $this->basketFactory->save($basket);
 
             return new RedirectResponse($this->generateUrl('sonata_basket_delivery'));
         }
@@ -434,7 +445,7 @@ class BasketController extends Controller
             $basket->setCustomer($customer);
             $basket->setBillingAddress($address);
             // save the basket
-            $this->get('sonata.basket.factory')->save($basket);
+            $this->basketFactory->save($basket);
 
             return new RedirectResponse($this->generateUrl('sonata_basket_payment'));
         }

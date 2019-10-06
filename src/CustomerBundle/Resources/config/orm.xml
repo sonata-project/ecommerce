@@ -9,7 +9,7 @@
             <argument>%sonata.customer.address.class%</argument>
             <argument type="service" id="doctrine"/>
         </service>
-        <service id="sonata.customer.manager" class="%sonata.customer.manager.class%">
+        <service id="sonata.customer.manager" class="%sonata.customer.manager.class%" public="true">
             <argument>%sonata.customer.customer.class%</argument>
             <argument type="service" id="doctrine"/>
         </service>
