@@ -84,7 +84,7 @@ class Facebook implements ServiceInterface
                 'slug' => $product->getSlug(),
                 'productId' => $product->getId(),
             ], UrlGeneratorInterface::ABSOLUTE_URL))
-            ->addMeta('property', 'product:price:amount', $this->numberHelper->formatDecimal($product->getPrice()))
+            ->addMeta('property', 'product:price:amount', (string) $this->numberHelper->formatDecimal($product->getPrice()))
             ->addMeta('property', 'product:price:currency', $this->currencyDetector->getCurrency()->getLabel());
 
         // If a media is available, we add the opengraph image data
@@ -97,9 +97,9 @@ class Facebook implements ServiceInterface
     {
         $provider = $this->mediaPool->getProvider($image->getProviderName());
 
-        $seoPage->addMeta('property', 'og:image', $provider->generatePublicUrl($image, $this->mediaFormat))
-            ->addMeta('property', 'og:image:width', $image->getWidth())
-            ->addMeta('property', 'og:image:height', $image->getHeight())
+        $seoPage->addMeta('property', 'og:image', $this->domain.$provider->generatePublicUrl($image, $this->mediaFormat))
+            ->addMeta('property', 'og:image:width', (string) $image->getWidth())
+            ->addMeta('property', 'og:image:height', (string) $image->getHeight())
             ->addMeta('property', 'og:image:type', $image->getContentType());
     }
 
