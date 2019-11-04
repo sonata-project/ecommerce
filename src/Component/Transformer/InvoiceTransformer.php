@@ -127,7 +127,6 @@ class InvoiceTransformer extends BaseTransformer
     /**
      * Creates an InvoiceElement based on an OrderElement.
      *
-     *
      * @return \Sonata\Component\Invoice\InvoiceElementInterface
      */
     protected function createInvoiceElementFromOrderElement(OrderElementInterface $orderElement)

@@ -32,7 +32,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * DeliveryExtension.
  *
- *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataDeliveryExtension extends Extension

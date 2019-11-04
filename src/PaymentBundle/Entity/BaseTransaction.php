@@ -279,7 +279,6 @@ class BaseTransaction implements TransactionInterface
     /**
      * Cleans up $toDecode keys & values.
      *
-     *
      * @return array
      */
     protected function cleanupEncoding(array $toDecode)
