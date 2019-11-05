@@ -863,7 +863,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * Adds $basketElement related to $product to $basket.
      *
-     *
      * @throws \Sonata\Component\Basket\InvalidProductException
      *
      * @return bool|\Sonata\Component\Basket\BasketElementInterface
@@ -901,8 +900,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * Merge a product with another when the product is already present into the basket.
-     *
-     *
      *
      * @throws \RuntimeException
      *
@@ -986,7 +983,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
     /**
      * Return true if the product can be added to the provided basket.
      *
-     *
      * @return bool
      */
     public function isAddableToBasket(BasketInterface $basket, ProductInterface $product, array $options = [])
@@ -996,7 +992,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * return a fresh product instance (so information are reloaded: enabled and stock ...).
-     *
      *
      * @return \Sonata\Component\Product\ProductInterface
      */
@@ -1101,7 +1096,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
 
     /**
      * Checks $fields if specified, returns variation fields otherwise.
-     *
      *
      * @throws \RuntimeException
      *

@@ -66,7 +66,6 @@ abstract class BaseProductController extends Controller
     /**
      * Renders product properties.
      *
-     *
      * @return Response
      */
     public function renderPropertiesAction(ProductInterface $product)

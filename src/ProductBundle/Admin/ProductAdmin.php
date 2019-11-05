@@ -169,7 +169,6 @@ class ProductAdmin extends AbstractAdmin
     /**
      * Return the Product Provider.
      *
-     *
      * @return \Sonata\Component\Product\ProductProviderInterface
      */
     public function getProductProvider(ProductInterface $product)

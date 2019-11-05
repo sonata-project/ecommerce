@@ -63,7 +63,6 @@ interface ServiceDeliveryInterface
     /**
      * Return the vat amount.
      *
-     *
      * @return float
      */
     public function getVatAmount(BasketInterface $basket);

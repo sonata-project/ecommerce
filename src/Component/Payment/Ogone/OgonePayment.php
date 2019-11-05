@@ -189,7 +189,6 @@ class OgonePayment extends BasePayment
     /**
      * Tells if $order matches $params.
      *
-     *
      * @return bool
      */
     protected function compareOrderToParams(OrderInterface $order, array $params)
@@ -224,7 +223,6 @@ class OgonePayment extends BasePayment
 
     /**
      * Returns form parameters for sendbank.
-     *
      *
      * @return array
      */
@@ -284,7 +282,6 @@ class OgonePayment extends BasePayment
 
     /**
      * Gets formatted address lines from $order.
-     *
      *
      * @return string
      */
