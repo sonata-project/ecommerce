@@ -21,16 +21,12 @@ interface ReferenceInterface
     /**
      * Append a valid reference number to the invoice, the order must be persisted first.
      *
-     *
-     *
      * @throws \RuntimeException
      */
     public function invoice(InvoiceInterface $invoice);
 
     /**
      * Append a valid reference number to the order, the order must be persisted first.
-     *
-     *
      *
      * @throws \RuntimeException
      */

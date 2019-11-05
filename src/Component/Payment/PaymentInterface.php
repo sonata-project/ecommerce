@@ -35,7 +35,6 @@ interface PaymentInterface
      * Send information to the bank, this method should handle
      * everything when called.
      *
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function sendbank(OrderInterface $order);
@@ -83,7 +82,6 @@ interface PaymentInterface
 
     /**
      * return true is the basket is valid for the current bank gateway.
-     *
      *
      * @return bool
      */

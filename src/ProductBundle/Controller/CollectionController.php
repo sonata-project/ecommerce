@@ -38,7 +38,6 @@ class CollectionController extends Controller
     /**
      * Display one collection.
      *
-     *
      * @param $collectionId
      * @param $slug
      *

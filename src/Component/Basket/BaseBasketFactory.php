@@ -87,7 +87,6 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
     /**
      * Retrieved basket associated with $customer from session.
      *
-     *
      * @return BasketInterface|null
      */
     protected function getFromSession(CustomerInterface $customer)
