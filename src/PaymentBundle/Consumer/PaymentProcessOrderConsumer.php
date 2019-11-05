@@ -74,7 +74,6 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
     /**
      * Get the related Order.
      *
-     *
      * @throws \RuntimeException
      *
      * @return OrderInterface
@@ -94,7 +93,6 @@ class PaymentProcessOrderConsumer implements ConsumerInterface
 
     /**
      * Get the related Transaction.
-     *
      *
      * @throws \RuntimeException
      *

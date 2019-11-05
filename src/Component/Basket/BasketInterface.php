@@ -99,7 +99,6 @@ interface BasketInterface
     /**
      * Check if the product can be added to the basket.
      *
-     *
      * @return bool
      */
     public function isAddable(ProductInterface $product);
@@ -141,7 +140,6 @@ interface BasketInterface
 
     /**
      * return the BasketElement depends on the $product or the position from the element stacks.
-     *
      *
      * @return BasketElementInterface
      */
@@ -231,7 +229,6 @@ interface BasketInterface
 
     /**
      * check if the basket contains $product.
-     *
      *
      * @return bool
      */

@@ -42,7 +42,6 @@ interface ProductCategoryManagerInterface extends ManagerInterface
     /**
      * Returns the number of products in $category (maxed by $limit).
      *
-     *
      * @return int
      */
     public function getProductCount(CategoryInterface $category, $limit = 1000);
