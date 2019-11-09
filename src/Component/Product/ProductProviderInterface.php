@@ -210,14 +210,12 @@ interface ProductProviderInterface
     /**
      * Check if the product has variations.
      *
-     *
      * @return bool
      */
     public function hasVariations(ProductInterface $product);
 
     /**
      * Return true if Product has enabled variation(s).
-     *
      *
      * @return bool
      */
@@ -226,14 +224,12 @@ interface ProductProviderInterface
     /**
      * Return the list of enabled product variations.
      *
-     *
      * @return ArrayCollection
      */
     public function getEnabledVariations(ProductInterface $product);
 
     /**
      * Fetch the cheapest variation if provided/existing.
-     *
      *
      * @return ProductInterface|null
      */
@@ -258,14 +254,12 @@ interface ProductProviderInterface
     /**
      * Gets the possible values for $fields (or variation fields if not set).
      *
-     *
      * @return array
      */
     public function getVariationsChoices(ProductInterface $product, array $fields = []);
 
     /**
      * Gets the properties values of $product amongst variation fields or $fields if set.
-     *
      *
      * @return array
      */
