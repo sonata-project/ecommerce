@@ -65,7 +65,6 @@ abstract class BasePaypal extends BasePayment
     /**
      * return true if the request contains a valid `check` parameter.
      *
-     *
      * @return bool
      */
     public function isRequestValid(TransactionInterface $transaction)
@@ -94,7 +93,6 @@ abstract class BasePaypal extends BasePayment
 
     /**
      * return the order reference from the transaction object.
-     *
      *
      * @return string
      */
@@ -193,7 +191,6 @@ abstract class BasePaypal extends BasePayment
     /**
      * Encrypt paypal information using openssl with a buffer.
      *
-     *
      * @param $hash
      *
      * @throws \RuntimeException
@@ -253,7 +250,6 @@ abstract class BasePaypal extends BasePayment
 
     /**
      * Encrypt paypal information using openssl with a temporary file.
-     *
      *
      * @param $hash
      *

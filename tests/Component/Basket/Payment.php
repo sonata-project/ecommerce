@@ -57,7 +57,6 @@ class Payment extends BasePayment
      * Send information to the bank, this method should handle
      * everything when called.
      *
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function callbank(OrderInterface $order)
@@ -76,7 +75,6 @@ class Payment extends BasePayment
     /**
      * Method called when an error occurs.
      *
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleError(TransactionInterface $transaction)
@@ -86,7 +84,6 @@ class Payment extends BasePayment
 
     /**
      * Send post back confirmation to the bank when the bank callback the site.
-     *
      *
      * @return \Symfony\Component\HttpFoundation\Response, false otherwise
      */
@@ -100,7 +97,6 @@ class Payment extends BasePayment
      *
      * WARNING : this methods does not check if the callback is valid
      *
-     *
      * @return bool true if all parameter are ok
      */
     public function isRequestValid(TransactionInterface $transaction)
@@ -110,7 +106,6 @@ class Payment extends BasePayment
 
     /**
      * return true is the basket is valid for the current bank gateway.
-     *
      *
      * @return bool
      */
@@ -137,7 +132,6 @@ class Payment extends BasePayment
 
     /**
      * return the order reference from the transaction.
-     *
      *
      * @return string
      */
