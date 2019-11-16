@@ -58,7 +58,7 @@ class OrderElementAdmin extends AbstractAdmin
         ];
 
         $formMapper
-            ->with($this->trans('order_element.form.group_main_label', [], 'SonataOrderBundle'))
+            ->with('order_element.form.group_main_label')
                 ->add('productType', ChoiceType::class, $productTypeOptions)
                 ->add('quantity')
                 ->add('price')

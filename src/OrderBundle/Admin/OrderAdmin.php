@@ -75,21 +75,21 @@ class OrderAdmin extends AbstractAdmin
     {
         // define group zoning
         $formMapper
-             ->with($this->trans('order.form.group_main_label'), ['class' => 'col-md-12'])->end()
-             ->with($this->trans('order.form.group_billing_label'), ['class' => 'col-md-6'])->end()
-             ->with($this->trans('order.form.group_shipping_label'), ['class' => 'col-md-6'])->end()
+             ->with('order.form.group_main_label', ['class' => 'col-md-12'])->end()
+             ->with('order.form.group_billing_label', ['class' => 'col-md-6'])->end()
+             ->with('order.form.group_shipping_label', ['class' => 'col-md-6'])->end()
         ;
 
         if (!$this->isChild()) {
             $formMapper
-                ->with($this->trans('order.form.group_main_label', [], 'SonataOrderBundle'))
+                ->with('order.form.group_main_label')
                     ->add('customer', ModelListType::class)
                 ->end()
             ;
         }
 
         $formMapper
-            ->with($this->trans('order.form.group_main_label', [], 'SonataOrderBundle'))
+            ->with('order.form.group_main_label')
                 ->add('currency', CurrencyFormType::class)
                 ->add('locale', LocaleType::class)
                 ->add('status', OrderStatusType::class, ['translation_domain' => 'SonataOrderBundle'])
@@ -97,7 +97,7 @@ class OrderAdmin extends AbstractAdmin
                 ->add('deliveryStatus', ProductDeliveryStatusType::class, ['translation_domain' => 'SonataDeliveryBundle'])
                 ->add('validatedAt', DatePickerType::class, ['dp_side_by_side' => true])
             ->end()
-            ->with($this->trans('order.form.group_billing_label', [], 'SonataOrderBundle'), ['collapsed' => true])
+            ->with('order.form.group_billing_label', ['collapsed' => true])
                 ->add('billingName')
                 ->add('billingAddress1')
                 ->add('billingAddress2')
@@ -109,7 +109,7 @@ class OrderAdmin extends AbstractAdmin
                 ->add('billingEmail')
                 ->add('billingMobile')
             ->end()
-            ->with($this->trans('order.form.group_shipping_label', [], 'SonataOrderBundle'), ['collapsed' => true])
+            ->with('order.form.group_shipping_label', ['collapsed' => true])
                 ->add('shippingName')
                 ->add('shippingAddress1')
                 ->add('shippingAddress2')
@@ -184,12 +184,12 @@ class OrderAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         $menu->addChild(
-            $this->trans('sonata.order.sidemenu.link_order_edit', [], 'SonataOrderBundle'),
+            'sonata.order.sidemenu.link_order_edit',
             ['uri' => $admin->generateUrl('edit', ['id' => $id])]
         );
 
         $menu->addChild(
-            $this->trans('sonata.order.sidemenu.link_order_elements_list', [], 'SonataOrderBundle'),
+            'sonata.order.sidemenu.link_order_elements_list',
             ['uri' => $admin->generateUrl('sonata.order.admin.order_element.list', ['id' => $id])]
         );
 
@@ -198,12 +198,12 @@ class OrderAdmin extends AbstractAdmin
 
         if (null === $invoice) {
             $menu->addChild(
-                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate', [], 'SonataOrderBundle'),
+                'sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate',
                 ['uri' => $admin->generateUrl('generateInvoice', ['id' => $id])]
             );
         } else {
             $menu->addChild(
-                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit', [], 'SonataOrderBundle'),
+                'sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit',
                 ['uri' => $this->getConfigurationPool()->getAdminByAdminCode('sonata.invoice.admin.invoice')->generateUrl('edit', ['id' => $invoice->getId()])]
             );
         }
