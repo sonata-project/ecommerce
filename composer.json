@@ -17,6 +17,7 @@
     "require": {
         "php": "^7.1",
         "cocur/slugify": "^2.5 || ^3.0",
+        "doctrine/doctrine-bundle": "^1.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
         "kriswallsmith/buzz": "^0.15 || 0.16.0",
