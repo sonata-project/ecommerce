@@ -20,6 +20,8 @@ use Sonata\Component\Form\BasketValidator;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductProviderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\ConstraintViolationInterface;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ContainerConstraintValidatorFactory;
 use Symfony\Component\Validator\Context\ExecutionContext;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
@@ -47,7 +49,11 @@ class BasketValidatorTest extends TestCase
         $violationBuilder->expects($this->once())->method('addViolation');
 
         $context = $this->createMock(ExecutionContext::class);
-        $context->expects($this->once())->method('getViolations')->willReturn(['violation1']);
+        $context->expects($this->once())
+                ->method('getViolations')
+                ->willReturn(new ConstraintViolationList([
+                    $this->createMock(ConstraintViolationInterface::class),
+                ]));
         $context->expects($this->once())->method('buildViolation')->willReturn($violationBuilder);
 
         $validator = new BasketValidator($pool, $consValFact);
