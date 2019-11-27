@@ -103,8 +103,10 @@ Configuration
                             - sonata.media.provider.image
 
                         formats:
+                            preview: { width: 80 , quality: 70}
                             small: { width: 100 , quality: 70}
-                            big:   { width: 500 , quality: 70}
+                            large: { width: 500 , quality: 70}
+                            big:   { width: 800 , quality: 70}
 
                     sonata_category:
                         providers:
