@@ -63,6 +63,8 @@
         <service id="Sonata\PaymentBundle\Controller\PaymentController">
             <tag name="controller.service_arguments"/>
             <argument type="service" id="sonata.basket.factory"/>
+            <argument type="service" id="sonata.payment.handler"/>
+            <argument type="service" id="sonata.basket"/>
         </service>
     </services>
 </container>

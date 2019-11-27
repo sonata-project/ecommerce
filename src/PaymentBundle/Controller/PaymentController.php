@@ -27,6 +27,52 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 class PaymentController extends Controller
 {
     /**
+     * @var BasketFactoryInterface
+     */
+    private $basketFactory;
+
+    /**
+     * @var PaymentHandlerInterface
+     */
+    private $paymentHandler;
+
+    /**
+     * @var Basket
+     */
+    private $basket;
+
+    public function __construct(BasketFactoryInterface $basketFactory = null, PaymentHandlerInterface $paymentHandler = null, Basket $basket = null)
+    {
+        if (!$basketFactory) {
+            @trigger_error(sprintf(
+                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.x. Providing it will be mandatory in 4.0',
+                BasketFactoryInterface::class,
+                __METHOD__
+            ), E_USER_DEPRECATED);
+        }
+
+        if (!$paymentHandler) {
+            @trigger_error(sprintf(
+                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.x. Providing it will be mandatory in 4.0',
+                PaymentHandlerInterface::class,
+                __METHOD__
+            ), E_USER_DEPRECATED);
+        }
+
+        if (!$basket) {
+            @trigger_error(sprintf(
+                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.x. Providing it will be mandatory in 4.0',
+                Basket::class,
+                __METHOD__
+            ), E_USER_DEPRECATED);
+        }
+
+        $this->basketFactory = $basketFactory;
+        $this->paymentHandler = $paymentHandler;
+        $this->basket = $basket;
+    }
+
+    /**
      * This action is called by the user after the sendbank
      * In most case the order is already cancelled by a previous callback.
      *
@@ -153,6 +199,10 @@ class PaymentController extends Controller
      */
     protected function getBasketFactory()
     {
+        if ($this->basketFactory instanceof BasketFactoryInterface) {
+            return $this->basketFactory;
+        }
+
         return $this->get('sonata.basket.factory');
     }
 
@@ -161,6 +211,10 @@ class PaymentController extends Controller
      */
     protected function getBasket()
     {
+        if ($this->basket instanceof Basket) {
+            return $this->basket;
+        }
+
         return $this->get('sonata.basket');
     }
 
@@ -169,6 +223,10 @@ class PaymentController extends Controller
      */
     protected function getPaymentHandler()
     {
+        if ($this->paymentHandler instanceof PaymentHandlerInterface) {
+            return $this->paymentHandler;
+        }
+
         return $this->get('sonata.payment.handler');
     }
 }
