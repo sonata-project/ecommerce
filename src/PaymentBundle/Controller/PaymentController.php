@@ -45,7 +45,7 @@ class PaymentController extends Controller
     {
         if (!$basketFactory) {
             @trigger_error(sprintf(
-                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.x. Providing it will be mandatory in 4.0',
+                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.1.0. Providing it will be mandatory in 4.0',
                 BasketFactoryInterface::class,
                 __METHOD__
             ), E_USER_DEPRECATED);
@@ -53,7 +53,7 @@ class PaymentController extends Controller
 
         if (!$paymentHandler) {
             @trigger_error(sprintf(
-                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.x. Providing it will be mandatory in 4.0',
+                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.1.0. Providing it will be mandatory in 4.0',
                 PaymentHandlerInterface::class,
                 __METHOD__
             ), E_USER_DEPRECATED);
@@ -61,7 +61,7 @@ class PaymentController extends Controller
 
         if (!$basket) {
             @trigger_error(sprintf(
-                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.x. Providing it will be mandatory in 4.0',
+                'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.1.0. Providing it will be mandatory in 4.0',
                 Basket::class,
                 __METHOD__
             ), E_USER_DEPRECATED);
