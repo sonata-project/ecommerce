@@ -2,7 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.0.1](https://github.com/sonata-project/ecommerce/compare/2.3.0...3.0.0) - 2019-11-24
+## [3.1.0](https://github.com/sonata-project/ecommerce/compare/3.0.1...3.1.0) - 2019-12-01
+### Fixed
+- crash on payment validation
+
+## [3.0.1](https://github.com/sonata-project/ecommerce/compare/3.0.0...3.0.1) - 2019-11-24
 ### Fixed
 - crash when using doctrine bundle 2
 
