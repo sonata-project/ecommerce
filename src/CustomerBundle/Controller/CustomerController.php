@@ -75,29 +75,33 @@ class CustomerController extends Controller
     /**
      * Adds an address to current customer.
      *
-     * @return Response
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
-    public function addAddressAction()
+    public function addAddressAction(Request $request)
     {
-        return $this->updateAddress();
+        return $this->updateAddress($request);
     }
 
     /**
      * Controller action to edit address $id.
      *
-     * @param $id
+     * @param Request $request
+     * @param int     $id
      *
      * @return RedirectResponse|Response
      */
-    public function editAddressAction($id)
+    public function editAddressAction(Request $request, $id)
     {
-        return $this->updateAddress($id);
+        return $this->updateAddress($request, $id);
     }
 
     /**
      * Deletes address $id.
      *
-     * @param $id The address to delete
+     * @param Request $request
+     * @param int     $id      The address to delete
      *
      * @return RedirectResponse
      */
@@ -134,17 +138,17 @@ class CustomerController extends Controller
 
         return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
     }
-
+    
     /**
      * Updates or create an address.
      *
-     * @param int $id Address id
+     * @param Request $request
+     * @param int     $id      Address id
      *
      * @return RedirectResponse|Response
      */
-    protected function updateAddress($id = null)
+    protected function updateAddress(Request $request, $id = null)
     {
-        $request = $this->getCurrentRequest();
         $customer = $this->getCustomer();
 
         // Show address creation/edition form

@@ -15,7 +15,4 @@
     <route id="sonata_customer_address_edit" path="/address/edit/{id}">
         <default key="_controller">SonataCustomerBundle:Customer:editAddress</default>
     </route>
-    <route id="sonata_customer_address_update" path="/address/update">
-        <default key="_controller">SonataCustomerBundle:Customer:updateAddress</default>
-    </route>
 </routes>
