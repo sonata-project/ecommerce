@@ -144,7 +144,7 @@ class CustomerController extends Controller
      */
     protected function updateAddress($id = null)
     {
-        $request = $this->getCurrentRequest();
+        $request = $this->get('request_stack')->getCurrentRequest();
         $customer = $this->getCustomer();
 
         // Show address creation/edition form
