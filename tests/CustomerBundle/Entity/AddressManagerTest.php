@@ -20,13 +20,15 @@ use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\CustomerBundle\Entity\AddressManager;
 use Sonata\CustomerBundle\Entity\BaseAddress;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
 class AddressManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testSetCurrent(): void
     {
         $currentAddress = $this->createMock(AddressInterface::class);
@@ -138,7 +140,7 @@ class AddressManagerTest extends TestCase
 
     protected function getAddressManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, [
+        $em = $this->createEntityManagerMock($qbCallback, [
             'name',
             'firstname',
         ]);

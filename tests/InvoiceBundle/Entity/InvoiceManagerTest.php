@@ -15,7 +15,7 @@ namespace Sonata\InvoiceBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 use Sonata\InvoiceBundle\Entity\BaseInvoice;
 use Sonata\InvoiceBundle\Entity\InvoiceManager;
 
@@ -24,6 +24,8 @@ use Sonata\InvoiceBundle\Entity\InvoiceManager;
  */
 class InvoiceManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testGetPager(): void
     {
         $self = $this;
@@ -115,7 +117,7 @@ class InvoiceManagerTest extends TestCase
 
     protected function getInvoiceManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, [
+        $em = $this->createEntityManagerMock($qbCallback, [
             'reference',
             'status',
             'name',
