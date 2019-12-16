@@ -20,13 +20,15 @@ use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Entity\BaseBasket;
 use Sonata\Component\Basket\Basket;
 use Sonata\Component\Basket\BasketManager;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
  */
 class BasketManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testCreateAndGetClass(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
@@ -140,7 +142,7 @@ class BasketManagerTest extends TestCase
 
     protected function getBasketManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, [
+        $em = $this->createEntityManagerMock($qbCallback, [
             'id',
             'locale',
         ]);

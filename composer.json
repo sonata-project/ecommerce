@@ -64,7 +64,7 @@
         "friendsofsymfony/rest-bundle": "^2.2",
         "jms/serializer-bundle": "^1.0 || ^2.0",
         "nelmio/api-doc-bundle": "^2.13",
-        "symfony/phpunit-bridge": "^4.2"
+        "symfony/phpunit-bridge": "^5.0"
     },
     "suggest": {
         "friendsofsymfony/rest-bundle": "For using the public API methods.",

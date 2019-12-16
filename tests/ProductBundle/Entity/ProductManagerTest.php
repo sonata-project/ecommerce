@@ -15,12 +15,14 @@ namespace Sonata\ProductBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Entity\ProductManager;
 
 class ProductManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testGetPager(): void
     {
         $self = $this;
@@ -104,7 +106,7 @@ class ProductManagerTest extends TestCase
 
     protected function getProductManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, [
+        $em = $this->createEntityManagerMock($qbCallback, [
             'sku',
             'slug',
             'name',
