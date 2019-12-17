@@ -26,18 +26,22 @@ class BasketBlockServiceTest extends TestCase
 {
     public function testGetName(): void
     {
+        $environment = $this->createMock(\Twig\Environment::class);
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
-        $block = new BasketBlockService('test', $engineInterfaceMock);
+        $block = new BasketBlockService($environment, $engineInterfaceMock);
 
         $this->assertSame('Basket items', $block->getName());
     }
 
     public function testExecute(): void
     {
+        $environment = $this->createMock(\Twig\Environment::class);
+
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
-        $engineInterfaceMock->expects($this->once())->method('renderResponse')->willReturn(new Response());
+        $engineInterfaceMock->expects($this->any())->method('renderResponse')->willReturn(new Response('test'));
+
         $context = $this->createMock(BlockContextInterface::class);
-        $block = new BasketBlockService('test', $engineInterfaceMock);
+        $block = new BasketBlockService($environment, $engineInterfaceMock);
 
         $this->assertInstanceOf(Response::class, $block->execute($context));
     }

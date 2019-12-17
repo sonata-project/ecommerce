@@ -78,6 +78,16 @@ class CatalogBreadcrumbBlockService extends BaseBreadcrumbMenuBlockService
             }
         }
 
+        if ($collection = $blockContext->getBlock()->getSetting('collection')) {
+            $menu->addChild($collection->getName(), [
+                    'route' => 'sonata_catalog_collection',
+                    'routeParameters' => [
+                        'collection_id' => $collection->getId(),
+                        'collection_slug' => $collection->getSlug(),
+                    ],
+                ]);
+        }
+
         if ($product) {
             $menu->addChild($product->getName(), [
                 'route' => 'sonata_product_view',

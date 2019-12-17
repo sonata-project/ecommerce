@@ -23,4 +23,9 @@ class Collection extends BaseCollection
     {
         $this->id = $id;
     }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

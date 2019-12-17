@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Invoice;
 
+use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
-use Sonata\Doctrine\Model\PageableManagerInterface;
 
-interface InvoiceManagerInterface extends ManagerInterface, PageableManagerInterface
+interface InvoiceManagerInterface extends ManagerInterface, PageableInterface
 {
 }
