@@ -27,8 +27,13 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('sonata_price');
+        $treeBuilder = new TreeBuilder('sonata_price');
+        // Keep compatibility with symfony/config < 4.2
+        if (!method_exists($treeBuilder, 'getRootNode')) {
+            $node = $treeBuilder->root('sonata_price');
+        } else {
+            $node = $treeBuilder->getRootNode();
+        }
 
         $this->addPriceSection($node);
         $this->addPrecisionSection($node);

@@ -82,6 +82,20 @@ file that was distributed with this source code.
                                     {% endblock %}
                                 </li>
                             {% endblock %}
+                            {% block product_collections %}
+                                {% if product.productCollections.count > 0 %}
+                                    <li class="list-group-item">
+                                    {{ 'list.label_product_collections'|trans({}, "SonataProductBundle") }}:&nbsp;
+                                        <ul class="list-group">
+                                            {% for productCollection in product.productCollections %}
+                                               <li class="list-group-item">
+                                                   <a href="{{ url('sonata_catalog_collection' , {'collection_id': productCollection.collection.id, 'collection_slug' : productCollection.collection.slug }) }}" > {{ productCollection.collection.name }} </a>
+                                               </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            {% endblock %}
                             <li class="list-group-item">
                                 <span itemprop="description">
                                     {% block product_description_short %}

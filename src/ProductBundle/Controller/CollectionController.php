@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Controller;
 
+use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
+use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\ProductBundle\Entity\ProductSetManager;
+use Sonata\SeoBundle\Seo\SeoPage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,25 +25,42 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CollectionController extends Controller
 {
     /**
-     * List the main collections.
-     *
-     * @return Response
+     * @var SeoPage
      */
-    public function indexAction(Request $request)
-    {
-        $pager = $this->get('sonata.classification.manager.collection')
-            ->getRootCollectionsPager($request->get('page'));
+    private $sonataSeoPage;
 
-        return $this->render('@SonataProduct/Collection/index.html.twig', [
-            'pager' => $pager,
-        ]);
+    /**
+     * @var CurrencyDetectorInterface
+     */
+    private $currencyDetector;
+
+    /**
+     * @var CollectionManagerInterface
+     */
+    private $collectionManagerInterface;
+
+    /**
+     * @var ProductSetManager
+     */
+    private $productSetManager;
+
+    public function __construct(
+            SeoPage $sonataSeoPage = null,
+            CurrencyDetectorInterface $currencyDetector = null,
+            CollectionManagerInterface $collectionManagerInterface = null,
+            ProductSetManager $productSetManager = null
+            ) {
+        $this->sonataSeoPage = $sonataSeoPage;
+        $this->currencyDetector = $currencyDetector;
+        $this->collectionManagerInterface = $collectionManagerInterface;
+        $this->productSetManager = $productSetManager;
     }
 
     /**
      * Display one collection.
+     * NEXT_MAJOR: remove this property.
      *
-     * @param $collectionId
-     * @param $slug
+     * @deprecated since 3.1, to be removed in 4.0.
      *
      * @throws NotFoundHttpException
      *
@@ -47,25 +68,64 @@ class CollectionController extends Controller
      */
     public function viewAction($collectionId, $slug)
     {
-        $collection = $this->get('sonata.classification.manager.collection')->findOneBy(['id' => $collectionId]);
+        $request = new Request();
+        $request->query->set('collection_id', $collectionId);
+        $request->query->set('collection_slug', $slug);
+
+        return $this->indexAction($request);
+    }
+
+    /**
+     * List the product related to one collection.
+     *
+     * @return Response
+     */
+    final public function indexAction(Request $request)
+    {
+        $page = $request->get('page', 1);
+        $displayMax = $request->get('max', 9);
+        $displayMode = $request->get('mode', 'grid');
+        $option = $request->get('option');
+
+        if (!\in_array($displayMode, ['grid'], true)) { // "list" mode will be added later
+            throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
+        }
+
+        $collectionId = $request->get('collection_id');
+        $collectionSlug = $request->get('collection_slug');
+
+        $collection = $this->getCollectionManagerInterface()->findOneBy(['id' => $collectionId, 'slug' => $collectionSlug, 'enabled' => true]);
 
         if (!$collection) {
             throw new NotFoundHttpException(sprintf('Unable to find the collection with id=%d', $collectionId));
         }
 
-        return $this->render('@SonataProduct/Collection/view.html.twig', [
-           'collection' => $collection,
+        $this->getSeoManager()->setTitle($collection ? $collection->getName() : $this->get('translator')->trans('catalog_index_title'));
+
+        $pager = $this->get('knp_paginator');
+
+        $pagination = $pager->paginate($this->getProductSetManager()->queryInCollection($collection, $option), $page, $displayMax);
+
+        return $this->render('@SonataProduct/Collection/list_products.twig', [
+                    'display_mode' => $displayMode,
+                    'collection' => $collection,
+                    'pager' => $pagination,
+                    'currency' => $this->getCurrencyDetector()->getCurrency(),
         ]);
     }
 
     /**
      * List collections from one collections.
      *
+     * NEXT_MAJOR: remove this property
+     *
+     * @deprecated since 3.1, to be removed in 4.0.
+     *
      * @param $collectionId
      *
      * @return Response
      */
-    public function listSubCollectionsAction(Request $request, $collectionId)
+    final public function listSubCollectionsAction(Request $request, $collectionId)
     {
         $pager = $this->get('sonata.classification.manager.collection')
             ->getSubCollectionsPager($collectionId, $request->get('page'));
@@ -78,11 +138,15 @@ class CollectionController extends Controller
     /**
      * List the product related to one collection.
      *
+     * NEXT_MAJOR: remove this property
+     *
+     * @deprecated since 3.1, to be removed in 4.0.
+     *
      * @param $collectionId
      *
      * @return Response
      */
-    public function listProductsAction(Request $request, $collectionId)
+    final public function listProductsAction(Request $request, $collectionId)
     {
         $pager = $this->get('sonata.product.set.manager')
             ->getProductsByCollectionIdPager($collectionId, $request->get('page'));
@@ -93,13 +157,17 @@ class CollectionController extends Controller
     }
 
     /**
+     * NEXT_MAJOR: remove this property.
+     *
+     * @deprecated since 3.1, to be removed in 4.0.
+     *
      * @param null $collection
      * @param int  $depth
      * @param int  $deep
      *
      * @return Response
      */
-    public function listSideMenuCollectionsAction($collection = null, $depth = 1, $deep = 0)
+    final public function listSideMenuCollectionsAction($collection = null, $depth = 1, $deep = 0)
     {
         $collection = $collection ?: $this->get('sonata.classification.manager.collection')->getRootCollection();
 
@@ -108,5 +176,41 @@ class CollectionController extends Controller
           'depth' => $depth,
           'deep' => $deep + 1,
         ]);
+    }
+
+    private function getCollectionManagerInterface(): CollectionManagerInterface
+    {
+        if (!$this->collectionManagerInterface) {
+            return $this->get('sonata.classification.manager.collection');
+        }
+
+        return $this->collectionManagerInterface;
+    }
+
+    private function getProductSetManager(): ProductSetManager
+    {
+        if (!$this->productSetManager) {
+            return $this->get('sonata.product.set.manager');
+        }
+
+        return $this->productSetManager;
+    }
+
+    private function getSeoManager(): SeoPage
+    {
+        if (!$this->sonataSeoPage) {
+            return $this->get('sonata.seo.page');
+        }
+
+        return $this->sonataSeoPage;
+    }
+
+    private function getCurrencyDetector(): CurrencyDetectorInterface
+    {
+        if (!$this->currencyDetector) {
+            return $this->get('sonata.price.currency.detector');
+        }
+
+        return $this->currencyDetector;
     }
 }

@@ -56,6 +56,11 @@ class ProductFbMock extends BaseProduct
     {
         return 123.56;
     }
+
+    public function getSlug()
+    {
+        return 'product-1';
+    }
 }
 
 class FacebookTest extends TestCase
@@ -69,6 +74,8 @@ class FacebookTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $product = new ProductFbMock();
         $router = $this->createMock(RouterInterface::class);
+        $router->expects($this->any())
+            ->method('generate')->willReturn('/product/link');
 
         //Prepare currency
         $currency = new Currency();
@@ -104,6 +111,8 @@ class FacebookTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $product = new ProductFbMock();
         $router = $this->createMock(RouterInterface::class);
+        $router->expects($this->any())
+            ->method('generate')->willReturn('/product/link');
 
         //Prepare currency
         $currency = new Currency();

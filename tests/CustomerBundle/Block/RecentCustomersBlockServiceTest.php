@@ -25,9 +25,11 @@ class RecentCustomersBlockServiceTest extends TestCase
 {
     public function testGetName(): void
     {
+        $environment = $this->createMock(\Twig\Environment::class);
+
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $customerManagerInterfaceMock = $this->createMock(CustomerManagerInterface::class);
-        $block = new RecentCustomersBlockService('test', $engineInterfaceMock, $customerManagerInterfaceMock);
+        $block = new RecentCustomersBlockService($environment, $engineInterfaceMock, $customerManagerInterfaceMock);
 
         $this->assertSame('Recent Customers', $block->getName());
     }

@@ -162,6 +162,21 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
         return $pager;
     }
 
+    final public function queryInCollection($collection, $limit = null)
+    {
+        $queryBuilder = $this->getRepository()->createQueryBuilder('p')
+            ->distinct()
+            ->leftJoin('p.productCollections', 'pc')
+            ->where('pc.collection = :collection')
+            ->setParameter('collection', $collection->getId());
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder;
+    }
+
     /**
      * Returns QueryBuilder for products.
      *
