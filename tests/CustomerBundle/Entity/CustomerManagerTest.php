@@ -17,10 +17,12 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\CustomerBundle\Entity\BaseCustomer;
 use Sonata\CustomerBundle\Entity\CustomerManager;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 class CustomerManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testGetPager(): void
     {
         $self = $this;
@@ -100,7 +102,7 @@ class CustomerManagerTest extends TestCase
 
     protected function getCustomerManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, [
+        $em = $this->createEntityManagerMock($qbCallback, [
             'firstname',
             'lastname',
             'email',

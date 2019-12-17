@@ -16,7 +16,7 @@ namespace Sonata\OrderBundle\Tests\Entity;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 use Sonata\OrderBundle\Entity\BaseOrder;
 use Sonata\OrderBundle\Entity\OrderManager;
 
@@ -36,6 +36,8 @@ class Order extends BaseOrder
  */
 class OrderManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testGetClass(): void
     {
         $registry = $this->createMock(ManagerRegistry::class);
@@ -212,7 +214,7 @@ class OrderManagerTest extends TestCase
 
     protected function getOrderManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, [
+        $em = $this->createEntityManagerMock($qbCallback, [
             'reference',
             'status',
             'username',
