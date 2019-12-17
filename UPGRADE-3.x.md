@@ -19,6 +19,12 @@ display a list of all similar products.
 Profile dependencies are no longer fetched from SonataUserBundle, but you can
 use this profile by changing the configuration (`template` and `menu_builder`). 
 
+## Fix products collection navigation
+Product's collections are available on product page. The collection page display a list of all similar products.
+
+## Remove deprecated calls 
+`Sonata\Doctrine\Model\PageableManagerInterface` is no longer used in profit of `Sonata\DatagridBundle\Pager\PageableInterface`
+
 ## Deprecated not passing dependencies to `Sonata\PaymentBundle\Controller\PaymentController`
 
 Dependencies are no longer fetched from the container, so if you manually

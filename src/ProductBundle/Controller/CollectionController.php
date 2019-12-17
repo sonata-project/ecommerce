@@ -77,10 +77,8 @@ class CollectionController extends Controller
 
     /**
      * List the product related to one collection.
-     *
-     * @return Response
      */
-    final public function indexAction(Request $request)
+    final public function indexAction(Request $request): Response
     {
         $page = $request->get('page', 1);
         $displayMax = $request->get('max', 9);
