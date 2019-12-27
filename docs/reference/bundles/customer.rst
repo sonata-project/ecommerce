@@ -24,6 +24,15 @@ The bundle allows you to configure the entity classes; you'll also need to regis
 .. code-block:: yaml
 
     sonata_customer:
+        profile:
+            template:       'SonataCustomerBundle:Profile:action.html.twig'
+            menu_builder:   'sonata.customer.profile.menu_builder.default'
+            dashboard_blocks:
+                #- { position: left, type: sonata.block.service.text, settings: { content: "<h2>Welcome!</h2> <p>This is a sample user profile dashboard, feel free to override it in the configuration! Want to make this text dynamic? For instance display the user's name? Create a dedicated block and edit the configuration!</p>"} }
+                - { position: left, type: sonata.order.block.recent_orders, settings: { title: Recent Orders, number: 5, mode: public }}
+                #- { position: right, type: sonata.timeline.block.timeline, settings: { max_per_page: 15 }}
+                - { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 5, mode: public }}
+                - { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 5, mode: public }}
         class:
             customer:             App\Sonata\CustomerBundle\Entity\Customer
             address:              App\Sonata\CustomerBundle\Entity\Address
