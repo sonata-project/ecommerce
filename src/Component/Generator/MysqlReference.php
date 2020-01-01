@@ -72,7 +72,8 @@ class MysqlReference implements ReferenceInterface
                 $row = ['counter' => 0];
             }
 
-            $reference = sprintf('%02d%02d%02d%06d',
+            $reference = sprintf(
+                '%02d%02d%02d%06d',
                 $date->format('y'),
                 $date->format('n'),
                 $date->format('j'),
