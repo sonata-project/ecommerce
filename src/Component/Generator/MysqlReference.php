@@ -68,7 +68,7 @@ class MysqlReference implements ReferenceInterface
         try {
             $statement = $this->registry->getConnection()->query($sql);
             $row = $statement->fetch();
-            if ($row === false) {
+            if (false === $row) {
                 $row = ['counter' => 0];
             }
 
