@@ -38,11 +38,7 @@ class MysqlReferenceTest extends TestCase
 
         $invoice->setId(12);
 
-        try {
-            $this->assertNull($mysqlReference->invoice($invoice));
-        } catch (\Exception $e) {
-            $this->fail('->invoice() should return a NULL value but should now throw an \Exception');
-        }
+        $this->assertNull($mysqlReference->invoice($invoice));
     }
 
     public function testOrder(): void
@@ -59,11 +55,7 @@ class MysqlReferenceTest extends TestCase
 
         $order->setId(12);
 
-        try {
-            $this->assertNull($mysqlReference->order($order));
-        } catch (\Exception $e) {
-            $this->fail('->order() should return a NULL value but should not throw an \Exception');
-        }
+        $this->assertNull($mysqlReference->order($order));
     }
 
     /**
