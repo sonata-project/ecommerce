@@ -68,6 +68,9 @@ class MysqlReference implements ReferenceInterface
         try {
             $statement = $this->registry->getConnection()->query($sql);
             $row = $statement->fetch();
+            if ($row === false) {
+                $row = ['counter' => 0];
+            }
 
             $reference = sprintf('%02d%02d%02d%06d',
                 $date->format('y'),
