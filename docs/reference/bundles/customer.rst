@@ -24,6 +24,41 @@ The bundle allows you to configure the entity classes; you'll also need to regis
 .. code-block:: yaml
 
     sonata_customer:
+        profile:
+            template:       'SonataCustomerBundle:Profile:action.html.twig' # or 'SonataCustomerBundle:Profile:action_with_user_menu.html.twig'
+            menu_builder:   'sonata.customer.profile.menu_builder.default'
+
+            menu:
+                -
+                    route: 'sonata_customer_dashboard'
+                    label: 'link_list_dashboard'
+                    domain: 'SonataCustomerBundle'
+                    route_parameters: {}
+                -
+                    route: 'sonata_customer_addresses'
+                    label: 'link_list_addresses'
+                    domain: 'SonataCustomerBundle'
+                    route_parameters: {}
+                -
+                    route: 'sonata_order_index'
+                    label: 'order_list'
+                    domain: 'SonataOrderBundle'
+                    route_parameters: {}
+
+            blocks:
+                -
+                    position: left
+                    type: sonata.order.block.recent_orders
+                    settings: { title: Recent Orders, number: 5, mode: public }
+                -
+                    position: right
+                    type: sonata.news.block.recent_posts
+                    settings: { title: Recent Posts, number: 5, mode: public }
+                -
+                    position: right
+                    type: sonata.news.block.recent_comments
+                    settings: { title: Recent Comments, number: 5, mode: public }
+
         class:
             customer:             App\Sonata\CustomerBundle\Entity\Customer
             address:              App\Sonata\CustomerBundle\Entity\Address

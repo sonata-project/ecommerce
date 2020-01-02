@@ -5,5 +5,8 @@
             <tag name="twig.extension"/>
             <argument type="service" id="sonata.delivery.selector.default"/>
         </service>
+        <service id="sonata.customer.twig.global" class="Sonata\CustomerBundle\Twig\GlobalVariables">
+            <argument type="string">%sonata.customer.profile.template%</argument>
+        </service>
     </services>
 </container>

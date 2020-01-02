@@ -3,6 +3,10 @@
     <file source-language="en" target-language="fr" datatype="plaintext" original="SonataCustomerBundle.en.xliff">
         <body>
             <!-- Begin - Titles -->
+            <trans-unit id="sonata_profile_title">
+                <source>sonata_profile_title</source>
+                <target>Mon tableau de bord</target>
+            </trans-unit>
             <trans-unit id="customer">
                 <source>customer</source>
                 <target>Client</target>
@@ -248,6 +252,10 @@
             <trans-unit id="link_list_addresses">
                 <source>link_list_addresses</source>
                 <target>Adresses</target>
+            </trans-unit>
+            <trans-unit id="link_list_dashboard">
+                <source>link_list_dashboard</source>
+                <target>Mon tableau de bord</target>
             </trans-unit>
             <!-- End - Sidemenu translations -->
             <!-- Begin - List translations -->

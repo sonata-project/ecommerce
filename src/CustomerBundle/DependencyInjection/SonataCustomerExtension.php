@@ -55,8 +55,9 @@ class SonataCustomerExtension extends Extension implements PrependExtensionInter
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('block.xml');
-        $loader->load('orm.xml');
         $loader->load('form.xml');
+        $loader->load('menu.xml');
+        $loader->load('orm.xml');
         $loader->load('twig.xml');
 
         if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
@@ -69,6 +70,7 @@ class SonataCustomerExtension extends Extension implements PrependExtensionInter
             $loader->load('admin.xml');
         }
 
+        $this->configureCustomerProfile($container, $config);
         $this->registerDoctrineMapping($config);
         $this->registerParameters($container, $config);
     }
@@ -156,5 +158,14 @@ class SonataCustomerExtension extends Extension implements PrependExtensionInter
             ],
             'orphanRemoval' => false,
         ]);
+    }
+
+    private function configureCustomerProfile(ContainerBuilder $container, array $config)
+    {
+        $container->setParameter('sonata.customer.profile.blocks', $config['profile']['blocks']);
+        $container->setParameter('sonata.customer.profile.template', $config['profile']['template']);
+
+        $container->setAlias('sonata.customer.profile.menu_builder', $config['profile']['menu_builder']);
+        $container->getDefinition('sonata.customer.profile.menu_builder.default')->replaceArgument(2, $config['profile']['menu']);
     }
 }

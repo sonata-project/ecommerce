@@ -22,7 +22,7 @@
         "knplabs/knp-paginator-bundle": "^2.6",
         "kriswallsmith/buzz": "^0.15 || 0.16.0",
         "sonata-project/admin-bundle": "^3.29",
-        "sonata-project/block-bundle": "^3.8",
+        "sonata-project/block-bundle": "^3.18.3",
         "sonata-project/classification-bundle": "^3.3",
         "sonata-project/comment-bundle": "^3.1",
         "sonata-project/core-bundle": "^3.15.1",
