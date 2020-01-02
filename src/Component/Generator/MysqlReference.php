@@ -55,7 +55,7 @@ class MysqlReference implements ReferenceInterface
      *
      * @throws \Exception
      *
-     * @return Exception|string
+     * @return string
      */
     protected function generateReference($object, $tableName)
     {
@@ -68,8 +68,12 @@ class MysqlReference implements ReferenceInterface
         try {
             $statement = $this->registry->getConnection()->query($sql);
             $row = $statement->fetch();
+            if (false === $row) {
+                $row = ['counter' => 0];
+            }
 
-            $reference = sprintf('%02d%02d%02d%06d',
+            $reference = sprintf(
+                '%02d%02d%02d%06d',
                 $date->format('y'),
                 $date->format('n'),
                 $date->format('j'),
