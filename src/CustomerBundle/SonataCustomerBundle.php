@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\CustomerBundle;
 
 use Sonata\CoreBundle\Form\FormHelper;
+use Sonata\CustomerBundle\DependencyInjection\Compiler\GlobalVariablesCompilerPass;
 use Sonata\CustomerBundle\Form\Type\AddressType;
 use Sonata\CustomerBundle\Form\Type\AddressTypeType;
 use Sonata\CustomerBundle\Form\Type\ApiAddressType;
@@ -25,6 +26,7 @@ class SonataCustomerBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
+        $container->addCompilerPass(new GlobalVariablesCompilerPass());
         $this->registerFormMapping();
     }
 

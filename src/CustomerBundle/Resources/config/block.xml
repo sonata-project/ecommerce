@@ -8,5 +8,12 @@
             <argument type="service" id="sonata.customer.manager"/>
             <argument type="service" id="sonata.admin.pool" on-invalid="ignore"/>
         </service>
+        <service id="sonata.customer.block.profile_menu" class="Sonata\CustomerBundle\Block\ProfileMenuBlockService">
+            <tag name="sonata.block"/>
+            <argument>sonata.customer.block.profile_menu</argument>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="knp_menu.menu_provider"/>
+            <argument type="service" id="sonata.customer.profile.menu_builder"/>
+        </service>
     </services>
 </container>

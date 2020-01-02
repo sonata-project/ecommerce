@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
         $node = $treeBuilder->root('sonata_customer');
 
         $this->addModelSection($node);
+        $this->addProfileSection($node);
 
         return $treeBuilder;
     }
@@ -62,5 +63,109 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+    }
+
+    private function addProfileSection(ArrayNodeDefinition $node): void
+    {
+        $node
+            ->children()
+                ->arrayNode('profile')
+                    ->addDefaultsIfNotSet()
+                    ->fixXmlConfig('block')
+                    ->children()
+                        ->scalarNode('template')
+                            ->info('This is the profile template. You should extend your profile actions template by using {% extends sonata_customer.profileTemplate %}.')
+                            ->cannotBeEmpty()
+                            ->defaultValue('SonataCustomerBundle:Profile:action.html.twig')
+                        ->end()
+                        ->scalarNode('menu_builder')
+                            ->info('MenuBuilder::createProfileMenu(array $itemOptions = []):ItemInterface is used to build profile menu.')
+                            ->defaultValue('sonata.customer.profile.menu_builder.default')
+                            ->cannotBeEmpty()
+                        ->end()
+                        ->arrayNode('blocks')
+                            ->info('Define your customer profile block here.')
+                            ->defaultValue($this->getProfileBlocksDefaultValues())
+                            ->prototype('array')
+                                ->fixXmlConfig('setting')
+                                ->children()
+                                    ->scalarNode('type')->cannotBeEmpty()->end()
+                                    ->arrayNode('settings')
+                                        ->useAttributeAsKey('id')
+                                        ->prototype('variable')->defaultValue([])->end()
+                                    ->end()
+                                    ->scalarNode('position')->defaultValue('right')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('menu')
+                            ->info('Define your customer profile menu records here.')
+                            ->prototype('array')
+                                ->addDefaultsIfNotSet()
+                                ->cannotBeEmpty()
+                                ->children()
+                                    ->scalarNode('route')->cannotBeEmpty()->end()
+                                    ->arrayNode('route_parameters')
+                                    ->defaultValue([])
+                                    ->prototype('array')->end()
+                                    ->end()
+                                    ->scalarNode('label')->cannotBeEmpty()->end()
+                                    ->scalarNode('domain')->defaultValue('messages')->end()
+                                ->end()
+                            ->end()
+                            ->defaultValue($this->getProfileMenuDefaultValues())
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * Returns default values for profile menu (to avoid BC Break).
+     */
+    private function getProfileMenuDefaultValues(): array
+    {
+        return [
+            [
+                'route' => 'sonata_customer_dashboard',
+                'label' => 'link_list_dashboard',
+                'domain' => 'SonataCustomerBundle',
+                'route_parameters' => [],
+            ],
+            [
+                'route' => 'sonata_customer_addresses',
+                'label' => 'link_list_addresses',
+                'domain' => 'SonataCustomerBundle',
+                'route_parameters' => [],
+            ],
+            [
+                'route' => 'sonata_order_index',
+                'label' => 'order_list',
+                'domain' => 'SonataOrderBundle',
+                'route_parameters' => [],
+            ],
+        ];
+    }
+
+    private function getProfileBlocksDefaultValues(): array
+    {
+        return [
+            [
+                'position' => 'left',
+                'type' => 'sonata.order.block.recent_orders',
+                'settings' => ['title' => 'Recent Orders', 'number' => 5, 'mode' => 'public'],
+            ],
+            [
+                'position' => 'right',
+                'type' => 'sonata.news.block.recent_posts',
+                'settings' => ['title' => 'Recent Posts', 'number' => 5, 'mode' => 'public'],
+            ],
+            [
+                'position' => 'right',
+                'type' => 'sonata.news.block.recent_comments',
+                'settings' => ['title' => 'Recent Comments', 'number' => 5, 'mode' => 'public'],
+            ],
+        ];
     }
 }
