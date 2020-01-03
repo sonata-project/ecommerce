@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.1](https://github.com/sonata-project/ecommerce/compare/3.2.0...3.2.1) - 2020-01-04
+### Fixed
+- crash with `Compile Error: Access level to Sonata\CustomerBundle\Block\ProfileMenuBlockService::getMenu() must be protected`
+
 ## [3.2.0](https://github.com/sonata-project/ecommerce/compare/3.1.0...3.2.0) - 2020-01-03
 ### Added
 - Added configurable profile to CustomerBundle
