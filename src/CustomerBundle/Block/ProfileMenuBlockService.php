@@ -58,7 +58,7 @@ final class ProfileMenuBlockService extends MenuBlockService
         ]);
     }
 
-    private function getMenu(BlockContextInterface $blockContext): ItemInterface
+    protected function getMenu(BlockContextInterface $blockContext): ItemInterface
     {
         $settings = $blockContext->getSettings();
 
