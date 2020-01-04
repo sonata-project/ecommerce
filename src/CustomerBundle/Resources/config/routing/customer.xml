@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="sonata_customer_dashboard" path="/" methods="GET">
+        <default key="_controller">SonataCustomerBundle:Dashboard:dashboard</default>
+    </route>
     <route id="sonata_customer_addresses" path="/address">
         <default key="_controller">SonataCustomerBundle:Customer:addresses</default>
     </route>
