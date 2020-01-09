@@ -25,7 +25,7 @@ The bundle allows you to configure the entity classes; you'll also need to regis
 
     sonata_customer:
         profile:
-            template:       'SonataCustomerBundle:Profile:action.html.twig' # or 'SonataCustomerBundle:Profile:action_with_user_menu.html.twig'
+            template:       '@SonataCustomer/Profile/action.html.twig'
             menu_builder:   'sonata.customer.profile.menu_builder.default'
 
             menu:

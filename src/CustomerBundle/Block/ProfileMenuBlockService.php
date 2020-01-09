@@ -54,11 +54,16 @@ final class ProfileMenuBlockService extends MenuBlockService
 
         $resolver->setDefaults([
             'cache_policy' => 'private',
-            'menu_template' => 'SonataBlockBundle:Block:block_side_menu_template.html.twig',
+            'menu_template' => '@SonataBlock/Block/block_side_menu_template.html.twig',
         ]);
     }
 
-    protected function getMenu(BlockContextInterface $blockContext): ItemInterface
+    /**
+     * Gets the menu to render.
+     *
+     * @return ItemInterface|string
+     */
+    protected function getMenu(BlockContextInterface $blockContext)
     {
         $settings = $blockContext->getSettings();
 
