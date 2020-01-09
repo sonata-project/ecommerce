@@ -20,7 +20,7 @@ final class DashboardController extends Controller
 {
     public function dashboardAction(): Response
     {
-        return $this->render('SonataCustomerBundle:Profile:dashboard.html.twig', [
+        return $this->render('@SonataCustomer/Profile/dashboard.html.twig', [
             'blocks' => $this->container->getParameter('sonata.customer.profile.blocks'),
         ]);
     }

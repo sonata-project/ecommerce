@@ -28,11 +28,11 @@ class GlobalVariablesTest extends TestCase
 
     protected function setUp()
     {
-        $this->globalVariables = new GlobalVariables('SonataCustomerBundle:Profile:action.html.twig');
+        $this->globalVariables = new GlobalVariables('@SonataCustomer/Profile/action.html.twig');
     }
 
     public function testGetProfileTemplate(): void
     {
-        $this->assertSame('SonataCustomerBundle:Profile:action.html.twig', $this->globalVariables->getProfileTemplate());
+        $this->assertSame('@SonataCustomer/Profile/action.html.twig', $this->globalVariables->getProfileTemplate());
     }
 }

@@ -29,6 +29,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * NEXT_MAJOR: make this class final.
+ *
  * @author Hugo Briand <briand@ekino.com>
  */
 class RecentCustomersBlockService extends AbstractAdminBlockService
