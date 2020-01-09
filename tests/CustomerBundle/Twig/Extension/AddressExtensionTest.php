@@ -26,7 +26,7 @@ class AddressExtensionTest extends TestCase
 {
     public function testRenderAddress(): void
     {
-        $environment = $this->createMock(\Twig_Environment::class);
+        $environment = $this->createMock(\Twig\Environment::class);
         $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
 
         $environment->expects($this->exactly(4))->method('render');

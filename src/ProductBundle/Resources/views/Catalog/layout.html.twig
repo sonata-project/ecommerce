@@ -13,7 +13,11 @@ file that was distributed with this source code.
 
 {% block sonata_page_breadcrumb %}
     <div class="row-fluid clearfix">
-        {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'category': category, 'current_uri': app.request.requestUri }) }}
+        {% if category is defined %}
+            {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'category': category, 'current_uri': app.request.requestUri }) }}
+        {% elseif collection is defined %}
+            {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'collection': collection, 'current_uri': app.request.requestUri }) }}
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -59,11 +63,7 @@ file that was distributed with this source code.
                     <div class="row">
                         <div class="col-sm-3">
                             <h4 class="panel-title">
-                                {% if category %}
-                                    {{ category.name }}
-                                {% else %}
-                                    {% trans from 'SonataProductBundle' %}catalog_root_title{% endtrans %}
-                                {% endif %}
+                                {% block products_heading_title %}{%endblock%}                                
                             </h4>
                         </div>
                         <div class="col-sm-9">

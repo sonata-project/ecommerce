@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Customer;
 
+use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
-use Sonata\Doctrine\Model\PageableManagerInterface;
 
-interface AddressManagerInterface extends ManagerInterface, PageableManagerInterface
+interface AddressManagerInterface extends ManagerInterface, PageableInterface
 {
     /**
      * Sets $address the current customer address.

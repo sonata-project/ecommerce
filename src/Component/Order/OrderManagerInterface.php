@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Order;
 
+use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
-use Sonata\Doctrine\Model\PageableManagerInterface;
 use Sonata\UserBundle\Model\UserInterface;
 
-interface OrderManagerInterface extends ManagerInterface, PageableManagerInterface
+interface OrderManagerInterface extends ManagerInterface, PageableInterface
 {
     /**
      * Finds orders belonging to given user.

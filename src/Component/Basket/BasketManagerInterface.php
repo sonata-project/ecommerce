@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sonata\Component\Basket;
 
 use Sonata\Component\Customer\CustomerInterface;
+use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
-use Sonata\Doctrine\Model\PageableManagerInterface;
 
-interface BasketManagerInterface extends ManagerInterface, PageableManagerInterface
+interface BasketManagerInterface extends ManagerInterface, PageableInterface
 {
     /**
      * @return BasketInterface|null

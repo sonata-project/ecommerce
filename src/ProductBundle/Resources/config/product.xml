@@ -49,5 +49,12 @@
             <argument>%sonata.product.seo.product.domain%</argument>
             <argument>%sonata.product.seo.product.media_format%</argument>
         </service>
+        <service id="Sonata\ProductBundle\Controller\CollectionController">
+            <tag name="controller.service_arguments"/>
+            <argument type="service" id="sonata.seo.page"/>
+            <argument type="service" id="sonata.price.currency.detector"/>
+            <argument type="service" id="sonata.classification.manager.collection"/>
+            <argument type="service" id="sonata.product.set.manager"/>
+        </service>
     </services>
 </container>

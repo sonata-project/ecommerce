@@ -4,8 +4,15 @@
         <default key="_controller">SonataProductBundle:Catalog:index</default>
     </route>
     <route id="sonata_catalog_category" path="/{category_slug}/{category_id}">
+        <requirement key="category_id">\d+</requirement>
         <default key="_controller">SonataProductBundle:Catalog:index</default>
         <default key="category_id">0</default>
         <default key="category_slug">all</default>
+    </route>
+    <route id="sonata_catalog_collection" path="/collection/{collection_slug}/{collection_id}">
+        <requirement key="collection_id">\d+</requirement>
+        <default key="_controller">SonataProductBundle:Collection:index</default>
+        <default key="collection_id">0</default>
+        <default key="collection_slug">all</default>
     </route>
 </routes>
