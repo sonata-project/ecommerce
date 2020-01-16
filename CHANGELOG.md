@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.2](https://github.com/sonata-project/ecommerce/compare/3.2.1...3.2.2) - 2020-01-15
+### Fixed
+- fix collection navigation
+- remove deprecated calls
+- `->cannotBeEmpty()` is not applicable to concrete nodes at path
+  `sonata_customer.profile.menu.`
+
 ## [3.2.1](https://github.com/sonata-project/ecommerce/compare/3.2.0...3.2.1) - 2020-01-04
 ### Fixed
 - crash with `Compile Error: Access level to Sonata\CustomerBundle\Block\ProfileMenuBlockService::getMenu() must be protected`
