@@ -93,13 +93,13 @@ class FacebookTest extends TestCase
         $fbService->alterPage($seoPage, $product);
         $content = $extension->getHeadAttributes();
 
-        $this->assertContains('fb: http://ogp.me/ns/fb#', $content);
+        $this->assertStringContainsString('fb: http://ogp.me/ns/fb#', $content);
 
         $content = $extension->getMetadatas();
 
-        $this->assertContains('property="og:description" content="O-some product"', $content);
-        $this->assertContains('property="og:title" content="Product1"', $content);
-        $this->assertContains('property="product:price:amount" content="123.56"', $content);
+        $this->assertStringContainsString('property="og:description" content="O-some product"', $content);
+        $this->assertStringContainsString('property="og:title" content="Product1"', $content);
+        $this->assertStringContainsString('property="product:price:amount" content="123.56"', $content);
     }
 
     public function testAlterPageImage(): void
@@ -149,17 +149,17 @@ class FacebookTest extends TestCase
         $fbService->alterPage($seoPage, $product);
         $content = $extension->getHeadAttributes();
 
-        $this->assertContains('fb: http://ogp.me/ns/fb#', $content);
+        $this->assertStringContainsString('fb: http://ogp.me/ns/fb#', $content);
 
         $content = $extension->getMetadatas();
 
         // image link
-        $this->assertContains('http://my-domain.ltd/upload/dummy.png', $content);
+        $this->assertStringContainsString('http://my-domain.ltd/upload/dummy.png', $content);
         //image width
-        $this->assertContains('meta property="og:image:width" content="1111"', $content);
+        $this->assertStringContainsString('meta property="og:image:width" content="1111"', $content);
         //image height
-        $this->assertContains('meta property="og:image:height" content="2222"', $content);
+        $this->assertStringContainsString('meta property="og:image:height" content="2222"', $content);
         //image content type
-        $this->assertContains('meta property="og:image:type" content="image/png"', $content);
+        $this->assertStringContainsString('meta property="og:image:type" content="image/png"', $content);
     }
 }

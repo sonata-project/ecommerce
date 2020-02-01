@@ -57,7 +57,7 @@ class BaseOrderTest extends TestCase
 
         $items = $order->getVatAmounts();
 
-        $this->assertInternalType('array', $items, 'Should return an array');
+        $this->assertIsArray($items, 'Should return an array');
 
         foreach ($items as $item) {
             $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');
