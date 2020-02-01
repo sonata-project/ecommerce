@@ -284,7 +284,7 @@ class BasketTest extends TestCase
 
         $data = $basket->serialize();
 
-        $this->assertInternalType('string', $data);
+        $this->assertIsString($data);
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present
@@ -314,7 +314,7 @@ class BasketTest extends TestCase
 
         $data = $basket->serialize();
 
-        $this->assertInternalType('string', $data);
+        $this->assertIsString($data);
         $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present

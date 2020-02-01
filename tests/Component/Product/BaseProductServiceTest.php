@@ -72,7 +72,7 @@ class BaseProductServiceTest extends TestCase
     {
         $provider = $this->getBaseProvider();
 
-        $this->assertInternalType('array', $provider->getOptions());
+        $this->assertIsArray($provider->getOptions());
         $this->assertNull($provider->getOption('foo'));
         $provider->setOptions(['foo' => 'bar']);
 

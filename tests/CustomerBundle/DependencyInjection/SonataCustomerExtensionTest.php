@@ -37,6 +37,9 @@ final class SonataCustomerExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEmptyProfileMenu(): void
     {
         $this->load([
@@ -46,6 +49,9 @@ final class SonataCustomerExtensionTest extends AbstractExtensionTestCase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEmptyProfileBlocks(): void
     {
         $this->load([
