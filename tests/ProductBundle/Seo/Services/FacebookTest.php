@@ -65,7 +65,7 @@ class ProductFbMock extends BaseProduct
 
 class FacebookTest extends TestCase
 {
-    public function testAlterPage()
+    public function testAlterPage(): void
     {
         $mediaPool = $this->createMock(Pool::class);
         $seoPage = new SeoPage('test');
@@ -102,7 +102,7 @@ class FacebookTest extends TestCase
         $this->assertContains('property="product:price:amount" content="123.56"', $content);
     }
 
-    public function testAlterPageImage()
+    public function testAlterPageImage(): void
     {
         $mediaPool = $this->createMock(Pool::class);
         $seoPage = new SeoPage('test');

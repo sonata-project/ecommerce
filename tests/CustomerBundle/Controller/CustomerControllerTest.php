@@ -23,7 +23,7 @@ class CustomerControllerTest extends TestCase
      */
     private $controller;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->controller = new CustomerController();
     }
