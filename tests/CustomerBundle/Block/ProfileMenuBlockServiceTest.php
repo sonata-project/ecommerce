@@ -33,7 +33,7 @@ class ProfileMenuBlockServiceTest extends TestCase
      */
     private $profileMenuBlockService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         /**
          * prepere profileMenuBuilder.

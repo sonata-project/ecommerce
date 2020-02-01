@@ -26,7 +26,7 @@ class GlobalVariablesTest extends TestCase
      */
     private $globalVariables;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->globalVariables = new GlobalVariables('@SonataCustomer/Profile/action.html.twig');
     }
