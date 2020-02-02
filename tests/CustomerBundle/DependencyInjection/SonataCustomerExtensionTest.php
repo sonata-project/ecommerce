@@ -17,7 +17,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sonata\CustomerBundle\DependencyInjection\Configuration;
 use Sonata\CustomerBundle\DependencyInjection\SonataCustomerExtension;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 final class SonataCustomerExtensionTest extends AbstractExtensionTestCase
 {
@@ -38,6 +37,9 @@ final class SonataCustomerExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEmptyProfileMenu(): void
     {
         $this->load([
@@ -47,6 +49,9 @@ final class SonataCustomerExtensionTest extends AbstractExtensionTestCase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEmptyProfileBlocks(): void
     {
         $this->load([
@@ -66,18 +71,5 @@ final class SonataCustomerExtensionTest extends AbstractExtensionTestCase
         return [
             new SonataCustomerExtension(),
         ];
-    }
-
-    protected function load(array $configurationValues = []): void
-    {
-        $configs = [$this->getMinimalConfiguration(), $configurationValues];
-
-        foreach ($this->container->getExtensions() as $extension) {
-            if ($extension instanceof PrependExtensionInterface) {
-                $extension->prepend($this->container);
-            }
-
-            $extension->load($configs, $this->container);
-        }
     }
 }

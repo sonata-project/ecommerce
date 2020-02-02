@@ -83,14 +83,14 @@ class TwitterTest extends TestCase
         $twitterService->alterPage($seoPage, $product);
         $content = $extension->getMetadatas();
 
-        $this->assertContains('name="twitter:label1" content="Price"', $content);
-        $this->assertNotContains('twitter:image:src', $content);
-        $this->assertContains('name="twitter:site" content="mySiteName"', $content);
-        $this->assertContains('name="twitter:creator" content="Sonata"', $content);
-        $this->assertContains('name="twitter:data2" content="Sku1"', $content);
-        $this->assertContains('name="twitter:title" content="Product1"', $content);
-        $this->assertContains('name="twitter:description" content="O-some product"', $content);
-        $this->assertContains('name="twitter:data1" content="123.56"', $content);
+        $this->assertStringContainsString('name="twitter:label1" content="Price"', $content);
+        $this->assertStringNotContainsString('twitter:image:src', $content);
+        $this->assertStringContainsString('name="twitter:site" content="mySiteName"', $content);
+        $this->assertStringContainsString('name="twitter:creator" content="Sonata"', $content);
+        $this->assertStringContainsString('name="twitter:data2" content="Sku1"', $content);
+        $this->assertStringContainsString('name="twitter:title" content="Product1"', $content);
+        $this->assertStringContainsString('name="twitter:description" content="O-some product"', $content);
+        $this->assertStringContainsString('name="twitter:data1" content="123.56"', $content);
     }
 
     public function testAlterPageImage(): void
@@ -125,6 +125,6 @@ class TwitterTest extends TestCase
         $twitterService->alterPage($seoPage, $product);
         $content = $extension->getMetadatas();
 
-        $this->assertContains('property="twitter:image:src" content="http://my-domain.ltd/upload/dummy.png"', $content);
+        $this->assertStringContainsString('property="twitter:image:src" content="http://my-domain.ltd/upload/dummy.png"', $content);
     }
 }

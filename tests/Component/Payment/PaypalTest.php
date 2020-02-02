@@ -47,7 +47,7 @@ class PaypalTest extends TestCase
         $sendbank = $paypal->sendbank($order);
         $this->assertInstanceOf(Response::class, $sendbank);
 
-        $this->assertContains('<input type="hidden" name="cmd" value="_s-xclick">', $sendbank->getContent());
+        $this->assertStringContainsString('<input type="hidden" name="cmd" value="_s-xclick">', $sendbank->getContent());
     }
 
     public function testIsCallbackValid(): void
