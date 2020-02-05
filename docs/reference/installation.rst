@@ -22,6 +22,7 @@ Follow their configuration step; you will find everything you need in their own
 installation chapter.
 
 .. note::
+
     If a dependency is already installed somewhere in your project or in
     another dependency, you won't need to install it again.
 
@@ -30,14 +31,11 @@ Enable the Bundle
 
 .. code-block:: bash
 
-    $ composer require sonata-project/ecommerce
+    composer require sonata-project/ecommerce
 
 Next, be sure to enable the bundles in your ``bundles.php`` file if they
-are not already enabled:
+are not already enabled::
 
-.. code-block:: php
-
-    <?php
     // config/bundles.php
 
     return [
@@ -55,18 +53,17 @@ are not already enabled:
     ];
 
 .. note::
+
     If you are not using Symfony Flex, you should enable bundles in your
     ``AppKernel.php``.
 
 .. code-block:: php
 
-    <?php
-
     // app/AppKernel.php
 
     public function registerBundles()
     {
-        return array(
+        return [
             // ...
             new Sonata\CustomerBundle\SonataCustomerBundle(),
             new Sonata\ProductBundle\SonataProductBundle(),
@@ -78,13 +75,14 @@ are not already enabled:
             new Sonata\PriceBundle\SonataPriceBundle(),
             // ...
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-        );
+        ];
     }
 
 Configuration
 -------------
 
 .. note::
+
     If you are not using Symfony Flex, all configuration in this section should
     be added to ``app/config/config.yml``.
 
@@ -92,7 +90,7 @@ Configuration
 
     .. code-block:: yaml
 
-            # app/config/sonata_ecommerce.yml
+            # app/config/sonata_ecommerce.yaml
 
             sonata_media:
                 # ...
@@ -165,6 +163,7 @@ Configuration
 
 Extending the Bundle
 --------------------
+
 At this point, the bundle is functional, but not quite ready yet. You need
 to generate the correct entities for all bundles:
 
@@ -178,6 +177,7 @@ to generate the correct entities for all bundles:
     bin/console sonata:easy-extends:generate SonataProductBundle --dest=src --namespace_prefix=App
 
 .. note::
+
     If you are not using Symfony Flex, use command without ``--namespace_prefix=App``.
 
 With provided parameters, the files are generated in ``src/Sonata``.
@@ -191,19 +191,15 @@ With provided parameters, the files are generated in ``src/Sonata``.
     ``App\Sonata\BasketBundle\Entity\Basket``.
 
 .. note::
+
     If you are not using Symfony Flex, the namespace will be ``App\Sonata``.
 
-Now, add the new ``App`` Bundle into the ``bundles.php``:
-
-.. code-block:: php
-
-    <?php
+Now, add the new ``App`` Bundle into the ``bundles.php``::
 
     // config/bundles.php
 
     return [
-        //...
-
+        // ...
         App\Sonata\CustomerBundle\ApplicationSonataCustomerBundle::class => ['all' => true],
         App\Sonata\BasketBundle\ApplicationSonataBasketBundle::class => ['all' => true],
         App\Sonata\InvoiceBundle\ApplicationSonataInvoiceBundle::class => ['all' => true],
@@ -213,16 +209,15 @@ Now, add the new ``App`` Bundle into the ``bundles.php``:
     ];
 
 .. note::
+
     If you are not using Symfony Flex, add the new ``App`` Bundle into your
     ``AppKernel.php``.
 
 .. code-block:: php
 
-    <?php
-
     // app/AppKernel.php
 
-    public function registerbundles()
+    public function registerBundles()
     {
         return [
             // ...
@@ -274,12 +269,14 @@ Next, add the correct routing files:
             prefix: /shop/user/invoice
 
 .. note::
+
     If you are not using Symfony Flex, routes should be added to ``app/config/routing.yml``.
 
 If you are not using auto-mapping in doctrine you will have to add it there
 too:
 
 .. note::
+
     If you are not using Symfony Flex, next configuration should be added
     to ``app/config/config.yml``.
 
@@ -288,12 +285,12 @@ too:
     # config/packages/doctrine.yaml
 
     doctrine:
-        #...
+        # ...
         orm:
             entity_managers:
                 default:
                     mappings:
-                        #...
+                        # ...
                         SonataProductBundle: ~
                         ApplicationSonataProductBundle: ~
                         SonataCustomerBundle: ~
@@ -310,14 +307,14 @@ The only thing left is to update your schema:
 
 .. code-block:: bash
 
-    php bin/console doctrine:schema:update --force
+    bin/console doctrine:schema:update --force
 
 Create missing contexts:
 
 .. code-block:: bash
 
-    $ bin/console sonata:classification:fix-context
-    $ bin/console sonata:media:fix-media-context
+    bin/console sonata:classification:fix-context
+    bin/console sonata:media:fix-media-context
 
 After the initial setup, you have to create a product:
 

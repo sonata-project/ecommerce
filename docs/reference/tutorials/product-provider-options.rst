@@ -21,32 +21,21 @@ Enable a modal for "add to basket" product page button
 This option will display your product in a modal (popin) after clicking on "add to basket" button on the product page
 with a small summary of your product.
 
-Start by adding the option in your product provider:
-
-.. code-block:: php
-
-    <?php
+Start by adding the option in your product provider::
 
     namespace App\Sonata\ProductBundle\Provider;
 
     use JMS\Serializer\SerializerInterface;
-
     use Sonata\ProductBundle\Model\BaseProductProvider;
 
-    /**
-     * TrainingProductProvider class
-     */
     class TrainingProductProvider extends BaseProductProvider
     {
-        /**
-         * {@inheritdoc}
-         */
         public function __construct(SerializerInterface $serializer)
         {
             $this->serializer = $serializer;
-            $this->setOptions(array(
+            $this->setOptions([
                 'product_add_modal' => true
-            ));
+            ]);
         }
 
         // ...
@@ -54,7 +43,7 @@ Start by adding the option in your product provider:
 You also have to create a template file to display your products properties. Those will be rendered via
 a ``Resources/views/Training/properties.html.twig`` template. It can be something like:
 
-.. code-block:: html+jinja
+.. code-block:: html+twig
 
     <dl>
         {% if not product.isMaster %}

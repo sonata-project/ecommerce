@@ -32,7 +32,7 @@ Several actions are provided by the controller:
 Anonymous basket invalidation
 =============================
 
-If you wish to invalidate the anonymous basket stored in session when the user logs out (and if you didn't invalidate the session), you'll need to edit your ``security.yml`` file to add this to your logout configuration:
+If you wish to invalidate the anonymous basket stored in session when the user logs out (and if you didn't invalidate the session), you'll need to edit your ``security.yaml`` file to add this to your logout configuration:
 
 .. code-block:: yaml
 

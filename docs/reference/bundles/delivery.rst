@@ -57,33 +57,19 @@ Add a custom delivery method
 
 In order to add a custom delivery methods, here are the steps to follow:
 
-1. Create your own delivery method class:
-
-.. code-block:: php
-
-    <?php
+1. Create your own delivery method class::
 
     namespace App\Delivery;
 
     use Sonata\Component\Delivery\BaseServiceDelivery;
 
-
-    /**
-     * Class TakeAwayDelivery
-     */
     class TakeAwayDelivery extends BaseServiceDelivery
     {
-        /**
-         * {@inheritdoc}
-         */
         public function isAddressRequired()
         {
             return false;
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function getCode()
         {
             return 'take_away';
@@ -94,9 +80,9 @@ In order to add a custom delivery methods, here are the steps to follow:
 
 .. code-block:: xml
 
-        <service id="app.delivery.take_away" class="App\Delivery\TakeAwayDelivery">
-            <tag name="sonata.delivery.method" />
-        </service>
+    <service id="app.delivery.take_away" class="App\Delivery\TakeAwayDelivery">
+        <tag name="sonata.delivery.method"/>
+    </service>
 
 3. Add it to your configuration:
 
