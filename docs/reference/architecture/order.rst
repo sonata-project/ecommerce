@@ -19,13 +19,7 @@ The `Order's` locale is also set (to the `Basket` locale, which is set to the cu
 Order Statuses
 ==============
 
-An `Order` or an `OrderElement` may have the following statuses:
-
-.. code-block:: php
-
-    <?php
-
-    // ...
+An `Order` or an `OrderElement` may have the following statuses::
 
     interface OrderInterface
     {
@@ -39,13 +33,7 @@ An `Order` or an `OrderElement` may have the following statuses:
         // ...
     }
 
-Regarding the `Payment` statuses, here are the possible values:
-
-.. code-block:: php
-
-    <?php
-
-    // ...
+Regarding the `Payment` statuses, here are the possible values::
 
     interface TransactionInterface
     {
@@ -63,13 +51,7 @@ Regarding the `Payment` statuses, here are the possible values:
         // ...
     }
 
-Finally, the values for the `Delivery` statuses:
-
-.. code-block:: php
-
-    <?php
-
-    // ...
+Finally, the values for the `Delivery` statuses::
 
     interface ServiceDeliveryInterface
     {

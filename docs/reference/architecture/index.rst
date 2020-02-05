@@ -43,16 +43,19 @@ Currently, the order process is implemented as follows:
 - He selects his `Delivery` option
 
 .. note::
+
     This option depends on its country, as you can see in :doc:`product`.
 
 - He selects his `Payment` mode
 
 .. note::
+
     The choices depend on the products in his `Basket`.
 
 - He processes to `Payment`
 
 .. note::
+
     There, the `Basket` is transformed into an `Order`. This implies that the data that concerns the `Basket` is serialized and duplicated into an `Order`.
     This process is made in case of the `Customer's` information and/or the `Product's` information change. If the `Order` has been checked out, it has to be fixed in time, hence the serialization.
 

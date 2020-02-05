@@ -11,7 +11,7 @@ Product
 
 A ``Product`` defines the data related to one entry in the persistence layer. An application can have different types of product. A `Product` is always linked to a ``ProductProvider``.
 
-The link between the ``Product`` and the ``ProductProvider`` is done through the configuration file (see ``app/config/sonata/sonata_product.yml`` under ``sonata_product`` namespace in the sandbox).
+The link between the ``Product`` and the ``ProductProvider`` is done through the configuration file (see ``app/config/sonata/sonata_product.yaml`` under ``sonata_product`` namespace in the sandbox).
 
 A ``ProductProvider`` is responsible of the ``Product`` lifecycle across the application:
 

@@ -5,7 +5,11 @@
 Payment
 =======
 
-At this time, several payment methods are handled in Sonata e-commerce. Whether you'd like to use credit card payment providers such as Scellius or Ogone ; simply Paypal ; or even want the ability to handle check payments, you should find what you need in what's already provided. Otherwise, you may of course add your own payment methods (and feel free to submit them to the community).
+At this time, several payment methods are handled in Sonata e-commerce. Whether you'd like
+to use credit card payment providers such as Scellius or Ogone ; simply Paypal ; or even want
+the ability to handle check payments, you should find what you need in what's already provided.
+Otherwise, you may of course add your own payment methods (and feel free to submit them to the
+community).
 
 You may get more details about the architecture here: :doc:`../../architecture/payment`.
 
@@ -45,9 +49,7 @@ Please keep in mind that we won't process your service configuration. You'll nee
 * ``setOptions``
 * ``addTransformer``
 
-Your service must return a unique, non-null key when the ``getCode`` method is called, or it might be overridden in the payment methods pool. To do that, either set the $this->code parameter in the constructor, or override the ``getCode`` method to return a constant string as follows:
-
-.. code-block:: php
+Your service must return a unique, non-null key when the ``getCode`` method is called, or it might be overridden in the payment methods pool. To do that, either set the $this->code parameter in the constructor, or override the ``getCode`` method to return a constant string as follows::
 
     namespace App\Sonata\PaymentBundle\Method;
 
@@ -224,11 +226,7 @@ Add a custom payment method
 
 In order to add a custom payment methods, here are the steps to follow:
 
-1. Create your own payment method class:
-
-.. code-block:: php
-
-    <?php
+1. Create your own payment method class::
 
     namespace App\Payment;
 
@@ -236,16 +234,10 @@ In order to add a custom payment methods, here are the steps to follow:
 
     // ...
 
-    /**
-     * Class Bitcoin
-     */
     class Bitcoin extends BasePayment
     {
         // ...
 
-        /**
-         * {@inheritdoc}
-         */
         public function getCode()
         {
             return 'bitcoin';
@@ -257,9 +249,9 @@ In order to add a custom payment methods, here are the steps to follow:
 
 .. code-block:: xml
 
-        <service id="app.payment.bitcoin" class="App\Payment\BitcoinPayment">
-            <tag name="sonata.payment.method" />
-        </service>
+    <service id="app.payment.bitcoin" class="App\Payment\BitcoinPayment">
+        <tag name="sonata.payment.method"/>
+    </service>
 
 3. Add it to your configuration:
 
