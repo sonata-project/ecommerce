@@ -17,18 +17,13 @@ Beware, the relation is not explicitly set in database; there is no explicit lin
 Invoice Statuses
 ================
 
-The various statuses for the `Invoice` are as follows:
-
-.. code-block:: php
-
-    <?php
-
-    // ...
+The various statuses for the `Invoice` are as follows::
 
     interface InvoiceInterface
     {
         const STATUS_OPEN     = 0; // created but not paid
         const STATUS_PAID     = 1; // the invoice has been paid
         const STATUS_CONFLICT = 2; // there is a conflict about this invoice
+    }
 
 Feel free to add your own statuses in your implementations; but remember to override the corresponding ``getStatusList`` static method.

@@ -8,24 +8,21 @@ Price
 Architecture
 ============
 
-For more information about our position regarding the *price* architecture, you can read: :doc:`../architecture/currency`.
+For more information about our position regarding the *price* architecture,
+you can read: :doc:`../architecture/currency`.
 
 Presentation
 ============
 
-Price bundle handles everything related to prices, (right now, only currencies, but it will soon be extended to add taxes, ...)
+Price bundle handles everything related to prices, (right now, only currencies,
+but it will soon be extended to add taxes, ...)
 
 Installation
 ============
 
-This central e-commerce bundle requires you add a `bcscale <http://php.net/manual/en/function.bcscale.php>`_ method in your ``AppKernel.php`` file to ensure that prices are correctly computed.
-Please, update your ``AppKernel.php`` file like this:
-
-.. code-block:: php
-
-    <?php
-
-    // ...
+This central e-commerce bundle requires you add a
+`bcscale <http://php.net/manual/en/function.bcscale.php>`_ method in your ``AppKernel.php``
+file to ensure that prices are correctly computed. Please, update your ``AppKernel.php`` file like this::
 
     class AppKernel extends Kernel
     {
@@ -33,8 +30,11 @@ Please, update your ``AppKernel.php`` file like this:
         {
             bcscale(3); // or any other value greater than 0
 
-            ...
+            // ...
+        }
 
+        // ...
+    }
 
 Configuration
 =============

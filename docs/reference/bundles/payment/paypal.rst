@@ -29,9 +29,9 @@ URL: http://youwebsite.com/shop/payment/callback
 
 .. code-block:: bash
 
-    $ cd yoursite/keys
-    $ sudo openssl genrsa -out my-prvkey.pem 1024
-    $ openssl req -new -key my-prvkey.pem -x509 -days 365 -out my-pubcert.pem
+    cd yoursite/keys
+    sudo openssl genrsa -out my-prvkey.pem 1024
+    openssl req -new -key my-prvkey.pem -x509 -days 365 -out my-pubcert.pem
 
 Then:
     - Go to https://www.paypal.com/fr/cgi-bin/webscr?cmd=_profile-website-cert

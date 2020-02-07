@@ -17,8 +17,6 @@ Basket
 
 .. code-block:: php
 
-    <?php
-
     final class BasketEvents
     {
         const PRE_ADD_PRODUCT  = 'sonata.ecommerce.basket.pre_add_product'; // AddBasketElementEvent
@@ -35,8 +33,6 @@ Payment
 -------
 
 .. code-block:: php
-
-    <?php
 
     final class PaymentEvents
     {
@@ -61,8 +57,6 @@ Transformers
 ------------
 
 .. code-block:: php
-
-    <?php
 
     final class TransformerEvents
     {
