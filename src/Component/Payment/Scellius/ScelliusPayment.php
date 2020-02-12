@@ -521,7 +521,8 @@ class ScelliusPayment extends BasePayment
      */
     private function getResponseData(TransactionInterface $transaction)
     {
-        $cmd = sprintf('cd %s && %s pathfile=%s message=%s ',
+        $cmd = sprintf(
+            'cd %s && %s pathfile=%s message=%s ',
             $this->getOption('base_folder'),
             $this->getOption('response_command'),
             $this->getOption('pathfile'),

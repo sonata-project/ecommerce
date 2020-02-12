@@ -55,8 +55,9 @@ class GenerateProductCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         // find a better way to detect the Application folder
-        $bundle_dir = sprintf('%s/src/Sonata/ProductBundle',
-                              $this->kernel->getProjectDir()
+        $bundle_dir = sprintf(
+            '%s/src/Sonata/ProductBundle',
+            $this->kernel->getProjectDir()
         );
 
         if (!is_dir($bundle_dir)) {
@@ -137,7 +138,8 @@ class GenerateProductCommand extends Command
 
         $service = $input->getArgument('service_id');
 
-        $output->write(Mustache::renderString(<<<CONFIG
+        $output->write(Mustache::renderString(
+            <<<CONFIG
 
 <info>1. Add this service definition</info>
 
@@ -176,7 +178,8 @@ You can customize the serialization of your Product by editing /src/Sonata/Produ
 
 
 CONFIG
-            , ['service' => $service, 'product' => $product]
+            ,
+            ['service' => $service, 'product' => $product]
         ));
     }
 }
