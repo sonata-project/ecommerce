@@ -228,7 +228,7 @@ final class CollectionControllerTest extends TestCase
         ?CurrencyDetectorInterface $currencyDetector = null,
         ?CollectionManagerInterface $collectionManagerInterface = null,
         ?ProductSetManager $productSetManager = null
-        ): CollectionController {
+    ): CollectionController {
         if (!$sonataSeoPage) {
             $sonataSeoPage = new SeoPage('Collection page');
         }

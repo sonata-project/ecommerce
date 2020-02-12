@@ -62,7 +62,8 @@ class ProductController extends Controller
         ]);
 
         if ($this->get('kernel')->isDebug()) {
-            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
+            $response->setContent(sprintf(
+                "\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
                 $this->get('sonata.product.pool')->getProductCode($product),
                 $product->getId(),
                 $action,
@@ -87,7 +88,8 @@ class ProductController extends Controller
         ]);
 
         if ($this->get('kernel')->isDebug()) {
-            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
+            $response->setContent(sprintf(
+                "\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
                 $basketElement->getProductCode(),
                 $basketElement->getProductId(),
                 $action,
@@ -159,7 +161,8 @@ class ProductController extends Controller
         ]);
 
         if ($this->get('kernel')->isDebug()) {
-            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
+            $response->setContent(sprintf(
+                "\n<!-- [Sonata] Product code: %s, id: %s, action: %s -->\n%s\n<!-- [Sonata] end product -->\n",
                 $basketElement->getProductCode(),
                 $basketElement->getProductId(),
                 $action,
@@ -194,7 +197,8 @@ class ProductController extends Controller
             ]);
 
         if ($this->get('kernel')->isDebug()) {
-            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
+            $response->setContent(sprintf(
+                "\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
                 $this->get('sonata.product.pool')->getProductCode($product),
                 $product->getId(),
                 $action,
@@ -262,7 +266,8 @@ class ProductController extends Controller
         ]);
 
         if ($this->get('kernel')->isDebug() && !($response instanceof JsonResponse)) {
-            $response->setContent(sprintf("\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
+            $response->setContent(sprintf(
+                "\n<!-- [Sonata] Product code: %s, id: %s, action: %s  -->\n%s\n<!-- [Sonata] end product -->\n",
                 $this->get('sonata.product.pool')->getProductCode($product),
                 $product->getId(),
                 $action,
