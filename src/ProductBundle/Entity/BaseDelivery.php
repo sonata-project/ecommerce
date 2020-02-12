@@ -64,7 +64,8 @@ abstract class BaseDelivery implements DeliveryInterface
      */
     public function __toString()
     {
-        return sprintf('%s-%s%s',
+        return sprintf(
+            '%s-%s%s',
             $this->getCode(),
             $this->getCountryCode(),
             $this->getZone() ? sprintf('%s', $this->getZone()) : ''

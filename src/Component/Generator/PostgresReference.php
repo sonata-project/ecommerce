@@ -35,8 +35,10 @@ final class PostgresReference implements ReferenceInterface
             throw new \RuntimeException('The invoice is not persisted into the database');
         }
 
-        $this->generateReference($invoice,
-            $this->registry->getManager()->getClassMetadata(\get_class($invoice))->table['name']);
+        $this->generateReference(
+            $invoice,
+            $this->registry->getManager()->getClassMetadata(\get_class($invoice))->table['name']
+        );
     }
 
     public function order(OrderInterface $order): void
@@ -45,8 +47,10 @@ final class PostgresReference implements ReferenceInterface
             throw new \RuntimeException('The order is not persisted into the database');
         }
 
-        $this->generateReference($order,
-            $this->registry->getManager()->getClassMetadata(\get_class($order))->table['name']);
+        $this->generateReference(
+            $order,
+            $this->registry->getManager()->getClassMetadata(\get_class($order))->table['name']
+        );
     }
 
     /**
@@ -75,7 +79,8 @@ final class PostgresReference implements ReferenceInterface
             $statement = $this->registry->getConnection()->query($sql);
             $row = $statement->fetch();
 
-            $reference = sprintf('%02d%02d%02d%06d',
+            $reference = sprintf(
+                '%02d%02d%02d%06d',
                 $date->format('y'),
                 $date->format('n'),
                 $date->format('j'),
