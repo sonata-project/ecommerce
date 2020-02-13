@@ -45,11 +45,11 @@ class CollectionController extends Controller
     private $productSetManager;
 
     public function __construct(
-            SeoPage $sonataSeoPage = null,
-            CurrencyDetectorInterface $currencyDetector = null,
-            CollectionManagerInterface $collectionManagerInterface = null,
-            ProductSetManager $productSetManager = null
-            ) {
+        SeoPage $sonataSeoPage = null,
+        CurrencyDetectorInterface $currencyDetector = null,
+        CollectionManagerInterface $collectionManagerInterface = null,
+        ProductSetManager $productSetManager = null
+    ) {
         $this->sonataSeoPage = $sonataSeoPage;
         $this->currencyDetector = $currencyDetector;
         $this->collectionManagerInterface = $collectionManagerInterface;

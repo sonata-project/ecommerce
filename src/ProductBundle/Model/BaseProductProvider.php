@@ -736,7 +736,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         } else {
             $transformer = new QuantityTransformer();
             $formBuilder->add(
-                    $formBuilder->create('quantity', HiddenType::class, ['data' => 1])
+                $formBuilder->create('quantity', HiddenType::class, ['data' => 1])
                                 ->addModelTransformer($transformer)
             );
         }

@@ -33,7 +33,8 @@ class ProductVariationAdmin extends ProductAdmin
             if ('sonata.product.admin.product.variation' === $this->getCode() && !$this->isChild()) { // variation
                 $this->baseRoutePattern = '/sonata/product/variation';
             } elseif ('sonata.product.admin.product.variation' === $this->getCode() && $this->isChild()) { // variation
-                $this->baseRoutePattern = sprintf('%s/{id}/%s',
+                $this->baseRoutePattern = sprintf(
+                    '%s/{id}/%s',
                     $this->getParent()->getBaseRoutePattern(),
                     $this->urlize('variation', '-')
                 );
@@ -56,7 +57,8 @@ class ProductVariationAdmin extends ProductAdmin
             if ('sonata.product.admin.product.variation' === $this->getCode() && !$this->isChild()) { // variation
                 $this->baseRouteName = 'admin_sonata_product_variation';
             } elseif ('sonata.product.admin.product.variation' === $this->getCode() && $this->isChild()) { // variation
-                $this->baseRouteName = sprintf('%s_%s',
+                $this->baseRouteName = sprintf(
+                    '%s_%s',
                     $this->getParent()->getBaseRouteName(),
                     $this->urlize('variation')
                 );
