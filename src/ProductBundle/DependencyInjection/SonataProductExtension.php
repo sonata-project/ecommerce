@@ -220,7 +220,7 @@ class SonataProductExtension extends Extension
              'orphanRemoval' => false,
         ]);
 
-        if ($addCollectionAssociation){
+        if ($addCollectionAssociation) {
             $collector->addAssociation($config['class']['collection'], 'mapOneToMany', [
                 'fieldName' => 'productCollection',
                 'targetEntity' => $config['class']['product_collection'],
