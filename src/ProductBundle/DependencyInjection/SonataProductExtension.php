@@ -193,11 +193,11 @@ class SonataProductExtension extends Extension
 
         /**
          * NEXT_MAJOR: remove this check, the inverse declaration below
-         * and association added to the Collection entity
+         * and association added to the Collection entity.
          */
         $addCollectionAssociation = false;
-        
-        if(\property_exists($config['class']['collection'], 'productCollection')){
+
+        if (property_exists($config['class']['collection'], 'productCollection')) {
             $addCollectionAssociation = true;
         }
 
@@ -220,7 +220,7 @@ class SonataProductExtension extends Extension
              'orphanRemoval' => false,
         ]);
 
-        if($addCollectionAssociation){
+        if ($addCollectionAssociation){
             $collector->addAssociation($config['class']['collection'], 'mapOneToMany', [
                 'fieldName' => 'productCollection',
                 'targetEntity' => $config['class']['product_collection'],
