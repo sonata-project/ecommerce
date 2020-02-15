@@ -192,6 +192,11 @@ class SonataProductExtension extends Extension
         ]);
 
         $addCollectionAssociation = false;
+
+        /**
+         * NEXT_MAJOR: remove this check, the inverse declaration below
+         * and association added to the Collection entity
+         */
         if(\property_exists($config['class']['collection'], 'productCollection')){
             $addCollectionAssociation = true;
         }
