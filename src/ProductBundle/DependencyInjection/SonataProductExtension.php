@@ -191,6 +191,11 @@ class SonataProductExtension extends Extension
              'orphanRemoval' => false,
         ]);
 
+        $addCollectionAssociation = false;
+        if(\property_exists($config['class']['collection'], 'productCollection')){
+            $addCollectionAssociation = true;
+        }
+
         $collector->addAssociation($config['class']['product_collection'], 'mapManyToOne', [
              'fieldName' => 'collection',
              'targetEntity' => $config['class']['collection'],
@@ -198,7 +203,7 @@ class SonataProductExtension extends Extension
                 'persist',
              ],
              'mappedBy' => null,
-             'inversedBy' => 'productCollection',
+             'inversedBy' => ($addCollectionAssociation ? 'productCollection' : null),
              'joinColumns' => [
                  [
                      'name' => 'collection_id',
@@ -210,15 +215,17 @@ class SonataProductExtension extends Extension
              'orphanRemoval' => false,
         ]);
 
-        $collector->addAssociation($config['class']['collection'], 'mapOneToMany', [
-            'fieldName' => 'productCollection',
-            'targetEntity' => $config['class']['product_collection'],
-            'cascade' => [
-                'persist',
-            ],
-            'mappedBy' => 'collection',
-            'orphanRemoval' => false,
-        ]);
+        if($addCollectionAssociation){
+            $collector->addAssociation($config['class']['collection'], 'mapOneToMany', [
+                'fieldName' => 'productCollection',
+                'targetEntity' => $config['class']['product_collection'],
+                'cascade' => [
+                    'persist',
+                ],
+                'mappedBy' => 'collection',
+                'orphanRemoval' => false,
+            ]);
+        }
 
         /*
          * PRODUCT
