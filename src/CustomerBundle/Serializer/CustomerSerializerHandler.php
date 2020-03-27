@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\CustomerBundle\Serializer;
 
-use Sonata\CoreBundle\Serializer\BaseSerializerHandler;
+use Sonata\Component\Serializer\BaseSerializerHandler;
 
 /**
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>

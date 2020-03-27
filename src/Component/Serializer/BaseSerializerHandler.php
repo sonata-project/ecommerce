@@ -11,10 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\PaymentBundle\Form\Type;
+namespace Sonata\Component\Serializer;
 
-use Sonata\Form\Type\BaseStatusType;
-
-class PaymentTransactionStatusType extends BaseStatusType
+abstract class BaseSerializerHandler implements SerializerHandlerInterface
 {
 }

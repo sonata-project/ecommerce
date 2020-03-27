@@ -17,7 +17,7 @@ use Sonata\Twig\Status\StatusClassRendererInterface as BaseStatusClassRendererIn
 
 /**
  * @deprecated
- * @see \Sonata\CoreBundle\Component\Status\StatusClassRendererInterface
+ * @see \Sonata\Twig\Status\StatusClassRendererInterface
  *
  * @author Hugo Briand <briand@ekino.com>
  */

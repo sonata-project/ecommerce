@@ -142,8 +142,6 @@ interface ProductProviderInterface
      * please not you always work with a clone version of the basketElement.
      *
      * If the basket is valid it will then replace the one in session
-     *
-     * @param \Sonata\CoreBundle\Validator\ErrorElement $errorElement
      */
     public function validateFormBasketElement(ErrorElement $errorElement, BasketElementInterface $basketElement, BasketInterface $basket);
 
