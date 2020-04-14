@@ -133,7 +133,7 @@ abstract class BaseProductController extends Controller
      *
      * @return JsonResponse|RedirectResponse
      */
-    public function variationToProductAction(Request $request, ProductInterface $product, ProductInterface $variation = null)
+    public function variationToProductAction(Request $request, ProductInterface $product, ?ProductInterface $variation = null)
     {
         $provider = $this->get('sonata.product.pool')->getProvider($product);
 

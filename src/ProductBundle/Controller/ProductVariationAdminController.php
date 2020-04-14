@@ -35,7 +35,7 @@ class ProductVariationAdminController extends Controller
      *
      * @return Response
      */
-    public function createAction(Request $request = null)
+    public function createAction(?Request $request = null)
     {
         if (!$this->admin->getParent()) {
             throw new \RuntimeException('The admin cannot be call directly, it must be embedded');

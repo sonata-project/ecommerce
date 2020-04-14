@@ -53,7 +53,7 @@ interface BasketInterface
      *
      * @param ServiceDeliveryInterface $method
      */
-    public function setDeliveryMethod(ServiceDeliveryInterface $method = null);
+    public function setDeliveryMethod(?ServiceDeliveryInterface $method = null);
 
     /**
      * @return ServiceDeliveryInterface
@@ -65,7 +65,7 @@ interface BasketInterface
      *
      * @param \Sonata\Component\Customer\AddressInterface $address
      */
-    public function setDeliveryAddress(AddressInterface $address = null);
+    public function setDeliveryAddress(?AddressInterface $address = null);
 
     /**
      * @return \Sonata\Component\Customer\AddressInterface
@@ -77,7 +77,7 @@ interface BasketInterface
      *
      * @param \Sonata\Component\Payment\PaymentInterface $method
      */
-    public function setPaymentMethod(PaymentInterface $method = null);
+    public function setPaymentMethod(?PaymentInterface $method = null);
 
     /**
      * @return \Sonata\Component\Payment\PaymentInterface
@@ -89,7 +89,7 @@ interface BasketInterface
      *
      * @param \Sonata\Component\Customer\AddressInterface $address
      */
-    public function setBillingAddress(AddressInterface $address = null);
+    public function setBillingAddress(?AddressInterface $address = null);
 
     /**
      * @return \Sonata\Component\Customer\AddressInterface
@@ -282,7 +282,7 @@ interface BasketInterface
     /**
      * @param \Sonata\Component\Customer\CustomerInterface $customer
      */
-    public function setCustomer(CustomerInterface $customer = null);
+    public function setCustomer(?CustomerInterface $customer = null);
 
     /**
      * @param \Sonata\Component\Customer\CustomerInterface

@@ -365,7 +365,7 @@ abstract class BaseProduct implements ProductInterface
         return $this->enabled;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -375,7 +375,7 @@ abstract class BaseProduct implements ProductInterface
         return $this->updatedAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -528,7 +528,7 @@ abstract class BaseProduct implements ProductInterface
         return \count($this->variations) > 0;
     }
 
-    public function setImage(MediaInterface $image = null): void
+    public function setImage(?MediaInterface $image = null): void
     {
         $this->image = $image;
     }
@@ -538,7 +538,7 @@ abstract class BaseProduct implements ProductInterface
         return $this->image;
     }
 
-    public function setGallery(GalleryInterface $gallery = null): void
+    public function setGallery(?GalleryInterface $gallery = null): void
     {
         $this->gallery = $gallery;
     }

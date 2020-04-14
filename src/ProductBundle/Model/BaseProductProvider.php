@@ -521,7 +521,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $variation;
     }
 
-    public function synchronizeVariations(ProductInterface $product, ArrayCollection $variations = null): void
+    public function synchronizeVariations(ProductInterface $product, ?ArrayCollection $variations = null): void
     {
         $this->synchronizeVariationsProduct($product, $variations);
         $this->synchronizeVariationsDeliveries($product, $variations);
@@ -530,7 +530,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->synchronizeVariationsCollections($product, $variations);
     }
 
-    public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null): void
+    public function synchronizeVariationsProduct(ProductInterface $product, ?ArrayCollection $variations = null): void
     {
         $variationFields = array_merge(['id', 'parent'], $this->getVariationFields());
 
@@ -555,7 +555,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null): void
+    public function synchronizeVariationsDeliveries(ProductInterface $product, ?ArrayCollection $variations = null): void
     {
         if (\in_array('deliveries', $this->getVariationFields(), true)) {
             return;
@@ -588,7 +588,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null): void
+    public function synchronizeVariationsCategories(ProductInterface $product, ?ArrayCollection $variations = null): void
     {
         if (\in_array('productCategories', $this->getVariationFields(), true)) {
             return;
@@ -620,7 +620,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null): void
+    public function synchronizeVariationsCollections(ProductInterface $product, ?ArrayCollection $variations = null): void
     {
         if (\in_array('productCollections', $this->getVariationFields(), true)) {
             return;
@@ -652,7 +652,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         }
     }
 
-    public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null): void
+    public function synchronizeVariationsPackages(ProductInterface $product, ?ArrayCollection $variations = null): void
     {
         if (\in_array('packages', $this->getVariationFields(), true)) {
             return;
@@ -693,7 +693,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
      *
      * @return object
      */
-    public function createBasketElement(ProductInterface $product = null, array $options = [])
+    public function createBasketElement(?ProductInterface $product = null, array $options = [])
     {
         $basketElement = $this->getBasketElementManager()->create();
         $this->buildBasketElement($basketElement, $product, $options);
@@ -701,7 +701,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         return $basketElement;
     }
 
-    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []): void
+    public function buildBasketElement(BasketElementInterface $basketElement, ?ProductInterface $product = null, array $options = []): void
     {
         if ($product) {
             $basketElement->setProduct($this->code, $product);

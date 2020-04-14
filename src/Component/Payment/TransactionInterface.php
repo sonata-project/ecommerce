@@ -105,7 +105,7 @@ interface TransactionInterface
      */
     public static function getStatusList();
 
-    public function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(?\DateTime $createdAt = null);
 
     /**
      * @return \DateTime

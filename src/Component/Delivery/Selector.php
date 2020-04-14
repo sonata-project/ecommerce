@@ -74,7 +74,7 @@ class Selector implements ServiceDeliverySelectorInterface
         return $this->productPool;
     }
 
-    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null)
+    public function getAvailableMethods(?BasketInterface $basket = null, ?AddressInterface $deliveryAddress = null)
     {
         $instances = [];
 

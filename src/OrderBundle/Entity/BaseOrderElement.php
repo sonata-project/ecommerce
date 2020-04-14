@@ -355,7 +355,7 @@ abstract class BaseOrderElement implements OrderElementInterface
      *
      * @param \DateTime $validatedAt
      */
-    public function setValidatedAt(\DateTime $validatedAt = null): void
+    public function setValidatedAt(?\DateTime $validatedAt = null): void
     {
         $this->validatedAt = $validatedAt;
     }
@@ -408,7 +408,7 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->productType;
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -421,7 +421,7 @@ abstract class BaseOrderElement implements OrderElementInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }

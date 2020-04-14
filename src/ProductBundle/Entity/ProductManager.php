@@ -62,7 +62,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
      *
      * @return QueryBuilder
      */
-    public function getCategoryActiveProductsQueryBuilder(CategoryInterface $category = null, $filter = null, $option = null)
+    public function getCategoryActiveProductsQueryBuilder(?CategoryInterface $category = null, $filter = null, $option = null)
     {
         $queryBuilder = $this->getCategoryProductsQueryBuilder($category);
         $queryBuilder->leftJoin('p.variations', 'pv')
@@ -184,7 +184,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
      *
      * @return QueryBuilder
      */
-    protected function getCategoryProductsQueryBuilder(CategoryInterface $category = null)
+    protected function getCategoryProductsQueryBuilder(?CategoryInterface $category = null)
     {
         $queryBuilder = $this->getRepository()->createQueryBuilder('p')
             ->leftJoin('p.image', 'i')

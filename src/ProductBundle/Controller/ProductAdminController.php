@@ -25,7 +25,7 @@ class ProductAdminController extends Controller
      *
      * @return \Symfony\Bundle\FrameworkBundle\Controller\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request = null)
+    public function createAction(?Request $request = null)
     {
         if (false === $this->admin->isGranted('CREATE')) {
             throw new AccessDeniedException();
@@ -50,7 +50,7 @@ class ProductAdminController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showVariationsAction(Request $request = null)
+    public function showVariationsAction(?Request $request = null)
     {
         $id = $request->get($this->admin->getIdParameter());
 

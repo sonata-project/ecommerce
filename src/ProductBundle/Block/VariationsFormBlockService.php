@@ -54,7 +54,7 @@ class VariationsFormBlockService extends BaseBlockService
         $this->formFactory = $formFactory;
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         $product = $blockContext->getSetting('product');
 
