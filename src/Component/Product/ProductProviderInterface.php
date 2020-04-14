@@ -112,7 +112,7 @@ interface ProductProviderInterface
     /**
      * @return BasketElementInterface
      */
-    public function createBasketElement(ProductInterface $product = null, array $options = []);
+    public function createBasketElement(?ProductInterface $product = null, array $options = []);
 
     public function configureShowFields(ShowMapper $showMapper);
 
@@ -135,7 +135,7 @@ interface ProductProviderInterface
     /**
      * @param \Sonata\Component\Product\ProductInterface|null $product
      */
-    public function buildBasketElement(BasketElementInterface $basketElement, ProductInterface $product = null, array $options = []);
+    public function buildBasketElement(BasketElementInterface $basketElement, ?ProductInterface $product = null, array $options = []);
 
     /**
      * return an array of errors if any, you can also manipulate the basketElement if require
@@ -165,7 +165,7 @@ interface ProductProviderInterface
      * @param ProductInterface $product    Parent Product
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function synchronizeVariations(ProductInterface $product, ArrayCollection $variations = null);
+    public function synchronizeVariations(ProductInterface $product, ?ArrayCollection $variations = null);
 
     /**
      * Synchronizes parent Product data to its variations (or a single one if $targetVariation is specified).
@@ -173,7 +173,7 @@ interface ProductProviderInterface
      * @param ProductInterface $product    Parent Product
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function synchronizeVariationsProduct(ProductInterface $product, ArrayCollection $variations = null);
+    public function synchronizeVariationsProduct(ProductInterface $product, ?ArrayCollection $variations = null);
 
     /**
      * Synchronizes parent Product deliveries to its variations (or a single one if $targetVariation is specified).
@@ -181,7 +181,7 @@ interface ProductProviderInterface
      * @param ProductInterface $product    Parent Product
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function synchronizeVariationsDeliveries(ProductInterface $product, ArrayCollection $variations = null);
+    public function synchronizeVariationsDeliveries(ProductInterface $product, ?ArrayCollection $variations = null);
 
     /**
      * Synchronizes parent Product categories to its variations (or a single one if $targetVariation is specified).
@@ -189,7 +189,7 @@ interface ProductProviderInterface
      * @param ProductInterface $product    Parent Product
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function synchronizeVariationsCategories(ProductInterface $product, ArrayCollection $variations = null);
+    public function synchronizeVariationsCategories(ProductInterface $product, ?ArrayCollection $variations = null);
 
     /**
      * Synchronizes parent Product collections to its variations (or a single one if $targetVariation is specified).
@@ -197,7 +197,7 @@ interface ProductProviderInterface
      * @param ProductInterface $product    Parent Product
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function synchronizeVariationsCollections(ProductInterface $product, ArrayCollection $variations = null);
+    public function synchronizeVariationsCollections(ProductInterface $product, ?ArrayCollection $variations = null);
 
     /**
      * Synchronizes parent Product packages to its variations (or a single one if $targetVariation is specified).
@@ -205,7 +205,7 @@ interface ProductProviderInterface
      * @param ProductInterface $product    Parent Product
      * @param ArrayCollection  $variations Optional target variations to synchronize
      */
-    public function synchronizeVariationsPackages(ProductInterface $product, ArrayCollection $variations = null);
+    public function synchronizeVariationsPackages(ProductInterface $product, ?ArrayCollection $variations = null);
 
     /**
      * Check if the product has variations.

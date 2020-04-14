@@ -63,7 +63,7 @@ class SimilarProductsBlockService extends BaseBlockService
         parent::__construct($name, $templating);
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         if (!$product = $this->getProductRepository()->findOneBy(['id' => $blockContext->getSetting('base_product_id')])) {
             return;

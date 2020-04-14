@@ -33,7 +33,7 @@ class GenerateProductCommand extends Command
      */
     private $kernel;
 
-    public function __construct(KernelInterface $kernel, string $name = null)
+    public function __construct(KernelInterface $kernel, ?string $name = null)
     {
         $this->kernel = $kernel;
         parent::__construct($name);

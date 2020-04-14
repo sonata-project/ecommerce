@@ -117,7 +117,7 @@ interface OrderElementInterface extends PriceComputableInterface
      *
      * @param \Datetime $validatedAt
      */
-    public function setValidatedAt(\DateTime $validatedAt = null);
+    public function setValidatedAt(?\DateTime $validatedAt = null);
 
     /**
      * Get validated_at.
@@ -157,7 +157,7 @@ interface OrderElementInterface extends PriceComputableInterface
      */
     public function getProductType();
 
-    public function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(?\DateTime $createdAt = null);
 
     /**
      * @return \Datetime
@@ -167,7 +167,7 @@ interface OrderElementInterface extends PriceComputableInterface
     /**
      * @param \Datetime
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(?\DateTime $updatedAt = null);
 
     /**
      * @return \Datetime

@@ -371,7 +371,7 @@ abstract class BaseOrder implements OrderInterface
         return $statusList[$this->getDeliveryStatus()];
     }
 
-    public function setValidatedAt(\DateTime $validatedAt = null): void
+    public function setValidatedAt(?\DateTime $validatedAt = null): void
     {
         $this->validatedAt = $validatedAt;
     }
@@ -702,7 +702,7 @@ abstract class BaseOrder implements OrderInterface
         return \in_array($this->getStatus(), [OrderInterface::STATUS_ERROR], true);
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -712,7 +712,7 @@ abstract class BaseOrder implements OrderInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }

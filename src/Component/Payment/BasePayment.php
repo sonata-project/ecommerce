@@ -38,9 +38,6 @@ abstract class BasePayment implements PaymentInterface
      */
     protected $transformers;
 
-    /**
-     * @var \Psr\Log\LoggerInterface;
-     */
     protected $logger;
 
     /**

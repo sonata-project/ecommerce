@@ -74,7 +74,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
         return $this->main;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -84,7 +84,7 @@ abstract class BaseProductCategory implements ProductCategoryInterface
         return $this->updatedAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }

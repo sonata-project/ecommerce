@@ -88,9 +88,6 @@ abstract class BaseAddress implements AddressInterface
      */
     protected $createdAt;
 
-    /**
-     * @var
-     */
     protected $customer;
 
     public function __construct()
@@ -407,7 +404,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param \Datetime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -427,7 +424,7 @@ abstract class BaseAddress implements AddressInterface
      *
      * @param \Datetime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }

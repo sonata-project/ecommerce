@@ -173,7 +173,7 @@ class Basket implements \Serializable, BasketInterface
         return true;
     }
 
-    public function setDeliveryMethod(ServiceDeliveryInterface $method = null): void
+    public function setDeliveryMethod(?ServiceDeliveryInterface $method = null): void
     {
         $this->deliveryMethod = $method;
         $this->deliveryMethodCode = $method ? $method->getCode() : null;
@@ -184,7 +184,7 @@ class Basket implements \Serializable, BasketInterface
         return $this->deliveryMethod;
     }
 
-    public function setDeliveryAddress(AddressInterface $address = null): void
+    public function setDeliveryAddress(?AddressInterface $address = null): void
     {
         $this->deliveryAddress = $address;
         $this->deliveryAddressId = $address ? $address->getId() : null;
@@ -195,7 +195,7 @@ class Basket implements \Serializable, BasketInterface
         return $this->deliveryAddress;
     }
 
-    public function setPaymentMethod(PaymentInterface $method = null): void
+    public function setPaymentMethod(?PaymentInterface $method = null): void
     {
         $this->paymentMethod = $method;
         $this->paymentMethodCode = $method ? $method->getCode() : null;
@@ -206,7 +206,7 @@ class Basket implements \Serializable, BasketInterface
         return $this->paymentMethod;
     }
 
-    public function setBillingAddress(AddressInterface $address = null): void
+    public function setBillingAddress(?AddressInterface $address = null): void
     {
         $this->billingAddress = $address;
         $this->billingAddressId = $address ? $address->getId() : null;
@@ -598,7 +598,7 @@ class Basket implements \Serializable, BasketInterface
         return $this->deliveryMethodCode;
     }
 
-    public function setCustomer(CustomerInterface $customer = null): void
+    public function setCustomer(?CustomerInterface $customer = null): void
     {
         $this->customer = $customer;
         $this->customerId = $customer ? $customer->getId() : null;
