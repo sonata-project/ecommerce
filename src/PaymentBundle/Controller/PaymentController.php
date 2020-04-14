@@ -41,7 +41,7 @@ class PaymentController extends Controller
      */
     private $basket;
 
-    public function __construct(BasketFactoryInterface $basketFactory = null, PaymentHandlerInterface $paymentHandler = null, Basket $basket = null)
+    public function __construct(?BasketFactoryInterface $basketFactory = null, ?PaymentHandlerInterface $paymentHandler = null, ?Basket $basket = null)
     {
         if (!$basketFactory) {
             @trigger_error(sprintf(

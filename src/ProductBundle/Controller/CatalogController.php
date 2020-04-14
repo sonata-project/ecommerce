@@ -88,7 +88,7 @@ class CatalogController extends Controller
      *
      * @return ProductProviderInterface|null
      */
-    protected function getProviderFromCategory(CategoryInterface $category = null)
+    protected function getProviderFromCategory(?CategoryInterface $category = null)
     {
         if (null === $category) {
             return null;

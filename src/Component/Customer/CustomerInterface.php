@@ -20,7 +20,7 @@ interface CustomerInterface
     /**
      * Set createdAt.
      */
-    public function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(?\DateTime $createdAt = null);
 
     /**
      * Get createdAt.
@@ -67,7 +67,7 @@ interface CustomerInterface
     /**
      * Set updatedAt.
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(?\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt.

@@ -72,7 +72,7 @@ class RecentOrdersBlockService extends BaseBlockService
         parent::__construct($name, $templating);
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null): Response
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         if ('admin' !== $blockContext->getSetting('mode')) {
             $orders = $this->orderManager->findForUser(

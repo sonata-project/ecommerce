@@ -26,7 +26,7 @@ interface PaymentSelectorInterface
      *
      * @return array
      */
-    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
+    public function getAvailableMethods(?BasketInterface $basket = null, ?AddressInterface $deliveryAddress = null);
 
     /**
      * Returns the Payment method for given $bank.

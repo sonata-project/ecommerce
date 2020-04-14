@@ -42,7 +42,7 @@ class PaymentEvent extends Event
      * @param TransactionInterface $transaction
      * @param Response             $response
      */
-    public function __construct(OrderInterface $order, TransactionInterface $transaction = null, Response $response = null)
+    public function __construct(OrderInterface $order, ?TransactionInterface $transaction = null, ?Response $response = null)
     {
         $this->order = $order;
         $this->transaction = $transaction;

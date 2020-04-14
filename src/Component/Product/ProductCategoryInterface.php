@@ -50,7 +50,7 @@ interface ProductCategoryInterface
      *
      * @param \DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(?\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt.
@@ -64,7 +64,7 @@ interface ProductCategoryInterface
      *
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(?\DateTime $createdAt = null);
 
     /**
      * Get createdAt.

@@ -23,7 +23,6 @@ use Symfony\Component\Translation\TranslatorInterface;
  *  https://www.paypal.com/IntegrationCenter/ic_button-encryption.html#Createanencryptedbutton
  *   openssl genrsa -out my-prvkey.pem 1024
  *   openssl req -new -key my-prvkey.pem -x509 -days 365 -out my-pubcert.pem
- *  *
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -56,7 +55,7 @@ abstract class BasePaypal extends BasePayment
      */
     protected $webConnectorProvider = null;
 
-    public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
+    public function __construct(RouterInterface $router, ?TranslatorInterface $translator = null)
     {
         $this->router = $router;
         $this->translator = $translator;

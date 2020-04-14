@@ -195,7 +195,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param \DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -215,7 +215,7 @@ abstract class BaseDelivery implements DeliveryInterface
      *
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }

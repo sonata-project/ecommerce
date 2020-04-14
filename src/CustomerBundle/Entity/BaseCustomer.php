@@ -206,7 +206,7 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTime $birthDate = null): void
+    public function setBirthDate(?\DateTime $birthDate = null): void
     {
         $this->birthDate = $birthDate;
     }
@@ -256,7 +256,7 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -266,7 +266,7 @@ abstract class BaseCustomer implements CustomerInterface
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
