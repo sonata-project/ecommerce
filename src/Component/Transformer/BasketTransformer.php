@@ -54,7 +54,7 @@ class BasketTransformer extends BaseTransformer
     /**
      * @param LoggerInterface $logger
      */
-    public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
+    public function __construct(OrderManagerInterface $orderManager, ProductPool $productPool, EventDispatcherInterface $eventDispatcher, ?LoggerInterface $logger = null)
     {
         $this->productPool = $productPool;
         $this->orderManager = $orderManager;

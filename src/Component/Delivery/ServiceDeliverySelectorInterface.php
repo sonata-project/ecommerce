@@ -18,5 +18,5 @@ use Sonata\Component\Customer\AddressInterface;
 
 interface ServiceDeliverySelectorInterface
 {
-    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $deliveryAddress = null);
+    public function getAvailableMethods(?BasketInterface $basket = null, ?AddressInterface $deliveryAddress = null);
 }

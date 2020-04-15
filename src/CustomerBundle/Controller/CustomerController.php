@@ -190,7 +190,7 @@ class CustomerController extends Controller
      *
      * @throws NotFoundHttpException
      */
-    protected function checkAddress(AddressInterface $address = null): void
+    protected function checkAddress(?AddressInterface $address = null): void
     {
         if (null === $address
             || $address->getCustomer()->getId() !== $this->getCustomer()->getId()) {

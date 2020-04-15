@@ -40,7 +40,7 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
     /**
      * @param string $name
      */
-    public function __construct($name, EngineInterface $templating, CustomerManagerInterface $manager, Pool $adminPool = null)
+    public function __construct($name, EngineInterface $templating, CustomerManagerInterface $manager, ?Pool $adminPool = null)
     {
         $this->manager = $manager;
         $this->adminPool = $adminPool;
@@ -48,7 +48,7 @@ class RecentCustomersBlockService extends AbstractAdminBlockService
         parent::__construct($name, $templating);
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         $criteria = [
 //            'mode' => $blockContext->getSetting('mode')

@@ -141,7 +141,7 @@ interface OrderInterface
      *
      * @param \Datetime $validatedAt
      */
-    public function setValidatedAt(\DateTime $validatedAt = null);
+    public function setValidatedAt(?\DateTime $validatedAt = null);
 
     /**
      * Get validated at.
@@ -571,14 +571,14 @@ interface OrderInterface
      */
     public function isError();
 
-    public function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(?\DateTime $createdAt = null);
 
     /**
      * @return \DateTime
      */
     public function getCreatedAt();
 
-    public function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(?\DateTime $updatedAt = null);
 
     /**
      * @return \DateTime

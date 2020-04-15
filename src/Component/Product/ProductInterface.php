@@ -207,7 +207,7 @@ interface ProductInterface extends PriceComputableInterface
      *
      * @param \DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null);
+    public function setUpdatedAt(?\DateTime $updatedAt = null);
 
     /**
      * Get updatedAt.
@@ -221,7 +221,7 @@ interface ProductInterface extends PriceComputableInterface
      *
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt = null);
+    public function setCreatedAt(?\DateTime $createdAt = null);
 
     /**
      * Get createdAt.
@@ -386,7 +386,7 @@ interface ProductInterface extends PriceComputableInterface
      *
      * @param GalleryInterface $gallery
      */
-    public function setGallery(GalleryInterface $gallery = null);
+    public function setGallery(?GalleryInterface $gallery = null);
 
     /**
      * Get Gallery.
@@ -400,7 +400,7 @@ interface ProductInterface extends PriceComputableInterface
      *
      * @param MediaInterface $image
      */
-    public function setImage(MediaInterface $image = null);
+    public function setImage(?MediaInterface $image = null);
 
     /**
      * Gets the product main image.

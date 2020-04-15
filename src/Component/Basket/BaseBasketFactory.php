@@ -109,7 +109,7 @@ abstract class BaseBasketFactory implements BasketFactoryInterface, LogoutHandle
      *
      * @return string
      */
-    protected function getSessionVarName(CustomerInterface $customer = null)
+    protected function getSessionVarName(?CustomerInterface $customer = null)
     {
         if (null === $customer || null === $customer->getId()) {
             return self::SESSION_BASE_NAME.'new';

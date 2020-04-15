@@ -42,7 +42,7 @@ class Selector implements PaymentSelectorInterface
     /**
      * @param LoggerInterface $logger
      */
-    public function __construct(PaymentPool $paymentPool, ProductPool $productPool, LoggerInterface $logger = null)
+    public function __construct(PaymentPool $paymentPool, ProductPool $productPool, ?LoggerInterface $logger = null)
     {
         $this->paymentPool = $paymentPool;
         $this->productPool = $productPool;
@@ -70,7 +70,7 @@ class Selector implements PaymentSelectorInterface
         return $this->productPool;
     }
 
-    public function getAvailableMethods(BasketInterface $basket = null, AddressInterface $billingAddress = null)
+    public function getAvailableMethods(?BasketInterface $basket = null, ?AddressInterface $billingAddress = null)
     {
         if (!$billingAddress) {
             return false;

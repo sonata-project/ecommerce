@@ -59,7 +59,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
         return $this->enabled;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -69,7 +69,7 @@ abstract class BaseProductCollection implements ProductCollectionInterface
         return $this->updatedAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }

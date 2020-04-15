@@ -223,7 +223,7 @@ abstract class BaseInvoice implements InvoiceInterface
      *
      * @param CustomerInterface $customer
      */
-    public function setCustomer(CustomerInterface $customer = null): void
+    public function setCustomer(?CustomerInterface $customer = null): void
     {
         $this->customer = $customer;
     }

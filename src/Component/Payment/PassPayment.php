@@ -36,7 +36,7 @@ class PassPayment extends BasePayment
     /**
      * @param \Buzz\Browser $browser
      */
-    public function __construct(RouterInterface $router, Browser $browser = null)
+    public function __construct(RouterInterface $router, ?Browser $browser = null)
     {
         $this->router = $router;
         $this->browser = $browser;

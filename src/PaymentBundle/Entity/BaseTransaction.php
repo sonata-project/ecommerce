@@ -225,7 +225,7 @@ class BaseTransaction implements TransactionInterface
         return array_keys(self::getStatusList());
     }
 
-    public function setCreatedAt(\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
