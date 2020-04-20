@@ -29,7 +29,7 @@ class CurrencyFormTypeTest extends TestCase
      */
     protected $currencyFormType;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $currencyDataTransformer = $this->createMock(CurrencyDataTransformer::class);
         $this->currencyFormType = new CurrencyFormType($currencyDataTransformer);
