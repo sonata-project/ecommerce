@@ -20,7 +20,7 @@ use Sonata\Component\Currency\CurrencyDoctrineType;
 
 class CurrencyDoctrineTypeTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         if (Type::hasType('currency')) {
             Type::overrideType('currency', CurrencyDoctrineType::class);
