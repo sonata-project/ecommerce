@@ -30,7 +30,7 @@ class BasketElementTest extends TestCase
     /**
      * Sets up unit test.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         bcscale(3);
     }
