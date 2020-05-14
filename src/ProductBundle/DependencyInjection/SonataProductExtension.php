@@ -312,6 +312,7 @@ class SonataProductExtension extends Extension
             'targetEntity' => $config['class']['product'],
             'cascade' => [
                 'persist',
+                'remove',
             ],
             'mappedBy' => null,
             'inversedBy' => 'variations',
@@ -319,7 +320,6 @@ class SonataProductExtension extends Extension
                 [
                     'name' => 'parent_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
                 ],
             ],
             'orphanRemoval' => false,
