@@ -96,9 +96,9 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
                 LEFT JOIN %s p ON pc.product_id = p.id
                 LEFT JOIN %s c ON pc.category_id = c.id
                 LEFT JOIN %s p2 ON p.id = p2.parent_id
-                WHERE p.enabled = :enabled
-                AND (p2.enabled = :enabled OR p2.enabled IS NULL)
-                AND (c.enabled = :enabled OR c.enabled IS NULL)
+                WHERE p.enabled = :productEnabled
+                AND (p2.enabled = :parentEnabled OR p2.enabled IS NULL)
+                AND (c.enabled = :categoryEnabled OR c.enabled IS NULL)
                 AND p.parent_id IS NULL
                 AND pc.category_id = :categoryId
                 LIMIT %d
@@ -107,7 +107,9 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         $sql = sprintf($sql, $metadata->table['name'], $productMetadata->table['name'], $categoryMetadata->table['name'], $productMetadata->table['name'], $limit);
 
         $statement = $this->getConnection()->prepare($sql);
-        $statement->bindValue('enabled', 1);
+        $statement->bindValue('productEnabled', 1);
+        $statement->bindValue('parentEnabled', 1);
+        $statement->bindValue('categoryEnabled', 1);
         $statement->bindValue('categoryId', $category->getId());
 
         $statement->execute();
