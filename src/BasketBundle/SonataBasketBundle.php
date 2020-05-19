@@ -42,18 +42,22 @@ class SonataBasketBundle extends Bundle
 
     /**
      * Register form mapping information.
+     *
+     * NEXT_MAJOR: remove this method
      */
     public function registerFormMapping(): void
     {
-        FormHelper::registerFormTypeMapping([
-            'sonata_basket_basket' => BasketType::class,
-            'sonata_basket_address' => AddressType::class,
-            'sonata_basket_shipping' => ShippingType::class,
-            'sonata_basket_payment' => PaymentType::class,
-            'sonata_basket_api_form_basket' => ApiBasketType::class,
-            'sonata_basket_api_form_basket_element' => ApiBasketElementType::class,
-            'sonata_basket_api_form_basket_parent' => ApiBasketParentType::class,
-            'sonata_basket_api_form_basket_element_parent' => ApiBasketElementParentType::class,
-        ]);
+        if (class_exists(FormHelper::class)) {
+            FormHelper::registerFormTypeMapping([
+                'sonata_basket_basket' => BasketType::class,
+                'sonata_basket_address' => AddressType::class,
+                'sonata_basket_shipping' => ShippingType::class,
+                'sonata_basket_payment' => PaymentType::class,
+                'sonata_basket_api_form_basket' => ApiBasketType::class,
+                'sonata_basket_api_form_basket_element' => ApiBasketElementType::class,
+                'sonata_basket_api_form_basket_parent' => ApiBasketParentType::class,
+                'sonata_basket_api_form_basket_element_parent' => ApiBasketElementParentType::class,
+            ]);
+        }
     }
 }

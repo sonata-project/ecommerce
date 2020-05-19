@@ -36,7 +36,7 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block product %}
-    {% include '@SonataCore/FlashMessage/render.html.twig' %}
+    {% include ['@SonataCore/FlashMessage/render.html.twig', '@SonataTwig/FlashMessage/render.html.twig'] %}
     <!-- Begin product display -->
     <div class="row">
         <div class="col-lg-12">
