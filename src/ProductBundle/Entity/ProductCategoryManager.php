@@ -101,10 +101,9 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
                 AND (c.enabled = :categoryEnabled OR c.enabled IS NULL)
                 AND p.parent_id IS NULL
                 AND pc.category_id = :categoryId
-                LIMIT %d
                 ) AS cnt';
 
-        $sql = sprintf($sql, $metadata->table['name'], $productMetadata->table['name'], $categoryMetadata->table['name'], $productMetadata->table['name'], $limit);
+        $sql = sprintf($sql, $metadata->table['name'], $productMetadata->table['name'], $categoryMetadata->table['name'], $productMetadata->table['name']);
 
         $statement = $this->getConnection()->prepare($sql);
         $statement->bindValue('productEnabled', 1);
@@ -113,9 +112,10 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
         $statement->bindValue('categoryId', $category->getId());
 
         $statement->execute();
-        $res = $statement->fetchAll();
+        $result = $statement->fetchAll();
+        $count = $result[0]['cntId'];
 
-        return $res[0]['cntId'];
+        return $limit > $count ? $count : $limit;
     }
 
     /**
