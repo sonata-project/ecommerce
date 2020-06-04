@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\Component\Event;
 
 use Sonata\Component\Basket\BasketInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

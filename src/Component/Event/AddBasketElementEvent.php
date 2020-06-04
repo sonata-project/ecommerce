@@ -17,7 +17,7 @@ use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductProviderInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
