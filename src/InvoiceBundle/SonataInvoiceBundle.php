@@ -32,11 +32,15 @@ class SonataInvoiceBundle extends Bundle
 
     /**
      * Register form mapping information.
+     *
+     * NEXT_MAJOR: remove this method
      */
     public function registerFormMapping(): void
     {
-        FormHelper::registerFormTypeMapping([
-            'sonata_invoice_status' => InvoiceStatusType::class,
-        ]);
+        if (class_exists(FormHelper::class)) {
+            FormHelper::registerFormTypeMapping([
+                'sonata_invoice_status' => InvoiceStatusType::class,
+            ]);
+        }
     }
 }

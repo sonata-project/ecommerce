@@ -37,14 +37,18 @@ class SonataCustomerBundle extends Bundle
 
     /**
      * Register form mapping information.
+     *
+     * NEXT_MAJOR: remove this method
      */
     public function registerFormMapping(): void
     {
-        FormHelper::registerFormTypeMapping([
-            'sonata_customer_address' => AddressType::class,
-            'sonata_customer_address_types' => AddressTypeType::class,
-            'sonata_customer_api_form_customer' => ApiCustomerType::class,
-            'sonata_customer_api_form_address' => ApiAddressType::class,
-        ]);
+        if (class_exists(FormHelper::class)) {
+            FormHelper::registerFormTypeMapping([
+                'sonata_customer_address' => AddressType::class,
+                'sonata_customer_address_types' => AddressTypeType::class,
+                'sonata_customer_api_form_customer' => ApiCustomerType::class,
+                'sonata_customer_api_form_address' => ApiAddressType::class,
+            ]);
+        }
     }
 }

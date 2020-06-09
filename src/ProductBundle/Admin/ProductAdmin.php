@@ -24,8 +24,8 @@ use Sonata\Component\Currency\CurrencyDetectorInterface;
 use Sonata\Component\Currency\CurrencyFormType;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\CoreBundle\Form\Type\BooleanType;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Type\BooleanType;
+use Sonata\Form\Validator\ErrorElement;
 
 class ProductAdmin extends AbstractAdmin
 {

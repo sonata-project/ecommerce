@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BasketBundle\Form;
 
-use Sonata\CoreBundle\Form\Type\BaseDoctrineORMSerializationType;
+use Sonata\Form\Type\BaseDoctrineORMSerializationType;
 
 class ApiBasketParentType extends BaseDoctrineORMSerializationType
 {

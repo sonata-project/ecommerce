@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 
 {% block sonata_flash_messages %}
-    {% include '@SonataCore/FlashMessage/render.html.twig' %}
+    {% include ['@SonataCore/FlashMessage/render.html.twig', '@SonataTwig/FlashMessage/render.html.twig'] %}
 {% endblock %}
 
 {% sonata_template_box 'This is the basket page template. Feel free to override it.' %}
