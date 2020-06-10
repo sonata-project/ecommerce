@@ -15,7 +15,7 @@ namespace Sonata\Component\Form;
 
 use Sonata\Component\Basket\BasketInterface;
 use Sonata\Component\Product\Pool as ProductPool;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ContainerConstraintValidatorFactory;

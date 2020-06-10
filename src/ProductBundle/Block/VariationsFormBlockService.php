@@ -20,7 +20,7 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Form\Type\VariationChoiceType;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductInterface;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;

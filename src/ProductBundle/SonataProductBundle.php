@@ -39,15 +39,19 @@ class SonataProductBundle extends Bundle
 
     /**
      * Register form mapping information.
+     *
+     * NEXT_MAJOR: remove this method
      */
     public function registerFormMapping(): void
     {
-        FormHelper::registerFormTypeMapping([
-            'sonata_product_delivery_status' => ProductDeliveryStatusType::class,
-            'sonata_product_variation_choices' => VariationChoiceType::class,
-            'sonata_product_api_form_product_parent' => ApiProductParentType::class,
-            'sonata_product_api_form_product' => ApiProductType::class,
-            'sonata_currency' => CurrencyFormType::class,
-        ]);
+        if (class_exists(FormHelper::class)) {
+            FormHelper::registerFormTypeMapping([
+                'sonata_product_delivery_status' => ProductDeliveryStatusType::class,
+                'sonata_product_variation_choices' => VariationChoiceType::class,
+                'sonata_product_api_form_product_parent' => ApiProductParentType::class,
+                'sonata_product_api_form_product' => ApiProductType::class,
+                'sonata_currency' => CurrencyFormType::class,
+            ]);
+        }
     }
 }

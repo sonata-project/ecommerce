@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Tests\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;
 use Sonata\Component\Basket\BasketElementInterface;
@@ -583,7 +583,7 @@ class BaseProductProviderTest extends TestCase
      */
     private function createNewProductProvider()
     {
-        $serializer = $this->createMock(Serializer::class);
+        $serializer = $this->createMock(SerializerInterface::class);
 
         $provider = new ProductProviderTest($serializer);
 
