@@ -15,8 +15,8 @@ namespace Sonata\Component\Event;
 
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

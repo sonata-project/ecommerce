@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\CustomerBundle\Menu;
 
 use Knp\Menu\ItemInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

@@ -27,12 +27,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('sonata_order');
-        // Keep compatibility with symfony/config < 4.2
-        if (!method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->root('sonata_order');
-        } else {
-            $node = $treeBuilder->getRootNode();
-        }
+        $node = $treeBuilder->getRootNode();
 
         $this->addModelSection($node);
 
