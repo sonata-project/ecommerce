@@ -60,7 +60,8 @@
     },
     "conflict": {
         "friendsofsymfony/rest-bundle": "<2.2 || >=3.0",
-        "jms/serializer": "<0.13"
+        "jms/serializer": "<0.13",
+        "sonata-project/core-bundle": "<3.20"
     },
     "require-dev": {
         "friendsofsymfony/rest-bundle": "^2.2",
