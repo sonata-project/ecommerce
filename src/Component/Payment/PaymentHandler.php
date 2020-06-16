@@ -21,8 +21,8 @@ use Sonata\Component\Generator\ReferenceInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\NotificationBundle\Backend\BackendInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Responsible for interactions between PaymentController & Model.
@@ -78,7 +78,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $order = $this->getValidOrder($transaction);
 
         $event = new PaymentEvent($order, $transaction);
-        $this->getEventDispatcher()->dispatch(PaymentEvents::PRE_ERROR, $event);
+        $this->getEventDispatcher()->dispatch($event, PaymentEvents::PRE_ERROR);
 
         if ($order->isCancellable()) {
             $order->setStatus(OrderInterface::STATUS_STOPPED);
@@ -95,7 +95,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $this->getPayment($transaction->getPaymentCode())->getTransformer('order')->transformIntoBasket($order, $basket);
 
         $event = new PaymentEvent($order, $transaction);
-        $this->getEventDispatcher()->dispatch(PaymentEvents::POST_ERROR, $event);
+        $this->getEventDispatcher()->dispatch($event, PaymentEvents::POST_ERROR);
 
         $this->notificationBackend->createAndPublish('sonata_payment_order_process', [
             'order_id' => $order->getId(),
@@ -111,7 +111,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $order = $this->getValidOrder($transaction);
 
         $event = new PaymentEvent($order, $transaction);
-        $this->getEventDispatcher()->dispatch(PaymentEvents::CONFIRMATION, $event);
+        $this->getEventDispatcher()->dispatch($event, PaymentEvents::CONFIRMATION);
 
         return $order;
     }
@@ -121,7 +121,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $order = $basket->getPaymentMethod()->getTransformer('basket')->transformIntoOrder($basket);
 
         $event = new PaymentEvent($order);
-        $this->getEventDispatcher()->dispatch(PaymentEvents::PRE_SENDBANK, $event);
+        $this->getEventDispatcher()->dispatch($event, PaymentEvents::PRE_SENDBANK);
 
         // save the order
         $this->orderManager->save($order);
@@ -130,7 +130,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $this->referenceGenerator->order($order);
 
         $event = new PaymentEvent($order);
-        $this->getEventDispatcher()->dispatch(PaymentEvents::POST_SENDBANK, $event);
+        $this->getEventDispatcher()->dispatch($event, PaymentEvents::POST_SENDBANK);
 
         return $order;
     }
@@ -142,7 +142,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $order = $this->getValidOrder($transaction);
 
         $event = new PaymentEvent($order, $transaction);
-        $this->getEventDispatcher()->dispatch(PaymentEvents::PRE_CALLBACK, $event);
+        $this->getEventDispatcher()->dispatch($event, PaymentEvents::PRE_CALLBACK);
 
         // start the payment callback
         $response = $this->getPayment($transaction->getPaymentCode())->callback($transaction);
@@ -151,7 +151,7 @@ class PaymentHandler implements PaymentHandlerInterface
         $this->orderManager->save($order);
 
         $event = new PaymentEvent($order, $transaction, $response);
-        $this->getEventDispatcher()->dispatch(PaymentEvents::POST_CALLBACK, $event);
+        $this->getEventDispatcher()->dispatch($event, PaymentEvents::POST_CALLBACK);
 
         $this->notificationBackend->createAndPublish('sonata_payment_order_process', [
             'order_id' => $order->getId(),

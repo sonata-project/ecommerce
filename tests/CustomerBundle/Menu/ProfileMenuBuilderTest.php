@@ -17,8 +17,8 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\CustomerBundle\Menu\ProfileMenuBuilder;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>

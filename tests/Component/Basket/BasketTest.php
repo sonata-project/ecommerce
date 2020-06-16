@@ -30,7 +30,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Component\Tests\Product\Product;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class BasketTest extends TestCase
 {

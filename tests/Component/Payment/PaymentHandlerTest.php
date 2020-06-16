@@ -29,9 +29,9 @@ use Sonata\Component\Transformer\OrderTransformer;
 use Sonata\NotificationBundle\Backend\BackendInterface;
 use Sonata\NotificationBundle\Backend\RuntimeBackend;
 use Sonata\PaymentBundle\Tests\Entity\Transaction;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
