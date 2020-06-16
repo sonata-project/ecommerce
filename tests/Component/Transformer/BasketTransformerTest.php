@@ -26,7 +26,7 @@ use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Product\Pool;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\OrderBundle\Entity\BaseOrder;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class BasketTransformerTest_Order extends BaseOrder
 {

@@ -22,7 +22,7 @@ use Sonata\Component\Invoice\InvoiceElementManagerInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -40,7 +40,7 @@ class InvoiceTransformer extends BaseTransformer
     protected $deliveryPool;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
@@ -61,7 +61,7 @@ class InvoiceTransformer extends BaseTransformer
     public function transformFromOrder(OrderInterface $order, InvoiceInterface $invoice): void
     {
         $event = new OrderTransformEvent($order);
-        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_TO_INVOICE_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch($event, TransformerEvents::PRE_ORDER_TO_INVOICE_TRANSFORM);
 
         $invoice->setName($order->getBillingName());
         $invoice->setAddress1($order->getBillingAddress1());
@@ -99,7 +99,7 @@ class InvoiceTransformer extends BaseTransformer
         $invoice->setStatus(InvoiceInterface::STATUS_OPEN);
 
         $event = new InvoiceTransformEvent($invoice);
-        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_TO_INVOICE_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch($event, TransformerEvents::POST_ORDER_TO_INVOICE_TRANSFORM);
     }
 
     /**

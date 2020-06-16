@@ -26,7 +26,7 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Form\Validator\ErrorElement;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ProductProviderTest extends BaseProductProvider
 {

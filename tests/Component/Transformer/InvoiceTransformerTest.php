@@ -23,7 +23,7 @@ use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Transformer\InvoiceTransformer;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class InvoiceTransformerTest extends TestCase
 {

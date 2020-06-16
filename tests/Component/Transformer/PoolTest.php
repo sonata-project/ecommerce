@@ -19,7 +19,7 @@ use Sonata\Component\Product\Pool;
 use Sonata\Component\Transformer\BasketTransformer;
 use Sonata\Component\Transformer\OrderTransformer;
 use Sonata\Component\Transformer\Pool as TransformerPool;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class PoolTest extends TestCase
 {

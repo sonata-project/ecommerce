@@ -39,7 +39,6 @@ use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\Component\Product\ProductProviderInterface;
 use Sonata\Form\Validator\ErrorElement;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -47,6 +46,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 abstract class BaseProductProvider implements ProductProviderInterface
 {
@@ -111,7 +111,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @return \Symfony\Contracts\EventDispatcher\EventDispatcherInterface
      */
     public function getEventDispatcher()
     {
@@ -807,7 +807,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function basketAddProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $basketElement)
     {
         $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_ADD_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch($event, BasketEvents::PRE_ADD_PRODUCT);
 
         if ($basket->hasProduct($product)) {
             return false;
@@ -830,7 +830,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $basket->addBasketElement($basketElement);
 
         $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::POST_ADD_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch($event, BasketEvents::POST_ADD_PRODUCT);
 
         return $event->getBasketElement();
     }
@@ -845,7 +845,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function basketMergeProduct(BasketInterface $basket, ProductInterface $product, BasketElementInterface $newBasketElement)
     {
         $event = new AddBasketElementEvent($basket, $newBasketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_MERGE_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch($event, BasketEvents::PRE_MERGE_PRODUCT);
 
         if (!$basket->hasProduct($product)) {
             return false;
@@ -861,7 +861,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $this->updateComputationPricesFields($basket, $basketElement, $product);
 
         $event = new AddBasketElementEvent($basket, $basketElement, $product, $this);
-        $this->getEventDispatcher()->dispatch(BasketEvents::POST_MERGE_PRODUCT, $event);
+        $this->getEventDispatcher()->dispatch($event, BasketEvents::POST_MERGE_PRODUCT);
 
         return $event->getBasketElement();
     }
@@ -894,7 +894,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
     public function calculatePrice(ProductInterface $product, CurrencyInterface $currency, $vat = false, $quantity = 1)
     {
         $event = new BeforeCalculatePriceEvent($product, $currency, $vat, $quantity);
-        $this->getEventDispatcher()->dispatch(BasketEvents::PRE_CALCULATE_PRICE, $event);
+        $this->getEventDispatcher()->dispatch($event, BasketEvents::PRE_CALCULATE_PRICE);
 
         $vat = $event->getVat();
         $quantity = $event->getQuantity();
@@ -906,7 +906,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
         $price = (float) (bcmul((string) $this->currencyPriceCalculator->getPrice($product, $currency, $vat), (string) $quantity));
 
         $afterEvent = new AfterCalculatePriceEvent($product, $currency, $vat, $quantity, $price);
-        $this->getEventDispatcher()->dispatch(BasketEvents::POST_CALCULATE_PRICE, $afterEvent);
+        $this->getEventDispatcher()->dispatch($afterEvent, BasketEvents::POST_CALCULATE_PRICE);
 
         return $afterEvent->getPrice();
     }

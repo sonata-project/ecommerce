@@ -20,7 +20,7 @@ use Sonata\Component\Event\TransformerEvents;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Product\Pool as ProductPool;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class OrderTransformer extends BaseTransformer
 {
@@ -51,7 +51,7 @@ class OrderTransformer extends BaseTransformer
     public function transformIntoBasket(OrderInterface $order, BasketInterface $basket)
     {
         $event = new OrderTransformEvent($order);
-        $this->eventDispatcher->dispatch(TransformerEvents::PRE_ORDER_TO_BASKET_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch($event, TransformerEvents::PRE_ORDER_TO_BASKET_TRANSFORM);
 
         // we reset the current basket
         $basket->reset(true);
@@ -84,7 +84,7 @@ class OrderTransformer extends BaseTransformer
         $basket->buildPrices();
 
         $event = new BasketTransformEvent($basket);
-        $this->eventDispatcher->dispatch(TransformerEvents::POST_ORDER_TO_BASKET_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch($event, TransformerEvents::POST_ORDER_TO_BASKET_TRANSFORM);
 
         return $basket;
     }

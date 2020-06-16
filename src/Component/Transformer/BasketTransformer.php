@@ -27,7 +27,7 @@ use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\Component\Payment\PaymentInterface;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\Pool as ProductPool;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class BasketTransformer extends BaseTransformer
 {
@@ -47,7 +47,7 @@ class BasketTransformer extends BaseTransformer
     protected $productPool;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
@@ -74,7 +74,7 @@ class BasketTransformer extends BaseTransformer
     public function transformIntoOrder(BasketInterface $basket)
     {
         $event = new BasketTransformEvent($basket);
-        $this->eventDispatcher->dispatch(TransformerEvents::PRE_BASKET_TO_ORDER_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch($event, TransformerEvents::PRE_BASKET_TO_ORDER_TRANSFORM);
 
         // Customer
         $customer = $basket->getCustomer();
@@ -181,7 +181,7 @@ class BasketTransformer extends BaseTransformer
         }
 
         $event = new OrderTransformEvent($order);
-        $this->eventDispatcher->dispatch(TransformerEvents::POST_BASKET_TO_ORDER_TRANSFORM, $event);
+        $this->eventDispatcher->dispatch($event, TransformerEvents::POST_BASKET_TO_ORDER_TRANSFORM);
 
         return $order;
     }
