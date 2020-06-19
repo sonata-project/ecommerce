@@ -20,8 +20,8 @@ use PHPUnit\Framework\TestCase;
 use Sonata\CustomerBundle\Block\ProfileMenuBlockService;
 use Sonata\CustomerBundle\Menu\ProfileMenuBuilder;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Wojciech Błoszyk <wbloszyk@gmail.com>

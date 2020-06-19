@@ -15,8 +15,8 @@ namespace Sonata\CustomerBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Hugo Briand <briand@ekino.com>
@@ -79,6 +79,6 @@ final class ProfileMenuBuilder
         }
 
         $event = new ProfileMenuEvent($menu);
-        $this->eventDispatcher->dispatch('sonata.customer.profile.configure_menu', $event);
+        $this->eventDispatcher->dispatch($event, 'sonata.customer.profile.configure_menu');
     }
 }

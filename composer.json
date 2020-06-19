@@ -41,6 +41,7 @@
         "symfony/dependency-injection": "^4.3",
         "symfony/doctrine-bridge": "^4.3",
         "symfony/event-dispatcher": "^4.3",
+        "symfony/event-dispatcher-contracts": "^1.1 || ^2.0",
         "symfony/filesystem": "^4.3",
         "symfony/form": "^4.3",
         "symfony/framework-bundle": "^4.3",
