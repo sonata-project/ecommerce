@@ -2,6 +2,29 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.0](https://github.com/sonata-project/ecommerce/compare/3.2.3...3.3.0) - 2020-06-23
+### Added
+- [[#678](https://github.com/sonata-project/ecommerce/pull/678)] Added
+  `twig/string-extra` dependency. ([@wbloszyk](https://github.com/wbloszyk))
+
+### Changed
+- [[#678](https://github.com/sonata-project/ecommerce/pull/678)] Changed use of
+  `truncate` filter with `u` filter. ([@wbloszyk](https://github.com/wbloszyk))
+
+### Fixed
+- [[#674](https://github.com/sonata-project/ecommerce/pull/674)] Deprecations
+  for event dispatching ([@wbloszyk](https://github.com/wbloszyk))
+- [[#676](https://github.com/sonata-project/ecommerce/pull/676)] Deprecations
+  for event dispatching ([@wbloszyk](https://github.com/wbloszyk))
+- [[#670](https://github.com/sonata-project/ecommerce/pull/670)] Fixed sql to
+  work with mssql ([@wbloszyk](https://github.com/wbloszyk))
+
+### Removed
+- [[#674](https://github.com/sonata-project/ecommerce/pull/674)] Remove support
+  for Symfony <4.3 and php <7.2 ([@wbloszyk](https://github.com/wbloszyk))
+- [[#672](https://github.com/sonata-project/ecommerce/pull/672)] Remove
+  SonataCoreBundle dependencies ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.2.3](https://github.com/sonata-project/ecommerce/compare/3.2.2...3.2.3) - 2020-02-27
 ### Fixed
 - Only add association mapping from ProductCollection to Collection when property exists
