@@ -16,8 +16,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   for event dispatching ([@wbloszyk](https://github.com/wbloszyk))
 - [[#676](https://github.com/sonata-project/ecommerce/pull/676)] Deprecations
   for event dispatching ([@wbloszyk](https://github.com/wbloszyk))
-- [[#670](https://github.com/sonata-project/ecommerce/pull/670)] Fixed sql to
-  work with mssql ([@wbloszyk](https://github.com/wbloszyk))
 
 ### Removed
 - [[#674](https://github.com/sonata-project/ecommerce/pull/674)] Remove support
