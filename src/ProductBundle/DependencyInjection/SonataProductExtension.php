@@ -17,10 +17,8 @@ use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Twig\Extra\String\StringExtension;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -56,8 +54,6 @@ class SonataProductExtension extends Extension
         $pool = $container->getDefinition('sonata.product.pool');
         // this value is altered by the AddProductProviderCompilerPass class
         $pool->addMethodCall('__hack', $config['products']);
-
-        $this->configureStringExtension($container);
 
         $this->registerParameters($container, $config);
         $this->registerDoctrineMapping($config);
@@ -350,16 +346,6 @@ class SonataProductExtension extends Extension
 
         foreach ($productSeo as $key => $value) {
             $container->setParameter(sprintf('sonata.product.seo.product.%s', $key), $value);
-        }
-    }
-
-    private function configureStringExtension(ContainerBuilder $container): void
-    {
-        if (!$container->hasDefinition('twig.extension.string') || !is_a($container->getDefinition('twig.extension.string')->getClass(), StringExtension::class)) {
-            $definition = new Definition(StringExtension::class);
-            $definition->addTag('twig.extension');
-
-            $container->setDefinition(StringExtension::class, $definition);
         }
     }
 }

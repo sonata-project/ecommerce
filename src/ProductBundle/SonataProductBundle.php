@@ -17,6 +17,7 @@ use Sonata\Component\Currency\CurrencyFormType;
 use Sonata\Component\Form\Type\VariationChoiceType;
 use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\ProductBundle\DependencyInjection\Compiler\AddProductProviderCompilerPass;
+use Sonata\ProductBundle\DependencyInjection\Compiler\TwigStringExtensionCompilerPass;
 use Sonata\ProductBundle\Form\Type\ApiProductParentType;
 use Sonata\ProductBundle\Form\Type\ApiProductType;
 use Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType;
@@ -28,6 +29,7 @@ class SonataProductBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new AddProductProviderCompilerPass());
+        $container->addCompilerPass(new TwigStringExtensionCompilerPass());
 
         $this->registerFormMapping();
     }
