@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\BasketBundle\Tests\Resources;
 
-use Sonata\CoreBundle\Test\XliffValidatorTestCase;
+use Sonata\Component\Tests\Test\XliffValidatorTestCase;
 
 class XliffTest extends XliffValidatorTestCase
 {
