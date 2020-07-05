@@ -21,6 +21,7 @@ use Sonata\ProductBundle\DependencyInjection\Compiler\TwigStringExtensionCompile
 use Sonata\ProductBundle\Form\Type\ApiProductParentType;
 use Sonata\ProductBundle\Form\Type\ApiProductType;
 use Sonata\ProductBundle\Form\Type\ProductDeliveryStatusType;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -29,7 +30,7 @@ class SonataProductBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new AddProductProviderCompilerPass());
-        $container->addCompilerPass(new TwigStringExtensionCompilerPass());
+        $container->addCompilerPass(new TwigStringExtensionCompilerPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1);
 
         $this->registerFormMapping();
     }
