@@ -4,5 +4,6 @@
         <service id="sonata.invoice.controller.api.invoice" class="Sonata\InvoiceBundle\Controller\Api\InvoiceController">
             <argument type="service" id="sonata.invoice.manager"/>
         </service>
+        <service id="Sonata\InvoiceBundle\Controller\Api\InvoiceController" alias="sonata.invoice.controller.api.invoice" public="true"/>
     </services>
 </container>

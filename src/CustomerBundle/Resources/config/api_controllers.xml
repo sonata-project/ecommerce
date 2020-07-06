@@ -5,11 +5,13 @@
             <argument type="service" id="sonata.address.manager"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="Sonata\CustomerBundle\Controller\Api\AddressController" alias="sonata.customer.controller.api.address" public="true"/>
         <service id="sonata.customer.controller.api.customer" class="Sonata\CustomerBundle\Controller\Api\CustomerController">
             <argument type="service" id="sonata.customer.manager"/>
             <argument type="service" id="sonata.order.manager"/>
             <argument type="service" id="sonata.address.manager"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="Sonata\CustomerBundle\Controller\Api\CustomerController" alias="sonata.customer.controller.api.customer" public="true"/>
     </services>
 </container>
