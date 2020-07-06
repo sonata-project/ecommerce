@@ -8,5 +8,6 @@
             <argument type="service" id="sonata.basket.builder.standard"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="Sonata\BasketBundle\Controller\Api\BasketController" alias="sonata.basket.controller.api.basket" public="true"/>
     </services>
 </container>
