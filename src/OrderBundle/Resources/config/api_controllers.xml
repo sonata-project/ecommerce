@@ -4,5 +4,6 @@
         <service id="sonata.order.controller.api.order" class="Sonata\OrderBundle\Controller\Api\OrderController">
             <argument type="service" id="sonata.order.manager"/>
         </service>
+        <service id="Sonata\OrderBundle\Controller\Api\OrderController" alias="sonata.order.controller.api.order" public="true"/>
     </services>
 </container>

@@ -7,5 +7,6 @@
             <argument type="service" id="form.factory"/>
             <argument type="service" id="sonata.formatter.pool"/>
         </service>
+        <service id="Sonata\ProductBundle\Controller\Api\ProductController" alias="sonata.product.controller.api.product" public="true"/>
     </services>
 </container>
