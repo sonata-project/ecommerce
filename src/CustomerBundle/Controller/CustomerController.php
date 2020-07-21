@@ -113,7 +113,8 @@ class CustomerController extends Controller
 
         $this->getAddressManager()->delete($address);
 
-        $this->get('session')->getFlashBag()->add('sonata_customer_success', 'customer_address_delete');
+        $message = $this->get('translator')->trans('customer_address_delete', [], 'SonataCustomerBundle');
+        $this->get('session')->getFlashBag()->add('sonata_customer_success', $message);
 
         return new RedirectResponse($this->generateUrl('sonata_customer_addresses'));
     }
@@ -170,7 +171,8 @@ class CustomerController extends Controller
 
             $this->getCustomerManager()->save($customer);
 
-            $this->get('session')->getFlashBag()->add('sonata_customer_success', $id ? 'address_edit_success' : 'address_add_success');
+            $message = $this->get('translator')->trans($id ? 'address_edit_success' : 'address_add_success', [], 'SonataCustomerBundle');
+            $this->get('session')->getFlashBag()->add('sonata_customer_success', $message);
 
             $url = $this->get('session')->get('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
 
