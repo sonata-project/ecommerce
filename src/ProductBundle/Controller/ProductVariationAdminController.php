@@ -74,7 +74,8 @@ class ProductVariationAdminController extends Controller
 
                     $manager->persist($variation);
                 } catch (\Exception $e) {
-                    $this->addFlash('sonata_flash_error', 'flash_create_variation_error');
+                    $message = $this->getTranslator()->trans('flash_create_variation_error', [], 'SonataProductBundle');
+                    $this->addFlash('sonata_flash_error', $message);
 
                     return new RedirectResponse($this->admin->generateUrl('create'));
                 }
@@ -82,7 +83,8 @@ class ProductVariationAdminController extends Controller
 
             $manager->flush();
 
-            $this->addFlash('sonata_flash_success', $this->getTranslator()->trans('flash_create_variation_success', [], 'SonataProductBundle'));
+            $message = $this->getTranslator()->trans('flash_create_variation_success', [], 'SonataProductBundle');
+            $this->addFlash('sonata_flash_success', $message);
 
             return new RedirectResponse($this->admin->generateUrl('list'));
         }
