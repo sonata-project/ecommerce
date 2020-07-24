@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing https://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="get_baskets" path="/baskets.{_format}" methods="GET" controller="Sonata\BasketBundle\Controller\Api\BasketController::getBasketsAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_basket" path="/baskets/{id}.{_format}" methods="GET" controller="Sonata\BasketBundle\Controller\Api\BasketController::getBasketAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_basket_basketelements" path="/baskets/{id}/basketelements.{_format}" methods="GET" controller="Sonata\BasketBundle\Controller\Api\BasketController::postBasketAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="put_basket" path="/baskets/{id}.{_format}" methods="PUT" controller="Sonata\BasketBundle\Controller\Api\BasketController::putBasketAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="delete_basket" path="/baskets/{id}.{_format}" methods="DELETE" controller="Sonata\BasketBundle\Controller\Api\BasketController::deleteBasketAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="post_basket_basketelements" path="/baskets/{id}/basketelements.{_format}" methods="POST" controller="Sonata\BasketBundle\Controller\Api\BasketController::postBasketBasketelementsAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="put_basket_basketelements" path="/baskets/{basketId}/basketelements/{elementId}.{_format}" methods="PUT" controller="Sonata\BasketBundle\Controller\Api\BasketController::putBasketBasketelementsAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="delete_basket_basketelements" path="/baskets/{basketId}/basketelements/{elementId}.{_format}" methods="DELETE" controller="Sonata\BasketBundle\Controller\Api\BasketController::deleteBasketBasketelementsAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+</routes>

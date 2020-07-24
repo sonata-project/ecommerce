@@ -63,12 +63,12 @@
         "twig/twig": "^2.12.1"
     },
     "conflict": {
-        "friendsofsymfony/rest-bundle": "<2.2 || >=3.0",
+        "friendsofsymfony/rest-bundle": "<2.2",
         "jms/serializer": "<0.13",
         "sonata-project/core-bundle": "<3.20"
     },
     "require-dev": {
-        "friendsofsymfony/rest-bundle": "^2.2",
+        "friendsofsymfony/rest-bundle": "^2.2 || ^3.0",
         "jms/serializer-bundle": "^2.0 || ^3.0",
         "matthiasnoback/symfony-config-test": "^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",

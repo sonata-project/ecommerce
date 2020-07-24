@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\InvoiceBundle\Controller\Api;
 
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class InvoiceController
 {
     /**
-     * @var \Sonata\Component\Invoice\InvoiceManagerInterface
+     * @var InvoiceManagerInterface
      */
     protected $invoiceManager;
 
@@ -44,14 +44,14 @@ class InvoiceController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for invoices list pagination")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of invoices by page")
-     * @QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
-     * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for invoices list pagination")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of invoices by page")
+     * @Rest\QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
+     * @Rest\QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on invoice statuses")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @return \Sonata\DatagridBundle\Pager\PagerInterface
+     * @return PagerInterface
      */
     public function getInvoicesAction(ParamFetcherInterface $paramFetcher)
     {
@@ -84,7 +84,7 @@ class InvoiceController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="invoice id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Invoice identifier"}
      *  },
      *  output={"class"="Sonata\Component\Invoice\InvoiceInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -93,7 +93,7 @@ class InvoiceController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -109,7 +109,7 @@ class InvoiceController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="invoice id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Invoice identifier"}
      *  },
      *  output={"class"="Sonata\Component\Invoice\InvoiceElementInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -118,7 +118,7 @@ class InvoiceController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -130,11 +130,11 @@ class InvoiceController
     }
 
     /**
-     * Retrieves invoice with id $id or throws an exception if it doesn't exist.
+     * Retrieves invoice with identifier $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      *
      * @return InvoiceInterface
      */

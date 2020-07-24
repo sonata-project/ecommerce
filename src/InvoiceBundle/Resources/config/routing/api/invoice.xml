@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing https://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="get_invoices" path="/invoices.{_format}" methods="GET" controller="Sonata\InvoiceBundle\Controller\Api\InvoiceController::getInvoicesAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_invoice" path="/invoices/{id}.{_format}" methods="GET" controller="Sonata\InvoiceBundle\Controller\Api\InvoiceController::getInvoiceAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_invoice_invoiceelements" path="/invoices/{id}/invoiceelements.{_format}" methods="POST" controller="Sonata\InvoiceBundle\Controller\Api\InvoiceController::getInvoiceInvoiceelementsAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+</routes>

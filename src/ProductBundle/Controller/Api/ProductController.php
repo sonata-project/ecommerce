@@ -14,13 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Controller\Api;
 
 use FOS\RestBundle\Context\Context;
-use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\Route;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\View\View as FOSRestView;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
@@ -31,6 +27,7 @@ use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,14 +79,14 @@ class ProductController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for products list pagination (1-indexed)")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of products by page")
-     * @QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
-     * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/disabled products only?")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for products list pagination (1-indexed)")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of products by page")
+     * @Rest\QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
+     * @Rest\QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/disabled products only?")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @return \Sonata\DatagridBundle\Pager\PagerInterface
+     * @return PagerInterface
      */
     public function getProductsAction(ParamFetcherInterface $paramFetcher)
     {
@@ -122,7 +119,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -131,7 +128,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -145,8 +142,6 @@ class ProductController
     /**
      * Adds a product depending on the product provider.
      *
-     * @Post("/{provider}/products")
-     *
      * @ApiDoc(
      *  resource=true,
      *  input={"class"="sonata_product_api_form_product", "name"="", "groups"={"sonata_api_write"}},
@@ -158,12 +153,10 @@ class ProductController
      *  }
      * )
      *
-     * @Route(requirements={"provider"="[A-Za-z0-9._]"})
+     * @param string  $provider Product provider name
+     * @param Request $request  Symfony request
      *
-     * @param string  $provider A product provider name
-     * @param Request $request  A Symfony request
-     *
-     * @return FOSRestView|FormInterface
+     * @return View|FormInterface
      */
     public function postProductAction($provider, Request $request)
     {
@@ -173,11 +166,10 @@ class ProductController
     /**
      * Updates a product.
      *
-     * @Put("/{provider}/products/{id}")
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product identifier"},
-     *      {"name"="provider", "dataType"="string", "requirement"="[A-Za-z0-9.]*", "description"="product provider"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"},
+     *      {"name"="provider", "dataType"="string", "requirement"="[A-Za-z0-9.]*", "description"="Product provider"}
      *  },
      *  input={"class"="sonata_product_api_form_product", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ProductBundle\Entity\BaseProduct", "groups"={"sonata_api_read"}},
@@ -188,13 +180,11 @@ class ProductController
      *  }
      * )
      *
-     * @Route(requirements={"provider"="[A-Za-z0-9.]*"})
+     * @param int     $id       Product identifier
+     * @param string  $provider Product provider name
+     * @param Request $request  Symfony request
      *
-     * @param int     $id       A Product identifier
-     * @param string  $provider A product provider name
-     * @param Request $request  A Symfony request
-     *
-     * @return FOSRestView|FormInterface
+     * @return View|FormInterface
      */
     public function putProductAction($id, $provider, Request $request)
     {
@@ -206,7 +196,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when post is successfully deleted",
@@ -215,11 +205,11 @@ class ProductController
      *  }
      * )
      *
-     * @param int $id A Product identifier
+     * @param int $id Product identifier
      *
      * @throws NotFoundHttpException
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
     public function deleteProductAction($id)
     {
@@ -229,7 +219,7 @@ class ProductController
         try {
             $manager->delete($product);
         } catch (\Exception $e) {
-            return FOSRestView::create(['error' => $e->getMessage()], 400);
+            return View::create(['error' => $e->getMessage()], 400);
         }
 
         return ['deleted' => true];
@@ -240,7 +230,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\Component\Product\ProductCategoryInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -249,7 +239,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -265,7 +255,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\CategoryInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -274,7 +264,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -290,7 +280,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\Component\Product\ProductCollectionInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -299,7 +289,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -315,7 +305,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\CollectionInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -324,7 +314,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -340,7 +330,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\Component\Product\DeliveryInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -349,7 +339,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -365,7 +355,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\Component\Product\PackageInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -374,7 +364,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -390,7 +380,7 @@ class ProductController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
      *  },
      *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -399,7 +389,7 @@ class ProductController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -413,11 +403,11 @@ class ProductController
     /**
      * Write a product, this method is used by both POST and PUT action methods.
      *
-     * @param string   $provider A product provider name
+     * @param string   $provider Product provider name
      * @param Request  $request  Symfony request
-     * @param int|null $id       A product identifier
+     * @param int|null $id       Product identifier
      *
-     * @return \FOS\RestBundle\View\View|FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteProduct($provider, $request, $id = null)
     {
@@ -453,7 +443,7 @@ class ProductController
                 $context->setMaxDepth(10);
             }
 
-            $view = FOSRestView::create($product);
+            $view = View::create($product);
             $view->setContext($context);
 
             return $view;
@@ -463,11 +453,11 @@ class ProductController
     }
 
     /**
-     * Retrieves product with id $id or throws an exception if it doesn't exist.
+     * Retrieves product with identifier $id or throws an exception if it doesn't exist.
      *
      * @param $id
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      *
      * @return ProductInterface
      */

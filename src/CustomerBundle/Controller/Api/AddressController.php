@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sonata\CustomerBundle\Controller\Api;
 
 use FOS\RestBundle\Context\Context;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\View\View as FOSRestView;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -54,14 +54,14 @@ class AddressController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for addresses list pagination (1-indexed)")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of addresses by page")
-     * @QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
-     * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for addresses list pagination (1-indexed)")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of addresses by page")
+     * @Rest\QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
+     * @Rest\QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @return \Sonata\DatagridBundle\Pager\PagerInterface
+     * @return PagerInterface
      */
     public function getAddressesAction(ParamFetcherInterface $paramFetcher)
     {
@@ -95,7 +95,7 @@ class AddressController
      * @ApiDoc(
      *  resource=true,
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="address id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Address identifier"}
      *  },
      *  output={"class"="Sonata\Component\Customer\AddressInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -104,7 +104,7 @@ class AddressController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -127,9 +127,9 @@ class AddressController
      *  }
      * )
      *
-     * @param Request $request A Symfony request
+     * @param Request $request Symfony request
      *
-     * @return FOSRestView|FormInterface
+     * @return View|FormInterface
      */
     public function postAddressAction(Request $request)
     {
@@ -141,7 +141,7 @@ class AddressController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="address id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Address identifier"}
      *  },
      *  input={"class"="sonata_customer_api_form_address", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\CustomerBundle\Model\Address", "groups"={"sonata_api_read"}},
@@ -151,10 +151,10 @@ class AddressController
      *  }
      * )
      *
-     * @param int     $id      An Address identifier
-     * @param Request $request A Symfony request
+     * @param int     $id      Address identifier
+     * @param Request $request Symfony request
      *
-     * @return FOSRestView|FormInterface
+     * @return View|FormInterface
      */
     public function putAddressAction($id, Request $request)
     {
@@ -166,7 +166,7 @@ class AddressController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="address identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Address identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when customer is successfully deleted",
@@ -175,11 +175,11 @@ class AddressController
      *  }
      * )
      *
-     * @param int $id An Address identifier
+     * @param int $id Address identifier
      *
      * @throws NotFoundHttpException
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
     public function deleteAddressAction($id)
     {
@@ -188,18 +188,18 @@ class AddressController
         try {
             $this->addressManager->delete($address);
         } catch (\Exception $e) {
-            return FOSRestView::create(['error' => $e->getMessage()], 400);
+            return View::create(['error' => $e->getMessage()], 400);
         }
 
         return ['deleted' => true];
     }
 
     /**
-     * Retrieves address with id $id or throws an exception if it doesn't exist.
+     * Retrieves address with identifier $id or throws an exception if it doesn't exist.
      *
      * @param int $id
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      *
      * @return AddressInterface
      */
@@ -218,9 +218,9 @@ class AddressController
      * Write an address, this method is used by both POST and PUT action methods.
      *
      * @param Request  $request Symfony request
-     * @param int|null $id      An Address identifier
+     * @param int|null $id      Address identifier
      *
-     * @return \FOS\RestBundle\View\View|FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteAddress($request, $id = null)
     {
@@ -246,7 +246,7 @@ class AddressController
                 $context->setMaxDepth(10);
             }
 
-            $view = FOSRestView::create($address);
+            $view = View::create($address);
             $view->setContext($context);
 
             return $view;

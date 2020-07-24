@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\OrderBundle\Controller\Api;
 
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -44,15 +44,15 @@ class OrderController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for orders list pagination (1-indexed)")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of orders by page")
-     * @QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
-     * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on order statuses")
-     * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for orders list pagination (1-indexed)")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of orders by page")
+     * @Rest\QueryParam(name="orderBy", map=true, requirements="ASC|DESC", nullable=true, strict=true, description="Sort specification for the resultset (key is field, value is direction")
+     * @Rest\QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on order statuses")
+     * @Rest\QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @return \Sonata\DatagridBundle\Pager\PagerInterface
+     * @return PagerInterface
      */
     public function getOrdersAction(ParamFetcherInterface $paramFetcher)
     {
@@ -86,7 +86,7 @@ class OrderController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="order id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Order identifier"}
      *  },
      *  output={"class"="Sonata\Component\Order\OrderInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -95,7 +95,7 @@ class OrderController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -111,7 +111,7 @@ class OrderController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="order id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Order identifier"}
      *  },
      *  output={"class"="Sonata\Component\Order\OrderElementInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -120,7 +120,7 @@ class OrderController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -136,7 +136,7 @@ class OrderController
      *
      * @param $id
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      *
      * @return OrderInterface
      */
