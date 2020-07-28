@@ -146,7 +146,8 @@ abstract class BaseProductController extends Controller
                 return new JsonResponse(['error' => $this->get('translator')->trans('variation_not_found', [], 'SonataProductBundle')]);
             }
 
-            $this->get('session')->getFlashBag()->add('sonata_product_error', 'variation_not_found');
+            $message = $this->get('translator')->trans('variation_not_found', [], 'SonataProductBundle');
+            $this->get('session')->getFlashBag()->add('sonata_product_error', $message);
 
             // Go to master product
             $variation = $product;

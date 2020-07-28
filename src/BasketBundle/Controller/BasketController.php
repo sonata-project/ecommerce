@@ -376,7 +376,8 @@ class BasketController extends Controller
 
                 $this->get('sonata.customer.manager')->save($customer);
 
-                $this->get('session')->getFlashBag()->add('sonata_customer_success', 'address_add_success');
+                $message = $this->get('translator')->trans('address_add_success', [], 'SonataCustomerBundle');
+                $this->get('session')->getFlashBag()->add('sonata_customer_success', $message);
             }
 
             $basket->setCustomer($customer);
@@ -439,7 +440,8 @@ class BasketController extends Controller
 
                 $this->get('sonata.customer.manager')->save($customer);
 
-                $this->get('session')->getFlashBag()->add('sonata_customer_success', 'address_add_success');
+                $message = $this->get('translator')->trans('address_add_success', [], 'SonataCustomerBundle');
+                $this->get('session')->getFlashBag()->add('sonata_customer_success', $message);
             }
 
             $basket->setCustomer($customer);
