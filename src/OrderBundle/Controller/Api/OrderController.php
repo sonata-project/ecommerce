@@ -86,7 +86,7 @@ class OrderController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Order identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Order identifier"}
      *  },
      *  output={"class"="Sonata\Component\Order\OrderInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -97,7 +97,7 @@ class OrderController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Order identifier
      *
      * @return OrderInterface
      */
@@ -111,7 +111,7 @@ class OrderController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Order identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Order identifier"}
      *  },
      *  output={"class"="Sonata\Component\Order\OrderElementInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -122,7 +122,7 @@ class OrderController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Order identifier
      *
      * @return array
      */
@@ -134,7 +134,7 @@ class OrderController
     /**
      * Retrieves order with id $id or throws an exception if it doesn't exist.
      *
-     * @param $id
+     * @param string $id Order identifier
      *
      * @throws NotFoundHttpException
      *
