@@ -55,7 +55,7 @@ class ProductAdminController extends Controller
         $id = $request->get($this->admin->getIdParameter());
 
         if (!$product = $this->admin->getObject($id)) {
-            throw new NotFoundHttpException('Product not found.');
+            throw new NotFoundHttpException(sprintf('Product not found for identifier %s.', var_export($id, true)));
         }
 
         return $this->render('@SonataProduct/ProductAdmin/variations.html.twig', [

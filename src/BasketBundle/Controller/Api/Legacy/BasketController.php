@@ -11,14 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\BasketBundle\Controller\Api;
+namespace Sonata\BasketBundle\Controller\Api\Legacy;
 
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Operation;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Basket\BasketBuilderInterface;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Basket\BasketElementManagerInterface;
@@ -27,7 +26,6 @@ use Sonata\Component\Basket\BasketManagerInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
-use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,35 +81,9 @@ class BasketController
     /**
      * Returns a paginated list of baskets.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Returns a paginated list of baskets.",
-     *     @SWG\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="Page for baskets list pagination (1-indexed)",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="count",
-     *         in="query",
-     *         description="Number of baskets per page",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="orderBy",
-     *         in="query",
-     *         description="Sort specification for the resultset (key is field, value is direction",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for baskets list pagination (1-indexed)")
@@ -149,18 +121,15 @@ class BasketController
     /**
      * Retrieves a specific basket.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Retrieves a specific basket.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Basket\BasketInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when basket is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when basket is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -177,18 +146,15 @@ class BasketController
     /**
      * Retrieves a specific basket's elements.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Retrieves a specific basket's elements.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Basket\BasketInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when basket is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when basket is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -205,22 +171,14 @@ class BasketController
     /**
      * Adds a basket.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Adds a basket.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Basket\BasketInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while basket creation"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find basket"
-     *     )
+     * @ApiDoc(
+     *  input={"class"="sonata_basket_api_form_basket", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while basket creation",
+     *      404="Returned when unable to find basket"
+     *  }
      * )
      *
      * @param Request $request Symfony request
@@ -235,22 +193,17 @@ class BasketController
     /**
      * Updates a basket.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Updates a basket.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Basket\BasketInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while basket update"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find basket"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
+     *  },
+     *  input={"class"="sonata_basket_api_form_basket", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while basket update",
+     *      404="Returned when unable to find basket"
+     *  }
      * )
      *
      * @param string  $id      Basket identifier
@@ -266,21 +219,15 @@ class BasketController
     /**
      * Deletes a basket.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Deletes a basket.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when basket is successfully deleted"
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while basket deletion"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find basket"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when basket is successfully deleted",
+     *      400="Returned when an error has occurred while basket deletion",
+     *      404="Returned when unable to find basket"
+     *  }
      * )
      *
      * @param string $id Basket identifier
@@ -305,22 +252,17 @@ class BasketController
     /**
      * Adds a basket element to a basket.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Adds a basket element to a basket.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Basket\BasketInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while basket/element attachment"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when basket or product not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"},
+     *  },
+     *  input={"class"="sonata_basket_api_form_basket_element", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while basket/element attachment",
+     *      404="Returned when basket or product not found",
+     *  }
      * )
      *
      * @param string  $id      Basket identifier
@@ -336,22 +278,18 @@ class BasketController
     /**
      * Updates a basket element of a basket.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Updates a basket element of a basket.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Basket\BasketInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while basket/element attachment"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when basket or basket element not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="basketId", "dataType"="string", "description"="Basket identifier"},
+     *      {"name"="elementId", "dataType"="string", "description"="Element identifier"},
+     *  },
+     *  input={"class"="sonata_basket_api_form_basket_element", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while basket/element attachment",
+     *      404="Returned when basket or basket element not found",
+     *  }
      * )
      *
      * @param string  $basketId  Basket identifier
@@ -368,21 +306,16 @@ class BasketController
     /**
      * Deletes a basket element from a basket.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/baskets"},
-     *     summary="Deletes a basket element from a basket.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when basket is successfully deleted"
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while basket element deletion"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find basket or basket element"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="basketId", "dataType"="string", "description"="Basket identifier"},
+     *      {"name"="elementId", "dataType"="string", "description"="Element identifier"},
+     *  },
+     *  statusCodes={
+     *      200="Returned when basket is successfully deleted",
+     *      400="Returned when an error has occurred while basket element deletion",
+     *      404="Returned when unable to find basket or basket element"
+     *  }
      * )
      *
      * @param string $basketId  Basket identifier

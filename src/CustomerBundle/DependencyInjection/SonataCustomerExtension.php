@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\CustomerBundle\DependencyInjection;
 
+use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -68,7 +69,11 @@ class SonataCustomerExtension extends Extension implements PrependExtensionInter
         $loader->load('twig.xml');
 
         if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
-            $loader->load('api_controllers.xml');
+            if (class_exists(Operation::class)) {
+                $loader->load('api_controllers.xml');
+            } else {
+                $loader->load('api_controllers_legacy.xml');
+            }
             $loader->load('api_form.xml');
             $loader->load('serializer.xml');
         }

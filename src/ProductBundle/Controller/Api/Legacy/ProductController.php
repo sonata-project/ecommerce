@@ -11,14 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ProductBundle\Controller\Api;
+namespace Sonata\ProductBundle\Controller\Api\Legacy;
 
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Operation;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -30,7 +29,6 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
-use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,42 +75,9 @@ class ProductController
     /**
      * Returns a paginated list of products.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Returns a paginated list of products.",
-     *     @SWG\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="Page for products list pagination (1-indexed)",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="count",
-     *         in="query",
-     *         description="Number of products per page",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="orderBy",
-     *         in="query",
-     *         description="Sort specification for the resultset (key is field, value is direction",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="enabled",
-     *         in="query",
-     *         description="Enables or disables the products only?",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for products list pagination (1-indexed)")
@@ -151,18 +116,15 @@ class ProductController
     /**
      * Retrieves a specific product.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Product\ProductInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -179,22 +141,15 @@ class ProductController
     /**
      * Adds a product depending on the product provider.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Adds a product depending on the product provider.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ProductBundle\Entity\BaseProduct"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while product creation"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find product"
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  input={"class"="sonata_product_api_form_product", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\ProductBundle\Entity\BaseProduct", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while product creation",
+     *      404="Returned when unable to find product"
+     *  }
      * )
      *
      * @param string  $provider Product provider name
@@ -210,22 +165,18 @@ class ProductController
     /**
      * Updates a product.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Updates a product.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ProductBundle\Entity\BaseProduct"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while product update"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find product"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"},
+     *      {"name"="provider", "dataType"="string", "requirement"="[A-Za-z0-9.]*", "description"="Product provider"}
+     *  },
+     *  input={"class"="sonata_product_api_form_product", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\ProductBundle\Entity\BaseProduct", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while product update",
+     *      404="Returned when unable to find product"
+     *  }
      * )
      *
      * @param string  $id       Product identifier
@@ -242,21 +193,15 @@ class ProductController
     /**
      * Deletes a product.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Deletes a product.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when post is successfully deleted"
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while product deletion"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find product"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when post is successfully deleted",
+     *      400="Returned when an error has occurred while product deletion",
+     *      404="Returned when unable to find product"
+     *  }
      * )
      *
      * @param string $id Product identifier
@@ -282,18 +227,15 @@ class ProductController
     /**
      * Retrieves a specific product's ProductCategories.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product's ProductCategories.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Product\ProductCategoryInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Product\ProductCategoryInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -310,18 +252,15 @@ class ProductController
     /**
      * Retrieves a specific product's ProductCategories' categories.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product's ProductCategories' categories.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\CategoryInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\ClassificationBundle\Model\CategoryInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -338,18 +277,15 @@ class ProductController
     /**
      * Retrieves a specific product's ProductCollections.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product's ProductCollections.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Product\ProductCollectionInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Product\ProductCollectionInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -366,18 +302,15 @@ class ProductController
     /**
      * Retrieves a specific product's ProductCollections' collections.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product's ProductCollections' collections.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\CollectionInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\ClassificationBundle\Model\CollectionInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -394,18 +327,15 @@ class ProductController
     /**
      * Retrieves a specific product's deliveries.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product's deliveries.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Product\DeliveryInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Product\DeliveryInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -422,18 +352,15 @@ class ProductController
     /**
      * Retrieves a specific product's packages.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product's packages.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Product\PackageInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Product\PackageInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -450,18 +377,15 @@ class ProductController
     /**
      * Retrieves a specific product's variations.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/products"},
-     *     summary="Retrieves a specific product's variations.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Product\ProductInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when product is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Product identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Product\ProductInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when product is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)

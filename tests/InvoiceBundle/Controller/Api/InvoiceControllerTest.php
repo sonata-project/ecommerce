@@ -46,12 +46,28 @@ class InvoiceControllerTest extends TestCase
         $this->assertSame($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
-    public function testGetInvoiceActionNotFoundException(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetInvoiceActionNotFoundException($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Invoice (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createInvoiceController()->getInvoiceAction(42);
+        $this->createInvoiceController()->getInvoiceAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Invoice not found for identifier 42.'],
+            ['42', 'Invoice not found for identifier \'42\'.'],
+            [null, 'Invoice not found for identifier NULL.'],
+            ['', 'Invoice not found for identifier \'\'.'],
+        ];
     }
 
     public function testGetInvoiceInvoiceelementsAction(): void

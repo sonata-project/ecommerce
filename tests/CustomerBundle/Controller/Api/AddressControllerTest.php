@@ -51,12 +51,28 @@ class AddressControllerTest extends TestCase
         $this->assertSame($address, $this->createAddressController($address)->getAddressAction(1));
     }
 
-    public function testGetAddressActionNotFoundException(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetAddressActionNotFoundException($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Address (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createAddressController()->getAddressAction(42);
+        $this->createAddressController()->getAddressAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Address not found for identifier 42.'],
+            ['42', 'Address not found for identifier \'42\'.'],
+            [null, 'Address not found for identifier NULL.'],
+            ['', 'Address not found for identifier \'\'.'],
+        ];
     }
 
     public function testPostAddressAction(): void

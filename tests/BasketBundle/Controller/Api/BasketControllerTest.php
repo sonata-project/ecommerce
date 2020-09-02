@@ -61,12 +61,28 @@ class BasketControllerTest extends TestCase
         $this->assertSame($basket, $this->createBasketController($basketManager)->getBasketAction(1));
     }
 
-    public function testGetBasketActionNotFoundException(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetBasketActionNotFoundException($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Basket (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createBasketController()->getBasketAction(42);
+        $this->createBasketController()->getBasketAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Basket not found for identifier 42.'],
+            ['42', 'Basket not found for identifier \'42\'.'],
+            [null, 'Basket not found for identifier NULL.'],
+            ['', 'Basket not found for identifier \'\'.'],
+        ];
     }
 
     public function testGetBasketelementsAction(): void
@@ -82,12 +98,15 @@ class BasketControllerTest extends TestCase
         $this->assertSame($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
     }
 
-    public function testGetBasketelementsActionNotFoundException(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetBasketelementsActionNotFoundException($identifier, $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Basket (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createBasketController()->getBasketBasketelementsAction(42);
+        $this->createBasketController()->getBasketBasketelementsAction($identifier);
     }
 
     public function testPostBasketAction(): void

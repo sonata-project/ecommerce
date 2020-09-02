@@ -62,12 +62,28 @@ class ProductControllerTest extends TestCase
         $this->assertSame($product, $this->createProductController($product)->getProductAction(1));
     }
 
-    public function testGetProductActionNotFoundException(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetProductActionNotFoundException($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Product (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createProductController()->getProductAction(42);
+        $this->createProductController()->getProductAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Product not found for identifier 42.'],
+            ['42', 'Product not found for identifier \'42\'.'],
+            [null, 'Product not found for identifier NULL.'],
+            ['', 'Product not found for identifier \'\'.'],
+        ];
     }
 
     public function testGetProductProductcategoriesAction(): void
