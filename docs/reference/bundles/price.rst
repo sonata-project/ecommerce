@@ -21,10 +21,10 @@ Installation
 ============
 
 This central e-commerce bundle requires you add a
-`bcscale <http://php.net/manual/en/function.bcscale.php>`_ method in your ``AppKernel.php``
-file to ensure that prices are correctly computed. Please, update your ``AppKernel.php`` file like this::
+`bcscale <http://php.net/manual/en/function.bcscale.php>`_ method in your ``Kernel.php``
+file to ensure that prices are correctly computed. Please, update your ``Kernel.php`` file like this::
 
-    class AppKernel extends Kernel
+    class Kernel extends BaseKernel
     {
         public function boot()
         {
