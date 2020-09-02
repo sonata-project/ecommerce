@@ -9,7 +9,6 @@ There are some Sonata dependencies that need to be installed and configured befo
 
     - `SonataAdminBundle <https://sonata-project.org/bundles/admin>`_
     - `SonataEasyExtendsBundle <https://sonata-project.org/bundles/easy-extends>`_
-    - `SonataCoreBundle <https://sonata-project.org/bundles/core>`_
     - `SonataBlockBundle <https://sonata-project.org/bundles/block>`_
     - `SonataClassificationBundle <https://sonata-project.org/bundles/classification>`_
     - `SonataMediaBundle <https://sonata-project.org/bundles/media>`_
@@ -55,11 +54,11 @@ are not already enabled::
 .. note::
 
     If you are not using Symfony Flex, you should enable bundles in your
-    ``AppKernel.php``.
+    ``Kernel.php``.
 
 .. code-block:: php
 
-    // app/AppKernel.php
+    // src/Kernel.php
 
     public function registerBundles()
     {
@@ -84,7 +83,7 @@ Configuration
 .. note::
 
     If you are not using Symfony Flex, all configuration in this section should
-    be added to ``app/config/config.yml``.
+    be added to ``app/config/config.yaml``.
 
 .. configuration-block::
 
@@ -211,11 +210,11 @@ Now, add the new ``App`` Bundle into the ``bundles.php``::
 .. note::
 
     If you are not using Symfony Flex, add the new ``App`` Bundle into your
-    ``AppKernel.php``.
+    ``Kernel.php``.
 
 .. code-block:: php
 
-    // app/AppKernel.php
+    // src/Kernel.php
 
     public function registerBundles()
     {
@@ -270,7 +269,7 @@ Next, add the correct routing files:
 
 .. note::
 
-    If you are not using Symfony Flex, routes should be added to ``app/config/routing.yml``.
+    If you are not using Symfony Flex, routes should be added to ``app/config/routing.yaml``.
 
 If you are not using auto-mapping in doctrine you will have to add it there
 too:
@@ -278,7 +277,7 @@ too:
 .. note::
 
     If you are not using Symfony Flex, next configuration should be added
-    to ``app/config/config.yml``.
+    to ``app/config/config.yaml``.
 
 .. code-block:: yaml
 
