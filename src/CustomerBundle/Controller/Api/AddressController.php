@@ -22,6 +22,7 @@ use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -95,7 +96,7 @@ class AddressController
      * @ApiDoc(
      *  resource=true,
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Address identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Address identifier"}
      *  },
      *  output={"class"="Sonata\Component\Customer\AddressInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -106,7 +107,7 @@ class AddressController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Address identifier
      *
      * @return AddressInterface
      */
@@ -141,7 +142,7 @@ class AddressController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Address identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Address identifier"}
      *  },
      *  input={"class"="sonata_customer_api_form_address", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\CustomerBundle\Model\Address", "groups"={"sonata_api_read"}},
@@ -151,7 +152,7 @@ class AddressController
      *  }
      * )
      *
-     * @param int     $id      Address identifier
+     * @param string  $id      Address identifier
      * @param Request $request Symfony request
      *
      * @return View|FormInterface
@@ -166,7 +167,7 @@ class AddressController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Address identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Address identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when customer is successfully deleted",
@@ -175,7 +176,7 @@ class AddressController
      *  }
      * )
      *
-     * @param int $id Address identifier
+     * @param string $id Address identifier
      *
      * @throws NotFoundHttpException
      *
@@ -197,7 +198,7 @@ class AddressController
     /**
      * Retrieves address with identifier $id or throws an exception if it doesn't exist.
      *
-     * @param int $id
+     * @param string $id Address identifier
      *
      * @throws NotFoundHttpException
      *
@@ -217,8 +218,8 @@ class AddressController
     /**
      * Write an address, this method is used by both POST and PUT action methods.
      *
-     * @param Request  $request Symfony request
-     * @param int|null $id      Address identifier
+     * @param Request     $request Symfony request
+     * @param string|null $id      Address identifier
      *
      * @return View|FormInterface
      */

@@ -84,7 +84,7 @@ class InvoiceController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Invoice identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Invoice identifier"}
      *  },
      *  output={"class"="Sonata\Component\Invoice\InvoiceInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -95,7 +95,7 @@ class InvoiceController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Invoice identifier
      *
      * @return InvoiceInterface
      */
@@ -109,7 +109,7 @@ class InvoiceController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Invoice identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Invoice identifier"}
      *  },
      *  output={"class"="Sonata\Component\Invoice\InvoiceElementInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -120,7 +120,7 @@ class InvoiceController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Invoice identifier
      *
      * @return array
      */
@@ -132,7 +132,7 @@ class InvoiceController
     /**
      * Retrieves invoice with identifier $id or throws an exception if it doesn't exist.
      *
-     * @param $id
+     * @param string $id Invoice identifier
      *
      * @throws NotFoundHttpException
      *

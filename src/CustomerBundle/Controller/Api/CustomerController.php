@@ -18,12 +18,14 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -107,7 +109,7 @@ class CustomerController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Customer identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Customer identifier"}
      *  },
      *  output={"class"="Sonata\Component\Customer\CustomerInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -118,7 +120,7 @@ class CustomerController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Customer identifier
      *
      * @return CustomerInterface
      */
@@ -153,7 +155,7 @@ class CustomerController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Customer identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Customer identifier"}
      *  },
      *  input={"class"="sonata_customer_api_form_customer", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\CustomerBundle\Model\Customer", "groups"={"sonata_api_read"}},
@@ -164,7 +166,7 @@ class CustomerController
      *  }
      * )
      *
-     * @param int     $id      Customer identifier
+     * @param string  $id      Customer identifier
      * @param Request $request Symfony request
      *
      * @return View|FormInterface
@@ -179,7 +181,7 @@ class CustomerController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Customer identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Customer identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when customer is successfully deleted",
@@ -188,7 +190,7 @@ class CustomerController
      *  }
      * )
      *
-     * @param int $id Customer identifier
+     * @param string $id Customer identifier
      *
      * @throws NotFoundHttpException
      *
@@ -212,7 +214,7 @@ class CustomerController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Customer identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Customer identifier"}
      *  },
      *  output={"class"="Sonata\Component\Order\OrderInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -223,7 +225,7 @@ class CustomerController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Customer identifier
      *
      * @return array
      */
@@ -239,7 +241,7 @@ class CustomerController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Customer identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Customer identifier"}
      *  },
      *  output={"class"="Sonata\Component\Customer\AddressInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -250,7 +252,7 @@ class CustomerController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Customer identifier
      *
      * @return array
      */
@@ -264,7 +266,7 @@ class CustomerController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Customer identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Customer identifier"}
      *  },
      *  input={"class"="sonata_customer_api_form_address", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\CustomerBundle\Model\Address", "groups"={"sonata_api_read"}},
@@ -276,12 +278,12 @@ class CustomerController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param int     $id      Customer identifier
+     * @param string  $id      Customer identifier
      * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
-     * @return Address
+     * @return AddressInterface
      */
     public function postCustomerAddressAction($id, Request $request)
     {
@@ -308,8 +310,8 @@ class CustomerController
     /**
      * Write a customer, this method is used by both POST and PUT action methods.
      *
-     * @param Request  $request Symfony request
-     * @param int|null $id      Customer identifier
+     * @param Request     $request Symfony request
+     * @param string|null $id      Customer identifier
      *
      * @return View|FormInterface
      */
@@ -349,7 +351,7 @@ class CustomerController
     /**
      * Retrieves customer with identifier $id or throws an exception if it doesn't exist.
      *
-     * @param $id
+     * @param string $id Customer identifier
      *
      * @throws NotFoundHttpException
      *

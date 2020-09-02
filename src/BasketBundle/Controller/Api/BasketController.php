@@ -125,7 +125,7 @@ class BasketController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Basket identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
      *  },
      *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -136,7 +136,7 @@ class BasketController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Basket identifier
      *
      * @return BasketInterface
      */
@@ -150,7 +150,7 @@ class BasketController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Basket identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
      *  },
      *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -161,7 +161,7 @@ class BasketController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param string $id Basket identifier
      *
      * @return BasketElementInterface[]
      */
@@ -197,7 +197,7 @@ class BasketController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Basket identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
      *  },
      *  input={"class"="sonata_basket_api_form_basket", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
@@ -208,7 +208,7 @@ class BasketController
      *  }
      * )
      *
-     * @param int     $id      Basket identifier
+     * @param string  $id      Basket identifier
      * @param Request $request Symfony request
      *
      * @return View|FormInterface
@@ -223,7 +223,7 @@ class BasketController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Basket identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when basket is successfully deleted",
@@ -232,7 +232,7 @@ class BasketController
      *  }
      * )
      *
-     * @param int $id Basket identifier
+     * @param string $id Basket identifier
      *
      * @throws NotFoundHttpException
      *
@@ -256,7 +256,7 @@ class BasketController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Basket identifier"},
+     *      {"name"="id", "dataType"="string", "description"="Basket identifier"},
      *  },
      *  input={"class"="sonata_basket_api_form_basket_element", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
@@ -267,7 +267,7 @@ class BasketController
      *  }
      * )
      *
-     * @param int     $id      Basket identifier
+     * @param string  $id      Basket identifier
      * @param Request $request Symfony request
      *
      * @return View|FormInterface
@@ -282,8 +282,8 @@ class BasketController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="basketId", "dataType"="integer", "requirement"="\d+", "description"="Basket identifier"},
-     *      {"name"="elementId", "dataType"="integer", "requirement"="\d+", "description"="Element identifier"},
+     *      {"name"="basketId", "dataType"="string", "description"="Basket identifier"},
+     *      {"name"="elementId", "dataType"="string", "description"="Element identifier"},
      *  },
      *  input={"class"="sonata_basket_api_form_basket_element", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\Component\Basket\BasketInterface", "groups"={"sonata_api_read"}},
@@ -294,8 +294,8 @@ class BasketController
      *  }
      * )
      *
-     * @param int     $basketId  Basket identifier
-     * @param int     $elementId Basket element identifier
+     * @param string  $basketId  Basket identifier
+     * @param string  $elementId Basket element identifier
      * @param Request $request   Symfony request
      *
      * @return View|FormInterface
@@ -310,8 +310,8 @@ class BasketController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="basketId", "dataType"="integer", "requirement"="\d+", "description"="Basket identifier"},
-     *      {"name"="elementId", "dataType"="integer", "requirement"="\d+", "description"="Element identifier"},
+     *      {"name"="basketId", "dataType"="string", "description"="Basket identifier"},
+     *      {"name"="elementId", "dataType"="string", "description"="Element identifier"},
      *  },
      *  statusCodes={
      *      200="Returned when basket is successfully deleted",
@@ -320,8 +320,8 @@ class BasketController
      *  }
      * )
      *
-     * @param int $basketId  Basket identifier
-     * @param int $elementId Basket element identifier
+     * @param string $basketId  Basket identifier
+     * @param string $elementId Basket element identifier
      *
      * @throws NotFoundHttpException
      *
@@ -367,8 +367,8 @@ class BasketController
     /**
      * Write a basket, this method is used by both POST and PUT action methods.
      *
-     * @param Request  $request Symfony request
-     * @param int|null $id      Basket identifier
+     * @param Request     $request Symfony request
+     * @param string|null $id      Basket identifier
      *
      * @return View|FormInterface
      */
@@ -411,9 +411,9 @@ class BasketController
     /**
      * Write a basket element, this method is used by both POST and PUT action methods.
      *
-     * @param int     $basketId  Sonata ecommerce basket identifier
+     * @param string  $basketId  Sonata ecommerce basket identifier
      * @param Request $request   Symfony Request service
-     * @param int     $elementId Sonata ecommerce basket element identifier
+     * @param string  $elementId Sonata ecommerce basket element identifier
      *
      * @return View|FormInterface
      */
@@ -471,7 +471,7 @@ class BasketController
     /**
      * Retrieves basket with identifier $id or throws an exception if it doesn't exist.
      *
-     * @param $id
+     * @param string $id Basket identifier
      *
      * @throws NotFoundHttpException
      *
@@ -491,7 +491,7 @@ class BasketController
     /**
      * Retrieves basket element with identifier $id or throws an exception if it doesn't exist.
      *
-     * @param $id
+     * @param string $id BasketElement identifier
      *
      * @throws NotFoundHttpException
      *
@@ -511,7 +511,7 @@ class BasketController
     /**
      * Retrieves product with identifier $id or throws an exception if it doesn't exist.
      *
-     * @param $id
+     * @param string $id Product identifier
      *
      * @throws NotFoundHttpException
      *
@@ -531,7 +531,7 @@ class BasketController
     /**
      * Throws an exception if it already exists a basket with a specific customer identifier.
      *
-     * @param $customerId
+     * @param string $customerId Customer identifier
      *
      * @throws HttpException
      */
