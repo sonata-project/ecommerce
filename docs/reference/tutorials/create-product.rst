@@ -34,11 +34,11 @@ Run the following command to create the files:
 The required base files will be created in ``src/Sonata/ProductBundle``.
 To finalize the installation, we have to define the missing parameters like the type
 itself and the related manager. These data have to be provided in
-``src/Sonata/ProductBundle/Resources/config/product.yml``.
+``src/Sonata/ProductBundle/Resources/config/product.yaml``.
 
 .. code-block:: yaml
 
-    # src/Sonata/ProductBundle/Resources/config/product.yml
+    # src/Sonata/ProductBundle/Resources/config/product.yaml
 
     services:
         sonata.ecommerce_demo.product.bowl.manager:
@@ -52,14 +52,14 @@ itself and the related manager. These data have to be provided in
             arguments:
                 - '@serializer'
 
-Don't forget to load this file by adding the following lines in the ``app/config/config.yml``
+Don't forget to load this file by adding the following lines in the ``app/config/config.yaml``
 
 .. code-block:: yaml
 
-    # app/config/config.yml
+    # app/config/config.yaml
 
     imports:
-        - { resource: '@ApplicationSonataProductBundle/Resources/config/product.yml' }
+        - { resource: '@ApplicationSonataProductBundle/Resources/config/product.yaml' }
 
 And finally, add in the ``app/config/sonata/sonata_product.yaml`` the following data:
 
