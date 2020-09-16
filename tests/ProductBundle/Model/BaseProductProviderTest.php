@@ -26,6 +26,9 @@ use Sonata\Component\Product\ProductInterface;
 use Sonata\Form\Validator\ErrorElement;
 use Sonata\ProductBundle\Entity\BaseProduct;
 use Sonata\ProductBundle\Model\BaseProductProvider;
+use Symfony\Component\Validator\ConstraintValidatorFactoryInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ProductProviderTest extends BaseProductProvider
@@ -118,7 +121,7 @@ class BaseProductProviderTest extends TestCase
     public function testValidateFormBasketElement(): void
     {
         $productProvider = $this->createNewProductProvider();
-        $errorElement = $this->createMock(ErrorElement::class);
+        $errorElement = $this->createErrorElement();
         $basket = $this->getMockBuilder(BasketInterface::class)->getMock();
 
         // With a deleted element
@@ -576,6 +579,43 @@ class BaseProductProviderTest extends TestCase
         ];
 
         $this->assertSame($variation2, $provider->getVariation($product, ['price' => 42, 'name' => 'avariation']));
+    }
+
+    private function createErrorElement(): ErrorElement
+    {
+        $executionContext = $this->createMock(ExecutionContextInterface::class);
+        $executionContext
+            ->method('buildViolation')
+            ->willReturn($this->createConstraintBuilder());
+
+        return new ErrorElement(
+            '',
+            $this->createStub(ConstraintValidatorFactoryInterface::class),
+            $executionContext,
+            'group'
+        );
+    }
+
+    /**
+     * @return Stub&ConstraintViolationBuilderInterface
+     */
+    private function createConstraintBuilder(): object
+    {
+        $constraintBuilder = $this->createStub(ConstraintViolationBuilderInterface::class);
+        $constraintBuilder
+            ->method('atPath')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setParameters')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setTranslationDomain')
+            ->willReturn($constraintBuilder);
+        $constraintBuilder
+            ->method('setInvalidValue')
+            ->willReturn($constraintBuilder);
+
+        return $constraintBuilder;
     }
 
     /**
