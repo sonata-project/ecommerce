@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Product;
 
-use Exporter\Source\DoctrineDBALConnectionSourceIterator;
-use Exporter\Source\SourceIteratorInterface;
-use Exporter\Source\SymfonySitemapSourceIterator;
+use Sonata\Exporter\Source\DoctrineDBALConnectionSourceIterator;
+use Sonata\Exporter\Source\SourceIteratorInterface;
+use Sonata\Exporter\Source\SymfonySitemapSourceIterator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
