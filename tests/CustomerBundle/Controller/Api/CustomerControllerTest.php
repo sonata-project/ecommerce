@@ -23,6 +23,7 @@ use Sonata\Component\Customer\CustomerManagerInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
 use Sonata\CustomerBundle\Controller\Api\CustomerController;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -36,14 +37,15 @@ class CustomerControllerTest extends TestCase
 {
     public function testGetCustomersAction(): void
     {
+        $pager = $this->createStub(PagerInterface::class);
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('getPager')->willReturn([]);
+        $customerManager->expects($this->once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get');
+        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $this->assertSame([], $this->createCustomerController(null, $customerManager)
+        $this->assertSame($pager, $this->createCustomerController(null, $customerManager)
             ->getCustomersAction($paramFetcher));
     }
 

@@ -18,7 +18,7 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class ProductManager extends BaseEntityManager implements ProductManagerInterface
@@ -125,7 +125,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
         $this->getConnection()->query(sprintf('UPDATE %s SET stock = stock %s %d WHERE id = %d;', $tableName, $operator, abs($diff), $productId));
     }
 
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
+    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
     {
         $query = $this->getRepository()
             ->createQueryBuilder('p')
@@ -153,13 +153,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
 
         $query->setParameters($parameters);
 
-        $pager = new Pager();
-        $pager->setMaxPerPage($limit);
-        $pager->setQuery(new ProxyQuery($query));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
+        return Pager::create($query, $limit, $page);
     }
 
     final public function queryInCollection($collection, $limit = null): QueryBuilder

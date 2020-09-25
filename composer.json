@@ -25,7 +25,7 @@
         "sonata-project/block-bundle": "^3.18.3",
         "sonata-project/classification-bundle": "^3.3",
         "sonata-project/comment-bundle": "^3.1",
-        "sonata-project/datagrid-bundle": "^2.5",
+        "sonata-project/datagrid-bundle": "^3.0.1",
         "sonata-project/doctrine-extensions": "^1.10.1",
         "sonata-project/doctrine-orm-admin-bundle": "^3.2",
         "sonata-project/exporter": "^2.3",

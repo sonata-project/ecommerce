@@ -19,6 +19,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\CustomerBundle\Controller\Api\AddressController;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -32,14 +33,15 @@ class AddressControllerTest extends TestCase
 {
     public function testGetAddressesAction(): void
     {
+        $pager = $this->createStub(PagerInterface::class);
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('getPager')->willReturn([]);
+        $addressManager->expects($this->once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get');
+        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $this->assertSame([], $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
+        $this->assertSame($pager, $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
 
     public function testGetAddressAction(): void
