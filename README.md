@@ -16,8 +16,8 @@ E-Commerce solution provided by Sonata
 [![Monthly Downloads](https://poser.pugx.org/sonata-project/ecommerce/d/monthly)](https://packagist.org/packages/sonata-project/ecommerce)
 [![Daily Downloads](https://poser.pugx.org/sonata-project/ecommerce/d/daily)](https://packagist.org/packages/sonata-project/ecommerce)
 
-Branch | Github Actions | Coverage |
------- | -------------- | -------- |
+Branch | Github Actions | Code Coverage |
+------ | -------------- | ------------- |
 3.x    | [![Test][test_stable_badge]][test_stable_link]     | [![Coverage Status][coverage_stable_badge]][coverage_stable_link]     |
 master | [![Test][test_unstable_badge]][test_unstable_link] | [![Coverage Status][coverage_unstable_badge]][coverage_unstable_link] |
 
