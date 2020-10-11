@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Delivery;
 
-use Exception;
 use Sonata\Component\Customer\AddressInterface;
 
 /**
@@ -27,10 +26,10 @@ class UndeliverableCountryException extends \RuntimeException
     private $address;
 
     /**
-     * @param int       $code
-     * @param Exception $previous
+     * @param int        $code
+     * @param \Exception $previous
      */
-    public function __construct(AddressInterface $address, $code = 0, ?Exception $previous = null)
+    public function __construct(AddressInterface $address, $code = 0, ?\Exception $previous = null)
     {
         $this->address = $address;
 
