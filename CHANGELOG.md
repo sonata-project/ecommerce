@@ -2,6 +2,31 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.0](https://github.com/sonata-project/ecommerce/compare/3.3.0...3.4.0) - 2020-10-19
+### Added
+- [[#688](https://github.com/sonata-project/ecommerce/pull/688)] Support for "friendsofsymfony/rest-bundle:^3.0" ([@wbloszyk](https://github.com/wbloszyk))
+- [[#685](https://github.com/sonata-project/ecommerce/pull/685)] Added public alias `Sonata\BasketBundle\Controller\Api\BasketController` for `sonata.basket.controller.api.basket` service ([@wbloszyk](https://github.com/wbloszyk))
+- [[#685](https://github.com/sonata-project/ecommerce/pull/685)] Added public alias `Sonata\CustomerBundle\Controller\Api\AddressController` for `sonata.customer.controller.api.address` service ([@wbloszyk](https://github.com/wbloszyk))
+- [[#685](https://github.com/sonata-project/ecommerce/pull/685)] Added public alias `Sonata\CustomerBundle\Controller\Api\CustomerController` for `sonata.customer.controller.api.customer` service ([@wbloszyk](https://github.com/wbloszyk))
+- [[#685](https://github.com/sonata-project/ecommerce/pull/685)] Added public alias `Sonata\InvoiceBundle\Controller\Api\InvoiceController` for `sonata.invoice.controller.api.invoice` service ([@wbloszyk](https://github.com/wbloszyk))
+- [[#685](https://github.com/sonata-project/ecommerce/pull/685)] Added public alias `Sonata\OrderBundle\Controller\Api\OrderController` for `sonata.order.controller.api.order` service ([@wbloszyk](https://github.com/wbloszyk))
+- [[#685](https://github.com/sonata-project/ecommerce/pull/685)] Added public alias `Sonata\ProductBundle\Controller\Api\ProductController` for `sonata.product.controller.api.product` service ([@wbloszyk](https://github.com/wbloszyk))
+
+### Changed
+- [[#688](https://github.com/sonata-project/ecommerce/pull/688)] Support for deprecated "rest" routing type in favor for xml ([@wbloszyk](https://github.com/wbloszyk))
+- [[#687](https://github.com/sonata-project/ecommerce/pull/687)] Translate flash message before add it to `flash bag` ([@wbloszyk](https://github.com/wbloszyk))
+
+### Fixed
+- [[#685](https://github.com/sonata-project/ecommerce/pull/685)] Fix RestFul API - `Class could not be determined for Controller identified` Error ([@wbloszyk](https://github.com/wbloszyk))
+- [[#709](https://github.com/sonata-project/ecommerce/pull/709)] Working with "sonata-project/exporter" v2 ([@wbloszyk](https://github.com/wbloszyk))
+- [[#702](https://github.com/sonata-project/ecommerce/pull/702)] Fixed support for string model identifiers at Open API definitions. ([@wbloszyk](https://github.com/wbloszyk))
+- [[#681](https://github.com/sonata-project/ecommerce/pull/681)] Fix `Twig\Extra\String\StringExtension` optional auto-registration to avoid duplication `twig.extension` service ([@wbloszyk](https://github.com/wbloszyk))
+
+### Removed
+- [[#702](https://github.com/sonata-project/ecommerce/pull/702)] Removed requirements that were only allowing integers for model identifiers at Open API definitions. ([@wbloszyk](https://github.com/wbloszyk))
+- [[#694](https://github.com/sonata-project/ecommerce/pull/694)] Support for `cocur/slugify` < 4.0 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#686](https://github.com/sonata-project/ecommerce/pull/686)] Support for Symfony < 4.4 ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.3.0](https://github.com/sonata-project/ecommerce/compare/3.2.3...3.3.0) - 2020-06-23
 ### Added
 - [[#678](https://github.com/sonata-project/ecommerce/pull/678)] Added
