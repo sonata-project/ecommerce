@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\OrderBundle\Tests\Entity;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 use Sonata\OrderBundle\Entity\BaseOrder;

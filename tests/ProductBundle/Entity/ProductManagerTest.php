@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Tests\Entity;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 use Sonata\ProductBundle\Entity\BaseProduct;

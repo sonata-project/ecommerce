@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Currency;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Currency\Currency;
 use Sonata\Component\Currency\CurrencyManager;
