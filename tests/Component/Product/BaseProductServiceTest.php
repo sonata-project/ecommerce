@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sonata\Component\Tests\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use JMS\Serializer\SerializerInterface;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Basket\BasketElement;

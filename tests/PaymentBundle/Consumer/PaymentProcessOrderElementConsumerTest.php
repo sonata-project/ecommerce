@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\PaymentBundle\Tests\Consumer;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Payment\TransactionInterface;
