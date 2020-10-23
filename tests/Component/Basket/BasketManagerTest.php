@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Tests\Basket;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\BasketBundle\Entity\BaseBasket;
 use Sonata\Component\Basket\Basket;
