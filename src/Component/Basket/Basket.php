@@ -288,7 +288,7 @@ class Basket implements \Serializable, BasketInterface
 
     public function getElementByPos($pos)
     {
-        return isset($this->basketElements[$pos]) ? $this->basketElements[$pos] : null;
+        return $this->basketElements[$pos] ?? null;
     }
 
     public function removeElements(array $elementsToRemove): void
