@@ -101,7 +101,7 @@ abstract class BasePayment implements PaymentInterface
 
     public function getOption($name, $default = null)
     {
-        return isset($this->options[$name]) ? $this->options[$name] : $default;
+        return $this->options[$name] ?? $default;
     }
 
     /**
@@ -139,7 +139,7 @@ abstract class BasePayment implements PaymentInterface
 
     public function getTransformer($name)
     {
-        return isset($this->transformers[$name]) ? $this->transformers[$name] : false;
+        return $this->transformers[$name] ?? false;
     }
 
     public function callback(TransactionInterface $transaction)

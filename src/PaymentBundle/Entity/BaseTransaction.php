@@ -161,7 +161,7 @@ class BaseTransaction implements TransactionInterface
      */
     public function get($name, $default = null)
     {
-        return isset($this->parameters[$name]) ? $this->parameters[$name] : $default;
+        return $this->parameters[$name] ?? $default;
     }
 
     /**

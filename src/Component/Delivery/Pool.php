@@ -48,6 +48,6 @@ class Pool
      */
     public function getMethod($code)
     {
-        return isset($this->methods[$code]) ? $this->methods[$code] : null;
+        return $this->methods[$code] ?? null;
     }
 }

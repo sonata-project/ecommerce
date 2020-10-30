@@ -163,7 +163,7 @@ abstract class BaseCustomer implements CustomerInterface
     {
         $list = self::getTitlesList();
 
-        return isset($list[$this->title]) ? $list[$this->title] : '';
+        return $list[$this->title] ?? '';
     }
 
     public function getFirstname()
