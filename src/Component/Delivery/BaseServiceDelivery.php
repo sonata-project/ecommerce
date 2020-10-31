@@ -147,7 +147,7 @@ abstract class BaseServiceDelivery implements ServiceDeliveryInterface
      */
     public function getOption($name, $default = null)
     {
-        return isset($this->options[$name]) ? $this->options[$name] : $default;
+        return $this->options[$name] ?? $default;
     }
 
     public function getTotal(BasketInterface $basket, $vat = false)
