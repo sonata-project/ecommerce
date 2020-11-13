@@ -194,20 +194,21 @@ final class CollectionControllerTest extends TestCase
         $collectionManagerInterface = $this->createMock(CollectionManagerInterface::class);
         $collectionManagerInterface->expects($this->any())->method('findOneBy')->willReturn($collection);
 
-        $container->expects($this->at(0))
-        ->method('get')
-        ->with('knp_paginator')
-        ->willReturn($paginator);
+        $container
+            ->expects($this->exactly(2))
+            ->method('has')
+            ->willReturnMap([
+                ['templating', false],
+                ['twig', true],
+            ]);
 
-        $container->expects($this->at(2))
-        ->method('has')
-        ->with('twig')
-        ->willReturn(true);
-
-        $container->expects($this->at(3))
-        ->method('get')
-        ->with('twig')
-        ->willReturn($template);
+        $container
+            ->expects($this->exactly(2))
+            ->method('get')
+            ->willReturnMap([
+                ['knp_paginator', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $paginator],
+                ['twig', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $template],
+            ]);
 
         $request = new Request();
         $request->setMethod('POST');
