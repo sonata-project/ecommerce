@@ -64,7 +64,7 @@ class BaseInvoiceTest extends TestCase
             $this->assertArrayHasKey('amount', $item, 'Array items should contains a "amount" key');
 
             $this->assertContains($item['rate'], [10, 20]);
-            $this->assertContains($item['amount'], [7, 3]);
+            $this->assertContains($item['amount'], ['7.000', '3']);
         }
     }
 }
