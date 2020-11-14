@@ -73,20 +73,13 @@ final class PaymentControllerTest extends TestCase
         $paymentHandlerInterface = $this->createMock(PaymentHandlerInterface::class);
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->at(0))
+        $container
             ->method('get')
-            ->with('sonata.basket.factory')
-            ->willReturn($basketFactoryInterface);
-
-        $container->expects($this->at(1))
-            ->method('get')
-            ->with('sonata.basket')
-            ->willReturn($basket);
-
-        $container->expects($this->at(2))
-            ->method('get')
-            ->with('sonata.payment.handler')
-            ->willReturn($paymentHandlerInterface);
+            ->willReturnMap([
+                ['sonata.basket.factory', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $basketFactoryInterface],
+                ['sonata.basket', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $basket],
+                ['sonata.payment.handler', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $paymentHandlerInterface],
+            ]);
 
         $paymentController = new PaymentController();
 
