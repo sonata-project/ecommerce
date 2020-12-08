@@ -67,6 +67,8 @@ class MysqlReferenceTest extends TestCase
         $metadata->table = ['name' => 'tableName'];
 
         $connection = $this->createMock(Connection::class);
+        $statement = $this->createMock(\PDOStatement::class);
+        $statement->expects($this->once())->method('fetch')->willReturn(false);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
         $em->expects($this->any())
@@ -75,7 +77,7 @@ class MysqlReferenceTest extends TestCase
 
         $connection->expects($this->any())
             ->method('query')
-            ->willReturn(new \PDOStatement());
+            ->willReturn($statement);
 
         $registry = $this->createMock(RegistryInterface::class);
         $registry->expects($this->any())->method('getManager')->willReturn($em);

@@ -264,7 +264,7 @@ class SelectorTest extends TestCase
         $deliveryMethod_high_bis = new ServiceDelivery();
         $deliveryMethod_high_bis->setCode('ups_high_bis');
         $deliveryMethod_high_bis->setEnabled(true);
-        $deliveryMethod_high_bis->setPriority(2);
+        $deliveryMethod_high_bis->setPriority(3);
 
         $deliveryPool = new DeliveryPool();
         $deliveryPool->addMethod($deliveryMethod_low);
