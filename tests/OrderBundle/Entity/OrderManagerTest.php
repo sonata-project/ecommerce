@@ -110,7 +110,7 @@ class OrderManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getOrderManager(static function ($qb) use ($self): void {
+            ->getOrderManager(static function ($qb): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }

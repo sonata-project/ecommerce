@@ -49,7 +49,7 @@ class InvoiceManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getInvoiceManager(static function ($qb) use ($self): void {
+            ->getInvoiceManager(static function ($qb): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }
