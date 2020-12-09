@@ -228,7 +228,7 @@ class Paypal extends BasePaypal
             default:
 
                 if ($this->getLogger()) {
-                    $this->getLogger()->emergency(sprintf('[Paypal:handlerError] STATUS_PENDING - uncaught error'));
+                    $this->getLogger()->emergency('[Paypal:handlerError] STATUS_PENDING - uncaught error');
                 }
         }
 

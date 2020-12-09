@@ -71,7 +71,7 @@ final class PostgresReference implements ReferenceInterface
             $date->format('Y-m-d')
         );
 
-        $this->registry->getConnection()->exec(sprintf('BEGIN WORK'));
+        $this->registry->getConnection()->exec('BEGIN WORK');
 
         $this->registry->getConnection()->exec(sprintf('LOCK TABLE %s IN EXCLUSIVE MODE', $tableName));
 
@@ -94,12 +94,12 @@ final class PostgresReference implements ReferenceInterface
             );
             $object->setReference($reference);
         } catch (\Exception $e) {
-            $this->registry->getConnection()->exec(sprintf('ROLLBACK WORK'));
+            $this->registry->getConnection()->exec('ROLLBACK WORK');
 
             throw $e;
         }
 
-        $this->registry->getConnection()->exec(sprintf('COMMIT WORK'));
+        $this->registry->getConnection()->exec('COMMIT WORK');
 
         return $reference;
     }
