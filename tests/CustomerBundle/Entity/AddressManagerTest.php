@@ -108,7 +108,7 @@ class AddressManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getAddressManager(static function ($qb) use ($self): void {
+            ->getAddressManager(static function ($qb): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }

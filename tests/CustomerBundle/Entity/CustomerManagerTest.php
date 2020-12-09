@@ -46,7 +46,7 @@ class CustomerManagerTest extends TestCase
 
         $self = $this;
         $this
-            ->getCustomerManager(static function ($qb) use ($self): void {
+            ->getCustomerManager(static function ($qb): void {
             })
             ->getPager([], 1, 10, ['invalid' => 'ASC']);
     }

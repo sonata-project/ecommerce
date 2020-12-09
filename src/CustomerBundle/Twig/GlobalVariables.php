@@ -21,7 +21,7 @@ final class GlobalVariables
     /**
      * @var string
      */
-    protected $profileTemplate;
+    private $profileTemplate;
 
     public function __construct(string $profileTemplate)
     {

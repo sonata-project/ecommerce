@@ -44,7 +44,7 @@ class Pool
             $code = $this->getProductCode($code);
 
             if (!$code) {
-                throw new \RuntimeException(sprintf('The class is not linked to a ProductProvider!'));
+                throw new \RuntimeException('The class is not linked to a ProductProvider!');
             }
         }
 
@@ -64,7 +64,7 @@ class Pool
             $code = $this->getProductCode($code);
 
             if (!$code) {
-                throw new \RuntimeException(sprintf('The class is not linked to a ProductManager!'));
+                throw new \RuntimeException('The class is not linked to a ProductManager!');
             }
         }
 
