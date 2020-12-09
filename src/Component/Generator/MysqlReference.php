@@ -83,12 +83,12 @@ class MysqlReference implements ReferenceInterface
             $this->registry->getConnection()->update($tableName, ['reference' => $reference], ['id' => $object->getId()]);
             $object->setReference($reference);
         } catch (\Exception $e) {
-            $this->registry->getConnection()->exec(sprintf('UNLOCK TABLES'));
+            $this->registry->getConnection()->exec('UNLOCK TABLES');
 
             throw $e;
         }
 
-        $this->registry->getConnection()->exec(sprintf('UNLOCK TABLES'));
+        $this->registry->getConnection()->exec('UNLOCK TABLES');
 
         return $reference;
     }
