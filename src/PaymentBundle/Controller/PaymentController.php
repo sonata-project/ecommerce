@@ -48,7 +48,7 @@ class PaymentController extends Controller
                 'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.1.0. Providing it will be mandatory in 4.0',
                 BasketFactoryInterface::class,
                 __METHOD__
-            ), E_USER_DEPRECATED);
+            ), \E_USER_DEPRECATED);
         }
 
         if (!$paymentHandler) {
@@ -56,7 +56,7 @@ class PaymentController extends Controller
                 'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.1.0. Providing it will be mandatory in 4.0',
                 PaymentHandlerInterface::class,
                 __METHOD__
-            ), E_USER_DEPRECATED);
+            ), \E_USER_DEPRECATED);
         }
 
         if (!$basket) {
@@ -64,7 +64,7 @@ class PaymentController extends Controller
                 'Not providing a %s instance to %s is deprecated since sonata-project/ecommerce 3.1.0. Providing it will be mandatory in 4.0',
                 Basket::class,
                 __METHOD__
-            ), E_USER_DEPRECATED);
+            ), \E_USER_DEPRECATED);
         }
 
         $this->basketFactory = $basketFactory;
