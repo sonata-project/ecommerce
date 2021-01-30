@@ -36,7 +36,7 @@
         "sonata-project/notification-bundle": "^3.3",
         "sonata-project/seo-bundle": "^2.4",
         "sonata-project/twig-extensions": "^0.1 || ^1.2",
-        "sonata-project/user-bundle": "^4.0",
+        "sonata-project/user-bundle": "^4.9",
         "symfony/config": "^4.4",
         "symfony/console": "^4.4",
         "symfony/dependency-injection": "^4.4",
