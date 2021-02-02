@@ -26,6 +26,7 @@ use Sonata\Component\Product\ProductCategoryInterface;
 use Sonata\Component\Product\ProductCollectionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\FormatterBundle\Formatter\Pool as FormatterPool;
 use Sonata\FormatterBundle\Formatter\RawFormatter;
 use Sonata\ProductBundle\Controller\Api\ProductController;
@@ -44,14 +45,15 @@ class ProductControllerTest extends TestCase
 {
     public function testGetProductsAction(): void
     {
+        $pager = $this->createStub(PagerInterface::class);
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('getPager')->willReturn([]);
+        $productManager->expects($this->once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get');
+        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $this->assertSame([], $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
+        $this->assertSame($pager, $this->createProductController(null, $productManager)->getProductsAction($paramFetcher));
     }
 
     public function testGetProductAction(): void

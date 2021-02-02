@@ -26,6 +26,7 @@ use Sonata\Component\Product\Pool;
 use Sonata\Component\Product\ProductDefinition;
 use Sonata\Component\Product\ProductInterface;
 use Sonata\Component\Product\ProductManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -39,14 +40,15 @@ class BasketControllerTest extends TestCase
 {
     public function testGetBasketsAction(): void
     {
+        $pager = $this->createStub(PagerInterface::class);
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('getPager')->willReturn([]);
+        $basketManager->expects($this->once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get');
+        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $this->assertSame([], $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
+        $this->assertSame($pager, $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
     public function testGetBasketAction(): void

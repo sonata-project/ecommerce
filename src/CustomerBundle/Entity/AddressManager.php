@@ -16,7 +16,7 @@ namespace Sonata\CustomerBundle\Entity;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class AddressManager extends BaseEntityManager implements AddressManagerInterface
@@ -56,7 +56,7 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
         parent::delete($address, $andFlush);
     }
 
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
+    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
     {
         $query = $this->getRepository()
             ->createQueryBuilder('a')
@@ -84,12 +84,6 @@ class AddressManager extends BaseEntityManager implements AddressManagerInterfac
 
         $query->setParameters($parameters);
 
-        $pager = new Pager();
-        $pager->setMaxPerPage($limit);
-        $pager->setQuery(new ProxyQuery($query));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
+        return Pager::create($query, $limit, $page);
     }
 }

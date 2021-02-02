@@ -16,7 +16,7 @@ namespace Sonata\Component\Basket;
 use Doctrine\ORM\NoResultException;
 use Sonata\Component\Customer\CustomerInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class BasketManager extends BaseEntityManager implements BasketManagerInterface
@@ -44,7 +44,7 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
         parent::save($entity, $andFlush);
     }
 
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
+    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
     {
         $query = $this->getRepository()
             ->createQueryBuilder('b')
@@ -63,12 +63,6 @@ class BasketManager extends BaseEntityManager implements BasketManagerInterface
             $query->orderBy(sprintf('b.%s', $field), strtoupper($direction));
         }
 
-        $pager = new Pager();
-        $pager->setMaxPerPage($limit);
-        $pager->setQuery(new ProxyQuery($query));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
+        return Pager::create($query, $limit, $page);
     }
 }

@@ -18,6 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\Component\Invoice\InvoiceElementInterface;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Invoice\InvoiceManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\InvoiceBundle\Controller\Api\InvoiceController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -28,14 +29,15 @@ class InvoiceControllerTest extends TestCase
 {
     public function testGetInvoicesAction(): void
     {
+        $pager = $this->createStub(PagerInterface::class);
         $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
-        $invoiceManager->expects($this->once())->method('getPager')->willReturn([]);
+        $invoiceManager->expects($this->once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get');
+        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $this->assertSame([], $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
+        $this->assertSame($pager, $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }
 
     public function testGetInvoiceAction(): void
