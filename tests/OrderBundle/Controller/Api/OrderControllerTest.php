@@ -18,6 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\OrderBundle\Controller\Api\OrderController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -28,14 +29,15 @@ class OrderControllerTest extends TestCase
 {
     public function testGetOrdersAction(): void
     {
+        $pager = $this->createStub(PagerInterface::class);
         $orderManager = $this->createMock(OrderManagerInterface::class);
-        $orderManager->expects($this->once())->method('getPager')->willReturn([]);
+        $orderManager->expects($this->once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get');
+        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $this->assertSame([], $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
+        $this->assertSame($pager, $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
     public function testGetOrderAction(): void
