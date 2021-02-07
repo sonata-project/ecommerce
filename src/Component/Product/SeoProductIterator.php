@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Product;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Sonata\Exporter\Source\DoctrineDBALConnectionSourceIterator;
 use Sonata\Exporter\Source\SourceIteratorInterface;
 use Sonata\Exporter\Source\SymfonySitemapSourceIterator;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -33,7 +33,7 @@ class SeoProductIterator implements SourceIteratorInterface
      * @param string $class
      * @param string $routeName
      */
-    public function __construct(RegistryInterface $registry, $class, RouterInterface $router, $routeName)
+    public function __construct(ManagerRegistry $registry, $class, RouterInterface $router, $routeName)
     {
         $tableName = $registry->getManager()->getClassMetadata($class)->table['name'];
 
