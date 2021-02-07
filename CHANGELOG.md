@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.0](https://github.com/sonata-project/ecommerce/compare/3.4.0...3.5.0) - 2021-02-05
+### Added
+- [[#714](https://github.com/sonata-project/ecommerce/pull/714)] Support for sonata-project/datagrid-bundle to version ^3.0 ([@wbloszyk](https://github.com/wbloszyk))
+- [[#730](https://github.com/sonata-project/ecommerce/pull/730)] Added compatibility with `doctrine/doctrine-bundle` ^2.0 ([@jordisala1991](https://github.com/jordisala1991))
+
+### Changed
+- [[#769](https://github.com/sonata-project/ecommerce/pull/769)] Bump "knplabs/knp-menu-bundle" to ^3.0. ([@wbloszyk](https://github.com/wbloszyk))
+
+### Removed
+- [[#714](https://github.com/sonata-project/ecommerce/pull/714)] Support for sonata-project/datagrid-bundle to version < 3.0 ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.4.0](https://github.com/sonata-project/ecommerce/compare/3.3.0...3.4.0) - 2020-10-19
 ### Added
 - [[#688](https://github.com/sonata-project/ecommerce/pull/688)] Support for "friendsofsymfony/rest-bundle:^3.0" ([@wbloszyk](https://github.com/wbloszyk))
