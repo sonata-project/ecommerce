@@ -13,18 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\Component\Generator;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Sonata\Component\Invoice\InvoiceInterface;
 use Sonata\Component\Order\OrderInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class MysqlReference implements ReferenceInterface
 {
     /**
-     * @var RegistryInterface
+     * @var ManagerRegistry
      */
     protected $registry;
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
     }
