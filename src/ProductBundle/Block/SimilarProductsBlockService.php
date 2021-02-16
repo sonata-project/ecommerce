@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ProductBundle\Block;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -23,7 +24,6 @@ use Sonata\Component\Product\ProductFinderInterface;
 use Sonata\Form\Type\ImmutableArrayType;
 use Sonata\Form\Validator\ErrorElement;
 use Sonata\ProductBundle\Repository\BaseProductRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -54,7 +54,7 @@ class SimilarProductsBlockService extends BaseBlockService
      * @param string $name
      * @param string $productClass
      */
-    public function __construct($name, EngineInterface $templating, RegistryInterface $registry, CurrencyDetectorInterface $currencyDetector, ProductFinderInterface $productFinder, $productClass)
+    public function __construct($name, EngineInterface $templating, ManagerRegistry $registry, CurrencyDetectorInterface $currencyDetector, ProductFinderInterface $productFinder, $productClass)
     {
         $this->productRepository = $registry->getManager()->getRepository($productClass);
         $this->currencyDetector = $currencyDetector;

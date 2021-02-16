@@ -15,9 +15,9 @@ namespace Sonata\Component\Tests\Generator;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\MysqlReference;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Xavier Coureau <xcoureau@ekino.com>
@@ -79,7 +79,7 @@ class MysqlReferenceTest extends TestCase
             ->method('query')
             ->willReturn($statement);
 
-        $registry = $this->createMock(RegistryInterface::class);
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManager')->willReturn($em);
         $registry->expects($this->any())->method('getConnection')->willReturn($connection);
 
