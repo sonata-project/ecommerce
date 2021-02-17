@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.1](https://github.com/sonata-project/ecommerce/compare/3.5.0...3.5.1) - 2021-02-16
+### Changed
+- [[#771](https://github.com/sonata-project/ecommerce/pull/771)] Change usage of `Symfony\Bridge\Doctrine\RegistryInterface` into `Doctrine\Persistence\ManagerRegistry` (BC) ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.5.0](https://github.com/sonata-project/ecommerce/compare/3.4.0...3.5.0) - 2021-02-05
 ### Added
 - [[#714](https://github.com/sonata-project/ecommerce/pull/714)] Support for sonata-project/datagrid-bundle to version ^3.0 ([@wbloszyk](https://github.com/wbloszyk))
