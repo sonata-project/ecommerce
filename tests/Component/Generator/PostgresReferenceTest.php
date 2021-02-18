@@ -15,9 +15,9 @@ namespace Sonata\Component\Tests\Generator;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\Component\Generator\PostgresReference;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
@@ -77,7 +77,7 @@ class PostgresReferenceTest extends TestCase
             ->method('query')
             ->willReturn(new \PDOStatement());
 
-        $registry = $this->createMock(RegistryInterface::class);
+        $registry = $this->createMock(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManager')->willReturn($em);
         $registry->expects($this->any())->method('getConnection')->willReturn($connection);
 

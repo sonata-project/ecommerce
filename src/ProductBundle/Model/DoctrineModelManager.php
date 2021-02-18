@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\ProductBundle\Model;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Sonata\Component\Product\Pool;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * this method overwrite the default AdminModelManager to call
@@ -28,7 +28,7 @@ class DoctrineModelManager extends ModelManager
      */
     protected $pool;
 
-    public function __construct(RegistryInterface $registry, Pool $pool)
+    public function __construct(ManagerRegistry $registry, Pool $pool)
     {
         parent::__construct($registry);
 
