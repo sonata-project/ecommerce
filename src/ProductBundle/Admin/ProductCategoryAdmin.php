@@ -41,8 +41,7 @@ class ProductCategoryAdmin extends AbstractAdmin
         $formMapper
             ->add('category')
             ->add('main')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     public function configureListFields(ListMapper $list): void
@@ -56,16 +55,14 @@ class ProductCategoryAdmin extends AbstractAdmin
         }
 
         $list
-            ->addIdentifier('category')
-        ;
+            ->addIdentifier('category');
     }
 
     public function configureDatagridFilters(DatagridMapper $filter): void
     {
         if (!$this->isChild()) {
             $filter
-                ->add('category')
-            ;
+                ->add('category');
         }
     }
 

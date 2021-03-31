@@ -45,8 +45,7 @@ class DeliveryAdmin extends AbstractAdmin
             ->add('code', DeliveryChoiceType::class)
             ->add('perItem')
             ->add('countryCode', CountryType::class)
-            ->add('zone')
-        ;
+            ->add('zone');
     }
 
     public function configureListFields(ListMapper $list): void
@@ -64,8 +63,7 @@ class DeliveryAdmin extends AbstractAdmin
             ->add('enabled')
             ->add('perItem')
             ->add('countryCode')
-            ->add('zone')
-        ;
+            ->add('zone');
     }
 
     protected function configureSideMenu(MenuItemInterface $menu, $action, ?AdminInterface $childAdmin = null): void
@@ -88,7 +86,6 @@ class DeliveryAdmin extends AbstractAdmin
     {
         $filter
             ->add('code')
-            ->add('countryCode')
-        ;
+            ->add('countryCode');
     }
 }

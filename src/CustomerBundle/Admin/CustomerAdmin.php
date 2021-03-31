@@ -60,8 +60,7 @@ class CustomerAdmin extends AbstractAdmin
                 ->add('mobileNumber')
                 ->add('faxNumber')
                 ->add('isFake')
-            ->end()
-        ;
+            ->end();
     }
 
     public function configureListFields(ListMapper $list): void
@@ -72,8 +71,7 @@ class CustomerAdmin extends AbstractAdmin
             ->add('email')
             ->add('createdAt')
             ->add('locale')
-            ->add('isFake')
-        ;
+            ->add('isFake');
     }
 
     public function configureShowFields(ShowMapper $filter): void
@@ -93,8 +91,7 @@ class CustomerAdmin extends AbstractAdmin
                 ->add('mobileNumber')
                 ->add('faxNumber')
                 ->add('isFake')
-            ->end()
-        ;
+            ->end();
     }
 
     public function configureDatagridFilters(DatagridMapper $filter): void
@@ -105,8 +102,7 @@ class CustomerAdmin extends AbstractAdmin
             ->add('user')
             ->add('email')
             ->add('locale', null, [], LocaleType::class)
-            ->add('isFake')
-        ;
+            ->add('isFake');
     }
 
     protected function configureSideMenu(MenuItemInterface $menu, $action, ?AdminInterface $childAdmin = null): void

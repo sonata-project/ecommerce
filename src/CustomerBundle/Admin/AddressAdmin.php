@@ -41,8 +41,7 @@ class AddressAdmin extends AbstractAdmin
                 ->add('firstname')
                 ->add('lastname')
                 ->add('phone')
-            ->end()
-        ;
+            ->end();
 
         $formMapper
             ->with('address.form.group_advanced_label', [
@@ -56,8 +55,7 @@ class AddressAdmin extends AbstractAdmin
         if (!$this->isChild()) {
             $formMapper->with('address.form.group_contact_label')
                 ->add('customer', ModelListType::class)
-            ->end()
-            ;
+            ->end();
         }
 
         $formMapper
@@ -70,8 +68,7 @@ class AddressAdmin extends AbstractAdmin
                 ->add('postcode')
                 ->add('city')
                 ->add('countryCode', CountryType::class)
-            ->end()
-        ;
+            ->end();
     }
 
     public function configureListFields(ListMapper $list): void
@@ -83,21 +80,18 @@ class AddressAdmin extends AbstractAdmin
                 'template' => '@SonataCustomer/Admin/list_address.html.twig',
             ])
             ->add('current')
-            ->add('typeCode', 'trans', ['catalogue' => $this->translationDomain])
-        ;
+            ->add('typeCode', 'trans', ['catalogue' => $this->translationDomain]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('current')
-            ->add('type', null, [], AddressTypeType::class, ['translation_domain' => 'SonataCustomerBundle'])
-        ;
+            ->add('type', null, [], AddressTypeType::class, ['translation_domain' => 'SonataCustomerBundle']);
 
         if (!$this->isChild()) {
             $filter
-                ->add('customer')
-            ;
+                ->add('customer');
         }
     }
 }
