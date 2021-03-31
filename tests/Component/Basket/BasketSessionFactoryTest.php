@@ -51,8 +51,7 @@ class BasketSessionFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
@@ -82,8 +81,7 @@ class BasketSessionFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
@@ -111,8 +109,7 @@ class BasketSessionFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
@@ -155,8 +152,7 @@ class BasketSessionFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketSessionFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 

@@ -77,15 +77,13 @@ class OrderAdmin extends AbstractAdmin
         $formMapper
              ->with('order.form.group_main_label', ['class' => 'col-md-12'])->end()
              ->with('order.form.group_billing_label', ['class' => 'col-md-6'])->end()
-             ->with('order.form.group_shipping_label', ['class' => 'col-md-6'])->end()
-        ;
+             ->with('order.form.group_shipping_label', ['class' => 'col-md-6'])->end();
 
         if (!$this->isChild()) {
             $formMapper
                 ->with('order.form.group_main_label')
                     ->add('customer', ModelListType::class)
-                ->end()
-            ;
+                ->end();
         }
 
         $formMapper
@@ -120,8 +118,7 @@ class OrderAdmin extends AbstractAdmin
                 ->add('shippingFax')
                 ->add('shippingEmail')
                 ->add('shippingMobile')
-            ->end()
-        ;
+            ->end();
     }
 
     public function configureListFields(ListMapper $list): void
@@ -146,15 +143,13 @@ class OrderAdmin extends AbstractAdmin
                 'template' => '@SonataOrder/OrderAdmin/list_payment_status.html.twig',
             ])
             ->add('validatedAt')
-            ->add('totalInc', CurrencyFormType::class, ['currency' => $currency])
-        ;
+            ->add('totalInc', CurrencyFormType::class, ['currency' => $currency]);
     }
 
     public function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('reference')
-        ;
+            ->add('reference');
 
         if (!$this->isChild()) {
             $filter->add('customer.lastname');
@@ -163,8 +158,7 @@ class OrderAdmin extends AbstractAdmin
         $filter
             ->add('status', null, [], OrderStatusType::class, ['translation_domain' => $this->translationDomain])
             ->add('deliveryStatus', null, [], ProductDeliveryStatusType::class, ['translation_domain' => 'SonataDeliveryBundle'])
-            ->add('paymentStatus', null, [], PaymentTransactionStatusType::class, ['translation_domain' => 'SonataPaymentBundle'])
-        ;
+            ->add('paymentStatus', null, [], PaymentTransactionStatusType::class, ['translation_domain' => 'SonataPaymentBundle']);
     }
 
     public function configureRoutes(RouteCollection $collection): void

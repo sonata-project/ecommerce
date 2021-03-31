@@ -315,20 +315,16 @@ class ProductControllerTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
         $product->expects($this->once())
             ->method('getDescriptionFormatter')
-            ->willReturn('foo')
-        ;
+            ->willReturn('foo');
         $product->expects($this->once())
             ->method('getRawDescription')
-            ->willReturn('description')
-        ;
+            ->willReturn('description');
         $product->expects($this->once())
             ->method('getShortDescriptionFormatter')
-            ->willReturn('foo')
-        ;
+            ->willReturn('foo');
         $product->expects($this->once())
             ->method('getRawShortDescription')
-            ->willReturn('shortDescription')
-        ;
+            ->willReturn('shortDescription');
 
         return $product;
     }
@@ -341,12 +337,10 @@ class ProductControllerTest extends TestCase
 
         $template->expects($this->exactly(2))
             ->method('render')
-            ->willReturn('Salut')
-        ;
+            ->willReturn('Salut');
         $env->expects($this->exactly(2))
             ->method('createTemplate')
-            ->willReturn($template)
-        ;
+            ->willReturn($template);
 
         $formatterPool = new FormatterPool('whatever');
         $formatterPool->setLogger($this->createMock(LoggerInterface::class));

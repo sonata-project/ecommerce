@@ -101,8 +101,7 @@ class ProductAdmin extends AbstractAdmin
                 'currency' => $this->currencyDetector->getCurrency()->getLabel(),
             ])
             ->add('productCategories', null, ['associated_tostring' => 'getCategory'])
-            ->add('productCollections', null, ['associated_tostring' => 'getCollection'])
-        ;
+            ->add('productCollections', null, ['associated_tostring' => 'getCollection']);
     }
 
     public function configureDatagridFilters(DatagridMapper $filter): void
@@ -112,8 +111,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('sku')
             ->add('enabled')
             ->add('productCategories.category', null, ['field_options' => ['expanded' => false, 'multiple' => true]])
-            ->add('productCollections.collection', null, ['field_options' => ['expanded' => false, 'multiple' => true]])
-        ;
+            ->add('productCollections.collection', null, ['field_options' => ['expanded' => false, 'multiple' => true]]);
     }
 
     public function setProductPool(Pool $productPool): void
@@ -167,8 +165,7 @@ class ProductAdmin extends AbstractAdmin
     public function validate(ErrorElement $errorElement, $object): void
     {
         $errorElement
-            ->assertCallback(['callback' => 'validateOneMainCategory'])
-        ;
+            ->assertCallback(['callback' => 'validateOneMainCategory']);
     }
 
     public function postUpdate($product): void
