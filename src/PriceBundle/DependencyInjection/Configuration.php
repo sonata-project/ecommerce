@@ -56,7 +56,6 @@ class Configuration implements ConfigurationInterface
                         ->thenInvalid("Invalid currency '%s'")
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 }

@@ -32,8 +32,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->scalarNode('selector')->defaultValue('sonata.delivery.selector.default')->cannotBeEmpty()->end()
-            ->end()
-        ;
+            ->end();
 
         $this->addDeliverySection($node);
         $this->addModelSection($node);
@@ -88,8 +87,7 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->end()
                 ->end()
 
-            ->end()
-        ;
+            ->end();
     }
 
     private function addModelSection(ArrayNodeDefinition $node): void

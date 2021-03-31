@@ -104,8 +104,7 @@ class ProductManager extends BaseEntityManager implements ProductManagerInterfac
             ->where('p.parent = :parent')
             ->andWhere('p.enabled = :enabled')
             ->setParameter('parent', $product)
-            ->setParameter('enabled', true)
-        ;
+            ->setParameter('enabled', true);
 
         return $queryBuilder->getQuery()->execute();
     }

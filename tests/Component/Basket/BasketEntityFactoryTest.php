@@ -48,8 +48,7 @@ class BasketEntityFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
@@ -79,8 +78,7 @@ class BasketEntityFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
@@ -112,8 +110,7 @@ class BasketEntityFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
@@ -139,8 +136,7 @@ class BasketEntityFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
@@ -167,8 +163,7 @@ class BasketEntityFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->save($basket);
@@ -191,8 +186,7 @@ class BasketEntityFactoryTest extends TestCase
         $currency->setLabel('EUR');
         $currencyDetector->expects($this->any())
             ->method('getCurrency')
-            ->willReturn($currency)
-        ;
+            ->willReturn($currency);
 
         $factory = new BasketEntityFactory($basketManager, $basketBuilder, $currencyDetector, $session);
         $factory->reset($basket);

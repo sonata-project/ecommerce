@@ -68,8 +68,7 @@ class ProductCategoryManager extends BaseEntityManager implements ProductCategor
             ->select('c, pc')
             ->leftJoin('pc.category', 'c')
             ->where('pc.enabled = true')
-            ->andWhere('c.enabled = true')
-        ;
+            ->andWhere('c.enabled = true');
 
         $pCategories = $qb->getQuery()->execute();
 

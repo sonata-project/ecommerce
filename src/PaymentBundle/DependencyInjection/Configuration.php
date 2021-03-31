@@ -40,8 +40,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('basket')->defaultValue('sonata.payment.transformer.basket')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
 
         $this->addPaymentSection($node);
         $this->addModelSection($node);
@@ -268,8 +267,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('code')
                     ->prototype('scalar')->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 
     private function addModelSection(ArrayNodeDefinition $node): void
@@ -283,7 +281,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('transaction')->defaultValue('App\\Sonata\\PaymentBundle\\Entity\\Transaction')->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 }

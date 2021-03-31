@@ -67,8 +67,7 @@ class OrderElementAdmin extends AbstractAdmin
                 ->add('description', null, ['required' => false])
                 ->add('status', OrderStatusType::class, ['translation_domain' => 'SonataOrderBundle'])
                 ->add('deliveryStatus', ProductDeliveryStatusType::class, ['translation_domain' => 'SonataDeliveryBundle'])
-            ->end()
-        ;
+            ->end();
     }
 
     public function configureListFields(ListMapper $list): void
@@ -87,7 +86,6 @@ class OrderElementAdmin extends AbstractAdmin
             ])
             ->add('getTotal', CurrencyFormType::class, [
                 'currency' => $this->currencyDetector->getCurrency()->getLabel(),
-            ])
-        ;
+            ]);
     }
 }
