@@ -34,8 +34,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('builder')->defaultValue('sonata.basket.builder.standard')->cannotBeEmpty()->end()
                 ->scalarNode('factory')->defaultValue('sonata.basket.session.factory')->cannotBeEmpty()->end()
                 ->scalarNode('loader')->defaultValue('sonata.basket.loader.standard')->cannotBeEmpty()->end()
-            ->end()
-        ;
+            ->end();
 
         $this->addModelSection($node);
         $this->addFormSection($node);
@@ -55,8 +54,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('customer')->defaultValue('App\\Sonata\\CustomerBundle\\Entity\\Customer')->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 
     private function addFormSection(ArrayNodeDefinition $node): void
@@ -102,7 +100,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 }

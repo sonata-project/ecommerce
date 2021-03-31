@@ -40,8 +40,7 @@ class ProductCollectionAdmin extends AbstractAdmin
 
         $formMapper
             ->add('collection')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     public function configureListFields(ListMapper $list): void
@@ -55,16 +54,14 @@ class ProductCollectionAdmin extends AbstractAdmin
         }
 
         $list
-            ->addIdentifier('collection')
-        ;
+            ->addIdentifier('collection');
     }
 
     public function configureDatagridFilters(DatagridMapper $filter): void
     {
         if (!$this->isChild()) {
             $filter
-                ->add('collection')
-            ;
+                ->add('collection');
         }
     }
 

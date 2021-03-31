@@ -411,8 +411,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('price', NumberType::class)
             ->add('priceIncludingVat')
             ->add('vatRate', NumberType::class)
-            ->add('stock', IntegerType::class)
-        ;
+            ->add('stock', IntegerType::class);
 
         if (!$isVariation || \in_array('description', $this->variationFields, true)) {
             $formMapper->add('description', FormatterType::class, [
@@ -482,8 +481,7 @@ abstract class BaseProductProvider implements ProductProviderInterface
             ->add('number')
             ->add('vatRate')
             ->add('stock')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     public function createVariation(ProductInterface $product, $copyDependencies = true)

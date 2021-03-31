@@ -47,8 +47,7 @@ class InvoiceAdmin extends AbstractAdmin
             $formMapper
                 ->with('invoice.form.group_main_label')
                     ->add('customer', ModelListType::class)
-                ->end()
-            ;
+                ->end();
         }
 
         $formMapper
@@ -71,8 +70,7 @@ class InvoiceAdmin extends AbstractAdmin
                 ->add('fax')
                 ->add('email')
                 ->add('mobile')
-            ->end()
-        ;
+            ->end();
     }
 
     public function configureListFields(ListMapper $list): void
@@ -88,8 +86,7 @@ class InvoiceAdmin extends AbstractAdmin
             ])
             ->add('totalInc', CurrencyFormType::class, [
                 'currency' => $this->currencyDetector->getCurrency()->getLabel(),
-            ])
-        ;
+            ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
@@ -97,7 +94,6 @@ class InvoiceAdmin extends AbstractAdmin
         $filter
             ->add('reference')
             ->add('customer')
-            ->add('status', null, [], InvoiceStatusType::class, ['translation_domain' => $this->translationDomain])
-        ;
+            ->add('status', null, [], InvoiceStatusType::class, ['translation_domain' => $this->translationDomain]);
     }
 }

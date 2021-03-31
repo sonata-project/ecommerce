@@ -48,8 +48,7 @@ class GenerateProductCommand extends Command
                 new InputArgument('namespace_prefix', InputArgument::OPTIONAL, 'The namespace prefix for the classes'),
             ])
             ->setName('sonata:product:generate')
-            ->setDescription('Generates required files for a new Product')
-        ;
+            ->setDescription('Generates required files for a new Product');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
