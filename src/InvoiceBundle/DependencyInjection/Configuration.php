@@ -48,7 +48,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('customer')->defaultValue('App\\Sonata\\CustomerBundle\\Entity\\Customer')->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 }

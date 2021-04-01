@@ -51,8 +51,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 
     private function addModelSection(ArrayNodeDefinition $node): void
@@ -73,8 +72,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('gallery')->defaultValue('App\\Sonata\\MediaBundle\\Entity\\Gallery')->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
 
     private function addSeoSection(ArrayNodeDefinition $node): void
