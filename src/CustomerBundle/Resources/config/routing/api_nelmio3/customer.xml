@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing https://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="get_customers" path="/customers.{_format}" methods="GET" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::getCustomersAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_customer" path="/customers/{id}.{_format}" methods="GET" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::getCustomerAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="post_customer" path="/customers.{_format}" methods="POST" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::postCustomerAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="put_customer" path="/customers/{id}.{_format}" methods="PUT" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::putCustomerAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="delete_customer" path="/customers/{id}.{_format}" methods="DELETE" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::deleteCustomerAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_customer_orders" path="/customers/{id}/orders.{_format}" methods="GET" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::getCustomerOrdersAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_customer_addresses" path="/customers/{id}/addresses.{_format}" methods="GET" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::getCustomerAddressesAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="post_customer_address" path="/customers/{id}/addresses.{_format}" methods="POST" controller="Sonata\CustomerBundle\Controller\Api\CustomerController::postCustomerAddressAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+</routes>

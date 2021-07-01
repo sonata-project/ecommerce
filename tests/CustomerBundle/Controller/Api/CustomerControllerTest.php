@@ -55,12 +55,28 @@ class CustomerControllerTest extends TestCase
         $this->assertSame($customer, $this->createCustomerController($customer)->getCustomerAction(1));
     }
 
-    public function testGetCustomerActionNotFoundException(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetCustomerActionNotFoundException($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Customer (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createCustomerController()->getCustomerAction(42);
+        $this->createCustomerController()->getCustomerAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Customer not found for identifier 42.'],
+            ['42', 'Customer not found for identifier \'42\'.'],
+            [null, 'Customer not found for identifier NULL.'],
+            ['', 'Customer not found for identifier \'\'.'],
+        ];
     }
 
     public function testGetCustomerOrdersAction(): void

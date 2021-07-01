@@ -46,12 +46,28 @@ class OrderControllerTest extends TestCase
         $this->assertSame($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
-    public function testGetOrderActionNotFoundException(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetOrderActionNotFoundException($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Order (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createOrderController()->getOrderAction(42);
+        $this->createOrderController()->getOrderAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Order not found for identifier 42.'],
+            ['42', 'Order not found for identifier \'42\'.'],
+            [null, 'Order not found for identifier NULL.'],
+            ['', 'Order not found for identifier \'\'.'],
+        ];
     }
 
     public function testGetOrderOrderelementsAction(): void

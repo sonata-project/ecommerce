@@ -11,18 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\CustomerBundle\Controller\Api;
+namespace Sonata\CustomerBundle\Controller\Api\Legacy;
 
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Operation;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
-use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,42 +50,9 @@ class AddressController
     /**
      * Returns a paginated list of addresses.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/addresses"},
-     *     summary="Returns a paginated list of addresses.",
-     *     @SWG\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="Page for addresses list pagination (1-indexed)",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="count",
-     *         in="query",
-     *         description="Number of addresses per page",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="orderBy",
-     *         in="query",
-     *         description="Sort specification for the resultset (key is field, value is direction",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="customer",
-     *         in="query",
-     *         description="Filter on customer id",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for addresses list pagination (1-indexed)")
@@ -126,18 +91,16 @@ class AddressController
     /**
      * Retrieves a specific address.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/addresses"},
-     *     summary="Retrieves a specific address.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\Component\Customer\AddressInterface"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when address is not found"
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Address identifier"}
+     *  },
+     *  output={"class"="Sonata\Component\Customer\AddressInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when address is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -154,18 +117,13 @@ class AddressController
     /**
      * Adds an address.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/addresses"},
-     *     summary="Adds an address.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\CustomerBundle\Model\Address"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while address creation"
-     *     )
+     * @ApiDoc(
+     *  input={"class"="sonata_customer_api_form_address", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\CustomerBundle\Model\Address", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while address creation",
+     *  }
      * )
      *
      * @param Request $request Symfony request
@@ -180,18 +138,16 @@ class AddressController
     /**
      * Updates an address.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/addresses"},
-     *     summary="Updates an address.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\CustomerBundle\Model\Address"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while address creation"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Address identifier"}
+     *  },
+     *  input={"class"="sonata_customer_api_form_address", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\CustomerBundle\Model\Address", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while address creation",
+     *  }
      * )
      *
      * @param string  $id      Address identifier
@@ -207,21 +163,15 @@ class AddressController
     /**
      * Deletes an address.
      *
-     * @Operation(
-     *     tags={"/api/ecommerce/addresses"},
-     *     summary="Deletes an address.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when customer is successfully deleted"
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while address deletion"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find address"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Address identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when customer is successfully deleted",
+     *      400="Returned when an error has occurred while address deletion",
+     *      404="Returned when unable to find address"
+     *  }
      * )
      *
      * @param string $id Address identifier
