@@ -54,8 +54,8 @@
         "symfony/process": "^4.4",
         "symfony/property-access": "^4.4",
         "symfony/routing": "^4.4",
-        "symfony/security-core": "^4.4",
-        "symfony/security-http": "^4.4",
+        "symfony/security-core": "^4.4.23",
+        "symfony/security-http": "^4.4.23",
         "symfony/string": "^5.1",
         "symfony/templating": "^4.4",
         "symfony/translation": "^4.4",
@@ -76,7 +76,7 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "nelmio/api-doc-bundle": "^2.13",
-        "symfony/phpunit-bridge": "^5.1.8"
+        "symfony/phpunit-bridge": "^5.3"
     },
     "suggest": {
         "friendsofsymfony/rest-bundle": "For using the public API methods.",
