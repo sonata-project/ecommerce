@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="fr" datatype="plaintext" original="validators.en.xliff">
-        <body>
-            <trans-unit id="product_not_available">
-                <source>product_not_available</source>
-                <target>Le produit n'est pas disponible.</target>
-            </trans-unit>
-            <trans-unit id="product_not_enabled">
-                <source>product_not_enabled</source>
-                <target>Le produit n'est pas activé.</target>
-            </trans-unit>
-            <trans-unit id="product_quantity_not_numeric">
-                <source>product_quantity_not_numeric</source>
-                <target>La quantité du produit n'est pas une valeur numérique.</target>
-            </trans-unit>
-            <trans-unit id="basket_quantity_limit_min">
-                <source>basket_quantity_limit_min</source>
-                <target>Vous devez avoir au moins {{ limit }} produit dans votre panier.</target>
-            </trans-unit>
-            <trans-unit id="basket_quantity_limit_max">
-                <source>basket_quantity_limit_max</source>
-                <target>Il y a seulement {{ limit }} produits restant en stock, alors que vous tentez d'en commander {{ value }}.</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="product_not_available">
+        <source>product_not_available</source>
+        <target>Le produit n'est pas disponible.</target>
+      </trans-unit>
+      <trans-unit id="product_not_enabled">
+        <source>product_not_enabled</source>
+        <target>Le produit n'est pas activé.</target>
+      </trans-unit>
+      <trans-unit id="product_quantity_not_numeric">
+        <source>product_quantity_not_numeric</source>
+        <target>La quantité du produit n'est pas une valeur numérique.</target>
+      </trans-unit>
+      <trans-unit id="basket_quantity_limit_min">
+        <source>basket_quantity_limit_min</source>
+        <target>Vous devez avoir au moins {{ limit }} produit dans votre panier.</target>
+      </trans-unit>
+      <trans-unit id="basket_quantity_limit_max">
+        <source>basket_quantity_limit_max</source>
+        <target>Il y a seulement {{ limit }} produits restant en stock, alors que vous tentez d'en commander {{ value }}.</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
