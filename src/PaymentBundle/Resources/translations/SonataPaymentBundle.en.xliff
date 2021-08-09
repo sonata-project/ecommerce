@@ -1,172 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
-        <body>
-            <trans-unit id="basket_not_valid">
-                <source>basket_not_valid</source>
-                <target>Your basket is not valid.</target>
-            </trans-unit>
-            <trans-unit id="basket_not_valid_with_current_payment_method">
-                <source>basket_not_valid_with_current_payment_method</source>
-                <target>Your basket is not valid with the current payment method.</target>
-            </trans-unit>
-            <trans-unit id="message_error_payment">
-                <source>message_error_payment</source>
-                <target>There is an error. Your payment can’t be completed.</target>
-            </trans-unit>
-            <trans-unit id="message_not_validated_payment">
-                <source>message_not_validated_payment</source>
-                <target>Your payment can’t be validated.</target>
-            </trans-unit>
-            <trans-unit id="message_pending_payment">
-                <source>message_pending_payment</source>
-                <target>Your payment is pending.</target>
-            </trans-unit>
-            <trans-unit id="message_validation_payment">
-                <source>message_validation_payment</source>
-                <target><![CDATA[Your payment is confirmed!<br/>
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="basket_not_valid">
+        <source>basket_not_valid</source>
+        <target>Your basket is not valid.</target>
+      </trans-unit>
+      <trans-unit id="basket_not_valid_with_current_payment_method">
+        <source>basket_not_valid_with_current_payment_method</source>
+        <target>Your basket is not valid with the current payment method.</target>
+      </trans-unit>
+      <trans-unit id="message_error_payment">
+        <source>message_error_payment</source>
+        <target>There is an error. Your payment can’t be completed.</target>
+      </trans-unit>
+      <trans-unit id="message_not_validated_payment">
+        <source>message_not_validated_payment</source>
+        <target>Your payment can’t be validated.</target>
+      </trans-unit>
+      <trans-unit id="message_pending_payment">
+        <source>message_pending_payment</source>
+        <target>Your payment is pending.</target>
+      </trans-unit>
+      <trans-unit id="message_validation_payment">
+        <source>message_validation_payment</source>
+        <target><![CDATA[Your payment is confirmed!<br/>
             You can view your order history by going to the your account page and by clicking on 'Orders'.<br/>
             Thanks for shopping with us online!]]></target>
-            </trans-unit>
-            <trans-unit id="title_error_payment">
-                <source>title_error_payment</source>
-                <target>Payment error</target>
-            </trans-unit>
-            <trans-unit id="title_not_validated_confirmation_payment">
-                <source>title_not_validated_confirmation_payment</source>
-                <target>Confirmation payment invalid</target>
-            </trans-unit>
-            <trans-unit id="title_pending_confirmation_payment">
-                <source>title_pending_confirmation_payment</source>
-                <target>Confirmation payment pending</target>
-            </trans-unit>
-            <trans-unit id="title_validation_confirmation_payment">
-                <source>title_validation_confirmation_payment</source>
-                <target>Confirmation payment valid</target>
-            </trans-unit>
-            <trans-unit id="process_to_paiement_bank_page">
-                <source>process_to_paiement_bank_page</source>
-                <target>Process to paiement (bank page)</target>
-            </trans-unit>
-            <trans-unit id="process_to_paiement_btn">
-                <source>process_to_paiement_btn</source>
-                <target>Check out</target>
-            </trans-unit>
-            <trans-unit id="status_stopped">
-                <source>status_stopped</source>
-                <target>Stopped</target>
-            </trans-unit>
-            <trans-unit id="status_open">
-                <source>status_open</source>
-                <target>Open</target>
-            </trans-unit>
-            <trans-unit id="status_pending">
-                <source>status_pending</source>
-                <target>Pending</target>
-            </trans-unit>
-            <trans-unit id="status_validated">
-                <source>status_validated</source>
-                <target>Validated</target>
-            </trans-unit>
-            <trans-unit id="status_cancelled">
-                <source>status_cancelled</source>
-                <target>Cancelled</target>
-            </trans-unit>
-            <trans-unit id="status_error">
-                <source>status_error</source>
-                <target>Error</target>
-            </trans-unit>
-            <trans-unit id="contract_status_sent_to_user">
-                <source>contract_status_sent_to_user</source>
-                <target>Sent to user</target>
-            </trans-unit>
-            <trans-unit id="contract_status_to_send">
-                <source>contract_status_to_send</source>
-                <target>To send</target>
-            </trans-unit>
-            <trans-unit id="contract_status_waiting_customer">
-                <source>contract_status_waiting_customer</source>
-                <target>Waiting customer</target>
-            </trans-unit>
-            <trans-unit id="contract_status_validated">
-                <source>contract_status_validated</source>
-                <target>Validated</target>
-            </trans-unit>
-            <trans-unit id="contract_status_canceled">
-                <source>contract_status_canceled</source>
-                <target>Canceled</target>
-            </trans-unit>
-            <trans-unit id="contract_status_expired">
-                <source>contract_status_expired</source>
-                <target>Expired</target>
-            </trans-unit>
-            <trans-unit id="order_unknown">
-                <source>order_unknown</source>
-                <target>Order unknown</target>
-            </trans-unit>
-            <trans-unit id="open">
-                <source>open</source>
-                <target>Open</target>
-            </trans-unit>
-            <trans-unit id="pending">
-                <source>pending</source>
-                <target>Pending</target>
-            </trans-unit>
-            <trans-unit id="validated">
-                <source>validated</source>
-                <target>Validated</target>
-            </trans-unit>
-            <trans-unit id="cancelled">
-                <source>cancelled</source>
-                <target>Cancelled</target>
-            </trans-unit>
-            <trans-unit id="status_unknown">
-                <source>status_unknown</source>
-                <target>Unknown</target>
-            </trans-unit>
-            <trans-unit id="error_validation">
-                <source>error_validation</source>
-                <target>Error validation</target>
-            </trans-unit>
-            <trans-unit id="wrong_callback">
-                <source>wrong_callback</source>
-                <target>Wrong callback</target>
-            </trans-unit>
-            <trans-unit id="wrong_request">
-                <source>wrong_request</source>
-                <target>Wrong request</target>
-            </trans-unit>
-            <trans-unit id="order_to_open">
-                <source>order_to_open</source>
-                <target>Order to open</target>
-            </trans-unit>
-            <trans-unit id="method">
-                <source>method</source>
-                <target>Method</target>
-            </trans-unit>
-            <trans-unit id="message_view_order_payment">
-                <source>message_view_order_payment</source>
-                <target>Check your order</target>
-            </trans-unit>
-            <trans-unit id="message_view_user_profile">
-                <source>message_view_user_profile</source>
-                <target>Go to your profile</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_title">
-                <source>debug_payment_title</source>
-                <target>Payment simulation</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_alert_title">
-                <source>debug_payment_alert_title</source>
-                <target>Warning!</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_alert_text">
-                <source>debug_payment_alert_text</source>
-                <target>Debug payment method is for debug purpose only. Do not use in a production environment.</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_help">
-                <source>debug_payment_help</source>
-                <target><![CDATA[
+      </trans-unit>
+      <trans-unit id="title_error_payment">
+        <source>title_error_payment</source>
+        <target>Payment error</target>
+      </trans-unit>
+      <trans-unit id="title_not_validated_confirmation_payment">
+        <source>title_not_validated_confirmation_payment</source>
+        <target>Confirmation payment invalid</target>
+      </trans-unit>
+      <trans-unit id="title_pending_confirmation_payment">
+        <source>title_pending_confirmation_payment</source>
+        <target>Confirmation payment pending</target>
+      </trans-unit>
+      <trans-unit id="title_validation_confirmation_payment">
+        <source>title_validation_confirmation_payment</source>
+        <target>Confirmation payment valid</target>
+      </trans-unit>
+      <trans-unit id="process_to_paiement_bank_page">
+        <source>process_to_paiement_bank_page</source>
+        <target>Process to paiement (bank page)</target>
+      </trans-unit>
+      <trans-unit id="process_to_paiement_btn">
+        <source>process_to_paiement_btn</source>
+        <target>Check out</target>
+      </trans-unit>
+      <trans-unit id="status_stopped">
+        <source>status_stopped</source>
+        <target>Stopped</target>
+      </trans-unit>
+      <trans-unit id="status_open">
+        <source>status_open</source>
+        <target>Open</target>
+      </trans-unit>
+      <trans-unit id="status_pending">
+        <source>status_pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="status_validated">
+        <source>status_validated</source>
+        <target>Validated</target>
+      </trans-unit>
+      <trans-unit id="status_cancelled">
+        <source>status_cancelled</source>
+        <target>Cancelled</target>
+      </trans-unit>
+      <trans-unit id="status_error">
+        <source>status_error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit id="contract_status_sent_to_user">
+        <source>contract_status_sent_to_user</source>
+        <target>Sent to user</target>
+      </trans-unit>
+      <trans-unit id="contract_status_to_send">
+        <source>contract_status_to_send</source>
+        <target>To send</target>
+      </trans-unit>
+      <trans-unit id="contract_status_waiting_customer">
+        <source>contract_status_waiting_customer</source>
+        <target>Waiting customer</target>
+      </trans-unit>
+      <trans-unit id="contract_status_validated">
+        <source>contract_status_validated</source>
+        <target>Validated</target>
+      </trans-unit>
+      <trans-unit id="contract_status_canceled">
+        <source>contract_status_canceled</source>
+        <target>Canceled</target>
+      </trans-unit>
+      <trans-unit id="contract_status_expired">
+        <source>contract_status_expired</source>
+        <target>Expired</target>
+      </trans-unit>
+      <trans-unit id="order_unknown">
+        <source>order_unknown</source>
+        <target>Order unknown</target>
+      </trans-unit>
+      <trans-unit id="open">
+        <source>open</source>
+        <target>Open</target>
+      </trans-unit>
+      <trans-unit id="pending">
+        <source>pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="validated">
+        <source>validated</source>
+        <target>Validated</target>
+      </trans-unit>
+      <trans-unit id="cancelled">
+        <source>cancelled</source>
+        <target>Cancelled</target>
+      </trans-unit>
+      <trans-unit id="status_unknown">
+        <source>status_unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="error_validation">
+        <source>error_validation</source>
+        <target>Error validation</target>
+      </trans-unit>
+      <trans-unit id="wrong_callback">
+        <source>wrong_callback</source>
+        <target>Wrong callback</target>
+      </trans-unit>
+      <trans-unit id="wrong_request">
+        <source>wrong_request</source>
+        <target>Wrong request</target>
+      </trans-unit>
+      <trans-unit id="order_to_open">
+        <source>order_to_open</source>
+        <target>Order to open</target>
+      </trans-unit>
+      <trans-unit id="method">
+        <source>method</source>
+        <target>Method</target>
+      </trans-unit>
+      <trans-unit id="message_view_order_payment">
+        <source>message_view_order_payment</source>
+        <target>Check your order</target>
+      </trans-unit>
+      <trans-unit id="message_view_user_profile">
+        <source>message_view_user_profile</source>
+        <target>Go to your profile</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_title">
+        <source>debug_payment_title</source>
+        <target>Payment simulation</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_alert_title">
+        <source>debug_payment_alert_title</source>
+        <target>Warning!</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_alert_text">
+        <source>debug_payment_alert_text</source>
+        <target>Debug payment method is for debug purpose only. Do not use in a production environment.</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_help">
+        <source>debug_payment_help</source>
+        <target><![CDATA[
             This Debug Payment method help you to debug your payment process, chose an action to continue the process&nbsp;:
             <br />
             <ul>
@@ -175,55 +175,55 @@
                 <li><strong>Cancel payment</strong>&nbsp;: Simulates a cancellation (payment cancelled by the user before submitted to the bank).</li>
             </ul>
         ]]></target>
-            </trans-unit>
-            <trans-unit id="debug_payment_ok_action">
-                <source>debug_payment_ok_action</source>
-                <target>Bank action : Accept payment</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_ko_action">
-                <source>debug_payment_ko_action</source>
-                <target>Bank action : Refuse payment</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_cancel_action">
-                <source>debug_payment_cancel_action</source>
-                <target>User action : Cancel payment</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_data_title">
-                <source>debug_payment_data_title</source>
-                <target>Order details</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_data_header">
-                <source>debug_payment_data_header</source>
-                <target>These are some data stored in your current order.</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_id">
-                <source>debug_payment_id</source>
-                <target>Id</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_reference">
-                <source>debug_payment_reference</source>
-                <target>Reference</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_status">
-                <source>debug_payment_status</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_payment_status">
-                <source>debug_payment_payment_status</source>
-                <target>Payment status</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_delivery_status">
-                <source>debug_payment_delivery_status</source>
-                <target>Delivery status</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_payment_method">
-                <source>debug_payment_payment_method</source>
-                <target>Payment method</target>
-            </trans-unit>
-            <trans-unit id="debug_payment_delivery_method">
-                <source>debug_payment_delivery_method</source>
-                <target>Delivery method</target>
-            </trans-unit>
-        </body>
-    </file>
+      </trans-unit>
+      <trans-unit id="debug_payment_ok_action">
+        <source>debug_payment_ok_action</source>
+        <target>Bank action : Accept payment</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_ko_action">
+        <source>debug_payment_ko_action</source>
+        <target>Bank action : Refuse payment</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_cancel_action">
+        <source>debug_payment_cancel_action</source>
+        <target>User action : Cancel payment</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_data_title">
+        <source>debug_payment_data_title</source>
+        <target>Order details</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_data_header">
+        <source>debug_payment_data_header</source>
+        <target>These are some data stored in your current order.</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_id">
+        <source>debug_payment_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_reference">
+        <source>debug_payment_reference</source>
+        <target>Reference</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_status">
+        <source>debug_payment_status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_payment_status">
+        <source>debug_payment_payment_status</source>
+        <target>Payment status</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_delivery_status">
+        <source>debug_payment_delivery_status</source>
+        <target>Delivery status</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_payment_method">
+        <source>debug_payment_payment_method</source>
+        <target>Payment method</target>
+      </trans-unit>
+      <trans-unit id="debug_payment_delivery_method">
+        <source>debug_payment_delivery_method</source>
+        <target>Delivery method</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

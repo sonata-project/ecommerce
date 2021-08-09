@@ -1,560 +1,560 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
-        <body>
-            <!-- Begin - Titles -->
-            <trans-unit id="order">
-                <source>order</source>
-                <target>Order</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.title_order">
-                <source>sonata.order.title_order</source>
-                <target>Your order</target>
-            </trans-unit>
-            <!-- End - Titles -->
-            <!-- Begin - Sidemenu translations -->
-            <trans-unit id="sonata.order.sidemenu.link_order_edit">
-                <source>sonata.order.sidemenu.link_order_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.sidemenu.link_order_elements_list">
-                <source>sonata.order.sidemenu.link_order_elements_list</source>
-                <target>Elements</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.sidemenu.link_oRDER_TO_INVOICE_list">
-                <source>sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit</source>
-                <target>Invoice</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate">
-                <source>sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate</source>
-                <target>Generate invoice</target>
-            </trans-unit>
-            <!-- End - Sidemenu translations -->
-            <!-- Begin - Breadcrumb translations -->
-            <trans-unit id="breadcrumb.link_order_list">
-                <source>breadcrumb.link_order_list</source>
-                <target>Orders</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_order_edit">
-                <source>breadcrumb.link_order_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_orderelement_list">
-                <source>breadcrumb.link_orderelement_list</source>
-                <target>Elements</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_order_element_list">
-                <source>breadcrumb.link_order_element_list</source>
-                <target>Elements</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_orderelement_edit">
-                <source>breadcrumb.link_orderelement_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_order_history">
-                <source>breadcrumb.link_order_history</source>
-                <target>Revision history</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_order_element_create">
-                <source>breadcrumb.link_order_element_create</source>
-                <target>Create element</target>
-            </trans-unit>
-            <!-- End - Breadcrumb translations -->
-            <!-- Begin - Global translations -->
-            <trans-unit id="oRDER_TO_INVOICE_generate_success">
-                <source>oRDER_TO_INVOICE_generate_success</source>
-                <target>Invoice generated with success</target>
-            </trans-unit>
-            <!-- End - Global translations -->
-            <!-- Begin - Form translations -->
-            <trans-unit id="order_element.form.group_main_label">
-                <source>order_element.form.group_main_label</source>
-                <target>General</target>
-            </trans-unit>
-            <trans-unit id="order.form.group_main_label">
-                <source>order.form.group_main_label</source>
-                <target>General</target>
-            </trans-unit>
-            <trans-unit id="order.form.group_billing_label">
-                <source>order.form.group_billing_label</source>
-                <target>Billing</target>
-            </trans-unit>
-            <trans-unit id="order.form.group_shipping_label">
-                <source>order.form.group_shipping_label</source>
-                <target>Shipping</target>
-            </trans-unit>
-            <trans-unit id="order.form.group_misc_label">
-                <source>order.form.group_misc_label</source>
-                <target>Misc</target>
-            </trans-unit>
-            <!-- End - Form translations -->
-            <!-- Begin - Filters translations -->
-            <trans-unit id="filter.label_reference">
-                <source>filter.label_reference</source>
-                <target>Reference</target>
-            </trans-unit>
-            <trans-unit id="filter.label_customer">
-                <source>filter.label_customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="filter.label_locale">
-                <source>filter.label_locale</source>
-                <target>Locale</target>
-            </trans-unit>
-            <trans-unit id="filter.label_customer_lastname">
-                <source>filter.label_customer_lastname</source>
-                <target>Lastname</target>
-            </trans-unit>
-            <trans-unit id="filter.label_status">
-                <source>filter.label_status</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="filter.label_delivery_status">
-                <source>filter.label_delivery_status</source>
-                <target>Delivery status</target>
-            </trans-unit>
-            <trans-unit id="filter.label_payment_status">
-                <source>filter.label_payment_status</source>
-                <target>Payment Status</target>
-            </trans-unit>
-            <!-- End - Filters translations -->
-            <!-- Begin - List translations -->
-            <trans-unit id="list.label_id">
-                <source>list.label_id</source>
-                <target>ID</target>
-            </trans-unit>
-            <trans-unit id="list.label_reference">
-                <source>list.label_reference</source>
-                <target>Reference</target>
-            </trans-unit>
-            <trans-unit id="list.label_customer">
-                <source>list.label_customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="list.label_locale">
-                <source>list.label_locale</source>
-                <target>Locale</target>
-            </trans-unit>
-            <trans-unit id="list.label_status">
-                <source>list.label_status</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="list.label_delivery_status">
-                <source>list.label_delivery_status</source>
-                <target>Delivery status</target>
-            </trans-unit>
-            <trans-unit id="list.label_payment_status">
-                <source>list.label_payment_status</source>
-                <target>Payment status</target>
-            </trans-unit>
-            <trans-unit id="list.label_validated_at">
-                <source>list.label_validated_at</source>
-                <target>Validated at</target>
-            </trans-unit>
-            <trans-unit id="list.label_total_excl">
-                <source>list.label_total_excl</source>
-                <target>Total excl. VAT</target>
-            </trans-unit>
-            <trans-unit id="list.label__action">
-                <source>list.label__action</source>
-                <target>Action</target>
-            </trans-unit>
-            <trans-unit id="list.label_product_type">
-                <source>list.label_product_type</source>
-                <target>Product type</target>
-            </trans-unit>
-            <trans-unit id="list.label_order">
-                <source>list.label_order</source>
-                <target>Order</target>
-            </trans-unit>
-            <trans-unit id="list.label_get_total_with_vat">
-                <source>list.label_get_total_with_vat</source>
-                <target>Total incl. VAT</target>
-            </trans-unit>
-            <trans-unit id="list.label_get_total">
-                <source>list.label_get_total</source>
-                <target>Total excl. VAT</target>
-            </trans-unit>
-            <trans-unit id="list.label_total_inc">
-                <source>list.label_total_inc</source>
-                <target>Total incl. VAT</target>
-            </trans-unit>
-            <trans-unit id="list.label_payment_method">
-                <source>list.label_payment_method</source>
-                <target>Payment method</target>
-            </trans-unit>
-            <trans-unit id="list.label_delivery_method">
-                <source>list.label_delivery_method</source>
-                <target>Delivery method</target>
-            </trans-unit>
-            <trans-unit id="list.label_get_status_name">
-                <source>list.label_get_status_name</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="list.label_get_delivery_status_name">
-                <source>list.label_get_delivery_status_name</source>
-                <target>Delivery status</target>
-            </trans-unit>
-            <!-- End - List translations -->
-            <!-- Begin - Status translations -->
-            <trans-unit id="status_open">
-                <source>status_open</source>
-                <target>Open</target>
-            </trans-unit>
-            <trans-unit id="status_pending">
-                <source>status_pending</source>
-                <target>Pending</target>
-            </trans-unit>
-            <trans-unit id="status_order_unknown">
-                <source>status_order_unknown</source>
-                <target>Order unknown</target>
-            </trans-unit>
-            <trans-unit id="status_validated">
-                <source>status_validated</source>
-                <target>Validated</target>
-            </trans-unit>
-            <trans-unit id="status_cancelled">
-                <source>status_cancelled</source>
-                <target>Cancelled</target>
-            </trans-unit>
-            <trans-unit id="status_unknown">
-                <source>status_unknown</source>
-                <target>Unknown</target>
-            </trans-unit>
-            <trans-unit id="status_error_validation">
-                <source>status_error_validation</source>
-                <target>Validation error</target>
-            </trans-unit>
-            <trans-unit id="status_wrong_callback">
-                <source>status_wrong_callback</source>
-                <target>Wrong callback</target>
-            </trans-unit>
-            <trans-unit id="status_wrong_request">
-                <source>status_wrong_request</source>
-                <target>Wrong request</target>
-            </trans-unit>
-            <trans-unit id="status_order_not_open">
-                <source>status_order_not_open</source>
-                <target>Order not open</target>
-            </trans-unit>
-            <trans-unit id="status_error">
-                <source>status_error</source>
-                <target>In error</target>
-            </trans-unit>
-            <trans-unit id="status_stopped">
-                <source>status_stopped</source>
-                <target>Stopped</target>
-            </trans-unit>
-            <!-- End - Status translations -->
-            <trans-unit id="form.label_locale">
-                <source>form.label_locale</source>
-                <target>Locale</target>
-            </trans-unit>
-            <trans-unit id="form.label_currency">
-                <source>form.label_currency</source>
-                <target>Currency</target>
-            </trans-unit>
-            <trans-unit id="form.label_status">
-                <source>form.label_status</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="form.label_payment_status">
-                <source>form.label_payment_status</source>
-                <target>Payment status</target>
-            </trans-unit>
-            <trans-unit id="form.label_delivery_status">
-                <source>form.label_delivery_status</source>
-                <target>Delivery status</target>
-            </trans-unit>
-            <trans-unit id="form.label_validated_at">
-                <source>form.label_validated_at</source>
-                <target>Validated at</target>
-            </trans-unit>
-            <trans-unit id="form.label_customer">
-                <source>form.label_customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_name">
-                <source>form.label_billing_name</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_phone">
-                <source>form.label_billing_phone</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_address1">
-                <source>form.label_billing_address1</source>
-                <target>Address 1</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_address2">
-                <source>form.label_billing_address2</source>
-                <target>Address 2</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_address3">
-                <source>form.label_billing_address3</source>
-                <target>Address 3</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_postcode">
-                <source>form.label_billing_postcode</source>
-                <target>Postcode</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_city">
-                <source>form.label_billing_city</source>
-                <target>City</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_country_code">
-                <source>form.label_billing_country_code</source>
-                <target>Country code</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_fax">
-                <source>form.label_billing_fax</source>
-                <target>Fax</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_mobile">
-                <source>form.label_billing_mobile</source>
-                <target>Mobile</target>
-            </trans-unit>
-            <trans-unit id="form.label_billing_email">
-                <source>form.label_billing_email</source>
-                <target>E-mail</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_name">
-                <source>form.label_shipping_name</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_phone">
-                <source>form.label_shipping_phone</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_address1">
-                <source>form.label_shipping_address1</source>
-                <target>Address 1</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_address2">
-                <source>form.label_shipping_address2</source>
-                <target>Address 2</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_address3">
-                <source>form.label_shipping_address3</source>
-                <target>Address 3</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_postcode">
-                <source>form.label_shipping_postcode</source>
-                <target>Postcode</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_city">
-                <source>form.label_shipping_city</source>
-                <target>City</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_country_code">
-                <source>form.label_shipping_country_code</source>
-                <target>Country code</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_fax">
-                <source>form.label_shipping_fax</source>
-                <target>Fax</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_mobile">
-                <source>form.label_shipping_mobile</source>
-                <target>Mobile</target>
-            </trans-unit>
-            <trans-unit id="form.label_shipping_email">
-                <source>form.label_shipping_email</source>
-                <target>E-mail</target>
-            </trans-unit>
-            <trans-unit id="form.label_product_type">
-                <source>form.label_product_type</source>
-                <target>Product type</target>
-            </trans-unit>
-            <trans-unit id="form.label_price">
-                <source>form.label_price</source>
-                <target>Price</target>
-            </trans-unit>
-            <trans-unit id="form.label_quantity">
-                <source>form.label_quantity</source>
-                <target>Quantity</target>
-            </trans-unit>
-            <trans-unit id="form.label_vat">
-                <source>form.label_vat</source>
-                <target>VAT</target>
-            </trans-unit>
-            <trans-unit id="form.label_designation">
-                <source>form.label_designation</source>
-                <target>Designation</target>
-            </trans-unit>
-            <trans-unit id="form.label_description">
-                <source>form.label_description</source>
-                <target>Description</target>
-            </trans-unit>
-            <!-- End - Filters translations -->
-            <!-- Begin - View order translations -->
-            <trans-unit id="sonata.order.view.in_progress_title">
-                <source>sonata.order.view.in_progress_title</source>
-                <target>Current orders</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.done_title">
-                <source>sonata.order.view.done_title</source>
-                <target>Past orders</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.created_at">
-                <source>sonata.order.view.created_at</source>
-                <target>Creation date</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.validated_at">
-                <source>sonata.order.view.validated_at</source>
-                <target>Validation date</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.updated_at">
-                <source>sonata.order.view.updated_at</source>
-                <target>Last update date</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.delivery">
-                <source>sonata.order.view.delivery</source>
-                <target>Delivery charge</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.delivery_title">
-                <source>sonata.order.view.delivery_title</source>
-                <target>Delivery Address</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.billing_title">
-                <source>sonata.order.view.billing_title</source>
-                <target>Billing Address</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.element.id">
-                <source>sonata.order.view.element.id</source>
-                <target>Id</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.element.label">
-                <source>sonata.order.view.element.label</source>
-                <target>Label</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.element.unit_price">
-                <source>sonata.order.view.element.unit_price</source>
-                <target>Unit Price</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.element.price">
-                <source>sonata.order.view.element.price</source>
-                <target>Price</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.element.quantity">
-                <source>sonata.order.view.element.quantity</source>
-                <target>Quantity</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.element.vat">
-                <source>sonata.order.view.element.vat</source>
-                <target>VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.order_with_id">
-                <source>sonata.order.view.order_with_id</source>
-                <target>Order #%orderId%</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.invoice">
-                <source>sonata.order.view.invoice</source>
-                <target>Invoice</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.reference">
-                <source>sonata.order.view.reference</source>
-                <target>Reference</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.elements">
-                <source>sonata.order.view.elements</source>
-                <target>Review order</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.subtitle_elements">
-                <source>sonata.order.view.subtitle_elements</source>
-                <target>Elements</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.subtitle_dates">
-                <source>sonata.order.view.subtitle_dates</source>
-                <target>Dates</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.total_excl">
-                <source>sonata.order.view.total_excl</source>
-                <target>Total excl. VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.total_vat">
-                <source>sonata.order.view.total_vat</source>
-                <target>Total VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.total_inc">
-                <source>sonata.order.view.total_inc</source>
-                <target>Total inc. VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata_order_view_vat">
-                <source>sonata_order_view_vat</source>
-                <target>VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view_invoice">
-                <source>sonata.order.view_invoice</source>
-                <target>Your invoice</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.status">
-                <source>sonata.order.view.status</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.subtitle_statuses">
-                <source>sonata.order.view.subtitle_statuses</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.order_status">
-                <source>sonata.order.view.order_status</source>
-                <target>Order status</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.payment_status">
-                <source>sonata.order.view.payment_status</source>
-                <target>Payment status</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.view.delivery_status">
-                <source>sonata.order.view.delivery_status</source>
-                <target>Delivery status</target>
-            </trans-unit>
-            <!-- End - Order view translations -->
-            <!-- Begin - Order admin confirm invoice generation translations -->
-            <trans-unit id="sonata.order.invoice_generate_confirm_title">
-                <source>sonata.order.invoice_generate_confirm_title</source>
-                <target>Invoice generation</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.invoice_generate_confirm_message">
-                <source>sonata.order.invoice_generate_confirm_message</source>
-                <target>You're about to generate an invoice for this order. Are you sure you want to proceed?</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.invoice_generate_confirm_cancel">
-                <source>sonata.order.invoice_generate_confirm_cancel</source>
-                <target>Back to the order</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.invoice_generate_confirm_confirm">
-                <source>sonata.order.invoice_generate_confirm_confirm</source>
-                <target>Generate invoice</target>
-            </trans-unit>
-            <!-- End - Order admin confirm invoice generation translations -->
-            <!-- Begin - Order front translations -->
-            <trans-unit id="order_list">
-                <source>order_list</source>
-                <target>Orders</target>
-            </trans-unit>
-            <trans-unit id="sonata.order.list.no_orders">
-                <source>sonata.order.list.no_orders</source>
-                <target>You don't have any orders yet.</target>
-            </trans-unit>
-            <trans-unit id="view_all_orders">
-                <source>view_all_orders</source>
-                <target>View all orders</target>
-            </trans-unit>
-            <!-- End - Order front translations -->
-            <!-- Begin - Order page titles translations -->
-            <trans-unit id="order_index_title">
-                <source>order_index_title</source>
-                <target>Your orders</target>
-            </trans-unit>
-            <trans-unit id="order_view_title">
-                <source>order_view_title</source>
-                <target>Your order</target>
-            </trans-unit>
-            <!-- End - Order page titles translations -->
-            <trans-unit id="sonata_order_user_breadcrumb">
-                <source>sonata_order_user_breadcrumb</source>
-                <target>Orders</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <!-- Begin - Titles -->
+      <trans-unit id="order">
+        <source>order</source>
+        <target>Order</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.title_order">
+        <source>sonata.order.title_order</source>
+        <target>Your order</target>
+      </trans-unit>
+      <!-- End - Titles -->
+      <!-- Begin - Sidemenu translations -->
+      <trans-unit id="sonata.order.sidemenu.link_order_edit">
+        <source>sonata.order.sidemenu.link_order_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.sidemenu.link_order_elements_list">
+        <source>sonata.order.sidemenu.link_order_elements_list</source>
+        <target>Elements</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.sidemenu.link_oRDER_TO_INVOICE_list">
+        <source>sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit</source>
+        <target>Invoice</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate">
+        <source>sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate</source>
+        <target>Generate invoice</target>
+      </trans-unit>
+      <!-- End - Sidemenu translations -->
+      <!-- Begin - Breadcrumb translations -->
+      <trans-unit id="breadcrumb.link_order_list">
+        <source>breadcrumb.link_order_list</source>
+        <target>Orders</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_order_edit">
+        <source>breadcrumb.link_order_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_orderelement_list">
+        <source>breadcrumb.link_orderelement_list</source>
+        <target>Elements</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_order_element_list">
+        <source>breadcrumb.link_order_element_list</source>
+        <target>Elements</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_orderelement_edit">
+        <source>breadcrumb.link_orderelement_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_order_history">
+        <source>breadcrumb.link_order_history</source>
+        <target>Revision history</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_order_element_create">
+        <source>breadcrumb.link_order_element_create</source>
+        <target>Create element</target>
+      </trans-unit>
+      <!-- End - Breadcrumb translations -->
+      <!-- Begin - Global translations -->
+      <trans-unit id="oRDER_TO_INVOICE_generate_success">
+        <source>oRDER_TO_INVOICE_generate_success</source>
+        <target>Invoice generated with success</target>
+      </trans-unit>
+      <!-- End - Global translations -->
+      <!-- Begin - Form translations -->
+      <trans-unit id="order_element.form.group_main_label">
+        <source>order_element.form.group_main_label</source>
+        <target>General</target>
+      </trans-unit>
+      <trans-unit id="order.form.group_main_label">
+        <source>order.form.group_main_label</source>
+        <target>General</target>
+      </trans-unit>
+      <trans-unit id="order.form.group_billing_label">
+        <source>order.form.group_billing_label</source>
+        <target>Billing</target>
+      </trans-unit>
+      <trans-unit id="order.form.group_shipping_label">
+        <source>order.form.group_shipping_label</source>
+        <target>Shipping</target>
+      </trans-unit>
+      <trans-unit id="order.form.group_misc_label">
+        <source>order.form.group_misc_label</source>
+        <target>Misc</target>
+      </trans-unit>
+      <!-- End - Form translations -->
+      <!-- Begin - Filters translations -->
+      <trans-unit id="filter.label_reference">
+        <source>filter.label_reference</source>
+        <target>Reference</target>
+      </trans-unit>
+      <trans-unit id="filter.label_customer">
+        <source>filter.label_customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="filter.label_locale">
+        <source>filter.label_locale</source>
+        <target>Locale</target>
+      </trans-unit>
+      <trans-unit id="filter.label_customer_lastname">
+        <source>filter.label_customer_lastname</source>
+        <target>Lastname</target>
+      </trans-unit>
+      <trans-unit id="filter.label_status">
+        <source>filter.label_status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="filter.label_delivery_status">
+        <source>filter.label_delivery_status</source>
+        <target>Delivery status</target>
+      </trans-unit>
+      <trans-unit id="filter.label_payment_status">
+        <source>filter.label_payment_status</source>
+        <target>Payment Status</target>
+      </trans-unit>
+      <!-- End - Filters translations -->
+      <!-- Begin - List translations -->
+      <trans-unit id="list.label_id">
+        <source>list.label_id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="list.label_reference">
+        <source>list.label_reference</source>
+        <target>Reference</target>
+      </trans-unit>
+      <trans-unit id="list.label_customer">
+        <source>list.label_customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="list.label_locale">
+        <source>list.label_locale</source>
+        <target>Locale</target>
+      </trans-unit>
+      <trans-unit id="list.label_status">
+        <source>list.label_status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="list.label_delivery_status">
+        <source>list.label_delivery_status</source>
+        <target>Delivery status</target>
+      </trans-unit>
+      <trans-unit id="list.label_payment_status">
+        <source>list.label_payment_status</source>
+        <target>Payment status</target>
+      </trans-unit>
+      <trans-unit id="list.label_validated_at">
+        <source>list.label_validated_at</source>
+        <target>Validated at</target>
+      </trans-unit>
+      <trans-unit id="list.label_total_excl">
+        <source>list.label_total_excl</source>
+        <target>Total excl. VAT</target>
+      </trans-unit>
+      <trans-unit id="list.label__action">
+        <source>list.label__action</source>
+        <target>Action</target>
+      </trans-unit>
+      <trans-unit id="list.label_product_type">
+        <source>list.label_product_type</source>
+        <target>Product type</target>
+      </trans-unit>
+      <trans-unit id="list.label_order">
+        <source>list.label_order</source>
+        <target>Order</target>
+      </trans-unit>
+      <trans-unit id="list.label_get_total_with_vat">
+        <source>list.label_get_total_with_vat</source>
+        <target>Total incl. VAT</target>
+      </trans-unit>
+      <trans-unit id="list.label_get_total">
+        <source>list.label_get_total</source>
+        <target>Total excl. VAT</target>
+      </trans-unit>
+      <trans-unit id="list.label_total_inc">
+        <source>list.label_total_inc</source>
+        <target>Total incl. VAT</target>
+      </trans-unit>
+      <trans-unit id="list.label_payment_method">
+        <source>list.label_payment_method</source>
+        <target>Payment method</target>
+      </trans-unit>
+      <trans-unit id="list.label_delivery_method">
+        <source>list.label_delivery_method</source>
+        <target>Delivery method</target>
+      </trans-unit>
+      <trans-unit id="list.label_get_status_name">
+        <source>list.label_get_status_name</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="list.label_get_delivery_status_name">
+        <source>list.label_get_delivery_status_name</source>
+        <target>Delivery status</target>
+      </trans-unit>
+      <!-- End - List translations -->
+      <!-- Begin - Status translations -->
+      <trans-unit id="status_open">
+        <source>status_open</source>
+        <target>Open</target>
+      </trans-unit>
+      <trans-unit id="status_pending">
+        <source>status_pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="status_order_unknown">
+        <source>status_order_unknown</source>
+        <target>Order unknown</target>
+      </trans-unit>
+      <trans-unit id="status_validated">
+        <source>status_validated</source>
+        <target>Validated</target>
+      </trans-unit>
+      <trans-unit id="status_cancelled">
+        <source>status_cancelled</source>
+        <target>Cancelled</target>
+      </trans-unit>
+      <trans-unit id="status_unknown">
+        <source>status_unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="status_error_validation">
+        <source>status_error_validation</source>
+        <target>Validation error</target>
+      </trans-unit>
+      <trans-unit id="status_wrong_callback">
+        <source>status_wrong_callback</source>
+        <target>Wrong callback</target>
+      </trans-unit>
+      <trans-unit id="status_wrong_request">
+        <source>status_wrong_request</source>
+        <target>Wrong request</target>
+      </trans-unit>
+      <trans-unit id="status_order_not_open">
+        <source>status_order_not_open</source>
+        <target>Order not open</target>
+      </trans-unit>
+      <trans-unit id="status_error">
+        <source>status_error</source>
+        <target>In error</target>
+      </trans-unit>
+      <trans-unit id="status_stopped">
+        <source>status_stopped</source>
+        <target>Stopped</target>
+      </trans-unit>
+      <!-- End - Status translations -->
+      <trans-unit id="form.label_locale">
+        <source>form.label_locale</source>
+        <target>Locale</target>
+      </trans-unit>
+      <trans-unit id="form.label_currency">
+        <source>form.label_currency</source>
+        <target>Currency</target>
+      </trans-unit>
+      <trans-unit id="form.label_status">
+        <source>form.label_status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="form.label_payment_status">
+        <source>form.label_payment_status</source>
+        <target>Payment status</target>
+      </trans-unit>
+      <trans-unit id="form.label_delivery_status">
+        <source>form.label_delivery_status</source>
+        <target>Delivery status</target>
+      </trans-unit>
+      <trans-unit id="form.label_validated_at">
+        <source>form.label_validated_at</source>
+        <target>Validated at</target>
+      </trans-unit>
+      <trans-unit id="form.label_customer">
+        <source>form.label_customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_name">
+        <source>form.label_billing_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_phone">
+        <source>form.label_billing_phone</source>
+        <target>Phone</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_address1">
+        <source>form.label_billing_address1</source>
+        <target>Address 1</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_address2">
+        <source>form.label_billing_address2</source>
+        <target>Address 2</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_address3">
+        <source>form.label_billing_address3</source>
+        <target>Address 3</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_postcode">
+        <source>form.label_billing_postcode</source>
+        <target>Postcode</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_city">
+        <source>form.label_billing_city</source>
+        <target>City</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_country_code">
+        <source>form.label_billing_country_code</source>
+        <target>Country code</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_fax">
+        <source>form.label_billing_fax</source>
+        <target>Fax</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_mobile">
+        <source>form.label_billing_mobile</source>
+        <target>Mobile</target>
+      </trans-unit>
+      <trans-unit id="form.label_billing_email">
+        <source>form.label_billing_email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_name">
+        <source>form.label_shipping_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_phone">
+        <source>form.label_shipping_phone</source>
+        <target>Phone</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_address1">
+        <source>form.label_shipping_address1</source>
+        <target>Address 1</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_address2">
+        <source>form.label_shipping_address2</source>
+        <target>Address 2</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_address3">
+        <source>form.label_shipping_address3</source>
+        <target>Address 3</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_postcode">
+        <source>form.label_shipping_postcode</source>
+        <target>Postcode</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_city">
+        <source>form.label_shipping_city</source>
+        <target>City</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_country_code">
+        <source>form.label_shipping_country_code</source>
+        <target>Country code</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_fax">
+        <source>form.label_shipping_fax</source>
+        <target>Fax</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_mobile">
+        <source>form.label_shipping_mobile</source>
+        <target>Mobile</target>
+      </trans-unit>
+      <trans-unit id="form.label_shipping_email">
+        <source>form.label_shipping_email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="form.label_product_type">
+        <source>form.label_product_type</source>
+        <target>Product type</target>
+      </trans-unit>
+      <trans-unit id="form.label_price">
+        <source>form.label_price</source>
+        <target>Price</target>
+      </trans-unit>
+      <trans-unit id="form.label_quantity">
+        <source>form.label_quantity</source>
+        <target>Quantity</target>
+      </trans-unit>
+      <trans-unit id="form.label_vat">
+        <source>form.label_vat</source>
+        <target>VAT</target>
+      </trans-unit>
+      <trans-unit id="form.label_designation">
+        <source>form.label_designation</source>
+        <target>Designation</target>
+      </trans-unit>
+      <trans-unit id="form.label_description">
+        <source>form.label_description</source>
+        <target>Description</target>
+      </trans-unit>
+      <!-- End - Filters translations -->
+      <!-- Begin - View order translations -->
+      <trans-unit id="sonata.order.view.in_progress_title">
+        <source>sonata.order.view.in_progress_title</source>
+        <target>Current orders</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.done_title">
+        <source>sonata.order.view.done_title</source>
+        <target>Past orders</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.created_at">
+        <source>sonata.order.view.created_at</source>
+        <target>Creation date</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.validated_at">
+        <source>sonata.order.view.validated_at</source>
+        <target>Validation date</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.updated_at">
+        <source>sonata.order.view.updated_at</source>
+        <target>Last update date</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.delivery">
+        <source>sonata.order.view.delivery</source>
+        <target>Delivery charge</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.delivery_title">
+        <source>sonata.order.view.delivery_title</source>
+        <target>Delivery Address</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.billing_title">
+        <source>sonata.order.view.billing_title</source>
+        <target>Billing Address</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.element.id">
+        <source>sonata.order.view.element.id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.element.label">
+        <source>sonata.order.view.element.label</source>
+        <target>Label</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.element.unit_price">
+        <source>sonata.order.view.element.unit_price</source>
+        <target>Unit Price</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.element.price">
+        <source>sonata.order.view.element.price</source>
+        <target>Price</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.element.quantity">
+        <source>sonata.order.view.element.quantity</source>
+        <target>Quantity</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.element.vat">
+        <source>sonata.order.view.element.vat</source>
+        <target>VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.order_with_id">
+        <source>sonata.order.view.order_with_id</source>
+        <target>Order #%orderId%</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.invoice">
+        <source>sonata.order.view.invoice</source>
+        <target>Invoice</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.reference">
+        <source>sonata.order.view.reference</source>
+        <target>Reference</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.elements">
+        <source>sonata.order.view.elements</source>
+        <target>Review order</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.subtitle_elements">
+        <source>sonata.order.view.subtitle_elements</source>
+        <target>Elements</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.subtitle_dates">
+        <source>sonata.order.view.subtitle_dates</source>
+        <target>Dates</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.total_excl">
+        <source>sonata.order.view.total_excl</source>
+        <target>Total excl. VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.total_vat">
+        <source>sonata.order.view.total_vat</source>
+        <target>Total VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.total_inc">
+        <source>sonata.order.view.total_inc</source>
+        <target>Total inc. VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata_order_view_vat">
+        <source>sonata_order_view_vat</source>
+        <target>VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view_invoice">
+        <source>sonata.order.view_invoice</source>
+        <target>Your invoice</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.status">
+        <source>sonata.order.view.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.subtitle_statuses">
+        <source>sonata.order.view.subtitle_statuses</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.order_status">
+        <source>sonata.order.view.order_status</source>
+        <target>Order status</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.payment_status">
+        <source>sonata.order.view.payment_status</source>
+        <target>Payment status</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.view.delivery_status">
+        <source>sonata.order.view.delivery_status</source>
+        <target>Delivery status</target>
+      </trans-unit>
+      <!-- End - Order view translations -->
+      <!-- Begin - Order admin confirm invoice generation translations -->
+      <trans-unit id="sonata.order.invoice_generate_confirm_title">
+        <source>sonata.order.invoice_generate_confirm_title</source>
+        <target>Invoice generation</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.invoice_generate_confirm_message">
+        <source>sonata.order.invoice_generate_confirm_message</source>
+        <target>You're about to generate an invoice for this order. Are you sure you want to proceed?</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.invoice_generate_confirm_cancel">
+        <source>sonata.order.invoice_generate_confirm_cancel</source>
+        <target>Back to the order</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.invoice_generate_confirm_confirm">
+        <source>sonata.order.invoice_generate_confirm_confirm</source>
+        <target>Generate invoice</target>
+      </trans-unit>
+      <!-- End - Order admin confirm invoice generation translations -->
+      <!-- Begin - Order front translations -->
+      <trans-unit id="order_list">
+        <source>order_list</source>
+        <target>Orders</target>
+      </trans-unit>
+      <trans-unit id="sonata.order.list.no_orders">
+        <source>sonata.order.list.no_orders</source>
+        <target>You don't have any orders yet.</target>
+      </trans-unit>
+      <trans-unit id="view_all_orders">
+        <source>view_all_orders</source>
+        <target>View all orders</target>
+      </trans-unit>
+      <!-- End - Order front translations -->
+      <!-- Begin - Order page titles translations -->
+      <trans-unit id="order_index_title">
+        <source>order_index_title</source>
+        <target>Your orders</target>
+      </trans-unit>
+      <trans-unit id="order_view_title">
+        <source>order_view_title</source>
+        <target>Your order</target>
+      </trans-unit>
+      <!-- End - Order page titles translations -->
+      <trans-unit id="sonata_order_user_breadcrumb">
+        <source>sonata_order_user_breadcrumb</source>
+        <target>Orders</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

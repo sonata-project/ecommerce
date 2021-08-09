@@ -1,447 +1,447 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="fr" datatype="plaintext" original="SonataProductBundle.en.xliff">
-        <body>
-            <!-- Begin - Title translations -->
-            <trans-unit id="title_select_provider">
-                <source>title_select_provider</source>
-                <target>Sélectionner un type</target>
-            </trans-unit>
-            <trans-unit id="sonata.basket.message_product_not_available">
-                <source>sonata.basket.message_product_not_available</source>
-                <target>Le produit est indisponible.</target>
-            </trans-unit>
-            <trans-unit id="product_reference">
-                <source>product_reference</source>
-                <target>Référence</target>
-            </trans-unit>
-            <trans-unit id="sonata.product.btn_add">
-                <source>sonata.product.btn_add</source>
-                <target>Ajouter</target>
-            </trans-unit>
-            <trans-unit id="sonata.product.btn_see">
-                <source>sonata.product.btn_see</source>
-                <target>Voir</target>
-            </trans-unit>
-            <trans-unit id="sonata.product.btn_add_to_basket">
-                <source>sonata.product.btn_add_to_basket</source>
-                <target>Ajouter au panier</target>
-            </trans-unit>
-            <trans-unit id="no_products_available">
-                <source>no_products_available</source>
-                <target>Aucun produit disponible</target>
-            </trans-unit>
-            <trans-unit id="no_sub_categories_available">
-                <source>no_sub_categories_available</source>
-                <target>Aucune sous-catégorie disponible</target>
-            </trans-unit>
-            <trans-unit id="title_category_list">
-                <source>title_category_list</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <trans-unit id="title_list_products">
-                <source>title_list_products</source>
-                <target>Liste des produits</target>
-            </trans-unit>
-            <trans-unit id="title_sub_categories">
-                <source>title_sub_categories</source>
-                <target>Sous-catégories</target>
-            </trans-unit>
-            <trans-unit id="product">
-                <source>product</source>
-                <target>Produit</target>
-            </trans-unit>
-            <trans-unit id="category">
-                <source>category</source>
-                <target>Catégorie</target>
-            </trans-unit>
-            <trans-unit id="delivery">
-                <source>delivery</source>
-                <target>Livraison</target>
-            </trans-unit>
-            <trans-unit id="sonata.product.label_quantity">
-                <source>sonata.product.label_quantity</source>
-                <target>Quantité</target>
-            </trans-unit>
-            <!-- End - Title translations -->
-            <!-- Begin - Sidemenu translations -->
-            <trans-unit id="sidemenu.link_product_edit">
-                <source>sidemenu.link_product_edit</source>
-                <target>Production</target>
-            </trans-unit>
-            <trans-unit id="sidemenu.link_category_list">
-                <source>sidemenu.link_category_list</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <trans-unit id="sidemenu.link_delivery_list">
-                <source>sidemenu.link_delivery_list</source>
-                <target>Livraisons</target>
-            </trans-unit>
-            <trans-unit id="sonata.product.sku">
-                <source>sonata.product.sku</source>
-                <target>Référence</target>
-            </trans-unit>
-            <trans-unit id="product.sidemenu.view_variations">
-                <source>product.sidemenu.view_variations</source>
-                <target>Variations</target>
-            </trans-unit>
-            <trans-unit id="product.sidemenu.view_categories">
-                <source>product.sidemenu.view_categories</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <trans-unit id="product.sidemenu.view_collections">
-                <source>product.sidemenu.view_collections</source>
-                <target>Collections</target>
-            </trans-unit>
-            <trans-unit id="product.sidemenu.view_deliveries">
-                <source>product.sidemenu.view_deliveries</source>
-                <target>Modes de livraison</target>
-            </trans-unit>
-            <!-- End - Sidemenu translations -->
-            <!-- Begin - List translations -->
-            <trans-unit id="list.label_enabled">
-                <source>list.label_enabled</source>
-                <target>Activé</target>
-            </trans-unit>
-            <trans-unit id="list.label_name">
-                <source>list.label_name</source>
-                <target>Nom</target>
-            </trans-unit>
-            <trans-unit id="list.label_sku">
-                <source>list.label_sku</source>
-                <target>SKU</target>
-            </trans-unit>
-            <trans-unit id="list.label_price">
-                <source>list.label_price</source>
-                <target>Prix</target>
-            </trans-unit>
-            <trans-unit id="list.label_stock">
-                <source>list.label_stock</source>
-                <target>Stock</target>
-            </trans-unit>
-            <trans-unit id="list.label_position">
-                <source>list.label_position</source>
-                <target>Position</target>
-            </trans-unit>
-            <trans-unit id="list.label_created_at">
-                <source>list.label_created_at</source>
-                <target>Créé le</target>
-            </trans-unit>
-            <trans-unit id="list.label_updated_at">
-                <source>list.label_updated_at</source>
-                <target>Mis à jour le</target>
-            </trans-unit>
-            <trans-unit id="list.label_code">
-                <source>list.label_code</source>
-                <target>Code</target>
-            </trans-unit>
-            <trans-unit id="list.label_per_item">
-                <source>list.label_per_item</source>
-                <target>Par élément</target>
-            </trans-unit>
-            <trans-unit id="list.label_country_code">
-                <source>list.label_country_code</source>
-                <target>Code pays</target>
-            </trans-unit>
-            <trans-unit id="list.label_zone">
-                <source>list.label_zone</source>
-                <target>Zone</target>
-            </trans-unit>
-            <trans-unit id="list.label_product_categories">
-                <source>list.label_product_categories</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <trans-unit id="list.label_product_collections">
-                <source>list.label_product_collections</source>
-                <target>Collections</target>
-            </trans-unit>
-            <trans-unit id="list.label_category">
-                <source>list.label_category</source>
-                <target>Catégorie</target>
-            </trans-unit>
-            <trans-unit id="list.label_collection">
-                <source>list.label_collection</source>
-                <target>Collection</target>
-            </trans-unit>
-            <!-- End - List translations -->
-            <!-- Begin - Filter translations -->
-            <trans-unit id="filter.label_enabled">
-                <source>filter.label_enabled</source>
-                <target>Activé</target>
-            </trans-unit>
-            <trans-unit id="filter.label_name">
-                <source>filter.label_name</source>
-                <target>Nom</target>
-            </trans-unit>
-            <trans-unit id="filter.label_sku">
-                <source>filter.label_sku</source>
-                <target>SKU</target>
-            </trans-unit>
-            <trans-unit id="filter.label_product_categories_category">
-                <source>filter.label_product_categories_category</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <trans-unit id="filter.label_product_collections_collection">
-                <source>filter.label_product_collections_collection</source>
-                <target>Collections</target>
-            </trans-unit>
-            <trans-unit id="filter.label_code">
-                <source>filter.label_code</source>
-                <target>Code</target>
-            </trans-unit>
-            <trans-unit id="filter.label_country_code">
-                <source>filter.label_country_code</source>
-                <target>Code pays</target>
-            </trans-unit>
-            <trans-unit id="filter.label_product">
-                <source>filter.label_product</source>
-                <target>Produit</target>
-            </trans-unit>
-            <!-- End - Filter translations -->
-            <!-- Begin - Breadcrumb translations -->
-            <trans-unit id="breadcrumb.link_delivery_history">
-                <source>breadcrumb.link_delivery_history</source>
-                <target>Historique des révisions</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_product_list">
-                <source>breadcrumb.link_product_list</source>
-                <target>Produit</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_product_edit">
-                <source>breadcrumb.link_product_edit</source>
-                <target>Edition</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_delivery_list">
-                <source>breadcrumb.link_delivery_list</source>
-                <target>Livraisons</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_category_list">
-                <source>breadcrumb.link_category_list</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_product_create">
-                <source>breadcrumb.link_product_create</source>
-                <target>Création de produit</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_category_history">
-                <source>breadcrumb.link_category_history</source>
-                <target>Historique des catégories</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_product_collection_list">
-                <source>breadcrumb.link_product_collection_list</source>
-                <target>Collections</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_product_category_list">
-                <source>breadcrumb.link_product_category_list</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <!-- End - Breadcrumb translations -->
-            <!-- Begin - Form translations -->
-            <trans-unit id="form.label_sub_description">
-                <source>form.label_sub_description</source>
-                <target>Sous description</target>
-            </trans-unit>
-            <trans-unit id="form.label_description">
-                <source>form.label_description</source>
-                <target>Description</target>
-            </trans-unit>
-            <trans-unit id="form.label_short_description">
-                <source>form.label_short_description</source>
-                <target>Description résumée</target>
-            </trans-unit>
-            <trans-unit id="form.label_position">
-                <source>form.label_position</source>
-                <target>Position</target>
-            </trans-unit>
-            <trans-unit id="form.label_children">
-                <source>form.label_children</source>
-                <target>Enfants</target>
-            </trans-unit>
-            <trans-unit id="form.label_code">
-                <source>form.label_code</source>
-                <target>Code</target>
-            </trans-unit>
-            <trans-unit id="form.label_per_item">
-                <source>form.label_per_item</source>
-                <target>Par élément</target>
-            </trans-unit>
-            <trans-unit id="form.label_country_code">
-                <source>form.label_country_code</source>
-                <target>Code pays</target>
-            </trans-unit>
-            <trans-unit id="form.label_zone">
-                <source>form.label_zone</source>
-                <target>Zone</target>
-            </trans-unit>
-            <trans-unit id="form.label_name">
-                <source>form.label_name</source>
-                <target>Nom</target>
-            </trans-unit>
-            <trans-unit id="form.label_enabled">
-                <source>form.label_enabled</source>
-                <target>Activé</target>
-            </trans-unit>
-            <trans-unit id="form.label_main">
-                <source>form.label_main</source>
-                <target>Principale</target>
-            </trans-unit>
-            <trans-unit id="form.label_sku">
-                <source>form.label_sku</source>
-                <target>SKU</target>
-            </trans-unit>
-            <trans-unit id="form.label_description_formatter">
-                <source>form.label_description_formatter</source>
-                <target>Format de description</target>
-            </trans-unit>
-            <trans-unit id="form.label_raw_description">
-                <source>form.label_raw_description</source>
-                <target>Description</target>
-            </trans-unit>
-            <trans-unit id="form.label_price">
-                <source>form.label_price</source>
-                <target>Prix</target>
-            </trans-unit>
-            <trans-unit id="form.label_vat_rate">
-                <source>form.label_vat_rate</source>
-                <target>TVA</target>
-            </trans-unit>
-            <trans-unit id="form.label_stock">
-                <source>form.label_stock</source>
-                <target>Stock</target>
-            </trans-unit>
-            <trans-unit id="form.label_image">
-                <source>form.label_image</source>
-                <target>Image</target>
-            </trans-unit>
-            <trans-unit id="form.label_gallery">
-                <source>form.label_gallery</source>
-                <target>Gallerie</target>
-            </trans-unit>
-            <trans-unit id="form.label_category">
-                <source>form.label_category</source>
-                <target>Catégorie</target>
-            </trans-unit>
-            <trans-unit id="form.label_product_categories">
-                <source>form.label_product_categories</source>
-                <target>Catégories</target>
-            </trans-unit>
-            <trans-unit id="form.label_deliveries">
-                <source>form.label_deliveries</source>
-                <target>Livraisons</target>
-            </trans-unit>
-            <trans-unit id="form.label_product_collections">
-                <source>form.label_product_collections</source>
-                <target>Collections</target>
-            </trans-unit>
-            <trans-unit id="form.label_collection">
-                <source>form.label_collection</source>
-                <target>Collection</target>
-            </trans-unit>
-            <!-- Begin - Form translations -->
-            <!-- Begin - Product view translations -->
-            <trans-unit id="variation_not_found">
-                <source>variation_not_found</source>
-                <target>Désolé, le produit que vous recherchez n'est pas disponible.</target>
-            </trans-unit>
-            <trans-unit id="product_show_variation">
-                <source>product_show_variation</source>
-                <target>Voir la variation</target>
-            </trans-unit>
-            <trans-unit id="product_price">
-                <source>product_price</source>
-                <target>Prix</target>
-            </trans-unit>
-            <trans-unit id="product_variations">
-                <source>product_variations</source>
-                <target>Variations</target>
-            </trans-unit>
-            <trans-unit id="sonata.product.cross_selling.title">
-                <source>sonata.product.cross_selling.title</source>
-                <target>Dans la même collection</target>
-            </trans-unit>
-            <trans-unit id="product_variation_min_price">
-                <source>product_variation_min_price</source>
-                <target>À partir de</target>
-            </trans-unit>
-            <trans-unit id="product_out_of_stock">
-                <source>product_out_of_stock</source>
-                <target>Attention : ce produit n'est pas disponible actuellement !</target>
-            </trans-unit>
-            <trans-unit id="product_out_of_stock_quantity">
-                <source>product_out_of_stock_quantity</source>
-                <target>Il n'y a pas assez de stock pour répondre à la quantité demandée.</target>
-            </trans-unit>
-            <trans-unit id="product_full_description">
-                <source>product_full_description</source>
-                <target>Description</target>
-            </trans-unit>
-            <trans-unit id="product_full_description_link">
-                <source>product_full_description_link</source>
-                <target>En savoir plus</target>
-            </trans-unit>
-            <!-- End - Product view translations -->
-            <!-- Begin - Product create variations -->
-            <trans-unit id="product.sidemenu.link_add_variation">
-                <source>product.sidemenu.link_add_variation</source>
-                <target>Ajouter une variation</target>
-            </trans-unit>
-            <trans-unit id="product.title.create_variations">
-                <source>product.title.create_variations</source>
-                <target>Création de variations</target>
-            </trans-unit>
-            <trans-unit id="product.submit.create_variations">
-                <source>product.submit.create_variations</source>
-                <target>Créer les variations</target>
-            </trans-unit>
-            <trans-unit id="variations_number">
-                <source>variations_number</source>
-                <target>Nombre de variations</target>
-            </trans-unit>
-            <trans-unit id="flash_create_variation_success">
-                <source>flash_create_variation_success</source>
-                <target>Création de la variation du produit réussie!</target>
-            </trans-unit>
-            <trans-unit id="flash_create_variation_error">
-                <source>flash_create_variation_error</source>
-                <target>Création de la variation du produit en erreur!</target>
-            </trans-unit>
-            <!-- End - Product create variations -->
-            <trans-unit id="product.sidemenu.link_product_edit">
-                <source>product.sidemenu.link_product_edit</source>
-                <target>Produit</target>
-            </trans-unit>
-            <trans-unit id="no_product_found">
-                <source>no_product_found</source>
-                <target>Aucun produit trouvé</target>
-            </trans-unit>
-            <trans-unit id="view_all_products">
-                <source>view_all_products</source>
-                <target>Voir tous les produits</target>
-            </trans-unit>
-            <trans-unit id="catalog_root_title">
-                <source>catalog_root_title</source>
-                <target>Catalogue</target>
-            </trans-unit>
-            <trans-unit id="list.label_is_variation">
-                <source>list.label_is_variation</source>
-                <target>Variation?</target>
-            </trans-unit>
-            <trans-unit id="form.label_price_including_vat">
-                <source>form.label_price_including_vat</source>
-                <target>Prix TTC</target>
-            </trans-unit>
-            <trans-unit id="show.label_price_including_vat">
-                <source>show.label_price_including_vat</source>
-                <target>Prix TTC</target>
-            </trans-unit>
-            <trans-unit id="sonata_product_catalog_breadcrumb">
-                <source>sonata_product_catalog_breadcrumb</source>
-                <target>Catalogue</target>
-            </trans-unit>
-            <trans-unit id="sonata.product.cross_selling.no_match">
-                <source>sonata.product.cross_selling.no_match</source>
-                <target>Aucun autre produit disponible dans la même collection.</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <body>
+      <!-- Begin - Title translations -->
+      <trans-unit id="title_select_provider">
+        <source>title_select_provider</source>
+        <target>Sélectionner un type</target>
+      </trans-unit>
+      <trans-unit id="sonata.basket.message_product_not_available">
+        <source>sonata.basket.message_product_not_available</source>
+        <target>Le produit est indisponible.</target>
+      </trans-unit>
+      <trans-unit id="product_reference">
+        <source>product_reference</source>
+        <target>Référence</target>
+      </trans-unit>
+      <trans-unit id="sonata.product.btn_add">
+        <source>sonata.product.btn_add</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="sonata.product.btn_see">
+        <source>sonata.product.btn_see</source>
+        <target>Voir</target>
+      </trans-unit>
+      <trans-unit id="sonata.product.btn_add_to_basket">
+        <source>sonata.product.btn_add_to_basket</source>
+        <target>Ajouter au panier</target>
+      </trans-unit>
+      <trans-unit id="no_products_available">
+        <source>no_products_available</source>
+        <target>Aucun produit disponible</target>
+      </trans-unit>
+      <trans-unit id="no_sub_categories_available">
+        <source>no_sub_categories_available</source>
+        <target>Aucune sous-catégorie disponible</target>
+      </trans-unit>
+      <trans-unit id="title_category_list">
+        <source>title_category_list</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="title_list_products">
+        <source>title_list_products</source>
+        <target>Liste des produits</target>
+      </trans-unit>
+      <trans-unit id="title_sub_categories">
+        <source>title_sub_categories</source>
+        <target>Sous-catégories</target>
+      </trans-unit>
+      <trans-unit id="product">
+        <source>product</source>
+        <target>Produit</target>
+      </trans-unit>
+      <trans-unit id="category">
+        <source>category</source>
+        <target>Catégorie</target>
+      </trans-unit>
+      <trans-unit id="delivery">
+        <source>delivery</source>
+        <target>Livraison</target>
+      </trans-unit>
+      <trans-unit id="sonata.product.label_quantity">
+        <source>sonata.product.label_quantity</source>
+        <target>Quantité</target>
+      </trans-unit>
+      <!-- End - Title translations -->
+      <!-- Begin - Sidemenu translations -->
+      <trans-unit id="sidemenu.link_product_edit">
+        <source>sidemenu.link_product_edit</source>
+        <target>Production</target>
+      </trans-unit>
+      <trans-unit id="sidemenu.link_category_list">
+        <source>sidemenu.link_category_list</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="sidemenu.link_delivery_list">
+        <source>sidemenu.link_delivery_list</source>
+        <target>Livraisons</target>
+      </trans-unit>
+      <trans-unit id="sonata.product.sku">
+        <source>sonata.product.sku</source>
+        <target>Référence</target>
+      </trans-unit>
+      <trans-unit id="product.sidemenu.view_variations">
+        <source>product.sidemenu.view_variations</source>
+        <target>Variations</target>
+      </trans-unit>
+      <trans-unit id="product.sidemenu.view_categories">
+        <source>product.sidemenu.view_categories</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="product.sidemenu.view_collections">
+        <source>product.sidemenu.view_collections</source>
+        <target>Collections</target>
+      </trans-unit>
+      <trans-unit id="product.sidemenu.view_deliveries">
+        <source>product.sidemenu.view_deliveries</source>
+        <target>Modes de livraison</target>
+      </trans-unit>
+      <!-- End - Sidemenu translations -->
+      <!-- Begin - List translations -->
+      <trans-unit id="list.label_enabled">
+        <source>list.label_enabled</source>
+        <target>Activé</target>
+      </trans-unit>
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="list.label_sku">
+        <source>list.label_sku</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="list.label_price">
+        <source>list.label_price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="list.label_stock">
+        <source>list.label_stock</source>
+        <target>Stock</target>
+      </trans-unit>
+      <trans-unit id="list.label_position">
+        <source>list.label_position</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="list.label_created_at">
+        <source>list.label_created_at</source>
+        <target>Créé le</target>
+      </trans-unit>
+      <trans-unit id="list.label_updated_at">
+        <source>list.label_updated_at</source>
+        <target>Mis à jour le</target>
+      </trans-unit>
+      <trans-unit id="list.label_code">
+        <source>list.label_code</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="list.label_per_item">
+        <source>list.label_per_item</source>
+        <target>Par élément</target>
+      </trans-unit>
+      <trans-unit id="list.label_country_code">
+        <source>list.label_country_code</source>
+        <target>Code pays</target>
+      </trans-unit>
+      <trans-unit id="list.label_zone">
+        <source>list.label_zone</source>
+        <target>Zone</target>
+      </trans-unit>
+      <trans-unit id="list.label_product_categories">
+        <source>list.label_product_categories</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="list.label_product_collections">
+        <source>list.label_product_collections</source>
+        <target>Collections</target>
+      </trans-unit>
+      <trans-unit id="list.label_category">
+        <source>list.label_category</source>
+        <target>Catégorie</target>
+      </trans-unit>
+      <trans-unit id="list.label_collection">
+        <source>list.label_collection</source>
+        <target>Collection</target>
+      </trans-unit>
+      <!-- End - List translations -->
+      <!-- Begin - Filter translations -->
+      <trans-unit id="filter.label_enabled">
+        <source>filter.label_enabled</source>
+        <target>Activé</target>
+      </trans-unit>
+      <trans-unit id="filter.label_name">
+        <source>filter.label_name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="filter.label_sku">
+        <source>filter.label_sku</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="filter.label_product_categories_category">
+        <source>filter.label_product_categories_category</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="filter.label_product_collections_collection">
+        <source>filter.label_product_collections_collection</source>
+        <target>Collections</target>
+      </trans-unit>
+      <trans-unit id="filter.label_code">
+        <source>filter.label_code</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="filter.label_country_code">
+        <source>filter.label_country_code</source>
+        <target>Code pays</target>
+      </trans-unit>
+      <trans-unit id="filter.label_product">
+        <source>filter.label_product</source>
+        <target>Produit</target>
+      </trans-unit>
+      <!-- End - Filter translations -->
+      <!-- Begin - Breadcrumb translations -->
+      <trans-unit id="breadcrumb.link_delivery_history">
+        <source>breadcrumb.link_delivery_history</source>
+        <target>Historique des révisions</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_product_list">
+        <source>breadcrumb.link_product_list</source>
+        <target>Produit</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_product_edit">
+        <source>breadcrumb.link_product_edit</source>
+        <target>Edition</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_delivery_list">
+        <source>breadcrumb.link_delivery_list</source>
+        <target>Livraisons</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_category_list">
+        <source>breadcrumb.link_category_list</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_product_create">
+        <source>breadcrumb.link_product_create</source>
+        <target>Création de produit</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_category_history">
+        <source>breadcrumb.link_category_history</source>
+        <target>Historique des catégories</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_product_collection_list">
+        <source>breadcrumb.link_product_collection_list</source>
+        <target>Collections</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_product_category_list">
+        <source>breadcrumb.link_product_category_list</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <!-- End - Breadcrumb translations -->
+      <!-- Begin - Form translations -->
+      <trans-unit id="form.label_sub_description">
+        <source>form.label_sub_description</source>
+        <target>Sous description</target>
+      </trans-unit>
+      <trans-unit id="form.label_description">
+        <source>form.label_description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="form.label_short_description">
+        <source>form.label_short_description</source>
+        <target>Description résumée</target>
+      </trans-unit>
+      <trans-unit id="form.label_position">
+        <source>form.label_position</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="form.label_children">
+        <source>form.label_children</source>
+        <target>Enfants</target>
+      </trans-unit>
+      <trans-unit id="form.label_code">
+        <source>form.label_code</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="form.label_per_item">
+        <source>form.label_per_item</source>
+        <target>Par élément</target>
+      </trans-unit>
+      <trans-unit id="form.label_country_code">
+        <source>form.label_country_code</source>
+        <target>Code pays</target>
+      </trans-unit>
+      <trans-unit id="form.label_zone">
+        <source>form.label_zone</source>
+        <target>Zone</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="form.label_enabled">
+        <source>form.label_enabled</source>
+        <target>Activé</target>
+      </trans-unit>
+      <trans-unit id="form.label_main">
+        <source>form.label_main</source>
+        <target>Principale</target>
+      </trans-unit>
+      <trans-unit id="form.label_sku">
+        <source>form.label_sku</source>
+        <target>SKU</target>
+      </trans-unit>
+      <trans-unit id="form.label_description_formatter">
+        <source>form.label_description_formatter</source>
+        <target>Format de description</target>
+      </trans-unit>
+      <trans-unit id="form.label_raw_description">
+        <source>form.label_raw_description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="form.label_price">
+        <source>form.label_price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="form.label_vat_rate">
+        <source>form.label_vat_rate</source>
+        <target>TVA</target>
+      </trans-unit>
+      <trans-unit id="form.label_stock">
+        <source>form.label_stock</source>
+        <target>Stock</target>
+      </trans-unit>
+      <trans-unit id="form.label_image">
+        <source>form.label_image</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="form.label_gallery">
+        <source>form.label_gallery</source>
+        <target>Gallerie</target>
+      </trans-unit>
+      <trans-unit id="form.label_category">
+        <source>form.label_category</source>
+        <target>Catégorie</target>
+      </trans-unit>
+      <trans-unit id="form.label_product_categories">
+        <source>form.label_product_categories</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="form.label_deliveries">
+        <source>form.label_deliveries</source>
+        <target>Livraisons</target>
+      </trans-unit>
+      <trans-unit id="form.label_product_collections">
+        <source>form.label_product_collections</source>
+        <target>Collections</target>
+      </trans-unit>
+      <trans-unit id="form.label_collection">
+        <source>form.label_collection</source>
+        <target>Collection</target>
+      </trans-unit>
+      <!-- Begin - Form translations -->
+      <!-- Begin - Product view translations -->
+      <trans-unit id="variation_not_found">
+        <source>variation_not_found</source>
+        <target>Désolé, le produit que vous recherchez n'est pas disponible.</target>
+      </trans-unit>
+      <trans-unit id="product_show_variation">
+        <source>product_show_variation</source>
+        <target>Voir la variation</target>
+      </trans-unit>
+      <trans-unit id="product_price">
+        <source>product_price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="product_variations">
+        <source>product_variations</source>
+        <target>Variations</target>
+      </trans-unit>
+      <trans-unit id="sonata.product.cross_selling.title">
+        <source>sonata.product.cross_selling.title</source>
+        <target>Dans la même collection</target>
+      </trans-unit>
+      <trans-unit id="product_variation_min_price">
+        <source>product_variation_min_price</source>
+        <target>À partir de</target>
+      </trans-unit>
+      <trans-unit id="product_out_of_stock">
+        <source>product_out_of_stock</source>
+        <target>Attention : ce produit n'est pas disponible actuellement !</target>
+      </trans-unit>
+      <trans-unit id="product_out_of_stock_quantity">
+        <source>product_out_of_stock_quantity</source>
+        <target>Il n'y a pas assez de stock pour répondre à la quantité demandée.</target>
+      </trans-unit>
+      <trans-unit id="product_full_description">
+        <source>product_full_description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="product_full_description_link">
+        <source>product_full_description_link</source>
+        <target>En savoir plus</target>
+      </trans-unit>
+      <!-- End - Product view translations -->
+      <!-- Begin - Product create variations -->
+      <trans-unit id="product.sidemenu.link_add_variation">
+        <source>product.sidemenu.link_add_variation</source>
+        <target>Ajouter une variation</target>
+      </trans-unit>
+      <trans-unit id="product.title.create_variations">
+        <source>product.title.create_variations</source>
+        <target>Création de variations</target>
+      </trans-unit>
+      <trans-unit id="product.submit.create_variations">
+        <source>product.submit.create_variations</source>
+        <target>Créer les variations</target>
+      </trans-unit>
+      <trans-unit id="variations_number">
+        <source>variations_number</source>
+        <target>Nombre de variations</target>
+      </trans-unit>
+      <trans-unit id="flash_create_variation_success">
+        <source>flash_create_variation_success</source>
+        <target>Création de la variation du produit réussie!</target>
+      </trans-unit>
+      <trans-unit id="flash_create_variation_error">
+        <source>flash_create_variation_error</source>
+        <target>Création de la variation du produit en erreur!</target>
+      </trans-unit>
+      <!-- End - Product create variations -->
+      <trans-unit id="product.sidemenu.link_product_edit">
+        <source>product.sidemenu.link_product_edit</source>
+        <target>Produit</target>
+      </trans-unit>
+      <trans-unit id="no_product_found">
+        <source>no_product_found</source>
+        <target>Aucun produit trouvé</target>
+      </trans-unit>
+      <trans-unit id="view_all_products">
+        <source>view_all_products</source>
+        <target>Voir tous les produits</target>
+      </trans-unit>
+      <trans-unit id="catalog_root_title">
+        <source>catalog_root_title</source>
+        <target>Catalogue</target>
+      </trans-unit>
+      <trans-unit id="list.label_is_variation">
+        <source>list.label_is_variation</source>
+        <target>Variation?</target>
+      </trans-unit>
+      <trans-unit id="form.label_price_including_vat">
+        <source>form.label_price_including_vat</source>
+        <target>Prix TTC</target>
+      </trans-unit>
+      <trans-unit id="show.label_price_including_vat">
+        <source>show.label_price_including_vat</source>
+        <target>Prix TTC</target>
+      </trans-unit>
+      <trans-unit id="sonata_product_catalog_breadcrumb">
+        <source>sonata_product_catalog_breadcrumb</source>
+        <target>Catalogue</target>
+      </trans-unit>
+      <trans-unit id="sonata.product.cross_selling.no_match">
+        <source>sonata.product.cross_selling.no_match</source>
+        <target>Aucun autre produit disponible dans la même collection.</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
