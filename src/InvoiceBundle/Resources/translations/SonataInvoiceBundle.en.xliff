@@ -1,235 +1,235 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
-        <body>
-            <!-- Begin - Titles -->
-            <trans-unit id="invoice">
-                <source>invoice</source>
-                <target>Invoice</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.title_invoice">
-                <source>sonata.invoice.title_invoice</source>
-                <target>Your invoice</target>
-            </trans-unit>
-            <trans-unit id="subtitle_payment">
-                <source>subtitle_payment</source>
-                <target>Payment</target>
-            </trans-unit>
-            <!-- End - Titles -->
-            <!-- Begin - Breadcrumb translations -->
-            <trans-unit id="breadcrumb.link_invoice_list">
-                <source>breadcrumb.link_invoice_list</source>
-                <target>Invoice</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_invoice_edit">
-                <source>breadcrumb.link_invoice_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <!-- End - Breadcrumb translations -->
-            <!-- Begin - List translations -->
-            <trans-unit id="list.label_id">
-                <source>list.label_id</source>
-                <target>ID</target>
-            </trans-unit>
-            <trans-unit id="list.label_reference">
-                <source>list.label_reference</source>
-                <target>Reference</target>
-            </trans-unit>
-            <trans-unit id="list.label_customer">
-                <source>list.label_customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="list.label_status">
-                <source>list.label_status</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="list.label_total_excl">
-                <source>list.label_total_excl</source>
-                <target>Total excl. VAT</target>
-            </trans-unit>
-            <trans-unit id="list.label_total_inc">
-                <source>list.label_total_inc</source>
-                <target>Total incl. VAT</target>
-            </trans-unit>
-            <!-- End - List translations -->
-            <!-- Begin - Form translations -->
-            <trans-unit id="invoice.form.group_main_label">
-                <source>invoice.form.group_main_label</source>
-                <target>General</target>
-            </trans-unit>
-            <trans-unit id="invoice.form.group_billing_label">
-                <source>invoice.form.group_billing_label</source>
-                <target>Billing</target>
-            </trans-unit>
-            <trans-unit id="invoice.form.group_misc_label">
-                <source>invoice.form.group_misc_label</source>
-                <target>Miscellaneous</target>
-            </trans-unit>
-            <trans-unit id="form.label_reference">
-                <source>form.label_reference</source>
-                <target>Reference</target>
-            </trans-unit>
-            <trans-unit id="form.label_currency">
-                <source>form.label_currency</source>
-                <target>Currency</target>
-            </trans-unit>
-            <trans-unit id="form.label_status">
-                <source>form.label_status</source>
-                <target>Status</target>
-            </trans-unit>
-            <trans-unit id="form.label_total_inc">
-                <source>form.label_total_inc</source>
-                <target>Total incl. VAT</target>
-            </trans-unit>
-            <trans-unit id="form.label_total_excl">
-                <source>form.label_total_excl</source>
-                <target>Total excl. VAT</target>
-            </trans-unit>
-            <trans-unit id="form.label_name">
-                <source>form.label_name</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="form.label_phone">
-                <source>form.label_phone</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="form.label_address1">
-                <source>form.label_address1</source>
-                <target>Address 1</target>
-            </trans-unit>
-            <trans-unit id="form.label_address2">
-                <source>form.label_address2</source>
-                <target>Address 2</target>
-            </trans-unit>
-            <trans-unit id="form.label_address3">
-                <source>form.label_address3</source>
-                <target>Address 3</target>
-            </trans-unit>
-            <trans-unit id="form.label_city">
-                <source>form.label_city</source>
-                <target>City</target>
-            </trans-unit>
-            <trans-unit id="form.label_postcode">
-                <source>form.label_postcode</source>
-                <target>Postcode</target>
-            </trans-unit>
-            <trans-unit id="form.label_country">
-                <source>form.label_country</source>
-                <target>Country</target>
-            </trans-unit>
-            <trans-unit id="form.label_fax">
-                <source>form.label_fax</source>
-                <target>Fax</target>
-            </trans-unit>
-            <trans-unit id="form.label_email">
-                <source>form.label_email</source>
-                <target>E-mail</target>
-            </trans-unit>
-            <trans-unit id="form.label_mobile">
-                <source>form.label_mobile</source>
-                <target>Mobile</target>
-            </trans-unit>
-            <trans-unit id="form.label_customer">
-                <source>form.label_customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <!-- End - Form translations -->
-            <!-- Begin - Status translations -->
-            <trans-unit id="status_open">
-                <source>status_open</source>
-                <target>Open</target>
-            </trans-unit>
-            <trans-unit id="status_paid">
-                <source>status_paid</source>
-                <target>Paid</target>
-            </trans-unit>
-            <trans-unit id="status_conflict">
-                <source>status_conflict</source>
-                <target>Conflict</target>
-            </trans-unit>
-            <!-- End - Status translations -->
-            <!-- Begin - Invoice admin filters -->
-            <trans-unit id="filter.label_reference">
-                <source>filter.label_reference</source>
-                <target>Reference</target>
-            </trans-unit>
-            <trans-unit id="filter.label_customer">
-                <source>filter.label_customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="filter.label_status">
-                <source>filter.label_status</source>
-                <target>Status</target>
-            </trans-unit>
-            <!-- End - Invoice admin filters -->
-            <!-- Begin - Invoice view -->
-            <trans-unit id="sonata.invoice.subtitle_billing">
-                <source>sonata.invoice.subtitle_billing</source>
-                <target>Billing address</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.subtitle_references">
-                <source>sonata.invoice.subtitle_references</source>
-                <target>References</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.references.date">
-                <source>sonata.invoice.references.date</source>
-                <target>Date</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.references.invoice">
-                <source>sonata.invoice.references.invoice</source>
-                <target>Invoice</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.elements.list.title">
-                <source>sonata.invoice.elements.list.title</source>
-                <target>Elements</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.elements.id">
-                <source>sonata.invoice.elements.id</source>
-                <target>ID</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.elements.label">
-                <source>sonata.invoice.elements.label</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.elements.quantity">
-                <source>sonata.invoice.elements.quantity</source>
-                <target>Quantity</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.elements.unit_price">
-                <source>sonata.invoice.elements.unit_price</source>
-                <target>Unit price</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.elements.total_ex_vat">
-                <source>sonata.invoice.elements.total_ex_vat</source>
-                <target>Total excl. VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.elements.total_inc_vat">
-                <source>sonata.invoice.elements.total_inc_vat</source>
-                <target>Total incl. VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.total_exc_vat">
-                <source>sonata.invoice.total_exc_vat</source>
-                <target>Total excl. VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.vat">
-                <source>sonata.invoice.vat</source>
-                <target>Total VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata.invoice.total_inc_vat">
-                <source>sonata.invoice.total_inc_vat</source>
-                <target>Total incl. VAT</target>
-            </trans-unit>
-            <trans-unit id="sonata_invoice_view_vat">
-                <source>sonata_invoice_view_vat</source>
-                <target>Total VAT</target>
-            </trans-unit>
-            <!-- End - Invoice View -->
-            <!-- Begin - Invoice page titles translations -->
-            <trans-unit id="invoice_view_title">
-                <source>invoice_view_title</source>
-                <target>Your invoice</target>
-            </trans-unit>
-            <!-- End - Invoice page titles translations -->
-        </body>
-    </file>
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <!-- Begin - Titles -->
+      <trans-unit id="invoice">
+        <source>invoice</source>
+        <target>Invoice</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.title_invoice">
+        <source>sonata.invoice.title_invoice</source>
+        <target>Your invoice</target>
+      </trans-unit>
+      <trans-unit id="subtitle_payment">
+        <source>subtitle_payment</source>
+        <target>Payment</target>
+      </trans-unit>
+      <!-- End - Titles -->
+      <!-- Begin - Breadcrumb translations -->
+      <trans-unit id="breadcrumb.link_invoice_list">
+        <source>breadcrumb.link_invoice_list</source>
+        <target>Invoice</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_invoice_edit">
+        <source>breadcrumb.link_invoice_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <!-- End - Breadcrumb translations -->
+      <!-- Begin - List translations -->
+      <trans-unit id="list.label_id">
+        <source>list.label_id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="list.label_reference">
+        <source>list.label_reference</source>
+        <target>Reference</target>
+      </trans-unit>
+      <trans-unit id="list.label_customer">
+        <source>list.label_customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="list.label_status">
+        <source>list.label_status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="list.label_total_excl">
+        <source>list.label_total_excl</source>
+        <target>Total excl. VAT</target>
+      </trans-unit>
+      <trans-unit id="list.label_total_inc">
+        <source>list.label_total_inc</source>
+        <target>Total incl. VAT</target>
+      </trans-unit>
+      <!-- End - List translations -->
+      <!-- Begin - Form translations -->
+      <trans-unit id="invoice.form.group_main_label">
+        <source>invoice.form.group_main_label</source>
+        <target>General</target>
+      </trans-unit>
+      <trans-unit id="invoice.form.group_billing_label">
+        <source>invoice.form.group_billing_label</source>
+        <target>Billing</target>
+      </trans-unit>
+      <trans-unit id="invoice.form.group_misc_label">
+        <source>invoice.form.group_misc_label</source>
+        <target>Miscellaneous</target>
+      </trans-unit>
+      <trans-unit id="form.label_reference">
+        <source>form.label_reference</source>
+        <target>Reference</target>
+      </trans-unit>
+      <trans-unit id="form.label_currency">
+        <source>form.label_currency</source>
+        <target>Currency</target>
+      </trans-unit>
+      <trans-unit id="form.label_status">
+        <source>form.label_status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="form.label_total_inc">
+        <source>form.label_total_inc</source>
+        <target>Total incl. VAT</target>
+      </trans-unit>
+      <trans-unit id="form.label_total_excl">
+        <source>form.label_total_excl</source>
+        <target>Total excl. VAT</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="form.label_phone">
+        <source>form.label_phone</source>
+        <target>Phone</target>
+      </trans-unit>
+      <trans-unit id="form.label_address1">
+        <source>form.label_address1</source>
+        <target>Address 1</target>
+      </trans-unit>
+      <trans-unit id="form.label_address2">
+        <source>form.label_address2</source>
+        <target>Address 2</target>
+      </trans-unit>
+      <trans-unit id="form.label_address3">
+        <source>form.label_address3</source>
+        <target>Address 3</target>
+      </trans-unit>
+      <trans-unit id="form.label_city">
+        <source>form.label_city</source>
+        <target>City</target>
+      </trans-unit>
+      <trans-unit id="form.label_postcode">
+        <source>form.label_postcode</source>
+        <target>Postcode</target>
+      </trans-unit>
+      <trans-unit id="form.label_country">
+        <source>form.label_country</source>
+        <target>Country</target>
+      </trans-unit>
+      <trans-unit id="form.label_fax">
+        <source>form.label_fax</source>
+        <target>Fax</target>
+      </trans-unit>
+      <trans-unit id="form.label_email">
+        <source>form.label_email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="form.label_mobile">
+        <source>form.label_mobile</source>
+        <target>Mobile</target>
+      </trans-unit>
+      <trans-unit id="form.label_customer">
+        <source>form.label_customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <!-- End - Form translations -->
+      <!-- Begin - Status translations -->
+      <trans-unit id="status_open">
+        <source>status_open</source>
+        <target>Open</target>
+      </trans-unit>
+      <trans-unit id="status_paid">
+        <source>status_paid</source>
+        <target>Paid</target>
+      </trans-unit>
+      <trans-unit id="status_conflict">
+        <source>status_conflict</source>
+        <target>Conflict</target>
+      </trans-unit>
+      <!-- End - Status translations -->
+      <!-- Begin - Invoice admin filters -->
+      <trans-unit id="filter.label_reference">
+        <source>filter.label_reference</source>
+        <target>Reference</target>
+      </trans-unit>
+      <trans-unit id="filter.label_customer">
+        <source>filter.label_customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="filter.label_status">
+        <source>filter.label_status</source>
+        <target>Status</target>
+      </trans-unit>
+      <!-- End - Invoice admin filters -->
+      <!-- Begin - Invoice view -->
+      <trans-unit id="sonata.invoice.subtitle_billing">
+        <source>sonata.invoice.subtitle_billing</source>
+        <target>Billing address</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.subtitle_references">
+        <source>sonata.invoice.subtitle_references</source>
+        <target>References</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.references.date">
+        <source>sonata.invoice.references.date</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.references.invoice">
+        <source>sonata.invoice.references.invoice</source>
+        <target>Invoice</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.elements.list.title">
+        <source>sonata.invoice.elements.list.title</source>
+        <target>Elements</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.elements.id">
+        <source>sonata.invoice.elements.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.elements.label">
+        <source>sonata.invoice.elements.label</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.elements.quantity">
+        <source>sonata.invoice.elements.quantity</source>
+        <target>Quantity</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.elements.unit_price">
+        <source>sonata.invoice.elements.unit_price</source>
+        <target>Unit price</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.elements.total_ex_vat">
+        <source>sonata.invoice.elements.total_ex_vat</source>
+        <target>Total excl. VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.elements.total_inc_vat">
+        <source>sonata.invoice.elements.total_inc_vat</source>
+        <target>Total incl. VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.total_exc_vat">
+        <source>sonata.invoice.total_exc_vat</source>
+        <target>Total excl. VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.vat">
+        <source>sonata.invoice.vat</source>
+        <target>Total VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata.invoice.total_inc_vat">
+        <source>sonata.invoice.total_inc_vat</source>
+        <target>Total incl. VAT</target>
+      </trans-unit>
+      <trans-unit id="sonata_invoice_view_vat">
+        <source>sonata_invoice_view_vat</source>
+        <target>Total VAT</target>
+      </trans-unit>
+      <!-- End - Invoice View -->
+      <!-- Begin - Invoice page titles translations -->
+      <trans-unit id="invoice_view_title">
+        <source>invoice_view_title</source>
+        <target>Your invoice</target>
+      </trans-unit>
+      <!-- End - Invoice page titles translations -->
+    </body>
+  </file>
 </xliff>

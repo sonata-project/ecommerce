@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
-        <body>
-            <!-- Begin - Titles -->
-            <trans-unit id="delivery">
-                <source>delivery</source>
-                <target>Delivery</target>
-            </trans-unit>
-            <!-- End - Titles -->
-            <!-- Begin - Breadcrumb translations -->
-            <trans-unit id="breadcrumb.link_delivery_list">
-                <source>breadcrumb.link_delivery_list</source>
-                <target>Delivery</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_delivery_edit">
-                <source>breadcrumb.link_delivery_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <!-- End - Breadcrumb translations -->
-            <!-- Begin - Status translations -->
-            <trans-unit id="status_open">
-                <source>status_open</source>
-                <target>Open</target>
-            </trans-unit>
-            <trans-unit id="status_pending">
-                <source>status_pending</source>
-                <target>Pending</target>
-            </trans-unit>
-            <trans-unit id="status_order_unknown">
-                <source>status_order_unknown</source>
-                <target>Order unknown</target>
-            </trans-unit>
-            <trans-unit id="status_validated">
-                <source>status_validated</source>
-                <target>Validated</target>
-            </trans-unit>
-            <trans-unit id="status_cancelled">
-                <source>status_cancelled</source>
-                <target>Cancelled</target>
-            </trans-unit>
-            <trans-unit id="status_unknown">
-                <source>status_unknown</source>
-                <target>Unknown</target>
-            </trans-unit>
-            <trans-unit id="status_error_validation">
-                <source>status_error_validation</source>
-                <target>Validation error</target>
-            </trans-unit>
-            <trans-unit id="status_wrong_callback">
-                <source>status_wrong_callback</source>
-                <target>Wrong callback</target>
-            </trans-unit>
-            <trans-unit id="status_wrong_request">
-                <source>status_wrong_request</source>
-                <target>Wrong request</target>
-            </trans-unit>
-            <trans-unit id="status_order_not_open">
-                <source>status_order_not_open</source>
-                <target>Order not open</target>
-            </trans-unit>
-            <trans-unit id="status_error">
-                <source>status_error</source>
-                <target>In error</target>
-            </trans-unit>
-            <trans-unit id="status_stopped">
-                <source>status_stopped</source>
-                <target>Stopped</target>
-            </trans-unit>
-            <trans-unit id="status_returned">
-                <source>status_returned</source>
-                <target>Returned</target>
-            </trans-unit>
-            <trans-unit id="status_completed">
-                <source>status_completed</source>
-                <target>Completed</target>
-            </trans-unit>
-            <trans-unit id="status_sent">
-                <source>status_sent</source>
-                <target>Sent</target>
-            </trans-unit>
-            <!-- End - Status translations -->
-        </body>
-    </file>
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <!-- Begin - Titles -->
+      <trans-unit id="delivery">
+        <source>delivery</source>
+        <target>Delivery</target>
+      </trans-unit>
+      <!-- End - Titles -->
+      <!-- Begin - Breadcrumb translations -->
+      <trans-unit id="breadcrumb.link_delivery_list">
+        <source>breadcrumb.link_delivery_list</source>
+        <target>Delivery</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_delivery_edit">
+        <source>breadcrumb.link_delivery_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <!-- End - Breadcrumb translations -->
+      <!-- Begin - Status translations -->
+      <trans-unit id="status_open">
+        <source>status_open</source>
+        <target>Open</target>
+      </trans-unit>
+      <trans-unit id="status_pending">
+        <source>status_pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="status_order_unknown">
+        <source>status_order_unknown</source>
+        <target>Order unknown</target>
+      </trans-unit>
+      <trans-unit id="status_validated">
+        <source>status_validated</source>
+        <target>Validated</target>
+      </trans-unit>
+      <trans-unit id="status_cancelled">
+        <source>status_cancelled</source>
+        <target>Cancelled</target>
+      </trans-unit>
+      <trans-unit id="status_unknown">
+        <source>status_unknown</source>
+        <target>Unknown</target>
+      </trans-unit>
+      <trans-unit id="status_error_validation">
+        <source>status_error_validation</source>
+        <target>Validation error</target>
+      </trans-unit>
+      <trans-unit id="status_wrong_callback">
+        <source>status_wrong_callback</source>
+        <target>Wrong callback</target>
+      </trans-unit>
+      <trans-unit id="status_wrong_request">
+        <source>status_wrong_request</source>
+        <target>Wrong request</target>
+      </trans-unit>
+      <trans-unit id="status_order_not_open">
+        <source>status_order_not_open</source>
+        <target>Order not open</target>
+      </trans-unit>
+      <trans-unit id="status_error">
+        <source>status_error</source>
+        <target>In error</target>
+      </trans-unit>
+      <trans-unit id="status_stopped">
+        <source>status_stopped</source>
+        <target>Stopped</target>
+      </trans-unit>
+      <trans-unit id="status_returned">
+        <source>status_returned</source>
+        <target>Returned</target>
+      </trans-unit>
+      <trans-unit id="status_completed">
+        <source>status_completed</source>
+        <target>Completed</target>
+      </trans-unit>
+      <trans-unit id="status_sent">
+        <source>status_sent</source>
+        <target>Sent</target>
+      </trans-unit>
+      <!-- End - Status translations -->
+    </body>
+  </file>
 </xliff>

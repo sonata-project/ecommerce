@@ -1,451 +1,451 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
-        <body>
-            <!-- Begin - Titles -->
-            <trans-unit id="sonata_profile_title">
-                <source>sonata_profile_title</source>
-                <target>Dashboard</target>
-            </trans-unit>
-            <trans-unit id="customer">
-                <source>customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="address">
-                <source>address</source>
-                <target>Address</target>
-            </trans-unit>
-            <!-- End - Titles -->
-            <!-- Begin - Form translations -->
-            <trans-unit id="address.form.group_address_label">
-                <source>address.form.group_address_label</source>
-                <target>Address</target>
-            </trans-unit>
-            <trans-unit id="address.form.group_contact_label">
-                <source>address.form.group_contact_label</source>
-                <target>Contact</target>
-            </trans-unit>
-            <trans-unit id="form_address.group_advanced_label">
-                <source>form_address.group_advanced_label</source>
-                <target>Advanced</target>
-            </trans-unit>
-            <trans-unit id="form_address.group_contact_label">
-                <source>form_address.group_contact_label</source>
-                <target>Contact</target>
-            </trans-unit>
-            <trans-unit id="form_address.group_address_label">
-                <source>form_address.group_address_label</source>
-                <target>Address</target>
-            </trans-unit>
-            <trans-unit id="address.form.group_advanced_label">
-                <source>address.form.group_advanced_label</source>
-                <target>Advanced</target>
-            </trans-unit>
-            <!-- Begin - Customer // Address form-->
-            <trans-unit id="form.label_firstname">
-                <source>form.label_firstname</source>
-                <target>Firstname</target>
-            </trans-unit>
-            <trans-unit id="form.label_lastname">
-                <source>form.label_lastname</source>
-                <target>Lastname</target>
-            </trans-unit>
-            <trans-unit id="form.label_locale">
-                <source>form.label_locale</source>
-                <target>Locale</target>
-            </trans-unit>
-            <trans-unit id="form.label_type">
-                <source>form.label_type</source>
-                <target>Type</target>
-            </trans-unit>
-            <trans-unit id="form.label_current">
-                <source>form.label_current</source>
-                <target>Current</target>
-            </trans-unit>
-            <trans-unit id="form.label_name">
-                <source>form.label_name</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="form.label_phone">
-                <source>form.label_phone</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="form.label_address1">
-                <source>form.label_address1</source>
-                <target>Address 1</target>
-            </trans-unit>
-            <trans-unit id="form.label_address2">
-                <source>form.label_address2</source>
-                <target>Address 2</target>
-            </trans-unit>
-            <trans-unit id="form.label_address3">
-                <source>form.label_address3</source>
-                <target>Address 3</target>
-            </trans-unit>
-            <trans-unit id="form.label_postcode">
-                <source>form.label_postcode</source>
-                <target>Postcode</target>
-            </trans-unit>
-            <trans-unit id="form.label_city">
-                <source>form.label_city</source>
-                <target>City</target>
-            </trans-unit>
-            <trans-unit id="form.label_country_code">
-                <source>form.label_country_code</source>
-                <target>Country code</target>
-            </trans-unit>
-            <trans-unit id="form.label_customer">
-                <source>form.label_customer</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="form.label_user">
-                <source>form.label_user</source>
-                <target>Username</target>
-            </trans-unit>
-            <trans-unit id="form.label_birth_date">
-                <source>form.label_birth_date</source>
-                <target>Birthdate</target>
-            </trans-unit>
-            <trans-unit id="form.label_birth_place">
-                <source>form.label_birth_place</source>
-                <target>Birthplace</target>
-            </trans-unit>
-            <trans-unit id="form.label_email">
-                <source>form.label_email</source>
-                <target>E-mail</target>
-            </trans-unit>
-            <trans-unit id="form.label_phone_number">
-                <source>form.label_phone_number</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="form.label_mobile_number">
-                <source>form.label_mobile_number</source>
-                <target>Mobile</target>
-            </trans-unit>
-            <trans-unit id="form.label_fax_number">
-                <source>form.label_fax_number</source>
-                <target>Fax</target>
-            </trans-unit>
-            <trans-unit id="form.label_is_fake">
-                <source>form.label_is_fake</source>
-                <target>Is fake</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_addresses">
-                <source>sonata_customer_address_addresses</source>
-                <target>Choose existing</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_useselected">
-                <source>sonata_customer_address_useselected</source>
-                <target>Use selected address</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_edit">
-                <source>sonata_customer_address_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_firstname">
-                <source>sonata_customer_address_firstname</source>
-                <target>Firstname</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_name">
-                <source>sonata_customer_address_name</source>
-                <target>Address name</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_type">
-                <source>sonata_customer_address_type</source>
-                <target>Address type</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_lastname">
-                <source>sonata_customer_address_lastname</source>
-                <target>Lastname</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_address1">
-                <source>sonata_customer_address_address1</source>
-                <target>Address</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_address2">
-                <source>sonata_customer_address_address2</source>
-                <target/>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_address3">
-                <source>sonata_customer_address_address3</source>
-                <target/>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_postcode">
-                <source>sonata_customer_address_postcode</source>
-                <target>Postcode</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_city">
-                <source>sonata_customer_address_city</source>
-                <target>City</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_countryCode">
-                <source>sonata_customer_address_countryCode</source>
-                <target>Country code</target>
-            </trans-unit>
-            <trans-unit id="sonata_customer_address_phone">
-                <source>sonata_customer_address_phone</source>
-                <target>Phone</target>
-            </trans-unit>
-            <!-- End - Customer // Address form-->
-            <!-- End - Form translations -->
-            <!-- Begin - Show customer translations -->
-            <trans-unit id="show.label_firstname">
-                <source>show.label_firstname</source>
-                <target>Firstname</target>
-            </trans-unit>
-            <trans-unit id="show.label_lastname">
-                <source>show.label_lastname</source>
-                <target>Lastname</target>
-            </trans-unit>
-            <trans-unit id="show.label_locale">
-                <source>show.label_locale</source>
-                <target>Locale</target>
-            </trans-unit>
-            <!-- End - Show customer translations -->
-            <!-- Begin - Breadcrumb translations -->
-            <trans-unit id="breadcrumb.link_customer_list">
-                <source>breadcrumb.link_customer_list</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_customer_edit">
-                <source>breadcrumb.link_customer_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_address_list">
-                <source>breadcrumb.link_address_list</source>
-                <target>Addresses</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_address_edit">
-                <source>breadcrumb.link_address_edit</source>
-                <target>Edit</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_address_create">
-                <source>breadcrumb.link_address_create</source>
-                <target>Create address</target>
-            </trans-unit>
-            <!-- End - Breadcrumb translations -->
-            <!-- Begin - Sidemenu translations -->
-            <trans-unit id="customer.sidemenu.link_customer_edit">
-                <source>customer.sidemenu.link_customer_edit</source>
-                <target>Customer</target>
-            </trans-unit>
-            <trans-unit id="customer.sidemenu.link_address_list">
-                <source>customer.sidemenu.link_address_list</source>
-                <target>Addresses</target>
-            </trans-unit>
-            <trans-unit id="customer.sidemenu.link_order_list">
-                <source>customer.sidemenu.link_order_list</source>
-                <target>Orders</target>
-            </trans-unit>
-            <trans-unit id="view_all_customers">
-                <source>view_all_customers</source>
-                <target>View all customers</target>
-            </trans-unit>
-            <trans-unit id="customer.group.general">
-                <source>customer.group.general</source>
-                <target>General</target>
-            </trans-unit>
-            <trans-unit id="customer.group.contact">
-                <source>customer.group.contact</source>
-                <target>Contact</target>
-            </trans-unit>
-            <trans-unit id="link_list_addresses">
-                <source>link_list_addresses</source>
-                <target>Addresses</target>
-            </trans-unit>
-            <trans-unit id="link_list_dashboard">
-                <source>link_list_dashboard</source>
-                <target>Dashboard</target>
-            </trans-unit>
-            <!-- End - Sidemenu translations -->
-            <!-- Begin - List translations -->
-            <trans-unit id="list.label_name">
-                <source>list.label_name</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="list.label_created_at">
-                <source>list.label_created_at</source>
-                <target>Created at</target>
-            </trans-unit>
-            <trans-unit id="list.label_locale">
-                <source>list.label_locale</source>
-                <target>Locale</target>
-            </trans-unit>
-            <trans-unit id="list.label_fulladdress">
-                <source>list.label_fulladdress</source>
-                <target>Full address</target>
-            </trans-unit>
-            <trans-unit id="list.label_current">
-                <source>list.label_current</source>
-                <target>Current</target>
-            </trans-unit>
-            <trans-unit id="list.label_type_code">
-                <source>list.label_type_code</source>
-                <target>Type</target>
-            </trans-unit>
-            <trans-unit id="list.label_user">
-                <source>list.label_user</source>
-                <target>Username</target>
-            </trans-unit>
-            <trans-unit id="list.label_email">
-                <source>list.label_email</source>
-                <target>E-mail address</target>
-            </trans-unit>
-            <trans-unit id="list.label_phone_number">
-                <source>list.label_phone_number</source>
-                <target>Phone</target>
-            </trans-unit>
-            <trans-unit id="list.label_mobile_number">
-                <source>list.label_mobile_number</source>
-                <target>Mobile</target>
-            </trans-unit>
-            <trans-unit id="list.label_is_fake">
-                <source>list.label_is_fake</source>
-                <target>Is fake</target>
-            </trans-unit>
-            <trans-unit id="list.label_birth_date">
-                <source>list.label_birth_date</source>
-                <target>Birthdate</target>
-            </trans-unit>
-            <trans-unit id="list.label_birth_place">
-                <source>list.label_birth_place</source>
-                <target>Birthplace</target>
-            </trans-unit>
-            <trans-unit id="list.label_fax_number">
-                <source>list.label_fax_number</source>
-                <target>Fax</target>
-            </trans-unit>
-            <!-- End - List translations -->
-            <!-- Begin - Filter translations -->
-            <trans-unit id="filter.label_firstname">
-                <source>filter.label_firstname</source>
-                <target>Firstname</target>
-            </trans-unit>
-            <trans-unit id="filter.label_lastname">
-                <source>filter.label_lastname</source>
-                <target>Lastname</target>
-            </trans-unit>
-            <trans-unit id="filter.label_user">
-                <source>filter.label_user</source>
-                <target>User</target>
-            </trans-unit>
-            <trans-unit id="filter.label_email">
-                <source>filter.label_email</source>
-                <target>E-Mail</target>
-            </trans-unit>
-            <trans-unit id="filter.label_is_fake">
-                <source>filter.label_is_fake</source>
-                <target>Fake user?</target>
-            </trans-unit>
-            <trans-unit id="filter.label_locale">
-                <source>filter.label_locale</source>
-                <target>Locale</target>
-            </trans-unit>
-            <trans-unit id="filter.label_current">
-                <source>filter.label_current</source>
-                <target>Current?</target>
-            </trans-unit>
-            <trans-unit id="filter.label_type">
-                <source>filter.label_type</source>
-                <target>Type</target>
-            </trans-unit>
-            <trans-unit id="filter.label_customer">
-                <source>filter.label_customer</source>
-                <target>Customer id</target>
-            </trans-unit>
-            <!-- End - Filter translations -->
-            <!-- Begin - Type translations -->
-            <trans-unit id="type_delivery">
-                <source>type_delivery</source>
-                <target>Delivery</target>
-            </trans-unit>
-            <trans-unit id="type_billing">
-                <source>type_billing</source>
-                <target>Billing</target>
-            </trans-unit>
-            <trans-unit id="type_contact">
-                <source>type_contact</source>
-                <target>Contact</target>
-            </trans-unit>
-            <!-- End - Type translations -->
-            <!-- Begin - Addresses translations -->
-            <trans-unit id="address_new">
-                <source>address_new</source>
-                <target>New address</target>
-            </trans-unit>
-            <trans-unit id="address_list">
-                <source>address_list</source>
-                <target>Addresses</target>
-            </trans-unit>
-            <trans-unit id="sonata.customer.address.save">
-                <source>sonata.customer.address.save</source>
-                <target>Save your address</target>
-            </trans-unit>
-            <trans-unit id="sonata.address.list.add">
-                <source>sonata.address.list.add</source>
-                <target>Add an address</target>
-            </trans-unit>
-            <trans-unit id="sonata.address.list.no_addresses">
-                <source>sonata.address.list.no_addresses</source>
-                <target>You don't have any available addresses.</target>
-            </trans-unit>
-            <trans-unit id="address_add_success">
-                <source>address_add_success</source>
-                <target>Your new address has been successfully added!</target>
-            </trans-unit>
-            <trans-unit id="address_edit_success">
-                <source>address_edit_success</source>
-                <target>Your address has been successfully saved!</target>
-            </trans-unit>
-            <trans-unit id="address_name_label">
-                <source>address_name_label</source>
-                <target>Name</target>
-            </trans-unit>
-            <trans-unit id="address_full_label">
-                <source>address_full_label</source>
-                <target>Address</target>
-            </trans-unit>
-            <trans-unit id="address_type_label">
-                <source>address_type_label</source>
-                <target>Type</target>
-            </trans-unit>
-            <trans-unit id="address_list_default">
-                <source>address_list_default</source>
-                <target>Default</target>
-            </trans-unit>
-            <trans-unit id="address_is_current">
-                <source>address_is_current</source>
-                <target>Yes</target>
-            </trans-unit>
-            <trans-unit id="address_is_not_current">
-                <source>address_is_not_current</source>
-                <target>No</target>
-            </trans-unit>
-            <trans-unit id="address_actions_label">
-                <source>address_actions_label</source>
-                <target>Actions</target>
-            </trans-unit>
-            <trans-unit id="sonata.address.list.delete">
-                <source>sonata.address.list.delete</source>
-                <target>Delete</target>
-            </trans-unit>
-            <trans-unit id="sonata.address.list.delete_confirm">
-                <source>sonata.address.list.delete_confirm</source>
-                <target>Are you sure you want to delete this address?</target>
-            </trans-unit>
-            <trans-unit id="customer_address_delete">
-                <source>customer_address_delete</source>
-                <target>The address has been successfully deleted!</target>
-            </trans-unit>
-            <trans-unit id="address_list_set_current">
-                <source>address_list_set_current</source>
-                <target>Set default</target>
-            </trans-unit>
-            <!-- End - Addresses translations -->
-            <trans-unit id="sonata_customer_addresses_breadcrumb">
-                <source>sonata_customer_addresses_breadcrumb</source>
-                <target>Addresses</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <!-- Begin - Titles -->
+      <trans-unit id="sonata_profile_title">
+        <source>sonata_profile_title</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="customer">
+        <source>customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="address">
+        <source>address</source>
+        <target>Address</target>
+      </trans-unit>
+      <!-- End - Titles -->
+      <!-- Begin - Form translations -->
+      <trans-unit id="address.form.group_address_label">
+        <source>address.form.group_address_label</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="address.form.group_contact_label">
+        <source>address.form.group_contact_label</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="form_address.group_advanced_label">
+        <source>form_address.group_advanced_label</source>
+        <target>Advanced</target>
+      </trans-unit>
+      <trans-unit id="form_address.group_contact_label">
+        <source>form_address.group_contact_label</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="form_address.group_address_label">
+        <source>form_address.group_address_label</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="address.form.group_advanced_label">
+        <source>address.form.group_advanced_label</source>
+        <target>Advanced</target>
+      </trans-unit>
+      <!-- Begin - Customer // Address form-->
+      <trans-unit id="form.label_firstname">
+        <source>form.label_firstname</source>
+        <target>Firstname</target>
+      </trans-unit>
+      <trans-unit id="form.label_lastname">
+        <source>form.label_lastname</source>
+        <target>Lastname</target>
+      </trans-unit>
+      <trans-unit id="form.label_locale">
+        <source>form.label_locale</source>
+        <target>Locale</target>
+      </trans-unit>
+      <trans-unit id="form.label_type">
+        <source>form.label_type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="form.label_current">
+        <source>form.label_current</source>
+        <target>Current</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="form.label_phone">
+        <source>form.label_phone</source>
+        <target>Phone</target>
+      </trans-unit>
+      <trans-unit id="form.label_address1">
+        <source>form.label_address1</source>
+        <target>Address 1</target>
+      </trans-unit>
+      <trans-unit id="form.label_address2">
+        <source>form.label_address2</source>
+        <target>Address 2</target>
+      </trans-unit>
+      <trans-unit id="form.label_address3">
+        <source>form.label_address3</source>
+        <target>Address 3</target>
+      </trans-unit>
+      <trans-unit id="form.label_postcode">
+        <source>form.label_postcode</source>
+        <target>Postcode</target>
+      </trans-unit>
+      <trans-unit id="form.label_city">
+        <source>form.label_city</source>
+        <target>City</target>
+      </trans-unit>
+      <trans-unit id="form.label_country_code">
+        <source>form.label_country_code</source>
+        <target>Country code</target>
+      </trans-unit>
+      <trans-unit id="form.label_customer">
+        <source>form.label_customer</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="form.label_user">
+        <source>form.label_user</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="form.label_birth_date">
+        <source>form.label_birth_date</source>
+        <target>Birthdate</target>
+      </trans-unit>
+      <trans-unit id="form.label_birth_place">
+        <source>form.label_birth_place</source>
+        <target>Birthplace</target>
+      </trans-unit>
+      <trans-unit id="form.label_email">
+        <source>form.label_email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="form.label_phone_number">
+        <source>form.label_phone_number</source>
+        <target>Phone</target>
+      </trans-unit>
+      <trans-unit id="form.label_mobile_number">
+        <source>form.label_mobile_number</source>
+        <target>Mobile</target>
+      </trans-unit>
+      <trans-unit id="form.label_fax_number">
+        <source>form.label_fax_number</source>
+        <target>Fax</target>
+      </trans-unit>
+      <trans-unit id="form.label_is_fake">
+        <source>form.label_is_fake</source>
+        <target>Is fake</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_addresses">
+        <source>sonata_customer_address_addresses</source>
+        <target>Choose existing</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_useselected">
+        <source>sonata_customer_address_useselected</source>
+        <target>Use selected address</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_edit">
+        <source>sonata_customer_address_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_firstname">
+        <source>sonata_customer_address_firstname</source>
+        <target>Firstname</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_name">
+        <source>sonata_customer_address_name</source>
+        <target>Address name</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_type">
+        <source>sonata_customer_address_type</source>
+        <target>Address type</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_lastname">
+        <source>sonata_customer_address_lastname</source>
+        <target>Lastname</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_address1">
+        <source>sonata_customer_address_address1</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_address2">
+        <source>sonata_customer_address_address2</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_address3">
+        <source>sonata_customer_address_address3</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_postcode">
+        <source>sonata_customer_address_postcode</source>
+        <target>Postcode</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_city">
+        <source>sonata_customer_address_city</source>
+        <target>City</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_countryCode">
+        <source>sonata_customer_address_countryCode</source>
+        <target>Country code</target>
+      </trans-unit>
+      <trans-unit id="sonata_customer_address_phone">
+        <source>sonata_customer_address_phone</source>
+        <target>Phone</target>
+      </trans-unit>
+      <!-- End - Customer // Address form-->
+      <!-- End - Form translations -->
+      <!-- Begin - Show customer translations -->
+      <trans-unit id="show.label_firstname">
+        <source>show.label_firstname</source>
+        <target>Firstname</target>
+      </trans-unit>
+      <trans-unit id="show.label_lastname">
+        <source>show.label_lastname</source>
+        <target>Lastname</target>
+      </trans-unit>
+      <trans-unit id="show.label_locale">
+        <source>show.label_locale</source>
+        <target>Locale</target>
+      </trans-unit>
+      <!-- End - Show customer translations -->
+      <!-- Begin - Breadcrumb translations -->
+      <trans-unit id="breadcrumb.link_customer_list">
+        <source>breadcrumb.link_customer_list</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_customer_edit">
+        <source>breadcrumb.link_customer_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_address_list">
+        <source>breadcrumb.link_address_list</source>
+        <target>Addresses</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_address_edit">
+        <source>breadcrumb.link_address_edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_address_create">
+        <source>breadcrumb.link_address_create</source>
+        <target>Create address</target>
+      </trans-unit>
+      <!-- End - Breadcrumb translations -->
+      <!-- Begin - Sidemenu translations -->
+      <trans-unit id="customer.sidemenu.link_customer_edit">
+        <source>customer.sidemenu.link_customer_edit</source>
+        <target>Customer</target>
+      </trans-unit>
+      <trans-unit id="customer.sidemenu.link_address_list">
+        <source>customer.sidemenu.link_address_list</source>
+        <target>Addresses</target>
+      </trans-unit>
+      <trans-unit id="customer.sidemenu.link_order_list">
+        <source>customer.sidemenu.link_order_list</source>
+        <target>Orders</target>
+      </trans-unit>
+      <trans-unit id="view_all_customers">
+        <source>view_all_customers</source>
+        <target>View all customers</target>
+      </trans-unit>
+      <trans-unit id="customer.group.general">
+        <source>customer.group.general</source>
+        <target>General</target>
+      </trans-unit>
+      <trans-unit id="customer.group.contact">
+        <source>customer.group.contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="link_list_addresses">
+        <source>link_list_addresses</source>
+        <target>Addresses</target>
+      </trans-unit>
+      <trans-unit id="link_list_dashboard">
+        <source>link_list_dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <!-- End - Sidemenu translations -->
+      <!-- Begin - List translations -->
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="list.label_created_at">
+        <source>list.label_created_at</source>
+        <target>Created at</target>
+      </trans-unit>
+      <trans-unit id="list.label_locale">
+        <source>list.label_locale</source>
+        <target>Locale</target>
+      </trans-unit>
+      <trans-unit id="list.label_fulladdress">
+        <source>list.label_fulladdress</source>
+        <target>Full address</target>
+      </trans-unit>
+      <trans-unit id="list.label_current">
+        <source>list.label_current</source>
+        <target>Current</target>
+      </trans-unit>
+      <trans-unit id="list.label_type_code">
+        <source>list.label_type_code</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="list.label_user">
+        <source>list.label_user</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="list.label_email">
+        <source>list.label_email</source>
+        <target>E-mail address</target>
+      </trans-unit>
+      <trans-unit id="list.label_phone_number">
+        <source>list.label_phone_number</source>
+        <target>Phone</target>
+      </trans-unit>
+      <trans-unit id="list.label_mobile_number">
+        <source>list.label_mobile_number</source>
+        <target>Mobile</target>
+      </trans-unit>
+      <trans-unit id="list.label_is_fake">
+        <source>list.label_is_fake</source>
+        <target>Is fake</target>
+      </trans-unit>
+      <trans-unit id="list.label_birth_date">
+        <source>list.label_birth_date</source>
+        <target>Birthdate</target>
+      </trans-unit>
+      <trans-unit id="list.label_birth_place">
+        <source>list.label_birth_place</source>
+        <target>Birthplace</target>
+      </trans-unit>
+      <trans-unit id="list.label_fax_number">
+        <source>list.label_fax_number</source>
+        <target>Fax</target>
+      </trans-unit>
+      <!-- End - List translations -->
+      <!-- Begin - Filter translations -->
+      <trans-unit id="filter.label_firstname">
+        <source>filter.label_firstname</source>
+        <target>Firstname</target>
+      </trans-unit>
+      <trans-unit id="filter.label_lastname">
+        <source>filter.label_lastname</source>
+        <target>Lastname</target>
+      </trans-unit>
+      <trans-unit id="filter.label_user">
+        <source>filter.label_user</source>
+        <target>User</target>
+      </trans-unit>
+      <trans-unit id="filter.label_email">
+        <source>filter.label_email</source>
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="filter.label_is_fake">
+        <source>filter.label_is_fake</source>
+        <target>Fake user?</target>
+      </trans-unit>
+      <trans-unit id="filter.label_locale">
+        <source>filter.label_locale</source>
+        <target>Locale</target>
+      </trans-unit>
+      <trans-unit id="filter.label_current">
+        <source>filter.label_current</source>
+        <target>Current?</target>
+      </trans-unit>
+      <trans-unit id="filter.label_type">
+        <source>filter.label_type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="filter.label_customer">
+        <source>filter.label_customer</source>
+        <target>Customer id</target>
+      </trans-unit>
+      <!-- End - Filter translations -->
+      <!-- Begin - Type translations -->
+      <trans-unit id="type_delivery">
+        <source>type_delivery</source>
+        <target>Delivery</target>
+      </trans-unit>
+      <trans-unit id="type_billing">
+        <source>type_billing</source>
+        <target>Billing</target>
+      </trans-unit>
+      <trans-unit id="type_contact">
+        <source>type_contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <!-- End - Type translations -->
+      <!-- Begin - Addresses translations -->
+      <trans-unit id="address_new">
+        <source>address_new</source>
+        <target>New address</target>
+      </trans-unit>
+      <trans-unit id="address_list">
+        <source>address_list</source>
+        <target>Addresses</target>
+      </trans-unit>
+      <trans-unit id="sonata.customer.address.save">
+        <source>sonata.customer.address.save</source>
+        <target>Save your address</target>
+      </trans-unit>
+      <trans-unit id="sonata.address.list.add">
+        <source>sonata.address.list.add</source>
+        <target>Add an address</target>
+      </trans-unit>
+      <trans-unit id="sonata.address.list.no_addresses">
+        <source>sonata.address.list.no_addresses</source>
+        <target>You don't have any available addresses.</target>
+      </trans-unit>
+      <trans-unit id="address_add_success">
+        <source>address_add_success</source>
+        <target>Your new address has been successfully added!</target>
+      </trans-unit>
+      <trans-unit id="address_edit_success">
+        <source>address_edit_success</source>
+        <target>Your address has been successfully saved!</target>
+      </trans-unit>
+      <trans-unit id="address_name_label">
+        <source>address_name_label</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="address_full_label">
+        <source>address_full_label</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="address_type_label">
+        <source>address_type_label</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="address_list_default">
+        <source>address_list_default</source>
+        <target>Default</target>
+      </trans-unit>
+      <trans-unit id="address_is_current">
+        <source>address_is_current</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="address_is_not_current">
+        <source>address_is_not_current</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="address_actions_label">
+        <source>address_actions_label</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="sonata.address.list.delete">
+        <source>sonata.address.list.delete</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="sonata.address.list.delete_confirm">
+        <source>sonata.address.list.delete_confirm</source>
+        <target>Are you sure you want to delete this address?</target>
+      </trans-unit>
+      <trans-unit id="customer_address_delete">
+        <source>customer_address_delete</source>
+        <target>The address has been successfully deleted!</target>
+      </trans-unit>
+      <trans-unit id="address_list_set_current">
+        <source>address_list_set_current</source>
+        <target>Set default</target>
+      </trans-unit>
+      <!-- End - Addresses translations -->
+      <trans-unit id="sonata_customer_addresses_breadcrumb">
+        <source>sonata_customer_addresses_breadcrumb</source>
+        <target>Addresses</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
