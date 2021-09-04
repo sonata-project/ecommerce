@@ -37,7 +37,7 @@ class BasketResizeFormListenerTest extends TestCase
             FormEvents::PRE_SUBMIT => 'preBind',
         ];
 
-        $this->assertSame($expected, BasketResizeFormListener::getSubscribedEvents());
+        static::assertSame($expected, BasketResizeFormListener::getSubscribedEvents());
     }
 
     public function testPreSetData(): void
@@ -45,7 +45,7 @@ class BasketResizeFormListenerTest extends TestCase
         $builder = $this->createMock(FormBuilder::class);
 
         $factory = $this->createMock(FormFactoryInterface::class);
-        $factory->expects($this->any())
+        $factory->expects(static::any())
             ->method('createNamedBuilder')
             ->willReturn($builder);
 
@@ -61,12 +61,12 @@ class BasketResizeFormListenerTest extends TestCase
         $builder = $this->createMock(FormBuilder::class);
 
         $factory = $this->createMock(FormFactoryInterface::class);
-        $factory->expects($this->any())
+        $factory->expects(static::any())
             ->method('createNamedBuilder')
             ->willReturn($builder);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->any())
+        $basket->expects(static::any())
             ->method('getBasketElements')
             ->willReturn($this->getBasketElements());
 
@@ -79,12 +79,12 @@ class BasketResizeFormListenerTest extends TestCase
         $builder = $this->createMock(FormBuilder::class);
 
         $factory = $this->createMock(FormFactoryInterface::class);
-        $factory->expects($this->any())
+        $factory->expects(static::any())
             ->method('createNamedBuilder')
             ->willReturn($builder);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->any())
+        $basket->expects(static::any())
             ->method('getBasketElements')
             ->willReturn($this->getBasketElements(null));
 
@@ -99,12 +99,12 @@ class BasketResizeFormListenerTest extends TestCase
         $builder = $this->createMock(FormBuilder::class);
 
         $factory = $this->createMock(FormFactoryInterface::class);
-        $factory->expects($this->any())
+        $factory->expects(static::any())
             ->method('createNamedBuilder')
             ->willReturn($builder);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->any())
+        $basket->expects(static::any())
             ->method('getBasketElements')
             ->willReturn($this->getBasketElements('test'));
 
@@ -118,12 +118,12 @@ class BasketResizeFormListenerTest extends TestCase
     protected function getFormEvent($preSetData = false, $addIsCalled = true)
     {
         $formEvent = $this->createMock(FormEvent::class);
-        $formEvent->expects($this->once())
+        $formEvent->expects(static::once())
             ->method('getForm')
             ->willReturn($this->getMockedForm($addIsCalled));
 
         if ($preSetData) {
-            $formEvent->expects($this->once())
+            $formEvent->expects(static::once())
                 ->method('getData')
                 ->willReturn($this->getBasketElements());
         }
@@ -138,7 +138,7 @@ class BasketResizeFormListenerTest extends TestCase
     {
         $form = $this->createMock(Form::class);
         if ($addIsCalled) {
-            $form->expects($this->once())->method('add');
+            $form->expects(static::once())->method('add');
         }
 
         return $form;
@@ -151,11 +151,11 @@ class BasketResizeFormListenerTest extends TestCase
         }
 
         $productProvider = $this->createMock(ProductProviderInterface::class);
-        $productProvider->expects($this->once())->method('defineBasketElementForm');
+        $productProvider->expects(static::once())->method('defineBasketElementForm');
 
         $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->exactly(2))->method('getPosition');
-        $basketElement->expects($this->once())
+        $basketElement->expects(static::exactly(2))->method('getPosition');
+        $basketElement->expects(static::once())
             ->method('getProductProvider')
             ->willReturn($productProvider);
 

@@ -47,20 +47,20 @@ class CheckPaymentTest extends TestCase
         $order->setCreatedAt($date);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('get')->willReturnCallback([$this, 'getCallback']);
-        $transaction->expects($this->once())->method('setTransactionId');
-        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
-        $transaction->expects($this->any())->method('getInformation')->willReturn('');
+        $transaction->expects(static::exactly(2))->method('get')->willReturnCallback([$this, 'getCallback']);
+        $transaction->expects(static::once())->method('setTransactionId');
+        $transaction->expects(static::any())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::any())->method('getInformation')->willReturn('');
 
-        $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
-        $this->assertTrue($payment->isAddableProduct($basket, $product));
-        $this->assertTrue($payment->isBasketValid($basket));
-        $this->assertTrue($payment->isRequestValid($transaction));
-        $this->assertTrue($payment->isCallbackValid($transaction));
+        static::assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        static::assertTrue($payment->isAddableProduct($basket, $product));
+        static::assertTrue($payment->isBasketValid($basket));
+        static::assertTrue($payment->isRequestValid($transaction));
+        static::assertTrue($payment->isCallbackValid($transaction));
 
-        $this->assertInstanceOf(Response::class, $payment->handleError($transaction));
+        static::assertInstanceOf(Response::class, $payment->handleError($transaction));
 
-        $this->assertSame($payment->getOrderReference($transaction), '0001231');
+        static::assertSame($payment->getOrderReference($transaction), '0001231');
 
         $payment->applyTransactionId($transaction);
     }
@@ -73,12 +73,12 @@ class CheckPaymentTest extends TestCase
         $order->setCreatedAt($date);
 
         $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->exactly(2))->method('generate')->willReturn('http://foo.bar/ok-url');
+        $router->expects(static::exactly(2))->method('generate')->willReturn('http://foo.bar/ok-url');
 
         $logger = $this->createMock(LoggerInterface::class);
 
         $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->once())->method('send')->willReturnCallback(static function ($request, $response): void {
+        $client->expects(static::once())->method('send')->willReturnCallback(static function ($request, $response): void {
             $response->setContent('ok');
         });
 
@@ -87,10 +87,10 @@ class CheckPaymentTest extends TestCase
 
         $response = $payment->sendbank($order);
 
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertSame(302, $response->getStatusCode());
-        $this->assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
-        $this->assertFalse($response->isCacheable());
+        static::assertInstanceOf(Response::class, $response);
+        static::assertSame(302, $response->getStatusCode());
+        static::assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
+        static::assertFalse($response->isCacheable());
     }
 
     public function testSendConfirmationReceipt(): void
@@ -98,7 +98,7 @@ class CheckPaymentTest extends TestCase
         $order = new CheckPaymentTest_Order();
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('getOrder')->will($this->onConsecutiveCalls(null, $order));
+        $transaction->expects(static::exactly(2))->method('getOrder')->will(static::onConsecutiveCalls(null, $order));
 
         $router = $this->createMock(RouterInterface::class);
         $logger = $this->createMock(LoggerInterface::class);
@@ -109,12 +109,12 @@ class CheckPaymentTest extends TestCase
 
         // first call : the order is not set
         $response = $payment->sendConfirmationReceipt($transaction);
-        $this->assertFalse($response, '::sendConfirmationReceipt return false on invalid order');
+        static::assertFalse($response, '::sendConfirmationReceipt return false on invalid order');
 
         // second call : the order is set
         $response = $payment->sendConfirmationReceipt($transaction);
-        $this->assertInstanceOf(Response::class, $response, '::sendConfirmationReceipt return a Response object');
-        $this->assertSame('ok', $response->getContent(), '::getContent returns ok');
+        static::assertInstanceOf(Response::class, $response, '::sendConfirmationReceipt return a Response object');
+        static::assertSame('ok', $response->getContent(), '::getContent returns ok');
     }
 
     public static function getCallback($name)

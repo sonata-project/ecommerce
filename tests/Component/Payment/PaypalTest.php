@@ -42,12 +42,12 @@ class PaypalTest extends TestCase
         $paypal->setOptions($options);
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())->method('getCreatedAt')->willReturn(new \DateTime());
+        $order->expects(static::any())->method('getCreatedAt')->willReturn(new \DateTime());
 
         $sendbank = $paypal->sendbank($order);
-        $this->assertInstanceOf(Response::class, $sendbank);
+        static::assertInstanceOf(Response::class, $sendbank);
 
-        $this->assertStringContainsString('<input type="hidden" name="cmd" value="_s-xclick">', $sendbank->getContent());
+        static::assertStringContainsString('<input type="hidden" name="cmd" value="_s-xclick">', $sendbank->getContent());
     }
 
     public function testIsCallbackValid(): void
@@ -58,26 +58,26 @@ class PaypalTest extends TestCase
         $paypal = new Paypal($router, $translator);
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())->method('getCreatedAt')->willReturn(new \DateTime());
-        $order->expects($this->any())->method('isValidated')->willReturn(true);
+        $order->expects(static::any())->method('getCreatedAt')->willReturn(new \DateTime());
+        $order->expects(static::any())->method('isValidated')->willReturn(true);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::any())->method('getOrder')->willReturn($order);
 
-        $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because request invalid');
+        static::assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because request invalid');
 
         $check = sha1(
             $order->getReference().
             $order->getCreatedAt()->format('m/d/Y:G:i:s').
             $order->getId()
         );
-        $transaction->expects($this->any())->method('get')->willReturn($check);
+        $transaction->expects(static::any())->method('get')->willReturn($check);
 
-        $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because order not validated');
+        static::assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because order not validated');
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())->method('getCreatedAt')->willReturn(new \DateTime());
-        $order->expects($this->any())->method('isValidated')->willReturn(false);
+        $order->expects(static::any())->method('getCreatedAt')->willReturn(new \DateTime());
+        $order->expects(static::any())->method('isValidated')->willReturn(false);
 
         $check = sha1(
             $order->getReference().
@@ -86,15 +86,15 @@ class PaypalTest extends TestCase
         );
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
-        $transaction->expects($this->any())->method('get')->willReturn($check);
+        $transaction->expects(static::any())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::any())->method('get')->willReturn($check);
 
-        $this->assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because payment_status invalid.');
+        static::assertFalse($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid false because payment_status invalid.');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::any())->method('getOrder')->willReturn($order);
 
-        $transaction->expects($this->any())->method('get')->willReturnCallback(static function () use ($check) {
+        $transaction->expects(static::any())->method('get')->willReturnCallback(static function () use ($check) {
             $asked = func_get_arg(0);
             switch ($asked) {
                         case 'check':
@@ -104,12 +104,12 @@ class PaypalTest extends TestCase
                     }
         });
 
-        $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status pending.');
+        static::assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status pending.');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::any())->method('getOrder')->willReturn($order);
 
-        $transaction->expects($this->any())->method('get')->willReturnCallback(static function () use ($check) {
+        $transaction->expects(static::any())->method('get')->willReturnCallback(static function () use ($check) {
             $asked = func_get_arg(0);
             switch ($asked) {
                         case 'check':
@@ -119,12 +119,12 @@ class PaypalTest extends TestCase
                     }
         });
 
-        $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status completed.');
+        static::assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status completed.');
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::any())->method('getOrder')->willReturn($order);
 
-        $transaction->expects($this->any())->method('get')->willReturnCallback(static function () use ($check) {
+        $transaction->expects(static::any())->method('get')->willReturnCallback(static function () use ($check) {
             $asked = func_get_arg(0);
             switch ($asked) {
                         case 'check':
@@ -134,7 +134,7 @@ class PaypalTest extends TestCase
                     }
         });
 
-        $this->assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status cancelled.');
+        static::assertTrue($paypal->isCallbackValid($transaction), 'Paypal::isCallbackValid true because payment_status cancelled.');
     }
 
     public function testHandleError(): void
@@ -148,40 +148,40 @@ class PaypalTest extends TestCase
         $order = $this->createMock(OrderInterface::class);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->once())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::once())->method('getOrder')->willReturn($order);
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->once())->method('getOrder')->willReturn($order);
-        $transaction->expects($this->atLeastOnce())
+        $transaction->expects(static::once())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::atLeastOnce())
                     ->method('getStatusCode')
                     ->willReturn(TransactionInterface::STATUS_ORDER_UNKNOWN);
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->atLeastOnce())->method('getOrder')->willReturn($order);
-        $transaction->expects($this->atLeastOnce())
+        $transaction->expects(static::atLeastOnce())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::atLeastOnce())
                     ->method('getStatusCode')
                     ->willReturn(TransactionInterface::STATUS_ERROR_VALIDATION);
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->atLeastOnce())->method('getOrder')->willReturn($order);
-        $transaction->expects($this->atLeastOnce())
+        $transaction->expects(static::atLeastOnce())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::atLeastOnce())
                     ->method('getStatusCode')
                     ->willReturn(TransactionInterface::STATUS_CANCELLED);
 
         $paypal->handleError($transaction);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->atLeastOnce())->method('getOrder')->willReturn($order);
-        $transaction->expects($this->atLeastOnce())
+        $transaction->expects(static::atLeastOnce())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::atLeastOnce())
                     ->method('getStatusCode')
                     ->willReturn(TransactionInterface::STATUS_PENDING);
-        $transaction->expects($this->atLeastOnce())
+        $transaction->expects(static::atLeastOnce())
                     ->method('get')
                     ->willReturn(Paypal::PENDING_REASON_ADDRESS);
 

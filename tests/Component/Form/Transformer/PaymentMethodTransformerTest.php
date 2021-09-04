@@ -32,8 +32,8 @@ class PaymentMethodTransformerTest extends TestCase
         $payment = new PassPayment($this->createMock(RouterInterface::class));
         $payment->setCode('paymentCode');
 
-        $this->assertSame('paymentCode', $transformer->transform($payment));
-        $this->assertNull($transformer->transform(null));
+        static::assertSame('paymentCode', $transformer->transform($payment));
+        static::assertNull($transformer->transform(null));
     }
 
     public function testReverseTransform(): void
@@ -43,12 +43,12 @@ class PaymentMethodTransformerTest extends TestCase
 
         $pool = $this->createMock(Pool::class);
 
-        $pool->expects($this->once())
+        $pool->expects(static::once())
             ->method('getMethod')
             ->willReturn($payment);
 
         $transformer = new PaymentMethodTransformer($pool);
 
-        $this->assertSame($payment, $transformer->reverseTransform('paymentCode'));
+        static::assertSame($payment, $transformer->reverseTransform('paymentCode'));
     }
 }

@@ -22,9 +22,9 @@ class NodeScelliusTransactionGeneratorTest extends TestCase
     public function testGenerator(): void
     {
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->never())->method('getReference');
+        $order->expects(static::never())->method('getReference');
 
         $generator = new NodeScelliusTransactionGenerator();
-        $this->assertSame('', $generator->generate($order));
+        static::assertSame('', $generator->generate($order));
     }
 }

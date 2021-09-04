@@ -33,6 +33,6 @@ class GlobalVariablesTest extends TestCase
 
     public function testGetProfileTemplate(): void
     {
-        $this->assertSame('@SonataCustomer/Profile/action.html.twig', $this->globalVariables->getProfileTemplate());
+        static::assertSame('@SonataCustomer/Profile/action.html.twig', $this->globalVariables->getProfileTemplate());
     }
 }

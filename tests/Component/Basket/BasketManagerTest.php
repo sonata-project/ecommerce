@@ -34,22 +34,22 @@ class BasketManagerTest extends TestCase
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
 
-        $this->assertInstanceOf(Basket::class, $basketMgr->create());
-        $this->assertSame(Basket::class, $basketMgr->getClass());
+        static::assertInstanceOf(Basket::class, $basketMgr->create());
+        static::assertSame(Basket::class, $basketMgr->getClass());
     }
 
     public function testSave(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->once())->method('persist');
-        $em->expects($this->once())->method('flush');
+        $em->expects(static::once())->method('persist');
+        $em->expects(static::once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
 
@@ -60,14 +60,14 @@ class BasketManagerTest extends TestCase
     public function testFind(): void
     {
         $repository = $this->createMock(EntityRepository::class);
-        $repository->expects($this->once())->method('findOneBy');
-        $repository->expects($this->once())->method('findBy');
+        $repository->expects(static::once())->method('findOneBy');
+        $repository->expects(static::once())->method('findBy');
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->willReturn($repository);
+        $em->expects(static::any())->method('getRepository')->willReturn($repository);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
         $basketMgr->findBy([]);
@@ -77,11 +77,11 @@ class BasketManagerTest extends TestCase
     public function testDelete(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->once())->method('remove');
-        $em->expects($this->once())->method('flush');
+        $em->expects(static::once())->method('remove');
+        $em->expects(static::once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $basketMgr = new BasketManager(Basket::class, $registry);
 
@@ -148,7 +148,7 @@ class BasketManagerTest extends TestCase
         ]);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         return new BasketManager(BaseBasket::class, $registry);
     }

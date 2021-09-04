@@ -29,24 +29,24 @@ class BasketEntityFactoryTest extends TestCase
     public function testLoadWithNoBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('setCustomer');
+        $basket->expects(static::once())->method('setCustomer');
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('loadBasketPerCustomer')->willReturn(false);
-        $basketManager->expects($this->once())->method('create')->willReturn($basket);
+        $basketManager->expects(static::once())->method('loadBasketPerCustomer')->willReturn(false);
+        $basketManager->expects(static::once())->method('create')->willReturn($basket);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->exactly(3))->method('getId')->willReturn(1);
+        $customer->expects(static::exactly(3))->method('getId')->willReturn(1);
 
         $session = $this->createMock(Session::class);
 
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -54,29 +54,29 @@ class BasketEntityFactoryTest extends TestCase
 
         $basket = $factory->load($customer);
 
-        $this->isInstanceOf(BasketInterface::class, $basket);
+        static::isInstanceOf(BasketInterface::class, $basket);
     }
 
     public function testLoadWithNoBasketInDbButBasketInSession(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('setCustomer');
+        $basket->expects(static::once())->method('setCustomer');
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('loadBasketPerCustomer')->willReturn(false);
+        $basketManager->expects(static::once())->method('loadBasketPerCustomer')->willReturn(false);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->exactly(3))->method('getId')->willReturn(1);
+        $customer->expects(static::exactly(3))->method('getId')->willReturn(1);
 
         $session = $this->createMock(Session::class);
-        $session->expects($this->exactly(1))->method('get')->willReturn($basket);
+        $session->expects(static::exactly(1))->method('get')->willReturn($basket);
 
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -84,7 +84,7 @@ class BasketEntityFactoryTest extends TestCase
 
         $basket = $factory->load($customer);
 
-        $this->isInstanceOf(BasketInterface::class, $basket);
+        static::isInstanceOf(BasketInterface::class, $basket);
     }
 
     public function testLoadWithBasketInDbAndInSession(): void
@@ -94,21 +94,21 @@ class BasketEntityFactoryTest extends TestCase
         $sessionBasket = $this->createMock(BasketInterface::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('loadBasketPerCustomer')->willReturn($basket);
+        $basketManager->expects(static::once())->method('loadBasketPerCustomer')->willReturn($basket);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->exactly(2))->method('build');
+        $basketBuilder->expects(static::exactly(2))->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->exactly(5))->method('getId')->willReturn(1);
+        $customer->expects(static::exactly(5))->method('getId')->willReturn(1);
 
         $session = $this->createMock(Session::class);
-        $session->expects($this->exactly(1))->method('get')->willReturn($sessionBasket);
+        $session->expects(static::exactly(1))->method('get')->willReturn($sessionBasket);
 
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -116,16 +116,16 @@ class BasketEntityFactoryTest extends TestCase
 
         $loadedBasket = $factory->load($customer);
 
-        $this->isInstanceOf(BasketInterface::class, $loadedBasket);
+        static::isInstanceOf(BasketInterface::class, $loadedBasket);
     }
 
     public function testSaveExistingCustomer(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getCustomerId')->willReturn(1);
+        $basket->expects(static::once())->method('getCustomerId')->willReturn(1);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('save');
+        $basketManager->expects(static::once())->method('save');
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
 
@@ -134,7 +134,7 @@ class BasketEntityFactoryTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -145,7 +145,7 @@ class BasketEntityFactoryTest extends TestCase
     public function testSaveNoExistingCustomer(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getCustomerId')->willReturn(false);
+        $basket->expects(static::once())->method('getCustomerId')->willReturn(false);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
 
@@ -153,7 +153,7 @@ class BasketEntityFactoryTest extends TestCase
 
         $session = $this->createMock(SessionInterface::class);
         $tester = $this;
-        $session->expects($this->once())->method('set')->willReturnCallback(static function ($key, $value) use ($tester, $basket): void {
+        $session->expects(static::once())->method('set')->willReturnCallback(static function ($key, $value) use ($tester, $basket): void {
             $tester->assertEquals($basket, $value);
             $tester->assertEquals('sonata/basket/factory/customer/new', $key);
         });
@@ -161,7 +161,7 @@ class BasketEntityFactoryTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -172,10 +172,10 @@ class BasketEntityFactoryTest extends TestCase
     public function testReset(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getCustomerId')->willReturn(1);
+        $basket->expects(static::once())->method('getCustomerId')->willReturn(1);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('delete');
+        $basketManager->expects(static::once())->method('delete');
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
 
@@ -184,7 +184,7 @@ class BasketEntityFactoryTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 

@@ -37,7 +37,7 @@ class SelectorTest extends TestCase
         $productPool = new ProductPool();
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEmpty($selector->getAvailableMethods());
+        static::assertEmpty($selector->getAvailableMethods());
     }
 
     public function testNonExistentProduct(): void
@@ -48,12 +48,12 @@ class SelectorTest extends TestCase
         $basketElement = $this->createMock(BasketElementInterface::class);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
 
         $address = $this->createMock(AddressInterface::class);
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEmpty($selector->getAvailableMethods($basket, $address));
+        static::assertEmpty($selector->getAvailableMethods($basket, $address));
     }
 
     /**
@@ -65,7 +65,7 @@ class SelectorTest extends TestCase
         $productPool = new ProductPool();
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEmpty($selector->getAvailableMethods());
+        static::assertEmpty($selector->getAvailableMethods());
     }
 
     /**
@@ -76,10 +76,10 @@ class SelectorTest extends TestCase
         $deliveryPool = new DeliveryPool();
         $productPool = new ProductPool();
         $basket = $this->createMock(Basket::class);
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([]);
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEmpty($selector->getAvailableMethods($basket));
+        static::assertEmpty($selector->getAvailableMethods($basket));
     }
 
     /**
@@ -94,12 +94,12 @@ class SelectorTest extends TestCase
         $basketElement = $this->createMock(BasketElement::class);
         $product = $this->createMock(Product::class);
 
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
-        $basketElement->expects($this->once())->method('getProduct')->willReturn($product);
-        $product->expects($this->once())->method('getDeliveries')->willReturn([]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basketElement->expects(static::once())->method('getProduct')->willReturn($product);
+        $product->expects(static::once())->method('getDeliveries')->willReturn([]);
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertEmpty($selector->getAvailableMethods($basket));
+        static::assertEmpty($selector->getAvailableMethods($basket));
     }
 
     /**
@@ -115,20 +115,20 @@ class SelectorTest extends TestCase
         $product = $this->createMock(Product::class);
 
         $delivery = $this->createMock(DeliveryInterface::class);
-        $delivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
+        $delivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
 
         $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
-        $serviceDelivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
-        $serviceDelivery->expects($this->any())->method('getEnabled')->willReturn(true);
-        $serviceDelivery->expects($this->any())->method('isAddressRequired')->willReturn(true);
-        $deliveryPool->expects($this->any())->method('getMethod')->willReturn($serviceDelivery);
+        $serviceDelivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
+        $serviceDelivery->expects(static::any())->method('getEnabled')->willReturn(true);
+        $serviceDelivery->expects(static::any())->method('isAddressRequired')->willReturn(true);
+        $deliveryPool->expects(static::any())->method('getMethod')->willReturn($serviceDelivery);
 
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
-        $basketElement->expects($this->once())->method('getProduct')->willReturn($product);
-        $product->expects($this->once())->method('getDeliveries')->willReturn([$delivery]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basketElement->expects(static::once())->method('getProduct')->willReturn($product);
+        $product->expects(static::once())->method('getDeliveries')->willReturn([$delivery]);
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertSame([], $selector->getAvailableMethods($basket));
+        static::assertSame([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -144,19 +144,19 @@ class SelectorTest extends TestCase
         $product = $this->createMock(Product::class);
 
         $delivery = $this->createMock(DeliveryInterface::class);
-        $delivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
+        $delivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
 
         $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
-        $serviceDelivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
-        $deliveryPool->expects($this->any())->method('getMethod')->willReturn($serviceDelivery);
-        $serviceDelivery->expects($this->any())->method('getEnabled')->willReturn(false);
+        $serviceDelivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
+        $deliveryPool->expects(static::any())->method('getMethod')->willReturn($serviceDelivery);
+        $serviceDelivery->expects(static::any())->method('getEnabled')->willReturn(false);
 
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
-        $basketElement->expects($this->once())->method('getProduct')->willReturn($product);
-        $product->expects($this->once())->method('getDeliveries')->willReturn([$delivery]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basketElement->expects(static::once())->method('getProduct')->willReturn($product);
+        $product->expects(static::once())->method('getDeliveries')->willReturn([$delivery]);
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertSame([], $selector->getAvailableMethods($basket));
+        static::assertSame([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -172,16 +172,16 @@ class SelectorTest extends TestCase
         $product = $this->createMock(Product::class);
 
         $delivery = $this->createMock(DeliveryInterface::class);
-        $delivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
+        $delivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
 
-        $deliveryPool->expects($this->any())->method('getMethod')->willReturn(null);
+        $deliveryPool->expects(static::any())->method('getMethod')->willReturn(null);
 
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
-        $basketElement->expects($this->once())->method('getProduct')->willReturn($product);
-        $product->expects($this->once())->method('getDeliveries')->willReturn([$delivery]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basketElement->expects(static::once())->method('getProduct')->willReturn($product);
+        $product->expects(static::once())->method('getDeliveries')->willReturn([$delivery]);
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertSame([], $selector->getAvailableMethods($basket));
+        static::assertSame([], $selector->getAvailableMethods($basket));
     }
 
     /**
@@ -197,24 +197,24 @@ class SelectorTest extends TestCase
         $product = $this->createMock(Product::class);
 
         $delivery = $this->createMock(DeliveryInterface::class);
-        $delivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
-        $delivery->expects($this->any())->method('getCountryCode')->willReturn('US');
+        $delivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
+        $delivery->expects(static::any())->method('getCountryCode')->willReturn('US');
 
         $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
-        $serviceDelivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
-        $serviceDelivery->expects($this->any())->method('getEnabled')->willReturn(true);
-        $serviceDelivery->expects($this->any())->method('isAddressRequired')->willReturn(true);
-        $deliveryPool->expects($this->any())->method('getMethod')->willReturn($serviceDelivery);
+        $serviceDelivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
+        $serviceDelivery->expects(static::any())->method('getEnabled')->willReturn(true);
+        $serviceDelivery->expects(static::any())->method('isAddressRequired')->willReturn(true);
+        $deliveryPool->expects(static::any())->method('getMethod')->willReturn($serviceDelivery);
 
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
-        $basketElement->expects($this->once())->method('getProduct')->willReturn($product);
-        $product->expects($this->once())->method('getDeliveries')->willReturn([$delivery]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basketElement->expects(static::once())->method('getProduct')->willReturn($product);
+        $product->expects(static::once())->method('getDeliveries')->willReturn([$delivery]);
 
         $address = $this->createMock(BaseAddress::class);
-        $address->expects($this->exactly(2))->method('getCountryCode')->willReturn('FR');
+        $address->expects(static::exactly(2))->method('getCountryCode')->willReturn('FR');
 
         $selector = new Selector($deliveryPool, $productPool);
-        $this->assertSame([], $selector->getAvailableMethods($basket, $address));
+        static::assertSame([], $selector->getAvailableMethods($basket, $address));
     }
 
     /**
@@ -229,24 +229,24 @@ class SelectorTest extends TestCase
         $product = $this->createMock(Product::class);
 
         $delivery1 = $this->createMock(DeliveryInterface::class);
-        $delivery1->expects($this->any())->method('getCode')->willReturn('deliveryTest');
+        $delivery1->expects(static::any())->method('getCode')->willReturn('deliveryTest');
 
         $delivery2 = $this->createMock(DeliveryInterface::class);
-        $delivery2->expects($this->any())->method('getCode')->willReturn('deliveryTest');
+        $delivery2->expects(static::any())->method('getCode')->willReturn('deliveryTest');
 
         $serviceDelivery = $this->createMock(BaseServiceDelivery::class);
-        $serviceDelivery->expects($this->any())->method('getCode')->willReturn('deliveryTest');
-        $serviceDelivery->expects($this->any())->method('getEnabled')->willReturn(true);
-        $serviceDelivery->expects($this->any())->method('isAddressRequired')->willReturn(false);
-        $deliveryPool->expects($this->once())->method('getMethod')->willReturn($serviceDelivery);
+        $serviceDelivery->expects(static::any())->method('getCode')->willReturn('deliveryTest');
+        $serviceDelivery->expects(static::any())->method('getEnabled')->willReturn(true);
+        $serviceDelivery->expects(static::any())->method('isAddressRequired')->willReturn(false);
+        $deliveryPool->expects(static::once())->method('getMethod')->willReturn($serviceDelivery);
 
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
-        $basketElement->expects($this->once())->method('getProduct')->willReturn($product);
-        $product->expects($this->once())->method('getDeliveries')->willReturn([$delivery1, $delivery2]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basketElement->expects(static::once())->method('getProduct')->willReturn($product);
+        $product->expects(static::once())->method('getDeliveries')->willReturn([$delivery1, $delivery2]);
 
         $selector = new Selector($deliveryPool, new ProductPool());
 
-        $this->assertSame([$serviceDelivery], $selector->getAvailableMethods($basket));
+        static::assertSame([$serviceDelivery], $selector->getAvailableMethods($basket));
     }
 
     public function testAvailableMethods(): void
@@ -274,22 +274,22 @@ class SelectorTest extends TestCase
         $productPool = new ProductPool();
 
         $productDelivery_low = $this->createMock(DeliveryInterface::class);
-        $productDelivery_low->expects($this->any())->method('getCode')->willReturn('ups_low');
+        $productDelivery_low->expects(static::any())->method('getCode')->willReturn('ups_low');
 
         $productDelivery_high = $this->createMock(DeliveryInterface::class);
-        $productDelivery_high->expects($this->any())->method('getCode')->willReturn('ups_high');
+        $productDelivery_high->expects(static::any())->method('getCode')->willReturn('ups_high');
 
         $productDelivery_high_bis = $this->createMock(DeliveryInterface::class);
-        $productDelivery_high_bis->expects($this->any())->method('getCode')->willReturn('ups_high_bis');
+        $productDelivery_high_bis->expects(static::any())->method('getCode')->willReturn('ups_high_bis');
 
         $product = $this->createMock(ProductInterface::class);
-        $product->expects($this->once())->method('getDeliveries')->willReturn([$productDelivery_low, $productDelivery_high, $productDelivery_high_bis]);
+        $product->expects(static::once())->method('getDeliveries')->willReturn([$productDelivery_low, $productDelivery_high, $productDelivery_high_bis]);
 
         $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->once())->method('getProduct')->willReturn($product);
+        $basketElement->expects(static::once())->method('getProduct')->willReturn($product);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([$basketElement]);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([$basketElement]);
 
         $address = $this->createMock(AddressInterface::class);
 
@@ -297,10 +297,10 @@ class SelectorTest extends TestCase
         $selector->setLogger($this->createMock(LoggerInterface::class));
 
         $instances = $selector->getAvailableMethods($basket, $address);
-        $this->assertCount(3, $instances);
-        $this->assertSame($instances[0]->getCode(), 'ups_high_bis');
-        $this->assertSame($instances[1]->getCode(), 'ups_high');
-        $this->assertSame($instances[2]->getCode(), 'ups_low');
+        static::assertCount(3, $instances);
+        static::assertSame($instances[0]->getCode(), 'ups_high_bis');
+        static::assertSame($instances[1]->getCode(), 'ups_high');
+        static::assertSame($instances[2]->getCode(), 'ups_low');
     }
 }
 

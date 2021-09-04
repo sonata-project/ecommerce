@@ -27,14 +27,14 @@ class LoaderTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
         $basket = $this->createMock(BasketInterface::class);
         $basketFactory = $this->createMock(BasketFactoryInterface::class);
-        $basketFactory->expects($this->once())->method('load')->willReturn($basket);
+        $basketFactory->expects(static::once())->method('load')->willReturn($basket);
 
         $customerSelector = $this->createMock(CustomerSelectorInterface::class);
-        $customerSelector->expects($this->once())->method('get')->willReturn($customer);
+        $customerSelector->expects(static::once())->method('get')->willReturn($customer);
 
         $loader = new Loader($basketFactory, $customerSelector);
 
-        $this->assertInstanceOf(BasketInterface::class, $loader->getBasket());
+        static::assertInstanceOf(BasketInterface::class, $loader->getBasket());
     }
 
     public function testExceptionLoadBasket(): void
@@ -43,12 +43,12 @@ class LoaderTest extends TestCase
 
         $customer = $this->createMock(CustomerInterface::class);
         $basketFactory = $this->createMock(BasketFactoryInterface::class);
-        $basketFactory->expects($this->once())->method('load')->willReturnCallback(static function (): void {
+        $basketFactory->expects(static::once())->method('load')->willReturnCallback(static function (): void {
             throw new \RuntimeException();
         });
 
         $customerSelector = $this->createMock(CustomerSelectorInterface::class);
-        $customerSelector->expects($this->once())->method('get')->willReturn($customer);
+        $customerSelector->expects(static::once())->method('get')->willReturn($customer);
 
         $loader = new Loader($basketFactory, $customerSelector);
         $loader->getBasket();

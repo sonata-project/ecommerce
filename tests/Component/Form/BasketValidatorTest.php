@@ -37,24 +37,24 @@ class BasketValidatorTest extends TestCase
     public function testValidate(): void
     {
         $provider = $this->createMock(ProductProviderInterface::class);
-        $provider->expects($this->once())->method('validateFormBasketElement');
+        $provider->expects(static::once())->method('validateFormBasketElement');
 
         $pool = $this->createMock(Pool::class);
-        $pool->expects($this->once())->method('getProvider')->willReturn($provider);
+        $pool->expects(static::once())->method('getProvider')->willReturn($provider);
 
         $consValFact = $this->createMock(ContainerConstraintValidatorFactory::class);
 
         $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
-        $violationBuilder->expects($this->once())->method('atPath')->willReturn($violationBuilder);
-        $violationBuilder->expects($this->once())->method('addViolation');
+        $violationBuilder->expects(static::once())->method('atPath')->willReturn($violationBuilder);
+        $violationBuilder->expects(static::once())->method('addViolation');
 
         $context = $this->createMock(ExecutionContext::class);
-        $context->expects($this->once())
+        $context->expects(static::once())
                 ->method('getViolations')
                 ->willReturn(new ConstraintViolationList([
                     $this->createMock(ConstraintViolationInterface::class),
                 ]));
-        $context->expects($this->once())->method('buildViolation')->willReturn($violationBuilder);
+        $context->expects(static::once())->method('buildViolation')->willReturn($violationBuilder);
 
         $validator = new BasketValidator($pool, $consValFact);
         $validator->initialize($context);
@@ -62,7 +62,7 @@ class BasketValidatorTest extends TestCase
         $elements = [$this->createMock(BasketElementInterface::class)];
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->willReturn($elements);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn($elements);
 
         $constraint = new NotBlank();
 

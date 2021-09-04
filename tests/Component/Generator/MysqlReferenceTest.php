@@ -31,14 +31,14 @@ class MysqlReferenceTest extends TestCase
 
         try {
             $mysqlReference->invoice($invoice);
-            $this->fail('->invoice() call should raise a \RuntimeException for a new entity');
+            static::fail('->invoice() call should raise a \RuntimeException for a new entity');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(\RuntimeException::class, $e);
+            static::assertInstanceOf(\RuntimeException::class, $e);
         }
 
         $invoice->setId(12);
 
-        $this->assertNull($mysqlReference->invoice($invoice));
+        static::assertNull($mysqlReference->invoice($invoice));
     }
 
     public function testOrder(): void
@@ -48,14 +48,14 @@ class MysqlReferenceTest extends TestCase
 
         try {
             $mysqlReference->order($order);
-            $this->fail('->order() call should raise a \RuntimeException for a new entity');
+            static::fail('->order() call should raise a \RuntimeException for a new entity');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(\RuntimeException::class, $e);
+            static::assertInstanceOf(\RuntimeException::class, $e);
         }
 
         $order->setId(12);
 
-        $this->assertNull($mysqlReference->order($order));
+        static::assertNull($mysqlReference->order($order));
     }
 
     /**
@@ -68,20 +68,20 @@ class MysqlReferenceTest extends TestCase
 
         $connection = $this->createMock(Connection::class);
         $statement = $this->createMock(\PDOStatement::class);
-        $statement->expects($this->once())->method('fetch')->willReturn(false);
+        $statement->expects(static::once())->method('fetch')->willReturn(false);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())
+        $em->expects(static::any())
             ->method('getClassMetadata')
             ->willReturn($metadata);
 
-        $connection->expects($this->any())
+        $connection->expects(static::any())
             ->method('query')
             ->willReturn($statement);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManager')->willReturn($em);
-        $registry->expects($this->any())->method('getConnection')->willReturn($connection);
+        $registry->expects(static::any())->method('getManager')->willReturn($em);
+        $registry->expects(static::any())->method('getConnection')->willReturn($connection);
 
         return new MysqlReference($registry);
     }

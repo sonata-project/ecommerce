@@ -38,7 +38,7 @@ class CurrencyFormTypeTest extends TestCase
     public function testBuildForm(): void
     {
         $formBuilder = $this->createMock(FormBuilder::class);
-        $formBuilder->expects($this->once())
+        $formBuilder->expects(static::once())
             ->method('addModelTransformer');
 
         $this->currencyFormType->buildForm($formBuilder, []);
@@ -46,11 +46,11 @@ class CurrencyFormTypeTest extends TestCase
 
     public function testGetParent(): void
     {
-        $this->assertSame(CurrencyType::class, $this->currencyFormType->getParent());
+        static::assertSame(CurrencyType::class, $this->currencyFormType->getParent());
     }
 
     public function testGetBlockPrefix(): void
     {
-        $this->assertSame('sonata_currency', $this->currencyFormType->getBlockPrefix());
+        static::assertSame('sonata_currency', $this->currencyFormType->getBlockPrefix());
     }
 }

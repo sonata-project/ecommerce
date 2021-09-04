@@ -48,7 +48,7 @@ class BasketTransformerTest extends TestCase
     {
         $order = new BasketTransformerTest_Order();
         $orderManager = $this->createMock(OrderManagerInterface::class);
-        $orderManager->expects($this->any())->method('create')->willReturn($order);
+        $orderManager->expects(static::any())->method('create')->willReturn($order);
 
         $productPool = $this->createMock(Pool::class);
 
@@ -140,7 +140,7 @@ class BasketTransformerTest extends TestCase
         $billingAddress = $this->createMock(AddressInterface::class);
         $paymentMethod = $this->createMock(PaymentInterface::class);
         $deliveryMethod = $this->createMock(ServiceDeliveryInterface::class);
-        $deliveryMethod->expects($this->once())->method('isAddressRequired')->willReturn(true);
+        $deliveryMethod->expects(static::once())->method('isAddressRequired')->willReturn(true);
 
         $basket->setCustomer($customer);
         $basket->setBillingAddress($billingAddress);
@@ -160,7 +160,7 @@ class BasketTransformerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
         $billingAddress = $this->createMock(AddressInterface::class);
         $deliveryMethod = $this->createMock(ServiceDeliveryInterface::class);
-        $deliveryMethod->expects($this->exactly(2))->method('isAddressRequired')->willReturn(true);
+        $deliveryMethod->expects(static::exactly(2))->method('isAddressRequired')->willReturn(true);
         $deliveryAddress = $this->createMock(AddressInterface::class);
         $paymentMethod = $this->createMock(PaymentInterface::class);
 
@@ -176,6 +176,6 @@ class BasketTransformerTest extends TestCase
 
         $order = $this->getBasketTransform()->transformIntoOrder($basket);
 
-        $this->assertInstanceOf(OrderInterface::class, $order, '::transformIntoOrder() returns an OrderInstance object');
+        static::assertInstanceOf(OrderInterface::class, $order, '::transformIntoOrder() returns an OrderInstance object');
     }
 }

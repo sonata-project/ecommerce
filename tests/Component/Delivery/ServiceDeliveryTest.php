@@ -41,8 +41,8 @@ class ServiceDeliveryTest extends TestCase
 
         $pool->addMethod($delivery);
 
-        $this->assertCount(2, $pool->getMethods(), 'Pool return 2 elements');
-        $this->assertInstanceOf(FreeDelivery::class, $pool->getMethod('free_2'), 'Pool return an FreeDelivery Instance');
+        static::assertCount(2, $pool->getMethods(), 'Pool return 2 elements');
+        static::assertInstanceOf(FreeDelivery::class, $pool->getMethod('free_2'), 'Pool return an FreeDelivery Instance');
     }
 
     public function testGetStatusList(): void
@@ -55,8 +55,8 @@ class ServiceDeliveryTest extends TestCase
             ServiceDeliveryInterface::STATUS_COMPLETED => 'status_completed',
             ServiceDeliveryInterface::STATUS_RETURNED => 'status_returned',
         ];
-        $this->assertSame($statusList, BaseDelivery::getStatusList());
-        $this->assertSame($statusList, BaseServiceDelivery::getStatusList());
+        static::assertSame($statusList, BaseDelivery::getStatusList());
+        static::assertSame($statusList, BaseServiceDelivery::getStatusList());
     }
 
     public function testGetOption(): void
@@ -65,8 +65,8 @@ class ServiceDeliveryTest extends TestCase
 
         $delivery->setOptions(['option1' => 'value1']);
 
-        $this->assertSame('value1', $delivery->getOption('option1'));
-        $this->assertSame('default', $delivery->getOption('unexisting', 'default'));
-        $this->assertNull($delivery->getOption('unexisting'));
+        static::assertSame('value1', $delivery->getOption('option1'));
+        static::assertSame('default', $delivery->getOption('unexisting', 'default'));
+        static::assertNull($delivery->getOption('unexisting'));
     }
 }

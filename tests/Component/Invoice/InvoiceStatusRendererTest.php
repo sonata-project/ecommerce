@@ -29,10 +29,10 @@ class InvoiceStatusRendererTest extends TestCase
         $renderer = new InvoiceStatusRenderer();
 
         $invoice = new \DateTime();
-        $this->assertFalse($renderer->handlesObject($invoice));
+        static::assertFalse($renderer->handlesObject($invoice));
 
         $invoice = $this->createMock(InvoiceInterface::class);
-        $this->assertTrue($renderer->handlesObject($invoice));
+        static::assertTrue($renderer->handlesObject($invoice));
     }
 
     public function testGetClass(): void
@@ -40,7 +40,7 @@ class InvoiceStatusRendererTest extends TestCase
         $renderer = new InvoiceStatusRenderer();
         $invoice = $this->createMock(InvoiceInterface::class);
 
-        $invoice->expects($this->once())->method('getStatus')->willReturn(array_rand(BaseInvoice::getStatusList()));
-        $this->assertContains($renderer->getStatusClass($invoice, '', 'error'), ['danger', 'warning', 'success']);
+        $invoice->expects(static::once())->method('getStatus')->willReturn(array_rand(BaseInvoice::getStatusList()));
+        static::assertContains($renderer->getStatusClass($invoice, '', 'error'), ['danger', 'warning', 'success']);
     }
 }

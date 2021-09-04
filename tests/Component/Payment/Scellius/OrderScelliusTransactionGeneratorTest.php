@@ -22,10 +22,10 @@ class OrderScelliusTransactionGeneratorTest extends TestCase
     public function testGenerator(): void
     {
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())->method('getReference')->willReturn('120112000012');
+        $order->expects(static::any())->method('getReference')->willReturn('120112000012');
 
         $generator = new OrderScelliusTransactionGenerator();
-        $this->assertSame('000012', $generator->generate($order));
+        static::assertSame('000012', $generator->generate($order));
     }
 
     public function testInvalidReferenceLength(): void
@@ -33,7 +33,7 @@ class OrderScelliusTransactionGeneratorTest extends TestCase
         $this->expectException(\RuntimeException::class);
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())->method('getReference')->willReturn('12');
+        $order->expects(static::any())->method('getReference')->willReturn('12');
 
         $generator = new OrderScelliusTransactionGenerator();
         $generator->generate($order);

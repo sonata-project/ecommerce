@@ -31,19 +31,19 @@ class OrderControllerTest extends TestCase
     {
         $pager = $this->createStub(PagerInterface::class);
         $orderManager = $this->createMock(OrderManagerInterface::class);
-        $orderManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $orderManager->expects(static::once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::exactly(3))->method('get')->willReturn(1, 10, null);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
-        $this->assertSame($pager, $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
+        static::assertSame($pager, $this->createOrderController(null, $orderManager)->getOrdersAction($paramFetcher));
     }
 
     public function testGetOrderAction(): void
     {
         $order = $this->createMock(OrderInterface::class);
-        $this->assertSame($order, $this->createOrderController($order)->getOrderAction(1));
+        static::assertSame($order, $this->createOrderController($order)->getOrderAction(1));
     }
 
     public function testGetOrderActionNotFoundException(): void
@@ -58,9 +58,9 @@ class OrderControllerTest extends TestCase
     {
         $order = $this->createMock(OrderInterface::class);
         $orderElements = $this->createMock(OrderElementInterface::class);
-        $order->expects($this->once())->method('getOrderElements')->willReturn([$orderElements]);
+        $order->expects(static::once())->method('getOrderElements')->willReturn([$orderElements]);
 
-        $this->assertSame([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
+        static::assertSame([$orderElements], $this->createOrderController($order)->getOrderOrderelementsAction(1));
     }
 
     /**
@@ -75,7 +75,7 @@ class OrderControllerTest extends TestCase
             $orderManager = $this->createMock(OrderManagerInterface::class);
         }
         if (null !== $order) {
-            $orderManager->expects($this->once())->method('findOneBy')->willReturn($order);
+            $orderManager->expects(static::once())->method('findOneBy')->willReturn($order);
         }
 
         return new OrderController($orderManager);

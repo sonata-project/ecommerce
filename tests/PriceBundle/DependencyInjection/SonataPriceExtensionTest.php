@@ -33,10 +33,10 @@ class SonataPriceExtensionTest extends TestCase
         $config = $this->getDefaultConfig();
 
         $loader->load($config, $configuration);
-        $this->assertTrue($configuration instanceof ContainerBuilder);
+        static::assertTrue($configuration instanceof ContainerBuilder);
 
-        $this->assertTrue($configuration->hasParameter('sonata.price.currency'));
-        $this->assertSame('EUR', $configuration->getParameter('sonata.price.currency'));
+        static::assertTrue($configuration->hasParameter('sonata.price.currency'));
+        static::assertSame('EUR', $configuration->getParameter('sonata.price.currency'));
     }
 
     /**

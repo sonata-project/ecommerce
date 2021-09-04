@@ -42,13 +42,13 @@ class BasketControllerTest extends TestCase
     {
         $pager = $this->createStub(PagerInterface::class);
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $basketManager->expects(static::once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::exactly(3))->method('get')->willReturn(1, 10, null);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
-        $this->assertSame($pager, $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
+        static::assertSame($pager, $this->createBasketController($basketManager)->getBasketsAction($paramFetcher));
     }
 
     public function testGetBasketAction(): void
@@ -56,9 +56,9 @@ class BasketControllerTest extends TestCase
         $basket = $this->createMock(BasketInterface::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
-        $this->assertSame($basket, $this->createBasketController($basketManager)->getBasketAction(1));
+        static::assertSame($basket, $this->createBasketController($basketManager)->getBasketAction(1));
     }
 
     public function testGetBasketActionNotFoundException(): void
@@ -74,12 +74,12 @@ class BasketControllerTest extends TestCase
         $elements = [1, 2];
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->willReturn($elements);
+        $basket->expects(static::once())->method('getBasketElements')->willReturn($elements);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
-        $this->assertSame($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
+        static::assertSame($elements, $this->createBasketController($basketManager)->getBasketBasketelementsAction(1));
     }
 
     public function testGetBasketelementsActionNotFoundException(): void
@@ -95,20 +95,20 @@ class BasketControllerTest extends TestCase
         $basket = $this->createMock(BasketInterface::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('save')->willReturn($basket);
+        $basketManager->expects(static::once())->method('save')->willReturn($basket);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($basket);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($basket);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->postBasketAction(new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPostBasketInvalidAction(): void
@@ -116,20 +116,20 @@ class BasketControllerTest extends TestCase
         $basket = $this->createMock(BasketInterface::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->never())->method('save')->willReturn($basket);
+        $basketManager->expects(static::never())->method('save')->willReturn($basket);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->never())->method('getData')->willReturn($basket);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::never())->method('getData')->willReturn($basket);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->postBasketAction(new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutBasketAction(): void
@@ -137,21 +137,21 @@ class BasketControllerTest extends TestCase
         $basket = $this->createMock(BasketInterface::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('save')->willReturn($basket);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::once())->method('save')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($basket);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($basket);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->putBasketAction(1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPutBasketInvalidAction(): void
@@ -159,21 +159,21 @@ class BasketControllerTest extends TestCase
         $basket = $this->createMock(BasketInterface::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->never())->method('save')->willReturn($basket);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::never())->method('save')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->never())->method('getData')->willReturn($basket);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::never())->method('getData')->willReturn($basket);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, null, null, null, $formFactory)->putBasketAction(1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteBasketAction(): void
@@ -181,12 +181,12 @@ class BasketControllerTest extends TestCase
         $basket = $this->createMock(BasketInterface::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('delete');
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::once())->method('delete');
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
         $view = $this->createBasketController($basketManager)->deleteBasketAction(1);
 
-        $this->assertSame(['deleted' => true], $view);
+        static::assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteBasketInvalidAction(): void
@@ -194,8 +194,8 @@ class BasketControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn(null);
-        $basketManager->expects($this->never())->method('delete');
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn(null);
+        $basketManager->expects(static::never())->method('delete');
 
         $this->createBasketController($basketManager)->deleteBasketAction(1);
     }
@@ -207,40 +207,40 @@ class BasketControllerTest extends TestCase
             ->getMock();
 
         $productPool = $this->createMock(Pool::class);
-        $productPool->expects($this->once())->method('getProduct')->willReturn($productDefinition);
+        $productPool->expects(static::once())->method('getProduct')->willReturn($productDefinition);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getProductPool')->willReturn($productPool);
+        $basket->expects(static::once())->method('getProductPool')->willReturn($productPool);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('save')->willReturn($basket);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::once())->method('save')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
         $basketElement = $this->createMock(BasketElementInterface::class);
 
         $basketElementManager = $this->createMock(BasketElementManagerInterface::class);
-        $basketElementManager->expects($this->once())->method('create')->willReturn($basketElement);
+        $basketElementManager->expects(static::once())->method('create')->willReturn($basketElement);
 
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
+        $productManager->expects(static::once())->method('findOneBy')->willReturn($product);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($basketElement);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($basketElement);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->postBasketBasketelementsAction(1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPostBasketBasketelementsInvalidAction(): void
@@ -250,40 +250,40 @@ class BasketControllerTest extends TestCase
             ->getMock();
 
         $productPool = $this->createMock(Pool::class);
-        $productPool->expects($this->once())->method('getProduct')->willReturn($productDefinition);
+        $productPool->expects(static::once())->method('getProduct')->willReturn($productDefinition);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getProductPool')->willReturn($productPool);
+        $basket->expects(static::once())->method('getProductPool')->willReturn($productPool);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->never())->method('save')->willReturn($basket);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::never())->method('save')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
         $basketElement = $this->createMock(BasketElementInterface::class);
 
         $basketElementManager = $this->createMock(BasketElementManagerInterface::class);
-        $basketElementManager->expects($this->once())->method('create')->willReturn($basketElement);
+        $basketElementManager->expects(static::once())->method('create')->willReturn($basketElement);
 
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
+        $productManager->expects(static::once())->method('findOneBy')->willReturn($product);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->never())->method('getData');
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::never())->method('getData');
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->postBasketBasketelementsAction(1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutBasketBasketelementsAction(): void
@@ -293,42 +293,42 @@ class BasketControllerTest extends TestCase
             ->getMock();
 
         $productPool = $this->createMock(Pool::class);
-        $productPool->expects($this->once())->method('getProduct')->willReturn($productDefinition);
+        $productPool->expects(static::once())->method('getProduct')->willReturn($productDefinition);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getProductPool')->willReturn($productPool);
+        $basket->expects(static::once())->method('getProductPool')->willReturn($productPool);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->never())->method('save')->willReturn($basket);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::never())->method('save')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
         $basketElement = $this->createMock(BasketElementInterface::class);
 
         $basketElementManager = $this->createMock(BasketElementManagerInterface::class);
-        $basketElementManager->expects($this->once())->method('findOneBy')->willReturn($basketElement);
-        $basketElementManager->expects($this->once())->method('save')->willReturn($basketElement);
-        $basketElementManager->expects($this->never())->method('create')->willReturn($basketElement);
+        $basketElementManager->expects(static::once())->method('findOneBy')->willReturn($basketElement);
+        $basketElementManager->expects(static::once())->method('save')->willReturn($basketElement);
+        $basketElementManager->expects(static::never())->method('create')->willReturn($basketElement);
 
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
+        $productManager->expects(static::once())->method('findOneBy')->willReturn($product);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($basketElement);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($basketElement);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->putBasketBasketelementsAction(1, 1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPutBasketBasketelementsInvalidAction(): void
@@ -338,59 +338,59 @@ class BasketControllerTest extends TestCase
             ->getMock();
 
         $productPool = $this->createMock(Pool::class);
-        $productPool->expects($this->once())->method('getProduct')->willReturn($productDefinition);
+        $productPool->expects(static::once())->method('getProduct')->willReturn($productDefinition);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getProductPool')->willReturn($productPool);
+        $basket->expects(static::once())->method('getProductPool')->willReturn($productPool);
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->never())->method('save')->willReturn($basket);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::never())->method('save')->willReturn($basket);
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
 
         $basketElement = $this->createMock(BasketElementInterface::class);
 
         $basketElementManager = $this->createMock(BasketElementManagerInterface::class);
-        $basketElementManager->expects($this->once())->method('findOneBy')->willReturn($basketElement);
-        $basketElementManager->expects($this->never())->method('create')->willReturn($basketElement);
+        $basketElementManager->expects(static::once())->method('findOneBy')->willReturn($basketElement);
+        $basketElementManager->expects(static::never())->method('create')->willReturn($basketElement);
 
         $product = $this->createMock(ProductInterface::class);
 
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())->method('findOneBy')->willReturn($product);
+        $productManager->expects(static::once())->method('findOneBy')->willReturn($product);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->never())->method('getData');
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::never())->method('getData');
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createBasketController($basketManager, $basketElementManager, $productManager, $basketBuilder, $formFactory)->putBasketBasketelementsAction(1, 1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteBasketBasketelementsAction(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getBasketElements')->willReturn([]);
-        $basket->expects($this->once())->method('setBasketElements');
+        $basket->expects(static::once())->method('getBasketElements')->willReturn([]);
+        $basket->expects(static::once())->method('setBasketElements');
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('findOneBy')->willReturn($basket);
-        $basketManager->expects($this->once())->method('save');
+        $basketManager->expects(static::once())->method('findOneBy')->willReturn($basket);
+        $basketManager->expects(static::once())->method('save');
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $view = $this->createBasketController($basketManager, null, null, $basketBuilder)->deleteBasketBasketelementsAction(1, 1);
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     /**

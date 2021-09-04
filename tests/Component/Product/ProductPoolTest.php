@@ -32,11 +32,11 @@ class ProductPoolTest extends TestCase
         $product1 = $this->createMock(ProductInterface::class);
         $product2 = new Product();
 
-        $productManager1->expects($this->any())
+        $productManager1->expects(static::any())
             ->method('getClass')
             ->willReturn($product1);
 
-        $productManager2->expects($this->any())
+        $productManager2->expects(static::any())
             ->method('getClass')
             ->willReturn($product2);
 
@@ -47,14 +47,14 @@ class ProductPoolTest extends TestCase
         $productPool->addProduct('product1', $definition1);
         $productPool->addProduct('product2', $definition2);
 
-        $this->assertFalse($productPool->hasProvider('grou'));
-        $this->assertTrue($productPool->hasProvider('product1'));
-        $this->assertTrue($productPool->hasProvider('product2'));
+        static::assertFalse($productPool->hasProvider('grou'));
+        static::assertTrue($productPool->hasProvider('product1'));
+        static::assertTrue($productPool->hasProvider('product2'));
 
-        $this->assertSame($productPool->getProduct('product1'), $definition1);
-        $this->assertSame($productPool->getProduct('product2'), $definition2);
+        static::assertSame($productPool->getProduct('product1'), $definition1);
+        static::assertSame($productPool->getProduct('product2'), $definition2);
 
-        $this->assertSame($productPool->getProductCode($product1), 'product1');
-        $this->assertSame($productPool->getProductCode($product2), 'product2');
+        static::assertSame($productPool->getProductCode($product1), 'product1');
+        static::assertSame($productPool->getProductCode($product2), 'product2');
     }
 }

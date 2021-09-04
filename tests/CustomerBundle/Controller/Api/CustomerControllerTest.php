@@ -39,20 +39,20 @@ class CustomerControllerTest extends TestCase
     {
         $pager = $this->createStub(PagerInterface::class);
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $customerManager->expects(static::once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::exactly(3))->method('get')->willReturn(1, 10, null);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
-        $this->assertSame($pager, $this->createCustomerController(null, $customerManager)
+        static::assertSame($pager, $this->createCustomerController(null, $customerManager)
             ->getCustomersAction($paramFetcher));
     }
 
     public function testGetCustomerAction(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
-        $this->assertSame($customer, $this->createCustomerController($customer)->getCustomerAction(1));
+        static::assertSame($customer, $this->createCustomerController($customer)->getCustomerAction(1));
     }
 
     public function testGetCustomerActionNotFoundException(): void
@@ -68,7 +68,7 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
         $order = $this->createMock(OrderInterface::class);
 
-        $this->assertSame(
+        static::assertSame(
             [$order],
             $this->createCustomerController($customer, null, null, null, $order)->getCustomerOrdersAction(1)
         );
@@ -78,9 +78,9 @@ class CustomerControllerTest extends TestCase
     {
         $customer = $this->createMock(CustomerInterface::class);
         $address = $this->createMock(AddressInterface::class);
-        $customer->expects($this->once())->method('getAddresses')->willReturn([$address]);
+        $customer->expects(static::once())->method('getAddresses')->willReturn([$address]);
 
-        $this->assertSame([$address], $this->createCustomerController($customer)
+        static::assertSame([$address], $this->createCustomerController($customer)
             ->getCustomerAddressesAction(1));
     }
 
@@ -89,21 +89,21 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('save')->willReturn($customer);
+        $customerManager->expects(static::once())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($customer);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($customer);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPostCustomerInvalidAction(): void
@@ -111,41 +111,41 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->never())->method('save')->willReturn($customer);
+        $customerManager->expects(static::never())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPostCustomerAddressAction(): void
     {
         $customer = $this->createMock(CustomerInterface::class);
         $address = $this->createMock(AddressInterface::class);
-        $address->expects($this->once())->method('setCustomer');
+        $address->expects(static::once())->method('setCustomer');
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('save')->willReturn($address);
+        $addressManager->expects(static::once())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($address);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($address);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $customerController = $this->createCustomerController(
             $customer,
@@ -156,7 +156,7 @@ class CustomerControllerTest extends TestCase
 
         $customer = $customerController->postCustomerAddressAction(1, new Request());
 
-        $this->assertInstanceOf(AddressInterface::class, $customer);
+        static::assertInstanceOf(AddressInterface::class, $customer);
     }
 
     public function testPostCustomerAddressInvalidAction(): void
@@ -164,20 +164,20 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->never())->method('save')->willReturn($customer);
+        $customerManager->expects(static::never())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController(null, $customerManager, null, $formFactory)
             ->postCustomerAction(new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutCustomerAction(): void
@@ -185,22 +185,22 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
-        $customerManager->expects($this->once())->method('save')->willReturn($customer);
+        $customerManager->expects(static::once())->method('findOneBy')->willReturn($customer);
+        $customerManager->expects(static::once())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($customer);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($customer);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
             ->putCustomerAction(1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPutCustomerInvalidAction(): void
@@ -208,21 +208,21 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
-        $customerManager->expects($this->never())->method('save')->willReturn($customer);
+        $customerManager->expects(static::once())->method('findOneBy')->willReturn($customer);
+        $customerManager->expects(static::never())->method('save')->willReturn($customer);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCustomerController($customer, $customerManager, null, $formFactory)
             ->putCustomerAction(1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteCustomerAction(): void
@@ -230,12 +230,12 @@ class CustomerControllerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
-        $customerManager->expects($this->once())->method('delete');
+        $customerManager->expects(static::once())->method('findOneBy')->willReturn($customer);
+        $customerManager->expects(static::once())->method('delete');
 
         $view = $this->createCustomerController($customer, $customerManager)->deleteCustomerAction(1);
 
-        $this->assertSame(['deleted' => true], $view);
+        static::assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteCustomerInvalidAction(): void
@@ -243,8 +243,8 @@ class CustomerControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $customerManager = $this->createMock(CustomerManagerInterface::class);
-        $customerManager->expects($this->once())->method('findOneBy')->willReturn(null);
-        $customerManager->expects($this->never())->method('delete');
+        $customerManager->expects(static::once())->method('findOneBy')->willReturn(null);
+        $customerManager->expects(static::never())->method('delete');
 
         $this->createCustomerController(null, $customerManager)->deleteCustomerAction(1);
     }
@@ -265,7 +265,7 @@ class CustomerControllerTest extends TestCase
             $customerManager = $this->createMock(CustomerManagerInterface::class);
         }
         if (null !== $customer) {
-            $customerManager->expects($this->once())->method('findOneBy')->willReturn($customer);
+            $customerManager->expects(static::once())->method('findOneBy')->willReturn($customer);
         }
         if (null === $orderManager) {
             $orderManager = $this->createMock(OrderManagerInterface::class);
@@ -274,7 +274,7 @@ class CustomerControllerTest extends TestCase
             $addressManager = $this->createMock(AddressManagerInterface::class);
         }
         if (null !== $order) {
-            $orderManager->expects($this->once())->method('findBy')->willReturn([$order]);
+            $orderManager->expects(static::once())->method('findBy')->willReturn([$order]);
         }
         if (null === $formFactory) {
             $formFactory = $this->createMock(FormFactoryInterface::class);

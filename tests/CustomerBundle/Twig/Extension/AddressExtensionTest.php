@@ -29,17 +29,17 @@ class AddressExtensionTest extends TestCase
         $environment = $this->createMock(\Twig\Environment::class);
         $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
 
-        $environment->expects($this->exactly(4))->method('render');
+        $environment->expects(static::exactly(4))->method('render');
 
         $address = $this->createMock(AddressInterface::class);
-        $address->expects($this->exactly(3))->method('getFullAddressHtml');
+        $address->expects(static::exactly(3))->method('getFullAddressHtml');
 
         $extension = new AddressExtension($deliverySelector);
 
         $extension->renderAddress($environment, $address, false);
-        $address->expects($this->exactly(2))->method('getName');
+        $address->expects(static::exactly(2))->method('getName');
         $extension->renderAddress($environment, $address);
-        $address->expects($this->once())->method('getId');
+        $address->expects(static::once())->method('getId');
         $extension->renderAddress($environment, $address, true, true);
 
         $address = [
@@ -96,20 +96,20 @@ class AddressExtensionTest extends TestCase
 
         // Test false
         $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
-        $deliverySelector->expects($this->once())->method('getAvailableMethods')->willReturn([]);
+        $deliverySelector->expects(static::once())->method('getAvailableMethods')->willReturn([]);
 
         $extension = new AddressExtension($deliverySelector);
         $deliverable = $extension->isAddressDeliverable($address, $basket);
 
-        $this->assertFalse($deliverable);
+        static::assertFalse($deliverable);
 
         // Test true
         $deliverySelector = $this->createMock(ServiceDeliverySelectorInterface::class);
-        $deliverySelector->expects($this->once())->method('getAvailableMethods')->willReturn(['paypal']);
+        $deliverySelector->expects(static::once())->method('getAvailableMethods')->willReturn(['paypal']);
 
         $extension = new AddressExtension($deliverySelector);
         $deliverable = $extension->isAddressDeliverable($address, $basket);
 
-        $this->assertTrue($deliverable);
+        static::assertTrue($deliverable);
     }
 }
