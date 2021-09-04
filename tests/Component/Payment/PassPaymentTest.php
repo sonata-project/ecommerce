@@ -31,10 +31,10 @@ class PassPaymentTest extends TestCase
     public function testPassPayment(): void
     {
         $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->exactly(2))->method('generate')->willReturn('http://foo.bar/ok-url');
+        $router->expects(static::exactly(2))->method('generate')->willReturn('http://foo.bar/ok-url');
 
         $client = $this->createMock(ClientInterface::class);
-        $client->expects($this->once())->method('send')->willReturnCallback(static function ($request, $response): void {
+        $client->expects(static::once())->method('send')->willReturnCallback(static function ($request, $response): void {
             $response->setContent('ok');
         });
 
@@ -46,36 +46,36 @@ class PassPaymentTest extends TestCase
         $product = $this->createMock(ProductInterface::class);
 
         $transaction = $this->createMock(TransactionInterface::class);
-        $transaction->expects($this->exactly(2))->method('get')->willReturnCallback([$this, 'getCallback']);
-        $transaction->expects($this->once())->method('setTransactionId');
+        $transaction->expects(static::exactly(2))->method('get')->willReturnCallback([$this, 'getCallback']);
+        $transaction->expects(static::once())->method('setTransactionId');
 
         $date = new \DateTime('1981-11-30', new \DateTimeZone('Europe/Paris'));
 
         $order = new PassPaymentTest_Order();
         $order->setCreatedAt($date);
 
-        $this->assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
-        $this->assertTrue($payment->isAddableProduct($basket, $product));
-        $this->assertTrue($payment->isBasketValid($basket));
-        $this->assertTrue($payment->isRequestValid($transaction));
+        static::assertSame('free_1', $payment->getCode(), 'Pass Payment return the correct code');
+        static::assertTrue($payment->isAddableProduct($basket, $product));
+        static::assertTrue($payment->isBasketValid($basket));
+        static::assertTrue($payment->isRequestValid($transaction));
 
-        $this->assertFalse($payment->isCallbackValid($transaction));
-        $this->assertFalse($payment->sendConfirmationReceipt($transaction));
+        static::assertFalse($payment->isCallbackValid($transaction));
+        static::assertFalse($payment->sendConfirmationReceipt($transaction));
 
-        $transaction->expects($this->any())->method('getOrder')->willReturn($order);
+        $transaction->expects(static::any())->method('getOrder')->willReturn($order);
 
-        $this->assertTrue($payment->isCallbackValid($transaction));
-        $this->assertInstanceOf(Response::class, $payment->handleError($transaction));
+        static::assertTrue($payment->isCallbackValid($transaction));
+        static::assertInstanceOf(Response::class, $payment->handleError($transaction));
 
-        $this->assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
+        static::assertInstanceOf(Response::class, $payment->sendConfirmationReceipt($transaction));
 
         $response = $payment->sendbank($order);
 
-        $this->assertTrue($response->headers->has('Location'));
-        $this->assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
-        $this->assertFalse($response->isCacheable());
+        static::assertTrue($response->headers->has('Location'));
+        static::assertSame('http://foo.bar/ok-url', $response->headers->get('Location'));
+        static::assertFalse($response->isCacheable());
 
-        $this->assertSame($payment->getOrderReference($transaction), '0001231');
+        static::assertSame($payment->getOrderReference($transaction), '0001231');
 
         $payment->applyTransactionId($transaction);
     }

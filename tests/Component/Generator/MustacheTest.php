@@ -27,6 +27,6 @@ class MustacheTest extends TestCase
 
         $expectedOutput = 'abc.42 toubidou def';
 
-        $this->assertSame($expectedOutput, Mustache::renderString($testInput, ['replace' => 'abc', 'second' => 'def']));
+        static::assertSame($expectedOutput, Mustache::renderString($testInput, ['replace' => 'abc', 'second' => 'def']));
     }
 }

@@ -68,14 +68,14 @@ class TwitterTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $product = new ProductTwitterMock();
 
-        $numberHelper->expects($this->any())
+        $numberHelper->expects(static::any())
                 ->method('formatCurrency')
                 ->willReturn($product->getPrice());
 
         //Prepare currency
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
                 ->method('getCurrency')
                 ->willReturn($currency);
 
@@ -83,14 +83,14 @@ class TwitterTest extends TestCase
         $twitterService->alterPage($seoPage, $product);
         $content = $extension->getMetadatas();
 
-        $this->assertStringContainsString('name="twitter:label1" content="Price"', $content);
-        $this->assertStringNotContainsString('twitter:image:src', $content);
-        $this->assertStringContainsString('name="twitter:site" content="mySiteName"', $content);
-        $this->assertStringContainsString('name="twitter:creator" content="Sonata"', $content);
-        $this->assertStringContainsString('name="twitter:data2" content="Sku1"', $content);
-        $this->assertStringContainsString('name="twitter:title" content="Product1"', $content);
-        $this->assertStringContainsString('name="twitter:description" content="O-some product"', $content);
-        $this->assertStringContainsString('name="twitter:data1" content="123.56"', $content);
+        static::assertStringContainsString('name="twitter:label1" content="Price"', $content);
+        static::assertStringNotContainsString('twitter:image:src', $content);
+        static::assertStringContainsString('name="twitter:site" content="mySiteName"', $content);
+        static::assertStringContainsString('name="twitter:creator" content="Sonata"', $content);
+        static::assertStringContainsString('name="twitter:data2" content="Sku1"', $content);
+        static::assertStringContainsString('name="twitter:title" content="Product1"', $content);
+        static::assertStringContainsString('name="twitter:description" content="O-some product"', $content);
+        static::assertStringContainsString('name="twitter:data1" content="123.56"', $content);
     }
 
     public function testAlterPageImage(): void
@@ -105,7 +105,7 @@ class TwitterTest extends TestCase
         //Prepare currency
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
                 ->method('getCurrency')
                 ->willReturn($currency);
 
@@ -113,10 +113,10 @@ class TwitterTest extends TestCase
         $image = $this->createMock(MediaInterface::class);
 
         $imageProvider = $this->createMock(ImageProvider::class);
-        $imageProvider->expects($this->any())
+        $imageProvider->expects(static::any())
             ->method('generatePublicUrl')->willReturn('/upload/dummy.png');
 
-        $mediaPool->expects($this->any())
+        $mediaPool->expects(static::any())
             ->method('getProvider')->willReturn($imageProvider);
 
         $product->setImage($image);
@@ -125,6 +125,6 @@ class TwitterTest extends TestCase
         $twitterService->alterPage($seoPage, $product);
         $content = $extension->getMetadatas();
 
-        $this->assertStringContainsString('property="twitter:image:src" content="http://my-domain.ltd/upload/dummy.png"', $content);
+        static::assertStringContainsString('property="twitter:image:src" content="http://my-domain.ltd/upload/dummy.png"', $content);
     }
 }

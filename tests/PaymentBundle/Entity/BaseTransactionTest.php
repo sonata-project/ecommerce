@@ -32,8 +32,8 @@ class BaseTransactionTest extends TestCase
         $transaction = new Transaction();
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getId')->willReturn(123);
-        $order->expects($this->once())->method('getReference')->willReturn('B00120');
+        $order->expects(static::once())->method('getId')->willReturn(123);
+        $order->expects(static::once())->method('getReference')->willReturn('B00120');
 
         $transaction->setOrder($order);
         $transaction->setTransactionId('XCADC');
@@ -49,7 +49,7 @@ The transaction state is `UNKNOWN`
 Update status code to `2` (validated)
 INFO;
 
-        $this->assertSame($expected, $transaction->getInformation());
+        static::assertSame($expected, $transaction->getInformation());
     }
 
     public function testParametersEncoding(): void
@@ -67,6 +67,6 @@ INFO;
         ]];
 
         $transaction->setParameters($inParams);
-        $this->assertSame($expectedParams, $transaction->getParameters());
+        static::assertSame($expectedParams, $transaction->getParameters());
     }
 }

@@ -31,19 +31,19 @@ class InvoiceControllerTest extends TestCase
     {
         $pager = $this->createStub(PagerInterface::class);
         $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
-        $invoiceManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $invoiceManager->expects(static::once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::exactly(3))->method('get')->willReturn(1, 10, null);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
-        $this->assertSame($pager, $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
+        static::assertSame($pager, $this->createInvoiceController(null, $invoiceManager)->getInvoicesAction($paramFetcher));
     }
 
     public function testGetInvoiceAction(): void
     {
         $invoice = $this->createMock(InvoiceInterface::class);
-        $this->assertSame($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
+        static::assertSame($invoice, $this->createInvoiceController($invoice)->getInvoiceAction(1));
     }
 
     public function testGetInvoiceActionNotFoundException(): void
@@ -58,9 +58,9 @@ class InvoiceControllerTest extends TestCase
     {
         $invoice = $this->createMock(InvoiceInterface::class);
         $invoiceElements = $this->createMock(InvoiceElementInterface::class);
-        $invoice->expects($this->once())->method('getInvoiceElements')->willReturn([$invoiceElements]);
+        $invoice->expects(static::once())->method('getInvoiceElements')->willReturn([$invoiceElements]);
 
-        $this->assertSame([$invoiceElements], $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
+        static::assertSame([$invoiceElements], $this->createInvoiceController($invoice)->getInvoiceInvoiceelementsAction(1));
     }
 
     /**
@@ -75,7 +75,7 @@ class InvoiceControllerTest extends TestCase
             $invoiceManager = $this->createMock(InvoiceManagerInterface::class);
         }
         if (null !== $invoice) {
-            $invoiceManager->expects($this->once())->method('findOneBy')->willReturn($invoice);
+            $invoiceManager->expects(static::once())->method('findOneBy')->willReturn($invoice);
         }
 
         return new InvoiceController($invoiceManager);

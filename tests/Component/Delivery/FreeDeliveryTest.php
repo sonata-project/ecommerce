@@ -24,22 +24,22 @@ class FreeDeliveryTest extends TestCase
     public function testConstruct(): void
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertFalse($freeDelivery->isAddressRequired());
+        static::assertFalse($freeDelivery->isAddressRequired());
 
         $freeDelivery = new FreeDelivery(true);
-        $this->assertTrue($freeDelivery->isAddressRequired());
+        static::assertTrue($freeDelivery->isAddressRequired());
     }
 
     public function testPriceIsNull(): void
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertSame(0, $freeDelivery->getVatRate());
-        $this->assertSame(0, $freeDelivery->getPrice());
+        static::assertSame(0, $freeDelivery->getVatRate());
+        static::assertSame(0, $freeDelivery->getPrice());
     }
 
     public function testGetName(): void
     {
         $freeDelivery = new FreeDelivery(false);
-        $this->assertSame('free_address_required', $freeDelivery->getName());
+        static::assertSame('free_address_required', $freeDelivery->getName());
     }
 }

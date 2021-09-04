@@ -64,6 +64,6 @@ class ProfileMenuBlockServiceTest extends TestCase
 
     public function testGetName(): void
     {
-        $this->assertSame('Ecommerce Profile Menu', $this->profileMenuBlockService->getName());
+        static::assertSame('Ecommerce Profile Menu', $this->profileMenuBlockService->getName());
     }
 }

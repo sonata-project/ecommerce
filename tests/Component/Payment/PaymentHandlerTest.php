@@ -41,32 +41,32 @@ class PaymentHandlerTest extends TestCase
     public function testHandleError(): void
     {
         $payment = $this->createMock(PaymentInterface::class);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('getOrderReference')
             ->willReturn('42');
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('isRequestValid')
             ->willReturn(true);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('getTransformer')
             ->willReturn($this->createMock(OrderTransformer::class));
 
         $order = $this->createMock(OrderInterface::class);
 
         $om = $this->createMock(OrderManagerInterface::class);
-        $om->expects($this->once())
+        $om->expects(static::once())
             ->method('findOneBy')
             ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
-        $ps->expects($this->exactly(3))
+        $ps->expects(static::exactly(3))
             ->method('getPayment')
             ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
-        $tm->expects($this->once())
+        $tm->expects(static::once())
             ->method('create')
             ->willReturn(new Transaction());
 
@@ -81,7 +81,7 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertSame($errorOrder, $order);
+        static::assertSame($errorOrder, $order);
     }
 
     public function testHandleErrorInvalidTransactionException(): void
@@ -96,14 +96,14 @@ class PaymentHandlerTest extends TestCase
         $om = $this->createMock(OrderManagerInterface::class);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
-        $ps->expects($this->exactly(2))
+        $ps->expects(static::exactly(2))
             ->method('getPayment')
             ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
-        $tm->expects($this->once())
+        $tm->expects(static::once())
             ->method('create')
             ->willReturn(new Transaction());
 
@@ -118,7 +118,7 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertSame($errorOrder, $order);
+        static::assertSame($errorOrder, $order);
     }
 
     public function testHandleErrorInvalidTransactionException2(): void
@@ -127,32 +127,32 @@ class PaymentHandlerTest extends TestCase
         $this->expectExceptionMessage('Invalid check - order ref: 42');
 
         $payment = $this->createMock(PaymentInterface::class);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('getOrderReference')
             ->willReturn('42');
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('isRequestValid')
             ->willReturn(false);
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->any())
+        $order->expects(static::any())
             ->method('getReference')
             ->willReturn('42');
 
         $om = $this->createMock(OrderManagerInterface::class);
-        $om->expects($this->once())
+        $om->expects(static::once())
             ->method('findOneBy')
             ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
-        $ps->expects($this->exactly(2))
+        $ps->expects(static::exactly(2))
             ->method('getPayment')
             ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
-        $tm->expects($this->once())
+        $tm->expects(static::once())
             ->method('create')
             ->willReturn(new Transaction());
 
@@ -168,7 +168,7 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertSame($errorOrder, $order);
+        static::assertSame($errorOrder, $order);
     }
 
     public function testHandleErrorEntityNotFoundException(): void
@@ -176,24 +176,24 @@ class PaymentHandlerTest extends TestCase
         $this->expectException(EntityNotFoundException::class);
 
         $payment = $this->createMock(PaymentInterface::class);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('getOrderReference')
             ->willReturn('42');
 
         $om = $this->createMock(OrderManagerInterface::class);
-        $om->expects($this->once())
+        $om->expects(static::once())
             ->method('findOneBy')
             ->willReturn(null);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
-        $ps->expects($this->exactly(2))
+        $ps->expects(static::exactly(2))
             ->method('getPayment')
             ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
-        $tm->expects($this->once())
+        $tm->expects(static::once())
             ->method('create')
             ->willReturn(new Transaction());
 
@@ -208,35 +208,35 @@ class PaymentHandlerTest extends TestCase
 
         $errorOrder = $handler->handleError($request, $basket);
 
-        $this->assertSame($errorOrder, null);
+        static::assertSame($errorOrder, null);
     }
 
     public function testHandleConfirmation(): void
     {
         $payment = $this->createMock(PaymentInterface::class);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('getOrderReference')
             ->willReturn('42');
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('isRequestValid')
             ->willReturn(true);
 
         $order = $this->createMock(OrderInterface::class);
 
         $om = $this->createMock(OrderManagerInterface::class);
-        $om->expects($this->once())
+        $om->expects(static::once())
             ->method('findOneBy')
             ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
-        $ps->expects($this->exactly(2))
+        $ps->expects(static::exactly(2))
             ->method('getPayment')
             ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
-        $tm->expects($this->once())
+        $tm->expects(static::once())
             ->method('create')
             ->willReturn(new Transaction());
 
@@ -251,7 +251,7 @@ class PaymentHandlerTest extends TestCase
 
         $confirmOrder = $handler->handleConfirmation($request);
 
-        $this->assertSame($confirmOrder, $order);
+        static::assertSame($confirmOrder, $order);
     }
 
     public function testGetSendbankOrder(): void
@@ -259,22 +259,22 @@ class PaymentHandlerTest extends TestCase
         $order = $this->createMock(OrderInterface::class);
 
         $basketTransformer = $this->createMock(BasketTransformer::class);
-        $basketTransformer->expects($this->once())
+        $basketTransformer->expects(static::once())
             ->method('transformIntoOrder')
             ->willReturn($order);
 
         $payment = $this->createMock(PaymentInterface::class);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('getTransformer')
             ->willReturn($basketTransformer);
 
         $om = $this->createMock(OrderManagerInterface::class);
-        $om->expects($this->once())->method('save');
+        $om->expects(static::once())->method('save');
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
 
         $ref = $this->createMock(ReferenceInterface::class);
-        $ref->expects($this->once())->method('order');
+        $ref->expects(static::once())->method('order');
 
         $tm = $this->createMock(TransactionManagerInterface::class);
 
@@ -285,13 +285,13 @@ class PaymentHandlerTest extends TestCase
         $handler = new PaymentHandler($om, $ps, $ref, $tm, $nb, $eventDispatcher);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())
+        $basket->expects(static::once())
             ->method('getPaymentMethod')
             ->willReturn($payment);
 
         $sendbankOrder = $handler->getSendbankOrder($basket);
 
-        $this->assertSame($order, $sendbankOrder);
+        static::assertSame($order, $sendbankOrder);
     }
 
     public function testGetPaymentCallbackResponse(): void
@@ -299,32 +299,32 @@ class PaymentHandlerTest extends TestCase
         $response = new Response();
 
         $payment = $this->createMock(PaymentInterface::class);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('getOrderReference')
             ->willReturn('42');
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('isRequestValid')
             ->willReturn(true);
-        $payment->expects($this->once())
+        $payment->expects(static::once())
             ->method('callback')
             ->willReturn($response);
 
         $order = $this->createMock(OrderInterface::class);
 
         $om = $this->createMock(OrderManagerInterface::class);
-        $om->expects($this->once())
+        $om->expects(static::once())
             ->method('findOneBy')
             ->willReturn($order);
 
         $ps = $this->createMock(PaymentSelectorInterface::class);
-        $ps->expects($this->exactly(3))
+        $ps->expects(static::exactly(3))
             ->method('getPayment')
             ->willReturn($payment);
 
         $ref = $this->createMock(ReferenceInterface::class);
 
         $tm = $this->createMock(TransactionManagerInterface::class);
-        $tm->expects($this->once())
+        $tm->expects(static::once())
             ->method('create')
             ->willReturn(new Transaction());
 
@@ -338,6 +338,6 @@ class PaymentHandlerTest extends TestCase
 
         $cbResponse = $handler->getPaymentCallbackResponse($request);
 
-        $this->assertSame($response, $cbResponse);
+        static::assertSame($response, $cbResponse);
     }
 }

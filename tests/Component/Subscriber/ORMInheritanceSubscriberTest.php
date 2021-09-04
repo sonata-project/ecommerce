@@ -27,7 +27,7 @@ class ORMInheritanceSubscriberTest extends TestCase
     public function testGetSubscribedEvents(): void
     {
         $subscriber = new ORMInheritanceSubscriber([], Product::class);
-        $this->assertCount(1, $subscriber->getSubscribedEvents());
+        static::assertCount(1, $subscriber->getSubscribedEvents());
     }
 
     public function testLoadClassMetadata(): void
@@ -37,24 +37,24 @@ class ORMInheritanceSubscriberTest extends TestCase
 
         $subscriber = new ORMInheritanceSubscriber([], Product::class);
         $metadata = $this->createMock(LoadClassMetadataEventArgs::class);
-        $metadata->expects($this->any())
+        $metadata->expects(static::any())
             ->method('getClassMetadata')
             ->willReturn($fakedMetadata);
 
-        $this->assertNull($subscriber->loadClassMetadata($metadata));
+        static::assertNull($subscriber->loadClassMetadata($metadata));
         unset($fakedMetadata);
 
         $classMetadata = $this->createMock(ClassMetadata::class);
         $classMetadata->name = Product::class;
         $metadata = $this->createMock(LoadClassMetadataEventArgs::class);
-        $metadata->expects($this->any())
+        $metadata->expects(static::any())
             ->method('getClassMetadata')
             ->willReturn($classMetadata);
 
         try {
             $subscriber->loadClassMetadata($metadata);
         } catch (\Exception $e) {
-            $this->fail('->loadClassMetadata() should not throw an exception when using Product entity');
+            static::fail('->loadClassMetadata() should not throw an exception when using Product entity');
         }
     }
 }

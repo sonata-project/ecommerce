@@ -32,41 +32,41 @@ class InvoiceTransformerTest extends TestCase
         $customer = $this->createMock(CustomerInterface::class);
 
         $orderElement = $this->createMock(OrderElementInterface::class);
-        $orderElement->expects($this->once())->method('getDescription');
-        $orderElement->expects($this->once())->method('getDesignation');
-        $orderElement->expects($this->once())->method('getPrice')->willReturn(42);
-        $orderElement->expects($this->once())->method('getQuantity')->willReturn(3);
-        $orderElement->expects($this->once())->method('getVatRate');
+        $orderElement->expects(static::once())->method('getDescription');
+        $orderElement->expects(static::once())->method('getDesignation');
+        $orderElement->expects(static::once())->method('getPrice')->willReturn(42);
+        $orderElement->expects(static::once())->method('getQuantity')->willReturn(3);
+        $orderElement->expects(static::once())->method('getVatRate');
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getOrderElements')->willReturn([$orderElement]);
-        $order->expects($this->once())->method('getCustomer')->willReturn($customer);
+        $order->expects(static::once())->method('getOrderElements')->willReturn([$orderElement]);
+        $order->expects(static::once())->method('getCustomer')->willReturn($customer);
 
-        $order->expects($this->once())->method('getBillingAddress1');
-        $order->expects($this->once())->method('getBillingAddress2');
-        $order->expects($this->once())->method('getBillingAddress3');
-        $order->expects($this->once())->method('getBillingCity');
-        $order->expects($this->once())->method('getBillingCountryCode');
-        $order->expects($this->once())->method('getBillingPostcode');
+        $order->expects(static::once())->method('getBillingAddress1');
+        $order->expects(static::once())->method('getBillingAddress2');
+        $order->expects(static::once())->method('getBillingAddress3');
+        $order->expects(static::once())->method('getBillingCity');
+        $order->expects(static::once())->method('getBillingCountryCode');
+        $order->expects(static::once())->method('getBillingPostcode');
 
-        $order->expects($this->once())->method('getBillingEmail');
-        $order->expects($this->once())->method('getBillingMobile');
-        $order->expects($this->once())->method('getBillingFax');
-        $order->expects($this->once())->method('getBillingPhone');
-        $order->expects($this->once())->method('getReference');
+        $order->expects(static::once())->method('getBillingEmail');
+        $order->expects(static::once())->method('getBillingMobile');
+        $order->expects(static::once())->method('getBillingFax');
+        $order->expects(static::once())->method('getBillingPhone');
+        $order->expects(static::once())->method('getReference');
 
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $order->expects($this->once())->method('getCurrency')->willReturn($currency);
-        $order->expects($this->once())->method('getTotalExcl');
-        $order->expects($this->once())->method('getTotalInc');
+        $order->expects(static::once())->method('getCurrency')->willReturn($currency);
+        $order->expects(static::once())->method('getTotalExcl');
+        $order->expects(static::once())->method('getTotalInc');
 
         $invoice = $this->createMock(InvoiceInterface::class);
 
         $invoiceElement = $this->createMock(InvoiceElementInterface::class);
 
         $invoiceElementManager = $this->createMock(InvoiceElementManagerInterface::class);
-        $invoiceElementManager->expects($this->once())->method('create')->willReturn($invoiceElement);
+        $invoiceElementManager->expects(static::once())->method('create')->willReturn($invoiceElement);
 
         $deliveryPool = new DeliveryPool();
 

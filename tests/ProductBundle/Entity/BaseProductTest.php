@@ -44,25 +44,25 @@ class BaseProductTest extends TestCase
     {
         $product = new Product();
 
-        $this->assertNull($product->getImage());
+        static::assertNull($product->getImage());
 
         // Test gallery
         $gallery = $this->createMock(GalleryInterface::class);
         $product->setGallery($gallery);
 
-        $this->assertNull($product->getImage());
-        $this->assertInstanceOf(GalleryInterface::class, $product->getGallery());
+        static::assertNull($product->getImage());
+        static::assertInstanceOf(GalleryInterface::class, $product->getGallery());
 
         // Test getImage
         $image = $this->createMock(MediaInterface::class);
-        $image->expects($this->any())
+        $image->expects(static::any())
             ->method('getName')
             ->willReturn('correctMedia');
 
         $product->setImage($image);
 
-        $this->assertInstanceOf(MediaInterface::class, $product->getImage());
-        $this->assertSame('correctMedia', $product->getImage()->getName());
+        static::assertInstanceOf(MediaInterface::class, $product->getImage());
+        static::assertSame('correctMedia', $product->getImage()->getName());
     }
 
     public function testHasOneMainCategory(): void
@@ -70,23 +70,23 @@ class BaseProductTest extends TestCase
         $product = new Product();
 
         $pc = $this->createMock(ProductCategoryInterface::class);
-        $pc->expects($this->any())->method('getMain')->willReturn(true);
+        $pc->expects(static::any())->method('getMain')->willReturn(true);
 
         $pc2 = $this->createMock(ProductCategoryInterface::class);
-        $pc2->expects($this->any())->method('getMain')->willReturn(true);
+        $pc2->expects(static::any())->method('getMain')->willReturn(true);
 
         $pc3 = $this->createMock(ProductCategoryInterface::class);
-        $pc3->expects($this->any())->method('getMain')->willReturn(true);
+        $pc3->expects(static::any())->method('getMain')->willReturn(true);
 
-        $this->assertFalse($product->hasOneMainCategory());
+        static::assertFalse($product->hasOneMainCategory());
 
         $product->addProductCategory($pc);
-        $this->assertTrue($product->hasOneMainCategory());
+        static::assertTrue($product->hasOneMainCategory());
 
         $product->addProductCategory($pc2);
-        $this->assertFalse($product->hasOneMainCategory());
+        static::assertFalse($product->hasOneMainCategory());
 
         $product->addProductCategory($pc3);
-        $this->assertFalse($product->hasOneMainCategory());
+        static::assertFalse($product->hasOneMainCategory());
     }
 }

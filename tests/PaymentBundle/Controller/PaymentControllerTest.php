@@ -48,9 +48,9 @@ final class PaymentControllerTest extends TestCase
 
         $paymentController = $this->createPaymentController($basketFactoryInterface, $paymentHandlerInterface, $basket);
 
-        $this->assertSame($basketFactoryInterface, $methodGetBasketFactory->invoke($paymentController));
-        $this->assertSame($paymentHandlerInterface, $methodGetPaymentHandler->invoke($paymentController));
-        $this->assertSame($basket, $methodGetBasket->invoke($paymentController));
+        static::assertSame($basketFactoryInterface, $methodGetBasketFactory->invoke($paymentController));
+        static::assertSame($paymentHandlerInterface, $methodGetPaymentHandler->invoke($paymentController));
+        static::assertSame($basket, $methodGetBasket->invoke($paymentController));
     }
 
     /**
@@ -85,9 +85,9 @@ final class PaymentControllerTest extends TestCase
 
         $paymentController->setContainer($container);
 
-        $this->assertSame($basketFactoryInterface, $methodGetBasketFactory->invoke($paymentController));
-        $this->assertSame($basket, $methodGetBasket->invoke($paymentController));
-        $this->assertSame($paymentHandlerInterface, $methodGetPaymentHandler->invoke($paymentController));
+        static::assertSame($basketFactoryInterface, $methodGetBasketFactory->invoke($paymentController));
+        static::assertSame($basket, $methodGetBasket->invoke($paymentController));
+        static::assertSame($paymentHandlerInterface, $methodGetPaymentHandler->invoke($paymentController));
     }
 
     public function testSendBankAction(): void
@@ -100,22 +100,22 @@ final class PaymentControllerTest extends TestCase
         $order = $this->getOrder();
 
         $paymentHandlerInterface = $this->createMock(PaymentHandlerInterface::class);
-        $paymentHandlerInterface->expects($this->once())
+        $paymentHandlerInterface->expects(static::once())
             ->method('getSendbankOrder')
             ->willReturn($order);
 
         $basket = $this->createMock(Basket::class);
-        $basket->expects($this->once())
+        $basket->expects(static::once())
             ->method('isValid')
             ->willReturn(true);
 
-        $basket->expects($this->once())
+        $basket->expects(static::once())
             ->method('getPaymentMethod')
             ->willReturn($payment);
 
         $paymentController = $this->createPaymentController(null, $paymentHandlerInterface, $basket);
 
-        $this->assertInstanceOf(Response::class, $paymentController->sendbankAction($request));
+        static::assertInstanceOf(Response::class, $paymentController->sendbankAction($request));
     }
 
     private function getOrder(): DebugPaymentTest_Order
@@ -126,12 +126,12 @@ final class PaymentControllerTest extends TestCase
         $order->setCreatedAt($date);
 
         $element1 = $this->getMockBuilder(BaseOrderElement::class)->getMock();
-        $element1->expects($this->any())->method('getVatRate')->willReturn(20);
-        $element1->expects($this->any())->method('getVatAmount')->willReturn(3);
+        $element1->expects(static::any())->method('getVatRate')->willReturn(20);
+        $element1->expects(static::any())->method('getVatAmount')->willReturn(3);
 
         $element2 = $this->getMockBuilder(BaseOrderElement::class)->getMock();
-        $element2->expects($this->any())->method('getVatRate')->willReturn(10);
-        $element2->expects($this->any())->method('getVatAmount')->willReturn(2);
+        $element2->expects(static::any())->method('getVatRate')->willReturn(10);
+        $element2->expects(static::any())->method('getVatAmount')->willReturn(2);
 
         $order->setOrderElements([$element1, $element2]);
 
@@ -143,7 +143,7 @@ final class PaymentControllerTest extends TestCase
     private function getDebugPayment(): DebugPayment
     {
         $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->exactly(1))->method('generate')->willReturn('http://foo.bar/ok-url');
+        $router->expects(static::exactly(1))->method('generate')->willReturn('http://foo.bar/ok-url');
 
         $client = $this->createMock(ClientInterface::class);
 

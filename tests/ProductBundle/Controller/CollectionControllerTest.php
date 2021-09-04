@@ -41,10 +41,10 @@ final class CollectionControllerTest extends TestCase
 
         //Mock Currency
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
-        $currencyDetector->expects($this->any())->method('getCurrency')->willReturn($currency);
+        $currencyDetector->expects(static::any())->method('getCurrency')->willReturn($currency);
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->once())
+        $container->expects(static::once())
                 ->method('get')
                 ->with('sonata.price.currency.detector')
                 ->willReturn($currencyDetector);
@@ -56,14 +56,14 @@ final class CollectionControllerTest extends TestCase
         $methodGetCurrencyDetector = $classCollectionController->getMethod('getCurrencyDetector');
         $methodGetCurrencyDetector->setAccessible(true);
 
-        $this->assertSame('EUR', $methodGetCurrencyDetector->invoke($collectionControllerTest)->getCurrency()->getLabel());
+        static::assertSame('EUR', $methodGetCurrencyDetector->invoke($collectionControllerTest)->getCurrency()->getLabel());
 
         // collection manager
 
         $collectionManagerInterface = $this->createMock(CollectionManagerInterface::class);
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->once())
+        $container->expects(static::once())
                 ->method('get')
                 ->with('sonata.classification.manager.collection')
                 ->willReturn($collectionManagerInterface);
@@ -75,13 +75,13 @@ final class CollectionControllerTest extends TestCase
         $methodGetCurrencyDetector = $classCollectionController->getMethod('getCollectionManagerInterface');
         $methodGetCurrencyDetector->setAccessible(true);
 
-        $this->assertInstanceOf(CollectionManagerInterface::class, $methodGetCurrencyDetector->invoke($collectionControllerTest));
+        static::assertInstanceOf(CollectionManagerInterface::class, $methodGetCurrencyDetector->invoke($collectionControllerTest));
 
         // product set manager
 
         $productSetManager = $this->createMock(ProductSetManager::class);
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->once())
+        $container->expects(static::once())
                 ->method('get')
                 ->with('sonata.product.set.manager')
                 ->willReturn($productSetManager);
@@ -93,13 +93,13 @@ final class CollectionControllerTest extends TestCase
         $methodGetCurrencyDetector = $classCollectionController->getMethod('getProductSetManager');
         $methodGetCurrencyDetector->setAccessible(true);
 
-        $this->assertInstanceOf(ProductSetManager::class, $methodGetCurrencyDetector->invoke($collectionControllerTest));
+        static::assertInstanceOf(ProductSetManager::class, $methodGetCurrencyDetector->invoke($collectionControllerTest));
 
         //seo
 
         $seoPage = $this->createMock(SeoPage::class);
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects($this->once())
+        $container->expects(static::once())
                 ->method('get')
                 ->with('sonata.seo.page')
                 ->willReturn($seoPage);
@@ -111,7 +111,7 @@ final class CollectionControllerTest extends TestCase
         $methodGetCurrencyDetector = $classCollectionController->getMethod('getSeoManager');
         $methodGetCurrencyDetector->setAccessible(true);
 
-        $this->assertInstanceOf(SeoPage::class, $methodGetCurrencyDetector->invoke($collectionControllerTest));
+        static::assertInstanceOf(SeoPage::class, $methodGetCurrencyDetector->invoke($collectionControllerTest));
     }
 
     public function testCollectionGridAction(): void
@@ -136,7 +136,7 @@ final class CollectionControllerTest extends TestCase
         $methodGetCurrencyDetector = $classCollectionController->getMethod('getCurrencyDetector');
         $methodGetCurrencyDetector->setAccessible(true);
 
-        $this->assertSame('EUR', $methodGetCurrencyDetector->invoke($collectionControllerTest)->getCurrency()->getLabel());
+        static::assertSame('EUR', $methodGetCurrencyDetector->invoke($collectionControllerTest)->getCurrency()->getLabel());
     }
 
     public function testCollectionProductManagerAction(): void
@@ -158,7 +158,7 @@ final class CollectionControllerTest extends TestCase
         $productSetManager = $methodGetSetProductManager->invoke($collectionControllerTest);
         $queryincollection = $methodQueryincollection->invokeArgs($productSetManager, [$collection1, 1]);
 
-        $this->assertSame('SELECT DISTINCT FROM '.collection::class.' q LEFT JOIN p.productCollections pc WHERE pc.collection = :collection', $queryincollection->getDql());
+        static::assertSame('SELECT DISTINCT FROM '.collection::class.' q LEFT JOIN p.productCollections pc WHERE pc.collection = :collection', $queryincollection->getDql());
     }
 
     public function testIndexActionCollectionNotFound(): void
@@ -186,16 +186,16 @@ final class CollectionControllerTest extends TestCase
 
         //mocking
         $paginator = $this->createMock(Paginator::class);
-        $paginator->expects($this->any())->method('paginate')->willReturn([]);
+        $paginator->expects(static::any())->method('paginate')->willReturn([]);
 
         $container = $this->createMock(ContainerInterface::class);
         $template = $this->createMock(Environment::class);
 
         $collectionManagerInterface = $this->createMock(CollectionManagerInterface::class);
-        $collectionManagerInterface->expects($this->any())->method('findOneBy')->willReturn($collection);
+        $collectionManagerInterface->expects(static::any())->method('findOneBy')->willReturn($collection);
 
         $container
-            ->expects($this->exactly(2))
+            ->expects(static::exactly(2))
             ->method('has')
             ->willReturnMap([
                 ['templating', false],
@@ -203,7 +203,7 @@ final class CollectionControllerTest extends TestCase
             ]);
 
         $container
-            ->expects($this->exactly(2))
+            ->expects(static::exactly(2))
             ->method('get')
             ->willReturnMap([
                 ['knp_paginator', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $paginator],
@@ -221,7 +221,7 @@ final class CollectionControllerTest extends TestCase
 
         $collectionControllerTest->setContainer($container);
 
-        $this->assertSame(200, $collectionControllerTest->indexAction($request)->getStatusCode());
+        static::assertSame(200, $collectionControllerTest->indexAction($request)->getStatusCode());
     }
 
     public function createCollectionController(
@@ -240,28 +240,28 @@ final class CollectionControllerTest extends TestCase
 
             //Mock Currency
             $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
-            $currencyDetector->expects($this->any())->method('getCurrency')->willReturn($currency);
+            $currencyDetector->expects(static::any())->method('getCurrency')->willReturn($currency);
         }
 
         //Mock repository
         $repository = $this->getMockBuilder(EntityRepository::class)->disableOriginalConstructor()->getMock();
-        $repository->expects($this->any())->method('findOneBy');
-        $repository->expects($this->any())->method('findBy');
+        $repository->expects(static::any())->method('findOneBy');
+        $repository->expects(static::any())->method('findBy');
 
         //Mock Entitymanaer
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->willReturn($repository);
+        $em->expects(static::any())->method('getRepository')->willReturn($repository);
 
         //Mock Manager registry
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         //Prepare Query Builder
         $qb = new QueryBuilder($em);
         $qb->from(Collection::class, 'q');
 
         //Mock createQueryBuilder result
-        $repository->expects($this->any())->method('createQueryBuilder')->willReturn($qb);
+        $repository->expects(static::any())->method('createQueryBuilder')->willReturn($qb);
 
         if (!$collectionManagerInterface) {
             $collectionManagerInterface = $this->createMock(CollectionManagerInterface::class);

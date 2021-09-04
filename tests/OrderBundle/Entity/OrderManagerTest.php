@@ -43,7 +43,7 @@ class OrderManagerTest extends TestCase
         $registry = $this->createMock(ManagerRegistry::class);
         $order = new OrderManager(Order::class, $registry);
 
-        $this->assertSame(Order::class, $order->getClass());
+        static::assertSame(Order::class, $order->getClass());
     }
 
     public function testCreate(): void
@@ -52,22 +52,22 @@ class OrderManagerTest extends TestCase
         $orderManager = new OrderManager(Order::class, $registry);
 
         $order = $orderManager->create();
-        $this->assertInstanceOf(Order::class, $order);
+        static::assertInstanceOf(Order::class, $order);
     }
 
     public function testSave(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->exactly(2))->method('persist');
-        $em->expects($this->once())->method('flush');
+        $em->expects(static::exactly(2))->method('persist');
+        $em->expects(static::once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $orderManager = new OrderManager(Order::class, $registry);
 
         $order = $this->createMock(Order::class);
-        $order->expects($this->once())->method('getCustomer');
+        $order->expects(static::once())->method('getCustomer');
 
         $orderManager->save($order);
     }
@@ -75,11 +75,11 @@ class OrderManagerTest extends TestCase
     public function testDelete(): void
     {
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->once())->method('remove');
-        $em->expects($this->once())->method('flush');
+        $em->expects(static::once())->method('remove');
+        $em->expects(static::once())->method('flush');
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $orderManager = new OrderManager(Order::class, $registry);
 
@@ -221,7 +221,7 @@ class OrderManagerTest extends TestCase
         ]);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         return new OrderManager(BaseOrder::class, $registry);
     }

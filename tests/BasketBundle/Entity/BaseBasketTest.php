@@ -30,12 +30,12 @@ class BaseBasketTest extends TestCase
         $basket = new BasketTest();
 
         $pool = $this->createMock(Pool::class);
-        $pool->expects($this->any())->method('getProvider')->willReturn($this->createMock(ProductProviderInterface::class));
+        $pool->expects(static::any())->method('getProvider')->willReturn($this->createMock(ProductProviderInterface::class));
 
         $basket->setProductPool($pool);
 
         $element = $this->getMockBuilder(BaseBasketElement::class)->getMock();
-        $element->expects($this->any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
+        $element->expects(static::any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
 
         $elements = [
             'notBasketElementInterface',
@@ -44,7 +44,7 @@ class BaseBasketTest extends TestCase
 
         $basket->setBasketElements($elements);
 
-        $this->assertCount(1, $basket->getBasketElements());
+        static::assertCount(1, $basket->getBasketElements());
     }
 
     public function testReset(): void
@@ -52,12 +52,12 @@ class BaseBasketTest extends TestCase
         $basket = new BasketTest();
 
         $pool = $this->createMock(Pool::class);
-        $pool->expects($this->any())->method('getProvider')->willReturn($this->createMock(ProductProviderInterface::class));
+        $pool->expects(static::any())->method('getProvider')->willReturn($this->createMock(ProductProviderInterface::class));
 
         $basket->setProductPool($pool);
 
         $element = $this->getMockBuilder(BaseBasketElement::class)->getMock();
-        $element->expects($this->any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
+        $element->expects(static::any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
 
         $elements = [
             'notBasketElementInterface',
@@ -68,12 +68,12 @@ class BaseBasketTest extends TestCase
 
         $basket->reset(false);
 
-        $this->assertCount(1, $basket->getBasketElements());
+        static::assertCount(1, $basket->getBasketElements());
 
         $basket->reset();
 
-        $this->assertCount(0, $basket->getBasketElements());
-        $this->assertInstanceOf(ArrayCollection::class, $basket->getBasketElements());
+        static::assertCount(0, $basket->getBasketElements());
+        static::assertInstanceOf(ArrayCollection::class, $basket->getBasketElements());
     }
 
     public function testBasketElementsVatAmounts(): void
@@ -81,37 +81,37 @@ class BaseBasketTest extends TestCase
         $basket = new BasketTest();
 
         $pool = $this->createMock(Pool::class);
-        $pool->expects($this->any())->method('getProvider')->willReturn($this->createMock(ProductProviderInterface::class));
+        $pool->expects(static::any())->method('getProvider')->willReturn($this->createMock(ProductProviderInterface::class));
 
         $basket->setProductPool($pool);
 
         $element1 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
-        $element1->expects($this->any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
-        $element1->expects($this->any())->method('getVatRate')->willReturn(20);
-        $element1->expects($this->any())->method('getVatAmount')->willReturn(3);
+        $element1->expects(static::any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
+        $element1->expects(static::any())->method('getVatRate')->willReturn(20);
+        $element1->expects(static::any())->method('getVatAmount')->willReturn(3);
 
         $element2 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
-        $element2->expects($this->any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
-        $element2->expects($this->any())->method('getVatRate')->willReturn(10);
-        $element2->expects($this->any())->method('getVatAmount')->willReturn(2);
+        $element2->expects(static::any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
+        $element2->expects(static::any())->method('getVatRate')->willReturn(10);
+        $element2->expects(static::any())->method('getVatAmount')->willReturn(2);
 
         $element3 = $this->getMockBuilder(BaseBasketElement::class)->getMock();
-        $element3->expects($this->any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
-        $element3->expects($this->any())->method('getVatRate')->willReturn(10);
-        $element3->expects($this->any())->method('getVatAmount')->willReturn(5);
+        $element3->expects(static::any())->method('getProduct')->willReturn($this->getMockBuilder(BaseProduct::class)->getMock());
+        $element3->expects(static::any())->method('getVatRate')->willReturn(10);
+        $element3->expects(static::any())->method('getVatAmount')->willReturn(5);
 
         $basket->setBasketElements([$element1, $element2, $element3]);
 
         $items = $basket->getVatAmounts();
 
-        $this->assertIsArray($items, 'Should return an array');
+        static::assertIsArray($items, 'Should return an array');
 
         foreach ($items as $item) {
-            $this->assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');
-            $this->assertArrayHasKey('amount', $item, 'Array items should contains a "amount" key');
+            static::assertArrayHasKey('rate', $item, 'Array items should contains a "rate" key');
+            static::assertArrayHasKey('amount', $item, 'Array items should contains a "amount" key');
 
-            $this->assertContains($item['rate'], [10, 20]);
-            $this->assertContains($item['amount'], ['7', '3']);
+            static::assertContains($item['rate'], [10, 20]);
+            static::assertContains($item['amount'], ['7', '3']);
         }
     }
 }

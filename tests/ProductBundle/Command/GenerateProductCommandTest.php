@@ -27,7 +27,7 @@ class GenerateProductCommandTest extends TestCase
     public function testConfigure(): void
     {
         $cmd = $this->getCommandInstance();
-        $this->assertInstanceOf(GenerateProductCommand::class, $cmd);
+        static::assertInstanceOf(GenerateProductCommand::class, $cmd);
     }
 
     public function testExecute(): void
@@ -37,9 +37,9 @@ class GenerateProductCommandTest extends TestCase
 
         try {
             $cmdTester->execute(['command' => $cmd->getName()]);
-            $this->fail('The command without arguments should throw a \RuntimeException');
+            static::fail('The command without arguments should throw a \RuntimeException');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(\RuntimeException::class, $e);
+            static::assertInstanceOf(\RuntimeException::class, $e);
         }
 
         try {
@@ -47,9 +47,9 @@ class GenerateProductCommandTest extends TestCase
                 'command' => $cmd->getName(),
                 'product' => 'Test',
             ]);
-            $this->fail('The command without "service_id" argument should throw a \RuntimeException');
+            static::fail('The command without "service_id" argument should throw a \RuntimeException');
         } catch (\Exception $e) {
-            $this->assertInstanceOf(\RuntimeException::class, $e);
+            static::assertInstanceOf(\RuntimeException::class, $e);
         }
 
         /*

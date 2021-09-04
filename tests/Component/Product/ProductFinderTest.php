@@ -26,13 +26,13 @@ class ProductFinderTest extends TestCase
     public function testGetCrossSellingSimilarProducts(): void
     {
         $productManager = $this->createMock(ProductManagerInterface::class);
-        $productManager->expects($this->once())
+        $productManager->expects(static::once())
             ->method('findInSameCollections')
             ->willReturn([]);
 
         $finder = new ProductFinder($productManager);
 
         $product = $this->createMock(ProductInterface::class);
-        $this->assertSame([], $finder->getCrossSellingSimilarProducts($product));
+        static::assertSame([], $finder->getCrossSellingSimilarProducts($product));
     }
 }

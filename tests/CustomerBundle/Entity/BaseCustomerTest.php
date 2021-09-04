@@ -51,22 +51,22 @@ class BaseCustomerTest extends TestCase
         $address->setType(AddressInterface::TYPE_BILLING);
 
         $customer->addAddress($address);
-        $this->assertTrue($address->getCurrent());
+        static::assertTrue($address->getCurrent());
 
         $address2 = new AddressTest();
         $address2->setType(AddressInterface::TYPE_BILLING);
         $customer->addAddress($address2);
-        $this->assertFalse($address2->getCurrent());
+        static::assertFalse($address2->getCurrent());
 
         $address = new AddressTest();
         $address->setType(AddressInterface::TYPE_CONTACT);
 
         $customer->addAddress($address);
-        $this->assertTrue($address->getCurrent());
+        static::assertTrue($address->getCurrent());
 
         $address2 = new AddressTest();
         $address2->setType(AddressInterface::TYPE_CONTACT);
         $customer->addAddress($address2);
-        $this->assertFalse($address2->getCurrent());
+        static::assertFalse($address2->getCurrent());
     }
 }

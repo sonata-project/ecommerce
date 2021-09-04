@@ -35,20 +35,20 @@ class AddressControllerTest extends TestCase
     {
         $pager = $this->createStub(PagerInterface::class);
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $addressManager->expects(static::once())->method('getPager')->willReturn($pager);
 
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->exactly(3))->method('get')->willReturn(1, 10, null);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::exactly(3))->method('get')->willReturn(1, 10, null);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
-        $this->assertSame($pager, $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
+        static::assertSame($pager, $this->createAddressController(null, $addressManager)->getAddressesAction($paramFetcher));
     }
 
     public function testGetAddressAction(): void
     {
         $address = $this->createMock(AddressInterface::class);
 
-        $this->assertSame($address, $this->createAddressController($address)->getAddressAction(1));
+        static::assertSame($address, $this->createAddressController($address)->getAddressAction(1));
     }
 
     public function testGetAddressActionNotFoundException(): void
@@ -64,20 +64,20 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('save')->willReturn($address);
+        $addressManager->expects(static::once())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($address);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($address);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPostCustomerInvalidAction(): void
@@ -85,19 +85,19 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->never())->method('save')->willReturn($address);
+        $addressManager->expects(static::never())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController(null, $addressManager, $formFactory)->postAddressAction(new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutAddressAction(): void
@@ -105,21 +105,21 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
-        $addressManager->expects($this->once())->method('save')->willReturn($address);
+        $addressManager->expects(static::once())->method('findOneBy')->willReturn($address);
+        $addressManager->expects(static::once())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($address);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($address);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController($address, $addressManager, $formFactory)->putAddressAction(1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPutAddressInvalidAction(): void
@@ -127,20 +127,20 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
-        $addressManager->expects($this->never())->method('save')->willReturn($address);
+        $addressManager->expects(static::once())->method('findOneBy')->willReturn($address);
+        $addressManager->expects(static::never())->method('save')->willReturn($address);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isSubmitted')->willReturn(true);
-        $form->expects($this->once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isSubmitted')->willReturn(true);
+        $form->expects(static::once())->method('isValid')->willReturn(false);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createAddressController($address, $addressManager, $formFactory)->putAddressAction(1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteAddressAction(): void
@@ -148,12 +148,12 @@ class AddressControllerTest extends TestCase
         $address = $this->createMock(AddressInterface::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
-        $addressManager->expects($this->once())->method('delete');
+        $addressManager->expects(static::once())->method('findOneBy')->willReturn($address);
+        $addressManager->expects(static::once())->method('delete');
 
         $view = $this->createAddressController($address, $addressManager)->deleteAddressAction(1);
 
-        $this->assertSame(['deleted' => true], $view);
+        static::assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteAddressInvalidAction(): void
@@ -161,8 +161,8 @@ class AddressControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $addressManager = $this->createMock(AddressManagerInterface::class);
-        $addressManager->expects($this->once())->method('findOneBy')->willReturn(null);
-        $addressManager->expects($this->never())->method('delete');
+        $addressManager->expects(static::once())->method('findOneBy')->willReturn(null);
+        $addressManager->expects(static::never())->method('delete');
 
         $this->createAddressController(null, $addressManager)->deleteAddressAction(1);
     }
@@ -182,7 +182,7 @@ class AddressControllerTest extends TestCase
             $addressManager = $this->createMock(AddressManagerInterface::class);
 
             if ($address) {
-                $addressManager->expects($this->once())->method('findOneBy')->willReturn($address);
+                $addressManager->expects(static::once())->method('findOneBy')->willReturn($address);
             }
         }
 

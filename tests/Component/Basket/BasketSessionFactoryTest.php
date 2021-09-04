@@ -33,23 +33,23 @@ class BasketSessionFactoryTest extends TestCase
     public function testLoadWithNoBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('setCustomer');
+        $basket->expects(static::once())->method('setCustomer');
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
-        $basketManager->expects($this->once())->method('create')->willReturn($basket);
+        $basketManager->expects(static::once())->method('create')->willReturn($basket);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->willReturn(1);
+        $customer->expects(static::any())->method('getId')->willReturn(1);
 
         $session = $this->createMock(Session::class);
 
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -57,21 +57,21 @@ class BasketSessionFactoryTest extends TestCase
 
         $basket = $factory->load($customer);
 
-        $this->isInstanceOf(BasketInterface::class, $basket);
+        static::isInstanceOf(BasketInterface::class, $basket);
     }
 
     public function testLoadWithBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('setCustomer');
+        $basket->expects(static::once())->method('setCustomer');
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->willReturn(1);
+        $customer->expects(static::any())->method('getId')->willReturn(1);
 
         $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/1', $basket);
@@ -79,7 +79,7 @@ class BasketSessionFactoryTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -87,7 +87,7 @@ class BasketSessionFactoryTest extends TestCase
 
         $basket = $factory->load($customer);
 
-        $this->isInstanceOf(BasketInterface::class, $basket);
+        static::isInstanceOf(BasketInterface::class, $basket);
     }
 
     public function testSave(): void
@@ -99,15 +99,15 @@ class BasketSessionFactoryTest extends TestCase
         $session = $this->createMock(SessionInterface::class);
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->willReturn(1);
+        $customer->expects(static::any())->method('getId')->willReturn(1);
 
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('getCustomer')->willReturn($customer);
+        $basket->expects(static::once())->method('getCustomer')->willReturn($customer);
 
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -122,7 +122,7 @@ class BasketSessionFactoryTest extends TestCase
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
 
         $session = $this->createMock(SessionInterface::class);
-        $session->expects($this->once())->method('remove');
+        $session->expects(static::once())->method('remove');
 
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
 
@@ -133,16 +133,16 @@ class BasketSessionFactoryTest extends TestCase
     public function testResetFullBasket(): void
     {
         $basket = $this->createMock(BasketInterface::class);
-        $basket->expects($this->once())->method('setCustomer');
+        $basket->expects(static::once())->method('setCustomer');
 
         $basketManager = $this->createMock(BasketManagerInterface::class);
 
         $basketBuilder = $this->createMock(BasketBuilderInterface::class);
-        $basketBuilder->expects($this->once())->method('build');
+        $basketBuilder->expects(static::once())->method('build');
 
         $customer = $this->createMock(CustomerInterface::class);
-        $customer->expects($this->any())->method('getId')->willReturn(1);
-        $basket->expects($this->any())->method('getCustomer')->willReturn($customer);
+        $customer->expects(static::any())->method('getId')->willReturn(1);
+        $basket->expects(static::any())->method('getCustomer')->willReturn($customer);
 
         $session = new Session(new MockArraySessionStorage());
         $session->set('sonata/basket/factory/customer/1', $basket);
@@ -150,7 +150,7 @@ class BasketSessionFactoryTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
@@ -160,7 +160,7 @@ class BasketSessionFactoryTest extends TestCase
 
         $factory->reset($basket, true);
 
-        $this->assertNull($session->get('sonata/basket/factory/customer/1'));
-        $this->assertNull($session->get('sonata/basket/factory/customer/new'));
+        static::assertNull($session->get('sonata/basket/factory/customer/1'));
+        static::assertNull($session->get('sonata/basket/factory/customer/new'));
     }
 }

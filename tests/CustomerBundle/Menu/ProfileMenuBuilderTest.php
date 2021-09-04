@@ -30,7 +30,7 @@ final class ProfileMenuBuilderTest extends TestCase
         $menu = $this->createMock(ItemInterface::class);
         $factory = $this->createMock(FactoryInterface::class);
 
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('createItem')
             ->willReturn($menu);
 
@@ -41,6 +41,6 @@ final class ProfileMenuBuilderTest extends TestCase
 
         $genMenu = $builder->createProfileMenu();
 
-        $this->assertInstanceOf(ItemInterface::class, $genMenu);
+        static::assertInstanceOf(ItemInterface::class, $genMenu);
     }
 }

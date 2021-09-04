@@ -30,6 +30,6 @@ class CustomerControllerTest extends TestCase
 
     public function testItIsInstantiable(): void
     {
-        $this->assertNotNull($this->controller);
+        static::assertNotNull($this->controller);
     }
 }

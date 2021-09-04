@@ -74,17 +74,17 @@ class FacebookTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $product = new ProductFbMock();
         $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->any())
+        $router->expects(static::any())
             ->method('generate')->willReturn('/product/link');
 
         //Prepare currency
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
                 ->method('getCurrency')
                 ->willReturn($currency);
 
-        $numberHelper->expects($this->any())
+        $numberHelper->expects(static::any())
                 ->method('formatDecimal')
                 ->willReturn($product->getPrice());
 
@@ -93,13 +93,13 @@ class FacebookTest extends TestCase
         $fbService->alterPage($seoPage, $product);
         $content = $extension->getHeadAttributes();
 
-        $this->assertStringContainsString('fb: http://ogp.me/ns/fb#', $content);
+        static::assertStringContainsString('fb: http://ogp.me/ns/fb#', $content);
 
         $content = $extension->getMetadatas();
 
-        $this->assertStringContainsString('property="og:description" content="O-some product"', $content);
-        $this->assertStringContainsString('property="og:title" content="Product1"', $content);
-        $this->assertStringContainsString('property="product:price:amount" content="123.56"', $content);
+        static::assertStringContainsString('property="og:description" content="O-some product"', $content);
+        static::assertStringContainsString('property="og:title" content="Product1"', $content);
+        static::assertStringContainsString('property="product:price:amount" content="123.56"', $content);
     }
 
     public function testAlterPageImage(): void
@@ -111,13 +111,13 @@ class FacebookTest extends TestCase
         $currencyDetector = $this->createMock(CurrencyDetectorInterface::class);
         $product = new ProductFbMock();
         $router = $this->createMock(RouterInterface::class);
-        $router->expects($this->any())
+        $router->expects(static::any())
             ->method('generate')->willReturn('/product/link');
 
         //Prepare currency
         $currency = new Currency();
         $currency->setLabel('EUR');
-        $currencyDetector->expects($this->any())
+        $currencyDetector->expects(static::any())
                 ->method('getCurrency')
                 ->willReturn($currency);
 
@@ -125,21 +125,21 @@ class FacebookTest extends TestCase
         $image = $this->createMock(MediaInterface::class);
 
         $imageProvider = $this->createMock(ImageProvider::class);
-        $imageProvider->expects($this->any())
+        $imageProvider->expects(static::any())
             ->method('generatePublicUrl')->willReturn('/upload/dummy.png');
 
-        $image->expects($this->any())
+        $image->expects(static::any())
             ->method('getName')->willReturn('correctMedia');
-        $image->expects($this->any())
+        $image->expects(static::any())
             ->method('getWidth')->willReturn(1111);
-        $image->expects($this->any())
+        $image->expects(static::any())
             ->method('getHeight')->willReturn(2222);
-        $image->expects($this->any())
+        $image->expects(static::any())
             ->method('getProviderName')->willReturn($imageProvider);
-        $image->expects($this->any())
+        $image->expects(static::any())
             ->method('getContentType')->willReturn('image/png');
 
-        $mediaPool->expects($this->any())
+        $mediaPool->expects(static::any())
             ->method('getProvider')->willReturn($imageProvider);
 
         $product->setImage($image);
@@ -149,17 +149,17 @@ class FacebookTest extends TestCase
         $fbService->alterPage($seoPage, $product);
         $content = $extension->getHeadAttributes();
 
-        $this->assertStringContainsString('fb: http://ogp.me/ns/fb#', $content);
+        static::assertStringContainsString('fb: http://ogp.me/ns/fb#', $content);
 
         $content = $extension->getMetadatas();
 
         // image link
-        $this->assertStringContainsString('http://my-domain.ltd/upload/dummy.png', $content);
+        static::assertStringContainsString('http://my-domain.ltd/upload/dummy.png', $content);
         //image width
-        $this->assertStringContainsString('meta property="og:image:width" content="1111"', $content);
+        static::assertStringContainsString('meta property="og:image:width" content="1111"', $content);
         //image height
-        $this->assertStringContainsString('meta property="og:image:height" content="2222"', $content);
+        static::assertStringContainsString('meta property="og:image:height" content="2222"', $content);
         //image content type
-        $this->assertStringContainsString('meta property="og:image:type" content="image/png"', $content);
+        static::assertStringContainsString('meta property="og:image:type" content="image/png"', $content);
     }
 }

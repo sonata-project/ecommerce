@@ -41,12 +41,12 @@ class CurrencyDetectorTest extends TestCase
     protected function setUp(): void
     {
         $this->currency = $this->createMock(CurrencyInterface::class);
-        $this->currency->expects($this->any())
+        $this->currency->expects(static::any())
             ->method('getLabel')
             ->willReturn('EUR');
 
         $currencyManager = $this->createMock(CurrencyManagerInterface::class);
-        $currencyManager->expects($this->any())
+        $currencyManager->expects(static::any())
             ->method('findOneByLabel')
             ->willReturn($this->currency);
 
@@ -70,12 +70,12 @@ class CurrencyDetectorTest extends TestCase
         $currency->setLabel('EUR');
 
         $currencyManager = $this->createMock(CurrencyManagerInterface::class);
-        $currencyManager->expects($this->any())
+        $currencyManager->expects(static::any())
             ->method('findOneByLabel')
             ->willReturn($currency);
 
         $currencyDetector = new CurrencyDetector('EUR', $currencyManager);
-        $this->assertSame('EUR', $currencyDetector->getCurrency()->getLabel());
+        static::assertSame('EUR', $currencyDetector->getCurrency()->getLabel());
     }
 
     /**
@@ -83,6 +83,6 @@ class CurrencyDetectorTest extends TestCase
      */
     public function testGetCurrency(): void
     {
-        $this->assertSame($this->currency->getLabel(), $this->object->getCurrency()->getLabel());
+        static::assertSame($this->currency->getLabel(), $this->object->getCurrency()->getLabel());
     }
 }

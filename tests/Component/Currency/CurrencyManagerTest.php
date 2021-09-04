@@ -29,6 +29,6 @@ class CurrencyManagerTest extends TestCase
 
         $currencyManager = new CurrencyManager(Currency::class, $registry);
 
-        $this->assertSame('EUR', $currencyManager->findOneByLabel('EUR')->getLabel());
+        static::assertSame('EUR', $currencyManager->findOneByLabel('EUR')->getLabel());
     }
 }
