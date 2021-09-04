@@ -39,12 +39,12 @@ class BaseProductServiceTest extends TestCase
     public function getBaseProvider()
     {
         $serializer = $this->createMock(SerializerInterface::class);
-        $serializer->expects($this->any())->method('serialize')->willReturn('{}');
+        $serializer->expects(static::any())->method('serialize')->willReturn('{}');
 
         $provider = new ProductProvider($serializer);
 
         $basketElementManager = $this->createMock(BasketElementManagerInterface::class);
-        $basketElementManager->expects($this->any())->method('getClass')->willReturn(
+        $basketElementManager->expects(static::any())->method('getClass')->willReturn(
             ProductProvider::class
         );
         $provider->setBasketElementManager($basketElementManager);
@@ -59,34 +59,34 @@ class BaseProductServiceTest extends TestCase
         $product = new Product();
 
         $product->setEnabled(false);
-        $this->assertFalse($product->isSalable());
+        static::assertFalse($product->isSalable());
 
         $product->setEnabled(true);
-        $this->assertTrue($product->isSalable());
+        static::assertTrue($product->isSalable());
 
         $product->setVariations(new ArrayCollection([new Product()]));
-        $this->assertFalse($product->isSalable());
+        static::assertFalse($product->isSalable());
     }
 
     public function testOptions(): void
     {
         $provider = $this->getBaseProvider();
 
-        $this->assertIsArray($provider->getOptions());
-        $this->assertNull($provider->getOption('foo'));
+        static::assertIsArray($provider->getOptions());
+        static::assertNull($provider->getOption('foo'));
         $provider->setOptions(['foo' => 'bar']);
 
-        $this->assertSame('bar', $provider->getOption('foo'));
+        static::assertSame('bar', $provider->getOption('foo'));
     }
 
     public function testOrderElement(): void
     {
         $product = $this->createMock(ProductInterface::class);
-        $product->expects($this->any())->method('getId')->willReturn(42);
-        $product->expects($this->any())->method('getName')->willReturn('Product name');
-        $product->expects($this->any())->method('getPrice')->willReturn(9.99);
-        $product->expects($this->any())->method('getOptions')->willReturn(['foo' => 'bar']);
-        $product->expects($this->any())->method('getDescription')->willReturn('product description');
+        $product->expects(static::any())->method('getId')->willReturn(42);
+        $product->expects(static::any())->method('getName')->willReturn('Product name');
+        $product->expects(static::any())->method('getPrice')->willReturn(9.99);
+        $product->expects(static::any())->method('getOptions')->willReturn(['foo' => 'bar']);
+        $product->expects(static::any())->method('getDescription')->willReturn('product description');
 
         $productProvider = new ProductProviderTest($this->createMock(SerializerInterface::class));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
@@ -102,25 +102,25 @@ class BaseProductServiceTest extends TestCase
 
         $orderElement = $provider->createOrderElement($basketElement);
 
-        $this->assertInstanceOf(OrderElementInterface::class, $orderElement);
-        $this->assertSame(OrderInterface::STATUS_PENDING, $orderElement->getStatus());
-        $this->assertSame('Product name', $orderElement->getDesignation());
-        $this->assertSame(1, $orderElement->getQuantity());
+        static::assertInstanceOf(OrderElementInterface::class, $orderElement);
+        static::assertSame(OrderInterface::STATUS_PENDING, $orderElement->getStatus());
+        static::assertSame('Product name', $orderElement->getDesignation());
+        static::assertSame(1, $orderElement->getQuantity());
     }
 
     public function testVariationFields(): void
     {
         $provider = $this->getBaseProvider();
 
-        $this->assertEmpty($provider->getVariationFields());
+        static::assertEmpty($provider->getVariationFields());
 
         $provider->setVariationFields(['name', 'price']);
 
-        $this->assertTrue($provider->hasVariationFields());
-        $this->assertTrue($provider->isVariateBy('name'));
-        $this->assertFalse($provider->isVariateBy('fake'));
-        $this->assertNotEmpty($provider->getVariationFields());
-        $this->assertSame(['name', 'price'], $provider->getVariationFields());
+        static::assertTrue($provider->hasVariationFields());
+        static::assertTrue($provider->isVariateBy('name'));
+        static::assertFalse($provider->isVariateBy('fake'));
+        static::assertNotEmpty($provider->getVariationFields());
+        static::assertSame(['name', 'price'], $provider->getVariationFields());
     }
 
     public function testVariationCreation(): void
@@ -138,31 +138,31 @@ class BaseProductServiceTest extends TestCase
         $variation1 = $provider->createVariation($product, false);
         $variation2 = $provider->createVariation($product, true);
 
-        $this->assertNull($variation1->getId());
-        $this->assertSame('fake name (duplicated)', $variation1->getName());
-        $this->assertSame($product->getId(), $variation1->getParent()->getId());
-        $this->assertFalse($variation1->isEnabled());
-        $this->assertTrue($variation1->isVariation());
+        static::assertNull($variation1->getId());
+        static::assertSame('fake name (duplicated)', $variation1->getName());
+        static::assertSame($product->getId(), $variation1->getParent()->getId());
+        static::assertFalse($variation1->isEnabled());
+        static::assertTrue($variation1->isVariation());
 
-        $this->assertCount(2, $product->getVariations());
+        static::assertCount(2, $product->getVariations());
 
-        $this->assertCount(0, $variation1->getVariations());
-        $this->assertCount(0, $variation1->getPackages());
-        $this->assertCount(0, $variation1->getDeliveries());
-        $this->assertCount(0, $variation1->getProductCategories());
+        static::assertCount(0, $variation1->getVariations());
+        static::assertCount(0, $variation1->getPackages());
+        static::assertCount(0, $variation1->getDeliveries());
+        static::assertCount(0, $variation1->getProductCategories());
 
-        $this->assertCount(0, $variation2->getVariations());
-        $this->assertCount(1, $variation2->getPackages());
-        $this->assertCount(1, $variation2->getDeliveries());
+        static::assertCount(0, $variation2->getVariations());
+        static::assertCount(1, $variation2->getPackages());
+        static::assertCount(1, $variation2->getDeliveries());
 
         $provider->setVariationFields(['packages', 'productCollections', 'productCategories', 'deliveries']);
 
         $variation3 = $provider->createVariation($product, true);
 
-        $this->assertCount(0, $variation3->getVariations());
-        $this->assertCount(0, $variation3->getPackages());
-        $this->assertCount(0, $variation3->getDeliveries());
-        $this->assertCount(0, $variation3->getProductCategories());
+        static::assertCount(0, $variation3->getVariations());
+        static::assertCount(0, $variation3->getPackages());
+        static::assertCount(0, $variation3->getDeliveries());
+        static::assertCount(0, $variation3->getProductCategories());
     }
 
     public function testProductDataSynchronization(): void
@@ -181,13 +181,13 @@ class BaseProductServiceTest extends TestCase
 
         $provider->synchronizeVariationsProduct($product);
 
-        $this->assertSame($product->getName(), $variation->getName());
-        $this->assertSame(15, $variation->getPrice());
-        $this->assertSame($product->getVatRate(), $variation->getVatRate());
-        $this->assertTrue($variation->isEnabled());
+        static::assertSame($product->getName(), $variation->getName());
+        static::assertSame(15, $variation->getPrice());
+        static::assertSame($product->getVatRate(), $variation->getVatRate());
+        static::assertTrue($variation->isEnabled());
 
-        $this->assertCount(1, $product->getVariations());
-        $this->assertCount(0, $variation->getVariations());
+        static::assertCount(1, $product->getVariations());
+        static::assertCount(0, $variation->getVariations());
     }
 
     public function testProductCategoriesSynchronization(): void
@@ -197,10 +197,10 @@ class BaseProductServiceTest extends TestCase
         $repository = $this->createMock(EntityRepository::class);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->willReturn($repository);
+        $em->expects(static::any())->method('getRepository')->willReturn($repository);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $productCategoryManager = new ProductCategoryManager(ProductCategory::class, $registry);
         $provider->setProductCategoryManager($productCategoryManager);
@@ -219,11 +219,11 @@ class BaseProductServiceTest extends TestCase
 
         // create product variation without sync categories
         $variation = $provider->createVariation($product, false);
-        $this->assertCount(0, $variation->getProductCategories());
+        static::assertCount(0, $variation->getProductCategories());
 
         // synchronise 1 category
         $provider->synchronizeVariationsCategories($product);
-        $this->assertCount(1, $variation->getProductCategories());
+        static::assertCount(1, $variation->getProductCategories());
 
         // create category2 and add to product
         $category2 = new Category();
@@ -234,17 +234,17 @@ class BaseProductServiceTest extends TestCase
         $product->addProductCategory($productCategory2);
 
         // variation still have 1 category (no sync yet)
-        $this->assertCount(1, $variation->getProductCategories());
+        static::assertCount(1, $variation->getProductCategories());
 
         // synchronize 2 categories
         $provider->synchronizeVariationsCategories($product);
-        $this->assertCount(2, $variation->getProductCategories());
+        static::assertCount(2, $variation->getProductCategories());
 
         // remove category1 from product
         $product->removeProductCategory($productCategory1);
 
         // variation still have 2 categories
-        $this->assertCount(2, $variation->getProductCategories());
+        static::assertCount(2, $variation->getProductCategories());
 
         $provider->synchronizeVariationsCategories($product);
         //        $this->assertEquals(1, count($variation->getProductCategories()));
@@ -259,10 +259,10 @@ class BaseProductServiceTest extends TestCase
         $repository = $this->createMock(EntityRepository::class);
 
         $em = $this->getMockBuilder(EntityManager::class)->disableOriginalConstructor()->getMock();
-        $em->expects($this->any())->method('getRepository')->willReturn($repository);
+        $em->expects(static::any())->method('getRepository')->willReturn($repository);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         $productCollectionManager = new ProductCollectionManager(ProductCollection::class, $registry);
         $provider->setProductCollectionManager($productCollectionManager);
@@ -277,10 +277,10 @@ class BaseProductServiceTest extends TestCase
         $product->addProductCollection($productCollection1);
 
         $variation = $provider->createVariation($product, false);
-        $this->assertCount(0, $variation->getProductCollections());
+        static::assertCount(0, $variation->getProductCollections());
 
         $provider->synchronizeVariationsCollections($product);
-        $this->assertCount(1, $variation->getProductCollections());
+        static::assertCount(1, $variation->getProductCollections());
 
         $collection2 = new Collection();
         $collection2->setId(2);
@@ -289,15 +289,15 @@ class BaseProductServiceTest extends TestCase
         $productCollection2->setCollection($collection2);
         $product->addProductCollection($productCollection2);
 
-        $this->assertCount(1, $variation->getProductCollections());
+        static::assertCount(1, $variation->getProductCollections());
 
         $provider->synchronizeVariationsCollections($product);
-        $this->assertCount(2, $variation->getProductCollections());
+        static::assertCount(2, $variation->getProductCollections());
 
         $product->removeProductCollection($productCollection1);
-        $this->assertCount(2, $variation->getProductCollections());
+        static::assertCount(2, $variation->getProductCollections());
 
-        $repository->expects($this->any())->method('findOneBy')->willReturn($productCollection1);
+        $repository->expects(static::any())->method('findOneBy')->willReturn($productCollection1);
 
         $provider->synchronizeVariationsCollections($product);
         //        $this->assertEquals(1, count($variation->getProductCollections()));
@@ -316,24 +316,24 @@ class BaseProductServiceTest extends TestCase
 
         $variation = $provider->createVariation($product, false);
 
-        $this->assertCount(0, $variation->getPackages());
+        static::assertCount(0, $variation->getPackages());
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertCount(1, $variation->getPackages());
+        static::assertCount(1, $variation->getPackages());
 
         $package2 = new Package();
         $product->addPackage($package2);
 
-        $this->assertCount(1, $variation->getPackages());
+        static::assertCount(1, $variation->getPackages());
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertCount(2, $variation->getPackages());
+        static::assertCount(2, $variation->getPackages());
 
         $product->removePackage($package1);
-        $this->assertCount(2, $variation->getPackages());
+        static::assertCount(2, $variation->getPackages());
 
         $provider->synchronizeVariationsPackages($product);
-        $this->assertCount(1, $variation->getPackages());
+        static::assertCount(1, $variation->getPackages());
     }
 
     public function testProductDeliveriesSynchronization(): void
@@ -347,24 +347,24 @@ class BaseProductServiceTest extends TestCase
 
         $variation = $provider->createVariation($product, false);
 
-        $this->assertCount(0, $variation->getDeliveries());
+        static::assertCount(0, $variation->getDeliveries());
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertCount(1, $variation->getDeliveries());
+        static::assertCount(1, $variation->getDeliveries());
 
         $delivery2 = new Delivery();
         $product->addDelivery($delivery2);
 
-        $this->assertCount(1, $variation->getDeliveries());
+        static::assertCount(1, $variation->getDeliveries());
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertCount(2, $variation->getDeliveries());
+        static::assertCount(2, $variation->getDeliveries());
 
         $product->removeDelivery($delivery1);
-        $this->assertCount(2, $variation->getDeliveries());
+        static::assertCount(2, $variation->getDeliveries());
 
         $provider->synchronizeVariationsDeliveries($product);
-        $this->assertCount(1, $variation->getDeliveries());
+        static::assertCount(1, $variation->getDeliveries());
     }
 
     public function testArrayProduct(): void
@@ -390,21 +390,21 @@ class BaseProductServiceTest extends TestCase
 
         $product->fromArray($arrayProduct);
 
-        $this->assertSame($arrayProduct, $product->toArray());
+        static::assertSame($arrayProduct, $product->toArray());
 
-        $this->assertSame($product->getSku(), $arrayProduct['sku']);
-        $this->assertSame($product->getSlug(), $arrayProduct['slug']);
-        $this->assertSame($product->getName(), $arrayProduct['name']);
-        $this->assertSame($product->getDescription(), $arrayProduct['description']);
-        $this->assertSame($product->getRawDescription(), $arrayProduct['rawDescription']);
-        $this->assertSame($product->getDescriptionFormatter(), $arrayProduct['descriptionFormatter']);
-        $this->assertSame($product->getShortDescription(), $arrayProduct['shortDescription']);
-        $this->assertSame($product->getRawShortDescription(), $arrayProduct['rawShortDescription']);
-        $this->assertSame($product->getShortDescriptionFormatter(), $arrayProduct['shortDescriptionFormatter']);
-        $this->assertSame($product->getPrice(), $arrayProduct['price']);
-        $this->assertSame($product->getVatRate(), $arrayProduct['vatRate']);
-        $this->assertSame($product->getStock(), $arrayProduct['stock']);
-        $this->assertSame($product->getEnabled(), $arrayProduct['enabled']);
-        $this->assertSame($product->getOptions(), $arrayProduct['options']);
+        static::assertSame($product->getSku(), $arrayProduct['sku']);
+        static::assertSame($product->getSlug(), $arrayProduct['slug']);
+        static::assertSame($product->getName(), $arrayProduct['name']);
+        static::assertSame($product->getDescription(), $arrayProduct['description']);
+        static::assertSame($product->getRawDescription(), $arrayProduct['rawDescription']);
+        static::assertSame($product->getDescriptionFormatter(), $arrayProduct['descriptionFormatter']);
+        static::assertSame($product->getShortDescription(), $arrayProduct['shortDescription']);
+        static::assertSame($product->getRawShortDescription(), $arrayProduct['rawShortDescription']);
+        static::assertSame($product->getShortDescriptionFormatter(), $arrayProduct['shortDescriptionFormatter']);
+        static::assertSame($product->getPrice(), $arrayProduct['price']);
+        static::assertSame($product->getVatRate(), $arrayProduct['vatRate']);
+        static::assertSame($product->getStock(), $arrayProduct['stock']);
+        static::assertSame($product->getEnabled(), $arrayProduct['enabled']);
+        static::assertSame($product->getOptions(), $arrayProduct['options']);
     }
 }

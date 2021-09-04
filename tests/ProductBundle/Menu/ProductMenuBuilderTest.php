@@ -31,14 +31,14 @@ class ProductMenuBuilderTest extends TestCase
         $menu = $this->createMock(ItemInterface::class);
         $factory = $this->createMock(FactoryInterface::class);
 
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('createItem')
             ->willReturn($menu);
 
         $categoryManager = $this->createMock(ProductCategoryManagerInterface::class);
         $router = $this->createMock(RouterInterface::class);
 
-        $categoryManager->expects($this->once())
+        $categoryManager->expects(static::once())
             ->method('getCategoryTree')
             ->willReturn([]);
 
@@ -46,7 +46,7 @@ class ProductMenuBuilderTest extends TestCase
 
         $genMenu = $builder->createCategoryMenu();
 
-        $this->assertInstanceOf(ItemInterface::class, $genMenu);
+        static::assertInstanceOf(ItemInterface::class, $genMenu);
     }
 
     public function testCreateFiltersMenu(): void
@@ -54,7 +54,7 @@ class ProductMenuBuilderTest extends TestCase
         $menu = $this->createMock(ItemInterface::class);
         $factory = $this->createMock(FactoryInterface::class);
 
-        $factory->expects($this->once())
+        $factory->expects(static::once())
             ->method('createItem')
             ->willReturn($menu);
 
@@ -65,12 +65,12 @@ class ProductMenuBuilderTest extends TestCase
 
         $productProvider = $this->createMock(ProductProviderInterface::class);
 
-        $productProvider->expects($this->once())
+        $productProvider->expects(static::once())
             ->method('getFilters')
             ->willReturn([]);
 
         $genMenu = $builder->createFiltersMenu($productProvider);
 
-        $this->assertInstanceOf(ItemInterface::class, $genMenu);
+        static::assertInstanceOf(ItemInterface::class, $genMenu);
     }
 }

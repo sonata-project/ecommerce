@@ -31,16 +31,16 @@ class ConfigurationTest extends TestCase
         $this->validateClass($config);
         $this->validateTransformers($config);
 
-        $this->assertSame('sonata.payment.selector.simple', $config['selector']);
-        $this->assertSame('sonata.payment.generator.mysql', $config['generator']);
+        static::assertSame('sonata.payment.selector.simple', $config['selector']);
+        static::assertSame('sonata.payment.generator.mysql', $config['generator']);
 
-        $this->assertArrayHasKey('methods', $config);
-        $this->assertEmpty($config['methods']);
+        static::assertArrayHasKey('methods', $config);
+        static::assertEmpty($config['methods']);
     }
 
     public function validateClass($config): void
     {
-        $this->assertSame([
+        static::assertSame([
             'order' => 'App\\Sonata\\OrderBundle\\Entity\\Order',
             'transaction' => 'App\\Sonata\\PaymentBundle\\Entity\\Transaction',
         ], $config['class']);
@@ -48,8 +48,8 @@ class ConfigurationTest extends TestCase
 
     public function validateTransformers($config): void
     {
-        $this->assertArrayHasKey('transformers', $config);
-        $this->assertSame('sonata.payment.transformer.order', $config['transformers']['order']);
-        $this->assertSame('sonata.payment.transformer.basket', $config['transformers']['basket']);
+        static::assertArrayHasKey('transformers', $config);
+        static::assertSame('sonata.payment.transformer.order', $config['transformers']['order']);
+        static::assertSame('sonata.payment.transformer.basket', $config['transformers']['basket']);
     }
 }

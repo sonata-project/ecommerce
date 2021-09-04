@@ -29,7 +29,7 @@ class ApiProductTypeTest extends TestCase
         $provider = $this->createMock(ProductProviderInterface::class);
 
         $productPool = $this->createMock(Pool::class);
-        $productPool->expects($this->once())->method('getProvider')->willReturn($provider);
+        $productPool->expects(static::once())->method('getProvider')->willReturn($provider);
 
         $type = new ApiProductType($productPool);
 

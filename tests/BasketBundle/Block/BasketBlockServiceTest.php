@@ -30,7 +30,7 @@ class BasketBlockServiceTest extends TestCase
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
         $block = new BasketBlockService($environment, $engineInterfaceMock);
 
-        $this->assertSame('Basket items', $block->getName());
+        static::assertSame('Basket items', $block->getName());
     }
 
     public function testExecute(): void
@@ -38,11 +38,11 @@ class BasketBlockServiceTest extends TestCase
         $environment = $this->createMock(\Twig\Environment::class);
 
         $engineInterfaceMock = $this->createMock(EngineInterface::class);
-        $engineInterfaceMock->expects($this->any())->method('renderResponse')->willReturn(new Response('test'));
+        $engineInterfaceMock->expects(static::any())->method('renderResponse')->willReturn(new Response('test'));
 
         $context = $this->createMock(BlockContextInterface::class);
         $block = new BasketBlockService($environment, $engineInterfaceMock);
 
-        $this->assertInstanceOf(Response::class, $block->execute($context));
+        static::assertInstanceOf(Response::class, $block->execute($context));
     }
 }

@@ -29,9 +29,9 @@ class BasketElementTest extends TestCase
         $basketElement = new BasketElement();
 
         $basketElement->setQuantity(50);
-        $this->assertSame(50, $basketElement->getQuantity());
+        static::assertSame(50, $basketElement->getQuantity());
 
         $basketElement->setQuantity(-50);
-        $this->assertSame(1, $basketElement->getQuantity());
+        static::assertSame(1, $basketElement->getQuantity());
     }
 }

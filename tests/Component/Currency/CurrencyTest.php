@@ -26,8 +26,8 @@ class CurrencyTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertSame('EUR', $currency->getLabel());
-        $this->assertSame('EUR', $currency->__toString());
+        static::assertSame('EUR', $currency->getLabel());
+        static::assertSame('EUR', $currency->__toString());
     }
 
     public function testEquals(): void
@@ -35,8 +35,8 @@ class CurrencyTest extends TestCase
         $currency = new Currency();
         $currency->setLabel('EUR');
 
-        $this->assertFalse($currency->equals(null));
-        $this->assertFalse($currency->equals(new Currency()));
-        $this->assertTrue($currency->equals($currency));
+        static::assertFalse($currency->equals(null));
+        static::assertFalse($currency->equals(new Currency()));
+        static::assertTrue($currency->equals($currency));
     }
 }

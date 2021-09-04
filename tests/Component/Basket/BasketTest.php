@@ -39,14 +39,14 @@ class BasketTest extends TestCase
         $product = $this->getMockBuilder(ProductInterface::class)
             ->setMockClassName('BasketTest_Product')
             ->getMock();
-        $product->expects($this->any())->method('getId')->willReturn(42);
-        $product->expects($this->any())->method('getName')->willReturn('Product name');
-        $product->expects($this->any())->method('getPrice')->willReturn(15);
-        $product->expects($this->any())->method('isPriceIncludingVat')->willReturn(false);
-        $product->expects($this->any())->method('getVatRate')->willReturn(19.6);
-        $product->expects($this->any())->method('getOptions')->willReturn(['foo' => 'bar']);
-        $product->expects($this->any())->method('getDescription')->willReturn('product description');
-        $product->expects($this->any())->method('getEnabled')->willReturn(true);
+        $product->expects(static::any())->method('getId')->willReturn(42);
+        $product->expects(static::any())->method('getName')->willReturn('Product name');
+        $product->expects(static::any())->method('getPrice')->willReturn(15);
+        $product->expects(static::any())->method('isPriceIncludingVat')->willReturn(false);
+        $product->expects(static::any())->method('getVatRate')->willReturn(19.6);
+        $product->expects(static::any())->method('getOptions')->willReturn(['foo' => 'bar']);
+        $product->expects(static::any())->method('getDescription')->willReturn('product description');
+        $product->expects(static::any())->method('getEnabled')->willReturn(true);
 
         return $product;
     }
@@ -56,14 +56,14 @@ class BasketTest extends TestCase
         $address = $this->getMockBuilder(AddressInterface::class)
             ->setMockClassName('BasketTest_Address')
             ->getMock();
-        $address->expects($this->any())->method('getName')->willReturn('Product name');
-        $address->expects($this->any())->method('getAddress1')->willReturn('Address1');
-        $address->expects($this->any())->method('getAddress2')->willReturn('Address2');
-        $address->expects($this->any())->method('getAddress3')->willReturn('Address3');
-        $address->expects($this->any())->method('getPostcode')->willReturn('75001');
-        $address->expects($this->any())->method('getCity')->willReturn('Paris');
-        $address->expects($this->any())->method('getCountryCode')->willReturn('FR');
-        $address->expects($this->any())->method('getPhone')->willReturn('0123456789');
+        $address->expects(static::any())->method('getName')->willReturn('Product name');
+        $address->expects(static::any())->method('getAddress1')->willReturn('Address1');
+        $address->expects(static::any())->method('getAddress2')->willReturn('Address2');
+        $address->expects(static::any())->method('getAddress3')->willReturn('Address3');
+        $address->expects(static::any())->method('getPostcode')->willReturn('75001');
+        $address->expects(static::any())->method('getCity')->willReturn('Paris');
+        $address->expects(static::any())->method('getCountryCode')->willReturn('FR');
+        $address->expects(static::any())->method('getPhone')->willReturn('0123456789');
 
         return $address;
     }
@@ -76,7 +76,7 @@ class BasketTest extends TestCase
         $basket->setCurrency($currency);
 
         $manager = $this->createMock(ProductManagerInterface::class);
-        $manager->expects($this->any())->method('getClass')->willReturn('BasketTest_Product');
+        $manager->expects(static::any())->method('getClass')->willReturn('BasketTest_Product');
 
         $productProvider = new ProductProviderTest($this->createMock(SerializerInterface::class));
         $productProvider->setCurrencyPriceCalculator(new CurrencyPriceCalculator());
@@ -86,7 +86,7 @@ class BasketTest extends TestCase
 
         $product = $this->getMockProduct();
 
-        $product->expects($this->any())
+        $product->expects(static::any())
             ->method('isRecurrentPayment')
             ->willReturn(false);
 
@@ -95,7 +95,7 @@ class BasketTest extends TestCase
 
         $basket->setProductPool($pool);
 
-        $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
+        static::assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
         $basketElement = new BasketElement();
         $basketElement->setProductDefinition($productDefinition);
@@ -103,40 +103,40 @@ class BasketTest extends TestCase
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
+        static::assertTrue($basket->hasProduct($product), '::hasProduct() - The product is present in the basket');
 
-        $this->assertSame(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
-        $this->assertSame('15', $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertSame(
+        static::assertSame(1, $basketElement->getQuantity(), '::getQuantity() - return 1');
+        static::assertSame('15', $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        static::assertSame(
             0,
             bccomp('15', $basketElement->getTotal(false)),
             '::getQuantity() - return 2'
         );
 
-        $this->assertSame('15.000', $basket->getTotal(false), '::getTotal() w/o vat return 15');
-        $this->assertSame('17.940', $basket->getTotal(true), '::getTotal() w/ vat return 18');
+        static::assertSame('15.000', $basket->getTotal(false), '::getTotal() w/o vat return 15');
+        static::assertSame('17.940', $basket->getTotal(true), '::getTotal() w/ vat return 18');
 
         $basketElement->setQuantity(2);
 
-        $this->assertSame(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
-        $this->assertSame('15', $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
-        $this->assertSame(
+        static::assertSame(2, $basketElement->getQuantity(), '::getQuantity() - return 2');
+        static::assertSame('15', $basketElement->getUnitPrice(false), '::getQuantity() - return 2');
+        static::assertSame(
             0,
             bccomp('30', $basketElement->getTotal(false)),
             '::getQuantity() - return 2'
         );
-        $this->assertSame('30.000', $basket->getTotal(false), '::getTotal() w/o vat return 30');
-        $this->assertSame('35.880', $basket->getTotal(true), '::getTotal() w/ vat return true');
+        static::assertSame('30.000', $basket->getTotal(false), '::getTotal() w/o vat return 30');
+        static::assertSame('35.880', $basket->getTotal(true), '::getTotal() w/ vat return true');
 
         // Recurrent payments
-        $this->assertSame(
+        static::assertSame(
             '0.000',
             $basket->getTotal(false, true),
             '::getTotal() for recurrent payments only'
         );
 
         $newProduct = $this->getMockProduct();
-        $newProduct->expects($this->any())
+        $newProduct->expects(static::any())
             ->method('isRecurrentPayment')
             ->willReturn(true);
 
@@ -145,7 +145,7 @@ class BasketTest extends TestCase
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertSame(
+        static::assertSame(
             '30.000',
             $basket->getTotal(false, false),
             '::getTotal() for non-recurrent payments only'
@@ -157,17 +157,17 @@ class BasketTest extends TestCase
         $delivery = new Delivery();
         $basket->setDeliveryMethod($delivery);
 
-        $this->assertSame(
+        static::assertSame(
             '150.000',
             $basket->getTotal(false),
             '::getTotal() - return 150'
         );
-        $this->assertSame(
+        static::assertSame(
             '179.400',
             $basket->getTotal(true),
             '::getTotal() w/o vat return 179.40'
         );
-        $this->assertSame(
+        static::assertSame(
             '29.400',
             $basket->getVatAmount(),
             '::getVatAmount() w/o vat return 29.4'
@@ -181,79 +181,79 @@ class BasketTest extends TestCase
         $product = $this->getMockProduct();
 
         // check if the product is part of the basket
-        $this->assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
+        static::assertFalse($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertTrue($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
+        static::assertTrue($basket->hasProduct($product), '::hasProduct() - The product is not present in the basket');
 
         // Covering all of the isValid method
-        $this->assertTrue($basket->isValid(true), '::isValid() return true for element only');
-        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
+        static::assertTrue($basket->isValid(true), '::isValid() return true for element only');
+        static::assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
 
         $invalidBasketElement = $this->createMock(BasketElementInterface::class);
-        $invalidBasketElement->expects($this->any())
+        $invalidBasketElement->expects(static::any())
             ->method('isValid')
             ->willReturn(false);
-        $invalidBasketElement->expects($this->any())
+        $invalidBasketElement->expects(static::any())
             ->method('getPosition')
             ->willReturn(1);
-        $invalidBasketElement->expects($this->any())
+        $invalidBasketElement->expects(static::any())
             ->method('getProduct')
             ->willReturn($product);
 
         $basket->addBasketElement($invalidBasketElement);
-        $this->assertFalse($basket->isValid(true), '::isValid() return false if an element is invalid');
+        static::assertFalse($basket->isValid(true), '::isValid() return false if an element is invalid');
 
         $basket->setBasketElements([]);
         $basket->addBasketElement($basketElement);
-        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
+        static::assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment address is invalid');
 
         $basket->setBillingAddress($this->getMockAddress());
-        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment method is invalid');
+        static::assertFalse($basket->isValid(), '::isValid() return false for the complete check because payment method is invalid');
 
         $basket->setPaymentMethod($this->createMock(PaymentInterface::class));
-        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery method is invalid');
+        static::assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery method is invalid');
 
         $deliveryMethod = $this->createMock(ServiceDeliveryInterface::class);
-        $deliveryMethod->expects($this->any())
+        $deliveryMethod->expects(static::any())
             ->method('isAddressRequired')
             ->willReturn(false);
         $basket->setDeliveryMethod($deliveryMethod);
-        $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check because delivery method doesn\'t require an address');
+        static::assertTrue($basket->isValid(), '::isValid() return true for the complete check because delivery method doesn\'t require an address');
 
         $requiredDelivery = $this->createMock(ServiceDeliveryInterface::class);
-        $requiredDelivery->expects($this->any())
+        $requiredDelivery->expects(static::any())
             ->method('isAddressRequired')
             ->willReturn(true);
         $basket->setDeliveryMethod($requiredDelivery);
-        $this->assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery address is invalid');
+        static::assertFalse($basket->isValid(), '::isValid() return false for the complete check because delivery address is invalid');
 
         $basket->setDeliveryAddress($this->getMockAddress());
-        $this->assertTrue($basket->isValid(), '::isValid() return true for the complete check because everything is fine');
+        static::assertTrue($basket->isValid(), '::isValid() return true for the complete check because everything is fine');
 
-        $this->assertTrue($basket->isAddable($product), '::isAddable() return true');
-        $this->assertFalse($basket->hasRecurrentPayment(), '::hasRecurrentPayment() return false');
+        static::assertTrue($basket->isAddable($product), '::isAddable() return true');
+        static::assertFalse($basket->hasRecurrentPayment(), '::hasRecurrentPayment() return false');
 
-        $this->assertTrue($basket->hasProduct($product), '::hasProduct() return true');
+        static::assertTrue($basket->hasProduct($product), '::hasProduct() return true');
 
-        $this->assertTrue($basket->hasBasketElements(), '::hasElement() return true ');
-        $this->assertSame(1, $basket->countBasketElements(), '::countElements() return 1');
-        $this->assertNotEmpty($basket->getBasketElements(), '::getElements() is not empty');
+        static::assertTrue($basket->hasBasketElements(), '::hasElement() return true ');
+        static::assertSame(1, $basket->countBasketElements(), '::countElements() return 1');
+        static::assertNotEmpty($basket->getBasketElements(), '::getElements() is not empty');
 
-        $this->assertInstanceOf(BasketElement::class, $element = $basket->getElement($product), '::getElement() - return a BasketElement');
+        static::assertInstanceOf(BasketElement::class, $element = $basket->getElement($product), '::getElement() - return a BasketElement');
 
-        $this->assertInstanceOf(BasketElement::class, $basket->removeElement($element), '::removeElement() - return the removed BasketElement');
+        static::assertInstanceOf(BasketElement::class, $basket->removeElement($element), '::removeElement() - return the removed BasketElement');
 
-        $this->assertFalse($basket->hasBasketElements(), '::hasElement() return false');
-        $this->assertSame(0, $basket->countBasketElements(), '::countElements() return 0');
-        $this->assertEmpty($basket->getBasketElements(), '::getElements() is empty');
+        static::assertFalse($basket->hasBasketElements(), '::hasElement() return false');
+        static::assertSame(0, $basket->countBasketElements(), '::countElements() return 0');
+        static::assertEmpty($basket->getBasketElements(), '::getElements() is empty');
 
         $basket->reset();
-        $this->assertFalse($basket->isValid(), '::isValid() return false after reset');
+        static::assertFalse($basket->isValid(), '::isValid() return false after reset');
     }
 
     public function testSerialize(): void
@@ -265,7 +265,7 @@ class BasketTest extends TestCase
 
         $provider = $this->createMock(ProductProviderInterface::class);
         $manager = $this->createMock(ProductManagerInterface::class);
-        $manager->expects($this->any())->method('getClass')->willReturn('BasketTest_Product');
+        $manager->expects(static::any())->method('getClass')->willReturn('BasketTest_Product');
 
         $definition = new ProductDefinition($provider, $manager);
 
@@ -284,8 +284,8 @@ class BasketTest extends TestCase
 
         $data = $basket->serialize();
 
-        $this->assertIsString($data);
-        $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
+        static::assertIsString($data);
+        static::assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present
         $expectedKeys = [
@@ -305,7 +305,7 @@ class BasketTest extends TestCase
         $basketData = unserialize($data);
 
         foreach ($expectedKeys as $key) {
-            $this->assertArrayHasKey($key, $basketData);
+            static::assertArrayHasKey($key, $basketData);
         }
 
         $basket->setDeliveryAddressId(1);
@@ -314,8 +314,8 @@ class BasketTest extends TestCase
 
         $data = $basket->serialize();
 
-        $this->assertIsString($data);
-        $this->assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
+        static::assertIsString($data);
+        static::assertStringStartsWith('a:11:', $data, 'the serialized array has 11 elements');
 
         // Ensuring all needed keys are present
         $expectedKeys = [
@@ -335,13 +335,13 @@ class BasketTest extends TestCase
         $basketData = unserialize($data);
 
         foreach ($expectedKeys as $key) {
-            $this->assertArrayHasKey($key, $basketData);
+            static::assertArrayHasKey($key, $basketData);
         }
 
         $basket->reset();
-        $this->assertTrue(0 === \count($basket->getBasketElements()), '::reset() remove all elements');
+        static::assertTrue(0 === \count($basket->getBasketElements()), '::reset() remove all elements');
         $basket->unserialize($data);
-        $this->assertTrue(1 === \count($basket->getBasketElements()), '::unserialize() restore elements');
+        static::assertTrue(1 === \count($basket->getBasketElements()), '::unserialize() restore elements');
     }
 
     public function testGetElementRaisesException(): void
@@ -358,7 +358,7 @@ class BasketTest extends TestCase
         $basket = $this->getPreparedBasket();
 
         $product = $this->getMockProduct();
-        $product->expects($this->once())
+        $product->expects(static::once())
             ->method('isRecurrentPayment')
             ->willReturn(true);
 
@@ -367,7 +367,7 @@ class BasketTest extends TestCase
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertTrue($basket->hasRecurrentPayment());
+        static::assertTrue($basket->hasRecurrentPayment());
     }
 
     public function testHasProduct(): void
@@ -376,22 +376,22 @@ class BasketTest extends TestCase
 
         $product = $this->getMockProduct();
 
-        $this->assertFalse($basket->hasProduct($product), '::hasProduct false because basket is empty');
+        static::assertFalse($basket->hasProduct($product), '::hasProduct false because basket is empty');
 
         $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->any())->method('getProduct')->willReturn($product);
-        $basketElement->expects($this->any())->method('getPosition')->willReturn(1042);
+        $basketElement->expects(static::any())->method('getProduct')->willReturn($product);
+        $basketElement->expects(static::any())->method('getPosition')->willReturn(1042);
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertFalse($basket->hasProduct($product), '::hasProduct false because position invalid');
+        static::assertFalse($basket->hasProduct($product), '::hasProduct false because position invalid');
 
         $basketElement = new BasketElement();
         $basketElement->setProduct('product_code', $product);
 
         $basket->addBasketElement($basketElement);
 
-        $this->assertTrue($basket->hasProduct($product), '::hasProduct true');
+        static::assertTrue($basket->hasProduct($product), '::hasProduct true');
     }
 
     public function testBuildPrices(): void
@@ -399,14 +399,14 @@ class BasketTest extends TestCase
         $basket = $this->getPreparedBasket();
 
         $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->any())->method('getProduct')->willReturn($this->getMockAddress());
-        $basketElement->expects($this->any())->method('getPosition')->willReturn(0);
+        $basketElement->expects(static::any())->method('getProduct')->willReturn($this->getMockAddress());
+        $basketElement->expects(static::any())->method('getPosition')->willReturn(0);
 
         $basket->addBasketElement($basketElement);
 
         $basket->buildPrices();
 
-        $this->assertCount(0, $basket->getBasketElements());
+        static::assertCount(0, $basket->getBasketElements());
     }
 
     public function testClean(): void
@@ -416,18 +416,18 @@ class BasketTest extends TestCase
         $product = $this->getMockProduct();
 
         $basketElement = $this->createMock(BasketElementInterface::class);
-        $basketElement->expects($this->any())->method('getProduct')->willReturn($product);
-        $basketElement->expects($this->any())->method('getPosition')->willReturn(0);
+        $basketElement->expects(static::any())->method('getProduct')->willReturn($product);
+        $basketElement->expects(static::any())->method('getPosition')->willReturn(0);
 
         $deletedBasketElement = clone $basketElement;
-        $deletedBasketElement->expects($this->any())->method('getDelete')->willReturn(true);
+        $deletedBasketElement->expects(static::any())->method('getDelete')->willReturn(true);
 
         $basket->addBasketElement($basketElement);
         $basket->addBasketElement($deletedBasketElement);
 
         $basket->clean();
 
-        $this->assertCount(1, $basket->getBasketElements());
+        static::assertCount(1, $basket->getBasketElements());
     }
 
     public function testGettersSetters(): void
@@ -440,43 +440,43 @@ class BasketTest extends TestCase
         $basketElement->setProduct('product_code', $product);
 
         $basket->setBasketElements([$basketElement]);
-        $this->assertSame([$basketElement], $basket->getBasketElements());
+        static::assertSame([$basketElement], $basket->getBasketElements());
 
         $basket->setDeliveryAddressId(1);
-        $this->assertSame(1, $basket->getDeliveryAddressId());
+        static::assertSame(1, $basket->getDeliveryAddressId());
 
         $basket->setBillingAddressId(1);
-        $this->assertSame(1, $basket->getBillingAddressId());
+        static::assertSame(1, $basket->getBillingAddressId());
 
         $deliveryMethod = $this->createMock(ServiceDeliveryInterface::class);
-        $deliveryMethod->expects($this->any())
+        $deliveryMethod->expects(static::any())
             ->method('getCode')
             ->willReturn(1);
         $basket->setDeliveryMethod($deliveryMethod);
-        $this->assertSame(1, $basket->getDeliveryMethodCode());
+        static::assertSame(1, $basket->getDeliveryMethodCode());
 
         $paymentMethod = $this->createMock(PaymentInterface::class);
-        $paymentMethod->expects($this->any())
+        $paymentMethod->expects(static::any())
             ->method('getCode')
             ->willReturn(1);
         $basket->setPaymentMethod($paymentMethod);
-        $this->assertSame(1, $basket->getPaymentMethodCode());
+        static::assertSame(1, $basket->getPaymentMethodCode());
 
         $basket->setCustomerId(1);
-        $this->assertSame(1, $basket->getCustomerId());
+        static::assertSame(1, $basket->getCustomerId());
 
         $options = ['option1' => 'value1', 'option2' => 'value2'];
         $basket->setOptions($options);
-        $this->assertNull($basket->getOption('unexisting_option'));
-        $this->assertSame(42, $basket->getOption('unexisting_option', 42));
-        $this->assertSame('value1', $basket->getOption('option1'));
-        $this->assertSame($options, $basket->getOptions());
+        static::assertNull($basket->getOption('unexisting_option'));
+        static::assertSame(42, $basket->getOption('unexisting_option', 42));
+        static::assertSame('value1', $basket->getOption('option1'));
+        static::assertSame($options, $basket->getOptions());
 
         $basket->setOption('option3', 'value3');
-        $this->assertSame('value3', $basket->getOption('option3'));
+        static::assertSame('value3', $basket->getOption('option3'));
 
         $basket->setLocale('en');
-        $this->assertSame('en', $basket->getLocale());
+        static::assertSame('en', $basket->getLocale());
     }
 
     protected function getPreparedBasket()
@@ -486,17 +486,17 @@ class BasketTest extends TestCase
         // create the provider mock
         $provider = $this->createMock(ProductProviderInterface::class);
 
-        $provider->expects($this->any())
+        $provider->expects(static::any())
             ->method('calculatePrice')
             ->willReturn(15);
 
-        $provider->expects($this->any())
+        $provider->expects(static::any())
             ->method('isAddableToBasket')
             ->willReturn(true);
 
         // create the product manager mock
         $manager = $this->createMock(ProductManagerInterface::class);
-        $manager->expects($this->any())->method('getClass')->willReturn('BasketTest_Product');
+        $manager->expects(static::any())->method('getClass')->willReturn('BasketTest_Product');
 
         $definition = new ProductDefinition($provider, $manager);
 

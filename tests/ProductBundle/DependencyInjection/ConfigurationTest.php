@@ -28,13 +28,13 @@ class ConfigurationTest extends TestCase
         $this->validateClass($config);
         $this->validateSeo($config);
 
-        $this->assertArrayHasKey('products', $config);
-        $this->assertEmpty($config['products']);
+        static::assertArrayHasKey('products', $config);
+        static::assertEmpty($config['products']);
     }
 
     public function validateClass($config): void
     {
-        $this->assertSame([
+        static::assertSame([
             'product' => 'App\\Sonata\\ProductBundle\\Entity\\Product',
             'package' => 'App\\Sonata\\ProductBundle\\Entity\\Package',
             'product_category' => 'App\\Sonata\\ProductBundle\\Entity\\ProductCategory',
@@ -49,7 +49,7 @@ class ConfigurationTest extends TestCase
 
     public function validateSeo($config): void
     {
-        $this->assertSame([
+        static::assertSame([
             'product' => [
                 'site' => '@sonataproject',
                 'creator' => '@th0masr',

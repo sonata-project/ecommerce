@@ -31,8 +31,8 @@ class DeliveryMethodTransformerTest extends TestCase
         $delivery = new FreeDelivery(false);
         $delivery->setCode('deliveryCode');
 
-        $this->assertSame('deliveryCode', $transformer->transform($delivery));
-        $this->assertNull($transformer->transform(null));
+        static::assertSame('deliveryCode', $transformer->transform($delivery));
+        static::assertNull($transformer->transform(null));
     }
 
     public function testReverseTransform(): void
@@ -42,12 +42,12 @@ class DeliveryMethodTransformerTest extends TestCase
 
         $pool = $this->createMock(Pool::class);
 
-        $pool->expects($this->once())
+        $pool->expects(static::once())
             ->method('getMethod')
             ->willReturn($delivery);
 
         $transformer = new DeliveryMethodTransformer($pool);
 
-        $this->assertSame($delivery, $transformer->reverseTransform('deliveryCode'));
+        static::assertSame($delivery, $transformer->reverseTransform('deliveryCode'));
     }
 }

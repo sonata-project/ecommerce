@@ -124,7 +124,7 @@ class InvoiceManagerTest extends TestCase
         ]);
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->expects(static::any())->method('getManagerForClass')->willReturn($em);
 
         return new InvoiceManager(BaseInvoice::class, $registry);
     }

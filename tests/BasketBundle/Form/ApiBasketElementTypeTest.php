@@ -27,8 +27,8 @@ class ApiBasketElementTypeTest extends TestCase
         $type = new ApiBasketElementType('my.test.class');
 
         $builder = $this->createMock(FormBuilder::class);
-        $builder->expects($this->once())->method('create')->willReturnSelf();
-        $builder->expects($this->once())->method('addModelTransformer');
+        $builder->expects(static::once())->method('create')->willReturnSelf();
+        $builder->expects(static::once())->method('addModelTransformer');
 
         $type->buildForm($builder, []);
     }

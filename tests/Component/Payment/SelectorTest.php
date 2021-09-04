@@ -29,15 +29,15 @@ class SelectorTest extends TestCase
         $paymentPoolMethods = ['first method', 'second method'];
 
         $paymentPool = $this->getMockBuilder(PaymentPool::class)->getMock();
-        $paymentPool->expects($this->any())
+        $paymentPool->expects(static::any())
             ->method('getMethods')
             ->willReturn($paymentPoolMethods);
 
         $productPool = $this->getMockBuilder(ProductPool::class)->getMock();
 
         $selector = new Selector($paymentPool, $productPool);
-        $this->assertFalse($selector->getAvailableMethods());
-        $this->assertSame($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
+        static::assertFalse($selector->getAvailableMethods());
+        static::assertSame($paymentPoolMethods, $selector->getAvailableMethods(null, new Address()));
     }
 
     public function testGetPaymentException(): void
@@ -48,7 +48,7 @@ class SelectorTest extends TestCase
         $paymentPoolMethods = ['first method', 'second method'];
 
         $paymentPool = $this->getMockBuilder(PaymentPool::class)->getMock();
-        $paymentPool->expects($this->any())
+        $paymentPool->expects(static::any())
             ->method('getMethods')
             ->willReturn($paymentPoolMethods);
 

@@ -33,9 +33,9 @@ class BaseBasketFactoryTest extends TestCase
 
         $basketFactory = new BasketFactory($basketManager, $basketBuilder, $currencyDetector, $session);
 
-        $this->assertSame($basketManager, $basketFactory->getBasketManager());
-        $this->assertSame($basketBuilder, $basketFactory->getBasketBuilder());
-        $this->assertSame($currencyDetector, $basketFactory->getCurrencyDetector());
-        $this->assertSame($session, $basketFactory->getSession());
+        static::assertSame($basketManager, $basketFactory->getBasketManager());
+        static::assertSame($basketBuilder, $basketFactory->getBasketBuilder());
+        static::assertSame($currencyDetector, $basketFactory->getCurrencyDetector());
+        static::assertSame($session, $basketFactory->getSession());
     }
 }

@@ -26,9 +26,9 @@ class BasePaymentTest extends TestCase
         $payment->setOptions([
             'foobar' => 'barfoo',
         ]);
-        $this->assertSame('test', $payment->getCode());
-        $this->assertFalse($payment->hasOption('bar'));
-        $this->assertSame('13 134 &*', $payment->encodeString('13 134 &*'));
+        static::assertSame('test', $payment->getCode());
+        static::assertFalse($payment->hasOption('bar'));
+        static::assertSame('13 134 &*', $payment->encodeString('13 134 &*'));
     }
 
     public function testGenerateUrlCheck(): void
@@ -41,10 +41,10 @@ class BasePaymentTest extends TestCase
         $date->setTimestamp(strtotime('1981-11-30'));
 
         $order = $this->createMock(OrderInterface::class);
-        $order->expects($this->once())->method('getReference')->willReturn('000123');
-        $order->expects($this->exactly(2))->method('getCreatedAt')->willReturn($date);
-        $order->expects($this->once())->method('getId')->willReturn(2);
+        $order->expects(static::once())->method('getReference')->willReturn('000123');
+        $order->expects(static::exactly(2))->method('getCreatedAt')->willReturn($date);
+        $order->expects(static::once())->method('getId')->willReturn(2);
 
-        $this->assertSame('2a084bbe95bb3842813499d4b5b1bfdf82e5a980', $payment->generateUrlCheck($order));
+        static::assertSame('2a084bbe95bb3842813499d4b5b1bfdf82e5a980', $payment->generateUrlCheck($order));
     }
 }

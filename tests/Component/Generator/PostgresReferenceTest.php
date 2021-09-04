@@ -35,9 +35,9 @@ class PostgresReferenceTest extends TestCase
         $invoice->setId(13);
 
         try {
-            $this->assertNull($postgresReference->invoice($invoice));
+            static::assertNull($postgresReference->invoice($invoice));
         } catch (\Exception $e) {
-            $this->fail('->invoice() should return a NULL value but should now throw an \Exception');
+            static::fail('->invoice() should return a NULL value but should now throw an \Exception');
         }
     }
 
@@ -52,9 +52,9 @@ class PostgresReferenceTest extends TestCase
         $order->setId(13);
 
         try {
-            $this->assertNull($postgresReference->order($order));
+            static::assertNull($postgresReference->order($order));
         } catch (\Exception $e) {
-            $this->fail('->order() should return a NULL value but should not throw an \Exception');
+            static::fail('->order() should return a NULL value but should not throw an \Exception');
         }
     }
 
@@ -69,17 +69,17 @@ class PostgresReferenceTest extends TestCase
         $connection = $this->createMock(Connection::class);
 
         $em = $this->createMock(EntityManager::class);
-        $em->expects($this->any())
+        $em->expects(static::any())
             ->method('getClassMetadata')
             ->willReturn($metadata);
 
-        $connection->expects($this->any())
+        $connection->expects(static::any())
             ->method('query')
             ->willReturn(new \PDOStatement());
 
         $registry = $this->createMock(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManager')->willReturn($em);
-        $registry->expects($this->any())->method('getConnection')->willReturn($connection);
+        $registry->expects(static::any())->method('getManager')->willReturn($em);
+        $registry->expects(static::any())->method('getConnection')->willReturn($connection);
 
         return new PostgresReference($registry);
     }

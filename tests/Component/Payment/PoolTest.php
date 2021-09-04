@@ -41,8 +41,8 @@ class PoolTest extends TestCase
 
         $pool->addMethod($payment);
 
-        $this->assertCount(2, $pool->getMethods(), 'Pool return 2 elements');
-        $this->assertInstanceOf(PassPayment::class, $pool->getMethod('pass_2'), 'Pool return an FreeDelivery Instance');
+        static::assertCount(2, $pool->getMethods(), 'Pool return 2 elements');
+        static::assertInstanceOf(PassPayment::class, $pool->getMethod('pass_2'), 'Pool return an FreeDelivery Instance');
     }
 
     public function testAddMethodError(): void
