@@ -21,6 +21,12 @@ Branch | Github Actions | Code Coverage | Documentation |
 3.x    | [![Test][test_stable_badge]][test_stable_link]     | [![Coverage Status][coverage_stable_badge]][coverage_stable_link]     | [![Documentation Status][documentation_stable_badge]][documentation_stable_link]     |
 master | [![Test][test_unstable_badge]][test_unstable_link] | [![Coverage Status][coverage_unstable_badge]][coverage_unstable_link] | [![Documentation Status][documentation_unstable_badge]][documentation_unstable_link] |
 
+## WARNING: This repository is abandoned
+
+There is no active support on it.
+
+Feel free to ask if you want to help to keep this project up to date.
+
 ## Documentation
 
 Check out the documentation on the [official website](https://docs.sonata-project.org/projects/ecommerce).
