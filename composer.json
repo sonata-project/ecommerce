@@ -117,5 +117,6 @@
             "Sonata\\PriceBundle\\Tests\\": "tests/PriceBundle",
             "Sonata\\ProductBundle\\Tests\\": "tests/ProductBundle"
         }
-    }
+    },
+    "abandoned": true
 }
