@@ -46,12 +46,10 @@ This package is available under the [MIT license](LICENSE).
 [test_stable_link]: https://github.com/sonata-project/ecommerce/actions?query=workflow:test+branch:3.x
 [test_unstable_badge]: https://github.com/sonata-project/ecommerce/workflows/Test/badge.svg?branch=4.x
 [test_unstable_link]: https://github.com/sonata-project/ecommerce/actions?query=workflow:test+branch:4.x
-
 [coverage_stable_badge]: https://codecov.io/gh/sonata-project/ecommerce/branch/3.x/graph/badge.svg
 [coverage_stable_link]: https://codecov.io/gh/sonata-project/ecommerce/branch/3.x
 [coverage_unstable_badge]: https://codecov.io/gh/sonata-project/ecommerce/branch/4.x/graph/badge.svg
 [coverage_unstable_link]: https://codecov.io/gh/sonata-project/ecommerce/branch/4.x
-
 [documentation_stable_badge]: https://readthedocs.org/projects/sonata-project-ecommerce/badge/?version=3.x
 [documentation_stable_link]: https://docs.sonata-project.org/projects/ecommerce/en/3.x/?badge=3.x
 [documentation_unstable_badge]: https://readthedocs.org/projects/sonata-project-ecommerce/badge/?version=4.x
