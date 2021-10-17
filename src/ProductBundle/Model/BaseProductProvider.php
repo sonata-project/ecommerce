@@ -364,8 +364,6 @@ abstract class BaseProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param  $name
-     *
      * @return bool return true if the field $name is a variation
      */
     public function isVariateBy($name)
