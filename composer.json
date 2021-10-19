@@ -17,6 +17,7 @@
     "require": {
         "php": "^7.3",
         "cocur/slugify": "^4.0",
+        "doctrine/dbal": "^2.10",
         "doctrine/doctrine-bundle": "^1.8 || ^2.0",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
@@ -76,6 +77,7 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "nelmio/api-doc-bundle": "^2.13",
+        "phpunit/phpunit": "^9.5",
         "symfony/phpunit-bridge": "^5.3"
     },
     "suggest": {

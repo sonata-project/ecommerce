@@ -67,6 +67,11 @@ class MockPlatform extends AbstractPlatform
         return 'mock';
     }
 
+    public function getCurrentDatabaseExpression(): string
+    {
+        return '';
+    }
+
     protected function initializeDoctrineTypeMappings(): void
     {
     }
